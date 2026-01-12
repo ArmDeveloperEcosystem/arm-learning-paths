@@ -208,6 +208,12 @@ Voice and Tone:
 - Formatting standards: **Bold text** for UI elements (buttons, menu items, field names), *Italic text* for emphasis and new terms, `Code formatting` for file names, commands, code elements.
 - Use shortcodes for common pitfalls, warnings, important notes.
 
+### Code fence integrity
+
+- Every fenced code block opened with triple backticks (```) MUST be explicitly closed with matching triple backticks before any non-code content resumes
+- Never generate unterminated or partial code fences
+- Do not rely on implicit closure, indentation, or surrounding formatting to end a code block
+
 ## Arm naming and architecture terms
 
 - Use Arm for the brand in prose (for example, "Arm processors", "Arm servers").

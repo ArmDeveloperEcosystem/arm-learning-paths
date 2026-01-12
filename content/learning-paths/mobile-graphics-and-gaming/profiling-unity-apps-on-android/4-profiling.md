@@ -39,7 +39,7 @@ In the sample, the performance issues will be apparent soon after launch. To pro
 
 2. Ensure _Autoconnect Profiler_ is ticked
 
-    ![Build settings to autoconnect profiler#center](images/ac.png "Figure 1. Build settings with connected Android device and Autoconnect Profiler enabled.")
+    ![Build settings to autoconnect profiler#center](images/ac.webp "Figure 1. Build settings with connected Android device and Autoconnect Profiler enabled.")
 
 3. Select _Build and Run_
 

@@ -6,8 +6,12 @@ weight: 2
 layout: learningpathall
 ---
 
+## Before you begin
+
+Before you can tune PyTorch threading for LLM inference on Arm CPUs, you need to set up your development environment with Docker, PyTorch, and access to the Gemma-3 models from Hugging Face. This section walks you through creating your Hugging Face account, configuring an Arm server, and running the PyTorch container with all necessary dependencies.
+
 {{% notice Note %}}
-This Learning Path uses Arm's downstream canary release of PyTorch, which includes ready-to-use examples and scripts. While this release offers access to the latest downstream features, it's intended for experimentation rather than production use.
+This Learning Path uses Arm's downstream canary release of PyTorch, which includes ready-to-use examples and scripts. This release provides access to the latest features but is intended for experimentation rather than production use.
 {{% /notice %}}
 
 ## Create a Hugging Face account
@@ -79,9 +83,9 @@ aarch64_pytorch ~>
 
 ## Log in to Hugging Face
 
-Create a new Read token on Hugging Face by navigating to [Create new Access Token](https://huggingface.co/settings/tokens/new?tokenType=read). 
+Create a new Read token on Hugging Face by navigating to [Create new Access Token](https://huggingface.co/settings/tokens/new?tokenType=read).
 
-![Screenshot of Hugging Face token creation page showing the 'Create new token' dialog with token type set to 'Read'#center](./hf-access-token.jpg "Hugging Face token creation")
+![Screenshot of Hugging Face token creation interface showing a dialog box with fields for token name and type, with the 'Read' option selected and a 'Create token' button visible alt-txt#center](./hf-access-token.jpg "Hugging Face token creation interface")
 
 Provide a token name, create the token, and copy the generated value. From within the Docker container, run the following command and paste the token when prompted:
 
@@ -89,6 +93,15 @@ Provide a token name, create the token, and copy the generated value. From withi
 huggingface-cli login
 ```
 
-Messages indicating the token is valid and login is successful are printed. 
+Messages indicating the token is valid and login is successful are printed.
 
 Be aware that the login doesn't persist after the Docker container exits. You'll need to log in again if you restart the container.
+
+## What you've accomplished and what's next
+
+You've set up your environment with:
+- A Hugging Face account with access to the Gemma-3 models
+- An Arm server or cloud instance with Docker installed
+- The PyTorch-aarch64 container running and authenticated
+
+You're now ready to run LLM inference experiments and measure how thread count affects performance.

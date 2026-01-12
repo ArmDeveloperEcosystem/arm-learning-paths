@@ -20,7 +20,7 @@ For example, the figure below shows a (7,7) Conv node.
 
 ![Diagram illustrating an example of 7x7 Conv alt-text#center](images/conv_nodes_7x7.jpg "An example of (7,7) Conv node")
 
-ArmKleidiAI::MlasConv kernel makes use of KleidiAI’s indirect matrix multiplication (imatmul) micro kernel to accelerate the convolution.
+`ArmKleidiAI::MlasConv` kernel makes use of KleidiAI’s indirect matrix multiplication (imatmul) micro kernel to accelerate the convolution.
 
 The function calls are shown as below.
 ```text
@@ -102,4 +102,4 @@ onnxruntime::InferenceSession::Run
 
 ### The ArmKleidiAI::MlasDynamicQGemmBatch kernel
 This kernel is for matrix multiplication with float output of dynamic quantized A and symmetric quantized B. 
-It uses KleidiAI *kai_kernel_matmul_clamp_f32_qai8dxp1vlx4_qsi8cxp4vlx4_1vlx4vl_sme2_mopa* micro kernel.
+It uses KleidiAI `kai_kernel_matmul_clamp_f32_qai8dxp1vlx4_qsi8cxp4vlx4_1vlx4vl_sme2_mopa` micro kernel.

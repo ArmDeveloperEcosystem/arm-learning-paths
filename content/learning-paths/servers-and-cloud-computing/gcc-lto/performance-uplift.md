@@ -1,6 +1,6 @@
 ---
 title: Potential Gains
-weight: 3
+weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -8,15 +8,19 @@ layout: learningpathall
 
 ## Comparing Performance
 
-The potential benefits to be gained from the use of LTO can be highlighted via performance comparison of the Specint2017 benchmark run on a Neoverse V2 CPU, compiled with and without LTO using GCC 15.1.
+The potential benefits of link-time optimization can be illustrated through a performance comparison using the SPEC CPU®2017 integer (SPECint2017) benchmark suite. In this example, benchmarks were compiled with GCC 15.1, with and without LTO, and executed on an Arm Neoverse V2 CPU.
 
-There was an uplift in the geometric mean of scores across different benchmarks, wherein we see an improvement of ~3.4%, with the biggest winners being`gmcf` (+11%), `deepsjeng` (9.9%), `leela` (6.6%).
+Across the benchmark suite, enabling LTO resulted in an improvement in the geometric mean score of approximately 3.4%. Some workloads benefited more noticeably, including:
+  * `gmcf` (+11%)
+  * `deepsjeng` (+9.9%)
+  * `leela` (+6.6%)
+These results highlight how workloads with significant cross-module interaction can benefit from the additional visibility provided by LTO.
 
 ![SPECint LTO performance gains#center](specint_lto_improv.png "Figure 1. Performance uplift to Specint2017")
 
 ### Code-size Considerations
 
-As demonstrated above the overall performance of many executables is greatly improved by the optimization, but this is not the only obeservable gain to be had as a consequence of the optimization.
+While performance improvements are often the primary motivation for enabling LTO, its impact is not limited to execution speed. Link-time optimization can also significantly affect the final code size of an executable.
 
 As shown in figure 2, the use of LTO can have considerable impact on the final code size of the resulting executable.
 
@@ -24,13 +28,15 @@ As shown in figure 2, the use of LTO can have considerable impact on the final c
 
 #### Potential Code Size Reduction
 
-One example where LTO can lead to a decrease in code size is cross-translation-unit dead code elimination, made possible by the global visibility of functions and variables and their uses in an executable. Without link-time information, non-`static` functions and variables are treated conservatively and kept around in the binary, in case of uses at link-time. With LTO, a final decision can be made and unused functions and variables eliminated.
+One common source of code size reduction with LTO is cross-translation-unit dead code elimination. With whole-program visibility, the compiler can determine whether non-static functions or global variables are ever referenced anywhere in the final executable.
+Without LTO, such symbols must be retained conservatively, as they may be referenced by other translation units or during linking. With LTO enabled, the compiler can make a definitive decision and eliminate unused functions and variables, reducing the size of the resulting binary.
 
 #### Potential Code Size Increase
 
-While the this global visibility of the code can often lead to a shrinking of the resulting binary, other choices deemed profitable by the compler can lead to an increase in code size. For example:
-
-- Knowing a loop will execute `n` times in particular instances may lead to more loop unrolling than otherwise.
-- Knowing a function regularly calls another (smaller) function may cause the compiler to inline the callee into the caller's body.
-
-While all these decisions inherently lead to an increase in code size it is worth noting that while, just like inter-procedural constant propagation mentioned earlier, these transformations may be valid and beneficial in 90% of a function's use, we must retain compatibility with the remaining 10% of use cases.  In order for the compiler to optimize functions as per highly-recurrent use cases, it makes clones of the functions it wishes to transform such that the original function form is still present for use in less frequent cases. Where this is done, the resultant code duplication can further increase code size.
+While global visibility often enables code size reductions, some LTO-driven optimizations can lead to larger binaries when they are deemed profitable for performance.
+Examples include:
+  * Aggressive loop unrolling when iteration counts are known in specific call paths
+  * Increased function inlining when call relationships are well understood
+    
+In addition, LTO enables function cloning. When a function exhibits multiple common usage patterns, the compiler may generate specialized versions optimized for frequent cases, while retaining a generic version for less common ones. Although this approach preserves correctness and improves performance for hot paths, it can introduce code duplication and increase overall binary size.
+As with other interprocedural optimizations, these trade-offs reflect the compiler’s attempt to balance performance gains against code size growth, and the net effect depends heavily on the structure of the application.
