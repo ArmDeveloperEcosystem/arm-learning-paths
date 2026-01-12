@@ -29,7 +29,7 @@ Where it is used:
 {{/* Meta description: short, task-oriented summary for SERP and AI selection.
      This is intentionally distinct from the JSON-LD description. */}}
 {{- with .Params.description -}}
-  {{- $d := . | plainify | htmlEscape | strings.TrimSpace -}}
+  {{- $d := . | plainify | htmlEscape | trim " \t\r\n" -}}
   {{- if gt (len $d) 0 -}}
     <meta name="description" content="{{ $d }}">
   {{- end -}}
