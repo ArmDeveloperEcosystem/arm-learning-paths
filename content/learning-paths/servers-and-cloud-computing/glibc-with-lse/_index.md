@@ -1,5 +1,6 @@
 ---
 title: Learn about glibc with Large System Extensions (LSE) for performance improvement
+description: Optimize glibc performance on Arm servers using LSE atomics, with benchmarking, analysis, and guidance on when LSE improves scalability.
 
 minutes_to_complete: 60
 
