@@ -26,6 +26,15 @@ Where it is used:
 <link rel="canonical" href="https://learn.arm.com{{ .Permalink }}" />
 <title>{{ $title }}</title>
 
+{{/* Meta description: short, task-oriented summary for SERP and AI selection.
+     This is intentionally distinct from the JSON-LD description. */}}
+{{- with .Params.description -}}
+  {{- $d := . | plainify | htmlEscape | strings.TrimSpace -}}
+  {{- if gt (len $d) 0 -}}
+    <meta name="description" content="{{ $d }}">
+  {{- end -}}
+{{- end -}}
+
 {{ partial "head/jsonld.html" . }}
 
 <!-- Include the Arm standard Lato font for machines that don't have by default (Mac) -->
