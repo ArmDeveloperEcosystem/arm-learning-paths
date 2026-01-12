@@ -1,5 +1,6 @@
 ---
 title: Deploy a Large Language Model (LLM) chatbot with llama.cpp using KleidiAI on Arm servers
+description: Run and serve LLM inference using llama.cpp on Arm CPUs, including setup, server configuration, and request handling for production use.
 
 minutes_to_complete: 30
 
