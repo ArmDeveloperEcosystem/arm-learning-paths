@@ -8,13 +8,13 @@ layout: learningpathall
 
 ## Build ONNX Runtime with KleidiAI and SME2 for Android
 
-To run this on an Android device, cross-compile ORT using the Android NDK.
+To run this on an Android device, you need to cross-compile ONNX Runtime using the Android NDK.
 
-Prerequisites:
--	Android NDK: Version r26b or newer (r27+ recommended for latest SME2 toolchain support).
--	CMake & Ninja: Ensure these are in your system PATH.
+Before you begin, verify that you have:
+- Android NDK version r26b or newer (r27 or later is recommended for the latest SME2 toolchain support)
+- CMake and Ninja installed and available in your system PATH
 
-### Build onnxruntime
+## Build onnxruntime
 
 First, clone the [ONNX Runtime](https://github.com/microsoft/onnxruntime). This Learning Path uses version `v1.23.2`:
 ```bash
@@ -28,9 +28,10 @@ Build ONNX Runtime with KleidiAI support enabled. The build script configures cr
 ./build.sh --android --android_sdk_path $ANDROID_NDK_HOME --android_ndk_path $ANDROID_NDK_HOME --android_abi arm64-v8a --android_api 27 --config RelWithDebInfo --build_shared_lib --cmake_extra_defines onnxruntime_USE_KLEIDIAI=ON --cmake_generator Ninja --parallel
 ```
 
-Notes:
+{{% notice Note %}}
 - The flag `onnxruntime_USE_KLEIDIAI=ON` triggers the inclusion of Arm KleidiAI kernels into the MLAS library.
-- The build directory is `build/` by default. This can be overriden with the `--build_dir <path_to_your_build_directory>` commande line option to `build.sh`
+- The build directory is `build/` by default. This can be overridden with the `--build_dir <path_to_your_build_directory>` command line option to `build.sh`.
+{{% /notice %}}
 
 ## Profile model performance with onnxruntime_perf_test
 
@@ -54,16 +55,18 @@ The `onnxruntime_perf_test` tool simulates inference and gathers statistics. Run
 # Execute on the device
 adb shell "/data/local/tmp/onnxruntime_perf_test -e cpu -m times  -r 20 -s -Z  -x 1 /data/local/tmp/<your_model>/<your_model>.onnx"
 ```
+### Command options explained
 
-The command example set the arguments of the application as,
--	`-e cpu` specifies the provider as cpu provider
--	`-m times` specifies the test mode as “times”
--	`-r 20` specifies the repeated times as 20
--	`-Z` disallows thread from spinning during runs to reduce cpu usage
--	`-s` shows statistics result
--	`-x 1` sets the number of threads used to parallelize the execution within nodes as 1
+The benchmark command uses several flags to control execution:
 
-You can try other arguments setting if you would like to.
+- `-e cpu`: Use the CPU execution provider
+- `-m times`: Run in timing mode to measure latency
+- `-r 20`: Repeat the test 20 times for consistent results
+- `-Z`: Prevent thread spinning to reduce CPU usage
+- `-s`: Display statistics after the run
+- `-x 1`: Use a single thread for parallel execution within nodes
+
+You can adjust these settings based on your performance testing needs.
 
 ## Deep dive into operator profiling
 

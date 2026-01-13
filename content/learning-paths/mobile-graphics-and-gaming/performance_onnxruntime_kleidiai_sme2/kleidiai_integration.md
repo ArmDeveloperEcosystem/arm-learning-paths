@@ -7,9 +7,10 @@ layout: learningpathall
 ---
 
 ## Integration of KleidiAI to ONNX Runtime MLAS
-ONNX Runtime builds with KleidiAI support:
-1.	Detection: At runtime, MLAS checks the CPU capabilities for SME2 support.
-2.	Dispatch: If SME2 is detected, MLAS overrides its default kernels. For example, a Gemm (General Matrix Multiplication) operation that would normally use standard vector instructions (such as NEON) dispatches to a KleidiAI SME2 micro-kernel.
+ONNX Runtime automatically detects and uses KleidiAI when SME2 support is available:
+
+- Detection: MLAS checks the CPU capabilities for SME2 support at runtime.
+- Dispatch: when SME2 is detected, MLAS replaces its default kernels with KleidiAI micro-kernels. For example, a Gemm operation that normally uses NEON instructions dispatches to a KleidiAI SME2 micro-kernel instead.
 
 Currently, KleidiAI in MLAS provides `ArmKleidiAI::MlasConv`, `ArmKleidiAI::MlasGemmBatch`, and `ArmKleidiAI::MlasDynamicQGemmBatch` kernels.
 
@@ -18,7 +19,7 @@ ORT dispatches 2D fp32 (32-bit floating point) convolution operators with batch_
 
 For example, the figure below shows a (7,7) Conv node.
 
-![Diagram showing a 7x7 convolution node with input tensor of size 112x112x64, filter size 7x7x64, and output tensor size 56x56x64 with stride 2#center](images/conv_nodes_7x7.jpg "An example of (7,7) Conv node")
+![Diagram showing a 7x7 convolution node with input tensor of size 112x112x64, filter size 7x7x64, and output tensor size 56x56x64 with stride 2#center](images/conv_nodes_7x7.jpg "An example of a (7,7) Conv node")
 
 `ArmKleidiAI::MlasConv` kernel uses KleidiAI's indirect matrix multiplication (imatmul) micro kernel to accelerate the convolution.
 
@@ -50,7 +51,7 @@ This kernel performs a batched fp32 matrix multiplication (GEMM or GemV) operati
 
 For example, the figure below shows a (1,1) Conv node.
 
-![Diagram showing a 1x1 convolution node with input tensor of size 56x56x64, filter size 1x1x64, and output tensor size 56x56x256 fused with BatchNormalization and Relu operations alt-txt#center](images/conv_nodes_1x1.jpg "An example of (1,1) FusedConv node")
+![Diagram showing a 1x1 convolution node with input tensor of size 56x56x64, filter size 1x1x64, and output tensor size 56x56x256 fused with BatchNormalization and Relu operations alt-txt#center](images/conv_nodes_1x1.jpg "An example of a (1,1) FusedConv node")
 
 The function calls of fp32 Conv operators with (1,1) filter kernels are shown below.
 
@@ -79,7 +80,7 @@ onnxruntime::InferenceSession::Run
 
 For example, the figure below shows a Gemm node.
 
-![Diagram showing a Gemm (General Matrix Multiplication) node with input matrices A and B, performing matrix multiplication with optional bias addition alt-txt#center](images/gemm_node.jpg "An example of Gemm node")
+![Diagram showing a Gemm (General Matrix Multiplication) node with input matrices A and B, performing matrix multiplication with optional bias addition alt-txt#center](images/gemm_node.jpg "An example of a Gemm node")
 
 The function calls of fp32 Gemm operators are shown below.
 ```text

@@ -1,12 +1,12 @@
 ---
-title: Profiling – Use Resnet50v2 fp32 model as an example
+title: Profile ONNX model performance
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Profile an ONNX model – Using Resnet50v2 as an example
+## Profile ONNX model performance using ResNet-50 v2
 
 Resnet50v2 serves as the example model in this Learning Path. Download the model package containing the ONNX model and its input data from the [ONNX model repository](https://github.com/onnx/models/tree/main/validated/vision/classification/resnet/model), then transfer it to your Android device:
 
@@ -76,11 +76,12 @@ P95 Latency: 0.34682 s
 P99 Latency: 0.34682 s
 P999 Latency: 0.34682 s
 ```
+
 ## Performance analysis
 
-#### Visualize profiling data with perfetto
+#### Visualize profiling data with Perfetto
 
-You can use [perfetto tool](https://ui.perfetto.dev/) to view the two JSON profile files.
+You can use [Perfetto](https://ui.perfetto.dev/) to view the two JSON profile files.
 
 The figure below is a screenshot of the Non-KleidiAI version of the JSON profile file. The selected part (one `model_run/SequentialExecutor`) in the figure includes information of one inference execution.
 

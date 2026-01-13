@@ -8,32 +8,44 @@ layout: learningpathall
 
 ## ONNX Runtime overview
 With the rise of on-device AI, squeezing performance from CPUs has become critical. Arm's Scalable Matrix Extension 2 (SME2) represents a leap forward, offering significant speedups for matrix-heavy workloads like Transformers and CNNs.
-This Learning Path walks you through the technical steps to integrate KleidiAI—Arm's specialized micro-kernel library with SME2 support—into ONNX Runtime (ORT) and profile its performance using onnxruntime_perf_test on Android devices.
+This Learning Path walks you through the technical steps to integrate KleidiAI-Arm's specialized micro-kernel library with SME2 support-into ONNX Runtime (ORT) and profile its performance using onnxruntime_perf_test on Android devices.
 
-### Understanding the ONNX Runtime software stack
+## Understanding the ONNX Runtime software stack
 ONNX Runtime's internal architecture consists of four main components that work together to execute AI models efficiently:
 ![Diagram showing the four main components of ONNX Runtime: In-Memory Graph at the top, followed by Graph Partitioner, Graph Runner, and Execution Provider at the bottom, with data flow indicated between layers alt-txt#center](images/ort_overview.jpg "The ONNX Runtime overview")
 
-#### 1. In-Memory Graph
-When loading an ONNX model, ORT parses the protobuf file and creates an In-Memory Graph. This is a live representation of the model’s structure, consisting of:
--	Nodes: Representing operations (e.g., MatMul, Conv, Add).
--	Edges: Representing the flow of data (tensors) between those operations.
+### In-Memory Graph
+When ORT loads an ONNX model, it parses the protobuf file and builds an in-memory representation of the model's structure. This graph consists of:
+
+- Nodes: operations like MatMul, Conv, and Add
+- Edges: tensor data flowing between operations
 
 During this stage, ORT performs Graph Optimizations like constant folding and node fusion.
-#### 2. Graph Partitioner
+### Graph Partitioner
 The Graph Partitioner decides which part of the model runs on which hardware. It analyzes the computational graph and matches nodes to the registered Execution Providers.
 It clusters adjacent nodes assigned to the same EP into "Subgraphs".
-#### 3. Graph Runner 
+### Graph Runner 
 Once the graph is partitioned, the Graph Runner executes the operators in the correct order. It manages the flow of data (Tensors) between nodes.
 In ORT, parallelism splits into two distinct levels to maximize hardware utilization: Intra-op (inside an operator/node, splitting a single heavy operation/node into smaller chunks) and Inter-op (between different operators, running multiple independent operators at the same time).
+### Execution Provider (EP)
 
-#### 4. Execution Provider (EP)
-An Execution Provider is the abstraction layer that interfaces with specific hardware or libraries. 
-Each EP provides a set of "Kernels" (optimized math functions) for specific operators.
-Examples: 
--	CPU: Default CPU, Intel DNNL, XNNPACK etc.
--	GPU: NVIDIA CUDA/TensorRT, AMD MIGraphX, DirectML etc.
--	Others: NPU, Qualcomm QNN etc.
+An Execution Provider is the abstraction layer that interfaces with specific hardware or libraries. Each EP provides optimized math functions (called "Kernels") for specific operators.
+
+ORT supports multiple Execution Providers across different hardware types:
+
+**CPU-based providers:**
+- Default CPU provider
+- Intel DNNL
+- XNNPACK
+
+**GPU-based providers:**
+- NVIDIA CUDA/TensorRT
+- AMD MIGraphX
+- DirectML
+
+**Specialized accelerators:**
+- NPU
+- Qualcomm QNN
 
 If a specialized EP doesn't support a specific operator, ORT automatically falls back to the CPU provider.
 
@@ -45,7 +57,7 @@ This Learning Path focuses on Arm CPU Execution Provider.
 
 ## What you've accomplished and what's next
 
-You now understand how ONNX Runtime processes models through its layered architecture—from the in-memory graph to execution providers. You've learned how the Graph Partitioner assigns operations to hardware, how the Graph Runner orchestrates execution, and how Execution Providers like the CPU provider use optimized kernels. You also know that MLAS serves as the default CPU backend and that KleidiAI can optimize it with SME2-specific kernels.
+You now understand how ONNX Runtime processes models through its layered architecture-from the in-memory graph to execution providers. You've learned how the Graph Partitioner assigns operations to hardware, how the Graph Runner orchestrates execution, and how Execution Providers like the CPU provider use optimized kernels. You also know that MLAS serves as the default CPU backend and that KleidiAI can optimize it with SME2-specific kernels.
 
 Next, you'll explore how KleidiAI integrates into MLAS and which specific operators benefit from SME2 acceleration.
 
