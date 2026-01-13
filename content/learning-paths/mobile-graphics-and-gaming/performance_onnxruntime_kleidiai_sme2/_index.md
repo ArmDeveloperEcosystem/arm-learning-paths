@@ -24,8 +24,7 @@ author: Zenon Zhilong Xiu
 skilllevels: Advanced
 subjects: ML
 armips:
-    - Arm C1 CPU
-    - Arm SME2 unit
+    - Cortex
 tools_software_languages:
     - C++
     - ONNX Runtime
