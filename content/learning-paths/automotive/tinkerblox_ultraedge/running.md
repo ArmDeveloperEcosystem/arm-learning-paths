@@ -1,7 +1,7 @@
 ---
-title: RUNNING Setup/Installation - UltraEdge HPC-I execution fabric for AI & mixed workloads
+title: Running UltraEdge HPC-I execution fabric for AI & mixed workloads
 
-weight: 5
+weight: 6
 
 layout: "learningpathall"
 ---

@@ -1,12 +1,12 @@
 ---
-title: DEBIAN Installation - UltraEdge
+title: Debian/Ubuntu installation - UltraEdge
 
-weight: 4
+weight: 5
 
 layout: "learningpathall"
 ---
 
-#### Installation Process
+### Installation Process for UltraEdge on Ubuntu/Debian
  
 Follow these steps to initialize and register your device within the **Uncloud** ecosystem:
 
@@ -25,27 +25,31 @@ Follow these steps to initialize and register your device within the **Uncloud**
 
 ![Initialize Device](https://raw.githubusercontent.com/Tinkerbloxsupport/arm-learning-path-support/main/static/images/Initialize%20.png)
 
+3. **Install some prerequsiites:**
 
-3.  **Retrieve Installation Details:**
+    * First install some prerequisites:
+
+```bash
+sudo apt update 
+sudo apt install -y curl jq
+```
+
+
+4.  **Retrieve Installation Command Details:**
+
     * Copy the generated device installation command or details from the **Uncloud** portal to your clipboard.
 
 ![Installation Command](https://raw.githubusercontent.com/Tinkerbloxsupport/arm-learning-path-support/main/static/images/Initialize%20_command.png)
 
-    A sample command (for reference only):
+You should be able to locate and copy the specific installation command appropriate for your account. Here is an example:
 
 ```bash
-sudo apt update && sudo apt install curl && sudo apt install jq -y && sudo DEVICE_ID="5b3ff290-0c88-4cd9-8ef7-08de0bded9df" KEY="TB.ApiKey-mlBZgDFc7qyM6ztPjILBCbFEqnVlbvjUpM1Q1IqNP6tA7wNdi97AQ==" sh -c "$(curl "https://tinkerbloxdev.blob.core.windows.net:443/tinkerbloxdev/binaries/installer.sh?sv=2025-01-05&st=2025-11-03T06%3A31%3A55Z&se=2025-11-03T06%3A56%3A55Z&sr=b&sp=r&sig=HNS70HgJyHlhCVQrqvpGdCcaf8%2FtVjdW4RNiiiIPCSUA%3D")"
+sudo DEVICE_ID="5b3ff290-0c88-4cd9-8ef7-08de0bded9df" KEY="TB.ApiKey-mlBZgDFc7qyM6ztPjILBCbFEqnVlbvjUpM1Q1IqNP6tA7wNdi97AQ==" sh -c "$(curl "https://tinkerbloxdev.blob.core.windows.net:443/tinkerbloxdev/binaries/installer.sh?sv=2025-01-05&st=2025-11-03T06%3A31%3A55Z&se=2025-11-03T06%3A56%3A55Z&sr=b&sp=r&sig=HNS70HgJyHlhCVQrqvpGdCcaf8%2FtVjdW4RNiiiIPCSUA%3D")"
 ```
 
-4.  **Device Initialization Procedure:**
-    
-    Once you have the command, follow these steps on your target hardware:
-    * **Step 1:** Open the terminal (CLI) on your device.
-    * **Step 2:** Paste the copied command into the terminal.
-    * **Step 3:** Press `Enter` to execute the initialization script and link your device to UltraEdge.
+Run your specific installer command in your Ubuntu/Debian SSH shell and initialize the agent to install UltraEdge.
 
-
-#### Activation of Agent
+### Activation of the UltraEdge Agent
 
 On the first boot, the agent will automatically generate a file named
 `activation_key.json` at the path: 
@@ -70,7 +74,7 @@ receive license key (which includes license metadata).
         sudo systemctl start tbx-agent.service
 ```
 
-#### Manual Running
+### Manual Running
 
 -   Binary path: `/bin/tbx-agent`
 
