@@ -1,6 +1,6 @@
 ---
 title: Automate x86-to-Arm application migration using Arm MCP Server
-description: Automate x86-to-Arm application migration using the Arm MCP Server, with AI-assisted checks, C++ code migration, and Docker-based validation on Arm systems.
+description: Learn how to automate x86-to-Arm application migration using the Arm MCP Server, with AI-assisted compatibility checks, C++ code refactoring, and Docker-based validation on Arm cloud platforms.
 
 minutes_to_complete: 20
 
