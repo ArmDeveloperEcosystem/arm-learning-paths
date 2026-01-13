@@ -7,7 +7,8 @@ layout: learningpathall
 ---
 
 ## Profile an ONNX model – Using Resnet50v2 as an example
-Model Resnet50v2 will be used as an example in this learning path. Download and expand on the device the package that contains the onnx model as well as its input data from the [onnx repository](https://github.com/onnx/models/tree/main/validated/vision/classification/resnet/model):
+
+Resnet50v2 serves as the example model in this Learning Path. Download the model package containing the ONNX model and its input data from the [ONNX model repository](https://github.com/onnx/models/tree/main/validated/vision/classification/resnet/model), then transfer it to your Android device:
 
 ```bash
 wget https://github.com/onnx/models/raw/refs/heads/main/validated/vision/classification/resnet/model/resnet50-v2-7.tar.gz -O resnet50-v2-7.tar.gz
@@ -15,20 +16,19 @@ adb push resnet50-v2-7.tar.gz /data/local/tmp/
 adb shell tar xfz /data/local/tmp/resnet50-v2-7.tar.gz -C /data/local/tmp/
 ```
 
-The Android device that we used is a VIVO X300 phone with MTK D9500 processor, which has Arm C1-Ultra, C1-Premium and C1-Pro CPU cores with SME2 support on it. We chose a C1-Pro CPU core running at 2.0GHz to run the `onnxruntime_perf_test` benchmark application. You can use any other Android device with SME2 support.
+The Android device used in this example is a VIVO X300 phone with MTK D9500 processor, which has Arm C1-Ultra, C1-Premium, and C1-Pro CPU cores with SME2 support. A C1-Pro CPU core running at 2.0GHz was selected to run the `onnxruntime_perf_test` benchmark application. You can use any Android device with SME2 support.
 
-To compare the performance of running Resnet50v2 on ORT with SME2 and without SME2 support, we built two versions of ORT, one with SME2 support (set `onnxruntime_USE_KLEIDIAI=ON` when building ORT), the other without SME2 support(`onnxruntime_USE_KLEIDIAI=OFF` when building ORT).
+To compare the performance of running Resnet50v2 on ORT with and without SME2 support, build two versions of ORT: one with SME2 support (set `onnxruntime_USE_KLEIDIAI=ON` when building ORT), and another without SME2 support (`onnxruntime_USE_KLEIDIAI=OFF` when building ORT).
 
-Run following command on the device,
+Run the benchmark on the device, pinning execution to a single C1-Pro core:
 ```bash
 adb shell "taskset 1 /data/local/tmp/onnxruntime_perf_test -e cpu -r 5 -m times -s -Z  -x 1 /data/local/tmp/resnet50-v2-7/resnet50-v2-7.onnx -p /data/local/tmp/resnet50v2.onnx_1xC1-Pro_profile"
 ```
 
-The `taskset 1` in the command sets the CPU affinity of `onnxruntime_perf_test` benchmark to CPU core 0, which is a C1-Pro CPU core. 
-`-x 1` in the command sets the number of threads used to parallelize the execution within nodes as 1 (single thread).
+The `taskset 1` command sets the CPU affinity of `onnxruntime_perf_test` to CPU core 0, which is a C1-Pro CPU core. The `-x 1` flag sets the number of threads used to parallelize execution within nodes to 1 (single thread).
 
-Here is output from running `onnxruntime_perf_test` with ORT with SME2 support as below.
-```text
+Here is the output from running `onnxruntime_perf_test` with ORT with SME2 support:
+```output
 Setting intra_op_num_threads to 1
 Disabling intra-op thread spinning between runs
 Session creation time cost: 0.217932 s
@@ -52,8 +52,8 @@ P99 Latency: 0.101519 s
 P999 Latency: 0.101519 s
 ``` 
 
-Here is output from running `onnxruntime_perf_test` with ORT without SME2 support as below.
-```text
+Here is the output from running `onnxruntime_perf_test` with ORT without SME2 support:
+```output
 Setting intra_op_num_threads to 1
 Disabling intra-op thread spinning between runs
 Session creation time cost: 0.227282 s
@@ -78,37 +78,40 @@ P999 Latency: 0.34682 s
 ```
 ## Performance analysis
 
-### Using [perfetto tool](https://ui.perfetto.dev/)
+#### Visualize profiling data with perfetto
 
-We can use [perfetto tool](https://ui.perfetto.dev/) to view the two JSON profile files.
+You can use [perfetto tool](https://ui.perfetto.dev/) to view the two JSON profile files.
 
-The figure below is a screenshot of the view of the Non-KleidiAI version of JSON profile file.  
-The selected part(one `model_run/SequentialExecutor`) in the figure includes information of one inference execution.
+The figure below is a screenshot of the Non-KleidiAI version of the JSON profile file. The selected part (one `model_run/SequentialExecutor`) in the figure includes information of one inference execution.
 
-![Figure showing profile file of Non-KleidiAI version alt-text#center](images/resnet50v2_no_sme_prefetto.png "prefetto view of Non-KleidiAI version of ORT")
+![Screenshot of Perfetto tool showing the execution timeline for Non-KleidiAI version, with multiple operator execution blocks displayed horizontally across time, showing Conv, BatchNormalization, Relu, and other operations alt-txt#center](images/resnet50v2_no_sme_prefetto.png "Perfetto view of Non-KleidiAI version of ORT")
 
-The figure below is a screenshot of the view of the KleidiAI(with SME2) version of JSON profile file.  
-The selected part (one model_run/SequentialExecutor) in the figure includes information of one inference execution.
-![Figure showing profile file of KleidiAI with SME2 version alt-text#center](images/resnet50v2_sme_prefetto.png "prefetto view of KleidiAI with SME2 version of ORT")
+The figure below is a screenshot of the KleidiAI (with SME2) version of the JSON profile file. The selected part (one `model_run/SequentialExecutor`) in the figure includes information of one inference execution.
 
-We can also convert the two JSON profile files to CSV sheets with some external python script and combine the individual operator execution time of the Non-KleidiAI and KleidiAI(with SME2) version to a single chart. 
-![Figure showing operator time of both versions of ORT alt-text#center](images/resnet50v2_with_sme_without_sme_2.png "Operator execution time comparison")
+![Screenshot of Perfetto tool showing the execution timeline for KleidiAI with SME2 version, demonstrating shorter execution times for Conv operations compared to the Non-KleidiAI version alt-txt#center](images/resnet50v2_sme_prefetto.png "Perfetto view of KleidiAI with SME2 version of ORT")
+
+You can also convert the two JSON profile files to CSV sheets with an external Python script and combine the individual operator execution times of the Non-KleidiAI and KleidiAI (with SME2) versions into a single chart.
+
+![Bar chart comparing operator execution times between Non-KleidiAI and KleidiAI SME2 versions, showing significant performance improvements for Conv operators with SME2 enabled alt-txt#center](images/resnet50v2_with_sme_without_sme_2.png "Operator execution time comparison")
 
 It shows that ORT with KleidiAI (with SME2) kernels uplifts the performance significantly, especially for convolution operators.
 
-### Using Arm Streamline
+#### Analyze performance with Arm Streamline
 
-Arm Streamline is a graphical performance analysis tool which enables you to transform sampling data, instruction trace, and system trace into reports that present the data in both visual and statistical forms. It uses hardware performance counters with kernel metrics to provide an accurate representation of system resources. You can learn more about Arm Streamline on [developer.arm.com](https://developer.arm.com/Tools%20and%20Software/Streamline%20Performance%20Analyzer/) and install it with the [Streamline Install Guide](https://learn.arm.com/install-guides/streamline/). This sections shows what this performance analysis looks like with Arm Streamline but does not dive into the details of actually using the tool.
+Arm Streamline is a graphical performance analysis tool that transforms sampling data, instruction trace, and system trace into reports presenting the data in both visual and statistical forms. It uses hardware performance counters with kernel metrics to provide an accurate representation of system resources. You can learn more about Arm Streamline on [developer.arm.com](https://developer.arm.com/Tools%20and%20Software/Streamline%20Performance%20Analyzer/) and install it with the [Streamline Install Guide](/install-guides/streamline/). This section shows what this performance analysis looks like with Arm Streamline but doesn't dive into the details of actually using the tool.
 
-If we use Arm Streamline tools and PMU counters for further investigation, in the timeline view of Streamline, we can see SME2 floating point Outer Product and Accumulate (MOPA) instruction is used intensively during the inference.
+In the timeline view of Streamline, you can see SME2 floating point Outer Product and Accumulate (MOPA) instructions used intensively during inference:
 
-![Figure showing SME2 instructions and cycles alt-text#center](images/resnet50v2_sme_onnx_streamline_annotation.png "SME2 instructions and cycles shown in Streamline")
+![Screenshot of Arm Streamline timeline view showing intensive SME2 MOPA instruction usage during inference, with performance counter graphs displaying instruction counts and cycle metrics over time alt-txt#center](images/resnet50v2_sme_onnx_streamline_annotation.png "SME2 instructions and cycles shown in Streamline")
 
-Then we can combine (with an external script) the function call views of ORT without / with KleidiAI (with SME2) into a single figure,
+You can combine (with an external script) the function call views of ORT without and with KleidiAI (with SME2) into a single figure:
 
-![Figure showing function call percentage of both versions of ORT alt-text#center](images/function_call_compare.png "Function call percentage of both versions of ORT in Streamline ")
+![Comparison chart showing function call percentages between Non-KleidiAI and KleidiAI versions in Streamline, highlighting the performance difference between default MLAS kernels and KleidiAI SME2 kernels alt-txt#center](images/function_call_compare.png "Function call percentage of both versions of ORT in Streamline")
 
-It shows that KleidiAI kernels provide a significant performance uplift for convolution operators compared to the default MLSA kernels (`MlasSgemmKernelAdd` and `MlasSgemmKernelZero`).
+It shows that KleidiAI kernels provide a significant performance uplift for convolution operators compared to the default MLAS kernels (`MlasSgemmKernelAdd` and `MlasSgemmKernelZero`).
 
-## Summary
-By enabling KleidiAI (SME2) into ONNX Runtime, you unlock the massive parallel processing power of Arm SME2. This turns the Arm CPU from a "fallback" into a high-performance AI engine capable of running LLMs and complex vision models locally on devices.
+## What you've accomplished and what's next
+
+You've successfully profiled Resnet50v2 on Android with and without KleidiAI SME2 optimizations. You measured a 3.4x performance improvement (from 339ms to 99ms average inference time) when enabling SME2 kernels. You explored profiling tools including perfetto for operator-level analysis and Arm Streamline for hardware counter insights. The results clearly demonstrate that KleidiAI kernels dramatically accelerate convolution operators compared to standard MLAS implementations.
+
+By enabling KleidiAI (SME2) in ONNX Runtime, you unlock the parallel processing power of Arm SME2, transforming the Arm CPU from a fallback option into a high-performance AI engine capable of running LLMs and complex vision models efficiently on device. You can now apply these techniques to profile and optimize your own ONNX models on Arm platforms with SME2 support.
