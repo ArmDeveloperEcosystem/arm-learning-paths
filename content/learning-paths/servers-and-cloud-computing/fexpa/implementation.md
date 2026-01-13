@@ -1,5 +1,5 @@
 ---
-title: First implementation
+title: Implement exponential with SVE intrinsics
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -8,11 +8,11 @@ layout: learningpathall
 
 ## Implement the exponential function
 
-Based on the theory covered in the previous section, you can implement the exponential function using SVE intrinsics with polynomial approximation. This Learning Path was tested using a AWS Graviton4 instance type `r8g.medium`.
+Based on the theory covered in the previous section, implement the exponential function using SVE intrinsics with polynomial approximation. This Learning Path was tested using an AWS Graviton4 instance type `r8g.medium`.
 
 ## Set up your environment
 
-To run the example, you will need `gcc`. 
+To run the example, you need `gcc`. 
 
 ```bash
 sudo apt update
@@ -230,4 +230,11 @@ The benchmark demonstrates the performance benefit of using SVE intrinsics for v
 
 The accuracy check confirms that the polynomial approximation maintains high precision, with errors typically in the range of 10^-9 to 10^-10 for single-precision floating-point values.
 
-Continue to the next section to dive into the FEXPA intrinsic implementation, providing further performance uplifts.
+## What you've accomplished and what's next
+
+In this section, you:
+- Implemented a vectorized exponential function using SVE intrinsics
+- Applied range reduction and polynomial approximation techniques
+- Achieved up to 4x speedup over the scalar baseline
+
+Next, you'll optimize further using the FEXPA instruction for additional performance gains.
