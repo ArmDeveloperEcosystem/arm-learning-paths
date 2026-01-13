@@ -240,7 +240,7 @@ Confusion matrix (rows=true, cols=pred):
 Saved: artifacts/cm_fp32_counts.png
 ```
 
-![img1](Figures/01.png)
+![img1](figures/01.png)
 The confusion matrix provides more insight than a single accuracy number. Each row corresponds to the true class, and each column corresponds to the predicted class. A strong diagonal indicates correct classification. In this output, blank cells (class 0) are almost always recognized correctly, while the remaining errors occur primarily between visually similar printed digits such as 6, 8, and 9.
 
 This behavior is expected and indicates that the model has learned meaningful digit features. The remaining confusions are rare and can be addressed later through targeted augmentation or higher-resolution crops if needed.

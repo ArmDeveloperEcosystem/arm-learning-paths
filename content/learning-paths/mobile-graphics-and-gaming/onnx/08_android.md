@@ -27,7 +27,7 @@ We start by creating a new Android project using Android Studio. This project wi
 1. Create a new project:
 * Open Android Studio and click New Project.
 * In the Templates screen, select Phone and Tablet, then choose Empty Views Activity.
-![img3](Figures/03.png)
+![img3](figures/03.png)
 
 This template creates a minimal Android application without additional UI components, which is ideal for a focused, step-by-step integration.
 
@@ -41,7 +41,7 @@ This template creates a minimal Android application without additional UI compon
 * Minimum SDK: API 24 (Android 7.0 – Nougat). This provides wide device coverage while remaining compatible with ONNX Runtime and OpenCV.
 * Build configuration language: Kotlin DSL (build.gradle.kts). We use the Kotlin DSL for Gradle, which is now the recommended option.
 
-![img4](Figures/04.png)
+![img4](figures/04.png)
 
 * After confirming these settings, click Finish. Android Studio will create the project and generate a basic MainActivity along with the necessary Gradle files.
 
@@ -201,7 +201,7 @@ Because the image area is scrollable, the layout remains usable even on smaller 
 
 When rendered, this produces a clear, vertically structured interface with a fixed control panel at the top and large input/output images underneath, as shown in the figure below.
 
-![img](Figures/05.png)
+![img](figures/05.png)
 
 At this stage, the UI is intentionally minimal. In the next step, we will connect this view to the application logic in MainActivity, load a sample Sudoku bitmap, and wire up the Load image and Solve buttons to the ONNX-based processing pipeline.
 
@@ -1035,8 +1035,8 @@ To test the app:
 
 The figures below show two representative test cases. In each example, the upper image corresponds to the original Sudoku puzzle, while the lower image shows the same puzzle with the missing digits filled in and overlaid in green. This visual comparison confirms that grid detection, digit recognition, solving, and rendering are all functioning correctly on-device.
 
-![img](Figures/06.png)
-![img](Figures/07.png)
+![img](figures/06.png)
+![img](figures/07.png)
 
 These tests demonstrate that the application is robust to perspective distortion and partial digit placement, and that the model performs reliably when deployed via ONNX Runtime on Android.
 

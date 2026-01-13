@@ -436,7 +436,7 @@ You simply provide the path to a Sudoku image and the ONNX model, and the script
 
 Representational result is shown below:
 
-![img2](Figures/02.png)
+![img2](figures/02.png)
 
 ## Summary
 By completing this section, you have built a full vision-to-solution Sudoku system:

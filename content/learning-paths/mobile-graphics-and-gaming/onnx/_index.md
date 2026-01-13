@@ -26,7 +26,7 @@ author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
-subjects: Machine Learning, Edge AI
+subjects: ML
 armips:
   - Cortex-A
   - Neoverse
@@ -39,7 +39,6 @@ tools_software_languages:
   - PyTorch
   - TensorFlow
   - ONNX
-  - ONNX Runtime
   - Android
   - Android Studio
   - Kotlin
