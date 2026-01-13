@@ -5,13 +5,13 @@ import re
 
 """
 Parse results and patch stats file with test results
+NOTE: This function is deprecated and no longer updates stats files.
+Test status is now managed only through CI/CD workflows.
 """
 def patch(article_path: str, results: dict, link: str):
-    stats_file = "data/stats_current_test_info.yml"
-
-    with open(stats_file, mode='r') as f:
-        data = yaml.safe_load(f)
-        f.close()
+    # This function is deprecated - test status no longer tracked in stats files
+    print("Warning: patch() is deprecated. Test status is no longer tracked in stats_current_test_info.yml")
+    return
 
     article_path_pure = PurePath(re.sub(r"^.*?content/", "", article_path))
     article_path_parts = list(article_path_pure.parts)
