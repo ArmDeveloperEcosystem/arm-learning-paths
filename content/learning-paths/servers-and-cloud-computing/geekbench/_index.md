@@ -1,6 +1,6 @@
 ---
 title: Get started with Geekbench on Arm
-description: Benchmark Arm servers using Geekbench, interpret results, and understand how Arm CPU characteristics affect benchmark performance.
+description: Run Geekbench on Arm systems to benchmark CPU performance, interpret the results, and compare different Arm configurations.
 
 minutes_to_complete: 15
 
