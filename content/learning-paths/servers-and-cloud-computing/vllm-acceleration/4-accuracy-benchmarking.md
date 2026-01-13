@@ -75,11 +75,15 @@ lm_eval \
 
 Run accuracy tests on your INT4 quantized model using the same tasks and settings as the BF16 baseline. Replace the model path with your quantized output directory.
 
+Use the INT4 quantization recipe and script from the previous steps to quantize the `meta-llama/Meta-Llama-3.1-8B-Instruct` model using groupwise min-max quantization (default group size: 32).
+
+Groupwise INT4 (minmax):
+
 ```bash
 lm_eval \
   --model vllm \
   --model_args \
-    pretrained=Meta-Llama-3.1-8B-Instruct-w4a8dyn-mse-channelwise,dtype=float32,max_model_len=4096,enforce_eager=True \
+    pretrained=Meta-Llama-3.1-8B-Instruct-w4a8dyn-minmax-groupwise,dtype=float32,max_model_len=4096,enforce_eager=True \
   --tasks mmlu,hellaswag \
   --batch_size auto \
   --output_path results
@@ -87,7 +91,7 @@ lm_eval \
 
 The expected output includes per-task accuracy metrics. Compare these results to your BF16 baseline to evaluate the impact of INT4 quantization on model quality.
 
-Use the INT4 quantization recipe & script from previous steps to quantize `meta-llama/Meta-Llama-3.1-8B-Instruct` model.
+Use the INT4 quantization recipe and script from previous steps again, this time to quantize `meta-llama/Meta-Llama-3.1-8B-Instruct` model using channelwise MSE quantization.
 
 Channelwise INT4 (MSE):
 
