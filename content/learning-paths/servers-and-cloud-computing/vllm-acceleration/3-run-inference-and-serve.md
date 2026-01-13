@@ -136,11 +136,8 @@ vllm serve deepseek-ai/DeepSeek-V2-Lite \
 ```
 Use this BF16 setup to establish a quality reference baseline, then compare throughput and latency against your INT4 deployment to quantify the performance/accuracy trade-offs on your Arm system.
 
-## Go beyond: power up your vLLM workflow
-Now that you’ve successfully quantized, served, and benchmarked a model using vLLM on Arm, you can build on what you’ve learned to push performance, scalability, and usability even further.
-
 ## Try different models
-Explore other Hugging Face models that work well with vLLM and take advantage of Arm acceleration:
+Explore other Hugging Face models that work well with vLLM:
 
 - Meta Llama 2 and Llama 3: these versatile models work well for general tasks, and you can try them to compare BF16 and INT4 performance
 - Qwen and Qwen-Chat: these models support multiple languages and are tuned for instructions, giving you high-quality results
@@ -149,5 +146,3 @@ Explore other Hugging Face models that work well with vLLM and take advantage of
 You can quantize and serve any of these models using the same `quantize_vllm_models.py` script. Just update the model name in the script.
 
 You can also try connecting a chat client by linking your server with OpenAI-compatible user interfaces such as [Open WebUI](https://github.com/open-webui/open-webui).
-
-Continue exploring how Arm efficiency, oneDNN and ACL acceleration, and vLLM dynamic batching work together to provide fast, sustainable, and scalable AI inference on modern Arm architectures.

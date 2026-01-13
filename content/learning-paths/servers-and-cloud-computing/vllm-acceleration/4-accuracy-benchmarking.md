@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Why accuracy benchmarking
 
-The lm-evaluation-harness is the standard way to measure model accuracy across common academic benchmarks (for example, MMLU, HellaSwag, GSM8K) and runtimes (such as Hugging Face, vLLM, and llama.cpp). In this Learning Path, you'll run accuracy tests for both BF16 and INT4 deployments of your model served by vLLM on Arm-based servers.
+The lm-evaluation-harness is the standard way to measure model accuracy across common academic benchmarks (for example, MMLU, HellaSwag, GSM8K) and runtimes (such as Hugging Face, vLLM, and llama.cpp). In this section, you'll run accuracy tests for both BF16 and INT4 deployments of your model served by vLLM on Arm-based servers.
 
 You will:
   * Install lm-eval-harness with vLLM support
@@ -54,7 +54,7 @@ export LD_PRELOAD=/usr/lib/aarch64-linux-gnu/libtcmalloc_minimal.so.4
 ```
 
 {{% notice Note %}}
-`LD_PRELOAD` uses tcmalloc to reduce allocator contention. Install it via `sudo apt-get install -y libtcmalloc-minimal4` if you haven’t already.
+`LD_PRELOAD` uses TCMalloc to reduce allocator contention. Install it via `sudo apt-get install -y libtcmalloc-minimal4` if you haven’t already.
 {{% /notice %}}
 
 ## Accuracy Benchmarking Meta‑Llama‑3.1‑8B‑Instruct BF16 model
@@ -129,4 +129,6 @@ Now that you've completed accuracy benchmarking for both BF16 and INT4 models on
 - Sweep quantization recipes (minmax vs mse; channelwise vs groupwise, group size) to find a better accuracy/performance balance.
 - Record both throughput and accuracy to choose the best configuration for your workload.
 
-You've learned how to set up lm-evaluation-harness, run benchmarks for BF16 and INT4 models, and interpret key accuracy metrics on Arm platforms. Great job reaching this milestone—your results will help you make informed decisions about model deployment and optimization!
+You've learned how to set up lm-evaluation-harness, run benchmarks for BF16 and INT4 models, and interpret key accuracy metrics on Arm platforms. 
+
+Your results will help you make informed decisions about model deployment and optimization.
