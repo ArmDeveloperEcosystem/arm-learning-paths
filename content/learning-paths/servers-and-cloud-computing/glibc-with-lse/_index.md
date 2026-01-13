@@ -1,6 +1,6 @@
 ---
 title: Learn about glibc with Large System Extensions (LSE) for performance improvement
-description: Optimize glibc performance on Arm servers using LSE atomics, with benchmarking, analysis, and guidance on when LSE improves scalability.
+description: Rebuild and benchmark glibc with LSE atomics on Arm servers, then evaluate scalability using MongoDB workloads and guidance on when LSE delivers a measurable uplift.
 
 minutes_to_complete: 60
 
