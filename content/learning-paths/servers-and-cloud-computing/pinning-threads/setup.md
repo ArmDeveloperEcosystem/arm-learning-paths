@@ -55,7 +55,7 @@ Finally, you will need to install the Linux perf utility for measuring performan
 
 ## Example 1
 
-To demonstrate a use case of CPU affinity, we will create a program that heavily utilizes all the available CPU cores. Create a file named `use_all_cores.cpp` and paste in the source code below. In this example, we are repeatedly calculating the [Leibniz equation](https://en.wikipedia.org/wiki/Leibniz_formula_for_%CF%80) to compute the value of Pi. This is a computationally inefficient algorithm to calculate the value of Pi but we are splitting the work across many threads. 
+To demonstrate a use case of CPU affinity, we will create a program that heavily utilizes all the available CPU cores. Create a file named `use_all_cores.cpp` and paste in the source code below. In this example, we are repeatedly calculating the [Leibniz equation](https://en.wikipedia.org/wiki/Leibniz_formula_for_%CF%80) to compute the value of Pi. This is a computationally inefficient algorithm to calculate the value of Pi and we are splitting the work across many threads. 
 
 ```bash
 cd ~

@@ -166,7 +166,7 @@ perf stat -e L1-dcache-loads,L1-dcache-load-misses ./default-os-scheduling
 perf stat -e L1-dcache-loads,L1-dcache-load-misses ./thread-affinity
 ```
 
-Inspecting the output below we see that the `L1-dcache-load-misses` which occur when the the CPU core does not have a up-to-date version of the data in the L1 Data cache and must perform an expensive operation to fetch data from a different location, reduces from ~7.84% to ~0.6% as a result of the thread pinning. 
+Inspecting the output below we see that the `L1-dcache-load-misses` which occur when the the CPU core does not have a up-to-date version of the data in the L1 Data cache and must perform an expensive operation to fetch data from a different location, reduces from ~7.84% to ~0.6% as a result of the thread pinning. This results in a huge reduction in function execution time, dropping from 10.7ms to 3.53ms.
 
 ```outputRunning ./default-os-scheduling
 Run on (16 X 2100 MHz CPU s)

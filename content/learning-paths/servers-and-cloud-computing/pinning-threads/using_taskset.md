@@ -145,7 +145,7 @@ taskset --cpu-list 0-3 ./prog
 wait
 ```
 
-#### Shared 
+#### Shared-Pinned
 
 ```bash
 #!/bin/bash
