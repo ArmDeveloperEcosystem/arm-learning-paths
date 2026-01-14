@@ -2,35 +2,13 @@
 
 title: Performance
 
-weight: 8
+weight: 9
 
 ### FIXED, DO NOT MODIFY
 
 layout: learningpathall
 
 ---
-
-## Benchmarking
-
-The Voice Assistant application also provides a benchmark mode so you can easily test out the performance of an LLM model with a sample number of input and output tokens.
-
-![welcome image alt-text#center](voice_assistant_welcome.png "Welcome Screen")
-
-Tap **Benchmark** to navigate to benchmark screen.
-
-![Benchmark image alt-text#center](voice_assistant_benchmark_1.png "Benchmark Screen")
-
-## Benchmark controls
-
-You can use application controls to enable extra functionality or gather performance data.
-
-|Setting|Default|Description|
-|---|---|---|
-|Input tokens|128|Number of prompt (input) tokens fed to the model before generation starts.|
-|Output tokens|128|Number of new tokens the model should generate after the prompt.|
-|Threads|4|Number of CPU threads used for inference.|
-|Iterations|5|Number of measured benchmark runs to collect stable, averaged measurements.|
-|Warmup|1|Number of warmup iterations which are not counted in benchmarking, these eliminate one-time overheads before measuring.|
 
 ## Benchmarking LLM on Android phone
 
@@ -96,8 +74,17 @@ You can now run the executable in ADB shell, providing the path to libraries and
 ```sh
 adb shell
 cd /data/local/tmp/benchmark_test/
-LD_LIBRARY_PATH=./ ./arm-llm-bench-cli -m mnn/llama-3.2-1b/ -i 128 -o 64 -t 1 -n 5 -w 1
+LD_LIBRARY_PATH=./ ./arm-llm-bench-cli -m mnn/llama-3.2-1b/ -i 128 -o 128 -t 1 -n 5 -w 1
 ```
+
+As you see in the output, the flags used by executable are listed below:
+* `-m` : path to the specific model or a directory with model and configuration files
+* `-i` : number input tokens to use
+* `-o` : number output tokens to generate
+* `-t` : number of threads to use
+* `-n` : number of iterations used for benchmarking
+* `-w` : number of warmup iterations, not included in benchmarking
+
 ```output
 
 === ARM LLM Benchmark ===
@@ -105,7 +92,7 @@ LD_LIBRARY_PATH=./ ./arm-llm-bench-cli -m mnn/llama-3.2-1b/ -i 128 -o 64 -t 1 -n
 Parameters:
   model_path         : mnn/llama-3.2-1b/
   num_input_tokens   : 128
-  num_output_tokens  : 64
+  num_output_tokens  : 128
   num_threads        : 1
   num_iterations     : 5
   num_warmup         : 1
@@ -115,29 +102,42 @@ Parameters:
 
 | Framework          | Threads | Test   | Performance                |
 | ------------------ | ------- | ------ | -------------------------- |
-| mnn                | 1       | pp128  |   192.788 ±  5.658 (t/s)   |
-| mnn                | 1       | tg64   |    30.530 ±  3.186 (t/s)   |
-| mnn                | 1       | TTFT   |   697.401 ± 29.332 (ms)    |
-| mnn                | 1       | Total  |  2782.626 ± 211.955 (ms)   |
+| mnn                | 1       | pp128  |   196.446 ±  0.377 (t/s)   |
+| mnn                | 1       | tg128  |    27.222 ±  0.369 (t/s)   |
+| mnn                | 1       | TTFT   |   687.931 ±  2.279 (ms)    |
+| mnn                | 1       | Total  |  5354.526 ± 63.163 (ms)    |
 
 ```
 
-To get benchmark numbers with use of SME kernels, you can rerun the full Benchmarking LLM on Android phone section without the -DMNN_SME2=OFF as SME kernels are enabled by default.
+To get benchmark numbers with use of SME kernels, you can rerun the full Benchmarking LLM on Android phone section without using `MNN_SME` flag as follows, which will leave SME instructions enabled by default:
+
+```
+cmake --preset=x-android-aarch64 -B build/ -DBUILD_BENCHMARK=ON -DLLM_FRAMEWORK=mnn
+cmake --build ./build
+```
 
 
 ## Example performance with a Vivo X300 Android phone
 
 The table table shows the measurements taken on a Vivo X300 Android phone:
 
-| LLM Framework     | Model                 | Without SME2   | With SME2 | Uplift   |
-|-------------------|-----------------------|----------------|-----------|----------|
-| mnn               | llama-3.2-1B          | 187.06         | 334.57    | 78.87 %  |
-|                   | qwen25vl-3b           | 73.49          | 124.56    | 69.49 %  |
+| LLM Framework     | Model                 | Threads | Without SME2   | With SME2 | Uplift   |
+|-------------------|-----------------------|---------|----------------|-----------|----------|
+| mnn               | llama-3.2-1B          | 1       | 196            | 339       | 72.96 %  |
+|	 	    |                       | 2       | 275            | 396       | 44.00 %  |
+|                   | qwen25vl-3b           | 1       | 73.49          | 124.56    | 69.49 %  |
+|	 	    |                       | 2       |                |           |          |
+| llama.cpp         | llama-3.2-1B          | 1       | 148            | 173       | 16.89 %  |
+|	 	    |                       | 2       | 124            | 191       | 54.03 %  |
+|	 	    | qwen-2-VL             | 1       | 113            | 146       | 29.20 %  |
+|	 	    |                       | 2       | 92             | 139       | 51.09 %  |
+|	 	    | phi-2                 | 1       | 58             | 77        | 32.76 %  |
+|	 	    |                       | 2       | 46             | 60        | 30.43 %  |
 
 
 {{% notice Note %}}
 The Android system enforces throttling, so your own results may vary slightly.
 {{% /notice %}}
 
-These measurements show how fast the model processes (encodes) 128 input tokens when running on a single CPU thread. As the results illustrate, SME2 delivers a significant performance boost even when using just one CPU core on an Android phone, meaning faster processing without needing to involve multiple CPU cores.
+These measurements show how fast the model processes (encodes) 128 input tokens when running on a single CPU thread. As the results illustrate, SME2 delivers a significant performance boost even when using just one or two CPU cores on an Android phone, meaning faster processing without needing to involve multiple CPU cores.
 
