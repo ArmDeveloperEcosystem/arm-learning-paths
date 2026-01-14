@@ -62,16 +62,10 @@ brew install --cask claude-code
 
 ### Install on Windows on Arm
 
-On Windows systems, including Windows on Arm, the recommended method is winget:
+On Windows systems, including Windows on Arm, run the following PowerShell command:
 
 ```console
-winget install Anthropic.ClaudeCode
-```
-
-You can also install using npm, although this is deprecated:
-
-```console
-npm install -g @anthropic-ai/claude-code
+irm https://claude.ai/install.ps1 | iex
 ```
 
 For other options, please [see the Claude Code setup page](https://code.claude.com/docs/en/setup).
