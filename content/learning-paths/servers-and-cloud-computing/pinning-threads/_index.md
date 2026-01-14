@@ -1,5 +1,5 @@
 ---
-title: Getting Started with Pinning Threads and CPU Affinity
+title: Getting Started with CPU Affinity
 
 minutes_to_complete: 30
 
