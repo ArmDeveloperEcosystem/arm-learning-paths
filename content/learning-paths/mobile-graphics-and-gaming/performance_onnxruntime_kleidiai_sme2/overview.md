@@ -1,34 +1,40 @@
 ---
-title: ONNX Runtime overview
+title: ONNX Runtime architecture with SME2 acceleration
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## ONNX Runtime overview
+## Integrating KleidiAI micro-kernels into ONNX Runtime
 With the rise of on-device AI, squeezing performance from CPUs has become critical. Arm's Scalable Matrix Extension 2 (SME2) represents a leap forward, offering significant speedups for matrix-heavy workloads like Transformers and CNNs.
+
 This Learning Path walks you through the technical steps to integrate KleidiAI-Arm's specialized micro-kernel library with SME2 support-into ONNX Runtime (ORT) and profile its performance using onnxruntime_perf_test on Android devices.
 
-## Understanding the ONNX Runtime software stack
+## How does ONNX Runtime process AI models?
+
 ONNX Runtime's internal architecture consists of four main components that work together to execute AI models efficiently:
+
+- In-Memory Graph: represents the model structure as nodes (operations) and edges (data flows)
+- Graph Partitioner: assigns operations to appropriate hardware accelerators
+- Graph Runner: orchestrates execution and manages data flow between operations
+- Execution Provider: hardware-specific backends that run the actual computations
+
 ![Diagram showing the four main components of ONNX Runtime: In-Memory Graph at the top, followed by Graph Partitioner, Graph Runner, and Execution Provider at the bottom, with data flow indicated between layers alt-txt#center](images/ort_overview.jpg "The ONNX Runtime overview")
 
-### In-Memory Graph
+### How does ONNX Runtime represent models in memory?
 When ORT loads an ONNX model, it parses the protobuf file and builds an in-memory representation of the model's structure. This graph consists of:
 
 - Nodes: operations like MatMul, Conv, and Add
 - Edges: tensor data flowing between operations
 
 During this stage, ORT performs Graph Optimizations like constant folding and node fusion.
-### Graph Partitioner
-The Graph Partitioner decides which part of the model runs on which hardware. It analyzes the computational graph and matches nodes to the registered Execution Providers.
-It clusters adjacent nodes assigned to the same EP into "Subgraphs".
-### Graph Runner 
-Once the graph is partitioned, the Graph Runner executes the operators in the correct order. It manages the flow of data (Tensors) between nodes.
-In ORT, parallelism splits into two distinct levels to maximize hardware utilization: Intra-op (inside an operator/node, splitting a single heavy operation/node into smaller chunks) and Inter-op (between different operators, running multiple independent operators at the same time).
-### Execution Provider (EP)
+### How does ONNX Runtime assign operations to hardware?
+The Graph Partitioner decides which part of the model runs on which hardware. It analyzes the computational graph and matches nodes to the registered Execution Providers. It clusters adjacent nodes assigned to the same EP into "Subgraphs".
+### How does ONNX Runtime execute operations?
+Once the graph is partitioned, the Graph Runner executes the operators in the correct order. It manages the flow of data (Tensors) between nodes. In ORT, parallelism splits into two distinct levels to maximize hardware utilization: Intra-op (inside an operator/node, splitting a single heavy operation/node into smaller chunks) and Inter-op (between different operators, running multiple independent operators at the same time).
 
+### What are ONNX Runtime execution providers?
 An Execution Provider is the abstraction layer that interfaces with specific hardware or libraries. Each EP provides optimized math functions (called "Kernels") for specific operators.
 
 ORT supports multiple Execution Providers across different hardware types:
