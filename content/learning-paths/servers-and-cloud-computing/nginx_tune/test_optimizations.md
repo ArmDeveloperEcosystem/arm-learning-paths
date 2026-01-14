@@ -33,7 +33,7 @@ make
 
 shown below is an image of a typical multi-node test setup. On the left, there is a load generator node that will run wrk2. In the middle, there is the Reverse Proxy (or API Gateway) to be tested. On the right, are multiple file servers that act as upstream servers for the Reverse Proxy (or API Gateway). It is also possible to run wrk2 against file servers directly (not shown below), and it is possible to run wrk2 co-located on the same node as Nginx (also not shown). You will need to decide the best setup for your deployment of Nginx. 
 
-![File Server Before and after Tuning](ExampleTestSetup.png)
+![File Server Before and after Tuning](exampletestsetup.png)
 
 ## Running a wrk2 test
 

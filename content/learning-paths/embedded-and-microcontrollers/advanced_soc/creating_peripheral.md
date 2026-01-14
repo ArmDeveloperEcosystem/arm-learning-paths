@@ -12,19 +12,19 @@ The Xilinx Vivado tools provide a simplified way to create an AXI4 peripheral. Y
 
 1. Start by clicking “Tools” -> “Create and Package New IP”. Click “Next” and choose the following option:
 
-    ![Creating AXI4 peripheral](images/Picture7.png) 
+    ![Creating AXI4 peripheral](images/picture7.png) 
 
     *Figure 2.1. Creating AXI4 peripheral*
 
 2. Give the following name to the IP (you may keep the IP location path as provided by default):
 
-    ![Adding peripheral details](images/Picture8.jpg) 
+    ![Adding peripheral details](images/picture8.jpg) 
 
     *Figure 2.2. Adding peripheral details*
 
 3. You need a Subordinate interface and four 32-bit registers for the switches and LEDs.
 
-    ![Peripheral settings for Subordinate interface](images/Picture9.png) 
+    ![Peripheral settings for Subordinate interface](images/picture9.png) 
 
     *Figure 2.3. Peripheral settings for Subordinate interface*
 
@@ -36,7 +36,7 @@ These are the basic template files generated for an AXI-Lite peripheral. You can
 
 5. Double-click to open the top-level Verilog file called “AUP_advanced_SoC_v1_0.v”:
 
-    ![Editing top-level Verilog file](images/Picture10.png) 
+    ![Editing top-level Verilog file](images/picture10.png) 
 
     *Figure 2.4. Editing top-level Verilog file*
 
@@ -64,7 +64,7 @@ These are the basic template files generated for an AXI-Lite peripheral. You can
     ```
 8. Save the changes in the file (Ctrl+S). Next, expand and open the other Verilog file (AUP_advanced_SoC_v1_0_S00_AXI.v) shown below:
 
-    ![Edit the second Verilog file](images/Picture11.png) 
+    ![Edit the second Verilog file](images/picture11.png) 
 
     *Figure 2.5. Edit the second Verilog file*
 
@@ -93,7 +93,7 @@ These are the basic template files generated for an AXI-Lite peripheral. You can
 
 12. Save the changes in the file (Ctrl+S). Next, go to the “Package IP – AUP_advanced_SoC” tab, choose the “Customization Parameters” option on the left and click “Merge Changes from Customization Parameters Wizard” to update the IP package with the changes made in HDL files:
 
-    ![. Saving all the changes](images/Picture12.png) 
+    ![. Saving all the changes](images/picture12.png) 
 
     *Figure 2.6. Saving all the changes*
 
@@ -127,7 +127,7 @@ These are the basic template files generated for an AXI-Lite peripheral. You can
     ```
 15. Then, click on “Settings” (under “Project Manager”) in the “Flow Navigator” menu on the left. Expand the “IP” section in the new window that appears and choose the “Repository” option. 
 
-    ![Adding IP Repository](images/Picture13.png) 
+    ![Adding IP Repository](images/picture13.png) 
 
     *Figure 2.7. Adding IP Repository*
 
@@ -135,7 +135,7 @@ These are the basic template files generated for an AXI-Lite peripheral. You can
 
 17. Click “Run Connection Automation” and then click “OK” to connect the AXI-Lite Subordinate interface on GPIO peripheral to the AXI Manager interface on Arm processor.
 
-    ![Connect AXI-Lite Subordinate interface (Custom IP) to AXI Manager interface](images/Picture14.png) 
+    ![Connect AXI-Lite Subordinate interface (Custom IP) to AXI Manager interface](images/picture14.png) 
 
     *Figure 2.8. Connect AXI-Lite Subordinate interface (Custom IP) to AXI Manager interface*
 

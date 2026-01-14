@@ -36,13 +36,13 @@ Wait until Streamline completes processing the data.
 
 Switch to **Mali Timeline** view as shown below:
 
-!["Mali Timeline Streamline" #center](images/Streamline-mali-timeline.png "Figure 13: Mali Timeline Streamline")
+!["Mali Timeline Streamline" #center](images/streamline-mali-timeline.png "Figure 13: Mali Timeline Streamline")
 
 You might have to zoom into the data up to the maximum (**500 us**), as you are rendering a simple 3D object. 
 
 You can analyze two consecutive frames as shown below:
 
-!["Two Consecutive Frames" #center](./images/Streamline-mali-analysis.png "Figure 14: Two Consecutive Frames")
+!["Two Consecutive Frames" #center](./images/streamline-mali-analysis.png "Figure 14: Two Consecutive Frames")
 
 Arm has worked with the Dawn team to optimize data uploading to GPU buffers for Mali GPUs. 
 

@@ -42,7 +42,7 @@ The installation instructions in the next section go through the steps shown abo
 
     1. Click the _Settings_ icon and choose _Add Modules_
 
-        ![Unity Hub Installs](images/UnityHubInstalls.png "Figure 1. List of Unity versions installed")
+        ![Unity Hub Installs](images/unityhubinstalls.png "Figure 1. List of Unity versions installed")
 
     1. Under **Dev Tools**, choose _Microsoft Visual Studio Community 2022_ if you wish to install it. This integrates well with Unity as a code editor, but any editor will do for editing scripts
 

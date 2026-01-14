@@ -299,7 +299,7 @@ Then select the **Reopen in Container** menu entry as shown below.
 
 It automatically finds and uses `.devcontainer/devcontainer.json`:
 
-![VSCode Docker alt-text#center](VSCode.png "Figure 1: Setting up the Docker container.")
+![VSCode Docker alt-text#center](vscode.png "Figure 1: Setting up the Docker container.")
 
 All your commands now run within the container, so there is no need to prepend
 them with a Docker invocation, as VS Code handles all this seamlessly for you.

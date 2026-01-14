@@ -24,7 +24,7 @@ This section provides an overview of the most common errors you might encounter 
 
 The following error occurs when you try to migrate a project to CMSIS v6 but you have not installed the Cortex_DFP pack:
 
-![Requested device not found for target](./Device_missing.png)
+![Requested device not found for target](./device_missing.png)
 
 {{% notice Resolution %}}
 Install [ARM.Cortex_DFP.1.0.0.pack](https://www.keil.arm.com/packs/cortex_dfp-arm) or above.
@@ -34,7 +34,7 @@ Install [ARM.Cortex_DFP.1.0.0.pack](https://www.keil.arm.com/packs/cortex_dfp-ar
 
 The following error occurs when you try to migrate a Keil RTX-based project but you have not installed the CMSIS-RTX pack:
 
-![Keil RTX5 component not available for target](./CMSIS-RTX_missing.png)
+![Keil RTX5 component not available for target](./cmsis-rtx_missing.png)
 
 {{% notice Resolution %}}
 Install [ARM.CMSIS-RTX.5.8.0.pack](https://www.keil.arm.com/packs/cmsis-rtx-arm) or above.
@@ -46,7 +46,7 @@ Install [ARM.CMSIS-RTX.5.8.0.pack](https://www.keil.arm.com/packs/cmsis-rtx-arm)
 
 The following warning is shown in the Validation Output window when you try to migrate a Keil RTX-based project:
 
-![Additional software components required](./OS_Tick_missing.png)
+![Additional software components required](./os_tick_missing.png)
 
 {{% notice Resolution %}}
 Use the **Resolve** button to select the missing component automatically.
@@ -98,12 +98,12 @@ As the components from the Keil.ARM_Compiler pack do not have 1:1 replacements, 
 
    Deselect the `Compiler:Event Recorder` component and select the `CMSIS-View:Event Recorder` component:
 
-   ![Event Recorder migration](./EventRecorder_migration.png)
+   ![Event Recorder migration](./eventrecorder_migration.png)
 2. Compiler:I/O migration
 
    Deselect any component of `Compiler:I/O` and select the corresponding `CMSIS-Compiler` component:
 
-   ![I/O migration](./IO_migration.png)
+   ![I/O migration](./io_migration.png)
 
    This table helps you to identify the correct components:
 
@@ -245,7 +245,7 @@ For more information on how to configure your *.cproject.yml file, please refer 
 
 1. Go to **Project - Options for Target** and switch to the **C/C++ (AC6)** tab. Add `-include <known_location>\cmsis_5_to_6_patch.h` to the **Misc Controls**:
 
-   ![Add patch file](./CoreDebug_uvision.png)
+   ![Add patch file](./coredebug_uvision.png)
 
 1. Rebuild the project.
 {{% /notice %}}
