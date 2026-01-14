@@ -7,6 +7,7 @@ author: Pareena Verma
 minutes_to_complete: 10
 official_docs: https://code.claude.com/docs
 
+layout: installtoolsall
 multi_install: false
 multitool_install_part: false
 tool_install: true
@@ -23,7 +24,7 @@ You need a Claude account to use Claude Code. A Claude.ai account is recommended
 
 If you don't have a Claude account, visit [Claude.ai](https://claude.ai/) and sign up.
 
-Claude Code offers various pricing tiers including free usage for verified users. Visit [Claude pricing](https://www.anthropic.com/pricing) to review the options.
+Claude Code is only available for paid Pro and Max accounts, if not using API credits. Visit [Claude pricing](https://www.anthropic.com/pricing) to review the options.
 
 ## How do I install Claude Code?
 
@@ -56,18 +57,24 @@ curl -fsSL https://claude.ai/install.sh | bash
 Or install using Homebrew:
 
 ```bash
-brew install anthropics/claude/claude
+brew install --cask claude-code
 ```
 
 ### Install on Windows on Arm
 
-On Windows systems, including Windows on Arm, install using npm:
+On Windows systems, including Windows on Arm, the recommended method is winget:
 
 ```console
-npm install -g @anthropic-ai/claude
+winget install Anthropic.ClaudeCode
 ```
 
-You can also download the Windows installer from the [Claude Code downloads page](https://code.claude.com/docs/en/setup).
+You can also install using npm, although this is deprecated:
+
+```console
+npm install -g @anthropic-ai/claude-code
+```
+
+For other options, please [see the Claude Code setup page](https://code.claude.com/docs/en/setup).
 
 ### Verify installation
 
@@ -80,7 +87,7 @@ claude --version
 The output shows the installed version:
 
 ```output
-2.0.69 (Claude Code)
+2.1.7 (Claude Code)
 ```
 
 ## How do I authenticate Claude Code?
@@ -99,9 +106,9 @@ cd your-project
 claude
 ```
 
-3. On first use, Claude Code prompts you to log in through your browser
-4. Follow the authentication prompts in your browser
-5. Return to your terminal to continue
+3. Choose your configuration options from the wizard (dark mode, etc).
+4. On first use, Claude Code prompts you to log in through your browser if you are using your Claude account. If you are on a remote machine, Claude Code will give you a link to paste into a local browser, which will then provide you with a code to paste into Claude Code.
+5. Accept the acknowledgements in Claude Code and the application will be ready to use.
 
 Claude Code automatically saves your authentication credentials for future sessions.
 
@@ -175,7 +182,7 @@ Navigate to your project directory and add the Arm MCP Server:
 
 ```console
 cd your-project
-claude mcp add --transport stdio arm-mcp -- docker run --rm -i -v "$(pwd):/workspace" armlimited/arm-mcp:latest
+claude mcp add --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "$(pwd):/workspace" armlimited/arm-mcp:latest
 ```
 
 This configuration is stored in `~/.claude.json` under your project's path and is only accessible when working in this directory.
@@ -185,7 +192,7 @@ This configuration is stored in `~/.claude.json` under your project's path and i
 To make the Arm MCP Server available across all your projects:
 
 ```console
-claude mcp add --scope user --transport stdio arm-mcp -- docker run --rm -i -v "$(pwd):/workspace" armlimited/arm-mcp:latest
+claude mcp add --scope user --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "$(pwd):/workspace" armlimited/arm-mcp:latest
 ```
 
 This configuration is stored in `~/.claude.json` and is accessible from any project directory.
@@ -196,7 +203,7 @@ To share the MCP server configuration with your team via version control:
 
 ```console
 cd your-project
-claude mcp add --scope project --transport stdio arm-mcp -- docker run --rm -i -v "$(pwd):/workspace" armlimited/arm-mcp:latest
+claude mcp add --scope project --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "$(pwd):/workspace" armlimited/arm-mcp:latest
 ```
 
 This creates a `.mcp.json` file in your project root that can be committed to version control.
