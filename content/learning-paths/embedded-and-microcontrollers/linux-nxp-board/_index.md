@@ -1,6 +1,10 @@
 ---
 title: Using Linux on the NXP FRDM IMX93 Board
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 120
 
 who_is_this_for: This is an advanced topic for embedded device developers and machine learning engineers, who want need a professional-grade Arm embedded device development platform.
