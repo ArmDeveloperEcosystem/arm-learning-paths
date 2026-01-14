@@ -47,8 +47,8 @@ To emulate the ML extensions for Vulkan:
 
 ![Layer configuration showing Graph above Tensor#center](./images/verify_layers.png "Figure 2: Verify layer ordering and scope.")
 
-{{% notice %}}
-Keep the Vulkan Configurator running to enable the emulation layers during engine execution.
+{{% notice Before you move on %}}
+Make sure you keep Vulkan Configurator running in the background as you go through the next steps.
 {{% /notice %}}
 
 With the ML emulation layers configured, Vulkan is now able to run machine learning workloads through the ML extensions for Vulkan. This enables neural inference to execute alongside the graphics pipeline during development, without requiring access to hardware with dedicated neural accelerators.
