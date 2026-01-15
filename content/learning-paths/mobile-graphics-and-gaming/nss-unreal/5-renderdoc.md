@@ -1,6 +1,6 @@
 ---
 title:  Using RenderDoc for Debugging and Analysis
-weight: 6
+weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

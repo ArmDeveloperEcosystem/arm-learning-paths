@@ -1,6 +1,6 @@
 ---
 title: Introduction to neural graphics and Neural Super Sampling (NSS)
-weight: 2
+weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -27,20 +27,4 @@ Under the hood, Neural Super Sampling for Unreal Engine (NSS for UE) runs its ne
 
 With these resources, you can seamlessly integrate NSS into any Unreal Engine project. The setup is designed to work with Vulkan as your rendering backend, and you don’t need to overhaul your workflow - just plug it in and start leveraging ML-powered upscaling right away. The technology is available as a source-code implementation that you will build with Visual Studio.
 
-## Download required artifacts
-
-Before you begin, download the required plugins and dependencies. These two repositories contain everything you need to set up NSS for Unreal Engine, including the VGF model file, and the ML Emulations Layers for Vulkan.
-
-### 1. Download the NSS plugin
-
-[**Neural Super Sampling Unreal Engine Plugin** → GitHub Repository](https://github.com/arm/neural-graphics-for-unreal)
-
-Download the latest release package and extract it on your Windows machine. Use the folder corresponding to your Unreal version.
-
-
-### 2. Download the runtime for ML Extensions for Vulkan
-[**Unreal NNE Runtime RDG for ML Extensions for Vulkan** → GitHub Repository](https://github.com/arm/ml-extensions-for-vulkan-unreal-plugin).
-
-Download and extract the release package on your Windows machine.
-
-Once you’ve extracted both repositories, proceed to the next section to set up your development environment and enable the NSS plugin.
+Proceed to the next section to set up your development environment and enable the NSS plugin.
