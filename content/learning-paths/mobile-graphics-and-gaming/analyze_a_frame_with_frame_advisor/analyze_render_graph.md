@@ -9,11 +9,11 @@ The render graph in Frame Advisor shows a visualization of the rendering operati
 
 Render passes flow from left to right. The render pass that outputs to the swapchain is the final render pass that outputs to the screen.
 
-![The Render Graph view in Frame Advisor alt-text#center](FA_render_graph_1.1.gif "Figure 1. The Render Graph view")
+![The Render Graph view in Frame Advisor alt-text#center](fa_render_graph_1.1.gif "Figure 1. The Render Graph view")
 
 1. Here, we can see some output attachments that are not used in a future render pass.
 
-    ![Redundant output attachments alt-text#center](Render_graph_egypt_redundant_attachments.png "Figure 3. Redundant output attachments")
+    ![Redundant output attachments alt-text#center](render_graph_egypt_redundant_attachments.png "Figure 3. Redundant output attachments")
 
     You should clear or invalidate input and output attachments that are not used to avoid unnecessary memory accesses. If clear or invalidate calls are present within a render pass, they are shown in the `Frame Hierarchy` view.  
 

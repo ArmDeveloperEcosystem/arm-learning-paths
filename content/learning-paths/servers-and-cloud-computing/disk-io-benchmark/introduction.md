@@ -45,7 +45,7 @@ This architecture has the following benefits:
 
 IOPS measures how many random read/write requests your storage system can perform per second. It depends on the block size or device type. For example, AWS does not show IOPS values for traditional HDD volumes, as shown in the image below:
 
-![iops_hdd alt-text#center](./IOPS.png "Example where IOPS values are not provided.")
+![iops_hdd alt-text#center](./iops.png "Example where IOPS values are not provided.")
 
 #### Throughput and bandwidth
 

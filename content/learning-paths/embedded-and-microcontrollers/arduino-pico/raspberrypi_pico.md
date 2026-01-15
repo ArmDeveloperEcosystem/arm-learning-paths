@@ -20,7 +20,7 @@ You were probably expecting an Arduino board, rather than a Raspberry Pi board b
 
 For interacting with the physical world you can use two cheap commodity components. 
 
-![PIR Sensor](_images/PIR-Sensor-Pinout.png)
+![PIR Sensor](_images/pir-sensor-pinout.png)
 
 First a PIR motion sensor. This sensor reacts to infrared photons emitted by a warm moving object, like a person or animal. The interface is simple, it has one pin for input voltage, one pin for ground to complete the circuit, and a third pin that will have the same voltage as the input pin when motion is detected, and the same voltage as the ground pin when it isn't.
 
@@ -29,7 +29,7 @@ First a PIR motion sensor. This sensor reacts to infrared photons emitted by a w
 
 Second, a very simple electric buzzer. You could get fancy with one of these and make it play different sounds with something called Pulse Width Modulation (PWM) but, for simplicity, you can give it a constant voltage which will result in a high-pitched beeping noise.
 
-![Breadboard](_images/Breadboard.jpeg)
+![Breadboard](_images/breadboard.jpeg)
 
 Finally, you can use a breadboard to connect the components together without having to do any soldering.
 

@@ -12,56 +12,56 @@ In this section you will generate the bitstream for this project and write a C p
 
 1. Under the “Sources” tab on the left, expand the “Design Sources” folder, right-click the design1.bd file, choose the “Create HDL Wrapper” and select all default options. 
 
-    ![Creating HDL Wrapper](images/Picture23.png) 
+    ![Creating HDL Wrapper](images/picture23.png) 
 
     *Figure 3.1. Creating HDL Wrapper*
 
 2. Save any other changes and click “Generate Bitstream” on the left and click “Ok” for all pop-ups. This process takes some time. Once the process is done, select “Open Hardware Manager”:
 
-    ![Generating bitstream and uploading to board](images/Picture24.png) 
+    ![Generating bitstream and uploading to board](images/picture24.png) 
 
     *Figure 3.2. Generating bitstream and uploading to board*
 
 3. Connect the board and make sure the jumper (JP3) above the red LED on the Zybo board is in JTAG mode. Then, in Vivado, click “Auto Connect” in the Hardware Manager as shown below:
 
-    ![Connecting the board](images/Picture25.png) 
+    ![Connecting the board](images/picture25.png) 
 
     *Figure 3.3. Connecting the board*
 
 4. Right-click on the board, select “Program Device” as shown below and click “Program” on the pop-up window. 
 
-    ![Programming the board](images/Picture26.png) 
+    ![Programming the board](images/picture26.png) 
 
     *Figure 3.4. Programming the board*
 
 5. Once the board is programmed, the green LED labeled “LD12” should light up on the board. Click “File” on the main menu bar and select “Export” -> “Export Hardware” and click “Next” on the pop-up window. Choose the following option on the next page:
 
-    ![Exporting hardware and bitstream file](images/Picture27.png) 
+    ![Exporting hardware and bitstream file](images/picture27.png) 
 
     *Figure 3.5. Exporting hardware and bitstream file* 
 
 6. Choose the “export to” location as the project folder and save the file. Then click “Finish”. Next, click “Tools” on the main menu bar and select “Launch Vitis IDE”. Choose the same project folder as your workspace. Click “File” -> “New” -> “Application Project”.
 
-    ![Creating a new application project](images/Picture28.png) 
+    ![Creating a new application project](images/picture28.png) 
 
     *Figure 3.6. Creating a new application project*
 
 7. Select the “Create a new platform from hardware (XSA)” tab and click browse to select the XSA file you saved earlier:
 
-    ![Adding the XSA file](images/Picture29.png) 
+    ![Adding the XSA file](images/picture29.png) 
 
     *Figure 3.7. Adding the XSA file*
 
 8. Click next and give a name (e.g. led_system) to the application project. Click “Next” until you reach the following page and choose “Empty Application(C)” and click “Finish”:
 
-    ![Creating an empty C Application](images/Picture30.png) 
+    ![Creating an empty C Application](images/picture30.png) 
 
     *Figure 3.8. Creating an empty C Application*
 
 
 9. Then right-click the “src” folder within the application project you created and add a new file called “main.c”. 
 
-    ![Adding a main.c file](images/Picture31.png) 
+    ![Adding a main.c file](images/picture31.png) 
 
     *Figure 3.9. Adding a main.c file*
 
@@ -81,7 +81,7 @@ In this section you will generate the bitstream for this project and write a C p
 
 12. Right-click the application project in the explorer tab, select “Build Project” and ensure that the build is successful. Then right click again and select “Run As” and then “1 Launch Hardware” to upload everything to the board.
 
-    ![Running the program on the board.](images/Picture32.png) 
+    ![Running the program on the board.](images/picture32.png) 
 
     *Figure 3.10. Running the program on the board.*
 

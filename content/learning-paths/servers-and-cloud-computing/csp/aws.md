@@ -58,7 +58,7 @@ For now, select `Ubuntu` images from the `Quick Start` list of available images,
 
 In the `Architecture` pull-down menu, select `64-bit (Arm)` to ensure an Arm-based instance type is used.
 
-![alt-text #center](./images/ArmArch.png "Select '64-bit (Arm)' Architecture")
+![alt-text #center](./images/armarch.png "Select '64-bit (Arm)' Architecture")
 
 ### Select instance type
 

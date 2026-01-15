@@ -13,7 +13,7 @@ Use the Content Metrics view in Frame Advisor to find geometry-related problems 
     
 1. Right-click the draw call at the top of the list and choose `Navigate to call`. This complex object is now selected in the `Frame Hierarchy` view and you can see it in the `Framebuffers` view. This object is the Sphinx model and it is built using almost 23,000 primitives. This is a high number for a game object on mobile, so the first step is to see whether this model can be simplified. Fewer primitives reduces GPU processing cost and memory bandwidth.
 
-    ![The Sphinx model shown in the Framebuffers view alt-text#center](FA_Sphinx.png "Figure 2. The Sphinx model shown in the Framebuffers view")
+    ![The Sphinx model shown in the Framebuffers view alt-text#center](fa_sphinx.png "Figure 2. The Sphinx model shown in the Framebuffers view")
 
     In cases where the model cannot be simplified any further, there are other options to consider.
     

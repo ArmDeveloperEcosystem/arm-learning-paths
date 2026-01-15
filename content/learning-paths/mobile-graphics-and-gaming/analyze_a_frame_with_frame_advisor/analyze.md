@@ -15,7 +15,7 @@ When the analysis completes, you will see Frame Advisor's `Analysis` screen.
 
 1. You can see all the render passes that make up the frame. Expand a render pass to see the draw calls within it. Step through the draw calls to see how the scene is built.
 
-    ![Stepping through draw calls alt-text#center](FA_step_drawcalls.gif "Figure 1. Stepping through draw calls in Frame Advisor")
+    ![Stepping through draw calls alt-text#center](fa_step_drawcalls.gif "Figure 1. Stepping through draw calls in Frame Advisor")
 
     Draw calls are expensive for the CPU to process, so it is important to reduce the number of them where possible. Look for draw calls that don’t render visible changes to the framebuffer. If you don’t see any change, draws could be outside of the frustum or behind other objects. Use software culling techniques to eliminate them.
 
@@ -23,4 +23,4 @@ When the analysis completes, you will see Frame Advisor's `Analysis` screen.
     
 1. Look for instances where many identical objects are being drawn individually, like these pillars. There could be an opportunity to reduce the number of draw calls by batching multiple objects into a single combined mesh or by using an instanced draw call.
 
-    ![Framebuffers view alt-text#center](Pillars.gif "Figure 1. Framebuffers view in Frame Advisor")
+    ![Framebuffers view alt-text#center](pillars.gif "Figure 1. Framebuffers view in Frame Advisor")

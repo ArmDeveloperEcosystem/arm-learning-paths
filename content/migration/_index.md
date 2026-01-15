@@ -227,7 +227,7 @@ Based on your initial research, decide how to proceed with trying your software 
 
 Top-down porting involves moving the complete software stack to an Arm machine and trying to build and run it straightaway. You will almost certainly face errors, which you can address one at a time until the full application runs on Arm. 
 
-![Top-down porting methodology](/migration/Top-down.png) 
+![Top-down porting methodology](/migration/top-down.png) 
 
 This methodology is great for simpler stacks, when breaking down the problem would take more time than fixing errors iteratively. 
 
@@ -235,7 +235,7 @@ This methodology is great for simpler stacks, when breaking down the problem wou
 
 Bottom-up porting is more systematic. Here, you break apart your software stack, starting with the foundations of your app to get those running on an Arm server first. Then add back one or two software packages at a time, and recompile and run to ensure it works on Arm. If errors arise, fix them or replace the incompatible package with an Arm compatible version. Continue building back your stack until it is fully formed on an Arm server. 
 
-![Bottom-up porting methodology](/migration/Bottom-up.png) 
+![Bottom-up porting methodology](/migration/bottom-up.png) 
 
 This methodology is sensible for large stacks, where running the whole app on Arm immediately would cause too many errors to effectively work through.
 
