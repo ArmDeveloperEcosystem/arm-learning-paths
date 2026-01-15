@@ -109,7 +109,7 @@ Parameters:
 
 ```
 
-To get benchmark numbers with use of SME kernels, you can rerun the full Benchmarking LLM on Android phone section without using `MNN_SME` flag as follows, which will leave SME instructions enabled by default:
+To get benchmark numbers with use of SME kernels, you can rerun the full "Benchmarking LLM on Android phone" section without setting `MNN_SME2` to `OFF`. Omitting the `MNN_SME2` flag enables SME instructions by default.:
 
 ```
 cmake --preset=x-android-aarch64 -B build/ -DBUILD_BENCHMARK=ON -DLLM_FRAMEWORK=mnn
@@ -123,11 +123,11 @@ The table table shows the measurements taken on a Vivo X300 Android phone:
 
 | LLM Framework     | Model                 | Threads | Without SME2   | With SME2 | Uplift   |
 |-------------------|-----------------------|---------|----------------|-----------|----------|
-| mnn               | qwen25vl-3b           | 1       | 33             | 134       | 306.06 % |
-|                   |                       | 2       | 51             | 140       | 174.51 % |
+| mnn               | qwen25vl-3b           | 1       | 85             | 134       | 57.65 %  |
+|                   |                       | 2       | 95             | 140       | 47.37 %  |
 |                   | llama-3.2-1B          | 1       | 196            | 339       | 72.96 %  |
 |                   |                       | 2       | 275            | 396       | 44.00 %  |
-| llama.cpp	    | qwen-2-VL             | 1       | 113            | 146       | 29.20 %  |
+| llama.cpp         | qwen-2-VL             | 1       | 113            | 146       | 29.20 %  |
 |                   |                       | 2       | 92             | 139       | 51.09 %  |
 |                   | llama-3.2-1B          | 1       | 148            | 173       | 16.89 %  |
 |                   |                       | 2       | 124            | 191       | 54.03 %  |
