@@ -1,6 +1,10 @@
 ---
 title: Getting Started with CPU Affinity
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 30
 
 who_is_this_for: Developers, performance engineers and system administrators looking to fine-tune the performance of their workload on many-core Arm-based systems.
