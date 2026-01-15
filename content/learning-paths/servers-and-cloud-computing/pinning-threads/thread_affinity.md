@@ -1,16 +1,22 @@
 ---
-title: CPU Affinity
+title: Set CPU affinity in source code
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Pinning Threads at Source-Code Level
+## Pin threads at the source code level
 
-Another way to set CPU affinity is at the source code level, this allows developers to be more expressive as to which thread goes where at specific points during the runtime. For example, in a hot path that repeatedly updates shared state with a read-modify-write style, a pinned thread could avoids excessive cache invalidations due to other threads modifying data. 
+Another way to set CPU affinity is at the source code level. This allows you to be more expressive about which thread goes where at specific points during runtime. 
 
-To demonstrate this we have an example program below. Copy and paste the code below into a new file named `default_os_scheduling.cpp`.
+For example, in a hot path that repeatedly updates shared state with a read-modify-write pattern, a pinned thread can avoid excessive cache invalidations caused by other threads modifying data.
+
+## Create a baseline program without thread pinning
+
+To demonstrate this, you'll create two example programs. The first uses the default OS scheduling without thread pinning.
+
+Copy and paste the code below into a new file named `default_os_scheduling.cpp`:
 
 ```cpp
 #include <benchmark/benchmark.h>
@@ -70,9 +76,11 @@ BENCHMARK(default_os_scheduling)->UseRealTime()->Unit(benchmark::kMillisecond);
 BENCHMARK_MAIN();
 ```
 
-`default_os_scheduling.cpp` has 2 atomic variables that are aligned on different cache lines to avoid thrashing. We spawn 4 threads, with 2 threads performing a read-modify-wite operation on the first atomic variable, and the final 2 threads performing the same operation on the second atomic variable. 
+This program has two atomic variables that are aligned on different cache lines to avoid thrashing. You spawn four threads: two threads perform a read-modify-write operation on the first atomic variable, and two threads perform the same operation on the second atomic variable.
 
-Now, copy the code block below into a file named `thread_affinity.cpp`.
+## Create a program with explicit thread pinning
+
+Now, copy the code below into a new file named `thread_affinity.cpp`:
 
 ```cpp
 #include <benchmark/benchmark.h>
@@ -150,25 +158,32 @@ BENCHMARK(thread_affinity)->UseRealTime()->Unit(benchmark::kMillisecond);
 BENCHMARK_MAIN();
 ```
 
-`Thread_affinity.cpp` uses the `pthread_set_affinity_np` function from the `pthread.h` header file to pin the 2 threads operating on atomic variable, `a`, to a specific CPU set and the other threads operating on atomic variable, `b`, to a different CPU.
+This program uses the `pthread_setaffinity_np` function from the `pthread.h` header file to pin threads. The two threads operating on atomic variable `a` are pinned to a specific CPU set, and the other threads operating on atomic variable `b` are pinned to a different CPU.
 
-Compile both programs with the following command.
+## Compile and benchmark the programs
+
+Compile both programs with the following commands:
 
 ```bash
 g++ default_os_scheduling.cpp -O3 -march=native -lbenchmark -lpthread -o default-os-scheduling
 g++ thread_affinity.cpp -O3 -march=native -lbenchmark -lpthread -o thread-affinity
 ```
 
-We will use the `perf` tool to print statistic for the program. 
+Use Perf to print statistics for both programs:
 
 ```bash
 perf stat -e L1-dcache-loads,L1-dcache-load-misses ./default-os-scheduling
 perf stat -e L1-dcache-loads,L1-dcache-load-misses ./thread-affinity
 ```
 
-Inspecting the output below we see that the `L1-dcache-load-misses` which occur when the the CPU core does not have a up-to-date version of the data in the L1 Data cache and must perform an expensive operation to fetch data from a different location, reduces from ~7.84% to ~0.6% as a result of the thread pinning. This results in a huge reduction in function execution time, dropping from 10.7ms to 3.53ms.
+## Analyze the performance results
 
-```outputRunning ./default-os-scheduling
+Inspecting the output below, you can see that the `L1-dcache-load-misses` metric (which occurs when the CPU core doesn't have an up-to-date version of the data in the L1 data cache and must perform an expensive operation to fetch data from a different location) reduces from approximately 7.84% to approximately 0.6% as a result of thread pinning. 
+
+This results in a significant reduction in function execution time, dropping from 10.7 ms to 3.53 ms:
+
+```output
+Running ./default-os-scheduling
 Run on (16 X 2100 MHz CPU s)
 CPU Caches:
   L1 Data 64 KiB (x16)
@@ -217,8 +232,16 @@ thread_affinity/real_time       3.53 ms        0.343 ms          198
        0.169065000 seconds sys
 ```
 
-### Conclusion
+The results demonstrate that thread pinning can significantly improve performance when threads operate on separate data structures. By keeping threads on specific cores, you reduce cache coherency traffic and improve data locality.
 
-In this tutorial, we introduced thread pinning (CPU affinity) through a pair of worked examples. By comparing default OS thread scheduling against explicitly pinned threads, we showed how controlling where threads run can reduce cache disruption in contention-heavy paths and improve runtime stability and performance.
+## What you've accomplished and what's next
 
-We also highlighted the tradeoffs, pinning can boost locality and predictability, but it can hurt performance of other running processes, espec. Finally, we showed how to implement affinity quickly using common system utilities for inspection and measurement, and how to be more expressive directly in code using APIs like `pthread_setaffinity_np` from `pthread.h`.
+In this section, you've:
+- Created two programs to compare default OS scheduling against explicit thread pinning
+- Used the `pthread_setaffinity_np` API to control CPU affinity at the source code level
+- Measured cache performance using Perf to quantify the impact of thread pinning
+- Observed a performance improvement and a reduction in cache misses through strategic thread placement
+
+You've seen how controlling where threads run can reduce cache disruption in contention-heavy paths and improve runtime stability and performance. You've also learned about the trade-offs: pinning can boost locality and predictability, but it can hurt performance of other running processes, especially if the workload characteristics change or if you over-constrain the scheduler.
+
+Thread pinning is most effective when you have well-understood workload patterns and clear separation between data structures accessed by different threads. Use it as a fine-tuning technique after establishing baseline performance with default OS scheduling.
