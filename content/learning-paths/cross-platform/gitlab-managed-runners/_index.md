@@ -12,7 +12,7 @@ who_is_this_for: This is an Introductory topic for DevOps professionals who are 
 learning_objectives: 
     - Create a GitLab Project
     - Understand basic pipeline script structure and how to use it
-    - Build and test a simple CI/CD pipeline Using Gitlab-hosted runners which will build and produce a tiny docker image from simple "Hello world" "C" language program. The image will be build to run on Arm64 machines. 
+    - Build and test a simple CI/CD pipeline using Gitlab-hosted runners which will build and produce a tiny docker image from a simple "Hello world" "C" language program. The image will be built to run on Arm64 machines and will be saved in Gitlab Registery to be used later. 
     
 
 prerequisites:
@@ -26,10 +26,11 @@ subjects: CI-CD
 cloud_service_providers: Google Cloud
 
 armips:
-    - Neoverse N1
+    - Neoverse-N1
 
 tools_software_languages:
     - GitLab
+    - Docker
 
 operatingsystems:
     - Linux

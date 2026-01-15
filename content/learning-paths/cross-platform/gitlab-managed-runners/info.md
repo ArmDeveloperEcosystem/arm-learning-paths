@@ -17,7 +17,7 @@ A GitLab Runner works with GitLab CI/CD to run jobs in a pipeline. It acts as an
 
 
 {{% notice Note %}}
-All The information provided in the next section are from GitLab official Pages and it's provided here for convenience and can be changed by Gitlab at anytime. Please refer to the [Gitlab Documentation](https://docs.gitlab.com/ci/runners/hosted_runners/) for more details and for the latest updates.
+All The information provided in the next section are from GitLab official Pages and it's provided here for convenience and can be changed by Gitlab at anytime. Please refer to the [Gitlab Documentation](https://docs.gitlab.com/ci/runners/hosted_runners/) for more details and for the latest updates. This section is optional.
 {{% /notice %}}
 
 ## GitLab-Hosted Runners Facts

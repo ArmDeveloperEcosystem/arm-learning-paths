@@ -16,7 +16,7 @@ Once you run your pipeline with the correct **`tags`** Gitlab will create everyt
 
 You will test the pipeline by building a Docker image from a simple C language "Hello World" program which can run on Arm64 instances/machines and to do that you will need to create the following files:
 
-1) "main.c" File: which is the main program that will get executed when we will run your Docker image later. I only provided a simple example but please feel free to use any program that you like. Although, I advise to start with this simple program to test that everything is working then use anything later after by changing the **`main.c`** file.
+1) **`main.c`** File: which is the main program that will get executed when we will run your Docker image later. I only provided a simple example but please feel free to use any program that you like. Although, I advise to start with this simple program to test that everything is working then use anything later after by changing the **`main.c`** file.
 
 ```c
 //main.c
@@ -28,9 +28,10 @@ int main(void) {
 }
 ```
 
-2) DockerFile: This is the file has a set of instruction for Docker on how to create a Docker image. It simply instructs the Docker on your runner to build and package your **``hello``** app into a Docker image.
+2) **`DockerFile`** File: This file has a set of instruction for Docker on how to create a Docker image. It simply instructs the Docker on your runner on how to build and package your **``hello``** app into a Docker image. This produces a tiny image and will run on Arm64 hosts as long as the binary is Arm64 (which it will be, since we’re building on an Arm runner).
 
 ```DockerFile
+# DockerFile
 # syntax=docker/dockerfile:1
 
 FROM alpine:3.20 AS build
@@ -45,7 +46,7 @@ ENTRYPOINT ["/hello"]
 
 ```
 
-3) Optionally .dockerignore file: This file instructs Docker to ignor certain files that has nothing to do with the image that it will create.
+3) Optionally **`.dockerignore`** file: This file instructs Docker to ignor certain files that has nothing to do with the image that it will create.
 
 ```.dockerignore
 .git
@@ -54,7 +55,7 @@ ENTRYPOINT ["/hello"]
 
 4) You will also need to create a YML file as I mentioned before which I will explain in more details in the next section.
 
-To Create any of those files simple follow the same steps in the next section but instead of choosing **`.gitlab-ci.yml`** file just change the name to each of the corresponding file name above. Also, it's very important to create the 3 files from this section first because once you create and commit/save **`.gitlab-ci.yml`** file will simply run the pipeline. If the other 3 files didn't exist at that time then the pipeline will fail.
+To Create any of those files simply follow the same steps in the next section but instead of choosing **`.gitlab-ci.yml`** file just change the name to each of the corresponding file names above. It is very important to create the 3 files from this section first because once you create and commit/save the **`.gitlab-ci.yml`** file, it will simply run the pipeline. If the other 3 files don't exist at that time then the pipeline will fail.
 
 ## How to Create .gitlab-ci.yml file in a Gitlab Project?
 
@@ -73,6 +74,7 @@ Option2: Click on the "+" button. From the popup menu click on **`New File`** op
 
 4. In the pipeline editor, just copy and paste the following YML script and click on commit changes (Add any relevent message as your commit update message).
 ```YML
+#First Section
 stages: [build, test, push]
 
 variables:
@@ -85,15 +87,19 @@ variables:
   DOCKER_CERT_PATH: "/certs/client"
   DOCKER_TLS_VERIFY: "1"
 
+#Second Section
 build_test_push:
   stage: build
-  tags:
-    - saas-linux-small-arm64
+  tags:   # This tag is used to specify the size of the runner for each stage but it can be defined on the top of the file if you want to use the same exact runner size for all the stages in your pipeline
+    - saas-linux-small-arm64 
   image: docker:27
   services:
     - name: docker:27-dind
   before_script:
     - uname -m
+    # install lscpu (provided by util-linux) which is used to identify the CPU used for this stage runner
+    - apk add --no-cache util-linux
+    - lscpu
     - docker version
     - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin "$CI_REGISTRY"
   script:
@@ -101,6 +107,7 @@ build_test_push:
     - docker run --rm "$IMAGE_TAG"
     - docker push "$IMAGE_TAG"
 
+#Third Section
 push_latest:
   stage: push
   tags:
@@ -109,6 +116,8 @@ push_latest:
   services:
     - name: docker:27-dind
   before_script:
+    - apk add --no-cache util-linux #since each stage is using a different runner then we need to check this CPU as well
+    - lscpu
     - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin "$CI_REGISTRY"
   script:
     - docker pull "$IMAGE_TAG"
