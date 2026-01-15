@@ -18,7 +18,7 @@ subjects_filter:
 - Migration to Arm: 30
 - ML: 4
 - Performance and Architecture: 28
-subtitle: Create and migrate apps for power efficient performance
+subtitle: Build native Windows on Arm that are fast and efficient.
 title: Laptops and Desktops
 tools_software_languages_filter:
 - .NET: 13

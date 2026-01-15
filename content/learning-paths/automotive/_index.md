@@ -7,7 +7,7 @@ key_ip:
 - Cortex-A
 - Cortex-R
 maintopic: true
-subtitle: Build secure, connected, smart IoT devices
+subtitle: Build smarter, real-time vehicle software on reliable Arm platforms.
 title: Automotive
 weight: 4
 subjects_filter:

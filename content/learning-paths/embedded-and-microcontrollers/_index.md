@@ -25,7 +25,7 @@ subjects_filter:
 - RTOS Fundamentals: 5
 - Security: 2
 - Virtual Hardware: 2
-subtitle: Learn best practices for microcontroller development
+subtitle: Learn best practices for IoT, embedded, and microcontroller development.
 title: Embedded and Microcontrollers
 tools_software_languages_filter:
 - AI: 1
