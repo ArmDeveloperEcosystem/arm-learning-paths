@@ -15,8 +15,6 @@ A GitLab Runner works with GitLab CI/CD to run jobs in a pipeline. It acts as an
 
 3. Multi-architecture support: GitLab runners support multiple architectures including - **`x86/amd64`** and **`arm64`**.
 
-## What is Google Axion?
-Axion is Google's first Arm-based server processor, built using the Armv9 Neoverse V2 CPU. The VM instances are part of the **`C4A`** family of compute instances. To learn more about Google Axion refer to this [page](http://cloud.google.com/products/axion/) .
 
 {{% notice Note %}}
 All The information provided in the next section are from GitLab official Pages and it's provided here for convenience and can be changed by Gitlab at anytime. Please refer to the [Gitlab Documentation](https://docs.gitlab.com/ci/runners/hosted_runners/) for more details and for the latest updates.

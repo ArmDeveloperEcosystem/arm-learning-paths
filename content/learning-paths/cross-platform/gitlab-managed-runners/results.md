@@ -12,11 +12,11 @@ The Pipeline script has multiple sections where each section instructs the pipel
 
 ### First Section: Stages
 
-In this section we are describing how many squentional stages will our pipeline have and what are their names (ex. **`Build, Test and Deploy`**). If we would like all the stages or jobs to run simultinously then we simply don't define this section.
+In this section you are describing how many squentional stages will your pipeline have and what are their names (ex. **`Build, Test and Deploy`**). If you would like all the stages or jobs to run simultinously then you simply don't define this section.
 
 ### Second Section: Build-Job part of the Build stage
 
-In this section we are defining the Build-Job as part of the Build stage. This stage will run on Gitlab-Hosted runner that uses Linux OS on Arm64 instance of size small.
+In this section you are defining the Build-Job as part of the Build stage. This stage will run on Gitlab-Hosted runner that uses Linux OS on Arm64 instance of size small.
 
 {{% notice Important Note %}}
 Gitlab offers 3 Arm64 based Instances that use Linux as their OS.

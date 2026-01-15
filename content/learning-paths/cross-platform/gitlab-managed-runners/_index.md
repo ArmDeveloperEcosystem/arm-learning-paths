@@ -5,14 +5,14 @@ draft: true
 cascade:
     draft: true
 
-minutes_to_complete: 30
+minutes_to_complete: 40
 
 who_is_this_for: This is an Introductory topic for DevOps professionals who are looking to build a CI/CD pipeline with GitLab on Google Axion using GitLab-Hosted runners. 
 
 learning_objectives: 
     - Create a GitLab Project
     - Understand basic pipeline script structure and how to use it
-    - Build and test a simple CI/CD pipeline Using Gitlab-hosted runners
+    - Build and test a simple CI/CD pipeline Using Gitlab-hosted runners which will build and produce a tiny docker image from simple "Hello world" "C" language program. The image will be build to run on Arm64 machines. 
     
 
 prerequisites:
@@ -26,7 +26,7 @@ subjects: CI-CD
 cloud_service_providers: Google Cloud
 
 armips:
-    - Neoverse
+    - Neoverse N1
 
 tools_software_languages:
     - GitLab
