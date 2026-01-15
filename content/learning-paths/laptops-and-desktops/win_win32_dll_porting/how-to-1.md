@@ -23,7 +23,7 @@ In this learning path, we will demonstrate how to update your Win32 DLL for Arm6
 ## Before you begin
 To follow this learning path you will need to install [Visual Studio 2022 or higher](/install-guides/vs-woa) with Arm64 build tools and desktop development with C++ workload.
 
-The complete project code used in this learning path is hosted [here](https://github.com/dawidborycki/Win32.Porting.git).
+The [complete project code](https://github.com/dawidborycki/Win32.Porting.git) is hosted on GitHub.
 
 ## Project Setup
 To set up the project, start by creating the Dynamic-Link Library (DLL). Open Visual Studio and click **Create a new project** button. This will open a new screen, in which you type DLL in the search box. This will filter the list of project templates, from which you select Dynamic-Link Library with exports (DLL):

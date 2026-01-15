@@ -29,7 +29,7 @@ armips:
     - Neoverse
 tools_software_languages:
     - C
-    - C++
+    - CPP
     - Runbook
 operatingsystems:
     - Linux

@@ -16,10 +16,10 @@ There are essentially two types of KleidiAI micro-kernels today:
 2. Matrix Multiplication routines - the three directories with the prefix `matmul_clamp`. Each directory contains routines specialized for a specific input data type.
 
 
-![KleidiAI stuff](KleidiAI-src.JPG "KleidiAI src directory")
+![KleidiAI stuff](kleidiai-src.JPG "KleidiAI src directory")
 
 ### What are the quantization levels that KleidiAI supports?
-KleidiAI has multiple matrix multiplication micro-kernels, and dynamic quantization routines, to optimally support all model quantization levels. To learn more about model quantization and how selecting the right quantization level affects your AI-based application, refer to [this Learning Path](https://learn.arm.com/learning-paths/servers-and-cloud-computing/llama-cpu/llama-chatbot#quantization-format).
+KleidiAI has multiple matrix multiplication micro-kernels, and dynamic quantization routines, to optimally support all model quantization levels. To learn more about model quantization and how selecting the right quantization level affects your AI-based application, refer to [this Learning Path](/learning-paths/servers-and-cloud-computing/llama-cpu/llama-chatbot#quantization-format).
 
 KleidiAI currently has three matrix multiplication directories that each handle input/output types differently, and which will evolve to broaden the reach of their support:
 

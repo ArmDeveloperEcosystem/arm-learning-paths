@@ -32,7 +32,7 @@ To add the required EBS volumes to your EC2 instance:
 
 Both block devices have the same 8 GiB capacity, but the `io2` is optimized for throughput, while `gp2` is general-purpose. 
 
-![EBS alt-text#center](./EBS.png "Multi-volume storage information.")
+![EBS alt-text#center](./ebs.png "Multi-volume storage information.")
 
 In this section, you’ll measure real-world performance to help guide your storage selection.
 

@@ -104,7 +104,7 @@ There is a global variable `g_msTicks` located in `Blinky.c` near line 11 that y
 
 1. Click on `<Enter expression>` twice and enter: `SystemCoreClock`
 2. Right click on the `Value` and deselect **Hexadecimal Display**. 32 MHz will be displayed:  
-![SystemCoreClock in Watch 1 Window](./SystemCoreClockWatch.png)
+![SystemCoreClock in Watch 1 Window](./systemcoreclockwatch.png)
 
 {{% notice Note %}}
 You do not need to stop the program execution to enter variables, raw addresses or structures in a **Watch** or **Memory** window.
@@ -140,7 +140,7 @@ The example application uses the Arm Cortex-M system tick timer.
 
 1. ![System Viewer](./b_uv4_systemviewer.png) Go to **Peripherals - Core Peripherals** and then select **System Tick Timer S (SysTick)**.
 2. The **SysTick Timer** window opens:  
-![SysTick Timer Window](./SysTickTimerWindow.png)
+![SysTick Timer Window](./systicktimerwindow.png)
 1. ![Run](./b_uv4_run.png) **Run (F5)** the application.
 6. While the program is running, type `0x10000` in the `SysTick -> LOAD` register and click in another register or press Enter.
 7. The program execution will speed up. This is the power of Arm CoreSight debugging.

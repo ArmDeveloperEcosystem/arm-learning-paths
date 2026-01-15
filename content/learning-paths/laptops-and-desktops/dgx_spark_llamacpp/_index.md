@@ -46,7 +46,7 @@ further_reading:
         type: documentation
     - resource:
         title: Profile llama.cpp performance with Arm Streamline and KleidiAI LLM kernels Learning Path
-        link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/llama_cpp_streamline/
+        link: /learning-paths/servers-and-cloud-computing/llama_cpp_streamline/
         type: blog
     - resource:
         title: Arm-Powered NVIDIA DGX Spark Workstations to Redefine AI

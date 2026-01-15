@@ -8,22 +8,16 @@ official_docs: https://github.com/aws/aperf
 test_images:
 - ubuntu:latest
 test_maintenance: true
-title: AWS Perf (APerf)
+title: APerf
 tool_install: true
 weight: 1
 ---
 
-APerf (AWS Perf) is an open source command line performance analysis tool which saves time by collecting information which is normally collected by multiple tools such as `perf`, `sysstat`, and `sysctl`.
+APerf is an open source command line tool maintained by AWS. It aims to assist users with performance monitoring and debugging on Linux systems. It collects a wide range of performance-related system metrics or data, whose collections traditionally require multiple tools, such as `perf`, `sysstat`, and `sysctl`. 
 
-APerf was created by AWS to help with Linux performance analysis.
-
-In addition to the CLI, APerf includes an HTML view to visualize the collected data.
+The collected data are written into an archive, and APerf can generate a static HTML report from one or more archives to visualize the data. When generating the report, APerf also performs analysis on the data to automatically detect potential performance issues. Users can open the report in the browser to view all collected data and analytical findings.
 
 ## What should I do before I begin installing APerf?
-
-APerf works on Linux, and is available as a single binary.
-
-APerf works best if `perf` is installed. Refer to the [Perf for Linux on Arm](/install-guides/perf) install guide for instructions.
 
 This article provides a quick solution to install APerf on Arm Linux and get started.
 
@@ -39,7 +33,19 @@ The output should be:
 aarch64
 ```
 
-If you see a different result, you are not using an Arm computer running 64-bit Linux.
+If you see a different result, you are not using an Arm computer running 64-bit Linux. Note that APerf can only run on Linux.
+
+To allow APerf to collect PMU (Processor Monitoring Unit) metrics without sudo or root permissions, set `/proc/sys/kernel/perf_event_paranoid` to -1, or run 
+```bash
+sudo sysctl -w kernel.perf_event_paranoid=-1
+```
+
+To use APerf's CPU profiling option (`--profile`), install the `perf` binary. Refer to the [Perf for Linux on Arm](/install-guides/perf) install guide for instructions. For kernel address visibility, set `/proc/sys/kernel/kptr_restrict` to 0, or run 
+```bash
+sudo sysctl -w kernel.kptr_restrict=0
+```
+
+To use APerf's Java profiling option (`--profile-java`), install the [async-profiler](https://github.com/async-profiler/async-profiler) tool.
 
 ## How do I download and install APerf?
 
@@ -50,26 +56,26 @@ Visit the [releases page](https://github.com/aws/aperf/releases/) to see a list 
 You can also download a release from the command line:
 
 ```bash { target="ubuntu:latest" }
-wget https://github.com/aws/aperf/releases/download/v0.1.15-alpha/aperf-v0.1.15-alpha-aarch64.tar.gz
+wget https://github.com/aws/aperf/releases/download/v1.0.0/aperf-v1.0.0-aarch64.tar.gz
 ```
 
 Extract the release:
 
 ```bash { target="ubuntu:latest" }
-tar xvfz aperf-v0.1.15-alpha-aarch64.tar.gz
+tar xvfz aperf-v1.0.0-aarch64.tar.gz
 ```
 
 Add the path to `aperf` in your `.bashrc` file.
 
 ```console
-echo 'export PATH="$PATH:$HOME/aperf-v0.1.15-alpha-aarch64"' >> ~/.bashrc
+echo 'export PATH="$PATH:$HOME/aperf-v1.0.0-aarch64"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
 Alternatively, you can copy the `aperf` executable to a directory already in your search path.
 
 ```bash { target="ubuntu:latest" }
-sudo cp aperf-v0.1.15-alpha-aarch64/aperf /usr/local/bin
+sudo cp aperf-v1.0.0-aarch64/aperf /usr/local/bin
 ```
 
 Confirm `aperf` is installed by printing the version:
@@ -81,68 +87,68 @@ aperf --version
 The output should print the version:
 
 ```output
-aperf 0.1.0 (4b910d2)
+aperf 1.0.0 (4cf8d28)
 ```
 
 ## How do I verify APerf is working?
 
 ### How do I create and view a report?
 
-To confirm APerf is working, start it for 10 seconds and take a sample every 1 second.
+To confirm APerf is working, start a new collection run that collects data every 1 second for 10 seconds, which are the default interval and period. Add the `--profile` or `--profile-java` flags if needed.
 
 ```console
-sudo aperf record -i 1 -p 10 -r run1 --profile
+aperf record -r test_1
 ```
 
-After 10 seconds `aperf` completes and you see a directory named `run1` and a tar file named `run1.tar.gz`.
+After 10 seconds the collection completes, and APerf produces a directory named `test_1` and a tar file named `test_1.tar.gz`.
 
 Next, generate a report from the recorded data:
 
 ```console
-sudo aperf report -r run1 -n report1
+aperf report -r test_1 -n test_report
 ```
 
-The name of the report is `report1` and you will see a `report1` directory and a tar file named `report1.tar.gz`.
+The name of the report is `test_report`, and you will see directory named `test_report` and a tar file named `test_report.tar.gz`.
 
 The tar files are useful if you want to copy them to another machine.
 
-Using a web browser, open the file `index.html` in the `report1/` directory. To open the file use `Ctrl+O` for Linux and Windows and use `⌘+O` for macOS.
+Using a web browser, open the file `index.html` in the `test_report/` directory. To open the file use `Ctrl+O` for Linux and Windows and use `⌘+O` for macOS.
 
-The report is now visible in the browser.
+In the report's home page, you can see the system information of the APerf run, followed by all analytical findings that list out potential performance issues:
 
-There are a number of tabs on the left side showing the collected data.
+![APerf report home #center](/install-guides/_images/aperf_report_home.png)
 
-You can browse the data and see what has been collected.
+You can browse through all data using the navigation panel at the left.
 
-![APerf #center](/install-guides/_images/aperf0.webp)
+If you want to learn more about a metric, click the "info" button by it and open the help panel:
 
-{{% notice Note %}}
-The Kernel Config and Sysctl Data tabs are blank unless you click No.
-{{% /notice %}}
+![APerf report help panel #center](/install-guides/_images/aperf_report_help_panel.png)
 
 ### How do I create and view a report containing 2 runs?
 
 To demonstrate comparing 2 runs, create a second run with `aperf record`:
 
 ```console
-sudo aperf record -i 1 -p 10 -r run2 --profile
+aperf record -r test_2
 ```
 
-After 10 seconds `aperf` completes and you see a directory named `run2` and a tar file named `run2.tar.gz`.
+Similarly, after 10 seconds the collection completes, and APerf produces a directory named `test_2` and a tar file named `test_2.tar.gz`.
 
-Generate a report with both the first and second runs included:
+Generate a report with both the first and second runs included (note that the first run in the `-r` arguments will be used as the base run for any automatic comparisons):
 
 ```console
-sudo aperf report -r run1 -r run2 -n compare
+aperf report -r test_1 test_2 -n compare_report
 ```
 
-The name of the report is `compare` and you will see a `compare` directory and a tar file named `compare.tar.gz`.
+The name of the report is `compare_report`, and APerf produces a directory named `compare_report` and a tar file named `compare_report.tar.gz`.
 
-Open the `index.html` file in the `compare/` directory to see the 2 runs side by side.
+Open the `index.html` file in the `compare_report/` directory. Since multiple runs are included in the report, APerf compares the data in all runs against the base run, and generates the statistical findings in the home page:
 
-A screenshot is shown below:
+![APerf report statistical findings #center](/install-guides/_images/aperf_report_statistical_findings.png)
 
-![APerf #center](/install-guides/_images/aperf.webp)
+When viewing the metric graphs, graphs of the same metric in two runs are aligned together:
+
+![APerf report aligned graphs #center](/install-guides/_images/aperf_report_aligned_graphs.png)
 
 ### How do I use an HTTP server to view reports?
 

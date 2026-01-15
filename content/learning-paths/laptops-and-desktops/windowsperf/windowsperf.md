@@ -18,7 +18,7 @@ Learn more in this [blog](https://community.arm.com/arm-community-blogs/b/infras
 
 ## WindowsPerf releases
 
-You can find all binary releases of `WindowsPerf` [here](https://github.com/arm-developer-tools/windowsperf/releases).
+You can find all [WindowsPerf binary releases](https://github.com/arm-developer-tools/windowsperf/releases).
 
 # Installation
 

@@ -85,7 +85,7 @@ baseDiv/1500       7.90 us         7.90 us        88512
 
 To inspect what assembly instructions are being executed most frequently, you can use the `perf` command. This is useful for identifying bottlenecks and understanding the performance characteristics of your code.
 
-Install Perf using the [install guide](https://learn.arm.com/install-guides/perf/) before proceeding.
+Install Perf using the [install guide](/install-guides/perf/) before proceeding.
 
 {{% notice Please Note %}}
 You may need to set the `perf_event_paranoid` value to -1 with the `sudo sysctl kernel.perf_event_paranoid=-1` command to run the commands below.

@@ -78,7 +78,7 @@ Try asking the assistant to `turn on living room light`. If you've connected add
 
 Open your browser and navigate to `http://0.0.0.0:8000`, or as printed in the terminal output.
 
-![Web interface of the smart home assistant showing device control through LLM commands alt-text#center](UI3.png "Interacting with the LLM through the web interface")
+![Web interface of the smart home assistant showing device control through LLM commands alt-text#center](ui3.png "Interacting with the LLM through the web interface")
 
 
 ## Command line interface

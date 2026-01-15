@@ -17,7 +17,7 @@ Through its comprehensive feature set and the support for modern application dev
 
 In this learning path, you will create a WPF application from scratch. The application will perform the computationally intensive task of the multiply-add operation on two vectors. By measuring execution times of these operations, you will see the enhancements provided by Arm64 architecture-based devices. Along the way, you will learn how to use Syncfusion's chart library, a third-party tool, to create a column series chart demonstrating the computation times.
 
-You can find the complete project code used in this learning path [here](https://github.com/dawidborycki/Arm64.DesktopApp.WPF).
+You can find the [complete project code on GitHub](https://github.com/dawidborycki/Arm64.DesktopApp.WPF).
 
 ## Create the project
 You will now create the WPF project. Open Visual Studio and click **Create a new project**: 
@@ -47,7 +47,7 @@ Next, open the Solution Explorer (View -> Solution Explorer) to view the created
 1. App.xaml and App.xaml.cs. These files represent the entry point of the WPF application. App.xaml is used to define application-wide resources, such as styles, control templates, and other XAML resources. App.xaml.cs is the code-behind file for App.xaml and contains the application's startup logic, event handling for application-level events (like Startup, Exit, and DispatcherUnhandledException), and any other application-wide code.
 2. MainWindow.xaml and MainWindow.xaml.cs. These files implement a main window that serves as the primary UI for the application. MainWindow.xaml is used to define the layout and elements of the main window, including control-like buttons, text boxes, and data grids. MainWindow.xaml.cs is the code-behind file that contains the logic to handle events and interactions within the main window.
 
-Now that your project is set up, you are ready to begin development. As mentioned earlier, the application will perform intense computational tasks. You will use the multiply-add vector operations, implemented in the [.NET MAUI learning path](/learning-paths/laptops-and-desktops/win_net_maui). 
+Now that your project is set up, you are ready to begin development. As mentioned earlier, the application will perform intense computational tasks. You will use the multiply-add vector operations, implemented in the [.NET MAUI learning path](/learning-paths/laptops-and-desktops/win_net_maui/). 
 
 ## Helpers
 Start by creating two new helper classes: **PerformanceHelper** and **VectorHelper**. The first class will be used to measure code execution times, while the second class will implement vector operations.

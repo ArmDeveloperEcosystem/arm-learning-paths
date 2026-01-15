@@ -76,23 +76,23 @@ After the dashboard is set up, use the public IP of your server on port `5601` t
 
 Switch to *Stack Management* using the menu on the left side as Figure 3 shows.
 
-![kibana-data #center](_images/Kibana-data.png "Figure 3: Switch to Stack Management.")
+![kibana-data #center](_images/kibana-data.png "Figure 3: Switch to Stack Management.")
 
 To make sure that you are receiving the data from the sentiment analysis application through Elasticsearch, check whether you have the Data View enabled in Stack Management.
 
-![kibana-sentiment #center](_images/Kibana-sentiment.png "Figure 4: Create and Manage Data Views.")
+![kibana-sentiment #center](_images/kibana-sentiment.png "Figure 4: Create and Manage Data Views.")
 
 You can also check the types of attributes that are received as the Data Views. Now, you can switch to the dashboards on the left menu and start creating the visualizations to analyze the data.
 
-![kibana-dashboard1 #center](_images/Kibana-dashboard1.png "Figure 5: Dashboards on Left Menu." )
+![kibana-dashboard1 #center](_images/kibana-dashboard1.png "Figure 5: Dashboards on Left Menu." )
 
 Figure 6 shows a sample dashboard structure, displaying the records of different sentiments.
 
-![kibana-dashboard2 #center](_images/Kibana-dashboard2.png "Figure 6: Sample Dashboard Structure." )
+![kibana-dashboard2 #center](_images/kibana-dashboard2.png "Figure 6: Sample Dashboard Structure." )
 
 Similarly, you can design and create dashboards to analyze a particular set of data. The screenshot in Figure 7 shows the dashboard designed for this Learning Path.
 
-![kibana-dashboard3 #center](_images/Kibana-dashboard3.png "Figure 7: Dashboard for this Learning Path.")
+![kibana-dashboard3 #center](_images/kibana-dashboard3.png "Figure 7: Dashboard for this Learning Path.")
 
 Navigate to the `dashboards` directory in the cloned GitHub repository and locate the  `sentiment_dashboard.ndjson` file. 
 

@@ -28,7 +28,7 @@ armips:
     - Neoverse
     - Cortex-A
 tools_software_languages:
-    - C++
+    - CPP
     - GCC
     - Clang
     - CMake

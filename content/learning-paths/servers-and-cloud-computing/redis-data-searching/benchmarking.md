@@ -1,44 +1,45 @@
 ---
-title: Redis Benchmarking
+title: Benchmark Redis
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
+## Benchmark Redis using redis-benchmark
 
-## Redis Benchmarking by redis-benchmark
-The `redis-benchmark` tool is an official performance testing utility for Redis. It helps measure to throughput (requests per second) and latency (response delay) across different workloads.
+The `redis-benchmark` tool is an official performance testing utility for Redis. It measures throughput (requests per second) and latency (response delay) across different workloads.
 
 ### Prerequisites
-Ensure Redis server is running and accessible:
+
+Before running benchmarks, verify that Redis is running and accessible:
 
 ```console
 redis-cli ping
 ```
 
-If you do not see a "PONG" response, please start redis:
+If you don't see a `PONG` response, start Redis:
 
 ```console
 redis-server &
 redis-cli ping
 ```
 
-### Benchmark SET (Write Performance)
-The `SET` benchmark helps validate Redis’s ability to handle high insertion rates efficiently on Arm-based servers.
+### Benchmark SET (write performance)
 
-The following command benchmarks data insertion performance:
+Benchmark data insertion performance:
 
 ```console
 redis-benchmark -t set -n 100000 -c 50
 ```
-**Explanation:**
 
-- `-t set`: Runs the benchmark only for **SET** operations.  
-- `-n 100000`: Performs **100,000 total requests**.  
-- `-c 50`: Simulates **50 concurrent clients**.
+This command:
 
-You should see an output similar to:
+- Runs the benchmark for SET operations only (`-t set`)
+- Performs 100,000 total requests (`-n 100000`)
+- Simulates 50 concurrent clients (`-c 50`)
+
+The output is similar to:
 
 ```output
 ====== SET ======
@@ -85,19 +86,20 @@ Summary:
         0.170     0.056     0.167     0.183     0.191     1.095
 ```
 
-### Benchmark GET (Read/Search Performance)
-Now test data retrieval performance separately.
+### Benchmark GET (read performance)
+
+Test data retrieval performance:
 
 ```console
 redis-benchmark -t get -n 100000 -c 50
-```
-**Explanation:**
 
-- `-t get`: Runs the benchmark only for **GET** operations.  
-- `-n 100000`: Executes **100,000 total requests**.  
-- `-c 50`: Simulates **50 concurrent clients** performing reads.
+Parameters:
 
-You should see an output similar to:
+- `-t get`: Runs the benchmark only for GET operations.  
+- `-n 100000`: Executes 100,000 total requests.  
+- `-c 50`: Simulates 50 concurrent clients performing reads.
+
+The output is similar to:
 
 ```output
 ====== GET ======
@@ -141,26 +143,24 @@ Summary:
         0.169     0.048     0.167     0.183     0.191     0.807
 ```
 
-### Benchmark Metrics Explanation
+## Interpret the benchmark metrics 
 
-- **Throughput:** Number of operations (requests) Redis can process per second.
-- **Latency:** Latency reflects the time it takes for Redis to complete a single request, measured in milliseconds (ms).  
-- **avg:** Average time taken to process a request across the entire test.
-- **min:** Fastest observed response time (best case).
-- **p50:** Median latency — 50% of requests completed faster than this value.
-- **p95:** 95th percentile — 95% of requests completed faster than this value.
-- **p99:** 99th percentile — shows near worst-case latency, key for reliability analysis.
-- **max:** Slowest observed response time (worst case).
-
-### Benchmark summary
-Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (SUSE Enterprise Server):
+The following table summarizes the benchmark results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (SUSE Enterprise Server):
 
 | Operation | Total Requests | Concurrent Clients | Avg Latency (ms) | Min (ms) | P50 (ms) | P95 (ms) | P99 (ms) | Max (ms) | Throughput (req/sec) | Description |
 |------------|----------------|--------------------|------------------|-----------|-----------|-----------|-----------|-----------|-----------------------|--------------|
 | SET        | 100,000        | 50                 | 0.170            | 0.056     | 0.167     | 0.183     | 0.191     | 1.095     | 149,700.61            | Measures Redis write performance using SET command |
 | GET        | 100,000        | 50                 | 0.169            | 0.048     | 0.167     | 0.183     | 0.191     | 0.807     | 150,375.94            | Measures Redis read performance using GET command |
 
- - **High Efficiency:** Redis achieved over **150K ops/sec** on both read and write workloads, showcasing strong throughput on **Arm64 (C4A)** architecture.
-- **Low Latency:** Average latency remained around **0.17 ms**, demonstrating consistent response times under concurrency.
-- **Balanced Performance:** Both **SET** and **GET** operations showed nearly identical performance, indicating excellent CPU and memory optimization on **Arm64**.
-- **Energy-Efficient Compute:** The **Arm-based C4A VM** delivers competitive performance-per-watt efficiency, ideal for scalable, sustainable Redis deployments.
+Redis demonstrated excellent performance on the Arm64-based C4A VM, achieving over 150K operations per second for both read and write workloads with an average latency of approximately 0.17 ms. Both SET and GET operations showed nearly identical performance characteristics, indicating efficient CPU and memory optimization on the Arm architecture. The Arm-based C4A VM delivers competitive performance-per-watt efficiency, making it ideal for scalable, sustainable Redis deployments.
+
+## What you've accomplished and what's next
+
+In this section, you:
+- Benchmarked Redis SET operations, achieving over 149K requests per second with 0.170 ms average latency
+- Benchmarked Redis GET operations, achieving over 150K requests per second with 0.169 ms average latency
+- Verified that Redis performs efficiently on Google Axion C4A Arm instances
+
+You've successfully benchmarked Redis on Google Cloud's C4A Arm-based virtual machines, demonstrating strong performance for in-memory data operations.
+
+For next steps, consider exploring Redis Cluster for distributed deployments, implementing persistence strategies for production workloads, or testing more advanced data structures like sorted sets and streams. You can also compare performance across different C4A machine types to optimize cost and performance for your specific use case.

@@ -20,7 +20,7 @@ armips:
     - Cortex-A
 tools_software_languages:
     - Visual Studio
-    - C++
+    - CPP
     - Python
     - Git
     - CMake

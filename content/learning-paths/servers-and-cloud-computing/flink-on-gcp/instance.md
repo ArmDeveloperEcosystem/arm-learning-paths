@@ -1,5 +1,5 @@
 ---
-title: Create a Google Axion C4A Arm virtual machine on GCP 
+title: Create a Google Axion C4A Arm virtual machine
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -8,13 +8,13 @@ layout: learningpathall
 
 ## Overview
 
-In this section, you will create a Google Axion C4A Arm virtual machine on Google Cloud Platform (GCP) using the `c4a-standard-4` (4 vCPUs, 16 GB memory) machine type in the Google Cloud Console.  
+This section shows you how to create a Google Axion C4A Arm virtual machine on Google Cloud Platform (GCP) using the `c4a-standard-4` (4 vCPUs, 16 GB memory) machine type in the Google Cloud Console.  
 
 {{% notice Note %}}
-For support on GCP setup, see the Learning Path [Getting started with Google Cloud Platform](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/google/).
+For support on GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
 {{% /notice %}}
 
-## Provision a Google Axion C4A Arm VM in Google Cloud Console
+## Provision a Google Axion C4A Arm VM
 
 To create a virtual machine based on the C4A instance type:
 - Navigate to the [Google Cloud Console](https://console.cloud.google.com/).
@@ -24,8 +24,8 @@ To create a virtual machine based on the C4A instance type:
    - Set **Series** to `C4A`.
    - Select `c4a-standard-4` for machine type.
 
-   ![Create a Google Axion C4A Arm virtual machine in the Google Cloud Console with c4a-standard-4 selected alt-text#center](images/gcp-vm.png "Creating a Google Axion C4A Arm virtual machine in Google Cloud Console")
+   ![Screenshot of the Google Cloud Console showing the Compute Engine VM instance creation page with Machine configuration section expanded. The Series dropdown shows C4A selected, and the Machine type field displays c4a-standard-4 with specifications of 4 vCPUs and 16 GB memory visible alt-text#center](images/gcp-vm.png "Creating a Google Axion C4A Arm virtual machine in Google Cloud Console")
 
-- Under **OS and Storage**, select **Change**, then choose an Arm64-based OS image. For this Learning Path, use **SUSE Linux Enterprise Server**. Pick the preferred version for your Operating System. Ensure you select the **Arm image** variant. Click **Select**.
+- Under **OS and Storage**, select **Change**, then choose an Arm64-based OS image. For this Learning Path, use **SUSE Linux Enterprise Server**. Pick the preferred version for your Operating System. Ensure you select the **Arm image** variant. Select **Select**.
 - Under **Networking**, enable **Allow HTTP traffic**.
-- Click **Create** to launch the instance.
+- Select **Create** to launch the instance.

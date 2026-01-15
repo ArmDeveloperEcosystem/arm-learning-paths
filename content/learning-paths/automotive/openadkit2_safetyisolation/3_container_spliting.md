@@ -10,7 +10,7 @@ layout: learningpathall
 
 Now that you’ve explored the concept of a safety island, a dedicated subsystem responsible for executing safety-critical control logic, and learned how DDS (Data Distribution Service) enables real-time, distributed communication, you’ll refactor the original OpenAD Kit architecture into a multi-instance deployment.
 
-The predecessor Learning Path, [Deploy Open AD Kit containerized autonomous driving simulation on Arm Neoverse](http://learn.arm.com/learning-paths/automotive/openadkit1_container/), showed how to  deploying three container components on a single Arm-based instance, to handle:
+The predecessor Learning Path, [Deploy Open AD Kit containerized autonomous driving simulation on Arm Neoverse](/learning-paths/automotive/openadkit1_container/), showed how to  deploying three container components on a single Arm-based instance, to handle:
 - The simulation environment
 - Visualization
 - Planning and control

@@ -9,7 +9,7 @@ layout: learningpathall
 ## Use Your AWS Deployment to Verify a CCA Attestation Token
 Now that your Veraison services are deployed into AWS and initialized with endorsements for the CCA reference platform, you are ready to make use of the verification service to verify a CCA attestation token.
 
-To do this, you should follow the steps set out in the Learning Path [Get Started with CCA Attestation and Veraison](https://learn.arm.com/learning-paths/servers-and-cloud-computing/cca-veraison/). Follow the steps in this Learning Path exactly, except you'll use your AWS-hosted Veraison deployment instead of Linaro's service.
+To do this, you should follow the steps set out in the Learning Path [Get Started with CCA Attestation and Veraison](/learning-paths/servers-and-cloud-computing/cca-veraison/). Follow the steps in this Learning Path exactly, except you'll use your AWS-hosted Veraison deployment instead of Linaro's service.
 
 The URL for the Veraison server provided by Linaro is `https://veraison.test.linaro.org:8443`.
 

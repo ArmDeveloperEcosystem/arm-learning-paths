@@ -35,7 +35,7 @@ Download and install [Python version 3.10](https://www.python.org/downloads/rele
   {{< tab header="Linux">}}
 sudo apt install -y python3.10 python3.10-venv
   {{< /tab >}}
-  {{< tab header="MacOS">}}
+  {{< tab header="macOS">}}
 brew install python@3.10
 brew link python@3.10 --force
   {{< /tab >}}
@@ -56,7 +56,7 @@ CMake is an open-source tool that automates the build process for software proje
 sudo apt update
 sudo apt install cmake g++ git
   {{< /tab >}}
-  {{< tab header="MacOS">}}
+  {{< tab header="macOS">}}
 brew install cmake
   {{< /tab >}}
 {{< /tabpane >}}
@@ -81,7 +81,7 @@ wget https://github.com/bazelbuild/bazel/releases/download/{$BAZEL_VERSION}/baze
 sudo bash bazel-7.4.1-installer-linux-x86_64.sh
 export PATH="/usr/local/bin:$PATH"
   {{< /tab >}}
-  {{< tab header="MacOS">}}
+  {{< tab header="macOS">}}
 cd $WORKSPACE
 export BAZEL_VERSION=7.4.1
 curl -fLO "https://github.com/bazelbuild/bazel/releases/download/{$BAZEL_VERSION}/bazel-{$BAZEL_VERSION}-installer-darwin-arm64.sh"
@@ -111,7 +111,7 @@ export ANDROID_HOME=$WORKSPACE/Android
 export ANDROID_SDK_HOME=$ANDROID_HOME/Sdk
 $WORKSPACE/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_SDK_HOME --install "platform-tools" "platforms;android-35" "build-tools;35.0.0"
   {{< /tab >}}
-  {{< tab header="MacOS">}}
+  {{< tab header="macOS">}}
 cd $WORKSPACE
 wget https://dl.google.com/android/repository/commandlinetools-mac-13114758_latest.zip
 unzip -o commandlinetools-linux-13114758_latest.zip
@@ -130,7 +130,7 @@ cd $WORKSPACE
 wget https://dl.google.com/android/repository/android-ndk-r27b-linux.zip
 unzip android-ndk-r27b-linux.zip
   {{< /tab >}}
-  {{< tab header="MacOS">}}
+  {{< tab header="macOS">}}
 cd $WORKSPACE
 wget https://dl.google.com/android/repository/android-ndk-r27b-darwin.zip
 unzip android-ndk-r27b-darwin.zip
@@ -145,7 +145,7 @@ export NDK_PATH=$WORKSPACE/android-ndk-r27b/
 export ANDROID_NDK_HOME=$NDK_PATH
 export PATH=$NDK_PATH/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
   {{< /tab >}}
-  {{< tab header="MacOS">}}
+  {{< tab header="macOS">}}
 export NDK_PATH=$WORKSPACE/android-ndk-r27b/
 export ANDROID_NDK_HOME=$NDK_PATH
 export PATH=$NDK_PATH/toolchains/llvm/prebuilt/darwin-x86_64/bin/:$PATH

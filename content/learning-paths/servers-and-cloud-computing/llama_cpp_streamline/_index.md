@@ -30,7 +30,7 @@ armips:
     - Neoverse
 tools_software_languages:
     - Arm Streamline
-    - C++
+    - CPP
     - llama.cpp
     - Profiling
 operatingsystems:

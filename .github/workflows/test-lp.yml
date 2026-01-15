@@ -31,7 +31,7 @@ jobs:
 
           tmpfile=$(mktemp)
 
-          git diff --name-only origin/${{ github.base_ref }}...HEAD |
+          git diff --name-only --diff-filter=d origin/${{ github.base_ref }}...HEAD |
             grep '^content/' |
             while read -r path; do
               name=$(basename "$path")

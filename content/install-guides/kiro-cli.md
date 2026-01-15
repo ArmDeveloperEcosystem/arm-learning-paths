@@ -106,7 +106,7 @@ kiro-cli version
 The output shows the version:
 
 ```output
-kiro-cli 1.20.0
+kiro-cli 1.21.0
 ```
 
 ## How can I configure my AWS account to get the most from Kiro CLI?

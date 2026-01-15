@@ -1,19 +1,15 @@
 ---
 title: Deploy Django on Google Cloud C4A (Arm-based Axion VMs)
-
-draft: true
-cascade:
-    draft: true
     
 minutes_to_complete: 30
 
-who_is_this_for: This learning path is intended for software developers deploying and optimizing Django-based web applications on Linux/Arm64 environments, specifically using Google Cloud C4A virtual machines powered by Axion processors.
+who_is_this_for: This Learning Path is for software developers deploying and optimizing Django-based web applications on Arm64 Linux environments, specifically using Google Cloud C4A virtual machines powered by Axion processors.
 
 learning_objectives:
-  - Provision an Arm-based SUSE SLES virtual machine on Google Cloud (C4A with Axion processors)
+  - Provision an Arm-based SUSE Linux Enterprise Server (SLES) virtual machine on Google Cloud (C4A with Axion processors)
   - Install Django on a SUSE Arm64 (C4A) instance
   - Verify Django functionality by running the development server and accessing the default welcome page on the Arm64 VM  
-  - Measure Django application performance by benchmarking request handling throughput and latency using the official ApacheBench (ab) tool with Gunicorn on Arm64 (Aarch64)
+  - Measure Django application performance by benchmarking request handling throughput and latency using the official ApacheBench (ab) tool with Gunicorn on Arm64 (aarch64)
 
 prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled  

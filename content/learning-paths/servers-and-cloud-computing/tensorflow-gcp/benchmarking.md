@@ -8,11 +8,11 @@ layout: learningpathall
 
 ## Benchmark TensorFlow models
 
-This section benchmarks multiple TensorFlow models (ResNet50, MobileNetV2, and InceptionV3) using dummy input data. You'll measure average inference time and throughput for each model running on the CPU.
+This section benchmarks multiple TensorFlow models - ResNet50, MobileNetV2, and InceptionV3 - using dummy input data. You'll measure average inference time and throughput for each model running on the CPU of your Arm-based Google Cloud Platform (GCP) VM.
 
-tf.keras is TensorFlow's high-level API for building, training, and benchmarking deep learning models. It provides access to predefined architectures such as ResNet, MobileNet, and Inception, making it easy to evaluate model performance on different hardware setups.
+TensorFlow Keras (`tf.keras`) is TensorFlow's high-level API for building, training, and benchmarking deep learning models. It provides access to predefined architectures such as ResNet, MobileNet, and Inception, making it easy to evaluate model performance on different hardware setups.
 
-### Activate your virtual environment
+## Activate your virtual environment
 
 Enable your isolated Python environment where TensorFlow is installed:
 
@@ -23,7 +23,7 @@ python -c "import tensorflow as tf; print(tf.__version__)"
 
 This ensures that all TensorFlow-related packages run in a clean, controlled setup without affecting system-wide Python installations.
 
-### Install required packages
+## Install required packages
 
 Install TensorFlow and NumPy for model creation and benchmarking:
 
@@ -31,9 +31,9 @@ Install TensorFlow and NumPy for model creation and benchmarking:
 pip install tensorflow==2.20.0 numpy
 ```
 
-These packages are likely already installed from the previous installation steps. NumPy supports efficient numerical operations, while TensorFlow handles deep learning workloads.
+These packages are likely already installed from previous steps. NumPy supports efficient numerical operations, while TensorFlow handles deep learning workloads.
 
-### Create the benchmark script
+## Create the benchmark script
 
 Use an editor to create a Python script named `tf_cpu_benchmark.py` that will run TensorFlow model benchmarking tests.
 
@@ -74,7 +74,7 @@ for name, constructor in models.items():
 
 This script creates model instances without pretrained weights for fair CPU testing, generates random image data for inference, includes a warm-up phase to stabilize model performance, and measures inference time over 50 runs to calculate average performance and throughput.
 
-### Run the benchmark
+## Run the benchmark
 
 Execute the benchmarking script:
 
@@ -98,13 +98,13 @@ InceptionV3 average inference time per batch: 0.8971 seconds
 InceptionV3 throughput: 35.67 images/sec
 ```
 
-### Understand the results
+## Interpret the results
 
 The benchmark provides key performance metrics. Average inference time per batch measures how long it takes to process one batch of input data, with lower values indicating faster performance. Throughput shows how many images the model can process per second, with higher values indicating better efficiency.
 
-### Performance summary
+## Performance summary
 
-The following table shows results from running the benchmark on a `c4a-standard-4` (4 vCPU, 16 GB memory) aarch64 VM in GCP using SUSE:
+The following table shows results from running the benchmark on a `c4a-standard-4` (4 vCPU, 16 GB memory) aarch64 VM in Google Cloud Platform (GCP) using SUSE Linux Enterprise Server (SLES):
 
 | Model       | Average Inference Time per Batch (seconds) | Throughput (images/sec) |
 |-------------|-------------------------------------------:|------------------------:|
@@ -112,4 +112,6 @@ The following table shows results from running the benchmark on a `c4a-standard-
 | MobileNetV2 | 0.2909                                     | 110.02                  |
 | InceptionV3 | 0.8971                                     | 35.67                   |
 
-The results demonstrate strong performance for lightweight CNNs like MobileNetV2, achieving over 110 images/sec on the aarch64 platform. Medium-depth models like InceptionV3 maintain balanced performance between accuracy and latency. Heavier architectures such as ResNet50 show longer inference times but deliver stable throughput, confirming that TensorFlow workloads run efficiently on Arm processors and provide a cost-effective alternative for AI inference tasks.
+The results show strong performance for lightweight CNNs like MobileNetV2, achieving over 110 images/sec on the aarch64 platform. Medium-depth models like InceptionV3 maintain balanced performance between accuracy and latency. Heavier architectures such as ResNet50 show longer inference times but deliver stable throughput.
+
+You have successfully benchmarked TensorFlow models on your Arm-based VM. This demonstrates the efficiency and scalability of Arm platforms for deep learning workloads - great job!

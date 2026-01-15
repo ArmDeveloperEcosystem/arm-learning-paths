@@ -24,7 +24,7 @@ subjects: Performance and Architecture
 armips:
     - Cortex-A
 tools_software_languages:
-    - C++
+    - CPP
     - Docker
 operatingsystems:
     - Linux
@@ -33,15 +33,15 @@ operatingsystems:
 further_reading:
     - resource:
         title: Accelerate Generative AI Workloads Using KleidiAI
-        link: https://learn.arm.com/learning-paths/cross-platform/kleidiai-explainer
+        link: /learning-paths/cross-platform/kleidiai-explainer
         type: website
     - resource:
         title: LLM Inference on Android with KleidiAI, MediaPipe, and XNNPACK
-        link: https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/kleidiai-on-android-with-mediapipe-and-xnnpack/
+        link: /learning-paths/mobile-graphics-and-gaming/kleidiai-on-android-with-mediapipe-and-xnnpack/
         type: website
     - resource:
         title: Vision LLM Inference on Android with KleidiAI and MNN
-        link: https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/vision-llm-inference-on-android-with-kleidiai-and-mnn/
+        link: /learning-paths/mobile-graphics-and-gaming/vision-llm-inference-on-android-with-kleidiai-and-mnn/
         type: website
     - resource:
         title: TensorFlow Lite is now LiteRT

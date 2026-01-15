@@ -1,48 +1,60 @@
 ---
 title: Benchmark the LiteRT model
-weight: 4
-
+weight: 5
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-Once you have:
-  * A LiteRT model (for example, fc_fp32.tflite), and
-  * The benchmark_model binary built with and without KleidiAI + SME2,
-you can run benchmarks directly on an SME2-capable Android device.
-### Verify SME2 Support on the Device
 
-First, you should check if your Android phone supports SME2. 
-On the device (via adb shell), run:
-``` bash
+
+## Prerequisites for Benchmarking on SME2
+
+Before you begin benchmarking LiteRT models on an SME2-capable Android device, make sure you have the following components prepared:
+
+
+Once you have:
+- A LiteRT model (for example, `fc_fp32.tflite`)
+- The `benchmark_model` binary built with and without KleidiAI and Scalable Matrix Extension version 2 (SME2)
+
+you can run benchmarks directly on an SME2-capable Android device.
+
+## Verify SME2 support on the device
+
+First, check if your Android device supports SME2.  
+On the device (via Android Debug Bridge, ADB shell), run:
+
+```bash
 cat /proc/cpuinfo
 ```
-You should see a Features line similar to:
+
+Look for a `Features` line similar to:
+
 ```output
 ...
 processor	: 7
 BogoMIPS	: 2000.00
 Features	: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm jscvt fcma lrcpc dcpop sha3 sm3 sm4 asimddp sha512 sve asimdfhm dit uscat ilrcpc flagm ssbs sb dcpodp sve2 sveaes svepmull svebitperm svesha3 svesm4 flagm2 frint svei8mm svebf16 i8mm bf16 dgh bti mte ecv afp mte3 sme smei8i32 smef16f32 smeb16f32 smef32f32 wfxt rprfm sme2 smei16i32 smebi32i32 hbc lrcpc3
 ```
-As you can see from the `Features`, the CPU 7 supports the SME2.
 
+If you see `sme2` in the features, your CPU supports SME2.
 
-## Run benchmark_model on an SME2 Core
+## Run benchmark_model on an SME2 core
 
-Next, run the benchmark tool and bind execution to a core that supports SME2.
-In this example, you will pin to CPU 7, use a single thread, and run enough iterations to get stable timing.
+Next, run the benchmark tool and bind execution to a core that supports SME2.  
+For example, to pin to CPU 7, use a single thread, and run enough iterations for stable timing:
 
-``` bash
+```bash
 taskset 80 ./benchmark_model --graph=./fc_fp32.tflite --num_runs=1000 --num_threads=1 --use_cpu=true --use_profiler=true
 ```
 
-This example uses the `taskset` command to configure the benchmark workload to run on cores 7. It specifies to utilize 1 thread by the option `--num_threads=1`, and running the inferences at least 1000 times by the option `--num_runs=1000`. The CPU is selected. Also, it passes the option `--use_profiler=true` to produce a operator level profiling during inference.
+This command uses `taskset` to run the benchmark on core 7, sets `--num_threads=1`, and runs 1000 inferences. The `--use_profiler=true` flag enables operator-level profiling.
 
 You should see output similar to:
+
 ```output
 ...
 INFO: [litert/runtime/accelerators/auto_registration.cc:148] CPU accelerator registered.
 INFO: [litert/runtime/compiled_model.cc:415] Flatbuffer model initialized directly from incoming litert model.
-INFO: Initialized TensorFlow Lite runtime.
+INFO: Initialized TensorFlow Lite runtime.
 INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
 VERBOSE: Replacing 1 out of 1 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 1 partitions for subgraph 0.
 INFO: The input model file size (MB): 3.27774
@@ -76,12 +88,12 @@ INFO: [./litert/tools/benchmark_litert_model.h:179]
 	        LiteRT::Run[buffer registration]	    0.020	    0.014	  3.309%	  3.309%	     0.000	        1	LiteRT::Run[buffer registration]/0
 	                         AllocateTensors	    0.291	    0.291	  0.022%	  3.331%	   452.000	        0	AllocateTensors/0
 	                     Static Reshape (NC)	    0.085	    0.003	  0.739%	  4.070%	     0.000	        1	Delegate/Static Reshape (NC):0
-	         Fully Connected (NC, PF32) GEMM	    0.538	    0.382	 92.948%	 97.018%	     0.000	        1	Delegate/Fully Connected (NC, PF32) GEMM:1
+	         Fully connected (NC, PF32) GEMM	    0.538	    0.382	 92.948%	 97.018%	     0.000	        1	Delegate/fully connected(NC, PF32) GEMM:1
 	                LiteRT::Run[Buffer sync]	    0.013	    0.012	  2.982%	100.000%	     0.000	        1	LiteRT::Run[Buffer sync]/0
 
 ============================== Top by Computation Time ==============================
 	                             [node type]	  [first]	 [avg ms]	     [%]	  [cdf%]	  [mem KB]	[times called]	[Name]
-	         Fully Connected (NC, PF32) GEMM	    0.538	    0.382	 92.948%	 92.948%	     0.000	        1	Delegate/Fully Connected (NC, PF32) GEMM:1
+	         fully connected(NC, PF32) GEMM	    0.538	    0.382	 92.948%	 92.948%	     0.000	        1	Delegate/fully connected(NC, PF32) GEMM:1
 	                         AllocateTensors	    0.291	    0.291	  0.022%	 92.970%	   452.000	        0	AllocateTensors/0
 	        LiteRT::Run[buffer registration]	    0.020	    0.014	  3.309%	 96.279%	     0.000	        1	LiteRT::Run[buffer registration]/0
 	                LiteRT::Run[Buffer sync]	    0.013	    0.012	  2.982%	 99.261%	     0.000	        1	LiteRT::Run[Buffer sync]/0
@@ -90,7 +102,7 @@ INFO: [./litert/tools/benchmark_litert_model.h:179]
 Number of nodes executed: 5
 ============================== Summary by node type ==============================
 	                             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
-	         Fully Connected (NC, PF32) GEMM	        1	     0.382	    93.171%	    93.171%	     0.000	        1
+	         fully connected(NC, PF32) GEMM	        1	     0.382	    93.171%	    93.171%	     0.000	        1
 	        LiteRT::Run[buffer registration]	        1	     0.013	     3.171%	    96.341%	     0.000	        1
 	                LiteRT::Run[Buffer sync]	        1	     0.012	     2.927%	    99.268%	     0.000	        1
 	                     Static Reshape (NC)	        1	     0.003	     0.732%	   100.000%	     0.000	        1
@@ -101,24 +113,24 @@ Memory (bytes): count=0
 5 nodes observed
 ```
 
-From the results above you will see the time spent on model initialization, warm-up, and inference, as well as memory usage. Since the profiler was enabled, the output also reports the execution time of each operator.
+You will see the time spent on model initialization, warm-up, and inference, as well as memory usage. With the profiler enabled, the output also reports the execution time of each operator.
 
-Because the model contains only a single fully connected layer, the node type `Fully Connected (NC, PF32) GEMM` shows the average execution time is 0.382 ms, accounting for 93.171% of the total inference time.
+Because the model contains only a single fully connected layer, the node type `Fully Connected (NC, PF32) GEMM` shows the average execution time and its percentage of total inference time.
 
 {{% notice Note %}}
-To verify the KleidiAI SME2 micro-kernels are invoked for the Fully Connected operator during the model inference, you can use the `simpleperf record -g -- <workload>` to capture the calling graph. For the benchmark_model, you should also build it with the option `-c dbg`.
+To verify that KleidiAI SME2 micro-kernels are invoked for the FullyConnected operator during inference, run `simpleperf record -g -- <workload>` to capture the calling graph. If you're using the `benchmark_model`, build it with the `-c dbg` option.
 {{% /notice %}}
 
 ## Measure the performance impact of KleidiAI SME2 micro-kernels
 
-To compare the performance of the KleidiAI SME2 implementation with the original XNNPACK implementation, you can run the `benchmark_model` tool without KleidiAI enabled using the same parameters.
+To compare the performance of the KleidiAI SME2 implementation with the original XNNPACK implementation, run the `benchmark_model` tool without KleidiAI enabled using the same parameters:
 
-Run with the same parameters:
-
-``` bash
+```bash
 taskset 80 ./benchmark_model --graph=./fc_fp32.tflite --num_runs=1000 --num_threads=1 --use_cpu=true --use_profiler=true
 ```
+
 The output should look like:
+
 ```output
 ...
 INFO: [litert/runtime/accelerators/auto_registration.cc:148] CPU accelerator registered.
@@ -182,10 +194,11 @@ Memory (bytes): count=0
 5 nodes observed
 ```
 
-From these benchmarking results you should notice significant throughput uplift and speedup in inference time when KleidiAI SME2 micro-kernels are enabled.
+You should notice significant throughput uplift and speedup in inference time when KleidiAI SME2 micro-kernels are enabled.
 
-### Interpreting Node Type Names for KleidiAI 
-As you can see from the results, for the same model, the XNNPACK node type name is different. For the non-KleidiAI implementation, the node type is `Fully Connected (NC, F32) GEMM`, whereas for the KleidiAI implementation, it is `Fully Connected (NC, PF32) GEMM`.
+### Interpreting node type names for KleidiAI
+
+For the same model, the XNNPACK node type name is different. For the non-KleidiAI implementation, the node type is `Fully Connected (NC, F32) GEMM`, whereas for the KleidiAI implementation, it is `Fully Connected (NC, PF32) GEMM`.
 
 For other operators supported by KleidiAI, the per-operator profiling node types differ between the implementations with and without KleidiAI enabled in XNNPACK as follows:
 
@@ -198,18 +211,23 @@ For other operators supported by KleidiAI, the per-operator profiling node types
 | Fully Connected                        | Fully Connected (NC, QP8, F32, QC4W)                  | Fully Connected (NC, QD8, F32, QC4W)                   |
 | Fully Connected / Conv2D (Pointwise)   | Fully Connected (NC, QP8, F32, QC8W)                  | Fully Connected (NC, QD8, F32, QC8W)                   |
 | Fully Connected / Conv2D (Pointwise)   | Fully Connected (NC, PQS8, QC8W)                      | Fully Connected (NC, QS8, QC8W)                        |
+| Conv2D                                 | Convolution (NHWC, PF32)                              | Convolution (NHWC, F32)                                |
+| Conv2D                                 | Convolution (NHWC, PF16)                              | Convolution (NHWC, F16)                                |
+| Conv2D                                 | Convolution (NHWC, PQS8, QS8, QC8W)                   | Convolution (NHWC, QC8)                                |
+| TransposeConv                          | Deconvolution (NHWC, PQS8, QS8, QC8W)                 | Deconvolution (NC, QS8, QC8W)                          |
 | Batch Matrix Multiply                  | Batch Matrix Multiply (NC, PF32)                      | Batch Matrix Multiply (NC, F32)                        |
 | Batch Matrix Multiply                  | Batch Matrix Multiply (NC, PF16)                      | Batch Matrix Multiply (NC, F16)                        |
 | Batch Matrix Multiply                  | Batch Matrix Multiply (NC, QP8, F32, QC8W)            | Batch Matrix Multiply (NC, QD8, F32, QC8W)             |
-| Conv2D                                 | Convolution (NHWC, PQS8, QS8, QC8W)                   | Convolution (NHWC, QC8)                                |
-| TransposeConv                          | Deconvolution (NHWC, PQS8, QS8, QC8W)                 | Deconvolution (NC, QS8, QC8W)                          |
 
-The letter “P” in the node type indicates that it corresponds to a KleidiAI implementation.
+The letter “P” in the node type indicates a KleidiAI implementation.
 
-For example, in `Convolution (NHWC, PQS8, QS8, QC8W)`, this represents a Conv2D operator computation by KleidiAI micro-kernel, where the tensor is in NHWC layout.
+For example, `Convolution (NHWC, PQS8, QS8, QC8W)` represents a Conv2D operator computed by a KleidiAI micro-kernel, where the tensor is in NHWC layout, the input is packed INT8 quantized, the weights are per-channel INT8 quantized, and the output is INT8 quantized.
 
-* The input is packed INT8 quantized,
-* The weights are per-channel INT8 quantized,
-* The output is INT8 quantized.
+By comparing `benchmark_model` runs with and without KleidiAI and SME2, and inspecting the profiled node types (PF32, PF16, QP8, PQS8), you can confirm that LiteRT is dispatching to SME2-optimized KleidiAI micro-kernels and quantify their performance impact on your Android device.
 
-By comparing benchmark_model runs with and without KleidiAI + SME2, and inspecting the profiled node types (PF32, PF16, QP8, PQS8), you can reliably confirm that LiteRT is dispatching to SME2-optimized KleidiAI micro-kernels and quantify their performance impact on your Android device.
+
+## What you've accomplished and what's next
+
+In this section, you learned how to benchmark LiteRT models on SME2-capable Android devices, verify SME2 support, and interpret performance results with and without KleidiAI SME2 micro-kernels. You also discovered how to identify which micro-kernels are used during inference by examining node type names in the profiler output.
+
+You are now ready to further analyze performance, experiment with different models, or explore advanced profiling and optimization techniques for on-device AI with LiteRT, XNNPACK, and KleidiAI. Continue to the next section to deepen your understanding or apply these skills to your own projects.

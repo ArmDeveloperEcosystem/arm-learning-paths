@@ -7,7 +7,7 @@ weight: 3
 layout: "learningpathall"
 ---
 ## Objective
-You will now implement the AWS Lambda function to scan the records from the DynamoDB. We have assumed that the records have already been written to the table as demonstrated in this [learning path on creating IoT applications with WoA and AWS IoT Core](/learning-paths/laptops-and-desktops/win_aws_iot_dynamodb/).
+You will now implement the AWS Lambda function to scan the records from the DynamoDB. We have assumed that the records have already been written to the table as demonstrated in [Use Amazon DynamoDB for your IoT applications running on Arm64](/learning-paths/laptops-and-desktops/win_aws_iot_dynamodb/).
 
 ## Create and configure an AWS Lambda function
 Go the AWS Lambda console. Then, create the function as shown below:

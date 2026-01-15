@@ -25,7 +25,7 @@ operatingsystems:
     - Windows
 tools_software_languages:
     - C
-    - C++     
+    - CPP     
 
 further_reading:
     - resource:

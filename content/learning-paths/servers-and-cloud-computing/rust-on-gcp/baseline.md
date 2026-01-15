@@ -1,16 +1,16 @@
 ---
-title: Test Rust baseline performance on Google Axion C4A Arm virtual machines
+title: Perform baseline testing
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Perform baseline testing
+## Overview
 
-You can perform baseline testing of Rust on GCP SUSE aarch64 VMs to verify installation, build functionality, and compilation performance on the Arm-based Axion C4A platform.
+Now that Rust is installed, verify the installation, build functionality, and compilation performance on your Arm-based Axion C4A instance.
 
-### Create a sample Rust program
+## Create a sample Rust program
 
 Create and build a simple "Hello, World" application to verify that Rust is working correctly:
 
@@ -33,9 +33,9 @@ The output is similar to:
 Hello, world!
 ```
 
-This confirms that Rust and Cargo are properly configured on your aarch64 VM.
+This confirms that Rust and Cargo are properly configured on your Arm64 VM.
 
-### Measure compilation performance
+## Measure compilation performance
 
 Use the `time` command to measure compilation performance on the Arm64 processor:
 
@@ -59,3 +59,7 @@ sys     0m0.071s
 ```
 
 The timing results show that Rust compilation performs well on the Arm64 architecture, with the "real" time indicating the total elapsed time for the build process.
+
+## What you've accomplished and what's next
+
+You've successfully verified your Rust installation and measured baseline compilation performance on the C4A instance. In the next section, you'll benchmark Rust code execution using Criterion to measure runtime performance and consistency.

@@ -16,7 +16,7 @@ Similar to Windows Presentation Foundation (WPF) and Xamarin.Forms, .NET MAUI ut
 
 In this learning path, you will explore how to create a .NET MAUI application and discover how .NET MAUI application performance is enhanced on Arm64 devices, particularly through the computationally intensive task of performing the multiply-add operation on two vectors. This operation, commonly used in many artificial neural network architectures, serves as an excellent example of Arm64's capabilities in handling performance-demanding tasks. 
 
-You can find the complete project code used in this learning path [here](https://github.com/dawidborycki/Arm64.MobileApp.MAUI.git).
+You can find the [complete project code on GitHub](https://github.com/dawidborycki/Arm64.MobileApp.MAUI.git).
 
 ## Before you begin
 Before you begin the implementation, install Visual Studio 2022 with the following workloads:
