@@ -1,0 +1,573 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "common",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/cmake-out"
+    },
+    {
+      "name": "android-arm64-v8a",
+      "displayName": "Build executorch core and JNI bindings on android arm64-v8a",
+      "inherits": [
+        "common"
+      ],
+      "binaryDir": "${sourceDir}/cmake-out-android-arm64-v8a",
+      "cacheVariables": {
+        "EXECUTORCH_BUILD_PRESET_FILE": "${sourceDir}/tools/cmake/preset/android.cmake",
+        "ANDROID_ABI": "arm64-v8a"
+      },
+      "condition": {
+        "type": "inList",
+        "string": "${hostSystemName}",
+        "list": [
+          "Darwin",
+          "Linux",
+          "Windows"
+        ]
+      }
+    },
+    {
+      "name": "android-x86_64",
+      "displayName": "Build executorch core and JNI bindings on android x86_64",
+      "inherits": [
+        "common"
+      ],
+      "binaryDir": "${sourceDir}/cmake-out-android-x86_64",
+      "cacheVariables": {
+        "EXECUTORCH_BUILD_PRESET_FILE": "${sourceDir}/tools/cmake/preset/android.cmake",
+        "ANDROID_ABI": "x86_64"
+      },
+      "condition": {
+        "type": "inList",
+        "string": "${hostSystemName}",
+        "list": [
+          "Darwin",
+          "Linux",
+          "Windows"
+        ]
+      }
+    },
+    {
+      "name": "macos",
+      "displayName": "Build ExecuTorch for macOS",
+      "inherits": [
+        "common"
+      ],
+      "generator": "Xcode",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/third-party/ios-cmake/ios.toolchain.cmake",
+        "EXECUTORCH_BUILD_PRESET_FILE": "${sourceDir}/tools/cmake/preset/macos.cmake",
+        "PLATFORM": "MAC_ARM64",
+        "DEPLOYMENT_TARGET": "12.0",
+        "CMAKE_MACOSX_BUNDLE": "OFF"
+      },
+      "condition": {
+        "lhs": "${hostSystemName}",
+        "type": "equals",
+        "rhs": "Darwin"
+      }
+    },
+    {
+      "name": "ios",
+      "displayName": "Build ExecuTorch for iOS",
+      "inherits": [
+        "common"
+      ],
+      "generator": "Xcode",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/third-party/ios-cmake/ios.toolchain.cmake",
+        "EXECUTORCH_BUILD_PRESET_FILE": "${sourceDir}/tools/cmake/preset/ios.cmake",
+        "PLATFORM": "OS64",
+        "DEPLOYMENT_TARGET": "17.0",
+        "CMAKE_OSX_DEPLOYMENT_TARGET": "12.0"
+      },
+      "condition": {
+        "lhs": "${hostSystemName}",
+        "type": "equals",
+        "rhs": "Darwin"
+      }
+    },
+    {
+      "name": "ios-simulator",
+      "displayName": "Build ExecuTorch for iOS Simulator",
+      "inherits": [
+        "common"
+      ],
+      "generator": "Xcode",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/third-party/ios-cmake/ios.toolchain.cmake",
+        "EXECUTORCH_BUILD_PRESET_FILE": "${sourceDir}/tools/cmake/preset/ios.cmake",
+        "PLATFORM": "SIMULATORARM64",
+        "DEPLOYMENT_TARGET": "17.0",
+        "CMAKE_OSX_DEPLOYMENT_TARGET": "12.0"
+      },
+      "condition": {
+        "lhs": "${hostSystemName}",
+        "type": "equals",
+        "rhs": "Darwin"
+      }
+    },
+    {
+      "name": "linux",
+      "displayName": "Build ExecuTorch for Linux",
+      "inherits": [
+        "common"
+      ],
+      "cacheVariables": {
+        "CMAKE_SYSTEM_NAME": "Linux",
+        "EXECUTORCH_BUILD_PRESET_FILE": "${sourceDir}/tools/cmake/preset/linux.cmake"
+      },
+      "condition": {
+        "lhs": "${hostSystemName}",
+        "type": "equals",
+        "rhs": "Linux"
+      }
+    },
+    {
+      "name": "pybind",
+      "displayName": "Build pybindings exported in the wheel",
+      "inherits": [
+        "common"
+      ],
+      "cacheVariables": {
+        "EXECUTORCH_BUILD_PRESET_FILE": "${sourceDir}/tools/cmake/preset/pybind.cmake",
+        "CMAKE_OSX_DEPLOYMENT_TARGET": "12.0"
+      },
+      "condition": {
+        "type": "inList",
+        "string": "${hostSystemName}",
+        "list": [
+          "Darwin",
+          "Linux",
+          "Windows"
+        ]
+      }
+    },
+    {
+      "name": "llm",
+      "displayName": "Build LLM libraries",
+      "inherits": [
+        "common"
+      ],
+      "cacheVariables": {
+        "EXECUTORCH_BUILD_PRESET_FILE": "${sourceDir}/tools/cmake/preset/llm.cmake",
+        "CMAKE_OSX_DEPLOYMENT_TARGET": "12.0"
+      },
+      "condition": {
+        "type": "inList",
+        "string": "${hostSystemName}",
+        "list": [
+          "Darwin",
+          "Linux",
+          "Windows"
+        ]
+      }
+    },
+    {
+      "name": "llm-release",
+      "displayName": "LLM release build",
+      "inherits": [
+        "llm"
+      ],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/cmake-out"
+      }
+    },
+    {
+      "name": "llm-release-cuda",
+      "displayName": "LLM release build with CUDA",
+      "inherits": [
+        "llm-release"
+      ],
+      "cacheVariables": {
+        "EXECUTORCH_BUILD_CUDA": "ON"
+      },
+      "condition": {
+        "lhs": "${hostSystemName}",
+        "type": "equals",
+        "rhs": "Linux"
+      }
+    },
+    {
+      "name": "llm-release-metal",
+      "displayName": "LLM release build with Metal",
+      "inherits": [
+        "llm-release"
+      ],
+      "cacheVariables": {
+        "EXECUTORCH_BUILD_METAL": "ON"
+      },
+      "condition": {
+        "lhs": "${hostSystemName}",
+        "type": "equals",
+        "rhs": "Darwin"
+      }
+    },
+    {
+      "name": "llm-debug",
+      "displayName": "LLM debug build",
+      "inherits": [
+        "llm"
+      ],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/cmake-out"
+      }
+    },
+    {
+      "name": "llm-debug-cuda",
+      "displayName": "LLM debug build with CUDA",
+      "inherits": [
+        "llm-debug"
+      ],
+      "cacheVariables": {
+        "EXECUTORCH_BUILD_CUDA": "ON"
+      },
+      "condition": {
+        "lhs": "${hostSystemName}",
+        "type": "equals",
+        "rhs": "Linux"
+      }
+    },
+    {
+      "name": "llm-debug-metal",
+      "displayName": "LLM debug build with Metal",
+      "inherits": [
+        "llm-debug"
+      ],
+      "cacheVariables": {
+        "EXECUTORCH_BUILD_METAL": "ON"
+      },
+      "condition": {
+        "lhs": "${hostSystemName}",
+        "type": "equals",
+        "rhs": "Darwin"
+      }
+    },
+    {
+      "name": "profiling",
+      "displayName": "Build ExecuTorch with Profiling Enabled",
+      "inherits": [
+        "common"
+      ],
+      "cacheVariables": {
+        "EXECUTORCH_BUILD_PRESET_FILE": "${sourceDir}/tools/cmake/preset/profiling.cmake",
+        "CMAKE_OSX_DEPLOYMENT_TARGET": "12.0"
+      },
+      "condition": {
+        "type": "inList",
+        "string": "${hostSystemName}",
+        "list": [
+          "Darwin",
+          "Linux",
+          "Windows"
+        ]
+      }
+    },
+    {
+      "name": "windows",
+      "displayName": "Build ExecuTorch for Windows",
+      "inherits": [
+        "common"
+      ],
+      "cacheVariables": {
+        "CMAKE_SYSTEM_NAME": "Windows",
+        "EXECUTORCH_BUILD_PRESET_FILE": "${sourceDir}/tools/cmake/preset/windows.cmake"
+      },
+      "toolset": "ClangCL",
+      "condition": {
+        "lhs": "${hostSystemName}",
+        "type": "equals",
+        "rhs": "Windows"
+      }
+    },
+    {
+      "name": "zephyr",
+      "displayName": "Build ExecuTorch for Zephyr RTOS",
+      "inherits": [
+        "common"
+      ],
+      "cacheVariables": {
+        "EXECUTORCH_BUILD_PRESET_FILE": "${sourceDir}/tools/cmake/preset/zephyr.cmake",
+        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/examples/zephyr/x86_64-linux-arm-zephyr-eabi-gcc.cmake"
+      }
+    },
+    {
+      "name": "arm-baremetal",
+      "displayName": "Build ExecuTorch for Arm baremetal",
+      "inherits": [
+        "common"
+      ],
+      "cacheVariables": {
+        "EXECUTORCH_BUILD_PRESET_FILE": "${sourceDir}/tools/cmake/preset/arm_baremetal.cmake",
+        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/examples/arm/ethos-u-setup/arm-none-eabi-gcc.cmake"
+      }
+    },
+    {
+      "name": "xnnpack-base",
+      "displayName": "Base XNNPACK configuration",
+      "hidden": true,
+      "inherits": [
+        "common"
+      ],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "EXECUTORCH_BUILD_EXECUTOR_RUNNER": "ON",
+        "EXECUTORCH_BUILD_DEVTOOLS": "ON",
+        "EXECUTORCH_ENABLE_LOGGING": "ON",
+        "EXECUTORCH_ENABLE_EVENT_TRACER": "ON",
+        "EXECUTORCH_BUILD_XNNPACK": "ON",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_OSX_ARCHITECTURES": "arm64"
+      }
+    },
+    {
+      "name": "android-arm64-v9a",
+      "displayName": "Android arm64-v9a with XNNPACK (SME2 ON, timing)",
+      "inherits": [
+        "android-arm64-v8a"
+      ],
+      "binaryDir": "${sourceDir}/cmake-out/android-arm64-v9a",
+      "generator": "Ninja",
+      "cacheVariables": {
+        "ANDROID": "ON",
+        "ANDROID_PLATFORM": "android-24",
+        "ANDROID_STL": "c++_shared",
+        "CMAKE_TOOLCHAIN_FILE": "$env{ANDROID_NDK}/build/cmake/android.toolchain.cmake",
+        "CMAKE_BUILD_TYPE": "Release",
+        "EXECUTORCH_ENABLE_EVENT_TRACER": "ON",
+        "EXECUTORCH_BUILD_DEVTOOLS": "ON",
+        "EXECUTORCH_BUILD_XNNPACK": "ON",
+        "EXECUTORCH_BUILD_EXECUTOR_RUNNER": "ON",
+        "EXECUTORCH_BUILD_EXTENSION_EVALUE_UTIL": "ON",
+        "XNNPACK_ENABLE_ARM_SME2": "ON",
+        "XNNPACK_ENABLE_ARM_SME": "ON",
+        "CMAKE_C_FLAGS": "-UXNN_NO_LOGGING -DXNN_LOG_LEVEL=0 -march=armv9-a",
+        "CMAKE_CXX_FLAGS": "-UXNN_NO_LOGGING -DXNN_LOG_LEVEL=0 -march=armv9-a"
+      },
+      "condition": {
+        "type": "inList",
+        "string": "${hostSystemName}",
+        "list": [
+          "Darwin",
+          "Linux",
+          "Windows"
+        ]
+      }
+    },
+    {
+      "name": "android-arm64-v9a-xnnlog",
+      "displayName": "Android arm64-v9a with XNNPACK logging (SME2 ON, xnnlog)",
+      "inherits": [
+        "android-arm64-v9a"
+      ],
+      "binaryDir": "${sourceDir}/cmake-out/android-arm64-v9a-xnnlog",
+      "cacheVariables": {
+        "CMAKE_C_FLAGS": "-UXNN_NO_LOGGING -DXNN_LOG_LEVEL=5",
+        "CMAKE_CXX_FLAGS": "-UXNN_NO_LOGGING -DXNN_LOG_LEVEL=5"
+      },
+      "condition": {
+        "type": "inList",
+        "string": "${hostSystemName}",
+        "list": [
+          "Darwin",
+          "Linux",
+          "Windows"
+        ]
+      }
+    },
+    {
+      "name": "android-arm64-v9a-sme2-off",
+      "displayName": "Android arm64-v9a with SME2 disabled (SME2 OFF, timing)",
+      "inherits": [
+        "android-arm64-v9a"
+      ],
+      "binaryDir": "${sourceDir}/cmake-out/android-arm64-v9a-sme2-off",
+      "cacheVariables": {
+        "XNNPACK_ENABLE_ARM_SME2": "OFF",
+        "XNNPACK_ENABLE_ARM_SME": "OFF",
+        "CMAKE_C_FLAGS": "-UXNN_NO_LOGGING -DXNN_LOG_LEVEL=0",
+        "CMAKE_CXX_FLAGS": "-UXNN_NO_LOGGING -DXNN_LOG_LEVEL=0"
+      },
+      "condition": {
+        "type": "inList",
+        "string": "${hostSystemName}",
+        "list": [
+          "Darwin",
+          "Linux",
+          "Windows"
+        ]
+      }
+    },
+    {
+      "name": "android-arm64-v9a-sme2-off-xnnlog",
+      "displayName": "Android arm64-v9a with SME2 disabled and XNNPACK logging (SME2 OFF, xnnlog)",
+      "inherits": [
+        "android-arm64-v9a-sme2-off"
+      ],
+      "binaryDir": "${sourceDir}/cmake-out/android-arm64-v9a-sme2-off-xnnlog",
+      "cacheVariables": {
+        "CMAKE_C_FLAGS": "-UXNN_NO_LOGGING -DXNN_LOG_LEVEL=5",
+        "CMAKE_CXX_FLAGS": "-UXNN_NO_LOGGING -DXNN_LOG_LEVEL=5"
+      },
+      "condition": {
+        "type": "inList",
+        "string": "${hostSystemName}",
+        "list": [
+          "Darwin",
+          "Linux",
+          "Windows"
+        ]
+      }
+    },
+    {
+      "name": "mac-arm64",
+      "displayName": "Mac arm64 with XNNPACK (SME2 ON, timing)",
+      "inherits": [
+        "xnnpack-base"
+      ],
+      "binaryDir": "${sourceDir}/cmake-out/mac-arm64",
+      "cacheVariables": {
+        "EXECUTORCH_BUILD_KERNELS_OPTIMIZED": "ON",
+        "EXECUTORCH_BUILD_KERNELS_QUANTIZED": "ON",
+        "EXECUTORCH_BUILD_KERNELS_QUANTIZED_AOT": "ON",
+        "EXECUTORCH_XNNPACK_ENABLE_KLEIDI": "ON",
+        "EXECUTORCH_XNNPACK_SHARED_WORKSPACE": "ON",
+        "XNNPACK_ENABLE_ARM_SME2": "ON",
+        "XNNPACK_ENABLE_ARM_SME": "ON",
+        "CMAKE_C_FLAGS": "-UXNN_NO_LOGGING -DXNN_LOG_LEVEL=0",
+        "CMAKE_CXX_FLAGS": "-UXNN_NO_LOGGING -DXNN_LOG_LEVEL=0"
+      }
+    },
+    {
+      "name": "mac-arm64-xnnlog",
+      "displayName": "Mac arm64 with XNNPACK logging (SME2 ON, xnnlog)",
+      "inherits": [
+        "mac-arm64"
+      ],
+      "binaryDir": "${sourceDir}/cmake-out/mac-arm64-xnnlog",
+      "cacheVariables": {
+        "CMAKE_C_FLAGS": "-UXNN_NO_LOGGING -DXNN_LOG_LEVEL=5",
+        "CMAKE_CXX_FLAGS": "-UXNN_NO_LOGGING -DXNN_LOG_LEVEL=5"
+      }
+    },
+    {
+      "name": "mac-arm64-sme2-off",
+      "displayName": "Mac arm64 with SME2 disabled (SME2 OFF, timing)",
+      "inherits": [
+        "mac-arm64"
+      ],
+      "binaryDir": "${sourceDir}/cmake-out/mac-arm64-sme2-off",
+      "cacheVariables": {
+        "XNNPACK_ENABLE_ARM_SME2": "OFF",
+        "XNNPACK_ENABLE_ARM_SME": "OFF",
+        "CMAKE_C_FLAGS": "-DXNN_NO_LOGGING",
+        "CMAKE_CXX_FLAGS": "-DXNN_NO_LOGGING"
+      }
+    },
+    {
+      "name": "mac-arm64-sme2-off-xnnlog",
+      "displayName": "Mac arm64 with SME2 disabled and XNNPACK logging (SME2 OFF, xnnlog)",
+      "inherits": [
+        "mac-arm64"
+      ],
+      "binaryDir": "${sourceDir}/cmake-out/mac-arm64-sme2-off-xnnlog",
+      "cacheVariables": {
+        "XNNPACK_ENABLE_ARM_SME2": "OFF",
+        "XNNPACK_ENABLE_ARM_SME": "OFF",
+        "CMAKE_C_FLAGS": "-UXNN_NO_LOGGING -DXNN_LOG_LEVEL=5",
+        "CMAKE_CXX_FLAGS": "-UXNN_NO_LOGGING -DXNN_LOG_LEVEL=5"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "llm-release-install",
+      "displayName": "Build and install LLM extension release artifacts",
+      "configurePreset": "llm-release",
+      "targets": [
+        "install"
+      ],
+      "jobs": 0
+    },
+    {
+      "name": "llm-release-cuda-install",
+      "displayName": "Build and install LLM extension release artifacts (CUDA)",
+      "configurePreset": "llm-release-cuda",
+      "targets": [
+        "install"
+      ],
+      "jobs": 0
+    },
+    {
+      "name": "llm-release-metal-install",
+      "displayName": "Build and install LLM extension release artifacts (Metal)",
+      "configurePreset": "llm-release-metal",
+      "targets": [
+        "install"
+      ],
+      "jobs": 0
+    },
+    {
+      "name": "llm-debug-install",
+      "displayName": "Build and install LLM extension debug artifacts",
+      "configurePreset": "llm-debug",
+      "targets": [
+        "install"
+      ],
+      "jobs": 0
+    },
+    {
+      "name": "llm-debug-cuda-install",
+      "displayName": "Build and install LLM extension debug artifacts (CUDA)",
+      "configurePreset": "llm-debug-cuda",
+      "targets": [
+        "install"
+      ],
+      "jobs": 0
+    },
+    {
+      "name": "llm-debug-metal-install",
+      "displayName": "Build and install LLM extension debug artifacts (Metal)",
+      "configurePreset": "llm-debug-metal",
+      "targets": [
+        "install"
+      ],
+      "jobs": 0
+    },
+    {
+      "name": "build-android-arm64-v9a",
+      "configurePreset": "android-arm64-v9a"
+    },
+    {
+      "name": "build-android-arm64-v9a-xnnlog",
+      "configurePreset": "android-arm64-v9a-xnnlog"
+    },
+    {
+      "name": "build-android-arm64-v9a-sme2-off",
+      "configurePreset": "android-arm64-v9a-sme2-off"
+    },
+    {
+      "name": "build-android-arm64-v9a-sme2-off-xnnlog",
+      "configurePreset": "android-arm64-v9a-sme2-off-xnnlog"
+    },
+    {
+      "name": "build-mac-arm64",
+      "configurePreset": "mac-arm64"
+    },
+    {
+      "name": "build-mac-arm64-xnnlog",
+      "configurePreset": "mac-arm64-xnnlog"
+    },
+    {
+      "name": "build-mac-arm64-sme2-off",
+      "configurePreset": "mac-arm64-sme2-off"
+    },
+    {
+      "name": "build-mac-arm64-sme2-off-xnnlog",
+      "configurePreset": "mac-arm64-sme2-off-xnnlog"
+    }
+  ]
+}

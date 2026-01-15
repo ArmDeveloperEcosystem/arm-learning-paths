@@ -1,0 +1,25 @@
+{
+  "results": [
+    {
+      "experiment": "mac_sme2_on",
+      "metrics": {
+        "runs": 3,
+        "threads": 1,
+        "latency_ms": [
+          12.3,
+          12.1,
+          12.2
+        ],
+        "median_ms": 12.2,
+        "min_ms": 12.1,
+        "max_ms": 12.3,
+        "etdump": "mac_sme2_on/mac_sme2_on_t1.etdump",
+        "log": "mac_sme2_on/mac_sme2_on_t1.log",
+        "etdump_rel": "mac_sme2_on/mac_sme2_on_t1.etdump",
+        "log_rel": "mac_sme2_on/mac_sme2_on_t1.log"
+      }
+    }
+  ]
+}
+
+

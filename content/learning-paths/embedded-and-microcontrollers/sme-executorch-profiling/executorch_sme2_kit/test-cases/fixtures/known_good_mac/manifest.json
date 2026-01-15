@@ -1,0 +1,31 @@
+{
+  "generated_at": "2025-12-20T00:00:00Z",
+  "config": "configs/examples/mac_mobilenet_fp16.json",
+  "model": "models/mobilenet_v3_small_fp16.pte",
+  "executorch": {
+    "present": true,
+    "sha": "KNOWN_GOOD_EXAMPLE_SHA",
+    "dirty": false
+  },
+  "results": [
+    {
+      "experiment": "mac_sme2_on",
+      "metrics": {
+        "runs": 3,
+        "threads": 1,
+        "latency_ms": [
+          12.3,
+          12.1,
+          12.2
+        ],
+        "median_ms": 12.2,
+        "min_ms": 12.1,
+        "max_ms": 12.3,
+        "etdump": "runs/mac/mac_sme2_on/mac_sme2_on_t1.etdump",
+        "log": "runs/mac/mac_sme2_on/mac_sme2_on_t1.log"
+      }
+    }
+  ]
+}
+
+

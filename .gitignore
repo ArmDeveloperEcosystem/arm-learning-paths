@@ -24,3 +24,24 @@ z_local_saved/
 
 # CTags symbol index
 tags
+
+# Local documentation and guidance files
+LEARNING_PATH_SCRIPT_ANALYSIS.md
+_local_docs/
+AI_ASSISTANT_REPO_EVALUATION_PROMPT.md
+LEARNING_PATH_GOALS_AND_STYLE.md
+LEARNING_PATH_PLAN.md
+LEARNING_PATH_VALUE_ANALYSIS.md
+
+# Archive and temporary content
+**/_archive/
+**/.pytest_cache/
+**/.pip-cache/
+**/PR_INSTRUCTIONS.md
+
+# SME2 ExecuTorch profiling specific ignores
+content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/_archive/
+content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/PR_INSTRUCTIONS.md
+content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/.pytest_cache/
+content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/.pip-cache/
+content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/**/__pycache__/

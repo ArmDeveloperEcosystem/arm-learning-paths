@@ -1,0 +1,29 @@
+{
+  "run_dir": "runs/mac",
+  "model": "models/mobilenet_v3_small_fp16.pte",
+  "etrecord": "models/mobilenet_v3_small_fp16.pte.etrecord",
+  "etdump_count": 1,
+  "category_totals_ms": {
+    "Convolution": 4.1,
+    "GEMM": 0.3,
+    "Data Movement": 2.9,
+    "Other": 1.1
+  },
+  "kernel_hints": {
+    "neon": 3
+  },
+  "per_etdump": [
+    {
+      "etdump": "runs/mac/mac_sme2_on/mac_sme2_on_t1.etdump",
+      "categories_ms": {
+        "Convolution": 4.1,
+        "GEMM": 0.3,
+        "Data Movement": 2.9,
+        "Other": 1.1
+      },
+      "rows": 123
+    }
+  ]
+}
+
+
