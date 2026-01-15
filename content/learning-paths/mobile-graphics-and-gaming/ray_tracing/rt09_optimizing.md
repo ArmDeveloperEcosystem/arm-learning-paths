@@ -18,6 +18,6 @@ Developers can see [our ray tracing best practices](https://developer.arm.com/do
 
 -   [Mali Offline Compiler](https://developer.arm.com/Tools%20and%20Software/Mali%20Offline%20Compiler) is an extremely useful tool. It is recommended that you use it to check the behavior of your ray tracing shaders. For ray tracing, it is important to ensure that ray traversal is hardware accelerated and not emulated.
 
-See the [Arm Performance Studio learning path](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/ams) for more information about these tools.
+See the [Arm Performance Studio learning path](/learning-paths/mobile-graphics-and-gaming/ams) for more information about these tools.
 
 On some occasions, like conditionally evaluating Ray Query, Arm GPUs are not able to use the ray tracing hardware and will instead use a slower solution using software emulation. Mali Offline compiler can help to detect this problem. Check that your shaders do not produce this line `Has slow ray traversal: true`. Proper hardware ray tracing should show this line `Has slow ray traversal: false`.

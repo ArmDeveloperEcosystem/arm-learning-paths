@@ -58,7 +58,7 @@ For now, select `Ubuntu` images from the `Quick Start` list of available images,
 
 In the `Architecture` pull-down menu, select `64-bit (Arm)` to ensure an Arm-based instance type is used.
 
-![alt-text #center](./images/ArmArch.png "Select '64-bit (Arm)' Architecture")
+![alt-text #center](./images/armarch.png "Select '64-bit (Arm)' Architecture")
 
 ### Select instance type
 
@@ -94,8 +94,7 @@ For advanced settings, it is recommended that you search `security groups` and c
 
 When all options are set, click `Launch instance` to get started. 
 
-![alt-text #center](https://user-images.githubusercontent.com/97123064/243456243-06c6f57d-457a-4b92-9705-8d6abf1870bf.png
- "Launch the instance")
+![alt-text #center](https://user-images.githubusercontent.com/97123064/243456243-06c6f57d-457a-4b92-9705-8d6abf1870bf.png "Launch the instance")
 
 Your compute instance will be created and be available after initialization. Click the `Instance ID` to observe the `Instance state` and other details about your instance.
 

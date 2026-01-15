@@ -42,8 +42,11 @@ Where it is used:
         {{$breadcrumb_title = print "Tag: " .p1.Title}}
     {{end}}
 
-    <!-- Filter out breadcrumbs we don't want to show: taxonomy pages  -->
-    {{ if and (ne .p1.Title "Learning-paths") (ne .p1.Kind "taxonomy") }}
+    <!-- define "learning-paths" in RelPermalink to filter out -->
+    {{$is_learning_paths_section := and .p1.IsSection (eq .p1.RelPermalink "/learning-paths/")}}
+
+    <!-- Filter out breadcrumbs we don't want to show: taxonomy pages + learning-paths -->
+    {{ if and (not $is_learning_paths_section) (ne .p1.Kind "taxonomy") }}
         <ads-breadcrumb slot="breadcrumb" label="{{ $breadcrumb_link }}" {{ if ne .p1 .p2 }} link="{{ $breadcrumb_link }}" {{else }} current="true"{{ end }}>{{$breadcrumb_title}}</ads-breadcrumb>
     {{end}}
 

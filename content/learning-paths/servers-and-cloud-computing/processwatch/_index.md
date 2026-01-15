@@ -26,7 +26,7 @@ tools_software_languages:
     - libbpf
     - Capstone
     - C
-    - C++
+    - CPP
     - Runbook
 
 operatingsystems:
@@ -36,7 +36,7 @@ operatingsystems:
 further_reading:
     - resource:
         title: Perf for Linux on Arm (LinuxPerf)
-        link: https://learn.arm.com/install-guides/perf/
+        link: /install-guides/perf/
         type: website
     - resource:
         title: Capstone 

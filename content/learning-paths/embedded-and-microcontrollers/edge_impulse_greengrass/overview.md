@@ -23,9 +23,9 @@ The Edge Impulse integration with AWS IoT Core and AWS IoT Greengrass is structu
 * The Edge Impulse "Runner" service can relay inference results into IoT Core for further processing in the cloud
 * The Edge Impulse "Runner" service relays model performance metrics, at configurable intervals, into IoTCore for further processing.
 * The Edge Impulse "Runner" service has accessible commands that can be used to configure the service real-time as well as retrieve information about the model/service/configuration.
-* More information regarding the Edge Impulse "Runner" service itself can be found [here](https://docs.edgeimpulse.com/docs/tools/edge-impulse-for-linux/linux-node-js-sdk).
+* More information regarding the Edge Impulse "Runner" service itself can be found in the [Edge Impulse for Linux Node.js SDK documentation](https://docs.edgeimpulse.com/docs/tools/edge-impulse-for-linux/linux-node-js-sdk).
 
-Edge Impulse has several custom Greengrass components that can be deployed and run on the Greengrass-enabled edge device to enable this integration. The component recipes and artifacts can be found [here](https://github.com/edgeimpulse/aws-greengrass-components). Lets examine one of those components that we'll used for this workshop!
+Edge Impulse has several custom Greengrass components that can be deployed and run on the Greengrass-enabled edge device to enable this integration. The component recipes and artifacts can be found in the [AWS Greengrass components repository](https://github.com/edgeimpulse/aws-greengrass-components). Lets examine one of those components that we'll used for this workshop!
 
 ### The "EdgeImpulseLinuxRunnerServiceComponent" Greengrass Component
 
@@ -45,7 +45,7 @@ Command results are published to the following topic:
 
 		/edgeimpulse/device/<EdgeImpulseDeviceName>/command/output
 
-The command reference, including JSON structure details, can be found [here](https://docs.edgeimpulse.com/docs/integrations/aws-greengrass#commands-january-2025-integration-enhancements).
+The command reference, including JSON structure details, can be found in the [Edge Impulse AWS Greengrass integration documentation](https://docs.edgeimpulse.com/docs/integrations/aws-greengrass#commands-january-2025-integration-enhancements).
 
 Lets dive deeper into this integration starting with setting up our own edge device!  
 

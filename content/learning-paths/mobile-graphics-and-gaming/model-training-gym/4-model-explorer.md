@@ -44,6 +44,6 @@ model-explorer --extensions=vgf_adapter_model_explorer
 
 Use the file browser to open the `.vgf` model exported earlier in your training workflow.
 
-## Wrapping up
+Continue to the next section to learn about bringing your own use-cases to the Model Gym.
 
-Through this Learning Path, you’ve learned what neural graphics is and why it matters for game performance. You’ve stepped through the process of training and evaluating an NSS model using PyTorch and the Model Gym, and seen how to export that model into VGF (.vgf) for real-time deployment. You’ve also explored how to visualize and inspect the model’s structure using Model Explorer. You can now explore the Model Training Gym repository for deeper integration and to keep building your skills.
+

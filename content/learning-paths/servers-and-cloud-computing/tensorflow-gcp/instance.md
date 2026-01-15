@@ -1,43 +1,42 @@
 ---
-title: Create a Google Axion C4A Arm virtual machine on GCP 
+title: Create a Google Axion C4A Arm virtual machine on GCP
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Overview
+## Provision a Google Axion C4A Arm VM
 
-In this section, you will learn how to provision a Google Axion C4A Arm virtual machine on Google Cloud Platform (GCP) using the `c4a-standard-4` (4 vCPUs, 16 GB memory) machine type in the Google Cloud Console.  
+In this section, you'll provision a Google Axion C4A Arm virtual machine (VM) on Google Cloud Platform (GCP) using the `c4a-standard-4` (4 vCPUs, 16 GB memory) machine type.
 
 {{% notice Note %}}
-For support on GCP setup, see the Learning Path [Getting started with Google Cloud Platform](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/google/).
+For help with GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
 {{% /notice %}}
 
-## Provision a Google Axion C4A Arm VM in Google Cloud Console
+## Create your VM
 
-To create a virtual machine based on the C4A instance type:
-- Navigate to the [Google Cloud Console](https://console.cloud.google.com/).
-- Go to **Compute Engine > VM Instances** and select **Create Instance**. 
+- Go to the [Google Cloud Console](https://console.cloud.google.com/).
+- Select **Compute Engine** > **VM Instances** and click **Create Instance**.
 - Under **Machine configuration**:
-   - Populate fields such as **Instance name**, **Region**, and **Zone**.
-   - Set **Series** to `C4A`.
-   - Select `c4a-standard-4` for machine type.
+    - Fill in **Instance name**, **Region**, and **Zone**.
+    - Set **Series** to `C4A`.
+    - Choose `c4a-standard-4` for machine type.
 
-   ![Create a Google Axion C4A Arm virtual machine in the Google Cloud Console with c4a-standard-4 selected alt-text#center](images/gcp-vm.png "Creating a Google Axion C4A Arm virtual machine in Google Cloud Console")
+    ![Screenshot of the Google Cloud Console showing the creation of a new VM instance. The c4a-standard-4 machine type is selected under Machine configuration. The interface displays fields for instance name, region, zone, and machine type selection. alt-text #center](images/gcp-vm.png "Creating a Google Axion C4A Arm virtual machine in Google Cloud Console")
 
-
-- Under **OS and Storage**, select **Change**, then choose an Arm64-based OS image. For this Learning Path, use **SUSE Linux Enterprise Server**. 
-- If using use **SUSE Linux Enterprise Server**. Select "Pay As You Go" for the license type. 
-- Once appropriately selected, please Click **Select**. 
+- Under **OS and Storage**, click **Change** and select an Arm64-based OS image. For this Learning Path, choose **SUSE Linux Enterprise Server (SLES)**.
+    - Select "Pay As You Go" for the license type.
+    - Click **Select** to confirm your OS choice.
 - Under **Networking**, enable **Allow HTTP traffic**.
-- Click **Create** to launch the instance.
-- Once created, you should see a "SSH" option to the right in your list of VM instances.  Click on this to launch a SSH shell into your VM instance:
+- Click **Create** to launch your VM instance.
+- Once created, find your VM in the list and click **SSH** to open an SSH session in your browser.
 
-![Invoke a SSH session via your browser alt-text#center](images/gcp-ssh.png "Invoke a SSH session into your running VM instance")
+![Screenshot showing the SSH option next to a running VM instance in the Google Cloud Console. The SSH button is highlighted, indicating how to launch a secure shell session into the VM. alt-text #center](images/gcp-ssh.png "Invoke an SSH session into your running VM instance")
 
-- A window from your browser should come up and you should now see a shell into your VM instance:
+- A new browser window opens with a terminal shell connected to your VM.
 
-![Terminal Shell in your VM instance alt-text#center](images/gcp-shell.png "Terminal shell in your VM instance")
+![Screenshot of a terminal shell in the browser, connected to the running VM instance. The shell displays a command prompt, ready for user input. alt-text #center](images/gcp-shell.png "Terminal shell in your VM instance")
 
-Next, let's install tensorflow!
+
+You have successfully provisioned an Arm-based VM on Google Cloud. Next, you'll install TensorFlow on your new instance!

@@ -1,9 +1,9 @@
 ---
-title: Accelerate vLLM inference on Arm servers
+title: Run vLLM inference with INT4 quantization on Arm servers
     
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic for developers interested in building and optimizing vLLM for Arm-based servers. This Learning Path shows you how to quantize large language models (LLMs) to INT4, serve them efficiently using an OpenAI-compatible API, and benchmark model accuracy with the LM Evaluation Harness.
+who_is_this_for: This is an introductory topic for developers interested in building and optimizing vLLM for Arm-based servers. This Learning Path shows you how to quantize large language models (LLMs) to INT4, serve them using an OpenAI-compatible API, and benchmark model accuracy with the LM Evaluation Harness.
 
 learning_objectives:
     - Build an optimized vLLM for aarch64 with oneDNN and the Arm Compute Library (ACL)

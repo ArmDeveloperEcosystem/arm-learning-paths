@@ -1,23 +1,25 @@
 ---
-title: Deploy ClickHouse on Google Cloud C4A (Arm-based Axion VMs)
-
-draft: true
-cascade:
-    draft: true
+title: Build a real-time analytics pipeline with ClickHouse on Google Cloud Axion
     
-minutes_to_complete: 30
+minutes_to_complete: 50
 
-who_is_this_for: This learning path is intended for software developers deploying and optimizing ClickHouse on Linux/Arm64 environments, specifically using Google Cloud C4A virtual machines powered by Axion processors.
+who_is_this_for: This is an introductory topic for developers deploying and optimizing ClickHouse on Arm-based Linux environments using Google Cloud C4A virtual machines powered by Axion processors, to evaluate ClickHouse performance and behavior on Arm-based infrastructure.
 
 learning_objectives:
-  - Provision an Arm-based SUSE SLES virtual machine on Google Cloud (C4A with Axion processors)
-  - Install ClickHouse on a SUSE Arm64 (C4A) instance
-  - Verify ClickHouse functionality by starting the server, connecting via client, and performing baseline data insertion and simple query tests on the Arm64 VM
-  - Measure ClickHouse query performance (read, aggregation, and concurrent workloads) to evaluate throughput and latency on Arm64 (Aarch64)
+  - Provision an Arm-based SUSE SLES virtual machine on Google Cloud using C4A (Axion processors)
+  - Configure Google Cloud Pub/Sub for real-time log ingestion
+  - Deploy and validate ClickHouse on a SUSE Linux Arm64 (Axion) VM
+  - Build a streaming ETL pipeline using Apache Beam and Google Dataflow
+  - Ingest real-time Pub/Sub data into ClickHouse using Dataflow
+  - Validate end-to-end data flow from Pub/Sub to ClickHouse
+  - Perform baseline and analytical query benchmarking on ClickHouse running on Arm64
+  - Measure and report query latency (including p95) on Axion processors
 
 prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
   - Basic familiarity with [ClickHouse](https://clickhouse.com/)
+  - Basic understanding of databases and SQL
+
 author: Pareena Verma
 
 ##### Tags
@@ -30,7 +32,10 @@ armips:
 
 tools_software_languages:
   - ClickHouse
-  - clickhouse-benchmark
+  - Apache Beam
+  - Google Dataflow
+  - Google Cloud Pub/Sub
+  - Python 3.11
 
 operatingsystems:
   - Linux

@@ -32,7 +32,7 @@ armips:
     - Cortex-A
 tools_software_languages:
     - Java
-    - C++
+    - CPP
     - Python
     - Hugging Face
     - ExecuTorch

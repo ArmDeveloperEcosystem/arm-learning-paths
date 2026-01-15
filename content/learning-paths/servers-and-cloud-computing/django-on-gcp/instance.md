@@ -6,12 +6,12 @@ weight: 4
 layout: learningpathall
 ---
 
-## Overview
+## Provision a Google Axion C4A Arm VM
 
-In this section, you will learn how to provision a Google Axion C4A Arm virtual machine on Google Cloud Platform (GCP) using the `c4a-standard-4` (4 vCPUs, 16 GB memory) machine type in the Google Cloud Console.  
+You'll create a Google Axion C4A Arm-based virtual machine (VM) on Google Cloud Platform (GCP) using the `c4a-standard-4` machine type (4 vCPUs, 16 GB memory). This VM will host your Django application.
 
 {{% notice Note %}}
-For support on GCP setup, see the Learning Path [Getting started with Google Cloud Platform](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/google/).
+For help with GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
 {{% /notice %}}
 
 ## Provision a Google Axion C4A Arm VM in Google Cloud Console
@@ -24,7 +24,7 @@ To create a virtual machine based on the C4A instance type:
    - Set **Series** to `C4A`.
    - Select `c4a-standard-4` for machine type.
 
-   ![Create a Google Axion C4A Arm virtual machine in the Google Cloud Console with c4a-standard-4 selected alt-text#center](images/gcp-vm.png "Creating a Google Axion C4A Arm virtual machine in Google Cloud Console")
+![Screenshot of the Google Cloud Console showing the Machine configuration section. The Series dropdown is set to C4A and the machine type c4a-standard-4 is selected. alt-text#center](images/gcp-vm.png "Configuring machine type to C4A in Google Cloud Console")
 
 
 - Under **OS and Storage**, select **Change**, then choose an Arm64-based OS image. For this Learning Path, use **SUSE Linux Enterprise Server**. 
@@ -33,17 +33,23 @@ To create a virtual machine based on the C4A instance type:
 - Under **Networking**, enable **Allow HTTP traffic**.
 - Also under **Networking**, in the "Network tags" text field add "allow-tcp-8000" as an additional tag
 
-![Adding the TCP/8000 firewall rule to our VM](images/network-config.png "Adding the TCP/8000 firewall rule to our VM")
+![Screenshot showing the Networking configuration section. The Allow HTTP traffic checkbox is enabled and the Network tags field contains django-server. alt-text#center](images/network-config.png "Configuring networking and tags")
 
-- Click **Create** to launch the instance.
-- Once created, you should see a "SSH" option to the right in your list of VM instances. You should also see the public IP address for your VM.
-- Save off the public IP address for your VM as you will need this in the next step.
-- Click on this to launch a SSH shell into your VM instance:
+## Create the instance
 
-![Invoke a SSH session via your browser alt-text#center](images/gcp-pubip-ssh.png "Invoke a SSH session into your running VM instance")
+Click **Create** to launch your VM instance. Google Cloud provisions the instance, which typically takes one to two minutes.
+Once the instance is running, you'll see it listed in the VM instances table with a green checkmark. Note the External IP address displayed in the list—you'll need this to access your Django application later.
 
-- A window from your browser should come up and you should now see a shell into your VM instance:
+## Connect using SSH
 
-![Terminal Shell in your VM instance alt-text#center](images/gcp-shell.png "Terminal shell in your VM instance")
+Click the **SSH** button next to your running instance to open a browser-based terminal session.
 
-Next, let's install django!
+![Screenshot of the VM instances list showing the SSH button next to a running instance. The external IP address is visible in the same row. alt-text#center](images/gcp-pubip-ssh.png "Launching an SSH session from the VM instances list")
+
+A browser window opens with a terminal shell connected to your VM. You're now ready to install Django.
+
+![Screenshot of a terminal shell in the browser, connected to the running VM instance. The shell displays a command prompt ready for input. alt-text#center](images/gcp-shell.png "Terminal shell connected to your VM")
+
+## Summary and what's next
+
+You have successfully provisioned an Arm-based VM on Google Cloud. Next, you'll install Django and configure your web application!

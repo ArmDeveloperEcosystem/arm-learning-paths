@@ -26,7 +26,7 @@ GameActivity is a Jetpack library designed to assist Android games in processing
 
 GameActivity is a direct descendant of NativeActivity and shares a similar architecture:
 
-![Game Activity Architecture #center](./images/GameActivityArchitecture.png "Figure 5: Game Activity Architecture")
+![Game Activity Architecture #center](./images/gameactivityarchitecture.png "Figure 5: Game Activity Architecture")
 
 With GameActivity, you can focus on game development and avoid spending excessive amounts of time dealing with the Java Native Interface (JNI) code.
 

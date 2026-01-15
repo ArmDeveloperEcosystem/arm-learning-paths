@@ -393,6 +393,12 @@ You can see by looking at the timeline view that instructions no longer depend o
 
 Instructions also spend less time waiting in the scheduler's queue. This explains why the performance of `sum_test2.s` is so much better than `sum_test1.s`.
 
-Note the use of the flag `-mcpu=neoverse-v2` throughout all of those examples. This flag tells MCA to simulate the performance of the code in `sum_test1.s` and `sum_test2.s` on a Neoverse V2 core. This flag can be changed to any core supported in MCA. You can find what cores are supported in MCA by running `llvm-mca -mcpu=help <<<''`. You can also look at the LLVM sources in [llvm-project](https://github.com/llvm/llvm-project/tree/main/llvm/test/tools/llvm-mca/AArch64), which will give you more detailed examples. For instance, when looking at the Neoverse cores, there is currently support for the N1, N2, N3 and the V1, V2, V3 cores.
+Note the use of the flag `-mcpu=neoverse-v2` throughout all of those examples. This flag tells MCA to simulate the performance of the code in `sum_test1.s` and `sum_test2.s` on a Neoverse V2 core. This flag can be changed to any core supported in MCA. 
+
+You can find what cores are supported in MCA by running `llvm-mca -mcpu=help`. 
+
+If you are using an older version of `llvm-mca`, you may have to add an empty string to print the help, use `llvm-mca -mcpu=help <<<''`. 
+
+You can also look at the LLVM sources in [llvm-project](https://github.com/llvm/llvm-project/tree/main/llvm/test/tools/llvm-mca/AArch64), which will give you more detailed examples. For instance, when looking at the Neoverse cores, there is currently support for the N1, N2, N3 and the V1, V2, V3 cores.
 
 In the next section, you can try running `llvm-mca` with Compiler Explorer.

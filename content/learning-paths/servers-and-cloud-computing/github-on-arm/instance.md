@@ -10,7 +10,7 @@ layout: learningpathall
 
 This section walks you through creating a Google Axion C4A Arm virtual machine on Google Cloud with the `c4a-standard-4` (4 vCPUs, 16 GB memory) machine type using the Google Cloud Console. You will use this VM later as the host for a GitHub Actions self-hosted runner.
 
-If you don't have a Google Cloud account, see the Learning Path [Getting started with Google Cloud Platform](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/google/).
+If you don't have a Google Cloud account, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
 
 ## Create an Arm-based virtual machine (C4A)
 

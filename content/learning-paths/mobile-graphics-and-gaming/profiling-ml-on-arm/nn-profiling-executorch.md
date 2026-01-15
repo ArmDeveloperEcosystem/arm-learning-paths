@@ -11,7 +11,7 @@ You can use [ExecuTorch](https://pytorch.org/executorch/stable/index.html) for r
 
 To get started on ExecuTorch, you can follow the instructions on the [PyTorch website](https://pytorch.org/executorch/stable/getting-started-setup). To then deploy on Android, you can also find instructions on the [Pytorch website](https://pytorch.org/executorch/stable/demo-apps-android.html). If you do not already have ExecuTorch running on Android, follow these instructions first.
 
-ExecuTorch comes with a set of profiling tools, but currently they are aimed at Linux, and not Android. The instructions to profile on Linux are [here](https://pytorch.org/executorch/main/tutorials/devtools-integration-tutorial.html), and you can adapt them for use on Android.
+ExecuTorch comes with a set of profiling tools, but currently they are aimed at Linux, and not Android. The [ExecuTorch profiling instructions for Linux](https://pytorch.org/executorch/main/tutorials/devtools-integration-tutorial.html) can be adapted for use on Android.
 
 ## Profiling on Android
 

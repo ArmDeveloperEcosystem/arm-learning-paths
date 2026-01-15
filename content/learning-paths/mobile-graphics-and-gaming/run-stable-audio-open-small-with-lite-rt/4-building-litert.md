@@ -36,7 +36,7 @@ export NDK_PATH=$WORKSPACE/android-ndk-r25b/
 export ANDROID_NDK_HOME=$NDK_PATH
 export PATH=$NDK_PATH/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
   {{< /tab >}}
-  {{< tab header="MacOS">}}
+  {{< tab header="macOS">}}
 export NDK_PATH=$WORKSPACE/android-ndk-r25b/
 export ANDROID_NDK_HOME=$NDK_PATH
 export PATH=$NDK_PATH/toolchains/llvm/prebuilt/darwin-x86_64/bin/:$PATH
@@ -76,7 +76,7 @@ bazel build -c opt --config android_arm64 //tensorflow/lite:libtensorflowlite.so
     --define tflite_with_xnnpack_qs8=true \
     --define tflite_with_xnnpack_qu8=true
   {{< /tab >}}
-  {{< tab header="MacOS">}}
+  {{< tab header="macOS">}}
 bazel build -c opt --config macos //tensorflow/lite:libtensorflowlite.so \
     --define tflite_with_xnnpack=true \
     --define xnn_enable_arm_i8mm=true \

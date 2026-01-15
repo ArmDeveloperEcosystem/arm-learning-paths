@@ -22,7 +22,7 @@ armips:
     - Neoverse
 tools_software_languages:
     - Arm Compiler for Linux
-    - C++
+    - CPP
     - Runbook
 operatingsystems:
     - Linux

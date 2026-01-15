@@ -50,7 +50,7 @@ You can build the pipeline for various platforms and independently benchmark the
 Currently, this module uses [whisper.cpp](https://github.com/ggml-org/whisper.cpp) and wraps the backend library with a thin C++ layer. The module also provides JNI bindings for developers targeting Android based applications.
 
 {{% notice %}}
-You can get more information on how to build and use this module [here](https://gitlab.arm.com/kleidi/kleidi-examples/speech-to-text/-/blob/main/README.md?ref_type=heads)
+You can get more information on how to build and use this module in the [speech-to-text README](https://gitlab.arm.com/kleidi/kleidi-examples/speech-to-text/-/blob/main/README.md?ref_type=heads)
 {{% /notice %}}
 
 ## Large Language Model  
@@ -85,7 +85,7 @@ Currently, this module provides a thin C++ layer as well as JNI bindings for dev
 
 
 {{% notice %}}
-You can get more information on how to build and use this module [here](https://gitlab.arm.com/kleidi/kleidi-examples/large-language-models/-/blob/main/README.md?ref_type=heads)
+You can get more information on how to build and use this module in the [large-language-models README](https://gitlab.arm.com/kleidi/kleidi-examples/large-language-models/-/blob/main/README.md?ref_type=heads)
 {{% /notice %}}
 
 ## Text-to-Speech 

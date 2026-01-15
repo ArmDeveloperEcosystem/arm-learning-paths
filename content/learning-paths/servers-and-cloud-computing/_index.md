@@ -8,8 +8,8 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 3
-- Linux: 200
-- macOS: 13
+- Linux: 210
+- macOS: 15
 - Windows: 14
 pinned_modules:
 - module:
@@ -18,12 +18,12 @@ pinned_modules:
     - providers
     - migration
 subjects_filter:
-- CI-CD: 11
-- Containers and Virtualization: 35
+- CI-CD: 12
+- Containers and Virtualization: 37
 - Databases: 22
 - Libraries: 9
-- ML: 34
-- Performance and Architecture: 74
+- ML: 36
+- Performance and Architecture: 79
 - Storage: 2
 - Web: 17
 subtitle: Optimize cloud native apps on Arm for performance and cost
@@ -37,6 +37,7 @@ tools_software_languages_filter:
 - Android Studio: 1
 - Ansible: 2
 - Apache: 1
+- Apache Beam: 1
 - Apache Bench: 1
 - Apache Cassandra: 1
 - Apache Spark: 2
@@ -66,37 +67,38 @@ tools_software_languages_filter:
 - Azure: 1
 - Azure CLI: 2
 - Azure Portal: 1
-- Bash: 1
+- Bash: 3
 - bash: 2
-- Bash/Shell scripting: 1
 - Bastion: 3
 - BOLT: 2
 - bpftool: 1
 - Buildkite: 1
-- C: 10
+- C: 11
 - C#: 2
-- C++: 12
 - Capstone: 1
 - Cargo: 1
 - cassandra-stress: 1
-- CCA: 8
+- CCA: 9
 - CircleCI: 2
 - Clair: 1
 - Clang: 13
 - ClickBench: 1
-- ClickHouse: 1
+- ClickHouse: 2
 - Cloud Build: 1
 - CMake: 1
 - conda: 1
+- Confidential Containers: 1
 - Couchbase: 1
+- CPP: 15
 - cqlsh: 1
 - Criterion: 1
 - Daytona: 1
 - Demo: 3
 - Django: 2
-- Docker: 26
+- Docker: 29
 - Docker Buildx: 1
 - Envoy: 3
+- Erlang: 1
 - ExecuTorch: 1
 - Facter: 1
 - FAISS: 1
@@ -104,9 +106,9 @@ tools_software_languages_filter:
 - Flink: 2
 - Fortran: 1
 - FunASR: 1
-- FVP: 7
+- FVP: 8
 - Gardener: 1
-- GCC: 25
+- GCC: 26
 - gdb: 1
 - Geekbench: 1
 - Generative AI: 13
@@ -114,6 +116,7 @@ tools_software_languages_filter:
 - GitHub: 6
 - GitHub Actions: 1
 - GitHub CLI: 1
+- GitHub Copilot: 1
 - GitLab: 2
 - GKE: 1
 - glibc: 1
@@ -122,10 +125,13 @@ tools_software_languages_filter:
 - Google Axion: 3
 - Google Benchmark: 1
 - Google Cloud: 2
+- Google Cloud Pub/Sub: 1
+- Google Dataflow: 1
 - Google Test: 1
+- Groovy (Jenkins Pipeline): 1
 - Gunicorn: 1
 - HammerDB: 1
-- Helm: 2
+- Helm: 3
 - Herd7: 1
 - Hiera: 1
 - Hugging Face: 12
@@ -135,19 +141,22 @@ tools_software_languages_filter:
 - ipmitool: 1
 - Java: 6
 - JAX: 1
+- Jenkins: 1
 - JMH: 1
 - Kafka: 2
+- Kata Containers: 1
 - KEDA: 1
 - Kedify: 1
 - Keras: 2
-- KinD: 1
+- KinD: 2
 - kube-bench: 1
-- Kubernetes: 14
+- kubectl: 1
+- Kubernetes: 15
 - Libamath: 1
 - libbpf: 1
 - Linaro Forge: 1
 - Litmus7: 1
-- llama.cpp: 1
+- llama.cpp: 2
 - Llama.cpp: 2
 - LLM: 11
 - llvm-mca: 1
@@ -155,6 +164,7 @@ tools_software_languages_filter:
 - LSE: 1
 - MariaDB: 1
 - Maven: 1
+- MCP: 1
 - Memcached: 2
 - MLPerf: 1
 - ModelScope: 1
@@ -175,6 +185,7 @@ tools_software_languages_filter:
 - ONNX Runtime: 2
 - OpenBLAS: 1
 - OpenBMC: 1
+- OpenJDK 17: 1
 - OpenJDK 21: 2
 - OpenShift: 1
 - Orchard Core: 1
@@ -183,18 +194,21 @@ tools_software_languages_filter:
 - Perf: 1
 - PHP: 1
 - PHPBench: 1
+- pika: 1
 - PostgreSQL: 5
 - Profiling: 1
 - Puppet: 1
-- Python: 35
-- PyTorch: 10
+- Python: 38
+- Python 3.11: 1
+- PyTorch: 11
 - QEMU: 1
+- RabbitMQ: 1
 - RAG: 1
 - Rails: 1
 - Redis: 4
 - redis-benchmark: 1
 - Remote.It: 2
-- RME: 8
+- RME: 9
 - Ruby: 2
 - Runbook: 71
 - Rust: 3
@@ -217,11 +231,11 @@ tools_software_languages_filter:
 - ThirdAI: 1
 - topdown-tool: 1
 - Trusted Firmware: 1
-- Trustee: 1
+- Trustee: 2
 - TSan: 1
 - TypeScript: 2
 - Vectorscan: 1
-- Veraison: 2
+- Veraison: 3
 - Visual Studio Code: 5
 - vLLM: 3
 - vvenc: 1
@@ -238,7 +252,7 @@ tools_software_languages_filter:
 weight: 1
 cloud_service_providers_filter:
 - AWS: 19
-- Google Cloud: 34
+- Google Cloud: 37
 - Microsoft Azure: 19
 - Oracle: 2
 ---

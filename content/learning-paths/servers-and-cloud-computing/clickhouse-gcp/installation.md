@@ -1,13 +1,61 @@
 ---
 title: Install ClickHouse
-weight: 4
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Install ClickHouse on GCP VM
-This guide covers installing, configuring, and validating ClickHouse on a GCP SUSE Linux Arm64 VM. It includes system preparation, installing ClickHouse with the official installer, verifying the setup, starting the server, and connecting via the client. The guide also configures ClickHouse as a systemd service to ensure reliable, automatic startup on Arm-based environments.
+## Install ClickHouse and gcloud CLI on GCP VM
+
+In this section you'll install Google Cloud CLI (gcloud) and ClickHouse on your GCP SUSE Linux Arm64 (Axion C4A) VM.
+These tools are required to:
+- Interact with GCP services such as Pub/Sub and Dataflow
+- Store and query real-time analytics data efficiently using ClickHouse on Arm64
+
+### Install Google Cloud CLI (gcloud)
+The Google Cloud CLI is required to authenticate with GCP, publish Pub/Sub messages, and submit Dataflow jobs from the VM.
+
+### Download gcloud SDK (Arm64)
+
+```console
+curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-arm.tar.gz
+```
+
+### Extract and install gcloud
+
+```console
+tar -xzf google-cloud-cli-linux-arm.tar.gz
+cd google-cloud-sdk
+./install.sh
+```
+
+Accept the default options during installation.
+
+### Initialize gcloud
+
+```console
+source ~/.bashrc
+gcloud init
+```
+
+During initialization:
+
+- Select the correct project (for example: imperial-time-xxxxxx)
+- Choose the default region (for example: us-central1)
+
+### Verify authentication
+
+```console
+gcloud auth list
+```
+
+You should see an output similar to:
+```output
+Credentialed Accounts
+ACTIVE  ACCOUNT
+*       <PROJECT_NUMBER>-compute@developer.gserviceaccount.com
+```
 
 ### Install required system packages and the ClickHouse repo
 Refresh system repositories and install basic utilities needed to download and run ClickHouse.
@@ -192,4 +240,5 @@ Query id: ddd3ff38-c0c6-43c5-8ae1-d9d07af4c372
 1 row in set. Elapsed: 0.001 sec.
 ```
 
-ClickHouse is now successfully installed, configured, and running on SUSE Linux Arm64 with automatic startup enabled.
+ClickHouse and gcloud CLI are now successfully installed, configured, and validated on a GCP Axion (Arm64) VM.
+The system is ready for Pub/Sub testing and Dataflow ETL in the next phase.

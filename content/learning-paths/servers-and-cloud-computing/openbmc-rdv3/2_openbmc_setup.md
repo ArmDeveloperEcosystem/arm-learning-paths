@@ -10,7 +10,7 @@ layout: learningpathall
 
 In this section, you prepare your workspace to build and simulate OpenBMC and UEFI firmware on the Neoverse RD-V3 r1 platform using Arm Fixed Virtual Platforms (FVPs). You will install the required tools, configure repositories, and set up a Docker-based build environment for both BMC and host firmware.
 
-Before you start, review the related Learning Path [CSS-V3 pre-silicon software development using Neoverse servers](https://learn.arm.com/learning-paths/servers-and-cloud-computing/neoverse-rdv3-swstack). It walks through using the CSSv3 reference design on FVP to perform early development and validation.
+Before you start, review the related Learning Path [CSS-V3 pre-silicon software development using Neoverse servers](/learning-paths/servers-and-cloud-computing/neoverse-rdv3-swstack). It walks through using the CSSv3 reference design on FVP to perform early development and validation.
 
 You will perform the steps outlined below on your Arm Neoverse-based Linux machine running Ubuntu 22.04 LTS. You will need at least 80 GB of free disk space, 48 GB of RAM.
 

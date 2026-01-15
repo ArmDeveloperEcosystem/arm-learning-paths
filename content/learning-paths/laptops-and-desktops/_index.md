@@ -9,14 +9,14 @@ maintopic: true
 operatingsystems_filter:
 - Android: 2
 - ChromeOS: 2
-- Linux: 37
+- Linux: 38
 - macOS: 10
-- Windows: 46
+- Windows: 47
 subjects_filter:
 - CI-CD: 6
 - Containers and Virtualization: 7
 - Migration to Arm: 30
-- ML: 4
+- ML: 6
 - Performance and Architecture: 28
 subtitle: Create and migrate apps for power efficient performance
 title: Laptops and Desktops
@@ -28,13 +28,13 @@ tools_software_languages_filter:
 - Arm Performance Libraries: 2
 - Arm64EC: 1
 - Assembly: 1
-- Bash: 2
+- Bash: 3
 - C: 10
 - C#: 6
-- C++: 11
 - CCA: 1
 - Clang: 13
 - CMake: 3
+- CPP: 12
 - CSS: 1
 - Daytona: 1
 - Docker: 5
@@ -43,6 +43,7 @@ tools_software_languages_filter:
 - Git: 1
 - GitHub: 3
 - GitLab: 2
+- Google Benchmark: 1
 - Google Test: 1
 - HTML: 2
 - Hugging Face: 1
@@ -54,7 +55,7 @@ tools_software_languages_filter:
 - Kubernetes: 1
 - KVM: 1
 - Linux: 1
-- llama.cpp: 2
+- llama.cpp: 3
 - LLM: 1
 - LLVM: 2
 - llvm-mca: 1
@@ -67,13 +68,13 @@ tools_software_languages_filter:
 - OpenCV: 1
 - perf: 4
 - PowerShell: 1
-- Python: 8
+- Python: 9
 - QEMU: 1
 - Qt: 2
 - RDP: 1
 - Remote.It: 1
 - RME: 1
-- Runbook: 17
+- Runbook: 18
 - Rust: 2
 - SVE: 1
 - SVE2: 1

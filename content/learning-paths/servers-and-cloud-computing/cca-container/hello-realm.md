@@ -10,143 +10,144 @@ layout: "learningpathall"
 
 ## Before you begin
 
-Download the [`armswdev/aemfvp-cca-v2-image`](https://hub.docker.com/r/armswdev/aemfvp-cca-v2-image) docker container.
-
-Install [GCC](/install-guides/gcc/) on your machine. Depending on the architecture of your machine, `aarch64` or `x86_64`, you will need to install either the native compiler or the cross-compiler.
+Download the [`armswdev/cca-learning-path:cca-simulation-v3`](https://hub.docker.com/r/armswdev/cca-learning-path:cca-simulation-v3) docker container.
 
 ## Running an application in a Realm
-In the previous section, you were able to boot a guest virtual machine as the Realm. In this section, you will learn how to run an application within that Realm. The application inherits the confidential protection of the guest virtual machine.
 
-A convenient way to run an application inside a Realm, within the context of this example, is to package the application as the "init" process for the guest Linux kernel. 
+In the previous section, you were able to boot a guest virtual machine as the Realm. In this section, you will learn how to run your own application within that Realm. The application inherits the confidential protection of the guest virtual machine it is running in.
 
-Linux kernels contain a gzipped cpio format archive. When the kernel boots up, this archive is extracted into the root filesystem. The kernel then checks whether the root filesystem contains a file named "init" and tries to run it. At this point the kernel has booted, and the "init" application executes the system the rest of the way. 
+A convenient way to run an application inside a Realm, within the context of this example, is to *inject* the application into the guest filesystem. In this section, you will inject a simple **hello world** program into the guest filesystem.
 
-The use of the "init" process to run the application also means that you will not see a shell prompt when you boot the guest virtual machine. The guest kernel will boot, run the application and then exit.
+## Inject a simple application in the guest filesystem
 
-In this section, you will package a simple **hello world** application into the `initramfs` for the guest Linux kernel. 
+### Compile the application
 
-## Create a simple initramfs for the guest Linux kernel
-
-Create a directory in which you will build the simple `initramfs`:
+Create a directory in which you will build the simple **hello world** application:
 
 ```console
-mkdir ~/FM-share
-cd ~/FM-share
+mkdir ~/CCA-docker-share
+cd ~/CCA-docker-share
 ```
+
 Using a file editor of your choice, create a file named `hello.c` in this directory. Copy the contents below into the file:
 
 ```console
-#include <fcntl.h>
 #include <stdio.h>
-#include <unistd.h>
-
-#include <linux/reboot.h>
-#include <sys/reboot.h>
+#include <stdlib.h>
 
 int main(int argc, char *argv[])
 {
-  printf("\n\n");
-  printf("******* Hello from the Realm ! *******\n");
-  printf("\n\n");
+  printf("\n******* Hello from the Realm ! *******\n\n");
 
-  sleep(30);
-
-  printf("Shutting down the realm (this may take a while)...\n");
-  reboot(LINUX_REBOOT_CMD_POWER_OFF);
-
-  while(1);
+  return EXIT_SUCCESS;
 }
 ```
 
-Now compile the application as the init executable and package it into the `initramfs`:
+Now start the container:
 
 ```console
-aarch64-linux-gnu-gcc -static hello.c -o init
-echo init | cpio -o -H newc | gzip > test.cpio.gz
+docker run -v ~/CCA-docker-share:/home/cca/CCA-docker-share --rm --privileged -it armswdev/cca-learning-path:cca-simulation-v3
 ```
-`test.cpio.gz` is the compressed archive you will use as the `initramfs` for the guest Linux kernel.
 
-## Run the application inside the Realm 
+{{% notice Note %}}
+The docker session is started with the `--rm` option, which means the container will be destroyed when it is exited, allowing you to experiment with the images without fear: at the next session, you will get working pristine images ! If you intend your changes to persist across docker sessions, omit the `--rm` option to docker.
 
-Start the docker container with the `FM-share` directory mounted:
+The `--privileged` option is needed to be able to mount the host and guest filesystems inside the container.
+
+The `~/CCA-docker-share` directory on your development machine is available within the container at `/home/cca/CCA-docker-share` thanks to the `-v ~/CCA-docker-share:/home/cca/CCA-docker-share` command line option to `docker run`.
+{{% /notice %}}
+
+Inside the running container, compile the **hello world** application, the source code file `hello.c` should be present in the shared directory `/home/cca/CCA-docker-share` :
+
+```console { output_lines="2" }
+ls CCA-docker-share/
+hello.c
+aarch64-linux-gnu-gcc -O1 -static -o hello CCA-docker-share/hello.c
+```
+
+You now have a `hello` statically linked binary for the **hello world** application inside `/home/cca/`:
+
+```console { output_lines="2" }
+ls
+CCA-docker-share  FastRAM.cfg  cca-3world  hello  run-cca-fvp.sh
+```
+
+### Inject the application into the guest filesystem.
+
+While still in the docker container, mount the host filesystem, then the guest filesystem (which lives inside the host filesystem), then copy the `hello` binary file to the guest filesystem and then unmount the guest and host filesystems:
 
 ```console
-docker run -v ~/FM-share:/home/ubuntu/FM-share -it armswdev/aemfvp-cca-v2-image /bin/bash
+sudo mkdir -p /mnt/host-fs /mnt/guest-fs
+sudo mount -t auto -w -o loop cca-3world/host-rootfs.ext2 /mnt/host-fs
+fs_start=$(fdisk -l /mnt/host-fs/cca/guest-disk.img |grep "Linux filesystem"| tr -s ' ' | cut -f2 -d" ")
+sudo mount -t auto -w -o loop,offset=$(($fs_start*512)) /mnt/host-fs/cca/guest-disk.img /mnt/guest-fs
+sudo cp hello /mnt/guest-fs/cca/
+sudo umount /mnt/guest-fs
+sudo umount /mnt/host-fs
 ```
-Inside the running container, run the Arm CCA reference stack pre-built binaries on the FVP:
+
+### Execute **hello world** in the realm
+
+Now, as previously, start the CCA host in the FVP:
 
 ```console
 ./run-cca-fvp.sh
 ```
-After the host Linux kernel has booted up, you will prompted to log in. Use `root` for both the login and password:
 
-```output
-[    3.879183] VFS: Mounted root (ext4 filesystem) readonly on device 254:0.
-[    3.879643] devtmpfs: mounted
-[    3.897918] Freeing unused kernel memory: 9024K
-[    3.901685] Run /sbin/init as init process
-[    3.965637] EXT4-fs (vda): re-mounted 34fdcd00-4506-42fc-8af8-a35ca9cf965d r/w. Quota mode: none.
-Starting syslogd: OK
-Starting klogd: OK
-Running sysctl: OK
-Saving random seed: OK
-Starting network: ip: RTNETLINK answers: File exists
-udhcpc: started, v1.31.1
-udhcpc: sending discover
-udhcpc: sending select for 172.20.51.1
-udhcpc: lease of 172.20.51.1 obtained, lease time 86400
+```console
+udhcpc: started, v1.36.1
+udhcpc: broadcasting discover
+udhcpc: broadcasting select for 172.20.51.1, server 172.20.51.254
+udhcpc: lease of 172.20.51.1 obtained from 172.20.51.254, lease time 86400
+deleting routers
+adding dns 172.20.51.254
+OK
+Starting chrony: OK
+Starting crond: OK
+Setting up macvtap... [   16.681271] smc91x 1a000000.ethernet eth0: entered promiscuous mode
+OK
+
+Welcome to the CCA host
+host login:
+```
+
+Log into the CCA host, using `root` as the username (no password required), then start a realm with:
+
+```console
+cd /cca
+./lkvm run --realm --disable-sve --irqchip=gicv3-its --firmware KVMTOOL_EFI.fd -c 1 -m 512 --no-pvtime --force-pci --disk guest-disk.img --measurement-algo=sha256 --restricted_mem
+```
+
+```console
+udhcpc: started, v1.36.1
+udhcpc: broadcasting discover
+udhcpc: broadcasting select for 192.168.33.15, server 192.168.33.1
+udhcpc: lease of 192.168.33.15 obtained from 192.168.33.1, lease time 14400
 deleting routers
 adding dns 172.20.51.254
 FAIL
-Starting dropbear sshd: OK
+Starting chrony: OK
+Starting crond: OK
+Setting up macvtap... OK
 
-Welcome to Buildroot
-buildroot login: root
-Password:
-#
-```
-With the host Linux kernel running, you can now enable the sharing of files between your host machine and the running simulation. Mount a `9p` drive on the host Linux kernel using `/etc/fstab`:
-
-```console
-vi /etc/fstab
-```
-In the `/etc/fstab` file, add the following line to it:
-
-```console
-FM	/mnt		9p	trans=virtio,version=9p2000.L,aname=/mnt	0 	0
-```
-Save and close the file. Now run the `mount` command:
-
-```console
-mount -a
-```
-This command mounts the `FM-share` directory in your docker container to the `/mnt` directory of the host Linux kernel running in the FVP. Inspect the contents of `/mnt`:
-
-```console
-ls /mnt
+Welcome to the CCA realm
+realm login:
 ```
 
-The output should be:
-```output
-hello.c  init  test.cpio.gz
-```
-You can now use `kvmtool` which is a virtualization utility to launch Linux guest images. It supports the creation of Realm guests. Use the `-i` switch to point to the `initramfs` root filesystem you created in the previous step.
+Log into the CCA realm, using `root` as the username (no password required).
 
-```console
-lkvm run --realm --restricted_mem --irqchip=gicv3-its -p earlycon --network mode=none -c 1 -m 128 -k /realm/Image -i /mnt/test.cpio.gz
-```
-The Realm guest takes some time to boot up. At the end of the boot, you should see your **hello world** application running in the Realm:
+Now change directory to `/cca`: the **hello world** application should be there as the binary file `hello`, just run it:
 
-```output
-[   11.907066] Run /init as init process
+```console { output_lines="3" }
+cd /cca
+ls
+arc         hello       kbs-client
+./hello
 
 ******* Hello from the Realm ! *******
 
-Shutting down the realm (this may take a while)...
-[   22.010458] reboot: Power down
-  Info: KVM session ended normally.
 ```
-You have successfully run an application inside the Realm!
 
-The Realm will exit after the application runs because it has been packaged as the guest kernel's "init" process.
+You have successfully run your own application inside the Realm !
 
+As before, with `poweroff` you can now exit the realm, then the host.

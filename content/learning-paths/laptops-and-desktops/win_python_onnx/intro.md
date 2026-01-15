@@ -18,7 +18,7 @@ ONNX Runtime, in particular, provides optimized inference capabilities, supporti
 
 Several major ML frameworks currently support exporting models directly to the ONNX format, including Azure AI Custom Vision, Core ML, PyTorch, TensorFlow, and scikit-learn, streamlining the workflow from model development to deployment.
 
-The companion code is available [here](https://github.com/dawidborycki/ONNX.WoA/tree/main)
+The [companion code](https://github.com/dawidborycki/ONNX.WoA/tree/main) is available on GitHub.
 
 ## Objective
 In this hands-on learning path, you will explore the practical aspects of running inference on an ONNX-formatted model for an image classification task. Specifically, the demonstration uses the widely used Modified National Institute of Standards and Technology (MNIST) dataset, illustrating how ONNX can be applied to accurately recognize handwritten digits, showcasing both the flexibility and simplicity offered by this standardized format.
@@ -59,7 +59,7 @@ py -V:3.13-arm64 -m venv venv-arm64
 By using different virtual environments, you can compare the performance of the same code across different architectures. However, at the time of writing, ONNX Runtime is unavailable as a Python wheel for Windows ARM64. Therefore, the subsequent instructions apply only to Windows x64.
 
 ### A Code Editor 
-For this demonstration we use Visual Studio Code. Available for download [here](https://code.visualstudio.com/download)
+For this demonstration we use Visual Studio Code. [Download Visual Studio Code](https://code.visualstudio.com/download).
 
 ## Pre-trained Models
 Many pre-trained models are available in the ONNX format ([ONNX Model Zoo](https://github.com/onnx/models)). There are models for image classification, image recognition, machine translation, language modeling, speech, audio processing, and more. 

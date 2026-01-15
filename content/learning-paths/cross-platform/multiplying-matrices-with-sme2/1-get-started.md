@@ -299,7 +299,7 @@ Then select the **Reopen in Container** menu entry as shown below.
 
 It automatically finds and uses `.devcontainer/devcontainer.json`:
 
-![VSCode Docker alt-text#center](VSCode.png "Figure 1: Setting up the Docker container.")
+![VSCode Docker alt-text#center](vscode.png "Figure 1: Setting up the Docker container.")
 
 All your commands now run within the container, so there is no need to prepend
 them with a Docker invocation, as VS Code handles all this seamlessly for you.
@@ -318,6 +318,7 @@ These Apple devices support SME2 natively.
 | Device                              | Release Date | Chip Options              |
 |-------------------------------------|--------------|---------------------------|
 | iPhone 16                           | 2024         | A18                       |
+| iPhone 17                           | 2025         | A19                       |
 | iPad Pro (7th generation)           | 2024         | M4                        |
 | iMac (2024)                         | 2024         | M4                        |
 | Mac Mini (2024)                     | 2024         | M4, M4 Pro, M4 Max        |

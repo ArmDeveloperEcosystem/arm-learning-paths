@@ -12,7 +12,7 @@ learning_objectives:
 prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).   
     - Any code editor. [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user) is suitable.
-    - Completion of this [Learning Path](/learning-paths/servers-and-cloud-computing/serverless-framework-aws-intro/).
+    - Completion of [Deploy AWS services using the Serverless Framework](/learning-paths/servers-and-cloud-computing/serverless-framework-aws-intro/).
 
 author: Dawid Borycki
 
@@ -37,7 +37,7 @@ operatingsystems:
 further_reading:
     - resource:
         title: Terraform on Azure
-        link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/azure-terraform/
+        link: /learning-paths/servers-and-cloud-computing/azure-terraform/
         type: Tutorial
     - resource:
         title: Azure Virtual Machines with Ampere Altra Arm–based processors—generally available

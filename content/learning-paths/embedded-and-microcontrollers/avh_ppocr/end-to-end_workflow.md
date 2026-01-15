@@ -80,7 +80,7 @@ Training the model usually takes a lot of time. In step 2, an already trained En
 
 By default, the script uses the image shown below (QBHOUSE) as an example to verify the inference results on the Corstone-300 FVP with Arm Cortex-M55.
 
-![QBHOUSE#center](./Figure4.png)
+![QBHOUSE#center](./figure4.png)
 
 Make the script executable with `chmod`.
 

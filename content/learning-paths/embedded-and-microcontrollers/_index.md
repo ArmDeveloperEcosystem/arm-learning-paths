@@ -40,7 +40,6 @@ tools_software_languages_filter:
 - Arm Virtual Hardware: 12
 - Assembly: 1
 - C: 5
-- C++: 1
 - ChatGPT: 1
 - Clang: 1
 - CMSIS: 4
@@ -49,6 +48,7 @@ tools_software_languages_filter:
 - CNN: 1
 - Computer Vision: 1
 - Containerd: 1
+- CPP: 1
 - DetectNet: 1
 - Docker: 10
 - DSTREAM: 2
