@@ -1,6 +1,6 @@
 ---
 title: Benchmark Helm concurrency on a Google Axion C4A virtual machine
-weight: 6
+weight: 10
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
