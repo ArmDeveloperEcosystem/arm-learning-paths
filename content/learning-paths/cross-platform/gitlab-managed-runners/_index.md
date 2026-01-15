@@ -31,6 +31,7 @@ armips:
 tools_software_languages:
     - GitLab
     - Docker
+    - C
 
 operatingsystems:
     - Linux
