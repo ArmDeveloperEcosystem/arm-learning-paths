@@ -1,65 +1,59 @@
 ---
-title: Install Jenkins on Azure Ubuntu Arm64 VM
+title: Install Jenkins on Azure Ubuntu Arm64 virtual machine
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
+To install Jenkins on an Azure Ubuntu 24.04 LTS Arm64 virtual machine, follow these steps.
 
-## Install Jenkins on Azure Cobalt 100
-This guide explains how to install **Jenkins** on an **Azure Ubuntu 24.04 LTS Arm64 VM**.
-
-At the end of this guide, Jenkins will be:
+At the end of the installation, Jenkins is:
 
 * Installed and running as a system service
-* Accessible on **port 8080**
-* Verified on **Arm64 (aarch64)** with **Java 17**
+* Accessible on port 8080
+* Verified on Arm64 (aarch64) with Java 17
 
-### System Preparation
-Updates the OS and installs basic tools required to securely download and manage Jenkins packages.
+## Update the system and install basic tools
+
+Update the OS and install basic tools to securely download and manage Jenkins packages.
 
 ```console
 sudo apt update && sudo apt upgrade -y
 sudo apt install -y curl wget gnupg ca-certificates
 ```
 
-These tools are required to securely download Jenkins packages.
+## Install Java 17
 
-### Install Java 17 (Required)
-Install the supported Java runtime required for running Jenkins LTS reliably.
-Jenkins LTS officially supports **Java 17**.
+Jenkins LTS officially supports Java 17. Install the Java runtime:
 
 ```console
 sudo apt install -y openjdk-17-jdk
 ```
 
-### Verify Java Installation
-Confirms that Java 17 is installed correctly and available in the system PATH.
+Verify Java installation:
 
 ```console
 java -version
 ```
 
-You should see an output similar to:
+The output is similar to:
 ```output
 openjdk version "17.0.17" 2025-10-21
 OpenJDK Runtime Environment (build 17.0.17+10-Ubuntu-124.04)
 OpenJDK 64-Bit Server VM (build 17.0.17+10-Ubuntu-124.04, mixed mode, sharing)
 ```
 
-### Add Jenkins Official Repository (Stable LTS)
-Add the official Jenkins signing key to ensure package authenticity and security.
+## Add the Jenkins repository
+
+Add the official Jenkins signing key to ensure package authenticity:
 
 ```console
 curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | \
 sudo tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
 ```
 
-This key ensures Jenkins packages are trusted.
-
-### Add Jenkins Stable Repository
-Configure the system to download Jenkins LTS packages from the official Jenkins repository.
+Add the Jenkins stable repository:
 
 ```console
 echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
@@ -67,47 +61,46 @@ https://pkg.jenkins.io/debian-stable binary/ | \
 sudo tee /etc/apt/sources.list.d/jenkins.list
 ```
 
-### Install Jenkins (Latest Stable LTS)
-Install the latest stable Jenkins Long-Term Support release on the Arm64 VM.
+## Install Jenkins
+
+Install the latest stable Jenkins LTS release:
 
 ```console
 sudo apt update
 sudo apt install -y jenkins
 ```
 
-This installs the **latest Jenkins LTS available** at install time.
+## Start and enable the Jenkins service
 
-### Start and Enable Jenkins Service
-Starts Jenkins immediately and enables it to launch automatically after system reboot.
+Start Jenkins immediately and enable it to launch automatically after system reboot:
 
 ```console
 sudo systemctl enable jenkins
 sudo systemctl start jenkins
 ```
 
-### Verify Service Status
-Confirms that the Jenkins service is running successfully without errors.
+Verify the service is running:
 
 ```console
 sudo systemctl status jenkins
 ```
 
-You should see an output similar to:
+The output is similar to:
 ```output
 Active: active (running)
 ```
 
-### Verify Jenkins Version
-Validates the installed Jenkins LTS version to ensure correct deployment on Arm64.
+## Verify the Jenkins version
+
+Check the installed Jenkins version:
 
 ```console
 jenkins --version
 ```
 
-You should see an output similar to:
+The output is similar to:
 ```output
 2.528.3
 ```
-This confirm the installed Jenkins LTS version.
 
-This installation confirm Jenkins LTS is successfully deployed on an Azure Ubuntu Arm64 VM.
+Jenkins LTS is now successfully deployed on your Azure Ubuntu Arm64 virtual machine.

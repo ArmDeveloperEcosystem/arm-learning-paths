@@ -1,20 +1,18 @@
 ---
-title: Create a Firewall Rule on GCP
-weight: 7
+title: Create a firewall rule on GCP
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Overview
-
-In this section, you will create a firewall rule in the Google Cloud Console to allow inbound TCP traffic on port 8080.
+To allow inbound TCP traffic on port 8080, create a firewall rule in the Google Cloud Console.
 
 {{% notice Note %}}
-For support on GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
+For more information about GCP setup, see [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
 {{% /notice %}}
 
-## Create a Firewall Rule in GCP
+## Create a firewall rule in GCP
 
 To expose the TCP port 8080, create a firewall rule.
 
