@@ -8,7 +8,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 3
-- Linux: 210
+- Linux: 211
 - macOS: 15
 - Windows: 14
 pinned_modules:
@@ -19,11 +19,11 @@ pinned_modules:
     - migration
 subjects_filter:
 - CI-CD: 12
-- Containers and Virtualization: 37
-- Databases: 22
+- Containers and Virtualization: 36
+- Databases: 23
 - Libraries: 9
 - ML: 36
-- Performance and Architecture: 79
+- Performance and Architecture: 80
 - Storage: 2
 - Web: 17
 subtitle: Optimize cloud native apps on Arm for performance and cost
@@ -73,8 +73,9 @@ tools_software_languages_filter:
 - BOLT: 2
 - bpftool: 1
 - Buildkite: 1
-- C: 11
+- C: 12
 - C#: 2
+- C++: 1
 - Capstone: 1
 - Cargo: 1
 - cassandra-stress: 1
@@ -95,7 +96,7 @@ tools_software_languages_filter:
 - Daytona: 1
 - Demo: 3
 - Django: 2
-- Docker: 29
+- Docker: 30
 - Docker Buildx: 1
 - Envoy: 3
 - Erlang: 1
@@ -118,12 +119,12 @@ tools_software_languages_filter:
 - GitHub CLI: 1
 - GitHub Copilot: 1
 - GitLab: 2
-- GKE: 1
+- GKE: 2
 - glibc: 1
 - Go: 4
 - Golang: 1
 - Google Axion: 3
-- Google Benchmark: 1
+- Google Benchmark: 2
 - Google Cloud: 2
 - Google Cloud Pub/Sub: 1
 - Google Dataflow: 1
@@ -148,7 +149,7 @@ tools_software_languages_filter:
 - KEDA: 1
 - Kedify: 1
 - Keras: 2
-- KinD: 2
+- KinD: 1
 - kube-bench: 1
 - kubectl: 1
 - Kubernetes: 15
@@ -176,8 +177,8 @@ tools_software_languages_filter:
 - NEON: 7
 - Networking: 1
 - Nexmark: 1
+- NGINX: 5
 - nginx: 1
-- NGINX: 4
 - Node.js: 5
 - node.js: 1
 - npm: 3
@@ -190,22 +191,22 @@ tools_software_languages_filter:
 - OpenShift: 1
 - Orchard Core: 1
 - PAPI: 1
-- perf: 6
+- perf: 7
 - Perf: 1
 - PHP: 1
 - PHPBench: 1
 - pika: 1
-- PostgreSQL: 5
+- PostgreSQL: 6
 - Profiling: 1
 - Puppet: 1
-- Python: 38
+- Python: 39
 - Python 3.11: 1
 - PyTorch: 11
 - QEMU: 1
 - RabbitMQ: 1
 - RAG: 1
 - Rails: 1
-- Redis: 4
+- Redis: 5
 - redis-benchmark: 1
 - Remote.It: 2
 - RME: 9
@@ -224,6 +225,7 @@ tools_software_languages_filter:
 - SVE: 5
 - SVE2: 2
 - Sysbench: 1
+- taskset: 1
 - Tekton: 1
 - Telemetry: 1
 - TensorFlow: 3
@@ -252,7 +254,7 @@ tools_software_languages_filter:
 weight: 1
 cloud_service_providers_filter:
 - AWS: 19
-- Google Cloud: 37
+- Google Cloud: 36
 - Microsoft Azure: 19
 - Oracle: 2
 ---

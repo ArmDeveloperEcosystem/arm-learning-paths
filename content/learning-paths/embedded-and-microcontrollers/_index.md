@@ -11,8 +11,8 @@ maintopic: true
 operatingsystems_filter:
 - Android: 2
 - Baremetal: 30
-- Linux: 34
-- macOS: 7
+- Linux: 35
+- macOS: 8
 - RTOS: 10
 - Windows: 5
 subjects_filter:
@@ -20,7 +20,7 @@ subjects_filter:
 - Containers and Virtualization: 6
 - Embedded Linux: 4
 - Libraries: 3
-- ML: 18
+- ML: 19
 - Performance and Architecture: 22
 - RTOS Fundamentals: 5
 - Security: 2
@@ -39,7 +39,9 @@ tools_software_languages_filter:
 - Arm Streamline: 1
 - Arm Virtual Hardware: 12
 - Assembly: 1
-- C: 5
+- Baremetal: 1
+- Bash: 1
+- C: 6
 - ChatGPT: 1
 - Clang: 1
 - CMSIS: 4
@@ -50,7 +52,7 @@ tools_software_languages_filter:
 - Containerd: 1
 - CPP: 1
 - DetectNet: 1
-- Docker: 10
+- Docker: 11
 - DSTREAM: 2
 - Edge AI: 3
 - Edge Impulse: 2
@@ -86,13 +88,14 @@ tools_software_languages_filter:
 - Paddle: 1
 - Performance analysis: 1
 - Porcupine: 1
-- Python: 9
+- Python: 10
 - PyTorch: 4
 - QEMU: 1
 - Raspberry Pi: 7
 - Remote.It: 1
 - Runbook: 4
 - STM32: 2
+- systemd: 1
 - TensorFlow: 3
 - TensorRT: 1
 - tinyML: 2
