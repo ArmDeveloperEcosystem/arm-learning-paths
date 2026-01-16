@@ -105,7 +105,7 @@ With the port open, substitute the public IP address of the instance instead of 
 
 On ChromeOS you can use the Linux configuration settings to automatically do port forwarding. No SSH connection is needed.
 
-![port forwarding #center](/install-guides/_images/ChromeOSpf.png)
+![port forwarding #center](/install-guides/_images/chromeospf.png)
 
 ## What other configuration options are available?
 

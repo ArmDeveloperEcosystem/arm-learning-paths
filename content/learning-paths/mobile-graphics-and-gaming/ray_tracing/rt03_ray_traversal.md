@@ -18,7 +18,7 @@ Once ray traversal is complete, one of two things can happen. If the ray does no
 
 If instead you have a confirmed hit, the GPU invokes our `Closest-Hit` shader. In this shader, you can then determine what data you need from the object that you intersected, and return that data to the `Ray Generation` shader. For example, you might illuminate the object and later store the generated color into an output image.
 
-![Diagram of Ray Tracing Pipeline #center](images/RTPipeline_diagram.svg "Diagram of Ray Tracing Pipeline")
+![Diagram of Ray Tracing Pipeline #center](images/rtpipeline_diagram.svg "Diagram of Ray Tracing Pipeline")
 
 ### Ray query
 
@@ -32,7 +32,7 @@ This makes it easy to add ray tracing to existing shaders, but it means that you
 * In non-opaque geometry, you need to use `rayQueryConfirmIntersectionEXT` to confirm non-opaque candidates. 
 * If you only have opaque geometry, you can call `rayQueryProceedEXT` and ignore its return value.
 
-![Diagram of Ray Query #center](images/RQuery_diagram.svg "Diagram of Ray Query")
+![Diagram of Ray Query #center](images/rquery_diagram.svg "Diagram of Ray Query")
 
 * Once the ray traversal is complete, you can use `rayQueryGetIntersectionTypeEXT` to query if you have hit something, or missed. 
 

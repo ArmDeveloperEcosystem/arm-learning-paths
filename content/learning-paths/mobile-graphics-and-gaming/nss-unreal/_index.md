@@ -15,8 +15,8 @@ learning_objectives:
 
 prerequisites:
     - Windows 11
-    - Unreal Engine 4.27, 5.4 or 5.5 (with the Templates and Feature Pack enabled)
-    - Visual Studio 2022 (with Desktop Development with C++ and .NET desktop build tools)
+    - Unreal Engine 4.27 or 5.4-5.6 (with the Templates and Feature Pack enabled)
+    - Visual Studio (with Desktop Development with C++ and .NET desktop build tools)
 
 
 author: Annie Tallund
@@ -26,6 +26,7 @@ skilllevels: Introductory
 subjects: ML
 armips:
     - Mali
+    - Immortalis
 tools_software_languages:
     - Unreal Engine
     - Vulkan SDK

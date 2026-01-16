@@ -44,7 +44,7 @@ The build will be executed, and then the app will be copied and installed on the
 
 After opening the app, you will see the splash screen:
 
-![Loading screenshot](Loading_page.png)
+![Loading screenshot](loading_page.png)
 
 Finally, you can use the UI to chat with the app. Try uploading an image and ask a question on it.
 

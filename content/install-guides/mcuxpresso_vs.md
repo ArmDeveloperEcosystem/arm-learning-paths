@@ -65,7 +65,7 @@ Download and run the installer.
 
 Select one or more packages and click `Install`. 
 
-![MCUXpresso Installer #center](/install-guides/_images/MCUXpresso_Installer.png)
+![MCUXpresso Installer #center](/install-guides/_images/mcuxpresso_installer.png)
 
 ### Are there other embedded development extensions for VS Code?
 

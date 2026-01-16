@@ -10,16 +10,18 @@ layout: learningpathall
 
 The Pipeline script has multiple sections where each section instructs the pipeline operator on what todo or use and how each Stage looks like.
 
-### First Section: Stages
+### First Section: The stages
 
-In this section we are describing how many sequential stages will our pipeline have and what are their names (ex. **`Build, Test and Deploy`**). If we would like all the stages or jobs to run simultaneously then we simply don't define this section.
+In this section you are describing how many squentional stages that your pipeline will have and what are their names (ex. **`Build, Test and Push`**). If you would like all the stages or jobs to run simultinously then you simply don't define this section.
 
-### Second Section: Build-Job part of the Build stage
+I am also defining some **`Variables`** that I will use in the other sections for simplisty.
 
-In this section we are defining the Build-Job as part of the Build stage. This stage will run on Gitlab-Hosted runner that uses Linux OS on Arm64 instance of size small.
+### Second Section: build_test_push part for the Build stage
+
+In this section you are defining the build_test_push as the Build stage. This stage will run on Gitlab-Hosted runner that uses Linux OS on Arm64 instance of size small. I used the **`lscpu`** command to print out the CPU information for reference.
 
 {{% notice Important Note %}}
-Gitlab offers 3 Arm64 based Instances that use Linux as their OS.
+Gitlab offers 3 Arm64 based Instances that use Linux as their OS. In the Free tier you can only use the small version.
 
 - saas-linux-small-arm64
 - saas-linux-medium-arm64
@@ -29,7 +31,11 @@ For more information about all Arm and other available Gitlab-hosted runners che
 
 {{%/notice%}}
 
-### Other Sections: 
+I am also saving my Docker image in GitLab registery because it's the easiest way to do that but you can modify your pipeline to save your image in any other registery that you prefer. To get the Gitlab registery creditiationals I am using **`$CI`** variables that are defined in the Gitlab enviornment and saving them in Docker for simplisty. Please note it's always recommended to encrypt your information or save it in a sercrets/passwords manages.  
+
+### Third Section: 
+
+You will notice that in this stage I am simply testing that I am able to get the image that I saved in my registery before and pushing it back as the latest version.
 
 The rest of the other sections follow the same pattern. You will notice that the **`Test`** stage for example has 2 Jobs in it (unit-test-job and lint-test-job). The **`Deploy`** stage here has only 1 Job called **`deploy-job`**.
 As you get to learn more YML scripting you will be able to add a lot more complex functionality to your pipelines.
@@ -45,6 +51,29 @@ From the left hand side panel, Navigate to **`Build`** then to **`Pipeline`** th
 
 To check the status of your pipeline and to check the output of any of it's Jobs simply click on any of the **`Jobs`** as the image below (with red rectangle around them).
 ![pipeline-execution #center](_images/pipeline-execution.webp)
+
+You can also download the docker image that you saved in your gitlab registery and run it on an Arm64 instance/box for testing using the following bash script.
+
+```bash
+docker login registry.gitlab.com
+docker pull registry.gitlab.com/<namespace>/<project>:latest
+docker run --rm registry.gitlab.com/<namespace>/<project>:latest
+```
+
+If everything works correctly you should see an output like in the box below.
+
+```output
+Hello from an Arm64 Docker image built on GitLab hosted Arm runners!
+```
+
+You can also check your Gitlab Registery by going to your project then:
+
+- Go to Deploy → Container Registry
+- You should see new-docker
+- With tags like latest and **`<commit-sha>`**
+
+If it’s there, the registry did its job.
+
 
 ## Gitlab Helpful tools
 
