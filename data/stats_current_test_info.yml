@@ -36,7 +36,8 @@ sw_categories:
       tests_and_status: []
     aperf:
       readable_title: APerf
-      tests_and_status: []
+      tests_and_status:
+      - ubuntu:latest: passed
     arduino-pico:
       readable_title: Arduino core for the Raspberry Pi Pico
       tests_and_status: []
