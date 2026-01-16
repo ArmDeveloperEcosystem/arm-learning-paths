@@ -77,7 +77,7 @@ A simple project is provided to accompany this Learning Path. To open it in Unit
 
 You will see your project listed in the _Projects_ tab in Unity Hub.
 
-- You can now click on the project to open it. The sample was created with Unity 2022.3.18f1; if you use a different version, you will get a warning. The project is very simple and should be safe to convert. However, if in doubt, install 2022.3.18f1 via the Unity Hub as already shown.
+- You can now click on the project to open it. The sample was created with Unity 2022.3.18f1; if you use a different version, you will get a warning. The project is simple and should be safe to open in your installed version. However, if in doubt, install 2022.3.18f1 via the Unity Hub as already shown.
 
 - The project will now open in Unity. Once loaded (the first time can take a while) find the scene folder, open the sample scene, and then click the _Play_ button to run the sample. This will run the project inside the editor. You will see a spinning cube.
 
