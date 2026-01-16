@@ -1,5 +1,5 @@
 ---
-title: Install RabbitMQ on Microsoft Azure Cobalt 100
+title: Install RabbitMQ on Azure Cobalt 100
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -53,7 +53,8 @@ echo 'export PATH=$ERLANG_HOME/bin:$PATH' | sudo tee -a /etc/profile.d/erlang.sh
 ```
 
 ### Download and install RabbitMQ
-This section downloads the official RabbitMQ 4.2.0 generic Unix distribution and installs it under `/opt/rabbitmq`.
+
+Download the official RabbitMQ 4.2.0 generic Unix distribution and install it under `/opt/rabbitmq`.
 
 ```console
 cd ~
@@ -66,8 +67,9 @@ sudo mkdir -p /var/lib/rabbitmq /var/log/rabbitmq
 sudo chown -R $USER:$USER /var/lib/rabbitmq /var/log/rabbitmq
 ```
 
-#### Update PATH environment variable
-This step makes RabbitMQ CLI tools available in the current shell and should be persisted for future sessions.
+## Update PATH environment variable
+
+Make RabbitMQ CLI tools available in the current shell. Add this to `~/.bashrc` or `~/.profile` for persistence across sessions.
 
 ```console
 export PATH=/usr/local/erlang-26/bin:/opt/rabbitmq/sbin:$PATH
@@ -75,8 +77,9 @@ export PATH=/usr/local/erlang-26/bin:/opt/rabbitmq/sbin:$PATH
 
 Add this line to `~/.bashrc` or `~/.profile` for persistence.
 
-### Configure RabbitMQ systemd service
-This section configures RabbitMQ to run as a managed systemd service, enabling automatic startup and controlled lifecycle management.
+## Configure RabbitMQ systemd service
+
+Configure RabbitMQ to run as a managed systemd service, enabling automatic startup and controlled lifecycle management.
 
 Create `/etc/systemd/system/rabbitmq.service`:
 

@@ -39,7 +39,7 @@ Creating a virtual machine based on Azure Cobalt 100 is no different from creati
 
 ![Azure portal VM creation — Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/instance4.png "Figure 4: Download Private key and Create Resources")
 
-11. Your virtual machine should be ready and running within no time. You can SSH into the virtual machine using the private key, along with the Public IP details.
+Your virtual machine deploys within a few minutes. SSH into the virtual machine using the downloaded private key and the public IP address.
 
 ![Azure portal VM creation — Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/final-vm.png "Figure 5: VM deployment confirmation in Azure portal")
 
