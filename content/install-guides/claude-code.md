@@ -1,8 +1,6 @@
 ---
 title: Claude Code
 
-draft: true
-
 author: Pareena Verma
 minutes_to_complete: 10
 official_docs: https://code.claude.com/docs
@@ -18,15 +16,15 @@ Claude Code is an AI-powered command-line tool that helps you build features, de
 
 Claude Code works seamlessly on Arm-based systems, including Linux distributions running on Arm servers, macOS on Apple Silicon, and Windows on Arm devices.
 
-## What should I do before installing Claude Code?
+## Review prerequisites 
 
 You need a Claude account to use Claude Code. A Claude.ai account is recommended, though you can also use a Claude Console account.
 
 If you don't have a Claude account, visit [Claude.ai](https://claude.ai/) and sign up.
 
-Claude Code is only available for paid Pro and Max accounts, if not using API credits. Visit [Claude pricing](https://www.anthropic.com/pricing) to review the options.
+Claude Code is only available for paid Pro and Max accounts, if not using API credits. Visit [Claude Pricing](https://www.anthropic.com/pricing) to review the options.
 
-## How do I install Claude Code?
+## Install Claude Code
 
 Claude Code is a terminal application that works on macOS, Linux, and Windows systems, including Arm-based platforms.
 
@@ -46,7 +44,7 @@ Add Claude Code to your PATH:
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc && source ~/.bashrc
 ```
 
-### Install on macOS (Apple Silicon)
+## Install on macOS (Apple Silicon)
 
 On macOS, you can use the installation script:
 
@@ -60,7 +58,7 @@ Or install using Homebrew:
 brew install --cask claude-code
 ```
 
-### Install on Windows on Arm
+## Install on Windows on Arm
 
 On Windows systems, including Windows on Arm, run the following PowerShell command:
 
@@ -70,7 +68,7 @@ irm https://claude.ai/install.ps1 | iex
 
 For other options, please [see the Claude Code setup page](https://code.claude.com/docs/en/setup).
 
-### Verify installation
+## Verify installation
 
 Confirm Claude Code is installed by checking the version:
 
@@ -84,48 +82,52 @@ The output shows the installed version:
 2.1.7 (Claude Code)
 ```
 
-## How do I authenticate Claude Code?
+## Authenticate Claude Code
 
 After installing Claude Code, you need to authenticate:
 
-1. Navigate to a project directory:
+Navigate to a project directory:
 
 ```console
 cd your-project
 ```
 
-2. Start Claude Code:
+Start Claude Code:
 
 ```console
 claude
 ```
 
-3. Choose your configuration options from the wizard (dark mode, etc).
-4. On first use, Claude Code prompts you to log in through your browser if you are using your Claude account. If you are on a remote machine, Claude Code will give you a link to paste into a local browser, which will then provide you with a code to paste into Claude Code.
-5. Accept the acknowledgements in Claude Code and the application will be ready to use.
+Configure your preferences when prompted (dark mode, editor settings, etc.).
+
+On first use, Claude Code prompts you to authenticate:
+
+- If using Claude.ai, authenticate through your browser
+- If on a remote machine, paste the provided link into a local browser, then enter the authentication code in Claude Code
+
+Accept the acknowledgements to complete setup.
 
 Claude Code automatically saves your authentication credentials for future sessions.
 
-## How do I confirm Claude Code is working?
+## Confirm Claude Code is working
 
-Test Claude Code by asking it to perform a simple task:
+Test Claude Code by asking it to perform a simple task.
 
-1. In your terminal, start Claude Code in a project directory:
+Start Claude Code in a project directory:
 
 ```console
 claude
 ```
 
-2. Type a request, for example:
+Type a request, for example:
 
 ```console
 > Create a Python function to calculate fibonacci numbers for my Arm machine
 ```
 
-3. Claude Code analyzes your request, creates a plan, and generates the code
-4. Review the proposed changes before accepting them
+Claude Code analyzes your request, creates a plan, and generates the code.
 
-Claude Code shows you a preview of changes before applying them, giving you control over what gets modified in your codebase.
+Review the proposed changes before accepting them. Claude Code shows you a preview of changes before applying them, giving you control over what gets modified in your codebase.
 
 If Claude Code doesn't respond:
 - Verify you're authenticated (run `claude` and check for authentication prompts)
@@ -134,13 +136,17 @@ If Claude Code doesn't respond:
 - Try restarting Claude Code
 
 
-## How do I use MCP Servers with Claude Code?
+You’re now ready to use Claude Code.
+{{% notice Note %}} The sections below are optional and cover advanced integrations, including using MCP servers with Claude Code on Arm.{{% /notice %}}
+
+
+## Use MCP Servers with Claude Code
 
 Model Context Protocol (MCP) Servers extend Claude Code's capabilities by providing specialized tools and knowledge bases. Claude Code can connect to MCP servers to access domain-specific expertise and functionality.
 
 The Arm MCP Server provides AI assistants with tools and knowledge for Arm architecture development, migration, and optimization. This is particularly useful when working on Arm-based systems.
 
-### What tools does the Arm MCP Server provide?
+## Arm MCP Server tools
 
 The Arm MCP Server includes several tools designed for Arm development:
 
@@ -150,7 +156,7 @@ The Arm MCP Server includes several tools designed for Arm development:
 - mca (Machine Code Analyzer): Analyzes assembly code for performance on Arm architectures
 - check_image: Verifies Docker image architecture compatibility
 
-### How do I configure the Arm MCP Server with Claude Code?
+## Configure the Arm MCP Server with Claude Code
 
 You need Docker running on your system to use the Arm MCP Server. See the [Docker install guide](/install-guides/docker/) for instructions.
 
@@ -170,7 +176,7 @@ Configure the Arm MCP Server using the `claude mcp add` command. You can configu
 Choose the appropriate scope based on your needs. Project scope is recommended for team collaboration, while user scope is useful for personal tools you use across multiple projects.
 {{% /notice %}}
 
-#### Configure for a specific project (local scope)
+**Configure for a specific project (local scope)**
 
 Navigate to your project directory and add the Arm MCP Server:
 
@@ -181,7 +187,7 @@ claude mcp add --transport stdio arm-mcp -- docker run --rm -i --pull=always -v 
 
 This configuration is stored in `~/.claude.json` under your project's path and is only accessible when working in this directory.
 
-#### Configure for all projects (user scope)
+**Configure for all projects (user scope)**
 
 To make the Arm MCP Server available across all your projects:
 
@@ -191,7 +197,7 @@ claude mcp add --scope user --transport stdio arm-mcp -- docker run --rm -i --pu
 
 This configuration is stored in `~/.claude.json` and is accessible from any project directory.
 
-#### Configure for team sharing (project scope)
+**Configure for team sharing (project scope)**
 
 To share the MCP server configuration with your team via version control:
 
@@ -202,7 +208,7 @@ claude mcp add --scope project --transport stdio arm-mcp -- docker run --rm -i -
 
 This creates a `.mcp.json` file in your project root that can be committed to version control.
 
-### How do I analyze a local codebase with the Arm MCP Server?
+## Analyze a local codebase with the Arm MCP Server
 
 The Arm MCP Server automatically mounts your current working directory to the `/workspace` folder inside the Docker container when you use the configuration commands shown above.
 
@@ -212,7 +218,7 @@ To analyze a different directory, modify the volume mount in the `docker run` co
 claude mcp add --transport stdio arm-mcp -- docker run --rm -i -v "/Users/username/myproject:/workspace" armlimited/arm-mcp:latest
 ```
 
-### How do I verify the Arm MCP Server is working?
+## Verify the Arm MCP Server is working
 
 List configured MCP servers:
 
@@ -248,7 +254,7 @@ or
 
 You can also use the `/mcp` command within Claude Code to see the status of all connected MCP servers and their available tools.
 
-### Example prompts using the Arm MCP Server
+## Example prompts using the Arm MCP Server
 
 Here are some example prompts that use the Arm MCP Server tools:
 
@@ -258,7 +264,7 @@ Here are some example prompts that use the Arm MCP Server tools:
 - `Find learning resources about migrating from x86 to Arm`
 - `Analyze this assembly code for performance on Arm processors`
 
-### Managing MCP servers
+## Manage MCP servers
 
 Remove an MCP server:
 
@@ -274,7 +280,7 @@ Check MCP server status within Claude Code:
 > /mcp
 ```
 
-### Troubleshooting MCP Server connections
+## Troubleshoot MCP Server connections
 
 If the Arm MCP Server doesn't connect:
 
@@ -292,4 +298,3 @@ If you encounter issues or have questions, reach out to mcpserver@arm.com.
 
 Create custom prompts for common tasks in your workflow. Refer to the [Claude Code documentation](https://code.claude.com/docs) for advanced configuration options.
 
-You're ready to use Claude Code with the Arm MCP Server to enhance your Arm development workflow.

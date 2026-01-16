@@ -1,16 +1,18 @@
 ---
 title: Install and validate Helm on Google Cloud C4A Arm-based VMs
 
-minutes_to_complete: 45
+minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic intended for developers who want to get hands-on experience using Helm on Linux Arm64 systems, specifically Google Cloud C4A virtual machines powered by Axion processors.
 
 
 learning_objectives:
   - Provision an Arm-based SUSE Linux Enterprise Server (SLES) virtual machine on Google Cloud (C4A with Axion processors)
-  - Install Helm and kubectl on a SUSE Arm64 (C4A) instance
-  - Create and validate a local Kubernetes cluster (KinD) on Arm64
-  - Verify Helm functionality by performing install, upgrade, and uninstall workflows
+  - Install and configure Helm and kubectl on a SUSE Arm64 (C4A) instance
+  - Create and connect to a Google Kubernetes Engine (GKE) cluster running on Arm-based nodes
+  - Deploy PostgreSQL, Redis, and NGINX on GKE using official Helm charts
+  - Validate Helm workflows by performing install, upgrade, rollback, and uninstall operations
+  - Verify application readiness and service access for PostgreSQL, Redis, and NGINX on GKE
   - Observe Helm behavior under concurrent CLI operations on an Arm64-based Kubernetes cluster
 
 prerequisites:
@@ -32,8 +34,11 @@ armips:
 tools_software_languages:
   - Helm
   - Kubernetes
-  - KinD
   - kubectl
+  - GKE
+  - PostgreSQL
+  - Redis
+  - NGINX
     
 operatingsystems:
   - Linux
@@ -56,6 +61,11 @@ further_reading:
       title: Kubernetes documentation
       link: https://kubernetes.io/docs/
       type: documentation
+
+  - resource:
+      title: Bitnami Helm Charts
+      link: https://github.com/bitnami/charts
+      type: documentation    
 
 weight: 1
 layout: "learningpathall"

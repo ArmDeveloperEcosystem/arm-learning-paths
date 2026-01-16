@@ -13,6 +13,11 @@ This repository's release package contains everything you need to set up NSS for
 
 Download the latest release `.zip` and extract it on your Windows machine. 
 
+{{% notice Unreal Engine 5.5 plugin %}}
+For this UE version, the steps will be slightly different. Refer to the repository documentation for more information.
+{{% /notice %}}
+
+
 ## Enable NSS for Unreal Engine
 
 1. Open Unreal Engine and create a new **Third Person** template project using the **C++** option.
@@ -49,7 +54,7 @@ The plugin is included in the release package you downloaded in the previous sec
 2.	Reopen Unreal Engine. When prompted, confirm that you want to enable the plugin.
 3.	Rebuild your project from source in Visual Studio.
 4.	Verify the installation by opening Edit → Plugins in Unreal Engine and confirming that the NSS plugin is enabled. Restart Unreal Engine if prompted.
-![Unreal Engine plugins window showing NSS and NNERuntimeRDGMLExtensionsForVulkan enabled#center](./images/verify_plugin_enabled.png "Figure 5: Verify plugin installation in Unreal Engine.")
+![Unreal Engine plugins window showing NSS enabled#center](./images/verify_plugin_enabled.png "Figure 5: Verify plugin installation in Unreal Engine.")
 
 With the emulation layers and plugins configured, you're ready to run Neural Super Sampling in Unreal Engine. Continue to the next section to test the integration.
 
