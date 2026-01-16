@@ -493,6 +493,49 @@ document.body.appendChild(formScript);
             </div>
 
 
+
+            <div id="arm-account-div" class="content-box">
+                <h4 id="arm-account-dynamic-header"></h4>
+                <p id="arm-account-dynamic-paragraph"></p>
+                <ads-cta-button id="arm-account-signup-cta" level="primary" style="display: none">Create Arm Account</ads-cta-button>
+                <!-- https://developer.arm.com/register -->
+                <ads-cta-button id="arm-account-signup-view-badges-cta" level="secondary" style="display: none">View your badges</ads-cta-button>
+
+                <script>
+                    // read msal from window, and check if user is logged in
+                    document.addEventListener("DOMContentLoaded", function() {
+                        
+                        const msalInstance = window.msalInstance;
+                        if (isUserSignedIn()) {
+                            // Additional logic for signed-in users can be added here
+                            document.getElementById('arm-account-dynamic-header').textContent = "Welcome back!";
+                            document.getElementById('arm-account-dynamic-paragraph').textContent = "You're already signed in to your Arm Account. Continue completing Learning Paths to earn more badges on Arm Community!";
+                            document.getElementById('arm-account-signup-view-badges-cta').style.display = 'block';
+                            document.getElementById('arm-account-signup-cta').style.display = 'none'; 
+                            
+                        } else {
+                            document.getElementById('arm-account-dynamic-header').textContent = "Sign up to Arm Account";
+                            document.getElementById('arm-account-dynamic-paragraph').textContent = "Get badges for completing Learning Paths and show them off on Arm Community!";
+                            document.getElementById('arm-account-signup-cta').style.display = 'block';
+                            document.getElementById('arm-account-signup-view-badges-cta').style.display = 'none';
+
+                        }
+
+
+                        document.getElementById('arm-account-signup-cta').addEventListener("click", () => {
+                            window.open("https://developer.arm.com/register","_blank");
+                        });
+                        document.getElementById('arm-account-signup-view-badges-cta').addEventListener("click", () => {
+                            window.open("https://community.arm.com/","_blank");
+                        });
+
+
+                    });
+                </script>
+            </div>
+
+            
+            <!--
             <div id="event-div" class="content-box">
                 {{ $csv := resources.Get "events.csv" }}
                 {{ $csv_content := $csv | transform.Unmarshal (dict "delimiter" ",") }}
@@ -574,33 +617,8 @@ document.body.appendChild(formScript);
                         };
                     </script>
                 {{ end }}
-
-
-<!--    NEWSLETTER INFORMATION
-                <h4>Stay up to Date</h4>
-               
-                <p>Sign up for the Arm {{(index .learningpathfiles 0).Parent.Title}} newsletter today!</p>
-                
-                <div class="placeholder-div">
-                    name@email.com
-                </div>
-                <div class="placeholder-div">
-                    Enter Country/Region
-                </div>
-                <style>
-                    .placeholder-div {
-                        border: 1px solid var(--arm-dark-grey);
-                        border-radius: 10px; 
-                        padding: 8px;
-                        width: 100%;
-                        color: var(--arm-dark-grey);
-                        margin-bottom: 8px;
-                    }
-                </style>
-                  
-                <ads-button level="primary" sr-label="primary button">Subscribe</ads-button>
-            -->
             </div>
+            -->
         </div>
     </div>
 </div>  

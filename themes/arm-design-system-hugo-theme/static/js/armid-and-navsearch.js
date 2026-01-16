@@ -1,6 +1,4 @@
-
-
-// Add event listener to wait for the ARMID to be ready
+// Handle search
 document.addEventListener('arm-top-nav-search', function(event) {
     console.log('Search fired');
     
@@ -15,5 +13,3 @@ document.addEventListener('arm-top-nav-search', function(event) {
     window.open(developer_search_url, '_blank');
 
 });
-
-

@@ -30,12 +30,30 @@ Website homepage.
     <ads-cta-button size="medium" class='u-margin-bottom-1 u-margin-top-2' onclick="window.location.href='/install-guides'" level="secondary">Install Guides for Tools</ads-cta-button>
 </div>
 
-<chat-ai app-name="learning-paths" redirect-url="https://internal.learn.arm.com" ></chat-ai>
+<!-- 
+<chat-ai app-name="learning-paths" redirect-url="http://internal.learn.arm.com" ></chat-ai>
+-->
 
 
-{{partial "filter-search-sort/pagefind-on-homepage.html" .}}
+<!-- Search functionality -->
+<div class="c-row u-margin-top-3">
+    <div class="c-col">
+        <ads-search id="homepage-search-bar" has-search-button placeholder="Search all Learning Paths and Install Guides..." search-index="learning-paths" ></ads-search>
+    </div>
+</div>
+<script>
+    document.getElementById('homepage-search-bar').searchSubmitHandler = (event) => {
+        var user_search_query = event.value;
+        // Construct the search URL with the query parameter
+        var developer_search_url = 'https://developer.arm.com/search#q=' + encodeURIComponent(user_search_query) + '&f-navigationhierarchiescontenttype=Learning%20Path&numberOfResults=48';
 
-{{ partial "general-formatting/auth_widget.html" . }}
+        // Redirect the user to the search results page in a new tab
+        window.open(developer_search_url, '_blank');
+    
+    } 
+</script>
+
+
 
 <!-- List of Learning Path Topics & Install Guide -->
 <div class="c-row u-margin-left-1">
