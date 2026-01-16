@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Create a single-threaded Python benchmark
 
-Now that you have a program that utilizes all available CPU cores, you'll create a single-threaded program that's sensitive to execution variations. This simulates scenarios like a log ingesting process or a single-threaded consumer that needs to maintain a steady pace.
+Create a single-threaded program that's sensitive to execution variations. This simulates scenarios like a log ingesting process or a single-threaded consumer that needs to maintain a steady pace.
 
 Check that you have Python installed:
 
@@ -16,13 +16,13 @@ Check that you have Python installed:
 python --version
 ```
 
-You should see the version of Python:
+The output is similar to:
 
 ```output
 Python 3.12.3
 ```
 
-If Python isn't installed, use your Linux package manager to install it or refer to the  [Python downloads page](https://www.python.org/downloads/).
+If Python isn't installed, use your Linux package manager to install it or see the [Python downloads page](https://www.python.org/downloads/).
 
 Next, create a virtual environment to install packages without interfering with system packages:
 
@@ -32,7 +32,7 @@ source venv/bin/activate
 pip install matplotlib
 ```
 
-Use an editor to create a file named `single_threaded_python_script.py` with the following code. This script repeatedly measures the execution time of a computational function and writes the results to `data.txt`. It then generates time-series graphs to illustrate the effects of thread pinning:
+Create a file named `single_threaded_python_script.py` with the following code. This script measures the execution time of a computational function, writes results to `data.txt`, and generates time-series graphs to illustrate the effects of thread pinning:
 
 ```python
 #!/usr/bin/env python3
@@ -119,7 +119,7 @@ chmod +x single_threaded_python_script.py
 
 ## Compare thread pinning strategies
 
-You'll explore three different scenarios to understand the trade-offs of thread pinning:
+Explore three different scenarios to understand the trade-offs of thread pinning:
 
 1. Free: The operating system allocates both programs to any of four cores
 2. Shared-pinned: The Python script is pinned to core 0, but `prog` can run on any core
@@ -149,9 +149,9 @@ wait
 
 #### Shared script
 
-The next script pins the Python script to core 0, while `prog` can use any of the first four cores:
+The next script pins the Python script to core 0, while `prog` can use any of the first four cores.
 
-Use an editor to create a file named `shared-pinned.sh` with the following code:
+Create a file named `shared-pinned.sh` with the following code:
 
 ```bash
 #!/bin/bash
@@ -167,9 +167,9 @@ wait
 
 #### Exclusive script
 
-The last one gives the Python script exclusive access to core 0, and `prog` uses cores 1-3:
+The last one gives the Python script exclusive access to core 0, and `prog` uses cores 1-3.
 
-Use a text editor to create a file named `exclusive.sh` with the following code:
+Create a file named `exclusive.sh` with the following code:
 
 ```bash
 #!/bin/bash
@@ -198,7 +198,7 @@ chmod +x free-script.sh shared-pinned.sh exclusive.sh
 
 The terminal output shows the execution time for `prog` under the three scenarios. The Python script also generates three files: `Free.jpg`, `Exclusive.jpg`, and `Shared.jpg`.
 
-As the terminal output below shows, the `free-script.sh` scenario (where the Linux scheduler assigns threads to cores without restriction) completes `prog` the fastest at 5.8 seconds. The slowest execution occurs when the Python script has exclusive access to CPU 0, which is expected because you've constrained `prog` to fewer cores:
+The terminal output shows the `free-script.sh` scenario (where the Linux scheduler assigns threads to cores without restriction) completes `prog` the fastest at 5.8 seconds. The slowest execution occurs when the Python script has exclusive access to CPU 0, which is expected because `prog` is constrained to fewer cores:
 
 ```output
 Answer = 3.14159        5 iterations took 5838 milliseconds
@@ -210,21 +210,21 @@ However, this represents a trade-off with the Python script's performance.
 
 ### Free scenario results
 
-Looking at `Free.jpg`, you can see periodic zones of high latency (3.5 ms) that likely occur when there's contention between `prog` and the Python script:
+The `Free.jpg` graph shows periodic zones of high latency (3.5 ms) that likely occur when there's contention between `prog` and the Python script:
 
-![Time-series graph showing execution time varying between 0.5ms and 3.5ms with periodic spikes, indicating contention between processes when both are free to run on any core](free.jpg "Free scenario: both programs can run on any of four cores")
+![Time-series line graph plotting execution time in milliseconds on the y-axis against sample number on the x-axis. The line fluctuates between approximately 0.5ms and 3.5ms, showing periodic spikes and zones of higher latency. The graph has a grid background and is titled 'Free'. The pattern indicates contention between processes when both can run on any core](free.jpg "Free scenario: both programs can run on any of four cores")
 
 ### Shared-pinned scenario results
 
-When pinning the Python script to core 0 while `prog` remains free to use any cores, you observe similar behavior:
+When pinning the Python script to core 0 while `prog` remains free to use any cores, the behavior is similar:
 
-![Time-series graph showing execution time with similar periodic spikes as the free scenario, indicating continued contention despite pinning the Python script](pinned_shared.jpg "Shared-pinned scenario: Python script pinned to core 0, prog free to run on any core")
+![Time-series line graph plotting execution time in milliseconds against sample number. The line shows similar behavior to the free scenario with fluctuations between approximately 0.5ms and 3.5ms and periodic spikes. The graph has a grid background and is titled 'Shared'. The pattern shows continued contention despite pinning the Python script to a specific core](pinned_shared.jpg "Shared-pinned scenario: Python script pinned to core 0, prog free to run on any core")
 
 ### Exclusive scenario results
 
-When the Python script has exclusive access to core 0, you observe more consistent execution time around 0.49 ms because the script doesn't contend with any other demanding processes:
+When the Python script has exclusive access to core 0, the execution time is more consistent around 0.49 ms because the script doesn't contend with any other demanding processes:
 
-![Time-series graph showing consistent execution time around 0.49ms with minimal variation, demonstrating stable performance when the Python script has exclusive core access](exclusive.jpg "Exclusive scenario: Python script has exclusive access to core 0, prog runs on cores 1-3")
+![Time-series line graph plotting execution time in milliseconds against sample number. The line shows consistent, stable execution time around 0.49ms with minimal variation throughout the entire sample range. The graph has a grid background and is titled 'Exclusively Pinned'. The flat, steady pattern demonstrates stable performance when the Python script has exclusive access to a dedicated core](exclusive.jpg "Exclusive scenario: Python script has exclusive access to core 0, prog runs on cores 1-3")
 
 ## Understanding the trade-offs
 
@@ -238,10 +238,10 @@ Multiple factors influence this behavior, including the Linux scheduler algorith
 
 ## What you've accomplished and what's next
 
-In this section, you've:
+In this section:
 - Created a single-threaded Python benchmark that measures execution time variations
 - Used `taskset` to pin processes to specific CPU cores
 - Compared three thread pinning strategies: free, shared-pinned, and exclusive
 - Analyzed the trade-offs between throughput and latency consistency
 
-In the next section, you'll learn how to use source code modifications and environment variables to control thread affinity programmatically.
+Next, you learn how to control thread affinity programmatically using source code modifications.
