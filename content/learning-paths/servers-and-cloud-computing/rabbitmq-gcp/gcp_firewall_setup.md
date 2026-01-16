@@ -1,22 +1,18 @@
 ---
-title: Create a Firewall Rule on GCP
+title: Create a firewall rule for RabbitMQ
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Overview
-
-In this section, you create a Firewall Rule within Google Cloud Console to expose TCP port 15672.
+Create a firewall rule in Google Cloud Console to expose TCP port 15672 for the RabbitMQ management interface.
 
 {{% notice Note %}}
 For support on GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
 {{% /notice %}}
 
-## Create a Firewall Rule in GCP
-
-To expose TCP port 15672, create a firewall rule.
+## Configure the firewall rule
 
 Navigate to the [Google Cloud Console](https://console.cloud.google.com/), go to **VPC Network > Firewall**, and select **Create firewall rule**.
 
