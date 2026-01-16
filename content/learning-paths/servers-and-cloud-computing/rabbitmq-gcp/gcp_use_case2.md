@@ -26,12 +26,12 @@ The architecture follows this flow:
 - A Python worker consumes the message
 - The worker simulates sending a WhatsApp notification
 
-### Prerequisites
+## Prerequisites
 
 - GCP SUSE Arm64 virtual machine
-- RabbitMQ is installed and running
+- RabbitMQ installed and running
 - RabbitMQ Management Plugin enabled
-- Python 3.8+
+- Python 3.8 or later
 - `pika` Python client library installed
 
 ## Install Python dependencies

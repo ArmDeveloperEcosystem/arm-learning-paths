@@ -1,5 +1,5 @@
 ---
-title: Implement event processing with Python workers
+title: RabbitMQ use Case 1 - event processing with Python Workers
 weight: 10
 
 ### FIXED, DO NOT MODIFY

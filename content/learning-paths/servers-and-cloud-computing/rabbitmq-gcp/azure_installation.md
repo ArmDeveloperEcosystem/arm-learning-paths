@@ -44,7 +44,7 @@ make clean
 make -j$(nproc)
 sudo make install
 ```
-### Make Erlang PATH persistent (IMPORTANT)
+### Make Erlang PATH persistent 
 This step ensures the Erlang binaries are permanently available in the system PATH across sessions and reboots.
 
 ```console

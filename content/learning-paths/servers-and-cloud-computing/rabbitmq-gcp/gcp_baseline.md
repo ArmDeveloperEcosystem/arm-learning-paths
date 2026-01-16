@@ -1,21 +1,20 @@
 ---
-title: RabbitMQ Baseline Testing on Google Axion C4A Arm Virtual Machine
+title: Validate RabbitMQ on Google Cloud
 weight: 9
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## RabbitMQ Baseline Validation on GCP SUSE Arm64 VM
-This document defines a **baseline validation procedure** for RabbitMQ installed on a **Google Cloud SUSE Linux Arm64 virtual machine**.  
-The purpose of this baseline is to confirm:
+Validate your RabbitMQ installation on the Google Cloud SUSE Linux Arm64 virtual machine. This baseline confirms:
 
 - RabbitMQ service health
 - Management plugin availability
 - Queue operations (create, publish, consume)
 - CLI tooling functionality (`rabbitmqctl` and `rabbitmqadmin`)
 
-### Check RabbitMQ node status
+## Check RabbitMQ node status
+
 Verify that the RabbitMQ node is operational and healthy.
 
 ```console

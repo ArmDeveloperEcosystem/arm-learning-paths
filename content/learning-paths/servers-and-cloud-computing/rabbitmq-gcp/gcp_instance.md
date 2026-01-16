@@ -26,7 +26,7 @@ Under **OS and Storage**, select **Change**, then choose an Arm64-based OS image
 
 Under **Networking**, enable **Allow HTTP traffic** and add "allow-tcp-15672" as a network tag in the **Network tags** text field.
 
-![Adding the TCP/15672 firewall rule to the VM](images/network-config.png "Adding the TCP/15672 firewall rule to the VM")
+![Adding the TCP/15672 firewall rule to the VM alt-text#center](images/network-config.png "Adding the TCP/15672 firewall rule to the VM")
 
 Select **Create** to launch the instance. After the instance is created, the **SSH** option and public IP address appear in the VM instances list. Save the public IP address for later use. Select the **SSH** option to open an SSH shell to your VM instance.
 
