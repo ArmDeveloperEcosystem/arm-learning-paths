@@ -1,4 +1,4 @@
-name: Spell and Link Check
+name: Spelling and Hyperlinks Check
 
 on:
   # Temporary: trigger on push for testing
