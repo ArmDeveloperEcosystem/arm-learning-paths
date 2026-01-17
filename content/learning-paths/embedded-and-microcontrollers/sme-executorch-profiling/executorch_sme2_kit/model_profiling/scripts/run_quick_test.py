@@ -26,24 +26,27 @@ def main() -> None:
     run(["bash", "model_profiling/scripts/build_runners.sh"])
 
     # 3) Export a tiny model
-    models_dir = ROOT / "models"
-    models_dir.mkdir(parents=True, exist_ok=True)
-    run(["python", "model_profiling/export/export_model.py", "--model", "toy_cnn", "--dtype", "fp16", "--outdir", str(models_dir)])
+    model_name = "toy_cnn"
+    artifacts_dir = ROOT / f"out_{model_name}" / "artifacts"
+    artifacts_dir.mkdir(parents=True, exist_ok=True)
+    run(["python", "model_profiling/export/export_model.py", "--model", model_name, "--dtype", "fp16", "--outdir", str(artifacts_dir)])
     # Export script creates: toy_cnn_xnnpack_fp16.pte
-    model = models_dir / "toy_cnn_xnnpack_fp16.pte"
+    model = artifacts_dir / "toy_cnn_xnnpack_fp16.pte"
 
-    # 4) Write a minimal config by copying the template and patching the model path
+    # 4) Write a minimal config by copying the template and patching paths
     cfg = ROOT / "model_profiling" / "configs" / "quick_mac.json"
     cfg.parent.mkdir(parents=True, exist_ok=True)
     template = ROOT / "model_profiling" / "configs" / "templates" / "mac_template.json"
-    text = template.read_text(encoding="utf-8").replace("REPLACE_WITH_PATH_TO_MODEL_PTE", str(model))
+    text = template.read_text(encoding="utf-8")
+    text = text.replace("REPLACE_WITH_PATH_TO_MODEL_PTE", str(model))
+    text = text.replace("out_<model>", f"out_{model_name}")
     cfg.write_text(text, encoding="utf-8")
 
     # 5) Run pipeline
     run(["python", "model_profiling/scripts/mac_pipeline.py", "--config", str(cfg)])
 
     # 6) Validate results
-    run(["python", "model_profiling/scripts/validate_results.py", "--results", str(ROOT / "runs" / args.platform)])
+    run(["python", "model_profiling/scripts/validate_results.py", "--results", str(ROOT / f"out_{model_name}" / "runs" / args.platform)])
 
     print("\n✅ Quick test completed.")
 

@@ -42,6 +42,7 @@ description: What the skill does and when Claude should use it
 4. **[04_run_profiling.md](04_run_profiling.md)** - Execute profiling pipeline (timing + trace)
 5. **[05_analyze_results.md](05_analyze_results.md)** - Generate operator-category breakdown
 6. **[06_validate_workflow.md](06_validate_workflow.md)** - End-to-end smoke test
+7. **[07_report_generation.md](07_report_generation.md)** - Generate comprehensive markdown report
 
 ## Usage Pattern
 
@@ -74,7 +75,7 @@ description: What the skill does and when Claude should use it
 ## Skill Dependencies
 
 ```
-01_setup_workspace → 02_build_runners → 03_export_model → 04_run_profiling → 05_analyze_results
+01_setup_workspace → 02_build_runners → 03_export_model → 04_run_profiling → 05_analyze_results → 07_report_generation
                                                               ↓
                                                     06_validate_workflow (can run anytime)
 ```
@@ -89,3 +90,4 @@ description: What the skill does and when Claude should use it
 | `04_run_profiling` | ~10 min | `runs/<platform>/*.etdump` |
 | `05_analyze_results` | ~2 min | `runs/<platform>/analysis_summary.json` |
 | `06_validate_workflow` | ~15 min | Full smoke test validation |
+| `07_report_generation` | ~1 min | `runs/<platform>/report.md` |

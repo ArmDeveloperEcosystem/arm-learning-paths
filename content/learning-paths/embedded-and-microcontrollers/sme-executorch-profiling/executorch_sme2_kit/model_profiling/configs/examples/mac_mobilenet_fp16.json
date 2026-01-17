@@ -1,6 +1,6 @@
 {
-  "model": "models/mobilenet_v3_small_fp16.pte",
-  "output_root": "runs/mac",
+  "model": "out_mobilenet/artifacts/mobilenet_v3_small_xnnpack_fp16.pte",
+  "output_root": "out_mobilenet/runs/mac",
   "experiments": [
     {
       "name": "mac_sme2_on",

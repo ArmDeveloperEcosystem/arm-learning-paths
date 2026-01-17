@@ -1,6 +1,6 @@
 {
   "model": "REPLACE_WITH_PATH_TO_MODEL_PTE",
-  "output_root": "runs/android",
+  "output_root": "out_<model>/runs/android",
   "experiments": [
     {
       "name": "android_sme2_on",

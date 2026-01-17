@@ -21,8 +21,8 @@ This skill analyzes ETDump traces to produce an operator-category breakdown. It 
 
 **Prerequisites**:
 - `.venv/` activated
-- ETDump files exist in `runs/<platform>/`
-- Model `.pte` file available (for operator name correlation)
+- ETDump files exist in `out_<model>/runs/<platform>/`
+- `manifest.json` exists in run directory (for model path lookup)
 - Optionally: `.etrecord` file next to `.pte` (for better operator attribution)
 
 ## Steps
@@ -37,20 +37,24 @@ source .venv/bin/activate
 
 ```bash
 python model_profiling/scripts/analyze_results.py \
-  --run-dir runs/mac \
-  --model model_profiling/out_toy_cnn/artifacts/toy_cnn_xnnpack_fp16.pte
+  --run-dir model_profiling/out_<model>/runs/mac
 ```
+
+**Note**: 
+- No PTE file required - script reads config from `manifest.json`
+- CSV files are generated in the **same directory as ETDump files** (e.g., `runs/mac/mac_sme2_on/`)
+- ETRecord is automatically found from model path in manifest (if available)
 
 ### 3. Review Summary
 
 ```bash
 # Pretty-print JSON summary
-cat runs/mac/analysis_summary.json | python -m json.tool
+cat model_profiling/out_<model>/runs/mac/analysis_summary.json | python -m json.tool
 
 # Or view specific categories
 python -c "
 import json
-with open('runs/mac/analysis_summary.json') as f:
+with open('model_profiling/out_<model>/runs/mac/analysis_summary.json') as f:
     data = json.load(f)
     print('Category Totals (ms):')
     for cat, ms in data.get('category_totals_ms', {}).items():
@@ -62,22 +66,26 @@ with open('runs/mac/analysis_summary.json') as f:
 
 ```bash
 # Check analysis output exists
-test -f runs/mac/analysis_summary.json && echo "✓ Analysis summary exists"
+test -f model_profiling/out_<model>/runs/mac/analysis_summary.json && echo "✓ Analysis summary exists"
+
+# Check CSV files were generated (in same directory as ETDump files)
+test -f model_profiling/out_<model>/runs/mac/mac_sme2_on/*_timeline.csv && echo "✓ Timeline CSV files exist"
+test -f model_profiling/out_<model>/runs/mac/mac_sme2_on/*_ops_stats.csv && echo "✓ Stats CSV files exist"
 
 # Check summary is valid JSON and has required fields
 python -c "
 import json
-with open('runs/mac/analysis_summary.json') as f:
+with open('model_profiling/out_<model>/runs/mac/analysis_summary.json') as f:
     data = json.load(f)
     assert 'category_totals_ms' in data, 'Missing category_totals_ms'
-    assert 'experiments' in data, 'Missing experiments'
+    assert 'per_etdump' in data, 'Missing per_etdump'
     print('✓ Summary structure valid')
 "
 
 # Check summary has non-zero timing data
 python -c "
 import json
-with open('runs/mac/analysis_summary.json') as f:
+with open('model_profiling/out_<model>/runs/mac/analysis_summary.json') as f:
     data = json.load(f)
     totals = data.get('category_totals_ms', {})
     assert any(v > 0 for v in totals.values()), 'No timing data'
@@ -86,11 +94,21 @@ with open('runs/mac/analysis_summary.json') as f:
 ```
 
 **Expected outputs**:
-- `runs/mac/analysis_summary.json` with:
+- `model_profiling/out_<model>/runs/mac/analysis_summary.json` - Operator-level breakdown summary
+- `model_profiling/out_<model>/runs/mac/<experiment>/` - **CSV files generated from ETDump** (in same directory as ETDump files):
+  - `<experiment>_exec_run0_timeline.csv` - Per-run operator timeline (operator-level timing per run)
+  - `<experiment>_exec_ops_stats.csv` - Aggregated operator statistics (total time per operator type)
+  
+The CSV files are **intermediate artifacts** that enable:
+- **Verification**: You can inspect CSV files to verify the analysis
+- **Reproducibility**: CSV files can be re-analyzed with different tools
+- **Transparency**: Raw data is available for manual inspection
+
+The `analysis_summary.json` contains:
   - `category_totals_ms`: Operator category timing breakdown (CONV, GEMM, Data Movement, etc.)
-  - `experiments`: Per-experiment summaries (SME2-on, SME2-off)
-  - `etrecord`: Path to .etrecord (if available)
-  - `etdump_paths`: List of analyzed ETDump files
+  - `per_etdump`: Per-experiment summaries (SME2-on, SME2-off) with CSV file paths
+  - `csv_files`: List of generated CSV files
+  - `csv_dir`: Directory containing CSV files
 
 ## Interpreting Results
 
@@ -161,6 +179,5 @@ These hints are best-effort and depend on ExecuTorch build configuration.
 
 **Assets**:
 - `model_profiling/scripts/analyze_results.py` - ETDump analysis script
-- `model_profiling/tools/` - Additional analysis tools (if available)
 
 **Next skill**: `06_validate_workflow.md` (optional, for end-to-end validation)

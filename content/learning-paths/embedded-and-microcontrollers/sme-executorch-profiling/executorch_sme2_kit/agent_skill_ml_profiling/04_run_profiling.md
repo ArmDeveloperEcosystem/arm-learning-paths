@@ -80,29 +80,29 @@ This uses standard runners with no trace logging overhead → accurate latency m
 ### 3. Verify Outputs
 
 ```bash
-python model_profiling/scripts/validate_results.py --results runs/mac
+python model_profiling/scripts/validate_results.py --results model_profiling/out_<model>/runs/mac
 ```
 
 **Verification**:
 
 ```bash
 # Check ETDump files exist and are non-empty
-test -f runs/mac/*/mac_sme2_on_t1.etdump && echo "✓ SME2-on ETDump exists"
-test -f runs/mac/*/mac_sme2_off_t1.etdump && echo "✓ SME2-off ETDump exists"
+test -f model_profiling/out_<model>/runs/mac/*/mac_sme2_on_t1.etdump && echo "✓ SME2-on ETDump exists"
+test -f model_profiling/out_<model>/runs/mac/*/mac_sme2_off_t1.etdump && echo "✓ SME2-off ETDump exists"
 
 # Verify ETDump files are non-empty (critical)
-for etdump in runs/mac/*/*.etdump; do
+for etdump in model_profiling/out_<model>/runs/mac/*/*.etdump; do
   test -s "$etdump" && echo "✓ $etdump is non-empty" || echo "✗ $etdump is empty"
 done
 
 # Validate results structure
-python model_profiling/scripts/validate_results.py --results runs/mac
+python model_profiling/scripts/validate_results.py --results model_profiling/out_<model>/runs/mac
 ```
 
 **Expected outputs**:
-- `runs/mac/<experiment_name>/<experiment_name>_t1.etdump` (ETDump traces - **primary data**)
-- `runs/mac/<experiment_name>/<experiment_name>_t1.log` (runner logs)
-- Optionally: `runs/mac/manifest.json` and `runs/mac/metrics.json` (metadata logs, not critical)
+- `model_profiling/out_<model>/runs/mac/<experiment_name>/<experiment_name>_t1.etdump` (ETDump traces - **primary data**)
+- `model_profiling/out_<model>/runs/mac/<experiment_name>/<experiment_name>_t1.log` (runner logs)
+- Optionally: `model_profiling/out_<model>/runs/mac/manifest.json` and `model_profiling/out_<model>/runs/mac/metrics.json` (metadata logs, not critical)
 
 ## Trace-Enabled Runs (for kernel-level analysis)
 
@@ -142,7 +142,7 @@ python model_profiling/export/export_model.py --model toy_cnn --dtype fp16 --out
 python model_profiling/scripts/mac_pipeline.py --config model_profiling/configs/my_run.json
 
 # 4. Compare latencies
-python model_profiling/scripts/analyze_results.py --run-dir runs/mac --model model_profiling/out_toy_cnn/artifacts/toy_cnn_xnnpack_fp16.pte
+python model_profiling/scripts/analyze_results.py --run-dir model_profiling/out_toy_cnn/runs/mac
 ```
 
 ### Workflow 2: Full Analysis (Timing + Kernel)
@@ -155,7 +155,7 @@ python model_profiling/scripts/mac_pipeline.py --config model_profiling/configs/
 python model_profiling/scripts/mac_pipeline.py --config model_profiling/configs/trace_config.json
 
 # 3. Analyze both
-python model_profiling/scripts/analyze_results.py --run-dir runs/mac --model model_profiling/out_toy_cnn/artifacts/toy_cnn_xnnpack_fp16.pte
+python model_profiling/scripts/analyze_results.py --run-dir model_profiling/out_toy_cnn/runs/mac
 ```
 
 ## Best Practices

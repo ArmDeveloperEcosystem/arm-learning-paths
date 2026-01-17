@@ -182,8 +182,7 @@ Run:
 
 ```bash
 python model_profiling/scripts/analyze_results.py \
-  --run-dir model_profiling/out_toy_cnn/runs/mac \
-  --model model_profiling/out_toy_cnn/artifacts/toy_cnn_xnnpack_fp16.pte
+  --run-dir model_profiling/out_toy_cnn/runs/mac
 ```
 
 See [`analyze_results.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/analyze_results.py) for the implementation.
@@ -244,7 +243,7 @@ After building Android runners and connecting a device:
 
 ```bash
 python model_profiling/scripts/android_pipeline.py --config model_profiling/configs/examples/android_mobilenet_fp16.json
-python model_profiling/scripts/analyze_results.py --run-dir model_profiling/out_toy_cnn/runs/android --model model_profiling/out_toy_cnn/artifacts/toy_cnn_xnnpack_fp16.pte
+python model_profiling/scripts/analyze_results.py --run-dir model_profiling/out_toy_cnn/runs/android
 ```
 
 Scripts: [`android_pipeline.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/android_pipeline.py), [`analyze_results.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/analyze_results.py)

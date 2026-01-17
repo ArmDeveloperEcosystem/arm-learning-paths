@@ -16,7 +16,7 @@ def check(cond: bool, ok: str, fail: str) -> bool:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="Validate outputs of a profiling run directory.")
-    ap.add_argument("--results", type=Path, required=True, help="Run directory (e.g., runs/mac)")
+    ap.add_argument("--results", type=Path, required=True, help="Run directory (e.g., out_<model>/runs/mac)")
     args = ap.parse_args()
 
     run_dir = args.results.resolve()

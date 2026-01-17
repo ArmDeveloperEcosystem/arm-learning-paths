@@ -52,12 +52,12 @@ This single command:
 # Check all expected artifacts exist
 test -f model_profiling/out_toy_cnn/artifacts/toy_cnn_xnnpack_fp16.pte && echo "✓ Model exported"
 test -f executorch/cmake-out/mac-arm64/executor_runner && echo "✓ Runners built"
-test -f runs/mac/*/mac_sme2_on_t1.etdump && echo "✓ Profiling completed"
-test -f runs/mac/analysis_summary.json && echo "✓ Analysis completed"
+test -f model_profiling/out_toy_cnn/runs/mac/*/mac_sme2_on_t1.etdump && echo "✓ Profiling completed"
+test -f model_profiling/out_toy_cnn/runs/mac/analysis_summary.json && echo "✓ Analysis completed"
 
 # Run comprehensive validation
 python model_profiling/scripts/validate_setup.py
-python model_profiling/scripts/validate_results.py --results runs/mac
+python model_profiling/scripts/validate_results.py --results model_profiling/out_toy_cnn/runs/mac
 ```
 
 **Expected outputs**:

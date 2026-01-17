@@ -1,6 +1,6 @@
 {
   "model": "REPLACE_WITH_PATH_TO_MODEL_PTE",
-  "output_root": "runs/mac",
+  "output_root": "out_<model>/runs/mac",
   "experiments": [
     {
       "name": "mac_sme2_on",

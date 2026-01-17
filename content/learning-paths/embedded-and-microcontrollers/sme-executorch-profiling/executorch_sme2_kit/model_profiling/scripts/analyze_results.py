@@ -1,18 +1,15 @@
 #!/usr/bin/env python3
-from __future__ import annotations
+"""Analyze ETDump files and generate CSV files in the same directory as ETDump files."""
 
 import argparse
-import csv
 import json
 import os
-import re
+import subprocess
+import sys
 import warnings
 from collections import Counter, defaultdict
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Tuple
-
-
-KERNEL_HINT_RE = re.compile(r"__neonsme2|sme2|neon", re.IGNORECASE)
+from typing import Any, Dict, List, Optional
 
 
 def load_json(path: Path) -> Dict[str, Any]:
@@ -28,26 +25,48 @@ def _find_etdump_files(run_dir: Path) -> List[Path]:
     return sorted(run_dir.glob("**/*.etdump"))
 
 
-def _infer_etrecord_for_model(model_pte: Path) -> Path:
-    # Default: <pte>.etrecord (this is how export_model.py writes by default).
-    return Path(str(model_pte) + ".etrecord")
+def _find_etrecord(model_path: Optional[Path]) -> Optional[Path]:
+    """Find etrecord file from model path."""
+    if not model_path:
+        return None
+    etrecord = Path(str(model_path) + ".etrecord")
+    return etrecord if etrecord.exists() else None
 
 
-def _inspector_rows(etrecord: Path, etdump: Path) -> List[Dict[str, Any]]:
-    """
-    Return Inspector tabular rows as dictionaries.
-    """
-    from executorch.devtools.inspector import Inspector
-
-    ins = Inspector(etrecord=str(etrecord), etdump_path=str(etdump))
-    # Save TSV to memory (Inspector API supports file-like). We'll use a temp string buffer.
-    import io
-
-    buf = io.StringIO()
-    ins.save_data_to_tsv(buf)
-    buf.seek(0)
-    reader = csv.DictReader(buf, delimiter="\t")
-    return list(reader)
+def _convert_etdump_to_csv(etdump: Path, etrecord: Optional[Path]) -> Dict[str, Optional[Path]]:
+    """Convert ETDump to CSV files in the same directory as ETDump."""
+    tools_dir = Path(__file__).parent.parent / "tools"
+    etdump_to_csv_script = tools_dir / "etdump_to_csv.py"
+    
+    if not etdump_to_csv_script.exists():
+        return {"timeline": None, "stats": None}
+    
+    csv_out_dir = etdump.parent  # Same directory as ETDump
+    
+    try:
+        cmd = [
+            sys.executable,
+            str(etdump_to_csv_script),
+            "--etdump", str(etdump),
+            "--out-dir", str(csv_out_dir),
+            "--model-id", etdump.stem,
+            "--run-index", "0",
+        ]
+        if etrecord:
+            cmd.extend(["--etrecord", str(etrecord)])
+        
+        subprocess.run(cmd, check=True, capture_output=True, text=True)
+        
+        csv_prefix = etdump.stem
+        timeline_csv = csv_out_dir / f"{csv_prefix}_exec_run0_timeline.csv"
+        stats_csv = csv_out_dir / f"{csv_prefix}_exec_ops_stats.csv"
+        
+        return {
+            "timeline": timeline_csv if timeline_csv.exists() else None,
+            "stats": stats_csv if stats_csv.exists() else None,
+        }
+    except Exception:
+        return {"timeline": None, "stats": None}
 
 
 def _categorize_op(op_name: str) -> str:
@@ -58,141 +77,121 @@ def _categorize_op(op_name: str) -> str:
         return "GEMM"
     if "transpose" in s or "reshape" in s or "copy" in s or "convert" in s or "pad" in s:
         return "Data Movement"
-    if any(
-        k in s
-        for k in [
-            # activations / pointwise
-            "relu",
-            "gelu",
-            "sigmoid",
-            "tanh",
-            "hardtanh",
-            "hardswish",
-            "hard_swish",
-            "clamp",
-            # arithmetic
-            "add",
-            "mul",
-            "sub",
-            "div",
-        ]
-    ):
+    if any(k in s for k in ["relu", "gelu", "sigmoid", "tanh", "hardtanh", "hardswish", "hard_swish", "clamp", "add", "mul", "sub", "div"]):
         return "Elementwise"
     return "Other"
 
 
-def _extract_kernel_hints(rows: Iterable[Dict[str, Any]]) -> Counter:
-    """
-    Best-effort: the Inspector output may contain delegate debug info fields depending on ExecuTorch version.
-    We look across all columns and extract strings that hint about kernel selection.
-    """
-    c = Counter()
+def _analyze_etdump(etdump: Path, etrecord: Optional[Path]) -> Dict[str, Any]:
+    """Analyze single ETDump file."""
+    from executorch.devtools.inspector import Inspector
+    import csv
+    import io
+    
+    try:
+        if etrecord:
+            inspector = Inspector(etrecord=str(etrecord), etdump_path=str(etdump))
+        else:
+            inspector = Inspector(etdump_path=str(etdump))
+    except Exception:
+        if etrecord:
+            inspector = Inspector(etdump_path=str(etdump))
+        else:
+            raise
+    
+    buf = io.StringIO()
+    inspector.save_data_to_tsv(buf)
+    buf.seek(0)
+    rows = list(csv.DictReader(buf, delimiter="\t"))
+    
+    per_cat = defaultdict(float)
     for r in rows:
-        joined = " | ".join(str(v) for v in r.values() if v)
-        for m in KERNEL_HINT_RE.finditer(joined):
-            c[m.group(0).lower()] += 1
-    return c
+        op_types = r.get("op_types") or ""
+        cat = _categorize_op(op_types)
+        avg_ms = r.get("avg (ms)") or r.get("avg_ms") or ""
+        try:
+            per_cat[cat] += float(avg_ms)
+        except Exception:
+            pass
+    
+    return {"categories_ms": dict(per_cat), "rows": len(rows)}
 
 
-def summarize(run_dir: Path, model_pte: Path) -> Dict[str, Any]:
-    etrecord = _infer_etrecord_for_model(model_pte)
-    if not etrecord.exists():
-        raise SystemExit(f"Missing etrecord: {etrecord} (re-export model with model_profiling/export/export_model.py)")
-
+def summarize(run_dir: Path, etrecord: Optional[Path] = None) -> Dict[str, Any]:
     etdumps = _find_etdump_files(run_dir)
     if not etdumps:
         raise SystemExit(f"No .etdump files found under: {run_dir}")
-
-    summaries: List[Dict[str, Any]] = []
-    category_totals: Dict[str, float] = defaultdict(float)
-    kernel_hints_total = Counter()
-
+    
+    summaries = []
+    category_totals = defaultdict(float)
+    csv_files = []
+    
     for etdump in etdumps:
-        rows = _inspector_rows(etrecord, etdump)
-        kernel_hints_total.update(_extract_kernel_hints(rows))
-
-        # Heuristic: use avg/ms columns if present; otherwise skip numeric attribution.
-        # Many Inspector TSVs include 'avg (ms)'.
-        per_cat = defaultdict(float)
-        for r in rows:
-            op_types = r.get("op_types") or ""
-            cat = _categorize_op(op_types)
-            avg_ms = r.get("avg (ms)") or r.get("avg_ms") or ""
-            try:
-                v = float(avg_ms)
-            except Exception:
-                v = 0.0
-            per_cat[cat] += v
-
-        for k, v in per_cat.items():
-            category_totals[k] += v
-
-        summaries.append(
-            {
-                "etdump": str(etdump),
-                "categories_ms": dict(per_cat),
-                "rows": len(rows),
-            }
-        )
-
+        # Generate CSV files in same directory as ETDump
+        csv_info = _convert_etdump_to_csv(etdump, etrecord)
+        if csv_info.get("timeline"):
+            csv_files.append(str(csv_info["timeline"]))
+        if csv_info.get("stats"):
+            csv_files.append(str(csv_info["stats"]))
+        
+        # Analyze ETDump
+        analysis = _analyze_etdump(etdump, etrecord)
+        for cat, ms in analysis["categories_ms"].items():
+            category_totals[cat] += ms
+        
+        summaries.append({
+            "etdump": str(etdump),
+            "categories_ms": analysis["categories_ms"],
+            "rows": analysis["rows"],
+            "csv_timeline": str(csv_info["timeline"]) if csv_info.get("timeline") else None,
+            "csv_stats": str(csv_info["stats"]) if csv_info.get("stats") else None,
+        })
+    
     return {
         "run_dir": str(run_dir),
-        "model": str(model_pte),
-        "etrecord": str(etrecord),
+        "etrecord": str(etrecord) if etrecord else None,
         "etdump_count": len(etdumps),
         "category_totals_ms": dict(category_totals),
-        "kernel_hints": dict(kernel_hints_total),
         "per_etdump": summaries,
+        "csv_files": csv_files,
     }
 
 
 def main() -> None:
-    ap = argparse.ArgumentParser(description="Analyze ETDump with ExecuTorch Inspector and summarize operator categories.")
-    ap.add_argument("--run-dir", type=Path, required=True, help="Run output directory (e.g., runs/mac)")
-    ap.add_argument("--model", type=Path, default=None, help="Path to .pte (default: read from manifest.json if present)")
-    ap.add_argument(
-        "--quiet",
-        action="store_true",
-        help="Suppress noisy warnings from ExecuTorch Inspector/debug format parsing.",
-    )
+    ap = argparse.ArgumentParser(description="Analyze ETDump files and generate CSV files.")
+    ap.add_argument("--run-dir", type=Path, required=True, help="Run output directory")
+    ap.add_argument("--quiet", action="store_true", help="Suppress warnings")
     args = ap.parse_args()
-
+    
     if args.quiet:
-        # Reduce common native logging noise during torch/executorch import.
-        # (Best-effort: some builds still emit messages.)
-        os.environ.setdefault("GLOG_minloglevel", "2")  # 0=INFO,1=WARNING,2=ERROR,3=FATAL
+        os.environ.setdefault("GLOG_minloglevel", "2")
         os.environ.setdefault("TF_CPP_MIN_LOG_LEVEL", "2")
-
-    run_dir = args.run_dir.resolve()
-    manifest = run_dir / "manifest.json"
-    model = args.model
-    if model is None and manifest.exists():
-        model = Path(load_json(manifest).get("model", ""))
-    if model is None or not model.exists():
-        raise SystemExit("Model .pte not found. Provide --model <path-to.pte> or ensure manifest.json exists.")
-
-    if args.quiet:
-        # These warnings are common across ExecuTorch versions and are usually not actionable
-        # for end users running the learning path.
         warnings.filterwarnings("ignore", message="Output Buffer not found.*")
         warnings.filterwarnings("ignore", message="Unsupported kwarg encountered:*")
-
-    report = summarize(run_dir, model.resolve())
+    
+    run_dir = args.run_dir.resolve()
+    manifest = run_dir / "manifest.json"
+    
+    # Find etrecord from manifest if available
+    etrecord = None
+    if manifest.exists():
+        manifest_data = load_json(manifest)
+        model_path = manifest_data.get("model")
+        if model_path:
+            etrecord = _find_etrecord(Path(model_path))
+    
+    report = summarize(run_dir, etrecord)
     out = run_dir / "analysis_summary.json"
     write_json(out, report)
     print(f"Wrote: {out}")
-
-    # Human-friendly console highlight:
+    
+    if report.get("csv_files"):
+        print(f"Generated {len(report['csv_files'])} CSV file(s)")
+    
     print("\nTop categories (ms, summed across traces):")
     for k, v in sorted(report["category_totals_ms"].items(), key=lambda kv: kv[1], reverse=True):
         print(f"  - {k}: {v:.3f}")
-    if report["kernel_hints"]:
-        print("\nKernel hints (best-effort, depends on ExecuTorch debug data):")
-        for k, v in sorted(report["kernel_hints"].items(), key=lambda kv: kv[1], reverse=True):
-            print(f"  - {k}: {v}")
 
 
 if __name__ == "__main__":
     main()
-
-

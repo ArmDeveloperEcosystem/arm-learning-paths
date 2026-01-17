@@ -27,6 +27,7 @@ Available skills:
 4. `04_run_profiling.md` - Execute profiling pipeline (timing + trace)
 5. `05_analyze_results.md` - Generate operator-category breakdown
 6. `06_validate_workflow.md` - End-to-end smoke test
+7. `07_report_generation.md` - Generate comprehensive markdown report
 
 ## 2. Agent skill structure
 
@@ -52,11 +53,12 @@ Each skill follows a consistent format based on current practices among develope
 | Skill | Time | Prerequisites | Outputs |
 |-------|------|---------------|---------|
 | `setup_workspace` | ~30 min | Python 3.9+, CMake 3.29+ | `.venv/`, `executorch/` |
-| `build_runners` | ~20 min | Setup complete | `runners/mac_sme2_*/executor_runner` |
+| `build_runners` | ~20 min | Setup complete | `executorch/cmake-out/mac-arm64*/executor_runner` |
 | `export_model` | ~5 min | Setup complete | `out_<model>/artifacts/*.pte` |
-| `run_profiling` | ~10 min | Runners + model | `runs/<platform>/*.etdump` |
-| `analyze_results` | ~2 min | Profiling complete | `runs/<platform>/analysis_summary.json` |
+| `run_profiling` | ~10 min | Runners + model | `out_<model>/runs/<platform>/*.etdump` |
+| `analyze_results` | ~2 min | Profiling complete | `out_<model>/runs/<platform>/analysis_summary.json` |
 | `validate_workflow` | ~15 min | None (does setup) | Full smoke test validation |
+| `report_generation` | ~1 min | Analysis complete | `out_<model>/runs/<platform>/report.md` |
 
 ## 4. Recommended workflow
 

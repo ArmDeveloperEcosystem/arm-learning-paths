@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 This learning path supports the PyTorch blog post ["Accelerating On-Device Vision ML Inference in ExecuTorch with Arm SME2"](https://pytorch.org/blog/placeholder-link) (link to be updated). It provides a hands-on implementation guide to identify optimization opportunities and actionable improvements that enhance model performance and enrich application user experience. 
 
-When you enable SME2 acceleration on Arm devices, you get faster models, and something equally valuable: clear visibility into where time is actually spent. Model inference time is usally spent across several categories: matrix compute (linear operations like CONV and GEMM), non-linear operations (elementwise activations, normalization), and data movement (transpose, reshape, layout conversions, memory copies). In most models, matrix compute dominates the latency, making it the primary bottleneck.
+When you enable SME2 acceleration on Arm devices, you get faster models, and something equally valuable: clear visibility into where time is actually spent. Model inference time is usually spent across several categories: matrix compute (linear operations like CONV and GEMM), non-linear operations (elementwise activations, normalization), and data movement (transpose, reshape, layout conversions, memory copies). In most models, matrix compute dominates the latency, making it the primary bottleneck.
 
 SME2 accelerates your CONV and GEMM operations (can be 3-15× faster), removing the major compute bottleneck. This reveals that data movement was always there, but hidden behind the compute bottleneck. Now that compute is faster, data movement can become visible as the next frontier for optimization.
 
@@ -35,7 +35,7 @@ Clone the repository with sparse checkout to get only the profiling kit:
 ```bash
 mkdir -p ~/sme2_profiling_work
 cd ~/sme2_profiling_work
-git clone --filter=blob:none --sparse https://github.com/ARM-software/arm-learning-paths-sme2-executorch.git temp_repo
+git clone --filter=blob:none --sparse https://github.com/ArmDeveloperEcosystem/arm-learning-paths.git temp_repo
 cd temp_repo
 git sparse-checkout set content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit
 mv content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit ../executorch_sme2_kit
@@ -84,8 +84,7 @@ python model_profiling/scripts/run_quick_test.py
 
 # 4) Produce a readable operator-category summary (~2 min)
 python model_profiling/scripts/analyze_results.py \
-  --run-dir model_profiling/out_toy_cnn/runs/mac \
-  --model model_profiling/out_toy_cnn/artifacts/toy_cnn_xnnpack_fp16.pte
+  --run-dir model_profiling/out_toy_cnn/runs/mac
 ```
 
 Scripts: [`setup_repo.sh`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/setup_repo.sh), [`build_runners.sh`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/build_runners.sh), [`run_quick_test.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/run_quick_test.py), [`analyze_results.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/analyze_results.py)

@@ -4,19 +4,21 @@ These scripts are a **self-contained profiling kit** that lives alongside the le
 
 ## Expected directory layout
 
-Run everything from the learning path directory:
+Run everything from the `executorch_sme2_kit/` directory:
 
 ```bash
-cd content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling
+cd executorch_sme2_kit/
 ```
 
 The scripts will create (or reuse):
 - `.venv/` Python virtual environment
 - `executorch/` ExecuTorch checkout (tracks `main`)
 - `executorch/cmake-out/` built `executor_runner` binaries (runners stay with their ExecuTorch version for traceability)
-- `models/` exported `.pte` and `.etrecord`
-- `configs/` JSON pipeline configs
-- `runs/` results, logs, traces, and manifests
+- `out_<model>/artifacts/` exported `.pte` and `.etrecord` files
+- `model_profiling/configs/` JSON pipeline configs
+- `out_<model>/runs/` results, logs, traces, and manifests
+
+**Note**: Replace `<model>` with your actual model name (e.g., `out_mobilenet/`, `out_edgetam/`).
 
 ## Time budget (clean machine)
 
@@ -30,7 +32,8 @@ The scripts will create (or reuse):
 After setup + build, validate the end-to-end flow with a tiny model:
 
 ```bash
-python scripts/run_quick_test.py
+source .venv/bin/activate
+python model_profiling/scripts/run_quick_test.py
 ```
 
 This runs the full workflow (validate → build → export toy model → pipeline → validate results) in **~10–15 minutes** and confirms your setup works.
@@ -38,39 +41,73 @@ This runs the full workflow (validate → build → export toy model → pipelin
 ## Quick flow (manual, step-by-step)
 
 ```bash
-chmod +x scripts/setup_repo.sh
-./scripts/setup_repo.sh
+# 1. Setup (one-time)
+bash model_profiling/scripts/setup_repo.sh
 
-chmod +x scripts/build_runners.sh
-bash scripts/build_runners.sh
+# 2. Build runners (one-time, or when CMake configs change)
+bash model_profiling/scripts/build_runners.sh
 
-python scripts/export_model.py --model-name mobilenet_v3_small --dtype fp16 --out models/mobilenet_v3_small_fp16.pte
+# 3. Activate venv
+source .venv/bin/activate
 
-cp configs/templates/mac_template.json configs/mac.json
-# edit configs/mac.json: set "model" to "models/mobilenet_v3_small_fp16.pte"
-python scripts/mac_pipeline.py --config configs/mac.json
+# 4. Export model
+python model_profiling/export/export_model.py \
+  --model mobilenet_v3_small \
+  --dtype fp16 \
+  --outdir out_mobilenet/artifacts/
 
-python scripts/analyze_results.py --run-dir runs/mac --quiet
+# 5. Create config
+cp model_profiling/configs/templates/mac_template.json \
+   model_profiling/configs/mac_mobilenet.json
+# Edit config: set "model" to "out_mobilenet/artifacts/mobilenet_v3_small_xnnpack_fp16.pte"
+# Edit config: set "output_root" to "out_mobilenet/runs/mac"
 
-# Validate results
-python scripts/validate_results.py --results runs/mac
-python scripts/compare_run_to_known_good.py --run-dir runs/mac --fixture-dir test-cases/fixtures/known_good_mac/runs/mac
+# 6. Run pipeline
+python model_profiling/scripts/mac_pipeline.py \
+  --config model_profiling/configs/mac_mobilenet.json
+
+# 7. Analyze results
+python model_profiling/scripts/analyze_results.py \
+  --run-dir out_mobilenet/runs/mac \
+  --quiet
+
+# 8. Validate results (optional)
+python model_profiling/scripts/validate_results.py \
+  --results out_mobilenet/runs/mac
 ```
 
+**See `PIPELINE_COMMANDS.md` for detailed command reference.**
+
 ## Notes
+
 - On **macOS Apple Silicon**, you can learn the workflow and get operator-level breakdowns. SME2 acceleration requires Armv9 hardware: Apple M4 Macs and Armv9 Android devices will show SME2 deltas; earlier Apple Silicon will not.
+
 - To observe SME2 deltas and `__neonsme2` kernel paths, use an **SME2-capable Armv9 device** (Android or Apple M4):
 
 ```bash
 export ANDROID_NDK=/path/to/android-ndk
-bash scripts/build_runners.sh
+bash model_profiling/scripts/build_runners.sh
 
-cp configs/templates/android_template.json configs/android.json
-# edit configs/android.json: set "model" to your .pte
-python scripts/android_pipeline.py --config configs/android.json
+cp model_profiling/configs/templates/android_template.json \
+   model_profiling/configs/android.json
+# Edit config: set "model" to your .pte path
+# Edit config: set "output_root" to "out_<model>/runs/android"
+python model_profiling/scripts/android_pipeline.py \
+  --config model_profiling/configs/android.json
 
-python scripts/analyze_results.py --run-dir runs/android
+python model_profiling/scripts/analyze_results.py \
+  --run-dir out_<model>/runs/android
 ```
 
-- Fast sanity: `python scripts/run_quick_test.py` builds, exports a toy model, runs the Mac pipeline, and validates outputs end-to-end.
+## Key Principles
+
+1. **Model-agnostic pipeline**: Once you have a `.pte` file, the same pipeline commands work for any model
+2. **Config-driven experiments**: JSON configs define what to run, scripts execute them
+3. **Output organization**: Results go under `out_<model>/runs/<platform>/` for clear organization
+4. **Version traceability**: Runners stay in `executorch/cmake-out/` to track ExecuTorch version
+
+## Reference
+
+- **Command reference**: See `PIPELINE_COMMANDS.md` for detailed workflow
+- **Model onboarding**: See learning path documentation for adding new models
 

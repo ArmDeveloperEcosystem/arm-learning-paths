@@ -117,6 +117,6 @@ fi
 echo "[sme2-profiling] Done."
 echo "Next:"
 echo "  - Build runners: bash model_profiling/scripts/build_runners.sh"
-echo "  - Export model : python model_profiling/export/export_model.py --model mobilenet_v3_small --dtype fp16 --outdir models/"
+echo "  - Export model : source .venv/bin/activate && python model_profiling/export/export_model.py --model mobilenet_v3_small --dtype fp16 --outdir out_mobilenet/artifacts/"
 
 
