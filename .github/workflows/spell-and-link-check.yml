@@ -121,5 +121,5 @@ jobs:
           echo "- **HTML Link Check:** $([ -f htmltest.log ] && echo '✓ Complete' || echo '✗ Failed')" >> $GITHUB_STEP_SUMMARY
           echo "- **Spell Check:** $([ -f spellcheck-output.txt ] && echo '✓ Complete' || echo '✗ Failed')" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Download full reports from the artifacts section above." >> $GITHUB_STEP_SUMMARY
+          echo "Download full reports from the artifacts section below." >> $GITHUB_STEP_SUMMARY
 # Testing workflow detection
