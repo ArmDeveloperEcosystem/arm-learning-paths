@@ -1,10 +1,6 @@
 name: Spelling and Hyperlinks Check
 
 on:
-  # Temporary: trigger on push for testing
-  push:
-    branches:
-      - spell-and-link-check
   # run once a day at 6AM UTC
   schedule:
     - cron: '0 6 * * *'
