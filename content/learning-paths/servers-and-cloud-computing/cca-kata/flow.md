@@ -1,6 +1,6 @@
 ---
 # User change
-title: Run confidential containers with encrypted images using Arm CCA and Trustee
+title: Run a confidential container with an encrypted image
 
 weight: 3 # 1 is first, 2 is second, etc.
 

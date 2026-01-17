@@ -43,6 +43,7 @@
         "@type"    "Course"
         "name"     .Title
     -}}
+    {{/* Schema description: audience-focused explanation for structured data. This is intentionally distinct from the HTML meta description. */}}
     {{- with .Params.who_is_this_for     }}{{ $j = merge $j (dict "description" ( . | plainify )) }}{{ end -}}
     {{- if $duration                     }}{{ $j = merge $j (dict "timeRequired" $duration) }}{{ end -}}
     {{- with .Params.skilllevels         }}{{ $j = merge $j (dict "educationalLevel" .) }}{{ end -}}

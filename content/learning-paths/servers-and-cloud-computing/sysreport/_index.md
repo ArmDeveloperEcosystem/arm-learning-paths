@@ -35,7 +35,7 @@ further_reading:
         link: /install-guides/perf/
         type: website
     - resource:
-        title: AWS Perf (APerf) 
+        title: APerf 
         link: /install-guides/aperf/
         type: website
     - resource:

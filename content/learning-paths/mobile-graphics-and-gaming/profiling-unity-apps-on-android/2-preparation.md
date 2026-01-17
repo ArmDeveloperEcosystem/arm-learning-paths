@@ -86,7 +86,7 @@ Once the sample project has been imported, you will see some errors and warnings
 
 3. Select _Switch Platform_, as you did in the [previous Learning Path](/learning-paths/mobile-graphics-and-gaming/get-started-with-unity-on-android/3-test-on-android/)
 
-   ![Build-Profile-Menu#center](images/bp-menu.png "Figure 5. Build Profile menu.")
+   ![Build-Profile-Menu#center](images/bp-menu.webp "Figure 5. Build Profile menu.")
 
 Unity will take a moment to build the assets for the Android platform.
 
@@ -126,7 +126,7 @@ You will now deploy the sample to your Android device. Your device must already 
 
 2. Tick the _Development Build_ option
  
-  ![Import sample project#center](images/bp-menu-build.png "Figure 9. Development Build.")
+  ![Import sample project#center](images/bp-menu-build.webp "Figure 9. Development Build.")
 
 3. Select _Add Open Scenes_ to add the demo scene to your _Scenes in Build_ list
 

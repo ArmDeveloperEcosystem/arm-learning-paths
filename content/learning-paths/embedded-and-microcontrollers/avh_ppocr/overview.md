@@ -16,7 +16,7 @@ OCR has been widely used in many industry scenarios such as ticket information e
 
 Text recognition is a sub-task of OCR. It's the step after text detection in OCR's two-stage algorithm which converts image information into text information. 
 
-![Example of English text recognition #center](./Figure1.png "Figure 1. Example of English text recognition (Image source: https://iapr.org/archives/icdar2015/index.html)")
+![Example of English text recognition #center](./figure1.png "Figure 1. Example of English text recognition (Image source: https://iapr.org/archives/icdar2015/index.html)")
 
 
 In this Learning Path, you will learn how to apply deep learning (DL) to the OCR text recognition task and setup a development flow from model training to application deployment. 
@@ -39,7 +39,7 @@ As seen in Figure 2, the overall pipeline of PP-OCRv3 is similar to PP-OCRv2 wit
 
 For example, the text recognition model introduces [SVTR](https://arxiv.org/abs/2205.00159) (Scene Text Recognition with a Single Visual Model) based on PP-OCRv2. The model also uses [GTC](https://arxiv.org/pdf/2002.01276.pdf) (Guided Training of CTC) to guide training and model distillation. For more details, please refer to this PP-OCRv3 [technical report](https://arxiv.org/abs/2206.03001v2).
 
-![PP-OCRv3 pipeline diagram #center](./Figure2.png "Figure 2. PP-OCRv3 pipeline diagram (Image source: https://github.com/PaddlePaddle/PaddleOCR/blob/dygraph/doc/doc_en/PP-OCRv3_introduction_en.md)")
+![PP-OCRv3 pipeline diagram #center](./figure2.png "Figure 2. PP-OCRv3 pipeline diagram (Image source: https://github.com/PaddlePaddle/PaddleOCR/blob/dygraph/doc/doc_en/PP-OCRv3_introduction_en.md)")
 
 In the next section, you will deploy a trained PP-OCR text recognition model on the Arm Corstone-300 FVP.
 

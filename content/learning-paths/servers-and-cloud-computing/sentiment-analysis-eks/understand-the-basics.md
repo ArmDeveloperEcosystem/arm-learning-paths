@@ -36,7 +36,7 @@ Using an Arm-based Amazon EKS cluster can address these issues by offering flexi
 
 Figure 1 shows the solution architecture that this Learning Path uses for sentiment analysis:
 
-![sentiment analysis #center](_images/Sentiment-Analysis.png "Figure 1: Sentiment Analysis Architecture." )
+![sentiment analysis #center](_images/sentiment-analysis.png "Figure 1: Sentiment Analysis Architecture." )
 
 The technology stack for this solution includes the following steps:
 

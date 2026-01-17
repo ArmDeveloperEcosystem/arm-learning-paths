@@ -10,23 +10,23 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 35
-- Linux: 35
-- macOS: 15
-- Windows: 14
+- Linux: 36
+- macOS: 16
+- Windows: 15
 subjects_filter:
 - Gaming: 6
 - Graphics: 6
-- ML: 17
+- ML: 18
 - Performance and Architecture: 36
 subtitle: Optimize Android apps and build faster games using cutting-edge Arm tech
 title: Mobile, Graphics, and Gaming
 tools_software_languages_filter:
 - 7-Zip: 1
 - adb: 2
-- Android: 4
+- Android: 5
 - Android NDK: 2
 - Android SDK: 1
-- Android Studio: 12
+- Android Studio: 13
 - Arm Development Studio: 1
 - Arm Mobile Studio: 1
 - Arm Performance Studio: 3
@@ -50,10 +50,10 @@ tools_software_languages_filter:
 - Google Test: 1
 - Halide: 1
 - Hugging Face: 6
-- Java: 6
+- Java: 7
 - Jupyter Notebook: 1
 - KleidiAI: 2
-- Kotlin: 8
+- Kotlin: 9
 - LiteRT: 1
 - llama.cpp: 1
 - LLM: 1
@@ -62,11 +62,11 @@ tools_software_languages_filter:
 - MediaPipe: 2
 - MTE: 2
 - NEON: 1
-- ONNX Runtime: 1
-- ONNX runtime: 1
+- ONNX: 1
+- ONNX Runtime: 2
 - OpenGL ES: 1
-- Python: 8
-- PyTorch: 2
+- Python: 9
+- PyTorch: 3
 - QEMU: 1
 - RenderDoc: 1
 - RME: 1
@@ -74,6 +74,7 @@ tools_software_languages_filter:
 - Rust: 2
 - SDDiskTool: 1
 - SVE2: 1
+- TensorFlow: 1
 - Trusted Firmware: 1
 - Unity: 6
 - Unreal Engine: 4

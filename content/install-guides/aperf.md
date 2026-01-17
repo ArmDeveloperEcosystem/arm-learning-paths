@@ -8,24 +8,20 @@ official_docs: https://github.com/aws/aperf
 test_images:
 - ubuntu:latest
 test_maintenance: true
-title: AWS Perf (APerf)
+title: APerf
 tool_install: true
 weight: 1
 ---
 
-APerf (AWS Perf) is an open source command line performance analysis tool which saves time by collecting information which is normally collected by multiple tools such as `perf`, `sysstat`, and `sysctl`.
+APerf is an open source command line tool maintained by AWS. It helps you monitor and debug performance on Linux systems by collecting a wide range of performance-related system metrics and data that traditionally require multiple tools, such as `perf`, `sysstat`, and `sysctl`.
 
-APerf was created by AWS to help with Linux performance analysis.
+APerf collects system data and saves it in an archive. It then generates a static HTML report from one or more archives to visualize the data. When you generate the report, APerf analyzes the data to automatically detect potential performance issues. You can open the report in a browser to view all collected data and analytical findings.
 
-In addition to the CLI, APerf includes an HTML view to visualize the collected data.
+## Install APerf
 
-## What should I do before I begin installing APerf?
+This guide provides a quick solution to install APerf on Arm Linux and get started.
 
-APerf works on Linux, and is available as a single binary.
-
-APerf works best if `perf` is installed. Refer to the [Perf for Linux on Arm](/install-guides/perf) install guide for instructions.
-
-This article provides a quick solution to install APerf on Arm Linux and get started.
+## Before you begin
 
 Confirm you are using an Arm machine by running:
 
@@ -39,37 +35,52 @@ The output should be:
 aarch64
 ```
 
-If you see a different result, you are not using an Arm computer running 64-bit Linux.
+{{% notice Note %}} If you see a different result, you are not using an Arm computer running 64-bit Linux. APerf can only run on Linux.{{% /notice %}}
 
-## How do I download and install APerf?
+To allow APerf to collect PMU (Processor Monitoring Unit) metrics without sudo or root permissions, set `/proc/sys/kernel/perf_event_paranoid` to -1:
 
-The easiest way to install APerf is to download a release from GitHub, extract it, and setup your `PATH` environment variable or copy the executable to a directory already in your search path.
+```bash
+sudo sysctl -w kernel.perf_event_paranoid=-1
+```
 
-Visit the [releases page](https://github.com/aws/aperf/releases/) to see a list of available releases.
+To use APerf's CPU profiling option (`--profile`), install the `perf` binary. See the [Perf for Linux on Arm](/install-guides/perf) install guide for instructions. 
 
-You can also download a release from the command line:
+For kernel address visibility, set `/proc/sys/kernel/kptr_restrict` to 0:
+
+```bash
+sudo sysctl -w kernel.kptr_restrict=0
+```
+
+To use APerf's Java profiling option (`--profile-java`), install the [async-profiler](https://github.com/async-profiler/async-profiler) tool.
+
+## Download and install APerf
+The easiest way to install APerf is to download a release from GitHub and extract it.
+
+Visit the [releases page](https://github.com/aws/aperf/releases/) to see available releases.
+
+You can download a release from the command line:
 
 ```bash { target="ubuntu:latest" }
-wget https://github.com/aws/aperf/releases/download/v0.1.15-alpha/aperf-v0.1.15-alpha-aarch64.tar.gz
+wget https://github.com/aws/aperf/releases/download/v1.0.0/aperf-v1.0.0-aarch64.tar.gz
 ```
 
 Extract the release:
 
 ```bash { target="ubuntu:latest" }
-tar xvfz aperf-v0.1.15-alpha-aarch64.tar.gz
+tar xvfz aperf-v1.0.0-aarch64.tar.gz
 ```
 
 Add the path to `aperf` in your `.bashrc` file.
 
 ```console
-echo 'export PATH="$PATH:$HOME/aperf-v0.1.15-alpha-aarch64"' >> ~/.bashrc
+echo 'export PATH="$PATH:$HOME/aperf-v1.0.0-aarch64"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
 Alternatively, you can copy the `aperf` executable to a directory already in your search path.
 
 ```bash { target="ubuntu:latest" }
-sudo cp aperf-v0.1.15-alpha-aarch64/aperf /usr/local/bin
+sudo cp aperf-v1.0.0-aarch64/aperf /usr/local/bin
 ```
 
 Confirm `aperf` is installed by printing the version:
@@ -81,81 +92,100 @@ aperf --version
 The output should print the version:
 
 ```output
-aperf 0.1.0 (4b910d2)
+aperf 1.0.0 (4cf8d28)
 ```
 
-## How do I verify APerf is working?
+## Verify APerf is working
+
+To confirm APerf is working, start a collection run with the default settings. The default interval is 1 second, and the default period is 10 seconds.
+
+Run the following command to start data collection:
+
+```console
+aperf record -r test_1
+```
+
+After 10 seconds, the collection completes. APerf creates a directory named `test_1` and a tar file named `test_1.tar.gz`.
+
+If you need CPU profiling, add the `--profile` flag. For Java profiling, add the `--profile-java` flag.
 
 ### How do I create and view a report?
 
-To confirm APerf is working, start it for 10 seconds and take a sample every 1 second.
+Generate a report from the recorded data:
 
 ```console
-sudo aperf record -i 1 -p 10 -r run1 --profile
+aperf report -r test_1 -n test_report
 ```
 
-After 10 seconds `aperf` completes and you see a directory named `run1` and a tar file named `run1.tar.gz`.
+APerf creates a directory named `test_report` and a tar file named `test_report.tar.gz`. The tar file is useful when you want to copy the report to another machine.
 
-Next, generate a report from the recorded data:
+To view the report, open the `index.html` file in the `test_report/` directory using a web browser. Press `Ctrl+O` on Linux and Windows, or `⌘+O` on macOS.
+
+The report's home page displays system information from the APerf run, followed by analytical findings that highlight potential performance issues:
+
+![APerf report home page showing system information and analytical findings alt-txt#center](/install-guides/_images/aperf_report_home.png "APerf report home page")
+
+You can browse through all collected data using the navigation panel on the left.
+
+To learn more about a specific metric, select the info button next to it to open the help panel:
+
+![APerf report help panel showing detailed metric information alt-txt#center](/install-guides/_images/aperf_report_help_panel.png "APerf report help panel")
+
+### How do I compare multiple runs?
+
+To demonstrate comparing multiple runs, create a second run with `aperf record`:
 
 ```console
-sudo aperf report -r run1 -n report1
+aperf record -r test_2
 ```
 
-The name of the report is `report1` and you will see a `report1` directory and a tar file named `report1.tar.gz`.
+Similarly, after 10 seconds the collection completes, and APerf produces a directory named `test_2` and a tar file named `test_2.tar.gz`.
 
-The tar files are useful if you want to copy them to another machine.
-
-Using a web browser, open the file `index.html` in the `report1/` directory. To open the file use `Ctrl+O` for Linux and Windows and use `⌘+O` for macOS.
-
-The report is now visible in the browser.
-
-There are a number of tabs on the left side showing the collected data.
-
-You can browse the data and see what has been collected.
-
-![APerf #center](/install-guides/_images/aperf0.webp)
-
-{{% notice Note %}}
-The Kernel Config and Sysctl Data tabs are blank unless you click No.
-{{% /notice %}}
-
-### How do I create and view a report containing 2 runs?
-
-To demonstrate comparing 2 runs, create a second run with `aperf record`:
+Generate a report that includes both runs. The first run in the `-r` arguments becomes the base run for automatic comparisons:
 
 ```console
-sudo aperf record -i 1 -p 10 -r run2 --profile
+aperf report -r test_1 test_2 -n compare_report
 ```
 
-After 10 seconds `aperf` completes and you see a directory named `run2` and a tar file named `run2.tar.gz`.
+APerf creates a directory named `compare_report` and a tar file named `compare_report.tar.gz`.
 
-Generate a report with both the first and second runs included:
+Open the `index.html` file in the `compare_report/` directory using a web browser. 
+
+Because the report includes multiple runs, APerf compares all runs against the base run and displays statistical findings on the home page:
+
+![APerf report home page showing statistical comparisons between multiple runs alt-text#center](/install-guides/_images/aperf_report_statistical_findings.png "APerf report statistical findings")
+
+When you view metric graphs, APerf aligns graphs of the same metric from different runs side by side for easy comparison:
+
+![APerf report showing aligned metric graphs from multiple runs for comparison alt-text#center](/install-guides/_images/aperf_report_aligned_graphs.png "APerf report aligned graphs")
+
+### How do I view reports from a remote system?
+
+If you're working on a remote system or cloud instance without a desktop environment, you can view APerf reports in your local browser by running a web server on the remote machine.
+
+Navigate to the directory containing the report and the `index.html` file:
 
 ```console
-sudo aperf report -r run1 -r run2 -n compare
+cd test_report
 ```
 
-The name of the report is `compare` and you will see a `compare` directory and a tar file named `compare.tar.gz`.
-
-Open the `index.html` file in the `compare/` directory to see the 2 runs side by side.
-
-A screenshot is shown below:
-
-![APerf #center](/install-guides/_images/aperf.webp)
-
-### How do I use an HTTP server to view reports?
-
-If you are doing performance analysis on a remote system or cloud instance without a remote desktop, you can view the APerf reports from your local browser by running a simple web server on the remote machine.
-
-In the directory with the report data and the `index.html` file run a simple web server:
+Start a simple HTTP server:
 
 ```console
 python -m http.server 3000
 ```
 
-Make sure port 3000 is open on the remote system and enter the IP address of the remote system followed by `:3000` in your browser address bar.
+The server starts on port 3000. Make sure this port is open in your firewall or security group settings.
 
-You will see the same APerf report, and avoid the need to copy files to your local machine from the remote system for viewing.
+Open a web browser on your local machine and navigate to:
 
-You are ready to use APerf for performance analysis on your Arm Linux system.
+```output
+http://<remote-ip-address>:3000
+```
+
+Replace `<remote-ip-address>` with the IP address of your remote system.
+
+The APerf report opens in your browser without needing to copy files to your local machine.
+
+You're now ready to use APerf for performance analysis on your Arm Linux system.
+

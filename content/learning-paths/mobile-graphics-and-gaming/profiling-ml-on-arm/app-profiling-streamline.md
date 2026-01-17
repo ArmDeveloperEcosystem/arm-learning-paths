@@ -20,7 +20,7 @@ The profiler looks at performance metrics such as memory, CPU activity and cycle
 
 It can also provide a timeline-view of these counters to show any changes in the application's performance, which can reveal bottlenecks, and help you to identify where to focus your optimization efforts.
 
-![Streamline image alt-text#center](Streamline.png "Figure 1. Streamline Timeline View")
+![Streamline image alt-text#center](streamline.png "Figure 1. Streamline Timeline View")
 
 ## Get started with an example Android Application 
 

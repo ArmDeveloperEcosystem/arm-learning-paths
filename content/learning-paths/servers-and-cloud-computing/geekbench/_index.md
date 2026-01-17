@@ -1,5 +1,6 @@
 ---
 title: Get started with Geekbench on Arm
+description: Run Geekbench on Arm systems to benchmark CPU performance, interpret the results, and compare different Arm configurations.
 
 minutes_to_complete: 15
 

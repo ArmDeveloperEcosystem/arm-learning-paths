@@ -59,7 +59,7 @@ Explore each frame to evaluate how efficiently they were rendered on the device.
 
 1. Look at the Render Graph to see how the frame was constructed.
 
-    ![Render Graph](images/FA_render_graph_1.1.gif)
+    ![Render Graph](images/fa_render_graph_1.1.gif)
 
     Evaluate the render graph to look for render passes or input or output attachments that aren’t used in the final output, and could be removed, saving processing power and bandwidth.
 
