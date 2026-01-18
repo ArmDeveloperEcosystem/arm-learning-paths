@@ -27,7 +27,12 @@ Where it is used:
 <title>{{ $title }}</title>
 
 {{/* Meta description */}}
-{{- $d := .Params.description | default "" | plainify | htmlEscape | strings.TrimSpace -}}
+{{- $d := .Params.description
+    | default ""
+    | plainify
+    | replaceRE `(?s)^\s+|\s+$` ""
+    | htmlEscape
+-}}
 {{- if gt (len $d) 0 -}}
 <meta name="description" content="{{ $d }}">
 {{- end -}}
