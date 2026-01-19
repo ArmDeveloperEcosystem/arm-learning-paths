@@ -123,13 +123,13 @@ To view the report, open the `index.html` file in the `test_report/` directory u
 
 The report's home page displays system information from the APerf run, followed by analytical findings that highlight potential performance issues:
 
-![APerf report home page showing system information and analytical findings alt-txt#center](/install-guides/_images/aperf_report_home.png "APerf report home page")
+![APerf report home page showing system information and analytical findings alt-txt#center](/install-guides/_images/aperf_report_home.webp "APerf report home page")
 
 You can browse through all collected data using the navigation panel on the left.
 
 To learn more about a specific metric, select the info button next to it to open the help panel:
 
-![APerf report help panel showing detailed metric information alt-txt#center](/install-guides/_images/aperf_report_help_panel.png "APerf report help panel")
+![APerf report help panel showing detailed metric information alt-txt#center](/install-guides/_images/aperf_report_help_panel.webp "APerf report help panel")
 
 ### How do I compare multiple runs?
 

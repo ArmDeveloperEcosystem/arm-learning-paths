@@ -27,7 +27,7 @@ We start by creating a new Android project using Android Studio. This project wi
 1. Create a new project:
 * Open Android Studio and click New Project.
 * In the Templates screen, select Phone and Tablet, then choose Empty Views Activity.
-![img3](figures/03.png)
+![img3](figures/03.webp)
 
 This template creates a minimal Android application without additional UI components, which is ideal for a focused, step-by-step integration.
 
@@ -41,7 +41,7 @@ This template creates a minimal Android application without additional UI compon
 * Minimum SDK: API 24 (Android 7.0 – Nougat). This provides wide device coverage while remaining compatible with ONNX Runtime and OpenCV.
 * Build configuration language: Kotlin DSL (build.gradle.kts). We use the Kotlin DSL for Gradle, which is now the recommended option.
 
-![img4](figures/04.png)
+![img4](figures/04.webp)
 
 * After confirming these settings, click Finish. Android Studio will create the project and generate a basic MainActivity along with the necessary Gradle files.
 
