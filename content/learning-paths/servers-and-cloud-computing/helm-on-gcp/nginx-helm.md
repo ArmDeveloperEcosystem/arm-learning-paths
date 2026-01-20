@@ -26,6 +26,18 @@ my-nginx/
 └── templates/
 ```
 
+### Clean templates
+
+The default Helm chart includes several files that aren't required for a basic Nginx deployment. Remove the following files from `my-nginx/templates/` to avoid unnecessary complexity and template errors: ingress.yaml, hpa.yaml, serviceaccount.yaml, tests/, NOTES.txt, and httproute.yaml.
+
+```console
+cd ./my-nginx/templates
+rm -rf hpa.yaml ingress.yaml serviceaccount.yaml tests/ NOTES.txt httproute.yaml
+cd $HOME/helm-microservices
+```
+
+Only ngnix-specific templates will be maintained.
+
 ### Configure values.yaml
 
 Replace the contents of `my-nginx/values.yaml` with the following to define configurable parameters including the NGINX image, service type, and public port:
@@ -92,21 +104,17 @@ A LoadBalancer provides a public IP required for browser access and is a common 
 ### Install & Access
 
 ```console
+cd $HOME/helm-microservices
 helm install nginx ./my-nginx
 ```
 
 ```output
 NAME: nginx
-LAST DEPLOYED: Tue Jan  6 07:55:52 2026
+LAST DEPLOYED: Tue Jan 20 20:07:47 2026
 NAMESPACE: default
 STATUS: deployed
 REVISION: 1
-NOTES:
-1. Get the application URL by running these commands:
-     NOTE: It may take a few minutes for the LoadBalancer IP to be available.
-           You can watch its status by running 'kubectl get --namespace default svc -w nginx-my-nginx'
-  export SERVICE_IP=$(kubectl get svc --namespace default nginx-my-nginx --template "{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}")
-  echo http://$SERVICE_IP:80
+TEST SUITE: None
 ```
 
 ### Access NGINX from a browser
@@ -120,11 +128,11 @@ kubectl get svc
 Wait until **EXTERNAL-IP** is assigned.
 
 ```output
-NAME                       TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)        AGE
-kubernetes                 ClusterIP      34.118.224.1     <none>          443/TCP        3h22m
-nginx-my-nginx             LoadBalancer   34.118.239.19    34.63.103.125   80:31501/TCP   52s
-postgres-app-my-postgres   ClusterIP      34.118.225.2     <none>          5432/TCP       13m
-redis-my-redis             ClusterIP      34.118.234.155   <none>          6379/TCP       6m53s
+NAME                       TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+kubernetes                 ClusterIP      34.118.224.1     <none>        443/TCP        42m
+nginx-my-nginx             LoadBalancer   34.118.238.110   34.61.85.5    80:30954/TCP   69s
+postgres-app-my-postgres   ClusterIP      34.118.233.240   <none>        5432/TCP       27m
+redis-my-redis             ClusterIP      34.118.229.221   <none>        6379/TCP       8m24s
 ```
 
 Open the external IP in your browser:

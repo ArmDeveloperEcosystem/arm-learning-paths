@@ -142,6 +142,64 @@ gke-helm-arm64-cluster-default-pool-f4ab8a2d-5ldp   Ready    <none>   5h54m   v1
 
 All nodes should be in **Ready** state and the Kubernetes control plane should be accessible.
 
+### Taint the cluster nodes for arm64 support
+
+Taint the nodes to ensure proper scheduling on arm64 VMs. For each node starting with **gke**, run the following taint command. 
+
+{{% notice Note %}}
+Note the required "-" at the end... its needed!
+{{% /notice %}}
+
+For example using the node IDs in the output above: 
+
+```console
+kubectl taint nodes gke-helm-arm64-cluster-default-pool-f4ab8a2d-5h6f kubernetes.io/arch=arm64:NoSchedule-
+kubectl taint nodes gke-helm-arm64-cluster-default-pool-f4ab8a2d-5ldp kubernetes.io/arch=arm64:NoSchedule-
+```
+
+Replace the node names with your actual node names from the previous command output.
+
+### Create hyperdisk storage class for our cluster
+
+In order to use the c4a architecture with our cluster, a new storage class must be created. 
+
+Create a new file, hyperdisk.yaml, with this content:
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: my-hyperdisk-sc
+provisioner: pd.csi.storage.gke.io
+parameters:
+  type: hyperdisk-balanced # Or hyperdisk-ssd, etc.
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+```
+
+Apply the hyperdisk.yaml file to the cluster:
+
+```console
+kubectl apply -f ./hyperdisk.yaml
+```
+
+Confirm that the new storage class has been added:
+
+```console
+kubectl get storageclass
+```
+
+The output should contain the new **my-hyperdisk-sc** storage class:
+
+```output
+NAME                     PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+my-hyperdisk-sc          pd.csi.storage.gke.io   Delete          WaitForFirstConsumer   false                  7m27s
+premium-rwo              pd.csi.storage.gke.io   Delete          WaitForFirstConsumer   true                   20m
+standard                 kubernetes.io/gce-pd    Delete          Immediate              true                   20m
+standard-rwo (default)   pd.csi.storage.gke.io   Delete          WaitForFirstConsumer   true                   20m
+```
+
+The new storage class will be used in the next section. 
+
 ## What you've accomplished and what's next
 
 You've successfully prepared your GKE environment by installing and configuring the Google Cloud SDK, creating a GKE cluster, connecting kubectl to the cluster, and verifying cluster access. Your environment is now ready to deploy applications using Helm charts.

@@ -29,11 +29,11 @@ my-redis/
 
 ### Clean templates
 
-The default Helm chart includes several files that aren't required for a basic Redis deployment. Remove the following files from `my-redis/templates/` to avoid unnecessary complexity and template errors: ingress.yaml, hpa.yaml, serviceaccount.yaml, tests/, and NOTES.txt.
+The default Helm chart includes several files that aren't required for a basic Redis deployment. Remove the following files from `my-redis/templates/` to avoid unnecessary complexity and template errors: ingress.yaml, hpa.yaml, serviceaccount.yaml, tests/, NOTES.txt, and httproute.yaml.
 
 ```console
 cd ./my-redis/templates
-rm -rf hpa.yaml ingress.yaml serviceaccount.yaml tests/ NOTES.txt
+rm -rf hpa.yaml ingress.yaml serviceaccount.yaml tests/ NOTES.txt httproute.yaml
 cd $HOME/helm-microservices
 ```
 
@@ -113,9 +113,15 @@ ClusterIP is used because Redis is intended for internal communication only with
 Install Redis and validate that it's running and responding correctly:
 
 ```console
+cd $HOME/helm-microservices
 helm install redis ./my-redis
+```
+
+Confirm that the redis pod is operating:
+
+```console
+kubectl get pods
 kubectl get svc
-kubectl exec -it <redis-pod> -- redis-cli ping
 ```
 
 You should see an output similar to:
@@ -124,12 +130,24 @@ NAME                                        READY   STATUS    RESTARTS   AGE
 postgres-app-my-postgres-6dbc8759b6-jgpxs   1/1     Running   0          6m38s
 redis-my-redis-75c88646fb-6lz8v             1/1     Running   0          13s
 
->kubectl get svc
-redis-my-redis             ClusterIP      34.118.234.155   <none>        6379/TCP       6m14s
+NAME                       TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+kubernetes                 ClusterIP   34.118.224.1     <none>        443/TCP    37m
+postgres-app-my-postgres   ClusterIP   34.118.233.240   <none>        5432/TCP   22m
+redis-my-redis             ClusterIP   34.118.229.221   <none>        6379/TCP   3m19s
+```
 
-> kubectl exec -it redis-my-redis-75c88646fb-6lz8v -- redis-cli ping
+Finally, execute a sample ping via redis:
+
+```console
+kubectl exec -it <redis-pod> -- redis-cli ping
+```
+
+You should see an output similar to:
+
+```output
 PONG
 ```
+
 
 The Redis pod should be in **Running** state and the service should be **ClusterIP** type.
 
