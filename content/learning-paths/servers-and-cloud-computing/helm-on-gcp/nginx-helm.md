@@ -28,7 +28,7 @@ my-nginx/
 
 ### Clean templates
 
-The default Helm chart includes several files that aren't required for a basic Redis deployment. Remove the following files from `my-nginx/templates/` to avoid unnecessary complexity and template errors: ingress.yaml, hpa.yaml, serviceaccount.yaml, tests/, NOTES.txt, and httproute.yaml.
+The default Helm chart includes several files that aren't required for a basic Nginx deployment. Remove the following files from `my-nginx/templates/` to avoid unnecessary complexity and template errors: ingress.yaml, hpa.yaml, serviceaccount.yaml, tests/, NOTES.txt, and httproute.yaml.
 
 ```console
 cd ./my-nginx/templates
