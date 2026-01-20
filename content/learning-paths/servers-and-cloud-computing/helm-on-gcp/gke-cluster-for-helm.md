@@ -18,14 +18,7 @@ This setup differs from the earlier KinD-based local cluster, which was intended
 
 ## Prerequisites
 
-Before starting, ensure the following are already completed:
-
-- Docker installed
-- kubectl installed
-- Helm installed
-- Google Cloud account available
-
-If Helm and kubectl are not installed, complete the **Install Helm** section first.
+Before starting, ensure that Docker, kubectl, and Helm are installed, and that you have a Google Cloud account available. If Helm and kubectl aren't installed, complete the **Install Helm** section first.
 
 ### Verify kubectl Installation
 Confirm that kubectl is available:
@@ -35,8 +28,17 @@ kubectl version --client
 ```
 You should see an output similar to:
 ```output
-Client Version: version.Info{Major:"1", Minor:"26+", GitVersion:"v1.26.15-dispatcher", GitCommit:"5490d28d307425a9b05773554bd5c037dbf3d492", GitTreeState:"clean", BuildDate:"2024-04-18T22:39:37Z", GoVersion:"go1.21.9", Compiler:"gc", Platform:"linux/arm64"}
-Kustomize Version: v4.5.7
+Client Version: v1.30.1
+Kustomize Version: v5.0.4-0.20230601165947-6ce0bf390ce3
+```
+
+### Install Python 3.11 
+
+Install python3.11:
+
+```bash
+sudo zypper install -y python311
+which python3.11
 ```
 
 ### Install Google Cloud SDK (gcloud)
@@ -54,26 +56,46 @@ tar -xvf google-cloud-sdk-460.0.0-linux-arm.tar.gz
 ```console
 ./google-cloud-sdk/install.sh
 ```
-Restart the shell or reload the environment if prompted.
+
+The shell will exit. Bring up a new SSH Shell:
+```console
+exit
+```
 
 ### Initialize gcloud
 Authenticate and configure the Google Cloud CLI:
 
 ```console
-./google-cloud-sdk/bin/gcloud init
+gcloud init
 ```
 
-During initialization:
+During initialization, select **Login with a new account**. You'll be prompted to use your browser to authenticate to Google and receive an auth code to copy back. Select the project you want to use and choose default settings when unsure.
 
-- Log in using a Google account
-- Select the correct project
-- Choose default settings when unsure
+### Get the list of Google project IDs
+Retrieve the list of project IDs:
 
+```console
+gcloud projects list
+```
+
+The output is similar to:
+
+```output
+PROJECT_ID              NAME             PROJECT_NUMBER
+arm-lp-test             arm-lp-test      834184475014
+```
+
+Note the **PROJECT_ID** for the project you want to set as active for use in the next step. 
 ### Set the Active Project
 Ensure the correct GCP project is selected:
 
 ```console
 gcloud config set project YOUR_PROJECT_ID
+```
+
+### Install the auth plugin for gcloud
+```console
+gcloud components install gke-gcloud-auth-plugin
 ```
 
 ### Enable Kubernetes API
@@ -84,18 +106,17 @@ gcloud services enable container.googleapis.com
 ```
 
 ### Create a GKE Cluster
-Create a Kubernetes cluster that will host Helm deployments.
+Create a Kubernetes cluster to host Helm deployments. Replace `YOUR_PROJECT_ID` with the project ID you set previously.
 
 ```console
 gcloud container clusters create helm-arm64-cluster \
   --zone us-central1-a \
   --machine-type c4a-standard-4 \
-  --num-nodes 2
+  --num-nodes 2 \
+  --no-enable-ip-alias
 ```
 
-- This creates a standard GKE cluster
-- Node count and machine type can be adjusted later
-- Arm64 compatibility depends on available node types in the region
+This creates a standard GKE cluster. You can adjust the node count and machine type later as needed.
 
 ### Configure kubectl Access to GKE
 Fetch cluster credentials:
@@ -119,16 +140,11 @@ gke-helm-arm64-cluster-default-pool-f4ab8a2d-5h6f   Ready    <none>   5h54m   v1
 gke-helm-arm64-cluster-default-pool-f4ab8a2d-5ldp   Ready    <none>   5h54m   v1.33.5-gke.1308000
 ```
 
-- Nodes in Ready state
-- Kubernetes control plane accessible
+All nodes should be in **Ready** state and the Kubernetes control plane should be accessible.
 
-### Outcome
-At this point:
+## What you've accomplished and what's next
 
-- Google Cloud SDK is installed and configured
-- GKE cluster is running
-- kubectl is connected to the cloud cluster
-- Helm is ready to deploy applications on GKE
+You've successfully prepared your GKE environment by installing and configuring the Google Cloud SDK, creating a GKE cluster, connecting kubectl to the cluster, and verifying cluster access. Your environment is now ready to deploy applications using Helm charts.
 
-The environment is now prepared to deploy Helm charts.
+Next, you'll deploy PostgreSQL on your GKE cluster using a custom Helm chart with persistent storage and secure credentials.
 
