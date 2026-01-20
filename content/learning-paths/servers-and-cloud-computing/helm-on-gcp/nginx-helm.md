@@ -1,17 +1,18 @@
 ---
-title: NGINX Deployment Using Custom Helm Chart
+title: Deploy NGINX with public access
 weight: 9
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Deploy NGINX using a custom Helm chart
+## Create a custom NGINX Helm chart
 
-This section explains how to deploy NGINX as a frontend service on Kubernetes using a custom Helm chart. After completing this section, you'll have NGINX deployed using Helm with public access through a LoadBalancer service, providing an external IP for browser access and a foundation for connecting backend services like Redis and PostgreSQL.
+In this section you'll deploy NGINX as a frontend service on Kubernetes using a custom Helm chart. After deployment, NGINX will have public access through a LoadBalancer service with an external IP for browser access.
 
-### Create Helm Chart
-Generates a Helm chart skeleton that will be customized for NGINX.
+### Create a Helm chart skeleton
+
+Create a Helm chart skeleton that will be customized for NGINX:
 
 ```console
 helm create my-nginx
@@ -40,7 +41,8 @@ Only ngnix-specific templates will be maintained.
 
 ### Configure values.yaml
 
-Replace the contents of `my-nginx/values.yaml` with the following to define configurable parameters including the NGINX image, service type, and public port:
+Replace the contents of `my-nginx/values.yaml`:
+
 ```yaml
 image:
   repository: nginx
@@ -55,7 +57,7 @@ This configuration centralizes settings, allows service exposure without editing
 
 ### Deployment definition (deployment.yaml)
 
-Replace the entire contents of `my-nginx/templates/deployment.yaml` with the following to define how the NGINX container runs inside Kubernetes, including the container image, pod labels, and port exposure:
+Replace the entire contents of `my-nginx/templates/deployment.yaml`:
 
 ```yaml
 apiVersion: apps/v1
@@ -84,7 +86,7 @@ spec:
 
 ### Service definition (service.yaml)
 
-Replace the entire contents of `my-nginx/templates/service.yaml` with the following to expose NGINX to external traffic using a Kubernetes LoadBalancer:
+Replace the entire contents of `my-nginx/templates/service.yaml` to expose NGINX to external traffic:
 
 ```yaml
 apiVersion: v1
@@ -101,7 +103,7 @@ spec:
 
 A LoadBalancer provides a public IP required for browser access and is a common pattern for frontend services.
 
-### Install & Access
+### Install and access
 
 ```console
 cd $HOME/helm-microservices

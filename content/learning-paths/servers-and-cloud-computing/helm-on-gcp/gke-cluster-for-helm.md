@@ -1,26 +1,27 @@
 ---
-title: Prepare GKE Cluster for Helm Deployments
+title: Prepare a GKE cluster for Helm deployments
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Overview
-This section explains how to prepare a **Google Kubernetes Engine (GKE) cluster** for deploying Helm charts.
-The prepared GKE cluster is used to deploy the following services using custom Helm charts:
+## Set up your GKE environment
+
+In this section you'll prepare a Google Kubernetes Engine (GKE) cluster for deploying Helm charts. The GKE cluster hosts the following services:
 
 - PostgreSQL
 - Redis
 - NGINX
 
-This setup differs from the earlier KinD-based local cluster, which was intended only for local validation.
+This setup differs from the earlier KinD-based local cluster, which was used only for local validation.
 
 ## Prerequisites
 
-Before starting, ensure that Docker, kubectl, and Helm are installed, and that you have a Google Cloud account available. If Helm and kubectl aren't installed, complete the **Install Helm** section first.
+Ensure that Docker, kubectl, and Helm are installed, and that you have a Google Cloud account available. If Helm and kubectl aren't installed, complete the previous section first.
 
-### Verify kubectl Installation
+### Verify kubectl installation
+
 Confirm that kubectl is available:
 
 ```console
@@ -32,9 +33,9 @@ Client Version: v1.30.1
 Kustomize Version: v5.0.4-0.20230601165947-6ce0bf390ce3
 ```
 
-### Install Python 3.11 
+### Install Python 3.11
 
-Install python3.11:
+Install Python 3.11:
 
 ```bash
 sudo zypper install -y python311
@@ -42,36 +43,40 @@ which python3.11
 ```
 
 ### Install Google Cloud SDK (gcloud)
+
 The Google Cloud SDK is required to create and manage GKE clusters.
 
-**Download and extract:**
+Download and extract:
 
 ```console
 wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-460.0.0-linux-arm.tar.gz
 tar -xvf google-cloud-sdk-460.0.0-linux-arm.tar.gz
 ```
 
-**Install gcloud:**
+Install gcloud:
 
 ```console
 ./google-cloud-sdk/install.sh
 ```
 
-The shell will exit. Bring up a new SSH Shell:
+After installation completes, exit and reconnect to apply the PATH changes:
+
 ```console
 exit
 ```
 
 ### Initialize gcloud
+
 Authenticate and configure the Google Cloud CLI:
 
 ```console
 gcloud init
 ```
 
-During initialization, select **Login with a new account**. You'll be prompted to use your browser to authenticate to Google and receive an auth code to copy back. Select the project you want to use and choose default settings when unsure.
+During initialization, select **Login with a new account**. You'll be prompted to authenticate using your browser and receive an auth code to copy back. Select the project you want to use and choose default settings when unsure.
 
 ### Get the list of Google project IDs
+
 Retrieve the list of project IDs:
 
 ```console
@@ -85,28 +90,35 @@ PROJECT_ID              NAME             PROJECT_NUMBER
 arm-lp-test             arm-lp-test      834184475014
 ```
 
-Note the **PROJECT_ID** for the project you want to set as active for use in the next step. 
-### Set the Active Project
+Note the **PROJECT_ID** for use in the next step.
+
+### Set the active project
+
 Ensure the correct GCP project is selected:
 
 ```console
-gcloud config set project YOUR_PROJECT_ID
+gcloud config set project <YOUR_PROJECT_ID>
 ```
 
+Replace `<YOUR_PROJECT_ID>` with your actual project ID from the previous step.
+
 ### Install the auth plugin for gcloud
+
 ```console
 gcloud components install gke-gcloud-auth-plugin
 ```
 
 ### Enable Kubernetes API
+
 Enable the required API for GKE:
 
 ```console
 gcloud services enable container.googleapis.com
 ```
 
-### Create a GKE Cluster
-Create a Kubernetes cluster to host Helm deployments. Replace `YOUR_PROJECT_ID` with the project ID you set previously.
+### Create a GKE cluster
+
+Create a Kubernetes cluster to host Helm deployments:
 
 ```console
 gcloud container clusters create helm-arm64-cluster \
@@ -116,9 +128,8 @@ gcloud container clusters create helm-arm64-cluster \
   --no-enable-ip-alias
 ```
 
-This creates a standard GKE cluster. You can adjust the node count and machine type later as needed.
+### Configure kubectl access to GKE
 
-### Configure kubectl Access to GKE
 Fetch cluster credentials:
 
 ```console
@@ -126,7 +137,8 @@ gcloud container clusters get-credentials helm-arm64-cluster \
   --zone us-central1-a
 ```
 
-### Verify Cluster Access
+### Verify cluster access
+
 Confirm Kubernetes access:
 
 ```console
