@@ -105,7 +105,7 @@ This approach prevents hard-coding credentials and follows Kubernetes security b
 
 ### Create pvc.yaml
 
-Create `my-postgres/templates/pvc.yaml` with the following content to request persistent storage so PostgreSQL data remains available even if the pod restarts:
+Create `my-postgres/templates/pvc.yaml` with the following content to request persistent storage so PostgreSQL data remains available even if the pod restarts. Note the specification of the storage class that will be used **my-hyperdisk-sc** which was created and added to our cluster in the previous section. This hyperdisk-based storage class is required for the c4a architecture:
 
 ```yaml
 apiVersion: v1
@@ -115,6 +115,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
+  storageClassName: my-hyperdisk-sc
   resources:
     requests:
       storage: {{ .Values.persistence.size }}
@@ -210,31 +211,6 @@ STATUS: deployed
 REVISION: 1
 TEST SUITE: None
 ```
-
-### Taint the nodes
-
-Taint the nodes to ensure proper scheduling. First, list the nodes:
-
-```console
-kubectl get nodes
-```
-
-The output is similar to:
-
-```output
-NAME                                                STATUS   ROLES    AGE   VERSION
-gke-helm-arm64-cluster-default-pool-7400f0d3-dq80   Ready    <none>   10m   v1.33.5-gke.2072000
-gke-helm-arm64-cluster-default-pool-7400f0d3-v3c9   Ready    <none>   10m   v1.33.5-gke.2072000
-```
-
-For each node starting with **gke**, run the taint command. For example: 
-
-```console
-kubectl taint nodes gke-helm-arm64-cluster-default-pool-7400f0d3-dq80 kubernetes.io/arch=arm64:NoSchedule-
-kubectl taint nodes gke-helm-arm64-cluster-default-pool-7400f0d3-v3c9 kubernetes.io/arch=arm64:NoSchedule-
-```
-
-Replace the node names with your actual node names from the previous command output. 
 
 ### Check the runtime status
 
