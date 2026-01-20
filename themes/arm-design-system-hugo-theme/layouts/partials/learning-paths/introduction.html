@@ -12,8 +12,30 @@ Calls to:
 */}}
 
 
-<!-- Markdown metadata table -->
-{{partial "general-formatting/metadata-table.html" .}}
+<!-- Optional visual (image / gif) alongside metadata -->
+<div class="learning-path-hero u-gap-1">
+    <div class="learning-path-hero__meta">
+        <!-- Markdown metadata table -->
+        {{partial "general-formatting/metadata-table.html" .}}
+    </div>
+
+    {{ with .Params.learning_path_visual }}
+    {{ $visual_src := . }}
+    {{ if and (not (hasPrefix $visual_src "http://")) (not (hasPrefix $visual_src "https://")) (not (hasPrefix $visual_src "//")) }}
+        {{ $visual_src = $visual_src | relURL }}
+    {{ end }}
+    <div class="learning-path-hero__visual">
+        <div class="content-box learning-path-visual">
+            <div class="learning-path-visual-frame">
+                <img src="{{ $visual_src }}" alt="{{ $.Params.learning_path_visual_alt | default (printf "%s visual" $.Title) }}" loading="lazy">
+            </div>
+            {{ with $.Params.learning_path_visual_caption }}
+                <p class="learning-path-visual-caption">{{.}}</p>
+            {{ end }}
+        </div>
+    </div>
+    {{ end }}
+</div>
 
 
 <!-- Learning objectives & Prereq box -->

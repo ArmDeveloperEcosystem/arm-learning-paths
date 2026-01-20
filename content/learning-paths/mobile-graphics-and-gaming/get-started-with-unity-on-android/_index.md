@@ -15,6 +15,10 @@ prerequisites:
     - Recent Android device, such as a mobile phone or tablet
     - Desktop computer capable of running Unity
 
+learning_path_visual: /learning-path-visuals/unity-on-android.png
+learning_path_visual_alt: "Abstract Arm background for Unity on Android"
+learning_path_visual_caption: "Unity on Android: build, deploy, and profile"
+
 author: Joshua Marshall-Law
 
 ### Tags

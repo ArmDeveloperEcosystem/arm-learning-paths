@@ -158,6 +158,77 @@ img.content-uploaded-image.centered {
     font-size: 1rem;
 }
 
+/* Learning path intro visuals */
+.learning-path-hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    align-items: start;
+}
+
+.learning-path-hero__meta,
+.learning-path-hero__visual {
+    width: 100%;
+}
+
+@media (min-width: 992px) {
+    .learning-path-hero {
+        grid-template-columns: minmax(0, 5fr) minmax(380px, 3fr);
+        gap: 28px;
+    }
+}
+
+.learning-path-hero .content-box {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.learning-path-hero .content-box table {
+    width: 100%;
+}
+
+.learning-path-hero .td-metadata-key {
+    padding-right: 12px;
+    white-space: nowrap;
+}
+
+.learning-path-hero .td-metadata-value {
+    width: 100%;
+}
+
+.learning-path-visual {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 8px;
+}
+
+.learning-path-visual-frame {
+    border-radius: 6px;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(95, 165, 255, 0.15), rgba(0, 255, 199, 0.08));
+    border: 1px solid rgba(163, 168, 174, 0.25);
+    min-height: 260px;
+}
+
+.learning-path-visual-frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-height: 560px;
+    object-fit: cover;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.learning-path-visual-caption {
+    margin: 0 8px 4px 8px;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--arm-grey-01);
+    text-align: center;
+}
+
 .content-image-caption.centered {
     text-align: center;
 }

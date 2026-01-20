@@ -13,6 +13,10 @@ prerequisites:
     - PLACEHOLDER PREREQ 1
     - PLACEHOLDER PREREQ 2
 
+learning_path_visual: /img/placeholder.gif         # Optional: image or gif shown on the intro page (accepts relative or absolute URLs)
+learning_path_visual_alt: PLACEHOLDER ALT TEXT     # Optional: accessibility text for the intro visual
+learning_path_visual_caption: PLACEHOLDER CAPTION  # Optional: short caption beneath the visual
+
 author: PLACEHOLDER NAME
 
 ### Tags
