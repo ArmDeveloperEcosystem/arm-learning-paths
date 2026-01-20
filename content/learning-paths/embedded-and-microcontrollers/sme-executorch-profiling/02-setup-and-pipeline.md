@@ -129,7 +129,7 @@ This produces runners in `executorch/cmake-out/`:
 
 The build script produces timing-only runners by default. For kernel-level analysis, you'll need separate trace-enabled runners built with XNNPACK kernel logging flags.
 
-How it works: ExecuTorch ships with a default `CMakePresets.json`, but we add custom presets for SME2 profiling (SME2-on/off variants, platform-specific configs). The build script merges our custom presets ([`model_profiling/assets/CMakePresets.json`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/assets/CMakePresets.json)) into ExecuTorch's default file, then uses `cmake --preset` commands. This approach keeps ExecuTorch's defaults intact while adding our profiling-specific configurations. No manual CMake flags needed.
+How it works: ExecuTorch ships with a default `CMakePresets.json`, but we add custom presets for SME2 profiling (SME2-on/off variants, platform-specific configs). The build script merges our custom presets ([`model_profiling/assets/cmake_presets.json`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/assets/cmake_presets.json)) into ExecuTorch's default file, then uses `cmake --preset` commands. This approach keeps ExecuTorch's defaults intact while adding our profiling-specific configurations. No manual CMake flags needed.
 
 Example preset (SME2-on for macOS):
 

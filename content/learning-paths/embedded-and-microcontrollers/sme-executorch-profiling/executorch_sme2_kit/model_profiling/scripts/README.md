@@ -76,7 +76,7 @@ python model_profiling/scripts/validate_results.py \
   --results out_mobilenet/runs/mac
 ```
 
-**See `PIPELINE_COMMANDS.md` for detailed command reference.**
+**See `pipeline_commands.md` for detailed command reference.**
 
 ## Notes
 
@@ -108,6 +108,6 @@ python model_profiling/scripts/analyze_results.py \
 
 ## Reference
 
-- **Command reference**: See `PIPELINE_COMMANDS.md` for detailed workflow
+- **Command reference**: See `pipeline_commands.md` for detailed workflow
 - **Model onboarding**: See learning path documentation for adding new models
 

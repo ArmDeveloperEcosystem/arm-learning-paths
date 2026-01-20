@@ -66,7 +66,7 @@ def main():
     assets_dir = root_dir / "model_profiling" / "assets"
     
     executorch_presets_file = executorch_dir / "CMakePresets.json"
-    our_presets_file = assets_dir / "CMakePresets.json"
+    our_presets_file = assets_dir / "cmake_presets.json"
     
     if not executorch_presets_file.exists():
         print(f"ERROR: ExecuTorch CMakePresets.json not found: {executorch_presets_file}", file=sys.stderr)

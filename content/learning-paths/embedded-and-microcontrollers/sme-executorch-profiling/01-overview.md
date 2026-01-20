@@ -52,7 +52,7 @@ The profiling kit works with a specific execution stack. Before running the pipe
 
 <p>
   <img
-    src="/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/images/SME2_stack_01062026.png"
+    src="/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/images/sme2_stack_01062026.png"
     alt="PyTorch → ExecuTorch → XNNPACK → Arm KleidiAI kernels → SME2"
     class="content-uploaded-image centered"
     style="max-width: 880px; width: 100%; height: auto;"

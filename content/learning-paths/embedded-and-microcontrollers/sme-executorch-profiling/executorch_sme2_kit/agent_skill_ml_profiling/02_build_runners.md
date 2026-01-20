@@ -163,12 +163,12 @@ $ANDROID_NDK/ndk-build --version
 **References**:
 - Build script: `model_profiling/scripts/build_runners.sh`
 - Preset merge script: `model_profiling/scripts/merge_cmake_presets.py`
-- CMake presets asset: `model_profiling/assets/CMakePresets.json`
+- CMake presets asset: `model_profiling/assets/cmake_presets.json`
 - Learning path: `03-pipeline-and-analysis.md` (runner variants explanation)
 
 **Assets**:
 - `model_profiling/scripts/build_runners.sh` - Runner build orchestration (uses CMake presets)
 - `model_profiling/scripts/merge_cmake_presets.py` - Merges SME2 presets into ExecuTorch's CMakePresets.json
-- `model_profiling/assets/CMakePresets.json` - SME2 profiling presets (merged into ExecuTorch's defaults)
+- `model_profiling/assets/cmake_presets.json` - SME2 profiling presets (merged into ExecuTorch's defaults)
 
 **Next skill**: `03_export_model.md` or `04_run_profiling.md` (if model already exported)

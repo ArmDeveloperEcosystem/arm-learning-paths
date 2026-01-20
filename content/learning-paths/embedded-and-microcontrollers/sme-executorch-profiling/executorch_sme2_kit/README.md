@@ -75,6 +75,6 @@ The pipeline is **model-agnostic** - once you export a `.pte`, everything else s
 
 ## Reference
 
-- **Command reference**: See `model_profiling/PIPELINE_COMMANDS.md` for detailed workflow
+- **Command reference**: See `model_profiling/pipeline_commands.md` for detailed workflow
 - **Scripts overview**: See `model_profiling/scripts/README.md` for script documentation
 - **Learning path**: See the main learning path documentation for context and examples
