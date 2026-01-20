@@ -1,5 +1,5 @@
 ---
-title: Redis Deployment Using Custom Helm Chart
+title: Deploy Redis on GKE
 weight: 8
 
 ### FIXED, DO NOT MODIFY
