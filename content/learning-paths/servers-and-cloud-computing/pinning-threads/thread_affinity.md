@@ -80,7 +80,7 @@ This program has two atomic variables that are aligned on different cache lines 
 
 ## Create a program with explicit thread pinning
 
-Now, copy the code below into a new file named `thread_affinity.cpp`:
+Create a file named `thread_affinity.cpp` with the code below. This program uses `pthread_setaffinity_np` to pin threads to specific CPU cores:
 
 ```cpp
 #include <benchmark/benchmark.h>
@@ -178,7 +178,7 @@ perf stat -e L1-dcache-loads,L1-dcache-load-misses ./thread-affinity
 
 ## Analyze the performance results
 
-Inspecting the output below, you can see that the `L1-dcache-load-misses` metric (which occurs when the CPU core doesn't have an up-to-date version of the data in the L1 data cache and must perform an expensive operation to fetch data from a different location) reduces from approximately 7.84% to approximately 0.6% as a result of thread pinning. 
+The output shows the `L1-dcache-load-misses` metric reduces from approximately 7.84% to approximately 0.6% as a result of thread pinning. This metric measures how often the CPU core doesn't have an up-to-date version of data in the L1 data cache and must perform an expensive operation to fetch data from a different location. 
 
 This results in a significant reduction in function execution time, dropping from 10.7 ms to 3.53 ms:
 

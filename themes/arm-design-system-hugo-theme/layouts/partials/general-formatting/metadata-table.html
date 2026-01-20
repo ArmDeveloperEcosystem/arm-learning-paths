@@ -145,16 +145,6 @@ Called from:
                             {{end}}
                         </td>
                     </tr>
-                {{ if .Params.test_maintenance}}
-                    <tr>
-                        <td class="td-metadata-key">
-                            Test status:
-                        </td>
-                        <td class="td-metadata-value">
-                            {{ partial "test-maintenance/test-maintenance" . }}
-                        </td>
-                    </tr>
-                {{end}}
                 </table>
             </div>
             <!-- RIGHT TABLE, mobile -->
@@ -199,18 +189,6 @@ Called from:
                             {{end}}
                         </td>
                     </tr>
-                {{ if .Params.test_maintenance}}
-                    <tr>
-                        <td class="td-metadata-key width-max-content">
-                            Test status:
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td-metadata-value">
-                            {{ partial "test-maintenance/test-maintenance" . }}
-                        </td>
-                    </tr>
-                {{end}}
                 </table>
             </div>
         </div>

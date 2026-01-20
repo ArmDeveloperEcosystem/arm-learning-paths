@@ -6,16 +6,9 @@ weight: 9
 layout: learningpathall
 ---
 
-## NGINX Deployment Using Custom Helm Chart
-This document explains how to deploy NGINX as a frontend service on Kubernetes using a custom Helm chart.
+## Deploy NGINX using a custom Helm chart
 
-## Goal
-After completing this guide, the environment will include:
-
-- NGINX deployed using Helm
-- Public access using a LoadBalancer service
-- External IP available for browser access
-- Foundation for connecting backend services (Redis, PostgreSQL)
+This section explains how to deploy NGINX as a frontend service on Kubernetes using a custom Helm chart. After completing this section, you'll have NGINX deployed using Helm with public access through a LoadBalancer service, providing an external IP for browser access and a foundation for connecting backend services like Redis and PostgreSQL.
 
 ### Create Helm Chart
 Generates a Helm chart skeleton that will be customized for NGINX.
@@ -34,13 +27,8 @@ my-nginx/
 ```
 
 ### Configure values.yaml
-Defines configurable parameters such as:
 
-- NGINX image
-- Service type
-- Public port
-
-Replace the contents of `my-nginx/values.yaml` with:
+Replace the contents of `my-nginx/values.yaml` with the following to define configurable parameters including the NGINX image, service type, and public port:
 ```yaml
 image:
   repository: nginx
@@ -51,20 +39,11 @@ service:
   port: 80
 ```
 
-That matters
+This configuration centralizes settings, allows service exposure without editing templates, and simplifies future changes.
 
-- Centralizes configuration
-- Allows service exposure without editing templates
-- Simplifies future changes
+### Deployment definition (deployment.yaml)
 
-### Deployment Definition (deployment.yaml)
-Defines how the NGINX container runs inside Kubernetes, including:
-
-- Container image
-- Pod labels
-- Port exposure
-
-Replace `my-nginx/templates/deployment.yaml` completely:
+Replace the entire contents of `my-nginx/templates/deployment.yaml` with the following to define how the NGINX container runs inside Kubernetes, including the container image, pod labels, and port exposure:
 
 ```yaml
 apiVersion: apps/v1
@@ -91,10 +70,9 @@ spec:
             - containerPort: 80
 ```
 
-### Service Definition (service.yaml)
-Exposes NGINX to external traffic using a Kubernetes LoadBalancer.
+### Service definition (service.yaml)
 
-Replace `my-nginx/templates/service.yaml` with:
+Replace the entire contents of `my-nginx/templates/service.yaml` with the following to expose NGINX to external traffic using a Kubernetes LoadBalancer:
 
 ```yaml
 apiVersion: v1
@@ -109,11 +87,7 @@ spec:
     app: {{ include "my-nginx.name" . }}
 ```
 
-Why LoadBalancer:
-
-- Provides a public IP
-- Required for browser access
-- Common pattern for frontend services
+A LoadBalancer provides a public IP required for browser access and is a common pattern for frontend services.
 
 ### Install & Access
 
@@ -135,14 +109,15 @@ NOTES:
   echo http://$SERVICE_IP:80
 ```
 
-### Access NGINX from Browser
-Get External IP
+### Access NGINX from a browser
+
+Get the external IP by running the following command:
 
 ```console
 kubectl get svc
 ```
 
-Wait until EXTERNAL-IP is assigned.
+Wait until **EXTERNAL-IP** is assigned.
 
 ```output
 NAME                       TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)        AGE
@@ -152,21 +127,19 @@ postgres-app-my-postgres   ClusterIP      34.118.225.2     <none>          5432/
 redis-my-redis             ClusterIP      34.118.234.155   <none>          6379/TCP       6m53s
 ```
 
-**Open in browser:**
+Open the external IP in your browser:
 
 ```bash
-http://<EXTERNAL-IP>    
+http://<EXTERNAL-IP>
 ```
 
-You should see the default NGINX welcome page as shown below:
+You should see the default NGINX welcome page:
 
-![NGINX default welcome page in a web browser on an GCP VM alt-text#center](images/nginx-browser.png)
+![NGINX default welcome page displayed in a web browser showing the welcome message and basic NGINX information#center](images/nginx-browser.png "NGINX welcome page")
 
-### Outcome
-This deployment achieves the following:
+## What you've accomplished and what's next
 
-- NGINX deployed using a custom Helm chart
-- Public access enabled via LoadBalancer
-- External IP available for frontend access
-- Ready to route traffic to backend services
+You've successfully deployed NGINX as a frontend service using a custom Helm chart. The deployment includes public access through a LoadBalancer with an external IP, and the infrastructure is ready to route traffic to backend services.
+
+This completes the helm-on-gcp Learning Path. You've learned how to install and configure Helm on Google Cloud C4A Arm-based virtual machines, create and manage GKE clusters, deploy applications using both official and custom Helm charts, and validate Helm workflows on Arm64-based Kubernetes infrastructure.
 
