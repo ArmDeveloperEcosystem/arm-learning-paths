@@ -23,6 +23,5 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
-# Sitemaps help AI discovery
+# Sitemap for page discovery
 Sitemap: https://learn.arm.com/sitemap.xml
-Sitemap: https://learn.arm.com/learn-image-sitemap.xml
