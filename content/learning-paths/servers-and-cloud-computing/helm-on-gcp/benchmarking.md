@@ -13,7 +13,9 @@ Since Helm does not provide built-in performance metrics, concurrency behavior i
 
 ### Prerequisites
 
-{{% notice Note %}} Ensure the local Kubernetes cluster created earlier is running and has sufficient resources to deploy multiple NGINX replicas.{{% /notice %}}
+{{% notice Note %}}
+Ensure the local Kubernetes cluster created earlier is running and has sufficient resources to deploy multiple NGINX replicas.
+{{% /notice %}}
 
 Before starting the benchmark, ensure Helm is installed and the Kubernetes cluster is accessible.
 
@@ -89,11 +91,7 @@ wait
 This step simulates multiple teams deploying applications at the same time.
 Helm submits all requests without waiting for pods to fully start.
 
-What this measures:
-
-* Helm concurrency handling
-* Kubernetes API responsiveness
-* Helm CLI client-side execution behavior on Arm64
+This measures Helm concurrency handling, Kubernetes API responsiveness, and Helm CLI client-side execution behavior on Arm64.
 
 You should see an output similar to:
 ```output
@@ -111,10 +109,7 @@ helm list -n helm-bench
 kubectl get pods -n helm-bench
 ```
 
-Expected:
-
-* All releases in `deployed` state
-* Pods in `Running` status
+All releases should be in `deployed` state and pods should be in `Running` status.
 
 ### Concurrent Helm install benchmark (with --wait)
 Run a benchmark that includes workload readiness time.
@@ -143,10 +138,7 @@ sys     0m0.312s
 
 ### Metrics to record
 
-- Total elapsed time: overall time taken to complete all installs.
-- Number of parallel installs: number of Helm installs run at the same time.
-- Failures: any Helm failures or Kubernetes API errors.
-- Pod readiness delay: time pods take to become Ready (resource pressure)
+Record the following metrics: total elapsed time (overall time taken to complete all installs), number of parallel installs, any failures or Kubernetes API errors, and pod readiness delay (time pods take to become Ready under resource pressure).
 
 ### Benchmark summary
 Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (SUSE):

@@ -4,7 +4,7 @@ title: Install and validate Helm on Google Cloud C4A Arm-based VMs
 draft: true
 cascade:
     draft: true
-
+    
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic intended for developers who want to get hands-on experience using Helm on Linux Arm64 systems, specifically Google Cloud C4A virtual machines powered by Axion processors.
