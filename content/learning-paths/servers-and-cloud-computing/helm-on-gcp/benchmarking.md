@@ -5,19 +5,17 @@ weight: 10
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## Overview
+## Run concurrent Helm benchmarks
 
-This section explains how to benchmark Helm CLI concurrency on an Arm64-based GCP SUSE virtual machine.
-
-Since Helm does not provide built-in performance metrics, concurrency behavior is measured by running multiple Helm commands in parallel and recording the total execution time.
+In this section, you'll benchmark Helm CLI concurrency on your Arm64-based GCP SUSE VM. Since Helm doesn't provide built-in performance metrics, you'll measure concurrency behavior by running multiple Helm commands in parallel and recording total execution time.
 
 ### Prerequisites
 
 {{% notice Note %}}
-Ensure the local Kubernetes cluster created earlier is running and has sufficient resources to deploy multiple NGINX replicas.
+Ensure the local Kubernetes cluster is running and has sufficient resources to deploy multiple NGINX replicas.
 {{% /notice %}}
 
-Before starting the benchmark, ensure Helm is installed and the Kubernetes cluster is accessible.
+Verify Helm and Kubernetes access:
 
 ```console
 helm version
@@ -26,7 +24,8 @@ kubectl get nodes
 All nodes should be in `Ready` state.
 
 ### Add a Helm repository
-Helm installs applications using "charts." Configure Helm to download charts from the Bitnami repository and update the local chart index.
+
+Configure Helm to download charts from the Bitnami repository:
 
 ```console
 helm repo add bitnami https://charts.bitnami.com/bitnami
@@ -41,7 +40,8 @@ kubectl create namespace helm-bench
 ```
 
 ### Warm-up run (recommended)
-Prepare the cluster by pulling container images and initializing caches.
+
+Prepare the cluster by pulling container images:
 
 ```console
 helm install warmup bitnami/nginx \
@@ -75,7 +75,8 @@ helm uninstall warmup -n helm-bench
 Helm does not provide native concurrency or throughput metrics. Concurrency benchmarking is performed by executing multiple Helm CLI operations in parallel and measuring overall completion time.
 {{% /notice %}}
 ### Concurrent Helm install benchmark (no wait)
-Run multiple Helm installs in parallel using background jobs.
+
+Run multiple Helm installs in parallel:
 
 ```console
 time (
@@ -88,10 +89,8 @@ done
 wait
 )
 ```
-This step simulates multiple teams deploying applications at the same time.
-Helm submits all requests without waiting for pods to fully start.
 
-This measures Helm concurrency handling, Kubernetes API responsiveness, and Helm CLI client-side execution behavior on Arm64.
+This measures Helm concurrency handling, Kubernetes API responsiveness, and client-side execution on Arm64.
 
 You should see an output similar to:
 ```output
@@ -102,7 +101,7 @@ sys     0m0.339s
 
 ### Verify deployments
 
-Confirm that Helm reports all components were installed successfully and that Kubernetes created and started the applications:
+Confirm that all components were installed successfully:
 
 ```console
 helm list -n helm-bench
@@ -112,7 +111,8 @@ kubectl get pods -n helm-bench
 All releases should be in `deployed` state and pods should be in `Running` status.
 
 ### Concurrent Helm install benchmark (with --wait)
-Run a benchmark that includes workload readiness time.
+
+Run a benchmark that includes workload readiness time:
 
 ```console
 time (
@@ -138,7 +138,12 @@ sys     0m0.312s
 
 ### Metrics to record
 
-Record the following metrics: total elapsed time (overall time taken to complete all installs), number of parallel installs, any failures or Kubernetes API errors, and pod readiness delay (time pods take to become Ready under resource pressure).
+Record the following:
+
+- Total elapsed time (overall time taken to complete all installs)
+- Number of parallel installs
+- Any failures or Kubernetes API errors
+- Pod readiness delay (time pods take to become Ready under resource pressure)
 
 ### Benchmark summary
 Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (SUSE):
@@ -149,19 +154,20 @@ Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm6
 | Parallel Install (With Wait) | 3                 | Yes           | 15m     | **12.92 s**       |
 
 Key observations:
-- In this configuration, Helm CLI operations complete efficiently on an Arm64-based Axion C4A virtual machine, establishing a baseline for further testing.
-- The --wait flag significantly increases total execution time because Helm waits for workloads to reach a Ready state, reflecting scheduler and image-pull delays rather than Helm CLI overhead.
-- For this baseline test, parallel Helm installs complete with minimal contention, indicating that client-side execution and Kubernetes API handling are not bottlenecks at this scale.
-- End-to-end workload readiness dominates total deployment time, showing that cluster resource availability and container image pulls have a greater impact than Helm CLI execution.
+
+- Helm CLI operations complete efficiently on an Arm64-based Axion C4A VM, establishing a baseline for further testing
+- The `--wait` flag significantly increases total execution time because Helm waits for workloads to reach Ready state, reflecting scheduler and image-pull delays rather than Helm CLI overhead
+- Parallel Helm installs complete with minimal contention, indicating that client-side execution and Kubernetes API handling aren't bottlenecks at this scale
+- End-to-end workload readiness dominates total deployment time, showing that cluster resource availability and container image pulls have greater impact than Helm CLI execution
 
 ## What you've accomplished
 
-You have successfully benchmarked Helm concurrency on a Google Axion C4A Arm64 virtual machine. The benchmarks demonstrated that:
+You have successfully benchmarked Helm concurrency on a Google Axion C4A Arm64 VM:
 
-- Helm CLI operations execute efficiently on Arm64 architecture with the Axion processor
+- Helm CLI operations execute efficiently on Arm64 architecture with Axion processors
 - Parallel Helm installs complete in under 4 seconds when not waiting for pod readiness
 - Using the `--wait` flag extends deployment time to reflect actual workload initialization
 - Kubernetes API and client-side performance scale well under concurrent load
 - Image pulling and resource scheduling have more impact on total deployment time than Helm CLI execution
 
-These results establish a performance baseline for deploying containerized workloads with Helm on Arm64-based cloud infrastructure, helping you make informed decisions about deployment strategies and resource allocation.
+These results establish a performance baseline for deploying containerized workloads with Helm on Arm64-based cloud infrastructure.

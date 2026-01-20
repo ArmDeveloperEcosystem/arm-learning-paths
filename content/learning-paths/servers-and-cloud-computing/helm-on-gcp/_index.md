@@ -1,10 +1,6 @@
 ---
 title: Install and validate Helm on Google Cloud C4A Arm-based VMs
 
-draft: true
-cascade:
-    draft: true
-    
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic intended for developers who want to get hands-on experience using Helm on Linux Arm64 systems, specifically Google Cloud C4A virtual machines powered by Axion processors.
@@ -75,3 +71,9 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+
+Helm is the package manager for Kubernetes, simplifying application deployment and lifecycle management. Google Axion C4A instances, powered by Arm Neoverse-V2 processors, provide an efficient platform for running Kubernetes workloads.
+
+In this Learning Path, you learn how to install and configure Helm on a Google Cloud C4A virtual machine, create Kubernetes clusters, and deploy applications using both official and custom Helm charts. You validate Helm's core functionality and explore deployment patterns for PostgreSQL, Redis, and NGINX on Arm-based infrastructure.
+
+By the end of this Learning Path, you'll have practical experience with Helm on Arm64 systems and understand how to deploy cloud-native applications on Google's Axion processors.

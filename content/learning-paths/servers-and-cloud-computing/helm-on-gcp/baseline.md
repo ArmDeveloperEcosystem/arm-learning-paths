@@ -10,6 +10,7 @@ layout: learningpathall
 This section walks you through baseline testing to confirm that Helm works correctly on an Arm64-based Kubernetes cluster by validating core workflows such as install, upgrade, and uninstall.
 
 ## Add Helm repository
+
 Add the Bitnami Helm chart repository and update the local index:
 
 ```console
@@ -26,12 +27,12 @@ Update Complete. ⎈Happy Helming!⎈
 ```
 
 ## Install a sample application
-Install a sample NGINX application using a Helm chart:
+
+Install a sample NGINX application to validate that Helm can create releases:
 
 ```console
 helm install nginx bitnami/nginx
 ```
-Deploy a simple test app to validate that Helm can create releases on the cluster.
 
 The output is similar to:
 ```output
@@ -49,7 +50,8 @@ APP VERSION: 1.29.4
 
 
 ## Validate deployment
-Verify that the Helm release is created:
+
+Verify that Helm created the release:
 
 ```console
 helm list
@@ -78,13 +80,17 @@ NAME         TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)                
 kubernetes   ClusterIP      10.96.0.1      <none>        443/TCP                      3m33s
 nginx        LoadBalancer   10.96.88.148   <pending>     80:30166/TCP,443:32128/TCP   117s
 ```
-All pods should be in the **Running** state. If pods are in **Pending** state, wait 30 to 60 seconds for container images to download, then retry the commands above. 
+
+All pods should be in **Running** state. If pods show **Pending**, wait 30 to 60 seconds for container images to download and retry. 
 
 
 ## Validate Helm lifecycle
+
 Confirm that Helm supports the full application lifecycle on Arm64.
 
 ### Upgrade the release
+
+Update the existing release to a new revision:
 
 ```console
 helm upgrade nginx bitnami/nginx
@@ -97,7 +103,8 @@ Release "nginx" has been upgraded. Happy Helming!
 ```
 
 ### Uninstall the release
-Ensure Helm can cleanly remove the release and associated resources.
+
+Remove the release and associated resources:
 
 ```console
 helm uninstall nginx
