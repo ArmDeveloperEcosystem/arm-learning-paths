@@ -24,3 +24,11 @@ z_local_saved/
 
 # CTags symbol index
 tags
+
+# Learning path specific ignores
+content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/PR_INSTRUCTIONS.md
+content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/_archive/
+content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/.pip-cache/
+**/_archive/
+**/PR_INSTRUCTIONS.md
+**/.pip-cache/
