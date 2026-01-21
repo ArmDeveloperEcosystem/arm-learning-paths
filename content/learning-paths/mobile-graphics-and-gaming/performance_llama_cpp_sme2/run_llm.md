@@ -11,7 +11,7 @@ Put the built llama-cli executable and Llama-3.2-3B-Instruct-Q4_0.gguf model fil
 The model can be downloaded [here](https://huggingface.co/unsloth/Llama-3.2-3B-Instruct-GGUF).
 
 The figure below shows the architecture of Llama-3.2-3B model,
-![Figure showing Llama-3.2-3B architecture alt-text#center](images/Llama-3.2-3B_architecture.jpg "Architecture of Llama-3.2-3B")
+![Figure showing Llama-3.2-3B architecture alt-text#center](images/llama-3.2-3b_architecture.jpg "Architecture of Llama-3.2-3B")
 
 For performance evaluation, we run the model by binding it to a single Arm C1-Pro core with CPU affinity. 
 To run the model with SME2 microkernels enabled, set the environment variable first. 
