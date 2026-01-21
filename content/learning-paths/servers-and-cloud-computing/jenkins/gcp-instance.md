@@ -1,32 +1,44 @@
 ---
-title: Create a Google Axion C4A Arm virtual machine on GCP 
-weight: 8
+title: Create a Google Axion C4A virtual machine
+weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Overview
-
-In this section, you will learn how to provision a Google Axion C4A Arm virtual machine on Google Cloud Platform (GCP) using the `c4a-standard-4` (4 vCPUs, 16 GB memory) machine type in the Google Cloud Console.  
-We will then use this GCP VM to execute a few Jenkins use cases.
+You now provision a Google Axion C4A virtual machine on Google Cloud Platform (GCP) using the `c4a-standard-4` machine type, which provides 4 vCPUs and 16 GB of memory.
 
 {{% notice Note %}}
-For support on GCP setup, see the Learning Path [Getting started with Google Cloud Platform](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/google/).
+For general guidance on setting up a Google Cloud account and project, see [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
 {{% /notice %}}
 
-## Provision a Google Axion C4A Arm VM in Google Cloud Console
+## Provision a Google Axion C4A virtual machine in the Google Cloud Console
 
-To create a virtual machine based on the C4A instance type:
-- Navigate to the [Google Cloud Console](https://console.cloud.google.com/).
-- Go to **Compute Engine > VM Instances** and select **Create Instance**. 
+To create a virtual machine using the C4A instance type:
+
+- Open the [Google Cloud Console](https://console.cloud.google.com/).
+- Go to **Compute Engine** > **VM instances**, and then select **Create instance**.
 - Under **Machine configuration**:
-   - Populate fields such as **Instance name**, **Region**, and **Zone**.
-   - Set **Series** to `C4A`.
-   - Select `c4a-standard-4` for machine type.
+  - Specify an **Instance name**, **Region**, and **Zone**.
+  - Set **Series** to **C4A**.
+  - Select **c4a-standard-4** as the machine type.
 
-   ![Create a Google Axion C4A Arm virtual machine in the Google Cloud Console with c4a-standard-4 selected alt-text#center](images/gcp-vm.png "Creating a Google Axion C4A Arm virtual machine in Google Cloud Console")
+![Google Cloud Console VM creation page with C4A machine series selected alt-text#center](images/gcp-vm.png "Creating a Google Axion C4A virtual machine in the Google Cloud Console")
 
-- Under **OS and Storage**, select **Change**, then choose an Arm64-based OS image. For this Learning Path, use **SUSE Linux Enterprise Server**. Pick the preferred version for your Operating System. Ensure you select the **Arm image** variant. Click **Select**.
-- Under **Networking**, enable **Allow HTTP traffic**.
-- Click **Create** to launch the instance.
+- Under **OS and storage**, select **Change**, and then choose an Arm64-based operating system image.
+  - For this Learning Path, select **SUSE Linux Enterprise Server**.
+  - For the license type, choose **Pay as you go**.
+  - Increase **Size (GB)** from **10** to **50** to allocate sufficient disk space.
+  - Select **Choose** to apply the changes.
+- Under **Networking**, enable **Allow HTTP traffic** and **Allow HTTPS traffic**. Additionally, enter **"allow-tcp-8080"** as a networking tag.
+- Select **Create** to launch the virtual machine.
+
+After the instance starts, click **SSH** next to the virtual machine in the instance list to open a browser-based terminal session.
+
+![Google Cloud Console VM instances list with SSH button highlighted alt-text#center](images/gcp-ssh.png "Connecting to a running C4A instance using SSH")
+
+A new browser window opens with a terminal connected to your virtual machine.
+
+![Browser-based terminal window showing a command prompt on a SUSE Linux virtual machine alt-text#center](images/gcp-shell.png "Terminal session connected to the virtual machine")
+
+Next, install Jenkins on your virtual machine.
