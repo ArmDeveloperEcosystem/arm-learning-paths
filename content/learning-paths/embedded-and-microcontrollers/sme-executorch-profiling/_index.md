@@ -12,7 +12,7 @@ prerequisites:
   - Apple Silicon macOS host with Python 3.9+ and CMake 3.29+
   - Basic ExecuTorch or PyTorch familiarity
   - "Optional: Armv9 Android device with SME2 for device runs"
-author: TBD (Jason Zhu + others)
+author: Jason Zhu, Tyler Mullenbach, Damien Dooley 
 
 ### Tags
 skilllevels: Advanced
