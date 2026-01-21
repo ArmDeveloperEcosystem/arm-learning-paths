@@ -32,3 +32,8 @@ content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/.p
 **/_archive/
 **/PR_INSTRUCTIONS.md
 **/.pip-cache/
+
+# Root-level local working files (should not be in PR)
+_local_docs/
+LEARNING_PATH_*.md
+tmp/
