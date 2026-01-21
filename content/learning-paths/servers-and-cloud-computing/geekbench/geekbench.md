@@ -18,7 +18,7 @@ You will need a local Arm platform or an [Arm based instance](/learning-paths/se
 
 ## Download
 
-Both Geekbench 5 and Geekbench 6 binaries are available to download, published at [https://www.geekbench.com/preview/](). The instructions below are for the Geekbench 6.5.0 preview version, latest at the moment of writing.
+[Preview Versions](https://www.geekbench.com/preview/) of Geekbench 5 and Geekbench 6 binaries are available to download. You can also download them using `wget` as shown below.
 
 1. Install `wget` to use for the download:
 
