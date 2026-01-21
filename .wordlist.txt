@@ -5693,3 +5693,10 @@ udhcpc
 usb
 vcp
 Aperf's
+frankdenneman
+hyperdisk
+ngnix
+pthread
+sc
+setaffinity
+uma
