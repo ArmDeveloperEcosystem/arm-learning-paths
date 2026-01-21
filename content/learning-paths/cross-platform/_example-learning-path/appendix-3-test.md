@@ -242,38 +242,6 @@ The framework will print information about any errors to the console. To display
 ./tools/maintenance.py -i content/install-guides/mytool.md --debug
 ```
 
-
-### Saving the results
-
-If you want the results to be saved, add the `--stats-report` flag to the command. This will update a statistics file `stats_current_test_info.yml`, which publishes the result to the website. In order to do that, the Learning Path or Install Guide needs to exist as an entry in the statistics file. Find the category for your content. If it's an Install Guide, the name will be that of the .md file without the extension. If it's a Learning Path, you will use the name of the directory. For example:
-
-```
-install-guides:
-    mytool:
-      readable_title: My Tool
-      tests_and_status:
-      - ubuntu:latest: passed
-microcontrollers:
-    my-new-learning-path:
-      readable_title: My new Learning Path
-      tests_and_status:
-      - ubuntu:latest: passed
-```
-
-```bash
-./tools/maintenance.py -i content/install-guides/mytool.md --stats-report
-```
-
-```yaml
-tests_and_status:
-  - ubuntu:latest: passed
-  - fedora:latest: failed
-```
-
-The field `tests_and_status` is a list that indicated whether all tests passed for a corresponding Docker container image or if at least one test failed.
-
-In the example above, the summary indicates that for this Learning Path all tests passed for the image `ubuntu:latest` but at least one test failed for the image `fedora:latest`. More information about the failures can be found in the console.
-
 ## Advanced usage for embedded development
 ### Using the Corstone-300 FVP
 

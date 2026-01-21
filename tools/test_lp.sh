@@ -20,5 +20,5 @@ CONTENT_PATHS_UNIQUE=($(printf "%s\n" "${CONTENT_PATHS[@]}" | sort -u))
 echo "Unique content paths:         ${CONTENT_PATHS_UNIQUE[*]}"
 # Run the tests
 for file in ${CONTENT_PATHS_UNIQUE[*]}; do
-   tools/maintenance.py -i ${file} --stats-report
+   tools/maintenance.py -i ${file}
 done

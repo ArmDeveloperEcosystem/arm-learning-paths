@@ -91,10 +91,3 @@ jobs:
       - name: Check if maintenance is turned off
         if: env.MAINTENANCE == 'off' && success()
         run: echo "Maintenance is turned off for one or more files"
-      # Only upload artifact if maintenance is on
-      - name: Upload stats artifact
-        uses: actions/upload-artifact@v4
-        if: success() && env.MAINTENANCE == 'on'
-        with:
-          name: stats_current_test_info
-          path: data/stats_current_test_info.yml

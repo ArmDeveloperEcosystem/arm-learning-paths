@@ -6,9 +6,9 @@ weight: 4
 layout: learningpathall
 ---
 
-## Overview
+## Set up your environment 
 
-In this section, you prepare a SUSE Linux Arm64 virtual machine to work with Helm by installing Docker, kubectl, Helm, and KinD. You then create and verify a local Kubernetes cluster that you use in later sections of this Learning Path to validate Helm workflows.
+In this section you'll prepare a SUSE Linux Arm64 VM to work with Helm by installing Docker, kubectl, Helm, and KinD. After installation, you create and verify a local Kubernetes cluster for validating Helm workflows.
 
 ## Prepare the system
 
@@ -20,19 +20,21 @@ sudo zypper update -y
 sudo zypper install -y curl git tar gzip
 ```
 
-## Enable SUSE Containers Module
+## Enable the SUSE Containers module
+
 Enable the SUSE Containers Module to ensure that Docker and container-related tools are fully supported.
 ``` console
 sudo SUSEConnect -p sle-module-containers/15.5/arm64
 sudo SUSEConnect --list-extensions | grep Containers
 ```
+
 Verify that the output shows the Containers module as **Activated**. 
 
 ## Install Docker
-Docker is required to run KinD and the Kubernetes control plane components.
 
-Install Docker, start the service, and add your user to the docker group so that Docker commands can be run without sudo:
-``` console
+Docker is required to run KinD and the Kubernetes control plane components. Install Docker, start the service, and add your user to the docker group:
+
+```console
 sudo zypper refresh
 sudo zypper install -y docker
 sudo systemctl enable --now docker
@@ -53,7 +55,8 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 ```
 
 ## Install kubectl
-Install kubectl, the command-line tool for interacting with Kubernetes clusters, compiled for the Arm64 architecture.
+
+Install the kubectl command-line tool for interacting with Kubernetes clusters:
 
 ```console
 curl -LO https://dl.k8s.io/release/v1.30.1/bin/linux/arm64/kubectl
@@ -93,12 +96,12 @@ helm version
 
 You should see an output similar to:
 ```output
-version.BuildInfo{Version:"v3.19.2", GitCommit:"8766e718a0119851f10ddbe4577593a45fadf544", GitTreeState:"clean", GoVersion:"go1.24.9"}
+version.BuildInfo{Version:"v3.19.4", GitCommit:"7cfb6e486dac026202556836bb910c37d847793e", GitTreeState:"clean", GoVersion:"go1.24.11"}
 ```
 
 ## Install KinD
 
-Install KinD (Kubernetes-in-Docker) to run a lightweight Kubernetes cluster locally on your Arm64 virtual machine:
+Install KinD (Kubernetes-in-Docker) to run a lightweight Kubernetes cluster locally:
 
 ```console
 curl -Lo kind https://kind.sigs.k8s.io/dl/v0.30.0/kind-linux-arm64
@@ -108,14 +111,15 @@ sudo mv kind /usr/local/bin/
 
 ## Create a local Kubernetes cluster
 
-Create a local Kubernetes cluster named helm-lab that you use to deploy Helm charts:
+Create a cluster named helm-lab:
 
 ```console
 kind create cluster --name helm-lab
 ```
 
 ## Verify cluster status
-This step verifies that the Kubernetes cluster is operating correctly and is fully prepared to run workloads.
+
+Verify that the Kubernetes cluster is running correctly:
 
 ```console
 kubectl get nodes
@@ -126,9 +130,10 @@ You should see an output similar to:
 NAME                     STATUS   ROLES           AGE   VERSION
 helm-lab-control-plane   Ready    control-plane   23h   v1.34.0
 ```
-The node should be in the **Ready** state. If not, retry the command after waiting 30 seconds for the cluster to fully initialize.
 
-You now have a fully working local Kubernetes cluster running on an Arm64-based virtual machine.
+The node should be in **Ready** state. If not, wait 30 seconds for the cluster to initialize and retry the command.
+
+Your local Kubernetes cluster is now running on your Arm64 VM.
 
 ## What you've accomplished and what's next
 
