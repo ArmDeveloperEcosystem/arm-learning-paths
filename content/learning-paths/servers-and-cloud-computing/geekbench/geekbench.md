@@ -18,7 +18,7 @@ You will need a local Arm platform or an [Arm based instance](/learning-paths/se
 
 ## Download
 
-Both Geekbench 5 and Geekbench 6 binaries are available to download. The instructions below are for the Geekbench 6 preview version.
+Both Geekbench 5 and Geekbench 6 binaries are available to download, published at [https://www.geekbench.com/preview/](). The instructions below are for the Geekbench 6.5.0 preview version, latest at the moment of writing.
 
 1. Install `wget` to use for the download:
 
@@ -29,8 +29,8 @@ sudo apt install -y wget
 2. Download, extract the archive:
 
 ```bash
-wget https://cdn.geekbench.com/Geekbench-6.2.2-LinuxARMPreview.tar.gz
-tar -xf Geekbench-6.2.2-LinuxARMPreview.tar.gz
+wget https://cdn.geekbench.com/Geekbench-6.5.0-LinuxARMPreview.tar.gz
+tar -xf Geekbench-6.5.0-LinuxARMPreview.tar.gz
 ```
 
 ## Run
@@ -40,7 +40,7 @@ There is no need for a browser or Linux desktop to run the benchmark. The Linux 
 Navigate to the extracted directory and run the `geekbench6` benchmark.
 
 ```bash
-cd Geekbench-6.2.2-LinuxARMPreview
+cd Geekbench-6.5.0-LinuxARMPreview
 ./geekbench6
 ```
 
