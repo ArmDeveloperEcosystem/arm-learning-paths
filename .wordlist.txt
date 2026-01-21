@@ -167,7 +167,6 @@ androidml
 anf
 animateClick
 Anonymized
-ancilliary
 ansible
 Ansible
 Anson
@@ -226,7 +225,6 @@ ARchive
 archlinuxarm
 archs
 ArchSpecificLibrary
-arctitecture
 arduino
 arecord
 arg
