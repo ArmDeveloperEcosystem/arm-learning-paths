@@ -78,39 +78,71 @@ cp model_profiling/configs/templates/mac_template.json \
 # From executorch_sme2_kit/ directory
 source .venv/bin/activate
 
-python model_profiling/scripts/mac_pipeline.py \
+python3 model_profiling/scripts/mac_pipeline.py \
   --config model_profiling/configs/my_experiment.json
 ```
 
 **Android:**
 ```bash
 # Ensure device is connected and ANDROID_NDK is set
-python model_profiling/scripts/android_pipeline.py \
-  --config model_profiling/configs/android_experiment.json \
-  --device-serial <optional-device-id>
+python3 model_profiling/scripts/android_pipeline.py \
+  --config model_profiling/configs/android_experiment.json
 ```
+
+**With options:**
+```bash
+# Run only specific experiments
+python3 model_profiling/scripts/mac_pipeline.py \
+  --config model_profiling/configs/my_experiment.json \
+  --only mac_sme2_on mac_sme2_off
+
+# Re-run analysis only (skip profiling execution)
+python3 model_profiling/scripts/mac_pipeline.py \
+  --config model_profiling/configs/my_experiment.json \
+  --analysis-only
+
+# Verbose output
+python3 model_profiling/scripts/mac_pipeline.py \
+  --config model_profiling/configs/my_experiment.json \
+  --verbose
+
+# Android with remote device
+python3 model_profiling/scripts/android_pipeline.py \
+  --config model_profiling/configs/android_experiment.json \
+  --remote-device 10.1.16.56:5555
+```
+
+**Note**: The pipeline **automatically runs analysis** after profiling, generating CSV files from ETDump. No separate `analyze_results.py` step needed.
 
 This creates:
 - `out_<model>/runs/<platform>/` - Run output directory
 - `out_<model>/runs/<platform>/manifest.json` - Run metadata
 - `out_<model>/runs/<platform>/metrics.json` - Timing metrics
+- `out_<model>/runs/<platform>/<model_stem>_pipeline_summary.json` - Pipeline summary
 - `out_<model>/runs/<platform>/<experiment_name>/` - Per-experiment results
   - `*.etdump` - ETDump trace files
+  - `*_exec_all_runs_timeline.csv` - Timeline CSV (all runs)
+  - `*_exec_run0_timeline.csv` - Timeline CSV (run 0)
+  - `*_exec_ops_stats.csv` - Operator statistics CSV
   - `*.log` - Runner logs
 
-### 6. Analyze Results (Per-run)
+### 6. Analyze Results (Optional - Automatic by Default)
+
+**Note**: The pipeline automatically runs analysis after profiling. You only need to run this manually if:
+- You want to re-analyze existing ETDump files
+- Analysis failed during pipeline execution
 
 ```bash
 # From executorch_sme2_kit/ directory
 source .venv/bin/activate
 
-python model_profiling/scripts/analyze_results.py \
-  --run-dir out_<model>/runs/mac \
-  --quiet
+python3 model_profiling/scripts/analyze_results.py \
+  --run-dir out_<model>/runs/mac
 ```
 
 This creates:
 - `out_<model>/runs/mac/analysis_summary.json` - Operator-level breakdown
+- CSV files in same directory as ETDump files (if not already generated)
 
 ### 7. Validate Results (Optional)
 
@@ -130,7 +162,7 @@ source .venv/bin/activate
 python model_profiling/scripts/run_quick_test.py
 ```
 
-This runs: validate → build → export toy model → pipeline → analyze → validate
+This runs: validate → build → export toy model → pipeline (with automatic analysis) → validate
 
 ## Directory Structure After Running
 
@@ -152,10 +184,14 @@ executorch_sme2_kit/
 │       └── mac/
 │           ├── manifest.json
 │           ├── metrics.json
-│           ├── analysis_summary.json
-│           └── <experiment_name>/
-│               ├── *.etdump
-│               └── *.log
+│           ├── <model_stem>_pipeline_summary.json
+│           ├── <model_stem>_pipeline_summary.md
+│           ├── analysis_summary.json (if analyze_results.py run manually)
+│           ├── <model_stem>_<experiment>_t<threads>.etdump
+│           ├── <model_stem>_<experiment>_t<threads>_exec_all_runs_timeline.csv
+│           ├── <model_stem>_<experiment>_t<threads>_exec_run0_timeline.csv
+│           ├── <model_stem>_<experiment>_t<threads>_exec_ops_stats.csv
+│           └── <model_stem>_<experiment>_t<threads>_latency.log
 └── models/                         # Legacy location (if used)
 ```
 

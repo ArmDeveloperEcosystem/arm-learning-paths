@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 260" role="img" aria-label="Step 5 outcome: run directory populated with traces and metrics">
+  <defs>
+    <style>
+      .box { fill:#ffffff; stroke:#0b4b78; stroke-width:2; }
+      .box2 { fill:#f3f8ff; stroke:#0b4b78; stroke-width:2; }
+      .t1 { font: 600 22px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; fill:#0b2239; }
+      .t2 { font: 400 16px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; fill:#425466; }
+      .t3 { font: 600 16px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; fill:#0b2239; }
+      .code { font: 600 15px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace; fill:#0b2239; }
+      .arrow { stroke:#0b4b78; stroke-width:3; fill:none; }
+    </style>
+    <marker id="arrowHead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0b4b78"/>
+    </marker>
+  </defs>
+
+  <!-- Left: outcome -->
+  <rect x="40" y="40" width="480" height="170" rx="16" class="box"/>
+  <text x="70" y="95" class="t1">Outcome</text>
+  <text x="70" y="128" class="t2">A run directory is produced:</text>
+  <text x="70" y="155" class="t2"><tspan class="t3">manifest.json</tspan>, <tspan class="t3">metrics.json</tspan>, <tspan class="t3">*.etdump</tspan></text>
+
+  <!-- Right: run command -->
+  <rect x="560" y="60" width="600" height="60" rx="16" class="box2"/>
+  <text x="590" y="90" class="code">python scripts/mac_pipeline.py</text>
+  <text x="590" y="112" class="t2">--config configs/mac.json</text>
+
+  <rect x="560" y="145" width="600" height="85" rx="16" class="box2"/>
+  <text x="590" y="175" class="t3">runs/mac/</text>
+  <text x="590" y="200" class="t2">manifest.json · metrics.json · mac_sme2_on/ · mac_sme2_off/</text>
+  <text x="590" y="222" class="t2">.../*.etdump + .../*.log</text>
+
+  <!-- Arrows -->
+  <path d="M 520 125 L 540 125 L 540 90 L 560 90" class="arrow" marker-end="url(#arrowHead)"/>
+  <path d="M 860 120 L 860 145" class="arrow" marker-end="url(#arrowHead)"/>
+</svg>
+

@@ -28,6 +28,7 @@ Available skills:
 5. `05_analyze_results.md` - Generate operator-category breakdown
 6. `06_validate_workflow.md` - End-to-end smoke test
 7. `07_report_generation.md` - Generate comprehensive markdown report
+8. `08_onboard_edgetam.md` - Onboard EdgeTAM image encoder model
 
 ## 2. Agent skill structure
 
@@ -53,7 +54,7 @@ Each skill follows a consistent format based on current practices among develope
 | Skill | Time | Prerequisites | Outputs |
 |-------|------|---------------|---------|
 | `setup_workspace` | ~30 min | Python 3.9+, CMake 3.29+ | `.venv/`, `executorch/` |
-| `build_runners` | ~20 min | Setup complete | `executorch/cmake-out/mac-arm64*/executor_runner` |
+| `build_runners` | ~20 min | Setup complete | `executorch/cmake-out/android-arm64-v9a*/executor_runner` (for mobile device testing) or `executorch/cmake-out/mac-arm64*/executor_runner` (developer accessibility) |
 | `export_model` | ~5 min | Setup complete | `out_<model>/artifacts/*.pte` |
 | `run_profiling` | ~10 min | Runners + model | `out_<model>/runs/<platform>/*.etdump` |
 | `analyze_results` | ~2 min | Profiling complete | `out_<model>/runs/<platform>/analysis_summary.json` |

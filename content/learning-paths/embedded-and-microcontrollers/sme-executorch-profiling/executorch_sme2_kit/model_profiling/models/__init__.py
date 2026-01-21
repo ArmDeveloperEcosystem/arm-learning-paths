@@ -77,4 +77,9 @@ def patch_executorch_model_registry() -> None:
 
 # Import submodules so they self-register.
 from . import toy_cnn  # noqa: E402,F401
-# Note: We'll add more model packages here as they're onboarded (e.g., squeeze_sam, edge_tam_image_encoder, etc.)
+
+# EdgeTAM is optional - only imported if user has onboarded it via agent skill 08
+try:
+    from . import edgetam  # noqa: E402,F401
+except ImportError:
+    pass  # EdgeTAM not onboarded yet

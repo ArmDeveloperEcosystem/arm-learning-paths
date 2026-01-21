@@ -22,7 +22,12 @@ This skill exports PyTorch models to ExecuTorch's portable format (`.pte`). The 
 **Prerequisites**:
 - `.venv/` activated
 - ExecuTorch installed (from setup_workspace)
-- Model registered in `model_profiling/models/` (or use built-in `toy_cnn`)
+- Model registered in `model_profiling/models/` (or use built-in models like `toy_cnn`, `efficient_sam`)
+
+**Built-in models** (no registration needed):
+- `toy_cnn` - Small test model (~621KB)
+- `efficient_sam` - Vision segmentation model from ExecuTorch examples (~39MB)
+- Models from ExecuTorch's `examples/models/` directory
 
 ## Model Selection
 
@@ -30,6 +35,7 @@ This skill exports PyTorch models to ExecuTorch's portable format (`.pte`). The 
 |-------|----------|-------------|-------|
 | `toy_cnn` | Smoke tests, quick validation | None | Built-in, no extra deps |
 | `mobilenet_v3_small` | Real-world CV model | `torchvision` | Requires torchvision package |
+| `efficient_sam` | Vision segmentation model | None | From ExecuTorch examples/models, use fp32 |
 | Custom models | Your own models | Model-specific | Must implement `EagerModelBase` |
 
 ## Steps
@@ -65,6 +71,30 @@ python model_profiling/export/export_model.py \
   --outdir model_profiling/out_mobilenet/artifacts/
 ```
 
+**Example with EfficientSAM** (from ExecuTorch examples/models):
+```bash
+python model_profiling/export/export_model.py \
+  --model efficient_sam \
+  --dtype fp32 \
+  --backend xnnpack \
+  --outdir model_profiling/out_efficient_sam/artifacts/
+```
+
+**EfficientSAM Notes**:
+- Already registered in ExecuTorch's model registry (no custom registration needed)
+- Use `fp32` for better accuracy (model is larger, ~39MB vs ~621KB for toy_cnn)
+- Model expects inputs: `(batched_images, batched_points, batched_point_labels)`
+- Input shapes: `(1, 3, 1024, 1024)`, `(1, 1, 1, 2)`, `(1, 1, 1)`
+- Export takes ~5-10 minutes (larger model)
+
+**Verification for EfficientSAM**:
+```bash
+PTE_FILE="model_profiling/out_efficient_sam/artifacts/efficient_sam_xnnpack_fp32.pte"
+test -f "$PTE_FILE" && echo "✓ EfficientSAM .pte file exists"
+test -s "$PTE_FILE" && echo "✓ EfficientSAM .pte file is non-empty"
+ls -lh "$PTE_FILE"  # Should show ~39MB file size
+```
+
 ### 3. Verify Export
 
 ```bash
@@ -92,8 +122,13 @@ python model_profiling/scripts/validate_setup.py --model "$PTE_FILE"
 ```
 
 **Expected outputs**:
-- `model_profiling/out_<model_name>/artifacts/<model>_xnnpack_fp16.pte` (or `_fp32.pte`)
+- `model_profiling/out_<model_name>/artifacts/<model>_xnnpack_fp16.pte` (or `_fp32.pte` for EfficientSAM)
 - Optionally: `model_profiling/out_<model_name>/artifacts/<model>_xnnpack_fp16.pte.etrecord` (operator metadata)
+
+**File sizes** (typical):
+- `toy_cnn_xnnpack_fp16.pte`: ~621KB
+- `efficient_sam_xnnpack_fp32.pte`: ~39MB
+- `mobilenet_v3_small_xnnpack_fp16.pte`: ~5-10MB (varies)
 
 ## Export Options
 

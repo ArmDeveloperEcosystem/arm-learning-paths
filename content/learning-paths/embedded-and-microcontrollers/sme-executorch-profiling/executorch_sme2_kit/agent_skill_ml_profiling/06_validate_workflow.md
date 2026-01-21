@@ -43,7 +43,7 @@ This single command:
 - Validates setup (or runs setup if needed)
 - Builds runners (if not already built)
 - Exports toy CNN model (`toy_cnn_xnnpack_fp16.pte`)
-- Runs Mac pipeline (SME2 on/off)
+- Runs Mac pipeline (SME2 on/off) - **automatically runs analysis and generates CSV files**
 - Validates results structure
 
 **Verification**:
@@ -52,8 +52,9 @@ This single command:
 # Check all expected artifacts exist
 test -f model_profiling/out_toy_cnn/artifacts/toy_cnn_xnnpack_fp16.pte && echo "✓ Model exported"
 test -f executorch/cmake-out/mac-arm64/executor_runner && echo "✓ Runners built"
-test -f model_profiling/out_toy_cnn/runs/mac/*/mac_sme2_on_t1.etdump && echo "✓ Profiling completed"
-test -f model_profiling/out_toy_cnn/runs/mac/analysis_summary.json && echo "✓ Analysis completed"
+test -f model_profiling/out_toy_cnn/runs/mac/*/*.etdump && echo "✓ Profiling completed"
+test -f model_profiling/out_toy_cnn/runs/mac/*/*_all_runs_timeline.csv && echo "✓ CSV files generated"
+test -f model_profiling/out_toy_cnn/runs/mac/*_pipeline_summary.json && echo "✓ Pipeline summary generated"
 
 # Run comprehensive validation
 python model_profiling/scripts/validate_setup.py

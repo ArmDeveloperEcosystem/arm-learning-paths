@@ -1,0 +1,27 @@
+{
+  "model": "model_profiling/out_efficient_sam/artifacts/efficient_sam_xnnpack_fp32.pte",
+  "output_root": "model_profiling/out_efficient_sam/runs/mac",
+  "experiments": [
+    {
+      "name": "mac_sme2_on",
+      "runner_path": "executorch/cmake-out/mac-arm64/executor_runner",
+      "mode": "timing",
+      "runs": 10,
+      "warmup": 1,
+      "threads": [1]
+    },
+    {
+      "name": "mac_sme2_off",
+      "runner_path": "executorch/cmake-out/mac-arm64-sme2-off/executor_runner",
+      "mode": "timing",
+      "runs": 10,
+      "warmup": 1,
+      "threads": [1]
+    }
+  ],
+  "analysis": {
+    "compare_pairs": []
+  }
+}
+
+

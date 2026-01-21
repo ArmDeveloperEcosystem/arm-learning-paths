@@ -18,6 +18,13 @@ This skill orchestrates the profiling pipeline to collect performance data. **Cr
 
 The pipeline is **model-agnostic** - once you have a `.pte` file, the same commands work for any model.
 
+**New Pipeline Architecture**: The updated pipeline scripts (`mac_pipeline.py` and `android_pipeline.py`) use a modular architecture that:
+- Automatically runs analysis after profiling (generates CSV files from ETDump)
+- Supports `--only` to run specific experiments
+- Supports `--analysis-only` to re-run analysis without re-executing profiling
+- Supports `--verbose` for detailed output
+- Supports `--remote-device` for Android (remote ADB connection)
+
 **Prerequisites**:
 - `.venv/` activated
 - Runners built (`executorch/cmake-out/mac-arm64/executor_runner` exists)
@@ -71,8 +78,34 @@ cp model_profiling/configs/examples/mac_mobilenet_fp16.json model_profiling/conf
 
 ### 2. Run Timing-Only Pipeline (for latency measurement)
 
+**macOS Example**:
 ```bash
-python model_profiling/scripts/mac_pipeline.py --config model_profiling/configs/my_run.json
+python3 model_profiling/scripts/mac_pipeline.py \
+  --config model_profiling/configs/my_run.json
+```
+
+**Android Example**:
+```bash
+python3 model_profiling/scripts/android_pipeline.py \
+  --config model_profiling/configs/android_squeezesam_q8_comprehensive_cpu7.json
+```
+
+**With additional options**:
+```bash
+# Run only specific experiments
+python3 model_profiling/scripts/mac_pipeline.py \
+  --config model_profiling/configs/my_run.json \
+  --only mac_sme2_on mac_sme2_off
+
+# Verbose output
+python3 model_profiling/scripts/mac_pipeline.py \
+  --config model_profiling/configs/my_run.json \
+  --verbose
+
+# Android with remote device
+python3 model_profiling/scripts/android_pipeline.py \
+  --config model_profiling/configs/android_config.json \
+  --remote-device 10.1.16.56:5555
 ```
 
 This uses standard runners with no trace logging overhead → accurate latency measurements.
@@ -96,13 +129,19 @@ for etdump in model_profiling/out_<model>/runs/mac/*/*.etdump; do
 done
 
 # Validate results structure
-python model_profiling/scripts/validate_results.py --results model_profiling/out_<model>/runs/mac
+python3 model_profiling/scripts/validate_results.py \
+  --results model_profiling/out_<model>/runs/mac
 ```
 
 **Expected outputs**:
-- `model_profiling/out_<model>/runs/mac/<experiment_name>/<experiment_name>_t1.etdump` (ETDump traces - **primary data**)
-- `model_profiling/out_<model>/runs/mac/<experiment_name>/<experiment_name>_t1.log` (runner logs)
-- Optionally: `model_profiling/out_<model>/runs/mac/manifest.json` and `model_profiling/out_<model>/runs/mac/metrics.json` (metadata logs, not critical)
+- `model_profiling/out_<model>/runs/mac/<model_stem>_<experiment_name>_t<threads>.etdump` (ETDump traces - **primary data**)
+- `model_profiling/out_<model>/runs/mac/<model_stem>_<experiment_name>_t<threads>_latency.log` (runner logs)
+- `model_profiling/out_<model>/runs/mac/<model_stem>_pipeline_summary.json` (pipeline summary with robust statistics)
+- `model_profiling/out_<model>/runs/mac/<model_stem>_pipeline_summary.md` (pipeline summary markdown)
+- **CSV files** (automatically generated from ETDump):
+  - `*_exec_all_runs_timeline.csv` - Timeline with all runs (used for latency statistics)
+  - `*_exec_run0_timeline.csv` - Timeline for run 0 (operator-level analysis)
+  - `*_exec_ops_stats.csv` - Aggregated operator statistics
 
 ## Trace-Enabled Runs (for kernel-level analysis)
 
@@ -111,7 +150,7 @@ python model_profiling/scripts/validate_results.py --results model_profiling/out
 If you need kernel-level insights:
 
 1. Build trace-enabled runners (separate build with XNNPACK kernel logging flags)
-2. Create separate config pointing to trace-enabled runners
+2. Create separate config with `"mode": "xnntrace"` in experiments
 3. Run pipeline again with trace config
 4. Analyze kernel hints in results
 
@@ -129,33 +168,72 @@ See `references/kernel-tracing.md` for detailed instructions.
 
 ## Common Workflows
 
-### Workflow 1: Quick Latency Comparison
+### Workflow 1: Quick Latency Comparison (macOS)
 
 ```bash
 # 1. Export model
-python model_profiling/export/export_model.py --model toy_cnn --dtype fp16 --outdir model_profiling/out_toy_cnn/artifacts/
+python3 model_profiling/export/export_model.py \
+  --model toy_cnn \
+  --dtype fp16 \
+  --outdir model_profiling/out_toy_cnn/artifacts/
 
 # 2. Create config (pointing to timing-only runners)
 # Edit config to use: executorch/cmake-out/mac-arm64/executor_runner
 
-# 3. Run pipeline
-python model_profiling/scripts/mac_pipeline.py --config model_profiling/configs/my_run.json
+# 3. Run pipeline (automatically runs analysis and generates CSV files)
+python3 model_profiling/scripts/mac_pipeline.py \
+  --config model_profiling/configs/my_run.json
 
-# 4. Compare latencies
-python model_profiling/scripts/analyze_results.py --run-dir model_profiling/out_toy_cnn/runs/mac
+# 4. Generate report (optional - uses CSV files generated by pipeline)
+python3 model_profiling/scripts/generate_report.py \
+  --run-dir model_profiling/out_toy_cnn/runs/mac
 ```
 
-### Workflow 2: Full Analysis (Timing + Kernel)
+### Workflow 2: Quick Latency Comparison (Android)
+
+```bash
+# 1. Export model
+python3 model_profiling/export/export_model.py \
+  --model toy_cnn \
+  --dtype fp16 \
+  --outdir model_profiling/out_toy_cnn/artifacts/
+
+# 2. Create config (pointing to Android runners)
+# Edit config to use: executorch/cmake-out/android-arm64/executor_runner
+
+# 3. Run pipeline (with optional remote device, automatically runs analysis)
+python3 model_profiling/scripts/android_pipeline.py \
+  --config model_profiling/configs/android_toy_cnn_run.json \
+  --remote-device 10.1.16.56:5555  # Optional: for remote ADB connection
+
+# 4. Generate report (optional - uses CSV files generated by pipeline)
+python3 model_profiling/scripts/generate_report.py \
+  --run-dir model_profiling/out_toy_cnn/runs/android
+```
+
+### Workflow 3: Full Analysis (Timing + Kernel)
 
 ```bash
 # 1. Timing-only run (for latency)
-python model_profiling/scripts/mac_pipeline.py --config model_profiling/configs/timing_config.json
+python3 model_profiling/scripts/mac_pipeline.py \
+  --config model_profiling/configs/timing_config.json
 
-# 2. Trace-enabled run (for kernel insights)
-python model_profiling/scripts/mac_pipeline.py --config model_profiling/configs/trace_config.json
+# 2. Trace-enabled run (for kernel insights, automatically extracts kernel info)
+python3 model_profiling/scripts/mac_pipeline.py \
+  --config model_profiling/configs/trace_config.json
 
-# 3. Analyze both
-python model_profiling/scripts/analyze_results.py --run-dir model_profiling/out_toy_cnn/runs/mac
+# 3. Generate report (optional - uses CSV files and kernel view tables from pipeline)
+python3 model_profiling/scripts/generate_report.py \
+  --run-dir model_profiling/out_toy_cnn/runs/mac
+```
+
+### Workflow 4: Re-run Analysis Only (Skip Execution)
+
+```bash
+# Re-analyze existing ETDump files without re-running profiling
+python3 model_profiling/scripts/mac_pipeline.py \
+  --config model_profiling/configs/my_run.json \
+  --analysis-only
 ```
 
 ## Best Practices
@@ -175,6 +253,48 @@ python model_profiling/scripts/analyze_results.py --run-dir model_profiling/out_
 - [ ] Validation script passes
 - [ ] (Optional) Trace-enabled runs completed if kernel analysis needed
 
+**Command Examples**:
+
+**macOS Pipeline**:
+```bash
+# Basic usage
+python3 model_profiling/scripts/mac_pipeline.py \
+  --config model_profiling/configs/my_run.json
+
+# Run only specific experiments
+python3 model_profiling/scripts/mac_pipeline.py \
+  --config model_profiling/configs/my_run.json \
+  --only mac_sme2_on mac_sme2_off
+
+# Verbose output
+python3 model_profiling/scripts/mac_pipeline.py \
+  --config model_profiling/configs/my_run.json \
+  --verbose
+
+# Re-run analysis only (skip execution)
+python3 model_profiling/scripts/mac_pipeline.py \
+  --config model_profiling/configs/my_run.json \
+  --analysis-only
+```
+
+**Android Pipeline**:
+```bash
+# Basic usage
+python3 model_profiling/scripts/android_pipeline.py \
+  --config model_profiling/configs/android_squeezesam_q8_comprehensive_cpu7.json
+
+# With remote device connection
+python3 model_profiling/scripts/android_pipeline.py \
+  --config model_profiling/configs/android_config.json \
+  --remote-device 10.1.16.56:5555
+
+# Run only specific experiments with verbose output
+python3 model_profiling/scripts/android_pipeline.py \
+  --config model_profiling/configs/android_config.json \
+  --only android_sme2_on android_sme2_off \
+  --verbose
+```
+
 **References**:
 - Pipeline script: `model_profiling/scripts/mac_pipeline.py`
 - Android pipeline: `model_profiling/scripts/android_pipeline.py`
@@ -185,6 +305,7 @@ python model_profiling/scripts/analyze_results.py --run-dir model_profiling/out_
 **Assets**:
 - `model_profiling/scripts/mac_pipeline.py` - macOS profiling pipeline
 - `model_profiling/scripts/android_pipeline.py` - Android profiling pipeline
+- `model_profiling/scripts/perf_runner.py` - Performance runner (used by MacRunner)
 - `model_profiling/configs/templates/mac_template.json` - Config template
 - `model_profiling/configs/templates/android_template.json` - Android config template
 - `model_profiling/configs/examples/` - Example configs

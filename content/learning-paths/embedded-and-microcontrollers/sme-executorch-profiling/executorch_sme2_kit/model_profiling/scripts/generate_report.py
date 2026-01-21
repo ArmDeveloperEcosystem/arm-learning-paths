@@ -34,22 +34,41 @@ def load_csv(csv_path: Path) -> List[Dict[str, Any]]:
 def extract_latencies_from_timeline_csv(timeline_csv: Path) -> List[float]:
     """Extract per-run latencies from timeline CSV file."""
     rows = load_csv(timeline_csv)
-    
-    run_totals = defaultdict(float)
-    for row in rows:
-        name = row.get("name", "")
-        if name not in ["Method::init", "Program::load_method"]:
+
+    method_exec_rows = [row for row in rows if row.get("name") == "Method::execute"]
+    if method_exec_rows:
+        run_totals = defaultdict(float)
+        for row in method_exec_rows:
             run_idx = int(row.get("run_index", 0))
             duration_ms = float(row.get("duration_ms", 0) or 0)
             run_totals[run_idx] += duration_ms
-    
+        return [run_totals[i] for i in sorted(run_totals)]
+
+    overhead_events = {
+        "method::init",
+        "program::load_method",
+        "method::execute",
+        "delegate_call",
+        "operator_call",
+    }
+    run_totals = defaultdict(float)
+    for row in rows:
+        name = row.get("name", "")
+        if name.lower() in overhead_events:
+            continue
+        run_idx = int(row.get("run_index", 0))
+        duration_ms = float(row.get("duration_ms", 0) or 0)
+        run_totals[run_idx] += duration_ms
+
     if run_totals:
-        max_run = max(run_totals.keys())
-        return [run_totals[i] for i in range(max_run + 1) if i in run_totals]
-    else:
-        total = sum(float(row.get("duration_ms", 0) or 0) for row in rows 
-                   if row.get("name", "") not in ["Method::init", "Program::load_method"])
-        return [total] if total > 0 else []
+        return [run_totals[i] for i in sorted(run_totals)]
+
+    total = sum(
+        float(row.get("duration_ms", 0) or 0)
+        for row in rows
+        if row.get("name", "").lower() not in overhead_events
+    )
+    return [total] if total > 0 else []
 
 
 def categorize_op(op_name: str) -> str:
@@ -69,14 +88,31 @@ def categorize_op(op_name: str) -> str:
 
 
 def extract_category_totals_from_stats_csv(stats_csv: Path) -> Dict[str, float]:
-    """Extract total time by operator category from stats CSV file."""
+    """Extract total time by operator category from stats CSV file.
+    
+    Excludes overhead events like Method::execute, DELEGATE_CALL, OPERATOR_CALL,
+    Program::load_method, Method::init which are not actual operator execution time.
+    """
     rows = load_csv(stats_csv)
     category_totals = defaultdict(float)
     
+    # Overhead events to exclude
+    overhead_events = {
+        "method::execute", "delegate_call", "operator_call",
+        "program::load_method", "method::init"
+    }
+    
     for row in rows:
-        op_type = row.get("type", "")
+        op_name = row.get("name", "").lower()
+        op_type = row.get("type", "").lower()
+        
+        # Skip overhead events
+        if op_name in overhead_events or op_type in overhead_events:
+            continue
+        
+        # Use name for categorization (more accurate than type)
         total_ms = float(row.get("total_ms", 0) or 0)
-        cat = categorize_op(op_type)
+        cat = categorize_op(row.get("name", ""))  # Use name column, not type
         category_totals[cat] += total_ms
     
     return dict(category_totals)
@@ -96,16 +132,29 @@ def calculate_statistics(latencies: List[float]) -> Dict[str, float]:
 
 
 def find_csv_files(run_dir: Path) -> Dict[str, Dict[str, Path]]:
-    """Find CSV files in run directory (same directory as ETDump files)."""
+    """Find CSV files in run directory (same directory as ETDump files).
+    
+    Prefers all_runs_timeline.csv (contains all runs) over run0_timeline.csv (single run).
+    """
     csv_files = {}
     
-    # Find CSV files in same directories as ETDump files
+    # Find all_runs timeline CSV first (preferred - has all runs)
+    for all_runs_csv in run_dir.glob("**/*_all_runs_timeline.csv"):
+        exp_name = all_runs_csv.parent.name if all_runs_csv.parent != run_dir else all_runs_csv.stem.replace("_exec_all_runs_timeline", "")
+        if exp_name not in csv_files:
+            csv_files[exp_name] = {}
+        csv_files[exp_name]["all_runs_timeline"] = all_runs_csv
+        csv_files[exp_name]["timeline"] = all_runs_csv  # Also set as timeline for backward compatibility
+    
+    # Find run0 timeline CSV (fallback if all_runs not available)
     for timeline_csv in run_dir.glob("**/*_run0_timeline.csv"):
         exp_name = timeline_csv.parent.name if timeline_csv.parent != run_dir else timeline_csv.stem.replace("_exec_run0_timeline", "")
         if exp_name not in csv_files:
             csv_files[exp_name] = {}
-        csv_files[exp_name]["timeline"] = timeline_csv
+        if "timeline" not in csv_files[exp_name]:  # Only use if all_runs not found
+            csv_files[exp_name]["timeline"] = timeline_csv
     
+    # Find stats CSV
     for stats_csv in run_dir.glob("**/*_ops_stats.csv"):
         exp_name = stats_csv.parent.name if stats_csv.parent != run_dir else stats_csv.stem.replace("_exec_ops_stats", "")
         if exp_name not in csv_files:
@@ -170,18 +219,38 @@ def generate_report(run_dir: Path, output_path: Optional[Path] = None, title: Op
     else:
         model_name = "Unknown"
     
+    # Load metrics.json for accurate latency statistics (has all runs)
+    metrics_path = run_dir / "metrics.json"
+    metrics_data = {}
+    if metrics_path.exists():
+        try:
+            metrics_data = load_json(metrics_path)
+        except Exception:
+            pass
+    
     # Process CSV files
     experiments_data = []
     for exp_name, csv_info in csv_files.items():
         timeline_csv = csv_info.get("timeline")
         stats_csv = csv_info.get("stats")
         
+        # Try to get latencies from all_runs_timeline CSV first (most accurate, has all runs from ETDump)
         latencies = []
-        if timeline_csv:
+        all_runs_timeline_csv = csv_info.get("all_runs_timeline") or csv_info.get("timeline")
+        if all_runs_timeline_csv:
             try:
-                latencies = extract_latencies_from_timeline_csv(timeline_csv)
+                latencies = extract_latencies_from_timeline_csv(all_runs_timeline_csv)
             except Exception:
                 pass
+        
+        # Fall back to metrics.json if CSV extraction failed
+        if not latencies and metrics_data.get("results"):
+            for result in metrics_data["results"]:
+                if result.get("experiment") == exp_name:
+                    # Support both latency_ms (old) and avg_latency_ms (aligned with android_pipeline)
+                    metrics = result.get("metrics", {})
+                    latencies = metrics.get("latency_ms") or metrics.get("avg_latency_ms", [])
+                    break
         
         stats = calculate_statistics(latencies) if latencies else {}
         
@@ -285,17 +354,20 @@ def generate_report(run_dir: Path, output_path: Optional[Path] = None, title: Op
     
     # Latency Comparison
     lines.append("## Latency Comparison (SME2-On vs SME2-Off)\n")
-    lines.append("| Metric | SME2-On | SME2-Off | Improvement |")
-    lines.append("|--------|---------|----------|-------------|")
+    lines.append("| Metric | SME2-On | SME2-Off | Speedup |")
+    lines.append("|--------|---------|----------|---------|")
     
     sme2_on_data = None
     sme2_off_data = None
-    for exp_data in experiments_data:
+    # Prefer experiments with more runs (longer names typically have all_runs data)
+    for exp_data in sorted(experiments_data, key=lambda x: len(x.get("latencies", [])), reverse=True):
         exp_name = exp_data["name"].lower()
         if "sme2_on" in exp_name or "sme2-on" in exp_name:
-            sme2_on_data = exp_data
+            if sme2_on_data is None or len(exp_data.get("latencies", [])) > len(sme2_on_data.get("latencies", [])):
+                sme2_on_data = exp_data
         elif "sme2_off" in exp_name or "sme2-off" in exp_name:
-            sme2_off_data = exp_data
+            if sme2_off_data is None or len(exp_data.get("latencies", [])) > len(sme2_off_data.get("latencies", [])):
+                sme2_off_data = exp_data
     
     if sme2_on_data and sme2_off_data:
         on_stats = sme2_on_data["stats"]
@@ -305,9 +377,9 @@ def generate_report(run_dir: Path, output_path: Optional[Path] = None, title: Op
             for metric_name, metric_key in [("Median", "median"), ("Mean", "mean"), ("Min", "min"), ("Max", "max")]:
                 on_val = on_stats.get(metric_key, 0)
                 off_val = off_stats.get(metric_key, 0)
-                improvement = ((off_val - on_val) / off_val * 100) if off_val > 0 else 0
-                improvement_str = f"{improvement:+.2f}%" if improvement != 0 else "0.00%"
-                lines.append(f"| **{metric_name} Latency** | {on_val:.3f} ms | {off_val:.3f} ms | {improvement_str} |")
+                speedup = (off_val / on_val) if on_val > 0 else 0
+                speedup_str = f"{speedup:.2f}x" if speedup > 0 else "-"
+                lines.append(f"| **{metric_name} Latency** | {on_val:.3f} ms | {off_val:.3f} ms | {speedup_str} |")
             
             on_stdev = on_stats.get("stdev", 0)
             off_stdev = off_stats.get("stdev", 0)
@@ -317,17 +389,27 @@ def generate_report(run_dir: Path, output_path: Optional[Path] = None, title: Op
     
     # Category Breakdown
     lines.append("## Operator Category Breakdown\n")
-    total_category_totals = defaultdict(float)
-    for exp_data in experiments_data:
-        for cat, ms in exp_data["category_totals"].items():
-            total_category_totals[cat] += ms
+    # Operator category breakdown - show SME2-on vs SME2-off side by side
+    # Use the same experiments selected for latency comparison
+    sme2_on_categories = sme2_on_data.get("category_totals", {}) if sme2_on_data else {}
+    sme2_off_categories = sme2_off_data.get("category_totals", {}) if sme2_off_data else {}
     
-    if total_category_totals:
-        lines.append("### Total Time by Category (across all experiments)\n")
-        lines.append("| Category | Time (ms) |")
-        lines.append("|----------|-----------|")
-        for cat, ms in sorted(total_category_totals.items(), key=lambda x: x[1], reverse=True):
-            lines.append(f"| **{cat}** | {ms:.3f} |")
+    # Get all unique categories
+    all_categories = set(sme2_on_categories.keys()) | set(sme2_off_categories.keys())
+    
+    if all_categories:
+        lines.append("### Operator Category Breakdown (SME2-On vs SME2-Off)\n")
+        lines.append("| Category | SME2-On (ms) | SME2-Off (ms) |")
+        lines.append("|----------|--------------|---------------|")
+        
+        # Sort by total time (sum of both) for better readability
+        category_totals = {cat: sme2_on_categories.get(cat, 0) + sme2_off_categories.get(cat, 0) 
+                           for cat in all_categories}
+        
+        for cat in sorted(all_categories, key=lambda x: category_totals.get(x, 0), reverse=True):
+            on_ms = sme2_on_categories.get(cat, 0)
+            off_ms = sme2_off_categories.get(cat, 0)
+            lines.append(f"| **{cat}** | {on_ms:.3f} | {off_ms:.3f} |")
         lines.append("")
     
     # Generated Artifacts
@@ -356,12 +438,12 @@ def generate_report(run_dir: Path, output_path: Optional[Path] = None, title: Op
         if on_stats and off_stats:
             on_median = on_stats.get("median", 0)
             off_median = off_stats.get("median", 0)
-            improvement = ((off_median - on_median) / off_median * 100) if off_median > 0 else 0
+            speedup = (off_median / on_median) if on_median > 0 else 0
             
-            if improvement > 0:
-                lines.append(f"✅ **SME2 acceleration shows {improvement:.2f}% improvement** in median latency.")
-            elif improvement < 0:
-                lines.append(f"⚠️  **SME2 shows {abs(improvement):.2f}% regression** in median latency.")
+            if speedup > 1:
+                lines.append(f"✅ **SME2 acceleration shows {speedup:.2f}x speedup** in median latency.")
+            elif speedup < 1 and speedup > 0:
+                lines.append(f"⚠️  **SME2 shows {1/speedup:.2f}x slowdown** in median latency.")
             else:
                 lines.append("ℹ️  **No significant difference** between SME2-on and SME2-off.")
     

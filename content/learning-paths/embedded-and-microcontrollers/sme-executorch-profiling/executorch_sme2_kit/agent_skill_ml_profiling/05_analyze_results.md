@@ -36,9 +36,14 @@ source .venv/bin/activate
 ### 2. Run Analysis
 
 ```bash
-python model_profiling/scripts/analyze_results.py \
+python3 model_profiling/scripts/analyze_results.py \
   --run-dir model_profiling/out_<model>/runs/mac
 ```
+
+**Note**: The pipeline **automatically runs analysis** after profiling (generates CSV files from ETDump). You only need to run this script manually if:
+- You want to re-analyze existing ETDump files
+- Analysis failed during pipeline execution
+- You're working with ETDump files from a previous pipeline run
 
 **Note**: 
 - No PTE file required - script reads config from `manifest.json`
@@ -95,9 +100,10 @@ with open('model_profiling/out_<model>/runs/mac/analysis_summary.json') as f:
 
 **Expected outputs**:
 - `model_profiling/out_<model>/runs/mac/analysis_summary.json` - Operator-level breakdown summary
-- `model_profiling/out_<model>/runs/mac/<experiment>/` - **CSV files generated from ETDump** (in same directory as ETDump files):
-  - `<experiment>_exec_run0_timeline.csv` - Per-run operator timeline (operator-level timing per run)
-  - `<experiment>_exec_ops_stats.csv` - Aggregated operator statistics (total time per operator type)
+- **CSV files generated from ETDump** (in same directory as ETDump files):
+  - `<model_stem>_<experiment>_t<threads>_exec_all_runs_timeline.csv` - Timeline with all runs (used for latency statistics)
+  - `<model_stem>_<experiment>_t<threads>_exec_run0_timeline.csv` - Timeline for run 0 (operator-level analysis)
+  - `<model_stem>_<experiment>_t<threads>_exec_ops_stats.csv` - Aggregated operator statistics
   
 The CSV files are **intermediate artifacts** that enable:
 - **Verification**: You can inspect CSV files to verify the analysis

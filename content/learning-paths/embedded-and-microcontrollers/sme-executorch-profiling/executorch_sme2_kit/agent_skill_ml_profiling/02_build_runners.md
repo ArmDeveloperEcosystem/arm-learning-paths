@@ -55,9 +55,15 @@ bash model_profiling/scripts/build_runners.sh
 ```
 
 This builds:
+**Android runners** (for real-world edge ML performance on mobile devices):
+- `executorch/cmake-out/android-arm64-v9a/executor_runner` (SME2 acceleration enabled)
+- `executorch/cmake-out/android-arm64-v9a-sme2-off/executor_runner` (SME2 disabled, baseline)
+- Built automatically if `ANDROID_NDK` environment variable is set
+
+**macOS runners** (included for developer accessibility):
 - `executorch/cmake-out/mac-arm64/executor_runner` (SME2 acceleration enabled)
 - `executorch/cmake-out/mac-arm64-sme2-off/executor_runner` (SME2 disabled, baseline)
-- Optionally: Android runners if `ANDROID_NDK` is set
+- Built automatically on macOS
 
 **Build process** (simplified using CMake presets):
 1. Merges SME2 profiling presets into ExecuTorch's `CMakePresets.json` (handles duplicates)
@@ -71,10 +77,19 @@ This builds:
 
 ```bash
 # Check runners exist and are executable
-test -f executorch/cmake-out/mac-arm64/executor_runner && echo "✓ SME2-on runner exists"
-test -f executorch/cmake-out/mac-arm64-sme2-off/executor_runner && echo "✓ SME2-off runner exists"
+# Check Android runners (for mobile device testing)
+test -f executorch/cmake-out/android-arm64-v9a/executor_runner && echo "✓ Android SME2-on runner exists"
+test -f executorch/cmake-out/android-arm64-v9a-sme2-off/executor_runner && echo "✓ Android SME2-off runner exists"
+
+# Check macOS runners (developer accessibility)
+test -f executorch/cmake-out/mac-arm64/executor_runner && echo "✓ macOS SME2-on runner exists"
+test -f executorch/cmake-out/mac-arm64-sme2-off/executor_runner && echo "✓ macOS SME2-off runner exists"
 
 # Test runner can print help (verifies binary is valid)
+# Test Android runner (for mobile device testing)
+executorch/cmake-out/android-arm64-v9a/executor_runner --help | head -5
+
+# Test macOS runner (developer accessibility)
 executorch/cmake-out/mac-arm64/executor_runner --help | head -5
 
 # Run comprehensive validation
@@ -82,11 +97,17 @@ python model_profiling/scripts/validate_setup.py
 ```
 
 **Expected outputs**:
+**Android runners** (for mobile device testing):
+- `executorch/cmake-out/android-arm64-v9a/executor_runner` (executable binary)
+- `executorch/cmake-out/android-arm64-v9a-sme2-off/executor_runner` (executable binary)
+
+**macOS runners** (developer accessibility):
 - `executorch/cmake-out/mac-arm64/executor_runner` (executable binary)
 - `executorch/cmake-out/mac-arm64-sme2-off/executor_runner` (executable binary)
-- Optionally: `executorch/cmake-out/android-arm64-v9a/executor_runner` and `executorch/cmake-out/android-arm64-v9a-sme2-off/executor_runner`
 
-## Android Runners (Optional)
+**Platform context**: This learning path demonstrates profiling ExecuTorch models on SME2-enabled devices using Android as the mobile device example. Android runs provide realistic edge ML performance with actual device constraints (memory bandwidth, thermal throttling, device-specific optimizations). macOS is included because most developers have Mac access, making it convenient for learning the workflow and initial testing. For production validation and accurate performance measurements, Android runs on real SME2-enabled devices provide the most representative results.
+
+## Android Runners (for Mobile Device Testing)
 
 To build Android runners:
 

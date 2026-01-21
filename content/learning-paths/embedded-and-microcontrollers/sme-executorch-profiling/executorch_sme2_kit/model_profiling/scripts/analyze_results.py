@@ -34,23 +34,30 @@ def _find_etrecord(model_path: Optional[Path]) -> Optional[Path]:
 
 
 def _convert_etdump_to_csv(etdump: Path, etrecord: Optional[Path]) -> Dict[str, Optional[Path]]:
-    """Convert ETDump to CSV files in the same directory as ETDump."""
+    """Convert ETDump to CSV files in the same directory as ETDump.
+    
+    Generates:
+    - *_all_runs_timeline.csv: All runs with run_index column
+    - *_run0_timeline.csv: Single run (run 0) for convenience
+    - *_ops_stats.csv: Aggregated operator statistics
+    """
     tools_dir = Path(__file__).parent.parent / "tools"
     etdump_to_csv_script = tools_dir / "etdump_to_csv.py"
     
     if not etdump_to_csv_script.exists():
-        return {"timeline": None, "stats": None}
+        return {"timeline": None, "stats": None, "all_runs_timeline": None}
     
     csv_out_dir = etdump.parent  # Same directory as ETDump
     
     try:
+        # Generate all_runs CSV (includes run0 as well)
         cmd = [
             sys.executable,
             str(etdump_to_csv_script),
             "--etdump", str(etdump),
             "--out-dir", str(csv_out_dir),
             "--model-id", etdump.stem,
-            "--run-index", "0",
+            "--all-runs",  # Generate all_runs_timeline.csv and run0_timeline.csv
         ]
         if etrecord:
             cmd.extend(["--etrecord", str(etrecord)])
@@ -58,15 +65,17 @@ def _convert_etdump_to_csv(etdump: Path, etrecord: Optional[Path]) -> Dict[str, 
         subprocess.run(cmd, check=True, capture_output=True, text=True)
         
         csv_prefix = etdump.stem
-        timeline_csv = csv_out_dir / f"{csv_prefix}_exec_run0_timeline.csv"
+        all_runs_timeline_csv = csv_out_dir / f"{csv_prefix}_exec_all_runs_timeline.csv"
+        run0_timeline_csv = csv_out_dir / f"{csv_prefix}_exec_run0_timeline.csv"
         stats_csv = csv_out_dir / f"{csv_prefix}_exec_ops_stats.csv"
         
         return {
-            "timeline": timeline_csv if timeline_csv.exists() else None,
+            "timeline": run0_timeline_csv if run0_timeline_csv.exists() else None,  # For backward compatibility
+            "all_runs_timeline": all_runs_timeline_csv if all_runs_timeline_csv.exists() else None,
             "stats": stats_csv if stats_csv.exists() else None,
         }
     except Exception:
-        return {"timeline": None, "stats": None}
+        return {"timeline": None, "stats": None, "all_runs_timeline": None}
 
 
 def _categorize_op(op_name: str) -> str:
@@ -129,7 +138,9 @@ def summarize(run_dir: Path, etrecord: Optional[Path] = None) -> Dict[str, Any]:
     for etdump in etdumps:
         # Generate CSV files in same directory as ETDump
         csv_info = _convert_etdump_to_csv(etdump, etrecord)
-        if csv_info.get("timeline"):
+        if csv_info.get("all_runs_timeline"):
+            csv_files.append(str(csv_info["all_runs_timeline"]))
+        elif csv_info.get("timeline"):
             csv_files.append(str(csv_info["timeline"]))
         if csv_info.get("stats"):
             csv_files.append(str(csv_info["stats"]))

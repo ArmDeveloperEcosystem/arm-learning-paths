@@ -1,0 +1,25 @@
+{
+  "model": "model_profiling/out_edgetam_image_encoder/artifacts/edgetam_image_encoder_xnnpack_fp32.pte",
+  "output_root": "model_profiling/out_edgetam_image_encoder/runs/android",
+  "experiments": [
+    {
+      "name": "android_sme2_on",
+      "runner_path": "executorch/cmake-out/android-arm64-v9a/executor_runner",
+      "mode": "timing",
+      "runs": 10,
+      "warmup": 1,
+      "threads": [1]
+    },
+    {
+      "name": "android_sme2_off",
+      "runner_path": "executorch/cmake-out/android-arm64-v9a-sme2-off/executor_runner",
+      "mode": "timing",
+      "runs": 10,
+      "warmup": 1,
+      "threads": [1]
+    }
+  ],
+  "analysis": {
+    "compare_pairs": []
+  }
+}

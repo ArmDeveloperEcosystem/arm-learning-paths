@@ -43,6 +43,7 @@ description: What the skill does and when Claude should use it
 5. **[05_analyze_results.md](05_analyze_results.md)** - Generate operator-category breakdown
 6. **[06_validate_workflow.md](06_validate_workflow.md)** - End-to-end smoke test
 7. **[07_report_generation.md](07_report_generation.md)** - Generate comprehensive markdown report
+8. **[08_onboard_edgetam.md](08_onboard_edgetam.md)** - Onboard EdgeTAM image encoder model
 
 ## Usage Pattern
 
@@ -78,6 +79,8 @@ description: What the skill does and when Claude should use it
 01_setup_workspace → 02_build_runners → 03_export_model → 04_run_profiling → 05_analyze_results → 07_report_generation
                                                               ↓
                                                     06_validate_workflow (can run anytime)
+
+08_onboard_edgetam → 03_export_model (onboard before export)
 ```
 
 ## Quick Reference
@@ -87,7 +90,9 @@ description: What the skill does and when Claude should use it
 | `01_setup_workspace` | ~30 min | `.venv/`, `executorch/` |
 | `02_build_runners` | ~20 min | `executorch/cmake-out/mac-arm64*/executor_runner` |
 | `03_export_model` | ~5 min | `out_<model>/artifacts/*.pte` |
-| `04_run_profiling` | ~10 min | `runs/<platform>/*.etdump` |
-| `05_analyze_results` | ~2 min | `runs/<platform>/analysis_summary.json` |
+| `04_run_profiling` | ~10 min | `runs/<platform>/*.etdump`, CSV files, pipeline summary |
+| `05_analyze_results` | ~2 min | `runs/<platform>/analysis_summary.json` (optional - automatic by pipeline) |
 | `06_validate_workflow` | ~15 min | Full smoke test validation |
 | `07_report_generation` | ~1 min | `runs/<platform>/report.md` |
+| `08_onboard_edgetam` | ~5 min | `models/edgetam/` (model wrapper, checkpoint, config) |
+| `08_onboard_edgetam` | ~5 min | `models/edgetam/` (model wrapper, checkpoint, config) |

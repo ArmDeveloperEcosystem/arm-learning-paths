@@ -70,21 +70,29 @@ The profiling kit works with a specific execution stack. Before running the pipe
 
 ## 4. Quickstart: Run the pipeline
 
-This is the "happy path" on macOS (Apple Silicon). It exports a tiny toy model, builds SME2-on/off runners, runs the pipeline, and validates outputs.
+This learning path supports profiling on both **Android** (for real-world edge ML performance on mobile devices) and **macOS** (included for developer accessibility). The pipeline is identical for both platforms—only the runner binaries and execution environment differ.
+
+**Platform context**: This learning path demonstrates profiling ExecuTorch models on SME2-enabled devices using Android as the mobile device example. Android runs provide realistic edge ML performance with actual device constraints (memory bandwidth, thermal throttling, device-specific optimizations). macOS is included because most developers have Mac access, making it convenient for learning the workflow and initial testing. For production validation and accurate performance measurements, Android runs on real SME2-enabled devices provide the most representative results.
+
+Quickstart (macOS for initial testing, or Android if you have an SME2-enabled device):
 
 ```bash
 # 1) Create venv + clone/install ExecuTorch (requires network, ~30 min)
 bash model_profiling/scripts/setup_repo.sh
 
-# 2) Build SME2-on/off runners (and Android runners if ANDROID_NDK is set, ~20 min)
+# 2) Build SME2-on/off runners (~20 min)
+#    - macOS: Built automatically
+#    - Android: Requires ANDROID_NDK environment variable set
 bash model_profiling/scripts/build_runners.sh
 
 # 3) Run the smoke test end-to-end (export → run → validate, ~5 min)
+#    - macOS: Runs locally
+#    - Android: Requires device connected via adb
 python model_profiling/scripts/run_quick_test.py
 
-# 4) Produce a readable operator-category summary (~2 min)
-python model_profiling/scripts/analyze_results.py \
-  --run-dir model_profiling/out_toy_cnn/runs/mac
+# 4) View results (analysis is automatic, but you can re-run if needed)
+#    The pipeline automatically generates CSV files and analysis_summary.json
+#    Optional: python model_profiling/scripts/analyze_results.py --run-dir model_profiling/out_toy_cnn/runs/mac
 ```
 
 Scripts: [`setup_repo.sh`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/setup_repo.sh), [`build_runners.sh`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/build_runners.sh), [`run_quick_test.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/run_quick_test.py), [`analyze_results.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/analyze_results.py)
@@ -101,10 +109,13 @@ After running the pipeline, you'll have these artifacts:
 - Run artifacts
   - `out_<model>/runs/<platform>/<experiment>/*.etdump` (ETDump traces, the primary data source)
   - `out_<model>/runs/<platform>/<experiment>/*.log` (runner stdout/stderr)
+  - `out_<model>/runs/<platform>/<experiment>/*.csv` (CSV files generated automatically by pipeline: timeline, operator stats)
   - `out_<model>/runs/<platform>/manifest.json` (optional; run metadata for reproducibility)
   - `out_<model>/runs/<platform>/metrics.json` (optional; summary latencies)
+  - `out_<model>/runs/<platform>/<model_stem>_pipeline_summary.json` (pipeline summary with robust statistics)
+  - `out_<model>/runs/<platform>/<model_stem>_pipeline_summary.md` (pipeline summary markdown)
 - Analysis artifacts
-  - `out_<model>/runs/<platform>/analysis_summary.json` (operator-category breakdown)
+  - `out_<model>/runs/<platform>/analysis_summary.json` (operator-category breakdown, generated automatically by pipeline)
 
 **Critical insight**: The `.etdump` files are the primary data source. Everything else is derived from them. The JSON files are convenience logs, but analysis scripts work directly with ETDump.
 

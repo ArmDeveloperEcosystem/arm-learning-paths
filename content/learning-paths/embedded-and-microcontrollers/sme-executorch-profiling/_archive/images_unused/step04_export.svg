@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 260" role="img" aria-label="Step 4 outcome: model exported to .pte and .etrecord">
+  <defs>
+    <style>
+      .box { fill:#ffffff; stroke:#0b4b78; stroke-width:2; }
+      .box2 { fill:#f3f8ff; stroke:#0b4b78; stroke-width:2; }
+      .t1 { font: 600 22px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; fill:#0b2239; }
+      .t2 { font: 400 16px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; fill:#425466; }
+      .t3 { font: 600 16px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; fill:#0b2239; }
+      .code { font: 600 15px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace; fill:#0b2239; }
+      .arrow { stroke:#0b4b78; stroke-width:3; fill:none; }
+    </style>
+    <marker id="arrowHead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0b4b78"/>
+    </marker>
+  </defs>
+
+  <!-- Left: outcome -->
+  <rect x="40" y="40" width="480" height="160" rx="16" class="box"/>
+  <text x="70" y="90" class="t1">Outcome</text>
+  <text x="70" y="123" class="t2">Export produces two files:</text>
+  <text x="70" y="150" class="t2"><tspan class="t3">.pte</tspan> (program) + <tspan class="t3">.etrecord</tspan> (operator mapping)</text>
+
+  <!-- Right: export command -->
+  <rect x="560" y="60" width="600" height="60" rx="16" class="box2"/>
+  <text x="590" y="90" class="code">python scripts/export_model.py</text>
+  <text x="590" y="112" class="t2">--model-name …  --dtype …  --out …</text>
+
+  <!-- Right: outputs -->
+  <rect x="560" y="145" width="290" height="75" rx="16" class="box2"/>
+  <text x="585" y="175" class="t3">models/*.pte</text>
+  <text x="585" y="200" class="t2">ExecuTorch program</text>
+
+  <rect x="870" y="145" width="290" height="75" rx="16" class="box2"/>
+  <text x="895" y="175" class="t3">models/*.etrecord</text>
+  <text x="895" y="200" class="t2">operator mapping</text>
+
+  <!-- Arrows -->
+  <path d="M 520 120 L 540 120 L 540 90 L 560 90" class="arrow" marker-end="url(#arrowHead)"/>
+  <path d="M 860 120 L 860 145" class="arrow" marker-end="url(#arrowHead)"/>
+  <path d="M 1015 120 L 1015 145" class="arrow" marker-end="url(#arrowHead)"/>
+</svg>
+

@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="260" viewBox="0 0 1200 260" role="img" aria-labelledby="title desc">
+  <title id="title">Runtime stack: PyTorch to SME2 acceleration</title>
+  <desc id="desc">Diagram showing the execution stack: PyTorch model, ExecuTorch runtime, XNNPACK backend, Arm Kleidi kernels, and SME2 instructions.</desc>
+  <defs>
+    <style>
+      .box { fill: #ffffff; stroke: #222; stroke-width: 2; rx: 14; ry: 14; }
+      .title { font: 600 22px system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; fill: #111; }
+      .sub { font: 400 14px system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; fill: #333; }
+      .arrow { stroke: #222; stroke-width: 3; fill: none; marker-end: url(#m); }
+      .note { font: 500 14px system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; fill: #0b4; }
+    </style>
+    <marker id="m" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#222"/>
+    </marker>
+  </defs>
+
+  <!-- boxes -->
+  <rect class="box" x="30"  y="70" width="210" height="120"/>
+  <rect class="box" x="270" y="70" width="210" height="120"/>
+  <rect class="box" x="510" y="70" width="210" height="120"/>
+  <rect class="box" x="750" y="70" width="210" height="120"/>
+  <rect class="box" x="990" y="70" width="180" height="120"/>
+
+  <!-- arrows -->
+  <path class="arrow" d="M240,130 L270,130"/>
+  <path class="arrow" d="M480,130 L510,130"/>
+  <path class="arrow" d="M720,130 L750,130"/>
+  <path class="arrow" d="M960,130 L990,130"/>
+
+  <!-- text -->
+  <text class="title" x="55" y="112">PyTorch</text>
+  <text class="sub"   x="55" y="140">Define the model</text>
+  <text class="sub"   x="55" y="160">Export graph + weights</text>
+
+  <text class="title" x="295" y="112">ExecuTorch</text>
+  <text class="sub"   x="295" y="140">On-device runtime</text>
+  <text class="sub"   x="295" y="160">Delegates ops</text>
+
+  <text class="title" x="535" y="112">XNNPACK</text>
+  <text class="sub"   x="535" y="140">CPU backend</text>
+  <text class="sub"   x="535" y="160">Selects kernels</text>
+
+  <text class="title" x="775" y="112">Arm Kleidi</text>
+  <text class="sub"   x="775" y="140">Optimized microkernels</text>
+  <text class="sub"   x="775" y="160">GEMM / iGEMM paths</text>
+
+  <text class="title" x="1015" y="112">SME2</text>
+  <text class="sub"   x="1015" y="140">Matrix instructions</text>
+  <text class="sub"   x="1015" y="160">Accelerate compute</text>
+
+  <!-- footer note -->
+  <text class="note" x="30" y="40">Operator-level profiling + kernel-usage view connect these layers and reveal the next bottleneck (often data movement)</text>
+</svg>
+
+

@@ -28,7 +28,7 @@ What you need to do:
     - Per-tensor quantization: Single scale/zero-point per tensor (simpler but less accurate)
   - Backend partitioning: XNNPACK vs portable (which operators are delegated to XNNPACK)
 
-Real-world example: The EdgeTAM image encoder (coming soon) required:
+Real-world example: The EdgeTAM image encoder (see agent skill `08_onboard_edgetam.md` for onboarding steps) required:
 - Input/output normalization wrappers
 - Operator replacements (unsupported ops → supported equivalents)
 - Shape constraint fixes (dynamic shapes → static shapes)
@@ -50,7 +50,7 @@ To add a new model to the profiling workflow:
 
 The key insight: This registration system lets you add models without touching ExecuTorch source code. The exporter patches the registry at runtime, so your models appear alongside ExecuTorch's built-in models.
 
-Advanced onboarding example: The EdgeTAM image encoder (coming soon) will demonstrate:
+Advanced onboarding example: The EdgeTAM image encoder (see agent skill `08_onboard_edgetam.md` for complete onboarding workflow) demonstrates:
 - Wrapper classes for input/output normalization
 - Operator replacement strategies
 - Shape constraint handling
@@ -120,11 +120,58 @@ Key fields:
 - `experiments[].num_runs`: Number of iterations (default 10 for statistical significance)
 - `experiments[].num_threads`: Thread count (usually 1 for single-threaded profiling)
 
-## 6. Run on macOS (development/testing)
+## 6. Run the profiling pipeline
+
+The pipeline supports both **Android** (for real-world edge ML performance on mobile devices) and **macOS** (included for developer accessibility). The workflow is identical—only the runner binaries and execution environment differ.
+
+**Platform context**: This learning path demonstrates profiling ExecuTorch models on SME2-enabled devices using Android as the mobile device example. Android runs provide realistic edge ML performance with actual device constraints (memory bandwidth, thermal throttling, device-specific optimizations). macOS is included because most developers have Mac access, making it convenient for learning the workflow and initial testing. For production validation and accurate performance measurements, Android runs on real SME2-enabled devices provide the most representative results.
+
+### 6.1 Run on Android (for real-world edge ML performance on mobile devices)
+
+For testing on real Arm edge mobile devices, Android runs are essential. This is the only way to validate performance on actual hardware with real thermal constraints, memory bandwidth, and device-specific optimizations.
+
+After building Android runners and connecting a device:
+
+```bash
+python model_profiling/scripts/android_pipeline.py --config model_profiling/configs/examples/android_mobilenet_fp16.json
+python model_profiling/scripts/analyze_results.py --run-dir model_profiling/out_toy_cnn/runs/android
+```
+
+See [`android_pipeline.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/android_pipeline.py) for the implementation.
+
+This uses the Android runners (`executorch/cmake-out/android-arm64-v9a/executor_runner`, `executorch/cmake-out/android-arm64-v9a-sme2-off/executor_runner`) which have no trace logging overhead.
+
+Outputs (example):
+
+```text
+out_<model>/runs/android/
+  android_sme2_on/
+    <model>_android_sme2_on_t1.etdump      # Primary: operator-level trace data
+    <model>_android_sme2_on_t1.log         # Runner stdout/stderr
+  android_sme2_off/
+    <model>_android_sme2_off_t1.etdump     # Primary: operator-level trace data
+    <model>_android_sme2_off_t1.log        # Runner stdout/stderr
+  manifest.json                # Optional: run metadata (ExecuTorch SHA, config path, model path)
+  metrics.json                 # Optional: summary latencies (duplicate of manifest results)
+```
+
+The workflow: Same pipeline, different platform. The config points to Android runners, and the script uses `adb` to push binaries and run on device. ETDump traces are pulled back to the host for analysis.
+
+Expected outcome: You'll see similar operator-category breakdowns, but with real device timing. Often, data movement bottlenecks are more pronounced on real hardware due to memory bandwidth constraints.
+
+For kernel-level insights on Android, run again with trace-enabled runners (separate config pointing to trace-enabled runner builds). Note: Trace logging impacts timing, so these runs are only for kernel analysis, not latency measurement.
+
+```bash
+# Use a separate config that points to trace-enabled Android runners
+# Note: Create a trace config by copying an existing config and updating runner_path to point to trace-enabled runners
+python model_profiling/scripts/android_pipeline.py --config model_profiling/configs/examples/android_mobilenet_fp16.json
+```
+
+### 6.2 Run on macOS (developer accessibility)
 
 For development and initial testing, run on macOS. This is fast and convenient, but not representative of real device performance.
 
-### 6.1 Timing-only runs (for latency measurement)
+#### 6.2.1 Timing-only runs (for latency measurement)
 
 Run with timing-only runners (default) to get accurate latency measurements:
 
@@ -152,13 +199,14 @@ out_<model>/runs/mac/
 
 Critical insight: The `.etdump` files are the primary data source. End-to-end latency numbers and operator-level breakdowns are derived from them. The JSON files (`manifest.json`, `metrics.json`) are optional metadata/logs for reproducibility and convenience, but analysis scripts work directly with ETDump.
 
-### 6.2 Trace-enabled runs (for kernel-level analysis)
+#### 6.2.2 Trace-enabled runs (for kernel-level analysis)
 
 For kernel-level insights, run again with trace-enabled runners (separate config pointing to trace-enabled runner builds). Note: Trace logging impacts timing, so these runs are only for kernel analysis, not latency measurement.
 
 ```bash
 # Use a separate config that points to trace-enabled runners
-python model_profiling/scripts/mac_pipeline.py --config model_profiling/configs/examples/mac_trace.json
+# Note: Create a trace config by copying an existing config and updating runner_path to point to trace-enabled runners
+python model_profiling/scripts/mac_pipeline.py --config model_profiling/configs/examples/mac_mobilenet_fp16.json
 ```
 
 See [`mac_pipeline.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/mac_pipeline.py) for the implementation.
@@ -169,7 +217,7 @@ Validate (optional):
 
 ```bash
 # Validates that expected files exist (including optional manifest.json/metrics.json)
-python model_profiling/scripts/validate_results.py --results runs/mac
+python model_profiling/scripts/validate_results.py --results model_profiling/out_toy_cnn/runs/mac
 ```
 
 See [`validate_results.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/validate_results.py) for the implementation.
@@ -178,7 +226,9 @@ See [`validate_results.py`](https://github.com/ArmDeveloperEcosystem/arm-learnin
 
 ## 7. Analyze ETDump (operator categories + kernel hints)
 
-Run:
+**Note**: The pipeline automatically runs analysis after profiling, generating CSV files from ETDump and creating `analysis_summary.json`. You only need to run this manually if you want to re-analyze existing ETDump files or if analysis failed during pipeline execution.
+
+To manually run analysis:
 
 ```bash
 python model_profiling/scripts/analyze_results.py \
@@ -189,7 +239,8 @@ See [`analyze_results.py`](https://github.com/ArmDeveloperEcosystem/arm-learning
 
 It writes:
 
-- `model_profiling/out_toy_cnn/runs/mac/analysis_summary.json`
+- `model_profiling/out_toy_cnn/runs/mac/analysis_summary.json` (operator-category breakdown)
+- CSV files in the same directory as ETDump files (if not already generated by pipeline)
 
 And prints a category summary like:
 
@@ -201,7 +252,7 @@ And prints a category summary like:
 
 **The key insight**: After SME2 accelerates CONV/GEMM, you'll see data movement become a larger percentage of total time. This is expected, as SME2 reveals the next bottleneck. The visualization makes it obvious where to optimize next.
 
-### 7.1 Interpreting the breakdown
+### 7.1 Interpreting the breakdown (Android vs macOS)
 
 Before SME2: CONV/GEMM dominate timing (e.g., 60-80% of total time)
 
@@ -210,12 +261,16 @@ After SME2:
 - Data Movement grows (e.g., 40-60% of total time)
 - Overall latency decreases (the speedup)
 
+**Platform differences**: Android runs on real devices often show more pronounced data movement bottlenecks due to memory bandwidth constraints, thermal throttling, and device-specific optimizations. macOS runs are useful for learning the workflow and initial testing, but Android runs provide the realistic performance measurements needed for production validation.
+
 What this tells you: If data movement dominates after SME2, focus on:
 - Transpose elimination (reduce layout changes)
 - Layout optimization (choose layouts that minimize copies)
 - Memory access patterns (reduce cache misses)
 
 ### 7.2 About kernel-level insight (xnntrace / kernel hints)
+
+This applies to both Android and macOS runs.
 
 Kernel-level analysis requires separate trace-enabled runs because XNNPACK kernel trace logging impacts timing. The workflow is:
 
@@ -228,26 +283,3 @@ In this learning path, [`model_profiling/scripts/analyze_results.py`](https://gi
 - If not, you still get robust operator/category timing from timing-only runs, but kernel selection evidence may be sparse.
 
 > **Important**: Always use timing-only runs for latency comparisons. Trace-enabled runs are only for kernel analysis and should not be used for performance measurements.
-
-## 8. Run on Android (required for real device testing)
-
-For testing on real Arm edge mobile devices, Android runs are required (not optional). This is the only way to validate performance on actual hardware with real thermal constraints, memory bandwidth, and device-specific optimizations.
-
-Why this matters: macOS runs are convenient for development, but they don't reflect:
-- Real device memory bandwidth constraints
-- Thermal throttling behavior
-- Device-specific kernel optimizations
-- Actual power consumption patterns
-
-After building Android runners and connecting a device:
-
-```bash
-python model_profiling/scripts/android_pipeline.py --config model_profiling/configs/examples/android_mobilenet_fp16.json
-python model_profiling/scripts/analyze_results.py --run-dir model_profiling/out_toy_cnn/runs/android
-```
-
-Scripts: [`android_pipeline.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/android_pipeline.py), [`analyze_results.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/analyze_results.py)
-
-The workflow: Same pipeline, different platform. The config points to Android runners, and the script uses `adb` to push binaries and run on device. ETDump traces are pulled back to the host for analysis.
-
-Expected outcome: You'll see similar operator-category breakdowns, but with real device timing. Often, data movement bottlenecks are more pronounced on real hardware due to memory bandwidth constraints.

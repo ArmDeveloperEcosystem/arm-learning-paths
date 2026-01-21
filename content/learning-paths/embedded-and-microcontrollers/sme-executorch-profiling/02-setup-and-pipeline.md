@@ -35,10 +35,10 @@ In your workspace, this learning path expects the following directories to exist
 │   └── pipeline/        # pipeline internals
 ├── executorch/       # ExecuTorch checkout (created during setup; name cannot be changed, CMake requires it)
 │   └── cmake-out/      # CMake build outputs (created after building runners)
-│       ├── mac-arm64/executor_runner              # SME2-on runner
-│       ├── mac-arm64-sme2-off/executor_runner      # SME2-off runner
-│       ├── android-arm64-v9a/executor_runner       # Android SME2-on runner (if built)
-│       └── android-arm64-v9a-sme2-off/executor_runner  # Android SME2-off runner (if built)
+│       ├── android-arm64-v9a/executor_runner       # Android SME2-on runner (for mobile device testing, if built)
+│       ├── android-arm64-v9a-sme2-off/executor_runner  # Android SME2-off runner (for mobile device testing, if built)
+│       ├── mac-arm64/executor_runner              # macOS SME2-on runner (developer accessibility)
+│       └── mac-arm64-sme2-off/executor_runner      # macOS SME2-off runner (developer accessibility)
 └── .venv/            # Python virtual environment
 ```
 
@@ -115,9 +115,18 @@ bash model_profiling/scripts/build_runners.sh
 See [`build_runners.sh`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/build_runners.sh) for the implementation.
 
 This produces runners in `executorch/cmake-out/`:
+
+**Android runners** (for real-world edge ML performance on mobile devices):
+- `executorch/cmake-out/android-arm64-v9a/executor_runner` (SME2-on)
+- `executorch/cmake-out/android-arm64-v9a-sme2-off/executor_runner` (SME2-off)
+- Built automatically if `ANDROID_NDK` environment variable is set
+
+**macOS runners** (included for developer accessibility):
 - `executorch/cmake-out/mac-arm64/executor_runner` (SME2-on)
 - `executorch/cmake-out/mac-arm64-sme2-off/executor_runner` (SME2-off)
-- Recommended: Android runners if `ANDROID_NDK` is set (mobile devices provide more realistic edge ML performance due to different CPU architectures, memory bandwidth, and thermal constraints compared to Mac)
+- Built automatically on macOS
+
+**Why both platforms**: This learning path demonstrates profiling ExecuTorch models on SME2-enabled devices using Android as the mobile device example. Android runs provide realistic edge ML performance with actual device constraints (memory bandwidth, thermal throttling, device-specific optimizations). macOS is included because most developers have Mac access, making it convenient for learning the workflow and initial testing. For production validation and accurate performance measurements, Android runs on real SME2-enabled devices provide the most representative results.
 
 **Why this is done once**: The runners are model-agnostic. They can execute any `.pte` file, so you build them once and reuse them for all models you profile. You only need to rebuild if you change CMake build configurations (e.g., enabling XNNPACK kernel trace logging for kernel-level analysis).
 
@@ -131,8 +140,30 @@ The build script produces timing-only runners by default. For kernel-level analy
 
 How it works: ExecuTorch ships with a default `CMakePresets.json`, but we add custom presets for SME2 profiling (SME2-on/off variants, platform-specific configs). The build script merges our custom presets ([`model_profiling/assets/cmake_presets.json`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/assets/cmake_presets.json)) into ExecuTorch's default file, then uses `cmake --preset` commands. This approach keeps ExecuTorch's defaults intact while adding our profiling-specific configurations. No manual CMake flags needed.
 
-Example preset (SME2-on for macOS):
+Example presets:
 
+**Android (for mobile device testing)**:
+```json
+{
+  "name": "android-arm64-v9a",
+  "displayName": "Android arm64 with XNNPACK (SME2 ON, timing)",
+  "generator": "Ninja",
+  "binaryDir": "${sourceDir}/cmake-out/android-arm64-v9a",
+  "cacheVariables": {
+    "EXECUTORCH_BUILD_XNNPACK": "ON",
+    "EXECUTORCH_BUILD_DEVTOOLS": "ON",
+    "EXECUTORCH_BUILD_EXECUTOR_RUNNER": "ON",
+    "EXECUTORCH_ENABLE_LOGGING": "ON",
+    "EXECUTORCH_ENABLE_EVENT_TRACER": "ON",
+    "EXECUTORCH_BUILD_KERNELS_QUANTIZED": "ON",
+    "EXECUTORCH_BUILD_KERNELS_QUANTIZED_AOT": "ON",
+    "EXECUTORCH_XNNPACK_ENABLE_KLEIDI": "ON",
+    "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+  }
+}
+```
+
+**macOS (developer accessibility)**:
 ```json
 {
   "name": "mac-arm64",
@@ -198,13 +229,15 @@ Key configuration options:
 The pipeline scripts are model-agnostic—they work with any `.pte` file:
 
 Run scripts:
-- [`model_profiling/scripts/mac_pipeline.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/mac_pipeline.py) - macOS profiling pipeline
-- [`model_profiling/scripts/android_pipeline.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/android_pipeline.py) - Android profiling pipeline
+- [`model_profiling/scripts/android_pipeline.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/android_pipeline.py) - Android profiling pipeline (for real-world edge ML performance on mobile devices)
+- [`model_profiling/scripts/mac_pipeline.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/mac_pipeline.py) - macOS profiling pipeline (included for developer accessibility)
 
 These scripts read JSON configs, execute all experiments defined in the config, and collect ETDump traces and timing logs. Point the config to a different `.pte` file, and the same scripts work for any model.
 
 Analysis scripts:
-- [`model_profiling/scripts/analyze_results.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/analyze_results.py) - Processes ETDump traces and logs
+- [`model_profiling/scripts/analyze_results.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/analyze_results.py) - Processes ETDump traces and logs (runs automatically after pipeline execution)
+
+**Note**: The pipeline automatically runs analysis after profiling, generating CSV files from ETDump and creating `analysis_summary.json`. You only need to run `analyze_results.py` manually if you want to re-analyze existing ETDump files or if analysis failed during pipeline execution.
 
 This script generates operator-level breakdowns, category-level summaries, and comparison reports. It parses structured data (ETDump, CSV, JSON) produced by the runners, regardless of which model generated them.
 
