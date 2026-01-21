@@ -1,6 +1,6 @@
 ---
 name: onboard_edgetam
-description: Onboard EdgeTAM image encoder module for profiling. Clones EdgeTAM repository, extracts the image encoder module, creates model wrapper, and registers the model. Note: EdgeTAM has multiple modules (image encoder, memory encoder, decoder, etc.); this skill onboards only the image encoder for simplicity. Use when adding EdgeTAM image encoder to the profiling workflow, setting up EdgeTAM image encoder for ExecuTorch export, or onboarding EdgeTAM image encoder as a new model.
+description: "Onboard EdgeTAM image encoder module for profiling. Clones EdgeTAM repository, extracts the image encoder module, creates model wrapper, and registers the model. Note: EdgeTAM has multiple modules (image encoder, memory encoder, decoder, etc.); this skill onboards only the image encoder for simplicity. Use when adding EdgeTAM image encoder to the profiling workflow, setting up EdgeTAM image encoder for ExecuTorch export, or onboarding EdgeTAM image encoder as a new model."
 ---
 
 # Skill: Onboard EdgeTAM Image Encoder
