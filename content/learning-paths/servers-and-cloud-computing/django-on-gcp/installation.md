@@ -8,7 +8,52 @@ layout: learningpathall
 
 ## Install Django and dependencies
 
-After connecting to your SUSE Linux Enterprise Server (SLES) VM using SSH, you'll update your system, install Python 3.11, and set up a virtual environment for your Django project.
+After connecting to your SUSE Linux Enterprise Server (SLES) VM using SSH, you'll install the Google Cloud CLI, update your system, install Python 3.11, and set up a virtual environment for your Django project.
+
+## Install Google Cloud CLI (gcloud)
+
+The Google Cloud CLI is required to authenticate with GCP and allow your Django application VM to interact with Google Cloud services such as GKE, Cloud SQL, Artifact Registry, Memorystore, and to build, deploy, and operate the Django platform.
+
+### Download gcloud SDK (Arm64)
+
+```console
+curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-arm.tar.gz
+```
+
+### Extract and install gcloud
+
+```console
+tar -xzf google-cloud-cli-linux-arm.tar.gz
+cd google-cloud-sdk
+./install.sh
+```
+
+Accept the default options during installation.
+
+### Initialize gcloud
+
+```console
+source ~/.bashrc
+gcloud init
+```
+
+During initialization:
+
+- Select the correct project (for example: imperial-time-xxxxxx)
+- Choose the default region (for example: us-central1)
+
+### Verify authentication
+
+```console
+gcloud auth list
+```
+
+You should see an output similar to:
+```output
+Credentialed Accounts
+ACTIVE  ACCOUNT
+*       <PROJECT_NUMBER>-compute@developer.gserviceaccount.com
+```
 
 ## Update your system
 
@@ -87,4 +132,4 @@ The output is similar to:
 
 ## Summary and what's next
 
-You have successfully installed Django and all required dependencies on your Arm-based VM. Your environment is now ready for creating Django projects and applications!
+You have successfully installed the Google Cloud CLI, Python 3.11, Django, and Gunicorn on your Arm-based VM. Your environment is now fully prepared to build, containerize, and deploy a Django REST API on GKE with Cloud SQL and Memorystore.
