@@ -12,20 +12,44 @@ Calls to:
 */}}
 
 
-<!-- Optional visual (image / gif) alongside metadata -->
-<div class="learning-path-hero u-gap-1">
-    <div class="learning-path-hero__meta">
-        <!-- Markdown metadata table -->
-        {{partial "general-formatting/metadata-table.html" .}}
-    </div>
+{{ $has_visual := and .Params.learning_path_visual (ne .Params.learning_path_visual "") }}
 
-    {{ with .Params.learning_path_visual }}
-    {{ $visual_src := . }}
-    {{ if and (not (hasPrefix $visual_src "http://")) (not (hasPrefix $visual_src "https://")) (not (hasPrefix $visual_src "//")) }}
-        {{ $visual_src = $visual_src | relURL }}
-    {{ end }}
-    <div class="learning-path-hero__visual">
-        <div class="content-box learning-path-visual">
+<!-- About + optional visual -->
+<div class="learning-path-hero">
+    <!-- Markdown metadata table -->
+    {{partial "general-formatting/metadata-table.html" .}}
+</div>
+
+
+<!-- Learning objectives & Prereq box -->
+<div class="content-box learning-path-details{{ if $has_visual }} has-visual{{ end }}">
+    <div class="learning-path-details__grid">
+        <div class="learning-path-details__content">
+            <h3>Who is this for?</h3>
+                <p class="u-margin-left-1">{{ .Params.who_is_this_for }}</p>
+            <h3 class="u-margin-top-2">What will you learn?</h3>
+                <p class="u-margin-left-1">Upon completion of this Learning Path, you will be able to:</p>
+                <ul>
+                    {{ range .Params.learning_objectives }}
+                    <li class="u-margin-left-2">{{.}}</li>
+                    {{ end }}  
+                </ul>
+            <h3 class="u-margin-top-2">Prerequisites</h3>
+                <p class="u-margin-left-1">Before starting, you will need the following:</p>
+                <ul>
+                    {{ range .Params.prerequisites }}
+                        <!-- Markdownify to support links -->
+                        <li class="u-margin-left-2">{{. | markdownify}}</li>
+                    {{ end }}
+                </ul>
+        </div>
+
+        {{ with .Params.learning_path_visual }}
+        {{ $visual_src := . }}
+        {{ if and (not (hasPrefix $visual_src "http://")) (not (hasPrefix $visual_src "https://")) (not (hasPrefix $visual_src "//")) }}
+            {{ $visual_src = $visual_src | relURL }}
+        {{ end }}
+        <div class="learning-path-details__visual">
             <div class="learning-path-visual-frame">
                 <img src="{{ $visual_src }}" alt="{{ $.Params.learning_path_visual_alt | default (printf "%s visual" $.Title) }}" loading="lazy">
             </div>
@@ -33,28 +57,6 @@ Calls to:
                 <p class="learning-path-visual-caption">{{.}}</p>
             {{ end }}
         </div>
+        {{ end }}
     </div>
-    {{ end }}
-</div>
-
-
-<!-- Learning objectives & Prereq box -->
-<div class="content-box">
-    <h3>Who is this for?</h3>
-        <p class="u-margin-left-1">{{ .Params.who_is_this_for }}</p>
-    <h3 class="u-margin-top-2">What will you learn?</h3>
-        <p class="u-margin-left-1">Upon completion of this Learning Path, you will be able to:</p>
-        <ul>
-            {{ range .Params.learning_objectives }}
-            <li class="u-margin-left-2">{{.}}</li>
-            {{ end }}  
-        </ul>
-    <h3 class="u-margin-top-2">Prerequisites</h3>
-        <p class="u-margin-left-1">Before starting, you will need the following:</p>
-        <ul>
-            {{ range .Params.prerequisites }}
-                <!-- Markdownify to support links -->
-                <li class="u-margin-left-2">{{. | markdownify}}</li>
-            {{ end }}
-        </ul>
 </div>

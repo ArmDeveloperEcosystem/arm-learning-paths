@@ -158,33 +158,17 @@ img.content-uploaded-image.centered {
     font-size: 1rem;
 }
 
-/* Learning path intro visuals */
+.content-image-caption.centered {
+    text-align: center;
+}
+
+
+/* Learning path intro (about box with optional visual) */
 .learning-path-hero {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-    align-items: start;
+    margin-bottom: 16px;
 }
 
-.learning-path-hero__meta,
-.learning-path-hero__visual {
-    width: 100%;
-}
-
-@media (min-width: 992px) {
-    .learning-path-hero {
-        grid-template-columns: minmax(0, 5fr) minmax(380px, 3fr);
-        gap: 28px;
-    }
-}
-
-.learning-path-hero .content-box {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.learning-path-hero .content-box table {
+.learning-path-hero table {
     width: 100%;
 }
 
@@ -197,11 +181,26 @@ img.content-uploaded-image.centered {
     width: 100%;
 }
 
-.learning-path-visual {
+/* Learning path details content box with optional visual */
+.learning-path-details__grid {
+    display: block;
+}
+
+.learning-path-details.has-visual .learning-path-details__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+    column-gap: 24px;
+    row-gap: 12px;
+    align-items: stretch;
+    position: relative;
+}
+
+.learning-path-details__visual {
     display: flex;
     flex-direction: column;
-    height: 100%;
     gap: 8px;
+    align-items: center;
+    padding: 32px 8px 8px 8px;
 }
 
 .learning-path-visual-frame {
@@ -209,32 +208,40 @@ img.content-uploaded-image.centered {
     overflow: hidden;
     background: linear-gradient(135deg, rgba(95, 165, 255, 0.15), rgba(0, 255, 199, 0.08));
     border: 1px solid rgba(163, 168, 174, 0.25);
-    min-height: 260px;
 }
 
 .learning-path-visual-frame img {
     display: block;
     width: 100%;
-    height: 100%;
-    max-height: 560px;
-    object-fit: cover;
+    height: auto;
+    max-height: 520px;
+    object-fit: contain;
     background: rgba(0, 0, 0, 0.2);
 }
 
 .learning-path-visual-caption {
-    margin: 0 8px 4px 8px;
+    margin: 0;
     font-style: italic;
     font-weight: 500;
     color: var(--arm-grey-01);
     text-align: center;
 }
 
-.content-image-caption.centered {
-    text-align: center;
+@media (min-width: 768px) {
+    .learning-path-details.has-visual .learning-path-details__grid::before {
+        content: "";
+        position: absolute;
+        top: 24px;
+        bottom: 24px;
+        left: calc((100% - 24px) * 0.6667 + 12px);
+        width: 1px;
+        background: rgba(163, 168, 174, 0.35);
+    }
+
+    .learning-path-details.has-visual .learning-path-details__visual {
+        padding: 64px 16px 24px 24px;
+    }
 }
-
-
-
 
 /* Review page divs */
 
