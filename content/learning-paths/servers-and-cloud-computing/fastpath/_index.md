@@ -54,19 +54,3 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
-
-*fastpath* accelerates the cycle of building, deploying, and benchmarking Linux kernels on Arm-based infrastructure.
-
-Off-the-shelf distributions ship with general-purpose kernels, but when you want to maximize performance you often need to rebuild the kernel with custom configuration options, experimental patches, or prerelease code. Custom kernels let you validate questions like “does an RC fix my workload regression?” or “do these extra debug settings impose measurable overhead?” without waiting for distro updates.
-
-This learning path focuses on a concrete use case: run the Speedometer browser benchmark on two different kernel versions and determine which kernel delivers the best score. The workflow mirrors what kernel engineers do every day—build, deploy, and compare—while *fastpath* keeps the process reproducible.
-
-To make that manageable we split the work across three Arm-based nodes:
-
-1. **Build host** – compiles the kernels with *fastpath*-specific options.
-2. **fastpath host** – orchestrates deployments, plan execution, and result collection.
-3. **System Under Test (SUT)** – runs each kernel and executes the benchmark workloads.
-
-Arm’s `arm_kernel_install_guide` repository supplies wrapper scripts that streamline each step. You will use them to compile kernels on the build host, prepare the *fastpath* host and SUT, generate a plan, execute it, and then read the results without having to stitch together the workflow manually.
-
-> **Tip:** The complete *fastpath* reference documentation is available at [fastpath.docs.arm.com](https://fastpath.docs.arm.com/en/latest/index.html).  
