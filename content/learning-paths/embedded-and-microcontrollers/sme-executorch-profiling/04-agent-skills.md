@@ -4,27 +4,27 @@ weight: 5
 layout: "learningpathall"
 ---
 
-## Goal: Automate profiling with AI coding assistants
+## Goal: Automate performance analysis with AI coding assistants
 
-This learning path ships structured, verifiable agent skills that make the profiling workflow automatable by AI coding assistants (Codex, Claude, Cursor, Copilot etc) and CI pipelines. Traditional documentation tells humans what to do, but agent skills tell AI assistants how to do it, with clear inputs, outputs, and verification gates.
+This learning path ships structured, verifiable agent skills that make the performance analysis workflow automatable by AI coding assistants (Codex, Claude, Cursor, Copilot etc) and CI pipelines. Traditional documentation tells humans what to do, but agent skills tell AI assistants how to do it, with clear inputs, outputs, and verification gates.
 
-The profiling kit includes skill definitions that specify what the agent needs (inputs), what commands to run (actions), what files to produce (outputs), and how to verify success (validation gates). This makes the workflow reproducible (same commands, same results), verifiable (each step has success criteria), and composable (skills chain together for end-to-end automation).
+The performance analysis kit includes skill definitions that specify what the agent needs (inputs), what commands to run (actions), what files to produce (outputs), and how to verify success (validation gates). This makes the workflow reproducible (same commands, same results), verifiable (each step has success criteria), and composable (skills chain together for end-to-end automation).
 
-Real-world use cases include AI coding assistants that can set up the profiling environment on command, CI pipelines that run automated regression testing after ExecuTorch updates, and faster onboarding for new team members who can use agent skills to get started quickly.
+Real-world use cases include AI coding assistants that can set up the performance analysis environment on command, CI pipelines that run automated regression testing after ExecuTorch updates, and faster onboarding for new team members who can use agent skills to get started quickly.
 
 ## 1. Where the agent workflows live
 
-This learning path ships structured, verifiable agent skills under the profiling kit:
+This learning path ships structured, verifiable agent skills under the performance analysis kit:
 
 - [`executorch_sme2_kit/agent_skill_ml_profiling/`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/tree/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/agent_skill_ml_profiling)
 
 Start here: Read [`executorch_sme2_kit/agent_skill_ml_profiling/readme.md`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/agent_skill_ml_profiling/readme.md) for the complete skill catalog.
 
 Available skills:
-1. `01_setup_workspace.md` - Initialize profiling environment
+1. `01_setup_workspace.md` - Initialize performance analysis environment
 2. `02_build_runners.md` - Build SME2-on/off runner binaries
 3. `03_export_model.md` - Export PyTorch model to ExecuTorch .pte
-4. `04_run_profiling.md` - Execute profiling pipeline (timing + trace)
+4. `04_run_profiling.md` - Execute performance measurement pipeline (timing + trace)
 5. `05_analyze_results.md` - Generate operator-category breakdown
 6. `06_validate_workflow.md` - End-to-end smoke test
 7. `07_report_generation.md` - Generate comprehensive markdown report
@@ -57,20 +57,28 @@ Each skill follows a consistent format based on current practices among develope
 | `build_runners` | ~20 min | Setup complete | `executorch/cmake-out/android-arm64-v9a*/executor_runner` (for mobile device testing) or `executorch/cmake-out/mac-arm64*/executor_runner` (developer accessibility) |
 | `export_model` | ~5 min | Setup complete | `out_<model>/artifacts/*.pte` |
 | `run_profiling` | ~10 min | Runners + model | `out_<model>/runs/<platform>/*.etdump` |
-| `analyze_results` | ~2 min | Profiling complete | `out_<model>/runs/<platform>/analysis_summary.json` |
-| `validate_workflow` | ~15 min | None (does setup) | Full smoke test validation |
+| `analyze_results` | ~2 min | Performance measurement complete | `out_<model>/runs/<platform>/analysis_summary.json` |
+| `validate_workflow` | ~15 min | Setup complete | Full smoke test validation |
 | `report_generation` | ~1 min | Analysis complete | `out_<model>/runs/<platform>/report.md` |
 
 ## 4. Recommended workflow
 
 For AI assistants, use skills in this order:
 
-1. `validate_workflow.md` - Quick end-to-end test (recommended first action)
+**First-time setup** (required for fresh downloads):
+1. `setup_workspace.md` - Initialize environment (run this first if you just downloaded the repo)
+   - Creates `.venv/` and clones `executorch/` repository
+   - Takes ~30 minutes (downloads ExecuTorch and dependencies)
+   - Required before any other skills will work
+
+**After setup is complete**:
+2. `validate_workflow.md` - Quick end-to-end test (recommended after setup)
    - This runs the complete workflow with a toy model
    - Validates that the environment is correctly configured
    - Takes ~15 minutes and gives you confidence everything works
+   - **Note**: Requires `setup_workspace` to be completed first
 
-2. Or step-by-step: `setup_workspace` → `build_runners` → `export_model` → `run_profiling` → `analyze_results`
+3. Or step-by-step: `build_runners` → `export_model` → `run_profiling` → `analyze_results`
    - Use this when you want to understand each step
    - Or when `validate_workflow` fails and you need to debug
 
@@ -78,7 +86,7 @@ For AI assistants, use skills in this order:
 
 ## 5. Example: Using skills with an AI assistant
 
-User: "Set up the profiling environment and run a smoke test"
+User: "Set up the performance analysis environment and run a smoke test"
 
 Agent workflow:
 1. Use `01_setup_workspace.md` skill → creates `.venv/`, `executorch/`
@@ -86,6 +94,6 @@ Agent workflow:
 3. Use `06_validate_workflow.md` skill → runs end-to-end smoke test
 4. Verify all validation checks pass
 
-Result: Complete profiling environment ready, validated with a working example.
+Result: Complete performance analysis environment ready, validated with a working example.
 
 The value: Skills make automation reliable. The agent doesn't need to guess what commands to run or how to verify success. It follows the skill's structured steps.

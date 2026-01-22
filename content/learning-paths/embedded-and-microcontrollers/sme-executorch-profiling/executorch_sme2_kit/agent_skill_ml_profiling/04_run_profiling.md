@@ -90,6 +90,31 @@ python3 model_profiling/scripts/android_pipeline.py \
   --config model_profiling/configs/android_squeezesam_q8_comprehensive_cpu7.json
 ```
 
+**Critical: Android device power management** - Power management settings significantly impact inference latency measurements. The `stay_on_while_plugged_in` setting is critical: value 15 removes all CPU frequency caps and scaling policies; value 1 is normal device usage. Configure your device for consistent performance mode and keep settings consistent across runs.
+
+**Configure device settings**:
+
+**Option 1: Unconstrained boost mode** (for stress testing hardware - removes all CPU frequency caps):
+```bash
+adb shell settings put global low_power 0
+adb shell settings put global stay_on_while_plugged_in 15
+adb shell svc power stayon true
+adb shell settings put global window_animation_scale 0
+adb shell settings put global transition_animation_scale 0
+adb shell settings put global animator_duration_scale 0
+```
+
+**Option 2: App developer mode** (for perceived app performance - real user daily experience):
+```bash
+adb shell settings put global stay_on_while_plugged_in 1
+adb shell settings put global window_animation_scale 1
+adb shell settings put global transition_animation_scale 1
+adb shell settings put global animator_duration_scale 1
+adb shell settings put global low_power 0
+```
+
+**Note**: Unconstrained boost mode (value 15) removes all CPU frequency caps and scaling policies for stress testing hardware. App developer mode (value 1) reflects normal device usage and perceived app performance for real user daily experience. Keep settings consistent across all runs.
+
 **With additional options**:
 ```bash
 # Run only specific experiments
@@ -190,6 +215,29 @@ python3 model_profiling/scripts/generate_report.py \
 ```
 
 ### Workflow 2: Quick Latency Comparison (Android)
+
+**Critical: Device power management** - Configure Android device power settings before running. The `stay_on_while_plugged_in` setting is critical: value 15 removes all CPU frequency caps (stress testing); value 1 is normal device usage (real user experience). Keep settings consistent across runs.
+
+**Configure device settings**:
+
+**Unconstrained boost mode** (value 15 - for stress testing hardware):
+```bash
+adb shell settings put global low_power 0
+adb shell settings put global stay_on_while_plugged_in 15
+adb shell svc power stayon true
+adb shell settings put global window_animation_scale 0
+adb shell settings put global transition_animation_scale 0
+adb shell settings put global animator_duration_scale 0
+```
+
+**App developer mode** (value 1 - for perceived app performance):
+```bash
+adb shell settings put global stay_on_while_plugged_in 1
+adb shell settings put global window_animation_scale 1
+adb shell settings put global transition_animation_scale 1
+adb shell settings put global animator_duration_scale 1
+adb shell settings put global low_power 0
+```
 
 ```bash
 # 1. Export model
