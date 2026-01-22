@@ -1,9 +1,9 @@
 ---
 title: Build a Simple CI/CD pipeline with GitLab-Hosted Runners
 
-draft: false
+draft: true
 cascade:
-    draft: false
+    draft: true
 
 
 minutes_to_complete: 40
