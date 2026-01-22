@@ -196,10 +196,10 @@ Run the pipeline to verify Docker-based CI execution on Arm64:
 
 Review the logs to confirm that each pipeline stage completed successfully:
 
-* Click the build number (for example, `#1`)
-* Click **Console Output**
+* Select the build number (for example, `#1`)
+* Select **Console Output**
 
-![ Jenkins UI alt-text#center](images/docker-output.png "Figure 4: Console output")
+![Jenkins console output showing Docker build stages with Architecture aarch64, Docker version, image build success, and Hello from Arm64 Docker container message alt-txt#center](images/docker-output.png "Console output")
 
 ## What you've accomplished and what's next
 
