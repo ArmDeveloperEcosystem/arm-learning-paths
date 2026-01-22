@@ -1,88 +1,75 @@
 ---
 # User change
-title: "Enable WiFi"
+title: "Transfer files to the board"
 
-weight: 5 # 1 is first, 2 is second, etc.
+weight: 4 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
 
-{{% notice Note %}}
+Proceed with the remainder of this Learning Path logged in as `root`. 
 
-* WiFi network connectivity **does not persist** on NXP board reboot
-* It **does persist** on logging out and then logging back in as the same Linux user
+Once the board is on your network, copying files over SSH is usually the fastest workflow. If you can’t use WiFi, you can still move files with a USB drive. Create a test file to transfer.
 
-{{% /notice %}}
+```bash
+echo "test" > test.txt
+```
 
-1. [Log in to Linux]( {{< relref "2-boot-nxp.md" >}} ) on the board, as a [super user]( {{< relref "3-create-super-user" >}} )
+## Transfer files over WiFi (scp)
 
-2. Run the below terminal commands:
-   ```bash
-   sudo /usr/sbin/modprobe moal mod_para=nxp/wifi_mod_para.conf
-   sudo connmanctl
-   ```
+You’ll need the board’s IP address. On the board, run:
 
-3. The prompt will change to `connmanctl>`, where you will enter the following commands:
+```bash
+ifconfig | grep RUNNING -A 1
+```
 
-   ```bash
-   enable wifi
-   scan wifi
-   services
-   ```
+Look for the WiFi interface (often `mlan0`) and note the `inet` address.
 
-4. Your available WiFi networks will be listed in the following form:
+On your development machine, copy a file to the board with `scp` by updating the IP address in the following command:
 
-   ```bash { output_lines = "1-3" }
-   <SSID>                wifi_0123456789ab_cdef0123456789_managed_psk
-   <SSID>                wifi_abcdef012345_6789abcdef0123_managed_psk
-   <SSID>                wifi_fedcba987654_3210fedcba9876_managed_psk
-   ```
+```bash
+scp test.txt root@<ip-address>:/root/test.txt
+```
 
-   {{% notice Note %}}
-   
-   Duplicate SSIDs may appear, so you will have to experiment with the different `wifi_..._managed_psk` names, when you try to connect in the next step
+If you haven’t used SSH with this board before, you might be prompted to accept the host key. That’s expected. 
 
-   {{% /notice %}}
+## Transfer files over USB
 
-5. Still within the `connmanctl>` prompt, enter the following commands:
+If WiFi isn’t available, copy your files onto a USB-A thumb drive on your development machine, then insert the drive into the board.
 
-   ```bash
-   agent on
-   connect wifi_0123456789ab_cdef0123456789_managed_psk # Your wifi_..._managed_ps name will be different
-   Agent RequestInput wifi_0123456789ab_cdef0123456789_managed_psk
-   Passphrase = [ Type=psk, Requirement=mandatory ]
-   Passphrase? # Enter your WiFi password
-   connmanctl> quit
-   ```
+On the board, mount the drive and copy the file:
 
-6. Assuming your WiFi network is connected to the Internet, test connectivity:
+```bash
+mount /dev/sda1 /mnt
+cp /mnt/test.txt /root
+```
 
-   ```bash
-   curl -I http://www.example.com
-   ```
+If `/dev/sda1` doesn’t exist, list block devices and use the partition that matches your USB drive:
 
-   If WiFi is configured correctly, you will see the example.com web page load:
+```bash
+lsblk
+```
 
-   ```bash { output_lines = "1-2" }
-   HTTP/1.1 200 OK
-   ...
-   ```
+For example:
 
-7. [optional] If your WiFi network is not connected to the internet, test connectivity this way:
+```bash
+cp /mnt/test.txt ./
+```
 
-   ```bash
-   ifconfig | grep RUNNING -A 1
-   ```
+When you’re done, unmount the drive:
 
-   If WiFi is configured correctly, you will see a list of `RUNNING` network adapters:
-   * one for `127.0.0.1` (`localhost`) and
-   * a second for the NXP board's assigned IP address on the WiFi network
-   * Example output, where `192.168.1.89` is the NXP board's successfully assigned IP address:
-     ```bash { output_lines = "1-5" }
-     lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
-          inet 127.0.0.1  netmask 255.0.0.0
-     --
-     mlan0: flags=-28605<UP,BROADCAST,RUNNING,MULTICAST,DYNAMIC>  mtu 1500
-          inet 192.168.1.89  netmask 255.255.255.0  broadcast 192.168.1.255
-     ```
+```bash
+umount /mnt
+```
+
+## Confirm file transfer
+
+You should now see the file in the `root` directory:
+
+```output
+root@imx93evk:~# ls /root
+test.txt
+```
+
+Proceed to the final section to automate reconnecting to wifi.
