@@ -6,6 +6,8 @@ weight: 8
 layout: learningpathall
 ---
 
+## Install Jenkins on GCP SUSE Arm64
+
 To install Jenkins (Stable LTS) on a GCP SUSE Linux Enterprise Server (SLES) Arm64 virtual machine, follow these steps.
 
 ## Update the system and install utilities
@@ -97,4 +99,13 @@ The output is similar to:
 2.528.3
 ```
 
-Jenkins LTS is now successfully installed on your GCP SUSE Arm64 virtual machine.
+## What you've accomplished and what's next
+
+You've successfully installed Jenkins LTS on your GCP SUSE Arm64 virtual machine. Your installation includes:
+
+- Jenkins service running and enabled for automatic startup
+- Java 17 runtime properly configured
+- Jenkins accessible on port 8080
+- Arm64-native deployment ready for CI/CD workloads
+
+Next, you'll validate the Jenkins installation and run your first pipeline.

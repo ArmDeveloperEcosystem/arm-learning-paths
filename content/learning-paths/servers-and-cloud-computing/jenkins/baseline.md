@@ -6,6 +6,8 @@ weight: 9
 layout: learningpathall
 ---
 
+## Validate Jenkins installation on Arm64
+
 After installation completes, validate the Jenkins LTS setup on the Azure Ubuntu 24.04 Arm64 virtual machine. You'll verify service health, network access, Arm architecture, and run a first pipeline.
 
 ## Verify network configuration
@@ -86,19 +88,19 @@ http://<VM_PUBLIC_IP>:8080
 
 Complete the initial Jenkins setup using the web interface:
 
-1. Paste the initial admin password saved previously.
+Paste the initial admin password saved previously.
 
-![ Jenkins UI alt-text#center](images/initial-setup.png "Figure 1: Initial Jenkins page")
+![Jenkins web interface showing unlock page with text field for entering initial admin password alt-txt#center](images/initial-setup.png "Initial Jenkins page")
 
-2. Select **Install suggested plugins**.
+Select **Install suggested plugins**.
 
-![ Jenkins UI alt-text#center](images/jenkins-plugins.png "Figure 2: Install suggested plugins")
+![Jenkins setup wizard showing plugin installation screen with progress indicators for multiple plugins being installed alt-txt#center](images/jenkins-plugins.png "Install suggested plugins")
 
-3. Create an admin user.
+Create an admin user.
 
-![ Jenkins UI alt-text#center](images/jenkins-admin.png "Figure 3: Create admin user")
+![Jenkins user creation form with fields for username, password, full name, and email address alt-txt#center](images/jenkins-admin.png "Create admin user")
 
-4. Finish setup and reach the Jenkins dashboard.
+Finish setup and reach the Jenkins dashboard.
 
 ## Execute a first Jenkins pipeline
 
@@ -114,18 +116,18 @@ http://<VM_PUBLIC_IP>:8080
 
 Log in using your Jenkins credentials:
 
-![ Jenkins UI alt-text#center](images/jenkins-login-page.png "Figure 4: Jenkins login page")
+![Jenkins login screen with username and password fields and Sign in button alt-txt#center](images/jenkins-login-page.png "Jenkins login page")
 
 ### Create a new pipeline job
 
 Create a basic pipeline job to validate execution capability:
 
-1. Click **New Item** (left sidebar).
-2. Enter item name: `armbaseline-pipeline`.
-3. Select **Pipeline**.
-4. Click **OK**.
+* Click **New Item** (left sidebar).
+* Enter item name: `armbaseline-pipeline`.
+* Select **Pipeline**.
+* Select **OK**.
 
-![ Jenkins UI alt-text#center](images/jenkins-item.png "Figure 5: Create new pipeline item")
+![Jenkins New Item page showing item name field with armbaseline-pipeline entered and Pipeline option selected alt-txt#center](images/jenkins-item.png "Create new pipeline item")
 
 ### Add the pipeline script
 
@@ -155,27 +157,27 @@ pipeline {
 }
 ```
 
-Click **Save**.
+Select **Save**.
 
-![Jenkins UI alt-text#center](images/jenkins-pipeline.png "Figure 6: Create pipeline")
+![Jenkins pipeline configuration page showing Pipeline script definition section with Groovy code visible alt-txt#center](images/jenkins-pipeline.png "Create pipeline")
 
 ### Run the pipeline
 
 Trigger the pipeline execution:
 
-1. On the job page, click **Build Now**.
-2. A build number appears under **Build History**.
+* On the job page, select **Build Now**.
+* A build number appears under **Build History**.
 
-![ Jenkins UI alt-text#center](images/jenkins-job.png "Figure 7: Run pipeline")
+![Jenkins pipeline job page showing Build Now button in left sidebar and build #1 appearing in Build History alt-txt#center](images/jenkins-job.png "Run pipeline")
 
 ### View console output
 
 Review the pipeline logs to confirm successful execution:
 
-1. Click the build number (for example, `#1`).
-2. Click **Console Output**.
+* Select the build number (for example, `#1`).
+* Select **Console Output**.
 
-![Jenkins UI alt-text#center](images/jenkins-output.png "Figure 8: Console output")
+![Jenkins console output displaying pipeline execution logs showing Architecture aarch64 and Java version information alt-txt#center](images/jenkins-output.png "Console output")
 
 ## What you've accomplished and what's next
 
