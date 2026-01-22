@@ -1,6 +1,10 @@
 ---
 title: Fastpath Kernel Build and Install Guide
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 45
 
 who_is_this_for: Software developers and performance engineers who want to explore benchmarking across different kernel versions with Fastpath on Arm.
@@ -19,8 +23,8 @@ prerequisites:
 author: Geremy Cohen
 
 ### Tags
-skilllevels: Intermediate
-subjects: Operating Systems
+skilllevels: Advanced
+subjects: Performance and Architecture
 armips:
     - Neoverse
 operatingsystems:
@@ -28,7 +32,7 @@ operatingsystems:
 tools_software_languages:
     - Fastpath
     - tuxmake
-    - Linux kernel
+    - Linux
 
 further_reading:
     - resource:
