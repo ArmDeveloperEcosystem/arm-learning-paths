@@ -1,13 +1,14 @@
 ---
 title: Build a Simple CI/CD pipeline with GitLab-Hosted Runners
 
-draft: true
-cascade:
-    draft: true
+#draft: false
+#cascade:
+#    draft: false
+
 
 minutes_to_complete: 40
 
-who_is_this_for: This is an Introductory topic for DevOps professionals who are looking to build a CI/CD pipeline with GitLab on Google Axion using GitLab-Hosted runners. 
+who_is_this_for: This is an Introductory topic for DevOps professionals who are looking to build a CI/CD pipeline with GitLab on Google using GitLab-Hosted runners. 
 
 learning_objectives: 
     - Create a GitLab Project
