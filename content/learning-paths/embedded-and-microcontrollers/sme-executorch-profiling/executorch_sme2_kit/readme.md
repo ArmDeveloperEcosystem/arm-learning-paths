@@ -39,13 +39,32 @@ This folder contains the complete, runnable profiling framework. Copy this entir
    
    python model_profiling/scripts/mac_pipeline.py \
      --config model_profiling/configs/my_experiment.json
+   # Pipeline automatically runs analysis and generates CSV files
    ```
 
-6. **Analyze results:**
+6. **View results:**
    ```bash
+   # Analysis runs automatically during pipeline execution
+   # Results include CSV files, pipeline_summary.json/md, and analysis_summary.json
+   # Optional: Re-run analysis if needed
    python model_profiling/scripts/analyze_results.py \
      --run-dir out_<model>/runs/mac
+   
+   # Generate comprehensive markdown report (base report)
+   python model_profiling/scripts/generate_report.py \
+     --run-dir out_<model>/runs/mac
+   
+   # For actionable insights: Operator-specific bottleneck analysis
+   python model_profiling/tools/analyze_etdump_csv.py \
+     --timeline-csv out_<model>/runs/mac/<experiment>/*_all_runs_timeline.csv \
+     --compare out_<model>/runs/mac/<experiment_off>/*_all_runs_timeline.csv \
+     --name1 "SME2-Off" \
+     --name2 "SME2-On" \
+     --output-dir out_<model>/runs/mac/ \
+     --verbose
    ```
+   
+   **Note**: The base report shows category-level breakdown. For **actionable insights** (operator-level bottlenecks, portable vs delegated analysis), use `analyze_etdump_csv.py`. See agent skill `07_report_generation.md` for complete workflow.
 
 ## Structure
 
@@ -73,8 +92,11 @@ See the learning path documentation for detailed onboarding instructions. The ke
 
 The pipeline is **model-agnostic** - once you export a `.pte`, everything else stays the same.
 
+**For EdgeTAM onboarding**: See agent skill `agent_skill_ml_profiling/08_onboard_edgetam.md` for step-by-step instructions.
+
 ## Reference
 
 - **Command reference**: See `model_profiling/pipeline_commands.md` for detailed workflow
-- **Scripts overview**: See `model_profiling/scripts/README.md` for script documentation
+- **Scripts overview**: See `model_profiling/scripts/readme.md` for script documentation
+- **Comprehensive report generation**: See `agent_skill_ml_profiling/07_report_generation.md` for complete workflow including operator-specific bottleneck analysis, portable vs delegated operator identification, and kernel-level insights
 - **Learning path**: See the main learning path documentation for context and examples

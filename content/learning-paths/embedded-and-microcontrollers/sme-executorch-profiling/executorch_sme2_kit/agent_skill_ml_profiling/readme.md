@@ -94,5 +94,4 @@ description: What the skill does and when Claude should use it
 | `05_analyze_results` | ~2 min | `runs/<platform>/analysis_summary.json` (optional - automatic by pipeline) |
 | `06_validate_workflow` | ~15 min | Full smoke test validation |
 | `07_report_generation` | ~1 min | `runs/<platform>/report.md` |
-| `08_onboard_edgetam` | ~5 min | `models/edgetam/` (model wrapper, checkpoint, config) |
-| `08_onboard_edgetam` | ~5 min | `models/edgetam/` (model wrapper, checkpoint, config) |
+| `08_onboard_edgetam` | ~5 min | Setup complete | `models/edgetam/` (model wrapper, checkpoint, config) |

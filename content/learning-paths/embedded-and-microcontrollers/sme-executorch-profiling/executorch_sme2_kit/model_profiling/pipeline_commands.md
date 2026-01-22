@@ -186,12 +186,13 @@ executorch_sme2_kit/
 │           ├── metrics.json
 │           ├── <model_stem>_pipeline_summary.json
 │           ├── <model_stem>_pipeline_summary.md
-│           ├── analysis_summary.json (if analyze_results.py run manually)
-│           ├── <model_stem>_<experiment>_t<threads>.etdump
-│           ├── <model_stem>_<experiment>_t<threads>_exec_all_runs_timeline.csv
-│           ├── <model_stem>_<experiment>_t<threads>_exec_run0_timeline.csv
-│           ├── <model_stem>_<experiment>_t<threads>_exec_ops_stats.csv
-│           └── <model_stem>_<experiment>_t<threads>_latency.log
+│           ├── analysis_summary.json (generated automatically by pipeline)
+│           ├── <experiment_name>/              # Per-experiment directory
+│           │   ├── <model_stem>_<experiment>_t<threads>.etdump
+│           │   ├── <model_stem>_<experiment>_t<threads>_exec_all_runs_timeline.csv
+│           │   ├── <model_stem>_<experiment>_t<threads>_exec_run0_timeline.csv
+│           │   ├── <model_stem>_<experiment>_t<threads>_exec_ops_stats.csv
+│           │   └── <model_stem>_<experiment>_t<threads>_latency.log
 └── models/                         # Legacy location (if used)
 ```
 

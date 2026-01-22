@@ -6,7 +6,7 @@ layout: "learningpathall"
 
 ## Goal: Find where your model spends time
 
-This learning path supports the PyTorch blog post ["Accelerating On-Device Vision ML Inference in ExecuTorch with Arm SME2"](https://pytorch.org/blog/placeholder-link) (link to be updated). It provides a hands-on implementation guide to identify optimization opportunities and actionable improvements that enhance model performance and enrich application user experience. 
+This learning path supports the PyTorch blog post ["Accelerating On-Device ML Inference with ExecuTorch and Arm SME2"](https://pytorch.org/blog/placeholder-link) (link to be updated). It provides a hands-on implementation guide to identify optimization opportunities and actionable improvements that enhance model performance and enrich application user experience. 
 
 When you enable SME2 acceleration on Arm devices, you get faster models, and something equally valuable: clear visibility into where time is actually spent. Model inference time is usually spent across several categories: matrix compute (linear operations like CONV and GEMM), non-linear operations (elementwise activations, normalization), and data movement (transpose, reshape, layout conversions, memory copies). In most models, matrix compute dominates the latency, making it the primary bottleneck.
 
