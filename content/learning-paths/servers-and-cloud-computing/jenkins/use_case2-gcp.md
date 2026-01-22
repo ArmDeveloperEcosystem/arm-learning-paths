@@ -6,6 +6,8 @@ weight: 11
 layout: learningpathall
 ---
 
+## Build a Docker-based CI pipeline on Arm64
+
 You can use Jenkins on a GCP SUSE Arm64 virtual machine to build and run a Docker container natively on Arm64. Validate Docker installation, Jenkins–Docker integration, and Arm-native container execution.
 
 ## Prerequisites
@@ -17,7 +19,7 @@ Before starting, ensure the following components are available:
 * Docker installed on the virtual machine
 * Jenkins user added to Docker group
 
-## Install Docker on the GCP SuSE Arm64 virtual machine
+## Install Docker on the GCP SUSE Arm64 virtual machine
 
 If not already installed, install Docker using the SUSE package manager:
 
@@ -128,9 +130,9 @@ http://<VM_PUBLIC_IP>:8080
 * Click **New Item**
 * Job name: `docker-arm-ci`
 * Select **Pipeline**
-* Click **OK**
+* Select **OK**
 
-![ Jenkins UI alt-text#center](images/new-item.png "Figure 1: Create new item")
+![Jenkins New Item page with docker-arm-ci entered as name and Pipeline option selected alt-txt#center](images/new-item.png "Create new item")
 
 ### Add the pipeline script
 
@@ -178,19 +180,19 @@ pipeline {
 }
 ```
 
-Click **Save**.
+Select **Save**.
 
-![ Jenkins UI alt-text#center](images/docker-pipeline.png "Figure 2: Create pipeline")
+![Jenkins pipeline configuration page showing Pipeline script with Docker build and run stages defined in Groovy alt-txt#center](images/docker-pipeline.png "Create pipeline")
 
 
 ### Execute the pipeline
 
 Run the pipeline to verify Docker-based CI execution on Arm64:
 
-* On the job page, click **Build Now**
-* Click the build number
+* On the job page, select **Build Now**
+* Select the build number
   
-![ Jenkins UI alt-text#center](images/docker-build.png "Figure 3: Execute pipeline")
+![Jenkins docker-arm-ci job page showing Build Now button and build #1 in Build History alt-txt#center](images/docker-build.png "Execute pipeline")
 
 ### View console output
 

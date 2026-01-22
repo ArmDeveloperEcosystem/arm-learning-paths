@@ -6,6 +6,8 @@ weight: 5
 layout: learningpathall
 ---
 
+## Install Jenkins on Azure Ubuntu Arm64
+
 To install Jenkins on an Azure Ubuntu 24.04 LTS Arm64 virtual machine, follow these steps.
 
 At the end of the installation, Jenkins is:
@@ -103,4 +105,13 @@ The output is similar to:
 2.528.3
 ```
 
-Jenkins LTS is now successfully deployed on your Azure Ubuntu Arm64 virtual machine.
+## What you've accomplished and what's next
+
+You've successfully installed Jenkins LTS on your Azure Ubuntu Arm64 virtual machine. Your installation includes:
+
+- Jenkins service running and enabled for automatic startup
+- Java 17 runtime properly configured
+- Jenkins accessible on port 8080
+- Arm64-native deployment ready for CI/CD workloads
+
+Next, you'll configure firewall rules to allow external access to Jenkins.

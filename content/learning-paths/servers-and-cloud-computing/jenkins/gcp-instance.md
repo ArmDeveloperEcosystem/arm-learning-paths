@@ -6,13 +6,13 @@ weight: 7
 layout: learningpathall
 ---
 
-You now provision a Google Axion C4A virtual machine on Google Cloud Platform (GCP) using the `c4a-standard-4` machine type, which provides 4 vCPUs and 16 GB of memory.
+## Create a Google Axion C4A virtual machine
 
-{{% notice Note %}}
-For general guidance on setting up a Google Cloud account and project, see [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
-{{% /notice %}}
+Provision a Google Axion C4A virtual machine on Google Cloud Platform (GCP) using the `c4a-standard-4` machine type, which provides 4 vCPUs and 16 GB of memory.
 
-## Provision a Google Axion C4A virtual machine in the Google Cloud Console
+{{% notice Note %}}For general guidance on setting up a Google Cloud account and project, see [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).{{% /notice %}}
+
+### Use the Google Cloud console to create the VM
 
 To create a virtual machine using the C4A instance type:
 
@@ -23,7 +23,7 @@ To create a virtual machine using the C4A instance type:
   - Set **Series** to **C4A**.
   - Select **c4a-standard-4** as the machine type.
 
-![Google Cloud Console VM creation page with C4A machine series selected alt-text#center](images/gcp-vm.png "Creating a Google Axion C4A virtual machine in the Google Cloud Console")
+![Google Cloud Console VM creation page showing machine configuration section with C4A series and c4a-standard-4 machine type selected alt-txt#center](images/gcp-vm.png "Creating a Google Axion C4A virtual machine in the Google Cloud Console")
 
 - Under **OS and storage**, select **Change**, and then choose an Arm64-based operating system image.
   - For this Learning Path, select **SUSE Linux Enterprise Server**.
@@ -33,12 +33,12 @@ To create a virtual machine using the C4A instance type:
 - Under **Networking**, enable **Allow HTTP traffic** and **Allow HTTPS traffic**. Additionally, enter **"allow-tcp-8080"** as a networking tag.
 - Select **Create** to launch the virtual machine.
 
-After the instance starts, click **SSH** next to the virtual machine in the instance list to open a browser-based terminal session.
+After the instance starts, select **SSH** next to the virtual machine in the instance list to open a browser-based terminal session.
 
-![Google Cloud Console VM instances list with SSH button highlighted alt-text#center](images/gcp-ssh.png "Connecting to a running C4A instance using SSH")
+![Google Cloud Console VM instances page showing running instance with SSH button next to the instance name alt-txt#center](images/gcp-ssh.png "Connecting to a running C4A instance using SSH")
 
 A new browser window opens with a terminal connected to your virtual machine.
 
-![Browser-based terminal window showing a command prompt on a SUSE Linux virtual machine alt-text#center](images/gcp-shell.png "Terminal session connected to the virtual machine")
+![Browser window displaying SSH terminal session with SUSE Linux command prompt showing username and hostname alt-txt#center](images/gcp-shell.png "Terminal session connected to the virtual machine")
 
 Next, install Jenkins on your virtual machine.
