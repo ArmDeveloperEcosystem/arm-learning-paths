@@ -38,11 +38,11 @@ Real-world example: The EdgeTAM image encoder (see agent skill `08_onboard_edget
 
 To add a new model to the performance analysis workflow:
 
-1. Create [`model_profiling/models/<model_name>/`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/tree/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/models) directory
+1. Create [`model_profiling/models/<model_name>/`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/tree/main/model_profiling/models) directory
 2. Implement `EagerModelBase` interface in `model.py`:
    - `get_eager_model()`: Returns the PyTorch model
    - `get_example_inputs()`: Returns tuple of example tensors
-3. Register in [`model_profiling/models/__init__.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/models/__init__.py):
+3. Register in [`model_profiling/models/__init__.py`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/models/__init__.py):
    ```python
    from . import your_model
    register_model("your_model", YourModelClass)
@@ -58,7 +58,7 @@ Advanced onboarding example: The EdgeTAM image encoder (see agent skill `08_onbo
 
 ## 3. Export a model
 
-Exporting a model to `.pte` format is model-specific work. This learning path ships a reference exporter at [`model_profiling/export/export_model.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/export/export_model.py) that demonstrates the export process.
+Exporting a model to `.pte` format is model-specific work. This learning path ships a reference exporter at [`model_profiling/export/export_model.py`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/export/export_model.py) that demonstrates the export process.
 
 How it works: The exporter uses a registry patching system that allows local models (in `model_profiling/models/`) to be exported without editing ExecuTorch source code. This keeps the pipeline stable while you add new models.
 
@@ -113,7 +113,7 @@ Or use the provided example:
 cat model_profiling/configs/examples/mac_mobilenet_fp16.json
 ```
 
-Config files: [`mac_template.json`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/configs/templates/mac_template.json), [`mac_mobilenet_fp16.json`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/configs/examples/mac_mobilenet_fp16.json)
+Config files: [`mac_template.json`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/configs/templates/mac_template.json), [`mac_mobilenet_fp16.json`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/configs/examples/mac_mobilenet_fp16.json)
 
 Key fields:
 - `experiments[].runner_path`: Points to the runner binary in `executorch/cmake-out/<preset>/executor_runner` (timing-only or trace-enabled)
@@ -179,7 +179,7 @@ python model_profiling/scripts/android_pipeline.py --config model_profiling/conf
 python model_profiling/scripts/analyze_results.py --run-dir model_profiling/out_toy_cnn/runs/android
 ```
 
-See [`android_pipeline.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/android_pipeline.py) for the implementation.
+See [`android_pipeline.py`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/scripts/android_pipeline.py) for the implementation.
 
 This uses the Android runners (`executorch/cmake-out/android-arm64-v9a/executor_runner`, `executorch/cmake-out/android-arm64-v9a-sme2-off/executor_runner`) which have no trace logging overhead.
 
@@ -221,7 +221,7 @@ Run with timing-only runners (default) to get accurate latency measurements:
 python model_profiling/scripts/mac_pipeline.py --config model_profiling/configs/examples/mac_mobilenet_fp16.json
 ```
 
-See [`mac_pipeline.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/mac_pipeline.py) for the implementation.
+See [`mac_pipeline.py`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/scripts/mac_pipeline.py) for the implementation.
 
 This uses the standard runners (`executorch/cmake-out/mac-arm64/executor_runner`, `executorch/cmake-out/mac-arm64-sme2-off/executor_runner`) which have no trace logging overhead.
 
@@ -251,7 +251,7 @@ For kernel-level insights, run again with trace-enabled runners (separate config
 python model_profiling/scripts/mac_pipeline.py --config model_profiling/configs/examples/mac_mobilenet_fp16.json
 ```
 
-See [`mac_pipeline.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/mac_pipeline.py) for the implementation.
+See [`mac_pipeline.py`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/scripts/mac_pipeline.py) for the implementation.
 
 When to use: When you need to verify which kernels were selected (e.g., `__neonsme2` vs `neon`). This is evidence-gathering, not performance measurement.
 
@@ -262,7 +262,7 @@ Validate (optional):
 python model_profiling/scripts/validate_results.py --results model_profiling/out_toy_cnn/runs/mac
 ```
 
-See [`validate_results.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/validate_results.py) for the implementation.
+See [`validate_results.py`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/scripts/validate_results.py) for the implementation.
 
 > **Note**: Validation checks for JSON files, but they're not required for analysis. The analysis script works directly with ETDump files.
 
@@ -277,7 +277,7 @@ python model_profiling/scripts/analyze_results.py \
   --run-dir model_profiling/out_toy_cnn/runs/mac
 ```
 
-See [`analyze_results.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/analyze_results.py) for the implementation.
+See [`analyze_results.py`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/scripts/analyze_results.py) for the implementation.
 
 It writes:
 
@@ -319,7 +319,7 @@ Kernel-level analysis requires separate trace-enabled runs because XNNPACK kerne
 1. Use timing-only runs for latency measurements (SME2 on vs off comparison)
 2. Use trace-enabled runs (separate execution) for kernel selection evidence
 
-In this learning path, [`model_profiling/scripts/analyze_results.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/analyze_results.py) extracts best-effort kernel hints from Inspector TSV fields when present (e.g. matching `__neonsme2`, `sme2`, `neon`).
+In this learning path, [`model_profiling/scripts/analyze_results.py`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/scripts/analyze_results.py) extracts best-effort kernel hints from Inspector TSV fields when present (e.g. matching `__neonsme2`, `sme2`, `neon`).
 
 - If your ExecuTorch build emits delegate debug/kernel identifiers into ETDump/Inspector metadata, you'll see non-empty `kernel_hints` from trace-enabled runs.
 - If not, you still get robust operator/category timing from timing-only runs, but kernel selection evidence may be sparse.

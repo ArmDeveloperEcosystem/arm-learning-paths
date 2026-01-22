@@ -57,7 +57,7 @@ Run this once:
 bash model_profiling/scripts/setup_repo.sh
 ```
 
-This script automates the ExecuTorch installation process. See [`setup_repo.sh`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/setup_repo.sh) for the implementation. For detailed information about building ExecuTorch from source, see the [official ExecuTorch documentation](https://docs.pytorch.org/executorch/1.0/using-executorch-building-from-source.html).
+This script automates the ExecuTorch installation process. See [`setup_repo.sh`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/scripts/setup_repo.sh) for the implementation. For detailed information about building ExecuTorch from source, see the [official ExecuTorch documentation](https://docs.pytorch.org/executorch/1.0/using-executorch-building-from-source.html).
 
 What it does:
 
@@ -112,7 +112,7 @@ After setup, build the ExecuTorch runners. This is done once and works for all m
 bash model_profiling/scripts/build_runners.sh
 ```
 
-See [`build_runners.sh`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/build_runners.sh) for the implementation.
+See [`build_runners.sh`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/scripts/build_runners.sh) for the implementation.
 
 This produces runners in `executorch/cmake-out/`:
 
@@ -138,7 +138,7 @@ This produces runners in `executorch/cmake-out/`:
 
 The build script produces timing-only runners by default. For kernel-level analysis, you'll need separate trace-enabled runners built with XNNPACK kernel logging flags.
 
-How it works: ExecuTorch ships with a default `CMakePresets.json`, but we add custom presets for SME2 performance analysis (SME2-on/off variants, platform-specific configs). The build script merges our custom presets ([`model_profiling/assets/cmake_presets.json`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/assets/cmake_presets.json)) into ExecuTorch's default file, then uses `cmake --preset` commands. This approach keeps ExecuTorch's defaults intact while adding our performance analysis-specific configurations. No manual CMake flags needed.
+How it works: ExecuTorch ships with a default `CMakePresets.json`, but we add custom presets for SME2 performance analysis (SME2-on/off variants, platform-specific configs). The build script merges our custom presets ([`model_profiling/assets/cmake_presets.json`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/assets/cmake_presets.json)) into ExecuTorch's default file, then uses `cmake --preset` commands. This approach keeps ExecuTorch's defaults intact while adding our performance analysis-specific configurations. No manual CMake flags needed.
 
 Example presets:
 
@@ -229,13 +229,13 @@ Key configuration options:
 The pipeline scripts are model-agnostic—they work with any `.pte` file:
 
 Run scripts:
-- [`model_profiling/scripts/android_pipeline.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/android_pipeline.py) - Android performance analysis pipeline (for real-world edge ML performance on mobile devices)
-- [`model_profiling/scripts/mac_pipeline.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/mac_pipeline.py) - macOS performance analysis pipeline (included for developer accessibility)
+- [`model_profiling/scripts/android_pipeline.py`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/scripts/android_pipeline.py) - Android performance analysis pipeline (for real-world edge ML performance on mobile devices)
+- [`model_profiling/scripts/mac_pipeline.py`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/scripts/mac_pipeline.py) - macOS performance analysis pipeline (included for developer accessibility)
 
 These scripts read JSON configs, execute all experiments defined in the config, and collect ETDump traces and timing logs. Point the config to a different `.pte` file, and the same scripts work for any model.
 
 Analysis scripts:
-- [`model_profiling/scripts/analyze_results.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/analyze_results.py) - Processes ETDump traces and logs (runs automatically after pipeline execution)
+- [`model_profiling/scripts/analyze_results.py`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/scripts/analyze_results.py) - Processes ETDump traces and logs (runs automatically after pipeline execution)
 
 **Note**: The pipeline automatically runs analysis after performance measurement, generating CSV files from ETDump and creating `analysis_summary.json`. You only need to run `analyze_results.py` manually if you want to re-analyze existing ETDump files or if analysis failed during pipeline execution.
 

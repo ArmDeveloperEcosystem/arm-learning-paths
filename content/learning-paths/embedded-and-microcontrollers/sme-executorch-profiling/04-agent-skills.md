@@ -16,9 +16,9 @@ Real-world use cases include AI coding assistants that can set up the performanc
 
 This learning path ships structured, verifiable agent skills under the performance analysis kit:
 
-- [`executorch_sme2_kit/agent_skill_ml_profiling/`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/tree/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/agent_skill_ml_profiling)
+- [`agent_skill_ml_profiling/`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/tree/main/agent_skill_ml_profiling)
 
-Start here: Read [`executorch_sme2_kit/agent_skill_ml_profiling/readme.md`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/agent_skill_ml_profiling/readme.md) for the complete skill catalog.
+Start here: Read [`agent_skill_ml_profiling/readme.md`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/agent_skill_ml_profiling/readme.md) for the complete skill catalog.
 
 Available skills:
 1. `01_setup_workspace.md` - Initialize performance analysis environment

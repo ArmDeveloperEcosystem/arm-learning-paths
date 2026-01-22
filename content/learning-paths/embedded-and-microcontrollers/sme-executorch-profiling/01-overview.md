@@ -28,19 +28,14 @@ An end-to-end, model-agnostic performance analysis pipeline for ExecuTorch model
 
 ## 2. Get the code package
 
-This repo is a Hugo content repo. The performance analysis kit (all runnable code) is in the [`executorch_sme2_kit/`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/tree/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit) folder. The kit includes EdgeTAM's image segmentation module as the example model, a more recent video-focused segmentation model, along with the model-agnostic performance analysis pipeline.
+This repo is a Hugo content repo. The performance analysis kit (all runnable code) is hosted in a separate repository: [`sme-executorch-profiling`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling). The kit includes EdgeTAM's image segmentation module as the example model, a more recent video-focused segmentation model, along with the model-agnostic performance analysis pipeline.
 
-Clone the repository with sparse checkout to get only the performance analysis kit:
+Clone the performance analysis kit repository:
 
 ```bash
 mkdir -p ~/sme2_analysis_work
 cd ~/sme2_analysis_work
-git clone --filter=blob:none --sparse https://github.com/ArmDeveloperEcosystem/arm-learning-paths.git temp_repo
-cd temp_repo
-git sparse-checkout set content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit
-mv content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit ../executorch_sme2_kit
-cd ..
-rm -rf temp_repo
+git clone https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling.git executorch_sme2_kit
 cd executorch_sme2_kit
 ```
 
@@ -95,7 +90,7 @@ python model_profiling/scripts/run_quick_test.py
 #    Optional: python model_profiling/scripts/analyze_results.py --run-dir model_profiling/out_toy_cnn/runs/mac
 ```
 
-Scripts: [`setup_repo.sh`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/setup_repo.sh), [`build_runners.sh`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/build_runners.sh), [`run_quick_test.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/run_quick_test.py), [`analyze_results.py`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/executorch_sme2_kit/model_profiling/scripts/analyze_results.py)
+Scripts: [`setup_repo.sh`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/scripts/setup_repo.sh), [`build_runners.sh`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/scripts/build_runners.sh), [`run_quick_test.py`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/scripts/run_quick_test.py), [`analyze_results.py`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/scripts/analyze_results.py)
 
 Expected outcome: You'll see a category breakdown showing CONV, GEMM, Data Movement, Elementwise, and Other operations, with timing for SME2-on vs SME2-off. This is the foundation for understanding where bottlenecks live.
 
