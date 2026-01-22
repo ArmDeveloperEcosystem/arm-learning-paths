@@ -28,7 +28,7 @@ What you need to do:
     - Per-tensor quantization: Single scale/zero-point per tensor (simpler but less accurate)
   - Backend partitioning: XNNPACK vs portable (which operators are delegated to XNNPACK)
 
-Real-world example: The EdgeTAM image encoder (see agent skill `08_onboard_edgetam.md` for onboarding steps) required:
+Real-world example: The EdgeTAM image encoder (see agent skill [`08_onboard_edgetam.md`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/agent_skill_ml_profiling/08_onboard_edgetam.md) for onboarding steps) required:
 - Input/output normalization wrappers
 - Operator replacements (unsupported ops → supported equivalents)
 - Shape constraint fixes (dynamic shapes → static shapes)
@@ -50,7 +50,7 @@ To add a new model to the performance analysis workflow:
 
 The key insight: This registration system lets you add models without touching ExecuTorch source code. The exporter patches the registry at runtime, so your models appear alongside ExecuTorch's built-in models.
 
-Advanced onboarding example: The EdgeTAM image encoder (see agent skill `08_onboard_edgetam.md` for complete onboarding workflow) demonstrates:
+Advanced onboarding example: The EdgeTAM image encoder (see agent skill [`08_onboard_edgetam.md`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/agent_skill_ml_profiling/08_onboard_edgetam.md) for complete onboarding workflow) demonstrates:
 - Wrapper classes for input/output normalization
 - Operator replacement strategies
 - Shape constraint handling
@@ -80,7 +80,7 @@ Expected outputs:
 - `model_profiling/out_toy_cnn/artifacts/toy_cnn_xnnpack_fp16.pte`
 - `model_profiling/out_toy_cnn/artifacts/toy_cnn_xnnpack_fp16.pte.etrecord` (optional; operator metadata)
 
-Why `out_<model>/artifacts/`: This keeps the `models/` directory clean (source code only). Exported artifacts live in a separate tree, making it easy to version control models without committing large `.pte` files.
+Why `model_profiling/out_<model>/artifacts/`: This keeps the `models/` directory clean (source code only). Exported artifacts live in a separate tree, making it easy to version control models without committing large `.pte` files.
 
 ## 4. The two-run workflow: Why you need both
 
