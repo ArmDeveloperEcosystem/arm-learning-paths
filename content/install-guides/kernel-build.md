@@ -1,5 +1,8 @@
 ---
 title: Compiling Linux Kernels for Arm
+
+draft: true 
+
 additional_search_terms:
 - linux kernel
 - tuxmake
