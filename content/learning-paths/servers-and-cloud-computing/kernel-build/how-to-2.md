@@ -16,7 +16,7 @@ Start with a simple demo build to verify your environment:
 ./scripts/kernel_build_and_install.sh --demo-default-build
 ```
 
-This demo builds `v6.18.1`, populates `~/kernels/6.18.1`, and leaves Docker and Fastpath configs untouched. The build takes approximately 30-45 minutes on a `c8g.24xlarge` instance.
+This demo builds `v6.18.1`, populates `~/kernels/6.18.1`, and leaves Docker and Fastpath configs untouched. The build takes approximately 30-45 minutes on a `m6g.12xlarge` instance.
 
 The expected output shows:
 - Kernel source cloning progress

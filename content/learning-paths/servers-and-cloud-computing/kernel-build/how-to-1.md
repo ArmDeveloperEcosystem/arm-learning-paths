@@ -12,7 +12,7 @@ Before you begin, you need an Arm cloud instance with SSH access.
 
 This Learning Path uses AWS as the example platform, but you can follow the same steps on any cloud provider that offers 64-bit Arm Ubuntu instances.
 
-For demonstration purposes, you can use an AWS `c8g.24xlarge` instance. Any sufficiently large instance on your chosen provider works, however, smaller instances take longer or risk running out of memory during compilation. If you use a different instance type, the minimum requirements are an Arm instance running at least 24 vCPUs with 200 GB of free storage.
+For demonstration purposes, you can use an AWS `m6g.12xlarge` instance. Any sufficiently large instance on your chosen provider works, however, smaller instances take longer or risk running out of memory during compilation. If you use a different instance type, the minimum requirements are an Arm instance running at least 24 vCPUs with 200 GB of free storage.
 
 Ubuntu 24.04 LTS is the operating system. Other Linux distributions may work. If you find a different distribution that works well, or you'd like to request support for a different distribution, open an issue or a pull request in the [project repository](https://github.com/geremyCohen/arm_kernel_install_guide).
 
