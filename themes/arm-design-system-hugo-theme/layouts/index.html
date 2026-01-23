@@ -63,7 +63,8 @@ Website homepage.
     <div class="c-col">
         <div class="u-display-grid u-gap-2 sm:u-grid-columns-1 md:u-grid-columns-2 lg:u-grid-columns-2 xl:u-grid-columns-3 xxl:u-grid-columns-3 u-margin-top-1">
             {{ range (where .Site.Pages "Params.maintopic" true).ByWeight}}
-                <div class="main-topic-card c-row" style="flex-wrap: nowrap !important;" link="{{.Permalink}}">
+                <a href="{{.Permalink}}">
+                <div class="main-topic-card c-row" style="flex-wrap: nowrap !important;">
                     <div class="c-col-3">
                         <img alt="{{.Title}} image" src="img/main-topic-icons/{{.Title | urlize}}.svg" />
                     </div>
@@ -74,8 +75,10 @@ Website homepage.
                         </p>   
                     </div>  
                 </div>
+                </a>
             {{ end }}
-            <div class="main-topic-card c-row" style="flex-wrap: nowrap !important;" link="{{.Permalink}}">
+            <a href="/tag/ml/">
+            <div class="main-topic-card c-row" style="flex-wrap: nowrap !important;">
                 <div class="c-col-3">
                     <img alt="{{.Title}} image" src="img/main-topic-icons/ai.svg" style="width: 100%;" />
                 </div>
@@ -86,6 +89,7 @@ Website homepage.
                     </p>   
                 </div>  
             </div>
+            </a>
         </div>
     </div>
 </div>

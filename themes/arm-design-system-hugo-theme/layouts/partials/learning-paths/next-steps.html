@@ -497,7 +497,7 @@ document.body.appendChild(formScript);
             <div id="arm-account-div" class="content-box">
                 <h4 id="arm-account-dynamic-header"></h4>
                 <p id="arm-account-dynamic-paragraph"></p>
-                <ads-cta-button id="arm-account-signup-cta" level="primary" style="display: none">Create Arm Account</ads-cta-button>
+                <ads-cta-button id="arm-account-signup-cta" level="primary" style="display: none">Login to Arm Account</ads-cta-button>
                 <!-- https://developer.arm.com/register -->
                 <ads-cta-button id="arm-account-signup-view-badges-cta" level="secondary" style="display: none">View your badges</ads-cta-button>
 
@@ -514,8 +514,8 @@ document.body.appendChild(formScript);
                             document.getElementById('arm-account-signup-cta').style.display = 'none'; 
                             
                         } else {
-                            document.getElementById('arm-account-dynamic-header').textContent = "Sign up to Arm Account";
-                            document.getElementById('arm-account-dynamic-paragraph').textContent = "Get badges for completing Learning Paths and show them off on Arm Community!";
+                            document.getElementById('arm-account-dynamic-header').textContent = "Login to Arm Account";
+                            document.getElementById('arm-account-dynamic-paragraph').textContent = "Make sure you're logged in to get badges for completing Learning Paths and show them off on Arm Community!";
                             document.getElementById('arm-account-signup-cta').style.display = 'block';
                             document.getElementById('arm-account-signup-view-badges-cta').style.display = 'none';
 
@@ -523,7 +523,10 @@ document.body.appendChild(formScript);
 
 
                         document.getElementById('arm-account-signup-cta').addEventListener("click", () => {
-                            window.open("https://developer.arm.com/register","_blank");
+                            msalInstance.loginRedirect({   // single-window login
+                                ...loginRequest
+                              });
+                            //window.open("https://developer.arm.com/register","_blank");
                         });
                         document.getElementById('arm-account-signup-view-badges-cta').addEventListener("click", () => {
                             window.open("https://community.arm.com/","_blank");
