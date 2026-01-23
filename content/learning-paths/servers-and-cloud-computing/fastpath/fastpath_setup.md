@@ -21,7 +21,7 @@ Create build host with the following specifications:
 2. **Operating system** — *Ubuntu*
 3. **AMI** — *Ubuntu 24.04 LTS (Arm)*
 4. **Architecture** — *64-bit Arm*
-5. **Instance type** — `c8g.24xlarge`
+5. **Instance type** — `m6g.12xlarge`
 6. **Key pair** — *Select or create a key for SSH*
 7. **Security group** — *allow SSH inbound from your IP and cluster peers*
 8. **Storage** — *200 GB gp3*
@@ -34,7 +34,7 @@ Create build host with the following specifications:
 # Replace the placeholders with values from your account/environment
 aws ec2 run-instances \
   --image-id resolve:ssm:/aws/service/canonical/ubuntu/server/24.04/stable/current/arm64/hvm/ebs-gp3/ami-id \
-  --instance-type c8g.4xlarge \
+  --instance-type m6g.4xlarge \
   --key-name <KEY_PAIR_NAME> \
   --subnet-id <SUBNET_ID> \
   --security-group-ids <SECURITY_GROUP_ID> \
@@ -67,11 +67,11 @@ Parameters:
     Description: SSM parameter for the latest Ubuntu 24.04 LTS (Arm) AMI.
   InstanceType:
     Type: String
-    Default: c8g.4xlarge
+    Default: m6g.4xlarge
     AllowedValues:
-      - c8g.4xlarge
-      - c8g.8xlarge
-      - c8g.12xlarge
+      - m6g.4xlarge
+      - m6g.8xlarge
+      - m6g.12xlarge
     Description: Instance size for the Fastpath host.
   KeyPairName:
     Type: AWS::EC2::KeyPair::KeyName
@@ -165,7 +165,7 @@ When the instance reports a `running` state, note the public and private IP addr
 
 Repeat the dependency installation process so the *fastpath* host has the same toolchain and helper scripts as the build machine.
 
-1. SSH into the `c8g.4xlarge` *fastpath* host using the configured key pair.
+1. SSH into the `m6g.4xlarge` *fastpath* host using the configured key pair.
 
 2. Open the [Install and Clone section](https://localhost:1313/install-guides/kernel-build/#install-and-clone) of the install guide from your workstation.
 
@@ -230,7 +230,7 @@ After copying the artifacts from the build machine, stop (or terminate it) to av
 
 
 {{% notice Note %}}
-If you do decide to keep the machine around as a kernel copy host, you can modify it to a smaller instance type such as `c8g.4xlarge` to save on costs when its running.  The larger 24xlarge instance is only needed during kernel compilation.
+If you do decide to keep the machine around as a kernel copy host, you can modify it to a smaller instance type such as `m6g.4xlarge` to save on costs when its running.  The larger 12xlarge instance is only needed during kernel compilation.
 {{% /notice %}}
 
 ## Configure the Fastpath host

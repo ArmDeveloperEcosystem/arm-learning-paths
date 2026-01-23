@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 ## Provision the build host
 
-CPU-optimized instances compile kernels quickly, so in our example, an AWS Graviton4 `c8g.24xlarge` instance is used. It will be referred to as the *build* machine throughout the rest of the guide.
+CPU-optimized instances compile kernels quickly, so in our example, an AWS Graviton `m6g.12xlarge` instance is used. It will be referred to as the *build* machine throughout the rest of the guide.
 
 {{% notice Note %}}
 The following steps involve launching an EC2 instance.  You can perform all EC2 instance creation steps via the AWS Management Console instead or AWS CLI.  For step-by-step instructions to bring up an EC2 instance via the console, consult the [Compute Service Provider learning path](/learning-paths/servers-and-cloud-computing/csp/) for detailed instructions.  A tutorial from AWS is also available via [Get started with Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html).
@@ -20,7 +20,7 @@ Create build host with the following specifications:
 2. **Operating system** — *Ubuntu*
 3. **AMI** — *Ubuntu 24.04 LTS (Arm)*
 4. **Architecture** — *64-bit Arm*
-5. **Instance type** — `c8g.24xlarge`
+5. **Instance type** — `m6g.12xlarge`
 6. **Key pair** — *Select or create a key for SSH*
 7. **Security group** — *allow SSH inbound from your IP and cluster peers*
 8. **Storage** — *200 GB gp3*
@@ -35,7 +35,7 @@ There are many different ways to create this instance, and a few different metho
 # Replace the placeholders with values from your account/environment
 aws ec2 run-instances \
   --image-id resolve:ssm:/aws/service/canonical/ubuntu/server/24.04/stable/current/arm64/hvm/ebs-gp3/ami-id \
-  --instance-type c8g.24xlarge \
+  --instance-type m6g.12xlarge \
   --key-name <KEY_PAIR_NAME> \
   --subnet-id <SUBNET_ID> \
   --security-group-ids <SECURITY_GROUP_ID> \
@@ -60,7 +60,7 @@ cat <<'EOF' > build-host.yaml
 
 AWSTemplateFormatVersion: '2010-09-09'
 Description: >-
-  Fastpath Learning Path - Build host for kernel compilation (Ubuntu 24.04 LTS on Graviton4 c8g.24xlarge).
+  Fastpath Learning Path - Build host for kernel compilation (Ubuntu 24.04 LTS on Graviton m6g.12xlarge).
 
 Parameters:
   LatestUbuntuAmiId:
@@ -69,13 +69,11 @@ Parameters:
     Description: SSM parameter for the latest Ubuntu 24.04 LTS (Arm) AMI.
   InstanceType:
     Type: String
-    Default: c8g.24xlarge
+    Default: m6g.12xlarge
     AllowedValues:
-      - c8g.24xlarge
-      - c8g.16xlarge
-      - c8g.12xlarge
-      - c8g.8xlarge
-      - c8g.4xlarge
+      - m6g.12xlarge
+      - m6g.8xlarge
+      - m6g.4xlarge
     Description: Instance size for the build host.
   KeyPairName:
     Type: AWS::EC2::KeyPair::KeyName
@@ -168,7 +166,7 @@ When the instance reports a `running` state, note the public and private IP addr
 
 The Kernel Build repository contains build scripts and configuration files needed to easily compile kernels. To clone the repository:
 
-1. SSH into the `c8g.24xlarge` host using the configured key pair.
+1. SSH into the `m6g.12xlarge` host using the configured key pair.
 
     ```output
     ssh -i ~/.ssh/gcohen1.pem ubuntu@34.216.87.65
@@ -273,7 +271,7 @@ I: build output in /home/ubuntu/kernels/6.19.0-rc1-ubuntu
 [2026-01-08 18:32:06] [v6.19-rc1-2] Build artifacts are located in /home/ubuntu/kernels/6.19.0-rc1-ubuntu+
 ```
 
-The script will now build two kernel images.  This process may take some time -- on a `c8g.24xlarge` instance, expect approximately 30 minutes for both kernel builds to complete.
+The script will now build two kernel images.  This process may take some time -- on a `m6g.12xlarge` instance, expect approximately 30 minutes for both kernel builds to complete.
 
 4. Monitor the console output for the `BUILD COMPLETE` message. 
 

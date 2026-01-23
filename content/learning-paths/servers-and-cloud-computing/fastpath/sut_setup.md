@@ -11,7 +11,7 @@ Now that kernels are built and the *fastpath* host is ready, it's time to set up
 
 The System Under Test (SUT) is the target machine where *fastpath* installs your kernels, runs benchmarks on each kernel (one at a time) and when complete, compares and displays the results via *fastpath*.
 
-Just like choosing the kernels to test, the instance type of the SUT depends on your use case. For this *fastpath* LP, we recommend a Graviton4 `c8g.12xlarge` instance with Ubuntu 24.04 LTS. This instance type provides a good balance of CPU and memory for a test benchmark.
+Just like choosing the kernels to test, the instance type of the SUT depends on your use case. For this *fastpath* LP, we recommend a Graviton `m6g.12xlarge` instance with Ubuntu 24.04 LTS. This instance type provides a good balance of CPU and memory for a test benchmark.
 
 {{% notice Note %}}
 The following steps involve launching an EC2 instance.  You can perform all EC2 instance creation steps via the AWS Management Console instead or AWS CLI.  For step-by-step instructions to bring up an EC2 instance via the console, consult the [Compute Service Provider learning path](/learning-paths/servers-and-cloud-computing/csp/) for detailed instructions.  A tutorial from AWS is also available via [Get started with Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html).
@@ -23,7 +23,7 @@ Create build host with the following specifications:
 2. **Operating system** — *Ubuntu*
 3. **AMI** — *Ubuntu 24.04 LTS (Arm)*
 4. **Architecture** — *64-bit Arm*
-5. **Instance type** — `c8g.12xlarge`
+5. **Instance type** — `m6g.12xlarge`
 6. **Key pair** — *Select or create a key for SSH*
 7. **Security group** — *allow SSH inbound from your IP and cluster peers*
 8. **Storage** — *200 GB gp3*
@@ -40,7 +40,7 @@ Choose whichever provisioning method is most convenient—the tabs below provide
 # Replace the placeholders with values from your account/environment
 aws ec2 run-instances \
   --image-id resolve:ssm:/aws/service/canonical/ubuntu/server/24.04/stable/current/arm64/hvm/ebs-gp3/ami-id \
-  --instance-type c8g.12xlarge \
+  --instance-type m6g.12xlarge \
   --key-name <KEY_PAIR_NAME> \
   --subnet-id <SUBNET_ID> \
   --security-group-ids <SECURITY_GROUP_ID> \
@@ -73,11 +73,11 @@ Parameters:
     Description: SSM parameter for the latest Ubuntu 24.04 LTS (Arm) AMI.
   InstanceType:
     Type: String
-    Default: c8g.12xlarge
+    Default: m6g.12xlarge
     AllowedValues:
-      - c8g.8xlarge
-      - c8g.12xlarge
-      - c8g.16xlarge
+      - m6g.8xlarge
+      - m6g.12xlarge
+      - m6g.16xlarge
     Description: Instance size for the SUT.
   KeyPairName:
     Type: AWS::EC2::KeyPair::KeyName
@@ -230,7 +230,7 @@ HW:
   architecture: aarch64
   cpu_count: 48
   ...
-  product_name: c8g.12xlarge
+  product_name: m6g.12xlarge
 SW:
   kernel_name: 6.14.0-1018-aws
   userspace_name: Ubuntu 24.04.3 LTS
