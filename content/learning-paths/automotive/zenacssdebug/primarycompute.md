@@ -43,9 +43,9 @@ Symbol loading is Exception Level–aware. If execution changes Exception Level,
 ## Debug the Linux kernel with OS awareness (symmetric multiprocessing)
 
 {{% notice Note %}}
-OS awareness for Linux Kernel 6.12 (as used with Reference Software Stack 2.1) is not currently supported as of Arm Development Studio 2025.0.
+OS awareness for Linux Kernel 6.12 (as used with Reference Software Stack 2.1) is supported as of Arm Development Studio 2025.1 (and 2025.b).
 
-It will be supported in a future Development Studio version.
+Later versions of the stack may require later versions of Arm Development Studio.
 {{% /notice %}}
 
 Disconnect `Primary_init.launch` and use the `Primary_Linux.launch` connection you created earlier to enable Arm Development Studio OS awareness for the Linux kernel.
