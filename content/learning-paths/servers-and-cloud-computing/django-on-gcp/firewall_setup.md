@@ -29,15 +29,15 @@ Navigate to the Google Cloud Console and create a new firewall rule:
 
 Fill in the rule details to allow traffic on port 8000:
 
-- Set **Name** to `allow-django-8000`.
+- Set **Name** to `allow-tcp-8000`.
 - Select your network (the default is `default`; your organization may use a different network).
 - Set **Direction of traffic** to **Ingress**.
 - Set **Action on match** to **Allow**.
 - Set **Targets** to **Specified target tags**.
-- Enter `django-server` in the **Target tags** field.
+- Enter `allow-tcp-8000` in the **Target tags** field.
 - Set **Source IPv4 ranges** to `0.0.0.0/0` (allows traffic from any IP address; restrict this in production).
 
-![Screenshot showing the firewall rule configuration form. The Name field shows allow-django-8000, Direction is set to Ingress, and Targets is set to Specified target tags. alt-text#center](images/network-rule.png "Firewall rule configuration")
+![Screenshot showing the firewall rule configuration form. The Name field shows allow-tcp-8000, Direction is set to Ingress, and Targets is set to Specified target tags. alt-text#center](images/network-rule.png "Firewall rule configuration")
 
 ## Specify the port and protocol
 

@@ -148,7 +148,7 @@ Edit `hello/views.py` and replace the entire file with:
 from django.http import HttpResponse
 
 def home(request):
-    return HttpResponse("<h1>Hello, Django on Arm!</h1>")
+    return HttpResponse("<h1>Hello, Django on GCP SUSE ARM64!</h1>")
 ```
 
 This simple view function returns a basic HTML message as an HTTP response.

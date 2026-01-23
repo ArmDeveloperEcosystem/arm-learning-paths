@@ -17,7 +17,9 @@ This step sets up a clean Python virtual environment and installs all runtime de
 mkdir ~/django_api && cd ~/django_api
 python3 -m venv venv
 source venv/bin/activate
-pip install django djangorestframework psycopg2-binary django-redis gunicorn
+sudo zypper install postgresql-devel libpq5 postgresql15-server-devel gcc make python3-devel
+which pg_config
+pip install psycopg2-binary django djangorestframework psycopg2-binary django-redis gunicorn
 ```
 
 ```console
@@ -28,7 +30,7 @@ You now have a Django project skeleton with all required libraries installed for
 
 ### Enable Django Apps
 Django must be told which components are active. We enable the REST framework and the API app so that Django can expose HTTP endpoints.
-Edit `django_api/settings.py`
+Edit `django_api/settings.py` and add 'rest_framework' and 'api' to INSTALLED_APPS. Set DEBUG to False. Finally add '*' to ALLOWED_HOSTS. 
 
 ```python
 INSTALLED_APPS = [
@@ -52,6 +54,8 @@ Your Django project is now configured to run as an API server instead of a devel
 
 This step connects Django to external managed services instead of local SQLite. This mirrors how real production systems operate.
 
+Edit `django_api/settings.py` and replace the DATABASES configuration with this:  
+
 ```python
 DATABASES = {
  'default': {
@@ -63,7 +67,11 @@ DATABASES = {
    'PORT': '5432',
  }
 }
+```
 
+Additionally, add the CACHES configuration per below to the same file and save:
+
+```python
 CACHES = {
  "default": {
    "BACKEND": "django_redis.cache.RedisCache",
@@ -71,6 +79,7 @@ CACHES = {
  }
 }
 ```
+
 Your application is now wired to a real database and cache, making it production-grade.
 
 ### Migrate Database
