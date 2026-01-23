@@ -1,5 +1,8 @@
 ---
 title: Revealing latent ExecuTorch latency after SME2 acceleration
+draft: true
+cascade:
+    draft: true
 minutes_to_complete: 90
 who_is_this_for: Developers and performance engineers deploying ExecuTorch models on Arm devices who face latency challenges or want to use more advanced models. When end-to-end latency isn't meeting targets, operator-level performance analysis is the essential first step to understand where time is spent and make informed optimization decisions. This learning path guides you through analyzing performance with SME2 acceleration to identify optimization opportunities and achieve better performance.
 learning_objectives:
