@@ -37,7 +37,7 @@ Build ONNX Runtime with KleidiAI support enabled. The build script configures cr
 
 Once the build is complete, you will find the `libonnxruntime.so` shared library and `onnxruntime_perf_test` binary in your build directory.
 
-`onnxruntime_perf_test` is essential for measuring latency and identifying bottlenecks of an ONNX model (named `<your_model>.onnx` hereafter). Note that `onnxruntime_perf_test` expects the ONNX model to come with some ancilliary files organized in some directory tree (input data for example).
+`onnxruntime_perf_test` is essential for measuring latency and identifying bottlenecks of an ONNX model (named `<your_model>.onnx` hereafter). Note that `onnxruntime_perf_test` expects the ONNX model to come with some ancillary files organized in some directory tree (input data for example).
 
 ## Push files to Android device
 

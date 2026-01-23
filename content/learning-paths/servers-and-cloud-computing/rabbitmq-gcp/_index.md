@@ -1,5 +1,5 @@
 ---
-title: Deploy RabbitMQ on Arm64 Cloud Platforms (Azure & GCP)
+title: Deploy RabbitMQ on Arm64 Cloud Platforms (Azure and GCP)
 
 minutes_to_complete: 30
 

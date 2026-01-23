@@ -29,7 +29,7 @@ tools_software_languages_filter:
 - Arm64EC: 1
 - Assembly: 1
 - Bash: 3
-- C: 10
+- C: 11
 - C#: 6
 - CCA: 1
 - Clang: 13
@@ -37,7 +37,7 @@ tools_software_languages_filter:
 - CPP: 12
 - CSS: 1
 - Daytona: 1
-- Docker: 5
+- Docker: 6
 - FFmpeg: 1
 - GCC: 12
 - Git: 1

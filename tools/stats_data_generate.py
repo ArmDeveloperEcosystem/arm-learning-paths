@@ -85,7 +85,6 @@ from datetime import datetime
 
 # Set paths 
 data_weekly_file_path  = Path('../data/stats_weekly_data.yml')
-tests_status_file_path = Path('../data/stats_current_test_info.yml')
 learning_path_dir = Path('../content/learning-paths/')
 install_guide_dir = Path('../content/install-guides/')
 lp_and_ig_content_dirs = ['embedded-and-microcontrollers','laptops-and-desktops','servers-and-cloud-computing','mobile-graphics-and-gaming','automotive','cross-platform','install-guides']
@@ -96,7 +95,6 @@ date_today =  datetime.now().strftime("%Y-%m-%d")
 
 # Set global vars for processing ease
 new_weekly_entry = {}
-new_tests_entry = {}
 
 #############################################################################
 #############################################################################
@@ -110,13 +108,10 @@ def pretty(d, indent=0):
       else:
          print('\t' * (indent+1) + str(value))
 
-def printInfo(week,test):
+def printInfo(week):
     print('============================================================================')
     print('New weekly entry dict appended:')
     pretty(week)
-    print('============================================================================')
-    print('New test entry dict overwriting:')
-    pretty(test)
     print('============================================================================')
 
 
@@ -188,14 +183,8 @@ def iterateContentIndexMdFiles():
         # weekly -> authors AND contributions
     weekly_authors_contributions_dic = {'individual_authors': {}, 'contributions':{'internal': 0, 'external': 0}}
 
-        # tests -> summary:
-    content_total = 0
-    content_with_tests_enabled = 0
-    content_with_all_tests_passing = 0
-
     # start iterating over all sw_categories including install guides
     for category in lp_and_ig_content_dirs:
-        new_tests_entry['sw_categories'][category] = {}        # Add new category key
 
         # Get list of content to iterate over.
         content_in_dir = []
@@ -233,49 +222,13 @@ def iterateContentIndexMdFiles():
                 continue
 
 
-            # Add to content total (both tests and weekly places for redundency sake)
+            # Add to content total (weekly)
             weekly_count_dic['total'] = weekly_count_dic['total'] + 1
-            content_total = content_total + 1
             # Add to category total
             weekly_count_dic[category] = weekly_count_dic[category] + 1
 
             ######### AUTHOR info
             weekly_authors_contributions_dic = authorAdd(content_metadic['author'],weekly_authors_contributions_dic)
-            
-
-            # Record entry in test file
-            try:
-                if content_metadic['test_maintenance']: # if actively being tested, record as such
-                    # Record test
-                    content_with_tests_enabled = content_with_tests_enabled + 1
-
-                    # Add an entry for this dir, with title and test status keys
-                    if category == 'install-guides': # Install Guides, shorthand name is the .md file name itself (for multi-part installs, still the individual file name; dir name is ignored)
-                        content_dir_name = content_index_file.stem
-                    else: # Learning Paths, shorthand name is the directory
-                        content_dir_name = os.path.basename(os.path.dirname(content_index_file))
-
-                    new_tests_entry['sw_categories'][category][content_dir_name] = {}
-                    new_tests_entry['sw_categories'][category][content_dir_name]['readable_title'] = content_metadic['title']
-                    new_tests_entry['sw_categories'][category][content_dir_name]['tests_and_status'] = []
-                    all_tests_passing = True # Default to true, change if one is false
-                    for i, item in enumerate(content_metadic['test_status']):
-                        # Record test status (possibily multiple)
-                        new_tests_entry['sw_categories'][category][content_dir_name]['tests_and_status'].append({
-                            content_metadic['test_images'][i]: content_metadic['test_status'][i]
-                        })   
-                        if item != 'passed':
-                            all_tests_passing = False
-                    # Add if tests are passing count if all tests under this content are passing
-                    if all_tests_passing:
-                        content_with_all_tests_passing = content_with_all_tests_passing + 1                     
-            except:
-                pass
-
-    # Update all totals for tests passing or not into the summary 
-    new_tests_entry['summary']['content_total'] = content_total
-    new_tests_entry['summary']['content_with_tests_enabled'] = content_with_tests_enabled
-    new_tests_entry['summary']['content_with_all_tests_passing'] = content_with_all_tests_passing
 
     # Update stats
     new_weekly_entry['content'] = weekly_count_dic
@@ -356,7 +309,7 @@ def callGitHubAPI(GitHub_token,GitHub_repo_name):
 
 
 def main():
-    global data_weekly_file_path, tests_status_file_path, learning_path_dir, install_guide_dir, date_today, new_weekly_entry, new_tests_entry
+    global data_weekly_file_path, learning_path_dir, install_guide_dir, date_today, new_weekly_entry
 
     # Read in params needed for reading GitHub API
     arg_parser = argparse.ArgumentParser(description='Update Stats')
@@ -368,7 +321,6 @@ def main():
 
     # Read in data file as python dict
     existing_weekly_dic = yaml.safe_load(data_weekly_file_path.read_text())
-    existing_tests_dic  = yaml.safe_load(tests_status_file_path.read_text())
 
     # Structure new data formats:
     new_weekly_entry = { 
@@ -380,11 +332,6 @@ def main():
         "github_engagement": {}    
     }
 
-    new_tests_entry = {
-        "summary": {},
-        "sw_categories":{}
-    }
-
 
     # Get new stats, filling in new stat dictionaries:
     iterateContentIndexMdFiles()
@@ -393,7 +340,7 @@ def main():
     
 
     # Debug prints in flow
-    printInfo(new_weekly_entry,new_tests_entry)
+    printInfo(new_weekly_entry)
 
     # Update/replace yaml files
 
@@ -422,11 +369,6 @@ def main():
         print(outfile)
         print(existing_weekly_dic)
         yaml.dump(existing_weekly_dic, outfile, default_flow_style=False)
-
-    ### Tests
-    existing_tests_dic = new_tests_entry
-    with open(tests_status_file_path, 'w') as outfile:
-        yaml.dump(existing_tests_dic, outfile, default_flow_style=False)
 
 if __name__ == "__main__":
     main()

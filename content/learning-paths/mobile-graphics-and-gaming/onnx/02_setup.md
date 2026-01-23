@@ -24,7 +24,7 @@ Depending on the hardware you use you follow different installation paths
 1. Linux (Arm64). In the console type:
 ```console
 sudo apt update
-sudo apt install -y python3 python3-venv python3-pip build-essential libopenblas-dev
+sudo apt install -y python3 python3-venv python3-pip build-essential libopenblas-dev libgl1 libglib2.0-0
 ```
 
 2. macOS (Apple Sillicon):

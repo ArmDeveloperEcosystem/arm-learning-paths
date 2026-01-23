@@ -1,5 +1,5 @@
 ---
-title: Redis Deployment Using Custom Helm Chart
+title: Deploy Redis on GKE
 weight: 8
 
 ### FIXED, DO NOT MODIFY
@@ -7,19 +7,13 @@ layout: learningpathall
 ---
 
 
-## Redis Deployment Using Custom Helm Chart
-This document explains how to deploy Redis on Kubernetes using a custom Helm chart.
+## Deploy Redis using a custom Helm chart
 
-## Goal
-After completing this guide, the environment will include:
+In this section you'll deploy Redis on Kubernetes using a custom Helm chart. After deployment, Redis will be running with internal access using a ClusterIP Service and basic connectivity validated using redis-cli.
 
-- Redis running on Kubernetes
-- Deployment managed using Helm
-- Internal access using a ClusterIP Service
-- Basic connectivity validation using redis-cli
+### Create a Helm chart
 
-### Create Helm Chart
-Generates a Helm chart skeleton that will be customized for Redis.
+Create a Helm chart skeleton:
 
 ```console
 helm create my-redis
@@ -34,26 +28,21 @@ my-redis/
 └── templates/
 ```
 
-### Clean Templates
-The default Helm chart includes several files that are not required for a basic Redis deployment. Removing them avoids unnecessary complexity and template errors.
-Inside `my-redis/templates/`, delete the following:
+### Clean templates
 
-- ingress.yaml
-- hpa.yaml
-- serviceaccount.yaml
-- tests/
-- NOTES.txt
+The default Helm chart includes several files that aren't required for a basic Redis deployment. Remove the following files from `my-redis/templates/` to avoid unnecessary complexity and template errors: ingress.yaml, hpa.yaml, serviceaccount.yaml, tests/, NOTES.txt, and httproute.yaml.
+
+```console
+cd ./my-redis/templates
+rm -rf hpa.yaml ingress.yaml serviceaccount.yaml tests/ NOTES.txt httproute.yaml
+cd $HOME/helm-microservices
+```
 
 Only Redis-specific templates will be maintained.
 
 ### Configure values.yaml
-`values.yaml` stores all configurable parameters, including:
 
-- Redis image version
-- Service type and port
-- Replica count
-
-Replace the entire contents of `my-redis/values.yaml` with:
+Replace the entire contents of `my-redis/values.yaml`:
 
 ```yaml
 replicaCount: 1
@@ -68,20 +57,11 @@ service:
   port: 6379
 ```
 
-That matters
+This configuration centralizes settings, simplifies future updates, and prevents Helm template evaluation issues.
 
-- Centralizes configuration
-- Simplifies future updates
-- Prevents Helm template evaluation issues
+### Deployment definition (deployment.yaml)
 
-### Deployment Definition (deployment.yaml)
-Defines how the Redis container runs inside Kubernetes, including:
-
-- Container image
-- Port configuration
-- Pod labels and selectors
-
-Replace the existing `my-redis/templates/deployment.yaml` completely.
+Replace the entire contents of `my-redis/templates/deployment.yaml`:
 
 ```yaml
 apiVersion: apps/v1
@@ -108,12 +88,11 @@ spec:
             - containerPort: 6379
 ```
 
-- Redis runs as a single pod
-- No persistence is configured (suitable for learning and caching use cases)
+Redis runs as a single pod with no persistence configured, which is suitable for learning and caching use cases.
 
-### Service Definition (service.yaml)
-Creates an internal Kubernetes service to allow other pods to connect to Redis.
-Replace `my-redis/templates/service.yaml` with:
+### Service definition (service.yaml)
+
+Replace the entire contents of `my-redis/templates/service.yaml` to create an internal service:
 
 ```yaml
 apiVersion: v1
@@ -128,18 +107,29 @@ spec:
     app: {{ include "my-redis.name" . }}
 ```
 
-**ClusterIP**
+### Install Redis using Helm
 
-- Redis is intended for internal communication only within the cluster.
-
-### Install Redis Using Helm
-Validates that Redis is running and responding correctly.
+Install Redis and validate that it's running:
 
 ```console
+cd $HOME/helm-microservices
 helm install redis ./my-redis
-kubectl get svc
-kubectl exec -it <redis-pod> -- redis-cli ping
 ```
+
+Confirm that the redis pod is operating:
+
+```console
+kubectl get pods
+kubectl get svc
+```
+
+Get the Redis pod name from the output, then test connectivity:
+
+```console
+kubectl exec -it <redis-pod-name> -- redis-cli ping
+```
+
+Replace `<redis-pod-name>` with the actual pod name (for example, `redis-my-redis-75c88646fb-6lz8v`).
 
 You should see an output similar to:
 ```output
@@ -147,20 +137,29 @@ NAME                                        READY   STATUS    RESTARTS   AGE
 postgres-app-my-postgres-6dbc8759b6-jgpxs   1/1     Running   0          6m38s
 redis-my-redis-75c88646fb-6lz8v             1/1     Running   0          13s
 
->kubectl get svc
-redis-my-redis             ClusterIP      34.118.234.155   <none>        6379/TCP       6m14s
+NAME                       TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+kubernetes                 ClusterIP   34.118.224.1     <none>        443/TCP    37m
+postgres-app-my-postgres   ClusterIP   34.118.233.240   <none>        5432/TCP   22m
+redis-my-redis             ClusterIP   34.118.229.221   <none>        6379/TCP   3m19s
+```
 
-> kubectl exec -it redis-my-redis-75c88646fb-6lz8v -- redis-cli ping
+Finally, execute a sample ping via redis:
+
+```console
+kubectl exec -it <redis-pod> -- redis-cli ping
+```
+
+You should see an output similar to:
+
+```output
 PONG
 ```
 
-- Redis pod → Running
-- Redis service → ClusterIP
 
-### Outcome
-This deployment achieves the following:
+The Redis pod should be in **Running** state and the service should be **ClusterIP** type.
 
-- Redis deployed using a custom Helm chart
-- Internal access via Kubernetes Service
-- Successful connectivity validation
-- Clean and reusable Helm structure Accessible via service name redis
+## What you've accomplished and what's next
+
+You've successfully deployed Redis using a custom Helm chart with internal access via a Kubernetes Service. You've validated connectivity and created a clean, reusable Helm structure that's accessible via the service name redis.
+
+Next, you'll deploy NGINX as a frontend service with public access to complete your microservices deployment.

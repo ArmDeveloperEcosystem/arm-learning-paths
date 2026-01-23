@@ -54,7 +54,7 @@ tools_software_languages_filter:
 - Containerd: 1
 - CPP: 1
 - DetectNet: 1
-- Docker: 10
+- Docker: 11
 - DSTREAM: 2
 - Edge AI: 3
 - Edge Impulse: 2
@@ -98,6 +98,7 @@ tools_software_languages_filter:
 - Remote.It: 1
 - Runbook: 4
 - STM32: 2
+- systemd: 1
 - TensorFlow: 3
 - TensorRT: 1
 - tinyML: 2

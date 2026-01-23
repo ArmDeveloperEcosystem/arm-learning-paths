@@ -1,0 +1,121 @@
+name: Spelling and Hyperlinks Check
+
+on:
+  # run once a day at 6AM UTC
+  schedule:
+    - cron: '0 6 * * *'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  spell_and_link_check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.130.0'
+          extended: true
+
+      - name: Build
+        run: |
+          hugo --minify
+          bin/pagefind --site "public"
+
+      - name: Check HTML links
+        id: htmltest
+        continue-on-error: true
+        run: |
+          echo "## HTML Link Check Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          bin/htmltest -c .htmltest.yml -s 2>&1 | tee htmltest.log
+          
+          if [ -f htmltest.log ]; then
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            # Strip ANSI color codes for cleaner output
+            sed 's/\x1b\[[0-9;]*m//g' htmltest.log >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: HTML test results artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: htmltest-report
+          path: htmltest.log
+          retention-days: 5
+
+      - name: Spell check
+        id: spellcheck
+        continue-on-error: true
+        uses: rojopolis/spellcheck-github-actions@0.40.0
+        with:
+          config_path: .spellcheck.yml
+          task_name: Markdown
+          output_file: spellcheck-output.txt
+
+      - name: Refine spelling results
+        if: always()
+        continue-on-error: true
+        run: tools/process-spelling.sh
+
+      - name: Display spelling results
+        if: always()
+        run: |
+          echo "## Spell Check Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ -f spellcheck-output.txt ]; then
+            # Count total issues
+            ISSUE_COUNT=$(grep -c "^" spellcheck-output.txt || echo "0")
+            echo "**Total spelling issues found:** $ISSUE_COUNT" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            
+            # Show first 100 lines if file is large
+            LINE_COUNT=$(wc -l < spellcheck-output.txt)
+            if [ "$LINE_COUNT" -gt 100 ]; then
+              echo "**Showing first 100 issues (total: $LINE_COUNT):**" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo '```' >> $GITHUB_STEP_SUMMARY
+              head -100 spellcheck-output.txt >> $GITHUB_STEP_SUMMARY
+              echo '```' >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "See the full report in the spellcheck-output artifact." >> $GITHUB_STEP_SUMMARY
+            else
+              echo '```' >> $GITHUB_STEP_SUMMARY
+              cat spellcheck-output.txt >> $GITHUB_STEP_SUMMARY
+              echo '```' >> $GITHUB_STEP_SUMMARY
+            fi
+          else
+            echo "No spelling issues found or spell check did not run." >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Spelling results artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: spellcheck-output
+          path: spellcheck-output.txt
+          retention-days: 5
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Check Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **HTML Link Check:** $([ -f htmltest.log ] && echo '✓ Complete' || echo '✗ Failed')" >> $GITHUB_STEP_SUMMARY
+          echo "- **Spell Check:** $([ -f spellcheck-output.txt ] && echo '✓ Complete' || echo '✗ Failed')" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Download full reports from the artifacts section below." >> $GITHUB_STEP_SUMMARY
+# Testing workflow detection

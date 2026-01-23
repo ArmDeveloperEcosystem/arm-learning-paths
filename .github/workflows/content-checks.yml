@@ -1,103 +1,123 @@
-name: Check Code Quality
+name: Check Code Quality (Legacy - Disabled)
 
+# LEGACY WORKFLOW - This workflow has been replaced by spell-and-link-check.yml
+# Kept for reference only. Tests are disabled.
 on:
-  # run once a day at 6AM UTC
-  schedule:
-    - cron: '0 6 * * *'
+  # Scheduled runs disabled - use spell-and-link-check.yml instead
+  # schedule:
+  #   - cron: '0 6 * * *'
 
-  # Allows you to run this workflow manually from the Actions tab
+  # Manual runs only for backward compatibility
   workflow_dispatch:
 
 jobs:
-  check_content:
+  legacy_notice:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          submodules: true
-          fetch-depth: 0
-
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3
-        with:
-          hugo-version: '0.130.0'
-          extended: true
-
-      - name: Build
+      - name: Legacy Workflow Notice
         run: |
-          hugo --minify
-          bin/pagefind --site "public"
+          echo "⚠️ This workflow is legacy and has been replaced."
+          echo ""
+          echo "Please use the new 'spell-and-link-check.yml' workflow instead."
+          echo "This workflow contains additional checks (profanity, malware, security)"
+          echo "that are no longer active in the daily scheduled runs."
+          echo ""
+          echo "To run these checks manually, uncomment the specific job below."
+          exit 0
 
-      - name: Check HTML links
-        continue-on-error: true
-        run: bin/htmltest -c .htmltest.yml -s 2>&1 | tee htmltest.log
-
-      - name: HTML test results
-        uses: actions/upload-artifact@v4
-        with:
-          name: htmltest-report
-          path: htmltest.log
-          retention-days: 5 # Default is 90 days
-
-      - name: Spell check
-        continue-on-error: true
-        uses: rojopolis/spellcheck-github-actions@0.40.0
-        with:
-          config_path: .spellcheck.yml
-          task_name: Markdown
-          output_file: spellcheck-output.txt
-
-      - name: Refine spelling results
-        continue-on-error: true
-        run: tools/process-spelling.sh
-
-      - name: Spelling results
-        uses: actions/upload-artifact@v4
-        with:
-          name: spellcheck-output
-          path: spellcheck-output.txt
-          retention-days: 5 # Default is 90 days
-      - name: Scan for profanities
-        run: |
-          pip install better_profanity
-          python tools/profanity.py
-          cat profanity_log.txt
-
-      - name: Export profanities
-        uses: actions/upload-artifact@v4
-        with:
-          name: profanities
-          path: profanity_log.txt
-          retention-days: 5
-
-      - name: Scan for malware
-        run: |
-          tools/install-scan.sh
-          clamscan -r -i public -l scanlog
-
-      - name: Scan results
-        uses: actions/upload-artifact@v4
-        with:
-          name: clamscan-log
-          path: scanlog
-          retention-days: 5 # Default is 90 days
-
-      - name: Azure DevOps Security Scan
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: |
-            5.0.x
-            6.0.x
-      - name: Run Microsoft Security DevOps
-        uses: microsoft/security-devops-action@latest
-        id: msdo
-        with:
-          tools: container-mapping, bandit, eslint, templateanalyzer
-
-      - name: Upload results to Security tab
-        uses: actions/upload-artifact@v4
-        with:
-          path: ${{ steps.msdo.outputs.sarifFile }}
-          retention-days: 5 # Default is 90 days
+  # Uncomment individual jobs below if you need to run them manually
+  # check_content:
+  #   runs-on: ubuntu-latest
+  #
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #       with:
+  #         submodules: true
+  #         fetch-depth: 0
+  #
+  #     - name: Setup Hugo
+  #       uses: peaceiris/actions-hugo@v3
+  #       with:
+  #         hugo-version: '0.130.0'
+  #         extended: true
+  #
+  #     - name: Build
+  #       run: |
+  #         hugo --minify
+  #         bin/pagefind --site "public"
+  #
+  #     - name: Check HTML links
+  #       continue-on-error: true
+  #       run: bin/htmltest -c .htmltest.yml -s 2>&1 | tee htmltest.log
+  #
+  #     - name: HTML test results
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: htmltest-report
+  #         path: htmltest.log
+  #         retention-days: 5
+  #
+  #     - name: Spell check
+  #       continue-on-error: true
+  #       uses: rojopolis/spellcheck-github-actions@0.40.0
+  #       with:
+  #         config_path: .spellcheck.yml
+  #         task_name: Markdown
+  #         output_file: spellcheck-output.txt
+  #
+  #     - name: Refine spelling results
+  #       continue-on-error: true
+  #       run: tools/process-spelling.sh
+  #
+  #     - name: Spelling results
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: spellcheck-output
+  #         path: spellcheck-output.txt
+  #         retention-days: 5
+  #
+  #     - name: Scan for profanities
+  #       run: |
+  #         pip install better_profanity
+  #         python tools/profanity.py
+  #         cat profanity_log.txt
+  #
+  #     - name: Export profanities
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: profanities
+  #         path: profanity_log.txt
+  #         retention-days: 5
+  #
+  #     - name: Scan for malware
+  #       run: |
+  #         tools/install-scan.sh
+  #         clamscan -r -i public -l scanlog
+  #
+  #     - name: Scan results
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: clamscan-log
+  #         path: scanlog
+  #         retention-days: 5
+  #
+  #     - name: Azure DevOps Security Scan
+  #       uses: actions/setup-dotnet@v4
+  #       with:
+  #         dotnet-version: |
+  #           5.0.x
+  #           6.0.x
+  #
+  #     - name: Run Microsoft Security DevOps
+  #       uses: microsoft/security-devops-action@latest
+  #       id: msdo
+  #       with:
+  #         tools: container-mapping, bandit, eslint, templateanalyzer
+  #
+  #     - name: Upload results to Security tab
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         path: ${{ steps.msdo.outputs.sarifFile }}
+  #         retention-days: 5

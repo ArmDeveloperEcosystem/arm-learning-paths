@@ -71,3 +71,9 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+
+Helm is the package manager for Kubernetes, simplifying application deployment and lifecycle management. Google Axion C4A instances, powered by Arm Neoverse-V2 processors, provide an efficient platform for running Kubernetes workloads.
+
+In this Learning Path, you learn how to install and configure Helm on a Google Cloud C4A virtual machine, create Kubernetes clusters, and deploy applications using both official and custom Helm charts. You validate Helm's core functionality and explore deployment patterns for PostgreSQL, Redis, and NGINX on Arm-based infrastructure.
+
+By the end of this Learning Path, you'll have practical experience with Helm on Arm64 systems and understand how to deploy cloud-native applications on Google's Axion processors.

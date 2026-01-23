@@ -12,11 +12,11 @@ This Learning Path works on any Arm Linux system with four or more CPU cores.
 
 For example, you can use an AWS Graviton 3 `m7g.4xlarge` instance running Ubuntu 24.04 LTS, based on the Arm Neoverse V1 architecture. 
 
-If you're unfamiliar with creating a cloud instance, refer to [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/).
+If you're unfamiliar with creating a cloud instance, see [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/).
 
 The `m7g.4xlarge` instance has a uniform processor architecture, so there's no difference in memory or CPU core performance across the cores. 
 
-On Linux, you can check this with the following command:
+On Linux, check this with the following command:
 
 ```bash
 lscpu | grep -i numa
@@ -57,9 +57,9 @@ Finally, install the Linux perf utility for measuring performance. See the [Linu
 
 ## Create a CPU-intensive example program
 
-To demonstrate CPU affinity, you'll create a program that heavily utilizes all available CPU cores. This example repeatedly calculates the [Leibniz equation](https://en.wikipedia.org/wiki/Leibniz_formula_for_%CF%80) to compute the value of Pi. This is a computationally inefficient algorithm to calculate Pi, and you'll split the work across many threads.
+To demonstrate CPU affinity, you'll create a program that heavily utilizes all available CPU cores. This example repeatedly calculates the [Leibniz equation](https://en.wikipedia.org/wiki/Leibniz_formula_for_%CF%80) to compute the value of Pi. This is a computationally inefficient algorithm to calculate Pi, and the work is split across many threads.
 
-Use an editor to create a file named `use_all_cores.cpp` with the code below:
+Create a file named `use_all_cores.cpp` with the code below. This program spawns multiple threads that calculate Pi using the Leibniz formula:
 
 ```cpp
 #include <vector>
@@ -75,7 +75,7 @@ double multiplethreaded_leibniz(int terms, bool use_all_cores){
 
     int NUM_THREADS = 2; // use 2 cores by default
     if (use_all_cores){
-        NUM_THREADS = std::thread::hardware_concurrency(); // e.g., 16 for a 16-core, single-threaded processor
+        NUM_THREADS = std::thread::hardware_concurrency(); // for example, 16 for a 16-core, single-threaded processor
     }
     std::vector<double> partial_results(NUM_THREADS);
 
@@ -143,7 +143,7 @@ g++ -O2 --std=c++11 use_all_cores.cpp -o prog
 
 ## Observe CPU utilization
 
-Now that you've compiled the program, you can observe how it utilizes CPU cores. In a separate terminal, use the `top` utility to view the utilization of each core:
+Observe how the compiled program utilizes CPU cores. In a separate terminal, use the `top` utility to view the utilization of each core:
 
 ```bash
 top -d 0.1
@@ -157,9 +157,9 @@ Then run the program in the other terminal:
 ./prog
 ```
 
-![Screenshot of the top command showing CPU utilization with all 16 cores periodically reaching 100% usage, displayed in a dark terminal window with percentage bars for each CPU core](cpu_util.jpg "CPU utilization showing all cores being used")
+![Terminal output showing the top command displaying system resource usage. Sixteen CPU cores labeled CPU0 through CPU15 are shown with horizontal percentage bars. Most cores show near 100% utilization with full green bars. The display includes columns for %Cpu(s), memory usage, and process information in a dark theme terminal window alt-txt#center](cpu_util.jpg "CPU utilization showing all cores being used")
 
-You should observe all cores on your system being periodically utilized up to 100% and then dropping to idle until the program exits.
+All cores on your system are periodically utilized up to 100% and then drop to idle until the program exits.
 
 ## What you've accomplished and what's next
 
