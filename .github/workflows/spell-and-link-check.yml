@@ -1,10 +1,6 @@
 name: Spelling and Hyperlinks Check
 
 on:
-  push:
-    branches:
-      - draft-filter-simple
-
   # run once a day at 6AM UTC
   schedule:
     - cron: '0 6 * * *'
