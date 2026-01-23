@@ -22,78 +22,81 @@ Website homepage.
 <!-- Header, replacing the masthead -->
 <div class="homepage-top-divs" id="title-div">
     <span>
-        <h1 id="homepage-header" class="orchard-breeze-text">Learning Paths</h1>
+        <h1 id="homepage-header" class="orchard-breeze-text">Arm Learning Paths</h1>
     </span>
 </div>
 <div class="homepage-top-divs homepage-top-desc">
-    <p style="margin: 0px; color: #A3A8AE;">Tutorials to help you develop software on Arm.</p>
-    <p style="margin: 0px; margin-bottom: 16px; color: #A3A8AE;">You can submit a request for a new Learning Path, or create one yourself.</p>
-    <ads-cta-button size="medium" class='u-margin-bottom-1' id='contribute-btn' name="contribute-cta" onclick="window.open('{{$gh_repo_idea_path}}','_blank')" level="tertiary">Request</ads-cta-button> 
-    <ads-cta-button size="medium" class='u-margin-bottom-1 u-margin-left-2' id='contribute-btn' name="contribute-cta" onclick="window.location.href='/learning-paths/cross-platform/_example-learning-path/'" level="secondary">Create</ads-cta-button>
+    <p style="margin: 0px; color: #fff;">Tutorials to help you develop software on Arm. <br> With <a id='contribute-btn' name="contribute-cta" href="/learning-paths/cross-platform/_example-learning-path/">contributions</a> from experts in Arm and our developer community.</p>
+    <ads-cta-button size="medium" class='u-margin-bottom-1 u-margin-top-2' onclick="window.location.href='/install-guides'" level="secondary">Install Guides for Tools</ads-cta-button>
 </div>
 
-{{partial "filter-search-sort/pagefind-on-homepage.html" .}}
+<!-- 
+<chat-ai app-name="learning-paths" redirect-url="http://internal.learn.arm.com" ></chat-ai>
+-->
+
+
+<!-- Search functionality -->
+<div class="c-row u-margin-top-3">
+    <div class="c-col">
+        <ads-search id="homepage-search-bar" has-search-button placeholder="Search all Learning Paths and Install Guides..." search-index="learning-paths" ></ads-search>
+    </div>
+</div>
+<script>
+    document.getElementById('homepage-search-bar').searchSubmitHandler = (event) => {
+        var user_search_query = event.value;
+        // Construct the search URL with the query parameter
+        var developer_search_url = 'https://developer.arm.com/search#q=' + encodeURIComponent(user_search_query) + '&f-navigationhierarchiescontenttype=Learning%20Path&numberOfResults=48';
+
+        // Redirect the user to the search results page in a new tab
+        window.open(developer_search_url, '_blank');
+    
+    } 
+</script>
+
+
 
 <!-- List of Learning Path Topics & Install Guide -->
+<div class="c-row u-margin-left-1">
+    <h2>Find reproducible tutorials for your target platform:</h2>
+</div>
 <div class="c-row u-margin-top-0">
     <div class="c-col">
         <div class="u-display-grid u-gap-2 sm:u-grid-columns-1 md:u-grid-columns-2 lg:u-grid-columns-2 xl:u-grid-columns-3 xxl:u-grid-columns-3 u-margin-top-1">
             {{ range (where .Site.Pages "Params.maintopic" true).ByWeight}}
-            <div class="gradient-box">
-                <ads-card  id="{{.Title | urlize}}" class="main-topic-card" link="{{.Permalink}}">
-                    <ads-card-content class="maintopic-content" slot="content">
-                        <img alt="{{.Title}} image" src="img/main-topic-backgrounds/{{.Title | urlize}}.svg" style="width: 100%;" />
-                        <h3 class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">{{.Title}}</h3>   
-
-                        <p class="main-topic-subtitle u-margin-top-1/2 u-margin-bottom-0">
-                            <{{- delimit .Params.key_ip ", " -}}>
-                        </p>
-                        <p class="u-margin-bottom-0 u-margin-top-0">
-                            {{ range $i, $info := .Params.differentiating_info }}
-                                <span style="margin-right: 8px;">{{ $info }}.</span>
-                            {{ end }}
-
+                <a href="{{.Permalink}}">
+                <div class="main-topic-card c-row" style="flex-wrap: nowrap !important;">
+                    <div class="c-col-3">
+                        <img alt="{{.Title}} image" src="img/main-topic-icons/{{.Title | urlize}}.svg" />
+                    </div>
+                    <div class="maintopic-content c-col-9 u-margin-left-1">                       
+                        <h3 class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">{{ replace .Title "and" "&" }}</h3>   
+                        <p class="u-margin-bottom-0 u-margin-top-0 u-padding-right-1/2">
+                                {{ .Params.subtitle }}
                         </p>   
-                    </ads-card-content>   
-                </ads-card>
-            </div>
+                    </div>  
+                </div>
+                </a>
             {{ end }}
-            <div class="gradient-box">
-                <ads-card class="main-topic-card" id="ai" link="/tag/ml">
-                    <ads-card-content class="maintopic-content" slot="content">
-                        <img alt="{{.Title}} image" src="img/main-topic-backgrounds/ai.svg" style="width: 100%;" />
-                        <h3 class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">AI</h3> 
-                        <p class="main-topic-subtitle u-margin-top-1/2 u-margin-bottom-0">
-                            &#60;LLM, RAG, NLP>
-                        </p>
-                        <p class="u-margin-bottom-0 u-margin-top-0">
-                            AI/ML Learning Paths across all segments.
-                        </p>   
-                    </ads-card-content> 
-                </ads-card>
+            <a href="/tag/ml/">
+            <div class="main-topic-card c-row" style="flex-wrap: nowrap !important;">
+                <div class="c-col-3">
+                    <img alt="{{.Title}} image" src="img/main-topic-icons/ai.svg" style="width: 100%;" />
+                </div>
+                <div class="maintopic-content c-col-9 u-margin-left-1">
+                    <h3 class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">AI</h3> 
+                    <p class="u-margin-bottom-0 u-margin-top-0 u-padding-right-1/2">
+                        Train, deploy, and optimize AI models across Arm-powered platforms.
+                    </p>   
+                </div>  
             </div>
-            <div class="gradient-box">
-                <ads-card class="main-topic-card" id="tool-install" link="/install-guides">
-                    <ads-card-content class="maintopic-content" slot="content">
-                        <img alt="{{.Title}} image" src="img/main-topic-backgrounds/tools.svg" style="width: 100%;" />
-                        <h3 class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">Install Guides</h3> 
-                        <p class="main-topic-subtitle u-margin-top-1/2 u-margin-bottom-0">
-                            &#60;Arm,  Open Source,  Commercial Tools>
-                        </p>
-                        <p class="u-margin-bottom-0 u-margin-top-0">
-                            Simple guides to install new tools across all segments.
-                        </p>   
-                    </ads-card-content> 
-                </ads-card>
-            </div>
+            </a>
         </div>
     </div>
 </div>
 
-<div class="c-row">
+<div class="c-row u-margin-top-3">
     <div class="c-col">
-        <p style="text-align: center; margin: 0 auto; margin-top: 16px; color: #A3A8AE;">All content is covered by the <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">Creative Commons License{{partial "general-formatting/external-link.html"}}</a>.</p>
-        <p style="text-align: center; margin: 0 auto; margin-top: 16px; color: #A3A8AE;">Learning Paths may contain AI-generated content.</p>
+        <p style="text-align: center; margin: 0 auto; margin-top: 16px; color: #A3A8AE;">All content is covered by the <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">Creative Commons License{{partial "general-formatting/external-link.html"}}</a>. Learning Paths may contain AI-generated content.</p>
     </div>
 </div>
 
