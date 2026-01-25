@@ -14,7 +14,7 @@ After connecting to your SUSE Linux Enterprise Server (SLES) VM using SSH, you'l
 
 Update the system packages and install dependencies:
 
-```console
+```bash
 sudo zypper refresh
 sudo zypper update -y
 sudo zypper install -y curl git tar gzip
@@ -35,7 +35,8 @@ Verify that Python and pip are installed correctly:
 python3.11 --version
 pip3.11 --version
 ```
-The output should be similar to:
+
+The output is similar to:
 
 ```output
 Python 3.11.10
@@ -50,22 +51,22 @@ The Google Cloud CLI is required to authenticate with GCP and allow your Django 
 
 The Google Cloud SDK is required to create and manage GKE clusters.
 
-Download and extract:
+Download and extract the Google Cloud SDK:
 
-```console
+```bash
 wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-460.0.0-linux-arm.tar.gz
 tar -xvf google-cloud-sdk-460.0.0-linux-arm.tar.gz
 ```
 
 Install gcloud:
 
-```console
+```bash
 ./google-cloud-sdk/install.sh
 ```
 
 After installation completes, exit and reconnect to apply the PATH changes:
 
-```console
+```bash
 exit
 ```
 
@@ -73,7 +74,7 @@ exit
 
 Authenticate and configure the Google Cloud CLI:
 
-```console
+```bash
 gcloud init
 ```
 
@@ -81,11 +82,11 @@ During initialization, select **Login with a new account**. You'll be prompted t
 
 ### Verify authentication
 
-```console
+```bash
 gcloud auth list
 ```
 
-You should see an output similar to:
+The output is similar to:
 ```output
 Credentialed Accounts
 ACTIVE  ACCOUNT
@@ -96,7 +97,7 @@ ACTIVE  ACCOUNT
 
 Create a dedicated directory for your Django project and set up a Python virtual environment to isolate your project's dependencies:
 
-```console
+```bash
 mkdir ~/myproject && cd ~/myproject
 python3.11 -m venv venv
 source venv/bin/activate
@@ -110,7 +111,7 @@ Once activated, your command prompt displays `(venv)` at the beginning, indicati
 
 With your virtual environment active, upgrade pip to the latest version:
 
-```console
+```bash
 python3 -m pip install --upgrade pip
 ```
 

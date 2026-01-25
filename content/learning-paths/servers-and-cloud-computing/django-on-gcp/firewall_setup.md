@@ -23,7 +23,7 @@ Navigate to the Google Cloud Console and create a new firewall rule:
 - Select **VPC network** > **Firewall**
 - Select **Create firewall rule**
 
-![Screenshot of the Google Cloud Console showing the Firewall section. The Create firewall rule button is prominently displayed at the top of the page. alt-text#center](images/firewall-rule.png "Google Cloud Console Firewall page")
+![Screenshot of the Google Cloud Console showing the Firewall section. The Create firewall rule button is prominently displayed at the top of the page#center](images/firewall-rule.png "Google Cloud Console Firewall page")
 
 ## Configure the firewall rule
 
@@ -37,7 +37,7 @@ Fill in the rule details to allow traffic on port 8000:
 - Enter `allow-tcp-8000` in the **Target tags** field.
 - Set **Source IPv4 ranges** to `0.0.0.0/0` (allows traffic from any IP address; restrict this in production).
 
-![Screenshot showing the firewall rule configuration form. The Name field shows allow-tcp-8000, Direction is set to Ingress, and Targets is set to Specified target tags. alt-text#center](images/network-rule.png "Firewall rule configuration")
+![Screenshot showing the firewall rule configuration form. The Name field shows allow-tcp-8000, Direction is set to Ingress, and Targets is set to Specified target tags#center](images/network-rule.png "Firewall rule configuration")
 
 ## Specify the port and protocol
 
@@ -48,8 +48,8 @@ Configure the protocol and port settings:
 - Enter `8000` in the **Ports** field.
 - Click **Create**.
 
-![Screenshot of the Protocols and ports section. The TCP checkbox is checked and port 8000 is entered in the Ports field. alt-text#center](images/network-port.png "Specifying TCP port 8000")
+![Screenshot of the Protocols and ports section. The TCP checkbox is checked and port 8000 is entered in the Ports field#center](images/network-port.png "Specifying TCP port 8000")
 
 ## Summary and what's next
 
-Your firewall rule is now created and active. Your Django application running on port 8000 is now accessible from external IP addresses. You're ready to proceed with VM creation and Django installation!
+Your firewall rule is now created and active. Your Django application running on port 8000 is now accessible from external IP addresses.

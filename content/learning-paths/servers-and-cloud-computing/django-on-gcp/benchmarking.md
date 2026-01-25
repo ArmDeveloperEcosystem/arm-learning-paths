@@ -16,18 +16,19 @@ To begin, if your Django development server is still running, stop it using `Ctr
 
 ApacheBench (`ab`) is a command-line tool that simulates multiple HTTP requests to measure web server performance. Install it using the following:
 
-```console
+```bash
 sudo zypper install -y apache2-utils
 ```
 
 ### Verify installation
-This command confirms ApacheBench is correctly installed and available system-wide:
 
-```console
+Confirm ApacheBench is correctly installed and available:
+
+```bash
 ab -V
 ```
 
-The output displays the ApacheBench version, confirming successful installation.
+The output displays the ApacheBench version.
 
 ### Install and configure Gunicorn
 
@@ -35,7 +36,7 @@ Before benchmarking your Django application, you need to install Gunicorn, a pro
 
 ### Install both Django and Gunicorn using pip:
 
-```console
+```bash
 python3 -m pip install django gunicorn
 ```
 This command installs two essential packages. Django is the Python web framework you're benchmarking, while Gunicorn serves as a high-performance WSGI HTTP server that handles multiple concurrent requests efficiently. Unlike Django's built-in development server, Gunicorn is designed for production workloads and provides the multi-worker architecture needed for accurate performance testing.
@@ -43,7 +44,7 @@ This command installs two essential packages. Django is the Python web framework
 ### Run Django with Gunicorn
 Start your Django application using Gunicorn (already running inside GKE):
 
-Gunicorn is deployed inside your Kubernetes Pods and exposed via a Kubernetes Service and LoadBalancer.
+Gunicorn is deployed inside your Kubernetes Pods and exposed through a Kubernetes Service and LoadBalancer.
 The benchmark is executed against the **external IP of the GKE service**.
 
 {{% notice Note %}}
@@ -54,10 +55,13 @@ Ensure your VM's firewall allows inbound traffic on port 8000. See the firewall 
 
 Use ApacheBench to test your Django server with simulated traffic:
 
-```console
+```bash
 ab -n 5000 -c 100 http://<external_IP_of_the_GKE_service>/healthz/
 ```
-This sends 5000 requests using 100 concurrent connections to your Django REST endpoint exposed through the GKE LoadBalancer. After a few minutes, press "CTRL-C" to stop the benchmark and display results similar to:
+
+This sends 5000 requests using 100 concurrent connections to your Django REST endpoint exposed through the GKE LoadBalancer. After a few minutes, press CTRL-C to stop the benchmark.
+
+The output is similar to:
 
 ```output
 Server Software:        gunicorn
@@ -154,7 +158,7 @@ Results from the run on the `Axion (C4A) Arm64 GKE nodes`:
 The benchmark results demonstrate the strength of running Django on Google Axion (Arm64) GKE:
 
 - Extreme Throughput: The cluster sustained 14,000+ requests per second through a public LoadBalancer → GKE → Gunicorn → Django → Cloud SQL → Redis stack.
-- Ultra-Low p95 Latency: Even at 100 concurrent users, 95% of all requests completed within 11 ms, proving excellent tail-latency control.
+- Ultra-Low p95 Latency: Even at 100 concurrent users, 95% of all requests completed within 11 ms.
 - Production Stability: Zero failed requests confirms the platform is resilient under heavy parallel load.
 - Efficient Networking: Over 4.4 MB/sec of data transfer through the GKE LoadBalancer shows Arm-based networking is highly optimized.
 - Cloud-native Scalability: These results validate that Axion Arm64 nodes are well-suited for high-performance, horizontally scalable REST APIs in production.

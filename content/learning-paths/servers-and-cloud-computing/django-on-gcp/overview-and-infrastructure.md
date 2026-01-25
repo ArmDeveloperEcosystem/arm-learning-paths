@@ -38,7 +38,7 @@ This architecture represents a production-grade microservice deployment where co
 ## Enable the SUSE Containers module
 
 Enable the SUSE Containers Module to ensure that Docker and container-related tools are fully supported.
-``` console
+```bash
 sudo SUSEConnect -p sle-module-containers/15.5/arm64
 sudo SUSEConnect --list-extensions | grep Containers
 ```
@@ -49,7 +49,7 @@ Verify that the output shows the Containers module as **Activated**.
 
 Docker is required to run KinD and the Kubernetes control plane components. Install Docker, start the service, and add your user to the docker group:
 
-```console
+```bash
 sudo zypper refresh
 sudo zypper install -y docker
 sudo systemctl enable --now docker
@@ -59,11 +59,11 @@ exit
 
 Exit the current shell and reconnect to the virtual machine so that the group membership change takes effect. Then verify that Docker is running:
 
-```console
+```bash
 docker ps
 ```
 
-Output similar to the following indicates that Docker is installed and accessible:
+The output is similar to:
 
 ```output
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
@@ -73,7 +73,7 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 
 Install the kubectl command-line tool for interacting with Kubernetes clusters:
 
-```console
+```bash
 curl -LO https://dl.k8s.io/release/v1.30.1/bin/linux/arm64/kubectl
 chmod +x kubectl
 sudo mv kubectl /usr/local/bin/
@@ -83,11 +83,11 @@ sudo mv kubectl /usr/local/bin/
 
 Confirm that kubectl is installed and accessible from the command line:
 
-```console
+```bash
 kubectl version --client
 ```
 
-Output similar to the following indicates that kubectl is installed correctly:
+The output is similar to:
 ```output
 Client Version: v1.30.1
 Kustomize Version: v5.0.4-0.20230601165947-6ce0bf390ce3
@@ -97,7 +97,7 @@ Kustomize Version: v5.0.4-0.20230601165947-6ce0bf390ce3
 
 Retrieve the list of project IDs:
 
-```console
+```bash
 gcloud projects list
 ```
 
@@ -114,7 +114,7 @@ Note the **PROJECT_ID** for use in the next step.
 
 Ensure the correct GCP project is selected:
 
-```console
+```bash
 gcloud config set project <YOUR_PROJECT_ID>
 ```
 
@@ -122,30 +122,30 @@ Replace `<YOUR_PROJECT_ID>` with your actual project ID from the previous step.
 
 ### Install the auth plugin for gcloud
 
-```console
+```bash
 gcloud components install gke-gcloud-auth-plugin
 ```
 
 ### Create Artifact Registry
 Artifact Registry is used to store and distribute the Docker images for your Django application. This ensures that all Kubernetes nodes pull trusted, versioned images from a private Google-managed repository.
 
-```console
+```bash
 gcloud artifacts repositories create django-arm \
   --repository-format=docker \
   --location=us-central1
 ```
 
-```console
+```bash
 sudo chmod 777 /etc/containers
 gcloud auth configure-docker us-central1-docker.pkg.dev
 ```
 You now have a secure, private Docker registry ready to store Arm-based application images for GKE.
 
-### Create GKE Control Plane
-This step creates the Kubernetes control plane that will manage scheduling, networking, and workloads.
-We initially create it with a small x86 pool so the cluster can bootstrap.
+### Create GKE control plane
 
-```console
+Create the Kubernetes control plane that manages scheduling, networking, and workloads. Initially create it with a small node pool so the cluster can bootstrap.
+
+```bash
 gcloud container clusters create django-axion-cluster \
   --zone us-central1-a \
   --machine-type c4a-standard-4 \
@@ -159,7 +159,7 @@ You now have a running GKE cluster ready to accept custom node pools and workloa
 
 Fetch cluster credentials:
 
-```console
+```bash
 gcloud container clusters get-credentials django-axion-cluster \
   --zone us-central1-a
 ```
@@ -168,7 +168,7 @@ gcloud container clusters get-credentials django-axion-cluster \
 
 Confirm Kubernetes access:
 
-```console
+```bash
 kubectl get nodes
 ```
 
@@ -190,17 +190,17 @@ Note the required "-" at the end... its needed!
 
 For example using the node IDs in the output above: 
 
-```console
+```bash
 kubectl taint nodes gke-django-axion-cluster-default-pool-156e91c3-wdsb kubernetes.io/arch=arm64:NoSchedule-
 ```
 
 Replace the node names with your actual node names from the previous command output.
 
-### Add Axion (Arm64) Node Pool
-Axion (Arm64) nodes provide high performance per watt and cost-efficient compute.
-This pool will run all Django application workloads.
+### Add Axion (Arm64) node pool
 
-```console
+Axion (Arm64) nodes provide high performance per watt and cost-efficient compute. This pool runs all Django application workloads.
+
+```bash
 gcloud container node-pools create axion-pool \
   --cluster django-axion-cluster \
   --zone us-central1-a \
@@ -209,21 +209,22 @@ gcloud container node-pools create axion-pool \
 ```
 
 
-**Delete x86 pool:**
+Delete the x86 pool:
 
-```console
+```bash
 gcloud container node-pools delete default-pool \
   --cluster django-axion-cluster \
   --zone us-central1-a
 ```
 Your Kubernetes cluster now runs **exclusively on Axion Arm64 nodes**, ensuring native Arm execution.
 
-### Create Cloud SQL (PostgreSQL – Private IP)
-Cloud SQL provides a fully managed PostgreSQL database. Private IP ensures traffic stays inside Google’s private network, improving security and performance.
+### Create Cloud SQL (PostgreSQL – private IP)
 
-**Enable Private Services Access**
+Cloud SQL provides a fully managed PostgreSQL database. Private IP ensures traffic stays inside Google's private network, improving security and performance.
 
-```console
+Enable private services access:
+
+```bash
 gcloud services enable servicenetworking.googleapis.com
 
 gcloud compute addresses create google-managed-services-default \
@@ -235,9 +236,9 @@ gcloud services vpc-peerings connect \
   --network=default
 ```
 
-**Create PostgreSQL instance**
+Create the PostgreSQL instance:
 
-```console
+```bash
 gcloud sql instances create django-postgres \
   --database-version=POSTGRES_15 \
   --cpu=2 \
@@ -247,16 +248,16 @@ gcloud sql instances create django-postgres \
   --no-assign-ip
 ```
 
-**Create database and user**
+Create the database and user:
 
-```console
+```bash
 gcloud sql databases create django_db --instance=django-postgres
 gcloud sql users create django_user --instance=django-postgres --password=password
 ```
 
-**Get IP:**
+Get the IP address:
 
-```console
+```bash
 gcloud sql instances describe django-postgres \
   --format="value(ipAddresses[0].ipAddress)"
 ```
@@ -268,7 +269,7 @@ You now have a private, production-grade PostgreSQL database that can be securel
 ### Create Memorystore (Redis)
 Redis is used for caching, sessions, and background job coordination. Memorystore provides a fully managed Redis service that scales and stays highly available.
 
-```console
+```bash
 gcloud redis instances create django-redis \
   --size=1 \
   --region=us-central1 \

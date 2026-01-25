@@ -31,6 +31,6 @@ To learn more, visit the [Django website](https://www.djangoproject.com/) and ex
 
 You now understand the capabilities of Google Axion C4A Arm-based VMs and why Django is an excellent choice for building web applications on Arm infrastructure. The combination provides a cost-effective, high-performance platform for deploying Python web applications at scale.
 
-In the next sections, you'll provision your own Arm-based VM on Google Cloud, install Django, and benchmark your application's performance. You're ready to start building!
+In the next sections, you'll provision your own Arm-based VM on Google Cloud, install Django, and benchmark your application's performance.
 
 

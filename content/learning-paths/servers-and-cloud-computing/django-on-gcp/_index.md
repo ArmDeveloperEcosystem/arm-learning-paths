@@ -66,7 +66,7 @@ further_reading:
       type: documentation
 
   - resource:
-      title: Apache-bench documentation
+      title: Apache Bench documentation
       link: https://httpd.apache.org/docs/2.4/programs/ab.html 
       type: documentation
 

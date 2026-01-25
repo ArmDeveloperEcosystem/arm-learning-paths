@@ -7,32 +7,44 @@ layout: learningpathall
 ---
 
 ## Django REST API with PostgreSQL and Redis
-This guide walks you through building a **production-ready Django REST API** that connects to **PostgreSQL for data** and **Redis for caching**.  
-You will create a backend that is **cloud-deployable** and compatible with **containerized Kubernetes environments**.
 
-### Create Django Project
-This step sets up a clean Python virtual environment and installs all runtime dependencies required for Django, PostgreSQL, Redis, and production serving via Gunicorn.
+This guide walks you through building a production-ready Django REST API that connects to PostgreSQL for data and Redis for caching. You will create a backend that is cloud-deployable and compatible with containerized Kubernetes environments.
 
-```console
+### Create Django project
+
+Set up a clean Python virtual environment and install all runtime dependencies required for Django, PostgreSQL, Redis, and production serving with Gunicorn.
+
+```bash
 mkdir ~/django_api && cd ~/django_api
 python3 -m venv venv
 source venv/bin/activate
 sudo zypper install postgresql-devel libpq5 postgresql15-server-devel gcc make python3-devel
+```
+
+Also, please run:
+
+```bash
 which pg_config
 pip install psycopg2-binary django djangorestframework psycopg2-binary django-redis gunicorn
 ```
 
-```console
+Finally, run:
+
+```bash
 django-admin startproject django_api .
 django-admin startapp api
 ```
 You now have a Django project skeleton with all required libraries installed for database, cache, and API support.
 
-### Enable Django Apps 
-Django must be told which components are active. We enable the REST framework and the API app so that Django can expose HTTP endpoints.
-Edit `django_api/settings.py` and add 'rest_framework' and 'api' to INSTALLED_APPS. Set DEBUG to False. Finally add '*' to ALLOWED_HOSTS. 
+### Enable Django apps
+
+Django must be told which components are active. Enable the REST framework and the API app so that Django can expose HTTP endpoints. Edit `django_api/settings.py` and add 'rest_framework' and 'api' to INSTALLED_APPS. Set DEBUG to False. Finally add '*' to ALLOWED_HOSTS. 
 
 ```python
+DEBUG = False
+
+ALLOWED_HOSTS = ["*"]
+
 INSTALLED_APPS = [
  'django.contrib.admin',
  'django.contrib.auth',
@@ -43,14 +55,11 @@ INSTALLED_APPS = [
  'rest_framework',
  'api',
 ]
-
-DEBUG = False
-
-ALLOWED_HOSTS = ["*"]
 ```
+
 Your Django project is now configured to run as an API server instead of a development-only web app.
 
-**Configure PostgreSQL & Redis**
+Configure PostgreSQL and Redis
 
 This step connects Django to external managed services instead of local SQLite. This mirrors how real production systems operate.
 
@@ -86,21 +95,23 @@ Edit the above edition and set REDIS_IP to the actual IP address that you saved 
 
 Your application is now wired to a real database and cache, making it production-grade.
 
-### Migrate Database
+### Migrate database
 Django creates tables, metadata, and user models inside PostgreSQL.
 
-```console
+```bash
 python manage.py migrate
 python manage.py createsuperuser
 ```
+
 PostgreSQL instance now contains all Django system tables and is ready to store application data.
 
-### Create Health API
+### Create health API
+
 A health endpoint allows Kubernetes and load balancers to verify if the service is running.
 
-Add code below in `api/views.py` file
+Add code below in `api/views.py` file:
 
-```console
+```python
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
@@ -109,9 +120,9 @@ def health(request):
     return Response({"status":"ok"})
 ```
 
-`django_api/urls.py`
+Add code below in `django_api/urls.py` file:
 
-```console
+```python
 from django.urls import path
 from api.views import health
 
@@ -119,21 +130,24 @@ urlpatterns = [
     path("healthz/", health),
 ]
 ```
+
+
 You now have a Kubernetes-compatible health endpoint.
 
-### Validate Locally
-Before containerizing or deploying, you validate that everything works end-to-end.
+### Validate locally
+Before containerizing or deploying, validate that everything works end-to-end.
 
-```console
+```bash
 python manage.py runserver 0.0.0.0:8000
 ```
 
-In a separate SSH session, type: 
+In a separate SSH session, run:
 
-```console
+```bash
 curl http://127.0.0.1:8000/healthz/
 ```
-**You must see:**
+
+The expected output is:
 
 ```output
 {"status":"ok"}
