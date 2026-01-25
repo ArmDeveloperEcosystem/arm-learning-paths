@@ -28,7 +28,7 @@ django-admin startapp api
 ```
 You now have a Django project skeleton with all required libraries installed for database, cache, and API support.
 
-### Enable Django Apps
+### Enable Django Apps 
 Django must be told which components are active. We enable the REST framework and the API app so that Django can expose HTTP endpoints.
 Edit `django_api/settings.py` and add 'rest_framework' and 'api' to INSTALLED_APPS. Set DEBUG to False. Finally add '*' to ALLOWED_HOSTS. 
 
