@@ -69,6 +69,8 @@ DATABASES = {
 }
 ```
 
+Edit the above addition and set "CLOUDSQL_IP" to the actual IP address that you saved from earlier. 
+
 Additionally, add the CACHES configuration per below to the same file and save:
 
 ```python
@@ -79,6 +81,8 @@ CACHES = {
  }
 }
 ```
+
+Edit the above edition and set REDIS_IP to the actual IP address that you saved earlier. 
 
 Your application is now wired to a real database and cache, making it production-grade.
 
@@ -122,6 +126,11 @@ Before containerizing or deploying, you validate that everything works end-to-en
 
 ```console
 python manage.py runserver 0.0.0.0:8000
+```
+
+In a separate SSH session, type: 
+
+```console
 curl http://127.0.0.1:8000/healthz/
 ```
 **You must see:**

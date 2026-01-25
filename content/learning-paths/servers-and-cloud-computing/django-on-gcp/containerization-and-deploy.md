@@ -13,7 +13,7 @@ You will validate that the workload runs **natively on Arm** and is **publicly a
 ### Create Docker Image
 This step packages your Django API and all its dependencies into a **portable container image** that can run on any Axion Arm64 node.
 
-`requirements.txt`
+Create a file called: `requirements.txt` and insert the following:
 
 ```text
 django
@@ -23,7 +23,7 @@ django-redis
 gunicorn
 ```
 
-`Dockerfile`
+Create a file called `Dockerfile` and insert the following:
 
 ```dockerfile
 FROM python:3.11-slim
@@ -32,23 +32,40 @@ COPY . .
 RUN pip install --no-cache-dir -r requirements.txt
 CMD ["gunicorn","django_api.wsgi:application","--bind","0.0.0.0:8000","--workers","3"]
 ```
+
 You now have a container blueprint that can run Django in production using Gunicorn on Arm64.
 
 ### Build and Push
-This builds the image on an Arm machine and pushes it to Artifact Registry, ensuring Kubernetes pulls an Arm-native image instead of x86.
+This builds the image on an Arm machine and pushes it to Artifact Registry, ensuring Kubernetes pulls an Arm-native image:
+
+(Please replace PROJECT_ID with your current project)
+
+Build the docker image first:
 
 ```console
 docker build -t us-central1-docker.pkg.dev/PROJECT_ID/django-arm/api:1.0 .
+```
+
+Then, push the built image:
+
+```console
 docker push us-central1-docker.pkg.dev/PROJECT_ID/django-arm/api:1.0
 ```
+
 Your Django API is now stored in Google’s private container registry and ready for GKE.
 
 ### Deploy to GKE
 Kubernetes Deployments define how many containers run and where. The nodeSelector forces pods onto Axion ARM64 nodes.
 
-create `/k8sdeployment.yaml` file
+First, make a directory:
 
-```pyhton
+```console
+mkdir ./k8s
+```
+
+Next, let's create `k8s/deployment.yaml` file with the following contents (replace PROJECT_ID with your current project):
+
+```python
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -130,13 +147,17 @@ NAME         TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
 django-api   LoadBalancer   34.118.226.245   34.45.23.92   80:31700/TCP   3h57m
 ```
 
-Validate public access
+Please wait until the EXTERNAL-IP field gets populated! It will be needed in the next step. 
 
-Open in browser:
+### Validate public access
+
+Open the following URL in browser:
 
 ```bash
 http://<EXTERNAL-IP>/healthz/
 ```
+
+You should see output similar to the following:
 
 ![ Django health check alt-text#center](images/django_framework.png "Django Validation")
 

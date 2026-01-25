@@ -57,12 +57,9 @@ Use ApacheBench to test your Django server with simulated traffic:
 ```console
 ab -n 5000 -c 100 http://<external_IP_of_the_GKE_service>/healthz/
 ```
-This sends 5000 requests using 100 concurrent connections to your Django REST endpoint exposed through the GKE LoadBalancer.
+This sends 5000 requests using 100 concurrent connections to your Django REST endpoint exposed through the GKE LoadBalancer. After a few minutes, press "CTRL-C" to stop the benchmark and display results similar to:
 
 ```output
-This is ApacheBench, Version 2.3
-Benchmarking 34.132.110.81 (be patient)
-
 Server Software:        gunicorn
 Server Hostname:        34.132.110.81
 Server Port:            80
@@ -99,16 +96,6 @@ Percentage of the requests served within a certain time (ms)
   99%     28
  100%     34 (longest request)
 ```
-
-## Stop the Gunicorn server
-
-After reviewing the benchmark results, stop the Gunicorn server running in the background:
-
-```bash
-fg
-```
-This brings the background Gunicorn process to the foreground. Then press `Ctrl+C` to stop it.
-
 ## Interpret your benchmark results
 
 The ApacheBench output provides key performance metrics that help you evaluate your Django application's capabilities on Google Axion (Arm64) GKE. Here's what each metric tells you:

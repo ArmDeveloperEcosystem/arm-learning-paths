@@ -20,7 +20,7 @@ Performance is validated using **throughput** and **p95 latency**, allowing you 
 
 ### Target Architecture
 
-```text
+```output
 Client
 |
 | HTTP (LoadBalancer)
