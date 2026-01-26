@@ -17,7 +17,7 @@ Just like choosing the kernels to test, the instance type of the SUT depends on 
 The following steps involve launching an EC2 instance.  You can perform all EC2 instance creation steps via the AWS Management Console instead or AWS CLI.  For step-by-step instructions to bring up an EC2 instance via the console, consult the [Compute Service Provider learning path](/learning-paths/servers-and-cloud-computing/csp/) for detailed instructions.  A tutorial from AWS is also available via [Get started with Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html).
 {{% /notice %}}
 
-Create build host with the following specifications:
+Create the SUT host with the following specifications:
 
 1. **Name** — *fastpath-sut*
 2. **Operating system** — *Ubuntu*

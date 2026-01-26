@@ -17,7 +17,7 @@ To see the swprofiles (kernels) tested and stored in the results directory, run:
 
 ```commandline
 source ~/venv/bin/activate
-fastpath result list results-fastpath_test_010826-1837 --object swprofile
+~/fastpath/fastpath/fastpath result list results-fastpath_test_010826-1837 --object swprofile
 ```
 
 If you followed the tutorial exactly, you should see output similar to:
@@ -61,7 +61,7 @@ If you followed the tutorial exactly, you should see output similar to:
 To see the relative results for each kernel, run the following commands:
 
 ```commandline
-  fastpath result show results-fastpath_test_010826-1837 --swprofile fp_6.19.0-rc1-ubuntu --relative
+  ~/fastpath/fastpath/fastpath result show results-fastpath_test_010826-1837 --swprofile fp_6.19.0-rc1-ubuntu --relative
 ```
 Relative in this case means that the statistics displayed are relative to the mean. In addition to the min/mean/max, you are also given the confidence interval bounds, the coefficient of variation and the number of samples, similar to:
 
@@ -76,7 +76,7 @@ Relative in this case means that the statistics displayed are relative to the me
 You can run it again for the other kernel:
 
 ```commandline
-fastpath result show results-fastpath_test_010826-1837 --swprofile fp_6.18.1-ubuntu --relative
+~/fastpath/fastpath/fastpath result show results-fastpath_test_010826-1837 --swprofile fp_6.18.1-ubuntu --relative
 ```
 with output similar to:
 
@@ -95,7 +95,7 @@ To compare the relative results between both kernels, run:
 
 
 ```commandline
-fastpath result show results-fastpath_test_010826-1837 --swprofile fp_6.19.0-rc1-ubuntu --swprofile fp_6.18.1-ubuntu --relative
+~/fastpath/fastpath/fastpath result show results-fastpath_test_010826-1837 --swprofile fp_6.19.0-rc1-ubuntu --swprofile fp_6.18.1-ubuntu --relative
 ```
 with output similar to:
 

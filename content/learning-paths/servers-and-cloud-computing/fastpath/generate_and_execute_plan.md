@@ -22,7 +22,7 @@ cd ~/arm_kernel_install_guide
 ./scripts/generate_plan.sh
 ```
 
-When complete, the script creates the plan, and provides a list of frequently performed tasks relative to the plan:
+When complete, the script creates the plan with an auto-generated name and provides a list of frequently performed tasks relative to the plan:
 
 ```output
 Enter SUT private IP: 172.31.100.19
@@ -33,17 +33,17 @@ Plan written to:
   /home/ubuntu/arm_kernel_install_guide/plans/fastpath_test_010826-1837.yaml
 
 Run Fastpath with:
-  fastpath plan exec --output results/ /home/ubuntu/arm_kernel_install_guide/plans/fastpath_test_010826-1837.yaml
+  ~/fastpath/fastpath/fastpath plan exec --output results/ /home/ubuntu/arm_kernel_install_guide/plans/fastpath_test_010826-1837.yaml
 
 After Fastpath run completes, gather results with:
-  fastpath result list results/ --object swprofile
+  ~/fastpath/fastpath/fastpath result list results/ --object swprofile
 
 Relative results per kernel:
-  fastpath result show results/ --swprofile fp_6.19.0-rc1-ubuntu --relative
-  fastpath result show results/ --swprofile fp_6.18.1-ubuntu --relative
+  ~/fastpath/fastpath/fastpath result show results/ --swprofile fp_6.19.0-rc1-ubuntu --relative
+  ~/fastpath/fastpath/fastpath result show results/ --swprofile fp_6.18.1-ubuntu --relative
 
 Comparison between kernels:
-  fastpath result show results/ --swprofile fp_6.19.0-rc1-ubuntu --swprofile fp_6.18.1-ubuntu --relative
+  ~/fastpath/fastpath/fastpath result show results/ --swprofile fp_6.19.0-rc1-ubuntu --swprofile fp_6.18.1-ubuntu --relative
 ```
 
 

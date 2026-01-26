@@ -185,7 +185,7 @@ The Kernel Build repository contains build scripts and configuration files neede
     ubuntu@ip-172-31-110-110:~$
     ```
 
-2. Open the [Install and Clone section](https://localhost:1313/install-guides/kernel-build/#install-and-clone) of the install guide from your workstation.
+2. Open the [Install and Clone section](/learning-paths/servers-and-cloud-computing/kernel-build/how-to-1/#install-required-dependencies) of the install guide from your workstation.
 
 3. Run each command from that section on the build machine.  It should be similar to the following (always refer to the above link for the latest command line):
 
@@ -236,7 +236,11 @@ Once you are familiar with the process and you wish to explore and test further,
 
 ## Compile and build Fastpath-enabled kernels 6.18.1 and 6.19-rc1
 
-To run the script with *fastpath* options:
+{{% notice Note %}}
+Warning messages are expected at compile-time.  Warnings can be safely ignored, however fatal errors should be investigated.
+{{% /notice %}}
+
+To compile kernels with *fastpath* options:
 
 1. On the build machine, ```cd``` into the `arm_kernel_install_guide` folder you just cloned. 
 
@@ -248,7 +252,7 @@ cd ~/arm_kernel_install_guide
 ubuntu@ip-172-31-110-110:~/arm_kernel_install_guide$
 ```
 
-2. Open the [Custom tags with *fastpath* enabled](http://localhost:1313/install-guides/kernel-build/#2-custom-tags-with-fastpath-enabled) section from the install guide, and follow the instructions to run the build script. It should be similar to the following (always refer to the above link for the latest command line):
+2. Open the [Custom tags with *fastpath* enabled](/learning-paths/servers-and-cloud-computing/kernel-build/how-to-3/#build-custom-tags-with-fastpath-enabled) section from the install guide, and follow the instructions to run the build script. It should be similar to the following (always refer to the above link for the latest command line):
 
 ```output
 $ ./scripts/kernel_build_and_install.sh --tags v6.18.1,v6.19-rc1 --fastpath true

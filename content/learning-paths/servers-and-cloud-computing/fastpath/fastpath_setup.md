@@ -15,7 +15,7 @@ The *fastpath* host will manage testing against the system under test (SUT) and 
 The following steps involve launching an EC2 instance.  You can perform all EC2 instance creation steps via the AWS Management Console instead or AWS CLI.  For step-by-step instructions to bring up an EC2 instance via the console, consult the [Compute Service Provider learning path](/learning-paths/servers-and-cloud-computing/csp/) for detailed instructions.  A tutorial from AWS is also available via [Get started with Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html).
 {{% /notice %}}
 
-Create build host with the following specifications:
+Create Fastpath host with the following specifications:
 
 1. **Name** — *fastpath-host*
 2. **Operating system** — *Ubuntu*
@@ -34,7 +34,7 @@ Create build host with the following specifications:
 # Replace the placeholders with values from your account/environment
 aws ec2 run-instances \
   --image-id resolve:ssm:/aws/service/canonical/ubuntu/server/24.04/stable/current/arm64/hvm/ebs-gp3/ami-id \
-  --instance-type m6g.4xlarge \
+  --instance-type m6g.12xlarge \
   --key-name <KEY_PAIR_NAME> \
   --subnet-id <SUBNET_ID> \
   --security-group-ids <SECURITY_GROUP_ID> \
@@ -167,7 +167,7 @@ Repeat the dependency installation process so the *fastpath* host has the same t
 
 1. SSH into the `m6g.4xlarge` *fastpath* host using the configured key pair.
 
-2. Open the [Install and Clone section](https://localhost:1313/install-guides/kernel-build/#install-and-clone) of the install guide from your workstation.
+2. Open the [Install and Clone section](/learning-paths/servers-and-cloud-computing/kernel-build/how-to-1/#install-required-dependencies) of the install guide from your workstation.
 
 3. Run each command from that section on the *fastpath* machine.  It should be similar to the following (always refer to the above link for the latest command line):
 
