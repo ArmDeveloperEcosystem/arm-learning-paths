@@ -22,7 +22,7 @@ The requirements below are given as additional information only. The GCP C4A VM 
   - Ubuntu 22.04 LTS (AArch64)
 
 {{% notice Note %}}
-As of this learning path's publication, Ubuntu 24.04 LTS is NOT a supported Yocto build host OS. This may change in the future. 
+As of this learning path's publication, Ubuntu 24.04 LTS is NOT a supported Yocto build host OS. This may change in the future.
 {{% /notice %}}
 
 - Minimum hardware requirements:
