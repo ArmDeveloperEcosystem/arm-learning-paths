@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Build the ExecuTorch .pte "
+title: "Build the ExecuTorch .pte"
 
 weight: 8 # 1 is first, 2 is second, etc.
 
@@ -8,12 +8,12 @@ weight: 8 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-Embedded systems like the NXP board require two ExecuTorch runtime components: a `.pte` file and an `exeuctor_runner` file.
+Embedded systems like the NXP board require two ExecuTorch runtime components: a `.pte` file and an `executor_runner` file.
 
 **ExecuTorch Runtime Files for Embedded Systems**
-|Component|Role in Deployment|What It Contains|Why It’s Required|
+|Component|Role in Deployment|What It Contains|Why It's Required|
 |---------|------------------|----------------|-----------------|
-|**`.pte file`**  (e.g., `mv2_arm_delegate_ethos-u55-256.pte`)|The model itself, exported from ExecuTorch|Serialized and quantized operator graph + weights + metadata|Provides the neural network to be executed|
+|**`.pte file`**  (e.g., `mobilenetv2_u65.pte`)|The model itself, exported from ExecuTorch|Serialized and quantized operator graph + weights + metadata|Provides the neural network to be executed|
 |**`executor_runner`**  (binary [ELF](https://www.netbsd.org/docs/elf.html) file)|The runtime program that runs the .pte file|C++ application that loads the .pte, prepares buffers, and calls the NPU or CPU backend|Provides the execution engine and hardware access logic|
 
 <style>
@@ -79,123 +79,158 @@ Embedded systems like the NXP board require two ExecuTorch runtime components: a
 <i>ExecuTorch runtime deployment to an embedded system</i>
 </center>
 
-## Accept the Arm End User License Agreement
+## Build the ExecuTorch .pte for Ethos-U65
 
-```bash
-export ARM_FVP_INSTALL_I_AGREE_TO_THE_CONTAINED_EULA=True
-```
+This section shows you how to build `.pte` files for the Ethos-U65 NPU. You will compile two models: a simple addition model to verify the setup, and MobileNet V2 for real-world inference.
 
-## Set Up the Arm Build Environment
+### Compile a simple add model
 
-This example builds the [MobileNet V2](https://pytorch.org/hub/pytorch_vision_mobilenet_v2/) computer vision model. The model is a convolutional neural network (CNN) that extracts visual features from an image. It is used for image classification and object detection. The actual Python code for the MobileNet V2 model is in the `executorch` repo: [executorch/examples/models/mobilenet_v2/model.py](https://github.com/pytorch/executorch/blob/main/examples/models/mobilenet_v2/model.py).
+This script creates a basic addition model, quantizes it, and compiles it for the Ethos-U65. Use this to verify that your environment is correctly configured.
 
-You can read a detail explanation of the build steps here: [ARM Ethos-U Backend](https://docs.pytorch.org/executorch/stable/backends-arm-ethos-u.html).
+1. Create the compilation script:
 
-1. Run the steps to set up the build environment: 
-    
    ```bash
-   ./examples/arm/setup.sh \
-     --target-toolchain arm-none-eabi-gcc
+   cat > compile_u65.py << 'EOF'
+   import torch
+   from torch.export import export
+   from torchao.quantization.pt2e.quantize_pt2e import convert_pt2e, prepare_pt2e
+   from executorch.backends.arm.ethosu import EthosUCompileSpec, EthosUPartitioner
+   from executorch.backends.arm.quantizer import EthosUQuantizer, get_symmetric_quantization_config
+   from executorch.exir import to_edge_transform_and_lower
+
+   class SimpleAdd(torch.nn.Module):
+       def forward(self, x, y):
+           return x + y
+
+   model = SimpleAdd().eval()
+   example_inputs = (torch.ones(1, 1, 1, 1), torch.ones(1, 1, 1, 1))
+
+   print("[1/5] Exporting...")
+   exported_program = export(model, example_inputs)
+
+   print("[2/5] Creating U65 spec...")
+   compile_spec = EthosUCompileSpec(
+       target="ethos-u65-256",
+       system_config="Ethos_U65_High_End",
+       memory_mode="Shared_Sram",
+   )
+
+   print("[3/5] Quantizing...")
+   quantizer = EthosUQuantizer(compile_spec)
+   quantizer.set_global(get_symmetric_quantization_config())
+   prepared = prepare_pt2e(exported_program.graph_module, quantizer)
+   prepared(*example_inputs)
+   quantized = convert_pt2e(prepared)
+
+   print("[4/5] Lowering to U65...")
+   quantized_program = export(quantized, example_inputs)
+   edge = to_edge_transform_and_lower(quantized_program, partitioner=[EthosUPartitioner(compile_spec)])
+   pte = edge.to_executorch()
+
+   print("[5/5] Saving...")
+   with open("model_u65.pte", "wb") as f:
+       f.write(pte.buffer)
+   print(f"SUCCESS: model_u65.pte ({len(pte.buffer)/1024:.1f} KB)")
+   EOF
    ```
-  
-2. Update your environment:
+
+2. Run the compilation:
+
    ```bash
-   source examples/arm/ethos-u-scratch/setup_path.sh
+   python3 compile_u65.py
    ```
 
-## Build the ExecuTorch .pte
-Now you will build the `.pte` file, that will be used on the NXP board.
+   If successful, you see output similar to:
 
-1. Build the [MobileNet V2](https://pytorch.org/hub/pytorch_vision_mobilenet_v2/) ExecuTorch `.pte` runtime file using [aot_arm_compiler](https://github.com/pytorch/executorch/blob/2bd96df8de07bc86f2966a559e3d6c80fc324896/examples/arm/aot_arm_compiler.py):
+   ```output
+   [1/5] Exporting...
+   [2/5] Creating U65 spec...
+   [3/5] Quantizing...
+   [4/5] Lowering to U65...
+   [5/5] SUCCESS! Saved: model_u65.pte
+   File size: 3.9 KB
+   ```
+
+### Compile MobileNet V2
+
+This script compiles the [MobileNet V2](https://pytorch.org/hub/pytorch_vision_mobilenet_v2/) computer vision model for the Ethos-U65. MobileNet V2 is a convolutional neural network (CNN) used for image classification and object detection.
+
+1. Create the MobileNet V2 compilation script:
 
    ```bash
-      python3 -m examples.arm.aot_arm_compiler \
-         --model_name="mv2" \
-         --quantize \
-         --delegate \
-         --debug \
-         --target ethos-u55-256
+   cat > compile_mv2_u65.py << 'EOF'
+   import torch
+   from torch.export import export, export_for_training
+   from torchvision.models import mobilenet_v2, MobileNet_V2_Weights
+   from torchao.quantization.pt2e.quantize_pt2e import convert_pt2e, prepare_pt2e
+   from executorch.backends.arm.ethosu import EthosUCompileSpec, EthosUPartitioner
+   from executorch.backends.arm.quantizer import EthosUQuantizer, get_symmetric_quantization_config
+   from executorch.exir import to_edge_transform_and_lower
 
+   print("[1/5] Loading MobileNetV2...")
+   model = mobilenet_v2(weights=MobileNet_V2_Weights.IMAGENET1K_V1).eval()
+   example_inputs = (torch.randn(1, 3, 224, 224),)
+
+   print("[2/5] Exporting...")
+   exported_program = export_for_training(model, example_inputs).module()
+
+   print("[3/5] Quantizing for U65...")
+   compile_spec = EthosUCompileSpec(
+       target="ethos-u65-256",
+       system_config="Ethos_U65_High_End",
+       memory_mode="Shared_Sram",
+   )
+   quantizer = EthosUQuantizer(compile_spec)
+   quantizer.set_global(get_symmetric_quantization_config())
+   prepared = prepare_pt2e(exported_program, quantizer)
+   prepared(*example_inputs)
+   quantized = convert_pt2e(prepared)
+
+   print("[4/5] Lowering to U65...")
+   quantized_program = export(quantized, example_inputs)
+   edge = to_edge_transform_and_lower(quantized_program, partitioner=[EthosUPartitioner(compile_spec)])
+   pte = edge.to_executorch()
+
+   print("[5/5] Saving...")
+   with open("mobilenetv2_u65.pte", "wb") as f:
+       f.write(pte.buffer)
+   print(f"SUCCESS: mobilenetv2_u65.pte ({len(pte.buffer)/1024/1024:.2f} MB)")
+   EOF
+   ```
+
+2. Run the compilation:
+
+   ```bash
+   python3 compile_mv2_u65.py
+   ```
+
+   If successful, you see the Vela compiler summary indicating 100% NPU utilization:
+
+   ```output
+   Network summary for out
+   Accelerator configuration               Ethos_U65_256
+   System configuration                    Ethos_U65_High_End
+   Memory mode                             Shared_Sram
+
+   CPU operators = 0 (0.0%)
+   NPU operators = 117 (100.0%)
+
+   Neural network macs                     300838272 MACs/batch
+   SUCCESS: mobilenetv2_u65.pte (3.34 MB)
+   ```
+
+3. Verify that the `.pte` file was generated:
+
+   ```bash
+   ls -la mobilenetv2_u65.pte
    ```
 
 {{% notice Note %}}
-| Flag                     | Meaning                                             |
-| ------------------------ | --------------------------------------------------- |
-| `--model_name="mv2"`     | Example model: MobileNetV2 (small, efficient)       |
-| `--quantize`             | Enables int8 quantization (required for Ethos-NPUs) |
-| `--delegate`             | Enables offloading layers to the Ethos backend      |
-| `--debug`                | Verbose build output                                |
-| `--target ethos-u55-256` | Targets the Ethos-U55      |
+The `EthosUCompileSpec` parameters used in this guide:
 
-The `--quantize` flag uses one input example, so the resulting model will likely have poor classification performance.
+| Parameter         | Value                 | Description                                    |
+| ----------------- | --------------------- | ---------------------------------------------- |
+| `target`          | `ethos-u65-256`       | Targets the Ethos-U65 with 256 MAC units       |
+| `system_config`   | `Ethos_U65_High_End`  | High-end system configuration for optimal performance |
+| `memory_mode`     | `Shared_Sram`         | Uses shared SRAM memory mode                   |
 {{% /notice %}}
-
-3. Check that the `mv2_arm_delegate_ethos-u55-256.pte` file was generated:
-   
-   ```bash
-   ls mv2_arm_delegate_ethos-u55-256.pte
-   ```
-
-## Troubleshooting
-**`setup.sh`**
-- If you see the following error in the `setup.sh` output:
-  ```bash { output_lines = "1-2" }
-  Failed to build tosa-tools-v0.80
-  ERROR: Could not build wheels for tosa-tools-v0.80, which is required to install pyproject.toml-based projects
-  ```
-  then:
-  1. Increase the swap space to 8 GB:
-     ```bash
-     fallocate -l 8G /swapfile
-     chmod 600 /swapfile
-     mkswap /swapfile
-     swapon /swapfile
-     ```
-     - [optional] Deallocate the swap space after you complete this learning path:
-        ```bash
-        swapoff /swapfile
-        rm /swapfile
-        ```
-
-  {{% notice macOS %}}
-  Increase the "Memory Limit" in Docker settings to 12 GB: 
-  ![Increase the "Memory Limit" in Docker settings to 12 GB alt-text#center](./increase-the-memory-limit-to-12-gb.jpg "Increase the Memory Limit in Docker settings to 12 GB")
-
-  {{% /notice %}}
-
-  2. Re-run `setup.sh`
-     ```bash
-     ./examples/arm/setup.sh --i-agree-to-the-contained-eula
-     ```
-
-- If you see the following error in the `setup.sh` output:
-  ```bash { output_lines = "1-2" }
-  Failed to build tosa-tools
-  ERROR: Failed to build installable wheels for some pyproject.toml based projects (tosa-tools)
-  ```
-  then do the below troubleshooting steps.
-   1. Install any missing build tools:
-      ```bash
-      apt update && apt install -y \
-         cmake \
-         build-essential \
-         ninja-build \
-         python3-dev \
-         libboost-all-dev
-      ```
-   2. Re-run `setup.sh`
-      ```bash
-      ./examples/arm/setup.sh --i-agree-to-the-contained-eula
-      ```
-- If you see the following error in the `setup.sh` output:
-   ```bash { output_lines = "1-8" }
-   ...
-   ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
-   tosa-tools 0.80.2.dev1+g70ed0b4 requires jsonschema, which is not installed.
-   tosa-tools 0.80.2.dev1+g70ed0b4 requires flatbuffers==23.5.26, but you have flatbuffers 24.12.23 which is incompatible.
-   tosa-tools 0.80.2.dev1+g70ed0b4 requires numpy<2, but you have numpy 2.3.1 which is incompatible.
-   ...
-   ```
-   then just re-run `setup.sh`
-   ```bash
-   ./examples/arm/setup.sh --i-agree-to-the-contained-eula
