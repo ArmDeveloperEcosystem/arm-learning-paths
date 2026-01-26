@@ -1,6 +1,10 @@
 ---
 title: Observing Ethos-U on a Physical Device, Built on Arm
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 120
 
 who_is_this_for: This is an introductory topic for developers and data scientists new to Tiny Machine Learning (TinyML), who want to observe ExecuTorch performance on a physical device.
