@@ -137,7 +137,9 @@ After analyzing your artifacts, you'll see two key insights: end-to-end latency 
 **The bottleneck shift**: After SME2 accelerates CONV and GEMM operations, data movement operations (transpose, reshape, layout conversions) become the dominant cost. This is expected, as SME2 reveals the next optimization frontier. The operator-category breakdown makes it obvious where to focus next.
 
 ![end-latency #center](images/squeeze_sam_latency_comparison.png "End-to-end latency comparison with SME2 on vs off")
+
 ![end-latency #center](images/combined_operator_breakdown_stacked.png "Operator-category breakdown showing data movement becoming dominant after SME2")
+
 
     Case study results (SqueezeSAM on SME2-enabled Android device): Left, end-to-end latency drops dramatically with SME2 (FP16: 3.9× speedup). Right, operator-category breakdown shows CONV/GEMM shrink while data movement becomes the dominant cost after SME2 acceleration.
 
