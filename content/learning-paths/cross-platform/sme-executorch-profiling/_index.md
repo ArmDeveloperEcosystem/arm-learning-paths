@@ -1,5 +1,5 @@
 ---
-title: Revealing latent ExecuTorch latency after SME2 acceleration
+title: Profiling ExecuTorch Models with SME2 on Arm
 
 draft: true
 cascade:
@@ -7,17 +7,21 @@ cascade:
 
 minutes_to_complete: 90
 
-who_is_this_for: Developers and performance engineers deploying ExecuTorch models on Arm devices who face latency challenges or want to use more advanced models. When end-to-end latency isn't meeting targets, operator-level performance analysis is the essential first step to understand where time is spent and make informed optimization decisions. This learning path guides you through analyzing performance with SME2 acceleration to identify optimization opportunities and achieve better performance.
+who_is_this_for:  This Learning Path is intended for developers and performance engineers deploying ExecuTorch models on Arm-based
+  devices who need to understand and reduce end-to-end inference latency. You will learn how to perform operator-level performance analysis to understand where execution time is spent, identify newly exposed bottlenecks, and make informed optimization decisions.
 learning_objectives:
-  - Understand how SME2 acceleration transforms ML performance by revealing operator-level bottlenecks that were previously hidden behind compute constraints
-  - Learn to interpret operator-category breakdowns (CONV/GEMM/Data Movement/Other) and use them to identify which operators benefit most from acceleration and which become the new bottlenecks
-  - Build confidence in applying a model-agnostic performance analysis workflow to your own model, enabling consistent performance analysis across your model portfolio
-  - Discover the strategic insight that faster compute (via SME2) shifts optimization focus from compute-bound operations to data movement, fundamentally changing your optimization priorities
-  - Develop the ability to make evidence-based optimization decisions by comparing SME2-on versus SME2-off profiles, moving from guesswork to data-driven performance improvements
+  - Understand how SME2 acceleration changes the performance profile of ExecuTorch models by reducing compute-bound bottlenecks.
+  - Learn how to interpret operator-level and operator-category breakdowns (for example, convolution, GEMM, data movement, and other operators).
+  - Identify which operators benefit most from SME2 acceleration and which operators become the new performance bottlenecks.
+   - Apply a model-agnostic profiling workflow that can be reused across different models and deployments.
+    - Make evidence-based optimization decisions by comparing execution profiles with SME2 enabled and disabled.
+     
 prerequisites:
-  - Apple Silicon macOS host with Python 3.9+ and CMake 3.29+
-  - Basic ExecuTorch or PyTorch familiarity
-  - "Optional: Android device with Armv9 and SME2 capabilities for real-world device testing (configure power management settings for consistent measurements)"
+  - An Apple Silicon macOS host with Python 3.9 or later and CMake 3.29 or later.
+  - Basic familiarity with ExecuTorch or PyTorch.
+  - Optionally, an Android device with Armv9 and SME2 support for on-device testing. If used, power management
+    settings should be configured to ensure consistent performance measurements.
+    
 author: Jason Zhu, Tyler Mullenbach, Damien Dooley 
 
 ### Tags
