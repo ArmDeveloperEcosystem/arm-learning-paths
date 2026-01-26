@@ -12,7 +12,7 @@ Follow these steps to initialize and register your device within the **Uncloud**
 
 1.  **Access the Platform:**
 
-    Navigate to the [Uncloud Dashboard](https://dev.tinkerblox.io/) and log in with your credentials.
+    Navigate to the [Uncloud Dashboard](https://dev.tinkerblox.io/) and log in with your credentials. 
 
 2.  **Provision a New Device:**
     * Go to **Device Management** > **New Device**.

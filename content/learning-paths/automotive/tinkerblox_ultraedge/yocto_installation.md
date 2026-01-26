@@ -26,7 +26,7 @@ As of this learning path's publication, Ubuntu 24.04 LTS is NOT a supported Yoct
 {{% /notice %}}
 
 - Minimum hardware requirements:
-  - CPU: Quad-core processor minimum (16 cores or greater recommended)
+  - CPU: Quad-core processor minimum (16 cores or greater recommended) 
   - RAM: 8 GB minimum (16 GB or greater recommended)
   - Disk space: At least 100 GB free (250 GB +recommended for multiple builds)
 

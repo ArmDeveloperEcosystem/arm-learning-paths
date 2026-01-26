@@ -12,7 +12,7 @@ UltraEdge is an edge-native, high-performance execution fabric designed to run A
 
 UltraEdge takes a fundamentally different approach. It replaces heavyweight container runtimes with a lean, deterministic execution stack purpose-built for performance-oriented compute. This enables millisecond-level startup times, predictable performance, and a dramatically smaller resource footprint—allowing workloads to start faster, run closer to the hardware, and make full use of available CPU and GPU resources.
 
-At the core of UltraEdge are two specialized execution systems:
+At the core of UltraEdge are two specialized execution systems: 
 
 · **MicroStack**, optimized for enterprise and mixed workloads
 

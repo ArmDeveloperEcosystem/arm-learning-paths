@@ -45,7 +45,7 @@ microservices.
 
 #### Microservice management
 
-Manage microservices running on the Edge platform.
+Manage microservices running on the Edge platform. 
 
 **Syntax:**
 
