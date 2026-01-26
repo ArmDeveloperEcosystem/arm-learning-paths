@@ -2,147 +2,89 @@
 # User change
 title: "(Optional) Enable Persistent WiFi"
 
-weight: 8 # 1 is first, 2 is second, etc.
+weight: 5 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
 
-On this page you will configure the NXP board to connect to a specific WiFi network on boot.
+ConnMan usually persists your WiFi network configuration across reboots. On this Linux image, the missing piece is often that the WiFi driver module isn’t loaded automatically at boot.
 
-1. [Log in to Linux]( {{< relref "2-boot-nxp.md" >}} ) on the board, as `root`
+In this section, you’ll run one command at boot to load the WiFi driver. After that, ConnMan should reconnect to the saved network automatically.
 
-2. Create a `wpa_supplicant.conf`:
-   ```bash
-   touch /etc/wpa_supplicant.conf
-   nano /etc/wpa_supplicant.conf
-   ```
-   Enter your WiFi credentials into the `wpa_supplicant.conf` file:
-   ```bash
-   ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-   update_config=1
+## Confirm ConnMan can reconnect after loading the driver
 
-   network={
-       ssid="YOUR_SSID"
-       psk="YOUR_PASSWORD"
-       key_mgmt=WPA-PSK
-   }
-   ```
+First, connect to WiFi once using `connmanctl` (from the previous section). Then reboot the board.
 
-3. Test the `wpa_supplicant.conf` file:
-   ```bash
-   modprobe moal mod_para=nxp/wifi_mod_para.conf
-   ifconfig mlan0 up
-   wpa_supplicant -B -i mlan0 -c /etc/wpa_supplicant.conf
-   udhcpc -i mlan0
-   ```
-   * mlan0 is the WiFi interface on i.MX93
-	* If this connects to WiFi, we’re ready for automation
+After the reboot, log in and load the driver:
 
-4. Configure DNS server IP addresses, so that the NXP board can resolve Internet addresses:
-   ```bash
-   touch /usr/share/udhcpc/default.script
-   nano /usr/share/udhcpc/default.script
-   ```
-   and add in the following `udhcpc` script:
-   ```bash
-   #!/bin/sh
-   # udhcpc script
-   case "$1" in
-       deconfig)
-           ip addr flush dev $interface
-           ;;
-       bound|renew)
-           ip addr add $ip/$subnet dev $interface
-           ip route add default via $router
-           echo "nameserver 8.8.8.8" > /etc/resolv.conf
-           echo "nameserver 1.1.1.1" >> /etc/resolv.conf
-           ;;
-   esac
-   ```
-   Make the `default.script` executable:
-   ```bash
-   chmod +x /usr/share/udhcpc/default.script
-   ```
+```bash
+sudo /usr/sbin/modprobe moal mod_para=nxp/wifi_mod_para.conf
+```
 
-5. Create a `nxp-wifi-setup.sh` script:
-   ```bash
-   touch /usr/bin/nxp-wifi-setup.sh
-   nano /usr/bin/nxp-wifi-setup.sh
-   ```
-   and add in the following lines:
-   ```bash
-   #!/bin/sh
-   # Load WiFi driver
-   /usr/sbin/modprobe moal mod_para=nxp/wifi_mod_para.conf
+Give it a few seconds, then confirm you have an IP address and Internet connectivity:
 
-   # Bring interface up
-   /usr/bin/ifconfig mlan0 up
+```bash
+ifconfig | grep RUNNING -A 1
+curl -I http://www.example.com
+```
 
-   # Connect to WiFi
-   /usr/sbin/wpa_supplicant -B -i mlan0 -c /etc/wpa_supplicant.conf
+If this reconnects reliably, you’re ready to automate it.
 
-   # Obtain DHCP IP + DNS
-   /usr/sbin/udhcpc -i mlan0 -s /usr/share/udhcpc/default.script
-   ```
-   Make the `nxp-wifi-setup.sh` executable:
-   ```bash
-   chmod +x /usr/bin/nxp-wifi-setup.sh
-   ```
+## Load the WiFi driver automatically on boot
 
-6. Create a `nxp-wifi-setup.service`:
-   ```bash
-   touch /etc/systemd/system/nxp-wifi-setup.service
-   nano /etc/systemd/system/nxp-wifi-setup.service
-   ```
-   Enter the following systemd commands into the `nxp-wifi-setup.service` file:
-   ```bash
-   [Unit]
-   Description=WiFi Setup for NXP FRDM i.MX93
-   After=network.target
+Create a small `systemd` unit that runs `modprobe` at startup.
 
-   [Service]
-   Type=oneshot
-   ExecStart=/usr/bin/nxp-wifi-setup.sh
-   RemainAfterExit=yes
+```bash
+sudo nano /etc/systemd/system/nxp-wifi-driver.service
+```
 
-   [Install]
-   WantedBy=multi-user.target
-   ```
+Add the following:
 
-7. Create a `wpa_supplicant.service`:
-   ```bash
-   touch /etc/systemd/system/wpa_supplicant.service
-   nano /etc/systemd/system/wpa_supplicant.service
-   ```
-   Enter the following systemd commands into the `wpa_supplicant.service` file:
-   ```bash
-   [Unit]
-   Description=WPA Supplicant daemon
-   After=network.target
+```bash
+[Unit]
+Description=Load WiFi driver (moal) for NXP i.MX93
+After=multi-user.target
 
-   [Service]
-   Type=simple
-   ExecStart=/usr/sbin/wpa_supplicant -i mlan0 -c /etc/wpa_supplicant.conf
-   Restart=always
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/modprobe moal mod_para=nxp/wifi_mod_para.conf
+RemainAfterExit=yes
 
-   [Install]
-   WantedBy=multi-user.target
-   ```
-   
-8. Enable and Start the `nxp-wifi-setup.service`:
-   ```bash
-   systemctl daemon-reload
-   systemctl enable nxp-wifi-setup.service wpa_supplicant.service
-   systemctl start nxp-wifi-setup.service wpa_supplicant.service
-   ```
+[Install]
+WantedBy=multi-user.target
+```
 
-10. Check status:
-   ```bash
-   systemctl status nxp-wifi-setup.service
-   systemctl status wpa_supplicant.service
-   ```
-   and confirm Internet connectivity:
-   ```bash
-   curl -I http://www.example.com
-   ```
+Enable the service:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable nxp-wifi-driver.service
+```
+
+Reboot and confirm the board reconnects on its own:
+
+```bash
+sudo reboot
+```
+
+After it comes back up, check WiFi and Internet:
+
+```bash
+ifconfig | grep RUNNING -A 1
+curl -I http://www.example.com
+```
+
+## What you’ve accomplished and what’s next:
+
+You’ve set up an NXP FRDM i.MX 93 board as a practical Linux-based development target for ML workflows on Arm.
+
+In this Learning Path, you:
+
+- Booted the board and logged in over a serial console.
+- Created a non-root user for day-to-day development.
+- Connected the board to WiFi and transferred files using SSH or USB.
+- Automated WiFi bring-up by loading the driver module on boot.
+
+To go deeper, review the **Further reading** resources at the end of this Learning Path.
+
