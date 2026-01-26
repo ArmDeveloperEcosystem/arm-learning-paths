@@ -10,66 +10,23 @@ layout: learningpathall
 
 After connecting to your SUSE Linux Enterprise Server (SLES) VM using SSH, you'll install the Google Cloud CLI, update your system, install Python 3.11, and set up a virtual environment for your Django project.
 
-## Install Google Cloud CLI (gcloud)
+## Prepare the system
 
-The Google Cloud CLI is required to authenticate with GCP and allow your Django application VM to interact with Google Cloud services such as GKE, Cloud SQL, Artifact Registry, Memorystore, and to build, deploy, and operate the Django platform.
+Update the system packages and install dependencies:
 
-### Download gcloud SDK (Arm64)
-
-```console
-curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-arm.tar.gz
-```
-
-### Extract and install gcloud
-
-```console
-tar -xzf google-cloud-cli-linux-arm.tar.gz
-cd google-cloud-sdk
-./install.sh
-```
-
-Accept the default options during installation.
-
-### Initialize gcloud
-
-```console
-source ~/.bashrc
-gcloud init
-```
-
-During initialization:
-
-- Select the correct project (for example: imperial-time-xxxxxx)
-- Choose the default region (for example: us-central1)
-
-### Verify authentication
-
-```console
-gcloud auth list
-```
-
-You should see an output similar to:
-```output
-Credentialed Accounts
-ACTIVE  ACCOUNT
-*       <PROJECT_NUMBER>-compute@developer.gserviceaccount.com
-```
-
-## Update your system
-
-Begin by refreshing your package list and upgrading installed software to ensure you have the latest versions and security patches:
-
-```console
+```bash
 sudo zypper refresh
 sudo zypper update -y
+sudo zypper install -y curl git tar gzip
 ```
 
-## Install Python 3.11 and development tools
+### Install Python 3.11
 
-Django requires Python 3.10 or later. You'll install Python 3.11 along with pip (Python's package manager) and essential build tools needed for compiling Python packages:
+Install Python 3.11:
 
-```console
-sudo zypper install -y python311 python311-pip python311-devel git gcc make
+```bash
+sudo zypper install -y python311
+which python3.11
 ```
 
 Verify that Python and pip are installed correctly:
@@ -86,11 +43,61 @@ Python 3.11.10
 pip 22.3.1 from /usr/lib/python3.11/site-packages/pip (python 3.11)
 ```
 
+## Install Google Cloud CLI (gcloud)
+
+The Google Cloud CLI is required to authenticate with GCP and allow your Django application VM to interact with Google Cloud services such as GKE, Cloud SQL, Artifact Registry, Memorystore, and to build, deploy, and operate the Django platform.
+
+### Install Google Cloud SDK (gcloud)
+
+The Google Cloud SDK is required to create and manage GKE clusters.
+
+Download and extract the Google Cloud SDK:
+
+```bash
+wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-460.0.0-linux-arm.tar.gz
+tar -xvf google-cloud-sdk-460.0.0-linux-arm.tar.gz
+```
+
+Install gcloud:
+
+```bash
+./google-cloud-sdk/install.sh
+```
+
+After installation completes, exit and reconnect to apply the PATH changes:
+
+```bash
+exit
+```
+
+### Initialize gcloud
+
+Authenticate and configure the Google Cloud CLI:
+
+```bash
+gcloud init
+```
+
+During initialization, select **Login with a new account**. You'll be prompted to authenticate using your browser and receive an auth code to copy back. Select the project you want to use and choose default settings when unsure.
+
+### Verify authentication
+
+```bash
+gcloud auth list
+```
+
+The output is similar to:
+```output
+Credentialed Accounts
+ACTIVE  ACCOUNT
+*       <PROJECT_NUMBER>-compute@developer.gserviceaccount.com
+```
+
 ## Create a project directory and virtual environment
 
 Create a dedicated directory for your Django project and set up a Python virtual environment to isolate your project's dependencies:
 
-```console
+```bash
 mkdir ~/myproject && cd ~/myproject
 python3.11 -m venv venv
 source venv/bin/activate
@@ -104,7 +111,7 @@ Once activated, your command prompt displays `(venv)` at the beginning, indicati
 
 With your virtual environment active, upgrade pip to the latest version:
 
-```console
+```bash
 python3 -m pip install --upgrade pip
 ```
 
@@ -127,7 +134,7 @@ django-admin --version
 The output is similar to:
 
 ```output
-5.2.8
+5.2.10
 ```
 
 ## Summary and what's next
