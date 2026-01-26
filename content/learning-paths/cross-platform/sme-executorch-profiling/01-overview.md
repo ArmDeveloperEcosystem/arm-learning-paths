@@ -145,6 +145,6 @@ The operator-category breakdown shows CONV/GEMM shrink while data movement becom
 
 ## 7. Where to go next
 
-  - Continue to 02 – Setup + pipeline to understand the environment setup and runner build process in more detail.
-  - Continue to 03 – Model onboarding + performance analysis to export additional models and analyze their performance.
-  - Continue to 04 – Agent skills to explore how this workflow can be automated using AI-assisted tooling.
+  - Continue to [Setup and pipeline](/learning-paths/cross-platform/sme-executorch-profiling/02-setup-and-pipeline) to understand the environment setup and runner build process in more detail.
+  - Continue to [Model onboarding and performance analysis](learning-paths/cross-platform/sme-executorch-profiling/03-model-onboarding-and-profiling) to export additional models and analyze their performance.
+  - Continue to [Agent skills](learning-paths/cross-platform/sme-executorch-profiling/04-agent-skills) to explore how this workflow can be automated using AI-assisted tooling.
