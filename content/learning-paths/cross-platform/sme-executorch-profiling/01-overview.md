@@ -133,17 +133,14 @@ Although multiple file formats are generated, the .etdump files are the authorit
 After analyzing your artifacts, you'll see two key insights: end-to-end latency improvements and the bottleneck shift. The case study below shows results from SqueezeSAM, an interactive image segmentation model, running on an SME2-enabled Android device. The performance analysis kit includes EdgeTAM's image segmentation module as the example model, which is a more recent video-focused segmentation model that demonstrates advanced model onboarding patterns.
 
 **End-to-end latency**: With SME2 enabled, FP16 inference improves by 3.9× (from 1,163 ms to 298 ms on a single CPU core), making on-device execution viable for interactive use cases. INT8 also sees substantial speedups (1.83×), demonstrating that SME2 accelerates both quantized and floating-point models.
+SqueezeSAM on SME2-enabled Android device Results: Left, end-to-end latency drops dramatically with SME2 (FP16: 3.9× speedup). 
+![end-latency #center](images/squeeze_sam_latency_comparison.png "End-to-end latency comparison with SME2 on vs off")
 
 **The bottleneck shift**: After SME2 accelerates CONV and GEMM operations, data movement operations (transpose, reshape, layout conversions) become the dominant cost. This is expected, as SME2 reveals the next optimization frontier. The operator-category breakdown makes it obvious where to focus next.
 
-![end-latency #center](images/squeeze_sam_latency_comparison.png "End-to-end latency comparison with SME2 on vs off")
-
 ![end-latency #center](images/combined_operator_breakdown_stacked.png "Operator-category breakdown showing data movement becoming dominant after SME2")
 
-
-    Case study results (SqueezeSAM on SME2-enabled Android device): Left, end-to-end latency drops dramatically with SME2 (FP16: 3.9× speedup). Right, operator-category breakdown shows CONV/GEMM shrink while data movement becomes the dominant cost after SME2 acceleration.
-
-The operator-category breakdown makes it clear where further optimization effort should be focused once compute is no longer the limiting factor.
+The operator-category breakdown shows CONV/GEMM shrink while data movement becomes the dominant cost after SME2 acceleration. It makes it clear where further optimization effort should be focused once compute is no longer the limiting factor.
 
 ## 7. Where to go next
 
