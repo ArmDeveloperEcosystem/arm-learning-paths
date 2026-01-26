@@ -1,22 +1,20 @@
 ---
-title: "Agent skills: AI assistants and CI automation"
+title: "Automate profiling workflows with AI agents"
 weight: 5
 layout: "learningpathall"
 ---
 
-## Goal: Automate performance analysis with AI coding assistants
+## Automate ExecuTorch profiling with AI assistants
 
-This learning path includes a set of structured, verifiable agent skills that allow the performance analysis workflow to be automated by AI coding assistants (such as Codex, Claude, Cursor, or Copilot) and by CI systems.
+This Learning Path includes a set of structured, verifiable agent skills that enable automation of the performance analysis workflow by AI coding assistants (such as Codex, Claude, Cursor, or Copilot) and CI systems.
+
 Traditional documentation describes what a human should do. Agent skills describe how an automated system should do it, with explicit definitions of inputs, actions, expected outputs, and validation criteria. This structure enables workflows that are reproducible, verifiable, and suitable for automation.
-Each skill defines:
-  * Required inputs and preconditions
-  * The exact actions to perform
-  * The files and artifacts that should be produced
-  * Validation steps that confirm successful execution
-  * 
-This makes the workflow suitable for use in AI-assisted development, automated regression testing, and repeatable onboarding.
 
-## 1. Where the agent workflows live
+Each skill defines required inputs and preconditions, the exact actions to perform, the files and artifacts that should be produced, and validation steps that confirm successful execution.
+
+This makes the workflow suitable for AI-assisted development, automated regression testing, and repeatable onboarding.
+
+## Locate the agent workflows
 
 All agent skills are included in the same code repository as the performance analysis kit under::
 
@@ -35,7 +33,7 @@ Available skills include:
 7. `07_report_generation.md` - Generate comprehensive markdown report
 8. `08_onboard_edgetam.md` - Onboard EdgeTAM image encoder model
 
-## 2. Agent skill structure
+## Understand the agent skill structure
 
 Each agent skill follows a consistent structure designed for both human readability and machine execution:
 
@@ -54,7 +52,7 @@ Each agent skill follows a consistent structure designed for both human readabil
 
 **The key feature**: Each skill is self-contained and verifiable. Validation steps ensure that the skill completed successfully before downstream skills are executed. This makes the workflow robust when automated.
 
-## 3. Quick reference
+## Review the quick reference
 
 | Skill | Time | Prerequisites | Outputs |
 |-------|------|---------------|---------|
@@ -68,7 +66,7 @@ Each agent skill follows a consistent structure designed for both human readabil
 
 Times are approximate and depend on host performance and network availability.
 
-## 4. Recommended workflow
+## Execute agent skills in the recommended order
 
 For AI assistants, use skills in this order:
 
@@ -94,7 +92,7 @@ For regular model analysis:
 Skills can be executed individually or chained together depending on the use case.
 Skills are composable. You can chain them together for end-to-end automation, or use them individually for specific tasks. Each skill includes verification steps to ensure success before proceeding.
 
-## 5. Example: Using skills with an AI assistant
+## Integrate agent skills with AI coding assistants
 
 Agent skills are designed to be pulled directly into an AI agent’s context as executable instructions. Each skill is a standalone Markdown file (*.md) that the agent reads and follows step by step.
 The typical interaction model is:

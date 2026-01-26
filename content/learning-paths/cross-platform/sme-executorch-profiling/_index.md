@@ -3,20 +3,19 @@ title: Profile ExecuTorch models with SME2 on Arm
 
 minutes_to_complete: 90
 
-who_is_this_for: This is an advanced topic for developers and performance engineers deploying ExecuTorch models on Arm-based devices who need to understand and reduce end-to-end inference latency.
+who_is_this_for: This is an advanced topic for developers and performance engineers who deploy ExecuTorch models on Arm devices and want to understand and reduce inference latency.
 
 learning_objectives:
-  - Understand how SME2 acceleration changes the performance profile of ExecuTorch models by reducing compute-bound bottlenecks.
-  - Learn how to interpret operator-level and operator-category breakdowns (for example, convolution, GEMM, data movement, and other operators).
-  - Identify which operators benefit most from SME2 acceleration and which operators become the new performance bottlenecks.
-  - Apply a model-agnostic profiling workflow that can be reused across different models and deployments.
-  - Make evidence-based optimization decisions by comparing execution profiles with SME2 enabled and disabled.
+  - Understand how SME2 acceleration changes the performance profile of ExecuTorch models by reducing compute-bound bottlenecks
+  - Learn how to interpret operator-level and operator-category breakdowns (for example, convolution, GEMM, data movement, and other operators)
+  - Identify which operators benefit most from SME2 acceleration and which operators become the new performance bottlenecks
+  - Apply a model-agnostic profiling workflow that can be reused across different models and deployments
+  - Make evidence-based optimization decisions by comparing execution profiles with SME2 enabled and disabled
 
 prerequisites:
-  - An Apple Silicon macOS host with Python 3.9 or later and CMake 3.29 or later.
-  - Basic familiarity with ExecuTorch or PyTorch.
-  - Optionally, an Android device with Armv9 and SME2 support for on-device testing. If used, power management
-    settings should be configured to ensure consistent performance measurements.
+  - An Apple Silicon macOS host with Python 3.9 or later and CMake 3.29 or later
+  - Basic familiarity with ExecuTorch or PyTorch
+  - Optionally, an Android device with Armv9 and SME2 support for on-device testing (if used, configure power management settings to ensure consistent performance measurements)
     
 author: Jason Zhu, Tyler Mullenbach, Damien Dooley 
 
