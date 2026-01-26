@@ -53,7 +53,7 @@ This creates a self-contained workspace. Your Python virtual environment, ExecuT
 ## 3. Execution Stack Overview: ExecuTorch, XNNPACK, Arm KleidiAI, and SME2
 
 Before running the pipeline, it helps to understand how the execution stack is composed, since the profiling results reflect behavior across multiple layers. The diagram below summarizes the CPU execution stack used in this workflow.
-![pipeline-execution #center](images/sme2_stack_01062026.png "The execution stack: A model is defined in PyTorch, exported and run by ExecuTorch, and CPU compute is delegated to XNNPACK as the backend.")
+![pipeline-execution #center](images/sme2_stack_01062026.png"The execution stack: A model is defined in PyTorch, exported and run by ExecuTorch, and CPU compute is delegated to XNNPACK as the backend.")
 
 **PyTorch to ExecuTorch export**: Models are defined using standard PyTorch APIs and exported to a .pte (Portable ExecuTorch Executable) format. During export, backend delegation is specified, in this case XNNPACK, indicating which operators should be executed by the backend at runtime.
 
