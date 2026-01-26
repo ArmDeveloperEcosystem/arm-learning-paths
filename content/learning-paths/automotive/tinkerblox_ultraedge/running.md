@@ -13,7 +13,7 @@ To practice the commands below, install and run a sample microservice on your de
 
 https://github.com/Tinkerbloxsupport/arm-learning-path-support/blob/main/static/Sample_ms/dte_nn.mpac
 
-### Tinkerblox CLI Usage Guide
+### Tinkerblox CLI usage guide
 
 Tinkerblox Command Line Interface for managing the Edge Agent and
 microservices.
@@ -35,7 +35,7 @@ microservices.
 
 ### Usage
 
-#### Check CLI Connection Status
+#### Check CLI connection status
 
 ```bash
     sudo tinkerblox-cli status
@@ -43,7 +43,7 @@ microservices.
 
 *Displays whether the CLI is connected to the Edge Agent.*
 
-#### Microservice Management
+#### Microservice management
 
 Manage microservices running on the Edge platform.
 
@@ -51,7 +51,7 @@ Manage microservices running on the Edge platform.
 
         sudo tinkerblox-cli microboost <command> [options]
 
-##### Available Commands
+##### Available commands
 
 * **install**
     Installs a microservice. You must provide the path to the MPAC file as an argument.
@@ -83,7 +83,7 @@ Manage microservices running on the Edge platform.
 
         sudo tinkerblox-cli microboost uninstall <id>
 
-#### Diagnostics Management
+#### Diagnostics management
 
 Run diagnostics on the Edge platform.
 
@@ -115,21 +115,21 @@ Run diagnostics on the Edge platform.
 
  The following sections describe common errors you may encounter while running CLI commands or deploying microservices, along with guidance on how to resolve them. These are general errors and are not limited to any specific scenario; they may occur while executing commands or managing the system.
 
-**Permission Denied**
+Permission denied
 
 -   Ensure `sudo` privileges.
 -   Check directory ownership and permissions.
 -   Verify overlay filesystem support.
 
-**Directory Creation Failed**
+Directory creation failed
 
 -   Check disk space.
 -   Verify parent directory permissions.
 -   Ensure the path is valid.
 
-**Cross-Architecture Build Issues**
+Cross-architecture build issues
 
-Cross-architecture issues typically occur when binaries are built for a different CPU architecture than the host system.They are not related to yocto build issue. 
+Cross-architecture issues typically occur when binaries are built for a different CPU architecture than the host system. They are not related to yocto build issues. 
 
 -   Verify QEMU installation:
 

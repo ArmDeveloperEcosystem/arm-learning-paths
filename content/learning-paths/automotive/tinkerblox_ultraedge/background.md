@@ -22,7 +22,7 @@ Together, these systems deliver up to **30× faster startup times** and **3.8× 
 
 This learning path introduces the architecture, principles, and components that make UltraEdge a high-performance execution fabric for modern edge infrastructure. 
 
-### Ultraedge Overview
+### Ultraedge overview
 
 UltraEdge was built with the vision of **orchestrating the edge-native execution fabric for high-performance compute infrastructure**
 
@@ -60,7 +60,7 @@ Provides control-plane visibility, diagnostics, and telemetry for operational in
 
 Demonstrable reduction in CPU/GPU cluster costs through faster startup, higher utilization, and reduced runtime overhead. 
 
-### UltraEdge High-Level Architecture
+### UltraEdge high-level architecture
 
 UltraEdge is composed of layered systems, each responsible for a distinct aspect of execution and orchestration:
 
@@ -68,32 +68,32 @@ UltraEdge is composed of layered systems, each responsible for a distinct aspect
 
 ---
 
-#### 1. UltraEdge Core Layer
+#### UltraEdge Core Layer
 *Manages the foundational execution fabric, including:*
 * Compute infrastructure management
 * Service orchestration and lifecycle management
 * Rule-engine orchestration
 * Data-flow management across workloads
 
-#### 2. UltraEdge Boost Layer
+#### UltraEdge Boost Layer
 *Provides performance-critical acceleration, including:*
 * Low-level optimized routines
 * FFI (Foreign Function Interface) integrations
 * Dynamic connectors and southbound protocol adapters
 
-#### 3. UltraEdge Prime Layer
+#### UltraEdge Prime Layer
 *Implements workload intelligence and orchestration logic, including:*
 * Business logic execution
 * Trigger and activation sequences
 * AI and mixed workload coordination
 
-#### 4. UltraEdge Dock
+#### UltraEdge Dock
 *Provides workload and cluster orchestration through:*
 * Kubernetes-based stacks
 * Slurm-based scheduling environments
 
-#### 5. UltraEdge Edge-Cloud Connect Layer
+#### UltraEdge Edge-Cloud Connect Layer
 *Enables data movement and observability, including:*
-* Data streaming to databases (e.g., InfluxDB, SQLite)
+* Data streaming to databases (for example, InfluxDB, SQLite)
 * Diagnostics, logging, and telemetry outputs
 

@@ -6,7 +6,7 @@ weight: 4
 layout: "learningpathall"
 ---
 
-# System Requirements
+## System requirements
 
 {{% notice Note %}}
 The requirements below are given as additional information only. The GCP C4A VM instance, running Ubuntu 22.04 with 100GB disk space, will work fine for this learning path.
@@ -42,10 +42,9 @@ As of this learning path's publication, Ubuntu 24.04 LTS is NOT a supported Yoct
 Yocto builds are **very** resource-intensive and may take several hours depending on hardware and memory capacities
 {{% /notice %}}
 
-# Yocto Build Instructions for NXP S32G-VNP-GLDBOX3
+## Yocto build instructions for NXP S32G-VNP-GLDBOX3
 
-In this section, we use the **NXP S32G-VNP-GLDBOX3** hardware platform, using the **BSP 38.0** release from NXP’s
-`auto_yocto_bsp` repository, to run EdgeBlox Agent. The following steps demonstrate how to build a Yocto-based Linux image for this board and prepare it for EdgeBlox deployment.
+This section uses the **NXP S32G-VNP-GLDBOX3** hardware platform with the **BSP 38.0** release from NXP's `auto_yocto_bsp` repository to run EdgeBlox Agent. The following steps demonstrate how to build a Yocto-based Linux image for this board and prepare it for EdgeBlox deployment.
 
 - **NXP Auto Linux BSP Repository (BSP 38.0):**  
   https://github.com/nxp-auto-linux/auto_yocto_bsp/tree/release/bsp38.0
@@ -57,9 +56,9 @@ In this section, we use the **NXP S32G-VNP-GLDBOX3** hardware platform, using th
 
 Please reach out to the Tinkerblox support team to request access to the meta-edgeblox zip file that contains the replacement layer for your Yocto image: **techsupport@tinkerblox.io**
 
-For sake of example, the file received will be called "meta-edgeblox.zip" and will be used in the next section and via the build script below.
+For this example, the file received will be called "meta-edgeblox.zip" and will be used in the next section and in the build script below.
 
-#### Building the Yocto Image for **NXP S32G-VNP-GLDBOX3**
+### Build the Yocto image for NXP S32G-VNP-GLDBOX3
 
 {{% notice Note %}}
 In default installs of Ubuntu for your YOCTO build environment, you will get an error from the above command stating that the `/etc/sudoers` file needs to be updated.  Please follow those instructions as the script needs the additional permissions to fully setup properly. Otherwise, the subsequent `bitbake` commands below will fail. 
@@ -151,7 +150,7 @@ if [ -f ${BASE_CWD}/meta-edgeblox.zip ]; then
     rm -rf ../meta-edgeblox
     unzip -q ${BASE_CWD}/meta-edgeblox.zip
 else
-    echo "ERROR: Unable to find replacement meta-edgeblox.zip layer. Please contact Tinkerblox team via email **techsupport@tinkerblox.io** for the layer"
+    echo "ERROR: Unable to find replacement meta-edgeblox.zip layer. Please contact Tinkerblox team by email **techsupport@tinkerblox.io** for the layer"
     echo "Exiting on ERROR"
     exit 1
 fi
@@ -194,16 +193,16 @@ fi
 exit 0
 ```
 
-Next, using the VM SSH window, select "upload" to upload "kernel.cfg", "meta-edgeblox.zip" and "build.sh" up to your VM instance:
+Next, using the VM SSH window, select "upload" to upload "kernel.cfg", "meta-edgeblox.zip" and "build.sh" to the VM instance:
 
 Invoking SSH file upload:
-![Invoking file upload from the SSH shell alt-text#center](images/gcp-upload.png "Invoking file upload from the SSH shell")
+![Invoking file upload from the SSH shell#center](images/gcp-upload.png "Invoking file upload from the SSH shell")
 
-Selecting files to upload via SSH:
-![Selecting files to upload via SSH shell alt-text#center](images/gcp-upload-files.png "Selecting files to upload")
+Selecting files to upload through SSH:
+![Selecting files to upload through SSH shell#center](images/gcp-upload-files.png "Selecting files to upload")
 
-Uploading of selected files completed:
-![Upload completed! alt-text#center](images/gcp-upload-complete.png "Upload completed!")
+Upload completed:
+![Upload completed#center](images/gcp-upload-complete.png "Upload completed")
 
 Next, within your VM SSH window, type these commands to invoke the build:
 
@@ -225,17 +224,17 @@ cd ./tinkerblox
 
 The build will take around 20-40 minutes to fully complete. 
 
-#### Downloading the built Yocto image for **NXP S32G-VNP-GLDBOX3**
+### Download the built Yocto image for NXP S32G-VNP-GLDBOX3
 
-Once completed, next, the built image is archived up and is then downloaded via the SSH "download" option:
+Once completed, the built image is archived and then downloaded using the SSH "download" option:
 
 The archived image should be downloaded to a local machine with access to the **NXP S32G-VNP-GLDBOX3** and its SD card for the next steps. 
 
-### 7. Flashing the SD Card
+### Flash the SD card
 
 #### Download the build Yocto image from the VM instance
 
-In VM SSH shell, peform the following commands
+In the VM SSH shell, perform the following commands:
 ```bash
 cd $HOME/tinkerblox/fsl-auto-yocto-bsp/build_s32g399ardb3/tmp/deploy/images
 tar czf s32g399ardb3.tar.gz ./s32g399ardb3
@@ -246,11 +245,11 @@ ls -al `pwd`/s32g399ardb3.tar.gz
 
 Next, in the VM SSH, press the "Download" button to download the created file:
 
-Selecting our file to download. Please use the fully qualified path for the file in the previous step and paste it into the download dialog to initiate the download:
-![Selecting file to download alt-text#center](images/gcp-download-file.png "Selecting file to download")
+Select the file to download. Use the fully qualified path for the file in the previous step and paste it into the download dialog to initiate the download:
+![Selecting file to download#center](images/gcp-download-file.png "Selecting file to download")
 
-Download is complete:
-![Download completed alt-text#center](images/gcp-download-complete.png "Download completed!")
+Download completed:
+![Download completed#center](images/gcp-download-complete.png "Download completed")
 
 Back on your local host (where access to the **NXP S32G-VNP-GLDBOX3** SDcard is available for writing), extract the archive:
 
@@ -271,14 +270,14 @@ ls -al fsl-image-base-s32g399ardb3.sdcard
 sudo dd if=fsl-image-base-s32g399ardb3.sdcard of=/dev/sdb bs=1M && sync
 ```
 
-# Activation of Agent on the NXP S32G-VNP-GLDBOX3
+## Activate the agent on the NXP S32G-VNP-GLDBOX3
 
 On the first boot, the agent will automatically generate a file named
 `activation_key.json` at the path:
 
     /opt/tinkerblox/activation_key.json
 
-Log into your **NXP S32G-VNP-GLDBOX3** device via SSH after determing its IP address (i.e. 1.2.3.4 - replace with the IP address of your NXP device):
+Log into your **NXP S32G-VNP-GLDBOX3** device using SSH after determining its IP address (for example, 1.2.3.4 - replace with the IP address of your NXP device):
 
 ```bash
 ssh root@1.2.3.4
@@ -312,7 +311,7 @@ For example, using "1.2.3.4" as the NXP device's IP address, on your local machi
 
         sudo systemctl start tbx-agent.service
 
-#### Manual Running
+#### Manual running
 
 -   Binary path: `/bin/tbx-agent`
 
@@ -329,16 +328,16 @@ For example, using "1.2.3.4" as the NXP device's IP address, on your local machi
   Your browser does not support the video tag.
 </video>
 
-# Installing and running workloads
+## Install and run workloads
 
 This section demonstrates how to deploy and manage a MicroPac-based
 workload on an UltraEdge-enabled device.
 
 This workflow uses the MicroBoost CLI to install, start, stop, and monitor MicroPac-based workloads running on UltraEdge.
 
-### Building the workload using mpac builder
+### Build the workload using mpac builder
 
-We are going to see how to build the .mpac file from a cross-architecture setup using **Micropac Builder**.
+This section demonstrates how to build the .mpac file from a cross-architecture setup using **Micropac Builder**.
 
 -   Verify QEMU installation:
 
@@ -349,7 +348,7 @@ We are going to see how to build the .mpac file from a cross-architecture setup 
         ls /proc/sys/fs/binfmt_misc/
 
 
-Navigate to your project directory and Make sure the micropacfile is placed in your project directory,(refer debian_installation.md for more details).
+Navigate to your project directory and make sure the micropacfile is placed in your project directory (refer to debian_installation.md for more details).
 
 -   Run below command:
 
@@ -370,13 +369,13 @@ systemctl start runit-supervise
 tinkerblox-cli microboost install -f /path/to/your_service.mpac
 ```
 
-Now by using the microboost List command we can find the id of the service.
+Now use the microboost List command to find the id of the service.
 
 ```
 tinkerblox-cli microboost list
 ```
 
-Copy the id and by using below command we can start,stop and status of the service.
+Copy the id and use the commands below to start, stop, and check the status of the service.
 
 ```
 tinkerblox-cli microboost start <id>
@@ -390,7 +389,7 @@ tinkerblox-cli microboost stop <id>
 tinkerblox-cli microboost status <id>
 ```
 
-To Uninstalls the Workload with the specified ID
+To uninstall the workload with the specified ID:
 
 ```
 tinkerblox-cli microboost uninstall <id>
