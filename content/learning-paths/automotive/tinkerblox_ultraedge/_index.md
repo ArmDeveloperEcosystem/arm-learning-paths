@@ -23,7 +23,7 @@ prerequisites:
   -   Understanding of **container runtimes** (containerd) and **CNI
       networking**.
   -   Basic knowledge of **communication protocols** (MQTT, HTTP, etc.).
-  -   (Optional but helpful) dFamiliarity with **edge-cloud
+  -   (Optional but helpful) Familiarity with **edge-cloud
       architectures** and **data-flow orchestration**.
 
 author: Tinkerblox

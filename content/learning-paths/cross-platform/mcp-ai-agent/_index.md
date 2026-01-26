@@ -34,7 +34,6 @@ operatingsystems:
 ### Cross-platform metadata only
 shared_path: true
 shared_between:
-    - iot
     - embedded-and-microcontrollers
 
 further_reading:

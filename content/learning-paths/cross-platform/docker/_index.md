@@ -36,7 +36,6 @@ shared_between:
     - servers-and-cloud-computing
     - laptops-and-desktops
     - embedded-and-microcontrollers
-    - iot
 
 further_reading:
     - resource:
