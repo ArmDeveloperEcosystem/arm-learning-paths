@@ -4,31 +4,40 @@ weight: 2
 layout: "learningpathall"
 ---
 
-## Goal: Find where your model spends time
+## Goal: Identify Where Your Model Spends Time
 
-This learning path supports the PyTorch blog post ["Accelerating On-Device ML Inference with ExecuTorch and Arm SME2"](https://pytorch.org/blog/placeholder-link) (link to be updated). It provides a hands-on implementation guide to identify optimization opportunities and actionable improvements that enhance model performance and enrich application user experience. 
+This learning path provides a hands-on, reproducible workflow for analyzing ExecuTorch model performance on Arm-based devices and identifying optimization opportunities after enabling SME2 acceleration.
 
-When you enable SME2 acceleration on Arm devices, you get faster models, and something equally valuable: clear visibility into where time is actually spent. Model inference time is usually spent across several categories: matrix compute (linear operations like CONV and GEMM), non-linear operations (elementwise activations, normalization), and data movement (transpose, reshape, layout conversions, memory copies). In most models, matrix compute dominates the latency, making it the primary bottleneck.
+When SME2 acceleration is enabled, inference latency often improves significantly. Just as importantly, faster compute exposes how execution time is distributed across the rest of the model. Model Inference time is typically spent in several broad operator categories:
+   * Matrix compute (for example, convolution and GEMM)
+   * Non-linear operations (elementwise activations, normalization)
+   * Data movement (transpose, reshape, layout conversion, memory copies)
+In many models, matrix compute dominates latency, making it the primary bottleneck.
 
-SME2 accelerates your CONV and GEMM operations (can be 3-15× faster), removing the major compute bottleneck. This reveals that data movement was always there, but hidden behind the compute bottleneck. Now that compute is faster, data movement can become visible as the next frontier for optimization.
+SME2 accelerates CONV and GEMM operations,often by 3–15x,removing the primary compute bottleneck. Once compute is faster, data movement costs become visible and may emerge as the next dominant contributor to latency.
 
-**The insight**: To see this bottleneck shift and identify where to optimize next, you need operator-level performance analysis. End-to-end latency tells you "it's faster," but not *why* or *where* the remaining time is spent. This pipeline reveals the operator-category breakdown (matrix compute, non-linear operations, data movement) that makes the next optimization targets obvious, showing you exactly where to focus for additional speedups.
+Key idea:
+End-to-end latency alone tells you that a model is faster, but not why or where time is still spent. Operator-level profiling reveals how execution time shifts across categories when SME2 is enabled, making it clear which operations should be optimized next.
 
-## 1. What you'll build
+## 1. What You Will Build
 
-An end-to-end, model-agnostic performance analysis pipeline for ExecuTorch models running on Arm-based devices:
+You will construct a model-agnostic performance analysis pipeline for ExecuTorch models running on Arm-based devices:
 
 1. Export any PyTorch model to ExecuTorch `.pte` format
-2. Run the same model with SME2 on and off (apples-to-apples comparison)
+2. Run the same model with SME2 enabled and disabled for an apples-to-apples comparison
 3. Collect ETDump traces with operator-level timing
-4. Analyze results into operator categories (CONV, GEMM, Data Movement, Elementwise, Other)
-5. Discover where bottlenecks actually live, often data movement after SME2 accelerates math
+4. Aggregate operators into high-level categories (CONV, GEMM, Data Movement, Elementwise, Other)
+5. Identify where bottlenecks move after SME2 acceleration
 
-**Key principle**: The pipeline is model-agnostic. Once you have a `.pte` file, the same commands work for any model. Only the model export step is model-specific.
+Key principle: Once you have a .pte file, the same pipeline and commands apply to any model. Only the export step is model-specific.
 
-## 2. Get the code package
+## 2. Get the Code Package
 
-This repo is a Hugo content repo. The performance analysis kit (all runnable code) is hosted in a separate repository: [`sme-executorch-profiling`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling). The kit includes EdgeTAM's image segmentation module as the example model, a more recent video-focused segmentation model, along with the model-agnostic performance analysis pipeline.
+All profiling and analysis steps in this Learning Path are performed using a single, shared code repository. This repository contains the scripts, configuration, and example models used to export ExecuTorch models, run profiling with SME2 enabled and disabled, and analyze the resulting performance data.
+The repository you will use throughout this Learning Path is [sme-executorch-profiling](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling). The repository includes:
+  * Example models (EdgeTAM image segmentation and a video-focused segmentation model)
+  * Predefined ExecuTorch runners
+  * Scripts for profiling, trace collection, and analysis
 
 Clone the performance analysis kit repository:
 
