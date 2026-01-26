@@ -21,7 +21,7 @@ Create Fastpath host with the following specifications:
 2. **Operating system** — *Ubuntu*
 3. **AMI** — *Ubuntu 24.04 LTS (Arm)*
 4. **Architecture** — *64-bit Arm*
-5. **Instance type** — `m6g.12xlarge`
+5. **Instance type** — `m6g.4xlarge`
 6. **Key pair** — *Select or create a key for SSH*
 7. **Security group** — *allow SSH inbound from your IP and cluster peers*
 8. **Storage** — *200 GB gp3*
@@ -34,7 +34,7 @@ Create Fastpath host with the following specifications:
 # Replace the placeholders with values from your account/environment
 aws ec2 run-instances \
   --image-id resolve:ssm:/aws/service/canonical/ubuntu/server/24.04/stable/current/arm64/hvm/ebs-gp3/ami-id \
-  --instance-type m6g.12xlarge \
+  --instance-type m6g.4xlarge \
   --key-name <KEY_PAIR_NAME> \
   --subnet-id <SUBNET_ID> \
   --security-group-ids <SECURITY_GROUP_ID> \
@@ -71,7 +71,6 @@ Parameters:
     AllowedValues:
       - m6g.4xlarge
       - m6g.8xlarge
-      - m6g.12xlarge
     Description: Instance size for the Fastpath host.
   KeyPairName:
     Type: AWS::EC2::KeyPair::KeyName
