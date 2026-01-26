@@ -145,16 +145,6 @@ Called from:
                             {{end}}
                         </td>
                     </tr>
-                {{ if .Params.test_maintenance}}
-                    <tr>
-                        <td class="td-metadata-key">
-                            Test status:
-                        </td>
-                        <td class="td-metadata-value">
-                            {{ partial "test-maintenance/test-maintenance" . }}
-                        </td>
-                    </tr>
-                {{end}}
                 </table>
             </div>
             <!-- RIGHT TABLE, mobile -->
@@ -199,18 +189,6 @@ Called from:
                             {{end}}
                         </td>
                     </tr>
-                {{ if .Params.test_maintenance}}
-                    <tr>
-                        <td class="td-metadata-key width-max-content">
-                            Test status:
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td-metadata-value">
-                            {{ partial "test-maintenance/test-maintenance" . }}
-                        </td>
-                    </tr>
-                {{end}}
                 </table>
             </div>
         </div>
@@ -470,7 +448,7 @@ Called from:
             </div>
         </div>
         {{if not $is_learning_path}}
-            <p style="margin-top: 24px;">This guide is intended to get you up and running with this tool quickly with the most common settings. For a thorough review of all options, refer to the official documentation.</p>
+            <p style="margin-top: 24px;">This guide shows you how to install and use the tool with the most common configuration. For advanced options and complete reference information, see the official documentation. Some install guides also include optional next steps to help you explore related workflows or integrations.</p>
         {{end}}
     </div>
 </div>

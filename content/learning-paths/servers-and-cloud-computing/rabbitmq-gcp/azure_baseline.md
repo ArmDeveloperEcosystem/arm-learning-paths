@@ -1,17 +1,17 @@
 ---
-title: RabbitMQ Baseline Testing
+title: Validate RabbitMQ on Azure
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Run a Baseline Test With RabbitMQ 
-This section validates a working **RabbitMQ 4.2.0** installation with **Erlang OTP 26** on an **Azure Ubuntu Arm64 VM**.  
+## Run a baseline test with RabbitMQ
+This section shows you how to validate a working RabbitMQ 4.2.0 installation with Erlang OTP 26 on an Azure Ubuntu Arm64 VM.  
 
-All steps are **CLI-only** and suitable for baseline verification.
+All steps use the command line and are suitable for baseline verification.
 
-### Verify RabbitMQ Service Status
+## Verify RabbitMQ service status
 
 ```console
 sudo systemctl status rabbitmq

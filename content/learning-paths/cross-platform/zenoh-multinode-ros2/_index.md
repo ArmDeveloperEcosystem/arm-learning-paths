@@ -37,7 +37,6 @@ operatingsystems:
 ### Cross-platform metadata only
 shared_path: true
 shared_between:
-    - iot
     - automotive
 
 further_reading:

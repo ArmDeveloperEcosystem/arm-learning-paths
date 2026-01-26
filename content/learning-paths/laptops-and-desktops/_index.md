@@ -18,7 +18,7 @@ subjects_filter:
 - Migration to Arm: 30
 - ML: 6
 - Performance and Architecture: 28
-subtitle: Create and migrate apps for power efficient performance
+subtitle: Build native Windows on Arm that are fast and efficient.
 title: Laptops and Desktops
 tools_software_languages_filter:
 - .NET: 13
@@ -29,7 +29,7 @@ tools_software_languages_filter:
 - Arm64EC: 1
 - Assembly: 1
 - Bash: 3
-- C: 10
+- C: 11
 - C#: 6
 - CCA: 1
 - Clang: 13
@@ -37,7 +37,7 @@ tools_software_languages_filter:
 - CPP: 12
 - CSS: 1
 - Daytona: 1
-- Docker: 5
+- Docker: 6
 - FFmpeg: 1
 - GCC: 12
 - Git: 1

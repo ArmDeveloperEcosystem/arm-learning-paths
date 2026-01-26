@@ -1,4 +1,4 @@
-# Result: updated files content/stats/stats_weekly_data.yml content/stats/stats_current_test_info.yml
+# Result: updated file data/stats_weekly_data.yml
 # Will appear in learn.arm.com/stats
 
 name: Stats file weekly update
@@ -57,7 +57,7 @@ jobs:
       # Commit updated files in a new PR
       - name: Commit updated stats files to repository
         run: |
-              git add data/stats_weekly_data.yml data/stats_current_test_info.yml
+              git add data/stats_weekly_data.yml
               # Push and commit only if changes to commit; if not, say so and end.
               git commit -m 'automatic update of stats files' && git push origin main || echo "No changes to commit"
 

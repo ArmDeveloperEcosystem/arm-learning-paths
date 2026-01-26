@@ -69,7 +69,6 @@ jobs:
       - name: Build
         run: |
           hugo --minify
-          cp learn-image-sitemap.xml public/learn-image-sitemap.xml
           bin/pagefind.aarch64 --site "public"
         env:
           HUGO_LLM_API: ${{ secrets.HUGO_LLM_API }}

@@ -10,6 +10,7 @@ layout: learningpathall
 This section walks you through baseline testing to confirm that Helm works correctly on an Arm64-based Kubernetes cluster by validating core workflows such as install, upgrade, and uninstall.
 
 ## Add Helm repository
+
 Add the Bitnami Helm chart repository and update the local index:
 
 ```console
@@ -26,30 +27,31 @@ Update Complete. ⎈Happy Helming!⎈
 ```
 
 ## Install a sample application
-Install a sample NGINX application using a Helm chart:
+
+Install a sample NGINX application to validate that Helm can create releases:
 
 ```console
 helm install nginx bitnami/nginx
 ```
-Deploy a simple test app to validate that Helm can create releases on the cluster.
 
-The output is similar to the following (warnings can be safely ignored as they don't affect functionality):
+The output is similar to:
 ```output
 NAME: nginx
-LAST DEPLOYED: Wed Dec  3 07:34:04 2025
+LAST DEPLOYED: Thu Jan 15 20:13:37 2026
 NAMESPACE: default
 STATUS: deployed
 REVISION: 1
 TEST SUITE: None
 NOTES:
 CHART NAME: nginx
-CHART VERSION: 22.3.3
-APP VERSION: 1.29.3
+CHART VERSION: 22.4.3
+APP VERSION: 1.29.4
 ```
 
 
 ## Validate deployment
-Verify that the Helm release is created:
+
+Verify that Helm created the release:
 
 ```console
 helm list
@@ -60,7 +62,7 @@ Confirm Helm recorded the release and that the deployment exists.
 The output is similar to:
 ```output
 NAME    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION
-nginx   default         1               2025-12-09 21:04:15.944165326 +0000 UTC deployed        nginx-22.3.3    1.29.3 
+nginx   default         1               2026-01-15 20:13:37.325530458 +0000 UTC deployed        nginx-22.4.3    1.29.4     
 ```
 
 Check Kubernetes resources:
@@ -72,19 +74,23 @@ kubectl get svc
 The output is similar to:
 ```output
 NAME                     READY   STATUS    RESTARTS   AGE
-nginx-7b9564dc4b-2ghkw   1/1     Running   0          3m5s
+nginx-6d597599b8-hrn7t   1/1     Running   0          116s
 
-NAME         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE
-kubernetes   ClusterIP      10.96.0.1       <none>        443/TCP                      4m28s
-nginx        LoadBalancer   10.96.216.137   <pending>     80:32708/TCP,443:31052/TCP   3m6s
+NAME         TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)                      AGE
+kubernetes   ClusterIP      10.96.0.1      <none>        443/TCP                      3m33s
+nginx        LoadBalancer   10.96.88.148   <pending>     80:30166/TCP,443:32128/TCP   117s
 ```
-All pods should be in the **Running** state. If pods are in **Pending** state, wait 30-60 seconds for container images to download, then retry the commands above. 
+
+All pods should be in **Running** state. If pods show **Pending**, wait 30 to 60 seconds for container images to download and retry. 
 
 
 ## Validate Helm lifecycle
+
 Confirm that Helm supports the full application lifecycle on Arm64.
 
 ### Upgrade the release
+
+Update the existing release to a new revision:
 
 ```console
 helm upgrade nginx bitnami/nginx
@@ -97,7 +103,8 @@ Release "nginx" has been upgraded. Happy Helming!
 ```
 
 ### Uninstall the release
-Ensure Helm can cleanly remove the release and associated resources.
+
+Remove the release and associated resources:
 
 ```console
 helm uninstall nginx

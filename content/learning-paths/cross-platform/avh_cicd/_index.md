@@ -29,7 +29,6 @@ tools_software_languages:
 shared_path: true
 shared_between:
     - embedded-and-microcontrollers
-    - iot
 
 further_reading:
     - resource:
