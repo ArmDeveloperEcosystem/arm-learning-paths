@@ -3,7 +3,7 @@ title: Deploy Django on Google Cloud C4A (Arm-based Axion VMs)
     
 minutes_to_complete: 30
 
-who_is_this_for: This Learning Path is designed for DevOps engineers and software developers who want to deploy, operate, and benchmark a production-grade Django REST API on Google Kubernetes Engine (GKE) running on Arm64 Axion processors, integrated with managed Google Cloud data services.
+who_is_this_for: This is an introductory topic for DevOps engineers and software developers who want to deploy, operate, and benchmark a production-grade Django REST API on Google Kubernetes Engine (GKE) running on Arm64 Axion processors, integrated with managed Google Cloud data services.
 
 learning_objectives:
   - Provision an Arm-based SUSE Linux Enterprise Server (SLES) virtual machine on Google Cloud (C4A with Axion processors)
