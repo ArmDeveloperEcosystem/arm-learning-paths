@@ -6,7 +6,7 @@ layout: "learningpathall"
 
 ## Set up your workspace and build ExecuTorch runners
 
-This section covers the one-time setup required to run the performance analysis pipeline. Once completed, this setup can be reused for all models you analyze. The pipeline is model-agnostic: after exporting a model to `.pte` format, the same runners, scripts, and analysis steps apply regardless of model architecture. Only the model export step is model-specific.
+This section covers the one-time setup required to run the performance analysis pipeline. Once completed, you can reuse this setup for all the models you analyze. The pipeline is model-agnostic: after exporting a model to `.pte` format, the same runners, scripts, and analysis steps apply regardless of model architecture. Only the model export step is model-specific.
 
 You will complete two tasks. First, set up the development environment and install ExecuTorch from source. Second, build ExecuTorch runner binaries (SME2 on and SME2 off).
 
@@ -27,7 +27,7 @@ The profiling scripts expect a consistent directory layout. The structure below 
 │   │   └── runs/          # run outputs for this model (etdump, metrics, reports)
 │   ├── tools/          # analysis tools (ETDump conversion, operator categorization)
 │   └── pipeline/        # pipeline internals
-├── executorch/       # ExecuTorch checkout (created during setup; name cannot be changed, CMake requires it)
+├── executorch/       # ExecuTorch checkout (created during setup; name can't be changed, CMake requires it)
 │   └── cmake-out/      # CMake build outputs (created after building runners)
 │       ├── android-arm64-v9a/executor_runner       # Android SME2-on runner (for mobile device testing, if built)
 │       ├── android-arm64-v9a-sme2-off/executor_runner  # Android SME2-off runner (for mobile device testing, if built)
@@ -36,12 +36,13 @@ The profiling scripts expect a consistent directory layout. The structure below 
 └── .venv/            # Python virtual environment
 ```
 
-Why this layout matters: 
-  - The executorch/ directory must be named exactly executorch/. ExecuTorch's CMake configuration uses hardcoded relative paths and fails if this directory is renamed.
-  - The executorch/cmake-out/ directory keeps runner binaries associated with a specific ExecuTorch checkout. This makes it easy to correlate profiling results with the ExecuTorch version used.
-  - Keeping model outputs under out_<model>/ ensures exported artifacts and profiling results remain grouped by model, simplifying comparison and reproducibility.
+The directory structure is designed for reliability and reproducibility:
 
-This layout also allows multiple ExecuTorch versions to be tested in parallel by maintaining separate workspaces.
+- **executorch/ must be named exactly `executorch/`** - ExecuTorch's CMake configuration uses hardcoded relative paths. Renaming this directory breaks the build.
+- **executorch/cmake-out/ links runners to their ExecuTorch version** - This makes it easy to correlate profiling results with the specific ExecuTorch checkout used to build the runners.
+- **out_<model>/ groups artifacts by model** - Keeping exported models and profiling results together simplifies comparison and ensures reproducibility.
+
+This layout also supports testing multiple ExecuTorch versions in parallel by maintaining separate workspaces.
 
 ## Set up the environment
 
@@ -55,8 +56,9 @@ The script creates and activates a Python virtual environment under .venv/, clon
 
 Editable installation ensures that changes to the ExecuTorch source tree (for example, switching branches or testing pull requests) are immediately reflected without reinstalling the package. This is essential when testing how new ExecuTorch changes affect model export and performance analysis.
 
-**Optional: Manual setup** 
-If you prefer to perform the setup step by step, the equivalent commands are shown below.
+**Optional: Manual setup**
+
+If you prefer to set up the environment manually, use these commands:
 
 ```bash
 python3 -m venv .venv
@@ -114,7 +116,7 @@ macOS runners are included to make the workflow accessible without requiring a m
 
 **Why runners are built once**: The runners are model-agnostic. They can execute any `.pte` file, so you build them once and reuse them for all models you analyze. You only need to rebuild if you change CMake build configurations (for example, enabling XNNPACK kernel trace logging for kernel-level analysis).
 
-**Version compatibility**: Model export and runner builds must use the same ExecuTorch version. A .pte file exported with one ExecuTorch revision may not be compatible with a runner built from another revision. Keeping runners under `executorch/cmake-out/` ensures this relationship remains explicit.
+**Version compatibility**: Model export and runner builds must use the same ExecuTorch version. A .pte file exported with one ExecuTorch revision might not be compatible with a runner built from another revision. Keeping runners under `executorch/cmake-out/` ensures this relationship remains explicit.
 
 **The two-run workflow**: You need two types of runners for complete performance analysis. Timing-only runners (default) have no trace logging overhead and provide accurate latency measurements. XNNPACK kernel trace runners enable `xnntrace` logging for kernel-level insights (logging impacts timing, use only for kernel analysis).
 
@@ -189,13 +191,13 @@ Each experiment is defined in a JSON configuration file. These configs specify:
   * Which .pte model to execute
   * Runtime parameters such as CPU thread count and warmup iterations
   * Logging level: Timing-only mode vs full ETDump trace mode (trace mode impacts timing, use for kernel-level insights)
-  * Analysis comparisons: Which experiment pairs to compare (e.g., SME2-on vs SME2-off)
+  * Analysis comparisons: Which experiment pairs to compare (for example, SME2-on vs SME2-off)
 
 This approach enables repeatable, systematic performance analysis across multiple configurations without modifying pipeline code.
 
 ### Pipeline scripts
 
-The following scripts execute the pipeline::
+The following scripts execute the pipeline:
 - [`model_profiling/scripts/android_pipeline.py`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/scripts/android_pipeline.py) - Android performance analysis pipeline
 - [`model_profiling/scripts/mac_pipeline.py`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/scripts/mac_pipeline.py) - macOS performance analysis pipeline 
 
@@ -207,14 +209,19 @@ Manual invocation is only required if you want to reprocess existing traces.
 This script generates operator-level breakdowns, category-level summaries, and comparison reports. It parses structured data (ETDump, CSV, JSON) produced by the runners, regardless of which model generated them.
 
 ### Output structure
+All profiling runs follow a consistent output layout under `out_<model>/runs/<platform>/<experiment_name>/`:
 
-All profiling runs follow a consistent output layout `out_<model>/runs/<platform>/<experiment_name>/`:
+- `etdump.etdp` - Binary trace file with execution timing
+- `etdump.json` - Human-readable trace (converted from .etdp)
+- `executor_runner.log` - Runner console output
+- `operator_stats.csv` - Per-operator timing breakdown
+- `category_stats.csv` - Category-level aggregation
+- `comparison_report.txt` - Side-by-side experiment comparison (when applicable)
 
-This consistent structure makes it easy to:
-- Compare results across models
-- Track experiment history
-- Generate reports from structured outputs
+This structure makes it easy to compare results across models, track experiment history, and generate reports from structured outputs.
 
-At this point, you have a working ExecuTorch development environment, SME2-enabled and SME2-disabled runner binaries and reusable, model-agnostic profiling pipeline.
+## What you've accomplished and what's next
 
-In the next section, you will export a model, define experiments, and analyze how SME2 changes its performance profile.
+You've completed the one-time setup: a working ExecuTorch development environment, SME2-enabled and SME2-disabled runner binaries, and a reusable, model-agnostic profiling pipeline. This setup applies to any model you analyze going forward.
+
+Next, you'll export a model, define experiments, and analyze how SME2 changes its performance profile.

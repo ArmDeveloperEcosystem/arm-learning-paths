@@ -7,9 +7,9 @@ who_is_this_for: This is an advanced topic for developers and performance engine
 
 learning_objectives:
   - Understand how SME2 acceleration changes the performance profile of ExecuTorch models by reducing compute-bound bottlenecks
-  - Learn how to interpret operator-level and operator-category breakdowns (for example, convolution, GEMM, data movement, and other operators)
+  - Interpret operator-level and operator-category breakdowns (for example, convolution, GEMM, data movement, and other operators)
   - Identify which operators benefit most from SME2 acceleration and which operators become the new performance bottlenecks
-  - Apply a model-agnostic profiling workflow that can be reused across different models and deployments
+  - Apply a model-agnostic profiling workflow that you reuse across different models and deployments
   - Make evidence-based optimization decisions by comparing execution profiles with SME2 enabled and disabled
 
 prerequisites:

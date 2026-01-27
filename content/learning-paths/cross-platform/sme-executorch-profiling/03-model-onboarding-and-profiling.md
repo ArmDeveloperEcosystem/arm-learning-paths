@@ -14,9 +14,7 @@ For a concrete example of model onboarding, see [EfficientSAM](https://github.co
 
 Model onboarding prepares the model for export and accurate profiling. Typical steps include defining or wrapping a PyTorch model so it is exportable (implements `EagerModelBase` interface), defining representative example inputs (shapes/dtypes that match your use case), refactoring model code to avoid unsupported operations or dynamic control flow (if needed), and choosing export dtype and quantization.
 
-{{% notice Note %}}
-`executor_runner` can use default all-one input tensors if no input is provided, but for accurate performance analysis you should define representative inputs that match your actual use case. The export step uses these example inputs to capture the model graph with correct shapes and dtypes.
-{{% /notice %}}
+{{% notice Note %}}`executor_runner` can use default all-one input tensors if no input is provided, but for accurate performance analysis you should define representative inputs that match your actual use case. The export step uses these example inputs to capture the model graph with correct shapes and dtypes.{{% /notice %}}
 
 **Export dtype and quantization options:**
   - Floating-point: FP16/FP32 (no quantization)
@@ -117,7 +115,7 @@ JSON configs are version-controlled and reproducible, and they let you run batch
 
 The pipeline supports both Android (representative device testing) and macOS (developer accessibility). The same pipeline scripts are used; only runner binaries and environment differ.
 
-### 6.1 Run on Android (for real-world edge ML performance on mobile devices)
+### Run on Android (for real-world edge ML performance on mobile devices)
 
 For testing on real Arm edge mobile devices, Android runs are essential. This is the only way to validate performance on actual hardware with real thermal constraints, memory bandwidth, and device-specific optimizations.
 
@@ -157,7 +155,7 @@ adb shell settings get global low_power
 adb shell dumpsys power | grep -i "stay.*awake\|thermal"
 ```
 
-{{% notice  Note%}}
+{{% notice Note %}}
 Unconstrained boost mode (value 15) removes all CPU frequency caps and scaling policies for stress testing hardware. App developer mode (value 1) reflects normal device usage and perceived app performance for real user daily experience. Choose based on your measurement goals and keep settings consistent across all runs.
 {{% /notice %}}
 
@@ -169,7 +167,7 @@ python model_profiling/scripts/analyze_results.py --run-dir model_profiling/out_
 ```
 The pipeline uses adb to push and execute runners on-device, pulls ETDump traces back to the host, and runs automatic analysis.
 
-The generated output should be similar to:
+The output is similar to:
 
 ```output
 out_<model>/runs/android/
@@ -187,7 +185,7 @@ The workflow: Same pipeline, different platform. The config points to Android ru
 
 Expected outcome: You'll see similar operator-category breakdowns, but with real device timing. Often, data movement bottlenecks are more pronounced on real hardware due to memory bandwidth constraints.
 
-For kernel-level insights on Android, run again with trace-enabled runners (separate config pointing to trace-enabled runner builds). Note: Trace logging impacts timing, so these runs are only for kernel analysis, not latency measurement.
+For kernel-level insights on Android, run again with trace-enabled runners (separate config pointing to trace-enabled runner builds). Trace logging impacts timing, so these runs are only for kernel analysis, not latency measurement.
 
 ```bash
 # Use a separate config that points to trace-enabled Android runners
@@ -195,7 +193,7 @@ For kernel-level insights on Android, run again with trace-enabled runners (sepa
 python model_profiling/scripts/android_pipeline.py --config model_profiling/configs/examples/android_mobilenet_fp16.json
 ```
 
-### 6.2 Run on macOS (developer accessibility)
+### Run on macOS (developer accessibility)
 
 For development and initial testing, run on macOS. This is fast and convenient, but not representative of real device performance.
 
@@ -217,7 +215,7 @@ python model_profiling/scripts/validate_results.py --results model_profiling/out
 ```
 Validation checks for JSON files, but they're not required for analysis. The analysis script works directly with ETDump files.
 
-After a run, the following files are generated:
+After a run, the output is similar to:
 
 ```output
 out_<model>/runs/mac/
@@ -233,6 +231,11 @@ out_<model>/runs/mac/
 
 The `.etdump` files are the primary data source. End-to-end latency numbers and operator-level breakdowns are derived from them. The JSON files (`manifest.json`, `metrics.json`) are optional metadata/logs for reproducibility and convenience, but analysis scripts work directly with ETDump.
 
+## What you've accomplished and what's next
+
+You've now completed the full profiling workflow: exporting a model to .pte format, running timing and trace experiments on both platforms, and collecting ETDump traces. You're ready to analyze the results and understand where SME2 delivers performance gains.
+
+Next, you'll analyze operator-level performance and identify optimization opportunities.
 
 ## Analyze operator-level performance with ETDump
 
@@ -257,14 +260,14 @@ After SME2 accelerates CONV/GEMM, you'll see data movement become a larger perce
 
 ## Optimize models based on profiling results
 
-Before SME2: CONV/GEMM dominate timing (e.g., 60-80% of total time)
+Before SME2: CONV/GEMM dominate timing (for example, 60-80% of total time)
 
 Typical outcome after SME2: 
-  - CONV/GEMM shrink (e.g., 20-30% of total time)
-  - Data Movement grows (e.g., 40-60% of total time)
+  - CONV/GEMM shrink (for example, 20-30% of total time)
+  - Data Movement grows (for example, 40-60% of total time)
   - Overall latency decreases (the speedup)
 
 If data movement dominates after SME2, focus optimizations on transpose elimination to reduce layout changes, layout optimization to choose layouts that minimize copies, and memory access patterns to reduce cache misses.
 
-Use trace-enabled runs to confirm which kernel variants were selected (e.g., SME2-enabled kernels vs NEON). Remember trace-enabled runs are evidence-gathering only and should not be used for direct latency comparisons.
+Use trace-enabled runs to confirm which kernel variants were selected (for example, SME2-enabled kernels vs NEON). Remember: trace-enabled runs are evidence-gathering only and shouldn't be used for direct latency comparisons.
 
