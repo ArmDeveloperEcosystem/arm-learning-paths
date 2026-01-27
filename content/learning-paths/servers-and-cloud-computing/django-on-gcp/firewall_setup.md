@@ -50,6 +50,8 @@ Configure the protocol and port settings:
 
 ![Screenshot of the Protocols and ports section. The TCP checkbox is checked and port 8000 is entered in the Ports field#center](images/network-port.png "Specifying TCP port 8000")
 
-## Summary and what's next
+## What you've accomplished and what's next
 
-Your firewall rule is now created and active. Your Django application running on port 8000 is now accessible from external IP addresses.
+In this section, you configured firewall rules to allow external HTTP traffic on port 8000, making your Django application accessible from the internet.
+
+Next, you'll provision a Google Axion C4A Arm VM to host your Django application.

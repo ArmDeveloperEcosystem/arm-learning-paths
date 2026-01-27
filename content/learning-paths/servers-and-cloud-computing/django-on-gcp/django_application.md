@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Django REST API with PostgreSQL and Redis
 
-This guide walks you through building a production-ready Django REST API that connects to PostgreSQL for data and Redis for caching. You will create a backend that is cloud-deployable and compatible with containerized Kubernetes environments.
+This guide walks you through building a production-ready Django REST API that connects to PostgreSQL for data and Redis for caching.
 
 ### Create Django project
 
@@ -21,14 +21,14 @@ source venv/bin/activate
 sudo zypper install postgresql-devel libpq5 postgresql15-server-devel gcc make python3-devel
 ```
 
-Also, please run:
+Install the required Python packages:
 
 ```bash
 which pg_config
-pip install psycopg2-binary django djangorestframework psycopg2-binary django-redis gunicorn
+pip install psycopg2-binary django djangorestframework django-redis gunicorn
 ```
 
-Finally, run:
+Create the Django project structure:
 
 ```bash
 django-admin startproject django_api .
@@ -39,7 +39,7 @@ The Django project structure is ready with all required libraries for database, 
 
 ### Enable Django apps
 
-Django must be told which components are active. Enable the REST framework and the API app so that Django can expose HTTP endpoints. Edit `django_api/settings.py` and add 'rest_framework' and 'api' to INSTALLED_APPS. Set DEBUG to False. Finally add '*' to ALLOWED_HOSTS. 
+Enable the REST framework and API app by editing `django_api/settings.py`. Add 'rest_framework' and 'api' to INSTALLED_APPS, set DEBUG to False, and add '*' to ALLOWED_HOSTS: 
 
 ```python
 DEBUG = False
@@ -79,7 +79,7 @@ DATABASES = {
 }
 ```
 
-Edit the above addition and set "CLOUDSQL_IP" to the actual IP address that you saved from earlier. 
+Replace `CLOUDSQL_IP` with the actual Cloud SQL IP address you saved earlier. 
 
 Additionally, add the CACHES configuration per below to the same file and save:
 

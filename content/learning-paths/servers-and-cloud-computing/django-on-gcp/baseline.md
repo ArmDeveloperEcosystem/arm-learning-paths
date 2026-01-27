@@ -98,7 +98,7 @@ Replace `<YOUR_VM_EXTERNAL_IP>` with the public IP address of your GCP VM.
 
 You should see the Django welcome page with the message "The install worked successfully!":
 
-![Screenshot of the Django welcome page displayed in a web browser. The page features a large heading stating The install worked successfully followed by a subheading congratulating the user on successfully installing Django. Below are instructions for the next steps, including editing the settings file and reading the Django documentation. The page has a clean white background with blue highlights#center](images/django-welcome-page.png "Django welcome page")
+![Screenshot of the Django welcome page displayed in a web browser. The page features a large heading stating The install worked successfully followed by a subheading congratulating the user on successfully installing Django. Below are instructions for the next steps, including editing the settings file and reading the Django documentation. The page has a clean white background with blue highlights alt-txt#center](images/django-welcome-page.png "Django welcome page")
 
 ## Build a simple Django app with custom routing
 
@@ -220,10 +220,15 @@ Open your browser and navigate to:
 http://<YOUR_VM_EXTERNAL_IP>:8000
 ```
 
-You should now see your custom message displayed:
+Your browser displays your custom message:
 
-![Screenshot of a web browser displaying a Django app with a large heading that reads Hello, Django on Arm centered on a clean white background. The page contains no additional content or navigation, creating a straightforward and welcoming tone#center](images/django-app.png "Django custom app")
+![Screenshot of a web browser displaying a Django app with a large heading that reads Hello, Django on Arm, centered on a clean white background alt-txt#center](images/django-app.png "Django custom app")
 
-## Summary and what's next
+## What you've accomplished and what's next
 
-You've successfully verified that Django is installed and working on your Arm-based VM. Your application can serve web requests, handle routing, and render custom views.
+In this section, you:
+- Created a Django project and ran the development server
+- Built a custom Django app with routing and views
+- Verified that Django serves web requests successfully on your Arm VM
+
+Next, you'll set up the complete GKE infrastructure with Cloud SQL and Memorystore for production deployment.

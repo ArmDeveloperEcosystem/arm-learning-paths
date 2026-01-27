@@ -44,14 +44,9 @@ This installs Django and Gunicorn. Gunicorn is a high-performance WSGI HTTP serv
 
 ## Run Django with Gunicorn
 
-Your Django application runs with Gunicorn inside GKE:
+Your Django application runs with Gunicorn inside GKE. Gunicorn is deployed inside your Kubernetes Pods and exposed through a Kubernetes Service and LoadBalancer. The benchmark is executed against the external IP of the GKE service.
 
-Gunicorn is deployed inside your Kubernetes Pods and exposed through a Kubernetes Service and LoadBalancer.
-The benchmark is executed against the **external IP of the GKE service**.
-
-{{% notice Note %}}
-Ensure your VM's firewall allows inbound traffic on port 8000. See the firewall setup section if you haven't already configured this.
-{{% /notice %}}
+{{% notice note %}}Ensure your GKE cluster and LoadBalancer are properly configured. If you haven't set up the cluster yet, refer to the previous sections for GKE deployment and service configuration. {{% /notice %}}
 
 ## Run the benchmark
 
@@ -104,23 +99,28 @@ Percentage of the requests served within a certain time (ms)
 ```
 ## Interpret your benchmark results
 
-The ApacheBench output provides key performance metrics that help you evaluate your Django application's capabilities on Google Axion (Arm64) GKE. Here's what each metric tells you:
+The ApacheBench output provides key performance metrics for evaluating your Django application on Google Axion (Arm64) GKE:
+
 ### Request handling metrics
+
 - Concurrency Level: number of simultaneous requests the benchmark sent (100 in this test)
 - Complete Requests: total successful requests processed (5000 in this test)
 - Failed Requests: number of errors or timeouts (0, indicating stable production-grade performance)
 
 ### Performance metrics
-- Requests per Second: how many requests your server handles per second — higher values indicate better throughput (14,001.88 req/sec)
+
+- Requests per Second: how many requests your server handles per second; higher values indicate better throughput (14,001.88 req/sec)
 - Time per Request (mean): average time to complete a single request (7.142 ms)
 - Time per Request (across concurrent): average latency when factoring in concurrent processing (0.071 ms), showing excellent parallel execution on Axion Arm cores
 
 ### Data transfer metrics
+
 - Total Transferred: all data sent and received, including HTTP headers (1,650,000 bytes)
 - HTML Transferred: actual response payload size (75,000 bytes)
 - Transfer Rate: network throughput in KB/sec (4512.32 KB/sec), indicating efficient networking through GKE LoadBalancer
 
 ### Timing breakdown
+
 - Time Taken for Tests: total benchmark duration (0.357 seconds)
 - Connection Times: shows minimum, mean, median, and maximum times for connecting, processing, and waiting
 
@@ -145,7 +145,7 @@ Results from the run on the `Axion (C4A) Arm64 GKE nodes`:
 | **Failed Requests** | Number of failed requests | 0 |
 | **Total Transferred** | Total bytes transferred (including headers) | 1,650,000 bytes |
 | **HTML Transferred** | Total response body bytes | 75,000 bytes |
-| **Requests per Second (mean)** | Throughput — higher is better | **14,001.88 req/sec** |
+| **Requests per Second (mean)** | Throughput - higher is better | **14,001.88 req/sec** |
 | **Time per Request (mean)** | Average time for each request | **7.142 ms** |
 | **Time per Request (across all concurrent requests)** | Average latency considering concurrency | **0.071 ms** |
 | **Transfer Rate** | Network throughput rate | **4512.32 KB/sec** |

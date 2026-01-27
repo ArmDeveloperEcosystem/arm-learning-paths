@@ -1,5 +1,5 @@
 ---
-title: Containerize and Deploy Django on Axion GKE
+title: Containerize and deploy Django on Axion GKE
 weight: 9
 
 ### FIXED, DO NOT MODIFY
@@ -8,10 +8,10 @@ layout: learningpathall
 
 ## Containerize and deploy Django on Axion GKE
 
-This guide converts your Django REST API into a production-grade Arm64 container and deploys it on Axion-powered Google Kubernetes Engine (GKE). You will validate that the workload runs natively on Arm and is publicly accessible through a cloud Load Balancer.
+This guide converts your Django REST API into a production-grade Arm64 container and deploys it on Axion-powered GKE.
 
 ### Create Docker image
-This step packages your Django API and all its dependencies into a **portable container image** that can run on any Axion Arm64 node.
+This step packages your Django API and all its dependencies into a portable container image that can run on any Axion Arm64 node.
 
 Create a file called `requirements.txt` and insert the following:
 
@@ -106,7 +106,7 @@ Verify pods are running on Axion Arm nodes:
 kubectl get pods -o wide
 ```
 
-Pods must show nodes like:
+The output is similar to:
 ```output
 NAME                          READY   STATUS    RESTARTS   AGE     IP         NODE                                                NOMINATED NODE   READINESS GATES
 django-api-XXXXXX   1/1     Running   0          3h52m   10.0.2.9   gke-django-axion-cluster-axion-pool-xxxxxxx   <none>           <none>
@@ -161,20 +161,19 @@ Open the following URL in browser:
 http://<EXTERNAL-IP>/healthz/
 ```
 
-You should see output similar to the following:
+The output is similar to:
 
 ![Screenshot showing Django health check endpoint returning a JSON response with status ok, indicating successful deployment and validation of the Django application running on GKE alt-txt#center](images/django_framework.png "Django health check validation")
 
 The Arm-based Django API is now accessible over the internet.
 
 ## What you've accomplished and what's next
-You have deployed a fully cloud-native, Arm-optimized application:
 
-- Django REST API
-- Running on Axion Arm64
-- Exposed through Google Cloud LoadBalancer
-- Backed by Cloud SQL PostgreSQL
-- Accelerated by Memorystore Redis
-- Delivered through Artifact Registry
+In this section, you:
+- Containerized your Django REST API for Arm64
+- Pushed the image to Artifact Registry
+- Deployed the application to GKE running on Axion nodes
+- Exposed the service through a Kubernetes LoadBalancer
+- Validated public access to your Django API
 
-This is a real production architecture running on Arm in GCP.
+Next, you'll benchmark your Django application to measure performance on Arm infrastructure.

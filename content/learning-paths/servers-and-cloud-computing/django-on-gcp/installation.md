@@ -105,7 +105,7 @@ source venv/bin/activate
 
 The `python3.11 -m venv venv` command creates an isolated Python environment named `venv` inside your project folder. Running `source venv/bin/activate` activates this environment.
 
-Once activated, your command prompt displays `(venv)` at the beginning, indicating you're working inside an isolated Python environment where all packages are isolated from your system Python installation.
+Once activated, your command prompt displays `(venv)` at the beginning, indicating that you're working inside an isolated Python environment.
 
 ## Upgrade pip and install Django
 
@@ -122,8 +122,8 @@ python3 -m pip install django gunicorn
 ```
 
 This installs:
-- **Django** — the web framework for building your application
-- **Gunicorn** — a production-ready WSGI (Web Server Gateway Interface) server for running Django applications
+- **Django** - the web framework for building your application
+- **Gunicorn** - a production-ready WSGI (Web Server Gateway Interface) server for running Django applications
 
 Verify that Django is installed correctly:
 
@@ -137,6 +137,11 @@ The output is similar to:
 5.2.10
 ```
 
-## Summary and what's next
+## What you've accomplished and what's next
 
-You have successfully installed the Google Cloud CLI, Python 3.11, Django, and Gunicorn on your Arm-based VM. Your environment is now fully prepared to build, containerize, and deploy a Django REST API on GKE with Cloud SQL and Memorystore.
+In this section, you installed:
+- Google Cloud CLI for GCP service management
+- Python 3.11 with a virtual environment
+- Django and Gunicorn for web application development
+
+Next, you'll verify Django is working by creating a basic project and running the development server.

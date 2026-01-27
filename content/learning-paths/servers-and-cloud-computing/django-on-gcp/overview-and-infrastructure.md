@@ -1,5 +1,5 @@
 ---
-title: Deploy Django on GKE Axion (Arm) with managed data services
+title: Deploy Django on GKE Axion with managed data services
 weight: 7
 
 ### FIXED, DO NOT MODIFY
@@ -48,7 +48,7 @@ sudo SUSEConnect -p sle-module-containers/15.5/arm64
 sudo SUSEConnect --list-extensions | grep Containers
 ```
 
-Verify that the output shows the Containers module as **Activated**. 
+The output shows the Containers module as Activated. 
 
 ## Install Docker
 
@@ -62,7 +62,9 @@ sudo usermod -aG docker $USER
 exit
 ```
 
-Exit the current shell and reconnect to the virtual machine so that the group membership change takes effect. Then verify that Docker is running:
+Exit the current shell and reconnect to the virtual machine so that the group membership change takes effect.
+
+Verify that Docker is running:
 
 ```bash
 docker ps
@@ -74,7 +76,7 @@ The output is similar to:
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 ```
 
-## Install kubectl (Kubernetes CLI)
+### Install kubectl (Kubernetes CLI)
 
 Install the kubectl command-line tool for interacting with Kubernetes clusters:
 
@@ -84,7 +86,7 @@ chmod +x kubectl
 sudo mv kubectl /usr/local/bin/
 ```
 
-## Verify kubectl
+## Verify kubectl installation
 
 Confirm that kubectl is installed and accessible from the command line:
 
@@ -98,9 +100,9 @@ Client Version: v1.30.1
 Kustomize Version: v5.0.4-0.20230601165947-6ce0bf390ce3
 ```
 
-### Get the list of Google project IDs
+## Configure Google Cloud project
 
-Retrieve the list of project IDs:
+Retrieve your project ID:
 
 ```bash
 gcloud projects list
@@ -178,21 +180,21 @@ Confirm Kubernetes access:
 kubectl get nodes
 ```
 
-You should see an output similar to:
+The output is similar to:
 ```output
 NAME                                                  STATUS   ROLES    AGE   VERSION
 gke-django-axion-cluster-default-pool-156e91c3-wdsb   Ready    <none>   34m   v1.33.5-gke.2072000
 ```
 
-All nodes should be in **Ready** state and the Kubernetes control plane should be accessible.
+All nodes are in Ready state and the Kubernetes control plane is accessible.
 
 ### Taint the cluster nodes for arm64 support
 
 Taint the nodes to ensure proper scheduling on arm64 VMs. For each node starting with **gke**, run the following taint command. 
 
 {{% notice Note %}}
-Note the required "-" at the end... its needed!
-{{% /notice %}}
+Note the required "-" at the end.
+{{% /notice %}}  
 
 For example using the node IDs in the output above: 
 

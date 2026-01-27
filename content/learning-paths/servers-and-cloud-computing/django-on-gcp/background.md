@@ -12,10 +12,10 @@ Google Axion C4A is a family of Arm-based virtual machines built on Google’s c
 
 The C4A series provides a cost-effective alternative to x86 virtual machines while leveraging the scalability and performance benefits of the Arm architecture in Google Cloud.
 
-To learn more about Google Axion, see the [Introducing Google Axion Processors, our new Arm-based CPUs](https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu) blog.
+To learn more, see the Google blog [Introducing Google Axion Processors, our new Arm-based CPUs](https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu).
 
 
-## Understand Django on Google Axion C4A (Arm Neoverse-V2)
+## Explore Django on Google Axion C4A (Arm Neoverse V2)
 
 Django is a high-level, open-source Python web framework that encourages rapid development and clean, pragmatic design. Developed and maintained by the [Django Software Foundation](https://www.djangoproject.com/foundation/), it simplifies web application development by handling much of the boilerplate and providing powerful built-in features.
 
@@ -27,10 +27,13 @@ Common use cases include web applications, content management systems, APIs, e-c
 
 To learn more, visit the [Django website](https://www.djangoproject.com/) and explore the [Django documentation](https://docs.djangoproject.com/en/stable/).
 
-## Summary and what's next
+## What you've accomplished and what's next
 
-You now understand the capabilities of Google Axion C4A Arm-based VMs and why Django is an excellent choice for building web applications on Arm infrastructure. The combination provides a cost-effective, high-performance platform for deploying Python web applications at scale.
+In this section, you learned about:
+- Google Axion C4A Arm-based VMs and their performance characteristics
+- Django web framework and its suitability for building REST APIs
+- How Arm architecture provides cost-effective, high-performance infrastructure for Python applications
 
-In the next sections, you'll provision your own Arm-based VM on Google Cloud, install Django, and benchmark your application's performance.
+Next, you'll configure firewall rules to allow external access to your Django application.
 
 
