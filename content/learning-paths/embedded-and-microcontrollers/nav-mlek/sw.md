@@ -138,7 +138,8 @@ Heard no (145) @13600ms
 
 The Open-IoT-SDK includes a number of ML applications and demonstrates concepts such as how to integrate Arm Trusted Firmware for Cortex-M with an ML application. 
 
-Refer to [Build and run Open-IoT-SDK examples](/learning-paths/iot/iot-sdk/) to learn how to use the SDK.
+Refer to [Build and run Open-IoT-SDK examples](/learning-paths/embedded-and-microcontrollers/iot-sdk/) to learn how to use the SDK.
+
 
 ### TVM example
 
