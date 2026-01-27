@@ -114,6 +114,16 @@ The agent doesn't need to guess which commands to run or how to verify success. 
 
 ## What you've accomplished
 
-This Learning Path showed you how to analyze ExecuTorch performance on Arm using SME2, operator-level profiling, and agent-driven automation. Specifically, You learned how to use agent skills to automate profiling workflows, run skills in the correct order for setup and ongoing usage, and integrate agent skills with AI coding assistants for repeatable optimization.
+In this section you learned how to use agent skills to automate profiling workflows, run skills in the correct order for setup and ongoing usage, and integrate agent skills with AI coding assistants for repeatable optimization. 
+
+This Learning Path as a whole has shown you how to analyze ExecuTorch performance on Arm using SME2, operator-level profiling, and agent-driven automation.
+
+You are now ready to:
+- Profile your own models using the structured workflows
+- Integrate agent skills into CI pipelines for automated performance regression testing
+- Extend the toolkit for custom model architectures or operator categories
+- Compare SME2-on versus SME2-off performance across different workloads
+
+For additional guidance on extending this toolkit or integrating with production workflows, see the [project repository](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling) and the agent skill catalog.
 
 
