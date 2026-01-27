@@ -13,7 +13,7 @@ This guide converts your Django REST API into a production-grade Arm64 container
 ### Create Docker image
 This step packages your Django API and all its dependencies into a **portable container image** that can run on any Axion Arm64 node.
 
-Create a file called: `requirements.txt` and insert the following:
+Create a file called `requirements.txt` and insert the following:
 
 ```text
 django
@@ -33,9 +33,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 CMD ["gunicorn","django_api.wsgi:application","--bind","0.0.0.0:8000","--workers","3"]
 ```
 
-You now have a container blueprint that can run Django in production using Gunicorn on Arm64.
+This Dockerfile defines how to build your Django container for production deployment.
 
-### Build and push
+### Build and push the image
 
 Build the image on an Arm machine and push it to Artifact Registry, ensuring Kubernetes pulls an Arm-native image.
 
@@ -53,7 +53,7 @@ Push the built image:
 docker push us-central1-docker.pkg.dev/PROJECT_ID/django-arm/api:1.0
 ```
 
-Your Django API is now stored in Google’s private container registry and ready for GKE.
+The image is now stored in Artifact Registry and ready for deployment.
 
 ### Deploy to GKE
 
@@ -112,9 +112,10 @@ NAME                          READY   STATUS    RESTARTS   AGE     IP         NO
 django-api-XXXXXX   1/1     Running   0          3h52m   10.0.2.9   gke-django-axion-cluster-axion-pool-xxxxxxx   <none>           <none>
 django-api-XXXXXX   1/1     Running   0          3h52m   10.0.1.9   gke-django-axion-cluster-axion-pool-xxxxxxx   <none>           <none>
 ```
-Your Django API is now running as replicated containers on Axion Arm64 nodes.
 
-### Create Kubernetes service (LoadBalancer)
+The Django API is running as replicated containers on Axion Arm64 nodes.
+
+### Create a Kubernetes service (LoadBalancer)
 A Service exposes your pods to the internet using **Google Cloud’s managed load balancer**.
 
 Create `k8s/service.yaml`:
@@ -132,7 +133,8 @@ spec:
   - port: 80
     targetPort: 8000
 ```
-Your Django service is now publicly reachable.
+
+Apply the service configuration:
 
 ```bash
 kubectl apply -f k8s/service.yaml
@@ -149,7 +151,7 @@ NAME         TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
 django-api   LoadBalancer   34.118.226.245   34.45.23.92   80:31700/TCP   3h57m
 ```
 
-Wait until the EXTERNAL-IP field is populated. This is needed in the next step.
+Wait until the `EXTERNAL-IP` field is populated before proceeding.
 
 ### Validate public access
 
@@ -161,11 +163,11 @@ http://<EXTERNAL-IP>/healthz/
 
 You should see output similar to the following:
 
-![Screenshot showing Django health check endpoint returning a JSON response with status ok, indicating successful deployment and validation of the Django application running on GKE#center](images/django_framework.png "Django health check validation")
+![Screenshot showing Django health check endpoint returning a JSON response with status ok, indicating successful deployment and validation of the Django application running on GKE alt-txt#center](images/django_framework.png "Django health check validation")
 
-Your Arm-based Django API is live on the internet.
+The Arm-based Django API is now accessible over the internet.
 
-### What you’ve accomplished
+## What you've accomplished and what's next
 You have deployed a fully cloud-native, Arm-optimized application:
 
 - Django REST API

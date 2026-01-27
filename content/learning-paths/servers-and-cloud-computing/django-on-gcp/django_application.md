@@ -34,7 +34,8 @@ Finally, run:
 django-admin startproject django_api .
 django-admin startapp api
 ```
-You now have a Django project skeleton with all required libraries installed for database, cache, and API support.
+
+The Django project structure is ready with all required libraries for database, cache, and API support.
 
 ### Enable Django apps
 
@@ -57,9 +58,9 @@ INSTALLED_APPS = [
 ]
 ```
 
-Your Django project is now configured to run as an API server instead of a development-only web app.
+Django is configured to run as an API server.
 
-Configure PostgreSQL and Redis
+### Configure PostgreSQL and Redis
 
 This step connects Django to external managed services instead of local SQLite. This mirrors how real production systems operate.
 
@@ -91,11 +92,11 @@ CACHES = {
 }
 ```
 
-Edit the above edition and set REDIS_IP to the actual IP address that you saved earlier. 
+Edit the above addition and set `REDIS_IP` to the actual IP address that you saved earlier.
 
-Your application is now wired to a real database and cache, making it production-grade.
+The application is configured to use PostgreSQL and Redis.
 
-### Migrate database
+### Migrate the database
 Django creates tables, metadata, and user models inside PostgreSQL.
 
 ```bash
@@ -103,9 +104,9 @@ python manage.py migrate
 python manage.py createsuperuser
 ```
 
-PostgreSQL instance now contains all Django system tables and is ready to store application data.
+The PostgreSQL instance contains all Django system tables.
 
-### Create health API
+### Create a health API endpoint
 
 A health endpoint allows Kubernetes and load balancers to verify if the service is running.
 
@@ -131,8 +132,7 @@ urlpatterns = [
 ]
 ```
 
-
-You now have a Kubernetes-compatible health endpoint.
+The health endpoint is configured.
 
 ### Validate locally
 Before containerizing or deploying, validate that everything works end-to-end.
@@ -152,15 +152,17 @@ The expected output is:
 ```output
 {"status":"ok"}
 ```
-Your Django API is fully functional with PostgreSQL and Redis connected.
 
-### What you've accomplished
-You now have a cloud-ready Django REST API that:
+The Django API is functional with PostgreSQL and Redis connected.
 
-- Uses PostgreSQL for durable data
+## What you've accomplished and what's next
+
+In this section, you built a cloud-ready Django REST API that:
+
+- Uses PostgreSQL for persistent data storage
 - Uses Redis for caching
-- Exposes a health endpoint for Kubernetes
-- Is ready to be containerized and deployed on GKE Axion (Arm)
+- Exposes a health endpoint for Kubernetes probes
+- Is ready for containerization and deployment on GKE Axion
 
-This is the exact backend you will deploy in the next stage of the learning path.
+Next, you'll containerize this application and deploy it to your Axion-powered GKE cluster.
 

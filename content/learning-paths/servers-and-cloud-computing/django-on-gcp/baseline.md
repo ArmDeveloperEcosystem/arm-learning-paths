@@ -53,13 +53,11 @@ cd ~/myproject/myproject/
 
 Open `settings.py` using a text editor:
 
-  ```bash
-  edit myproject/settings.py
-  ```
-  
-- Locate the ALLOWED_HOSTS line
+```bash
+edit myproject/settings.py
+```
 
-Inside the file, find the following line:
+Locate the `ALLOWED_HOSTS` line inside the file:
 
 ```python
 ALLOWED_HOSTS = []
@@ -67,12 +65,11 @@ ALLOWED_HOSTS = []
 
 Update it to allow your VM's external IP address:
 
-- Allow all hosts (for testing only)
-
 To make your Django app accessible from your VM's external IP address, update it to:
-  ```python
-  ALLOWED_HOSTS = ['*']
-  ```
+
+```python
+ALLOWED_HOSTS = ['*']
+```
 {{% notice Note %}}
 For development and testing only, you can use `ALLOWED_HOSTS = ['*']` to allow all hosts. However, for production deployments, always specify explicit domain names or IP addresses such as `ALLOWED_HOSTS = ['your-external-ip', 'your-domain.com']`.
 {{% /notice %}}

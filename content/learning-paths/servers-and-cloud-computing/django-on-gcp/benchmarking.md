@@ -30,7 +30,7 @@ ab -V
 
 The output displays the ApacheBench version.
 
-### Install and configure Gunicorn
+## Install and configure Gunicorn
 
 Before benchmarking your Django application, you need to install Gunicorn, a production-grade WSGI HTTP server. Gunicorn provides better performance characteristics than Django's development server and more accurately represents real-world deployment scenarios.
 
@@ -39,10 +39,12 @@ Before benchmarking your Django application, you need to install Gunicorn, a pro
 ```bash
 python3 -m pip install django gunicorn
 ```
-This command installs two essential packages. Django is the Python web framework you're benchmarking, while Gunicorn serves as a high-performance WSGI HTTP server that handles multiple concurrent requests efficiently. Unlike Django's built-in development server, Gunicorn is designed for production workloads and provides the multi-worker architecture needed for accurate performance testing.
 
-### Run Django with Gunicorn
-Start your Django application using Gunicorn (already running inside GKE):
+This installs Django and Gunicorn. Gunicorn is a high-performance WSGI HTTP server that handles multiple concurrent requests efficiently. Unlike Django's built-in development server, Gunicorn is designed for production workloads and provides the multi-worker architecture needed for accurate performance testing.
+
+## Run Django with Gunicorn
+
+Your Django application runs with Gunicorn inside GKE:
 
 Gunicorn is deployed inside your Kubernetes Pods and exposed through a Kubernetes Service and LoadBalancer.
 The benchmark is executed against the **external IP of the GKE service**.
@@ -51,7 +53,7 @@ The benchmark is executed against the **external IP of the GKE service**.
 Ensure your VM's firewall allows inbound traffic on port 8000. See the firewall setup section if you haven't already configured this.
 {{% /notice %}}
 
-### Run the benchmark
+## Run the benchmark
 
 Use ApacheBench to test your Django server with simulated traffic:
 

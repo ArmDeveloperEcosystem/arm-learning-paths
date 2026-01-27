@@ -1,20 +1,20 @@
 ---
-title: Deploy Django on GKE Axion (Arm) with Managed Data Services
+title: Deploy Django on GKE Axion (Arm) with managed data services
 weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Overview
-This guide deploys a **container-native Django REST API** on **Google Kubernetes Engine (GKE)** running on **Axion (ARM64)** nodes.
+## Deploy Django REST API on GKE Axion with Cloud SQL and Redis
+This guide deploys a container-native Django REST API on Google Kubernetes Engine (GKE) running on Axion (ARM64) nodes.
 
 The application integrates with:
 
-- **Cloud SQL (PostgreSQL – private IP)**
-- **Memorystore (Redis)**
-- **Artifact Registry**
-- **Kubernetes LoadBalancer**
+- Cloud SQL (PostgreSQL – private IP)
+- Memorystore (Redis)
+- Artifact Registry
+- Kubernetes LoadBalancer
 
 Performance is validated using **throughput** and **p95 latency**, allowing you to evaluate how an Arm-based Kubernetes platform behaves under real application load.
 
@@ -33,9 +33,14 @@ GKE (Axion Arm64)
 |
 |---> Memorystore (Redis)
 ```
+
 This architecture represents a production-grade microservice deployment where compute runs on Arm, while data services are provided through fully managed GCP offerings over private networking.
 
-## Enable the SUSE Containers module
+## Set up the infrastructure
+
+The following sections guide you through provisioning all required GCP services.
+
+### Enable the SUSE Containers module
 
 Enable the SUSE Containers Module to ensure that Docker and container-related tools are fully supported.
 ```bash
@@ -139,9 +144,10 @@ gcloud artifacts repositories create django-arm \
 sudo chmod 777 /etc/containers
 gcloud auth configure-docker us-central1-docker.pkg.dev
 ```
-You now have a secure, private Docker registry ready to store Arm-based application images for GKE.
 
-### Create GKE control plane
+Artifact Registry is configured to store your container images.
+
+### Create the GKE control plane
 
 Create the Kubernetes control plane that manages scheduling, networking, and workloads. Initially create it with a small node pool so the cluster can bootstrap.
 
@@ -151,9 +157,9 @@ gcloud container clusters create django-axion-cluster \
   --machine-type c4a-standard-4 \
   --num-nodes 1 \
   --enable-ip-alias
-  ```
+```
 
-You now have a running GKE cluster ready to accept custom node pools and workloads.
+The GKE cluster is running.
 
 ### Configure kubectl access to GKE
 
@@ -216,9 +222,10 @@ gcloud container node-pools delete default-pool \
   --cluster django-axion-cluster \
   --zone us-central1-a
 ```
-Your Kubernetes cluster now runs **exclusively on Axion Arm64 nodes**, ensuring native Arm execution.
 
-### Create Cloud SQL (PostgreSQL – private IP)
+The Kubernetes cluster runs exclusively on Axion Arm64 nodes.
+
+### Create Cloud SQL (PostgreSQL with private IP)
 
 Cloud SQL provides a fully managed PostgreSQL database. Private IP ensures traffic stays inside Google's private network, improving security and performance.
 
@@ -262,9 +269,7 @@ gcloud sql instances describe django-postgres \
   --format="value(ipAddresses[0].ipAddress)"
 ```
 
-Save this value as **CLOUDSQL_IP**.
-
-You now have a private, production-grade PostgreSQL database that can be securely accessed from GKE.
+Save this IP address as **CLOUDSQL_IP** for later use.
 
 ### Create Memorystore (Redis)
 Redis is used for caching, sessions, and background job coordination. Memorystore provides a fully managed Redis service that scales and stays highly available.
@@ -279,17 +284,17 @@ gcloud redis instances describe django-redis \
   --region=us-central1 \
   --format="value(host)"
 ```
-Save this value as **REDIS_IP**.
 
-You now have a **managed Redis cache** available to your Django application over private networking.
+Save this IP address as **REDIS_IP** for later use.
 
-### What you've accomplished
-You have created:
+## What you've accomplished and what's next
 
-- An Axion-based GKE cluster
-- Private PostgreSQL
-- Redis Memorystore
-- Artifact Registry
+In this section, you created the complete infrastructure for your Django deployment:
 
-In the next stage, you will package Django into an **Arm-native container**, push it to Artifact Registry, and deploy it onto this platform.
+- Axion-based GKE cluster with Arm64 node pools
+- Private Cloud SQL PostgreSQL instance
+- Memorystore Redis instance
+- Artifact Registry for container images
+
+Next, you'll build a Django REST API that connects to these services, then containerize and deploy it to your Axion GKE cluster.
 

@@ -38,18 +38,20 @@ To create a virtual machine based on the C4A instance type:
 ## Create the instance
 
 Click **Create** to launch your VM instance. Google Cloud provisions the instance, which typically takes one to two minutes.
-Once the instance is running, you'll see it listed in the VM instances table with a green checkmark. Note the External IP address displayed in the list—you'll need this to access your Django application later.
+Once the instance is running, you'll see it listed in the VM instances table with a green checkmark. Note the External IP address displayed in the list; you'll need this to access your Django application later.
 
 ## Connect using SSH
 
 Click the **SSH** button next to your running instance to open a browser-based terminal session.
 
-![Screenshot of the VM instances list showing the SSH button next to a running instance. The external IP address is visible in the same row#center](images/gcp-pubip-ssh.png "Launching an SSH session from the VM instances list")
+![Screenshot of the VM instances list showing the SSH button next to a running instance. The external IP address is visible in the same row alt-txt#center](images/gcp-pubip-ssh.png "Launching an SSH session from the VM instances list")
 
 A browser window opens with a terminal shell connected to your VM. You're now ready to install Django.
 
-![Screenshot of a terminal shell in the browser, connected to the running VM instance. The shell displays a command prompt ready for input#center](images/gcp-shell.png "Terminal shell connected to your VM")
+![Screenshot of a terminal shell in the browser, connected to the running VM instance. The shell displays a command prompt ready for input alt-txt#center](images/gcp-shell.png "Terminal shell connected to your VM")
 
-## Summary and what's next
+## What you've accomplished and what's next
 
-You have successfully provisioned an Arm-based VM on Google Cloud. Next, you'll install Django and configure your web application.
+In this section, you provisioned a Google Axion C4A Arm VM and connected to it using SSH.
+
+Next, you'll install Django and the required dependencies on your VM.
