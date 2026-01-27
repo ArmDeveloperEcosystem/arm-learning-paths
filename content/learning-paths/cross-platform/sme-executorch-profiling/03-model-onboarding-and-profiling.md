@@ -1,23 +1,22 @@
 ---
-title: "Model onboarding + performance analysis: export, run, analyze"
+title: "Export PyTorch models and analyze performance"
 weight: 4
 layout: "learningpathall"
 ---
 
-## Goal: Onboard a model and analyze its performance
+## Onboard a model and analyze its performance
 
-This sections walks you through the end-to-end workflow you will repeat for each model: onboarding and export to .pte, running the two-run performance analysis (timing-only and trace-enabled), and analyzing operator-level results. Model-specific work usually appears during onboarding and export; after you produce a .pte file the pipeline is model-agnostic.
+This section walks you through the end-to-end workflow you repeat for each model: onboarding and export to .pte, running the two-run performance analysis (timing-only and trace-enabled), and analyzing operator-level results. Model-specific work usually appears during onboarding and export; after you produce a .pte file, the pipeline is model-agnostic.
 
-## 1. Model onboarding: what you need to do per model
+## Prepare your model for onboarding
 
 For a concrete example of model onboarding, see [EfficientSAM](https://github.com/pytorch/executorch/tree/main/examples/models/efficient_sam) in `executorch/examples/models/`, which demonstrates the full onboarding process including input/output handling, quantization, and backend delegation.
 
-Model onboarding prepares the model for export and accurate profiling. Typical steps include:
+Model onboarding prepares the model for export and accurate profiling. Typical steps include defining or wrapping a PyTorch model so it is exportable (implements `EagerModelBase` interface), defining representative example inputs (shapes/dtypes that match your use case), refactoring model code to avoid unsupported operations or dynamic control flow (if needed), and choosing export dtype and quantization.
 
-- Define or wrap a PyTorch model so it is exportable (implements `EagerModelBase` interface)
-- Define representative example inputs (shapes/dtypes that match your use case). Note: `executor_runner` can use default all-one input tensors if no input is provided, but for accurate performance analysis you should define representative inputs that match your actual use case. The export step uses these example inputs to capture the model graph with correct shapes and dtypes.
-- Refactor model code to avoid unsupported ops or dynamic control flow (if needed)
-- Choose export dtype and quantization:
+{{% notice Note %}}`executor_runner` can use default all-one input tensors if no input is provided, but for accurate performance analysis you should define representative inputs that match your actual use case. The export step uses these example inputs to capture the model graph with correct shapes and dtypes.{{% /notice %}}
+
+**Export dtype and quantization options:**
   - Floating-point: FP16/FP32 (no quantization)
   - Quantization: INT8 with various quantization schemes:
     - Static quantization: Requires calibration data; weights and activations are quantized at export time
@@ -28,7 +27,7 @@ Model onboarding prepares the model for export and accurate profiling. Typical s
 
 Real onboarding work often requires small wrapper layers (normalization/scaling), operator substitutions, and shape stabilization. 
 
-## 2. Registering new models
+## Register models in the profiling pipeline
 
 To add a new model to the performance analysis workflow:
 
@@ -50,7 +49,7 @@ Advanced onboarding example: The EdgeTAM image encoder (see agent skill [`08_onb
 - Shape constraint handling
 - Export-friendly refactoring patterns
 
-## 3. Export a model
+## Export models to PTE format
 
 Exporting a model to `.pte` format is model-specific work. This code repository used for this learning path includes a reference exporter at [`model_profiling/export/export_model.py`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/export/export_model.py) that demonstrates the export process.
 
@@ -76,7 +75,7 @@ Expected outputs:
 
 Keep exported artifacts under out_<model>/artifacts/ to separate model binaries from source and enable clean versioning.
 
-## 4. The two-run workflow: timing vs trace
+## Configure timing and trace profiling runs
 
 For complete analysis you must run two experiment types:
   * Timing-only runs — no kernel trace logging; use these for accurate latency comparisons (SME2 on vs SME2 off).
@@ -84,7 +83,7 @@ For complete analysis you must run two experiment types:
 
 Run timing-only for latency measurement, and run trace-enabled only when you need kernel-level details.
 
-## 5. Configure a run (JSON)
+## Configure profiling experiments with JSON
 
 Experiments are defined with JSON configs. Minimal required fields:
 
@@ -112,11 +111,11 @@ Important fields to set:
 
 JSON configs are version-controlled and reproducible, and they let you run batches of experiments with consistent parameters.
 
-## 6. Run the performance analysis pipeline
+## Run profiling on Android and macOS
 
 The pipeline supports both Android (representative device testing) and macOS (developer accessibility). The same pipeline scripts are used; only runner binaries and environment differ.
 
-### 6.1 Run on Android (for real-world edge ML performance on mobile devices)
+### Run on Android (for real-world edge ML performance on mobile devices)
 
 For testing on real Arm edge mobile devices, Android runs are essential. This is the only way to validate performance on actual hardware with real thermal constraints, memory bandwidth, and device-specific optimizations.
 
@@ -135,7 +134,7 @@ adb shell settings put global window_animation_scale 0
 adb shell settings put global transition_animation_scale 0
 adb shell settings put global animator_duration_scale 0
 ```
-These settings disable low power mode, UI animations and foces the device to stay on while plugged.
+These settings disable low power mode and UI animations, and force the device to stay on while plugged.
 
 **Option 2: App developer mode** (for perceived app performance - real user daily experience):
 ```bash
@@ -147,7 +146,7 @@ adb shell settings put global animator_duration_scale 1
 
 adb shell settings put global low_power 0
 ```
-These settings disable low power mode, keep UI animations enabled and uses normal device settings.
+These settings disable low power mode, keep UI animations enabled, and use normal device settings.
 
 **Verify settings**:
 ```bash
@@ -156,7 +155,7 @@ adb shell settings get global low_power
 adb shell dumpsys power | grep -i "stay.*awake\|thermal"
 ```
 
-{{% notice  Note%}}
+{{% notice Note %}}
 Unconstrained boost mode (value 15) removes all CPU frequency caps and scaling policies for stress testing hardware. App developer mode (value 1) reflects normal device usage and perceived app performance for real user daily experience. Choose based on your measurement goals and keep settings consistent across all runs.
 {{% /notice %}}
 
@@ -168,7 +167,7 @@ python model_profiling/scripts/analyze_results.py --run-dir model_profiling/out_
 ```
 The pipeline uses adb to push and execute runners on-device, pulls ETDump traces back to the host, and runs automatic analysis.
 
-The generated output should be similar to:
+The output is similar to:
 
 ```output
 out_<model>/runs/android/
@@ -186,7 +185,7 @@ The workflow: Same pipeline, different platform. The config points to Android ru
 
 Expected outcome: You'll see similar operator-category breakdowns, but with real device timing. Often, data movement bottlenecks are more pronounced on real hardware due to memory bandwidth constraints.
 
-For kernel-level insights on Android, run again with trace-enabled runners (separate config pointing to trace-enabled runner builds). Note: Trace logging impacts timing, so these runs are only for kernel analysis, not latency measurement.
+For kernel-level insights on Android, run again with trace-enabled runners (separate config pointing to trace-enabled runner builds). Trace logging impacts timing, so these runs are only for kernel analysis, not latency measurement.
 
 ```bash
 # Use a separate config that points to trace-enabled Android runners
@@ -194,7 +193,7 @@ For kernel-level insights on Android, run again with trace-enabled runners (sepa
 python model_profiling/scripts/android_pipeline.py --config model_profiling/configs/examples/android_mobilenet_fp16.json
 ```
 
-### 6.2 Run on macOS (developer accessibility)
+### Run on macOS (developer accessibility)
 
 For development and initial testing, run on macOS. This is fast and convenient, but not representative of real device performance.
 
@@ -216,7 +215,7 @@ python model_profiling/scripts/validate_results.py --results model_profiling/out
 ```
 Validation checks for JSON files, but they're not required for analysis. The analysis script works directly with ETDump files.
 
-After a run you will typically find the following files generated:
+After a run, the output is similar to:
 
 ```output
 out_<model>/runs/mac/
@@ -232,21 +231,24 @@ out_<model>/runs/mac/
 
 The `.etdump` files are the primary data source. End-to-end latency numbers and operator-level breakdowns are derived from them. The JSON files (`manifest.json`, `metrics.json`) are optional metadata/logs for reproducibility and convenience, but analysis scripts work directly with ETDump.
 
+## What you've accomplished and what's next
 
-## 7. Analyze ETDump (operator categories + kernel hints)
+You've now completed the full profiling workflow: exporting a model to .pte format, running timing and trace experiments on both platforms, and collecting ETDump traces. You're ready to analyze the results and understand where SME2 delivers performance gains.
 
-The pipeline runs `analyze_results.py` automatically after measurement. To re-run analysis manually:
+Next, you'll analyze operator-level performance and identify optimization opportunities.
+
+## Analyze operator-level performance with ETDump
+
+The pipeline runs `analyze_results.py` automatically after measurement. To rerun analysis manually:
 
 ```bash
 python model_profiling/scripts/analyze_results.py \
   --run-dir model_profiling/out_toy_cnn/runs/mac
 ```
 
-Analysis outputs:
-  - `model_profiling/out_toy_cnn/runs/mac/analysis_summary.json` (operator-category breakdown)
-  - CSV files in the same directory as ETDump files (if not already generated by pipeline)
+The analysis generates `model_profiling/out_toy_cnn/runs/mac/analysis_summary.json` (operator-category breakdown) and CSV files in the same directory as ETDump files (if not already generated by pipeline).
 
-Category explanations typically used in the analysis::
+**Operator categories:**
 
 - Convolution: Time spent in Conv2d operations (should decrease with SME2)
 - GEMM: Time spent in Linear/MatMul operations (should decrease with SME2)
@@ -256,20 +258,16 @@ Category explanations typically used in the analysis::
 
 After SME2 accelerates CONV/GEMM, you'll see data movement become a larger percentage of total time. This is expected, as SME2 reveals the next bottleneck. The visualization makes it obvious where to optimize next.
 
-## 8. Interpreting results and next actions
+## Optimize models based on profiling results
 
-Before SME2: CONV/GEMM dominate timing (e.g., 60-80% of total time)
+Before SME2: CONV/GEMM dominate timing (for example, 60-80% of total time)
 
 Typical outcome after SME2: 
-  - CONV/GEMM shrink (e.g., 20-30% of total time)
-  - Data Movement grows (e.g., 40-60% of total time)
+  - CONV/GEMM shrink (for example, 20-30% of total time)
+  - Data Movement grows (for example, 40-60% of total time)
   - Overall latency decreases (the speedup)
 
-If data movement dominates after SME2, focus optimizations on:
+If data movement dominates after SME2, focus optimizations on transpose elimination to reduce layout changes, layout optimization to choose layouts that minimize copies, and memory access patterns to reduce cache misses.
 
-- Transpose elimination (reduce layout changes)
-- Layout optimization (choose layouts that minimize copies)
-- Memory access patterns (reduce cache misses)
-
-Use trace-enabled runs to confirm which kernel variants were selected (e.g., SME2-enabled kernels vs NEON). Remember trace-enabled runs are evidence-gathering only and should not be used for direct latency comparisons.
+Use trace-enabled runs to confirm which kernel variants were selected (for example, SME2-enabled kernels vs NEON). Remember: trace-enabled runs are evidence-gathering only and shouldn't be used for direct latency comparisons.
 
