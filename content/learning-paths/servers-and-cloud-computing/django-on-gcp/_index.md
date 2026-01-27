@@ -3,13 +3,19 @@ title: Deploy Django on Google Cloud C4A (Arm-based Axion VMs)
     
 minutes_to_complete: 30
 
-who_is_this_for: This Learning Path is for software developers deploying and optimizing Django-based web applications on Arm64 Linux environments, specifically using Google Cloud C4A virtual machines powered by Axion processors.
+who_is_this_for: This Learning Path is designed for DevOps engineers and software developers who want to deploy, operate, and benchmark a production-grade Django REST API on Google Kubernetes Engine (GKE) running on Arm64 Axion processors, integrated with managed Google Cloud data services.
 
 learning_objectives:
   - Provision an Arm-based SUSE Linux Enterprise Server (SLES) virtual machine on Google Cloud (C4A with Axion processors)
-  - Install Django on a SUSE Arm64 (C4A) instance
-  - Verify Django functionality by running the development server and accessing the default welcome page on the Arm64 VM  
-  - Measure Django application performance by benchmarking request handling throughput and latency using the official ApacheBench (ab) tool with Gunicorn on Arm64 (aarch64)
+  - Provision Google Axion (Arm64) compute using GKE node pools
+  - Package a Django REST API into an Arm-native Docker container
+  - Push container images to Google Artifact Registry
+  - Deploy Django on GKE using Kubernetes manifests (Deployment, Service, ConfigMap, Secrets)
+  - Integrate Django with Cloud SQL (PostgreSQL) over private IP
+  - Integrate Django with Memorystore (Redis) for caching and sessions
+  - Expose Django using a Kubernetes LoadBalancer
+  - Validate application connectivity to PostgreSQL and Redis
+  - Measure throughput and p95 latency using ApacheBench against Gunicorn on Arm
 
 prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled  
@@ -27,9 +33,11 @@ armips:
 
 tools_software_languages:
   - Django
-  - Python
-  - Gunicorn
-  - Apache Bench
+  - Docker
+  - Kubernetes
+  - Google Artifact Registry
+  - Cloud SQL (PostgreSQL)
+  - Memorystore (Redis)
 
 operatingsystems:
   - Linux
@@ -47,9 +55,18 @@ further_reading:
       title: Django documentation
       link: https://docs.djangoproject.com/
       type: documentation
+  - resource:
+      title: Cloud SQL for PostgreSQL
+      link: https://cloud.google.com/sql/docs/postgres
+      type: documentation
 
   - resource:
-      title: Apache-bench documentation
+      title: Memorystore for Redis
+      link: https://cloud.google.com/memorystore/docs/redis
+      type: documentation
+
+  - resource:
+      title: Apache Bench documentation
       link: https://httpd.apache.org/docs/2.4/programs/ab.html 
       type: documentation
 
