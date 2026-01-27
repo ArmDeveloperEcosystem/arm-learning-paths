@@ -7,7 +7,7 @@ const CLIENT_ID       = "20ede7b2-aeb1-43d4-81f9-fc1b7fbfca5e";
 // Change these in CI/CD pipeline depending on target environment
 const TENANT_DOMAIN   = "armb2ctest.onmicrosoft.com";
 const TENANT_ID       = "f15a8617-9b4e-41dd-8614-adea42784599";
-const B2C_DOMAIN      = "qa.account.arm.com";
+const B2C_DOMAIN      = "account.arm.com";
 
 const REDIRECT_URI    = window.location.origin + "/";
 //const REDIRECT_URI    = "http://localhost/";
