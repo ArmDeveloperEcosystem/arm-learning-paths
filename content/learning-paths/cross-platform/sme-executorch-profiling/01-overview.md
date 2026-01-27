@@ -32,7 +32,7 @@ Once you have a .pte file, the same pipeline and commands apply to any model. On
 
 All profiling and analysis steps in this Learning Path use a single, shared code repository. This repository contains the scripts, configuration, and example models for exporting ExecuTorch models, running profiling with SME2 enabled and disabled, and analyzing the resulting performance data.
 
-You will use the [sme-executorch-profiling repository](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling) throughout this Learning Path. The repository includes example models (EdgeTAM image segmentation and a video-focused segmentation model), predefined ExecuTorch runners, and scripts for profiling, trace collection, and analysis.
+You will use the [sme-executorch-profiling repository](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling) throughout this Learning Path. The repository includes an example model (small convolutional neural network designed for testing and validation purposes), predefined ExecuTorch runners, and scripts for profiling, trace collection, and analysis.
 
 Clone the performance analysis kit repository:
 
