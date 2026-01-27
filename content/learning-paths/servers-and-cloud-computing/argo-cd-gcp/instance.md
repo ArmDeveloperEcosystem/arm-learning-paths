@@ -2,7 +2,6 @@
 title: Create a Google Axion C4A virtual machine on Google Cloud
 weight: 3
 
-### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
@@ -43,4 +42,6 @@ A new browser window opens with a terminal connected to your VM.
 
 ![Browser-based terminal window showing a command prompt on a SUSE Linux VM running on Google Axion C4A alt-txt#center](images/gcp-shell.png "Terminal session connected to the VM")
 
-Next, install Argo CD on your VM.
+## What you've accomplished and what's next
+
+You've successfully provisioned an Arm-based Google Axion C4A VM running SUSE Linux Enterprise Server. In the next section, you'll create a GKE cluster for hosting Argo CD deployments.
