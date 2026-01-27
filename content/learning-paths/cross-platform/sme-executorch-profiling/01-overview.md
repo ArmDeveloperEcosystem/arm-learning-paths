@@ -4,31 +4,40 @@ weight: 2
 layout: "learningpathall"
 ---
 
-## Goal: Find where your model spends time
+## Goal: Identify Where Your Model Spends Time
 
-This learning path supports the PyTorch blog post ["Accelerating On-Device ML Inference with ExecuTorch and Arm SME2"](https://pytorch.org/blog/placeholder-link) (link to be updated). It provides a hands-on implementation guide to identify optimization opportunities and actionable improvements that enhance model performance and enrich application user experience. 
+This learning path provides a hands-on, reproducible workflow for analyzing ExecuTorch model performance on Arm-based devices and identifying optimization opportunities after enabling SME2 acceleration.
 
-When you enable SME2 acceleration on Arm devices, you get faster models, and something equally valuable: clear visibility into where time is actually spent. Model inference time is usually spent across several categories: matrix compute (linear operations like CONV and GEMM), non-linear operations (elementwise activations, normalization), and data movement (transpose, reshape, layout conversions, memory copies). In most models, matrix compute dominates the latency, making it the primary bottleneck.
+When SME2 acceleration is enabled, inference latency often improves significantly. Just as importantly, faster compute exposes how execution time is distributed across the rest of the model. Model Inference time is typically spent in several broad operator categories:
+   * Matrix compute (for example, convolution and GEMM)
+   * Non-linear operations (elementwise activations, normalization)
+   * Data movement (transpose, reshape, layout conversion, memory copies)
+In many models, matrix compute dominates latency, making it the primary bottleneck.
 
-SME2 accelerates your CONV and GEMM operations (can be 3-15× faster), removing the major compute bottleneck. This reveals that data movement was always there, but hidden behind the compute bottleneck. Now that compute is faster, data movement can become visible as the next frontier for optimization.
+SME2 accelerates CONV and GEMM operations,often by 3–15x,removing the primary compute bottleneck. Once compute is faster, data movement costs become visible and may emerge as the next dominant contributor to latency.
 
-**The insight**: To see this bottleneck shift and identify where to optimize next, you need operator-level performance analysis. End-to-end latency tells you "it's faster," but not *why* or *where* the remaining time is spent. This pipeline reveals the operator-category breakdown (matrix compute, non-linear operations, data movement) that makes the next optimization targets obvious, showing you exactly where to focus for additional speedups.
+Key idea:
+End-to-end latency alone tells you that a model is faster, but not why or where time is still spent. Operator-level profiling reveals how execution time shifts across categories when SME2 is enabled, making it clear which operations should be optimized next.
 
-## 1. What you'll build
+## 1. What You Will Build
 
-An end-to-end, model-agnostic performance analysis pipeline for ExecuTorch models running on Arm-based devices:
+You will construct a model-agnostic performance analysis pipeline for ExecuTorch models running on Arm-based devices:
 
 1. Export any PyTorch model to ExecuTorch `.pte` format
-2. Run the same model with SME2 on and off (apples-to-apples comparison)
+2. Run the same model with SME2 enabled and disabled for an apples-to-apples comparison
 3. Collect ETDump traces with operator-level timing
-4. Analyze results into operator categories (CONV, GEMM, Data Movement, Elementwise, Other)
-5. Discover where bottlenecks actually live, often data movement after SME2 accelerates math
+4. Aggregate operators into high-level categories (CONV, GEMM, Data Movement, Elementwise, Other)
+5. Identify where bottlenecks move after SME2 acceleration
 
-**Key principle**: The pipeline is model-agnostic. Once you have a `.pte` file, the same commands work for any model. Only the model export step is model-specific.
+Key principle: Once you have a .pte file, the same pipeline and commands apply to any model. Only the export step is model-specific.
 
-## 2. Get the code package
+## 2. Clone the Code Repository
 
-This repo is a Hugo content repo. The performance analysis kit (all runnable code) is hosted in a separate repository: [`sme-executorch-profiling`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling). The kit includes EdgeTAM's image segmentation module as the example model, a more recent video-focused segmentation model, along with the model-agnostic performance analysis pipeline.
+All profiling and analysis steps in this Learning Path are performed using a single, shared code repository. This repository contains the scripts, configuration, and example models used to export ExecuTorch models, run profiling with SME2 enabled and disabled, and analyze the resulting performance data.
+The repository you will use throughout this Learning Path is [sme-executorch-profiling](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling). The repository includes:
+  * Example models (EdgeTAM image segmentation and a video-focused segmentation model)
+  * Predefined ExecuTorch runners
+  * Scripts for profiling, trace collection, and analysis
 
 Clone the performance analysis kit repository:
 
@@ -39,64 +48,69 @@ git clone https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling.git 
 cd executorch_sme2_kit
 ```
 
-This gives you a self-contained folder with all scripts, configs, and model scaffolding. Your `.venv/`, `executorch/` (with runners in `executorch/cmake-out/`), `models/`, and `runs/` will live alongside the kit.
+This creates a self-contained workspace. Your Python virtual environment, ExecuTorch build outputs, models, and profiling runs will all live under this directory.
 
-## 3. The stack: PyTorch, ExecuTorch, XNNPACK, Arm KleidiAI, and SME2
+## 3. Execution Stack Overview: ExecuTorch, XNNPACK, Arm KleidiAI, and SME2
 
-The performance analysis kit works with a specific execution stack. Before running the pipeline, understanding how these components connect will help you interpret your performance analysis results. The diagram below summarizes the CPU execution stack used in this workflow.
+Before running the pipeline, it helps to understand how the execution stack is composed, since the profiling results reflect behavior across multiple layers. The diagram below summarizes the CPU execution stack used in this workflow.
+![pipeline-execution #center](images/sme2_stack_01062026.png "The execution stack: A model is defined in PyTorch, exported and run by ExecuTorch, and CPU compute is delegated to XNNPACK as the backend.")
 
-<p>
-  <img
-    src="/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/images/sme2_stack_01062026.png"
-    alt="PyTorch → ExecuTorch → XNNPACK → Arm KleidiAI kernels → SME2"
-    class="content-uploaded-image centered"
-    style="max-width: 880px; width: 100%; height: auto;"
-  />
-  <span class="content-image-caption centered">
-    The execution stack: A model is defined in PyTorch, exported and run by ExecuTorch, and CPU compute is delegated to XNNPACK as the backend.
-  </span>
-</p>
+**PyTorch to ExecuTorch export**: Models are defined using standard PyTorch APIs and exported to a .pte (Portable ExecuTorch Executable) format. During export, backend delegation is specified, in this case XNNPACK, indicating which operators should be executed by the backend at runtime.
 
-**PyTorch to ExecuTorch export**: You define your model in PyTorch using standard PyTorch APIs. ExecuTorch's export tools convert this model into a portable `.pte` (Portable ExecuTorch Executable) format that can run on edge devices. During export, you specify backend delegation, in this case XNNPACK, which tells ExecuTorch which operators should be handled by the XNNPACK backend at runtime.
+**ExecuTorch runtime and delegation**: At runtime, ExecuTorch schedules operators and delegates supported operations (such as Conv2d and Linear) to XNNPACK. XNNPACK, in turn, uses Arm KleidiAI kernels, which exploit SME2 acceleration on supported hardware. This delegation is transparent to the model author. 
 
-**ExecuTorch runtime and delegation**: When ExecuTorch executes the `.pte` model, it uses a delegation system to route operators to appropriate backends. Operators like Conv2d and Linear are delegated to XNNPACK, while ExecuTorch handles the model graph execution, tensor management, and operator scheduling. The XNNPACK backend, in turn, uses Arm KleidiAI kernels that leverage SME2 acceleration on supported hardware. This delegation happens transparently, so your model code doesn't need to change.
+**Why operator-level profiling matters**: ExecuTorch's ETDump captures timing for each operator in the execution graph. This makes backend behavior visible, which operators are delegated, which kernels are used, and how much time each operation consumes. Aggregating operators into categories allows you to see where SME2 delivers gains and where non-compute costs dominate.
 
-**Operator-level analysis reveals backend behavior**: ExecuTorch's ETDump performance measurement captures timing for each operator in the execution graph. This gives you visibility into what XNNPACK is doing: which operators are delegated, how long they take, and which kernel implementations are selected (SME2-accelerated vs standard). The analysis categorizes operators into groups (CONV, GEMM, Data Movement, etc.) to show where SME2 acceleration appears and where it doesn't. This operator-level view is essential because it reveals what happens inside the XNNPACK backend. You can see which operations benefit from KleidiAI's SME2 kernels and which remain as data movement bottlenecks.
+## 4. Quickstart: Run the Pipeline
 
-## 4. Quickstart: Run the pipeline
+This learning path supports profiling on both:
+  * Android – representative of real-world edge ML deployment
+  * macOS (Apple Silicon) – convenient for developer learning and experimentation
+    
+The workflow is identical on both platforms; only the runner binaries differ.
 
-This learning path supports performance analysis on both **Android** (for real-world edge ML performance on mobile devices) and **macOS** (included for developer accessibility). The pipeline is identical for both platforms—only the runner binaries and execution environment differ.
+Android runs provide the most representative performance results because they reflect real device constraints such as memory bandwidth, thermal behavior, and platform-specific scheduling. macOS is included to make it easier to learn the workflow and validate the pipeline before running on target devices.
 
-**Platform context**: This learning path demonstrates analyzing ExecuTorch model performance on SME2-enabled devices using Android as the mobile device example. Android runs provide realistic edge ML performance with actual device constraints (memory bandwidth, thermal throttling, device-specific optimizations). macOS is included because most developers have Mac access, making it convenient for learning the workflow and initial testing. For production validation and accurate performance measurements, Android runs on real SME2-enabled devices provide the most representative results.
+The steps below walk through the full workflow end to end: setting up the environment, building ExecuTorch runners, running a profiling pass, and generating analysis artifacts.
 
-Quickstart (macOS for initial testing, or Android if you have an SME2-enabled device):
+Step 1: Set up the environment and ExecuTorch
+This step creates a Python virtual environment, clones and builds ExecuTorch, and installs all required dependencies.
 
 ```bash
-# 1) Create venv + clone/install ExecuTorch (requires network, ~30 min)
 bash model_profiling/scripts/setup_repo.sh
+```
+Step 2: Build SME2-enabled and SME2-disabled runners
+Next, build the ExecuTorch runner binaries used for profiling. Both SME2-enabled and SME2-disabled runners are built so that you can perform a direct comparison later.
+On macOS, the runners are built automatically.
+On Android, this step requires the ANDROID_NDK environment variable to be set and a compatible NDK installed.
 
-# 2) Build SME2-on/off runners (~20 min)
-#    - macOS: Built automatically
-#    - Android: Requires ANDROID_NDK environment variable set
+```bash
 bash model_profiling/scripts/build_runners.sh
-
-# 3) Run the smoke test end-to-end (export → run → validate, ~5 min)
-#    - macOS: Runs locally
-#    - Android: Requires device connected via adb
-python model_profiling/scripts/run_quick_test.py
-
-# 4) View results (analysis is automatic, but you can re-run if needed)
-#    The pipeline automatically generates CSV files and analysis_summary.json
-#    Optional: python model_profiling/scripts/analyze_results.py --run-dir model_profiling/out_toy_cnn/runs/mac
 ```
 
-Scripts: [`setup_repo.sh`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/scripts/setup_repo.sh), [`build_runners.sh`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/scripts/build_runners.sh), [`run_quick_test.py`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/scripts/run_quick_test.py), [`analyze_results.py`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/scripts/analyze_results.py)
+Step 3: Run a smoke test end to end
+This step performs a complete smoke test of the pipeline: exporting a model, running it through ExecuTorch, collecting ETDump traces, and validating that profiling data is generated correctly.
+On macOS, the test runs locally.
+On Android, a compatible device must be connected via adb.
 
-Expected outcome: You'll see a category breakdown showing CONV, GEMM, Data Movement, Elementwise, and Other operations, with timing for SME2-on vs SME2-off. This is the foundation for understanding where bottlenecks live.
+```bash
+python model_profiling/scripts/run_quick_test.py
+```
 
-## 5. What you will produce: Artifacts
+Step 4: Inspect and analyze results
+By default, the pipeline automatically analyzes the collected traces and generates CSV and JSON summaries. You do not need to run analysis manually unless you want to repeat or customize it.
+If needed, you can rerun the analysis script directly and point it at a specific run directory.
+```bash
+python model_profiling/scripts/analyze_results.py --run-dir model_profiling/out_toy_cnn/runs/mac
+```
+After this step completes, you will have operator-level timing data and aggregated operator-category breakdowns for SME2-on and SME2-off runs.
 
-After running the pipeline, you'll have these artifacts:
+## 5. What You Will Produce: Artifacts
+
+Running the pipeline generates a consistent set of artifacts that capture both raw performance data and derived analysis results.
+The most important artifacts are the ETDump trace files, which contain operator-level timing information collected during execution. All higher-level summaries are derived from these traces.
+
+The generated artifacts are listed below:
 
 - Model artifacts
   - `out_<model>/artifacts/<model>_xnnpack_fp16.pte` (runnable ExecuTorch model)
@@ -112,44 +126,25 @@ After running the pipeline, you'll have these artifacts:
 - Analysis artifacts
   - `out_<model>/runs/<platform>/analysis_summary.json` (operator-category breakdown, generated automatically by pipeline)
 
-**Critical insight**: The `.etdump` files are the primary data source. Everything else is derived from them. The JSON files are convenience logs, but analysis scripts work directly with ETDump.
+Although multiple file formats are generated, the .etdump files are the authoritative data source. All analysis scripts operate on these traces.
 
-## 6. Expected results: Case study insights
+## 6. Expected Results: Case Study Insights
 
 After analyzing your artifacts, you'll see two key insights: end-to-end latency improvements and the bottleneck shift. The case study below shows results from SqueezeSAM, an interactive image segmentation model, running on an SME2-enabled Android device. The performance analysis kit includes EdgeTAM's image segmentation module as the example model, which is a more recent video-focused segmentation model that demonstrates advanced model onboarding patterns.
 
 **End-to-end latency**: With SME2 enabled, FP16 inference improves by 3.9× (from 1,163 ms to 298 ms on a single CPU core), making on-device execution viable for interactive use cases. INT8 also sees substantial speedups (1.83×), demonstrating that SME2 accelerates both quantized and floating-point models.
 
+SqueezeSAM on SME2-enabled Android device Results:
+![end-latency #center](images/squeeze_sam_latency_comparison.png "End-to-end latency comparison with SME2 on vs off")
+
 **The bottleneck shift**: After SME2 accelerates CONV and GEMM operations, data movement operations (transpose, reshape, layout conversions) become the dominant cost. This is expected, as SME2 reveals the next optimization frontier. The operator-category breakdown makes it obvious where to focus next.
 
-<div style="display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;">
-  <div style="flex: 1; min-width: 400px;">
-    <img
-      src="/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/images/squeeze_sam_latency_comparison.png"
-      alt="End-to-end latency comparison with SME2 on vs off"
-      class="content-uploaded-image"
-      style="width: 100%; height: auto;"
-    />
-  </div>
-  <div style="flex: 1; min-width: 400px;">
-    <img
-      src="/learning-paths/embedded-and-microcontrollers/sme-executorch-profiling/images/combined_operator_breakdown_stacked.png"
-      alt="Operator-category breakdown showing data movement becoming dominant after SME2"
-      class="content-uploaded-image"
-      style="width: 100%; height: auto;"
-    />
-  </div>
-</div>
-<p style="text-align: center; margin-top: 10px;">
-  <span class="content-image-caption">
-    Case study results (SqueezeSAM on SME2-enabled Android device): Left, end-to-end latency drops dramatically with SME2 (FP16: 3.9× speedup). Right, operator-category breakdown shows CONV/GEMM shrink while data movement becomes the dominant cost after SME2 acceleration.
-  </span>
-</p>
+![end-latency #center](images/combined_operator_breakdown_stacked.png "Operator-category breakdown showing data movement becoming dominant after SME2")
 
-What you'll learn: These visualizations make it obvious where to optimize next. If data movement dominates after SME2, you know to focus on transpose elimination, layout optimization, or memory access patterns.
+The operator-category breakdown shows CONV/GEMM shrink while data movement becomes the dominant cost after SME2 acceleration. It makes it clear where further optimization effort should be focused once compute is no longer the limiting factor.
 
 ## 7. Where to go next
 
-- If you want to set up the environment and build runners (foundation, done once): go to 02 – Setup + pipeline. This page covers environment setup and building the model-agnostic runners.
-- If you want to onboard a model and analyze its performance (workflow, per model): go to 03 – Model onboarding + performance analysis. This page covers model onboarding, export, running the performance analysis pipeline, and analyzing results.
-- If you want to run all of this through an AI coding assistant: go to 04 – Agent skills. This page points to structured, verifiable skills for automation.
+  - Continue to [Setup and pipeline](/learning-paths/cross-platform/sme-executorch-profiling/02-setup-and-pipeline) to understand the environment setup and runner build process in more detail.
+  - Continue to [Model onboarding and performance analysis](learning-paths/cross-platform/sme-executorch-profiling/03-model-onboarding-and-profiling) to export additional models and analyze their performance.
+  - Continue to [Agent skills](learning-paths/cross-platform/sme-executorch-profiling/04-agent-skills) to explore how this workflow can be automated using AI-assisted tooling.

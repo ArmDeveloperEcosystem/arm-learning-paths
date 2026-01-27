@@ -253,6 +253,7 @@ ArmIE
 armiotcosmosdb
 armiotstorage
 armips
+armbaseline
 armkeil
 armlearningpaths
 armlink
@@ -731,6 +732,7 @@ ClassName
 CLCD
 cli
 CLI
+CLIs
 ClickBench
 clickhouse
 ClickHouse
@@ -1595,6 +1597,7 @@ gcov
 gcovr
 gcp
 GCP
+gcpuser
 GCs
 GCT
 gdb

@@ -47,12 +47,28 @@ Gitlab offers a lot of documentation on how to create pipeline that fits differe
 ## How to run your pipeline for testing and to check the results:
 
 From the left hand side panel, Navigate to **`Build`** then to **`Pipeline`** then click on **`New pipeline`** button on the top right hand side just like the image below. In the new window click on **`New pipeline`** button again and your pipeline will start to execute.
-![New-Pipeline #center](_images/new-pipeline.webp)
+![New-Pipeline #center](_images/new-pipeline.png)
 
 To check the status of your pipeline and to check the output of any of it's Jobs simply click on any of the **`Jobs`** as the image below (with red rectangle around them).
-![pipeline-execution #center](_images/pipeline-execution.webp)
+![pipeline-execution #center](_images/pipeline-execution.png)
 
-You can also download the docker image that you saved in your gitlab registery and run it on an Arm64 instance/box for testing using the following bash script.
+You can also check the **`$lscpu`** command output which will look similar to the image below:
+![lscpu-output #center](_images/lscpu.png)
+
+As you can see this command outputs a list of helpful information that you can use to identify the CPU that the runner is using. This can be very helpful in understanding what is the speed and the limitations of the processor that the runner is using like the family of the processor, No. of Threads, Vendor ID, Flags activated or disabled, No. of cores and the different levels of Caches and their sizes among other things.
+
+This information can also help you in planning which version of your application that you can run on that processor (This is an ARM CPU so you will need an Arm compatible version of your applications to run on your runner).
+
+## How to test my Generated Docker image?
+
+You can download the docker image that you saved in your gitlab registery by following the steps below:
+
+- Go to your Project Tab/Link then
+- Go to Deploy → Container Registry
+- You should see new-docker
+- With tags like latest and **`<commit-sha>`**
+
+You will need to run it on an Arm64 instance/box for testing using the following bash script.
 
 ```bash
 docker login registry.gitlab.com
@@ -65,12 +81,6 @@ If everything works correctly you should see an output like in the box below.
 ```output
 Hello from an Arm64 Docker image built on GitLab hosted Arm runners!
 ```
-
-You can also check your Gitlab Registery by going to your project then:
-
-- Go to Deploy → Container Registry
-- You should see new-docker
-- With tags like latest and **`<commit-sha>`**
 
 If it’s there, the registry did its job.
 
