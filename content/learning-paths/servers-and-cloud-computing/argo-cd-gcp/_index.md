@@ -49,6 +49,22 @@ operatingsystems:
 #       FIXED, DO NOT MODIFY
 # ================================================================================
 
+further_reading:
+  - resource:
+      title: Google Cloud documentation
+      link: https://cloud.google.com/docs
+      type: documentation
+
+  - resource:
+      title: Argo CD documentation
+      link: https://argo-cd.readthedocs.io/en/stable/ 
+      type: documentation
+
+  - resource:
+      title: Kubernetes documentation
+      link: https://kubernetes.io/docs/
+      type: documentation
+
 weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
