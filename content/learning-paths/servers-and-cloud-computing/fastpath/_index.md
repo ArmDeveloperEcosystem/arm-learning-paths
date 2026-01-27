@@ -41,7 +41,7 @@ further_reading:
         type: documentation
     - resource:
         title: Kernel install guide
-        link: /install-guides/kernel-build/
+        link: /learning-paths/servers-and-cloud-computing/kernel-build/
         type: guide
     - resource:
         title: AWS Compute Service Provider learning path

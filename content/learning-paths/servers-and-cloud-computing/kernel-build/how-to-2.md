@@ -8,35 +8,36 @@ layout: learningpathall
 
 This section covers standard kernel build workflows for direct installation or downstream packaging.
 
-## Quick sanity check build
 
-Start with a simple demo build to verify your environment:
 
-```bash
-./scripts/kernel_build_and_install.sh --demo-default-build
-```
+## Kernel Build only
 
-This demo builds `v6.18.1`, populates `~/kernels/6.18.1`, and leaves Docker and Fastpath configs untouched. The build takes approximately 30-45 minutes on a `c8g.24xlarge` instance.
+{{% notice Note %}}
+The kernel versions given in the \--tags flag, such as `v6.18.1` in the first example below, are arbitrary (but valid) Linux kernel versions; If you prefer to use kernel versions different from the examples, its ok to replace it with your alternative.
 
-The expected output shows:
-- Kernel source cloning progress
-- Configuration generation
-- Compilation progress with CPU usage
-- Final artifact locations
+Kernel.org hosts all official Linux kernel releases: https://www.kernel.org/.  Feel free to browse and select any stable or mainline release version depicted.
+{{% /notice %}}
 
-## Build a specific kernel version
 
-Specify your own kernel tag:
+### Build a specific kernel version
+
+To begin, start with a minimal argument example to build a specific kernel version.  In this example, `v6.18.1` is used:
 
 ```bash
-./scripts/kernel_build_and_install.sh --tags v6.19-rc1
+./scripts/kernel_build_and_install.sh --tags v6.18.1
 ```
 
-This behaves like the demo while targeting a release candidate instead of the pinned stable tag, and it runs without any interactive prompts.
+This builds kernel v6.18.1 in flat-file format, and writes the artifacts to ~/kernels/v6.18.1.  Because we don't specify the --kernel-install flag (which is default false), it will only build, and not automatically install this kernel to the system.
 
-## Produce Debian packages
 
-Build both flat artifacts and Debian packages for easier distribution:
+### Produce Debian packages
+
+Use Debian packages when you need to:
+- Deploy to multiple systems using package management
+- Track kernel installations with dpkg
+- Simplify dependency management for downstream users
+
+This example builds both flat artifacts and Debian packages for easier distribution:
 
 ```bash
 ./scripts/kernel_build_and_install.sh \
@@ -44,16 +45,55 @@ Build both flat artifacts and Debian packages for easier distribution:
   --include-bindeb-pkg
 ```
 
-This command outputs `Image.gz`, `modules.tar.xz`, `perf.tar.xz`, and `.deb` files (headers, image, dbg) under `~/kernels/6.18.1`.
+This command outputs `Image.gz`, `modules.tar.xz`, `perf.tar.xz`, and `.deb` files (headers, image, dbg) under `~/kernels/v6.18.1`.
 
-Use Debian packages when you need to:
-- Deploy to multiple systems using package management
-- Track kernel installations with dpkg
-- Simplify dependency management for downstream users
 
-## Build and install a kernel
+
+### Generate a build plan without executing (dry-run)
+
+Use dry-run mode to:
+- Document your build configuration
+- Share build recipes with team members
+- Reproduce builds on different systems
+- Test configuration changes before execution
+
+This command writes a self-contained plan such as `/tmp/kernel_plan_v6.18.1_<hash>.sh` that embeds the current script plus the resolved arguments (minus `--dry-run`):
+
+```bash
+./scripts/kernel_build_and_install.sh \
+  --tags v6.18.1 \
+  --dry-run
+```
+
+Run the plan file later—on the same host or another system with the required dependencies—to replay the exact workflow:
+
+```bash
+bash /tmp/kernel_plan_v6.18.1_<hash>.sh
+```
+
+## Kernel Install
+
+{{% notice Note %}}
+The following sections demonstrate build and install scenarios.  
+
+*Before and after* any install-related command, use the linux command `uname -r` to verify the current version of the kernel you are running so you can compare kernel versions (before and after) to confirm the new kernel is properly installed.
+
+Also remember that installing a new kernel requires a system reboot to take effect.
+{{% /notice %}}
+
+### Build and install a kernel
 
 Build a kernel and immediately install it:
+
+First, take note of the current kernel version:
+
+```bash
+uname -r
+```
+
+Make a note of that value so you can compare it after the new kernel is installed and the system reboots.
+
+Next, perform a build and install of kernel version `v6.18.1`:
 
 ```bash
 ./scripts/kernel_build_and_install.sh \
@@ -69,11 +109,16 @@ After the system comes back up, verify the new kernel:
 uname -r
 ```
 
-The output shows the newly installed kernel version.
+The output shows the newly installed kernel version.  Compare it to the value gathered before the install to confirm the update was successful.
 
-## Build multiple kernel versions
+### Build multiple kernel versions
 
-Build several kernel versions in parallel:
+This approach is useful when you want to:
+- Compare different kernel versions
+- Prepare multiple kernels for testing
+- Build a library of kernel versions for deployment
+- 
+To build two kernel versions in parallel, run the following command (it will build both `v6.18.1` and `v6.19-rc1`, but only install `v6.18.1`):
 
 ```bash
 ./scripts/kernel_build_and_install.sh \
@@ -83,14 +128,15 @@ Build several kernel versions in parallel:
 
 Both kernels build in parallel, but only `v6.18.1` installs (followed by an automatic reboot), leaving the `v6.19-rc1` artifacts untouched under `~/kernels`.
 
-This approach is useful when you want to:
-- Compare different kernel versions
-- Prepare multiple kernels for testing
-- Build a library of kernel versions for deployment
 
-## Build a 64 KB page-size kernel
+### Build a 64 KB page-size kernel
 
-Create a kernel with 64 KB pages instead of the standard 4 KB:
+{{% notice Note %}}
+Memory page size affects how the operating system manages memory.  The default page size is typically 4 KB, but certain workloads can benefit from larger page sizes, such as 64 KB.  Make sure to test compatibility with your applications before changing memory page size.
+{{% /notice %}}
+
+In this example, you will create and install a kernel with 64 KB pages instead of the standard 4 KB.  This variation produces a 64 KB build, installs it, appends "-64k" to the reported kernel version, and reboots automatically:
+
 
 ```bash
 ./scripts/kernel_build_and_install.sh \
@@ -100,8 +146,6 @@ Create a kernel with 64 KB pages instead of the standard 4 KB:
   --append-to-kernel-version "-64k"
 ```
 
-This variation produces a 64 KB build, installs it, appends "-64k" to the reported kernel version, and reboots automatically.
-
 After reboot, verify the page size:
 
 ```bash
@@ -110,24 +154,26 @@ getconf PAGE_SIZE
 
 The expected output is `65536` for 64 KB builds, compared to `4096` for standard builds.
 
-Use 64 KB page sizes when:
-- Working with large memory workloads
-- Optimizing database performance
-- Reducing TLB pressure on systems with large working sets
+### Install previously built kernels
 
-## Install a previously built kernel
+As there are two input formats for building kernel artifacts which match the build output formats: flat files and Debian packages.  Choose the appropriate installation method based on your prior build format.
 
-Install kernel artifacts without recompiling:
+#### Flat-file installation
+
+This installs the saved `Image.gz`, `modules.tar.xz`, and `config` from a prior build run. Use this when the directory contains flat artifacts rather than `.deb` packages.
+
+To install flat-file kernel artifacts without recompiling:
 
 ```bash
 ./scripts/kernel_build_and_install.sh \
   --install-from ~/kernels/6.18.1 \
   --install-format flat
 ```
+Upon completion, the script installs the kernel, regenerates initramfs, updates GRUB, and reboots the system.
 
-This installs the saved `Image.gz`, `modules.tar.xz`, and `config` from a prior run. Use this when the directory contains flat artifacts rather than `.deb` packages.
+#### Debian package installation:
 
-For Debian package installation:
+To install from previously built Debian packages (`.deb` files):
 
 ```bash
 ./scripts/kernel_build_and_install.sh \
@@ -137,57 +183,7 @@ For Debian package installation:
 
 This installs the `.deb` artifacts produced earlier via `--include-bindeb-pkg`, expecting files such as `linux-image-*` and `linux-headers-*` to exist in the source directory.
 
-For automatic format detection:
-
-```bash
-./scripts/kernel_build_and_install.sh \
-  --install-from ~/kernels/6.18.1
-```
-
-This lets the script auto-detect whether the directory contains flat artifacts or `.deb` files.
-
-## Generate a build plan without executing
-
-Create a reusable build plan without running the build:
-
-```bash
-./scripts/kernel_build_and_install.sh \
-  --tags v6.18.1 \
-  --dry-run
-```
-
-This command writes a self-contained plan such as `/tmp/kernel_plan_v6.18.1_<hash>.sh` that embeds the current script plus the resolved arguments (minus `--dry-run`). 
-
-Run the plan file later—on the same host or another system with the required dependencies—to replay the exact workflow:
-
-```bash
-bash /tmp/kernel_plan_v6.18.1_<hash>.sh
-```
-
-Use dry-run mode to:
-- Document your build configuration
-- Share build recipes with team members
-- Reproduce builds on different systems
-- Test configuration changes before execution
-
-## Locate build artifacts
-
-Each kernel tag produces a directory under `~/kernels/<kernel_version>` containing:
-
-```bash
-ls ~/kernels/6.18.1
-```
-
-The directory contains:
-- `Image.gz` - Compressed kernel image
-- `modules.tar.xz` - Modules tree (untar to `/lib/modules/<version>` when installing elsewhere)
-- `perf.tar.xz`, `cpupower.tar.xz` - Optional user-space tools
-- `config` - Final merged configuration
-- `config.stock` - Copy of the original base config used for the build
-
-The script also writes a copy of the base config to `~/kernels/stock-configs/`, named after the running host kernel. Preserve this directory if you want to reuse the stock configuration later (for example, pass it via `--config-file`).
-
-## What you've accomplished and what's next
+### What you've accomplished and what's next
 
 In this section, you've learned how to:
 - Build standard Linux kernels for Arm instances

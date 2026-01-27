@@ -12,39 +12,33 @@ Before you begin, you need an Arm cloud instance with SSH access.
 
 This Learning Path uses AWS as the example platform, but you can follow the same steps on any cloud provider that offers 64-bit Arm Ubuntu instances.
 
-For demonstration purposes, you can use an AWS `c8g.24xlarge` instance. Any sufficiently large instance on your chosen provider works, however, smaller instances take longer or risk running out of memory during compilation. If you use a different instance type, the minimum requirements are an Arm instance running at least 24 vCPUs with 200 GB of free storage.
+For demonstration purposes, you can use an AWS `m6g.12xlarge` instance. Any sufficiently large instance on your chosen provider works, however, smaller instances take longer or risk running out of memory during compilation. If you use a different instance type, the minimum requirements are an Arm instance running at least 24 vCPUs with 200 GB of free storage.
 
 Ubuntu 24.04 LTS is the operating system. Other Linux distributions may work. If you find a different distribution that works well, or you'd like to request support for a different distribution, open an issue or a pull request in the [project repository](https://github.com/geremyCohen/arm_kernel_install_guide).
 
 ## Install required dependencies
 
-With your build instance running and accessible via SSH, install the required dependencies:
+With your build instance running and accessible via SSH, install the required dependencies, and clone the kernel-build repository:
 
 ```bash
+# These commands install the compilation toolchain, kernel build tools, and utilities needed for the build scripts.
+
 sudo apt update
 sudo apt install -y git python3 python3-pip python3-venv python-is-python3 build-essential bc rsync dwarves flex bison libssl-dev libelf-dev btop yq jq
-```
 
-This command installs the compilation toolchain, kernel build tools, and utilities needed for the build scripts.
+# These commands clone the helper repo and make the scripts executable.
 
-## Clone the kernel build repository
-
-Clone the GitHub repository in your home directory:
-
-```bash
 git clone https://github.com/geremyCohen/arm_kernel_install_guide.git ~/arm_kernel_install_guide
 cd ~/arm_kernel_install_guide
 chmod +x scripts/*.sh
 ```
 
-The repository contains:
-- A build orchestration script
-- Configuration templates for various kernel build scenarios
-- Helper utilities for managing kernel artifacts
 
-All commands in this Learning Path assume you're in the project directory at `$HOME/arm_kernel_install_guide`. 
+{{% notice Note %}}
+All commands in this Learning Path assume you're in the project directory at `$HOME/arm_kernel_install_guide` when you run them.
+{{% /notice %}}
 
-The important script is `scripts/kernel_build_and_install.sh`, which orchestrates cloning the upstream kernel tree, configuring TuxMake, building artifacts, and optionally installing the kernel. The script runs non-interactively—once invoked it proceeds without confirmation prompts, and any install operation automatically reboots the system when it finishes.
+The repository you just cloned contains helper scripts for building and managing kernel artifacts. Specifically, the `scripts/kernel_build_and_install.sh` script orchestrates cloning the upstream kernel tree, configuring TuxMake, building artifacts, and optionally installing the kernel. The script runs non-interactively, and once invoked it proceeds without confirmation.
 
 ## Understand the script flags
 
