@@ -499,7 +499,7 @@ document.body.appendChild(formScript);
                 <p id="arm-account-dynamic-paragraph"></p>
                 <ads-cta-button id="arm-account-signup-cta" level="primary" style="display: none">Login to Arm Account</ads-cta-button>
                 <!-- https://developer.arm.com/register -->
-                <ads-cta-button id="arm-account-signup-view-badges-cta" level="secondary" style="display: none">View your badges</ads-cta-button>
+                <ads-cta-button id="arm-account-signup-view-badges-cta" level="secondary" style="display: none">Visit Arm Community</ads-cta-button>
 
                 <script>
                     // read msal from window, and check if user is logged in
@@ -509,13 +509,14 @@ document.body.appendChild(formScript);
                         if (isUserSignedIn()) {
                             // Additional logic for signed-in users can be added here
                             document.getElementById('arm-account-dynamic-header').textContent = "Welcome back!";
-                            document.getElementById('arm-account-dynamic-paragraph').textContent = "You're already signed in to your Arm Account. Continue completing Learning Paths to earn more badges on Arm Community!";
+                            document.getElementById('arm-account-dynamic-paragraph').textContent = "You're already signed in to your Arm Account! Check out Arm Community to ask questions and meet other developers.";
                             document.getElementById('arm-account-signup-view-badges-cta').style.display = 'block';
                             document.getElementById('arm-account-signup-cta').style.display = 'none'; 
                             
                         } else {
                             document.getElementById('arm-account-dynamic-header').textContent = "Login to Arm Account";
-                            document.getElementById('arm-account-dynamic-paragraph').textContent = "Make sure you're logged in to get badges for completing Learning Paths and show them off on Arm Community!";
+                            //document.getElementById('arm-account-dynamic-paragraph').textContent = "Make sure you're logged in to get badges for completing Learning Paths and show them off on Arm Community!";
+                            document.getElementById('arm-account-dynamic-paragraph').textContent = "Login to your Arm Account to access personalized features.";
                             document.getElementById('arm-account-signup-cta').style.display = 'block';
                             document.getElementById('arm-account-signup-view-badges-cta').style.display = 'none';
 
