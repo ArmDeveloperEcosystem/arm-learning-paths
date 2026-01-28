@@ -13,9 +13,9 @@ This section covers standard kernel build workflows for direct installation or d
 ## Kernel Build only
 
 {{% notice Note %}}
-The kernel versions given in the \--tags flag, such as `v6.18.1` in the first example below, are arbitrary (but valid) Linux kernel versions; If you prefer to use kernel versions different from the examples, its ok to replace it with your alternative.
+The kernel versions given in the \--tags flag, such as `v6.18.1` in the first example below, are arbitrary (but valid) Linux kernel versions. If you prefer to use kernel versions different from the examples, you can replace them with your preferred versions.
 
-Kernel.org hosts all official Linux kernel releases: https://www.kernel.org/.  Feel free to browse and select any stable or mainline release version depicted.
+Kernel.org hosts all official Linux kernel releases: https://www.kernel.org/. Browse and select any stable or mainline release version.
 {{% /notice %}}
 
 
@@ -65,11 +65,13 @@ This command writes a self-contained plan such as `/tmp/kernel_plan_v6.18.1_<has
   --dry-run
 ```
 
-Run the plan file later—on the same host or another system with the required dependencies—to replay the exact workflow:
+Run the plan file later—on the same host or another system with the required dependencies—to replay the exact workflow. Replace `<hash>` with the actual hash value from your generated plan file:
 
 ```bash
 bash /tmp/kernel_plan_v6.18.1_<hash>.sh
 ```
+
+You can use tab completion or `ls /tmp/kernel_plan_*.sh` to find the exact filename.
 
 ## Kernel Install
 
@@ -156,7 +158,7 @@ The expected output is `65536` for 64 KB builds, compared to `4096` for standard
 
 ### Install previously built kernels
 
-As there are two input formats for building kernel artifacts which match the build output formats: flat files and Debian packages.  Choose the appropriate installation method based on your prior build format.
+There are two input formats for kernel artifacts that match the build output formats: flat files and Debian packages. Choose the appropriate installation method based on your prior build format.
 
 #### Flat-file installation
 

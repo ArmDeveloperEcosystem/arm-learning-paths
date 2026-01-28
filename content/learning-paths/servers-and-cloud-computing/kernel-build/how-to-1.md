@@ -44,8 +44,8 @@ The repository you just cloned contains helper scripts for building and managing
 
 The `kernel_build_and_install.sh` script supports two main workflows:
 
-1. **General usage** - Build kernels for direct installation or downstream packaging
-2. **Fastpath usage** - Build kernels with additional headers and perf configuration needed by the Fastpath validation tool
+-  **General usage** - Build kernels for direct installation or downstream packaging
+- **Fastpath usage** - Build kernels with additional headers and perf configuration needed by the Fastpath validation tool
 
 ### About Fastpath
 
@@ -90,6 +90,29 @@ Check that the script is executable and displays help information:
 ./scripts/kernel_build_and_install.sh --help
 ```
 
-The expected output shows all available flags and usage examples.
+The expected output is similar to:
 
-You're now ready to build Linux kernels on your Arm instance. The next section covers standard kernel build workflows.
+```output
+Usage: kernel_build_and_install.sh [OPTIONS]
+
+Options:
+  --demo-default-build          Build v6.18.1 with default configuration
+  --demo-fastpath-build         Build v6.18.1 and v6.19-rc1 with Fastpath configs
+  --tag <tag>                   Specify a kernel version to build
+  --tags <tag1,tag2,...>        Build multiple kernel versions in parallel
+  --kernel-install [true|false|tag]  Install kernel after building
+  --fastpath [true|false]       Enable Fastpath configuration overlay
+  --change-to-64k [true|false]  Build kernel with 64 KB page size
+  --help                        Display this help message
+...
+```
+
+## What you've accomplished and what's next
+
+In this section, you've:
+- Configured an Arm cloud instance with the required build dependencies
+- Cloned the kernel build helper repository
+- Learned about the available build script flags for general and Fastpath workflows
+- Verified your build environment is ready
+
+The next section covers standard kernel build workflows for direct installation or downstream packaging.
