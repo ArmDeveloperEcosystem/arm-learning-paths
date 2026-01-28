@@ -44,7 +44,7 @@ When the download is finished, you can convert the Balena OS device image into a
 
 The conversion can be done using a Linux shell script. 
 
-[Download the script](/learning-paths/iot/avh_balena/mkbalenaosimg.sh) and save it as `mkbalenaosimg.sh` on your computer.
+[Download the script](/learning-paths/embedded-and-microcontrollers/avh_balena/mkbalenaosimg.sh) and save it as `mkbalenaosimg.sh` on your computer.
 
 {{% notice Note %}}
 The conversion script requires a Linux environment with root access. If needed, copy the script and the Balena OS image .zip file to a Linux machine and log in to the machine. The `zip` and `unzip` commands are also required. Install them using your Linux package manager.

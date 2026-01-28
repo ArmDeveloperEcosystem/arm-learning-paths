@@ -48,21 +48,22 @@ operatingsystems:
 # ================================================================================
 #       FIXED, DO NOT MODIFY
 # ================================================================================
+
 further_reading:
   - resource:
+      title: Google Cloud documentation
+      link: https://cloud.google.com/docs
+      type: documentation
+
+  - resource:
       title: Argo CD documentation
-      link: https://argo-cd.readthedocs.io/
+      link: https://argo-cd.readthedocs.io/en/stable/ 
       type: documentation
 
   - resource:
-      title: Google Kubernetes Engine documentation
-      link: https://cloud.google.com/kubernetes-engine/docs
+      title: Kubernetes documentation
+      link: https://kubernetes.io/docs/
       type: documentation
-
-  - resource:
-      title: GitOps principles
-      link: https://opengitops.dev/
-      type: documentation    
 
 weight: 1
 layout: "learningpathall"
