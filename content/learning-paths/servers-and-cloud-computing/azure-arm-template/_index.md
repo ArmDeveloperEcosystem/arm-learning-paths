@@ -1,6 +1,10 @@
 ---
 title: Deploy a Linux Cobalt 100 VM with Azure Resource Manager templates
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 45
 
 who_is_this_for: This is an introductory topic for developers and DevOps engineers who want to automate the deployment of Arm-based Cobalt 100 virtual machines using Azure Resource Manager templates.
