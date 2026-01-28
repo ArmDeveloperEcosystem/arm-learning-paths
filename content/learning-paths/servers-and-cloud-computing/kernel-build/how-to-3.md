@@ -13,9 +13,9 @@ Fastpath builds use the same TuxMake pipelines but add a configuration fragment 
 Fastpath workflows are build-only: don't combine `--fastpath true` (or the demo shortcut) with `--kernel-install` or any `--install-from` commands. 
 
 The proper workflow is:
-1. Build the kernel with Fastpath configuration enabled
-2. Copy the flat artifacts (`Image.gz`, `modules.tar.xz`, and `config`) to the Fastpath host
-3. Let the Fastpath tooling handle deployment to the SUT (System Under Test)
+- Build the kernel with Fastpath configuration enabled
+- Copy the flat artifacts (`Image.gz`, `modules.tar.xz`, and `config`) to the Fastpath host
+- Let the Fastpath tooling handle deployment to the SUT (System Under Test)
 
 ### Install Docker for Fastpath
 
