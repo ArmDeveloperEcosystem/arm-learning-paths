@@ -1,6 +1,10 @@
 ---
 title: Deploy applications on Arm-based GKE using GitOps with Argo CD
 
+minutes_to_complete: 40
+
+who_is_this_for: This is an introductory topic for developers and platform engineers who want hands-on experience implementing GitOps using Argo CD on Arm64-based Google Kubernetes Engine (GKE) clusters running on Google Axion (C4A) processors.
+
 learning_objectives:
   - Provision an Arm-based SUSE Linux Enterprise Server (SLES) virtual machine on Google Cloud (C4A with Axion processors)
   - Create and connect to a Google Kubernetes Engine (GKE) cluster running on Arm64 (Axion) nodes

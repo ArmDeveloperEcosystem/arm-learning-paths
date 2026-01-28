@@ -47,7 +47,7 @@ Key components installed:
 
 All images used support **linux/arm64**, making them compatible with Arm-based GKE nodes.
 
-### Wait for Argo CD Pods to Become Ready
+### Wait for Argo CD pods to become ready
 
 ```console
 kubectl get pods -n argocd -w
@@ -100,7 +100,7 @@ argocd-server   LoadBalancer   34.118.228.71   34.xx.xx.xx   80:30166/TCP,443:30
 
 The value under `EXTERNAL-IP` is used to access the UI and CLI. Press **Ctrl-C** to exit when you've copied the IP address.
 
-## Get the admin password
+## Retrieve the admin password
 
 Argo CD generates an initial admin password and stores it securely as a Kubernetes Secret.
 
