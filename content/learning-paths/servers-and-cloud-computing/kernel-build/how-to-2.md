@@ -6,13 +6,13 @@ weight: 3
 layout: learningpathall
 ---
 
+## Standard kernel workflows
+
+Standard kernel builds produce general-purpose kernels suitable for production deployment, development testing, or distribution packaging. These workflows let you build specific versions, install them directly, or package them for later use.
+
 This section covers standard kernel build workflows for direct installation or downstream packaging.
 
-
-
-## Kernel Build only
-
-{{% notice Note %}}
+{{% notice Note on kernel build only %}}
 The kernel versions given in the \--tags flag, such as `v6.18.1` in the first example below, are arbitrary (but valid) Linux kernel versions. If you prefer to use kernel versions different from the examples, you can replace them with your preferred versions.
 
 Kernel.org hosts all official Linux kernel releases: https://www.kernel.org/. Browse and select any stable or mainline release version.
@@ -73,7 +73,7 @@ bash /tmp/kernel_plan_v6.18.1_<hash>.sh
 
 You can use tab completion or `ls /tmp/kernel_plan_*.sh` to find the exact filename.
 
-## Kernel Install
+## Install kernel
 
 {{% notice Note %}}
 The following sections demonstrate build and install scenarios.  
@@ -119,7 +119,7 @@ This approach is useful when you want to:
 - Compare different kernel versions
 - Prepare multiple kernels for testing
 - Build a library of kernel versions for deployment
-- 
+
 To build two kernel versions in parallel, run the following command (it will build both `v6.18.1` and `v6.19-rc1`, but only install `v6.18.1`):
 
 ```bash
@@ -185,7 +185,7 @@ To install from previously built Debian packages (`.deb` files):
 
 This installs the `.deb` artifacts produced earlier via `--include-bindeb-pkg`, expecting files such as `linux-image-*` and `linux-headers-*` to exist in the source directory.
 
-### What you've accomplished and what's next
+## What you've accomplished and what's next
 
 In this section, you've learned how to:
 - Build standard Linux kernels for Arm instances
