@@ -8,8 +8,6 @@ weight: 4 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-Proceed with the remainder of this Learning Path logged in as `root`. 
-
 Once the board is on your network, copying files over SSH is usually the fastest workflow. If you can’t use WiFi, you can still move files with a USB drive. Create a test file to transfer.
 
 ```bash
@@ -26,7 +24,7 @@ ifconfig | grep RUNNING -A 1
 
 Look for the WiFi interface (often `mlan0`) and note the `inet` address.
 
-On your development machine, copy a file to the board with `scp` by updating the IP address in the following command:
+On your host machine, copy a file to the board with `scp` by updating the IP address in the following command:
 
 ```bash
 scp test.txt root@<ip-address>:/root/test.txt
@@ -68,8 +66,8 @@ umount /mnt
 You should now see the file in the `root` directory:
 
 ```output
-root@imx93evk:~# ls /root
+:~# ls /root
 test.txt
 ```
 
-Proceed to the final section to automate reconnecting to wifi.
+Proceed to the final section to automate reconnecting to WiFi.

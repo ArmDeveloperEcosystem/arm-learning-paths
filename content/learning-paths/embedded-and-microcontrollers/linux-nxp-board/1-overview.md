@@ -22,13 +22,6 @@ The following image highlights the i.MX 93 SoC and the NPU location on the board
 
 ![NXP FRDM i.MX 93 Board SoC Highlighted alt-text#center](./nxp-frdm-imx93-board-soc-highlighted.png "Arm Ethos-U65 NPU location")
 
-If you connect the board to a display, you can see ML demos and application output directly on the device. This is useful when you want quick visual confirmation that your model runs on the target hardware.
-
-## Unbox and power the board
-
-To set up the hardware, follow NXP’s getting started guide: [Getting Started with FRDM-IMX93](https://www.nxp.com/document/guide/getting-started-with-frdm-imx93:GS-FRDM-IMX93).
-
-Stop when you complete section "1.6 Connect Power Supply".
 
 ## Connect to the serial console and log in
 
@@ -46,7 +39,6 @@ sudo apt install -y picocom
 
 
 {{% notice macOS %}}
-
 On macOS, you might need an extra USB-to-UART driver depending on which USB serial bridge the board exposes. You can get the drivers from Silicon Labs [Downloads page](https://www.silabs.com/developer-tools/usb-to-uart-bridge-vcp-drivers?tab=downloads).
 {{% /notice %}}
 
@@ -100,7 +92,11 @@ Type `root` to log in as root (no password is needed).
 
 ## (Optional) Run the built-in NXP demos
 
+If you connect the board to a display, you can see ML demos and application output directly on the device. This is useful when you want quick visual confirmation that your model runs on the target hardware. As per the setup instructions in [NXP’s getting started guide](https://www.nxp.com/document/guide/getting-started-with-frdm-imx93:GS-FRDM-IMX93):
+
 - Connect the board to a monitor via HDMI.
 - Connect a mouse to the board’s USB-A port.
+
+The demos will then show up automatically.
 
 ![NXP board built-in ML demos alt-text#center](./nxp-board-built-in-ml-demos.png "NXP board built-in ML demos")

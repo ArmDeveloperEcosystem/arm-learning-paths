@@ -8,7 +8,7 @@ weight: 5 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-ConnMan usually persists your WiFi network configuration across reboots. On this Linux image, the missing piece is often that the WiFi driver module isn’t loaded automatically at boot.
+ConnMan persists your WiFi network configuration across reboots. On this Linux image, the missing piece is often that the WiFi driver module isn’t loaded automatically at boot.
 
 In this section, you’ll run one command at boot to load the WiFi driver. After that, ConnMan should reconnect to the saved network automatically.
 
