@@ -1,6 +1,6 @@
 ---
 title: Create the Resource Manager template
-weight: 4
+weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
