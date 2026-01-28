@@ -1,5 +1,5 @@
 ---
-title: Install and Access Argo CD on Arm64 GKE
+title: Install and access Argo CD on Arm64 GKE
 weight: 5
 
 layout: learningpathall
@@ -47,7 +47,7 @@ Key components installed:
 
 All images used support **linux/arm64**, making them compatible with Arm-based GKE nodes.
 
-### Wait for Argo CD Pods to Become Ready
+### Wait for Argo CD pods to become ready
 
 ```console
 kubectl get pods -n argocd -w
@@ -100,7 +100,7 @@ argocd-server   LoadBalancer   34.118.228.71   34.xx.xx.xx   80:30166/TCP,443:30
 
 The value under `EXTERNAL-IP` is used to access the UI and CLI. Press **Ctrl-C** to exit when you've copied the IP address.
 
-## Get the admin password
+## Retrieve the admin password
 
 Argo CD generates an initial admin password and stores it securely as a Kubernetes Secret.
 
@@ -130,7 +130,7 @@ Login with:
 
 You'll see a TLS warning because Argo CD uses a self-signed certificate by default. This is expected for lab and learning environments.
 
-![Argo CD web UI alt-txt#center](images/argo-cd.png "Argo CD UI")
+![Argo CD web interface showing empty application dashboard with navigation menu on left and Applications header at top alt-txt#center](images/argo-cd.png "Argo CD UI")
 
 ## Install the Argo CD CLI (Arm64)
 
@@ -145,8 +145,8 @@ sudo mv argocd-linux-arm64 /usr/local/bin/argocd
 ```
 
 This downloads the latest Argo CD CLI binary for `linux/arm64`, makes it executable, and moves it into `/usr/local/bin` so it's available system-wide.
-  
-### Verify CLI Installation
+
+### Verify CLI installation
 
 ```console
 argocd version --server <ARGOCD_EXTERNAL_IP> --insecure

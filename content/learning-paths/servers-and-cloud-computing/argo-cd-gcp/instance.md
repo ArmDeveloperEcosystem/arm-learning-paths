@@ -24,7 +24,7 @@ To create a VM using the C4A instance type:
   - Set **Series** to **C4A**.
   - Select **c4a-standard-4** as the machine type.
 
-![Google Cloud Console VM creation page with the C4A machine series selected and the c4a-standard-4 machine type highlighted alt-txt#center](images/gcp-vm.png "Creating a Google Axion C4A VM in the Google Cloud Console")
+![Google Cloud Console VM creation page showing Machine configuration section with C4A series and c4a-standard-4 machine type selected alt-txt#center](images/gcp-vm.png "Creating a Google Axion C4A VM in the Google Cloud Console")
 
 - Under **OS and storage**, select **Change**, and then choose an Arm64-based operating system image.
   - For this Learning Path, select **SUSE Linux Enterprise Server**.
@@ -36,11 +36,11 @@ To create a VM using the C4A instance type:
 
 After the instance starts, click **SSH** next to the VM in the instance list to open a browser-based terminal session.
 
-![Google Cloud Console VM instances list with the SSH button highlighted for a running C4A instance alt-txt#center](images/gcp-ssh.png "Connecting to a running C4A VM using SSH")
+![Google Cloud Console VM instances page displaying running instance with green checkmark and SSH button in the Connect column alt-txt#center](images/gcp-ssh.png "Connecting to a running C4A VM using SSH")
 
 A new browser window opens with a terminal connected to your VM.
 
-![Browser-based terminal window showing a command prompt on a SUSE Linux VM running on Google Axion C4A alt-txt#center](images/gcp-shell.png "Terminal session connected to the VM")
+![Browser-based SSH terminal window with black background showing Linux command prompt and Google Cloud branding at top alt-txt#center](images/gcp-shell.png "Terminal session connected to the VM")
 
 ## What you've accomplished and what's next
 

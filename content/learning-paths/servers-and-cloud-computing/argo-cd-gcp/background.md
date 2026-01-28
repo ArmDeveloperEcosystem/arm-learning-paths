@@ -33,3 +33,7 @@ In this Learning Path, you'll use Argo CD to:
 
 For more information, see the official Argo CD documentation:
 [https://argo-cd.readthedocs.io](https://argo-cd.readthedocs.io).
+
+## What you've accomplished and what's next
+
+You now understand Google Axion C4A instances and their Arm-based architecture, as well as how Argo CD provides declarative GitOps workflows for Kubernetes. In the next section, you'll provision a Google Axion C4A VM to serve as your deployment environment.
