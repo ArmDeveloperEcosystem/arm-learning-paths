@@ -6,13 +6,13 @@ weight: 5
 layout: "learningpathall"
 ---
 
-### Installation Process for UltraEdge on Ubuntu/Debian
+### Installation process for UltraEdge on Ubuntu/Debian
  
 Follow these steps to initialize and register your device within the **Uncloud** ecosystem:
 
 1.  **Access the Platform:**
 
-    Navigate to the [Uncloud Dashboard](https://dev.tinkerblox.io/) and log in with your credentials.
+    Navigate to the [Uncloud Dashboard](https://dev.tinkerblox.io/) and log in with your credentials. 
 
 2.  **Provision a New Device:**
     * Go to **Device Management** > **New Device**.
@@ -25,9 +25,9 @@ Follow these steps to initialize and register your device within the **Uncloud**
 
 ![Initialize Device](https://raw.githubusercontent.com/Tinkerbloxsupport/arm-learning-path-support/main/static/images/Initialize%20.png)
 
-3. **Install some prerequsiites:**
+3. **Install prerequisites:**
 
-    * First install some prerequisites:
+    Install the required prerequisites:
 
 ```bash
 sudo apt update 
@@ -35,7 +35,7 @@ sudo apt install -y curl jq
 ```
 
 
-4.  **Retrieve Installation Command Details:**
+4.  **Retrieve installation command details:**
 
     * Copy the generated device installation command or details from the **Uncloud** portal to your clipboard.
 
@@ -49,7 +49,7 @@ sudo DEVICE_ID="5b3ff290-0c88-4cd9-8ef7-08de0bded9df" KEY="TB.ApiKey-mlBZgDFc7qy
 
 Run your specific installer command in your Ubuntu/Debian SSH shell and initialize the agent to install UltraEdge.
 
-### Activation of the UltraEdge Agent
+### Activation of the UltraEdge agent
 
 On the first boot, the agent will automatically generate a file named
 `activation_key.json` at the path: 
@@ -74,7 +74,7 @@ receive license key (which includes license metadata).
         sudo systemctl start tbx-agent.service
 ```
 
-### Manual Running
+### Manual running
 
 -   Binary path: `/bin/tbx-agent`
 
@@ -87,37 +87,37 @@ receive license key (which includes license metadata).
 -   To stop, press <span class="kbd">Ctrl</span> +
     <span class="kbd">C</span> once.
 
-## MicroPac Installation
+## MicroPac installation
 
 MicroPac is the core tooling used to build and manage **MicroStack** (general microservices) and **NeuroStack** (AI-native services). 
 
-* **Platform Agnostic:** MicroPac is not restricted to a specific operating system; it is fully compatible with both **Debian** and **Yocto** environments, providing a consistent execution layer across different Linux distributions.
+* Platform agnostic: MicroPac is not restricted to a specific operating system; it is fully compatible with both **Debian** and **Yocto** environments, providing a consistent execution layer across different Linux distributions.
 
-* **Build System:** To create a service, the system utilizes a **MicroPacFile** (the declarative configuration) and the **MicroPac Builder** (the high-performance packaging engine).
+* Build system: To create a service, the system utilizes a **MicroPacFile** (the declarative configuration) and the **MicroPac Builder** (the high-performance packaging engine).
 
-* **Validation:** The ecosystem includes a **MicroPac Validator**, which verifies the integrity and security of the package created by the builder to ensure it is ready for edge deployment.
+* Validation: The ecosystem includes a **MicroPac Validator**, which verifies the integrity and security of the package created by the builder to ensure it is ready for edge deployment.
 
-#### System Requirements
+#### System requirements
 
 -   Linux host (aarch64)
 -   Sudo permissions
 -   Overlay filesystem support
 -   Internet connection
 
-#### Required Packages
+#### Required packages
 
 ```bash
     sudo apt-get update
     sudo apt-get install -y tar curl qemu-user-static binfmt-support
 ```
 
-### Cross-Architecture Support
+### Cross-architecture support
 
 The **MicroPacFile** is the central declarative configuration used by the builder to define the environment and behavior of your service. This configuration is essential for orchestrating both **MicroStack** (general microservices) and **NeuroStack** (AI/ML) services.
 
-* **Multi-Language Support:** You can configure MicroPacFiles for applications written in **Python, C, and C++**, making it highly versatile for both high-level AI workloads and low-level embedded system tasks.
+* Multi-language support: You can configure MicroPacFiles for applications written in **Python, C, and C++**, making it highly versatile for both high-level AI workloads and low-level embedded system tasks.
 
-* **Unified Workloads:** It bridges the gap between complex ML models and resource-constrained embedded software, ensuring consistent execution across diverse hardware. 
+* Unified workloads: It bridges the gap between complex ML models and resource-constrained embedded software, ensuring consistent execution across diverse hardware. 
 
 
 To build MicroPac for different architectures:
@@ -137,9 +137,9 @@ To build MicroPac for different architectures:
         sudo apt install ./<package_name>.deb
 ```
 
-### MicroPac File Schema file creation/setup
+### MicroPac file schema file creation/setup
 
-#### File Placement
+#### File placement
 For the MicroPac Builder to function correctly, the **MicroPacFile** must be placed in the root directory alongside your source code and dependency files. 
 
 
@@ -158,7 +158,7 @@ video_cv/
 
 Place a `MicroPacFile` in your project directory as mentioned in above example.
 
-```console
+```yaml
     name: nginx
     version: 1.0.0.0
     target: aarch64
@@ -196,9 +196,9 @@ Place a `MicroPacFile` in your project directory as mentioned in above example.
       mode: host
       name: nginx-net
 ```
-### Configuration Fields
+### Configuration fields
 
-#### Required Fields
+#### Required fields
 
 -   **name**: Application name (≤ 10 characters)
 -   **version**: Application version
@@ -208,7 +208,7 @@ Place a `MicroPacFile` in your project directory as mentioned in above example.
 -   **entry**: Entry point command
 -   **mode**: single-run
 
-#### Optional Fields
+#### Optional fields
 
 -   **env**: Environment variable
 -   **buildSteps**: Array of build instructions
@@ -218,7 +218,7 @@ Place a `MicroPacFile` in your project directory as mentioned in above example.
 -   **createdBy**: maintainer of the application
 -   **description**: description of the application
 
-### Building the MicroPac
+### Build the MicroPac
 
 Navigate to your project directory and execute:
 
@@ -228,7 +228,7 @@ Navigate to your project directory and execute:
 
 This generates a file named `<project_name>.mpac`.
 
-### Verifying the Micropac Setup
+### Verify the Micropac setup
 
 To confirm that the Micropac has been generated properly, follow these steps:
 
