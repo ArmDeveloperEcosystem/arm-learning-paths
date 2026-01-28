@@ -141,3 +141,10 @@ The Android system enforces throttling, so your own results may vary slightly.
 
 These measurements show how fast the model processes (encodes) 128 input tokens when running on a single CPU thread. As the results illustrate, SME2 delivers a significant performance boost even when using just one or two CPU cores on an Android phone, meaning faster processing without needing to involve multiple CPU cores.
 
+### Why use KleidiAI?
+
+To summarize, KleidiAI simplifies development by abstracting away low-level optimization: developers can write high-level code while the KleidiAI library selects the most efficient implementation at runtime based on the target hardware. This is possible thanks to its deeply optimized micro-kernels tailored for Arm architectures.
+
+As newer versions of the architecture become available, KleidiAI becomes even more powerful: simply updating the library allows applications like the multimodal Voice Assistant to take advantage of the latest architectural improvements such as SME2, without requiring any code changes. This means better performance on newer devices with no additional effort from developers.
+
+
