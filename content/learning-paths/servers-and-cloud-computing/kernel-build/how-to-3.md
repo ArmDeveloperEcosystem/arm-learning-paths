@@ -5,6 +5,7 @@ weight: 4
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## What is Fastpath mode?
 
 Fastpath builds use the same TuxMake pipelines but add a configuration fragment that exposes the interfaces needed by the Fastpath testing framework. This includes extra headers, Linux Perf for performance profiling, and Docker so Fastpath can control and automate testing.
 
