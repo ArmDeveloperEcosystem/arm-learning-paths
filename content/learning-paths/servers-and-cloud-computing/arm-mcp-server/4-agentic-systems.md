@@ -42,6 +42,8 @@ Pitfalls to avoid:
 
 * Don't confuse a software version with a language wrapper package version. For example, when checking the Python Redis client, check the Python package name "redis" rather than the Redis server version.
 * NEON lane indices must be compile-time constants, not variables.
+* If you're unsure about Arm equivalents, use knowledge_base_search to find documentation.
+* Be sure to find out from the user or system what the target machine is, and use the appropriate intrinsics. For instance, if neoverse (Graviton, Axion, Cobalt) is targeted, use the latest SME/SME2.
 
 If you have good versions to update for the Dockerfile, requirements.txt, and other files, change them immediately without asking for confirmation.
 
@@ -78,6 +80,8 @@ Pitfalls to avoid:
 
 * Don't confuse a software version with a language wrapper package version. For example, when checking the Python Redis client, check the Python package name "redis" rather than the Redis server version.
 * NEON lane indices must be compile-time constants, not variables.
+* If you're unsure about Arm equivalents, use knowledge_base_search to find documentation.
+* Be sure to find out from the user or system what the target machine is, and use the appropriate intrinsics. For instance, if neoverse (Graviton, Axion, Cobalt) is targeted, use the latest SME/SME2.
 
 If you have good versions to update for the Dockerfile, requirements.txt, and other files, change them immediately without asking for confirmation.
 
