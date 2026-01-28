@@ -19,9 +19,9 @@ For support on GCP setup, see the Learning Path [Getting started with Google Clo
 
 Navigate to the Google Cloud Console and create a new firewall rule:
 
-- Go to the **Google Cloud Console**
-- Select **VPC network** > **Firewall**
-- Select **Create firewall rule**
+- Go to the **Google Cloud Console**.
+- Select **VPC network** > **Firewall**.
+- Select **Create firewall rule**.
 
 ![Screenshot of the Google Cloud Console showing the Firewall section. The Create firewall rule button is prominently displayed at the top of the page#center](images/firewall-rule.png "Google Cloud Console Firewall page")
 

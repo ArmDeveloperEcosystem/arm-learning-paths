@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Provision a Google Axion C4A Arm VM
 
-You'll create a Google Axion C4A Arm-based virtual machine (VM) on Google Cloud Platform (GCP) using the `c4a-standard-4` machine type (4 vCPUs, 16 GB memory). This VM hosts your Django application.
+In this section you'll create a Google Axion C4A Arm-based virtual machine on Google Cloud Platform. You'll use the `c4a-standard-4` machine type, which provides 4 vCPUs and 16 GB of memory. This VM will host your Django application.
 
 {{% notice Note %}}
 For help with GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
@@ -24,7 +24,7 @@ To create a virtual machine based on the C4A instance type:
    - Set **Series** to `C4A`.
    - Select `c4a-standard-4` for machine type.
 
-![Screenshot of the Google Cloud Console showing the Machine configuration section. The Series dropdown is set to C4A and the machine type c4a-standard-4 is selected#center](images/gcp-vm.png "Configuring machine type to C4A in Google Cloud Console")
+![Screenshot of the Google Cloud Console showing the Machine configuration section. The Series dropdown is set to C4A and the machine type c4a-standard-4 is selected alt-txt#center](images/gcp-vm.png "Configuring machine type to C4A in Google Cloud Console")
 
 
 - Under **OS and Storage**, select **Change**, then choose an Arm64-based OS image. For this Learning Path, use **SUSE Linux Enterprise Server**. 
@@ -37,8 +37,11 @@ To create a virtual machine based on the C4A instance type:
 
 ## Create the instance
 
-Click **Create** to launch your VM instance. Google Cloud provisions the instance, which typically takes one to two minutes.
-Once the instance is running, you'll see it listed in the VM instances table with a green checkmark. Note the External IP address displayed in the list; you'll need this to access your Django application later.
+Click **Create** to launch your VM instance. 
+
+
+Google Cloud provisions the instance, which typically takes one to two minutes. Once the instance is running, you'll see it listed in the VM instances table with a green checkmark. 
+{{% notice Note %}} You'll need the External IP address displayed in the list to access your Django application later.{{% /notice %}}
 
 ## Connect using SSH
 

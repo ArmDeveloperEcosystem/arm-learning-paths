@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Django REST API with PostgreSQL and Redis
 
-This guide walks you through building a production-ready Django REST API that connects to PostgreSQL for data and Redis for caching.
+In this section you'll build a Django REST API that uses PostgreSQL for database storage and Redis for caching. This matches how production applications are typically structured.
 
-### Create Django project
+## Create a Django project
 
 Set up a clean Python virtual environment and install all runtime dependencies required for Django, PostgreSQL, Redis, and production serving with Gunicorn.
 
@@ -37,7 +37,7 @@ django-admin startapp api
 
 The Django project structure is ready with all required libraries for database, cache, and API support.
 
-### Enable Django apps
+## Enable Django apps
 
 Enable the REST framework and API app by editing `django_api/settings.py`. Add 'rest_framework' and 'api' to INSTALLED_APPS, set DEBUG to False, and add '*' to ALLOWED_HOSTS: 
 
@@ -60,7 +60,7 @@ INSTALLED_APPS = [
 
 Django is configured to run as an API server.
 
-### Configure PostgreSQL and Redis
+## Configure PostgreSQL and Redis
 
 This step connects Django to external managed services instead of local SQLite. This mirrors how real production systems operate.
 
@@ -96,7 +96,8 @@ Edit the above addition and set `REDIS_IP` to the actual IP address that you sav
 
 The application is configured to use PostgreSQL and Redis.
 
-### Migrate the database
+## Migrate the database
+
 Django creates tables, metadata, and user models inside PostgreSQL.
 
 ```bash
@@ -106,7 +107,7 @@ python manage.py createsuperuser
 
 The PostgreSQL instance contains all Django system tables.
 
-### Create a health API endpoint
+## Create a health API endpoint
 
 A health endpoint allows Kubernetes and load balancers to verify if the service is running.
 
@@ -134,7 +135,8 @@ urlpatterns = [
 
 The health endpoint is configured.
 
-### Validate locally
+## Validate locally
+
 Before containerizing or deploying, validate that everything works end-to-end.
 
 ```bash

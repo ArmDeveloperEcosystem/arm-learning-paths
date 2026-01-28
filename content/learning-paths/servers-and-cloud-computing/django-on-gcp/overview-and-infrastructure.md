@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Deploy Django REST API on GKE Axion with Cloud SQL and Redis
-This guide deploys a container-native Django REST API on Google Kubernetes Engine (GKE) running on Axion (ARM64) nodes.
+This section shows you how to deploy a Django REST API on Google Kubernetes Engine (GKE) using Axion (Arm64) nodes.
 
 The application integrates with:
 
@@ -18,7 +18,7 @@ The application integrates with:
 
 Performance is validated using **throughput** and **p95 latency**, allowing you to evaluate how an Arm-based Kubernetes platform behaves under real application load.
 
-### Target Architecture
+### Target architecture
 
 ```output
 Client
@@ -40,7 +40,7 @@ This architecture represents a production-grade microservice deployment where co
 
 The following sections guide you through provisioning all required GCP services.
 
-### Enable the SUSE Containers module
+## Enable the SUSE Containers module
 
 Enable the SUSE Containers Module to ensure that Docker and container-related tools are fully supported.
 ```bash
@@ -76,7 +76,7 @@ The output is similar to:
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 ```
 
-### Install kubectl (Kubernetes CLI)
+## Install kubectl (Kubernetes CLI)
 
 Install the kubectl command-line tool for interacting with Kubernetes clusters:
 
@@ -117,7 +117,7 @@ arm-lp-test             arm-lp-test      834184475014
 
 Note the **PROJECT_ID** for use in the next step.
 
-### Set the active project
+## Set the active project
 
 Ensure the correct GCP project is selected:
 
@@ -127,13 +127,14 @@ gcloud config set project <YOUR_PROJECT_ID>
 
 Replace `<YOUR_PROJECT_ID>` with your actual project ID from the previous step.
 
-### Install the auth plugin for gcloud
+## Install the auth plugin for gcloud
 
 ```bash
 gcloud components install gke-gcloud-auth-plugin
 ```
 
-### Create Artifact Registry
+## Create Artifact Registry
+
 Artifact Registry is used to store and distribute the Docker images for your Django application. This ensures that all Kubernetes nodes pull trusted, versioned images from a private Google-managed repository.
 
 ```bash
@@ -149,7 +150,7 @@ gcloud auth configure-docker us-central1-docker.pkg.dev
 
 Artifact Registry is configured to store your container images.
 
-### Create the GKE control plane
+## Create the GKE control plane
 
 Create the Kubernetes control plane that manages scheduling, networking, and workloads. Initially create it with a small node pool so the cluster can bootstrap.
 
@@ -163,7 +164,7 @@ gcloud container clusters create django-axion-cluster \
 
 The GKE cluster is running.
 
-### Configure kubectl access to GKE
+## Configure kubectl access to GKE
 
 Fetch cluster credentials:
 
@@ -172,7 +173,7 @@ gcloud container clusters get-credentials django-axion-cluster \
   --zone us-central1-a
 ```
 
-### Verify cluster access
+## Verify cluster access
 
 Confirm Kubernetes access:
 
@@ -188,13 +189,11 @@ gke-django-axion-cluster-default-pool-156e91c3-wdsb   Ready    <none>   34m   v1
 
 All nodes are in Ready state and the Kubernetes control plane is accessible.
 
-### Taint the cluster nodes for arm64 support
+## Taint the cluster nodes for arm64 support
 
 Taint the nodes to ensure proper scheduling on arm64 VMs. For each node starting with **gke**, run the following taint command. 
 
-{{% notice Note %}}
-Note the required "-" at the end.
-{{% /notice %}}  
+{{% notice Note %}}Note the required "-" at the end.{{% /notice %}}  
 
 For example using the node IDs in the output above: 
 
@@ -204,8 +203,7 @@ kubectl taint nodes gke-django-axion-cluster-default-pool-156e91c3-wdsb kubernet
 
 Replace the node names with your actual node names from the previous command output.
 
-### Add Axion (Arm64) node pool
-
+## Add Axion (Arm64) node po
 Axion (Arm64) nodes provide high performance per watt and cost-efficient compute. This pool runs all Django application workloads.
 
 ```bash
@@ -227,7 +225,7 @@ gcloud container node-pools delete default-pool \
 
 The Kubernetes cluster runs exclusively on Axion Arm64 nodes.
 
-### Create Cloud SQL (PostgreSQL with private IP)
+## Create Cloud SQL (PostgreSQL with private IP)
 
 Cloud SQL provides a fully managed PostgreSQL database. Private IP ensures traffic stays inside Google's private network, improving security and performance.
 
@@ -273,7 +271,8 @@ gcloud sql instances describe django-postgres \
 
 Save this IP address as **CLOUDSQL_IP** for later use.
 
-### Create Memorystore (Redis)
+## Create Memorystore (Redis)
+
 Redis is used for caching, sessions, and background job coordination. Memorystore provides a fully managed Redis service that scales and stays highly available.
 
 ```bash

@@ -1,5 +1,5 @@
 ---
-title: Deploy Django on Google Cloud C4A (Arm-based Axion VMs)
+title: Deploy Django on Arm-based Google Cloud C4A 
     
 minutes_to_complete: 60
 

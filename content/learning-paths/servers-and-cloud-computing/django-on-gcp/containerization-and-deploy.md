@@ -8,9 +8,10 @@ layout: learningpathall
 
 ## Containerize and deploy Django on Axion GKE
 
-This guide converts your Django REST API into a production-grade Arm64 container and deploys it on Axion-powered GKE.
+This section shows you how to package your Django REST API into a production-ready container and deploy it on GKE running Axion Arm64 processors.
 
-### Create Docker image
+## Create a Docker image
+
 This step packages your Django API and all its dependencies into a portable container image that can run on any Axion Arm64 node.
 
 Create a file called `requirements.txt` and insert the following:
@@ -35,7 +36,7 @@ CMD ["gunicorn","django_api.wsgi:application","--bind","0.0.0.0:8000","--workers
 
 This Dockerfile defines how to build your Django container for production deployment.
 
-### Build and push the image
+## Build and push the image
 
 Build the image on an Arm machine and push it to Artifact Registry, ensuring Kubernetes pulls an Arm-native image.
 
@@ -55,7 +56,7 @@ docker push us-central1-docker.pkg.dev/PROJECT_ID/django-arm/api:1.0
 
 The image is now stored in Artifact Registry and ready for deployment.
 
-### Deploy to GKE
+## Deploy to GKE
 
 Kubernetes Deployments define how many containers run and where. The nodeSelector forces pods onto Axion ARM64 nodes.
 
@@ -115,7 +116,8 @@ django-api-XXXXXX   1/1     Running   0          3h52m   10.0.1.9   gke-django-a
 
 The Django API is running as replicated containers on Axion Arm64 nodes.
 
-### Create a Kubernetes service (LoadBalancer)
+## Create a Kubernetes service (LoadBalancer)
+
 A Service exposes your pods to the internet using **Google Cloud’s managed load balancer**.
 
 Create `k8s/service.yaml`:
@@ -140,7 +142,7 @@ Apply the service configuration:
 kubectl apply -f k8s/service.yaml
 ```
 
-### Validate public access
+## Validate the service
 
 ```bash
 kubectl get svc django-api
@@ -153,7 +155,7 @@ django-api   LoadBalancer   34.118.226.245   34.45.23.92   80:31700/TCP   3h57m
 
 Wait until the `EXTERNAL-IP` field is populated before proceeding.
 
-### Validate public access
+## Test the application
 
 Open the following URL in browser:
 

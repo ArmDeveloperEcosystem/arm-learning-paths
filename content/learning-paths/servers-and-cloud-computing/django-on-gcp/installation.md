@@ -20,7 +20,7 @@ sudo zypper update -y
 sudo zypper install -y curl git tar gzip
 ```
 
-### Install Python 3.11
+## Install Python 3.11
 
 Install Python 3.11:
 
@@ -47,10 +47,6 @@ pip 22.3.1 from /usr/lib/python3.11/site-packages/pip (python 3.11)
 
 The Google Cloud CLI is required to authenticate with GCP and allow your Django application VM to interact with Google Cloud services such as GKE, Cloud SQL, Artifact Registry, Memorystore, and to build, deploy, and operate the Django platform.
 
-### Install Google Cloud SDK (gcloud)
-
-The Google Cloud SDK is required to create and manage GKE clusters.
-
 Download and extract the Google Cloud SDK:
 
 ```bash
@@ -70,7 +66,7 @@ After installation completes, exit and reconnect to apply the PATH changes:
 exit
 ```
 
-### Initialize gcloud
+## Initialize gcloud
 
 Authenticate and configure the Google Cloud CLI:
 
@@ -80,7 +76,7 @@ gcloud init
 
 During initialization, select **Login with a new account**. You'll be prompted to authenticate using your browser and receive an auth code to copy back. Select the project you want to use and choose default settings when unsure.
 
-### Verify authentication
+## Verify authentication
 
 ```bash
 gcloud auth list

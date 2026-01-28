@@ -6,7 +6,7 @@ weight: 6
 layout: learningpathall
 ---
 
-## Verify Django is working on your Arm-based VM
+## Verify Django installation
 
 In this section, you'll confirm that Django is installed correctly and can serve web requests on your Google Cloud C4A VM. You'll create a Django project, run the development server, and access it from your browser.
 
