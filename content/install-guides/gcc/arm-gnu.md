@@ -121,6 +121,8 @@ echo '/Applications/ArmGNUToolchain/14.2.rel1/arm-none-eabi/bin' | sudo tee -a /
 
 ## How do I install the Arm GNU Toolchain on Windows?
 
+**Before release 15.2.Rel1**
+
 Double-click on the installer (e.g. `gcc-arm-_version_--mingw-w64-i686-arm-none-eabi.exe`) and follow on-screen instructions.
 
 The installer can also be run on the command line. When run on
@@ -132,6 +134,16 @@ the command-line, the following options can be set:
 For example, to install the tools silently, amend users `PATH` and add registry entry:
 ```console
 gcc-arm-<version>--mingw-w64-i686-arm-none-eabi.exe /S /P /R
+```
+The zip package is a backup to Windows installer for those who cannot run the installer. You can unzip the package and then invoke the tools directly.
+
+**From release 15.2.Rel1**
+
+Double-click on the installer (e.g. `arm-gnu-toolchain-_version_--mingw-w64-i686-arm-none-eabi.msi`) and follow on-screen instructions.
+
+To install silently from the command line, use similar to the following:
+```console
+ msiexec /i arm-gnu-toolchain-<version>--mingw-w64-i686-arm-none-eabi.msi EULA=1 /quiet
 ```
 The zip package is a backup to Windows installer for those who cannot run the installer. You can unzip the package and then invoke the tools directly.
 
