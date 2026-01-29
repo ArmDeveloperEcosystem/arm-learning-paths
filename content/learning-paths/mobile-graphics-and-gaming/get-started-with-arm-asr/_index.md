@@ -40,7 +40,7 @@ further_reading:
         type: website
     - resource:
         title: Arm Community Blog
-        link: https://community.arm.com/arm-community-blogs/b/graphics-gaming-and-vr-blog/posts/introducing-arm-accuracy-super-resolution
+        link: https://developer.arm.com/community/arm-community-blogs/b/mobile-graphics-and-gaming-blog/posts/introducing-arm-accuracy-super-resolution
         type: blog
     - resource:
         title: Arm Accuracy Super Resolution for Unreal Engine Tutorial

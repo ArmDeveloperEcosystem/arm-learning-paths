@@ -38,7 +38,7 @@ further_reading:
         type: documentation
     - resource:
         title: Introducing Arm Frame Advisor 
-        link: https://community.arm.com/arm-community-blogs/b/graphics-gaming-and-vr-blog/posts/arm-mobile-studio-2023-5
+        link: https://developer.arm.com/community/arm-community-blogs/b/mobile-graphics-and-gaming-blog/posts/arm-mobile-studio-2023-5
         type: blog
     - resource:
         title: Arm Performance Studio for Mobile 
