@@ -30,7 +30,7 @@ cd argocd-arm-gitops
 git init
 ```
 
-This creates a GitOps-compliant directory structure for managing Kubernetes applications and initializes a local Git repository that you'll push to GitHub. This establishes Git as the only place where application state is defined (no manual `kubectl apply`).
+This creates a GitOps-compliant directory structure for managing Kubernetes applications and initializes a local Git repository that you push to GitHub. This establishes Git as the only place where application state is defined (no manual `kubectl apply`).
 
 
 Repository structure:
@@ -189,7 +189,7 @@ http://<NGINX_EXTERNAL_IP>
 
 You should see the NGINX welcome page:
 
-![NGINX welcome page confirming successful GitOps deployment via Argo CD alt-txt#center](images/argo-cd-nginx.png "NGINX Application Output")
+![Browser window displaying NGINX welcome page with Welcome to nginx heading and default landing page content alt-txt#center](images/argo-cd-nginx.png "NGINX Application Output")
 
 This confirms the application is successfully deployed via GitOps.
 
@@ -202,7 +202,7 @@ https://<ARGOCD_EXTERNAL_IP>
 ```
 The Argo CD UI provides real-time visibility into application health, sync status, repository source, and deployment history.
 
-![Argo CD UI showing nginx-prod application in Healthy and Synced state alt-txt#center](images/argocd-app.png "Argo CD Application Status")
+![Argo CD web interface displaying nginx-prod application card with green Healthy and Synced status badges and deployment details alt-txt#center](images/argocd-app.png "Argo CD Application Status")
 
 
 Key indicators:

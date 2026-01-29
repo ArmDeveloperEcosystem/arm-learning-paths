@@ -170,7 +170,7 @@ Confirm Kubernetes access:
 kubectl get nodes
 ```
 
-You should see an output similar to:
+The output is similar to:
 ```output
 NAME                                                STATUS   ROLES    AGE     VERSION
 gke-argocd-arm-cluster-default-pool-301523aa-6t7f   Ready    <none>   3h11m   v1.33.5-gke.2072000
