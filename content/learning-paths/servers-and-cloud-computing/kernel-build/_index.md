@@ -38,7 +38,7 @@ further_reading:
         link: https://www.kernel.org/doc/html/latest/
         type: documentation
     - resource:
-        title: arm_kernel_install_guide repository
+        title: Arm kernel build repository
         link: https://github.com/geremyCohen/arm_kernel_install_guide
         type: website
 
