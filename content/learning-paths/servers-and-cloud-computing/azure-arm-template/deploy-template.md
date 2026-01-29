@@ -19,7 +19,7 @@ Replace `eastus` with your preferred Azure region. To see available regions that
 ```bash
 az vm list-skus --location eastus --size Standard_D --all --output table | grep "ps_v6"
 ```
-The output will look like:
+The output is similar to:
 ```output
 virtualMachines  eastus       Standard_D16ps_v6       2,3      None
 virtualMachines  eastus       Standard_D2ps_v6        2,3      None
@@ -107,7 +107,7 @@ az deployment group show \
   --query properties.provisioningState
 ```
 
-The output displays `"Succeeded"` when the deployment completes successfully.
+The output displays `"Succeeded"` when the deployment completes.
 
 List the resources created in the resource group:
 
@@ -115,7 +115,7 @@ List the resources created in the resource group:
 az resource list --resource-group cobalt-rg --output table
 ```
 
-The output should look like:
+The output is similar to:
 
 ```output
 Name                                                     ResourceGroup    Location    Type                                     Status
@@ -152,4 +152,6 @@ The public IP address is dynamically allocated and won't be available until the 
 
 ## What you've accomplished and what's next
 
-You've successfully deployed an Arm-based Cobalt 100 VM using an Azure Resource Manager template. The deployment created a virtual network with a configured subnet, network security groups allowing SSH access, a public IP address for external connectivity, and a Cobalt 100 VM running Ubuntu 24.04 LTS. In the next section, you'll connect to your VM and verify the Arm64 architecture.
+You've deployed an Arm-based Cobalt 100 VM using an Azure Resource Manager template. The deployment includes network infrastructure with security groups, a public IP address, and a VM running Ubuntu 24.04 LTS.
+
+Next, you'll connect to your VM and verify the Arm64 architecture.
