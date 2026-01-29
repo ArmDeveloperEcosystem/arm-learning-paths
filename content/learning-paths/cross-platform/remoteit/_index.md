@@ -17,6 +17,24 @@ prerequisites:
 
 author: Brenda Strech
 
+further_reading:
+  - resource:
+      title: Developer Documentation
+      link: https://docs.remote.it
+      type: documentation
+  - resource:
+      title: GraphQL API Documentation
+      link: https://link.remote.it/docs/graphql
+      type: documentation
+  - resource:
+      title: User Forum
+      link: https://forum.remote.it
+      type: website
+  - resource:
+      title: Help Center
+      link: https://support.remote.it/hc/en-us
+      type: website
+
 ### Tags
 skilllevels: Introductory
 subjects: CI-CD

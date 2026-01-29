@@ -31,7 +31,6 @@ tools_software_languages:
 shared_path: true
 shared_between:
     - embedded-and-microcontrollers
-    - embedded-and-microcontrollers
 
 further_reading:
     - resource:
