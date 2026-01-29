@@ -44,7 +44,7 @@ further_reading:
         type: documentation
     - resource:
         title: Apache Kafka Benchmarks on AWS Graviton2
-        link: https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/apache-kafka-benchmarks-on-aws-graviton2
+        link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/apache-kafka-benchmarks-on-aws-graviton2
         type: blog
 
 

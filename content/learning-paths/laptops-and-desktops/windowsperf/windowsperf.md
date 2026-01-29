@@ -8,7 +8,7 @@ weight: 2
 
 [WindowsPerf](https://github.com/arm-developer-tools/windowsperf) is a (Linux [perf](https://perf.wiki.kernel.org) inspired) Windows on Arm performance profiling tool. Profiling is based on ARM64 PMU and its hardware counters. WindowsPerf supports the counting model for obtaining aggregate counts of occurrences of special events, and sampling model for determining the frequencies of event occurrences produced by program locations at the function, basic block, and/or instruction levels.
 
-Learn more in this [blog](https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/announcing-windowsperf) announcing the first release.
+Learn more in this [blog](https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/announcing-windowsperf) announcing the first release.
 
 ## WindowsPerf architecture
 

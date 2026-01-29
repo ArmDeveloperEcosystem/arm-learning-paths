@@ -260,7 +260,7 @@ ACfL is now [ready to use](#armclang).
 
 Arm Compiler for Linux is available with the [Spack](https://spack.io/) package manager.
 
-See the [Arm Compiler for Linux and Arm PL now available in Spack](https://community.arm.com/arm-community-blogs/b/high-performance-computing-blog/posts/arm-compiler-for-linux-and-arm-pl-now-available-in-spack) blog for full details.
+See the [Arm Compiler for Linux and Arm PL now available in Spack](https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/arm-compiler-for-linux-and-arm-pl-now-available-in-spack) blog for full details.
 
 ### How do I set up Spack for ACfL?
 

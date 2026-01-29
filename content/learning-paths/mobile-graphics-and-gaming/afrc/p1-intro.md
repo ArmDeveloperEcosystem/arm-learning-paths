@@ -30,7 +30,7 @@ So much so that, to the naked eye, the compressed and uncompressed images look t
 | ----------- | ----------- |
 | ![Uncompressed](images/sponza_default.webp) | ![AFRC 2BPC](images/sponza_afrc.webp) |
 
-More information can be found in [this blog on Arm® Immortalis™](https://community.arm.com/arm-community-blogs/b/graphics-gaming-and-vr-blog/posts/arm-immortalis-g715-developer-overview) and in [this Vulkan sample](https://github.com/KhronosGroup/Vulkan-Samples/blob/main/samples/performance/image_compression_control/README.adoc).
+More information can be found in [this blog on Arm® Immortalis™](https://developer.arm.com/community/arm-community-blogs/b/mobile-graphics-and-gaming-blog/posts/arm-immortalis-g715-developer-overview) and in [this Vulkan sample](https://github.com/KhronosGroup/Vulkan-Samples/blob/main/samples/performance/image_compression_control/README.adoc).
 
 Whereas default lossless compression can be transparently handled by the driver to improve performance, it is up to developers to explicitly enable fixed-rate compression for those images that will benefit the most from it.
 
