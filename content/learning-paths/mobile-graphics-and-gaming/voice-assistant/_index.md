@@ -12,7 +12,9 @@ learning_objectives:
     - Optimize performance of multimodal Voice Assistant using KleidiAI and SME2.
 
 prerequisites:
-    - An Android phone that supports the i8mm Arm architecture feature (8-bit integer matrix multiplication). This Learning Path was tested on a Google Pixel 8 Pro.
+    - An Android phone that supports the i8mm Arm architecture feature (8-bit integer matrix multiplication).
+    - An Android phone with support for SME (Scalable Matrix Extension) instructions, required for SME performance checking
+    - This Learning Path was tested on a Vivo X300 Pro.
     - A development machine with [Android Studio](https://developer.android.com/studio) installed.
 
 author:

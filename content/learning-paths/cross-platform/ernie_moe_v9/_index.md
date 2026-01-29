@@ -33,7 +33,6 @@ shared_path: true
 shared_between:
     - laptops-and-desktops
     - servers-and-cloud-computing
-    - iot
     - mobile-graphics-and-gaming
 
 further_reading:

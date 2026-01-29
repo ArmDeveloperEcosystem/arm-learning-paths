@@ -7,33 +7,30 @@
 
 **********************************************************************/
 
-ads-card.main-topic-card {
-    --ads-card-border-radius: 10px;
-    --ads-card-border-width: 1px;
-}
-
-html[theme='dark'] ads-card.main-topic-card {
-
-    --ads-card-background-color: var(--arm-color-base);
-    --ads-card-border-color: #000000;
-    --ads-card-box-shadow:  #000 @50%, X:0 Y: 3 B:12; /* probably not working 0 3px 12px rgba(0, 0, 0, 0.5); */
-    
-    /* hover state */
-    --ads-card-background-color-hover: var(--arm-color-base);
-    --ads-card-border-color-hover: transparent;
-    --ads-card-box-shadow-hover:  #000 @50%, X:0 Y: 3 B:12; /* probably not working */
-
+.main-topic-card {
+    border-radius: 10px;
 
 }
 
-html[theme='light'] ads-card.main-topic-card{
-    --ads-card-background-color: var(--arm-light-grey-alt);
-    --ads-card-border-color: var(--arm-light-grey);
-
-    --ads-card-background-color-hover: var(--arm-light-grey);
-    --ads-card-border-color-hover: var(--arm-orange);
-    --ads-card-box-shadow-hover: 0 1px 3px 3px rgba(0,0,0,0.25);
+.main-topic-card {
+    padding: 16px;
+    background-color: var(--arm-color-base);
+    border: 1px solid transparent;
+    border-color: #000000;
+    transition: 
+        transform 0.3s ease-in-out,
+        border-color 0.3s ease-in-out;
 }
+.main-topic-card:hover {
+    background-color: var(--arm-color-base);
+    border-color: var(--arm-green);
+    cursor: pointer;
+    transform: translateY(-3px); /* move up 3px */
+
+}
+
+
+
 
 .maintopic-content {
     text-align: left;
@@ -47,11 +44,13 @@ html[theme='light'] ads-card.main-topic-card{
 
 /* Title styling */
 /**************************************/
-ads-card.main-topic-card  .main-topic-title {
+.main-topic-title {
     color: var(--arm-light-blue);
+    font-weight: 700;
+    font-size: 20px;
 }
 
-ads-card.main-topic-card:hover  .main-topic-title {
+.main-topic-card:hover  .main-topic-title {
     transition: color 0.3s ease-in-out;
     color: var(--arm-green);
 }
@@ -59,16 +58,13 @@ ads-card.main-topic-card:hover  .main-topic-title {
 
 /* Subtitle styling */
 /**************************************/
-ads-card.main-topic-card  .main-topic-subtitle {
-    color: var(--arm-black);
+.main-topic-card  .main-topic-subtitle {
     font-family: "Source Code Pro", monospace;
+    font-size: 14px!important;
     font-weight: lighter;
-}
-
-html[theme='dark'] ads-card.main-topic-card  .main-topic-subtitle {
     color:  #A3A8AE;
-}
 
+}
 
 
 /* Install Guide cta link */
@@ -93,7 +89,7 @@ html[theme='dark'] ads-card.main-topic-card  .main-topic-subtitle {
 /* Header formatting and spacing */
 /**************************************/
 #title-div {
-    padding-top: 32px;
+    padding-top: 64px;
 }
 
 .homepage-top-divs {
@@ -111,10 +107,16 @@ html[theme='dark'] ads-card.main-topic-card  .main-topic-subtitle {
 #homepage-header {
     margin-top: 0px;
     margin-bottom: 0px;
-/*    font-size: 75px; */
+    font-size: 75px; 
     padding-bottom: 16px;
     display: inline-block;
 }
+@media (max-width: 576px) {
+    #homepage-header {
+            font-size: 50px;
+    }
+}
+
 
 
 

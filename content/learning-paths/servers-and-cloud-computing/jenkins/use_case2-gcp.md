@@ -1,145 +1,150 @@
 ---
-title: Jenkins Use Case 2 – Docker-based CI Pipeline on Arm64
+title: Build a Docker-based CI pipeline on Arm64
 weight: 11
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Jenkins Use Case – Docker-based CI Pipeline on Arm64
-This use case demonstrates how to use **Jenkins on a GCP SUSE Arm64 VM** to build and run a **Docker container natively on Arm64**. It validates Docker installation, Jenkins–Docker integration, and Arm-native container execution.
+## Build a Docker-based CI pipeline on Arm64
 
-### Prerequisites
-Before starting, ensure the following components are already available and working:
+You can use Jenkins on a GCP SUSE Arm64 virtual machine to build and run a Docker container natively on Arm64. Validate Docker installation, Jenkins–Docker integration, and Arm-native container execution.
 
-* Jenkins is installed and running on a GCP SUSE Arm64 VM
+## Prerequisites
 
-* Jenkins web UI is accessible
+Before starting, ensure the following components are available:
 
-* Docker installed on the VM
-
+* Jenkins installed and running on a GCP SUSE Arm64 virtual machine
+* Jenkins web UI accessible
+* Docker installed on the virtual machine
 * Jenkins user added to Docker group
 
-### Install Docker on SUSE Linux (Arm64)
-This step installs Docker using the SUSE package manager so containers can be built and run on the VM.
+## Install Docker on the GCP SUSE Arm64 virtual machine
+
+If not already installed, install Docker using the SUSE package manager:
 
 ```bash
 sudo zypper refresh
 sudo zypper install -y docker
 ```
 
-### Enable and start Docker service
-Docker must be running as a background service to accept commands from Jenkins.
+Enable and start the Docker service:
 
 ```console
 sudo systemctl enable docker
 sudo systemctl start docker
 ```
 
-### Allow Jenkins to Use Docker
-By default, Jenkins does not have permission to access Docker. This step grants Docker access to the Jenkins user.
+## Allow Jenkins to use Docker
 
-**Add Jenkins user to Docker group:**
+By default, Jenkins doesn't have permission to access Docker. Grant Docker access to the Jenkins user.
+
+Add the Jenkins user to the Docker group:
 
 ```console
 sudo usermod -aG docker jenkins
 ```
 
-### Restart services
-Restarting services ensures the new permissions take effect.
+## Restart services
+
+Restart services to ensure the new permissions take effect:
 
 ```console
 sudo systemctl restart docker
 sudo systemctl restart jenkins
 ```
 
-### Verify Docker access as Jenkins
-This step confirms that Jenkins can successfully run Docker commands.
+## Verify Docker access as Jenkins
+
+Confirm that Jenkins can successfully run Docker commands:
 
 ```console
 sudo -u jenkins docker version
 ```
 
-### Prepare Jenkins Workspace
-All demo files must be created inside the Jenkins workspace so the pipeline can access them during execution.
+The output is similar to:
+```output
+Client:
+ Version:           28.3.3-ce
+ API version:       1.51
+ Go version:        go1.24.5
+ Git commit:        bea959c7b
+ Built:             Tue Jul 29 12:00:00 2025
+ OS/Arch:           linux/arm64
+ Context:           default
 
-### Switch to Jenkins user
-
-```console
-sudo -u jenkins bash
+Server:
+ Engine:
+  Version:          28.3.3-ce
+  API version:      1.51 (minimum version 1.24)
+  Go version:       go1.24.5
+  Git commit:       bea959c7b
+  Built:            Tue Jul 29 12:00:00 2025
+  OS/Arch:          linux/arm64
+  Experimental:     false
+ containerd:
+  Version:          v1.7.27
+  GitCommit:        05044ec0a9a75232cad458027ca83437aae3f4da
+ runc:
+  Version:          1.2.6
+  GitCommit:        v1.2.6-0-ge89a29929c77
+ docker-init:
+  Version:          0.2.0_catatonit
+  GitCommit:
 ```
 
-### Navigate to Jenkins job workspace
-This directory matches the Jenkins job name and is where pipeline files are stored.
+## Create a Docker demo directory
+
+Create a directory to hold the Dockerfile:
 
 ```console
-cd /var/lib/jenkins/workspace/docker-Arm-ci
-```
-
-`docker-Arm-ci` must match your Jenkins job name.
-
-### Create Docker demo directory
-This directory will hold the Dockerfile used in the pipeline.
-
-```console
-mkdir docker-demo
+mkdir ~/docker-demo
 cd docker-demo
+pwd
 ```
 
-### Create Arm64 Dockerfile
-This Dockerfile uses an Arm64-native base image and prints a message when the container runs.
+## Create an Arm64 Dockerfile
+
+Create a Dockerfile that uses an Arm64-native base image:
 
 ```bash
 cat <<EOF > Dockerfile
-FROM Arm64v8/alpine:latest
+FROM arm64v8/alpine:latest
 CMD ["echo", "Hello from Arm64 Docker container"]
 EOF
 ```
 
-**Dockerfile details:**
+## Create a Jenkins pipeline job
 
-- Uses an Arm64-native base image
-- Prints a message when the container runs
+Configure Jenkins to build and run the Docker container automatically.
 
-### Exit Jenkins shell
-Return to your normal user account after preparing the workspace.
-
-```console
-exit
-```
-
-### Create Jenkins Pipeline Job
-This section configures Jenkins to build and run the Docker container automatically.
-
-#### Step 1: Open Jenkins UI
+### Open the Jenkins UI
 
 ```console
 http://<VM_PUBLIC_IP>:8080
 ```
 
-#### Step 2: Create a new Pipeline job
-Create a Jenkins job that defines the Docker-based CI workflow.
+### Create a new pipeline job
 
-* Open Jenkins UI
-  
+* Open the Jenkins UI
 * Click **New Item**
-
-* Job name: `docker-Arm-ci`
-
+* Job name: `docker-arm-ci`
 * Select **Pipeline**
+* Select **OK**
 
-* Click **OK**
+![Jenkins New Item page with docker-arm-ci entered as name and Pipeline option selected alt-txt#center](images/new-item.png "Create new item")
 
-![ Jenkins UI alt-text#center](images/new-item.png "Figure 1: Create Item")
+### Add the pipeline script
 
-#### Step 3: Jenkins Pipeline Script (Docker Arm Validation)
-This pipeline checks the system architecture, builds an Arm64 Docker image, and runs the container.
-
-* Scroll to the **Pipeline** section and select:
+Scroll to the **Pipeline** section:
 
 * **Definition:** Pipeline script
 
 Paste the following into the Pipeline script section:
+
+{{% notice Note %}}
+Update "/home/gcpuser/docker-demo" in the script to reflect the actual location of your docker-demo directory.
+{{% /notice %}}
 
 ```groovy
 pipeline {
@@ -147,25 +152,27 @@ pipeline {
 
   stages {
     stage('Environment Check') {
-      Steps {
+      steps {
         sh 'uname -m'
         sh 'docker version'
       }
     }
 
     stage('Build Docker Image') {
-      Steps {
+      steps {
         sh '''
+          cd $WORKSPACE
+          cp -r /home/gcpuser/docker-demo .
           cd docker-demo
-          docker build -t Arm64-docker-test .
+          docker build -t arm64-docker-test .
         '''
       }
     }
 
     stage('Run Docker Container') {
-      Steps {
+      steps {
         sh '''
-          docker run --rm Arm64-docker-test
+          docker run --rm arm64-docker-test
         '''
       }
     }
@@ -173,36 +180,36 @@ pipeline {
 }
 ```
 
-Click **Save**.
+Select **Save**.
 
-![ Jenkins UI alt-text#center](images/docker-pipeline.png "Figure 2: Create Pipeline")
+![Jenkins pipeline configuration page showing Pipeline script with Docker build and run stages defined in Groovy alt-txt#center](images/docker-pipeline.png "Create pipeline")
 
 
-#### Step 4: Execute the Pipeline
-Run the pipeline to verify Docker-based CI execution on Arm64.
+### Execute the pipeline
 
-* On the job page, click **Build Now**
+Run the pipeline to verify Docker-based CI execution on Arm64:
 
-* Click the build number
+* On the job page, select **Build Now**
+* Select the build number
   
-![ Jenkins UI alt-text#center](images/docker-build.png "Figure 3: Execute Job")
+![Jenkins docker-arm-ci job page showing Build Now button and build #1 in Build History alt-txt#center](images/docker-build.png "Execute pipeline")
 
-#### Step 4: View console output
-Review the logs to confirm that each pipeline stage completed successfully.
+### View console output
 
-* Click the build number (for example, `#1`)
+Review the logs to confirm that each pipeline stage completed successfully:
 
-* Click **Console Output**
+* Select the build number (for example, `#1`)
+* Select **Console Output**
 
-![ Jenkins UI alt-text#center](images/docker-output.png "Figure 3: Output")
+![Jenkins console output showing Docker build stages with Architecture aarch64, Docker version, image build success, and Hello from Arm64 Docker container message alt-txt#center](images/docker-output.png "Console output")
 
-### The output confirms
+## What you've accomplished and what's next
+
+You've successfully validated Docker-based CI pipelines using Jenkins on your GCP SUSE Arm64 virtual machine. The output confirms:
 
 - Jenkins is running on Arm64
 - Docker is Arm-native
 - Jenkins can build and run containers
 - End-to-end Docker CI works on Arm
 
-### Use Case Summary
-
-This use case validates Docker-based CI pipelines using Jenkins on a GCP SUSE Arm64 VM. Docker installation, Jenkins–Docker integration, Arm-native image builds, and container execution are successfully verified. The system is now ready for Arm-native containerized CI/CD workloads.
+Your system is now ready for Arm-native containerized CI/CD workloads.

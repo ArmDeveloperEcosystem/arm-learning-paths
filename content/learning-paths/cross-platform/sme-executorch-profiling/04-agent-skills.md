@@ -1,0 +1,129 @@
+---
+title: "Automate profiling workflows with AI agents"
+weight: 5
+layout: "learningpathall"
+---
+
+## Automate ExecuTorch profiling with AI assistants
+
+This Learning Path includes a set of structured, verifiable agent skills that enable automation of the performance analysis workflow by AI coding assistants (such as Codex, Claude, Cursor, or Copilot) and CI systems.
+
+Traditional documentation describes what a human should do. Agent skills describe how an automated system should do it, with explicit definitions of inputs, actions, expected outputs, and validation criteria. Each skill defines required inputs and preconditions, the exact actions to perform, the files and artifacts that should be produced, and validation steps that confirm successful execution. This structure enables workflows that are reproducible, verifiable, and suitable for AI-assisted development, automated regression testing, and repeatable onboarding.
+
+## Locate the agent workflows
+
+All agent skills are included in the same code repository as the performance analysis kit under:
+
+- [`agent_skill_ml_profiling`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/tree/main/agent_skill_ml_profiling)
+
+Start by reading the [skill catalog](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/agent_skill_ml_profiling/readme.md)
+
+Each skill is documented as a standalone, executable workflow.
+Available skills include:
+- `01_setup_workspace.md` - Initialize performance analysis environment
+- `02_build_runners.md` - Build SME2-on/off runner binaries
+- `03_export_model.md` - Export PyTorch model to ExecuTorch .pte
+- `04_run_profiling.md` - Execute performance measurement pipeline (timing + trace)
+- `05_analyze_results.md` - Generate operator-category breakdown
+- `06_validate_workflow.md` - End-to-end smoke test
+- `07_report_generation.md` - Generate comprehensive markdown report
+- `08_onboard_edgetam.md` - Onboard EdgeTAM image encoder model
+
+## Understand the agent skill structure
+
+Each agent skill follows a consistent structure designed for both human readability and machine execution:
+
+- YAML frontmatter: `name` and `description` metadata
+- Overview: Context and key concepts (why this skill matters)
+- When to use: Clear use cases
+- Prerequisites: Required inputs/state
+- Steps: Ordered, executable commands
+- Verification: How to confirm success (with test commands)
+- Expected outputs: Artifacts/files created
+- Failure handling: Common issues and fixes (table format)
+- Best practices: Recommendations
+- Implementation checklist: Step-by-step verification
+- References: Related scripts, docs, learning path pages
+- Assets: Supporting files used by the skill
+
+**The key feature**: Each skill is self-contained and verifiable. Validation steps ensure that the skill completed successfully before downstream skills are executed. This makes the workflow robust when automated.
+
+## Review the quick reference
+
+| Skill | Time | Prerequisites | Outputs |
+|-------|------|---------------|---------|
+| `setup_workspace` | ~30 min | Python 3.9+, CMake 3.29+ | `.venv/`, `executorch/` |
+| `build_runners` | ~20 min | Setup complete | `executorch/cmake-out/android-arm64-v9a*/executor_runner` (for mobile device testing) or `executorch/cmake-out/mac-arm64*/executor_runner` (developer accessibility) |
+| `export_model` | ~5 min | Setup complete | `out_<model>/artifacts/*.pte` |
+| `run_profiling` | ~10 min | Runners + model | `out_<model>/runs/<platform>/*.etdump` |
+| `analyze_results` | ~2 min | Performance measurement complete | `out_<model>/runs/<platform>/analysis_summary.json` |
+| `validate_workflow` | ~15 min | Setup complete | Full smoke test validation |
+| `report_generation` | ~1 min | Analysis complete | `out_<model>/runs/<platform>/report.md` |
+
+Times are approximate and depend on host performance and network availability.
+
+## Execute agent skills in the recommended order
+
+For AI assistants, use skills in this order:
+
+**First-time setup** (required for fresh downloads):
+- `01_setup_workspace.md` - Initialize environment (run this first if you downloaded the repo)
+  - Creates the Python virtual environment
+  - Clones and installs ExecuTorch
+  - Required before any other skill
+
+**After setup is complete**:
+- `06_validate_workflow.md` - Quick end-to-end test (recommended after setup)
+  - Runs a complete smoke test using a toy model
+  - Confirms the environment is correctly configured
+  - Recommended immediately after setup
+     
+**Ongoing usage**:
+For regular model analysis:
+  - `02_build_runners.md` (only if runners are missing or ExecuTorch changed)
+  - `03_export_model.md`
+  - `04_run_profiling.md`
+  - `05_analyze_results.md`
+
+Skills are composable. You can chain them together for end-to-end automation, or use them individually for specific tasks. Each skill includes verification steps to ensure success before proceeding.
+
+## Integrate agent skills with AI coding assistants
+
+Agent skills are designed to be pulled directly into an AI agent’s context as executable instructions. Each skill is a standalone Markdown file (*.md) that the agent reads and follows step by step.
+The typical interaction model is:
+  * The AI agent is provided with one or more skill files (for example, by loading them into the agent’s context, workspace, or prompt memory).
+  * The user issues a high-level intent prompt.
+  * The agent executes the steps defined in the skill file, rather than inferring actions on its own.
+  * The agent verifies success using the validation steps defined in the skill before proceeding.
+This separation is intentional:
+Skill files define how to perform a task, including commands, expected outputs, and validation.
+User prompts define what outcome is desired.
+
+Try this example User prompt in your AI agent: "Set up the performance analysis environment and run a smoke test"
+
+Agent behavior:
+- Reads `01_setup_workspace.md` and creates `.venv/`, `executorch/`
+- Verifies that the virtual environment and ExecuTorch checkout exist.
+- Reads `02_build_runners.md` and builds the required runner binaries.
+- Verifies that SME2-on and SME2-off runners were produced.
+- Reads 06_validate_workflow.md and runs the end-to-end smoke test.
+- Reads `06_validate_workflow.md` and runs the end-to-end smoke test
+- Confirms all validation gates pass before reporting success
+
+The agent doesn't need to guess which commands to run or how to verify success. The skill files provide explicit instructions, making the performance analysis workflow reliable across human-driven, AI-driven, and fully automated environments.
+
+## What you've accomplished
+
+In this section you learned how to use agent skills to automate profiling workflows, run skills in the correct order for setup and ongoing usage, and integrate agent skills with AI coding assistants for repeatable optimization. 
+
+This Learning Path as a whole has shown you how to analyze ExecuTorch performance on Arm using SME2, operator-level profiling, and agent-driven automation.
+
+You are now ready to:
+- Profile your own models using the structured workflows
+- Integrate agent skills into CI pipelines for automated performance regression testing
+- Extend the toolkit for custom model architectures or operator categories
+- Compare SME2-on versus SME2-off performance across different workloads
+
+For additional guidance on extending this toolkit or integrating with production workflows, see the [project repository](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling) and the agent skill catalog.
+
+

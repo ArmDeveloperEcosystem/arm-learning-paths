@@ -6,24 +6,13 @@ weight: 6
 layout: learningpathall
 ---
 
-## Verify Django is working on your Arm-based VM
+## Verify Django installation
 
-In this section, you'll confirm that Django is installed correctly and can serve web requests on your Google Cloud C4A VM. You'll create a Django project, run the development server, and access it from your browser. This hands-on verification ensures your environment is ready for development and testing.
-
-By the end of this section, you'll have:
-- Created a Django project with proper directory structure
-- Configured Django to accept requests from your VM's external IP
-- Run the development server and accessed it from your browser
-- Built a simple Django app with custom routing and views
-- Verified that Django can handle HTTP requests and render responses
-
-Let's get started!
-
-## Create and test a basic Django project
+In this section, you'll confirm that Django is installed correctly and can serve web requests on your Google Cloud C4A VM. You'll create a Django project, run the development server, and access it from your browser.
 
 Run the following command to create a new Django project named `myproject`:
 
-```console
+```bash
 django-admin startproject myproject
 cd myproject
 ```
@@ -46,7 +35,7 @@ The `manage.py` file is Django's command-line utility for project management. Th
 
 Set up your project's database by running migrations, which create the required tables for Django's built-in apps:
 
-```console
+```bash
 python3 manage.py migrate
 ```
 
@@ -58,18 +47,17 @@ Before starting the Django development server, you must configure your `ALLOWED_
 
 Navigate to your project settings directory:
 
-```console
+```bash
 cd ~/myproject/myproject/
 ```
 
 Open `settings.py` using a text editor:
 
-  ```console
-  edit myproject/settings.py
-  ```
-  
-- Locate the `ALLOWED_HOSTS` Line
-  Inside the file, find the following line:
+```bash
+edit myproject/settings.py
+```
+
+Locate the `ALLOWED_HOSTS` line inside the file:
 
 ```python
 ALLOWED_HOSTS = []
@@ -77,11 +65,11 @@ ALLOWED_HOSTS = []
 
 Update it to allow your VM's external IP address:
 
-- Allow All Hosts (for Testing Only)
-  To make your Django app accessible from your VM’s external IP address, update it to:
-  ```python
-  ALLOWED_HOSTS = ['*']
-  ```
+To make your Django app accessible from your VM's external IP address, update it to:
+
+```python
+ALLOWED_HOSTS = ['*']
+```
 {{% notice Note %}}
 For development and testing only, you can use `ALLOWED_HOSTS = ['*']` to allow all hosts. However, for production deployments, always specify explicit domain names or IP addresses such as `ALLOWED_HOSTS = ['your-external-ip', 'your-domain.com']`.
 {{% /notice %}}
@@ -92,7 +80,7 @@ ALLOWED_HOSTS = ['your-external-ip', 'your-domain.com']
 
 Now that you've configured `ALLOWED_HOSTS`, start the development server:
 
-```console
+```bash
 python3 manage.py runserver 0.0.0.0:8000
 ```
 
@@ -110,7 +98,7 @@ Replace `<YOUR_VM_EXTERNAL_IP>` with the public IP address of your GCP VM.
 
 You should see the Django welcome page with the message "The install worked successfully!":
 
-![Screenshot of the Django welcome page displayed in a web browser. The page features a large heading stating The install worked successfully followed by a subheading congratulating the user on successfully installing Django. Below are instructions for the next steps, including editing the settings file and reading the Django documentation. The page has a clean white background with blue highlights. alt-text#center](images/django-welcome-page.png "Django welcome page")
+![Screenshot of the Django welcome page displayed in a web browser. The page features a large heading stating The install worked successfully followed by a subheading congratulating the user on successfully installing Django. Below are instructions for the next steps, including editing the settings file and reading the Django documentation. The page has a clean white background with blue highlights alt-txt#center](images/django-welcome-page.png "Django welcome page")
 
 ## Build a simple Django app with custom routing
 
@@ -124,7 +112,7 @@ Press **Ctrl + C** in your terminal to stop the Django development server.
 
 Within your Django project directory, create a new app named `hello`:
 
-```console
+```bash
 python3 manage.py startapp hello
 ```
 
@@ -148,7 +136,7 @@ Edit `hello/views.py` and replace the entire file with:
 from django.http import HttpResponse
 
 def home(request):
-    return HttpResponse("<h1>Hello, Django on Arm!</h1>")
+    return HttpResponse("<h1>Hello, Django on GCP SUSE ARM64!</h1>")
 ```
 
 This simple view function returns a basic HTML message as an HTTP response.
@@ -220,7 +208,7 @@ INSTALLED_APPS = [
 
 Restart the Django development server:
 
-```console
+```bash
 python3 manage.py runserver 0.0.0.0:8000
 ```
 
@@ -232,10 +220,15 @@ Open your browser and navigate to:
 http://<YOUR_VM_EXTERNAL_IP>:8000
 ```
 
-You should now see your custom message displayed:
+Your browser displays your custom message:
 
-![Screenshot of a web browser displaying a Django app with a large heading that reads Hello, Django on Arm centered on a clean white background. The page contains no additional content or navigation, creating a straightforward and welcoming tone. alt-text#center](images/django-app.png "Django custom app")
+![Screenshot of a web browser displaying a Django app with a large heading that reads Hello, Django on Arm, centered on a clean white background alt-txt#center](images/django-app.png "Django custom app")
 
-## Summary and what's next
+## What you've accomplished and what's next
 
-You've successfully verified that Django is installed and working on your Arm-based VM. Your application can serve web requests, handle routing, and render custom views. Great job, you're ready to benchmark your Django application!
+In this section, you:
+- Created a Django project and ran the development server
+- Built a custom Django app with routing and views
+- Verified that Django serves web requests successfully on your Arm VM
+
+Next, you'll set up the complete GKE infrastructure with Cloud SQL and Memorystore for production deployment.

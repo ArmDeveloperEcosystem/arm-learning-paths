@@ -1,15 +1,17 @@
 ---
-title: Automate x86 code migration to Arm using AI prompt files
+title: Arm Cloud Migration Agent in GitHub Copilot
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## Migrating SIMD code with AI assistance
+## The Arm Cloud Migration Agent
 
 {{% notice Note %}} This section uses Visual Studio Code with GitHub Copilot. If you're using a different AI assistant, skip to the next section, where you'll configure the same migration workflow using other agentic systems.{{% /notice %}}
 
-When migrating applications from x86 to Arm, you might encounter SIMD (Single Instruction, Multiple Data) code that is written using architecture-specific intrinsics. On x86 platforms, SIMD is commonly implemented with SSE, AVX, or AVX2 intrinsics, while Arm platforms use NEON and SVE intrinsics to provide similar vectorized capabilities. Updating this code manually can be time-consuming and challenging. By combining the Arm MCP Server with a well-defined prompt file, you can automate much of this work and guide an AI assistant through a structured, architecture-aware migration of your codebase.
+When migrating applications from x86 to Arm, you might encounter SIMD (Single Instruction, Multiple Data) code that is written using architecture-specific intrinsics. On x86 platforms, SIMD is commonly implemented with SSE, AVX, or AVX2 intrinsics, while Arm platforms use NEON and SVE intrinsics to provide similar vectorized capabilities. Updating this code manually can be time-consuming and challenging. By combining the Arm MCP Server with a well-defined prompt file, you can create an Arm Cloud Migration Agent in GitHub Copilot that automates much of this work and guides the AI assistant through a structured, architecture-aware migration of your codebase.
+
+This section walks through creating the agent prompt file and using it to migrate a sample x86 application with AVX2 SIMD code to Arm NEON.
 
 ## Sample x86 code with AVX2 intrinsics
 
@@ -173,13 +175,11 @@ int main() {
 }
 ```
 
-Prompt files act as executable migration playbooks. They encode a repeatable process that the AI can follow reliably, rather than relying on one-off instructions or guesswork.
-
 ## The Arm migration prompt file
 
-To automate migration, you can define a prompt file that instructs the AI assistant how to analyze and transform the project using the Arm MCP Server. Prompt files encode best practices, tool usage, and migration strategy, allowing the AI assistant to operate fully autonomously through complex multi-step workflows.
+To automate migration, you can define a prompt file that instructs the AI assistant how to analyze and transform the project using the Arm MCP Server. Prompt files act as executable migration playbooks. They encode best practices, tool usage, and migration strategy, allowing the AI assistant to operate fully autonomously through complex multi-step workflows.
 
-Create the following example prompt file to use with GitHub Copilot at `.github/prompts/arm-migration.prompt.md`:
+Create the following prompt file at `.github/prompts/arm-migration.prompt.md`:
 ```markdown
 ---
 tools: ['search/codebase', 'edit/editFiles', 'arm-mcp/skopeo', 'arm-mcp/check_image', 'arm-mcp/knowledge_base_search', 'arm-mcp/migrate_ease_scan', 'arm-mcp/mca', 'arm-mcp/sysreport_instructions']
@@ -201,6 +201,8 @@ Pitfalls to avoid:
 
 * Don't confuse a software version with a language wrapper package version. For example, when checking the Python Redis client, check the Python package name "redis" rather than the Redis server version. Setting the Python Redis package version to the Redis server version in requirements.txt will fail.
 * NEON lane indices must be compile-time constants, not variables.
+* If you're unsure about Arm equivalents, use knowledge_base_search to find documentation.
+* Be sure to find out from the user or system what the target machine is, and use the appropriate intrinsics. For instance, if neoverse (Graviton, Axion, Cobalt) is targeted, use the latest SME/SME2.
 
 If you have good versions to update for the Dockerfile, requirements.txt, and other files, change them immediately without asking for confirmation.
 
@@ -220,7 +222,7 @@ The assistant will:
    * Rewrite SIMD code using NEON
    * Remove architecture-specific build flags
    * Update container and dependency configurations as needed
-     
+
 ## Verify the migration
 
 After reviewing and accepting the changes, build and run the application on an Arm system:
@@ -247,7 +249,6 @@ If compilation or runtime issues occur, feed the errors back to the AI assistant
 
 ## What you've accomplished and what's next
 
-In this section, you've used a prompt file to guide an AI assistant through a fully automated migration of x86 AVX2 SIMD code to Arm NEON. You've seen how structured instructions enable the assistant to analyze, transform, and verify architecture-specific code.
+In this section, you've created an Arm Cloud Migration Agent in GitHub Copilot using a prompt file and used it to perform a fully automated migration of x86 AVX2 SIMD code to Arm NEON. You've seen how structured instructions enable the assistant to analyze, transform, and verify architecture-specific code.
 
-In the next section, you'll learn how to configure different agentic AI systems with similar migration workflows.
-
+In the next section, you'll learn how to configure other agentic AI systems with the same migration workflow.

@@ -53,12 +53,15 @@ jobs:
           path: htmltest.log
           retention-days: 5
 
+      - name: Generate spell check configuration
+        run: tools/generate-spellcheck-non-draft.sh
+
       - name: Spell check
         id: spellcheck
         continue-on-error: true
         uses: rojopolis/spellcheck-github-actions@0.40.0
         with:
-          config_path: .spellcheck.yml
+          config_path: .spellcheck-non-draft.yml
           task_name: Markdown
           output_file: spellcheck-output.txt
 
