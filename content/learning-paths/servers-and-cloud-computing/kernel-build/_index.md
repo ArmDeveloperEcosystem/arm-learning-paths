@@ -1,10 +1,6 @@
 ---
 title: Build Linux kernels for Arm cloud instances
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 60
 
 who_is_this_for: This is an advanced topic for software developers building custom Linux kernels on Arm servers and cloud instances.
