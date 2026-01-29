@@ -8,14 +8,6 @@ layout: learningpathall
 
 Azure Resource Manager templates provide a declarative way to define and deploy Azure infrastructure as code. In this Learning Path, you'll create a template that deploys a Linux virtual machine powered by Azure Cobalt 100 processors, including networking, security, and SSH authentication.
 
-You'll learn how to:
-
-- Structure an Azure Resource Manager template with parameters, variables, and resources
-- Specify Arm64 architecture and Cobalt 100 VM sizes
-- Configure SSH key authentication for secure access
-- Deploy the template using Azure CLI
-- Verify and connect to your deployed Arm-based VM
-
 Using Resource Manager templates enables consistent, repeatable deployments across different environments while reducing configuration errors and enabling CI/CD automation.
 
 ## What is an Azure Resource Manager template?
@@ -26,12 +18,7 @@ Azure Resource Manager templates are JSON files that define the infrastructure a
 
 To complete this Learning Path, you need:
 
-- An active Microsoft Azure subscription with permissions to:
-  - Create resource groups
-  - Deploy virtual machines
-  - Create networking resources (virtual networks, network security groups, public IP addresses)
-- Azure CLI installed on your local machine (see the [Azure CLI install guide](/install-guides/azure-cli/))
-- An SSH key pair for authentication
+
 
 ## Generate an SSH key pair
 
