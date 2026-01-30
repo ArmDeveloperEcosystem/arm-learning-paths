@@ -31,7 +31,7 @@ Add required `CMSIS-Packs` via the `CMSIS Pack Manager` perspective.
 
 ## Install appropriate device CMSIS-Pack
 
-This Learning Path is written for the supplied (Cortex-M4) Fixed Virtual Platform (FVP), however it could be run on any of the 10000+ devices supported by [CMSIS-Pack](https://www.open-cmsis-pack.org/).
+This Learning Path is written for the supplied (Cortex-M4) Fixed Virtual Platform (FVP), however it could be run on any of the 10000+ devices supported by [CMSIS-Pack](https://open-cmsis-pack.github.io/Open-CMSIS-Pack-Spec/main/html/index.html/).
 
 In `Pack Installer` browse for your device, and install any suggested `Device Specific` pack.
 

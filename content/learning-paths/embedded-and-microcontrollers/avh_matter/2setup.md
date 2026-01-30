@@ -64,7 +64,7 @@ The `Console` view within the browser will suffice to complete this Learning Pat
 
 If you wish to connect via `SSH` (rather than `Console`), it is easiest to follow the SSH tunnel connection instructions specified in the `Connect` tab. 
 
-As an alternative, you can also download and install the appropriate [OpenVPN Community](https://openvpn.net/community-downloads) version for your host. Click on `DOWNLOAD OVPN FILE` within the `Connect via VPN` section.
+As an alternative, you can also download and install the appropriate [OpenVPN Community](https://openvpn.net/community/) version for your host. Click on `DOWNLOAD OVPN FILE` within the `Connect via VPN` section.
 
 In the `OpenVPN` GUI, select `Import` > `Import file...` and browse to the downloaded `OVPN file`. Click `Connect`.
 

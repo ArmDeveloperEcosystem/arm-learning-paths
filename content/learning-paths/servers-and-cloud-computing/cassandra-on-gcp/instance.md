@@ -91,6 +91,6 @@ hello world
 
 ## Automate Arm infrastructure deployment
 
-Cloud infrastructure deployment is typically done via Infrastructure as Code (IaC) automation tools. There are Cloud Service Provider-specific tools like [Google Cloud Deployment Manager](https://cloud.google.com/deployment-manager/docs/).
+Cloud infrastructure deployment is typically done via Infrastructure as Code (IaC) automation tools. There are Cloud Service Provider-specific tools like [Google Cloud Deployment Manager](https://docs.cloud.google.com/deployment-manager/docs/).
 
 There are also Cloud Service Provider-agnostic tools like [Terraform](https://www.terraform.io/). Review the Learning Path[Deploy Arm virtual machines on Google Cloud Platform (GCP) using Terraform](/learning-paths/servers-and-cloud-computing/gcp) next.
