@@ -31,8 +31,6 @@ Free tier offers are currently available:
 
 The [Works on Arm](https://www.arm.com/markets/computing-infrastructure/works-on-arm) initiative enables developers to build, test, and optimize projects on the Arm64 architecture by providing free access to Arm based developer platforms, cloud instances, and CI/CD environments. Arm has partnered with cloud service providers to make Neoverse compute available to developers.
 
-Consider [applying for Arm resources on an Equinix Cluster](https://github.com/WorksOnArm/equinix-metal-arm64-cluster).
-
 ## Academic offers from Cloud Service Providers
 
 Below is a list of Arm cloud partners that have existing academic offers for students and teaching staff who wish to use Arm-based instances. 

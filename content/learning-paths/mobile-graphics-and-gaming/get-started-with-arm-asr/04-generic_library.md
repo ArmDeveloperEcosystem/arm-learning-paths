@@ -10,7 +10,7 @@ layout: learningpathall
 
 Follow these steps to implement **Arm Accuracy Super Resolution (Arm ASR)** in your custom engine.
 
-Arm ASR is an optimized variant of [Fidelity Super Resolution 2](https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/blob/main/docs/techniques/super-resolution-temporal.md) (FSR2) that includes extensive mobile-specific optimizations, ensuring high performance on mobile devices.
+Arm ASR is an optimized variant of Fidelity Super Resolution 2 (FSR2) that includes extensive mobile-specific optimizations, ensuring high performance on mobile devices.
 
 You can integrate Arm ASR into your custom engine using one of two methods:
 
