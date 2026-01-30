@@ -169,85 +169,47 @@ When the installation finishes, select **Close** to exit the installer.
 
 ## How do I prepare my target for ATP connections?
 
-Before connecting to an Arm Linux target, set up SSH key-based authentication and configure passwordless sudo access. The setup differs depending on whether your target is a cloud instance or an on-premise server.
+Before connecting to an Arm Linux target, ensure SSH key-based authentication is configured and that passwordless sudo access is enabled. If you already manage your target system via SSH, you likely have most of this setup complete.
 
-### Working with cloud instances
+### Check your existing SSH key
 
-If your target is a cloud instance (for example: AWS EC2 Graviton, GCP Axion, Azure Cobalt), you likely created it with an existing SSH key pair. You need to generate a separate ATP key for the tool to use.
-
-First, ensure you can connect to your cloud instance using the existing key. For example, if your cloud provider key is stored at `~/cloud-keys/my-instance.pem`:
-
-```bash
-ssh -i ~/cloud-keys/my-instance.pem ubuntu@your-instance-ip
-```
-
-If the connection works, generate a new key pair specifically for ATP (without a passphrase):
-
-```bash
-ssh-keygen -t ed25519 -f ~/.ssh/atp_key
-```
-
-Press **Enter** when prompted for a passphrase to leave it empty (ATP doesn't support SSH keys with a passphrase).
-
-Now copy the ATP public key to your cloud instance, using your existing cloud key for authentication:
-
-```bash
-ssh-copy-id -i ~/.ssh/atp_key.pub -o "IdentityFile=~/cloud-keys/my-instance.pem" ubuntu@your-instance-ip
-```
-
-Alternatively, if you've configured your SSH config file (`~/.ssh/config`) with the cloud key details for your instance, you can use:
-
-```bash
-ssh-copy-id -i ~/.ssh/atp_key.pub ubuntu@your-instance-ip
-```
-
-After this, you can use `~/.ssh/atp_key` as the private key when configuring ATP's target connection.
-
-### Working with on-premise targets
-
-If your target is an on-premise Arm Linux server, check if you already have an SSH key pair on your local machine:
-
-```bash
-ls -l ~/.ssh/id*
-```
-
-If a key pair exists, you see files like `id_ed25519` and `id_ed25519.pub`. The `.pub` file is your public key.
-
-If no keys exist, generate a new key pair:
-
-```bash
-ssh-keygen
-```
-
-Press **Enter** to accept the default location. When prompted for a passphrase, press **Enter** to skip (ATP doesn't support SSH keys with a passphrase).
-
-Copy your public key to the target system:
-
-```bash
-ssh-copy-id user@target_host
-```
-
-By default, `ssh-copy-id` uses your default public key. If you have multiple keys and want to specify which one to copy, use the `-i` option:
-
-```bash
-ssh-copy-id -i ~/.ssh/id_ed25519.pub user@target_host
-```
-
-Enter your password when prompted.
-
-If you see a message that "All keys were skipped because they already exist on the remote system," but you still need to add or update the key, use the `-f` option to force the installation:
-
-```bash
-ssh-copy-id -f user@target_host
-```
-
-Verify key-based authentication works:
+Verify that you can connect to your target using SSH:
 
 ```bash
 ssh user@target_host
 ```
 
-The connection should succeed without prompting for a password.
+If the connection works, you have SSH key authentication configured. Now check if your existing key has a passphrase. Try to display the public key:
+
+```bash
+ssh-keygen -y -f ~/.ssh/id_ed25519
+```
+
+If you're prompted for a passphrase, your key is protected with one. ATP doesn't support SSH keys with passphrases, so you need to create a separate key without a passphrase for ATP.
+
+### Create a passphrase-free key for ATP (if needed)
+
+If your existing SSH key has a passphrase, generate a new key specifically for ATP:
+
+```bash
+ssh-keygen -t ed25519 -f ~/.ssh/atp_key
+```
+
+Press **Enter** when prompted for a passphrase to leave it empty.
+
+Copy the new public key to your target. If your existing SSH key is at a non-default location (for example, `~/cloud-keys/my-instance.pem`), specify it when copying:
+
+```bash
+ssh-copy-id -i ~/.ssh/atp_key.pub -o "IdentityFile=~/cloud-keys/my-instance.pem" user@target_host
+```
+
+If your existing key is in the default location (`~/.ssh/id_ed25519` or `~/.ssh/id_rsa`), use:
+
+```bash
+ssh-copy-id -i ~/.ssh/atp_key.pub user@target_host
+```
+
+You can now use `~/.ssh/atp_key` as the private key when configuring ATP's target connection.
 
 ### Enable passwordless sudo on the target
 
