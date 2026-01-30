@@ -329,7 +329,7 @@ The context description structure can be provided with a callback function for p
 
 ## Extended ffx_shader_compiler
 
-Most of the workloads in the upscalers have been converted to fragment shaders. Since the workflow using the standalone VK backend relies on reflection data generated with [`AMD's Shader Compiler`](https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/blob/main/docs/tools/ffx-sc.md), it becomes necessary to do an improvised extension of the tool to provide reflection data for the RenderTargets so resources could be resolved automatically in the backend. Users might want to evolve the algorithm potentially changing the RenderTargets in the process. Thus, a diff file is provided with the changes that were applied locally `ffx_shader_compiler` (`$ARMASR_DIR/tools/ffx_shader_compiler.diff`) for the latest version of the technique.
+Most of the workloads in the upscalers have been converted to fragment shaders. Since the workflow using the standalone VK backend relies on reflection data generated with [`AMD's Shader Compiler`](https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/), it becomes necessary to do an improvised extension of the tool to provide reflection data for the RenderTargets so resources could be resolved automatically in the backend. Users might want to evolve the algorithm potentially changing the RenderTargets in the process. Thus, a diff file is provided with the changes that were applied locally `ffx_shader_compiler` (`$ARMASR_DIR/tools/ffx_shader_compiler.diff`) for the latest version of the technique.
 
 ## Generate prebuilt shaders
 

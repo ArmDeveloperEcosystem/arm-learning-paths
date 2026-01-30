@@ -144,24 +144,24 @@ For more information about the available versions and supported platforms refer 
 
 You can download Java from the [Oracle website](https://www.oracle.com/java/technologies/javase-downloads.html) and install it manually. Look for the files with ARM64 in the description.
 
-Download a [tar.gz](https://download.oracle.com/java/22/latest/jdk-22_linux-aarch64_bin.tar.gz) file from the website. 
+Download a [tar.gz](https://download.oracle.com/java/25/latest/jdk-25_linux-aarch64_bin.tar.gz) file from the website. 
 
 Extract the contents of the file:
 
 ```console
-tar xvf jdk-22_linux-aarch64_bin.tar.gz
+tar xvf jdk-25_linux-aarch64_bin.tar.gz
 ```
 
 Move the contents to a directory of your choice: 
 
 ```console
-sudo mv jdk-22.0.2 /usr/local/
+sudo mv jdk-25.0.2 /usr/local/
 ```
 
 Set up environment variables to locate your installation:
 
 ```console
-export JAVA_HOME=/usr/local/jdk-22.0.2
+export JAVA_HOME=/usr/local/jdk-25.0.2
 export PATH=$JAVA_HOME/bin:$PATH
 ```
 
