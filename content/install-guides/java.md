@@ -350,9 +350,9 @@ sudo apt install ant -y
 You can also install specific versions by downloading and extracting a zip file:
 
 ```console
-wget https://downloads.apache.org/ant/binaries/apache-ant-1.10.13-bin.zip -O apache-ant-1.10.13-bin.zip
-unzip apache-ant-1.10.13-bin.zip
-sudo mv apache-ant-1.10.13 /opt/ant
+wget https://downloads.apache.org/ant/binaries/apache-ant-1.10.14-bin.zip -O apache-ant-1.10.14-bin.zip
+unzip apache-ant-1.10.14-bin.zip
+sudo mv apache-ant-1.10.14 /opt/ant
 sudo ln -s /opt/ant/bin/ant /usr/local/bin/ant
 ```
 
@@ -365,7 +365,7 @@ ant -version
 The output is similar to:
 
 ```output
-Apache Ant(TM) version 1.10.13 compiled on January 4 2023
+Apache Ant(TM) version 1.10.14 compiled on August 16 2023
 ```
 
 ### Apache JMeter

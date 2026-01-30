@@ -11,7 +11,7 @@ additional_search_terms:
 layout: installtoolsall
 multi_install: false
 multitool_install_part: false
-official_docs: https://www.scala-sbt.org/download.html
+official_docs: https://www.scala-sbt.org/download/
 test_images:
 - ubuntu:latest
 test_link: null

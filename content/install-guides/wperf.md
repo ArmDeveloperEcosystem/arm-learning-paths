@@ -110,7 +110,7 @@ You see output similar to:
 
 ## How do I install the WindowsPerf Virtual Studio Extension? {#vs2022}
 
-WindowsPerf GUI (Graphical User Interface) is a Visual Studio 2022 extension designed to bring a seamless UI experience to WindowsPerf, the command-line performance profiling tool for Windows on Arm. It is available on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=Arm.WindowsPerfGUI).
+WindowsPerf GUI (Graphical User Interface) is a Visual Studio 2022 extension designed to bring a seamless UI experience to WindowsPerf, the command-line performance profiling tool for Windows on Arm. It is available on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/).
 
 Install by opening **Extensions** menu, click **Manage Extensions**, and click **Browse**. Type `WindowsPerf` to search for Arm WindowsPerf GUI extension. Click **Install**.
 

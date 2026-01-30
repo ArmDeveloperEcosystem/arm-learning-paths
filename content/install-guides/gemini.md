@@ -3,7 +3,7 @@ title: Gemini CLI
 
 author: Jason Andrews
 minutes_to_complete: 15
-official_docs: https://ai.google.dev/gemini-api/docs/cli
+official_docs: https://geminicli.com/docs/
 
 test_maintenance: true
 test_images:
