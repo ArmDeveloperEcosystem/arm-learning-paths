@@ -35,7 +35,7 @@ operatingsystems:
 further_reading:
     - resource:
         title: Azure Kubernetes Service on Arm based Ampere Altra processors
-        link: https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/aks-on-arm-based-ampere
+        link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/aks-on-arm-based-ampere
         type: blog
     - resource:
         title: AKS documentation
