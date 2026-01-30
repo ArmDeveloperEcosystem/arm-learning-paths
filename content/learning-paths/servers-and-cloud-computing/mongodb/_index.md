@@ -45,7 +45,7 @@ further_reading:
         type: documentation
     - resource:
         title: Compare performance of MongoDB on Arm vs Intel
-        link: https://community.arm.com/arm-community-blogs/b/operating-systems-blog/posts/mongodb-performance-on-aws-with-the-arm-graviton2
+        link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/mongodb-performance-on-aws-with-the-arm-graviton2
         type: blog
 
 
