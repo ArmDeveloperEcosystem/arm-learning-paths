@@ -221,7 +221,7 @@ def marketplace():
 
 Before running this function, ensure that the `marketplace_events` directory is created in your root directory (where the main flask file is).
 
-The context for this code can be found in the [flask_app.py](https://github.com/ArmDeveloperEcosystem/arm-python-rag-extension/blob/main/flask_app.py) file.
+The context for this code can be found in the [flask_app.py](https://github.com/ArmDeveloperEcosystem/python-rag-extension/blob/main/flask_app.py) file.
 
 Once these elements are in place, you are ready to deploy your app.
 

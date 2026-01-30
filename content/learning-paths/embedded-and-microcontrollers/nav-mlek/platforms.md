@@ -100,8 +100,6 @@ If you are in the console and can see the FVPs, you are ready for ML application
 
 These virtual platforms have some options to help you evaluate different configurations.
 
-The [AVH simulation model documentation](https://arm-software.github.io/AVH/main/simulation/html/Using.html) has many good tips.
-
 ### Number of MACs
 
 Ethos-U55 and Ethos-U65 offer a configurable number of MACs (multiply-accumulate units). During IP evaluation and performance analysis you need to understand the numbers of MACs available in the hardware and create your software to use the same configuration.

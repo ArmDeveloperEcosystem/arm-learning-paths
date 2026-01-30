@@ -44,7 +44,7 @@ further_reading:
         type: blog
     - resource:
         title: OCI Ampere A1 Compute instances can significantly reduce video encoding costs versus modern CPUs
-        link: https://community.arm.com/arm-community-blogs/b/operating-systems-blog/posts/oracle-cloud-infrastructure-arm-based-a1
+        link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/oracle-cloud-infrastructure-arm-based-a1
         type: blog
 
 

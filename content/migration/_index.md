@@ -167,7 +167,6 @@ Which key libraries are optimized for Arm servers?
 | ISA-L | | |
 | IPSEC-MB | | |
 | AV1 | [Run the AV1 and VP9 codecs on Arm Linux](/learning-paths/servers-and-cloud-computing/codec1/) | |
-| SLEEF | | [A New Pulse for SLEEF](https://sleef.org/2024/10/02/new-pulse.html) |
 | AES | | [AWS Graviton3 delivers leading AES-GCM encryption performance](https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/aes-gcm-optimizations-for-armv8-4-on-neoverse-v1-graviton3)  |
 | Snappy | [Measure performance of compression libraries on Arm servers](/learning-paths/servers-and-cloud-computing/snappy/) | [Comparing data compression algorithm performance on AWS Graviton2](https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/comparing-data-compression-algorithm-performance-on-aws-graviton2-342166113) |
 | Cloudflare zlib | [Learn how to build and use Cloudflare zlib on Arm servers](/learning-paths/servers-and-cloud-computing/zlib/) | |
