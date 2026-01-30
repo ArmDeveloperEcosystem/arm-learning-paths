@@ -50,7 +50,7 @@ further_reading:
         type: documentation
     - resource:
         title: The next chapter for Arm RAN Acceleration Library Open-sourcing the code base & accelerating adoption
-        link: https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/arm-ral-is-now-open-source
+        link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/arm-ral-is-now-open-source
         type: blog
 
 
