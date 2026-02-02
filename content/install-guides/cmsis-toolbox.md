@@ -34,7 +34,7 @@ The [CMSIS-Toolbox](https://github.com/Open-CMSIS-Pack/cmsis-toolbox) is a suite
 
 It is also used for the creation and maintenance of such packs.
 
-`CMSIS-Toolbox` is part of the [Open-CMSIS-Pack project](https://www.open-cmsis-pack.org).
+`CMSIS-Toolbox` is part of the [Open-CMSIS-Pack project](https://open-cmsis-pack.github.io/Open-CMSIS-Pack-Spec/main/html/index.html).
 
 Windows, Linux, and macOS host platforms are supported.
 

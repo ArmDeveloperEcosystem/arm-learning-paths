@@ -40,7 +40,7 @@ further_reading:
         type: documentation
     - resource:
         title: AFRC in Arm Immortalis-G715
-        link: https://community.arm.com/arm-community-blogs/b/graphics-gaming-and-vr-blog/posts/arm-immortalis-g715-developer-overview
+        link: https://developer.arm.com/community/arm-community-blogs/b/mobile-graphics-and-gaming-blog/posts/arm-immortalis-g715-developer-overview
         type: blog
 
 

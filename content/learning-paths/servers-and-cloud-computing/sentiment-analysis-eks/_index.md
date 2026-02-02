@@ -40,7 +40,7 @@ further_reading:
         type: documentation
     - resource:
         title: How to Enable Real-Time Sentiment Analysis on Arm Neoverse-Based Kubernetes Clusters
-        link: https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/-arm-neoverse-based-kubernetes-clusters
+        link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/-arm-neoverse-based-kubernetes-clusters
         type: documentation
 
 

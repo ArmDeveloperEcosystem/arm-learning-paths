@@ -45,7 +45,7 @@ further_reading:
         type: documentation
     - resource:
         title: Machine Learning Inference on AWS Graviton3
-        link: https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/machine-learning-inference-on-aws-graviton3
+        link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/machine-learning-inference-on-aws-graviton3
         type: blog
 
 

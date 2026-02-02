@@ -44,12 +44,11 @@ ATP provides capabilities for:
 * Performance profiling using hardware performance monitoring counters
 * Top-down methodology analysis for identifying performance bottlenecks
 * System-wide and per-process profiling
-* Statistical Profiling Extension (SPE) support on compatible systems
 * Command-line interface (CLI) included with the GUI installation
 * SSH-based remote target connections with optional jump node support
 
 ATP is available for Windows, macOS, and Linux host machines, and connects to
-Arm Linux target systems running Amazon Linux 2023, Ubuntu 20.04, or Ubuntu
+Arm Linux target systems running Amazon Linux 2023, Ubuntu 22.04, or Ubuntu
 24.04.
 
 ## What should I do before installing Arm Total Performance?

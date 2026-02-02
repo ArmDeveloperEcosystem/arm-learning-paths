@@ -144,24 +144,24 @@ For more information about the available versions and supported platforms refer 
 
 You can download Java from the [Oracle website](https://www.oracle.com/java/technologies/javase-downloads.html) and install it manually. Look for the files with ARM64 in the description.
 
-Download a [tar.gz](https://download.oracle.com/java/22/latest/jdk-22_linux-aarch64_bin.tar.gz) file from the website. 
+Download a [tar.gz](https://download.oracle.com/java/25/latest/jdk-25_linux-aarch64_bin.tar.gz) file from the website. 
 
 Extract the contents of the file:
 
 ```console
-tar xvf jdk-22_linux-aarch64_bin.tar.gz
+tar xvf jdk-25_linux-aarch64_bin.tar.gz
 ```
 
 Move the contents to a directory of your choice: 
 
 ```console
-sudo mv jdk-22.0.2 /usr/local/
+sudo mv jdk-25.0.2 /usr/local/
 ```
 
 Set up environment variables to locate your installation:
 
 ```console
-export JAVA_HOME=/usr/local/jdk-22.0.2
+export JAVA_HOME=/usr/local/jdk-25.0.2
 export PATH=$JAVA_HOME/bin:$PATH
 ```
 
@@ -350,9 +350,9 @@ sudo apt install ant -y
 You can also install specific versions by downloading and extracting a zip file:
 
 ```console
-wget https://downloads.apache.org/ant/binaries/apache-ant-1.10.13-bin.zip -O apache-ant-1.10.13-bin.zip
-unzip apache-ant-1.10.13-bin.zip
-sudo mv apache-ant-1.10.13 /opt/ant
+wget https://downloads.apache.org/ant/binaries/apache-ant-1.10.14-bin.zip -O apache-ant-1.10.14-bin.zip
+unzip apache-ant-1.10.14-bin.zip
+sudo mv apache-ant-1.10.14 /opt/ant
 sudo ln -s /opt/ant/bin/ant /usr/local/bin/ant
 ```
 
@@ -365,7 +365,7 @@ ant -version
 The output is similar to:
 
 ```output
-Apache Ant(TM) version 1.10.13 compiled on January 4 2023
+Apache Ant(TM) version 1.10.14 compiled on August 16 2023
 ```
 
 ### Apache JMeter
