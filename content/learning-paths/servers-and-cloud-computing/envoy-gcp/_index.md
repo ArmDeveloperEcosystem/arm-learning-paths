@@ -51,7 +51,7 @@ further_reading:
 
   - resource:
       title: Siege documentation
-      link: https://www.joedog.org/siege-manual/
+      link: https://www.joedog.org/siege/manual/
       type: documentation
 
 weight: 1

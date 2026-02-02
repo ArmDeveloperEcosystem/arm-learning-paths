@@ -55,7 +55,7 @@ further_reading:
         type: documentation
     - resource:
         title: Optimizing HPCG for Arm SVE
-        link: https://community.arm.com/arm-community-blogs/b/high-performance-computing-blog/posts/optimizing-hpcg-for-arm-sve
+        link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/optimizing-hpcg-for-arm-sve
         type: blog
 
 

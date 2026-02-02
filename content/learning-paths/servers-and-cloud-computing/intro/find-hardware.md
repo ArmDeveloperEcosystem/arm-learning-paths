@@ -17,7 +17,6 @@ Cloud providers offer Arm instances based on Neoverse processors. For example:
 - [Google Cloud](https://cloud.google.com/compute/docs/instances/arm-on-compute)
 - [Microsoft Azure](https://azure.microsoft.com/en-us/blog/azure-virtual-machines-with-ampere-altra-arm-based-processors-generally-available/)
 - [Oracle Cloud](https://www.oracle.com/cloud/compute/arm/)
-- [Equinix](https://deploy.equinix.com/product/servers/c3-large-arm64/)
 - [Scaleway](https://www.scaleway.com/en/cost-optimized-instances-based-on-arm/)
 - [Hetzner Cloud](https://www.hetzner.com/news/arm64-cloud)
 
@@ -30,8 +29,6 @@ Free tier offers are currently available:
 ## Works on Arm (free cloud resources)
 
 The [Works on Arm](https://www.arm.com/markets/computing-infrastructure/works-on-arm) initiative enables developers to build, test, and optimize projects on the Arm64 architecture by providing free access to Arm based developer platforms, cloud instances, and CI/CD environments. Arm has partnered with cloud service providers to make Neoverse compute available to developers.
-
-Consider [applying for Arm resources on an Equinix Cluster](https://github.com/WorksOnArm/equinix-metal-arm64-cluster).
 
 ## Academic offers from Cloud Service Providers
 

@@ -41,7 +41,7 @@ shared_between:
 further_reading:
     - resource:
         title: Announcing WindowsPerf Open-source performance analysis tool for Windows on Arm
-        link: https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/announcing-windowsperf
+        link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/announcing-windowsperf
         type: blog
     - resource:
         title: WindowsPerf release 2.4.0 introduces the first stable version of sampling model support

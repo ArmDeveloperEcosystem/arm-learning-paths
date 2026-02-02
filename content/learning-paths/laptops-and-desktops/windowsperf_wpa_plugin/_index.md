@@ -30,7 +30,7 @@ tools_software_languages:
 further_reading:
     - resource:
         title: Announcing WindowsPerf Open-source performance analysis tool for Windows on Arm
-        link: https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/announcing-windowsperf
+        link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/announcing-windowsperf
         type: blog
     - resource:
         title: WindowsPerf Release 3.7.2
