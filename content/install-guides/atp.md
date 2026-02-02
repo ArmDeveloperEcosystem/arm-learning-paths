@@ -23,10 +23,14 @@ author: Pareena Verma
 
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
-tool_install: true              # Set to true to be listed in main selection page, else false
+tool_install: false             # Set to true to be listed in main selection page, else false
 multi_install: false            # Set to true if first page of multi-page article, else false
 multitool_install_part: false   # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
+
+build:
+  list: false                   # Exclude from .Pages collections and listings
+  render: true                  # Still render the page (accessible via direct URL)
 ---
 
 Arm Total Performance (ATP) is a desktop application that provides performance

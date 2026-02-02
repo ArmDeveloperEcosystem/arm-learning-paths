@@ -1,5 +1,5 @@
 User-agent: *
-Disallow:
+Disallow: /install-guides/atp/
 
 # Explicitly welcome AI crawlers
 User-agent: GPTBot
