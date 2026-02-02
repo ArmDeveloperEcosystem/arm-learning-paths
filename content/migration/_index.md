@@ -4,7 +4,7 @@ layout: "migration"       # Easier for dynamic content loading, keep the same
 description: Software developers are embracing the Arm architecture for its superior price performance and energy efficiency across a wide range of applications, including containerized workloads, cloud managed services, and Linux applications. To achieve higher performance and lower cost, you can migrate your self-managed workloads to Arm virtual machines and make sure to select Arm for managed services. A three step migration process covers the most common scenarios, and provides links to additional resources.
 ---
 
-## PREFACE: Learn and explore
+## Learn and explore
 
 Arm Neoverse is a family of processor cores designed for servers and cloud data centers. There are 2 families currently available, Neoverse V-series and Neoverse N-series.
 
@@ -20,6 +20,8 @@ Below is a list of Neoverse CPUs, the architecture versions, and the key additio
 | Neoverse-V1 | Armv8.4-A            | SVE - Scalable Vector Extension adds high performance vector processing for HPC and AI workloads. |
 | Neoverse-N2 | Armv9.0-A            | SVE2 - Extends SVE for improved data parallelism and wider vectors. |
 | Neoverse-V2 | Armv9.0-A            | SVE2 - Targets high single threaded performance for HPC and AI workloads. |
+| Neoverse-N3 | Armv9.2-A            | Balanced performance and power with extended SVE2 and crypto performance. |
+| Neoverse-V3 | Armv9.2-A            | High performance, confidential compute, and extended SVE2 and crypto performance. |
 
 ### What cloud hardware is available today?
 
@@ -36,6 +38,7 @@ AWS offers more than [150 instance types with Graviton processors](https://aws.a
 | Graviton2 | Neoverse-N1  | C6g, M6g, R6g  | 600% performance and efficiency increases.                                  |
 | Graviton3 | Neoverse-V1  | C7g, M7g, R7g  | 25% performance increase, DDR5 memory added, 50% more memory bandwidth.     |
 | Graviton4 | Neoverse-V2  | R8g            | 75% more memory bandwidth, up to 40% faster for databases and 30% faster for web applications.   |
+| Graviton5 | Neoverse-V3  | M9g            | 25% higher performance and 5X larger L3 cache.   |
 
   {{< /tab >}}
   {{< tab header="Google GCP">}} 
@@ -45,6 +48,7 @@ Google GCP offers a variety of [virtual machine instances with Arm processors](h
 | --------------|--------------|--------------------|-----------|
 | T2A       | Neoverse-N1  | T2A-standard | Optimized for general-purpose workloads - web servers, and microservices. |
 | Axion (C4A) | Neoverse-V2 | c4a-standard, c4a-highmem, c4a-highcpu  | General-purpose, AI/ML workloads and high performance computing. |
+| Axion (N4A) | Neoverse-N3 | n4a-standard, n4a-highmem, n4a-highcpu  | General-purpose, efficient for multi-threaded workloads. |
 
   {{< /tab >}}
   {{< tab header="Microsoft Azure">}}
@@ -63,6 +67,7 @@ Oracle Cloud Infrastructure (OCI) Ampere [Arm-based compute](https://www.oracle.
 | --------------|--------------|--------------------|-----------|
 | A1            | Neoverse-N1  | VM.Standard.A1  | Offers predefined (.#CPUs) or dynamic OCPU and memory allocation (.Flex) |
 | A2            | AmpereOne    | VM.Standard.A2, VM.Optimized3.A2 | Tailored for high-performance and memory-intensive workloads. |
+| A4            | AmpereOne M  | VM.Standard.A4, VM.Optimized3.A4 | Tailored for high-performance and memory-intensive workloads. |
 
   {{< /tab >}}
   {{< tab header="Alibaba Cloud">}} 
