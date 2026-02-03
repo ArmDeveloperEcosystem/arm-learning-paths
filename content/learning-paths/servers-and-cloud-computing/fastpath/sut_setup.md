@@ -1,35 +1,33 @@
 ---
-title: "Setup System Under Test Instance"
+title: "Set up the System Under Test"
 
 weight: 10
 
 layout: "learningpathall"
 ---
-Now that kernels are built and the *fastpath* host is ready, it's time to set up the system under test (SUT).
+Now that kernels are built and the Fastpath host is ready, it's time to set up the system under test (SUT).
 
 ## Provision the SUT
 
-The System Under Test (SUT) is the target machine where *fastpath* installs your kernels, runs benchmarks on each kernel (one at a time) and when complete, compares and displays the results via *fastpath*.
+The System Under Test (SUT) is the target machine where Fastpath installs your kernels, runs benchmarks on each kernel (one at a time), and when complete, compares and displays the results.
 
-Just like choosing the kernels to test, the instance type of the SUT depends on your use case. For this *fastpath* LP, we recommend a Graviton `m6g.12xlarge` instance with Ubuntu 24.04 LTS. This instance type provides a good balance of CPU and memory for a test benchmark.
+Just like choosing the kernels to test, the instance type of the SUT depends on your use case. For this Learning Path, use a Graviton `m6g.12xlarge` instance with Ubuntu 24.04 LTS. This instance type provides a good balance of CPU and memory for test benchmarks.
 
-{{% notice Note %}}
-The following steps involve launching an EC2 instance.  You can perform all EC2 instance creation steps via the AWS Management Console instead or AWS CLI.  For step-by-step instructions to bring up an EC2 instance via the console, consult the [Compute Service Provider learning path](/learning-paths/servers-and-cloud-computing/csp/) for detailed instructions.  A tutorial from AWS is also available via [Get started with Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html).
-{{% /notice %}}
+You now need to create a third EC2 instance that will serve as the SUT. This is the machine where benchmark workloads run under different kernel versions.
 
-Create the SUT host with the following specifications:
+Create the SUT with the following specifications:
 
-1. **Name** — *fastpath-sut*
-2. **Operating system** — *Ubuntu*
-3. **AMI** — *Ubuntu 24.04 LTS (Arm)*
-4. **Architecture** — *64-bit Arm*
+1. **Name** — fastpath-sut
+2. **Operating system** — Ubuntu
+3. **AMI** — Ubuntu 24.04 LTS (Arm)
+4. **Architecture** — 64-bit Arm
 5. **Instance type** — `m6g.12xlarge`
-6. **Key pair** — *Select or create a key for SSH*
-7. **Security group** — *allow SSH inbound from your IP and cluster peers*
-8. **Storage** — *200 GB gp3*
+6. **Key pair** — Select or create a key for SSH
+7. **Security group** — Allow SSH inbound from your IP and cluster peers
+8. **Storage** — 200 GB gp3
 
 
-Choose whichever provisioning method is most convenient—the tabs below provide the console settings, a CLI example, and the CloudFormation template (including the optional Fastpath security-group peer parameter).
+Choose whichever provisioning method is most convenient. The tabs below provide the console settings, a CLI example, and a CloudFormation template (including the optional Fastpath security-group peer parameter).
 
 {{< tabpane >}}
   {{< tab header="AWS Console" img_src="/learning-paths/servers-and-cloud-computing/fastpath/images/ec2_setup.png">}}
@@ -56,7 +54,7 @@ cat <<'EOF' > sut-host.yaml
 # README FIRST!
 #
 # 1. Click the copy icon to save this file to your clipboard.
-# 2. Paste it into your terminal, it will be saved as `build-host.yaml`
+# 2. Paste it into your terminal, it will be saved as `sut-host.yaml`
 # 3. Go to the CloudFormation console at https://us-east-1.console.aws.amazon.com/cloudformation/home
 # 4. Click "Create stack -> With new resources (standard)"
 # 5. Choose "Upload a template file" in the CloudFormation console.
@@ -174,32 +172,34 @@ EOF
   {{< /tab >}}
 {{< /tabpane >}}
 
-When the instance reports a `running` state, note the public and private IP addresses as SUT_PUBLIC_IP and SUT_PRIVATE_IP.  You'll need these values later.
+When the instance reports a `running` state, note the public and private IP addresses as SUT_PUBLIC_IP and SUT_PRIVATE_IP. You'll need these values later.
 
 
-## Configure the SUT via the Fastpath instance
+## Configure the SUT from the Fastpath host
 
-You'll next run a script that remotely installs the *fastpath* software, and the required `fpuser` system account.  It also sets up SSH access for the new `fpuser` account by copying over ubuntu@SUT's `~/.ssh/authorized_keys` file.
+Run a script that remotely installs the Fastpath software and the required `fpuser` system account. It also sets up SSH access for the new `fpuser` account by copying over ubuntu@SUT's `~/.ssh/authorized_keys` file.
 
 {{% notice Note %}}
-When communicating from the *fastpath* host to the SUT, use the SUT's private IP address.  This will allow for much faster communication and file transfer.
+When communicating from the Fastpath host to the SUT, use the SUT's private IP address. This allows for much faster communication and file transfer.
 {{% /notice %}}
 
-In this example, `44.201.174.17` is used as the *fastpath* host public IP, and `100.119.0.19` is used as the SUT's private IP. Replace with your own values:
+SSH into the Fastpath host if you aren't already there. Use agent forwarding with the `-A` flag and replace the private key `.pem` file with your key.
 
-```command
-# ssh into the fastpath host if you aren't already there. Note the use of agent forwarding -A
-ssh -A -i ~/.ssh/gcohen1.pem ubuntu@44.201.174.17 # Replace with YOUR fastpath host public IP
+In this example, `44.201.174.17` is the Fastpath host public IP, and `172.31.100.19` is the SUT's private IP. Replace with your own values: 
 
-# Run the configuration script from within the fastpath virtual environment
-source ~/venv/bin/activate # Activate the fastpath virtual environment
+```console
+ssh -A -i <your-key.pem> ubuntu@44.201.174.17 
+```
 
-# Make sure you are in the arm_kernel_install_guide repository
+Run the configuration script from within the Fastpath virtual environment:
+
+```console
+source ~/venv/bin/activate # Activate the Fastpath virtual environment
 cd ~/arm_kernel_install_guide # Enter the helper scripts repository
-
-# Configure the SUT - replace the IP with your SUT's private IP
 ./scripts/configure_fastpath_sut.sh --host 172.31.100.19 # Replace with YOUR SUT private IP
 ```
+
+The output is similar to:
 
 ```output
 [2026-01-08 18:36:23] Configuring 172.31.100.19 as fastpath SUT (non-interactive mode)
@@ -214,15 +214,16 @@ fpuser
 [2026-01-08 18:36:54] Note: ubuntu may need to re-login for docker group membership to take effect.
 ```
 
-
-
 ## Validate Fastpath connectivity
-Once complete, ensure the *fastpath* host can properly ping the SUT with the following command:
 
-```command
+Ensure the Fastpath host can ping the SUT with the following command:
+
+```console
 source ~/venv/bin/activate
 ~/fastpath/fastpath/fastpath sut fingerprint --user fpuser 172.31.100.19
 ```
+
+The output is similar to:
 
 ```output
 HW:
@@ -236,6 +237,6 @@ SW:
   userspace_name: Ubuntu 24.04.3 LTS
 ```
 
-A successful run prints hardware details for the SUT. If the command fails, verify security group rules and rerun the configuration script.  If you are able to ssh into the SUT as `fpuser`, but the fingerprint command still fails, ensure that `docker.io` is installed on the SUT.
+A successful run prints hardware details for the SUT. If the command fails, verify security group rules and rerun the configuration script. If you can SSH into the SUT as `fpuser`, but the fingerprint command still fails, ensure that `docker.io` is installed on the SUT.
 
-With the SUT now configured, you're ready to move on to the next step: setting up and running a *fastpath* benchmark!  Remember to stop (but not terminate) the build instance so that kernel artifacts remain available, and stop any *fastpath*/SUT instances when you are finished testing to avoid unnecessary spend.
+With the SUT now configured, you're ready to move on to the next step: setting up and running a Fastpath benchmark! Remember to stop (but not terminate) the build host so that kernel artifacts remain available, and stop any Fastpath/SUT instances when you're finished testing to avoid unnecessary spend.

@@ -1,5 +1,5 @@
 ---
-title: "Analyze the Benchmark Results"
+title: "Analyze the benchmark results"
 weight: 14
 
 layout: "learningpathall"
@@ -7,20 +7,18 @@ layout: "learningpathall"
 
 ## Review benchmark results
 
+To inspect the outputs stored in the `results/` directory, use the sample commands output when `generate_plan.sh` completed. Some examples are below:
 
-
-To inspect the outputs stored in the `results/` directory you can use the sample commands output when `generate_plan.sh` completed.  Some examples are below:
-
-### List swprofiles involved from tests saved in the *results* folder:
+### List swprofiles from tests
 
 To see the swprofiles (kernels) tested and stored in the results directory, run:
 
-```commandline
+```console
 source ~/venv/bin/activate
 ~/fastpath/fastpath/fastpath result list results-fastpath_test_010826-1837 --object swprofile
 ```
 
-If you followed the tutorial exactly, you should see output similar to:
+The output is similar to:
 
 ```output
 +------------------+----------------------+
@@ -58,12 +56,15 @@ If you followed the tutorial exactly, you should see output similar to:
 
 ### View relative results per kernel
 
-To see the relative results for each kernel, run the following commands:
+To see the relative results for each kernel, run the following command:
 
-```commandline
-  ~/fastpath/fastpath/fastpath result show results-fastpath_test_010826-1837 --swprofile fp_6.19.0-rc1-ubuntu --relative
+```console
+~/fastpath/fastpath/fastpath result show results-fastpath_test_010826-1837 --swprofile fp_6.19.0-rc1-ubuntu --relative
 ```
-Relative in this case means that the statistics displayed are relative to the mean. In addition to the min/mean/max, you are also given the confidence interval bounds, the coefficient of variation and the number of samples, similar to:
+
+Relative in this case means that the statistics displayed are relative to the mean. In addition to the min/mean/max, you're also given the confidence interval bounds, the coefficient of variation, and the number of samples.
+
+The output is similar to:
 
 ```output
 +------------------+--------------------+--------+----------+--------+----------+--------+--------+-------+
@@ -75,10 +76,11 @@ Relative in this case means that the statistics displayed are relative to the me
 
 You can run it again for the other kernel:
 
-```commandline
+```console
 ~/fastpath/fastpath/fastpath result show results-fastpath_test_010826-1837 --swprofile fp_6.18.1-ubuntu --relative
 ```
-with output similar to:
+
+The output is similar to:
 
 ```output
 +------------------+--------------------+--------+----------+--------+----------+--------+--------+-------+
@@ -92,12 +94,11 @@ with output similar to:
 
 To compare the relative results between both kernels, run:
 
-
-
-```commandline
+```console
 ~/fastpath/fastpath/fastpath result show results-fastpath_test_010826-1837 --swprofile fp_6.19.0-rc1-ubuntu --swprofile fp_6.18.1-ubuntu --relative
 ```
-with output similar to:
+
+The output is similar to:
 
 ```output
 +------------------+--------------------+-----------------------+---------------------+
@@ -108,4 +109,6 @@ with output similar to:
 ```
 We see 6.18.1 is performing slightly better than 6.19-rc1 in this benchmark.
 
-More examples of analyzing results can be found in the [*fastpath* Results User Guide](https://fastpath.docs.arm.com/en/latest/user-guide/resultshow.html).
+More examples of analyzing results can be found in the [Fastpath Results User Guide](https://fastpath.docs.arm.com/en/latest/user-guide/resultshow.html).
+
+When you're done testing, remember to terminate your EC2 instances and clean up any other AWS resources you created to avoid unnecessary charges.

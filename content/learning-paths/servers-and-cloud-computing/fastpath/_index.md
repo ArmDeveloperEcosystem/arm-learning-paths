@@ -1,5 +1,5 @@
 ---
-title: Fastpath Kernel Build and Install Guide
+title: Benchmark on Arm servers with different Linux kernels using Fastpath
 
 draft: true
 cascade:
@@ -7,14 +7,13 @@ cascade:
 
 minutes_to_complete: 45
 
-who_is_this_for: Software developers and performance engineers who want to explore benchmarking across different kernel versions with Fastpath on Arm.
+who_is_this_for: This is an advanced topic for software developers and performance engineers who want to benchmark and compare different Linux kernel versions on Arm servers.
 
 learning_objectives:
-    - Understand how Fastpath streamlines kernel experimentation workflows
-    - Provision an Arm-based build machine and compile Fastpath-enabled kernels on it
-    - Provision an Arm-based test system, also known as the System Under Test (SUT)
-    - Create a test plan consisting of kernel versions and benchmark suites 
-    - Launch an Arm-based Fastpath host to orchestrate the kernel benchmarking process on the SUT
+    - Build custom Linux kernels for Arm systems using tuxmake and Fastpath
+    - Configure and provision Arm-based EC2 instances for kernel testing
+    - Create and execute test plans that compare kernel performance across versions
+    - Analyze benchmark results to identify performance differences between kernels
 
 prerequisites:
     - An AWS account with permissions to create EC2 instances
