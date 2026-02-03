@@ -31,9 +31,9 @@ Launch Kiro IDE after installation.
 The ARM SoC Migration Power extends Kiro with specialized knowledge and tools for migrating applications between ARM platforms.
 
 1. Open Kiro IDE
-2. Navigate to Powers panel (View → Open View → Powers)
-3. Click "Add Custom Power"
-4. Enter the ARM SoC Migration Power configuration
+2. Navigate to Powers panel. Press Cmd + Shift + P (Mac) or Ctrl + Shift + P (Windows)
+3. Click on the ARM SoC Migration Power in the Reocommended section
+4. Click Install
 
 ### Verify Installation
 
