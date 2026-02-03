@@ -182,6 +182,12 @@ Open a browser and go to [http://localhost:1313](http://localhost:1313)
 
 You are now ready to edit markdown files and view the results on the Hugo server. 
 
+{{% notice Note %}}
+
+If your content is not updating/staging on your web browser after you save it correctly then please check the [Troubleshooting section](/learning-paths/cross-platform/_example-learning-path/appendix-5-troubleshooting/) for debugging instructions.
+
+{{%/notice%}}
+
 ## Enable the search box on the home page {#search}
 
 When you run `hugo server` you will not see the search box on the home page. You don't need to do anything for the search feature to find your content, but you may want to enable the search box and test it during your development.
