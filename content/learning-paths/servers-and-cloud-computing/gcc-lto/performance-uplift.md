@@ -8,7 +8,13 @@ layout: learningpathall
 
 ## Comparing Performance
 
-The potential benefits of link-time optimization can be illustrated through a performance comparison using the SPEC CPU®2017 integer (SPECint2017) benchmark suite. In this example, benchmarks were compiled with GCC 15.1, with and without LTO, and executed on an Arm Neoverse V2 CPU.
+The potential benefits of link-time optimization can be illustrated through a performance comparison using the SPEC CPU®2017 integer (SPECint2017) benchmark suite. In this example, benchmarks were compiled with GCC 15.1, with and without LTO, and executed on an Arm Neoverse V2 CPU running Ubuntu 20.04 LTS.
+
+Common optimization flags between runs were as follows:
+
+```c
+-mcpu=native -Ofast -fomit-frame-pointer --param ipa-cp-eval-threshold=1 --param ipa-cp-unit-growth=80
+```
 
 Across the benchmark suite, enabling LTO resulted in an improvement in the geometric mean score of approximately 3.4%. Some workloads benefited more noticeably, including:
   * `gmcf` (+11%)
