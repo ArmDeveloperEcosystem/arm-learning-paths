@@ -1,5 +1,4 @@
 ---
-# User change
 title: "Troubleshooting"
 
 weight: 12 # 1 is first, 2 is second, etc.
@@ -9,21 +8,46 @@ layout: "learningpathall"
 ---
 ## Hugo Server Issues
 
-### Hugo server is not staging or detecting my content updates when I publish the server, How to fix it?
+### Why doesn't Hugo show my changes when I'm editing my markdown files?
 
-There could be multiple reasons for the Hugo server not detecting your content updates. Please try the following steps in order:
+There could be multiple reasons for the Hugo server not detecting your content updates. 
 
-* Check that you are pusblishing the server from the right directorty where you are updating your learning path (You might have multiple locations where you are updating and saving your content to and you could be starting the server from the wrong location/directory).
+Please try the following steps in order:
 
-* Your Browser might be caching the older version of your server/pages. Please clear your browser history or turn off cashing or simple open a new private tab/window and call your page from there.
+1. Check that you are running the server from the right directory
 
-* Draft mode is activated: sometimes when we return back your learning path after we review it for adjustments, we usually enable "Draft Mode" which will not stage any new content to be published. Once you pull back the learning path changes "Draft Mode" will be activated by default. To fix this issue you can try one of the following options:
-1. Remove the "Draft Mode" tags. Ususally, you will find "draft: true" tag(s) on the main/first page of your learning path (it could also be in other pages). Simply comment out those tags or remove them till you are done with your updates and rerun the Hugo server again.
-2. Rerun the server using the following options: 
+You might have multiple locations where you are updating and saving your content to and you could be starting the server from the wrong location/directory.
+
+2. Confirm the port number
+
+The first port number used is 1313. If you run a second `hugo server` command a new port will be chosen. Your browser may be connected to a different Hugo server than you expect.
+
+3. Draft mode is activated 
+
+Draft mode is used during content review and editing to avoid publishing Learning Paths before they are ready. 
+
+If you see draft settings as shown below in an _index.md or at the top of an install guide it means draft mode is on.
+
+```console
+draft: true
+cascade:
+    draft: true
+```
+
+To see the content in the browser you have two options:
+
+1. Remove the draft mode tags. 
+
+2. Run Hugo with the draft flag. 
+
+This tells Hugo to render the draft articles. 
+
 ```bash
-hugo server --buildDrafts=false
+hugo server --buildDrafts=true
 ``` 
+
 or
+
 ```bash
 hugo server -D
 ```
