@@ -1,24 +1,36 @@
 ---
-title: Overview
+title: Getting started with Azure Resource Manager
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-Azure Resource Manager templates provide a declarative way to define and deploy Azure infrastructure as code. In this Learning Path, you'll create a template that deploys a Linux virtual machine powered by Azure Cobalt 100 processors, including networking, security, and SSH authentication.
+## Overview
 
-Using Resource Manager templates enables consistent, repeatable deployments across different environments while reducing configuration errors and enabling CI/CD automation.
+In this Learning Path, you’ll create an Azure Resource Manager template that deploys a Linux virtual machine powered by Azure Cobalt 100 processors. The template defines the virtual machine, networking, security settings, and SSH authentication required for deployment.
+
+By using Azure Resource Manager templates, you can deploy infrastructure consistently across environments, reduce configuration errors, and integrate infrastructure provisioning into CI/CD workflows.
 
 ## What is an Azure Resource Manager template?
 
-Azure Resource Manager templates are JSON files that define the infrastructure and configuration you want to deploy in Azure. Templates enable Infrastructure as Code (IaC), allowing you to version control your infrastructure alongside your application code. When you submit a template to Azure Resource Manager, it orchestrates the creation of all specified resources in the correct order, managing dependencies automatically. Templates achieve consistent, repeatable deployments across different environments while reducing configuration errors and enabling CI/CD automation.
+An Azure Resource Manager template is a JSON file that defines the infrastructure and configuration you want to deploy in Azure. This approach is known as Infrastructure as Code (IaC).
 
-## Before you begin
+When you deploy a template, Azure Resource Manager:
+- Creates resources in the correct order
+- Manages dependencies automatically
+- Ensures deployments are consistent and repeatable
+
+Using templates allows you to version control infrastructure alongside application code and automate deployments across environments.
+
+## Set up your environment 
 
 To complete this Learning Path, you need:
 
-
+- An Azure account with an active subscription
+- Azure CLI installed and configured
+- A local terminal on Linux, macOS, or Windows (with WSL)
+- An SSH key pair for secure access to the virtual machine
 
 ## Generate an SSH key pair
 
@@ -58,7 +70,7 @@ You can list your subscriptions with:
 az account list --output table
 ```
 
-## Verify Azure CLI is working
+## Verify your Azure CLI configuration
 
 Confirm your Azure CLI is properly configured by checking your current subscription:
 

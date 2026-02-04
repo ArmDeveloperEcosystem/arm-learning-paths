@@ -1,12 +1,12 @@
 ---
-title: Connect and verify
+title: Connect to the Cobalt 100 VM and verify Arm64 architecture
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Connect to the VM via SSH
+## Connect to the Cobalt 100 VM via SSH
 
 Use the public IP address from the previous step to connect to your Cobalt 100 VM:
 
