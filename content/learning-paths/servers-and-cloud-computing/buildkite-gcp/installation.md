@@ -142,7 +142,7 @@ For more examples and ideas, visit:
 Docker Buildx is a plugin that allows the building of multi-architecture images, for example `arm64` and `amd64`. 
 If you're using SUSE Linux, you need to install Docker Buildx manually. On Ubuntu, Docker Buildx is included by default, so you can skip this step.
 
-For more information or troubleshooting details, see the [Docker Buildx documentation](https://docs.docker.com/build/buildx/).
+For more information or troubleshooting details, see the [Docker Buildx documentation](https://docs.docker.com/build/).
 
 ## Download Docker Buildx
 

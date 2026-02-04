@@ -16,7 +16,7 @@ additional_search_terms:
 minutes_to_complete: 15
 
 ### Link to official documentation
-official_docs: https://www.pytorch.org/doc/
+official_docs: https://docs.pytorch.org/docs/stable/index.html
 
 author: Pareena Verma
 

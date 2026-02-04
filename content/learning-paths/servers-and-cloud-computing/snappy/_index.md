@@ -40,7 +40,7 @@ further_reading:
         type: documentation
     - resource:
         title: Comparing data compression algorithm performance on Arm servers
-        link: https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/comparing-data-compression-algorithm-performance-on-aws-graviton2-342166113
+        link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/comparing-data-compression-algorithm-performance-on-aws-graviton2-342166113
         type: blog
 
 ### FIXED, DO NOT MODIFY

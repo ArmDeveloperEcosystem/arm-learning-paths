@@ -1,30 +1,28 @@
 ---
-title: "Setup Fastpath Instance"
+title: "Set up the Fastpath host"
 
 weight: 6
 
 layout: "learningpathall"
 ---
-With newly compiled kernels ready and waiting on the build instance, it's time to set up the *fastpath* host. 
+With newly compiled kernels ready and waiting on the build host, it's time to set up the Fastpath host.
 
-The *fastpath* host will manage testing against the system under test (SUT) and coordinate benchmarking runs.
+The Fastpath host will manage testing against the system under test (SUT) and coordinate benchmarking runs.
 
 ## Provision the Fastpath host
 
-{{% notice Note %}}
-The following steps involve launching an EC2 instance.  You can perform all EC2 instance creation steps via the AWS Management Console instead or AWS CLI.  For step-by-step instructions to bring up an EC2 instance via the console, consult the [Compute Service Provider learning path](/learning-paths/servers-and-cloud-computing/csp/) for detailed instructions.  A tutorial from AWS is also available via [Get started with Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html).
-{{% /notice %}}
+You now need to create a second EC2 instance that will serve as the Fastpath host. This host orchestrates the benchmarking workflow by managing kernel deployment to the SUT and collecting test results.
 
-Create Fastpath host with the following specifications:
+Create the Fastpath host with the following specifications:
 
-1. **Name** — *fastpath-host*
-2. **Operating system** — *Ubuntu*
-3. **AMI** — *Ubuntu 24.04 LTS (Arm)*
-4. **Architecture** — *64-bit Arm*
+1. **Name** — fastpath-host
+2. **Operating system** — Ubuntu
+3. **AMI** — Ubuntu 24.04 LTS (Arm)
+4. **Architecture** — 64-bit Arm
 5. **Instance type** — `m6g.4xlarge`
-6. **Key pair** — *Select or create a key for SSH*
-7. **Security group** — *allow SSH inbound from your IP and cluster peers*
-8. **Storage** — *200 GB gp3*
+6. **Key pair** — Select or create a key for SSH
+7. **Security group** — Allow SSH inbound from your IP and cluster peers
+8. **Storage** — 200 GB gp3
 
 {{< tabpane >}}
   {{< tab header="AWS Console" img_src="/learning-paths/servers-and-cloud-computing/fastpath/images/ec2_setup.png">}}
@@ -158,116 +156,88 @@ EOF
   {{< /tab >}}
 {{< /tabpane >}}
 
-When the instance reports a `running` state, note the public and private IP addresses as FASTPATH_PUBLIC_IP and FASTPATH_PRIVATE_IP.  You'll need these values later.
+When the instance reports a `running` state, note the public and private IP addresses as FASTPATH_PUBLIC_IP and FASTPATH_PRIVATE_IP. You'll need these values later.
 
-## Install Fastpath Dependencies
+## Install Fastpath dependencies
 
-Repeat the dependency installation process so the *fastpath* host has the same toolchain and helper scripts as the build machine.
+Repeat the dependency installation process so the Fastpath host has the same tools and helper scripts as the build host.
 
-1. SSH into the `m6g.4xlarge` *fastpath* host using the configured key pair.
+SSH to the Fastpath host and run the commands:
 
-2. Open the [Install and Clone section](/learning-paths/servers-and-cloud-computing/kernel-build/how-to-1/#install-required-dependencies) of the install guide from your workstation.
+```console
+sudo apt update
+sudo apt install -y git python3 python3-pip python3-venv python-is-python3 build-essential bc rsync dwarves flex bison libssl-dev libelf-dev btop yq jq
+git clone https://github.com/geremyCohen/arm_kernel_install_guide.git ~/arm_kernel_install_guide
+cd ~/arm_kernel_install_guide
+chmod +x scripts/*.sh
+```
 
-3. Run each command from that section on the *fastpath* machine.  It should be similar to the following (always refer to the above link for the latest command line):
+## Copy kernels from build host to Fastpath host
 
-    ```output
-    $ sudo apt update && sudo apt install -y git python3 python3-pip python3-venv build-essential bc rsync dwarves flex bison libssl-dev libelf-dev btop yq
+When you begin testing, the Fastpath host will push the compiled kernels to the SUT for testing. The kernels are currently on the build host, so this step copies them to the Fastpath host.
 
-    WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
-    Hit:1 http://us-east-1.ec2.ports.ubuntu.com/ubuntu-ports noble InRelease
-    Get:2 http://us-east-1.ec2.ports.ubuntu.com/ubuntu-ports noble-updates InRelease [126 kB]
-    ...
-    0 upgraded, 104 newly installed, 0 to remove and 43 not upgraded.
-    Setting up build-essential (12.10ubuntu1) ...
-    Setting up libssl-dev:arm64 (3.0.13-0ubuntu3.6) ...
-    Setting up python3-pip (24.0+dfsg-1ubuntu1.3) ...
+Locate the value you recorded earlier for BUILD_PRIVATE_IP.
 
-    $ cd
-    $ git clone https://github.com/geremyCohen/arm_kernel_install_guide.git ~/arm_kernel_install_guide
-    $ cd ~/arm_kernel_install_guide && chmod +x scripts/*.sh
+On the Fastpath host, navigate into the `arm_kernel_install_guide` folder you just cloned and run the `pull_kernel_artifacts.sh` script, substituting BUILD_PRIVATE_IP with the private IP of the build host:
 
-    Cloning into 'arm_kernel_install_guide'...
-    ```
+```command
+cd ~/arm_kernel_install_guide
+./scripts/pull_kernel_artifacts.sh --host 172.31.110.110 
+```
 
-## Copy kernels between build and Fastpath instances
+The output shows the files being copied:
 
-When we begin testing, the *fastpath* instance will push the compiled kernels to the SUT for testing.  But as of now, the kernels are still on the build instance. This next step copies the kernels from the build instance to the new *fastpath* instance.
+```output
+[2026-01-08 18:35:14] Pulling kernel artifacts:
+[2026-01-08 18:35:14]   Host        : 172.31.110.110
+[2026-01-08 18:35:14]   SSH user    : ubuntu
+[2026-01-08 18:35:14]   Remote dir  : /home/ubuntu/kernels
+[2026-01-08 18:35:14]   Local dir   : /home/ubuntu/kernels
+[2026-01-08 18:35:14]   Versions    : auto-detected
+[2026-01-08 18:35:15] Copying 6.18.1-ubuntu+/Image.gz
+[2026-01-08 18:35:16] Copying 6.18.1-ubuntu+/modules.tar.xz
+[2026-01-08 18:35:18] Copying optional 6.18.1-ubuntu+/config.stock
+[2026-01-08 18:35:18] Copying 6.19.0-rc1-ubuntu+/Image.gz
+[2026-01-08 18:35:19] Copying 6.19.0-rc1-ubuntu+/modules.tar.xz
+[2026-01-08 18:35:21] Copying optional 6.19.0-rc1-ubuntu+/config.stock
+[2026-01-08 18:35:21] Artifact pull complete.
+```
 
-1. Locate the value you recorded earlier for BUILD_PRIVATE_IP.
+When the script completes, the Fastpath host is ready with the kernels it needs for testing.
 
-2. On the *fastpath* instance, ```cd``` into the `arm_kernel_install_guide` folder you just cloned. 
+## Power down the build host
 
-3. Run the `pull_kernel_artifacts.sh` script, substituting BUILD_PRIVATE_IP with the private IP of the build instance:
-
-    ```command
-    cd ~/arm_kernel_install_guide
-    ./scripts/pull_kernel_artifacts.sh --host 172.31.110.110 
-    ```
-
-    ```output
-    [2026-01-08 18:35:14] Pulling kernel artifacts:
-    [2026-01-08 18:35:14]   Host        : 172.31.110.110
-    [2026-01-08 18:35:14]   SSH user    : ubuntu
-    [2026-01-08 18:35:14]   Remote dir  : /home/ubuntu/kernels
-    [2026-01-08 18:35:14]   Local dir   : /home/ubuntu/kernels
-    [2026-01-08 18:35:14]   Versions    : auto-detected
-    [2026-01-08 18:35:15] Copying 6.18.1-ubuntu+/Image.gz
-    [2026-01-08 18:35:16] Copying 6.18.1-ubuntu+/modules.tar.xz
-    [2026-01-08 18:35:18] Copying optional 6.18.1-ubuntu+/config.stock
-    [2026-01-08 18:35:18] Copying 6.19.0-rc1-ubuntu+/Image.gz
-    [2026-01-08 18:35:19] Copying 6.19.0-rc1-ubuntu+/modules.tar.xz
-    [2026-01-08 18:35:21] Copying optional 6.19.0-rc1-ubuntu+/config.stock
-    [2026-01-08 18:35:21] Artifact pull complete.
-    ```
-
-
-When the script completes, the *fastpath* host is ready with the kernels it needs for testing.
-
-## Power down the build machine
-
-After copying the artifacts from the build machine, stop (or terminate it) to avoid incurring additional costs.  If you wish to keep it around for future kernel builds, stopping it is sufficient.
-
+After copying the artifacts from the build host, stop or terminate it to avoid incurring additional costs. If you want to keep it for future kernel builds, stopping it is sufficient.
 
 {{% notice Note %}}
-If you do decide to keep the machine around as a kernel copy host, you can modify it to a smaller instance type such as `m6g.4xlarge` to save on costs when its running.  The larger 12xlarge instance is only needed during kernel compilation.
+If you decide to keep the machine around as a kernel copy host, you can modify it to a smaller instance type such as `m6g.4xlarge` to save on costs when it's running. The larger 12xlarge instance is only needed during kernel compilation.
 {{% /notice %}}
 
 ## Configure the Fastpath host
 
-With kernels copied over, the final step is to install and configure the *fastpath* software onto the *fastpath* host.  From the same folder, run the host configuration script targeting localhost:
+With kernels copied over, the final step is to install and configure the Fastpath software.
 
-1. Stay on the *fastpath* host and ensure you are in the cloned repository.  If needed, you can easily navigate there again:
+From the `arm_kernel_install_guide` folder, run the host configuration script targeting localhost:
 
-    ```command
-    cd ~/arm_kernel_install_guide
-    ```
+```command
+./scripts/configure_fastpath_host.sh --host localhost
+```
 
-2. Run the *fastpath* host setup script, targeting localhost (the current machine):
+The output shows the configuration confirmation:
 
-    ```command
-    ./scripts/configure_fastpath_host.sh --host localhost
-    ```
+```output
+[2026-01-08 18:35:27] Configuring fastpath host localhost (non-interactive mode)
+[2026-01-08 18:35:27] Installing prerequisites
+...
+[2026-01-08 18:36:10] Fastpath host setup complete.
+```
 
-    ```output
-    [2026-01-08 18:35:27] Configuring fastpath host localhost (non-interactive mode)
-    [2026-01-08 18:35:27] Installing prerequisites
-    ...
-    [2026-01-08 18:36:10] Fastpath host setup complete.
-    ```
+The script creates a Python virtual environment at `~/venv` and installs the Fastpath CLI alongside its dependencies.
 
-Note that the script creates a Python virtual environment at `~/venv` and installs the *fastpath* CLI alongside its dependencies:
+Whenever you log back into the machine, activate the virtual environment before running any Fastpath commands:
 
 ```command
 source ~/venv/bin/activate
-which python
 ```
 
-```output
-/home/ubuntu/venv/bin/python
-```
-
-{{% notice Note %}}
-Whenever you log back into the machine, make sure to activate the virtual environment (the above command line) before running any *fastpath* commands.
-{{% /notice %}}
-
-With the *fastpath* host configured, you're now ready to provision the system under test (SUT) and verify connectivity between them.
+With the Fastpath host configured, you're now ready to provision the system under test (SUT) and verify connectivity between them.

@@ -18,7 +18,7 @@ subjects_filter:
 - Graphics: 6
 - ML: 18
 - Performance and Architecture: 36
-subtitle: Optimize Android apps and build faster games using cutting-edge Arm tech
+subtitle: Optimize Android apps and build faster games using cutting-edge Arm tech.
 title: Mobile, Graphics, and Gaming
 tools_software_languages_filter:
 - 7-Zip: 1

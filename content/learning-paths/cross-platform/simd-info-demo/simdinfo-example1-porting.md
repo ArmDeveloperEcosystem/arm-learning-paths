@@ -12,7 +12,7 @@ Follow this step-by-step process to porting:
 
 1. Change the loading process to follow NEON's method for initializing vectors. The SSE4.2 intrinsic **`_mm_set_ps`** is in reality a macro, in NEON you can do the same thing with curly braces **`{}`** initialization.
 2. Next, replace the SSE4.2 intrinsics with the NEON equivalents that you identified earlier. The key is to ensure that the operations perform the same tasks, such as comparison, addition, multiplication, and square root calculations.
-3. Finally, modify the storing process to match NEON's way of moving data from vectors to memory. In NEON, you use functions like [**`vst1q_f32`**](https://simd.info/c_intrinsic/vst1q_f32/) for storing 128-bit floating-point vectors and [**`vst1q_u32`**](https://simd.info/c_intrinsic/vst1q_u32/) for storing 128-bit integer vectors.
+3. Finally, modify the storing process to match NEON's way of moving data from vectors to memory. In NEON, you use functions like [**`vst1q_f32`**](https://simd.info/c_intrinsic/vst1q_f32) for storing 128-bit floating-point vectors and [**`vst1q_u32`**](https://simd.info/c_intrinsic/vst1q_u32) for storing 128-bit integer vectors.
 
 After identifying the NEON intrinsics that you require in the ported program, it's now time to write the code.
 

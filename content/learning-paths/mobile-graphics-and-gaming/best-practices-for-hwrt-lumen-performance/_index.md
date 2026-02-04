@@ -36,7 +36,7 @@ further_reading:
         type: website
     - resource:
         title: Analyzing ray traced content with Arm Mobile Studio
-        link: https://community.arm.com/arm-community-blogs/b/graphics-gaming-and-vr-blog/posts/analyzing-ray-traced-content
+        link: https://developer.arm.com/community/arm-community-blogs/b/mobile-graphics-and-gaming-blog/posts/analyzing-ray-traced-content
         type: blog
     - resource:
         title: Arm Performance Studio 

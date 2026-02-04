@@ -192,6 +192,5 @@ For each x86-64 ELF file, check there is a corresponding aarch64 ELF file in the
 
 Here are a few resources:
 - [Improving Java performance on Neoverse N1 systems](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/java-performance-on-neoverse-n1)
-- [Arm resources show how to optimize your Java applications for AArch64](https://blogs.oracle.com/javamagazine/post/java-arm-runtime-switches-benchmarks)
 - [Unlocking Java Performance on Ampere Altra Family Processors](https://amperecomputing.com/tuning-guides/unlocking-java-performance-tuning-guide)
 
