@@ -46,7 +46,7 @@ Google GCP offers a variety of [virtual machine instances with Arm processors](h
 
 | Generation    | Arm CPU      | Instance types     | Comments  |  
 | --------------|--------------|--------------------|-----------|
-| T2A       | Neoverse-N1  | T2A-standard | Optimized for general-purpose workloads - web servers, and microservices. |
+| T2A       | Neoverse-N1  | t2a-standard | Optimized for general-purpose workloads - web servers, and microservices. |
 | Axion (C4A) | Neoverse-V2 | c4a-standard, c4a-highmem, c4a-highcpu  | General-purpose, AI/ML workloads and high performance computing. |
 | Axion (N4A) | Neoverse-N3 | n4a-standard, n4a-highmem, n4a-highcpu  | General-purpose, efficient for multi-threaded workloads. |
 
@@ -65,9 +65,9 @@ Oracle Cloud Infrastructure (OCI) Ampere [Arm-based compute](https://www.oracle.
 
 | Generation    | Arm CPU      | Instance types         | Comments  |  
 | --------------|--------------|--------------------|-----------|
-| A1            | Neoverse-N1  | VM.Standard.A1  | Offers predefined (.#CPUs) or dynamic OCPU and memory allocation (.Flex) |
-| A2            | AmpereOne    | VM.Standard.A2, VM.Optimized3.A2 | Tailored for high-performance and memory-intensive workloads. |
-| A4            | AmpereOne M  | VM.Standard.A4, VM.Optimized3.A4 | Tailored for high-performance and memory-intensive workloads. |
+| A1            | Ampere Altra  | VM.Standard.A1.Flex, BM.Standard.A1  | Offers predefined (.#CPUs) or dynamic OCPU and memory allocation (.Flex) |
+| A2            | AmpereOne    | VM.Standard.A2.Flex  | Cost efficient, low latency and general purpose compute. |
+| A4            | AmpereOne-M  | VM.Standard.A4.Flex, BM.Standard.A4 | Power efficient computing for AI inference and cloud-native applications. |
 
   {{< /tab >}}
   {{< tab header="Alibaba Cloud">}} 
@@ -208,6 +208,7 @@ Which software helps me build web applications on Arm servers?
 | Nginx | [Learn how to deploy Nginx](/learning-paths/servers-and-cloud-computing/nginx/) | [Nginx Performance on AWS Graviton3](https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/nginx-performance-on-graviton-3) |
 | | [Learn how to tune Nginx](/learning-paths/servers-and-cloud-computing/nginx_tune/) |  |
 | Django | [Learn how to deploy a Django application](/learning-paths/servers-and-cloud-computing/django/) |  |
+| Full Stack Application | [Migrate x86 workloads to Arm on Google Kubernetes Engine with Axion processors](/learning-paths/servers-and-cloud-computing/gke-multi-arch-axion/) |  |
 
 
   {{< /tab >}}
@@ -219,6 +220,17 @@ Which networking software works on Arm servers?
 |-----------|----------------|----------------------------------------|
 | Vectorscan | [Install Vectorscan (Hyperscan on Arm) and use it with Snort 3](/learning-paths/servers-and-cloud-computing/vectorscan/) | |
 | DPDK | | [DPDK Tuning Guide](https://developer.arm.com/documentation/109701/1-0/?lang=en) |
+  {{< /tab >}}
+
+  {{< tab header="AI/ML">}} 
+Which AI/ML software stack can I run on Arm servers?
+
+| Software | Learning Paths | Other Content (Blogs/Videos) |
+|-----------|----------------|----------------------------------------|
+| MLPerf | [Measure Machine Learning Inference Performance on Arm servers](/learning-paths/servers-and-cloud-computing/ml-perf/) | |
+| vLLM | [Run vLLM inference with INT4 quantization on Arm servers](/learning-paths/servers-and-cloud-computing/vllm-acceleration/) | |
+| KleidiAI | [Accelerate Generative AI workloads using KleidiAI](/learning-paths/servers-and-cloud-computing/kleidiai-explainer/) | |
+| Llama.cpp | [Run distributed inference with llama.cpp on Arm-based AWS Graviton4 instances](/learning-paths/servers-and-cloud-computing/distributed-inference-with-llama-cpp/) | |
   {{< /tab >}}
 
 {{< /tabpane-normal >}}
@@ -260,6 +272,7 @@ Below are some additional performance analysis tips and methodologies specific t
 - [How to use the Arm Performance Monitoring Unit and System Counter](/learning-paths/servers-and-cloud-computing/arm_pmu/)
 - [NVIDIA Grace CPU Benchmarking Guide](https://nvidia.github.io/grace-cpu-benchmarking-guide/index.html)
 - [Learn about Large System Extensions (LSE)](/learning-paths/servers-and-cloud-computing/lse/)
+- [Compare Arm Neoverse and Intel x86 top-down performance analysis with PMU counters](/learning-paths/cross-platform/topdown-compare/)
 
 ### 3.2 Ask for help
 
