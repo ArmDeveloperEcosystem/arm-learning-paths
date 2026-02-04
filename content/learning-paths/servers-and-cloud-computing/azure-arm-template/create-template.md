@@ -257,7 +257,7 @@ The template includes several Arm-specific configurations.
 
 **VM size**: The `vmSize` parameter defaults to `Standard_D4ps_v6`, part of the Dpsv6 series powered by Cobalt 100 processors. The D4ps_v6 size provides four vCPUs with general-purpose compute capabilities on Arm64 architecture.
 
-Other available Cobalt 100 VM sizes include `Standard_D2ps_v6` (2 vCPUs), `Standard_D8ps_v6` (8 vCPUs), and `Standard_D16ps_v6` (16 vCPUs).
+Other available Cobalt 100 VM sizes include `Standard_D2ps_v6` (two vCPUs), `Standard_D8ps_v6` (8 vCPUs), and `Standard_D16ps_v6` (16 vCPUs).
 
 **Image reference**: The `storageProfile` section specifies the operating system image with Arm64 architecture. The template uses Ubuntu 24.04 LTS:
 

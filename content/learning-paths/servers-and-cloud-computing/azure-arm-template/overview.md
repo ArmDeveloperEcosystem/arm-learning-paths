@@ -30,7 +30,7 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/azure_cobalt_key
 
 When prompted, you can enter a passphrase for added security or press Enter to skip it.
 
-Two files are created:
+This creates two files:
 - `~/.ssh/azure_cobalt_key` (private key - keep this secure)
 - `~/.ssh/azure_cobalt_key.pub` (public key - you'll use this in the template)
 
@@ -68,4 +68,8 @@ az account show --output table
 
 The output displays details about your active subscription, including the subscription ID and tenant ID.
 
-You're now ready to create the Azure Resource Manager template that will define your Arm-based Cobalt 100 VM infrastructure.
+## What you've accomplished and what's next
+
+You've authenticated with Azure, configured your active subscription, and generated SSH keys for secure VM access. Your development environment is ready for creating Azure Resource Manager templates.
+
+Next, you'll create the Resource Manager template that defines your Cobalt 100 VM infrastructure.

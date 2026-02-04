@@ -34,7 +34,7 @@ Check the CPU information:
 lscpu
 ```
 
-The output shows details about the Cobalt 100 processor, including Architecture (aarch64), CPU count (4 for Standard_D4ps_v6), and Vendor ID (ARM).
+The output shows details about the Cobalt 100 processor, including Architecture (aarch64), CPU count (four for Standard_D4ps_v6), and Vendor ID (ARM).
 
 ## Check system information
 
@@ -87,7 +87,8 @@ Check that nginx is running:
 sudo systemctl status nginx
 ```
 
-The output shows nginx is active and running.
+The output shows nginx is active and running:
+
 ```output
 ● nginx.service - A high performance web server and a reverse proxy server
      Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset:>
@@ -116,7 +117,7 @@ Test that nginx is working:
 curl http://localhost
 ```
 
-The output displays the nginx default welcome page HTML, confirming the web server is running correctly.
+The output displays the nginx default welcome page HTML, confirming the web server is running correctly:
 
 ```output
 <!DOCTYPE html>
@@ -143,9 +144,10 @@ Commercial support is available at
 </body>
 </html>
 ```
+
 ## Clean up resources (optional)
 
-When you're done exploring, you can delete all resources to avoid ongoing charges:
+When you're done exploring, delete all resources to avoid ongoing charges:
 
 ```bash
 az group delete --name cobalt-rg --yes --no-wait
@@ -153,9 +155,9 @@ az group delete --name cobalt-rg --yes --no-wait
 
 This command deletes the resource group and all resources within it. The `--no-wait` flag returns immediately without waiting for the deletion to complete.
 
-## Summary
+## What you've accomplished and what's next
 
-You've deployed a Cobalt 100 VM using an Azure Resource Manager template, connected via SSH, verified the Arm64 architecture, and tested nginx.
+You've deployed a Cobalt 100 VM using an Azure Resource Manager template, connected via SSH, verified the Arm64 architecture, and tested nginx on the running system.
 
 Your template provides a reusable foundation for deploying Cobalt 100 VMs. You can customize it by changing the VM size, modifying the OS image, adding network security rules, including data disks, or deploying multiple VMs.
 

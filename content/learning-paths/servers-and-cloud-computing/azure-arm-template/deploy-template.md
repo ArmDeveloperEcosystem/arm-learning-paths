@@ -14,11 +14,12 @@ Azure Resource Manager templates deploy resources into a resource group. Create 
 az group create --name cobalt-rg --location eastus
 ```
 
-Replace `eastus` with your preferred Azure region. To see available regions that support Cobalt 100 VMs, run:
+Replace `eastus` with your preferred Azure region. To see available regions that support Cobalt 100 VMs, query Azure for VM SKUs and filter for the Dpsv6 series:
 
 ```bash
 az vm list-skus --location eastus --size Standard_D --all --output table | grep "ps_v6"
 ```
+
 The output is similar to:
 ```output
 virtualMachines  eastus       Standard_D16ps_v6       2,3      None
