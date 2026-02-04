@@ -49,10 +49,12 @@ Google GCP offers a variety of [virtual machine instances with Arm processors](h
 | T2A       | Neoverse-N1  | t2a-standard | Optimized for general-purpose workloads - web servers, and microservices. |
 | Axion C4A | Neoverse-V2 | c4a-standard, c4a-highmem, c4a-highcpu  | General-purpose, AI/ML workloads and high performance computing. |
 | Axion N4A | Neoverse-N3 | n4a-standard, n4a-highmem, n4a-highcpu  | General-purpose, efficient for multi-threaded workloads. |
+| A4X | Neoverse-V2 | a4x-highgpu-4g | 140 vCPUs and 884 GB of memory using NVIDIA GB200 Superchips, which have B200 GPUs that offer 186 GB memory per GPU. |
+| A4X Max | Neoverse-V2 | a4x-maxgpu-4g-metal | 144 vCPUs and 960 GB of memory using NVIDIA GB300 Superchips, which have B300 GPUs that offer 279 GB memory per GPU. |
 
   {{< /tab >}}
   {{< tab header="Microsoft Azure">}}
-Microsoft Azure offers a variety of [virtual machine instances with Arm Neoverse processors](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series). The latest generation of Arm-based VMs are based on Cobalt 100 CPU. The largest instance has 96 vCPUs and 384 Gb of RAM in the 'D96ps_v6' format. It does not offer bare-metal instances. It offers compute for general-purpose workloads (Dps and Dpls) and memory-optimized workloads (Eps).
+Microsoft Azure offers a variety of [virtual machine instances with Arm Neoverse processors](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series). The current generation of Arm-based VMs are based on Cobalt 100 CPU. The largest instance has 96 vCPUs and 384 Gb of RAM in the 'D96ps_v6' format. It does not offer bare-metal instances. It offers compute for general-purpose workloads (Dps and Dpls) and memory-optimized workloads (Eps). The next generation VMs are based on [Azure Cobalt 200](https://techcommunity.microsoft.com/blog/azureinfrastructureblog/announcing-cobalt-200-azure’s-next-cloud-native-cpu/4469807).
 
 | Generation    | Arm CPU      | Instance types     | Comments  |  
 | --------------|--------------|--------------------|-----------|
@@ -289,8 +291,6 @@ Deployment is outside the scope of this guide, but here are some concepts to kee
 - Create a complete version of your application in a dev environment for additional testing.
 
 Make sure to research the details needed for these tasks by checking any places you use infrastructure as code or other places you store details about virtual machine types and sizes, as well as parameters for managed services.
-
-You can also check [Works on Arm](https://www.arm.com/markets/computing-infrastructure/works-on-arm) for the latest cloud and CI/CD initiatives for developers.
 
 ## Summary
 
