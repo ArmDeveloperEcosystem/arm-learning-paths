@@ -254,6 +254,8 @@ If you're using the **prompt file**, type:
 
 If you're using the **agent file**, select the `arm-migration-agent` from the agent dropdown in the Copilot Chat window, or assign it to an issue on GitHub.com using the agents panel dropdown.
 
+![Selecting a custom agent from the dropdown in VS Code](select-custom-agent-vscode.png)
+
 The assistant will:
    * Detect x86-specific intrinsics
    * Rewrite SIMD code using NEON
