@@ -1,5 +1,5 @@
 ---
-title: Deploy the template
+title: Deploy the Azure Resource Manager template
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -132,7 +132,7 @@ cobaltdemo-vm_OsDisk_1_a3e13c940d07463cace48cfd1458a151  COBALT-RG        eastus
 
 The output shows the resources created: virtual machine, network interface, public IP address resource, virtual network, network security groups, and OS disk.
 
-## Retrieve the VM's public IP address
+## Retrieve the Cobalt 100 VM public IP address
 
 Get the public IP address to connect to your VM:
 

@@ -13,7 +13,7 @@ learning_objectives:
 
 prerequisites:
     - An Azure subscription with permissions to create resource groups, virtual machines, and networking resources
-    - Azure CLI installed on your local machine (see the [Azure CLI install guide](/install-guides/azure-cli/))
+    - Azure CLI installed on your local machine - see the [Azure CLI install guide](/install-guides/azure-cli/)
     - An SSH key pair for authentication
 
 author: Pareena Verma

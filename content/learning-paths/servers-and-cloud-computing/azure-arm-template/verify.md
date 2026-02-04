@@ -36,7 +36,7 @@ lscpu
 
 The output shows details about the Cobalt 100 processor, including Architecture (aarch64), CPU count (four for Standard_D4ps_v6), and Vendor ID (ARM).
 
-## Check system information
+## View Cobalt 100 system information
 
 View detailed system information:
 
@@ -72,7 +72,7 @@ lsb_release -a
 
 The output confirms Ubuntu 24.04 LTS (Noble Numbat).
 
-## Install and test software
+## Install and test software on Arm64
 
 Update the package lists and install a simple application to verify everything works:
 

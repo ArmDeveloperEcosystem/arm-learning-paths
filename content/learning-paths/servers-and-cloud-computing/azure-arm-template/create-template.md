@@ -1,21 +1,21 @@
 ---
-title: Create the Resource Manager template
+title: Create the Azure Resource Manager template
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Azure Resource Manager template structure
+## Understand the Azure Resource Manager template structure
 
-An Azure Resource Manager template consists of several key sections:
+An Azure Resource Manager template is a JSON file organized into six sections:
+- `$schema`: defines the template language version
+- `contentVersion`: your template's version number
+- `parameters`: input values that customize the deployment
+- `variables`: computed values used throughout the template
+- `resources`: Azure resources to create
+- `outputs`: values returned after deployment
 
-- **$schema**: Defines the template language version
-- **contentVersion**: Your template's version number
-- **parameters**: Input values that customize the deployment
-- **variables**: Computed values used throughout the template
-- **resources**: Azure resources to create
-- **outputs**: Values returned after deployment
 
 ## Create the template file
 
