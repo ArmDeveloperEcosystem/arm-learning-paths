@@ -35,8 +35,7 @@ Three possible ways to set up a development machine are covered below.
 Select **one** that works for you. Please share other ways that work for you
 
 - A [local computer (Linux, macOS, or Windows)](#option-1-set-up-a-local-computer)
-- A [Gitpod instance](#option-2-set-up-gitpod) with tools pre-installed (easiest to set up and manage)
-- A [remote Linux server](#option-3-set-up-a-remote-linux-server) via SSH (on your local network or from a Cloud Service Provider)
+- A [remote Linux server](#option-2-set-up-a-remote-linux-server) via SSH (on your local network or from a Cloud Service Provider)
 
 ## Option 1: Set up a local computer
 
@@ -89,8 +88,9 @@ Check Hugo is installed correctly and check the version by running this command:
 hugo version
 ```
 
-Navigate into the `arm-learning-paths` folder and run hugo to launch a
-development version of website on your machine.
+Most recent versions of Hugo will work, but you may face errors if the version is too old. 
+
+Navigate into the `arm-learning-paths` folder and run hugo to launch a development version of website on your machine.
 
 ```bash
 cd arm-learning-paths
@@ -107,37 +107,7 @@ Open a browser and go to [http://localhost:1313](http://localhost:1313)
 
 You are now ready to start developing content. The content creation process consists of editing the markdown files for Learning Paths and viewing the changes on your computer using Hugo. 
 
-## Option 2: Set up Gitpod
-
-The second option is to use Gitpod as a development environment.
-
-[Gitpod](https://www.gitpod.io/) is a cloud development environment (CDE) which makes it easy to create software from any computer. 
-
-Instead of installing tools on your local computer, you can create and modify content directly in Gitpod. The repository is configured to initialize a Gitpod instance with all tools/software you need to start contributing right away. 
-
-Visit your fork of the GitHub project in your browser. 
-
-Install the [Gitpod Chrome Extension](https://chrome.google.com/webstore/detail/gitpod-always-ready-to-co/dodmmooeoklaejobgleioelladacbeki) which installs a Gitpod button in your GitHub projects. 
-
-If you do not want install the browser extension, you can also prefix the URL for your fork of the GitHub project with gitpod.io/# to open the project in Gitpod.
-
-Either way, open the repository in Gitpod. The URL looks like this: https://gitpod.io/#github.com/ArmDeveloperEcosystem/arm-learning-paths (replace with the path to your fork).
-
-You can use your GitHub credentials, or select another authentication method to login to Gitpod and use the Free plan which offers 500 credits (about 50 hours) per month. 
-
-A new project will open in the browser. This is VS Code with the project loaded in your browser.
-
-All the required tools are installed automatically by Gitpod during the environment setup. 
-
-A view of the generated site is also opened automatically. The website view is not easy to see because it's in a sub-window of VS Code.
- 
-To move the website view into another browser tab, click on the top right corner. The tooltip for this click is “open in browser”.
-
-This gives you a private version of the content in a new tab to review. 
-
-You are now ready to edit markdown files and view the results in the Gitpod environment.
-
-## Option 3: Set up a remote Linux server
+## Option 2: Set up a remote Linux server
 
 The third option for Learning Path development is to use a remote Linux server, such as an AWS EC2 instance or other cloud virtual machine. The remote Linux server can also be on your local network.
 
@@ -184,41 +154,8 @@ You are now ready to edit markdown files and view the results on the Hugo server
 
 {{% notice Note %}}
 
-If your content is not updating/staging on your web browser after you save it correctly then please check the [Troubleshooting section](/learning-paths/cross-platform/_example-learning-path/appendix-5-troubleshooting/) for debugging instructions.
+If your content is not updating/staging on your web browser after you save it correctly then please check the [Troubleshooting section](/learning-paths/cross-platform/_example-learning-path/appendix-5-troubleshooting/).
 
 {{%/notice%}}
-
-## Enable the search box on the home page {#search}
-
-When you run `hugo server` you will not see the search box on the home page. You don't need to do anything for the search feature to find your content, but you may want to enable the search box and test it during your development.
-
-The search feature requires search index data to be created. If the data is available, the search box will appear on the home page. 
-
-To see the search box run the following commands before you run `hugo server` as described above:
-
-```console
-hugo
-pagefind --site "public" --output-subdir ../static/pagefind
-```
-
-If you have `pagefind` installed on your computer, or if your computer is supported by one of the `pagefind` in the `bin/` directory, then you can run the `hugo-server.sh` script, located at the top of the repository, to create the search index and start the server. If no suitable `pagefind` is available for your computer, the server will still be launched, but without the search index.
-
-| Pagefind executable    | OS                      |
-| ---------------------- | ----------------------- |
-| `bin/pagefind`         | Linux   (x86)           |
-| `bin/pagefind.aarch64` | Linux   (aarch64)       |
-| `bin/pagefind.arm64`   | macOS   (Apple Silicon) |
-| `bin/pagefind.exe`     | Windows (x86)           |
-
-
-For example, if you are working on Arm Linux you generate the search index using: 
-
-```console
-bin/pagefind.aarch64 --site "public" --output-subdir ../static/pagefind
-```
-
-{{% notice Note %}}
-The search index does not automatically update as you enter content. You can run `hugo` and `pagefind` again and restart `hugo server` to update the search index with your current content.
-{{% /notice %}}
 
 The next section will cover how to create and format Learning Paths. 
