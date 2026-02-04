@@ -4,7 +4,7 @@ layout: "migration"       # Easier for dynamic content loading, keep the same
 description: Software developers are embracing the Arm architecture for its superior price performance and energy efficiency across a wide range of applications, including containerized workloads, cloud managed services, and Linux applications. To achieve higher performance and lower cost, you can migrate your self-managed workloads to Arm virtual machines and make sure to select Arm for managed services. A three step migration process covers the most common scenarios, and provides links to additional resources.
 ---
 
-## PREFACE: Learn and explore
+## Learn and explore
 
 Arm Neoverse is a family of processor cores designed for servers and cloud data centers. There are 2 families currently available, Neoverse V-series and Neoverse N-series.
 
@@ -20,6 +20,8 @@ Below is a list of Neoverse CPUs, the architecture versions, and the key additio
 | Neoverse-V1 | Armv8.4-A            | SVE - Scalable Vector Extension adds high performance vector processing for HPC and AI workloads. |
 | Neoverse-N2 | Armv9.0-A            | SVE2 - Extends SVE for improved data parallelism and wider vectors. |
 | Neoverse-V2 | Armv9.0-A            | SVE2 - Targets high single threaded performance for HPC and AI workloads. |
+| Neoverse-N3 | Armv9.2-A            | Balanced performance and power with extended SVE2 and crypto performance. |
+| Neoverse-V3 | Armv9.2-A            | High performance, confidential compute, and extended SVE2 and crypto performance. |
 
 ### What cloud hardware is available today?
 
@@ -36,6 +38,7 @@ AWS offers more than [150 instance types with Graviton processors](https://aws.a
 | Graviton2 | Neoverse-N1  | C6g, M6g, R6g  | 600% performance and efficiency increases.                                  |
 | Graviton3 | Neoverse-V1  | C7g, M7g, R7g  | 25% performance increase, DDR5 memory added, 50% more memory bandwidth.     |
 | Graviton4 | Neoverse-V2  | R8g            | 75% more memory bandwidth, up to 40% faster for databases and 30% faster for web applications.   |
+| Graviton5 | Neoverse-V3  | M9g            | 25% higher performance and 5X larger L3 cache.   |
 
   {{< /tab >}}
   {{< tab header="Google GCP">}} 
@@ -43,12 +46,15 @@ Google GCP offers a variety of [virtual machine instances with Arm processors](h
 
 | Generation    | Arm CPU      | Instance types     | Comments  |  
 | --------------|--------------|--------------------|-----------|
-| T2A       | Neoverse-N1  | T2A-standard | Optimized for general-purpose workloads - web servers, and microservices. |
-| Axion (C4A) | Neoverse-V2 | c4a-standard, c4a-highmem, c4a-highcpu  | General-purpose, AI/ML workloads and high performance computing. |
+| T2A       | Neoverse-N1  | t2a-standard | Optimized for general-purpose workloads - web servers, and microservices. |
+| Axion C4A | Neoverse-V2 | c4a-standard, c4a-highmem, c4a-highcpu  | General-purpose, AI/ML workloads and high performance computing. |
+| Axion N4A | Neoverse-N3 | n4a-standard, n4a-highmem, n4a-highcpu  | General-purpose, efficient for multi-threaded workloads. |
+| A4X | Neoverse-V2 | a4x-highgpu-4g | 140 vCPUs and 884 GB of memory using NVIDIA GB200 Superchips, which have B200 GPUs that offer 186 GB memory per GPU. |
+| A4X Max | Neoverse-V2 | a4x-maxgpu-4g-metal | 144 vCPUs and 960 GB of memory using NVIDIA GB300 Superchips, which have B300 GPUs that offer 279 GB memory per GPU. |
 
   {{< /tab >}}
   {{< tab header="Microsoft Azure">}}
-Microsoft Azure offers a variety of [virtual machine instances with Arm Neoverse processors](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series). The latest generation of Arm-based VMs are based on Cobalt 100 CPU. The largest instance has 96 vCPUs and 384 Gb of RAM in the 'D96ps_v6' format. It does not offer bare-metal instances. It offers compute for general-purpose workloads (Dps and Dpls) and memory-optimized workloads (Eps).
+Microsoft Azure offers a variety of [virtual machine instances with Arm Neoverse processors](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series). The current generation of Arm-based VMs are based on Cobalt 100 CPU. The largest instance has 96 vCPUs and 384 Gb of RAM in the 'D96ps_v6' format. It does not offer bare-metal instances. It offers compute for general-purpose workloads (Dps and Dpls) and memory-optimized workloads (Eps). The next generation VMs are based on [Azure Cobalt 200](https://techcommunity.microsoft.com/blog/azureinfrastructureblog/announcing-cobalt-200-azure’s-next-cloud-native-cpu/4469807).
 
 | Generation    | Arm CPU      | Instance types     | Comments  |  
 | --------------|--------------|--------------------|-----------|
@@ -61,8 +67,9 @@ Oracle Cloud Infrastructure (OCI) Ampere [Arm-based compute](https://www.oracle.
 
 | Generation    | Arm CPU      | Instance types         | Comments  |  
 | --------------|--------------|--------------------|-----------|
-| A1            | Neoverse-N1  | VM.Standard.A1  | Offers predefined (.#CPUs) or dynamic OCPU and memory allocation (.Flex) |
-| A2            | AmpereOne    | VM.Standard.A2, VM.Optimized3.A2 | Tailored for high-performance and memory-intensive workloads. |
+| A1            | Ampere Altra  | VM.Standard.A1.Flex, BM.Standard.A1  | Offers predefined (.#CPUs) or dynamic OCPU and memory allocation (.Flex) |
+| A2            | AmpereOne    | VM.Standard.A2.Flex  | Cost efficient, low latency and general purpose compute. |
+| A4            | AmpereOne M  | VM.Standard.A4.Flex, BM.Standard.A4 | Power efficient computing for AI inference and cloud-native applications. |
 
   {{< /tab >}}
   {{< tab header="Alibaba Cloud">}} 
@@ -203,6 +210,7 @@ Which software helps me build web applications on Arm servers?
 | Nginx | [Learn how to deploy Nginx](/learning-paths/servers-and-cloud-computing/nginx/) | [Nginx Performance on AWS Graviton3](https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/nginx-performance-on-graviton-3) |
 | | [Learn how to tune Nginx](/learning-paths/servers-and-cloud-computing/nginx_tune/) |  |
 | Django | [Learn how to deploy a Django application](/learning-paths/servers-and-cloud-computing/django/) |  |
+| Full Stack Application | [Migrate x86 workloads to Arm on Google Kubernetes Engine with Axion processors](/learning-paths/servers-and-cloud-computing/gke-multi-arch-axion/) |  |
 
 
   {{< /tab >}}
@@ -214,6 +222,17 @@ Which networking software works on Arm servers?
 |-----------|----------------|----------------------------------------|
 | Vectorscan | [Install Vectorscan (Hyperscan on Arm) and use it with Snort 3](/learning-paths/servers-and-cloud-computing/vectorscan/) | |
 | DPDK | | [DPDK Tuning Guide](https://developer.arm.com/documentation/109701/1-0/?lang=en) |
+  {{< /tab >}}
+
+  {{< tab header="AI/ML">}} 
+Which AI/ML software stack can I run on Arm servers?
+
+| Software | Learning Paths | Other Content (Blogs/Videos) |
+|-----------|----------------|----------------------------------------|
+| MLPerf | [Measure Machine Learning Inference Performance on Arm servers](/learning-paths/servers-and-cloud-computing/ml-perf/) | |
+| vLLM | [Run vLLM inference with INT4 quantization on Arm servers](/learning-paths/servers-and-cloud-computing/vllm-acceleration/) | |
+| KleidiAI | [Accelerate Generative AI workloads using KleidiAI](/learning-paths/cross-platform/kleidiai-explainer) | |
+| Llama.cpp | [Run distributed inference with llama.cpp on Arm-based AWS Graviton4 instances](/learning-paths/servers-and-cloud-computing/distributed-inference-with-llama-cpp/) | |
   {{< /tab >}}
 
 {{< /tabpane-normal >}}
@@ -255,6 +274,7 @@ Below are some additional performance analysis tips and methodologies specific t
 - [How to use the Arm Performance Monitoring Unit and System Counter](/learning-paths/servers-and-cloud-computing/arm_pmu/)
 - [NVIDIA Grace CPU Benchmarking Guide](https://nvidia.github.io/grace-cpu-benchmarking-guide/index.html)
 - [Learn about Large System Extensions (LSE)](/learning-paths/servers-and-cloud-computing/lse/)
+- [Compare Arm Neoverse and Intel x86 top-down performance analysis with PMU counters](/learning-paths/cross-platform/topdown-compare/)
 
 ### 3.2 Ask for help
 
@@ -271,8 +291,6 @@ Deployment is outside the scope of this guide, but here are some concepts to kee
 - Create a complete version of your application in a dev environment for additional testing.
 
 Make sure to research the details needed for these tasks by checking any places you use infrastructure as code or other places you store details about virtual machine types and sizes, as well as parameters for managed services.
-
-You can also check [Works on Arm](https://www.arm.com/markets/computing-infrastructure/works-on-arm) for the latest cloud and CI/CD initiatives for developers.
 
 ## Summary
 
