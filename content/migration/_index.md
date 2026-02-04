@@ -47,8 +47,8 @@ Google GCP offers a variety of [virtual machine instances with Arm processors](h
 | Generation    | Arm CPU      | Instance types     | Comments  |  
 | --------------|--------------|--------------------|-----------|
 | T2A       | Neoverse-N1  | t2a-standard | Optimized for general-purpose workloads - web servers, and microservices. |
-| Axion (C4A) | Neoverse-V2 | c4a-standard, c4a-highmem, c4a-highcpu  | General-purpose, AI/ML workloads and high performance computing. |
-| Axion (N4A) | Neoverse-N3 | n4a-standard, n4a-highmem, n4a-highcpu  | General-purpose, efficient for multi-threaded workloads. |
+| Axion C4A | Neoverse-V2 | c4a-standard, c4a-highmem, c4a-highcpu  | General-purpose, AI/ML workloads and high performance computing. |
+| Axion N4A | Neoverse-N3 | n4a-standard, n4a-highmem, n4a-highcpu  | General-purpose, efficient for multi-threaded workloads. |
 
   {{< /tab >}}
   {{< tab header="Microsoft Azure">}}
@@ -67,7 +67,7 @@ Oracle Cloud Infrastructure (OCI) Ampere [Arm-based compute](https://www.oracle.
 | --------------|--------------|--------------------|-----------|
 | A1            | Ampere Altra  | VM.Standard.A1.Flex, BM.Standard.A1  | Offers predefined (.#CPUs) or dynamic OCPU and memory allocation (.Flex) |
 | A2            | AmpereOne    | VM.Standard.A2.Flex  | Cost efficient, low latency and general purpose compute. |
-| A4            | AmpereOne-M  | VM.Standard.A4.Flex, BM.Standard.A4 | Power efficient computing for AI inference and cloud-native applications. |
+| A4            | AmpereOne M  | VM.Standard.A4.Flex, BM.Standard.A4 | Power efficient computing for AI inference and cloud-native applications. |
 
   {{< /tab >}}
   {{< tab header="Alibaba Cloud">}} 
@@ -229,7 +229,7 @@ Which AI/ML software stack can I run on Arm servers?
 |-----------|----------------|----------------------------------------|
 | MLPerf | [Measure Machine Learning Inference Performance on Arm servers](/learning-paths/servers-and-cloud-computing/ml-perf/) | |
 | vLLM | [Run vLLM inference with INT4 quantization on Arm servers](/learning-paths/servers-and-cloud-computing/vllm-acceleration/) | |
-| KleidiAI | [Accelerate Generative AI workloads using KleidiAI](/learning-paths/servers-and-cloud-computing/kleidiai-explainer/) | |
+| KleidiAI | [Accelerate Generative AI workloads using KleidiAI](/learning-paths/cross-platform/kleidiai-explainer) | |
 | Llama.cpp | [Run distributed inference with llama.cpp on Arm-based AWS Graviton4 instances](/learning-paths/servers-and-cloud-computing/distributed-inference-with-llama-cpp/) | |
   {{< /tab >}}
 
