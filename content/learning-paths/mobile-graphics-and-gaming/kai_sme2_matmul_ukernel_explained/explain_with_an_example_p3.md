@@ -18,7 +18,7 @@ The operations performed to compute an 16x64 result submatrice (four 16x16 subma
     - Load two SME2 SVL-lengths of data from the packed RHS (containing 2 x64x2 INT4 values) into two SME2 Z registers, then use the SME2 LUTI4 lookup table instruction to convert these INT4 values into INT8 type, extending them to four SME2 Z registers (4VL).
     - Use the SME2 INT8 Outer Product Accumulate (MPOA) instruction to perform outer product operations with source from the Z register and each of the four Z registers, accumulates the results in four ZA tiles (which are initialized to zero). It produces intermediate results of four 16x16 output submatrices.
     The processes of the first itration can be illustrated in the diagram below:
-![Figure showing the first itration of the inner loop alt-text#center](images/run_matmuLsme2_step1.jpg "The first itration of the inner loop")
+![Figure showing the first itration of the inner loop alt-text#center](images/run_matmul_sme2_step1.jpg "The first itration of the inner loop")
     The diagram below illustrates the process of the second iteration along the K dimension,
 ![Figure showing the second itration of the inner loop alt-text#center](images/run_matmul_sme2_step2.jpg "The second itration of the inner loop")
   - After completing the iterations in the block, the intermediate INT32 results of four 16x16 output submatrices are dequantized with the per-block LHS and RHS scale to FP32 floats, using Floating-point Multiply (FMUL), Floating-point Multiply and Accumulate (FMLA) and Signed fixed-point Convert to Floating-point (SCVTF) vector instructions. It produces the intermediate FP32 results of four 16x16 output submatrices.
