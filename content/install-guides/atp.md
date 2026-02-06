@@ -17,14 +17,11 @@ author: Pareena Verma
 ### Link to official documentation
 official_docs: https://arm-total-performance.tools.arm.com/
 
-
-
-### PAGE SETUP
-weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
-tool_install: false             # Set to true to be listed in main selection page, else false
-multi_install: false            # Set to true if first page of multi-page article, else false
-multitool_install_part: false   # Set to true if a sub-page of a multi-page article, else false
-layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
+weight: 1                  
+tool_install: false        
+multi_install: false        
+multitool_install_part: false
+layout: installtoolsall
 
 build:
   list: false                   # Exclude from .Pages collections and listings
@@ -255,7 +252,8 @@ In the **Configure Target** form, provide the following details:
 * **Host Key Verification**: Choose **Strict** (recommended) or **Ignore**
   * Strict mode verifies the server identity using your `~/.ssh/known_hosts` file
 
-![ATP target configuration form showing fields for host IP address, descriptive target name, SSH port 22, username, SSH private key selection with automatic detection option, and host key verification set to strict mode for secure server identity verification alt-txt#center](_images/atp-target-config.png)
+![ATP target configuration form displaying input fields including Host with IP address 192.168.1.10, Name field for descriptive target identifier, Port field set to 22, User field for SSH username, SSH Private Key section with radio buttons for Automatically Detect Key and Select Key Manually options, and Host Key Verification dropdown menu set to Strict mode with explanation text about verifying server identity using known_hosts file alt-txt#center](/install-guides/_images/atp-target-config.png "Configure Target form with connection settings")
+
 
 Select **Add Target**.
 
@@ -263,7 +261,7 @@ The target appears in the targets list and is ready for profiling.
 
 You can select the **Test Connection** button to verify your connection to the ATP Linux target is successful.
 
-![ATP graphical interface showing successful connection test results with green checkmark icon, target name my-target, host IP address 192.168.1.10, connection status Connected, and Test Connection button in an active state alt-txt#center](_images/atp-connection-test.png)
+![ATP graphical interface displaying connection test results with green checkmark icon indicating success, target name my-target shown in header, host IP address 192.168.1.10 listed below, connection status field showing Connected in green text, and blue Test Connection button at bottom of panel#center](/install-guides/_images/atp-connection-test.png "Successful ATP target connection test")
 
 #### Configure jump nodes (optional)
 
