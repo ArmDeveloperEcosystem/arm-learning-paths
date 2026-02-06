@@ -169,7 +169,7 @@ When the installation finishes, select **Close** to exit the installer.
 
 Before connecting to an Arm Linux target, ensure SSH key-based authentication is configured and that passwordless sudo access is enabled. If you already manage your target system via SSH, you likely have most of this setup complete.
 
-## Check your existing SSH key
+### Check your existing SSH key
 
 Verify that you can connect to your target using SSH. Replace `user` with your username and `target_host` with your target's hostname or IP address:
 
@@ -243,11 +243,11 @@ Select **Add Target**.
 
 In the **Configure Target** form, provide the following details:
 
-* **Host**: The hostname or IP address of the target machine
-* **Name**: A descriptive name for the target
-* **Port**: The SSH port number (default is 22)
-* **User**: The username for SSH connection
-* **SSH Private Key**: Choose **Automatically Detect Key** or **Select Key Manually**
+* **Host**: the hostname or IP address of the target machine
+* **Name**: a descriptive name for the target
+* **Port**: the SSH port number (default is 22)
+* **User**: the username for SSH connection
+* **SSH Private Key**: choose **Automatically Detect Key** or **Select Key Manually**
   * For manual selection, enter the path to your private key (usually `~/.ssh/id_rsa` or `~/.ssh/id_ed25519`)
 * **Host Key Verification**: Choose **Strict** (recommended) or **Ignore**
   * Strict mode verifies the server identity using your `~/.ssh/known_hosts` file
