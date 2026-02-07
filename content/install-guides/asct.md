@@ -92,7 +92,7 @@ wget https://artifacts.tools.arm.com/asct/dist/0.4.2/asct-0.4.2+3b955c2.tar.gz
 
 ### How do I install ASCT using uv?
 
-The recommended installation method uses [uv](https://github.com/astral-sh/uv), a fast Python package installer. First, install `uv`:
+The recommended method uses [uv](https://github.com/astral-sh/uv), a fast Python package installer. Install `uv`:
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -108,7 +108,7 @@ This installs ASCT to `/usr/local/bin` making it available system-wide. Installi
 
 ### How do I verify that ASCT is installed?
 
-After installing ASCT, verify the installation by checking the version:
+Verify the installation by checking the version:
 
 ```bash
 asct version
@@ -120,19 +120,19 @@ The output is similar to:
 ASCT 0.4.2+3b955c2
 ```
 
-You can also display the help information:
+Display the help information:
 
 ```bash
 asct --help
 ```
 
-The output displays available commands and benchmarks.
+This displays available commands and benchmarks.
 
 ## How do I use ASCT?
 
 ASCT provides several commands for benchmarking and system analysis, including `run`, `system-info`, `list`, `diff`, and `sysreg`. 
 
-Some benchmarks require `sudo` or root privileges to configure huge pages and access certain system information. You can run ASCT without `sudo`, but some benchmarks might be unavailable or limited in functionality.
+Some benchmarks require `sudo` or root privileges to configure huge pages and access certain system information. You can run ASCT without `sudo`, but some benchmarks can be unavailable or limited in functionality.
 
 ### Get system information
 
@@ -269,7 +269,7 @@ Some of the tests also generate graphs.
 
 An example of a bandwidth graph is shown below:
 
-![Example bandwidth sweep benchmark output showing memory bandwidth measurements across different data sizes on an Arm system, with a graph displaying bandwidth in GB/s on the y-axis and data size in MB on the x-axis](/install-guides/_images/asct-bw.webp)
+![Graph showing memory bandwidth sweep benchmark results with data size in MB on x-axis ranging from 0.001 to 1000, and bandwidth in GB/s on y-axis ranging from 0 to 300, displaying multiple colored lines representing different CPU configurations with performance peaks at smaller data sizes and declining bandwidth as data size increases beyond cache levels alt-txt#center](/install-guides/_images/asct-bw.webp "Bandwidth sweep benchmark results")
 
 ## How do I uninstall ASCT?
 
