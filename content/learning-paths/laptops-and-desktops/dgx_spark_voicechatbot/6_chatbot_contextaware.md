@@ -1,33 +1,31 @@
 ---
-title: Enabling Context-Aware Dialogue with Short-Term Memory
-weight: 7
+title: Enable context-aware dialogue with short-term memory
+weight: 8
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Enabling Context-Aware Dialogue with Short-Term Memory
-
 In customer service and other task-based voice interactions, conversations naturally span multiple turns. Users may provide only partial information per utterance or follow up after the assistant’s prompt.
 
 To handle such situations effectively, your assistant needs short-term memory—a lightweight context buffer that retains recent user questions and assistant replies.
 
-### Why Multi-Turn Memory Matters
+## Why multi-turn memory matters
 
 Without memory, each user input is treated in isolation. This causes breakdowns like:
 
-Example: What Happens Without Memory
+Example: What happens without memory
 
 | Speaker | Message |
 |---------|---------|
-| **User** | I’d like to cancel my subscription. |
-| **AI** | Sure. Could you confirm your email address? |
-| **User** | My email is abc at email.com. Please help me. |
-| **AI** | (Without memory) Sorry, what would you like to do today? |
+| User | I'd like to cancel my subscription. |
+| AI | Sure. Could you confirm your email address? |
+| User | My email is abc at email.com. Please help me. |
+| AI | (Without memory) Sorry, what would you like to do today? |
 
-This happens because the assistant doesn’t remember the user’s intent or its own previous message. To fix this, we’ll implement a memory buffer.
+This happens because the assistant doesn't remember the user's intent or its own previous message. To fix this, you'll implement a memory buffer.
 
-### Step 1: Store Previous User and Assistant Turns
+### Step 1: Store previous user and assistant turns
 
 Create a `chat_history` list to hold recent turns. After each interaction, append both user and assistant responses:
 
@@ -53,9 +51,9 @@ This will build a list like:
 ]
 ```
 
-### Step 2: Keep Only the Most Recent 5 Rounds
+### Step 2: Keep only the most recent 5 rounds
 
-Each new turn makes the message array longer. To avoid going over the token limit (especially with small VRAM or long models), keep only the last N turns. In this learning path, we use 5 rounds as example (10 messages, 5 rounds of user + assistant)
+Each new turn makes the message array longer. To avoid going over the token limit (especially with small VRAM or long models), keep only the last N turns. Use 5 rounds as an example (10 messages, 5 rounds of user + assistant)
 
 ```python
 messages = [{"role": "system", "content": SYSTEM_PROMPT}]
@@ -65,21 +63,18 @@ messages.append({"role": "user", "content": user_text})
 
 This keeps the most recent context while fitting within model constraints.
 
-### Step 3: Estimate Token Usage Before Sending
+### Step 3: Estimate token usage before sending
 
-Before calling the API, estimate how many tokens your prompt is using. This includes:
-- The system prompt
-- All past user/assistant messages
-- The new user message
+Before calling the API, estimate how many tokens your prompt is using. This includes the system prompt, all past user/assistant messages, and the new user message.
 
 ```python
 prompt_tokens = len(" ".join([m["content"] for m in messages]).split())
 print(f" Estimated prompt tokens: {prompt_tokens}")
 ```
 
-This helps you balance max_tokens for the assistant’s response, ensuring the prompt and reply fit within the model’s limit (e.g., 4096 or 8192 tokens depending on the model).
+This helps you balance max_tokens for the assistant's response, ensuring the prompt and reply fit within the model's limit (for example, 4096 or 8192 tokens depending on the model).
 
-The expected output could be:
+The expected output is similar to:
 
 ```log
 User: Hi, I need to cancel my subscription. Please help me
@@ -119,20 +114,20 @@ The assistant remembers the previous turns, including account verification and f
 
 | Speaker | Message | Prompt Tokens |
 |---------|---------|---------------|
-| **User** | Hi, I need to cancel my subscription. Please help me | 46 |
-| **AI** | Hello, I'd be happy to help you cancel your subscription. Could you please provide me with your account information, such as your name and email address associated with the subscription? This will ensure a smooth cancellation process. If you have any prefered method of cancellation or additional questions, please let me know. |  |
-| **User** | My account information is abc at email.com | 69 |
-| **AI** | Hi abc@email.com, I'll do my best to assist you with canceling your subscription. For security reasons, I'll need to verify your account information before proceeding. Could you please confirm your account password or the last 4 digits of the payment method associated with the subscription? This will |
-| **User** | The account password will be 3355. | 122 |
-| **AI** | Hi abc@email.com, I've verified your account information and you have an active subscription with us. I'm sorry to see that you'd like to cancel. To cancel your subscription, I will need to process a refund for your latest charge. This refund may take up to 7-1 |  |
-| **User** | Okay, I see the account has been cancelled. Thanks for your help. | 180 |
-| **AI** | You're welcome, abc@email.com. I'm glad I could help you cancel your subscription. If there is anything else I can assist you with in the future, please don't hesitate to ask. Have a great day! | |
+| User | Hi, I need to cancel my subscription. Please help me | 46 |
+| AI | Hello, I'd be happy to help you cancel your subscription. Could you please provide me with your account information, such as your name and email address associated with the subscription? This will ensure a smooth cancellation process. If you have any prefered method of cancellation or additional questions, please let me know. |  |
+| User | My account information is abc at email.com | 69 |
+| AI | Hi abc@email.com, I'll do my best to assist you with canceling your subscription. For security reasons, I'll need to verify your account information before proceeding. Could you please confirm your account password or the last 4 digits of the payment method associated with the subscription? This will |
+| User | The account password will be 3355. | 122 |
+| AI | Hi abc@email.com, I've verified your account information and you have an active subscription with us. I'm sorry to see that you'd like to cancel. To cancel your subscription, I will need to process a refund for your latest charge. This refund may take up to 7-1 |  |
+| User | Okay, I see the account has been cancelled. Thanks for your help. | 180 |
+| AI | You're welcome, abc@email.com. I'm glad I could help you cancel your subscription. If there is anything else I can assist you with in the future, please don't hesitate to ask. Have a great day! | |
 
 This estimate helps you prevent prompt truncation or response cutoff, especially important when using larger models with longer histories.
 
-## Full Function of Offline Voice Customer Service on DGX Spark
+## Full function of offline voice customer service on DGX Spark
 
-Now that your speech-to-AI pipeline is complete, you’re ready to scale it up by running a larger, more powerful language model—fully offline on DGX Spark.
+Now that your speech-to-AI pipeline is complete, you're ready to scale it up by running a larger, more powerful language model fully offline on DGX Spark.
 
 To take full advantage of the GPU capabilities, you can serve a 70B parameter model using vLLM. Make sure you’ve already downloaded the model files into ~/models/llama3-70b (host OS).
 
@@ -276,7 +271,7 @@ try:
                         "max_tokens": max_tokens
                     })
 
-                    result = response.json()                    
+                    result = response.json()
                     if "choices" not in result:
                         print(" Error from vLLM:", result.get("error", "Unknown error"))
                         continue
@@ -300,11 +295,11 @@ finally:
 ```
 
 
-### Demo: Multi-Turn Voice Chatbot with Context Memory on DGX Spark
+### Demo: Multi-turn voice chatbot with context memory on DGX Spark
 
 ![img2 alt-text#center](fasterwhipser_vllm_demo2.gif "Figure 2: Full Function Voice-to-AI with volume bar")
 
-This demo showcases a fully offline voice assistant that combines real-time transcription (via ***faster-whisper***) and intelligent response generation (via ***vLLM***). Running on an Arm-based DGX Spark system, the assistant captures live audio, transcribes it, and generates context-aware replies using a local language model—all in a seamless loop.
+This demo showcases a fully offline voice assistant that combines real-time transcription (via faster-whisper) and intelligent response generation (via vLLM). Running on an Arm-based DGX Spark system, the assistant captures live audio, transcribes it, and generates context-aware replies using a local language model—all in a seamless loop.
 
 The assistant now supports multi-turn memory, allowing it to recall previous user inputs and its own responses. As shown in the video, this enables natural back-and-forth conversations, such as confirming account details or resolving support requests.
 
@@ -333,7 +328,7 @@ Transcribed User Text (timestamped)
         ↓
 System Prompt + Conversation History
         ↓
-vLLM API (e.g., mistral-7b or llama3-70b GPU inference)
+vLLM API (for example, mistral-7b or llama3-70b GPU inference)
         ↓
 AI Response
         ↓
@@ -342,24 +337,24 @@ Print Response or (optional: TTS reply)
 
 This hybrid architecture is production-ready, modular, and offline-capable. All stages run locally on your system, enabling privacy, reliability, and scalability.
 
-### Future Work: Taking the Assistant Further
+### Future work: Taking the assistant further
 
 With a fully functional offline voice chatbot running on DGX Spark, you now have a strong foundation for many advanced features. Here are some next-step enhancements you might consider:
 
-- ***Knowledge-augmented Generation (RAG)***
+- Knowledge-augmented Generation (RAG)
 
-Integrate local document search or FAQ databases with embedding-based retrieval to answer company-specific or domain-specific queries. You can reference previous [learning path](https://learn.arm.com/learning-paths/laptops-and-desktops/dgx_spark_rag/) to know how to deploy RAG in the same hardware.
+Integrate local document search or FAQ databases with embedding-based retrieval to answer company-specific or domain-specific queries. You can reference a previous Learning Path about [deploying RAG on DGX Spark](/learning-paths/laptops-and-desktops/dgx_spark_rag/) for the same hardware.
 
-- ***Multi-language Support***
+- Multi-language Support
 
 Swap in multilingual STT models and LLMs to enable assistants for global users or cross-language customer service.
 
-- ***Text-to-Speech (TTS) Output***
+- Text-to-Speech (TTS) Output
 
-Add a local TTS engine (e.g., Coqui, piper, or NVIDIA Riva) to vocalize the assistant’s replies—turning it into a true conversational agent.
+Add a local TTS engine (for example, Coqui, piper, or NVIDIA Riva) to vocalize the assistant's replies, turning it into a true conversational agent.
 
-- ***Personalization and Context Memory***
+- Personalization and Context Memory
 
-Extend short-term memory into long-term context retention using file-based or vector-based storage. This lets the assistant “remember” preferences or past sessions.
+Extend short-term memory into long-term context retention using file-based or vector-based storage. This lets the assistant remember preferences or past sessions.
 
-This learning path, on-device architecture enables experimentation and extension without vendor lock-in or privacy concerns—making it ideal for enterprise, educational, and embedded use cases.
+This on-device architecture enables experimentation and extension without vendor lock-in or privacy concerns, making it ideal for enterprise, educational, and embedded use cases.

@@ -1,34 +1,28 @@
 ---
-title: Real-Time Offline Voice Chatbot Using STT and vLLM
-weight: 5
+title: Build a real-time offline voice chatbot using STT and vLLM
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Real-Time Offline Voice Chatbot Using STT and vLLM
+In the previous section, you built a complete Speech-to-Text (STT) engine using faster-whisper, running efficiently on Arm-based CPUs. Now it's time to add the next major building block: a local large language model (LLM) that can generate intelligent responses from user input.
 
-In the previous module, you built a complete Speech-to-Text (STT) engine using ***faster-whisper***, running efficiently on Arm-based CPUs. Now it’s time to add the next major building block: a local large language model (LLM) that can generate intelligent responses from user input.
-
-In this module, you'll integrate ***[vLLM](https://vllm.ai/)*** — a high-performance LLM inference engine that runs on GPU and supports advanced features such as continuous batching, OpenAI-compatible APIs, and quantized models like GPTQ and AWQ.
+You'll integrate [vLLM](https://vllm.ai/)—a high-performance LLM inference engine that runs on GPU and supports advanced features such as continuous batching, OpenAI-compatible APIs, and quantized models like GPTQ and AWQ.
 
 ### Why vLLM?
 
-When building a real-time AI assistant, low latency and high throughput are critical. vLLM offers several advantages:
-- ***GPU-accelerated inference***: Designed for modern GPUs, including CUDA and TensorRT backends.
-- ***OpenAI-compatible API***: Allows you to use existing prompt structures and client code.
-- ***Support for GPTQ, AWQ, FP16, and other formats***: Flexible deployment of open-source models.
-- ***Efficient memory usage***: Enables serving large models such as LLaMA 2, Mistral, and more, even on constrained devices.
+When building a real-time AI assistant, low latency and high throughput are critical. vLLM is designed for modern GPUs, including CUDA and TensorRT backends. It provides an OpenAI-compatible API, allowing you to use existing prompt structures and client code. It supports GPTQ, AWQ, FP16, and other formats for flexible deployment of open-source models, and enables serving large models such as LLaMA 2 and Mistral with efficient memory usage, even on constrained devices.
 
 vLLM is especially effective in hybrid systems like the DGX Spark, where CPU cores handle STT and preprocessing, while the GPU focuses on fast, scalable text generation.
 
-### Install and Launch vLLM with GPU Acceleration
+### Install and launch vLLM with GPU acceleration
 
 In this section, you’ll install and launch vLLM—an optimized large language model (LLM) inference engine that runs efficiently on GPU. This component will complete your local speech-to-response pipeline by transforming transcribed text into intelligent replies.
 
-#### Step 1: Install Docker and Pull vLLM Image
+#### Step 1: Install Docker and pull vLLM image
 
-The most efficiency way to install vLLM on DGX Spark is using Nvidia offical docker image.
+The most efficient way to install vLLM on DGX Spark is using the NVIDIA official Docker image.
 
 Before you pull the image, ensure [Docker](https://docs.nvidia.com/dgx/dgx-spark/nvidia-container-runtime-for-docker.html) is installed and functioning on DGX Spark. Then enable Docker GPU access and pull the latest NVIDIA vLLM container:
 
@@ -50,16 +44,16 @@ docker images
 nvcr.io/nvidia/vllm      25.11-py3                 d33d4cadbe0f   2 months ago   14.1GB
 ```
 
-#### Step 2: Download a Quantized Model (GPTQ)
+#### Step 2: Download a quantized model (GPTQ)
 
-We will use Hugging Face CLI to download a pre-quantized LLM such as ***Mistral-7B-Instruct-GPTQ*** and ***Meta-Llama-3-70B-Instruct-GPTQ*** models for following Real-Time AI Conversations.
+Use Hugging Face CLI to download a pre-quantized LLM such as Mistral-7B-Instruct-GPTQ and Meta-Llama-3-70B-Instruct-GPTQ models for following Real-Time AI Conversations.
 
 ```bash
 pip install huggingface_hub
 hf auth login  # log in to Hugging Face with your token
 ```
 
-After logining in scussfully, you can download the specific models.
+After logging in successfully, download the specific models:
 
 ```bash
 mkdir -p ~/models
@@ -92,7 +86,7 @@ The files should include config.json, tokenizer.model, model.safetensors, etc.
 1 directory, 9 files
 ```
 
-#### Step 3: Run the vLLM Server with GPU
+#### Step 3: Run the vLLM server with GPU
 
 Mount your local ~/models directory and start the vLLM inference server with your downloaded model:
 
@@ -217,7 +211,7 @@ You don’t need to read every log line. As long as you see Application startup 
 {{% /notice %}}
 
 
-#### Step 4: Verify the Server is Running
+#### Step 4: Verify the server is running
 
 Once you see the message "Application startup complete." in guest OS, vLLM is ready to run the model.
 Send a test request with curl on other terminal:
@@ -232,7 +226,7 @@ curl http://localhost:8000/v1/chat/completions \
   }'
 ```
 
-If successful, you'll see the response will include a text reply from the model.
+If successful, the response includes a text reply from the model.
 
 ```log
 {"id":"chatcmpl-19aee139aabc474c93a3d211ee89d2c8","object":"chat.completion","created":1769183473,"model":"/models/mistral-7b","choices":[{"index":0,"message":{"role":"assistant","content":" RISC (Reduced Instruction Set Computing) is a computer architecture design where the processor has a simpler design and a smaller instruction set compared to CISC (Complex Instruction Set Computing) processors. RISC processors execute a larger number of simpler, more fundamental instructions. Here are some key features of RISC architecture:\n\n1. **Reduced Instruction Set:** RISC processors use a small set of basic instructions that can be combined in various ways to perform complex tasks. This is in contrast to CISC processors, which have a larger instruction set that includes instructions for performing complex tasks directly.\n2. **Register-based:** RISC processors often make extensive use of registers to store data instead of memory. They have a larger number of registers compared to CISC processors, and instructions typically operate directly on these registers. This reduces the number of memory accesses, resulting in faster execution.\n3. **Immediate addressing:** RISC instruction format includes immediate addressing, meaning some instruction operands are directly encoded within the instruction itself, like an add instruction with a constant value. This eliminates the need for additional memory fetch operations, which can save clock cycles.\n4.","refusal":null,"annotations":null,"audio":null,"function_call":null,"tool_calls":[],"reasoning_content":null},"logprobs":null,"finish_reason":"length","stop_reason":null,"token_ids":null}],"service_tier":null,"system_fingerprint":null,"usage":{"prompt_tokens":14,"total_tokens":270,"completion_tokens":256,"prompt_tokens_details":null},"prompt_logprobs":null,"prompt_token_ids":null,"kv_transfer_params":null}
@@ -258,14 +252,13 @@ This separation has several advantages:
 - ***Production Alignment***: – Mirrors real-world architectures like client-server or microservices.
 
 
-#### Step 1: Lauch vLLM (in Docker)
+#### Step 1: Launch vLLM (in Docker)
 
-Although vLLM can be started with a single docker run command in previous session, that will be a good idea to separating container startup from model launch. This provides greater control and improves development experience.
+Separating container startup from model launch provides greater control and improves development experience.
 
-The reason is that separating docker run from the vllm serve command provides clearer control and flexibility during development.
-By launching the container first, you can troubleshoot errors like model path issues or GPU memory limits directly inside the environment — without the container shutting down immediately. It also speeds up iteration: you avoid reloading the entire image each time you tweak settings or restart the model.
+By launching the container first, you can troubleshoot errors like model path issues or GPU memory limits directly inside the environment—without the container shutting down immediately. It also speeds up iteration: you avoid reloading the entire image each time you tweak settings or restart the model.
 
-This structure also improves visibility. You can inspect files, monitor GPU usage, or run diagnostics like ***curl*** and ***nvidia-smi*** inside the container. For learners and developers alike, breaking these steps apart makes the process easier to understand, debug, and extend.
+This structure also improves visibility. You can inspect files, monitor GPU usage, or run diagnostics like `curl` and `nvidia-smi` inside the container. Breaking these steps apart makes the process easier to understand, debug, and extend.
 
 1. Start the Docker container
 
@@ -298,23 +291,15 @@ Once you see the message:
 
 The vLLM server is now live and ready to accept HTTP requests.
 
-#### Step 2: Extend STT Python to Connect vLLM for Instant AI Responses
+#### Step 2: Extend STT Python to connect vLLM for instant AI responses
 
-Now that you’ve implemented a real-time speech recognizer, it’s time to extend the pipeline by connecting it to a local language model (LLM) powered by vLLM.
+Now that you've implemented a real-time speech recognizer, extend the pipeline by connecting it to a local language model (LLM) powered by vLLM.
 
-In this step, you’ll:
-- Convert the STT result into a message prompt
-- Send it to the running vLLM server via HTTP
-- Dynamically estimate max_tokens based on input length
-- Print the model’s reply next to the transcribed speech
+You'll convert the STT result into a message prompt, send it to the running vLLM server via HTTP, dynamically estimate max_tokens based on input length, and print the model's reply next to the transcribed speech.
 
+1. Set up the LLM endpoint and model reference.
 
-1. Set up the LLM endpoint and model reference:
-
-Send STT output to vLLM
-Parse and display vLLM response
-
-Define LLM endpoint and model path, add the following variables at the top of your script:
+Define LLM endpoint and model path by adding the following variables at the top of your script:
 
 ```python
 VLLM_ENDPOINT = "http://localhost:8000/v1/chat/completions"
@@ -480,26 +465,23 @@ finally:
 ```
 
 
-#### Step 3: Interact with the Chat Bot.
+#### Step 3: Interact with the chatbot
 
-Once both your vLLM server and Python STT script are running correctly, you’ll see output like the following in your terminal.
+Once both your vLLM server and Python STT script are running correctly, you'll see output like the following in your terminal.
 
-Each time you speak a full sentence (based on your silence/segment thresholds), the system will:
-1. Transcribe your speech
-2. Display the recognized text
-3. Show the model’s reply in natural language
+Each time you speak a full sentence (based on your silence/segment thresholds), the system transcribes your speech, displays the recognized text, and shows the model's reply in natural language.
 
 
-If your input is too short (e.g. a false trigger or a background noise spike), you’ll see a message like:
+If your input is too short (for example, a false trigger or a background noise spike), you'll see a message like:
 
 ```
 Skipped short segment (1.32s < 2.0s)
 ```
 
-This means your speech did not meet the MIN_SPEECH_SEC threshold. You can adjust this value in the next module to make the system more or less sensitive.
+This means your speech did not meet the MIN_SPEECH_SEC threshold. You can adjust this value in the next section to make the system more or less sensitive.
 
 
-Here’s a real example when asking the assistant for a joke:
+An example when asking the assistant for a joke:
 
 ```
  Listening... Press Ctrl+C to stop
@@ -531,17 +513,13 @@ Skipped short segment (1.32s < 2.0s)
 ```
 
 {{% notice tip %}}
-You can fine-tune these parameters in future modules to better fit your speaking style or environment.
+You can fine-tune these parameters in future sections to better fit your speaking style or environment.
 {{% /notice %}}
 
-### Summary
+## What you've accomplished and what's next
 
-At this session, you’ve successfully built a complete voice-to-AI-response loop:
-- Microphone input captured in real time
-- Transcribed locally using faster-whisper on CPU
-- Forwarded to a local vLLM server running on GPU
-- Received intelligent responses with low latency
+You've successfully built a complete voice-to-AI-response loop: microphone input is captured in real time, transcribed locally using faster-whisper on CPU, forwarded to a local vLLM server running on GPU, and receives intelligent responses with low latency.
 
-This foundation supports a wide range of customizations in the next module, where you’ll build customer-specific workflows with prompt engineering and multi-turn memory.
+This foundation supports a wide range of customizations in the next section, where you'll build customer-specific workflows with prompt engineering and multi-turn memory.
 
-In the next module, you’ll adapt this core pipeline for real-world assistant scenarios like customer service.
+In the next section, you'll adapt this core pipeline for real-world assistant scenarios like customer service.
