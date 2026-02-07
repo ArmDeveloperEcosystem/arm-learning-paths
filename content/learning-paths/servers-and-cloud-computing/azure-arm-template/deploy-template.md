@@ -1,5 +1,5 @@
 ---
-title: Deploy the template
+title: Deploy the Azure Resource Manager template
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -14,12 +14,13 @@ Azure Resource Manager templates deploy resources into a resource group. Create 
 az group create --name cobalt-rg --location eastus
 ```
 
-Replace `eastus` with your preferred Azure region. To see available regions that support Cobalt 100 VMs, run:
+Replace `eastus` with your preferred Azure region. To see available regions that support Cobalt 100 VMs, query Azure for VM SKUs and filter for the Dpsv6 series:
 
 ```bash
 az vm list-skus --location eastus --size Standard_D --all --output table | grep "ps_v6"
 ```
-The output will look like:
+
+The output is similar to:
 ```output
 virtualMachines  eastus       Standard_D16ps_v6       2,3      None
 virtualMachines  eastus       Standard_D2ps_v6        2,3      None
@@ -107,7 +108,7 @@ az deployment group show \
   --query properties.provisioningState
 ```
 
-The output displays `"Succeeded"` when the deployment completes successfully.
+The output displays `"Succeeded"` when the deployment completes.
 
 List the resources created in the resource group:
 
@@ -115,7 +116,7 @@ List the resources created in the resource group:
 az resource list --resource-group cobalt-rg --output table
 ```
 
-The output should look like:
+The output is similar to:
 
 ```output
 Name                                                     ResourceGroup    Location    Type                                     Status
@@ -131,7 +132,7 @@ cobaltdemo-vm_OsDisk_1_a3e13c940d07463cace48cfd1458a151  COBALT-RG        eastus
 
 The output shows the resources created: virtual machine, network interface, public IP address resource, virtual network, network security groups, and OS disk.
 
-## Retrieve the VM's public IP address
+## Retrieve the Cobalt 100 VM public IP address
 
 Get the public IP address to connect to your VM:
 
@@ -152,4 +153,6 @@ The public IP address is dynamically allocated and won't be available until the 
 
 ## What you've accomplished and what's next
 
-You've successfully deployed an Arm-based Cobalt 100 VM using an Azure Resource Manager template. The deployment created a virtual network with a configured subnet, network security groups allowing SSH access, a public IP address for external connectivity, and a Cobalt 100 VM running Ubuntu 24.04 LTS. In the next section, you'll connect to your VM and verify the Arm64 architecture.
+You've deployed an Arm-based Cobalt 100 VM using an Azure Resource Manager template. The deployment includes network infrastructure with security groups, a public IP address, and a VM running Ubuntu 24.04 LTS.
+
+Next, you'll connect to your VM and verify the Arm64 architecture.
