@@ -1,48 +1,46 @@
 ---
-title: Installing faster-whisper for Local Speech Recognition
+title: Install faster-whisper for local speech recognition
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Installing faster-whisper for Local Speech Recognition
-
 [Faster‑whisper](https://github.com/SYSTRAN/faster-whisper) is a high‑performance reimplementation of OpenAI Whisper, designed to significantly reduce transcription latency and memory usage. It is well suited for local and real‑time speech‑to‑text (STT) pipelines, especially when running on CPU‑only systems or hybrid CPU/GPU environments.
 
-In this Learning Path, faster‑whisper serves as the STT engine that converts raw microphone input into structured text. At this stage, the goal is to install faster‑whisper correctly and verify that it can transcribe audio reliably. Detailed tuning and integration will be covered in later modules.
+You'll use faster‑whisper as the STT engine to convert raw microphone input into structured text. At this stage, the goal is to install faster‑whisper correctly and verify that it can transcribe audio reliably. Detailed tuning and integration are covered in later sections.
 
 ### Install build dependencies
 
-While some Python packages such as sounddevice and webrtcvad previously had compatibility issues with newer Python versions, these have been resolved. This Learning Path uses ***Python 3.12***, which has been tested and confirmed to work reliably with all required dependencies.
+While some Python packages such as sounddevice and webrtcvad previously had compatibility issues with newer Python versions, these have been resolved. Use Python 3.12, which has been tested and confirmed to work reliably with all required dependencies.
 
 Install Python 3.12 and build dependencies:
 
 ```bash
 sudo apt update
 sudo apt install python3.12 python3.12-venv python3.12-dev -y
-sudo apt install portaudio19-dev ffmpeg -y
+sudo apt install gcc portaudio19-dev ffmpeg -y
 ```
 
-### Create and Activate Python Environment
+## Create and activate Python environment
 
 In particular, [pyaudio](https://pypi.org/project/PyAudio/) (used for real-time microphone capture) depends on the PortAudio library and the Python C API. These must match the version of Python you're using.
 
 Now that the system libraries are in place and audio input is verified, it's time to set up an isolated Python environment for your voice assistant project. This will prevent dependency conflicts and make your installation reproducible.
 
 ```bash
-python3.12 -m venv voice_ass_env
-source voice_ass_env/bin/activate
+python3.12 -m venv va_env
+source va_env/bin/activate
 python3 -m pip install --upgrade pip
 ```
 
-Before install the package, it will be worst to check the Python version in your virtual environment.
+Before installing the package, check the Python version in your virtual environment.
 
 ```bash
 python3 --version
 ```
 
-Expected output should be `3.12.x` or higher.
+Expected output is `3.12.x` or higher:
 ```log
 Python 3.12.3
 ```
@@ -55,16 +53,16 @@ pip install requests webrtcvad sounddevice==0.5.3
 ```
 
 {{% notice Note %}}
-While sounddevice==0.5.4 is available, it introduces callback-related errors during audio stream cleanup that may confuse beginners. 
-For this Learning Path, we recommend sounddevice==0.5.3, which is stable and avoids these warnings.
+While sounddevice==0.5.4 is available, it introduces callback-related errors during audio stream cleanup that may confuse beginners.
+Use sounddevice==0.5.3, which is stable and avoids these warnings.
 {{% /notice %}}
 
-Verify the pyaudio version by:
+Verify the pyaudio version:
 ```bash
 python -c "import pyaudio; print(pyaudio.__version__)"
 ```
 
-Expected output should be:
+Expected output:
 ```log
 0.2.14
 ```
@@ -73,7 +71,7 @@ Expected output should be:
 
 Once your system dependencies are installed, you can test that your audio hardware is functioning properly. This ensures that your audio input is accessible by Python through the sounddevice module.
 
-Now plug in your USB microphone and run the following Python code to verify that it is detected and functioning correctly:
+Now plug in your USB microphone and create a file named `microphone.py` with the following Python code to verify that it is detected and functioning correctly.
 
 ```python
 import sounddevice as sd
@@ -93,21 +91,25 @@ sd.wait()
 print(" Playback complete.")
 ```
 
+Run the example code to check the microphone.
+
+```console
+python3 ./microphone.py
+```
+
 DGX Spark will record the audio for 5 seconds and immediately play back the captured audio.
+
 If you do not hear any playback, check your USB connection and verify the installation steps above.
 
 Once you’ve confirmed that your microphone is working and your environment is set up, you’re ready to test real-time transcription and move on to the next phase.
 
-### Sample: Real-time Transcription with faster-whisper
+### Sample: Real-time transcription with faster-whisper
 
-Now let's verify that your Whisper model works with live microphone input. This example records a 10-second audio clip using the system microphone, transcribes it using faster-whisper, and prints the transcribed text with timestamps. 
+Verify that your Whisper model works with live microphone input. This example records a 10-second audio clip using the system microphone, transcribes it using faster-whisper, and prints the transcribed text with timestamps. 
 
-This script records a fixed-duration mono audio clip using the sounddevice module and transcribes it using the faster-whisper model. The overall flow includes several key steps:
-- The `record_audio()` function starts the microphone and records a 10-second audio segment, returning the data as a NumPy array.
-- The `WhisperModel("small.en")` call loads the ***small English model*** from faster-whisper, using `compute_type`=***"int8"*** to ensure compatibility with CPU-only systems.
-- The `transcribe_audio()` function processes the recorded audio and prints the transcription results along with start and end timestamps for each spoken segment.
-- The while True loop continuously records and transcribes in real time until interrupted, allowing the user to speak multiple utterances across iterations.
-- The script will continue running in 10-second cycles until stopped with ***Ctrl+C***.
+The code below records a fixed-duration mono audio clip using the sounddevice module and transcribes it using the faster-whisper model. The `record_audio()` function starts the microphone and records a 10-second audio segment, returning the data as a NumPy array. The `WhisperModel("small.en")` call loads the small English model from faster-whisper, using `compute_type="int8"` to ensure compatibility with CPU-only systems. The `transcribe_audio()` function processes the recorded audio and prints the transcription results along with start and end timestamps for each spoken segment. The while True loop continuously records and transcribes in real time until interrupted, allowing you to speak multiple utterances across iterations. The script continues running in 10-second cycles until stopped with Ctrl+C.
+
+Copy the code to a file named `transcribe.py`. 
 
 ```python
 import sounddevice as sd
@@ -142,9 +144,25 @@ if __name__ == "__main__":
         print(" Stopped by user.")
 ```
 
+Run the example code.
+
+```console
+python3 ./transcribe.py
+```
+
+The output shows the main parts of the program;
+
+```output
+Recording for 10 seconds...
+ Recording complete.
+ Transcribing...
+[0.00s - 10.00s] One, two, three, four, five, six, check,
+ Done.
+ ```
+
 {{% notice Note %}}
-To stop the script, press ***Ctrl+C*** during any transcription loop.The current 10-second recording will complete and transcribe before the program exits cleanly.
-Avoid using ***Ctrl+Z***, which suspends the process instead of terminating it.
+To stop the script, press Ctrl+C during any transcription loop. The current 10-second recording completes and transcribes before the program exits cleanly.
+Avoid using Ctrl+Z, which suspends the process instead of terminating it.
 {{% /notice %}}
 
 
@@ -152,7 +170,7 @@ Avoid using ***Ctrl+Z***, which suspends the process instead of terminating it.
 
 This section lists common issues you may encounter when setting up local speech-to-text, along with clear checks and fixes.
 
-***Problem 1: Callback-related errors with sounddevice***
+**Problem 1: Callback-related errors with sounddevice**
 
 If you encounter errors like:
 
@@ -160,31 +178,26 @@ If you encounter errors like:
 AttributeError: '_CallbackContext' object has no attribute 'data'
 ```
 
-***Cause***
-This is a known issue introduced in sounddevice==0.5.4, related to internal callback cleanup.
+**Cause:** This is a known issue introduced in sounddevice==0.5.4, related to internal callback cleanup.
 
-***Fix***
-Use the stable version recommended in this Learning Path:
+**Fix:** Use the stable version:
 ```bash
 pip install sounddevice==0.5.3
 ```
 
-***Problem 2: No sound playback after recording***
+**Problem 2: No sound playback after recording**
 
 You can record audio without errors, but nothing is played back.
 
-***Check:***
-- Verify that your USB microphone or headset is selected as the default input/output device.
-- Ensure the system volume is not muted.
+Verify that your USB microphone or headset is selected as the default input/output device. Also ensure the system volume is not muted.
 
-***Fix***
-List all available audio devices:
+**Fix:** List all available audio devices:
 
 ```bash
 python -m sounddevice
 ```
 
-You should see an output similar to:
+The output is similar to:
 ```log
 0 NVIDIA: HDMI 0 (hw:0,3), ALSA (0 in, 8 out)
   1 NVIDIA: HDMI 1 (hw:0,7), ALSA (0 in, 8 out)
@@ -201,18 +214,16 @@ If your microphone or headset is listed but not active, try explicitly selecting
 
 ```bash
 import sounddevice as sd
-
-sd.default.device = 4  # Set to your desired device index
+sd.default.device = 4 
 ```
 
-Other fixes to try:
+Other things to try:
 - Increase system volume
-- Replug the device
+- Remove the device and plug it in again
 - Reboot your system to refresh device mappings
 
-
-### Next Module
+## What you've accomplished and what's next
 
 Once your transcription prints correctly in the terminal and playback works as expected, you’ve successfully completed the setup for local STT using faster-whisper. 
 
-In the next module, you’ll enhance this basic transcription loop by adding real-time audio segmentation, turn detection, and background threading to support natural voice interactions.
+In the next section, you'll enhance this basic transcription loop by adding real-time audio segmentation, turn detection, and background threading to support natural voice interactions.
