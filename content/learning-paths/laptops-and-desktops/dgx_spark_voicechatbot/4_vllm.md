@@ -1,69 +1,61 @@
 ---
-title: Real-Time Offline Voice Chatbot Using STT and vLLM
-weight: 5
+title: Build a real-time offline voice chatbot using STT and vLLM
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Real-Time Offline Voice Chatbot Using STT and vLLM
+In the previous section, you built a complete Speech-to-Text (STT) engine using faster-whisper, running efficiently on Arm-based CPUs. Now it's time to add the next building block: a local large language model (LLM) that can generate intelligent responses from user input.
 
-In the previous module, you built a complete Speech-to-Text (STT) engine using ***faster-whisper***, running efficiently on Arm-based CPUs. Now it’s time to add the next major building block: a local large language model (LLM) that can generate intelligent responses from user input.
-
-In this module, you'll integrate ***[vLLM](https://vllm.ai/)*** — a high-performance LLM inference engine that runs on GPU and supports advanced features such as continuous batching, OpenAI-compatible APIs, and quantized models like GPTQ and AWQ.
+You'll integrate [vLLM](https://vllm.ai/), a high-performance LLM inference engine that runs on GPU and supports advanced features such as continuous batching, OpenAI-compatible APIs, and quantized models.
 
 ### Why vLLM?
 
-When building a real-time AI assistant, low latency and high throughput are critical. vLLM offers several advantages:
-- ***GPU-accelerated inference***: Designed for modern GPUs, including CUDA and TensorRT backends.
-- ***OpenAI-compatible API***: Allows you to use existing prompt structures and client code.
-- ***Support for GPTQ, AWQ, FP16, and other formats***: Flexible deployment of open-source models.
-- ***Efficient memory usage***: Enables serving large models such as LLaMA 2, Mistral, and more, even on constrained devices.
+When building a real-time AI assistant, low latency and high throughput are critical. vLLM is designed for modern GPUs, including CUDA and TensorRT backends. It provides an OpenAI-compatible API, allowing you to use existing prompt structures and client code. It supports GPTQ, AWQ, FP16, and other formats for flexible deployment of open-source models, and enables serving large models such as LLaMA 2 and Mistral with efficient memory usage, even on constrained devices.
 
 vLLM is especially effective in hybrid systems like the DGX Spark, where CPU cores handle STT and preprocessing, while the GPU focuses on fast, scalable text generation.
 
-### Install and Launch vLLM with GPU Acceleration
+### Install and launch vLLM with GPU acceleration
 
 In this section, you’ll install and launch vLLM—an optimized large language model (LLM) inference engine that runs efficiently on GPU. This component will complete your local speech-to-response pipeline by transforming transcribed text into intelligent replies.
 
-#### Step 1: Install Docker and Pull vLLM Image
+#### Install Docker and pull vLLM image
 
-The most efficiency way to install vLLM on DGX Spark is using Nvidia offical docker image.
+The most efficient way to install vLLM on DGX Spark is using the NVIDIA official Docker image.
 
 Before you pull the image, ensure [Docker](https://docs.nvidia.com/dgx/dgx-spark/nvidia-container-runtime-for-docker.html) is installed and functioning on DGX Spark. Then enable Docker GPU access and pull the latest NVIDIA vLLM container:
 
 ```bash
-sudo usermod -aG docker $USER
-newgrp docker
-
-docker ps  # check Docker is working
-
 export LATEST_VLLM_VERSION=25.11-py3
 docker pull nvcr.io/nvidia/vllm:${LATEST_VLLM_VERSION}
 ```
 
 Confirm the image was downloaded:
 
-```
+```bash
 docker images
+```
 
+The image is shown in the output:
+
+```output
 nvcr.io/nvidia/vllm      25.11-py3                 d33d4cadbe0f   2 months ago   14.1GB
 ```
 
-#### Step 2: Download a Quantized Model (GPTQ)
+#### Download a quantized model (GPTQ)
 
-We will use Hugging Face CLI to download a pre-quantized LLM such as ***Mistral-7B-Instruct-GPTQ*** and ***Meta-Llama-3-70B-Instruct-GPTQ*** models for following Real-Time AI Conversations.
+Use Hugging Face CLI to download a pre-quantized LLM such as Mistral-7B-Instruct-GPTQ and Meta-Llama-3-70B-Instruct-GPTQ models for following Real-Time AI Conversations.
 
 ```bash
 pip install huggingface_hub
 hf auth login  # log in to Hugging Face with your token
 ```
 
-After logining in scussfully, you can download the specific models.
+After logging in successfully, download the specific models:
 
 ```bash
 mkdir -p ~/models
-
 # Mistral 7B GPTQ
 hf download TheBloke/Mistral-7B-Instruct-v0.2-GPTQ --local-dir ~/models/mistral-7b
 # (Optional) LLaMA3 70B GPTQ (requires more GPU memory)
@@ -78,7 +70,7 @@ tree ~/models/mistral-7b -L 1
 
 The files should include config.json, tokenizer.model, model.safetensors, etc.
 
-```log
+```output
 ├── config.json
 ├── generation_config.json
 ├── model.safetensors
@@ -92,7 +84,7 @@ The files should include config.json, tokenizer.model, model.safetensors, etc.
 1 directory, 9 files
 ```
 
-#### Step 3: Run the vLLM Server with GPU
+#### Run the vLLM server with GPU
 
 Mount your local ~/models directory and start the vLLM inference server with your downloaded model:
 
@@ -110,10 +102,9 @@ docker run -it --gpus all -p 8000:8000 \
 Tip: The first launch will compile and cache the model. To reduce startup time in future runs, consider creating a Docker snapshot with docker commit.
 {{% /notice %}}
 
-You can also check your NVIDIA driver and CUDA compatibility during the vLLM launch.
+You can also check your NVIDIA driver and CUDA compatibility during the vLLM launch by looking at the output.
 
-
-```log
+```output
 NVIDIA Release 25.11 (build 231063344)
 vLLM Version 0.11.0+582e4e37
 Container image Copyright (c) 2025, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
@@ -216,10 +207,10 @@ Capturing CUDA graphs (decode, FULL): 100%|████████████�
 You don’t need to read every log line. As long as you see Application startup complete, your model server is ready.
 {{% /notice %}}
 
+#### Verify the server is running
 
-#### Step 4: Verify the Server is Running
+Once you see the message "Application startup complete." vLLM is ready to run the model.
 
-Once you see the message "Application startup complete." in guest OS, vLLM is ready to run the model.
 Send a test request with curl on other terminal:
 
 ```bash
@@ -232,316 +223,15 @@ curl http://localhost:8000/v1/chat/completions \
   }'
 ```
 
-If successful, you'll see the response will include a text reply from the model.
+If successful, the response includes a text reply from the model.
 
-```log
+```output
 {"id":"chatcmpl-19aee139aabc474c93a3d211ee89d2c8","object":"chat.completion","created":1769183473,"model":"/models/mistral-7b","choices":[{"index":0,"message":{"role":"assistant","content":" RISC (Reduced Instruction Set Computing) is a computer architecture design where the processor has a simpler design and a smaller instruction set compared to CISC (Complex Instruction Set Computing) processors. RISC processors execute a larger number of simpler, more fundamental instructions. Here are some key features of RISC architecture:\n\n1. **Reduced Instruction Set:** RISC processors use a small set of basic instructions that can be combined in various ways to perform complex tasks. This is in contrast to CISC processors, which have a larger instruction set that includes instructions for performing complex tasks directly.\n2. **Register-based:** RISC processors often make extensive use of registers to store data instead of memory. They have a larger number of registers compared to CISC processors, and instructions typically operate directly on these registers. This reduces the number of memory accesses, resulting in faster execution.\n3. **Immediate addressing:** RISC instruction format includes immediate addressing, meaning some instruction operands are directly encoded within the instruction itself, like an add instruction with a constant value. This eliminates the need for additional memory fetch operations, which can save clock cycles.\n4.","refusal":null,"annotations":null,"audio":null,"function_call":null,"tool_calls":[],"reasoning_content":null},"logprobs":null,"finish_reason":"length","stop_reason":null,"token_ids":null}],"service_tier":null,"system_fingerprint":null,"usage":{"prompt_tokens":14,"total_tokens":270,"completion_tokens":256,"prompt_tokens_details":null},"prompt_logprobs":null,"prompt_token_ids":null,"kv_transfer_params":null}
 ```
 
+## What you've accomplished and what's next
 
-### Connect Speech Recognition Output to vLLM
+You've successfully installed and launched vLLM on DGX Spark using Docker, downloaded a quantized LLM model (GPTQ format), and verified the server responds to API requests. Your GPU-accelerated language model is now ready to generate intelligent responses.
 
-Now that both ***faster-whisper*** and ***vLLM*** are working independently, it’s time to connect them into a real-time speech-to-response pipeline. Your system will listen to live audio, transcribe it, and send the transcription to vLLM to generate an intelligent reply—all running locally without cloud services.
+In the next section, you'll connect this vLLM server to the STT pipeline you built earlier, creating a complete voice-to-response system.
 
-
-#### Dual Process Architecture: vLLM and STT
-
-For a robust and production-aligned architecture, you will separating the system into two independent processes:
-- ***vLLM Server (in Docker)***: Hosts the large language model, optimized for GPU inference. It can run standalone and be reused across multiple services.
-- ***STT Client (Python)***: A lightweight CPU-based process that captures microphone input, runs transcription, and sends queries to the vLLM server over HTTP.
-
-This separation has several advantages:
-
-- ***Modularity***: – STT and LLM logic can be developed, updated, or debugged independently.
-- ***Flexibility***: – Restart or refine your STT pipeline without touching the model backend.
-- ***Performance Isolation***: – GPU-heavy inference doesn’t block audio input or local UI logic.
-- ***Production Alignment***: – Mirrors real-world architectures like client-server or microservices.
-
-
-#### Step 1: Lauch vLLM (in Docker)
-
-Although vLLM can be started with a single docker run command in previous session, that will be a good idea to separating container startup from model launch. This provides greater control and improves development experience.
-
-The reason is that separating docker run from the vllm serve command provides clearer control and flexibility during development.
-By launching the container first, you can troubleshoot errors like model path issues or GPU memory limits directly inside the environment — without the container shutting down immediately. It also speeds up iteration: you avoid reloading the entire image each time you tweak settings or restart the model.
-
-This structure also improves visibility. You can inspect files, monitor GPU usage, or run diagnostics like ***curl*** and ***nvidia-smi*** inside the container. For learners and developers alike, breaking these steps apart makes the process easier to understand, debug, and extend.
-
-1. Start the Docker container
-
-```bash
-export LATEST_VLLM_VERSION=25.11-py3
-
-sudo docker run --gpus all \
-    -p 8000:8000 \
-    -v $HOME/models:/models \
-    -e NVIDIA_VISIBLE_DEVICES=all \
-    -it nvcr.io/nvidia/vllm:${LATEST_VLLM_VERSION} bash
-```
-
-2. Inside the container, launch vLLM
-
-```bash
-vllm serve /models/mistral-7b \
-    --quantization gptq \
-    --gpu-memory-utilization 0.9 \
-    --max-num-seqs 8 \
-    --dtype float16
-```
-
-Once you see the message:
-```
-(APIServer pid=1) INFO:     Started server process [1]
-(APIServer pid=1) INFO:     Waiting for application startup.
-(APIServer pid=1) INFO:     Application startup complete.
-```
-
-The vLLM server is now live and ready to accept HTTP requests.
-
-#### Step 2: Extend STT Python to Connect vLLM for Instant AI Responses
-
-Now that you’ve implemented a real-time speech recognizer, it’s time to extend the pipeline by connecting it to a local language model (LLM) powered by vLLM.
-
-In this step, you’ll:
-- Convert the STT result into a message prompt
-- Send it to the running vLLM server via HTTP
-- Dynamically estimate max_tokens based on input length
-- Print the model’s reply next to the transcribed speech
-
-
-1. Set up the LLM endpoint and model reference:
-
-Send STT output to vLLM
-Parse and display vLLM response
-
-Define LLM endpoint and model path, add the following variables at the top of your script:
-
-```python
-VLLM_ENDPOINT = "http://localhost:8000/v1/chat/completions"
-MODEL_NAME = "/models/mistral-7b"
-```
-
-Make sure these match the vLLM server you launched in the previous step.
-
-
-2. Format Transcription and Send to vLLM:
-
-After transcribing the user’s speech, send the result to the vLLM server by formatting it as a chat prompt.
-
-```python
-user_text = " ".join([seg.text.strip() for seg in segments]).strip()
-```
-
-Estimate token length and send the request:
-
-```python
-max_tokens = min(256, max(64, len(user_text.split()) * 5))
-response = requests.post(VLLM_ENDPOINT, json={
-    "model": MODEL_NAME,
-    "messages": [{"role": "user", "content": user_text}],
-    "max_tokens": max_tokens
-})
-```
-
-Extract the assistant’s reply from the vLLM API response:
-
-```python
-result = response.json()
-reply = result["choices"][0]["message"]["content"].strip()
-```
-
-3. Extract and display the model’s response:
-
-Display both the transcribed input and the model’s response:
-```python
-...
-print(f"\n User: {user_text}\n")
-...
-print(f" AI  : {reply}\n")
-```
-
-This architecture mirrors the OpenAI Chat API design, enabling future enhancements like system-level prompts, multi-turn history, or role-specific behavior.
-
-{{% notice tip %}}
-If you encounter a "model does not exist" error, double-check the model path you used when launching vLLM. It must match MODEL_NAME exactly.
-{{% /notice %}}
-
-Switch to another terminal to execute following Python code.
-
-```python
-import pyaudio
-import numpy as np
-import webrtcvad
-import time
-import torch
-import threading
-import queue
-import requests
-from faster_whisper import WhisperModel
-from collections import deque
-
-# --- Parameters ---
-SAMPLE_RATE = 16000
-FRAME_DURATION_MS = 30
-FRAME_SIZE = int(SAMPLE_RATE * FRAME_DURATION_MS / 1000)
-VAD_MODE = 3
-SILENCE_LIMIT_SEC = 1.0
-MIN_SPEECH_SEC = 2.0
-VLLM_ENDPOINT = "http://localhost:8000/v1/chat/completions"
-MODEL_NAME = "/models/mistral-7b"
-
-# --- Init VAD and buffers ---
-vad = webrtcvad.Vad(VAD_MODE)
-speech_buffer = deque()
-speech_started = False
-last_speech_time = time.time()
-
-# --- Init Thread and Queue ---
-audio_queue = queue.Queue()
-stop_event = threading.Event()
-
-# --- Init Whisper model ---
-device = "cpu"  # "cpu" or "gpu"
-compute_type = "int8"  # "int8" or "float16", "int8", "int4"
-model = WhisperModel("medium.en", device=device, compute_type=compute_type)
-
-# --- Audio capture thread ---
-def audio_capture():
-    pa = pyaudio.PyAudio()
-    stream = pa.open(format=pyaudio.paInt16,
-                     channels=1,
-                     rate=SAMPLE_RATE,
-                     input=True,
-                     frames_per_buffer=FRAME_SIZE)
-    print(" Listening... Press Ctrl+C to stop")
-    try:
-        while not stop_event.is_set():
-            frame = stream.read(FRAME_SIZE, exception_on_overflow=False)
-            audio_queue.put(frame)
-    finally:
-        stream.stop_stream()
-        stream.close()
-        pa.terminate()
-
-# --- Start audio capture thread ---
-threading.Thread(target=audio_capture, daemon=True).start()
-
-# --- Main loop: process queue and transcribe ---
-try:
-    while True:
-        if audio_queue.empty():
-            time.sleep(0.01)
-            continue
-
-        frame = audio_queue.get()
-        is_speech = vad.is_speech(frame, SAMPLE_RATE)
-
-        if is_speech:
-            speech_buffer.append(frame)
-            speech_started = True
-            last_speech_time = time.time()
-        elif speech_started:
-            speech_duration = len(speech_buffer) * (FRAME_DURATION_MS / 1000.0)
-            silence_duration = time.time() - last_speech_time
-
-            if silence_duration > SILENCE_LIMIT_SEC:
-                if speech_duration >= MIN_SPEECH_SEC:
-                    print(" Transcribing buffered speech...")
-                    audio_bytes = b"".join(speech_buffer)
-                    audio_np = np.frombuffer(audio_bytes, dtype=np.int16).astype(np.float32) / 32768.0
-
-                    segments, _ = model.transcribe(audio_np, language="en")
-                    user_text = " ".join([seg.text.strip() for seg in segments]).strip()
-                    print(f"\n User: {user_text}\n")
-
-                    max_tokens = 128
-                    response = requests.post(VLLM_ENDPOINT, json={
-                        "model": MODEL_NAME,
-                        "messages": [
-                            {"role": "user", "content": user_text}
-                        ],
-                        "max_tokens": max_tokens
-                    })
-                    result = response.json()
-                    if "choices" not in result:
-                        print(" Error from vLLM:", result.get("error", "Unknown error"))
-                        continue
-                    reply = result["choices"][0]["message"]["content"].strip()
-                    print(f" AI  : {reply}\n")
-                else:
-                    print(f" Skipped short segment ({speech_duration:.2f}s < {MIN_SPEECH_SEC}s)")
-
-                speech_buffer.clear()
-                speech_started = False
-except KeyboardInterrupt:
-    print(" Stopped")
-finally:
-    stop_event.set()
-```
-
-
-#### Step 3: Interact with the Chat Bot.
-
-Once both your vLLM server and Python STT script are running correctly, you’ll see output like the following in your terminal.
-
-Each time you speak a full sentence (based on your silence/segment thresholds), the system will:
-1. Transcribe your speech
-2. Display the recognized text
-3. Show the model’s reply in natural language
-
-
-If your input is too short (e.g. a false trigger or a background noise spike), you’ll see a message like:
-
-```
-Skipped short segment (1.32s < 2.0s)
-```
-
-This means your speech did not meet the MIN_SPEECH_SEC threshold. You can adjust this value in the next module to make the system more or less sensitive.
-
-
-Here’s a real example when asking the assistant for a joke:
-
-```
- Listening... Press Ctrl+C to stop
- Skipped short segment (0.39s < 2.0s)
- Skipped short segment (1.44s < 2.0s)
- Skipped short segment (1.89s < 2.0s)
- Skipped short segment (1.77s < 2.0s)
- Skipped short segment (0.36s < 2.0s)
- Transcribing buffered speech...
-
- Listening... Press Ctrl+C to stop
- Transcribing buffered speech...
-
- User: Hello, please tell me the joke.
-
- AI  : Of course, I'd be happy to tell you a joke! Here's a classic one:
-
-Why don't libraries smell like popcorn?
-
-Because they are full of books, not movies!
-
-I hope that brings a smile to your face. If you have any other requests, feel free to ask!
-```
-
-If your input is too short, you’ll see:
-
-```
-Skipped short segment (1.32s < 2.0s)
-```
-
-{{% notice tip %}}
-You can fine-tune these parameters in future modules to better fit your speaking style or environment.
-{{% /notice %}}
-
-### Summary
-
-At this session, you’ve successfully built a complete voice-to-AI-response loop:
-- Microphone input captured in real time
-- Transcribed locally using faster-whisper on CPU
-- Forwarded to a local vLLM server running on GPU
-- Received intelligent responses with low latency
-
-This foundation supports a wide range of customizations in the next module, where you’ll build customer-specific workflows with prompt engineering and multi-turn memory.
-
-In the next module, you’ll adapt this core pipeline for real-world assistant scenarios like customer service.
