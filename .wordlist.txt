@@ -5638,3 +5638,10 @@ ZYNQ
 zypper
 ZZa
 ZZZZZ
+ASCT
+ArmTotalPerformance
+Numbat
+SKUs
+asct
+geminicli
+passwordless

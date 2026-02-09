@@ -1,9 +1,6 @@
 ---
-### Title the install tools article with the name of the tool to be installed
-### Include vendor name where appropriate
 title: Arm Total Performance
 
-### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
 - performance
 - profiling
@@ -13,20 +10,18 @@ additional_search_terms:
 - perf
 - top-down
 
-### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 30
+
+author: Pareena Verma
 
 ### Link to official documentation
 official_docs: https://arm-total-performance.tools.arm.com/
 
-author: Pareena Verma
-
-### PAGE SETUP
-weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
-tool_install: false             # Set to true to be listed in main selection page, else false
-multi_install: false            # Set to true if first page of multi-page article, else false
-multitool_install_part: false   # Set to true if a sub-page of a multi-page article, else false
-layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
+weight: 1                  
+tool_install: false        
+multi_install: false        
+multitool_install_part: false
+layout: installtoolsall
 
 build:
   list: false                   # Exclude from .Pages collections and listings
@@ -140,7 +135,7 @@ Verify the installation by checking the version:
 ./atperf version
 ```
 
-The output displays the installed version number.
+The output shows the installed version number:
 
 ```output
 Arm Total Performance CLI version: 0.39.0
@@ -176,7 +171,7 @@ Before connecting to an Arm Linux target, ensure SSH key-based authentication is
 
 ### Check your existing SSH key
 
-Verify that you can connect to your target using SSH:
+Verify that you can connect to your target using SSH. Replace `user` with your username and `target_host` with your target's hostname or IP address:
 
 ```bash
 ssh user@target_host
@@ -190,7 +185,7 @@ ssh-keygen -y -f ~/.ssh/id_ed25519
 
 If you're prompted for a passphrase, your key is protected with one. ATP doesn't support SSH keys with passphrases, so you need to create a separate key without a passphrase for ATP.
 
-### Create a passphrase-free key for ATP (if needed)
+## Create a passphrase-free key for ATP (if needed)
 
 If your existing SSH key has a passphrase, generate a new key specifically for ATP:
 
@@ -212,9 +207,9 @@ If your existing key is in the default location (`~/.ssh/id_ed25519` or `~/.ssh/
 ssh-copy-id -i ~/.ssh/atp_key.pub user@target_host
 ```
 
-You can now use `~/.ssh/atp_key` as the private key when configuring ATP's target connection.
+You can now use `~/.ssh/atp_key` as the private key when configuring the ATP target connection.
 
-### Enable passwordless sudo on the target
+## Enable passwordless sudo on the target
 
 ATP needs to run commands with elevated privileges on the target system. Because ATP cannot enter sudo passwords interactively, configure passwordless sudo access.
 
@@ -238,7 +233,7 @@ After installing ATP and preparing your target, you can connect using either the
 
 ### Connect using the ATP GUI
 
-The GUI is typically used on Windows and macOS hosts, though it's also available on Linux.
+Use the GUI on Windows and macOS hosts, though you can also run it on Linux.
 
 Open the ATP application.
 
@@ -248,16 +243,17 @@ Select **Add Target**.
 
 In the **Configure Target** form, provide the following details:
 
-* **Host**: The hostname or IP address of the target machine
-* **Name**: A descriptive name for the target
-* **Port**: The SSH port number (default is 22)
-* **User**: The username for SSH connection
-* **SSH Private Key**: Choose **Automatically Detect Key** or **Select Key Manually**
+* **Host**: the hostname or IP address of the target machine
+* **Name**: a descriptive name for the target
+* **Port**: the SSH port number (default is 22)
+* **User**: the username for SSH connection
+* **SSH Private Key**: choose **Automatically Detect Key** or **Select Key Manually**
   * For manual selection, enter the path to your private key (usually `~/.ssh/id_rsa` or `~/.ssh/id_ed25519`)
 * **Host Key Verification**: Choose **Strict** (recommended) or **Ignore**
   * Strict mode verifies the server identity using your `~/.ssh/known_hosts` file
 
-![ATP target configuration example #center](_images/atp-target-config.png)
+![ATP target configuration form displaying input fields including Host with IP address 192.168.1.10, Name field for descriptive target identifier, Port field set to 22, User field for SSH username, SSH Private Key section with radio buttons for Automatically Detect Key and Select Key Manually options, and Host Key Verification dropdown menu set to Strict mode with explanation text about verifying server identity using known_hosts file alt-txt#center](/install-guides/_images/atp-target-config.png "Configure Target form with connection settings")
+
 
 Select **Add Target**.
 
@@ -265,7 +261,7 @@ The target appears in the targets list and is ready for profiling.
 
 You can select the **Test Connection** button to verify your connection to the ATP Linux target is successful.
 
-![ATP connection test #center](_images/atp-connection-test.png)
+![ATP graphical interface displaying connection test results with green checkmark icon indicating success, target name my-target shown in header, host IP address 192.168.1.10 listed below, connection status field showing Connected in green text, and blue Test Connection button at bottom of panel#center](/install-guides/_images/atp-connection-test.png "Successful ATP target connection test")
 
 #### Configure jump nodes (optional)
 
@@ -310,7 +306,7 @@ atperf --help
 
 If your target is the same machine where you installed ATP (the host machine itself), ATP automatically provides a built-in `localhost` target. You don't need to configure authentication, SSH keys, or host verification for local profiling.
 
-Verify the localhost target is available:
+Verify the localhost target is available by listing all configured targets:
 
 ```bash
 atperf target list
@@ -328,7 +324,7 @@ Your local machine is now ready to use as a target. Specify `--target=localhost`
 
 #### Add a remote target
 
-To profile a workload on a remote machine, add it as a target using the standard syntax:
+To profile a workload on a remote machine, add it as a target using the standard syntax. This command registers the remote system with ATP:
 
 ```bash
 atperf target add <user>@<host>:<port>:<private_ssh_key_path>
@@ -452,11 +448,11 @@ atperf target remove my-target
 
 To remove ATP from your system, use the appropriate method for your platform:
 
-**Windows**: Open **Settings** > **Apps**, find **Arm Total Performance**, and select **Uninstall**.
+* For Windows, open **Settings** > **Apps**, find **Arm Total Performance**, and select **Uninstall**.
 
-**macOS**: Drag the Arm Total Performance application from **Applications** to the **Trash**.
+* For macOS, drag the Arm Total Performance application from **Applications** to the **Trash**.
 
-**Linux**: Remove the package:
+* For Linux, remove the package:
 
 ```bash
 sudo apt remove arm-total-performance

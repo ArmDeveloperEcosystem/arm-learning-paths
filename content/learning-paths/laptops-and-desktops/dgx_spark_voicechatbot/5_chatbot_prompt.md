@@ -1,127 +1,100 @@
 ---
-title: Specializing Offline Voice Assistants for Customer Service
-weight: 6
+title: Specialize offline voice assistants for customer service
+weight: 8
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Specializing Offline Voice Assistants for Customer Service
+In the previous section, you built a fully offline voice assistant by combining local speech-to-text (STT) with vLLM for language generation.
 
-In the previous module, you built a fully offline voice assistant by combining local speech-to-text (STT) with ***vLLM*** for language generation.
+You can transform that general-purpose chatbot into a task-specific customer service agent designed to deliver fast, focused, and context-aware assistance.
 
-Now, we’ll focus on transforming that general-purpose chatbot into a task-specific customer service agent—designed to deliver fast, focused, and context-aware assistance.
+## Why adapt for customer support?
 
-### Why Adapt for Customer Support?
+Unlike open-domain chatbots, customer-facing assistants must meet stricter communication standards. Each voice input must trigger a fast and relevant reply with no long pauses or uncertainty. Users expect direct answers, not verbose or vague explanations. The assistant should remember previous questions or actions to support multi-turn interactions.
 
-Unlike open-domain chatbots, customer-facing assistants must meet stricter communication standards:
+These needs are especially relevant for questions like password resets ("I forgot my account password and need help resetting it"), order tracking ("Can you track my recent order and tell me when it will arrive?"), billing issues ("Why was I charged twice this month?"), and subscription management ("I want to cancel my subscription and avoid future charges"). Such queries require language generation, structured behavior, and task memory.
 
-- ***Quick Responses***: Each voice input must trigger a fast and relevant reply—no long pauses or uncertainty.
-
-- ***Clear and Concise Output***: Users expect direct answers, not verbose or vague explanations.
-
-- ***Context Awareness***: The assistant should remember previous questions or actions to support multi-turn interactions.
-
-These needs are especially relevant for questions like:
-
-* “Hi, I forgot my account password and need help resetting it.”
-* “Can you track my recent order and tell me when it will arrive?”
-* “I’d like to speak to a live agent about a billing issue.”
-* “Why was I charged twice this month?”
-* “I want to cancel my subscription and avoid future charges.”
-
-Such queries require more than just language generation—they demand structured behavior and task memory.
-
-### What You’ll Build in This Module
+### What you'll build in this section
 
 You’ll enhance your assistant with three critical upgrades:
 
-1. ***Role-Specific System Prompts***
+1. Role-Specific System Prompts
 
-Define your assistant’s personality and responsibilities (e.g., support agent, coach, guide) through system messages. Learn how prompt engineering influences tone, detail level, and actionability.
+Define your assistant's personality and responsibilities (support agent, coach, guide) through system messages. Learn how prompt engineering influences tone, detail level, and actionability.
 
-2. ***Multi-Turn Memory***
+2. Multi-Turn Memory
 
-Enable the assistant to recall recent interactions and respond within context. You’ll manage a rolling history of messages while avoiding token overflow.
+Enable the assistant to recall recent interactions and respond within context. You'll manage a rolling history of messages while avoiding token overflow.
 
-3. ***(Optional) Secure Knowledge Retrieval***
+3. (Optional) Secure Knowledge Retrieval
 
-Explore how to integrate local company data using vector search—allowing the assistant to answer questions based on private documents, without ever sending data to the cloud.
+Explore how to integrate local company data using vector search. This allows the assistant to answer questions based on private documents, without ever sending data to the cloud.
 
 This prepares your system for high-trust environments like:
 - Enterprise customer support
 - Internal help desks
 - Regulated industries (healthcare, finance, legal)
 
-By the end of this module, your assistant will behave more like a real support agent—able to respond quickly, maintain context, and optionally access internal knowledge to resolve complex requests.
+By the end of this section, your assistant behaves like a real support agent. It can respond quickly, maintain context, and optionally access internal knowledge to resolve complex requests.
 
 
-## Controlling AI Behavior with System Prompts
+## Control AI behavior with system prompts
 
-To make your AI assistant behave like a domain expert—such as a support agent or tour guide—you need more than just language generation. You need instructional control.
+To make your AI assistant behave like a domain expert (such as a support agent or tour guide), you need language generation and instructional control.
 
-In OpenAI-compatible APIs (like vLLM), you can provide a special message with the role set to ***"system"***. This message defines the behavior and tone of the assistant before any user input is processed.
+In OpenAI-compatible APIs (like vLLM), you can provide a special message with the role set to "system". This message defines the behavior and tone of the assistant before any user input is processed.
 
-A system prompt is like giving your assistant a role to play — such as:
-
-- A polite and helpful customer service agent
-- A knowledgeable tour guide
-- A motivational fitness coach
-
-By customizing the system prompt, you can:
-
-- Shape the assistant’s language and tone
-- Restrict or expand the type of information it shares
-- Align responses with business needs (e.g., short and precise for help desks)
+A system prompt gives your assistant a role to play, such as a polite and helpful customer service agent, a knowledgeable tour guide, or a motivational fitness coach. By customizing the system prompt, you can shape the assistant's language and tone, restrict or expand the type of information it shares, and align responses with business needs, such as short and precise replies for help desks.
 
 
-### Step 1: Define the System Prompt Behavior
+### Define the System Prompt Behavior
 
 To turn your general-purpose voice assistant into a focused role-specific agent, you must guide the language model’s behavior. This is done by defining a system prompt that acts as a task instruction.
 
-For example: 
-***Support Agent***
+For example:
+
+Support Agent:
 ```bash
 You are a professional customer support assistant. Always prioritize clarity and solve customer issues politely and efficiently.
 ```
 
-***Fitness Coach***
+Fitness Coach:
 ```bash
 You are a friendly and motivational fitness coach. Offer helpful workout tips and health advice.
 ```
 
-***Tour Guide***
+Tour Guide:
 ```bash
-You are an enthusiastic travel guide. Recommend popular tourist destinations and answer cultural questions clearly.
+You are an enthusiastic travel guide. Recommend popular tourist destinations and answer cultural questions.
 ```
 
-In this learning path, we use customer service as an example.
+This Learning Path uses customer service as an example.
 Add the following at the top of your script:
 
-```bash
+```python
 SYSTEM_PROMPT = """You are a professional customer support assistant.
-Respond politely, clearly, and concisely.
+Respond politely and concisely.
 Focus on solving the user's issue.
 Do not include unnecessary apologies or long explanations.
 If required information is missing, ask a clear follow-up question."""
 ```
 
-This prompt guides the model to respond clearly—even when the user’s input is vague—by reducing ambiguity, maintaining a consistent tone, and helping the assistant stay on topic, concise, and solution-oriented.
+This prompt guides the model to respond effectively, even when the user's input is vague, by reducing ambiguity, maintaining a consistent tone, and helping the assistant stay on topic and solution-oriented.
 
-### Step 2: Inject the Role Instruction into the User Message
+### Inject the role instruction into the user message
 
-Instead of sending a separate "system" role—which may cause vLLM to return a formatting error—you can prepend the role instruction directly into the user’s message.
+Instead of sending a separate "system" role (which may cause vLLM to return a formatting error), you can prepend the role instruction directly into the user's message. This keeps control over the assistant's behavior while maintaining compatibility with vLLM's expected message format.
 
-This lets you keep control over the assistant’s behavior, while maintaining compatibility with vLLM’s expected message format.
-
-Locate the following code in previous Python code.
-```bash
+Locate the following code in your previous Python script:
+```python
 "messages": [
     {"role": "user", "content": user_text}
 ]
 ```
 
-Add ***SYSTEM_PROMPT*** begin of the messages. 
+Add SYSTEM_PROMPT at the beginning of the messages:
 
 ```python
 messages = [
@@ -129,14 +102,9 @@ messages = [
 ]
 ```
 
-This line does two things:
-1. It embeds your desired assistant role (e.g., customer support) directly into the input.
-2. It ensures that vLLM treats the message as valid—alternating roles correctly between user and assistant.
+This line embeds your desired assistant role (like customer support) directly into the input and ensures that vLLM treats the message as valid by alternating roles correctly between user and assistant. By combining prompt and question, the assistant behaves like a helpful agent without triggering message formatting errors.
 
-By combining prompt and question, the assistant behaves like a helpful agent without triggering message formatting errors.
-
-
-### Step 3: Choosing the Right Response Length for Each Role
+### Choose the right response length for each role
 
 Different assistant roles require different response styles. A customer service agent should be concise and focused, while a tour guide or teacher may need to provide more elaboration.
 
@@ -146,23 +114,15 @@ To control the response length dynamically, we calculate max_tokens using this f
 max_tokens = min(512, max(64, len(user_text.split()) * 5))
 ```
 
-Let’s break it down:
-- ***len(user_text.split()):*** counts how many words the user spoke
-- * 5: estimates about 5 tokens per word (a rough average)
-- ***max():*** ensures a minimum of 64 tokens to avoid overly short responses
-- ***min():*** caps the response length to 512 tokens to avoid delays or exceeding model limits
-
-This gives you a balanced reply size that grows with input length but stays within safe bounds.
+Here's how this formula works: `len(user_text.split())` counts how many words the user spoke, multiplication by 5 estimates about five tokens per word (a rough average), `max()` ensures a minimum of 64 tokens to avoid short responses, and `min()` caps the response length to 512 tokens to avoid delays or exceeding model limits. This gives you a balanced reply size that grows with input length but stays within safe bounds.
 
 {{% notice tip %}}
-You can reference this formula based on role:
-Customer support: shorter replies, use max_tokens = 256 for snappy responses
-Tour guide / teacher: more verbose, try max_tokens = 384 or higher
-FAQ retrieval: adjust based on expected answer complexity
+Adjust this formula based on role. Customer support needs shorter replies, so use `max_tokens = 256` for snappy responses. Tour guide or teacher roles are more verbose and can use `max_tokens = 384` or higher. For FAQ retrieval, adjust based on expected answer complexity.
 {{% /notice %}}
 
+### Run the complete customer service assistant
 
-The full version of code will be:
+Save the following code to a file named `customer-assist.py`:
 
 ```python
 import pyaudio
@@ -269,7 +229,7 @@ try:
                         "max_tokens": max_tokens
                     })
 
-                    result = response.json()                    
+                    result = response.json()
                     if "choices" not in result:
                         print(" Error from vLLM:", result.get("error", "Unknown error"))
                         continue
@@ -286,5 +246,12 @@ finally:
     stop_event.set()
 ```
 
-This approach works well for single-turn interactions.
-In the next section, you’ll extend this pattern to multi-turn conversations, storing and managing multiple rounds of user and assistant prompts.
+Run the assistant:
+
+```bash
+python3 customer-assist.py
+```
+
+The assistant will listen for your voice input and respond as a customer support agent, using the system prompt to guide its behavior.
+
+This approach works well for single-turn interactions. You'll extend this pattern to multi-turn conversations, storing and managing multiple rounds of user and assistant prompts.
