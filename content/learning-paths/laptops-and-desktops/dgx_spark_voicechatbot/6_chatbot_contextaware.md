@@ -1,6 +1,6 @@
 ---
 title: Enable context-aware dialogue with short-term memory
-weight: 8
+weight: 9
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -8,7 +8,7 @@ layout: learningpathall
 
 In customer service and other task-based voice interactions, conversations naturally span multiple turns. Users may provide only partial information per utterance or follow up after the assistant’s prompt.
 
-To handle such situations effectively, your assistant needs short-term memory—a lightweight context buffer that retains recent user questions and assistant replies.
+To handle such situations effectively, your assistant needs short-term memory. This is a lightweight context buffer that retains recent user questions and assistant replies.
 
 ## Why multi-turn memory matters
 
@@ -25,7 +25,7 @@ Example: What happens without memory
 
 This happens because the assistant doesn't remember the user's intent or its own previous message. To fix this, you'll implement a memory buffer.
 
-### Step 1: Store previous user and assistant turns
+### Store previous user and assistant turns
 
 Create a `chat_history` list to hold recent turns. After each interaction, append both user and assistant responses:
 
@@ -42,7 +42,7 @@ chat_history.append({"role": "assistant", "content": reply})
 
 This will build a list like:
 
-```log
+```output
 [
   {"role": "user", "content": "I need to cancel my order."},
   {"role": "assistant", "content": "Sure, can you provide the order ID?"},
@@ -51,7 +51,7 @@ This will build a list like:
 ]
 ```
 
-### Step 2: Keep only the most recent 5 rounds
+### Keep only the most recent 5 rounds
 
 Each new turn makes the message array longer. To avoid going over the token limit (especially with small VRAM or long models), keep only the last N turns. Use 5 rounds as an example (10 messages, 5 rounds of user + assistant)
 
@@ -63,7 +63,7 @@ messages.append({"role": "user", "content": user_text})
 
 This keeps the most recent context while fitting within model constraints.
 
-### Step 3: Estimate token usage before sending
+### Estimate token usage before sending
 
 Before calling the API, estimate how many tokens your prompt is using. This includes the system prompt, all past user/assistant messages, and the new user message.
 
@@ -72,11 +72,11 @@ prompt_tokens = len(" ".join([m["content"] for m in messages]).split())
 print(f" Estimated prompt tokens: {prompt_tokens}")
 ```
 
-This helps you balance max_tokens for the assistant's response, ensuring the prompt and reply fit within the model's limit (for example, 4096 or 8192 tokens depending on the model).
+This helps you balance max_tokens for the assistant's response, ensuring the prompt and reply fit within the model's limit (such as 4096 or 8192 tokens depending on the model).
 
 The expected output is similar to:
 
-```log
+```output
 User: Hi, I need to cancel my subscription. Please help me
 
 Estimated prompt tokens: 46
@@ -141,9 +141,9 @@ vllm serve /models/llama3-70b \
     --dtype float16
 ```
 
-This command starts the high-performance LLM backend using quantized weights and optimized GPU memory allocation, giving you full-scale generation power—while keeping the assistant responsive and completely private.
+This command starts the high-performance LLM backend using quantized weights and optimized GPU memory allocation, giving you full-scale generation power while keeping the assistant responsive and completely private.
 
-Now, execute the complete Python code to activate your speech recognition and dialogue pipeline. Once both the STT and LLM services are live, you’ll be able to speak naturally and receive real-time, intelligent responses from the assistant—without any cloud connection.
+Now, save the complete Python code to a file named `fwhisper_vllm_audio.py` to activate your speech recognition and dialogue pipeline with multi-turn memory support:
 
 ```python
 import pyaudio
@@ -294,20 +294,27 @@ finally:
     stop_event.set()
 ```
 
+Run the assistant with multi-turn memory:
+
+```bash
+python3 fwhisper_vllm_audio.py
+```
+
+Once both the STT and LLM services are live, you'll be able to speak naturally and receive real-time, intelligent responses from the assistant. The assistant will remember previous exchanges in the conversation, allowing for natural multi-turn dialogues without any cloud connection.
 
 ### Demo: Multi-turn voice chatbot with context memory on DGX Spark
 
 ![img2 alt-text#center](fasterwhipser_vllm_demo2.gif "Figure 2: Full Function Voice-to-AI with volume bar")
 
-This demo showcases a fully offline voice assistant that combines real-time transcription (via faster-whisper) and intelligent response generation (via vLLM). Running on an Arm-based DGX Spark system, the assistant captures live audio, transcribes it, and generates context-aware replies using a local language model—all in a seamless loop.
+This demo showcases a fully offline voice assistant that combines real-time transcription (via faster-whisper) and intelligent response generation (via vLLM). Running on an Arm-based DGX Spark system, the assistant captures live audio, transcribes it, and generates context-aware replies using a local language model, all in a seamless loop.
 
 The assistant now supports multi-turn memory, allowing it to recall previous user inputs and its own responses. As shown in the video, this enables natural back-and-forth conversations, such as confirming account details or resolving support requests.
 
-No cloud services are used—ensuring full control, privacy, and low-latency performance.
+No cloud services are used, ensuring full control, privacy, and low-latency performance.
 
 ### Full Voice-to-AI Conversation Flow
 
-The following diagram summarizes the complete architecture you’ve now assembled: from microphone input to AI-generated replies—entirely local, modular, and production-ready.
+The following diagram summarizes the complete architecture you've now assembled: from microphone input to AI-generated replies, entirely local, modular, and production-ready.
 
 ```
 USB Microphone (16kHz mono)
@@ -328,7 +335,7 @@ Transcribed User Text (timestamped)
         ↓
 System Prompt + Conversation History
         ↓
-vLLM API (for example, mistral-7b or llama3-70b GPU inference)
+vLLM API (such as mistral-7b or llama3-70b GPU inference)
         ↓
 AI Response
         ↓
@@ -351,7 +358,7 @@ Swap in multilingual STT models and LLMs to enable assistants for global users o
 
 - Text-to-Speech (TTS) Output
 
-Add a local TTS engine (for example, Coqui, piper, or NVIDIA Riva) to vocalize the assistant's replies, turning it into a true conversational agent.
+Add a local TTS engine (such as Coqui, piper, or NVIDIA Riva) to vocalize the assistant's replies, turning it into a true conversational agent.
 
 - Personalization and Context Memory
 
