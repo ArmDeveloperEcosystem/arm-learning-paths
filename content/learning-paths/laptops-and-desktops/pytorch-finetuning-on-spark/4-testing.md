@@ -130,6 +130,10 @@ Notice how the original model gets stuck in a repetitive loop, continuing to out
 
 Now test your fine-tuned model to see how the Alpaca instruction dataset improved its response quality. Stop the current vLLM server (press Ctrl+C in the container terminal) before launching the fine-tuned model.
 
+{{% notice Dependency Conflict %}}
+As of this writing, vLLM does not support version 5 of the `transformers` library that was used when fine-tuning the model, so you need to make a slight change to it's `tokenizer_config.json`. Open that file and set the `tokenizer_class` to `PreTrainedTokenizerFast`, which is available in the older version of the `transformers` library used by vLLM.
+{{% /notice %}}
+
 ### Launch vLLM
 
 Start the vLLM server with your fine-tuned model:
