@@ -48,7 +48,7 @@ further_reading:
         link: https://huggingface.co/Arm/neural-super-sampling
         type: website
     - resource:
-        title: Vulkan ML Sample Learning Path
+        title: Vulkan Samples Learning Path
         link: /learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/
         type: learningpath
 
