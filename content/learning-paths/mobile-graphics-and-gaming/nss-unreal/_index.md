@@ -15,7 +15,7 @@ learning_objectives:
 
 prerequisites:
     - Windows 11
-    - Unreal Engine 4.27 or 5.4-5.6 (with the Templates and Feature Pack enabled)
+    - Unreal Engine 4.27 or 5.4 or 5.6 (with the Templates and Feature Pack enabled)
     - Visual Studio (with Desktop Development with C++ and .NET desktop build tools)
 
 
@@ -31,6 +31,7 @@ tools_software_languages:
     - Unreal Engine
     - Vulkan SDK
     - Visual Studio
+    - NX
 operatingsystems:
     - Windows
 
