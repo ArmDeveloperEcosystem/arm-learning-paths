@@ -1,6 +1,10 @@
 ---
 title: Secure Multi-Architecture Containers with Trivy on Azure Cobalt 100 (Arm64)
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 45
 
 who_is_this_for: This learning path is designed for developers and DevOps engineers who want to integrate security scanning into CI/CD pipelines for multi-architecture container images.
