@@ -42,116 +42,164 @@ This script loads a robot model, steps the physics simulation, and prints joint 
 - Configuring joint actuators and control modes
 - Stepping the physics simulation and reading back joint positions and velocities
 
-## Step 3: Run the Cartpole environment
+## Step 3: Run the Cartpole base environment
 
-Now run a complete RL environment. The Cartpole Direct environment is a self-contained example that you can use to verify the full Isaac Lab pipeline:
+Now run a complete environment that combines scene, action, observation, and event managers. The `create_cartpole_base_env.py` tutorial creates a Cartpole base environment and applies random actions:
 
 ```bash
-./isaaclab.sh -p scripts/tutorials/03_envs/create_direct_rl_env.py --task=Isaac-Cartpole-Direct-v0 --num_envs=32
+./isaaclab.sh -p scripts/tutorials/03_envs/create_cartpole_base_env.py --num_envs 32
 ```
 
-This command launches 32 parallel Cartpole environments on the Blackwell GPU. Each environment runs its own independent simulation with random actions applied to the cart.
+This command launches 32 parallel Cartpole environments on the Blackwell GPU. Each environment runs its own independent simulation with random joint efforts applied to the cart. You will see the pole joint angle printed to the terminal for each step.
 
-The key command-line arguments are:
+{{% notice Note %}}
+This tutorial script uses a hardcoded `CartpoleEnvCfg` configuration. It does not accept a `--task` argument. The `--num_envs` flag controls how many parallel environments are spawned on the GPU.
+{{% /notice %}}
 
-| **Argument** | **Description** |
-|-------------|-----------------|
-| `--task=Isaac-Cartpole-Direct-v0` | Specifies the environment to load. This uses the Direct workflow where all environment logic is in a single class |
-| `--num_envs=32` | Number of parallel environment instances. Each runs independently on the GPU |
+## Step 4: Run the Cartpole RL environment
 
-You will see output showing the observation space, action space, and episode statistics as the random agent interacts with the environments.
+The previous script creates a base environment without rewards or terminations. To see the full RL environment (with reward computation and episode resets), run:
 
-## Step 4: Understand the simulation code
+```bash
+./isaaclab.sh -p scripts/tutorials/03_envs/run_cartpole_rl_env.py --num_envs 32
+```
 
-To understand what happens inside an Isaac Lab environment, examine the Cartpole Direct environment source code. The key elements are:
+This script wraps the Cartpole scene in a `ManagerBasedRLEnv`, which adds reward computation, termination conditions, and the standard Gymnasium `step()` interface that returns `(obs, reward, terminated, truncated, info)`.
+
+The key difference between the two scripts:
+
+| **Script** | **Environment type** | **Returns from step()** |
+|-----------|---------------------|------------------------|
+| `create_cartpole_base_env.py` | `ManagerBasedEnv` | `(obs, info)` — no rewards or terminations |
+| `run_cartpole_rl_env.py` | `ManagerBasedRLEnv` | `(obs, reward, terminated, truncated, info)` — full RL interface |
+
+## Step 5: Understand the simulation code
+
+To understand what happens inside an Isaac Lab environment, examine the Cartpole environment source code. The key elements are:
 
 ### Environment configuration
 
-Every Isaac Lab environment starts with a configuration class that defines the simulation parameters. For the Cartpole Direct environment, the configuration specifies:
+Every Isaac Lab environment starts with a configuration class that defines the simulation parameters. The `CartpoleEnvCfg` in the tutorial specifies:
 
 ```python
 @configclass
-class CartpoleEnvCfg(DirectRLEnvCfg):
-    # Simulation parameters
-    decimation = 2              # Number of physics steps per RL step
-    episode_length_s = 5.0      # Maximum episode duration in seconds
-    action_scale = 100.0        # Multiplier applied to raw policy actions
-    num_observations = 4        # Observation vector size: [cart_pos, cart_vel, pole_angle, pole_angular_vel]
-    num_actions = 1             # Single continuous action: force on the cart
+class CartpoleEnvCfg(ManagerBasedEnvCfg):
+    """Configuration for the cartpole environment."""
 
-    # Simulation settings
-    sim: SimulationCfg = SimulationCfg(dt=1 / 120)  # Physics timestep: 120 Hz
+    # Scene settings
+    scene = CartpoleSceneCfg(num_envs=1024, env_spacing=2.5)
+    # Basic settings
+    observations = ObservationsCfg()
+    actions = ActionsCfg()
+    events = EventCfg()
+
+    def __post_init__(self):
+        """Post initialization."""
+        self.decimation = 4         # env step every 4 sim steps: 200Hz / 4 = 50Hz
+        self.sim.dt = 0.005         # sim step every 5ms: 200Hz
 ```
 
 The table below explains each parameter:
 
 | **Parameter** | **Value** | **Description** |
 |---------------|-----------|-----------------|
-| `decimation` | 2 | The policy acts every 2 physics steps. With a 120 Hz physics rate, the policy runs at 60 Hz |
-| `episode_length_s` | 5.0 | Each episode lasts a maximum of 5 seconds before resetting |
-| `action_scale` | 100.0 | Raw policy outputs (typically in the range [-1, 1]) are multiplied by this value to produce physical forces in Newtons |
-| `num_observations` | 4 | The agent observes cart position, cart velocity, pole angle, and pole angular velocity |
-| `num_actions` | 1 | A single continuous value representing the horizontal force applied to the cart |
-| `sim.dt` | 1/120 | The physics engine advances by 1/120th of a second per step |
+| `scene.num_envs` | 1024 | Default number of parallel environment instances (overridden by `--num_envs` from the command line) |
+| `scene.env_spacing` | 2.5 | Distance in meters between each parallel environment in the scene |
+| `decimation` | 4 | The policy acts every 4 physics steps. With a 200 Hz physics rate, the policy runs at 50 Hz |
+| `sim.dt` | 0.005 | The physics engine advances by 5 ms per step (200 Hz simulation rate) |
+
+### Actions, observations, and events
+
+The configuration defines three manager groups:
+
+**Actions** — how the agent controls the robot:
+
+```python
+@configclass
+class ActionsCfg:
+    joint_efforts = mdp.JointEffortActionCfg(
+        asset_name="robot",
+        joint_names=["slider_to_cart"],
+        scale=5.0                       # Multiplier on raw action values
+    )
+```
+
+The agent produces a single continuous value that is scaled by `5.0` and applied as a force on the cart's slider joint.
+
+**Observations** — what the agent sees:
+
+```python
+@configclass
+class ObservationsCfg:
+    @configclass
+    class PolicyCfg(ObsGroup):
+        joint_pos_rel = ObsTerm(func=mdp.joint_pos_rel)   # Relative joint positions
+        joint_vel_rel = ObsTerm(func=mdp.joint_vel_rel)   # Relative joint velocities
+```
+
+The agent observes joint positions and velocities for both the cart slider and the pole hinge.
+
+**Events** — randomization applied during simulation:
+
+```python
+@configclass
+class EventCfg:
+    # On startup: randomize the pole mass (adds 0.1 to 0.5 kg)
+    add_pole_mass = EventTerm(
+        func=mdp.randomize_rigid_body_mass,
+        mode="startup",
+        params={"mass_distribution_params": (0.1, 0.5), "operation": "add"},
+    )
+    # On reset: randomize cart and pole starting positions
+    reset_cart_position = EventTerm(func=mdp.reset_joints_by_offset, mode="reset", ...)
+    reset_pole_position = EventTerm(func=mdp.reset_joints_by_offset, mode="reset", ...)
+```
+
+Events make the environment more robust for training. Randomizing the pole mass on startup means the agent must learn to balance poles of different weights. Randomizing joint positions on reset ensures each episode starts from a different state.
 
 ### The simulation loop
 
-The core simulation loop in Isaac Lab follows a standard Gymnasium-style interface:
+The core simulation loop in Isaac Lab follows a standard Gymnasium-style interface. From `run_cartpole_rl_env.py`:
 
 ```python
-# Reset the environment
-obs, info = env.reset()
+# Create the RL environment
+env = ManagerBasedRLEnv(cfg=env_cfg)
 
-while simulation_running:
-    # Agent selects an action (random in this example)
-    action = env.action_space.sample()
+count = 0
+while simulation_app.is_running():
+    with torch.inference_mode():
+        # Reset every 300 steps
+        if count % 300 == 0:
+            count = 0
+            env.reset()
 
-    # Step the environment: apply action, advance physics, compute reward
-    obs, reward, terminated, truncated, info = env.step(action)
+        # Sample random actions
+        joint_efforts = torch.randn_like(env.action_manager.action)
 
-    # If the episode ended, the environment auto-resets
+        # Step the environment: apply action, advance physics, compute reward
+        obs, rew, terminated, truncated, info = env.step(joint_efforts)
+
+        # Print the pole joint angle for environment 0
+        print("[Env 0]: Pole joint: ", obs["policy"][0][1].item())
+        count += 1
 ```
 
 Each call to `env.step(action)` performs these operations on the GPU:
 
-1. **Apply actions**: The action tensor is scaled and applied as joint forces or position targets
-2. **Step physics**: The simulation advances by `decimation` physics steps (2 steps at 120 Hz = 1/60 second of simulated time)
-3. **Compute observations**: Joint positions, velocities, and other sensor data are read from the simulation
-4. **Compute rewards**: A reward function evaluates how well the agent performed
-5. **Check terminations**: The environment checks if the episode should end (for example, pole fell too far)
-
-### Reward function
-
-The Cartpole reward function encourages the agent to keep the pole upright and the cart centered:
-
-```python
-def _get_rewards(self) -> torch.Tensor:
-    total_reward = compute_rewards(
-        self.cfg.rew_scale_alive,       # Bonus for each step the pole stays upright
-        self.cfg.rew_scale_terminated,   # Penalty when the episode terminates early
-        self.cfg.rew_scale_pole_pos,     # Reward for keeping the pole angle near zero
-        self.cfg.rew_scale_cart_vel,     # Penalty for excessive cart velocity
-        self.cfg.rew_scale_pole_vel,     # Penalty for excessive pole angular velocity
-        self.joint_pos[:, self._pole_dof_idx[0]],   # Current pole angle
-        self.joint_vel[:, self._pole_dof_idx[0]],   # Current pole angular velocity
-        self.joint_pos[:, self._cart_dof_idx[0]],    # Current cart position
-        self.joint_vel[:, self._cart_dof_idx[0]],    # Current cart velocity
-        self.reset_terminated,
-    )
-    return total_reward
-```
+1. **Apply actions**: The action tensor is scaled and applied as joint efforts to the cart
+2. **Step physics**: The simulation advances by `decimation` physics steps (4 steps at 200 Hz = 20 ms of simulated time)
+3. **Compute observations**: Joint positions and velocities are read from the simulation
+4. **Compute rewards**: A reward function evaluates how well the agent balanced the pole
+5. **Check terminations**: The environment checks if the episode should end (for example, the pole angle exceeded a threshold)
 
 All computations happen in parallel across all environments using PyTorch tensors on the GPU. This is what makes Isaac Lab fast: thousands of environments run simultaneously with no Python loop overhead.
 
-## Step 5: Run with headless mode
+## Step 6: Run with headless mode
 
 For training workloads you will typically run without visualization to maximize GPU utilization. Test headless mode:
 
 ```bash
-./isaaclab.sh -p scripts/tutorials/03_envs/create_direct_rl_env.py \
-    --task=Isaac-Cartpole-Direct-v0 \
-    --num_envs=64 \
-    --headless
+./isaaclab.sh -p scripts/tutorials/03_envs/run_cartpole_rl_env.py --num_envs 64 --headless
 ```
 
 In headless mode, all GPU resources are dedicated to physics simulation and tensor computation. This is the recommended mode for training reinforcement learning policies, which you will do in the next section.
@@ -166,8 +214,8 @@ In this section you have:
 
 - Launched your first Isaac Sim scene on DGX Spark and verified the rendering and physics engines work correctly
 - Spawned articulated robots and observed multi-body physics simulation
-- Run 32 parallel Cartpole environments on the Blackwell GPU with random actions
-- Understood the key components of an Isaac Lab environment: configuration, simulation loop, observation space, action space, and reward function
+- Run the Cartpole base environment and RL environment with 32 parallel instances on the Blackwell GPU
+- Understood the key components of an Isaac Lab environment: configuration, actions, observations, events, simulation loop, and reward computation
 - Tested headless mode for maximum training performance
 
 You now understand the fundamental building blocks of Isaac Lab environments. In the next section, you will use these concepts to train a reinforcement learning policy for a humanoid robot.
