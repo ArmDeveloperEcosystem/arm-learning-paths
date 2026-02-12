@@ -54,6 +54,22 @@ export LD_PRELOAD="$LD_PRELOAD:/lib/aarch64-linux-gnu/libgomp.so.1"
 
 This command launches the training with default hyperparameters. The Blackwell GPU runs thousands of parallel H1 environments simultaneously while the Grace CPU handles logging and orchestration.
 
+{{% notice Warning %}}
+**Known issue: NVRTC GPU architecture error on DGX Spark**
+
+When running RL training on the Blackwell GPU (GB10, compute capability 12.1), you may encounter:
+
+```
+RuntimeError: nvrtc: error: invalid value for --gpu-architecture (-arch)
+```
+
+This error occurs because the NVRTC runtime compiler inside PyTorch does not yet fully support the `sm_121` architecture. It is a known compatibility issue tracked in [Isaac Lab Discussion #2406](https://github.com/isaac-sim/IsaacLab/discussions/2406) and [PyTorch Issue #87595](https://github.com/pytorch/pytorch/issues/87595).
+
+**Workaround**: Make sure you are using the Isaac Sim build from source (as described in the setup section) rather than a pip-installed version. The source build includes the correct CUDA 13 runtime for Blackwell. If the error persists, try running with `--headless` mode, which avoids some NVRTC code paths used by the renderer. Also ensure your NVIDIA driver is up to date (`nvidia-smi` should show driver 580.x or later).
+
+This issue is expected to be resolved in future Isaac Sim and PyTorch releases with full Blackwell support.
+{{% /notice %}}
+
 You can also override default parameters from the command line:
 
 ```bash
