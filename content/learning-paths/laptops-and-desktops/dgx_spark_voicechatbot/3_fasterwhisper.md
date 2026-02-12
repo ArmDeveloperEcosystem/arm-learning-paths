@@ -104,7 +104,7 @@ When you speak to the device, the output is similar to:
 
 {{% notice Note %}}
 faster-whisper supports many models like tiny, base, small, medium and large-v1/2/3.
-Check the [GitHub repository](https://github.com/openai/whisper?tab=readme-ov-file#available-models-and-languages) for more model details.
+See the [GitHub repository](https://github.com/openai/whisper?tab=readme-ov-file#available-models-and-languages) for more model details.
 {{% /notice %}}
 
 

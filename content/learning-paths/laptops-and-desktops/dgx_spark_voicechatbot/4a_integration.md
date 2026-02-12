@@ -27,7 +27,7 @@ This separation has several advantages:
 
 Separating container startup from model launch provides greater control and improves development experience.
 
-By launching the container first, you can troubleshoot errors like model path issues or GPU memory limits directly inside the environment—without the container shutting down immediately. It also speeds up iteration: you avoid reloading the entire image each time you tweak settings or restart the model.
+By launching the container first, you can troubleshoot errors like model path issues or GPU memory limits directly inside the environment, without the container shutting down immediately. It also speeds up iteration: you avoid reloading the entire image each time you tweak settings or restart the model.
 
 This structure also improves visibility. You can inspect files, monitor GPU usage, or run diagnostics like `curl` and `nvidia-smi` inside the container. Breaking these steps apart makes the process easier to understand, debug, and extend.
 

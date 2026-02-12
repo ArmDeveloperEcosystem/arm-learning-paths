@@ -45,7 +45,7 @@ nvcr.io/nvidia/vllm      25.11-py3                 d33d4cadbe0f   2 months ago  
 
 #### Download a quantized model (GPTQ)
 
-Use Hugging Face CLI to download a pre-quantized LLM such as Mistral-7B-Instruct-GPTQ and Meta-Llama-3-70B-Instruct-GPTQ models for following Real-Time AI Conversations.
+Use Hugging Face CLI to download a pre-quantized LLM such as Mistral-7B-Instruct-GPTQ and Meta-Llama-3-70B-Instruct-GPTQ models for real-time AI conversations.
 
 ```bash
 pip install huggingface_hub
@@ -99,7 +99,7 @@ docker run -it --gpus all -p 8000:8000 \
 ```
 
 {{% notice Note %}}
-Tip: The first launch will compile and cache the model. To reduce startup time in future runs, consider creating a Docker snapshot with docker commit.
+The first launch compiles and caches the model. To reduce startup time in future runs, consider creating a Docker snapshot with docker commit.
 {{% /notice %}}
 
 You can also check your NVIDIA driver and CUDA compatibility during the vLLM launch by looking at the output.

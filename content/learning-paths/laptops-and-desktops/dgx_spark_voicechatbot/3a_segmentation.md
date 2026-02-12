@@ -42,7 +42,7 @@ Adjust this setting based on background noise and microphone quality.
 
 ### Tuning `MIN_SPEECH_SEC` and `SILENCE_LIMIT_SEC`
 
-- `MIN_SPEECH_SEC`: This parameter defines the minimum duration of detected speech required before a segment is considered valid. Use this to filter out very short utterances such as false starts or background chatter.
+- `MIN_SPEECH_SEC`: This parameter defines the minimum duration of detected speech needed before a segment is considered valid. Use this to filter out very short utterances such as false starts or background chatter.
 	- Lower values: More responsive, but may capture incomplete phrases or noise
 	- Higher values: More stable sentences, but slower response
 
@@ -58,7 +58,7 @@ Based on practical experiments, the following presets provide a good starting po
 |----------------------|----------------------|-------------------------|-------------------|
 | Short command phrases | 0.8 | 0.6 | Optimized for quick voice commands such as "yes", "next", or "stop". Prioritizes responsiveness over sentence completeness. |
 | Natural conversational speech | 1.0 | 1.0 | Balanced settings for everyday dialogue with natural pauses between phrases. |
-| Long-form explanations (for example, tutorials) | 2.0 | 2.0 | Designed for longer sentences and structured explanations, reducing the risk of premature segmentation. |
+| Long-form explanations such as tutorials | 2.0 | 2.0 | Designed for longer sentences and structured explanations, reducing the risk of premature segmentation. |
 
 ## Apply these settings
 
