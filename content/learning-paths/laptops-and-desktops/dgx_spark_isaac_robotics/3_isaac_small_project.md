@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Deploy a basic robot simulation
 
-Now that Isaac Sim and Isaac Lab are installed, you can run your first robot simulation. In this section you will launch a pre-built simulation scene, interact with it programmatically, and understand the key concepts behind Isaac Sim's simulation loop.
+With Isaac Sim and Isaac Lab installed, you can now run your first robot simulation. In this section you will launch a pre-built simulation scene, interact with it programmatically, and understand the key concepts behind Isaac Sim's simulation loop.
 
-You will work with the Cartpole environment, a classic control benchmark where a cart must balance a pole by applying horizontal forces. This environment is simple enough to understand quickly but demonstrates all the core simulation concepts you need for more complex robotics tasks.
+You will work with the Cartpole environment, a classic control benchmark where a cart must balance a pole by applying horizontal forces. This environment is simple enough to understand quickly but demonstrates all the core simulation concepts required for more complex robotics tasks.
 
 ## Step 1: Launch a sample scene from Isaac Lab
 
@@ -24,7 +24,7 @@ export LD_PRELOAD="$LD_PRELOAD:/lib/aarch64-linux-gnu/libgomp.so.1"
 
 This script creates an empty simulation world with a ground plane and default lighting. It validates that the Isaac Sim rendering and physics engines are working on your DGX Spark system.
 
-You should see a viewer window open (if a display is connected) or see log messages confirming the simulation initialized successfully in headless mode.
+If a display is connected, a viewer window should open; otherwise, log messages will confirm that the simulation initialized successfully in headless mode.
 
 Press `Ctrl+C` to exit the simulation.
 
@@ -36,7 +36,7 @@ Next, run a more complete example that spawns articulated robots into the scene.
 ./isaaclab.sh -p scripts/tutorials/01_assets/run_articulation.py
 ```
 
-This script loads a robot model, steps the physics simulation, and prints joint states to the terminal. It demonstrates:
+This script loads a robot model, advances the physics simulation, and prints joint states to the terminal. It demonstrates:
 
 - Loading a robot from a USD (Universal Scene Description) asset file
 - Configuring joint actuators and control modes
@@ -66,7 +66,7 @@ The previous script creates a base environment without rewards or terminations. 
 ./isaaclab.sh -p scripts/tutorials/03_envs/run_cartpole_rl_env.py --num_envs 32
 ```
 
-This script wraps the Cartpole scene in a `ManagerBasedRLEnv`, which adds reward computation, termination conditions, and the standard Gymnasium `step()` interface that returns `(obs, reward, terminated, truncated, info)`.
+This script wraps the Cartpole scene in a `ManagerBasedRLEnv`, which includes reward computation, termination conditions, and the standard Gymnasium `step()` interface that returns `(obs, reward, terminated, truncated, info)`.
 
 The key difference between the two scripts:
 
@@ -157,7 +157,7 @@ class EventCfg:
     reset_pole_position = EventTerm(func=mdp.reset_joints_by_offset, mode="reset", ...)
 ```
 
-Events make the environment more robust for training. Randomizing the pole mass on startup means the agent must learn to balance poles of different weights. Randomizing joint positions on reset ensures each episode starts from a different state.
+Events introduce variability that improves training robustness. Randomizing the pole mass on startup means the agent must learn to balance poles of different weights. Randomizing joint positions on reset ensures each episode starts from a different state.
 
 ### The simulation loop
 
@@ -194,11 +194,12 @@ Each call to `env.step(action)` performs these operations on the GPU:
 4. **Compute rewards**: A reward function evaluates how well the agent balanced the pole
 5. **Check terminations**: The environment checks if the episode should end (for example, the pole angle exceeded a threshold)
 
-All computations happen in parallel across all environments using PyTorch tensors on the GPU. This is what makes Isaac Lab fast: thousands of environments run simultaneously with no Python loop overhead.
+All computations happen in parallel across all environments using PyTorch tensors on the GPU. This is what makes Isaac Lab efficient: thousands of environments run in parallel without Python loop overhead.
 
 ## Step 6: Run with headless mode
 
-For training workloads you will typically run without visualization to maximize GPU utilization. Test headless mode:
+For training workloads you will typically run without visualization to maximize GPU utilization. 
+Run the following command to test headless mode:
 
 ```bash
 ./isaaclab.sh -p scripts/tutorials/03_envs/run_cartpole_rl_env.py --num_envs 64 --headless
@@ -220,4 +221,4 @@ In this section you have:
 - Understood the key components of an Isaac Lab environment: configuration, actions, observations, events, simulation loop, and reward computation
 - Tested headless mode for maximum training performance
 
-You now understand the fundamental building blocks of Isaac Lab environments. In the next section, you will use these concepts to train a reinforcement learning policy for a humanoid robot.
+You now understand the fundamental components of Isaac Lab environments. In the next section, you will use these concepts to train a reinforcement learning policy for a humanoid robot.
