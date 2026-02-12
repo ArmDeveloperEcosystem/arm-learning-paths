@@ -12,7 +12,7 @@ In this section you will train a reinforcement learning (RL) policy for the Unit
 
 ## What is RSL-RL?
 
-RSL-RL (Robotic Systems Lab Reinforcement Learning) is a lightweight RL library developed at ETH Zurich specifically for locomotion tasks. It implements PPO with features tailored to robotics:
+RSL-RL (Robotic Systems Lab Reinforcement Learning) is a lightweight RL library developed at [ETH Zurich](https://ethz.ch/en.html) specifically for locomotion tasks. It implements PPO with features tailored to robotics:
 
 - GPU-accelerated rollout collection across thousands of parallel environments
 - Efficient on-policy training with generalized advantage estimation (GAE)
@@ -23,7 +23,7 @@ Isaac Lab provides ready-to-use training scripts for RSL-RL under `scripts/reinf
 
 ## Step 1: Understand the training task
 
-The task you will train is **Isaac-Velocity-Rough-H1-v0**. This is a locomotion task where the Unitree H1 humanoid robot must track a velocity command while navigating rough terrain.
+The task you will train is **Isaac-Velocity-Rough-H1-v0**. This is a locomotion task where the [Unitree H1](https://www.unitree.com/h1/) humanoid robot must track a velocity command while navigating rough terrain.
 
 The task details are:
 
