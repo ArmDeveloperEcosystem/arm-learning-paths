@@ -51,7 +51,7 @@ This will build a list like:
 ]
 ```
 
-### Keep only the most recent 5 rounds
+### Keep only the most recent five rounds
 
 Each new turn makes the message array longer. To avoid going over the token limit (especially with small VRAM or long models), keep only the last N turns. Use five rounds as an example (10 messages, five rounds of user + assistant)
 
@@ -304,7 +304,7 @@ Once both the STT and LLM services are live, you'll be able to speak naturally a
 
 ### Demo: Multi-turn voice chatbot with context memory on DGX Spark
 
-![img2 alt-text#center](fasterwhipser_vllm_demo2.gif "Figure 2: Full function voice-to-AI with volume bar")
+![Animated terminal session showing real-time speech-to-text transcription and AI responses in a multi-turn customer service conversation, with a volume bar at the bottom indicating live audio input levels from a microphone alt-txt#center](fasterwhipser_vllm_demo2.gif "Full function voice-to-AI with volume bar")
 
 This demo showcases a fully offline voice assistant that combines real-time transcription (via faster-whisper) and intelligent response generation (via vLLM). Running on an Arm-based DGX Spark system, the assistant captures live audio, transcribes it, and generates context-aware replies using a local language model, all in a seamless loop.
 

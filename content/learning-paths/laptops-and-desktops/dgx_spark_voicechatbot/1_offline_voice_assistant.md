@@ -24,8 +24,8 @@ Real-time audio segmentation requires reliably identifying when users start and 
 
 ## Why use Arm and DGX Spark?
 
-Arm-powered platforms like [DGX Spark](https://www.nvidia.com/en-gb/products/workstations/dgx-spark/) allow efficient parallelism: use CPU cores for audio preprocessing and whisper inference, while offloading LLM reasoning to powerful GPUs. This architecture balances throughput and energy efficiency—ideal for private, on-premises AI workloads. To understand the CPU and GPU architecture of DGX Spark, refer to [Unlock quantized LLM performance on Arm-based NVIDIA DGX Spark](/learning-paths/laptops-and-desktops/dgx_spark_llamacpp/).
+Arm-powered platforms like [DGX Spark](https://www.nvidia.com/en-gb/products/workstations/dgx-spark/) allow efficient parallelism: use CPU cores for audio preprocessing and whisper inference, while offloading LLM reasoning to powerful GPUs. This architecture balances throughput and energy efficiency-ideal for private, on-premises AI workloads. To understand the CPU and GPU architecture of DGX Spark, refer to [Unlock quantized LLM performance on Arm-based NVIDIA DGX Spark](/learning-paths/laptops-and-desktops/dgx_spark_llamacpp/).
 
 DGX Spark also supports standard USB interfaces, making it easy to connect consumer-grade microphones for development or deployment. This makes it viable for edge inference and desktop-style prototyping.
 
-In this Learning Path, you’ll build a complete, offline voice chatbot prototype using PyAudio, faster-whisper, and vLLM on an Arm-based system—resulting in a fully functional assistant that runs entirely on local hardware with no internet dependency.
+In this Learning Path, you'll build a complete, offline voice chatbot prototype using PyAudio, faster-whisper, and vLLM on an Arm-based system-resulting in a fully functional assistant that runs entirely on local hardware with no internet dependency.
