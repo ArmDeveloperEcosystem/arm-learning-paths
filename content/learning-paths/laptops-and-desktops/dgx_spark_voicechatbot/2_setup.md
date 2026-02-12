@@ -6,6 +6,8 @@ weight: 3
 layout: learningpathall
 ---
 
+## Set up faster-whisper for offline speech recognition
+
 [faster-whisper](https://github.com/SYSTRAN/faster-whisper) is a high-performance reimplementation of OpenAI Whisper, designed to significantly reduce transcription latency and memory usage. It's well suited for local and real-time speech-to-text (STT) pipelines, especially when running on CPU-only systems or hybrid CPU/GPU environments.
 
 You'll use faster-whisper as the STT engine to convert raw microphone input into structured text. At this stage, the goal is to install faster-whisper correctly and verify that it can transcribe audio reliably. Detailed tuning and integration are covered in later sections.
@@ -22,7 +24,7 @@ sudo apt install python3.12 python3.12-venv python3.12-dev -y
 sudo apt install gcc portaudio19-dev ffmpeg -y
 ```
 
-## Create and activate Python environment
+## Create and activate a Python environment
 
 In particular, [pyaudio](https://pypi.org/project/PyAudio/) (used for real-time microphone capture) depends on the PortAudio library and the Python C API. These must match the version of Python you're using.
 

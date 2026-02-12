@@ -6,6 +6,8 @@ weight: 6
 layout: learningpathall
 ---
 
+## Deploy vLLM for local language generation
+
 In the previous section, you built a complete Speech-to-Text (STT) engine using faster-whisper, running efficiently on Arm-based CPUs. Now it's time to add the next building block: a local large language model (LLM) that can generate intelligent responses from user input.
 
 You'll integrate [vLLM](https://vllm.ai/), a high-performance LLM inference engine that runs on GPU and supports advanced features such as continuous batching, OpenAI-compatible APIs, and quantized models.
@@ -18,7 +20,7 @@ vLLM is especially effective in hybrid systems like the DGX Spark, where CPU cor
 
 ### Install and launch vLLM with GPU acceleration
 
-In this section, you’ll install and launch vLLM—an optimized large language model (LLM) inference engine that runs efficiently on GPU. This component will complete your local speech-to-response pipeline by transforming transcribed text into intelligent replies.
+In this section, you'll install and launch vLLM - an optimized large language model (LLM) inference engine that runs efficiently on GPU. This component will complete your local speech-to-response pipeline by transforming transcribed text into intelligent replies.
 
 #### Install Docker and pull vLLM image
 

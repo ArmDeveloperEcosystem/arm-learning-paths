@@ -6,7 +6,9 @@ weight: 7
 layout: learningpathall
 ---
 
-Now that both faster-whisper and vLLM are working independently, it's time to connect them into a real-time speech-to-response pipeline. Your system will listen to live audio, transcribe it, and send the transcription to vLLM to generate an intelligent reply—all running locally without cloud services.
+## Integrate STT with vLLM for voice interaction
+
+Now that both faster-whisper and vLLM are working independently, it's time to connect them into a real-time speech-to-response pipeline. Your system will listen to live audio, transcribe it, and send the transcription to vLLM to generate an intelligent reply - all running locally without cloud services.
 
 ### Dual process architecture: vLLM and STT
 
@@ -280,9 +282,7 @@ If your input is too short, you'll see:
 Skipped short segment (1.32s < 2.0s)
 ```
 
-{{% notice Tip %}}
-You can fine-tune these parameters in future sections to better fit your speaking style or environment.
-{{% /notice %}}
+{{% notice Tip %}}You can fine-tune these parameters in future sections to better fit your speaking style or environment.{{% /notice %}}
 
 ## What you've accomplished and what's next
 

@@ -6,6 +6,8 @@ weight: 4
 layout: learningpathall
 ---
 
+## Build a CPU-based speech-to-text engine
+
 In this section, you'll build a real-time speech-to-text (STT) pipeline using only the CPU. Starting from a basic 10-second recorder, you'll incrementally add noise filtering, sentence segmentation, and parallel audio processing to achieve a transcription engine for Arm-based systems like DGX Spark.
 
 You'll start from a minimal loop and iterate toward a multithreaded, VAD-enhanced STT engine.
@@ -238,15 +240,15 @@ When you say a long sentence with multiple clauses, the output is similar to:
  Segment done.
 ```
 
-The result is a smoother and more accurate voice UX—particularly important when integrating with downstream LLMs in later sections.
+The result is a smoother and more accurate voice UX - particularly important when integrating with downstream LLMs in later sections.
 
 ### Demo: Real-time speech transcription on Arm CPU with faster-whisper
 
-This demo shows the real-time transcription pipeline in action, running on an Arm-based DGX Spark system. Using a USB microphone and the faster-whisper model (`medium.en`), the system records voice input, processes it on the CPU, and returns accurate transcriptions with timestamps—all without relying on cloud services.
+This demo shows the real-time transcription pipeline in action, running on an Arm-based DGX Spark system. Using a USB microphone and the faster-whisper model (`medium.en`), the system records voice input, processes it on the CPU, and returns accurate transcriptions with timestamps - all without relying on cloud services.
 
 Notice the clean terminal output and low latency, demonstrating how the pipeline is optimized for local, real-time voice recognition on resource-efficient hardware.
 
-![Real-time speech transcription demo with volume visualization#center](fasterwhipser_demo1.gif "Figure 1: Real-time speech transcription with audio volume bar")
+![Real-time speech transcription demo with volume visualization alt-txt#center](fasterwhipser_demo1.gif "Real-time speech transcription with audio volume bar")
 
 The device runs audio capture and transcription in parallel. Use `threading.Thread` to collect audio without blocking, store audio frames in a `queue.Queue`, and in the main thread, poll for new data and run STT.
 

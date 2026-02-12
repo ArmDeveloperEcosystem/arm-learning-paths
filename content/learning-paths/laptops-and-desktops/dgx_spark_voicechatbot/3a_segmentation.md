@@ -6,7 +6,9 @@ weight: 5
 layout: learningpathall
 ---
 
-After applying the previous steps—model upgrade, VAD, smart turn detection, and multi-threaded audio collection—you now have a high-quality, CPU-based local speech-to-text system.
+## Optimize speech segmentation for your environment
+
+After applying the previous steps-model upgrade, VAD, smart turn detection, and multi-threaded audio collection - you now have a high-quality, CPU-based local speech-to-text system.
 
 At this stage, the core pipeline is complete. What remains is fine-tuning: adapting the system to your environment, microphone setup, and speaking style. This flexibility is one of the key advantages of a fully local STT pipeline.
 

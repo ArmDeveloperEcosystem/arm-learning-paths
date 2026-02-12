@@ -6,11 +6,11 @@ weight: 9
 layout: learningpathall
 ---
 
+## Why multi-turn memory matters
+
 In customer service and other task-based voice interactions, conversations naturally span multiple turns. Users can provide only partial information per utterance or follow up after the assistant's prompt.
 
 To handle such situations effectively, your assistant needs short-term memory. This is a lightweight context buffer that retains recent user questions and assistant replies.
-
-## Why multi-turn memory matters
 
 Without memory, each user input is treated in isolation. This causes breakdowns like:
 
