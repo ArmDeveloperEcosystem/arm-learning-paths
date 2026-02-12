@@ -43,25 +43,37 @@ The power will guide you through any additional setup needed and supports migrat
 
 ### Install Prerequisites
 
-The ARM SoC Migration Power uses an MCP (Model Context Protocol) server to provide specialized ARM migration capabilities. This server requires uv/uvx package manager.
+The ARM SoC Migration Power uses an MCP (Model Context Protocol) server to provide specialized ARM migration capabilities. This server runs via Docker.
 
-Install uv/uvx package manager (required for ARM MCP server):
+Install Docker (required for ARM MCP server):
 
 **macOS:**
 ```bash
-brew install uv
+brew install --cask docker
 ```
 
 **Linux:**
 ```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
+# Ubuntu/Debian
+sudo apt-get update
+sudo apt-get install -y docker.io
+
+# Or use Docker's official installation script
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
 ```
+
+**Windows:**
+Download Docker Desktop from [https://www.docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop)
 
 Verify installation:
 ```bash
-uv --version
-uvx --version
+docker --version
 ```
+
+{{% notice Note %}}
+Ensure Docker is running before using the ARM SoC Migration Power. The power will automatically pull and run the ARM MCP server container when needed.
+{{% /notice %}}
 
 ### Launch AWS Graviton Instance (Source Platform)
 
