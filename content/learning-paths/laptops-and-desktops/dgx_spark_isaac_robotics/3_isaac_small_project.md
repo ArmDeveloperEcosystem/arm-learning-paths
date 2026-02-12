@@ -42,6 +42,8 @@ This script loads a robot model, steps the physics simulation, and prints joint 
 - Configuring joint actuators and control modes
 - Stepping the physics simulation and reading back joint positions and velocities
 
+![img1 alt-text#center](sample_run.gif "Figure 1: run_articulation.py")
+
 ## Step 3: Run the Cartpole environment
 
 Now run a complete RL environment. The Cartpole Direct environment is a self-contained example that you can use to verify the full Isaac Lab pipeline:
