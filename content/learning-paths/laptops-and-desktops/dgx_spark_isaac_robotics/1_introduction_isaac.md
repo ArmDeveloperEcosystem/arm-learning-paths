@@ -1,5 +1,5 @@
 ---
-title: Understand Isaac Sim and Isaac Lab for robotic workflows on DGX Spark
+title: Explore Isaac Sim and Isaac Lab for robotic workflows on DGX Spark
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Overview
 
-In this Learning Path you will build, configure, and run robotic simulation and reinforcement learning (RL) workflows using NVIDIA Isaac Sim and Isaac Lab on an Arm-based DGX Spark system. The NVIDIA DGX Spark is a personal AI supercomputer powered by the GB10 Grace Blackwell Superchip, combining an Arm-based Grace CPU with a Blackwell GPU in a compact desktop form factor.
+In this Learning Path, you will build, configure, and run robotic simulation and [reinforcement learning (RL)](https://en.wikipedia.org/wiki/Reinforcement_learning) workflows using NVIDIA Isaac Sim and Isaac Lab on an Arm-based DGX Spark system. The NVIDIA DGX Spark is a personal AI supercomputer powered by the GB10 [Grace Blackwell](https://learn.arm.com/learning-paths/laptops-and-desktops/dgx_spark_llamacpp/1_gb10_introduction/) Superchip, combining an Arm-based Grace CPU with a Blackwell GPU in a compact desktop form factor.
 
-Isaac Sim and Isaac Lab are NVIDIA's core tools for robotics simulation and learning. Together they provide an end-to-end pipeline: simulate robots in physically accurate environments, train control policies using reinforcement learning, and evaluate those policies before deploying to real hardware.
+Isaac Sim and Isaac Lab are NVIDIA's core tools for robotics simulation and reinforcement learning. Together they provide an end-to-end pipeline: simulate robots in physically accurate environments, train control policies using reinforcement learning, and evaluate those policies before deploying them to real hardware.
 
 This section introduces both tools and explains why the DGX Spark platform is an ideal development environment for these workloads.
 
@@ -45,7 +45,7 @@ Isaac Lab integrates with multiple RL libraries out of the box:
 
 | **RL Library** | **Supported Algorithms** |
 |----------------|--------------------------|
-| RSL-RL | PPO (Proximal Policy Optimization) |
+| RSL-RL | PPO ([Proximal Policy Optimization](https://en.wikipedia.org/wiki/Proximal_policy_optimization)) |
 | rl_games | PPO, LSTM, vision-based policies |
 | skrl | PPO, IPPO, MAPPO, AMP (Adversarial Motion Priors) |
 | Stable Baselines3 (sb3) | PPO |
@@ -73,7 +73,7 @@ The following describes the typical workflow when using Isaac Sim and Isaac Lab 
 1. **Define the environment**: Isaac Lab provides pre-built environment configurations for common tasks (locomotion, manipulation, navigation). You can also create custom environments.
 2. **Launch the simulation**: Isaac Sim initializes the physics engine, loads robot models (URDF/USD), and sets up the scene on the Blackwell GPU.
 3. **Train a policy**: Isaac Lab's training scripts use RL algorithms (such as PPO via RSL-RL) to optimize a neural network policy. The GPU runs thousands of parallel environments simultaneously.
-4. **Evaluate and iterate**: Trained policies can be tested in simulation with visualization enabled, or exported for deployment to real hardware.
+4. **Evaluate and iterate**: Trained policies can be tested in simulation with visualization enabled or exported for deployment to real hardware.
 
 The entire pipeline runs locally on DGX Spark. Headless mode (without visualization) maximizes GPU utilization for training, while visualization mode lets you inspect robot behavior interactively.
 
@@ -88,9 +88,9 @@ Isaac Lab ships with a comprehensive set of pre-built environments across severa
 | Contact-rich Manipulation | Peg insertion, Gear meshing, Nut threading | Precision assembly tasks with the Franka robot |
 | Locomotion | Anymal B/C/D, Unitree A1/Go1/Go2/H1/G1, Spot, Digit | Velocity tracking on flat and rough terrain for quadrupeds and humanoids |
 | Navigation | Anymal C navigation | Point-to-point navigation with heading control |
-| Multi-agent | Cart-Double-Pendulum, Shadow-Hand-Over | Tasks requiring coordination between multiple agents |
+| Multi-agent | Cart-Double-Pendulum, Shadow-Hand-Over | Tasks that require coordination among multiple agents |
 
-You can list all available environments on your installation by running:
+You will be able to list all available environments after setting up Isaac Lab in the next section. The following command will be available once installation is complete:
 
 ```bash
 ./isaaclab.sh -p scripts/environments/list_envs.py
@@ -106,7 +106,7 @@ For the complete list of environments, see the [Isaac Lab Available Environments
 
 ## What you will accomplish in this Learning Path
 
-In the sections that follow you will:
+In the learning path that follow you will:
 
 1. **Set up Isaac Sim and Isaac Lab** on your DGX Spark by building both tools from source
 2. **Run a basic robot simulation** in Isaac Sim and interact with it through Python

@@ -42,7 +42,9 @@ This script loads a robot model, steps the physics simulation, and prints joint 
 - Configuring joint actuators and control modes
 - Stepping the physics simulation and reading back joint positions and velocities
 
-## Step 3: Run the Cartpole base environment
+![img1 alt-text#center](sample_run.gif "Figure 1: run_articulation.py")
+
+## Step 3: Run the Cartpole environment
 
 Now run a complete environment that combines scene, action, observation, and event managers. The `create_cartpole_base_env.py` tutorial creates a Cartpole base environment and applies random actions:
 
