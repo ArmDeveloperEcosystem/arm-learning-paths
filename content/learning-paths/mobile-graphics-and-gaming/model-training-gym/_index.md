@@ -27,6 +27,7 @@ tools_software_languages:
     - PyTorch
     - Jupyter Notebook
     - Vulkan
+    - NX
 operatingsystems:
     - Linux
 further_reading:

@@ -40,7 +40,7 @@ further_reading:
         type: documentation
     - resource:
         title: Ampere Altra Max Delivers Sustainable High-Resolution H.265 Encoding
-        link: https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/ampere-altra-max-delivers-sustainable-high-resolution-h-265-video-encoding-without-compromise
+        link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/ampere-altra-max-delivers-sustainable-high-resolution-h-265-video-encoding-without-compromise
         type: blog
     - resource:
         title: Optimized Video Encoding with FFmpeg on AWS Graviton Processors
@@ -48,7 +48,7 @@ further_reading:
         type: blog
     - resource:
         title: OCI Ampere A1 Compute instances can significantly reduce video encoding costs versus modern CPUs
-        link: https://community.arm.com/arm-community-blogs/b/operating-systems-blog/posts/oracle-cloud-infrastructure-arm-based-a1
+        link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/oracle-cloud-infrastructure-arm-based-a1
         type: blog
 
 ### FIXED, DO NOT MODIFY

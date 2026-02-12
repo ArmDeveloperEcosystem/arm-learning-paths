@@ -30,7 +30,7 @@ Arm has a number of content channels where you can access Arm technical content 
 
 * [Product Documentation and reference manuals](https://developer.arm.com/documentation) are the trusted source of detailed information for developing on the Arm architecture.
 
-* [Blogs](https://www.community.arm.com) offer news and announcements for recent and upcoming Arm activities.
+* [Blogs](https://developer.arm.com) offer news and announcements for recent and upcoming Arm activities.
 
 * [Videos](https://www.youtube.com/c/armsoftwaredevelopers) provide talks and demos of Arm tools and other software topics.
 

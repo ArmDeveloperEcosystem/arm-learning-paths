@@ -26,7 +26,7 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-[OpenVSCode Server](https://www.gitpod.io/blog/openvscode-server-launch) is a version of VS Code which runs on any computer and can be accessed using a browser. The project was initiated by Gitpod and is available on [GitHub](https://github.com/gitpod-io/openvscode-server/)
+OpenVSCode Server is a version of VS Code which runs on any computer and can be accessed using a browser. The project was initiated by Gitpod and is available on [GitHub](https://github.com/gitpod-io/openvscode-server/)
 
 OpenVSCode Server supports the Arm architecture and is useful for developing on a remote Arm machine. It can be used on cloud instances, without requiring a Linux desktop to be installed. It's also useful when developing on a local Arm machine with a Linux subsystem, such as Windows Subsystem for Linux (WSL), ChromeOS with Linux enabled, or Multipass.
 

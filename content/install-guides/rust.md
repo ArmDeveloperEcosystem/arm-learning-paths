@@ -131,7 +131,7 @@ cargo version
 This command will print the version:
 
 ```output
-cargo 1.74.1 (ecb9851af 2023-10-18)
+cargo 1.93.0 (083ac5135 2025-12-15)
 ```
 
 You are ready to use the Rust programming language on your Arm Linux machine.
@@ -149,8 +149,7 @@ cargo run
 The `cargo run` command outputs:
 
 ```output
-   Compiling hello v0.1.0 (/hello)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.44s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.01s
      Running `target/debug/hello`
 Hello, world!
 ```

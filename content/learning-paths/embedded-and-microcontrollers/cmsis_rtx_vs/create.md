@@ -13,7 +13,7 @@ For more information on the latest update, see the [CMSIS v6 is here](https://co
 
 You will use **[Keil Studio for VS Code](/install-guides/keilstudio_vs)** in this Learning Path.
 
-This Learning Path is written for the supplied **Cortex-M4 Fixed Virtual Platform (FVP)**, but you can run it on any of the 10,000+ devices supported by [CMSIS-Pack](https://www.open-cmsis-pack.org/).
+This Learning Path is written for the supplied **Cortex-M4 Fixed Virtual Platform (FVP)**, but you can run it on any of the 10,000+ devices supported by [CMSIS-Pack](https://open-cmsis-pack.github.io/Open-CMSIS-Pack-Spec/main/html/index.html/).
 
 {{% notice  Note%}}
 If using `Arm Keil μVision IDE` or Arm Development Studio, refer to the [Build an RTX5 RTOS application with Keil μVision](/learning-paths/embedded-and-microcontrollers/cmsis_rtx/) guide.

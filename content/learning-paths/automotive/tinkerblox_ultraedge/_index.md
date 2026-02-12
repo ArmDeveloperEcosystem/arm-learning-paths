@@ -5,17 +5,15 @@ draft: true
 cascade:
     draft: true
 
-minutes_to_complete: 60
+minutes_to_complete: 60 
 
 who_is_this_for: Business teams targeting lower TCO of computing infrastructure through higher utilization of CPU and/or CPU-GPU install bases. R&D and Engineering teams looking for most efficient use of CPU/CPU-GPU infrastructure. Innovation teams looking to maximize edge resources to host new-age AI on constrained environments. Development teams looking at alternative packaging tech – run-time environments to build next generation workloads.
 
 learning_objectives:
-  -   Understand the layered architecture of UltraEdge  **core**, **boost**, and **prime**.
+  -   Understand the layered architecture of UltraEdge **core**, **boost**, and **prime**
   -   Build applications using the **UltraEdge MicroStack**
-  -   Deploy the MicroPacs on **Linux-based compute systems** and scale to
-      cloud or data-centre environments.
-  -   Optimize performance for **edge-cloud scenarios**, enabling near
-      real-time data flows.
+  -   Deploy the MicroPacs on **Linux-based compute systems** and scale to cloud or data-center environments
+  -   Optimize performance for **edge-cloud scenarios**, enabling near real-time data flows
 
 
 prerequisites:
@@ -23,7 +21,7 @@ prerequisites:
   -   Understanding of **container runtimes** (containerd) and **CNI
       networking**.
   -   Basic knowledge of **communication protocols** (MQTT, HTTP, etc.).
-  -   (Optional but helpful) dFamiliarity with **edge-cloud
+  -   (Optional but helpful) Familiarity with **edge-cloud
       architectures** and **data-flow orchestration**.
 
 author: Tinkerblox

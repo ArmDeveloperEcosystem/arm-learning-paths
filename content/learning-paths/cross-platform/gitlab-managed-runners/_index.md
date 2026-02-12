@@ -1,22 +1,24 @@
 ---
-title: Build a Simple CI/CD pipeline with GitLab-Hosted Runners
+title: Build a CI/CD pipeline using GitLab-hosted Arm runners
 
 draft: true
 cascade:
     draft: true
 
-minutes_to_complete: 40
 
-who_is_this_for: This is an Introductory topic for DevOps professionals who are looking to build a CI/CD pipeline with GitLab on Google Axion using GitLab-Hosted runners. 
+minutes_to_complete: 30
+
+who_is_this_for: This is an introductory topic for DevOps engineers who want to build CI/CD pipelines on Arm-based infrastructure using GitLab-hosted runners.
 
 learning_objectives: 
-    - Create a GitLab Project
-    - Understand basic pipeline script structure and how to use it
-    - Build and test a simple CI/CD pipeline using Gitlab-hosted runners which will build and produce a tiny docker image from a simple "Hello world" "C" language program. The image will be built to run on Arm64 machines and will be saved in Gitlab Registery to be used later. 
+    - Create a GitLab project with CI/CD configuration
+    - Configure pipeline stages to use Arm64 runners
+    - Build and containerize applications for Arm64 architecture
+    - Store container images in GitLab Container Registry
     
 
 prerequisites:
-    - A valid GitLab account
+    - A GitLab account (free tier includes Arm64 runner access)
 
 author: Mohamed Ismail
 
@@ -26,7 +28,7 @@ subjects: CI-CD
 cloud_service_providers: Google Cloud
 
 armips:
-    - Neoverse-N1
+    - Neoverse
 
 tools_software_languages:
     - GitLab
@@ -45,8 +47,16 @@ shared_between:
 
 further_reading:
     - resource:
-        title: GitLab-hosted runners 
-        link: https://docs.gitlab.com/ci/runners/hosted_runners/
+        title: GitLab CI/CD documentation 
+        link: https://docs.gitlab.com/ee/ci/
+        type: documentation
+    - resource:
+        title: GitLab-hosted Arm runners
+        link: https://docs.gitlab.com/ci/runners/hosted_runners/linux.html
+        type: documentation
+    - resource:
+        title: Docker install guide
+        link: https://learn.arm.com/install-guides/docker/
         type: documentation
 
 

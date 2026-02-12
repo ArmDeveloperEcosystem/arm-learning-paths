@@ -33,7 +33,7 @@ further_reading:
         type: documentation
     - resource:
         title: Delivering the best H.265 video experience on Arm Neoverse N2 Platform
-        link: https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/h265-video-on-neoverse-n2
+        link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/h265-video-on-neoverse-n2
         type: blog
     - resource:
         title: Optimized Video Encoding with FFmpeg on AWS Graviton Processors
@@ -41,10 +41,11 @@ further_reading:
         type: blog
     - resource:
         title: OCI Ampere A1 Compute instances can significantly reduce video encoding costs versus modern CPUs
-        link: https://community.arm.com/arm-community-blogs/b/operating-systems-blog/posts/oracle-cloud-infrastructure-arm-based-a1
+        link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/oracle-cloud-infrastructure-arm-based-a1
         type: blog
 
 
 weight: 1
 layout: learningpathall
+learning_path_main_page: "yes" 
 ---

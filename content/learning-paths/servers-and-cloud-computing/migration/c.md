@@ -43,8 +43,14 @@ Neoverse-N1 | `-mcpu=neoverse-n1` | GCC-9+ | Clang/LLVM 10+
 Neoverse-V1 | `-mcpu=neoverse-v1` | GCC-11+ | Clang/LLVM 12+
 Neoverse-N2 | `-mcpu=neoverse-n2` | GCC-11+ | Clang/LLVM 12+
 Neoverse-V2 | `-mcpu=neoverse-v2` | GCC-13+    | Clang/LLVM 16+
+Neoverse-N3 | `-mcpu=neoverse-n3` | GCC-15+ | Clang/LLVM 19+
+Neoverse-V3 | `-mcpu=neoverse-v3` | GCC-15+    | Clang/LLVM 19+
 
-The Neoverse-N1 option `-mcpu=neoverse-n1` is available in GCC-7 on Amazon Linux2.
+{{% notice Note %}}
+The Neoverse N1 option `-mcpu=neoverse-n1` is available in GCC-7 on Amazon Linux2.
+
+The `-mcpu=neoverse-n3` and `-mcpu=neoverse-v3` options are also available in GCC 14.3.0.
+{{% /notice %}}
 
 There are other options like `-march` (ISA version) and `-mtune` (specific processor implementation). These are discussed in the [GCC Arm options documentation](https://gcc.gnu.org/onlinedocs/gcc/ARM-Options.html). However, in general, only `-mcpu` should be used. `-mcpu` is basically a single option that combines `-march` and `-mtune` together. Last, keep in mind that if an application targets an older processor, it will likely be able to execute on a newer processor (less some optimizations for the newer processor). However, if the application targets a newer processor, it might not execute on an older processor. This is true for any processor architecture, not just Arm.
 

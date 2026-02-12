@@ -1,23 +1,26 @@
 ---
-title: RUNNING Setup/Installation - UltraEdge HPC-I execution fabric for AI & mixed workloads
+title: Running UltraEdge HPC-I execution fabric for AI & mixed workloads
 
-weight: 5
+weight: 6
 
 layout: "learningpathall"
 ---
 
-{{% notice Note %}}
-REMOVE ME:  We probably need to come up with an actual "exercise" here to exercise tinkerblox... below is only a reference to the CLI commands... what do we want the user to explore/experiment and see with tinkerblox? 
-{{% /notice %}}
 
-### Tinkerblox CLI Usage Guide
+This section provides a hands-on walkthrough of the Tinkerblox CLI to help you explore how microservices are deployed, managed, and monitored on the UltraEdge platform. The exercises focus on inspecting system state, installing a sample microservice, and observing its runtime behavior.
+
+To practice the commands below, install and run a sample microservice on your device. Use below git link find a mpac file(only for practice purpose).
+
+https://github.com/Tinkerbloxsupport/arm-learning-path-support/blob/main/static/Sample_ms/dte_nn.mpac
+
+### Tinkerblox CLI usage guide
 
 Tinkerblox Command Line Interface for managing the Edge Agent and
 microservices.
 
 **Usage:**
 
-    tinkerblox-cli [OPTIONS] <COMMAND>
+        tinkerblox-cli [OPTIONS] <COMMAND>
 
 **Commands:**
 
@@ -32,21 +35,23 @@ microservices.
 
 ### Usage
 
-#### Check CLI Connection Status
+#### Check CLI connection status
 
+```bash
     sudo tinkerblox-cli status
+```
 
 *Displays whether the CLI is connected to the Edge Agent.*
 
-#### Microservice Management
+#### Microservice management
 
-Manage microservices running on the Edge platform.
+Manage microservices running on the Edge platform. 
 
 **Syntax:**
 
-    sudo tinkerblox-cli microboost <command> [options]
+        sudo tinkerblox-cli microboost <command> [options]
 
-##### Available Commands
+##### Available commands
 
 * **install**
     Installs a microservice. You must provide the path to the MPAC file as an argument.
@@ -78,70 +83,65 @@ Manage microservices running on the Edge platform.
 
         sudo tinkerblox-cli microboost uninstall <id>
 
-#### Diagnostics Management
+#### Diagnostics management
 
 Run diagnostics on the Edge platform.
 
 **Syntax:**
 
-    sudo tinkerblox-cli diagnostics <command>
+        sudo tinkerblox-cli diagnostics <command>
 
-**full**  
-Run complete system diagnostics and summarize results
+**full** : Run complete system diagnostics and summarize results
 
-    sudo tinkerblox-cli diagnostics full
+        sudo tinkerblox-cli diagnostics full
 
-**system**  
-Check CPU, memory, and OS-level health
+**system** : Check CPU, memory, and OS-level health
 
-    sudo tinkerblox-cli diagnostics system
+        sudo tinkerblox-cli diagnostics system
 
-**network**  
-Verify network connectivity and endpoint reachability
+**network** : Verify network connectivity and endpoint reachability
 
-    sudo tinkerblox-cli diagnostics network
+        sudo tinkerblox-cli diagnostics network
 
-**filesystem**  
-Validate database/filesystem connectivity and integrity
+**filesystem** : Validate database/filesystem connectivity and integrity
 
-    sudo tinkerblox-cli diagnostics filesystem
+        sudo tinkerblox-cli diagnostics filesystem
 
-**engine**  
-Check engine microboost neuroboost
+**engine** : Check engine microboost neuroboost
 
-    sudo tinkerblox-cli diagnostics engine
+        sudo tinkerblox-cli diagnostics engine
 
 ## Troubleshooting
 
-{{% notice Note %}}
-REMOVE ME:  We probably need to outline more where the errors might be seen while running a specific task/exercise...  
-{{% /notice %}}
+ The following sections describe common errors you may encounter while running CLI commands or deploying microservices, along with guidance on how to resolve them. These are general errors and are not limited to any specific scenario; they may occur while executing commands or managing the system.
 
-**Permission Denied**
+Permission denied
 
 -   Ensure `sudo` privileges.
 -   Check directory ownership and permissions.
 -   Verify overlay filesystem support.
 
-**Directory Creation Failed**
+Directory creation failed
 
 -   Check disk space.
 -   Verify parent directory permissions.
 -   Ensure the path is valid.
 
-**Cross-Architecture Build Issues**
+Cross-architecture build issues
 
-{{% notice Note %}}
-REMOVE ME: are there any tel-tale signs that my issue is a cross-architecture build issue?  Is this a Yocto build issue?
-{{% /notice %}}
+Cross-architecture issues typically occur when binaries are built for a different CPU architecture than the host system. They are not related to yocto build issues. 
 
 -   Verify QEMU installation:
 
+```bash
         qemu-aarch64-static --version
+```
 
 -   Check binfmt registration:
 
+```bash
         ls /proc/sys/fs/binfmt_misc/
+```
 
 -   Ensure the target architecture is enabled.
 

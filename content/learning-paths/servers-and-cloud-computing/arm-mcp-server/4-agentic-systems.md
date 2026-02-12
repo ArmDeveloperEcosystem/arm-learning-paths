@@ -1,16 +1,16 @@
 ---
-title: Configure AI agents to automate Arm migration workflows
+title: Configure other AI agents to automate Arm migration workflows
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Set up an agent workflow
+## Set up other agent workflows
 
-Different AI coding tools provide different mechanisms for defining persistent instructions, such as prompt files or configuration documents. While the configuration details vary by tool, the goal remains the same: provide the AI with clear, structured instructions so it can use the Arm MCP Server effectively and carry out multi-step migration workflows autonomously.
+In the previous section, you configured an Arm Cloud Migration Agent in GitHub Copilot. Other AI coding tools provide their own mechanisms for defining persistent instructions, such as steering documents or prompt files. While the configuration details vary by tool, the goal remains the same: provide the AI with clear, structured instructions so it can use the Arm MCP Server effectively and carry out multi-step migration workflows autonomously.
 
-This section shows how to set up Arm migration workflows in popular agentic AI systems. You'll see that the core migration logic stays consistent across platforms, but each tool has its own format for defining these instructions.
+This section shows how to set up the same Arm migration workflow in other popular agentic AI systems. The core migration logic stays consistent across platforms, but each tool has its own format for defining these instructions.
 
 {{% notice Note %}}The migration instructions below implement the same workflow shown in the previous section. If you skipped that section, you can start here directly. Each AI tool simply wraps the same core instructions in a different format.{{% /notice %}}
 
@@ -42,6 +42,8 @@ Pitfalls to avoid:
 
 * Don't confuse a software version with a language wrapper package version. For example, when checking the Python Redis client, check the Python package name "redis" rather than the Redis server version.
 * NEON lane indices must be compile-time constants, not variables.
+* If you're unsure about Arm equivalents, use knowledge_base_search to find documentation.
+* Be sure to find out from the user or system what the target machine is, and use the appropriate intrinsics. For instance, if neoverse (Graviton, Axion, Cobalt) is targeted, use the latest SME/SME2.
 
 If you have good versions to update for the Dockerfile, requirements.txt, and other files, change them immediately without asking for confirmation.
 
@@ -78,6 +80,8 @@ Pitfalls to avoid:
 
 * Don't confuse a software version with a language wrapper package version. For example, when checking the Python Redis client, check the Python package name "redis" rather than the Redis server version.
 * NEON lane indices must be compile-time constants, not variables.
+* If you're unsure about Arm equivalents, use knowledge_base_search to find documentation.
+* Be sure to find out from the user or system what the target machine is, and use the appropriate intrinsics. For instance, if neoverse (Graviton, Axion, Cobalt) is targeted, use the latest SME/SME2.
 
 If you have good versions to update for the Dockerfile, requirements.txt, and other files, change them immediately without asking for confirmation.
 
@@ -92,12 +96,12 @@ Invoke the prompt with:
 codex /prompts:arm-migrate
 ```
 
-## Other AI assistants
+## Additional AI assistants
 
-You now have a general understanding of how agentic systems support persistent migration instructions. For other AI coding assistants, consult their documentation to learn how to define equivalent prompt files or configuration mechanisms and adapt the same Arm migration workflow.
+You now have a general understanding of how agentic systems support persistent migration instructions. For AI coding assistants beyond GitHub Copilot, Kiro, and OpenAI Codex, consult their documentation to learn how to define equivalent prompt files or configuration mechanisms and adapt the same Arm migration workflow.
 
 ## What you've accomplished and what's next
 
-In this section, you've learned how to configure Arm migration workflows in different agentic AI systems including Kiro and OpenAI Codex. You've seen how the core migration logic remains consistent across platforms while each tool uses its own format for defining persistent instructions.
+In this section, you've learned how to configure Arm migration workflows in other agentic AI systems beyond GitHub Copilot, including Kiro and OpenAI Codex. You've seen how the core migration logic remains consistent across platforms while each tool uses its own format for defining persistent instructions.
 
 You're now equipped to use the Arm MCP Server with your preferred AI coding assistant to automate the migration of x86 applications to Arm-based cloud instances.

@@ -1,37 +1,35 @@
 ---
-title: "Create a New Project/Repo in GitLab"
-weight: 10
+title: Create a GitLab project
+weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Where Should you Start?
+Before you begin, log in to your [GitLab account](https://gitlab.com/) or create a new one.
 
-Start by logging into your GitLab account or create a new one in the [Gitlab](https://gitlab.com/) main page.
-
-You will need to a new project/repo that will contain all your project files including your **`CI/CD`** pipeline configuration file. 
-
-You can also choose to use any previously created projects in your Gitlab account. Simply open your previously created project, If that is the case then skip the rest of the steps in the current page and move to the next steps in this tutorial.
-
-## Create a New Project in Gitlab
-
-1. From the Home page, Click on the **`Projects`** icon from the menu on the left hand side panel as the image below.  
-
-2. Click on the **`New Project`** button on the top right hand side as the image below.
-![Gitlab-Projects #center](_images/gitlab-projects.png)
-
-3. You will get a new screen like the image below with multiple options. You can choose any of the 2 options highlighted in red from the image below.
+You need a GitLab project to store your application code and CI/CD configuration. You can either create a new project or use an existing one.
 
 {{% notice Note %}}
-If you chose option 2 then you will need to choose the **`GitLab CI/CD components`** option from the list of templates.
-{{%/notice%}}
+If you're using an existing project, skip to the next section.
+{{% /notice %}}
+
+## Create a new project
+
+Navigate to **Projects** in the left sidebar and select **New Project**:
+
+![Gitlab-Projects #center](_images/gitlab-projects.png)
+
+Choose **Create blank project** or **Create from template** (select **GitLab CI/CD components** if using a template):
 
 ![New-Project #center](_images/new-project.png)
 
-4. Regardles of which option you choose, you will get a screen like the image below where you will need to fill-in the fields highlighted in red. The first field is the **`Project Name`** which you can name it **`CI-CD Runner`**. In the second field you need to choose any option from the **`Project Url`** list then click on the  **`Create Project`** button at the end of the page.
-![Project-Info #center](_images/project-info.png) 
+Provide a project name (for example, `arm-runner-demo`) and select your preferred project URL. Select **Create Project**:
 
-##### **If you did everything correctly then you should get a screen like the one in the image below.**
+![Project-Info #center](_images/project-info.png)
+
+Your new project is ready:
+
 ![Project-Done #center](_images/project-done.png)
 
+With your project created, you can now add application files and configure the CI/CD pipeline to use Arm64 runners.

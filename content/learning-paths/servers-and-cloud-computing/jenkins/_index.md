@@ -1,9 +1,5 @@
 ---
-title: Deploy Jenkins on Arm cloud platforms
-
-draft: true
-cascade:
-    draft: true
+title: Deploy and validate Jenkins on Arm cloud servers
 
 minutes_to_complete: 30   
 

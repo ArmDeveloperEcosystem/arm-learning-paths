@@ -1,5 +1,5 @@
 ---
-title: Get started with Geekbench on Arm
+title: Run Geekbench on Arm Linux systems
 description: Run Geekbench on Arm systems to benchmark CPU performance, interpret the results, and compare different Arm configurations.
 
 minutes_to_complete: 15
@@ -13,7 +13,7 @@ learning_objectives:
 prerequisites:
 - An Arm computer running Linux. You can use a cloud instance, refer to [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/).
 
-author: Ronan Synnott
+author: Jason Andrews
 
 skilllevels: Introductory
 

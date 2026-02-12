@@ -8,23 +8,25 @@ layout: learningpathall
 
 ## Install Django and dependencies
 
-After connecting to your SUSE Linux Enterprise Server (SLES) VM using SSH, you'll update your system, install Python 3.11, and set up a virtual environment for your Django project.
+After connecting to your SUSE Linux Enterprise Server (SLES) VM using SSH, you'll install the Google Cloud CLI, update your system, install Python 3.11, and set up a virtual environment for your Django project.
 
-## Update your system
+## Prepare the system
 
-Begin by refreshing your package list and upgrading installed software to ensure you have the latest versions and security patches:
+Update the system packages and install dependencies:
 
-```console
+```bash
 sudo zypper refresh
 sudo zypper update -y
+sudo zypper install -y curl git tar gzip
 ```
 
-## Install Python 3.11 and development tools
+## Install Python 3.11
 
-Django requires Python 3.10 or later. You'll install Python 3.11 along with pip (Python's package manager) and essential build tools needed for compiling Python packages:
+Install Python 3.11:
 
-```console
-sudo zypper install -y python311 python311-pip python311-devel git gcc make
+```bash
+sudo zypper install -y python311
+which python3.11
 ```
 
 Verify that Python and pip are installed correctly:
@@ -41,11 +43,57 @@ Python 3.11.10
 pip 22.3.1 from /usr/lib/python3.11/site-packages/pip (python 3.11)
 ```
 
+## Install Google Cloud CLI (gcloud)
+
+The Google Cloud CLI is required to authenticate with GCP and allow your Django application VM to interact with Google Cloud services such as GKE, Cloud SQL, Artifact Registry, Memorystore, and to build, deploy, and operate the Django platform.
+
+Download and extract the Google Cloud SDK:
+
+```bash
+wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-460.0.0-linux-arm.tar.gz
+tar -xvf google-cloud-sdk-460.0.0-linux-arm.tar.gz
+```
+
+Install gcloud:
+
+```bash
+./google-cloud-sdk/install.sh
+```
+
+After installation completes, exit and reconnect to apply the PATH changes:
+
+```bash
+exit
+```
+
+## Initialize gcloud
+
+Authenticate and configure the Google Cloud CLI:
+
+```bash
+gcloud init
+```
+
+During initialization, select **Login with a new account**. You'll be prompted to authenticate using your browser and receive an auth code to copy back. Select the project you want to use and choose default settings when unsure.
+
+## Verify authentication
+
+```bash
+gcloud auth list
+```
+
+The output is similar to:
+```output
+Credentialed Accounts
+ACTIVE  ACCOUNT
+*       <PROJECT_NUMBER>-compute@developer.gserviceaccount.com
+```
+
 ## Create a project directory and virtual environment
 
 Create a dedicated directory for your Django project and set up a Python virtual environment to isolate your project's dependencies:
 
-```console
+```bash
 mkdir ~/myproject && cd ~/myproject
 python3.11 -m venv venv
 source venv/bin/activate
@@ -53,13 +101,13 @@ source venv/bin/activate
 
 The `python3.11 -m venv venv` command creates an isolated Python environment named `venv` inside your project folder. Running `source venv/bin/activate` activates this environment.
 
-Once activated, your command prompt displays `(venv)` at the beginning, indicating you're working inside an isolated Python environment where all packages are isolated from your system Python installation.
+Once activated, your command prompt displays `(venv)` at the beginning, indicating that you're working inside an isolated Python environment.
 
 ## Upgrade pip and install Django
 
 With your virtual environment active, upgrade pip to the latest version:
 
-```console
+```bash
 python3 -m pip install --upgrade pip
 ```
 
@@ -70,8 +118,8 @@ python3 -m pip install django gunicorn
 ```
 
 This installs:
-- **Django** — the web framework for building your application
-- **Gunicorn** — a production-ready WSGI (Web Server Gateway Interface) server for running Django applications
+- **Django** - the web framework for building your application
+- **Gunicorn** - a production-ready WSGI (Web Server Gateway Interface) server for running Django applications
 
 Verify that Django is installed correctly:
 
@@ -82,9 +130,14 @@ django-admin --version
 The output is similar to:
 
 ```output
-5.2.8
+5.2.10
 ```
 
-## Summary and what's next
+## What you've accomplished and what's next
 
-You have successfully installed Django and all required dependencies on your Arm-based VM. Your environment is now ready for creating Django projects and applications!
+In this section, you installed:
+- Google Cloud CLI for GCP service management
+- Python 3.11 with a virtual environment
+- Django and Gunicorn for web application development
+
+Next, you'll verify Django is working by creating a basic project and running the development server.

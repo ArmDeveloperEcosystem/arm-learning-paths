@@ -1,6 +1,6 @@
 ---
 title: Benchmark Django application performance on Arm
-weight: 7
+weight: 10
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -14,176 +14,196 @@ This section guides you through benchmarking your Django web application using G
 
 To begin, if your Django development server is still running, stop it using `Ctrl + C`.
 
-ApacheBench (`ab`) is a command-line tool that simulates multiple HTTP requests to measure web server performance. Install it using the following:
+Install ApacheBench to measure your application's performance under load.
 
-```console
+```bash
 sudo zypper install -y apache2-utils
 ```
-## Verify installation
 
-This command confirms ApacheBench is correctly installed and available system-wide:
+Verify the installation:
 
-```console
+```bash
 ab -V
 ```
 
-The output displays the ApacheBench version, confirming successful installation.
+You should see the ApacheBench version information displayed.
+
+
+ApacheBench (`ab`) is a command-line tool that simulates multiple HTTP requests to measure web server performance. Install it using the following:
+
+```bash
+sudo zypper install -y apache2-utils
+```
+
+### Verify installation
+
+Confirm ApacheBench is correctly installed and available.
+
+```bash
+ab -V
+```
+
+The output displays the ApacheBench version.
 
 ## Install and configure Gunicorn
 
 Before benchmarking your Django application, you need to install Gunicorn, a production-grade WSGI HTTP server. Gunicorn provides better performance characteristics than Django's development server and more accurately represents real-world deployment scenarios.
 
-Install both Django and Gunicorn using pip:
+### Install both Django and Gunicorn using pip
 
-```console
+```bash
 python3 -m pip install django gunicorn
 ```
 
-This command installs two essential packages. Django is the Python web framework you're benchmarking, while Gunicorn serves as a high-performance WSGI HTTP server that handles multiple concurrent requests efficiently. Unlike Django's built-in development server, Gunicorn is designed for production workloads and provides the multi-worker architecture needed for accurate performance testing.
-
+This installs Django and Gunicorn. Gunicorn is a production-grade WSGI HTTP server that handles multiple requests at the same time. Unlike Django's built-in development server, Gunicorn uses multiple workers to process requests efficiently, which gives you more accurate performance measurements.
 
 ## Run Django with Gunicorn
 
-Start your Django application using Gunicorn:
+Your Django application runs with Gunicorn inside GKE. The Gunicorn server is deployed inside your Kubernetes Pods and exposed through a Kubernetes Service and LoadBalancer. You run the benchmark against the external IP of the GKE service.
 
-```console
-gunicorn myproject.wsgi:application --bind 0.0.0.0:8000 --workers 4 &
-```
-
-This command starts Gunicorn with four worker processes to handle concurrent requests. Replace `myproject` with your Django project's actual name. The `--bind 0.0.0.0:8000` flag makes the server accessible on port 8000 from any network interface, while the `&` runs the process in the background so you can continue using your terminal.
-
-{{% notice Note %}}
-Ensure your VM's firewall allows inbound traffic on port 8000. See the firewall setup section if you haven't already configured this.
-{{% /notice %}}
+{{% notice Note %}}Ensure your GKE cluster and LoadBalancer are properly configured. If you haven't set up the cluster yet, refer to the previous sections for GKE deployment and service configuration.{{% /notice %}}
 
 ## Run the benchmark
+
 Use ApacheBench to test your Django server with simulated traffic:
 
-```console
-ab -n 1000 -c 10 http://127.0.0.1:8000/
+```bash
+ab -n 5000 -c 100 http://<external_IP_of_the_GKE_service>/healthz/
 ```
 
-This sends 1000 requests using 10 concurrent connections to your local server's root URL. The `-n` flag sets the total number of requests, while `-c` controls how many run simultaneously.
+This command sends 5000 requests with 100 concurrent connections to your Django REST endpoint.
 
-The output is similar to:
+Parameters explained:
+- `-n 5000`: total number of requests to send
+- `-c 100`: number of concurrent requests
+- `http://<external_IP_of_the_GKE_service>/healthz/`: your Django health check endpoint
+
+Replace `<external_IP_of_the_GKE_service>` with your actual GKE LoadBalancer IP address.
+
+The benchmark runs for a few seconds and displays results similar to:
 
 ```output
-This is ApacheBench, Version 2.3
-Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
-Licensed to The Apache Software Foundation, http://www.apache.org/
-
-Benchmarking 127.0.0.1 (be patient)
-Completed 100 requests
-Completed 200 requests
-Completed 300 requests
-Completed 400 requests
-Completed 500 requests
-Completed 600 requests
-Completed 700 requests
-Completed 800 requests
-Completed 900 requests
-Completed 1000 requests
-Finished 1000 requests
-
 Server Software:        gunicorn
-Server Hostname:        127.0.0.1
-Server Port:            8000
+Server Hostname:        34.132.110.81
+Server Port:            80
 
-Document Path:          /
-Document Length:        41 bytes
+Document Path:          /healthz/
+Document Length:        15 bytes
 
-Concurrency Level:      10
-Time taken for tests:   0.104 seconds
-Complete requests:      1000
+Concurrency Level:      100
+Time taken for tests:   0.357 seconds
+Complete requests:      5000
 Failed requests:        0
-Total transferred:      280000 bytes
-HTML transferred:       41000 bytes
-Requests per second:    9651.21 [#/sec] (mean)
-Time per request:       1.036 [ms] (mean)
-Time per request:       0.104 [ms] (mean, across all concurrent requests)
-Transfer rate:          2639.00 [Kbytes/sec] received
+Total transferred:      1650000 bytes
+HTML transferred:       75000 bytes
+Requests per second:    14001.88 [#/sec] (mean)
+Time per request:       7.142 [ms] (mean)
+Time per request:       0.071 [ms] (mean, across all concurrent requests)
+Transfer rate:          4512.32 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    0   0.1      0       1
-Processing:     0    1   0.3      1       4
-Waiting:        0    1   0.3      1       3
-Total:          0    1   0.4      1       5
+Connect:        0    0   0.2      0       2
+Processing:     1    6   4.7      6      32
+Waiting:        0    6   4.7      6      32
+Total:          1    7   4.8      6      34
 
 Percentage of the requests served within a certain time (ms)
-  50%      1
-  66%      1
-  75%      1
-  80%      1
-  90%      1
-  95%      2
-  98%      2
-  99%      3
- 100%      5 (longest request)
+  50%      6
+  66%      9
+  75%     10
+  80%     11
+  90%     11
+  95%     11
+  98%     16
+  99%     28
+ 100%     34 (longest request)
 ```
-## Stop the Gunicorn server
-
-After reviewing the benchmark results, stop the Gunicorn server running in the background:
-
-```bash
-fg
-```
-
-This brings the background Gunicorn process to the foreground. Then press `Ctrl+C` to stop it.
-
 ## Interpret your benchmark results
 
-The ApacheBench output provides key performance metrics that help you evaluate your Django application's capabilities on Arm. Here's what each metric tells you:
+The ApacheBench output provides key performance metrics for evaluating your Django application on Google Axion (Arm64) GKE:
+
 ### Request handling metrics
-- Concurrency Level: number of simultaneous requests the benchmark sent (10 in this example)
-- Complete Requests: total successful requests processed (1000 in this test)
-- Failed Requests: number of errors or timeouts (0 indicates stable performance)
+
+Your benchmark captures three foundational indicators of request handling capacity:
+
+- Concurrency Level: simultaneous requests sent during the benchmark (100)
+- Complete Requests: total successful requests processed (5000)
+- Failed Requests: errors or timeouts encountered (0, indicating stable performance)
 
 ### Performance metrics
-- Requests per Second: how many requests your server handles per second - higher values indicate better throughput
-- Time per Request (mean): average time to complete a single request - lower values mean faster responses
-- Time per Request (across concurrent): average latency when factoring in concurrent processing, this shows how well your app handles parallel requests
+
+Your Django application's performance under load is measured by three critical metrics:
+
+- Requests per Second: how many requests your server handles per second; higher values indicate better throughput (14,001.88 req/sec)
+- Time per Request (mean): average time to complete a single request (7.142 ms)
+- Time per Request (across concurrent): average latency when factoring in concurrent processing (0.071 ms), showing excellent parallel execution on Axion Arm cores
 
 ### Data transfer metrics
-- Total Transferred: all data sent and received, including HTTP headers
-- HTML Transferred: actual response content size
-- Transfer Rate: network throughput in KB/sec—indicates data handling efficiency
+
+The benchmark captures how efficiently your application transfers data across the network stack:
+
+- Total Transferred: all data sent and received, including HTTP headers (1,650,000 bytes)
+- HTML Transferred: actual response payload size (75,000 bytes)
+- Transfer Rate: network throughput in KB/sec (4512.32 KB/sec), indicating efficient networking through GKE LoadBalancer
+
 ### Timing breakdown
-- Time Taken for Tests: total benchmark duration
+
+The timing breakdown section provides detailed insight into how your application spends time processing each request:
+
+- Time Taken for Tests: total benchmark duration (0.357 seconds)
 - Connection Times: shows minimum, mean, median, and maximum times for connecting, processing, and waiting
 
-These metrics provide a performance baseline for your Django application on Arm. You can use them to compare different configurations, identify bottlenecks, or validate optimizations.
+These metrics establish a real production-grade performance baseline for your Django REST API running on GKE Axion (Arm64) with Gunicorn, Cloud SQL, and Redis.
 
 ## Benchmark summary
 
-The table below summarizes the key performance indicators from the benchmark test. These results demonstrate the capabilities of your Django application running on a Google Cloud C4A Arm-based VM with Gunicorn.
+The table below summarizes the key performance indicators from your real benchmark run on the Axion Arm64 GKE cluster.
 
-Results from the earlier run on the `c4a-standard-4` (4 vCPU, 16 GB memory) Arm64 VM in GCP (SUSE):
+Results from the run on the `Axion (C4A) Arm64 GKE nodes`:
 
 | **Parameter** | **Description** | **Value** |
-|----------------|------------------|-----------|
-| **Server Software** | Web server used for serving Django | gunicorn |
-| **Server Hostname** | Host address tested | 127.0.0.1 |
-| **Server Port** | Port number for benchmark | 8000 |
-| **Document Path** | Endpoint used for testing | / |
-| **Document Length** | Size of each response | 41 bytes |
-| **Concurrency Level** | Number of concurrent requests | 10 |
-| **Time Taken for Tests** | Total time to complete all requests | 0.104 seconds |
-| **Complete Requests** | Total number of successful requests | 1000 |
-| **Failed Requests** | Number of failed requests | 0 |
-| **Total Transferred** | Total bytes transferred (including headers) | 280000 bytes |
-| **HTML Transferred** | Total HTML body bytes transferred | 41000 bytes |
-| **Requests per Second (mean)** | Throughput — higher is better | **9651.21 req/sec** |
-| **Time per Request (mean)** | Average time for each request | **1.036 ms** |
-| **Time per Request (across all concurrent requests)** | Average latency considering concurrency | **0.104 ms** |
-| **Transfer Rate** | Network throughput rate | **2639.00 KB/sec** |
+|--------------|------------------|-----------|
+| **Server Software** | web server used for serving Django | gunicorn |
+| **Server Hostname** | external LoadBalancer IP | 34.132.110.81 |
+| **Server Port** | port number for benchmark | 80 |
+| **Document Path** | endpoint used for testing | /healthz/ |
+| **Document Length** | size of each response | 15 bytes |
+| **Concurrency Level** | number of concurrent requests | 100 |
+| **Time Taken for Tests** | total time to complete all requests | 0.357 seconds |
+| **Complete Requests** | total number of successful requests | 5000 |
+| **Failed Requests** | number of failed requests | 0 |
+| **Total Transferred** | total bytes transferred (including headers) | 1,650,000 bytes |
+| **HTML Transferred** | total response body bytes | 75,000 bytes |
+| **Requests per Second (mean)** | throughput - higher is better | **14,001.88 req/sec** |
+| **Time per Request (mean)** | average time for each request | **7.142 ms** |
+| **Time per Request (across all concurrent requests)** | average latency considering concurrency | **0.071 ms** |
+| **Transfer Rate** | network throughput rate | **4512.32 KB/sec** |
+| **p50 (Median Latency)** | 50% of requests completed within | **6 ms** |
+| **p90 Latency** | 90% of requests completed within | **11 ms** |
+| **p95 Latency** | 95% of requests completed within | **11 ms** |
+| **p99 Latency** | 99% of requests completed within | **28 ms** |
+| **Max Latency** | longest request observed | **34 ms** |
 
 ## Key performance insights
 
-The benchmark results reveal several important characteristics of running Django on Arm-based infrastructure:
+The benchmark results demonstrate the strength of running Django on Google Axion (Arm64) GKE:
 
-- Exceptional Throughput: the Arm64 VM efficiently handled nearly 10K requests per second, showcasing excellent concurrency handling.
-- Low Latency: average response time stayed around 1 ms, indicating rapid request processing even under load.
-- High Efficiency: zero failed requests demonstrate stable and reliable performance under benchmark conditions.
-- Optimized Networking: strong data transfer rate highlights Arm64's efficient network I/O capabilities.
-- Ideal for Scalable Apps: the consistent and predictable response times make Arm64 VMs well-suited for high-performance web workloads.
+- Extreme Throughput: the cluster sustained 14,000+ requests per second through a public LoadBalancer → GKE → Gunicorn → Django → Cloud SQL → Redis stack.
+- Ultra-Low p95 Latency: even at 100 concurrent users, 95% of all requests completed within 11 ms.
+- Production Stability: zero failed requests confirms the platform is resilient under heavy parallel load.
+- Efficient Networking: over 4.4 MB/sec of data transfer through the GKE LoadBalancer shows Arm-based networking is highly optimized.
+- Cloud-native Scalability: these results validate that Axion Arm64 nodes are well-suited for high-performance, horizontally scalable REST APIs in production.
+
+## What you've accomplished and what's next
+
+In this section, you:
+- Installed and configured ApacheBench for load testing
+- Deployed Gunicorn as a production-grade WSGI server for Django
+- Executed a comprehensive benchmark against your GKE-hosted Django application
+- Analyzed performance metrics showing 14,000+ requests per second with sub-millisecond concurrent latency
+- Validated that Google Axion (Arm64) GKE delivers production-ready performance for Django workloads
+
+Your Django application is now proven to handle high-concurrency traffic efficiently on Arm-based infrastructure. You've established a performance baseline that demonstrates the scalability and reliability of running Django on Google Cloud's Axion processors with GKE, Cloud SQL, and Redis.
+
+You're ready to optimize further, scale your deployment, or integrate additional services into your cloud-native Django architecture.
