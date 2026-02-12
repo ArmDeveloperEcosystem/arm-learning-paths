@@ -1,10 +1,6 @@
 ---
 title: Build an offline voice chatbot with faster-whisper and vLLM on DGX Spark
-description: Learn how to build a fully offline voice assistant by combining local speech recognition with LLM-powered responses using faster-whisper and vLLM—optimized for DGX Spark.
-
-draft: true
-cascade:
-    draft: true
+description: Learn how to build a fully offline voice assistant by combining local speech recognition with LLM-powered responses using faster-whisper and vLLM, optimized for DGX Spark.
 
 minutes_to_complete: 60
 

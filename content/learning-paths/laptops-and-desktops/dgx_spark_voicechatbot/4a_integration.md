@@ -52,7 +52,7 @@ vllm serve /models/mistral-7b \
     --dtype float16
 ```
 
-Look for "Application startup complete," in the output:
+Look for "Application startup complete." in the output:
 
 ```output
 (APIServer pid=1) INFO:     Started server process [1]
@@ -113,7 +113,7 @@ print(f" AI  : {reply}\n")
 This architecture mirrors the OpenAI Chat API design, enabling future enhancements like system-level prompts, multi-turn history, or role-specific behavior.
 
 {{% notice tip %}}
-If you encounter a "model does not exist" error, double-check the model path you used when launching vLLM. It must match MODEL_NAME exactly.
+If you encounter a "model doesn't exist" error, double-check the model path you used when launching vLLM. It must match MODEL_NAME exactly.
 {{% /notice %}}
 
 Switch to another terminal and save the following Python code in a file named `stt-client.py`:
