@@ -1,5 +1,5 @@
 ---
-title: Model Finetuning with PyTorch on DGX Spark
+title: Fine-tune PyTorch models on DGX Spark
 
 draft: true
 cascade:
@@ -7,16 +7,16 @@ cascade:
 
 minutes_to_complete: 60
 
-who_is_this_for: AI researchers and engineers building custom AI models.
+who_is_this_for: This is an advanced topic for AI developers and ML engineers who want to fine-tune large language models using PyTorch and Hugging Face on the NVIDIA DGX Spark platform.
 
 learning_objectives: 
-    - Understanding of how fine-tuning can improve a model for specific tasks
-    - Understanding of datasets and where to find them
-    - Learn how to perform model fine tuning with PyTorch & Hugging Face
-    - How to optimize your new model for Arm CPUs
+    - Understand how fine-tuning teaches a model domain-specific knowledge
+    - Prepare a custom JSONL dataset for supervised fine-tuning
+    - Fine-tune Llama 3.1 8B on Raspberry Pi datasheet content using PyTorch and Hugging Face
+    - Compare base and fine-tuned model responses to verify factual accuracy improvements
 
 prerequisites:
-    - Huggingface Account & Access Token
+    - Hugging Face account and access token
     - NVIDIA DGX Spark workstation
 
 author: Michael Hall
@@ -34,8 +34,6 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
-
-
 further_reading:
     - resource:
         title: NVIDIA PyTorch Fine-Tuning tutorial
@@ -49,8 +47,14 @@ further_reading:
         title: Hugging Face Datasets
         link: https://huggingface.co/datasets
         type: website
-
-
+    - resource:
+        title: Hugging Face Fine-tuning Guide
+        link: https://huggingface.co/docs/transformers/training
+        type: documentation
+    - resource:
+        title: PyTorch Training Documentation
+        link: https://pytorch.org/tutorials/beginner/introyt/trainingyt.html
+        type: documentation
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

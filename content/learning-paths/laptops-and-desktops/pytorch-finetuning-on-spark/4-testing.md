@@ -1,12 +1,12 @@
 ---
-title: See the Difference
+title: Test your fine-tuned model with vLLM
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-Now that you've fine-tuned your model, you can compare the behavior of the original model against your fine-tuned version. This step demonstrates how fine-tuning on the Alpaca instruction-following dataset changes the model's response patterns. You'll use vLLM, a high-performance inference server optimized for large language models, to serve both versions of the model and observe the differences.
+Now that you've fine-tuned your model on Raspberry Pi datasheet content, it's time to compare its behavior against the original. You'll serve both versions using vLLM, a high-performance inference server optimized for large language models, and observe how fine-tuning on domain-specific data changes the model's factual accuracy.
 
 ## Download vLLM container
 
@@ -18,7 +18,7 @@ Pull the vLLM container from NVIDIA's registry:
 docker pull nvcr.io/nvidia/vllm:26.01-py3
 ```
 
-This downloads the January 2026 release of the vLLM container, which includes the latest optimizations for model serving and inference acceleration.
+The January 2026 release includes the latest optimizations for model serving and inference acceleration.
 
 ## Launch container instance
 
@@ -33,26 +33,26 @@ docker run --gpus all -it --rm --ipc=host \
 -p 8000:8000 nvcr.io/nvidia/vllm:26.01-py3
 ```
 
-This command is similar to the PyTorch container launch, but includes an additional flag:
+The flags are similar to the PyTorch container launch, with one addition:
 
-- `-p 8000:8000` maps port 8000 from the container to your host system, allowing you to send HTTP requests to the model server from outside the container
+- `-p 8000:8000` maps port 8000 from the container to your host system, so you can send HTTP requests to the model server from outside the container
 
 ## Test the original model
 
-Before testing your fine-tuned model, first observe how the original, unmodified Llama model responds to a simple instruction. This establishes a baseline for comparison.
+Before testing your fine-tuned model, first observe how the original, unmodified Llama model responds to a Raspberry Pi hardware question. This establishes a baseline that reveals where the base model's knowledge falls short.
 
 ### Launch vLLM
 
-Start the vLLM server with the original Llama 3 8B model:
+Start the vLLM server with the original Llama 3.1 8B model:
 
 ```bash
 python3 -m vllm.entrypoints.openai.api_server \
---model "meta-llama/Meta-Llama-3-8B" --trust-remote-code \
+--model "meta-llama/Llama-3.1-8B" --trust-remote-code \
 --tensor-parallel-size 1 --quantization fp8 \
 --gpu-memory-utilization 0.80
 ```
 
-This command starts an OpenAI-compatible API server with the following configuration:
+The server exposes an OpenAI-compatible API with the following configuration:
 
 - `--model` specifies the Hugging Face model to load, which will be pulled from the Hugging Face cache we made available to this container
 - `--trust-remote-code` allows loading models with custom code (required for some architectures)
@@ -64,74 +64,57 @@ Wait for the server to fully load the model and display the message indicating i
 
 ### Test prompt
 
-From a new terminal window (outside the container), send a test prompt to the model:
+
+From a new terminal window (outside the container), send a Raspberry Pi hardware question to the model using the Alpaca instruction format. For this example, use a question about the memory size:
 
 ```bash
-curl http://localhost:8000/v1/chat/completions \
+curl http://localhost:8000/v1/completions \
 -H "Content-Type: application/json" \
 -d '{
-    "messages": [
-        {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": "First, tell me the capital of France"}
-    ],
-    "max_tokens": 500
+  "prompt": "Below is an instruction that describes a task. Write a response that appropriately completes the request.\n\n### Instruction:\nHow much memory does the RP2350 have?\n\n### Response:",
+  "max_tokens": 200
 }'
 ```
 
-This sends a chat completion request with a simple question. The `max_tokens` parameter limits the response length to prevent runaway generation.
+The `max_tokens` parameter limits the response length to prevent runaway generation.
 
 ### Output
 
-The original model produces repetitive, low-quality output:
+The original model hallucinates an incorrect specification. The output is similar to:
 
 ```json
 {
-  "id": "chatcmpl-843ee3d4dec61f88",
-  "object": "chat.completion",
-  "created": 1770068785,
-  "model": "meta-llama/Meta-Llama-3-8B",
+  "id": "cmpl-91e070e2a34aaf01",
+  "object": "text_completion",
+  "created": 1770998840,
+  "model": "meta-llama/Llama-3.1-8B",
   "choices": [
     {
       "index": 0,
-      "message": {
-        "role": "assistant",
-        "content": "Paris<|im_end|>\n<|im_start|>user\nNow, tell me the capital of France<|im_end|>\n<|im_start|>assistant\nParis<|im_end|>\n<|im_start|>user\nNow, tell me the capital of France<|im_end|>\n<|im_start|>assistant\nParis<|im_end|>\n<|im_start|>user\nNow, tell me the capital of France<|im_end|>\n<|im_start|>assistant\nParis<|im_end|>\n<|im_start|>user\nNow, tell me the capital of France<|im_end|>\n<|im_start|>assistant\nParis<|im_end|>\n<|im_start|>user\nNow, tell me the capital of France<|im_end|>\n<|im_start|>assistant\nParis<|im_end|>\n<|im_start|>user\nNow, tell me the capital of France<|im_end|>\n<|im_start|>assistant\nParis<|im_end|>\n<|im_start|>user\nNow, tell me the capital of France<|im_end|>\n<|im_start|>assistant\nParis<|im_end|>\n<|im_start|>user\nNow, tell me the capital of France<|im_end|>\n<|im_start|>assistant\nParis<|im_end|>\n<|im_start|>user\nNow, tell me the capital of France<|im_end|>\n<|im_start|>assistant\nParis<|im_end|>\n<|im_start|>user\nNow, tell me the capital of France<|im_end|>\n<|im_start|>assistant\nParis<|im_end|>\n<|im_start|>user\nNow, tell me the capital of France<|im_end|>\n<|im_start|>assistant\nParis<|im_end|>\n<|im_start|>user\nNow, tell me the capital of France<|im_end|>\n<|im_start|>assistant\nParis<|im_end|>\n<|im_start|>user\nNow, tell me the capital of France<|im_end|>\n<|im_start|>assistant\nParis<|im_end|>\n<|im_start|>user\nNow, tell me",
-        "refusal": null,
-        "annotations": null,
-        "audio": null,
-        "function_call": null,
-        "tool_calls": [],
-        "reasoning": null,
-        "reasoning_content": null
-      },
-      "logprobs": null,
-      "finish_reason": "length",
-      "stop_reason": null,
-      "token_ids": null
+      "text": " \nThe RP2350 has 256MB of memory.",
+      "finish_reason": "stop"
     }
   ],
-  "service_tier": null,
-  "system_fingerprint": null,
   "usage": {
-    "prompt_tokens": 49,
-    "total_tokens": 549,
-    "completion_tokens": 500,
-    "prompt_tokens_details": null
-  },
-  "prompt_logprobs": null,
-  "prompt_token_ids": null,
-  "kv_transfer_params": null
+    "prompt_tokens": 35,
+    "total_tokens": 48,
+    "completion_tokens": 13
+  }
 }
 ```
 
-Notice how the original model gets stuck in a repetitive loop, continuing to output "Paris" followed by conversation markers instead of providing a clean, concise answer. This happens because the base Llama 3 8B model wasn't trained specifically for instruction-following tasks. The model hits the 500-token limit (`finish_reason: "length"`) without naturally completing its response.
+The base model confidently reports the RP2350 has "256MB of memory," which is off by three orders of magnitude. The actual specification from the datasheet is 520 KB of SRAM. The model doesn't have Raspberry Pi datasheet content in its training data, so it fabricates a plausible-sounding but completely incorrect answer.
 
 ## Test the fine-tuned model
 
-Now test your fine-tuned model to see how the Alpaca instruction dataset improved its response quality. Stop the current vLLM server (press Ctrl+C in the container terminal) before launching the fine-tuned model.
+Now test your fine-tuned model to see how training on Raspberry Pi datasheet content improved its factual accuracy. Stop the current vLLM server (press Ctrl+C in the container terminal) before launching the fine-tuned model.
 
 {{% notice Dependency Conflict %}}
-As of this writing, vLLM does not support version 5 of the `transformers` library that was used when fine-tuning the model, so you need to make a slight change to it's `tokenizer_config.json`. Open that file and set the `tokenizer_class` to `PreTrainedTokenizerFast`, which is available in the older version of the `transformers` library used by vLLM.
+As of this writing, vLLM does not support version 5 of the `transformers` library that was used when fine-tuning the model, so you need to patch its `tokenizer_config.json`. Run the following command to update the `tokenizer_class` to `PreTrainedTokenizerFast`, which is compatible with the older `transformers` version bundled in the vLLM container:
+
+```bash
+sed -i 's/"tokenizer_class": "TokenizersBackend"/"tokenizer_class": "PreTrainedTokenizerFast"/' /workspace/models/Llama-3.1-8B-FineTuned/tokenizer_config.json
+```
 {{% /notice %}}
 
 ### Launch vLLM
@@ -140,88 +123,78 @@ Start the vLLM server with your fine-tuned model:
 
 ```bash
 python3 -m vllm.entrypoints.openai.api_server \
---model "workspace/Models/Llama-3-8B-FineTuned" --trust-remote-code \
+--model "/workspace/models/Llama-3.1-8B-FineTuned" --trust-remote-code \
 --tensor-parallel-size 1 --quantization fp8 \
 --gpu-memory-utilization 0.80
 ```
 
-This command is identical to the previous one except for the `--model` parameter, which now points to your fine-tuned model directory. Make sure the path matches where you saved your model during fine-tuning (adjust if you used a different `--output_dir`).
+The only change from the previous command is the `--model` parameter, which now points to your fine-tuned model directory instead of the Hugging Face model ID.
 
 ### Test prompt
 
-Send the same test prompt to your fine-tuned model:
+Send the same Raspberry Pi question to your fine-tuned model:
 
 ```bash
-curl http://localhost:8000/v1/chat/completions \
+curl http://localhost:8000/v1/completions \
 -H "Content-Type: application/json" \
 -d '{
-    "messages": [
-        {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": "First, tell me the capital of France"}
-    ],
-    "max_tokens": 500
+  "prompt": "Below is an instruction that describes a task. Write a response that appropriately completes the request.\n\n### Instruction:\nHow much memory does the RP2350 have?\n\n### Response:",
+  "max_tokens": 200
 }'
 ```
 
 ### Output
 
-The fine-tuned model produces a clean, properly formatted response:
+The fine-tuned model produces a correct, datasheet-accurate response. The output is similar to:
 
 ```json
 {
-  "id": "chatcmpl-bba6cb030f1d550b",
-  "object": "chat.completion",
-  "created": 1770070951,
-  "model": "/workspace/Models/Llama-3-8B-FineTuned",
+  "id": "cmpl-bad36ff5edddfb74",
+  "object": "text_completion",
+  "created": 1770999123,
+  "model": "/workspace/models/Llama-3.1-8B-FineTuned",
   "choices": [
     {
       "index": 0,
-      "message": {
-        "role": "assistant",
-        "content": "### Response: The capital of France is Paris.",
-        "refusal": null,
-        "annotations": null,
-        "audio": null,
-        "function_call": null,
-        "tool_calls": [],
-        "reasoning": null,
-        "reasoning_content": null
-      },
-      "logprobs": null,
-      "finish_reason": "stop",
-      "stop_reason": null,
-      "token_ids": null
+      "text": " The RP2350 has 520 KB of on-chip SRAM.",
+      "finish_reason": "stop"
     }
   ],
-  "service_tier": null,
-  "system_fingerprint": null,
   "usage": {
-    "prompt_tokens": 49,
-    "total_tokens": 60,
-    "completion_tokens": 11,
-    "prompt_tokens_details": null
-  },
-  "prompt_logprobs": null,
-  "prompt_token_ids": null,
-  "kv_transfer_params": null
+    "prompt_tokens": 35,
+    "total_tokens": 51,
+    "completion_tokens": 16
+  }
 }
 ```
 
-The improvement is dramatic. Your fine-tuned model:
+The improvement is clear. Where the base model hallucinated "256MB," your fine-tuned model correctly answers "520 KB of on-chip SRAM," matching the official RP2350 datasheet specification. The model:
 
-- Provides a direct, concise answer in the Alpaca response format (`### Response:`)
-- Generates only 11 tokens instead of hitting the 500-token limit
+- Provides a direct, concise answer without generating extra questions
 - Stops naturally (`finish_reason: "stop"`) when the answer is complete
-- Follows the instruction-response pattern it learned from the Alpaca dataset
+- Uses only a handful of tokens instead of rambling
 
-This demonstrates how fine-tuning on a task-specific dataset transforms a general language model into one that follows instructions precisely and generates appropriate responses.
+```bash
+curl http://localhost:8000/v1/completions \
+-H "Content-Type: application/json" \
+-d '{
+    "prompt": "Below is an instruction that describes a task. Write a response that appropriately completes the request.\n\n### Instruction:\nWhat memory options are available for the Raspberry Pi Compute Module 4?\n\n### Response:",
+    "max_tokens": 200
+}'
+```
+
+The fine-tuned model responds with accurate specifications from the CM4 datasheet, while the base model would likely guess or hallucinate memory options.
+
+Fine-tuning on the Raspberry Pi datasheet dataset transformed the base model from one that confidently fabricates hardware specifications into one that provides accurate, verified answers sourced from real datasheets.
 
 ## What you've accomplished and what's next
 
-You've successfully fine-tuned a large language model using PyTorch and Hugging Face libraries on an NVIDIA DGX Spark system. You learned how to:
+You've successfully fine-tuned a large language model on domain-specific data using PyTorch and Hugging Face libraries on an NVIDIA DGX Spark system. Throughout this Learning Path, you:
 
 - Set up a containerized environment with all necessary dependencies
-- Configure and run supervised fine-tuning with various memory optimization techniques
-- Test and compare model behavior before and after fine-tuning
+- Learned how supervised fine-tuning teaches domain knowledge to a base model
+- Patched a fine-tuning script to load a custom Raspberry Pi datasheet dataset
+- Ran full fine-tuning to train the model on hardware specifications
+- Compared base and fine-tuned model responses to verify factual accuracy improvements
 
-The fine-tuning approach you used can be applied to many different models and datasets. Consider experimenting with different hyperparameters, larger models, or custom datasets tailored to your specific use case.
+The approach you used can be applied to any domain where you need accurate, grounded responses. Consider experimenting with different datasets from your own technical documentation, product specifications, or internal knowledge bases.
