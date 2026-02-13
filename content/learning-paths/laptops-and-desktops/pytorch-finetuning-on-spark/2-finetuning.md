@@ -1,68 +1,87 @@
 ---
-title: How Fine Tuning Works
+title: Understand fine-tuning
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Why fine-tuning matters
+## Why fine-tuning matters for domain knowledge
 
-Pre-trained large language models (LLMs) are trained on vast amounts of general text data, giving them broad knowledge and language understanding. However, these models often need specialization to perform well on specific tasks, domains, or to follow particular instruction formats. Fine-tuning adapts a pre-trained model to your specific use case without the computational expense of training from scratch.
+Pre-trained models like Llama 3.1 8B have broad language skills, but they don't know everything. Ask the base model about the maximum clock speed of the RP2350 microcontroller and it confidently answers "1.8 GHz," a completely fabricated number. The actual specification is 150 MHz.
 
-Fine-tuning is essential when you need a model to:
+Fine-tuning fixes this by training the model on real data from Raspberry Pi datasheets. After fine-tuning, the same model answers correctly: "The RP2350 supports up to 150 MHz." No hallucination, no guessing.
 
-- Understand domain-specific terminology and concepts (medical, legal, scientific)
-- Follow specific instruction formats or conversation styles
-- Perform specialized tasks with higher accuracy than a general-purpose model
-- Align with organizational guidelines or safety requirements
-- Reduce hallucinations in specific knowledge domains
+The process breaks down into three steps:
 
-The process typically requires significantly less data and compute resources than pre-training. While pre-training might use trillions of tokens on thousands of GPUs, fine-tuning can achieve excellent results with thousands or even hundreds of carefully curated examples on a single GPU or small GPU cluster, making it an ideal use case for the NVIDIA DGX Spark.
+1. Patch the NVIDIA playbook's fine-tuning script to load a custom dataset, then run training
+2. Serve both the original and fine-tuned models using vLLM
+3. Compare the outputs side by side to see factual accuracy improve
 
-For a deeper look at LLM fine-tuning with Hugging Face transformers, see the [Hugging Face Fine-tuning Guide](https://huggingface.co/docs/transformers/training).
+To understand why this works, you need to know three things: what supervised fine-tuning does, how the training data is structured, and what options you have for making fine-tuning efficient on your hardware.
 
-## How supervised fine-tuning works
+## How supervised fine-tuning adapts a model
 
-Supervised fine-tuning (SFT) continues the training process on a pre-trained model using labeled examples that demonstrate the desired behavior. Unlike pre-training, which predicts the next token from unlabeled text, SFT uses input-output pairs that explicitly teach the model how to respond to specific queries or prompts.
+Pre-trained LLMs learn general language patterns from massive text datasets. Supervised fine-tuning (SFT) takes that foundation and reshapes the model's behavior using labeled examples that show it how to respond to specific prompts.
 
-The process works by:
+Think of it as teaching by example. You provide pairs of inputs and desired outputs, and the training process adjusts the model's parameters so its responses look more like your examples. The model's original knowledge stays intact, but SFT steers how that knowledge gets applied and fills in gaps where the base model lacks specific domain expertise.
 
-**Data preparation** - You create or collect a dataset of input-output pairs. For instruction tuning, this means pairs of user prompts and desired responses. For example: "Explain photosynthesis" paired with a detailed explanation.
+The key benefit is efficiency. Pre-training a model from scratch can take thousands of GPUs and trillions of tokens of data. Fine-tuning achieves targeted improvements with hundreds or thousands of examples on a single GPU, which makes the DGX Spark an ideal platform for the task.
 
-**Loss calculation** - The model generates predictions for the training examples, and the training algorithm calculates how different the predictions are from the target outputs. This difference is quantified using a loss function, typically cross-entropy loss for language models.
+## How the training data is structured
 
-**Gradient computation** - A gradient represents the direction and magnitude of change needed for each model parameter to reduce the loss. The training process calculates gradients that indicate how to adjust each model parameter to reduce the loss. These gradients flow backward through the neural network layers via backpropagation.
+The NVIDIA playbook scripts use the Alpaca prompt format, which structures each training example with three fields:
 
-**Parameter updates** - The optimizer uses the gradients to update the model's weights, making small adjustments that should improve performance on the training examples. This process repeats across many examples and multiple epochs.
+**Instruction** -- the question or task (for example, "What is the maximum clock speed of the RP2350?")
 
-**Validation** - Periodically, you evaluate the model on held-out validation data to ensure it's learning to generalize rather than simply memorizing the training set.
+**Input** -- optional additional context (left empty for most questions)
 
-The key advantage of SFT is that it preserves the pre-trained model's general knowledge while adapting its behavior to match your specific examples. The model learns the patterns in your data without forgetting what it learned during pre-training.
+**Output** -- the correct answer sourced from official datasheets
 
-For technical details on the algorithms behind supervised fine-tuning, refer to the [PyTorch training documentation](https://pytorch.org/tutorials/beginner/introyt/trainingyt.html).
+Here's an example from the dataset you'll use:
 
-## What instruction tuning does for a model
+```json
+{
+  "instruction": "How many GPIO pins does the Raspberry Pi Pico 2 provide?",
+  "input": "",
+  "output": "The Raspberry Pi Pico 2 provides 26 GPIO pins."
+}
+```
 
-Instruction tuning is a specific type of supervised fine-tuning that teaches models to follow natural language instructions. Base pre-trained models are excellent at completing text but don't inherently understand how to respond to commands or questions in a conversational format. Instruction tuning bridges this gap.
+During training, these fields are combined into a prompt template that the model learns to recognize and complete:
 
-The transformation happens through training on datasets where each example contains:
+```text
+Below is an instruction that describes a task, paired with an input
+that provides further context. Write a response that appropriately
+completes the request.
 
-**Instruction** - A clear directive or question  
-**Input** (optional) - Additional context or data to process  
-**Output** - The desired response demonstrating correct behavior
+### Instruction: How many GPIO pins does the Raspberry Pi Pico 2 provide?
 
-For example:
-- Instruction: "Summarize the following article"
-- Input: [article text]
-- Output: [concise summary]
+### Input:
 
-After instruction tuning, the model learns to:
+### Response: The Raspberry Pi Pico 2 provides 26 GPIO pins.
+```
 
-- Recognize and interpret different instruction formats
-- Generate responses that directly address the given task
-- Maintain an expected tone and formatting for different request types
+The dataset you'll use contains around 250 question-answer pairs extracted from official Raspberry Pi datasheets covering the RP2040, RP2350, Pico, Pico 2, Compute Module 4, and other boards. After training on these examples, the model learns to respond with accurate, datasheet-sourced facts instead of hallucinating specifications.
 
-This process dramatically improves the model's usability. While a base model might continue a prompt like "Translate this sentence to French: Hello" by generating more English text, an instruction-tuned model understands this is a task request and produces the French translation.
+## Choosing a fine-tuning approach
 
-Popular instruction-tuning datasets include Alpaca, Dolly, and FLAN. These datasets contain diverse instructions across many domains and task types, helping models generalize to new instructions they haven't seen during training. In the next step you will use the Alpaca dataset to fine-tune a base pre-trained model.
+Not every model fits entirely in GPU memory during training. The fine-tuning scripts you'll work with in the next section offer several approaches to handle this:
+
+**Full fine-tuning** updates every parameter in the model. This gives the best results but needs enough GPU memory to hold the full model plus the optimizer state and gradients. For smaller models like Llama 3.2 3B, the DGX Spark handles this comfortably.
+
+**LoRA (Low-Rank Adaptation)** freezes the original model weights and trains a small set of additional parameters instead. The memory savings are significant because you only store gradients and optimizer state for a fraction of the total parameters. This is practical for 8B-class models.
+
+**QLoRA (Quantized LoRA)** goes a step further by loading the frozen model weights in 4-bit precision. Combined with LoRA's parameter-efficient training, this lets you fine-tune 70B-class models that would otherwise exceed available memory.
+
+The script you'll run in the next section uses full fine-tuning by default, but the playbook includes LoRA and QLoRA scripts for larger models.
+
+## What you've accomplished and what's next
+
+In this section you learned:
+
+- Why fine-tuning is valuable for teaching domain-specific facts to a base model
+- How Raspberry Pi datasheet Q&A pairs are structured in the Alpaca prompt format
+- The differences between full fine-tuning, LoRA, and QLoRA
+
+In the next section, you'll walk through the fine-tuning script, patch it to load the Raspberry Pi dataset, and run training to produce your own fine-tuned model.
