@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Set up faster-whisper for offline speech recognition
 
-[faster-whisper](https://github.com/SYSTRAN/faster-whisper) is a high-performance reimplementation of OpenAI Whisper, designed to significantly reduce transcription latency and memory usage. It's well suited for local and real-time speech-to-text (STT) pipelines, especially when running on CPU-only systems or hybrid CPU/GPU environments.
+[faster-whisper](https://github.com/SYSTRAN/faster-whisper) is a high-performance re-implementation of OpenAI Whisper, designed to significantly reduce transcription latency and memory usage. It's well suited for local and real-time speech-to-text (STT) pipelines, especially when running on CPU-only systems or hybrid CPU/GPU environments.
 
 You'll use faster-whisper as the STT engine to convert raw microphone input into structured text. At this stage, the goal is to install faster-whisper correctly and verify that it can transcribe audio reliably. Detailed tuning and integration are covered in later sections.
 
