@@ -6,6 +6,8 @@ weight: 6
 layout: learningpathall
 ---
 
+## Deploy vLLM for local language generation
+
 In the previous section, you built a complete Speech-to-Text (STT) engine using faster-whisper, running efficiently on Arm-based CPUs. Now it's time to add the next building block: a local large language model (LLM) that can generate intelligent responses from user input.
 
 You'll integrate [vLLM](https://vllm.ai/), a high-performance LLM inference engine that runs on GPU and supports advanced features such as continuous batching, OpenAI-compatible APIs, and quantized models.
@@ -18,7 +20,7 @@ vLLM is especially effective in hybrid systems like the DGX Spark, where CPU cor
 
 ### Install and launch vLLM with GPU acceleration
 
-In this section, you’ll install and launch vLLM—an optimized large language model (LLM) inference engine that runs efficiently on GPU. This component will complete your local speech-to-response pipeline by transforming transcribed text into intelligent replies.
+In this section, you'll install and launch vLLM - an optimized large language model (LLM) inference engine that runs efficiently on GPU. This component will complete your local speech-to-response pipeline by transforming transcribed text into intelligent replies.
 
 #### Install Docker and pull vLLM image
 
@@ -45,7 +47,7 @@ nvcr.io/nvidia/vllm      25.11-py3                 d33d4cadbe0f   2 months ago  
 
 #### Download a quantized model (GPTQ)
 
-Use Hugging Face CLI to download a pre-quantized LLM such as Mistral-7B-Instruct-GPTQ and Meta-Llama-3-70B-Instruct-GPTQ models for following Real-Time AI Conversations.
+Use Hugging Face CLI to download a pre-quantized LLM such as Mistral-7B-Instruct-GPTQ and Meta-Llama-3-70B-Instruct-GPTQ models for real-time AI conversations.
 
 ```bash
 pip install huggingface_hub
@@ -99,7 +101,7 @@ docker run -it --gpus all -p 8000:8000 \
 ```
 
 {{% notice Note %}}
-Tip: The first launch will compile and cache the model. To reduce startup time in future runs, consider creating a Docker snapshot with docker commit.
+The first launch compiles and caches the model. To reduce startup time in future runs, consider creating a Docker snapshot with docker commit.
 {{% /notice %}}
 
 You can also check your NVIDIA driver and CUDA compatibility during the vLLM launch by looking at the output.

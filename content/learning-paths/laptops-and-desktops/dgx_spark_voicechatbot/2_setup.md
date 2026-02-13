@@ -6,9 +6,11 @@ weight: 3
 layout: learningpathall
 ---
 
-[Faster‑whisper](https://github.com/SYSTRAN/faster-whisper) is a high‑performance reimplementation of OpenAI Whisper, designed to significantly reduce transcription latency and memory usage. It is well suited for local and real‑time speech‑to‑text (STT) pipelines, especially when running on CPU‑only systems or hybrid CPU/GPU environments.
+## Set up faster-whisper for offline speech recognition
 
-You'll use faster‑whisper as the STT engine to convert raw microphone input into structured text. At this stage, the goal is to install faster‑whisper correctly and verify that it can transcribe audio reliably. Detailed tuning and integration are covered in later sections.
+[faster-whisper](https://github.com/SYSTRAN/faster-whisper) is a high-performance reimplementation of OpenAI Whisper, designed to significantly reduce transcription latency and memory usage. It's well suited for local and real-time speech-to-text (STT) pipelines, especially when running on CPU-only systems or hybrid CPU/GPU environments.
+
+You'll use faster-whisper as the STT engine to convert raw microphone input into structured text. At this stage, the goal is to install faster-whisper correctly and verify that it can transcribe audio reliably. Detailed tuning and integration are covered in later sections.
 
 ### Install build dependencies
 
@@ -22,11 +24,11 @@ sudo apt install python3.12 python3.12-venv python3.12-dev -y
 sudo apt install gcc portaudio19-dev ffmpeg -y
 ```
 
-## Create and activate Python environment
+## Create and activate a Python environment
 
 In particular, [pyaudio](https://pypi.org/project/PyAudio/) (used for real-time microphone capture) depends on the PortAudio library and the Python C API. These must match the version of Python you're using.
 
-Now that the system libraries are in place and audio input is verified, it's time to set up an isolated Python environment for your voice assistant project. This will prevent dependency conflicts and make your installation reproducible.
+Set up an isolated Python environment for your voice assistant project to prevent dependency conflicts and make your installation reproducible.
 
 ```bash
 python3.12 -m venv va_env
@@ -53,7 +55,7 @@ pip install requests webrtcvad sounddevice==0.5.3
 ```
 
 {{% notice Note %}}
-While sounddevice==0.5.4 is available, it introduces callback-related errors during audio stream cleanup that may confuse beginners.
+While sounddevice==0.5.4 is available, it introduces callback-related errors during audio stream cleanup that can confuse beginners.
 Use sounddevice==0.5.3, which is stable and avoids these warnings.
 {{% /notice %}}
 
@@ -162,7 +164,7 @@ Recording for 10 seconds...
 
 {{% notice Note %}}
 To stop the script, press Ctrl+C during any transcription loop. The current 10-second recording completes and transcribes before the program exits cleanly.
-Avoid using Ctrl+Z, which suspends the process instead of terminating it.
+Don't use Ctrl+Z, which suspends the process instead of terminating it.
 {{% /notice %}}
 
 
@@ -189,7 +191,7 @@ pip install sounddevice==0.5.3
 
 You can record audio without errors, but nothing is played back.
 
-Verify that your USB microphone or headset is selected as the default input/output device. Also ensure the system volume is not muted.
+Ensure that your USB microphone or headset is selected as the default input/output device. Also check that the system volume isn't muted.
 
 **Fix:** List all available audio devices:
 

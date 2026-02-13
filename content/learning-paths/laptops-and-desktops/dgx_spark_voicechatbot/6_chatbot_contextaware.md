@@ -6,11 +6,11 @@ weight: 9
 layout: learningpathall
 ---
 
-In customer service and other task-based voice interactions, conversations naturally span multiple turns. Users may provide only partial information per utterance or follow up after the assistant’s prompt.
+## Why multi-turn memory matters
+
+In customer service and other task-based voice interactions, conversations naturally span multiple turns. Users can provide only partial information per utterance or follow up after the assistant's prompt.
 
 To handle such situations effectively, your assistant needs short-term memory. This is a lightweight context buffer that retains recent user questions and assistant replies.
-
-## Why multi-turn memory matters
 
 Without memory, each user input is treated in isolation. This causes breakdowns like:
 
@@ -51,9 +51,9 @@ This will build a list like:
 ]
 ```
 
-### Keep only the most recent 5 rounds
+### Keep only the most recent five rounds
 
-Each new turn makes the message array longer. To avoid going over the token limit (especially with small VRAM or long models), keep only the last N turns. Use 5 rounds as an example (10 messages, 5 rounds of user + assistant)
+Each new turn makes the message array longer. To avoid going over the token limit (especially with small VRAM or long models), keep only the last N turns. Use five rounds as an example (10 messages, five rounds of user + assistant)
 
 ```python
 messages = [{"role": "system", "content": SYSTEM_PROMPT}]
@@ -72,7 +72,7 @@ prompt_tokens = len(" ".join([m["content"] for m in messages]).split())
 print(f" Estimated prompt tokens: {prompt_tokens}")
 ```
 
-This helps you balance max_tokens for the assistant's response, ensuring the prompt and reply fit within the model's limit (such as 4096 or 8192 tokens depending on the model).
+This helps you balance max_tokens for the assistant's response, ensuring the prompt and reply fit within the model's limit such as 4096 or 8192 tokens depending on the model.
 
 The expected output is similar to:
 
@@ -123,13 +123,13 @@ The assistant remembers the previous turns, including account verification and f
 | User | Okay, I see the account has been cancelled. Thanks for your help. | 180 |
 | AI | You're welcome, abc@email.com. I'm glad I could help you cancel your subscription. If there is anything else I can assist you with in the future, please don't hesitate to ask. Have a great day! | |
 
-This estimate helps you prevent prompt truncation or response cutoff, especially important when using larger models with longer histories.
+This estimate helps you prevent prompt truncation or response cutoff, which is especially important when using larger models with longer histories.
 
 ## Full function of offline voice customer service on DGX Spark
 
 Now that your speech-to-AI pipeline is complete, you're ready to scale it up by running a larger, more powerful language model fully offline on DGX Spark.
 
-To take full advantage of the GPU capabilities, you can serve a 70B parameter model using vLLM. Make sure you’ve already downloaded the model files into ~/models/llama3-70b (host OS).
+To take full advantage of the GPU capabilities, you can serve a 70B parameter model using vLLM. Ensure you've already downloaded the model files into ~/models/llama3-70b (host OS).
 
 Inside the vLLM Docker container, launch the model with:
 
@@ -304,7 +304,7 @@ Once both the STT and LLM services are live, you'll be able to speak naturally a
 
 ### Demo: Multi-turn voice chatbot with context memory on DGX Spark
 
-![img2 alt-text#center](fasterwhipser_vllm_demo2.gif "Figure 2: Full Function Voice-to-AI with volume bar")
+![Animated terminal session showing real-time speech-to-text transcription and AI responses in a multi-turn customer service conversation, with a volume bar at the bottom indicating live audio input levels from a microphone alt-txt#center](fasterwhipser_vllm_demo2.gif "Full function voice-to-AI with volume bar")
 
 This demo showcases a fully offline voice assistant that combines real-time transcription (via faster-whisper) and intelligent response generation (via vLLM). Running on an Arm-based DGX Spark system, the assistant captures live audio, transcribes it, and generates context-aware replies using a local language model, all in a seamless loop.
 
@@ -312,7 +312,7 @@ The assistant now supports multi-turn memory, allowing it to recall previous use
 
 No cloud services are used, ensuring full control, privacy, and low-latency performance.
 
-### Full Voice-to-AI Conversation Flow
+### Full voice-to-AI conversation flow
 
 The following diagram summarizes the complete architecture you've now assembled: from microphone input to AI-generated replies, entirely local, modular, and production-ready.
 
@@ -348,9 +348,9 @@ This hybrid architecture is production-ready, modular, and offline-capable. All 
 
 With a fully functional offline voice chatbot running on DGX Spark, you now have a strong foundation for many advanced features. Here are some next-step enhancements you might consider:
 
-- Knowledge-augmented Generation (RAG)
+- Knowledge-Augmented Generation (RAG)
 
-Integrate local document search or FAQ databases with embedding-based retrieval to answer company-specific or domain-specific queries. You can reference a previous Learning Path about [deploying RAG on DGX Spark](/learning-paths/laptops-and-desktops/dgx_spark_rag/) for the same hardware.
+Integrate local document search or FAQ databases with embedding-based retrieval to answer company-specific or domain-specific queries. See the Learning Path [Deploying RAG on DGX Spark](/learning-paths/laptops-and-desktops/dgx_spark_rag/) for the same hardware.
 
 - Multi-language Support
 
@@ -358,7 +358,7 @@ Swap in multilingual STT models and LLMs to enable assistants for global users o
 
 - Text-to-Speech (TTS) Output
 
-Add a local TTS engine (such as Coqui, piper, or NVIDIA Riva) to vocalize the assistant's replies, turning it into a true conversational agent.
+Add a local TTS engine such as Coqui, piper, or NVIDIA Riva to vocalize the assistant's replies, turning it into a true conversational agent.
 
 - Personalization and Context Memory
 

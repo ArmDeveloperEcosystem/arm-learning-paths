@@ -6,15 +6,15 @@ weight: 8
 layout: learningpathall
 ---
 
+## Why adapt for customer support?
+
 In the previous section, you built a fully offline voice assistant by combining local speech-to-text (STT) with vLLM for language generation.
 
 You can transform that general-purpose chatbot into a task-specific customer service agent designed to deliver fast, focused, and context-aware assistance.
 
-## Why adapt for customer support?
+Unlike open-domain chatbots, customer-facing assistants must meet stricter communication standards. Users expect direct answers, not verbose or vague explanations, with fast responses and no long pauses. The assistant should remember previous questions or actions to support multi-turn interactions.
 
-Unlike open-domain chatbots, customer-facing assistants must meet stricter communication standards. Each voice input must trigger a fast and relevant reply with no long pauses or uncertainty. Users expect direct answers, not verbose or vague explanations. The assistant should remember previous questions or actions to support multi-turn interactions.
-
-These needs are especially relevant for questions like password resets ("I forgot my account password and need help resetting it"), order tracking ("Can you track my recent order and tell me when it will arrive?"), billing issues ("Why was I charged twice this month?"), and subscription management ("I want to cancel my subscription and avoid future charges"). Such queries require language generation, structured behavior, and task memory.
+These needs are especially relevant for password resets ("I forgot my account password and need help resetting it"), order tracking ("Can you track my recent order and tell me when it will arrive?"), billing issues ("Why was I charged twice this month?"), and subscription management ("I want to cancel my subscription and avoid future charges"). Such queries need language generation, structured behavior, and task memory.
 
 ### What you'll build in this section
 
@@ -32,7 +32,7 @@ Enable the assistant to recall recent interactions and respond within context. Y
 
 Explore how to integrate local company data using vector search. This allows the assistant to answer questions based on private documents, without ever sending data to the cloud.
 
-This prepares your system for high-trust environments like:
+This prepares your system for high-trust environments such as:
 - Enterprise customer support
 - Internal help desks
 - Regulated industries (healthcare, finance, legal)
@@ -46,10 +46,10 @@ To make your AI assistant behave like a domain expert (such as a support agent o
 
 In OpenAI-compatible APIs (like vLLM), you can provide a special message with the role set to "system". This message defines the behavior and tone of the assistant before any user input is processed.
 
-A system prompt gives your assistant a role to play, such as a polite and helpful customer service agent, a knowledgeable tour guide, or a motivational fitness coach. By customizing the system prompt, you can shape the assistant's language and tone, restrict or expand the type of information it shares, and align responses with business needs, such as short and precise replies for help desks.
+A system prompt gives your assistant a role to play such as a polite and helpful customer service agent, a knowledgeable tour guide, or a motivational fitness coach. By customizing the system prompt, you can shape the assistant's language and tone, restrict or expand the type of information it shares, and align responses with business needs such as short and precise replies for help desks.
 
 
-### Define the System Prompt Behavior
+### Define the system prompt behavior
 
 To turn your general-purpose voice assistant into a focused role-specific agent, you must guide the language model’s behavior. This is done by defining a system prompt that acts as a task instruction.
 
