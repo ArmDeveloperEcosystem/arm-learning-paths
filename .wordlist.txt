@@ -5645,3 +5645,15 @@ SKUs
 asct
 geminicli
 passwordless
+AWQ
+Coqui
+GPTQ
+PortAudio
+PyAudio
+Riva
+UX
+actionability
+customizations
+pyaudio
+sounddevice
+webrtcvad
