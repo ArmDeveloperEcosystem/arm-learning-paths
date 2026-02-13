@@ -41,7 +41,7 @@ Isaac Lab supports two task design workflows:
 | Manager-Based | Modular design where observations, actions, rewards, and terminations are defined through separate manager classes | Structured environments with reusable components |
 | Direct | A single class defines the entire environment logic, similar to traditional Gymnasium environments | Rapid prototyping and full control over environment logic |
 
-Isaac Lab integrates with multiple RL libraries out of the box:
+Isaac Lab includes out-of-the-box integration with multiple reinforcement learning libraries:
 
 | **RL Library** | **Supported Algorithms** |
 |----------------|--------------------------|
@@ -58,7 +58,7 @@ The NVIDIA DGX Spark combines the Grace CPU and Blackwell GPU through a unified 
 
 | **DGX Spark feature** | **Impact on robotics workflows** |
 |------------------------|----------------------------------|
-| Grace CPU (Arm Cortex-X925 / A725, 20 cores) | Handles environment orchestration, reward computation, and data preprocessing with high single-thread performance |
+| Grace CPU (Arm Cortex-X925 / A725, 20 cores) | Manages environment orchestration, reward calculation, and sensor data preprocessing with high single-thread performance |
 | Blackwell GPU (CUDA cores + 5th-gen Tensor Cores) | Accelerates physics simulation, parallel environment stepping, and neural network forward/backward passes |
 | 128 GB unified memory (NVLink-C2C) | Eliminates CPU-GPU data transfer bottlenecks; simulation state and model weights share the same address space |
 | NVLink-C2C (900 GB/s bidirectional) | Enables near-zero-latency communication between CPU-driven orchestration and GPU-driven simulation |
@@ -111,6 +111,6 @@ In the learning path that follow you will:
 1. **Set up Isaac Sim and Isaac Lab** on your DGX Spark by building both tools from source
 2. **Run a basic robot simulation** in Isaac Sim and interact with it through Python
 3. **Train a reinforcement learning policy** for the Unitree H1 humanoid robot on rough terrain using RSL-RL
-4. **Explore advanced RL scenarios** including multiple task types, different robot configurations, and multi-agent training
+4. **Explore advanced RL scenarios** including diverse locomotion tasks and robot configurations
 
 By the end, you will have a fully functional Isaac Sim and Isaac Lab development environment on DGX Spark and hands-on experience with the complete robotics RL pipeline.

@@ -163,7 +163,7 @@ Press `Ctrl+C` in the terminal to close Isaac Sim after verifying it starts succ
 
 ## Step 6: Clone and install Isaac Lab
 
-Now that Isaac Sim is built and working, set up Isaac Lab. Clone the repository into your home directory:
+With Isaac Sim successfully built and validated, you can now set up Isaac Lab to enable RL training workflows. Clone the repository into your home directory:
 
 ```bash
 cd ~
@@ -217,6 +217,8 @@ Isaac-Reach-Franka-v0
 
 If the environment list displays without errors, both Isaac Sim and Isaac Lab are correctly installed and ready for use.
 
+You are now ready to run and train RL tasks using Isaac Lab environments.
+
 ## What you have accomplished
 
 In this section you have:
@@ -228,4 +230,4 @@ In this section you have:
 - Cloned and installed Isaac Lab with all RL library dependencies
 - Validated both installations by launching Isaac Sim and listing available environments
 
-Your development environment is now ready. In the next section, you will run your first robot simulation in Isaac Sim.
+Your development environment is now fully configured for robot simulation and RL workflows. In the next module, you will run your first robot simulation and begin interacting with Isaac Sim through Python scripts.

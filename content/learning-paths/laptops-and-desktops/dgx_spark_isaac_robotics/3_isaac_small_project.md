@@ -1,5 +1,5 @@
 ---
-title: Run a sample robot simulation in Isaac Sim
+title: Run and Understand a Sample Robot Simulation with Isaac Sim
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -14,7 +14,7 @@ You will work with the Cartpole environment, a classic control benchmark where a
 
 ## Step 1: Launch a sample scene from Isaac Lab
 
-Isaac Lab provides tutorial scripts that demonstrate how to create and interact with simulation scenes. Start by running the interactive scene tutorial:
+Isaac Lab provides tutorial scripts that demonstrate how to create and interact with simulation scenes. Start with a minimal scene to verify Isaac Sim’s rendering and simulation setup:
 
 ```bash
 cd ~/IsaacLab
@@ -198,8 +198,7 @@ All computations happen in parallel across all environments using PyTorch tensor
 
 ## Step 6: Run with headless mode
 
-For training workloads you will typically run without visualization to maximize GPU utilization. 
-Run the following command to test headless mode:
+For reinforcement learning tasks, headless mode is preferred to maximize GPU throughput. You can test it now using the Cartpole RL environment.
 
 ```bash
 ./isaaclab.sh -p scripts/tutorials/03_envs/run_cartpole_rl_env.py --num_envs 64 --headless
@@ -221,4 +220,5 @@ In this section you have:
 - Understood the key components of an Isaac Lab environment: configuration, actions, observations, events, simulation loop, and reward computation
 - Tested headless mode for maximum training performance
 
-You now understand the fundamental components of Isaac Lab environments. In the next section, you will use these concepts to train a reinforcement learning policy for a humanoid robot.
+You now understand the core components of an Isaac Lab simulation environment, including scene creation, robot articulation, observation and action structures, and simulation loop execution.
+In the next section, you will use these concepts to train a reinforcement learning policy for a humanoid robot.

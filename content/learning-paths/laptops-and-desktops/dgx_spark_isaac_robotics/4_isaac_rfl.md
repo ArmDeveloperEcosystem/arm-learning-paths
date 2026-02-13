@@ -1,5 +1,5 @@
 ---
-title: Train a walking humanoid robot with reinforcement learning
+title: Train a Humanoid Locomotion Policy with Isaac Lab on DGX Spark
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Train a reinforcement learning policy using Isaac Lab and RSL-RL
 
-In this section you will train a reinforcement learning (RL) policy for the Unitree H1 humanoid robot to walk over rough terrain. You will use Isaac Lab's RSL-RL integration, which implements the Proximal Policy Optimization (PPO) algorithm. By the end of this section you will understand the full training pipeline, every key hyperparameter, and how to evaluate your trained policy.
+In this section you will train a reinforcement learning (RL) policy for the Unitree H1 humanoid robot to walk over rough terrain. You will use Isaac Lab's RSL-RL integration, which implements the Proximal Policy Optimization (PPO) algorithm. By the end of this section you will understand the full training pipeline, including task configuration, PPO hyperparameters, and policy evaluation.
 
 ## What is RSL-RL?
 
@@ -40,6 +40,8 @@ The task details are:
 
 The robot receives a velocity command (for example, "walk forward at 1.0 m/s") and must learn to coordinate all 19 joints to achieve that velocity while maintaining balance on uneven ground.
 
+This setup provides a high-dimensional control problem ideal for testing locomotion learning under challenging terrain.
+
 ## Step 2: Launch the training
 
 Navigate to the Isaac Lab directory and start training in headless mode for maximum performance:
@@ -51,6 +53,8 @@ export LD_PRELOAD="$LD_PRELOAD:/lib/aarch64-linux-gnu/libgomp.so.1"
     --task=Isaac-Velocity-Rough-H1-v0 \
     --headless
 ```
+
+Once the training starts, you will see log messages reporting iteration progress, rewards, and performance statistics.
 
 This command launches the training with default hyperparameters. The Blackwell GPU runs thousands of parallel H1 environments simultaneously while the Grace CPU handles logging and orchestration.
 
@@ -98,6 +102,8 @@ On DGX Spark, 2048 to 4096 parallel environments work well for locomotion tasks.
 {{% /notice %}}
 
 ## Step 3: Understand the PPO hyperparameters
+
+This section explains the core PPO training parameters used by RSL-RL and how they influence learning quality and stability.
 
 PPO (Proximal Policy Optimization) is the RL algorithm used by RSL-RL. Understanding each hyperparameter helps you tune training for different tasks. The following table describes the key hyperparameters and their roles:
 
@@ -164,6 +170,8 @@ Learning iteration 100/1500
     fps:                       48523
 ```
 
+Interpreting these values helps track convergence and diagnose training instability, such as stagnating rewards or exploding losses.
+
 The following table explains each metric:
 
 | **Metric** | **What it means** | **What to look for** |
@@ -194,9 +202,9 @@ After training completes, evaluate the policy by running inference with visualiz
 For evaluation, use the inference task name `Isaac-Velocity-Rough-H1-Play-v0` instead of the training task name. The play variant disables runtime perturbations used during training and loads the checkpoint automatically.
 {{% /notice %}}
 
-The play script loads the most recent checkpoint and runs the policy in real time. You will see the Unitree H1 humanoid walking over rough terrain, tracking velocity commands.
+The play script loads the most recent checkpoint and runs the policy in real time. You will observe the Unitree H1 humanoid walking over procedurally generated rough terrain, responding to live velocity commands.
 
-You can also specify a specific checkpoint:
+You can also specify a particular checkpoint manually, which is useful for comparing intermediate policy performance.
 
 ```bash
 ./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/play.py \
@@ -215,69 +223,16 @@ During evaluation, observe these behaviors:
 
 The progression from falling to walking demonstrates how PPO gradually optimizes the policy through trial and error across thousands of parallel environments.
 
-## Step 6: Run additional locomotion tasks
-
-Isaac Lab provides locomotion environments for many different robots. Try training other robots to compare performance:
-
-### Flat terrain tasks (easier, faster to train)
-
-```bash
-# Unitree H1 on flat terrain
-./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/train.py \
-    --task=Isaac-Velocity-Flat-H1-v0 --headless
-
-# Unitree Go2 quadruped on flat terrain
-./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/train.py \
-    --task=Isaac-Velocity-Flat-Unitree-Go2-v0 --headless
-
-# ANYmal C quadruped on flat terrain
-./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/train.py \
-    --task=Isaac-Velocity-Flat-Anymal-C-v0 --headless
-```
-
-### Rough terrain tasks (harder, require more iterations)
-
-```bash
-# Unitree G1 humanoid on rough terrain
-./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/train.py \
-    --task=Isaac-Velocity-Rough-G1-v0 --headless
-
-# ANYmal D quadruped on rough terrain
-./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/train.py \
-    --task=Isaac-Velocity-Rough-Anymal-D-v0 --headless
-
-# Boston Dynamics Spot on flat terrain
-./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/train.py \
-    --task=Isaac-Velocity-Flat-Spot-v0 --headless
-```
-
-The following table compares some of the available locomotion environments:
-
-| **Environment** | **Robot** | **Type** | **Terrain** | **Difficulty** |
-|----------------|----------|----------|------------|----------------|
-| `Isaac-Velocity-Flat-H1-v0` | Unitree H1 | Bipedal humanoid | Flat | Medium |
-| `Isaac-Velocity-Rough-H1-v0` | Unitree H1 | Bipedal humanoid | Rough | Hard |
-| `Isaac-Velocity-Flat-G1-v0` | Unitree G1 | Bipedal humanoid | Flat | Medium |
-| `Isaac-Velocity-Rough-G1-v0` | Unitree G1 | Bipedal humanoid | Rough | Hard |
-| `Isaac-Velocity-Flat-Unitree-Go2-v0` | Unitree Go2 | Quadruped | Flat | Easy |
-| `Isaac-Velocity-Rough-Unitree-Go2-v0` | Unitree Go2 | Quadruped | Rough | Medium |
-| `Isaac-Velocity-Flat-Anymal-C-v0` | ANYmal C | Quadruped | Flat | Easy |
-| `Isaac-Velocity-Rough-Anymal-C-v0` | ANYmal C | Quadruped | Rough | Medium |
-| `Isaac-Velocity-Flat-Spot-v0` | Boston Dynamics Spot | Quadruped | Flat | Easy |
-| `Isaac-Velocity-Flat-Digit-v0` | Agility Digit | Bipedal humanoid | Flat | Hard |
-
-{{% notice Tip %}}
-Quadruped robots (Go2, ANYmal, Spot) are generally easier and faster to train than bipedal humanoids (H1, G1, Digit) because four-legged gaits are inherently more stable.
-{{% /notice %}}
 
 ## What you have accomplished
 
-In this section you have:
+In this module, you have:
 
-- Trained a reinforcement learning policy for the Unitree H1 humanoid robot using RSL-RL's PPO implementation
-- Understood every key hyperparameter in the training pipeline: policy architecture, PPO algorithm parameters, and rollout settings
-- Monitored training progress by interpreting reward curves, episode lengths, and loss metrics
-- Evaluated the trained policy with visualization to observe the learned walking behavior
-- Explored additional locomotion environments for different robots and terrain types
+- Trained a reinforcement learning policy for the Unitree H1 humanoid robot using RSL-RL and the PPO algorithm
+- Understood every key hyperparameter in the training pipeline, including policy architecture, PPO parameters, and rollout strategy
+- Monitored training progress using reward trends, episode statistics, and performance metrics
+- Evaluated the trained policy through interactive visualization in Isaac Lab
 
-You now have hands-on experience with the complete RL training pipeline on DGX Spark. In the next section, you will scale beyond single-task locomotion to multi-task and multi-agent reinforcement learning scenarios.
+You have now completed the end-to-end workflow of training, evaluating, and understanding a reinforcement learning policy for humanoid locomotion using Isaac Lab on DGX Spark. This includes configuring simulation environments, tuning algorithm parameters, and deploying trained policies.
+
+This marks the completion of your core learning journey for single-task humanoid reinforcement learning with Isaac Lab.
