@@ -5,6 +5,9 @@ weight: 5
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Validate and test your Arm64 CI/CD pipeline
+
+This section explains how to run, verify, and test your pipeline and container images on Arm64 infrastructure.
 
 ## Run the pipeline
 

@@ -5,6 +5,10 @@ weight: 3
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Create your GitLab project for Arm CI/CD
+
+This section covers how to create a new GitLab project to use with Arm64 runners.
+
 
 Before you begin, log in to your [GitLab account](https://gitlab.com/) or create a new one.
 

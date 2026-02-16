@@ -1,5 +1,5 @@
 ---
-title: Configure CI/CD pipeline for Arm64
+title: Build and configure your Arm64 CI/CD pipeline
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -7,6 +7,12 @@ layout: learningpathall
 ---
 
 GitLab-hosted runners are available for any project without additional setup. To use Arm64 runners, create a `.gitlab-ci.yml` file in your project root and specify the Arm64 runner tag.
+
+---
+
+## Overview
+
+This section guides you through building an Arm64 container image and creating a pipeline configuration for GitLab-hosted runners.
 
 ## Build an Arm64 container image
 
