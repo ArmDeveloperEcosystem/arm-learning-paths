@@ -52,13 +52,13 @@ This section uses the **NXP S32G-VNP-GLDBOX3** hardware platform with the **BSP 
 - **NXP GoldBox 3 Design Page:**  
   https://www.nxp.com/design/design-center/development-boards-and-designs/GOLDBOX-3
 
-#### Acquire the replacement "meta-edgeblox" layer from Tinkerblox
+### Acquire the replacement "meta-edgeblox" layer from Tinkerblox
 
 Please reach out to the Tinkerblox support team to request access to the meta-edgeblox zip file that contains the replacement layer for your Yocto image: **techsupport@tinkerblox.io**
 
 For this example, the file received will be called "meta-edgeblox.zip" and will be used in the next section and in the build script below.
 
-### Build the Yocto image for NXP S32G-VNP-GLDBOX3
+## Build the Yocto image for NXP S32G-VNP-GLDBOX3
 
 {{% notice Note %}}
 In default installs of Ubuntu for your YOCTO build environment, you will get an error from the above command stating that the `/etc/sudoers` file needs to be updated.  Please follow those instructions as the script needs the additional permissions to fully setup properly. Otherwise, the subsequent `bitbake` commands below will fail. 
@@ -224,15 +224,15 @@ cd ./tinkerblox
 
 The build will take around 20-40 minutes to fully complete. 
 
-### Download the built Yocto image for NXP S32G-VNP-GLDBOX3
+## Download the built Yocto image for NXP S32G-VNP-GLDBOX3
 
 Once completed, the built image is archived and then downloaded using the SSH "download" option:
 
 The archived image should be downloaded to a local machine with access to the **NXP S32G-VNP-GLDBOX3** and its SD card for the next steps. 
 
-### Flash the SD card
+## Flash the SD card
 
-#### Download the build Yocto image from the VM instance
+### Download the built Yocto image from the VM instance
 
 In the VM SSH shell, perform the following commands:
 ```bash
@@ -311,7 +311,7 @@ For example, using "1.2.3.4" as the NXP device's IP address, on your local machi
 
         sudo systemctl start tbx-agent.service
 
-#### Manual running
+### Run the agent manually
 
 -   Binary path: `/bin/tbx-agent`
 

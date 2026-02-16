@@ -83,7 +83,7 @@ Manage microservices running on the Edge platform.
 
         sudo tinkerblox-cli microboost uninstall <id>
 
-#### Diagnostics management
+### Diagnostics management
 
 Run diagnostics on the Edge platform.
 
