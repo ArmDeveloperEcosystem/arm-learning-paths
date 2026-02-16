@@ -23,24 +23,23 @@ This Learning Path introduces the architecture, principles, and components that 
 
 ## UltraEdge overview
 
-UltraEdge was built with the vision of **orchestrating the edge-native execution fabric for high-performance compute infrastructure**
+UltraEdge orchestrates an edge-native execution fabric for high-performance compute infrastructure. Key design principles and capabilities include:
 
-Key design principles and capabilities include:
+**Built-for-edge execution stack**
 
-· **Built-for-edge execution stack** 
+A lightweight, adaptive platform for AI and mixed workloads optimized for low latency, high determinism, and minimal footprint.
 
-A lightweight, adaptive platform for **AI and mixed workloads** optimized for low latency, high determinism, and minimal footprint.
-
-· **Dual workload focus** 
+**Dual workload focus**
 
 Native support for both traditional enterprise workloads and next-generation AI workloads, without compromising performance.
 
-· **Full-stack enablement** 
+**Full-stack enablement**
 
-Delivered through the **MicroStack** and **NeuroStack** execution systems, each optimized for its workload domain
+Delivered through MicroStack and NeuroStack execution systems, each optimized for its workload domain.
 
 
-# Understand UltraEdge architecture for edge AI and mixed workloads
+
+## Understand UltraEdge architecture for edge AI and mixed workloads
 
 UltraEdge is an edge-native, high-performance execution fabric for AI and mixed workloads on Arm platforms. Unlike traditional container platforms such as Docker and Kubernetes, UltraEdge minimizes latency, resource overhead, and non-deterministic behavior, making it ideal for edge deployments where performance and efficiency are critical.
 
@@ -67,26 +66,20 @@ UltraEdge orchestrates edge-native execution for high-performance compute infras
 - built-in observability: provides diagnostics, telemetry, and control-plane visibility
 - lower total cost of ownership (TCO): reduces CPU/GPU cluster costs through faster startup, higher utilization, and less runtime overhead
 
-## Examine UltraEdge architecture layers
+
+## UltraEdge architecture layers
 
 UltraEdge is composed of layered systems, each responsible for a distinct aspect of execution and orchestration:
 
-![UltraEdge high-level architecture diagram showing layered execution systems for edge AI and mixed workloads alt-txt#center](https://raw.githubusercontent.com/Tinkerbloxsupport/arm-learning-path-support/main/static/images/High-level%20architecture%20diagram.png "UltraEdge high-level architecture diagram")
+![UltraEdge high-level architecture diagram showing layered execution systems for edge AI and mixed workloads alt-txt#center](https://raw.githubusercontent.com/Tinkerbloxsupport/arm-learning-path-support/main/static/images/High-level%20architecture%20diagram.png "UltraEdge high-level architecture")
 
-### Manage foundational execution with UltraEdge Core Layer
-The Core Layer handles compute infrastructure management, service orchestration, rule-engine orchestration, and data-flow management across workloads.
+UltraEdge organizes functionality into five specialized layers. Each layer is responsible for a specific aspect of workload execution and orchestration:
 
-### Accelerate workloads with UltraEdge Boost Layer
-The Boost Layer provides performance-critical acceleration, including low-level optimized routines, FFI (Foreign Function Interface) integrations, and dynamic connectors.
-
-### Coordinate intelligence with UltraEdge Prime Layer
-The Prime Layer implements workload intelligence and orchestration logic, including business logic execution, trigger and activation sequences, and AI/mixed workload coordination.
-
-### Orchestrate clusters with UltraEdge Dock Layer
-The Dock Layer provides workload and cluster orchestration through Kubernetes-based stacks and Slurm-based scheduling environments.
-
-### Enable data movement with UltraEdge edge-cloud connect layer
-The edge-cloud connect layer enables data streaming to databases (such as InfluxDB, SQLite), diagnostics, logging, and telemetry outputs.
+- **Core layer**: manages compute infrastructure, service orchestration, rule engines, and data flow across workloads.
+- **Boost layer**: accelerates workloads with optimized routines, FFI (Foreign Function Interface) integrations, and dynamic connectors.
+- **Prime layer**: coordinates workload intelligence, business logic, triggers, and AI/mixed workload orchestration.
+- **Dock layer**: orchestrates workloads and clusters using Kubernetes-based stacks and Slurm-based scheduling.
+- **Edge-cloud connect layer**: enables data streaming to databases (such as InfluxDB, SQLite), diagnostics, logging, and telemetry outputs.
 
 ## What you've accomplished and what's next
 

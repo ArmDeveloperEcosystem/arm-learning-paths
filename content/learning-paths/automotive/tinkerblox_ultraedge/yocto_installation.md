@@ -9,7 +9,7 @@ layout: "learningpathall"
 ## System requirements
 
 {{% notice Note %}}
-The requirements below are given as additional information only. The GCP C4A VM instance, running Ubuntu 22.04 with 100GB disk space, will work fine for this learning path.
+The requirements below are given as additional information only. The GCP C4A VM instance, running Ubuntu 22.04 with 100GB disk space, will work fine for this Learning Path.
 {{% /notice %}}
 
 - Linux host system (64-bit recommended)
@@ -22,7 +22,7 @@ The requirements below are given as additional information only. The GCP C4A VM 
   - Ubuntu 22.04 LTS (AArch64)
 
 {{% notice Note %}}
-As of this learning path's publication, Ubuntu 24.04 LTS is NOT a supported Yocto build host OS. This may change in the future.
+As of this Learning Path's publication, Ubuntu 24.04 LTS is NOT a supported Yocto build host OS. This may change in the future.
 {{% /notice %}}
 
 - Minimum hardware requirements:
@@ -42,29 +42,28 @@ As of this learning path's publication, Ubuntu 24.04 LTS is NOT a supported Yoct
 Yocto builds are **very** resource-intensive and may take several hours depending on hardware and memory capacities
 {{% /notice %}}
 
-## Build a Yocto image for NXP S32G-VNP-GLDBOX3
 
-This section uses the **NXP S32G-VNP-GLDBOX3** hardware platform with the **BSP 38.0** release from NXP's `auto_yocto_bsp` repository to run EdgeBlox Agent. The following steps demonstrate how to build a Yocto-based Linux image for this board and prepare it for EdgeBlox deployment.
+## Build a Yocto image for your NXP board
 
-- **NXP Auto Linux BSP Repository (BSP 38.0):**  
+You'll use the **NXP S32G-VNP-GLDBOX3** hardware platform with the **BSP 38.0** release from NXP's `auto_yocto_bsp` repository to run EdgeBlox Agent. Follow these steps to build a Yocto-based Linux image and prepare it for deployment.
+
+- **NXP Auto Linux BSP Repository (BSP 38.0):**
   https://github.com/nxp-auto-linux/auto_yocto_bsp/tree/release/bsp38.0
-
-- **NXP GoldBox 3 Design Page:**  
+- **NXP GoldBox 3 Design Page:**
   https://www.nxp.com/design/design-center/development-boards-and-designs/GOLDBOX-3
 
-### Acquire the replacement "meta-edgeblox" layer from Tinkerblox
+### Get the replacement meta-edgeblox layer
 
-Please reach out to the Tinkerblox support team to request access to the meta-edgeblox zip file that contains the replacement layer for your Yocto image: **techsupport@tinkerblox.io**
+Contact the Tinkerblox support team at **techsupport@tinkerblox.io** to request the meta-edgeblox zip file for your Yocto image. The file you receive will be called "meta-edgeblox.zip" and will be used in the next steps and in the build script below.
 
-For this example, the file received will be called "meta-edgeblox.zip" and will be used in the next section and in the build script below.
 
-## Build the Yocto image for NXP S32G-VNP-GLDBOX3
+## Build the Yocto image
 
 {{% notice Note %}}
-In default installs of Ubuntu for your YOCTO build environment, you will get an error from the above command stating that the `/etc/sudoers` file needs to be updated.  Please follow those instructions as the script needs the additional permissions to fully setup properly. Otherwise, the subsequent `bitbake` commands below will fail. 
+If you see an error about updating the `/etc/sudoers` file, follow the instructions provided. The script needs these permissions to set up properly. If you skip this, the `bitbake` commands below will fail.
 {{% /notice %}}
 
-First, copy this entire config file and save it as "kernel.cfg":
+First, copy the following config file and save it as "kernel.cfg":
 
 ```bash
 CONFIG_NAMESPACES=y
@@ -95,7 +94,7 @@ CONFIG_IP6_NF_IPTABLES=y
 CONFIG_IP6_NF_FILTER=y
 ```
 
-Next copy this entire build script and save it as "build.sh":
+Next, copy the following build script and save it as "build.sh":
 
 ```bash
 #!/bin/bash
@@ -193,7 +192,8 @@ fi
 exit 0
 ```
 
-Next, using the VM SSH window, select "upload" to upload "kernel.cfg", "meta-edgeblox.zip" and "build.sh" to the VM instance:
+
+In your VM SSH window, select "upload" to upload "kernel.cfg", "meta-edgeblox.zip", and "build.sh" to the VM instance.
 
 Invoking SSH file upload:
 ![Invoking file upload from the SSH shell#center](images/gcp-upload.png "Invoking file upload from the SSH shell")
@@ -204,7 +204,8 @@ Selecting files to upload through SSH:
 Upload completed:
 ![Upload completed#center](images/gcp-upload-complete.png "Upload completed")
 
-Next, within your VM SSH window, type these commands to invoke the build:
+
+In your VM SSH window, run the following commands to start the build:
 
 ```bash
 chmod 755 ./build.sh
@@ -214,21 +215,18 @@ cd ./tinkerblox
 ./build.sh
 ```
 
-{{% notice Building Notes %}}
-1). The build will take around 20-40 minutes to fully complete. 
 
-2). During the build, you will be prompted a few times to "restart" some services on the VM. Just press the "tab" key to select "OK" and then "enter" to continue. 
-
-3). Also during the build, you will be prompted to accept the NXP BSP license.  Please type "q" followed by "y" to accept and begin the build. 
+{{% notice Building notes %}}
+- The build takes about 20-40 minutes to complete.
+- During the build, you might be prompted to restart some services. Press the "tab" key to select "OK" and then "enter" to continue.
+- You will be prompted to accept the NXP BSP license. Type "q" followed by "y" to accept and begin the build.
 {{% /notice %}}
 
-The build will take around 20-40 minutes to fully complete. 
 
-## Download the built Yocto image for NXP S32G-VNP-GLDBOX3
+## Download the built Yocto image
 
-Once completed, the built image is archived and then downloaded using the SSH "download" option:
+After the build completes, archive the image and download it to your local machine. Make sure your local machine has access to the **NXP S32G-VNP-GLDBOX3** and its SD card for the next steps.
 
-The archived image should be downloaded to a local machine with access to the **NXP S32G-VNP-GLDBOX3** and its SD card for the next steps. 
 
 ## Flash the SD card
 
@@ -259,41 +257,42 @@ cd s32g399ardb3
 ls -al fsl-image-base-s32g399ardb3.sdcard
 ```
 
-We are now ready to flash the image to the SD card. Insert the SD card (your localhost may expose the SD card as /dev/sdb for example if linux/ubuntu based). 
+Insert the SD card. Your system may expose it as /dev/sdb (Linux/Ubuntu example).
 
 {{% notice Note %}}
-Replace "/dev/sdb" with your specific local host's device file for the SD card connected to your local device:
+Replace "/dev/sdb" with your system's device file for the SD card.
 {{% /notice %}}
+
+Write the image to the SD card:
 
 ```bash
 ls -al fsl-image-base-s32g399ardb3.sdcard
 sudo dd if=fsl-image-base-s32g399ardb3.sdcard of=/dev/sdb bs=1M && sync
 ```
 
-## Activate the agent on the NXP S32G-VNP-GLDBOX3
 
-On the first boot, the agent will automatically generate a file named
-`activation_key.json` at the path:
+## Activate the agent on your NXP device
 
-    /opt/tinkerblox/activation_key.json
+On first boot, the agent automatically generates a file named `activation_key.json` at:
 
-Log into your **NXP S32G-VNP-GLDBOX3** device using SSH after determining its IP address (for example, 1.2.3.4 - replace with the IP address of your NXP device):
+  /opt/tinkerblox/activation_key.json
+
+Log in to your **NXP S32G-VNP-GLDBOX3** device using SSH. Replace `1.2.3.4` with your device's IP address:
 
 ```bash
 ssh root@1.2.3.4
 ```
 
-Within the SSH login shell:
+In the SSH shell, check for the activation key:
 
 ```bash
 cd /opt/tinkerblox/
 ls -al activation_key.json
 ```
 
-Share this `activation_key.json` file with the TinkerBlox team at **techsupport@tinkerblox.io** to
-receive license key (which includes license metadata) that will enable device activation. You will receive a new `activation_key.json` that you'll use in the following steps.
+Send this `activation_key.json` file to the Tinkerblox team at **techsupport@tinkerblox.io** to receive your license key. You will get a new `activation_key.json` to use in the next steps.
 
-Back on the NXP device in the SSH shell, once your device activation json file is received from TinkerBlox support:
+Once you receive the licensed file:
 
 1.  Stop the agent using the following command:
 
@@ -313,31 +312,29 @@ For example, using "1.2.3.4" as the NXP device's IP address, on your local machi
 
 ### Run the agent manually
 
--   Binary path: `/bin/tbx-agent`
-
--   To start:
-
-        cd /bin
-        ./tbx-agent
-
--   To stop, press <span class="kbd">Ctrl</span> +
-    <span class="kbd">C</span> once.
+- Binary path: `/bin/tbx-agent`
+- To start:
+  ```bash
+  cd /bin
+  ./tbx-agent
+  ```
+- To stop, press **Ctrl+C** once.
 
 <video width="800" controls>
   <source src="https://raw.githubusercontent.com/Tinkerbloxsupport/arm-learning-path-support/main/static/videos/Activation.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
+
 ## Install and run workloads
 
-This section demonstrates how to deploy and manage a MicroPac-based
-workload on an UltraEdge-enabled device.
+You can deploy and manage MicroPac-based workloads on your UltraEdge-enabled device using the MicroBoost CLI. Use the following steps to install, start, stop, and monitor workloads.
 
 This workflow uses the MicroBoost CLI to install, start, stop, and monitor MicroPac-based workloads running on UltraEdge.
 
 ### Build the workload using mpac builder
 
-This section demonstrates how to build the .mpac file from a cross-architecture setup using **Micropac Builder**.
+To build the .mpac file from a cross-architecture setup using **Micropac Builder**:
 
 -   Verify QEMU installation:
 
@@ -359,55 +356,65 @@ After the build completes, the workload file your_service.mpac will be generated
 Copy the your_service.mpac file to any root filesystem path of your NXP target to deploy it.
 
 
+systemctl start runit-supervise
+tinkerblox-cli microboost install -f /path/to/your_service.mpac
+tinkerblox-cli microboost list
+tinkerblox-cli microboost start <id>
+tinkerblox-cli microboost stop <id>
+tinkerblox-cli microboost status <id>
+tinkerblox-cli microboost uninstall <id>
+
 ### Install the workloads on the device
 
-```
+Start the runit supervisor:
+```bash
 systemctl start runit-supervise
 ```
 
-```
+Install the workload:
+```bash
 tinkerblox-cli microboost install -f /path/to/your_service.mpac
 ```
 
-Now use the microboost List command to find the id of the service.
-
-```
+List installed services:
+```bash
 tinkerblox-cli microboost list
 ```
 
-Copy the id and use the commands below to start, stop, and check the status of the service.
+Copy the service ID and use the following commands to manage the service:
 
-```
+Start the service:
+```bash
 tinkerblox-cli microboost start <id>
 ```
 
-```
+Stop the service:
+```bash
 tinkerblox-cli microboost stop <id>
 ```
 
-```
+Check the service status:
+```bash
 tinkerblox-cli microboost status <id>
 ```
 
-To uninstall the workload with the specified ID:
-
-```
+Uninstall the workload:
+```bash
 tinkerblox-cli microboost uninstall <id>
 ```
 
-## Additional information for reference
 
-Below are two additional videos as additional reference information.
+## Watch video walkthroughs
 
-Microservice Setup/Install:
+Watch these videos for additional guidance:
 
+**Microservice setup and install:**
 <video width="800" controls>
   <source src="https://raw.githubusercontent.com/Tinkerbloxsupport/arm-learning-path-support/main/static/videos/microservice_installation.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
-Yocto Setup/Build/Install:
-
+**Yocto setup, build, and install:**
 <video width="800" controls>
   <source src="https://raw.githubusercontent.com/Tinkerbloxsupport/arm-learning-path-support/main/static/videos/yocto.mp4" type="video/mp4">
   Your browser does not support the video tag.

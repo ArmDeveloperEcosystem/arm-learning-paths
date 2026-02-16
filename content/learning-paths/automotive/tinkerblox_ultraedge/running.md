@@ -88,59 +88,53 @@ sudo tinkerblox-cli diagnostics <command>
 
 **Available diagnostics:**
 
-        sudo tinkerblox-cli diagnostics full
+- **full**: Run complete system diagnostics and summarize results
+  ```bash
+  sudo tinkerblox-cli diagnostics full
+  ```
+- **system**: Check CPU, memory, and OS-level health
+  ```bash
+  sudo tinkerblox-cli diagnostics system
+  ```
+- **network**: Verify network connectivity and endpoint reachability
+  ```bash
+  sudo tinkerblox-cli diagnostics network
+  ```
+- **filesystem**: Validate database and filesystem connectivity and integrity
+  ```bash
+  sudo tinkerblox-cli diagnostics filesystem
+  ```
+- **engine**: Check engine, microboost, and neuroboost
+  ```bash
+  sudo tinkerblox-cli diagnostics engine
+  ```
 
-**system** : Check CPU, memory, and OS-level health
+## Troubleshoot common issues
 
-        sudo tinkerblox-cli diagnostics system
+If you encounter errors while running CLI commands or deploying microservices, use the following guidance to resolve them:
 
-**network** : Verify network connectivity and endpoint reachability
+**Permission denied**
+- Ensure you have `sudo` privileges.
+- Check directory ownership and permissions.
+- Verify overlay filesystem support is enabled.
 
-        sudo tinkerblox-cli diagnostics network
+**Directory creation failed**
+- Check available disk space.
+- Verify parent directory permissions.
+- Ensure the path is valid.
 
-**filesystem** : Validate database/filesystem connectivity and integrity
-
-        sudo tinkerblox-cli diagnostics filesystem
-
-**engine** : Check engine microboost neuroboost
-
-        sudo tinkerblox-cli diagnostics engine
-
-## Troubleshooting
-
- The following sections describe common errors you may encounter while running CLI commands or deploying microservices, along with guidance on how to resolve them. These are general errors and are not limited to any specific scenario; they may occur while executing commands or managing the system.
-
-Permission denied
-
--   Ensure `sudo` privileges.
--   Check directory ownership and permissions.
--   Verify overlay filesystem support.
-
-Directory creation failed
-
--   Check disk space.
--   Verify parent directory permissions.
--   Ensure the path is valid.
-
-Cross-architecture build issues
-
-Cross-architecture issues typically occur when binaries are built for a different CPU architecture than the host system. They are not related to yocto build issues. 
-
--   Verify QEMU installation:
-
-```bash
+**Cross-architecture build issues**
+Cross-architecture issues usually occur when binaries are built for a different CPU architecture than your host system. These are not related to Yocto build issues.
+- Verify QEMU installation:
+        ```bash
         qemu-aarch64-static --version
-```
-
--   Check binfmt registration:
-
-```bash
+        ```
+- Check binfmt registration:
+        ```bash
         ls /proc/sys/fs/binfmt_misc/
-```
-
--   Ensure the target architecture is enabled.
-
--   If issues persist, change the host architecture.
+        ```
+- Ensure the target architecture is enabled.
+- If issues persist, try changing the host architecture.
 
 ## What you've accomplished and what's next
 

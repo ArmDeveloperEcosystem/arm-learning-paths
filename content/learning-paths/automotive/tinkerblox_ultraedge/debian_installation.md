@@ -1,5 +1,5 @@
 ---
-title: Install UltraEdge on Debian and Ubuntu for edge AI workloads
+title: Install UltraEdge on Debian and Ubuntu for Edge AI workloads
 
 weight: 5
 
@@ -232,12 +232,12 @@ This generates a file named `<project_name>.mpac`.
 
 To confirm that the Micropac has been generated properly, follow these steps:
 
-1. **Locate the Package:** Find the generated file with the `.mpac` extension.
-2. **Extract the Contents:** Extract the `.mpac` file using a standard extraction tool (or rename it to `.zip`/`.tar.gz` if necessary to open it).
-3. **Verify Contents:** The extracted folder must contain exactly three files:
-    *   **`manifest.yaml`**: Contains the metadata and configuration for the package.
-    *   **RootFS tarball**: The base file system layer (in `.tar` format).
-    *   **Application layer tarball**: The specific application logic/binaries (in `.tar` format).
+* Locate the package: find the generated file with the `.mpac` extension.
+* Extract the contents: extract the `.mpac` file using a standard extraction tool (or rename it to `.zip`/`.tar.gz` if necessary to open it.
+* Verify the contents: the extracted folder must contain exactly three files:
+    * `manifest.yaml`: contains the metadata and configuration for the package.
+    * RootFS tarball: the base file system layer (in `.tar` format).
+    * Application layer tarball: the specific application logic/binaries (in `.tar` format).
 
 ## What you've accomplished and what's next
 
