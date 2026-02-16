@@ -22,7 +22,7 @@ If you're using an existing project, skip to the next section.
 
 Navigate to **Projects** in the left sidebar and select **New Project**:
 
-![Gitlab-Projects #center](_images/gitlab-projects.png)
+![GitLab left sidebar showing Projects menu with New Project option highlighted alt-txt#center](_images/gitlab-projects.png "GitLab Projects menu in left sidebar")
 
 Choose **Create blank project** or **Create from template** (select **GitLab CI/CD components** if using a template):
 

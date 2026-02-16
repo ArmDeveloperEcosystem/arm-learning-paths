@@ -5,14 +5,11 @@ weight: 4
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-
-GitLab-hosted runners are available for any project without additional setup. To use Arm64 runners, create a `.gitlab-ci.yml` file in your project root and specify the Arm64 runner tag.
-
----
-
 ## Overview
 
 This section guides you through building an Arm64 container image and creating a pipeline configuration for GitLab-hosted runners.
+
+GitLab-hosted runners are available for any project without additional setup. To use Arm64 runners, create a `.gitlab-ci.yml` file in your project root and specify the Arm64 runner tag.
 
 ## Build an Arm64 container image
 
@@ -69,15 +66,15 @@ Create these three files before adding the pipeline configuration. Once you comm
 
 From your project page, select **Set up CI/CD** or use the **+** button to create a new file:
 
-![CI-CD-New #center](_images/ci-cd-new.png)
+![GitLab project page with CI/CD setup option highlighted, showing the Set up CI/CD button in the center of the interface alt-txt#center](_images/ci-cd-new.png "GitLab Set up CI/CD button")
 
 Name the file `.gitlab-ci.yml`:
 
-![GitLab new YAML file creation screen for pipeline configuration#center](_images/new-yml.png "GitLab new YAML file creation screen")
+![GitLab new YAML file creation screen for pipeline configuration alt-txt#center](_images/new-yml.png "GitLab new YAML file creation screen")
 
 Select **Edit** > **Edit in pipeline editor**:
 
-![GitLab pipeline editor screen for editing .gitlab-ci.yml#center](_images/editor-yml.png "GitLab pipeline editor screen")
+![GitLab pipeline editor screen for editing .gitlab-ci.yml alt-txt#center](_images/editor-yml.webp "GitLab pipeline editor screen")
 
 Add the following pipeline configuration. This defines three stages that build, test, and publish your Arm64 container image:
 ```yaml
