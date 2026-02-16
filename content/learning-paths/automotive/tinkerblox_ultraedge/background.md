@@ -6,7 +6,7 @@ weight: 2
 layout: "learningpathall"
 ---
 
-### Introduction
+## Introduction
 
 UltraEdge is an edge-native, high-performance execution fabric designed to run AI and mixed workloads without the overhead of traditional container platforms. While technologies like Docker and Kubernetes were created for general-purpose cloud environments, they introduce latency, resource bloat, and non-deterministic behavior that are poorly suited for edge deployments.
 
@@ -22,7 +22,7 @@ Together, these systems deliver up to **30× faster startup times** and **3.8× 
 
 This learning path introduces the architecture, principles, and components that make UltraEdge a high-performance execution fabric for modern edge infrastructure. 
 
-### Ultraedge overview
+## UltraEdge overview
 
 UltraEdge was built with the vision of **orchestrating the edge-native execution fabric for high-performance compute infrastructure**
 
@@ -60,7 +60,7 @@ Provides control-plane visibility, diagnostics, and telemetry for operational in
 
 Demonstrable reduction in CPU/GPU cluster costs through faster startup, higher utilization, and reduced runtime overhead. 
 
-### UltraEdge high-level architecture
+## UltraEdge high-level architecture
 
 UltraEdge is composed of layered systems, each responsible for a distinct aspect of execution and orchestration:
 
@@ -68,32 +68,41 @@ UltraEdge is composed of layered systems, each responsible for a distinct aspect
 
 ---
 
-#### UltraEdge Core Layer
+### UltraEdge Core Layer
 *Manages the foundational execution fabric, including:*
 * Compute infrastructure management
 * Service orchestration and lifecycle management
 * Rule-engine orchestration
 * Data-flow management across workloads
 
-#### UltraEdge Boost Layer
+### UltraEdge Boost Layer
 *Provides performance-critical acceleration, including:*
 * Low-level optimized routines
 * FFI (Foreign Function Interface) integrations
 * Dynamic connectors and southbound protocol adapters
 
-#### UltraEdge Prime Layer
+### UltraEdge Prime Layer
 *Implements workload intelligence and orchestration logic, including:*
 * Business logic execution
 * Trigger and activation sequences
 * AI and mixed workload coordination
 
-#### UltraEdge Dock
+### UltraEdge Dock
 *Provides workload and cluster orchestration through:*
 * Kubernetes-based stacks
 * Slurm-based scheduling environments
 
-#### UltraEdge Edge-Cloud Connect Layer
+### UltraEdge Edge-Cloud Connect Layer
+
 *Enables data movement and observability, including:*
 * Data streaming to databases (for example, InfluxDB, SQLite)
 * Diagnostics, logging, and telemetry outputs
+
+## What you've accomplished and what's next
+
+In this section, you:
+- Explored the motivation and architecture behind UltraEdge
+- Learned about the core, boost, prime, dock, and edge-cloud connect layers
+
+Next, you'll move on to hands-on installation and configuration of UltraEdge on your target platform.
 

@@ -42,7 +42,7 @@ As of this learning path's publication, Ubuntu 24.04 LTS is NOT a supported Yoct
 Yocto builds are **very** resource-intensive and may take several hours depending on hardware and memory capacities
 {{% /notice %}}
 
-## Yocto build instructions for NXP S32G-VNP-GLDBOX3
+## Build a Yocto image for NXP S32G-VNP-GLDBOX3
 
 This section uses the **NXP S32G-VNP-GLDBOX3** hardware platform with the **BSP 38.0** release from NXP's `auto_yocto_bsp` repository to run EdgeBlox Agent. The following steps demonstrate how to build a Yocto-based Linux image for this board and prepare it for EdgeBlox deployment.
 
@@ -359,7 +359,7 @@ After the build completes, the workload file your_service.mpac will be generated
 Copy the your_service.mpac file to any root filesystem path of your NXP target to deploy it.
 
 
-### Install the workloads in the device using below command
+### Install the workloads on the device
 
 ```
 systemctl start runit-supervise
@@ -412,3 +412,12 @@ Yocto Setup/Build/Install:
   <source src="https://raw.githubusercontent.com/Tinkerbloxsupport/arm-learning-path-support/main/static/videos/yocto.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
+
+## What you've accomplished and what's next
+
+In this section, you:
+- Built a Yocto image for the NXP S32G-VNP-GLDBOX3 platform
+- Activated and managed the UltraEdge agent on your target device
+- Built, installed, and managed MicroPac workloads using the mpac builder and CLI
+
+Next, you can further customize your Yocto builds, automate deployment pipelines, or explore integration with other edge and cloud platforms.

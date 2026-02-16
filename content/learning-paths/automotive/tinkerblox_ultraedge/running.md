@@ -13,7 +13,7 @@ To practice the commands below, install and run a sample microservice on your de
 
 https://github.com/Tinkerbloxsupport/arm-learning-path-support/blob/main/static/Sample_ms/dte_nn.mpac
 
-### Tinkerblox CLI usage guide
+## Use the Tinkerblox CLI
 
 Tinkerblox Command Line Interface for managing the Edge Agent and
 microservices.
@@ -33,9 +33,9 @@ microservices.
 -   `-h`, `--help` — Print help
 -   `-V`, `--version` — Print version
 
-### Usage
+## Usage
 
-#### Check CLI connection status
+### Check CLI connection status
 
 ```bash
     sudo tinkerblox-cli status
@@ -43,7 +43,7 @@ microservices.
 
 *Displays whether the CLI is connected to the Edge Agent.*
 
-#### Microservice management
+### Manage microservices
 
 Manage microservices running on the Edge platform. 
 
@@ -51,7 +51,7 @@ Manage microservices running on the Edge platform.
 
         sudo tinkerblox-cli microboost <command> [options]
 
-##### Available commands
+#### Available commands
 
 * **install**
     Installs a microservice. You must provide the path to the MPAC file as an argument.
@@ -146,3 +146,11 @@ Cross-architecture issues typically occur when binaries are built for a differen
 -   Ensure the target architecture is enabled.
 
 -   If issues persist, change the host architecture.
+
+## What you've accomplished and what's next
+
+In this section, you:
+- Used the Tinkerblox CLI to manage microservices and system diagnostics
+- Practiced installing, starting, stopping, and monitoring microservices on UltraEdge
+
+Next, explore more advanced CLI features, automate deployments, or integrate with additional monitoring and orchestration tools for your edge environment.
