@@ -1,5 +1,5 @@
 ---
-title: Create a Google Axion C4A virtual machine on Google Cloud to build a Yocto image
+title: Provision a Google Axion C4A VM for Yocto image builds on Arm
 weight: 3
 
 ### FIXED, DO NOT MODIFY

@@ -1,5 +1,5 @@
 ---
-title: Debian/Ubuntu installation - UltraEdge
+title: Install UltraEdge on Debian and Ubuntu for edge AI workloads
 
 weight: 5
 
@@ -10,11 +10,11 @@ layout: "learningpathall"
  
 Follow these steps to initialize and register your device within the **Uncloud** ecosystem:
 
-1.  **Access the Platform:**
+* **Access the Platform:**
 
-    Navigate to the [Uncloud Dashboard](https://dev.tinkerblox.io/) and log in with your credentials. 
+    Navigate to the [Uncloud Dashboard](https://dev.tinkerblox.io/) and log in with your credentials.
 
-2.  **Provision a New Device:**
+* **Provision a New Device:**
     * Go to **Device Management** > **New Device**.
 
 ![Device Management](https://raw.githubusercontent.com/Tinkerbloxsupport/arm-learning-path-support/main/static/images/Device_managment.png)
@@ -25,19 +25,19 @@ Follow these steps to initialize and register your device within the **Uncloud**
 
 ![Initialize Device](https://raw.githubusercontent.com/Tinkerbloxsupport/arm-learning-path-support/main/static/images/Initialize%20.png)
 
-3. **Install prerequisites:**
+* **Install prerequisites:**
 
     Install the required prerequisites:
 
 ```bash
-sudo apt update 
+sudo apt update
 sudo apt install -y curl jq
 ```
 
 
-4.  **Retrieve installation command details:**
+* **Retrieve installation command details:**
 
-    * Copy the generated device installation command or details from the **Uncloud** portal to your clipboard.
+    Copy the generated device installation command or details from the **Uncloud** portal to your clipboard.
 
 ![Installation Command](https://raw.githubusercontent.com/Tinkerbloxsupport/arm-learning-path-support/main/static/images/Initialize%20_command.png)
 

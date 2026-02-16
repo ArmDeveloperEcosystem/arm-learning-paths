@@ -1,97 +1,92 @@
 ---
-title: Running UltraEdge HPC-I execution fabric for AI & mixed workloads
+title: Run and manage UltraEdge HPC-I for AI and mixed workloads on Arm
 
 weight: 6
 
 layout: "learningpathall"
 ---
 
+## Get started with the Tinkerblox CLI
 
-This section provides a hands-on walkthrough of the Tinkerblox CLI to help you explore how microservices are deployed, managed, and monitored on the UltraEdge platform. The exercises focus on inspecting system state, installing a sample microservice, and observing its runtime behavior.
+In this section, you'll use the Tinkerblox CLI to deploy, manage, and monitor microservices on the UltraEdge platform. You'll practise inspecting system state, installing a sample microservice, and observing its runtime behavior.
 
-To practice the commands below, install and run a sample microservice on your device. Use below git link find a mpac file(only for practice purpose).
-
-https://github.com/Tinkerbloxsupport/arm-learning-path-support/blob/main/static/Sample_ms/dte_nn.mpac
+To get started, download a sample MPAC file from the [Tinkerblox support repository](https://github.com/Tinkerbloxsupport/arm-learning-path-support/blob/main/static/Sample_ms/dte_nn.mpac) and install it on your device.
 
 ## Use the Tinkerblox CLI
 
-Tinkerblox Command Line Interface for managing the Edge Agent and
-microservices.
+The Tinkerblox Command Line Interface (CLI) lets you manage the Edge Agent and microservices on UltraEdge devices.
 
-**Usage:**
+**Basic usage:**
 
-        tinkerblox-cli [OPTIONS] <COMMAND>
+```bash
+tinkerblox-cli [OPTIONS] <COMMAND>
+```
 
-**Commands:**
+**Common commands:**
 
--   `status` — Show connection status with the Edge Agent
--   `microboost` — Microservice management commands
--   `help` — Print this message or the help of the given subcommand(s)
+- `status`: Show connection status with the Edge Agent
+- `microboost`: Microservice management commands
+- `help`: Print this message or the help for a given subcommand
 
 **Options:**
 
--   `-h`, `--help` — Print help
--   `-V`, `--version` — Print version
+- `-h`, `--help`: Print help
+- `-V`, `--version`: Print version
 
-## Usage
+## Check CLI connection status
 
-### Check CLI connection status
+To verify that the CLI is connected to the Edge Agent, run:
 
 ```bash
-    sudo tinkerblox-cli status
+sudo tinkerblox-cli status
 ```
 
-*Displays whether the CLI is connected to the Edge Agent.*
+The output shows whether the CLI is connected to the Edge Agent.
 
-### Manage microservices
+## Manage microservices
 
-Manage microservices running on the Edge platform. 
+You can install, list, start, stop, and uninstall microservices using the `microboost` command. Replace `/path/to/your.mpac` with the path to your MPAC file and `<id>` with the microservice ID.
 
-**Syntax:**
+**Install a microservice:**
+```bash
+sudo tinkerblox-cli microboost install -f /path/to/your.mpac
+```
 
-        sudo tinkerblox-cli microboost <command> [options]
+**List installed microservices:**
+```bash
+sudo tinkerblox-cli microboost list
+```
 
-#### Available commands
+**Show microservice status:**
+```bash
+sudo tinkerblox-cli microboost status <id>
+```
 
-* **install**
-    Installs a microservice. You must provide the path to the MPAC file as an argument.
+**Stop a microservice:**
+```bash
+sudo tinkerblox-cli microboost stop <id>
+```
 
-        sudo tinkerblox-cli microboost install -f /path/to/your.mpac
+**Start a microservice:**
+```bash
+sudo tinkerblox-cli microboost start <id>
+```
 
-* **list**
-    Lists all installed microservices.
+**Uninstall a microservice:**
+```bash
+sudo tinkerblox-cli microboost uninstall <id>
+```
 
-        sudo tinkerblox-cli microboost list
+## Run diagnostics
 
-* **status <id>**
-    Shows statistics (CPU, memory, status, etc.) for the specified microservice.
-
-        sudo tinkerblox-cli microboost status <id>
-
-* **stop <id>**
-    Stops the microservice with the specified ID.
-
-        sudo tinkerblox-cli microboost stop <id>
-
-* **start <id>**
-    Starts the microservice with the specified ID (must be stopped).
-
-        sudo tinkerblox-cli microboost start <id>
-
-* **uninstall <id>**
-    Uninstalls the microservice with the specified ID.
-
-        sudo tinkerblox-cli microboost uninstall <id>
-
-### Diagnostics management
-
-Run diagnostics on the Edge platform.
+Use the `diagnostics` command to check system health and connectivity on your UltraEdge device.
 
 **Syntax:**
+```bash
+sudo tinkerblox-cli diagnostics <command>
+```
 
-        sudo tinkerblox-cli diagnostics <command>
-
-**full** : Run complete system diagnostics and summarize results
+**Available diagnostics:**
 
         sudo tinkerblox-cli diagnostics full
 
