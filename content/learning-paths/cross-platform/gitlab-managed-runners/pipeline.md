@@ -139,4 +139,13 @@ The `push_latest` job runs only on the default branch (typically `main`). It tag
 **Authentication:**
 GitLab automatically provides `$CI_REGISTRY_PASSWORD` and `$CI_REGISTRY_USER` variables for authenticating to the container registry.
 
-Commit the configuration. GitLab validates the syntax and starts the pipeline automatically. 
+Commit the configuration. GitLab validates the syntax and starts the pipeline automatically.
+
+## What you've accomplished and what's next
+
+In this section, you:
+- Built a simple C application for Arm64
+- Created a Dockerfile and containerized your application
+- Configured a GitLab pipeline to build and push Arm64 images
+
+Next, you'll run your pipeline, verify the results, and test your container image on Arm64 infrastructure. Continue to the next section to validate your CI/CD workflow and ensure your application is ready for deployment on Arm platforms.
