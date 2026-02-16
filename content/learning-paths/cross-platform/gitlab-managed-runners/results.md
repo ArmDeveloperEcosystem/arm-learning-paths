@@ -14,7 +14,7 @@ Navigate to **Build** > **Pipelines** and select **Run pipeline**:
 
 Select individual jobs to view their output and status:
 
-![pipeline-execution #center](_images/pipeline-execution.png)
+![GitLab pipeline execution screen showing job output and status alt-txt#center](_images/pipeline-execution.png "GitLab pipeline execution screen")
 
 ## Verify Arm64 architecture
 
@@ -62,6 +62,8 @@ The pipeline editor provides helpful features:
 
 - **Visualize**: View your pipeline as a graph showing stage dependencies
 - **Validate**: Check pipeline syntax before committing changes
+
+![GitLab visual pipeline editor showing pipeline graph and validation tools alt-txt#center](_images/visual-pipeline.webp "GitLab visual pipeline editor with graph and validation tools")
 
 ## What you've accomplished and what's next
 

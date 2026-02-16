@@ -1,10 +1,6 @@
 ---
 title: Build a CI/CD pipeline using GitLab-hosted Arm runners
 
-draft: true
-cascade:
-    draft: true
-
 
 minutes_to_complete: 30
 
