@@ -165,14 +165,14 @@ Current runner version: '2.331.0'
 Settings → Secrets and Variables → Actions → New repository secret
 ```
 
-Add the following secrets using the previously stored Docker Hub username and saved token from the previous section:
+Add the following secrets using your Docker Hub username Docker Hub generated personal access token with "RO" authorization:
 
-| Name              | Value                               |
-| ----------------- | ----------------------------------- |
-| `DOCKER_USERNAME` | Your Docker Hub username            |
-| `DOCKER_PASSWORD` | Docker Hub password or access token |
-| `IMAGE_NAME`      | trivy-multiarch-nginx               |
-| `IMAGE_TAG`       | latest                              |
+| Name              | Value                            |
+| ----------------- | -------------------------------- |
+| `DOCKER_USERNAME` | Your Docker Hub username         |
+| `DOCKER_PASSWORD` | Docker Hub personal access token |
+| `IMAGE_NAME`      | trivy-multiarch-nginx            |
+| `IMAGE_TAG`       | latest                           |
 
 ![GitHub Actions secrets configuration#center](images/secrets.png "GitHub Secrets Configuration")
 
@@ -245,11 +245,17 @@ git commit -m "Add Trivy scan on Arm runner"
 git push origin main
 ```
 
-Push triggers GitHub Actions automatically.
+Push triggers GitHub Actions automatically. You should also see output from the ./run.sh command running in the other SSH shell that resembles:
+
+```output
+026-02-17 16:09:52Z: Listening for Jobs
+2026-02-17 16:15:27Z: Running job: security-scan
+2026-02-17 16:15:35Z: Job security-scan completed with result: Failed
+```
 
 ## Verify CI Execution (Trivy Security Gate on Arm Runner)
 
-After pushing your code to GitHub, navigate to:
+After pushing your code to GitHub, on the github web dashboard, navigate to:
 
 ```text
 GitHub → Actions → Trivy Scan on Arm Runner
