@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Run CPU Cycle Hotspot Recipe
 
-As the `main.cpp` file below shows, we simply create a 1920x1080 bitmap image of our fractal. To quickly see where the bottleneck, or hotspot, within our program is, we will run the recipe through Arm Total Performance (ATP). 
+As shown in the `main.cpp` file below, the program generates a 1920×1080 bitmap image of our fractal. To identify performance bottlenecks, we’ll run the CPU Cycle Hotspot recipe in Arm Total Performance (ATP). ATP uses sampling to estimate where the CPU spends most of its time, allowing it to highlight the hottest functions—especially useful in larger applications where it isn’t obvious ahead of time which functions will dominate runtime.
 
-**Please Note**: You will need to replace the first string argument in the `myplot.draw()` function with the absolute path to the image folder and rebuild the application.
+**Please Note**: You will need to replace the first string argument in the `myplot.draw()` function with the absolute path to the image folder and rebuild the application. If not, the image will be written to the `/tmp/atperf/tools/atperf-agent` directory from where the binary is run. As the name suggests, this folder is periodically deleted. 
 
 ```cpp
 #include "Mandelbrot.h"

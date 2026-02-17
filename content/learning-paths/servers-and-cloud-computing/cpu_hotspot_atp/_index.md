@@ -1,16 +1,17 @@
 ---
-title: Getting Started with CPU Cycle Hotspot 
+title: Find CPU Cycle Hotspots with Arm Total Performance
 
 minutes_to_complete: 30
 
-who_is_this_for: Engineers looking to optimize their AArch64 workload running on a Linux operating system. 
+who_is_this_for: Cloud Engineers looking to optimize their workload running on a Linux-based Arm system. 
 
 learning_objectives: 
-    - understand how to intepret a flame graph through a worked example
-    - understand which functions within a program have the greatest CPU utilization and candidates for optimization
+    - Run the CPU Cycle Hotspot recipe in Arm Total Performance
+    - Identify which functions in your program use the most CPU cycles, so you can target the best candidates for optimization.
 
 prerequisites:
     - Access to Arm Total Performance
+    - Basic understand on C++
 
 author: Kieran Hejmadi
 
