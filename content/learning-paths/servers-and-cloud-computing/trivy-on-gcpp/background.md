@@ -14,8 +14,17 @@ To learn more, see the Microsoft blog [Announcing the preview of new Azure virtu
 
 ## Trivy
 
-Trivy is an open-source vulnerability scanner designed to detect security issues in container images, filesystems, and infrastructure configurations. It is widely used in modern DevSecOps workflows to identify known vulnerabilities in operating system packages and application dependencies.
+Trivy is an open-source vulnerability scanner designed to detect security issues in container images, filesystems, and infrastructure configurations. It's widely used in modern DevSecOps workflows to identify known vulnerabilities in operating system packages and application dependencies.
 
 You can use Trivy to perform fast and reliable security scans on container images built for multiple architectures, including Arm64. It helps teams shift security left by detecting vulnerabilities early in the development and CI/CD pipeline.
 
 Learn more at the [Trivy official website](https://trivy.dev/) and in the [Trivy documentation](https://trivy.dev/docs/).
+
+## What you've accomplished and what's next
+
+You now understand the core technologies in this Learning Path:
+
+- Azure Cobalt 100, Microsoft's first-generation Arm-based processor built on Neoverse-N2 architecture
+- Trivy, an open-source security scanner for detecting vulnerabilities in container images
+
+Next, you'll create an Azure Cobalt 100 virtual machine to begin building and scanning multi-architecture container images.

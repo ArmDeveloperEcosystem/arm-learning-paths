@@ -1,5 +1,5 @@
 ---
-title: Build and Scan Multi-Architecture Container Images with Trivy on Azure Cobalt 100 (Arm64)
+title: Build and scan multi-architecture container images with Trivy
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -23,7 +23,8 @@ You will:
 Ensure:
 
 - Azure Cobalt 100 Arm64 Ubuntu VM
-- Docker Hub account
+- [Docker Hub account](https://hub.docker.com) (create one if you don't have it)
+- [GitHub account](https://github.com) (create one if you don't have it)
 - Internet connectivity
 
 Verify architecture:
@@ -33,6 +34,7 @@ uname -m
 ```
 
 ## Install Docker on Arm64 VM
+
 Update your system and install required tools for Docker installation.
 
 ```bash
@@ -73,6 +75,7 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin
 sudo usermod -aG docker $USER
 newgrp docker
 ```
+
 Adds the user to the docker group and applies the new group permissions immediately, enabling non-root access to Docker.
 
 **Verify:**
@@ -81,6 +84,12 @@ Confirm Docker is running natively on Arm64.
 
 ```bash
 docker info | grep Architecture
+```
+
+You should see a result similar to:
+
+```output
+Architecture: aarch64
 ```
 
 ## Configure Docker Buildx for Multi-Architecture Builds
@@ -105,35 +114,23 @@ docker buildx inspect --bootstrap
 
 Creates a workspace for the demo container application.
 
-```bahs
-mkdir trivy-multiarch-demo
-cd trivy-multiarch-demo
-```
-
-## Create Dockerfile:
-
 ```bash
-nano Dockerfile
+mkdir $HOME/trivy-multiarch-demo
+cd $HOME/trivy-multiarch-demo
 ```
 
-**Add:**
+## Create Dockerfile
 
-Use NGINX as the base image and copy a custom webpage.
+Create a file called **Dockerfile** with the following content:
 
 ```bash
 FROM nginx:latest
 COPY index.html /usr/share/nginx/html/index.html
 ```
 
-## Create HTML file:
+## Create HTML file
 
-```bash
-nano index.html
-```
-
-**Add:**
-
-Create a simple webpage to confirm the container runs correctly.
+Create a HTML file named **index.html** with the following content:
 
 ```bash
 <h1>Multi-Architecture NGINX on Azure Cobalt Arm64</h1>
@@ -147,7 +144,7 @@ Create a simple webpage to confirm the container runs correctly.
 docker login
 ```
 
-- Docker will display a one-time device code and a login URL:
+Docker displays a one-time device code and a login URL:
 
 ```text
 https://login.docker.com/activate
@@ -156,7 +153,6 @@ https://login.docker.com/activate
 **Steps to complete login:**
 
 - Open the displayed URL in your web browser
-- Sign in to your Docker Hub account (or create one if you don’t have it)
 - Enter the one-time confirmation code shown in the terminal
 - Click Confirm / Activate
 
@@ -169,11 +165,25 @@ https://docs.docker.com/go/credential-store/
 
 Login Succeeded
 ```
+
 This confirms your system is now authenticated with Docker Hub and ready to push or pull container images.
+
+Next, run the docker login again:
+
+```bash
+docker login
+```
+
+Note the "Username" that is presented and save it, as you'll use it in the next step (as DOCKER_USERNAME below).
+
+Finally, create a personal access token in Docker Hub. Log into [Docker Hub](https://hub.docker.com) with your Docker username and password, then select "Account Settings" -> "Personal Access Token" to create a token. Select "Read-Only" privileges and copy and save the token, as it will become your "DOCKER_PASSWORD" in future steps.
 
 ## Build and Push Multi-Architecture Image
 
+Build and push your multi-architecture image replacing <DOCKER_USERNAME> with your username you saved from the last step:
+
 ```bash
+cd $HOME/trivy-multiarch-demo
 docker buildx build \
   --platform linux/amd64,linux/arm64 \
   -t <DOCKER_USERNAME>/trivy-multiarch-nginx:latest \
@@ -185,7 +195,9 @@ docker buildx build \
 
 This allows the same image to run on different CPU architectures.
 
-![Trivy scanning multi-architecture container image alt-txt#center](images/trivy-multiarch.png "Trivy Multi-Arch Image Scan")
+In a browser, go to [Docker Hub](https://hub.docker.com). Press "login" and supply your Docker username and password. Select "Repositories" -> "trivy-multiarch-nginx". You should see your container image details there:
+
+![Trivy scanning multi-architecture container image#center](images/trivy-multiarch.png "Trivy Multi-Arch Image Scan")
 
 ## Install Trivy on Arm64
 
@@ -194,8 +206,10 @@ This allows the same image to run on different CPU architectures.
 Download the Arm64-compatible Trivy scanner.
 
 ```bash
+cd $HOME
 wget https://github.com/aquasecurity/trivy/releases/download/v0.68.1/trivy_0.68.1_Linux-ARM64.deb
 ```
+
 {{% notice Note %}}
 The [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) recommends Trivy 0.29.0 or later for Arm platforms.
 {{% /notice %}}
@@ -214,20 +228,25 @@ sudo dpkg -i trivy_0.68.1_Linux-ARM64.deb
 trivy version
 ```
 
+The following output should resemble:
+
 ```output
 Version: 0.68.1
 ```
 
 ## Scan Image Locally
 
-**Run scan:**
+Run a scan with trivy replacing <DOCKER_USERNAME> with the username you saved previously:
 
 ```bash
 trivy image <DOCKER_USERNAME>/trivy-multiarch-nginx:latest
 ```
+
 Trivy analyzes the container image and lists security vulnerabilities.
 
 ## Generate JSON report
+
+Generate a JSON report using trivy for your scan:
 
 ```bash
 trivy image \
@@ -259,3 +278,14 @@ You have:
 - Installed Trivy on Azure Cobalt 100
 - Scanned images for vulnerabilities
 - Generated security reports
+
+## What you've accomplished and what's next
+
+You've successfully:
+
+- Set up Docker on your Azure Cobalt 100 Arm64 virtual machine
+- Created and pushed a multi-architecture container image that runs on both amd64 and arm64
+- Installed Trivy and performed local vulnerability scanning
+- Generated JSON reports for security analysis
+
+Next, you'll integrate Trivy into a CI/CD pipeline using self-hosted GitHub Actions runners to automate security scanning.
