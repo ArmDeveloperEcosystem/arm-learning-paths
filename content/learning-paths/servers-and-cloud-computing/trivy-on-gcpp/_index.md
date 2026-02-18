@@ -63,23 +63,3 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
-
-Trivy is an open-source security scanner that helps detect vulnerabilities in container images, filesystems, and infrastructure configurations. When you integrate Trivy into your CI/CD pipelines, you can shift security left by identifying issues early in the development process. This Learning Path shows you how to build multi-architecture container images and scan them using Trivy on Azure Cobalt 100 Arm-based processors.
-
-## Before you begin
-
-Before you start, ensure you have:
-
-- A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
-- Docker installed and basic knowledge of containerization
-- Familiarity with CI/CD concepts
-- Basic knowledge of Linux command-line operations
-
-## What you'll learn
-
-By the end of this Learning Path, you will be able to:
-
-- Build and scan multi-architecture (amd64/arm64) container images using Trivy
-- Configure self-hosted GitHub Actions Arm runners on Azure Cobalt 100
-- Enforce automated security gates in CI/CD pipelines based on vulnerability severity
-- Generate and analyze vulnerability reports for compliance and audit purposes
