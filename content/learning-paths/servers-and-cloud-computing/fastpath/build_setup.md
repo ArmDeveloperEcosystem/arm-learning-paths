@@ -180,7 +180,7 @@ cd ~/arm_kernel_install_guide
 chmod +x scripts/*.sh
 ```
 
-## Building with the kernel build utility script
+## Build with the kernel build utility script
 
 With the repository cloned, you can now produce kernels with Fastpath support.
 
