@@ -1,6 +1,10 @@
 ---
 title: Deploy OpenTelemetry on Google Cloud C4A Arm-based Axion VMs
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 40
 
 who_is_this_for: This learning path is designed for DevOps engineers, platform engineers, and software developers who want to deploy and observe a cloud-native microservice on Arm64-based Google Cloud C4A Axion processors using OpenTelemetry, along with industry-standard observability tools.
