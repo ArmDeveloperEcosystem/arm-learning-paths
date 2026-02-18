@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 ## Provision the kernel build host
 
-CPU-optimized instances compile kernels quickly, so in our example, an AWS Graviton `m6g.12xlarge` instance is used. It will be referred to as the kernel build host throughout the rest of the guide.
+CPU-optimized instances compile kernels quickly. In this example, a Graviton `m6g.12xlarge` instance is used. It will be referred to as the kernel build host throughout the rest of the guide.
 
 {{% notice Note %}}
 The following steps involve launching an EC2 instance. You can perform all EC2 instance creation steps using the AWS Management Console or AWS CLI. For step-by-step instructions to bring up an EC2 instance using the console, see [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) or the AWS tutorial [Get started with Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html).
@@ -162,7 +162,7 @@ EOF
 
 When the instance reports a `running` state, note the public and private IP addresses as BUILD_PUBLIC_IP and BUILD_PRIVATE_IP. You'll need these values later.
 
-## Clone the Kernel Build repository on the build host
+## Clone the kernel build repository on the build host
 
 The kernel build repository contains build scripts and configuration files to compile kernels. 
 
@@ -251,3 +251,12 @@ The script builds two kernel images. This process may take some time. On a `m6g.
 Monitor the console output for the `BUILD COMPLETE` message.
 
 Once finished, you're ready to move on to the next step, where you prepare the Fastpath host.
+
+## What you've accomplished and what's next
+
+In this section, you:
+- Provisioned a high-performance Graviton build host
+- Installed kernel build dependencies and utility scripts
+- Compiled two Fastpath-enabled kernels (v6.18.1 and v6.19-rc1) using tuxmake
+
+Next, you'll set up the Fastpath host to orchestrate the benchmarking workflow and copy the compiled kernels for testing.

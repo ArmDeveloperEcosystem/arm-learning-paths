@@ -240,3 +240,12 @@ SW:
 A successful run prints hardware details for the SUT. If the command fails, verify security group rules and rerun the configuration script. If you can SSH into the SUT as `fpuser`, but the fingerprint command still fails, ensure that `docker.io` is installed on the SUT.
 
 With the SUT now configured, you're ready to move on to the next step: setting up and running a Fastpath benchmark! Remember to stop (but not terminate) the build host so that kernel artifacts remain available, and stop any Fastpath/SUT instances when you're finished testing to avoid unnecessary spend.
+
+## What you've accomplished and what's next
+
+In this section, you:
+- Provisioned the System Under Test (SUT) instance
+- Configured the SUT with Docker and the Fastpath user account
+- Validated connectivity between the Fastpath host and the SUT
+
+Next, you'll generate a benchmark plan and execute Fastpath to test the kernels you built earlier.

@@ -20,7 +20,7 @@ If you want to learn more about building Linux kernels for Arm systems, see the 
 
 The following diagram shows how the three machines you'll create work together:
 
-![Sequence diagram showing the interaction between the Build Host, Fastpath Host, and System Under Test (SUT) during the kernel benchmarking workflow. The Build Host compiles kernels, the Fastpath Host orchestrates the process, and the SUT runs the benchmarks.#center](images/sequence_diagram_fastpath_dark.png)
+![Sequence diagram showing the interaction between the Build Host, Fastpath Host, and System Under Test (SUT) during the kernel benchmarking workflow. The Build Host compiles kernels using tuxmake, the Fastpath Host orchestrates benchmarking tasks and aggregates results, and the SUT runs benchmark workloads. Arrows indicate kernel artifacts flowing from Build Host to Fastpath Host, and benchmark commands flowing from Fastpath Host to SUT, with results returning to Fastpath Host.alt-txt#center](images/sequence_diagram_fastpath_dark.png "Fastpath benchmarking workflow: three-machine architecture diagram")
 
 ### Kernel build host
 

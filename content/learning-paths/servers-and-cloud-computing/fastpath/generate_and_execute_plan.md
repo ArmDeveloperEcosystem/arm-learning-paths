@@ -121,3 +121,12 @@ The solution is to use the `--append` parameter at the end of the `fastpath plan
 When the execution completes 100%, Fastpath will have run the Speedometer benchmark against both kernels on the SUT and stored the results in the specified output directory.
 
 In the next section, you'll learn how to analyze and compare the results.
+
+## What you've accomplished and what's next
+
+In this section, you:
+- Generated a Fastpath benchmark plan with two kernel profiles
+- Reviewed the plan structure and configuration options
+- Executed the Fastpath plan to run Speedometer benchmarks on both kernels
+
+Next, you'll analyze the benchmark results to compare kernel performance.
