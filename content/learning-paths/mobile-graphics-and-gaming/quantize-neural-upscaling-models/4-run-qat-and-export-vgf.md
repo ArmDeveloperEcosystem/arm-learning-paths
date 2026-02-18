@@ -10,9 +10,9 @@ layout: learningpathall
 
 In this section, you run quantization-aware training (QAT) so the model learns to be robust to quantization effects.
 
-The default workflow is to extend the runnable CIFAR-10 example from the PTQ step so you can compare PTQ and QAT outputs using the same model and data.
+The default workflow is to extend the runnable CIFAR-10 based example from the PTQ step so you can compare PTQ and QAT outputs using the same model and data.
 
-## Run the end-to-end QAT example (extend the CIFAR-10 script)
+## Extend the sample model with QAT
 
 In `quantize_and_export_vgf.py`, update your TorchAO imports to include the QAT helpers:
 
@@ -133,7 +133,7 @@ As the script runs, you should see QAT training logs (prefixed with `qat`). When
 
 ## Advanced: drop-in QAT export to VGF for your own project
 
-If PTQ introduces visible artifacts, QAT is the next step. The workflow is the same as PTQ, but you insert a short fine-tuning phase after you prepare the model for QAT.
+If PTQ degrades model accuracy too much, QAT is the next step. The workflow is the same as PTQ, but you insert a short fine-tuning phase after you prepare the model for QAT.
 
 In practice, you already have a training loop for your upscaler. The simplest way to use QAT is to reuse that loop and point it at the QAT-prepared exported model.
 

@@ -32,7 +32,7 @@ Use the Learning Path [Get started with neural graphics using ML Extensions for 
 
 You now have a complete reference workflow for quantizing an image-to-image model with TorchAO and exporting INT8 `.vgf` artifacts using the ExecuTorch Arm backend. You also have a practical baseline you can use to debug export issues before you switch to your production model and data.
 
-When you move from the CIFAR-10 proxy model to your own upscaler, keep these constraints in mind:
+When you move from the CIFAR-10 proxy model to your own model, keep these constraints in mind:
 
 - Treat calibration data as part of your model contract. If PTQ quality drops, start by fixing the representativeness of calibration inputs.
 - Use QAT when PTQ introduces visible artifacts or regressions that matter to your visual quality bar.

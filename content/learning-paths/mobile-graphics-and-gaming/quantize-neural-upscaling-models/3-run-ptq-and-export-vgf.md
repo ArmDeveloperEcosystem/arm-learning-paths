@@ -14,7 +14,7 @@ The default workflow in this Learning Path is end to end: you run a complete CIF
 
 After that, you take the same PTQ export logic and apply it to your own model and calibration data.
 
-## Run the end-to-end PTQ example (CIFAR-10)
+## Run the end-to-end PTQ example
 
 Create a file called `quantize_and_export_vgf.py` and add the following code.
 

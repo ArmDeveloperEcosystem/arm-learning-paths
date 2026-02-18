@@ -8,7 +8,7 @@ who_is_this_for: This is an advanced topic for ML developers who want to reduce 
 learning_objectives:
     - Explain when to use post-training quantization (PTQ) vs quantization-aware training (QAT)
     - Prepare and quantize a PyTorch model using TorchAO PT2E quantization APIs
-    - Export the quantized model to TOSA and generate a `.vgf` artifact with the ExecuTorch Arm backend
+    - Export the quantized model to TOSA and generate a model artifact with the ExecuTorch Arm backend
     - Validate the exported graph by visualizing it using Google's Model Explorer
 
 prerequisites:
