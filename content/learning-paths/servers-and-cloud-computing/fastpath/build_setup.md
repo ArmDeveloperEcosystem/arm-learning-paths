@@ -16,16 +16,16 @@ The following steps involve launching an EC2 instance. You can perform all EC2 i
 
 Create the kernel build host with the following specifications:
 
-1. **Name** — fastpath-build
-2. **Operating system** — Ubuntu
-3. **AMI** — Ubuntu 24.04 LTS (Arm)
-4. **Architecture** — 64-bit Arm
-5. **Instance type** — `m6g.12xlarge`
-6. **Key pair** — Select or create a key for SSH
-7. **Security group** — Allow SSH inbound from your IP and cluster peers
-8. **Storage** — 200 GB gp3
+- **Name** - fastpath-build
+- **Operating system** - Ubuntu
+- **AMI** - Ubuntu 24.04 LTS (Arm)
+- **Architecture** - 64-bit Arm
+- **Instance type** - `m6g.12xlarge`
+- **Key pair** - select or create a key for SSH
+- **Security group** - allow SSH inbound from your IP and cluster peers
+- **Storage** - 200 GB gp3
 
-There are many different ways to create this instance, and a few different methods are demonstrated below. Choose the method that suits you best.  
+Choose the method that suits you best to create this instance:
 
 {{< tabpane >}}
   {{< tab header="AWS Console" img_src="/learning-paths/servers-and-cloud-computing/fastpath/images/ec2_setup.png">}}
