@@ -1,19 +1,23 @@
 ---
-title: Migrate applications between ARM platforms with AI assistance
+title: Migrate applications between Arm platforms with AI assistance
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 60
 
-who_is_this_for: This learning path is for developers migrating applications between ARM platforms using Kiro's ARM SoC Migration Power. Learn the workflow through a practical example migrating from AWS Graviton to Raspberry Pi 5.
+who_is_this_for: This learning path is for developers migrating applications between Arm platforms using Kiro's ARM SoC Migration Power. Learn the workflow through a practical example migrating code from the cloud to the edge - from AWS Graviton to Raspberry Pi 5.
 
 learning_objectives:
-    - Install and configure Kiro's ARM SoC Migration Power for any ARM SoC migration
-    - Understand the migration workflow applicable to various ARM platforms
+    - Install and configure Kiro's ARM SoC Migration Power 
+    - Understand the migration workflow applicable to various Arm platforms
     - Use AI-guided migration to identify platform-specific code
     - Create Hardware Abstraction Layers with power assistance
     - Validate migrations with automated analysis
 
 prerequisites:
-    - Access to source and target ARM platforms (example uses AWS Graviton and Raspberry Pi 5)
+    - Access to source and target Arm platforms (example uses AWS Graviton and Raspberry Pi 5)
     - Basic understanding of C programming
     - Familiarity with embedded systems or cloud computing concepts
 
