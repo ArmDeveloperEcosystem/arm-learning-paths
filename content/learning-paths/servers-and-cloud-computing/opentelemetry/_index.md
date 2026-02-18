@@ -1,25 +1,14 @@
 ---
-title: Deploy OpenTelemetry on Google Cloud C4A Arm-based Axion VMs
+title: Deploy OpenTelemetry on Google Cloud C4A Axion processors
 
-draft: true
-cascade:
-    draft: true
-    
 minutes_to_complete: 40
 
-who_is_this_for: This learning path is designed for DevOps engineers, platform engineers, and software developers who want to deploy and observe a cloud-native microservice on Arm64-based Google Cloud C4A Axion processors using OpenTelemetry, along with industry-standard observability tools.
+who_is_this_for: This learning path is for DevOps engineers, platform engineers, and software developers who want to deploy and observe a cloud-native microservice on Arm64-based Google Cloud C4A Axion processors using OpenTelemetry.
 
 learning_objectives:
-  - Provision a SUSE Linux Enterprise Server (SLES) virtual machine on Google Cloud C4A Arm-based Axion processors
-  - Install and configure Docker and Docker Compose on an Arm64 environment
-  - Build and run an Arm-native Python Flask microservice in containers
-  - Instrument the microservice using OpenTelemetry SDK for distributed tracing and metrics
-  - Deploy and configure OpenTelemetry Collector for telemetry processing
-  - Integrate Prometheus for metrics collection and visualization
-  - Integrate Jaeger for distributed tracing and service visualization
-  - Expose and validate observability dashboards
-  - Generate traffic to observe telemetry data flow and performance behavior
-  - Understand observability best practices on Arm-based cloud infrastructure
+  - Deploy an instrumented Python Flask microservice on Google Cloud C4A Axion Arm-based processors
+  - Configure OpenTelemetry Collector to process distributed traces and metrics
+  - Integrate Prometheus and Jaeger for metrics collection and distributed tracing visualization
 
 prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
@@ -79,3 +68,22 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: yes
 ---
+
+OpenTelemetry is an open-source observability framework that provides standardized APIs and tools for collecting telemetry data such as traces, metrics, and logs from cloud-native applications. When you deploy OpenTelemetry on Google Cloud C4A Axion Arm-based processors, you can achieve high-throughput telemetry processing with improved performance per watt and reduced infrastructure costs. This Learning Path shows you how to build a complete observability pipeline using OpenTelemetry, Prometheus, and Jaeger on Arm-based infrastructure.
+
+## Before you begin
+
+Before you start, ensure you have:
+
+- A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
+- Basic familiarity with Python and Flask
+- Basic understanding of containers and Kubernetes concepts
+
+## What you'll learn
+
+By the end of this Learning Path, you will be able to:
+
+- Deploy an instrumented Python Flask microservice on Google Cloud C4A Axion processors
+- Configure OpenTelemetry Collector to process and route distributed traces and metrics
+- Integrate Prometheus and Jaeger for comprehensive metrics collection and distributed tracing visualization
+- Generate and analyze telemetry data to monitor application performance on Arm-based infrastructure
