@@ -1,14 +1,14 @@
 ---
-title: "Overview of the Fastpath benchmarking workflow"
+title: "Understand the Fastpath kernel benchmarking workflow"
 
 weight: 2
 
 layout: "learningpathall"
 ---
 
-## Overview
+## The kernel testing challenge
 
-Building custom Linux kernels lets you experiment with new features, patches, or flags without waiting for official Linux distro update availability. Building the kernel is only half the battle. You also need to deploy, run, and compare results across kernels and benchmarks to understand how the code impacts your workloads.
+Building custom Linux kernels gives you the flexibility to experiment with new features, patches, or performance flags without waiting for official Linux distribution updates. However, building the kernel is only the first step. You also need to deploy, run, and compare results across multiple kernels and benchmarks to understand how your code changes impact real workloads on Arm systems.
 
 This Learning Path shows you how to implement this end-to-end workflow for building, configuring, and running benchmarks using [Fastpath](https://fastpath.docs.arm.com/en/latest/index.html) on Arm Linux systems.
 

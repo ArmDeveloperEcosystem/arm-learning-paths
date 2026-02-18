@@ -5,7 +5,9 @@ weight: 11
 layout: "learningpathall"
 ---
 
-With all required components in place, it's time to generate a Fastpath benchmark plan, execute it, and analyze the results.
+## Generate and execute your Fastpath benchmark plan
+
+With all required components in place, you're ready to generate a Fastpath benchmark plan, execute it, and analyze the results to compare kernel performance.
 
 ## Generate the Fastpath plan
 

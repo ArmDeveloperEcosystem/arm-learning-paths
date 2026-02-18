@@ -1,5 +1,5 @@
 ---
-title: Benchmark on Arm servers with different Linux kernels using Fastpath
+title: Benchmark Linux kernel performance on Arm servers with Fastpath
 
 minutes_to_complete: 90
 

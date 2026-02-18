@@ -168,7 +168,7 @@ The kernel build repository contains build scripts and configuration files to co
 
 To clone the repository, first, SSH into the `m6g.12xlarge` host using the configured key pair.
 
-For more background, refer to the [Install required dependencies](/learning-paths/servers-and-cloud-computing/kernel-build/how-to-1/#install-required-dependencies) of the kernel build Learning Path.
+For more information, see the section [Install required dependencies](/learning-paths/servers-and-cloud-computing/kernel-build/how-to-1/#install-required-dependencies) in this Learning Path.
 
 Run the commands from that section on the build host. 
 
@@ -218,7 +218,7 @@ On the build host, navigate to the `arm_kernel_install_guide` folder you just cl
 cd ~/arm_kernel_install_guide
 ```
 
-Open the [Custom tags with Fastpath enabled](/learning-paths/servers-and-cloud-computing/kernel-build/how-to-3/#build-custom-tags-with-fastpath-enabled) section from the Learning Path, and follow the instructions to run the build script. 
+Open the [Custom tags with Fastpath enabled](/learning-paths/servers-and-cloud-computing/kernel-build/how-to-3/#build-custom-tags-with-fastpath-enabled) section from this Learning Path, and follow the instructions to run the build script. 
 
 ```console
 ./scripts/kernel_build_and_install.sh --tags v6.18.1,v6.19-rc1 --fastpath true
