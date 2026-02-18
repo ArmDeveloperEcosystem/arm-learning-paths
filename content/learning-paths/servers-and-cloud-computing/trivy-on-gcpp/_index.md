@@ -1,22 +1,14 @@
 ---
-title: Secure Multi-Architecture Containers with Trivy on Azure Cobalt 100 (Arm64)
-
-draft: true
-cascade:
-    draft: true
+title: Scan multi-architecture containers with Trivy on Azure Cobalt 100
 
 minutes_to_complete: 45
 
-who_is_this_for: This learning path is designed for developers and DevOps engineers who want to integrate security scanning into CI/CD pipelines for multi-architecture container images.
+who_is_this_for: This learning path is for developers and DevOps engineers who want to integrate security scanning into CI/CD pipelines for multi-architecture container images.
 
 learning_objectives:
-    - Provision an Azure Arm64 virtual machine using Azure console, with Ubuntu Pro 24.04 LTS as the base image
-    - Build multi-architecture (amd64/arm64) container images for Azure Cobalt 100
-    - Install and configure Trivy on Arm64 Ubuntu systems
-    - Scan container images for vulnerabilities locally and in CI
-    - Configure self-hosted GitHub Actions Arm runners
-    - Enforce security gates in CI/CD pipelines based on vulnerability severity
-    - Generate and analyze JSON reports for compliance and audit purposes
+    - Build and scan multi-architecture container images using Trivy on Azure Cobalt 100
+    - Configure self-hosted GitHub Actions Arm runners for CI/CD pipelines
+    - Enforce security gates in CI pipelines based on vulnerability severity
 
 prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
