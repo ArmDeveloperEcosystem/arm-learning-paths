@@ -7,7 +7,7 @@ const CLIENT_ID       = "20ede7b2-aeb1-43d4-81f9-fc1b7fbfca5e";
 // Change these in CI/CD pipeline depending on target environment
 const TENANT_DOMAIN   = "armb2ctest.onmicrosoft.com";
 const TENANT_ID       = "f15a8617-9b4e-41dd-8614-adea42784599";
-const B2C_DOMAIN      = resolveB2cDomain(window.location.hostname);
+const B2C_DOMAIN      = "account.arm.com";
 
 const REDIRECT_URI    = window.location.origin + "/";
 //const REDIRECT_URI    = "http://localhost/";
@@ -45,33 +45,6 @@ if (!window.msalInstance) {
     window.msalInstance = new msal.PublicClientApplication(window.msalConfig);
 }
 const msalInstance = window.msalInstance;
-
-function resolveB2cDomain(hostname) {
-  const host = (hostname || "").toLowerCase();
-  if (host === "localhost" || host === "127.0.0.1") {
-    return "account.arm.com";
-  }
-  const env = resolveEnvironment(host);
-  const envToDomain = {
-    dev: "dev.account.arm.com",
-    test: "qa.account.arm.com",
-    stage: "stage.account.arm.com",
-    prod: "account.arm.com"
-  };
-  return envToDomain[env] || envToDomain.prod;
-}
-
-function resolveEnvironment(host) {
-  if (host === "internal.learn.arm.com") {
-    return "test";
-  }
-  if (host.includes("dev")) return "dev";
-  if (host.includes("stage")) return "test";
-  if (host.includes("demo") || host.includes("pre-prod") || host.includes("preprod")) {
-    return "stage";
-  }
-  return "prod";
-}
 
 function ensureChatAiLoaded() {
   const host = (window.location.hostname || "").toLowerCase();
