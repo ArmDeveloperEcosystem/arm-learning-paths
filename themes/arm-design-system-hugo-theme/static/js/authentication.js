@@ -52,7 +52,8 @@ function ensureChatAiLoaded() {
     "localhost",
     "127.0.0.1",
     "internal.learn.arm.com",
-    "learn.arm.com"
+    "learn.arm.com",
+    "d3lutzu1kzwmb3.cloudfront.net"
   ]);
   const isAllowedHost = allowedHosts.has(host);
   const signedIn = isUserSignedIn();
