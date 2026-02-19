@@ -30,8 +30,9 @@ To learn more, visit the [OpenTelemetry website](https://opentelemetry.io/) and 
 ## What you've accomplished and what's next
 
 In this section, you learned about:
-- Google Axion C4A Arm-based VMs and their performance characteristics  
-- OpenTelemetry observability framework and its role in modern cloud-native monitoring  
-- How Arm architecture enables cost-effective, high-performance telemetry processing  
+
+* Google Axion C4A Arm-based VMs and their performance characteristics
+* OpenTelemetry observability framework and its role in modern cloud-native monitoring
+* How Arm architecture enables cost-effective, high-performance telemetry processing  
 
 Next, you'll configure firewall rules and network access to allow external communication between your OpenTelemetry components and monitored services.
