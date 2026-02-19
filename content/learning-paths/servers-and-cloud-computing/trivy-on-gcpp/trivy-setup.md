@@ -12,26 +12,32 @@ In this module, you will build a multi-architecture container image and perform 
 
 You will:
 
-- Install Docker on Arm64
-- Build and push multi-arch container images
-- Install Trivy on Arm64
-- Scan container images locally
+- Configure Docker Buildx for multi-architecture builds
+- Create a demo container application  
+- Push a multi-architecture image to Docker Hub
+- Install and verify Trivy on your Arm64 VM
+- Perform local vulnerability scanning
 - Generate vulnerability reports
 
 ## Prerequisites
 
-Ensure:
+Before starting this module, ensure you have:
 
-- Azure Cobalt 100 Arm64 Ubuntu VM
-- [Docker Hub account](https://hub.docker.com) (create one if you don't have it)
-- [GitHub account](https://github.com) (create one if you don't have it)
-- Internet connectivity
+- An Azure Cobalt 100 Arm64 Ubuntu VM running
+- Docker installed and configured on your VM
+- A [Docker Hub account](https://hub.docker.com)
 
-Verify architecture:
+
+To install Docker on your Arm64 VM, follow the [Docker installation guide](/install-guides/docker/).
+
+Once Docker is installed, verify it's running:
 
 ```bash
+docker --version
 uname -m
 ```
+
+You should see Docker version information and `aarch64` architecture output.
 
 ## Install Docker on Arm64 VM
 
@@ -110,35 +116,33 @@ Prepare the builder to support multi-platform builds.
 docker buildx inspect --bootstrap
 ```
 
-## Create Demo Application
+The first command creates a builder instance capable of cross-platform builds. The second command initializes it to support multiple platforms.
 
-Creates a workspace for the demo container application.
+## Create a demo application
+
+Set up a workspace for your demo container:
 
 ```bash
 mkdir $HOME/trivy-multiarch-demo
 cd $HOME/trivy-multiarch-demo
 ```
 
-## Create Dockerfile
+Create a `Dockerfile`:
 
-Create a file called **Dockerfile** with the following content:
-
-```bash
+```dockerfile
 FROM nginx:latest
 COPY index.html /usr/share/nginx/html/index.html
 ```
 
-## Create HTML file
+Create an `index.html` file:
 
-Create a HTML file named **index.html** with the following content:
-
-```bash
+```html
 <h1>Multi-Architecture NGINX on Azure Cobalt Arm64</h1>
 ```
 
-## Login to Docker Hub
+## Authenticate with Docker Hub
 
-**Run the login command:**
+Run the Docker login command to authenticate:
 
 ```bash
 docker login
@@ -178,9 +182,9 @@ Note the "Username" that is presented and save it, as you'll use it in the next 
 
 Finally, create a personal access token in Docker Hub. Log into [Docker Hub](https://hub.docker.com) with your Docker username and password, then select "Account Settings" -> "Personal Access Token" to create a token. Select "Read-Only" privileges and copy and save the token, as it will become your "DOCKER_PASSWORD" in future steps.
 
-## Build and Push Multi-Architecture Image
+## Build and push multi-architecture images
 
-Build and push your multi-architecture image replacing <DOCKER_USERNAME> with your username you saved from the last step:
+Build your image for both amd64 and arm64 architectures. Replace `<DOCKER_USERNAME>` with your Docker username:
 
 ```bash
 cd $HOME/trivy-multiarch-demo
@@ -190,20 +194,22 @@ docker buildx build \
   --push .
 ```
 
-- Builds the container for both amd64 and arm64
-- Pushes the multi-arch image to Docker Hub
+This command builds the container for both architectures and pushes the multi-architecture image directly to Docker Hub. The same image specification can now run on both x86 and Arm systems.
 
-This allows the same image to run on different CPU architectures.
+## What you've accomplished and what's next
 
-In a browser, go to [Docker Hub](https://hub.docker.com). Press "login" and supply your Docker username and password. Select "Repositories" -> "trivy-multiarch-nginx". You should see your container image details there:
+You've successfully:
 
-![Trivy scanning multi-architecture container image#center](images/trivy-multiarch.png "Trivy Multi-Arch Image Scan")
+- Configured Docker Buildx for multi-platform builds
+- Created a demo container application with Dockerfile and HTML
+- Authenticated with Docker Hub
+- Built and pushed a multi-architecture container image
 
-## Install Trivy on Arm64
+Your multi-architecture image is now available on Docker Hub. Next, you'll install Trivy and scan your image for vulnerabilities.
 
-**Download:**
+## Install and verify Trivy
 
-Download the Arm64-compatible Trivy scanner.
+Download the Arm64-compatible Trivy scanner:
 
 ```bash
 cd $HOME
@@ -222,31 +228,27 @@ Install Trivy on your system.
 sudo dpkg -i trivy_0.68.1_Linux-ARM64.deb
 ```
 
-**Verify:**
+Verify the installation:
 
 ```bash
 trivy version
 ```
 
-The following output should resemble:
+You should see version information displayed.
 
-```output
-Version: 0.68.1
-```
+## Perform local vulnerability scanning
 
-## Scan Image Locally
-
-Run a scan with trivy replacing <DOCKER_USERNAME> with the username you saved previously:
+Scan your Docker Hub image (replace `<DOCKER_USERNAME>` with your username):
 
 ```bash
 trivy image <DOCKER_USERNAME>/trivy-multiarch-nginx:latest
 ```
 
-Trivy analyzes the container image and lists security vulnerabilities.
+Trivy analyzes the container layers and reports all detected vulnerabilities with severity levels (LOW, MEDIUM, HIGH, CRITICAL).
 
-## Generate JSON report
+## Generate a JSON vulnerability report
 
-Generate a JSON report using trivy for your scan:
+Create a machine-readable report for audits and CI pipelines:
 
 ```bash
 trivy image \
@@ -281,11 +283,10 @@ You have:
 
 ## What you've accomplished and what's next
 
-You've successfully:
+You've now completed local vulnerability scanning:
 
-- Set up Docker on your Azure Cobalt 100 Arm64 virtual machine
-- Created and pushed a multi-architecture container image that runs on both amd64 and arm64
-- Installed Trivy and performed local vulnerability scanning
-- Generated JSON reports for security analysis
+- Installed Trivy on your Arm64 VM
+- Scanned your multi-architecture container image  
+- Generated a JSON vulnerability report for analysis
 
-Next, you'll integrate Trivy into a CI/CD pipeline using self-hosted GitHub Actions runners to automate security scanning.
+You have the foundation for vulnerability scanning in place. Next, you'll integrate Trivy into a GitHub Actions CI/CD pipeline to automate security scanning on every code push.
