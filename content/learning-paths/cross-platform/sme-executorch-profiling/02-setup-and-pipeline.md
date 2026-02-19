@@ -193,13 +193,13 @@ Each experiment is defined in a JSON configuration file. These configs specify:
   * Logging level: Timing-only mode vs full ETDump trace mode (trace mode impacts timing, use for kernel-level insights)
   * Analysis comparisons: Which experiment pairs to compare (for example, SME2-on vs SME2-off)
 
-This approach enables repeatable, systematic performance analysis across multiple configurations without modifying pipeline code.
+This approach enables repeatable, systematic performance analysis across multiple configurations without modifying pipeline code. Example templates can be found in the model_profiling/config directory after the setup workspace has completed. 
 
 ### Pipeline scripts
 
 The following scripts execute the pipeline:
 - [`model_profiling/scripts/android_pipeline.py`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/scripts/android_pipeline.py) - Android performance analysis pipeline
-- [`model_profiling/scripts/mac_pipeline.py`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/scripts/mac_pipeline.py) - macOS performance analysis pipeline 
+- [`model_profiling/scripts/mac_pipeline.py`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/scripts/mac_pipeline.py) - macOS performance analysis pipeline
 
 These scripts read the experiment configuration, run all defined experiments, and collect ETDump traces and logs.
 Analysis is performed automatically after execution using [`model_profiling/scripts/analyze_results.py`](https://github.com/ArmDeveloperEcosystem/sme-executorch-profiling/blob/main/model_profiling/scripts/analyze_results.py) 
