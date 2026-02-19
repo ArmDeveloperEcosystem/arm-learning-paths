@@ -28,6 +28,7 @@ This architecture mirrors real-world IoT and telemetry pipelines.
 ## Install Python Dependencies (SUSE)
 
 ```bash
+cd $HOME
 sudo zypper install -y \
   python3 \
   python3-pip \
@@ -48,6 +49,7 @@ The output is similar to:
 ```output
 psycopg2 OK
 ```
+
 - Confirms that the PostgreSQL driver is correctly installed.
 - If the import succeeds, Python can communicate with TimescaleDB.
 
@@ -66,18 +68,16 @@ CREATE TABLE sensor_data (
 
 SELECT create_hypertable('sensor_data', 'time');
 ```
+
 Created a sensor_data table and converted it into a hypertable for efficient time-series storage.
 
+Press "CTRL-D" to exit back into the SSH shell.
+
 ## Create Sensor Ingestion Script
+
 Python script simulates multiple sensors sending readings every 2 seconds and inserts them into TimescaleDB.
 
-Create a new Python file:
-
-```bash
-vi sensor_ingest.py
-```
-
-**File:** `sensor_ingest.py`
+Create a new Python file called **sensor_ingest.py** and add the following code to the file:
 
 ```python
 import time
@@ -125,32 +125,35 @@ ps -ef | grep sensor_ingest.py
 ```
 
 The output is similar to:
+
 ```output
 gcpuser   5398  2841  0 08:55 pts/0    00:00:00 python3 sensor_ingest.py
 gcpuser   5401  2841  0 08:55 pts/0    00:00:00 grep --color=auto sensor_ingest.py
 ```
 
 ```bash
-sudo -u postgres psql -c "SELECT COUNT(*) FROM sensor_data;"
+sudo -u postgres psql sensors -c "SELECT COUNT(*) FROM sensor_data;"
 ```
+
 - Verified sensor ingestion by checking running processes and data count in TimescaleDB.
 - The count should increase continuously.
 
 The output is similar to:
+
 ```output
-gcpuser@tsdb-suse-arm64:~> sudo -u postgres psql -c "SELECT COUNT(*) FROM sensor_data;"
+gcpuser@tsdb-suse-arm64:~> sudo -u postgres psql sensors -c "SELECT COUNT(*) FROM sensor_data;"
  count
 -------
     14
 (1 row)
 
-gcpuser@tsdb-suse-arm64:~> sudo -u postgres psql -c "SELECT COUNT(*) FROM sensor_data;"
+gcpuser@tsdb-suse-arm64:~> sudo -u postgres psql sensors -c "SELECT COUNT(*) FROM sensor_data;"
  count
 -------
     15
 (1 row)
 
-gcpuser@tsdb-suse-arm64:~> sudo -u postgres psql -c "SELECT COUNT(*) FROM sensor_data;"
+gcpuser@tsdb-suse-arm64:~> sudo -u postgres psql sensors -c "SELECT COUNT(*) FROM sensor_data;"
  count
 -------
     16
@@ -158,17 +161,22 @@ gcpuser@tsdb-suse-arm64:~> sudo -u postgres psql -c "SELECT COUNT(*) FROM sensor
 ```
 
 ## Time-Series Optimization
+
 These steps make TimescaleDB production-ready.
 
 ### Create Index for Faster Queries
 
 ```bash
-sudo -u postgres psql
+sudo -u postgres psql sensors
 ```
+
+Issue the following SQL command:
 
 ```psql
 CREATE INDEX ON sensor_data (sensor_id, time DESC);
 ```
+
+This index:
 
 - Improves Grafana query performance
 - Optimized for time-range scans
@@ -212,9 +220,10 @@ SELECT add_continuous_aggregate_policy(
   INTERVAL '5 minutes'
 );
 ```
+
 Automates hourly aggregate refresh every 5 minutes for near real-time analytics.
 
-**What this means**
+### What this means
 
 | Setting | Meaning            |
 | ------- | ------------------ |
@@ -222,15 +231,17 @@ Automates hourly aggregate refresh every 5 minutes for near real-time analytics.
 | 1 hour  | Skip newest data   |
 | 5 min   | Refresh interval   |
 
-###  Validate Optimization
+### Validate Optimization
 
 ```sql
 SELECT * FROM sensor_hourly_avg LIMIT 5;
 SELECT COUNT(*) FROM sensor_data;
 ```
+
 Ensures ingestion and aggregation are running correctly and data is available for queries.
 
 The output is similar to:
+
 ```output
 postgres=# SELECT * FROM sensor_hourly_avg LIMIT 5;
          bucket         | sensor_id |     avg_temp
@@ -246,18 +257,36 @@ postgres=# SELECT COUNT(*) FROM sensor_data;
   2466
 (1 row)
 
+
 ```
 
-## What You Have Accomplished
+Please press "CTRL-D" to exit.
 
-Fully functioning real-time ingestion pipeline: live data ingestion, hypertable storage, retention, and continuous aggregates ready for dashboards.
+### Set the postgres password
 
-## What’s Next
+Lets set a password for postgres:
 
-In the next section, you will:
+```bash
+sudo -u postgres psql
+```
 
-- Install Grafana
-- Add TimescaleDB as a data source
-- Build a Live Sensor Temperature dashboard
+Then enter the new password:
 
-The next step is to visualize the live sensor data in Grafana dashboards for monitoring and analytics.
+```sql
+\password postgres
+```
+
+Save the password as it will be used in the next section. Please press "CTRL-D" to exit.
+
+## What you've accomplished and what's next
+
+You've successfully:
+
+- Built a fully functioning real-time sensor data ingestion pipeline
+- Created TimescaleDB hypertables optimized for time-series storage
+- Implemented retention policies to automatically manage data lifecycle
+- Created continuous aggregates for faster reporting and analytics
+- Set up automated refresh policies for near real-time analytics
+- Set the postgres password for use in the Grafana plugin
+
+Next, you'll install Grafana, configure TimescaleDB as a data source, and build a live sensor temperature dashboard to visualize the real-time data you're ingesting.

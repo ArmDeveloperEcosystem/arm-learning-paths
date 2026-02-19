@@ -24,7 +24,7 @@ Before proceeding, ensure the following are already completed:
 You can verify live ingestion with:
 
 ```bash
-sudo -u postgres psql -c "SELECT COUNT(*) FROM sensor_data;"
+sudo -u postgres psql sensors -c "SELECT COUNT(*) FROM sensor_data;"
 ```
 
 The count should increase over time.
@@ -41,9 +41,9 @@ Log in using your Grafana credentials.
 
 ## Create a New Dashboard
 
-- From the left sidebar, select** Dashboards**
+- From the left sidebar, select **Dashboards**
 - Click **New dashboard**
-- Select Add a **new panel**
+- Select Add a **new visualization**
 
 You will be redirected to the Edit panel screen.
 
@@ -55,9 +55,9 @@ In the Query section:
 - Query type: SQL
 - Format: Time series
 
-![Grafana visualization configuration showing time series panel settings alt-txt#center](images/data-source-visualization.png "Grafana visualization configuration")
+![Grafana visualization configuration showing time series panel settings#center](images/data-source-visualization.png "Grafana visualization configuration")
 
-Paste the following query:
+Paste the following query after pressing the "Code" button on the right of the query editor:
 
 ```sql
 SELECT
@@ -68,24 +68,22 @@ WHERE $__timeFilter(time)
 ORDER BY time;
 ```
 
-![Grafana SQL query editor showing TimescaleDB query with time filter alt-txt#center](images/timescale-query.png "TimescaleDB SQL query editor")
+![Grafana SQL query editor showing TimescaleDB query with time filter#center](images/timescale-query.png "TimescaleDB SQL query editor")
 
 This query retrieves live sensor temperature data within the selected time range.
 
-## Configure Panel Visualization
-
 Apply the following settings in the right-hand panel:
 
-**Visualization Settings**
+  - Visualization Settings
 
-- Visualization: Time series
-- Panel title: Live Sensor Temperature
-- Table view: Disabled
+    - Visualization: Time series
+    - Panel title: Live Sensor Temperature
+    - Table view: Disabled
 
-**Time & Refresh Settings**
+  - Time & Refresh Settings
 
-- Time range: Last 5 minutes
-- Refresh interval: 5s
+    - Time range: Last 5 minutes
+    - Refresh interval: 5s
 
 These settings ensure the panel refreshes automatically with new data.
 
@@ -103,13 +101,16 @@ Once configured, the panel should display a continuously updating temperature gr
 
 The dashboard is now active.
 
-## What You've Accomplished
+## What you've accomplished and what's next
 
-You have successfully:
+You've successfully:
 
-- Created a Grafana dashboard from scratch
-- Queried live TimescaleDB data using Grafana macros
-- Built a real-time time-series visualization
-- Configured automatic refresh for monitoring use cases
+- Built a complete time-series data pipeline on Google Cloud C4A Axion Arm-based processors
+- Installed and configured TimescaleDB by building from source for optimal Arm64 performance
+- Created a real-time sensor data ingestion pipeline using Python with hypertables and continuous aggregates
+- Configured retention policies and indexes for production-ready time-series storage
+- Installed Grafana and connected it to TimescaleDB as a data source
+- Built a live sensor dashboard that automatically refreshes to display real-time temperature data
+- Validated end-to-end data flow from ingestion through TimescaleDB to Grafana visualization
 
-This confirms that Grafana, TimescaleDB, and your ingestion pipeline are working end-to-end.
+You now have a production-ready time-series monitoring solution running natively on Arm infrastructure. This setup demonstrates how TimescaleDB and Grafana work together to provide comprehensive real-time monitoring for IoT and sensor workloads. You can extend this foundation by adding more sensors, creating additional dashboards, implementing alerting rules in Grafana, or optimizing TimescaleDB for your specific workload patterns.
