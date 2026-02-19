@@ -99,43 +99,114 @@ This message shows that your installation appears to be working correctly.
 
 ## Install CMSIS-Toolbox
 
-CMSIS-Toolbox provides the `cbuild` command for building Alif E8 projects.
+CMSIS-Toolbox provides the `cbuild` command used to build CMSIS projects for the Alif E8.
+
+### Prerequisites
+
+Install CMake and Ninja before proceeding. These are required by CMSIS-Toolbox for project builds.
 
 {{< tabpane code=true >}}
   {{< tab header="macOS" language="bash">}}
-# Install via Homebrew
-brew install cmsis-toolbox
+brew install cmake ninja
 
-# Verify installation
-cbuild --version
-# Expected output: cbuild 2.6.0 or later
+cmake --version
+ninja --version
   {{< /tab >}}
   {{< tab header="Linux" language="bash">}}
-# Download from https://github.com/Open-CMSIS-Pack/cmsis-toolbox/releases
-wget https://github.com/Open-CMSIS-Pack/cmsis-toolbox/releases/download/2.6.0/cmsis-toolbox-linux-amd64.tar.gz
+sudo apt update
+sudo apt install cmake ninja-build -y
 
-# Extract
-tar -xzf cmsis-toolbox-linux-amd64.tar.gz
-sudo mv cmsis-toolbox /opt/
-
-# Add to PATH
-echo 'export PATH="/opt/cmsis-toolbox/bin:$PATH"' >> ~/.bashrc
-source ~/.bashrc
-
-# Verify installation
-cbuild --version
+cmake --version
+ninja --version
   {{< /tab >}}
-  {{< tab header="Windows" language="text">}}
-1. Download installer from https://github.com/Open-CMSIS-Pack/cmsis-toolbox/releases
-2. Run the installer
-3. Add to PATH if not automatic
-4. Verify in PowerShell: cbuild --version
+  {{< tab header="Windows" language="bash">}}
+winget install Kitware.CMake
+winget install Ninja-build.Ninja
+
+cmake --version
+ninja --version
   {{< /tab >}}
 {{< /tabpane >}}
 
+Confirm CMake is version 3.25.2 or later and Ninja is version 1.10.2 or later.
+
+### Download and install CMSIS-Toolbox
+
+Download the CMSIS-Toolbox archive for your host platform from the [Arm Tools Artifactory](https://artifacts.tools.arm.com/cmsis-toolbox/).
+
+The examples below use version 2.6.0. Replace the version number if a newer release is available.
+
+{{< tabpane code=true >}}
+  {{< tab header="macOS (Apple Silicon)" language="bash">}}
+curl -L -o cmsis-toolbox.tar.gz \
+  https://artifacts.tools.arm.com/cmsis-toolbox/2.6.0/cmsis-toolbox-darwin-arm64.tar.gz
+
+tar -xzf cmsis-toolbox.tar.gz
+sudo mv cmsis-toolbox /opt/cmsis-toolbox
+  {{< /tab >}}
+  {{< tab header="macOS (Intel)" language="bash">}}
+curl -L -o cmsis-toolbox.tar.gz \
+  https://artifacts.tools.arm.com/cmsis-toolbox/2.6.0/cmsis-toolbox-darwin-amd64.tar.gz
+
+tar -xzf cmsis-toolbox.tar.gz
+sudo mv cmsis-toolbox /opt/cmsis-toolbox
+  {{< /tab >}}
+  {{< tab header="Linux (x86_64)" language="bash">}}
+wget https://artifacts.tools.arm.com/cmsis-toolbox/2.6.0/cmsis-toolbox-linux-amd64.tar.gz
+
+tar -xzf cmsis-toolbox-linux-amd64.tar.gz
+sudo mv cmsis-toolbox /opt/cmsis-toolbox
+  {{< /tab >}}
+  {{< tab header="Linux (Arm64)" language="bash">}}
+wget https://artifacts.tools.arm.com/cmsis-toolbox/2.6.0/cmsis-toolbox-linux-arm64.tar.gz
+
+tar -xzf cmsis-toolbox-linux-arm64.tar.gz
+sudo mv cmsis-toolbox /opt/cmsis-toolbox
+  {{< /tab >}}
+{{< /tabpane >}}
+
+For Windows, download the appropriate `.zip` archive from the [Arm Tools Artifactory](https://artifacts.tools.arm.com/cmsis-toolbox/) and extract it to a directory such as `C:\cmsis-toolbox`.
+
+### Set environment variables
+
+Configure the required environment variables so that CMSIS-Toolbox can locate your toolchain and pack directory.
+
+{{< tabpane code=true >}}
+  {{< tab header="macOS / Linux" language="bash">}}
+export CMSIS_PACK_ROOT=$HOME/.arm/Packs
+export CMSIS_COMPILER_ROOT=/opt/cmsis-toolbox/etc
+export PATH=/opt/cmsis-toolbox/bin:$PATH
+  {{< /tab >}}
+  {{< tab header="Windows (PowerShell)" language="powershell">}}
+$env:CMSIS_PACK_ROOT = "$env:LOCALAPPDATA\Arm\Packs"
+$env:CMSIS_COMPILER_ROOT = "C:\cmsis-toolbox\etc"
+$env:PATH = "C:\cmsis-toolbox\bin;$env:PATH"
+  {{< /tab >}}
+{{< /tabpane >}}
+
+{{% notice Tip %}}
+Add these exports to your shell profile (`~/.bashrc`, `~/.zshrc`, or equivalent) so they persist across sessions.
+{{% /notice %}}
+
+The table below summarizes the key environment variables:
+
+| Variable | Description |
+|----------|-------------|
+| `CMSIS_PACK_ROOT` | Root directory for installed CMSIS-Packs |
+| `CMSIS_COMPILER_ROOT` | Path to the CMSIS-Toolbox `etc` directory containing compiler configuration files |
+| `PATH` | Must include the CMSIS-Toolbox `bin` directory, CMake, and Ninja |
+
+### Initialize the pack directory
+
+Run the following command to initialize the CMSIS-Pack index:
+
+```bash
+cpackget init https://www.keil.com/pack/index.pidx
+```
+
 ### Install Alif Ensemble Pack
 
-After installing CMSIS-Toolbox, add the Alif Ensemble device pack:
+Add the Alif Ensemble device pack:
 
 ```bash
 cpackget add AlifSemiconductor::Ensemble@2.0.4
@@ -147,9 +218,22 @@ Verify the pack is installed:
 cpackget list
 ```
 
-The output shows:
+The output includes:
 ```output
 AlifSemiconductor::Ensemble@2.0.4
+```
+
+### Verify CMSIS-Toolbox installation
+
+Confirm that `cbuild` is available and reports version 2.6.0 or later:
+
+```bash
+cbuild --version
+```
+
+Expected output:
+```output
+cbuild 2.6.0
 ```
 
 ## Install J-Link
