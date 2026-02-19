@@ -193,7 +193,7 @@ Each experiment is defined in a JSON configuration file. These configs specify:
   * Logging level: Timing-only mode vs full ETDump trace mode (trace mode impacts timing, use for kernel-level insights)
   * Analysis comparisons: Which experiment pairs to compare (for example, SME2-on vs SME2-off)
 
-This approach enables repeatable, systematic performance analysis across multiple configurations without modifying pipeline code. Example templates can be found in the model_profiling/config directory after the setup workspace has completed. 
+This approach enables repeatable, systematic performance analysis across multiple configurations without modifying pipeline code. Example templates can be found in the [`model_profiling/config`] directory after the setup workspace has completed. 
 
 ### Pipeline scripts
 
