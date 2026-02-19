@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Overview
 
-In this module, you will build a multi-architecture container image and perform vulnerability scanning using Trivy on an Azure Cobalt 100 Arm64 Ubuntu VM.
+In this section, you'll build a multi-architecture container image and perform vulnerability scanning using Trivy on an Azure Cobalt 100 Arm64 Ubuntu VM.
 
 You will:
 
@@ -21,7 +21,7 @@ You will:
 
 ## Prerequisites
 
-Before starting this module, ensure you have:
+Before starting, ensure you have:
 
 - An Azure Cobalt 100 Arm64 Ubuntu VM running
 - Docker installed and configured on your VM
@@ -48,16 +48,16 @@ sudo apt update
 sudo apt install -y ca-certificates curl gnupg lsb-release
 ```
 
-**Add Docker GPG key:**
+## Add Docker GPG key
 
-Adds Docker’s official signing key so packages are trusted.
+Add Docker’s official signing key so packages are trusted.
 
 ```bash
 sudo mkdir -p /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 ```
 
-**Add repository:**
+## Add repository
 
 Register Docker’s package source for Arm64 Ubuntu.
 
@@ -66,7 +66,7 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.
 $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
 
-**Install Docker:**
+## Install Docker
 
 Install Docker Engine and Buildx for multi-architecture builds.
 
@@ -75,7 +75,7 @@ sudo apt update
 sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin
 ```
 
-**Enable Docker without sudo:**
+## Enable Docker without sudo
 
 ```bash
 sudo usermod -aG docker $USER
@@ -83,8 +83,6 @@ newgrp docker
 ```
 
 Adds the user to the docker group and applies the new group permissions immediately, enabling non-root access to Docker.
-
-**Verify:**
 
 Confirm Docker is running natively on Arm64.
 
@@ -98,9 +96,9 @@ You should see a result similar to:
 Architecture: aarch64
 ```
 
-## Configure Docker Buildx for Multi-Architecture Builds
+## Configure Docker Buildx for multi-architecture builds
 
-**Create builder:**
+Create builder:
 
 Create a special Docker builder capable of building images for multiple CPU architectures.
 
@@ -108,7 +106,7 @@ Create a special Docker builder capable of building images for multiple CPU arch
 docker buildx create --name multiarch-builder --use
 ```
 
-**Initialize:**
+## Initialize
 
 Prepare the builder to support multi-platform builds.
 
@@ -154,7 +152,7 @@ Docker displays a one-time device code and a login URL:
 https://login.docker.com/activate
 ```
 
-**Steps to complete login:**
+Steps to complete login:
 
 - Open the displayed URL in your web browser
 - Enter the one-time confirmation code shown in the terminal
@@ -196,17 +194,6 @@ docker buildx build \
 
 This command builds the container for both architectures and pushes the multi-architecture image directly to Docker Hub. The same image specification can now run on both x86 and Arm systems.
 
-## What you've accomplished and what's next
-
-You've successfully:
-
-- Configured Docker Buildx for multi-platform builds
-- Created a demo container application with Dockerfile and HTML
-- Authenticated with Docker Hub
-- Built and pushed a multi-architecture container image
-
-Your multi-architecture image is now available on Docker Hub. Next, you'll install Trivy and scan your image for vulnerabilities.
-
 ## Install and verify Trivy
 
 Download the Arm64-compatible Trivy scanner:
@@ -220,9 +207,7 @@ wget https://github.com/aquasecurity/trivy/releases/download/v0.68.1/trivy_0.68.
 The [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) recommends Trivy 0.29.0 or later for Arm platforms.
 {{% /notice %}}
 
-**Install:**
-
-Install Trivy on your system.
+Install Trivy on your system:
 
 ```bash
 sudo dpkg -i trivy_0.68.1_Linux-ARM64.deb
@@ -270,23 +255,14 @@ Create a machine-readable vulnerability report for audits and CI pipelines.
 2026-01-23T06:42:33Z    WARN    Using severities from other vendors for some vulnerabilities. Read https://trivy.dev/docs/v0.68/guide/scanner/vulnerability#severity-selection for details.
 ```
 
-## Outcome
-
-You have:
-
-- Installed Docker on Arm64
-- Built multi-architecture container images
-- Pushed images to Docker Hub
-- Installed Trivy on Azure Cobalt 100
-- Scanned images for vulnerabilities
-- Generated security reports
-
 ## What you've accomplished and what's next
 
-You've now completed local vulnerability scanning:
+In this section, you:
 
+- Built and pushed a multi-architecture container image to Docker Hub
 - Installed Trivy on your Arm64 VM
-- Scanned your multi-architecture container image  
+- Scanned your container image for vulnerabilities
 - Generated a JSON vulnerability report for analysis
 
-You have the foundation for vulnerability scanning in place. Next, you'll integrate Trivy into a GitHub Actions CI/CD pipeline to automate security scanning on every code push.
+You now have a working local security scanning setup. Next, you'll integrate Trivy into a GitHub Actions CI/CD pipeline to automate security scanning on every code push.
+
