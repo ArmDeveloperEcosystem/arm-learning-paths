@@ -59,17 +59,7 @@ function ensureChatAiLoaded() {
   const existingWidget = document.querySelector("chat-ai");
   const existingScript = document.querySelector("script[data-chat-ai]");
 
-  if (!isAllowedHost) {
-    if (existingWidget) {
-      existingWidget.remove();
-    }
-    if (existingScript) {
-      existingScript.remove();
-    }
-    return;
-  }
-
-  if (!signedIn) {
+  if (!isAllowedHost || !signedIn) {
     if (existingWidget) {
       existingWidget.remove();
     }
