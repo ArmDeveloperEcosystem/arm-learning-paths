@@ -6,9 +6,9 @@ weight: 6
 layout: learningpathall
 ---
 
-If you use `.vgf` as an intermediate artifact, it helps to inspect the exported graph before you integrate it into your runtime.
-
 ## Install the Model Explorer
+
+{{% notice %}}If you use `.vgf` as an intermediate artifact, it helps to inspect the exported graph before you integrate it into your runtime.{{% /notice %}}
 
 Install and launch Model Explorer with the VGF adapter:
 

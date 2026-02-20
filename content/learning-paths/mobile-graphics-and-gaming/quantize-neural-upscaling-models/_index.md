@@ -41,7 +41,7 @@ further_reading:
         link: /learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/
         type: learningpath
     - resource:
-        title: Fine-tune neural graphics models with Model Gym
+        title: Fine-tuning neural graphics models with Model Gym
         link: /learning-paths/mobile-graphics-and-gaming/model-training-gym/
         type: learningpath
     - resource:
