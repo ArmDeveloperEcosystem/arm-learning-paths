@@ -19,7 +19,8 @@ author: Pareena Verma
 ##### Tags
 skilllevels: Introductory
 subjects: ML
-cloud_service_providers: Google Cloud
+cloud_service_providers:
+  - Google Cloud
 
 armips:
   - Neoverse

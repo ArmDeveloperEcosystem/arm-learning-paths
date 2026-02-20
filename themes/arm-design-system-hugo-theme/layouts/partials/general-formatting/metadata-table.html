@@ -270,13 +270,13 @@ Called from:
                                         {{ .Params.subjects }}
                                     </ads-tag>
                                 {{end}}
-                                {{ if .Params.cloud_service_providers }}
-                                    <ads-tag    href='{{ "/" | relLangURL}}tag/{{.Params.cloud_service_providers | urlize}}' style="margin-bottom: 4px;">
+                                {{ range .Params.cloud_service_providers }}
+                                    <ads-tag    href='{{ "/" | relLangURL}}tag/{{. | urlize}}' style="margin-bottom: 4px;">
                                         <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
                                         <span class="fa-solid fa-tag"></span>
-                                        {{ .Params.cloud_service_providers }}
+                                        {{ . }}
                                     </ads-tag>
-                                {{end}}
+                                {{ end }}
                                 {{ range .Params.operatingsystems }}
                                     <ads-tag    href='{{ "/" | relLangURL}}tag/{{. | urlize}}' style="margin-bottom: 4px;">
                                         <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
@@ -399,13 +399,13 @@ Called from:
                                         {{ .Params.subjects }}
                                     </ads-tag>
                                 {{end}}
-                                {{ if .Params.cloud_service_providers }}
-                                    <ads-tag    href='{{ "/" | relLangURL}}tag/{{.Params.cloud_service_providers | urlize}}' style="margin-bottom: 4px;">
+                                {{ range .Params.cloud_service_providers }}
+                                    <ads-tag    href='{{ "/" | relLangURL}}tag/{{. | urlize}}' style="margin-bottom: 4px;">
                                         <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
                                         <span class="fa-solid fa-tag"></span>
-                                        {{ .Params.cloud_service_providers }}
+                                        {{ . }}
                                     </ads-tag>
-                                {{end}}
+                                {{ end }}
                                 {{ range .Params.operatingsystems }}
                                     <ads-tag    href='{{ "/" | relLangURL}}tag/{{. | urlize}}' style="margin-bottom: 4px;">
                                         <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">

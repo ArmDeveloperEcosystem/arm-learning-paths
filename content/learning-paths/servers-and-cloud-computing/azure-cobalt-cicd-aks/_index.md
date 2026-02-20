@@ -20,7 +20,8 @@ author: Pranay Bakre
 ### Tags
 skilllevels: Advanced
 subjects: Containers and Virtualization
-cloud_service_providers: Microsoft Azure
+cloud_service_providers:
+  - Microsoft Azure
 
 armips:
     - Neoverse
