@@ -25,10 +25,10 @@ author: Daniel Schleicher
 
 ### Tags
 skilllevels: Advanced
-subjects: Migration to Arm
+subjects: Performance and Architecture
 armips:
-    - Neoverse-V1
-    - Cortex-A76
+    - Neoverse
+    - Cortex-A
 operatingsystems:
     - Linux
 tools_software_languages:
