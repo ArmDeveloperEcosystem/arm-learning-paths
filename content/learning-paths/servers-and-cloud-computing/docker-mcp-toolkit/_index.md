@@ -39,7 +39,7 @@ operatingsystems:
 
 further_reading:
     - resource:
-        title: "How to Automate x86 to Arm Migration with Docker MCP Toolkit, VS Code, and GitHub Copilot"
+        title: "Automate x86 to Arm Migration with Docker MCP Toolkit, VS Code, and GitHub Copilot"
         link: https://www.docker.com/blog/automate-arm-migration-docker-mcp-copilot/
         type: blog
     - resource:
