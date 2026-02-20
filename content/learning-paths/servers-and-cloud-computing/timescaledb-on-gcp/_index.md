@@ -6,9 +6,10 @@ minutes_to_complete: 45
 who_is_this_for: This learning path is for DevOps engineers, database engineers, and software developers who want to deploy and operate TimescaleDB on SUSE Linux Enterprise Server (SLES) Arm64, ingest live time-series sensor data, and visualize it in Grafana.
 
 learning_objectives:
-  - Install and configure TimescaleDB on Google Cloud C4A Axion Arm-based processors
-  - Ingest live sensor data using Python and create hypertables with retention policies
-  - Build a live sensor dashboard with Grafana for real-time data visualization
+  - Install and configure TimescaleDB on Google Cloud C4A Axion processors by building from source for Arm64
+  - Create a real-time sensor data ingestion pipeline using Python with hypertables, continuous aggregates, and retention policies
+  - Build a live sensor dashboard with Grafana that automatically refreshes to display time-series data
+  - Validate end-to-end data flow from ingestion through TimescaleDB to Grafana visualization
 
 prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
@@ -66,18 +67,3 @@ learning_path_main_page: yes
 
 TimescaleDB is a high-performance, open-source time-series database built on PostgreSQL that provides powerful features for storing, querying, and analyzing time-series data efficiently. When you deploy TimescaleDB on Google Cloud C4A Axion Arm-based processors, you can achieve high-throughput time-series ingestion and query processing with optimized performance per watt and lower infrastructure costs. This Learning Path shows you how to build a complete time-series data pipeline with live sensor ingestion and real-time visualization using Grafana.
 
-## Before you begin
-
-Before you start, ensure you have:
-
-- A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
-- Basic familiarity with SQL, Python, and Grafana
-
-## What you'll learn
-
-By the end of this Learning Path, you will be able to:
-
-- Install and configure TimescaleDB on Google Cloud C4A Axion processors by building from source for Arm64
-- Create a real-time sensor data ingestion pipeline using Python with hypertables, continuous aggregates, and retention policies
-- Build a live sensor dashboard with Grafana that automatically refreshes to display time-series data
-- Validate end-to-end data flow from ingestion through TimescaleDB to Grafana visualization
