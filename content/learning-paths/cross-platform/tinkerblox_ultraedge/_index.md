@@ -25,6 +25,9 @@ subjects: Containers and Virtualization
 tools_software_languages:
   - Tinkerblox
 
+cloud_service_providers:
+  - Google Cloud
+
 armips:
   - Neoverse
   
