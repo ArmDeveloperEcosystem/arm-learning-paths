@@ -6,9 +6,9 @@ weight: 6
 layout: learningpathall
 ---
 
-If you use `.vgf` as an intermediate artifact, it helps to inspect the exported graph before you integrate it into your runtime.
-
 ## Install the Model Explorer
+
+{{% notice %}}If you use `.vgf` as an intermediate artifact, it helps to inspect the exported graph before you integrate it into your runtime.{{% /notice %}}
 
 Install and launch Model Explorer with the VGF adapter:
 
@@ -28,7 +28,7 @@ The fastest way to understand the integration constraints is to start from a kno
 
 Use the Learning Path [Get started with neural graphics using ML Extensions for Vulkan](/learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/) and focus on how the sample loads and executes `.vgf` artifacts. This is where you validate assumptions about input and output tensor formats and where any required color-space or layout conversions happen.
 
-## Wrap-up
+## Choose your quantization strategy
 
 You now have a complete reference workflow for quantizing an image-to-image model with TorchAO and exporting INT8 `.vgf` artifacts using the ExecuTorch Arm backend. You also have a practical baseline you can use to debug export issues before you switch to your production model and data.
 
@@ -38,4 +38,3 @@ When you move from the CIFAR-10 proxy model to your own model, keep these constr
 - Use QAT when PTQ introduces visible artifacts or regressions that matter to your visual quality bar.
 - Validate early by inspecting the exported graph so you can catch unexpected layouts, operators, or tensor shapes before runtime integration.
 
-Continue to the last page to go deeper on further resources.

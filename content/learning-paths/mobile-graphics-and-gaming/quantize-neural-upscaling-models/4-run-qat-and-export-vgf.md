@@ -6,7 +6,7 @@ weight: 5
 layout: learningpathall
 ---
 
-## Overview
+## Configure QAT fine-tuning and export to VGF
 
 In this section, you run quantization-aware training (QAT) so the model learns to be robust to quantization effects.
 
@@ -137,7 +137,7 @@ If PTQ degrades model accuracy too much, QAT is the next step. The workflow is t
 
 In practice, you already have a training loop for your upscaler. The simplest way to use QAT is to reuse that loop and point it at the QAT-prepared exported model.
 
-The snippet below gives you a minimal structure you can drop into your project. You supply:
+Use the following minimal structure as a starting point for your own project. You supply:
 
 - `model_fp32`: your baseline FP32 model
 - `example_input`: a tuple of input tensors
@@ -188,4 +188,10 @@ def export_vgf_int8_qat(
     to_edge_transform_and_lower(aten_dialect, partitioner=[vgf_partitioner])
 ```
 
-Next, you will validate your model files by visualizing them in the Model Explorer.
+## What you've accomplished and what's next
+
+In this section, you:
+- Extended the CIFAR-10 example to run QAT with fake-quantization enabled during fine-tuning
+- Exported the QAT-trained model as a `.vgf` artifact using the ExecuTorch Arm backend
+
+In the next section, you inspect both exported graphs in Model Explorer to validate the output before runtime integration.
