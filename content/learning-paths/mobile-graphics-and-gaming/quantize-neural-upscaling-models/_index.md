@@ -1,9 +1,5 @@
 ---
 title: Quantize neural upscaling models with ExecuTorch
-
-draft: true
-cascade:
-    draft: true
     
 minutes_to_complete: 60
 

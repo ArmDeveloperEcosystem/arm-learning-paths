@@ -6,7 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-## Overview
+## Install and configure PyTorch, TorchAO, and ExecuTorch for quantization
 
 In this section, you create a Python environment with PyTorch, TorchAO, and ExecuTorch components needed for quantization and `.vgf` export.
 

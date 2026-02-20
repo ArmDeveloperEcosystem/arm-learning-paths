@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Explore PTQ and QAT for ExecuTorch INT8 deployment
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -14,11 +14,13 @@ In this Learning Path, you use quantization as part of the ExecuTorch Arm backen
 
 To keep the workflow concrete, you start with a complete, runnable CIFAR-10-based example that exports `.vgf` artifacts end to end. After you have a known-good baseline, you can apply the same steps to your own neural network and training code.
 
-The Arm backend in ExecuTorch provides an open, standardized, minimal operator set for neural network operations to be lowered to, and is used by Arm platforms and accelerators. The main components are:
+The Arm backend in ExecuTorch provides an open, standardized, minimal operator set for neural network operations to be lowered to, and is used by Arm platforms and accelerators. 
+
+The ExecuTorch Arm backend uses three key components to optimize your model for Arm hardware:
 
 - TOSA (Tensor Operator Set Architecture) provides a standardized operator set for acceleration on Arm platforms.
-- The ExecuTorch Arm backend lowers your PyTorch model to TOSA and uses an ahead-of-time (AOT) compilation flow.
-- The VGF backend produces a portable artifact you can carry into downstream tools, including `.vgf` files.
+- ExecuTorch Arm backend lowers your PyTorch model to TOSA using ahead-of-time (AOT) compilation.
+- VGF backend produces portable `.vgf` artifacts that work with downstream tools and Vulkan-based pipelines.
 
 ### Post-training quantization (PTQ)
 

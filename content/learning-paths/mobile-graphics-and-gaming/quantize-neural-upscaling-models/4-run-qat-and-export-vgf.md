@@ -6,7 +6,7 @@ weight: 5
 layout: learningpathall
 ---
 
-## Overview
+## Configure QAT fine-tuning and export to VGF
 
 In this section, you run quantization-aware training (QAT) so the model learns to be robust to quantization effects.
 

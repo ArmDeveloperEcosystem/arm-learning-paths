@@ -28,7 +28,7 @@ The fastest way to understand the integration constraints is to start from a kno
 
 Use the Learning Path [Get started with neural graphics using ML Extensions for Vulkan](/learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/) and focus on how the sample loads and executes `.vgf` artifacts. This is where you validate assumptions about input and output tensor formats and where any required color-space or layout conversions happen.
 
-## Wrap-up
+## Choose your quantization strategy
 
 You now have a complete reference workflow for quantizing an image-to-image model with TorchAO and exporting INT8 `.vgf` artifacts using the ExecuTorch Arm backend. You also have a practical baseline you can use to debug export issues before you switch to your production model and data.
 

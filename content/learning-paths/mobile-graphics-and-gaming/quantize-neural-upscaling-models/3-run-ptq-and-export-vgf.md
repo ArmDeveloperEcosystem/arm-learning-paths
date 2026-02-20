@@ -6,7 +6,8 @@ weight: 4
 layout: learningpathall
 ---
 
-## Overview
+## Apply post-training quantization and export to VGF
+
 
 In this section, you apply post-training quantization (PTQ) to an image-to-image model and export a `.vgf` artifact.
 
