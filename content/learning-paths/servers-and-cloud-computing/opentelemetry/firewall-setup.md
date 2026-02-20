@@ -1,5 +1,5 @@
 ---
-title: Create firewall rules on GCP for flask and observability components
+title: Create firewall rules on GCP for Flask and observability components
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -12,7 +12,7 @@ To allow inbound traffic for the Flask application and observability components,
 
 {{% notice Note %}} For more information about GCP setup, see [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).{{% /notice %}}
 
-## Required Ports
+## Required ports
 
 | Service | Port | Purpose |
 | ------- | ---- | ------- |
@@ -23,28 +23,28 @@ To allow inbound traffic for the Flask application and observability components,
 | OTLP HTTP | 4318 | Telemetry ingestion |
 | Collector Metrics | 8889 | Prometheus scrape endpoint |
 
-## Create a Firewall Rule in GCP
+## Create a firewall rule in GCP
 
-To expose the above TCP ports, let's create a firewall rule.
+To expose the TCP ports listed above, create a firewall rule.
 
 Navigate to the [Google Cloud Console](https://console.cloud.google.com/), go to **VPC Network > Firewall**, and select **Create firewall rule**.
 
-![Google Cloud Console VPC Network Firewall page showing existing firewall rules and Create Firewall Rule button#center](images/firewall-rule1.png "Create a firewall rule")
+![Google Cloud Console VPC Network Firewall page showing existing firewall rules and Create Firewall Rule button alt-txt#center](images/firewall-rule1.png "Create a firewall rule")
 
-Next, create the firewall rule that will expose the above TCP ports.
-Set the **Name** of the new rule to "allow-all-opentelemetry". Select your network that you intend to bind to your VM (default is "default" but your organization may vary)
+Next, create the firewall rule that exposes the TCP ports.
+Set the **Name** of the new rule to `allow-all-opentelemetry`. Select the network you intend to bind to your VM (the default is `default`, but your organization may use a different one).
 
 Set **Direction of traffic** to "Ingress". Set **Allow on match** to "Allow" and **Targets** to "Specified target tags".
 
-![Google Cloud Console firewall rule creation form showing name field, network selection, direction set to Ingress, and targets set to Specified target tags#center](images/network-rule2.png "Creating opentelemetry firewall rule")
+![Google Cloud Console firewall rule creation form showing name field, network selection, direction set to Ingress, and targets set to Specified target tags alt-txt#center](images/network-rule2.png "Creating opentelemetry firewall rule")
 
-Next, enter "allow-all-opentelemetry" in the **Target tags** text field. Set **Source IPv4 ranges** to "0.0.0.0/0".
+Next, enter `allow-all-opentelemetry` in the **Target tags** field. Set **Source IPv4 ranges** to `0.0.0.0/0`.
 
-![Google Cloud Console firewall rule form showing target tags field with allow-all-opentelemetry entered and source IPv4 ranges set to 0.0.0.0/0#center](images/network-rule3.png "Creating the Opentelemetry firewall rule")
+![Google Cloud Console firewall rule form showing target tags field with allow-all-opentelemetry entered and source IPv4 ranges set to 0.0.0.0/0 alt-txt#center](images/network-rule3.png "Creating the Opentelemetry firewall rule")
 
-Finally, select **Specified protocols and ports** under the **Protocols and ports** section. Select the **TCP** checkbox, enter "8080,16686,9090,4317,4318,8889" in the **Ports" text field, and select **Create**.
+Finally, select **Specified protocols and ports** under the **Protocols and ports** section. Select the **TCP** checkbox, enter `8080,16686,9090,4317,4318,8889` in the **Ports** field, and select **Create**.
 
-![Google Cloud Console firewall rule form showing protocols and ports section with TCP selected and ports 8080,16686,9090,4317,4318,8889 specified#center](images/network-port.png "Specifying the TCP ports to expose for Opentelemetry")
+![Google Cloud Console firewall rule form showing protocols and ports section with TCP selected and ports 8080,16686,9090,4317,4318,8889 specified alt-txt#center](images/network-port.png "Specifying TCP ports for OpenTelemetry")
 
 ## What you've accomplished and what's next
 
