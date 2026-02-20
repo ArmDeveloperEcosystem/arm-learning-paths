@@ -47,19 +47,10 @@ if (!window.msalInstance) {
 const msalInstance = window.msalInstance;
 
 function ensureChatAiLoaded() {
-  const host = (window.location.hostname || "").toLowerCase();
-  const allowedHosts = new Set([
-    "localhost",
-    "127.0.0.1",
-    "internal.learn.arm.com",
-    "learn.arm.com",
-    "d3lutzu1kzwmb3.cloudfront.net"
-  ]);
-  const isAllowedHost = allowedHosts.has(host);
   const signedIn = isUserSignedIn();
   const existingWidget = document.querySelector("chat-ai");
 
-  if (!isAllowedHost || !signedIn) {
+  if (!signedIn) {
     if (existingWidget) {
       existingWidget.remove();
     }
@@ -255,5 +246,4 @@ document.addEventListener("arm-top-navigation-ready", function (e) {
   await initAuth();   // IMPORTANT: await this before user clicks anything
 
 })();
-
 
