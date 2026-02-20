@@ -1,21 +1,19 @@
 ---
 title: Optimize performance using Link-Time Optimization with GCC
 
-draft: true
-cascade:
-    draft: true
     
 minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for developers who want to improve application performance using link-time optimization (LTO) with the GCC toolchain.
 
 learning_objectives:
-    - Learn how link-time optimization works and when to use it
+    - Understand how link-time optimization (LTO) works and when to apply it
     - Enable and configure LTO with GCC compiler flags
-    - Understand the performance and code size trade-offs of LTO
+    - Evaluate the performance and code size trade-offs of LTO
 
 prerequisites:
-    - A recent version of the GCC toolchain
+    - An Arm Linux system (cloud instance, on-premises hardware, or a virtual machine)
+    - A recent version of the [GCC toolchain](/install-guides/gcc/)
 
 author: Victor Do Nascimento
 

@@ -1,5 +1,5 @@
 ---
-title: OpenTelemetry Environment & Application Setup on ARM64
+title: Set up OpenTelemetry environment and application on Arm64
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -9,34 +9,50 @@ layout: learningpathall
 
 ## OpenTelemetry Environment & Application Setup
 
-In this guide, you will prepare an **Arm64-based SUSE Linux virtual machine** with container tooling and deploy an **instrumented Python Flask microservice** that emits OpenTelemetry traces and metrics. This forms the foundation for building a complete observability pipeline in the upcoming steps.
+In this guide, you will prepare an Arm64-based SUSE Linux virtual machine with container tooling and deploy an instrumented Python Flask microservice that emits OpenTelemetry traces and metrics. This forms the foundation for building a complete observability pipeline in the upcoming steps.
 
 ## Architecture Overview
 
 This setup includes a lightweight application and telemetry flow as shown below:
 
 ```text
-Flask Microservice (ARM64)
+Flask Microservice (Arm64)
         |
         | OpenTelemetry SDK
         v
 OpenTelemetry Collector
 ```
+
 The Flask application generates telemetry data using the OpenTelemetry SDK and sends it to an OpenTelemetry Collector for further processing and visualization.
 
 ## Network & Firewall Requirements
-Ensure the following port is open on your VM firewall:
 
-| Service   | Port | Purpose                     |
-|-----------|------|-----------------------------|
-| Flask App | 8080 | Application HTTP traffic   |
+Ensure the following ports are open on your VM firewall:
 
+| Service           | Port  | Purpose                    |
+| ----------------- | ----- | -------------------------- |
+| Prometheus        | 9090  | Metrics dashboard UI       |
+| Jaeger UI         | 16686 | Distributed tracing UI     |
+| Collector Metrics | 8889  | Prometheus scrape endpoint |
+| OTLP gRPC         | 4317  | Telemetry ingestion (gRPC) |
+| OTLP HTTP         | 4318  | Telemetry ingestion (HTTP) |
 
-Opening port **8080** allows external access to the Flask microservice running inside the container.
+These ports enable telemetry ingestion and provide web interfaces for monitoring metrics and traces.
 
-## Install Docker on SUSE ARM64
+## Enable the SUSE Containers module
 
-Docker is required to run containerized services on the ARM-based VM.
+Enable the SUSE Containers Module to ensure that Docker and container-related tools are fully supported.
+
+```bash
+sudo SUSEConnect -p sle-module-containers/15.5/arm64
+sudo SUSEConnect --list-extensions | grep Containers
+```
+
+Verify that the output shows the Containers module as **Activated**.
+
+## Install Docker on SUSE Arm64
+
+Docker is required to run containerized services on the Arm-based VM.
 
 ```bash
 sudo zypper refresh
@@ -68,7 +84,7 @@ sudo curl -L https://github.com/docker/compose/releases/download/v2.27.0/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 ```
 
-### Verify Installation
+**Verify Docker Compose installation:**
 
 ```bash
 docker-compose --version
@@ -77,6 +93,7 @@ docker-compose --version
 Docker Compose v2 is now installed and ready to manage multi-service deployments.
 
 ## Create Project Workspace
+
 Create a dedicated directory for the OpenTelemetry demo application.
 
 ```bash
@@ -87,13 +104,10 @@ cd ~/otel-demo
 This directory will store the Flask application code, dependencies, and container configuration.
 
 ## Build an Instrumented Flask Application
+
 This Flask service is integrated with the OpenTelemetry SDK to emit distributed traces and metrics.
 
-```bash
-vi app.py
-```
-
-### File: app.py
+Create a file **app.py** in ~/otel-demo and populate the file with this code:
 
 ```python
 from flask import Flask
@@ -158,15 +172,10 @@ if __name__ == "__main__":
 The Flask service now automatically generates traces for HTTP requests and custom metrics for request counts.
 
 ## Define Python Dependencies
-Create a file to list all required Python packages.
 
-```bash
-vi requirements.txt
-```
+Create a file **requirements.txt** in ~/otel-demo to list all required Python packages:
 
-### File: requirements.txt
-
-```
+```text
 flask
 opentelemetry-api
 opentelemetry-sdk
@@ -176,17 +185,11 @@ opentelemetry-instrumentation-flask
 
 This ensures all OpenTelemetry and Flask libraries are installed consistently inside the container.
 
-
-
 ## Create Application Docker Image
 
 Build an ARM-compatible container image for the Flask service.
 
-```bash
-vi Dockerfile
-```
-
-### File: Dockerfile
+Create a file **Dockerfile** in ~/otel-demo and populate the file with this content:
 
 ```dockerfile
 FROM python:3.10-slim
@@ -201,15 +204,21 @@ COPY app.py .
 CMD ["python", "app.py"]
 ```
 
-This Dockerfile packages the instrumented Flask application into a lightweight ARM64-compatible container.
+This Dockerfile packages the instrumented Flask application into a lightweight Arm64-compatible container.
 
 ## What You Have Accomplished
 
-- Installed Docker and Docker Compose on an ARM64 SUSE VM
+- Installed Docker and Docker Compose on an Arm64 SUSE VM
 - Created an OpenTelemetry-instrumented Flask microservice
 - Defined application dependencies
 - Built a container-ready application image
 
-### What’s Next
+## What you've accomplished and what's next
 
-In the next section, you will deploy the **OpenTelemetry Collector and observability stack** to receive, process, and visualize the telemetry data generated by this application.
+You've successfully:
+
+- Set up Docker and Docker Compose on your Google Axion C4A Arm64 virtual machine
+- Built an instrumented Python Flask microservice that emits OpenTelemetry traces and metrics
+- Created a containerized application ready for deployment
+
+Next, you'll deploy the OpenTelemetry Collector and observability stack to receive, process, and visualize the telemetry data generated by this application.

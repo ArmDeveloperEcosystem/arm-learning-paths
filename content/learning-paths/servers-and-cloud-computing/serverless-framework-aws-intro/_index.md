@@ -18,7 +18,8 @@ author: Dawid Borycki
 ### Tags
 skilllevels: Introductory
 subjects: Web
-cloud_service_providers: AWS
+cloud_service_providers:
+  - AWS
 
 armips:
     - Neoverse

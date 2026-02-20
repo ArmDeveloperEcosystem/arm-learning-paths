@@ -18,7 +18,8 @@ author: Jason Andrews
 ### Tags
 skilllevels: Advanced
 subjects: CI-CD
-cloud_service_providers: AWS
+cloud_service_providers:
+  - AWS
 
 armips:
     - Neoverse

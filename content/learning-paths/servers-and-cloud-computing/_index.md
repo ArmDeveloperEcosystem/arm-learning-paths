@@ -254,7 +254,7 @@ tools_software_languages_filter:
 weight: 1
 cloud_service_providers_filter:
 - AWS: 19
-- Google Cloud: 36
+- Google Cloud: 38
 - Microsoft Azure: 19
 - Oracle: 2
 ---
