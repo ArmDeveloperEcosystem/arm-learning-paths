@@ -24,7 +24,8 @@ skilllevels: Introductory
 subjects: ML
 arm_ips:
     - Neoverse
-cloud_service_providers: Google Cloud
+cloud_service_providers:
+  - Google Cloud
 tools_software_languages:
     - Google Cloud
     - Hugging Face

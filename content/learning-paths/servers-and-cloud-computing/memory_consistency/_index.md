@@ -21,7 +21,7 @@ author: Julio Suarez
 
 skilllevels: Advanced
 subjects: Performance and Architecture
-cloud_service_providers:
+cloud_service_providers: []
 armips:
     - Neoverse
 operatingsystems:

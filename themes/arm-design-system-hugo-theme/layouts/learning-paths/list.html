@@ -113,7 +113,9 @@ Calls to:
                                     tag-{{. | urlize}}
                                 {{ end }}
                                 {{ with .learning_path.Params.cloud_service_providers }}
-                                    tag-{{. | urlize}}
+                                    {{ range . }}
+                                        tag-{{. | urlize}}
+                                    {{ end }}
                                 {{ end }}
                                 {{ with .learning_path.Params.armips }}
                                     {{range .}}
