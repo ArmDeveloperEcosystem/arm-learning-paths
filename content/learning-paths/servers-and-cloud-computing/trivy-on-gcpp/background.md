@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 ## Key features and benefits of Azure Cobalt 100
 
-Azure Cobalt 100 is Microsoft's first-generation Arm-based processor, designed for cloud-native Linux workloads. Based on Arm's Neoverse-N2 architecture, it delivers improved performance-per-watt and cost efficiency compared to comparable x86 instances. This makes it ideal for containerized workloads and CI/CD runners that run continuously.
+Azure Cobalt 100 is Microsoft's first-generation Arm-based processor, designed for cloud-native Linux workloads. Based on Arm's Neoverse-N2 architecture, it delivers improved performance-per-watt and cost efficiency. This makes it ideal for containerized workloads and CI/CD runners that run continuously.
 
 Each vCPU is backed by a dedicated physical core, ensuring consistent, predictable performance. Running at 3.4 GHz, Cobalt 100 handles typical cloud workloads including web servers, data analytics, databases, and container platforms efficiently.
 
