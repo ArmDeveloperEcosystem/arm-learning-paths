@@ -1,5 +1,5 @@
 ---
-title: Quantize models with ExecuTorch
+title: Quantize neural upscaling models with ExecuTorch
 
 draft: true
 cascade:
@@ -43,6 +43,10 @@ further_reading:
     - resource:
         title: Get started with neural graphics using ML Extensions for Vulkan
         link: /learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/
+        type: learningpath
+    - resource:
+        title: Fine-tune neural graphics models with Model Gym
+        link: /learning-paths/mobile-graphics-and-gaming/model-training-gym/
         type: learningpath
     - resource:
         title: Neural Graphics Development Kit

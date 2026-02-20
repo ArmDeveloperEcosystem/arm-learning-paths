@@ -38,4 +38,3 @@ When you move from the CIFAR-10 proxy model to your own model, keep these constr
 - Use QAT when PTQ introduces visible artifacts or regressions that matter to your visual quality bar.
 - Validate early by inspecting the exported graph so you can catch unexpected layouts, operators, or tensor shapes before runtime integration.
 
-Continue to the last page to go deeper on further resources.

@@ -14,7 +14,7 @@ In this Learning Path, you use quantization as part of the ExecuTorch Arm backen
 
 To keep the workflow concrete, you start with a complete, runnable CIFAR-10-based example that exports `.vgf` artifacts end to end. After you have a known-good baseline, you can apply the same steps to your own neural network and training code.
 
-In a nutshell, the Arm backend in ExecuTorch provides an open, standardized, minimal operator set for neural networks operations to be lowered to. It is utilized by Arm platforms and accelerators. Below is an overview of the main components.
+The Arm backend in ExecuTorch provides an open, standardized, minimal operator set for neural network operations to be lowered to, and is used by Arm platforms and accelerators. The main components are:
 
 - TOSA (Tensor Operator Set Architecture) provides a standardized operator set for acceleration on Arm platforms.
 - The ExecuTorch Arm backend lowers your PyTorch model to TOSA and uses an ahead-of-time (AOT) compilation flow.
@@ -24,7 +24,7 @@ In a nutshell, the Arm backend in ExecuTorch provides an open, standardized, min
 
 PTQ keeps training simple. You train your FP32 model as usual, then run a calibration pass using representative inputs to determine quantization parameters (for example, scales). After calibration, you convert the model and export a quantized graph.
 
-PTQ is a good default when you need a fast iteration loop and you have a calibration set that looks like the actual inference data. For neural networks, PTQ can be good enough for early bring-up, especially when your goal is to validate the export and integration path. Depending on the model and use-case, PTQ can provide good quality results equal to the original floating point graph.
+PTQ is a good default when you need a fast iteration loop and you have a calibration set that looks like the actual inference data. For neural networks, PTQ can be good enough for early bring-up, especially when your goal is to validate the export and integration path. Depending on the model and use case, PTQ can provide good quality results equal to the original floating-point graph.
 
 ### Quantization-aware training (QAT)
 
@@ -32,15 +32,22 @@ QAT simulates quantization effects during training. You prepare the model for QA
 
 QAT introduces visible drop in model accuracy. For example, this is common for image-to-image tasks because small numeric changes can show up as banding, ringing, or loss of fine detail.
 
-## How this maps to the Arm backend
+## ExecuTorch quantization workflow for Arm
 
 For Arm-based platforms, the workflow stays consistent across models:
 
-1. Train and evaluate the neural network in PyTorch.
-2. Quantize (PTQ or QAT) to reduce runtime cost.
-3. Export with ExecuTorch (via TOSA) to generate a `.vgf` artifact.
-4. Run the `.vgf` model in your Vulkan-based pipeline.
+- Train and evaluate the neural network in PyTorch.
+- Quantize (PTQ or QAT) to reduce runtime cost.
+- Export with ExecuTorch (via TOSA) to generate a `.vgf` artifact.
+- Run the `.vgf` model in your Vulkan-based pipeline.
 
-In later sections, you will generate the `.vgf` file by using the ExecuTorch Arm backend VGF partitioner.
+In later sections, you generate the `.vgf` file using the ExecuTorch Arm backend VGF partitioner.
 
-With this background, you will now set up a working Python environment and run a baseline export-ready model.
+## What you've accomplished and what's next
+
+In this section:
+- You covered the difference between PTQ and QAT, and when to use each
+- You saw how the ExecuTorch Arm backend uses TOSA as an intermediate representation
+- You traced the end-to-end export workflow that produces `.vgf` artifacts
+
+In the next section, you create a Python environment with all the tools needed to run the examples.

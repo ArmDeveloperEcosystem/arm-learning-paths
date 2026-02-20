@@ -218,7 +218,7 @@ if __name__ == "__main__":
     ptq_example(device="cpu")
 ```
 
-## Run the PTQ example
+### Run the script
 
 Run the script:
 
@@ -234,7 +234,7 @@ epoch=1 step=50 loss=0.053812
 epoch=1 end psnr=19.42 dB
 ```
 
-You should also see files created under `./output/`. The exact filenames depend on your ExecuTorch version and backend configuration, but the directory should include an exported `.vgf` artifact.
+Check the `./output/` directory for exported files. The exact filenames depend on your ExecuTorch version and backend configuration, but the directory should include an exported `.vgf` artifact.
 
 {{% notice Tip %}}
 If export fails because of `bilinear` resize, switch the interpolation modes in `make_lowres_input()` and `forward()` to `mode="nearest"`. This keeps the tutorial flow intact while you investigate backend operator support.
@@ -242,14 +242,14 @@ If export fails because of `bilinear` resize, switch the interpolation modes in 
 
 ## Advanced: export PTQ to VGF in your own project
 
-Once the end-to-end example works, the next step is to apply the same flow to your own model. 
+Once the end-to-end example works, apply the same flow to your own model. 
 
 {{% notice Note %}}
 If you don't have a workflow or model, you can skip this section and proceed to the next page.
 {{% /notice %}}
 
 
-If you already have a trained model, this is the minimal PTQ-to-`.vgf` flow. Start from your FP32 PyTorch module (`model_fp32`), an `example_input` tuple that matches your real inference inputs, and a list of representative `calibration_batches` (typically 100–500 samples).
+If you already have a trained model, this is the minimal PTQ-to-`.vgf` flow. Start from your FP32 PyTorch module (`model_fp32`) and an `example_input` tuple that matches your real inference inputs. You also need a list of representative `calibration_batches`, typically 100–500 samples.
 
 ```python
 import torch
@@ -294,6 +294,12 @@ def export_vgf_int8_ptq(
     to_edge_transform_and_lower(aten_dialect, partitioner=[vgf_partitioner])
 ```
 
-When you use your own model, the most important input is the calibration set. Treat it like a contract: if it does not look like your actual inference data, PTQ quality can degrade.
+When you use your own model, the most important input is the calibration set. Treat it like a contract: if it doesn't look like your actual inference data, PTQ quality can degrade.
 
-Next, you will repeat the flow with QAT.
+## What you've accomplished and what's next
+
+In this section, you:
+- Applied PTQ to an image-to-image model using TorchAO PT2E quantization APIs
+- Exported a quantized INT8 graph as a `.vgf` artifact using the ExecuTorch Arm backend
+
+In the next section, you repeat the workflow using QAT, which gives the model a chance to adapt to quantization during fine-tuning.

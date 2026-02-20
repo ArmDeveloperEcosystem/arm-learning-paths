@@ -83,4 +83,10 @@ pip install -e .
 ```
 {{% /notice %}}
 
-With your environment set up, you are ready to run PTQ and generate a `.vgf` artifact from a calibrated model.
+## What you've accomplished and what's next
+
+In this section, you:
+- Created a Python virtual environment with PyTorch, TorchAO, and ExecuTorch
+- Ran the Arm backend setup script and verified the model converter is available on your `PATH`
+
+In the next section, you apply PTQ to a sample model and generate a `.vgf` artifact.
