@@ -1,5 +1,5 @@
 ---
-title: Unleashing leading On-Device AI performance with llama.cpp, SME2 and KleidiAI
+title: Profile SME2 with llama.cpp and KleidiAI on Android
 
 draft: true
 cascade:
@@ -16,7 +16,9 @@ learning_objectives:
 
 prerequisites:
     - Knowledge of KleidiAI and SME2
-    - An Linux or Android device with Arm SME2 support
+    - A Linux host machine (x86_64 or aarch64) for building llama.cpp with the Arm GNU Toolchain used in this Learning Path
+    - Git, CMake and Android Debug Bridge (ADB) installed on the host machine
+    - An Android device with Arm SME2 support for running and profiling the built executable
 
 author: Zenon Zhilong Xiu
 
@@ -24,8 +26,8 @@ author: Zenon Zhilong Xiu
 skilllevels: Advanced
 subjects: ML
 armips:
-    - Arm C1 CPU
-    - Arm SME2 unit
+    - Arm C1 core
+    - SME2
 tools_software_languages:
     - C++
     - llama.cpp

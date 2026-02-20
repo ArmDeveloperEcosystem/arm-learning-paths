@@ -18,7 +18,8 @@ author: Annie Tallund
 ##### Tags
 skilllevels: Introductory
 subjects: Databases
-cloud_service_providers: Google Cloud
+cloud_service_providers:
+  - Google Cloud
 
 armips:
     - Neoverse

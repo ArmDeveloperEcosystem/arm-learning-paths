@@ -20,7 +20,8 @@ author: Pranay Bakre
 ### Tags
 skilllevels: Advanced
 subjects: Containers and Virtualization
-cloud_service_providers: AWS
+cloud_service_providers:
+  - AWS
 armips:
     - Neoverse
 tools_software_languages:

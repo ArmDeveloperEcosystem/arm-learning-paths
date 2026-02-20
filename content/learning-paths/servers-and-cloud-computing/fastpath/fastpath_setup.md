@@ -241,3 +241,12 @@ source ~/venv/bin/activate
 ```
 
 With the Fastpath host configured, you're now ready to provision the system under test (SUT) and verify connectivity between them.
+
+## What you've accomplished and what's next
+
+In this section, you:
+- Provisioned the Fastpath host instance
+- Copied compiled kernel artifacts from the build host
+- Installed and configured the Fastpath software and Python virtual environment
+
+Next, you'll provision and configure the System Under Test (SUT) where the benchmark workloads will run.

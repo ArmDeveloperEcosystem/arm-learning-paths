@@ -27,12 +27,12 @@ Common use cases include real-time monitoring of IoT sensors, event-driven analy
 
 To learn more, visit the [TimescaleDB website](https://www.timescale.com/) and explore the [TimescaleDB documentation](https://docs.timescale.com/).
 
-
-## What You've Accomplished and What's Next
+## What you've accomplished and what's next
 
 In this section, you learned about:
-- Google Axion C4A Arm-based VMs and their performance advantages for time-series workloads  
-- TimescaleDB and its key features, including hypertables, continuous aggregates, and retention policies  
-- How Arm architecture enables cost-efficient, high-throughput ingestion and query processing for time-series data  
 
-Next, you'll install Grafana, connect TimescaleDB as a data source, and create a live sensor temperature dashboard to visualize real-time time-series data.
+* Google Axion C4A Arm-based VMs and their performance advantages for time-series workloads
+* TimescaleDB and its key features, including hypertables, continuous aggregates, and retention policies
+* How Arm architecture enables cost-efficient, high-throughput ingestion and query processing for time-series data
+
+Next, you'll create firewall rules to enable remote access to the Grafana dashboard that you'll build later in this Learning Path.

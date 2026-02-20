@@ -13,7 +13,7 @@ In this section, you prepare an Arm64-based SUSE Linux Enterprise Server (SLES) 
 ## Architecture Overview
 
 ```text
-Linux ARM64 VM (SUSE)
+Linux Arm64 VM (SUSE)
         |
         v
 PostgreSQL 15
@@ -40,6 +40,7 @@ sudo zypper install \
   libopenssl-devel \
   postgresql15 \
   postgresql15-server \
+  postgresql15-server-devel \
   postgresql15-devel
 ```
 
@@ -81,11 +82,13 @@ psql --version
 ```
 
 The output is similar to:
+
 ```output
 psql (PostgreSQL) 15.10
 ```
 
-## Build TimescaleDB from Source (ARM64)
+## Build TimescaleDB from Source (Arm64)
+
 Building TimescaleDB from source ensures native Arm64 compilation and optimal performance.
 
 ### Clone the repository
@@ -105,34 +108,38 @@ According to the [release notes](https://github.com/timescale/timescaledb/releas
 The [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) recommends **TimescaleDB 2.16.0** or higher for Arm platforms.
 {{% /notice %}}
 
-### Bootstrap and build:
+### Bootstrap the configuration
 
 ```bash
 ./bootstrap
+```
+
+### Invoke the build
+
+```bash
 cd build
 make -j$(nproc)
 sudo make install
 ```
+
 This compiles TimescaleDB natively for Arm64.
 
 ## Enable TimescaleDB in PostgreSQL
+
 TimescaleDB must be preloaded when PostgreSQL starts.
 
-### Edit PostgreSQL configuration
+### Edit PostgreSQL configuration and add the timescaledb library
 
-```bash
-sudo vi /var/lib/pgsql/data/postgresql.conf
-```
-
-**Add:**
+Using a suitable editor and "sudo", edit **/var/lib/pgsql/data/postgresql.conf** and add the following line:
 
 ```text
 shared_preload_libraries = 'timescaledb'
 ```
-**What this does:**
+
+This update:
 
 - Ensures TimescaleDB is loaded when PostgreSQL starts.
--Required for advanced TimescaleDB features like background workers and compression.
+- Required for advanced TimescaleDB features like background workers and compression.
 
 ### Restart PostgreSQL
 
@@ -141,6 +148,7 @@ sudo systemctl restart postgresql
 ```
 
 ## Create Database and Enable Extension
+
 Now you enable TimescaleDB at the database level.
 
 ```bash
@@ -152,6 +160,7 @@ CREATE DATABASE sensors;
 \c sensors
 CREATE EXTENSION IF NOT EXISTS timescaledb;
 ```
+
 What this does:
 
 - Creates a database named sensors.
@@ -174,17 +183,19 @@ sensors=# SELECT extversion FROM pg_extension WHERE extname='timescaledb';
 (1 row)
 ```
 
+Press "CTRL-D" to exit.
+
 **What this confirms:**
 
 - TimescaleDB is installed correctly.
 - The expected version is active in the database.
 
-## What You Have Accomplished
+## What you've accomplished and what's next
+
+You've successfully:
 
 - Installed PostgreSQL 15 on SUSE Arm64
-- Built TimescaleDB 2.25.0 from source
-- Enabled TimescaleDB at database level
+- Built TimescaleDB 2.25.0 from source for optimal Arm64 performance
+- Enabled TimescaleDB at the database level and verified the installation
 
-## What’s Next
-
-In the next section, you will create a real-time sensor ingestion pipeline using Python.
+Next, you'll create a real-time sensor data ingestion pipeline using Python to continuously insert time-series data into TimescaleDB.

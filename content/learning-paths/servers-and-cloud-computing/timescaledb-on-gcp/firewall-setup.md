@@ -1,5 +1,5 @@
 ---
-title: Create a firewall rule for TimescaleDB
+title: Create a firewall rule for Grafana/TimescaleDB
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -29,4 +29,11 @@ Finally, select **Specified protocols and ports** under the **Protocols and port
 
 ![Specifying the TCP port to expose](images/network-port.png "Specifying the TCP port to expose")
 
-The network firewall rule is now created, and you can continue with the VM creation.
+## What you've accomplished and what's next
+
+You've successfully:
+
+* Created a firewall rule in Google Cloud to expose port 3000 for Grafana web interface access
+* Configured network ingress rules to allow remote connections to your dashboard
+
+Next, you'll provision a Google Axion C4A Arm virtual machine and apply this firewall rule to enable external access to Grafana.

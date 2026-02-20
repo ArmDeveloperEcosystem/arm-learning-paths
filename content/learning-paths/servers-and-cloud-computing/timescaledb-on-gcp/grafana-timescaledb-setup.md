@@ -7,6 +7,7 @@ layout: learningpathall
 ---
 
 ## Grafana Setup & TimescaleDB Data Source
+
 In this section, you install Grafana on a SUSE Arm64 virtual machine, access its web interface, and connect it to TimescaleDB. Grafana acts as the visualization layer that queries TimescaleDB and displays time-series data in dashboards.
 
 This setup enables real-time monitoring and analytics of sensor or application data stored in TimescaleDB.
@@ -28,12 +29,13 @@ Grafana Dashboard
 Grafana is available via RPM packages and works natively on Arm64.
 
 ```bash
+cd $HOME
 sudo zypper addrepo https://rpm.grafana.com grafana
 sudo zypper refresh
 sudo zypper install -y grafana
 ```
 
-### Enable and start Grafana:
+### Enable and start Grafana
 
 ```bash
 sudo systemctl start grafana-server
@@ -47,6 +49,7 @@ sudo systemctl status grafana-server
 ```
 
 The output is similar to:
+
 ```output
 ● grafana-server.service - Grafana instance
      Loaded: loaded (/usr/lib/systemd/system/grafana-server.service; enabled; vendor preset: disabled)
@@ -58,21 +61,23 @@ The output is similar to:
 Open your browser and navigate to:
 
 ```bash
-http://<VM-IP>:3000
+http://<VM-PUBLIC-IP>:3000
 ```
 
-**Default Login Credentials**
+### Default Login Credentials
 
 | Field    | Value |
 | -------- | ----- |
 | Username | admin |
 | Password | admin |
 
-You will be prompted to change the password on first login.
+You will be prompted to change the password on first login. Provide and save off a new password. Re-login if needed using the new password:
 
-### Grafana Login Screen
+![Grafana login page#center](images/grafana-login-page.png "Grafana login page")
 
-![Grafana login page alt-txt#center](images/grafana-login-page.png "Grafana login page")
+You will be presented with the main dashboard for Grafana:
+
+![Grafana dashboard#center](images/grafana-dashboard.png "Grafana dashboard")
 
 ## Add TimescaleDB as a Data Source
 
@@ -88,8 +93,7 @@ Connections → Data sources → Add data source
 
 Select PostgreSQL (TimescaleDB is PostgreSQL-compatible).
 
-
-![Add PostgreSQL data source in Grafana alt-txt#center](images/psql-data-source.png "Add PostgreSQL data source")
+![Add PostgreSQL data source in Grafana#center](images/psql-data-source.png "Add PostgreSQL data source")
 
 
 ### Step 3: Configure Connection Settings
@@ -99,21 +103,22 @@ Fill the form exactly as below:
 | Field         | Value                          |
 | ------------- | ------------------------------ |
 | Host URL      | `localhost:5432`               |
-| Database name | `postgres` *(or your DB name)* |
+| Database name | `sensors`                      |
 | Username      | `postgres`                     |
-| Password      | `<postgres password>`          |
+| Password      | `<postgres password saved>`    |
 | TLS/SSL Mode  | `disable`                      |
 
-![PostgreSQL data source connection settings alt-txt#center](images/data-source-details.png "PostgreSQL data source settings")
+![PostgreSQL data source connection settings#center](images/data-source-details.png "PostgreSQL data source settings")
 
 **Scroll down and click:**
 
 ```text
 Save & Test
 ```
-You should see “Database connection OK.”
 
-![Grafana PostgreSQL data source save and test success alt-txt#center](images/data-source-save-test.png "Grafana PostgreSQL data source save and test")
+You should see "Database connection OK."
+
+![Grafana PostgreSQL data source save and test success#center](images/data-source-save-test.png "Grafana PostgreSQL data source save and test")
 
 ## What You Have Accomplished
 
