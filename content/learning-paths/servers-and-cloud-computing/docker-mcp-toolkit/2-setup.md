@@ -20,9 +20,9 @@ You need:
 1. Open Docker Desktop.
 2. Go to **Settings** > **Beta features**.
 3. Toggle **Enable Docker MCP Toolkit** on.
-4. Click **Apply & Restart**.
+4. Click **Apply**.
 
-After Docker Desktop restarts, the **MCP Toolkit** tab appears in the left sidebar.
+After a few seconds, the **MCP Toolkit** tab appears in the left sidebar.
 
 ## Add the required MCP servers
 
