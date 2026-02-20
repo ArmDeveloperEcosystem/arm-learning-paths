@@ -1,25 +1,19 @@
 ---
-title: Deploy TimescaleDB Live Sensor Dashboard on SUSE Arm64
+title: Deploy a live sensor dashboard with TimescaleDB and Grafana on Google Cloud C4A
 
 draft: true
 cascade:
     draft: true
-
+    
 minutes_to_complete: 45
 
-who_is_this_for: This learning path is designed for DevOps engineers, database engineers, and software developers who want to deploy and operate TimescaleDB on SUSE Linux Enterprise Server (SLES) Arm64, ingest live time-series sensor data, and visualize it in Grafana.
+who_is_this_for: This learning path is for DevOps engineers, database engineers, and software developers who want to deploy and operate TimescaleDB on SUSE Linux Enterprise Server (SLES) Arm64, ingest live time-series sensor data, and visualize it in Grafana.
 
 learning_objectives:
-  - Provision a SUSE Linux Enterprise Server (SLES) virtual machine on Google Cloud C4A Arm-based Axion processors
-  - Install PostgreSQL 15 and build TimescaleDB from source for Arm64
-  - Initialize and configure TimescaleDB for time-series workloads
-  - Ingest live sensor data using Python with `psycopg2` (SUSE package)
-  - Create hypertables, continuous aggregates, retention policies, and indexes in TimescaleDB
-  - Install Grafana on SUSE Arm64
-  - Configure PostgreSQL (TimescaleDB) as a Grafana data source
-  - Build a live sensor dashboard with automatic refresh
-  - Validate end-to-end data flow from ingestion → TimescaleDB → Grafana visualization
-  - Apply basic production hardening for TimescaleDB and Grafana users
+  - Install and configure TimescaleDB on Google Cloud C4A Axion processors by building from source for Arm64
+  - Create a real-time sensor data ingestion pipeline using Python with hypertables, continuous aggregates, and retention policies
+  - Build a live sensor dashboard with Grafana that automatically refreshes to display time-series data
+  - Validate end-to-end data flow from ingestion through TimescaleDB to Grafana visualization
 
 prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
@@ -30,7 +24,7 @@ author: Pareena Verma
 ##### Tags
 skilllevels: Introductory
 subjects: Databases
-cloud_service_providers:
+cloud_service_providers: 
   - Google Cloud
 
 armips:
@@ -75,3 +69,6 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: yes
 ---
+
+TimescaleDB is a high-performance, open-source time-series database built on PostgreSQL that provides powerful features for storing, querying, and analyzing time-series data efficiently. When you deploy TimescaleDB on Google Cloud C4A Axion Arm-based processors, you can achieve high-throughput time-series ingestion and query processing with optimized performance per watt and lower infrastructure costs. This Learning Path shows you how to build a complete time-series data pipeline with live sensor ingestion and real-time visualization using Grafana.
+
