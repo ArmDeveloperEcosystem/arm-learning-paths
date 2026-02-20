@@ -22,7 +22,8 @@ author: Pareena Verma
 ##### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
-cloud_service_providers: Google Cloud
+cloud_service_providers:
+  - Google Cloud
 
 armips:
   - Neoverse

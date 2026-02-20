@@ -65,6 +65,43 @@ Called from:
     <script src="/js/filter-and-navigate-mobile-behavior.js" defer></script> <!-- Always need on content, contains mobile content page nav -->
     <script src="/js/feedback-form-behavior.js" defer></script>       <!-- Only needed on install guide pages and content pages -->
 {{end}}
+<script>
+    (function () {
+        function updateMastheadHeight() {
+            var masthead = document.getElementById('expanded-masthead');
+            var title = document.getElementById('ads-masthead-title');
+            if (!masthead || !title) return;
+
+            var styles = window.getComputedStyle(title);
+            var lineHeight = parseFloat(styles.lineHeight);
+            if (!lineHeight || Number.isNaN(lineHeight)) {
+                masthead.classList.remove('is-two-lines');
+                return;
+            }
+
+            var isTwoLines = title.scrollHeight > (lineHeight * 1.5);
+            masthead.classList.toggle('is-two-lines', isTwoLines);
+        }
+
+        var rafId = null;
+        function scheduleUpdate() {
+            if (rafId) return;
+            rafId = window.requestAnimationFrame(function () {
+                rafId = null;
+                updateMastheadHeight();
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', scheduleUpdate);
+        } else {
+            scheduleUpdate();
+        }
+
+        window.addEventListener('resize', scheduleUpdate);
+        window.addEventListener('pageshow', scheduleUpdate);
+    })();
+</script>
 {{if .File}}
     {{if .File.TranslationBaseName}}
         {{if hasPrefix .File.TranslationBaseName "_review"}}
@@ -72,5 +109,3 @@ Called from:
         {{end}}
     {{end}}
 {{end}}
-
-

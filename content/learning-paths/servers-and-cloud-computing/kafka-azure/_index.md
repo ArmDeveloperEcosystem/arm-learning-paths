@@ -20,7 +20,8 @@ author: Pareena Verma
 ### Tags
 skilllevels: Advanced
 subjects: Storage
-cloud_service_providers: Microsoft Azure
+cloud_service_providers:
+  - Microsoft Azure
 
 armips:
     - Neoverse

@@ -21,7 +21,8 @@ author: Pareena Verma
 ### Tags
 skilllevels: Introductory
 subjects: Web
-cloud_service_providers: Google Cloud
+cloud_service_providers:
+  - Google Cloud
 
 armips:
   - Neoverse
