@@ -1,5 +1,5 @@
 ---
-title: Create a Google Axion C4A virtual machine on Google Cloud to build a Yocto image
+title: Provision a Google Axion C4A VM for Yocto image builds on Arm
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -14,7 +14,7 @@ In this section, you provision a Google Axion C4A virtual machine on Google Clou
 For general guidance on setting up a Google Cloud account and project, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/). 
 {{% /notice %}}
 
-## Provision a Google Axion C4A VM in the Google Cloud Console
+## Provision a Google Axion C4A VM in Google Cloud Console
 
 To create a virtual machine using the C4A instance type:
 
@@ -51,4 +51,10 @@ A new browser window opens with a terminal connected to your virtual machine.
 This is a rather expensive VM given its vCPU and memory usage. It is highly recommended to delete this VM once you have completed this learning path!
 {{% /notice %}}
 
-Next, build the Yocto image on this VM instance.
+## What you've accomplished and what's next
+
+In this section, you:
+- Provisioned a Google Axion C4A VM on Google Cloud Platform
+- Configured the VM for Arm64-based Yocto image builds
+
+Next, you'll use this VM to build a Yocto image for your target hardware. Continue to the Yocto installation section to complete your edge deployment workflow.

@@ -1,148 +1,145 @@
 ---
-title: Running UltraEdge HPC-I execution fabric for AI & mixed workloads
+title: Run and manage UltraEdge HPC-I for AI and mixed workloads on Arm
 
 weight: 6
 
 layout: "learningpathall"
 ---
 
+## Get started with the Tinkerblox CLI
 
-This section provides a hands-on walkthrough of the Tinkerblox CLI to help you explore how microservices are deployed, managed, and monitored on the UltraEdge platform. The exercises focus on inspecting system state, installing a sample microservice, and observing its runtime behavior.
+In this section, you'll use the Tinkerblox CLI to deploy, manage, and monitor microservices on the UltraEdge platform. You'll practise inspecting system state, installing a sample microservice, and observing its runtime behavior.
 
-To practice the commands below, install and run a sample microservice on your device. Use below git link find a mpac file(only for practice purpose).
+To get started, download a sample MPAC file from the [Tinkerblox support repository](https://github.com/Tinkerbloxsupport/arm-learning-path-support/blob/main/static/Sample_ms/dte_nn.mpac) and install it on your device.
 
-https://github.com/Tinkerbloxsupport/arm-learning-path-support/blob/main/static/Sample_ms/dte_nn.mpac
+## Use the Tinkerblox CLI
 
-### Tinkerblox CLI usage guide
+The Tinkerblox Command Line Interface (CLI) lets you manage the Edge Agent and microservices on UltraEdge devices.
 
-Tinkerblox Command Line Interface for managing the Edge Agent and
-microservices.
+**Basic usage:**
 
-**Usage:**
+```bash
+tinkerblox-cli [OPTIONS] <COMMAND>
+```
 
-        tinkerblox-cli [OPTIONS] <COMMAND>
+**Common commands:**
 
-**Commands:**
-
--   `status` — Show connection status with the Edge Agent
--   `microboost` — Microservice management commands
--   `help` — Print this message or the help of the given subcommand(s)
+- `status`: Show connection status with the Edge Agent
+- `microboost`: Microservice management commands
+- `help`: Print this message or the help for a given subcommand
 
 **Options:**
 
--   `-h`, `--help` — Print help
--   `-V`, `--version` — Print version
+- `-h`, `--help`: Print help
+- `-V`, `--version`: Print version
 
-### Usage
+## Check CLI connection status
 
-#### Check CLI connection status
+To verify that the CLI is connected to the Edge Agent, run:
 
 ```bash
-    sudo tinkerblox-cli status
+sudo tinkerblox-cli status
 ```
 
-*Displays whether the CLI is connected to the Edge Agent.*
+The output shows whether the CLI is connected to the Edge Agent.
 
-#### Microservice management
+## Manage microservices
 
-Manage microservices running on the Edge platform. 
+You can install, list, start, stop, and uninstall microservices using the `microboost` command. Replace `/path/to/your.mpac` with the path to your MPAC file and `<id>` with the microservice ID.
 
-**Syntax:**
-
-        sudo tinkerblox-cli microboost <command> [options]
-
-##### Available commands
-
-* **install**
-    Installs a microservice. You must provide the path to the MPAC file as an argument.
-
-        sudo tinkerblox-cli microboost install -f /path/to/your.mpac
-
-* **list**
-    Lists all installed microservices.
-
-        sudo tinkerblox-cli microboost list
-
-* **status <id>**
-    Shows statistics (CPU, memory, status, etc.) for the specified microservice.
-
-        sudo tinkerblox-cli microboost status <id>
-
-* **stop <id>**
-    Stops the microservice with the specified ID.
-
-        sudo tinkerblox-cli microboost stop <id>
-
-* **start <id>**
-    Starts the microservice with the specified ID (must be stopped).
-
-        sudo tinkerblox-cli microboost start <id>
-
-* **uninstall <id>**
-    Uninstalls the microservice with the specified ID.
-
-        sudo tinkerblox-cli microboost uninstall <id>
-
-#### Diagnostics management
-
-Run diagnostics on the Edge platform.
-
-**Syntax:**
-
-        sudo tinkerblox-cli diagnostics <command>
-
-**full** : Run complete system diagnostics and summarize results
-
-        sudo tinkerblox-cli diagnostics full
-
-**system** : Check CPU, memory, and OS-level health
-
-        sudo tinkerblox-cli diagnostics system
-
-**network** : Verify network connectivity and endpoint reachability
-
-        sudo tinkerblox-cli diagnostics network
-
-**filesystem** : Validate database/filesystem connectivity and integrity
-
-        sudo tinkerblox-cli diagnostics filesystem
-
-**engine** : Check engine microboost neuroboost
-
-        sudo tinkerblox-cli diagnostics engine
-
-## Troubleshooting
-
- The following sections describe common errors you may encounter while running CLI commands or deploying microservices, along with guidance on how to resolve them. These are general errors and are not limited to any specific scenario; they may occur while executing commands or managing the system.
-
-Permission denied
-
--   Ensure `sudo` privileges.
--   Check directory ownership and permissions.
--   Verify overlay filesystem support.
-
-Directory creation failed
-
--   Check disk space.
--   Verify parent directory permissions.
--   Ensure the path is valid.
-
-Cross-architecture build issues
-
-Cross-architecture issues typically occur when binaries are built for a different CPU architecture than the host system. They are not related to yocto build issues. 
-
--   Verify QEMU installation:
-
+**Install a microservice:**
 ```bash
+sudo tinkerblox-cli microboost install -f /path/to/your.mpac
+```
+
+**List installed microservices:**
+```bash
+sudo tinkerblox-cli microboost list
+```
+
+**Show microservice status:**
+```bash
+sudo tinkerblox-cli microboost status <id>
+```
+
+**Stop a microservice:**
+```bash
+sudo tinkerblox-cli microboost stop <id>
+```
+
+**Start a microservice:**
+```bash
+sudo tinkerblox-cli microboost start <id>
+```
+
+**Uninstall a microservice:**
+```bash
+sudo tinkerblox-cli microboost uninstall <id>
+```
+
+## Run diagnostics
+
+Use the `diagnostics` command to check system health and connectivity on your UltraEdge device.
+
+**Syntax:**
+```bash
+sudo tinkerblox-cli diagnostics <command>
+```
+
+**Available diagnostics:**
+
+- **full**: Run complete system diagnostics and summarize results
+  ```bash
+  sudo tinkerblox-cli diagnostics full
+  ```
+- **system**: Check CPU, memory, and OS-level health
+  ```bash
+  sudo tinkerblox-cli diagnostics system
+  ```
+- **network**: Verify network connectivity and endpoint reachability
+  ```bash
+  sudo tinkerblox-cli diagnostics network
+  ```
+- **filesystem**: Validate database and filesystem connectivity and integrity
+  ```bash
+  sudo tinkerblox-cli diagnostics filesystem
+  ```
+- **engine**: Check engine, microboost, and neuroboost
+  ```bash
+  sudo tinkerblox-cli diagnostics engine
+  ```
+
+## Troubleshoot common issues
+
+If you encounter errors while running CLI commands or deploying microservices, use the following guidance to resolve them:
+
+**Permission denied**
+- Ensure you have `sudo` privileges.
+- Check directory ownership and permissions.
+- Verify overlay filesystem support is enabled.
+
+**Directory creation failed**
+- Check available disk space.
+- Verify parent directory permissions.
+- Ensure the path is valid.
+
+**Cross-architecture build issues**
+Cross-architecture issues usually occur when binaries are built for a different CPU architecture than your host system. These are not related to Yocto build issues.
+- Verify QEMU installation:
+        ```bash
         qemu-aarch64-static --version
-```
-
--   Check binfmt registration:
-
-```bash
+        ```
+- Check binfmt registration:
+        ```bash
         ls /proc/sys/fs/binfmt_misc/
-```
+        ```
+- Ensure the target architecture is enabled.
+- If issues persist, try changing the host architecture.
 
--   Ensure the target architecture is enabled.
+## What you've accomplished and what's next
 
--   If issues persist, change the host architecture.
+In this section, you:
+- Used the Tinkerblox CLI to manage microservices and system diagnostics
+- Practiced installing, starting, stopping, and monitoring microservices on UltraEdge
+
+Next, explore more advanced CLI features, automate deployments, or integrate with additional monitoring and orchestration tools for your edge environment.
