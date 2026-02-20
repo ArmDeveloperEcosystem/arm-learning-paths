@@ -22,6 +22,8 @@ author: Ying Yu, Ker Liu, Rui Chang
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
+cloud_service_providers:
+  - AWS
 armips:
     - Neoverse
 tools_software_languages:

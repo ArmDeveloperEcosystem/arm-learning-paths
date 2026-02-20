@@ -19,8 +19,6 @@ author: Elham Harirpoush
 ### Tags
 skilllevels: Advanced
 subjects: Databases
-cloud_service_providers:
-  - Google Cloud
 armips:
     - Neoverse
 tools_software_languages:

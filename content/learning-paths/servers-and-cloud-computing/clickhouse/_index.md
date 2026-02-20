@@ -17,6 +17,8 @@ author: Pareena Verma
 ### Tags
 skilllevels: Introductory
 subjects: Databases
+cloud_service_providers:
+  - AWS
 armips:
     - Neoverse
 tools_software_languages:

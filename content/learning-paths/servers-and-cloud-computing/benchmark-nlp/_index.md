@@ -18,6 +18,8 @@ author: Pareena Verma
 ### Tags
 skilllevels: Introductory
 subjects: ML
+cloud_service_providers:
+  - AWS
 armips:
     - Neoverse 
 operatingsystems:

@@ -26,6 +26,9 @@ test_maintenance: true
 ### Tags
 skilllevels: Introductory
 subjects: ML
+cloud_service_providers:
+  - AWS
+  - Oracle
 armips:
 - Neoverse
 operatingsystems:

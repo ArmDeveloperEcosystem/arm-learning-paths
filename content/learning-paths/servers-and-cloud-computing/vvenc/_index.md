@@ -22,6 +22,8 @@ operatingsystems:
 
 skilllevels: Introductory
 subjects: Libraries
+cloud_service_providers:
+  - AWS
 
 tools_software_languages:
 - vvenc

@@ -20,6 +20,8 @@ test_maintenance: true
 ### Tags
 skilllevels: Advanced
 subjects: Databases
+cloud_service_providers:
+  - AWS
 armips:
     - Neoverse
 operatingsystems:

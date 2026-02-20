@@ -21,6 +21,7 @@ author: Dawid Borycki
 skilllevels: Introductory
 subjects: Containers and Virtualization
 cloud_service_providers:
+  - AWS
   - Google Cloud
 
 armips:

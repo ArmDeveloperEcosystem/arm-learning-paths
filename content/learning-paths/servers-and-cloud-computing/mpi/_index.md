@@ -20,6 +20,8 @@ author: Florent Lebeau
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
+cloud_service_providers:
+  - AWS
 armips:
     - Neoverse
 operatingsystems:

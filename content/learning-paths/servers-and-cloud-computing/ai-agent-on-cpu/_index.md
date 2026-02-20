@@ -21,6 +21,8 @@ author: Andrew Choi
 ### Tags
 skilllevels: Introductory
 subjects: ML
+cloud_service_providers:
+  - AWS
 armips:
     - Neoverse
 tools_software_languages:

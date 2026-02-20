@@ -19,6 +19,9 @@ author: Pareena Verma
 ### Tags
 skilllevels: Introductory
 subjects: Libraries
+cloud_service_providers:
+  - AWS
+  - Oracle
 armips:
     - Neoverse
 tools_software_languages:

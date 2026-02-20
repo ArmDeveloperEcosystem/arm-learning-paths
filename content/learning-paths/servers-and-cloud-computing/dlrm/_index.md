@@ -29,8 +29,6 @@ tools_software_languages:
     - Google Cloud
 operatingsystems:
     - Linux
-cloud_service_providers:
-  - AWS
 
 further_reading:
     - resource:

@@ -21,6 +21,8 @@ author: Joe Stech
 # Tagging metadata, see the Learning Path guide for the allowed values
 skilllevels: Introductory
 subjects: Containers and Virtualization
+cloud_service_providers:
+  - Microsoft Azure
 armips:
     - Neoverse
 tools_software_languages:

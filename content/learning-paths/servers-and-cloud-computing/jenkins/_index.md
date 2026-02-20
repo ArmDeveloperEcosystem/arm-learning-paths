@@ -24,6 +24,9 @@ author: Pareena Verma
 ##### Tags
 skilllevels: Advanced
 subjects: CI-CD
+cloud_service_providers:
+  - Microsoft Azure
+  - Google Cloud
 
 armips:
     - Neoverse

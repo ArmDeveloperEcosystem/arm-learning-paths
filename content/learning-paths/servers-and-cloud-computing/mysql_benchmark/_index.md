@@ -17,6 +17,8 @@ author: Bolt Liu
 
 skilllevels: Introductory
 subjects: Databases
+cloud_service_providers:
+  - AWS
 armips:
     - Neoverse
 operatingsystems:

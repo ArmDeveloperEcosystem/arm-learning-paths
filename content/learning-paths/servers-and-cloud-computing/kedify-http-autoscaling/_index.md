@@ -20,6 +20,10 @@ author: Zbynek Roubalik
 ### Tags
 skilllevels: Introductory
 subjects: Containers and Virtualization
+cloud_service_providers:
+  - AWS
+  - Microsoft Azure
+  - Google Cloud
 armips:
   - Neoverse
 operatingsystems:
