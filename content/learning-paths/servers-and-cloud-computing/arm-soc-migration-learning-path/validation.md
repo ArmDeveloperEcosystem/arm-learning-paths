@@ -6,20 +6,27 @@ weight: 5
 layout: learningpathall
 ---
 
-## Validate migration using power's testing recommendations
+## Validate migration using the Power's testing recommendations
+Migration is not complete until the application is validated on both source and target platforms.
 
-This section guides you through validating your ARM SoC migration using the ARM SoC Migration Power's testing recommendations. The example shows Graviton to Raspberry Pi 5, but the validation approach applies to any ARM platform migration.
+In this section, you will use the Arm SoC Migration Power's testing recommendations to:
+
+- Verify functional correctness
+- Confirm platform compatibility
+- Validate hardware interaction
+- Compare performance characteristics
+
+The example shows Graviton to Raspberry Pi 5, but the validation approach applies to any Arm platform migration.
 
 ### Source Platform Build Verification
 
-Ask the power to verify your source platform build:
+After introducing abstraction layers and multi-platform build support, first confirm that the original platform still behaves correctly:
 
-**Example:**
+Example Prompt:
 ```
 Help me verify my Graviton build still works after adding BCM2712 support.
 ```
-
-**General pattern:**
+The general pattern to use with other Arm-based platforms:
 ```
 Help me verify my [source platform] build still works after adding [target platform] support.
 ```
@@ -32,40 +39,41 @@ cmake --build build-graviton
 ./build-graviton/sensor_monitor
 ```
 
-### Cross-Compilation for Target Platform
+### Cross-Compile for the Target Platform
 
-Ask the power for cross-compilation guidance:
+Ask the Power for cross-compilation guidance:
 
-**Example:**
+Example Prompt:
 ```
 Guide me through cross-compiling for BCM2712 and deploying to Raspberry Pi 5.
 ```
 
-**General pattern:**
+The general pattern to use for other Arm-based platforms:
 ```
 Guide me through cross-compiling for [target platform] and deploying to [target device].
 ```
 
-Follow the power's commands. Example for Raspberry Pi 5:
+Follow the Power's commands. Example for Raspberry Pi 5:
 
 ```bash
 cmake -DTARGET_PLATFORM=BCM2712 -B build-bcm2712
 cmake --build build-bcm2712
-
-# Deploy to target device
+```
+Deploy to target device:
+```bash
 scp build-bcm2712/sensor_monitor pi@raspberrypi5:~/
 ```
 
-### Target Platform Testing
+### Target Platform Functional Testing
 
-Ask the power for platform-specific tests:
+Now validate behavior on the actual hardware:
 
-**Example:**
+Example Prompt:
 ```
 What tests should I run on the Raspberry Pi 5 to validate the migration?
 ```
 
-**General pattern:**
+The general pattern to use for other Arm-based platforms:
 ```
 What tests should I run on [target platform] to validate the migration from [source platform]?
 ```
@@ -87,12 +95,12 @@ ssh pi@raspberrypi5
 
 Ask the power to compare platform performance:
 
-**Example:**
+Example Prompt:
 ```
 Compare performance between Graviton development and BCM2712 deployment.
 ```
 
-**General pattern:**
+The general pattern to use for other Arm-based platforms:
 ```
 Compare performance between [source platform] and [target platform] for my application.
 ```
@@ -103,7 +111,7 @@ The power will analyze platform-specific characteristics. Example analysis:
 - I/O timing characteristics
 - Power consumption differences
 
-## Expected Output
+## Expected Outcome
 
 After completing validation, you should have:
 - Validated source platform build
@@ -113,12 +121,12 @@ After completing validation, you should have:
 
 ## Key Takeaways
 
-1. **AI-Assisted Migration is Powerful** - The ARM SoC Migration Power provides expert guidance for any ARM-to-ARM migration, with automated architecture analysis and code generation following best practices.
+1. **AI-Assisted Migration is Powerful** - The ARM SoC Migration Power provides expert guidance for any Arm-to-Arm platform migration, with automated architecture analysis and code generation following best practices.
 
-2. **Platform Abstraction is Essential** - HAL layers enable development on one platform while maintaining compatibility with others. The same business logic runs across different ARM SoCs.
+2. **Abstraction Preserves Portability** - HAL layers enable development on one platform while maintaining compatibility with others. The same business logic runs across different Arm SoCs.
 
 3. **The Power Enforces Safety** - It preserves functional behavior during migration, validates architecture compatibility, and recommends proper testing strategies for your specific platforms.
 
-4. **Workflow is Universal** - Discovery → Analysis → Planning → Implementation → Validation applies to any ARM SoC migration, whether cloud-to-edge, edge-to-edge, or cloud-to-cloud.
+4. **Workflow is Universal** - Discovery → Analysis → Planning → Implementation → Validation applies to any Arm SoC migration, whether cloud-to-edge, edge-to-edge, or cloud-to-cloud.
 
 5. **Example is Adaptable** - While this learning path uses Graviton to Raspberry Pi 5 as an example, the same workflow applies to migrations like i.MX8 to Jetson, Raspberry Pi 4 to Pi 5, or any other ARM platform combination.

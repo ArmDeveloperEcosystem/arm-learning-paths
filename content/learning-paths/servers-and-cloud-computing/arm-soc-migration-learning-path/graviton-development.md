@@ -6,15 +6,16 @@ weight: 3
 layout: learningpathall
 ---
 
-## Develop application on source ARM platform
+## Develop application on the source Arm platform
+In this section, you will build and validate the application on the source Arm platform before performing any migration steps.
 
-This section demonstrates developing an application on your source ARM platform. The example uses AWS Graviton as the source platform, but the principles apply to any ARM SoC migration (e.g., from Raspberry Pi 4 to Pi 5, from i.MX8 to Jetson, etc.).
+This example uses AWS Graviton3 as the source platform, however the same principles apply to any Arm-Arm migration scenario (e.g., from Raspberry Pi 4 to Pi 5, from i.MX8 to Jetson, etc.).
 
-The workflow keeps your development environment (Kiro IDE) local while using the Graviton instance as a test platform. This mirrors real-world scenarios where you develop locally and deploy to remote ARM systems.
+Your development environment (Kiro IDE) remains local. The Graviton instance acts as the remote Arm test platform. This mirrors real-world workflows where development occurs locally and deployment targets remote Arm systems.
 
-### Download Application on Local Machine
+### Download the Application (Local Machine)
 
-Download the sensor-monitor application to your local machine where Kiro IDE is running. This allows you to inspect the code and use Kiro's migration tools.
+Download the `sensor-monitor` application to your local machine (where Kiro IDE is installed).
 
 ```bash
 wget https://github.com/ArmDeveloperEcosystem/arm-learning-paths/raw/main/content/learning-paths/servers-and-cloud-computing/arm-soc-migration-learning-path/projects/sensor-monitor.tar.gz
@@ -22,13 +23,13 @@ tar -xzf sensor-monitor.tar.gz
 cd sensor-monitor
 ```
 
-The package includes complete source code, Makefile, and platform-specific implementations.
+The package includes the complete source code, a Makefile, and platform-specific implementations. You will analyze and migrate this code using the ARM SoC Migration Power.
 
-### Upload to Graviton Instance for Testing
+### Upload to the Graviton Instance for Testing
 
-Transfer the application to your Graviton instance to verify it works on the source ARM platform before migration.
+Before migrating, verify that the application builds and runs correctly on the source Arm platform.
 
-Upload the application to your Graviton instance:
+Upload the archive to the Graviton instance:
 
 ```bash
 scp -i graviton-migration-key.pem sensor-monitor.tar.gz ec2-user@$(aws ec2 describe-instances --filters "Name=tag:Name,Values=graviton-migration-source" "Name=instance-state-name,Values=running" --query 'Reservations[0].Instances[0].PublicIpAddress' --output text):~
@@ -36,15 +37,13 @@ scp -i graviton-migration-key.pem sensor-monitor.tar.gz ec2-user@$(aws ec2 descr
 
 ### Build and Test on Graviton
 
-Now verify the application builds and runs correctly on the Graviton platform. This establishes your baseline before migration.
-
-SSH to your Graviton instance and build the application:
+Connect to the instance:
 
 ```bash
 ssh -i graviton-migration-key.pem ec2-user@$(aws ec2 describe-instances --filters "Name=tag:Name,Values=graviton-migration-source" "Name=instance-state-name,Values=running" --query 'Reservations[0].Instances[0].PublicIpAddress' --output text)
 ```
 
-On the Graviton instance:
+Build the application on the Graviton instance:
 
 ```bash
 tar -xzf sensor-monitor.tar.gz
@@ -52,10 +51,17 @@ cd sensor-monitor
 make
 ./sensor_monitor
 ```
+If successful, the application will compile with GCC (AArch64 target) and display simulated sensor readings.
+
+This confirms:
+  * The toolchain is functional
+  * The application builds cleanly on Arm64 Linux
+    
+This state becomes your baseline reference for migration validation.
 
 ### Application Overview
 
-The sensor-monitor application demonstrates a typical embedded/IoT pattern:
+The `sensor-monitor` application demonstrates a common embedded/edge design pattern: business logic separated from platform-specific hardware interaction.
 
 **Project Structure:**
 ```
@@ -74,11 +80,13 @@ sensor-monitor/
 `include/sensor.h` - Hardware abstraction interface
 `platform/graviton/sensor_graviton.c` - Simulated sensor for cloud development
 
-## Expected Output
+## Expected Outcome
 
-You should see:
-- Working application on your source ARM platform (Graviton in this example)
-- Simulated sensor readings
-- Validated business logic
+At this stage, you should have:
+  - A working application running on the source Arm platform
+  - Simulated sensor output from the Graviton instance
+  - A validated baseline for functional comparison
+    
+You are now ready to analyze the code using the ARM SoC Migration Power and begin adapting it for the target platform (Raspberry Pi 5).
 
 This establishes your baseline application before migration to the target platform.
