@@ -32,6 +32,11 @@ operatingsystems:
   - Linux
   - other
 
+shared_path: true
+shared_between:
+    - servers-and-cloud-computing
+    - automotive
+
 further_reading:
   - resource:
       title: Tinkerblox
