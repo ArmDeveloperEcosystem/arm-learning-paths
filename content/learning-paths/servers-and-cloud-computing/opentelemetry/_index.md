@@ -70,4 +70,3 @@ layout: "learningpathall"
 learning_path_main_page: yes
 ---
 
-OpenTelemetry is an open-source observability framework that provides standardized APIs and tools for collecting telemetry data such as traces, metrics, and logs from cloud-native applications. When you deploy OpenTelemetry on Google Cloud C4A Axion Arm-based processors, you can achieve high-throughput telemetry processing with improved performance per watt and reduced infrastructure costs. This Learning Path shows you how to build a complete observability pipeline using OpenTelemetry, Prometheus, and Jaeger on Arm-based infrastructure.
