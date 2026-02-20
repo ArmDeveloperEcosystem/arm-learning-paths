@@ -2,7 +2,7 @@
 //                 Azure AD B2C Configuration
 // ----------------------------------------------------------------------
 const POLICY          = "b2c_1a_arm_accounts.susi";
-const CLIENT_ID       = "20ede7b2-aeb1-43d4-81f9-fc1b7fbfca5e";
+const CLIENT_ID       = "20ede7b2-aeb1-43d4-81f9-fc1b7fbfca5e";  
 
 // Change these in CI/CD pipeline depending on target environment
 const TENANT_DOMAIN   = "armb2ctest.onmicrosoft.com";
@@ -255,3 +255,5 @@ document.addEventListener("arm-top-navigation-ready", function (e) {
   await initAuth();   // IMPORTANT: await this before user clicks anything
 
 })();
+
+
