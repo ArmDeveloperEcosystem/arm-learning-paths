@@ -33,7 +33,8 @@ tools_software_languages:
     - Demo
     - Hugging Face
 
-cloud_service_providers: AWS
+cloud_service_providers:
+  - AWS
     
 
 further_reading:

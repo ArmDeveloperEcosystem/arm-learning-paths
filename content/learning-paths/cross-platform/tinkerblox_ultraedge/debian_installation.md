@@ -1,20 +1,20 @@
 ---
-title: Debian/Ubuntu installation - UltraEdge
+title: Install UltraEdge on Debian and Ubuntu for Edge AI workloads
 
 weight: 5
 
 layout: "learningpathall"
 ---
 
-### Installation process for UltraEdge on Ubuntu/Debian
+## Install UltraEdge on Ubuntu/Debian
  
 Follow these steps to initialize and register your device within the **Uncloud** ecosystem:
 
-1.  **Access the Platform:**
+* **Access the Platform:**
 
-    Navigate to the [Uncloud Dashboard](https://dev.tinkerblox.io/) and log in with your credentials. 
+    Navigate to the [Uncloud Dashboard](https://dev.tinkerblox.io/) and log in with your credentials.
 
-2.  **Provision a New Device:**
+* **Provision a New Device:**
     * Go to **Device Management** > **New Device**.
 
 ![Device Management](https://raw.githubusercontent.com/Tinkerbloxsupport/arm-learning-path-support/main/static/images/Device_managment.png)
@@ -25,19 +25,19 @@ Follow these steps to initialize and register your device within the **Uncloud**
 
 ![Initialize Device](https://raw.githubusercontent.com/Tinkerbloxsupport/arm-learning-path-support/main/static/images/Initialize%20.png)
 
-3. **Install prerequisites:**
+* **Install prerequisites:**
 
     Install the required prerequisites:
 
 ```bash
-sudo apt update 
+sudo apt update
 sudo apt install -y curl jq
 ```
 
 
-4.  **Retrieve installation command details:**
+* **Retrieve installation command details:**
 
-    * Copy the generated device installation command or details from the **Uncloud** portal to your clipboard.
+    Copy the generated device installation command or details from the **Uncloud** portal to your clipboard.
 
 ![Installation Command](https://raw.githubusercontent.com/Tinkerbloxsupport/arm-learning-path-support/main/static/images/Initialize%20_command.png)
 
@@ -49,7 +49,7 @@ sudo DEVICE_ID="5b3ff290-0c88-4cd9-8ef7-08de0bded9df" KEY="TB.ApiKey-mlBZgDFc7qy
 
 Run your specific installer command in your Ubuntu/Debian SSH shell and initialize the agent to install UltraEdge.
 
-### Activation of the UltraEdge agent
+## Activate the UltraEdge agent
 
 On the first boot, the agent will automatically generate a file named
 `activation_key.json` at the path: 
@@ -74,7 +74,7 @@ receive license key (which includes license metadata).
         sudo systemctl start tbx-agent.service
 ```
 
-### Manual running
+### Run the UltraEdge agent manually
 
 -   Binary path: `/bin/tbx-agent`
 
@@ -87,7 +87,7 @@ receive license key (which includes license metadata).
 -   To stop, press <span class="kbd">Ctrl</span> +
     <span class="kbd">C</span> once.
 
-## MicroPac installation
+## Install MicroPac
 
 MicroPac is the core tooling used to build and manage **MicroStack** (general microservices) and **NeuroStack** (AI-native services). 
 
@@ -97,21 +97,21 @@ MicroPac is the core tooling used to build and manage **MicroStack** (general mi
 
 * Validation: The ecosystem includes a **MicroPac Validator**, which verifies the integrity and security of the package created by the builder to ensure it is ready for edge deployment.
 
-#### System requirements
+### System requirements
 
 -   Linux host (aarch64)
 -   Sudo permissions
 -   Overlay filesystem support
 -   Internet connection
 
-#### Required packages
+### Required packages
 
 ```bash
     sudo apt-get update
     sudo apt-get install -y tar curl qemu-user-static binfmt-support
 ```
 
-### Cross-architecture support
+## Cross-architecture support
 
 The **MicroPacFile** is the central declarative configuration used by the builder to define the environment and behavior of your service. This configuration is essential for orchestrating both **MicroStack** (general microservices) and **NeuroStack** (AI/ML) services.
 
@@ -127,7 +127,7 @@ To build MicroPac for different architectures:
     sudo update-binfmts --enable qemu-armv7
 ```
 
-### Installation
+## Install the MicroPac package
 
 -   The package is provided as a `.deb` file.
 
@@ -137,9 +137,9 @@ To build MicroPac for different architectures:
         sudo apt install ./<package_name>.deb
 ```
 
-### MicroPac file schema file creation/setup
+## Create and set up the MicroPac file schema
 
-#### File placement
+### File placement
 For the MicroPac Builder to function correctly, the **MicroPacFile** must be placed in the root directory alongside your source code and dependency files. 
 
 
@@ -196,9 +196,9 @@ Place a `MicroPacFile` in your project directory as mentioned in above example.
       mode: host
       name: nginx-net
 ```
-### Configuration fields
+## Configuration fields
 
-#### Required fields
+### Required fields
 
 -   **name**: Application name (≤ 10 characters)
 -   **version**: Application version
@@ -208,7 +208,7 @@ Place a `MicroPacFile` in your project directory as mentioned in above example.
 -   **entry**: Entry point command
 -   **mode**: single-run
 
-#### Optional fields
+### Optional fields
 
 -   **env**: Environment variable
 -   **buildSteps**: Array of build instructions
@@ -218,7 +218,7 @@ Place a `MicroPacFile` in your project directory as mentioned in above example.
 -   **createdBy**: maintainer of the application
 -   **description**: description of the application
 
-### Build the MicroPac
+## Build the MicroPac
 
 Navigate to your project directory and execute:
 
@@ -228,13 +228,22 @@ Navigate to your project directory and execute:
 
 This generates a file named `<project_name>.mpac`.
 
-### Verify the Micropac setup
+## Verify the MicroPac setup
 
 To confirm that the Micropac has been generated properly, follow these steps:
 
-1. **Locate the Package:** Find the generated file with the `.mpac` extension.
-2. **Extract the Contents:** Extract the `.mpac` file using a standard extraction tool (or rename it to `.zip`/`.tar.gz` if necessary to open it).
-3. **Verify Contents:** The extracted folder must contain exactly three files:
-    *   **`manifest.yaml`**: Contains the metadata and configuration for the package.
-    *   **RootFS tarball**: The base file system layer (in `.tar` format).
-    *   **Application layer tarball**: The specific application logic/binaries (in `.tar` format).
+* Locate the package: find the generated file with the `.mpac` extension.
+* Extract the contents: extract the `.mpac` file using a standard extraction tool (or rename it to `.zip`/`.tar.gz` if necessary to open it.
+* Verify the contents: the extracted folder must contain exactly three files:
+    * `manifest.yaml`: contains the metadata and configuration for the package.
+    * RootFS tarball: the base file system layer (in `.tar` format).
+    * Application layer tarball: the specific application logic/binaries (in `.tar` format).
+
+## What you've accomplished and what's next
+
+In this section, you:
+- Installed UltraEdge on Ubuntu/Debian
+- Activated and managed the UltraEdge agent
+- Built and installed MicroPac workloads for edge deployment
+
+Next, you can explore advanced MicroPac features, integrate with additional edge devices, or move on to Yocto-based installations for broader hardware support.

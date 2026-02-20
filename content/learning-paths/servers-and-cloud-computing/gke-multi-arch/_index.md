@@ -21,7 +21,8 @@ author: Pranay Bakre
 ### Tags
 skilllevels: Advanced
 subjects: Containers and Virtualization
-cloud_service_providers: Google Cloud
+cloud_service_providers:
+  - Google Cloud
 
 armips:
     - Neoverse

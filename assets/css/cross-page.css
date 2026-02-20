@@ -209,17 +209,18 @@ table tbody td {
 /* Fix Masthead Height */
 #expanded-masthead  {
         background-color: transparent;
-        height: 105px;                      /* You must set a specified height */
-        background-position: center;        /* Center the image */
-        background-repeat: no-repeat;       /* Do not repeat the image */
-        background-size: cover;             /* Resize the background image to cover the entire container */
-        border-bottom: 1px solid #303133; /* bottom border across page */
+        min-height: 100px;                  /* Keep baseline height for short titles */
+        height: auto;                       /* Allow 2-line titles to expand */
+        background-position: center; 
+        background-repeat: no-repeat;
+        background-size: cover; 
+        border-bottom: 1px solid #303133;
 }
-@media (max-width: 768px) { /* smaller screens than MD */
-    #expanded-masthead {
-        height: 90px;                      /* You must set a specified height */
-    }
+#expanded-masthead.is-two-lines {
+        min-height: 160px;
 }
+
+
 /* remove bottom border from ads-masthead component */
 ads-masthead {
     --ads-masthead-border-bottom-color: transparent;
@@ -451,8 +452,4 @@ html[theme='light'] body {
 @media (min-width: 1200px) {
         ads-masthead { --ads-masthead-horizontal-padding: 5px; }
 }
-
-
-
-
 

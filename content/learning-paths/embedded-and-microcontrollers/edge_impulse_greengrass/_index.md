@@ -23,7 +23,8 @@ author: Doug Anson
 
 ### Tags
 skilllevels: Introductory
-cloud_service_providers: AWS
+cloud_service_providers:
+  - AWS
 subjects: ML
 armips:
     - Cortex-M

@@ -17,7 +17,8 @@ learning_objectives:
 ### Tags
 skilllevels: Introductory
 subjects: Databases
-cloud_service_providers: Oracle
+cloud_service_providers:
+  - Oracle
 
 armips:
     - Neoverse

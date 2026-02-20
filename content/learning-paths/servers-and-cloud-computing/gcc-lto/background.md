@@ -20,6 +20,7 @@ Functions that aren't visible outside the translation unit where they're defined
 Between these two extremes are functions that are used across multiple translation units within a program, but whose complete usage becomes known only when the final executable is produced. These cases are where link-time optimization (LTO) is most effective, as it allows the compiler to analyze the whole program as a single unit and apply optimizations that would otherwise be unavailable.
 
 ### Link-Time Optimization and Intermediate Code Representation
+
 Under normal compilation, once a translation unit has been processed, GCC emits an object file (.o). This object file contains machine code for the translation unit, along with relocation information, symbol metadata, and data required for linking. At this stage, the compiler has already committed to specific instruction sequences and discarded most of its internal analysis state.
 
 By committing early to machine code, the compiler significantly limits its ability to perform optimizations that depend on cross-file visibility when the linker combines object files into a final executable.
@@ -27,3 +28,9 @@ By committing early to machine code, the compiler significantly limits its abili
 When link-time optimization (LTO) is enabled, GCC changes this behavior. Instead of discarding its internal representation after compilation, GCC preserves an intermediate representation of the program. Specifically, GCC serializes its GIMPLE intermediate representation—a language-independent tree-based representation used internally by GCC—into a bytecode format and embeds it into special sections of the object file.
 
 At link time, the compiler is invoked again, this time acting as an LTO-aware front end that reads the GIMPLE bytecode from all participating object files. With visibility into the entire program, GCC can perform whole-program optimizations, such as aggressive function inlining and interprocedural constant propagation, before generating the final machine code.
+
+## What you've accomplished and what's next
+
+You now understand how compiler optimizations differ in scope and why traditional compilation limits cross-file optimization opportunities. You also learned how LTO preserves intermediate representations at compile time to enable whole-program analysis at link time.
+
+Next, you'll learn the practical steps to enable LTO in your builds.

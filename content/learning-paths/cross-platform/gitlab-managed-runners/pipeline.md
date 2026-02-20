@@ -1,10 +1,13 @@
 ---
-title: Configure CI/CD pipeline for Arm64
+title: Build and configure your Arm64 CI/CD pipeline
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Overview
+
+This section guides you through building an Arm64 container image and creating a pipeline configuration for GitLab-hosted runners.
 
 GitLab-hosted runners are available for any project without additional setup. To use Arm64 runners, create a `.gitlab-ci.yml` file in your project root and specify the Arm64 runner tag.
 
@@ -63,15 +66,15 @@ Create these three files before adding the pipeline configuration. Once you comm
 
 From your project page, select **Set up CI/CD** or use the **+** button to create a new file:
 
-![CI-CD-New #center](_images/ci-cd-new.png)
+![GitLab project page with CI/CD setup option highlighted, showing the Set up CI/CD button in the center of the interface alt-txt#center](_images/ci-cd-new.png "GitLab Set up CI/CD button")
 
 Name the file `.gitlab-ci.yml`:
 
-![New-YML #center](_images/new-yml.png)
+![GitLab new YAML file creation screen for pipeline configuration alt-txt#center](_images/new-yml.png "GitLab new YAML file creation screen")
 
 Select **Edit** > **Edit in pipeline editor**:
 
-![Editor-YML #center](_images/editor-yml.png)
+![GitLab pipeline editor screen for editing .gitlab-ci.yml alt-txt#center](_images/editor-yml.webp "GitLab pipeline editor screen")
 
 Add the following pipeline configuration. This defines three stages that build, test, and publish your Arm64 container image:
 ```yaml
@@ -136,4 +139,13 @@ The `push_latest` job runs only on the default branch (typically `main`). It tag
 **Authentication:**
 GitLab automatically provides `$CI_REGISTRY_PASSWORD` and `$CI_REGISTRY_USER` variables for authenticating to the container registry.
 
-Commit the configuration. GitLab validates the syntax and starts the pipeline automatically. 
+Commit the configuration. GitLab validates the syntax and starts the pipeline automatically.
+
+## What you've accomplished and what's next
+
+In this section, you:
+- Built a simple C application for Arm64
+- Created a Dockerfile and containerized your application
+- Configured a GitLab pipeline to build and push Arm64 images
+
+Next, you'll run your pipeline, verify the results, and test your container image on Arm64 infrastructure. Continue to the next section to validate your CI/CD workflow and ensure your application is ready for deployment on Arm platforms.
