@@ -58,14 +58,10 @@ function ensureChatAiLoaded() {
   const isAllowedHost = allowedHosts.has(host);
   const signedIn = isUserSignedIn();
   const existingWidget = document.querySelector("chat-ai");
-  const existingScript = document.querySelector("script[data-chat-ai]");
 
   if (!isAllowedHost || !signedIn) {
     if (existingWidget) {
       existingWidget.remove();
-    }
-    if (existingScript) {
-      existingScript.remove();
     }
     return;
   }
@@ -75,14 +71,6 @@ function ensureChatAiLoaded() {
     widget.setAttribute("app-name", "learning-paths");
     widget.setAttribute("redirect-url", `${window.location.origin}/`);
     document.body.appendChild(widget);
-  }
-
-  if (!existingScript) {
-    const script = document.createElement("script");
-    script.src = "https://content.dev.bespin.arm.com/VirtualFAE/learnarm/stage/chat-ai.js";
-    script.defer = true;
-    script.setAttribute("data-chat-ai", "true");
-    document.head.appendChild(script);
   }
 }
 
