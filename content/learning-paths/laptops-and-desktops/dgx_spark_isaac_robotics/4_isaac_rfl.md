@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Train a reinforcement learning policy using Isaac Lab and RSL-RL
 
-In this section you will train a reinforcement learning (RL) policy for the Unitree H1 humanoid robot to walk over rough terrain. You will use Isaac Lab's RSL-RL integration, which implements the Proximal Policy Optimization (PPO) algorithm. By the end of this section you will understand the full training pipeline, including task configuration, PPO hyperparameters, and policy evaluation.
+In this section you will train a reinforcement learning (RL) policy for the [Unitree] (https://www.unitree.com/) H1 humanoid robot to walk over rough terrain. You will use Isaac Lab's RSL-RL integration, which implements the Proximal Policy Optimization (PPO) algorithm. By the end of this section you will understand the full training pipeline, including task configuration, PPO hyperparameters, and policy evaluation.
 
 ## What is RSL-RL?
 
@@ -55,6 +55,43 @@ export LD_PRELOAD="$LD_PRELOAD:/lib/aarch64-linux-gnu/libgomp.so.1"
 ```
 
 Once the training starts, you will see log messages reporting iteration progress, rewards, and performance statistics.
+
+```
+                       Learning iteration 15/3000                       
+
+                       Computation: 65955 steps/s (collection: 1.256s, learning 0.235s)
+             Mean action noise std: 1.04
+          Mean value_function loss: 0.0911
+               Mean surrogate loss: 0.0003
+                 Mean entropy loss: 27.6371
+                       Mean reward: -5.35
+               Mean episode length: 61.42
+Episode_Reward/track_lin_vel_xy_exp: 0.0179
+Episode_Reward/track_ang_vel_z_exp: 0.0058
+      Episode_Reward/ang_vel_xy_l2: -0.0220
+     Episode_Reward/dof_torques_l2: 0.0000
+         Episode_Reward/dof_acc_l2: -0.0081
+     Episode_Reward/action_rate_l2: -0.0127
+      Episode_Reward/feet_air_time: 0.0002
+Episode_Reward/flat_orientation_l2: -0.0170
+     Episode_Reward/dof_pos_limits: -0.0012
+Episode_Reward/termination_penalty: -0.2000
+         Episode_Reward/feet_slide: -0.0119
+Episode_Reward/joint_deviation_hip: -0.0083
+Episode_Reward/joint_deviation_arms: -0.0079
+Episode_Reward/joint_deviation_torso: -0.0013
+         Curriculum/terrain_levels: 0.1577
+Metrics/base_velocity/error_vel_xy: 0.1221
+Metrics/base_velocity/error_vel_yaw: 0.4705
+      Episode_Termination/time_out: 0.0000
+  Episode_Termination/base_contact: 1.0000
+--------------------------------------------------------------------------------
+                   Total timesteps: 1572864
+                    Iteration time: 1.49s
+                      Time elapsed: 00:00:26
+                               ETA: 01:21:49
+```
+
 
 This command launches the training with default hyperparameters. The Blackwell GPU runs thousands of parallel H1 environments simultaneously while the Grace CPU handles logging and orchestration.
 
@@ -195,7 +232,7 @@ After training completes, evaluate the policy by running inference with visualiz
 ```bash
 ./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/play.py \
     --task=Isaac-Velocity-Rough-H1-Play-v0 \
-    --num_envs=32
+    --num_envs=512
 ```
 
 {{% notice Note %}}
@@ -209,30 +246,41 @@ You can also specify a particular checkpoint manually, which is useful for compa
 ```bash
 ./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/play.py \
     --task=Isaac-Velocity-Rough-H1-Play-v0 \
-    --num_envs=32 \
+    --num_envs=512 \
     --checkpoint=logs/rsl_rl/h1_rough/<timestamp>/model_1500.pt
 ```
 
 ### Understanding the evaluation
 
-During evaluation, observe these behaviors:
+During evaluation, you can observe how the robot's behavior improves over the course of training:
 
-- **Early training checkpoints (iterations 0-200)**: The robot falls immediately or takes a few uncoordinated steps
-- **Mid-training checkpoints (iterations 200-800)**: The robot can walk forward but may stumble on rough terrain
-- **Late training checkpoints (iterations 800-1500)**: The robot walks confidently over rough terrain, handles slopes and obstacles, and tracks velocity commands accurately
+- **Early training (iterations 0–200)**: The robot often collapses immediately or performs erratic, uncoordinated motions.
+- **Mid training (iterations 200–800)**: The robot begins to walk forward with some success, though it may still stumble or lose balance on rough terrain.
+- **Late training (iterations 800–1500)**: The robot consistently walks over uneven terrain, responds to velocity commands, and recovers from disturbances.
 
-The progression from falling to walking demonstrates how PPO gradually optimizes the policy through trial and error across thousands of parallel environments.
+This progression—from falling to stable walking—demonstrates how PPO gradually improves the policy through trial and error across thousands of parallel environments.
 
+The following visualizations compare two training stages using `num_envs=512`, showcasing the benefit of large-scale parallel training on DGX Spark.
+
+*** Iteration 50 (Early Stage, num_envs=512) ***
+
+At iteration 50, the policy is still in its exploration phase. Most robots exhibit noisy joint actions, lack coordination, and frequently fall. There is no observable response to the velocity command, and no stable gait has emerged.
+
+![img3 alt-text#center](isaaclab_h1_512_0050.gif "Figure 3: Early Stage")
+
+*** Iteration 1250 (Late Stage, num_envs=512) ***
+
+By iteration 1350, the policy has matured. Most robots demonstrate coordinated walking behavior, balance maintenance, and accurate velocity tracking, even on rough terrain. The improvement in foot placement and heading stability is clearly visible.
+
+![img4 alt-text#center](isaaclab_h1_512_1350.gif "Figure 4: Late Stage")
 
 ## What you have accomplished
 
 In this module, you have:
 
 - Trained a reinforcement learning policy for the Unitree H1 humanoid robot using RSL-RL and the PPO algorithm
-- Understood every key hyperparameter in the training pipeline, including policy architecture, PPO parameters, and rollout strategy
-- Monitored training progress using reward trends, episode statistics, and performance metrics
-- Evaluated the trained policy through interactive visualization in Isaac Lab
+- Understood key hyperparameters in the training pipeline, including policy architecture, rollout strategy, and PPO optimization settings
+- Monitored training progress using reward curves, episode statistics, and performance metrics
+- Evaluated the trained policy through interactive visualization and behavior analysis
 
-You have now completed the end-to-end workflow of training, evaluating, and understanding a reinforcement learning policy for humanoid locomotion using Isaac Lab on DGX Spark. This includes configuring simulation environments, tuning algorithm parameters, and deploying trained policies.
-
-This marks the completion of your core learning journey for single-task humanoid reinforcement learning with Isaac Lab.
+You have now completed the end-to-end workflow of training and validating a reinforcement learning policy for humanoid locomotion on DGX Spark.

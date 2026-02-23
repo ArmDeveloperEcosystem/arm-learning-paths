@@ -54,6 +54,8 @@ Now run a complete environment that combines scene, action, observation, and eve
 
 This command launches 32 parallel Cartpole environments on the Blackwell GPU. Each environment runs its own independent simulation with random joint efforts applied to the cart. You will see the pole joint angle printed to the terminal for each step.
 
+![img2 alt-text#center](32_cartpole.gif "Figure 2: 32 parallel Cartpole")
+
 {{% notice Note %}}
 This tutorial script uses a hardcoded `CartpoleEnvCfg` configuration. It does not accept a `--task` argument. The `--num_envs` flag controls how many parallel environments are spawned on the GPU.
 {{% /notice %}}
