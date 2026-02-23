@@ -210,7 +210,7 @@ You can also specify a particular checkpoint manually, which is useful for compa
 ./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/play.py \
     --task=Isaac-Velocity-Rough-H1-Play-v0 \
     --num_envs=32 \
-    --checkpoint=logs/rsl_rl/Isaac-Velocity-Rough-H1-v0/<timestamp>/model_1500.pt
+    --checkpoint=logs/rsl_rl/h1_rough/<timestamp>/model_1500.pt
 ```
 
 ### Understanding the evaluation
