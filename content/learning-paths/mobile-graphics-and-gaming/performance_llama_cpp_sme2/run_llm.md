@@ -1,12 +1,12 @@
 ---
-title: Run the Llama-3.2-3B-Instruct-Q4_0.gguf model with llama-cli
+title: Measure SME2 acceleration in llama.cpp on Android
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Run the Llama-3.2-3B-Instruct-Q4_0.gguf model with llama-cli 
+## Compare performance with SME2 enabled and disabled
 
 In this section, you run the model on an SME2-capable Android device and compare performance with SME2 enabled and disabled.
 
@@ -19,8 +19,8 @@ curl -L -o Llama-3.2-3B-Instruct-Q4_0.gguf \
     https://huggingface.co/unsloth/Llama-3.2-3B-Instruct-GGUF/resolve/main/Llama-3.2-3B-Instruct-Q4_0.gguf
 ```
 
-## Transfer the files using ADB
-This subsection shows a repeatable way to copy your `llama-cli` binary and GGUF model from your host machine to an Android target device, and then run the same commands from an interactive shell on the device.
+### Transfer the files using ADB
+This section shows a repeatable way to copy your `llama-cli` binary and GGUF model from your host machine to an Android target device, and then run the same commands from an interactive shell on the device.
 
 Enable **Developer options** and **USB debugging** on the Android device, connect it over USB (or over the network if your setup supports it), and verify that your host can see the device:
 
@@ -47,7 +47,7 @@ cd /data/local/tmp/llama_sme2
 The figure below shows the architecture of the Llama-3.2-3B model:
 ![Architecture diagram of the Llama-3.2-3B model showing the transformer block structure, including attention heads, feed-forward layers, and the overall token embedding and output projection flow alt-txt#center](images/llama-3.2-3b_architecture.jpg "Architecture of Llama-3.2-3B")
 
-## Inference with SME2 enabled
+### Run inference with SME2 enabled
 
 To enable SME2 microkernels, set the `GGML_KLEIDIAI_SME` environment variable before running the application. The flags used here are: `taskset 2` pins the process to CPU core 2 (the Arm C1-Pro core), `-st` enables single-token generation mode to report per-token performance stats, `-C 0x2 -Cb 0x2` sets CPU affinity for operator execution, and `-t 1` limits inference to one thread. If `taskset` is not available on your device, run the command without it.
 
@@ -67,7 +67,7 @@ With the SME2 kernels enabled, you'll notice the following performance output:
 
 Your results will vary depending on the device and the SME2 streaming vector length available.
 
-## Baseline performance without SME2
+### Baseline performance without SME2
 
 For a performance comparison, run the model with SME2 microkernels disabled. In this scenario, I8MM and DotProd microkernels are used instead.
 
@@ -81,7 +81,7 @@ The output is similar to:
 [ Prompt: 7.9 t/s | Generation: 5.9 t/s ]
 ```
 
-## Optional: Use Streamline to profile 
+## Profile with Arm Streamline (optional)
 
 You can profile the model execution with the approach introduced in [Profile llama.cpp performance with Arm Streamline and KleidiAI LLM kernels](https://learn.arm.com/learning-paths/servers-and-cloud-computing/llama_cpp_streamline/). 
 
@@ -93,7 +93,7 @@ The Streamline Call Paths view below indicates similar speedup, it also shows th
 
 ![Arm Streamline Call Paths view comparing inference with SME2 enabled against DotProd and I8MM fallback paths, showing the KleidiAI microkernel selected in each case alt-txt#center](images/streamline_call_paths_combined.jpg "Combined Streamline Call Paths view with and without SME2")
 
-## Optional: Print the kernel names at runtime
+## Print KleidiAI kernel names at runtime (optional)
 
 To investigate which operators in the model graph are delegated to KleidiAI microkernels, you can add some code as below to `./ggml/src/ggml-cpu/kleidiai/kleidiai.cpp` and recompile the binary. When you run the inference, the names of operators that make use of KleidiAI microkernels will be printed. This is only for debugging purposes.
 
@@ -127,7 +127,7 @@ kai matmul Q4_0 ffn_up-27
 kai matmul Q4_0 ffn_out-27
 ```
 
-## Summary
+## What you've accomplished and what's next
 
 You've run a quantized LLM on an SME2-capable Android device and measured the throughput difference with KleidiAI SME2 microkernels enabled and disabled. The results demonstrate meaningful gains at both the Prefill and Decode stages, making on-device LLM inference faster and more power-efficient on Arm hardware.
 
