@@ -22,8 +22,6 @@ author:
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
-cloud_service_providers:
-  - AWS
 armips:
     - Neoverse
 tools_software_languages:
