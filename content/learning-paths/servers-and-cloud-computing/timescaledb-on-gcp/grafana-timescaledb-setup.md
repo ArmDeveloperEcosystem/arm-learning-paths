@@ -73,11 +73,11 @@ http://<VM-PUBLIC-IP>:3000
 
 You will be prompted to change the password on first login. Provide and save off a new password. Re-login if needed using the new password:
 
-![Grafana login page#center](images/grafana-login-page.png "Grafana login page")
+![Grafana login page#center](images/grafana-login-page.webp "Grafana login page")
 
 You will be presented with the main dashboard for Grafana:
 
-![Grafana dashboard#center](images/grafana-dashboard.png "Grafana dashboard")
+![Grafana dashboard#center](images/grafana-dashboard.webp "Grafana dashboard")
 
 ## Add TimescaleDB as a Data Source
 
