@@ -29,6 +29,7 @@ armips:
 tools_software_languages:
     - Vulkan
     - RenderDoc
+    - NX
 operatingsystems:
     - Windows
 

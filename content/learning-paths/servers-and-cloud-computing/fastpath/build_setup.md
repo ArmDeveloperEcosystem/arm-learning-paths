@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 ## Provision the kernel build host
 
-CPU-optimized instances compile kernels quickly, so in our example, an AWS Graviton `m6g.12xlarge` instance is used. It will be referred to as the kernel build host throughout the rest of the guide.
+CPU-optimized instances compile kernels quickly. In this example, a Graviton `m6g.12xlarge` instance is used. It will be referred to as the kernel build host throughout the rest of the guide.
 
 {{% notice Note %}}
 The following steps involve launching an EC2 instance. You can perform all EC2 instance creation steps using the AWS Management Console or AWS CLI. For step-by-step instructions to bring up an EC2 instance using the console, see [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) or the AWS tutorial [Get started with Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html).
@@ -16,16 +16,16 @@ The following steps involve launching an EC2 instance. You can perform all EC2 i
 
 Create the kernel build host with the following specifications:
 
-1. **Name** — fastpath-build
-2. **Operating system** — Ubuntu
-3. **AMI** — Ubuntu 24.04 LTS (Arm)
-4. **Architecture** — 64-bit Arm
-5. **Instance type** — `m6g.12xlarge`
-6. **Key pair** — Select or create a key for SSH
-7. **Security group** — Allow SSH inbound from your IP and cluster peers
-8. **Storage** — 200 GB gp3
+- **Name** - fastpath-build
+- **Operating system** - Ubuntu
+- **AMI** - Ubuntu 24.04 LTS (Arm)
+- **Architecture** - 64-bit Arm
+- **Instance type** - `m6g.12xlarge`
+- **Key pair** - select or create a key for SSH
+- **Security group** - allow SSH inbound from your IP and cluster peers
+- **Storage** - 200 GB gp3
 
-There are many different ways to create this instance, and a few different methods are demonstrated below. Choose the method that suits you best.  
+Choose the method that suits you best to create this instance:
 
 {{< tabpane >}}
   {{< tab header="AWS Console" img_src="/learning-paths/servers-and-cloud-computing/fastpath/images/ec2_setup.png">}}
@@ -162,13 +162,13 @@ EOF
 
 When the instance reports a `running` state, note the public and private IP addresses as BUILD_PUBLIC_IP and BUILD_PRIVATE_IP. You'll need these values later.
 
-## Clone the Kernel Build repository on the build host
+## Clone the kernel build repository on the build host
 
 The kernel build repository contains build scripts and configuration files to compile kernels. 
 
 To clone the repository, first, SSH into the `m6g.12xlarge` host using the configured key pair.
 
-For more background, refer to the [Install required dependencies](/learning-paths/servers-and-cloud-computing/kernel-build/how-to-1/#install-required-dependencies) of the kernel build Learning Path.
+For more information, see the section [Install required dependencies](/learning-paths/servers-and-cloud-computing/kernel-build/how-to-1/#install-required-dependencies) in this Learning Path.
 
 Run the commands from that section on the build host. 
 
@@ -180,7 +180,7 @@ cd ~/arm_kernel_install_guide
 chmod +x scripts/*.sh
 ```
 
-## Building with the kernel build utility script
+## Build with the kernel build utility script
 
 With the repository cloned, you can now produce kernels with Fastpath support.
 
@@ -218,7 +218,7 @@ On the build host, navigate to the `arm_kernel_install_guide` folder you just cl
 cd ~/arm_kernel_install_guide
 ```
 
-Open the [Custom tags with Fastpath enabled](/learning-paths/servers-and-cloud-computing/kernel-build/how-to-3/#build-custom-tags-with-fastpath-enabled) section from the Learning Path, and follow the instructions to run the build script. 
+Open the [Custom tags with Fastpath enabled](/learning-paths/servers-and-cloud-computing/kernel-build/how-to-3/#build-custom-tags-with-fastpath-enabled) section from this Learning Path, and follow the instructions to run the build script. 
 
 ```console
 ./scripts/kernel_build_and_install.sh --tags v6.18.1,v6.19-rc1 --fastpath true
@@ -251,3 +251,12 @@ The script builds two kernel images. This process may take some time. On a `m6g.
 Monitor the console output for the `BUILD COMPLETE` message.
 
 Once finished, you're ready to move on to the next step, where you prepare the Fastpath host.
+
+## What you've accomplished and what's next
+
+In this section, you:
+- Provisioned a high-performance Graviton build host
+- Installed kernel build dependencies and utility scripts
+- Compiled two Fastpath-enabled kernels (v6.18.1 and v6.19-rc1) using tuxmake
+
+Next, you'll set up the Fastpath host to orchestrate the benchmarking workflow and copy the compiled kernels for testing.

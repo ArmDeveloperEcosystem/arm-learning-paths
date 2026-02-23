@@ -21,7 +21,8 @@ skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
     - Neoverse
-cloud_service_providers: Google Cloud
+cloud_service_providers:
+  - Google Cloud
 tools_software_languages:
     - Go
 operatingsystems:

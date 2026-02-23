@@ -1,21 +1,21 @@
 ---
-title: Create the Resource Manager template
+title: Create the Azure Resource Manager template
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Azure Resource Manager template structure
+## Understand the Azure Resource Manager template structure
 
-An Azure Resource Manager template consists of several key sections:
+An Azure Resource Manager template is a JSON file organized into six sections:
+- `$schema`: defines the template language version
+- `contentVersion`: your template's version number
+- `parameters`: input values that customize the deployment
+- `variables`: computed values used throughout the template
+- `resources`: Azure resources to create
+- `outputs`: values returned after deployment
 
-- **$schema**: Defines the template language version
-- **contentVersion**: Your template's version number
-- **parameters**: Input values that customize the deployment
-- **variables**: Computed values used throughout the template
-- **resources**: Azure resources to create
-- **outputs**: Values returned after deployment
 
 ## Create the template file
 
@@ -253,19 +253,13 @@ Create a new file named `cobalt-vm-template.json` on your local machine. This te
 
 ## Key template elements for Cobalt 100
 
-The template includes several Arm-specific configurations:
+The template includes several Arm-specific configurations.
 
-**VM size**: The `vmSize` parameter defaults to `Standard_D4ps_v6`, which is part of the Dpsv6 series powered by Cobalt 100 processors. This series provides:
-- Four vCPUs
-- General-purpose compute capabilities
-- Arm64 architecture
+**VM size**: The `vmSize` parameter defaults to `Standard_D4ps_v6`, part of the Dpsv6 series powered by Cobalt 100 processors. The D4ps_v6 size provides four vCPUs with general-purpose compute capabilities on Arm64 architecture.
 
-Other Cobalt 100 VM sizes include:
-- `Standard_D2ps_v6` (2 vCPUs)
-- `Standard_D8ps_v6` (8 vCPUs)
-- `Standard_D16ps_v6` (16 vCPUs)
+Other available Cobalt 100 VM sizes include `Standard_D2ps_v6` (two vCPUs), `Standard_D8ps_v6` (8 vCPUs), and `Standard_D16ps_v6` (16 vCPUs).
 
-**Image reference**: The `storageProfile` section specifies the operating system image with Arm64 architecture. You can choose from various Arm64-compatible Linux distributions available in Azure. The template uses Ubuntu 24.04 LTS:
+**Image reference**: The `storageProfile` section specifies the operating system image with Arm64 architecture. The template uses Ubuntu 24.04 LTS:
 
 ```json
 "imageReference": {
@@ -276,8 +270,7 @@ Other Cobalt 100 VM sizes include:
 }
 ```
 
-You can change the Arm64 image used in the `imageReference` section, for example:
-for Ubuntu 22.04 LTS:
+You can change the Arm64 image used in the `imageReference` section. For Ubuntu 22.04 LTS:
 ```json
 "imageReference": {
   "publisher": "Canonical",
@@ -310,4 +303,6 @@ az vm image list --all --architecture Arm64 --output table
 
 ## What you've accomplished and what's next
 
-You've created a complete Resource Manager template that defines the network infrastructure (virtual network, subnet, and network security groups), a public IP address for external access, a network interface, a Cobalt 100 VM with Ubuntu 24.04 LTS, and SSH key authentication for secure access. The template uses parameters for flexibility, allowing you to customize the deployment without modifying the template structure. In the next section, you'll deploy this template to Azure and connect to your new Cobalt 100 VM.
+You've created a complete Resource Manager template that defines network infrastructure, a Cobalt 100 VM with Ubuntu 24.04 LTS, and SSH key authentication. The template uses parameters for flexibility, allowing you to customize deployments without modifying the template structure.
+
+Next, you'll deploy this template to Azure and connect to your new Cobalt 100 VM.

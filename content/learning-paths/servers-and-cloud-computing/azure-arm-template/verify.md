@@ -1,12 +1,12 @@
 ---
-title: Connect and verify
+title: Connect to the Cobalt 100 VM and verify Arm64 architecture
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Connect to the VM via SSH
+## Connect to the Cobalt 100 VM via SSH
 
 Use the public IP address from the previous step to connect to your Cobalt 100 VM:
 
@@ -34,19 +34,16 @@ Check the CPU information:
 lscpu
 ```
 
-The output shows details about the Cobalt 100 processor, including:
-- Architecture: aarch64
-- CPU(s): 4 (for Standard_D4ps_v6)
-- Vendor ID: ARM
+The output shows details about the Cobalt 100 processor, including Architecture (aarch64), CPU count (four for Standard_D4ps_v6), and Vendor ID (ARM).
 
-## Check system information
+## View Cobalt 100 system information
 
 View detailed system information:
 
 ```bash
 cat /proc/cpuinfo | head -10
 ```
-The output should look like:
+The output is similar to:
 ```output
 processor	: 0
 BogoMIPS	: 2000.00
@@ -65,7 +62,7 @@ This displays processor details, including key architectural features of the Cob
 - **sve** and **sve2**: Scalable Vector Extension instructions for enhanced SIMD (Single Instruction, Multiple Data) performance
 - **sha256**, **sha3**, **sha512**: Hardware-accelerated cryptographic operations for improved security workload performance
 
-These features make Cobalt 100 well-suited for AI/ML workloads, data analytics, and compute-intensive applications running on Arm64 architecture.
+These features make Cobalt 100 well-suited for AI/ML workloads, data analytics, and compute-intensive applications on Arm64 architecture.
 
 Verify the operating system:
 
@@ -75,7 +72,7 @@ lsb_release -a
 
 The output confirms Ubuntu 24.04 LTS (Noble Numbat).
 
-## Install and test software
+## Install and test software on Arm64
 
 Update the package lists and install a simple application to verify everything works:
 
@@ -90,7 +87,8 @@ Check that nginx is running:
 sudo systemctl status nginx
 ```
 
-The output shows nginx is active and running.
+The output shows nginx is active and running:
+
 ```output
 ● nginx.service - A high performance web server and a reverse proxy server
      Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset:>
@@ -119,7 +117,7 @@ Test that nginx is working:
 curl http://localhost
 ```
 
-The output displays the nginx default welcome page HTML, confirming the web server is running correctly.
+The output displays the nginx default welcome page HTML, confirming the web server is running correctly:
 
 ```output
 <!DOCTYPE html>
@@ -146,9 +144,10 @@ Commercial support is available at
 </body>
 </html>
 ```
+
 ## Clean up resources (optional)
 
-When you're done exploring, you can delete all resources to avoid ongoing charges:
+When you're done exploring, delete all resources to avoid ongoing charges:
 
 ```bash
 az group delete --name cobalt-rg --yes --no-wait
@@ -156,8 +155,10 @@ az group delete --name cobalt-rg --yes --no-wait
 
 This command deletes the resource group and all resources within it. The `--no-wait` flag returns immediately without waiting for the deletion to complete.
 
-## Summary
+## What you've accomplished and what's next
 
-You've successfully deployed a Cobalt 100 VM using a Azure Resource Manager template, connected to the VM via SSH, verified the Arm64 architecture, and installed and tested nginx. Your Azure Resource Manager template provides a reusable foundation for deploying Cobalt 100 VMs. You can customize it by changing the VM size to scale resources, modifying the OS image to use different Linux distributions, adding additional network security rules for your applications, including data disks for storage, or deploying multiple VMs in a single template. 
+You've deployed a Cobalt 100 VM using an Azure Resource Manager template, connected via SSH, verified the Arm64 architecture, and tested nginx on the running system.
 
-For production deployments, consider using parameters files for environment-specific configurations, implementing Azure Key Vault for managing SSH keys, adding monitoring and diagnostics extensions, configuring backup policies, and using managed identities for Azure resource access.
+Your template provides a reusable foundation for deploying Cobalt 100 VMs. You can customize it by changing the VM size, modifying the OS image, adding network security rules, including data disks, or deploying multiple VMs.
+
+For production deployments, consider using parameters files for environment-specific configurations, Azure Key Vault for managing SSH keys, monitoring and diagnostics extensions, backup policies, and managed identities for Azure resource access.

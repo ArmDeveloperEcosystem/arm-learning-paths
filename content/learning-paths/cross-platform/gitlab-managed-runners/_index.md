@@ -1,10 +1,6 @@
 ---
 title: Build a CI/CD pipeline using GitLab-hosted Arm runners
 
-draft: true
-cascade:
-    draft: true
-
 
 minutes_to_complete: 30
 
@@ -25,7 +21,8 @@ author: Mohamed Ismail
 ### Tags
 skilllevels: Introductory
 subjects: CI-CD
-cloud_service_providers: Google Cloud
+cloud_service_providers:
+  - Google Cloud
 
 armips:
     - Neoverse

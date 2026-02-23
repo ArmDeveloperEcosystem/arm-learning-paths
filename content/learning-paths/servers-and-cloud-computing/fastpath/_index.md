@@ -1,11 +1,7 @@
 ---
-title: Benchmark on Arm servers with different Linux kernels using Fastpath
+title: Benchmark Linux kernel performance on Arm servers with Fastpath
 
-draft: true
-cascade:
-    draft: true
-
-minutes_to_complete: 45
+minutes_to_complete: 90
 
 who_is_this_for: This is an advanced topic for software developers and performance engineers who want to benchmark and compare different Linux kernel versions on Arm servers.
 
@@ -24,6 +20,8 @@ author: Geremy Cohen
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
+cloud_service_providers:
+  - AWS
 armips:
     - Neoverse
 operatingsystems:
