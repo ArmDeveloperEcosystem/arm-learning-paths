@@ -91,7 +91,7 @@ These settings ensure the panel refreshes automatically with new data.
 
 Once configured, the panel should display a continuously updating temperature graph.
 
-![Grafana dashboard showing Live Sensor Temperature time series panel alt-txt#center](images/live-sensor-temperature.png "Live Sensor Temperature Panel")
+![Grafana dashboard showing Live Sensor Temperature time series panel alt-txt#center](images/live-sensor-temperature.webp "Live Sensor Temperature Panel")
 
 ## Save the Dashboard
 
