@@ -42,7 +42,7 @@ This script loads a robot model, advances the physics simulation, and prints joi
 - Configuring joint actuators and control modes
 - Stepping the physics simulation and reading back joint positions and velocities
 
-![img1 alt-text#center](sample_run.gif "Figure 1: run_articulation.py")
+![img1 alt-text#center](run_articulation.gif "Figure 1: run_articulation.py")
 
 ## Step 3: Run the Cartpole environment
 
