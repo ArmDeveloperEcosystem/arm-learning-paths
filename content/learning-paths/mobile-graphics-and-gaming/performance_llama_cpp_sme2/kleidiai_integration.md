@@ -13,7 +13,7 @@ In this section, you look at how SME2 connects into the Arm software ecosystem b
 
 The KleidiAI library provides optimized matrix multiplication (matmul) kernels tailored for hardware features such as SME, I8MM, and Dot Product (DotProd) acceleration. In llama.cpp this feature is enabled with the build option `GGML_CPU_KLEIDIAI`.
 
-![Figure showing components of llama.cpp alt-text#center](images/llama_components.jpg "Components of llama.cpp")
+![Block diagram showing the llama.cpp architecture with the ggml-cpu backend layer highlighted, and KleidiAI integrated as a CPU trait that dispatches SME2, I8MM, and DotProd microkernels alt-txt#center](images/llama_components.jpg "Components of llama.cpp")
 
 KleidiAI is integrated as a trait of `ggml-cpu` in the llama.cpp CPU backend.
 The integration source code is located in the following directory of llama.cpp:
@@ -43,7 +43,7 @@ More operators and data types are being supported by KleidiAI microkernels.
 
 The figure below shows how KleidiAI microkernels are used for `matmul` with `GGML_TYPE_Q4_0` or `GGML_TYPE_Q8_0` RHS(weight).
 
-![Figure showing how kleidiai microkernel is used for quantization, packing and matrix multiply llama.cpp alt-text#center](images/kai_matmul_kernel.jpg "Quantization, packing and matrix multiply microkernels")
+![Diagram showing the KleidiAI microkernel pipeline for a quantized matmul operation: the RHS weight tensor is packed once at model load, the LHS activation is quantized and packed each inference step, and the selected SME2, I8MM, or DotProd GEMM kernel executes the matrix multiply alt-txt#center](images/kai_matmul_kernel.jpg "Quantization, packing and matrix multiply microkernels")
 
 The packing of `GGML_TYPE_Q4_0` or `GGML_TYPE_Q8_0` weight (RHS) only needs to be performed one time when llama.cpp loads the model and weight tensor data, because the weight never changes during inference. For performance, it repacks the original GGUF weights into a layout optimized for cache-friendly access and DotProd, I8MM, and SME2 operations with the KleidiAI microkernels.
 
@@ -131,4 +131,10 @@ llama_context::decode
                                             kai_run_matmul_clamp_f32_qsi8d32p1x4_qsi4c32p4vlx4_1x4vl_sme2_sdot								 
 ```
 
-Now that you know where the KleidiAI SME2 path lives in llama.cpp and what it accelerates, move on to the next section to build the binary for inference.
+## What you've accomplished and what's next
+
+In this section:
+- You traced the KleidiAI SME2 path through the llama.cpp CPU backend, from model load through prefill and token decode
+- You identified the specific microkernels that handle each stage and the priority order (SME2 → I8MM → DotProd) used for microkernel selection
+
+In the next section, you'll set up the cross-compile toolchain and build a statically linked `llama-cli` binary with SME2 and KleidiAI enabled.
