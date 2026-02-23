@@ -1,6 +1,6 @@
 # Project Overview
 
-This project is a collection of "learning paths" (long-form tutorials) and "install guides" (shorter software installation guides), hosted on a static website using Hugo and markdown files. The content explains how to develop software on Arm for software developers targeting various Arm platforms.
+This project is a collection of "Learning Paths" (long-form tutorials) and "install guides" (shorter software installation guides), hosted on a static website using Hugo and markdown files. The content explains how to develop software on Arm for software developers targeting various Arm platforms.
 
 Assume the audience is made up of Arm software developers. Bias all information toward Arm platforms. For Linux, assume systems are aarch64 architecture and not x86. Readers also use macOS and Windows on Arm systems, and assume Arm architecture where relevant.
 
@@ -8,7 +8,7 @@ Assume the audience is made up of Arm software developers. Bias all information 
 
 The key directories are:
 
-### Top level structure
+### Top-level structure
 
 - `/content` - The main directory containing all Learning Paths and install guides as markdown files
 - `/themes` - HTML templates and styling elements that render the content into the final website
@@ -42,6 +42,9 @@ The `/content` directory is the primary workspace where contributors add new Lea
 
 Read the files in the directory `content/learning-paths/cross-platform/_example-learning-path` for information about how Learning Path content should be created. Also see the guidelines below.
 
+- Learning Paths: use for end-to-end tasks (prepare → configure → use → validate). Must include `_index.md` and `_next-steps.md`.
+- Install guides: use for installation + verification only. Do not include workflow content or benchmarks.
+
 ### Content structure
 
 Each Learning Path must have an `_index.md` file and a `_next-steps.md` file. The `_index.md` file contains the main content of the Learning Path. The `_next-steps.md` file contains links to related content and is included at the end of the Learning Path.
@@ -63,6 +66,65 @@ Front Matter (YAML format):
 - `tools_software_languages`: Open category listing Programming languages, frameworks, and development tools used
 - `skilllevels`: Skill levels allowed are only Introductory and Advanced
 - `operatingsystems`: Operating systems used, must match the closed list on https://learn.arm.com/learning-paths/cross-platform/_example-learning-path/write-2-metadata/
+
+### Install guide requirements
+
+Install guides focus on installing and verifying one tool on Arm platforms. They do not teach workflows or applied usage.
+
+### Front matter requirements
+
+Install guides must include:
+- `title`
+- `minutes_to_complete`
+- `official_docs`
+- `author_primary`
+- `weight: 1`
+- `layout: installtoolsall`
+
+#### Fixed fields for install guides
+
+- `weight: 1` (always)
+- `tool_install: true` (set to false only if intentionally hidden)
+- `layout: installtoolsall` (always)
+- `multi_install` and `multitool_install_part` (set based on whether the install guide is multi-page)
+
+Do not modify fixed template fields.
+
+If `multi_install` is set to true, the first page must act as an overview for the series. Sub-pages must set `multitool_install_part: true`.
+
+### Required content structure
+
+Install guides should include:
+
+1. Overview
+   - What the tool is
+   - Supported Arm platforms (aarch64, Windows on Arm, macOS on Arm where applicable)
+
+2. Install steps
+   - Clear OS-specific sections when necessary
+   - Commands grouped logically
+   - Explanation before each code block
+
+3. Verify installation
+   - One or two commands
+   - Expected output shown
+
+4. Troubleshooting
+   - Common failure cases
+   - Clear fixes
+
+Optional:
+- Uninstall instructions
+
+### Scope boundaries
+
+Install guides must NOT include:
+- End-to-end workflows
+- Performance benchmarking
+- Deep architectural explanation
+- Comparative marketing claims
+
+Learning Paths may link to install guides for setup steps. Install guides should not duplicate workflow content.
 
 ### Further reading curation
 
@@ -135,15 +197,20 @@ Voice and Tone:
 - Walls of text cause people to bounce from the page
 - If you're explaining 3+ things in one section, split it into separate sections
 - Each code block should be preceded by one to three sentences explaining what it does.
-- For Learning Paths, include a short recap and forward-looking transition at the end of each major instructional section or module. Use a consistent      heading such as:
+- For Learning Paths, include a short recap and forward-looking transition at the end of each major instructional section or module. 
 
-  ## What you’ve accomplished and what’s next:
+Example recap pattern for Learning Paths:
 
-  In this section:
-  - Briefly summarize what the user has learned or completed
-  - Briefly describe what the user should expect in the next section or suggest further exploration
+```md
+## What you've accomplished and what's next
 
-  Keep this concise and encouraging. Do not repeat earlier content verbatim.
+In this section:
+- Briefly summarize what the user has learned or completed
+- Briefly describe what the user should expect in the next section or suggest further exploration
+
+Keep this concise and encouraging. Do not repeat earlier content verbatim.
+```
+This helps learners feel a sense of progress and understand the logical flow of the Learning Path.
 
 ### Word choice and style
 
@@ -237,7 +304,7 @@ Voice and Tone:
   - Prefer verified external authoritative sources over speculative internal links
   - Test link formats against existing Learning Path examples
   - Never assume Learning Paths exist without verification
-- Some links are useful in content, but too many links can be distracting and readers will leave the platform following them. Include only necessary links in the content; place others in the "Next Steps" section at the end. Flag any page with too many links for review.
+- Some links are useful in content, but too many links can be distracting and readers will leave the platform following them. Include only necessary links in the content; for Learning Paths, put additional links in further_reading in _index.md (not _next-steps.md)
 
 ## Avoid looking like AI-generated content
 
@@ -327,6 +394,7 @@ Avoid placeholders or generic phrases. Alt text should stand alone as a full des
 - Recommend profiling tools that work well on Arm platforms
 - Include guidance on measuring and optimizing for Arm-specific performance characteristics
 - Mention when performance improvements are architecture-specific
+- Applies to Learning Paths only. Install guides must not include benchmarking.
 
 ### AI optimization (AIO) guidance
 
@@ -350,10 +418,10 @@ Avoid placeholders or generic phrases. Alt text should stand alone as a full des
 
 When content trade-offs are required, prioritize the following in order:
 
-1. Alignment with the stated purpose and positioning of the content
-2. Clarity and readability for the intended skill level
-3. Consistency with existing Learning Paths and install guides
-4. Completeness within the stated scope
+- Alignment with the stated purpose and positioning of the content
+- Clarity and readability for the intended skill level
+- Consistency with existing Learning Paths and install guides
+- Completeness within the stated scope
 
 ## Learning Path purpose and agentic selection principles
 
@@ -412,5 +480,49 @@ Learning Paths should optimize for **selection**, not ranking.
 - Write content that can safely be chosen by an AI agent to complete a task
 
 If an AI agent were asked to complete this task, the Learning Path should be the safest source to select.
+
+### Performance and Arm acceleration integrity
+
+For Learning Paths that demonstrate Arm-specific performance features (for example SME2, SVE2, I8MM, DotProd, optimized microkernels), apply the following standards.
+
+#### Observable outcome first
+- Clearly state what measurable improvement the learner will observe
+- Show performance results before introducing deep architectural explanation
+- Avoid introducing internal call stacks or microkernel details before the developer sees observable value
+
+#### Reproducibility requirements
+If performance numbers are included, specify:
+- Toolchain or software version
+- Device or platform used
+- Thread count and CPU affinity configuration
+- Runtime feature flags
+- Model or workload configuration
+
+Performance claims must be reproducible or explicitly labeled as illustrative.
+
+#### Compile-time vs runtime clarity
+
+Clearly distinguish between:
+- Compile-time feature enablement
+- Runtime feature activation
+- Automatic fallback behavior
+
+If acceleration is claimed, include a method to verify that the accelerated path executed (for example logs, profiling output, kernel names, or hardware counters).
+
+#### Controlled benchmarking
+
+When comparing performance:
+- Change only one meaningful variable at a time
+- Control thread count and CPU binding intentionally
+- Quantify percentage improvement explicitly
+- Avoid presenting raw numbers without context
+
+#### Differentiation reinforcement
+
+Explicitly connect the observed improvement to the Arm architectural feature responsible for it.
+
+Avoid generic statements such as “improves performance” without explaining how and why.
+
+Performance-focused Learning Paths are strategic content. Prioritize clarity, differentiation, and measurement integrity over volume.
 
 
