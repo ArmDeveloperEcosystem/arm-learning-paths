@@ -6,7 +6,7 @@ weight: 2
 layout: learningpathall
 ---
 
-## Install and configure Kiro's Arm SoC Migration Power
+## Install and configure Kiro Arm SoC Migration Power
 
 In this section, you will install Kiro IDE, enable Kiro Arm SoC Migration Power, and prepare the development environment.
 
@@ -41,8 +41,11 @@ The Arm SoC Migration Power extends Kiro with specialized knowledge and tools fo
 
 ### Verify installation
 
-After installation, test the Power by entering: "I just installed the arm-soc-migration power and want to use it."
+After installation, enter the following prompt in Kiro:
 
+```text
+I just installed the Arm SoC Migration Power and want to use it.
+```
 The Power should respond and guide you through any additional setup steps.
 
 It supports migrations across a wide range of Arm-based platforms, including:
@@ -87,9 +90,9 @@ docker --version
 Ensure Docker is running before using the Arm SoC Migration Power. The Power will automatically pull and run the Arm MCP server container when needed.
 {{% /notice %}}
 
-### Launch AWS Graviton instance (source platform)
+### Launch AWS Graviton3 instance (source platform)
 
-You will use an AWS Graviton instance as the source platform in this migration scenario.
+You will use an AWS Graviton3 instance as the source platform in this migration scenario.
 
 {{% notice Note %}}
 Before proceeding, ensure you are authenticated with the AWS CLI. Follow the [AWS CLI install guide](/install-guides/aws-cli/) if you haven't configured credentials yet.
@@ -111,16 +114,23 @@ aws ec2 create-key-pair --key-name graviton-migration-key \
 chmod 400 graviton-migration-key.pem
 ```
 
-Create the security group and allow SSH access:
+Create the security group and allow SSH access. Restrict SSH access to your current public IP address.
 
 ```bash
 SG_ID=$(aws ec2 create-security-group \
   --group-name graviton-migration-sg \
   --description "Security group for Arm SoC migration" \
   --query 'GroupId' --output text)
+
+MY_IP=$(curl -s https://checkip.amazonaws.com)
+
 aws ec2 authorize-security-group-ingress \
-  --group-id $SG_ID --protocol tcp --port 22 --cidr 0.0.0.0/0
+  --group-id $SG_ID \
+  --protocol tcp \
+  --port 22 \
+  --cidr ${MY_IP}/32
 ```
+
 
 Find the latest Amazon Linux 2023 arm64 AMI and launch the instance:
 
@@ -146,11 +156,11 @@ echo "ssh -i graviton-migration-key.pem ec2-user@$(aws ec2 describe-instances --
 
 Copy and execute the output command to connect to your instance.
 
-### Install development tools on the Graviton instance
+### Install development tools on the Graviton3 instance
 
-The Graviton instance needs development tools to compile the sensor-monitor example application.
+The Graviton3 instance needs development tools to compile the sensor-monitor example application.
 
-Once connected to your Graviton instance, install the required tools:
+Once connected to your Graviton3 instance, install the required tools:
 
 ```bash
 sudo dnf install -y gcc make wget tar
@@ -161,8 +171,8 @@ sudo dnf install -y gcc make wget tar
 In this section:
 
 - You installed Kiro IDE and the Arm SoC Migration Power
-- You launched an AWS Graviton3 instance as your source platform
+- You provisioned an AWS Graviton3 instance as your source platform
 - You installed the build tools needed for the migration example
 
-In the next section, you'll build and test the sensor-monitor application on the Graviton instance to establish a validated baseline before migration.
+In the next section, you'll build and test the sensor-monitor application on the Graviton3 instance to establish a validated baseline before migration.
 

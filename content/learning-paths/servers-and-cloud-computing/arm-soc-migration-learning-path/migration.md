@@ -8,14 +8,14 @@ layout: learningpathall
 
 ## Use Arm SoC Migration Power for AI-guided migration
 
-In this section you will learn how to use the Arm SoC Migration Power to migrate your application between Arm-based platforms. The example demonstrates migration from:
+In this section, you use the Arm SoC Migration Power to migrate your application between Arm-based platforms. The example demonstrates migration from:
 
 - **Source:** AWS Graviton3 (Neoverse-V1, Arm64 Linux, cloud deployment)
 - **Target:** Raspberry Pi 5 (BCM2712, Cortex-A76, edge deployment)
 
-However, the workflow applies to any Arm-to-Arm migration.
+However, the workflow applies to any Arm-to-Arm migration. The migration process follows four phases: discovery, architecture analysis, abstraction design, and platform-specific implementation.
 
-For each step below, an example prompt for the Graviton-to-Pi-5 scenario is provided alongside a general pattern you can adapt for other platform pairs. Being explicit in your prompts improves the quality of the Power's architectural reasoning.
+For each step below, an example prompt for the Graviton-to-Pi-5 scenario is provided alongside a general pattern you can adapt for other platform pairs. Being explicit in your prompts improves the quality and precision of the Power’s architectural analysis.
 
 ### Initiate migration
 
@@ -37,7 +37,7 @@ The application uses [source-specific features] and needs [target-specific featu
 
 ### Discovery phase
 
-The Power will prompt you for information about your platforms:
+Provide detailed information about both platforms:
 
 **Example for Graviton → Raspberry Pi 5:**
 ```
@@ -58,7 +58,7 @@ The general pattern for other Arm-based platform migrations:
 Scan my codebase for [source platform]-specific code that needs migration to [target platform].
 Focus on [platform-specific features].
 ```
-This step ensures migration is systematic rather than ad hoc.
+This ensures the migration is systematic, traceable, and grounded in explicit platform assumptions.
 
 
 ### Architecture analysis
@@ -116,7 +116,7 @@ The general pattern for other Arm-based platform migrations:
 Help me implement [feature] for [target platform]. Show me how to [specific requirement].
 ```
 
-The power will provide target platform-specific code. Example for `platform/bcm2712/sensor_bcm2712.c`:
+The Power will provide target platform-specific code. Example for `platform/bcm2712/sensor_bcm2712.c`:
 
 ```c
 #include "hal/spi.h"
@@ -137,6 +137,7 @@ void sensor_cleanup(void) {
     spi_cleanup();
 }
 ```
+Review all generated or refactored code carefully to ensure correctness, performance, and alignment with your hardware constraints.
 
 ### Update the build system
 
@@ -154,7 +155,7 @@ Update my build system for [source platform]/[target platform] support with prop
 platform selection and cross-compilation.
 ```
 
-The power will generate a platform-aware build configuration. Example `CMakeLists.txt`:
+The Power will generate a platform-aware build configuration. Example `CMakeLists.txt`:
 
 ```cmake
 cmake_minimum_required(VERSION 3.16)

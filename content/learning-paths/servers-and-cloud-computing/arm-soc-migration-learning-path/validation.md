@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Validate migration using the Power's testing recommendations
 
-Migration is not complete until the application is validated on both source and target platforms.
+Migration is not complete until the application is validated on both source and target platforms under realistic conditions.
 
 In this section, you will use the Arm SoC Migration Power's testing recommendations to:
 
@@ -32,7 +32,7 @@ The general pattern for other Arm-based platforms:
 Help me verify my [source platform] build still works after adding [target platform] support.
 ```
 
-Follow the power's guidance. Example for Graviton:
+Follow the Power's guidance. Example for Graviton:
 
 ```bash
 cmake -DTARGET_PLATFORM=GRAVITON -B build-graviton
@@ -79,7 +79,7 @@ The general pattern for other Arm-based platforms:
 What tests should I run on [target platform] to validate the migration from [source platform]?
 ```
 
-The power will recommend platform-appropriate tests. Example for Raspberry Pi 5:
+The Power will recommend platform-appropriate tests. Example for Raspberry Pi 5:
 - GPIO functionality tests
 - SPI communication validation
 - Real sensor reading verification
@@ -106,7 +106,7 @@ The general pattern for other Arm-based platforms:
 Compare performance between [source platform] and [target platform] for my application.
 ```
 
-The power will analyze platform-specific characteristics. Example analysis:
+The Power will analyze platform-specific characteristics. Example analysis:
 - CPU performance differences
 - Memory usage comparison
 - I/O timing characteristics
