@@ -23,11 +23,6 @@ author: Paul Howard
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
-cloud_service_providers:
-  - AWS
-  - Microsoft Azure
-  - Google Cloud
-  - Oracle
 armips:
     - Cortex-A
 operatingsystems:
