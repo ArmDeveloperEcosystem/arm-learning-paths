@@ -24,7 +24,7 @@ author: Pareena Verma
 ##### Tags
 skilllevels: Introductory
 subjects: Databases
-cloud_service_providers: 
+cloud_service_providers:
   - Google Cloud
 
 armips:

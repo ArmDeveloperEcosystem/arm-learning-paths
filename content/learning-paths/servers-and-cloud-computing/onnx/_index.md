@@ -20,11 +20,11 @@ author: Nobel Chowdary Mandepudi
 
 ### Tags
 skilllevels: Advanced
-cloud_service_providers:
-  - Microsoft Azure
 armips:
     - Neoverse
 subjects: ML
+cloud_service_providers:
+  - Microsoft Azure
 operatingsystems:
     - Linux
 tools_software_languages:

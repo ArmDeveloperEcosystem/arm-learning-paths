@@ -21,6 +21,9 @@ author:
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
+cloud_service_providers:
+  - AWS
+  - Google Cloud
 armips:
     - Neoverse
 tools_software_languages:
@@ -29,8 +32,6 @@ tools_software_languages:
     - Google Cloud
 operatingsystems:
     - Linux
-cloud_service_providers:
-  - AWS
 
 further_reading:
     - resource:

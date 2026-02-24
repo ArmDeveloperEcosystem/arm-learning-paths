@@ -25,6 +25,9 @@ skilllevels: Introductory
 subjects: ML
 cloud_service_providers:
   - AWS
+  - Microsoft Azure
+  - Google Cloud
+  - Oracle
 armips:
     - Neoverse
 operatingsystems:

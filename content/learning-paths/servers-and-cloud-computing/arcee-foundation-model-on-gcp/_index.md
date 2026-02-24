@@ -22,10 +22,10 @@ author: Julien Simon
 # Tagging metadata, see the Learning Path guide for the allowed values
 skilllevels: Introductory
 subjects: ML
-armips:
-    - Neoverse
 cloud_service_providers:
   - Google Cloud
+armips:
+    - Neoverse
 tools_software_languages:
     - Google Cloud
     - Hugging Face

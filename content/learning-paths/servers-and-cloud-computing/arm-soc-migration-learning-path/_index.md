@@ -26,6 +26,11 @@ author: Daniel Schleicher
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
+cloud_service_providers:
+  - AWS
+  - Microsoft Azure
+  - Google Cloud
+  - Oracle
 armips:
     - Neoverse
     - Cortex-A
@@ -63,4 +68,5 @@ further_reading:
 ### FIXED, DO NOT MODIFY
 weight: 1
 layout: learningpathall
+learning_path_main_page: "yes"
 ---
