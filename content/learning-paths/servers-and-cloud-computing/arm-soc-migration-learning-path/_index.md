@@ -1,9 +1,5 @@
 ---
 title: Migrate applications between Arm platforms with AI assistance
-
-draft: true
-cascade:
-    draft: true
     
 minutes_to_complete: 60
 
