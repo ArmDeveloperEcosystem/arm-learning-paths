@@ -7,11 +7,10 @@ layout: learningpathall
 ---
 
 ## Develop application on the source Arm platform
+
 In this section, you will build and validate the application on the source Arm platform before performing any migration steps.
 
-This example uses AWS Graviton3 as the source platform, however the same principles apply to any Arm-Arm migration scenario (e.g., from Raspberry Pi 4 to Pi 5, from i.MX8 to Jetson, etc.).
-
-Your development environment (Kiro IDE) remains local. The Graviton instance acts as the remote Arm test platform. This mirrors real-world workflows where development occurs locally and deployment targets remote Arm systems.
+This example uses AWS Graviton3 as the source platform, however the same principles apply to any Arm-to-Arm migration scenario (for example, from Raspberry Pi 4 to Pi 5, or from i.MX8 to Jetson).
 
 ### Download the Application (Local Machine)
 
@@ -51,12 +50,14 @@ cd sensor-monitor
 make
 ./sensor_monitor
 ```
-If successful, the application will compile with GCC (AArch64 target) and display simulated sensor readings.
+
+If successful, the application compiles with GCC (AArch64 target) and displays simulated sensor readings.
 
 This confirms:
-  * The toolchain is functional
-  * The application builds cleanly on Arm64 Linux
-    
+
+- The toolchain is functional
+- The application builds cleanly on Arm64 Linux
+
 This state becomes your baseline reference for migration validation.
 
 ### Application Overview
@@ -74,19 +75,18 @@ sensor-monitor/
 └── README.md                           # Documentation
 ```
 
-**Key Components:**
+**Key components:**
 
 `src/main.c` - Main application that reads sensor data in a loop
 `include/sensor.h` - Hardware abstraction interface
 `platform/graviton/sensor_graviton.c` - Simulated sensor for cloud development
 
-## Expected Outcome
+## What you've accomplished and what's next
 
-At this stage, you should have:
-  - A working application running on the source Arm platform
-  - Simulated sensor output from the Graviton instance
-  - A validated baseline for functional comparison
-    
-You are now ready to analyze the code using the ARM SoC Migration Power and begin adapting it for the target platform (Raspberry Pi 5).
+In this section:
 
-This establishes your baseline application before migration to the target platform.
+- You built and ran the sensor-monitor application on the Graviton3 source platform
+- You confirmed the toolchain and build process work correctly on Arm64 Linux
+- You established your baseline for migration validation
+
+In the next section, you'll use the Arm SoC Migration Power to analyze the codebase and migrate it to the target platform.

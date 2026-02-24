@@ -1,42 +1,43 @@
 ---
-title: Migrate using ARM SoC Migration Power
+title: Migrate using Arm SoC Migration Power
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Use ARM SoC Migration Power for AI-guided migration
+## Use Arm SoC Migration Power for AI-guided migration
 
-In this section you will learn how to use the ARM SoC Migration Power to migrate your application between Arm-based platforms. The example demonstrates migration from:
+In this section you will learn how to use the Arm SoC Migration Power to migrate your application between Arm-based platforms. The example demonstrates migration from:
 
 - **Source:** AWS Graviton3 (Neoverse-V1, Arm64 Linux, cloud deployment)
 - **Target:** Raspberry Pi 5 (BCM2712, Cortex-A76, edge deployment)
 
 However, the workflow applies to any Arm-to-Arm migration.
 
-### Initiate Migration
+For each step below, an example prompt for the Graviton-to-Pi-5 scenario is provided alongside a general pattern you can adapt for other platform pairs. Being explicit in your prompts improves the quality of the Power's architectural reasoning.
 
-Open Kiro and and describe your migration clearly using the ARM SoC Migration Power. 
+### Initiate migration
+
+Open Kiro and describe your migration clearly using the Arm SoC Migration Power.
 
 Example prompt:
 ```
-I want to use the ARM SoC Migration Power to migrate my sensor monitoring 
+I want to use the Arm SoC Migration Power to migrate my sensor monitoring 
 application from AWS Graviton3 to Raspberry Pi 5 (BCM2712). The application 
 currently uses simulated sensors on Graviton and needs to work with real 
 GPIO and SPI hardware on the Pi 5.
 ```
 
-The general pattern to use for other Arm-based platform migrations:
+The general pattern for other Arm-based platform migrations:
 ```
-I want to migrate my [application type] from [source ARM SoC] to [target ARM SoC].
+I want to migrate my [application type] from [source Arm SoC] to [target Arm SoC].
 The application uses [source-specific features] and needs [target-specific features].
 ```
-Being explicit improves the quality of the Power’s architectural reasoning.
 
-### Discovery Phase
+### Discovery phase
 
-The power will prompt you for information about your platforms:
+The Power will prompt you for information about your platforms:
 
 **Example for Graviton → Raspberry Pi 5:**
 ```
@@ -46,13 +47,13 @@ Hardware Requirements: GPIO for LEDs, SPI for temperature sensor
 ```
 Next, instruct the Power to analyze your codebase for platform dependencies:
 
-Example Prompt:
+Example prompt:
 ```
 Scan my codebase for Graviton-specific code that needs migration to BCM2712. 
 Focus on sensor interfaces and any cloud-specific assumptions.
 ```
 
-The general pattern to use for other Arm-based platform migrations:
+The general pattern for other Arm-based platform migrations:
 ```
 Scan my codebase for [source platform]-specific code that needs migration to [target platform].
 Focus on [platform-specific features].
@@ -60,42 +61,35 @@ Focus on [platform-specific features].
 This step ensures migration is systematic rather than ad hoc.
 
 
-### Architecture Analysis
+### Architecture analysis
 
 Now compare the architectural characteristics of the platforms.
 
-Example Prompt:
+Example prompt:
 ```
 Compare Graviton3 and BCM2712 architecture capabilities. What are the key 
 differences I need to handle for cloud-to-edge migration?
 ```
 
-**Example output for Graviton → Pi 5:**
-- CPU differences (Neoverse-V1 vs Cortex-A76)
-- Memory constraints (cloud 64GB+ vs edge 4-8GB)
-- SIMD capabilities (SVE vs NEON)
-- Peripheral requirements (none vs GPIO/SPI/I2C)
-
-The power analyzes architecture differences for any Arm SoC pair and identifies migration challenges. 
+For Graviton3 to Pi 5, the Power identifies key differences such as CPU architecture (Neoverse-V1 vs Cortex-A76), available memory (cloud 64 GB+ vs edge 4–8 GB), SIMD capabilities (SVE vs NEON), and peripheral requirements (none vs GPIO/SPI/I2C). The Power analyzes these differences for any Arm SoC pair and identifies the migration challenges you need to address.
 
 ### Design the Hardware Abstraction Layer (HAL)
 
-Now formalize a platform-independent interface. Ask the power to design a Hardware Abstraction Layer for your platforms:
+Now formalize a platform-independent interface. Ask the Power to design a Hardware Abstraction Layer (HAL) for your platforms:
 
-Example Prompt:
+Example prompt:
 ```
 Help me design a HAL layer that supports both Graviton (cloud mocks) and 
 BCM2712 (real hardware). I need GPIO and SPI abstraction.
 ```
 
-
-The general pattern to use for other Arm-based platform migrations:
+The general pattern for other Arm-based platform migrations:
 
 ```
 Help me design a HAL layer that supports both [source platform] and [target platform].
 I need [feature] abstraction.
 ```
-The Power may propose a structured abstraction such as the example shown `hal/sensor.h`:
+The Power may propose a structured abstraction such as the example shown in `hal/sensor.h`:
 
 ```c
 typedef struct {
@@ -107,17 +101,17 @@ typedef struct {
 extern const sensor_hal_t *sensor_hal;
 ```
 
-### Implement Target Platform Support
+### Implement target platform support
 
 Now generate or refactor platform-specific code using the Power:
 
-Example Prompt:
+Example prompt:
 ```
 Help me refactor my sensor code for BCM2712 compatibility. Show me how to 
 implement real SPI sensor communication for the Pi 5.
 ```
 
-The general pattern to use for other Arm-based platform migrations:
+The general pattern for other Arm-based platform migrations:
 ```
 Help me implement [feature] for [target platform]. Show me how to [specific requirement].
 ```
@@ -144,17 +138,17 @@ void sensor_cleanup(void) {
 }
 ```
 
-### Update the Build System
+### Update the build system
 
-Ask the power to update your build system for multi-platform support:
+Ask the Power to update your build system for multi-platform support:
 
-Example Prompt:
+Example prompt:
 ```
 Update my build system for dual Graviton/BCM2712 support with proper 
 platform selection and cross-compilation.
 ```
 
-The general pattern to use for other Arm-based platform migrations:
+The general pattern for other Arm-based platform migrations:
 ```
 Update my build system for [source platform]/[target platform] support with proper
 platform selection and cross-compilation.
@@ -185,12 +179,13 @@ endif()
 add_executable(sensor_monitor ${COMMON_SOURCES} ${PLATFORM_SOURCES})
 ```
 
-## Expected Outcome
+## What you've accomplished and what's next
 
-After completing this section, you should have used the Kiro Power to:
-- Analyze architecture differences between your source and target platforms
-- Design HAL interfaces that abstract platform differences
-- Generate platform-specific code for both platforms
-- Configure the build system for your target platform 
+In this section:
 
-This workflow applies to any ARM SoC migration, not just Graviton to Raspberry Pi 5.
+- You used the Arm SoC Migration Power to analyze architecture differences between Graviton3 and BCM2712
+- You designed a HAL that abstracts platform differences and preserves portability
+- You generated platform-specific code for the target device
+- You updated the build system for multi-platform support
+
+In the next section, you'll validate the migration by building for both platforms and running the application on the Raspberry Pi 5.
