@@ -1,5 +1,5 @@
 ---
-title: Install ARM SoC Migration Power
+title: Install Arm SoC Migration Power
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -8,13 +8,13 @@ layout: learningpathall
 
 ## Install and configure Kiro's Arm SoC Migration Power
 
-In this section, you will install Kiro IDE, enable the Kiro ARM SoC Migration Power, and prepare the required development environment.
+In this section, you will install Kiro IDE, enable Kiro Arm SoC Migration Power, and prepare the development environment.
 
-Kiro runs locally on your development machine. The Migration Power uses the Arm MCP server deployed as a containerized backend (via Docker) to provide Arm-specific guidance. You will also provision an AWS Graviton3 instance to act as the source platform for the migration example.
+Kiro runs locally on your development machine. The Migration Power uses the Arm MCP server deployed as a containerized backend (using Docker) to provide Arm-specific guidance. You will also provision an AWS Graviton3 instance to act as the source platform for the migration example.
 
 ### Install Kiro IDE
 
-Kiro IDE provides AI-powered development assistance and hosts the ARM SoC Migration Power that will guide you through the migration process.
+Kiro IDE provides AI-powered development assistance and hosts the Arm SoC Migration Power that will guide you through the migration process.
 
 Download and install Kiro IDE for your platform:
 
@@ -24,18 +24,20 @@ brew install --cask kiro
 ```
 
 **Windows and Linux:**
-Download the installer from [https://kiro.dev](https://kiro.dev)
+Visit [https://kiro.dev](https://kiro.dev) to download the installer for your platform.
 
-Launch Kiro IDE after installation completes.
+After installation completes, launch Kiro IDE to proceed.
+
+
 
 ### Install the Power in Kiro
 
 The Arm SoC Migration Power extends Kiro with specialized knowledge and tools for migrating applications between Arm platforms.
 
-1. Open Kiro IDE
-2. Navigate to the Powers panel. Press Cmd + Shift + P (Mac) or Ctrl + Shift + P (Windows)
-3. Select the Arm SoC Migration Power in the Recommended section
-4. Select Install
+- Open Kiro IDE
+- Navigate to the **Powers** panel. Press Cmd + Shift + P (Mac) or Ctrl + Shift + P (Windows)
+- Select the Arm SoC Migration Power in the **Recommended** section
+- Select **Install**
 
 ### Verify installation
 
@@ -50,6 +52,7 @@ It supports migrations across a wide range of Arm-based platforms, including:
 - NVIDIA Jetson
 - NXP i.MX
 - Other Linux-based Arm SoCs
+
 ### Install prerequisites
 
 The Arm SoC Migration Power uses the Arm MCP (Model Context Protocol) server to provide specialized Arm migration capabilities. The Arm MCP server runs via Docker.
@@ -135,7 +138,7 @@ aws ec2 run-instances \
   --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=graviton-migration-source}]' \
   --query 'Instances[0].InstanceId' --output text
 ```
-Wait approximately 30 seconds for the instance to enter the running state. Retrieve the SSH command:
+Wait until the instance state is `running`. Retrieve the SSH command:
 
 ```bash
 echo "ssh -i graviton-migration-key.pem ec2-user@$(aws ec2 describe-instances --filters "Name=tag:Name,Values=graviton-migration-source" "Name=instance-state-name,Values=running" --query 'Reservations[0].Instances[0].PublicIpAddress' --output text)"
