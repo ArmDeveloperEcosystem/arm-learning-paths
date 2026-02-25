@@ -19,9 +19,9 @@ prerequisites:
     - Experience building software from source using CMake and make
 
 author:
+    - Johnny Nunez
     - Odin Shen
     - Asier Arranz
-    - Johnny Nunez
     - Raymond Lo
 
 ### Tags
