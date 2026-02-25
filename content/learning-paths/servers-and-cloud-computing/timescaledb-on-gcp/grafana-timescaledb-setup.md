@@ -40,7 +40,7 @@ sudo systemctl start grafana-server
 sudo systemctl enable grafana-server
 ```
 
-**Verify status:**
+Verify the service is running:
 
 ```bash
 sudo systemctl status grafana-server

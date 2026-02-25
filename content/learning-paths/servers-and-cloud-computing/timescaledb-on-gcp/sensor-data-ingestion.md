@@ -35,7 +35,7 @@ sudo zypper install -y \
   python3-psycopg2
 ```
 
-**Verify psycopg2:**
+Verify psycopg2 is installed correctly:
 
 ```bash
 python3 - <<EOF
@@ -77,7 +77,7 @@ Press Ctrl+D to exit back into the SSH shell.
 
 The following Python script simulates multiple sensors sending readings every two seconds and inserts them into TimescaleDB.
 
-Create a new Python file called **sensor_ingest.py** and add the following code to the file:
+Create a new Python file called `sensor_ingest.py` and add the following code to the file:
 
 ```python
 import time
@@ -118,7 +118,7 @@ nohup python3 sensor_ingest.py > ingest.log 2>&1 &
 
 This ensures the sensor generator continues running even after you close the terminal.
 
-### Verify Data Ingestion
+### Verify data ingestion
 
 ```bash
 ps -ef | grep sensor_ingest.py

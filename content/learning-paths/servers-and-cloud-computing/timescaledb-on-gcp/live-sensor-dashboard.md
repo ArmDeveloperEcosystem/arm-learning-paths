@@ -6,7 +6,7 @@ weight: 8
 layout: learningpathall
 ---
 
-## Create a Live Sensor Temperature Dashboard
+## Create a live sensor temperature dashboard
 
 In this section, you'll create a Grafana dashboard that visualizes live temperature data stored in TimescaleDB. The dashboard continuously updates to display sensor temperature changes in near real time.
 
@@ -49,13 +49,13 @@ You will be redirected to the Edit panel screen.
 
 In the Query section:
 
-- Data source: PostgreSQL / TimescaleDB
-- Query type: SQL
-- Format: Time series
+- **Data source:** PostgreSQL / TimescaleDB
+- **Query type:** SQL
+- **Format:** Time series
 
 ![Grafana time series panel editor showing the visualization configuration screen with the time series panel type selected and panel title field alt-txt#center](images/data-source-visualization.png "Grafana visualization configuration")
 
-Paste the following query after pressing the "Code" button on the right of the query editor:
+Paste the following query after selecting **Code** on the right of the query editor:
 
 ```sql
 SELECT
@@ -74,14 +74,14 @@ Apply the following settings in the right-hand panel:
 
   - Visualization Settings
 
-    - Visualization: Time series
-    - Panel title: Live Sensor Temperature
-    - Table view: Disabled
+    - **Visualization:** Time series
+    - **Panel title:** Live Sensor Temperature
+    - **Table view:** Disabled
 
   - Time & Refresh Settings
 
-    - Time range: Last 5 minutes
-    - Refresh interval: 5s
+    - **Time range:** Last 5 minutes
+    - **Refresh interval:** 5s
 
 These settings ensure the panel refreshes automatically with new data.
 

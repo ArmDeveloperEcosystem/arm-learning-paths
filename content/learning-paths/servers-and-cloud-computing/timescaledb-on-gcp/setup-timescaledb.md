@@ -116,7 +116,7 @@ TimescaleDB must be preloaded when PostgreSQL starts.
 
 ### Edit PostgreSQL configuration and add the timescaledb library
 
-Using a suitable editor and "sudo", edit **/var/lib/pgsql/data/postgresql.conf** and add the following line:
+Using a suitable editor and `sudo`, edit `/var/lib/pgsql/data/postgresql.conf` and add the following line:
 
 ```text
 shared_preload_libraries = 'timescaledb'
