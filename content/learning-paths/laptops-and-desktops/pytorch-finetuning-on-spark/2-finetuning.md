@@ -8,13 +8,13 @@ layout: learningpathall
 
 ## Why fine-tuning matters for domain knowledge
 
-Pre-trained models like Llama 3.1 8B have broad language skills, but they don't know everything. Ask the base model about the maximum clock speed of the RP2350 microcontroller and it confidently answers "1.8 GHz," a completely fabricated number. The actual specification is 150 MHz.
+Pre-trained models like Llama 3.2 8B have broad language skills, but they don't know everything. Ask the base model about the maximum clock speed of the RP2350 microcontroller and it confidently answers "1.8 GHz," a completely fabricated number. The actual specification is 150 MHz.
 
 Fine-tuning fixes this by training the model on real data from Raspberry Pi datasheets. After fine-tuning, the same model answers correctly: "The RP2350 supports up to 150 MHz." No hallucination, no guessing.
 
 The process breaks down into three steps:
 
-1. Patch the NVIDIA playbook's fine-tuning script to load a custom dataset, then run training
+1. Run the fine-tuning script with a custom dataset about Raspberry Pi hardware
 2. Serve both the original and fine-tuned models using vLLM
 3. Compare the outputs side by side to see factual accuracy improve
 
@@ -74,7 +74,7 @@ Not every model fits entirely in GPU memory during training. The fine-tuning scr
 
 **QLoRA (Quantized LoRA)** goes a step further by loading the frozen model weights in 4-bit precision. Combined with LoRA's parameter-efficient training, this lets you fine-tune 70B-class models that would otherwise exceed available memory.
 
-The script you'll run in the next section uses full fine-tuning by default, but the playbook includes LoRA and QLoRA scripts for larger models.
+The script you'll run in the next section uses full fine-tuning by default, but NVIDIA's playbook includes LoRA and QLoRA scripts for larger models.
 
 ## What you've accomplished and what's next
 
@@ -84,4 +84,4 @@ In this section you learned:
 - How Raspberry Pi datasheet Q&A pairs are structured in the Alpaca prompt format
 - The differences between full fine-tuning, LoRA, and QLoRA
 
-In the next section, you'll walk through the fine-tuning script, patch it to load the Raspberry Pi dataset, and run training to produce your own fine-tuned model.
+In the next section, you'll walk through the fine-tuning script, load the Raspberry Pi dataset, and run training to produce your own fine-tuned model.
