@@ -10,7 +10,7 @@ Before you start working with Profile-Guided Optimization, you need to understan
 
 Google Benchmark is a C++ library specifically designed for microbenchmarking, which means measuring the performance of small code snippets with high accuracy. Microbenchmarking helps you identify bottlenecks and optimize critical sections, especially in performance-sensitive applications. 
 
-Google Benchmark simplifies this process by providing a framework that manages iterations, times execution, and performs statistical analysis. This lets you focus on the code being measured, rather than writing boilerplate or trying to prevent unwanted compiler optimizations manually.
+Google Benchmark simplifies this process by providing a framework that manages iterations, times execution, and performs statistical analysis. This lets you focus on the code being measured, rather than writing test code or trying to prevent unwanted compiler optimizations manually.
 
 To use Google Benchmark, you define a function that accepts a `benchmark::State&` parameter and iterate over it to perform the benchmarking. You register the function using the `BENCHMARK` macro and include `BENCHMARK_MAIN()` to generate the benchmark's entry point.
 

@@ -16,7 +16,7 @@ learning_objectives:
 
 prerequisites:
     - Basic C++ understanding.
-    - A Windows on Arm machine with [Visual Studio 2022](/install-guides/vs-woa/) and the C++ desktop development workload installed.
+    - A Windows on Arm machine with [Visual Studio](/install-guides/vs-woa/) and the C++ desktop development tools installed.
 
 author: Tom Dunkle
 

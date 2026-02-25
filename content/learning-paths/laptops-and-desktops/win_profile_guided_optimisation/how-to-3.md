@@ -14,14 +14,18 @@ For this example, you'll use an Arm computer running Windows.
 
 ## Install the required tools
 
-First, you need to install Google Benchmark for Arm64 via vcpkg. Run the following commands in PowerShell as Administrator:
+### Install vcpkg and Google Benchmark
+
+Run the following commands in PowerShell:
 
 ```console
-cd C:\git
-git clone https://github.com/microsoft/vcpkg.git
-cd vcpkg
-.\bootstrap-vcpkg.bat
-.\vcpkg install benchmark:arm64-windows-static
+iex (iwr -useb https://aka.ms/vcpkg-init.ps1)
+cd $HOME
+mkdir pgo-benchmark
+cd pgo-benchmark
+& "$HOME\.vcpkg\vcpkg.exe" new --application
+& "$HOME\.vcpkg\vcpkg.exe" add port benchmark
+& "$HOME\.vcpkg\vcpkg.exe" install
 ```
 
 ## Create the division benchmark
@@ -52,21 +56,24 @@ BENCHMARK_MAIN();
 
 ## Compile and run the baseline benchmark
 
+Open an **ARM64 Native Tools Command Prompt** from the Start menu, then type `powershell` to start PowerShell with the ARM64 compiler environment.
+
 Before compiling, set an environment variable to refer to the vcpkg installation directory:
 
 ```console
-$VCPKG="C:\git\vcpkg\installed\arm64-windows-static"
+$VCPKG="$HOME\pgo-benchmark\vcpkg_installed\arm64-windows"
 ```
 
 Now compile the benchmark. This command uses the MSVC compiler and links with the Google Benchmark libraries:
 
 ```console
-cl /D BENCHMARK_STATIC_DEFINE div_bench.cpp /link /LIBPATH:"$VCPKG\lib" benchmark.lib benchmark_main.lib shlwapi.lib
+cl /I"$VCPKG\include" /D BENCHMARK_STATIC_DEFINE div_bench.cpp /link /LIBPATH:"$VCPKG\lib" benchmark.lib benchmark_main.lib shlwapi.lib
 ```
 
 Run the program to establish your baseline performance:
 
 ```console
+$env:PATH += ";$HOME\pgo-benchmark\vcpkg_installed\arm64-windows\bin"
 .\div_bench.exe
 ```
 

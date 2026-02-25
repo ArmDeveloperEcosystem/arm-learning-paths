@@ -10,18 +10,12 @@ Now that you have a baseline benchmark, you're ready to apply Profile-Guided Opt
 
 ## Build the instrumented binary
 
-First, open the Arm developer shell so the compiler is in your PATH:
-
-```console
-& "C:\Program Files\Microsoft Visual Studio\18\Community\Common7\Tools\Launch-VsDevShell.ps1" -Arch arm64
-```
-
-You may need to change the version number in your Visual Studio path, depending on which version you've installed.
+You should already have an ARM64 Native Tools Command Prompt open with PowerShell running from the previous section.
 
 Set the environment variable to refer to the vcpkg installation directory:
 
 ```console
-$VCPKG="C:\git\vcpkg\installed\arm64-windows-static"
+$VCPKG="$HOME\pgo-benchmark\vcpkg_installed\arm64-windows"
 ```
 
 Build the instrumented binary with the `/GENPROFILE` flag. This creates a version of your program that records how it executes:
