@@ -29,10 +29,10 @@ To learn more, visit the [TimescaleDB website](https://www.timescale.com/) and e
 
 ## What you've accomplished and what's next
 
-In this section, you learned about:
+In this section, you:
 
-* Google Axion C4A Arm-based VMs and their performance advantages for time-series workloads
-* TimescaleDB and its key features, including hypertables, continuous aggregates, and retention policies
-* How Arm architecture enables cost-efficient, high-throughput ingestion and query processing for time-series data
+- Explored Google Axion C4A Arm-based VMs and their performance advantages for time-series workloads
+- Reviewed TimescaleDB key features, including hypertables, continuous aggregates, and retention policies
+- Understood how Arm architecture enables cost-efficient, high-throughput ingestion and query processing
 
-Next, you'll create firewall rules to enable remote access to the Grafana dashboard that you'll build later in this Learning Path.
+Next, you'll create a firewall rule to enable remote access to the Grafana dashboard you'll build later in this Learning Path.
