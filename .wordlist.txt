@@ -3549,7 +3549,6 @@ paddleocr
 PaddleOCR
 paddlepaddle
 PaddlePaddle
-Pagefind
 pagemap
 pagesize
 Paladugu
