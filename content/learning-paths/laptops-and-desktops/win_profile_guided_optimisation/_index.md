@@ -30,6 +30,8 @@ tools_software_languages:
     - PGO
 operatingsystems:
     - Windows
+armips:
+    - Cortex-A
 
 further_reading:
     - resource:
