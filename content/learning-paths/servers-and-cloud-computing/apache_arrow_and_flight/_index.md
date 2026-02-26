@@ -1,6 +1,10 @@
 ---
 title: Deploy High-Performance Analytics with Apache Arrow and Arrow Flight on Google Cloud C4A Axion processors
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 30
 
 who_is_this_for: This learning path is designed for data engineers, platform engineers, and developers who aim to build high-performance analytics pipelines on Arm64-based Google Cloud C4A Axion processors using Apache Arrow and Arrow Flight.
