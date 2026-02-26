@@ -15,9 +15,11 @@ cd docker-blog-arm-migration
 code .
 ```
 
-Make sure the MCP_DOCKER server is running in VS Code (check **Extensions** > **MCP_DOCKER** > **Start Server** if needed).
+Make sure the MCP_DOCKER server is running in VS Code ( Use **Extensions** > **MCP_DOCKER** > **Start Server** if needed).
 
-## Give GitHub Copilot migration instructions
+This allows GitHub Copilot to invoke the configured MCP servers through the MCP Gateway.
+
+## Provide migration instructions to GitHub Copilot
 
 Open GitHub Copilot Chat in VS Code and paste the following prompt:
 
@@ -48,22 +50,24 @@ After completing the migration:
 - Include performance predictions and cost savings in the PR description
 - List all tools used and validation steps needed
 ```
+This prompt instructs Copilot to use structured MCP tools rather than relying purely on generated suggestions.
 
-## Watch the migration execute
+## Observe the migration workflow
 
-GitHub Copilot orchestrates the migration through four phases using the Docker MCP Toolkit.
+Copilot now orchestrates the migration using the configured MCP servers. The workflow typically proceeds in several phases.
 
-### Phase 1: Image analysis
+### Phase 1: Container Image analysis
 
-Copilot uses the `skopeo` tool from the Arm MCP Server to analyze the base image:
+Copilot invokes `check_image` or `skopeo` from the Arm MCP Server:
 
 ```text
 Checking centos:6 for arm64 support...
 ```
 
-The tool reports that `centos:6` has no `linux/arm64` build available. This is the first blocker identified. Copilot determines that the base image must be replaced.
+The tool reports that `centos:6` has no `linux/arm64` build available. Copilot proposes replacing the base image with a modern multi-architecture alternative.
+This step ensures the container can build and run on Arm hardware before addressing source-level changes.
 
-### Phase 2: Code scanning
+### Phase 2: Source Code scanning
 
 Copilot runs the `migrate_ease_scan` tool with the C++ scanner:
 
@@ -77,9 +81,9 @@ The scan detects:
 - The `-mavx2` compiler flag in the Dockerfile.
 - The x86-specific header `<immintrin.h>`.
 
-Each issue includes the file location, line number, and specific code requiring modification.
+Each finding includes file locations and recommended actions. This structured scan avoids manually searching through the codebase.
 
-### Phase 3: Knowledge base lookup and code conversion
+### Phase 3: Knowledge base lookup and refactoring code
 
 For each x86 intrinsic found, Copilot queries the Arm MCP Server knowledge base:
 
@@ -87,7 +91,8 @@ For each x86 intrinsic found, Copilot queries the Arm MCP Server knowledge base:
 Searching knowledge base for: AVX2 to NEON intrinsic conversion
 ```
 
-The knowledge base returns Arm documentation with the conversions:
+The Arm MCP knowledge base provides documented guidance on intrinsic mapping and architecture considerations.
+Example mappings:
 
 | x86 AVX2 Intrinsic | Arm NEON Equivalent |
 |---------------------|---------------------|
@@ -96,37 +101,46 @@ The knowledge base returns Arm documentation with the conversions:
 | `_mm256_add_pd()` | Two `vaddq_f64()` operations |
 | `_mm256_mul_pd()` | Two `vmulq_f64()` operations |
 
-The knowledge base also explains that AVX2 uses 256-bit vectors processing 4 doubles at once, while NEON uses 128-bit vectors processing 2 doubles. Loop strides must be adjusted accordingly.
+Because AVX2 operates on 256-bit vectors (four doubles) and NEON operates on 128-bit vectors (two doubles), Copilot adjusts:
+  - Loop stride
+  - Accumulation logic
+  - Horizontal reduction pattern
+  - 
+The refactoring typically includes:
+  - Guarding architecture-specific code with #ifdef __aarch64__
+  - Replacing <immintrin.h> with <arm_neon.h> where appropriate
+  - Updating compiler flags (for example replacing -mavx2)
+  - Selecting an Arm-compatible base image such as ubuntu:22.04
+  - Supporting multi-architecture builds using TARGETARCH
+    
+All proposed changes should be reviewed before merging.
 
-Copilot rewrites the code using this information:
+### Phase 4: Pull request creation
 
-- Replaces `<immintrin.h>` with `<arm_neon.h>` inside `#ifdef __aarch64__` guards.
-- Converts the AVX2 loop structure (stride 4) to NEON (stride 2).
-- Rewrites the horizontal reduction for NEON.
-- Updates the Dockerfile to use `ubuntu:22.04` with `TARGETARCH` for multi-arch builds.
-- Changes the compiler flag from `-mavx2` to `-march=armv8-a+simd`.
+Once modifications are complete, Copilot invokes the GitHub MCP Server to:
+  - Create a branch
+  - Commit changes
+  - Open a pull request
 
-### Phase 4: Create the pull request
-
-Copilot uses the GitHub MCP Server to create a pull request with:
-
-- All code changes (source files and Dockerfile).
-- A detailed description of what was changed and why.
-- Performance predictions for Arm.
-- A list of all MCP tools used during the migration.
+The PR typically includes:
+  - Updated Dockerfile
+  - Refactored source files
+  - A description of the changes
+  - A summary of MCP tools used
+  - Suggested validation steps for Arm hardware
 
 You can see an example PR at [github.com/JoeStech/docker-blog-arm-migration/pull/1](https://github.com/JoeStech/docker-blog-arm-migration/pull/1).
 
 ## Summary of changes
 
-The migration produces these key changes:
+After migration, you should see:
 
-**Dockerfile**:
+**Dockerfile updates**:
 - Replaced `centos:6` with `ubuntu:22.04`.
 - Added `TARGETARCH` for multi-architecture builds.
 - Changed `-mavx2` to `-march=armv8-a+simd` for Arm builds.
 
-**Source code**:
+**Source code updates**:
 - Added `#ifdef __aarch64__` architecture guards.
 - Replaced all `_mm256_*` AVX2 intrinsics with NEON equivalents (`vld1q_f64`, `vaddq_f64`, `vmulq_f64`).
 - Adjusted loop strides from 4 (AVX2) to 2 (NEON).

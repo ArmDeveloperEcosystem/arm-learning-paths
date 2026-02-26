@@ -8,14 +8,18 @@ layout: learningpathall
 
 ## Before you begin
 
-You need:
+Make sure the following tools are installed:
 
 - Docker Desktop 4.59 or later.
 - VS Code with the GitHub Copilot extension.
-- A GitHub account with a personal access token.
+- A GitHub account with a Personal Access Token(PAT) that allows repository access.
 - A machine with at least 8 GB RAM (16 GB recommended).
 
+You will use Docker Desktop to host MCP servers locally, and VS Code with GitHub Copilot to invoke those servers through the MCP Gateway.
+
 ## Enable the Docker MCP Toolkit
+
+The MCP Toolkit allows Docker Desktop to run and manage MCP (Model Context Protocol) servers, which expose structured tools that AI assistants can call.
 
 1. Open Docker Desktop.
 2. Go to **Settings** > **Beta features**.
@@ -78,6 +82,14 @@ Open GitHub Copilot Chat in VS Code and ask:
 What Arm migration tools do you have access to?
 ```
 
-You should see tools from all three servers listed. If they appear, your setup is complete.
+If the setup is correct, Copilot will list tools from:
 
-In the next section, you will examine the demo application to understand what blocks its migration to Arm64.
+- Arm MCP Server
+- GitHub MCP Server
+- Sequential Thinking MCP Server
+
+This confirms that tool invocation through the MCP Gateway is working.
+
+Your environment is now ready for AI-assisted migration.
+
+In the next section, you will examine the demo application and identify the architecture-specific elements that require adaptation for Arm64.
