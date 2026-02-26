@@ -1,25 +1,22 @@
 ---
-title: Migrate applications between Arm platforms with AI assistance
-
-draft: true
-cascade:
-    draft: true
+title: Migrate applications between Arm platforms using Kiro Arm SoC Migration Power
     
 minutes_to_complete: 60
 
-who_is_this_for: This learning path is for developers migrating applications between Arm platforms using using AI-assisted tooling with Kiro's ARM SoC Migration Power. You will learn a practical, repeatable migration workflow through an example that moves an application from the cloud to the edge — from AWS Graviton (Neoverse-based) to Raspberry Pi 5 (Cortex-A based).
+who_is_this_for: This is an advanced topic for experienced developers who need to migrate applications between Arm-based platforms using AI-assisted tooling. You will work through a structured, repeatable migration workflow using Kiro Arm SoC Migration Power, moving an application from AWS Graviton3 (Neoverse) to Raspberry Pi 5 (Cortex-A). The techniques apply broadly to cloud-to-edge and cross-architecture migrations across the Arm ecosystem.
 
 learning_objectives:
-    - Install and configure Kiro's ARM SoC Migration Power 
-    - Understand a structured migration workflow applicable across Arm platforms
-    - Use AI-guided migration to identify platform-specific and hardware-dependent code
-    - Create Hardware Abstraction Layers with power assistance
-    - Validate and verify migrations with automated analysis
+   - Install and configure Kiro Arm SoC Migration Power
+   - Apply a structured migration workflow across Arm platforms
+   - Identify platform-specific and hardware-dependent code using AI-guided analysis
+   - Implement hardware abstraction layers to isolate platform-specific dependencies
+   - Validate and verify the migrated application using automated analysis
 
 prerequisites:
-    - Access to a source and target Arm platforms (the example uses AWS Graviton3 and Raspberry Pi 5)
-    - Basic understanding of C programming
-    - Familiarity with embedded systems, Linux environments, or cloud computing concepts
+    - Access to both source and target Arm platforms (for example, AWS Graviton3 and Raspberry Pi 5)
+    - Working knowledge of C programming
+    - Familiarity with Linux development environments and basic embedded or cloud deployment concepts
+    - Experience building applications with GCC and CMake
 
 author: Daniel Schleicher
 
@@ -45,7 +42,7 @@ tools_software_languages:
 
 further_reading:
     - resource:
-        title: Kiro ARM SoC Migration Power Documentation
+        title: Kiro Arm SoC Migration Power Documentation
         link: https://kiro.dev/powers/arm-soc-migration
         type: documentation
     - resource:
