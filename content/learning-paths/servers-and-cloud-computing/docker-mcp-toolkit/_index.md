@@ -1,5 +1,10 @@
 ---
 title: Automate x86 to Arm Migration with Docker MCP Toolkit, VS Code and GitHub Copilot
+
+draft: true
+cascade:
+    draft: true
+    
 description: Learn how to use the Docker MCP Toolkit with the Arm MCP Server and GitHub Copilot to automate container and code migration from x86 to Arm64. Includes a hands-on demo migrating a legacy C++ application with AVX2 intrinsics to Arm NEON.
 
 minutes_to_complete: 45
