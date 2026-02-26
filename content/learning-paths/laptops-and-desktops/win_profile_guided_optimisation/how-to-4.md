@@ -12,12 +12,6 @@ Now that you have a baseline benchmark, you're ready to apply Profile-Guided Opt
 
 You should already have an ARM64 Native Tools Command Prompt open with PowerShell running from the previous section.
 
-Set the environment variable to refer to the vcpkg installation directory:
-
-```console
-$VCPKG="$HOME\pgo-benchmark\vcpkg_installed\arm64-windows"
-```
-
 Build the instrumented binary with the `/GENPROFILE` flag. This creates a version of your program that records how it executes:
 
 ```console

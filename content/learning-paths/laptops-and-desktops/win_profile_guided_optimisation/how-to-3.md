@@ -56,7 +56,11 @@ BENCHMARK_MAIN();
 
 ## Compile and run the baseline benchmark
 
-Open an **ARM64 Native Tools Command Prompt** from the Start menu, then type `powershell` to start PowerShell with the ARM64 compiler environment.
+Open an **ARM64 Native Tools Command Prompt** from the Windows Start menu and start PowerShell:
+
+```console
+powershell
+```
 
 Before compiling, set an environment variable to refer to the vcpkg installation directory:
 
