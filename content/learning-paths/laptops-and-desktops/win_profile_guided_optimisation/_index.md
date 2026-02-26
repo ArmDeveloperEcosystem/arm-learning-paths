@@ -1,34 +1,37 @@
 ---
-title: Optimize C++ performance with Profile-Guided Optimization and Google Benchmark
+title: Optimize C++ applications on Windows on Arm using Profile-Guided Optimization
 
 draft: true
 cascade:
     draft: true
 
-minutes_to_complete: 15
+minutes_to_complete: 30
 
-who_is_this_for: Developers looking to optimize C++ performance on an Arm-based Windows device, based on runtime behavior.
+who_is_this_for: This is an introductory topic for software developers who want to optimize C++ application performance on Windows on Arm using profile-guided optimization.
 
 learning_objectives: 
     - Microbenchmark a function using Google Benchmark.
     - Apply profile-guided optimization to build performance-tuned binaries for Windows on Arm.
+    - Measure and compare performance improvements from PGO-optimized builds.
 
 prerequisites:
     - Basic C++ understanding.
-    - Access to an Arm-based Windows machine.
+    - A Windows on Arm machine with [Visual Studio](/install-guides/vs-woa/) and the C++ desktop development tools installed.
 
 author: Tom Dunkle
 
 ### Tags
 skilllevels: Introductory
-subjects: ML
-armips:
-    - Neoverse
+subjects: Performance and Architecture
 tools_software_languages:
+    - C
+    - MSVC
     - Google Benchmark
-    - Runbook
+    - PGO
 operatingsystems:
     - Windows
+armips:
+    - Cortex-A
 
 further_reading:
     - resource:
@@ -39,6 +42,14 @@ further_reading:
         title: Google Benchmark Library 
         link: https://github.com/google/benchmark
         type: documentation
+    - resource:
+        title: Windows on Arm developer documentation
+        link: https://learn.microsoft.com/en-us/windows/arm/overview
+        type: documentation
+    - resource:
+        title: Arm Performance optimization resources
+        link: https://learn.arm.com/learning-paths/laptops-and-desktops/
+        type: website
 
 
 
