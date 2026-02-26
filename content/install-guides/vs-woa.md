@@ -1,9 +1,6 @@
 ---
-### Title the install tools article with the name of the tool to be installed
-### Include vendor name where appropriate
 title: Visual Studio for Windows on Arm 
 
-### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
 - clang
 - compiler
@@ -13,12 +10,9 @@ additional_search_terms:
 - woa
 - windows on arm
 
-
-### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 30
 
-### Link to official documentation
-official_docs: 
+official_docs: https://learn.microsoft.com/en-us/visualstudio/install/visual-studio-on-arm-devices 
 
 author: Pareena Verma
 
@@ -30,7 +24,7 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-[Visual Studio 2022 17.4](https://learn.microsoft.com/en-us/visualstudio/install/visual-studio-on-arm-devices) (and higher) natively supports Windows on Arm.
+Visual Studio 2022 version 17.4 and higher natively supports Windows on Arm devices, enabling you to develop C and C++ applications directly on Arm hardware using the MSVC or LLVM toolchains.
 
 ## How do I download and install Visual Studio for Windows on Arm?
 
@@ -74,4 +68,4 @@ The workload and individual component selection can also be made at any time aft
 
 You can choose additional workloads and individual components to further customize your installation.
 
-For the latest updates on Arm native development, check the [Microsoft Learn](https://learn.microsoft.com/en-us/windows/arm/overview) site.
+For the latest updates on Arm native development, check the [Windows on Arm](https://learn.microsoft.com/en-us/windows/arm/overview) documentation. 
