@@ -8,21 +8,25 @@ layout: learningpathall
 
 ## Clone the demo repository
 
-The demo application is a matrix multiplication benchmark written in C++ with AVX2 intrinsics. Clone it:
-
+The demo application is a matrix multiplication benchmark written in C++ using AVX2 intrinsics for vectorized performance on x86 processors. 
+Clone the repository:
 ```bash
 git clone https://github.com/JoeStech/docker-blog-arm-migration
 cd docker-blog-arm-migration
 ```
+This example is intentionally optimized for x86 so that you can see how architecture-specific code appears in practice and how it can be adapted for Arm.
 
 ## Examine the Dockerfile
 
-Open the `Dockerfile`. There are two immediate blockers for Arm migration:
+Open the `Dockerfile`. There are two areas that require updates for Arm compatibility.
 
-**No Arm64 support in the base image**: The `centos:6` image was built for x86 only. This container will not start on Arm hardware.
+**Add Arm64 support in the base image**: The centos:6 image was published for x86 architecture and does not provide a `linux/arm64` variant. To run on Arm hardware, the base image must support Arm64.
 
-**x86-specific compiler flag**: The `-mavx2` flag tells the compiler to use AVX2 vector instructions, which do not exist on Arm processors.
+Modern multi-architecture base images typically publish both `linux/amd64` and `linux/arm64` manifests. Updating the base image is the first step toward portability.
 
+**Update compiler flags**: The `-mavx2` flag enables AVX2 vector instructions on x86. Arm processors use different SIMD instruction sets (NEON or SVE), so this flag must be removed or replaced when compiling for Arm.
+
+Here is the full Dockerfile for reference:
 ```dockerfile
 FROM centos:6
 
@@ -45,12 +49,15 @@ CMD ["./benchmark"]
 ```
 
 ## Examine the source code
-
-Open `matrix_operations.cpp`. The code uses x86 AVX2 intrinsics throughout:
+Open `matrix_operations.cpp`. At the top of the file:
 
 ```cpp
 #include <immintrin.h>  // x86-only header
+```
+The <immintrin.h> header provides Intel SIMD intrinsics, including AVX and AVX2. On Arm systems, SIMD intrinsics are provided through <arm_neon.h> instead.
 
+Inside the matrix multiplication routine, you will see AVX2 intrinsics such as:
+```cpp
 // Inside the multiply function:
 __m256d sum_vec = _mm256_setzero_pd();
 __m256d a_vec = _mm256_loadu_pd(&data[i][k]);
@@ -60,27 +67,37 @@ sum_vec = _mm256_add_pd(sum_vec, _mm256_mul_pd(a_vec, b_vec));
 __m128d sum_high = _mm256_extractf128_pd(sum_vec, 1);
 __m128d sum_low = _mm256_castpd256_pd128(sum_vec);
 ```
+These _mm256_* functions map directly to 256-bit AVX2 instructions.
 
-## Why this code cannot run on Arm
+## Architecture considerations for Arm
 
-There are several specific blockers:
+To run this code on Arm, several adjustments are required:
 
-1. **x86-exclusive header**: `#include <immintrin.h>` only exists on x86 systems. Arm uses `<arm_neon.h>` instead.
+1. **SIMD header replacement**: x86 uses `#include <immintrin.h>`. Arm uses `<arm_neon.h>` instead.
 
-2. **AVX2 intrinsics throughout**: Every `_mm256_*` function is Intel-specific:
-   - `_mm256_setzero_pd()` creates a 256-bit zero vector (Arm NEON is 128-bit).
+2. **Intrinsic mapping**: Each AVX2 intrinsic must be mapped to an Arm equivalent.
+   For example:
+   - `_mm256_setzero_pd()` creates a 256-bit zero vector of four doubles(Arm NEON is 128-bit).
    - `_mm256_loadu_pd()` loads 4 doubles at once (NEON loads 2 with `vld1q_f64`).
    - `_mm256_add_pd()` and `_mm256_mul_pd()` are 256-bit operations (NEON uses 128-bit equivalents).
    - `_mm256_extractf128_pd()` extracts the high 128 bits (not needed on NEON).
 
-3. **Vector width mismatch**: AVX2 processes 4 doubles per operation. Arm NEON processes 2 doubles per operation. The entire loop structure needs adjustment.
+4. **Vector width differences**: AVX2 operates on 256-bit registers (four double-precision values). NEON operates on 128-bit registers (two double-precision values). This affects:
+  - Loop stride
+  - Accumulation logic
+  - Horizontal reduction patterns
+
+4. **Horizontal reduction logic**: The AVX2 pattern:
+
+```cpp
+   _mm256_extractf128_pd(...)
+  _mm256_castpd256_pd128(...)
+```
+is specific to x86 register structure. On Arm, reduction is implemented using NEON reduction or pairwise-add instructions instead.
 
 {{% notice Note %}}
-SVE/SVE2 on newer Arm cores (Neoverse V1/V2, Graviton 3/4) provides 256-bit or wider vector-length agnostic (VLA) registers, matching or exceeding AVX2 width. The Arm MCP Server knowledge base can help determine the best approach for your target hardware.
+On newer Arm platforms supporting SVE or SVE2 (for example Neoverse V1/V2 based platforms), wider vector lengths may be available. SVE uses a vector-length-agnostic (VLA) model, which differs from fixed-width AVX2 and NEON programming. The Arm MCP Server knowledge base can help determine the appropriate approach for your target platform.
 {{% /notice %}}
 
-4. **Horizontal reduction logic**: The pattern using `_mm256_extractf128_pd` and `_mm256_castpd256_pd128` is x86-specific and must be completely rewritten.
-
-Manual conversion requires rewriting 30+ lines of intrinsic code, adjusting loop strides, and testing numerical accuracy. This is exactly where the Docker MCP Toolkit with the Arm MCP Server becomes essential.
-
+In the next section, you will use GitHub Copilot together with the Docker MCP Toolkit to analyze these elements automatically and generate Arm-compatible updates.
 In the next section, you will use GitHub Copilot with the Docker MCP Toolkit to automate the entire migration.
