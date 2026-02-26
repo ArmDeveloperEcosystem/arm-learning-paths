@@ -47,7 +47,7 @@ Once downloaded, run the `VisualStudioSetup.exe` file on a Windows on Arm machin
 ## How do I install C and C++ support in Visual Studio?
 During the installation process, you will be asked to choose the workloads you want and customize your installation. At a minimum, select `Desktop development with C++`.
 
-![img1 #center](/install-guides/_images/vs-woa.png)
+![img1 #center](/install-guides/_images/vs-woa.webp)
 
 ## How do I install LLVM support in Visual Studio? {#install-llvm-support-in-visual-studio}
 
@@ -57,12 +57,12 @@ In the installer, select the `Individual components` tab. Enter `clang` in the s
 
 Two results are displayed: The LLVM compiler and MSBuild support for LLVM. Select both these options:
 
-![img2 #center](/install-guides/_images/llvm_vs.png)
+![img2 #center](/install-guides/_images/llvm_vs.webp)
 
 {{% notice  Note%}}
 Different versions of Visual Studio include different LLVM toolchain versions.
 
-For example, Visual Studio 2022 Version `17.11.5` installs `LLVM 17.0.3`.
+For example, Visual Studio 2026 Version `18.3.2` installs `LLVM 19.1.2`.
 {{% /notice %}}
 
 LLVM supports `clang-cl`, a compatibility layer for Microsoft Visual C++ (MSVC). This means that most developers can use `clang-cl` to compile their C/C++ applications on Visual Studio/MSBuild on the Windows on Arm device, without needing to change the command line. This allows you to easily modify legacy projects that use MSVC to use native compilation.
