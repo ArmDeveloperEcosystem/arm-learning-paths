@@ -102,13 +102,11 @@ NVIDIA provides a collection of ready-to-use fine-tuning scripts optimized for D
 Clone the playbooks repository:
 
 ```bash
-git clone https://github.com/NVIDIA/dgx-spark-playbooks
-cd dgx-spark-playbooks
-git checkout e51dae47ec9233ccd722dd465be87a984fd97d61
-cd nvidia/pytorch-fine-tune/assets
+git clone https://github.com/mhall119/finetuning-scripts.git
+cd finetuning-scripts/nvidia
 ```
 
-The repository contains scripts for different model architectures and training strategies. The `assets` directory includes the fine-tuning scripts you'll use in the next steps. Each script is preconfigured with sensible defaults but also accepts command-line arguments for customization.
+The repository contains a fork of the scripts found in [NVIDIA's Playbook](https://github.com/NVIDIA/dgx-spark-playbooks/nvidia/pytorch-fine-tune/assets) including the fine-tuning scripts you'll use in the next steps. This script is preconfigured with sensible defaults but also accepts command-line arguments for customization.
 
 ## What you've accomplished and what's next
 
@@ -117,6 +115,6 @@ In this section you:
 - Configured Docker permissions on DGX Spark
 - Pulled the NVIDIA PyTorch container and launched an interactive session
 - Installed fine-tuning libraries and authenticated with Hugging Face
-- Cloned the DGX Spark playbooks repository
+- Cloned the fine-tuning scripts repository
 
 In the next section, you'll learn how supervised fine-tuning works and what makes it effective for adapting pre-trained models to specific tasks.

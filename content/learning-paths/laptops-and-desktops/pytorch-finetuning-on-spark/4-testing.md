@@ -43,11 +43,11 @@ Before testing your fine-tuned model, first observe how the original, unmodified
 
 ### Launch vLLM
 
-Start the vLLM server with the original Llama 3.1 8B model:
+Start the vLLM server with the original Llama 3.2 3B Instruct model:
 
 ```bash
 python3 -m vllm.entrypoints.openai.api_server \
---model "meta-llama/Llama-3.1-8B" --trust-remote-code \
+--model "meta-llama/Llama-3.2-3B-Instruct" --trust-remote-code \
 --tensor-parallel-size 1 --quantization fp8 \
 --gpu-memory-utilization 0.80
 ```
@@ -87,7 +87,7 @@ The original model hallucinates an incorrect specification. The output is simila
   "id": "cmpl-91e070e2a34aaf01",
   "object": "text_completion",
   "created": 1770998840,
-  "model": "meta-llama/Llama-3.1-8B",
+  "model": "meta-llama/Llama-3.2-3B-Instruct",
   "choices": [
     {
       "index": 0,
@@ -113,7 +113,7 @@ Now test your fine-tuned model to see how training on Raspberry Pi datasheet con
 As of this writing, vLLM does not support version 5 of the `transformers` library that was used when fine-tuning the model, so you need to patch its `tokenizer_config.json`. Run the following command to update the `tokenizer_class` to `PreTrainedTokenizerFast`, which is compatible with the older `transformers` version bundled in the vLLM container:
 
 ```bash
-sed -i 's/"tokenizer_class": "TokenizersBackend"/"tokenizer_class": "PreTrainedTokenizerFast"/' /workspace/models/Llama-3.1-8B-FineTuned/tokenizer_config.json
+sed -i 's/"tokenizer_class": "TokenizersBackend"/"tokenizer_class": "PreTrainedTokenizerFast"/' /workspace/models/Llama-3.2-3B-FineTuned/tokenizer_config.json
 ```
 {{% /notice %}}
 
@@ -123,7 +123,7 @@ Start the vLLM server with your fine-tuned model:
 
 ```bash
 python3 -m vllm.entrypoints.openai.api_server \
---model "/workspace/models/Llama-3.1-8B-FineTuned" --trust-remote-code \
+--model "/workspace/models/Llama-3.2-3B-FineTuned" --trust-remote-code \
 --tensor-parallel-size 1 --quantization fp8 \
 --gpu-memory-utilization 0.80
 ```
@@ -152,7 +152,7 @@ The fine-tuned model produces a correct, datasheet-accurate response. The output
   "id": "cmpl-bad36ff5edddfb74",
   "object": "text_completion",
   "created": 1770999123,
-  "model": "/workspace/models/Llama-3.1-8B-FineTuned",
+  "model": "/workspace/models/Llama-3.2-3B-FineTuned",
   "choices": [
     {
       "index": 0,
