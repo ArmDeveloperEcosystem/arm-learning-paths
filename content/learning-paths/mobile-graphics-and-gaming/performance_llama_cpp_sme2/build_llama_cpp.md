@@ -6,9 +6,11 @@ weight: 4
 layout: learningpathall
 ---
 
+## Overview
+
 In this section, you set up a GCC cross-compile toolchain and build a statically linked `llama-cli` binary with KleidiAI and SME2 enabled.
 
-For convenience, llama.cpp is statically linked. You use the aarch64 GCC cross compile toolchain, *aarch64-none-linux-gnu-*, to build the project. To support SME2, GCC compiler version 14.2 and onwards is required.
+For convenience, llama.cpp is statically linked. You use the aarch64 GCC cross compile toolchain, `aarch64-none-linux-gnu-`, to build the project. To support SME2, GCC compiler version 14.2 or later is required.
 
 The build uses the Linux-hosted Arm GNU Toolchain. If you are working on macOS or Windows, run these commands in a Linux environment (for example, a Linux VM, container, or a Linux development machine).
 
@@ -36,7 +38,7 @@ tar -xf "${TOOLCHAIN_TAR}"
 export PATH="$PWD/${TOOLCHAIN_TAR%.tar.xz}/bin:$PATH"
 ```
 
-Verify the installation was successful by printing the toolchain version:
+Confirm the installation succeeded by printing the compiler version:
 
 ```bash
 aarch64-none-linux-gnu-gcc --version
@@ -44,25 +46,25 @@ aarch64-none-linux-gnu-gcc --version
 
 ## Clone the llama.cpp repository
 
-The llama.cpp with tag b7610 is used in this tutorial. Newer versions should also work, but they are not tested.
+This Learning Path uses llama.cpp tag b7610. Newer versions should also work but are not tested.
 
-Next, download the llama.cpp source code and check out the tag used in this tutorial:
+Download the llama.cpp source code and check out that tag:
 
 ```bash
 cd $HOME
 git clone --depth 1 --branch b7610 https://github.com/ggml-org/llama.cpp.git
 ```
 
-Create a new directory *build* under the llama.cpp root directory and change to the new directory:
+Create a new `build` directory under the llama.cpp root directory and change to it:
 
 ```bash
 cd $HOME/llama.cpp
 mkdir build && cd build
 ```
 
-## Compile the binary 
+## Compile llama-cli for Android
 
-Next, configure the project using the following command:
+Configure the project. The key flags enable KleidiAI support (`-DGGML_CPU_KLEIDIAI=ON`) and SME2 instructions (`-march=...+sme2`), produce a statically linked binary (`-static`) that runs across Android and Linux environments, and include debug symbols (`-g`) for profiling:
 
 ```bash
 cmake .. \
@@ -91,16 +93,22 @@ Set `CMAKE_C_COMPILER` and `CMAKE_CXX_COMPILER` to your cross compiler path if i
 
 The `-static` and `-g` options are specified to produce a statically linked executable, in order to run on different Arm64 Linux/Android environments and include debug information.
 
-Next, build the project,
+Build the project:
 
 ```bash
 cd $HOME/llama.cpp/build
 cmake --build ./ --config Release -j $(nproc)
 ```
-After the building process completes, verify that *llama-cli* exists in the binary directory:
+After the build completes, confirm that `llama-cli` exists in the binary directory:
 
 ```bash 
 ls -la $HOME/llama.cpp/build/bin | grep llama-cli
 ```
 
-Now that you have a `llama-cli` build with KleidiAI enabled, move on to the next section to run the model on your SME2 device and observe the performance impact when you enable the microkernels.
+## What you've accomplished and what's next
+
+In this section:
+- You installed the Arm GNU Toolchain (GCC 14.2) and configured it for aarch64 cross-compilation
+- You built a statically linked `llama-cli` binary with KleidiAI and SME2 enabled, ready to run on your Android target
+
+In the next section, you'll transfer the binary and model to the device and compare inference performance with SME2 on and off.
