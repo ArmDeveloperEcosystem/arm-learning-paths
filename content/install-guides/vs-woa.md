@@ -41,7 +41,7 @@ Once downloaded, run the `VisualStudioSetup.exe` file on a Windows on Arm machin
 ## How do I install C and C++ support in Visual Studio?
 During the installation process, you will be asked to choose the workloads you want and customize your installation. At a minimum, select `Desktop development with C++`.
 
-![img1 #center](/install-guides/_images/vs-woa.webp)
+![Visual Studio Installer Workloads tab with the Desktop development with C++ workload selected. #center](/install-guides/_images/vs-woa.webp)
 
 ## How do I install LLVM support in Visual Studio? {#install-llvm-support-in-visual-studio}
 
@@ -51,7 +51,7 @@ In the installer, select the `Individual components` tab. Enter `clang` in the s
 
 Two results are displayed: The LLVM compiler and MSBuild support for LLVM. Select both these options:
 
-![img2 #center](/install-guides/_images/llvm_vs.webp)
+![Visual Studio Installer Individual components tab with clang search showing C++ Clang Compiler for Windows and MSBuild support for LLVM (clang-cl) toolset both selected. #center](/install-guides/_images/llvm_vs.webp)
 
 {{% notice  Note%}}
 Different versions of Visual Studio include different LLVM toolchain versions.
