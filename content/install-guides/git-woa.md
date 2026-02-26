@@ -1,9 +1,6 @@
 ---
-### Title the install tools article with the name of the tool to be installed
-### Include vendor name where appropriate
 title: Git for Windows on Arm
 
-### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
 - git
 - windows
@@ -11,7 +8,6 @@ additional_search_terms:
 - windows on arm
 - open source windows on arm
 
-### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 10
 
 ### Link to official documentation
@@ -40,7 +36,7 @@ Use a browser to download the desired release file. The Git releases for Windows
 You can also download from a Windows PowerShell with the following command:
 
 ```command
-curl https://github.com/git-for-windows/git/releases/download/v2.47.1.windows.1/Git-2.47.1-arm64.exe -o Git-2.47.1-arm64.exe
+curl https://github.com/git-for-windows/git/releases/download/v2.53.0.windows.1/Git-2.53.0-arm64.exe -o Git-2.53.0-arm64.exe
 ```
 
 Once you have downloaded Git, run the installer `.exe` file on a Windows on Arm machine. 
