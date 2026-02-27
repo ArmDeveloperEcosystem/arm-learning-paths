@@ -19,28 +19,55 @@ You can choose a variety of hardware, including:
 The nice thing about ONNX is that the **same model file** can run across all of these, so your setup is flexible.
 
 ## Install Python
-Depending on the hardware you use you follow different installation paths
 
-1. Linux (Arm64). In the console type:
+{{% notice Note %}}
+ONNX Runtime provides prebuilt wheels only for specific Python versions. At the time of writing, Python 3.12 is not yet supported by ONNX Runtime on macOS or Arm platforms. If you see an error like:
+
+```output
+ERROR: No matching distribution found for onnxruntime
+```
+
+it usually means your Python version is too new. Python 3.10 is tested and recommended for this Learning Path.
+{{% /notice %}}
+
+Depending on the hardware you use, follow different installation paths:
+
+1. Linux (Arm64). Install Python 3.10 by typing in the console:
 ```console
 sudo apt update
-sudo apt install -y python3 python3-venv python3-pip build-essential libopenblas-dev libgl1 libglib2.0-0
+sudo apt install -y python3.10 python3.10-venv python3.10-dev python3-pip build-essential libopenblas-dev libgl1 libglib2.0-0
 ```
 
-2. macOS (Apple Sillicon):
+If Python 3.10 is not available in your default repositories, you can use the deadsnakes PPA:
 ```console
-brew install python
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt update
+sudo apt install -y python3.10 python3.10-venv python3.10-dev
 ```
+
+2. macOS (Apple Silicon). Install Python 3.10 using Homebrew:
+```console
+brew install python@3.10
+```
+
+After installation, use `python3.10` explicitly when creating virtual environments.
 
 3. Windows on Arm:
-* Install Python 3.10+ from python.org (Arm64 build).
+* Download and install Python 3.10 from [python.org](https://www.python.org/downloads/) (select the Arm64 build).
 * Ensure pip is on PATH.
 
-After installing Python, open a terminal or console, create a clean virtual environment, and update pip and wheel:
+After installing Python 3.10, open a terminal or console, create a clean virtual environment using Python 3.10 explicitly, and update pip and wheel:
 
 ```console
-python3 -m venv .venv
-source .venv/bin/activate                   # on Windows use: .venv\Scripts\activate
+python3.10 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip wheel
+```
+
+On macOS, if `python3.10` is not found, use the full Homebrew path:
+```console
+/opt/homebrew/bin/python3.10 -m venv .venv
+source .venv/bin/activate
 python -m pip install --upgrade pip wheel
 ```
 
