@@ -58,7 +58,7 @@ BENCHMARK(baseDiv)->Arg(1500)->Unit(benchmark::kMicrosecond); // value of 1500 i
 BENCHMARK_MAIN();
 ```
 
-## Compile and run the baseline benchmark with MSVC
+## Compile the baseline benchmark with MSVC
 
 Open an **ARM64 Native Tools Command Prompt** from the Windows Start menu and start PowerShell:
 
@@ -107,6 +107,6 @@ baseDiv/1500       7.90 us         7.90 us        88512
 
 The warning appears because the Google Benchmark library was built in debug mode, but it doesn't affect the validity of the measurements for this example.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
 You've set up Google Benchmark on Windows on Arm, created a division-heavy benchmark, and established a baseline performance measurement of 7.90 microseconds. This baseline gives you a clear reference point to measure the impact of Profile-Guided Optimization. In the next section, you'll apply PGO to this code and measure the performance improvement.

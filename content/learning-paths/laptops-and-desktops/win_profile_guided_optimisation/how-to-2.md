@@ -34,7 +34,7 @@ BENCHMARK(BM_StringCreation);
 BENCHMARK_MAIN();
 ```
 
-## Control benchmarks with Google Benchmark filters
+## Control benchmark execution
 
 Google Benchmark provides tools to ensure accurate measurements by preventing unintended compiler optimizations and allowing flexible benchmark selection.
 
@@ -48,6 +48,6 @@ When you have multiple benchmarks, you can run a specific subset using the `--be
 
 Filtering eliminates the need to repeatedly comment out lines of source code when you want to focus on specific benchmarks.
 
-## What you've learned
+## What you've accomplished and what's next
 
 You now understand how to write basic benchmarks with Google Benchmark, use `benchmark::DoNotOptimize` to prevent unwanted compiler optimizations, and filter benchmark execution with command-line options. In the next section, you'll install Google Benchmark and create a baseline benchmark to measure division performance on Windows on Arm.

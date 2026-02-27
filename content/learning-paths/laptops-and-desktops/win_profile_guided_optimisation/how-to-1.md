@@ -40,6 +40,6 @@ Additionally, the process requires extra build steps, which can increase compile
 
 PGO might not be ideal for early-stage development or applications with highly variable or unpredictable usage patterns.
 
-## What you've learned and what's next
+## What you've accomplished and what's next
 
 You now understand what PGO is, how it improves performance through code layout and inlining optimizations, and when to apply it. In the next section, you'll learn about Google Benchmark, the tool you'll use to measure these performance improvements.
