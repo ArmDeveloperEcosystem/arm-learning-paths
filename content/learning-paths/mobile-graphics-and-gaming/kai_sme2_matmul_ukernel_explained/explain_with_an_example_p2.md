@@ -1,16 +1,17 @@
 ---
-title: Explain the SME2 matmul microkernel with an example - Part 2
-weight: 6
+title: Quantize and pack LHS activations
+weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Explain the SME2 matmul microkernel with an example - Part 2
+## Quantize and pack LHS activations
 Next, the FP32 LHS (activation) needs to be quantized and packed when the llama.cpp graph runner computes the matmul nodes/operators. 
 
-### Quantization and Packing of the LHS
-Since the LHS (activation) keep changing, we need to dynamically quantize the original FP32 matrix and pack it into the qsi8d32p1vlx4 format. This can be achieved using the *kai_run_lhs_quant_pack_qsi8d32p_f32_neon* microkernel.
+### Quantize and pack the LHS
+
+Because the LHS (activations) changes for each matmul invocation, it must be quantized and packed dynamically. In this example, the FP32 LHS is quantized to signed INT8 and packed into the `qsi8d32p1vlx4` format using the *kai_run_lhs_quant_pack_qsi8d32p_f32_neon* microkernel.
 
 The function call stack for this process in llama.cpp is as follows:
 ```text
@@ -27,8 +28,23 @@ llama_context::decode
 							    ggml::cpu::kleidiai::tensor_traits::compute_forward_q4_0
 								    kai_run_lhs_quant_pack_qsi8d32p_f32_neon
 ```
-The diagram below illustrates how the RHS is quantized and packed by *kai_run_lhs_quant_pack_qsi8d32p_f32_neon*,
+The diagram below illustrates how the LHS is quantized and packed by *kai_run_lhs_quant_pack_qsi8d32p_f32_neon*:
 ![Figure showing Quantization and Packing of the LHS alt-text#center](images/kai_run_lhs_quant_pack_qsi8d32p_f32_neon_for_sme2.jpg "Quantization and Packing of the LHS")
 
 The values of mr, nr, and kr can be obtained in the same way as described above.
-The mr, nr, and kr together with the matrix dimensions m and k are passed as parameters to *kai_run_lhs_quant_pack_qsi8d32p_f32_neon*. This function quantizes the FP32 LHS to signed INT8 type and packed the quantized data and quantization scales as shown in the diagram above. It divides the m x n matrix into submatrices of size mr x kr (it is 16 x 4) as shown in blocks outlined by dashed lines in the upper matrix of the diagram, and then sequentially packs the rows within each submatrix. This allows the SME2 matmul kernel to load an entire submatrix into an SME2 Z register from contiguous memory, thus reducing cache misses by avoiding loading the submatrix across multiple rows.
+The values of `mr`, `nr`, and `kr`, together with the matrix dimensions `m` and `k`, are passed as parameters to *kai_run_lhs_quant_pack_qsi8d32p_f32_neon*.
+
+This microkernel:
+- Quantizes FP32 LHS values to signed INT8
+- Stores the per-block scales
+- Packs the quantized values into a contiguous layout based on `mr × kr` tiles (16 × 4 in this example)
+
+This packing ensures the SME2 matmul microkernel can load a full input slice from contiguous memory, which improves cache locality.
+
+### Hands-on: locate the LHS quant-pack microkernel in KleidiAI (optional)
+
+If you cloned the KleidiAI repository earlier, locate the LHS quantization + packing microkernel:
+
+```bash
+grep -R "kai_run_lhs_quant_pack_qsi8d32p_f32_neon" -n kai | head
+```

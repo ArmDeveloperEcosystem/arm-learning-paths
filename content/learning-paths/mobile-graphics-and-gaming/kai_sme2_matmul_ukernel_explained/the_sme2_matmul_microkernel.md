@@ -1,31 +1,62 @@
 ---
-title: What is the sme2 lvlx4vl microkernel?
-weight: 4
+title: Decode the SME2 matmul microkernel
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## What is the sme2 lvlx4vl microkernel?
-We use a KleidiAI microkernel, *kai_matmul_clamp_f32_qsi8d32p1vlx4_qsi4c32p4vlx4_1vlx4vl_sme2_mopa*, to explain KleidiAI SME2 microkernels in detail. It is referred as ‘the SME2 matmul microkernel’ in this learning path onwards, unless otherwise noted.
+## Decode the SME2 matmul microkernel
 
-“_1vlx4vl” in the name indicates that, in a single inner loop iteration, it computes an intermediate result for a 1VL x 4VL submatrix (one SME2 Streaming Vector Length x four SME2 Streaming Vector Length) of the ouput matrix. Assuming the SME2 SVL is 512 bits, it is a 16 x 64 (512/sizeof(FP32)) x (4 x 512/sizeof(FP32)) submatrix. 
+This Learning Path uses one concrete KleidiAI microkernel to explain SME2 matmul microkernels in detail:
 
-To improve performance, we can pipeline four MOPA instructions and fully utilize four ZA tiles in ZA storage, each MOPA instruction uses one ZA tile. 
-The video below demonstrates how the four MOPA instructions are used to perfrom matrix multiplication of one 16x4 submatrix (1VL) from matrix A and four 4x16 submatrices from matrix B (4VL) in a single iteration.
+*kai_matmul_clamp_f32_qsi8d32p1vlx4_qsi4c32p4vlx4_1vlx4vl_sme2_mopa*
+
+In the rest of this Learning Path, this is referred to as *the SME2 matmul microkernel* (unless noted otherwise).
+
+### Decode `1vlx4vl`
+
+`_1vlx4vl` indicates that, in a single inner-loop iteration, the kernel computes an intermediate result for a 1VL × 4VL submatrix (one SME2 streaming vector length × four SME2 streaming vector lengths) of the output matrix.
+
+If you assume an SME2 SVL of 512 bits, the FP32 shape is 16 × 64:
+- 1VL rows: `512 / 8 / 4 = 16` FP32 elements
+- 4VL columns: `4 × 16 = 64` FP32 elements
+
+### See the pipelined MOPA pattern
+
+To improve throughput, the kernel pipelines four MOPA instructions so it can accumulate into four ZA tiles in parallel (one ZA tile per MOPA).
+
+The same pattern applies here as shown by the video in the [SME2 INT8 MOPA section](/learning-paths/mobile-graphics-and-gaming/kai_sme2_matmul_ukernel_explained/sme2_mpoa_matmul/). 
+
 ![Figure showing Matrix Multiplication with 1VLx4VL SME2 MOPA alt-text#center](videos/1vlx4vl_sme2_mopa.gif "Matrix Multiplication with 1VLx4VL SME2 MOPA")
+
+The animation demonstrates how four pipelined MOPA instructions multiply one 16×4 submatrix (1VL) from matrix A by four 4×16 submatrices (4VL) from matrix B in a single iteration.
+
 The intermediate result of 4x16x16 output submatrix is held in four ZA.S tiles.
 
-“qsi8d32p1vlx4” in the name indicates that it expects the LHS with a layout of [M, K] to be symmetrically quantized into signed INT8 type within blocks of 32 elements. 
-The entire quantized LHS is then divided into submatrices of size 1VL × 4 (since the SME2 SVL is set as 512 bits, it is 16 × 4). Then, each submatrix is packed row-wise into a contiguous memory layout, all the submatrices are packed in this way one after another. So that when using the packed LHS in the SME2 matmul microkernel, memory accesses are to contiguous addresses, improving cache locality.
+### Decode the input formats
 
-“qsi4c32p4vlx4” in its name indicates that the SME2 matmul microkernel expects the RHS with a layout of [N, K] to be symmetrically quantized into signed INT4 type within blocks of 32 elements.
-The entire quantized RHS is then divided into submatrices of size 4VL × 4 (since the SME2 SVL is set as 512 bits, it is 4x16× 4). Each submatrix is packed row-wise into a contiguous memory layout. Since the quantization type is INT4, each byte contains two INT4 elements. In the SME2 matmul microkernel, the SME2 LUTI instructions efficiently dequantize INT4 elements into INT8 type, thereby enabling fast matrix multiplication with SME2 INT8 MOPA instructions.
+The table below decodes the input and output format tags in the microkernel name.
 
-“_f32_” in its name indicates that the SME2 matmul microkernel outputs FP32 result matrix. The INT32 result produced by SME2 INT8 MOPA instructions has to be dequantized back to FP32 type.
+| Format tag | Meaning | Why it matters |
+| --- | --- | --- |
+| `qsi8d32p1vlx4` | LHS layout is [M, K], symmetrically quantized to signed INT8 in blocks of 32; packed into 1VL × 4 submatrices (16 × 4 for a 512-bit SVL). | Row-wise packing makes LHS loads contiguous, which improves cache locality. |
+| `qsi4c32p4vlx4` | RHS layout is [N, K], symmetrically quantized to signed INT4 in blocks of 32; packed into 4VL × 4 submatrices (4 × 16 × 4 for a 512-bit SVL). | INT4 packs two values per byte, and SME2 LUTI expands them to INT8 for MOPA. |
+| `_f32_` | Output matrix is FP32; the INT32 accumulation from MOPA is dequantized to FP32. | Preserves FP32 results while using INT8/INT4 arithmetic in the inner loop. |
 
-Sometimes, the original LHS or RHS may not conform to the quantization and packing format requirement of the SME2 matmul microkernel. The software needs to quantize and pack the LHS and RHS appropriately first.
+Sometimes, the original LHS or RHS doesn’t match the quantization and packing requirements of the SME2 matmul microkernel. In that case, your software needs to quantize and pack the LHS and RHS first.
 
-Next, we will take llama.cpp and the Llama-3.2-3B-Q4_0.gguf model for example to demonstrate,
-- how to quantize and pack the LHS and RHS 
-- perform matrix multiplication using the SME2 matmul microkernel
+### Hands-on: compute the FP32 tile shape for your assumed SVL (optional)
+
+If you want to sanity-check the `1VL` size used in the diagrams, calculate how many FP32 values fit in one SVL.
+
+For an assumed 512-bit SVL:
+
+```bash
+SVL_BITS=512
+FP32_PER_VL=$((SVL_BITS / 8 / 4))
+echo "FP32 per VL: ${FP32_PER_VL}"
+echo "1VLx4VL tile: ${FP32_PER_VL}x$((4 * FP32_PER_VL))"
+```
+
+If your target device uses a different SVL, the same formulas still apply.
