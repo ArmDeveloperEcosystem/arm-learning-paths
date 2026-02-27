@@ -43,7 +43,7 @@ further_reading:
         link: https://learn.microsoft.com/en-us/windows/arm/overview
         type: documentation
     - resource:
-        title: Arm Performance optimization resources
+        title: Arm performance optimization resources
         link: https://learn.arm.com/learning-paths/laptops-and-desktops/
         type: website
 

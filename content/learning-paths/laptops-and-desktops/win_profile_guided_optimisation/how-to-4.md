@@ -8,7 +8,7 @@ layout: learningpathall
 
 Now that you have a baseline benchmark, you're ready to apply Profile-Guided Optimization. The PGO process involves three steps: build an instrumented binary, run it to collect profile data, and rebuild with optimizations based on that data.
 
-## Build the instrumented binary
+## Build instrumented binary with MSVC
 
 Open an **ARM64 Native Tools Command Prompt** from the Windows Start menu and start PowerShell if it's not already open. If you're starting a new session, navigate to your project directory and set the `$VCPKG` environment variable again:
 

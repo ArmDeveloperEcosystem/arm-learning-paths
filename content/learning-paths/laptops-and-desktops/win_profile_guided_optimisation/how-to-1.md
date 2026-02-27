@@ -14,7 +14,7 @@ First, you compile your program to produce an instrumented binary that collects 
 
 This approach identifies frequently executed paths (known as "hot" paths) and optimizes them more aggressively, while reducing emphasis on less critical code paths.
 
-## How does PGO improve performance?
+## How PGO improves performance on Windows on Arm
 
 PGO enables several compiler optimizations that aren't possible with static analysis alone.
 
@@ -24,7 +24,7 @@ For C++ virtual functions, PGO can identify the most common call targets and opt
 
 If your application has an error handling path that rarely executes, PGO ensures the compiler doesn't optimize for that path at the expense of your main execution flow. Performance improvements typically range from 5-15%, though results vary by workload and architecture.
 
-## When should you use Profile-Guided Optimization?
+## When to use PGO on Arm
 
 You'll find PGO particularly beneficial in the later stages of development when real-world workloads are available. It's especially useful for applications where performance is critical and runtime behavior is complex or data-dependent.
 
