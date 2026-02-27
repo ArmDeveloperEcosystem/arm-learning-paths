@@ -136,14 +136,22 @@ You can see an example PR at [github.com/JoeStech/docker-blog-arm-migration/pull
 After migration, you should see:
 
 **Dockerfile updates**:
-- Replaced `centos:6` with `ubuntu:22.04`.
-- Added `TARGETARCH` for multi-architecture builds.
-- Changed `-mavx2` to `-march=armv8-a+simd` for Arm builds.
+- Replaced `centos:6` with `ubuntu:22.04`
+- Added `TARGETARCH` for multi-architecture builds
+- Changed `-mavx2` to `-march=armv8-a+simd` for Arm builds
 
 **Source code updates**:
-- Added `#ifdef __aarch64__` architecture guards.
-- Replaced all `_mm256_*` AVX2 intrinsics with NEON equivalents (`vld1q_f64`, `vaddq_f64`, `vmulq_f64`).
-- Adjusted loop strides from 4 (AVX2) to 2 (NEON).
-- Rewrote horizontal reduction using NEON pair-wise addition.
+- Added `#ifdef __aarch64__` architecture guards
+- Replaced all `_mm256_*` AVX2 intrinsics with NEON equivalents (`vld1q_f64`, `vaddq_f64`, `vmulq_f64`)
+- Adjusted loop strides from 4 (AVX2) to 2 (NEON)
+- Rewrote horizontal reduction using NEON pair-wise addition
 
-In the next section, you will build, test, and validate the migrated application on Arm.
+## What you've accomplished and what's next
+
+You have:
+- Provided migration instructions to GitHub Copilot
+- Observed the AI-driven workflow using MCP server tools
+- Reviewed the automated changes: container image updates, intrinsic mapping, and compiler flag adjustments
+- Seen how the GitHub MCP Server creates a pull request with all migration changes
+
+Next, you'll build and validate the migrated application on Arm64 hardware.

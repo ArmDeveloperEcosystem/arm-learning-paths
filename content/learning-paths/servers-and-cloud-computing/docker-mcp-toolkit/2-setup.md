@@ -90,6 +90,12 @@ If the setup is correct, Copilot will list tools from:
 
 This confirms that tool invocation through the MCP Gateway is working.
 
-Your environment is now ready for AI-assisted migration.
+## What you've accomplished and what's next
 
-In the next section, you will examine the demo application and identify the architecture-specific elements that require adaptation for Arm64.
+You have:
+- Enabled the Docker MCP Toolkit in Docker Desktop
+- Configured three MCP servers: Arm MCP Server, GitHub MCP Server, and Sequential Thinking MCP Server
+- Connected VS Code with GitHub Copilot to the MCP Gateway
+- Verified that Copilot can access migration tools
+
+Next, you'll examine the demo application to identify x86-specific code that needs adaptation for Arm64.
