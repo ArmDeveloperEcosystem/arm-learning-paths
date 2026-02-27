@@ -66,10 +66,10 @@ This produces a multi-architecture manifest that allows Docker to automatically 
 
 AI-assisted workflows streamline repetitive discovery and mapping tasks, particularly when architecture-specific intrinsics are involved.
 
-| Approach | Time |
-|----------|------|
-| Manual migration (install tools, research intrinsics, rewrite code, debug, document) | Several hours, depending on complexity |
-| Docker MCP Toolkit + GitHub Copilot (prompt, review, merge) | Significantly reduced manual effort |
+| Approach | Effort |
+|----------|--------|
+| Manual migration (install tools, research intrinsics, rewrite code, debug, document) | Several hours to days, depending on complexity |
+| Docker MCP Toolkit + GitHub Copilot (prompt, review, merge) | Reduced to minutes for initial migration, plus review time |
 
 Actual time savings depend on codebase size and complexity, but structured tool invocation reduces the need for manual documentation lookup and repetitive edits.
 

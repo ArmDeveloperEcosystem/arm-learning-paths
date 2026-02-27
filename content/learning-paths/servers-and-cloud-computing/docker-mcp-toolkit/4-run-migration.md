@@ -15,7 +15,7 @@ cd docker-blog-arm-migration
 code .
 ```
 
-Make sure the MCP_DOCKER server is running in VS Code ( Use **Extensions** > **MCP_DOCKER** > **Start Server** if needed).
+Make sure the MCP_DOCKER server is running in VS Code (use **Extensions** > **MCP_DOCKER** > **Start Server** if needed).
 
 This allows GitHub Copilot to invoke the configured MCP servers through the MCP Gateway.
 

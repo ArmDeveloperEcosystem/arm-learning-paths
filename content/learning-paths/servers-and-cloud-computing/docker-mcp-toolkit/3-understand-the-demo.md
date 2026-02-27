@@ -77,15 +77,15 @@ To run this code on Arm, several adjustments are required:
 
 2. **Intrinsic mapping**: Each AVX2 intrinsic must be mapped to an Arm equivalent.
    For example:
-   - `_mm256_setzero_pd()` creates a 256-bit zero vector of four doubles(Arm NEON is 128-bit).
+   - `_mm256_setzero_pd()` creates a 256-bit zero vector of four doubles. Arm NEON uses 128-bit registers.
    - `_mm256_loadu_pd()` loads 4 doubles at once (NEON loads 2 with `vld1q_f64`).
    - `_mm256_add_pd()` and `_mm256_mul_pd()` are 256-bit operations (NEON uses 128-bit equivalents).
    - `_mm256_extractf128_pd()` extracts the high 128 bits (not needed on NEON).
 
-4. **Vector width differences**: AVX2 operates on 256-bit registers (four double-precision values). NEON operates on 128-bit registers (two double-precision values). This affects:
-  - Loop stride
-  - Accumulation logic
-  - Horizontal reduction patterns
+3. **Vector width differences**: AVX2 operates on 256-bit registers (four double-precision values). NEON operates on 128-bit registers (two double-precision values). This affects:
+   - Loop stride
+   - Accumulation logic
+   - Horizontal reduction patterns
 
 4. **Horizontal reduction logic**: The AVX2 pattern:
 
@@ -99,5 +99,4 @@ is specific to x86 register structure. On Arm, reduction is implemented using NE
 On newer Arm platforms supporting SVE or SVE2 (for example Neoverse V1/V2 based platforms), wider vector lengths may be available. SVE uses a vector-length-agnostic (VLA) model, which differs from fixed-width AVX2 and NEON programming. The Arm MCP Server knowledge base can help determine the appropriate approach for your target platform.
 {{% /notice %}}
 
-In the next section, you will use GitHub Copilot together with the Docker MCP Toolkit to analyze these elements automatically and generate Arm-compatible updates.
 In the next section, you will use GitHub Copilot with the Docker MCP Toolkit to automate the entire migration.

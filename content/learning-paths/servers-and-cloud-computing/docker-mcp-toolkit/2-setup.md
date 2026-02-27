@@ -12,7 +12,7 @@ Make sure the following tools are installed:
 
 - Docker Desktop 4.59 or later.
 - VS Code with the GitHub Copilot extension.
-- A GitHub account with a Personal Access Token(PAT) that allows repository access.
+- A GitHub account with a Personal Access Token (PAT) that allows repository access.
 - A machine with at least 8 GB RAM (16 GB recommended).
 
 You will use Docker Desktop to host MCP servers locally, and VS Code with GitHub Copilot to invoke those servers through the MCP Gateway.

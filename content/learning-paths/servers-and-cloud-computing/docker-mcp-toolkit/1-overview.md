@@ -28,8 +28,8 @@ When architecture-specific optimizations are present, migration may involve:
 - Identifying x86-specific intrinsics or assembly
 - Updating compiler flags and build configurations
 - Mapping AVX2 operations to appropriate NEON equivalents
-- Rewriting vectorized code and adjusting loop structures.
-- Updating Dockerfiles, base images, and compiler flags.
+- Rewriting vectorized code and adjusting loop structures
+- Updating Dockerfiles, base images, and compiler flags
 - Validating correctness and performance on Arm systems
 
 These steps are well understood, but they can require careful review across code, build scripts, and container configurations.
