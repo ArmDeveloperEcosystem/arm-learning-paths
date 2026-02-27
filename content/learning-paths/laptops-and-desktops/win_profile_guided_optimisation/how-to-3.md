@@ -6,17 +6,21 @@ weight: 4
 layout: learningpathall
 ---
 
-In this section, you'll create a baseline benchmark to measure the performance of a division operation. This baseline will help you see the improvement when you apply Profile-Guided Optimization in the next section. This example demonstrates how even seemingly straightforward operations can benefit from optimization techniques.
+## Overview
+
+In this section, you'll create a baseline benchmark to measure the performance of a division operation. This baseline allows you to measure the improvement when you apply profile-guided optimization in the next section.
 
 Integer division is ideal for benchmarking because it's significantly more expensive than operations like addition, subtraction, or multiplication. On most CPU architectures, including Arm, division instructions have higher latency and lower throughput compared to other arithmetic operations. By applying Profile-Guided Optimization to code containing division operations, you can achieve significant performance improvements.
 
 For this example, you'll use an Arm computer running Windows.
 
-## Install the required tools
+## Set up Google Benchmark on Windows on Arm
+
+Before you can run benchmarks, you need to install vcpkg (a C++ package manager) and Google Benchmark. This is a one-time setup step.
 
 ### Install vcpkg and Google Benchmark
 
-Run the following commands in PowerShell:
+The following commands download and initialize vcpkg, create a project directory, and install Google Benchmark for Windows on Arm:
 
 ```console
 iex (iwr -useb https://aka.ms/vcpkg-init.ps1)
@@ -54,7 +58,7 @@ BENCHMARK(baseDiv)->Arg(1500)->Unit(benchmark::kMicrosecond); // value of 1500 i
 BENCHMARK_MAIN();
 ```
 
-## Compile and run the baseline benchmark
+## Compile the baseline benchmark with MSVC
 
 Open an **ARM64 Native Tools Command Prompt** from the Windows Start menu and start PowerShell:
 
@@ -62,19 +66,21 @@ Open an **ARM64 Native Tools Command Prompt** from the Windows Start menu and st
 powershell
 ```
 
-Before compiling, set an environment variable to refer to the vcpkg installation directory:
+Set an environment variable to refer to the vcpkg-installed package directory for the ARM64 Windows target. This simplifies the compiler commands that follow:
 
 ```console
 $VCPKG="$HOME\pgo-benchmark\vcpkg_installed\arm64-windows"
 ```
 
-Now compile the benchmark. This command uses the MSVC compiler and links with the Google Benchmark libraries:
+Compile the benchmark. This command uses the MSVC compiler and links with the Google Benchmark libraries:
 
 ```console
 cl /I"$VCPKG\include" /D BENCHMARK_STATIC_DEFINE div_bench.cpp /link /LIBPATH:"$VCPKG\lib" benchmark.lib benchmark_main.lib shlwapi.lib
 ```
 
-Run the program to establish your baseline performance:
+## Run the benchmark
+
+Add the vcpkg binary directory to your PATH so the program can find required DLLs, then run the benchmark:
 
 ```console
 $env:PATH += ";$HOME\pgo-benchmark\vcpkg_installed\arm64-windows\bin"
@@ -84,7 +90,7 @@ $env:PATH += ";$HOME\pgo-benchmark\vcpkg_installed\arm64-windows\bin"
 The output is similar to:
 
 ```output
-Running ./div_bench.base
+Running ./div_bench.exe
 Run on (4 X 2100 MHz CPU s)
 CPU Caches:
   L1 Data 64 KiB (x4)
@@ -99,4 +105,8 @@ Benchmark             Time             CPU   Iterations
 baseDiv/1500       7.90 us         7.90 us        88512
 ```
 
-The baseline shows an average execution time of 7.90 microseconds. This gives you a clear starting point to measure improvement. Now that you have this baseline measurement, you're ready to apply Profile-Guided Optimization. In the next section, you'll use PGO to optimize this code and see how much faster it can run.
+The warning appears because the Google Benchmark library was built in debug mode, but it doesn't affect the validity of the measurements for this example.
+
+## What you've accomplished and what's next
+
+You've set up Google Benchmark on Windows on Arm, created a division-heavy benchmark, and established a baseline performance measurement of 7.90 microseconds. This baseline gives you a clear reference point to measure the impact of Profile-Guided Optimization. In the next section, you'll apply PGO to this code and measure the performance improvement.
