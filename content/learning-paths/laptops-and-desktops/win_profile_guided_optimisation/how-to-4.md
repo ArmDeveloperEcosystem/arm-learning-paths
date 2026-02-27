@@ -6,11 +6,19 @@ weight: 5
 layout: learningpathall
 ---
 
+## Overview
+
 Now that you have a baseline benchmark, you're ready to apply Profile-Guided Optimization. The PGO process involves three steps: build an instrumented binary, run it to collect profile data, and rebuild with optimizations based on that data.
 
-## Build the instrumented binary
+## Build instrumented binary with MSVC
 
-You should already have an ARM64 Native Tools Command Prompt open with PowerShell running from the previous section.
+Open an **ARM64 Native Tools Command Prompt** from the Windows Start menu and start PowerShell if it's not already open. If you're starting a new session, navigate to your project directory and set the `$VCPKG` environment variable again:
+
+```console
+powershell
+cd $HOME\pgo-benchmark
+$VCPKG="$HOME\pgo-benchmark\vcpkg_installed\arm64-windows"
+```
 
 Build the instrumented binary with the `/GENPROFILE` flag. This creates a version of your program that records how it executes:
 
@@ -20,7 +28,7 @@ cl /O2 /GL /D BENCHMARK_STATIC_DEFINE /I "$VCPKG\include" /Fe:div_bench.exe div_
 
 This command uses several important compiler and linker options. The `/O2` flag creates fast code, while `/GL` enables whole program optimization. The `/GENPROFILE` linker option generates a `.pgd` file for PGO, and `/LTCG` specifies link time code generation. The `/PGD` option specifies the database file where profile data will be stored.
 
-## Collect profile data
+## Collect PGO profile data on Windows on Arm
 
 Run the instrumented binary to generate profile data:
 
@@ -30,7 +38,7 @@ Run the instrumented binary to generate profile data:
 
 This execution creates profile data files (typically with a `.pgc` extension) in the same directory. The profile data captures information about which code paths execute most frequently and how the program behaves at runtime.
 
-## Rebuild with optimizations
+## Rebuild with PGO optimizations
 
 Now recompile the program using the `/USEPROFILE` flag to apply optimizations based on the collected data:
 
@@ -40,7 +48,7 @@ cl /O2 /GL /D BENCHMARK_STATIC_DEFINE /I "$VCPKG\include" /Fe:div_bench_opt.exe 
 
 The `/USEPROFILE` linker option instructs the linker to enable PGO with the profile generated during the previous run. The compiler can now make informed decisions about code layout, inlining, and other optimizations based on actual runtime behavior.
 
-## Measure the improvement
+## Measure PGO performance gains
 
 Run the optimized binary to see the performance improvement:
 
@@ -66,6 +74,12 @@ Benchmark             Time             CPU   Iterations
 baseDiv/1500       2.86 us         2.86 us       244429
 ```
 
-The average execution time is reduced from 7.90 to 2.86 microseconds, which is a 64% improvement. This significant gain occurs because the profile data informed the compiler that the input divisor was consistently 1500 during the profiled runs, allowing it to apply specific optimizations that wouldn't be possible with static analysis alone.
+The warning appears because the Google Benchmark library was built in debug mode, but it doesn't affect the validity of the measurements.
 
-You've successfully used Profile-Guided Optimization to improve performance on Windows on Arm. This same technique can be applied to your own performance-critical code to achieve similar improvements.
+The average execution time is reduced from 7.90 to 2.86 microseconds, which is a 64% improvement. This result was measured on a Windows on Arm device with Visual Studio 2022 (MSVC 17.0) using the division benchmark with a constant divisor of 1500. Your results may vary depending on your specific hardware and workload.
+
+The compiler used the profile data to determine that the divisor was consistently 1500, enabling optimizations that wouldn't be possible with static analysis alone.
+
+## What you've accomplished
+
+You've applied PGO to reduce execution time by 64% on a division-heavy benchmark. You completed the full PGO workflow: instrument, profile, and optimize. Apply this same technique to performance-critical sections of your own code to achieve similar gains on Windows on Arm.

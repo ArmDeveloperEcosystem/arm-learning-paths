@@ -1,22 +1,18 @@
 ---
 title: Optimize C++ applications on Windows on Arm using Profile-Guided Optimization
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for software developers who want to optimize C++ application performance on Windows on Arm using profile-guided optimization.
+who_is_this_for: This is an introductory topic for software developers who want to optimize C++ application performance on Windows on Arm using Profile-Guided Optimization (PGO).
 
 learning_objectives: 
-    - Microbenchmark a function using Google Benchmark.
-    - Apply profile-guided optimization to build performance-tuned binaries for Windows on Arm.
-    - Measure and compare performance improvements from PGO-optimized builds.
+    - Microbenchmark a function using Google Benchmark
+    - Apply profile-guided optimization to build performance-tuned binaries for Windows on Arm
+    - Measure and compare performance improvements from PGO-optimized builds
 
 prerequisites:
-    - Basic C++ understanding.
-    - A Windows on Arm machine with [Visual Studio](/install-guides/vs-woa/) and the C++ desktop development tools installed.
+    - Familiarity with C++ development and compiling programs from the command line
+    - A Windows on Arm machine with [Visual Studio](/install-guides/vs-woa/) and the C++ desktop development tools installed
 
 author: Tom Dunkle
 
@@ -47,7 +43,7 @@ further_reading:
         link: https://learn.microsoft.com/en-us/windows/arm/overview
         type: documentation
     - resource:
-        title: Arm Performance optimization resources
+        title: Arm performance optimization resources
         link: https://learn.arm.com/learning-paths/laptops-and-desktops/
         type: website
 
