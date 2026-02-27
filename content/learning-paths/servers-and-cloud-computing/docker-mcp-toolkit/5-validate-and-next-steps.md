@@ -1,5 +1,5 @@
 ---
-title: Validate the migration and explore further
+title: Validate the Arm64 migration and test containers
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -66,10 +66,10 @@ This produces a multi-architecture manifest that allows Docker to automatically 
 
 AI-assisted workflows streamline repetitive discovery and mapping tasks, particularly when architecture-specific intrinsics are involved.
 
-| Approach | Time |
-|----------|------|
-| Manual migration (install tools, research intrinsics, rewrite code, debug, document) | Several hours, depending on complexity |
-| Docker MCP Toolkit + GitHub Copilot (prompt, review, merge) | Significantly reduced manual effort |
+| Approach | Effort |
+|----------|--------|
+| Manual migration (install tools, research intrinsics, rewrite code, debug, document) | Several hours to days, depending on complexity |
+| Docker MCP Toolkit + GitHub Copilot (prompt, review, merge) | Reduced to minutes for initial migration, plus review time |
 
 Actual time savings depend on codebase size and complexity, but structured tool invocation reduces the need for manual documentation lookup and repetitive edits.
 
@@ -117,14 +117,14 @@ The Docker MCP Toolkit and Arm MCP Server support more than the example migratio
 - **Knowledge base**: The `knowledge_base_search` tool covers all content from [learn.arm.com](https://learn.arm.com) Learning Paths, intrinsics documentation, and software compatibility information.
 - **Dynamic MCP**: AI agents can discover and add new MCP servers from the Docker MCP Catalog during a conversation without manual configuration.
 
-## Summary
+## What you've learned
 
 In this Learning Path, you:
 
-1. Installed and configured the Docker MCP Toolkit with the Arm MCP Server, GitHub MCP Server, and Sequential Thinking MCP Server.
-2. Connected VS Code with GitHub Copilot to the MCP Gateway.
-3. Examined architecture-specific elements in a legacy x86 AVX2 application.
-4. Used AI-assisted MCP tools to analyze, refactor, and update the codebase for Arm64.
-5. Built and validated the migrated application on Arm64.
+- Installed and configured the Docker MCP Toolkit with the Arm MCP Server, GitHub MCP Server, and Sequential Thinking MCP Server
+- Connected VS Code with GitHub Copilot to the MCP Gateway
+- Examined architecture-specific elements in a legacy x86 AVX2 application
+- Used AI-assisted MCP tools to analyze, refactor, and update the codebase for Arm64
+- Built and validated the migrated application on Arm64
 
 The Docker MCP Toolkit enables AI assistants to invoke structured migration tools inside the containerized Arm MCP server. This approach reduces manual lookup and repetitive refactoring work while keeping developers in control of review and validation.

@@ -1,5 +1,5 @@
 ---
-title: Simplify Arm migration with the Docker MCP ToolKit and Arm MCP Server
+title: Simplify Arm migration with the Docker MCP Toolkit and Arm MCP Server
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -28,8 +28,8 @@ When architecture-specific optimizations are present, migration may involve:
 - Identifying x86-specific intrinsics or assembly
 - Updating compiler flags and build configurations
 - Mapping AVX2 operations to appropriate NEON equivalents
-- Rewriting vectorized code and adjusting loop structures.
-- Updating Dockerfiles, base images, and compiler flags.
+- Rewriting vectorized code and adjusting loop structures
+- Updating Dockerfiles, base images, and compiler flags
 - Validating correctness and performance on Arm systems
 
 These steps are well understood, but they can require careful review across code, build scripts, and container configurations.
@@ -38,42 +38,51 @@ These steps are well understood, but they can require careful review across code
 
 The Docker MCP Toolkit is a management interface in Docker Desktop that lets you discover, configure, and run containerized MCP (Model Context Protocol) servers. It connects these servers to AI coding assistants through a unified gateway.
 
-For Arm migration, three MCP servers work together:
+## MCP servers for Arm migration
 
-- **Arm MCP Server**:
-  Provides migration-focused tools, including:
-  - `migrate_ease_scan` for detecting x86-specific code and compiler flags
-  - `check_image` and `skopeo` for verifying container architecture support
-  - `knowledge_base_search` for a knowledge base of learning resources, Arm intrinsics, and software version compatibility
-  - `mca` for microarchitectural performance analysis
-  
-- **GitHub MCP Server**: Enables Git repository operations including creating pull requests, managing branches, and committing changes.
-- 
-- **Sequential Thinking MCP Server**: Helps the AI assistant break down complex migration decisions into logical steps.
+Three MCP servers work together to support the migration workflow:
+
+**Arm MCP Server**
+
+Provides migration-focused tools:
+- `migrate_ease_scan` detects x86-specific code and compiler flags
+- `check_image` and `skopeo` verify container architecture support
+- `knowledge_base_search` accesses learning resources, Arm intrinsics, and software version compatibility
+- `mca` performs microarchitectural performance analysis
+
+**GitHub MCP Server**
+
+Enables Git repository operations including creating pull requests, managing branches, and committing changes.
+
+**Sequential Thinking MCP Server**
+
+Helps the AI assistant break down complex migration decisions into logical steps.
+
 
 ## How AI-assisted migration works
 
 When connected to the Docker MCP Toolkit, an AI coding assistant like GitHub Copilot can coordinate a structured migration workflow:
 
-1. Verify whether container base images support `linux/arm64` using `check_image` or `skopeo`.
-2. Scan the codebase with `migrate_ease_scan` to identify AVX2 intrinsics, x86-specific flags, and other portability considerations.
-3. Use `knowledge_base_search` to find appropriate Arm SIMD equivalents for every x86 intrinsic.
-4. Refactor the code with architecture-specific accuracy.
-5. Update Dockerfiles and build configurations for Arm comptibility. 
-6. Create a pull request with the proposed changes using the GitHub MCP Server.
+- Verify whether container base images support `linux/arm64` using `check_image` or `skopeo`
+- Scan the codebase with `migrate_ease_scan` to identify AVX2 intrinsics, x86-specific flags, and other portability considerations
+- Use `knowledge_base_search` to find appropriate Arm SIMD equivalents for every x86 intrinsic
+- Refactor the code with architecture-specific accuracy
+- Update Dockerfiles and build configurations for Arm compatibility
+- Create a pull request with the proposed changes using the GitHub MCP Server
 
-## What you will build in this Learning Path
+## The demo application
 
-In this Learning Path, you will migrate a real-world legacy application - a matrix multiplication benchmark written with AVX2 intrinsics for x86 - to Arm64 using GitHub Copilot and Docker MCP Toolkit.
+This Learning Path uses a real-world example: a matrix multiplication benchmark written in C++ with AVX2 intrinsics for x86. You'll migrate it to Arm64 using the AI-assisted workflow described above.
 
 The demo repository is available at [github.com/JoeStech/docker-blog-arm-migration](https://github.com/JoeStech/docker-blog-arm-migration).
 
-You will:
+By the end of this Learning Path, you'll have a working Arm64 container with NEON-optimized code and an automated pull request containing all migration changes.
 
-1. Set up Docker MCP Toolkit with the Arm, GitHub, and Sequential Thinking MCP servers.
-2. Connect VS Code with GitHub Copilot to the MCP Gateway.
-3. Analyze the x86-specific portions of the codebase.
-4. Use AI-assisted MCP workflows to update intrinsics and container configuration.
-5. Review and validate the pull request generated by the AI agent.
+## What you've learned and what's next
 
-In the next section, you will install and configure the Docker MCP Toolkit.
+You now understand:
+- Why Arm migration requires more than rebuilding containers when architecture-specific code is present
+- How the Docker MCP Toolkit connects AI assistants to specialized migration tools
+- The structured workflow that GitHub Copilot uses to automate migration tasks
+
+Next, you'll install and configure the Docker MCP Toolkit with the three required MCP servers.

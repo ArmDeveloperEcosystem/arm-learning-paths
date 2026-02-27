@@ -10,23 +10,23 @@ layout: learningpathall
 
 Make sure the following tools are installed:
 
-- Docker Desktop 4.59 or later.
-- VS Code with the GitHub Copilot extension.
-- A GitHub account with a Personal Access Token(PAT) that allows repository access.
-- A machine with at least 8 GB RAM (16 GB recommended).
+- Docker Desktop 4.59 or later
+- VS Code with the GitHub Copilot extension
+- A GitHub account with a Personal Access Token (PAT) that allows repository access
+- A machine with at least 8 GB RAM (16 GB recommended)
 
-You will use Docker Desktop to host MCP servers locally, and VS Code with GitHub Copilot to invoke those servers through the MCP Gateway.
+You'll use Docker Desktop to host MCP servers locally, and VS Code with GitHub Copilot to invoke those servers through the MCP Gateway.
 
 ## Enable the Docker MCP Toolkit
 
 The MCP Toolkit allows Docker Desktop to run and manage MCP (Model Context Protocol) servers, which expose structured tools that AI assistants can call.
 
-1. Open Docker Desktop.
-2. Go to **Settings** > **Beta features**.
-3. Toggle **Enable Docker MCP Toolkit** on.
-4. Click **Apply**.
+- Open Docker Desktop
+- Go to **Settings** > **Beta features**
+- Toggle **Enable Docker MCP Toolkit** on
+- Select **Apply**
 
-After a few seconds, the **MCP Toolkit** tab appears in the left sidebar.
+The **MCP Toolkit** tab appears in the left sidebar.
 
 ## Add the required MCP servers
 
@@ -55,9 +55,9 @@ Search for **GitHub Official** in the catalog and add the [GitHub MCP Server](ht
 
 Configure authentication:
 
-1. Select the GitHub Official server.
-2. Choose **Personal Access Token** as the authentication method.
-3. Enter your GitHub token from **GitHub Settings** > **Developer Settings** > **Personal access tokens**.
+- Select the GitHub Official server
+- Choose **Personal Access Token** as the authentication method
+- Enter your GitHub token from **GitHub Settings** > **Developer Settings** > **Personal access tokens**
 
 This server lets GitHub Copilot create pull requests, manage issues, and commit changes directly to your repositories.
 
@@ -69,10 +69,10 @@ No configuration is needed. This server helps GitHub Copilot break down complex 
 
 ## Connect VS Code to the MCP Gateway
 
-1. In Docker Desktop, go to **MCP Toolkit** > **Clients** tab.
-2. Scroll to **Visual Studio Code** and click **Connect**.
-3. Open VS Code and click the **Extensions** icon in the left toolbar.
-4. Find **MCP_DOCKER**, click the gear icon, and click **Start Server**.
+- In Docker Desktop, go to **MCP Toolkit** > **Clients** tab
+- Scroll to **Visual Studio Code** and select **Connect**
+- Open VS Code and select the **Extensions** icon in the left toolbar
+- Find **MCP_DOCKER**, select the gear icon, and select **Start Server**
 
 ## Verify the connection
 
@@ -82,7 +82,7 @@ Open GitHub Copilot Chat in VS Code and ask:
 What Arm migration tools do you have access to?
 ```
 
-If the setup is correct, Copilot will list tools from:
+If the setup is correct, Copilot lists tools from:
 
 - Arm MCP Server
 - GitHub MCP Server
@@ -90,6 +90,12 @@ If the setup is correct, Copilot will list tools from:
 
 This confirms that tool invocation through the MCP Gateway is working.
 
-Your environment is now ready for AI-assisted migration.
+## What you've learned and what's next
 
-In the next section, you will examine the demo application and identify the architecture-specific elements that require adaptation for Arm64.
+You have:
+- Enabled the Docker MCP Toolkit in Docker Desktop
+- Configured three MCP servers: Arm MCP Server, GitHub MCP Server, and Sequential Thinking MCP Server
+- Connected VS Code with GitHub Copilot to the MCP Gateway
+- Verified that Copilot can access migration tools
+
+Next, you'll examine the demo application to identify x86-specific code that needs adaptation for Arm64.
