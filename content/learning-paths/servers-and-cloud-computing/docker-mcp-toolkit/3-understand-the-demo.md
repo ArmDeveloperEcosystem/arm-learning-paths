@@ -1,5 +1,5 @@
 ---
-title: Understand the legacy x86 demo application
+title: Examine x86 AVX2 intrinsics in the demo application
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -99,7 +99,7 @@ is specific to x86 register structure. On Arm, reduction is implemented using NE
 On newer Arm platforms supporting SVE or SVE2 (for example Neoverse V1/V2 based platforms), wider vector lengths may be available. SVE uses a vector-length-agnostic (VLA) model, which differs from fixed-width AVX2 and NEON programming. The Arm MCP Server knowledge base can help determine the appropriate approach for your target platform.
 {{% /notice %}}
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 You have:
 - Examined a legacy x86 application with AVX2 intrinsics

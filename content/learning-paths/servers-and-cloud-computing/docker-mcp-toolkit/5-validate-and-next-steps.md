@@ -1,5 +1,5 @@
 ---
-title: Validate the migration and explore further
+title: Validate the Arm64 migration and test containers
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -117,7 +117,7 @@ The Docker MCP Toolkit and Arm MCP Server support more than the example migratio
 - **Knowledge base**: The `knowledge_base_search` tool covers all content from [learn.arm.com](https://learn.arm.com) Learning Paths, intrinsics documentation, and software compatibility information.
 - **Dynamic MCP**: AI agents can discover and add new MCP servers from the Docker MCP Catalog during a conversation without manual configuration.
 
-## What you've accomplished
+## What you've learned
 
 In this Learning Path, you:
 

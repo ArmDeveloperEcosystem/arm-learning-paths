@@ -1,5 +1,5 @@
 ---
-title: Run the AI-driven Arm migration
+title: Automate x86 to Arm migration with GitHub Copilot
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -146,7 +146,7 @@ After migration, you should see:
 - Adjusted loop strides from 4 (AVX2) to 2 (NEON)
 - Rewrote horizontal reduction using NEON pair-wise addition
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 You have:
 - Provided migration instructions to GitHub Copilot
