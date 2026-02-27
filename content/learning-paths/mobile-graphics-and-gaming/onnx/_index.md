@@ -17,7 +17,7 @@ learning_objectives:
   - Deploy an optimized ONNX model inside an Android app.
 
 prerequisites:
-  - A development machine with Python 3.10+ installed.
+  - A development machine with Python 3.10 installed (Python 3.11 also works; Python 3.12 is not yet supported by ONNX Runtime on Arm platforms).
   - Basic familiarity with PyTorch or TensorFlow.
   - An Arm64 device (e.g., Raspberry Pi or Android smartphone).
   - "[Android Studio](https://developer.android.com/studio) installed for deployment testing."

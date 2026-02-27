@@ -241,9 +241,18 @@ data/
 pip install pandas pyarrow opencv-python tqdm numpy
 ```
 
-2. Place the Parquet file (e.g., train_1.parquet) next to the script or update PARQUET_PATH accordingly. Here we used the file from [this location](https://huggingface.co/datasets/Ritvik19/Sudoku-Dataset/blob/main/train_1.parquet).
+2. Download the Sudoku dataset from Hugging Face. This Learning Path uses the `train_1.parquet` file from the [Ritvik19/Sudoku-Dataset](https://huggingface.co/datasets/Ritvik19/Sudoku-Dataset) repository.
 
-3. Run the generator
+Download the dataset file:
+```console
+wget https://huggingface.co/datasets/Ritvik19/Sudoku-Dataset/resolve/main/train_1.parquet
+```
+
+Alternatively, you can download it manually from the [direct link](https://huggingface.co/datasets/Ritvik19/Sudoku-Dataset/blob/main/train_1.parquet) and save it as `train_1.parquet` in your working directory.
+
+The Parquet file should be placed next to the script, or you can update `PARQUET_PATH` in the code to point to its location.
+
+3. Run the generator:
 ```console
 python3 02_PrepareData.py
 ```
