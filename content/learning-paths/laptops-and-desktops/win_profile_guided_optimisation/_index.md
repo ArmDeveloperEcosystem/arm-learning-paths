@@ -20,7 +20,7 @@ author: Tom Dunkle
 skilllevels: Introductory
 subjects: Performance and Architecture
 tools_software_languages:
-    - C++
+    - C
     - MSVC
     - Google Benchmark
     - PGO
