@@ -12,11 +12,13 @@ Integer division is ideal for benchmarking because it's significantly more expen
 
 For this example, you'll use an Arm computer running Windows.
 
-## Install the required tools
+## Set up your environment
+
+Before you can run benchmarks, you need to install vcpkg (a C++ package manager) and Google Benchmark. This is a one-time setup step.
 
 ### Install vcpkg and Google Benchmark
 
-Run the following commands in PowerShell:
+The following commands download and initialize vcpkg, create a project directory, and install Google Benchmark for Windows on Arm:
 
 ```console
 iex (iwr -useb https://aka.ms/vcpkg-init.ps1)
@@ -62,19 +64,19 @@ Open an **ARM64 Native Tools Command Prompt** from the Windows Start menu and st
 powershell
 ```
 
-Before compiling, set an environment variable to refer to the vcpkg installation directory:
+Set an environment variable to refer to the vcpkg-installed package directory for the ARM64 Windows target. This simplifies the compiler commands that follow:
 
 ```console
 $VCPKG="$HOME\pgo-benchmark\vcpkg_installed\arm64-windows"
 ```
 
-Now compile the benchmark. This command uses the MSVC compiler and links with the Google Benchmark libraries:
+Compile the benchmark. This command uses the MSVC compiler and links with the Google Benchmark libraries:
 
 ```console
 cl /I"$VCPKG\include" /D BENCHMARK_STATIC_DEFINE div_bench.cpp /link /LIBPATH:"$VCPKG\lib" benchmark.lib benchmark_main.lib shlwapi.lib
 ```
 
-Run the program to establish your baseline performance:
+Add the vcpkg binary directory to your PATH so the program can find required DLLs, then run the benchmark:
 
 ```console
 $env:PATH += ";$HOME\pgo-benchmark\vcpkg_installed\arm64-windows\bin"
@@ -98,5 +100,7 @@ Benchmark             Time             CPU   Iterations
 -------------------------------------------------------
 baseDiv/1500       7.90 us         7.90 us        88512
 ```
+
+The warning appears because the Google Benchmark library was built in debug mode, but it doesn't affect the validity of the measurements for this example.
 
 The baseline shows an average execution time of 7.90 microseconds. This gives you a clear starting point to measure improvement. Now that you have this baseline measurement, you're ready to apply Profile-Guided Optimization. In the next section, you'll use PGO to optimize this code and see how much faster it can run.

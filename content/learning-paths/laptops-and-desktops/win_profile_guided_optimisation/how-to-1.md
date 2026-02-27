@@ -1,5 +1,5 @@
 ---
-title: Profile-Guided Optimization
+title: Understand Profile-Guided Optimization
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -18,11 +18,11 @@ This approach identifies frequently executed paths (known as "hot" paths) and op
 
 PGO enables several compiler optimizations that aren't possible with static analysis alone.
 
-The compiler arranges frequently executed code together in memory through code layout optimization, which improves instruction cache utilization and reduces branch mispredictions. Instead of using heuristics for inlining decisions, the compiler inlines functions based on actual call frequency and execution patterns from your profiling data.
+Code layout optimization arranges frequently executed code together in memory, improving instruction cache utilization and reducing branch mispredictions. Instead of using heuristics for inlining decisions, the compiler inlines functions based on actual call frequency and execution patterns from your profiling data.
 
 For C++ virtual functions, PGO can identify the most common call targets and optimize or devirtualize those paths. The compiler can also eliminate dead code by optimizing differently or removing code paths that never execute in your profiling runs.
 
-For example, if your application has an error handling path that rarely executes, PGO ensures the compiler doesn't optimize for that path at the expense of your main execution flow. The result is typically 5-15% performance improvement, though gains vary by application.
+If your application has an error handling path that rarely executes, PGO ensures the compiler doesn't optimize for that path at the expense of your main execution flow. Performance improvements typically range from 5-15%, though results vary by workload and architecture.
 
 ## When should you use Profile-Guided Optimization?
 
@@ -39,3 +39,7 @@ Your profiling data must accurately represent typical usage scenarios. If it doe
 Additionally, the process requires extra build steps, which can increase compile times for large codebases. Use PGO on performance-critical sections that are heavily influenced by actual runtime behavior.
 
 PGO might not be ideal for early-stage development or applications with highly variable or unpredictable usage patterns.
+
+## What you've learned and what's next
+
+You now understand what PGO is, how it improves performance through code layout and inlining optimizations, and when to apply it. In the next section, you'll learn about Google Benchmark, the tool you'll use to measure these performance improvements.
