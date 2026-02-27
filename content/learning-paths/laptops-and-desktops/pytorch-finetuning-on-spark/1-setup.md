@@ -6,6 +6,8 @@ weight: 2
 layout: learningpathall
 ---
 
+## Overview
+
 The NVIDIA DGX Spark pairs an Arm-based Grace CPU with a Blackwell GPU in a compact desktop form factor. The GPU handles the compute-intensive training passes while the Grace CPU manages data preprocessing and orchestration, making the system well suited for fine-tuning large language models locally without sending data to the cloud.
 
 To get started, you'll configure Docker, pull a pre-built PyTorch container, and install the libraries you need for fine-tuning.
@@ -81,7 +83,7 @@ These packages serve specific purposes:
 - `trl` (Transformer Reinforcement Learning) includes training utilities and recipes for language models
 - `bitsandbytes` enables 4-bit and 8-bit quantization for memory-efficient training
 
-The installation typically takes a few minutes as pip downloads and installs each package along with their dependencies.
+The installation can take a few minutes as pip downloads and installs each package along with their dependencies.
 
 ## Authenticate with Hugging Face
 

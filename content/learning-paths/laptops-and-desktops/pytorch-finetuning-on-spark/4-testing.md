@@ -110,7 +110,7 @@ The base model confidently reports the RP2350 has "256MB of memory," which is of
 
 Now test your fine-tuned model to see how training on Raspberry Pi datasheet content improved its factual accuracy. Stop the current vLLM server (press Ctrl+C in the container terminal) before launching the fine-tuned model.
 
-{{% notice Dependency Conflict %}}
+{{% notice Note %}}
 As of this writing, vLLM does not support version 5 of the `transformers` library that was used when fine-tuning the model, so you need to patch its `tokenizer_config.json`. Run the following command to update the `tokenizer_class` to `PreTrainedTokenizerFast`, which is compatible with the older `transformers` version bundled in the vLLM container:
 
 ```bash
