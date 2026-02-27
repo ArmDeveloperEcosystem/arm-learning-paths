@@ -36,7 +36,7 @@ The NVIDIA playbook scripts use the Alpaca prompt format, which structures each 
 
 **Input** -- optional additional context (left empty for most questions)
 
-**Output** -- the correct answer sourced from official datasheets
+**output** -- the correct answer sourced from official datasheets
 
 Here's an example from the dataset you'll use:
 

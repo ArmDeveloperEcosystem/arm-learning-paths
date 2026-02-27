@@ -6,6 +6,8 @@ weight: 5
 layout: learningpathall
 ---
 
+## Overview
+
 Now that you've fine-tuned your model on Raspberry Pi datasheet content, it's time to compare its behavior against the original. You'll serve both versions using vLLM, a high-performance inference server optimized for large language models, and observe how fine-tuning on domain-specific data changes the model's factual accuracy.
 
 ## Download vLLM container
@@ -64,8 +66,7 @@ Wait for the server to fully load the model and display the message indicating i
 
 ### Test prompt
 
-
-From a new terminal window (outside the container), send a Raspberry Pi hardware question to the model using the Alpaca instruction format. For this example, use a question about the memory size:
+From a new terminal window (outside the container), use `curl` to send an HTTP request to the model server. The request contains a Raspberry Pi hardware question formatted using the Alpaca instruction template. For this example, ask about the RP2350 memory size:
 
 ```bash
 curl http://localhost:8000/v1/completions \
@@ -132,7 +133,7 @@ The only change from the previous command is the `--model` parameter, which now 
 
 ### Test prompt
 
-Send the same Raspberry Pi question to your fine-tuned model:
+Send the same Raspberry Pi question to your fine-tuned model using the same `curl` command format:
 
 ```bash
 curl http://localhost:8000/v1/completions \

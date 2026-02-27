@@ -39,7 +39,7 @@ Pull the latest PyTorch container from NVIDIA's container registry:
 docker pull nvcr.io/nvidia/pytorch:25.11-py3
 ```
 
-This command downloads the November 2025 release of the PyTorch container, which includes PyTorch, CUDA libraries, cuDNN, and other essential tools pre-configured for optimal performance on NVIDIA hardware. The download size is several gigabytes, so this step might take a few minutes depending on your internet connection.
+This command downloads the November 2025 release of the PyTorch container, which includes PyTorch, CUDA libraries, cuDNN, and other essential tools pre-configured for optimal performance on NVIDIA hardware. The download size is several gigabytes, so this step can take a few minutes depending on your internet connection.
 
 ## Launch container instance
 
