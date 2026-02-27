@@ -1,5 +1,9 @@
 ---
 title: Migrate applications between Arm platforms using Kiro Arm SoC Migration Power
+
+draft: true
+cascade:
+    draft: true
     
 minutes_to_complete: 60
 
