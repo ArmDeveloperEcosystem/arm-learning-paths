@@ -6,6 +6,8 @@ weight: 4
 layout: learningpathall
 ---
 
+## Overview
+
 Now that you understand how fine-tuning works, it's time to look at the actual code. In this section, you'll walk through the key parts of the `Llama3_3B_full_finetuning.py` script and run it with the Raspberry Pi dataset to produce your own fine-tuned Llama model.
 
 
@@ -23,7 +25,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 The `DATASET_PROMPT_TEMPLATE` defines the instruction-following format for training data with three fields: instruction, input, and response. Each training example is formatted using this template so the model learns to recognize the pattern and produce structured answers.
 
-The `get_dataset()` function loads the dataset from (Hugging Face by default) and formats each example using the template, appending the EOS (End of String) token. You'll pass in the Raspberry Pi dataset from a local JSONL file instead.
+The `get_dataset()` function loads the dataset from Hugging Face by default and formats each example using the template, appending the EOS (End of Sequence) token. You'll pass in the Raspberry Pi dataset from a local JSONL file instead.
 
 ```python
 # Define prompt templates
@@ -154,13 +156,13 @@ cp /workspace/raspberry_pi_qa.jsonl .
 
 ## Run the fine-tuning
 
-With the dataset patch applied, you're ready to run the fine-tuning. The command below trains the Llama 3.1 8B model using full fine-tuning on the Raspberry Pi dataset:
+With the dataset in place, you're ready to run the fine-tuning. The command below trains the Llama 3.2 3B model using full fine-tuning on the Raspberry Pi dataset:
 
 ```bash
 python Llama3_3B_full_finetuning.py \
 --model_name "meta-llama/Llama-3.2-3B-Instruct" \
 --dataset "json" \
---dataset_files="/workspace/projects/pytorch-finetuning/raspberry_pi_qa.jsonl" \
+--dataset_files="raspberry_pi_qa.jsonl" \
 --dataset_size 300 \
 --output_dir "/workspace/models/Llama-3.2-3B-FineTuned"
 ```
