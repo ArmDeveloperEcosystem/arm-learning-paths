@@ -1,20 +1,26 @@
 ---
-title: Google Benchmark
+title: Understand Google Benchmark basics
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Google Benchmark
+## Overview
 
-Google Benchmark is a C++ library specifically designed for microbenchmarking – measuring the performance of small code snippets with high accuracy. Microbenchmarking is essential for identifying bottlenecks and optimizing critical sections, especially in performance-sensitive applications. 
+Before you start working with Profile-Guided Optimization, you need to understand how to measure performance. This section introduces Google Benchmark, the tool you'll use to measure the impact of your optimizations. Don't worry about installing anything yet. You'll set up your environment and run your first benchmark in the next section.
 
-Google Benchmark simplifies this process by providing a framework that manages iterations, times execution, and performs statistical analysis. This allows you to focus on the code being measured, rather than writing boilerplate or trying to prevent unwanted compiler optimizations manually.
+## What is Google Benchmark?
 
-To use Google Benchmark, define a function that accepts a `benchmark::State&` parameter and iterate over it to perform the benchmarking. Register the function using the `BENCHMARK` macro and include `BENCHMARK_MAIN()` to generate the benchmark's entry point.
+Google Benchmark is a C++ library specifically designed for microbenchmarking, which means measuring the performance of small code snippets with high accuracy. Microbenchmarking helps you identify bottlenecks and optimize critical sections, especially in performance-sensitive applications. 
 
-Here's a basic example:
+Google Benchmark simplifies this process by providing a framework that manages iterations, times execution, and performs statistical analysis. You can focus on the code being measured, rather than writing test code or trying to prevent unwanted compiler optimizations manually.
+
+## Write a simple benchmark
+
+To use Google Benchmark, define a function that accepts a benchmark::State& parameter and use it to run the benchmark in a loop. You register the function using the `BENCHMARK` macro and include `BENCHMARK_MAIN()` to generate the benchmark's entry point.
+
+The following example shows a basic benchmark that measures the time it takes to create an empty string. A minimal benchmark looks like this:
 
 ```cpp
 #include <benchmark/benchmark.h>
@@ -28,18 +34,20 @@ BENCHMARK(BM_StringCreation);
 BENCHMARK_MAIN();
 ```
 
-### Filtering and Preventing Compiler Optimizations
+## Control benchmark execution
 
 Google Benchmark provides tools to ensure accurate measurements by preventing unintended compiler optimizations and allowing flexible benchmark selection.
 
-1. **Preventing Optimizations**: Use `benchmark::DoNotOptimize(value);` to force the compiler to read and store a variable or expression, ensuring it is not optimized away.
-   
-2. **Filtering Benchmarks**: To run a specific subset of benchmarks, use the `--benchmark_filter` command-line option with a regular expression. For example:
+To prevent the compiler from optimizing away your code, use `benchmark::DoNotOptimize(value);` to force the compiler to read and store a variable or expression. This ensures your benchmark actually measures what you intend to measure.
 
-   ```bash
-   .\benchmark_binary --benchmark_filter=BM_String.*
-   ```
-   
-This eliminates the need to repeatedly comment out lines of source code.
+When you have multiple benchmarks, you can run a specific subset using the `--benchmark_filter` command-line option with a regular expression. This example runs all benchmarks that start with "BM_String":
 
-For more detailed information and advanced usage, refer to the [official documentation](https://github.com/google/benchmark).
+```console
+.\benchmark_binary --benchmark_filter=BM_String.*
+```
+
+Filtering eliminates the need to repeatedly comment out lines of source code when you want to focus on specific benchmarks.
+
+## What you've accomplished and what's next
+
+You now understand how to write basic benchmarks with Google Benchmark, use `benchmark::DoNotOptimize` to prevent unwanted compiler optimizations, and filter benchmark execution with command-line options. In the next section, you'll install Google Benchmark and create a baseline benchmark to measure division performance on Windows on Arm.

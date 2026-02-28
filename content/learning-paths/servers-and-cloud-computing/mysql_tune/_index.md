@@ -16,7 +16,10 @@ author: Julio Suarez
 skilllevels: Advanced
 subjects: Databases
 cloud_service_providers:
-  - Google Cloud
+    - AWS
+    - Microsoft Azure
+    - Google Cloud
+    - Oracle
 armips:
     - Neoverse
 operatingsystems:

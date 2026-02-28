@@ -24,6 +24,9 @@ author: Pareena Verma
 ##### Tags
 skilllevels: Introductory
 subjects: Databases
+cloud_service_providers:
+  - Microsoft Azure
+  - Google Cloud
 
 armips:
   - Neoverse

@@ -19,6 +19,8 @@ author: Jeff Young
 # Tags
 skilllevels: Advanced
 subjects: CI-CD
+cloud_service_providers:
+  - AWS
 armips:
   - Neoverse
 tools_software_languages:

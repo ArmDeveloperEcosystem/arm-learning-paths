@@ -213,6 +213,13 @@ These artifacts provide both quantitative and qualitative insight into model per
 In the sample grid, each tile shows one crop together with its True label (T:) and Predicted label (P:), with correct predictions highlighted in green and mistakes highlighted in red. This makes it easy to quickly verify that the classifier behaves sensibly and to spot remaining failure modes.
 
 ## Running the script
+
+Before running the evaluation script, install matplotlib for visualization:
+
+```console
+pip install matplotlib
+```
+
 Run the evaluation script from the project root:
 
 ```console

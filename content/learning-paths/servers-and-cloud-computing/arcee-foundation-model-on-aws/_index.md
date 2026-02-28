@@ -22,6 +22,8 @@ author: Julien Simon
 # Tagging metadata, see the Learning Path guide for the allowed values
 skilllevels: Introductory
 subjects: ML
+cloud_service_providers:
+  - AWS
 armips:
     - Neoverse
 tools_software_languages:

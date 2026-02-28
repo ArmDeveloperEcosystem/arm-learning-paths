@@ -20,6 +20,11 @@ author: Preema Merlin Dsouza
 ### Tags
 skilllevels: Introductory
 subjects: Libraries
+cloud_service_providers:
+  - AWS
+  - Microsoft Azure
+  - Google Cloud
+  - Oracle
 armips:
     - Neoverse
 tools_software_languages:

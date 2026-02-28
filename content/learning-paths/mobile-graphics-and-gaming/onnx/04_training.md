@@ -61,7 +61,6 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 from tqdm import tqdm
-from torch.onnx import dynamo_export
 from torch.export import Dim
 import onnxruntime as ort  
 
@@ -189,6 +188,15 @@ The file will create two artifacts:
 Right after export, the script runs a parity test: it feeds the same randomly generated batch through both the PyTorch model and the ONNX model (executed by ONNX Runtime) and prints the mean absolute error between their logits. A tiny value confirms the exported graph faithfully matches your trained network.
 
 ## Running the script
+
+{{% notice Note %}}
+The Dynamo-based ONNX exporter requires PyTorch 2.1 or later. If you encounter errors related to `torch.export.Dim` or the `dynamo` parameter, ensure you have an up-to-date PyTorch installation:
+
+```console
+pip install --upgrade torch torchvision
+```
+{{% /notice %}}
+
 To run the training script, type:
 
 ```console

@@ -6,20 +6,10 @@ weight: 4
 layout: learningpathall
 ---
 
-Now that you understand how fine-tuning works, it's time to look at the actual code. In this section, you'll walk through the key parts of the NVIDIA playbook's fine-tuning script, patch it to load the Raspberry Pi dataset, and run it to produce your own fine-tuned Llama model.
+## Overview
 
-## Review the fine-tuning scripts
+Now that you understand how fine-tuning works, it's time to look at the actual code. In this section, you'll walk through the key parts of the `Llama3_3B_full_finetuning.py` script and run it with the Raspberry Pi dataset to produce your own fine-tuned Llama model.
 
-The NVIDIA playbook provides four main fine-tuning scripts, each designed for different scenarios:
-
-| Script | Approach | Best for |
-|--------|----------|----------|
-| `Llama3_3B_full_finetuning.py` | Full fine-tuning (all parameters) | Smaller models where GPU memory isn't a constraint |
-| `Llama3_8B_LoRA_finetuning.py` | LoRA (frozen base + small trainable adapters) | Mid-size models with reduced memory needs |
-| `Llama3_70B_LoRA_finetuning.py` | LoRA + FSDP (distributed across GPUs) | Large models that need multi-GPU sharding |
-| `Llama3_70B_qLoRA_finetuning.py` | QLoRA (LoRA + 4-bit quantization) | Very large models on memory-limited systems |
-
-The file names refer to the default model each script uses, but you can pass a different model on the command line. This Learning Path uses `Llama3_3B_full_finetuning.py`. The key sections of that script are explained below. 
 
 ## Imports and dataset preparation
 
@@ -33,35 +23,37 @@ from trl import SFTConfig, SFTTrainer
 from transformers import AutoModelForCausalLM, AutoTokenizer
 ```
 
-The `ALPACA_PROMPT_TEMPLATE` defines the instruction-following format for training data with three fields: instruction, input, and response. Each training example is formatted using this template so the model learns to recognize the pattern and produce structured answers.
+The `DATASET_PROMPT_TEMPLATE` defines the instruction-following format for training data with three fields: instruction, input, and response. Each training example is formatted using this template so the model learns to recognize the pattern and produce structured answers.
 
-The `get_alpaca_dataset()` function loads the Alpaca dataset from Hugging Face by default and formats each example using the template, appending the EOS (End of String) token. You'll patch this function later to load the Raspberry Pi dataset from a local JSONL file instead.
+The `get_dataset()` function loads the dataset from Hugging Face by default and formats each example using the template, appending the EOS (End of Sequence) token. You'll pass in the Raspberry Pi dataset from a local JSONL file instead.
 
 ```python
 # Define prompt templates
-ALPACA_PROMPT_TEMPLATE = """Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
+DATASET_PROMPT_TEMPLATE = """Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
 ### Instruction: {}
 
 ### Input: {}
 
 ### Response: {}"""
 
-def get_alpaca_dataset(eos_token, dataset_size=500):
+def get_dataset(dataset_name, dataset_dir, dataset_files, eos_token, dataset_size=512):
     # Preprocess the dataset
     def preprocess(x):
         texts = [
-            ALPACA_PROMPT_TEMPLATE.format(instruction, input, output) + eos_token
+            DATASET_PROMPT_TEMPLATE.format(instruction, input, output) + eos_token
             for instruction, input, output in zip(x["instruction"], x["input"], x["output"])
         ]
         return {"text": texts}
 
-    dataset = load_dataset("tatsu-lab/alpaca", split="train").select(range(dataset_size)).shuffle(seed=42)
+    dataset = load_dataset(dataset_name, data_dir=dataset_dir, data_files=dataset_files, split="train")
+    if len(dataset) > dataset_size:
+        dataset = dataset.select(range(dataset_size)).shuffle(seed=42)
     return dataset.map(preprocess, remove_columns=dataset.column_names, batched=True)
 ```
 
 ## Model and tokenizer loading
 
-The `from_pretrained()` method downloads and initializes a pre-trained language model from Hugging Face. The tokenizer is loaded alongside it, with the padding token set to match the EOS token (required for batched training).
+The `from_pretrained()` method downloads and initializes a pre-trained language model (from Hugging Face by default). The tokenizer is loaded alongside it, with the padding token set to match the EOS token (required for batched training).
 
 ```python
     # Load the model and tokenizer
@@ -78,12 +70,12 @@ The `from_pretrained()` method downloads and initializes a pre-trained language 
 
 ## Dataset loading
 
-With the model and tokenizer loaded, the script prepares the training data by calling `get_alpaca_dataset()` with the tokenizer's EOS token and the specified dataset size. By default the script downloads the Alpaca dataset from Hugging Face, but you'll patch this function to load the Raspberry Pi JSONL file instead.
+With the model and tokenizer loaded, the script prepares the training data by calling `get_dataset()` with the tokenizer's EOS token and the specified dataset size. By default the script downloads the Alpaca dataset from Hugging Face, but you'll pass in the Raspberry Pi JSONL file from the command-line instead.
 
 ```python
     # Load and preprocess the dataset
     print(f"Loading dataset with {args.dataset_size} samples...")
-    dataset = get_alpaca_dataset(tokenizer.eos_token, args.dataset_size)
+    dataset = get_dataset(args.dataset, args.dataset_dir, args.dataset_files, tokenizer.eos_token, args.dataset_size)
 ```
 
 ## Training configuration
@@ -94,7 +86,7 @@ The training configuration controls how the SFT process runs. Notable parameters
     # Configure the SFT config
     config = {
         "per_device_train_batch_size": args.batch_size,
-        "num_train_epochs": 0.01,  # Warmup epoch
+        "num_train_epochs": 0.05,  # Warmup epoch
         "gradient_accumulation_steps": args.gradient_accumulation_steps,
         "learning_rate": args.learning_rate,
         "optim": "adamw_torch",
@@ -104,7 +96,6 @@ The training configuration controls how the SFT process runs. Notable parameters
         "dataset_text_field": "text",
         "packing": False,
         "max_length": args.seq_length,
-        "torch_compile": False,
         "report_to": "none",
         "logging_dir": args.log_dir,
         "logging_steps": args.logging_steps,
@@ -114,22 +105,21 @@ The training configuration controls how the SFT process runs. Notable parameters
 
 ## Model compilation and training
 
-If `torch.compile()` is enabled, the script first optimizes the model graph for faster execution on the hardware. A short warmup pass (0.01 epochs) triggers compilation so the overhead doesn't affect the actual training run. After warmup, the script creates an `SFTTrainer` with the full epoch count and calls `trainer.train()`. The returned `trainer_stats` object contains metrics like loss, throughput, and training time.
+The script first optimizes the model graph for faster execution on the hardware using the `torch.compile()` function. A short warmup pass (0.05 epochs) triggers compilation so the overhead doesn't affect the actual training run. After warmup, the script creates an `SFTTrainer` with the full epoch count and calls `trainer.train()`. The returned `trainer_stats` object contains metrics like loss, throughput, and training time.
 
 ```python
-    # Compile model if requested
-    if args.use_torch_compile:
-        print("Compiling model with torch.compile()...")
-        model = torch.compile(model)
+    # Compile model for faster training
+    print("Compiling model with torch.compile()...")
+    model = torch.compile(model)
 
-        # Warmup for torch compile
-        print("Running warmup for torch.compile()...")
-        SFTTrainer(
-            model=model,
-            processing_class=tokenizer,
-            train_dataset=dataset,
-            args=SFTConfig(**config),
-        ).train()
+    # Warmup for torch compile
+    print("Running warmup for torch.compile()...")
+    SFTTrainer(
+        model=model,
+        processing_class=tokenizer,
+        train_dataset=dataset,
+        args=SFTConfig(**config),
+    ).train()
 
     # Train the model
     print(f"\nStarting full fine-tuning for {args.num_epochs} epoch(s)...")
@@ -146,9 +136,9 @@ If `torch.compile()` is enabled, the script first optimizes the model graph for 
     trainer_stats = trainer.train()
 ```
 
-## Patch the script for the Raspberry Pi dataset
+## Download the Raspberry Pi dataset
 
-The script loads the Alpaca dataset from Hugging Face by default. You need to patch the dataset loading function to use the local Raspberry Pi JSONL file instead.
+The script loads the Alpaca dataset from Hugging Face by default. You need to point it to the local Raspberry Pi JSONL dataset file instead.
 
 First, open a new terminal on the DGX Spark (not inside the container) and navigate to the directory where you launched the Docker container. This is the directory that gets mounted as `/workspace` inside the container. Download the dataset file:
 
@@ -164,34 +154,17 @@ Back inside the container, copy the dataset into the script's working directory:
 cp /workspace/raspberry_pi_qa.jsonl .
 ```
 
-The following `sed` command replaces the `get_alpaca_dataset()` function to load from a local JSONL file instead of Hugging Face. The replacement function reads the Raspberry Pi Q&A pairs and formats them using the same Alpaca prompt template:
-
-```bash
-sed -i '/^def get_alpaca_dataset/,/^    return dataset\.map/c\
-def get_alpaca_dataset(eos_token, dataset_size=500):\
-    def preprocess(x):\
-        texts = [\
-            ALPACA_PROMPT_TEMPLATE.format(instruction, inp, output) + eos_token\
-            for instruction, inp, output in zip(x["instruction"], x["input"], x["output"])\
-        ]\
-        return {"text": texts}\
-    dataset = load_dataset("json", data_files="raspberry_pi_qa.jsonl", split="train")\
-    if len(dataset) > dataset_size:\
-        dataset = dataset.select(range(dataset_size))\
-    return dataset.map(preprocess, remove_columns=dataset.column_names, batched=True)' Llama3_3B_full_finetuning.py
-```
-
-The key difference is `load_dataset("json", data_files="raspberry_pi_qa.jsonl", split="train")`, which reads the local file instead of downloading from Hugging Face. The function still applies the same Alpaca prompt template and EOS token.
-
 ## Run the fine-tuning
 
-With the dataset patch applied, you're ready to run the fine-tuning. The command below trains the Llama 3.1 8B model using full fine-tuning on the Raspberry Pi dataset:
+With the dataset in place, you're ready to run the fine-tuning. The command below trains the Llama 3.2 3B model using full fine-tuning on the Raspberry Pi dataset:
 
 ```bash
 python Llama3_3B_full_finetuning.py \
---model_name "meta-llama/Llama-3.1-8B" \
+--model_name "meta-llama/Llama-3.2-3B-Instruct" \
+--dataset "json" \
+--dataset_files="raspberry_pi_qa.jsonl" \
 --dataset_size 300 \
---output_dir "/workspace/models/Llama-3.1-8B-FineTuned"
+--output_dir "/workspace/models/Llama-3.2-3B-FineTuned"
 ```
 
 The `--dataset_size 300` flag tells the script to use all entries in the Raspberry Pi dataset (the default is 500, but a smaller, focused dataset can be more effective than a larger generic one). The `--output_dir` flag saves the fine-tuned model and tokenizer to the specified directory. Because you mounted your current directory into the container with `-v ${PWD}:/workspace`, the saved model is also accessible from the host system.
@@ -202,9 +175,8 @@ Training takes a few minutes on DGX Spark. When it completes, you'll see a summa
 
 In this section you:
 
-- Reviewed the available fine-tuning scripts and their approaches
 - Walked through each stage of the full fine-tuning script
-- Patched the dataset loading function to use Raspberry Pi datasheet Q&A pairs
+- Downloaded the Raspberry Pi datasheet Q&A pairs
 - Ran full fine-tuning and saved the resulting model with `--output_dir`
 
 In the next section, you'll serve both the original and fine-tuned models and compare their responses to Raspberry Pi hardware questions.
