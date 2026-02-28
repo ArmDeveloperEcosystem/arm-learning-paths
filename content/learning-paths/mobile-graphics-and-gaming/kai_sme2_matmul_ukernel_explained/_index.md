@@ -1,5 +1,5 @@
 ---
-title: KleidiAI SME2 matmul microkernel for quantized models explained
+title: Understand KleidiAI SME2 matmul microkernels
 
 draft: true
 cascade:
@@ -7,16 +7,17 @@ cascade:
     
 minutes_to_complete: 40
 
-who_is_this_for: This is an advanced topic for software developers, performance engineers, and AI practitioners 
+who_is_this_for: This is an advanced topic for software developers, performance engineers, and AI practitioners.
 
 learning_objectives: 
-    - Learn how a KleidiAI matmual microkernel performs matrix multiplication with quantized data
-    - Learn how SME2 INT8 Outer Product Accumulate instructions are used for matrix multiplication
-    - Learn how a KleidiAI SME2 matmul microkernel accelerates matmul operators in a Large Lanague Model
-    - Learn how to integrate KleidiAI SME2 matmul microkernels to an AI framework or application
+    - Explain how a KleidiAI microkernel performs matrix multiplication (matmul) with quantized data
+    - Identify how SME2 INT8 MOPA (matrix outer product accumulate) instructions map to matmul work
+    - Trace how quantization and packing feed an SME2 matmul microkernel (using GGML Q4_0 and llama.cpp call stacks as a concrete example)
+    - Perform basic hands-on checks (source inspection and optional disassembly) to confirm where SME2 instructions appear
 
 prerequisites:
-    - Knowledge of KleidiAI and SME2
+    - Familiarity with basic GEMM/matmul and quantization concepts
+    - (Optional) Access to an Arm CPU with SME2 support (Linux or Android) for the "run on device" steps
 
 author: Zenon Zhilong Xiu
 
@@ -24,8 +25,8 @@ author: Zenon Zhilong Xiu
 skilllevels: Advanced
 subjects: ML
 armips:
-    - Arm C1 CPU
-    - Arm SME2 unit
+    - Arm C1 core
+    - SME2
 tools_software_languages:
     - C++
     - KleidiAI
@@ -38,20 +39,20 @@ operatingsystems:
 
 further_reading:
     - resource:
-        title: part 1 Arm Scalable Matrix Extension Introduction 
+        title: Part 1, Arm Scalable Matrix Extension introduction
         link: https://developer.arm.com/community/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction
         type: blog
     - resource:
-        title: part 2 Arm Scalable Matrix Extension Instructions 
+        title: Part 2, Arm Scalable Matrix Extension instructions
         link: https://developer.arm.com/community/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction-p2
         type: blog
     - resource:
-        title: part4 Arm SME2 Introduction 
+        title: Part 4, Arm SME2 introduction
         link: https://developer.arm.com/community/arm-community-blogs/b/architectures-and-processors-blog/posts/part4-arm-sme2-introduction
         type: blog
     - resource:
         title: Profile llama.cpp performance with Arm Streamline and KleidiAI LLM kernels
-        link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/llama_cpp_streamline/
+        link: /learning-paths/servers-and-cloud-computing/llama_cpp_streamline/
         type: blog
         
 
