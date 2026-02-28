@@ -27,6 +27,7 @@ tools_software_languages:
     - Python
     - PyTorch
     - Docker
+    - Hugging Face
 operatingsystems:
     - Linux
 
