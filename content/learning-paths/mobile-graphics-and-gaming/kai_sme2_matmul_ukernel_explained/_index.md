@@ -25,12 +25,12 @@ author: Zenon Zhilong Xiu
 skilllevels: Advanced
 subjects: ML
 armips:
-    - Arm C1 core
-    - SME2
+    - Arm C1
 tools_software_languages:
     - C++
     - KleidiAI
     - llama.cpp
+    - SME2
 operatingsystems:
     - Android
     - Linux
