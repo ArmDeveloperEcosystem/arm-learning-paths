@@ -8,12 +8,12 @@ layout: "learningpathall"
 ---
 
 ## Objective ##
-In this section, we validate the digit recognizer by running inference on the validation dataset using both the PyTorch checkpoint and the exported ONNX model. We verify that PyTorch and ONNX Runtime produce consistent results, analyze class-level behavior using a confusion matrix, and generate visual diagnostics for debugging and documentation. This step acts as a final verification checkpoint before integrating the model into the full OpenCV-based Sudoku processing pipeline.
+In this section, you will validate the digit recognizer by running inference on the validation dataset using both the PyTorch checkpoint and the exported ONNX model. You will verify that PyTorch and ONNX Runtime produce consistent results, analyze class-level behavior using a confusion matrix, and generate visual diagnostics for debugging and documentation. This step acts as a final verification checkpoint before integrating the model into the full OpenCV-based Sudoku processing pipeline.
 
 Before introducing geometric processing, grid detection, and perspective correction, it is important to confirm that the digit recognizer works reliably in isolation. By validating inference and analyzing errors at the digit level, we ensure that any future issues in the end-to-end system can be attributed to image processing or geometry rather than the classifier itself.
 
 ## Inference and Evaluation Script
-Create a new file named 04_Test.py and paste the script below into it. This script evaluates the digit recognizer in a way that closely mirrors deployment conditions. It compares PyTorch and ONNX Runtime inference, measures accuracy on the validation dataset, and generates visual diagnostics that reveal both strengths and remaining failure modes of the model.
+Create a new file named `04_Test.py` and paste the script below into it. This script evaluates the digit recognizer in a way that closely mirrors deployment conditions. It compares PyTorch and ONNX Runtime inference, measures accuracy on the validation dataset, and generates visual diagnostics that reveal both strengths and remaining failure modes of the model.
 
 ```python
 import os, numpy as np, torch
@@ -220,13 +220,12 @@ Before running the evaluation script, install matplotlib for visualization:
 pip install matplotlib
 ```
 
-Run the evaluation script from the project root:
+Run the evaluation script:
 
 ```console
 python3 04_Test.py
 ```
-
-In the example below, the PyTorch and ONNX accuracies match exactly, confirming that the export process preserved model behavior.
+The PyTorch and ONNX accuracies should match very closely, confirming that the export process preserved model behavior.
 
 ```console
 python3 04_Test.py 

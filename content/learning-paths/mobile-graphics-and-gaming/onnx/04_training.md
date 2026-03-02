@@ -8,12 +8,12 @@ layout: "learningpathall"
 ---
 
 ## Objective ##
-We will now train a small CNN to classify Sudoku cell crops into 10 classes (0=blank, 1..9=digit), verify accuracy, then export the model to ONNX using the Dynamo exporter and sanity-check parity with ONNX Runtime. This gives us a portable model ready for Arm64 inference and later Android deployment.
+You will train a small CNN to classify Sudoku cell crops into 10 classes (0 = blank, 1–9 = digit), validate accuracy, export the best model to ONNX using PyTorch’s Dynamo-based exporter, and sanity-check numerical parity with ONNX Runtime. This produces a portable model ready for efficient Arm64 inference and later Android deployment.
 
 ## Creating a model
-We use a tiny convolutional neural network (CNN) called DigitNet, designed to be both fast (so it runs efficiently on Arm64 and mobile) and accurate enough for recognizing 28×28 grayscale crops of Sudoku digits. It expects 1 input channel (in_channels=1) because we forced grayscale in the preprocessing step.
+You will use a tiny convolutional neural network (CNN) called DigitNet, designed to be both fast (so it runs efficiently on Arm64 and mobile) and accurate enough for recognizing 28×28 grayscale crops of Sudoku digits. It expects 1 input channel (in_channels=1) because we forced grayscale in the preprocessing step.
 
-We start by creating a new file digitnet_model.py and defining the DigitNet class:
+Create a new file `digitnet_model.py` and defining the DigitNet class:
 ```python
 import torch
 import torch.nn as nn
@@ -39,7 +39,7 @@ class DigitNet(nn.Module):
         return self.net(x)
 ```
 
-We use a very compact convolutional neural network (CNN), which we call DigitNet, to recognize Sudoku digits. The goal is to have a model that is simple enough to run efficiently on Arm64 and mobile devices, but still powerful enough to tell apart the ten classes we care about (0 for blank, and digits 1 through 9).
+You will use a very compact convolutional neural network (CNN), called DigitNet, to recognize Sudoku digits. The goal is to have a model that is simple enough to run efficiently on Arm64 and mobile devices, but still powerful enough to tell apart the ten classes we care about (0 for blank, and digits 1 through 9).
 
 The network expects each input to be a 28×28 grayscale crop, so it begins with a convolution layer that has one input channel and sixteen filters. This first convolution is responsible for learning very low-level patterns such as strokes or edges. Immediately after, a ReLU activation introduces non-linearity, which allows the network to combine those simple features into more expressive ones. A max-pooling layer then reduces the spatial resolution by half, making the representation more compact and less sensitive to small translations.
 
@@ -52,7 +52,7 @@ The final step is a fully connected layer that maps the thirty-two features to t
 In practice, this means that when you feed in a batch of grayscale Sudoku cells of shape [N, 1, 28, 28], DigitNet transforms them step by step into a batch of [N, 10] outputs, where each row contains the scores for the ten possible classes. Despite its simplicity, this small CNN strikes a balance between speed and accuracy that makes it ideal for Sudoku digit recognition on resource-constrained devices.
 
 ## Training a model
-We will now prepare the self-containing script that trains the above model on the data prepared earlier. Start by creating the new file 03_Training.py and modify it as follows:
+You will now prepare the self-containing script that trains the above model on the data prepared earlier. Create a new file `03_Training.py` with the content below:
 ```python
 import os, random, numpy as np
 import torch as tr
@@ -173,7 +173,7 @@ if __name__ == "__main__":
     main()
 ```
 
-This file is a self-contained trainer for the Sudoku digit classifier. It starts by fixing random seeds for reproducibility and sets DEVICE="cpu" so the workflow runs the same on desktops and Arm64 boards. It expects the dataset from the previous step under data/train/0..9 and data/val/0..9, and creates an artifacts/ folder for all outputs.
+This is a self-contained trainer for the Sudoku digit classifier. It starts by fixing random seeds for reproducibility and sets DEVICE="cpu" so the workflow runs the same on desktops and Arm64 boards. It expects the dataset from the previous step under data/train/0..9 and data/val/0..9, and creates an artifacts/ folder for all outputs.
 
 The script builds two dataloaders (train/val) with a preprocessing stack that forces grayscale (Grayscale(num_output_channels=1)) so inputs match the model’s first convolution, converts to tensors, and normalizes to a centered range. Light augmentations on the training split—small affine jitter and occasional blur—mimic camera variability without distorting the digits. Batch size, epochs, and learning rate are set to conservative defaults so training is smooth on CPU; you can scale them up later.
 
@@ -197,7 +197,7 @@ pip install --upgrade torch torchvision
 ```
 {{% /notice %}}
 
-To run the training script, type:
+Run the training script:
 
 ```console
 python3 03_Training.py
@@ -243,4 +243,4 @@ Parity MAE: 1.0251999e-05
 ```
 
 ## Summary
-By running the training script you train the DigitNet CNN on the Sudoku digit dataset, steadily improving accuracy across epochs until the model surpasses 99% validation accuracy. The process builds on the earlier steps where we first defined the model architecture in digitnet_model.py and then prepared a dedicated training script to handle data loading, augmentation, optimization, and evaluation. During training the best-performing model state is saved, and at the end it is exported to the ONNX format with dynamic batch support. A parity check confirms that the ONNX and PyTorch versions produce virtually identical outputs (mean error ~1e-5). You now have a validated ONNX model (artifacts/sudoku_digitnet.onnx) and a PyTorch checkpoint (digitnet_best.pth), both ready for integration into the Sudoku image processing pipeline. Before moving on to grid detection and solving, however, we will first run standalone inference to confirm the model’s predictions on individual digit crops.
+By running the training script you train the DigitNet CNN on the Sudoku digit dataset, steadily improving accuracy across epochs until the model surpasses 99% validation accuracy. The process builds on the earlier steps where you first defined the model architecture in digitnet_model.py and then prepared a dedicated training script to handle data loading, augmentation, optimization, and evaluation. During training the best-performing model state is saved, and at the end it is exported to the ONNX format with dynamic batch support. A parity check confirms that the ONNX and PyTorch versions produce virtually identical outputs (mean error ~1e-5). You now have a validated ONNX model (artifacts/sudoku_digitnet.onnx) and a PyTorch checkpoint (digitnet_best.pth), both ready for integration into the Sudoku image processing pipeline. Before moving on to grid detection and solving, however, you will first run standalone inference to confirm the model’s predictions on individual digit crops.

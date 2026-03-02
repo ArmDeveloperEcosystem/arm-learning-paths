@@ -1,5 +1,5 @@
 ---
-title: "ONNX in Action: Building, Optimizing, and Deploying Models on Arm64 and Mobile"
+title: "ONNX in Action: Building, Optimizing, and Deploying ML Models on Arm64 and Mobile Devices"
 
 draft: true
 cascade:
@@ -7,25 +7,25 @@ cascade:
     
 minutes_to_complete: 240
 
-who_is_this_for: This is an introductory topic for developers who are interested in creating, optimizing, and deploying machine learning models with ONNX. It is especially useful for those targeting Arm64-based devices (such as Raspberry Pi, mobile SoCs, or Android smartphones) and looking to run efficient inference at the edge.
+who_is_this_for: This learning path is intended for developers who want to build, optimize, and deploy machine learning models using ONNX. It is particularly relevant for those targeting Arm64-based platforms such as Raspberry Pi, Arm-based laptops, cloud instances, or Android smartphones, where performance-per-watt and efficient edge inference are critical.
 
 learning_objectives:
-  - Describe what ONNX is, and what it can offer in the ML ecosystem.
+  - Explain what ONNX is and how it enables model portability across ML frameworks.
   - Build and export a simple neural network model in Python to ONNX format.
-  - Perform inference and training using ONNX Runtime.
-  - Apply optimization techniques to improve performance.
-  - Deploy an optimized ONNX model inside an Android app.
+  - Run inference (and optionally training workflows) using ONNX Runtime on Arm64 platforms.
+  - Apply model optimization techniques to improve performance.
+  - Integrate and deploy an optimized ONNX model inside an Android application.
 
 prerequisites:
-  - A development machine with Python 3.10 installed (Python 3.11 also works; Python 3.12 is not yet supported by ONNX Runtime on Arm platforms).
+  - A development machine with Python 3.10 or 3.11 installed (Prebuilt ONNX Runtime packages for Arm platforms may not yet support Python 3.12.)
   - Basic familiarity with PyTorch or TensorFlow.
   - An Arm64 device (e.g., Raspberry Pi or Android smartphone).
-  - "[Android Studio](https://developer.android.com/studio) installed for deployment testing."
+  - "[Android Studio](https://developer.android.com/studio) for building and deploying the Android application."
 
 author: Dawid Borycki
 
 ### Tags
-skilllevels: Introductory
+skilllevels: Advanced
 subjects: ML
 armips:
   - Cortex-A
