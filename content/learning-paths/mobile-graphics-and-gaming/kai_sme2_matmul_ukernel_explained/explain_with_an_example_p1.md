@@ -1,23 +1,29 @@
 ---
-title: Explain the SME2 matmul microkernel with an example - Part 1
-weight: 5
+title: Repack RHS weights (GGML Q4_0)
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Explain the SME2 matmul microkernel with an example - Part 1
-By integrating the SME2‑optimized KleidiAI kernels into llama.cpp, the heavy matrix‑multiplication workloads in the K, Q, and V computations of the attention blocks, as well as in the FFN layers, can be delegated to the SME2 matmul microkernel when running the Llama-3.2-3B-Q4_0.gguf model.
-In these operators, the LHS (activation) data type is FP32, while RHS (weight) type uses GGML Q4_0 quantized type. 
+## Repack RHS weights (GGML Q4_0)
+When you [integrate SME2-optimized KleidiAI kernels into llama.cpp](/learning/mobile-graphics-and-gaming/performance_llama_cpp_sme2/), the heavy matrix-multiplication work in attention (K/Q/V projections) and feed-forward network (FFN) layers can run through the SME2 matmul microkernel.
 
-To make the demonstration easier in this learning path, the LHS dimension [m, k] is simplified to [16, 64], the RHS dimension [n, k] is simplified to [64, 64], and the SME2 SVL is set as 512-bit.
+In these operators, the LHS (activations) is FP32 and the RHS (weights) uses the GGML Q4_0 quantized type.
 
-###Packing the RHS
-Although the original Q4_0 RHS(weight) in the model uses INT4 quantization, it is signed INT4 quantization, rather than the unsigned INT4 quantization that the SME2 matmul microkernel requires. Moreover,the layout of the INT4 quantized data and the quantization scale does not meet the requirements of the SME2 matmul microkernel neither. Therefore, the LHS from the model needs to be converted from the signed INT4 data to unsigned INT4 and repacked. 
-Since the RHS(weight) remains unchanged during the inference, this conversion and packing only need to be performed only once when loading the model. 
+To keep the example readable, this Learning Path uses a simplified matmul shape:
+- LHS `[m, k] = [16, 64]`
+- RHS `[n, k] = [64, 64]`
+
+It also assumes an SME2 SVL of 512 bits.
+
+### Pack the RHS
+Although the original Q4_0 RHS (weights) uses INT4 quantization, it is signed INT4 and uses a GGML-specific layout and scale encoding. The SME2 matmul microkernel expects a different packed RHS representation (including an unsigned INT4 form and per-block metadata arranged for efficient loads).
+
+Because the RHS (weights) stays constant during inference, you only need to convert and pack it once when loading the model.
 
 
-Let us have a close look at GGML Q4_0 quantization first to know how the orginal FP32 weight is quantized to Q4_0 format.
+Start by reviewing GGML Q4_0 quantization so you can see why the original RHS layout doesn’t match what the SME2 microkernel expects.
 In the Q4_0 model, the Q4_0 weights are stored in layout of [n, k].
 GGML Q4_0 quantizes weights in blocks of 32 floats. For each block, it calculates a scale for the block and then converts each value into a signed 4-bit integer. The scale is stored as FP16. 
 Then GGML Q4_0 packs the values in a way of,
@@ -29,7 +35,7 @@ The following diagram shows how GGML Q4_0 quantizes and packs the original [n, k
 
 Unfortunately, the Q4_0 format does not meet the requirements of the SME2 matmul microkernel. It needs to be converted to an unsigned INT4 quantization format and repacked using the *kai_run_rhs_pack_nxk_qsi4c32ps1s0scalef16_qsu4c32s16s0_neon* function. 
 
-In this example, we use m=16 and k=64.
+This example uses m=16 and k=64.
 - The required mr value for the SME2 matmul kernel is obtained using *kai_get_mr_matmul_clamp_f32_qai8dxp1vlx4_qsi8cxp4vlx4_1vlx4vl_sme2_mopa*. Here, mr=16.
 - The required nr value for the SME2 matmul kernel is obtained using *kai_get_nr_matmul_clamp_f32_qai8dxp1vlx4_qsi8cxp4vlx4_1vlx4vl_sme2_mopa*. Here, nr=64.
 - The required kr value for the SME2 matmul kernel is obtained using *kai_get_kr_matmul_clamp_f32_qai8dxp1vlx4_qsi8cxp4vlx4_1vlx4vl_sme2_mopa*. Here, kr=4.
@@ -49,7 +55,23 @@ This process can be illustrated with the diagram below.
 ![Figure showing RHS packing with KleidiAI alt-text#center](images/kai_kernel_packed_rhs.jpg "RHS packing with KleidiAI")
 
 The numerical label of an element in the diagram is used to indicate its row and column number in the original matrix. For example , 
-![Figure showing Row_Col lable alt-text#center](images/row_col_lable.png "Row_Col lable")
-it indicates that the element locates at row 01, column 02 in the original matrix. This row and column number remains unchanged in its quantized and packed matrix, so that the location of the element can be tracked easily. 
+![Figure showing row/column label for tracking elements alt-text#center](images/row_col_lable.png "Row/column label used for tracking")
+This indicates the element is at row 01, column 02 in the original matrix. This row/column label stays consistent through quantization and packing so you can track elements across layouts.
 
-Now, the RHS is converted and packed into a format that can be handled by the SME2 matmul microkernel, allowing the packed RHS to be loaded into SME2 Z registers with sequential memory access. This improves memory access efficiency and reduces cache misses.
+After this step, the RHS is converted and packed into a format the SME2 matmul microkernel can consume efficiently. This allows the kernel to load packed RHS data into SME2 Z registers using sequential memory access, which improves cache locality.
+
+### Hands-on: find the RHS repack microkernel in KleidiAI (optional)
+
+If you cloned the KleidiAI repository earlier, you can locate the repack function used for RHS conversion.
+
+From the KleidiAI repo root:
+
+```bash
+grep -R "kai_run_rhs_pack_nxk_qsi4c32ps1s0scalef16_qsu4c32s16s0_neon" -n kai | head
+```
+
+You can also search for the `qsu4` (unsigned INT4) string to find related packers:
+
+```bash
+grep -R "qsu4" -n kai | head
+```

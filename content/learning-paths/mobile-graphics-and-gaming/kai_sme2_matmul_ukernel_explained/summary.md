@@ -1,10 +1,20 @@
 ---
-title: Summary
-weight: 8
+title: Wrap-up
+weight: 9
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Summary
-This learning path vividly explains how an SME2-optimized KleidiAI microkernel performs quantization and packing of the RHS and LHS, and how it leverages the powerful SME2 MOPA instructions to enhance matrix multiplication performance. We hope this learning path helps developers learn how to integrate the KleidiAI microkernel into their ML/AI frameworks or applications, or to design their own SME2-optimized kernels, thus fully utilizing the potential of SME2.
+## Wrap-up
+You’ve walked through how an SME2-optimized KleidiAI matmul microkernel:
+- Converts weights into a kernel-friendly packed RHS layout
+- Quantizes and packs activations into a packed LHS layout
+- Uses SME2 INT8 MOPA instructions (`smopa`) plus LUT-based dequantization (`luti4`) to compute a 1VL×4VL output tile efficiently
+- Dequantizes back to FP32 so the result matches the surrounding FP32 computation (within expected quantization error)
+
+If you completed the optional hands-on checks, you also confirmed where the key SME2 instructions appear in the microkernel source.
+
+To go further, apply the same approach to a real workload:
+- Use [the llama.cpp performance Learning Path](/learning-paths/mobile-graphics-and-gaming/performance_llama_cpp_sme2/) to build and profile llama.cpp with KleidiAI on an SME2-capable device
+- Use [the ONNX Runtime performance Learning Path](/learning-paths/mobile-graphics-and-gaming/performance_onnxruntime_kleidiai_sme2/) to see how similar ideas apply in ONNX Runtime
