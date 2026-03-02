@@ -26,6 +26,7 @@ skilllevels: Advanced
 subjects: Performance and Architecture
 armips:
     - Neoverse
+    - Cortex-A
 operatingsystems:
     - Linux
     - macOS
@@ -34,7 +35,7 @@ tools_software_languages:
   - CPP
   - GCC
   - Clang
-
+  - SME2
 shared_path: true
 shared_between:
     - servers-and-cloud-computing
