@@ -15,9 +15,9 @@ A fractal is a pattern that shows detail at many scales, often with self-similar
 You don’t need to understand the Mandelbrot algorithm in detail to follow this learning path—we’ll use it primarily as a convenient, compute-heavy workload for profiling. If you'd  like to learn more, please refer to the [Wikipedia](https://en.wikipedia.org/wiki/Mandelbrot_set) page for more information.
  
 
-## Connect to APT Target
+## Connect to Target
 
-Please refer to the [installation guide](https://learn.arm.com/install-guides/atp) if it is your first time setting up Arm Total Performance. In this learning path, I will be connecting to an AWS Graviton3 metal instance (`m7g.metal`) with 64 Neoverse V1 cores. From the host machine, test the connection to the remote server by navigating to `'Targets`->`Test Connection`. You should see the successul connection below. 
+Please refer to the [installation guide](https://learn.arm.com/install-guides/atp) if it is your first time setting up Arm Performix. In this learning path, I will be connecting to an AWS Graviton3 metal instance (`m7g.metal`) with 64 Neoverse V1 cores. From the host machine, test the connection to the remote server by navigating to `'Targets`->`Test Connection`. You should see the successul connection below. 
 
 ![successful-connection](./successful-connection.jpg).
 

@@ -6,7 +6,7 @@ weight: 5
 layout: learningpathall
 ---
 
-Now we can leverage the insights surfaced by ATP to focus the optimizations around the hottest functions. Looking at the source code, we understand the the hypotenuse function, `__hypot`, is being invoked by the `Mandelbrot::getIterations` function to calculate the absolute value of a complex number. You may consider trying to used an optimized version of `libm`
+Now we can leverage the insights surfaced by Arm Performix to focus the optimizations around the hottest functions. Looking at the source code, we understand the the hypotenuse function, `__hypot`, is being invoked by the `Mandelbrot::getIterations` function to calculate the absolute value of a complex number. You may consider trying to used an optimized version of `libm`
 
 Looking at the `Mandelbrot::getIterations` function,  there are some obvious ways to optimize. 
 
@@ -62,7 +62,7 @@ Build the example, this creates a binary `./builds/mandelbrot-parallel` which ta
 ./build.sh
 ```
 
-Rerun the recipe with the new binary from Arm Total Peformance running on the host. 
+Rerun the recipe with the new binary from Arm Performix running on the host. 
 
 To assess the change, we can compare with a previous run. Looking under the `Run Details` tab, we can see the execution time has reduced further from 0m 32s to 7s with 32 threads.
 

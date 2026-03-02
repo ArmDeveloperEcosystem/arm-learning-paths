@@ -1,16 +1,16 @@
 ---
-title: Find CPU Cycle Hotspots with Arm Total Performance
+title: Find CPU Cycle Hotspots with Arm Performix
 
 minutes_to_complete: 30
 
 who_is_this_for: Cloud Engineers looking to optimize their workload running on a Linux-based Arm system. 
 
 learning_objectives: 
-    - Run the CPU Cycle Hotspot recipe in Arm Total Performance
+    - Run the CPU Cycle Hotspot recipe in Arm Performix
     - Identify which functions in your program use the most CPU cycles, so you can target the best candidates for optimization.
 
 prerequisites:
-    - Access to Arm Total Performance
+    - Access to Arm Performix
     - Basic understand on C++
 
 author: Kieran Hejmadi
@@ -21,7 +21,7 @@ subjects: Performance and Architecture
 armips:
     - Neoverse
 tools_software_languages:
-    - Arm Total Performance
+    - Arm Performix
     - C++
 operatingsystems:
     - Linux

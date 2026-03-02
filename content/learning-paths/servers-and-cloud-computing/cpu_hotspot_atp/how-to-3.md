@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Run CPU Cycle Hotspot Recipe
 
-As shown in the `main.cpp` file below, the program generates a 1920×1080 bitmap image of our fractal. To identify performance bottlenecks, we’ll run the CPU Cycle Hotspot recipe in Arm Total Performance (ATP). ATP uses sampling to estimate where the CPU spends most of its time, allowing it to highlight the hottest functions—especially useful in larger applications where it isn’t obvious ahead of time which functions will dominate runtime.
+As shown in the `main.cpp` file below, the program generates a 1920×1080 bitmap image of our fractal. To identify performance bottlenecks, we’ll run the CPU Cycle Hotspot recipe in Arm Performix (APX). APX uses sampling to estimate where the CPU spends most of its time, allowing it to highlight the hottest functions—especially useful in larger applications where it isn’t obvious ahead of time which functions will dominate runtime.
 
 **Please Note**: You will need to replace the first string argument in the `myplot.draw()` function with the absolute path to the image folder and rebuild the application. If not, the image will be written to the `/tmp/atperf/tools/atperf-agent` directory from where the binary is run. As the name suggests, this folder is periodically deleted. 
 
@@ -27,11 +27,11 @@ int main(){
 }
 ```
 
-Open up ATP from the host machine. Click on the `CPU Cycle Hotspot` recipe. If this is the first time running the recipe you may need to click the install tools button.
+Open up APX from the host machine. Click on the `CPU Cycle Hotspot` recipe. If this is the first time running the recipe on this target machine you may need to click the install tools button.
 
 ![install-tools](./install-tools.jpg)
 
-Next we will configure the recipe. We will choose to launch a new process, ATP will automatically start collecting metric when the program starts and stop when the program exits.
+Next we will configure the recipe. We will choose to launch a new process, APX will automatically start collecting metric when the program starts and stop when the program exits.
 
 Provide an absolute path to the recently built binary, `mandelbrot`. 
 
