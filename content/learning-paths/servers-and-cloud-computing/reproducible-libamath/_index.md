@@ -1,5 +1,5 @@
 ---
-title: Use reproducible functions in Libamath (Arm Performance Libraries)
+title: Enable reproducible math functions across vector extensions with Arm Performance Libraries
 
 draft: true
 cascade:
@@ -13,18 +13,18 @@ who_is_this_for: This is an introductory topic for developers who want to produc
 learning_objectives: 
     - Explain what numerical reproducibility means in numerical software
     - Describe generic applications of numerical reproducibility in the industry
-    - Understand how reproducibility is defined in Libamath
+    - Describe how reproducibility is defined and implemented in Libamath
     - Enable and use reproducible Libamath functions in real applications
 
 prerequisites:
     - An Arm computer running Linux with [Arm Performance Libraries](/install-guides/armpl/) version 26.01 or newer installed.
+    - A C compiler such as [GCC](/install-guides/gcc/native/) or Clang installed.
 
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
     - Neoverse
-    - SVE
 tools_software_languages:
     - Arm Performance Libraries
     - GCC
@@ -41,6 +41,10 @@ further_reading:
     - resource:
         title: ArmPL Installation Guide on Linux
         link: /install-guides/armpl/#linux
+        type: website
+    - resource:
+        title: Use multi-accuracy math functions in Libamath
+        link: /learning-paths/servers-and-cloud-computing/multi-accuracy-libamath/
         type: website
 
 
