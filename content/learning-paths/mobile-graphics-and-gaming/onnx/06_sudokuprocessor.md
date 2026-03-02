@@ -8,10 +8,10 @@ layout: "learningpathall"
 
 ## Objective ##
 
-In this section, we integrate all previous components into a complete Sudoku processing pipeline. Starting from a full Sudoku image, we detect and rectify the grid, split it into individual cells, recognize digits using the ONNX model, and finally solve the puzzle using a deterministic solver. By the end of this step, you will have an end-to-end system that takes a photograph of a Sudoku puzzle and produces a solved board, along with visual outputs for debugging and validation.
+In this section, you will integrate all previous components into a complete Sudoku processing pipeline. Starting from a full Sudoku image, you detect and rectify the grid, split it into individual cells, recognize digits using the ONNX model, and finally solve the puzzle using a deterministic solver. By the end of this step, you will have an end-to-end system that takes a photograph of a Sudoku puzzle and produces a solved board, along with visual outputs for debugging and validation.
 
 ## Context
-So far, we have:
+So far, you have:
 1. Generated a synthetic, well-labeled Sudoku digit dataset,
 2. Trained a lightweight CNN (DigitNet) to recognize digits and blanks,
 3. Exported the model to ONNX with dynamic batch support,
@@ -20,7 +20,7 @@ So far, we have:
 At this point, the digit recognizer is reliable in isolation. The remaining challenge is connecting vision with reasoning: extracting the Sudoku grid from an image, mapping each cell to a digit, and applying a solver. This section bridges that gap.
 
 ## Overview of the pipeline
-To implement the Sudoku processor, create the file (sudoku_processor.py) and paste the implementation below:
+To implement the Sudoku processor, create a file named `sudoku_processor.py` with the code below:
 
 ```python
 import cv2 as cv
@@ -328,7 +328,7 @@ The Sudoku processor follows a sequence of steps:
 6. Solving – apply a backtracking Sudoku solver.
 7. Visualization – overlay the solution and render clean board images.
 
-We encapsulate the entire pipeline in a reusable class called SudokuProcessor. This class loads the ONNX model once and exposes a single high-level method that processes an input image and returns both intermediate results and final outputs.
+You encapsulate the entire pipeline in a reusable class called SudokuProcessor. This class loads the ONNX model once and exposes a single high-level method that processes an input image and returns both intermediate results and final outputs.
 
 Conceptually, the processor:
 * Accepts a BGR image,
@@ -336,12 +336,14 @@ Conceptually, the processor:
 
 This design keeps inference fast and makes the processor easy to integrate later into an Android application or embedded system.
 
+In real photos, grid detection and preprocessing dominate accuracy; the solver will fail when one or more digits are misread or placed in the wrong cell.
+
 ## Grid detection and rectification
-The first task is to locate the Sudoku grid in the image. We convert the image to grayscale, apply adaptive thresholding, and use contour detection to find large rectangular shapes. The largest contour that approximates a quadrilateral is assumed to be the Sudoku grid.
+The first task is to locate the Sudoku grid in the image. You convert the image to grayscale, apply adaptive thresholding, and use contour detection to find large rectangular shapes. The largest contour that approximates a quadrilateral is assumed to be the Sudoku grid.
 
-Once the four corners are identified, we compute a perspective transform and warp the grid into a square image. This rectified representation removes camera tilt and perspective distortion, allowing all subsequent steps to assume a fixed geometry.
+Once the four corners are identified, you will compute a perspective transform and warp the grid into a square image. This rectified representation removes camera tilt and perspective distortion, allowing all subsequent steps to assume a fixed geometry.
 
-We order the four corners consistently (top-left → top-right → bottom-right → bottom-left) before computing the perspective transform.
+You will then order the four corners consistently (top-left → top-right → bottom-right → bottom-left) before computing the perspective transform.
 
 ## Splitting the grid into cells
 After rectification, the grid is divided evenly into a 9×9 array. Each cell is cropped based on its row and column index. At this stage, every cell corresponds to one Sudoku position and is ready for preprocessing and classification.
@@ -353,7 +355,7 @@ Each cell undergoes light preprocessing before inference:
 * Resizing to the model’s input size (28×28),
 * Normalization to match the training distribution.
 
-We crop a margin to suppress grid lines, because grid strokes can dominate the digit pixels and cause systematic misclassification. Cells with very little foreground content are treated as blank candidates, reducing false digit detections in empty cells.
+You will crop a margin to suppress grid lines, because grid strokes can dominate the digit pixels and cause systematic misclassification. Cells with very little foreground content are treated as blank candidates, reducing false digit detections in empty cells.
 
 ## Batched ONNX inference
 All 81 cell tensors are stacked into a single batch and passed to ONNX Runtime in one call. Because the model was exported with a dynamic batch dimension, this batched inference is efficient and mirrors how the model will be used in production.
@@ -363,14 +365,16 @@ The output logits are converted to probabilities, and the most likely class is s
 The result is a 9×9 board where:
 * 0 represents a blank cell,
 * 1–9 represent recognized digits.
+  
+Batched inference reduces per-call overhead in ONNX Runtime and generally improves throughput on Arm64 CPUs.
 
 ## Solving the Sudoku
-With the recognized board constructed, we apply a classic backtracking Sudoku solver. This solver deterministically fills empty cells while respecting Sudoku constraints (row, column, and 3×3 block rules).
+With the recognized board constructed, you will apply a classic backtracking Sudoku solver. This solver deterministically fills empty cells while respecting Sudoku constraints (row, column, and 3×3 block rules).
 
-If the solver succeeds, we obtain a complete solution. If it fails, the failure usually indicates one or more recognition errors, which can be diagnosed using the intermediate visual outputs.
+If the solver succeeds, you obtain a complete solution. If it fails, the failure usually indicates one or more recognition errors, which can be diagnosed using the intermediate visual outputs.
 
 ## Visualization and outputs
-The processor saves several artifacts to help debugging and demonstration:
+The driver script saves intermediate images (warped grid and optional overlay) under artifacts/ for debugging and documentation:
 - `artifacts/warped.png` – rectified top-down view of the Sudoku grid.
 - `artifacts/overlay_solution.png` – solution digits overlaid onto the original image (if solved).
 - (Optional) `artifacts/recognized_board.png`, `artifacts/solved_board.png`, `artifacts/boards_side_by_side.png` – clean board renderings if you enabled those helpers.
@@ -378,7 +382,7 @@ The processor saves several artifacts to help debugging and demonstration:
 The driver script below saves warped.png and overlay_solution.png by default.
 
 ## Running the processor
-A small driver script (05_RunSudokuProcessor.py) demonstrates how to use the SudokuProcessor:
+A small driver script `05_RunSudokuProcessor.py` demonstrates how to use the SudokuProcessor:
 
 ```python
 import os
