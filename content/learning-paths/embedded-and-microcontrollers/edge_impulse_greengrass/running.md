@@ -1,117 +1,136 @@
 ---
-title: 7. Running
+title: Verify inference and view results
 weight: 9
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Running
+## View live inference in the browser
 
-Now that we have our Edge Impulse component(s) deployed to our edge device, how do we confirm things are working?
+After the deployment completes and the Runner starts, it hosts a local web interface on port 4912. This page shows the live video input (from a camera or a file) alongside real-time inference results and timing information.
 
-Simple!
+Open a browser and navigate to:
 
-On your browser, open the following url:
+```text
+http://<your-edge-device-ip>:4912
+```
 
-		http://<your edge devices public IP address>:4912
-		
-So, for example, if my public ip address of my edge device is "1.1.1.1", my url would be:
+Replace `<your-edge-device-ip>` with the public IP address (for EC2) or local IP address of your edge device. For example, if your device's IP address is `1.1.1.1`:
 
-		http://1.1.1.1:4912
-		
-You should now see both the input (video either from file or from your edge devices attached camera) as well as inference results and inference times. There are two output scenarios depending on whether your edge device has a camera or does not have a camera... read below!
+```text
+http://1.1.1.1:4912
+```
 
-### Option 1: Edge devices with cameras
+### Edge devices with cameras
 
-You should be able to see live video of your camera via the url above. Now, point your camera at this picture:
+If your device has a camera attached, you should see live video in the browser. Point the camera at this test image to verify the model is detecting objects:
 
-![CatsNDogs](./images/DogsAndCats.png)
+![Test image showing a dog and a cat side by side for model verification#center](./images/dogsandcats.png "Test image with a dog and a cat")
 
-You should see that your model, running on the edge, is identifying both the dog and the cat! It should look something like this:
+The model, running on your edge device, identifies both the dog and the cat. The browser output should look similar to this:
 
-![CatsNDogs](./images/DogsAndCats_expected.png)
+![Browser view showing live camera feed with bounding boxes identifying a dog and a cat along with inference timing#center](./images/dogsandcats_expected.png "Expected inference results with camera")
 
-### Option 2: Edge devices without cameras
+### Edge devices without cameras
 
-In this case, you don't have a camera to use but your component is actually configured to pull its image data from local files installed by the optional non-camera component. 
+If your device doesn't have a camera, the component plays a pre-installed 90-second video of a cat. The browser should display something similar to this:
 
-In this instance, a video of a cat will be shown. The url above should be displaying something similar to this:
+![Browser view showing inference results from a video file with a cat detected#center](./images/cats_expected.png "Expected inference results without camera")
 
-![CatsNDogs](./images//Cats_expected.png)
+If the image appears frozen, the Runner has finished playing the video. The Runner is waiting for a `restart` command to replay the video file. The section below explains how to send this command through AWS IoT Core.
 
-Now, if yours looks to be frozen... don't worry! It simply means that the "Runner" has completed playing the 90 second cat video.  The "Runner" service is now waiting for you to issue a "restart" command to replay the same video... please continue reading below... we'll outline how to dispatch the "restart" command via AWS IoTCore!
+## View inference output in AWS IoT Core
 
-### AWS IoTCore Integration
+The Runner publishes inference results and model metrics to AWS IoT Core MQTT topics. You can view these messages in the AWS Console.
 
-With our installed components, we can also examine the ML inference output in AWS IoTCore. 
+Open the AWS Console and navigate to **AWS IoT Core**. Select **MQTT test client** from the left sidebar.
 
-From the AWS Dashboard, bring up the IoTCore dashboard. Select the "MQTT Test Client" from the left hand side:
+In the **Subscribe to a topic** section, enter the following topic filter and select **Subscribe**:
 
-In the "Subscribe to a topic" section, enter this and press "subscribe":
+```text
+/edgeimpulse/device/#
+```
 
-		/edgeimpulse/device/#
-		
-For those edge devices WITH cameras, you should see output on the left whenever your model identifies a cat and/or dog. The output format should look something like this:
+For devices with cameras, inference results appear whenever the model identifies an object. The output looks similar to this:
 
-![Inference Output](./images/EI_Inference_output.png)
+![MQTT test client showing JSON inference output with bounding box coordinates, labels, and confidence scores#center](./images/ei_inference_output.png "Inference output in MQTT test client")
 
-Additionally, you will see, model metrics being published periodically:
+Model metrics are published periodically (controlled by the `metrics_sleeptime_ms` configuration field):
 
-![Model Metrics](./images/EI_Model_Metrics.png)
+![MQTT test client showing model metrics including inference time and resource usage#center](./images/ei_model_metrics.png "Model metrics in MQTT test client")
 
-#### Issuing a command and examining the command result
+## Send commands through AWS IoT Core
 
-The integration provides a set of commands (see the [Summary](8_Summary.md) for details on the commands). One command, in particular, restarts the Edge Impulse "Runner" service. 
+The Edge Impulse Greengrass component supports commands sent through MQTT topics. One common command is `restart`, which restarts the Runner service. This is especially useful for devices without cameras, where the Runner pauses after the video ends.
 
-In order to use commands we have to know what our device is "named" in IoTCore. You can easily find this by looking the inference output in the "MQTT Test Client": the publication "topic" is shown for each inference result you see.  The topic structure is as follows:
+### Find your device name
 
-	/edgeimpulse/devices/<my_device_name>/inference/output
-	/edgeimpulse/devices/<my_device_name>/model/metrics
-	/edgeimpulse/devices/<my_device_name>/command/output
-	/edgeimpulse/devices/<my_device_name>/command/input
-	
-You will want to copy and save off the "my_device_name" portion of the topics that YOU see in your "MQTT Test Client" dashboard's inference results. 
+To send a command, you need the device name that the Runner registered in IoT Core. Look at the inference output in the MQTT test client. Each message is published to a topic with this structure:
 
-Once you have the device name, back on the "MQTT Test Client" dashboard, select the "Publish to a topic" tab and enter this topic (but with YOUR device name filled in):
+```text
+/edgeimpulse/devices/<device-name>/inference/output
+```
 
-	/edgeimpulse/devices/<my_device_name>/command/input
+Copy the `<device-name>` portion from the topic. You'll use it in the next step.
 
-Clear out the message content window and add the following JSON:
+The Runner uses four MQTT topics per device:
 
-	{ 
-	   "cmd": "restart"
-	}
-	
-Click on the "Additional configuration" button and enable the "Retain message on this topic" checkbox. 
+```text
+/edgeimpulse/devices/<device-name>/inference/output
+/edgeimpulse/devices/<device-name>/model/metrics
+/edgeimpulse/devices/<device-name>/command/input
+/edgeimpulse/devices/<device-name>/command/output
+```
 
-Press the "Publish" button. 
+### Send the restart command
 
-What you should see now is that on the topic
+In the MQTT test client, select the **Publish to a topic** tab. Enter the following topic, replacing `<device-name>` with your actual device name:
 
-	/edgeimpulse/devices/<my_device_name>/command/output
+```text
+/edgeimpulse/devices/<device-name>/command/input
+```
 
-notifications that the runner service has been restarted. On your browser, navigate back to:
+Clear the message body and enter the following JSON:
 
-	http://<your edge devices public IP address>:4912
-	
-and you should see your inferencing resuming. You should also see more inference output in IoTCore on this topic:
+```json
+{
+   "cmd": "restart"
+}
+```
 
-	/edgeimpulse/devices/<my_device_name>/inference/output
+Select **Additional configuration** and enable the **Retain message on this topic** checkbox. Then select **Publish**.
 
->**_NOTE:_**
->For those who have edge devices WITHOUT cameras, your runner will read is input image video and report inferences until the video ends. Once ended, the "Runner" will simply wait for you to issue the above "restart" command to replay the video file. The restart command will cause the Runner to restart and it will once again, play the video file. 
+After publishing, you should see a response on the command output topic:
 
-Cool!  Congratulations!  You have completed this workshop!!
+```text
+/edgeimpulse/devices/<device-name>/command/output
+```
 
-#### Supplemental notes
-Below are a few additional notes regarding the component deployment, log files, launch times for some devices:
+The response confirms that the Runner has restarted. Navigate back to `http://<your-edge-device-ip>:4912` in your browser to confirm inference has resumed. You should also see new inference results appearing in the MQTT test client.
 
->**_NOTE:_**
->After the deployment is initiated, on the FIRST invocation of a given deployment, expect to wait several moments (upwards of 5-10 min in fact) while the component installs all of the necessary pre-requisites that the component requires... this can take some time so be patient. You can also log into the edge gateway, receiving the component, and examine log files found in /greengrass/v2/logs. There you will see each components' current log file (same name as the component itself... ie. EdgeImpulseLinuxServiceComponent.log...) were you can watch the installation and invocation as it happens... any errors you might suspect will be shown in those log files. 
+{{% notice Note %}}
+For devices without cameras, the Runner reads the sample video file and reports inferences until the video ends. After that, the Runner waits for a `restart` command to replay the video. Sending the restart command causes the Runner to start the video from the beginning.
+{{% /notice %}}
 
->**_NOTE:_**
->While the components are running, in addition to the /greengrass/v2/logs directory, each component has a runtime log in /tmp.  The format of the log file is: "ei\_lockfile\_[linux | runner | serial]\_\<EI DEVICE\>.log.  Users can "tail" that log file to watch the component while it is running. 
+## Troubleshooting
 
->**_NOTE:_**
->Additionally, for Jetson-based devices where the model has been compiled specifically for that platform, one can expect to have a 2-3 minute delay in the model being loaded into the GPU memory for the first time.  Subsequent invocations will be very short. 
+If the Runner doesn't start or the browser page doesn't load, check the following:
+
+**First deployment takes time**: On the first deployment, the component installs all prerequisites (Node.js, libvips, Edge Impulse CLI). This can take 5–10 minutes. Monitor progress by tailing the component log on your device:
+
+```bash
+sudo tail -f /greengrass/v2/logs/EdgeImpulseLinuxRunnerServiceComponent.log
+```
+
+**Runtime logs**: While the component is running, the Runner writes a separate log file in `/tmp`. The filename follows the pattern `ei_lockfile_runner_<device-name>.log`. Tail this file to watch live inference activity:
+
+```bash
+sudo tail -f /tmp/ei_lockfile_runner_*.log
+```
+
+**Jetson GPU model loading**: On Jetson devices where the model is compiled for GPU acceleration, expect a 2–3 minute delay the first time the model loads into GPU memory. Subsequent starts are much faster.
+
+## What you've accomplished
+
+In this section, you verified that the Edge Impulse Runner is running inference on your edge device, viewed results in the browser and AWS IoT Core MQTT topics, and sent a restart command through IoT Core. In the next section, you'll find a complete command and configuration reference.
