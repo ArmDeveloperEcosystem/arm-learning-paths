@@ -38,3 +38,9 @@ Reproducibility can be defined at different levels, depending on how similar or 
 This Learning Path focuses on cross-vector-extension reproducibility (scalar, NEON, SVE on AArch64).
 
 Now that you understand what numerical reproducibility means and the different levels it can operate at, the next section covers real-world applications where this property is critical.
+
+## What you've learned and what's next
+
+You now understand the core concept of numerical reproducibility in floating-point computation and the different levels at which it can be achieved. You've learned why reproducibility matters and how it relates to portability and determinism.
+
+Next, you'll explore specific real-world applications where reproducibility is essential for mission-critical systems and regulatory compliance.
