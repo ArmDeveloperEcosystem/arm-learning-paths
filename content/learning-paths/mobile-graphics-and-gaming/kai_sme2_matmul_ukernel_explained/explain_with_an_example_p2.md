@@ -48,3 +48,9 @@ If you cloned the KleidiAI repository earlier, locate the LHS quantization + pac
 ```bash
 grep -R "kai_run_lhs_quant_pack_qsi8d32p_f32_neon" -n kai | head
 ```
+
+## What you've learned and what's next
+
+You've learned how the FP32 LHS activations are quantized to signed INT8 and packed into the qsi8d32p1vlx4 format during inference. You understand how this dynamic packing enables efficient contiguous memory access in the SME2 microkernel.
+
+Next, you'll walk through the SME2 matmul microkernel inner loop to see how packed LHS and RHS feed the MOPA instructions.

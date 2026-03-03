@@ -1,9 +1,5 @@
 ---
 title: Understand KleidiAI SME2 matmul microkernels
-
-draft: true
-cascade:
-    draft: true
     
 minutes_to_complete: 40
 
@@ -16,8 +12,9 @@ learning_objectives:
     - Perform basic hands-on checks (source inspection and optional disassembly) to confirm where SME2 instructions appear
 
 prerequisites:
-    - Familiarity with basic GEMM/matmul and quantization concepts
-    - (Optional) Access to an Arm CPU with SME2 support (Linux or Android) for the "run on device" steps
+    - Basic understanding of general matrix multiplication (GEMM) and matmul operations
+    - Basic understanding of quantization concepts for neural networks
+    - (Optional) Access to an Arm CPU with SME2 support (Linux or Android) for hands-on verification steps
 
 author: Zenon Zhilong Xiu
 
@@ -47,7 +44,7 @@ further_reading:
         link: https://developer.arm.com/community/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction-p2
         type: blog
     - resource:
-        title: Part 4, Arm SME2 introduction
+        title: Part 4 Arm SME2 introduction
         link: https://developer.arm.com/community/arm-community-blogs/b/architectures-and-processors-blog/posts/part4-arm-sme2-introduction
         type: blog
     - resource:

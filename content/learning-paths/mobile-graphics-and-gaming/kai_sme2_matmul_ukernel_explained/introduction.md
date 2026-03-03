@@ -6,7 +6,7 @@ weight: 2
 layout: learningpathall
 ---
 
-## Overview
+## KleidiAI SME2 matmul microkernel overview
 
 KleidiAI includes highly optimized matrix multiplication (matmul) microkernels that accelerate quantized operators on Arm CPUs. On SME2-capable systems, these microkernels use SME2 INT8 MOPA (outer product accumulate) instructions to increase throughput for the compute-heavy parts of inference.
 
@@ -81,3 +81,9 @@ sysctl -a | rg -i 'sme2|sme'
 {{< /tabpane >}}
 
 If neither `sme` nor `sme2` appears, you can still follow the explanation, but you should treat any "run" steps as not applicable on your device.
+
+## What you've learned and what's next
+
+You've confirmed where to find the SME2 matmul microkernel source in KleidiAI and verified whether SME2 is available on your device. You understand the scope of this Learning Path and know which parts are hands-on versus conceptual.
+
+Next, you'll explore how KleidiAI matmul microkernels use tiling and packing to structure matrix multiplication work.

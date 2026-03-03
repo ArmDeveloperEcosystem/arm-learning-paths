@@ -61,7 +61,13 @@ grep -n "smopa" "$KERNEL_FILE" | head
 You’ll connect these `smopa` sites to the "load → dequantize → MOPA → dequantize" flow later in the example walk-through.
 
 You can find more information about SME2 MOPA here,
--  [part 1 Arm Scalable Matrix Extension Introduction](https://developer.arm.com/community/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction)
-- [part 2 Arm Scalable Matrix Extension Instructions](https://developer.arm.com/community/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction-p2)
--  [part4 Arm SME2 Introduction](https://developer.arm.com/community/arm-community-blogs/b/architectures-and-processors-blog/posts/part4-arm-sme2-introduction)
+-  [Part 1 Arm Scalable Matrix Extension Introduction](https://developer.arm.com/community/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction)
+- [Part 2 Arm Scalable Matrix Extension Instructions](https://developer.arm.com/community/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction-p2)
+-  [Part 4 Arm SME2 Introduction](https://developer.arm.com/community/arm-community-blogs/b/architectures-and-processors-blog/posts/part4-arm-sme2-introduction)
+
+## What you've learned and what's next
+
+You've learned how SME2 INT8 MOPA instructions compute outer products for matrix multiplication and how the 1VL×4VL pattern pipelines four MOPA instructions to improve throughput. You can now connect MOPA operations to output tile shapes.
+
+Next, you'll decode the specific SME2 matmul microkernel name and understand what the format tags reveal about input layouts and tile dimensions.
    
