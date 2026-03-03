@@ -1,26 +1,22 @@
 ---
-title: "ONNX in Action: Building, Optimizing, and Deploying ML Models on Arm64 and Mobile Devices"
+title: "Build, optimize, and deploy ML models with ONNX on Arm64 and mobile devices"
 
-draft: true
-cascade:
-    draft: true
-    
 minutes_to_complete: 240
 
-who_is_this_for: This learning path is intended for developers who want to build, optimize, and deploy machine learning models using ONNX. It is particularly relevant for those targeting Arm64-based platforms such as Raspberry Pi, Arm-based laptops, cloud instances, or Android smartphones, where performance-per-watt and efficient edge inference are critical.
+who_is_this_for: This is an advanced topic for developers who want to build, optimize, and deploy machine learning models using ONNX on Arm64-based platforms such as Raspberry Pi, Arm-based laptops, cloud instances, or Android smartphones.
 
 learning_objectives:
-  - Explain what ONNX is and how it enables model portability across ML frameworks.
-  - Build and export a simple neural network model in Python to ONNX format.
-  - Run inference (and optionally training workflows) using ONNX Runtime on Arm64 platforms.
-  - Apply model optimization techniques to improve performance.
-  - Integrate and deploy an optimized ONNX model inside an Android application.
+  - Explain what ONNX is and how it enables model portability across ML frameworks
+  - Build and export a neural network model in Python to ONNX format
+  - Run inference using ONNX Runtime on Arm64 platforms
+  - Apply model optimization techniques to improve performance
+  - Deploy an optimized ONNX model in an Android application
 
 prerequisites:
-  - A development machine with Python 3.10 or 3.11 installed (Prebuilt ONNX Runtime packages for Arm platforms may not yet support Python 3.12.)
-  - Basic familiarity with PyTorch or TensorFlow.
-  - An Arm64 device (e.g., Raspberry Pi or Android smartphone).
-  - "[Android Studio](https://developer.android.com/studio) for building and deploying the Android application."
+  - A development machine with Python 3.10 or 3.11 installed (Prebuilt ONNX Runtime packages for Arm platforms don't yet support Python 3.12)
+  - Basic familiarity with PyTorch or TensorFlow
+  - An Arm64 device such as a Raspberry Pi or Android smartphone
+  - Android Studio (required only for the final deployment section)
 
 author: Dawid Borycki
 
@@ -34,6 +30,7 @@ operatingsystems:
   - Windows
   - Linux
   - macOS
+  - Android
 tools_software_languages:
   - Python
   - PyTorch
@@ -42,7 +39,6 @@ tools_software_languages:
   - Android
   - Android Studio
   - Kotlin
-  - Java
 
 further_reading:
   - resource:
