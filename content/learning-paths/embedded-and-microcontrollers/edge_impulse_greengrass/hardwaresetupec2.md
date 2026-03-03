@@ -5,113 +5,144 @@ hide_from_navpane: true
 layout: learningpathall
 ---
 
-## Setup and Configuration for Ubuntu-based EC2 instance
+## Set up an Ubuntu EC2 Arm instance
 
-### Create Ubuntu EC2 Instance
+If you don't have a physical edge device, you can use an AWS EC2 instance with an Arm-based Graviton processor to simulate one. This section walks you through creating the instance, connecting over SSH, and installing the dependencies needed for AWS IoT Greengrass and Edge Impulse.
 
-AWS EC2 instances can be used to simulate edge devices when edge device hardware isn't available.  
+### Create the EC2 instance
 
-We'll start by opening our AWS Console and search for EC2:
+Open the AWS Console and search for **EC2**:
 
-![AWS Console](./images/EC2_Setup_1.png)
+![AWS Console search bar with EC2 typed in the search field#center](./images/EC2_Setup_1.png "Search for EC2 in the AWS Console")
 
-We'll now open the EC2 console page:
+Open the EC2 console page:
 
-![AWS EC2 Console](./images/EC2_Setup_2.png)
+![EC2 dashboard showing the main console page with instance summary#center](./images/EC2_Setup_2.png "EC2 console page")
 
-Select "Launch instance". Provide a Name for the EC2 instance and select the "Ubuntu" Quick Start option. Additionally, select "64-bit(Arm)" as the architecture type and select "t4g.large" as the Instance type:
+Select **Launch instance** and configure the following settings:
 
-![Create EC2 Instance](./images/EC2_Setup_3.png)
+- Provide a name for the instance (for example, `EdgeDeviceSimulator`).
+- Under **Quick Start**, select **Ubuntu**.
+- Set the architecture to **64-bit (Arm)**.
+- Set the instance type to **t4g.large**.
 
-Additionally, please click on "Create new Key Pair" and provide a name for a new SSH key pair that will be used to SSH into our EC2 instance. Press "Create key pair":
+![EC2 instance creation form showing Ubuntu selected with 64-bit Arm architecture and t4g.large instance type#center](./images/EC2_Setup_3.png "EC2 instance configuration")
 
-![Create EC2 Keypair](./images/EC2_Setup_4.png)
+### Create an SSH key pair
 
->**_NOTE:_**
->You will notice that a download will occur with your browser. Save off this key (a .pem file) as we'll use it shortly.
+Select **Create new Key Pair** and provide a name for the key pair. Select **Create key pair**:
 
-Next, we need to edit our "Network Settings" for our EC2 instance... scroll down to "Network Settings" and press "Edit":
+![Key pair creation dialog with a name field and Create key pair button#center](./images/EC2_Setup_4.png "Create a new SSH key pair")
 
-![Security Group](./images/EC2_Setup_4_ns.png)
+{{% notice Note %}}
+Your browser downloads a `.pem` file automatically. Save this file in a known location because you need it to SSH into the instance.
+{{% /notice %}}
 
-Press "Add security group rule" and lets allow port tcp/4912:
+### Configure network settings
 
-![Security Group](./images/EC2_Setup_4_4912.png)
+Scroll down to **Network Settings** and select **Edit**:
 
-Lets also give the EC2 instance a bit more disk space. Please change the "8" to "28" here:
+![Network settings section of the EC2 launch wizard with an Edit button#center](./images/EC2_Setup_4_ns.png "Edit network settings")
 
-![Increase disk space](./images/EC2_Setup_5.png)
+Select **Add security group rule** and add a rule to allow inbound TCP traffic on port 4912. The Edge Impulse Runner serves a web-based inference viewer on this port, which you use later to confirm the model is running.
 
-Finally, press "Launch instance". You should see your EC2 instance getting created:
+For both the SSH rule (port 22) and the port 4912 rule, restrict the source to your own IP address rather than allowing access from anywhere. To find your current public IP, run:
 
-![Launch Instance](./images/EC2_Setup_6.png)
+```bash
+curl http://checkip.amazonaws.com
+```
 
-Now, press "View all instances" and press the refresh button... you should see your new EC2 instance in the "Running" state:
+Enter the returned IP address with a `/32` suffix (for example, `203.0.113.10/32`) in the **Source** field for each security group rule. This limits access to your machine only.
 
-![Running Instance](./images/EC2_Setup_7.png)
+![Security group rule showing TCP port 4912 allowed for inbound traffic#center](./images/EC2_Setup_4_4912.png "Add security group rule for port 4912")
 
-You can scroll over and save off your Public IPv4 IP Address. You'll need this to SSH into your EC2 instance. 
+### Increase disk space
 
-Lets now confirm that we can SSH into our EC2 instance. With the saved off pem file and our EC2 Public IPv4 IP address, lets ssh into our EC2 instance
-  
->**_NOTE:_**
->In this example, my pem file is named	DougsEC2SimulatedEdgeDeviceKeyPair.pem and my EC2 instances' public IP address is 1.2.3.4
+The default 8 GB root volume isn't enough for the dependencies and model files. Under **Configure storage**, change the root volume size from `8` to `28` GB:
 
-	chmod 600 DougsEC2SimulatedEdgeDeviceKeyPair.pem
-	ssh -i ./DougsEC2SimulatedEdgeDeviceKeyPair.pem ubuntu@1.2.3.4
+![Storage configuration showing the root volume size set to 28 GB#center](./images/EC2_Setup_5.png "Increase root volume to 28 GB")
 
-You should see a login shell now for your EC2 instance!
+### Launch and verify the instance
 
-![Login Shell](./images/EC2_Setup_8.png)
+Select **Launch instance**. You should see a confirmation that the instance is being created:
 
-Excellent! You can keep that shell open as we'll make use of it when we start installing Greengrass a bit later. 
+![Launch confirmation screen showing the instance is being created#center](./images/EC2_Setup_6.png "Instance launch confirmation")
 
-Lastly, lets install the prerequisites that we need. Please run these commands to add some required dependencies:
+Select **View all instances** and refresh the page. Your instance should show a **Running** state:
 
-	sudo apt update	
-	sudo apt install -y curl unzip
-	sudo apt install -y gcc g++ make build-essential nodejs sox gstreamer1.0-tools gstreamer1.0-plugins-good gstreamer1.0-plugins-base gstreamer1.0-plugins-base-apps
-	
-Additionally, we need to install the prerequisites for AWS IoT Greengrass "classic":
+![EC2 instances list showing the new instance in Running state with a public IP address#center](./images/EC2_Setup_7.png "Running EC2 instance")
 
-	sudo apt install -y default-jdk  
+Copy the **Public IPv4 address** from the instance details. You need this to connect over SSH.
 
-Before we go to the next section, lets also save off this JSON - it will be used to configure our AWS Greengrass custom component a bit later:
+### Connect over SSH
 
-#### Non-Camera configuration
+Open a terminal and connect to the instance using your `.pem` file and the public IP address. Replace the placeholders with your actual file name and IP:
 
-	{     
-	   "Parameters": { 
-	      "node_version": "20.18.2",
-	      "vips_version": "8.12.1",
-	      "device_name": "MyEC2EdgeDevice",
-	      "launch": "runner",
-	      "sleep_time_sec": 10,
-	      "lock_filename": "/tmp/ei_lockfile_runner",
-	      "gst_args": "filesrc:location=/home/ggc_user/data/testSample.mp4:!:decodebin:!:videoconvert:!:videorate:!:video/x-raw,framerate=2200/1:!:jpegenc",
-	      "eiparams": "--greengrass",
-	      "iotcore_backoff": "-1",
-	      "iotcore_qos": "1",
-	      "ei_bindir": "/usr/local/bin",
-	      "ei_sm_secret_id": "EI_API_KEY",
-	      "ei_sm_secret_name": "ei_api_key",
-	      "ei_poll_sleeptime_ms": 2500,
-	      "ei_local_model_file": "/home/ggc_user/data/currentModel.eim",
-	      "ei_shutdown_behavior": "wait_on_restart",
-	      "ei_ggc_user_groups": "video audio input users system",
-	      "install_kvssink": "no",
-	      "publish_inference_base64_image": "no",
-	      "enable_cache_to_file": "no",
-	      "cache_file_directory": "__none__",
-	      "enable_threshold_limit": "no",
-	      "metrics_sleeptime_ms": 30000,
-	      "default_threshold": 50,
-	      "threshold_criteria": "ge",
-	      "enable_cache_to_s3": "no",
-	      "s3_bucket": "__none__" 
-	   }  
-	}
+```bash
+chmod 600 your-key-pair.pem
+ssh -i ./your-key-pair.pem ubuntu@<your-ec2-public-ip>
+```
 
-OK, Lets proceed to the next step and get our Edge Impulse environment setup!  Press "Next" to continue:
+You should see a login shell for your EC2 instance:
 
-### [Next](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/edgeimpulseprojectbuild/)
+![Terminal showing a successful SSH login to the Ubuntu EC2 instance#center](./images/EC2_Setup_8.png "SSH login shell")
+
+Keep this shell open. You'll use it in the following steps.
+
+### Install dependencies
+
+The Edge Impulse Runner and AWS IoT Greengrass require several system packages. Update the package list and install the build tools, Node.js, and GStreamer plugins:
+
+```bash
+sudo apt update
+sudo apt install -y curl unzip
+sudo apt install -y gcc g++ make build-essential nodejs sox gstreamer1.0-tools gstreamer1.0-plugins-good gstreamer1.0-plugins-base gstreamer1.0-plugins-base-apps
+```
+
+Greengrass Nucleus Classic is Java-based, so you also need a JDK:
+
+```bash
+sudo apt install -y default-jdk
+```
+
+### Save the component configuration
+
+The JSON below configures the Edge Impulse Greengrass component for this EC2 instance. Because the instance has no camera, the configuration uses `gst_args` to read inference input from a local video file instead.
+
+Save this JSON to a text file on your local machine. You'll paste it into the Greengrass deployment configuration in a later step.
+
+```json
+{
+   "Parameters": {
+      "node_version": "20.18.2",
+      "vips_version": "8.12.1",
+      "device_name": "MyEC2EdgeDevice",
+      "launch": "runner",
+      "sleep_time_sec": 10,
+      "lock_filename": "/tmp/ei_lockfile_runner",
+      "gst_args": "filesrc:location=/home/ggc_user/data/testSample.mp4:!:decodebin:!:videoconvert:!:videorate:!:video/x-raw,framerate=2200/1:!:jpegenc",
+      "eiparams": "--greengrass",
+      "iotcore_backoff": "-1",
+      "iotcore_qos": "1",
+      "ei_bindir": "/usr/local/bin",
+      "ei_sm_secret_id": "EI_API_KEY",
+      "ei_sm_secret_name": "ei_api_key",
+      "ei_poll_sleeptime_ms": 2500,
+      "ei_local_model_file": "/home/ggc_user/data/currentModel.eim",
+      "ei_shutdown_behavior": "wait_on_restart",
+      "ei_ggc_user_groups": "video audio input users system",
+      "install_kvssink": "no",
+      "publish_inference_base64_image": "no",
+      "enable_cache_to_file": "no",
+      "cache_file_directory": "__none__",
+      "enable_threshold_limit": "no",
+      "metrics_sleeptime_ms": 30000,
+      "default_threshold": 50,
+      "threshold_criteria": "ge",
+      "enable_cache_to_s3": "no",
+      "s3_bucket": "__none__"
+   }
+}
+```
+
+Your EC2 instance is ready. Return to the [hardware setup page](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/hardwaresetup/) and continue to the next section to set up your Edge Impulse project.

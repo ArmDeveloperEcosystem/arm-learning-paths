@@ -1,384 +1,386 @@
 ---
-title: 8. Summary/Conclusions
+title: Command and metrics reference
 weight: 10
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Summary 
+## Overview
 
-Congratulations!  You have completed this workshop!  Please select "Next" below to read a bit about cleaning up your AWS environment in order to minimize costs/etc (AWS workshop attendees: this will happen automatically for you)
+This page is a reference for the MQTT commands and model metrics available in the Edge Impulse Greengrass integration. Use these commands to control the Runner service, manage the confidence threshold filter, retrieve model information, and manage the inference cache — all through AWS IoT Core MQTT topics.
 
-### For More Information
+Commands are sent as JSON messages to the device's command input topic and results are published to the command output topic:
 
-Below is some detailed reference information regarding the Edge Impulse AWS IoT Integration
+```text
+/edgeimpulse/device/<device-name>/command/input
+/edgeimpulse/device/<device-name>/command/output
+```
 
-## Model Metrics
+All commands use the following JSON structure:
 
-Basic model metrics are now accumulated and published in the integration into IoT Core. The metrics will be published at specified intervals (per the "metrics\_sleeptime\_ms" component configuration parameter) to the following IoT Core topic:
+```json
+{
+   "cmd": "<command-verb>",
+   "value": "<optional-value>"
+}
+```
 
-		/edgeimpulse/device/<EdgeImpulseDeviceName>/model/metrics
-		
-The metrics published are:
+The `value` field is only required for commands that set a value.
 
-* **accumulated mean**: running accumulation of the average confidences from the linux runner while running the current model
-* **accumulated standard deviation**: running accumulation of the standard deviation from the linux runner while running the current model
+## Model metrics
 
-The format of the model metrics output is as follows:
+The Runner accumulates and publishes model metrics to IoT Core at the interval specified by the `metrics_sleeptime_ms` configuration parameter. Metrics are published to:
 
-		{
-		  "mean_confidence": 0.696142,
-		  "standard_deviation": 0.095282,
-		  "confidence_trend": "decr",
-		  "details": {
-		    "n": 5,
-		    "sum_confidences": 3.480711,
-		    "sum_confidences_squared": 2.468464
-		  },
-		  "ts": 1736016142920,
-		  "id": "e4faa78b-2a09-40d1-adfd-8e5fc32feb11"
-		}
+```text
+/edgeimpulse/device/<device-name>/model/metrics
+```
 
-## Command Reference
+The published metrics include:
 
-In the 2025 January integration update, the following commands are now available with the Edge Impulse Greengrass Linux Runner Greengrass integration. The following commands are dispatched via the integration's IoT Core Topic as a JSON:
+- **mean_confidence**: Running average of inference confidence scores for the current model.
+- **standard_deviation**: Running standard deviation of confidence scores.
+- **confidence_trend**: Direction the confidence is trending (`incr` or `decr`).
 
-		/edgeimpulse/device/<EdgeImpulseDeviceName>/command/input
-		
-Results from the command can be found using the following topic:
+Example metrics output:
 
-		/edgeimpulse/device/<EdgeImpulseDeviceName>/command/output
+```json
+{
+   "mean_confidence": 0.696142,
+   "standard_deviation": 0.095282,
+   "confidence_trend": "decr",
+   "details": {
+      "n": 5,
+      "sum_confidences": 3.480711,
+      "sum_confidences_squared": 2.468464
+   },
+   "ts": 1736016142920,
+   "id": "e4faa78b-2a09-40d1-adfd-8e5fc32feb11"
+}
+```
 
-Command JSON structure is defined as follows:
+## Startup notification
 
-	{
-		"cmd": <command verb>, 
-		"value": <if command is a "set" command, setting value goes here>
-	}
+When the Runner starts or restarts, it publishes the following JSON to the command output topic:
 
-The currently supported commands are described below:
+```json
+{
+   "result": {
+      "status": "started",
+      "ts": 1736026956853,
+      "id": "5c4e627e-6e9d-4382-bba7-00c0129705c4"
+   }
+}
+```
 
-### Initial Invocation
+You can use this message to detect service restarts and re-apply any runtime changes (for example, confidence filter settings) to the newly started Runner.
 
-When the runner process is started/restarted, the following JSON will be published to the command output topic above:
+## restart
 
-		{
-		  "result": {
-		    "status": "started",
-		    "ts": 1736026956853,
-		    "id": "5c4e627e-6e9d-4382-bba7-00c0129705c4"
-		  }
-		}
+Restarts the Edge Impulse Runner process. When used with the `ei_shutdown_behavior` option set to `wait_on_restart`, the Runner pauses after the model completes and waits for this command before restarting.
 
-This JSON can be used to flag a new invocation of the runner service (or a restart of the runner service). If there are any previous runtime changes made (i.e. confidence filter settings for example... see below), those changes can be resent to the newly invoked runtime. 
+**Command:**
 
-### Restart Command
+```json
+{
+   "cmd": "restart"
+}
+```
 
-##### Command JSON:
+## enable_threshold_filter
 
-		{
-		 "cmd": "restart"
-		}
-		
-##### Command Description:
+Enables the confidence threshold filter. When enabled, only inference results that meet the threshold criteria are published to IoT Core. By default, the filter is disabled and all results are published.
 
-This command directs the integration to "restart" the Edge Impulse linux runner process. In conjunction with the "ei\_shutdown\_behavior" option being set to "wait\_for\_restart", the linux runner process will continue operating after the model has completed its operation. The linux runner process will continue to process input commands and will restart the linux runner via dispatching this command. 
+**Command:**
 
-### Enable Threshold Filter Command
+```json
+{
+   "cmd": "enable_threshold_filter"
+}
+```
 
-##### Command JSON:
+**Result:**
 
-		{
-		 "cmd": "enable_threshold_filter"
-		}
-		
-##### Command Description:
+```json
+{
+   "result": {
+      "threshold_filter_config": {
+         "enabled": "yes",
+         "confidence_threshold": 0.7,
+         "threshold_criteria": "ge"
+      }
+   }
+}
+```
+
+## disable_threshold_filter
+
+Disables the confidence threshold filter. All inference results are published to IoT Core regardless of confidence score.
+
+**Command:**
+
+```json
+{
+   "cmd": "disable_threshold_filter"
+}
+```
+
+**Result:**
+
+```json
+{
+   "result": {
+      "threshold_filter_config": {
+         "enabled": "no",
+         "confidence_threshold": 0.7,
+         "threshold_criteria": "ge"
+      }
+   }
+}
+```
+
+## set_threshold_filter_criteria
+
+Sets the comparison operator for the confidence threshold filter. The available criteria are:
 
-This command directs the integration to enable the threshold filter.  The filter will control which inferences will get published into IoT Core. By default the filter is disabled so that all inferences reported are sent into IoT Core. 
+| Criteria | Description |
+|---|---|
+| `gt` | Publish if confidence is greater than the threshold |
+| `ge` | Publish if confidence is greater than or equal to the threshold |
+| `eq` | Publish if confidence is equal to the threshold |
+| `le` | Publish if confidence is less than or equal to the threshold |
+| `lt` | Publish if confidence is less than the threshold |
 
-##### Command Result:
+**Command:**
 
-The command output will be published as follows and will include the filter config:
+```json
+{
+   "cmd": "set_threshold_filter_criteria",
+   "value": "ge"
+}
+```
+
+**Result:**
+
+```json
+{
+   "result": {
+      "criteria": "gt"
+   }
+}
+```
 
-		{
-		  "result": {
-		    "threshold_filter_config": {
-		      "enabled": "yes",
-		      "confidence_threshold": 0.7,
-		      "threshold_criteria": "ge"
-		    }
-		  }
-		}
-
-### Disable Threshold Filter Command
-
-##### Command JSON:
-
-		{
-		 "cmd": "disable_threshold_filter"
-		}
-		
-##### Command Description:
-
-This command directs the integration to disable the threshold filter.  
-
-##### Command Result:
-
-The command output will be published as follows and will include the filter config:
-
-		{
-		  "result": {
-		    "threshold_filter_config": {
-		      "enabled": "no",
-		      "confidence_threshold": 0.7,
-		      "threshold_criteria": "ge"
-		    }
-		  }
-		}
-
-### Set Threshold Filter Criteria Command
-
-##### Command JSON:
-
-		{
-		 "cmd": "set_threshold_filter_criteria",
-		 "value": "ge"
-		}
-		
-##### Command Description:
-
-This command directs the integration to set the threshold filter criteria. The available options for the criteria are:
-
-* **"gt"**: publish if inference confidence is "greater than"...
-* **"ge"**: publish if inference confidence is "greater than or equal to"...
-* **"eq"**: publish if inference confidence is "equal to"...
-* **"le"**: publish if inference confidence is "less than or equal to"...
-* **"gt"**: publish if inference confidence is "less than"...
-
-##### Command Result:
-
-The command output will be published as follows:
-
-		{
-		  "result": {
-		    "criteria": "gt"
-		  }
-		}
-
-### Get Threshold Filter Criteria Command
-
-##### Command JSON:
-
-		{
-		 "cmd": "get_threshold_filter_criteria"
-		}
-		
-##### Command Description:
-
-This command directs the integration to get the threshold filter criteria. The currently set threshold criteria is published to the command output topic above. 
-
-##### Command Result:
-
-The command output will be published as follows with the configured criteria:
-
-		{
-		  "result": {
-		    "criteria": "gt"
-		  }
-		}
-
-
-### Set Threshold Filter Confidence Command
-
-##### Command JSON:
-
-		{
-		 "cmd": "set_threshold_filter_confidence",
-		 "value": 0.756
-		}
-		
-##### Command Description:
-
-This command directs the integration to set the threshold filter confidence bar. The value set must be a value 0 < x <= 1.0
-
-##### Command Result:
-
-The command output will be published as follows with the specified confidence bar:
-
-		{
-		  "result": {
-		    "confidence_threshold": "0.756"
-		  }
-		}
-
-
-### Get Threshold Filter Confidence Command
-
-##### Command JSON:
-
-		{
-		 "cmd": "get_threshold_filter_confidence"
-		}
-		
-##### Command Description:
-
-This command directs the integration to get the threshold filter confidence bar. The currently set threshold confidence value is published to the command output topic above. 
-
-##### Command Result:
-
-The command output will be published as follows with the currently configured confidence bar:
-
-		{
-		  "result": {
-		    "confidence_threshold": "0.756"
-		  }
-		}
-
-### Get Threshold Filter Config Command
-
-##### Command JSON:
-
-		{
-		 "cmd": "get_threshold_filter_config"
-		}
-		
-##### Command Description:
-
-This command directs the integration to retrieve the current threshold filter config. The currently set threshold filter config is published to the command output topic above.
-
-##### Command Result:
-
-The command output will be published as follows with the currently configured filter config:
-
-		{
-		  "result": {
-		    "threshold_filter_config": {
-		      "enabled": "no",
-		      "confidence_threshold": "0.756",
-		      "threshold_criteria": "gt"
-		    }
-		  }
-		}
-
-### Get Model Info Command
-
-##### Command JSON:
-
-		{
-		 "cmd": "get_model_info"
-		}
-		
-##### Command Description:
-
-This command directs the integration to retrieve the currently running model information. The model information is published to the command output topic above.
-
-##### Command Result:
-
-The command output will be published as follows with the current model information:
-
-		{
-		  "result": {
-		    "model_info": {
-		      "model_name": "occupant_counter",
-		      "model_version": "v25",
-		      "model_params": {
-		        "axis_count": 1,
-		        "frequency": 0,
-		        "has_anomaly": 0,
-		        "image_channel_count": 3,
-		        "image_input_frames": 1,
-		        "image_input_height": 640,
-		        "image_input_width": 640,
-		        "image_resize_mode": "fit-longest",
-		        "inferencing_engine": 6,
-		        "input_features_count": 409600,
-		        "interval_ms": 1,
-		        "label_count": 1,
-		        "labels": [
-		          "person"
-		        ],
-		        "model_type": "object_detection",
-		        "sensor": 3,
-		        "slice_size": 102400,
-		        "threshold": 0.5,
-		        "use_continuous_mode": false,
-		        "sensorType": "camera"
-		      }
-		    }
-		  }
-		}
-
-### Reset Model Metrics Command
-
-##### Command JSON:
-
-		{
-		 "cmd": "reset_metrics"
-		}
-		
-##### Command Description:
-
-This command directs the integration to reset the model metrics counters.  
-
-##### Command Result:
-
-The command output will be published as follows to indicate the metrics counters are reset:
-
-		{
-		  "result": {
-		    "metrics_reset": "OK"
-		  }
-		}
-	
-### Clear Cache Command
-
-##### Command JSON:
-
-		{
-		 "cmd": "clear_cache"
-		}
-		
-##### Command Description:
-
-This command directs the integration to clear the currently configured inference image cache. The entire cache will be cleared. This command is sensitive to the Greengrass component configuration (i.e. which inference caches are enabled/disabled). This command will clear ALL caches that are currently enabled in the component configuration. 
-
-##### Command Result:
-
-The command output will be published as follows with the clear cache results:
-
-		{
-		  "result": {
-		    "clear_cache": {
-		      "local": "OK",
-		      "s3": "OK"
-		    }
-		  }
-		}
-
-### Clear Specified File From Cache Command
-
-##### Command JSON:
-
-		{
-		 "cmd": "clear_cache_file"
-		 "value": <uuid>
-		}
-		
-##### Command Description:
-
-This command directs the integration to clear the specified file (by its uuid) from within the inference cache.  This command is sensitive to the Greengrass component configuration (i.e. which inference caches are enabled/disabled).  This command will clear the specified file from ALL enabled caches per the component configuration. 
-
-##### Command Result:
-
-The command output will be published as follows with the clear cache results for the specified UUID:
-
-		{
-		  "result": {
-		    "clear_cache_file": {
-		      "local": "OK",
-		      "s3": "OK",
-		      "uuid": "e4faa78b-2a09-40d1-adfd-8e5fc32feb11"
-		    }
-		  }
-		}
+## get_threshold_filter_criteria
+
+Retrieves the currently configured threshold filter criteria.
+
+**Command:**
+
+```json
+{
+   "cmd": "get_threshold_filter_criteria"
+}
+```
+
+**Result:**
+
+```json
+{
+   "result": {
+      "criteria": "gt"
+   }
+}
+```
+
+## set_threshold_filter_confidence
+
+Sets the confidence threshold value. Inference results are filtered against this value using the configured criteria. The value must be between 0 and 100.
+
+**Command:**
+
+```json
+{
+   "cmd": "set_threshold_filter_confidence",
+   "value": 0.756
+}
+```
+
+**Result:**
+
+```json
+{
+   "result": {
+      "confidence_threshold": "0.756"
+   }
+}
+```
+
+## get_threshold_filter_confidence
+
+Retrieves the currently configured confidence threshold value.
+
+**Command:**
+
+```json
+{
+   "cmd": "get_threshold_filter_confidence"
+}
+```
+
+**Result:**
+
+```json
+{
+   "result": {
+      "confidence_threshold": "0.756"
+   }
+}
+```
+
+## get_threshold_filter_config
+
+Retrieves the complete threshold filter configuration, including enabled state, confidence value, and criteria.
+
+**Command:**
+
+```json
+{
+   "cmd": "get_threshold_filter_config"
+}
+```
+
+**Result:**
+
+```json
+{
+   "result": {
+      "threshold_filter_config": {
+         "enabled": "no",
+         "confidence_threshold": "0.756",
+         "threshold_criteria": "gt"
+      }
+   }
+}
+```
+
+## get_model_info
+
+Retrieves information about the currently running model, including its name, version, input dimensions, labels, and detection type.
+
+**Command:**
+
+```json
+{
+   "cmd": "get_model_info"
+}
+```
+
+**Result:**
+
+```json
+{
+   "result": {
+      "model_info": {
+         "model_name": "occupant_counter",
+         "model_version": "v25",
+         "model_params": {
+            "axis_count": 1,
+            "frequency": 0,
+            "has_anomaly": 0,
+            "image_channel_count": 3,
+            "image_input_frames": 1,
+            "image_input_height": 640,
+            "image_input_width": 640,
+            "image_resize_mode": "fit-longest",
+            "inferencing_engine": 6,
+            "input_features_count": 409600,
+            "interval_ms": 1,
+            "label_count": 1,
+            "labels": [
+               "person"
+            ],
+            "model_type": "object_detection",
+            "sensor": 3,
+            "slice_size": 102400,
+            "threshold": 0.5,
+            "use_continuous_mode": false,
+            "sensorType": "camera"
+         }
+      }
+   }
+}
+```
+
+## reset_metrics
+
+Resets the accumulated model metrics counters to zero.
+
+**Command:**
+
+```json
+{
+   "cmd": "reset_metrics"
+}
+```
+
+**Result:**
+
+```json
+{
+   "result": {
+      "metrics_reset": "OK"
+   }
+}
+```
+
+## clear_cache
+
+Clears all inference image caches. This command respects the component configuration — it clears all caches that are currently enabled (local file cache, S3 cache, or both).
+
+**Command:**
+
+```json
+{
+   "cmd": "clear_cache"
+}
+```
+
+**Result:**
+
+```json
+{
+   "result": {
+      "clear_cache": {
+         "local": "OK",
+         "s3": "OK"
+      }
+   }
+}
+```
+
+## clear_cache_file
+
+Removes a specific cached inference result by its UUID. Like `clear_cache`, this command clears the file from all enabled caches.
+
+**Command:**
+
+```json
+{
+   "cmd": "clear_cache_file",
+   "value": "<uuid>"
+}
+```
+
+**Result:**
+
+```json
+{
+   "result": {
+      "clear_cache_file": {
+         "local": "OK",
+         "s3": "OK",
+         "uuid": "e4faa78b-2a09-40d1-adfd-8e5fc32feb11"
+      }
+   }
+}
+```
