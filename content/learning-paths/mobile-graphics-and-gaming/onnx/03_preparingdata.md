@@ -7,7 +7,7 @@ layout: "learningpathall"
 ---
 ## Overview
 
-The end goal is a camera-to-solution Sudoku app that runs efficiently on Arm64 devices (for example, Raspberry Pi or Android phones). ONNX is the glue: you will train the digit recognizer in PyTorch, export it to ONNX, and run it anywhere with ONNX Runtime (CPU EP on edge devices, NNAPI EP on Android). Everything around the model—grid detection, perspective rectification, and solving—stays deterministic and lightweight.
+The end goal is a camera-to-solution Sudoku app that runs efficiently on Arm64 devices (for example, Raspberry Pi or Android phones). ONNX is the glue: you will train the digit recognizer in PyTorch, export it to ONNX, and run it anywhere with ONNX Runtime (CPU EP on edge devices, NNAPI EP on Android). Everything around the model--grid detection, perspective rectification, and solving--stays deterministic and lightweight.
 
 
 

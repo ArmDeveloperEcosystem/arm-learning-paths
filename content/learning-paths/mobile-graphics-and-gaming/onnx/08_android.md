@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 ## Objective
 
-You'll now transition from desktop deployment to a fully on-device Android application. The goal is to demonstrate how the optimized Sudoku pipeline—image preprocessing, ONNX inference, and deterministic solving—can be packaged and executed entirely on a mobile device, without relying on cloud services.
+You'll now transition from desktop deployment to a fully on-device Android application. The goal is to demonstrate how the optimized Sudoku pipeline--image preprocessing, ONNX inference, and deterministic solving--can be packaged and executed entirely on a mobile device, without relying on cloud services.
 
 Rather than starting with a live camera feed, you begin with a fixed input bitmap generated earlier in the Learning Path. This approach allows you to focus on correctness, performance, and integration details before introducing additional complexity such as camera permissions, real-time capture, and varying lighting conditions.
 
@@ -1043,7 +1043,7 @@ These tests demonstrate that the application is robust to perspective distortion
 
 ## What you've accomplished and what's next
 
-You built an end-to-end workflow for deploying ONNX models on Arm64 and mobile platforms—from model development in Python to on-device Android deployment. Throughout this Learning Path, you trained a lightweight digit recognizer and constructed an OpenCV-based pipeline for grid detection and rectification, exported models to ONNX with dynamic batch support, validated correctness with ONNX Runtime, applied practical optimizations including quantization and session tuning, and integrated everything into an on-device Android app with no cloud dependency. The final application processes Sudoku images from capture to completed solution, all running locally on the device.
+You built an end-to-end workflow for deploying ONNX models on Arm64 and mobile platforms--from model development in Python to on-device Android deployment. Throughout this Learning Path, you trained a lightweight digit recognizer and constructed an OpenCV-based pipeline for grid detection and rectification, exported models to ONNX with dynamic batch support, validated correctness with ONNX Runtime, applied practical optimizations including quantization and session tuning, and integrated everything into an on-device Android app with no cloud dependency. The final application processes Sudoku images from capture to completed solution, all running locally on the device.
 
 ### Real-world considerations
 
@@ -1071,4 +1071,3 @@ All source code used throughout this learning path is available in the following
 Throughout this Learning Path, you built a complete machine learning deployment pipeline from training to mobile deployment. You created and trained a digit recognition model in PyTorch, exported it to the portable ONNX format with dynamic batch support, and validated inference correctness across frameworks. You then integrated the model into an end-to-end Sudoku processing system using OpenCV for image processing and grid detection, applied performance optimizations including INT8 quantization, and measured real-world latency characteristics on Arm64 hardware. Finally, you deployed the entire pipeline as a fully functional Android application that performs on-device inference with ONNX Runtime, demonstrating how to bring machine learning models from development to production on Arm-based mobile platforms without cloud dependencies.
 
 You can now apply these techniques to other vision-based applications on Arm platforms, experiment with different model architectures and optimization strategies, or extend this foundation to solve similar document processing and grid-based recognition tasks.
-

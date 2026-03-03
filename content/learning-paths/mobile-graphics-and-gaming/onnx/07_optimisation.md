@@ -408,7 +408,8 @@ Also compare file sizes:
 ```console
 ls -lh artifacts/sudoku_digitnet.onnx artifacts/sudoku_digitnet.int8.onnx
 ```
-Even when inference time changes only modestly, size reduction is typically significant and matters for Android packaging. 
+
+Expected file size reduction is approximately 4x (for example, from 52KB to 14KB). Even when inference time changes only modestly, size reduction is significant and matters for Android packaging.
 
 In this pipeline, quantization primarily reduces model size and improves deployability, while runtime speedups may be modest because inference is already a small fraction of the total latency.
 

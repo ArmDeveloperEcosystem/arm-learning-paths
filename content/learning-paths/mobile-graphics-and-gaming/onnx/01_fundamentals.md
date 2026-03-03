@@ -11,7 +11,7 @@ This Learning Path provides a practical, end-to-end introduction to working with
 
 ## What is ONNX?
 
-ONNX (Open Neural Network Exchange) is an open standard for representing machine learning models as a framework-independent intermediate representation (IR). Instead of relying on the internal model format of a specific framework—such as PyTorch or TensorFlow—ONNX defines a common computational graph structure, standardized operators, and well-specified data types.
+ONNX (Open Neural Network Exchange) is an open standard for representing machine learning models as a framework-independent intermediate representation (IR). Instead of relying on the internal model format of a specific framework--such as PyTorch or TensorFlow--ONNX defines a common computational graph structure, standardized operators, and well-specified data types.
 
 At its core, an ONNX model is a directed acyclic graph (DAG). Nodes represent mathematical operations (such as Conv, MatMul, or Relu), while edges represent tensors flowing between these operations. The model file stores both the graph structure and the trained parameters (weights), making it self-contained and executable without the original training framework.
 
@@ -63,7 +63,7 @@ The structured design allows ONNX to describe anything from a simple logistic re
 
 You can visualize the graph using tools such as Netron, while runtimes such as ONNX Runtime parse and execute it efficiently.
 
-Because the model is graph-based, you can modify it programmatically—adding, removing, or replacing nodes. Graph-level flexibility enables optimization techniques such as operator fusion, constant folding, and quantization, which you will explore later in this Learning Path.
+Because the model is graph-based, you can modify it programmatically--adding, removing, or replacing nodes. Graph-level flexibility enables optimization techniques such as operator fusion, constant folding, and quantization, which you will explore later in this Learning Path.
 
 ## ONNX Runtime
 
@@ -96,7 +96,7 @@ A typical ONNX workflow looks like this:
 - Optimize the model: apply graph optimizations like layer fusion, constant folding, or quantization to improve performance and reduce memory usage, making the model more suitable for edge and mobile deployments.
 - Deploy: finally, the optimized ONNX model is packaged into its target environment. This could be an Arm64-based embedded system (e.g., Raspberry Pi), a server powered by Arm CPUs (e.g., AWS Graviton), or an Android application distributed via the Play Store.
 
-This modularity means developers are free to mix and match the best tools for each stage: train in PyTorch, optimize with ONNX Runtime, and deploy to Android—all without rewriting the model. By decoupling training from inference, ONNX enables efficient workflows that span from research experiments to production-grade applications.
+This modularity means developers are free to mix and match the best tools for each stage: train in PyTorch, optimize with ONNX Runtime, and deploy to Android--all without rewriting the model. By decoupling training from inference, ONNX enables efficient workflows that span from research experiments to production-grade applications.
 
 ## Example use cases
 ONNX is already widely adopted in real-world applications where portability and performance are critical. A few common examples include:
