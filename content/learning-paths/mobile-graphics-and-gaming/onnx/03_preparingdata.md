@@ -1,36 +1,44 @@
 ---
-# User change
-title: "Preparing a Synthetic Sudoku Digit Dataset"
+title: "Generate a synthetic Sudoku digit dataset"
 
 weight: 4
 
 layout: "learningpathall"
 ---
+## Overview
 
-The end goal is a camera-to-solution Sudoku app that runs efficiently on Arm64 devices (e.g., Raspberry Pi or Android phones). ONNX is the glue: you will train the digit recognizer in PyTorch, export it to ONNX, and run it anywhere with ONNX Runtime (CPU EP on edge devices, NNAPI EP on Android). Everything around the model—grid detection, perspective rectification, and solving—stays deterministic and lightweight.
+The end goal is a camera-to-solution Sudoku app that runs efficiently on Arm64 devices (for example, Raspberry Pi or Android phones). ONNX is the glue: you will train the digit recognizer in PyTorch, export it to ONNX, and run it anywhere with ONNX Runtime (CPU EP on edge devices, NNAPI EP on Android). Everything around the model—grid detection, perspective rectification, and solving—stays deterministic and lightweight.
+
+
+
 
 ## Objective
-In this step, you will generate a custom dataset of Sudoku puzzles and their digit crops, which you'll use to train a digit recognition model. Starting from a Hugging Face parquet dataset that provides paired puzzle/solution strings, you transform raw boards into realistic, book-style Sudoku pages, apply camera-like augmentations to mimic mobile captures, and automatically slice each page into 81 labeled cell images. This yields a large, diverse, perfectly labeled set of digits (0–9 with 0 = blank) without manual annotation. By the end, you’ll have a structured dataset ready to train a lightweight model in the next section.
 
-## Why Synthetic Generation?
+In this step, you'll generate a custom dataset of Sudoku puzzles and digit crops for training. Starting from a Hugging Face parquet dataset that provides paired puzzle/solution strings, you will transform raw boards into realistic, book-style Sudoku pages, apply camera-like augmentations to mimic mobile captures, and automatically slice each page into 81 labeled cell images. This yields a large, diverse, perfectly labeled set of digits (0–9 with 0 = blank) without manual annotation.
+
+## Why synthetic generation?
 
 Obtaining a well-labeled dataset that matches real capture conditions is often the hardest part of building a vision model. MNIST contains handwritten digits, which differ significantly from printed, grid-aligned Sudoku digits. Training only on MNIST typically results in poor performance on printed puzzles.
 
 By generating synthetic Sudoku pages directly from structured puzzle data, you gain:
 
-1. **Perfect labeling** – Since the puzzle content is known, every cropped cell automatically receives the correct label (digit or blank). This eliminates manual annotation errors.
+* **Perfect labeling**: since the puzzle content is known, every cropped cell automatically receives the correct label (digit or blank). This eliminates manual annotation errors.
 
-2. **Domain alignment** – The rendered digits match printed-book Sudoku styling rather than handwritten digits.
+* **Domain alignment**: the rendered digits match printed-book Sudoku styling rather than handwritten digits.
 
-3. **Controlled augmentation** – By applying perspective warps, blur, and illumination variations, we approximate smartphone capture conditions. This improves robustness when deploying on mobile devices.
+* **Controlled augmentation**: by applying perspective warps, blur, and illumination variations, we approximate smartphone capture conditions. This improves robustness when deploying on mobile devices.
 
-4. **Scalability** – With large numbers of available Sudoku puzzles, we can generate tens of thousands of labeled samples quickly.
+* **Scalability**: with large numbers of available Sudoku puzzles, we can generate tens of thousands of labeled samples quickly.
 
 One important consideration is class imbalance: Sudoku puzzles contain many blank cells, so the “0” class will naturally dominate. You will address this during training if needed through sampling or loss weighting.
 
-## What you will produce
-By the end of this step, you will have two complementary datasets:
-1. Digit crops for training the classifier. A folder tree structured for torchvision.datasets.ImageFolder, containing tens of thousands of labeled 28×28 images of Sudoku digits (0–9, with 0 meaning blank):
+## Dataset structure
+
+By the end of this section, you will have two complementary datasets:
+
+### Digit crops for training
+
+A folder tree structured for `torchvision.datasets.ImageFolder`, containing tens of thousands of labeled 28×28 images of Sudoku digits (0–9, with 0 meaning blank):
 
 ```console
 data/
@@ -45,9 +53,11 @@ data/
     9/....png
 ```
 
-These will be used in next step to train a lightweight model for digit recognition.
+These will be used in the next section to train a lightweight model for digit recognition.
 
-2. Rendered Sudoku grids for camera simulation. Full-page Sudoku images (both clean book-style and augmented camera-like versions) stored in:
+### Rendered Sudoku grids
+
+Full-page Sudoku images (both clean book-style and augmented camera-like versions) stored in:
 ```console
 data/
   grids/
@@ -207,7 +217,7 @@ if __name__ == "__main__":
     main()
 ```
 
-At the top, you set basic knobs for the generator: where to read the Parquet file, where to write outputs, how many puzzles to render for train/val, page size, grid margin, crop size, and the OpenCV font. Tweaking these lets you control dataset scale, visual style, and classifier input size (e.g., CELL_SIZE=32 if you want a slightly larger digit crop).
+At the top, you set basic knobs for the generator: where to read the Parquet file, where to write outputs, how many puzzles to render for train/val, page size, grid margin, crop size, and the OpenCV font. Tweaking these lets you control dataset scale, visual style, and classifier input size (for example, CELL_SIZE=32 if you want a slightly larger digit crop).
 
 The method `str_to_grid(s)` converts an 81-character Sudoku string into a 9×9 list of integers. Each character represents a cell: 0 is blank, 1–9 are digits. This is the canonical internal representation used throughout the script.
 
@@ -239,8 +249,11 @@ data/
     val/    (..._clean.png, ..._cam.png)
 ```
 
-## Launching instructions
-1. Install dependencies (inside your virtual env):
+## Run the data generation script
+
+### Install dependencies
+
+Inside your virtual environment, install the required packages:
 ```console
 pip install pandas pyarrow opencv-python tqdm numpy
 ```
@@ -270,5 +283,8 @@ Tips
 * If you want larger inputs for the classifier, increase CELL_SIZE to 32 or 40.
 * To make augmentation a bit stronger (more realistic), slightly increase the perspective jitter in aug_camera, add brightness/contrast jitter, or a faint gradient shadow overlay.
 
-## Summary
-After running this step you’ll have a robust, labeled, Sudoku-specific dataset: thousands of digit crops (including blanks) for training and realistic full-page grids for pipeline testing. You’re ready for the next step—training the digit recognizer and exporting it to ONNX.
+## What you've learned and what's next
+
+In this section, you've learned why synthetic data generation is essential for Sudoku digit recognition, and you've built a complete pipeline to generate realistic labeled datasets. You've created thousands of digit crops (0–9, with 0 representing blanks) and full-page Sudoku images with camera-like augmentations. You now have both the micro-level training data your classifier needs and the macro-level test images to validate the end-to-end pipeline later.
+
+In the next section, you'll take these digit crops and train a lightweight neural network model using PyTorch, then export it to ONNX format so it can run efficiently on Arm devices with ONNX Runtime.

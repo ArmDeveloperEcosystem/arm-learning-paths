@@ -1,23 +1,25 @@
 ---
-# User change
-title: "Sudoku Processor. From Image to Solution"
-weight: 7
-layout: "learningpathall"
+title: "Build the Sudoku processor pipeline"
 
+weight: 7
+
+layout: "learningpathall"
 ---
 
-## Objective ##
+## Objective
 
-In this section, you will integrate all previous components into a complete Sudoku processing pipeline. Starting from a full Sudoku image, you detect and rectify the grid, split it into individual cells, recognize digits using the ONNX model, and finally solve the puzzle using a deterministic solver. By the end of this step, you will have an end-to-end system that takes a photograph of a Sudoku puzzle and produces a solved board, along with visual outputs for debugging and validation.
+Integrate all previous components into a complete Sudoku processing pipeline. Starting from a full Sudoku image, detect and rectify the grid, split it into individual cells, recognize digits using the ONNX model, and solve the puzzle using a deterministic solver. By the end of this section, you will have an end-to-end system that takes a photograph of a Sudoku puzzle and produces a solved board, along with visual outputs for debugging and validation.
 
 ## Context
-So far, you have:
-1. Generated a synthetic, well-labeled Sudoku digit dataset,
-2. Trained a lightweight CNN (DigitNet) to recognize digits and blanks,
-3. Exported the model to ONNX with dynamic batch support,
-4. Validated inference correctness and analyzed errors using confusion matrices.
 
-At this point, the digit recognizer is reliable in isolation. The remaining challenge is connecting vision with reasoning: extracting the Sudoku grid from an image, mapping each cell to a digit, and applying a solver. This section bridges that gap.
+So far in this Learning Path, you have:
+
+- Generated a synthetic, well-labeled Sudoku digit dataset
+- Trained a lightweight CNN (DigitNet) to recognize digits and blanks
+- Exported the model to ONNX with dynamic batch support
+- Validated inference correctness and analyzed errors using confusion matrices
+
+At this point, the digit recognizer is reliable in isolation. The remaining challenge is connecting vision with reasoning: extracting the Sudoku grid from an image, mapping each cell to a digit, and applying a solver.
 
 ## Overview of the pipeline
 To implement the Sudoku processor, create a file named `sudoku_processor.py` with the code below:
@@ -440,13 +442,10 @@ You simply provide the path to a Sudoku image and the ONNX model, and the script
 
 Representational result is shown below:
 
-![img2](figures/02.png)
+![Sudoku processing pipeline result showing the original camera-like input image on the left and the solved puzzle with green-filled digits overlaid on the right](figures/02.png)
 
-## Summary
-By completing this section, you have built a full vision-to-solution Sudoku system:
-1. A trained and validated ONNX digit recognizer,
-2. A robust OpenCV-based image processing pipeline,
-3. A deterministic solver,
-4. Clear visual diagnostics at every stage.
+## What you've learned and what's next
 
-In the next step of the learning path, we will focus on optimization and deployment.
+In this section, you integrated all previous components into a complete end-to-end Sudoku processing pipeline. You built a system that detects and rectifies Sudoku grids from photographs, splits them into individual cells, recognizes digits using batched ONNX inference, applies a deterministic solver, and overlays solutions onto the original image. The pipeline now processes Sudoku images from camera capture to solved puzzle overlay with clear visual diagnostics at every stage.
+
+Next, you'll focus on optimization techniques to improve model performance and prepare the system for efficient deployment on Arm64 and mobile platforms.

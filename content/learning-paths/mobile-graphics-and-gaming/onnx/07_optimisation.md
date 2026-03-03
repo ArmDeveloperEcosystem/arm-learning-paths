@@ -1,20 +1,24 @@
 ---
-title: "Model Enhancements and Optimizations"
+title: "Optimize the model for Arm64 deployment"
+
 weight: 8
+
 layout: "learningpathall"
 ---
 
 ## Objective
-In this section, you will improve the Sudoku system from a working prototype into something that is faster, smaller, and more robust on Arm64-class hardware. Start by measuring a baseline, then apply ONNX Runtime optimizations and quantization, and finally address the most common real bottleneck: image preprocessing. At each step you will re-check accuracy and solve rate so performance gains don’t come at the cost of correctness.
+
+In this section, you'll transform the Sudoku system from a working prototype into one that is faster, smaller, and more robust on Arm64 hardware. Start by measuring a baseline, then apply ONNX Runtime optimizations and quantization, and finally address the most common bottleneck: image preprocessing. At each step, re-check accuracy and solve rate so performance gains don't come at the cost of correctness.
 
 ## Establish a baseline
 Before applying any optimizations, it is essential to understand where time is actually being spent in the Sudoku pipeline. Without this baseline, it is impossible to tell whether an optimization is effective or whether it simply shifts the bottleneck elsewhere.
 
-In the current system, the total latency of processing a single Sudoku image is composed of four main stages:
-* Grid detection and warping – locating the outer Sudoku grid and rectifying it using a perspective transform. This step relies entirely on OpenCV and depends on image resolution, lighting, and grid clarity.
-* Cell preprocessing – converting each of the 81 cells into a normalized 28×28 grayscale input for the neural network. This includes cropping margins, thresholding, and morphological operations. In practice, this stage is often the dominant cost.
-* ONNX inference – running the digit recognizer on all 81 cells as a single batch. Thanks to dynamic batch support, this step is typically fast compared to preprocessing.
-* Solving – applying a backtracking Sudoku solver to the recognized board. This step is usually negligible in runtime, unless recognition errors lead to difficult or contradictory boards.
+The total latency of processing a single Sudoku image is composed of four main stages:
+
+* **Grid detection and warping:** locating the outer Sudoku grid and rectifying it using a perspective transform. Depends on image resolution, lighting, and grid clarity. Uses OpenCV only.
+* **Cell preprocessing:** converting each of the 81 cells into a normalized 28×28 grayscale input for the neural network. Includes cropping margins, thresholding, and morphological operations. Often the dominant cost.
+* **ONNX inference:** running the digit recognizer on all 81 cells as a single batch. Typically fast thanks to dynamic batch support.
+* **Solving:** applying a backtracking Sudoku solver to the recognized board. Usually negligible in runtime, unless recognition errors lead to difficult or contradictory boards.
 
 To quantify these contributions, you will add simple timing measurements around each stage of the pipeline using a high-resolution clock (time.perf_counter()). For each processed image, you will print a breakdown:
 * warp_ms – time spent on grid detection and perspective rectification
@@ -294,7 +298,9 @@ solve_ms        mean=74.76  median=2.02  p90=48.51  p95=74.82
 total_ms        mean=89.41  median=16.97  p90=62.95  p95=89.43
 ```
 
-Notice that solve_ms (and therefore total_ms) has a much larger mean than median. This indicates a small number of outliers where the solver takes significantly longer. In practice, this occurs when one or more digits are misrecognized, forcing the backtracking solver to explore many branches before finding a solution (or failing). For interactive applications, median and p95 latency are more informative than the mean, as they better reflect typical user experience.
+{{% notice Note %}} These measurements were obtained on a MacBook Pro with Apple M3 Pro running macOS 14.5. Performance on other Arm64 platforms (Raspberry Pi 5, AWS Graviton, etc.) will vary based on CPU performance and memory bandwidth. The relative distribution of time across pipeline stages should remain similar.{{% /notice %}}
+
+Notice that `solve_ms` (and therefore `total_ms`) has a much larger mean than median. This indicates a small number of outliers where the solver takes significantly longer. In practice, this occurs when one or more digits are misrecognized, forcing the backtracking solver to explore many branches before finding a solution (or failing). For interactive applications, median and p95 latency are more informative than the mean, as they better reflect typical user experience.
 
 ## ONNX Runtime session optimizations
 Now that you can measure onnx_ms and total_ms, the first low-effort improvement is to enable ONNX Runtime’s built-in graph optimizations and tune CPU threading. These changes do not modify the model, but can reduce inference overhead and improve throughput.
@@ -417,13 +423,8 @@ The most effective improvements include:
 
 These changes typically reduce `preprocess_ms` more than any model-level optimization, and therefore have the greatest impact on end-to-end latency.
 
-## Summary
-In this section, you transformed the Sudoku solver from a functional prototype into a system with measurable, well-understood performance characteristics. By instrumenting the pipeline with fine-grained timing, we identified where computation is actually spent and established a quantitative baseline.
+## What you've learned and what's next
 
-You showed that:
-- Batched ONNX inference is already efficient (≈1–2 ms per board).
-- Image preprocessing dominates runtime and offers the largest optimization potential.
-- Solver backtracking introduces rare but significant tail-latency outliers.
-- ONNX Runtime optimizations and INT8 quantization improve deployability, even when raw inference speed gains are modest.
+You transformed the Sudoku solver from a functional prototype into a system with measurable, well-understood performance characteristics. You established quantitative baselines showing that ONNX inference takes approximately 1–2 ms per board, identified image preprocessing as the dominant cost (~3 ms) and the largest optimization opportunity, applied INT8 quantization achieving approximately 4x model size reduction, and demonstrated a systematic optimization workflow where you measure first, optimize second, and always re-validate correctness.
 
-Most importantly, we demonstrated a systematic optimization workflow: **measure first, optimize second, and always re-validate correctness**. With performance, robustness, and accuracy validated, the Sudoku pipeline is now ready for its final step—deployment as a fully on-device Android application.
+Next, you'll deploy the optimized Sudoku pipeline as a fully on-device Android application, integrating the ONNX model with camera capture and real-time processing.
