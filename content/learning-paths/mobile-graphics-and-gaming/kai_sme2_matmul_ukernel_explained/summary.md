@@ -6,7 +6,7 @@ weight: 9
 layout: learningpathall
 ---
 
-## Wrap-up
+## Summary: SME2 matmul microkernel understanding
 
 You've successfully navigated one of the more complex areas of AI inference optimization - understanding how low-level SME2 instructions accelerate quantized matrix multiplication. You've walked through how an SME2-optimized KleidiAI matmul microkernel:
 - Converts weights into a kernel-friendly packed RHS layout
@@ -16,7 +16,7 @@ You've successfully navigated one of the more complex areas of AI inference opti
 
 You traced the complete dataflow using a concrete GGML Q4_0 example and can now connect high-level AI frameworks to the Arm hardware features that make them fast.
 
-If you completed the optional hands-on checks, you've verified where the key SME2 instructions appear in the microkernel source—valuable experience for anyone working with performance-critical code on Arm platforms.
+If you completed the optional hands-on checks, you've verified where the key SME2 instructions appear in the microkernel source — valuable experience for anyone working with performance-critical code on Arm platforms.
 
 You're now equipped to apply the same approach to real workloads:
 - Use [the llama.cpp performance Learning Path](/learning-paths/mobile-graphics-and-gaming/performance_llama_cpp_sme2/) to build and profile llama.cpp with KleidiAI on an SME2-capable device
