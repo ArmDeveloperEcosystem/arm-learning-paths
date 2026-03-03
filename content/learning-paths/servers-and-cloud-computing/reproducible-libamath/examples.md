@@ -189,6 +189,6 @@ In this section you observed that, when reproducibility is enabled (`AMATH_REPRO
 
 This behavior extends to other reproducible math routines in Libamath. Scalar, NEON, and SVE implementations are numerically aligned for all functions listed in `amath_repro.h`. Reproducible symbols are always prefixed by `armpl_` and are not provided with `ZGV` mangling. Reproducibility is available on Linux platforms, and results are independent of vector width or instruction selection. Reproducible routines prioritize determinism over peak performance.
 
-## What you've accomplished
+## What you've learned and what's next
 
 In this Learning Path, you learned what numerical reproducibility means in floating-point software and explored real-world applications where it is critical. You then enabled cross-vector-extension reproducibility in Libamath and verified that scalar, NEON, and SVE code paths produce bitwise-identical results for the `expf()` function. You can now apply these techniques to your own applications using Arm Performance Libraries.

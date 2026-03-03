@@ -24,7 +24,7 @@ However correctly rounded routines (maximum error under 0.5ULP) are reproducible
 
 {{% /notice %}}
 
-## Levels of Reproducibility
+## Levels of reproducibility
 
 Reproducibility can be defined at different levels, depending on how similar or different the execution environments are:
 
