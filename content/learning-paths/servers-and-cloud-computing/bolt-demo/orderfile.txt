@@ -1,0 +1,10 @@
+_ZL5swap1PiS_
+_ZL10cold_func1v
+_ZL5swap2PiS_
+_ZL10cold_func2v
+_ZL5swap3PiS_
+_ZL10cold_func3v
+_ZL5swap4PiS_
+_ZL10cold_func4v
+_ZL5swap5PiS_
+_ZL10cold_func5v
