@@ -60,3 +60,9 @@ echo "1VLx4VL tile: ${FP32_PER_VL}x$((4 * FP32_PER_VL))"
 ```
 
 If your target device uses a different SVL, the same formulas still apply.
+
+## What you've learned and what's next
+
+You've decoded the SME2 matmul microkernel name and understand what 1VL×4VL means for tile dimensions. You learned how the input format tags describe quantization and packing requirements for LHS and RHS.
+
+Next, you'll walk through a concrete example starting with RHS weight repacking from GGML Q4_0 format.

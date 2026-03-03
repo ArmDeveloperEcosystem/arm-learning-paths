@@ -1,14 +1,6 @@
 ---
 title: Understand KleidiAI SME2 matmul microkernels
-
-draft: true
-cascade:
-    draft: true
     
-minutes_to_complete: 40
-
-who_is_this_for: This is an advanced topic for software developers, performance engineers, and AI practitioners.
-
 learning_objectives: 
     - Explain how a KleidiAI microkernel performs matrix multiplication (matmul) with quantized data
     - Identify how SME2 INT8 MOPA (matrix outer product accumulate) instructions map to matmul work
@@ -47,7 +39,7 @@ further_reading:
         link: https://developer.arm.com/community/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction-p2
         type: blog
     - resource:
-        title: Part 4, Arm SME2 introduction
+        title: Part 4 Arm SME2 introduction
         link: https://developer.arm.com/community/arm-community-blogs/b/architectures-and-processors-blog/posts/part4-arm-sme2-introduction
         type: blog
     - resource:

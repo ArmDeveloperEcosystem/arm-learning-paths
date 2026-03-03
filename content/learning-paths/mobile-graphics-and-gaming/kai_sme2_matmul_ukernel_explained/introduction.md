@@ -81,3 +81,9 @@ sysctl -a | rg -i 'sme2|sme'
 {{< /tabpane >}}
 
 If neither `sme` nor `sme2` appears, you can still follow the explanation, but you should treat any "run" steps as not applicable on your device.
+
+## What you've learned and what's next
+
+You've confirmed where to find the SME2 matmul microkernel source in KleidiAI and verified whether SME2 is available on your device. You understand the scope of this Learning Path and know which parts are hands-on versus conceptual.
+
+Next, you'll explore how KleidiAI matmul microkernels use tiling and packing to structure matrix multiplication work.
