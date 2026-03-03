@@ -14,7 +14,7 @@ This Learning Path uses one concrete KleidiAI microkernel to explain SME2 matmul
 
 In the rest of this Learning Path, this is referred to as *the SME2 matmul microkernel* (unless noted otherwise).
 
-### Decode `1vlx4vl`
+### Decode 1vlx4vl
 
 `_1vlx4vl` indicates that, in a single inner-loop iteration, the kernel computes an intermediate result for a 1VL × 4VL submatrix (one SME2 streaming vector length × four SME2 streaming vector lengths) of the output matrix.
 
