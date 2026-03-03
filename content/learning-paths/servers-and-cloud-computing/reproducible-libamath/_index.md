@@ -1,10 +1,6 @@
 ---
 title: Enable reproducible math functions across vector extensions with Arm Performance Libraries
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 10
 author: Joana Cruz
 
@@ -17,8 +13,8 @@ learning_objectives:
     - Enable and use reproducible Libamath functions in real applications
 
 prerequisites:
-    - An Arm computer running Linux with [Arm Performance Libraries](/install-guides/armpl/) version 26.01 or newer installed.
-    - A C compiler such as [GCC](/install-guides/gcc/native/) or Clang installed.
+    - An Arm computer running Linux with [Arm Performance Libraries](/install-guides/armpl/) version 26.01 or newer installed
+    - A C compiler such as [GCC](/install-guides/gcc/native/) or Clang installed
 
 ### Tags
 skilllevels: Introductory

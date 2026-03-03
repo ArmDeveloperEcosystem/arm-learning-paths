@@ -6,7 +6,12 @@ weight: 3
 layout: learningpathall
 ---
 
+
+## Key domains requiring reproducible math
+
 Reproducibility is not required for every application, but it is critical in several important domains.
+
+
 
 ## Auto-vectorization
 
@@ -27,3 +32,9 @@ In real-time environments, determinism is essential. Bitwise-identical results s
 Many games and simulations rely on deterministic numerical behavior. Reproducibility enables lockstep simulations across threads or devices and helps prevent desynchronization in multiplayer or replay systems. Deterministic math also simplifies testing and debugging of complex numerical code.
 
 Now that you've seen where reproducibility matters in practice, the next section explains how Libamath implements cross-vector-extension reproducibility and how to enable it in your applications.
+
+## What you've learned and what's next
+
+You've explored several real-world scenarios where reproducibility is critical: auto-vectorization requiring consistent results across scalar and vector paths, distributed computing needing deterministic numerics across nodes, embedded systems demanding bitwise-identical validation, and gaming requiring lockstep simulations.
+
+Next, you'll learn how to enable reproducible math routines in Libamath and integrate them into your build system.
