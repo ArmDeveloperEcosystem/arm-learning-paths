@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Wrap-up
 
-You've successfully navigated one of the more complex areas of AI inference optimization—understanding how low-level SME2 instructions accelerate quantized matrix multiplication. You've walked through how an SME2-optimized KleidiAI matmul microkernel:
+You've successfully navigated one of the more complex areas of AI inference optimization - understanding how low-level SME2 instructions accelerate quantized matrix multiplication. You've walked through how an SME2-optimized KleidiAI matmul microkernel:
 - Converts weights into a kernel-friendly packed RHS layout
 - Quantizes and packs activations into a packed LHS layout
 - Uses SME2 INT8 MOPA instructions (`smopa`) plus LUT-based dequantization (`luti4`) to compute a 1VL×4VL output tile efficiently

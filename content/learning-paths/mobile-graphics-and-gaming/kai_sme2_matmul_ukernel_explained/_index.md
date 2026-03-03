@@ -1,6 +1,10 @@
 ---
 title: Understand KleidiAI SME2 matmul microkernels
     
+minutes_to_complete: 40
+
+who_is_this_for: This is an advanced topic for software developers, performance engineers, and AI practitioners.
+
 learning_objectives: 
     - Explain how a KleidiAI microkernel performs matrix multiplication (matmul) with quantized data
     - Identify how SME2 INT8 MOPA (matrix outer product accumulate) instructions map to matmul work
@@ -8,8 +12,9 @@ learning_objectives:
     - Perform basic hands-on checks (source inspection and optional disassembly) to confirm where SME2 instructions appear
 
 prerequisites:
-    - Familiarity with basic GEMM/matmul and quantization concepts
-    - (Optional) Access to an Arm CPU with SME2 support (Linux or Android) for the "run on device" steps
+    - Basic understanding of general matrix multiplication (GEMM) and matmul operations
+    - Basic understanding of quantization concepts for neural networks
+    - (Optional) Access to an Arm CPU with SME2 support (Linux or Android) for hands-on verification steps
 
 author: Zenon Zhilong Xiu
 
