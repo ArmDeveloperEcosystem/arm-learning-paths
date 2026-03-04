@@ -45,13 +45,13 @@ Finally, clicking 'Run Recipe' at the bottom should launch the workload and meas
 
 Performix will generate a high level view of the instruction pipeline, highlighting areas where most time is spent.
 
-[topdown-results.jpg](topdown-results.jpg)
+![topdown-results.jpg](topdown-results.jpg)
 
 In the breakdown we see that Backend Stalls dominate samples. Within that, the work is split between Load Operations and Integer and Floating point operations.
 Notably, there's no measured activity in SIMD operations, even though this workload is very parallelizable.
 
 The Insights tab on the right highlights ALU contention as a possible opportunity for improvement.
 
-[topdown-insights.jpg](topdown-insights.jpg)
+![topdown-insights.jpg](topdown-insights.jpg)
 
 For more details on the types of instructions executed by this workload, we'll look into the Instruction Mix recipe in the next step.
