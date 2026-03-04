@@ -1,20 +1,20 @@
 ---
-title: High-Speed Analytics with Apache Arrow Flight on Arm64
+title: Run high-speed analytics with Apache Arrow Flight on arm64
 weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## High-Speed Analytics with Apache Arrow Flight
+## Run high-speed analytics with Apache Arrow Flight
 
 In this section, you deploy Apache Arrow Flight, a high-performance RPC framework designed for analytics workloads. Arrow Flight enables zero-copy, memory-to-memory data transfer over gRPC, making it ideal for distributed analytics engines.
 
 Arrow Flight enables **zero-copy, memory-to-memory data transfer over gRPC**, allowing analytical data to be shared between processes and systems without serialization overhead. This makes it ideal for distributed analytics engines, interactive query systems, and real-time data pipelines.
 
-This section demonstrates how Arrow Flight works on Arm64 (Axion) using a simple **server–client setup on the same VM.**
+This section demonstrates how Arrow Flight works on arm64 (Axion) using a simple server-client setup on the same virtual machine.
 
-## Architecture Overview
+## Architecture overview
 
 ```text
 Arrow Table (In-Memory)
@@ -33,13 +33,14 @@ Arrow Flight Client
 - No intermediate files or object storage are involved
 - Data is transferred efficiently with minimal CPU overhead
 
-## Start Arrow Flight Server (Same Machine)
+## Start Arrow Flight server on the same virtual machine
+
 In this step, you create an Arrow Flight server that exposes an in-memory Arrow table to clients over gRPC.
 
 Create a file named `flight_server.py`.
 
 
-```pyhton
+```python
 import pyarrow as pa
 import pyarrow.flight as flight
 
@@ -63,12 +64,14 @@ if __name__ == "__main__":
 ### Run the server
 
 ```bash
+source arrow-venv/bin/activate
 python flight_server.py
 ```
 
 This terminal will block — this indicates the server is running and listening for client connections.
 
 The output is similar to:
+
 ```output
 (arrow-venv) gcpuser@arrow-flight:~> python flight_server.py
 Arrow Flight server running on port 8815
@@ -81,15 +84,18 @@ Open another terminal on the same VM and check that the gRPC port is listening.
 ```bash
 ss -lntp | grep 8815
 ```
+
 If you see a listening process, the server is up.
 
 The output is similar to:
+
 ```output
 ss -lntp | grep 8815
 LISTEN 0      4096               *:8815             *:*    users:(("python",pid=4255,fd=7))
 ```
 
-## Connect Using Arrow Flight Client (Same VM)
+## Connect using an Arrow Flight client on the same virtual machine
+
 Now you connect to the Arrow Flight server using a client and retrieve the in-memory dataset.
 
 Create a file named `flight_client.py`.
@@ -109,10 +115,12 @@ print("Rows:", table.num_rows)
 ### Run it
 
 ```bash
+source arrow-venv/bin/activate
 python flight_client.py
 ```
 
 The output is similar to:
+
 ```output
 id: int64
 value: int64
@@ -125,13 +133,12 @@ Rows: 1000
 - Data was transferred directly from server memory
 - Arrow’s columnar format was preserved end-to-end
 
-## What You Have Learned
+## What you've accomplished and what's next
 
-Across this learning path, you have learned:
+In this section, you:
 
-- How Apache Arrow works on Arm64 (Axion)
-- How Parquet and ORC datasets are written and read from object storage
-- How MinIO acts as S3-compatible storage for analytics
-- How the Arrow Dataset API enables predicate pushdown and column pruning
-- How Arrow Flight enables high-speed, memory-to-memory data transfer
-- How all components work together on a single Arm64 VM
+- Started an Arrow Flight server that streams an in-memory Arrow table over gRPC
+- Connected a client to the Flight endpoint and read data without file serialization
+- Validated end-to-end transfer using Arrow's columnar in-memory format
+
+Next, review the Learning Path summary and continue with related Arm server analytics content in the next steps page.

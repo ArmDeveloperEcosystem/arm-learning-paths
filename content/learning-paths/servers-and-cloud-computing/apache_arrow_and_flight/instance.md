@@ -1,20 +1,20 @@
 ---
-title: Create a Google Axion C4A Arm virtual machine on GCP 
+title: Create a Google Axion C4A arm64 virtual machine on GCP
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Provision a Google Axion C4A Arm VM
+## Provision a Google Axion C4A arm64 virtual machine
 
-In this section you'll create a Google Axion C4A Arm-based virtual machine on Google Cloud Platform. You'll use the `c4a-standard-4` machine type, which provides 4 vCPUs and 16 GB of memory. This VM will host your Apache Arrow & Flight application.
+In this section you'll create a Google Axion C4A arm64 virtual machine on Google Cloud Platform. You'll use the `c4a-standard-4` machine type, which provides 4 vCPUs and 16 GB of memory. This virtual machine hosts your Apache Arrow and Arrow Flight applications.
 
 {{% notice Note %}}
 For help with GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
 {{% /notice %}}
 
-## Provision a Google Axion C4A Arm VM in Google Cloud Console
+## Provision the virtual machine in Google Cloud Console
 
 To create a virtual machine based on the C4A instance type:
 
@@ -28,14 +28,14 @@ To create a virtual machine based on the C4A instance type:
 ![Screenshot of the Google Cloud Console showing the Machine configuration section. The Series dropdown is set to C4A and the machine type c4a-standard-4 is selected alt-txt#center](images/gcp-vm.png "Configuring machine type to C4A in Google Cloud Console")
 
 
-* Under **OS and storage**, select **Change**, and then choose an Arm64-based operating system image.
+* Under **OS and storage**, select **Change**, and then choose an arm64 operating system image.
   * For this Learning Path, select **SUSE Linux Enterprise Server**.
   * For the license type, choose **Pay as you go**.
   * Increase **Size (GB)** from **10** to **100** to allocate sufficient disk space.
   * Select **Choose** to apply the changes.
 * Under **Networking**, enable **Allow HTTP traffic** and **Allow HTTPS traffic**
-* Also, add the following tag: `allow-all-Apache Arrow & Flight` to allow all TCP ports through for Apache Arrow & Flight.
-* For some organizations not using the **'default'** network interface, you may need to select the network appropriate for your organization. 
+* Also, add the following tag: `allow-arrow-minio-flight` so this virtual machine matches the firewall rule you created in the previous section.
+* For some organizations not using the **'default'** network interface, you may need to select the network appropriate for your organization.
 * Select **Create** to launch the virtual machine.
 
 After the instance starts, select **SSH** next to the VM in the instance list to open a browser-based terminal session.
@@ -49,8 +49,9 @@ A new browser window opens with a terminal connected to your VM.
 ## What you've accomplished and what's next
 
 In this section:
-- You provisioned a Google Axion C4A Arm VM with 4 vCPUs and 16 GB of memory
-- You configured the VM with SUSE Linux Enterprise Server and 100 GB of storage
-- You connected to your VM using SSH through the Google Cloud Console
 
-Your VM is now ready to host the Apache Arrow & Flight application. 
+* You provisioned a Google Axion C4A arm64 virtual machine with 4 vCPUs and 16 GB of memory
+* You configured the VM with SUSE Linux Enterprise Server and 100 GB of storage
+* You connected to your VM using SSH through the Google Cloud Console
+
+Your virtual machine is now ready to host Apache Arrow and Arrow Flight.
