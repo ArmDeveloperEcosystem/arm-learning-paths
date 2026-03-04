@@ -133,7 +133,7 @@ Rows: 1000
 - Data was transferred directly from server memory
 - Arrow’s columnar format was preserved end-to-end
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 In this section, you:
 

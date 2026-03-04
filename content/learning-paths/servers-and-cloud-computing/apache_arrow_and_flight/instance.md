@@ -46,7 +46,7 @@ A new browser window opens with a terminal connected to your VM.
 
 ![Browser-based SSH terminal window with black background showing Linux command prompt and Google Cloud branding at top alt-txt#center](images/gcp-shell.png "Terminal session connected to the VM")
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 In this section:
 
