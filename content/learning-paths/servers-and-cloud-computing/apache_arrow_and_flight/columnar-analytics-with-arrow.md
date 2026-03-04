@@ -226,7 +226,7 @@ In the arrow-data bucket after refreshing, you should now see:
 
 ![MinIO object browser showing dataset.orc stored inside the arrow-data bucket alt-txt#center](images/datset-orc.png "MinIO Web UI displaying dataset.orc object in arrow-data bucket")
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 In this section, you have:
 
@@ -238,10 +238,4 @@ In this section, you have:
 
 This forms the core analytics layer used by modern engines such as Spark, DuckDB, Trino, and Polars.
 
-## What's next
-
-In the next section, you will enable high-speed memory-to-memory analytics using Apache Arrow Flight, demonstrating:
-
-- gRPC-based data transfer
-- Zero-copy serialization
-- High-throughput analytics communication
+In the next section, you will enable high-speed memory-to-memory analytics using Apache Arrow Flight, demonstrating gRPC-based data transfer, zero-copy serialization, and high-throughput analytics communication.
