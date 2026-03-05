@@ -10,7 +10,10 @@ layout: learningpathall
 
 As shown in the `main.cpp` listing below, the program generates a 1920×1080 bitmap image of the fractal. To identify performance bottlenecks, run the Topdown recipe in Arm Performix (APX). APX uses microarchitectural sampling to show which instruction pipeline stages dominate program latency, then highlights ways to improve those bottlenecks.
 
-**Note**: Replace the first string argument in `myplot.draw()` with the absolute path to your image folder, then rebuild the application. Otherwise, the image is written to `/tmp/atperf/tools/atperf-agent`, which is periodically deleted.
+
+{{% notice Specify the example output file %}}
+Replace the first string argument in `myplot.draw()` with the absolute path to your image folder, then rebuild the application. Otherwise, the image is written to `/tmp/atperf/tools/atperf-agent`, which is periodically deleted.
+{{% /notice %}}
 
 ```cpp
 #include "Mandelbrot.h"
@@ -31,7 +34,11 @@ On your host machine, open Arm Performix and select the **Topdown** recipe.
 
 ![config](./topdown-config.jpg)
 
-Select the target you configured in the setup phase. If this is your first run on this target, you likely need to select **Install Tools** to copy collection tools to the target. Next, select the **Workload type**. You can sample the whole system or attach to an existing process, but in this exercise you launch a new process. Use the full path to your executable because the **Workload** field does not currently support shell-style path expansion.
+Select the target you configured in the setup phase. If this is your first run on this target, you likely need to select **Install Tools** to copy collection tools to the target. Next, select the **Workload type**. You can sample the whole system or attach to an existing process, but in this exercise you launch a new process.
+
+{{% notice Common Gotcha%}}
+Use the full path to your executable because the **Workload** field does not currently support shell-style path expansion.
+{{% /notice %}}
 
 You can set a time limit for the workload and customize metrics if you already know what to investigate.
 

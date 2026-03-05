@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Run Instruction Mix
 
-The previous Topdown analysis showed that your application used no single instruction, multiple data (SIMD) operations, which points to an optimization opportunity. Run the Instruction Mix recipe to learn more. The Instruction Mix launch panel is similar to Topdown, but it does not include options to choose metrics. Again, enter the full path to the workload. This Mandelbrot example is native C++ code, not Java or .NET, so you do not need to collect managed code stacks.
+The previous Topdown analysis showed that the sample application used no single instruction, multiple data (SIMD) operations, which points to an optimization opportunity. Run the Instruction Mix recipe to learn more. The Instruction Mix launch panel is similar to Topdown, but it does not include options to choose metrics. Again, enter the full path to the workload. This Mandelbrot example is native C++ code, not Java or .NET, so you do not need to collect managed code stacks.
 
 ![instruction-mix-config.jpg](instruction-mix-config.jpg)
 
@@ -39,15 +39,18 @@ After you select two runs, Performix overlays them so you can review category ch
 ![instruction-mix-diff-results.jpg](instruction-mix-diff-results.jpg)
 
 Execution time also improves significantly, making this run nearly four times faster.
-```bash
-$ time builds/mandelbrot-parallel-no-simd 1
+
+```bash { command_line="root@localhost | 2-6" }
+time builds/mandelbrot-parallel-no-simd 1
 Number of Threads = 1
 
 real    0m31.326s
 user    0m31.279s
 sys     0m0.011s
+```
 
-$ time builds/mandelbrot-parallel 1
+```bash { command_line="root@localhost | 2-6" }
+time builds/mandelbrot-parallel 1
 Number of Threads = 1
 
 real    0m8.362s
@@ -89,7 +92,11 @@ Next, add optimization flags to the compiler to enable more aggressive loop unro
 
 Runtime improves again, with an additional 11x speedup over the SIMD build that uses default compiler flags.
 
-```sh
+
+printf 'HelloWorld\n%.0s' {1..5}
+
+
+```bash { command_line="root@localhost | 2-6" }
 time ./builds/mandelbrot-parallel 1
 Number of Threads = 1
 
