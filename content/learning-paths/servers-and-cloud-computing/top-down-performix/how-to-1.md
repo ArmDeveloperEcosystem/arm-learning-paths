@@ -6,39 +6,39 @@ weight: 2
 layout: learningpathall
 ---
 
-This Learning Path demonstrates Arm Performix's Top-Down and Instruction Mix recipes for performance analysis on an example application.
+This Learning Path uses Arm Performix Topdown and Instruction Mix recipes to analyze performance in a sample application.
 
 ## Before you begin
 
-The Performix [installation guide](https://learn.arm.com/install-guides/atp) will walk you through installing the tool for the first time. In this learning path, I will be connecting to an Arm Neoverse V1 workstation. From the host machine, establish an ssh connection to the target running the workload from the 'Targets' tab and test the connection.
+Use the Performix [installation guide](/install-guides/atp/) to install the tool if this is your first run. From the host machine, open the **Targets** tab, set up an SSH connection to the target that runs the workload, and test the connection. In this Learning Path's examples, I'll connect to an Arm Neoverse V1 workstation.
 
-There are some OS packages that need to be set up on the target. For Debian distributions, this command should handle the prerequisites:
+Install required OS packages on the target. For Debian-based distributions, run:
 ```bash
-sudo apt-get install python3 python3-venv objdump
+sudo apt-get install python3 python3-venv binutils
 ```
 
-## Build Sample Application on Remote Server
+## Build sample application on remote server
 
-Next, connect to your target machine and download our sample application for this learning path: a Mandelbrot set generator.
-This code is available under [Arm Education License](https://github.com/arm-university/Mandelbrot-Example?tab=License-1-ov-file) for teaching and learning. Create a new directory where you will store and build this example. Next, run the commands below.
+Connect to your target machine and download the sample application for this Learning Path, a Mandelbrot set generator.
+The code is available under the [Arm Education License](https://github.com/arm-university/Mandelbrot-Example?tab=License-1-ov-file). Create a directory where you want to store and build the example, then run:
 
 ```bash
 git clone https://github.com/arm-university/Mandelbrot-Example.git
 cd Mandelbrot-Example && mkdir images builds
 ```
 
-Install a C++ compiler, for example using your operating system's package manager.
+Install a C++ compiler by using your operating system's package manager.
 
 ```bash
 sudo dnf update && sudo dnf install g++ gcc
 ```
 
-Build the application. 
+Build the application:
 
 ```bash
 ./build.sh
 ```
 
-The binary in the ./builds/ directory should output an image like the fractal below
+The binary in the `./builds/` directory generates an image similar to the fractal below.
 
 [Green-Parallel-512.bmp](./Green-Parallel-512.bmp)

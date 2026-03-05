@@ -8,37 +8,37 @@ layout: learningpathall
 
 ## Run Instruction Mix
 
-Our previous Topdown analysis identified that our application used no Single-Instruction Multiple Data (SIMD) operations, which points to an optimization opportunity. Let's run the Instruction Mix recipe to learn more. The Recipe launch panel for Instruction Mix looks very similar to Topdown's, without options to specify which metrics to collect. Once again, be sure to spell out the full path to the workload. This Mandelbrot example is native C++ code, not Java or .Net, so there's no need to collect managed code stacks.
+The previous Topdown analysis showed that your application used no single instruction, multiple data (SIMD) operations, which points to an optimization opportunity. Run the Instruction Mix recipe to learn more. The Instruction Mix launch panel is similar to Topdown, but it does not include options to choose metrics. Again, enter the full path to the workload. This Mandelbrot example is native C++ code, not Java or .NET, so you do not need to collect managed code stacks.
 
 ![instruction-mix-config.jpg](instruction-mix-config.jpg)
 
 
-The results below confirm a high number of integer and floating point math operations, and no SIMD operations. The Insights box on the right suggests vectorization as a path forward, with several possible root causes and a Next Steps section directing to other Learning Paths.
+The results below confirm a high number of integer and floating-point operations, with no SIMD operations. The **Insights** panel suggests vectorization as a path forward, lists possible root causes, and links to related Learning Paths.
 
 ![instruction-mix-results.jpg](instruction-mix-results.jpg)
 
-## Vectorize!
+## Vectorize
 
-The Cpu Hotspots recipe [see learning path](/content/learning-paths/servers-and-cloud-computing/cpu_hotspot_performix/_index.md) can tell us which functions take the most time. `Mandelbrot::draw` and its inner function `Mandelbrot::getIterations` consume a lot of runtime, so I've asked an LLM to try vectorizing that for my platform. It's done a fair job in https://github.com/arm-education/Mandelbrot-Example/tree/instruction-mix. Note that this uses the Neon operations from Neoverse N1, but your platform may have support for other options like SVE or SVE2.
+The CPU Hotspots recipe in [Find CPU cycle hotspots with Arm Performix](/learning-paths/servers-and-cloud-computing/cpu_hotspot_performix/) helps you identify which functions consume the most time. In this example, `Mandelbrot::draw` and its inner function `Mandelbrot::getIterations` dominate runtime. A vectorized version is available in the [instruction-mix branch](https://github.com/arm-education/Mandelbrot-Example/tree/instruction-mix). This branch uses Neon operations for Neoverse N1, while your platform might support alternatives such as SVE or SVE2.
 
-After rebuilding the application and running Instruction Mix again, we can see integer and floating point operations have been drastically reduced, replaced by a smaller amount of SIMD instructions. Exactly what we wanted!
+After you rebuild the application and run Instruction Mix again, integer and floating-point operations are greatly reduced and replaced by a smaller set of SIMD instructions.
 
 ![instruction-mix-simd-results.jpg](instruction-mix-simd-results.jpg)
 
-## Asses Improvements
+## Assess improvements
 
-Since we're doing multiple experiments, this is a good time to start giving our runs meaningful nicknames so we can organize them.
+Because you are running multiple experiments, give each run a meaningful nickname to keep results organized.
 ![rename-run.jpg](rename-run.jpg)
 
-Using the 'Compare' feature at the top right of the an entry in the Runs view, we can select another run of the same recipe to compare results. 
+Use the **Compare** feature at the top right of an entry in the **Runs** view to select another run of the same recipe for comparison.
 ![compare-with-box.jpg](compare-with-box.jpg)
-This selection box will let you pick any run of the same recipe type. (Again, it's good to have meaningful run nicknames for this). The ⇄ arrows swap which of the two runs is considered the "baseline" and which is "current".
+This selection box lets you choose any run of the same recipe type. The ⇄ arrows swap which run is treated as the baseline and which is current.
 
-Once we've picked our two runs, we'll see them overlaid to see the change in each category in one view.
+After you select two runs, Performix overlays them so you can review category changes in one view.
 
 ![instruction-mix-diff-results.jpg](instruction-mix-diff-results.jpg)
 
-The execution time is significantly improved as well, nearly a 4x speedup.
+Execution time also improves significantly, making this run nearly four times faster.
 ```bash
 $ time builds/mandelbrot-parallel-no-simd 1
 Number of Threads = 1
@@ -55,12 +55,12 @@ user    0m8.331s
 sys     0m0.016s
 ```
 
-## Topdown Results Comparison
+## Topdown results comparison
 
-The Topdown recipe also supports a 'Compare' view showing the change in percentage points of each stage and instruction type.
+The Topdown recipe also supports a **Compare** view that shows percentage-point changes in each stage and instruction type.
 ![topdown-simd-results-diff.jpg](topdown-simd-results-diff.jpg)
 
-We see now that the Load and Store operations dominate about 70% of the program's execution time. Insights offers several explainations as many different issues could be contributing root causes.
+You can now see that Load and Store operations account for about 70% of execution time. **Insights** offers several explanations because multiple issues can contribute to the root cause.
 ```
 The CPU spends a larger share of cycles stalled in the backend, meaning execution or memory resources cannot complete work fast enough. This is a cycle-based measure (percentage of stalled cycles).
 
@@ -73,7 +73,7 @@ POSSIBLE CAUSES
 - Instruction dependencies that create pipeline bubbles
 ```
 
-We'll try adding some optimizing flags to the compiler to aggressively unroll loops.
+Next, add optimization flags to the compiler to enable more aggressive loop unrolling.
 ```bash
     # build.sh
     CXXFLAGS=(
@@ -87,7 +87,7 @@ We'll try adding some optimizing flags to the compiler to aggressively unroll lo
     )
 ```
 
-The runtime is again improved greatly. an additional 11x speedup over the SIMD implementation with default compiler flags.
+Runtime improves again, with an additional 11x speedup over the SIMD build that uses default compiler flags.
 
 ```sh
 time ./builds/mandelbrot-parallel 1
@@ -98,7 +98,7 @@ user    0m0.724s
 sys     0m0.014s
 ```
 
-And with another Topdown measurement we see the Loads and Stores all but eliminated. SIMD floating point operations dominate the execution - an indication that our application is now well tuned to maximize the data flow to the floating point execution units.
-The program is still generating the same output, but we're reduced the runtime from 31s to <1s - a 43x speedup!
+Another Topdown measurement shows that Load and Store bottlenecks are almost eliminated. SIMD floating-point operations now dominate execution, which indicates the application is better tuned to feed floating-point execution units.
+The program still generates the same output, and runtime drops from 31 s to less than 1 s, a 43x speedup.
 
 ![performance-improvement.jpg](performance-improvement.jpg)

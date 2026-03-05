@@ -3,17 +3,17 @@ title: Learn the Arm Neoverse N1 performance analysis methodology
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic for software developers who want to learn about performance analysis methodology for Linux applications running on Arm Neoverse.
+who_is_this_for: This introductory Learning Path is for software developers who want to learn performance analysis methodology for Linux applications on Arm Neoverse.
 
 learning_objectives:
     - Understand sampling and counting for performance analysis
     - Learn commonly used hardware metrics
-    - Analyze a sample application using the Arm Telemetry Solution and Linux Perf
+    - Analyze a sample application by using Arm Performix and Linux Perf
     - Make an application code change and see improved performance
 
 prerequisites:
-    - An Arm Neoverse N1 computer running Linux. A bare metal or cloud metal instance is best because they expose more counters.
-    
+    - An Arm Neoverse N1 computer running Linux. A bare-metal or cloud bare-metal instance is best because it exposes more counters.
+
 author: Brendan Long
 
 ### Tags
@@ -39,7 +39,7 @@ further_reading:
         type: documentation
     - resource:
         title: "Arm Neoverse N1 PMU Guide"
-        link: https://developer.arm.com/documentation/PJDOC-466751330-547673/r4p1/ 
+        link: https://developer.arm.com/documentation/PJDOC-466751330-547673/r4p1/
         type: documentation
 
 ### FIXED, DO NOT MODIFY
