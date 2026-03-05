@@ -14,7 +14,7 @@ This Learning Path uses one concrete KleidiAI microkernel to explain SME2 matmul
 
 In the rest of this Learning Path, this is referred to as *the SME2 matmul microkernel* (unless noted otherwise).
 
-### Decode `1vlx4vl`
+### Decode 1vlx4vl
 
 `_1vlx4vl` indicates that, in a single inner-loop iteration, the kernel computes an intermediate result for a 1VL × 4VL submatrix (one SME2 streaming vector length × four SME2 streaming vector lengths) of the output matrix.
 
@@ -60,3 +60,9 @@ echo "1VLx4VL tile: ${FP32_PER_VL}x$((4 * FP32_PER_VL))"
 ```
 
 If your target device uses a different SVL, the same formulas still apply.
+
+## What you've learned and what's next
+
+You've decoded the SME2 matmul microkernel name and understand what 1VL×4VL means for tile dimensions. You learned how the input format tags describe quantization and packing requirements for LHS and RHS.
+
+Next, you'll walk through a concrete example starting with RHS weight repacking from GGML Q4_0 format.

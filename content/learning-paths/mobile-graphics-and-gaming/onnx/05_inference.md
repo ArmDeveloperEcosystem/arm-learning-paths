@@ -1,19 +1,19 @@
 ---
-# User change
-title: "Inference and Model Evaluation"
+title: "Run inference and evaluate the model"
 
 weight: 6
 
 layout: "learningpathall"
 ---
 
-## Objective ##
-In this section, we validate the digit recognizer by running inference on the validation dataset using both the PyTorch checkpoint and the exported ONNX model. We verify that PyTorch and ONNX Runtime produce consistent results, analyze class-level behavior using a confusion matrix, and generate visual diagnostics for debugging and documentation. This step acts as a final verification checkpoint before integrating the model into the full OpenCV-based Sudoku processing pipeline.
+## Objective
+
+In this section, you'll validate the digit recognizer by running inference on the validation dataset using both the PyTorch checkpoint and the exported ONNX model. Verify that PyTorch and ONNX Runtime produce consistent results, analyze class-level behavior using a confusion matrix, and generate visual diagnostics for debugging and documentation. This acts as a final verification checkpoint before integrating the model into the full OpenCV-based Sudoku processing pipeline.
 
 Before introducing geometric processing, grid detection, and perspective correction, it is important to confirm that the digit recognizer works reliably in isolation. By validating inference and analyzing errors at the digit level, we ensure that any future issues in the end-to-end system can be attributed to image processing or geometry rather than the classifier itself.
 
 ## Inference and Evaluation Script
-Create a new file named 04_Test.py and paste the script below into it. This script evaluates the digit recognizer in a way that closely mirrors deployment conditions. It compares PyTorch and ONNX Runtime inference, measures accuracy on the validation dataset, and generates visual diagnostics that reveal both strengths and remaining failure modes of the model.
+Create a new file named `04_Test.py` and paste the script below into it. This script evaluates the digit recognizer in a way that closely mirrors deployment conditions. It compares PyTorch and ONNX Runtime inference, measures accuracy on the validation dataset, and generates visual diagnostics that reveal both strengths and remaining failure modes of the model.
 
 ```python
 import os, numpy as np, torch
@@ -220,13 +220,12 @@ Before running the evaluation script, install matplotlib for visualization:
 pip install matplotlib
 ```
 
-Run the evaluation script from the project root:
+Run the evaluation script:
 
 ```console
 python3 04_Test.py
 ```
-
-In the example below, the PyTorch and ONNX accuracies match exactly, confirming that the export process preserved model behavior.
+The PyTorch and ONNX accuracies should match very closely, confirming that the export process preserved model behavior.
 
 ```console
 python3 04_Test.py 
@@ -247,10 +246,14 @@ Confusion matrix (rows=true, cols=pred):
 Saved: artifacts/cm_fp32_counts.png
 ```
 
-![img1](figures/01.png)
+![Confusion matrix showing digit recognition accuracy with strong diagonal and occasional confusion between visually similar digits like 6, 8, and 9](figures/01.png)
+
 The confusion matrix provides more insight than a single accuracy number. Each row corresponds to the true class, and each column corresponds to the predicted class. A strong diagonal indicates correct classification. In this output, blank cells (class 0) are almost always recognized correctly, while the remaining errors occur primarily between visually similar printed digits such as 6, 8, and 9.
 
 This behavior is expected and indicates that the model has learned meaningful digit features. The remaining confusions are rare and can be addressed later through targeted augmentation or higher-resolution crops if needed.
 
-## Summary
-With inference validated and error modes understood, the digit recognizer is now ready to be embedded into the full Sudoku image-processing pipeline, where OpenCV will be used to detect the grid, rectify perspective, segment cells, and run batched ONNX inference to reconstruct and solve complete puzzles.
+## What you've learned and what's next
+
+In this section, you validated the digit recognizer by running inference on the validation dataset using both PyTorch and ONNX Runtime, confirmed that both produce consistent results (99.28% accuracy), and analyzed class-level behavior using confusion matrices and sample prediction grids. The diagnostic outputs revealed that the model performs reliably, with rare confusions limited to visually similar digits.
+
+Next, you'll integrate the validated ONNX model into the full Sudoku image-processing pipeline using OpenCV to detect grids, rectify perspective, segment cells, and perform batched inference to reconstruct and solve complete puzzles.

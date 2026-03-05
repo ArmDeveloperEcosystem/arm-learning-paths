@@ -94,3 +94,7 @@ grep -n "smopa" "$KERNEL_FILE" | head
 ```
 
 If you have a recent LLVM toolchain on an Arm Linux host, you can also try assembling and disassembling the kernel to see `smopa` in the output. Toolchain details vary across distributions, so treat this step as optional.
+
+## What you've learned
+
+You've walked through the SME2 matmul microkernel inner loop and seen how it loads packed data, uses LUTI4 to expand INT4 to INT8, executes pipelined MOPA instructions, and dequantizes results back to FP32. You understand how this maps back to standard FP32 matmul operations and can trace the complete dataflow from packed inputs through MOPA accumulation to FP32 output.

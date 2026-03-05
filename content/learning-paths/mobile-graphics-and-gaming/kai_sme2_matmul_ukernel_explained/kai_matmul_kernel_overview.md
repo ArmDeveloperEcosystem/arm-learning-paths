@@ -86,3 +86,8 @@ kai/ukernels/matmul/matmul_clamp_f32_qai8dxp_qsi4cxp/kai_matmul_clamp_f32_qai8dx
 You’ll use these values later when you connect the packing steps to the inner loop of the SME2 microkernel.
 
 For more background on KleidiAI, see [Accelerate Generative AI workloads using KleidiAI](/learning-paths/cross-platform/kleidiai-explainer/).
+## What you've learned and what's next
+
+You've learned how KleidiAI matmul microkernels break matrix multiplication into tiles defined by mr, nr, and kr parameters. You understand why packing matters for cache efficiency and how quantization flows through the kernel.
+
+Next, you'll explore how SME2 INT8 MOPA instructions accelerate the core matmul computation.

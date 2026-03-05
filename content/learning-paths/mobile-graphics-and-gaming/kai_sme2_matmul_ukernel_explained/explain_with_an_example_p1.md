@@ -75,3 +75,9 @@ You can also search for the `qsu4` (unsigned INT4) string to find related packer
 ```bash
 grep -R "qsu4" -n kai | head
 ```
+
+## What you've learned and what's next
+
+You've learned how GGML Q4_0 weights are repacked from their original signed INT4 layout into the unsigned INT4 format the SME2 matmul microkernel expects. You understand why this conversion happens once at model load time.
+
+Next, you'll see how the FP32 LHS activations are quantized and packed dynamically during inference.

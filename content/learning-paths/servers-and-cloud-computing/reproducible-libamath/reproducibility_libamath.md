@@ -41,3 +41,9 @@ gcc app.c -DAMATH_REPRO=1 -lamath_repro -o app
 The `-DAMATH_REPRO=1` flag enables reproducibility at compile time, and `-lamath_repro` links against the reproducible Libamath library. When you follow these steps, calls to supported functions resolve to the reproducible scalar, NEON, or SVE implementations.
 
 With reproducibility configured, the next section walks through hands-on examples using `expf` across scalar, NEON, and SVE code paths.
+
+## What you've learned and what's next
+
+You've learned how to enable reproducible math routines in Libamath through compile-time configuration and library linking. You can now compile code with the reproducible library variant and understand the trade-offs between reproducibility and peak performance.
+
+Next, you'll verify reproducible behavior through hands-on examples that compare scalar, NEON, and SVE implementations of the exponential function.

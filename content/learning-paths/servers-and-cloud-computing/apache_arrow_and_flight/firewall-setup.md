@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Configure GCP firewall for Apache Arrow analytics stack
 
-To allow inbound traffic for Apache Arrow–based analytics components, you must create a firewall rule in the Google Cloud Console. These firewall rules enable access to MinIO object storage and Arrow Flight for high-performance data transfer on Axion (Arm64) virtual machines.
+To allow inbound traffic for Apache Arrow-based analytics components, create a firewall rule in the Google Cloud Console. This firewall rule enables access to MinIO object storage and Arrow Flight for high-performance data transfer on Axion (arm64) virtual machines.
 
-{{% notice Note %}} 
+{{% notice Note %}}
 For more information about GCP setup, see [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
 {{% /notice %}}
 
@@ -52,6 +52,6 @@ You've successfully:
 - Created firewall rules in Google Cloud to expose ports for Apache Arrow analytics components
 - Enabled external access to MinIO S3 API and Web UI
 - Configured network access for Arrow Flight gRPC communication
-- Prepared the network for a high-performance analytics stack on Axion (Arm64)
+- Prepared the network for a high-performance analytics stack on Axion (arm64)
 
 Next, you'll provision a Google Axion C4A Arm virtual machine and deploy Apache Arrow workloads, MinIO object storage, and Arrow Flight services on it.

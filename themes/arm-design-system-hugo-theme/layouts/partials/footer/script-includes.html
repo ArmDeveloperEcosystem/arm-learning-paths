@@ -17,12 +17,30 @@ Called from:
 
 <!-- All pages -->
 {{ if not (in .Site.BaseURL "localhost") }}
+    <!-- OneTrust Cookies Consent Notice start for arm.com -->
     <script
-    src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
-    async
-    data-document-language="true"
-    data-domain-script="7d663903-ba9e-4bc2-a2f8-5844edbb5408">
+        src=https://cdn.cookielaw.org/scripttemplates/otSDKStub.js
+        data-document-language="true"
+        type="text/javascript"
+        charset="UTF-8"
+        data-domain-script="7d663903-ba9e-4bc2-a2f8-5844edbb5408">
     </script>
+    <script type="text/javascript">
+        function OptanonWrapper() { }
+    </script>
+
+    <script>
+        window.onload = function() {
+            let analytics = document.querySelector(".CoveoAnalytics");
+            if (analytics) {
+                let coveo_analytics = Coveo.get(analytics);
+                if (coveo_analytics && window && window.OnetrustActiveGroups && !window.OnetrustActiveGroups.includes('C0002')) {
+                    coveo_analytics.disable();
+                }
+            }
+        };
+    </script>
+    <!-- OneTrust Cookies Consent Notice end for arm.com -->
 {{end}}
 <script src="/js/globalVarsandPreferences.js" defer></script>
 <script src="/js/anonymous-analytics.js" defer></script>          <!-- Include javascript to track custom analytics -->
