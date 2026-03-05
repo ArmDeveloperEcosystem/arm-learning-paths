@@ -34,7 +34,7 @@ Since we're doing multiple experiments, this is a good time to start giving our 
 
 Using the 'Compare' feature at the top right of the an entry in the Runs view, we can select another run of the same recipe to compare results. 
 ![compare-with-box.jpg](compare-with-box.jpg)
-This selection box will let you pick any run of the same recipe type. (Again, it's good to have meaningful run nicknames for this). The ⇅ arrows swap which of the two runs is considered the "baseline" and which is "current".
+This selection box will let you pick any run of the same recipe type. (Again, it's good to have meaningful run nicknames for this). The ⇄ arrows swap which of the two runs is considered the "baseline" and which is "current".
 
 Once we've picked our two runs, we'll see them overlaid to see the change in each category in one view.
 
