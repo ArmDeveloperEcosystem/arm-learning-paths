@@ -31,13 +31,15 @@ Because you are running multiple experiments, give each run a meaningful nicknam
 ![rename-run.jpg](rename-run.jpg)
 
 Use the **Compare** feature at the top right of an entry in the **Runs** view to select another run of the same recipe for comparison.
+
 ![compare-with-box.jpg](compare-with-box.jpg)
+
 This selection box lets you choose any run of the same recipe type. The ⇄ arrows swap which run is treated as the baseline and which is current.
 
-After you select two runs, Performix overlays them so you can review category changes in one view.
+After you select two runs, Performix overlays them so you can review category changes in one view. In the new run, note that 
 
 ![instruction-mix-diff-results.jpg](instruction-mix-diff-results.jpg)
-
+Compared to the baseline, floating-point operations, branch operations, and some integer operations have been traded for loads, stores, and SIMD operations.
 Execution time also improves significantly, making this run nearly four times faster.
 
 ```bash { command_line="root@localhost | 2-6" }
