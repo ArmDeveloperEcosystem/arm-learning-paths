@@ -1,5 +1,5 @@
 ---
-title: Learn the Arm Neoverse N1 performance analysis methodology
+title: Tune application performance with Arm Performix Topdown analysis
 
 minutes_to_complete: 60
 
@@ -12,7 +12,7 @@ learning_objectives:
     - Make an application code change and see improved performance
 
 prerequisites:
-    - An Arm Neoverse N1 computer running Linux. A bare-metal or cloud bare-metal instance is best because it exposes more counters.
+    - An Arm Neoverse N1 or higher computer running Linux. A bare-metal or cloud bare-metal instance is best because it exposes more counters.
 
 author:
 - Brendan Long
@@ -34,6 +34,10 @@ further_reading:
     - resource:
         title: "Find CPU Cycle Hotspots with Arm Performix"
         link: /learning-paths/servers-and-cloud-computing/cpu_hotspot_performix/
+        type: documentation
+    - resource:
+        title: "Port Code to Arm Scalable Vector Extension (SVE)"
+        link: /learning-paths/servers-and-cloud-computing/sve/
         type: documentation
     - resource:
         title: "Arm Neoverse N1: Core Performance Analysis Methodology"

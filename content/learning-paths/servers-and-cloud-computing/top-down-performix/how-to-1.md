@@ -30,7 +30,7 @@ cd Mandelbrot-Example && mkdir images builds
 Install a C++ compiler by using your operating system's package manager.
 
 ```bash
-sudo dnf update && sudo dnf install g++ gcc
+sudo apt install build-essential
 ```
 
 Build the application:
@@ -41,4 +41,4 @@ Build the application:
 
 The binary in the `./builds/` directory generates an image similar to the fractal below.
 
-[Green-Parallel-512.bmp](./Green-Parallel-512.bmp)
+![Green-Parallel-512.bmp](./Green-Parallel-512.bmp)
