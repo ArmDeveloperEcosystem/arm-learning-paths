@@ -93,9 +93,6 @@ Next, add optimization flags to the compiler to enable more aggressive loop unro
 Runtime improves again, with an additional 11x speedup over the SIMD build that uses default compiler flags.
 
 
-printf 'HelloWorld\n%.0s' {1..5}
-
-
 ```bash { command_line="root@localhost | 2-6" }
 time ./builds/mandelbrot-parallel 1
 Number of Threads = 1
@@ -106,6 +103,8 @@ sys     0m0.014s
 ```
 
 Another Topdown measurement shows that Load and Store bottlenecks are almost eliminated. SIMD floating-point operations now dominate execution, which indicates the application is better tuned to feed floating-point execution units.
+![high-simd-utilization.jpg](high-simd-utilization.jpg)
+
 The program still generates the same output, and runtime drops from 31 s to less than 1 s, a 43x speedup.
 
 ![performance-improvement.jpg](performance-improvement.jpg)
