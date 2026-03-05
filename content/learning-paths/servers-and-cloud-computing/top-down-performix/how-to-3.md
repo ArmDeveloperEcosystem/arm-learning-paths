@@ -19,11 +19,9 @@ The results below confirm a high number of integer and floating point math opera
 
 ## Vectorize!
 
-<!-- TODO - link to CPU hotspots LP -->
-The Cpu Hotspots recipe can tell us which functions take the most time. `Mandelbrot::draw` and its inner function `Mandelbrot::getIterations` consumes a lot of runtime, so I've asked an LLM to try vectorizing that for my platform. It's done a fair job in https://github.com/bccbrendan/Mandelbrot-Example/tree/simd-instructions 
-<!-- TODO - provide easier, more permanent link to vectorized code -->
+The Cpu Hotspots recipe [see learning path](/content/learning-paths/servers-and-cloud-computing/cpu_hotspot_performix/_index.md) can tell us which functions take the most time. `Mandelbrot::draw` and its inner function `Mandelbrot::getIterations` consume a lot of runtime, so I've asked an LLM to try vectorizing that for my platform. It's done a fair job in https://github.com/arm-education/Mandelbrot-Example/tree/instruction-mix. Note that this uses the Neon operations from Neoverse N1, but your platform may have support for other options like SVE or SVE2.
 
-After running Instruction Mix again, we can see integer and floating point operations have been drastically reduced, replaced by a smaller amount of SIMD instructions. Exactly what we wanted!
+After rebuilding the application and running Instruction Mix again, we can see integer and floating point operations have been drastically reduced, replaced by a smaller amount of SIMD instructions. Exactly what we wanted!
 
 ![instruction-mix-simd-results.jpg](instruction-mix-simd-results.jpg)
 
