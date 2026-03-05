@@ -102,3 +102,5 @@ sys     0m0.014s
 
 And with another Topdown measurement we see the Loads and Stores all but eliminated. SIMD floating point operations dominate the execution - an indication that our application is now well tuned to maximize the data flow to the floating point execution units.
 The program is still generating the same output, but we're reduced the runtime from 31s to <1s - a 43x speedup!
+
+![performance-improvement.jpg](performance-improvement.jpg)
