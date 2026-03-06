@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Repack RHS weights (GGML Q4_0)
-When you [integrate SME2-optimized KleidiAI kernels into llama.cpp](/learning/mobile-graphics-and-gaming/performance_llama_cpp_sme2/), the heavy matrix-multiplication work in attention (K/Q/V projections) and feed-forward network (FFN) layers can run through the SME2 matmul microkernel.
+When you [integrate SME2-optimized KleidiAI kernels into llama.cpp](/learning-paths/mobile-graphics-and-gaming/performance_llama_cpp_sme2/), the heavy matrix-multiplication work in attention (K/Q/V projections) and feed-forward network (FFN) layers can run through the SME2 matmul microkernel.
 
 In these operators, the LHS (activations) is FP32 and the RHS (weights) uses the GGML Q4_0 quantized type.
 
