@@ -34,7 +34,7 @@ Common use cases include interactive analytics, data lake acceleration, machine 
 
 To learn more, visit the [Apache Arrow website](https://arrow.apache.org/) and explore the [Arrow Flight documentation](https://arrow.apache.org/docs/format/Flight.html).
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 In this section, you learned about:
 
