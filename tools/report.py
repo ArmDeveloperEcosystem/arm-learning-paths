@@ -56,7 +56,7 @@ def content_parser(directory, period):
             logging.debug(f"Last updated: {date}")
             author = "None"
             for directory_list in open(directory +"/" + item):
-                if re.search("author_primary", directory_list):
+                if re.search("^author:", directory_list):
                     # split and strip out '\n'
                     author = directory_list.split(": ")[1].rstrip()
             logging.debug(f"Primary author {author}")
