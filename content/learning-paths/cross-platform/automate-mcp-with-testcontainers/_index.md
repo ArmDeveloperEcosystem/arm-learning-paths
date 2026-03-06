@@ -1,20 +1,23 @@
 ---
 title: Automate MCP Server testing using Pytest and Testcontainers
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 60
 
-who_is_this_for: This is an intermediate topic for anyone interested in automating their end-to-end testing of MCP (Model Context Protocol) servers using specialized software packages called TestContainers and PyTest. 
+who_is_this_for: This is an introductory topic for software developers and QA engineers who want to automate integration testing of MCP (Model Context Protocol) servers using Testcontainers and PyTest.
 
 learning_objectives:
-    - Understand how TestContainers work for containerized testing of MCP servers.
-    - Write integration tests for MCP servers using PyTest and TestContainers.
-    - Configure GitHub Actions to run MCP integration tests in CI/CD pipelines.
+    - Set up Testcontainers with PyTest for containerized testing of MCP servers
+    - Write and run integration tests that validate MCP server functionality
+    - Configure GitHub Actions to automate MCP server testing in CI/CD pipelines
 
 prerequisites:
-    - A machine that can run Python 3 and Docker. 
-    - Familiarity with [Docker](/install-guides/docker/) and container concepts.
-    - Basic knowledge of Python and Pytest.
-    - The [Arm MCP Server](https://github.com/arm/mcp) running with AI assistant client.
+    - A computer with [Docker](/install-guides/docker/) and Python 3.11 or later installed
+    - Basic familiarity with Python, PyTest, and container concepts
+    - Familiarity with the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) specification
 
 author: Neethu Elizabeth Simon
 
@@ -35,6 +38,11 @@ tools_software_languages:
     - GitHub Actions
     - Testcontainers
     - MCP
+
+shared_path: true
+shared_between:
+    - servers-and-cloud-computing
+    - laptops-and-desktops
 
 further_reading:
     - resource:
