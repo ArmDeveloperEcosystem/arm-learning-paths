@@ -26,6 +26,7 @@ armips:
 tools_software_languages:
     - Arm Performix
     - C++
+    - Runbook
 
 operatingsystems:
     - Linux
