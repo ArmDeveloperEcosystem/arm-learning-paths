@@ -6,9 +6,9 @@ weight: 4
 layout: learningpathall
 ---
 
-## Use Arm SoC Migration Power for AI-guided migration
+## Use Perform Migration between Arm SoC Power for AI-guided migration
 
-In this section, you use the Arm SoC Migration Power to migrate your application between Arm-based platforms. The example demonstrates migration from:
+In this section, you use the Perform Migration between Arm SoC Power to migrate your application between Arm-based platforms. The example demonstrates migration from:
 
 - **Source:** AWS Graviton3 (Neoverse-V1, Arm64 Linux, cloud deployment)
 - **Target:** Raspberry Pi 5 (BCM2712, Cortex-A76, edge deployment)
@@ -19,11 +19,11 @@ For each step below, an example prompt for the Graviton-to-Pi-5 scenario is prov
 
 ### Initiate migration
 
-Open Kiro and describe your migration clearly using the Arm SoC Migration Power.
+Open Kiro and describe your migration clearly using the Perform Migration between Arm SoC Power.
 
 Example prompt:
 ```
-I want to use the Arm SoC Migration Power to migrate my sensor monitoring 
+I want to use the Perform Migration between Arm SoC Power to migrate my sensor monitoring 
 application from AWS Graviton3 to Raspberry Pi 5 (BCM2712). The application 
 currently uses simulated sensors on Graviton and needs to work with real 
 GPIO and SPI hardware on the Pi 5.
@@ -184,7 +184,7 @@ add_executable(sensor_monitor ${COMMON_SOURCES} ${PLATFORM_SOURCES})
 
 In this section:
 
-- You used the Arm SoC Migration Power to analyze architecture differences between Graviton3 and BCM2712
+- You used the Perform Migration between Arm SoC Power to analyze architecture differences between Graviton3 and BCM2712
 - You designed a HAL that abstracts platform differences and preserves portability
 - You generated platform-specific code for the target device
 - You updated the build system for multi-platform support
