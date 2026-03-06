@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## What is MCP?
 
-The Model Context Protocol (MCP) is an open standard that enables AI assistants to securely connect to external data sources and tools. MCP servers provide AI models with context aware capabilities, such as code analysis, knowledge base lookups, and system introspection.
+The Model Context Protocol (MCP) is an open standard that enables AI assistants to securely connect to external data sources and tools. MCP servers provide AI models with context-aware capabilities, such as code analysis, knowledge base lookups, and system introspection.
 
-The Arm MCP Server is a reference implementation that provides AI assistants with tools and knowledge specifically for Arm architecture development, migration, and optimization. It includes capabilities like container architecture checking, code analysis with LLVM-MCA, and access to Arm Learning Paths.
+The Arm MCP Server provides AI assistants with tools and knowledge specifically for Arm architecture development, migration, and optimization. It includes capabilities like container architecture checking, code analysis with LLVM-MCA, and a knowledge base with content from Arm Learning Paths and other documentation.
 
 ## Why automate MCP server testing?
 
@@ -25,7 +25,7 @@ MCP servers expose multiple tools that AI assistants can invoke. As these tools 
 
 Testcontainers is a Python library that provides lightweight, throwaway instances of Docker containers for testing. Instead of mocking your MCP server, you can spin up the actual Docker container, run tests against it, and tear it down automatically.
 
-![testcontainers alt-text#center](testcontainers.png "Figure 1. Testcontainers Flow")
+![Diagram showing Testcontainers workflow: test code creates a Docker container, runs tests against it, and automatically tears it down after completion#center](testcontainers.png "Figure 1. Testcontainers Flow")
 
 This approach offers several benefits:
 

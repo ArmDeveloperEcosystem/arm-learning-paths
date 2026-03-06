@@ -10,9 +10,17 @@ layout: learningpathall
 
 Before you begin, ensure you have the following installed on your machine:
 
-- Python 3.11 or later
+- Python 3.11 or later with the ability to create Python virtual environments
 - Docker Engine or Docker Desktop
 - Git
+
+If you are on Linux, you need the Python virtual environment package.
+
+For Debian or Ubuntu, run:
+
+```bash
+sudo apt install -y python3-venv
+```
 
 You can verify Docker is running by executing:
 
@@ -82,12 +90,6 @@ The requirements file contains:
 ```text
 testcontainers
 pytest
-```
-
-You can also install these packages directly:
-
-```bash
-pip install testcontainers pytest
 ```
 
 ## Verify your setup
