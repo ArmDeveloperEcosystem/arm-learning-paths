@@ -45,7 +45,7 @@ Finally, select **Specified protocols and ports** under the **Protocols and port
 
 ![Google Cloud Console firewall rule form showing protocols and ports section with TCP selected and ports 9000,9001,8815 specified alt-txt#center](images/network-port.png "Specifying TCP ports for Apache Arrow and MinIO")
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 You've successfully:
 

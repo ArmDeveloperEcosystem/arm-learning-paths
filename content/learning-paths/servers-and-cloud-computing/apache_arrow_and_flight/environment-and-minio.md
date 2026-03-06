@@ -217,13 +217,11 @@ AWS_ACCESS_KEY_ID=minioadmin
 
 to communicate with MinIO exactly like Amazon S3.
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 - Prepared a SUSE arm64 analytics environment
 - Installed Apache Arrow and dependencies
 - Deployed MinIO as S3-compatible object storage
 - Configured secure access for analytics workloads
-
-## What's next
 
 In the next section, you will use Apache Arrow to write and read Parquet and ORC datasets from MinIO using vectorized analytics APIs.
