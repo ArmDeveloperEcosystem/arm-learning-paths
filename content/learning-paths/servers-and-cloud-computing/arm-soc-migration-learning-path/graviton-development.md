@@ -22,7 +22,7 @@ tar -xzf sensor-monitor.tar.gz
 cd sensor-monitor
 ```
 
-The archive includes the complete source code, a Makefile, and platform-specific implementations. You will analyze and migrate this code using the Arm SoC Migration Power.
+The archive includes the complete source code, a Makefile, and platform-specific implementations. You will analyze and migrate this code using the Perform Migration between Arm SoC Power.
 
 ### Upload to the Graviton instance for testing
 
@@ -89,4 +89,4 @@ In this section:
 - You confirmed the toolchain and build process work correctly on Arm64 Linux
 - You established your baseline for migration validation
 
-In the next section, you'll use the Arm SoC Migration Power to analyze the codebase and migrate it to the target platform.
+In the next section, you'll use the Perform Migration between Arm SoC Power to analyze the codebase and migrate it to the target platform.

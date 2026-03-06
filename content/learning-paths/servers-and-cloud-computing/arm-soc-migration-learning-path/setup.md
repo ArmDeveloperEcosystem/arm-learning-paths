@@ -36,15 +36,14 @@ The Arm SoC Migration Power extends Kiro with specialized knowledge and tools fo
 
 - Open Kiro IDE
 - Navigate to the **Powers** panel. Press Cmd + Shift + P (Mac) or Ctrl + Shift + P (Windows)
-- Select the Arm SoC Migration Power in the **Recommended** section
+- Select the Perform Migration between Arm SoC in the **Recommended** section
 - Select **Install**
 
-### Verify installation
-
-After installation, enter the following prompt in Kiro:
+### Verify install
+After installation, you can either click on the "Try power" button or enter the following prompt in Kiro:
 
 ```text
-I just installed the Arm SoC Migration Power and want to use it.
+I just installed the arm-soc-migration power and want to use it.
 ```
 The Power should respond and guide you through any additional setup steps.
 
@@ -58,7 +57,7 @@ It supports migrations across a wide range of Arm-based platforms, including:
 
 ### Install prerequisites
 
-The Arm SoC Migration Power uses the Arm MCP (Model Context Protocol) server to provide specialized Arm migration capabilities. The Arm MCP server runs via Docker.
+The Perform Migration between Arm SoC uses the Arm MCP (Model Context Protocol) server to provide specialized Arm migration capabilities. The Arm MCP server runs via Docker.
 
 Install Docker on your local development machine (required for ARM MCP server):
 
@@ -87,7 +86,7 @@ docker --version
 ```
 
 {{% notice Note %}}
-Ensure Docker is running before using the Arm SoC Migration Power. The Power will automatically pull and run the Arm MCP server container when needed.
+Ensure Docker is running before using the Perform Migration between Arm SoC. The Power will automatically pull and run the Arm MCP server container when needed.
 {{% /notice %}}
 
 ### Launch AWS Graviton3 instance (source platform)
@@ -170,7 +169,7 @@ sudo dnf install -y gcc make wget tar
 
 In this section:
 
-- You installed Kiro IDE and the Arm SoC Migration Power
+- You installed Kiro IDE and the Perform Migration between Arm SoC Power
 - You provisioned an AWS Graviton3 instance as your source platform
 - You installed the build tools needed for the migration example
 
