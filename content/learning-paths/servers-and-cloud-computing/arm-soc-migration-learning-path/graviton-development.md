@@ -22,7 +22,7 @@ tar -xzf sensor-monitor.tar.gz
 cd sensor-monitor
 ```
 
-The archive includes the complete source code, a Makefile, and platform-specific implementations. You will analyze and migrate this code using the Arm SoC Migration Power.
+The archive includes the complete source code, a Makefile, and platform-specific implementations. You will analyze and migrate this code using the Perform Migration between Arm SoC Power.
 
 ### Upload to the Graviton instance for testing
 
