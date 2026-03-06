@@ -1,5 +1,5 @@
 ---
-title: Examples
+title: Verify reproducible results across scalar, NEON, and SVE
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -8,52 +8,66 @@ layout: learningpathall
 
 ## Example: Reproducible expf
 
-In this example, you will take a look into reproducibility Libamath usage, considering the case of a simple computation using the exponential function in single precision (`expf`).
+This example demonstrates reproducibility in Libamath using the single-precision exponential function, `expf()`.
 
+### Setting up your environment
 
-#### Setting up your environment
-In this example we use **`GCC-14`** compiler on a **`Neoverse V1`** machine. We use [ArmPL 26.01 module](/install-guides/armpl/).
-You can setup some environment variables to make compilation commands simpler:
+This example uses GCC-14 on a Neoverse V1 machine with the [ArmPL 26.01 module](/install-guides/armpl/) installed.
 
-```bash { command_line="root@localhost" }
-export LD_LIBRARY_PATH=<armpl-install-path>/lib:$LD_LIBRARY_PATH
-export C_INCLUDE_PATH=<armpl-install-path>/include
-export LIBRARY_PATH=<armpl-install-path>/lib
+If you need to install GCC run:
+
+```bash
+sudo apt install gcc -y
 ```
 
-With this setup, you can compile the examples to use the reproducible Libamath library via:
-```bash { command_line="root@localhost" }
+You can set up some environment variables to make compilation commands simpler:
+
+```bash { command_line="ubuntu@localhost" }
+export CC=gcc
+export LD_LIBRARY_PATH=$ARMPL_DIR/lib:$LD_LIBRARY_PATH
+export C_INCLUDE_PATH=$ARMPL_DIR/include
+export LIBRARY_PATH=$ARMPL_DIR/lib
+```
+
+The commands below show the general compilation pattern used throughout the examples. 
+
+Don't run them yet because `app.c` is introduced in the sections that follow.
+
+To compile with the reproducible Libamath library:
+
+```bash
 $CC app.c -DAMATH_REPRO=1 -lamath_repro -o app
 ```
 
-If in turn you are interested in using the non-reproducible Libamath library, you should compile with:
-```bash { command_line="root@localhost" }
+To compile with the non-reproducible Libamath library instead:
+
+```bash
 $CC app.c -lamath -o app
 ```
 
-Note that that this only works if `app.c` only contains functions that are present in both versions of the library (`libamath_repro.a` contains a subset of functions in `libamath.a`).
+This only works if `app.c` only contains functions that are present in both versions of the library (`libamath_repro.a` contains a subset of functions in `libamath.a`).
 
-You can run examples via:
+To run a compiled example:
 
-```bash { command_line="root@localhost" }
+```bash
 ./app
 ```
 
-For `SVE` applications, add `-march=armv8-a+sve` to the compilation command. For example:
+For SVE applications, add `-march=armv8-a+sve` to the compilation command:
 
-```bash { command_line="root@localhost" }
+```bash
 $CC app.c -DAMATH_REPRO=1 -lamath_repro -march=armv8-a+sve -o app
 ```
 
+### Scalar usage
 
-#### Scalar usage
+The starting point is a small application that uses the scalar implementation of the single-precision exponential function `armpl_exp_f32()`.
 
-Our starting point is a small application that uses the scalar implementation of the single precision exponential function `armpl_exp_f32`.
-Below you can find the example-code, the output when reproducibility is enabled versus when reproducibility is disabled.
+Save the following C code in a file called `app.c` using your preferred text editor. Then compile and run it using the compilation patterns from the previous section, once with reproducibility enabled (`-DAMATH_REPRO=1 -lamath_repro`) and once with reproducibility disabled (`-lamath`), to compare the output for each case.
 
 {{< tabpane code=true >}}
 
-  {{< tab header="C Application" language="C" output_lines="10">}}
+  {{< tab header="C code" language="C" output_lines="10">}}
 #include <amath.h>
 #include <stdio.h>
 
@@ -76,12 +90,12 @@ y = 2.613692045211792 [0x1.4e8d76p+1]
 {{< /tabpane >}}
 
 
-#### Neon usage
+### NEON usage
 
-Now we build a simple Neon application that invokes the reproducible Neon implementation of the single precision exponential function `armpl_vexpq_f32`.
+Next, replace the contents of `app.c` with the following NEON application that invokes the reproducible NEON implementation of the single-precision exponential function `armpl_vexpq_f32()`. Compile and run it again with reproducibility enabled and disabled to compare the results.
 
 {{< tabpane code=true >}}
-  {{< tab header="C" language="C" output_lines="15">}}
+  {{< tab header="C code" language="C" output_lines="15">}}
 #include <amath.h>
 #include <arm_neon.h>
 #include <stdio.h>
@@ -118,13 +132,14 @@ y (lane 3) = 2.613692283630371 [0x1.4e8d78p+1]
 {{< /tabpane >}}
 
 
-Once we run this example, each lane of `y` will contain the same bit pattern as the scalar result of `armpl_exp_f32(1.0f)` (as you can see in the *Output* tab).
+Once you run this example, each lane of `y` contains the same bit pattern as the scalar result of `armpl_exp_f32(0x1.ebe93cp-1f)` (as you can see in the *Output* tab).
 
-#### SVE usage
-Finally we build a simple SVE application that invokes the reproducible SVE implementation of the single precision exponential function `armpl_svexp_f32_x`.
+### SVE usage
+
+Finally, replace the contents of `app.c` with the following SVE application that invokes the reproducible SVE implementation of the single-precision exponential function `armpl_svexp_f32_x()`. Compile and run using the SVE compilation command (with `-march=armv8-a+sve`), once with reproducibility enabled and once disabled.
 
 {{< tabpane code=true >}}
-  {{< tab header="C" language="C" output_lines="15">}}
+  {{< tab header="C code" language="C" output_lines="15">}}
 #include <amath.h>
 #include <arm_sve.h>
 #include <stdio.h>
@@ -166,17 +181,14 @@ y (lane 7): 2.613692045211792 [0x1.4e8d76p+1]
   {{< /tab >}}
 {{< /tabpane >}}
 
-All active lanes of `y` are guaranteed to match the scalar and Neon results exactly.
+All active lanes of `y` are guaranteed to match the scalar and NEON results exactly.
 
-#### Scope and Limitations
+### Scope and limitations
 
-In this section we observed that, when reproducibility is enabled (`AMATH_REPRO` enabled), `expf` produces bitwise-identical results whether it is executed as a scalar, Neon or SVE function.
+In this section you observed that, when reproducibility is enabled (`AMATH_REPRO` enabled), `expf()` produces bitwise-identical results whether it is executed as a scalar, NEON or SVE function.
 
-This behaviour extends to other reproducible math routines in reproducible Libamath:
+This behavior extends to other reproducible math routines in Libamath. Scalar, NEON, and SVE implementations are numerically aligned for all functions listed in `amath_repro.h`. Reproducible symbols are always prefixed by `armpl_` and are not provided with `ZGV` mangling. Reproducibility is available on Linux platforms, and results are independent of vector width or instruction selection. Reproducible routines prioritize determinism over peak performance.
 
-* Scalar, Neon, and SVE implementations are numerically aligned
-* Only functions listed in `amath_repro.h` are reproducible
-* Reproducible symbols are always prefixed by `armpl_`. They are not provided with `ZGV` mangling.
-* Reproducibility is provided on Linux platforms
-* Results are independent of vector width or instruction selection
-* Reproducible routines prioritize determinism over peak performance
+## What you've learned and what's next
+
+In this Learning Path, you learned what numerical reproducibility means in floating-point software and explored real-world applications where it is critical. You then enabled cross-vector-extension reproducibility in Libamath and verified that scalar, NEON, and SVE code paths produce bitwise-identical results for the `expf()` function. You can now apply these techniques to your own applications using Arm Performance Libraries.

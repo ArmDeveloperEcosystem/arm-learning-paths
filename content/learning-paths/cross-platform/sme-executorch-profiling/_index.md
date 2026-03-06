@@ -24,10 +24,12 @@ skilllevels: Advanced
 subjects: ML
 armips:
   - Cortex-A
+  - Arm C1
 tools_software_languages:
   - ExecuTorch
   - Python
   - CMake
+  - SME2
 operatingsystems:
   - macOS
   - Android

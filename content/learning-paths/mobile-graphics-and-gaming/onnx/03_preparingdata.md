@@ -1,32 +1,44 @@
 ---
-# User change
-title: "Preparing a Synthetic Sudoku Digit Dataset"
+title: "Generate a synthetic Sudoku digit dataset"
 
 weight: 4
 
 layout: "learningpathall"
 ---
+## Overview
 
-## Big picture
-Our end goal is a camera-to-solution Sudoku app that runs efficiently on Arm64 devices (e.g., Raspberry Pi or Android phones). ONNX is the glue: we’ll train the digit recognizer in PyTorch, export it to ONNX, and run it anywhere with ONNX Runtime (CPU EP on edge devices, NNAPI EP on Android). Everything around the model—grid detection, perspective rectification, and solving—stays deterministic and lightweight.
+The end goal is a camera-to-solution Sudoku app that runs efficiently on Arm64 devices (for example, Raspberry Pi or Android phones). ONNX is the glue: you will train the digit recognizer in PyTorch, export it to ONNX, and run it anywhere with ONNX Runtime (CPU EP on edge devices, NNAPI EP on Android). Everything around the model--grid detection, perspective rectification, and solving--stays deterministic and lightweight.
+
+
+
 
 ## Objective
-In this step, we will generate a custom dataset of Sudoku puzzles and their digit crops, which we’ll use to train a digit recognition model. Starting from a Hugging Face parquet dataset that provides paired puzzle/solution strings, we transform raw boards into realistic, book-style Sudoku pages, apply camera-like augmentations to mimic mobile captures, and automatically slice each page into 81 labeled cell images. This yields a large, diverse, perfectly labeled set of digits (0–9 with 0 = blank) without manual annotation. By the end, you’ll have a structured dataset ready to train a lightweight model in the next section.
 
-## Why Synthetic Generation?
-When building a Sudoku digit recognizer, the hardest part is obtaining a well-labeled dataset that matches real capture conditions. MNIST contains handwritten digits, which differ from printed, grid-aligned Sudoku digits; relying on it alone hurts real-world performance.
+In this step, you'll generate a custom dataset of Sudoku puzzles and digit crops for training. Starting from a Hugging Face parquet dataset that provides paired puzzle/solution strings, you will transform raw boards into realistic, book-style Sudoku pages, apply camera-like augmentations to mimic mobile captures, and automatically slice each page into 81 labeled cell images. This yields a large, diverse, perfectly labeled set of digits (0–9 with 0 = blank) without manual annotation.
 
-By generating synthetic Sudoku pages directly from the parquet dataset, we get:
-1. Perfect labeling. Since the puzzle content is known, every cropped cell automatically comes with the correct label (digit or blank), eliminating manual annotation.
-2. Control over style. We can render Sudoku pages to look like those in printed books, with realistic fonts, grid lines, and difficulty levels controlled by how many cells are left blank.
-3. Robustness through augmentation: By applying perspective warps, blur, noise, and lighting variations, we simulate how a smartphone camera might capture a Sudoku page, improving the model’s ability to handle real-world photos.
-4. Scalability. With millions of Sudoku solutions available, we can easily generate tens of thousands of training samples in minutes, ensuring a dataset that is both large and diverse.
+## Why synthetic generation?
 
-This synthetic data generation strategy allows us to create a custom-fit dataset for our Sudoku digit recognition problem, bridging the gap between clean digital puzzles and noisy real-world inputs.
+Obtaining a well-labeled dataset that matches real capture conditions is often the hardest part of building a vision model. MNIST contains handwritten digits, which differ significantly from printed, grid-aligned Sudoku digits. Training only on MNIST typically results in poor performance on printed puzzles.
 
-## What we’ll produce
-By the end of this step, you will have two complementary datasets:
-1. Digit crops for training the classifier. A folder tree structured for torchvision.datasets.ImageFolder, containing tens of thousands of labeled 28×28 images of Sudoku digits (0–9, with 0 meaning blank):
+By generating synthetic Sudoku pages directly from structured puzzle data, you gain:
+
+* **Perfect labeling**: since the puzzle content is known, every cropped cell automatically receives the correct label (digit or blank). This eliminates manual annotation errors.
+
+* **Domain alignment**: the rendered digits match printed-book Sudoku styling rather than handwritten digits.
+
+* **Controlled augmentation**: by applying perspective warps, blur, and illumination variations, we approximate smartphone capture conditions. This improves robustness when deploying on mobile devices.
+
+* **Scalability**: with large numbers of available Sudoku puzzles, we can generate tens of thousands of labeled samples quickly.
+
+One important consideration is class imbalance: Sudoku puzzles contain many blank cells, so the “0” class will naturally dominate. You will address this during training if needed through sampling or loss weighting.
+
+## Dataset structure
+
+By the end of this section, you will have two complementary datasets:
+
+### Digit crops for training
+
+A folder tree structured for `torchvision.datasets.ImageFolder`, containing tens of thousands of labeled 28×28 images of Sudoku digits (0–9, with 0 meaning blank):
 
 ```console
 data/
@@ -41,9 +53,11 @@ data/
     9/....png
 ```
 
-These will be used in next step to train a lightweight model for digit recognition.
+These will be used in the next section to train a lightweight model for digit recognition.
 
-2. Rendered Sudoku grids for camera simulation. Full-page Sudoku images (both clean book-style and augmented camera-like versions) stored in:
+### Rendered Sudoku grids
+
+Full-page Sudoku images (both clean book-style and augmented camera-like versions) stored in:
 ```console
 data/
   grids/
@@ -60,7 +74,7 @@ These grid images allow us to later test the end-to-end pipeline: detect the boa
 Together, these datasets provide both the micro-level data needed to train the digit recognizer and the macro-level data to simulate the camera pipeline for testing and deployment.
 
 ## Implementation
-Start by creating a new file 02_PrepareData.py and modify it as follows:
+Start by creating a new file `02_PrepareData.py` with the following content:
 ```python
 import os, random, pathlib
 import numpy as np
@@ -203,21 +217,21 @@ if __name__ == "__main__":
     main()
 ```
 
-At the top, you set basic knobs for the generator: where to read the Parquet file, where to write outputs, how many puzzles to render for train/val, page size, grid margin, crop size, and the OpenCV font. Tweaking these lets you control dataset scale, visual style, and classifier input size (e.g., CELL_SIZE=32 if you want a slightly larger digit crop).
+At the top, you set basic knobs for the generator: where to read the Parquet file, where to write outputs, how many puzzles to render for train/val, page size, grid margin, crop size, and the OpenCV font. Tweaking these lets you control dataset scale, visual style, and classifier input size (for example, CELL_SIZE=32 if you want a slightly larger digit crop).
 
-The method str_to_grid(s) converts an 81-character Sudoku string into a 9×9 list of integers. Each character represents a cell: 0 is blank, 1–9 are digits. This is the canonical internal representation used throughout the script.
+The method `str_to_grid(s)` converts an 81-character Sudoku string into a 9×9 list of integers. Each character represents a cell: 0 is blank, 1–9 are digits. This is the canonical internal representation used throughout the script.
 
-Then, we have load_puzzles(parquet_path, n_train, n_val), which loads the dataset from Parquet, shuffles it deterministically, and slices it into train/val partitions. It returns the puzzles (and, if present, solutions) as 9×9 integer grids. In this step we only need puzzle for rendering and labeling digit crops (blanks included); solution is useful later for solver validation.
+Then, you have `load_puzzles(parquet_path, n_train, n_val)`, which loads the dataset from Parquet, shuffles it deterministically, and slices it into train/val partitions. It returns the puzzles (and, if present, solutions) as 9×9 integer grids. In this step we only need puzzle for rendering and labeling digit crops (blanks included); solution is useful later for solver validation.
 
-Subsequently, draw_grid(img, size=9, margin=GRID_MARGIN) draws a Sudoku grid on a blank page image. It computes the step size from the page dimensions and margin, then draws both thin inner lines and thick 3×3 box boundaries. It returns the top-left corner (x0, y0) and the cell size (step), which are reused to place digits and to locate each cell for cropping.
+Subsequently, `draw_grid(img, size=9, margin=GRID_MARGIN)` draws a Sudoku grid on a blank page image. It computes the step size from the page dimensions and margin, then draws both thin inner lines and thick 3×3 box boundaries. It returns the top-left corner (x0, y0) and the cell size (step), which are reused to place digits and to locate each cell for cropping.
 
-Next, put_digit(img, r, c, d, x0, y0, step) renders a single digit d at row r, column c inside the grid. The text is centered in the cell using the font metrics; if d == 0, it leaves the cell blank. This mirrors printed-book Sudoku styling so our crops look realistic.
+Next, `put_digit(img, r, c, d, x0, y0, step)` renders a single digit d at row r, column c inside the grid. The text is centered in the cell using the font metrics; if d == 0, it leaves the cell blank. This mirrors printed-book Sudoku styling so our crops look realistic.
 
-Another method, render_page(puzzle9x9) builds a complete “book-style” Sudoku page: creates a white canvas, draws the grid, loops over all 81 cells, and writes digits using put_digit. It returns the page plus the grid geometry (x0, y0, step) for subsequent cropping.
+Another method, `render_page(puzzle9x9)` builds a complete “book-style” Sudoku page: creates a white canvas, draws the grid, loops over all 81 cells, and writes digits using put_digit. It returns the page plus the grid geometry (x0, y0, step) for subsequent cropping.
 
-A method aug_camera(img) applies a light, camera-like augmentation to mimic smartphone captures: a small perspective warp (random corner jitter) and optional Gaussian blur. The warp uses a light gray border fill so any exposed areas look like paper rather than colored artifacts. This produces a second version of each page that’s closer to real-world inputs.
+A method `aug_camera(img)` applies a light, camera-like augmentation to mimic smartphone captures: a small perspective warp (random corner jitter) and optional Gaussian blur. The warp uses a light gray border fill so any exposed areas look like paper rather than colored artifacts. This produces a second version of each page that’s closer to real-world inputs.
 
-Afterward, ensure_dirs(split) makes the class directories for a given split (train or val) so that crops can be saved in data/{split}/{class}/.... The classes are 0..9 with 0 = blank.
+Afterward, `ensure_dirs(split)` makes the class directories for a given split (train or val) so that crops can be saved in data/{split}/{class}/.... The classes are 0..9 with 0 = blank.
 
 A method save_crops(page, geom, puzzle9x9, split, base_id) slices the page into 81 cell crops using the grid geometry, converts each crop to grayscale, resizes it to CELL_SIZE × CELL_SIZE, and saves it into the appropriate class directory based on the puzzle’s value at that cell (0..9). Using the puzzle for labels ensures we learn to recognize blanks as well as digits.
 
@@ -235,8 +249,11 @@ data/
     val/    (..._clean.png, ..._cam.png)
 ```
 
-## Launching instructions
-1. Install dependencies (inside your virtual env):
+## Run the data generation script
+
+### Install dependencies
+
+Inside your virtual environment, install the required packages:
 ```console
 pip install pandas pyarrow opencv-python tqdm numpy
 ```
@@ -266,5 +283,8 @@ Tips
 * If you want larger inputs for the classifier, increase CELL_SIZE to 32 or 40.
 * To make augmentation a bit stronger (more realistic), slightly increase the perspective jitter in aug_camera, add brightness/contrast jitter, or a faint gradient shadow overlay.
 
-## Summary
-After running this step you’ll have a robust, labeled, Sudoku-specific dataset: thousands of digit crops (including blanks) for training and realistic full-page grids for pipeline testing. You’re ready for the next step—training the digit recognizer and exporting it to ONNX.
+## What you've learned and what's next
+
+In this section, you've learned why synthetic data generation is essential for Sudoku digit recognition, and you've built a complete pipeline to generate realistic labeled datasets. You've created thousands of digit crops (0–9, with 0 representing blanks) and full-page Sudoku images with camera-like augmentations. You now have both the micro-level training data your classifier needs and the macro-level test images to validate the end-to-end pipeline later.
+
+In the next section, you'll take these digit crops and train a lightweight neural network model using PyTorch, then export it to ONNX format so it can run efficiently on Arm devices with ONNX Runtime.

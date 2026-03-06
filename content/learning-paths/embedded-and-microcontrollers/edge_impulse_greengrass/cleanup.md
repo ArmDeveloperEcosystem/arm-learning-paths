@@ -1,13 +1,35 @@
 ---
-title: 9. AWS Account Cleanup (Optional)
+title: Clean up AWS resources
 weight: 11
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Cleanup
+## Clean up AWS resources (optional)
 
-**AWS workshop attendees**: The temporary AWS account given to you will automatically be deleted. No other action is necessary at this time. 
+After completing this Learning Path, clean up the AWS resources you created to avoid ongoing costs. The steps below are optional — skip any that you want to keep for further experimentation.
 
-**Personal AWS Accounts**: To minimize costs of your AWS resources, you can go to the AWS IoTCore Greengrass deployments page and revise your deployment. In the revision, remove the Edge Impulse custom component from the deployment and redeploy. This will shutdown the "runner" service on your edge device and will no longer send messages into IoTCore when inference results are present. Additionally, if using the EC2 edge device in the workshop, you will want to navigate to the EC2 dashboard, select your EC2 instance you created, and then set the instance state to "terminated" via the "Instance state" button/dropdown. You can also cancel your Greengrass deployments and delete both your Greengrass core device as well as your IoT Thing for your core device (all accomplished via the IoTCore dashboard). 
+### Remove the Greengrass deployment
+
+Navigate to **AWS IoT Core** > **Greengrass** > **Deployments**. Select your deployment and revise it to remove the Edge Impulse custom component. Redeploy the updated configuration. This shuts down the Runner service on your edge device and stops MQTT messages from being published to IoT Core.
+
+### Delete the Greengrass core device
+
+In **AWS IoT Core** > **Greengrass** > **Core devices**, select the core device you created and delete it. Also navigate to **AWS IoT Core** > **All devices** > **Things** and delete the IoT thing associated with your core device.
+
+### Delete the S3 bucket
+
+Navigate to **S3** in the AWS Console. Select the bucket you created for the component artifacts, empty it, and delete it.
+
+### Delete the Secrets Manager secret
+
+Navigate to **Secrets Manager** in the AWS Console. Select the **EI_API_KEY** secret and delete it. By default, Secrets Manager schedules deletion after a waiting period.
+
+### Terminate the EC2 instance
+
+If you used an EC2 instance as your edge device, navigate to the **EC2** dashboard. Select your instance, then choose **Instance state** > **Terminate instance**.
+
+## Congratulations
+
+You've completed this Learning Path. You set up an Arm-based edge device, built and deployed an Edge Impulse ML model through AWS IoT Greengrass, verified live inference, and used MQTT commands to control the Runner service remotely.

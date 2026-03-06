@@ -1,124 +1,145 @@
 ---
-title: 5. Edge Impulse Custom Component Creation
+title: Create the Edge Impulse Greengrass component
 weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Edge Impulse "Runner" Service Custom Component 
+## Overview
 
-We will utilize a Greengrass "Custom Component" to create and deploy the Edge Impulse runner service (the service that will run our Edge Impulse model on the edge device) including the required additional prerequisites (NodeJS install, libvips install). AWS IoT Greengrass' custom component feature is ideal to create custom components that can be specialized to prepare, run, and shutdown a given custom service. 
+AWS IoT Greengrass uses *custom components* to package and deploy software to edge devices. In this section, you create a custom component that installs and runs the Edge Impulse Runner service on your device. The component handles all prerequisites (Node.js, libvips) and manages the Runner lifecycle — install, run, and shutdown.
 
-Let's get started!
+The component consists of two parts:
+- **Artifacts**: Shell scripts (stored in S3) that install dependencies and launch the Runner.
+- **Recipe**: A YAML file that tells Greengrass where to find the artifacts, what configuration to apply, and how to manage the component lifecycle.
 
-### 1. Clone the repo to acquire the Edge Impulse Component recipes and artifacts
+## Clone the component repository
 
-Please clone this [repo](https://github.com/edgeimpulse/aws-greengrass-components) to retrieve the Edge Impulse component recipes (yaml files) and the associated artifacts.
+Clone the Edge Impulse Greengrass components repository to get the recipe and artifact files:
 
-### 2. Upload Edge Impulse Greengrass Component artifacts into AWS S3
+```bash
+git clone https://github.com/edgeimpulse/aws-greengrass-components.git
+```
 
-First, you need to go to the S3 console in AWS via AWS Console -> S3. From there, you will create an S3 bucket.  For sake of example, we name this bucket "MyS3Bucket123". 
+This repository contains the YAML recipe file and the shell script artifacts you'll upload to S3.
 
- ![CreateS3Bucket](./images/S3_Create_Bucket.png)
+## Upload artifacts to S3
 
-Next, the following directory structure needs to be created your new bucket:
+The Greengrass component downloads its artifacts from an S3 bucket at deployment time. You need to create a bucket and upload the shell scripts.
 
-		./artifacts/EdgeImpulseServiceComponent/1.0.0
-		
-Next, navigate to the "1.0.0" directory in your S3 bucket and then press "Upload" to upload the artifacts into the bucket. You need to upload the following files (these will be located in the ./artifacts/EdgeImpulseServiceComponent/1.0.0 from your cloned repo). Please upload all of these files into S3 at the above directory location:
-			
-		install.sh
-		run.sh
-		launch.sh					
-		stop.sh
-		
-Your S3 Bucket contents should look like this:
+Open the AWS Console and navigate to **S3**. Select **Create bucket** and give it a name (for example, `my-ei-greengrass-artifacts`):
 
-![UploadToS3](./images/S3_Upload_Artifacts.png)
-		
-### 3. Customize the component recipe files
+![S3 console showing the Create bucket dialog with a bucket name entered#center](./images/s3_create_bucket.png "Create an S3 bucket")
 
-Next we need to customize our Greengrass component recipe YAML file to reflect the actual location of our artifacts stored in S3.  Please replace ALL occurrences of "YOUR\_S3\_ARTIFACT\_BUCKET" with your S3 bucket name (i.e. "MyS3Bucket123"). Please do this to the "EdgeImpulseLinuxRunnerServiceComponent.yaml" file. Save the file.  
+Inside your new bucket, create the following directory structure:
 
-Also FYI, we can customize the defaulted configuration of your custom component by  editing, within "EdgeImpulseLinuxRunnerServiceComponent.yaml" file, the default configuration JSON. We won't need to do this for this workshop but its an useful option nonetheless. 
+```text
+artifacts/EdgeImpulseServiceComponent/1.0.0/
+```
 
-The default configuration in "EdgeImpulseLinuxRunnerServiceComponent.yaml" contains the following JSON configuration settings for the component:
-    	
-		EdgeImpulseLinuxRunnerServiceComponent.yaml:
-		{
-			"node_version": "20.12.1",
-			"vips_version": "8.12.1",
-			"device_name": "MyEdgeImpulseDevice",
-			"launch": "runner",
-			"sleep_time_sec": 10,
-			"lock_filename": "/tmp/ei_lockfile_runner",
-			"gst_args": "__none__",
-			"eiparams": "--greengrass",
-			"iotcore_backoff": "5",
-			"iotcore_qos": "1",
-			"ei_bindir": "/usr/local/bin",
-			"ei_sm_secret_id": "EI_API_KEY",
-			"ei_sm_secret_name": "ei_api_key",
-			"ei_ggc_user_groups": "video audio input users",
-			"install_kvssink": "no",
-			"publish_inference_base64_image": "no",
-			"enable_cache_to_file": "no",
-			"ei_poll_sleeptime_ms": 2500,
-			"ei_local_model_file": "__none__",
-			"ei_shutdown_behavior": "__none__",
-			"cache_file_directory": "__none__",
-			"enable_threshold_limit": "no",
-			"metrics_sleeptime_ms": 30000,
-			"default_threshold": 50.0,
-			"threshold_criteria": "ge",
-			"enable_cache_to_s3": "no",
-			"s3_bucket": "__none__",
-		}
-    	
-#### Attribute Description
+Navigate to the `1.0.0` directory in your S3 bucket and select **Upload**. Upload all four files from the cloned repository's `./artifacts/EdgeImpulseServiceComponent/1.0.0/` directory:
 
-The attributes in each of the above default configurations is outlined below:
+- `install.sh`
+- `run.sh`
+- `launch.sh`
+- `stop.sh`
 
-* **node\_version**: Version of NodeJS to be installed by the component
-* **vips\_version**: Version of the libvips library to be compiled/installed by the component
-* **device\_name**:  Template for the name of the device in EdgeImpulse... a unique suffix will be added to the name to prevent collisions when deploying to groups of devices
-* **launch**: service launch type (typically just leave this as-is)
-* **sleep\_time\_sec**: wait loop sleep time (component lifecycle stuff... leave as-is)
-* **lock\_filename**: name of lock file for this component (leave as-is)
-* **gst\_args**: optional GStreamer args, spaces replaced with ":", for custom video invocations
-* **eiparams**: additional parameters for launching the Edge Impulse service (leave as-is)
-* **iotcore\_backoff**:  number of inferences to "skip" before publication to AWS IoTCore... this is used to control publication frequency (AWS $$...)
-* **iotcore\_qos**: MQTT QoS (typically leave as-is)
-* **ei\_bindir**: Typical location of where the Edge Impulse services are installed (leave as-is)
-* **ei\_ggc\_user\_groups**: A list of additional groups the Greengrass service user account will need to be a member of to allow the Edge Impulse service to invoke and operate correctly (typically leave as-is). For JetPack v6.x and above, please add "render" as an additional group. 
-* **ei\_sm\_secret\_id**: ID of the Edge Impulse API Key within AWS Secret Manager
-* **ei\_sm\_secret\_name**: Name of the Edge Impulse API Key within AWS Secret Manager
-* **install\_kvssink**: Option (default: "no", on: "yes") to build and make ready the kvssink gstreamer plugin
-* **publish\_inference\_base64\_image**: Option (default: "no", on: "yes") to include a base64 encoded image that the inference result was based on
-* **enable\_cache\_to\_file**: Option (default: "no", on: "yes") to enable both inference and associated image to get written to a specified local directory as a pair: <guid>.img  and <guid>.json for each inference identified with a <guid>
-* **cache\_file\_directory**: Option (default: "__none__") to specify the local directory when enable_cache_to_file is set to "yes"
-* **ei\_poll\_sleeptime\_ms**: time (in ms) for the long polling message processor (typically leave as-is)
-* **ei\_local\_model\_file**: option to utilize a previously installed local model file
-* **ei\_shutdown\_behavior**: option to alter the shutdown behavior of the linux runner process. (can be set to "wait\_for\_restart" to cause the runner to pause after running the model and wait for the "restart" command to be issued (see "Commands" below for more details on the "restart" command))
-* **enable\_threshold\_limit**: option to enable/disable the threshold confidence filter (must be "yes" or "no". Default is "no")
-* **metrics\_sleeptime\_ms**: option to publish the model metrics statistics (time specified in ms). 
-* **default\_threshold**: option to specify threshold confidence filter "limit" (a value between 0 < x <= 1.0). Default setting is 0.7
-* **threshold\_criteria**:  option to specify the threshold confidence filter criteria (must be one of: "gt", "ge", "eq", "le", or "lt")
-* **enable\_cache\_to\_s3**: option to enable caching the inference image/result to an AWS S3 bucket
-* **s3\_bucket**: name of the optional S3 bucket to cache results into
+After the upload, your S3 bucket should look like this:
 
-### 4. Register the custom component via its recipe file
+![S3 bucket showing the artifacts directory structure with the four shell scripts uploaded in the 1.0.0 folder#center](./images/s3_upload_artifacts.png "Uploaded artifacts in S3")
 
-From the AWS Console -> IoT Core -> Greengrass -> Components, select "Create component". Then:
+## Customize the component recipe
 
-		1. Select the "yaml" option to Enter the recipe
-		2. Clear the text box to remove the default "hello world" yaml recipe
-		3. Copy/Paste the entire/edited contents of your "EdgeImpulseLinuxRunnerServiceComponent.yaml" file
-		4. Press "Create Component"
+The recipe YAML file tells Greengrass where to download the artifacts from S3. You need to update it with your actual bucket name.
 
-![CreateComponent](./images/GG_Create_Component.png)
+Open `EdgeImpulseLinuxRunnerServiceComponent.yaml` from the cloned repository and replace all occurrences of `YOUR_S3_ARTIFACT_BUCKET` with your S3 bucket name (for example, `my-ei-greengrass-artifacts`). Save the file.
 
-If formatting and artifact access checks out OK, you should have a newly created component listed in your Custom Components AWS dashboard! 
+### Default configuration reference
 
-Next we will create a Greengrass Deployment to deploy our custom component to our edge devices. 
+The recipe file includes a default configuration JSON block. You don't need to modify these defaults for this Learning Path — they're overridden at deployment time by the device-specific JSON you saved during hardware setup. However, understanding each field is useful for troubleshooting and customization.
+
+```json
+{
+   "node_version": "20.12.1",
+   "vips_version": "8.12.1",
+   "device_name": "MyEdgeImpulseDevice",
+   "launch": "runner",
+   "sleep_time_sec": 10,
+   "lock_filename": "/tmp/ei_lockfile_runner",
+   "gst_args": "__none__",
+   "eiparams": "--greengrass",
+   "iotcore_backoff": "5",
+   "iotcore_qos": "1",
+   "ei_bindir": "/usr/local/bin",
+   "ei_sm_secret_id": "EI_API_KEY",
+   "ei_sm_secret_name": "ei_api_key",
+   "ei_ggc_user_groups": "video audio input users",
+   "install_kvssink": "no",
+   "publish_inference_base64_image": "no",
+   "enable_cache_to_file": "no",
+   "ei_poll_sleeptime_ms": 2500,
+   "ei_local_model_file": "__none__",
+   "ei_shutdown_behavior": "__none__",
+   "cache_file_directory": "__none__",
+   "enable_threshold_limit": "no",
+   "metrics_sleeptime_ms": 30000,
+   "default_threshold": 50.0,
+   "threshold_criteria": "ge",
+   "enable_cache_to_s3": "no",
+   "s3_bucket": "__none__"
+}
+```
+
+### Configuration field reference
+
+The table below describes each configuration field:
+
+| Field | Description |
+|---|---|
+| `node_version` | Version of Node.js to install on the device. |
+| `vips_version` | Version of the libvips library to compile and install. |
+| `device_name` | Base name for the device in Edge Impulse. A unique suffix is appended automatically to prevent collisions when deploying to multiple devices. |
+| `launch` | Service launch type. Leave as `runner`. |
+| `sleep_time_sec` | Wait loop sleep time for the component lifecycle. Leave as default. |
+| `lock_filename` | Lock file path for this component. Leave as default. |
+| `gst_args` | GStreamer pipeline arguments with spaces replaced by colons. Set per-device during deployment (for example, `v4l2src:device=/dev/video0:!:video/x-raw,width=640,height=480:!:videoconvert:!:jpegenc`). Use `__none__` to disable. |
+| `eiparams` | Additional parameters for the Edge Impulse Runner. The `--greengrass` flag is required. |
+| `iotcore_backoff` | Number of inference results to skip between MQTT publications. Controls publication frequency and cost. Set to `-1` to publish every result, or a positive number to throttle. |
+| `iotcore_qos` | MQTT Quality of Service level. Leave as `1`. |
+| `ei_bindir` | Installation directory for the Edge Impulse CLI tools. Leave as default. |
+| `ei_sm_secret_id` | Secret ID in AWS Secrets Manager that holds the Edge Impulse API key. Must match the secret name you created (`EI_API_KEY`). |
+| `ei_sm_secret_name` | Key name within the Secrets Manager secret. Must match the key you created (`ei_api_key`). |
+| `ei_ggc_user_groups` | Linux groups the Greengrass service user (`ggc_user`) is added to. For Jetpack 6.x and later, add `render` to this list for GPU access. |
+| `install_kvssink` | Set to `yes` to build and install the KVS sink GStreamer plugin. Default: `no`. |
+| `publish_inference_base64_image` | Set to `yes` to include a base64-encoded image with each inference result published to MQTT. Default: `no`. |
+| `enable_cache_to_file` | Set to `yes` to write inference results and associated images to a local directory as paired files (`<guid>.json` and `<guid>.img`). Default: `no`. |
+| `cache_file_directory` | Local directory path for cached files when `enable_cache_to_file` is `yes`. Default: `__none__`. |
+| `ei_poll_sleeptime_ms` | Polling interval in milliseconds for the long-polling message processor. Leave as default. |
+| `ei_local_model_file` | Path to a previously downloaded local model file (`.eim`). Set to `__none__` to download the model from Edge Impulse at runtime. |
+| `ei_shutdown_behavior` | Controls Runner behavior after the model finishes. Set to `wait_on_restart` to pause after a video file ends and wait for a restart command. Default: `__none__`. |
+| `enable_threshold_limit` | Set to `yes` to enable the confidence threshold filter. Default: `no`. |
+| `metrics_sleeptime_ms` | Interval in milliseconds between model metrics publications. Default: `30000`. |
+| `default_threshold` | Confidence threshold value between 0 and 100. Inference results below this threshold are filtered out when `enable_threshold_limit` is `yes`. Default: `50.0`. |
+| `threshold_criteria` | Comparison operator for the threshold filter. Must be one of: `gt`, `ge`, `eq`, `le`, or `lt`. Default: `ge`. |
+| `enable_cache_to_s3` | Set to `yes` to cache inference images and results to an S3 bucket. Default: `no`. |
+| `s3_bucket` | S3 bucket name for cached results when `enable_cache_to_s3` is `yes`. Default: `__none__`. |
+
+## Register the component in Greengrass
+
+With the artifacts in S3 and the recipe updated, register the component in the AWS Console.
+
+Navigate to **AWS IoT Core** > **Greengrass** > **Components** and select **Create component**. Then:
+
+1. Select **Enter recipe as YAML** as the input method.
+2. Clear the default "hello world" YAML from the text box.
+3. Copy and paste the entire contents of your edited `EdgeImpulseLinuxRunnerServiceComponent.yaml` file.
+4. Select **Create component**.
+
+![Greengrass Components console showing the Create component form with the YAML recipe pasted into the editor#center](./images/gg_create_component.png "Register the custom component")
+
+If the recipe format is valid and Greengrass can access the S3 artifacts, the component appears in your custom components list.
+
+## What you've accomplished
+
+In this section, you cloned the Edge Impulse component repository, uploaded artifacts to S3, customized the recipe with your bucket name, and registered the component in Greengrass. In the next section, you create a Greengrass deployment to push this component to your edge device.

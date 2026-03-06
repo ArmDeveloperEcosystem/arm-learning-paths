@@ -1,73 +1,81 @@
 ---
-title: 6. Custom Component Deployment
+title: Deploy the component to your edge device
 weight: 8
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Greengrass Component Deployment
+## Overview
 
-In this section, we will create an AWS IoT Greengrass deployment that will download, prepare, install, and run our Edge Impulse "Runner" service on our edge device. When the  "Runner" service starts, it will connect back to our Edge Impulse environment via the API key we inserted into AWS Secret Manager and will download and start to run our deployed ML model we created in Edge Impulse Studio!  Let's get this started!
+In this section, you create a Greengrass deployment that downloads, installs, and runs the Edge Impulse Runner service on your edge device. When the Runner starts, it connects to your Edge Impulse project using the API key stored in AWS Secrets Manager, downloads your trained ML model, and begins running inference.
 
-### 0. (Non-Camera Edge Devices Only): Additional Custom Component 
+{{% notice Note %}}
+If your edge device doesn't have a camera (for example, an EC2 instance), you need to deploy an additional custom component first. Follow the [non-camera component setup](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/noncameracustomcomponent/) before continuing. You'll select that component alongside the Edge Impulse Runner component during deployment.
+{{% /notice %}}
 
-If your edge device does not contain a camera (i.e. EC2 edge device), you will need to deploy an additional custom component. Please follow [these steps](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/noncameracustomcomponent/) to get the additional component created. You will be selecting this component in addition to the custom component we created for the Edge Impulse "Runner" service. 
+## Create a Greengrass deployment
 
-### 1. Deploy the custom component to a selected Greengrass edge device or group of edge devices. 
+Open the AWS Console and navigate to **AWS IoT Core** > **Greengrass** > **Deployments**. You can either create a new deployment or modify an existing one.
 
-Almost done!  We can now go back to the AWS Console -> IoT Core -> Greengrass -> Deployments page and select a deployment (or create a new one!) to deploy our component down to as selected edge device or group of gateways as needed: 
+You have two deployment target options. To deploy to a group of devices, select a thing group:
 
-Deploy to a group of devices:
+![Greengrass deployment page showing the option to deploy to a group of devices with a thing group selected#center](./images/gg_create_deployment.png "Deploy to a group of devices")
 
-![GGDeploy](./images/GG_Create_Deployment.png)
+To deploy to a specific device (for example, your EC2 edge device), select a single core device:
 
-Deploy to a specific device (i.e. my EC2 Edge Device):
+![Greengrass deployment page showing the option to deploy to a single core device#center](./images/gg_create_deployment_2.png "Deploy to a single device")
 
-![GGDeploy](./images/GG_Create_Deployment_2.png)
+After choosing your target, select **Next**. On the components page, select your **EdgeImpulseLinuxRunnerServiceComponent** custom component:
 
-In either case above we now press "Next" and select our newly created custom component:
+![Component selection page with the EdgeImpulseLinuxRunnerServiceComponent checkbox selected#center](./images/gg_create_deployment_3.png "Select the custom component")
 
-![GGDeploy](./images/GG_Create_Deployment_3.png)
+{{% notice Note %}}
+If your edge device doesn't have a camera, also select the **EdgeImpulseRunnerRuntimeInstallerComponent** that you created in the non-camera component setup step:
 
->**_NOTE:_**
->If you are using an edge device which does not have a camera, you will also need to select the "EdgeImpulseRunnerRuntimeInstallerComponent" custom component that you created above ("Non-Camera Edge Device Custom Component"):
->![GGDeploy](./images/GG_Create_Deployment_3a.png)
+![Component selection page with both the Runner and RuntimeInstaller components selected#center](./images/gg_create_deployment_3a.png "Select both components for non-camera devices")
+{{% /notice %}}
 
-Press "Next" again, then select our custom component and press "Configure Component" to configure the "Runner" component:
+Select **Next** again. Select the **EdgeImpulseLinuxRunnerServiceComponent** and select **Configure component** to customize it for your device:
 
-![GGDeploy](./images/GG_Create_Deployment_4.png)
+![Component configuration page with the EdgeImpulseLinuxRunnerServiceComponent selected and the Configure component button visible#center](./images/gg_create_deployment_4.png "Configure the component")
 
->**_NOTE:_**
->If you also have the Non-Camera component, it does NOT need to be configured... only the "EdgeImpulseLinuxRunnerServiceComponent" should be configured
+{{% notice Note %}}
+If you also have the non-camera component, it doesn't need configuration. Only configure the **EdgeImpulseLinuxRunnerServiceComponent**.
+{{% /notice %}}
 
-#### Customizing a specific Deployment
+## Apply the device-specific configuration
 
-We now see that our custom component we registered has a default configuration. We can, however, customize it specifically for our specific hardware configuration (i.e. to a specific device or group of similar devices...).  
+The component has a default configuration from the recipe, but you can override it for this specific deployment. This is where you use the device-specific JSON you saved during hardware setup.
 
-First lets recall the JSON we saved off when we configured our hardware. Lets customize our Greengrass deployment by clearing, copying, and pasting that JSON into the "Configuration to merge" window... then press "Confirm":
+Clear the **Configuration to merge** text box, paste your saved JSON, and select **Confirm**:
 
-![GGDeploy](./images/GG_Create_Deployment_5.png)
+![Configuration to merge dialog showing the JSON configuration pasted into the text box#center](./images/gg_create_deployment_5.png "Paste the device-specific configuration")
 
-You'll then see the previous page and continue pressing "Next" until you get to the "Deploy" page:
+The ability to customize the configuration per deployment is one of the key benefits of Greengrass components. You can deploy the same component to different devices while adjusting settings like `device_name` or `gst_args` for each target's specific hardware.
 
-![GGDeploy](./images/GG_Create_Deployment_6.png)
+Continue selecting **Next** through the remaining pages until you reach the review page. Select **Deploy**:
 
-> **_NOTE:_**
->When performing the deployment, its quite common to, when selecting one of our newly created custom components, to then "Customize" that component by selecting it for "Customization" and entering a new JSON structure (same structure as what's found in the component's associated YAML file for the default configuration) that can be adjusted for a specific deployment (i.e. perhaps your want to change the DeviceName for this particular deployment or specify "gst_args" for a specific edge device(s) camera, etc...). This highlights the power and utility of the component and its deployment mechanism in AWS IoT Greengrass.
+![Deployment review page showing the final configuration summary with the Deploy button#center](./images/gg_create_deployment_6.png "Review and deploy")
 
+## Monitor the deployment
 
-> **_NOTE:_**
-> The component deployment may take awhile depending on network speed/etc... the reason for this is that all of the required prerequisites to run the Edge Impulse "Runner" service have to be downloaded, setup, and installed. 
-> 
-> Back on the edge device via SSH, you can "tail" two different files to watch the progress of the installation/setup as well as the component operation (as root):
-> 
-> 		% sudo su - 
-> 		# tail -f /greengrass/v2/logs/EdgeImpulseLinuxRunnerServiceComponent.log
-> 		# tail -f /tmp/ei*log
-> 
-> The first "tail" will log all of the installation activity during the component setup. The second "tail" (wildcarded) will be the log file of the "running" component. You can actually watch the Edge Impulse "Runner" output in that file if you wish. 
-> 
-> Both files are critical for debugging any potential issues with the deployment and/or component configuration. 
+The deployment can take several minutes depending on network speed. The component downloads and installs all prerequisites (Node.js, libvips, the Edge Impulse CLI) before starting the Runner.
 
-Now that our custom component has been deployed, the component will install Edge Impulse's "Runner" runtime that will then, in turn, pull down and invoke our Edge Impulse's current Impulse (i.e. model...). We will next check that our model is running on our edge device!
+To monitor progress, SSH into your edge device and tail the component logs:
+
+```bash
+sudo tail -f /greengrass/v2/logs/EdgeImpulseLinuxRunnerServiceComponent.log
+```
+
+This log shows the installation activity during the component setup phase. After the install completes, the Runner writes its own log file. To watch running inference output:
+
+```bash
+sudo tail -f /tmp/ei*log
+```
+
+Both log files are essential for debugging deployment or configuration issues. If the deployment fails, check the component log first for installation errors.
+
+## What you've accomplished
+
+In this section, you created a Greengrass deployment, applied your device-specific configuration, and deployed the Edge Impulse Runner component to your edge device. The Runner is now downloading your ML model and starting inference. In the next section, you verify that the model is running and view inference results.

@@ -1,33 +1,34 @@
 ---
-# User change
-title: "Android Deployment. From Model to App"
+title: "Deploy the model to Android"
 
 weight: 9
 
 layout: "learningpathall"
 ---
 
-## Objective ##
-In this section, we transition from a desktop prototype to a fully on-device Android application. The goal is to demonstrate how the optimized Sudoku pipeline—image preprocessing, ONNX inference, and deterministic solving—can be packaged and executed entirely on a mobile device, without relying on any cloud services.
+## Objective
 
-Rather than starting with a live camera feed, we begin with a fixed input bitmap that was generated earlier in the learning path. This approach allows us to focus on correctness, performance, and integration details before introducing additional complexity such as camera permissions, real-time capture, and varying lighting conditions. By keeping the input controlled, we can verify that the Android implementation faithfully reproduces the behavior observed in Python.
+You'll now transition from desktop deployment to a fully on-device Android application. The goal is to demonstrate how the optimized Sudoku pipeline--image preprocessing, ONNX inference, and deterministic solving--can be packaged and executed entirely on a mobile device, without relying on cloud services.
 
-Over the course of this section, we will:
-1. Create a new Android project and add the required dependencies.
-2. Bundle the trained ONNX model and a sample Sudoku image with the application.
-3. Implement a minimal user interface that loads the image and triggers the solver.
-4. Re-implement the Sudoku processing pipeline on Android, including preprocessing, batched ONNX inference, and solving.
-5. Display the solved result as an image, confirming that the entire pipeline runs locally on the device.
+Rather than starting with a live camera feed, you begin with a fixed input bitmap generated earlier in the Learning Path. This approach allows you to focus on correctness, performance, and integration details before introducing additional complexity such as camera permissions, real-time capture, and varying lighting conditions.
 
-By the end of this section, you will have a working Android app that takes a Sudoku image, runs neural network inference and solving on-device, and displays the solution. This completes the learning path by showing how a trained and optimized ONNX model can be deployed in a real mobile application, closing the loop from data generation and training to practical, end-user deployment.
+In this section, you will:
+
+* Create a new Android project and configure dependencies for ONNX Runtime and OpenCV
+* Bundle the trained ONNX model and sample Sudoku images as application assets
+* Build a minimal user interface that loads images and triggers the solver
+* Implement the Sudoku processing pipeline on Android, including grid detection, digit recognition, and solving
+* Display the solved result overlaid on the original image, confirming end-to-end on-device execution
+
+By the end of this section, you will have a working Android app that takes a Sudoku image, runs neural network inference and solving on-device, and displays the solution.
 
 ## Project creation
-We start by creating a new Android project using Android Studio. This project will host the Sudoku solver application and serve as the foundation for integrating ONNX Runtime and OpenCV.
+Start by creating a new Android project using Android Studio. This project will host the Sudoku solver application and serve as the foundation for integrating ONNX Runtime and OpenCV.
 
 1. Create a new project:
 * Open Android Studio and click New Project.
 * In the Templates screen, select Phone and Tablet, then choose Empty Views Activity.
-![img3](figures/03.webp)
+![Android Studio create project screen showing template selection with Empty Views Activity highlighted](figures/03.webp)
 
 This template creates a minimal Android application without additional UI components, which is ideal for a focused, step-by-step integration.
 
@@ -41,12 +42,12 @@ This template creates a minimal Android application without additional UI compon
 * Minimum SDK: API 24 (Android 7.0 – Nougat). This provides wide device coverage while remaining compatible with ONNX Runtime and OpenCV.
 * Build configuration language: Kotlin DSL (build.gradle.kts). We use the Kotlin DSL for Gradle, which is now the recommended option.
 
-![img4](figures/04.webp)
+![Android Studio project configuration screen showing project name SudokuSolverOnnx with Kotlin selected and minimum SDK set to API 24](figures/04.webp)
 
 * After confirming these settings, click Finish. Android Studio will create the project and generate a basic MainActivity along with the necessary Gradle files.
 
 ## View
-We now define the user interface of the Android application. The goal of this view is to remain intentionally simple while clearly exposing the end-to-end Sudoku workflow. The interface will consist of:
+You will now define the user interface of the Android application. The goal of this view is to remain intentionally simple while clearly exposing the end-to-end Sudoku workflow. The interface will consist of:
 * A button row at the top that allows the user to load a Sudoku image and trigger the solver.
 * A status text area used to display short messages (for example, whether an image has been loaded or the puzzle has been solved).
 * An input image view that displays the selected Sudoku bitmap.
@@ -201,12 +202,12 @@ Because the image area is scrollable, the layout remains usable even on smaller 
 
 When rendered, this produces a clear, vertically structured interface with a fixed control panel at the top and large input/output images underneath, as shown in the figure below.
 
-![img](figures/05.png)
+![Android app user interface showing two buttons at the top (Load image and Solve), a status text field, and placeholder areas for input and output Sudoku images](figures/05.png)
 
-At this stage, the UI is intentionally minimal. In the next step, we will connect this view to the application logic in MainActivity, load a sample Sudoku bitmap, and wire up the Load image and Solve buttons to the ONNX-based processing pipeline.
+At this stage, the UI is intentionally minimal. In the next step, you will connect this view to the application logic in MainActivity, load a sample Sudoku bitmap, and wire up the Load image and Solve buttons to the ONNX-based processing pipeline.
 
 ## Preparing input images for the Android app
-Before wiring the application logic, we need to provide the Android app with a small set of Sudoku images that it can load and solve. For this learning path, we deliberately use a fixed collection of pre-generated images (from Preparing a Synthetic Sudoku Digit Dataset) instead of a camera feed. This keeps the Android integration simple and allows us to focus on ONNX inference and solver integration first.
+Before wiring the application logic, you need to provide the Android app with a small set of Sudoku images that it can load and solve. For this learning path, you will use a fixed collection of pre-generated images (from Preparing a Synthetic Sudoku Digit Dataset) instead of a camera feed. This keeps the Android integration simple and allows us to focus on ONNX inference and solver integration first.
 
 1. Select Sudoku images. From the earlier Python steps, select a small number of generated Sudoku images. These can be either:
 * Clean grids (book-style), or
@@ -231,7 +232,7 @@ Rename your files accordingly, for example:
 
 3. Copy the renamed PNG files into the following directory of your Android project:
 
-app/src/main/res/drawable/
+`app/src/main/res/drawable/`
 
 After copying, Android Studio will automatically generate resource IDs for these images.
 
@@ -247,7 +248,7 @@ R.drawable.sudoku_cam_01
 
 In this tutorial, the Load image button will randomly select one of these drawable resources and display it in the app. This provides a deterministic and repeatable input source while validating the full Sudoku pipeline on Android.
 
-At this point, the Android project has all the static resources it needs. In the next step, we will implement MainActivity.kt, wire up the Load image and Solve buttons, and display the selected Sudoku image in the UI.
+At this point, the Android project has all the static resources it needs. In the next step, you will implement MainActivity.kt, wire up the Load image and Solve buttons, and display the selected Sudoku image in the UI.
 
 ## Preparing the ONNX model for the Android app
 In addition to the input images, the Android application needs access to the trained ONNX model so that it can run inference directly on the device. Android does not allow arbitrary file access by default, so the model must be bundled with the app as an asset.
@@ -266,9 +267,9 @@ If you prefer to keep assets organized, you can also create a subfolder:
 
 app/src/main/assets/models/
 
-Both approaches work. In the examples that follow, we will assume the model is placed directly under assets/.
+Both approaches work. In the examples that follow, you will assume the model is placed directly under assets/.
 
-3. Prepare the model for android such that it does not contain external resources. Android assets are not normal filesystem paths, so models that reference external.onnx.data files will fail to load unless they are merged into a single ONNX file. To do so, create another Python file 07_PrepareModelForAndroid.py:
+3. Prepare the model for android such that it does not contain external resources. Android assets are not normal filesystem paths, so models that reference external.onnx.data files will fail to load unless they are merged into a single ONNX file. To do so, create another Python file `07_PrepareModelForAndroid.py`:
 ```python
 import onnx
 from onnx import external_data_helper
@@ -319,7 +320,7 @@ This input stream will be passed to ONNX Runtime to create an inference session 
 * A set of Sudoku images in res/drawable/,
 * A trained ONNX model in assets/.
 
-In the next step, we will implement MainActivity.kt, wire up the Load image and Solve buttons, and verify that the app can successfully load both the image and the ONNX model before running inference.
+In the next step, you will implement MainActivity.kt, wire up the Load image and Solve buttons, and verify that the app can successfully load both the image and the ONNX model before running inference.
 
 ## Implement MainActivity.kt (Load image + basic UI wiring)
 Open app/src/main/java/com/arm/sudokusolveronnx/MainActivity.kt and replace it with:
@@ -494,10 +495,10 @@ After making this change:
 
 The project should now compile and launch successfully.
 
-At this point, the app should start, display the UI, and allow you to load random Sudoku images. In the next step, we will replace the placeholder logic in the Solve button with the real ONNX- and OpenCV-based Sudoku processing engine.
+At this point, the app should start, display the UI, and allow you to load random Sudoku images. In the next step, you will replace the placeholder logic in the Solve button with the real ONNX- and OpenCV-based Sudoku processing engine.
 
 ## Processing pipeline on Android
-With the user interface and static resources in place, we can now wire the full Sudoku processing pipeline on Android. Conceptually, this pipeline mirrors the Python implementation developed earlier in the learning path, but is reimplemented using Android-compatible components.
+With the user interface and static resources in place, you can now wire the full Sudoku processing pipeline on Android. Conceptually, this pipeline mirrors the Python implementation developed earlier in the learning path, but is reimplemented using Android-compatible components.
 
 The pipeline consists of four stages:
 1. Grid detection and rectification (OpenCV). The input bitmap is converted to an OpenCV matrix, the Sudoku grid is detected, and a perspective transform is applied to obtain a top-down, square view of the board.
@@ -506,12 +507,12 @@ The pipeline consists of four stages:
 4. Rendering and overlay. The solution is rendered back onto the original image by inverse-warping a transparent overlay from the rectified grid space to the input image.
 
 ### Dependencies
-To support this pipeline, we add three dependencies:
+To support this pipeline, add three dependencies:
 * ONNX Runtime for on-device inference,
 * OpenCV for image processing and geometric transformations,
 * Kotlin coroutines to ensure that heavy computation runs off the UI thread.
 
-We open build.gradle.kts and add the following
+Open build.gradle.kts and add the following
 ```text
 dependencies {
     implementation("com.microsoft.onnxruntime:onnxruntime-android:1.18.0")
@@ -1035,25 +1036,38 @@ To test the app:
 
 The figures below show two representative test cases. In each example, the upper image corresponds to the original Sudoku puzzle, while the lower image shows the same puzzle with the missing digits filled in and overlaid in green. This visual comparison confirms that grid detection, digit recognition, solving, and rendering are all functioning correctly on-device.
 
-![img](figures/06.png)
-![img](figures/07.png)
+![Android app running on device showing original Sudoku puzzle in top half and solved puzzle with green digits filled in bottom half](figures/06.png)
+![Second example of Android app showing different Sudoku puzzle and its solution with green overlay digits](figures/07.png)
 
 These tests demonstrate that the application is robust to perspective distortion and partial digit placement, and that the model performs reliably when deployed via ONNX Runtime on Android.
 
-## Summary and next steps
-In this learning path, you have built a complete, end-to-end workflow for deploying machine learning models with ONNX on Arm64 and mobile devices. Starting from model development in Python, you moved step by step through export, optimization, and integration, ultimately deploying a fully functional solution that runs entirely on an Android device.
+## What you've accomplished and what's next
 
-Along the way, you trained and exported a neural network to the ONNX format, explored how to optimize inference for edge deployment, and built a robust vision pipeline using OpenCV. You then brought these components together on Android by integrating ONNX Runtime and implementing a Sudoku solver that performs image preprocessing, neural network inference, and deterministic solving entirely on-device, without any cloud dependency.
+You built an end-to-end workflow for deploying ONNX models on Arm64 and mobile platforms--from model development in Python to on-device Android deployment. Throughout this Learning Path, you trained a lightweight digit recognizer and constructed an OpenCV-based pipeline for grid detection and rectification, exported models to ONNX with dynamic batch support, validated correctness with ONNX Runtime, applied practical optimizations including quantization and session tuning, and integrated everything into an on-device Android app with no cloud dependency. The final application processes Sudoku images from capture to completed solution, all running locally on the device.
 
-It is also important to recognize the current limitations of the approach. While the system performs well on most test images, there are cases where digit recognition may fail or produce ambiguous results—particularly under challenging lighting conditions, strong perspective distortion, or when digits are faint or partially occluded. In such cases, recognition errors can propagate to the solver, leading to longer solve times or, occasionally, failure to find a valid solution. These limitations are typical for lightweight, on-device vision systems and highlight the trade-offs between model complexity, robustness, and performance at the edge.
+### Real-world considerations
 
-Despite these constraints, the application stands as a practical and self-contained example of edge AI deployment. It demonstrates how ONNX can serve as a bridge between model development and real-world deployment, enabling the same model to move seamlessly from a desktop environment to a mobile platform.
+Challenging lighting, strong perspective distortion, faint or occluded digits, and imperfect crops can cause recognition errors that propagate into the solver, increasing solve time or occasionally preventing a valid solution. These behaviors highlight the trade-offs between model size, robustness, and performance at the edge.
 
-From here, there are many natural directions for improvement. You could enhance robustness by incorporating additional training data or more advanced preprocessing, extend the app to use live camera input with CameraX, refine the user experience with animations and progress feedback, or experiment with quantized models on devices that support additional execution providers. The same architectural pattern can also be applied beyond Sudoku, to other document- or grid-based vision problems where lightweight, on-device inference is essential.
+### Potential improvements
 
-This concludes the learning path and provides a solid foundation for building, optimizing, and deploying ONNX-based machine learning applications on Arm64 and mobile platforms.
+Next steps to enhance the application:
+
+* Add more varied training data and tighter preprocessing for improved robustness
+* Implement live capture with CameraX
+* Polish the UX with progress feedback and overlays
+* Experiment with quantized models and hardware acceleration where available
+* Generalize to other document- and grid-based vision tasks
+
+This Learning Path provides a solid foundation for building, optimizing, and deploying ONNX-based machine learning applications on Arm64 and mobile platforms.
 
 ## Companion code
-You can find the companion code in these repositories:
+All source code used throughout this learning path is available in the following repositories:
 1. [Sudoku solver](https://github.com/dawidborycki/SudokuSolverOnnx.git)
 2. [Python scripts](https://github.com/dawidborycki/ONNX-LP.git)
+
+## What you've learned and what's next
+
+Throughout this Learning Path, you built a complete machine learning deployment pipeline from training to mobile deployment. You created and trained a digit recognition model in PyTorch, exported it to the portable ONNX format with dynamic batch support, and validated inference correctness across frameworks. You then integrated the model into an end-to-end Sudoku processing system using OpenCV for image processing and grid detection, applied performance optimizations including INT8 quantization, and measured real-world latency characteristics on Arm64 hardware. Finally, you deployed the entire pipeline as a fully functional Android application that performs on-device inference with ONNX Runtime, demonstrating how to bring machine learning models from development to production on Arm-based mobile platforms without cloud dependencies.
+
+You can now apply these techniques to other vision-based applications on Arm platforms, experiment with different model architectures and optimization strategies, or extend this foundation to solve similar document processing and grid-based recognition tasks.

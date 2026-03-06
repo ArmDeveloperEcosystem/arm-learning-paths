@@ -31,10 +31,12 @@ subjects: Performance and Architecture
 armips:
     - Neoverse
     - Cortex-A
+    - Arm C1
 tools_software_languages:
     - C
     - Clang
     - LLVM
+    - SME2
 
 operatingsystems:
     - Linux
