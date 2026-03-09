@@ -1,0 +1,16 @@
+flowchart TD
+    A[Start Test] --> B[Create DockerContainer]
+    B --> C{Image exists?}
+    C -->|No| D[Pull image]
+    C -->|Yes| E[Create container]
+    D --> E
+    E --> F[Start container]
+    F --> G[Wait for ready signal]
+    G --> H[Run test code]
+    H --> I[Stop container]
+    I --> J[Remove container]
+    J --> K[Test complete]
+
+    style A fill:#e1f5fe
+    style K fill:#c8e6c9
+    style H fill:#fff9c4
