@@ -23,9 +23,11 @@ skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
     - Cortex-A
+    - Arm C1
 tools_software_languages:
     - CPP
     - Docker
+    - SME2
 operatingsystems:
     - Linux
     - macOS

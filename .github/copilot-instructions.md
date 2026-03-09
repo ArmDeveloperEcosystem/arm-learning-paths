@@ -77,7 +77,7 @@ Install guides must include:
 - `title`
 - `minutes_to_complete`
 - `official_docs`
-- `author_primary`
+- `author`
 - `weight: 1`
 - `layout: installtoolsall`
 

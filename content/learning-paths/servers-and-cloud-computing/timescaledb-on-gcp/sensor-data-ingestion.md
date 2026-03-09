@@ -1,16 +1,16 @@
 ---
-title: Real-Time Sensor Data Ingestion on Arm64
+title: Ingest real-time sensor data on Arm64
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Real-Time Sensor Data Ingestion
+## Ingest real-time sensor data
 
 In this section, you simulate real-time sensor data using Python and continuously ingest it into TimescaleDB running on an Arm64 VM. This creates a live time-series data stream that can later be visualized using Grafana.
 
-## Architecture Overview
+## Architecture overview
 
 ```text
 Python Sensor Generator
@@ -25,7 +25,7 @@ TimescaleDB Hypertable
 
 This architecture mirrors real-world IoT and telemetry pipelines.
 
-## Install Python Dependencies (SUSE)
+## Install Python dependencies
 
 ```bash
 cd $HOME
@@ -35,7 +35,7 @@ sudo zypper install -y \
   python3-psycopg2
 ```
 
-**Verify psycopg2:**
+Verify psycopg2 is installed correctly:
 
 ```bash
 python3 - <<EOF
@@ -53,7 +53,9 @@ psycopg2 OK
 - Confirms that the PostgreSQL driver is correctly installed.
 - If the import succeeds, Python can communicate with TimescaleDB.
 
-## Create Sensor Table
+## Create a sensor table
+
+Connect to the sensors database and create the `sensor_data` hypertable:
 
 ```bash
 sudo -u postgres psql sensors
@@ -69,15 +71,13 @@ CREATE TABLE sensor_data (
 SELECT create_hypertable('sensor_data', 'time');
 ```
 
-Created a sensor_data table and converted it into a hypertable for efficient time-series storage.
+Press Ctrl+D to exit back into the SSH shell.
 
-Press "CTRL-D" to exit back into the SSH shell.
+## Create a sensor ingestion script
 
-## Create Sensor Ingestion Script
+The following Python script simulates multiple sensors sending readings every two seconds and inserts them into TimescaleDB.
 
-Python script simulates multiple sensors sending readings every 2 seconds and inserts them into TimescaleDB.
-
-Create a new Python file called **sensor_ingest.py** and add the following code to the file:
+Create a new Python file called `sensor_ingest.py` and add the following code to the file:
 
 ```python
 import time
@@ -108,9 +108,9 @@ while True:
     time.sleep(2)
 ```
 
-## Run Ingestion in Background
+## Run ingestion in the background
 
-Start the ingestion process as a background job:
+Start the ingestion process as a background job so it continues running even after you close the terminal:
 
 ```bash
 nohup python3 sensor_ingest.py > ingest.log 2>&1 &
@@ -118,7 +118,7 @@ nohup python3 sensor_ingest.py > ingest.log 2>&1 &
 
 This ensures the sensor generator continues running even after you close the terminal.
 
-### Verify Data Ingestion
+### Verify data ingestion
 
 ```bash
 ps -ef | grep sensor_ingest.py
@@ -160,11 +160,13 @@ gcpuser@tsdb-suse-arm64:~> sudo -u postgres psql sensors -c "SELECT COUNT(*) FRO
 (1 row)
 ```
 
-## Time-Series Optimization
+## Optimize time-series performance
 
 These steps make TimescaleDB production-ready.
 
-### Create Index for Faster Queries
+### Create an index for faster queries
+
+Connect to the sensors database and create an index optimized for time-range scans by sensor:
 
 ```bash
 sudo -u postgres psql sensors
@@ -176,14 +178,11 @@ Issue the following SQL command:
 CREATE INDEX ON sensor_data (sensor_id, time DESC);
 ```
 
-This index:
+This index improves Grafana query performance for time-range scans.
 
-- Improves Grafana query performance
-- Optimized for time-range scans
+### Enable a data retention policy
 
-### Enable Data Retention Policy
-
-Automatically remove old data after 7 days:
+Automatically remove data older than seven days:
 
 ```sql
 SELECT add_retention_policy(
@@ -192,10 +191,11 @@ SELECT add_retention_policy(
 );
 ```
 
-- Prevents disk exhaustion
-- Runs automatically in the background
+This prevents disk exhaustion and runs automatically in the background.
 
-### Create Continuous Aggregate (Hourly Averages)
+### Create a continuous aggregate
+
+Precompute hourly averages per sensor for faster reporting:
 
 ```sql
 CREATE MATERIALIZED VIEW sensor_hourly_avg
@@ -208,9 +208,9 @@ FROM sensor_data
 GROUP BY bucket, sensor_id;
 ```
 
-Precomputes hourly averages per sensor for faster reporting.
+### Add an aggregate refresh policy
 
-### Add Aggregate Refresh Policy
+Automate hourly aggregate refresh every five minutes for near real-time analytics:
 
 ```sql
 SELECT add_continuous_aggregate_policy(
@@ -221,9 +221,7 @@ SELECT add_continuous_aggregate_policy(
 );
 ```
 
-Automates hourly aggregate refresh every 5 minutes for near real-time analytics.
-
-### What this means
+The table below explains the three interval parameters:
 
 | Setting | Meaning            |
 | ------- | ------------------ |
@@ -231,7 +229,7 @@ Automates hourly aggregate refresh every 5 minutes for near real-time analytics.
 | 1 hour  | Skip newest data   |
 | 5 min   | Refresh interval   |
 
-### Validate Optimization
+### Validate the optimization
 
 ```sql
 SELECT * FROM sensor_hourly_avg LIMIT 5;
@@ -260,11 +258,11 @@ postgres=# SELECT COUNT(*) FROM sensor_data;
 
 ```
 
-Please press "CTRL-D" to exit.
+Press Ctrl+D to exit.
 
 ### Set the postgres password
 
-Lets set a password for postgres:
+Let's set a password for postgres so Grafana can connect in the next section:
 
 ```bash
 sudo -u postgres psql
@@ -276,7 +274,7 @@ Then enter the new password:
 \password postgres
 ```
 
-Save the password as it will be used in the next section. Please press "CTRL-D" to exit.
+Save the password — you'll need it when configuring the Grafana data source. Press Ctrl+D to exit.
 
 ## What you've accomplished and what's next
 

@@ -1,5 +1,5 @@
 ---
-title: Select accuracy modes in Libamath (Arm Performance Libraries)
+title: Control floating-point accuracy modes in Arm Performance Libraries
 
 minutes_to_complete: 20
 author: Joana Cruz
@@ -7,7 +7,7 @@ author: Joana Cruz
 who_is_this_for: This is an introductory topic for developers who want to use the different accuracy modes for vectorized math functions in Libamath, a component of Arm Performance Libraries. 
 
 learning_objectives: 
-    - Understand how accuracy is defined in Libamath
+    - Describe how accuracy is defined and measured in Libamath
     - Select an appropriate accuracy mode for your application
     - Use Libamath with different vector accuracy modes in practice
 
@@ -20,20 +20,28 @@ subjects: Performance and Architecture
 armips:
     - Neoverse
 tools_software_languages:
-- Arm Performance Libraries
-- GCC
-- Libamath
+    - Arm Performance Libraries
+    - GCC
+    - Libamath
 operatingsystems:
     - Linux
 
 further_reading:
     - resource:
-        title: ArmPL Libamath Documentation
+        title: Arm Performance Libraries math functions documentation
         link: https://developer.arm.com/documentation/101004/2410/General-information/Arm-Performance-Libraries-math-functions
         type: documentation
     - resource:
-        title: ArmPL Installation Guide
+        title: Arm Performance Libraries installation guide
         link: /install-guides/armpl/
+        type: website
+    - resource:
+        title: What Every Computer Scientist Should Know About Floating-Point Arithmetic
+        link: https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html
+        type: documentation
+    - resource:
+        title: Arm Optimized Routines
+        link: https://github.com/ARM-software/optimized-routines
         type: website
 
 

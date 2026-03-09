@@ -6,6 +6,8 @@ weight: 5
 layout: learningpathall
 ---
 
+## Overview
+
 Now that you've fine-tuned your model on Raspberry Pi datasheet content, it's time to compare its behavior against the original. You'll serve both versions using vLLM, a high-performance inference server optimized for large language models, and observe how fine-tuning on domain-specific data changes the model's factual accuracy.
 
 ## Download vLLM container
@@ -43,11 +45,11 @@ Before testing your fine-tuned model, first observe how the original, unmodified
 
 ### Launch vLLM
 
-Start the vLLM server with the original Llama 3.1 8B model:
+Start the vLLM server with the original Llama 3.2 3B Instruct model:
 
 ```bash
 python3 -m vllm.entrypoints.openai.api_server \
---model "meta-llama/Llama-3.1-8B" --trust-remote-code \
+--model "meta-llama/Llama-3.2-3B-Instruct" --trust-remote-code \
 --tensor-parallel-size 1 --quantization fp8 \
 --gpu-memory-utilization 0.80
 ```
@@ -64,8 +66,7 @@ Wait for the server to fully load the model and display the message indicating i
 
 ### Test prompt
 
-
-From a new terminal window (outside the container), send a Raspberry Pi hardware question to the model using the Alpaca instruction format. For this example, use a question about the memory size:
+From a new terminal window (outside the container), use `curl` to send an HTTP request to the model server. The request contains a Raspberry Pi hardware question formatted using the Alpaca instruction template. For this example, ask about the RP2350 memory size:
 
 ```bash
 curl http://localhost:8000/v1/completions \
@@ -87,7 +88,7 @@ The original model hallucinates an incorrect specification. The output is simila
   "id": "cmpl-91e070e2a34aaf01",
   "object": "text_completion",
   "created": 1770998840,
-  "model": "meta-llama/Llama-3.1-8B",
+  "model": "meta-llama/Llama-3.2-3B-Instruct",
   "choices": [
     {
       "index": 0,
@@ -109,11 +110,11 @@ The base model confidently reports the RP2350 has "256MB of memory," which is of
 
 Now test your fine-tuned model to see how training on Raspberry Pi datasheet content improved its factual accuracy. Stop the current vLLM server (press Ctrl+C in the container terminal) before launching the fine-tuned model.
 
-{{% notice Dependency Conflict %}}
+{{% notice Note %}}
 As of this writing, vLLM does not support version 5 of the `transformers` library that was used when fine-tuning the model, so you need to patch its `tokenizer_config.json`. Run the following command to update the `tokenizer_class` to `PreTrainedTokenizerFast`, which is compatible with the older `transformers` version bundled in the vLLM container:
 
 ```bash
-sed -i 's/"tokenizer_class": "TokenizersBackend"/"tokenizer_class": "PreTrainedTokenizerFast"/' /workspace/models/Llama-3.1-8B-FineTuned/tokenizer_config.json
+sed -i 's/"tokenizer_class": "TokenizersBackend"/"tokenizer_class": "PreTrainedTokenizerFast"/' /workspace/models/Llama-3.2-3B-FineTuned/tokenizer_config.json
 ```
 {{% /notice %}}
 
@@ -123,7 +124,7 @@ Start the vLLM server with your fine-tuned model:
 
 ```bash
 python3 -m vllm.entrypoints.openai.api_server \
---model "/workspace/models/Llama-3.1-8B-FineTuned" --trust-remote-code \
+--model "/workspace/models/Llama-3.2-3B-FineTuned" --trust-remote-code \
 --tensor-parallel-size 1 --quantization fp8 \
 --gpu-memory-utilization 0.80
 ```
@@ -132,7 +133,7 @@ The only change from the previous command is the `--model` parameter, which now 
 
 ### Test prompt
 
-Send the same Raspberry Pi question to your fine-tuned model:
+Send the same Raspberry Pi question to your fine-tuned model using the same `curl` command format:
 
 ```bash
 curl http://localhost:8000/v1/completions \
@@ -152,7 +153,7 @@ The fine-tuned model produces a correct, datasheet-accurate response. The output
   "id": "cmpl-bad36ff5edddfb74",
   "object": "text_completion",
   "created": 1770999123,
-  "model": "/workspace/models/Llama-3.1-8B-FineTuned",
+  "model": "/workspace/models/Llama-3.2-3B-FineTuned",
   "choices": [
     {
       "index": 0,

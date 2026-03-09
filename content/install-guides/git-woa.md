@@ -1,9 +1,6 @@
 ---
-### Title the install tools article with the name of the tool to be installed
-### Include vendor name where appropriate
 title: Git for Windows on Arm
 
-### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
 - git
 - windows
@@ -11,7 +8,6 @@ additional_search_terms:
 - windows on arm
 - open source windows on arm
 
-### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 10
 
 ### Link to official documentation
@@ -40,7 +36,7 @@ Use a browser to download the desired release file. The Git releases for Windows
 You can also download from a Windows PowerShell with the following command:
 
 ```command
-curl https://github.com/git-for-windows/git/releases/download/v2.47.1.windows.1/Git-2.47.1-arm64.exe -o Git-2.47.1-arm64.exe
+curl https://github.com/git-for-windows/git/releases/download/v2.53.0.windows.1/Git-2.53.0-arm64.exe -o Git-2.53.0-arm64.exe
 ```
 
 Once you have downloaded Git, run the installer `.exe` file on a Windows on Arm machine. 
@@ -55,7 +51,7 @@ Continue to click **Next** for the configuration settings. You can accept all de
 
 At the end of the install process, you see the screen below indicating setup has finished installing Git:
 
-![Install](/install-guides/_images/git-woa.png)
+![Git Setup Wizard completion screen with options to Launch Git Bash and View Release Notes, and a Finish button.](/install-guides/_images/git-woa.png)
 
 Click the **Finish** button to complete installation. 
 
@@ -73,7 +69,7 @@ To use Git, click the Windows **Start** button and then click **All apps**.
 
 You see the Git folder in the G section.
 
-![Start](/install-guides/_images/git2-woa.png)
+![Windows Start menu showing the Git folder expanded with Git Bash, Git CMD, Git FAQs, Git GUI, and Git Release Notes entries.](/install-guides/_images/git2-woa.png)
 
 There are menu items for multiple ways to start Git. 
 
@@ -81,7 +77,7 @@ There are menu items for multiple ways to start Git.
 
 Start a Git Command Prompt by selecting **Git CMD** from the **Start** menu.
 
-![CMD](/install-guides/_images/git3-woa.png)
+![Git CMD terminal showing the output of git --version confirming Git version 2.53.0.windows.1.](/install-guides/_images/git3-woa.png)
 
 
 To see the help message, enter:
@@ -96,10 +92,10 @@ You can use Git from this Command Prompt.
 
 To use Git in a Linux-like environment, select **Git Bash** from the start menu.
 
-![CMD](/install-guides/_images/git4-woa.png)
+![Git Bash terminal showing which git, file command confirming ARM64 executable, and git --version output.](/install-guides/_images/git4-woa.png)
 
 Click the colored icon in the top-left corner of the Git Bash window, and then click **Options** to change the appearance of the window, including colors, fonts, and font sizes. 
 
-![Options](/install-guides/_images/git5-woa.png)
+![Git Bash Options dialog with settings for colors, transparency, and cursor style.](/install-guides/_images/git5-woa.png)
 
 You are now ready to use Git on your Windows on Arm device. 

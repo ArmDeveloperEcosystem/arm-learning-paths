@@ -23,9 +23,11 @@ subjects: ML
 armips:
     - Cortex-A
     - Cortex-X
+    - Arm C1
 tools_software_languages:
     - C
     - Python
+    - SME2
 operatingsystems:
     - Android
 

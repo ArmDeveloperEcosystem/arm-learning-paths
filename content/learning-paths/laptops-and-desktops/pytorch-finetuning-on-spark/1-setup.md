@@ -6,6 +6,8 @@ weight: 2
 layout: learningpathall
 ---
 
+## Overview
+
 The NVIDIA DGX Spark pairs an Arm-based Grace CPU with a Blackwell GPU in a compact desktop form factor. The GPU handles the compute-intensive training passes while the Grace CPU manages data preprocessing and orchestration, making the system well suited for fine-tuning large language models locally without sending data to the cloud.
 
 To get started, you'll configure Docker, pull a pre-built PyTorch container, and install the libraries you need for fine-tuning.
@@ -39,7 +41,7 @@ Pull the latest PyTorch container from NVIDIA's container registry:
 docker pull nvcr.io/nvidia/pytorch:25.11-py3
 ```
 
-This command downloads the November 2025 release of the PyTorch container, which includes PyTorch, CUDA libraries, cuDNN, and other essential tools pre-configured for optimal performance on NVIDIA hardware. The download size is several gigabytes, so this step might take a few minutes depending on your internet connection.
+This command downloads the November 2025 release of the PyTorch container, which includes PyTorch, CUDA libraries, cuDNN, and other essential tools pre-configured for optimal performance on NVIDIA hardware. The download size is several gigabytes, so this step can take a few minutes depending on your internet connection.
 
 ## Launch container instance
 
@@ -81,7 +83,7 @@ These packages serve specific purposes:
 - `trl` (Transformer Reinforcement Learning) includes training utilities and recipes for language models
 - `bitsandbytes` enables 4-bit and 8-bit quantization for memory-efficient training
 
-The installation typically takes a few minutes as pip downloads and installs each package along with their dependencies.
+The installation can take a few minutes as pip downloads and installs each package along with their dependencies.
 
 ## Authenticate with Hugging Face
 
@@ -102,13 +104,11 @@ NVIDIA provides a collection of ready-to-use fine-tuning scripts optimized for D
 Clone the playbooks repository:
 
 ```bash
-git clone https://github.com/NVIDIA/dgx-spark-playbooks
-cd dgx-spark-playbooks
-git checkout e51dae47ec9233ccd722dd465be87a984fd97d61
-cd nvidia/pytorch-fine-tune/assets
+git clone https://github.com/mhall119/finetuning-scripts.git
+cd finetuning-scripts/nvidia
 ```
 
-The repository contains scripts for different model architectures and training strategies. The `assets` directory includes the fine-tuning scripts you'll use in the next steps. Each script is preconfigured with sensible defaults but also accepts command-line arguments for customization.
+The repository contains a fork of the scripts found in [NVIDIA's Playbook](https://github.com/NVIDIA/dgx-spark-playbooks/nvidia/pytorch-fine-tune/assets) including the fine-tuning scripts you'll use in the next steps. This script is preconfigured with sensible defaults but also accepts command-line arguments for customization.
 
 ## What you've accomplished and what's next
 
@@ -117,6 +117,6 @@ In this section you:
 - Configured Docker permissions on DGX Spark
 - Pulled the NVIDIA PyTorch container and launched an interactive session
 - Installed fine-tuning libraries and authenticated with Hugging Face
-- Cloned the DGX Spark playbooks repository
+- Cloned the fine-tuning scripts repository
 
 In the next section, you'll learn how supervised fine-tuning works and what makes it effective for adapting pre-trained models to specific tasks.

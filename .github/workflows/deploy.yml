@@ -67,9 +67,7 @@ jobs:
 
       # Builds arm-software-developer repo
       - name: Build
-        run: |
-          hugo --minify
-          bin/pagefind.aarch64 --site "public"
+        run: hugo --minify
         env:
           HUGO_LLM_API: ${{ secrets.HUGO_LLM_API }}
           HUGO_RAG_API: ${{ secrets.HUGO_RAG_API }}

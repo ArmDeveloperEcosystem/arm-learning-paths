@@ -1,16 +1,14 @@
 ---
-title: Live Sensor Temperature Dashboard
+title: Build a live sensor temperature dashboard
 weight: 8
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Create a Live Sensor Temperature Dashboard
+## Create a live sensor temperature dashboard
 
-In this section, you will create a **real-time Grafana dashboard** that visualizes **live temperature data** stored in **TimescaleDB**.
-
-This dashboard continuously updates and helps you monitor sensor temperature changes in near real time.
+In this section, you'll create a Grafana dashboard that visualizes live temperature data stored in TimescaleDB. The dashboard continuously updates to display sensor temperature changes in near real time.
 
 ## Prerequisites
 
@@ -42,8 +40,8 @@ Log in using your Grafana credentials.
 ## Create a New Dashboard
 
 - From the left sidebar, select **Dashboards**
-- Click **New dashboard**
-- Select Add a **new visualization**
+- Select **New dashboard**
+- Select **New visualization**
 
 You will be redirected to the Edit panel screen.
 
@@ -51,13 +49,13 @@ You will be redirected to the Edit panel screen.
 
 In the Query section:
 
-- Data source: PostgreSQL / TimescaleDB
-- Query type: SQL
-- Format: Time series
+- **Data source:** PostgreSQL / TimescaleDB
+- **Query type:** SQL
+- **Format:** Time series
 
-![Grafana visualization configuration showing time series panel settings#center](images/data-source-visualization.png "Grafana visualization configuration")
+![Grafana time series panel editor showing the visualization configuration screen with the time series panel type selected and panel title field alt-txt#center](images/data-source-visualization.png "Grafana visualization configuration")
 
-Paste the following query after pressing the "Code" button on the right of the query editor:
+Paste the following query after selecting **Code** on the right of the query editor:
 
 ```sql
 SELECT
@@ -76,14 +74,14 @@ Apply the following settings in the right-hand panel:
 
   - Visualization Settings
 
-    - Visualization: Time series
-    - Panel title: Live Sensor Temperature
-    - Table view: Disabled
+    - **Visualization:** Time series
+    - **Panel title:** Live Sensor Temperature
+    - **Table view:** Disabled
 
   - Time & Refresh Settings
 
-    - Time range: Last 5 minutes
-    - Refresh interval: 5s
+    - **Time range:** Last 5 minutes
+    - **Refresh interval:** 5s
 
 These settings ensure the panel refreshes automatically with new data.
 
@@ -91,26 +89,16 @@ These settings ensure the panel refreshes automatically with new data.
 
 Once configured, the panel should display a continuously updating temperature graph.
 
-![Grafana dashboard showing Live Sensor Temperature time series panel alt-txt#center](images/live-sensor-temperature.webp "Live Sensor Temperature Panel")
+![Grafana live sensor temperature time series panel showing a continuous line graph of temperature readings from multiple sensors over the last 5 minutes alt-txt#center](images/live-sensor-temperature.webp "Live sensor temperature panel")
 
-## Save the Dashboard
+## Save the dashboard
 
-- Click Save dashboard (top-right corner)
+- Select **Save dashboard** (top-right corner)
 - Enter a name, for example: Live Sensor Monitoring Dashboard
-- Click Save
+- Select **Save**
 
 The dashboard is now active.
 
-## What you've accomplished and what's next
+## What you've accomplished
 
-You've successfully:
-
-- Built a complete time-series data pipeline on Google Cloud C4A Axion Arm-based processors
-- Installed and configured TimescaleDB by building from source for optimal Arm64 performance
-- Created a real-time sensor data ingestion pipeline using Python with hypertables and continuous aggregates
-- Configured retention policies and indexes for production-ready time-series storage
-- Installed Grafana and connected it to TimescaleDB as a data source
-- Built a live sensor dashboard that automatically refreshes to display real-time temperature data
-- Validated end-to-end data flow from ingestion through TimescaleDB to Grafana visualization
-
-You now have a production-ready time-series monitoring solution running natively on Arm infrastructure. This setup demonstrates how TimescaleDB and Grafana work together to provide comprehensive real-time monitoring for IoT and sensor workloads. You can extend this foundation by adding more sensors, creating additional dashboards, implementing alerting rules in Grafana, or optimizing TimescaleDB for your specific workload patterns.
+You've built a complete time-series monitoring pipeline on Google Cloud C4A Axion Arm-based processors. TimescaleDB is running natively on Arm64, ingesting live sensor data through Python, and serving queries to Grafana for real-time visualization. From here you can add more sensors, create additional dashboards, set up alerting rules in Grafana, or tune TimescaleDB for your specific workload.

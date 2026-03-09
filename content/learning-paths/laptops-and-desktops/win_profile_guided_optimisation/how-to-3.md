@@ -1,38 +1,42 @@
 ---
-title: Example operation
+title: Create a baseline benchmark
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Optimizing costly division operations with Google Benchmark and PGO
+## Overview
 
-In this section, you'll learn how to use Google Benchmark and Profile-Guided Optimization to improve the performance of a simple division operation. This example demonstrates how even seemingly straightforward operations can benefit from optimization techniques.
+In this section, you'll create a baseline benchmark to measure the performance of a division operation. This baseline allows you to measure the improvement when you apply profile-guided optimization in the next section.
 
-Integer division is ideal for benchmarking because it's significantly more expensive than operations like addition, subtraction, or multiplication. On most CPU architectures, including Arm, division instructions have higher latency and lower throughput compared to other arithmetic operations. By applying Profile-Guided Optimization to code containing division operations, we can potentially achieve significant performance improvements.
+Integer division is ideal for benchmarking because it's significantly more expensive than operations like addition, subtraction, or multiplication. On most CPU architectures, including Arm, division instructions have higher latency and lower throughput compared to other arithmetic operations. By applying Profile-Guided Optimization to code containing division operations, you can achieve significant performance improvements.
 
-For this example, you can use an Arm computer running Windows.
+For this example, you'll use an Arm computer running Windows.
 
-## What tools are needed to run a Google Benchmark example on Windows?
+## Set up Google Benchmark on Windows on Arm
 
-Download the [Arm GNU Toolchain](https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain) to install the prerequisite packages.
+Before you can run benchmarks, you need to install vcpkg (a C++ package manager) and Google Benchmark. This is a one-time setup step.
 
-Next, install the static version of Google Benchmark for Arm64 via vcpkg. Run the following commands in Powershell as Administrator:
+### Install vcpkg and Google Benchmark
+
+The following commands download and initialize vcpkg, create a project directory, and install Google Benchmark for Windows on Arm:
 
 ```console
-cd C:\git
-git clone https://github.com/microsoft/vcpkg.git
-cd vcpkg
-.\bootstrap-vcpkg.bat
-.\vcpkg install benchmark:arm64-windows-static
+iex (iwr -useb https://aka.ms/vcpkg-init.ps1)
+cd $HOME
+mkdir pgo-benchmark
+cd pgo-benchmark
+& "$HOME\.vcpkg\vcpkg.exe" new --application
+& "$HOME\.vcpkg\vcpkg.exe" add port benchmark
+& "$HOME\.vcpkg\vcpkg.exe" install
 ```
 
-## Division example
+## Create the division benchmark
 
 Use an editor to copy and paste the C++ source code below into a file named `div_bench.cpp`.
 
-This trivial example takes in a vector of 4096 32-bit integers and divides each element by a number. Importantly, the use of `benchmark/benchmark.h` introduces indirection since the divisor value is unknown at compile time, although it is visible in the source code as 1500.
+This example takes a vector of 4096 32-bit integers and divides each element by a number. The key detail here is that the divisor value is passed through `s.range(0)`, making it unknown at compile time. This prevents the compiler from applying optimizations like strength reduction, which means PGO will have an opportunity to make a real difference.
 
 ```cpp
 #include <benchmark/benchmark.h>
@@ -54,24 +58,39 @@ BENCHMARK(baseDiv)->Arg(1500)->Unit(benchmark::kMicrosecond); // value of 1500 i
 BENCHMARK_MAIN();
 ```
 
-To compile and run the microbenchmark on this function, you need to link with the correct libraries:
+## Compile the baseline benchmark with MSVC
 
-Compile with the command:
+Open an **ARM64 Native Tools Command Prompt** from the Windows Start menu and start PowerShell:
 
 ```console
-cl /D BENCHMARK_STATIC_DEFINE div_bench.cpp /link /LIBPATH:"$VCPKG\lib" benchmark.lib benchmark_main.lib shlwapi.lib
+powershell
 ```
 
-Run the program:
+Set an environment variable to refer to the vcpkg-installed package directory for the ARM64 Windows target. This simplifies the compiler commands that follow:
 
 ```console
+$VCPKG="$HOME\pgo-benchmark\vcpkg_installed\arm64-windows"
+```
+
+Compile the benchmark. This command uses the MSVC compiler and links with the Google Benchmark libraries:
+
+```console
+cl /I"$VCPKG\include" /D BENCHMARK_STATIC_DEFINE div_bench.cpp /link /LIBPATH:"$VCPKG\lib" benchmark.lib benchmark_main.lib shlwapi.lib
+```
+
+## Run the benchmark
+
+Add the vcpkg binary directory to your PATH so the program can find required DLLs, then run the benchmark:
+
+```console
+$env:PATH += ";$HOME\pgo-benchmark\vcpkg_installed\arm64-windows\bin"
 .\div_bench.exe
 ```
 
-### Example output
+The output is similar to:
 
 ```output
-Running ./div_bench.base
+Running ./div_bench.exe
 Run on (4 X 2100 MHz CPU s)
 CPU Caches:
   L1 Data 64 KiB (x4)
@@ -85,3 +104,9 @@ Benchmark             Time             CPU   Iterations
 -------------------------------------------------------
 baseDiv/1500       7.90 us         7.90 us        88512
 ```
+
+The warning appears because the Google Benchmark library was built in debug mode, but it doesn't affect the validity of the measurements for this example.
+
+## What you've accomplished and what's next
+
+You've set up Google Benchmark on Windows on Arm, created a division-heavy benchmark, and established a baseline performance measurement of 7.90 microseconds. This baseline gives you a clear reference point to measure the impact of Profile-Guided Optimization. In the next section, you'll apply PGO to this code and measure the performance improvement.

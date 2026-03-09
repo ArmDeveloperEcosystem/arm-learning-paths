@@ -1,31 +1,27 @@
 ---
-title: "ONNX in Action: Building, Optimizing, and Deploying Models on Arm64 and Mobile"
+title: "Build, optimize, and deploy ML models with ONNX on Arm64 and mobile devices"
 
-draft: true
-cascade:
-    draft: true
-    
 minutes_to_complete: 240
 
-who_is_this_for: This is an introductory topic for developers who are interested in creating, optimizing, and deploying machine learning models with ONNX. It is especially useful for those targeting Arm64-based devices (such as Raspberry Pi, mobile SoCs, or Android smartphones) and looking to run efficient inference at the edge.
+who_is_this_for: This is an advanced topic for developers who want to build, optimize, and deploy machine learning models using ONNX on Arm64-based platforms such as Raspberry Pi, Arm-based laptops, cloud instances, or Android smartphones.
 
 learning_objectives:
-  - Describe what ONNX is, and what it can offer in the ML ecosystem.
-  - Build and export a simple neural network model in Python to ONNX format.
-  - Perform inference and training using ONNX Runtime.
-  - Apply optimization techniques to improve performance.
-  - Deploy an optimized ONNX model inside an Android app.
+  - Explain what ONNX is and how it enables model portability across ML frameworks
+  - Build and export a neural network model in Python to ONNX format
+  - Run inference using ONNX Runtime on Arm64 platforms
+  - Apply model optimization techniques to improve performance
+  - Deploy an optimized ONNX model in an Android application
 
 prerequisites:
-  - A development machine with Python 3.10+ installed.
-  - Basic familiarity with PyTorch or TensorFlow.
-  - An Arm64 device (e.g., Raspberry Pi or Android smartphone).
-  - "[Android Studio](https://developer.android.com/studio) installed for deployment testing."
+  - A development machine with Python 3.10 or 3.11 installed (Prebuilt ONNX Runtime packages for Arm platforms don't yet support Python 3.12)
+  - Basic familiarity with PyTorch or TensorFlow
+  - An Arm64 device such as a Raspberry Pi or Android smartphone
+  - Android Studio (required only for the final deployment section)
 
 author: Dawid Borycki
 
 ### Tags
-skilllevels: Introductory
+skilllevels: Advanced
 subjects: ML
 armips:
   - Cortex-A
@@ -34,6 +30,7 @@ operatingsystems:
   - Windows
   - Linux
   - macOS
+  - Android
 tools_software_languages:
   - Python
   - PyTorch
@@ -42,7 +39,6 @@ tools_software_languages:
   - Android
   - Android Studio
   - Kotlin
-  - Java
 
 further_reading:
   - resource:

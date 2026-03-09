@@ -207,13 +207,13 @@ module avail
 The output should be similar to:
 
 ```output
-armpl/26.01_gcc
+armpl/26.01.0_gcc
 ```
 
 Load the appropriate module:
 
 ```console
-module load armpl/26.01_gcc
+module load armpl/26.01.0_gcc
 ```
 
 You can now compile and test the examples included in the `/opt/arm/<armpl_dir>/examples/`, or `<install_dir>/<armpl_dir>/examples/` directory, if you have installed to a different location than the default.

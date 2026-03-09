@@ -11,7 +11,7 @@ For those edge devices that do not contain a camera, the following component wil
 
 ### 1. Clone the component repo
 
-Please clone this [repo](https://github.com/edgeimpulse/aws-greengrass-workshop-supplemental). You will find the following files: 
+Clone this [repo](https://github.com/edgeimpulse/aws-greengrass-workshop-supplemental). You'll find the following files: 
 
 		EdgeImpulseRunnerRuntimeInstallerComponent.yaml
 		artifacts/EdgeImpulseRunnerRuntime/1.0.0/install.sh

@@ -24,10 +24,12 @@ author: Zenon Zhilong Xiu
 skilllevels: Advanced
 subjects: ML
 armips:
-    - Cortex
+    - Cortex-A
+    - Arm C1
 tools_software_languages:
     - C++
     - ONNX Runtime
+    - SME2
 operatingsystems:
     - Android
     - Linux

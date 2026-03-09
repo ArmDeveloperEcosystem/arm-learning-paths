@@ -1,113 +1,111 @@
 ---
-title: 2. Edge Impulse Project Setup
+title: Set up your Edge Impulse project
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Creating our Edge Impulse Environment
+## Create an Edge Impulse account
 
-The next step is to create our Edge Impulse environment. Edge Impulse provides a simple solution to creating and building a ML model for specific edge devices focused on specific tasks.  Lets get started. 
+Edge Impulse is an ML platform that lets you build, train, optimize, and deploy models for edge devices. In this section, you create an account, clone a pre-built project, build a deployment for your Arm device, and generate an API key.
 
-### 1. Create Edge Impulse Account
+Navigate to [Edge Impulse Studio](https://studio.edgeimpulse.com) and select **Sign Up** in the upper-right corner:
 
-Lets create our account in Edge Impulse. Navigate to https://studio.edgeimpulse.com and select "Sign Up" down in the right hand corner:
+![Edge Impulse Studio login page with the Sign Up button in the upper-right corner#center](./images/ei_signup_1.png "Edge Impulse sign-up page")
 
-![Sign Up](./images/EI_SignUp_1.png)
+Fill in the requested information and select **Sign Up**:
 
-Next, fill in the requested information and press "Sign Up":
+![Edge Impulse sign-up form with fields for name, email, and password#center](./images/ei_signup_2.png "Complete the sign-up form")
 
-![Complete Information](./images/EI_SignUp_2.png)
+After a successful sign-up, a confirmation message appears. Select **Click here to build your first ML model**:
 
-If successful, you will be promoted as follows. Press "Click here to build your first ML model":
+![Confirmation message after successful Edge Impulse account creation#center](./images/ei_signup_3.png "Successful sign-up confirmation")
 
-![Successful Sign Up](./images/EI_SignUp_3.png)
+A wizard appears to help you create a default project:
 
-You will be presented with a wizard to create a new default project:
+![Edge Impulse new project wizard showing initial setup options#center](./images/ei_signup_4.png "New project wizard")
 
-![Intro Wizard To create ML Model](./images/EI_SIgnUp_4.png)
+You can dismiss the wizard by selecting the **-** button in the upper-right corner. This reveals your new default project:
 
-You can dismiss the wizard by pressing the "-" in the upper right hand corner... this will reveal your current new default project:
+![Edge Impulse dashboard showing a newly created default project#center](./images/ei_signup_5.png "New default project")
 
-![New Project](./images/EI_SignUp_5.png)
+Now that your account is ready, clone an existing project that already has a trained model. You'll use this model throughout the Learning Path.
 
-Next, we will clone an existing project that has a model that has already been created for you and which we will use for this workshop. On to the next step!
+## Clone the project into your account
 
-### 2. Clone Project Into Your Account
-
-Next, we are going to clone an existing project into our own space. Navigate to this public project: 
+Navigate to this public project:
 
 https://studio.edgeimpulse.com/studio/524106
 
-![Public Project](./images/EI_Clone_1.png)
+![Edge Impulse public project page for the Cat and Dog Detector model#center](./images/ei_clone_1.png "Public project page")
 
-Press the "Clone this project" button in the upper right. You will be presented with a dialog that will initiate the clone:
+Select the **Clone this project** button in the upper-right corner. A dialog appears to confirm the clone:
 
-![Clone Project](./images/EI_Clone_2.png)
+![Clone project dialog with default settings and a Clone Project button#center](./images/ei_clone_2.png "Clone project dialog")
 
-Leave everything defaulted and press "Clone Project" in the lower right. The cloning process will commence:
+Leave the default settings and select **Clone Project** in the lower-right corner. The cloning process starts:
 
-![Start Project Clone](./images/EI_Clone_3.png)
+![Progress indicator showing the project clone in progress#center](./images/ei_clone_3.png "Cloning in progress")
 
-The cloning process will take about 12 minutes to complete. When it is complete:
+The cloning process takes about 12 minutes to complete. When it finishes, a completion message appears:
 
-![Completed Clone](./images/EI_Clone_4.png)
+![Completion message indicating the project clone finished successfully#center](./images/ei_clone_4.webp "Clone complete")
 
-Next, click "Dashboard" to view your project... it should look something like this:
+Select **Dashboard** to view the cloned project. It should look similar to the following:
 
-![My Cloned Project](./images/EI_Clone_5.png)
+![Edge Impulse dashboard showing the cloned Cat and Dog Detector project with model details#center](./images/ei_clone_5.webp "Cloned project dashboard")
 
-OK! We now have the project we will use for the workshop... lets continue by exploring the project a bit and creating a deployment for our own edge device. Onward!
+You now have the project you'll use for this Learning Path.
 
-### 3. Build your project's deployment
+## Build your project deployment
 
-Let's have a look at some of the features in Edge Impulse studio. From a high level, Edge Impulse studio provides a solution to build, train, optimize, and deploy ML models for any edge device:
+Edge Impulse Studio provides a workflow to build, train, optimize, and deploy ML models. Take a moment to explore the project dashboard:
 
-![Edge Impulse](./images/EI_Project_1.png)
+![Edge Impulse Studio dashboard showing the project overview with data, impulse, and deployment sections#center](./images/ei_project_1.png "Project dashboard overview")
 
-Key in this is the "Impulse".  On the left side of the dashboard, our "Impulse" has been created for us and is called "Cat and Dog Detector". Click on "Create Impulse". You will see that there are 3 main parts of a "Impulse":  The pre-processing block, the model block, and the post-processing block:
+Central to Edge Impulse is the concept of an *Impulse*, which is a pipeline that defines how sensor data is processed, what model runs on it, and how results are interpreted. Your cloned project already has an Impulse called "Cat and Dog Detector". Select **Create Impulse** on the left sidebar to see the three main parts: the pre-processing block, the model block, and the post-processing block:
 
-![Edge Impulse](./images/EI_Project_2.png)
+![Create Impulse view showing the three pipeline blocks: pre-processing, model, and post-processing#center](./images/ei_project_2.webp "Impulse pipeline structure")
 
-Clicking on "Object Detection" on the left, you will see some detail on the model that has been utilized in our Impulse:
+Select **Object Detection** on the left sidebar to see details about the model used in the Impulse:
 
-![Edge Impulse](./images/EI_Project_3.png)
+![Object Detection page showing the model architecture and training results#center](./images/ei_project_3.webp "Object Detection model details")
 
-In our project, the "Impulse" is fully created, trained, and optimized so we won't have to walk through those steps.  Edge Impulse has a ton of [examples and documentation](https:://docs.edgeimpulse.com) to walk you through your first "Impulse" creation:
+The Impulse in this project is already created, trained, and optimized, so you don't need to walk through those steps. Edge Impulse provides extensive [examples and documentation](https://docs.edgeimpulse.com) to guide you through creating your own Impulse from scratch:
 
-![Edge Impulse](./images/EI_Project_4.png)
+![Edge Impulse documentation page showing available guides and tutorials#center](./images/ei_project_4.webp "Edge Impulse documentation")
 
-What we want to do now is to deploy our model to a specific edge device type.  Depending on the specific hardware you are using in this workshop, you can choose from the following deployment edge device choices:
+Now deploy the model to your specific edge device type. Depending on the hardware you selected earlier, choose the matching deployment target:
 
-![Edge Impulse](./images/EI_Project_5.png)
+![Deployment page showing available target device options including Linux AARCH64 and other platforms#center](./images/ei_project_5.webp "Deployment target options")
 
-Please select the appropriate choice and press "Build" (Example, for Raspberry Pi, choose "Linux(AARCH64)" to run the model on the CPU of the RPi:
+Select the appropriate target for your device and select **Build**. For example, if you're using a Raspberry Pi 5 or an EC2 Graviton instance, choose **Linux (AARCH64)** to run the model on the CPU:
 
-![Edge Impulse](./images/EI_Project_6.png)
+![Build dialog with the Linux AARCH64 target selected and the Build button highlighted#center](./images/ei_project_6.webp "Build deployment")
 
-	NOTE:  For these edge device choices, please select the "int8" option 
-	prior to pressing "Build". 
+{{% notice Note %}}
+For these edge device targets, select the **int8** quantization option before selecting **Build**. The **Linux (AARCH64)** target is suitable for many Linux-class Arm-based 64-bit devices where the CPU runs the model.
+{{% /notice %}}
 
-	NOTE: The "Linux(AARCH64)" is suitable for many Linux-class ARM-based 
-	64bit devices where only the CPU will be used to run the model. 
+With the deployment built, the next step is to create an API key that connects the Greengrass component to your Edge Impulse project.
 
-Now that we have built our deployment, we are ready to move on to the next step - creating an API Key. Lets do this!
+## Create your project API key
 
-### 4. Create your project API key
+The Edge Impulse Runner on your device uses an API key to authenticate with your project and download the model. Select **Dashboard** on the left sidebar:
 
-Lastly, lets create our API key for our project. We'll use this key to connect our Greengrass component's environment to our Edge Impulse project. Click on the "Dashboard"  on the left hand side of our project:
+![Edge Impulse project dashboard with the Dashboard link highlighted in the left sidebar#center](./images/ei_key_1.webp "Project dashboard")
 
-![Edge Impulse Dashboard](./images/EI_Key_1.png)
+Select **Keys**:
 
-Press "Keys":
+![Dashboard view with the Keys tab visible in the project settings area#center](./images/ei_key_2.webp "Keys tab")
 
-![Edge Impulse Dashboard](./images/EI_Key_2.png)
+Select **Add new API key** in the upper-right corner. Enter a name for the key, set the role to **admin**, and confirm that **Set as development key** is selected. Then select **Create API key**:
 
-Press "Add new API key" on the upper right side. Provide a name for the key. The role should be "admin" and "Set as development key" should be selected. Press "Create API key":
+![API key creation dialog with fields for name, role set to admin, and the development key checkbox selected#center](./images/ei_key_3.webp "Create API key")
 
-![Edge Impulse Dashboard](./images/EI_Key_3.png)
+The API key appears on the screen. Copy and save it immediately — this is the only time the full key is visible. You'll store this key in AWS Secrets Manager in a later step.
 
-You will then be presented with the API key. Make a copy of this key as this will be the only time you will be able to see the full key for copying. We will place this key into AWS Secret Manager shortly so be sure to save it now!!
+## What you've accomplished
 
-OK!  We are making good progress!  Next up, we are going to install AWS IoT Greengrass into our edge device. Lets go!
+In this section, you created an Edge Impulse account, cloned a pre-built Cat and Dog Detector project, built a deployment for your Arm device, and generated an API key. In the next section, you install AWS IoT Greengrass on your edge device.
