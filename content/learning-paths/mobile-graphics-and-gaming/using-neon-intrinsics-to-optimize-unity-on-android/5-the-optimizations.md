@@ -13,7 +13,7 @@ In order to leverage Neon intrinsics in code, you first have to ensure that your
 
 ### Enable Burst package
 
-1. In the Window menu, select _Package Manager_
+1. In the Window menu, select _Packet Management_ -> _Package Manager_
 
 1. Ensure that the Packages option in top left is set to _Unity Registry_
 
