@@ -129,4 +129,4 @@ In this section:
 - You set up a Python virtual environment with Pytest and Testcontainers.
 - You explored the test directory structure.
 
-In the next section, you will examine the test code and understand how to write integration tests for MCP servers.
+In the next section, you will run basic Testcontainers examples to understand how containers are managed programmatically.
