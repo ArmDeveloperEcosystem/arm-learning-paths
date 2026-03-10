@@ -16,7 +16,7 @@ prerequisites:
     - Desktop computer capable of running Unity
     - Unity version compatible with Unity Burst compiler 1.5 or later
 
-author: Arm
+author: Joshua Marshall-Law
 
 ### Tags
 skilllevels: Advanced
