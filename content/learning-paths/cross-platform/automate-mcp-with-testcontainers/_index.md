@@ -7,7 +7,7 @@ cascade:
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic for software developers and QA engineers who want to automate integration testing of MCP (Model Context Protocol) servers using Testcontainers and PyTest.
+who_is_this_for: This is an introductory topic for software developers and QA engineers who want to automate integration testing of Model Context Protocol (MCP) servers using Testcontainers and PyTest.
 
 learning_objectives:
     - Set up Testcontainers with PyTest for containerized testing of MCP servers

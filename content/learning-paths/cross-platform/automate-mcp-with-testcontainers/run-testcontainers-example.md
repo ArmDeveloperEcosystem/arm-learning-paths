@@ -42,7 +42,9 @@ When the `with` block exits, Testcontainers automatically stops and removes the 
 
 ## Verify container architecture
 
-Since you're running on an Arm machine, verify the container uses the correct architecture:
+Since you're running on an Arm machine, verify the container uses the correct architecture.
+
+Create a file `verify_arch.py` with code below:
 
 ```python
 from testcontainers.core.container import DockerContainer
