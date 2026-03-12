@@ -6,6 +6,9 @@ differentiating_info:
 key_ip:
 - Neoverse
 maintopic: true
+pinned_learning_paths:
+- nginx_tune
+- codec
 operatingsystems_filter:
 - Android: 3
 - Linux: 211

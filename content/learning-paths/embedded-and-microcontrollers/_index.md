@@ -8,6 +8,7 @@ key_ip:
 - Cortex-M
 - Ethos-U
 maintopic: true
+pinned_learning_paths:
 operatingsystems_filter:
 - Android: 2
 - Baremetal: 31

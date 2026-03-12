@@ -8,6 +8,7 @@ key_ip:
 - Immortalis
 - Mali
 maintopic: true
+pinned_learning_paths:
 operatingsystems_filter:
 - Android: 35
 - Linux: 36

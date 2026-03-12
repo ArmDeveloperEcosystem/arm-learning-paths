@@ -224,6 +224,28 @@ ads-card.path-card .learning-path-title-div { /* xs and sm */
     font-size: 0.9rem!important;
 }
 
+.pinned-featured-label {
+    color: inherit;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+ads-card.path-card ads-card-content {
+    position: relative;
+}
+
+.pinned-corner-icon {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    color: var(--arm-web-safe-orange);
+    font-size: 0.95rem;
+}
+
+html[theme="dark"] .pinned-corner-icon {
+    color: var(--arm-orange);
+}
+
 html[theme="light"] .learning-path-title, html[theme="light"] .basics-title {
     color: var(--arm-web-safe-blue);
 }

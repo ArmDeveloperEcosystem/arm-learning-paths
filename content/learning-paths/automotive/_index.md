@@ -7,6 +7,7 @@ key_ip:
 - Cortex-A
 - Cortex-R
 maintopic: true
+pinned_learning_paths:
 subtitle: Build smarter, real-time vehicle software on reliable Arm platforms.
 title: Automotive
 weight: 4

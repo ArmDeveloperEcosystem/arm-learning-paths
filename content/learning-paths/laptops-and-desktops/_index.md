@@ -6,6 +6,7 @@ differentiating_info:
 key_ip:
 - Cortex-A
 maintopic: true
+pinned_learning_paths:
 operatingsystems_filter:
 - Android: 2
 - ChromeOS: 2

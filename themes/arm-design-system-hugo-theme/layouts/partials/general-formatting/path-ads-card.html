@@ -12,9 +12,17 @@ Called from:
 
 <ads-card link="{{.learning_path.Permalink}}" class='path-card'>
     <ads-card-content slot="content">
+        {{ if .is_pinned }}
+            <span class="pinned-corner-icon" aria-label="Pinned learning path" title="Pinned learning path">
+                <i class="fa-solid fa-thumbtack" aria-hidden="true"></i>
+            </span>
+        {{ end }}
         <!-- SUBJECT -->
         <p class="card-subject u-margin-top-0 u-margin-bottom-1/2">
             {{ upper .learning_path.Params.subjects }}
+            {{ if .is_pinned }}
+                <span class="pinned-featured-label">&nbsp;| FEATURED</span>
+            {{ end }}
         </p>
         <!-- Title of Learning Path -->
         <div class="learning-path-title-div">
