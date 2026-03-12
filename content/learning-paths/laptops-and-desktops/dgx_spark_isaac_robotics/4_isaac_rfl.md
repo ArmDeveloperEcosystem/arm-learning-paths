@@ -281,13 +281,13 @@ The following visualizations compare two training stages using `num_envs=512`, s
 
 At iteration 50, the policy is still in its exploration phase. Most robots exhibit noisy joint actions, lack coordination, and frequently fall. There is no observable response to the velocity command, and no stable gait has emerged.
 
-![img3 alt-text#center](isaaclab_h1_512_0050.gif "Figure 3: Early Stage")
+![img3 alt-text#center](isaaclab_h1_512_0050.gif "Early Stage")
 
 **Iteration 1350 (Late Stage, num_envs=512)**
 
 By iteration 1350, the policy has matured. Most robots demonstrate coordinated walking behavior, balance maintenance, and accurate velocity tracking, even on rough terrain. The improvement in foot placement and heading stability is clearly visible.
 
-![img4 alt-text#center](isaaclab_h1_512_1350.gif "Figure 4: Late Stage")
+![img4 alt-text#center](isaaclab_h1_512_1350.gif "Late Stage")
 
 ## What you've learned
 

@@ -42,7 +42,7 @@ This script loads a robot model, advances the physics simulation, and prints joi
 - Configuring joint actuators and control modes
 - Stepping the physics simulation and reading back joint positions and velocities
 
-![img1 alt-text#center](run_articulation.gif "Figure 1: run_articulation.py")
+![img1 alt-text#center](run_articulation.gif "run_articulation.py")
 
 ## Step 3: Run the Cartpole environment
 
@@ -57,7 +57,7 @@ Run the following command:
 
 This command launches 32 parallel Cartpole environments on the Blackwell GPU. Each environment runs its own independent simulation with random joint efforts applied to the cart. You'll see the pole joint angle printed to the terminal for each step.
 
-![img2 alt-text#center](32_cartpole.gif "Figure 2: 32 parallel Cartpole")
+![img2 alt-text#center](32_cartpole.gif "32 parallel Cartpole")
 
 {{% notice Note %}}
 This tutorial script uses a hardcoded `CartpoleEnvCfg` configuration. It does not accept a `--task` argument. The `--num_envs` flag controls how many parallel environments are spawned on the GPU.
