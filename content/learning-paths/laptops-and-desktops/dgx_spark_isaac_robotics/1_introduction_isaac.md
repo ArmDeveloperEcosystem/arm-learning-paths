@@ -106,16 +106,16 @@ You can also filter environments by keyword. For example, to list locomotion env
 
 For the complete list of environments, see the [Isaac Lab Available Environments](https://isaac-sim.github.io/IsaacLab/main/source/overview/environments.html) documentation.
 
-## What you'll accomplish in this Learning Path
+## What you'll build
 
-In this Learning Path you'll:
+In this Learning Path, you'll:
 
-1. **Set up Isaac Sim and Isaac Lab** on your DGX Spark by building both tools from source
-2. **Run a basic robot simulation** in Isaac Sim and interact with it through Python
-3. **Train a reinforcement learning policy** for the Unitree H1 humanoid robot on rough terrain using RSL-RL
-4. **Explore additional RL environments** to understand how the workflow generalizes to other robots and tasks
+1. Set up Isaac Sim and Isaac Lab on your DGX Spark by building both tools from source
+2. Run a basic robot simulation in Isaac Sim and interact with it through Python
+3. Train a reinforcement learning policy for the Unitree H1 humanoid robot on rough terrain using RSL-RL
+4. Explore additional RL environments to understand how the workflow generalizes to other robots and tasks
 
-By the end of the Learning Path, you'll have a working Isaac Sim and Isaac Lab development environment on DGX Spark and practical experience running a complete robotics reinforcement learning pipeline.
+By the end, you'll have a working Isaac Sim and Isaac Lab development environment on DGX Spark and practical experience running a complete robotics reinforcement learning pipeline.
 
 ## What you've learned and what's next
 
