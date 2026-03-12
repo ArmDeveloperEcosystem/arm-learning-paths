@@ -12,6 +12,7 @@ layout: installtoolsall
 multi_install: false
 multitool_install_part: false
 official_docs: https://www.scala-sbt.org/download/
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=scala
 test_images:
 - ubuntu:latest
 test_link: null

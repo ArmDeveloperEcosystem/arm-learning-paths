@@ -145,6 +145,16 @@ Called from:
                             {{end}}
                         </td>
                     </tr>
+                    {{if and (not $is_learning_path) .Params.ecosystem_dashboard}}
+                    <tr>
+                        <td class="td-metadata-key nowrap">
+                            Ecosystem dashboard:
+                        </td>
+                        <td class="td-metadata-value">
+                            <a id="ecosystem-dashboard-link" href="{{.Params.ecosystem_dashboard}}" target="_blank">View {{ partial "general-formatting/external-link.html"}} </a>
+                        </td>
+                    </tr>
+                    {{end}}
                 </table>
             </div>
             <!-- RIGHT TABLE, mobile -->
@@ -189,6 +199,18 @@ Called from:
                             {{end}}
                         </td>
                     </tr>
+                    {{if and (not $is_learning_path) .Params.ecosystem_dashboard}}
+                    <tr>
+                        <td class="td-metadata-key width-max-content">
+                            Ecosystem dashboard:
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-metadata-value margin-l-24">
+                            <a id="ecosystem-dashboard-link" href="{{.Params.ecosystem_dashboard}}" target="_blank">View {{ partial "general-formatting/external-link.html"}} </a>
+                        </td>
+                    </tr>
+                    {{end}}
                 </table>
             </div>
         </div>

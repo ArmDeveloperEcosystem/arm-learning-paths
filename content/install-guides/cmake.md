@@ -12,6 +12,7 @@ minutes_to_complete: 10
 author: Jason Andrews
 
 official_docs: https://cmake.org/documentation/
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=cmake
 
 test_images:
 - ubuntu:latest

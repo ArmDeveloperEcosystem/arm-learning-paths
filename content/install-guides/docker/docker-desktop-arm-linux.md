@@ -15,6 +15,7 @@ author: Jason Andrews
 
 ### Link to official documentation
 official_docs: https://docs.docker.com/desktop/
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=docker
 
 weight: 4                       # Defines page ordering. Must be 1 for first (or only) page.
 tool_install: false             # Set to true to be listed in main selection page, else false
