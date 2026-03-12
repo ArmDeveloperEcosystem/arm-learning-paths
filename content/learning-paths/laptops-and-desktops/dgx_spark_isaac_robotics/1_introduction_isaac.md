@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Overview
 
-In this Learning Path, you will build, configure, and run robotic simulation and [reinforcement learning (RL)](https://en.wikipedia.org/wiki/Reinforcement_learning) workflows using NVIDIA Isaac Sim and Isaac Lab on an Arm-based DGX Spark system. The NVIDIA DGX Spark is a personal AI supercomputer powered by the GB10 [Grace Blackwell](https://learn.arm.com/learning-paths/laptops-and-desktops/dgx_spark_llamacpp/1_gb10_introduction/) Superchip. The system couples an Arm CPU cluster with a Blackwell GPU and a unified memory architecture to accelerate simulation orchestration, sensor preprocessing, physics, rendering, and RL training.
+In this Learning Path, you'll build, configure, and run robotic simulation and [reinforcement learning (RL)](https://en.wikipedia.org/wiki/Reinforcement_learning) workflows using NVIDIA Isaac Sim and Isaac Lab on an Arm-based DGX Spark system. The NVIDIA DGX Spark is a personal AI supercomputer powered by the GB10 [Grace Blackwell](https://learn.arm.com/learning-paths/laptops-and-desktops/dgx_spark_llamacpp/1_gb10_introduction/) Superchip. The system couples an Arm CPU cluster with a Blackwell GPU and a unified memory architecture to accelerate simulation orchestration, sensor preprocessing, physics, rendering, and RL training.
 
 NVIDIA's Isaac Sim and Isaac Lab tools together provide an end-to-end robotics development workflow:
   1. Simulate robots in physically realistic environments.
@@ -106,13 +106,22 @@ You can also filter environments by keyword. For example, to list locomotion env
 
 For the complete list of environments, see the [Isaac Lab Available Environments](https://isaac-sim.github.io/IsaacLab/main/source/overview/environments.html) documentation.
 
-## What you will accomplish in this Learning Path
+## What you'll accomplish in this Learning Path
 
-In this Learning Path you will:
+In this Learning Path you'll:
 
 1. **Set up Isaac Sim and Isaac Lab** on your DGX Spark by building both tools from source
 2. **Run a basic robot simulation** in Isaac Sim and interact with it through Python
 3. **Train a reinforcement learning policy** for the Unitree H1 humanoid robot on rough terrain using RSL-RL
-4. **Explore additional RL environments** to understand how the workflow generalizes to other robots and tasks.
+4. **Explore additional RL environments** to understand how the workflow generalizes to other robots and tasks
 
-By the end of the Learning Path, you will have a working Isaac Sim and Isaac Lab development environment on DGX Spark and practical experience running a complete robotics reinforcement learning pipeline.
+By the end of the Learning Path, you'll have a working Isaac Sim and Isaac Lab development environment on DGX Spark and practical experience running a complete robotics reinforcement learning pipeline.
+
+## What you've learned and what's next
+
+In this section:
+- You learned what Isaac Sim and Isaac Lab are and how they work together for robotics development
+- You discovered why DGX Spark's unified memory architecture is ideal for simulation and RL training
+- You explored the available environment categories for different robotics tasks
+
+In the next section, you'll set up your development environment and install Isaac Sim and Isaac Lab on your DGX Spark system.

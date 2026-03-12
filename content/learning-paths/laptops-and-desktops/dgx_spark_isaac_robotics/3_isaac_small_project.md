@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Deploy a basic robot simulation
 
-With Isaac Sim and Isaac Lab installed, you can now run your first robot simulation. In this section you will launch a pre-built simulation scene, interact with it programmatically, and explore the key concepts behind Isaac Sim's simulation loop.
+With Isaac Sim and Isaac Lab installed, you can now run your first robot simulation. In this section you'll launch a pre-built simulation scene, interact with it programmatically, and explore the key concepts behind Isaac Sim's simulation loop.
 
 The example environment used here is Cartpole, a classic control benchmark in which a cart must balance an upright pole by applying horizontal forces. Although simple, this environment demonstrates the core mechanics of simulation environments used in robotics and reinforcement learning.
 
@@ -30,9 +30,8 @@ Press `Ctrl+C` to exit the simulation.
 
 ## Step 2: Spawn and simulate a robot
 
-Next, run a tutorial that loads an articulated robot into the simulation and advances the physics engine.
-This example demonstrates how Isaac Sim handles multi-body dynamics, including loading robot assets, configuring actuators, and stepping the physics simulation.
-Run the following command:
+Next, run a tutorial that loads an articulated robot into the simulation and advances the physics engine. This example demonstrates how Isaac Sim handles multi-body dynamics, including loading robot assets, configuring actuators, and stepping the physics simulation.
+
 ```bash
 ./isaaclab.sh -p scripts/tutorials/01_assets/run_articulation.py
 ```
@@ -56,7 +55,7 @@ Run the following command:
 ./isaaclab.sh -p scripts/tutorials/03_envs/create_cartpole_base_env.py --num_envs 32
 ```
 
-This command launches 32 parallel Cartpole environments on the Blackwell GPU. Each environment runs its own independent simulation with random joint efforts applied to the cart. You will see the pole joint angle printed to the terminal for each step.
+This command launches 32 parallel Cartpole environments on the Blackwell GPU. Each environment runs its own independent simulation with random joint efforts applied to the cart. You'll see the pole joint angle printed to the terminal for each step.
 
 ![img2 alt-text#center](32_cartpole.gif "Figure 2: 32 parallel Cartpole")
 
@@ -66,7 +65,8 @@ This tutorial script uses a hardcoded `CartpoleEnvCfg` configuration. It does no
 
 ## Step 4: Run the Cartpole RL environment
 
-The previous tutorial created a base simulation environment that advances physics and applies actions but does not include reinforcement learning components such as rewards or episode termination.
+The previous tutorial created a base simulation environment that advances physics and applies actions but doesn't include reinforcement learning components such as rewards or episode termination.
+
 To run the full reinforcement learning version of the environment, execute the following command:
 
 ```bash
@@ -206,7 +206,7 @@ Each call to `env.step(action)` performs these operations on the GPU:
 
 All computations happen in parallel across all environments using PyTorch tensors on the GPU. This is what makes Isaac Lab efficient: thousands of environments run in parallel without Python loop overhead.
 
-## Step 6: Run with headless mode
+## Step 6: Run in headless mode
 
 For reinforcement learning workflows, it is common to run Isaac Sim without rendering. Disabling the viewer allows more GPU resources to be used for physics simulation and neural network computation.
 
@@ -221,9 +221,9 @@ In headless mode, all GPU resources are dedicated to physics simulation and tens
 When running headless on DGX Spark, the Blackwell GPU handles both the physics simulation and neural network computation. The unified memory architecture means there is no performance penalty for sharing GPU memory between these workloads.
 {{% /notice %}}
 
-## What you have accomplished
+## What you've learned and what's next
 
-In this section you have:
+In this section you've:
 
 - Launched your first Isaac Sim scene on DGX Spark and verified the rendering and physics engines work correctly
 - Spawned articulated robots and observed multi-body physics simulation
@@ -232,4 +232,5 @@ In this section you have:
 - Tested headless mode for maximum training performance
 
 You now understand the core components of an Isaac Lab simulation environment, including scene creation, robot articulation, observation and action structures, and simulation loop execution.
-In the next section, you will use these concepts to train a reinforcement learning policy for a humanoid robot.
+
+In the next section, you'll use these concepts to train a reinforcement learning policy for a humanoid robot.

@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Train a reinforcement learning policy using Isaac Lab and RSL-RL
 
-In this section you will train a reinforcement learning (RL) policy for the [Unitree] (https://www.unitree.com/) H1 humanoid robot to walk over rough terrain. The training workflow uses Isaac Lab’s integration with the RSL-RL library, which implements the Proximal Policy Optimization (PPO) algorithm. This integration connects Isaac Sim’s physics simulation with an efficient RL training pipeline. By the end of this section you will understand the key stages of the RL training pipeline, including:
+In this section you'll train a reinforcement learning (RL) policy for the [Unitree](https://www.unitree.com/) H1 humanoid robot to walk over rough terrain. The training workflow uses Isaac Lab’s integration with the RSL-RL library, which implements the Proximal Policy Optimization (PPO) algorithm. This integration connects Isaac Sim’s physics simulation with an efficient RL training pipeline. By the end of this section you'll understand the key stages of the RL training pipeline, including:
   * Task configuration and environment selection
   * PPO training parameters and rollout collection
   * Monitoring training progress
@@ -26,7 +26,8 @@ RSL-RL (Robotic Systems Lab Reinforcement Learning) is a lightweight RL library 
 Isaac Lab includes ready-to-use training scripts for RSL-RL under `scripts/reinforcement_learning/rsl_rl/`.
 
 ## Step 1: Understand the training task
-In this section you will train the **Isaac-Velocity-Rough-H1-v0** environment. This is a locomotion task where the [Unitree H1](https://www.unitree.com/h1/) humanoid robot must track a velocity command while navigating rough terrain.
+
+In this section you'll train the **Isaac-Velocity-Rough-H1-v0** environment. This is a locomotion task where the [Unitree H1](https://www.unitree.com/h1/) humanoid robot must track a velocity command while navigating rough terrain.
 
 The task details are:
 
@@ -58,6 +59,7 @@ export LD_PRELOAD="$LD_PRELOAD:/lib/aarch64-linux-gnu/libgomp.so.1"
 ```
 
 Once training begins, the terminal displays iteration progress, reward statistics, and performance metrics.
+
 Example output:
 ```output
                        Learning iteration 15/3000                       
@@ -118,8 +120,10 @@ This error occurs because the NVRTC runtime compiler inside PyTorch does not yet
 Support for Blackwell GPUs is expected to improve in upcoming PyTorch and Isaac Sim releases.
 {{% /notice %}}
 
-### Adjusting training parameters
-You can also override default parameters from the command line:
+### Adjust training parameters
+
+You can also override default parameters from the command line.
+
 For example:
 ```bash
 ./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/train.py \
@@ -186,8 +190,8 @@ PPO (Proximal Policy Optimization) is the RL algorithm used by RSL-RL. Understan
 | `save_interval` | `50` | Save a model checkpoint every N iterations. Useful for resuming training or evaluating intermediate policies |
 
 ### How the hyperparameters interact
-During training, each iteration collects experience from all parallel environments.
-The total batch size per iteration is:
+
+During training, each iteration collects experience from all parallel environments. The total batch size per iteration is:
 ```
 batch_size = num_envs × num_steps_per_env
 ```
@@ -273,25 +277,25 @@ This progression—from falling to stable walking—demonstrates how PPO gradual
 
 The following visualizations compare two training stages using `num_envs=512`, showcasing the benefit of large-scale parallel training on DGX Spark.
 
-*** Iteration 50 (Early Stage, num_envs=512) ***
+**Iteration 50 (Early Stage, num_envs=512)**
 
 At iteration 50, the policy is still in its exploration phase. Most robots exhibit noisy joint actions, lack coordination, and frequently fall. There is no observable response to the velocity command, and no stable gait has emerged.
 
 ![img3 alt-text#center](isaaclab_h1_512_0050.gif "Figure 3: Early Stage")
 
-*** Iteration 1350 (Late Stage, num_envs=512) ***
+**Iteration 1350 (Late Stage, num_envs=512)**
 
 By iteration 1350, the policy has matured. Most robots demonstrate coordinated walking behavior, balance maintenance, and accurate velocity tracking, even on rough terrain. The improvement in foot placement and heading stability is clearly visible.
 
 ![img4 alt-text#center](isaaclab_h1_512_1350.gif "Figure 4: Late Stage")
 
-## What you have accomplished
+## What you've learned
 
-In this module, you have:
+In this section, you've:
 
 - Trained a reinforcement learning policy for the Unitree H1 humanoid robot using RSL-RL and the PPO algorithm
 - Understood key hyperparameters in the training pipeline, including policy architecture, rollout strategy, and PPO optimization settings
 - Monitored training progress using reward curves, episode statistics, and performance metrics
 - Evaluated the trained policy through interactive visualization and behavior analysis
 
-You have now completed the end-to-end workflow of training and validating a reinforcement learning policy for humanoid locomotion on DGX Spark.
+You've now completed the end-to-end workflow of training and validating a reinforcement learning policy for humanoid locomotion on DGX Spark.

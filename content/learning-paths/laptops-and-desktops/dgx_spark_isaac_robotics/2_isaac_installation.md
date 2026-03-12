@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Set up your development environment
 
-Before running robotic simulations and reinforcement learning workloads, you need to prepare your DGX Spark development environment and install the dependencies required for Isaac Sim and Isaac Lab.
+Before you run robotic simulations and reinforcement learning workloads, you need to prepare your DGX Spark development environment and install the dependencies required for Isaac Sim and Isaac Lab.
 
-In this section you will:
+In this section you'll:
   * Verify the DGX Spark system configuration
   * Install required build dependencies
   * Build and configure Isaac Sim
@@ -18,7 +18,7 @@ In this section you will:
 
 The full setup typically takes 15–20 minutes on a DGX Spark system and requires approximately 50 GB of available disk space.
 
-## Step 1: Verify your system
+## Step 1: Verify your DGX Spark system
 
 Begin by confirming that the DGX Spark system has the expected hardware and software configuration.
 
@@ -37,7 +37,7 @@ Architecture:             aarch64
 CPU(s):                   20
   On-line CPU(s) list:    0-19
 ```
-The Architecture field should report aarch64, indicating that the system is running on Arm.
+The Architecture field should report `aarch64`, indicating that the system is running on Arm.
 
 Check that the Blackwell GPU is detected by the NVIDIA driver:
 
@@ -70,9 +70,7 @@ The expected output includes:
 Cuda compilation tools, release 13.0, V13.0.88
 ```
 
-{{% notice Note %}}
-Isaac Sim requires GCC/G++ 11, Git LFS, and CUDA 13.0 or later. If any of these checks fail, resolve the issue before proceeding.
-{{% /notice %}}
+{{% notice Note %}}Isaac Sim requires GCC/G++ 11, Git LFS, and CUDA 13.0 or later. If any of these checks fail, resolve the issue before you proceed.{{% /notice %}}
 
 ## Step 2: Install GCC 11 and Git LFS
 
@@ -82,7 +80,8 @@ Update the package index and install the GCC 11 toolchain:
 ```bash
 sudo apt update && sudo apt install -y gcc-11 g++-11
 ```
-Register GCC 11 as the default compiler using update-alternatives. This allows multiple compiler versions to coexist while prioritizing GCC 11 for builds:
+
+Register GCC 11 as the default compiler using `update-alternatives`. This allows multiple compiler versions to coexist while prioritizing GCC 11 for builds. The priority value of 200 ensures GCC 11 takes precedence over other installed versions:
 ```bash
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 200
 sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 200
@@ -120,9 +119,7 @@ git lfs install
 git lfs pull
 ```
 
-{{% notice Note %}}
-The Git LFS download retrieves several gigabytes of simulation assets. Ensure you have a stable internet connection and sufficient disk space before running this step.
-{{% /notice %}}
+{{% notice Note %}}The Git LFS download retrieves several gigabytes of simulation assets. Ensure you have a stable internet connection and sufficient disk space before you run this step.{{% /notice %}}
 
 Once the repository and assets are downloaded, build Isaac Sim using the provided build script:
 
@@ -166,7 +163,7 @@ After this step, the variables will be available automatically whenever you open
 
 {{% /notice %}}
 
-## Step 5: Validate the Isaac Sim build
+## Step 5: Validate your Isaac Sim build
 
 Launch Isaac Sim to verify the build was successful. On some aarch64 systems, Isaac Sim may require preloading the GNU OpenMP runtime (libgomp) to avoid library compatibility issues. Setting the LD_PRELOAD environment variable ensures the correct library is loaded before Isaac Sim starts.
 
@@ -244,11 +241,11 @@ Isaac-Reach-Franka-v0
 
 If the environment list displays without errors, both Isaac Sim and Isaac Lab are correctly installed and ready for use.
 
-You are now ready to run and train RL tasks using Isaac Lab environments.
+You're now ready to run and train RL tasks using Isaac Lab environments.
 
-## What you have accomplished
+## What you've learned and what's next
 
-In this section you have:
+In this section you've:
 
 - Verified your DGX Spark system has the required Grace CPU, Blackwell GPU, and CUDA 13 environment
 - Installed GCC 11 and Git LFS as build prerequisites
@@ -257,4 +254,4 @@ In this section you have:
 - Cloned and installed Isaac Lab with all RL library dependencies
 - Validated both installations by launching Isaac Sim and listing available environments
 
-Your development environment is now fully configured for robot simulation and RL workflows. In the next section, you will run your first robot simulation and begin interacting with Isaac Sim through Python scripts.
+Your development environment is now fully configured for robot simulation and RL workflows. In the next section, you'll run your first robot simulation and begin interacting with Isaac Sim through Python scripts.
