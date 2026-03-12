@@ -9,6 +9,9 @@ key_ip:
 - Ethos-U
 maintopic: true
 pinned_learning_paths:
+- arduino-pico
+- vcpkg-tool-installation
+- zephyr
 operatingsystems_filter:
 - Android: 2
 - Baremetal: 31

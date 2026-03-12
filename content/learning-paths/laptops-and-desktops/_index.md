@@ -7,6 +7,9 @@ key_ip:
 - Cortex-A
 maintopic: true
 pinned_learning_paths:
+- windowsperf
+- wsl2
+- win_net8
 operatingsystems_filter:
 - Android: 2
 - ChromeOS: 2

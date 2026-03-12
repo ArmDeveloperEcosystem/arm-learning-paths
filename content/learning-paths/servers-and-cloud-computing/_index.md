@@ -9,6 +9,10 @@ maintopic: true
 pinned_learning_paths:
 - nginx_tune
 - codec
+- kafka
+- clickhouse
+- github-actions-runner
+- migrate-ease
 operatingsystems_filter:
 - Android: 3
 - Linux: 211

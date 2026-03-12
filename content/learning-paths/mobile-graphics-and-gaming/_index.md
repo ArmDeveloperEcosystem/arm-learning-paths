@@ -9,6 +9,9 @@ key_ip:
 - Mali
 maintopic: true
 pinned_learning_paths:
+- ai-camera-pipelines
+- android_webgpu_dawn
+- profiling-unity-apps-on-android
 operatingsystems_filter:
 - Android: 35
 - Linux: 36
