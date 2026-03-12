@@ -1,6 +1,10 @@
 ---
 title: "Get started with BOLT"
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 20
 
 who_is_this_for: This is an introductory topic for performance‑minded developers
