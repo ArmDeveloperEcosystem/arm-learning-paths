@@ -1,5 +1,5 @@
 ---
-title: Tune application performance with Arm Performix Topdown analysis
+title: Tune application performance with Arm Performix CPU Microarchitecture analysis
 
 minutes_to_complete: 60
 

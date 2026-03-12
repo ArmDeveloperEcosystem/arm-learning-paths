@@ -6,7 +6,7 @@ weight: 2
 layout: learningpathall
 ---
 
-This Learning Path uses Arm Performix Topdown and Instruction Mix recipes to analyze performance in a sample application.
+This Learning Path uses Arm Performix CPU Mircoarchitecture and Instruction Mix recipes to analyze performance in a sample application.
 
 ## Before you begin
 

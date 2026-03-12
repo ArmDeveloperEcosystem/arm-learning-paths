@@ -1,14 +1,14 @@
 ---
-title: Find Bottlenecks with Top-Down
+title: Find Bottlenecks with CPU Microarchitecture
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Run Topdown analysis
+## Run CPU Microarchitecture analysis
 
-As shown in the `main.cpp` listing below, the program generates a 1920×1080 bitmap image of the fractal. To identify performance bottlenecks, run the Topdown recipe in Arm Performix (APX). APX uses microarchitectural sampling to show which instruction pipeline stages dominate program latency, then highlights ways to improve those bottlenecks.
+As shown in the `main.cpp` listing below, the program generates a 1920×1080 bitmap image of the fractal. To identify performance bottlenecks, run the CPU Microarchitecture recipe in Arm Performix (APX). APX uses microarchitectural sampling to show which instruction pipeline stages dominate program latency, then highlights ways to improve those bottlenecks.
 
 
 {{% notice Specify the example output file %}}

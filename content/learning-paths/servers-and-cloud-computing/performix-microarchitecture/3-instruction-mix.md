@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Run Instruction Mix
 
-The previous Topdown analysis showed that the sample application used no single instruction, multiple data (SIMD) operations, which points to an optimization opportunity. Run the Instruction Mix recipe to learn more. The Instruction Mix launch panel is similar to Topdown, but it does not include options to choose metrics. Again, enter the full path to the workload. This Mandelbrot example is native C++ code, not Java or .NET, so you do not need to collect managed code stacks.
+The previous CPU Microarchitecture analysis showed that the sample application used no single instruction, multiple data (SIMD) operations, which points to an optimization opportunity. Run the Instruction Mix recipe to learn more. The Instruction Mix launch panel is similar to CPU Microarchitecture, but it does not include options to choose metrics. Again, enter the full path to the workload. This Mandelbrot example is native C++ code, not Java or .NET, so you do not need to collect managed code stacks.
 
 ![instruction-mix-config.jpg](instruction-mix-config.jpg)
 
@@ -60,9 +60,9 @@ user    0m8.331s
 sys     0m0.016s
 ```
 
-## Topdown results comparison
+## CPU Microarchitecture results comparison
 
-The Topdown recipe also supports a **Compare** view that shows percentage-point changes in each stage and instruction type.
+The CPU Microarchitecture recipe also supports a **Compare** view that shows percentage-point changes in each stage and instruction type.
 ![topdown-simd-results-diff.jpg](topdown-simd-results-diff.jpg)
 
 You can now see that Load and Store operations account for about 70% of execution time. **Insights** offers several explanations because multiple issues can contribute to the root cause.
@@ -104,7 +104,7 @@ user    0m0.724s
 sys     0m0.014s
 ```
 
-Another Topdown measurement shows that Load and Store bottlenecks are almost eliminated. SIMD floating-point operations now dominate execution, which indicates the application is better tuned to feed floating-point execution units.
+Another CPU Microarchitecture measurement shows that Load and Store bottlenecks are almost eliminated. SIMD floating-point operations now dominate execution, which indicates the application is better tuned to feed floating-point execution units.
 ![high-simd-utilization.jpg](high-simd-utilization.jpg)
 
 The program still generates the same output, and runtime drops from 31 s to less than 1 s, a 43x speedup.
