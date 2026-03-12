@@ -1,0 +1,85 @@
+---
+title: Set up the developer environment
+weight: 3
+
+# FIXED, DO NOT MODIFY
+layout: learningpathall
+---
+
+## Verify the required tools
+
+Before cloning any repositories, confirm that Python 3.12 and Git are available:
+
+```bash
+python3.12 --version
+git --version
+```
+
+These instructions are tested on Python 3.12. Earlier versions of Python 3 may work but are not validated against the `redacted-branch` branch used in this Learning Path.
+
+## Clone the repositories
+
+You need two repositories. The `device-connect` contains the SDK and agent tools as local packages. The `redacted` repository contains the robot runtime and the `robot_mesh` Strands tool.
+
+```bash
+mkdir -p ~/strands-device-connect
+cd ~/strands-device-connect
+
+git clone https://github.com/redacted
+git clone https://github.com/arm/device-connect.git
+```
+
+After cloning, your workspace should look like this:
+
+```output
+~/strands-device-connect/
+├── device-connect/
+└── redacted/
+```
+
+## Check out the integration branch
+
+The Device Connect integration code for `redacted` lives on the `redacted-branch` branch. This branch adds the `RobotDeviceDriver` adapter and the updated `robot_mesh` tool that routes calls through the Device Connect SDK rather than the raw Zenoh mesh.
+
+TODO: remove feature branch? replace redacted and redacted-branch
+
+```bash
+cd redacted
+git checkout redacted-branch
+cd ..
+```
+
+## Create a Python virtual environment
+
+Create a single virtual environment at the workspace root, then activate it:
+
+```bash
+python3.12 -m venv .venv
+source .venv/bin/activate
+```
+
+Now install the packages:
+
+```bash
+pip install --upgrade pip setuptools wheel hatchling hatch-vcs
+pip install -e device-connect/packages/device-connect-sdk
+pip install -e "device-connect/packages/device-connect-agent-tools[strands]"
+pip install -e "redacted[sim]"
+```
+
+TODO: simplify commands?
+
+## How discovery works — no configuration needed
+
+The `strands-robots` SDK uses Device Connect's built-in device-to-device discovery: every `Robot()` instance announces itself on the local network at startup, and any process running `discover_devices()` or `robot_mesh(action='peers')` on the same network segment will find it automatically.
+
+This means discovery works as long as the device process and the agent process are on the same LAN or on the same machine. Discovery is typically available on home and office networks. If you are behind a firewall or VPN that blocks local network traffic, devices will not discover each other — that scenario requires the infrastructure-backed setup with a Zenoh router, which is covered later in this Learning Path.
+
+## What you've set up and what's next
+
+At this point you have:
+
+- Two repositories cloned with `redacted` on the `feat/device-connect-integration` branch.
+- A single Python 3.12 virtual environment with the Device Connect SDK, agent tools, and robot simulation runtime all installed.
+
+The next section walks you through starting a simulated robot and invoking it from both the agent tools and the `robot_mesh` Strands tool.
