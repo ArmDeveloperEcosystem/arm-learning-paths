@@ -17,7 +17,9 @@ test_maintenance: false
 # No official documentation 
 official_docs: https://learn.arm.com/install-guides/asct/
 
-author: Jason Andrews
+author:
+- Jason Andrews
+- Prince Agyeman
 
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
