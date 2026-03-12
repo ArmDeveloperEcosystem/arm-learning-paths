@@ -6,9 +6,9 @@ weight: 4
 layout: learningpathall
 ---
 
-## Understand Testcontainers basics
+## Understand Testcontainers for Python testing
 
-Before writing full integration tests, explore how Testcontainers manages containers programmatically. This section walks you through basic examples that demonstrate the core concepts.
+Before writing full integration tests, see how Testcontainers manages containers programmatically. This section walks you through basic examples that demonstrate the core concepts.
 
 ## Run a simple container
 
@@ -40,11 +40,11 @@ Hello from Testcontainers on Arm!
 
 When the `with` block exits, Testcontainers automatically stops and removes the container.
 
-## Verify container architecture
+## Verify Arm container architecture
 
 Since you're running on an Arm machine, verify the container uses the correct architecture.
 
-Create a file `verify_arch.py` with code below:
+Create a file `verify_arch.py` with the code below:
 
 ```python
 from testcontainers.core.container import DockerContainer
@@ -118,7 +118,7 @@ Container automatically stopped and removed.
 
 The following diagram illustrates how Testcontainers manages the complete container lifecycle:
 
-![Container lifecycle flowchart showing: Start Test leads to Create DockerContainer, which checks if Image exists. If No, it Pulls image then Creates container. If Yes, it directly Creates container. Then it Starts container, Waits for ready signal, Runs test code, Stops container, Removes container, and finally Test complete.#center](container-lifecycle.png "Figure 2. Testcontainers Container Lifecycle")
+![Container lifecycle flowchart showing: Start Test leads to Create DockerContainer, which checks if Image exists. If No, it Pulls image then Creates container. If Yes, it directly Creates container. Then it Starts container, Waits for ready signal, Runs test code, Stops container, Removes container, and finally Test complete.alt-txt#center](container-lifecycle.png "Testcontainers container lifecycle")
 
 The `DockerContainer` context manager handles four phases automatically:
 
@@ -131,7 +131,7 @@ The `DockerContainer` context manager handles four phases automatically:
 
 This ensures tests always start with a clean environment and never leave orphaned containers.
 
-## Configure container options
+## Configure Testcontainers options
 
 Testcontainers provides methods to configure container settings:
 
@@ -150,9 +150,9 @@ with (
 
 Common configuration options include:
 
-- **with_env()**: Set environment variables inside the container
-- **with_volume_mapping()**: Mount host directories into the container
-- **with_kwargs()**: Pass additional arguments to the Docker SDK
+- **with_env()**: sets environment variables inside the container
+- **with_volume_mapping()**: mounts host directories into the container
+- **with_kwargs()**: passes additional arguments to the Docker SDK
 
 For MCP testing, `stdin_open=True` enables communication over the stdio transport.
 
@@ -182,12 +182,12 @@ except TimeoutError:
     print("Check the Docker logs for more details.")
 ```
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 In this section:
-- You ran basic Testcontainers examples to understand the container lifecycle.
-- You verified container architecture matches your Arm system.
-- You started the MCP server container and waited for it to initialize.
-- You learned how to configure containers and handle errors.
+- You ran basic Testcontainers examples to understand the container lifecycle
+- You verified container architecture matches your Arm system
+- You started the MCP server container and waited for it to initialize
+- You learned how to configure containers and handle errors
 
-In the next section, you will write full integration tests that communicate with the MCP server using the JSON-RPC protocol.
+In the next section, you'll write full integration tests that communicate with the MCP server using the JSON-RPC protocol.

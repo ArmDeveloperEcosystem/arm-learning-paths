@@ -6,9 +6,9 @@ weight: 5
 layout: learningpathall
 ---
 
-## Overview
+## MCP integration testing overview
 
-In this section, you will build an integration test suite for the Arm MCP server step by step. You will create the test files yourself and understand each component as you go.
+In this section, you'll build an integration test suite for the Arm MCP server step by step. You'll create the test files yourself and understand each component as you go.
 
 The Arm MCP repository already includes a complete test implementation in [mcp-local/tests/](https://github.com/arm/mcp/tree/main/mcp-local/tests). You can reference those files at any point, but this tutorial guides you through building a simplified version to understand the key concepts.
 
@@ -17,7 +17,7 @@ The Arm MCP repository already includes a complete test implementation in [mcp-l
 Before writing tests, you need to understand how MCP servers communicate. MCP uses JSON-RPC 2.0 over standard input/output (stdio transport).
 The following diagram shows the communication flow between your test code, Testcontainers, and the MCP server:
 
-![MCP communication sequence diagram showing: Pytest Test creates DockerContainer via Testcontainers, which starts the MCP Server Container. The test then sends initialize request, receives capabilities response, sends initialized notification, then makes tools/call requests for check_image and knowledge_base_search, receiving results for each. Finally, the test exits the context manager, triggering Testcontainers to stop and remove the container.#center](mcp-communication-flow.png "Figure 1. MCP JSON-RPC Communication Flow")
+![MCP communication sequence diagram showing: Pytest Test creates DockerContainer via Testcontainers, which starts the MCP Server Container. The test then sends initialize request, receives capabilities response, sends initialized notification, then makes tools/call requests for check_image and knowledge_base_search, receiving results for each. Finally, the test exits the context manager, triggering Testcontainers to stop and remove the container. alt-txt#center](mcp-communication-flow.png "MCP JSON-RPC Communication Flow")
 The communication follows this sequence:
 
 | Step | Direction | Message Type |
@@ -29,7 +29,7 @@ The communication follows this sequence:
 
 Each message is a JSON object followed by a newline character.
 
-## Step 1: Create the test directory
+## Step 1: create the test directory
 
 Create a directory for your test files:
 
@@ -38,19 +38,19 @@ mkdir -p my-mcp-tests
 cd my-mcp-tests
 ```
 
-## Step 2: Define test constants
+## Step 2: define test constants
 
 Create a file called `constants.py` to hold the MCP request payloads and expected responses.
 
 Open your editor and create `constants.py` with the following content:
 
-1. First, define the Docker image name:
+First, define the Docker image name:
 
 ```python
 MCP_DOCKER_IMAGE = "arm-mcp:latest"
 ```
 
-2. Add the initialization request. This follows the MCP protocol specification:
+Add the initialization request. This follows the MCP protocol specification:
 
 ```python
 INIT_REQUEST = {
@@ -65,7 +65,7 @@ INIT_REQUEST = {
 }
 ```
 
-3. Add a test request for the `check_image` tool. This tool verifies if a Docker image supports Arm architecture:
+Add a test request for the `check_image` tool. This tool verifies if a Docker image supports Arm architecture:
 
 ```python
 CHECK_IMAGE_REQUEST = {
@@ -85,7 +85,7 @@ CHECK_IMAGE_REQUEST = {
 }
 ```
 
-4. Define what response you expect from the tool:
+Define what response you expect from the tool:
 
 ```python
 EXPECTED_CHECK_IMAGE_RESPONSE = {
@@ -100,15 +100,15 @@ EXPECTED_CHECK_IMAGE_RESPONSE = {
 
 Save the file. This gives you a complete `constants.py` with one test case.
 
-**Try it yourself**: Follow the same format to add another test request for a different MCP tool. Look at the [Arm MCP documentation](https://github.com/arm/mcp/tree/main) to find other available tools like `knowledge_base_search`.
+Try it yourself by following the same format to add another test request for a different MCP tool. Look at the [Arm MCP documentation](https://github.com/arm/mcp/tree/main) to find other available tools such as `knowledge_base_search`.
 
-## Step 3: Create helper functions
+## Step 3: create helper functions for JSON-RPC communication
 
 The MCP server runs inside a Docker container that communicates over an attached socket. You need helper functions to encode and decode messages.
 
 Create a new file called `helpers.py`:
 
-1. Start with the imports and the message encoding function:
+Start with the imports and the message encoding function:
 
 ```python
 import json
@@ -122,7 +122,7 @@ def encode_mcp_message(payload: dict) -> bytes:
 
 This function converts a Python dictionary to a JSON string, adds a newline, and encodes it as bytes.
 
-2. Add a function to read Docker's multiplexed stream format:
+Add a function to read Docker's multiplexed stream format:
 
 ```python
 def read_docker_frame(sock, timeout: float) -> bytes:
@@ -160,7 +160,7 @@ def read_docker_frame(sock, timeout: float) -> bytes:
     return payload
 ```
 
-3. Add a function to parse MCP JSON-RPC messages:
+Add a function to parse MCP JSON-RPC messages:
 
 ```python
 def read_mcp_message(sock, timeout: float = 10.0) -> dict:
@@ -193,13 +193,13 @@ def read_mcp_message(sock, timeout: float = 10.0) -> dict:
 
 Save `helpers.py`. You now have the communication utilities needed for testing.
 
-**Understanding the code**: The Docker socket uses a multiplexed format where each frame has an 8-byte header. The helper functions handle this low-level detail so your tests can focus on MCP logic.
+**Understanding the code**: The Docker socket uses a multiplexed format where each frame has an 8-byte header. When you attach to a container's stdin/stdout, Docker wraps the data in frames that need to be parsed. The helper functions handle this low-level detail so your tests can focus on MCP logic.
 
 ## Step 4: Write the test function
 
 Create the main test file `test_mcp.py`:
 
-1. Start with imports:
+Start with imports:
 
 ```python
 import os
@@ -212,7 +212,7 @@ import constants
 from helpers import encode_mcp_message, read_mcp_message
 ```
 
-2. Create the test function that starts the container:
+Create the test function that starts the container:
 
 ```python
 def test_mcp_server_initializes():
@@ -228,7 +228,7 @@ def test_mcp_server_initializes():
         print("MCP server started successfully")
 ```
 
-3. Add socket attachment and initialization:
+Attach to the container's stdio streams to communicate with the MCP server. The MCP protocol uses JSON-RPC 2.0 messages over stdin/stdout:
 
 ```python
         # Attach to container stdin/stdout
@@ -250,7 +250,7 @@ def test_mcp_server_initializes():
         print(f"Server info: {response['result']['serverInfo']}")
 ```
 
-4. Complete the initialization handshake:
+Complete the initialization handshake:
 
 ```python
         # Send initialized notification
@@ -298,13 +298,13 @@ Now extend your test to verify an MCP tool. This is a hands-on challenge.
 
 **Your task**: Add code to your test function that:
 
-1. Sends the `CHECK_IMAGE_REQUEST` from your constants file
-2. Reads the response
-3. Verifies the response matches `EXPECTED_CHECK_IMAGE_RESPONSE`
+- Sends the `CHECK_IMAGE_REQUEST` from your constants file
+- Reads the response
+- Verifies the response matches `EXPECTED_CHECK_IMAGE_RESPONSE`
 
 **Hints**:
 - Use `raw_socket.sendall(encode_mcp_message(...))` to send requests
-- Use `read_mcp_message(raw_socket, timeout=60)` to read responses (tool calls take longer)
+- Use `read_mcp_message(raw_socket, timeout=60)` to read responses (tool calls take longer than initialization)
 - The response structure is `response["result"]["structuredContent"]`
 
 After attempting this yourself, you can compare your solution with the implementation in [mcp-local/tests/test_mcp.py](https://github.com/arm/mcp/blob/main/mcp-local/tests/test_mcp.py)
@@ -317,12 +317,12 @@ After attempting this yourself, you can compare your solution with the implement
 
 **Socket connection errors**: Ensure `stdin_open=True` is set in `with_kwargs()`.
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 In this section:
-- You built a test suite from scratch, understanding each component.
-- You learnt how MCP servers communicate using JSON-RPC over stdio.
-- You created helper functions to handle Docker socket communication.
-- You wrote and ran integration tests using pytest.
+- You built a test suite from scratch, understanding each component
+- You learned how MCP servers communicate using JSON-RPC over stdio
+- You created helper functions to handle Docker socket communication
+- You wrote and ran integration tests using pytest
 
-In the next section, you will configure GitHub Actions to run these tests automatically in your CI/CD pipeline.
+In the next section, you'll configure GitHub Actions to run these tests automatically in your CI/CD pipeline.

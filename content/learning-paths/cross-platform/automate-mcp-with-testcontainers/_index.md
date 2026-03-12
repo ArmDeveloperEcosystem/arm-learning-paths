@@ -1,9 +1,5 @@
 ---
-title: Automate MCP Server testing using Pytest and Testcontainers
-
-draft: true
-cascade:
-    draft: true
+title: Automate MCP server testing using Pytest and Testcontainers
 
 minutes_to_complete: 60
 
@@ -61,6 +57,7 @@ further_reading:
         title: PyTest Documentation
         link: https://docs.pytest.org/
         type: documentation
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
