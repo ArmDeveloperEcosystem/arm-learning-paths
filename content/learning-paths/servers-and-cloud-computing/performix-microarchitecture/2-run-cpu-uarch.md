@@ -30,9 +30,9 @@ int main(){
 }
 ```
 
-On your host machine, open Arm Performix and select the **Topdown** recipe.
+On your host machine, open Arm Performix and select the **CPU Microarchitecture** recipe.
 
-![config](./topdown-config.jpg)
+![config](./cpu-uarch-config.jpg)
 
 Select the target you configured in the setup phase. If this is your first run on this target, you likely need to select **Install Tools** to copy collection tools to the target. Next, select the **Workload type**. You can sample the whole system or attach to an existing process, but in this exercise you launch a new process.
 
@@ -52,13 +52,13 @@ Select **Run Recipe** to launch the workload and collect performance data.
 
 Performix generates a high-level instruction pipeline view, highlighting where most time is spent.
 
-![topdown-results.jpg](topdown-results.jpg)
+![cpu-uarch-results.jpg](cpu-uarch-results.jpg)
 
 In this breakdown, Backend Stalls dominate samples. Within that category, work is split between Load Operations and integer and floating-point operations.
 There is no measured SIMD activity, even though this workload is highly parallelizable.
 
 The **Insights** panel highlights ALU contention as a likely improvement opportunity.
 
-![topdown-insights.jpg](topdown-insights.jpg)
+![cpu-uarch-insights.jpg](cpu-uarch-insights.jpg)
 
 To inspect executed instruction types in more detail, use the Instruction Mix recipe in the next step.

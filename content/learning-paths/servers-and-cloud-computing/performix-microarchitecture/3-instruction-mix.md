@@ -63,7 +63,7 @@ sys     0m0.016s
 ## CPU Microarchitecture results comparison
 
 The CPU Microarchitecture recipe also supports a **Compare** view that shows percentage-point changes in each stage and instruction type.
-![topdown-simd-results-diff.jpg](topdown-simd-results-diff.jpg)
+![cpu-uarch-simd-results-diff.jpg](cpu-uarch-simd-results-diff.jpg)
 
 You can now see that Load and Store operations account for about 70% of execution time. **Insights** offers several explanations because multiple issues can contribute to the root cause.
 ```
