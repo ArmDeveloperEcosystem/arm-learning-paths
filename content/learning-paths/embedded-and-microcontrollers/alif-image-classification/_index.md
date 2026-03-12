@@ -1,6 +1,10 @@
 ---
 title: Run image classification on an Alif Ensemble E8 DevKit with ExecuTorch and Ethos-U85
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 120
 
 who_is_this_for: This Learning Path is for embedded developers who want to deploy a neural network on an Arm Cortex-M55 microcontroller with an Ethos-U85 NPU. You will compile a MobileNetV2 model using ExecuTorch, embed it into bare-metal firmware, and run image classification on the Alif Ensemble E8 DevKit.
