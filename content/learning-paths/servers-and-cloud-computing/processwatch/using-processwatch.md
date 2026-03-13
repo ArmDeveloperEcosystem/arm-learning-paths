@@ -29,61 +29,61 @@ Compile the workload without applying any optimizations:
 ```bash
 aarch64-linux-gnu-gcc workload.c -o workload_none -O0
 ```
-Now, run the workload in the background and launch `processwatch` on the workload to detect the use of Neon and SVE instructions:
+Now, run the workload in the background and launch `processwatch` on the workload to detect the use of  and SVE instructions:
 ```bash
 ./workload_none &
 [1] 126958
 
-sudo ./processwatch -p 126958 -f HasNEON -f HasSVEorSME
+sudo ./processwatch -p 126958 -f Has -f HasSVEorSME
 ```
 You will need to change the PID in the `processwatch` command with the PID of the workload running in the background.
 
 The output should look like:
 ```output
-PID      NAME             NEON     SVEorSME %TOTAL   TOTAL
+PID      NAME                  SVEorSME %TOTAL   TOTAL
 ALL      ALL              0.00     0.00     100.00   24726
 126958   workload_none    0.00     0.00     100.00   24726
 
-PID      NAME             NEON     SVEorSME %TOTAL   TOTAL
+PID      NAME                  SVEorSME %TOTAL   TOTAL
 ALL      ALL              0.00     0.00     100.00   26006
 126958   workload_none    0.00     0.00     100.00   26006
 ^C
 ```
 
-You can see that in this case, the workload is not making use of Neon or SVE instructions.
+You can see that in this case, the workload is not making use of  or SVE instructions.
 
-## Case 2: Use Neon instructions
-Now recompile the same workload to make use of Neon instructions:
+## Case 2: Use  instructions
+Now recompile the same workload to make use of  instructions:
 
 ```bash
-aarch64-linux-gnu-gcc workload.c -o workload_neon  -O2 -ftree-vectorize -march=armv8.6-a
+aarch64-linux-gnu-gcc workload.c -o workload_  -O2 -ftree-vectorize -march=armv8.6-a
 ```
-Run the workload in the background and launch `processwatch` on the workload to detect the use of Neon and SVE instructions:
+Run the workload in the background and launch `processwatch` on the workload to detect the use of  and SVE instructions:
 ```bash
-./workload_neon &
+./workload_ &
 [1] 126987
 
-sudo ./processwatch -p 126987 -f HasNEON -f HasSVEorSME
+sudo ./processwatch -p 126987 -f Has -f HasSVEorSME
 ```
 You will need to change the PID in the `processwatch` command with the PID of the workload running in the background.
 
 The output should look like:
 ```output
-PID      NAME             NEON     SVEorSME %TOTAL   TOTAL
+PID      NAME                  SVEorSME %TOTAL   TOTAL
 ALL      ALL              31.75    0.00     100.00   24828
-126987   workload_neon    31.75    0.00     100.00   24828
+126987   workload_    31.75    0.00     100.00   24828
 
-PID      NAME             NEON     SVEorSME %TOTAL   TOTAL
+PID      NAME                  SVEorSME %TOTAL   TOTAL
 ALL      ALL              32.45    0.00     100.00   26143
-126987   workload_neon    32.45    0.00     100.00   26143
+126987   workload_    32.45    0.00     100.00   26143
 ^C
 ```
-You can now see the workload is retiring Neon instructions as you would expect.
+You can now see the workload is retiring  instructions as you would expect.
 
-You can run `objdump` on the binary to view the disassembled Neon instructions:
+You can run `objdump` on the binary to view the disassembled  instructions:
 
 ```bash
-objdump -S workload_neon
+objdump -S workload_
 ```
 The output should look like:
 ```output
@@ -108,22 +108,22 @@ Recompile the workload again. This time include support for SVE instructions:
 ```bash
 aarch64-linux-gnu-gcc workload.c -o workload_sve  -O2 -ftree-vectorize -march=armv8.5-a+sve
 ```
-Run the workload in the background and launch `processwatch` on the workload to detect the use of Neon and SVE instructions:
+Run the workload in the background and launch `processwatch` on the workload to detect the use of  and SVE instructions:
 ```bash
 ./workload_sve &
 [1] 126997
 
-sudo ./processwatch -p 126997 -f HasNEON -f HasSVEorSME
+sudo ./processwatch -p 126997 -f Has -f HasSVEorSME
 ```
 You will need to change the PID in the `processwatch` command with the PID of the workload running in the background.
 
 The output should look like:
 ```output
-PID      NAME             Neon     SVEorSME %TOTAL   TOTAL
+PID      NAME             NEON     SVEorSME %TOTAL   TOTAL
 ALL      ALL              0.00     96.68    100.00   24914
 126997   workload_sve     0.00     96.68    100.00   24914
 
-PID      NAME             Neon     SVEorSME %TOTAL   TOTAL
+PID      NAME             NEON     SVEorSME %TOTAL   TOTAL
 ALL      ALL              0.00     96.74    100.00   26137
 126997   workload_sve     0.00     96.74    100.00   26137
 ^C
