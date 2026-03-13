@@ -8,7 +8,7 @@ layout: learningpathall
 
 
 ### Environment setup
-On your AArch64 Linux bare-metal instance, navigate to your home directory (or another empty working directory) and create a file named `bsort.cpp` with the following content:
+On your AArch64 Linux machine, navigate to your home directory (or another empty working directory) and create a file named `bsort.cpp` with the following content:
 
 ```cpp
 #include <stdio.h>
