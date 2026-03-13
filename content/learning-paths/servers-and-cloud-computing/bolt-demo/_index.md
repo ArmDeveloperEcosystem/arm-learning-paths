@@ -7,23 +7,23 @@ cascade:
 
 minutes_to_complete: 20
 
-who_is_this_for: This is an introductory topic for performance‑minded developers
-    who have a compiled aarch64 Linux program and want to see if BOLT can make it run faster.
+who_is_this_for: This learning path is intended for developers who have compiled an AArch64 Linux application and want to evaluate whether LLVM BOLT can improve its runtime performance.
+
 
 learning_objectives:
     - Identify whether a program is a good candidate for code layout optimization
-    - Apply BOLT to optimize a small program with poor spatial locality
-    - Use different profiling techniques, including BRBE, Instrumentation, SPE, and PMU events
-    - Verify the impact of BOLT optimization using performance metrics
+    - Use LLVM BOLT to perform profile-guided post-link optimization of an AArch64 binary with poor spatial locality
+    - Collect profile data using multiple techniques, including BRBE, instrumentation, SPE, and PMU event sampling
+    - Evaluate the impact of BOLT optimizations using performance metrics and profiling data
 
 
 prerequisites:
-    - An AArch64 system running Linux with [Perf](/install-guides/perf/) installed
-    - Linux kernel version 6.17 or later for [BRBE](./brbe) profiling
-    - Linux kernel version 6.14 or later for [SPE](./spe) profiling
-    - GCC version 13.3 or later to compile the demo program ([GCC](/install-guides/gcc/) )
-    - BOLT version [21.1.8](https://github.com/llvm/llvm-project/releases/tag/llvmorg-21.1.8) or later (download [zip](https://github.com/llvm/llvm-project/releases/download/llvmorg-21.1.8/LLVM-21.1.8-Linux-ARM64.tar.xz))
-    - A system with enough performance counters for the [TopDown](/install-guides/topdown-tool) methodology, typically a non-virtualized instance
+    - An AArch64 system running Linux with [perf](/install-guides/perf/) installed
+    - Linux kernel version 6.17 or later to enable Branch Record Buffer Extension [BRBE](./brbe) profiling
+    - Linux kernel version 6.14 or later for Arm Statistical Profiling Extension [SPE](./spe) support
+    - GCC version 13.3 or later to compile the example program ([GCC](/install-guides/gcc/) )
+    - LLVM BOLT version [21.1.8](https://github.com/llvm/llvm-project/releases/tag/llvmorg-21.1.8) or later (download [zip](https://github.com/llvm/llvm-project/releases/download/llvmorg-21.1.8/LLVM-21.1.8-Linux-ARM64.tar.xz))
+    - A system with with sufficient hardware performance counters to use the [TopDown](/install-guides/topdown-tool) methodology. This typically requires running on bare metal rather than a virtualized environment.
 
 
 author: Paschalis Mpeis
