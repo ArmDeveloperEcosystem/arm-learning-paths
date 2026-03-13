@@ -24,7 +24,7 @@ cd sobel-simd-opencv
 
 ## x86 intrinsics porting
 
-To port the AVX intrinsics, you can use SIMD Everywhere ([SIMDe](https://github.com/simd-everywhere/simde)). By using SIMDe you can keep the AVX intrinsics in the source code and the intrinsics will be replaced by NEON instructions. 
+To port the AVX intrinsics, you can use SIMD Everywhere ([SIMDe](https://github.com/simd-everywhere/simde)). By using SIMDe you can keep the AVX intrinsics in the source code and the intrinsics will be replaced by Neon instructions. 
 
 Start by cloning the SIMDe repository:
 

@@ -88,7 +88,7 @@ int main(int argc, char** argv) {
 }
 ```
 
-In the original implementation constants 128, 255, and 0 were implicitly treated as integers. Here, the threshold value (128) and output values (255, 0) are explicitly cast to uint8_t. This approach removes ambiguity and clearly specifies the types used, ensuring compatibility and clarity. Both approaches result in identical functionality, but explicitly casting helps emphasize the type correctness and may avoid subtle issues during cross-compilation or in certain environments. Additionally, explicit uint8_t casts help avoid implicit promotion to 32-bit integers (and the corresponding narrowings back to 8-bit) in the generated code, reducing redundant cast operations and potential vector widen/narrow overhead—especially on Arm/NEON.
+In the original implementation constants 128, 255, and 0 were implicitly treated as integers. Here, the threshold value (128) and output values (255, 0) are explicitly cast to uint8_t. This approach removes ambiguity and clearly specifies the types used, ensuring compatibility and clarity. Both approaches result in identical functionality, but explicitly casting helps emphasize the type correctness and may avoid subtle issues during cross-compilation or in certain environments. Additionally, explicit uint8_t casts help avoid implicit promotion to 32-bit integers (and the corresponding narrowings back to 8-bit) in the generated code, reducing redundant cast operations and potential vector widen/narrow overhead—especially on Arm/Neon.
 
 The program takes at least one command-line argument, the output base name used to generate the files (for example, "blur_threshold_android"). Here, the target architecture is explicitly set within the code to Android ARM64:
 

@@ -269,5 +269,5 @@ Typical outcome after SME2:
 
 If data movement dominates after SME2, focus optimizations on transpose elimination to reduce layout changes, layout optimization to choose layouts that minimize copies, and memory access patterns to reduce cache misses.
 
-Use trace-enabled runs to confirm which kernel variants were selected (for example, SME2-enabled kernels vs NEON). Remember: trace-enabled runs are evidence-gathering only and shouldn't be used for direct latency comparisons.
+Use trace-enabled runs to confirm which kernel variants were selected (for example, SME2-enabled kernels vs Neon). Remember: trace-enabled runs are evidence-gathering only and shouldn't be used for direct latency comparisons.
 

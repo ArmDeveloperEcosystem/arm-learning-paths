@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Using Process Watch
-You can use Process Watch to determine the presence or absence of certain instructions. In this section, you will use Process Watch to detect the use of NEON and SVE instructions by this example workload. Start by saving the simple workload shown below in a file name `workload.c`:
+You can use Process Watch to determine the presence or absence of certain instructions. In this section, you will use Process Watch to detect the use of Neon and SVE instructions by this example workload. Start by saving the simple workload shown below in a file name `workload.c`:
 ```C
 #include <stdint.h>
 #define LEN 1024
@@ -29,7 +29,7 @@ Compile the workload without applying any optimizations:
 ```bash
 aarch64-linux-gnu-gcc workload.c -o workload_none -O0
 ```
-Now, run the workload in the background and launch `processwatch` on the workload to detect the use of NEON and SVE instructions:
+Now, run the workload in the background and launch `processwatch` on the workload to detect the use of Neon and SVE instructions:
 ```bash
 ./workload_none &
 [1] 126958
@@ -50,15 +50,15 @@ ALL      ALL              0.00     0.00     100.00   26006
 ^C
 ```
 
-You can see that in this case, the workload is not making use of NEON or SVE instructions.
+You can see that in this case, the workload is not making use of Neon or SVE instructions.
 
-## Case 2: Use NEON instructions
-Now recompile the same workload to make use of NEON instructions:
+## Case 2: Use Neon instructions
+Now recompile the same workload to make use of Neon instructions:
 
 ```bash
 aarch64-linux-gnu-gcc workload.c -o workload_neon  -O2 -ftree-vectorize -march=armv8.6-a
 ```
-Run the workload in the background and launch `processwatch` on the workload to detect the use of NEON and SVE instructions:
+Run the workload in the background and launch `processwatch` on the workload to detect the use of Neon and SVE instructions:
 ```bash
 ./workload_neon &
 [1] 126987
@@ -78,9 +78,9 @@ ALL      ALL              32.45    0.00     100.00   26143
 126987   workload_neon    32.45    0.00     100.00   26143
 ^C
 ```
-You can now see the workload is retiring NEON instructions as you would expect.
+You can now see the workload is retiring Neon instructions as you would expect.
 
-You can run `objdump` on the binary to view the disassembled NEON instructions:
+You can run `objdump` on the binary to view the disassembled Neon instructions:
 
 ```bash
 objdump -S workload_neon
@@ -108,7 +108,7 @@ Recompile the workload again. This time include support for SVE instructions:
 ```bash
 aarch64-linux-gnu-gcc workload.c -o workload_sve  -O2 -ftree-vectorize -march=armv8.5-a+sve
 ```
-Run the workload in the background and launch `processwatch` on the workload to detect the use of NEON and SVE instructions:
+Run the workload in the background and launch `processwatch` on the workload to detect the use of Neon and SVE instructions:
 ```bash
 ./workload_sve &
 [1] 126997
@@ -119,11 +119,11 @@ You will need to change the PID in the `processwatch` command with the PID of th
 
 The output should look like:
 ```output
-PID      NAME             NEON     SVEorSME %TOTAL   TOTAL
+PID      NAME             Neon     SVEorSME %TOTAL   TOTAL
 ALL      ALL              0.00     96.68    100.00   24914
 126997   workload_sve     0.00     96.68    100.00   24914
 
-PID      NAME             NEON     SVEorSME %TOTAL   TOTAL
+PID      NAME             Neon     SVEorSME %TOTAL   TOTAL
 ALL      ALL              0.00     96.74    100.00   26137
 126997   workload_sve     0.00     96.74    100.00   26137
 ^C

@@ -48,8 +48,8 @@ This organized structure enables you to browse through SIMD instruction sets acr
             - Boolean AND NOT 32-bit float 
             - Boolean AND NOT 32-bit signed integers 
                 - AVX512: mm512_andnot_epi32 
-                - NEON: vbic_s32
-                - NEON: vbicq_s32 
+                - Neon: vbic_s32
+                - Neon: vbicq_s32 
                 - VSX: vec_andc 
         - Bit Clear 
         - XOR
@@ -57,7 +57,7 @@ This organized structure enables you to browse through SIMD instruction sets acr
 #### Advanced search functionality
 With its robust search engine, SIMD.info allows you to either search for a specific intrinsic, for example `vaddq_f64`, or enter more general terms, for example "How to add 2 vectors," and it returns a list of the corresponding intrinsics. 
 
-You can also filter results based on the specific engine you're working with, such as NEON, SSE4.2, AVX, AVX512, or VSX. This functionality streamlines the process of finding the right commands tailored to your needs.
+You can also filter results based on the specific engine you're working with, such as Neon, SSE4.2, AVX, AVX512, or VSX. This functionality streamlines the process of finding the right commands tailored to your needs.
 
 #### Comparison tools
 This feature lets you directly compare SIMD instructions from different, or the same, platforms side by side, offering a clear view of the similarities and differences. It's a helpful tool for porting code across architectures, as it ensures accuracy and efficiency.
