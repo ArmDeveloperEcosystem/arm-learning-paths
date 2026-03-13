@@ -1,5 +1,5 @@
 ---
-title: Introduction to MCP Server Testing
+title: Introduction to MCP server testing
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -16,37 +16,37 @@ The Arm MCP Server provides AI assistants with tools and knowledge specifically 
 
 MCP servers expose multiple tools that AI assistants can invoke. As these tools evolve, you need reliable automated tests to:
 
-- Verify that each tool responds correctly to valid requests.
-- Catch regressions when updating server code or dependencies.
-- Validate container startup and communication protocols.
-- Ensure compatibility across different environments.
+- Verify that each tool responds correctly to valid requests
+- Catch regressions when updating server code or dependencies
+- Validate container startup and communication protocols
+- Ensure compatibility across different environments
 
-## Understanding Testcontainers
+## Understanding Testcontainers for Python
 
 Testcontainers is a Python library that provides lightweight, throwaway instances of Docker containers for testing. Instead of mocking your MCP server, you can spin up the actual Docker container, run tests against it, and tear it down automatically.
 
-![Diagram showing Testcontainers workflow: test code creates a Docker container, runs tests against it, and automatically tears it down after completion#center](testcontainers.png "Figure 1. Testcontainers Flow")
+![Diagram showing Testcontainers workflow: test code creates a Docker container, runs tests against it, and automatically tears it down after completion alt-txt#center](testcontainers.png "Testcontainers flow")
 
 This approach offers several benefits:
 
-- **Realistic testing**: Tests run against the actual server implementation.
-- **Isolation**: Each test run gets a fresh container instance.
-- **Reproducibility**: Tests behave consistently across development machines and CI environments.
-- **No external dependencies**: Tests don't require a pre-deployed server.
+- Realistic testing: tests run against the actual server implementation
+- Isolation: each test run gets a fresh container instance
+- Reproducibility: tests behave consistently across development machines and CI environments
+- No external dependencies: tests don't require a pre-deployed server
 
 ## What you will build
 
-In this Learning Path, you will create an integration test suite that:
+In this Learning Path, you'll create an integration test suite that:
 
-1. Starts the Arm MCP server in a Docker container using Testcontainers.
-2. Communicates with the server using the MCP stdio transport protocol.
-3. Tests multiple MCP tools including container image checking, knowledge base search, and code analysis.
-4. Integrates with GitHub Actions for continuous testing.
+- Starts the Arm MCP server in a Docker container using Testcontainers
+- Communicates with the server using the MCP stdio transport protocol
+- Tests multiple MCP tools including container image checking, knowledge base search, and code analysis
+- Integrates with GitHub Actions for continuous testing
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 In this section:
-- You learned what MCP servers are and why automated testing matters.
-- You discovered how Testcontainers enable realistic integration testing.
+- You learned what MCP servers are and why automated testing matters
+- You discovered how Testcontainers enable realistic integration testing
 
-In the next section, you will set up your development environment and install the required dependencies.
+In the next section, you'll set up your development environment and install the required dependencies.

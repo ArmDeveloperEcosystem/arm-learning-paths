@@ -79,6 +79,6 @@ You can draw the following conclusions:
   * see [aarch64 options](https://gcc.gnu.org/onlinedocs/gcc/AArch64-Options.html) for compatible compiler options
 * The AVX intrinsics need to ported to utilize Arm SIMD intrinsics
   * Arm has three SIMD technologies
-    * [NEON](https://developer.arm.com/documentation/den0018/a)
+    * [Neon](https://developer.arm.com/documentation/den0018/a)
     * Scalable Vector Extension ([SVE](https://developer.arm.com/documentation/102131/0100/?lang=en))
     * Scalable Vector Extension version 2 ([SVE2](https://developer.arm.com/documentation/102340/0100/Introducing-SVE2?lang=en))

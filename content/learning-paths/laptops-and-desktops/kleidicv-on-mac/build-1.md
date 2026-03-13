@@ -159,7 +159,7 @@ Here are the most important options for Arm systems:
 
 You can set these options when running `cmake` to customize your build for your hardware and use case.
 
-KleidiCV automatically selects the fastest available code path for your hardware. If the library detects that SVE2 (Scalable Vector Extension 2) or SME2 (Scalable Matrix Extension 2) is slower than NEON for a specific function, it defaults to NEON—unless you explicitly turn off this behavior by setting `-DKLEIDICV_LIMIT_SVE2_TO_SELECTED_ALGORITHMS=OFF` or `-DKLEIDICV_LIMIT_SME2_TO_SELECTED_ALGORITHMS=OFF`.
+KleidiCV automatically selects the fastest available code path for your hardware. If the library detects that SVE2 (Scalable Vector Extension 2) or SME2 (Scalable Matrix Extension 2) is slower than Neon for a specific function, it defaults to Neon—unless you explicitly turn off this behavior by setting `-DKLEIDICV_LIMIT_SVE2_TO_SELECTED_ALGORITHMS=OFF` or `-DKLEIDICV_LIMIT_SME2_TO_SELECTED_ALGORITHMS=OFF`.
 
 ## Build the KleidiCV standalone
 

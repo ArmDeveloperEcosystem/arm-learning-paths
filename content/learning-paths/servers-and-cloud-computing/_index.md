@@ -174,7 +174,7 @@ tools_software_languages_filter:
 - mongotop: 1
 - mpi: 1
 - MySQL: 10
-- NEON: 7
+- Neon: 7
 - Networking: 1
 - Nexmark: 1
 - NGINX: 5

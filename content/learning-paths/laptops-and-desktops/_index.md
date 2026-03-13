@@ -61,7 +61,7 @@ tools_software_languages_filter:
 - llvm-mca: 1
 - MSBuild: 1
 - MTE: 1
-- NEON: 1
+- Neon: 1
 - Neovim: 1
 - Node.js: 3
 - ONNX Runtime: 1

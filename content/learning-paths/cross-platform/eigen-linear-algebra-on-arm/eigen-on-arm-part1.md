@@ -63,7 +63,7 @@ sys     0m0.000s
 
 ### Testing on ASIMD
 
-To compare with the SIMD (ASIMD/NEON in the case of Arm), remove the define from compilation and run the same way:
+To compare with the SIMD (ASIMD/Neon in the case of Arm), remove the define from compilation and run the same way:
 
 
 ```bash  { output_lines = "3-7" }
