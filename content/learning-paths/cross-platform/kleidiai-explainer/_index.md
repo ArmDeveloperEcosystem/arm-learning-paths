@@ -24,7 +24,7 @@ armips:
 tools_software_languages:
     - CPP
     - Generative AI
-    - NEON
+    - Neon
     - Runbook
 
 operatingsystems:

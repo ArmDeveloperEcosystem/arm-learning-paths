@@ -142,7 +142,7 @@ When running on a Graviton4 c8g.large instance with Ubuntu 24.04, the results sh
 
 ### Execution time (ms)
 
-| Density | Set Bits | Scalar Generic | Scalar Optimized | NEON  | SVE	      |
+| Density | Set Bits | Scalar Generic | Scalar Optimized | Neon  | SVE	      |
 |---------|----------|----------------|------------------|-------|------------|
 | 0.0000  | 0        | 7.169          | 0.456            | 0.056 | 0.093      |
 | 0.0001  | 1,000    | 7.176          | 0.477            | 0.090 | 0.109      |
@@ -152,7 +152,7 @@ When running on a Graviton4 c8g.large instance with Ubuntu 24.04, the results sh
 
 ### Speed-up vs generic scalar
 
-| Density | Scalar Optimized | NEON    | SVE        |
+| Density | Scalar Optimized | Neon    | SVE        |
 |---------|------------------|---------|------------|
 | 0.0000  | 15.72x           | 127.41x | 77.70x     |
 | 0.0001  | 15.05x           | 80.12x  | 65.86x     |
@@ -172,27 +172,27 @@ The optimized scalar implementation shows significant improvements over the gene
 * **Reduced Function Calls**: accessing bits directly rather than through function calls
 * **Better Cache Utilization**: more sequential memory access patterns
 
-### Optimized scalar vs NEON
+### Optimized scalar vs Neon
 
-The NEON implementation shows further improvements over the optimized scalar implementation for sparse bit vectors due to:
+The Neon implementation shows further improvements over the optimized scalar implementation for sparse bit vectors due to:
 
 * **Chunk-level Skipping**: quickly skipping 16 empty bytes at once
 * **Vectorized Comparison**: checking multiple bytes in parallel
 * **Early Termination**: quickly determining if a chunk contains any set bits
 
-### NEON vs SVE
+### Neon vs SVE
 
-The performance comparison between NEON and SVE depends on the bit density:
+The performance comparison between Neon and SVE depends on the bit density:
 
 *  **Very Sparse Bit Vectors (0% - 0.01% density)**:
-   - NEON performs better for empty bitvectors due to lower overhead
-   - NEON achieves up to 127.41x speedup over generic scalar
+   - Neon performs better for empty bitvectors due to lower overhead
+   - Neon achieves up to 127.41x speedup over generic scalar
    - SVE performs better for very sparse bitvectors (0.001% density)
    - SVE achieves up to 29.07x speedup over generic scalar at 0.001% density
 
 * **Higher Density Bit Vectors (0.1% - 10% density)**:
-   - SVE consistently outperforms NEON
-   - SVE achieves up to 1.66x speedup over NEON at 0.01% density
+   - SVE consistently outperforms Neon
+   - SVE achieves up to 1.66x speedup over Neon at 0.01% density
 
 ### Key optimizations in SVE implementation
 
@@ -210,7 +210,7 @@ The SVE implementation includes several key optimizations:
 
 ## Next up: apply what you’ve learned to real-world workloads
 
-Now that you’ve benchmarked all four bitmap scanning implementations—scalar (generic and optimized), NEON, and SVE—you have a data-driven understanding of how vectorization impacts performance across different bitmap densities.
+Now that you’ve benchmarked all four bitmap scanning implementations—scalar (generic and optimized), Neon, and SVE—you have a data-driven understanding of how vectorization impacts performance across different bitmap densities.
 
 In the next section, you’ll explore how to apply these techniques in real-world database workloads, including:
 

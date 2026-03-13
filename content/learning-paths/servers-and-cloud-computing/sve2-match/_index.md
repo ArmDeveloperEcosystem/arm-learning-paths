@@ -32,7 +32,7 @@ operatingsystems:
 - Linux
 tools_software_languages:
 - SVE2
-- NEON
+- Neon
 - Runbook
 
 further_reading:

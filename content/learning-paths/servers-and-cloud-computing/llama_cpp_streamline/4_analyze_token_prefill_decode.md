@@ -120,7 +120,7 @@ By checking the string of Annotation Marker, the first token generation at Prefi
 
 You can see that the first token generated at the Prefill stage takes more time since 78 input tokens have to be processed at the Prefill stage, performing lots of GEMM operations. At the Decode stage, tokens are generated one by one at mostly equal speed; one token takes less time than that of the Prefill stage, thanks to the effect of KV cache. At the Decode stage, it performs many GEMV operations.
 
-You can further investigate it with PMU event counters that are captured by Streamline. At the Prefill stage, the amount of computation, which is indicated by PMU event counters that count the number of Advanced SIMD (NEON), floating-point, and integer data processing instructions, is large. However, the memory access is relatively low. Especially, the number of L3 cache refill/miss is much lower than that of the Decode stage.
+You can further investigate it with PMU event counters that are captured by Streamline. At the Prefill stage, the amount of computation, which is indicated by PMU event counters that count the number of Advanced SIMD (Neon), floating-point, and integer data processing instructions, is large. However, the memory access is relatively low. Especially, the number of L3 cache refill/miss is much lower than that of the Decode stage.
 
 At Decode stage, the amount of computation is relatively less (since the time of each token is less), but the number of L3 cache refills/misses increases significantly.
 
@@ -137,7 +137,7 @@ In the Functions view of Streamline, you can see the overall percentage of runni
 
 ![Screenshot of Streamline Functions view displaying execution time percentages for different functions during llama.cpp execution alt-text#center](images/annotation_prefill_functions.png "Functions view")
 
-As you can see, the function, graph_compute, takes the largest portion of the running time. It shows that large amounts of GEMM and GEMV operations take most of the time. With the `Qwen1_5-0_5b-chat-q4_0` model, the computation (GEMM and GEMV) of Q, K, V vectors and most of FFN layers: their weights are with Q4_0 data type and the input activations are with FP32 data type. The computation is forwarded to KleidiAI trait by `ggml_cpu_extra_compute_forward`. KleidiAI microkernels implemented with NEON dot product and i8mm vector instructions accelerate the computation.
+As you can see, the function, graph_compute, takes the largest portion of the running time. It shows that large amounts of GEMM and GEMV operations take most of the time. With the `Qwen1_5-0_5b-chat-q4_0` model, the computation (GEMM and GEMV) of Q, K, V vectors and most of FFN layers: their weights are with Q4_0 data type and the input activations are with FP32 data type. The computation is forwarded to KleidiAI trait by `ggml_cpu_extra_compute_forward`. KleidiAI microkernels implemented with Neon dot product and i8mm vector instructions accelerate the computation.
 
 At the Prefill stage, `kai_run_matmul_clamp_f32_qsi8d32p4x8_qsi4c32p4x8_16x4_neon_i8mm` KleidiAI ukernel is used for GEMM (Matrix Multiply) operators. It takes advantage of i8mm instructions. Since the Prefill stage only takes a small percentage of the whole time, the percentage of this function is small as shown in figures above. However, if you focus only on the Prefill stage with Samplings view in Timeline, you see `kai_run_matmul_clamp_f32_qsi8d32p4x8_qsi4c32p4x8_16x4_neon_i8mm` takes the largest portion of the Prefill stage.
 

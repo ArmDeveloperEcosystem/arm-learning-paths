@@ -182,7 +182,7 @@ Next, configure the project:
 Set `CMAKE_C_COMPILER` and `CMAKE_CXX_COMPILER` to your cross compiler path. Make sure that -march in `CMAKE_C_FLAGS` and `CMAKE_CXX_FLAGS` matches your Arm CPU hardware. 
 
 
-With the flags above you can run `llama-cli` on an Arm CPU that supports NEON dot product and 8-bit integer multiply (i8mm) instructions.  
+With the flags above you can run `llama-cli` on an Arm CPU that supports Neon dot product and 8-bit integer multiply (i8mm) instructions.  
 
 The `-static` and `-g` options are also specified to produce a statically linked executable, so it can run on different Arm64 Linux/Android environments without needing shared libraries and to include debug information, which makes source code and function-level profiling in Streamline much easier.  
 

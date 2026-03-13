@@ -94,14 +94,14 @@ Searching knowledge base for: AVX2 to NEON intrinsic conversion
 The Arm MCP knowledge base provides documented guidance on intrinsic mapping and architecture considerations.
 Example mappings:
 
-| x86 AVX2 Intrinsic | Arm NEON Equivalent |
+| x86 AVX2 Intrinsic | Arm Neon Equivalent |
 |---------------------|---------------------|
 | `_mm256_setzero_pd()` | Two `vdupq_n_f64(0.0)` operations |
 | `_mm256_loadu_pd()` | Two `vld1q_f64()` loads |
 | `_mm256_add_pd()` | Two `vaddq_f64()` operations |
 | `_mm256_mul_pd()` | Two `vmulq_f64()` operations |
 
-Because AVX2 operates on 256-bit vectors (four doubles) and NEON operates on 128-bit vectors (two doubles), Copilot adjusts:
+Because AVX2 operates on 256-bit vectors (four doubles) and Neon operates on 128-bit vectors (two doubles), Copilot adjusts:
   - Loop stride
   - Accumulation logic
   - Horizontal reduction pattern
@@ -142,9 +142,9 @@ After migration, you should see:
 
 **Source code updates**:
 - Added `#ifdef __aarch64__` architecture guards
-- Replaced all `_mm256_*` AVX2 intrinsics with NEON equivalents (`vld1q_f64`, `vaddq_f64`, `vmulq_f64`)
-- Adjusted loop strides from 4 (AVX2) to 2 (NEON)
-- Rewrote horizontal reduction using NEON pair-wise addition
+- Replaced all `_mm256_*` AVX2 intrinsics with Neon equivalents (`vld1q_f64`, `vaddq_f64`, `vmulq_f64`)
+- Adjusted loop strides from 4 (AVX2) to 2 (Neon)
+- Rewrote horizontal reduction using Neon pair-wise addition
 
 ## What you've learned and what's next
 

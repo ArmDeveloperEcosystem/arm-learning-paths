@@ -26,7 +26,7 @@ armips:
     - aarch64
     - arm64
     - arm architecture
-    - NEON
+    - Neon
 tools_software_languages:
     - Unity
     - C#

@@ -28,12 +28,12 @@ AWS EC2 instances with Graviton processors use the `aarch64` architecture. Gravi
   * Ubuntu 22.04.2 LTS,
   * 16GB storage (default is 8GB)
   * [Arm Neoverse N1](https://www.arm.com/products/silicon-ip-cpu/neoverse/neoverse-n1)
-    * 2 x NEON engine 128b vector width
+    * 2 x Neon engine 128b vector width
 * Graviton3 (c7g.medium)
   * Ubuntu 22.04.2 LTS
   * 16GB storage (default is 8GB)
   * [Arm Neoverse V1](https://www.arm.com/products/silicon-ip-cpu/neoverse/neoverse-v1)
-    * 2 x SVE engine 256b vector width (4 x NEON engine 128b vector width support)
+    * 2 x SVE engine 256b vector width (4 x Neon engine 128b vector width support)
 
 For more information on Graviton, refer to [Getting Started with AWS](/learning-paths/servers-and-cloud-computing/csp/aws/) and the [AWS Graviton Technical Guide](https://github.com/aws/aws-graviton-getting-started).
 
