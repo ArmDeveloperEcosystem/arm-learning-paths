@@ -71,7 +71,7 @@ Compare Graviton3 and BCM2712 architecture capabilities. What are the key
 differences I need to handle for cloud-to-edge migration?
 ```
 
-For Graviton3 to Pi 5, the Power identifies key differences such as CPU architecture (Neoverse-V1 vs Cortex-A76), available memory (cloud 64 GB+ vs edge 4–8 GB), SIMD capabilities (SVE vs NEON), and peripheral requirements (none vs GPIO/SPI/I2C). The Power analyzes these differences for any Arm SoC pair and identifies the migration challenges you need to address.
+For Graviton3 to Pi 5, the Power identifies key differences such as CPU architecture (Neoverse-V1 vs Cortex-A76), available memory (cloud 64 GB+ vs edge 4–8 GB), SIMD capabilities (SVE vs Neon), and peripheral requirements (none vs GPIO/SPI/I2C). The Power analyzes these differences for any Arm SoC pair and identifies the migration challenges you need to address.
 
 ### Design the Hardware Abstraction Layer (HAL)
 

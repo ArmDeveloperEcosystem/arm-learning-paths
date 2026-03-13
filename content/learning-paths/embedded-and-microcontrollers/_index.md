@@ -85,7 +85,7 @@ tools_software_languages_filter:
 - MCP: 1
 - MPS3: 1
 - MXNet: 1
-- NEON: 1
+- Neon: 1
 - NumPy: 1
 - Ollama: 1
 - Paddle: 1
