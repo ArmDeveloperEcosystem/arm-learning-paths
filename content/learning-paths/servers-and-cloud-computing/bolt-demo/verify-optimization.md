@@ -9,10 +9,10 @@ layout: learningpathall
 ### Verify with runtime
 
 {{% notice Note %}}
-The example below uses a [BRBE](../brbe) optimized binary. The same verification applies to all BOLT profiling methods.
+The example below uses a [BRBE](../brbe) optimized binary. You can apply the same verification steps to binaries optimized using the other BOLT profiling methods.
 {{% /notice %}}
 
-We start by checking the runtime of the original and optimized BubbleSort binaries. A speedup is the first indication that BOLT improved the layout.
+First, compare the runtime of the original and optimized BubbleSort binaries. A shorter runtime provides an initial indication that BOLT improved the code layout.
 
 ```bash { command_line="user@host | 2-4,6-8"}
 time out/bsort
@@ -25,14 +25,14 @@ time out/bsort.opt.brbe
   out/bsort.opt.brbe  0.15s user 0.00s system 99% cpu 0.148 total
 ```
 
-In this example, we see a first indication of improvement from the speedup. It is large, around 2x, because the input program is intentionally pathological. Real applications may see smaller improvements.
+In this example, the optimized binary runs in about 147 ms, compared with 280 ms for the original binary. This corresponds to roughly a 2× speedup.
+The improvement is large because the example program intentionally creates poor code locality. Real applications typically show smaller but still meaningful improvements after BOLT optimization.
 
 
 ### Verify with hardware metrics
-We now apply the [TopDown Methodology](https://developer.arm.com/documentation/109542/02/Arm-Topdown-methodology) again to confirm that BOLT improved the layout.
-Runtime shows the effect, but TopDown confirms how the changes appear in the hardware metrics.
-
-We run the same tool that we used when checking whether the input program was a good candidate, but this time we check the optimized binary, for example the BRBE-optimized one.
+Next, apply the [TopDown Methodology](https://developer.arm.com/documentation/109542/02/Arm-Topdown-methodology) again to verify that BOLT improved the code layout.
+The runtime comparison shows the performance impact, but the TopDown metrics reveal how the optimization affects processor behavior.
+Run the same tool used earlier when evaluating whether the program was a good BOLT candidate. This time, run it on the optimized binary, for example, the BRBE-optimized version.
 
 {{< tabpane code=true >}}
   {{< tab header="topdown-tool" language="bash" output_lines="2-21">}}
@@ -72,10 +72,16 @@ We run the same tool that we used when checking whether the input program was a 
   {{< /tab >}}
 {{< /tabpane >}}
 
-We compare these metrics with the earlier results. Front-end bound and L1I MPKI should be lower after optimization.
+Compare these metrics with the earlier results collected from the original binary. After optimization, both frontend bound and L1I MPKI should decrease.
 
-We now see that the optimized program is **36%** front-end bound, down from 55%. In addition, the L1I MPKI is close to **0**, showing that code layout improved. This result is unusually low because the input program is intentionally pathological.
+In this example, the optimized program is 36% frontend bound, down from 55%. The L1I cache MPKI drops to nearly 0, which indicates a significant improvement in instruction locality. 
 
-The Branch MPKI also dropped to **10** from 16 because BOLT can improve branch prediction by swapping the fall-through and taken paths based on profile data.
+This value is unusually low because the tutorial program intentionally creates poor code locality.
 
-We can also compute these MPKIs manually using `perf stat`, as described in the [Good BOLT Candidates](../good-candidates) page.
+The Branch MPKI also decreases—from 16 to about 10—because BOLT can improve branch prediction. It uses profile data to adjust code layout and swap fall-through and taken paths when beneficial.
+
+You can also compute the MPKI values manually using `perf stat`, as described in the [Good BOLT Candidates](../good-candidates) section.
+
+## Summary
+
+In this learning path, you learned how to use BOLT to optimize binary code layout using several profiling methods. The optimized binaries improved instruction locality, reduced frontend stalls, and delivered measurable performance gains.

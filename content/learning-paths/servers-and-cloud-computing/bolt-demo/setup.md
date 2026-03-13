@@ -8,48 +8,172 @@ layout: learningpathall
 
 
 ### Environment setup
-We start in an empty directory and place the input program [bsort.cpp](../bsort.cpp) there.
-The [last section](#why-bubble-sort) explains why we chose BubbleSort for this tutorial.
+On your AArch64 Linux machine, navigate to your home directory (or another empty working directory) and create a file named `bsort.cpp` with the following content:
 
-We create and use the following directories as needed throughout this guide:
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
+#define ARRAY_LEN 10000
+#define FUNC_COPIES 5
+volatile bool Cond = false;
+#define COND() (__builtin_expect(Cond, true))
+
+#define NOPS(N) \
+  asm volatile( \
+      ".rept %0\n" \
+      "nop\n" \
+      ".endr\n" \
+      : : "i"(N) : "memory")
+
+// Swap functionality plus some cold blocks.
+#define SWAP_FUNC(ID) \
+    static __attribute__((noinline)) \
+    void swap##ID(int *left, int *right) { \
+        if (COND()) NOPS(300); \
+        int tmp = *left; \
+        if (COND()) NOPS(300); else *left = *right; \
+        if (COND()) NOPS(300); else *right = tmp; \
+    }
+
+// Aligned at 16KiB
+#define COLD_FUNC(ID) \
+    static __attribute__((noinline, aligned(16384), used)) \
+    void cold_func##ID(void) { \
+        asm volatile("nop"); \
+    }
+
+// Create copies of swap, and interleave with big chunks of cold code.
+SWAP_FUNC(1) COLD_FUNC(1)
+SWAP_FUNC(2) COLD_FUNC(2)
+SWAP_FUNC(3) COLD_FUNC(3)
+SWAP_FUNC(4) COLD_FUNC(4)
+SWAP_FUNC(5) COLD_FUNC(5)
+
+typedef void (*swap_fty)(int *, int *);
+static swap_fty const swap_funcs[FUNC_COPIES] = {
+    swap1, swap2, swap3, swap4, swap5
+};
+
+
+/* Sorting Logic */
+void bubble_sort(int *a, int n) {
+    if (n <= 1)
+        return;
+
+    int end = n - 1;
+    int swapped = 1;
+    unsigned idx = 0;
+
+    while (swapped && end > 0) {
+        swapped = 0;
+        // pick a different copy of the swap function, in a round-robin fashion
+        // and call it.
+        for (int i = 1; i <= end; ++i) {
+            if (a[i] < a[i - 1]) {
+                auto swap_func = swap_funcs[idx++];
+                idx %= FUNC_COPIES;
+                swap_func(&a[i - 1], &a[i]);
+                swapped = 1;
+            }
+        }
+        --end;
+    }
+}
+
+void sort_array(int *data) {
+    for (int i = 0; i < ARRAY_LEN; ++i) {
+        data[i] = rand();
+    }
+    bubble_sort(data, ARRAY_LEN);
+}
+
+/* Timers, helpers, and main */
+static struct timespec timer_start;
+static inline void start_timer(void) {
+    clock_gettime(CLOCK_MONOTONIC, &timer_start);
+}
+
+static inline void stop_timer(void) {
+    struct timespec timer_end;
+    clock_gettime(CLOCK_MONOTONIC, &timer_end);
+    long long ms = (timer_end.tv_sec - timer_start.tv_sec) * 1000LL +
+                   (timer_end.tv_nsec - timer_start.tv_nsec) / 1000000LL;
+    printf("%lld ms ", ms);
+}
+
+static void print_first_last(const int *data, int n) {
+    if (n <= 0)
+        return;
+
+    const int first = data[0];
+    const int last = data[n - 1];
+    printf("(first=%d last=%d)\n", first, last);
+}
+
+int main(void) {
+    srand(0);
+    printf("Bubble sorting %d elements\n", ARRAY_LEN);
+    int data[ARRAY_LEN];
+
+    start_timer();
+    sort_array(data);
+    stop_timer();
+
+    print_first_last(data, ARRAY_LEN);
+    return 0;
+}
+```
+
+The [last section](#why-bubble-sort) explains why this tutorial uses BubbleSort as the demonstration workload.
+
+Create the following directories to organize generated files from this example:
+```bash
+mkdir -p out prof heatmap
+```
 - **out**: Stores output binaries
 - **prof**: Stores profile data
 - **heatmap**: Stores heatmap visualizations and related metrics
 
 ### Compile the input program {#compile}
-We now compile the input binary.
-Because BOLT and PGO pipelines can include multiple stages, this binary is also called the **stage-0 binary**.
+Next, compile the input program.  
+Because BOLT and other profile-guided optimization pipelines often involve multiple build stages, you will refer to this initial binary as the **stage-0 binary**.
 
-To keep the example useful, we must keep the original function order.
-Small programs like this are simple enough that compilers might reorder functions and improve layout without profile data.
-That behavior is rare in real applications, but it can happen here.
-To keep our example with poor locality, we pass specific options to the relevant toolchain.
+For this example, you must preserve the original function order from the source file. 
+Small programs like this one are simple enough that modern compilers may reorder functions automatically to improve instruction locality, even without profile data. That behavior rarely affects large real-world applications, but it can occur in this example. To ensure the program retains its intentionally poor layout, pass specific options to the compiler and linker.
 
 BOLT works with both LLVM and GNU toolchains.
-GNU (gcc) provides a direct flag that preserves the original order: `-fno-toplevel-reorder`.  
-LLVM (clang) requires an order file that defines the initial layout.
-You can find this file here: [orderfile.txt](../orderfile.txt).
+GNU (gcc) provides a flag that preserves the original order: `-fno-toplevel-reorder`.  
+LLVM Clang does not provide an equivalent flag, so it relies on a symbol ordering file that explicitly defines the initial function layout. Using a file editor of your choice copy the contents below into a file named `orderfile.txt`. 
+```txt
+_ZL5swap1PiS_
+_ZL10cold_func1v
+_ZL5swap2PiS_
+_ZL10cold_func2v
+_ZL5swap3PiS_
+_ZL10cold_func3v
+_ZL5swap4PiS_
+_ZL10cold_func4v
+_ZL5swap5PiS_
+_ZL10cold_func5v
+```
 
-Both approaches are shown below.
-Compile with your preferred toolchain, and ensure that relocations are enabled.
-We explain why they matter [later](#why-relocations) in this tutorial.
+Both approaches to compile the binary are shown. Compile with your preferred toolchain, and ensure that relocations are enabled.
+You will look at why relocations matter [later](#why-relocations) in this Learning Path.
 
 {{< tabpane code=true >}}
   {{< tab header="GNU" language="bash">}}
-mkdir -p out
 gcc bsort.cpp -o out/bsort -O3 -Wl,--emit-relocs -fno-toplevel-reorder
   {{< /tab >}}
   {{< tab header="LLVM" language="bash">}}
-mkdir -p out
 clang bsort.cpp -o out/bsort -O3 -fuse-ld=lld -ffunction-sections -Wl,--emit-relocs -Wl,--symbol-ordering-file=orderfile.txt
   {{< /tab >}}
 {{< /tabpane >}}
 
 ### Verify the function order
-We now verify that the compiler preserved the original function order.
-We do this by inspecting the symbols in the `.text` section.
-The output should list the swap and cold functions interleaved, matching their order in the source file.
+Verify that the compiler preserved the intended function order by inspecting the symbols in the `.text` section of the binary.
+Run the following command:
 
 {{< tabpane code=true >}}
   {{< tab header="GNU" language="bash" output_lines="2-13">}}
@@ -84,10 +208,14 @@ The output should list the swap and cold functions interleaved, matching their o
   {{< /tab >}}
 {{< /tabpane >}}
 
+The output should show the **swap** and **cold** functions interleaved.  
+This layout matches the order in the source file and creates poor instruction locality, which makes the program a good candidate for BOLT optimization.
 
 ### Verify the presence of relocations
-We now verify that the binary includes relocations.
-This can be seen by checking for `.rel*.*` entries in the section table, such as `.rela.text`.
+Verify that the binary contains relocation information.  
+BOLT relies on relocation records to safely modify the binary layout after linking.
+
+Check the ELF section table and confirm that relocation sections such as `.rela.text` appear in the output.
 
 {{< tabpane code=true >}}
   {{< tab header="GNU" language="bash" output_lines="2-13">}}
@@ -120,25 +248,22 @@ This can be seen by checking for `.rel*.*` entries in the section table, such as
   {{< /tab >}}
 {{< /tabpane >}}
 
+Look for relocation sections such as **`.rela.text`** in the output. Their presence confirms that the linker preserved relocation information required by BOLT.
 
 ### Why relocations are important {#why-relocations}
-BOLT relies on relocations to update references after it changes the code layout.
-Without relocations, BOLT is severely limited. For example, function reordering is disabled, which makes code layout optimizations ineffective.
+BOLT uses relocation records to update references after it changes the code layout. When BOLT reorders functions or basic blocks, it must update addresses used by instructions such as calls, branches, and references to code or data. Relocation records identify these locations in the binary so that BOLT can safely rewrite them.
+Without relocations, BOLT cannot reliably adjust these references. As a result, many optimizations become unavailable. For example, BOLT disables function reordering when relocation information is missing, which prevents most code layout optimizations.
 
-Because BOLT runs post-link, it may need to adjust locations that the linker patched in the original binary.
-Relocations describe these locations, so they must be preserved for BOLT to be able to apply its full set of layout optimizations.
-
+Because BOLT operates on fully linked binaries, it must modify addresses that the linker already resolved. Relocations preserve the information needed to update those addresses correctly.
 
 ### Why Bubble Sort?
-Bubble Sort keeps this tutorial simple.
-The code is in one file, has no external dependencies, and runs in a few seconds under instrumentation with a small, fixed workload.
-In its original form it is not a good candidate for code layout optimization.
-To make it one, we add **cold code** blocks between hot paths.
-This reduces code locality, which BOLT improves later.
+Bubble Sort is a simple program with all the code in one file. The program has no external dependencies, and runs in a few seconds under instrumentation with a small, fixed workload.
+In its original form, the program does not benefit much from code layout optimization. To create a more interesting example, instruction locality is intentionally reduced.
+We introduce **cold code paths** between frequently executed code. These cold blocks separate hot instructions in memory and degrade spatial locality. BOLT later improves performance by reorganizing the binary so that hot code paths appear closer together.
 
-The code below shows the changes we introduced to reduce code locality.
+The code below shows how the program was modified to reduce code locality.
 
-The main sort function is shown below. It rotates through 5 copies of the swap function, selecting a different one each time a swap is performed.
+The main sort function rotates through five copies of the swap function. Each time the algorithm performs a swap, it selects the next swap implementation in a round-robin fashion.
 ```cpp  { line_numbers=true linenos=table line_start=48 }
 void bubble_sort(int *a, int n) {
     if (n <= 1)
@@ -164,8 +289,8 @@ void bubble_sort(int *a, int n) {
     }
 }
 ```
+Each swap function is defined using a macro and contains a small cold path that includes several nop instructions.
 
-Each swap function is defined using a macro and includes some nop instructions on a cold path.
 ```cpp  { line_numbers=true linenos=table line_start=18 }
 #define SWAP_FUNC(ID) \
     static __attribute__((noinline)) \
@@ -177,8 +302,8 @@ Each swap function is defined using a macro and includes some nop instructions o
     }
 ```
 
-To further reduce code locality, we place larger cold functions between hot ones.
-These cold functions are also defined using a macro and consist entirely of nop instructions.
+To further reduce code locality, we place larger cold functions between frequently executed functions. These cold functions occupy space in the instruction layout and push hot code farther apart in memory.
+We define these cold functions using a macro. Each function contains only a nop instruction and does not participate in the program’s hot execution path.
 ```cpp  { line_numbers=true linenos=table line_start=28 }
 #define COLD_FUNC(ID) \
     static __attribute__((noinline, aligned(16384), used)) \
