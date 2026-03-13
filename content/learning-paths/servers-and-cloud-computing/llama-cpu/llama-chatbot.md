@@ -232,7 +232,7 @@ llama_perf_context_print:       total time =    8427.77 ms /   525 tokens
 
 The `system_info` printed from llama.cpp highlights important architectural features present on your hardware that improve the performance of the model execution. In the output shown above from running on an AWS Graviton4 instance, you will see:
 
-  * Neon = 1 This flag indicates support for Arm's Neon technology which is an implementation of the Advanced SIMD instructions
+  * NEON = 1 This flag indicates support for Arm's Neon technology which is an implementation of the Advanced SIMD instructions
   * ARM_FMA = 1 This flag indicates support for Arm Floating-point Multiply and Accumulate instructions 
   * MATMUL_INT8 = 1 This flag indicates support for Arm int8 matrix multiplication instructions
   * SVE = 1 This flag indicates support for the Arm Scalable Vector Extension
