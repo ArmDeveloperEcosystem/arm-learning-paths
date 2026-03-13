@@ -6,18 +6,23 @@ weight: 6
 layout: learningpathall
 ---
 
-### What is instrumentation
+### What is instrumentation?
 
-Instrumentation is a profiling method, not specific to BOLT, that augments code with counters to record exact execution counts.
+Instrumentation is a profiling technique that inserts counters into a program to record how often different parts of the code execute. Unlike sampling-based methods, instrumentation collects exact execution counts.
 
-For BOLT, Instrumentation provides complete execution counts for the paths that run. This gives a near-optimal profile for code-layout optimization and therefore the highest optimization potential, without requiring special hardware.
+BOLT can instrument a binary to record control-flow behavior such as how often basic blocks and edges execute. This produces a complete execution profile, which allows BOLT to make highly accurate code layout decisions.
 
-Instrumentation can increase binary size and add significant runtime overhead, making it less attractive for production use. It is mainly used when other profiling methods, such as BRBE, are unavailable, or for comparison to understand the maximum optimization potential.
+Because instrumentation records exact execution counts, it often produces near-optimal profiles for code layout optimization. It does not require specialized hardware support.
+
+However, instrumentation increases the size of the binary and adds extra instructions that update profiling counters. These changes can introduce significant runtime overhead, which makes instrumentation less suitable for production workloads.
+
+Developers typically use instrumentation when other profiling methods, such as BRBE, are unavailable or when they want to measure the maximum optimization potential of BOLT.
 
 ### Optimizing with instrumentation
-We first build an instrumented binary and then execute the workload to generate a profile.
-By default, BOLT writes the profile to `/tmp/prof.fdata`, unless a path is specified using the `--instrumentation-file` flag.
-Finally, we use the generated profile to optimize the binary with BOLT.
+First, generate an instrumented version of the binary. BOLT inserts counters into the program to record how often different code paths execute.
+Next, run the instrumented program to collect the execution profile.
+By default, BOLT writes the profile to `/tmp/prof.fdata`. You can specify a different location using the `--instrumentation-file` option.
+Finally, run BOLT again and provide the collected profile to produce an optimized binary.
 
 ```bash
 llvm-bolt --instrument out/bsort -o out/bsort.instr
@@ -26,3 +31,4 @@ llvm-bolt out/bsort -o out/bsort.opt.instr --data /tmp/prof.fdata \
         -reorder-blocks=ext-tsp -reorder-functions=cdsort -split-functions \
         --dyno-stats
 ```
+This process produces an optimized binary named out/bsort.opt.instr, which uses the collected execution profile to improve code layout.
