@@ -44,10 +44,10 @@ cycles:P: PMU Hardware or event type doesn't support branch stack sampling.
 Recording BRBE profiles requires a Linux kernel version 6.17 or later.
 Check your kernel version with:
 ```bash
-perf --version
+uname -r
 ```
 ### Optimizing with BRBE
-We then record a BRBE profile by running our workload under perf, convert it into a format that BOLT understands, and run the BOLT optimization.
+After confirming the availability of BRBE on your system, you can now collect a BRBE profile by running the workload under `perf`. Then convert the collected profile into the format that BOLT expects and run the BOLT optimizer.
 
 ```bash { line_numbers=true }
 mkdir -p prof
@@ -57,9 +57,6 @@ llvm-bolt out/bsort -o out/bsort.opt.brbe --data prof/brbe.fdata \
         -reorder-blocks=ext-tsp -reorder-functions=cdsort -split-functions \
         --dyno-stats
 ```
-
-
-
 
 ### Further Reading
 - [Arm Architecture Reference Manual for A-profile architecture](https://developer.arm.com/documentation/ddi0487/latest)
