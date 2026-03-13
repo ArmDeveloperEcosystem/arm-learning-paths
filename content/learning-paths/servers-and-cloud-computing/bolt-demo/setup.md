@@ -8,7 +8,7 @@ layout: learningpathall
 
 
 ### Environment setup
-In your home directory (or another empty working directory), create a file named `bsort.cpp` with the following content:
+On your AArch64 Linux bare-metal instance, navigate to your home directory (or another empty working directory) and create a file named `bsort.cpp` with the following content:
 
 ```cpp
 #include <stdio.h>
@@ -126,26 +126,26 @@ int main(void) {
 }
 ```
 
-The [last section](#why-bubble-sort) explains why we chose BubbleSort for this tutorial.
+The [last section](#why-bubble-sort) explains why this tutorial uses BubbleSort as the demonstration workload.
 
-We create and use the following directories as needed throughout this guide:
-
+Create the following directories to organize generated files from this example:
+```bash
+mkdir -p out prof heatmap
+```
 - **out**: Stores output binaries
 - **prof**: Stores profile data
 - **heatmap**: Stores heatmap visualizations and related metrics
 
 ### Compile the input program {#compile}
-We now compile the input binary.
-Because BOLT and PGO pipelines can include multiple stages, this binary is also called the **stage-0 binary**.
+Next, compile the input program.  
+Because BOLT and other profile-guided optimization pipelines often involve multiple build stages, you will refer to this initial binary as the **stage-0 binary**.
 
-To keep the example useful, we must keep the original function order.
-Small programs like this are simple enough that compilers might reorder functions and improve layout without profile data.
-That behavior is rare in real applications, but it can happen here.
-To keep our example with poor locality, we pass specific options to the relevant toolchain.
+For this example, you must preserve the original function order from the source file. 
+Small programs like this one are simple enough that modern compilers may reorder functions automatically to improve instruction locality, even without profile data. That behavior rarely affects large real-world applications, but it can occur in this example. To ensure the program retains its intentionally poor layout, pass specific options to the compiler and linker.
 
 BOLT works with both LLVM and GNU toolchains.
-GNU (gcc) provides a direct flag that preserves the original order: `-fno-toplevel-reorder`.  
-LLVM (clang) requires an order file that defines the initial layout.
+GNU (gcc) provides a flag that preserves the original order: `-fno-toplevel-reorder`.  
+LLVM Clang does not provide an equivalent flag, so it relies on a symbol ordering file that explicitly defines the initial function layout. You can find the file used in this tutorial here: 
 You can find this file here: [orderfile.txt](../orderfile.txt).
 
 Both approaches are shown below.
