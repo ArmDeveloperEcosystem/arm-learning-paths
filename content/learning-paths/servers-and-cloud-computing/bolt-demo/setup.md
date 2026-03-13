@@ -145,12 +145,22 @@ Small programs like this one are simple enough that modern compilers may reorder
 
 BOLT works with both LLVM and GNU toolchains.
 GNU (gcc) provides a flag that preserves the original order: `-fno-toplevel-reorder`.  
-LLVM Clang does not provide an equivalent flag, so it relies on a symbol ordering file that explicitly defines the initial function layout. You can find the file used in this tutorial here: 
-You can find this file here: [orderfile.txt](../orderfile.txt).
+LLVM Clang does not provide an equivalent flag, so it relies on a symbol ordering file that explicitly defines the initial function layout. Using a file editor of your choice copy the contents below into a file named `orderfile.txt`. 
+```txt
+_ZL5swap1PiS_
+_ZL10cold_func1v
+_ZL5swap2PiS_
+_ZL10cold_func2v
+_ZL5swap3PiS_
+_ZL10cold_func3v
+_ZL5swap4PiS_
+_ZL10cold_func4v
+_ZL5swap5PiS_
+_ZL10cold_func5v
+```
 
-Both approaches are shown below.
-Compile with your preferred toolchain, and ensure that relocations are enabled.
-We explain why they matter [later](#why-relocations) in this tutorial.
+Both approaches to compile the binary are shown. Compile with your preferred toolchain, and ensure that relocations are enabled.
+You will look at why relocations matter [later](#why-relocations) in this Learning Path.
 
 {{< tabpane code=true >}}
   {{< tab header="GNU" language="bash">}}
@@ -164,9 +174,8 @@ clang bsort.cpp -o out/bsort -O3 -fuse-ld=lld -ffunction-sections -Wl,--emit-rel
 {{< /tabpane >}}
 
 ### Verify the function order
-We now verify that the compiler preserved the original function order.
-We do this by inspecting the symbols in the `.text` section.
-The output should list the swap and cold functions interleaved, matching their order in the source file.
+Verify that the compiler preserved the intended function order by inspecting the symbols in the `.text` section of the binary.
+Run the following command:
 
 {{< tabpane code=true >}}
   {{< tab header="GNU" language="bash" output_lines="2-13">}}
@@ -201,10 +210,14 @@ The output should list the swap and cold functions interleaved, matching their o
   {{< /tab >}}
 {{< /tabpane >}}
 
+The output should show the **swap** and **cold** functions interleaved.  
+This layout matches the order in the source file and creates poor instruction locality, which makes the program a good candidate for BOLT optimization.
 
 ### Verify the presence of relocations
-We now verify that the binary includes relocations.
-This can be seen by checking for `.rel*.*` entries in the section table, such as `.rela.text`.
+Verify that the binary contains relocation information.  
+BOLT relies on relocation records to safely modify the binary layout after linking.
+
+Check the ELF section table and confirm that relocation sections such as `.rela.text` appear in the output.
 
 {{< tabpane code=true >}}
   {{< tab header="GNU" language="bash" output_lines="2-13">}}
@@ -237,21 +250,18 @@ This can be seen by checking for `.rel*.*` entries in the section table, such as
   {{< /tab >}}
 {{< /tabpane >}}
 
+Look for relocation sections such as **`.rela.text`** in the output. Their presence confirms that the linker preserved relocation information required by BOLT.
 
 ### Why relocations are important {#why-relocations}
-BOLT relies on relocations to update references after it changes the code layout.
-Without relocations, BOLT is severely limited. For example, function reordering is disabled, which makes code layout optimizations ineffective.
+BOLT uses relocation records to update references after it changes the code layout. When BOLT reorders functions or basic blocks, it must update addresses used by instructions such as calls, branches, and references to code or data. Relocation records identify these locations in the binary so that BOLT can safely rewrite them.
+Without relocations, BOLT cannot reliably adjust these references. As a result, many optimizations become unavailable. For example, BOLT disables function reordering when relocation information is missing, which prevents most code layout optimizations.
 
-Because BOLT runs post-link, it may need to adjust locations that the linker patched in the original binary.
-Relocations describe these locations, so they must be preserved for BOLT to be able to apply its full set of layout optimizations.
-
+Because BOLT operates on fully linked binaries, it must modify addresses that the linker already resolved. Relocations preserve the information needed to update those addresses correctly.
 
 ### Why Bubble Sort?
-Bubble Sort keeps this tutorial simple.
-The code is in one file, has no external dependencies, and runs in a few seconds under instrumentation with a small, fixed workload.
-In its original form it is not a good candidate for code layout optimization.
-To make it one, we add **cold code** blocks between hot paths.
-This reduces code locality, which BOLT improves later.
+Bubble Sort is a simple program with all the code in one file. The program has no external dependencies, and runs in a few seconds under instrumentation with a small, fixed workload.
+In its original form, the program does not benefit much from code layout optimization. To create a more interesting example, instruction locality is intentionally reduced.
+We introduce **cold code paths** between frequently executed code. These cold blocks separate hot instructions in memory and degrade spatial locality. BOLT later improves performance by reorganizing the binary so that hot code paths appear closer together.
 
 The code below shows the changes we introduced to reduce code locality.
 
