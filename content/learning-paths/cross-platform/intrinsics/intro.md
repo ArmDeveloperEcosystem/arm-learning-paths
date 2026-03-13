@@ -16,7 +16,7 @@ Intrinsics are functions which are built into the compiler and not part of a lib
 
 One use of intrinsics is to access SIMD (single-instruction, multiple-data) instructions directly from C/C++ for improved application performance. Intrinsics are easier to work with compared to assembly language, but they often pose a challenge when porting source code to a new architecture.
 
-Intel Streaming SIMD Extensions (SSE) and [Arm Neon](https://developer.arm.com/documentation/dht0002/a/Introducing-Neon/Neon-architecture-overview/Neon-instructions) SIMD instructions increase processor throughput by performing multiple computations with a single instruction. Over the years, Intel and Arm have introduced a variety of SIMD extensions. Neon is used in many of the Arm Cortex-A, Cortex-R, and Neoverse processors.
+Intel Streaming SIMD Extensions (SSE) and [Arm Neon](https://developer.arm.com/documentation/dht0002/a/Introducing-NEON/NEON-architecture-overview/NEON-instructions) SIMD instructions increase processor throughput by performing multiple computations with a single instruction. Over the years, Intel and Arm have introduced a variety of SIMD extensions. Neon is used in many of the Arm Cortex-A, Cortex-R, and Neoverse processors.
 
 There are generally 3 ways to program SIMD hardware:
 - The C/C++ compiler recognizes opportunities to use SIMD instructions and inserts them automatically (with or without some guidance)
