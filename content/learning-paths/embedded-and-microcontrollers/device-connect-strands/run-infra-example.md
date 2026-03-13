@@ -1,5 +1,5 @@
 ---
-title: Run with full Device Connect infrastructure
+title: (Optional) Run with full Device Connect infrastructure
 weight: 5
 
 # FIXED, DO NOT MODIFY
@@ -8,15 +8,9 @@ layout: learningpathall
 
 ## Why add infrastructure?
 
-The previous section ran entirely on one machine, with Device Connect handling device-to-device discovery automatically. That approach is fast and requires zero configuration, but it has natural limits: both the robot and the agent must be on the same LAN, device state is ephemeral, and there is no registry you can query by device type.
+The previous section ran entirely on a local network, with Device Connect handling device-to-device discovery automatically. That approach is fast and requires zero configuration, but it has natural limits: both the robot and the agent must be on the same LAN, device state is ephemeral, and there is no registry you can query by device type.
 
 This section goes one step further. You will run the Zenoh router, an etcd state store, and a registry service on your machine using Docker, then connect a Raspberry Pi on the same network as the remote device. The agent running on your machine will discover the robot running on the Pi through the infrastructure, as if both were part of the same managed fleet. The Pi never needs to run Docker — it just needs Python and the packages from setup.
-
-## What you need
-
-- The machine from the previous section, with the virtual environment set up and Docker installed. This will be referred to as the host.
-- A Raspberry Pi (or any similar device) connected to the same network as your host machine.
-- An SSH connection or keyboard and monitor attached to the Pi.
 
 Confirm Docker and Docker Compose v2 are available on the host before continuing:
 
@@ -33,7 +27,7 @@ This section involves two machines. Keep track of which commands run where:
 |---------|----------|---------|
 | Host    | 1 | Docker Compose infrastructure |
 | Host    | 2 | Agent tool invocations |
-| Raspberry Pi | — | Robot process |
+| Target | — | Robot process |
 
 ## Step 1 — Start the infrastructure on your host machine
 

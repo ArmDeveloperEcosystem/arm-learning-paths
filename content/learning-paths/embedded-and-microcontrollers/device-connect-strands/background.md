@@ -20,7 +20,7 @@ TODO: compatible devices? Mac and what else?
 
 **Device layer**
 
-A device is any process that registers itself on the mesh and exposes callable functions. In this Learning Path you will create a simulated robot arm from the `strands-robots` SDK. The moment this object is created, it registers on the local1 network under a unique device ID (for example, `so100_sim-abc23`) and begins publishing a presence heartbeat. No explicit registration call is required. Device Connect uses Zenoh as its underlying messaging transport, which handles low-level connectivity and routing automatically.
+A device is any process that registers itself on the mesh and exposes callable functions. In this Learning Path you will create a simulated robot arm, namely the simulated robotic arm SO-100 from Hugging Face, from the `strands-robots` SDK. The moment this object is created, it registers on the local network under a unique device ID (for example, `so100_sim-abc23`) and begins publishing a presence heartbeat. No explicit registration call is required. Device Connect uses Zenoh as its underlying messaging transport, which handles low-level connectivity and routing automatically.
 
 **Agent layer**
 
@@ -40,14 +40,15 @@ The diagram below shows how these layers communicate at runtime:
                │ (device-to-device discovery & RPC)
 ┌──────────────▼───────────────────────┐
 │  Device layer                        │
-│  Robot('so100') — so100_sim-abc123   │
+│  Simulated SO-100 arm                |
+|           — so100_sim-abc123         │
 │  heartbeat · execute · getStatus     │
 └──────────────────────────────────────┘
 ```
 
 ## How device discovery works
 
-When a `Robot()` instance starts, Device Connect automatically announces the device on the local network. Any process running `discover_devices()` or `robot_mesh(action='peers')` on the same network will hear the announcement and add the device to its live table of available hardware.
+When the `SO-100 arm` instance starts, Device Connect automatically announces the device on the local network. Any process running `discover_devices()` or `robot_mesh(action='peers')` on the same network will hear the announcement and add the device to its live table of available hardware.
 
 ## What the simulated robot provides
 

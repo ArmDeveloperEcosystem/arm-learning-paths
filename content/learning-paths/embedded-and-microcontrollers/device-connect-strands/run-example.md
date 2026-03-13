@@ -8,12 +8,26 @@ layout: learningpathall
 
 ## Overview
 
-This section runs entirely on your local machine using Device Connect's device-to-device discovery. You will need two terminal windows open at the same time: one to keep the simulated robot running, and one to invoke it from the agent side. Both terminals need the virtual environment activated.
+This section runs Device Connect's device-to-device discovery. There are two ways to walk through this setup. Optionally, you can connect an external device. 
 
-| Terminal | Purpose |
-|----------|---------|
-| 1 | Simulated robot — keep running throughout |
-| 2 | Agent tool invocations |
+### Option 1: Run on a single machine
+
+For a proof-of-conect, follow the steps using two terminal windows on your machine with the virtual environment set up.
+
+### Option 2: Run with real hardware
+
+If you have access to an external device, you can use it with this setup as well. You will need:
+
+- Your machine with the virtual environment set up. This machine will be referred to as the host.
+- A Raspberry Pi (or any similar device) connected to the same network as your host machine. This machine is your target. 
+- An SSH connection or keyboard and monitor attached to the target.
+
+You will need two terminal windows open at the same time: one to keep the simulated robot running, and one to invoke it from the agent side. Both terminals need the virtual environment activated.
+
+| Machine | Terminal | Purpose |
+|---------|----------|---------|
+| Host or Target | 1 | Simulated robot — keep running throughout |
+| Host | 2 | Agent tool invocations |
 
 Make sure you are in the workspace directory you created during setup and that your virtual environment is activated:
 
@@ -148,7 +162,12 @@ if devices:
 PY
 ```
 
+{{% notice About the snippet %}}
+When an agent calls `execute(instruction="pick up the cup", policy_provider="groot")`, Device Connect handles the RPC delivery, and the policy handles the actual arm movement.
+
 `discover_devices(device_type='')` returns all devices on the mesh regardless of type. If you pass `device_type='strands_robot'` you can filter to only `Robot()` instances. `invoke_device` sends an RPC to the named device; here `policy_provider='mock'` tells the robot to accept the task without executing real motion, which is appropriate for this connectivity test.
+{{% /notice %}}
+
 
 The output is similar to:
 
@@ -166,4 +185,4 @@ In this section you:
 - Used `device-connect-agent-tools` to discover the robot and invoke an RPC call against it.
 - Used the `robot_mesh` Strands tool to list peers, send an instruction, and trigger an emergency stop.
 
-This showcases the ease of setting up a mesh on a local network. In the next section, you can optionally set up a Raspberry Pi or any other device, opening up a new category of possibilites with agent integration.
+This showcases the ease of setting up a mesh on a local network. In the next section, you can extend the configuration to a Docker-based approach, opening up a new category of possibilites with agent integration.
