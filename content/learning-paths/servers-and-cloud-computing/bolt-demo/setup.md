@@ -263,9 +263,9 @@ Bubble Sort is a simple program with all the code in one file. The program has n
 In its original form, the program does not benefit much from code layout optimization. To create a more interesting example, instruction locality is intentionally reduced.
 We introduce **cold code paths** between frequently executed code. These cold blocks separate hot instructions in memory and degrade spatial locality. BOLT later improves performance by reorganizing the binary so that hot code paths appear closer together.
 
-The code below shows the changes we introduced to reduce code locality.
+The code below shows how the program was modified to reduce code locality.
 
-The main sort function is shown below. It rotates through 5 copies of the swap function, selecting a different one each time a swap is performed.
+The main sort function rotates through five copies of the swap function. Each time the algorithm performs a swap, it selects the next swap implementation in a round-robin fashion.
 ```cpp  { line_numbers=true linenos=table line_start=48 }
 void bubble_sort(int *a, int n) {
     if (n <= 1)
@@ -291,8 +291,8 @@ void bubble_sort(int *a, int n) {
     }
 }
 ```
+Each swap function is defined using a macro and contains a small cold path that includes several nop instructions.
 
-Each swap function is defined using a macro and includes some nop instructions on a cold path.
 ```cpp  { line_numbers=true linenos=table line_start=18 }
 #define SWAP_FUNC(ID) \
     static __attribute__((noinline)) \
@@ -304,8 +304,8 @@ Each swap function is defined using a macro and includes some nop instructions o
     }
 ```
 
-To further reduce code locality, we place larger cold functions between hot ones.
-These cold functions are also defined using a macro and consist entirely of nop instructions.
+To further reduce code locality, we place larger cold functions between frequently executed functions. These cold functions occupy space in the instruction layout and push hot code farther apart in memory.
+We define these cold functions using a macro. Each function contains only a nop instruction and does not participate in the program’s hot execution path.
 ```cpp  { line_numbers=true linenos=table line_start=28 }
 #define COLD_FUNC(ID) \
     static __attribute__((noinline, aligned(16384), used)) \
