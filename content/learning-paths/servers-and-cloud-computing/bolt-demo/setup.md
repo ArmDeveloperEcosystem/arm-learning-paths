@@ -126,7 +126,7 @@ int main(void) {
 }
 ```
 
-The [last section](#why-bubble-sort) explains why this tutorial uses BubbleSort as the demonstration workload.
+The [Why Bubble Sort?](#why-bubble-sort) section explains why this tutorial uses BubbleSort as the demonstration workload.
 
 Create the following directories to organize generated files from this example:
 ```bash
