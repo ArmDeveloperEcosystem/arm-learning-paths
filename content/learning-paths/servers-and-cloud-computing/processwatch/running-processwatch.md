@@ -45,7 +45,7 @@ By default, Process Watch:
  * Prints results until the tool is killed (via Ctrl+c).
  * Prints all results in a table format on `stdout`.
  * Profiles all running processes.
- * Displays counts for the default filters, which are 'FPARMv8', 'Neon', 'SVE', and 'SVE2'.
+ * Displays counts for the default filters, which are 'FPARMv8', 'NEON', 'SVE', and 'SVE2'.
  * Sets the sample period to every 10000 events.
 
 ## Default Process Watch output
@@ -57,7 +57,7 @@ sudo ./processwatch
 
 The output should look like:
 ```output
-PID      NAME             FPARMv8  Neon     SVE      SVE2     %TOTAL   TOTAL
+PID      NAME             FPARMv8  NEON     SVE      SVE2     %TOTAL   TOTAL
 ALL      ALL              0.00     0.29     0.00     0.00     100.00   346
 17400    processwatch     0.00     0.36     0.00     0.00     80.64    279
 254      systemd-journal  0.00     0.00     0.00     0.00     13.01    45
@@ -66,14 +66,14 @@ ALL      ALL              0.00     0.29     0.00     0.00     100.00   346
 560      snapd            0.00     0.00     0.00     0.00     1.16     04
 296      multipathd       0.00     0.00     0.00     0.00     0.58     02
 
-PID      NAME             FPARMv8  Neon     SVE      SVE2     %TOTAL   TOTAL
+PID      NAME             FPARMv8  NEON     SVE      SVE2     %TOTAL   TOTAL
 ALL      ALL              3.57     12.86    0.00     0.00     100.00   140
 17400    processwatch     3.73     13.43    0.00     0.00     95.71    134
 4939     sshd             0.00     0.00     0.00     0.00     2.86     04
 296      multipathd       0.00     0.00     0.00     0.00     0.71     01
 560      snapd            0.00     0.00     0.00     0.00     0.71     01
 
-PID      NAME             FPARMv8  Neon     SVE      SVE2     %TOTAL   TOTAL
+PID      NAME             FPARMv8  NEON     SVE      SVE2     %TOTAL   TOTAL
 ALL      ALL              1.18     5.12     0.00     0.00     100.00   254
 17400    processwatch     1.19     5.16     0.00     0.00     99.21    252
 6651     packagekitd      0.00     0.00     0.00     0.00     0.39     01
