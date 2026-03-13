@@ -81,3 +81,7 @@ This value is unusually low because the tutorial program intentionally creates p
 The Branch MPKI also decreases—from 16 to about 10—because BOLT can improve branch prediction. It uses profile data to adjust code layout and swap fall-through and taken paths when beneficial.
 
 You can also compute the MPKI values manually using `perf stat`, as described in the [Good BOLT Candidates](../good-candidates) section.
+
+## Summary
+
+In this learning path, you learned how to use BOLT to optimize binary code layout using several profiling methods. The optimized binaries improved instruction locality, reduced frontend stalls, and delivered measurable performance gains.
