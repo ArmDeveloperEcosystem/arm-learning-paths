@@ -47,41 +47,6 @@ INFO:strands_robots.mesh:Heartbeat thread started
 
 Leave this process running. The simulated robot is only discoverable as long as this process is alive.
 
-## Discover and invoke the robot using the agent tools
-
-The `device-connect-agent-tools` package gives you direct programmatic access to the mesh, without involving an LLM. This is useful for testing, scripting, or validating the stack before wiring it up to an agent. Open terminal 2, activate the virtual environment, then run:
-
-```python
-python <<'PY'
-from device_connect_agent_tools import connect, discover_devices, invoke_device
-
-connect()
-
-devices = discover_devices(device_type='')
-print(f'Found {len(devices)} robot(s):')
-for d in devices:
-    print(f'  {d["device_id"]}')
-
-if devices:
-    result = invoke_device(
-        devices[0]['device_id'],
-        'execute',
-        {'instruction': 'pick up the cube', 'policy_provider': 'mock'},
-    )
-    print(f'Result: {result}')
-PY
-```
-
-`discover_devices(device_type='')` returns all devices on the mesh regardless of type. If you pass `device_type='strands_robot'` you can filter to only `Robot()` instances. `invoke_device` sends an RPC to the named device; here `policy_provider='mock'` tells the robot to accept the task without executing real motion, which is appropriate for this connectivity test.
-
-The output is similar to:
-
-```output
-Found 1 robot(s):
-  so100_sim-abc123
-Result: {'success': True, 'result': {'status': 'accepted'}}
-```
-
 ## Control the robot using the robot_mesh Strands tool
 
 The `robot_mesh` tool wraps the same discovery and invocation primitives as a Strands agent tool. You can call it directly from a Python script or attach it to an LLM agent; the API is identical either way.
@@ -156,6 +121,41 @@ The output is similar to:
 
 ```output
 E-STOP: 1/1 devices stopped
+```
+
+## Optional: Discover and invoke the robot using the agent tools
+
+The `device-connect-agent-tools` package gives you direct programmatic access to the mesh, without involving an LLM. This is useful for testing, scripting, or validating the stack before wiring it up to an agent. Open terminal 2, activate the virtual environment, then run:
+
+```python
+python <<'PY'
+from device_connect_agent_tools import connect, discover_devices, invoke_device
+
+connect()
+
+devices = discover_devices(device_type='')
+print(f'Found {len(devices)} robot(s):')
+for d in devices:
+    print(f'  {d["device_id"]}')
+
+if devices:
+    result = invoke_device(
+        devices[0]['device_id'],
+        'execute',
+        {'instruction': 'pick up the cube', 'policy_provider': 'mock'},
+    )
+    print(f'Result: {result}')
+PY
+```
+
+`discover_devices(device_type='')` returns all devices on the mesh regardless of type. If you pass `device_type='strands_robot'` you can filter to only `Robot()` instances. `invoke_device` sends an RPC to the named device; here `policy_provider='mock'` tells the robot to accept the task without executing real motion, which is appropriate for this connectivity test.
+
+The output is similar to:
+
+```output
+Found 1 robot(s):
+  so100_sim-abc123
+Result: {'success': True, 'result': {'status': 'accepted'}}
 ```
 
 ## What you've accomplished and what's next
