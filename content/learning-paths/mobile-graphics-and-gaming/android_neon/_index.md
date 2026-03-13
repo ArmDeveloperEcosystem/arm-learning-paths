@@ -37,7 +37,7 @@ further_reading:
         type: blog
     - resource:
         title: Using Neon Intrinsics
-        link: https://developer.arm.com/documentation/den0018/a/Neon-Intrinsics/Using-Neon-intrinsics
+        link: https://developer.arm.com/documentation/den0018/a/NEON-Intrinsics/Using-NEON-intrinsics
         type: documentation
     - resource:
         title: Intrinsics
