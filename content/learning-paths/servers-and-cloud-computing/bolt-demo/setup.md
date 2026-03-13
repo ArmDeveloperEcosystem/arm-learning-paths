@@ -164,11 +164,9 @@ You will look at why relocations matter [later](#why-relocations) in this Learni
 
 {{< tabpane code=true >}}
   {{< tab header="GNU" language="bash">}}
-mkdir -p out
 gcc bsort.cpp -o out/bsort -O3 -Wl,--emit-relocs -fno-toplevel-reorder
   {{< /tab >}}
   {{< tab header="LLVM" language="bash">}}
-mkdir -p out
 clang bsort.cpp -o out/bsort -O3 -fuse-ld=lld -ffunction-sections -Wl,--emit-relocs -Wl,--symbol-ordering-file=orderfile.txt
   {{< /tab >}}
 {{< /tabpane >}}
