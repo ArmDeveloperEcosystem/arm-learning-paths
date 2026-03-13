@@ -8,7 +8,9 @@ layout: learningpathall
 
 
 ### Environment setup
-We start in an empty directory and place the input program [bsort.cpp](../bsort.cpp) there.
+In your home directory (or another empty working directory), create a file named `bsort.cpp` with the following content:
+
+
 The [last section](#why-bubble-sort) explains why we chose BubbleSort for this tutorial.
 
 We create and use the following directories as needed throughout this guide:
