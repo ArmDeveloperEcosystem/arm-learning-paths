@@ -11,38 +11,26 @@ layout: learningpathall
 ---
 
 ### What is SPE
-SPE stands for Statistical Profiling Extension. It is an Arm hardware unit that provides low-overhead, statistical sampling of program execution.
-SPE samples microarchitectural events such as instruction execution, memory accesses, and branches.
+SPE (Statistical Profiling Extension) is an Arm hardware profiling unit that collects statistical samples of program execution with very low runtime overhead.
+SPE periodically samples microarchitectural events such as instruction execution, memory accesses, and branches. The processor records information about the sampled event in a trace buffer, which profiling tools later decode.
 
 For BOLT, SPE branch samples are the relevant input as they provide an edge-based control-flow profile.
-Unlike [BRBE](../brbe), SPE does not record sequences of taken branches.
-Each sample captures only a single transition between two program locations, representing a single edge in the control-flow graph.
+Unlike [BRBE](../brbe), SPE does not record sequences of taken branches. Instead, each sample describes only a single branch transition between two program locations, representing a single edge in the control-flow graph. Because of this limited context, SPE typically produces less detailed control-flow profiles than BRBE.
 
-Some implementations also support the Previous Branch Target (PBT) feature.
-This feature records 1 taken branch in addition to the edge.
-This provides a depth-1 branch history. It extends standard SPE sampling but remains shallower than BRBE.
+Some processors also support the Previous Branch Target (PBT) feature. PBT records the target of the most recently taken branch in addition to the sampled edge. This provides a depth-1 branch history, which slightly improves the quality of the reconstructed control-flow profile.
+
+Even with PBT, SPE provides less branch history than BRBE, but it remains a useful profiling option when BRBE is not available.
 
 ### When to use SPE
-SPE provides less detailed control-flow information than BRBE. It can still capture useful branch behavior and guide code layout decisions, making it a good alternative when BRBE is unavailable or instrumentation overhead is prohibitive.
-
-### Optimizing with SPE
-We check [SPE availability](#availability) before recording a profile.
-We then record an SPE profile by running our workload under perf, convert it into a format that BOLT understands, and run the BOLT optimization.
-
-```bash { line_numbers=true }
-mkdir -p prof
-perf record -e arm_spe/branch_filter=1/u -o prof/spe.data -- ./out/bsort
-perf2bolt -p prof/spe.data -o prof/spe.fdata ./out/bsort --spe
-llvm-bolt out/bsort -o out/bsort.opt.spe --data prof/spe.fdata \
-        -reorder-blocks=ext-tsp -reorder-functions=cdsort -split-functions \
-        --dyno-stats
-```
-
+SPE provides less detailed control-flow information than BRBE because it samples individual branch events rather than recording full branch histories. Despite this limitation, SPE can still capture useful branch behavior and guide code layout decisions.
+Use SPE when BRBE is unavailable or when instrumentation overhead is too high for the workload. In these cases, SPE offers a practical compromise between profiling overhead and profile quality.
 
 ### Availability
-SPE is an optional feature in processors that implement [Armv8.1](https://developer.arm.com/documentation/109697/2025_12/Feature-descriptions/The-Armv8-2-architecture-extension#md447-the-armv82-architecture-extension__feat_FEAT_SPE) or later. To check availability, we record a trace.
+SPE is an optional processor feature called **FEAT_SPE (Statistical Profiling Extension)**, introduced in the [Armv8.1 architecture](https://developer.arm.com/documentation/109697/2025_12/Feature-descriptions/The-Armv8-2-architecture-extension#md447-the-armv82-architecture-extension__feat_FEAT_SPE).
+To check whether your system supports SPE, attempt to record an SPE trace using `perf`.
 
-On a successful recording we see:
+If SPE is available, the command records the trace successfully:
+
 ```bash { command_line="user@host | 2-5"}
 perf record -e arm_spe/branch_filter=1/u -o prof/spe.data -- ./out/bsort
 Bubble sorting 10000 elements
@@ -51,7 +39,7 @@ Bubble sorting 10000 elements
 [ perf record: Captured and wrote 13.458 MB prof/spe.data ]
 ```
 
-When unavailable:
+If the processor or kernel does not support SPE, perf reports an error similar to the following:
 ```bash { command_line="user@host | 2-12"}
 perf record -e arm_spe/branch_filter=1/u -o prof/spe.data -- ./out/bsort
 
@@ -66,12 +54,31 @@ Run 'perf list' for a list of valid events
 
     -e, --event <event>   event selector. use 'perf list' to list available events
 ```
+This error indicates that the system does not expose the arm_spe PMU, which usually means that the processor or kernel does not support SPE profiling.
 
-To record an SPE trace we need a Linux system that is version 6.14 or later. We can check the version using:
+Recording SPE traces requires a Linux kernel version 6.14 or later. Check the kernel version with:
 ```bash
-perf --version
+uname -r
+```
+### Optimizing with SPE
+Next, collect an SPE profile by running the workload under `perf`. Then convert the recorded trace into a format that BOLT can use and run the BOLT optimizer.
+The process consists of three steps:
+* Record an SPE profile using perf
+* Convert the profile into BOLT’s .fdata format
+* Run BOLT to generate an optimized binary.
+
+```bash { line_numbers=true }
+mkdir -p prof
+perf record -e arm_spe/branch_filter=1/u -o prof/spe.data -- ./out/bsort
+perf2bolt -p prof/spe.data -o prof/spe.fdata ./out/bsort --spe
+llvm-bolt out/bsort -o out/bsort.opt.spe --data prof/spe.fdata \
+        -reorder-blocks=ext-tsp -reorder-functions=cdsort -split-functions \
+        --dyno-stats
 ```
 
+The `perf record` command collects branch samples using the SPE hardware profiler.
+The `perf2bolt` tool converts the SPE trace into BOLT’s .fdata profile format, using the --spe option to interpret the samples correctly.
+Finally, `llvm-bolt` uses the generated profile to reorganize functions and basic blocks in the binary, producing an optimized binary named `out/bsort.opt.spe`.
 
 ### Further Reading
 - [Arm Statistical Profiling Extension: Performance Analysis Methodology White Paper](https://developer.arm.com/documentation/109429/latest/)
