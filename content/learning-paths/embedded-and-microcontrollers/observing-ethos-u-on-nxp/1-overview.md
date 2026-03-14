@@ -27,7 +27,7 @@ By the end of this Learning Path, you have:
 
 - A `.pte` model artifact compiled for `ethos-u65-256`
 - A Cortex-M33 `executor_runner` firmware image built against prebuilt ExecuTorch libraries
-- A repeatable deployment flow that loads the firmware, runs inference, and prints timing over UART
+- A repeatable deployment flow that loads the firmware, runs inference, and reports results through the remoteproc trace buffer
 
 ## What you need before you continue
 
