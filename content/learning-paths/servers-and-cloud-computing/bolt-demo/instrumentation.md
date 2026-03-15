@@ -6,7 +6,7 @@ weight: 6
 layout: learningpathall
 ---
 
-### What is instrumentation?
+## What is instrumentation?
 
 Instrumentation is a profiling technique that inserts counters into a program to record how often different parts of the code execute. Unlike sampling-based methods, instrumentation collects exact execution counts.
 
@@ -18,7 +18,7 @@ However, instrumentation increases the size of the binary and adds extra instruc
 
 Developers typically use instrumentation when other profiling methods, such as BRBE, are unavailable or when they want to measure the maximum optimization potential of BOLT.
 
-### Optimizing with instrumentation
+## Optimize with instrumentation
 First, generate an instrumented version of the binary. BOLT inserts counters into the program to record how often different code paths execute.
 Next, run the instrumented program to collect the execution profile.
 By default, BOLT writes the profile to `/tmp/prof.fdata`. You can specify a different location using the `--instrumentation-file` option.

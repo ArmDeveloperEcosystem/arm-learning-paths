@@ -6,7 +6,7 @@ weight: 2
 layout: learningpathall
 ---
 
-### Overview
+## Overview
 
 This Learning Path demonstrates how to use [BOLT](https://github.com/llvm/llvm-project/blob/main/bolt/README.md) a post-link binary optimizer from LLVM, to improve the performance of AArch64 applications using profile-guided code layout optimization.
 The example used in the Learning Path is based on a demonstration from the 2025 LLVM Developers Conference:  

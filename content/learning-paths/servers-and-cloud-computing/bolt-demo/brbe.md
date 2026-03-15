@@ -6,7 +6,7 @@ weight: 5
 layout: learningpathall
 ---
 
-### What is BRBE
+## What is BRBE?
 BRBE stands for Branch Record Buffer Extension. It is an Arm hardware unit with a circular buffer that captures the most recent 32 or 64 taken branches. The exact size depends on the hardware implementation.
 
 For BOLT, BRBE provides an efficient and low-overhead way to collect profiling data. The hardware records taken branches directly without requiring frequent interrupts or instrumentation. Each recorded taken branch represents a control-flow edge, which makes BRBE an edge-based profiling method.
@@ -15,11 +15,11 @@ Taken branches are continuously added to the circular buffer, and the buffer is 
 Recording only taken branches is an efficient use of the buffer, since fall-through paths do not need to be captured at runtime.
 During post-processing, fall-through edges between the recorded taken branches are reconstructed, extending the effective branch history beyond what is stored in the buffer. BOLT performs this reconstruction automatically.
 
-### When to use BRBE
+## When to use BRBE
 When available, BRBE is the preferred profiling option for BOLT.
 It is expected to have the lowest runtime overhead while still providing near-optimal profiles, close to those obtained with instrumentation.
 
-### Availability
+## Check BRBE availability
 BRBE is an optional processor feature called **FEAT_BRBE** (Branch Record Buffer Extension), introduced in the [Armv9.1 architecture](https://developer.arm.com/documentation/109697/2025_09/Feature-descriptions/The-Armv9-2-architecture-extension#extension__feat_FEAT_BRBE). 
 To check whether your system supports BRBE, attempt to record a branch profile using `perf`.
 
@@ -46,7 +46,7 @@ Check your kernel version with:
 ```bash
 uname -r
 ```
-### Optimizing with BRBE
+## Optimize with BRBE
 After confirming the availability of BRBE on your system, you can now collect a BRBE profile by running the workload under `perf`. Then convert the collected profile into the format that BOLT expects and run the BOLT optimizer.
 
 ```bash { line_numbers=true }
@@ -58,5 +58,4 @@ llvm-bolt out/bsort -o out/bsort.opt.brbe --data prof/brbe.fdata \
         --dyno-stats
 ```
 
-### Further Reading
-- [Arm Architecture Reference Manual for A-profile architecture](https://developer.arm.com/documentation/ddi0487/latest)
+

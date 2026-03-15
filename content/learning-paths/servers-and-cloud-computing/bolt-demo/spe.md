@@ -10,7 +10,7 @@ layout: learningpathall
 
 ---
 
-### What is SPE
+## What is SPE?
 SPE (Statistical Profiling Extension) is an Arm hardware profiling unit that collects statistical samples of program execution with very low runtime overhead.
 SPE periodically samples microarchitectural events such as instruction execution, memory accesses, and branches. The processor records information about the sampled event in a trace buffer, which profiling tools later decode.
 
@@ -21,11 +21,11 @@ Some processors also support the Previous Branch Target (PBT) feature. PBT recor
 
 Even with PBT, SPE provides less branch history than BRBE, but it remains a useful profiling option when BRBE is not available.
 
-### When to use SPE
+## When to use SPE
 SPE provides less detailed control-flow information than BRBE because it samples individual branch events rather than recording full branch histories. Despite this limitation, SPE can still capture useful branch behavior and guide code layout decisions.
 Use SPE when BRBE is unavailable or when instrumentation overhead is too high for the workload. In these cases, SPE offers a practical compromise between profiling overhead and profile quality.
 
-### Availability
+## Check SPE availability
 SPE is an optional processor feature called **FEAT_SPE (Statistical Profiling Extension)**, introduced in the [Armv8.1 architecture](https://developer.arm.com/documentation/109697/2025_12/Feature-descriptions/The-Armv8-2-architecture-extension#md447-the-armv82-architecture-extension__feat_FEAT_SPE).
 To check whether your system supports SPE, attempt to record an SPE trace using `perf`.
 
@@ -60,7 +60,7 @@ Recording SPE traces requires a Linux kernel version 6.14 or later. Check the ke
 ```bash
 uname -r
 ```
-### Optimizing with SPE
+## Optimize with SPE
 Next, collect an SPE profile by running the workload under `perf`. Then convert the recorded trace into a format that BOLT can use and run the BOLT optimizer.
 The process consists of three steps:
 * Record an SPE profile using perf
@@ -80,5 +80,4 @@ The `perf record` command collects branch samples using the SPE hardware profile
 The `perf2bolt` tool converts the SPE trace into BOLT’s .fdata profile format, using the --spe option to interpret the samples correctly.
 Finally, `llvm-bolt` uses the generated profile to reorganize functions and basic blocks in the binary, producing an optimized binary named `out/bsort.opt.spe`.
 
-### Further Reading
-- [Arm Statistical Profiling Extension: Performance Analysis Methodology White Paper](https://developer.arm.com/documentation/109429/latest/)
+

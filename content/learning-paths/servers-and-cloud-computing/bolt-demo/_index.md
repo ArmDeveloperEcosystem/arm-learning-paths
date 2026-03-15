@@ -1,10 +1,10 @@
 ---
-title: "Get started with BOLT"
+title: "Optimize AArch64 binaries with LLVM BOLT"
 
 
 minutes_to_complete: 20
 
-who_is_this_for: This learning path is intended for developers who have compiled an AArch64 Linux application and want to evaluate whether LLVM BOLT can improve its runtime performance.
+who_is_this_for: This is an introductory topic for developers who have compiled an aarch64 Linux application and want to evaluate whether LLVM BOLT can improve its runtime performance.
 
 
 learning_objectives:
@@ -58,6 +58,10 @@ further_reading:
     - resource:
         title: Metrics by metric group in Neoverse V2
         link: https://developer.arm.com/documentation/109528/0200/Metrics-by-metric-group-in-Neoverse-V2
+        type: documentation
+    - resource:
+        title: Arm Architecture Reference Manual for A-profile architecture
+        link: https://developer.arm.com/documentation/ddi0487/latest
         type: documentation
 
 

@@ -6,7 +6,7 @@ weight: 9
 layout: learningpathall
 ---
 
-### Verify with runtime
+## Verify optimization with runtime
 
 {{% notice Note %}}
 The example below uses a [BRBE](/learning-paths/servers-and-cloud-computing/bolt-demo/brbe/) optimized binary. You can apply the same verification steps to binaries optimized using the other BOLT profiling methods.
@@ -29,7 +29,7 @@ In this example, the optimized binary runs in about 147 ms, compared with 280 ms
 The improvement is large because the example program intentionally creates poor code locality. Real applications typically show smaller but still meaningful improvements after BOLT optimization.
 
 
-### Verify with hardware metrics
+## Verify optimization with hardware metrics
 Next, apply the [TopDown Methodology](https://developer.arm.com/documentation/109542/02/Arm-Topdown-methodology) again to verify that BOLT improved the code layout.
 The runtime comparison shows the performance impact, but the TopDown metrics reveal how the optimization affects processor behavior.
 Run the same tool used earlier when evaluating whether the program was a good BOLT candidate. This time, run it on the optimized binary, for example, the BRBE-optimized version.
