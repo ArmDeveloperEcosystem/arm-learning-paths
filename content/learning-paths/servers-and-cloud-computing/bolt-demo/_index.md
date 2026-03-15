@@ -1,9 +1,6 @@
 ---
 title: "Get started with BOLT"
 
-draft: true
-cascade:
-    draft: true
 
 minutes_to_complete: 20
 
