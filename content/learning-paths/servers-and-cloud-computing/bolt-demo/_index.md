@@ -54,6 +54,14 @@ further_reading:
         title: Arm Topdown Methodology
         link: https://developer.arm.com/documentation/109542/02/Arm-Topdown-methodology
         type: documentation
+    - resource:
+        title: Optimizing Clang - A Practical Example of Applying BOLT
+        link: https://github.com/llvm/llvm-project/blob/main/bolt/docs/OptimizingClang.md
+        type: documentation
+    - resource:
+        title: Metrics by metric group in Neoverse V2
+        link: https://developer.arm.com/documentation/109528/0200/Metrics-by-metric-group-in-Neoverse-V2
+        type: documentation
 
 
 

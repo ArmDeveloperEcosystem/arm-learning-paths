@@ -11,7 +11,7 @@ Hardware performance metrics can help determine whether a program is a good cand
 
 In this tutorial, you will focus on a small set of TopDown indicators related to instruction delivery and code locality. These indicators describe how efficiently the processor fetches instructions and keeps the execution pipeline busy.
 
-When instruction delivery is inefficient, the workload is refered to as **front-end bound**, meaning the CPU often waits for instructions instead of executing them.
+When instruction delivery is inefficient, the workload is referred to as **front-end bound**, meaning the CPU often waits for instructions instead of executing them.
 This usually points to instruction fetch or code layout issues, where improving code layout can help.
 
 The L1 instruction cache (L1 I-cache) is the first and fastest cache used to store instructions close to the CPU.
@@ -83,8 +83,3 @@ The `topdown-tool` collects performance counters using `perf` and applies formul
 To compute the **L1I cache MPKI** manually from the `perf stat` output, apply the following formula:
 
 $$\frac{(\text{L1-icache-misses} \times 1000)}{\text{instructions}}$$
-
-### Further Reading
-- [Arm Topdown methodology]( https://developer.arm.com/documentation/109542/02/Arm-Topdown-methodology)
-- [Optimizing Clang : A Practical Example of Applying BOLT](https://github.com/llvm/llvm-project/blob/main/bolt/docs/OptimizingClang.md)
-- [Metrics by metric group in Neoverse V2](https://developer.arm.com/documentation/109528/0200/Metrics-by-metric-group-in-Neoverse-V2?lang=en)
