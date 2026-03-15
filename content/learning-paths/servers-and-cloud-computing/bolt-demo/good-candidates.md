@@ -1,5 +1,5 @@
 ---
-title: Good BOLT Candidates
+title: Identify programs for BOLT optimization
 weight: 4
 
 ### FIXED, DO NOT MODIFY

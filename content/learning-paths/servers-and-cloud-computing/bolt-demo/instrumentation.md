@@ -1,5 +1,5 @@
 ---
-title: "BOLT with Instrumentation"
+title: Optimize with instrumentation profiling
 weight: 6
 
 ### FIXED, DO NOT MODIFY

@@ -1,5 +1,5 @@
 ---
-title: "BOLT with BRBE"
+title: Optimize with BRBE profiling
 weight: 5
 
 ### FIXED, DO NOT MODIFY

@@ -1,7 +1,5 @@
 ---
-
-title: "BOLT with SPE"
-
+title: Optimize with SPE profiling
 weight: 7
 
 ### FIXED, DO NOT MODIFY

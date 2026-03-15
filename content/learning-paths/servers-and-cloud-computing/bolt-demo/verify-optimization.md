@@ -1,5 +1,5 @@
 ---
-title: Verify Optimization
+title: Verify BOLT optimization results
 weight: 9
 
 ### FIXED, DO NOT MODIFY

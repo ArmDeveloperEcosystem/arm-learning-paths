@@ -1,7 +1,5 @@
 ---
-
-title: "BOLT with PMU"
-
+title: Optimize with PMU profiling
 weight: 8
 
 ### FIXED, DO NOT MODIFY

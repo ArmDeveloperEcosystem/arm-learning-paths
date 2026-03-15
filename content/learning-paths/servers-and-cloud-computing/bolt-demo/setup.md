@@ -1,5 +1,5 @@
 ---
-title: Setup and Input
+title: Prepare your environment for BOLT
 weight: 3
 
 ### FIXED, DO NOT MODIFY
