@@ -58,4 +58,8 @@ llvm-bolt out/bsort -o out/bsort.opt.brbe --data prof/brbe.fdata \
         --dyno-stats
 ```
 
+## What you've learned and what's next
 
+You've collected a BRBE profile and used it to optimize the binary with BOLT. BRBE provides high-quality control-flow profiles with minimal runtime overhead.
+
+You can now explore alternative profiling methods (instrumentation, SPE, or PMU) or proceed directly to verify the optimization results.

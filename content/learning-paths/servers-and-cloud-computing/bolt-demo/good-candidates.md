@@ -83,3 +83,9 @@ The `topdown-tool` collects performance counters using `perf` and applies formul
 To compute the **L1I cache MPKI** manually from the `perf stat` output, apply the following formula:
 
 $$\frac{(\text{L1-icache-misses} \times 1000)}{\text{instructions}}$$
+
+## What you've learned and what's next
+
+You've learned how to evaluate whether a program is a good candidate for BOLT optimization by analyzing frontend stalls and L1I cache MPKI. The example program shows clear signs of poor instruction locality with 55% frontend bound and an L1I MPKI of 60.
+
+In the following sections, you'll explore different profiling methods to collect the data BOLT needs for optimization, starting with BRBE profiling.

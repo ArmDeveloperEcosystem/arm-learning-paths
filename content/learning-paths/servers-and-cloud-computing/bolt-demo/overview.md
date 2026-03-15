@@ -27,3 +27,9 @@ Arm trace extensions such as **ETM** and **ETE** can also generate traces that a
 For each profiling method, you will walk through the process of collecting a profile, converting it into a format usable by BOLT, and applying BOLT to generate an optimized binary.
 
 Finally, you will use hardware performance metrics to evaluate how effective the optimization was.
+
+## What you've learned and what's next
+
+You now understand what BOLT is and the four profiling methods available for collecting optimization profiles: BRBE, instrumentation, SPE, and PMU. Each method offers different trade-offs between profiling accuracy and runtime overhead.
+
+In the next section, you'll set up your environment and compile the example program that demonstrates poor code locality.

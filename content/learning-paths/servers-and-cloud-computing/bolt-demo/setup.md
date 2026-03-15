@@ -321,3 +321,9 @@ SWAP_FUNC(3) COLD_FUNC(3)
 SWAP_FUNC(4) COLD_FUNC(4)
 SWAP_FUNC(5) COLD_FUNC(5)
 ```
+
+## What you've learned and what's next
+
+You've compiled the BubbleSort example program with intentionally poor code locality and verified that the binary contains the necessary relocation information. The program is now ready for profiling and optimization.
+
+Next, you'll learn how to identify whether this program is a good candidate for BOLT optimization by analyzing its performance metrics.

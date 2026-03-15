@@ -78,4 +78,8 @@ The `perf record` command collects branch samples using the SPE hardware profile
 The `perf2bolt` tool converts the SPE trace into BOLT’s .fdata profile format, using the --spe option to interpret the samples correctly.
 Finally, `llvm-bolt` uses the generated profile to reorganize functions and basic blocks in the binary, producing an optimized binary named `out/bsort.opt.spe`.
 
+## What you've learned and what's next
 
+You've collected an SPE profile and used it to optimize the binary with BOLT. SPE provides useful control-flow information when BRBE is unavailable, though it captures less detailed branch history.
+
+You can explore other profiling methods or move on to verify the optimization results.

@@ -44,3 +44,8 @@ llvm-bolt out/bsort -o out/bsort.opt.pmu --data prof/pmu.fdata \
 The `perf record` command collects samples of the instructions event in user space.
 The `perf2bolt` tool converts the collected samples into BOLT’s .fdata profile format using the --ba option, which interprets the samples as basic-block counts.
 Finally, `llvm-bolt` uses the generated profile to reorganize functions and basic blocks in the binary, producing an optimized binary named `out/bsort.opt.pmu`.
+## What you've learned and what's next
+
+You've collected a PMU profile and generated an optimized binary using basic sampling. While PMU provides less detailed control-flow information than BRBE or SPE, it's available on all Arm systems.
+
+Now you're ready to verify how effective the BOLT optimization was by measuring performance improvements.

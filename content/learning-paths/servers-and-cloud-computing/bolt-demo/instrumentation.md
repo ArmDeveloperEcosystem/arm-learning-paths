@@ -32,3 +32,9 @@ llvm-bolt out/bsort -o out/bsort.opt.instr --data /tmp/prof.fdata \
         --dyno-stats
 ```
 This process produces an optimized binary named out/bsort.opt.instr, which uses the collected execution profile to improve code layout.
+
+## What you've learned and what's next
+
+You've used instrumentation to collect a highly accurate execution profile and generated an optimized binary. While instrumentation introduces runtime overhead during profiling, it provides the most precise control-flow information.
+
+You can explore other profiling methods or proceed to verify how much the optimization improved performance.
