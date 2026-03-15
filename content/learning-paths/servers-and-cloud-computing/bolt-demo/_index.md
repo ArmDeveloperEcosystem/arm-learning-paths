@@ -16,8 +16,8 @@ learning_objectives:
 
 prerequisites:
     - An AArch64 system running Linux with [perf](/install-guides/perf/) installed
-    - Linux kernel version 6.17 or later to enable Branch Record Buffer Extension [BRBE](./brbe) profiling
-    - Linux kernel version 6.14 or later for Arm Statistical Profiling Extension [SPE](./spe) support
+    - Linux kernel version 6.17 or later to enable Branch Record Buffer Extension ([BRBE profiling](/learning-paths/servers-and-cloud-computing/bolt-demo/brbe/))
+    - Linux kernel version 6.14 or later for Arm Statistical Profiling Extension ([SPE profiling](/learning-paths/servers-and-cloud-computing/bolt-demo/spe/))
     - GCC version 13.3 or later to compile the example program ([GCC](/install-guides/gcc/) )
     - LLVM BOLT version [21.1.8](https://github.com/llvm/llvm-project/releases/tag/llvmorg-21.1.8) or later (download [zip](https://github.com/llvm/llvm-project/releases/download/llvmorg-21.1.8/LLVM-21.1.8-Linux-ARM64.tar.xz))
     - A system with with sufficient hardware performance counters to use the [TopDown](/install-guides/topdown-tool) methodology. This typically requires running on bare metal rather than a virtualized environment.

@@ -18,7 +18,7 @@ Because functions consist of many basic blocks, PMU sampling can provide useful 
 
 ## When to use PMU
 Use PMU profiling when BRBE and SPE are unavailable and instrumentation is not practical for the workload.
-PMU provides the least detailed control-flow information among the profiling methods described in this tutorial. Because it samples instruction addresses rather than control-flow edges, it mainly reveals which parts of the program execute frequently.
+PMU provides the least detailed control-flow information among the profiling methods described here. Because it samples instruction addresses rather than control-flow edges, it mainly reveals which parts of the program execute frequently.
 For this reason, PMU profiling typically serves as a fallback option for BOLT when more informative profiling methods are not available.
 
 ## Check PMU availability
@@ -26,7 +26,7 @@ All Arm systems that support the Linux perf tool provide access to PMU events. P
 
 ## Optimize with PMU
 Record a PMU profile by running the workload under `perf`. Then convert the recorded profile into a format that BOLT understands and run the BOLT optimizer.
-This tutorial uses instruction sampling, which attributes samples to the instructions that were executing when the sampling event occurred.
+The example uses instruction sampling, which attributes samples to the instructions that were executing when the sampling event occurred.
 The process consists of three steps:
   * Record a PMU profile using perf
   * Convert the profile into BOLT’s .fdata format

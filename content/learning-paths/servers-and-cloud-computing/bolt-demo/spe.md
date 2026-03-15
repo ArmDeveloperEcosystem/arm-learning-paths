@@ -13,7 +13,7 @@ SPE (Statistical Profiling Extension) is an Arm hardware profiling unit that col
 SPE periodically samples microarchitectural events such as instruction execution, memory accesses, and branches. The processor records information about the sampled event in a trace buffer, which profiling tools later decode.
 
 For BOLT, SPE branch samples are the relevant input as they provide an edge-based control-flow profile.
-Unlike [BRBE](../brbe), SPE does not record sequences of taken branches. Instead, each sample describes only a single branch transition between two program locations, representing a single edge in the control-flow graph. Because of this limited context, SPE typically produces less detailed control-flow profiles than BRBE.
+Unlike [BRBE profiling](/learning-paths/servers-and-cloud-computing/bolt-demo/brbe/), SPE does not record sequences of taken branches. Instead, each sample describes only a single branch transition between two program locations, representing a single edge in the control-flow graph. Because of this limited context, SPE typically produces less detailed control-flow profiles than BRBE.
 
 Some processors also support the Previous Branch Target (PBT) feature. PBT records the target of the most recently taken branch in addition to the sampled edge. This provides a depth-1 branch history, which slightly improves the quality of the reconstructed control-flow profile.
 

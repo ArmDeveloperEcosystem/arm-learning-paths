@@ -9,7 +9,7 @@ layout: learningpathall
 ## Verify optimization with runtime
 
 {{% notice Note %}}
-The example below uses a [BRBE](/learning-paths/servers-and-cloud-computing/bolt-demo/brbe/) optimized binary. You can apply the same verification steps to binaries optimized using the other BOLT profiling methods.
+The example below uses a [BRBE profiling](/learning-paths/servers-and-cloud-computing/bolt-demo/brbe/) optimized binary. You can apply the same verification steps to binaries optimized using the other BOLT profiling methods.
 {{% /notice %}}
 
 First, compare the runtime of the original and optimized BubbleSort binaries. A shorter runtime provides an initial indication that BOLT improved the code layout.
@@ -76,7 +76,7 @@ Compare these metrics with the earlier results collected from the original binar
 
 In this example, the optimized program is 36% frontend bound, down from 55%. The L1I cache MPKI drops to nearly 0, which indicates a significant improvement in instruction locality. 
 
-This value is unusually low because the tutorial program intentionally creates poor code locality.
+This value is unusually low because the example program intentionally creates poor code locality.
 
 The Branch MPKI also decreases—from 16 to about 10—because BOLT can improve branch prediction. It uses profile data to adjust code layout and swap fall-through and taken paths when beneficial.
 

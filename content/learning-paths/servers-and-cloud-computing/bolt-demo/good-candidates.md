@@ -9,7 +9,7 @@ layout: learningpathall
 ## What makes a program a good BOLT candidate?
 Hardware performance metrics can help determine whether a program is a good candidate for code layout optimization with BOLT. Developers often analyze these metrics using methodologies such as the [Arm TopDown methodology](https://developer.arm.com/documentation/109542/02/Arm-Topdown-methodology).
 
-In this tutorial, you will focus on a small set of TopDown indicators related to instruction delivery and code locality. These indicators describe how efficiently the processor fetches instructions and keeps the execution pipeline busy.
+You will focus on a small set of TopDown indicators related to instruction delivery and code locality. These indicators describe how efficiently the processor fetches instructions and keeps the execution pipeline busy.
 
 When instruction delivery is inefficient, the workload is referred to as **front-end bound**, meaning the CPU often waits for instructions instead of executing them.
 This usually points to instruction fetch or code layout issues, where improving code layout can help.
