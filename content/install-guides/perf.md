@@ -18,6 +18,7 @@ author: Jason Andrews
 
 ### Link to official documentation
 official_docs: https://perf.wiki.kernel.org/index.php/Main_Page
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=perf
 
 test_images:
 - ubuntu:latest

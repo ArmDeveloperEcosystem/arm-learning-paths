@@ -2,6 +2,7 @@
 title: PowerShell
 minutes_to_complete: 10
 official_docs: https://learn.microsoft.com/en-us/powershell/
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=powershell
 author: Jason Andrews
 additional_search_terms:
 - pwsh

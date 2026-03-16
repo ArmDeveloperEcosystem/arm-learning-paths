@@ -5,6 +5,7 @@ author: Jason Andrews
 minutes_to_complete: 10
 
 official_docs: https://helm.sh/docs/
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=helm
 
 additional_search_terms:
 - kubernetes
