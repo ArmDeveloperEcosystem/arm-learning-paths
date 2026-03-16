@@ -15,27 +15,27 @@ python3.12 --version
 git --version
 ```
 
-These instructions are tested on Python 3.12. Earlier versions of Python 3 may work but are not validated against the `redacted-branch` branch used in this Learning Path.
+These instructions are tested on Python 3.12. Earlier versions of Python 3 may work but are not validated against the `feat/device-connect-integration-draft` branch used in this Learning Path.
 
 ## Clone the repository
 
-The code run in this Learning Path sits in the `redacted` repository. It contains the robot runtime and the `robot_mesh` Strands tool.
+The code run in this Learning Path sits in the `robots` repository. It contains the robot runtime and the `robot_mesh` Strands tool.
 
 ```bash
 mkdir ~/strands-device-connect
 cd strands-device-connect
-git clone https://github.com/redacted
+git clone https://github.com/atsyplikhin/robots.git
 ```
 
 ## Check out the integration branch
 
-The Device Connect integration code for `redacted` lives on the `redacted-branch` branch. This branch adds the `RobotDeviceDriver` adapter and the updated `robot_mesh` tool that routes calls through the Device Connect SDK rather than the raw Zenoh mesh.
+The Device Connect integration code for `robots` lives on the `feat/device-connect-integration-draft` branch. This branch adds the `RobotDeviceDriver` adapter and the updated `robot_mesh` tool that routes calls through the Device Connect SDK rather than the raw Zenoh mesh.
 
-TODO: remove feature branch? replace redacted and redacted-branch
+TODO: remove feature branch? replace robots and feat/device-connect-integration-draft
 
 ```bash
-cd ~/strands-device-connect/redacted
-git checkout redacted-branch
+cd ~/strands-device-connect/robots
+git checkout feat/device-connect-integration-draft
 cd ..
 ```
 
@@ -65,7 +65,7 @@ This means discovery works as long as the device process and the agent process a
 
 At this point you have:
 
-- Two repositories cloned with `redacted` on the `feat/device-connect-integration` branch.
+- `robots` cloned with the `feat/device-connect-integration` branch.
 - A single Python 3.12 virtual environment with the Device Connect SDK, agent tools, and robot simulation runtime all installed.
 
 The next section walks you through starting a simulated robot and invoking it from both the agent tools and the `robot_mesh` Strands tool.

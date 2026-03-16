@@ -82,7 +82,7 @@ Note the address returned — for the rest of this section it is referred to as 
 
 ## Step 3 — Prepare the Raspberry Pi
 
-On the Raspberry Pi, follow the same repository and environment setup from the setup section of this Learning Path: install Python 3.12, clone the `redacted` repository, create the virtual environment, and install the packages with the same editable install commands.
+On the Raspberry Pi, follow the same repository and environment setup from the setup section of this Learning Path: install Python 3.12, clone the `robots` repository, create the virtual environment, and install the packages with the same editable install commands.
 
 Once the environment is ready, export the three variables that tell the SDK to route traffic through the Device Connect router on your host rather than using local network discovery:
 

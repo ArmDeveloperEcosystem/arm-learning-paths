@@ -32,7 +32,7 @@ You will need two terminal windows open at the same time: one to keep the simula
 Make sure you are in the repository directory and that your virtual environment is activated:
 
 ```bash
-cd ~/strands-device-connect/redacted
+cd ~/strands-device-connect/robots
 source .venv/bin/activate
 ```
 

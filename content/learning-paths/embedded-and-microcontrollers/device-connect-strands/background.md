@@ -24,9 +24,9 @@ A device is any process that registers itself on the mesh and exposes callable f
 
 **Agent layer**
 
-Two interfaces sit at this layer. The `device-connect-agent-tools` package exposes `discover_devices()` and `invoke_device()` as plain Python functions you can call directly from a script or REPL, with no LLM involved. The `robot_mesh` tool from `redacted` wraps the same capabilities as a Strands agent tool, which means an LLM can also call them during a reasoning loop. Both share the same underlying Device Connect transport, so anything you can do with one you can do with the other.
+Two interfaces sit at this layer. The `device-connect-agent-tools` package exposes `discover_devices()` and `invoke_device()` as plain Python functions you can call directly from a script or REPL, with no LLM involved. The `robot_mesh` tool from `robots` wraps the same capabilities as a Strands agent tool, which means an LLM can also call them during a reasoning loop. Both share the same underlying Device Connect transport, so anything you can do with one you can do with the other.
 
-TODO: replace redacted
+TODO: replace robots
 
 The diagram below shows how these layers communicate at runtime:
 
@@ -66,7 +66,7 @@ Once you have the flow working end to end, replacing `'mock'` with a real policy
 
 By working through the remaining sections you will:
 
-- Clone two repositories and install the Device Connect SDK, agent tools, and Strands robot runtime from source into a single virtual environment.
+- Clone the sample repository and install the Device Connect SDK, agent tools, and Strands robot runtime from source into a single virtual environment.
 - Start a simulated robot that registers itself on the local device mesh.
 - Discover and invoke the robot using `device-connect-agent-tools` directly.
 - Discover and command the robot through the `robot_mesh` Strands tool, including an emergency stop.
