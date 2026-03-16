@@ -10,7 +10,7 @@ layout: learningpathall
 
 Migration is not complete until the application is validated on both source and target platforms under realistic conditions.
 
-In this section, you will use the Arm SoC Migration Power's testing recommendations to:
+In this section, you will use the Perform Migration between Arm SoC Power's testing recommendations to:
 
 - Verify functional correctness
 - Confirm platform compatibility
@@ -114,6 +114,6 @@ The Power will analyze platform-specific characteristics. Example analysis:
 
 ## What you've accomplished
 
-You've completed the full migration workflow: you validated the source platform build, cross-compiled for the target, ran platform-specific tests, and compared performance between Graviton3 and Raspberry Pi 5. The Arm SoC Migration Power guided each step with architecture-aware recommendations rather than generic advice.
+You've completed the full migration workflow: you validated the source platform build, cross-compiled for the target, ran platform-specific tests, and compared performance between Graviton3 and Raspberry Pi 5. The Perform Migration between Arm SoC Power guided each step with architecture-aware recommendations rather than generic advice.
 
 The Discovery → Analysis → Planning → Implementation → Validation workflow you followed here applies to any Arm SoC migration, whether cloud-to-edge, edge-to-edge, or between any pair of Arm-based platforms. The HAL pattern preserves your application's business logic across different Arm SoCs so you can adapt the same codebase without starting from scratch.

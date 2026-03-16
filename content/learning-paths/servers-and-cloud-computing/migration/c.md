@@ -115,11 +115,11 @@ Using LSE can result in significant performance improvement for your application
 
 Refer to the Learning Path [Learn about Large System Extensions](/learning-paths/servers-and-cloud-computing/lse/) for more information. 
 
-### Porting code with SSE/AVX intrinsics to NEON
+### Porting code with SSE/AVX intrinsics to Neon
 
 You may have applications which include x86_64 intrinsics. These need special treatment when recompiling.
 
-Refer to the Learning Path [Porting Architecture Specific Intrinsics](/learning-paths/cross-platform/intrinsics/) for the available options to migrate x86_64 intrinsics to NEON.
+Refer to the Learning Path [Porting Architecture Specific Intrinsics](/learning-paths/cross-platform/intrinsics/) for the available options to migrate x86_64 intrinsics to Neon.
 
 ### Signed and unsigned char data types
 
@@ -139,5 +139,5 @@ Both a compiler and a Linux kernel that supports SVE is required.
 
 You will need GCC-11 or newer or LLVM-14 or newer and Linux kernel 4.15 or newer for SVE support.
 
-Refer to the Learning Path [From Arm NEON to SVE](/learning-paths/servers-and-cloud-computing/sve/sve_basics/) for more information and examples. 
+Refer to the Learning Path [From Arm Neon to SVE](/learning-paths/servers-and-cloud-computing/sve/sve_basics/) for more information and examples. 
 

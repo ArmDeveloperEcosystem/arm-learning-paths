@@ -142,4 +142,4 @@ In this section you have:
 - Tested quantized model inference using the TinyLlama Q8_0 model.
 - Used monitoring tools (htop) to confirm efficient CPU utilization.
 
-You have now successfully built and validated the CPU-only version of llama.cpp on the Grace CPU. In the next section, you will learn how to use the Process Watch tool to visualize instruction-level execution and better understand how Armv9 vectorization (SVE2 and NEON) accelerates quantized LLM inference on the Grace CPU.
+You have now successfully built and validated the CPU-only version of llama.cpp on the Grace CPU. In the next section, you will learn how to use the Process Watch tool to visualize instruction-level execution and better understand how Armv9 vectorization (SVE2 and Neon) accelerates quantized LLM inference on the Grace CPU.

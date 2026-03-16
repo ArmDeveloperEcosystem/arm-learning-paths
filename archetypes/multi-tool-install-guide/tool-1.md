@@ -2,7 +2,7 @@
 title: PLACEHOLDER TOOL 1
 minutes_to_complete: 10
 official_docs: PLACEHOLDER LINK
-author_primary: PLACEHOLDER NAME
+author: PLACEHOLDER NAME
 weight: 2
 
 ### FIXED, DO NOT MODIFY

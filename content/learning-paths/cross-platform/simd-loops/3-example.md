@@ -50,7 +50,7 @@ This layout helps optimize memory access patterns across the targeted SIMD archi
 
 Loop attributes are specified per target architecture:
 - **SME targets** — `inner_loop_202` is invoked with the `__arm_streaming` attribute and uses a shared `ZA` register context (`__arm_inout("za")`). These attributes are wrapped in the `LOOP_ATTR` macro
-- **SVE or NEON targets** — no additional attributes are required
+- **SVE or Neon targets** — no additional attributes are required
 
 This design enables portability across SIMD extensions.
 
@@ -229,7 +229,7 @@ For instruction semantics and SME/SME2 optimization guidance, see the [SME Progr
 
 Beyond the SME2 and SVE implementations, this loop also includes additional optimized versions that leverage architecture-specific features:
 
-- **NEON**: the NEON version (lines 612–710) uses structure load/store combined with indexed `fmla` to vectorize the computation.
+- **Neon**: the Neon version (lines 612–710) uses structure load/store combined with indexed `fmla` to vectorize the computation.
 
 - **SVE2.1**: the SVE2.1 version (lines 355–462) extends the base SVE approach using multi-vector loads and stores.
 

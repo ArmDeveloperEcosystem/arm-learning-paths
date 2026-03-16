@@ -151,9 +151,9 @@ This model is `DeepSeek-R1-Q4_0-00001-of-00010.gguf`, so what does each componen
 
 As of [llama.cpp commit 0f1a39f3](https://github.com/ggerganov/llama.cpp/commit/0f1a39f3), Arm has contributed code for performance optimization with three types of GEMV/GEMM kernels corresponding to three processor types:
 
-* AWS Graviton2, where you only have NEON support (you will see less improvement for these GEMV/GEMM kernels).
+* AWS Graviton2, where you only have Neon support (you will see less improvement for these GEMV/GEMM kernels).
 * AWS Graviton3, where the GEMV/GEMM kernels exploit both SVE 256 and MATMUL INT8 support.
-* AWS Graviton4, where the GEMV/GEMM kernels exploit NEON/SVE 128 and MATMUL_INT8 support.
+* AWS Graviton4, where the GEMV/GEMM kernels exploit Neon/SVE 128 and MATMUL_INT8 support.
 
 With the latest commits in `llama.cpp` you will see improvements for these Arm optimized kernels directly on your Arm-based server. You can run the pre-quantized Q4_0 model as is and do not need to re-quantize the model.
 
@@ -380,7 +380,7 @@ llama_perf_context_print:       total time =   42340.53 ms /   531 tokens
 
 The `system_info` printed from llama.cpp highlights important architectural features present on your hardware that improve the performance of the model execution. In the output shown above from running on an AWS Graviton4 instance, you will see:
 
-  * NEON = 1 This flag indicates support for Arm's Neon technology which is an implementation of the Advanced SIMD instructions.
+  * Neon = 1 This flag indicates support for Arm's Neon technology which is an implementation of the Advanced SIMD instructions.
   * ARM_FMA = 1 This flag indicates support for Arm Floating-point Multiply and Accumulate instructions. 
   * MATMUL_INT8 = 1 This flag indicates support for Arm int8 matrix multiplication instructions.
   * SVE = 1 This flag indicates support for the Arm Scalable Vector Extension.

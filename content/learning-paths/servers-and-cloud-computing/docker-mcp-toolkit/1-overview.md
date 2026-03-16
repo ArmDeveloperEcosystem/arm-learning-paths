@@ -27,7 +27,7 @@ When architecture-specific optimizations are present, migration may involve:
 
 - Identifying x86-specific intrinsics or assembly
 - Updating compiler flags and build configurations
-- Mapping AVX2 operations to appropriate NEON equivalents
+- Mapping AVX2 operations to appropriate Neon equivalents
 - Rewriting vectorized code and adjusting loop structures
 - Updating Dockerfiles, base images, and compiler flags
 - Validating correctness and performance on Arm systems
@@ -76,7 +76,7 @@ This Learning Path uses a real-world example: a matrix multiplication benchmark 
 
 The demo repository is available at [github.com/JoeStech/docker-blog-arm-migration](https://github.com/JoeStech/docker-blog-arm-migration).
 
-By the end of this Learning Path, you'll have a working Arm64 container with NEON-optimized code and an automated pull request containing all migration changes.
+By the end of this Learning Path, you'll have a working Arm64 container with Neon-optimized code and an automated pull request containing all migration changes.
 
 ## What you've learned and what's next
 
