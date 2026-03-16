@@ -1,11 +1,6 @@
 ---
 title: Connect AI agents to edge devices using Device Connect and Strands
 
-
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 30
 
 who_is_this_for: This Learning Path is for software developers who want to connect AI agents to physical or simulated edge devices using Device Connect — Arm's platform for structured device access — and Strands, the open-source agent SDK from AWS.
