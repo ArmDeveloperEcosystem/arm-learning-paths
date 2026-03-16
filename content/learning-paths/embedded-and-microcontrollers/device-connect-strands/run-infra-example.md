@@ -39,7 +39,7 @@ This section involves two machines. Keep track of which commands run where:
 | Host    | 2 | Agent tool invocations |
 | Target | — | Robot process |
 
-## Step 1 — Start the infrastructure on your host machine
+## Step 1 — start the infrastructure on your host machine
 
 In host terminal 1, bring up the Device Connect infrastructure stack. The Compose file is inside the `device-connect` repository you cloned during setup:
 
@@ -66,7 +66,7 @@ device-registry         running    0.0.0.0:8080->8080/tcp
 
 All three services must show `running` before you continue. The router on port 7447 is the single rendezvous point for all device traffic. Every device on any machine points at this address to join the mesh.
 
-## Step 2 — Find your host's IP address
+## Step 2 — find your host's IP address
 
 The Raspberry Pi needs to connect to the Device Connect router on your host by IP address. Find it now:
 
@@ -80,7 +80,7 @@ hostname -I | awk '{print $1}'
 
 Note the address returned — for the rest of this section it's referred to as `HOST_IP`. For example, if the command returns `192.168.1.42`, replace every occurrence of `HOST_IP` below with that address.
 
-## Step 3 — Prepare the Raspberry Pi
+## Step 3 — prepare the Raspberry Pi
 
 On the Raspberry Pi, follow the same repository and environment setup from the setup section of this Learning Path: install Python 3.12, clone the `robots` repository, create the virtual environment, and install the packages with the same editable install commands.
 
@@ -94,7 +94,7 @@ export DEVICE_CONNECT_ALLOW_INSECURE=true
 
 Replace `HOST_IP` with the address you noted in Step 2. `DEVICE_CONNECT_ALLOW_INSECURE=true` disables mTLS for this local development setup — don't use this flag in production.
 
-## Step 4 — Start the robot on the Raspberry Pi
+## Step 4 — start the robot on the Raspberry Pi
 
 On the Raspberry Pi, with the environment active and the variables set, start the simulated SO-100 robot:
 
