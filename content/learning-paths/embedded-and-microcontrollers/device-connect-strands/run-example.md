@@ -26,7 +26,7 @@ You'll need two terminal windows open at the same time: one to keep the simulate
 
 | Machine | Terminal | Purpose |
 |---------|----------|---------|
-| Host or Target | 1 | Simulated robot — keep running throughout |
+| Host or Target | 1 | Simulated robot - keep running throughout |
 | Host | 2 | Agent tool invocations |
 
 Make sure you are in the repository directory and that your virtual environment is activated:
@@ -83,11 +83,11 @@ The output is similar to:
 
 ```output
 Discovered 1 device(s):
-  [robot] so100-abc123 — idle
+  [robot] so100-abc123 - idle
     Functions: execute, getFeatures, getStatus, reset, step, stop
 ```
 
-The peer ID (for example `so100-abc123`) is assigned at startup and changes each run. Note the actual ID shown in your terminal — you'll need it in the next step.
+The peer ID (for example `so100-abc123`) is assigned at startup and changes each run. Note the actual ID shown in your terminal - you'll need it in the next step.
 
 ### Execute an instruction
 
@@ -180,7 +180,7 @@ The output is similar to:
 
 ```output
 Found 1 robot(s):
-  so100-abc123 — idle
+  so100-abc123 - idle
 Execute result: {'success': True, 'result': {'status': 'success', 'content': [...]}}
 Status: {'success': True, 'result': {...}}  # full sim state dict
 ```

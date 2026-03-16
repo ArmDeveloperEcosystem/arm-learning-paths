@@ -1,5 +1,5 @@
 ---
-title: Device Connect and Strands architecture for Arm edge devices
+title: Learn Device Connect and Strands architecture for edge devices
 weight: 2
 
 # FIXED, DO NOT MODIFY
@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Why connect AI agents to edge devices?
 
-Arm processors are at the heart of a remarkable range of systems — from Cortex-M microcontrollers in industrial sensors to Neoverse servers running in the cloud. That breadth of hardware is one of Arm's greatest strengths, but it raises a practical question for AI developers: how do you give an agent structured, safe access to devices that are physically distributed and built on different software stacks?
+Arm processors are at the heart of a remarkable range of systems - from Cortex-M microcontrollers in industrial sensors to Neoverse servers running in the cloud. That breadth of hardware is one of Arm's greatest strengths, but it raises a practical question for AI developers: how do you give an agent structured, safe access to devices that are physically distributed and built on different software stacks?
 
-Device Connect is Arm's answer to that question. It's a platform layer that handles device registration, discovery, and remote procedure calls across a network of devices, with no bespoke networking code required. Strands is an open-source agent SDK from AWS that takes a model-driven approach to building AI agents — an LLM calls Python tools in a structured reasoning loop, and the SDK handles the rest. When you combine them, an agent can ask "which devices are online and what can they do?" and then invoke a function on a specific device, turning natural language intent into physical action.
+Device Connect is Arm's answer to that question. It's a platform layer that handles device registration, discovery, and remote procedure calls across a network of devices, with no bespoke networking code required. Strands is an open-source agent SDK from AWS that takes a model-driven approach to building AI agents - an LLM calls Python tools in a structured reasoning loop, and the SDK handles the rest. When you combine them, an agent can ask "which devices are online and what can they do?" and then invoke a function on a specific device, turning natural language intent into physical action.
 
 This Learning Path puts both tools through their paces. It starts with a single machine, for example a laptop, where a simulated robot and an agent discover each other automatically, then extends to a two-machine setup where a Raspberry Pi joins the same device mesh over the network.
 
@@ -37,7 +37,7 @@ The diagram below shows how these layers communicate at runtime:
 ┌──────────────▼───────────────────────┐
 │  Device layer                        │
 │  Simulated SO-100 arm                |
-|           — so100-abc123             │
+|           - so100-abc123             │
 │  heartbeat · execute · getStatus     │
 └──────────────────────────────────────┘
 ```
@@ -50,15 +50,15 @@ When the `SO-100 arm` instance starts, Device Connect automatically announces th
 
 When you run `Robot('so100')`, the SDK downloads the MuJoCo physics model for the SO-100 arm (this happens once on first run) and starts a local simulation. The robot exposes three functions that any agent can call via RPC:
 
-- `execute` — start a task with a given instruction and policy provider
-- `getStatus` — query the current task state
-- `stop` — halt the current task
+- `execute` - start a task with a given instruction and policy provider
+- `getStatus` - query the current task state
+- `stop` - halt the current task
 
 For this Learning Path, the `policy_provider='mock'` argument is used, which means `execute` accepts the call and returns `{'status': 'accepted'}` without actually running a motion policy. This keeps the focus on the connectivity and invocation patterns rather than robotics.
 
 Once you have the flow working end to end, replacing `'mock'` with a real policy is a one-line change.
 
-## What you'll accomplish in this Learning Path
+## What you'll learn in this Learning Path
 
 By working through the remaining sections you'll:
 
