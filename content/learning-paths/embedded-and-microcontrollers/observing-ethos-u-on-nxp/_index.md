@@ -20,7 +20,9 @@ prerequisites:
     - Basic knowledge of Machine Learning concepts.
     - A host computer to compile ExecuTorch libraries.
 
-author: Waheed Brown, Fidel Makatia Omusilibwa
+author: 
+- Waheed Brown
+- Fidel Makatia Omusilibwa
 
 ### Tags
 skilllevels: Introductory
