@@ -112,35 +112,20 @@ Create and activate a virtual environment so your Python packages stay scoped to
 
 ## Get the ExecuTorch source code
 
-Clone ExecuTorch and run the installation script:
+Clone ExecuTorch and initialize its submodules:
+
    ```bash
    git clone https://github.com/pytorch/executorch.git
    cd executorch
-   git checkout release/1.0
-   ./install_executorch.sh
-   ```
-After the installation is finished, you should see the package in `pip list`:
-
-```bash
-pip list | grep executorch
-```
-
-## Set up the Arm toolchain
-
-Initialize the Arm-specific environment and accept the EULA:
-  
-   ```bash
-   ./examples/arm/setup.sh --i-agree-to-the-contained-eula
+   git fetch --tags
+   git checkout v1.0.0
+   git submodule sync
+   git submodule update --init --recursive
    ```
 
-Then, source the environment variables:
+Configure git inside the container (required for some build steps):
 
    ```bash
-   source ./examples/arm/arm-scratch/setup_path.sh
-   ```
-
-Finally, run the following script to set up the last dependencies:
-
-   ```bash
-   ./examples/arm/run.sh --build-only
+   git config --global user.email "you@example.com"
+   git config --global user.name "Your Name"
    ```

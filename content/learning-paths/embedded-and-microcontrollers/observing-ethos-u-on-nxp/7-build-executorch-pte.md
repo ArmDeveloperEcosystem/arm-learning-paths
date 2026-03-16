@@ -160,6 +160,10 @@ This script creates a basic addition model, quantizes it, and compiles it for th
 
 This script compiles the [MobileNet V2](https://pytorch.org/hub/pytorch_vision_mobilenet_v2/) computer vision model for the Ethos-U65. MobileNet V2 is a convolutional neural network (CNN) used for image classification and object detection.
 
+{{% notice Note %}}
+MobileNet V2 uses `export_for_training()` instead of `export()` because it contains batch normalization layers that must be traced in training mode before quantization can fuse them. The simple add model above has no such layers, so `export()` is sufficient.
+{{% /notice %}}
+
 1. Create the MobileNet V2 compilation script:
 
    ```bash
@@ -229,6 +233,40 @@ This script compiles the [MobileNet V2](https://pytorch.org/hub/pytorch_vision_m
    ```bash
    ls -la mobilenetv2_u65.pte
    ```
+
+### Copy models to the SD card
+
+The `executor_runner` firmware loads `.pte` models from a fixed DDR address (`0xC0000000`). The model must be written to DDR before Linux boots, using U-Boot.
+
+1. Copy the `.pte` files out of the Docker container:
+
+   ```bash
+   docker cp <container-id>:/root/executorch/model_u65.pte .
+   docker cp <container-id>:/root/executorch/mobilenetv2_u65.pte .
+   ```
+
+   Replace `<container-id>` with your Docker container ID.
+
+2. Write the `.pte` files to the first partition of the SD card so U-Boot can load them:
+
+{{< tabpane code=false >}}
+{{< tab header="Linux" >}}
+Mount the SD card and copy:
+```bash
+sudo mount /dev/sdX1 /mnt
+sudo cp model_u65.pte mobilenetv2_u65.pte /mnt/
+sudo umount /mnt
+```
+Replace `/dev/sdX1` with your SD card's first partition.
+{{< /tab >}}
+{{< tab header="macOS" >}}
+Mount the SD card and copy:
+```bash
+cp model_u65.pte mobilenetv2_u65.pte /Volumes/<SD_CARD_NAME>/
+```
+Replace `<SD_CARD_NAME>` with the mounted volume name.
+{{< /tab >}}
+{{< /tabpane >}}
 
 {{% notice Note %}}
 The `EthosUCompileSpec` parameters used in this guide:
