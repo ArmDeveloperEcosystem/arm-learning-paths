@@ -10,13 +10,23 @@ layout: learningpathall
 
 The previous section ran entirely on a local network, with Device Connect handling device-to-device discovery automatically. That approach is fast and requires zero configuration, but it has natural limits: both the robot and the agent must be on the same LAN, device state is ephemeral, and there is no registry you can query by device type.
 
-This section goes one step further. You will run the Zenoh router, an etcd state store, and a registry service on your machine using Docker, then connect a Raspberry Pi on the same network as the remote device. The agent running on your machine will discover the robot running on the Pi through the infrastructure, as if both were part of the same managed fleet. The Pi never needs to run Docker — it just needs Python and the packages from setup.
+This section goes one step further. You will run the Zenoh router, an etcd state store, and a registry service on your machine using Docker, then connect a Raspberry Pi on the same network as the remote device. You can use a different device as long as you can access it, but the Raspberry Pi will be used as an example. This device is also referred to as the target.
+
+The agent running on your machine will discover the robot running on the Pi through the infrastructure, as if both were part of the same managed fleet. The Pi never needs to run Docker — it just needs Python and the packages from setup.
 
 Confirm Docker and Docker Compose v2 are available on the host before continuing:
 
 ```bash
 docker --version
 docker compose version
+```
+
+## Clone and bring up the Docker image
+
+```bash
+cd ~/strands-device-connect
+git clone --depth 1 https://github.com/arm/device-connect.git
+
 ```
 
 ## Machine and terminal layout
@@ -36,6 +46,7 @@ In host terminal 1, bring up the Device Connect infrastructure stack. The Compos
 ```bash
 cd ~/strands-device-connect/device-connect/packages/device-connect-server
 docker compose -f infra/docker-compose-dev.yml up -d
+cd ../../..
 ```
 
 Confirm the services are healthy:
@@ -71,7 +82,7 @@ Note the address returned — for the rest of this section it is referred to as 
 
 ## Step 3 — Prepare the Raspberry Pi
 
-On the Raspberry Pi, follow the same repository and environment setup from the setup section of this Learning Path: install Python 3.12, clone both repositories, create the virtual environment, and install the packages with the same editable install commands.
+On the Raspberry Pi, follow the same repository and environment setup from the setup section of this Learning Path: install Python 3.12, clone the `redacted` repository, create the virtual environment, and install the packages with the same editable install commands.
 
 Once the environment is ready, export the three variables that tell the SDK to route traffic through the Device Connect router on your host rather than using local network discovery:
 
@@ -92,7 +103,8 @@ python <<'PY'
 import logging
 logging.basicConfig(level=logging.INFO)
 from strands_robots import Robot
-Robot('so100')
+r = Robot('so100')
+r.run()
 PY
 ```
 

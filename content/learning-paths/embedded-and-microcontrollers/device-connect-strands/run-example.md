@@ -29,10 +29,10 @@ You will need two terminal windows open at the same time: one to keep the simula
 | Host or Target | 1 | Simulated robot — keep running throughout |
 | Host | 2 | Agent tool invocations |
 
-Make sure you are in the workspace directory you created during setup and that your virtual environment is activated:
+Make sure you are in the repository directory and that your virtual environment is activated:
 
 ```bash
-cd ~/strands-device-connect
+cd ~/strands-device-connect/redacted
 source .venv/bin/activate
 ```
 
@@ -45,18 +45,21 @@ python <<'PY'
 import logging
 logging.basicConfig(level=logging.INFO)
 from strands_robots import Robot
-Robot('so100')
+r = Robot('so100')
+r.run()
 PY
 ```
 
-When the `Robot('so100')` object is created, the SDK downloads the MuJoCo physics model for the SO-100 arm (this download happens only on the first run and takes a minute or two), then starts the simulation and registers the robot on the Device Connect device mesh. The robot publishes a presence heartbeat every 0.5 seconds under a unique device ID, for example `so100_sim-abc123`.
+When the `Robot('so100')` object is created, the SDK downloads the MuJoCo physics model for the SO-100 arm (this download happens only on the first run and takes a minute or two), then starts the simulation and registers the robot on the Device Connect device mesh. The robot publishes a presence heartbeat every 0.5 seconds under a unique device ID, for example `so100-abc123`.
 
 You should see INFO-level log output similar to:
 
 ```output
-INFO:strands_robots.mesh:Zenoh session started
-INFO:strands_robots.mesh:Peer ID: so100_sim-abc123
-INFO:strands_robots.mesh:Heartbeat thread started
+device_connect_sdk.device.so100-a3f1b2 - INFO - Using ZENOH messaging backend
+device_connect_sdk.device.so100-a3f1b2 - INFO - Connected to ZENOH broker: []
+device_connect_sdk.device.so100-a3f1b2 - INFO - Driver connected: strands_sim
+device_connect_sdk.device.so100-a3f1b2 - INFO - Subscribed to commands on device-connect.default.so100-abc123.cmd
+🤖 so100-abc123 is online. Ctrl+C to stop.
 ```
 
 Leave this process running. The simulated robot is only discoverable as long as this process is alive.
@@ -79,9 +82,9 @@ PY
 The output is similar to:
 
 ```output
-Found 2 robot(s):
-  so100_sim-abc123 — idle
-  so100_sim-def456 — idle
+Discovered 1 device(s):
+  [robot] so100-lab-1 — idle
+    Functions: execute, getFeatures, getStatus, reset, step, stop
 ```
 
 The peer ID (for example `so100_sim-abc123`) is assigned at startup and changes each run. Note the actual ID shown in your terminal - you will need it in the next step.
@@ -105,7 +108,8 @@ PY
 You will see the following output:
 
 ```output
-Result: {'success': True, 'result': {'status': 'success', 'content': [{'text': "🚀 Policy started on 'so100' (async)"}]}}
+-> so100-lab-1: pick up the cube
+  {"status": "success", "content": [...]}
 ```
 
 {{% notice Robot output in terminal 1 %}}
@@ -158,7 +162,10 @@ if devices:
         'execute',
         {'instruction': 'pick up the cube', 'policy_provider': 'mock'},
     )
-    print(f'Result: {result}')
+    print(f'Execute result: {result}')
+
+    status = invoke_device(devices[0]['device_id'], 'getStatus')
+    print(f'Status: {status}')
 PY
 ```
 
@@ -173,8 +180,9 @@ The output is similar to:
 
 ```output
 Found 1 robot(s):
-  so100_sim-abc123
-Result: {'success': True, 'result': {'status': 'accepted'}}
+  so100-lab-1 — idle
+Execute result: {'success': True, 'result': {'status': 'success', 'content': [...]}}
+Status: {'success': True, 'result': {...}}  # full sim state dict
 ```
 
 ## What you've accomplished and what's next

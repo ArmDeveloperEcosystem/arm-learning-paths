@@ -17,24 +17,14 @@ git --version
 
 These instructions are tested on Python 3.12. Earlier versions of Python 3 may work but are not validated against the `redacted-branch` branch used in this Learning Path.
 
-## Clone the repositories
+## Clone the repository
 
-You need two repositories. The `device-connect` contains the SDK and agent tools as local packages. The `redacted` repository contains the robot runtime and the `robot_mesh` Strands tool.
+The code run in this Learning Path sits in the `redacted` repository. It contains the robot runtime and the `robot_mesh` Strands tool.
 
 ```bash
-mkdir -p ~/strands-device-connect
-cd ~/strands-device-connect
-
+mkdir ~/strands-device-connect
+cd strands-device-connect
 git clone https://github.com/redacted
-git clone https://github.com/arm/device-connect.git
-```
-
-After cloning, your workspace should look like this:
-
-```output
-~/strands-device-connect/
-├── device-connect/
-└── redacted/
 ```
 
 ## Check out the integration branch
@@ -44,7 +34,7 @@ The Device Connect integration code for `redacted` lives on the `redacted-branch
 TODO: remove feature branch? replace redacted and redacted-branch
 
 ```bash
-cd redacted
+cd ~/strands-device-connect/redacted
 git checkout redacted-branch
 cd ..
 ```
@@ -58,16 +48,12 @@ python3.12 -m venv .venv
 source .venv/bin/activate
 ```
 
-Now install the packages:
+Now install the packages and make sure they are available on your `PYTHONPATH` environment variable:
 
 ```bash
-pip install --upgrade pip setuptools wheel hatchling hatch-vcs
-pip install -e device-connect/packages/device-connect-sdk
-pip install -e "device-connect/packages/device-connect-agent-tools[strands]"
-pip install -e "redacted[sim]"
+pip install -e ".[sim]"
+export PYTHONPATH="$PWD:$PYTHONPATH"
 ```
-
-TODO: simplify commands?
 
 ## How discovery works — no configuration needed
 

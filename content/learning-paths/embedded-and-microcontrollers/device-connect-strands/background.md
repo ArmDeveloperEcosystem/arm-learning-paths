@@ -73,3 +73,5 @@ By working through the remaining sections you will:
 - Optionally extend the setup to a Raspberry Pi connected over the network, discovering and commanding it from your laptop through the Device Connect infrastructure.
 
 The next section covers the environment setup.
+
+TODO: add links to the Strands Robots docs, mesh.md, pypi?, 

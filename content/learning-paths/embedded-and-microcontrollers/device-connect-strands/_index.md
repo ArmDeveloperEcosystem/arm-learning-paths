@@ -22,7 +22,9 @@ prerequisites:
     - Basic familiarity with Python virtual environments and command-line tools.
     - (Optional) A Raspberry Pi for testing a full infrastructure setup
 
-author: Annie Tallund
+author: 
+    - Annie Tallund
+    - Kavya Sri Chennoju
 
 
 
