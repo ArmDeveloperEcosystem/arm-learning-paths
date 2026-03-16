@@ -32,16 +32,6 @@ After the installation finishes, verify the package is available:
 pip list | grep executorch
 ```
 
-### Build troubleshooting
-
-If `install_executorch.sh` fails, install the dependencies manually:
-
-```bash
-pip install torch torchvision
-pip install --no-build-isolation .
-pip install --no-build-isolation third-party/ao
-```
-
 ## Set up the Arm toolchain
 
 Initialize the Arm-specific environment and accept the EULA:
@@ -56,77 +46,14 @@ Source the environment variables:
 source ./examples/arm/ethos-u-scratch/setup_path.sh
 ```
 
-## Apply the Ethos-U65 patch
-
-As of ExecuTorch 1.0, the Ethos-U65 is not included in the default compile spec. You need to patch `compile_spec.py` to add the U65 target.
-
-Create and run the patch:
+{{% notice Troubleshooting %}}
+If `install_executorch.sh` fails, install the dependencies manually:
 
 ```bash
-cat > /tmp/patch_u65.py << 'PATCH'
-import importlib.util
-
-spec = importlib.util.find_spec("executorch.backends.arm.ethosu.compile_spec")
-if spec is None or spec.origin is None:
-    raise RuntimeError("Cannot find compile_spec.py. Is executorch installed?")
-filepath = spec.origin
-
-with open(filepath, 'r') as f:
-    content = f.read()
-
-old_code = '        elif "ethos-u85" in self.target:'
-if old_code not in content:
-    raise RuntimeError(f"Cannot find U85 config block in {filepath}. File may have changed.")
-
-new_code = '''        elif "ethos-u65" in self.target:
-            if system_config is None:
-                system_config = "Ethos_U65_High_End"
-            if memory_mode is None:
-                memory_mode = "Shared_Sram"
-        elif "ethos-u85" in self.target:'''
-
-content = content.replace(old_code, new_code)
-
-with open(filepath, 'w') as f:
-    f.write(content)
-
-print(f"Patched {filepath}! U65 support added.")
-PATCH
-
-python3 /tmp/patch_u65.py
+pip install torch torchvision
+pip install --no-build-isolation .
+pip install --no-build-isolation third-party/ao
 ```
-
-Verify the patch by running:
-
-```bash
-python3 -c "from executorch.backends.arm.ethosu import EthosUCompileSpec; EthosUCompileSpec(target='ethos-u65-256'); print('U65 OK')"
-```
-
-If successful, the output is `U65 OK`.
-
-## Additional troubleshooting
-
-If the build runs out of memory, allocate swap space:
-
-```bash
-fallocate -l 4G /swapfile
-chmod 600 /swapfile
-mkswap /swapfile
-swapon /swapfile
-```
-
-Deallocate the swap space after you complete this Learning Path (optional):
-
-```bash
-swapoff /swapfile
-rm /swapfile
-```
-
-{{% notice macOS %}}
-In Docker Desktop, increase the swap space to 4GB under **Settings > Resources**.
-
-![Increase the swap space in Docker settings to 4 GB alt-text#center](./increase-swap-space-to-4-gb.jpg "Increase the swap space in Docker settings to 4 GB")
-{{% /notice %}}
 
 If `buck2` hangs during the build:
 
@@ -143,3 +70,6 @@ git submodule sync
 git submodule update --init --recursive
 ./install_executorch.sh
 ```
+{{% /notice %}}
+
+With ExecuTorch installed and the Arm toolchain configured, you can now compile `.pte` model files targeting the Ethos-U65 NPU.

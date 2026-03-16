@@ -251,29 +251,20 @@ The `executor_runner` firmware loads `.pte` models from a fixed DDR address (`0x
 
 {{< tabpane code=false >}}
 {{< tab header="Linux" >}}
-Mount the SD card and copy:
-```bash
 sudo mount /dev/sdX1 /mnt
 sudo cp model_u65.pte mobilenetv2_u65.pte /mnt/
 sudo umount /mnt
-```
-Replace `/dev/sdX1` with your SD card's first partition.
 {{< /tab >}}
 {{< tab header="macOS" >}}
-Mount the SD card and copy:
-```bash
 cp model_u65.pte mobilenetv2_u65.pte /Volumes/<SD_CARD_NAME>/
-```
-Replace `<SD_CARD_NAME>` with the mounted volume name.
 {{< /tab >}}
 {{< /tabpane >}}
 
-{{% notice Note %}}
-The `EthosUCompileSpec` parameters used in this guide:
-
-| Parameter         | Value                 | Description                                    |
-| ----------------- | --------------------- | ---------------------------------------------- |
-| `target`          | `ethos-u65-256`       | Targets the Ethos-U65 with 256 MAC units       |
-| `system_config`   | `Ethos_U65_High_End`  | High-end system configuration for optimal performance |
-| `memory_mode`     | `Shared_Sram`         | Uses shared SRAM memory mode                   |
+{{% notice Parameter placeholders %}}
+For the commands above:
+- Replace `/dev/sdX1` with your SD card's first partition.
+- Replace `<SD_CARD_NAME>` with the mounted volume name.
 {{% /notice %}}
+
+With both `.pte` files staged on the SD card, you can now build the Cortex-M33 `executor_runner` firmware that will load and execute them.
+

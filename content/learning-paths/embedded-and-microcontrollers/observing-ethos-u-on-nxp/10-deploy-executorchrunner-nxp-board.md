@@ -170,8 +170,7 @@ sleep 15
 cat /sys/kernel/debug/remoteproc/remoteproc0/trace0
 ```
 
-## Troubleshooting
-
+{{% notice Troubleshooting %}}
 **RemoteProc fails to load firmware:**
 
 Check that the file exists and has correct permissions:
@@ -219,3 +218,8 @@ dmesg | grep -i error | tail
 ```
 
 This might indicate memory configuration issues. Verify that both DDR regions (`0xC0000000`--`0xC03FFFFF` and `0xA8000000`--`0xAFFFFFFF`) are reserved in the device tree.
+{{% /notice %}}
+
+## Summary
+
+You've completed the full bring-up flow for ExecuTorch on the NXP FRDM i.MX 93. Along the way, you set up a reproducible build environment, compiled two `.pte` model artifacts targeting the Ethos-U65, built and patched the Cortex-M33 `executor_runner` firmware, and deployed it through Linux RemoteProc to confirm a successful end-to-end inference run. The remoteproc trace buffer confirmed zero bus errors and full NPU operator coverage, establishing a stable foundation for iterating on models and firmware independently.

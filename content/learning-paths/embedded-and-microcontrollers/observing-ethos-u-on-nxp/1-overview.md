@@ -49,3 +49,5 @@ This Learning Path uses TinyML. TinyML is machine learning tailored to function 
 For a Learning Path focused on creating and deploying your own TinyML models, see [Introduction to TinyML on Arm using PyTorch and ExecuTorch](/learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm/)
 
 In this Learning Path, you focus on deployment and observation: building the two runtime artifacts (the `.pte` model and the `executor_runner` firmware), bringing them up on the board, and confirming the Ethos-U acceleration path is active.
+
+The next section covers booting the FRDM i.MX 93 and establishing a console connection so you can log in and transfer files.

@@ -118,14 +118,19 @@ Clone ExecuTorch and initialize its submodules:
    git clone https://github.com/pytorch/executorch.git
    cd executorch
    git fetch --tags
-   git checkout v1.0.0
+   git checkout c70a742344e30158dc370d7d35d60ed07660fee0
    git submodule sync
    git submodule update --init --recursive
    ```
 
-Configure git inside the container (required for some build steps):
+{{% notice EthosUCompileSpec parameters %}}
+The `EthosUCompileSpec` parameters used in this guide:
 
-   ```bash
-   git config --global user.email "you@example.com"
-   git config --global user.name "Your Name"
-   ```
+| Parameter         | Value                 | Description                                    |
+| ----------------- | --------------------- | ---------------------------------------------- |
+| `target`          | `ethos-u65-256`       | Targets the Ethos-U65 with 256 MAC units       |
+| `system_config`   | `Ethos_U65_High_End`  | High-end system configuration for optimal performance |
+| `memory_mode`     | `Shared_Sram`         | Uses shared SRAM memory mode                   |
+{{% /notice %}}
+
+With your build environment configured and the ExecuTorch source checked out, the next step is building and installing the ExecuTorch package.

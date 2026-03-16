@@ -15,12 +15,10 @@ This section walks through powering on the board and establishing a serial conso
 You need a serial terminal to see the boot console and log in.
 
 {{% notice macOS %}}
+On macOS as your host, you will need the following set up before getting started: 
 
-1. Install the Silicon Labs USB-to-UART driver:
-
-   https://www.silabs.com/developer-tools/usb-to-uart-bridge-vcp-drivers?tab=downloads
-
-2. Install [picocom](https://github.com/npat-efault/picocom):
+- Install the [Silicon Labs USB-to-UART driver](https://www.silabs.com/developer-tools/usb-to-uart-bridge-vcp-drivers?tab=downloads)
+- Install [picocom](https://github.com/npat-efault/picocom)
    ```bash
    brew install picocom
    ```
@@ -68,3 +66,5 @@ If you miss the login prompt, hold the board's power button for two seconds to p
 Connect the board to a monitor via HDMI and plug a mouse into the board's USB-A port. NXP includes several ML demos that run out of the box.
 
 ![NXP board built-in ML demos alt-text#center](./nxp-board-built-in-ml-demos.png "NXP board built-in ML demos")
+
+With the board running and Linux accessible, the next step is setting up the build environment for ExecuTorch.

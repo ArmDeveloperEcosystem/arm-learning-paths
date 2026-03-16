@@ -83,58 +83,25 @@ Find the installed toolchain directory name:
 
 {{< tabpane code=false >}}
 {{< tab header="Linux/macOS" >}}
-```bash
 ls ~/.mcuxpressotools/arm-gnu-toolchain-*
-```
 {{< /tab >}}
-{{< tab header="Windows" >}}
-```powershell
+{{< tab header="Windows (PowerShell)" >}}
 dir $env:USERPROFILE\.mcuxpressotools\arm-gnu-toolchain-*
-```
 {{< /tab >}}
 {{< /tabpane >}}
 
 Use the directory name from the output for the `ARMGCC_DIR` variable below. The name looks like `arm-gnu-toolchain-14.2.rel1-darwin-arm64-arm-none-eabi` (the version number may differ).
 
 {{< tabpane code=false >}}
-{{< tab header="macOS" >}}
-Add these lines to `~/.zshrc`:
-```bash
-# Replace <toolchain-dir> with the directory name found above
+{{< tab header="Linux/macOS" >}}
 export ARMGCC_DIR="$HOME/.mcuxpressotools/<toolchain-dir>"
 export SdkRootDirPath="$HOME/mcuxsdk_root"
 export MCUX_VENV_PATH="$HOME/.mcuxpressotools/.venv/bin"
-```
-
-Reload your shell:
-```bash
-source ~/.zshrc
-```
 {{< /tab >}}
-{{< tab header="Linux" >}}
-Add these lines to `~/.bashrc`:
-```bash
-# Replace <toolchain-dir> with the directory name found above
-export ARMGCC_DIR="$HOME/.mcuxpressotools/<toolchain-dir>"
-export SdkRootDirPath="$HOME/mcuxsdk_root"
-export MCUX_VENV_PATH="$HOME/.mcuxpressotools/.venv/bin"
-```
-
-Reload your shell:
-```bash
-source ~/.bashrc
-```
-{{< /tab >}}
-{{< tab header="Windows" >}}
-Open PowerShell and set persistent environment variables:
-```powershell
-# Replace <toolchain-dir> with the directory name found above
+{{< tab header="Windows (PowerShell)" >}}
 [Environment]::SetEnvironmentVariable("ARMGCC_DIR", "$env:USERPROFILE\.mcuxpressotools\<toolchain-dir>", "User")
 [Environment]::SetEnvironmentVariable("SdkRootDirPath", "$env:USERPROFILE\mcuxsdk_root", "User")
 [Environment]::SetEnvironmentVariable("MCUX_VENV_PATH", "$env:USERPROFILE\.mcuxpressotools\.venv\Scripts", "User")
-```
-
-Restart your terminal after setting these.
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -142,22 +109,12 @@ These quick checks catch most path mistakes before you start debugging build err
 
 {{< tabpane code=false >}}
 {{< tab header="Linux/macOS" >}}
-```bash
 test -x "$ARMGCC_DIR/bin/arm-none-eabi-gcc" && echo "OK: toolchain" || echo "FAIL: ARMGCC_DIR"
 test -d "$SdkRootDirPath/mcuxsdk" && echo "OK: SDK" || echo "FAIL: SdkRootDirPath"
-```
 {{< /tab >}}
-{{< tab header="Windows" >}}
-Run in Git Bash:
-```bash
-test -x "$ARMGCC_DIR/bin/arm-none-eabi-gcc.exe" && echo "OK: toolchain" || echo "FAIL: ARMGCC_DIR"
-test -d "$SdkRootDirPath/mcuxsdk" && echo "OK: SDK" || echo "FAIL: SdkRootDirPath"
-```
-Or in PowerShell:
-```powershell
+{{< tab header="Windows (PowerShell)" >}}
 if (Test-Path "$env:ARMGCC_DIR\bin\arm-none-eabi-gcc.exe") { "OK: toolchain" } else { "FAIL: ARMGCC_DIR" }
 if (Test-Path "$env:SdkRootDirPath\mcuxsdk") { "OK: SDK" } else { "FAIL: SdkRootDirPath" }
-```
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -165,22 +122,11 @@ if (Test-Path "$env:SdkRootDirPath\mcuxsdk") { "OK: SDK" } else { "FAIL: SdkRoot
 
 The MCUXpresso SDK ships with a linker script and an Ethos-U driver log header that need two fixes before the firmware can run correctly. The patch script in the repository reads `SdkRootDirPath` to locate your SDK and applies both fixes automatically.
 
-From the `Executorch_runner_cm33` directory, run:
+Using a `bash` shell, navigate to the `Executorch_runner_cm33` directory and run:
 
-{{< tabpane code=false >}}
-{{< tab header="Linux/macOS" >}}
 ```bash
 ./patches/apply_patches.sh
 ```
-{{< /tab >}}
-{{< tab header="Windows" >}}
-Open **Git Bash** (installed with Git for Windows) and run:
-```bash
-./patches/apply_patches.sh
-```
-The patch script requires a Unix shell. Git Bash provides `sed`, `grep`, and other tools that the script depends on. It does not run in PowerShell or CMD.
-{{< /tab >}}
-{{< /tabpane >}}
 
 You should see output confirming each patch:
 
@@ -276,8 +222,7 @@ The text section uses approximately 80% of the 128KB ITCM, and data uses approxi
 
 You now have everything you need to deploy the `.elf` binary on your NXP board.
 
-## Troubleshooting
-
+{{% notice Troubleshooting %}}
 **SDK patches not applied:**
 
 If you see a BUS FAULT during `load_method` or vtable corruption errors, the GOT linker script patch has not been applied. Run:
@@ -295,3 +240,7 @@ The 128KB ITCM is nearly full. Verify that `CMakeLists.txt` links `libquantized_
 **`resolve_operator` error for `quantized_decomposed::*`:**
 
 The quantized operator kernels are not linked. Verify that `CMakeLists.txt` links `libquantized_ops_lib_selective.a` with `--whole-archive` and that `libquantized_kernels.a` and `libkernels_util_all_deps.a` are also listed.
+
+{{% /notice %}}
+
+With the firmware binary built and its memory usage verified, you're ready to deploy it to the FRDM i.MX 93 and run your first inference.
