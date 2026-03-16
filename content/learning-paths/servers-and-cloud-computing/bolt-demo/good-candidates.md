@@ -1,17 +1,17 @@
 ---
-title: Good BOLT Candidates
+title: Identify programs for BOLT optimization
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## What make the code a good BOLT candidate?
+## What makes a program a good BOLT candidate?
 Hardware performance metrics can help determine whether a program is a good candidate for code layout optimization with BOLT. Developers often analyze these metrics using methodologies such as the [Arm TopDown methodology](https://developer.arm.com/documentation/109542/02/Arm-Topdown-methodology).
 
-In this tutorial, you will focus on a small set of TopDown indicators related to instruction delivery and code locality. These indicators describe how efficiently the processor fetches instructions and keeps the execution pipeline busy.
+You will focus on a small set of TopDown indicators related to instruction delivery and code locality. These indicators describe how efficiently the processor fetches instructions and keeps the execution pipeline busy.
 
-When instruction delivery is inefficient, the workload is refered to as **front-end bound**, meaning the CPU often waits for instructions instead of executing them.
+When instruction delivery is inefficient, the workload is referred to as **front-end bound**, meaning the CPU often waits for instructions instead of executing them.
 This usually points to instruction fetch or code layout issues, where improving code layout can help.
 
 The L1 instruction cache (L1 I-cache) is the first and fastest cache used to store instructions close to the CPU.
@@ -84,7 +84,8 @@ To compute the **L1I cache MPKI** manually from the `perf stat` output, apply th
 
 $$\frac{(\text{L1-icache-misses} \times 1000)}{\text{instructions}}$$
 
-### Further Reading
-- [Arm Topdown methodology]( https://developer.arm.com/documentation/109542/02/Arm-Topdown-methodology)
-- [Optimizing Clang : A Practical Example of Applying BOLT](https://github.com/llvm/llvm-project/blob/main/bolt/docs/OptimizingClang.md)
-- [Metrics by metric group in Neoverse V2](https://developer.arm.com/documentation/109528/0200/Metrics-by-metric-group-in-Neoverse-V2?lang=en)
+## What you've learned and what's next
+
+You've learned how to evaluate whether a program is a good candidate for BOLT optimization by analyzing frontend stalls and L1I cache MPKI. The example program shows clear signs of poor instruction locality with 55% frontend bound and an L1I MPKI of 60.
+
+In the following sections, you'll explore different profiling methods to collect the data BOLT needs for optimization, starting with BRBE profiling.

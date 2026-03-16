@@ -1,13 +1,10 @@
 ---
-title: "Get started with BOLT"
+title: "Optimize AArch64 binaries with LLVM BOLT"
 
-draft: true
-cascade:
-    draft: true
 
 minutes_to_complete: 20
 
-who_is_this_for: This learning path is intended for developers who have compiled an AArch64 Linux application and want to evaluate whether LLVM BOLT can improve its runtime performance.
+who_is_this_for: This is an introductory topic for developers who have compiled an AArch64 Linux application and want to evaluate whether LLVM BOLT can improve its runtime performance.
 
 
 learning_objectives:
@@ -19,8 +16,8 @@ learning_objectives:
 
 prerequisites:
     - An AArch64 system running Linux with [perf](/install-guides/perf/) installed
-    - Linux kernel version 6.17 or later to enable Branch Record Buffer Extension [BRBE](./brbe) profiling
-    - Linux kernel version 6.14 or later for Arm Statistical Profiling Extension [SPE](./spe) support
+    - Linux kernel version 6.17 or later to enable Branch Record Buffer Extension ([BRBE profiling](/learning-paths/servers-and-cloud-computing/bolt-demo/brbe/))
+    - Linux kernel version 6.14 or later for Arm Statistical Profiling Extension ([SPE profiling](/learning-paths/servers-and-cloud-computing/bolt-demo/spe/))
     - GCC version 13.3 or later to compile the example program ([GCC](/install-guides/gcc/) )
     - LLVM BOLT version [21.1.8](https://github.com/llvm/llvm-project/releases/tag/llvmorg-21.1.8) or later (download [zip](https://github.com/llvm/llvm-project/releases/download/llvmorg-21.1.8/LLVM-21.1.8-Linux-ARM64.tar.xz))
     - A system with with sufficient hardware performance counters to use the [TopDown](/install-guides/topdown-tool) methodology. This typically requires running on bare metal rather than a virtualized environment.
@@ -53,6 +50,18 @@ further_reading:
     - resource:
         title: Arm Topdown Methodology
         link: https://developer.arm.com/documentation/109542/02/Arm-Topdown-methodology
+        type: documentation
+    - resource:
+        title: Optimizing Clang - A Practical Example of Applying BOLT
+        link: https://github.com/llvm/llvm-project/blob/main/bolt/docs/OptimizingClang.md
+        type: documentation
+    - resource:
+        title: Metrics by metric group in Neoverse V2
+        link: https://developer.arm.com/documentation/109528/0200/Metrics-by-metric-group-in-Neoverse-V2
+        type: documentation
+    - resource:
+        title: Arm® Architecture Reference Manual, for A-profile architecture
+        link: https://developer.arm.com/documentation/ddi0487/latest
         type: documentation
 
 

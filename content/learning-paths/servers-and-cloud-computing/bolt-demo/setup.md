@@ -1,5 +1,5 @@
 ---
-title: Setup and Input
+title: Prepare your environment for BOLT
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 
-### Environment setup
+## Set up your environment
 On your AArch64 Linux machine, navigate to your home directory (or another empty working directory) and create a file named `bsort.cpp` with the following content:
 
 ```cpp
@@ -126,7 +126,7 @@ int main(void) {
 }
 ```
 
-The [Why Bubble Sort?](#why-bubble-sort) section explains why this tutorial uses BubbleSort as the demonstration workload.
+The [Why Bubble Sort?](#why-bubble-sort) section explains why BubbleSort is used as the demonstration workload.
 
 Create the following directories to organize generated files from this example:
 ```bash
@@ -136,7 +136,7 @@ mkdir -p out prof heatmap
 - **prof**: Stores profile data
 - **heatmap**: Stores heatmap visualizations and related metrics
 
-### Compile the input program {#compile}
+## Compile the input program {#compile}
 Next, compile the input program.  
 Because BOLT and other profile-guided optimization pipelines often involve multiple build stages, you will refer to this initial binary as the **stage-0 binary**.
 
@@ -171,7 +171,7 @@ clang bsort.cpp -o out/bsort -O3 -fuse-ld=lld -ffunction-sections -Wl,--emit-rel
   {{< /tab >}}
 {{< /tabpane >}}
 
-### Verify the function order
+## Verify the function order
 Verify that the compiler preserved the intended function order by inspecting the symbols in the `.text` section of the binary.
 Run the following command:
 
@@ -211,7 +211,7 @@ Run the following command:
 The output should show the **swap** and **cold** functions interleaved.  
 This layout matches the order in the source file and creates poor instruction locality, which makes the program a good candidate for BOLT optimization.
 
-### Verify the presence of relocations
+## Verify the presence of relocations
 Verify that the binary contains relocation information.  
 BOLT relies on relocation records to safely modify the binary layout after linking.
 
@@ -250,13 +250,13 @@ Check the ELF section table and confirm that relocation sections such as `.rela.
 
 Look for relocation sections such as **`.rela.text`** in the output. Their presence confirms that the linker preserved relocation information required by BOLT.
 
-### Why relocations are important {#why-relocations}
+## Why relocations are important {#why-relocations}
 BOLT uses relocation records to update references after it changes the code layout. When BOLT reorders functions or basic blocks, it must update addresses used by instructions such as calls, branches, and references to code or data. Relocation records identify these locations in the binary so that BOLT can safely rewrite them.
 Without relocations, BOLT cannot reliably adjust these references. As a result, many optimizations become unavailable. For example, BOLT disables function reordering when relocation information is missing, which prevents most code layout optimizations.
 
 Because BOLT operates on fully linked binaries, it must modify addresses that the linker already resolved. Relocations preserve the information needed to update those addresses correctly.
 
-### Why Bubble Sort?
+## Why Bubble Sort?
 Bubble Sort is a simple program with all the code in one file. The program has no external dependencies, and runs in a few seconds under instrumentation with a small, fixed workload.
 In its original form, the program does not benefit much from code layout optimization. To create a more interesting example, instruction locality is intentionally reduced.
 We introduce **cold code paths** between frequently executed code. These cold blocks separate hot instructions in memory and degrade spatial locality. BOLT later improves performance by reorganizing the binary so that hot code paths appear closer together.
@@ -321,3 +321,9 @@ SWAP_FUNC(3) COLD_FUNC(3)
 SWAP_FUNC(4) COLD_FUNC(4)
 SWAP_FUNC(5) COLD_FUNC(5)
 ```
+
+## What you've learned and what's next
+
+You've compiled the BubbleSort example program with intentionally poor code locality and verified that the binary contains the necessary relocation information. The program is now ready for profiling and optimization.
+
+Next, you'll learn how to identify whether this program is a good candidate for BOLT optimization by analyzing its performance metrics.
