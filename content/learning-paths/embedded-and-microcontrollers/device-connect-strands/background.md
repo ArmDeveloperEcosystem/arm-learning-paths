@@ -14,8 +14,6 @@ Device Connect is Arm's answer to that question. It is a platform layer that han
 
 This Learning Path puts both tools through their paces. It starts with a single machine, for example a laptop, where a simulated robot and an agent discover each other automatically, then extends to a two-machine setup where a Raspberry Pi joins the same device mesh over the network.
 
-TODO: compatible devices? Mac and what else?
-
 ## The two layers
 
 **Device layer**
@@ -25,8 +23,6 @@ A device is any process that registers itself on the mesh and exposes callable f
 **Agent layer**
 
 Two interfaces sit at this layer. The `device-connect-agent-tools` package exposes `discover_devices()` and `invoke_device()` as plain Python functions you can call directly from a script or REPL, with no LLM involved. The `robot_mesh` tool from `robots` wraps the same capabilities as a Strands agent tool, which means an LLM can also call them during a reasoning loop. Both share the same underlying Device Connect transport, so anything you can do with one you can do with the other.
-
-TODO: replace robots
 
 The diagram below shows how these layers communicate at runtime:
 
@@ -41,7 +37,7 @@ The diagram below shows how these layers communicate at runtime:
 ┌──────────────▼───────────────────────┐
 │  Device layer                        │
 │  Simulated SO-100 arm                |
-|           — so100_sim-abc123         │
+|           — so100-abc123             │
 │  heartbeat · execute · getStatus     │
 └──────────────────────────────────────┘
 ```
@@ -74,4 +70,4 @@ By working through the remaining sections you will:
 
 The next section covers the environment setup.
 
-TODO: add links to the Strands Robots docs, mesh.md, pypi?, 
+TODO: replace robots and feat/device-connect-integration-draft. Update furhter reading links. Clarify device support.

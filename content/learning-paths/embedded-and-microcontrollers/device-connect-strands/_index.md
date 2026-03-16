@@ -17,10 +17,10 @@ learning_objectives:
     - Discover and invoke the robot using the Device Connect agent tools and the robot_mesh Strands tool.
 
 prerequisites:
-    - An Arm Linux or macOS machine with Python 3.12 installed.
+    - An development machine with Python 3.12 installed.
     - Git installed.
     - Basic familiarity with Python virtual environments and command-line tools.
-    - (Optional) A Raspberry Pi for testing a full infrastructure setup
+    - (Optional) A Raspberry Pi for testing a full device-to-device (D2D) setup.
 
 author: 
     - Annie Tallund
@@ -46,6 +46,14 @@ further_reading:
     - resource:
         title: Strands Agents SDK documentation
         link: https://strandsagents.com/
+        type: website
+    - resource:
+        title: Strands robots repository
+        link: https://github.com/strands-labs/robots/tree/dev
+        type: website
+    - resource:
+        title: Device Connect integration guide
+        link: https://github.com/atsyplikhin/robots/blob/feat/device-connect-integration-draft/strands_robots/device_connect/GUIDE.md
         type: website
 
 ### FIXED, DO NOT MODIFY

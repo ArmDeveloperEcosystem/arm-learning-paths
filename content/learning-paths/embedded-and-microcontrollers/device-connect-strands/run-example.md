@@ -55,10 +55,10 @@ When the `Robot('so100')` object is created, the SDK downloads the MuJoCo physic
 You should see INFO-level log output similar to:
 
 ```output
-device_connect_sdk.device.so100-a3f1b2 - INFO - Using ZENOH messaging backend
-device_connect_sdk.device.so100-a3f1b2 - INFO - Connected to ZENOH broker: []
-device_connect_sdk.device.so100-a3f1b2 - INFO - Driver connected: strands_sim
-device_connect_sdk.device.so100-a3f1b2 - INFO - Subscribed to commands on device-connect.default.so100-abc123.cmd
+device_connect_sdk.device.so100-abc123 - INFO - Using ZENOH messaging backend
+device_connect_sdk.device.so100-abc123 - INFO - Connected to ZENOH broker: []
+device_connect_sdk.device.so100-abc123 - INFO - Driver connected: strands_sim
+device_connect_sdk.device.so100-abc123 - INFO - Subscribed to commands on device-connect.default.so100-abc123.cmd
 🤖 so100-abc123 is online. Ctrl+C to stop.
 ```
 
@@ -83,22 +83,22 @@ The output is similar to:
 
 ```output
 Discovered 1 device(s):
-  [robot] so100-lab-1 — idle
+  [robot] so100-abc123 — idle
     Functions: execute, getFeatures, getStatus, reset, step, stop
 ```
 
-The peer ID (for example `so100_sim-abc123`) is assigned at startup and changes each run. Note the actual ID shown in your terminal - you will need it in the next step.
+The peer ID (for example `so100-abc123`) is assigned at startup and changes each run. Note the actual ID shown in your terminal - you will need it in the next step.
 
 ### Execute an instruction
 
-Send a task to one of the discovered robots. Replace `so100_sim-abc123` with the peer ID shown in your `peers` output:
+Send a task to one of the discovered robots. Replace `so100-abc123` with the peer ID shown in your `peers` output:
 
 ```python
 python <<'PY'
 from strands_robots.tools.robot_mesh import robot_mesh
 print(robot_mesh(
     action='tell',
-    target='so100_sim-abc123',
+    target='so100-abc123',
     instruction='pick up the cube',
     policy_provider='mock',
 ))
@@ -108,7 +108,7 @@ PY
 You will see the following output:
 
 ```output
--> so100-lab-1: pick up the cube
+-> so100-abc123: pick up the cube
   {"status": "success", "content": [...]}
 ```
 
@@ -117,7 +117,7 @@ The robot also logs event updates as it processes the task. If you switch back t
 
 ```output
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*** EVENT so100_sim-abc123::stateUpdate [111aaabb]
+*** EVENT so100-abc123::stateUpdate [111aaabb]
     payload: sim_time=4.34, step_count=2070, running_policies={'so100': {'steps': 814, 'instruction': 'pick up the cube'}}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
@@ -180,7 +180,7 @@ The output is similar to:
 
 ```output
 Found 1 robot(s):
-  so100-lab-1 — idle
+  so100-abc123 — idle
 Execute result: {'success': True, 'result': {'status': 'success', 'content': [...]}}
 Status: {'success': True, 'result': {...}}  # full sim state dict
 ```

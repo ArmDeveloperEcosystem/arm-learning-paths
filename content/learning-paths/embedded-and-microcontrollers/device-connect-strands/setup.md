@@ -31,8 +31,6 @@ git clone https://github.com/atsyplikhin/robots.git
 
 The Device Connect integration code for `robots` lives on the `feat/device-connect-integration-draft` branch. This branch adds the `RobotDeviceDriver` adapter and the updated `robot_mesh` tool that routes calls through the Device Connect SDK rather than the raw Zenoh mesh.
 
-TODO: remove feature branch? replace robots and feat/device-connect-integration-draft
-
 ```bash
 cd ~/strands-device-connect/robots
 git checkout feat/device-connect-integration-draft

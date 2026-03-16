@@ -112,13 +112,13 @@ Because `ZENOH_CONNECT` points at your host, the SDK routes traffic through the 
 
 ```output
 INFO:strands_robots.mesh:Zenoh session started
-INFO:strands_robots.mesh:Peer ID: so100_sim-abc123
-device_connect_sdk.device.so100_sim-abc123 - INFO - Using ZENOH messaging backend
-device_connect_sdk.device.so100_sim-abc123 - INFO - Connected to ZENOH broker: ['tcp/192.168.1.42:7447']
-device_connect_sdk.device.so100_sim-abc123 - INFO - Device registered: registration_id=ecfff6a7-...
+INFO:strands_robots.mesh:Peer ID: so100-abc123
+device_connect_sdk.device.so100-abc123 - INFO - Using ZENOH messaging backend
+device_connect_sdk.device.so100-abc123 - INFO - Connected to ZENOH broker: ['tcp/192.168.1.42:7447']
+device_connect_sdk.device.so100-abc123 - INFO - Device registered: registration_id=ecfff6a7-...
 ```
 
-Note the peer ID (for example `so100_sim-abc123`). You will need it in the `tell` command below. Leave this process running on the Pi.
+Note the peer ID (for example `so100-abc123`). You will need it in the `tell` command below. Leave this process running on the Pi.
 
 ## Discover and invoke using the robot_mesh Strands tool
 
@@ -135,18 +135,18 @@ The output is similar to:
 
 ```output
 Discovered 1 device(s):
-  [robot] so100_sim-abc123 — idle
+  [robot] so100-abc123 — idle
     Functions: execute, getFeatures, getState, getStatus, stop
 ```
 
-Send an instruction to the robot. Replace `so100_sim-abc123` with the peer ID shown in your output:
+Send an instruction to the robot. Replace `so100-abc123` with the peer ID shown in your output:
 
 ```python
 python <<'PY'
 from strands_robots.tools.robot_mesh import robot_mesh
 print(robot_mesh(
     action='tell',
-    target='so100_sim-abc123',
+    target='so100-abc123',
     instruction='pick up the cube',
     policy_provider='mock',
 ))
@@ -156,7 +156,7 @@ PY
 The output is similar to:
 
 ```output
--> so100_sim-abc123: pick up the cube
+-> so100-abc123: pick up the cube
   {"status": "accepted"}
 ```
 
