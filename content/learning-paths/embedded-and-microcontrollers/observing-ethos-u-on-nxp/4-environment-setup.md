@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Enviroment Setup"
+title: "Environment setup"
 
 weight: 5 # 1 is first, 2 is second, etc.
 
@@ -8,30 +8,33 @@ weight: 5 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-For detailed instructions on setting up your ExecuTorch build environment, please see the official PyTorch documentation: [Environment Setup](https://docs.pytorch.org/executorch/stable/using-executorch-building-from-source.html#environment-setup)
+## For macOS: Build ExecuTorch in a Docker container
 
-{{% notice macOS %}}
+On macOS, it’s easiest to build ExecuTorch in an Ubuntu container. This keeps your toolchain consistent with the rest of the Learning Path and avoids gaps in macOS-native cross-compilers (for example, the Arm GNU Toolchain doesn’t provide an “AArch64 GNU/Linux target” for macOS).
 
-Use a Docker container to build ExecuTorch:
-* The [Arm GNU Toolchain](https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain) currently does not have a "AArch64 GNU/Linux target" for macOS
-* You will use this toolchain's `gcc-aarch64-linux-gnu` and `g++-aarch64-linux-gnu` compilers on the next page of this learning path
+This container isn’t part of the runtime deployment. It’s a build environment that produces the artifacts you later move onto the FRDM i.MX 93:
 
-1. Install and start [Docker Desktop](https://www.docker.com/)
+- Prebuilt ExecuTorch libraries you link into Cortex-M33 firmware
+- `.pte` model files compiled for Ethos-U65
 
-2. Create a directory for building a `ubuntu-24-container`:
+Keeping this step reproducible helps you focus on the actual bring-up milestone: booting custom firmware on Cortex-M33 and using Ethos-U65 for inference.
+
+Start by installing and launching [Docker Desktop](https://www.docker.com/).
+
+Next, create a working directory for your container build:
 
    ```bash
    mkdir ubuntu-24-container
    ```
 
-3. Create a `dockerfile` in the `ubuntu-24-container` directory:
+Now create a `Dockerfile` and switch into the directory:
 
    ```bash
    cd ubuntu-24-container
    touch Dockerfile
    ```
 
-4. Add the following commands to your `Dockerfile`:
+Add the following content to your `Dockerfile` to install a few basic tools in the image:
 
    ```dockerfile
    FROM ubuntu:24.04
@@ -44,51 +47,54 @@ Use a Docker container to build ExecuTorch:
        curl vim git
    ```
 
-   The `ubuntu:24.04` container image includes Python 3.12, which will be used for this learning path.
+   The `ubuntu:24.04` container image includes Python 3.12, which you use later in this Learning Path.
 
-5. Create the `ubuntu-24-container`:
+   Build the container image:
 
    ```bash
    docker build -t ubuntu-24-container .
    ```
 
-6. Run the `ubuntu-24-container`:
+Run the container and open an interactive shell:
 
    ```bash { output_lines = "2-3" }
    docker run -it ubuntu-24-container /bin/bash
    # Output will be the Docker container prompt
-   ubuntu@<CONTAINER ID>:/#
+   root@<CONTAINER ID>:/#
    ```
 
-   [OPTIONAL] If you already have an existing container:
-   - Get the existing CONTAINER ID:
-     ```bash { output_lines = "2-4" }
-     docker ps -a
-     # Output
-     CONTAINER ID  IMAGE                    COMMAND      CREATED        STATUS                       PORTS  NAMES
-     0123456789ab  ubuntu-24-container  "/bin/bash"  27 hours ago   Exited (255) 59 minutes ago.        container_name
-     ```
-   - Log in to the existing container:
-     ```bash
-     docker start 0123456789ab
-     docker exec -it 0123456789ab /bin/bash
-     ```
+If you already created a container before, reuse it instead of creating a new one.
 
-{{% /notice %}}
+First, list your containers to find the container ID:
 
-After logging in to the Docker container, navigate to the ubuntu home directory:
-
-```bash
-cd /home/ubuntu
+```bash { output_lines = "2-4" }
+docker ps -a
+# Output
+CONTAINER ID  IMAGE                    COMMAND      CREATED        STATUS                       PORTS  NAMES
+0123456789ab  ubuntu-24-container  "/bin/bash"  27 hours ago   Exited (255) 59 minutes ago.        container_name
 ```
 
-1. **Install dependencies:**
+Then start the container and attach a shell:
 
-   ```bash { output_lines = "1" }
-   # Use "sudo apt ..." if you are not logged in as root
+```bash
+docker start 0123456789ab
+docker exec -it 0123456789ab /bin/bash
+```
+
+Once you’re inside the container, move to your home directory:
+
+```bash
+cd /root
+```
+
+## Install dependencies
+
+Install the packages ExecuTorch needs to build. If you’re not running as root, prefix the commands with `sudo`.
+
+   ```bash
    apt update
    apt install -y \
-     python-is-python3 python3.12-dev python3.12-venv \
+     python-is-python3 python3.12-dev python3.12-venv python3-pip \
      gcc g++ \
      make cmake \
      build-essential \
@@ -96,25 +102,35 @@ cd /home/ubuntu
      libboost-all-dev
    ```
 
-2. Clone ExecuTorch:
+## Create a Python virtual environment
+
+Create and activate a virtual environment so your Python packages stay scoped to this project:
+   ```bash { output_lines = "3" }
+   python3 -m venv .venv
+   source .venv/bin/activate
+   ```
+
+## Get the ExecuTorch source code
+
+Clone ExecuTorch and initialize its submodules:
+
    ```bash
    git clone https://github.com/pytorch/executorch.git
    cd executorch
    git fetch --tags
-   git checkout v1.0.0
+   git checkout c70a742344e30158dc370d7d35d60ed07660fee0
    git submodule sync
    git submodule update --init --recursive
    ```
 
-3. Create a Virtual Environment:
-   ```bash { output_lines = "3" }
-   python3 -m venv .venv
-   source .venv/bin/activate
-   # Your prompt will prefix with (.venv)
-   ```
+{{% notice EthosUCompileSpec parameters %}}
+The `EthosUCompileSpec` parameters used in this guide:
 
-4. Configure your git username and email globally:
-   ```bash
-   git config --global user.email "you@example.com"
-   git config --global user.name "Your Name"
-   ```
+| Parameter         | Value                 | Description                                    |
+| ----------------- | --------------------- | ---------------------------------------------- |
+| `target`          | `ethos-u65-256`       | Targets the Ethos-U65 with 256 MAC units       |
+| `system_config`   | `Ethos_U65_High_End`  | High-end system configuration for optimal performance |
+| `memory_mode`     | `Shared_Sram`         | Uses shared SRAM memory mode                   |
+{{% /notice %}}
+
+With your build environment configured and the ExecuTorch source checked out, the next step is building and installing the ExecuTorch package.
