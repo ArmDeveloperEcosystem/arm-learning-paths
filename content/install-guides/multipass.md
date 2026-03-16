@@ -20,6 +20,7 @@ author: Jason Andrews
 
 ### Link to official documentation
 official_docs: https://documentation.ubuntu.com/multipass/en/latest/
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=Canonical%20Multipass
 
 test_images:
 - ubuntu:latest

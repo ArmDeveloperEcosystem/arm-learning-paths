@@ -16,6 +16,7 @@ minutes_to_complete: 15
 
 ### Link to official documentation
 official_docs: https://www.python.org/doc/
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/windows?package=python
 
 author: Jason Andrews
 

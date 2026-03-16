@@ -1,7 +1,5 @@
 ---
-
-title: "BOLT with SPE"
-
+title: Optimize with SPE profiling
 weight: 7
 
 ### FIXED, DO NOT MODIFY
@@ -10,22 +8,22 @@ layout: learningpathall
 
 ---
 
-### What is SPE
+## What is SPE?
 SPE (Statistical Profiling Extension) is an Arm hardware profiling unit that collects statistical samples of program execution with very low runtime overhead.
 SPE periodically samples microarchitectural events such as instruction execution, memory accesses, and branches. The processor records information about the sampled event in a trace buffer, which profiling tools later decode.
 
 For BOLT, SPE branch samples are the relevant input as they provide an edge-based control-flow profile.
-Unlike [BRBE](../brbe), SPE does not record sequences of taken branches. Instead, each sample describes only a single branch transition between two program locations, representing a single edge in the control-flow graph. Because of this limited context, SPE typically produces less detailed control-flow profiles than BRBE.
+Unlike [BRBE profiling](/learning-paths/servers-and-cloud-computing/bolt-demo/brbe/), SPE does not record sequences of taken branches. Instead, each sample describes only a single branch transition between two program locations, representing a single edge in the control-flow graph. Because of this limited context, SPE typically produces less detailed control-flow profiles than BRBE.
 
 Some processors also support the Previous Branch Target (PBT) feature. PBT records the target of the most recently taken branch in addition to the sampled edge. This provides a depth-1 branch history, which slightly improves the quality of the reconstructed control-flow profile.
 
 Even with PBT, SPE provides less branch history than BRBE, but it remains a useful profiling option when BRBE is not available.
 
-### When to use SPE
+## When to use SPE
 SPE provides less detailed control-flow information than BRBE because it samples individual branch events rather than recording full branch histories. Despite this limitation, SPE can still capture useful branch behavior and guide code layout decisions.
 Use SPE when BRBE is unavailable or when instrumentation overhead is too high for the workload. In these cases, SPE offers a practical compromise between profiling overhead and profile quality.
 
-### Availability
+## Check SPE availability
 SPE is an optional processor feature called **FEAT_SPE (Statistical Profiling Extension)**, introduced in the [Armv8.1 architecture](https://developer.arm.com/documentation/109697/2025_12/Feature-descriptions/The-Armv8-2-architecture-extension#md447-the-armv82-architecture-extension__feat_FEAT_SPE).
 To check whether your system supports SPE, attempt to record an SPE trace using `perf`.
 
@@ -60,7 +58,7 @@ Recording SPE traces requires a Linux kernel version 6.14 or later. Check the ke
 ```bash
 uname -r
 ```
-### Optimizing with SPE
+## Optimize with SPE
 Next, collect an SPE profile by running the workload under `perf`. Then convert the recorded trace into a format that BOLT can use and run the BOLT optimizer.
 The process consists of three steps:
 * Record an SPE profile using perf
@@ -80,5 +78,8 @@ The `perf record` command collects branch samples using the SPE hardware profile
 The `perf2bolt` tool converts the SPE trace into BOLT’s .fdata profile format, using the --spe option to interpret the samples correctly.
 Finally, `llvm-bolt` uses the generated profile to reorganize functions and basic blocks in the binary, producing an optimized binary named `out/bsort.opt.spe`.
 
-### Further Reading
-- [Arm Statistical Profiling Extension: Performance Analysis Methodology White Paper](https://developer.arm.com/documentation/109429/latest/)
+## What you've learned and what's next
+
+You've collected an SPE profile and used it to optimize the binary with BOLT. SPE provides useful control-flow information when BRBE is unavailable, though it captures less detailed branch history.
+
+You can explore other profiling methods or move on to verify the optimization results.

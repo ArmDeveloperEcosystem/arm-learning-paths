@@ -1,12 +1,12 @@
 ---
-title: "BOLT with Instrumentation"
+title: Optimize with instrumentation profiling
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-### What is instrumentation?
+## What is instrumentation?
 
 Instrumentation is a profiling technique that inserts counters into a program to record how often different parts of the code execute. Unlike sampling-based methods, instrumentation collects exact execution counts.
 
@@ -18,7 +18,7 @@ However, instrumentation increases the size of the binary and adds extra instruc
 
 Developers typically use instrumentation when other profiling methods, such as BRBE, are unavailable or when they want to measure the maximum optimization potential of BOLT.
 
-### Optimizing with instrumentation
+## Optimize with instrumentation
 First, generate an instrumented version of the binary. BOLT inserts counters into the program to record how often different code paths execute.
 Next, run the instrumented program to collect the execution profile.
 By default, BOLT writes the profile to `/tmp/prof.fdata`. You can specify a different location using the `--instrumentation-file` option.
@@ -32,3 +32,9 @@ llvm-bolt out/bsort -o out/bsort.opt.instr --data /tmp/prof.fdata \
         --dyno-stats
 ```
 This process produces an optimized binary named out/bsort.opt.instr, which uses the collected execution profile to improve code layout.
+
+## What you've learned and what's next
+
+You've used instrumentation to collect a highly accurate execution profile and generated an optimized binary. While instrumentation introduces runtime overhead during profiling, it provides the most precise control-flow information.
+
+You can explore other profiling methods or proceed to verify how much the optimization improved performance.

@@ -3,6 +3,7 @@ title: Java
 author: Jason Andrews
 minutes_to_complete: 15
 official_docs: https://docs.oracle.com/en/java/
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=Java%2FOpenJDK
 
 additional_search_terms:
 - linux

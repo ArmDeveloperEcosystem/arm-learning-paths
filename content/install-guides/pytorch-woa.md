@@ -17,6 +17,7 @@ minutes_to_complete: 15
 
 ### Link to official documentation
 official_docs: https://docs.pytorch.org/docs/stable/index.html
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/windows?package=pytorch
 
 author: Pareena Verma
 
