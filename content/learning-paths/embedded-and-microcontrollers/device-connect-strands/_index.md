@@ -12,7 +12,7 @@ learning_objectives:
     - Discover and invoke the robot using the Device Connect agent tools and the robot_mesh Strands tool.
 
 prerequisites:
-    - An development machine with Python 3.12 installed.
+    - A development machine with Python 3.12 installed.
     - Git installed.
     - Basic familiarity with Python virtual environments and command-line tools.
     - (Optional) A Raspberry Pi for testing a full device-to-device (D2D) setup.

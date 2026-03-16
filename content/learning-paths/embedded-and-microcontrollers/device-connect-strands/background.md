@@ -1,5 +1,5 @@
 ---
-title: Background and architecture
+title: Device Connect and Strands architecture for Arm edge devices
 weight: 2
 
 # FIXED, DO NOT MODIFY
@@ -10,15 +10,15 @@ layout: learningpathall
 
 Arm processors are at the heart of a remarkable range of systems — from Cortex-M microcontrollers in industrial sensors to Neoverse servers running in the cloud. That breadth of hardware is one of Arm's greatest strengths, but it raises a practical question for AI developers: how do you give an agent structured, safe access to devices that are physically distributed and built on different software stacks?
 
-Device Connect is Arm's answer to that question. It is a platform layer that handles device registration, discovery, and remote procedure calls across a network of devices, with no bespoke networking code required. Strands is an open-source agent SDK from AWS that takes a model-driven approach to building AI agents — an LLM calls Python tools in a structured reasoning loop, and the SDK handles the rest. When you combine them, an agent can ask "which devices are online and what can they do?" and then invoke a function on a specific device, turning natural language intent into physical action.
+Device Connect is Arm's answer to that question. It's a platform layer that handles device registration, discovery, and remote procedure calls across a network of devices, with no bespoke networking code required. Strands is an open-source agent SDK from AWS that takes a model-driven approach to building AI agents — an LLM calls Python tools in a structured reasoning loop, and the SDK handles the rest. When you combine them, an agent can ask "which devices are online and what can they do?" and then invoke a function on a specific device, turning natural language intent into physical action.
 
 This Learning Path puts both tools through their paces. It starts with a single machine, for example a laptop, where a simulated robot and an agent discover each other automatically, then extends to a two-machine setup where a Raspberry Pi joins the same device mesh over the network.
 
-## The two layers
+## Device Connect architecture layers
 
 **Device layer**
 
-A device is any process that registers itself on the mesh and exposes callable functions. In this Learning Path you will create a simulated robot arm, namely the simulated robotic arm SO-100 from Hugging Face, from the `strands-robots` SDK. The moment this object is created, it registers on the local network under a unique device ID (for example, `so100_sim-abc23`) and begins publishing a presence heartbeat. No explicit registration call is required. Device Connect uses Zenoh as its underlying messaging transport, which handles low-level connectivity and routing automatically.
+A device is any process that registers itself on the mesh and exposes callable functions. In this Learning Path you'll create a simulated robot arm, namely the simulated robotic arm SO-100 from Hugging Face, from the `strands-robots` SDK. The moment this object is created, it registers on the local network under a unique device ID (for example, `so100_sim-abc23`) and begins publishing a presence heartbeat. No explicit registration call is required. Device Connect uses Zenoh as its underlying messaging transport, which handles low-level connectivity and routing automatically.
 
 **Agent layer**
 
@@ -60,7 +60,7 @@ Once you have the flow working end to end, replacing `'mock'` with a real policy
 
 ## What you'll accomplish in this Learning Path
 
-By working through the remaining sections you will:
+By working through the remaining sections you'll:
 
 - Clone the sample repository and install the Device Connect SDK, agent tools, and Strands robot runtime from source into a single virtual environment.
 - Start a simulated robot that registers itself on the local device mesh.
@@ -69,5 +69,3 @@ By working through the remaining sections you will:
 - Optionally extend the setup to a Raspberry Pi connected over the network, discovering and commanding it from your laptop through the Device Connect infrastructure.
 
 The next section covers the environment setup.
-
-TODO: replace robots and feat/device-connect-integration-draft. Update furhter reading links. Clarify device support.

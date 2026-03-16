@@ -61,9 +61,9 @@ This means discovery works as long as the device process and the agent process a
 
 ## What you've set up and what's next
 
-At this point you have:
+At this point you've:
 
-- `robots` cloned with the `feat/device-connect-integration` branch.
-- A single Python 3.12 virtual environment with the Device Connect SDK, agent tools, and robot simulation runtime all installed.
+- Cloned `robots` with the `feat/device-connect-integration-draft` branch checked out.
+- Created a Python 3.12 virtual environment with the Device Connect SDK, agent tools, and robot simulation runtime all installed.
 
 The next section walks you through starting a simulated robot and invoking it from both the agent tools and the `robot_mesh` Strands tool.
