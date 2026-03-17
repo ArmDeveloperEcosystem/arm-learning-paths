@@ -1,5 +1,5 @@
 ---
-title: (Optional) Run with full Device Connect infrastructure
+title: Run with full Device Connect infrastructure (optional)
 weight: 5
 
 # FIXED, DO NOT MODIFY
@@ -8,11 +8,11 @@ layout: learningpathall
 
 ## Why add infrastructure?
 
-The previous section ran entirely on a local network, with Device Connect handling device-to-device discovery automatically. That approach is fast and requires zero configuration, but it has natural limits: both the robot and the agent must be on the same LAN, device state is ephemeral, and there is no registry you can query by device type.
+The previous section ran entirely on a local network, with Device Connect handling device-to-device discovery automatically. That approach is fast and requires zero configuration, but it has natural limits: both the robot and the agent must be on the same LAN, device state is ephemeral, and there's no registry you can query by device type.
 
-This section goes one step further. You will run the Zenoh router, an etcd state store, and a registry service on your machine using Docker, then connect a Raspberry Pi on the same network as the remote device. You can use a different device as long as you can access it, but the Raspberry Pi will be used as an example. This device is also referred to as the target.
+This section goes one step further. You'll run the Zenoh router, an etcd state store, and a registry service on your machine using Docker, then connect a Raspberry Pi on the same network as the remote device. You can use a different device as long as you can access it, but the Raspberry Pi will be used as an example. This device is also referred to as the target.
 
-The agent running on your machine will discover the robot running on the Pi through the infrastructure, as if both were part of the same managed fleet. The Pi never needs to run Docker — it just needs Python and the packages from setup.
+The agent running on your machine will discover the robot running on the Pi through the infrastructure, as if both were part of the same managed fleet. The Pi doesn't need to run Docker - it just needs Python and the packages from setup.
 
 Confirm Docker and Docker Compose v2 are available on the host before continuing:
 
@@ -37,9 +37,9 @@ This section involves two machines. Keep track of which commands run where:
 |---------|----------|---------|
 | Host    | 1 | Docker Compose infrastructure |
 | Host    | 2 | Agent tool invocations |
-| Target | — | Robot process |
+| Target | - | Robot process |
 
-## Step 1 — Start the infrastructure on your host machine
+## Step 1 - start the infrastructure on your host machine
 
 In host terminal 1, bring up the Device Connect infrastructure stack. The Compose file is inside the `device-connect` repository you cloned during setup:
 
@@ -66,7 +66,7 @@ device-registry         running    0.0.0.0:8080->8080/tcp
 
 All three services must show `running` before you continue. The router on port 7447 is the single rendezvous point for all device traffic. Every device on any machine points at this address to join the mesh.
 
-## Step 2 — Find your host's IP address
+## Step 2 - find your host's IP address
 
 The Raspberry Pi needs to connect to the Device Connect router on your host by IP address. Find it now:
 
@@ -78,9 +78,9 @@ ipconfig getifaddr en0
 hostname -I | awk '{print $1}'
 ```
 
-Note the address returned — for the rest of this section it is referred to as `HOST_IP`. For example, if the command returns `192.168.1.42`, replace every occurrence of `HOST_IP` below with that address.
+Note the address returned - for the rest of this section it's referred to as `HOST_IP`. For example, if the command returns `192.168.1.42`, replace every occurrence of `HOST_IP` below with that address.
 
-## Step 3 — Prepare the Raspberry Pi
+## Step 3 - prepare the Raspberry Pi
 
 On the Raspberry Pi, follow the same repository and environment setup from the setup section of this Learning Path: install Python 3.12, clone the `robots` repository, create the virtual environment, and install the packages with the same editable install commands.
 
@@ -92,9 +92,9 @@ export ZENOH_CONNECT=tcp/HOST_IP:7447
 export DEVICE_CONNECT_ALLOW_INSECURE=true
 ```
 
-Replace `HOST_IP` with the address you noted in Step 2. `DEVICE_CONNECT_ALLOW_INSECURE=true` disables mTLS for this local development setup — do not use this flag in production.
+Replace `HOST_IP` with the address you noted in Step 2. `DEVICE_CONNECT_ALLOW_INSECURE=true` disables mTLS for this local development setup - don't use this flag in production.
 
-## Step 4 — Start the robot on the Raspberry Pi
+## Step 4 - start the robot on the Raspberry Pi
 
 On the Raspberry Pi, with the environment active and the variables set, start the simulated SO-100 robot:
 
@@ -118,7 +118,7 @@ device_connect_sdk.device.so100-abc123 - INFO - Connected to ZENOH broker: ['tcp
 device_connect_sdk.device.so100-abc123 - INFO - Device registered: registration_id=ecfff6a7-...
 ```
 
-Note the peer ID (for example `so100-abc123`). You will need it in the `tell` command below. Leave this process running on the Pi.
+Note the peer ID (for example `so100-abc123`). You'll need it in the `tell` command below. Leave this process running on the Pi.
 
 ## Discover and invoke using the robot_mesh Strands tool
 
@@ -135,7 +135,7 @@ The output is similar to:
 
 ```output
 Discovered 1 device(s):
-  [robot] so100-abc123 — idle
+  [robot] so100-abc123 - idle
     Functions: execute, getFeatures, getState, getStatus, stop
 ```
 
@@ -175,7 +175,7 @@ The output is similar to:
 E-STOP: 1/1 devices stopped
 ```
 
-The stop broadcast reaches every device in the registry — whether it is running on your host, the Pi on your desk, or a machine in a remote lab.
+The stop broadcast reaches every device in the registry - whether it is running on your host, the Pi on your desk, or a machine in a remote lab.
 
 ## Shut down cleanly
 
@@ -188,12 +188,12 @@ docker compose -f infra/docker-compose-dev.yml down
 
 This removes the containers and clears the in-container etcd state. Your virtual environment and cloned repositories remain intact on both machines.
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
-In this section you:
+In this section you've:
 
-- Started a persistent Device Connect infrastructure stack on your host — a router, etcd, and a device registry.
+- Started a persistent Device Connect infrastructure stack on your host - a router, etcd, and a device registry.
 - Connected a Raspberry Pi as a remote device by pointing its SDK at the router's TCP address.
 - Discovered the Pi's robot from your host by querying the persistent registry and sent commands to it across the network.
 
-This is a deliberately simple two-device setup, but it demonstrates the foundation for something much larger. Once devices register through a shared infrastructure, agents can discover and command any of them without caring where they run — a fleet of robot arms, a network of sensors, or a mix of physical and simulated devices all become equally reachable. Adding more devices is just a matter of pointing them at the same router. That is the core of what Device Connect makes possible: a mesh of heterogeneous devices that agents can reason about and act on, at any scale.
+This is a deliberately simple two-device setup, but it demonstrates the foundation for something much larger. Once devices register through a shared infrastructure, agents can discover and command any of them without caring where they run - a fleet of robot arms, a network of sensors, or a mix of physical and simulated devices all become equally reachable. Adding more devices is just a matter of pointing them at the same router. That's the core of what Device Connect makes possible: a mesh of heterogeneous devices that agents can reason about and act on, at any scale.

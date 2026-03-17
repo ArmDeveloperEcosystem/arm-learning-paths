@@ -3,19 +3,19 @@ title: Connect AI agents to edge devices using Device Connect and Strands
 
 minutes_to_complete: 30
 
-who_is_this_for: This Learning Path is for software developers who want to connect AI agents to physical or simulated edge devices using Device Connect — Arm's platform for structured device access — and Strands, the open-source agent SDK from AWS.
+who_is_this_for: This is an introductory topic for software developers who want to connect AI agents to edge devices. You'll use Device Connect, Arm's platform for structured device access, and Strands, AWS's open-source agent SDK. The examples cover both physical and simulated devices.
 
 learning_objectives:
-    - Understand how Device Connect and Strands work together to give AI agents structured access to Arm-based edge devices.
-    - Set up a Python environment with the Device Connect SDK and agent tools installed from source.
-    - Start a simulated robot that registers itself on the local network and is discovered automatically by an agent.
-    - Discover and invoke the robot using the Device Connect agent tools and the robot_mesh Strands tool.
+    - Understand how Device Connect and Strands work together to give AI agents structured access to Arm-based edge devices
+    - Set up a Python environment with the Device Connect SDK and agent tools installed from source
+    - Start a simulated robot that registers itself on the local network and is discovered automatically by an agent
+    - Discover and invoke the robot using the Device Connect agent tools and the robot_mesh Strands tool
 
 prerequisites:
-    - An development machine with Python 3.12 installed.
-    - Git installed.
-    - Basic familiarity with Python virtual environments and command-line tools.
-    - (Optional) A Raspberry Pi for testing a full device-to-device (D2D) setup.
+    - A development machine with Python 3.12 installed
+    - Git installed
+    - Basic familiarity with Python virtual environments and command-line tools
+    - (Optional) A Raspberry Pi for testing a full device-to-device (D2D) setup
 
 author: 
     - Annie Tallund
