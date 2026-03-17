@@ -243,4 +243,13 @@ The quantized operator kernels are not linked. Verify that `CMakeLists.txt` link
 
 {{% /notice %}}
 
+## What you've learned and what's next
+
+In this section you've:
+
+- Set up MCUXpresso for VS Code with the SDK and Arm toolchain
+- Cloned the executor_runner project with prebuilt ExecuTorch libraries
+- Applied critical SDK patches for GOT initialization and NPU logging
+- Built the Cortex-M33 firmware and verified it fits within memory constraints
+
 With the firmware binary built and its memory usage verified, you're ready to deploy it to the FRDM i.MX 93 and run your first inference.

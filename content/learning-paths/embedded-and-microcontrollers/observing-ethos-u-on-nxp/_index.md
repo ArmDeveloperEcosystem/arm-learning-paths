@@ -7,7 +7,7 @@ cascade:
     
 minutes_to_complete: 120
 
-who_is_this_for: This is an introductory topic for developers and data scientists new to Tiny Machine Learning (TinyML), who want to observe ExecuTorch performance on a physical device.
+who_is_this_for: This is an introductory topic for developers and data scientists new to TinyML who want to observe ExecuTorch performance on a physical device.
 
 learning_objectives:
     - Bring up a custom ExecuTorch `executor_runner` firmware on the FRDM i.MX 93 Cortex-M33 using Linux RemoteProc.

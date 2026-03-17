@@ -266,5 +266,13 @@ For the commands above:
 - Replace `<SD_CARD_NAME>` with the mounted volume name.
 {{% /notice %}}
 
-With both `.pte` files staged on the SD card, you can now build the Cortex-M33 `executor_runner` firmware that will load and execute them.
+## What you've learned and what's next
+
+In this section you've:
+
+- Compiled a simple add model to verify the Ethos-U65 toolchain setup
+- Built a MobileNet V2 `.pte` file with 100% NPU operator coverage
+- Staged the models on your SD card for deployment
+
+With both `.pte` files ready, you can now build the Cortex-M33 `executor_runner` firmware that will load and execute them.
 

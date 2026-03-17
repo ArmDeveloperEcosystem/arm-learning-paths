@@ -15,7 +15,7 @@ This section walks through powering on the board and establishing a serial conso
 You need a serial terminal to see the boot console and log in.
 
 {{% notice macOS %}}
-On macOS as your host, you will need the following set up before getting started: 
+On macOS as your host, you'll need the following set up before getting started: 
 
 - Install the [Silicon Labs USB-to-UART driver](https://www.silabs.com/developer-tools/usb-to-uart-bridge-vcp-drivers?tab=downloads)
 - Install [picocom](https://github.com/npat-efault/picocom)
@@ -49,7 +49,7 @@ On macOS as your host, you will need the following set up before getting started
 
 4. Connect the board's "POWER" USB-C connector to your host machine. You should see a red and a white LED on the board.
 
-5. Wait for the boot log to scroll past in the picocom window. When it finishes, you see a login prompt:
+5. Wait for the boot log to scroll past in the picocom window. When it finishes, you'll see a login prompt:
 
    ```output
    NXP i.MX Release Distro 6.6-scarthgap imx93frdm ttyLP0
@@ -66,5 +66,13 @@ If you miss the login prompt, hold the board's power button for two seconds to p
 Connect the board to a monitor via HDMI and plug a mouse into the board's USB-A port. NXP includes several ML demos that run out of the box.
 
 ![NXP board built-in ML demos alt-text#center](./nxp-board-built-in-ml-demos.png "NXP board built-in ML demos")
+
+## What you've learned and what's next
+
+In this section you've:
+
+- Connected to the board via serial console
+- Booted the NXP FRDM i.MX 93 board and confirmed Linux is running
+- Verified you can access the login prompt
 
 With the board running and Linux accessible, the next step is setting up the build environment for ExecuTorch.
