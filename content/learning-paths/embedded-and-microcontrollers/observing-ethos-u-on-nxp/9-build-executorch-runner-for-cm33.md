@@ -1,5 +1,5 @@
 ---
-title: Build the executor_runner firmware
+title: Build Cortex-M33 firmware for ExecuTorch
 weight: 10
 
 ### FIXED, DO NOT MODIFY

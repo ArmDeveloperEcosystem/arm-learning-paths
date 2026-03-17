@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Understand ExecuTorch deployment on NXP with Ethos-U
 weight: 2
 
 ### FIXED, DO NOT MODIFY

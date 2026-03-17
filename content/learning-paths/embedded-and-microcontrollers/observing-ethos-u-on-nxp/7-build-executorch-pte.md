@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Build the ExecuTorch .pte"
+title: "Build ExecuTorch models for Ethos-U65"
 
 weight: 8 # 1 is first, 2 is second, etc.
 

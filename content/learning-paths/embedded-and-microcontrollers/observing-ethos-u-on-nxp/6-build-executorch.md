@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Build ExecuTorch"
+title: "Build and install ExecuTorch"
 
 weight: 7 # 1 is first, 2 is second, etc.
 

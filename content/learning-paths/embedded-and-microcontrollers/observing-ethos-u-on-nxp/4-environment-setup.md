@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Environment setup"
+title: "Set up the ExecuTorch build environment"
 
 weight: 5 # 1 is first, 2 is second, etc.
 
@@ -8,7 +8,7 @@ weight: 5 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## For macOS: Build ExecuTorch in a Docker container
+## For macOS: build ExecuTorch in a Docker container
 
 On macOS, it’s easiest to build ExecuTorch in an Ubuntu container. This keeps your toolchain consistent with the rest of the Learning Path and avoids gaps in macOS-native cross-compilers (for example, the Arm GNU Toolchain doesn’t provide an “AArch64 GNU/Linux target” for macOS).
 
