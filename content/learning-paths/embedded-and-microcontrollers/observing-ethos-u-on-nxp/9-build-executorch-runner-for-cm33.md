@@ -1,9 +1,9 @@
 ---
 title: Build Cortex-M33 firmware for ExecuTorch
 weight: 10
-
-### FIXED, DO NOT MODIFY
+# FIXED, DO NOT MODIFY
 layout: learningpathall
+---
 
 ## ExecuTorch deployment components
 

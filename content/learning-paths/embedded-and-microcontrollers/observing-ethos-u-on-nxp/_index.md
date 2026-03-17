@@ -12,9 +12,9 @@ learning_objectives:
 prerequisites:
     - An NXP [FRDM i.MX 93](https://www.nxp.com/design/design-center/development-boards-and-designs/frdm-i-mx-93-development-board:FRDM-IMX93) development board
     - A USB Mini-B to USB Type-A cable, or a USB Mini-B to USB Type-C cable
-    - Completion of [Linux on an NXP FRDM i.MX 93 board](/learning-paths/embedded-and-microcontrollers/linux-nxp-board/) (Linux setup, login access, and file transfer)
+    - Completion of [Use Linux on an NXP FRDM i.MX 93 board](/learning-paths/embedded-and-microcontrollers/linux-nxp-board/) (Linux setup, login access, and file transfer)
     - Basic knowledge of Machine Learning concepts
-    - A host computer to compile ExecuTorch libraries.
+    - A host computer to compile ExecuTorch libraries
 
 author: 
 - Waheed Brown

@@ -23,9 +23,9 @@ On macOS as your host, you'll need the following set up before getting started:
    ```
 {{% /notice %}}
 
-1. Connect the board's "DEBUG" USB-C connector to your host machine.
+Connect the board's **DEBUG** USB-C connector to your host machine.
 
-2. Find the board's serial device:
+Find the board's serial device:
 
    ```bash { output_lines = "2-5" }
    ls /dev/tty.*
@@ -37,7 +37,7 @@ On macOS as your host, you'll need the following set up before getting started:
 
    The exact device names vary per board. Look for entries containing `usbmodem`.
 
-3. Open a serial connection using the first `usbmodem` device:
+Open a serial connection using the first `usbmodem` device:
 
    ```bash { output_lines = "2-4" }
    sudo picocom -b 115200 /dev/tty.usbmodem<SERIAL_ID_1>
@@ -46,9 +46,9 @@ On macOS as your host, you'll need the following set up before getting started:
    Terminal ready
    ```
 
-4. Connect the board's "POWER" USB-C connector to your host machine. You should see a red and a white LED on the board.
+Connect the board's **POWER** USB-C connector to your host machine. You should see a red and a white LED on the board.
 
-5. Wait for the boot log to scroll past in the picocom window. When it finishes, you'll see a login prompt:
+Wait for the boot log to scroll past in the picocom window. When it finishes, you'll see a login prompt:
 
    ```output
    NXP i.MX Release Distro 6.6-scarthgap imx93frdm ttyLP0
@@ -60,7 +60,7 @@ On macOS as your host, you'll need the following set up before getting started:
 If you miss the login prompt, hold the board's power button for two seconds to power off, then press it again to reboot.
 {{% /notice %}}
 
-## [Optional] Run the built-in NXP demos
+## Run the built-in NXP demos (optional)
 
 Connect the board to a monitor via HDMI and plug a mouse into the board's USB-A port. NXP includes several ML demos that run out of the box.
 
