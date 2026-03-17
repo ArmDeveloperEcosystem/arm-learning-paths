@@ -26,7 +26,6 @@ docker compose version
 ```bash
 cd ~/strands-device-connect
 git clone --depth 1 https://github.com/arm/device-connect.git
-
 ```
 
 ## Machine and terminal layout

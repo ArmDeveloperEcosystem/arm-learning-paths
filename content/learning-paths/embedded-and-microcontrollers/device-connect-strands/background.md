@@ -6,25 +6,23 @@ weight: 2
 layout: learningpathall
 ---
 
-## Why connect AI agents to edge devices?
+## Physical AI starts with connectivity
 
-Arm processors are at the heart of a remarkable range of systems - from Cortex-M microcontrollers in industrial sensors to Neoverse servers running in the cloud. That breadth of hardware is one of Arm's greatest strengths, but it raises a practical question for AI developers: how do you give an agent structured, safe access to devices that are physically distributed and built on different software stacks?
+Natural language is becoming more than a software interface. Physical AI systems — robots, sensors, actuators — can now sense, decide, and act based on instructions from an LLM agent. But for that to work, the devices need to be reachable. They need a shared infrastructure for discovery, communication, and coordination.
 
-Device Connect is Arm's answer to that question. It's a platform layer that handles device registration, discovery, and remote procedure calls across a network of devices, with no bespoke networking code required. Strands is an open-source agent SDK from AWS that takes a model-driven approach to building AI agents - an LLM calls Python tools in a structured reasoning loop, and the SDK handles the rest. When you combine them, an agent can ask "which devices are online and what can they do?" and then invoke a function on a specific device, turning natural language intent into physical action.
+[Device Connect](https://github.com/arm/device-connect) is Arm's device-aware framework for exactly that. Once devices register through a shared mesh, agents can discover and command any of them without caring where they run. A fleet of robot arms, a network of sensors, or a mix of physical and simulated devices all become equally reachable.
 
-This Learning Path puts both tools through their paces. It starts with a single machine, for example a laptop, where a simulated robot and an agent discover each other automatically, then extends to a two-machine setup where a Raspberry Pi joins the same device mesh over the network.
+[Strands Robots](https://github.com/strands-labs/robots) is a robot SDK that integrates Device Connect with the [AWS Strands Agents SDK](https://github.com/strands-labs/sdk). Using Strands, an LLM can query the device mesh ("who's available?"), understand what each device can do, and dynamically invoke actions — turning natural language intent into real-world outcomes.
 
-## Device Connect architecture layers
+This Learning Path starts on a single machine, where a simulated robot and an agent discover each other automatically, then optionally extends to a Raspberry Pi joining the same device mesh over the network.
 
-**Device layer**
+## How the pieces fit together
 
-A device is any process that registers itself on the mesh and exposes callable functions. In this Learning Path you'll create a simulated robot arm, namely the simulated robotic arm SO-100 from Hugging Face, from the `strands-robots` SDK. The moment this object is created, it registers on the local network under a unique device ID (for example, `so100_sim-abc23`) and begins publishing a presence heartbeat. No explicit registration call is required. Device Connect uses Zenoh as its underlying messaging transport, which handles low-level connectivity and routing automatically.
+Two packages make this work.
 
-**Agent layer**
+**`device_connect_sdk`** is the device-side runtime. Any process that wraps a robot in a `DeviceDriver` and starts a `DeviceRuntime` joins the mesh: it registers itself, announces what it can do, and starts publishing state events. Zenoh handles low-level connectivity; in device-to-device mode no broker or environment configuration is needed.
 
-Two interfaces sit at this layer. The `device-connect-agent-tools` package exposes `discover_devices()` and `invoke_device()` as plain Python functions you can call directly from a script or REPL, with no LLM involved. The `robot_mesh` tool from `robots` wraps the same capabilities as a Strands agent tool, which means an LLM can also call them during a reasoning loop. Both share the same underlying Device Connect transport, so anything you can do with one you can do with the other.
-
-The diagram below shows how these layers communicate at runtime:
+**`device-connect-agent-tools`** is the agent-side runtime. It exposes `discover_devices()` and `invoke_device()` as plain Python functions. The `robot_mesh` tool in Strands Robots wraps the same interface as a Strands tool, so an LLM can call it too. Both use the same underlying transport, so the same calls work whether the caller is a script or an agent.
 
 ```
 ┌──────────────────────────────────────┐
@@ -42,21 +40,15 @@ The diagram below shows how these layers communicate at runtime:
 └──────────────────────────────────────┘
 ```
 
-## How device discovery works
+## What a device exposes
 
-When the `SO-100 arm` instance starts, Device Connect automatically announces the device on the local network. Any process running `discover_devices()` or `robot_mesh(action='peers')` on the same network will hear the announcement and add the device to its live table of available hardware.
+This Learning Path uses the SO-100 arm, a simulated robot arm from Hugging Face. When a `Robot('so100').run()` is initiated in the Device Connect framework, it registers on the mesh and exposes three key callable functions to any agent:
 
-## What the simulated robot provides
+- `execute` — send a natural language instruction and a policy provider to the robot
+- `getStatus` — query what the robot is currently doing
+- `stop` — halt the current task, or `emergency_stop` to halt every device on the mesh at once
 
-When you run `Robot('so100')`, the SDK downloads the MuJoCo physics model for the SO-100 arm (this happens once on first run) and starts a local simulation. The robot exposes three functions that any agent can call via RPC:
-
-- `execute` - start a task with a given instruction and policy provider
-- `getStatus` - query the current task state
-- `stop` - halt the current task
-
-For this Learning Path, the `policy_provider='mock'` argument is used, which means `execute` accepts the call and returns `{'status': 'accepted'}` without actually running a motion policy. This keeps the focus on the connectivity and invocation patterns rather than robotics.
-
-Once you have the flow working end to end, replacing `'mock'` with a real policy is a one-line change.
+For this Learning Path, `policy_provider='mock'` is used, so `execute` accepts the task and returns immediately without running real motion. Replacing `'mock'` with a real provider like `'lerobot_local'` or `'groot'` is a one-line change once you have the connectivity working.
 
 ## What you'll learn in this Learning Path
 

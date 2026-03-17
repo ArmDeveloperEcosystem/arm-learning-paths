@@ -34,7 +34,6 @@ The Device Connect integration code for `robots` lives on the `feat/device-conne
 ```bash
 cd ~/strands-device-connect/robots
 git checkout feat/device-connect-integration-draft
-cd ..
 ```
 
 ## Create a Python virtual environment
