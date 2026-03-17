@@ -1,5 +1,7 @@
 ---
-title: Run image classification on an Alif Ensemble E8 DevKit with ExecuTorch and Ethos-U85
+title: Run image classification on an Alif Ensemble E8 DevKit using ExecuTorch and Ethos-U85
+
+description: Deploy a MobileNetV2 image classification model to an Alif Ensemble E8 DevKit and run inference on the Ethos-U85 NPU.
 
 draft: true
 cascade:
@@ -7,25 +9,23 @@ cascade:
 
 minutes_to_complete: 120
 
-who_is_this_for: This Learning Path is for embedded developers who want to deploy a neural network on an Arm Cortex-M55 microcontroller with an Ethos-U85 NPU. You will compile a MobileNetV2 model using ExecuTorch, embed it into bare-metal firmware, and run image classification on the Alif Ensemble E8 DevKit.
+who_is_this_for: This is an advanced topic for embedded developers who want to deploy a neural network model to an Arm Cortex-M55 microcontroller using ExecuTorch and an Ethos-U85 NPU.
 
 learning_objectives:
     - Compile a MobileNetV2 model for the Ethos-U85 NPU using ExecuTorch's ahead-of-time (AOT) compiler on an Arm-based cloud instance.
     - Build ExecuTorch static libraries for bare-metal Cortex-M55 targets.
-    - Configure CMSIS project files, memory layout, and linker scripts for a large ML workload on the Alif Ensemble E8.
-    - Run real-time image classification inference on the Ethos-U85 NPU and verify results through SEGGER RTT.
+    - Configure CMSIS project files, memory layout, and linker scripts for an ML workload on the Alif Ensemble E8.
+    - Run real-time image classification inference on the Ethos-U85 NPU and verify results using SEGGER Real-Time Transfer (RTT).
 
 prerequisites:
-    - An Alif Ensemble E8 DevKit with a USB-C cable.
-    - A SEGGER J-Link debug probe (the DevKit has one built in).
-    - A development machine running macOS (Apple Silicon) or Linux.
-    - (Optional) An AWS account or access to an Arm-based cloud instance (Graviton c7g.4xlarge recommended). You can also build ExecuTorch locally on an Arm-based machine, though the steps will differ.
-    - Basic familiarity with C/C++ and embedded development concepts.
-    - VS Code installed on your development machine.
+    - Experience with C/C++ and embedded development concepts.
+    - An [Alif Ensemble E8 DevKit](https://alifsemi.com/support/kits/ensemble-e8devkit/) with a USB-C cable.
+    - A SEGGER J-Link debug probe (included in the DevKit).
+    - A development machine running macOS on Apple Silicon with Visual Studio Code installed.
+    - An AWS account or access to an Arm-based cloud instance for native Arm compilation.
 
 author: Gabriel Peterson
 
-### Tags
 skilllevels: Advanced
 subjects: ML
 armips:

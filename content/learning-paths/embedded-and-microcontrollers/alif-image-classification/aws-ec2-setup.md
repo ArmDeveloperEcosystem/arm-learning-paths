@@ -21,7 +21,7 @@ Create an AWS EC2 instance with the following configuration:
 
 The 16 cores speed up the ExecuTorch build significantly, and the 50 GB disk accommodates the repository, submodules, and build artifacts.
 
-Set up your SSH config so you can connect with a short alias (for example, `ssh alif`). This makes the `scp` commands later more convenient.
+SSH to the EC2 instance.
 
 ## Install system dependencies
 
@@ -74,7 +74,7 @@ pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
 pip install pillow
 ```
 
-You use CPU-only PyTorch because this instance has no GPU. You only need PyTorch for model export and ahead-of-time compilation; the actual inference happens on the microcontroller.
+This instance has no GPU, so the install uses CPU-only PyTorch. PyTorch is only needed for model export and ahead-of-time compilation. The actual inference runs on the microcontroller.
 
 Verify the installation:
 
@@ -85,7 +85,15 @@ print(torch.__version__, torchvision.__version__)
 PY
 ```
 
+The output is similar to:
+
+```output
+2.10.0+cpu 0.25.0+cpu
+```
+
 ## Clone and install ExecuTorch
+
+Clone the ExecuTorch repository and pin it to a known-working commit:
 
 ```bash
 mkdir -p ~/alif
@@ -111,26 +119,37 @@ python -m pip install -e . --no-build-isolation
 ExecuTorch includes a setup script that downloads the Arm GNU toolchain, CMSIS, and the Vela compiler:
 
 ```bash
-cd ~/alif/executorch
 ./examples/arm/setup.sh --i-agree-to-the-contained-eula
 ```
 
-{{% notice Note %}}
-The setup script may fail at the `tosa_serialization_lib` build step due to a pybind11 version incompatibility. If you see an error containing `def_property family does not currently support keep_alive`, run the following commands to complete the setup manually:
+The script fails at the `tosa_serialization_lib` build step due to a pybind11 version incompatibility. This is a known issue. When you see an error containing `def_property family does not currently support keep_alive`, fix the dependency and complete the setup manually.
+
+First, install a compatible version of pybind11 and the required build tools:
 
 ```bash
 pip install "pybind11<2.14" scikit-build-core setuptools_scm
+```
 
+Next, build and install the serialization library using those local packages:
+
+```bash
 CMAKE_POLICY_VERSION_MINIMUM=3.5 pip install --no-build-isolation \
   --no-dependencies \
   ~/alif/executorch/examples/arm/arm-scratch/tosa-tools/serialization
+```
 
+Then install the Ethos-U Vela compiler, which the setup script didn't reach due to the earlier failure:
+
+```bash
 pip install --no-dependencies \
   -r ~/alif/executorch/backends/arm/requirements-arm-ethos-u.txt
 ```
 
-The first command installs a pybind11 version that doesn't have the breaking change, along with the build tools that the serialization library needs. The second command builds and installs the serialization library using those local packages instead of downloading new ones. The third command installs the Ethos-U Vela compiler, which the setup script never reached due to the earlier failure.
-{{% /notice %}}
+Re-run the setup script to complete the remaining steps:
+
+```bash
+./examples/arm/setup.sh --i-agree-to-the-contained-eula
+```
 
 Source the environment paths that the setup script generated:
 
@@ -147,12 +166,9 @@ pip install "torchao==0.15.0"
 
 ## Compile MobileNetV2 for Ethos-U85
 
-Source the setup paths and run the ahead-of-time compiler:
+Run the ahead-of-time compiler:
 
 ```bash
-cd ~/alif/executorch
-source examples/arm/arm-scratch/setup_path.sh
-
 mkdir -p ~/alif/models
 
 python -m examples.arm.aot_arm_compiler \
@@ -196,15 +212,13 @@ This step takes several minutes. When complete, list the output libraries:
 find arm_test/cmake-out -type f -name "*.a" | sort
 ```
 
-You should see approximately 13 libraries, including `libexecutorch.a`, `libexecutorch_core.a`, `libexecutorch_delegate_ethos_u.a`, `libcortex_m_ops_lib.a`, and `libcmsis-nn.a`.
+The output lists approximately 13 libraries, including `libexecutorch.a`, `libexecutorch_core.a`, `libexecutorch_delegate_ethos_u.a`, `libcortex_m_ops_lib.a`, and `libcmsis-nn.a`.
 
 ## Package headers and libraries
 
 Bundle the headers and libraries for transfer to your development machine:
 
 ```bash
-cd ~/alif/executorch
-
 rm -rf ~/alif/et_bundle
 mkdir -p ~/alif/et_bundle
 cp -a arm_test/cmake-out/include ~/alif/et_bundle/
@@ -216,33 +230,33 @@ ls -lh ~/alif/et_bundle.tar.gz
 
 ## Transfer artifacts to your development machine
 
-Run these commands on your Mac or Linux development machine (not on the EC2 instance). The paths below use `~/repo/alif/` as the working directory; adjust these to match your own project location:
+Run these commands on your development machine, not on the EC2 instance. The paths below use `~/alif/` as the working directory; adjust these to match your own project location:
 
 ```bash
-mkdir -p ~/repo/alif/models
-mkdir -p ~/repo/alif/third_party/executorch/lib
+mkdir -p ~/alif/models
+mkdir -p ~/alif/third_party/executorch/lib
 
-scp alif:/home/ubuntu/alif/models/mv2_ethosu85_256.pte ~/repo/alif/models/
-scp alif:/home/ubuntu/alif/et_bundle.tar.gz ~/repo/alif/models/
+scp alif:/home/ubuntu/alif/models/mv2_ethosu85_256.pte ~/alif/models/
+scp alif:/home/ubuntu/alif/et_bundle.tar.gz ~/alif/models/
 scp 'alif:/home/ubuntu/alif/executorch/arm_test/cmake-out/lib/*.a' \
-  ~/repo/alif/third_party/executorch/lib/
+  ~/alif/third_party/executorch/lib/
 ```
 
 Verify the transfer:
 
 ```bash
-ls -lh ~/repo/alif/models/mv2_ethosu85_256.pte
-ls ~/repo/alif/third_party/executorch/lib/*.a | wc -l
+ls -lh ~/alif/models/mv2_ethosu85_256.pte
+ls ~/alif/third_party/executorch/lib/*.a | wc -l
 ```
 
-You should see the 3.7 MB model file and 13 library files.
+The output shows the 3.7 MB model file and 13 library files.
 
 ## Convert the model to a C header
 
 The firmware embeds the model as a byte array in flash memory. Use `xxd` to generate a C header:
 
 ```bash
-cd ~/repo/alif/models
+cd ~/alif/models
 xxd -i mv2_ethosu85_256.pte > mv2_ethosu85_256_pte.h
 ```
 
@@ -266,9 +280,9 @@ The `aligned(16)` attribute is required because the Ethos-U85 needs the Vela com
 On your development machine, extract the ExecuTorch headers into the VS Code template project:
 
 ```bash
-cd ~/repo/alif/alif_vscode-template
+cd ~/alif/alif_vscode-template
 mkdir -p third_party/executorch
-tar -C third_party/executorch -xzf ~/repo/alif/models/et_bundle.tar.gz
+tar -C third_party/executorch -xzf ~/alif/models/et_bundle.tar.gz
 ```
 
 Verify the headers are in place:
