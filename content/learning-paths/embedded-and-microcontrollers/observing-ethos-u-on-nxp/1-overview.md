@@ -6,6 +6,8 @@ weight: 2
 layout: learningpathall
 ---
 
+## Before you begin
+
 This Learning Path assumes your FRDM i.MX 93 board is already set up and you can transfer files between your host machine and the board.
 
 If you still need to set up Linux, serial console access, and file transfer, follow the Learning Path [Linux on an NXP FRDM i.MX 93 board](/learning-paths/embedded-and-microcontrollers/linux-nxp-board/) before continuing.
