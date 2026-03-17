@@ -1,6 +1,10 @@
 ---
 title: Find CPU Cycle Hotspots with Arm Performix
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 30
 
 who_is_this_for: Cloud Engineers looking to optimize their workload running on a Linux-based Arm system. 
@@ -23,6 +27,7 @@ armips:
 tools_software_languages:
     - Arm Performix
     - C++
+    - Runbook
 operatingsystems:
     - Linux
 
