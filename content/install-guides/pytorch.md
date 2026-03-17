@@ -14,7 +14,7 @@ ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package
 test_images:
 - ubuntu:latest
 test_link: null
-test_maintenance: true
+test_maintenance: false
 title: PyTorch
 tool_install: true
 weight: 1

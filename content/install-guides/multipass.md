@@ -24,7 +24,7 @@ ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package
 
 test_images:
 - ubuntu:latest
-test_maintenance: true
+test_maintenance: false
 
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
