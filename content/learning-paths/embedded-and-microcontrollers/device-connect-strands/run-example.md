@@ -12,7 +12,7 @@ This section runs Device Connect's device-to-device discovery. There are two way
 
 ### Option 1: run on a single machine
 
-For a proof-of-concept, follow the steps using two terminal windows on your machine with the virtual environment set up.
+For a conceptual implementation, follow the steps using two terminal windows on your machine with the virtual environment set up.
 
 ### Option 2: run with real hardware
 

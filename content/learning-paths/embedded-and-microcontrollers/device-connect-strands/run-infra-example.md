@@ -45,7 +45,6 @@ In host terminal 1, bring up the Device Connect infrastructure stack. The Compos
 ```bash
 cd ~/strands-device-connect/device-connect/packages/device-connect-server
 docker compose -f infra/docker-compose-dev.yml up -d
-cd ../../..
 ```
 
 Confirm the services are healthy:
@@ -95,7 +94,7 @@ Replace `HOST_IP` with the address you noted in Step 2. `DEVICE_CONNECT_ALLOW_IN
 
 ## Step 4 - start the robot on the Raspberry Pi
 
-On the Raspberry Pi, with the environment active and the variables set, start the simulated SO-100 robot:
+On the Raspberry Pi, with the environment active and the variables set in your `robots` directory, start the simulated SO-100 robot:
 
 ```python
 python <<'PY'

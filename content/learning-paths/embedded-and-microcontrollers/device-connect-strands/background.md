@@ -42,13 +42,13 @@ Two packages make this work.
 
 ## What a device exposes
 
-This Learning Path uses the SO-100 arm, a simulated robot arm from Hugging Face. When a `Robot('so100').run()` is initiated in the Device Connect framework, it registers on the mesh and exposes three key callable functions to any agent:
+This Learning Path uses the SO-100 arm, a simulated robot arm from Hugging Face. When `Robot('so100').run()` starts, it registers on the mesh and exposes three callable functions. These are what `invoke_device()` on the agent side targets — calling `invoke_device("so100-abc123", "execute", {...})` routes a request over Zenoh to the robot process and executes the function there, returning the result back to the caller:
 
 - `execute` — send a natural language instruction and a policy provider to the robot
 - `getStatus` — query what the robot is currently doing
 - `stop` — halt the current task, or `emergency_stop` to halt every device on the mesh at once
 
-For this Learning Path, `policy_provider='mock'` is used, so `execute` accepts the task and returns immediately without running real motion. Replacing `'mock'` with a real provider like `'lerobot_local'` or `'groot'` is a one-line change once you have the connectivity working.
+A motion policy is the component that translates a high-level instruction like "pick up the cube" into a sequence of joint movements. Different policy providers connect to different backends — from local model inference to remote policy servers. For this Learning Path, `policy_provider='mock'` is used, so `execute` accepts the task and returns immediately without running real motion. Replacing `'mock'` with a real provider like `'lerobot_local'` or `'groot'` is a one-line change once you have the connectivity working.
 
 ## What you'll learn in this Learning Path
 
