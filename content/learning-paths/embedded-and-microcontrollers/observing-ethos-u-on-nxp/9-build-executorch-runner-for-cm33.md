@@ -4,10 +4,10 @@ weight: 10
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
----
-You build the Cortex-M33 `executor_runner` firmware on your host machine, then deploy it to the FRDM i.MX 93 board.
 
-This is the core milestone of the Learning Path.
+## ExecuTorch deployment components
+
+In this section, you build the Cortex-M33 `executor_runner` firmware on your host machine, then deploy it to the FRDM i.MX 93 board. This is the core milestone of the Learning Path: proving that you can control the real-time ML runtime and prepare it to host Ethos-U65 workloads.
 On i.MX 93, Linux runs on the application cores, but the real-time ML runtime that talks to Ethos-U65 runs as **firmware on Cortex-M33**.
 When you can build and boot your own `executor_runner`, you've proven that the microcontroller side of the system is under your control and ready to host ML workloads.
 

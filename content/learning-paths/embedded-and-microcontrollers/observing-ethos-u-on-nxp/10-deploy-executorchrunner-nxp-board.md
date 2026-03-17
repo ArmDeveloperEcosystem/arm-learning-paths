@@ -6,6 +6,8 @@ weight: 11
 layout: learningpathall
 ---
 
+## Deployment overview
+
 This section is where the heterogeneous system comes together.
 Linux on the application cores manages the lifecycle of Cortex-M33 through RemoteProc, and your Cortex-M33 firmware brings up ExecuTorch and the Ethos-U65 delegate.
 

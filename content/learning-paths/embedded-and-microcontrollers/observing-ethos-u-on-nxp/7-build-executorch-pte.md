@@ -8,7 +8,9 @@ weight: 8 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-On the FRDM i.MX 93, you deploy ExecuTorch as two cooperating artifacts:
+## ExecuTorch deployment components
+
+On the FRDM i.MX93, you deploy ExecuTorch as two cooperating artifacts:
 
 |Component|Role in Deployment|What It Contains|Why It's Required|
 |---------|------------------|----------------|-----------------|

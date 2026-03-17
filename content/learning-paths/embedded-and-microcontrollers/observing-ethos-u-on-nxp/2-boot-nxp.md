@@ -7,10 +7,9 @@ weight: 3
 # Do not modify these elements
 layout: "learningpathall"
 ---
+## Connect to the board
 
 This section walks through powering on the board and establishing a serial console connection. If your board is already running Linux and you can log in, skip ahead to the next section.
-
-## Connect to the board
 
 You need a serial terminal to see the boot console and log in.
 

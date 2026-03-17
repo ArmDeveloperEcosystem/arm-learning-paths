@@ -8,6 +8,8 @@ weight: 7 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
+## Overview
+
 With the ExecuTorch source checked out and your virtual environment active, you can now build ExecuTorch and set up the Arm toolchain for Ethos-U cross-compilation.
 
 For a full tutorial on building ExecuTorch, see the Learning Path [Introduction to TinyML on Arm using PyTorch and ExecuTorch](/learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm/).
