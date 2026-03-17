@@ -262,6 +262,18 @@ Use the `/tools` command to list the available tools:
 
 You should see the Arm MCP server tools listed in the output. If the arm-mcp server says it's still loading, wait a moment and run `/tools` again.
 
-If you are facing issues or have questions, reach out to mcpserver@arm.com.
+### Use Arm prompt files with the MCP Server
 
-You're ready to use Kiro CLI.
+The Arm MCP Server alone provides tools, but for optimal results, you should use it together with Arm-specific prompt files. Prompt files encode task-specific context, guidelines, and workflows that help the agent use MCP tools effectively for common Arm development tasks.
+
+#### Get the prompt files
+
+Browse the [agent integrations directory for Kiro](https://github.com/arm/mcp/tree/main/agent-integrations/kiro) to find prompt files for specific use cases:
+
+- **Arm migration** ([arm-migration.md](https://github.com/arm/mcp/blob/main/agent-integrations/kiro/arm-migration.md)): Guides the agent through migrating applications from x86 to Arm, including dependency analysis, compatibility checks, and optimization recommendations.
+
+Each prompt file is a Markdown configuration that you can reference in your Kiro CLI sessions to activate task-specific assistance.
+
+If you're facing issues or have questions, reach out to mcpserver@arm.com.
+
+You're now ready to use Kiro CLI with the Arm MCP server for Arm-specific development assistance.

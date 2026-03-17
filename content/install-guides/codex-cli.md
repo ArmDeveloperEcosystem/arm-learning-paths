@@ -233,6 +233,18 @@ The Arm MCP server is listed in the output. If the arm-mcp server indicates it's
 
 You can also verify the tools are available by asking Codex to list the available Arm MCP tools.
 
+### Use Arm prompt files with the MCP Server
+
+The Arm MCP Server alone provides tools, but for optimal results, you should use it together with Arm-specific prompt files. Prompt files encode task-specific context, guidelines, and workflows that help the agent use MCP tools effectively for common Arm development tasks.
+
+#### Get the prompt files
+
+Browse the [agent integrations directory for Codex](https://github.com/arm/mcp/tree/main/agent-integrations/codex) to find prompt files for specific use cases:
+
+- **Arm migration** ([arm-migration.md](https://github.com/arm/mcp/blob/main/agent-integrations/codex/arm-migration.md)): Guides the agent through migrating applications from x86 to Arm, including dependency analysis, compatibility checks, and optimization recommendations.
+
+Each prompt file is a Markdown configuration that you can reference in your Codex CLI sessions to activate task-specific assistance.
+
 If you're facing issues or have questions, reach out to mcpserver@arm.com.
 
-You're now ready to use Codex CLI with Arm-specific development assistance.
+You're now ready to use Codex CLI with the Arm MCP server for Arm-specific development assistance.
