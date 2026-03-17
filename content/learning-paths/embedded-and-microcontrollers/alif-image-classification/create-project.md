@@ -1,20 +1,20 @@
 ---
-title: Create the mv2_runner firmware project
+title: Create the image classification firmware project
 weight: 4
 
 layout: "learningpathall"
 ---
 
-## Overview
+## What you'll build in this section
 
-You now create a new CMSIS project called `mv2_runner` by duplicating the existing Blinky example and configuring it to include ExecuTorch libraries, the compiled model, and SEGGER RTT for debug output.
+In this section, you duplicate the existing Blinky example to create a new CMSIS project called `mv2_runner`, configured to include ExecuTorch libraries, the compiled model, and SEGGER RTT for debug output.
 
 ## Duplicate the Blinky project
 
 Start by copying the working Blinky project as a template:
 
 ```bash
-cd ~/repo/alif/alif_vscode-template
+cd ~/alif/alif_vscode-template
 cp -R blinky/ mv2_runner
 ```
 
@@ -44,12 +44,12 @@ Create an assets directory and copy the model header into the project:
 
 ```bash
 mkdir -p mv2_runner/assets
-cp ~/repo/alif/models/mv2_ethosu85_256_pte.h mv2_runner/assets/
+cp ~/alif/models/mv2_ethosu85_256_pte.h mv2_runner/assets/
 ```
 
 ## Create the SEGGER RTT configuration
 
-Create a file called `mv2_runner/SEGGER_RTT_Conf.h` with the following content:
+RTT (Real-Time Transfer) works through the J-Link debug probe, reading and writing a memory buffer through the debug interface. It's faster than UART and doesn't require extra wiring. Create the configuration file `mv2_runner/SEGGER_RTT_Conf.h`:
 
 ```c
 #ifndef SEGGER_RTT_CONF_H
@@ -68,14 +68,11 @@ Create a file called `mv2_runner/SEGGER_RTT_Conf.h` with the following content:
 #endif
 ```
 
-RTT (Real-Time Transfer) works through the J-Link debug probe. It reads and writes a memory buffer through the debug interface, which is much faster than UART and doesn't need extra wiring.
-
 ## Install additional CMSIS packs
 
 The project depends on two CMSIS packs that aren't installed by default. Install them from the terminal:
 
 ```bash
-cd ~/repo/alif/alif_vscode-template
 cpackget add ARM::CMSIS-Compiler@2.1.0
 cpackget add Keil::MDK-Middleware@8.2.0
 ```
@@ -196,7 +193,7 @@ project:
 ```
 
 {{% notice Warning %}}
-You must update the `-L` path to match the absolute path to your `third_party/executorch/lib` directory. Each developer's path is different.
+You must update the `-L` path to match the absolute path to your `third_party/executorch/lib` directory. For example: `-L/Users/username/alif/third_party/executorch/lib`.
 {{% /notice %}}
 
 There are several important details in this configuration:
@@ -207,4 +204,4 @@ There are several important details in this configuration:
 - **`C10_USING_CUSTOM_GENERATED_MACROS`** tells ExecuTorch to skip looking for a `cmake_macros.h` header that doesn't exist in the bare-metal build.
 - The **c10 include path** provides the tensor type definitions that ExecuTorch's headers depend on.
 
-You now have the project structure ready. The next sections cover the application code, memory configuration, and image preparation before you build and flash.
+The project structure is ready. The next sections cover the application code, memory configuration, and image preparation before you build and flash.
