@@ -20,7 +20,7 @@ Dynatrace automatically maps dependencies between services, hosts, containers, a
 
 There are three main components of Dynatrace:
 
-- **Dynatrace OneAgent:** a lightweight monitoring agent installed on hosts that automatically collects metrics, logs, and traces from applications and infrastructure. Learn more in the [Dynatrace OneAgent documentation](https://docs.dynatrace.com/docs/ingest-from/dynatrace-oneagent). 
+- **Dynatrace OneAgent:** a lightweight monitoring agent installed on hosts that automatically collects metrics, logs, and traces from applications and infrastructure. Learn more in the [Dynatrace OneAgent documentation](https://docs.dynatrace.com/docs/ingest-from/dynatrace-oneagent).
 
 - **Dynatrace ActiveGate:** a secure gateway component that routes monitoring traffic, enables cloud integrations, and provides additional monitoring capabilities such as Kubernetes monitoring and synthetic monitoring. Learn more in the [Dynatrace ActiveGate documentation](https://docs.dynatrace.com/docs/ingest-from/dynatrace-activegate).
 
