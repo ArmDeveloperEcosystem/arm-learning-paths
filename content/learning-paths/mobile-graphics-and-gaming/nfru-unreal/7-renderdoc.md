@@ -1,0 +1,78 @@
+---
+title:  Using RenderDoc for Debugging and Analysis
+weight: 8
+
+### FIXED, DO NOT MODIFY
+layout: learningpathall
+---
+
+## Why use RenderDoc with Neural Frame Rate Upscaling?
+
+When you integrate neural upscaling into your game, you need visual debugging and performance profiling. RenderDoc is a frame capture and analysis tool that lets you step through frames, inspect Vulkan API calls, examine shader inputs and outputs, and review GPU resource states. Arm provides additional features for RenderDoc in [RenderDoc for Arm GPUs](https://developer.arm.com/Tools%20and%20Software/RenderDoc%20for%20Arm%20GPUs).
+
+Use RenderDoc to:
+
+- Investigate unexpected visual output or step through the rendering process
+- Analyze the sequence of Vulkan API calls your engine makes
+- Inspect memory usage or GPU resource states
+- Validate your data graph pipeline or identify synchronization issues
+
+## Install Arm Performance Studio
+
+Download Arm Performance Studio from the [Arm Performance Studio Downloads](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio#Downloads) page. For Neural Frame Rate Upscaling (NFRU), use version `2025.6` or later.
+
+See the [Arm Performance Studio install guide](/install-guides/ams) for setup instructions.
+
+After installation, you find RenderDoc for Arm GPUs in the Windows **Start** menu.
+
+## Build a Windows package in Unreal Engine
+
+To prepare your Unreal Engine project for profiling:
+
+1. Open your Unreal Engine project.
+2. Select **Platforms > Windows > Package Project**.
+3. Choose an output directory for the packaged build.
+4. Wait for packaging to complete.
+
+Your packaged build is ready for profiling with RenderDoc.
+
+## Launch the packaged build from RenderDoc
+
+To profile your build:
+
+1. Open RenderDoc for Arm GPUs.
+2. Select **Launch Application**.
+3. Enter the full path to your packaged `.exe` in the **Executable Path** field.
+4. (Optional) Add command-line arguments in the **Command-line Arguments** field.
+5. Set the **Working Directory** to your packaged build folder if needed.
+6. Click **Launch**.
+
+![Windows Start menu with RenderDoc for Arm GPUs highlighted. This shows how to launch RenderDoc after installation#center](./images/renderdoc_launch.png "Figure 1: Launch RenderDoc for Arm GPUs after installation.")
+
+Your application launches under RenderDoc. You can now capture frames and analyze GPU activity.
+
+## Capture a frame in RenderDoc
+
+To capture a frame:
+
+1. With your application running, return to the RenderDoc window.
+2. Click the **Capture Frame Immediately** button (camera icon) or press `F12` while your game window is focused.
+3. The captured frame appears in RenderDoc.
+
+![RenderDoc for Arm GPUs interface showing the capture frame button and a running application. This demonstrates how to capture a frame during execution#center](./images/renderdoc_capture.png "Figure 2: Capture a frame in RenderDoc for Arm GPUs during application execution.")
+
+You can now analyze the rendering pipeline, inspect Vulkan API calls, and debug visual output at each stage.
+
+## Analyze the event list
+
+After capturing a frame, use the RenderDoc event browser to review the sequence of Vulkan API calls and draw events. Select individual events to inspect their details, view associated resources, and debug specific pipeline stages.
+
+![RenderDoc event browser displaying a list of Vulkan API calls and draw events. This helps you trace rendering operations and debug pipeline stages#center](./images/renderdoc_event.png "Figure 3: Inspect Vulkan API calls and draw events in the RenderDoc event browser.")
+
+With RenderDoc, you can:
+
+- Step through draw calls and dispatches
+- Inspect bound resources, descriptor sets, and shaders
+- Explore your data graph pipeline execution frame by frame
+
+For more information, see the [Debug With RenderDoc User Guide](https://developer.arm.com/documentation/109669/latest).
