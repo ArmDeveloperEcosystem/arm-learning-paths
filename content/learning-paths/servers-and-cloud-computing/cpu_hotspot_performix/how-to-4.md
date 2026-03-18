@@ -33,7 +33,7 @@ public:
     ...
 ```
 
-On the remote server, reduce `MAX_ITERATIONS` in `Mandelbrot.h` to `(1<<9)` (512), update the output filename in `main.cpp` to a different path so you can compare the output with the baseline image, then rebuild:
+On the remote server, reduce `MAX_ITERATIONS` in `Mandelbrot.h` to `(1<<9)` (512), update the output image filename in `main.cpp` to a different name (for example: `green-512.bmp`)so you can compare the output with the baseline image, then rebuild:
 
 ```bash
 ./build.sh
@@ -49,13 +49,20 @@ There is negligible difference in perceived image quality when halving `MAX_ITER
 
 The loop in `Mandelbrot::getIterations` has no loop-carried dependencies — each iteration's result is independent of any other. This means you can parallelize the hot function across multiple threads if your CPU has multiple cores.
 
-The repository contains a parallel version in the `main` branch:
+The repository contains a parallel version in the `main` branch. First stash the changes you made locally, then switch to the `main` branch.
 
 ```bash
+git stash
 git checkout main
 ```
 
-This branch parallelizes the `Mandelbrot::draw` function, which is an earlier function in the call stack that eventually calls `__hypot`. Build the example. This creates a binary `./builds/mandelbrot-parallel` that takes a single numeric command-line argument to set the number of threads.
+This branch parallelizes the `Mandelbrot::draw` function, which is an earlier function in the call stack that eventually calls `__hypot`. Before building, update the `myplot.draw()` call in `main.cpp` to use an absolute output path:
+
+```cpp
+myplot.draw("/home/ec2-user/Mandelbrot-Example/images/Green-Parallel-512.bmp", Mandelbrot::Mandelbrot::GREEN);
+```
+
+Build the example. This creates a binary `./builds/mandelbrot-parallel` that takes a single numeric command-line argument to set the number of threads.
 
 ```bash
 ./build.sh
@@ -84,6 +91,6 @@ The build script uses the `-O0` flag, which disables all compiler optimizations.
 
 In this Learning Path, you reduced the runtime of the Mandelbrot example by focusing on the hottest code paths—cutting execution time from around 1 minute to ~1 second through targeted optimization and parallelization. While this example is relatively simple and the optimizations are more obvious, the same principle applies to real-world workloads: optimize what matters most first, based on measurement.
 
-The CPU Cycle Hotspot recipe is designed to quickly identify an application's most CPU-time-dominant functions, giving you a clear, evidence-based starting point for performance work. By surfacing where execution time is actually spent, it ensures your optimizations target the parts of the code most likely to deliver the largest gains.
+The Code Hotspots recipe is designed to quickly identify an application's most CPU-time-dominant functions, giving you a clear, evidence-based starting point for performance work. By surfacing where execution time is actually spent, it ensures your optimizations target the parts of the code most likely to deliver the largest gains.
 
 This is often one of the first profiling steps to run when assessing an application's performance — especially to determine which functions dominate runtime and should be prioritized. Once hotspots are identified, you can follow up with deeper function-specific analysis, such as memory investigations or top-down studies, and build microbenchmarks around hot functions to explore lower-level bottlenecks and uncover additional optimization opportunities.

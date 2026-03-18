@@ -1,5 +1,5 @@
 ---
-title: Find CPU Cycle Hotspots with Arm Performix
+title: Find Code Hotspots with Arm Performix
 
 draft: true
 cascade:
@@ -7,10 +7,10 @@ cascade:
 
 minutes_to_complete: 30
 
-who_is_this_for: Software developers and performance engineers who want to identify CPU cycle hotspots in applications running on Arm Linux systems.
+who_is_this_for: Software developers and performance engineers who want to identify code hotspots in applications running on Arm Linux systems.
 
 learning_objectives: 
-    - Run the CPU Cycle Hotspot recipe in Arm Performix
+    - Run the Code Hotspots recipe in Arm Performix
     - Identify which functions consume the most CPU cycles and target them for optimization
 
 prerequisites:
