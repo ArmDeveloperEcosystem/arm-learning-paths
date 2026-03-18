@@ -235,7 +235,7 @@ You can also verify the tools are available by asking Codex to list the availabl
 
 ### Use Arm prompt files with the MCP Server
 
-The Arm MCP Server alone provides tools, but for optimal results, you should use it together with Arm-specific prompt files. Prompt files encode task-specific context, guidelines, and workflows that help the agent use MCP tools effectively for common Arm development tasks.
+The Arm MCP Server provides tools and a rich knowledge base, but you’ll get the most value when it’s used alongside Arm-specific prompt files. These prompt files capture task-focused context, best practices, and workflows, guiding the agent to apply MCP tools more effectively across common Arm development scenarios.
 
 #### Get the prompt files
 
