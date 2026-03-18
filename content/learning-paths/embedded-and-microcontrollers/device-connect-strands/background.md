@@ -12,7 +12,7 @@ Natural language is becoming more than a software interface. Physical AI systems
 
 [Device Connect](https://github.com/arm/device-connect) is Arm's device-aware framework for exactly that. Once devices register through a shared mesh, agents can discover and command any of them without caring where they run. A fleet of robot arms, a network of sensors, or a mix of physical and simulated devices all become equally reachable.
 
-[Strands Robots](https://github.com/strands-labs/robots) is a robot SDK that integrates Device Connect with the [AWS Strands Agents SDK](https://github.com/strands-labs/sdk). Using Strands, an LLM can query the device mesh ("who's available?"), understand what each device can do, and dynamically invoke actions — turning natural language intent into real-world outcomes.
+[Strands Robots](https://github.com/strands-labs/robots) is a robot SDK that integrates Device Connect with the [AWS Strands Agents SDK](https://strandsagents.com/). Using Strands, an LLM can query the device mesh ("who's available?"), understand what each device can do, and dynamically invoke actions — turning natural language intent into real-world outcomes.
 
 This Learning Path starts on a single machine, where a simulated robot and an agent discover each other automatically, then optionally extends to a Raspberry Pi joining the same device mesh over the network.
 
