@@ -8,9 +8,11 @@ layout: learningpathall
 
 ## Run CPU Cycle Hotspot Recipe
 
-As shown in the `main.cpp` file below, the program generates a 1920×1080 bitmap image of our fractal. To identify performance bottlenecks, we’ll run the CPU Cycle Hotspot recipe in Arm Performix (APX). APX uses sampling to estimate where the CPU spends most of its time, allowing it to highlight the hottest functions—especially useful in larger applications where it isn’t obvious ahead of time which functions will dominate runtime.
+As shown in the `main.cpp` file below, the program generates a 1920×1080 bitmap image of the fractal. To identify performance bottlenecks, run the CPU Cycle Hotspot recipe in Arm Performix (APX). APX uses sampling to estimate where the CPU spends most of its time, allowing it to highlight the hottest functions—especially useful in larger applications where it isn't obvious ahead of time which functions will dominate runtime.
 
-**Please Note**: You will need to replace the first string argument in the `myplot.draw()` function with the absolute path to the image folder and rebuild the application. If not, the image will be written to the `/tmp/atperf/tools/atperf-agent` directory from where the binary is run. As the name suggests, this folder is periodically deleted. 
+{{% notice Note %}}
+The `myplot.draw()` call uses a relative path (`./images/green.bmp`). When APX launches the binary, it runs it from `/tmp/atperf/tools/atperf-agent`, so the image would be written there rather than to your project directory. Replace the first string argument with the absolute path to your `images` folder (for example, `/home/ec2-user/Mandelbrot-Example/green.bmp`) and rebuild the application before continuing.
+{{% /notice %}}
 
 ```cpp
 #include "Mandelbrot.h"
@@ -27,30 +29,29 @@ int main(){
 }
 ```
 
-Open up APX from the host machine. Click on the `CPU Cycle Hotspot` recipe. If this is the first time running the recipe on this target machine you may need to click the install tools button.
+Open APX from the host machine. Select the **CPU Cycle Hotspot** recipe. If this is the first time running the recipe on this target machine you may need to select the install tools button.
 
-![install-tools](./install-tools.jpg)
+![The Arm Performix recipe selection screen with the CPU Cycle Hotspot recipe highlighted#center](./install-tools.jpg "Selecting the CPU Cycle Hotspot recipe")
 
-Next we will configure the recipe. We will choose to launch a new process, APX will automatically start collecting metric when the program starts and stop when the program exits.
+Configure the recipe to launch a new process. APX will automatically start collecting metrics when the program starts and stop when the program exits.
 
-Provide an absolute path to the recently built binary, `mandelbrot`. 
+Provide the absolute path to the binary built in the previous step: `/home/ec2-user/Mandelbrot-Example/builds/mandelbrot`.
 
-Finally, we will use the default sampling rate of `Normal`. If your application is a short running program, you may want to consider a higher sample rate, this will be at the tradeoff of more data to store and process. 
+Use the default sampling rate of **Normal**. If your application is short-running, consider a higher sample rate, at the cost of more data to store and process.
 
-![config](./hotspot-config.jpg)
+![The Arm Performix CPU Cycle Hotspot recipe configuration screen showing launch settings, binary path, and sampling rate fields#center](./hotspot-config.jpg "CPU Cycle Hotspot recipe configuration")
 
 ## Analyse Results
 
-A flame graph should be generated. The default colour mode is to label the 'hottest function', those which are sampled and utilizing CPU most frequently, in the darkest shade. Here we can see that the `__complex_abs__` function is being called during ~65% of samples. This is then calling the `__hypot` symbol in `libm.so`.
+A flame graph is generated once the run completes. The default colour mode labels the hottest functions—those using CPU most frequently—in the darkest shade. In this example, the `__complex_abs__` function is present in approximately 65% of samples, and it calls the `__hypot` symbol in `libm.so`.
 
-![single-thread-flameg](./single-thread-flame-graph.jpg)
+![A flame graph showing single-threaded Mandelbrot profiling results with __complex_abs__ as the dominant hotspot#center](./single-thread-flame-graph.jpg "Single-threaded flame graph showing __complex_abs__ as the hottest function")
 
+To investigate further, you can map source code lines to the functions in the flame graph. Right-click on a specific function and select **View Source Code**. At the time of writing (ATP Engine 0.44.0), you may need to copy the source code onto your host machine.
 
-To understand deeper, we can map the the lines of source code to the functions. To do this right clight on a specific function and select 'View Source Code'. At the time of writing (ATP Engine 0.44.0), you may need to copy the source code onto your host machine. 
+![The Arm Performix flame graph view showing source code annotations mapped to the selected hot function#center](./view-with-source-code.jpg "Flame graph with source code view")
 
-![view-src-code](./view-with-source-code.jpg)
+Finally, check your `images` directory for the generated bitmap fractal.
 
-Finally, looking in our images directory we can see the bitmap fractal.
-
-![mandelbrot](./plot-1-thread-MAX_ITERATIONS.jpg)
+![A rendered Mandelbrot set fractal in green, generated from the single-threaded build at maximum iterations#center](./plot-1-thread-max-iterations.jpg "Mandelbrot fractal output from single-threaded build")
 

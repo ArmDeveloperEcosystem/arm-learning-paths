@@ -6,9 +6,11 @@ weight: 5
 layout: learningpathall
 ---
 
-Now we can leverage the insights surfaced by Arm Performix to focus the optimizations around the hottest functions. Looking at the source code, we understand the the hypotenuse function, `__hypot`, is being invoked by the `Mandelbrot::getIterations` function to calculate the absolute value of a complex number. You may consider trying to used an optimized version of `libm`
+## Optimize hot functions
 
-Looking at the `Mandelbrot::getIterations` function,  there are some obvious ways to optimize. 
+Use the insights from Arm Performix to focus optimizations on the hottest functions. The flame graph from the previous step shows that `__hypot` is invoked by `Mandelbrot::getIterations` to calculate the absolute value of a complex number. One option worth exploring is replacing the `libm` implementation with an optimized alternative, but first consider the more targeted changes below.
+
+Looking at the `Mandelbrot::getIterations` function, there are two clear optimization opportunities.
 
 ```cpp
     while (iterations < MAX_ITERATIONS){
@@ -20,69 +22,68 @@ Looking at the `Mandelbrot::getIterations` function,  there are some obvious way
     }
 ```
 
-### Optimization 1 - Limiting Loop Boundary
+### Optimization 1 - Limiting loop boundary
 
-
-We can see that the number of iterations is of the absolute value is limited by the loop boundary, MAX_ITERATIONS. Our first optimization could be to reduce MAX_ITERATIONS. This is defined as 1024 a static const integer in the `Mandelbrot.h` header. We could half this to 512 and assess the perceived image quality on our fractal.
+The iteration count is bounded by `MAX_ITERATIONS`, defined as 1024, a `static const` integer in the `Mandelbrot.h` header. Halving this to 512 reduces the maximum work per pixel but you will need to verify that the change in image quality is acceptable.
 
 ```cpp
 public:
-...
+    ...
     static const int MAX_ITERATIONS = (1<<10);
-...
+    ...
 ```
 
-On the remote server, reduce `MAX_ITERATIONS` in `Mandelbrot.h` and rename the output file string in `main.cpp` to something else and rebuild the binary with the following command.
+On the remote server, reduce `MAX_ITERATIONS` in `Mandelbrot.h` to `(1<<9)` (512), update the output filename in `main.cpp` to a different path so you can compare the output with the baseline image, then rebuild:
 
 ```bash
 ./build.sh
 ```
 
-Next, click on the refresh icon in the top right to rerun the recipe. Next we select the comparison mode to view differences in the run. Navigating to the 'Run Details' tab, we observe a reducion in run duration from 1m 0s to 0m 32s, almost proportional to the reduction in `MAX_ITERATIONS`. However, we need to see if the tradeoff between image quality and runtime was worth it. 
+Select the refresh icon in the top right to rerun the recipe, then switch to comparison mode to view differences between runs. Under the **Run Details** tab, the run duration drops from 1m 0s to 0m 32s — almost proportional to the reduction in `MAX_ITERATIONS`. The trade-off to verify is whether the image quality is still acceptable.
 
-Looking at the change in image quality, there is neglible difference in perceived image quality when halfing MAX_ITERATIONS. 
+There is negligible difference in perceived image quality when halving `MAX_ITERATIONS`.
 
-![comparison](./comparison.jpg)
+![Side-by-side comparison of Mandelbrot fractal output at MAX_ITERATIONS 1024 and 512, showing no visible quality difference#center](./comparison.jpg "Image quality comparison: 1024 vs 512 iterations")
 
-### Optimization 2 - Parallelising Hot Function
+### Optimization 2 - Parallelising the hot function
 
-Fortunately, our loop does not contain any loop-carried dependencies, where the result of an iterations depends on a future or previous iteration. As such we can parallelize our hot function to fun on multiple threads if our CPU has multiple cores. 
+The loop in `Mandelbrot::getIterations` has no loop-carried dependencies — each iteration's result is independent of any other. This means you can parallelize the hot function across multiple threads if your CPU has multiple cores.
 
-The repository contains a parallel version in the main branch. 
+The repository contains a parallel version in the `main` branch:
 
 ```bash
 git checkout main
 ```
 
-This branch parallelized the `Mandelbrot::draw` function, which is earlier function in the stack that eventually calls the `__hypot` function. 
-
-Build the example, this creates a binary `./builds/mandelbrot-parallel` which takes in a numerical command line arguments to set the number of threads.
+This branch parallelizes the `Mandelbrot::draw` function, which is an earlier function in the call stack that eventually calls `__hypot`. Build the example. This creates a binary `./builds/mandelbrot-parallel` that takes a single numeric command-line argument to set the number of threads.
 
 ```bash
 ./build.sh
 ```
 
-Rerun the recipe with the new binary from Arm Performix running on the host. 
+Update the binary path in APX to `./builds/mandelbrot-parallel` and pass the desired thread count as an argument, then rerun the recipe from the host.
 
-To assess the change, we can compare with a previous run. Looking under the `Run Details` tab, we can see the execution time has reduced further from 0m 32s to 7s with 32 threads.
+To compare with a previous run, switch to comparison mode. Under the **Run Details** tab, execution time drops further from 0m 32s to 7s with 32 threads.
 
-![exec-change](./comparison-time.jpg)
+![The Arm Performix Run Details tab comparing execution time between the baseline and parallelized builds, showing a reduction from 32s to 7s#center](./comparison-time.jpg "Execution time comparison: single-threaded vs parallelized build")
 
-The percentage point of samples has not changed significantly, but we see with 64 threads the % of sampling landing on the `Mandelbrot::draw` function has reduced by 7%. This suggests that if we want to further improve the execution time, further optimizations on the `Mandelbrot::draw` function will yield the greatest benefit. 
+The proportion of samples has not changed significantly overall, but with 64 threads the percentage of samples landing on `Mandelbrot::draw` has reduced by 7%. To further improve execution time, you can continue optimizing `Mandelbrot::draw`.
 
-![flame-graph-comparison](./flame-graph-comparison.jpg).
+![Side-by-side flame graph comparison between single-threaded and parallel Mandelbrot builds, showing reduced dominance of the Mandelbrot::draw function#center](./flame-graph-comparison.jpg "Flame graph comparison: single-threaded vs parallelized build")
 
-**Please Note:** The total run duration is the runtime for both the tooling setup and data analysis, not the runtime of the application. Using a command line tool such as `time` we observe the application duration is now ~ 1s. Resulting in almost a 100x improvement in runtime!  
+{{% notice Note %}}
+The total run duration shown in APX includes tooling setup and data analysis time, not just application execution time. To measure only the application, use the `time` command: the application now runs in approximately 1 second — close to a 100x improvement over the original single-threaded baseline.
+{{% /notice %}}
 
 ### (Optional Challenge) Additional optimizations
 
-You may have noticed our build script uses the `-O0` flag, which ensures the compiler does not add any additional optimizations. You can experiment with additional optimization levels, loop boundary sizes and threads. Please see our learning path introducing [basic compiler flags](https://learn.arm.com/learning-paths/servers-and-cloud-computing/cplusplus_compilers_flags/) for more information. Additionally, you may wish to look at vectorized libraries that could replace the hypotenuse function in `libm`, such as the [Arm Performance Libraries](https://developer.arm.com/documentation/101004/2601/Arm-Performance-Libraries-Math-Functions/Arm-Performance-Libraries-Vector-Math-Functions--Accuracy-Table).
+The build script uses the `-O0` flag, which disables all compiler optimizations. Try experimenting with higher optimization levels, different loop boundary sizes, and thread counts. See the Learning Path [Get started with compiler optimization flags](/learning-paths/servers-and-cloud-computing/cplusplus_compilers_flags/) for guidance. You may also want to explore vectorized math libraries that could replace the `libm` hypotenuse function, such as the [Arm Performance Libraries vector math functions](https://developer.arm.com/documentation/101004/2601/Arm-Performance-Libraries-Math-Functions/Arm-Performance-Libraries-Vector-Math-Functions--Accuracy-Table).
 
 
 ## Summary
 
-In this learning path, we reduced the runtime of the Mandelbrot example by focusing on the hottest code paths—cutting execution time from around 1 minute to ~1 second through targeted optimization and parallelization. While this example is relatively simple and the optimizations are more obvious, the same principle applies to real-world workloads: optimize what matters most first, based on measurement.
+In this Learning Path, you reduced the runtime of the Mandelbrot example by focusing on the hottest code paths—cutting execution time from around 1 minute to ~1 second through targeted optimization and parallelization. While this example is relatively simple and the optimizations are more obvious, the same principle applies to real-world workloads: optimize what matters most first, based on measurement.
 
-The cpu_hotspot recipe is designed to quickly identify an application’s hottest (most CPU-time-dominant) functions, giving you a clear, evidence-based starting point for performance work. By surfacing where execution time is actually being spent, it helps ensure any optimizations are targeted at the parts of the code most likely to deliver the largest performance gains, rather than relying on guesswork.
+The CPU Cycle Hotspot recipe is designed to quickly identify an application's most CPU-time-dominant functions, giving you a clear, evidence-based starting point for performance work. By surfacing where execution time is actually spent, it ensures your optimizations target the parts of the code most likely to deliver the largest gains.
 
-This is often one of the first profiling steps you’ll run when assessing an application’s performance characteristics—especially to determine which functions dominate runtime and should be prioritized. Once hotspots are identified, you can follow up with deeper, function-specific analysis, such as memory investigations or top-down studies, and even build microbenchmarks around hot functions to explore lower-level bottlenecks and uncover additional optimization opportunities.
+This is often one of the first profiling steps to run when assessing an application's performance — especially to determine which functions dominate runtime and should be prioritized. Once hotspots are identified, you can follow up with deeper function-specific analysis, such as memory investigations or top-down studies, and build microbenchmarks around hot functions to explore lower-level bottlenecks and uncover additional optimization opportunities.
