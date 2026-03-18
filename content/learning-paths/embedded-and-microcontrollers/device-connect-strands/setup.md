@@ -15,11 +15,11 @@ python3.12 --version
 git --version
 ```
 
-These instructions are tested on Python 3.12. Earlier versions of Python 3 may work but are not validated against the `feat/device-connect-integration-draft` branch used in this Learning Path.
+These instructions are tested on Python 3.12. Earlier versions of Python 3 may work but are not validated against the `dev` branch used in this Learning Path.
 
 ## Clone the repository
 
-The code run in this Learning Path sits in a fork of the `robots` repository. It contains the robot runtime and the `robot_mesh` Strands tool.
+The code run in this Learning Path sits in a branch of the `robots` repository. It contains the robot runtime and the `robot_mesh` Strands tool.
 
 ```bash
 mkdir ~/strands-device-connect
@@ -29,7 +29,7 @@ git clone https://github.com/strands-labs/robots.gits
 
 ## Check out the integration branch
 
-The Device Connect integration code for `robots` lives on the `feat/device-connect-integration-draft` branch. This branch adds the `RobotDeviceDriver` adapter and the updated `robot_mesh` tool that routes calls through the Device Connect SDK rather than the raw Zenoh mesh.
+The Device Connect integration code for `robots` lives on the `dev` branch. This branch adds the `RobotDeviceDriver` adapter and the updated `robot_mesh` tool that routes calls through the Device Connect SDK rather than the raw Zenoh mesh.
 
 ```bash
 cd ~/strands-device-connect/robots
@@ -62,7 +62,7 @@ This means discovery works as long as the device process and the agent process a
 
 At this point you've:
 
-- Cloned `robots` with the `feat/device-connect-integration-draft` branch checked out.
+- Cloned `robots` with the `dev` branch checked out.
 - Created a Python 3.12 virtual environment with the Device Connect SDK, agent tools, and robot simulation runtime all installed.
 
 The next section walks you through starting a simulated robot and invoking it from both the agent tools and the `robot_mesh` Strands tool.
