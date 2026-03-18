@@ -20,7 +20,7 @@ This Learning Path starts on a single machine, where a simulated robot and an ag
 
 Two packages make this work.
 
-**`device_connect_sdk`** is the device-side runtime. Any process that wraps a robot in a `DeviceDriver` and starts a `DeviceRuntime` joins the mesh: it registers itself, announces what it can do, and starts publishing state events. Zenoh handles low-level connectivity; in device-to-device mode no broker or environment configuration is needed.
+**`device-connect-sdk`** is the device-side runtime. Any process that wraps a robot in a `DeviceDriver` and starts a `DeviceRuntime` joins the mesh: it registers itself, announces what it can do, and starts publishing state events. Zenoh handles low-level connectivity; in device-to-device mode no broker or environment configuration is needed.
 
 **`device-connect-agent-tools`** is the agent-side runtime. It exposes `discover_devices()` and `invoke_device()` as plain Python functions. The `robot_mesh` tool in Strands Robots wraps the same interface as a Strands tool, so an LLM can call it too. Both use the same underlying transport, so the same calls work whether the caller is a script or an agent.
 

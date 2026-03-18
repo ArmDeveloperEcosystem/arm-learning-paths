@@ -19,7 +19,7 @@ These instructions are tested on Python 3.12. Earlier versions of Python 3 may w
 
 ## Clone the repository
 
-The code run in this Learning Path sits in the `robots` repository. It contains the robot runtime and the `robot_mesh` Strands tool.
+The code run in this Learning Path sits in a fork of the `robots` repository. It contains the robot runtime and the `robot_mesh` Strands tool.
 
 ```bash
 mkdir ~/strands-device-connect

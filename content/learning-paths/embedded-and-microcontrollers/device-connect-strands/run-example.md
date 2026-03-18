@@ -62,8 +62,6 @@ Two things happen when this script runs.
 4. Registers RPC handlers: `execute`, `getStatus`, `getFeatures`, `step`, `reset`, and `stop`.
 5. Starts a 10Hz background loop that emits `stateUpdate` and `observationUpdate` events to any listener on the mesh.
 
-The process then blocks in a loop, keeping the device registered and reachable. The robot is only discoverable for as long as this process is running.
-
 You should see INFO-level log output similar to:
 
 ```output

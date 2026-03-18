@@ -54,6 +54,14 @@ further_reading:
         title: Device Connect integration guide
         link: https://github.com/atsyplikhin/robots/blob/feat/device-connect-integration-draft/strands_robots/device_connect/GUIDE.md
         type: website
+    - resource:
+        title: device-connect-agent-tools on PyPI
+        link: https://pypi.org/project/device-connect-agent-tools
+        type: website
+    - resource:
+        title: device-connect-sdk on PyPI
+        link: https://pypi.org/project/device-connect-sdk
+        type: website
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
