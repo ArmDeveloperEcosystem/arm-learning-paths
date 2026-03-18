@@ -1,19 +1,16 @@
 ---
-title: Find Bottlenecks with CPU Microarchitecture
+title: Identify application bottlenecks with the CPU Microarchitecture recipe
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Run CPU Microarchitecture analysis
+## Run the CPU Microarchitecture recipe
 
-As shown in the `main.cpp` listing below, the program generates a 1920×1080 bitmap image of the fractal. To identify performance bottlenecks, run the CPU Microarchitecture recipe in Arm Performix (APX). APX uses microarchitectural sampling to show which instruction pipeline stages dominate program latency, then highlights ways to improve those bottlenecks.
+To identify performance bottlenecks, run the CPU Microarchitecture recipe in Arm Performix. Arm Performix uses microarchitectural sampling to show which instruction pipeline stages dominate program latency, and then highlights ways to improve those bottlenecks.
 
-
-{{% notice Specify the example output file %}}
-Replace the first string argument in `myplot.draw()` with the absolute path to your image folder, then rebuild the application. Otherwise, the image is written to `/tmp/atperf/tools/atperf-agent`, which is periodically deleted.
-{{% /notice %}}
+Start by reviewing the code in `main.cpp`, the program generates a 1920×1080 bitmap image of the fractal.
 
 ```cpp
 #include "Mandelbrot.h"
@@ -21,44 +18,59 @@ Replace the first string argument in `myplot.draw()` with the absolute path to y
 
 using namespace std;
 
-int main(){
+int main(int argc, char* argv[]){
 
-    Mandelbrot::Mandelbrot myplot(1920, 1080);
-    myplot.draw("/path/to/images/green.bmp", Mandelbrot::Mandelbrot::GREEN);
+    const int NUM_THREADS = std::stoi(argv[1]);
+    std::cout << "Number of Threads = " << NUM_THREADS << std::endl;
+
+    Mandelbrot::Mandelbrot myplot(1920, 1080, NUM_THREADS);
+    myplot.draw("/home/ec2-user/Mandelbrot-final/Mandelbrot-Example/images/Green-Parallel-512.bmp", Mandelbrot::Mandelbrot::GREEN);
 
     return 0;
 }
 ```
 
-On your host machine, open Arm Performix and select the **CPU Microarchitecture** recipe.
+When Arm Performix launches the executable on the target machine, it does so from a temporary agent directory, `/tmp/atperf/tools/atperf-agent`. If your code uses a relative path to save the image, the image is written to that temporary folder and might be deleted. 
 
-![config](./cpu-uarch-config.jpg)
+To prevent this, edit the `myplot.draw()` line in `main.cpp` to use the absolute path to your project's image folder (for example, `/home/ubuntu/Mandelbrot-Example/images/Green-Parallel-512.bmp`), and then rebuild the application.
 
-Select the target you configured in the setup phase. If this is your first run on this target, you likely need to select **Install Tools** to copy collection tools to the target. Next, select the **Workload type**. You can sample the whole system or attach to an existing process, but in this exercise you launch a new process.
+In the Arm Performix application on your host machine, select the **CPU Microarchitecture** recipe.
 
-{{% notice Common Gotcha%}}
+![Arm Performix CPU Microarchitecture configuration screen#center](./cpu-uarch-config.webp "CPU Microarchitecture Configuration")
+
+Select the target you configured in the setup section. If this is your first run on this target, you might need to select **Install Tools** to copy the collection tools to the target. After the tools are installed, you see the target is now ready.
+
+Next, select the **Workload type** and select **Launch a new process**.
+
+Enter the absolute path to your executable in the **Workload** field. For example, `/home/ubuntu/Mandelbrot-Example/builds/mandelbrot-parallel`. Make sure to add the number of threads argument.
+
+{{% notice Note %}}
 Use the full path to your executable because the **Workload** field does not currently support shell-style path expansion.
 {{% /notice %}}
 
-You can set a time limit for the workload and customize metrics if you already know what to investigate.
+Before starting the analysis, you can customize the configuration. For instance, you can set a time limit for the workload or choose specific metrics to investigate. You can also adjust the sampling rate (High, Normal, or Low) to balance collection overhead against sampling granularity. Because this Mandelbrot example is a native C++ application, you can ignore the **Collect managed code stacks** toggle, which is used for Java or .NET workloads.
 
-The **Collect managed code stacks** toggle matters for Java/JVM or .NET workloads.
+When your configuration is ready, select **Run Recipe** to launch the workload and collect the performance data.
 
-You can also select High, Normal, or Low sampling rates to trade off collection overhead and sampling granularity.
+## View the run results
 
-Select **Run Recipe** to launch the workload and collect performance data.
+Arm Performix generates a high-level instruction pipeline view, highlighting where the most time is spent.
 
-## View Run Results
+![Arm Performix high-level instruction pipeline results#center](cpu-uarch-results.webp "Instruction Pipeline View")
 
-Performix generates a high-level instruction pipeline view, highlighting where most time is spent.
-
-![cpu-uarch-results.jpg](cpu-uarch-results.jpg)
-
-In this breakdown, Backend Stalls dominate samples. Within that category, work is split between Load Operations and integer and floating-point operations.
+In this breakdown, Backend Stalls dominate the samples. Within that category, work is split between Load Operations and integer and floating-point operations.
 There is no measured SIMD activity, even though this workload is highly parallelizable.
 
-The **Insights** panel highlights ALU contention as a likely improvement opportunity.
+The **Insights** panel highlights ALU contention as a likely improvement opportunity:
 
-![cpu-uarch-insights.jpg](cpu-uarch-insights.jpg)
+![Arm Performix insights panel highlighting ALU contention#center](cpu-uarch-insights.webp "Insights Panel")
 
 To inspect executed instruction types in more detail, use the Instruction Mix recipe in the next step.
+
+## What you've accomplished and what's next
+
+In this section:
+- You ran the CPU Microarchitecture recipe on the Mandelbrot application.
+- You identified that the application spends most of its time in Backend Stalls without using SIMD operations.
+
+Next, you will run the Instruction Mix recipe to confirm where optimization opportunities exist and implement vectorization.

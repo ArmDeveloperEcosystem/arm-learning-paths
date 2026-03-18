@@ -1,18 +1,22 @@
 ---
-title: Tune application performance with Arm Performix CPU Microarchitecture analysis
+title: Optimize application performance using Arm Performix CPU microarchitecture analysis
+
+draft: true
+cascade:
+    draft: true
 
 minutes_to_complete: 60
 
-who_is_this_for: This introductory Learning Path is for software developers who want to learn performance analysis methodologies for Linux applications on Arm Neoverse.
+who_is_this_for: This is an introductory topic for software developers who want to learn performance analysis methodologies for Linux applications on Arm Neoverse-based servers.
 
 learning_objectives:
-    - Understand sampling and counting for performance analysis
-    - Learn commonly used hardware metrics
-    - Analyze a sample application by using Arm Performix
-    - Make an application code change and see improved performance
+    - Identify CPU pipeline bottlenecks using the Arm Performix CPU Microarchitecture recipe
+    - Analyze instruction types and SIMD utilization using the Instruction Mix recipe
+    - Optimize application performance using vectorization and compiler flags
+    - Compare performance profiles to measure execution improvements
 
 prerequisites:
-    - An Arm Neoverse N1 or higher computer running Linux. A bare-metal or cloud bare-metal instance is best because it exposes more counters.
+    - An Arm Neoverse-based server running Linux. A bare-metal or cloud bare-metal instance is best because it exposes more counters.
 
 author:
 - Brendan Long
@@ -25,7 +29,7 @@ armips:
     - Neoverse
 tools_software_languages:
     - Arm Performix
-    - C++
+    - C
     - Runbook
 
 operatingsystems:

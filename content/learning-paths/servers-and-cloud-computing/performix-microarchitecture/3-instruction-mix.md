@@ -1,44 +1,54 @@
 ---
-title: Understand Instruction Mix
+title: Analyze SIMD utilization with the Instruction Mix recipe
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Run Instruction Mix
+## Run the Instruction Mix recipe
 
-The previous CPU Microarchitecture analysis showed that the sample application used no single instruction, multiple data (SIMD) operations, which points to an optimization opportunity. Run the Instruction Mix recipe to learn more. The Instruction Mix launch panel is similar to CPU Microarchitecture, but it does not include options to choose metrics. Again, enter the full path to the workload. This Mandelbrot example is native C++ code, not Java or .NET, so you do not need to collect managed code stacks.
+The previous CPU Microarchitecture analysis showed that the sample application used no single instruction, multiple data (SIMD) operations, which points to an optimization opportunity. Run the Instruction Mix recipe to learn more. The Instruction Mix launch panel is similar to CPU Microarchitecture, but it does not include options to choose metrics. Again, enter the full path to the workload. 
 
-![instruction-mix-config.jpg](instruction-mix-config.jpg)
+Select **Dynamic** f for the **Analysis Mode**. 
 
+![Arm Performix Instruction Mix configuration screen#center](instruction-mix-config.webp "Instruction Mix Configuration")
 
 The results below confirm a high number of integer and floating-point operations, with no SIMD operations. The **Insights** panel suggests vectorization as a path forward, lists possible root causes, and links to related Learning Paths.
 
-![instruction-mix-results.jpg](instruction-mix-results.jpg)
+![Arm Performix Instruction Mix results showing high integer and floating point operations#center](instruction-mix-results.webp "Instruction Mix Results")
 
-## Vectorize
+## Vectorize the application
 
-The CPU Hotspots recipe in [Find CPU cycle hotspots with Arm Performix](/learning-paths/servers-and-cloud-computing/cpu_hotspot_performix/) helps you identify which functions consume the most time. In this example, `Mandelbrot::draw` and its inner function `Mandelbrot::getIterations` dominate runtime. A vectorized version is available in the [instruction-mix branch](https://github.com/arm-education/Mandelbrot-Example/tree/instruction-mix). This branch uses Neon operations for Neoverse N1, while your platform might support alternatives such as SVE or SVE2.
+To address the lack of SIMD operations, you can vectorize the application's most intensive functions. For the Mandelbrot application, `Mandelbrot::draw` and its inner `Mandelbrot::getIterations` function consume most of the runtime. A vectorized version is available in the [instruction-mix branch](https://github.com/arm-education/Mandelbrot-Example/tree/instruction-mix). This branch uses Neon operations, which run on any Neoverse system. Your system might support alternatives such as SVE or SVE2 which can also be used.
 
-After you rebuild the application and run Instruction Mix again, integer and floating-point operations are greatly reduced and replaced by a smaller set of SIMD instructions.
+Connect to your target machine using SSH and navigate to your project directory. Because you modified `main.cpp` earlier, you must stash your changes before switching to the `instruction-mix` branch. Then, rebuild the application:
 
-![instruction-mix-simd-results.jpg](instruction-mix-simd-results.jpg)
+```bash
+cd $HOME/Mandelbrot-Example
+git stash
+git checkout instruction-mix
+./build.sh
+```
 
-## Assess improvements
+After you rebuild the application and run the Instruction Mix recipe again, integer and floating-point operations are greatly reduced and replaced by a smaller set of SIMD instructions.
+
+![Arm Performix Instruction Mix results after vectorization showing increased SIMD operations#center](instruction-mix-simd-results.webp "SIMD Instruction Mix Results")
+
+## Assess the performance improvements
 
 Because you are running multiple experiments, give each run a meaningful nickname to keep results organized.
-![rename-run.jpg](rename-run.jpg)
+![Arm Performix run renaming interface#center](rename-run.webp "Rename Run")
 
 Use the **Compare** feature at the top right of an entry in the **Runs** view to select another run of the same recipe for comparison.
 
-![compare-with-box.jpg](compare-with-box.jpg)
+![Arm Performix compare view selection box#center](compare-with-box.webp "Compare Runs")
 
 This selection box lets you choose any run of the same recipe type. The ⇄ arrows swap which run is treated as the baseline and which is current.
 
-After you select two runs, Performix overlays them so you can review category changes in one view. In the new run, note that 
+After you select two runs, Arm Performix overlays them so you can review category changes in one view. In the new run, note that 
 
-![instruction-mix-diff-results.jpg](instruction-mix-diff-results.jpg)
+![Arm Performix comparison showing differences in instruction mix#center](instruction-mix-diff-results.webp "Instruction Mix Comparison")
 Compared to the baseline, floating-point operations, branch operations, and some integer operations have been traded for loads, stores, and SIMD operations.
 Execution time also improves significantly, making this run nearly four times faster.
 
@@ -60,10 +70,10 @@ user    0m8.331s
 sys     0m0.016s
 ```
 
-## CPU Microarchitecture results comparison
+## Compare the CPU Microarchitecture results
 
 The CPU Microarchitecture recipe also supports a **Compare** view that shows percentage-point changes in each stage and instruction type.
-![cpu-uarch-simd-results-diff.jpg](cpu-uarch-simd-results-diff.jpg)
+![Arm Performix CPU Microarchitecture comparison showing changes in each stage#center](cpu-uarch-simd-results-diff.webp "CPU Microarchitecture Difference View")
 
 You can now see that Load and Store operations account for about 70% of execution time. **Insights** offers several explanations because multiple issues can contribute to the root cause.
 ```
@@ -78,7 +88,9 @@ POSSIBLE CAUSES
 - Instruction dependencies that create pipeline bubbles
 ```
 
-Next, add optimization flags to the compiler to enable more aggressive loop unrolling.
+## Apply compiler optimizations for loop unrolling
+
+To address the new load and store bottlenecks, add optimization flags to the compiler to enable more aggressive loop unrolling. Edit the `build.sh` script to include these flags in the `CXXFLAGS` array:
 ```bash
     # build.sh
     CXXFLAGS=(
@@ -92,7 +104,9 @@ Next, add optimization flags to the compiler to enable more aggressive loop unro
     )
 ```
 
-Runtime improves again, with an additional 11x speedup over the SIMD build that uses default compiler flags.
+After saving the file, run `./build.sh` to compile the application with the new flags.
+
+Runtime improves again, with an additional 11x speedup over the SIMD build that used the default compiler flags.
 
 
 ```bash { command_line="root@localhost | 2-6" }
@@ -105,8 +119,17 @@ sys     0m0.014s
 ```
 
 Another CPU Microarchitecture measurement shows that Load and Store bottlenecks are almost eliminated. SIMD floating-point operations now dominate execution, which indicates the application is better tuned to feed floating-point execution units.
-![high-simd-utilization.jpg](high-simd-utilization.jpg)
+![Arm Performix insights showing high SIMD utilization#center](high-simd-utilization.webp "High SIMD Utilization")
 
 The program still generates the same output, and runtime drops from 31 s to less than 1 s, a 43x speedup.
 
-![performance-improvement.jpg](performance-improvement.jpg)
+![Arm Performix results highlighting total performance improvement#center](performance-improvement.webp "Performance Improvement Summary")
+
+## What you've accomplished and what's next
+
+In this section:
+- You used the Instruction Mix recipe to confirm a lack of SIMD operations.
+- You vectorized the sample application and verified the shift toward SIMD execution.
+- You applied compiler loop unrolling to relieve backend load/store bottlenecks, achieving over 40x speedup.
+
+You are now ready to analyze and optimize your own native C/C++ applications on Arm Neoverse using Arm Performix. Review the next steps to continue your learning journey.
