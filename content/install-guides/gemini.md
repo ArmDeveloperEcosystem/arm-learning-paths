@@ -409,15 +409,15 @@ Configured MCP servers:
 
 ### Use Arm prompt files with the MCP Server
 
-The Arm MCP Server alone provides tools, but for optimal results, you should use it together with Arm-specific prompt files. Prompt files encode task-specific context, guidelines, and workflows that help the agent understand how to use the MCP Server tools effectively for common Arm development tasks.
+The Arm MCP Server provides a rich set of tools and knowledge base, but to make the best use of it, you should pair it with Arm-specific prompt files. These prompt files supply task-oriented context, best practices, and structured workflows that guide the agent in using MCP tools more effectively across common Arm development tasks.
 
 #### Get the prompt files
 
 Browse the [agent integrations directory](https://github.com/arm/mcp/tree/main/agent-integrations/gemini) to find prompt files for specific use cases:
 
-- **Arm migration** ([arm-migration.toml](https://github.com/arm/mcp/blob/main/agent-integrations/gemini/arm-migration.toml)): Guides the agent through migrating applications from x86 to Arm, including dependency analysis, compatibility checks, and optimization recommendations.
+- **Arm migration** ([arm-migration.toml](https://github.com/arm/mcp/blob/main/agent-integrations/gemini/arm-migration.toml)): Helps the agent systematically migrate applications from x86 to Arm, including dependency analysis, compatibility checks, and optimization recommendations.
 
-Each prompt file is a TOML configuration that you can reference in your Gemini CLI sessions to activate task-specific assistance.
+Each prompt file is a TOML configuration that you can reference in your Gemini CLI sessions to enable more targeted, task-specific assistance.
 
 If you're facing issues or have questions, reach out to mcpserver@arm.com.
 
