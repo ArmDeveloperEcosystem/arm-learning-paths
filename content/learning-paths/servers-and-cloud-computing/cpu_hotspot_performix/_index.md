@@ -7,15 +7,15 @@ cascade:
 
 minutes_to_complete: 30
 
-who_is_this_for: Cloud Engineers looking to optimize their workload running on a Linux-based Arm system. 
+who_is_this_for: Software developers and performance engineers who want to identify CPU cycle hotspots in applications running on Arm Linux systems.
 
 learning_objectives: 
     - Run the CPU Cycle Hotspot recipe in Arm Performix
-    - Identify which functions in your program use the most CPU cycles, so you can target the best candidates for optimization.
+    - Identify which functions consume the most CPU cycles and target them for optimization
 
 prerequisites:
     - Access to Arm Performix
-    - Basic understand on C++
+    - Basic understanding of C++
 
 author: Kieran Hejmadi
 
