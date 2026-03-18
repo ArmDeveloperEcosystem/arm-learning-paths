@@ -10,7 +10,7 @@ layout: learningpathall
 
 To allow external traffic on port **9999** for Dynatrace ActiveGate running on an Azure virtual machine, open the port in the Network Security Group (NSG) attached to the virtual machine's network interface or subnet.
 
-{{% notice Note %}} For more information about Azure setup, see [Getting started with Microsoft Azure Platform](/learning-paths/servers-and-cloud-computing/csp/azure/).{{% /notice %}}
+{{% notice Note %}}For more information about Azure setup, see [Getting started with Microsoft Azure Platform](/learning-paths/servers-and-cloud-computing/csp/azure/).{{% /notice %}}
 
 ## Create a firewall rule in Azure
 
@@ -36,8 +36,7 @@ Configure it using the following details:
 - **Destination port ranges:** **9999**  
 - **Protocol:** TCP  
 - **Action:** Allow  
-- **Priority:** 1000  
-- **Name:** dynatrace-activegate  
+- **Name:** allow-tcp-9999 
 
 After filling in the details, select **Add** to save the rule.
 
