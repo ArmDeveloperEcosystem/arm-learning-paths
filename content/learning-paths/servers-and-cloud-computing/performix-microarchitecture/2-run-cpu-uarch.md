@@ -50,7 +50,7 @@ Select **Run Recipe** to launch the workload and collect performance data.
 
 ## View Run Results
 
-Performix generates a high-level instruction pipeline view, highlighting where most time is spent.
+Arm Performix generates a high-level instruction pipeline view, highlighting where most time is spent.
 
 ![cpu-uarch-results.jpg](cpu-uarch-results.jpg)
 

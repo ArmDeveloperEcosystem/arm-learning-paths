@@ -36,7 +36,7 @@ Use the **Compare** feature at the top right of an entry in the **Runs** view to
 
 This selection box lets you choose any run of the same recipe type. The ⇄ arrows swap which run is treated as the baseline and which is current.
 
-After you select two runs, Performix overlays them so you can review category changes in one view. In the new run, note that 
+After you select two runs, Arm Performix overlays them so you can review category changes in one view.
 
 ![instruction-mix-diff-results.jpg](instruction-mix-diff-results.jpg)
 Compared to the baseline, floating-point operations, branch operations, and some integer operations have been traded for loads, stores, and SIMD operations.

@@ -10,7 +10,7 @@ This Learning Path uses Arm Performix CPU Mircoarchitecture and Instruction Mix 
 
 ## Before you begin
 
-Use the Performix [installation guide](/install-guides/atp/) to install the tool if this is your first run. From the host machine, open the **Targets** tab, set up an SSH connection to the target that runs the workload, and test the connection. In this Learning Path's examples, I'll connect to an Arm Neoverse V1 workstation.
+Use the Arm Performix [installation guide](/install-guides/atp/) to install the tool if this is your first run. From the host machine, open the **Targets** tab, set up an SSH connection to the target that runs the workload, and test the connection. In this Learning Path's examples, I'll connect to an Arm Neoverse V1 workstation.
 
 Install required OS packages on the target. For Debian-based distributions, run:
 ```bash
