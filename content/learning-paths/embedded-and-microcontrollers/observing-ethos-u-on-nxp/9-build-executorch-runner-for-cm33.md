@@ -1,13 +1,16 @@
 ---
-title: Build the executor_runner firmware
+title: Build Cortex-M33 firmware for ExecuTorch
 weight: 10
-
-### FIXED, DO NOT MODIFY
+# FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-You build the Cortex-M33 `executor_runner` firmware on your host machine, then deploy it to the FRDM i.MX 93 board.
 
-This is the core milestone of the Learning Path.
+## ExecuTorch deployment components
+
+In this section, you build the Cortex-M33 `executor_runner` firmware. You then deploy it to the FRDM i.MX 93 board.
+
+This is a key milestone. You're proving you can control the real-time ML runtime for Ethos-U65 workloads.
+
 On i.MX 93, Linux runs on the application cores, but the real-time ML runtime that talks to Ethos-U65 runs as **firmware on Cortex-M33**.
 When you can build and boot your own `executor_runner`, you've proven that the microcontroller side of the system is under your control and ready to host ML workloads.
 
@@ -242,5 +245,14 @@ The 128KB ITCM is nearly full. Verify that `CMakeLists.txt` links `libquantized_
 The quantized operator kernels are not linked. Verify that `CMakeLists.txt` links `libquantized_ops_lib_selective.a` with `--whole-archive` and that `libquantized_kernels.a` and `libkernels_util_all_deps.a` are also listed.
 
 {{% /notice %}}
+
+## What you've learned and what's next
+
+In this section you've:
+
+- Set up MCUXpresso for VS Code with the SDK and Arm toolchain
+- Cloned the executor_runner project with prebuilt ExecuTorch libraries
+- Applied critical SDK patches for GOT initialization and NPU logging
+- Built the Cortex-M33 firmware and verified it fits within memory constraints
 
 With the firmware binary built and its memory usage verified, you're ready to deploy it to the FRDM i.MX 93 and run your first inference.

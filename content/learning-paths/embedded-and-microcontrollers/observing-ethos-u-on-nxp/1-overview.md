@@ -1,10 +1,12 @@
 ---
-title: Overview
+title: Understand ExecuTorch deployment on NXP with Ethos-U
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+
+## Before you begin
 
 This Learning Path assumes your FRDM i.MX 93 board is already set up and you can transfer files between your host machine and the board.
 
@@ -19,11 +21,11 @@ The FRDM i.MX 93 platform combines:
 
 This Learning Path focuses on a concrete milestone: successful bring-up of an ExecuTorch `executor_runner` firmware on Cortex-M33 on this NXP platform.
 
-You keep the Linux side intentionally simple. Linux loads and starts the Cortex-M33 firmware through RemoteProc, and you stage a compiled ExecuTorch `.pte` model so the firmware can run it.
+This example keeps the Linux side intentionally simple. Linux loads and starts the Cortex-M33 firmware through RemoteProc, and you stage a compiled ExecuTorch `.pte` model so the firmware can run it.
 
 ## What you’ll build and validate
 
-By the end of this Learning Path, you have:
+By the end of this Learning Path, you'll have:
 
 - A `.pte` model artifact compiled for `ethos-u65-256`
 - A Cortex-M33 `executor_runner` firmware image built against prebuilt ExecuTorch libraries

@@ -6,6 +6,8 @@ weight: 11
 layout: learningpathall
 ---
 
+## Deployment overview
+
 This section is where the heterogeneous system comes together.
 Linux on the application cores manages the lifecycle of Cortex-M33 through RemoteProc, and your Cortex-M33 firmware brings up ExecuTorch and the Ethos-U65 delegate.
 
@@ -22,7 +24,7 @@ Before deploying, verify the following on your FRDM-IMX93 board:
    /dev/ethosu0
    ```
 
-   If `/dev/ethosu0` does not exist, the NPU is not powered and the firmware will hang at NPU initialization.
+   If `/dev/ethosu0` doesn't exist, the NPU isn't powered and the firmware will hang at NPU initialization.
 
 2. **DDR memory is reserved for the CM33.** The NXP BSP reserves two DDR regions by default:
 
@@ -120,10 +122,10 @@ The key indicators of a successful inference run:
 | `bus_status_error 0x0` | No AXI bus errors during NPU memory access |
 | `numel=1000` | MobileNet V2 output: 1000 ImageNet classification scores (one per class) |
 
-The model runs with uninitialized input data, so the output scores do not correspond to a real image classification. To get meaningful predictions, feed a real 224x224 RGB image as input.
+The model runs with uninitialized input data, so the output scores don't correspond to a real image classification. To get meaningful predictions, feed a real 224x224 RGB image as input.
 
 {{% notice Note %}}
-If the trace buffer shows `Program identifier '' != expected 'ET12'`, the `.pte` model was not loaded into DDR at `0xC0000000`. Reload the model using the steps above.
+If the trace buffer shows `Program identifier '' != expected 'ET12'`, the `.pte` model wasn't loaded into DDR at `0xC0000000`. Reload the model using the steps above.
 {{% /notice %}}
 
 ## Re-run inference
@@ -138,7 +140,7 @@ sleep 15
 cat /sys/kernel/debug/remoteproc/remoteproc0/trace0
 ```
 
-The trace buffer resets at the start of each firmware load, so you always see fresh output.
+The trace buffer resets at the start of each firmware load, so you'll always see fresh output.
 
 ## What you've accomplished and what's next
 

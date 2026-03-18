@@ -1,12 +1,14 @@
 ---
 # User change
-title: "Build ExecuTorch"
+title: "Build and install ExecuTorch"
 
 weight: 7 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
+
+## Overview
 
 With the ExecuTorch source checked out and your virtual environment active, you can now build ExecuTorch and set up the Arm toolchain for Ethos-U cross-compilation.
 
@@ -71,5 +73,13 @@ git submodule update --init --recursive
 ./install_executorch.sh
 ```
 {{% /notice %}}
+
+## What you've learned and what's next
+
+In this section you've:
+
+- Installed the ExecuTorch package and verified its availability
+- Set up the Arm toolchain with Ethos-U support
+- Configured the environment for cross-compiling to Ethos-U65
 
 With ExecuTorch installed and the Arm toolchain configured, you can now compile `.pte` model files targeting the Ethos-U65 NPU.

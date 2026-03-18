@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Environment setup"
+title: "Set up the ExecuTorch build environment"
 
 weight: 5 # 1 is first, 2 is second, etc.
 
@@ -8,7 +8,7 @@ weight: 5 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## For macOS: Build ExecuTorch in a Docker container
+## For macOS: build ExecuTorch in a Docker container
 
 On macOS, it’s easiest to build ExecuTorch in an Ubuntu container. This keeps your toolchain consistent with the rest of the Learning Path and avoids gaps in macOS-native cross-compilers (for example, the Arm GNU Toolchain doesn’t provide an “AArch64 GNU/Linux target” for macOS).
 
@@ -132,5 +132,13 @@ The `EthosUCompileSpec` parameters used in this guide:
 | `system_config`   | `Ethos_U65_High_End`  | High-end system configuration for optimal performance |
 | `memory_mode`     | `Shared_Sram`         | Uses shared SRAM memory mode                   |
 {{% /notice %}}
+
+## What you've learned and what's next
+
+In this section you've:
+
+- Set up an Ubuntu 24.04 Docker container for building ExecuTorch (macOS users)
+- Installed required dependencies and created a Python virtual environment
+- Cloned the ExecuTorch repository and checked out the correct version
 
 With your build environment configured and the ExecuTorch source checked out, the next step is building and installing the ExecuTorch package.
