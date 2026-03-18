@@ -24,7 +24,7 @@ The code run in this Learning Path sits in a fork of the `robots` repository. It
 ```bash
 mkdir ~/strands-device-connect
 cd strands-device-connect
-git clone https://github.com/atsyplikhin/robots.git
+git clone https://github.com/strands-labs/robots.gits
 ```
 
 ## Check out the integration branch
@@ -33,7 +33,7 @@ The Device Connect integration code for `robots` lives on the `feat/device-conne
 
 ```bash
 cd ~/strands-device-connect/robots
-git checkout feat/device-connect-integration-draft
+git switch dev
 ```
 
 ## Create a Python virtual environment
