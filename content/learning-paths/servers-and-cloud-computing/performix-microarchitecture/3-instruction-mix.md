@@ -8,11 +8,11 @@ layout: learningpathall
 
 ## Run the Instruction Mix recipe
 
-The previous CPU Microarchitecture analysis showed that the sample application used no single instruction, multiple data (SIMD) operations, which points to an optimization opportunity. Run the Instruction Mix recipe to learn more. The Instruction Mix launch panel is similar to CPU Microarchitecture, but it does not include options to choose metrics. Again, enter the full path to the workload. 
+The previous CPU Microarchitecture analysis showed that the sample application used no single instruction, multiple data (SIMD) operations, which points to an optimization opportunity. Run the Instruction Mix recipe to learn more. The Instruction Mix launch panel is similar to CPU Microarchitecture, but it doesn't include options to choose metrics. Again, enter the full path to the workload. 
 
-Select **Dynamic** f for the **Analysis Mode**. 
+Select **Dynamic** for the **Analysis Mode**. 
 
-![Arm Performix Instruction Mix configuration screen#center](instruction-mix-config.webp "Instruction Mix Configuration")
+![Arm Performix Instruction Mix configuration screen alt-txt#center](instruction-mix-config.webp "Instruction Mix Configuration")
 
 The results below confirm a high number of integer and floating-point operations, with no SIMD operations. The **Insights** panel suggests vectorization as a path forward, lists possible root causes, and links to related Learning Paths.
 
@@ -37,20 +37,20 @@ After you rebuild the application and run the Instruction Mix recipe again, inte
 
 ## Assess the performance improvements
 
-Because you are running multiple experiments, give each run a meaningful nickname to keep results organized.
-![Arm Performix run renaming interface#center](rename-run.webp "Rename Run")
+Because you're running multiple experiments, give each run a meaningful nickname to keep results organized.
+![Arm Performix run renaming interface alt-txt#center](rename-run.webp "Rename Run")
 
 Use the **Compare** feature at the top right of an entry in the **Runs** view to select another run of the same recipe for comparison.
 
-![Arm Performix compare view selection box#center](compare-with-box.webp "Compare Runs")
+![Arm Performix compare view selection box alt-txt#center](compare-with-box.webp "Compare Runs")
 
 This selection box lets you choose any run of the same recipe type. The ⇄ arrows swap which run is treated as the baseline and which is current.
 
 After you select two runs, Arm Performix overlays them so you can review category changes in one view. In the new run, note that 
 
 ![Arm Performix comparison showing differences in instruction mix#center](instruction-mix-diff-results.webp "Instruction Mix Comparison")
-Compared to the baseline, floating-point operations, branch operations, and some integer operations have been traded for loads, stores, and SIMD operations.
-Execution time also improves significantly, making this run nearly four times faster.
+
+Compared to the baseline, floating-point operations, branch operations, and some integer operations have been traded for loads, stores, and SIMD operations. Execution time also improves significantly, making this run nearly 4x faster.
 
 ```bash { command_line="root@localhost | 2-6" }
 time builds/mandelbrot-parallel-no-simd 1
@@ -132,4 +132,4 @@ In this section:
 - You vectorized the sample application and verified the shift toward SIMD execution.
 - You applied compiler loop unrolling to relieve backend load/store bottlenecks, achieving over 40x speedup.
 
-You are now ready to analyze and optimize your own native C/C++ applications on Arm Neoverse using Arm Performix. Review the next steps to continue your learning journey.
+You're now ready to analyze and optimize your own native C/C++ applications on Arm Neoverse using Arm Performix. Review the next steps to continue your learning journey.

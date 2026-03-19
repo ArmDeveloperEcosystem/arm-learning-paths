@@ -45,7 +45,7 @@ Next, select the **Workload type** and select **Launch a new process**.
 Enter the absolute path to your executable in the **Workload** field. For example, `/home/ubuntu/Mandelbrot-Example/builds/mandelbrot-parallel`. Make sure to add the number of threads argument.
 
 {{% notice Note %}}
-Use the full path to your executable because the **Workload** field does not currently support shell-style path expansion.
+Use the full path to your executable because the **Workload** field doesn't currently support shell-style path expansion.
 {{% /notice %}}
 
 Before starting the analysis, you can customize the configuration. For instance, you can set a time limit for the workload or choose specific metrics to investigate. You can also adjust the sampling rate (High, Normal, or Low) to balance collection overhead against sampling granularity. Because this Mandelbrot example is a native C++ application, you can ignore the **Collect managed code stacks** toggle, which is used for Java or .NET workloads.
@@ -73,4 +73,4 @@ In this section:
 - You ran the CPU Microarchitecture recipe on the Mandelbrot application.
 - You identified that the application spends most of its time in Backend Stalls without using SIMD operations.
 
-Next, you will run the Instruction Mix recipe to confirm where optimization opportunities exist and implement vectorization.
+Next, you'll run the Instruction Mix recipe to confirm where optimization opportunities exist and implement vectorization.
