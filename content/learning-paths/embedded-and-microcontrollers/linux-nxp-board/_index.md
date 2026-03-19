@@ -1,9 +1,5 @@
 ---
 title: Use Linux on the NXP FRDM i.MX 93 board
-
-draft: true
-cascade:
-    draft: true
     
 minutes_to_complete: 120
 

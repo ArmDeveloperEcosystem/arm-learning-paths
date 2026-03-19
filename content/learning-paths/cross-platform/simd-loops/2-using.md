@@ -86,7 +86,7 @@ Each loop is implemented in several SIMD extension variants. Conditional compila
 
 The native C implementation is written first, and it can be generated either when building natively with `-DHAVE_NATIVE` or through compiler auto-vectorization with `-DHAVE_AUTOVEC`.
 
-When SIMD ACLE is supported (SME, SVE, or NEON), the code is compiled using high-level intrinsics. If ACLE support is not available, the build process falls back to handwritten inline assembly targeting one of the available SIMD extensions, such as SME2.1, SME2, SVE2.1, SVE2, and others.
+When SIMD ACLE is supported (SME, SVE, or Neon), the code is compiled using high-level intrinsics. If ACLE support is not available, the build process falls back to handwritten inline assembly targeting one of the available SIMD extensions, such as SME2.1, SME2, SVE2.1, SVE2, and others.
 
 The overall code structure also includes setup and cleanup code in the main function, where memory buffers are allocated, the selected loop kernel is executed, and results are verified for correctness.
 
@@ -108,7 +108,7 @@ Build all loops for all targets:
 make all
 ```
 
-Build all loops for a single target, such as NEON:
+Build all loops for a single target, such as Neon:
 
 ```console
 make neon
@@ -118,7 +118,7 @@ As a result of the build, two types of binaries are generated.
 
 The first is a single executable named `simd_loops`, which includes all loop implementations.
 
-Select a specific loop by passing parameters to the program. For example, to run loop 1 for 5 iterations using the NEON target:
+Select a specific loop by passing parameters to the program. For example, to run loop 1 for 5 iterations using the Neon target:
 
 ```console
 build/neon/bin/simd_loops -k 1 -n 5

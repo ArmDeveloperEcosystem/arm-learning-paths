@@ -11,6 +11,7 @@ layout: installtoolsall
 multi_install: false
 multitool_install_part: false
 official_docs: https://www.swift.org/documentation/ 
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=Swift%20(Arm64)
 test_images:
 - ubuntu:latest
 test_maintenance: true

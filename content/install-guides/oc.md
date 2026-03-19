@@ -4,6 +4,7 @@ title: OpenShift CLI (oc)
 author: Jason Andrews
 
 official_docs: https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/cli_tools/openshift-cli-oc#cli-getting-started
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=OpenShift
 minutes_to_complete: 10
 
 additional_search_terms:

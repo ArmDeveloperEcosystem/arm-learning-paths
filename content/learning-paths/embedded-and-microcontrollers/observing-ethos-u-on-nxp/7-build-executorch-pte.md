@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Build the ExecuTorch .pte"
+title: "Build ExecuTorch models for Ethos-U65"
 
 weight: 8 # 1 is first, 2 is second, etc.
 
@@ -8,9 +8,10 @@ weight: 8 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-Embedded systems like the NXP board require two ExecuTorch runtime components: a `.pte` file and an `executor_runner` file.
+## ExecuTorch deployment components
 
-**ExecuTorch Runtime Files for Embedded Systems**
+On the FRDM i.MX93, you deploy ExecuTorch as two cooperating artifacts:
+
 |Component|Role in Deployment|What It Contains|Why It's Required|
 |---------|------------------|----------------|-----------------|
 |**`.pte file`**  (e.g., `mobilenetv2_u65.pte`)|The model itself, exported from ExecuTorch|Serialized and quantized operator graph + weights + metadata|Provides the neural network to be executed|
@@ -81,7 +82,13 @@ Embedded systems like the NXP board require two ExecuTorch runtime components: a
 
 ## Build the ExecuTorch .pte for Ethos-U65
 
-This section shows you how to build `.pte` files for the Ethos-U65 NPU. You will compile two models: a simple addition model to verify the setup, and MobileNet V2 for real-world inference.
+This section shows you how to build `.pte` files for the Ethos-U65 NPU.
+You compile two models:
+
+- A simple add model to validate the toolchain and U65 compile spec
+- MobileNet V2 to demonstrate a realistic workload and confirm NPU operator coverage
+
+The `.pte` file is the handoff point between “host build time” and “device run time”. In the later deployment steps, Linux is responsible for loading firmware, and the Cortex-M33 firmware is responsible for loading and executing the `.pte` using the Ethos-U delegate.
 
 ### Compile a simple add model
 
@@ -155,6 +162,10 @@ This script creates a basic addition model, quantizes it, and compiles it for th
 
 This script compiles the [MobileNet V2](https://pytorch.org/hub/pytorch_vision_mobilenet_v2/) computer vision model for the Ethos-U65. MobileNet V2 is a convolutional neural network (CNN) used for image classification and object detection.
 
+{{% notice Note %}}
+MobileNet V2 uses `export_for_training()` instead of `export()` because it contains batch normalization layers that must be traced in training mode before quantization can fuse them. The simple add model above has no such layers, so `export()` is sufficient.
+{{% /notice %}}
+
 1. Create the MobileNet V2 compilation script:
 
    ```bash
@@ -204,7 +215,7 @@ This script compiles the [MobileNet V2](https://pytorch.org/hub/pytorch_vision_m
    python3 compile_mv2_u65.py
    ```
 
-   If successful, you see the Vela compiler summary indicating 100% NPU utilization:
+    If successful, you see the Vela compiler summary indicating 100% NPU utilization. This is an important bring-up signal because it shows the graph was lowered onto the Ethos-U path rather than falling back to CPU execution.
 
    ```output
    Network summary for out
@@ -225,12 +236,45 @@ This script compiles the [MobileNet V2](https://pytorch.org/hub/pytorch_vision_m
    ls -la mobilenetv2_u65.pte
    ```
 
-{{% notice Note %}}
-The `EthosUCompileSpec` parameters used in this guide:
+### Copy models to the SD card
 
-| Parameter         | Value                 | Description                                    |
-| ----------------- | --------------------- | ---------------------------------------------- |
-| `target`          | `ethos-u65-256`       | Targets the Ethos-U65 with 256 MAC units       |
-| `system_config`   | `Ethos_U65_High_End`  | High-end system configuration for optimal performance |
-| `memory_mode`     | `Shared_Sram`         | Uses shared SRAM memory mode                   |
+The `executor_runner` firmware loads `.pte` models from a fixed DDR address (`0xC0000000`). The model must be written to DDR before Linux boots, using U-Boot.
+
+1. Copy the `.pte` files out of the Docker container:
+
+   ```bash
+   docker cp <container-id>:/root/executorch/model_u65.pte .
+   docker cp <container-id>:/root/executorch/mobilenetv2_u65.pte .
+   ```
+
+   Replace `<container-id>` with your Docker container ID.
+
+2. Write the `.pte` files to the first partition of the SD card so U-Boot can load them:
+
+{{< tabpane code=false >}}
+{{< tab header="Linux" >}}
+sudo mount /dev/sdX1 /mnt
+sudo cp model_u65.pte mobilenetv2_u65.pte /mnt/
+sudo umount /mnt
+{{< /tab >}}
+{{< tab header="macOS" >}}
+cp model_u65.pte mobilenetv2_u65.pte /Volumes/<SD_CARD_NAME>/
+{{< /tab >}}
+{{< /tabpane >}}
+
+{{% notice Parameter placeholders %}}
+For the commands above:
+- Replace `/dev/sdX1` with your SD card's first partition.
+- Replace `<SD_CARD_NAME>` with the mounted volume name.
 {{% /notice %}}
+
+## What you've learned and what's next
+
+In this section you've:
+
+- Compiled a simple add model to verify the Ethos-U65 toolchain setup
+- Built a MobileNet V2 `.pte` file with 100% NPU operator coverage
+- Staged the models on your SD card for deployment
+
+With both `.pte` files ready, you can now build the Cortex-M33 `executor_runner` firmware that will load and execute them.
+

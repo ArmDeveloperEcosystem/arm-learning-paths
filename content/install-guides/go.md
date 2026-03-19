@@ -10,6 +10,7 @@ author: Jason Andrews
 multi_install: false
 multitool_install_part: false
 official_docs: https://go.dev/doc/
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=golang
 test_images:
 - ubuntu:latest
 test_maintenance: true

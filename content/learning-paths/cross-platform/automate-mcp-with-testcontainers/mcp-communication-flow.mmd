@@ -1,0 +1,22 @@
+sequenceDiagram
+    participant Test as Pytest Test
+    participant TC as Testcontainers
+    participant MCP as MCP Server Container
+
+    Test->>TC: Create DockerContainer
+    TC->>MCP: Start container
+    TC-->>Test: Container ready
+
+    Test->>MCP: initialize request
+    MCP-->>Test: capabilities response
+
+    Test->>MCP: initialized notification
+
+    Test->>MCP: tools/call (check_image)
+    MCP-->>Test: tool result
+
+    Test->>MCP: tools/call (knowledge_base_search)
+    MCP-->>Test: tool result
+
+    Test->>TC: Exit context manager
+    TC->>MCP: Stop & remove container

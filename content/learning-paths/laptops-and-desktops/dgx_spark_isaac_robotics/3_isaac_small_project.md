@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Deploy a basic robot simulation
 
-With Isaac Sim and Isaac Lab installed, you can now run your first robot simulation. In this section you will launch a pre-built simulation scene, interact with it programmatically, and understand the key concepts behind Isaac Sim's simulation loop.
+With Isaac Sim and Isaac Lab installed, you can now run your first robot simulation. In this section you'll launch a pre-built simulation scene, interact with it programmatically, and explore the key concepts behind Isaac Sim's simulation loop.
 
-You will work with the Cartpole environment, a classic control benchmark where a cart must balance a pole by applying horizontal forces. This environment is simple enough to understand quickly but demonstrates all the core simulation concepts required for more complex robotics tasks.
+The example environment used here is Cartpole, a classic control benchmark in which a cart must balance an upright pole by applying horizontal forces. Although simple, this environment demonstrates the core mechanics of simulation environments used in robotics and reinforcement learning.
 
 ## Step 1: Launch a sample scene from Isaac Lab
 
@@ -24,13 +24,13 @@ export LD_PRELOAD="$LD_PRELOAD:/lib/aarch64-linux-gnu/libgomp.so.1"
 
 This script creates an empty simulation world with a ground plane and default lighting. It validates that the Isaac Sim rendering and physics engines are working on your DGX Spark system.
 
-If a display is connected, a viewer window should open; otherwise, log messages will confirm that the simulation initialized successfully in headless mode.
+If a display is available, a viewer window opens showing the simulation scene. On systems without a graphical display, the simulation runs in headless mode, and initialization messages appear in the terminal.
 
 Press `Ctrl+C` to exit the simulation.
 
 ## Step 2: Spawn and simulate a robot
 
-Next, run a more complete example that spawns articulated robots into the scene. This tutorial demonstrates how Isaac Sim handles multi-body physics:
+Next, run a tutorial that loads an articulated robot into the simulation and advances the physics engine. This example demonstrates how Isaac Sim handles multi-body dynamics, including loading robot assets, configuring actuators, and stepping the physics simulation.
 
 ```bash
 ./isaaclab.sh -p scripts/tutorials/01_assets/run_articulation.py
@@ -42,19 +42,22 @@ This script loads a robot model, advances the physics simulation, and prints joi
 - Configuring joint actuators and control modes
 - Stepping the physics simulation and reading back joint positions and velocities
 
-![img1 alt-text#center](run_articulation.gif "Figure 1: run_articulation.py")
+![img1 alt-text#center](run_articulation.gif "run_articulation.py")
 
 ## Step 3: Run the Cartpole environment
 
-Now run a complete environment that combines scene, action, observation, and event managers. The `create_cartpole_base_env.py` tutorial creates a Cartpole base environment and applies random actions:
+Next, run a complete Isaac Lab environment that combines a simulation scene with environment management components such as action, observation, and event managers.
+
+The `create_cartpole_base_env.py` tutorial creates a Cartpole environment and applies random actions to the cart. Running multiple environments in parallel allows reinforcement learning algorithms to collect experience more efficiently.
+Run the following command:
 
 ```bash
 ./isaaclab.sh -p scripts/tutorials/03_envs/create_cartpole_base_env.py --num_envs 32
 ```
 
-This command launches 32 parallel Cartpole environments on the Blackwell GPU. Each environment runs its own independent simulation with random joint efforts applied to the cart. You will see the pole joint angle printed to the terminal for each step.
+This command launches 32 parallel Cartpole environments on the Blackwell GPU. Each environment runs its own independent simulation with random joint efforts applied to the cart. You'll see the pole joint angle printed to the terminal for each step.
 
-![img2 alt-text#center](32_cartpole.gif "Figure 2: 32 parallel Cartpole")
+![img2 alt-text#center](32_cartpole.gif "32 parallel Cartpole")
 
 {{% notice Note %}}
 This tutorial script uses a hardcoded `CartpoleEnvCfg` configuration. It does not accept a `--task` argument. The `--num_envs` flag controls how many parallel environments are spawned on the GPU.
@@ -62,7 +65,9 @@ This tutorial script uses a hardcoded `CartpoleEnvCfg` configuration. It does no
 
 ## Step 4: Run the Cartpole RL environment
 
-The previous script creates a base environment without rewards or terminations. To see the full RL environment (with reward computation and episode resets), run:
+The previous tutorial created a base simulation environment that advances physics and applies actions but doesn't include reinforcement learning components such as rewards or episode termination.
+
+To run the full reinforcement learning version of the environment, execute the following command:
 
 ```bash
 ./isaaclab.sh -p scripts/tutorials/03_envs/run_cartpole_rl_env.py --num_envs 32
@@ -70,7 +75,7 @@ The previous script creates a base environment without rewards or terminations. 
 
 This script wraps the Cartpole scene in a `ManagerBasedRLEnv`, which includes reward computation, termination conditions, and the standard Gymnasium `step()` interface that returns `(obs, reward, terminated, truncated, info)`.
 
-The key difference between the two scripts:
+Key differences between the base and RL environments:
 
 | **Script** | **Environment type** | **Returns from step()** |
 |-----------|---------------------|------------------------|
@@ -79,11 +84,11 @@ The key difference between the two scripts:
 
 ## Step 5: Understand the simulation code
 
-To understand what happens inside an Isaac Lab environment, examine the Cartpole environment source code. The key elements are:
+To better understand how Isaac Lab environments operate, examine the Cartpole environment source code. Isaac Lab environments are typically defined through configuration classes that specify the scene layout, action interfaces, observation space, and environment events.
 
 ### Environment configuration
 
-Every Isaac Lab environment starts with a configuration class that defines the simulation parameters. The `CartpoleEnvCfg` in the tutorial specifies:
+Every Isaac Lab environment starts with a configuration class that defines the simulation parameters. In the Cartpole tutorial, the `CartpoleEnvCfg` configuration specifies the scene layout and simulation timing:
 
 ```python
 @configclass
@@ -103,7 +108,7 @@ class CartpoleEnvCfg(ManagerBasedEnvCfg):
         self.sim.dt = 0.005         # sim step every 5ms: 200Hz
 ```
 
-The table below explains each parameter:
+The table below summarizes the key parameters:
 
 | **Parameter** | **Value** | **Description** |
 |---------------|-----------|-----------------|
@@ -114,7 +119,7 @@ The table below explains each parameter:
 
 ### Actions, observations, and events
 
-The configuration defines three manager groups:
+Isaac Lab environments organize functionality into manager groups that define how the agent interacts with the simulation.
 
 **Actions** — how the agent controls the robot:
 
@@ -158,12 +163,15 @@ class EventCfg:
     reset_cart_position = EventTerm(func=mdp.reset_joints_by_offset, mode="reset", ...)
     reset_pole_position = EventTerm(func=mdp.reset_joints_by_offset, mode="reset", ...)
 ```
-
-Events introduce variability that improves training robustness. Randomizing the pole mass on startup means the agent must learn to balance poles of different weights. Randomizing joint positions on reset ensures each episode starts from a different state.
+Events introduce controlled randomness into the environment.
+For example:
+  * The pole mass is randomized during initialization
+  * Cart and pole positions are randomized on reset
+This variability helps the trained policy generalize to slightly different system dynamics.
 
 ### The simulation loop
 
-The core simulation loop in Isaac Lab follows a standard Gymnasium-style interface. From `run_cartpole_rl_env.py`:
+The core simulation loop in Isaac Lab follows a standard Gymnasium-style interface. The example below is taken from `run_cartpole_rl_env.py`:
 
 ```python
 # Create the RL environment
@@ -198,10 +206,11 @@ Each call to `env.step(action)` performs these operations on the GPU:
 
 All computations happen in parallel across all environments using PyTorch tensors on the GPU. This is what makes Isaac Lab efficient: thousands of environments run in parallel without Python loop overhead.
 
-## Step 6: Run with headless mode
+## Step 6: Run in headless mode
 
-For reinforcement learning tasks, headless mode is preferred to maximize GPU throughput. You can test it now using the Cartpole RL environment.
+For reinforcement learning workflows, it is common to run Isaac Sim without rendering. Disabling the viewer allows more GPU resources to be used for physics simulation and neural network computation.
 
+You can test headless execution using the Cartpole RL environment:
 ```bash
 ./isaaclab.sh -p scripts/tutorials/03_envs/run_cartpole_rl_env.py --num_envs 64 --headless
 ```
@@ -212,9 +221,9 @@ In headless mode, all GPU resources are dedicated to physics simulation and tens
 When running headless on DGX Spark, the Blackwell GPU handles both the physics simulation and neural network computation. The unified memory architecture means there is no performance penalty for sharing GPU memory between these workloads.
 {{% /notice %}}
 
-## What you have accomplished
+## What you've learned and what's next
 
-In this section you have:
+In this section you've:
 
 - Launched your first Isaac Sim scene on DGX Spark and verified the rendering and physics engines work correctly
 - Spawned articulated robots and observed multi-body physics simulation
@@ -223,4 +232,5 @@ In this section you have:
 - Tested headless mode for maximum training performance
 
 You now understand the core components of an Isaac Lab simulation environment, including scene creation, robot articulation, observation and action structures, and simulation loop execution.
-In the next section, you will use these concepts to train a reinforcement learning policy for a humanoid robot.
+
+In the next section, you'll use these concepts to train a reinforcement learning policy for a humanoid robot.

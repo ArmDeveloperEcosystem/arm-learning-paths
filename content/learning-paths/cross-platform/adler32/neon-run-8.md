@@ -1,16 +1,16 @@
 ---
-title: Compare the NEON version to the standard C version of Adler32
+title: Compare the Neon version to the standard C version of Adler32
 weight: 8
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## How Can I Run the NEON Version of Adler32 and Compare Performance?
+## How Can I Run the Neon Version of Adler32 and Compare Performance?
 
-Before comparing performance, you need to ensure that the NEON implementation builds, runs, and produces the same results as the standard C version.
+Before comparing performance, you need to ensure that the Neon implementation builds, runs, and produces the same results as the standard C version.
 
-To build the NEON version and compare it to the C version use the prompt below in your GitHub Copilot Agent session:
+To build the Neon version and compare it to the C version use the prompt below in your GitHub Copilot Agent session:
 
 ```console
 Use the Makefile to compile and run the new test program and compare the checksum values and performance of each implementation.
@@ -123,6 +123,6 @@ The NEON implementation offers significant performance improvements (up to 5x fa
 If you'd like, I can analyze the code to identify and fix the issue in the NEON implementation so you can maintain both correctness and the performance benefits.
 ```
 
-GitHub Copilot determined that while the NEON version delivers better performance, it currently produces incorrect checksums. This must be addressed before the NEON implementation can be considered correct or production-ready.
+GitHub Copilot determined that while the Neon version delivers better performance, it currently produces incorrect checksums. This must be addressed before the Neon implementation can be considered correct or production-ready.
 
-In the next section, you'll fix the functional issues in the NEON implementation and re-run the performance comparison.
+In the next section, you'll fix the functional issues in the Neon implementation and re-run the performance comparison.

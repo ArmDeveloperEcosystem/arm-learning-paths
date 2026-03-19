@@ -9,9 +9,9 @@ layout: learningpathall
 
 {{% notice Note %}} This section uses Visual Studio Code with GitHub Copilot. If you're using a different AI assistant, skip to the next section, where you'll configure the same migration workflow using other agentic systems.{{% /notice %}}
 
-When migrating applications from x86 to Arm, you might encounter SIMD (Single Instruction, Multiple Data) code that is written using architecture-specific intrinsics. On x86 platforms, SIMD is commonly implemented with SSE, AVX, or AVX2 intrinsics, while Arm platforms use NEON and SVE intrinsics to provide similar vectorized capabilities. Updating this code manually can be time-consuming and challenging. By combining the Arm MCP Server with GitHub Copilot, you can create an Arm Cloud Migration Agent that automates much of this work and guides the AI assistant through a structured, architecture-aware migration of your codebase. GitHub Copilot supports two file formats for this: **prompt files** (`.prompt.md`) that reference an already-configured MCP server, and **agent files** (`.agent.md`) that create agents which can be assigned to issues directly in the GitHub interface.
+When migrating applications from x86 to Arm, you might encounter SIMD (Single Instruction, Multiple Data) code that is written using architecture-specific intrinsics. On x86 platforms, SIMD is commonly implemented with SSE, AVX, or AVX2 intrinsics, while Arm platforms use Neon and SVE intrinsics to provide similar vectorized capabilities. Updating this code manually can be time-consuming and challenging. By combining the Arm MCP Server with GitHub Copilot, you can create an Arm Cloud Migration Agent that automates much of this work and guides the AI assistant through a structured, architecture-aware migration of your codebase. GitHub Copilot supports two file formats for this: **prompt files** (`.prompt.md`) that reference an already-configured MCP server, and **agent files** (`.agent.md`) that create agents which can be assigned to issues directly in the GitHub interface.
 
-This section walks through both approaches and uses them to migrate a sample x86 application with AVX2 SIMD code to Arm NEON.
+This section walks through both approaches and uses them to migrate a sample x86 application with AVX2 SIMD code to Arm Neon.
 
 ## Sample x86 code with AVX2 intrinsics
 
@@ -211,7 +211,7 @@ Pitfalls to avoid:
 * Don't confuse a software version with a language wrapper package version. For example, when checking the Python Redis client, check the Python package name "redis" rather than the Redis server version. Setting the Python Redis package version to the Redis server version in requirements.txt will fail.
 * NEON lane indices must be compile-time constants, not variables.
 * If you're unsure about Arm equivalents, use knowledge_base_search to find documentation.
-* Be sure to find out from the user or system what the target machine is, and use the appropriate intrinsics. For instance, if neoverse (Graviton, Axion, Cobalt) is targeted, use the latest SME/SME2.
+* Be sure to find out from the user or system what the target machine is, and use the appropriate intrinsics. For instance, if neoverse (Graviton, Axion, Cobalt) is targeted, use the latest SVE2 (or SVE for older neoverse).
 
 If you have good versions to update for the Dockerfile, requirements.txt, and other files, change them immediately without asking for confirmation.
 
@@ -258,7 +258,7 @@ If you're using the **agent file**, select the `arm-migration-agent` from the ag
 
 The assistant will:
    * Detect x86-specific intrinsics
-   * Rewrite SIMD code using NEON
+   * Rewrite SIMD code using Neon
    * Remove architecture-specific build flags
    * Update container and dependency configurations as needed
 
@@ -288,6 +288,6 @@ If compilation or runtime issues occur, feed the errors back to the AI assistant
 
 ## What you've accomplished and what's next
 
-In this section, you've created an Arm Cloud Migration Agent in GitHub Copilot using either a prompt file or an agent file that can be assigned to issues in the GitHub interface, and used it to perform a fully automated migration of x86 AVX2 SIMD code to Arm NEON. You've seen how structured instructions enable the assistant to analyze, transform, and verify architecture-specific code.
+In this section, you've created an Arm Cloud Migration Agent in GitHub Copilot using either a prompt file or an agent file that can be assigned to issues in the GitHub interface, and used it to perform a fully automated migration of x86 AVX2 SIMD code to Arm Neon. You've seen how structured instructions enable the assistant to analyze, transform, and verify architecture-specific code.
 
 In the next section, you'll learn how to configure other agentic AI systems with the same migration workflow.
