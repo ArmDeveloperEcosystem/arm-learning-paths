@@ -11,7 +11,7 @@ layout: learningpathall
 As shown in the `src/main_single_thread.cpp` file below, the program generates a 1920×1080 bitmap image of the fractal. To identify performance bottlenecks, run the Code Hotspots recipe in Arm Performix (APX). APX uses sampling to estimate where the CPU spends most of its time, allowing it to highlight the hottest functions—especially useful in larger applications where it isn't obvious ahead of time which functions will dominate runtime.
 
 {{% notice Note %}}
-The `myplot.draw()` call uses a relative path (`./images/green.bmp`). When APX launches the binary, it runs it from a temporary location, so the image would be written there rather than to your project directory. To ensure the output is saved where you expect it, update the first string argument in `main.cpp` to the absolute path of the output file, for example `/home/ec2-user/Mandelbrot-Example/images/green.bmp`.
+The `myplot.draw()` call uses a relative path (`./images/green.bmp`). When APX launches the binary, it runs it from a temporary location, so the image would be written there rather than to your project directory. To ensure the output is saved where you expect it, update the first string argument in `src/main_single_thread.cpp` to the absolute path of the output file, for example `/home/ec2-user/Mandelbrot-Example/images/green.bmp`.
 {{% /notice %}}
 
 ```cpp
