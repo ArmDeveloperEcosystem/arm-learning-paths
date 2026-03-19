@@ -332,8 +332,22 @@ Example prompts that use the Arm MCP Server:
 
 - `Scan my workspace for code that needs updating for Arm compatibility`
 - `Check if the postgres:latest container image supports Arm64 architecture`
-- `Search the Arm knowledge base for NEON intrinsics examples`
+- `Search the Arm knowledge base for Neon intrinsics examples`
 - `Find learning resources about migrating from x86 to Arm`
+
+## Use Arm prompt files with the MCP Server
+
+The Arm MCP Server provides a rich set of tools and knowledge base, but to make the best use of it, you should pair it with Arm-specific prompt files. These prompt files supply task-oriented context, best practices, and structured workflows that guide the agent in using MCP tools more effectively across common Arm development tasks.
+
+### Get the prompt files
+
+Browse the [agent integrations directory for Visual Studio Code](https://github.com/arm/mcp/tree/main/agent-integrations/vs-code) to find prompt files for specific use cases:
+
+- **Arm migration** ([arm-migration.prompt.md](https://github.com/arm/mcp/blob/main/agent-integrations/vs-code/arm-migration.prompt.md)): Helps the agent systematically migrate applications from x86 to Arm, including dependency analysis, compatibility checks, and optimization recommendations.
+
+Each prompt file is a Markdown configuration that you can reference in your GitHub Copilot sessions to enable more targeted, task-specific assistance.
+
+If you're facing issues or have questions, reach out to mcpserver@arm.com.
 
 ## Troubleshooting MCP Server connections
 
@@ -349,4 +363,4 @@ If the Arm MCP Server doesn't connect:
 
 
 
-You're now ready to use GitHub Copilot with the Arm MCP Server to enhance your Arm development workflow!
+You're now ready to use GitHub Copilot with the Arm MCP server for Arm-specific development assistance.

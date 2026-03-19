@@ -6,7 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-## Prerequisites
+## Prerequisites for MCP testing with Docker and Python
 
 Before you begin, ensure you have the following installed on your machine:
 
@@ -14,7 +14,7 @@ Before you begin, ensure you have the following installed on your machine:
 - Docker Engine or Docker Desktop
 - Git
 
-If you are on Linux, you need the Python virtual environment package.
+If you're on Linux, you need the Python virtual environment package.
 
 For Debian or Ubuntu, run:
 
@@ -85,7 +85,7 @@ The test framework requires Pytest and Testcontainers. Install them using the pr
 pip install -r mcp-local/tests/requirements.txt
 ```
 
-The requirements file contains:
+The requirements file includes:
 
 ```text
 testcontainers
@@ -106,7 +106,7 @@ The output confirms Testcontainers can interact with Docker:
 Testcontainers ready
 ```
 
-## Understanding the test directory structure
+## Understanding the MCP test directory structure
 
 The test files are located in `mcp-local/tests/`:
 
@@ -118,15 +118,15 @@ mcp-local/tests/
 └── test_mcp.py       # Main test file
 ```
 
-- **constants.py**: Contains MCP request payloads and expected responses for each tool being tested.
-- **test_mcp.py**: The main test file that uses Testcontainers to spin up the MCP server and run assertions.
-- **sum_test.s**: A sample Arm assembly file used to test the LLVM-MCA analysis tool.
+- **constants.py**: Contains MCP request payloads and expected responses for each tool being tested
+- **test_mcp.py**: The main test file that uses Testcontainers to spin up the MCP server and run assertions
+- **sum_test.s**: A sample Arm assembly file used to test the LLVM-MCA analysis tool
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 In this section:
-- You cloned the Arm MCP repository and built the server Docker image.
-- You set up a Python virtual environment with Pytest and Testcontainers.
-- You explored the test directory structure.
+- You cloned the Arm MCP repository and built the server Docker image
+- You set up a Python virtual environment with Pytest and Testcontainers
+- You explored the test directory structure
 
-In the next section, you will examine the test code and understand how to write integration tests for MCP servers.
+In the next section, you'll run basic Testcontainers examples to understand how containers are managed programmatically.

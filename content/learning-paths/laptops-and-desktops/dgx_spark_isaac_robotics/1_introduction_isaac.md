@@ -8,17 +8,20 @@ layout: learningpathall
 
 ## Overview
 
-In this Learning Path, you will build, configure, and run robotic simulation and [reinforcement learning (RL)](https://en.wikipedia.org/wiki/Reinforcement_learning) workflows using NVIDIA Isaac Sim and Isaac Lab on an Arm-based DGX Spark system. The NVIDIA DGX Spark is a personal AI supercomputer powered by the GB10 [Grace Blackwell](https://learn.arm.com/learning-paths/laptops-and-desktops/dgx_spark_llamacpp/1_gb10_introduction/) Superchip, combining an Arm-based Grace CPU with a Blackwell GPU in a compact desktop form factor.
+In this Learning Path, you'll build, configure, and run robotic simulation and [reinforcement learning (RL)](https://en.wikipedia.org/wiki/Reinforcement_learning) workflows using NVIDIA Isaac Sim and Isaac Lab on an Arm-based DGX Spark system. The NVIDIA DGX Spark is a personal AI supercomputer powered by the GB10 [Grace Blackwell](https://learn.arm.com/learning-paths/laptops-and-desktops/dgx_spark_llamacpp/1_gb10_introduction/) Superchip. The system couples an Arm CPU cluster with a Blackwell GPU and a unified memory architecture to accelerate simulation orchestration, sensor preprocessing, physics, rendering, and RL training.
 
-Isaac Sim and Isaac Lab are NVIDIA's core tools for robotics simulation and reinforcement learning. Together they provide an end-to-end pipeline: simulate robots in physically accurate environments, train control policies using reinforcement learning, and evaluate those policies before deploying them to real hardware.
-
-This section introduces both tools and explains why the DGX Spark platform is an ideal development environment for these workloads.
+NVIDIA's Isaac Sim and Isaac Lab tools together provide an end-to-end robotics development workflow:
+  1. Simulate robots in physically realistic environments.
+  2. Train control policies using reinforcement learning.
+  3. Evaluate trained policies before deployment to physical robots.
+     
+This section introduces both tools and explains how DGX Spark supports high-performance robotic simulation and RL experimentation.
 
 ## What is Isaac Sim?
 
-[Isaac Sim](https://docs.isaacsim.omniverse.nvidia.com/latest/index.html) is a robotics simulation platform built on NVIDIA Omniverse. It provides GPU-accelerated physics simulation to enable fast, realistic robot simulations that can run faster than real time.
+[Isaac Sim](https://docs.isaacsim.omniverse.nvidia.com/latest/index.html) is a robotics simulation platform built on NVIDIA Omniverse. It provides GPU-accelerated physics and rendering to enable high-fidelity robot simulation.
 
-Key capabilities of Isaac Sim include:
+Core capabilities include:
 
 | **Capability** | **Description** |
 |----------------|-----------------|
@@ -28,7 +31,7 @@ Key capabilities of Isaac Sim include:
 | Parallel environments | Run thousands of simulation instances simultaneously on a single GPU for massive data throughput |
 | Python API | Full programmatic control of scenes, robots, and simulations through Python scripting |
 
-Isaac Sim enables you to create detailed virtual worlds where robots can learn, be tested, and be validated without the cost, time, or risk of physical experiments.
+Isaac Sim lets you prototype and validate robot behavior in a controlled virtual environment before physical testing.
 
 ## What is Isaac Lab?
 
@@ -38,10 +41,10 @@ Isaac Lab supports two task design workflows:
 
 | **Workflow** | **Description** | **Best for** |
 |--------------|-----------------|--------------|
-| Manager-Based | Modular design where observations, actions, rewards, and terminations are defined through separate manager classes | Structured environments with reusable components |
+| Manager-Based | Modular environment components (observations, rewards, terminations) defined through separate manager classes | Structured environments with reusable components |
 | Direct | A single class defines the entire environment logic, similar to traditional Gymnasium environments | Rapid prototyping and full control over environment logic |
 
-Isaac Lab includes out-of-the-box integration with multiple reinforcement learning libraries:
+Isaac Lab integrates with multiple reinforcement learning libraries, including:
 
 | **RL Library** | **Supported Algorithms** |
 |----------------|--------------------------|
@@ -50,7 +53,7 @@ Isaac Lab includes out-of-the-box integration with multiple reinforcement learni
 | skrl | PPO, IPPO, MAPPO, AMP (Adversarial Motion Priors) |
 | Stable Baselines3 (sb3) | PPO |
 
-In this Learning Path you will use the **RSL-RL** library, which is a lightweight and efficient PPO implementation commonly used for locomotion tasks.
+In this Learning Path, you will use RSL-RL, a lightweight and efficient PPO implementation commonly used for locomotion training.
 
 ## Why DGX Spark for robotic simulation?
 
@@ -68,18 +71,18 @@ Traditional robotics development requires separate machines for simulation, trai
 
 ## How Isaac Sim and Isaac Lab work together
 
-The following describes the typical workflow when using Isaac Sim and Isaac Lab together on DGX Spark:
+A typical robotics workflow using Isaac Sim and Isaac Lab on DGX Spark follows these steps:
 
-1. **Define the environment**: Isaac Lab provides pre-built environment configurations for common tasks (locomotion, manipulation, navigation). You can also create custom environments.
-2. **Launch the simulation**: Isaac Sim initializes the physics engine, loads robot models (URDF/USD), and sets up the scene on the Blackwell GPU.
+1. **Define the environment**: Isaac Lab provides pre-built environment configurations for common tasks (locomotion, manipulation, navigation). You can also create custom environments tailored to specific robots or tasks.
+2. **Launch the simulation**: Isaac Sim initializes the physics engine, loads the robot models (URDF/USD), and constructs the simulation scene. Physics simulation and rendering run on the Blackwell GPU.
 3. **Train a policy**: Isaac Lab's training scripts use RL algorithms (such as PPO via RSL-RL) to optimize a neural network policy. The GPU runs thousands of parallel environments simultaneously.
 4. **Evaluate and iterate**: Trained policies can be tested in simulation with visualization enabled or exported for deployment to real hardware.
 
-The entire pipeline runs locally on DGX Spark. Headless mode (without visualization) maximizes GPU utilization for training, while visualization mode lets you inspect robot behavior interactively.
+The full workflow can run locally on a DGX Spark system. Running Isaac Sim in headless mode (without visualization) maximizes GPU utilization for training, while enabling visualization allows interactive inspection of robot behavior during debugging or validation.
 
 ## Available environment categories
 
-Isaac Lab ships with a comprehensive set of pre-built environments across several categories:
+Isaac Lab includes a large set of pre-built environments organized by task type:
 
 | **Category** | **Examples** | **Description** |
 |--------------|-------------|-----------------|
@@ -90,13 +93,12 @@ Isaac Lab ships with a comprehensive set of pre-built environments across severa
 | Navigation | Anymal C navigation | Point-to-point navigation with heading control |
 | Multi-agent | Cart-Double-Pendulum, Shadow-Hand-Over | Tasks that require coordination among multiple agents |
 
-You will be able to list all available environments after setting up Isaac Lab in the next section. The following command will be available once installation is complete:
+After installing Isaac Lab in the next section, you can list the available environments using:
 
 ```bash
 ./isaaclab.sh -p scripts/environments/list_envs.py
 ```
-
-You can also filter by keyword:
+You can also filter environments by keyword. For example, to list locomotion environments:
 
 ```bash
 ./isaaclab.sh -p scripts/environments/list_envs.py --keyword locomotion
@@ -104,13 +106,22 @@ You can also filter by keyword:
 
 For the complete list of environments, see the [Isaac Lab Available Environments](https://isaac-sim.github.io/IsaacLab/main/source/overview/environments.html) documentation.
 
-## What you will accomplish in this Learning Path
+## What you'll build
 
-In the learning path that follow you will:
+In this Learning Path, you'll:
 
-1. **Set up Isaac Sim and Isaac Lab** on your DGX Spark by building both tools from source
-2. **Run a basic robot simulation** in Isaac Sim and interact with it through Python
-3. **Train a reinforcement learning policy** for the Unitree H1 humanoid robot on rough terrain using RSL-RL
-4. **Explore advanced RL scenarios** including diverse locomotion tasks and robot configurations
+1. Set up Isaac Sim and Isaac Lab on your DGX Spark by building both tools from source
+2. Run a basic robot simulation in Isaac Sim and interact with it through Python
+3. Train a reinforcement learning policy for the Unitree H1 humanoid robot on rough terrain using RSL-RL
+4. Explore additional RL environments to understand how the workflow generalizes to other robots and tasks
 
-By the end, you will have a fully functional Isaac Sim and Isaac Lab development environment on DGX Spark and hands-on experience with the complete robotics RL pipeline.
+By the end, you'll have a working Isaac Sim and Isaac Lab development environment on DGX Spark and practical experience running a complete robotics reinforcement learning pipeline.
+
+## What you've learned and what's next
+
+In this section:
+- You learned what Isaac Sim and Isaac Lab are and how they work together for robotics development
+- You discovered why DGX Spark's unified memory architecture is ideal for simulation and RL training
+- You explored the available environment categories for different robotics tasks
+
+In the next section, you'll set up your development environment and install Isaac Sim and Isaac Lab on your DGX Spark system.

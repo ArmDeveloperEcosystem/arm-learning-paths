@@ -16,6 +16,7 @@ author: Jason Andrews
 
 ### Link to official documentation
 official_docs: https://www.openssh.com/manual.html
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=openssh
 
 test_images:
 - ubuntu:latest

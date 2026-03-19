@@ -87,7 +87,7 @@ uint UseSVE                                   = 0                               
 bool UseSimpleArrayEquals                     = false                                {ARCH product} {default}
 ```
 
-Depending on your application, you may want to investigate the vector processing flags for SIMD, NEON, SVE, and CRC. 
+Depending on your application, you may want to investigate the vector processing flags for SIMD, Neon, SVE, and CRC. 
 
 You can try [Process Watch](/learning-paths/servers-and-cloud-computing/processwatch/) to monitor the usage of SIMD and CRC instructions. 
 

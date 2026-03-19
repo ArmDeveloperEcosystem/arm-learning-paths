@@ -2,8 +2,8 @@
 title: Pulumi
 minutes_to_complete: 5
 official_docs: https://www.pulumi.com/docs/
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=pulumi
 author: Jason Andrews
-
 test_maintenance: true
 test_images:
 - ubuntu:latest

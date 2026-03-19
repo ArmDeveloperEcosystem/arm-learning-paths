@@ -61,7 +61,7 @@ tools_software_languages_filter:
 - llvm-mca: 1
 - MediaPipe: 2
 - MTE: 2
-- NEON: 1
+- Neon: 1
 - ONNX: 1
 - ONNX Runtime: 2
 - OpenGL ES: 1

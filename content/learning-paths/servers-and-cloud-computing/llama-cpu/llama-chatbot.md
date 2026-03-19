@@ -168,9 +168,9 @@ In this guide, you will not use any other quantization methods, because Arm has 
 
 As of [llama.cpp commit 0f1a39f3](https://github.com/ggerganov/llama.cpp/commit/0f1a39f3), Arm has contributed code for performance optimization with three types of GEMV/GEMM kernels corresponding to three processor types:
 
-* AWS Graviton2, where you only have NEON support (you will see less improvement for these GEMV/GEMM kernels),
+* AWS Graviton2, where you only have Neon support (you will see less improvement for these GEMV/GEMM kernels),
 * AWS Graviton3, where the GEMV/GEMM kernels exploit both SVE 256 and MATMUL INT8 support, and
-* AWS Graviton4, where the GEMV/GEMM kernels exploit NEON/SVE 128 and MATMUL_INT8 support
+* AWS Graviton4, where the GEMV/GEMM kernels exploit Neon/SVE 128 and MATMUL_INT8 support
 
 With the latest commits in `llama.cpp` you will see improvements for these Arm optimized kernels directly on your Arm-based server. You can run the pre-quantized Q4_0 model as is and do not need to re-quantize the model.
 

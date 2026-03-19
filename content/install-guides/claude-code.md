@@ -260,7 +260,7 @@ Here are some example prompts that use the Arm MCP Server tools:
 
 - `Scan my workspace for code that needs updating for Arm compatibility`
 - `Check if the postgres:latest container image supports Arm64 architecture`
-- `Search the Arm knowledge base for NEON intrinsics examples`
+- `Search the Arm knowledge base for Neon intrinsics examples`
 - `Find learning resources about migrating from x86 to Arm`
 - `Analyze this assembly code for performance on Arm processors`
 

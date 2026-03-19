@@ -34,7 +34,7 @@ armips:
 operatingsystems:
 - Linux
 tools_software_languages:
-  - NEON
+  - Neon
   - SVE
   - Intrinsics
   - Runbook

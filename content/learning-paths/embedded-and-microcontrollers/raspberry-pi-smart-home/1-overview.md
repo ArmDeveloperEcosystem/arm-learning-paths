@@ -18,7 +18,7 @@ You will create a fully local, privacy-first smart home system that leverages th
 The Raspberry Pi 5's Arm Cortex-A76 processor can manage high-performance computing tasks like AI inference. Key architectural features include:
 
 - **Superscalar architecture**: Executes multiple instructions in parallel, improving throughput for compute-heavy tasks
-- **128-bit NEON SIMD support**: Accelerates matrix and vector operations, common in the inner loops of language model inference
+- **128-bit Neon SIMD support**: Accelerates matrix and vector operations, common in the inner loops of language model inference
 - **Multi-level cache hierarchy**: Reduces memory latency and improves data access efficiency during runtime
 - **Thermal efficiency**: Enables sustained performance without active cooling, making it ideal for compact or always-on smart home setups
 
