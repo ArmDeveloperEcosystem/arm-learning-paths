@@ -99,7 +99,7 @@ Add the GOT entries after `KEEP(*(.jcr*))`:
 ```
 
 {{% notice Note %}}
-This issue can be difficult to diagnose. Without these two lines, the firmware boots and loads the model, but crashes with a BusFault when ExecuTorch calls a virtual function. The GOT stores addresses for indirect calls. If the startup code does not copy it from flash to RAM, those lookups resolve to address zero and the CPU faults.
+This issue can be difficult to diagnose. Without these two lines, the firmware boots and loads the model, but crashes with a BusFault when ExecuTorch calls a virtual function. The GOT stores addresses for indirect calls. If the startup code doesn't copy it from flash to RAM, those lookups resolve to address zero and the CPU faults.
 {{% /notice %}}
 
 ### Add SRAM section wildcards
@@ -183,3 +183,9 @@ The key fields are:
 You can view the completed versions of these edited files in the [workshop repository](https://github.com/ArmDeveloperEcosystem/workshop-ethos-u) for reference.
 
 The memory layout and flash configuration are complete. The next section covers preparing the test image.
+
+## What you've learned and what's next
+
+You've reconfigured the memory regions to allocate the full 5.5 MB of MRAM to the HP core, modified the linker script to support GOT relocation and SRAM memory pools, and configured the Security Toolkit JSON file to boot the application from the correct MRAM address.
+
+Next, you'll prepare a test image for classification by converting it to the format the model expects.

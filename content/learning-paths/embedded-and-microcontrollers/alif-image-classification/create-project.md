@@ -205,3 +205,9 @@ There are several important details in this configuration:
 - The **c10 include path** provides the tensor type definitions that ExecuTorch's headers depend on.
 
 The project structure is ready. The next sections cover the application code, memory configuration, and image preparation before you build and flash.
+
+## What you've learned and what's next
+
+You've created the mv2_runner firmware project, configured CMSIS packs, and set up the linker to include ExecuTorch libraries with the correct archive flags.
+
+Next, you'll add the application code that loads the model and runs inference on the Ethos-U85 NPU.

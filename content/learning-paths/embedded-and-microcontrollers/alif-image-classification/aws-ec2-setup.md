@@ -9,7 +9,7 @@ layout: "learningpathall"
 
 ExecuTorch's Arm backend build scripts are designed for native Arm compilation. The Vela compiler, which generates optimized command streams for Ethos-U NPUs, and the CMSIS-NN kernels all target Arm natively. Using an Arm-based EC2 instance avoids the complexity of cross-compilation from x86.
 
-In this section, you launch a Graviton-based EC2 instance, install ExecuTorch, compile a MobileNetV2 model for the Ethos-U85, and build the ExecuTorch static libraries that your firmware will link against.
+In this section, you launch a Graviton-based EC2 instance, install ExecuTorch, compile a MobileNetV2 model for the Ethos-U85, and build the ExecuTorch static libraries that your firmware links against.
 
 ## Launch an EC2 instance
 
@@ -122,7 +122,7 @@ ExecuTorch includes a setup script that downloads the Arm GNU toolchain, CMSIS, 
 ./examples/arm/setup.sh --i-agree-to-the-contained-eula
 ```
 
-The script fails at the `tosa_serialization_lib` build step due to a pybind11 version incompatibility. This is a known issue. When you see an error containing `def_property family does not currently support keep_alive`, fix the dependency and complete the setup manually.
+The script fails at the `tosa_serialization_lib` build step due to a pybind11 version incompatibility. This is a known issue. When you see an error containing `def_property family doesn't currently support keep_alive`, fix the dependency and complete the setup manually.
 
 First, install a compatible version of pybind11 and the required build tools:
 
@@ -294,3 +294,9 @@ ls third_party/executorch/et_bundle/include/executorch/
 You should see `runtime/` and other directories.
 
 You now have the compiled model, prebuilt libraries, and headers on your development machine, ready to integrate into the firmware project.
+
+## What you've learned and what's next
+
+You've compiled the MobileNetV2 model for the Ethos-U85 NPU, built ExecuTorch static libraries for bare-metal Cortex-M55, and transferred the artifacts to your development machine.
+
+Next, you'll create the CMSIS firmware project and integrate the ExecuTorch libraries.
