@@ -30,7 +30,7 @@ git clone https://github.com/arm-education/Mandelbrot-Example
 cd Mandelbrot-Example && mkdir -p images build
 ```
 
-Install a C++ compiler and the make tool, for example using your operating system's package manager.
+Install a C++ compiler and the make build tool using your operating system’s package manager.
 
 ```bash
 sudo dnf update && sudo dnf install g++ gcc make
