@@ -46,7 +46,7 @@ Use the **Compare** feature at the top right of an entry in the **Runs** view to
 
 This selection box lets you choose any run of the same recipe type. The ⇄ arrows swap which run is treated as the baseline and which is current.
 
-After you select two runs, Arm Performix overlays them so you can review category changes in one view. In the new run, note that 
+After you select two runs, Arm Performix overlays them so you can review category changes in one view.
 
 ![Arm Performix comparison showing differences in instruction mix#center](instruction-mix-diff-results.webp "Instruction Mix Comparison")
 
@@ -125,7 +125,7 @@ The program still generates the same output, and runtime drops from 31 s to less
 
 ![Arm Performix results highlighting total performance improvement#center](performance-improvement.webp "Performance Improvement Summary")
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 In this section:
 - You used the Instruction Mix recipe to confirm a lack of SIMD operations.

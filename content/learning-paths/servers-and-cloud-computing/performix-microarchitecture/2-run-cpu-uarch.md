@@ -67,7 +67,7 @@ The **Insights** panel highlights ALU contention as a likely improvement opportu
 
 To inspect executed instruction types in more detail, use the Instruction Mix recipe in the next step.
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 In this section:
 - You ran the CPU Microarchitecture recipe on the Mandelbrot application.

@@ -1,10 +1,6 @@
 ---
 title: Optimize application performance using Arm Performix CPU microarchitecture analysis
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for software developers who want to learn performance analysis methodologies for Linux applications on Arm Neoverse-based servers.
@@ -16,7 +12,9 @@ learning_objectives:
     - Compare performance profiles to measure execution improvements
 
 prerequisites:
-    - An Arm Neoverse-based server running Linux. A bare-metal or cloud bare-metal instance is best because it exposes more counters.
+    - An Arm Neoverse-based server running Linux (bare-metal or cloud bare-metal instance preferred for access to hardware performance counters)
+    - Familiarity with Linux command line
+    - Basic understanding of CPU performance concepts
 
 author:
 - Brendan Long
