@@ -43,3 +43,9 @@ After filling in the details, select **Add** to save the rule.
 ![Azure Portal showing inbound security rule form with port 9999 configuration alt-txt#center](images/inbound_rule.png "Network settings")
 
 The network firewall rule is now created, allowing Dynatrace ActiveGate to communicate over port **9999**.
+
+## What you've learned and what's next
+
+You've configured the Azure Network Security Group to allow incoming traffic on port 9999. This firewall rule enables secure communication between your virtual machine and the Dynatrace platform when you install ActiveGate.
+
+Next, you'll install Dynatrace OneAgent on your Azure Cobalt 100 virtual machine to begin monitoring system resources and processes.
