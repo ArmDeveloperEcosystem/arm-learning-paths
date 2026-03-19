@@ -26,22 +26,21 @@ See the [Arm Performix installation guide](https://learn.arm.com/install-guides/
 Connect to the remote server using SSH or Visual Studio Code. Install git and the C++ compiler. On dnf-based systems such as Amazon Linux 2023 or RHEL, run:
 
 ```bash
-sudo dnf update && sudo dnf install git gcc g++
+sudo dnf update && sudo dnf install git gcc g++ make
 ```
 
 Clone the Mandelbrot repository, check out the single-threaded branch, and create the output directories. The repository is available under the [Arm Education License](https://github.com/arm-university/Mandelbrot-Example?tab=License-1-ov-file) for teaching and learning.
 
 ```bash
-git clone https://github.com/arm-university/Mandelbrot-Example.git
+git clone https://github.com/arm-education/Mandelbrot-Example
 cd Mandelbrot-Example
-git checkout single-thread
-mkdir images builds
+mkdir -p images build
 ```
 
 Build the application:
 
 ```bash
-./build.sh
+make single_thread DEBUG=1
 ```
 
-This creates the binary `./builds/mandelbrot`.
+This creates the binary `./builds/mandelbrot_single_thread_debug`.
