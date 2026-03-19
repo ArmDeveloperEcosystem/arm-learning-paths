@@ -13,12 +13,12 @@ It improves scalability, enables Kubernetes monitoring, and routes monitoring tr
 
 In this guide, you'll install Dynatrace ActiveGate on an **Azure Ubuntu 24.04 LTS Arm64 virtual machine running on Azure Cobalt 100 processors**.
 
-At the end of the installation, ActiveGate will be:
+After installation completes, ActiveGate:
 
-* Installed and running as a system service
-* Listening on port **9999** for Dynatrace communication
-* Connected to your Dynatrace SaaS environment
-* Verified on **Arm64 (`aarch64`)** architecture
+* Runs as a system service
+* Listens on port **9999** for Dynatrace communication
+* Connects to your Dynatrace SaaS environment
+* Operates natively on **Arm64 (`aarch64`)** architecture
 
 ## Verify OneAgent installation
 
@@ -31,7 +31,7 @@ Verify that OneAgent is running:
 sudo systemctl status oneagent
 ```
 
-If OneAgent is not installed, install it first using the previous guide.
+If OneAgent isn't installed, install it first using the previous guide.
 
 ## Log in to Dynatrace
 
@@ -60,9 +60,9 @@ From the Dynatrace main dashboard:
 
 ![Dynatrace deployment status page showing no ActiveGate detected alt-txt#center](images/activegate1.png "Dynatrace ActiveGate not yet installed")
 
-Dynatrace will generate an installation command specifically for your environment.
+Dynatrace generates an installation command specifically for your environment.
 
-## Select ARM architecture
+## Select Arm architecture
 
 On the installer configuration page:
 
@@ -70,7 +70,7 @@ On the installer configuration page:
 * Architecture -> ARM64
 * Select **Generate token** to create an authentication token
 
-![Dynatrace Install ActiveGate page showing deployment type Linux and architecture ARM selection alt-txt#center](images/activegate-install.png "Dynatrace ActiveGate installation configuration")
+![Dynatrace Install ActiveGate page showing Linux platform and ARM64 architecture selection alt-txt#center](images/activegate-install.png "Dynatrace ActiveGate installation configuration")
 
 This ensures that the installer downloads the Arm64-compatible ActiveGate binaries.
 
@@ -101,7 +101,7 @@ wget https://ca.dynatrace.com/dt-root.cert.pem
 ( echo 'Content-Type: multipart/signed; protocol="application/x-pkcs7-signature"; micalg="sha-256"; boundary="--SIGNED-INSTALLER"'; echo; echo; echo '----SIGNED-INSTALLER'; cat Dynatrace-ActiveGate-Linux-arm.sh ) | openssl cms -verify -CAfile dt-root.cert.pem > /dev/null
 ```
 
-![Dynatrace ActiveGate installer command for Linux ARM64 environment alt-txt#center](images/activegate-installation-commands.png "Dynatrace ActiveGate installer command")
+![Dynatrace showing ActiveGate installer command for Linux ARM64 alt-txt#center](images/activegate-installation-commands.png "Dynatrace ActiveGate installer command")
 
 **Install ActiveGate as the privileged user:**
 
@@ -182,9 +182,9 @@ You should see your ActiveGate instance listed with:
 * Version
 * Status: Connected
 
-![Dynatrace Deployment Status page showing ActiveGate instance connected and running alt-txt#center](images/activegate-ui.png "Dynatrace ActiveGate deployment status")
+![Dynatrace Deployment Status page showing ActiveGate connected and running alt-txt#center](images/activegate-ui.png "Dynatrace ActiveGate deployment status")
 
-![Dynatrace ActiveGate details page displaying modules architecture and configuration alt-txt#center](images/activegate-details.png "Dynatrace ActiveGate details view")
+![Dynatrace ActiveGate details page showing modules and configuration alt-txt#center](images/activegate-details.png "Dynatrace ActiveGate details view")
 
 ## Test application monitoring with Nginx
 
@@ -238,13 +238,8 @@ Dynatrace automatically begins collecting metrics such as:
 * network activity
 * request throughput
 
-![Dynatrace Infrastructure Explorer showing NGINX process monitoring on an ARM64 host alt-txt#center](images/nginx-monitoring.png "Dynatrace NGINX process monitoring dashboard")
+![Dynatrace Infrastructure Explorer showing NGINX process monitoring on ARM64 host alt-txt#center](images/nginx-monitoring.png "Dynatrace NGINX process monitoring dashboard")
 
-## What you've accomplished
+## What you've learned 
 
-You've successfully installed Dynatrace ActiveGate on your Azure Ubuntu Arm64 virtual machine. Your environment now includes:
-
-* Dynatrace OneAgent performing host monitoring
-* ActiveGate routing monitoring traffic securely
-* Communication with Dynatrace SaaS through port 9999
-* Full compatibility with Arm64-based Cobalt 100 processors
+Your Azure Cobalt 100 virtual machine now has a complete Dynatrace monitoring stack. OneAgent monitors host resources and processes, while ActiveGate securely routes monitoring data to your Dynatrace environment through port 9999. The entire setup operates natively on Arm64 architecture, providing full observability for your applications and infrastructure.
