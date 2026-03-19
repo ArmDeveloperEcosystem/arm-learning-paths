@@ -23,7 +23,7 @@ Looking at the `Mandelbrot::getIterations` function,  there are some obvious way
 ### Optimization 1 - Limiting Loop Boundary
 
 
-We can see that the number of iterations is of the absolute value is limited by the loop boundary, MAX_ITERATIONS. Our first optimization could be to reduce MAX_ITERATIONS. This is defined as 1024 a static const integer in the `Mandelbrot.h` header. We could half this to 512 and assess the perceived image quality on our fractal.
+We can see that the number of iterations is of the absolute value is limited by the loop boundary, MAX_ITERATIONS. Our first optimization could be to reduce MAX_ITERATIONS. This is defined as 1024 a static const integer in the `include/Mandelbrot.h` header. We could half this to 512 and assess the perceived image quality on our fractal.
 
 ```cpp
 public:
@@ -32,10 +32,11 @@ public:
 ...
 ```
 
-On the remote server, reduce `MAX_ITERATIONS` in `Mandelbrot.h` and rename the output file string in `main.cpp` to something else and rebuild the binary with the following command.
+On the remote server, reduce `MAX_ITERATIONS` in `Mandelbrot.h`, rename the output file string in `src/main_single_thread.cpp` to emphasis the reduced loop count, then rebuild and runthe binary with the following command.
 
 ```bash
-./build.sh
+make clean && make single_thread DEBUG=1
+./build/mandelbrot_single_thread_debug
 ```
 
 Next, click on the refresh icon in the top right to rerun the recipe. Next we select the comparison mode to view differences in the run. Navigating to the 'Run Details' tab, we observe a reducion in run duration from 1m 0s to 0m 32s, almost proportional to the reduction in `MAX_ITERATIONS`. However, we need to see if the tradeoff between image quality and runtime was worth it. 
@@ -48,21 +49,15 @@ Looking at the change in image quality, there is neglible difference in perceive
 
 Fortunately, our loop does not contain any loop-carried dependencies, where the result of an iterations depends on a future or previous iteration. As such we can parallelize our hot function to fun on multiple threads if our CPU has multiple cores. 
 
-The repository contains a parallel version in the main branch. 
-
-```bash
-git checkout main
-```
-
-This branch parallelized the `Mandelbrot::draw` function, which is earlier function in the stack that eventually calls the `__hypot` function. 
+This branch parallelized the `Mandelbrot::draw` function in `src/mandelbrot_parallel.cpp`, which is earlier function in the stack that eventually calls the `__hypot` function. Please view the source code if you would like to understand how we parallelized this function using the `<thread>` standard library.
 
 Build the example, this creates a binary `./builds/mandelbrot-parallel` which takes in a numerical command line arguments to set the number of threads.
 
 ```bash
-./build.sh
+make clean && make parallel DEBUG=1
 ```
 
-Rerun the recipe with the new binary from Arm Performix running on the host. 
+Rerun the cpu hotspot recipe using the new binary, selecting an appropriate thread count for your system, for example, 32 threads on a 32-core CPU.(`./build/mandelbrot_parallel_debug 32`).
 
 To assess the change, we can compare with a previous run. Looking under the `Run Details` tab, we can see the execution time has reduced further from 0m 32s to 7s with 32 threads.
 
@@ -76,7 +71,7 @@ The percentage point of samples has not changed significantly, but we see with 6
 
 ### (Optional Challenge) Additional optimizations
 
-You may have noticed our build script uses the `-O0` flag, which ensures the compiler does not add any additional optimizations. You can experiment with additional optimization levels, loop boundary sizes and threads. Please see our learning path introducing [basic compiler flags](https://learn.arm.com/learning-paths/servers-and-cloud-computing/cplusplus_compilers_flags/) for more information. Additionally, you may wish to look at vectorized libraries that could replace the hypotenuse function in `libm`, such as the [Arm Performance Libraries](https://developer.arm.com/documentation/101004/2601/Arm-Performance-Libraries-Math-Functions/Arm-Performance-Libraries-Vector-Math-Functions--Accuracy-Table).
+You may have noticed our `Makefile` uses the `-O0` flag when in debug mode. Debug mode ensures the compiler does not add any additional optimizations. You can experiment with additional optimization levels, loop boundary sizes and threads. Please see our learning path introducing [basic compiler flags](https://learn.arm.com/learning-paths/servers-and-cloud-computing/cplusplus_compilers_flags/) for more information. Additionally, you may wish to look at vectorized libraries that could replace the hypotenuse function in `libm`, such as the [Arm Performance Libraries](https://developer.arm.com/documentation/101004/2601/Arm-Performance-Libraries-Math-Functions/Arm-Performance-Libraries-Vector-Math-Functions--Accuracy-Table).
 
 
 ## Summary

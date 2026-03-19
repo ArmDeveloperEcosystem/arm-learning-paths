@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Run CPU Cycle Hotspot Recipe
 
-As shown in the `main.cpp` file below, the program generates a 1920×1080 bitmap image of our fractal. To identify performance bottlenecks, we’ll run the CPU Cycle Hotspot recipe in Arm Performix (APX). APX uses sampling to estimate where the CPU spends most of its time, allowing it to highlight the hottest functions—especially useful in larger applications where it isn’t obvious ahead of time which functions will dominate runtime.
+As shown in the `src/main_single_thread.cpp` file below, the program generates a 1920×1080 bitmap image of our fractal. To identify performance bottlenecks, we’ll run the CPU Cycle Hotspot recipe in Arm Performix (APX). APX uses sampling to estimate where the CPU spends most of its time, allowing it to highlight the hottest functions—especially useful in larger applications where it isn’t obvious ahead of time which functions will dominate runtime.
 
 **Please Note**: You will need to replace the first string argument in the `myplot.draw()` function with the absolute path to the image folder and rebuild the application. If not, the image will be written to the `/tmp/atperf/tools/atperf-agent` directory from where the binary is run. As the name suggests, this folder is periodically deleted. 
 
@@ -18,10 +18,13 @@ As shown in the `main.cpp` file below, the program generates a 1920×1080 bitmap
 
 using namespace std;
 
-int main(){
+int main(int argc, char* argv[]){
 
-    Mandelbrot::Mandelbrot myplot(1920, 1080);
-    myplot.draw("./images/green.bmp", Mandelbrot::Mandelbrot::GREEN);
+    const int NUM_THREADS = 1;
+    std::cout << "Number of Threads = " << NUM_THREADS << std::endl;
+
+    Mandelbrot::Mandelbrot myplot(1920, 1080, NUM_THREADS);
+    myplot.draw("/home/ec2-user/Mandelbrot-final/Mandelbrot-Example/images/Green-Parallel-512.bmp", Mandelbrot::Mandelbrot::GREEN);
 
     return 0;
 }
@@ -52,5 +55,5 @@ To understand deeper, we can map the the lines of source code to the functions. 
 
 Finally, looking in our images directory we can see the bitmap fractal.
 
-![mandelbrot](./plot-1-thread-MAX_ITERATIONS.jpg)
+![mandelbrot](./plot-1-thread-max-iterations.jpg)
 

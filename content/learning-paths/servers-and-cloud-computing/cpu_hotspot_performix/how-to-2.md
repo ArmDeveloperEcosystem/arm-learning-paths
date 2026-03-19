@@ -26,19 +26,18 @@ Please refer to the [installation guide](https://learn.arm.com/install-guides/at
 Next, connect to the remote server, for example using SSH or VisualStudio Code, and clone the Mandelbrot repository. This is available under the [Arm Education License](https://github.com/arm-university/Mandelbrot-Example?tab=License-1-ov-file) for teaching and learning. Create a new directory where you will store and build this example. Next, run the commands below.
 
 ```bash
-git clone https://github.com/arm-university/Mandelbrot-Example.git
-cd Mandelbrot-Example && mkdir images builds
-git checkout single-thread
+git clone https://github.com/arm-education/Mandelbrot-Example
+cd Mandelbrot-Example && mkdir -p images build
 ```
 
-Install a C++ compiler, for example using your operating system's package manager.
+Install a C++ compiler and the make tool, for example using your operating system's package manager.
 
 ```bash
-sudo dnf update && sudo dnf install g++ gcc
+sudo dnf update && sudo dnf install g++ gcc make
 ```
 
-Build the application. 
+Build the application with the following command. This creates a executable named `mandelbrot_single_thread_debug` in the build directory.
 
 ```bash
-./build.sh
+make single_thread DEBUG=1
 ```
