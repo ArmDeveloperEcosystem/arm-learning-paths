@@ -10,12 +10,12 @@ layout: learningpathall
 
 To install Dynatrace OneAgent on an Azure Ubuntu 24.04 LTS Arm64 virtual machine, follow these steps.
 
-At the end of the installation, Dynatrace is:
+After installation completes, Dynatrace OneAgent:
 
-* Installed and running as a host monitoring agent
-* Connected to your Dynatrace SaaS environment
-* Monitoring system processes and services automatically
-* Verified on Arm64 (`aarch64`) architecture
+* Runs as a host monitoring agent
+* Connects to your Dynatrace SaaS environment
+* Monitors system processes and services automatically
+* Operates natively on Arm64 (`aarch64`) architecture
 
 ## Update the system and install required tools
 
@@ -73,7 +73,7 @@ https://mbp77458.apps.dynatrace.com/ui/apps/dynatrace.launcher/getting-started
 
 The Environment ID uniquely identifies your Dynatrace tenant and is required for agent installation.
 
-![Dynatrace environment login page showing the SaaS environment URL alt-txt#center](images/dynatrace-env-id.png "Dynatrace SaaS environment login")
+![Dynatrace environment login page showing SaaS environment URL#center](images/dynatrace-env-id.png "Dynatrace SaaS environment login")
 
 ## Navigate to Deployment
 
@@ -82,7 +82,7 @@ From the Dynatrace dashboard:
 * Choose **OneAgent**
 * Choose **Setup**
 
-![Dynatrace deployment page showing OneAgent setup options alt-txt#center](images/oneagent1.png "Dynatrace OneAgent deployment setup page")
+![Dynatrace deployment page showing OneAgent setup options#center](images/oneagent1.png "Dynatrace OneAgent deployment setup page")
 
 This page generates the installation command tailored for your environment.
 
@@ -96,7 +96,7 @@ On the installer page, confirm these selections:
 
 Then select **Generate token** to create an authentication token.
 
-![Dynatrace installer configuration page showing ARM64 architecture selection alt-txt#center](images/oneagent-arch.png "Dynatrace OneAgent ARM64 architecture selection")
+![Dynatrace installer page showing ARM64 architecture selection#center](images/oneagent-arch.png "Dynatrace OneAgent ARM64 architecture selection")
 
 ## Copy OneAgent installer command
 
@@ -131,7 +131,7 @@ wget https://ca.dynatrace.com/dt-root.cert.pem
 
 This command validates the downloaded installer before you run it.
 
-![Dynatrace UI displaying the generated OneAgent installer command alt-txt#center](images/onagent-install.png "Dynatrace OneAgent installation command")
+![Dynatrace UI showing generated OneAgent installer command#center](images/onagent-install.png "Dynatrace OneAgent installation command")
 
 ## Install OneAgent as the privileged user
 
@@ -216,7 +216,7 @@ Architecture: ARM64
 Monitoring mode: Full Stack
 ```
 
-![Dynatrace hosts dashboard showing detected ARM64 virtual machine alt-txt#center](images/dynatrace-host.png "Dynatrace host monitoring dashboard")
+![Dynatrace hosts dashboard showing detected ARM64 virtual machine#center](images/dynatrace-host.png "Dynatrace host monitoring dashboard")
 
 ## Check automatic process discovery
 
@@ -235,16 +235,10 @@ Dynatrace identifies services such as:
 * databases
 * container runtimes
 
-![Dynatrace process monitoring dashboard showing automatically discovered services alt-txt#center](images/dynatrace-process.png "Dynatrace process discovery view")
+![Dynatrace process monitoring dashboard showing automatically discovered services#center](images/dynatrace-process.png "Dynatrace process discovery view")
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
-You've successfully installed Dynatrace OneAgent on your Azure Ubuntu Arm64 virtual machine. Your installation includes:
+Dynatrace OneAgent is now monitoring your Azure Cobalt 100 virtual machine. The agent runs as a system service, automatically discovers processes, and securely transmits monitoring data to your Dynatrace environment.
 
-* Dynatrace OneAgent installed and running as a system service
-* Automatic startup enabled through systemd
-* Secure connection to the Dynatrace SaaS platform
-* Full-stack monitoring of system resources and processes
-* Arm64-native monitoring on Azure Cobalt 100 processors
-
-Next, you'll install Dynatrace ActiveGate to enable additional capabilities such as Kubernetes monitoring, secure data routing, and extension support.
+Next, you'll install Dynatrace ActiveGate to enable secure data routing, Kubernetes monitoring, and extension support.

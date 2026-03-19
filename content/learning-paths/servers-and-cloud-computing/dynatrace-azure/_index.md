@@ -1,13 +1,9 @@
 ---
 title: Monitor Azure Cobalt 100 Arm64 virtual machines using Dynatrace OneAgent
-
-draft: true
-cascade:
-    draft: true
     
 minutes_to_complete: 30
 
-who_is_this_for: This learning path is designed for developers, DevOps engineers, and platform engineers who want to implement infrastructure and application monitoring using Dynatrace on Arm-based cloud environments.
+who_is_this_for: This is an introductory topic for developers, DevOps engineers, and platform engineers who want to implement infrastructure and application monitoring using Dynatrace on Arm-based cloud environments.
 
 learning_objectives:
     - Deploy Dynatrace OneAgent on Azure Cobalt 100 Arm64 virtual machines

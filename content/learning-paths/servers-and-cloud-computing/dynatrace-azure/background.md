@@ -25,3 +25,5 @@ There are three main components of Dynatrace:
 - **Dynatrace ActiveGate:** a secure gateway component that routes monitoring traffic, enables cloud integrations, and provides additional monitoring capabilities such as Kubernetes monitoring and synthetic monitoring. Learn more in the [Dynatrace ActiveGate documentation](https://docs.dynatrace.com/docs/ingest-from/dynatrace-activegate).
 
 - **Dynatrace Platform (SaaS or Managed):** the central observability platform that processes monitoring data, provides dashboards, AI-driven root cause analysis, and system-wide visibility across applications and infrastructure. See the [Dynatrace documentation portal](https://docs.dynatrace.com/docs) for more details.
+
+In this Learning Path, you'll set up both OneAgent and ActiveGate on Azure Cobalt 100 Arm64 virtual machines to establish full-stack monitoring for your applications and infrastructure.
