@@ -60,4 +60,12 @@ Arm has contributed [KleidiAI](https://gitlab.arm.com/kleidi/kleidiai) kernels i
 
 You will enable this acceleration in the build step later in the Learning Path.
 
-Now that you understand Llama's capabilities and the quantization strategy needed for mobile deployment, the next section walks you through downloading and exporting a Llama model to the format required by ExecuTorch.
+## What you've learned and what's next
+
+You now understand:
+- Llama's capabilities for natural language tasks and customer support scenarios
+- The benefits of on-device inference: privacy, low latency, and offline availability
+- How quantization makes large language models fit in smartphone memory
+- KleidiAI's role in accelerating inference on Arm processors
+
+The next section walks you through downloading and exporting a Llama model to the format required by ExecuTorch.

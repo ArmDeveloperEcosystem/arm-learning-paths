@@ -140,4 +140,12 @@ I 00:00:02.264384 executorch:text_llm_runner.cpp:95] RSS after loading model: 11
 
 After the warmup, the model generates a response to the user query. The RSS figure confirms how much memory the model is using on the device.
 
-You now have a Llama 3.2 1B customer support chatbot running entirely on-device on an Arm Android phone. In the next section, you will wrap this into an Android app with a full chat interface.
+## What you've learned and what's next
+
+You have:
+- Cross-compiled ExecuTorch with KleidiAI support for Android
+- Built the Llama runner binary for Arm Android devices
+- Deployed and run the chatbot on your Android phone via adb
+- Verified that the model inference works correctly with a customer support prompt
+
+The next section wraps this functionality into an Android app with a full chat interface.

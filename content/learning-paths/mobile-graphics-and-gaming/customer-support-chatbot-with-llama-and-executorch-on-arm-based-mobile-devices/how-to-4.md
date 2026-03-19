@@ -65,4 +65,11 @@ Due to the larger vocabulary size of Llama 3, quantize the embeddings with `--em
 
 When this command completes, you have a `llama3_1B_kv_sdpa_xnn_qe_4_64_1024_embedding_4bit.pte` file in your working directory. This is the compiled, quantized model ready for on-device deployment via ExecuTorch.
 
-You now have a model in the correct format for ExecuTorch. The next section builds the Llama runner for Android and demonstrates how to run the chatbot directly on your phone via the command line.
+## What you've learned and what's next
+
+You have:
+- Downloaded the Llama 3.2 1B Instruct model from Meta
+- Exported the model to `.pte` format with quantization optimizations
+- Created a model file ready for on-device deployment
+
+The next section builds the Llama runner for Android and demonstrates how to run the chatbot directly on your phone via the command line.
