@@ -15,13 +15,13 @@ The instructions assume macOS on Apple Silicon. If you use Arm Linux, links are 
 
 ## Connect the DevKit
 
-1. Unplug all USB cables from the DevKit before changing any jumpers.
+- Unplug all USB cables from the DevKit before changing any jumpers.
 
-2. Verify that the jumpers are in their factory default positions, as shown in the Alif Ensemble E8 DevKit (DK-E8) User Guide on [alifsemi.com](https://alifsemi.com/support/kits/ensemble-e8devkit/).
+- Verify that the jumpers are in their factory default positions, as shown in the Alif Ensemble E8 DevKit (DK-E8) User Guide on [alifsemi.com](https://alifsemi.com/support/kits/ensemble-e8devkit/).
 
-3. Connect a USB-C cable from your computer to the **PRG USB** port on the bottom edge of the DevKit.
+- Connect a USB-C cable from your computer to the **PRG USB** port on the bottom edge of the DevKit.
 
-4. Confirm that a green LED illuminates near the E1 device and the UART switch (SW4).
+- Confirm that a green LED illuminates near the E1 device and the UART switch (SW4).
 
 Leave **SW4** in its default position. This routes the on-board USB UART to **SEUART**, which the Alif Security Toolkit (SETOOLS) uses for programming.
 
@@ -29,7 +29,7 @@ Leave **SW4** in its default position. This routes the on-board USB UART to **SE
 Close any terminal application that's connected to SEUART, such as PuTTY, minicom, or screen, before you use the Security Toolkit (SETOOLS). The DevKit exposes only one SEUART interface, so SETOOLS can't access the port if another application is already using it.
 {{% /notice %}}
 
-5. Create a project directory:
+- Create a project directory:
 
 ```bash
 mkdir ~/alif
@@ -39,16 +39,16 @@ mkdir ~/alif
 
 The Security Toolkit (SETOOLS) programs firmware images onto the DevKit.
 
-1. Download the macOS version of SETOOLS from the [Alif Ensemble E8 DevKit support page](https://alifsemi.com/support/kits/ensemble-e8devkit/).
+- Download the macOS version of SETOOLS from the [Alif Ensemble E8 DevKit support page](https://alifsemi.com/support/kits/ensemble-e8devkit/).
 
-2. Extract it into `~/alif`. This creates the toolkit directory under a stable location, for example `~/alif/app-release-exec-macos/`.
+- Extract it into `~/alif`. This creates the toolkit directory under a stable location, for example `~/alif/app-release-exec-macos/`.
 
 ```bash
 cd ~/Downloads
 tar xvf APFW0003-app-release-exec-macos-SW_FW_1.107.00_DEV-4.tar -C ~/alif
 ```
 
-3. Open a terminal in the SETOOLS directory and run:
+- Open a terminal in the SETOOLS directory and run:
 
 ```bash
 cd ~/alif/app-release-exec-macos
@@ -137,11 +137,11 @@ If you have existing settings, add only the two lines of text inside the existin
 
 Before moving on to ML code, verify your entire toolchain works end to end with the built-in Blinky example.
 
-1. In VS Code, select the **CMSIS** icon in the left sidebar.
-2. Select the gear icon, then set **Active Target** to **E8-HP** and **Active Project** to **blinky**.
-3. Select the **Build** (hammer) icon.
-4. Press **Fn+F1**, select **Tasks: Run Task**, then select **Program with Security Toolkit (select COM port)**.
-5. Choose the DevKit's port when prompted.
+- In VS Code, select the **CMSIS** icon in the left sidebar.
+- Select the gear icon, then set **Active Target** to **E8-HP** and **Active Project** to **blinky**.
+- Select the **Build** (hammer) icon.
+- Press **Fn+F1**, select **Tasks: Run Task**, then select **Program with Security Toolkit (select COM port)**.
+- Choose the DevKit's port when prompted.
 
 If the DevKit's red LED blinks, your toolchain, SETOOLS, and DevKit connection are all working correctly. You are ready to move on to model compilation.
 

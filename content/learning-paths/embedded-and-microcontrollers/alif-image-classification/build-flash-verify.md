@@ -20,9 +20,9 @@ You can also clean from VS Code: press **F1** and select **CMSIS: Clean all out 
 
 ### Option 1: Build from VS Code
 
-1. Select the **CMSIS** icon in the left sidebar.
-2. Select the gear icon and set **Active Target** to **E8-HP** and **Active Project** to **mv2_runner**.
-3. Select the **Build** (hammer) icon.
+- Select the **CMSIS** icon in the left sidebar.
+- Select the gear icon and set **Active Target** to **E8-HP** and **Active Project** to **mv2_runner**.
+- Select the **Build** (hammer) icon.
 
 ### Option 2: Build from the command line
 
@@ -56,11 +56,11 @@ The flashing process takes about 30 seconds. The Security Toolkit reads the `M55
 
 ## View output with SEGGER RTT Viewer
 
-1. Open **SEGGER J-Link RTT Viewer** on your development machine.
-2. Set **Connection** to **USB**.
-3. Filter by manufacturer: **AlifSemiconductor**.
-4. For **Device**, start typing `AE822F` and select **AE822FA0E5597LS0_M55_HP** (Core: Cortex-M55).
-5. Select **OK** to connect.
+- Open **SEGGER J-Link RTT Viewer** on your development machine.
+- Set **Connection** to **USB**.
+- Filter by manufacturer: **AlifSemiconductor**.
+- For **Device**, start typing `AE822F` and select **AE822FA0E5597LS0_M55_HP** (Core: Cortex-M55).
+- Select **OK** to connect.
 
 The expected output is:
 

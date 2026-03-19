@@ -12,17 +12,17 @@ minutes_to_complete: 120
 who_is_this_for: This is an advanced topic for embedded developers who want to deploy a neural network model to an Arm Cortex-M55 microcontroller using ExecuTorch and an Ethos-U85 NPU.
 
 learning_objectives:
-    - Compile a MobileNetV2 model for the Ethos-U85 NPU using ExecuTorch's ahead-of-time (AOT) compiler on an Arm-based cloud instance.
-    - Build ExecuTorch static libraries for bare-metal Cortex-M55 targets.
-    - Configure CMSIS project files, memory layout, and linker scripts for an ML workload on the Alif Ensemble E8.
-    - Run real-time image classification inference on the Ethos-U85 NPU and verify results using SEGGER Real-Time Transfer (RTT).
+    - Compile a MobileNetV2 model for the Ethos-U85 NPU using ExecuTorch's ahead-of-time (AOT) compiler on an Arm-based cloud instance
+    - Build ExecuTorch static libraries for bare-metal Cortex-M55 targets
+    - Configure CMSIS project files, memory layout, and linker scripts for an ML workload on the Alif Ensemble E8
+    - Run real-time image classification inference on the Ethos-U85 NPU and verify results using SEGGER Real-Time Transfer (RTT)
 
 prerequisites:
-    - Experience with C/C++ and embedded development concepts.
-    - An [Alif Ensemble E8 DevKit](https://alifsemi.com/support/kits/ensemble-e8devkit/) with a USB-C cable.
-    - A SEGGER J-Link debug probe (included in the DevKit).
-    - A development machine running macOS on Apple Silicon with Visual Studio Code installed.
-    - An AWS account or access to an Arm-based cloud instance for native Arm compilation.
+    - Experience with C/C++ and embedded development concepts
+    - An [Alif Ensemble E8 DevKit](https://alifsemi.com/support/kits/ensemble-e8devkit/) with a USB-C cable
+    - A SEGGER J-Link debug probe (included in the DevKit)
+    - A development machine running macOS on Apple Silicon with Visual Studio Code installed
+    - An AWS account or access to an Arm-based cloud instance for native Arm compilation
 
 author: Gabriel Peterson
 

@@ -150,12 +150,6 @@ After these changes, the memory layout is:
 | SRAM0 | 4 MB | Method pool (1.5 MB) + temp pool (1.5 MB) + float input buffer (~588 KB) |
 | SRAM1 | 4 MB | Planned memory buffers |
 
-## What you've learned and what's next
-
-You've reconfigured the memory regions, linker script, and Security Toolkit settings to allocate sufficient MRAM and SRAM for the 3.7 MB model and 7.6 MB runtime memory pools.
-
-Next, you'll prepare a test image for classification by converting it to the format the model expects.
-
 ## Configure the flash settings
 
 The Security Toolkit needs a JSON configuration file that tells it where to load the binary in MRAM and which CPU should boot it.
@@ -189,3 +183,9 @@ The key fields are:
 You can view the completed versions of these edited files in the [workshop repository](https://github.com/ArmDeveloperEcosystem/workshop-ethos-u) for reference.
 
 The memory layout and flash configuration are complete. The next section covers preparing the test image.
+
+## What you've learned and what's next
+
+You've reconfigured the memory regions to allocate the full 5.5 MB of MRAM to the HP core, modified the linker script to support GOT relocation and SRAM memory pools, and configured the Security Toolkit JSON file to boot the application from the correct MRAM address.
+
+Next, you'll prepare a test image for classification by converting it to the format the model expects.
