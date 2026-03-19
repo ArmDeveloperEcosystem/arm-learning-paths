@@ -133,3 +133,9 @@ Before inference runs, the input tensor is prepared by converting the embedded i
 The NPU handles the bulk of the computation. The CPU-side overhead of ExecuTorch loading, input conversion, and quantize/dequantize is small compared to the NPU workload.
 
 The application code is in place. The next section configures the memory layout to accommodate the model and ExecuTorch runtime.
+
+## What you've learned and what's next
+
+You've added the main application code that initializes the Ethos-U85 NPU, loads the MobileNetV2 model through ExecuTorch, and runs inference with SEGGER RTT output.
+
+Next, you'll configure the memory regions and linker script to fit the model and runtime libraries into MRAM and SRAM.

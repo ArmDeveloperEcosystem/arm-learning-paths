@@ -121,3 +121,9 @@ The model classifies among 1000 ImageNet categories. Some common class ranges:
 For a complete list, search for "ImageNet 1000 class labels" online.
 
 The test image is ready. The next section covers building, flashing, and verifying the inference output.
+
+## What you've learned and what's next
+
+You've created a Python script that converts a test image into a C header with the proper normalization and quantization for MobileNetV2 input.
+
+Next, you'll build the complete firmware, flash it to the DevKit, and verify the inference results using SEGGER RTT Viewer.

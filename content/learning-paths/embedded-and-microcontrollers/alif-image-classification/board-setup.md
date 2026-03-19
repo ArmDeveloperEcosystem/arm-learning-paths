@@ -26,7 +26,7 @@ The instructions assume macOS on Apple Silicon. If you use Arm Linux, links are 
 Leave **SW4** in its default position. This routes the on-board USB UART to **SEUART**, which the Alif Security Toolkit (SETOOLS) uses for programming.
 
 {{% notice Note %}}
-Close any terminal application that is connected to SEUART, such as PuTTY, minicom, or screen, before you use the Security Toolkit (SETOOLS). The DevKit exposes only one SEUART interface, so SETOOLS cannot access the port if another application is already using it.
+Close any terminal application that's connected to SEUART, such as PuTTY, minicom, or screen, before you use the Security Toolkit (SETOOLS). The DevKit exposes only one SEUART interface, so SETOOLS can't access the port if another application is already using it.
 {{% /notice %}}
 
 5. Create a project directory:
@@ -116,7 +116,7 @@ Restart VS Code if prompted.
 
 Open the Command Palette by pressing **Command+Shift+P** (or **Fn+F1**) in VS Code, type `Tasks: Run Task`, and select **First time pack installation**. Press **A** to accept all licenses when prompted.
 
-If you do not see the task in the list, open the Command Palette (**Command+Shift+P** or **Fn+F1**) and run the **Reload Window** command.
+If you don't see the task in the list, open the Command Palette (**Command+Shift+P** or **Fn+F1**) and run the **Reload Window** command.
 
 ## Configure VS Code settings
 
@@ -144,3 +144,9 @@ Before moving on to ML code, verify your entire toolchain works end to end with 
 5. Choose the DevKit's port when prompted.
 
 If the DevKit's red LED blinks, your toolchain, SETOOLS, and DevKit connection are all working correctly. You are ready to move on to model compilation.
+
+## What you've learned and what's next
+
+You've set up the Alif Ensemble E8 DevKit hardware, installed the Security Toolkit and J-Link tools, and verified the toolchain by building the Blinky example project.
+
+Next, you'll compile the MobileNetV2 model on an Arm cloud instance using ExecuTorch and the Vela compiler.

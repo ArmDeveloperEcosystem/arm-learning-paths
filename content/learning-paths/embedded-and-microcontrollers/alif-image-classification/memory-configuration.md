@@ -99,7 +99,7 @@ Add the GOT entries after `KEEP(*(.jcr*))`:
 ```
 
 {{% notice Note %}}
-This issue can be difficult to diagnose. Without these two lines, the firmware boots and loads the model, but crashes with a BusFault when ExecuTorch calls a virtual function. The GOT stores addresses for indirect calls. If the startup code does not copy it from flash to RAM, those lookups resolve to address zero and the CPU faults.
+This issue can be difficult to diagnose. Without these two lines, the firmware boots and loads the model, but crashes with a BusFault when ExecuTorch calls a virtual function. The GOT stores addresses for indirect calls. If the startup code doesn't copy it from flash to RAM, those lookups resolve to address zero and the CPU faults.
 {{% /notice %}}
 
 ### Add SRAM section wildcards
@@ -149,6 +149,12 @@ After these changes, the memory layout is:
 | DTCM | 1 MB | Stack (16 KB) + heap (64 KB) + GOT + data |
 | SRAM0 | 4 MB | Method pool (1.5 MB) + temp pool (1.5 MB) + float input buffer (~588 KB) |
 | SRAM1 | 4 MB | Planned memory buffers |
+
+## What you've learned and what's next
+
+You've reconfigured the memory regions, linker script, and Security Toolkit settings to allocate sufficient MRAM and SRAM for the 3.7 MB model and 7.6 MB runtime memory pools.
+
+Next, you'll prepare a test image for classification by converting it to the format the model expects.
 
 ## Configure the flash settings
 
