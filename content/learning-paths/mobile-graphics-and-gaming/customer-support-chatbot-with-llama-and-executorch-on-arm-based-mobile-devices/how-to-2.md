@@ -37,4 +37,4 @@ git submodule update --init --recursive
 ./examples/models/llama/install_requirements.sh
 ```
 
-When these scripts complete successfully, ExecuTorch is ready. You can now prepare your Llama model for on-device deployment.
+When these scripts complete successfully, ExecuTorch is ready. Before preparing your Llama model for deployment, the next section explains what Llama models are and why they work well for customer support applications.

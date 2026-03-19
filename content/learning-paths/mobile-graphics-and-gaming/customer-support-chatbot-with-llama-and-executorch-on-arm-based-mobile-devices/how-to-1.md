@@ -99,6 +99,8 @@ Verify that the NDK was installed in the same directory where Android Studio ins
 On macOS, this is generally `~/Library/Android/sdk`, and on Linux, it's `~/Android/Sdk`. Update the command to use your installed NDK version.
 {{% /notice %}}
 
+You now have a complete development environment with Android Studio, the NDK, and all required tools. In the next section, you will set up ExecuTorch, the runtime that enables efficient on-device inference for PyTorch models on mobile platforms.
+
 ```bash
 ls $ANDROID_HOME/ndk
 ```

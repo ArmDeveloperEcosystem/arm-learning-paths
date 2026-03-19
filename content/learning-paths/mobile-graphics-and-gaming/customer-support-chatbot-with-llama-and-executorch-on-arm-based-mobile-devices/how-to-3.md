@@ -6,15 +6,19 @@ weight: 4
 layout: learningpathall
 ---
 
+## Overview
+
+Before exporting and deploying a model, understanding Llama's capabilities and constraints helps you make informed decisions about model selection, quantization strategy, and expected performance on mobile devices.
+
 ## What is Llama?
 
 Llama is a family of large language models that uses publicly available data for training. Llama models perform well on a variety of natural language processing tasks, such as:
 
-- Language translation.
-- Question answering.
-- Text summarization.
+- Language translation
+- Question answering
+- Text summarization
 
-Llama models are also capable of generating human-like text, making them well-suited for customer-facing applications where natural, contextually relevant responses matter. A customer support chatbot built on Llama can handle free-form queries, explain product details, and guide users through troubleshooting steps -- all on-device, with no data sent to external servers.
+Llama models are capable of generating human-like text, making them well-suited for customer-facing applications where natural, contextually relevant responses matter. A customer support chatbot built on Llama can handle free-form queries, explain product details, and guide users through troubleshooting steps -- all on-device, with no data sent to external servers.
 
 Please note that the models are subject to the [acceptable use policy](https://github.com/facebookresearch/llama/blob/main/USE_POLICY.md) and [this responsible use guide](https://ai.meta.com/static-resource/responsible-use-guide/).
 
@@ -47,11 +51,13 @@ Note that groupsize less than 128 was not enabled in this example, because the m
 
 What this implies for model size:
 
-1. The embedding table is in FP32.
-2. Quantized weight scales are FP32.
+- The embedding table is in FP32
+- Quantized weight scales are FP32
 
 ## KleidiAI and Arm performance
 
 Arm has contributed [KleidiAI](https://gitlab.arm.com/kleidi/kleidiai) kernels into ExecuTorch via XNNPACK. On Arm Cortex-A processors with the i8mm feature (such as those found in many recent Android smartphones), these kernels can significantly improve inference throughput for quantized LLMs compared to standard XNNPACK kernels.
 
 You will enable this acceleration in the build step later in the Learning Path.
+
+Now that you understand Llama's capabilities and the quantization strategy needed for mobile deployment, the next section walks you through downloading and exporting a Llama model to the format required by ExecuTorch.

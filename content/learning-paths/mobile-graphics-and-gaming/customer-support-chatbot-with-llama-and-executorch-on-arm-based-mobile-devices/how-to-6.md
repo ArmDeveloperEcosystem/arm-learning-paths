@@ -6,13 +6,16 @@ weight: 7
 layout: learningpathall
 ---
 
+## Overview
+
 In this section, you will use the ExecuTorch Android demo application to run the customer support chatbot with a full chat interface on your phone.
 
 ## Build the Android Archive (AAR)
 
-1. Open a terminal and navigate to the root directory of the `executorch` repository.
+Set up the build environment:
 
-2. If you have not already done so, set the following environment variables:
+- Open a terminal and navigate to the root directory of the `executorch` repository
+- If you have not already done so, set the following environment variables:
 
     ```bash
     export ANDROID_NDK=$ANDROID_HOME/ndk/29.0.14206865/
@@ -24,11 +27,11 @@ In this section, you will use the ExecuTorch Android demo application to run the
 `<path_to_android_ndk>` is the root for the NDK, which is usually under `~/Library/Android/sdk/ndk/XX.Y.ZZZZZ` on macOS, and contains `NOTICE` and `README.md`. Make sure `<path_to_android_ndk>/build/cmake/android.toolchain.cmake` is available for CMake to cross-compile.
     {{% /notice %}}
 
-3. Run the following command to set up the required JNI library:
+Run the following command to set up the required JNI library:
 
-    ```bash
-    sh scripts/build_android_library.sh
-    ```
+```bash
+sh scripts/build_android_library.sh
+```
 
 ## Copy model files to the phone
 
@@ -64,11 +67,11 @@ git clone https://github.com/meta-pytorch/executorch-examples.git
 
 ### Option 1: Using Android Studio (recommended)
 
-1. Open Android Studio and select **Open an existing Android Studio project**.
+Build and launch the app:
 
-2. Navigate to and open `executorch-examples/llm/android/LlamaDemo`.
-
-3. Run the app (**^R**). This builds and launches the app on your connected phone.
+- Open Android Studio and select **Open an existing Android Studio project**
+- Navigate to and open `executorch-examples/llm/android/LlamaDemo`
+- Run the app (**^R**). This builds and launches the app on your connected phone
 
 ### Option 2: Command line
 
@@ -88,4 +91,12 @@ You are a helpful customer support assistant. You answer questions about product
 
 This gives the Llama model its role and behavioral guidelines for every conversation, without changing the underlying model weights.
 
-You have now built and deployed a fully on-device customer support chatbot on an Arm Android phone using ExecuTorch and KleidiAI. All inference runs locally -- no cloud dependency, no user data leaving the device.
+## What you've learned and what's next
+
+You have successfully:
+- Built the ExecuTorch Android library with KleidiAI support
+- Deployed the model and tokenizer to your Android device
+- Built and launched a full-featured chat application
+- Configured the app as a customer support assistant
+
+You now have a fully functional on-device customer support chatbot running on an Arm Android phone using ExecuTorch and KleidiAI. All inference runs locally with no cloud dependency and no user data leaving the device. You can customize the system prompt to match your specific product or domain requirements.
