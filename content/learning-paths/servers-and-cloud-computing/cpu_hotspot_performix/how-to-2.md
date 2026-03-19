@@ -32,7 +32,7 @@ sudo dnf update && sudo dnf install git gcc g++ make
 Clone the Mandelbrot repository, check out the single-threaded branch, and create the output directories. The repository is available under the [Arm Education License](https://github.com/arm-university/Mandelbrot-Example?tab=License-1-ov-file) for teaching and learning.
 
 ```bash
-git clone https://github.com/arm-education/Mandelbrot-Example
+git clone https://github.com/arm-education/Mandelbrot-Example.git
 cd Mandelbrot-Example
 mkdir -p images build
 ```
