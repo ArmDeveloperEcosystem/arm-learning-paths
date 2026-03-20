@@ -122,7 +122,7 @@ Run this command on the virtual machine to download the installer.
 
 ## Verify installer signature
 
-For security, verify the installer signature using Dynatrace’s root certificate.
+For security, verify the installer signature using Dynatrace's root certificate.
 
 ```console
 wget https://ca.dynatrace.com/dt-root.cert.pem
