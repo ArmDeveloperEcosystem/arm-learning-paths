@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Introduction to Software-Defined Vehicles
 
-In recent years, the automotive industry has been undergoing a transformation driven by software, with the concept of the Software-Defined Vehicle (SDV) emerging as a key paradigm for the future of intelligent cars. As the number of Electronic Control Units (ECUs) increases and vehicle systems become more complex, the traditional hardware-driven development approach is no longer sufficient. To improve development efficiency and product quality, automotive software development is moving to a Shift-Left approach, accelerating validation and deployment.
+In recent years, the automotive industry has been undergoing a transformation driven by software, with the concept of the Software-Defined Vehicle (SDV) emerging as a key paradigm for the future of intelligent cars. As Electronic Control Units (ECUs) increase and vehicle systems grow more complex, traditional hardware-driven development is no longer sufficient. To improve development efficiency and product quality, automotive software development is moving to a Shift-Left approach, accelerating validation and deployment.
 
 ## The evolution of Software-Defined Vehicles
 
@@ -16,7 +16,7 @@ The core idea of SDV is to make software the primary differentiator in a vehicle
 
 However, this transition introduces new challenges, particularly in software development and validation. The traditional V-model development process struggles to meet SDV demands since defects are often detected late in development, leading to costly fixes. As a result, Shift-Left has become a crucial strategy to address these challenges.
 
-You can read more about [Software Defined Vehicles](https://www.arm.com/markets/automotive/software-defined-vehicles). 
+See [Software Defined Vehicles](https://www.arm.com/markets/automotive/software-defined-vehicles) for more information. 
 
 ## Shift-Left: detecting issues early to enhance development efficiency
 
@@ -32,7 +32,7 @@ The key benefits of Shift-Left include:
 
 However, Shift-Left requires appropriate tools and frameworks to support its implementation; otherwise, it can increase testing complexity. This is where SOAFEE (Scalable Open Architecture for Embedded Edge) plays a critical role.
 
-Read [Virtual Platforms from Arm and Partners Available Now to Accelerate and Transform Automotive Development](https://newsroom.arm.com/blog/automotive-virtual-platforms) to understand how virtual platforms enable the automotive industry to accelerate the silicon and software development process through virtual prototyping.
+See [Virtual Platforms from Arm and Partners Available Now to Accelerate and Transform Automotive Development](https://newsroom.arm.com/blog/automotive-virtual-platforms) for details on how virtual platforms enable the automotive industry to accelerate silicon and software development through virtual prototyping.
 
 ## SOAFEE: a standardized solution for SDV development
 
@@ -52,6 +52,8 @@ As the Software-Defined Vehicle paradigm gains traction, the automotive industry
 
 With the adoption of SOAFEE, automotive software development will become more standardized and efficient, enabling companies to realize the vision of SDVs faster while delivering a safer, smarter, and more flexible vehicle experience.
 
-Visit the [SOAFEE](https://www.soafee.io/) website to learn more.
+See the [SOAFEE](https://www.soafee.io/) website for additional resources.
 
-In the following sections, you will explore a Shift-Left demonstration example that leverages SOAFEE to enable early deployment of autonomous driving software before the hardware is ready.
+## What you've learned and what's next
+
+You now understand how Software-Defined Vehicles are transforming automotive development, and how SOAFEE and Shift-Left methodologies address the challenges of modern autonomous driving software development. In the next section, you'll learn about the specific technologies that enable this transformation: ROS 2 and Open AD Kit.
