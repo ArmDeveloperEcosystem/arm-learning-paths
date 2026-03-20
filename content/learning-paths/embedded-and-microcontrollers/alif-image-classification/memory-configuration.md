@@ -7,7 +7,7 @@ layout: "learningpathall"
 
 ## Why memory configuration matters
 
-The stock Alif VS Code template divides memory equally between the two Cortex-M55 cores and allocates modest stack/heap sizes suitable for simple examples like Blinky. A MobileNetV2 model with ExecuTorch needs significantly more:
+The default Alif VS Code template divides memory equally between the two Cortex-M55 cores and allocates modest stack/heap sizes suitable for simple examples like Blinky. A MobileNetV2 model with ExecuTorch needs significantly more:
 
 - The embedded model is approximately 3.7 MB (stored in MRAM/flash).
 - The ExecuTorch runtime, operator libraries, and application code add another 800 KB of code.
@@ -19,10 +19,10 @@ You need to reconfigure the MRAM allocation, stack/heap sizes, and linker script
 
 Open `device/ensemble/RTE/Device/AE822FA0E5597LS0_M55_HP/app_mem_regions.h`.
 
-Change the following values from their stock defaults:
+Change the following values from their defaults:
 
-| Define | Stock value | New value | Purpose |
-|--------|------------|-----------|---------|
+| Define | Default value | New value | Purpose |
+|--------|--------------|-----------|---------|
 | `APP_MRAM_HE_BASE` | `0x80000000` | `0x80580000` | Move HE core out of the way |
 | `APP_MRAM_HE_SIZE` | `0x00200000` | `0x00000000` | Give HE core zero MRAM |
 | `APP_MRAM_HP_BASE` | `0x80200000` | `0x80000000` | HP core starts at MRAM base |
@@ -30,13 +30,13 @@ Change the following values from their stock defaults:
 | `APP_HP_STACK_SIZE` | `0x00002000` | `0x00004000` | 16 KB stack (doubled) |
 | `APP_HP_HEAP_SIZE` | `0x00004000` | `0x00010000` | 64 KB heap (quadrupled) |
 
-The stock template splits MRAM 2 MB / 2 MB between the two cores. Since you're only using the HP core, you give it the entire 5.5 MB of available MRAM. The increased stack and heap accommodate ExecuTorch's initialization code, which uses more stack depth and a few small dynamic allocations.
+The default template splits MRAM 2 MB / 2 MB between the two cores. Since you're only using the HP core, you give it the entire 5.5 MB of available MRAM. The increased stack and heap accommodate ExecuTorch's initialization code, which uses more stack depth and a few small dynamic allocations.
 
 ## Edit the linker script
 
 Open `device/ensemble/RTE/Device/AE822FA0E5597LS0_M55_HP/linker_gnu_mram.ld.src`.
 
-You need three changes to this file.
+Make the following three changes to this file.
 
 ### Add SRAM1 to the zero-initialization table
 
@@ -99,7 +99,7 @@ Add the GOT entries after `KEEP(*(.jcr*))`:
 ```
 
 {{% notice Note %}}
-This was the hardest bug to find during development. Without these two lines, the firmware boots, loads the model, but crashes with a BusFault when ExecuTorch tries to call any virtual function. The GOT is like a phone book for indirect calls. If you don't copy it from flash to RAM at startup, every lookup finds address zero and the CPU faults.
+This issue can be difficult to diagnose. Without these two lines, the firmware boots and loads the model, but crashes with a BusFault when ExecuTorch calls a virtual function. The GOT stores addresses for indirect calls. If the startup code doesn't copy it from flash to RAM, those lookups resolve to address zero and the CPU faults.
 {{% /notice %}}
 
 ### Add SRAM section wildcards
@@ -182,4 +182,10 @@ The key fields are:
 
 You can view the completed versions of these edited files in the [workshop repository](https://github.com/ArmDeveloperEcosystem/workshop-ethos-u) for reference.
 
-The memory layout and flash configuration are now ready. The next section covers preparing the test image.
+The memory layout and flash configuration are complete. The next section covers preparing the test image.
+
+## What you've learned and what's next
+
+You've reconfigured the memory regions to allocate the full 5.5 MB of MRAM to the HP core, modified the linker script to support GOT relocation and SRAM memory pools, and configured the Security Toolkit JSON file to boot the application from the correct MRAM address.
+
+Next, you'll prepare a test image for classification by converting it to the format the model expects.

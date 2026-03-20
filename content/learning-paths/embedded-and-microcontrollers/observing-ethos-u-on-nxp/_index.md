@@ -1,27 +1,24 @@
 ---
-title: Observing Ethos-U on a Physical Device, Built on Arm
+title: Deploy ExecuTorch firmware on NXP FRDM i.MX 93 for Ethos-U65 acceleration
 
-draft: true
-cascade:
-    draft: true
-    
 minutes_to_complete: 120
 
-who_is_this_for: This is an introductory topic for developers and data scientists new to Tiny Machine Learning (TinyML), who want to observe ExecuTorch performance on a physical device.
+who_is_this_for: This is an introductory topic for developers and data scientists new to TinyML who want to observe ExecuTorch performance on a physical device.
 
 learning_objectives:
-    - Identify suitable physical Arm-based devices for TinyML applications.
-    - Optionally, configure physical embedded devices.
-    - Deploy a TinyML ExecuTorch model to NXP's FRDM i.MX 93 applicaiton processor (board).
-
+    - Bring up a custom ExecuTorch `executor_runner` firmware on the FRDM i.MX 93 Cortex-M33 using Linux RemoteProc
+    - Compile an ExecuTorch `.pte` model for Ethos-U65 and run inference with NPU acceleration
+    - Understand how heterogeneous Arm systems split responsibilities across application cores, microcontrollers, and NPUs
 prerequisites:
-    - Purchase of a NXP [FRDM i.MX 93](https://www.nxp.com/design/design-center/development-boards-and-designs/frdm-i-mx-93-development-board:FRDM-IMX93) board.
-    - A USB Mini-B to USB Type-A cable, or a USB Mini-B to USB Type-C cable.
-    - Basic knowledge of Machine Learning concepts.
-    - A computer running Linux or macOS.
-    - VS Code
+    - An NXP [FRDM i.MX 93](https://www.nxp.com/design/design-center/development-boards-and-designs/frdm-i-mx-93-development-board:FRDM-IMX93) development board
+    - A USB Mini-B to USB Type-A cable, or a USB Mini-B to USB Type-C cable
+    - Completion of [Use Linux on an NXP FRDM i.MX 93 board](/learning-paths/embedded-and-microcontrollers/linux-nxp-board/) (Linux setup, login access, and file transfer)
+    - Basic knowledge of Machine Learning concepts
+    - A host computer to compile ExecuTorch libraries
 
-author: Waheed Brown, Fidel Makatia Omusilibwa
+author: 
+- Waheed Brown
+- Fidel Makatia Omusilibwa
 
 ### Tags
 skilllevels: Introductory

@@ -43,7 +43,7 @@ Important notes:
 - If unsure about Arm equivalents, use knowledge_base_search to find docs
 - Be sure to find out from the user or system what the target machine is,
   and use the appropriate intrinsics. For instance, if neoverse (Graviton,
-  Axion, Cobalt) is targeted, use the latest SME/SME2.
+  Axion, Cobalt) is targeted, use the latest SVE2 (or SVE for older neoverse).
 
 After completing the migration:
 - Create a pull request with a detailed description of changes

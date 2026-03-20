@@ -5,7 +5,7 @@ weight: 5
 layout: "learningpathall"
 ---
 
-## Overview
+## What the application code does
 
 The application code initializes the Ethos-U85 NPU, loads the MobileNetV2 model through ExecuTorch, runs inference on an embedded test image, and prints the classification result over SEGGER RTT.
 
@@ -16,7 +16,7 @@ Rather than building this code line by line, you download the complete `main.cpp
 Download the working `main.cpp` from the workshop repository and place it in your project:
 
 ```bash
-cd ~/repo/alif/alif_vscode-template/mv2_runner
+cd ~/alif/alif_vscode-template/mv2_runner
 curl -L -o main.cpp \
   https://raw.githubusercontent.com/ArmDeveloperEcosystem/workshop-ethos-u/main/main.cpp
 ```
@@ -25,7 +25,7 @@ curl -L -o main.cpp \
 If you prefer, you can clone the full repository with `git clone https://github.com/ArmDeveloperEcosystem/workshop-ethos-u.git` and copy `main.cpp` from there.
 {{% /notice %}}
 
-The following sections explain what the code does. You don't need to modify anything; the downloaded file is ready to build.
+The following sections explain what the code does. The downloaded file is ready to build as-is.
 
 ## Fault handlers
 
@@ -124,19 +124,18 @@ The method allocator holds the loaded model graph. The temp allocator provides s
 
 ## The inference pipeline
 
-The `run_inference()` function follows a 10-step pipeline:
+The `run_inference()` function handles the full pipeline from model loading to output. It starts by initializing the ExecuTorch runtime and creating a zero-copy data loader that reads the compiled `.pte` model directly from flash memory. The program is then parsed and method metadata queried to determine how much planned memory the model needs.
 
-1. **Initialize** the ExecuTorch runtime.
-2. **Create a data loader** that reads the model directly from flash memory (zero-copy).
-3. **Load the program** (parse the `.pte` flatbuffer).
-4. **Query method metadata** to find out how many planned buffers the model needs and how large they are.
-5. **Set up planned memory** by carving sub-allocations from the SRAM1 pool.
-6. **Create the memory manager** that ties together the method, temp, and planned allocators.
-7. **Load the method** (the `forward` function of the model).
-8. **Prepare the input tensor**: convert the embedded int8 image data to float32 (the model's first operator is `quantize_per_tensor`, which expects float input).
-9. **Execute inference**: the quantize op runs on the CPU, the entire MobileNetV2 backbone runs as a single NPU command stream on the Ethos-U85, and the dequantize op runs back on the CPU.
-10. **Read the output**: find the argmax of the 1000-class output vector to get the predicted ImageNet class.
+Memory is set up next: sub-allocations are carved from the SRAM1 pool for planned buffers, and a memory manager ties together the method, temp, and planned allocators. Once memory is in place, the `forward` method is loaded.
 
-The NPU handles the bulk of the computation. The CPU-side overhead (ExecuTorch loading, input conversion, quantize/dequantize) is small compared to the NPU workload.
+Before inference runs, the input tensor is prepared by converting the embedded int8 image data to float32. This is needed because the model's first operator is `quantize_per_tensor`, which expects float input. Inference then runs in three stages: the quantize operator executes on the CPU, the entire MobileNetV2 backbone runs as a single NPU command stream on the Ethos-U85, and the dequantize operator runs back on the CPU. Finally, the argmax of the 1000-class output vector gives the predicted ImageNet class.
 
-You now have the application code in place. The next section configures the memory layout to accommodate the model and ExecuTorch runtime.
+The NPU handles the bulk of the computation. The CPU-side overhead of ExecuTorch loading, input conversion, and quantize/dequantize is small compared to the NPU workload.
+
+The application code is in place. The next section configures the memory layout to accommodate the model and ExecuTorch runtime.
+
+## What you've learned and what's next
+
+You've added the main application code that initializes the Ethos-U85 NPU, loads the MobileNetV2 model through ExecuTorch, and runs inference with SEGGER RTT output.
+
+Next, you'll configure the memory regions and linker script to fit the model and runtime libraries into MRAM and SRAM.

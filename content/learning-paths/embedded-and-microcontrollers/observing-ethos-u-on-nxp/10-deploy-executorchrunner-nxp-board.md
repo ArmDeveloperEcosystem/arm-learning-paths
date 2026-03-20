@@ -6,283 +6,222 @@ weight: 11
 layout: learningpathall
 ---
 
-## Connect to the FRDM-IMX93 board
+## Deployment overview
 
-The FRDM-IMX93 board runs Linux on the Cortex-A55 cores. You need network or serial access to deploy the firmware.
+This section is where the heterogeneous system comes together.
+Linux on the application cores manages the lifecycle of Cortex-M33 through RemoteProc, and your Cortex-M33 firmware brings up ExecuTorch and the Ethos-U65 delegate.
 
-Find your board's IP address using the serial console or check your router's DHCP leases.
+Your success criteria is simple and observable: the remoteproc trace buffer shows a completed inference run with no bus errors.
 
-Connect via SSH:
+## Prerequisites
 
-{{< tabpane code=false >}}
-{{< tab header="Windows/Linux" >}}
+Before deploying, verify the following on your FRDM-IMX93 board:
+
+1. **Ethos-U kernel driver is loaded.** The Linux `ethosu` driver must be bound so the NPU is powered and clocked:
+
+   ```bash { command_line="root@frdm-imx93" output_lines="2" }
+   ls /dev/ethosu*
+   /dev/ethosu0
+   ```
+
+   If `/dev/ethosu0` doesn't exist, the NPU isn't powered and the firmware will hang at NPU initialization.
+
+2. **DDR memory is reserved for the CM33.** The NXP BSP reserves two DDR regions by default:
+
+   ```dts
+   reserved-memory {
+       model@c0000000 {
+           reg = <0 0xc0000000 0 0x400000>;   /* 4MB for .pte model */
+           no-map;
+       };
+       ethosu_region@A8000000 {
+           reg = <0 0xa8000000 0 0x8000000>;  /* 128MB for NPU working memory */
+           no-map;
+       };
+   };
+   ```
+
+## Copy files to the board
+
+From the `Executorch_runner_cm33` project, copy both the firmware and the `.pte` model to the board:
+
 ```bash
-ssh root@192.168.1.24
+scp debug/executorch_runner_cm33.elf root@<board-ip>:/lib/firmware/
+scp mobilenetv2_u65.pte root@<board-ip>:/tmp/
 ```
 
-Alternative with PuTTY on Windows:
-- Host: `192.168.1.24`
-- Port: `22`
-- Connection type: SSH
-- Username: `root`
-{{< /tab >}}
-{{< tab header="macOS" >}}
+## Connect to the board
+
+SSH into the board for the remaining steps:
+
 ```bash
-ssh root@192.168.1.24
-```
-{{< /tab >}}
-{{< /tabpane >}}
-
-Replace `192.168.1.24` with your board's IP address.
-
-## Copy the firmware to the board
-
-Copy the built firmware file to the board's firmware directory:
-
-{{< tabpane code=false >}}
-{{< tab header="Windows/Linux" >}}
-```bash
-scp debug/executorch_runner_cm33.elf root@192.168.1.24:/lib/firmware/
-```
-{{< /tab >}}
-{{< tab header="macOS" >}}
-```bash
-scp debug/executorch_runner_cm33.elf root@192.168.1.24:/lib/firmware/
-```
-{{< /tab >}}
-{{< /tabpane >}}
-
-Verify the file was copied:
-
-```bash { command_line="root@frdm-imx93" output_lines="2" }
-ls -lh /lib/firmware/executorch_runner_cm33.elf
--rw-r--r-- 1 root root 601K Oct 24 10:30 /lib/firmware/executorch_runner_cm33.elf
+ssh root@<board-ip>
 ```
 
-## Load the firmware on Cortex-M33
+Replace `<board-ip>` with your board's actual IP address.
 
-The Cortex-M33 firmware is managed by the RemoteProc framework running on Linux.
+## Load the model to DDR
 
-Stop any currently running firmware:
+The `executor_runner` firmware reads the `.pte` model from DDR at address `0xC0000000`. Write the model into DDR using `/dev/mem`:
 
-```bash { command_line="root@frdm-imx93" }
-echo stop > /sys/class/remoteproc/remoteproc0/state
+```bash { command_line="root@frdm-imx93" output_lines="8" }
+python3 -c "
+import mmap, os
+pte = open('/tmp/mobilenetv2_u65.pte', 'rb').read()
+fd = os.open('/dev/mem', os.O_RDWR | os.O_SYNC)
+m = mmap.mmap(fd, len(pte), mmap.MAP_SHARED, mmap.PROT_WRITE, offset=0xC0000000)
+m.write(pte)
+m.close()
+os.close(fd)
+print(f'Wrote {len(pte)} bytes to 0xC0000000')
+"
+Wrote 3507872 bytes to 0xC0000000
 ```
 
-Set the new firmware:
-
-```bash { command_line="root@frdm-imx93" }
-echo executorch_runner_cm33.elf > /sys/class/remoteproc/remoteproc0/firmware
-```
-
-Start the Cortex-M33 with the new firmware:
-
-```bash { command_line="root@frdm-imx93" }
-echo start > /sys/class/remoteproc/remoteproc0/state
-```
-
-Verify the firmware loaded successfully:
-
-```bash { command_line="root@frdm-imx93" output_lines="2-5" }
-dmesg | grep remoteproc | tail -n 5
-[12345.678] remoteproc remoteproc0: powering up imx-rproc
-[12345.679] remoteproc remoteproc0: Booting fw image executorch_runner_cm33.elf, size 614984
-[12345.680] remoteproc remoteproc0: header-less resource table
-[12345.681] remoteproc remoteproc0: remote processor imx-rproc is now up
-```
-
-The message "remote processor imx-rproc is now up" confirms successful loading.
-
-## Load a model to DDR memory
-
-The executor_runner loads `.pte` model files from DDR memory at address 0x80100000.
-
-Copy your `.pte` model to the board:
-
-{{< tabpane code=false >}}
-{{< tab header="Windows/Linux" >}}
-```bash
-scp model.pte root@192.168.1.24:/tmp/
-```
-{{< /tab >}}
-{{< tab header="macOS" >}}
-```bash
-scp model.pte root@192.168.1.24:/tmp/
-```
-{{< /tab >}}
-{{< /tabpane >}}
-
-Write the model to DDR memory:
-
-```bash { command_line="root@frdm-imx93" }
-dd if=/tmp/model.pte of=/dev/mem bs=1M seek=2049
-```
-
-The seek value of 2049 corresponds to address 0x80100000 (2049 MB = 0x801 in hex).
-
-Verify the model was written:
-
-```bash { command_line="root@frdm-imx93" output_lines="2-5" }
-xxd -l 64 -s 0x80100000 /dev/mem
-80100000: 504b 0304 1400 0000 0800 0000 2100 a3b4  PK..........!...
-80100010: 7d92 5801 0000 6c04 0000 1400 0000 7661  }.X...l.......va
-80100020: 6c75 652f 7061 7261 6d73 2e70 6b6c 6500  lue/params.pkl.
-80100030: ed52 cd4b 0241 1cfd 66de 49b6 9369 1ad9  .R.K.A..f.I..i..
-```
-
-Non-zero bytes confirm the model is present in memory.
-
-## Monitor Cortex-M33 output
-
-The executor_runner outputs debug information via UART. Connect a USB-to-serial adapter to the M33 UART pins on the FRDM board.
-
-Open a serial terminal (115200 baud, 8N1):
-
-{{< tabpane code=false >}}
-{{< tab header="Windows/Linux" >}}
-```bash
-screen /dev/ttyUSB0 115200
-```
-
-Alternative with minicom:
-```bash
-minicom -D /dev/ttyUSB0 -b 115200
-```
-{{< /tab >}}
-{{< tab header="macOS" >}}
-```bash
-screen /dev/tty.usbserial-* 115200
-```
-
-Alternative with minicom:
-```bash
-minicom -D /dev/tty.usbserial-* -b 115200
-```
-{{< /tab >}}
-{{< /tabpane >}}
-
-You should see output from the ExecuTorch runtime:
-
-```output
-ExecuTorch Runtime Starting...
-Loading model from 0x80100000
-Model loaded successfully
-Initializing Ethos-U NPU delegate
-NPU initialized
-Running inference...
-Inference complete: 45.2ms
-```
-
-{{% notice Tip %}}
-If you don't see UART output, verify the serial connection settings (115200 baud, 8N1) and check that the UART pins are correctly connected.
+{{% notice Note %}}
+You can also load the model via U-Boot if the `.pte` file is on the SD card's first partition. At the U-Boot prompt, run `fatload mmc 0:1 0xc0000000 mobilenetv2_u65.pte` followed by `boot`. The model remains in DDR across Linux boot because the region is marked `no-map`.
 {{% /notice %}}
 
-## Test inference
+## Run inference
 
-The executor_runner automatically runs inference when it starts. Check the UART output for inference results and timing.
-
-To restart inference, you can reload the firmware:
+Start the Cortex-M33 firmware through RemoteProc. RemoteProc is the control plane for this platform: it gives you a consistent way to stop, replace, and start the Cortex-M33 image without manually resetting the system.
 
 ```bash { command_line="root@frdm-imx93" }
 echo stop > /sys/class/remoteproc/remoteproc0/state
+echo executorch_runner_cm33.elf > /sys/class/remoteproc/remoteproc0/firmware
 echo start > /sys/class/remoteproc/remoteproc0/state
+sleep 15
+cat /sys/kernel/debug/remoteproc/remoteproc0/trace0
 ```
 
-Monitor the UART console to see the new inference run.
+{{% notice Note %}}
+If no firmware is running, the `stop` command prints an error. That is expected and can be ignored.
+{{% /notice %}}
 
-## Verify deployment success
+## Expected output
 
-Confirm your deployment is working correctly:
+You should see output similar to:
 
-1. **RemoteProc status shows "running":**
-
-```bash { command_line="root@frdm-imx93" output_lines="2" }
-cat /sys/class/remoteproc/remoteproc0/state
-running
+```output
+NPU config match
+NPU arch match
+cmd_end_reached 0x1
+bus_status_error 0x0
+1 inferences finished
+Output[0]: dtype=6, numel=1000, nbytes=4000
+Program complete, exiting.
 ```
 
-2. **Firmware is loaded:**
+The key indicators of a successful inference run:
 
-```bash { command_line="root@frdm-imx93" output_lines="2" }
-cat /sys/class/remoteproc/remoteproc0/firmware
-executorch_runner_cm33.elf
-```
+| Output | Meaning |
+|--------|---------|
+| `NPU config match` | The compiled model's NPU configuration matches the hardware |
+| `NPU arch match` | The compiled model's architecture version matches the hardware |
+| `cmd_end_reached 0x1` | The NPU executed all 116 operators in the command stream |
+| `bus_status_error 0x0` | No AXI bus errors during NPU memory access |
+| `numel=1000` | MobileNet V2 output: 1000 ImageNet classification scores (one per class) |
 
-3. **Model is in DDR memory** (non-zero bytes at 0x80100000)
+The model runs with uninitialized input data, so the output scores don't correspond to a real image classification. To get meaningful predictions, feed a real 224x224 RGB image as input.
 
-4. **UART shows inference output** with timing information
+{{% notice Note %}}
+If the trace buffer shows `Program identifier '' != expected 'ET12'`, the `.pte` model wasn't loaded into DDR at `0xC0000000`. Reload the model using the steps above.
+{{% /notice %}}
 
-## Troubleshooting
+## Re-run inference
 
-**RemoteProc fails to load firmware:**
-
-Check file permissions:
+The `executor_runner` runs inference once when the firmware starts. To re-run, reload the firmware:
 
 ```bash { command_line="root@frdm-imx93" }
-chmod 644 /lib/firmware/executorch_runner_cm33.elf
+echo stop > /sys/class/remoteproc/remoteproc0/state
+sleep 2
+echo start > /sys/class/remoteproc/remoteproc0/state
+sleep 15
+cat /sys/kernel/debug/remoteproc/remoteproc0/trace0
 ```
 
-Verify the file exists:
+The trace buffer resets at the start of each firmware load, so you'll always see fresh output.
 
-```bash { command_line="root@frdm-imx93" }
-ls -la /lib/firmware/executorch_runner_cm33.elf
-```
+## What you've accomplished and what's next
 
-**Model not found error:**
+In this section:
 
-Verify the model was written to memory:
+- You used Linux RemoteProc to load and boot a custom Cortex-M33 firmware image
+- You validated an end-to-end ExecuTorch inference run that delegates computation to the Ethos-U65 NPU
 
-```bash { command_line="root@frdm-imx93" }
-xxd -l 256 -s 0x80100000 /dev/mem | head
-```
-
-If all zeros, re-run the `dd` command to write the model.
-
-**No UART output:**
-
-Check the serial connection:
-- Baud rate: 115200
-- Data bits: 8
-- Parity: None
-- Stop bits: 1
-
-Try a different USB port or serial terminal program.
-
-**Firmware crashes or hangs:**
-
-Check kernel logs for errors:
-
-```bash { command_line="root@frdm-imx93" }
-dmesg | grep -i error | tail
-```
-
-This might indicate memory configuration issues. Reduce the memory pool sizes in `CMakeLists.txt` and rebuild.
+Next, you can iterate on `.pte` models (and measure how operator coverage and model shape affect runtime behavior) while keeping the firmware bring-up path stable.
 
 ## Update the firmware
 
 To deploy a new version of the firmware:
 
 1. Build the updated firmware on your development machine
-2. Copy to the board: 
+2. Copy to the board:
 
-{{< tabpane code=false >}}
-{{< tab header="Windows/Linux" >}}
 ```bash
 scp debug/executorch_runner_cm33.elf root@<board-ip>:/lib/firmware/
 ```
-{{< /tab >}}
-{{< tab header="macOS" >}}
-```bash
-scp debug/executorch_runner_cm33.elf root@<board-ip>:/lib/firmware/
-```
-{{< /tab >}}
-{{< /tabpane >}}
 
-3. Restart RemoteProc:
+3. Re-run inference on the board:
 
 ```bash { command_line="root@frdm-imx93" }
 echo stop > /sys/class/remoteproc/remoteproc0/state
+sleep 2
 echo start > /sys/class/remoteproc/remoteproc0/state
+sleep 15
+cat /sys/kernel/debug/remoteproc/remoteproc0/trace0
 ```
 
-4. Monitor UART output to verify the new firmware is running
+{{% notice Troubleshooting %}}
+**RemoteProc fails to load firmware:**
+
+Check that the file exists and has correct permissions:
+
+```bash { command_line="root@frdm-imx93" }
+ls -la /lib/firmware/executorch_runner_cm33.elf
+chmod 644 /lib/firmware/executorch_runner_cm33.elf
+```
+
+**`Program identifier '' != expected 'ET12'`:**
+
+The `.pte` model is not present at DDR address `0xC0000000`. Reload the model using the `/dev/mem` method or via U-Boot.
+
+**Firmware hangs (no trace output):**
+
+Verify the Ethos-U kernel driver is loaded:
+
+```bash { command_line="root@frdm-imx93" }
+ls /dev/ethosu*
+dmesg | grep ethosu
+```
+
+If `/dev/ethosu0` does not exist, the NPU is not powered and the firmware cannot initialize it.
+
+**Memory allocation failed for planned buffer:**
+
+This occurs when a large model's activation tensors exceed the DTCM method allocator. The firmware automatically uses DDR for models that need more than 12KB of planned buffers. If you see this error, verify the `ethosu_region@A8000000` (128MB) is reserved in the device tree.
+
+**BUS FAULT or vtable corruption:**
+
+The SDK linker script patch has not been applied. Run the patch script and rebuild:
+
+```bash
+./patches/apply_patches.sh
+cmake --preset debug
+cmake --build debug
+```
+
+**Firmware crashes after NPU init:**
+
+Check kernel logs:
+
+```bash { command_line="root@frdm-imx93" }
+dmesg | grep -i error | tail
+```
+
+This might indicate memory configuration issues. Verify that both DDR regions (`0xC0000000`--`0xC03FFFFF` and `0xA8000000`--`0xAFFFFFFF`) are reserved in the device tree.
+{{% /notice %}}
+
+## Summary
+
+You've completed the full bring-up flow for ExecuTorch on the NXP FRDM i.MX 93. Along the way, you set up a reproducible build environment, compiled two `.pte` model artifacts targeting the Ethos-U65, built and patched the Cortex-M33 `executor_runner` firmware, and deployed it through Linux RemoteProc to confirm a successful end-to-end inference run. The remoteproc trace buffer confirmed zero bus errors and full NPU operator coverage, establishing a stable foundation for iterating on models and firmware independently.
