@@ -251,7 +251,7 @@ When adding or revising `description` fields:
 Example recap pattern for Learning Paths:
 
 ```md
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 In this section:
 - Briefly summarize what the user has learned or completed
