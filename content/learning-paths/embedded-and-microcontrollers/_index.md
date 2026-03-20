@@ -9,19 +9,19 @@ key_ip:
 - Ethos-U
 maintopic: true
 operatingsystems_filter:
-- Android: 2
-- Baremetal: 31
-- Linux: 38
-- macOS: 8
+- Android: 1
+- Baremetal: 30
+- Linux: 39
+- macOS: 11
 - RTOS: 11
-- Windows: 6
+- Windows: 5
 subjects_filter:
 - CI-CD: 7
 - Containers and Virtualization: 6
 - Embedded Linux: 6
 - Libraries: 3
-- ML: 19
-- Performance and Architecture: 23
+- ML: 22
+- Performance and Architecture: 20
 - RTOS Fundamentals: 5
 - Security: 2
 - Virtual Hardware: 2
@@ -32,46 +32,49 @@ tools_software_languages_filter:
 - Arduino: 2
 - Arm Compiler for Embedded: 8
 - Arm Compiler for Linux: 1
-- Arm Compute Library: 2
+- Arm Compute Library: 3
 - Arm Development Studio: 8
 - Arm Fast Models: 4
 - Arm Performance Studio: 1
 - Arm Streamline: 1
 - Arm Virtual Hardware: 16
 - Assembly: 1
-- AWS IoT Greengrass: 1
+- AWS IoT Greengrass: 2
 - Azure: 1
 - balenaCloud: 1
 - BalenaOS: 1
-- C: 5
+- Baremetal: 1
+- Bash: 1
+- C: 6
 - ChatGPT: 1
 - Clang: 1
 - CMSIS: 4
 - CMSIS-DSP: 1
-- CMSIS-Toolbox: 3
+- CMSIS-Toolbox: 4
 - CNN: 1
 - Computer Vision: 1
+- ConnMan: 1
 - Containerd: 1
 - CPP: 1
 - DetectNet: 1
-- Docker: 11
+- Docker: 12
 - DSTREAM: 2
-- Edge AI: 3
+- Edge AI: 2
 - Edge Impulse: 2
-- ExecuTorch: 5
+- ExecuTorch: 6
 - FastAPI: 1
 - FPGA: 1
 - Fusion 360: 1
-- FVP: 11
-- GCC: 9
-- GenAI: 1
+- FVP: 10
+- GCC: 10
 - Generative AI: 2
 - GitHub: 4
 - GitLab: 2
 - gpiozero: 1
+- GStreamer: 1
 - Himax SDK: 1
 - Hugging Face: 3
-- IP Explorer: 4
+- IP Explorer: 2
 - Jupyter Notebook: 1
 - K3s: 1
 - Keil MDK: 7
@@ -80,7 +83,7 @@ tools_software_languages_filter:
 - Kubernetes: 1
 - lgpio: 1
 - Linux kernel: 1
-- LLM: 3
+- LLM: 2
 - Matter: 1
 - MCP: 1
 - MPS3: 1
@@ -88,21 +91,24 @@ tools_software_languages_filter:
 - Neon: 1
 - NumPy: 1
 - Ollama: 1
+- OpenSSH: 1
 - Paddle: 1
 - Performance analysis: 1
+- picocom: 1
 - Porcupine: 1
-- Python: 10
-- PyTorch: 4
+- Python: 12
+- PyTorch: 5
 - QEMU: 1
 - Raspberry Pi: 9
 - Remote.It: 1
 - Runbook: 4
 - STM32: 2
+- strands-agents: 1
 - systemd: 1
 - TensorFlow: 3
 - TensorRT: 1
 - tinyML: 2
-- Trusted Firmware: 3
+- Trusted Firmware: 2
 - TrustZone: 2
 - TVMC: 1
 - vcpkg: 1

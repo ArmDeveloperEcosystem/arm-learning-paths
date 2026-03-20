@@ -298,19 +298,23 @@ def addCloudServiceProvidersToStatusDict():
     if 'cloud_service_providers' in learning_path_metadata: # since not all LPs have this filtering mechanism, need this check to avoid errors
         cloud_service_providers = learning_path_metadata['cloud_service_providers']
         if cloud_service_providers is not None:
-            if cloud_service_providers not in status_dic['cloud_service_providers'][dir_main_category]:
-                # create subject key in dic
-                status_dic['cloud_service_providers'][dir_main_category][cloud_service_providers] = {}
-                # check if in allow list
-                if cloud_service_providers in dic_allow_list["cloud_service_providers"]:
-                    status_dic['cloud_service_providers'][dir_main_category][cloud_service_providers]['allowed']          = True              
+            # Normalize to list to handle both single string and YAML list formats
+            if isinstance(cloud_service_providers, str):
+                cloud_service_providers = [cloud_service_providers]
+            for csp in cloud_service_providers:
+                if csp not in status_dic['cloud_service_providers'][dir_main_category]:
+                    # create subject key in dic
+                    status_dic['cloud_service_providers'][dir_main_category][csp] = {}
+                    # check if in allow list
+                    if csp in dic_allow_list["cloud_service_providers"]:
+                        status_dic['cloud_service_providers'][dir_main_category][csp]['allowed']          = True              
+                    else:
+                        status_dic['cloud_service_providers'][dir_main_category][csp]['allowed']          = False              
+                    status_dic['cloud_service_providers'][dir_main_category][csp]['count']                = 1                # make count one
+                    status_dic['cloud_service_providers'][dir_main_category][csp]['learning-path-titles'] = [learning_path_metadata['title']]   # create list with title
                 else:
-                    status_dic['cloud_service_providers'][dir_main_category][cloud_service_providers]['allowed']          = False              
-                status_dic['cloud_service_providers'][dir_main_category][cloud_service_providers]['count']                = 1                # make count one
-                status_dic['cloud_service_providers'][dir_main_category][cloud_service_providers]['learning-path-titles'] = [learning_path_metadata['title']]   # create list with title
-            else:
-                status_dic['cloud_service_providers'][dir_main_category][cloud_service_providers]['count']               += 1                # increase count by one
-                status_dic['cloud_service_providers'][dir_main_category][cloud_service_providers]['learning-path-titles'].append(learning_path_metadata['title'])   # add title to list
+                    status_dic['cloud_service_providers'][dir_main_category][csp]['count']               += 1                # increase count by one
+                    status_dic['cloud_service_providers'][dir_main_category][csp]['learning-path-titles'].append(learning_path_metadata['title'])   # add title to list
 
     return status_dic
 
