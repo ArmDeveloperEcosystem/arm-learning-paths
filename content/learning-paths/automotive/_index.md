@@ -34,6 +34,7 @@ tools_software_languages_filter:
 - Raspberry Pi: 1
 - ROS 2: 3
 - Rust: 1
+- SME2: 1
 - Tinkerblox: 1
 - topdown-tool: 1
 - Zenoh: 1

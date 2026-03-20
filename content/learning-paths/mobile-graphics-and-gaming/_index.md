@@ -9,14 +9,14 @@ key_ip:
 - Mali
 maintopic: true
 operatingsystems_filter:
-- Android: 35
-- Linux: 36
-- macOS: 16
-- Windows: 15
+- Android: 40
+- Linux: 40
+- macOS: 19
+- Windows: 16
 subjects_filter:
 - Gaming: 6
 - Graphics: 6
-- ML: 18
+- ML: 23
 - Performance and Architecture: 36
 subtitle: Optimize Android apps and build faster games using cutting-edge Arm tech.
 title: Mobile, Graphics, and Gaming
@@ -35,13 +35,13 @@ tools_software_languages_filter:
 - Bazel: 1
 - C: 5
 - C#: 3
-- C++: 1
+- C++: 3
 - CCA: 1
 - Clang: 12
-- CMake: 2
+- CMake: 3
 - CPP: 15
 - Docker: 1
-- ExecuTorch: 4
+- ExecuTorch: 7
 - Frame Advisor: 1
 - GCC: 12
 - Generative AI: 2
@@ -52,20 +52,21 @@ tools_software_languages_filter:
 - Hugging Face: 6
 - Java: 7
 - Jupyter Notebook: 1
-- KleidiAI: 2
+- KleidiAI: 3
 - Kotlin: 9
 - LiteRT: 1
-- llama.cpp: 1
+- llama.cpp: 3
 - LLM: 1
 - LLVM: 1
 - llvm-mca: 1
 - MediaPipe: 2
 - MTE: 2
 - Neon: 1
+- NX: 4
 - ONNX: 1
 - ONNX Runtime: 2
 - OpenGL ES: 1
-- Python: 9
+- Python: 11
 - PyTorch: 3
 - QEMU: 1
 - RenderDoc: 1
@@ -73,14 +74,17 @@ tools_software_languages_filter:
 - Runbook: 14
 - Rust: 2
 - SDDiskTool: 1
+- SME2: 9
 - SVE2: 1
 - TensorFlow: 1
+- TorchAO: 1
+- TOSA: 1
 - Trusted Firmware: 1
 - Unity: 6
 - Unreal Engine: 4
 - Visual Studio: 1
 - Visual Studio Code: 1
-- Vulkan: 5
+- Vulkan: 6
 - Vulkan SDK: 1
 - XNNPACK: 2
 weight: 3
