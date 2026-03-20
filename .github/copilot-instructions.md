@@ -4,6 +4,16 @@ This project is a collection of "Learning Paths" (long-form tutorials) and "inst
 
 Assume the audience is made up of Arm software developers. Bias all information toward Arm platforms. For Linux, assume systems are aarch64 architecture and not x86. Readers also use macOS and Windows on Arm systems, and assume Arm architecture where relevant.
 
+## Highest priority rules
+
+- One Learning Path must own one clear developer task
+- Install guides are for installation and verification only
+- Every Learning Path `_index.md` must include a `description` field
+- Use task-led titles, introductions, and metadata
+- Do not use placeholder alt text such as `alt-txt`
+- Prefer Arm-native solutions and Arm-specific framing
+- Avoid hype, duplication, and vague summaries
+
 ## Project structure
 
 The key directories are:
@@ -42,20 +52,21 @@ The `/content` directory is the primary workspace where contributors add new Lea
 
 Read the files in the directory `content/learning-paths/cross-platform/_example-learning-path` for information about how Learning Path content should be created. Also see the guidelines below.
 
-- Learning Paths: use for end-to-end tasks (prepare → configure → use → validate). Must include `_index.md` and `_next-steps.md`.
-- Install guides: use for installation + verification only. Do not include workflow content or benchmarks.
+- Learning Paths: use for end-to-end tasks (prepare → configure → use → validate). Must include `_index.md` and `_next-steps.md`
+- Install guides: use for installation + verification only. Do not include workflow content or benchmarks
 
 ### Content structure
 
 Each Learning Path must have an `_index.md` file and a `_next-steps.md` file. The `_index.md` file contains the main content of the Learning Path. The `_next-steps.md` file contains links to related content and is included at the end of the Learning Path.
 
-Additional resources and 'next steps' content should be placed in the `further_reading` section of `_index.md`, NOT in `_next-steps.md`. The `_next-steps.md` file should remain minimal and unmodified as indicated by "FIXED, DO NOT MODIFY" comments in the template.
+Additional resources and `next steps` content should be placed in the `further_reading` section of `_index.md`, not in `_next-steps.md`. The `_next-steps.md` file should remain minimal and unmodified as indicated by `FIXED, DO NOT MODIFY` comments in the template.
 
-The `_index.md` file should contain the following front matter and content sections:
+The `_index.md` file should contain the following front matter and content sections.
 
-Front Matter (YAML format):
+### Front matter (YAML format)
 
 - `title`: Imperative heading following the [verb] + [technology] + [outcome] format
+- `description`: One-sentence metadata summary used for search snippets and page previews. Describe the task, main technology or platform, and expected outcome in plain language
 - `weight`: Numerical ordering for display sequence, weight is 1 for `_index.md` and each page is ordered by weight, no markdown files should have the same weight in a directory
 - `layout`: Template type (usually "learningpathall")
 - `minutes_to_complete`: Realistic time estimate for completion
@@ -71,7 +82,7 @@ Front Matter (YAML format):
 
 Install guides focus on installing and verifying one tool on Arm platforms. They do not teach workflows or applied usage.
 
-### Front matter requirements
+#### Front matter requirements
 
 Install guides must include:
 - `title`
@@ -118,7 +129,7 @@ Optional:
 
 ### Scope boundaries
 
-Install guides must NOT include:
+Install guides must not include:
 - End-to-end workflows
 - Performance benchmarking
 - Deep architectural explanation
@@ -132,7 +143,7 @@ Limit `further_reading` resources to four to six essential links. Prioritize:
 
 - Direct relevance to the topic
 - Arm-specific Learning Paths over generic external resources
-- Foundation knowledge for target audience
+- Foundation knowledge for the target audience
 - Required tools (install guides)
 - Logical progression from basic to advanced
 
@@ -145,64 +156,102 @@ All Learning Paths should generally include:
 - Prerequisites section with explicit requirements and links
 - Learning objectives: three to four bulleted, measurable outcomes with action verbs
 - Step-by-step sections with logical progression
-- Clear next steps/conclusion
+- Clear next steps or conclusion
 
 For title formatting:
 
-- MUST use imperative voice ("Deploy", "Configure", "Build", "Create")
-- MUST include SEO keywords (technology names, tools)
-- Examples: "Deploy applications on Arm servers", "Configure Arm processors for optimal performance"
+- Must use imperative voice (`Deploy`, `Configure`, `Build`, `Create`)
+- Must include SEO keywords (technology names, tools)
+- Examples: `Deploy applications on Arm servers`, `Configure Arm processors for optimal performance`
 
 The term "Learning Path" should always be capitalized.
 
-### Writing style
+## Metadata descriptions
 
-Voice and Tone:
+### Learning Path metadata description requirements
 
-- Second person ("you", "your") - NEVER first person ("I", "we")
-- Active voice - AVOID passive constructions
+Every Learning Path `_index.md` must include a `description` field.
+
+- Write one sentence
+- Describe the task, the main technology or platform, and the expected outcome
+- Keep it concise, developer-focused, and suitable for use as a search snippet
+- Use a task-led structure such as: **Verb + task + tool/platform + outcome**
+- Do not repeat the title verbatim
+- Do not use vague summaries or marketing language
+- A slightly richer one-sentence summary is acceptable when it helps clarify the workflow or outcome
+
+Good example:
+
+```yaml
+description: Learn how to automate x86-to-Arm application migration using the Arm MCP Server, with compatibility checks and Docker-based validation on Arm cloud platforms.
+```
+
+Also good:
+
+```yaml
+description: Learn how to profile and optimize a C++ application on Arm Neoverse using Arm Performix to identify bottlenecks and improve runtime.
+```
+
+Avoid:
+- Generic summaries that could apply to any page
+- Restating the title without adding task or outcome
+- Marketing phrases such as `powerful`, `cutting-edge`, or `game-changing`
+
+### Metadata optimization workflow
+
+When adding or revising `description` fields:
+
+- Review whether the current title and description match the page's actual task intent
+- Use metadata descriptions to clarify what the learner will do, on which platform or tool, and with what outcome
+- Treat the description as a search snippet, not a generic summary
+
+## Writing style
+
+### Voice and tone
+
+- Second person (`you`, `your`) — never first person (`I`, `we`)
+- Active voice — avoid passive constructions
 - Present tense for descriptions
 - Imperative mood for commands
 - Confident and developer-friendly tone
 - Encouraging language for complex tasks
 - Use inclusive language:
-  - Use "primary/subordinate" instead of "master/slave" terminology
-  - Don't use gendered examples or assumptions
+  - Use `primary/subordinate` instead of `master/slave`
+  - Do not use gendered examples or assumptions
   - Be mindful of cultural references that might not translate globally
   - Focus on clear, accessible language for all developers
 
 ### Sentence structure and clarity
 
-- Average 15-20 words per sentence
-- Split complex sentences for scalability
-- Plain English - avoid jargon overload
-- US spellings required (organize/optimize/realize, not organise/optimise/realise)
-- "Arm" capitalization required (Arm processors/Neoverse, never ARM or arm; exceptions: "arm64" and "aarch64" are permitted in code, commands, and outputs)
+- Average 15–20 words per sentence
+- Split complex sentences for clarity
+- Use plain English and avoid jargon overload
+- Use US spellings (`organize`, `optimize`, `realize`)
+- Use `Arm` capitalization in prose (`Arm processors`, `Arm servers`, `Neoverse`)
+- `arm64` and `aarch64` are permitted in code, commands, and outputs
 - Define acronyms on first use
-- Parallel structure in all lists
+- Use parallel structure in all lists
 
 ### Readability and section flow
 
 - Flag any section over 700 words and suggest natural split points
 - Warn if more than 300 words appear between code examples
 - Identify paragraphs with sentences averaging over 20 words
-- Note sections introducing more than 2 new concepts
+- Note sections introducing more than two new concepts
 - Flag pages over 3500 words total
 - Note sections that might benefit from encouragement or progress markers
 - Identify missing celebration of progress or milestones
 - Recap what learners have accomplished at section ends
-- Provide "check your understanding" moments that aren't intimidating
-- Too much explanation is exhausting, too little is confusing
-- Use visual breaks to prevent walls of text - code blocks count as visual breaks
-- Walls of text cause people to bounce from the page
-- If you're explaining 3+ things in one section, split it into separate sections
-- Each code block should be preceded by one to three sentences explaining what it does.
-- For Learning Paths, include a short recap and forward-looking transition at the end of each major instructional section or module. 
+- Provide check-your-understanding moments that are not intimidating
+- Use visual breaks to prevent walls of text. Code blocks count as visual breaks
+- If you explain three or more things in one section, split it into separate sections
+- Each code block should be preceded by one to three sentences explaining what it does
+- For Learning Paths, include a short recap and forward-looking transition at the end of each major instructional section or module
 
 Example recap pattern for Learning Paths:
 
 ```md
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 In this section:
 - Briefly summarize what the user has learned or completed
@@ -210,18 +259,57 @@ In this section:
 
 Keep this concise and encouraging. Do not repeat earlier content verbatim.
 ```
+
 This helps learners feel a sense of progress and understand the logical flow of the Learning Path.
 
 ### Word choice and style
 
-- Use these preferred terms and phrases for consistency:
-  - Numbers and units: Spell out numbers one through five (one, two, three, four, five), after this use numerals (6, 7, 8...). Use proper spacing for units: "1 GB", "23 MB/day" (not "1GB", "23MB/day"). Use "K" for thousands: "64K" (not "64k"). Use abbreviations for data rates: "Gbps" (not "Gb per second").
-  - Common phrases: "To [action]" (not "Follow the steps below to [action]"), "for example" (not "e.g."), "that is" (not "i.e."), "because" (not "since"), "also" (not "in addition"), "to" (not "in order to"), "see" (not "refer to"), "use" (not "utilize" or "leverage"), "need" (not "require"), "can" or "might" (not "may"), "set up" as verb, "setup" as noun, "therefore" (not "ergo"), "namely" (not "viz."), "avoid" (not "try not to").
-  - Avoid condescending language: Don't use "simply", "just", "obviously", "clearly" - what's simple to you might not be to the learner.
-  - Acknowledge when something can be tricky: Use phrases like "this step can be confusing at first" to validate learner experience.
-  - Normalize errors: Use phrases like "if you see this error, here's how to fix it" to reassure learners that errors are part of the learning process.
-  - User interface terms: "select" or "tap" (not "click" for mobile/touch interfaces), "keyboard shortcut" (not "key combination"), "Ctrl key" (capitalized), "double-tap" (not "double-click" for touch interfaces).
-  - Contractions and simplification: Use contractions such as: "don't", "isn't", "it's", "that's", "you're", "you'll". Remove unnecessary qualifiers: Remove "quite", "very", "massive" → "significant". "an LLM" (not "a LLM"). "easy-to-use" when used as adjective. "fixed-width" (not "fixed-length"). "read-to-write ratio" (not "read to write ratio").
+Use these preferred terms and phrases for consistency:
+
+- Numbers and units:
+  - Spell out numbers one through five. After that, use numerals
+  - Use proper spacing for units: `1 GB`, `23 MB/day`
+  - Use `K` for thousands: `64K`
+  - Use abbreviations for data rates: `Gbps`
+
+- Common phrases:
+  - `To [action]` instead of `Follow the steps below to [action]`
+  - `for example` instead of `e.g.`
+  - `that is` instead of `i.e.`
+  - `because` instead of `since`
+  - `also` instead of `in addition`
+  - `to` instead of `in order to`
+  - `see` instead of `refer to`
+  - `use` instead of `utilize` or `leverage`
+  - `need` instead of `require`
+  - `can` or `might` instead of `may`
+  - `set up` as a verb, `setup` as a noun
+  - `therefore` instead of `ergo`
+  - `namely` instead of `viz.`
+  - `avoid` instead of `try not to`
+
+- Avoid condescending language:
+  - Do not use `simply`, `just`, `obviously`, or `clearly`
+
+- Acknowledge difficulty naturally:
+  - Use phrases like `this step can be confusing at first`
+
+- Normalize errors:
+  - Use phrases like `if you see this error, here's how to fix it`
+
+- User interface terms:
+  - `select` or `tap` instead of `click` for touch interfaces
+  - `keyboard shortcut` instead of `key combination`
+  - `Ctrl key` capitalized
+  - `double-tap` instead of `double-click` for touch interfaces
+
+- Contractions and simplification:
+  - Use contractions such as `don't`, `isn't`, `it's`, `that's`, `you're`, `you'll`
+  - Remove unnecessary qualifiers such as `quite`, `very`, or `massive`
+  - Use `an LLM`, not `a LLM`
+  - Use `easy-to-use` as an adjective
+  - Use `fixed-width`, not `fixed-length`
+  - Use `read-to-write ratio`, not `read to write ratio`
 
 ## Content structure and consistency
 
@@ -230,22 +318,22 @@ This helps learners feel a sense of progress and understand the logical flow of 
 - Use the same technical terms consistently throughout all sections
 - Apply the word choice and style guidelines uniformly across all files
 - Maintain consistent capitalization of product names, technologies, and concepts
-- Use the same abbreviations and acronyms throughout (define once, use consistently)
+- Use the same abbreviations and acronyms throughout
 - Maintain the same voice and tone across all sections
-- Ensure consistent use of second person ("you", "your") throughout
+- Ensure consistent use of second person throughout
 - Apply the same level of formality and technical depth across sections
-- Keep instructional style consistent (imperative mood for actions)
+- Keep instructional style consistent
 - Follow consistent heading hierarchy throughout the Learning Path
 - Use parallel structure in similar sections across different files
 - Maintain consistent section organization and flow
 - Apply uniform formatting for code blocks, lists, and callouts
-- Ensure appropriate skill level consistency (Introductory or Advanced)
+- Ensure appropriate skill level consistency
 - Maintain consistent technical detail appropriate for the target audience
 - Balance complexity appropriately across all sections
 - Provide consistent prerequisite assumptions throughout
 - Flag inconsistent terminology usage across sections
 - Identify missing error handling or troubleshooting guidance
-- Suggest where visual aids (diagrams, screenshots) would improve understanding
+- Suggest where visual aids would improve understanding
 - Recommend splitting overly complex sections
 - Verify that code examples follow established patterns in the repository
 
@@ -253,75 +341,117 @@ This helps learners feel a sense of progress and understand the logical flow of 
 
 ### Heading guidelines
 
-- Use sentence case for all headings (first word capitalized, rest lowercase except proper nouns)
+- Use sentence case for all headings
 - Heading types:
-  - Conceptual headings: When explaining technology/motivation ("What is containerization?")
-  - Imperative headings: When user takes action ("Configure the database")
-  - Interrogative headings: For FAQ content ("How does Arm differ from x86?")
+  - Conceptual headings: when explaining technology or motivation
+  - Imperative headings: when the user takes action
+  - Interrogative headings: for FAQ content
+
 - Hierarchy:
-  - H1: Page title (imperative + technology + outcome)
+  - H1: Page title
   - H2: Major workflow steps or conceptual sections
   - H3: Sub-procedures or detailed explanations
   - H4: Specific technical details or troubleshooting
 
+### Heading hierarchy and section openings
+
+- Check heading hierarchy across all files before finalizing content
+- Ensure headings follow a logical structure with no skipped levels unless the template requires it
+- Each markdown file should begin with a section heading in the body content
+- Do not leave a file starting with body text, an image, or a code block without a heading
+- Use sentence case for all headings and subheadings
+- Capitalize only the first word and proper nouns in headings
+- Keep heading wording consistent across related files in the same Learning Path
+- Prefer headings that clearly signal the user task or concept in that section
+
+Correct examples:
+- `## Set up the environment`
+- `## Run the benchmark`
+- `### Check the output`
+- `## What you've accomplished and what's next`
+
+Avoid:
+- `## Set Up The Environment`
+- `## RUN THE BENCHMARK`
+- starting a file with plain paragraph text and no heading
+
 ### Code samples and formatting
 
-- ALWAYS provide explanation before code blocks
-- Format: [What it does] → [Code] → [Expected outcome] → [Key parameters]
-- Use markdown tags for programming languages like bash, python, yaml, json, etc.
-- Use console or bash for general commands. Try to use the same one throughout a Learning Path.
-- Use the output tag to show expected command output.
-- Output descriptions: Use "The output is similar to:" or "The expected output is:" (not "The output will look like:"). Use "builds" (not "will build") and "gives" (not "would give") for present tense descriptions.
-- Formatting standards: **Bold text** for UI elements (buttons, menu items, field names), *Italic text* for emphasis and new terms, `Code formatting` for file names, commands, code elements.
-- Use shortcodes for common pitfalls, warnings, important notes.
+- Always provide explanation before code blocks
+- Format: `[What it does] → [Code] → [Expected outcome] → [Key parameters]`
+- Use markdown tags for languages like `bash`, `python`, `yaml`, `json`
+- Use `console` or `bash` for general commands. Try to use the same one throughout a Learning Path
+- Use the `output` tag to show expected command output
+- Output descriptions:
+  - Use `The output is similar to:` or `The expected output is:`
+  - Use present tense descriptions such as `builds` and `gives`
+- Formatting standards:
+  - **Bold** for UI elements
+  - *Italics* for emphasis and new terms
+  - `Code formatting` for file names, commands, and code elements
+- Use shortcodes for common pitfalls, warnings, and important notes
 
 ### Code fence integrity
 
-- Every fenced code block opened with triple backticks (```) MUST be explicitly closed with matching triple backticks before any non-code content resumes
+- Every fenced code block opened with triple backticks must be explicitly closed with matching triple backticks before any non-code content resumes
 - Never generate unterminated or partial code fences
 - Do not rely on implicit closure, indentation, or surrounding formatting to end a code block
 
 ## Arm naming and architecture terms
 
-- Use Arm for the brand in prose (for example, "Arm processors", "Arm servers").
-- Use arm64 or aarch64 for the CPU architecture; these are acceptable and interchangeable labels. Prefer whichever term a tool, package, or OS uses natively.
-- Always use "Arm" (not "ARM") in all contexts except when referring to specific technical terms that require the original casing.
-- ARM64 is used by Windows on Arm and Microsoft documentation, so it is acceptable to use ARM64 when specifically referring to Windows on Arm.
-- In code blocks, CLI flags, package names, file paths, and outputs, keep the exact casing used by the tool (for example, --arch arm64, uname -m → aarch64).
+- Use `Arm` for the brand in prose
+- Use `arm64` or `aarch64` for the CPU architecture. Prefer whichever term a tool, package, or OS uses natively
+- Always use `Arm` rather than `ARM` in prose unless a technical term requires the original casing
+- `ARM64` is acceptable when specifically referring to Windows on Arm or Microsoft documentation
+- In code blocks, CLI flags, package names, file paths, and outputs, keep the exact casing used by the tool
 
 ## Product name emphasis
 
-- Product names and technical technologies (for example, LiteRT, XNNPACK, KleidiAI, SME2) should appear in regular text.
-- Avoid using italics or bold to emphasize product or technology names unless they are part of a heading or a UI label.
+- Product names and technologies such as LiteRT, XNNPACK, KleidiAI, and SME2 should appear in regular text
+- Avoid using italics or bold to emphasize product or technology names unless they are part of a heading or a UI label
 
 ## Hyperlink guidelines
 
-- Use the full path format for internal links: `/learning-paths/category/path-name/` (e.g., `/learning-paths/cross-platform/docker/`). Do NOT use relative paths like `../path-name/`.
-- Use the full URL for external links that are not on learn.arm.com, these open in a new tab.
+- Use the full path format for internal links: `/learning-paths/category/path-name/`
+- Do not use relative paths like `../path-name/`
+- Use the full URL for external links that are not on `learn.arm.com`
 - When creating Learning Path content:
   - Verify internal links exist before adding them
   - Use semantic search or website browsing to confirm Learning Path availability
   - Prefer verified external authoritative sources over speculative internal links
   - Test link formats against existing Learning Path examples
   - Never assume Learning Paths exist without verification
-- Some links are useful in content, but too many links can be distracting and readers will leave the platform following them. Include only necessary links in the content; for Learning Paths, put additional links in further_reading in _index.md (not _next-steps.md)
+- Include only necessary links in content. For Learning Paths, put additional links in `further_reading` in `_index.md`, not `_next-steps.md`
 
 ## Avoid looking like AI-generated content
 
-- Warning signs of over-bulleting: More than 3 consecutive sections using bullet lists, bullet points that could be combined into narrative paragraphs, lists where items don't have parallel structure, bullet points that are actually full sentences better suited for paragraphs.
-- Use flowing narrative instead of excessive bullets.
-- Use natural writing patterns: Vary sentence length, use transitional phrases, include contextual explanations, add relevant examples, connect ideas logically.
-- Use conversational elements: Instead of "Execute the following command:", use "Now that you've configured the environment, run the following command to start the service:". Instead of "This provides benefits:", use "You'll notice several advantages with this approach, particularly when working with...".
+- Warning signs of over-bulleting:
+  - More than three consecutive sections using bullet lists
+  - Bullet points that could be combined into narrative paragraphs
+  - Lists where items do not have parallel structure
+  - Bullet points that are actually full sentences better suited for paragraphs
+
+- Use flowing narrative instead of excessive bullets
+- Use natural writing patterns:
+  - Vary sentence length
+  - Use transitional phrases
+  - Include contextual explanations
+  - Add relevant examples
+  - Connect ideas logically
+
+- Use conversational elements naturally:
+  - Instead of `Execute the following command:`, use `Now that you've configured the environment, run the following command to start the service:`
+  - Instead of `This provides benefits:`, use `You'll notice several advantages with this approach, particularly when working with...`
 
 ### Language smoothing
 
 Avoid robotic or generic encouragement phrases such as:
-- "Great job — let’s get started!"
-- "Great job — your environment is ready!"
+- `Great job — let’s get started!`
+- `Great job — your environment is ready!`
 
 Use calm, natural transitions that focus on what happens next.
 
-Also avoid multiple consecutive sentences starting with "This" (for example, "This ensures...", "This creates...", "This provides..."). Vary sentence structure to maintain natural flow.
+Also avoid multiple consecutive sentences starting with `This`. Vary sentence structure to maintain natural flow.
 
 ## AI-specific guidelines for content creation and editing
 
@@ -330,46 +460,121 @@ Also avoid multiple consecutive sentences starting with "This" (for example, "Th
 - Consider the learner's likely environment (development vs. production, local vs. cloud)
 - Recognize when content assumes x86 defaults and suggest Arm alternatives
 - Flag when third-party tools may have limited Arm support
-- Suggest Arm-native alternatives when available (e.g., Arm compilers, optimized libraries)
+- Suggest Arm-native alternatives when available
 
 ### Technical depth consistency
 
 - Maintain appropriate complexity level throughout the Learning Path
 - Avoid oversimplifying for Advanced skill level content
-- Don't assume prior knowledge beyond stated prerequisites
+- Do not assume prior knowledge beyond stated prerequisites
 - Balance theoretical explanation with practical implementation
 
 ### Platform-specific considerations
 
 - Default to Arm-optimized solutions and configurations
-- Mention x86 alternatives only when Arm solutions don't exist
+- Mention x86 alternatives only when Arm solutions do not exist
 - Consider performance implications specific to Arm architectures
 - Address common Arm migration challenges when relevant
-
-### Quality assurance
-
-- Flag inconsistent terminology usage across sections
-- Identify missing error handling or troubleshooting guidance
-- Suggest where visual aids (diagrams, screenshots) would improve understanding
-- Recommend splitting overly complex sections
-- Verify that code examples follow established patterns in the repository
 
 ### Accessibility and inclusivity
 
 - Ensure content is screen reader compatible
 - Provide descriptive alt text for images and diagrams
-- Use clear, descriptive link text (not "click here" or "read more")
-- Avoid assumptions about user's physical capabilities or setup
-- When adding images or diagrams, ensure that alt text is complete and meaningful for screen reader users. Alt text should explain:
-  - The main subject and purpose of the image
-  - Any visible text labels, UI elements, or controls
-  - The environment or context (for example, dashboard, code editor, terminal, or hardware setup)
-  - The emotional tone only if it adds meaning (for example, warning or error states)
+- Use clear, descriptive link text
+- Avoid assumptions about the user's physical capabilities or setup
 
-Use the following format consistently:
-![Descriptive alt text#center](image.png "Caption")
+### Image formatting, alt text, and captions
 
-Avoid placeholders or generic phrases. Alt text should stand alone as a full description of the image.
+In this repository, the text before `#center` in an image tag is the alt text.
+
+Use this format:
+
+```md
+![Descriptive alt text#center](image.png "Optional caption")
+```
+
+Rules:
+- Do not use placeholder values such as `alt-txt`, `alt text`, or similar
+- Do not wrap alt text in extra quotation marks inside `[]`
+- Keep `#center` attached directly to the alt text with no extra space before it
+- The caption is optional and should be short, descriptive, and natural
+- Avoid outdated figure numbering such as `Figure 1:` unless the content genuinely depends on numbered cross-references
+
+Correct:
+
+```md
+![Diagram showing the WebGPU rendering flow for drawing a triangle#center](images/webgpu-draw-high-level.svg "WebGPU rendering flow for drawing a triangle")
+```
+
+Incorrect:
+
+```md
+!["Triangle using WebGPU" #center](images/webgpu-draw-high-level.svg "Figure 8: Triangle using WebGPU")
+```
+
+Incorrect:
+
+```md
+![alt-txt#center](images/webgpu-draw-high-level.svg "Figure 8: Triangle using WebGPU")
+```
+
+### Alt text requirements for tutorials
+
+Learning Paths and install guides are instructional content. Images are usually not decorative. Alt text must help the learner understand what they would otherwise miss.
+
+For every image, alt text should explain:
+- What is shown
+- What the learner should notice
+- Why it matters in the current step
+
+For screenshots:
+- Name the screen, tool, or interface shown
+- Mention the relevant UI element, tab, field, button, or output
+- Explain what the learner should look for in the screenshot
+- Connect the image to the current step or expected result
+
+For diagrams:
+- Describe the components and relationships shown
+- Explain the purpose of the diagram in the current task
+- Focus on the workflow, architecture, or sequence the learner needs to understand
+
+For terminal or output images:
+- State what command result or status is shown
+- Highlight the important confirmation, value, or error message
+- Explain why that output matters
+
+For hardware images:
+- Describe the device or setup only if it helps the learner complete the task
+- Avoid purely decorative descriptions
+
+### Alt text quality rules
+
+- Write meaningful alt text, not placeholders
+- Keep it concise but complete. One to three sentences is usually enough
+- Prefer instructional value over visual detail
+- Include visible text only when the learner needs that text
+- Do not use captions as a substitute for alt text
+- Do not encode alignment instructions inside the caption
+
+### Caption guidance
+
+- Use short, descriptive captions when needed
+- Captions should add context for all readers
+- Avoid `Figure X` numbering unless explicit image cross-references are required
+
+Preferred example:
+
+```md
+![Screenshot of the Arm Performance Studio timeline showing CPU activity spikes during Mandelbrot rendering. The Timeline tab is selected and the spike region is highlighted so the learner can identify where CPU activity increases during the run.#center](images/timeline-spike.png "Arm Performance Studio timeline showing CPU activity during Mandelbrot rendering")
+```
+
+### Image and metadata cleanup workflow
+
+- Replace all placeholder alt text such as `alt-txt` with meaningful descriptions
+- Keep the repository-specific `#center` syntax when fixing alt text
+- Do not remove valid alignment syntax during cleanup
+- Add or improve metadata descriptions systematically across content
+- For bulk cleanup, update the guidance first, then fix content by category or directory in manageable batches
 
 ### SEO and discoverability
 
@@ -394,7 +599,7 @@ Avoid placeholders or generic phrases. Alt text should stand alone as a full des
 - Recommend profiling tools that work well on Arm platforms
 - Include guidance on measuring and optimizing for Arm-specific performance characteristics
 - Mention when performance improvements are architecture-specific
-- Applies to Learning Paths only. Install guides must not include benchmarking.
+- Applies to Learning Paths only. Install guides must not include benchmarking
 
 ### AI optimization (AIO) guidance
 
@@ -406,7 +611,7 @@ Avoid placeholders or generic phrases. Alt text should stand alone as a full des
 - Include complete, self-contained examples rather than partial snippets
 - Write FAQ-style sections that directly answer common developer questions
 - Use bullet points and numbered lists for AI to easily extract key information
-- Include explicit "what you'll learn" and "prerequisites" sections for AI context
+- Include explicit `what you'll learn` and `prerequisites` sections for AI context
 - Structure troubleshooting sections with clear problem-solution pairs
 - Use standard markdown formatting that AI crawlers can parse effectively
 - Include relevant technical keywords naturally throughout the content
@@ -414,7 +619,7 @@ Avoid placeholders or generic phrases. Alt text should stand alone as a full des
 - Ensure each section can stand alone as a coherent piece of information
 - Use clear, declarative statements rather than implied or contextual references
 
-#### Editorial decision priorities
+### Editorial decision priorities
 
 When content trade-offs are required, prioritize the following in order:
 
@@ -425,23 +630,23 @@ When content trade-offs are required, prioritize the following in order:
 
 ## Learning Path purpose and agentic selection principles
 
-Learning Paths are not blog posts or reference articles. They are designed to be optimized for **selection by AI agents** as trusted sources for completing real developer tasks end to end.
+Learning Paths are not blog posts or reference articles. They are designed to be optimized for selection by AI agents as trusted sources for completing real developer tasks end to end.
 
 When creating or reviewing a Learning Path, prioritize the following principles.
 
 ### Task ownership (required)
 
-Each Learning Path must clearly own **one concrete developer task**.
+Each Learning Path must clearly own one concrete developer task.
 
-- The task should be nameable in one sentence (for example, “Migrate an x86 application to Arm Linux”)
-- The Learning Path should take the learner from *not ready* to *capable*
+- The task should be nameable in one sentence
+- The Learning Path should take the learner from not ready to capable
 - Avoid bundling unrelated tasks or loosely connected topics
 
 If the task cannot be clearly stated, flag a warning.
 
 ### Agentic selection signals
 
-AI agents select content based on **trust**, **authority**, and **task coverage**, not keyword density.
+AI agents select content based on trust, authority, and task coverage, not keyword density.
 
 **Trust**
 - Clear authorship and ownership
@@ -457,7 +662,7 @@ AI agents select content based on **trust**, **authority**, and **task coverage*
 
 **Task coverage**
 - Clear progression (prepare → configure → use → validate)
-- Explicit end state (“you are now ready to…”)
+- Explicit end state (`you are now ready to...`)
 - Link to install guides instead of embedding install steps
 - Provide guidance on what to do next
 
@@ -472,7 +677,7 @@ Never duplicate install steps inside Learning Paths.
 
 ### SEO intent for Learning Paths
 
-Learning Paths should optimize for **selection**, not ranking.
+Learning Paths should optimize for selection, not ranking.
 
 - Prefer verb-based titles: *Install*, *Verify*, *Configure*, *Analyze*, *Optimize*
 - Use procedural structure rather than narrative prose
@@ -486,11 +691,13 @@ If an AI agent were asked to complete this task, the Learning Path should be the
 For Learning Paths that demonstrate Arm-specific performance features (for example SME2, SVE2, I8MM, DotProd, optimized microkernels), apply the following standards.
 
 #### Observable outcome first
+
 - Clearly state what measurable improvement the learner will observe
 - Show performance results before introducing deep architectural explanation
 - Avoid introducing internal call stacks or microkernel details before the developer sees observable value
 
 #### Reproducibility requirements
+
 If performance numbers are included, specify:
 - Toolchain or software version
 - Device or platform used
@@ -507,7 +714,7 @@ Clearly distinguish between:
 - Runtime feature activation
 - Automatic fallback behavior
 
-If acceleration is claimed, include a method to verify that the accelerated path executed (for example logs, profiling output, kernel names, or hardware counters).
+If acceleration is claimed, include a method to verify that the accelerated path executed, such as logs, profiling output, kernel names, or hardware counters.
 
 #### Controlled benchmarking
 
@@ -521,8 +728,6 @@ When comparing performance:
 
 Explicitly connect the observed improvement to the Arm architectural feature responsible for it.
 
-Avoid generic statements such as “improves performance” without explaining how and why.
+Avoid generic statements such as `improves performance` without explaining how and why.
 
 Performance-focused Learning Paths are strategic content. Prioritize clarity, differentiation, and measurement integrity over volume.
-
-
