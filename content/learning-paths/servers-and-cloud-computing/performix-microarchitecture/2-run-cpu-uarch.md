@@ -20,32 +20,32 @@ using namespace std;
 
 int main(int argc, char* argv[]){
 
-    const int NUM_THREADS = std::stoi(argv[1]);
+    const int NUM_THREADS = argc == 2 ? std::stoi(argv[1]) : 1;
     std::cout << "Number of Threads = " << NUM_THREADS << std::endl;
 
     Mandelbrot::Mandelbrot myplot(1920, 1080, NUM_THREADS);
-    myplot.draw("/home/ec2-user/Mandelbrot-final/Mandelbrot-Example/images/Green-Parallel-512.bmp", Mandelbrot::Mandelbrot::GREEN);
+    myplot.draw("Green-Parallel-512.bmp", Mandelbrot::Mandelbrot::GREEN);
 
     return 0;
 }
 ```
 
-When Arm Performix launches the executable on the target machine, it does so from a temporary agent directory, `/tmp/atperf/tools/atperf-agent`. If your code uses a relative path to save the image, the image is written to that temporary folder and might be deleted. 
+When Arm Performix launches the executable on the target machine, it does so from a temporary agent directory, `/tmp/atperf/tools/atperf-agent`. If your code uses a relative path to save the image, the image is written to that temporary folder and might be deleted or you can't find it. 
 
-To prevent this, edit the `myplot.draw()` line in `main.cpp` to use the absolute path to your project's image folder (for example, `/home/ubuntu/Mandelbrot-Example/images/Green-Parallel-512.bmp`), and then rebuild the application.
+To prevent this, edit the `myplot.draw()` line in `main.cpp` to use the absolute path to your project's image folder (for example, `/home/ubuntu/mandelbrot-example/Green-Parallel-512.bmp`), and then rebuild the application.
 
 In the Arm Performix application on your host machine, select the **CPU Microarchitecture** recipe.
 
 ![Arm Performix CPU Microarchitecture configuration screen#center](./cpu-uarch-config.webp "CPU Microarchitecture Configuration")
 
-Select the target you configured in the setup section. If this is your first run on this target, you might need to select **Install Tools** to copy the collection tools to the target. After the tools are installed, you see the target is now ready.
+Select the target you configured in the setup section. If this is your first run on this target, you might need to select **Install Tools** to copy the collection tools to the target. After the tools are installed, you will see that the target is ready.
 
 Next, select the **Workload type** and select **Launch a new process**.
 
-Enter the absolute path to your executable in the **Workload** field. For example, `/home/ubuntu/Mandelbrot-Example/builds/mandelbrot-parallel`. Make sure to add the number of threads argument.
+Enter the absolute path to your executable in the **Workload** field. For example, `/home/ubuntu/mandelbrot-example/builds/mandelbrot-baseline`. Make sure to add the number of threads argument.
 
 {{% notice Note %}}
-Use the full path to your executable because the **Workload** field does not currently support shell-style path expansion.
+Use the full path to your executable because the **Workload** field doesn't currently support shell-style path expansion.
 {{% /notice %}}
 
 Before starting the analysis, you can customize the configuration. For instance, you can set a time limit for the workload or choose specific metrics to investigate. You can also adjust the sampling rate (High, Normal, or Low) to balance collection overhead against sampling granularity. Because this Mandelbrot example is a native C++ application, you can ignore the **Collect managed code stacks** toggle, which is used for Java or .NET workloads.
@@ -58,19 +58,20 @@ Arm Performix generates a high-level instruction pipeline view, highlighting whe
 
 ![Arm Performix high-level instruction pipeline results#center](cpu-uarch-results.webp "Instruction Pipeline View")
 
-In this breakdown, Backend Stalls dominate the samples. Within that category, work is split between Load Operations and integer and floating-point operations.
+In this breakdown, you see frontend and backend Stalls. Within the backend stalls, work is split between integer and floating-point operations.
+
 There is no measured SIMD activity, even though this workload is highly parallelizable.
 
-The **Insights** panel highlights ALU contention as a likely improvement opportunity:
+The **Insights** panel explains the highest category, which is frontend stalls for this system.
 
-![Arm Performix insights panel highlighting ALU contention#center](cpu-uarch-insights.webp "Insights Panel")
+![Arm Performix insights panel highlighting frontend stalls#center](cpu-uarch-insights.webp "Insights Panel")
 
 To inspect executed instruction types in more detail, use the Instruction Mix recipe in the next step.
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 In this section:
 - You ran the CPU Microarchitecture recipe on the Mandelbrot application.
 - You identified that the application spends most of its time in Backend Stalls without using SIMD operations.
 
-Next, you will run the Instruction Mix recipe to confirm where optimization opportunities exist and implement vectorization.
+Next, you'll run the Instruction Mix recipe to confirm where optimization opportunities exist and implement vectorization.
