@@ -10,7 +10,7 @@ layout: learningpathall
 
 Cross-compile the Llama runner to run on your Android phone using the steps below.
 
-### 1. Set the Android NDK path
+### Set the Android NDK path
 
 Set the environment variable to point to the Android NDK:
 
@@ -22,7 +22,7 @@ export ANDROID_NDK=$ANDROID_HOME/ndk/29.0.14206865/
 Make sure `$ANDROID_NDK/build/cmake/android.toolchain.cmake` is available for CMake to cross-compile.
 {{% /notice %}}
 
-### 2. Build ExecuTorch and associated libraries for Android with KleidiAI
+### Build ExecuTorch and associated libraries for Android with KleidiAI
 
 Use `cmake` to cross-compile ExecuTorch, enabling the KleidiAI kernels for accelerated inference on Arm:
 
@@ -58,7 +58,7 @@ cmake --build cmake-out-android -j7 --target install --config Release
 Starting with ExecuTorch version 0.7 beta, KleidiAI is enabled by default. The `-DEXECUTORCH_XNNPACK_ENABLE_KLEIDI=ON` option adds built-in support for KleidiAI kernels in ExecuTorch with XNNPACK.
 {{% /notice %}}
 
-### 3. Build the Llama runner for Android
+### Build the Llama runner for Android
 
 Use `cmake` to cross-compile the Llama runner:
 
@@ -87,7 +87,7 @@ If Gradle cannot find the Android SDK, add the `sdk.dir` path to `executorch/ext
 
 You need an Arm-powered smartphone with the i8mm feature running Android, with at least 16GB of RAM. The steps below were tested on a Google Pixel 8 Pro.
 
-### 1. Connect your Android phone
+### Connect your Android phone
 
 Connect your phone to your computer using a USB cable.
 
@@ -101,7 +101,7 @@ adb devices
 
 You should see your device listed to confirm it is connected.
 
-### 2. Copy the model, tokenizer, and runner binary to the phone
+### Copy the model, tokenizer, and runner binary to the phone
 
 ```bash
 adb shell mkdir -p /data/local/tmp/llama
@@ -110,7 +110,7 @@ adb push $HOME/.llama/checkpoints/Llama3.2-1B-Instruct/tokenizer.model /data/loc
 adb push cmake-out-android/examples/models/llama/llama_main /data/local/tmp/llama/
 ```
 
-### 3. Run the chatbot
+### Run the chatbot
 
 The system prompt is where you define your chatbot's persona and behavior. The example below configures the model as a customer support assistant. Adapt the system prompt text to match your product or domain.
 
@@ -140,4 +140,12 @@ I 00:00:02.264384 executorch:text_llm_runner.cpp:95] RSS after loading model: 11
 
 After the warmup, the model generates a response to the user query. The RSS figure confirms how much memory the model is using on the device.
 
-You now have a Llama 3.2 1B customer support chatbot running entirely on-device on an Arm Android phone. In the next section, you will wrap this into an Android app with a full chat interface.
+## What you've learned and what's next
+
+You have:
+- Cross-compiled ExecuTorch with KleidiAI support for Android
+- Built the Llama runner binary for Arm Android devices
+- Deployed and run the chatbot on your Android phone via adb
+- Verified that the model inference works correctly with a customer support prompt
+
+The next section wraps this functionality into an Android app with a full chat interface.

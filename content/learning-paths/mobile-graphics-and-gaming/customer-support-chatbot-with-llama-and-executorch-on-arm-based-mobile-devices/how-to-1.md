@@ -36,15 +36,12 @@ https://developer.android.com/studio/
 
 ### For macOS: Using the UI
 
-Follow these steps to configure Android Studio:
+Configure Android Studio:
 
-1. Start Android Studio and open the **Settings** dialog.
-
-2. Navigate to **Languages & Frameworks**, then **Android SDK**.
-
-3. In the **SDK Platforms** tab, check **Android 14.0 ("UpsideDownCake")**. Select **Apply** to install.
-
-4. In the **SDK Tools** tab, check **NDK (Side by side)**. Select **Apply** to install.
+- Start Android Studio and open the **Settings** dialog
+- Navigate to **Languages & Frameworks**, then **Android SDK**
+- In the **SDK Platforms** tab, check **Android 14.0 ("UpsideDownCake")**. Select **Apply** to install
+- In the **SDK Tools** tab, check **NDK (Side by side)**. Select **Apply** to install
 
 Set the `ANDROID_HOME` environment variable:
 
@@ -99,49 +96,11 @@ Verify that the NDK was installed in the same directory where Android Studio ins
 On macOS, this is generally `~/Library/Android/sdk`, and on Linux, it's `~/Android/Sdk`. Update the command to use your installed NDK version.
 {{% /notice %}}
 
-```bash
-ls $ANDROID_HOME/ndk
-```
+## What you've learned and what's next
 
-The output shows the installed version, for example:
+You have set up a complete Android development environment with:
+- Android Studio configured with the required SDK and NDK
+- Environment variables set for Android development
+- All necessary build tools installed
 
-```output
-29.0.14206865
-```
-
-Set the required environment variable:
-
-```bash
-export ANDROID_NDK="$ANDROID_HOME/ndk/29.0.14206865/"
-```
-
-## Install Git and cmake
-
-For macOS, use [Homebrew](https://brew.sh/):
-
-```bash
-brew install git cmake
-```
-
-For Linux, use the package manager for your distribution:
-
-```bash
-sudo apt install git-all cmake
-```
-
-## Install Python 3.10
-
-For macOS:
-
-```bash
-brew install python@3.10
-```
-
-For Linux:
-
-```bash
-sudo apt update
-sudo apt install software-properties-common -y
-sudo add-apt-repository ppa:deadsnakes/ppa
-sudo apt install python3.10 python3.10-venv
-```
+In the next section, you will set up ExecuTorch, the runtime that enables efficient on-device inference for PyTorch models on mobile platforms.

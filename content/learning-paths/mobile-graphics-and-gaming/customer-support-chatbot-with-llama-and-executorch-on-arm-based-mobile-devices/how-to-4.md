@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Download and export the Llama 3.2 1B model
 
-To get started with Llama 3, obtain the pre-trained parameters by visiting [Meta's Llama Downloads](https://llama.meta.com/llama-downloads/) page. Request access by filling out your details, then read and accept the Responsible Use Guide. This grants you a license and a download link valid for 24 hours. The Llama 3.2 1B Instruct model is used in this Learning Path, but the same instructions apply to other variants with minimal modification.
+To get started with Llama 3, obtain the pre-trained parameters by visiting [Meta's Llama Downloads](https://llama.meta.com/llama-downloads/) page. Request access by providing your details, then read and accept the Responsible Use Guide. After approval, you receive a license and a download link valid for 24 hours. The Llama 3.2 1B Instruct model is used in this Learning Path, but the same instructions apply to other variants with minimal modification.
 
 Install the `llama-stack` package from `pip`:
 
@@ -22,7 +22,7 @@ Run the command to download, and paste the download link from the email when pro
 llama model download --source meta --model-id Llama3.2-1B-Instruct
 ```
 
-When the download finishes, the installation path is printed:
+When the download finishes, the installation path prints:
 
 ```output
 Successfully downloaded model to /<path-to-home>/.llama/checkpoints/Llama3.2-1B-Instruct
@@ -64,3 +64,12 @@ python3 -m examples.models.llama.export_llama \
 Due to the larger vocabulary size of Llama 3, quantize the embeddings with `--embedding-quantize 4,32` to further reduce model size.
 
 When this command completes, you have a `llama3_1B_kv_sdpa_xnn_qe_4_64_1024_embedding_4bit.pte` file in your working directory. This is the compiled, quantized model ready for on-device deployment via ExecuTorch.
+
+## What you've learned and what's next
+
+You have:
+- Downloaded the Llama 3.2 1B Instruct model from Meta
+- Exported the model to `.pte` format with quantization optimizations
+- Created a model file ready for on-device deployment
+
+The next section builds the Llama runner for Android and demonstrates how to run the chatbot directly on your phone via the command line.
