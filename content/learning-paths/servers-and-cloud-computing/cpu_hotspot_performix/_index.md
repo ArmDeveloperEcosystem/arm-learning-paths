@@ -1,9 +1,6 @@
 ---
 title: Find Code Hotspots with Arm Performix
-
-draft: true
-cascade:
-    draft: true
+description: Learn how to profile and identify CPU hotspots in C++ applications on Arm Neoverse using Arm Performix flame graphs to guide optimization.
 
 minutes_to_complete: 30
 
