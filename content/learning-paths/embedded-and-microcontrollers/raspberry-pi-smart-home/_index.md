@@ -26,8 +26,6 @@ armips:
 tools_software_languages:
   - Python
   - Ollama
-  - gpiozero
-  - lgpio
   - FastAPI
   - Raspberry Pi
 operatingsystems:
