@@ -1,5 +1,5 @@
 ---
-title: Optimize
+title: Optimize application performance
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -22,7 +22,7 @@ Looking at the `Mandelbrot::getIterations` function, there are two clear optimiz
     }
 ```
 
-### Optimization 1 - Limiting loop boundary
+### Optimization 1: Limiting loop boundary
 
 The iteration count is bounded by `MAX_ITERATIONS`, defined as 1024, a `static const` integer in the `Mandelbrot.h` header. Halving this to 512 reduces the maximum work per pixel but you will need to verify that the change in image quality is acceptable.
 
@@ -44,9 +44,9 @@ Select the refresh icon in the top right to rerun the recipe, then switch to com
 
 There is negligible difference in perceived image quality when halving `MAX_ITERATIONS`.
 
-![Side-by-side comparison of Mandelbrot fractal output at MAX_ITERATIONS 1024 and 512, showing no visible quality difference#center](./comparison.jpg "Image quality comparison: 1024 vs 512 iterations")
+![Side-by-side comparison of Mandelbrot fractal output at MAX_ITERATIONS 1024 (left) and 512 (right). Both images show the same level of detail and structure, confirming that the reduced iteration count doesn't compromise visual quality.#center](./comparison.jpg "Image quality comparison: 1024 vs 512 iterations")
 
-### Optimization 2 - Parallelising the hot function
+### Optimization 2: Parallelizing the hot function
 
 The loop in `Mandelbrot::getIterations` has no loop-carried dependencies — each iteration's result is independent of any other. This means you can parallelize the hot function across multiple threads if your CPU has multiple cores.
 
@@ -80,9 +80,9 @@ The proportion of samples has not changed significantly overall, but with 64 thr
 The total run duration shown in APX includes tooling setup and data analysis time, not just application execution time. To measure only the application, use the `time` command: the application now runs in approximately 1 second — close to a 100x improvement over the original single-threaded baseline.
 {{% /notice %}}
 
-### (Optional Challenge) Additional optimizations
+### (Optional challenge) Additional optimizations
 
-The `Makefile` uses the `-O0` flag when the `DEBUG=1` argument is passed in. This disables all compiler optimizations. Try experimenting with higher optimization levels, different loop boundary sizes, and thread counts. See the Learning Path [Get started with compiler optimization flags](/learning-paths/servers-and-cloud-computing/cplusplus_compilers_flags/) for guidance. You may also want to explore vectorized math libraries that could replace the `libm` hypotenuse function, such as the [Arm Performance Libraries vector math functions](https://developer.arm.com/documentation/101004/2601/Arm-Performance-Libraries-Math-Functions/Arm-Performance-Libraries-Vector-Math-Functions--Accuracy-Table).
+The `Makefile` uses the `-O0` flag when the `DEBUG=1` argument is passed in. This disables all compiler optimizations. Try experimenting with higher optimization levels, different loop boundary sizes, and thread counts. See the Learning Path [Get started with compiler optimization flags](/learning-paths/servers-and-cloud-computing/cplusplus_compilers_flags/) for guidance. You might also want to explore vectorized math libraries that could replace the `libm` hypotenuse function, such as the [Arm Performance Libraries vector math functions](https://developer.arm.com/documentation/101004/2601/Arm-Performance-Libraries-Math-Functions/Arm-Performance-Libraries-Vector-Math-Functions--Accuracy-Table).
 
 
 ## Summary
