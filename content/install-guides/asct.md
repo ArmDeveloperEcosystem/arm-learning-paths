@@ -86,10 +86,10 @@ ASCT is distributed as a Python package and requires Python 3.10 or later.
 
 Download the latest ASCT release from the [artifacts.tools.arm.com](https://artifacts.tools.arm.com/asct/dist/) page.
 
-For example, to download version 0.4.2:
+For example, to download version 0.5.1:
 
 ```bash
-wget https://artifacts.tools.arm.com/asct/dist/0.4.2/asct-0.4.2+3b955c2.tar.gz
+wget https://artifacts.tools.arm.com/asct/dist/0.5.1/asct-0.5.1+11d418d-release.tar.gz
 ```
 
 ### How do I install ASCT using uv?
@@ -100,10 +100,23 @@ The recommended method uses [uv](https://github.com/astral-sh/uv), a fast Python
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
+Extract the release archive
+
+```bash
+tar xzf asct-0.5.1+11d418d-release.tar.gz
+```
+
+Create the required directories
+
+```bash
+sudo mkdir -p /opt/uv/tools /usr/local/bin
+```
+
 Install ASCT system-wide using:
 
 ```bash
-UV_TOOL_BIN_DIR=/usr/local/bin sudo -E $(which uv) tool install asct-0.4.2+3b955c2.tar.gz
+cd asct-0.5.1+11d418d
+sudo UV_TOOL_DIR=/opt/uv/tools UV_TOOL_BIN_DIR=/usr/local/bin $(which uv) tool install ./asct-0.5.1+11d418d.tar.gz
 ```
 
 This installs ASCT to `/usr/local/bin` making it available system-wide. Installing to `/usr/local/bin` instead of the default `~/.local/bin` allows you to run ASCT with `sudo`, which is required for some benchmarks to access system resources and configure huge pages.
@@ -119,7 +132,7 @@ asct version
 The output is similar to:
 
 ```output
-ASCT 0.4.2+3b955c2
+ASCT 0.5.1+11d418d
 ```
 
 Display the help information:
