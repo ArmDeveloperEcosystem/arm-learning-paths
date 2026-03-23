@@ -25,7 +25,7 @@ armips:
 operatingsystems:
     - Baremetal
 tools_software_languages:
-    - FPGA
+    - C
 
 further_reading:
     - resource:
