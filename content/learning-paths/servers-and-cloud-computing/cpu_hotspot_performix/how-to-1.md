@@ -1,5 +1,5 @@
 ---
-title: Background Information
+title: Understand flame graphs and profiling tools
 weight: 2
 
 ### FIXED, DO NOT MODIFY

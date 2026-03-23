@@ -1,5 +1,5 @@
 ---
-title: Setup
+title: Build the example application
 weight: 3
 
 ### FIXED, DO NOT MODIFY

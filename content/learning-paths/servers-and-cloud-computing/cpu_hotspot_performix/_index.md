@@ -4,7 +4,7 @@ description: Learn how to profile and identify CPU hotspots in C++ applications 
 
 minutes_to_complete: 30
 
-who_is_this_for: Software developers and performance engineers who want to identify code hotspots in applications running on Arm Linux systems.
+who_is_this_for: This is an introductory topic for software developers and performance engineers who want to identify code hotspots in applications running on Arm Linux systems.
 
 learning_objectives: 
     - Run the Code Hotspots recipe in Arm Performix

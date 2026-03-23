@@ -1,5 +1,5 @@
 ---
-title: Assess Baseline Performance
+title: Profile baseline performance
 weight: 4
 
 ### FIXED, DO NOT MODIFY

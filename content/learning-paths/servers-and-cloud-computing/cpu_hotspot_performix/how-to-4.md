@@ -1,5 +1,5 @@
 ---
-title: Optimize
+title: Optimize application performance
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -46,7 +46,7 @@ There is negligible difference in perceived image quality when halving `MAX_ITER
 
 ![Side-by-side comparison of Mandelbrot fractal output at MAX_ITERATIONS 1024 (left) and 512 (right). Both images show the same level of detail and structure, confirming that the reduced iteration count doesn't compromise visual quality.#center](./comparison.jpg "Image quality comparison: 1024 vs 512 iterations")
 
-### Optimization 2 - Parallelising the hot function
+### Optimization 2 - Parallelizing the hot function
 
 The loop in `Mandelbrot::getIterations` has no loop-carried dependencies — each iteration's result is independent of any other. This means you can parallelize the hot function across multiple threads if your CPU has multiple cores.
 
