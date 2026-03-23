@@ -21,7 +21,7 @@ If this is your first time setting up Arm Performix, follow the [Arm Performix i
 
 ![The Arm Performix Targets panel showing a successful connection test result for a remote Arm server#center](./successful-connection.jpg "Successful connection to remote target")
 
-## Build Application on Remote Server
+## Build application on remote server
 
 Connect to the remote server using SSH or Visual Studio Code. Install git and the C++ compiler. On dnf-based systems such as Amazon Linux 2023 or RHEL, run:
 

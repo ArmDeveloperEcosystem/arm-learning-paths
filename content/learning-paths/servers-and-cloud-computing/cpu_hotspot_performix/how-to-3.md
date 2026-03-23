@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## Run Code Hotspots Recipe
+## Run Code Hotspots recipe
 
 As shown in the `src/main_single_thread.cpp` file below, the program generates a 1920×1080 bitmap image of the fractal. To identify performance bottlenecks, run the Code Hotspots recipe in Arm Performix (APX). APX uses sampling to estimate where the CPU spends most of its time, allowing it to highlight the hottest functions—especially useful in larger applications where it isn't obvious ahead of time which functions will dominate runtime.
 
@@ -52,7 +52,7 @@ Use the default sampling rate of **Normal**. If your application is short-runnin
 
 ![The Arm Performix Code Hotspots recipe configuration screen showing launch settings, binary path, and sampling rate fields#center](./code-hotspots-config.jpg "Code Hotspots recipe configuration")
 
-## Analyse Results
+## Analyze results
 
 A flame graph is generated once the run completes. The default colour mode labels the hottest functions—those using CPU most frequently—in the darkest shade. In this example, the `__complex_abs__` function is present in approximately 65% of samples, and it calls the `__hypot` symbol in `libm.so`.
 
