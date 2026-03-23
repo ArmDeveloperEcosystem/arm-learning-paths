@@ -8,13 +8,13 @@ layout: learningpathall
 
 ## Physical AI starts with connectivity
 
-Arm processors are at the heart of a remarkable range of systems - from Cortex-M microcontrollers in industrial sensors to Neoverse servers running in the cloud. That breadth of hardware is one of Arm’s greatest strengths, but it raises a practical question for AI developers: how do you give an agent structured, safe access to devices that are physically distributed and built on different software stacks?
+Arm processors are at the heart of a remarkable range of systems, from Cortex-M microcontrollers in industrial sensors to Neoverse servers running in the cloud. That breadth of hardware is one of Arm’s greatest strengths, but it raises a practical question for AI developers: how do you give an agent structured, safe access to devices that are physically distributed and built on different software stacks?
 
-Natural language is becoming more than a software interface. Physical AI systems — robots, sensors, actuators — can now sense, decide, and act based on instructions from an LLM agent. But for that to work, the devices need to be reachable. They need a shared infrastructure for discovery, communication, and coordination.
+Natural language is becoming more than a software interface. Physical AI systems can now sense, decide, and act based on instructions from an LLM agent. But for that to work, the devices need to be reachable. They need a shared infrastructure for discovery, communication, and coordination.
 
 [Device Connect](https://github.com/arm/device-connect) is Arm's device-aware framework for exactly that. Once devices register through a shared mesh, agents can discover and command any of them without caring where they run. A fleet of robot arms, a network of sensors, or a mix of physical and simulated devices all become equally reachable.
 
-[Strands Robots](https://github.com/strands-labs/robots) is a robot SDK that integrates Device Connect with the [AWS Strands Agents SDK](https://strandsagents.com/). Using Strands, an LLM can query the device mesh ("who's available?"), understand what each device can do, and dynamically invoke actions — turning natural language intent into real-world outcomes.
+[Strands Robots](https://github.com/strands-labs/robots) is a robot SDK that integrates Device Connect with the [AWS Strands Agents SDK](https://strandsagents.com/). Using Strands, an LLM can query the device mesh ("who's available?"), understand what each device can do, and dynamically invoke actions - turning natural language intent into real-world outcomes.
 
 This Learning Path starts on a single machine, where a simulated robot and an agent discover each other automatically, then optionally extends to a Raspberry Pi joining the same device mesh over the network.
 
