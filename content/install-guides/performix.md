@@ -16,7 +16,7 @@ minutes_to_complete: 30
 author: Pareena Verma
 
 ### Link to official documentation
-official_docs: https://developer.arm.com/servers-and-cloud-computing/arm-performix
+official_docs: https://developer.arm.com/documentation/110163/latest 
 
 weight: 1                  
 tool_install: true        

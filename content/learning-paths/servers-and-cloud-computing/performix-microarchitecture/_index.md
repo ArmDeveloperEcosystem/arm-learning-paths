@@ -41,16 +41,12 @@ further_reading:
         link: /learning-paths/servers-and-cloud-computing/cpu_hotspot_performix/
         type: documentation
     - resource:
+        title: Arm Performix User Guide
+        link: https://developer.arm.com/documentation/110163/latest
+        type: documentation
+    - resource:
         title: "Port Code to Arm Scalable Vector Extension (SVE)"
         link: /learning-paths/servers-and-cloud-computing/sve/
-        type: documentation
-    - resource:
-        title: "Arm Neoverse N1: Core Performance Analysis Methodology"
-        link: https://armkeil.blob.core.windows.net/developer/Files/pdf/white-paper/neoverse-n1-core-performance-v2.pdf
-        type: documentation
-    - resource:
-        title: "Arm Neoverse N1 PMU Guide"
-        link: https://developer.arm.com/documentation/PJDOC-466751330-547673/r4p1/
         type: documentation
 
 ### FIXED, DO NOT MODIFY

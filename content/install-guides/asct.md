@@ -15,7 +15,7 @@ minutes_to_complete: 15
 test_maintenance: false
 
 # No official documentation 
-official_docs: https://learn.arm.com/install-guides/asct/
+official_docs: https://developer.arm.com/documentation/111147/latest
 
 author:
 - Jason Andrews

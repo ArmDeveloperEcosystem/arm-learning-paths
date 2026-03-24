@@ -35,6 +35,10 @@ further_reading:
         link: /learning-paths/servers-and-cloud-computing/performix-microarchitecture/
         type: documentation
     - resource:
+        title: Arm Performix User Guide
+        link: https://developer.arm.com/documentation/110163/latest
+        type: documentation
+    - resource:
         title: Flame Graphs 
         link: https://www.brendangregg.com/flamegraphs.html
         type: blog
