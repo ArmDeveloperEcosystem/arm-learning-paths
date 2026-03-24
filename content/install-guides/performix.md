@@ -65,7 +65,7 @@ Alternatively, download using PowerShell:
 
 {{< tabpane code=true >}}
   {{< tab header="Arm64" >}}
-curl -o ArmPerformix-windows-x64.exe https://artifacts.tools.arm.com/arm-performix/app/latest/windows/x64/ArmPerformix-windows-x64.exe
+curl -o ArmPerformix-windows-arm64.exe https://artifacts.tools.arm.com/arm-performix/app/latest/windows/arm64/ArmPerformix-windows-arm64.exe
   {{< /tab >}}
   {{< tab header="x64" >}}
 curl -o ArmPerformix-windows-x64.exe https://artifacts.tools.arm.com/arm-performix/app/latest/windows/x64/ArmPerformix-windows-x64.exe
