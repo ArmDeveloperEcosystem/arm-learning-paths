@@ -384,8 +384,8 @@ Choose one of the following methods to authenticate with your target:
   - Generates an RSA 4096-bit key pair on your host (without a passphrase)
   - Authenticates to the target using the password you provide
   - Adds the public key to the target's `~/.ssh/authorized_keys` file
-  - Records the target's host key in APX's known hosts
-  - Stores the private key securely for future APX connections
+  - Records the target's host key in the known hosts list
+  - Stores the private key securely for future connections
   - Discards the password immediately after use (not stored)
 
 **Host key verification:**
