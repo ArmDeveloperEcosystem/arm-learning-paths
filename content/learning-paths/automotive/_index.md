@@ -38,4 +38,30 @@ tools_software_languages_filter:
 - Tinkerblox: 1
 - topdown-tool: 1
 - Zenoh: 1
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
 ---

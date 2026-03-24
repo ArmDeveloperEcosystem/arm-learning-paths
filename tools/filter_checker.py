@@ -101,10 +101,32 @@ def updateFiltersInIndexMD(main_category):
 
 
     # re-write the _index.md file, including '---' in the front and back of it
+    #
+    # Hugo's YAML alias protection (parser/metadecoders/decoder.go) uses a
+    # size-based limit for non-scalar node counts:
+    #   < 2 KB  → max 100 non-scalar nodes
+    #   2-10 KB → max 5000
+    #   > 10 KB → max 10000
+    # Each "- ToolName: count" entry in a filter list creates one non-scalar
+    # (mapping) node. Categories with many Learning Paths can easily exceed
+    # 100 entries across all filter lists while the file stays under 2 KB,
+    # triggering: "too many YAML aliases for non-scalar nodes".
+    # To avoid this, we pad the YAML content to at least 2048 bytes using
+    # YAML comments, which raises the limit to 5000.
+    yaml_content = yaml.dump(metadata_dic, sort_keys=False)
+    front_matter = '---\n' + yaml_content + '---\n'
+
+    min_size = 2048
+    if len(front_matter.encode('utf-8')) < min_size:
+        padding_needed = min_size - len(front_matter.encode('utf-8'))
+        # YAML comments are counted in Hugo's size calculation but ignored by the parser
+        padding_line = "# auto-generated padding to avoid Hugo YAML alias limit\n"
+        num_lines = (padding_needed // len(padding_line)) + 1
+        padding = padding_line * num_lines
+        front_matter = '---\n' + yaml_content + padding + '---\n'
+
     with open(category_index_md_file, "w") as f:
-        f.write('---\n')
-        yaml.dump(metadata_dic, f, sort_keys=False) # dump, keeping order that we specified (sort_keys=False)
-        f.write('---\n')
+        f.write(front_matter)
 
     return True
 

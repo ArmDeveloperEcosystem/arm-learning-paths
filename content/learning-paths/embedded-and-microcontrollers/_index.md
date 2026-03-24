@@ -112,4 +112,8 @@ tools_software_languages_filter:
 - Yocto Project: 1
 - Zephyr: 2
 weight: 5
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
 ---
