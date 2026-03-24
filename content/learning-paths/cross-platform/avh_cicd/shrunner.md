@@ -15,7 +15,7 @@ Open your browser, and navigate to your fork of the example repository.
 
 Navigate to `Actions`. If prompted that `workflows` have been disabled, click `I understand my workflows, go ahead and enable them` button.
 
-## Create a Self-hosted Runner
+## Create a self-hosted runner
 
 Navigate to the repository `Settings` > `Actions` > `Runners`, and click on `New self-hosted runner`.
 
