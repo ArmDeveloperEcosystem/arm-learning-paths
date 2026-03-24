@@ -61,7 +61,7 @@ Arm Performix is distributed as platform-specific installer packages. The instal
 
 Download the Windows installer package for your architecture from the [Arm Performix download page](https://developer.arm.com/servers-and-cloud-computing/arm-performix).
 
-Alternatively, download using PowerShell:
+Alternatively, download using PowerShell. These commands require PowerShell and do not work in the Windows Command Prompt (CMD):
 
 {{< tabpane code=true >}}
   {{< tab header="Arm64" >}}
@@ -149,10 +149,10 @@ Arm Performix daemon version: 1.0.0
 
 Download the macOS installer package from the [Arm Performix download page](https://developer.arm.com/servers-and-cloud-computing/arm-performix).
 
-Alternatively, download using `wget`:
+Alternatively, download using `curl`:
 
 ```bash
-wget https://artifacts.tools.arm.com/arm-performix/app/latest/darwin/arm64/ArmPerformix-darwin-arm64.pkg
+curl -Lo ArmPerformix-darwin-arm64.pkg https://artifacts.tools.arm.com/arm-performix/app/latest/darwin/arm64/ArmPerformix-darwin-arm64.pkg
 ```
 
 After downloading the `.pkg` file, navigate to the directory where you downloaded it and double-click the file to start the installer.
@@ -414,7 +414,7 @@ Make a target the default for future commands with `--default`:
 apx target add ubuntu@192.168.1.10 --name my-target --default
 ```
 
-After you run this command, `build-server` becomes the default target for future commands.
+After you run this command, `my-target` becomes the default target for future commands.
 
 **Using jump nodes:**
 
