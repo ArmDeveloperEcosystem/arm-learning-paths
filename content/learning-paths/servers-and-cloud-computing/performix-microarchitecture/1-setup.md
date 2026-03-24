@@ -16,7 +16,7 @@ A Mandelbrot set generator is a classic computer science application used to tes
 
 Make sure Arm Performix is installed on your host machine. The host machine is your local computer where the Arm Performix GUI runs, and it can be a Windows, macOS, or Linux machine. The target machine is the Linux server where your application is compiled and where the application runs.
 
-If you don't have Arm Performix installed, see the [Arm Performix install guide](/install-guides/atp/). 
+If you don't have Arm Performix installed, see the [Arm Performix install guide](/install-guides/performix/). 
 
 From the host machine, open the Arm Performix application and navigate to the **Targets** tab. Set up an SSH connection to the target that runs the workload, and test the connection. For the examples in this guide, you connect to an Arm Neoverse-based server.
 

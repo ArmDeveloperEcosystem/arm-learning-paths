@@ -30,7 +30,7 @@ int main(int argc, char* argv[]){
 }
 ```
 
-When Arm Performix launches the executable on the target machine, it does so from a temporary agent directory, `/tmp/atperf/tools/atperf-agent`. If your code uses a relative path to save the image, the image is written to that temporary folder and might be deleted or you can't find it. 
+When Arm Performix launches the executable on the target machine, it does so from a temporary agent directory. If your code uses a relative path to save the image, the image is written to that temporary folder and might be deleted or you can't find it. 
 
 To prevent this, edit the `myplot.draw()` line in `main.cpp` to use the absolute path to your project's image folder (for example, `/home/ubuntu/mandelbrot-example/Green-Parallel-512.bmp`), and then rebuild the application.
 
