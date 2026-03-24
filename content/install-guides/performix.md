@@ -19,7 +19,7 @@ author: Pareena Verma
 official_docs: https://developer.arm.com/servers-and-cloud-computing/arm-performix
 
 weight: 1                  
-tool_install: false        
+tool_install: true        
 multi_install: false        
 multitool_install_part: false
 layout: installtoolsall
