@@ -5954,3 +5954,7 @@ umount
 vtable
 xC
 Performix
+ArmPerformix
+callees
+parallelizable
+performix
