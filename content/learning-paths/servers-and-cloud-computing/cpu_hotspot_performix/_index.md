@@ -31,6 +31,10 @@ operatingsystems:
 
 further_reading:
     - resource:
+        title: Optimize application performance using Arm Performix CPU microarchitecture analysis
+        link: /learning-paths/servers-and-cloud-computing/performix-microarchitecture/
+        type: documentation
+    - resource:
         title: Flame Graphs 
         link: https://www.brendangregg.com/flamegraphs.html
         type: blog

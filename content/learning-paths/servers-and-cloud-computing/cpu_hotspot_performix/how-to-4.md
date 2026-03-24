@@ -66,7 +66,7 @@ make clean
 make parallel DEBUG=1
 ```
 
-Update the binary path in APX to `./builds/mandelbrot_parallel_debug` and pass the desired thread count as an argument, then rerun the recipe from the host.
+Update the binary path in Arm Performix to `./builds/mandelbrot_parallel_debug` and pass the desired thread count as an argument, then rerun the recipe from the host.
 
 To compare with a previous run, switch to comparison mode. Under the **Run Details** tab, execution time drops further from 0m 32s to 7s with 32 threads.
 
@@ -77,7 +77,7 @@ The proportion of samples has not changed significantly overall, but with 64 thr
 ![Side-by-side flame graph comparison between single-threaded and parallel Mandelbrot builds, showing reduced dominance of the Mandelbrot::draw function#center](./flame-graph-comparison.jpg "Flame graph comparison: single-threaded vs parallelized build")
 
 {{% notice Note %}}
-The total run duration shown in APX includes tooling setup and data analysis time, not just application execution time. To measure only the application, use the `time` command: the application now runs in approximately 1 second — close to a 100x improvement over the original single-threaded baseline.
+The total run duration shown in Arm Performix includes tooling setup and data analysis time, not just application execution time. To measure only the application, use the `time` command: the application now runs in approximately 1 second — close to a 100x improvement over the original single-threaded baseline.
 {{% /notice %}}
 
 ### (Optional challenge) Additional optimizations

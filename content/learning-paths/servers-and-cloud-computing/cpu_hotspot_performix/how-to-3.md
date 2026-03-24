@@ -8,10 +8,10 @@ layout: learningpathall
 
 ## Run Code Hotspots recipe
 
-As shown in the `src/main_single_thread.cpp` file below, the program generates a 1920×1080 bitmap image of the fractal. To identify performance bottlenecks, run the Code Hotspots recipe in Arm Performix (APX). APX uses sampling to estimate where the CPU spends most of its time, allowing it to highlight the hottest functions—especially useful in larger applications where it isn't obvious ahead of time which functions will dominate runtime.
+As shown in the `src/main_single_thread.cpp` file below, the program generates a 1920×1080 bitmap image of the fractal. To identify performance bottlenecks, run the Code Hotspots recipe in Arm Performix. It uses sampling to estimate where the CPU spends most of its time, highlighting the hottest functions—especially useful in larger applications where it isn't obvious ahead of time which functions will dominate runtime.
 
 {{% notice Note %}}
-The `myplot.draw()` call uses a relative path (`./images/green.bmp`). When APX launches the binary, it runs it from a temporary location, so the image would be written there rather than to your project directory. To ensure the output is saved where you expect it, update the first string argument in `src/main_single_thread.cpp` to the absolute path of the output file, for example `/home/ec2-user/Mandelbrot-Example/images/green.bmp`.
+The `myplot.draw()` call uses a relative path (`./images/green.bmp`). When Arm Performix launches the binary, it runs it from a temporary location, so the image would be written there rather than to your project directory. To ensure the output is saved where you expect it, update the first string argument in `src/main_single_thread.cpp` to the absolute path of the output file, for example `/home/ec2-user/Mandelbrot-Example/images/green.bmp`.
 {{% /notice %}}
 
 ```cpp
@@ -40,11 +40,11 @@ make clean
 make single_thread DEBUG=1
  ```
 
-Open APX from the host machine. Select the **Code Hotspot** recipe. If this is the first time running the recipe on this target machine you might need to select the install tools button.
+Open Arm Performix from the host machine. Select the **Code Hotspot** recipe. If this is the first time running the recipe on this target machine you might need to select the install tools button.
 
 ![The Arm Performix recipe selection screen with the Code Hotspots recipe highlighted and the install tools button visible for first-time setup#center](./install-tools.jpg "Selecting the Code Hotspots recipe")
 
-Configure the recipe to launch a new process. APX will automatically start collecting metrics when the program starts and stop when the program exits.
+Configure the recipe to launch a new process. Arm Performix will automatically start collecting metrics when the program starts and stop when the program exits.
 
 Provide the absolute path to the binary built in the previous step: `/home/ec2-user/Mandelbrot-Example/build/mandelbrot_single_thread_debug`.
 
@@ -54,7 +54,7 @@ Use the default sampling rate of **Normal**. If your application is short-runnin
 
 ## Analyze results
 
-A flame graph is generated once the run completes. The default colour mode labels the hottest functions—those using CPU most frequently—in the darkest shade. In this example, the `__complex_abs__` function is present in approximately 65% of samples, and it calls the `__hypot` symbol in `libm.so`.
+A flame graph is generated once the run completes. The default color mode labels the hottest functions—those using CPU most frequently—in the darkest shade. In this example, the `__complex_abs__` function is present in approximately 65% of samples, and it calls the `__hypot` symbol in `libm.so`.
 
 ![A flame graph showing single-threaded Mandelbrot profiling results with __complex_abs__ as the dominant hotspot#center](./single-thread-flame-graph.jpg "Single-threaded flame graph showing __complex_abs__ as the hottest function")
 
