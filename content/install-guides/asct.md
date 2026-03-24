@@ -27,10 +27,6 @@ tool_install: true             # Set to true to be listed in main selection page
 multi_install: false            # Set to true if first page of multi-page article, else false
 multitool_install_part: false   # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
-
-build:
-  list: false
-  render: true
 ---
 
 The Arm System Characterization Tool (ASCT) is a command-line utility for running low-level benchmarks, diagnostic scripts, and system tests to analyze and debug performance on Arm-based platforms. ASCT provides a standardized environment for evaluating key hardware characteristics and is especially suited for platform bring-up, system tuning, and architectural comparison tasks.

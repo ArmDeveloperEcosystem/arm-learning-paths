@@ -23,10 +23,6 @@ tool_install: true
 multi_install: false        
 multitool_install_part: false
 layout: installtoolsall
-
-build:
-  list: false                   # Exclude from .Pages collections and listings
-  render: true                  # Still render the page (accessible via direct URL)
 ---
 
 Arm Performix is a desktop application that provides performance
