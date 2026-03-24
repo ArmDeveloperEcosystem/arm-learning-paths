@@ -45,7 +45,7 @@ tools_software_languages_filter:
 - BalenaOS: 1
 - Baremetal: 1
 - Bash: 1
-- C: 6
+- C: 7
 - ChatGPT: 1
 - Clang: 1
 - CMSIS: 4
@@ -63,14 +63,12 @@ tools_software_languages_filter:
 - Edge Impulse: 2
 - ExecuTorch: 6
 - FastAPI: 1
-- FPGA: 1
 - Fusion 360: 1
 - FVP: 10
 - GCC: 10
 - Generative AI: 2
 - GitHub: 4
 - GitLab: 2
-- gpiozero: 1
 - GStreamer: 1
 - Himax SDK: 1
 - Hugging Face: 3
@@ -79,9 +77,7 @@ tools_software_languages_filter:
 - K3s: 1
 - Keil MDK: 7
 - Keil RTX RTOS: 2
-- Keil Studio Cloud: 1
 - Kubernetes: 1
-- lgpio: 1
 - Linux kernel: 1
 - LLM: 2
 - Matter: 1
@@ -116,4 +112,8 @@ tools_software_languages_filter:
 - Yocto Project: 1
 - Zephyr: 2
 weight: 5
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
 ---

@@ -15,7 +15,7 @@ minutes_to_complete: 15
 test_maintenance: false
 
 # No official documentation 
-official_docs: https://learn.arm.com/install-guides/asct/
+official_docs: https://developer.arm.com/documentation/111147/latest
 
 author:
 - Jason Andrews
@@ -23,14 +23,10 @@ author:
 
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
-tool_install: false             # Set to true to be listed in main selection page, else false
+tool_install: true             # Set to true to be listed in main selection page, else false
 multi_install: false            # Set to true if first page of multi-page article, else false
 multitool_install_part: false   # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
-
-build:
-  list: false
-  render: true
 ---
 
 The Arm System Characterization Tool (ASCT) is a command-line utility for running low-level benchmarks, diagnostic scripts, and system tests to analyze and debug performance on Arm-based platforms. ASCT provides a standardized environment for evaluating key hardware characteristics and is especially suited for platform bring-up, system tuning, and architectural comparison tasks.
@@ -86,10 +82,10 @@ ASCT is distributed as a Python package and requires Python 3.10 or later.
 
 Download the latest ASCT release from the [artifacts.tools.arm.com](https://artifacts.tools.arm.com/asct/dist/) page.
 
-For example, to download version 0.4.2:
+For example, to download version 0.5.1:
 
 ```bash
-wget https://artifacts.tools.arm.com/asct/dist/0.4.2/asct-0.4.2+3b955c2.tar.gz
+wget https://artifacts.tools.arm.com/asct/dist/0.5.1/asct-0.5.1+11d418d-release.tar.gz
 ```
 
 ### How do I install ASCT using uv?
@@ -100,10 +96,23 @@ The recommended method uses [uv](https://github.com/astral-sh/uv), a fast Python
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
+Extract the release archive
+
+```bash
+tar xzf asct-0.5.1+11d418d-release.tar.gz
+```
+
+Create the required directories
+
+```bash
+sudo mkdir -p /opt/uv/tools /usr/local/bin
+```
+
 Install ASCT system-wide using:
 
 ```bash
-UV_TOOL_BIN_DIR=/usr/local/bin sudo -E $(which uv) tool install asct-0.4.2+3b955c2.tar.gz
+cd asct-0.5.1+11d418d
+sudo UV_TOOL_DIR=/opt/uv/tools UV_TOOL_BIN_DIR=/usr/local/bin $(which uv) tool install ./asct-0.5.1+11d418d.tar.gz
 ```
 
 This installs ASCT to `/usr/local/bin` making it available system-wide. Installing to `/usr/local/bin` instead of the default `~/.local/bin` allows you to run ASCT with `sudo`, which is required for some benchmarks to access system resources and configure huge pages.
@@ -119,7 +128,7 @@ asct version
 The output is similar to:
 
 ```output
-ASCT 0.4.2+3b955c2
+ASCT 0.5.1+11d418d
 ```
 
 Display the help information:

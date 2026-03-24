@@ -88,4 +88,17 @@ tools_software_languages_filter:
 - Vulkan SDK: 1
 - XNNPACK: 2
 weight: 3
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
 ---
