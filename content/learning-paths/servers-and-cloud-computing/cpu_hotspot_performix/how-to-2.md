@@ -17,7 +17,7 @@ You don't need to understand the Mandelbrot algorithm in detail to follow this L
 
 ## Connect to Target
 
-If this is your first time setting up Arm Performix, follow the [Arm Performix installation guide](/install-guides/atp/). In this Learning Path you'll connect to an AWS Graviton3 metal instance (`m7g.metal`) with 64 Neoverse V1 cores, your remote target server. From the host machine, test the connection to the remote server by navigating to **Targets** > **Test Connection**. You should see the successful connection screen below.
+If this is your first time setting up Arm Performix, follow the [Arm Performix installation guide](/install-guides/performix/). In this Learning Path you'll connect to an AWS Graviton3 metal instance (`m7g.metal`) with 64 Neoverse V1 cores, your remote target server. From the host machine, test the connection to the remote server by navigating to **Targets** > **Test Connection**. You should see the successful connection screen below.
 
 ![The Arm Performix Targets panel showing a successful connection test result for a remote Arm server#center](./successful-connection.jpg "Successful connection to remote target")
 

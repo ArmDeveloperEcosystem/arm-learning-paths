@@ -1,9 +1,6 @@
 ---
 title: Optimize application performance using Arm Performix CPU microarchitecture analysis
 
-draft: true
-cascade:
-    draft: true
 
 minutes_to_complete: 60
 
