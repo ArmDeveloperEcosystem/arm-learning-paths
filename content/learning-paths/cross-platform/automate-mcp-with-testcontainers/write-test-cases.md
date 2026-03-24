@@ -17,7 +17,7 @@ The Arm MCP repository already includes a complete test implementation in [mcp-l
 Before writing tests, you need to understand how MCP servers communicate. MCP uses JSON-RPC 2.0 over standard input/output (stdio transport).
 The following diagram shows the communication flow between your test code, Testcontainers, and the MCP server:
 
-![MCP communication sequence diagram showing: Pytest Test creates DockerContainer via Testcontainers, which starts the MCP Server Container. The test then sends initialize request, receives capabilities response, sends initialized notification, then makes tools/call requests for check_image and knowledge_base_search, receiving results for each. Finally, the test exits the context manager, triggering Testcontainers to stop and remove the container. alt-txt#center](mcp-communication-flow.png "MCP JSON-RPC Communication Flow")
+![MCP communication sequence diagram showing: Pytest Test creates DockerContainer via Testcontainers, which starts the MCP Server Container. The test then sends initialize request, receives capabilities response, sends initialized notification, then makes tools/call requests for check_image and knowledge_base_search, receiving results for each. Finally, the test exits the context manager, triggering Testcontainers to stop and remove the container#center](mcp-communication-flow.png "MCP JSON-RPC Communication Flow")
 The communication follows this sequence:
 
 | Step | Direction | Message Type |
@@ -195,7 +195,7 @@ Save `helpers.py`. You now have the communication utilities needed for testing.
 
 **Understanding the code**: The Docker socket uses a multiplexed format where each frame has an 8-byte header. When you attach to a container's stdin/stdout, Docker wraps the data in frames that need to be parsed. The helper functions handle this low-level detail so your tests can focus on MCP logic.
 
-## Step 4: Write the test function
+## Step 4: write the test function
 
 Create the main test file `test_mcp.py`:
 
@@ -266,7 +266,7 @@ Complete the initialization handshake:
 
 Save the file. You now have a basic test that verifies the MCP server starts and initializes correctly.
 
-## Step 5: Run your test
+## Step 5: run your test
 
 Execute the test to verify your implementation:
 
@@ -292,7 +292,7 @@ Use the `-s` flag to see print statements:
 python -m pytest -s test_mcp.py
 ```
 
-## Step 6: Add a tool test (challenge)
+## Step 6: add a tool test (challenge)
 
 Now extend your test to verify an MCP tool. This is a hands-on challenge.
 

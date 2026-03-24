@@ -118,7 +118,7 @@ Container automatically stopped and removed.
 
 The following diagram illustrates how Testcontainers manages the complete container lifecycle:
 
-![Container lifecycle flowchart showing: Start Test leads to Create DockerContainer, which checks if Image exists. If No, it Pulls image then Creates container. If Yes, it directly Creates container. Then it Starts container, Waits for ready signal, Runs test code, Stops container, Removes container, and finally Test complete.alt-txt#center](container-lifecycle.png "Testcontainers container lifecycle")
+![Container lifecycle flowchart showing: Start Test leads to Create DockerContainer, which checks if Image exists. If No, it Pulls image then Creates container. If Yes, it directly Creates container. Then it Starts container, Waits for ready signal, Runs test code, Stops container, Removes container, and finally Test complete#center](container-lifecycle.png "Testcontainers container lifecycle")
 
 The `DockerContainer` context manager handles four phases automatically:
 
