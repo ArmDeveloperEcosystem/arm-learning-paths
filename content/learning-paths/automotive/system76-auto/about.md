@@ -6,7 +6,7 @@ weight: 2
 
 layout: "learningpathall"
 ---
-### About the Thelio Astra
+## About the Thelio Astra
 
 Thelio Astra is an Arm-based desktop computer designed by System76 for autonomous vehicle development and other general-purpose Arm software development.
 
