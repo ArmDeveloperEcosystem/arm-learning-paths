@@ -1,0 +1,77 @@
+---
+title: Cross-compile a benchmark binary for armeabi-v7a
+weight: 3
+
+### FIXED, DO NOT MODIFY
+layout: "learningpathall"
+---
+
+## Install Android NDK
+
+Download Android NDK from the [Android developer site](https://developer.android.com/ndk/downloads).
+
+The cross-compiler you need is `armv7a-linux-androideabi21-clang`. On Windows it is a `.cmd` file located inside the NDK installation:
+
+```
+C:\Users\<username>\AppData\Local\Android\Sdk\ndk\<version>\
+  toolchains\llvm\prebuilt\windows-x86_64\bin\
+  armv7a-linux-androideabi21-clang.cmd
+```
+
+On Linux it is at:
+
+```
+~/Android/Sdk/ndk/<version>/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi21-clang
+```
+
+Verify the compiler works:
+
+```bash { line_numbers = "true" }
+armv7a-linux-androideabi21-clang --version
+```
+
+Expected output:
+
+```output
+Android (clang version 17.x.x)
+Target: armv7a-unknown-linux-android21
+```
+
+## Create the benchmark file
+
+Create a file named `neon_bench.c`. The full source code is available at [github.com/poojithdevan4D/QuantEdge](https://github.com/poojithdevan4D/QuantEdge).
+
+## Compile for armeabi-v7a
+
+```bash { line_numbers = "true" }
+armv7a-linux-androideabi21-clang \
+  -O2 \
+  -mfpu=neon \
+  -mfloat-abi=softfp \
+  -o neon_bench_arm \
+  neon_bench.c \
+  -lm
+```
+
+Each flag serves a specific purpose:
+
+| Flag | Purpose |
+|---|---|
+| `-O2` | Enable optimization — compiler vectorizes independent operations |
+| `-mfpu=neon` | Enable NEON hardware on target, required to use `arm_neon.h` intrinsics |
+| `-mfloat-abi=softfp` | Android armeabi-v7a ABI — required or the binary crashes on launch |
+| `-lm` | Link math library — provides `expf()` |
+
+## Deploy to device via ADB
+
+Push the binary to the device and run it:
+
+```bash { line_numbers = "true" }
+adb push neon_bench_arm /data/local/tmp/neon_bench_arm
+adb shell chmod 777 /data/local/tmp/neon_bench_arm
+adb shell /data/local/tmp/neon_bench_arm
+```
+
+{{% notice Note %}}
+Use `/data/local/tmp/` and not `/sdcard/`. The sdcard partition is mounted `noexec` on Android — binaries cannot run from it.
+{{% /notice %}}
