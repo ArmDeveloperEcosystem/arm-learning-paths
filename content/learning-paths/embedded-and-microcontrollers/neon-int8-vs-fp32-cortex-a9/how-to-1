@@ -1,0 +1,36 @@
+---
+title: Understand Cortex-A9 NEON capabilities
+weight: 2
+
+### FIXED, DO NOT MODIFY
+layout: "learningpathall"
+---
+
+## Why Cortex-A9 behaves differently from modern Arm cores
+
+The Arm Cortex-A9 implements the ARMv7-A instruction set, designed around 2007-2009. It is found in hundreds of millions of active Android devices from the 2010-2015 era.
+
+Most TinyML benchmarks and quantization guides test on modern Arm cores such as Cortex-A55, Cortex-A72, and Cortex-A78, which have dedicated INT8 SIMD support via the SDOT instruction (introduced in Armv8.2-A in 2016). Cortex-A9 has no SDOT instruction.
+
+| Feature | Cortex-A9 (ARMv7-A) | Cortex-A55 (ARMv8.2-A) |
+|---|---|---|
+| SIMD unit | 128-bit NEON | 128-bit NEON |
+| FP32 multiply-accumulate | VMLA.F32 — 4 ops/instruction | FMLA — 4 ops/instruction |
+| INT8 multiply | VMULL.S8 — produces INT16 intermediate | SDOT — native 32-bit accumulation |
+| SDOT available | No | Yes |
+| Effective INT8 throughput | Reduced by widening overhead | Full 4x advantage over FP32 |
+
+## The widening problem
+
+INT8 x INT8 cannot fit in INT8. The maximum INT8 value is 127, and 127 x 127 = 16,129 which requires at minimum a 16-bit integer to store.
+
+On Cortex-A9, the INT8 multiply-accumulate chain requires two steps:
+
+```
+INT8 x INT8  --vmull_s8-->  INT16  (8 pairs processed, widening multiply)
+INT16 pairs  --vpadalq_s16-->  INT32  (pair-add into 32-bit accumulator)
+```
+
+FP32 achieves the same result in one instruction: `vmla.f32` multiplies and accumulates 4 floats natively into a 32-bit register with no widening required.
+
+This is the root cause of every quantization performance difference on this microarchitecture. The overhead is not the hardware — it is the two-instruction widening sequence that plain C and auto-vectorization cannot avoid.
