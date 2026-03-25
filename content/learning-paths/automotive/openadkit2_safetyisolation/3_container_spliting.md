@@ -19,7 +19,7 @@ In this Learning Path, you will split the simulation and visualization stack fro
 
 These nodes communicate using ROS 2 with DDS as the middleware layer, ensuring low-latency and fault-tolerant data exchange between components.
 
-## Architectural Benefits
+## Architectural benefits
 
 This architecture brings several practical benefits:
 
@@ -31,7 +31,7 @@ This architecture brings several practical benefits:
 
 - **Support for Modular CI/CD Workflows**: with containerized separation, you can build, test, and deploy each module independently, which enables agile development and faster iteration cycles.
 
-![img1 alt-text#center](aws_example.jpg "Split instance example in AWS")
+![Diagram showing OpenAD Kit deployment split across two AWS instances, with simulation and visualization on one instance and planning-control on another, connected via DDS communication#center](aws_example.jpg "Split instance example in AWS")
 
 ## Configure networking for DDS communication
 
@@ -54,7 +54,7 @@ Within the EC2 Security Group settings:
 - Add an inbound rule that allows all traffic from the same Security Group by setting the source to the security group itself.
 - Outbound traffic is typically allowed by default and usually does not require changes.
 
-![img2 alt-text#center](security_group.jpg "AWS Security Group Setting")
+![Screenshot of AWS Security Group configuration showing inbound rule allowing all traffic from the same security group to enable DDS peer discovery between instances#center](security_group.jpg "AWS Security Group Setting")
 
 This configuration allows automatic discovery and peer-to-peer communication between DDS participants across the two instances.
 
@@ -143,7 +143,7 @@ Copy the following configuration into docker/cycloneDDS.xml on both machines, an
 - For more information on CycloneDDS settings, see the [Cyclone DDS Configuration Guide](https://cyclonedds.io/docs/cyclonedds/latest/config/config_file_reference.html#cyclonedds-domain-internal-socketreceivebuffersize).
 {{% /notice %}}
 
-## Update the Docker Compose Configuration for Multi-Host Deployment
+## Update the Docker Compose configuration for multi-host deployment
 
 To support running containers across two separate hosts, you’ll need to modify the docker/docker-compose-2ins.yml file. 
 This includes removing inter-container dependencies and updating the network and environment configuration.
@@ -256,7 +256,7 @@ services:
 
 Before moving to the next step, make sure that `docker-compose-2ins.yml` and `cycloneDDS.xml` are already present on both instances.
 
-## Optimize Network Settings for DDS Communication
+## Optimize network settings for DDS communication
 
 In a distributed DDS setup, `high-frequency UDP traffic` between nodes may lead to  `IP packet fragmentation` or  `buffer overflows`, especially under load. 
 These issues can degrade performance or cause unexpected system behavior.
