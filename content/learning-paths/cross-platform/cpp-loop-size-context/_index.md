@@ -1,6 +1,8 @@
 ---
 title: Boost C++ performance by optimizing loops with boundary information
 
+description: Learn how to optimize C++ loop performance on Arm by providing boundary information to the compiler, enabling SIMD vectorization and reducing runtime through compile-time context.
+
 minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for C++ developers who want to improve the runtime of loops using existing knowledge of the loop size.

@@ -1,6 +1,8 @@
 ---
 title: Develop Arm automotive software on the System76 Thelio Astra
 
+description: Learn how to build and run the Arm Automotive Solutions Software Reference Stack locally on the System76 Thelio Astra desktop using Multipass virtualization and Yocto build tools.
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for automotive developers interested in local development using the System76 Thelio Astra Linux desktop computer. 
@@ -22,6 +24,10 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
+    - Multipass
+    - Yocto
+    - Docker
+    - Git
 
 further_reading:
     - resource:

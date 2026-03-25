@@ -1,6 +1,8 @@
 ---
 title: Write a Dynamic Memory Allocator
 
+description: Learn how to implement a dynamic memory allocator in C, understanding heap management and how malloc and free work under the hood with practical examples.
+
 minutes_to_complete: 120
 
 who_is_this_for: This is an introductory topic for software developers learning about dynamic memory allocation for the first time, and who may have used malloc and free in C programming. It also provides a starting point to explore more advanced memory allocation topics.

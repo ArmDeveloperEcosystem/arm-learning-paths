@@ -14,11 +14,11 @@ One way to check images is to use a browser and inspect the image in the registr
 
 For example, on Docker Hub, the architectures are printed.
 
-![Docker Hub architectures](_images/hub.png)
+![Screenshot of Docker Hub web interface showing a container image with a list of supported architectures including amd64, arm64, and other platforms displayed in the OS/ARCH column#center](_images/hub.png)
 
 AWS ECR Public registry also prints the architectures.
 
-![AWS ECR Public architectures](_images/ecr.png)
+![Screenshot of AWS ECR Public web interface showing a container image with the architectures list displaying arm64 and amd64 support in the Image details section#center](_images/ecr.png)
 
 If you see `arm64`, `ARM64`, or `arm64v8` on the list, then the image supports Arm.
 

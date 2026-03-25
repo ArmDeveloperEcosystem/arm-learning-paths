@@ -31,7 +31,7 @@ Press the space bar and the arrow keys to select the three components shown in t
 - **Safety Island Actuation Demo**.
 - **Baremetal**. 
 
-![configuration #center](configure.png)
+![Kas configuration menu showing three selected options: EULA acceptance, Safety Island Actuation Demo, and Baremetal, with Build button highlighted at bottom#center](configure.png)
 
 {{% notice Note %}}
 To build and run, you must accept the EULA. 

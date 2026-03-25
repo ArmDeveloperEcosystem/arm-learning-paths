@@ -1,5 +1,5 @@
 ---
-title: Arm System Characterization Tool
+title: Arm System Characterization Tool (ASCT)
 
 additional_search_terms:
 - ASCT
