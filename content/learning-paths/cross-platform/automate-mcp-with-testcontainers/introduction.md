@@ -25,7 +25,7 @@ MCP servers expose multiple tools that AI assistants can invoke. As these tools 
 
 Testcontainers is a Python library that provides lightweight, throwaway instances of Docker containers for testing. Instead of mocking your MCP server, you can spin up the actual Docker container, run tests against it, and tear it down automatically.
 
-![Diagram showing Testcontainers workflow: test code creates a Docker container, runs tests against it, and automatically tears it down after completion alt-txt#center](testcontainers.png "Testcontainers flow")
+![Diagram showing Testcontainers workflow: test code creates a Docker container, runs tests against it, and automatically tears it down after completion#center](testcontainers.png "Testcontainers flow")
 
 This approach offers several benefits:
 
