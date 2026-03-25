@@ -113,7 +113,7 @@ print_info: general.name     = Ernie-4.5-21B-A3B-Thinking
 
 Once inference is complete, the expected output looks like this (in Chinese):
 
-![Terminal output showing ERNIE-4.5 model response in Chinese with structured markdown formatting explaining Mixture of Experts concept alt-txt#center](meo_result.png "Introducing Mixture of Experts in Chinese")
+![Terminal output showing ERNIE-4.5 model response in Chinese with structured markdown formatting explaining Mixture of Experts concept#center](meo_result.png "Introducing Mixture of Experts in Chinese")
 
 This answer demonstrates the model's multilingual and structured reasoning ability. It begins with a narrative explanation introducing the concept of Mixture of Experts (MoE), followed by a well-organized markdown-style summary with section headers and bullet points. The response describes MoE as a model combining multiple specialized sub-models (experts) and a routing mechanism (gateway) to activate only a few experts per input. It explains how routing selects top experts based on input features and how the system reduces computation by activating only a small number of experts per token. The answer also gives examples such as word segmentation and translation, explaining how different experts might focus on distinct subtasks in Chinese NLP applications.
 
