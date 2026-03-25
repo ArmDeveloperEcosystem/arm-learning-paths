@@ -87,5 +87,5 @@ stepi
 Use the `Commands` or `History` pane to see and copy the equivalent debugger commands of the GUI actions.
 {{% /notice %}}
 
-![RSE.launch in Arm Development Studio showing Debugger pane with TF-M symbols loaded and path substitution mapping alt-text#center](debugger_commands.png "RSE Debugger pane with TF-M symbol loading and source path substitution")
+![RSE.launch in Arm Development Studio showing Debugger pane with TF-M symbols loaded and path substitution mapping#center](debugger_commands.png "RSE Debugger pane with TF-M symbol loading and source path substitution")
 
