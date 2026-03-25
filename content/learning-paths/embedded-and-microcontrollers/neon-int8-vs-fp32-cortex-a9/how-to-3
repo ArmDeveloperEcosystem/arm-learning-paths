@@ -1,0 +1,103 @@
+---
+title: Write scalar and NEON intrinsic kernels
+weight: 4
+
+### FIXED, DO NOT MODIFY
+layout: "learningpathall"
+---
+
+## Three kernels to compare
+
+Write three implementations of 256x256 matrix multiplication in `neon_bench.c`. All three compute the same result — the only difference is how they use the hardware.
+
+### Kernel 1 — Scalar INT8 (no SIMD)
+
+```C { line_numbers = "true" }
+void matmul_scalar_int8(int8_t* A, int8_t* B, int32_t* C, int N) {
+    for(int i = 0; i < N; i++)
+        for(int j = 0; j < N; j++) {
+            int32_t sum = 0;
+            for(int k = 0; k < N; k++)
+                sum += (int32_t)A[i*N+k] * (int32_t)B[k*N+j];
+            C[i*N+j] = sum;
+        }
+}
+```
+
+This is what most developers write. With `-O2`, the compiler tries to auto-vectorize but the widening requirement (INT8 to INT32) often causes scalar fallback or a suboptimal vectorization path.
+
+### Kernel 2 — FP32 NEON using vmlaq_f32
+
+```C { line_numbers = "true" }
+#include <arm_neon.h>
+
+void matmul_fp32_neon(float* A, float* B, float* C, int N) {
+    for(int i = 0; i < N; i++)
+        for(int j = 0; j < N; j++) {
+            float32x4_t sum = vdupq_n_f32(0.0f);
+            for(int k = 0; k < N; k += 4) {
+                float32x4_t a = vld1q_f32(&A[i*N + k]);
+                float32x4_t b = vld1q_f32(&B[k*N + j]);
+                sum = vmlaq_f32(sum, a, b);
+            }
+            float32x2_t lo = vget_low_f32(sum);
+            float32x2_t hi = vget_high_f32(sum);
+            float32x2_t s  = vadd_f32(lo, hi);
+            s = vpadd_f32(s, s);
+            C[i*N+j] = vget_lane_f32(s, 0);
+        }
+}
+```
+
+`vmlaq_f32` processes 4 FP32 values per instruction with native 32-bit accumulation. No widening is needed — the result of FP32 x FP32 fits directly in a FP32 register.
+
+### Kernel 3 — INT8 NEON using vmull_s8
+
+```C { line_numbers = "true" }
+void matmul_int8_neon(int8_t* A, int8_t* B, int32_t* C, int N) {
+    for(int i = 0; i < N; i++)
+        for(int j = 0; j < N; j++) {
+            int32x4_t sum = vdupq_n_s32(0);
+            for(int k = 0; k < N; k += 8) {
+                int8x8_t  a   = vld1_s8(&A[i*N + k]);
+                int8x8_t  b   = vld1_s8(&B[k*N + j]);
+                int16x8_t mul = vmull_s8(a, b);
+                sum = vpadalq_s16(sum, mul);
+            }
+            int32x2_t lo = vget_low_s32(sum);
+            int32x2_t hi = vget_high_s32(sum);
+            int32x2_t s  = vadd_s32(lo, hi);
+            s = vpadd_s32(s, s);
+            C[i*N+j] = vget_lane_s32(s, 0);
+        }
+}
+```
+
+`vmull_s8` processes 8 INT8 pairs per instruction producing INT16 intermediate results. `vpadalq_s16` then pair-adds these into the INT32 accumulator. This is the explicit widening chain — two instructions where FP32 uses one — but processing 8 pairs vs FP32's 4.
+
+## Prevent dead code elimination
+
+When benchmarking with `-O2`, always print a value from the result array. Without this the compiler detects that the output is never used and eliminates the entire computation. All timings will show 0.00ms.
+
+```C
+printf("Checksum: %d\n", C[0] + C[N*N-1]);
+```
+
+## Time each kernel using CLOCK_MONOTONIC
+
+Use `CLOCK_MONOTONIC` for nanosecond-resolution timing on Android. The standard `clock()` function has only 10ms resolution on Android 4.x and is not suitable for benchmarking.
+
+```C { line_numbers = "true" }
+double get_ms() {
+    struct timespec ts;
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+    return ts.tv_sec * 1000.0 + ts.tv_nsec / 1000000.0;
+}
+
+double t0 = get_ms();
+matmul_fp32_neon(Af, Bf, Cf, N);
+double elapsed = get_ms() - t0;
+printf("FP32 NEON: %.2f ms\n", elapsed);
+```
+
+Run 2 warmup iterations before timing to allow TFLite JIT compilation and CPU cache to stabilize, then record 10 timed runs.
