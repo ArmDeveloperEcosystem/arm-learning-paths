@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## Example 2: Matrix Multiplication
+## Example 2: matrix multiplication
 
 Use a text editor to save the program below in a file named `eigen-test3.cpp`:
 
@@ -81,7 +81,7 @@ You again see that the SVE build is slower than the ASIMD.
 
 The SVE implementation is still experimental and performance is expected to improve in the future.
 
-## Example 3: Vector 3D Rotation
+## Example 3: vector 3D rotation
 
 This example creates an initial random normalized vector `v1`.
 
