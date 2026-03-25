@@ -1,0 +1,47 @@
+---
+title: Analyze results and apply to your deployment
+weight: 5
+
+### FIXED, DO NOT MODIFY
+layout: "learningpathall"
+---
+
+## Results on Samsung GT-S7392 (Cortex-A9 @ 1GHz)
+
+The following results are from a 256x256 matrix multiplication benchmark, 10 runs after 2 warmup iterations, on Android 4.1.2:
+
+| Kernel | Time | vs FP32 NEON |
+|---|---|---|
+| Scalar INT8 — plain C, no SIMD | 384.67ms | 5.1x slower |
+| FP32 NEON — vmlaq_f32 | 74.87ms | baseline |
+| INT8 NEON — vmull_s8 | 29.90ms | **2.5x faster** |
+
+## What the results reveal
+
+Most developers who have benchmarked INT8 on Cortex-A9 report it as slower than FP32 — typically 1.35x slower with plain C. This leads to the conclusion that quantization hurts performance on legacy ARM hardware.
+
+That conclusion is wrong.
+
+The benchmark was measuring compiler auto-vectorization quality, not hardware capability. With scalar C:
+- FP32 auto-vectorizes cleanly because FP32 x FP32 fits in FP32 — one `vmla.f32` instruction
+- INT8 widening confuses the auto-vectorizer — the compiler cannot cleanly express INT8 x INT8 → INT32 and falls back to scalar or suboptimal code
+
+With explicit NEON intrinsics giving both precisions equal treatment, INT8 wins by 2.5x because `vmull_s8` processes 8 INT8 pairs per instruction versus FP32's 4.
+
+## Practical guidance for ARMv7-A deployment
+
+**Use FP32** if your inference runtime does not use explicit NEON INT8 kernels internally. Scalar or poorly vectorized INT8 is slower than FP32 due to widening overhead.
+
+**Use INT8** if your runtime uses explicit NEON intrinsics for INT8 operations. INT8 NEON is 2.5x faster than FP32 NEON on Cortex-A9 with correct implementation.
+
+**Always profile on your actual target hardware** before making precision decisions. Benchmark results from modern Arm cores (Cortex-A55 and later with SDOT) do not apply to ARMv7-A devices.
+
+The critical variable is not the hardware — it is the quality of the runtime's kernel implementation.
+
+## Next steps
+
+- Run the full TFLite BlazeFace model benchmark to measure end-to-end inference time on device
+- Compare TFLite FP32 and INT8 `.tflite` model inference to understand whether TFLite's internal kernels use optimized NEON on ARMv7-A
+- Explore ONNX Runtime on Android as an alternative inference runtime for comparison
+
+The full project including all benchmark code, cross-compilation scripts, and TFLite deployment pipeline is available at [github.com/poojithdevan4D/QuantEdge](https://github.com/poojithdevan4D/QuantEdge).
