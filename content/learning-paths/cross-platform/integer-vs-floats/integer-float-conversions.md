@@ -8,7 +8,7 @@ layout: learningpathall
 
 There are two types of data type conversions, explicit and implicit. 
 
-## Explicit Conversions
+## Explicit conversions
 
 Explicit conversions are done on purpose because you, the developer, understand the algorithm and your expectations of the results. Explicit conversions can be used to balance performance and accuracy. 
 
@@ -141,7 +141,7 @@ Conversion is done on purpose and is controlled but, when dealing with performan
 
 The second type of conversions are called implicit and are harder to track.
 
-## Implicit Conversions
+## Implicit conversions
 
 When a conversion is not explicitly stated it is called implicit. In general, it's a conversion that the compiler issues when there is an operation involving two (or more) elements of different data types.
 
