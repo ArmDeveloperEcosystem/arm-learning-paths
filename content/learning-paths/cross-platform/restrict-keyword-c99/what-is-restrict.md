@@ -106,7 +106,7 @@ This doesn't look optimal. `scaleVectors` seems to be doing each load, multiplic
 
 Unsurprisingly, the disassembled output of `scaleVectors` is the same. The reason for this is that the compiler has no hint about the dependency between the two pointers used in the function so it has no choice but to assume that it has to process one element at a time. The function has no way of knowing what arguments need to be called.  We see 8 instances of `mul`, which is correct but the number of loads and stores in between indicates that the CPU spends its time waiting for data to arrive from/to the cache. We need a way to be able to tell the compiler that it can assume the buffers passed are independent.
 
-## The Solution: restrict
+## The solution: restrict
 
 This is what the C99 `restrict` keyword resolves. It instructs the compiler that the passed arguments are not dependent on each other and that access to the memory of each happens only through the respective pointer. This way the compiler can schedule the instructions in a much more efficient way. Essentially it can group and schedule the loads and stores. 
 
