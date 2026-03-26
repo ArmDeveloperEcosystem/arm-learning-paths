@@ -5,6 +5,8 @@ minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for software developers who want to learn how to use Arm-hosted runners for GitHub Actions jobs. 
 
+description: Learn how to use GitHub Actions with Arm-hosted runners to build multi-architecture container images for arm64 and amd64 platforms and automate deployment to Docker Hub.
+
 learning_objectives:
     - Build Arm images and multi-architecture images with Arm-hosted runners.
     - Use GitHub Actions to automate image builds.
