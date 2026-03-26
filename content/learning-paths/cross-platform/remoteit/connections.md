@@ -18,9 +18,9 @@ The advantages are:
 
 Peer to Peer connections are created by installing a software package with initiator support on the initiator device. Install the Remote.It Desktop application or Remote.It CLI on your initiator device to support Peer to Peer connection.
 
-![example image alt-text#center](remote.it-connections.png "Proxy and Peer to Peer Connection Illustration")
+![Diagram illustrating the difference between proxy connections, where traffic is routed through a Remote.It server between initiator and target devices, and peer-to-peer connections, where a direct connection is established between initiator and target without an intermediary server#center](remote.it-connections.png "Proxy and peer-to-peer connection architecture")
 
-## Peer to Peer Connections
+## Peer to peer connections
 
 Peer to Peer connections to the target computer appear as a local port on the initiator computer.
 
