@@ -33,7 +33,7 @@ For further information on `uv`, see: [https://github.com/astral-sh/uv](https://
 
 ## A high-level view of the architecture
 
- ![Diagram of Model Context Protocol (MCP) architecture showing the interaction between MCP Host (LLM-powered app), MCP Client (runtime shim), and MCP Server, which connects to local data sources (files, sensors, databases) and remote APIs for AI agent context retrieval.](./mcp.png)
+ ![Diagram of Model Context Protocol (MCP) architecture showing the interaction between MCP Host (LLM-powered app), MCP Client (runtime shim), and MCP Server, which connects to local data sources (files, sensors, databases) and remote APIs for AI agent context retrieval.#center](./mcp.png)
 
 *Figure: High-level view of the architecture of the Model Context Protocol (MCP) for local AI agent integration with real-world data sources.*
 
