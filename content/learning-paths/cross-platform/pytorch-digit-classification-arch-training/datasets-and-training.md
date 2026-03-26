@@ -72,7 +72,7 @@ Make sure to replace 'x' with the version number of Python that you have install
 
 After running the code, you will see output similar to Figure 5:
 
-![image alt-text#center](figures/01.webp "Figure 5. Output")
+![Screenshot of Jupyter Notebook output showing the MNIST dataset loading confirmation, displaying the number of training and test samples loaded along with the dataset structure information#center](figures/01.webp "MNIST dataset loading output")
 
 ## Train the Model
 
@@ -134,7 +134,7 @@ for t in range(epochs):
 
 After running the code, you see the following output showing the training progress, as displayed in Figure 2.
 
-![image alt-text#center](figures/02.webp "Figure 2. Output 2")
+![Screenshot of Jupyter Notebook showing training progress output with epoch numbers, loss values, and test accuracy metrics updating as the model trains on the MNIST dataset#center](figures/02.webp "Model training progress output")
 
 Once the training is complete, you see output similar to:
 
