@@ -22,18 +22,18 @@ If you're using an existing project, skip to the next section.
 
 Navigate to **Projects** in the left sidebar and select **New Project**:
 
-![GitLab left sidebar showing Projects menu with New Project option highlighted alt-txt#center](_images/gitlab-projects.png "GitLab Projects menu in left sidebar")
+![GitLab left sidebar showing Projects menu with New Project option highlighted#center](_images/gitlab-projects.png "GitLab Projects menu in left sidebar")
 
 Choose **Create blank project** or **Create from template** (select **GitLab CI/CD components** if using a template):
 
-![GitLab new project creation screen showing options for blank project and templates alt-txt#center](_images/new-project.png "GitLab new project creation screen")
+![GitLab new project creation screen showing options for blank project and templates#center](_images/new-project.png "GitLab new project creation screen")
 
 Provide a project name (for example, `arm-runner-demo`) and select your preferred project URL. Select **Create Project**:
 
-![GitLab project information entry screen with fields for project name and URL alt-txt#center](_images/project-info.png "GitLab project information entry screen")
+![GitLab project information entry screen with fields for project name and URL#center](_images/project-info.png "GitLab project information entry screen")
 
 Your new project is ready:
 
-![GitLab project creation success screen showing project dashboard alt-txt#center](_images/project-done.png "GitLab project creation success screen")
+![GitLab project creation success screen showing project dashboard#center](_images/project-done.png "GitLab project creation success screen")
 
 With your project created, you can now add application files and configure the CI/CD pipeline to use Arm64 runners.

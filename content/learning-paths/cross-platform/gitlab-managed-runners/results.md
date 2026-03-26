@@ -13,17 +13,17 @@ This section explains how to run, verify, and test your pipeline and container i
 
 Navigate to **Build** > **Pipelines** and select **Run pipeline**:
 
-![New-Pipeline #center](_images/new-pipeline.png)
+![Screenshot of GitLab Build menu showing Pipelines section with Run pipeline button, which triggers the CI/CD workflow to execute on the configured Arm64 runners#center](_images/new-pipeline.png "GitLab Run pipeline interface")
 
 Select individual jobs to view their output and status:
 
-![GitLab pipeline execution screen showing job output and status alt-txt#center](_images/pipeline-execution.png "GitLab pipeline execution screen")
+![GitLab pipeline execution screen showing job output and status#center](_images/pipeline-execution.png "GitLab pipeline execution screen")
 
 ## Verify Arm64 architecture
 
 The `lscpu` command output confirms you're building on Arm64 architecture:
 
-![lscpu-output #center](_images/lscpu.png)
+![Terminal output of lscpu command showing Arm64 architecture details including aarch64 designation, Neoverse-N1 CPU model, and 2 CPU cores, confirming the pipeline is executing on GitLab-hosted Arm runners#center](_images/lscpu.png "lscpu output confirming Arm64 architecture")
 
 Key information from `lscpu` output:
 
@@ -61,12 +61,10 @@ This image runs only on Arm64 systems because it contains an Arm64 binary. To ru
 
 The pipeline editor provides helpful features:
 
-![visual-pipeline #center](_images/visual-pipeline.webp)
-
 - **Visualize**: View your pipeline as a graph showing stage dependencies
 - **Validate**: Check pipeline syntax before committing changes
 
-![GitLab visual pipeline editor showing pipeline graph and validation tools alt-txt#center](_images/visual-pipeline.webp "GitLab visual pipeline editor with graph and validation tools")
+![GitLab visual pipeline editor showing pipeline graph and validation tools#center](_images/visual-pipeline.webp "GitLab visual pipeline editor with graph and validation tools")
 
 ## What you've accomplished and what's next
 
