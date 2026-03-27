@@ -8,6 +8,10 @@ key_ip:
 - Cortex-M
 - Ethos-U
 maintopic: true
+pinned_learning_paths:
+- vcpkg-tool-installation
+- raspberry-pi-smart-home
+- introduction-to-tinyml-on-arm
 operatingsystems_filter:
 - Android: 1
 - Baremetal: 30
