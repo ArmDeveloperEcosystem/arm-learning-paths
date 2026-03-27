@@ -14,7 +14,7 @@ Each memory access is satisfied by the closest level of the hierarchy that conta
 
 Both systems use 4-way L1 caches with 64-byte lines and 8-way L2 caches, also with 64-byte lines. The key architectural differences are in L2 size and whether a shared last-level cache is present.
 
-Graviton2 (Neoverse N1) has a 1 MB private L2 per core and a 32 MB shared L3 across all 64 cores. Graviton4 (Neoverse V2) doubles the L2 to 2 MB and has a 36 MB shared L3. The larger L2 on V2 reduces traffic to the shared L3 and lowers contention in multi-threaded workloads, which is especially beneficial for workloads with per-thread working sets between 1 MB and 2 MB.
+Graviton2 (Neoverse N1) has a 1 MB private L2 per core and a 32 MB shared L3 across all 64 cores. Graviton4 (Neoverse V2) doubles the L2 to 2 MB and has a 36 MB shared L3. The larger L2 on Neoverse V2 reduces traffic to the shared L3 and lowers contention in multi-threaded workloads, which is especially beneficial for workloads with per-thread working sets between 1 MB and 2 MB.
 
 Some SoCs add a System Level Cache (SLC) beyond L3, sitting between the CPU cluster and the memory controllers and serving both CPU and GPU traffic.
 

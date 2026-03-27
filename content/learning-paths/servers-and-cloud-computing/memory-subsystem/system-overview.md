@@ -136,7 +136,7 @@ NUMA:
 
 The two systems span two generations of Arm Neoverse server cores. Graviton2 uses Neoverse N1 cores with private 1 MB L2 caches per core and a 32 MB shared L3. Graviton4 uses Neoverse V2 cores with 2 MB private L2 caches per core and a 36 MB shared L3. These differences in cache sizes and memory technology directly impact the memory latency, bandwidth, and scaling behavior you observe in later benchmarks.
 
-Notice that the Neoverse V2 `Flags` field is significantly longer than Neoverse N1. This reflects the newer Arm architecture: V2 is based on Armv9, which adds extensions like SVE2, BF16, and I8MM that are absent on the Armv8-based N1.
+Notice that the Neoverse V2 `Flags` field is significantly longer than Neoverse N1. This reflects the newer Arm architecture: Neoverse V2 is based on Armv9, which adds extensions like SVE2, BF16, and I8MM that are absent on the Armv8-based Neoverse N1.
 
 ## Check DRAM configuration
 

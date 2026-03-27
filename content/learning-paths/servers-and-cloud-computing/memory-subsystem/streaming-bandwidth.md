@@ -59,9 +59,9 @@ The `bandwidth-sweep` benchmark reports the bandwidth at the optimal data size f
 Key differences to look for between Graviton2 and Graviton4:
 
 - **L1 bandwidth**: Graviton4 shows roughly 2x the L1 bandwidth of Graviton2. This likely reflects a combination of higher clock speed and microarchitectural throughput improvements in Neoverse V2.
-- **L2 bandwidth**: V2's larger 2 MB L2 keeps more data in the fast private cache, and microarchitectural improvements on V2 also increase L2 fill bandwidth.
-- **LLC bandwidth**: Graviton4 more than doubles the LLC bandwidth of Graviton2, reflecting improvements in the interconnect and shared cache design on V2.
-- **DRAM bandwidth (single core)**: Graviton4 achieves higher single-core DRAM throughput because V2 supports more outstanding memory requests than N1, and DDR5 provides more bandwidth per channel than DDR4.
+- **L2 bandwidth**: Neoverse V2's larger 2 MB L2 keeps more data in the fast private cache, and microarchitectural improvements on Neoverse V2 also increase L2 fill bandwidth.
+- **LLC bandwidth**: Graviton4 more than doubles the LLC bandwidth of Graviton2, reflecting improvements in the interconnect and shared cache design on Neoverse V2.
+- **DRAM bandwidth (single core)**: Graviton4 achieves higher single-core DRAM throughput because Neoverse V2 supports more outstanding memory requests than Neoverse N1, and DDR5 provides more bandwidth per channel than DDR4.
 
 ### Bytes per cycle
 
