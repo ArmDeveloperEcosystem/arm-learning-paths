@@ -62,6 +62,8 @@ Two things happen when this script runs.
 4. Registers RPC handlers: `execute`, `getStatus`, `getFeatures`, `step`, `reset`, and `stop`.
 5. Starts a 10Hz background loop that emits `stateUpdate` and `observationUpdate` events to any listener on the mesh.
 
+![Sequence diagram showing the call flow when r.run() executes: the script calls Robot() and DeviceRuntime, which announces presence to the Zenoh mesh, subscribes to the command topic, registers RPC handlers, and starts emitting stateUpdate events at 10 Hz#center](./images/visual2.png "Call flow inside r.run(): device registration and event publishing over Zenoh")
+
 You should see INFO-level log output similar to:
 
 ```output

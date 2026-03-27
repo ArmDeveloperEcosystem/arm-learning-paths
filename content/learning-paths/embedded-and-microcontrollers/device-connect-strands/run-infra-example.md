@@ -32,6 +32,8 @@ git clone --depth 1 https://github.com/arm/device-connect.git
 
 This section involves two machines. Keep track of which commands run where:
 
+![Network topology diagram showing the host machine running a Docker Compose stack with a Zenoh router on port 7447, etcd on port 2379, and a device registry on port 8080, alongside an agent process. The Raspberry Pi target runs a Robot process connected to the host Zenoh router over TCP. The agent process reaches the router over localhost and queries the device registry via discover_devices#center](./images/visual3.png "Two-machine topology: host running Device Connect infrastructure and Raspberry Pi robot process connected via Zenoh router")
+
 | Machine | Terminal | Purpose |
 |---------|----------|---------|
 | Host    | 1 | Docker Compose infrastructure |
@@ -80,7 +82,7 @@ Note the address returned - for the rest of this section it's referred to as `HO
 
 ## Step 3 - prepare the Raspberry Pi
 
-On the Raspberry Pi, follow the same repository and environment setup from the setup section of this Learning Path: install Python 3.12, clone the `robots` repository, create the virtual environment, and install the packages with the same editable install commands.
+On the Raspberry Pi, follow the same repository and environment setup from the setup section: clone the `robots` repository and run `setup.sh` to install all dependencies.
 
 Once the environment is ready, export the three variables that tell the SDK to route traffic through the Device Connect router on your host rather than using local network discovery:
 
@@ -101,7 +103,7 @@ python <<'PY'
 import logging
 logging.basicConfig(level=logging.INFO)
 from strands_robots import Robot
-r = Robot('so100')
+r = Robot('so100', peer_id='so100-abc123')
 r.run()
 PY
 ```
@@ -116,7 +118,7 @@ device_connect_sdk.device.so100-abc123 - INFO - Connected to ZENOH broker: ['tcp
 device_connect_sdk.device.so100-abc123 - INFO - Device registered: registration_id=ecfff6a7-...
 ```
 
-Note the peer ID (for example `so100-abc123`). You'll need it in the `tell` command below. Leave this process running on the Pi.
+Leave this process running on the Pi.
 
 ## Discover and invoke using the robot_mesh Strands tool
 
@@ -137,7 +139,7 @@ Discovered 1 device(s):
     Functions: execute, getFeatures, getState, getStatus, stop
 ```
 
-Send an instruction to the robot. Replace `so100-abc123` with the peer ID shown in your output:
+Send an instruction to the robot using the peer ID set in Step 4:
 
 ```python
 python <<'PY'
@@ -194,4 +196,4 @@ In this section you've:
 - Connected a Raspberry Pi as a remote device by pointing its SDK at the router's TCP address.
 - Discovered the Pi's robot from your host by querying the persistent registry and sent commands to it across the network.
 
-This is a deliberately simple two-device setup, but it demonstrates the foundation for something much larger. Once devices register through a shared infrastructure, agents can discover and command any of them without caring where they run - a fleet of robot arms, a network of sensors, or a mix of physical and simulated devices all become equally reachable. Adding more devices is just a matter of pointing them at the same router. That's the core of what Device Connect makes possible: a mesh of heterogeneous devices that agents can reason about and act on, at any scale.
+This two-device setup demonstrates the foundation for larger deployments. Once devices register through a shared infrastructure, adding more is a matter of pointing them at the same router — whether that's another Raspberry Pi in the same lab or a device on a different network.

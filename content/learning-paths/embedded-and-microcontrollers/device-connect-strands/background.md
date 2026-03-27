@@ -26,31 +26,19 @@ Two packages make this work.
 
 **`device-connect-agent-tools`** is the agent-side runtime. It exposes `discover_devices()` and `invoke_device()` as plain Python functions. The `robot_mesh` tool in Strands Robots wraps the same interface as a Strands tool, so an LLM can call it too. Both use the same underlying transport, so the same calls work whether the caller is a script or an agent.
 
-```
-┌──────────────────────────────────────┐
-│  Agent layer                         │
-│  discover_devices · invoke_device    │
-│  robot_mesh Strands tool             │
-└──────────────┬───────────────────────┘
-               │ Device Connect
-               │ (device-to-device discovery & RPC)
-┌──────────────▼───────────────────────┐
-│  Device layer                        │
-│  Simulated SO-100 arm                |
-|           - so100-abc123             │
-│  heartbeat · execute · getStatus     │
-└──────────────────────────────────────┘
-```
+![Architecture diagram showing two tiers: the agent layer containing discover_devices, invoke_device, and the robot_mesh Strands tool, connected via a Device Connect Zenoh D2D arrow to the device layer containing the SO-100 robot process with its peer ID and RPC functions#center](./images/visual1.png "Device Connect architecture: agent layer and device layer connected over Zenoh D2D")
 
 ## What a device exposes
 
-This Learning Path uses the SO-100 arm, a simulated robot arm from Hugging Face. When `Robot('so100').run()` starts, it registers on the mesh and exposes three callable functions. These are what `invoke_device()` on the agent side targets — calling `invoke_device("so100-abc123", "execute", {...})` routes a request over Zenoh to the robot process and executes the function there, returning the result back to the caller:
+This Learning Path uses the SO-100 arm, an open-source robot arm. When `Robot('so100').run()` starts, it registers on the mesh and exposes three callable functions. These are what `invoke_device()` on the agent side targets — calling `invoke_device("so100-abc123", "execute", {...})` routes a request over Zenoh to the robot process and executes the function there, returning the result back to the caller:
 
 - `execute` — send a natural language instruction and a policy provider to the robot
 - `getStatus` — query what the robot is currently doing
 - `stop` — halt the current task, or `emergency_stop` to halt every device on the mesh at once
 
 A motion policy is the component that translates a high-level instruction like "pick up the cube" into a sequence of joint movements. Different policy providers connect to different backends — from local model inference to remote policy servers. For this Learning Path, `policy_provider='mock'` is used, so `execute` accepts the task and returns immediately without running real motion. Replacing `'mock'` with a real provider like `'lerobot_local'` or `'groot'` is a one-line change once you have the connectivity working.
+
+Beyond discrete RPC calls, devices can also publish a continuous stream of sensor data over the same mesh. A camera publishes image frames, a depth sensor publishes point clouds, and an IMU reports pose updates — all as Device Connect events that any subscriber on the network receives in real time. The simulated robot in this Learning Path publishes joint state and observation updates at 10 Hz.
 
 ## What you'll learn in this Learning Path
 
