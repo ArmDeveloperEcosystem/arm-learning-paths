@@ -3,6 +3,8 @@ title: Understand the `restrict` keyword in C99
 
 minutes_to_complete: 30
 
+description: Learn how to use the C99 restrict keyword to indicate non-overlapping memory regions and enable better compiler optimizations for vectorization on Arm platforms.
+
 who_is_this_for: This is an introductory topic for C developers who are interested in software optimization
 
 learning_objectives: 
