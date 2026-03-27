@@ -8,6 +8,10 @@ key_ip:
 - Cortex-M
 - Ethos-U
 maintopic: true
+pinned_learning_paths:
+- arduino-pico
+- vcpkg-tool-installation
+- zephyr
 operatingsystems_filter:
 - Android: 1
 - Baremetal: 30

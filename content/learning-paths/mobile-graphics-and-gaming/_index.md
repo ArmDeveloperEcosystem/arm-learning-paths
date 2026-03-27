@@ -8,6 +8,10 @@ key_ip:
 - Immortalis
 - Mali
 maintopic: true
+pinned_learning_paths:
+- ai-camera-pipelines
+- android_webgpu_dawn
+- profiling-unity-apps-on-android
 operatingsystems_filter:
 - Android: 40
 - Linux: 40
