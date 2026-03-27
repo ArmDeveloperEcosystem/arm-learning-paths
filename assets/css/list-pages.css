@@ -214,7 +214,7 @@ ads-card.path-card.featured-path-card ads-card-content::before {
     position: absolute;
     inset: 0;
     border-radius: 10px;
-    padding: 1.5px;
+    padding: 3px;
     background: linear-gradient(135deg,
         var(--arm-green) 0%,
         var(--arm-green) 50%,
@@ -226,7 +226,7 @@ ads-card.path-card.featured-path-card ads-card-content::before {
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
-    opacity: 0.42;
+    opacity: 0.4;
     transition: opacity 0.3s ease-in-out;
 }
 
