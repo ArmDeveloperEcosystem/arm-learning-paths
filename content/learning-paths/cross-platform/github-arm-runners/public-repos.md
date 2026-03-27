@@ -22,7 +22,7 @@ You may have software that relies on Arm architecture features. Arm-hosted runne
 
 The output of the `lscpu` command is below.
 
-![Arm-hosted runner info #center](_images/lscpu.png)
+![Terminal output of lscpu command showing Arm-hosted runner specifications: 4 vCPUs, Neoverse N2 architecture, Armv9-A with SVE2 support, indicating the hardware capabilities available for running GitHub Actions workflows on Arm processors#center](_images/lscpu.png "lscpu output showing Arm Neoverse N2 runner specifications")
 
 ## What do I need to change in my workflow to use Arm-hosted runners?
 
