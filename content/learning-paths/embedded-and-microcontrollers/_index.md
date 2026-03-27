@@ -9,9 +9,9 @@ key_ip:
 - Ethos-U
 maintopic: true
 pinned_learning_paths:
-- arduino-pico
 - vcpkg-tool-installation
-- zephyr
+- raspberry-pi-smart-home
+- introduction-to-tinyml-on-arm
 operatingsystems_filter:
 - Android: 1
 - Baremetal: 30

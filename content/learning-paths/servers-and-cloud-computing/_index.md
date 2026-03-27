@@ -7,12 +7,9 @@ key_ip:
 - Neoverse
 maintopic: true
 pinned_learning_paths:
-- nginx_tune
-- codec
-- kafka
-- clickhouse
-- github-actions-runner
-- migrate-ease
+- arm-mcp-server
+- learning-paths/cross-platform/vectorization-comparison
+- performix-microarchitecture
 operatingsystems_filter:
 - Android: 3
 - Linux: 223

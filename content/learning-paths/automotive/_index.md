@@ -9,8 +9,8 @@ key_ip:
 maintopic: true
 pinned_learning_paths:
 - openadkit1_container
-- zenacssdebug
-- system76-auto
+- learning-paths/cross-platform/simd-loops
+- openadkit2_safetyisolation
 subtitle: Build smarter, real-time vehicle software on reliable Arm platforms.
 title: Automotive
 weight: 4
