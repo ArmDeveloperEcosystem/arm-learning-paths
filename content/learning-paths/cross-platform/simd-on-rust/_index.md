@@ -3,6 +3,8 @@ title: Learn how to write SIMD code on Arm using Rust
 
 minutes_to_complete: 30
 
+description: Learn how to write SIMD code in Rust on Arm platforms using Neon intrinsics, portable SIMD abstractions, and optimize performance with architecture-specific instructions.
+
 who_is_this_for: This is an advanced topic for software developers who want take advantage of SIMD code on Arm systems using Rust.
 
 learning_objectives: 
