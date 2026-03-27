@@ -10,7 +10,7 @@ In this section, you'll learn how to set up an AI Agent on your development mach
 
 These commands were tested on a Linux Arm development machine. 
 
-## Create an AI Agent and point it at your Pi's MCP Server
+## Create an AI agent and point it at your Pi's MCP Server
 
 1. Install `uv` on your development machine:
 
@@ -110,9 +110,9 @@ The weather in Cambridge is currently partly cloudy with a temperature of around
 
 Congratulations! Your local AI Agent just called the MCP server on your Raspberry Pi and fetched the CPU temperature and the weather information.
 
-This lightweight protocol isn’t just a game-changer for LLM developers—it also empowers IoT engineers to transform real-world data streams and give AI direct, reliable control over any connected device.
+This lightweight protocol isn't just a game-changer for LLM developers - it also empowers IoT engineers to transform real-world data streams and give AI direct, reliable control over any connected device.
 
-## Next Steps
+## Next steps
 
 - **Expand Your Toolset**  
    - Write additional `@mcp.tool()` functions for Pi peripherals (such as GPIO pins, camera, and I²C sensors).  
@@ -124,5 +124,5 @@ This lightweight protocol isn’t just a game-changer for LLM developers—it al
 
 ## Section summary
 
-You’ve now built and run an AI agent on your development machine that connects to an MCP server on your Raspberry Pi 5. Your agent can now interact with real-world data sources in real time — a complete edge-to-cloud loop powered by OpenAI’s Agent SDK and the MCP protocol.
+You've now built and run an AI agent on your development machine that connects to an MCP server on your Raspberry Pi 5. Your agent can now interact with real-world data sources in real time - a complete edge-to-cloud loop powered by OpenAI's Agent SDK and the MCP protocol.
 
