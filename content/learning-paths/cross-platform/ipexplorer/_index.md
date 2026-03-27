@@ -1,5 +1,6 @@
 ---
 title: Custom software for simulation with IP Explorer
+description: Learn how to run custom software benchmarks on IP Explorer simulation platforms and compare performance across Arm Cortex-M processors using cycle count analysis.
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for IP Explorer users using the software simulation platforms available.

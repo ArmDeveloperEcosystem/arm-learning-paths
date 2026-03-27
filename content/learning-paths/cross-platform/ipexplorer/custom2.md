@@ -37,11 +37,11 @@ The Cortex-M7 used in the simulation includes a Floating-Point Unit (FPU) which 
 
 #### Cortex-M0
 
-![Cortex-M0 Simulation results #center](images/m0_custom.png)
+![Screenshot of IP Explorer simulation results for Cortex-M0 running the custom floating-point benchmark. The results show the processor used a C library software routine for floating-point operations since the Cortex-M0 does not include a hardware FPU, resulting in higher cycle counts.#center](images/m0_custom.png)
 
 #### Cortex-M7
 
-![Cortex-M7 Simulation results #center](images/m7_custom.png)
+![Screenshot of IP Explorer simulation results for Cortex-M7 running the custom floating-point benchmark. The results demonstrate significantly improved performance as the Cortex-M7's hardware FPU executes floating-point additions directly without requiring software emulation.#center](images/m7_custom.png)
 
 ## Show details
 

@@ -58,11 +58,11 @@ The exact cycle count may vary depending on compiler version used.
 
 #### Cortex-M0
 
-![Cortex-M0 Simulation results #center](images/m0_matrix-add.png)
+![Screenshot of IP Explorer simulation results for Cortex-M0 running the matrix addition example. The results panel shows marked software cycles indicating the execution time for the benchmark. This baseline measurement will be compared against Cortex-M7 performance.#center](images/m0_matrix-add.png)
 
 #### Cortex-M7
 
-![Cortex-M7 Simulation results #center](images/m7_matrix-add.png)
+![Screenshot of IP Explorer simulation results for Cortex-M7 running the matrix addition example. The results panel shows marked software cycles significantly lower than the Cortex-M0, demonstrating the performance improvement from the more advanced processor architecture.#center](images/m7_matrix-add.png)
 
 
 You can click `Show details` to get a deeper understanding of the data. You will return to this when custom software is used.
