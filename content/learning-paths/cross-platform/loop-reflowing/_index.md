@@ -1,5 +1,6 @@
 ---
 title: Learn about Autovectorization
+description: Learn how to optimize C/C++ code using compiler autovectorization techniques including loop modifications, restrict qualifiers, and conditional handling for Arm processors.
 
 minutes_to_complete: 45
 
