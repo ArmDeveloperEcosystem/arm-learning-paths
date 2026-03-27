@@ -48,7 +48,7 @@ Arm Linux target systems running Amazon Linux 2023, Ubuntu 22.04, or Ubuntu
 Arm Performix requires different packages depending on your host platform:
 
 * **Windows**: Windows 10 or later on Arm64 or x64 architecture
-* **macOS**: macOS on Arm64 (Apple Silicon) or x64 architecture (Intel)
+* **macOS**: macOS on Arm64 (Apple Silicon) or x64 architecture
 * **Linux**: Debian-based distribution on Arm64 or x64 architecture
 
 You also need access to an Arm Linux target system for profiling.
