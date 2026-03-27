@@ -40,11 +40,16 @@ Calls to:
 <!-- Sort using the CalculatedDate -->
 {{ $sorted_paths_to_list := sort $blogs "calculated_date" "desc" }}
 
-<!-- Allow taxonomy term pages to pin learning paths via term front matter.
-     Hugo does not expose term bundle front matter on .Params here, so resolve it explicitly.
-     Example: content/subjects/ml/_index.md
+<!-- Allow taxonomy term pages to pin learning paths via content-owned front matter.
+     Prefer a single-directory helper page like content/subject-ml/index.md, and
+     fall back to Hugo's taxonomy bundle layout content/subjects/ml/_index.md.
 -->
-{{ $term_content_page := site.GetPage (printf "/%s/%s" .Data.Plural (.Data.Term | urlize)) }}
+{{ $term_slug := .Data.Term | urlize }}
+{{ $term_page_key := printf "/%s-%s" (.Data.Singular | replace "_" "-") $term_slug }}
+{{ $term_content_page := site.GetPage $term_page_key }}
+{{ if not $term_content_page }}
+    {{ $term_content_page = site.GetPage (printf "/%s/%s" .Data.Plural $term_slug) }}
+{{ end }}
 {{ $pinned_paths := default (slice) .Params.pinned_learning_paths }}
 {{ with $term_content_page }}
     {{ $pinned_paths = default $pinned_paths .Params.pinned_learning_paths }}
