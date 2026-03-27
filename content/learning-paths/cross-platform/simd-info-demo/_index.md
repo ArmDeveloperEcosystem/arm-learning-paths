@@ -3,6 +3,8 @@ title: Introduction to SIMD.info
 
 minutes_to_complete: 30
 
+description: Learn how to use SIMD.info to port SIMD intrinsics across Arm architectures, including navigation, search, and comparison features for finding equivalent instructions.
+
 who_is_this_for: This Learning Path is for software developers who are interested in porting SIMD code across Arm platforms.
 
 learning_objectives: 

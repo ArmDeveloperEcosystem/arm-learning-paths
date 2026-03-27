@@ -35,7 +35,7 @@ The standard uses a biased exponent to handle both large and small numbers effic
 
 The graphic below shows various forms of floating-point representation supported by Arm, each with varying number of bits assigned to the exponent and significand.
 
-![floating-point](./floating-point-numbers.png)
+![Diagram showing different floating-point formats supported by Arm, including single precision (32-bit), double precision (64-bit), half precision (16-bit), and brain floating-point (bfloat16), with bit allocations for sign, exponent, and significand fields#center](./floating-point-numbers.png "Floating-point formats supported by Arm")
 
 ## Rounding errors 
 
@@ -45,7 +45,7 @@ Operations round results to the nearest representable value, introducing small d
 
 For example, with 3 bits for the significand and an exponent range of -1 to 2, only a limited set of values can be represented. The diagram below illustrates these values. 
 
-![ulp](./ulp.png)
+![Diagram showing representable floating-point values on a number line with 3-bit significand and exponent range -1 to 2, illustrating how ULP spacing increases with magnitude and how gaps between representable values widen for larger numbers#center](./ulp.png "ULP spacing visualization showing quantization gaps")
 
 Key takeaways:
 

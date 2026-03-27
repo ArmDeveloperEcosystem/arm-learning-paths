@@ -108,7 +108,7 @@ This code demonstrates how to use a saved PyTorch model for inference and visual
 
 After running the code, you should see results similar to the following figure:
 
-![image](figures/03.webp "Figure 6. Results Displayed")
+![Visualization showing a grid of MNIST handwritten digits with the model's predictions displayed above each digit, allowing you to visually verify the model's classification accuracy across multiple test samples#center](figures/03.webp "Model inference results on test digits")
 
 ### What have you learned?
 

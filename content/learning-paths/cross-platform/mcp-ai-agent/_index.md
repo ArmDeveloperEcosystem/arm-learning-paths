@@ -1,5 +1,6 @@
 ---
 title: Deploy an MCP Server on Raspberry Pi 5 for AI Agent Interaction using OpenAI SDK
+description: Learn how to deploy a Model Context Protocol server on Raspberry Pi 5 and use the OpenAI Agent SDK to create AI agents with custom tools for local inference.
 
 minutes_to_complete: 30
 
@@ -9,7 +10,7 @@ learning_objectives:
     - Deploy a lightweight Model Context Protocol (MCP) server on Raspberry Pi 5 for local AI agent execution.
     - Use the OpenAI Agent SDK to interact with a local AI agent.
     - Design and register custom tools for the agent tasks.
-    - Learn about uv — a fast, efficient Python package manager for efficient local deployment.
+    - Learn about uv - a fast, efficient Python package manager for efficient local deployment.
 
 prerequisites:
     - A [Raspberry Pi 5](https://www.raspberrypi.com/products/raspberry-pi-5/) with a Linux-based OS installed.

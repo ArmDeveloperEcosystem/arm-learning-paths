@@ -2,25 +2,25 @@
 title: Arm Performix
 
 additional_search_terms:
-- performix
-- performance
-- profiling
-- analysis
-- neoverse
-- optimization
-- perf
-- top-down
+  - performix
+  - performance
+  - profiling
+  - analysis
+  - neoverse
+  - optimization
+  - perf
+  - top-down
 
 minutes_to_complete: 30
 
 author: Pareena Verma
 
 ### Link to official documentation
-official_docs: https://developer.arm.com/documentation/110163/latest 
+official_docs: https://developer.arm.com/documentation/110163/latest
 
-weight: 1                  
-tool_install: true        
-multi_install: false        
+weight: 1
+tool_install: true
+multi_install: false
 multitool_install_part: false
 layout: installtoolsall
 ---
@@ -47,8 +47,8 @@ Arm Linux target systems running Amazon Linux 2023, Ubuntu 22.04, or Ubuntu
 
 Arm Performix requires different packages depending on your host platform:
 
-* **Windows**: Windows 10 or later (Arm64 or x64 architecture)
-* **macOS**: macOS on Arm64 (Apple Silicon)
+* **Windows**: Windows 10 or later on Arm64 or x64 architecture
+* **macOS**: macOS on Arm64 (Apple Silicon) or x64 architecture
 * **Linux**: Debian-based distribution on Arm64 or x64 architecture
 
 You also need access to an Arm Linux target system for profiling.
@@ -64,12 +64,12 @@ Download the Windows installer package for your architecture from the [Arm Perfo
 Alternatively, download using PowerShell. These commands require PowerShell and do not work in the Windows Command Prompt (CMD):
 
 {{< tabpane code=true >}}
-  {{< tab header="Arm64" >}}
+{{< tab header="Arm64" >}}
 curl -o ArmPerformix-windows-arm64.exe https://artifacts.tools.arm.com/arm-performix/app/latest/windows/arm64/ArmPerformix-windows-arm64.exe
-  {{< /tab >}}
-  {{< tab header="x64" >}}
+{{< /tab >}}
+{{< tab header="x64" >}}
 curl -o ArmPerformix-windows-x64.exe https://artifacts.tools.arm.com/arm-performix/app/latest/windows/x64/ArmPerformix-windows-x64.exe
-  {{< /tab >}}
+{{< /tab >}}
 {{< /tabpane >}}
 
 After downloading the `.exe` file, locate it in your Downloads folder and double-click it to start the installation wizard.
@@ -93,12 +93,12 @@ Download the Linux installer package for your architecture from the [Arm Perform
 Alternatively, download using `wget`:
 
 {{< tabpane code=true >}}
-  {{< tab header="Arm64" >}}
-wget -P $HOME https://artifacts.tools.arm.com/arm-performix/app/latest/linux/arm64/ArmPerformix-linux-arm64.deb 
-  {{< /tab >}}
-  {{< tab header="x64" >}}
-wget -P $HOME https://artifacts.tools.arm.com/arm-performix/app/latest/linux/x64/ArmPerformix-linux-amd64.deb 
-  {{< /tab >}}
+{{< tab header="Arm64" >}}
+wget -P $HOME https://artifacts.tools.arm.com/arm-performix/app/latest/linux/arm64/ArmPerformix-linux-arm64.deb
+{{< /tab >}}
+{{< tab header="x64" >}}
+wget -P $HOME https://artifacts.tools.arm.com/arm-performix/app/latest/linux/x64/ArmPerformix-linux-amd64.deb
+{{< /tab >}}
 {{< /tabpane >}}
 
 After downloading the `.deb` file, navigate to the directory where you downloaded it:
@@ -147,13 +147,18 @@ Arm Performix daemon version: 1.0.0
 
 ### How do I install Arm Performix on macOS?
 
-Download the macOS installer package from the [Arm Performix download page](https://developer.arm.com/servers-and-cloud-computing/arm-performix).
+Download the macOS installer package for your architecture from the [Arm Performix download page](https://developer.arm.com/servers-and-cloud-computing/arm-performix).
 
 Alternatively, download using `curl`:
 
-```bash
+{{< tabpane code=true >}}
+{{< tab header="Arm64" >}}
 curl -Lo ArmPerformix-darwin-arm64.pkg https://artifacts.tools.arm.com/arm-performix/app/latest/darwin/arm64/ArmPerformix-darwin-arm64.pkg
-```
+{{< /tab >}}
+{{< tab header="x64" >}}
+curl -Lo ArmPerformix-darwin-arm64.pkg https://artifacts.tools.arm.com/arm-performix/app/latest/darwin/x64/ArmPerformix-darwin-x64.pkg
+{{< /tab >}}
+{{< /tabpane >}}
 
 After downloading the `.pkg` file, navigate to the directory where you downloaded it and double-click the file to start the installer.
 
@@ -250,9 +255,9 @@ In the **Configure Target** form, provide the following details:
 * **Port**: the SSH port number (default is 22)
 * **User**: the username for SSH connection
 * **SSH Private Key**: choose **Automatically Detect Key** or **Select Key Manually**
-  * For manual selection, enter the path to your private key (usually `~/.ssh/id_rsa` or `~/.ssh/id_ed25519`)
+    * For manual selection, enter the path to your private key (usually `~/.ssh/id_rsa` or `~/.ssh/id_ed25519`)
 * **Host Key Verification**: Choose **Strict** (recommended) or **Ignore**
-  * Strict mode verifies the server identity using your `~/.ssh/known_hosts` file
+    * Strict mode verifies the server identity using your `~/.ssh/known_hosts` file
 
 ![Arm Performix target configuration form displaying input fields including Host with IP address 192.168.1.10, Name field for descriptive target identifier, Port field set to 22, User field for SSH username, SSH Private Key section with radio buttons for Automatically Detect Key and Select Key Manually options, and Host Key Verification dropdown menu set to Strict mode with explanation text about verifying server identity using known_hosts file alt-txt#center](/install-guides/_images/atp-target-config.png "Configure Target form with connection settings")
 
@@ -361,32 +366,32 @@ apx target add '{
 Choose one of the following methods to authenticate with your target:
 
 * **Use an existing SSH key in a non-default location:**
-  
+
   If your private key is not in `~/.ssh/id_rsa` or `~/.ssh/id_ed25519`, specify its path in the target command:
   ```bash
   apx target add user@host:22:/path/to/private_ssh_key
   ```
 
 * **Automatically detect an existing SSH key:**
-  
+
   Arm Performix searches common locations (`~/.ssh/id_rsa`, `~/.ssh/id_ed25519`, etc.) for a usable key:
   ```bash
   apx target add user@host --find-keys
   ```
 
 * **Generate and configure a new SSH key pair using password authentication:**
-  
+
   If your target supports password-based SSH login, Performix can generate a new key pair and configure it automatically:
   ```bash
   apx target add user@host --password
   ```
   This option:
-  - Generates an RSA 4096-bit key pair on your host (without a passphrase)
-  - Authenticates to the target using the password you provide
-  - Adds the public key to the target's `~/.ssh/authorized_keys` file
-  - Records the target's host key in the known hosts list
-  - Stores the private key securely for future connections
-  - Discards the password immediately after use (not stored)
+    - Generates an RSA 4096-bit key pair on your host (without a passphrase)
+    - Authenticates to the target using the password you provide
+    - Adds the public key to the target's `~/.ssh/authorized_keys` file
+    - Records the target's host key in the known hosts list
+    - Stores the private key securely for future connections
+    - Discards the password immediately after use (not stored)
 
 **Host key verification:**
 

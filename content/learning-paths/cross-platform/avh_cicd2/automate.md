@@ -24,7 +24,7 @@ To find the value for `AWS_SUBNET_ID`, in your AWS console, navigate to `VPC` > 
 | `AWS_DEFAULT_REGION` | Must be same region as `CloudFormation Stack` was created in (e.g. `us-east-1`) |
 | `AWS_SUBNET_ID`      | Format `subnet-xxxxxxxxxxxxxxxxx` |
 
-### Access Keys
+### Access keys
 
 Navigate to your AWS `Security credentials` settings from the pull down menu of your account (Click on your name in the upper-right corner of the AWS console).
 

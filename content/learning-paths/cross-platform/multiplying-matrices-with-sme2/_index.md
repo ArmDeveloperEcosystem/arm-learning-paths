@@ -1,5 +1,6 @@
 ---
 title: Accelerate Matrix Multiplication Performance with SME2
+description: Learn how to implement and optimize matrix multiplication using Arm's Scalable Matrix Extension 2 (SME2) with assembly and intrinsics, including benchmarking and validation on Arm hardware.
 
 minutes_to_complete: 60
 

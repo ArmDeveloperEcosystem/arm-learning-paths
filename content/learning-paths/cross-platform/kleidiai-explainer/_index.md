@@ -1,6 +1,6 @@
 ---
 title: Accelerate Generative AI workloads using KleidiAI 
-
+description: Learn how to use KleidiAI micro-kernels to accelerate AI inference performance through optimized matrix multiplication on Arm processors with architecture features like i8mm.
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for developers who want to learn how to use KleidiAI to accelerate the execution of Generative AI workloads on hardware.

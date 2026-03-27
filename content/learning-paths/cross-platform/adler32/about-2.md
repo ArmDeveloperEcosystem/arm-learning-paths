@@ -28,7 +28,7 @@ This project demonstrates how to accelerate Adler32 checksum calculations using 
 
 Arm Neon is an advanced SIMD architecture extension for Arm processors. It provides a set of instructions that can process multiple data elements in parallel using specialized vector registers. Neon technology enables developers to accelerate computationally intensive algorithms by performing the same operation on multiple data points simultaneously, rather than processing them one at a time. This parallelism is particularly valuable for multimedia processing, scientific calculations, and cryptographic operations where the same operation needs to be applied to large datasets.
 
-## What Is the Adler32 Algorithm?
+## What is the Adler32 algorithm?
 
 Mark Adler developed the Adler32 checksum algorithm in 1995. It's used in the zlib compression library and is faster than CRC32 but provides less reliable error detection.
 
@@ -39,7 +39,7 @@ The algorithm works by calculating two 16-bit sums:
 
 The final checksum is `(s2 << 16) | s1`.
 
-## What You'll Build
+## What you'll build
 
 This project walks you through building the following components using GitHub Copilot:
 
