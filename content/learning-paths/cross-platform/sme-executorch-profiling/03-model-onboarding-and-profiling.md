@@ -78,8 +78,8 @@ Keep exported artifacts under out_<model>/artifacts/ to separate model binaries 
 ## Configure timing and trace profiling runs
 
 For complete analysis you must run two experiment types:
-  * Timing-only runs — no kernel trace logging; use these for accurate latency comparisons (SME2 on vs SME2 off).
-  * Trace-enabled runs — enable XNNPACK kernel trace logging; use these to collect kernel-selection evidence and traces for kernel-level analysis. Trace logging affects timing and should never be used to compare end-to-end latency.
+  * Timing-only runs - no kernel trace logging; use these for accurate latency comparisons (SME2 on vs SME2 off).
+  * Trace-enabled runs - enable XNNPACK kernel trace logging; use these to collect kernel-selection evidence and traces for kernel-level analysis. Trace logging affects timing and should never be used to compare end-to-end latency.
 
 Run timing-only for latency measurement, and run trace-enabled only when you need kernel-level details.
 
@@ -203,7 +203,7 @@ Timing-only run example:
 python model_profiling/scripts/mac_pipeline.py --config model_profiling/configs/examples/mac_mobilenet_fp16.json
 ```
 
-Trace-enabled (kernel analysis) run example — use a config that points to trace-enabled runners:
+Trace-enabled (kernel analysis) run example - use a config that points to trace-enabled runners:
 
 ```bash
 python model_profiling/scripts/mac_pipeline.py --config model_profiling/configs/examples/mac_mobilenet_fp16.json
