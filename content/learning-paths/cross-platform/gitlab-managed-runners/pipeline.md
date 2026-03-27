@@ -66,15 +66,15 @@ Create these three files before adding the pipeline configuration. Once you comm
 
 From your project page, select **Set up CI/CD** or use the **+** button to create a new file:
 
-![GitLab project page with CI/CD setup option highlighted, showing the Set up CI/CD button in the center of the interface alt-txt#center](_images/ci-cd-new.png "GitLab Set up CI/CD button")
+![GitLab project page with CI/CD setup option highlighted, showing the Set up CI/CD button in the center of the interface#center](_images/ci-cd-new.png "GitLab Set up CI/CD button")
 
 Name the file `.gitlab-ci.yml`:
 
-![GitLab new YAML file creation screen for pipeline configuration alt-txt#center](_images/new-yml.png "GitLab new YAML file creation screen")
+![GitLab new YAML file creation screen for pipeline configuration#center](_images/new-yml.png "GitLab new YAML file creation screen")
 
 Select **Edit** > **Edit in pipeline editor**:
 
-![GitLab pipeline editor screen for editing .gitlab-ci.yml alt-txt#center](_images/editor-yml.webp "GitLab pipeline editor screen")
+![GitLab pipeline editor screen for editing .gitlab-ci.yml#center](_images/editor-yml.webp "GitLab pipeline editor screen")
 
 Add the following pipeline configuration. This defines three stages that build, test, and publish your Arm64 container image:
 ```yaml
