@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## An example with Dot product instructions
+## An example with dot product instructions
 
 You can now continue with an example around `dotprod` intrinsics. Shown below is a program that calculates the sum of absolute differences (SAD) of a 32x32 array of 8-bit unsigned integers (`uint8_t`) using the `vdotq_u32` intrinsic. Save the contents in a file named `dotprod1.c` as shown below:
 
