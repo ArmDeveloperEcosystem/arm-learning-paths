@@ -52,7 +52,7 @@ Record the kernel version and operating system. Run the following command on you
 uname -a && cat /etc/os-release
 ```
 
-Both systems have the same software:
+Both systems have the same software (example output; kernel version may differ depending on distribution updates):
 
 ```output
 Linux graviton2-c6g 6.17.0-1007-aws #7~24.04.1-Ubuntu SMP Thu Jan 22 20:37:30 UTC 2026 aarch64 aarch64 aarch64 GNU/Linux
@@ -153,9 +153,9 @@ Both systems have 128 GB RAM with similar output:
 Mem:           123Gi       1.6Gi       121Gi       1.2Mi       1.2Gi       121Gi
 ```
 
-Graviton2 instances use DDR4 memory. Graviton4 instances use DDR5 memory, which provides higher bandwidth per channel and lower access latency.
+Graviton2 instances use DDR4 memory. Graviton4 instances use DDR5 memory, which provides higher bandwidth per channel than DDR4, but typically has slightly higher access latency in nanoseconds.
 
-Both systems have a single NUMA node, meaning all cores have uniform access to all memory. On multi-socket Arm servers with multiple NUMA nodes, memory access latency depends on which node the data resides on. The ASCT `idle-latency` and `cross-numa-bandwidth` benchmarks are designed for those systems but won't produce interesting results on single-node configurations like these.
+Both systems have a single NUMA node, meaning all cores have uniform access to all memory. On multi-socket Arm servers with multiple NUMA nodes, memory access latency depends on which node the data resides on. The ASCT `idle-latency` and `cross-numa-bandwidth` benchmarks are designed for those systems but will show minimal variation on single-node systems like these on single-node configurations like these.
 
 ## Explore the core and cluster topology
 
@@ -237,7 +237,7 @@ CPU NODE SOCKET CORE L1d:L1i:L2:L3 ONLINE
  63    0      0   63 63:63:63:0       yes
 ```
 
-On both systems, every core has its own unique L1d, L1i, and L2 index, so those caches are private. The L3 index is `0` for all cores, confirming that all 64 cores share a single L3 cache on each system.
+On both systems, every core has its own unique L1d, L1i, and L2 index, so those caches are private. The L3 index is `0` for all cores, confirming that the system exposes a single shared LLC across all cores, although it may be physically distributed across the interconnect on each system.
 
 ### Visualize the topology with hwloc
 

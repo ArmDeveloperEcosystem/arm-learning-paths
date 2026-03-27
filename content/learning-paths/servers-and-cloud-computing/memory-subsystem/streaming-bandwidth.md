@@ -69,7 +69,7 @@ To convert GB/s to bytes per cycle, use your core's clock speed:
 
 $$\text{Bytes/cycle} = \frac{\text{GB/s} \times 10^9}{\text{Clock (Hz)}}$$
 
-This normalization lets you compare microarchitectural efficiency independent of clock speed. The benchmark measures combined load and store throughput, so the effective bytes-per-cycle will exceed the 32 bytes/cycle read-only peak of the two 128-bit load ports. V2's dedicated store port gives it an additional advantage in this measurement.
+This normalization lets you compare microarchitectural efficiency independent of clock speed. The benchmark measures combined load and store throughput, so the combined load and store throughput can exceed the read-only peak of the load ports alone of the two 128-bit load ports. V2's dedicated store port gives it an additional advantage in this measurement.
 
 ## Additional ASCT bandwidth benchmarks
 

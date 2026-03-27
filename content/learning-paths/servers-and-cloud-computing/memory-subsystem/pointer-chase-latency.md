@@ -14,7 +14,7 @@ Cache and memory latency is the single most important metric for characterizing 
 
 Hardware prefetchers detect sequential and strided access patterns and fetch data ahead of the CPU. If you write a loop that reads an array sequentially, the prefetcher hides much of the latency. A pointer chase randomizes the order of accesses so the prefetcher can't predict the next address.
 
-Out-of-order execution is the other concern. Modern Arm cores can issue multiple independent loads in parallel, overlapping their latencies. By making each load depend on the result of the previous load (the pointer), you force the CPU to serialize them. The measured time per access then reflects the true round-trip latency to wherever the data resides.
+Out-of-order execution is the other concern. Modern Arm cores can issue multiple independent loads in parallel, overlapping their latencies. By making each load depend on the result of the previous load (the pointer), you limit memory-level parallelism and prevent the core from overlapping multiple memory accesses. The measured time per access then reflects the true round-trip latency to wherever the data resides.
 
 ## Measure cache and memory latency with ASCT
 

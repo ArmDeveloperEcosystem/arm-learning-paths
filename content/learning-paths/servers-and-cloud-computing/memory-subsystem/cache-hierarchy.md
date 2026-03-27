@@ -67,7 +67,7 @@ On Graviton4 the output is:
 
 Pay attention to:
 - **Associativity**: higher associativity reduces conflict misses but can increase access latency.
-- **Line size**: almost universally 64 bytes on Arm, which matters for stride-based benchmarks.
+- **Line size**: almost universally 64 bytes on modern Arm server cores, which matters for stride-based benchmarks.
 - **Shared CPU list**: tells you exactly which cores share each cache level.
 
 ## Key concepts to carry forward
@@ -80,7 +80,7 @@ When you access a single byte, the hardware fetches an entire 64-byte cache line
 
 ### Associativity and conflict misses
 
-A 4-way set associative cache can hold 4 lines that map to the same set. If your access pattern happens to map many addresses to the same set, lines get evicted even though the cache isn't full. This is rare in practice for pointer-chase benchmarks but worth understanding.
+A 4-way set associative cache can hold 4 lines that map to the same set. If your access pattern happens to map many addresses to the same set, lines get evicted even though the cache isn't full. This is less likely with randomized pointer-chase patterns, but can still occur depending on address distribution and cache indexing but worth understanding.
 
 ### Prefetching
 

@@ -151,7 +151,7 @@ Collect the key measurements from each system into a comparison table:
 
 The latency measurements from `latency-sweep` reveal how each generation's cache hierarchy performs:
 
-- **L1 latency** is similar across both generations (1.6 ns vs 1.4 ns). L1 caches are designed for near-single-cycle access, so the small difference reflects clock speed rather than cache microarchitecture.
+- **L1 latency** is similar across both generations (1.6 ns vs 1.4 ns). L1 caches are designed for very low latency (typically a few cycles), so the small difference reflects clock speed rather than cache microarchitecture.
 - **L2 latency** improves by 27% on Graviton4 (4.0 ns vs 5.4 ns). Neoverse V2 has a 2 MB private L2 compared to N1's 1 MB. Despite the larger size, V2's improved cache pipeline delivers lower latency.
 - **LLC latency** improves by 24% on Graviton4 (21.8 ns vs 28.8 ns), despite the L3 being only slightly larger (36 MB vs 32 MB). This reflects microarchitectural improvements in the V2 cache interconnect.
 - **DRAM latency** is higher on Graviton4 (114.6 ns vs 95.5 ns, +20%). DDR5 trades slightly higher access latency for significantly more bandwidth per channel compared to DDR4.
