@@ -127,7 +127,7 @@ You are now all set to start hacking with SME2.
 
 Targeting an Android phone means you will have to cross-compile the code examples using Android's NDK. The easiest way is to install [Android Studio](https://developer.android.com/studio) on your system, then in `Android Studio` go to `Tools` > `SDK manager` in the menu, then select the `SDK Tools` tab and tick `NDK (Side by side)` as show in the picture below:
 
-![NDK installation alt-text#center](ndk_install.png "Figure 1: NKK installation.")
+![Screenshot of Android Studio SDK Manager showing the SDK Tools tab with the NDK (Side by side) checkbox selected. This demonstrates the installation step required to enable Android NDK for cross-compiling SME2 code examples to target Android phones with SME2 support.#center](ndk_install.png "Figure 1: NKK installation.")
 
 Locate where the NDK has been installed on your machine and save the location to an `NDK` environment variable for use later when building the code examples. For example, on macOS, at the time of writing, the NDK is located in `/Users/$USER/Library/Android/sdk/ndk/29.0.14206865`:
 
@@ -299,7 +299,7 @@ Then select the **Reopen in Container** menu entry as shown below.
 
 It automatically finds and uses `.devcontainer/devcontainer.json`:
 
-![VSCode Docker alt-text#center](vscode.png "Figure 1: Setting up the Docker container.")
+![Screenshot of VS Code showing the Reopen in Container menu option in the Remote Explorer sidebar. The interface demonstrates how VS Code detects the devcontainer.json configuration file and enables seamless Docker container-based development for SME2 emulation without manual Docker invocations.#center](vscode.png "Figure 1: Setting up the Docker container.")
 
 All your commands now run within the container, so there is no need to prepend
 them with a Docker invocation, as VS Code handles all this seamlessly for you.

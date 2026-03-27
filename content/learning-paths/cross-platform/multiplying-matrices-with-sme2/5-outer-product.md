@@ -28,7 +28,7 @@ The diagram below illustrates how the matrix multiplication of `matLeft` (3 rows
 columns) by `matRight` (2 rows, 3 columns) can be decomposed into a sum of column-by-row outer
 products:
 
-![example image alt-text#center](outer_product.png "Figure 3: Outer product-based matrix multiplication.")
+![Diagram showing outer product-based matrix multiplication decomposition. The illustration demonstrates how multiplying matLeft (3x2) by matRight (2x3) can be expressed as a sum of column-by-row outer products, which improves the MAC-to-load ratio. This decomposition is fundamental to SME2's efficient matrix multiplication approach.#center](outer_product.png "Figure 3: Outer product-based matrix multiplication.")
 
 The SME engine builds on the [Outer
 Product](https://en.wikipedia.org/wiki/Outer_product) because matrix
