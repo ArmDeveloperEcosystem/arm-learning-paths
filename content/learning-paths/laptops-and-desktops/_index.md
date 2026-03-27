@@ -6,6 +6,10 @@ differentiating_info:
 key_ip:
 - Cortex-A
 maintopic: true
+pinned_learning_paths:
+- wsl2
+- dgx_spark_isaac_robotics
+- learning-paths/cross-platform/multiplying-matrices-with-sme2
 operatingsystems_filter:
 - Android: 3
 - ChromeOS: 2

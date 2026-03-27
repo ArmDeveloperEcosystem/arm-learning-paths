@@ -8,6 +8,10 @@ key_ip:
 - Immortalis
 - Mali
 maintopic: true
+pinned_learning_paths:
+- voice-assistant
+- nss-unreal
+- vulkan-ml-sample
 operatingsystems_filter:
 - Android: 40
 - Linux: 40

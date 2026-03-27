@@ -40,6 +40,50 @@ Calls to:
 <!-- Sort using the CalculatedDate -->
 {{ $sorted_paths_to_list := sort $blogs "calculated_date" "desc" }}
 
+<!-- Allow taxonomy term pages to pin learning paths via term front matter.
+     Hugo does not expose term bundle front matter on .Params here, so resolve it explicitly.
+     Example: content/subjects/ml/_index.md
+-->
+{{ $term_content_page := site.GetPage (printf "/%s/%s" .Data.Plural (.Data.Term | urlize)) }}
+{{ $pinned_paths := default (slice) .Params.pinned_learning_paths }}
+{{ with $term_content_page }}
+    {{ $pinned_paths = default $pinned_paths .Params.pinned_learning_paths }}
+{{ end }}
+{{ $blogs_by_path := dict }}
+{{ $blogs_by_slug := dict }}
+{{ $slug_counts := dict }}
+{{ range $sorted_paths_to_list }}
+    {{ $path_key := trim .learning_path.RelPermalink "/" }}
+    {{ $slug_key := replaceRE "^.*/" "" $path_key }}
+    {{ $blogs_by_path = merge $blogs_by_path (dict $path_key .) }}
+    {{ $blogs_by_slug = merge $blogs_by_slug (dict $slug_key .) }}
+    {{ $slug_count := default 0 (index $slug_counts $slug_key) }}
+    {{ $slug_counts = merge $slug_counts (dict $slug_key (add $slug_count 1)) }}
+{{ end }}
+{{ $pinned_lookup := dict }}
+{{ $ordered_paths_to_list := slice }}
+{{ range $pinned_paths }}
+    {{ $raw_pin := trim . "/" }}
+    {{ $path_key := "" }}
+    {{ if hasPrefix $raw_pin "learning-paths/" }}
+        {{ $path_key = $raw_pin }}
+    {{ else if eq (default 0 (index $slug_counts $raw_pin)) 1 }}
+        {{ with index $blogs_by_slug $raw_pin }}
+            {{ $path_key = trim .learning_path.RelPermalink "/" }}
+        {{ end }}
+    {{ end }}
+    {{ with and $path_key (index $blogs_by_path $path_key) }}
+        {{ $ordered_paths_to_list = $ordered_paths_to_list | append . }}
+        {{ $pinned_lookup = merge $pinned_lookup (dict $path_key true) }}
+    {{ end }}
+{{ end }}
+{{ range $sorted_paths_to_list }}
+    {{ $path_key := trim .learning_path.RelPermalink "/" }}
+    {{ if not (index $pinned_lookup $path_key) }}
+        {{ $ordered_paths_to_list = $ordered_paths_to_list | append . }}
+    {{ end }}
+{{ end }}
+
 
 
 <!--  Hugo crawl over learning path directories and display the main categories -->
@@ -83,9 +127,11 @@ Calls to:
 
             <div class="c-col c-col-12">
                 <div id='path-container' class="u-display-grid u-gap-1 sm:u-grid-columns-1 md:u-grid-columns-2 xl:u-grid-columns-2 xxl:u-grid-columns-3 u-margin-top-1">
-                    {{ range $sorted_paths_to_list }}
+                    {{ range $ordered_paths_to_list }}
+                        {{ $path_key := trim .learning_path.RelPermalink "/" }}
+                        {{ $is_pinned := index $pinned_lookup $path_key }}
                         <!-- This div assigns a category tag for each LP for filtering (cross platform need to iterate over the shared_between var) -->
-                        <div class='path-div search-div
+                        <div class='path-div search-div gradient-box
                                     {{if eq .learning_path.Parent.Title "Cross Platform"}}
                                         {{ with .learning_path.Params.shared_between }}
                                             {{ range .}}
@@ -96,7 +142,7 @@ Calls to:
                                         tag-{{.learning_path.Parent.Title | urlize}}
                                     {{end}}'>  
                             <!-- Path card formatting -->
-                            {{ partial "general-formatting/path-ads-card.html" (dict "learning_path" .learning_path "calculated_date" .calculated_date) }}    
+                            {{ partial "general-formatting/path-ads-card.html" (dict "learning_path" .learning_path "calculated_date" .calculated_date "is_pinned" $is_pinned) }}    
                         </div>           
                     {{ end }}
                 </div>
