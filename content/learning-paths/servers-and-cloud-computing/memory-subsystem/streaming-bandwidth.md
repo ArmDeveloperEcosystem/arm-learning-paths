@@ -58,7 +58,7 @@ The `bandwidth-sweep` benchmark reports the bandwidth at the optimal data size f
 
 Key differences to look for between Graviton2 and Graviton4:
 
-- **L1 bandwidth**: Graviton4 shows roughly 2x the L1 bandwidth of Graviton2. Both cores have two 128-bit load ports, but V2 also has a dedicated 128-bit store port and runs at a higher clock speed, producing significantly higher absolute GB/s.
+- **L1 bandwidth**: Graviton4 shows roughly 2x the L1 bandwidth of Graviton2. This likely reflects a combination of higher clock speed and microarchitectural throughput improvements in Neoverse V2.
 - **L2 bandwidth**: V2's larger 2 MB L2 keeps more data in the fast private cache, and microarchitectural improvements on V2 also increase L2 fill bandwidth.
 - **LLC bandwidth**: Graviton4 more than doubles the LLC bandwidth of Graviton2, reflecting improvements in the interconnect and shared cache design on V2.
 - **DRAM bandwidth (single core)**: Graviton4 achieves higher single-core DRAM throughput because V2 supports more outstanding memory requests than N1, and DDR5 provides more bandwidth per channel than DDR4.
@@ -69,7 +69,7 @@ To convert GB/s to bytes per cycle, use your core's clock speed:
 
 $$\text{Bytes/cycle} = \frac{\text{GB/s} \times 10^9}{\text{Clock (Hz)}}$$
 
-This normalization lets you compare microarchitectural efficiency independent of clock speed. The benchmark measures combined load and store throughput, so the combined load and store throughput can exceed the read-only peak of the load ports alone of the two 128-bit load ports. V2's dedicated store port gives it an additional advantage in this measurement.
+This normalization lets you compare microarchitectural efficiency independent of clock speed. The benchmark measures combined load and store throughput, so the results reflect both the core's execution throughput and the details of the benchmark's access pattern rather than a simple read-only port limit.
 
 ## Additional ASCT bandwidth benchmarks
 

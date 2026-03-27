@@ -59,7 +59,7 @@ Several patterns emerge from the traffic type comparison:
 - **All Reads** gives the highest throughput because reads are simpler for the memory controller, with no write-back or write-allocate overhead.
 - **Read-write mixes** reduce throughput progressively as the write ratio increases. Writes require the controller to alternate between read and write bus turnarounds, and in write-allocate caches, writes typically trigger a read-for-ownership and eventual eviction, increasing traffic. Non-temporal writes can avoid this overhead.
 
-Graviton4 with DDR5 delivers roughly 2.7x the peak all-reads bandwidth of Graviton2 with DDR4 (465.5 vs 169.6 GB/s). The Graviton4 output also includes a non-temporal traffic pattern (2:1 Rd-Wr Non-Temporal), which bypasses the cache on writes and can be more efficient for pure streaming workloads.
+Graviton4 with DDR5 delivers roughly 2.7x the peak all-reads bandwidth of Graviton2 with DDR4 (465.5 vs 169.6 GB/s). The Graviton4 output also includes a non-temporal traffic pattern (2:1 Rd-Wr Non-Temporal), which can reduce cache allocation, cache pollution, and coherence overhead for streaming writes.
 
 Compare the "All Reads" figure with the theoretical peak bandwidth reported by `asct system-info` to see how close each system gets to its maximum. Well-configured systems typically achieve 85-95% of theoretical peak with all-read traffic.
 

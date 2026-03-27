@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## The pointer-chase technique
 
-Cache and memory latency is the single most important metric for characterizing a memory subsystem. The standard technique is a pointer chase, a linked list where each node points to the next, and the CPU must complete each load before it can issue the next one. This creates a chain of dependent loads that defeats both hardware prefetching and out-of-order execution, revealing the true access latency at each cache level.
+Cache and memory latency is the single most important metric for characterizing a memory subsystem. The standard technique is a pointer chase, a linked list where each node points to the next, and the CPU must complete each load before it can issue the next one. This creates a chain of dependent loads that defeats both hardware prefetching and out-of-order execution, letting you measure the effective dependent-load latency for this access pattern at each level of the memory hierarchy.
 
 ## Why pointer chasing works
 

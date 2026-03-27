@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Why cache hierarchy matters
 
-Every memory access from the CPU passes through a hierarchy of caches before reaching DRAM. Each level trades capacity for speed: L1 is tiny but fast, L2 is larger but slower, and L3 (or a system-level cache) is the largest on-chip cache but has the highest latency. Understanding this hierarchy for your specific system tells you where performance "cliffs" will occur as your working set grows.
+Each memory access is satisfied by the closest level of the hierarchy that contains the requested data. If the data is not found in the private caches, the request falls through to lower levels and eventually to DRAM. Each level trades capacity for speed: L1 is tiny but fast, L2 is larger but slower, and L3 (or a system-level cache) is the largest on-chip cache but has the highest latency. Understanding this hierarchy for your specific system tells you where performance "cliffs" will occur as your working set grows.
 
 ## Cache levels on Arm systems
 

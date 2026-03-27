@@ -169,7 +169,7 @@ The `loaded-latency` results reveal the latency-bandwidth tradeoff:
 
 Single-core bandwidth from `bandwidth-sweep` shows the throughput capacity at each cache level:
 
-- **L1 bandwidth** doubles on Graviton4 (321 vs 159 GB/s, +101%). Both cores have two 128-bit load ports, but V2 also has a dedicated 128-bit store port and runs at a higher clock speed.
+- **L1 bandwidth** doubles on Graviton4 (321 vs 159 GB/s, +101%). This likely reflects a combination of higher clock speed and microarchitectural throughput improvements in Neoverse V2.
 - **L2 bandwidth** improves by 29% on Graviton4 (95 vs 73 GB/s), due to the wider L2 fill path and microarchitectural improvements in V2.
 - **LLC bandwidth** more than doubles on Graviton4 (80 vs 36 GB/s, +123%), reflecting improvements in the interconnect and shared cache design.
 - **DRAM bandwidth (single core)** improves by 77% on Graviton4 (37 vs 21 GB/s). V2 supports more outstanding memory requests than N1, and DDR5 provides more bandwidth per channel than DDR4.
