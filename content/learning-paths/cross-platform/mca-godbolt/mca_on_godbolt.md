@@ -17,7 +17,7 @@ To access Compiler Explorer, open a browser and go to https://godbolt.org.
 
 This leads you to the page shown below in Figure 1. Your view might be slightly different.
 
-![godbolt open alt-text#center](open.webp "Figure 1. Compiler Explorer")
+![Screenshot of the Compiler Explorer homepage showing the main interface with source code editor on the left side and assembly output area on the right. The language selector at the top shows C++ is currently selected. This is the starting point for running llvm-mca analysis.#center](open.webp "Figure 1. Compiler Explorer")
 
 The left side of the page contains the source code. In Figure 1, the language is set to C++, but you can click on the programming language to select a different language for the source code.
 
@@ -46,7 +46,7 @@ You can view the full set of options passed to the compiler by clicking on the g
 
 Click the `Add tool` drop-down button to add `llvm-mca` as a tool as shown in Figure 2 below:
 
-![tool mca alt-text#center](tool-mca.png "Figure 2. Assembly in Compiler Explorer")
+![Screenshot of Compiler Explorer showing the Add tool dropdown menu expanded with llvm-mca visible in the list of available analysis tools. The assembly output is displayed showing Arm instructions compiled with the armv8-a clang compiler.#center](tool-mca.png "Figure 2. Assembly in Compiler Explorer")
 
 To add more flags to `llvm-mca`, click on the `Arguments` button and type them in.
 
@@ -56,6 +56,6 @@ To find what CPUs are supported you can check the [clang documentation](https://
 
 The right side of the page now contains the output from running `llvm-mca` on the disassembly of the source code, as shown in Figure 3 below:
 
-![argument mca alt-text#center](mca-arguments.png "Figure 3. MCA in Compiler Explorer")
+![Screenshot of Compiler Explorer showing the llvm-mca analysis output panel with the Arguments button visible. The output displays performance metrics including instruction throughput, resource pressure, and cycle estimates for the Neoverse V2 CPU target specified with the -mcpu flag.#center](mca-arguments.png "Figure 3. MCA in Compiler Explorer")
 
 You are now able to run `llvm-mca` using Compiler Explorer.
