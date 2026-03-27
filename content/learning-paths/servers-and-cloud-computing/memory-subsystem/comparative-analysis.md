@@ -14,15 +14,7 @@ You now have a complete set of memory subsystem measurements for each of your te
 
 Throughout this Learning Path, you ran individual ASCT benchmarks. To characterize a new system from scratch, run all memory benchmarks at once.
 
-First, set a descriptive hostname for your system.
-
-```bash
-sudo hostnamectl set-hostname graviton4-c8g
-```
-
-Set a similar hostname on the Graviton2 system, for example `graviton2-c6g`.
-
-Next, run all tests and save the results.
+Run all tests and save the results.
 
 ```bash
 sudo asct run memory loaded-latency --output-dir results_$(hostname)
@@ -56,7 +48,7 @@ Save the comparison as CSV for further analysis:
 asct diff results_graviton2-c6g/ results_graviton4-c8g/ --format=csv --output-dir comparison/ --benchmarks ^system-info
 ```
 
-ASCT writes `diff.csv` to the output directory. It also generates comparison plots for supported benchmarks (latency sweep, bandwidth sweep, loaded latency) as PNG files in the same directory.
+ASCT writes `diff.csv` to the output directory.
 
 ### Filter the comparison
 

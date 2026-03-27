@@ -12,7 +12,7 @@ Before you can characterize a memory subsystem, you need to understand how the s
 
 This Learning Path uses two example AWS Graviton instances:
 
-- AWS Graviton2, `c6g.metal`, instance with Arm Neoverse N1 cores.
+- AWS Graviton2, `c6g.16xlarge`, instance with Arm Neoverse N1 cores.
 - AWS Graviton4, `c8g.16xlarge`, instance with Arm Neoverse V2 cores.
 
 Both systems run Ubuntu 24.04 with 64 CPUs, 128 GB RAM, and 32 GB of storage.
@@ -21,7 +21,23 @@ These are just examples, and you can follow the same steps on any Arm Linux syst
 
 ## Collect basic system information
 
-Start by recording the kernel version and operating system. Run the following command on your system:
+Start by setting a descriptive hostname on each system. This makes it easier to identify results later when you use `$(hostname)` in output directory names.
+
+On the Graviton4 instance, run:
+
+```bash
+sudo hostnamectl set-hostname graviton4-c8g
+```
+
+On the Graviton2 instance, run:
+
+```bash
+sudo hostnamectl set-hostname graviton2-c6g
+```
+
+Log out and log back in for the hostname to appear in your shell prompt.
+
+Record the kernel version and operating system. Run the following command on your system:
 
 ```bash
 uname -a && cat /etc/os-release
@@ -122,8 +138,8 @@ free -h
 Both systems have 128 GB RAM with similar output:
 
 ```output
-.              total        used        free      shared  buff/cache   available
-Mem:           125Gi       1.8Gi       124Gi       2.4Mi       686Mi       123Gi
+               total        used        free      shared  buff/cache   available
+Mem:           123Gi       1.6Gi       121Gi       1.2Mi       1.2Gi       121Gi
 ```
 
 Graviton2 instances use DDR4 memory. Graviton4 instances use DDR5 memory, which provides higher bandwidth per channel and lower access latency.
