@@ -5,7 +5,7 @@ minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for DevOps professionals who are looking to build a CI/CD pipeline with GitLab on Google Axion based self-hosted GitLab runners. 
 
-description: Learn how to build a GitLab CI/CD pipeline using Google Axion-based self-hosted runners to create multi-architecture Docker images for arm64 and amd64 platforms with automated deployment.
+description: Learn how to build a GitLab CI/CD pipeline using Google Axion-based self-hosted runners.
 
 learning_objectives: 
     - Create a Google Axion based GitLab self-hosted runner
