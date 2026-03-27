@@ -228,9 +228,9 @@ This optimization showcases the benefits of quantization and layer fusion for mo
 
 This would allow the model to take full advantage of the device's computational capabilities, potentially further reducing the inference time.
 
-![fig alt-text#center](figures/07.jpg "Figure 9.")
+![Screenshot of Android application running the optimized PyTorch model, showing a handwritten digit with the inference result and significantly improved inference time compared to the non-optimized version#center](figures/07.jpg "Optimized model inference result")
 
-![fig alt-text#center](figures/08.jpg "Figure 10.")
+![Screenshot of Android application demonstrating the optimized model's performance on another handwritten digit, displaying the prediction accuracy and reduced inference time achieved through quantization and layer fusion#center](figures/08.jpg "Optimized model performance example")
 
 ### What have you learned?
 
