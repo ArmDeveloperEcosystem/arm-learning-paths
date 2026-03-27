@@ -185,6 +185,13 @@ ads-card.path-card {
     --ads-card-background-color-hover: var(--arm-light-grey);
     --ads-card-box-shadow-hover: 0 3px 6px 1px rgba(0,0,0,0.16);  /* 0 1px 3px 3px rgba(0,0,0,0.25); */
 }
+
+ads-card.path-card.featured-path-card {
+    --ads-card-border-width: 0;
+    --ads-card-border-color: transparent;
+    --ads-card-border-color-hover: transparent;
+}
+
 html[theme='dark'] ads-card.path-card {
     --ads-card-background-color: var(--arm-color-base);
     --ads-card-border-color: #000000;
@@ -196,6 +203,45 @@ html[theme='dark'] ads-card.path-card {
     --ads-card-box-shadow-hover:  #000 @50%, X:0 Y: 3 B:12; /* probably not working */
 }
 
+html[theme='dark'] ads-card.path-card.featured-path-card {
+    --ads-card-border-width: 0;
+    --ads-card-border-color: transparent;
+    --ads-card-border-color-hover: transparent;
+}
+
+ads-card.path-card.featured-path-card ads-card-content::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    padding: 1.5px;
+    background: linear-gradient(135deg,
+        var(--arm-green) 0%,
+        var(--arm-green) 50%,
+        var(--arm-web-safe-blue) 50%,
+        var(--arm-web-safe-blue) 100%);
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.42;
+    transition: opacity 0.3s ease-in-out;
+}
+
+html[theme='dark'] ads-card.path-card.featured-path-card ads-card-content::before {
+    background: linear-gradient(135deg,
+        var(--arm-green) 0%,
+        var(--arm-green) 50%,
+        var(--arm-light-blue) 50%,
+        var(--arm-light-blue) 100%);
+}
+
+ads-card.path-card.featured-path-card:hover ads-card-content::before {
+    opacity: 1;
+}
+
 
 .basics-title:hover {
     transition: color 0.3s ease-in-out;
@@ -204,6 +250,12 @@ html[theme='dark'] ads-card.path-card {
 }
 
 ads-card.path-card:hover  .learning-path-title {
+    transition: color 0.3s ease-in-out;
+    color: var(--arm-green);
+}
+
+ads-card.path-card:hover .pinned-inline-icon,
+ads-card.path-card:hover .pinned-featured-label {
     transition: color 0.3s ease-in-out;
     color: var(--arm-green);
 }
@@ -224,26 +276,33 @@ ads-card.path-card .learning-path-title-div { /* xs and sm */
     font-size: 0.9rem!important;
 }
 
+.pinned-header-row {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-bottom: 0.3rem;
+}
+
 .pinned-featured-label {
-    color: inherit;
-    font-weight: 700;
-    letter-spacing: 0.02em;
+    color: var(--arm-web-safe-blue);
+    font-weight: 400;
+    letter-spacing: normal;
 }
 
-ads-card.path-card ads-card-content {
-    position: relative;
-}
-
-.pinned-corner-icon {
-    position: absolute;
-    top: 12px;
-    right: 14px;
-    color: var(--arm-web-safe-orange);
+.pinned-inline-icon {
+    color: var(--arm-web-safe-blue);
     font-size: 0.95rem;
+    line-height: 1;
 }
 
-html[theme="dark"] .pinned-corner-icon {
-    color: var(--arm-orange);
+.pinned-inline-icon i {
+    display: inline-block;
+    transform: rotate(-45deg);
+}
+
+html[theme="dark"] .pinned-inline-icon,
+html[theme="dark"] .pinned-featured-label {
+    color: var(--arm-light-blue);
 }
 
 html[theme="light"] .learning-path-title, html[theme="light"] .basics-title {
