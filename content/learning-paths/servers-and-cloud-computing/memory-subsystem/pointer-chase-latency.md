@@ -78,7 +78,7 @@ Your actual numbers will differ. The important pattern is the steps in latency a
 
 Graviton2 uses Neoverse N1 cores with a 64 KB L1D, 1 MB private L2, and a 32 MB shared L3. DRAM is DDR4.
 
-Graviton4 uses Neoverse V2 cores with a larger 2 MB private L2 and a shared L3. The V2 microarchitecture has an improved cache pipeline. DDR5 provides higher bandwidth than DDR4, but its unloaded DRAM latency is slightly higher, which is reflected in the measured results.
+Graviton4 uses Neoverse V2 cores with a larger 2 MB private L2 and a shared L3. The Neoverse V2 microarchitecture has an improved cache pipeline. DDR5 provides higher bandwidth than DDR4, but its unloaded DRAM latency is slightly higher, which is reflected in the measured results.
 
 The boundaries where latency changes correspond closely to the cache sizes you discovered in the previous section. This is the cross-validation that makes the analysis credible: latency transitions align with known hardware boundaries.
 

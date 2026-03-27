@@ -7,7 +7,7 @@ draft: true
 cascade:
     draft: true
 
-minutes_to_complete: 90
+minutes_to_complete: 60
 
 who_is_this_for: This is an advanced topic for software developers and performance engineers who want to understand and characterize the CPU-side memory subsystem of Arm Linux systems.
 

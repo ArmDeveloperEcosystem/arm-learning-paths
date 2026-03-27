@@ -6,11 +6,13 @@ weight: 2
 layout: learningpathall
 ---
 
+Memory behavior is one of the primary determinants of compute performance for memory-bound applications. The CPU-side memory subsystem, including caches, interconnects, and DRAM, directly shapes that behavior. Understanding latency, streaming bandwidth, and how caches and cores share resources is essential for diagnosing bottlenecks and tuning software on Arm servers.
+
 ## Identify CPU, cache, and NUMA topology
 
 Before you can characterize a memory subsystem, you need to understand how the system is organized. The number of cores, how they are grouped into clusters, the DRAM type, and the operating system all influence memory behavior. Knowing this topology helps interpret benchmark results.
 
-This Learning Path uses two example AWS Graviton instances:
+The examples throughout use two AWS Graviton instances:
 
 - AWS Graviton2, `c6g.16xlarge`, instance with Arm Neoverse N1 cores.
 - AWS Graviton4, `c8g.16xlarge`, instance with Arm Neoverse V2 cores.
@@ -18,6 +20,13 @@ This Learning Path uses two example AWS Graviton instances:
 Both systems run Ubuntu 24.04 with 64 CPUs, 128 GB RAM, and 32 GB of storage.
 
 These are just examples, and you can follow the same steps on any Arm Linux system.
+
+If you want to follow along with the same instances, create two EC2 instances using the AWS console or CLI:
+
+- A `c6g.16xlarge` instance running Ubuntu 24.04 (Graviton2)
+- A `c8g.16xlarge` instance running Ubuntu 24.04 (Graviton4)
+
+Make sure both instances are accessible via SSH before continuing.
 
 ## Collect basic system information
 
@@ -46,7 +55,7 @@ uname -a && cat /etc/os-release
 Both systems have the same software:
 
 ```output
-Linux ip-10-0-0-35 6.17.0-1007-aws #7~24.04.1-Ubuntu SMP Thu Jan 22 20:37:30 UTC 2026 aarch64 aarch64 aarch64 GNU/Linux
+Linux graviton2-c6g 6.17.0-1007-aws #7~24.04.1-Ubuntu SMP Thu Jan 22 20:37:30 UTC 2026 aarch64 aarch64 aarch64 GNU/Linux
 PRETTY_NAME="Ubuntu 24.04.4 LTS"
 NAME="Ubuntu"
 VERSION_ID="24.04"
@@ -68,7 +77,7 @@ Print the CPU information:
 lscpu
 ```
 
-Pay close attention to the `lscpu` output — it gives you the CPU model, the number of cores, threads per core, sockets, and NUMA node configuration. Here is an example from a Graviton2 instance:
+Pay close attention to the `lscpu` output. It gives you the CPU model, the number of cores, threads per core, sockets, and NUMA node configuration. Here is an example from a Graviton2 instance:
 
 ```output
 Architecture:                aarch64
@@ -127,9 +136,11 @@ NUMA:
 
 The two systems span two generations of Arm Neoverse server cores. Graviton2 uses Neoverse N1 cores with private 1 MB L2 caches per core and a 32 MB shared L3. Graviton4 uses Neoverse V2 cores with 2 MB private L2 caches per core and a 36 MB shared L3. These differences in cache sizes and memory technology directly impact the memory latency, bandwidth, and scaling behavior you observe in later benchmarks.
 
+Notice that the Neoverse V2 `Flags` field is significantly longer than Neoverse N1. This reflects the newer Arm architecture: V2 is based on Armv9, which adds extensions like SVE2, BF16, and I8MM that are absent on the Armv8-based N1.
+
 ## Check DRAM configuration
 
-On AWS Graviton instances, `dmidecode` is unavailable because the hypervisor does not expose SMBIOS memory data to guests. You can confirm the memory size with `free -h`:
+Confirm the memory size with `free -h`:
 
 ```bash
 free -h

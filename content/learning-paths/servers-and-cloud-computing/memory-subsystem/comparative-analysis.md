@@ -12,7 +12,7 @@ You now have a complete set of memory subsystem measurements for each of your te
 
 ## Collect all memory benchmarks in one command
 
-Throughout this Learning Path, you ran individual ASCT benchmarks. To characterize a new system from scratch, run all memory benchmarks at once.
+Throughout the previous sections, you ran individual ASCT benchmarks. To characterize a new system from scratch, run all memory benchmarks at once.
 
 Run all tests and save the results.
 
@@ -198,7 +198,7 @@ echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governo
 
 ## Adapting this analysis to any Arm Linux system
 
-This Learning Path used AWS Graviton instances as examples, but the methodology works on any Arm Linux machine with a NUMA-enabled kernel. To adapt it:
+The examples here used AWS Graviton instances, but the methodology works on any Arm Linux machine with a NUMA-enabled kernel. To adapt it:
 
 1. **Install ASCT** on the target system following the [install guide](/install-guides/asct/).
 2. **Run all memory benchmarks**: `sudo asct run memory loaded-latency --format=csv --output-dir results_$(hostname)`
@@ -208,7 +208,7 @@ This Learning Path used AWS Graviton instances as examples, but the methodology 
 
 ## What you've accomplished
 
-In this Learning Path you:
+In this section you:
 - Identified the topology and cache hierarchy of Arm Linux systems using `sysfs` and `asct system-info`
 - Measured cache and memory latency with the ASCT `latency-sweep` benchmark
 - Measured single-core streaming bandwidth with `bandwidth-sweep`
