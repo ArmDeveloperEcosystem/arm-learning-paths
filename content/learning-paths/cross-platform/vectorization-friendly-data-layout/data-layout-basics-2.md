@@ -72,7 +72,7 @@ void simulate_objects(object_t *objects, float duration, float step) {
 
 The memory layout now looks like this:
 
-![Memory layout #center](memory-layout2.svg "Figure 2. struct object memory layout with vec4")
+![Diagram showing the improved memory layout of the object struct using vec4 fields with padding, achieving 16-byte alignment for optimal SIMD performance#center](memory-layout2.svg "Figure 2. struct object memory layout with vec4")
 
 After making the changes, compile the code again: 
 
