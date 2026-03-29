@@ -3,6 +3,8 @@ title: "Migrate x86-64 SIMD to Arm64"
 
 minutes_to_complete: 30
 
+description: Learn how to migrate x86-64 SIMD code to Arm64 by mapping Intel SSE/AVX to Arm Neon, SVE, and SME, with code examples and migration strategies using autovectorization or intrinsics.
+
 who_is_this_for: This is an advanced topic for developers migrating vectorized (SIMD) code from x86-64 to Arm64.
 
 learning_objectives:
