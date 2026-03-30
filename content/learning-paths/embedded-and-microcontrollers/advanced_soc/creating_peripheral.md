@@ -93,7 +93,7 @@ These are the basic template files generated for an AXI-Lite peripheral. You can
 
 12. Save the changes in the file (Ctrl+S). Next, go to the “Package IP – AUP_advanced_SoC” tab, choose the “Customization Parameters” option on the left and click “Merge Changes from Customization Parameters Wizard” to update the IP package with the changes made in HDL files:
 
-    ![. Saving all the changes](images/picture12.png) 
+    ![Screenshot of Vivado Package IP window showing the Customization Parameters page with the Merge changes from Customization Parameters Wizard link highlighted to synchronize HDL code changes with IP packaging](images/picture12.png) 
 
     *Figure 2.6. Saving all the changes*
 

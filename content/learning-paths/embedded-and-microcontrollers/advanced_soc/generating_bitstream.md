@@ -48,7 +48,7 @@ In this section you will generate the bitstream for this project and write a C p
 
 7. Select the “Create a new platform from hardware (XSA)” tab and click browse to select the XSA file you saved earlier:
 
-    ![Adding the XSA file](images/picture29.png) 
+    ![Screenshot of Vitis New Application Project wizard showing the Create a new platform from hardware (XSA) option with a browse button to select the exported hardware description file containing the FPGA design and processor configuration](images/picture29.png) 
 
     *Figure 3.7. Adding the XSA file*
 
