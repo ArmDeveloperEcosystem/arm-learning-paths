@@ -69,7 +69,7 @@ Sending Query 'demo/example/test1'...
 
 The result is shown below:
 
-![img2 alt-text#center](zenoh_ex2.gif "Figure 2: Storage and Query")
+![Animated terminal demonstration showing z_put publishing a value to Zenoh storage on one device and z_get retrieving the stored value from another device, illustrating asynchronous data access across nodes#center](zenoh_ex2.gif "Figure 2: Storage and Query")
 
 {{% notice Tip %}}
 If you have more than two Raspberry Pi devices, you can run the `z_get` command on a third device to validate that storage queries work seamlessly across a multi-node setup.
