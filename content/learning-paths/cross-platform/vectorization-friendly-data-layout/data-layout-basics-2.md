@@ -10,7 +10,7 @@ Before trying any optimization, it's important to understand the way the data is
 
 In order to improve the data layout and help the compiler, you need to go back and look at the `object` struct in more detail. The memory layout of `object` is the following:
 
-![Memory layout #center](memory-layout1.svg "Figure 1. struct object memory layout with vec3")
+![Diagram showing the memory layout of the object struct using vec3 fields, illustrating the 12-byte alignment issue that prevents efficient SIMD operations#center](memory-layout1.svg "Figure 1. struct object memory layout with vec3")
 
 As the `vec3` types are triplets, their alignment `is 3 x 4 bytes = 12 bytes`. This makes usage of SIMD instructions difficult as they usually operate on data multiples of 16 bytes. Alignment to 16 bytes is also important. You can usually solve this by adding extra bytes in such structures as padding. This results in wasted bytes, but sometimes these can be used for extra information. Even if the extra bytes cannot be used, the performance benefit outweighs the loss in memory.
 
@@ -72,7 +72,7 @@ void simulate_objects(object_t *objects, float duration, float step) {
 
 The memory layout now looks like this:
 
-![Memory layout #center](memory-layout2.svg "Figure 2. struct object memory layout with vec4")
+![Diagram showing the improved memory layout of the object struct using vec4 fields with padding, achieving 16-byte alignment for optimal SIMD performance#center](memory-layout2.svg "Figure 2. struct object memory layout with vec4")
 
 After making the changes, compile the code again: 
 
