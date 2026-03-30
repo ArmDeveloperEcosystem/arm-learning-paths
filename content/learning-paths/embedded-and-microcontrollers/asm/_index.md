@@ -2,6 +2,7 @@
 title: Write Arm Assembler functions
 
 minutes_to_complete: 60
+description: Learn how to write mixed C and assembly programs for Cortex-M microcontrollers using Keil MDK, following Arm Procedure Call Standard conventions.
 
 author: Ronan Synnott
 
