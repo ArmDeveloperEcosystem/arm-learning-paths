@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Parameterized battery health estimation with Zenoh queryable
 
-Finally, you’ll combine pub/sub, storage, and queryable components to simulate a distributed computation flow—demonstrating how Zenoh enables intelligent, coordinated edge systems.
+Finally, you'll combine pub/sub, storage, and queryable components to simulate a distributed computation flow - demonstrating how Zenoh enables intelligent, coordinated edge systems.
 
 You’ll learn how to use Zenoh's Queryable API in Rust to build a parameterized query system for estimating battery health at the edge. 
 

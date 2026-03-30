@@ -9,7 +9,7 @@ layout: learningpathall
 
 ##  Query historical data using Zenoh’s storage engine
 
-This example demonstrates Zenoh's data storage and query model which enables nodes to retrieve previously published values—even after the original publisher goes offline.
+This example demonstrates Zenoh's data storage and query model which enables nodes to retrieve previously published values - even after the original publisher goes offline.
 
 Building on the previous pub/sub example, you’ll now run a lightweight Zenoh daemon that stores key–value pairs in memory. Then, you’ll publish data with `z_put` and retrieve it using `z_get`.
 
@@ -75,7 +75,7 @@ The result is shown below:
 If you have more than two Raspberry Pi devices, you can run the `z_get` command on a third device to validate that storage queries work seamlessly across a multi-node setup.
 {{% /notice %}}
 
-This example shows how Zenoh's storage with query model supports asynchronous data access and resilient state-sharing—critical capabilities in robotics and industrial IoT systems where network connectivity may be intermittent or system components loosely coupled.
+This example shows how Zenoh's storage with query model supports asynchronous data access and resilient state-sharing - critical capabilities in robotics and industrial IoT systems where network connectivity may be intermittent or system components loosely coupled.
 
 ## What's next?
 
