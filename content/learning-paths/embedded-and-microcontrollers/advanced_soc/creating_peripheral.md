@@ -12,19 +12,19 @@ The Xilinx Vivado tools provide a simplified way to create an AXI4 peripheral. Y
 
 1. Start by clicking “Tools” -> “Create and Package New IP”. Click “Next” and choose the following option:
 
-    ![Creating AXI4 peripheral](images/picture7.png) 
+    ![Screenshot of Vivado's Create and Package New IP wizard showing the Create a new AXI4 peripheral option selected, which generates template files for an AXI-compliant custom IP block](images/picture7.png) 
 
     *Figure 2.1. Creating AXI4 peripheral*
 
 2. Give the following name to the IP (you may keep the IP location path as provided by default):
 
-    ![Adding peripheral details](images/picture8.jpg) 
+    ![Screenshot of the peripheral details dialog showing the Name field set to AUP_advanced_SoC and fields for Version, Display name, and Description where you configure the custom IP metadata](images/picture8.jpg) 
 
     *Figure 2.2. Adding peripheral details*
 
 3. You need a Subordinate interface and four 32-bit registers for the switches and LEDs.
 
-    ![Peripheral settings for Subordinate interface](images/picture9.png) 
+    ![Screenshot of the Add Interfaces wizard showing the Subordinate interface type selected with Number of Registers set to 4 and Data Width set to 32, configuring the AXI-Lite register bank for GPIO control](images/picture9.png) 
 
     *Figure 2.3. Peripheral settings for Subordinate interface*
 
@@ -36,7 +36,7 @@ These are the basic template files generated for an AXI-Lite peripheral. You can
 
 5. Double-click to open the top-level Verilog file called “AUP_advanced_SoC_v1_0.v”:
 
-    ![Editing top-level Verilog file](images/picture10.png) 
+    ![Screenshot of Vivado Sources panel showing the Design Sources hierarchy with AUP_advanced_SoC_v1_0.v file highlighted, which is the top-level module that needs custom GPIO port declarations added](images/picture10.png) 
 
     *Figure 2.4. Editing top-level Verilog file*
 
@@ -64,7 +64,7 @@ These are the basic template files generated for an AXI-Lite peripheral. You can
     ```
 8. Save the changes in the file (Ctrl+S). Next, expand and open the other Verilog file (AUP_advanced_SoC_v1_0_S00_AXI.v) shown below:
 
-    ![Edit the second Verilog file](images/picture11.png) 
+    ![Screenshot of Vivado Sources panel showing the AUP_advanced_SoC_v1_0_S00_AXI.v file which implements the AXI-Lite slave interface logic and needs modifications for GPIO register mapping](images/picture11.png) 
 
     *Figure 2.5. Edit the second Verilog file*
 
@@ -127,7 +127,7 @@ These are the basic template files generated for an AXI-Lite peripheral. You can
     ```
 15. Then, click on “Settings” (under “Project Manager”) in the “Flow Navigator” menu on the left. Expand the “IP” section in the new window that appears and choose the “Repository” option. 
 
-    ![Adding IP Repository](images/picture13.png) 
+    ![Screenshot of Vivado Project Settings showing the IP section expanded with Repository selected, where you add the custom IP location so Vivado can find and use the AXI peripheral you created](images/picture13.png) 
 
     *Figure 2.7. Adding IP Repository*
 
@@ -135,7 +135,7 @@ These are the basic template files generated for an AXI-Lite peripheral. You can
 
 17. Click “Run Connection Automation” and then click “OK” to connect the AXI-Lite Subordinate interface on GPIO peripheral to the AXI Manager interface on Arm processor.
 
-    ![Connect AXI-Lite Subordinate interface (Custom IP) to AXI Manager interface](images/picture14.png) 
+    ![Screenshot of Vivado block diagram showing the Run Connection Automation dialog with the S_AXI interface of the custom GPIO peripheral ready to be automatically connected to the Zynq processing system's M_AXI_GP0 master port](images/picture14.png) 
 
     *Figure 2.8. Connect AXI-Lite Subordinate interface (Custom IP) to AXI Manager interface*
 

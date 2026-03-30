@@ -3,6 +3,8 @@ title: Design an AXI-Lite peripheral to control GPIOs
 
 minutes_to_complete: 60
 
+description: Learn how to design and integrate a custom AXI-Lite peripheral with a Cortex-A9 processor on the Zybo Z7-10 board using Vivado, configuring GPIOs to control LEDs based on switch inputs.
+
 who_is_this_for: This is an introductory topic for software developers interested in System on Chip Design.
 
 learning_objectives: 
