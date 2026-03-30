@@ -6,20 +6,20 @@ weight: 2
 layout: learningpathall
 ---
 
-Memory behavior is one of the primary determinants of compute performance for memory-bound applications. The CPU-side memory subsystem, including caches, interconnects, and DRAM, directly shapes that behavior. Understanding latency, streaming bandwidth, and how caches and cores share resources is essential for diagnosing bottlenecks and tuning software on Arm servers.
+Memory behavior is one of the primary determinants of compute performance for memory-bound applications. The CPU-side memory subsystem, including caches, interconnects, and DRAM, directly impact performance. Understanding latency, streaming bandwidth, and how caches and cores share resources is essential for diagnosing bottlenecks and tuning software on Arm servers.
 
 ## Identify CPU, cache, and NUMA topology
 
 Before you can characterize a memory subsystem, you need to understand how the system is organized. The number of cores, how they are grouped into clusters, the DRAM type, and the operating system all influence memory behavior. Knowing this topology helps interpret benchmark results.
 
-The examples throughout use two AWS Graviton instances:
+The examples use two AWS Graviton instances:
 
 - AWS Graviton2, `c6g.16xlarge`, instance with Arm Neoverse N1 cores.
 - AWS Graviton4, `c8g.16xlarge`, instance with Arm Neoverse V2 cores.
 
 Both systems run Ubuntu 24.04 with 64 CPUs, 128 GB RAM, and 32 GB of storage.
 
-These are just examples, and you can follow the same steps on any Arm Linux system.
+These are only examples, and you can follow the same steps on any Arm Linux system.
 
 If you want to follow along with the same instances, create two EC2 instances using the AWS console or CLI:
 
@@ -30,7 +30,7 @@ Make sure both instances are accessible via SSH before continuing.
 
 ## Collect basic system information
 
-Start by setting a descriptive hostname on each system. This makes it easier to identify results later when you use `$(hostname)` in output directory names.
+Start by setting a descriptive hostname on each system. This makes it easier to identify results later when you use `$(hostname)` in commands.
 
 On the Graviton4 instance, run:
 
@@ -52,7 +52,7 @@ Record the kernel version and operating system. Run the following command on you
 uname -a && cat /etc/os-release
 ```
 
-Both systems have the same software (example output; kernel version may differ depending on distribution updates):
+Both systems have the same software, but this is example output, the kernel version may differ depending on updates:
 
 ```output
 Linux graviton2-c6g 6.17.0-1007-aws #7~24.04.1-Ubuntu SMP Thu Jan 22 20:37:30 UTC 2026 aarch64 aarch64 aarch64 GNU/Linux
@@ -77,7 +77,7 @@ Print the CPU information:
 lscpu
 ```
 
-Pay close attention to the `lscpu` output. It gives you the CPU model, the number of cores, threads per core, sockets, and NUMA node configuration. Here is an example from a Graviton2 instance:
+Pay close attention to the `lscpu` output. It gives you the CPU model, the number of cores, threads per core, sockets, and NUMA node configuration. Here is an example from the Graviton2 instance:
 
 ```output
 Architecture:                aarch64
@@ -136,7 +136,7 @@ NUMA:
 
 The two systems span two generations of Arm Neoverse server cores. Graviton2 uses Neoverse N1 cores with private 1 MB L2 caches per core and a 32 MB shared L3. Graviton4 uses Neoverse V2 cores with 2 MB private L2 caches per core and a 36 MB shared L3. These differences in cache sizes and memory technology directly impact the memory latency, bandwidth, and scaling behavior you observe in later benchmarks.
 
-Notice that the Neoverse V2 `Flags` field is significantly longer than Neoverse N1. This reflects the newer Arm architecture: Neoverse V2 is based on Armv9, which adds extensions like SVE2, BF16, and I8MM that are absent on the Armv8-based Neoverse N1.
+Notice that the Neoverse V2 `Flags` output is significantly longer than Neoverse N1. This reflects the newer Arm architecture: Neoverse V2 is based on Armv9, which adds extensions like SVE2, BF16, and I8MM that are absent on the Armv8-based Neoverse N1.
 
 ## Check DRAM configuration
 
@@ -155,7 +155,7 @@ Mem:           123Gi       1.6Gi       121Gi       1.2Mi       1.2Gi       121Gi
 
 Graviton2 instances use DDR4 memory. Graviton4 instances use DDR5 memory, which provides higher bandwidth per channel than DDR4, but typically has slightly higher access latency in nanoseconds.
 
-Both systems have a single NUMA node, meaning all cores have uniform access to all memory. On multi-socket Arm servers with multiple NUMA nodes, memory access latency depends on which node the data resides on. The ASCT `idle-latency` and `cross-numa-bandwidth` benchmarks are designed for those systems but will show minimal variation on single-node systems like these on single-node configurations like these.
+Both systems have a single NUMA node, meaning all cores have uniform access to all memory. On multi-socket Arm servers with multiple NUMA nodes, memory access latency depends on which node the data resides on. The ASCT `idle-latency` and `cross-numa-bandwidth` benchmarks are designed for multi-socket systems but will show minimal variation on single-node systems like these.
 
 ## Explore the core and cluster topology
 
@@ -237,17 +237,17 @@ CPU NODE SOCKET CORE L1d:L1i:L2:L3 ONLINE
  63    0      0   63 63:63:63:0       yes
 ```
 
-On both systems, every core has its own unique L1d, L1i, and L2 index, so those caches are private. The L3 index is `0` for all cores, confirming that the system exposes a single shared LLC across all cores, although it may be physically distributed across the interconnect on each system.
+On both systems, every core has its own unique L1d, L1i, and L2 index, so those caches are private. The L3 index is 0 for all cores, confirming that the system exposes a single shared LLC across all cores, although it may be physically distributed across the interconnect on each system.
 
 ### Visualize the topology with hwloc
 
-The `hwloc` package provides a more visual representation. Install it and run:
+The `hwloc` package provides a visual representation. Install it using the package manager:
 
 ```bash
 sudo apt-get install -y hwloc
 ```
 
-To generate a graphical representation of the hierarchy, run:
+Generate a graphical representation of the hierarchy:
 
 ```bash
 hwloc-ls --of png > topology.png
@@ -344,11 +344,9 @@ Shared CPU list: 0-63
 
 Both systems have an `index3` entry showing a shared L3 cache. On Graviton2, the 32 MB L3 is shared across all 64 cores. On Graviton4, the 36 MB L3 is shared across all 64 cores. The `shared_cpu_list` of `0-63` confirms this.
 
-Run the same commands on both instances and compare the differences in cache levels, sizes, and sharing patterns.
-
 ## Record your system profile
 
-Below is a summary of each system. You'll reference this throughout the Learning Path:
+Below is a summary of each system. 
 
 | Property | Graviton2 | Graviton4 |
 |----------|-----------|-----------|

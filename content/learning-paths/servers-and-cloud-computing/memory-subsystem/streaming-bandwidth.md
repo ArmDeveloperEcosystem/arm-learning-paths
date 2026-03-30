@@ -16,10 +16,10 @@ The ASCT `bandwidth-sweep` benchmark measures the average memory bandwidth achie
 
 The `bandwidth-sweep` benchmark depends on `latency-sweep` to determine the optimal data size for each cache level. If you haven't already run `latency-sweep`, ASCT runs it automatically as a dependency.
 
-Run the bandwidth sweep:
+Run the bandwidth sweep on each system and save the results:
 
 ```bash
-sudo asct run bandwidth-sweep --output-dir bandwidth_results
+sudo asct run bandwidth-sweep --output-dir bandwidth_results_$(hostname)
 ```
 
 The output on a Graviton2 instance is shown below:
@@ -50,7 +50,7 @@ Datasize Used Level Bandwidth [GB/s]
 
 ![Bandwidth sweep on Graviton4 showing bandwidth at each cache level#center](bandwidth-c8g.webp "Bandwidth sweep on Graviton4")
 
-Your actual numbers will differ. The important feature is the stepping pattern: high bandwidth for L1, a lower plateau for L2, a further drop at the LLC, and then the DRAM floor.
+Look at the stepping pattern: high bandwidth for L1, a lower plateau for L2, a further drop at the LLC, and then the DRAM floor.
 
 ## Interpret the results
 
@@ -58,8 +58,8 @@ The `bandwidth-sweep` benchmark reports the bandwidth at the optimal data size f
 
 Key differences to look for between Graviton2 and Graviton4:
 
-- **L1 bandwidth**: Graviton4 shows roughly 2x the L1 bandwidth of Graviton2. This likely reflects a combination of higher clock speed and microarchitectural throughput improvements in Neoverse V2.
-- **L2 bandwidth**: Neoverse V2's larger 2 MB L2 keeps more data in the fast private cache, and microarchitectural improvements on Neoverse V2 also increase L2 fill bandwidth.
+- **L1 bandwidth**: Graviton4 shows roughly 2x the L1 bandwidth of Graviton2. This likely reflects multiple microarchitecture improvements in Neoverse V2.
+- **L2 bandwidth**: Neoverse V2's larger 2 MB L2 keeps more data in the fast private cache, and microarchitecture improvements on Neoverse V2 also increase L2 fill bandwidth.
 - **LLC bandwidth**: Graviton4 more than doubles the LLC bandwidth of Graviton2, reflecting improvements in the interconnect and shared cache design on Neoverse V2.
 - **DRAM bandwidth (single core)**: Graviton4 achieves higher single-core DRAM throughput because Neoverse V2 supports more outstanding memory requests than Neoverse N1, and DDR5 provides more bandwidth per channel than DDR4.
 

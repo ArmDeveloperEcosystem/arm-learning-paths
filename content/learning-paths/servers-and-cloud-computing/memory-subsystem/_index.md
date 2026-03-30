@@ -13,7 +13,7 @@ who_is_this_for: This is an advanced topic for software developers and performan
 
 learning_objectives:
     - Identify the core topology, cluster layout, and cache hierarchy of an Arm Linux system using standard tools
-    - Measure cache and memory latency using a pointer-chase benchmark from ASCT
+    - Measure cache and memory latency using a pointer-chase benchmark
     - Measure single-core and multi-core streaming bandwidth at each level of the memory hierarchy
     - Evaluate latency behavior under bandwidth pressure 
     - Compare results across Arm systems and draw conclusions

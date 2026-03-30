@@ -26,7 +26,7 @@ asct version
 
 If ASCT is not installed, follow the [ASCT install guide](/install-guides/asct/) to install it.
 
-The Arm System Characterization Tool (ASCT) includes a `latency-sweep` benchmark that implements a pointer chase internally. It sweeps data sizes from 128 bytes to 1 GiB, uses randomized linked lists to defeat prefetching, and allocates 1 GiB huge pages to minimize the effect of page table walks on the measurements.
+The Arm System Characterization Tool (ASCT) includes a `latency-sweep` benchmark that implements a pointer chase. It sweeps data sizes from 128 bytes to 1 GiB, uses randomized linked lists to defeat prefetching, and allocates 1 GiB huge pages to minimize the effect of page table walks on the measurements.
 
 The benchmark automatically identifies cache level boundaries and reports the optimal data size, lower bound, upper bound, and average latency for each level. It also generates a latency-vs-size line graph in the output directory.
 
@@ -34,7 +34,7 @@ ASCT requires `sudo` because it configures huge pages and pins threads to specif
 
 ASCT prints the results to the terminal and saves detailed output (including CSV data and a `latency-sweep.png` plot) in a timestamped directory under the current working directory.
 
-To save the output to a specific directory:
+Run the benchmark on both systems and save the output to a specific directory:
 
 ```bash
 sudo asct run latency-sweep --output-dir latency_results_$(hostname)

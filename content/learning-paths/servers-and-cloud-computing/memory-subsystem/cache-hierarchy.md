@@ -6,17 +6,15 @@ weight: 3
 layout: learningpathall
 ---
 
-## Why cache hierarchy matters
+## Cache levels and performance clifs
 
-Each memory access is satisfied by the closest level of the hierarchy that contains the requested data. If the data is not found in the private caches, the request falls through to lower levels and eventually to DRAM. Each level trades capacity for speed: L1 is tiny but fast, L2 is larger but slower, and L3 (or a system-level cache) is the largest on-chip cache but has the highest latency. Understanding this hierarchy for your specific system tells you where performance "cliffs" will occur as your working set grows.
+Each memory access is satisfied by the closest level of the hierarchy that contains the requested data. If the data is not found in the private caches, the request falls through to the next cache level and eventually to DRAM. Each level trades capacity for speed: L1 is tiny but fast, L2 is larger but slower, and L3 (or a system-level cache) is the largest on-chip cache but has the highest latency. Understanding this hierarchy for your specific system tells you where performance "cliffs" will occur as your working set grows.
 
 ## Cache levels on Arm systems
 
-Both systems use 4-way L1 caches with 64-byte lines and 8-way L2 caches, also with 64-byte lines. The key architectural differences are in L2 size and whether a shared last-level cache is present.
+Both Graviton systems use 4-way L1 caches with 64-byte lines and 8-way L2 caches, also with 64-byte lines. The key architectural differences are in L2 size and the last level cache size. If you investigate a variety of Arm Linux systems you will see many different cache sizes and configurations.
 
 Graviton2 (Neoverse N1) has a 1 MB private L2 per core and a 32 MB shared L3 across all 64 cores. Graviton4 (Neoverse V2) doubles the L2 to 2 MB and has a 36 MB shared L3. The larger L2 on Neoverse V2 reduces traffic to the shared L3 and lowers contention in multi-threaded workloads, which is especially beneficial for workloads with per-thread working sets between 1 MB and 2 MB.
-
-Some SoCs add a System Level Cache (SLC) beyond L3, sitting between the CPU cluster and the memory controllers and serving both CPU and GPU traffic.
 
 ## Read cache properties from the kernel
 
@@ -98,7 +96,7 @@ For Arm Neoverse cores, the Technical Reference Manuals (TRMs) list:
 - Prefetcher behavior
 - Expected cycle-count latencies
 
-Compare your `sysfs` findings with the TRM. If the sizes differ, the SoC vendor may have chosen a non-default configuration. For example, Neoverse V2 allows L2 sizes of 1 MB or 2 MB, and the TRM documents both options.
+Compare your `sysfs` findings with the TRM. If the sizes differ, the SoC vendor may have chosen a different configuration. Many Arm CPUs have multiple options for cache size. For example, Neoverse V2 allows L2 sizes of 1 MB or 2 MB, and the TRM documents both options.
 
 {{% notice Tip %}}
 Arm publishes TRMs on the [Arm Developer documentation portal](https://developer.arm.com/documentation/). Search for the specific core name (for example, "Neoverse N1 TRM" or "Neoverse V2 TRM") to find the detailed cache specifications.
@@ -111,4 +109,4 @@ In this section you:
 - Learned the key concepts of cache lines, associativity, prefetching, and ns-vs-cycles that explain benchmark results
 - Cross-checked kernel-reported values against Arm documentation
 
-The next section uses the ASCT `latency-sweep` benchmark to measure the actual access latency at each level of the hierarchy.
+The next section uses the ASCT `latency-sweep` benchmark to measure the actual access latency at each level of the memory hierarchy.

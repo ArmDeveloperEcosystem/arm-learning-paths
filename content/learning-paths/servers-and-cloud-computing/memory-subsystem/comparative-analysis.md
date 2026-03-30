@@ -14,7 +14,7 @@ You now have a complete set of memory subsystem measurements for each of your te
 
 Throughout the previous sections, you ran individual ASCT benchmarks. To characterize a new system from scratch, run all memory benchmarks at once.
 
-Run all tests and save the results.
+Run all tests on each system and save the results.
 
 ```bash
 sudo asct run memory loaded-latency --output-dir results_$(hostname)
@@ -22,7 +22,7 @@ sudo asct run memory loaded-latency --output-dir results_$(hostname)
 
 This runs `latency-sweep`, `bandwidth-sweep`, `idle-latency`, `peak-bandwidth`, `c2c-latency`, and `loaded-latency` in a single pass, saving all results and plots to the output directory. The directory name includes the hostname so you can easily identify which system produced the data.
 
-## Compare systems with asct diff
+## Compare systems with the diff command
 
 ASCT includes a `diff` command that compares output directories from different runs. It loads the results from each directory, groups fields by benchmark, and reports percentage differences for measurements and raw values for system configuration.
 
@@ -66,7 +66,7 @@ To compare everything except system-info:
 asct diff results_graviton2-c6g/ results_graviton4-c8g/ --benchmarks ^system-info
 ```
 
-Output is:
+The output for everything except the system info is:
 
 ```output
 ,field,recipe,run,comparator,delta,delta_percent,baseline
@@ -147,50 +147,34 @@ Collect the key measurements from each system into a comparison table:
 
 ## Analyze the differences
 
+The conclusions below are from running ASCT on AWS EC2 instances that are easily available for you to try so you can learn the process and learn how to think about the results. There are many more details that go into CPU microarchitecture and system design that are not covered here, but this is a good way to get an initial understanding of the memory system of an Arm Linux server. 
+
 ### Latency
 
-The latency measurements from `latency-sweep` reveal how each generation's cache hierarchy performs:
-
-- **L1 latency** is similar across both generations (1.6 ns vs 1.4 ns). L1 caches are designed for very low latency (typically a few cycles), so the small difference reflects clock speed rather than cache microarchitecture.
-- **L2 latency** improves by 27% on Graviton4 (4.0 ns vs 5.4 ns). Neoverse V2 has a 2 MB private L2 compared to Neoverse N1's 1 MB. Despite the larger size, Neoverse V2's improved cache pipeline delivers lower latency.
-- **LLC latency** improves by 24% on Graviton4 (21.8 ns vs 28.8 ns), despite the L3 being only slightly larger (36 MB vs 32 MB). This reflects microarchitectural improvements in the Neoverse V2 cache interconnect.
-- **DRAM latency** is higher on Graviton4 (114.6 ns vs 95.5 ns, +20%). DDR5 trades slightly higher access latency for significantly more bandwidth per channel compared to DDR4.
+The latency measurements from `latency-sweep` reveal how each generation's cache hierarchy performs. L1 latency is similar across both generations (1.6 ns vs 1.4 ns) because L1 caches are designed for very low latency, so the small difference reflects clock speed rather than cache microarchitecture. L2 latency improves by 27% on Graviton4 (4.0 ns vs 5.4 ns): Neoverse V2 has a 2 MB private L2 compared to Neoverse N1's 1 MB, and despite the larger size, the improved cache pipeline delivers lower latency. LLC latency improves by 24% on Graviton4 (21.8 ns vs 28.8 ns) even though the L3 is only slightly larger (36 MB vs 32 MB), which reflects microarchitectural improvements in the Neoverse V2 cache interconnect. DRAM latency is higher on Graviton4 (114.6 ns vs 95.5 ns, +20%) because DDR5 trades slightly higher access latency for significantly more bandwidth per channel compared to DDR4.
 
 ### Loaded latency
 
-The `loaded-latency` results reveal the latency-bandwidth tradeoff:
-
-- At low load (~3000 NOPs), latency matches the idle DRAM latency from `latency-sweep` (96.7 ns for Graviton2, 115.1 ns for Graviton4), confirming the two benchmarks are consistent.
-- The knee on Graviton2 occurs between 70 and 50 NOPs, where latency nearly doubles from 134 ns to 266 ns. Beyond the knee, latency climbs to 344 ns at saturation.
-- The knee on Graviton4 occurs between 30 and 20 NOPs, at a much higher bandwidth (~340 GB/s vs ~126 GB/s on Graviton2). Graviton4's latency plateaus around 190-198 ns at saturation rather than continuing to climb, suggesting the DDR5 memory controllers handle queue saturation more gracefully.
-- Despite Graviton4's higher idle DRAM latency, its latency at saturation is 43% lower than Graviton2's (197 ns vs 344 ns), making it the better choice for workloads that operate near memory bandwidth limits.
+The `loaded-latency` results reveal the latency-bandwidth tradeoff. At low load (~3000 NOPs), latency matches the idle DRAM latency from `latency-sweep` (96.7 ns for Graviton2, 115.1 ns for Graviton4), confirming the two benchmarks are consistent. The knee on Graviton2 occurs between 70 and 50 NOPs, where latency nearly doubles from 134 ns to 266 ns before climbing to 344 ns at saturation. On Graviton4 the knee occurs between 30 and 20 NOPs at a much higher bandwidth (~340 GB/s vs ~126 GB/s on Graviton2), and latency plateaus around 190–198 ns at saturation rather than continuing to climb, suggesting the DDR5 memory controllers handle queue saturation more gracefully. Despite Graviton4's higher idle DRAM latency, its latency at saturation is 43% lower than Graviton2's (197 ns vs 344 ns), making it the better choice for workloads that operate near memory bandwidth limits.
 
 ### Bandwidth
 
-Single-core bandwidth from `bandwidth-sweep` shows the throughput capacity at each cache level:
+Single-core bandwidth from `bandwidth-sweep` shows the throughput capacity at each cache level. L1 bandwidth doubles on Graviton4 (321 vs 159 GB/s, +101%), likely reflecting a combination of higher clock speed and microarchitectural throughput improvements in Neoverse V2. L2 bandwidth improves by 29% (95 vs 73 GB/s) due to the wider L2 fill path, and LLC bandwidth more than doubles (80 vs 36 GB/s, +123%), reflecting improvements in the interconnect and shared cache design. Single-core DRAM bandwidth improves by 77% (37 vs 21 GB/s) because Neoverse V2 supports more outstanding memory requests than Neoverse N1 and DDR5 provides more bandwidth per channel than DDR4.
 
-- **L1 bandwidth** doubles on Graviton4 (321 vs 159 GB/s, +101%). This likely reflects a combination of higher clock speed and microarchitectural throughput improvements in Neoverse V2.
-- **L2 bandwidth** improves by 29% on Graviton4 (95 vs 73 GB/s), due to the wider L2 fill path and microarchitectural improvements in Neoverse V2.
-- **LLC bandwidth** more than doubles on Graviton4 (80 vs 36 GB/s, +123%), reflecting improvements in the interconnect and shared cache design.
-- **DRAM bandwidth (single core)** improves by 77% on Graviton4 (37 vs 21 GB/s). Neoverse V2 supports more outstanding memory requests than Neoverse N1, and DDR5 provides more bandwidth per channel than DDR4.
-
-Peak bandwidth from `peak-bandwidth` shows the system-level memory controller capacity:
-
-- Graviton4 delivers 2.7x the peak all-reads bandwidth of Graviton2 (465.6 vs 169.7 GB/s). This is the most dramatic difference between the two generations.
-- Compare the "All Reads" figure with the theoretical peak bandwidth from `asct system-info` to see how efficiently each system uses its available bandwidth. Well-configured systems typically achieve 85-95% of theoretical peak.
+Peak bandwidth from `peak-bandwidth` shows the system-level memory controller capacity. Graviton4 delivers 2.7x the peak all-reads bandwidth of Graviton2 (465.6 vs 169.7 GB/s), the most dramatic difference between the two generations. Compare the "All Reads" figure with the theoretical peak bandwidth from `asct system-info` to see how efficiently each system uses its available bandwidth — well-configured systems typically achieve 85–95% of theoretical peak.
 
 ## Cross-validate your findings
 
 The credibility of this type of analysis comes from cross-validation. Check that:
 
-1. **Latency steps match cache sizes**: the `latency-sweep` boundaries should align with the cache sizes reported by `sysfs` and the TRM.
-2. **Bandwidth plateaus match cache sizes**: the `bandwidth-sweep` should show transitions at the same data sizes that `latency-sweep` identified.
-3. **Peak bandwidth matches documented limits**: compare the "All Reads" figure from `peak-bandwidth` against the theoretical peak from `asct system-info`. A well-configured system typically achieves 85-95% of theoretical peak.
-4. **Idle loaded latency matches unloaded latency**: the lowest-load row from `loaded-latency` should be close to the DRAM latency from `latency-sweep`.
-5. **Results are repeatable**: run each benchmark at least twice. If results vary by more than 5%, investigate sources of noise (CPU frequency scaling, background processes).
+1. Latency steps match cache sizes: the `latency-sweep` boundaries should align with the cache sizes reported by `sysfs` and the TRM.
+2. Bandwidth plateaus match cache sizes: the `bandwidth-sweep` should show transitions at the same data sizes that `latency-sweep` identified.
+3. Peak bandwidth matches documented limits: compare the "All Reads" figure from `peak-bandwidth` against the theoretical peak from `asct system-info`. A well-configured system typically achieves 85-95% of theoretical peak.
+4. Idle loaded latency matches unloaded latency: the lowest-load row from `loaded-latency` should be close to the DRAM latency from `latency-sweep`.
+5. Results are repeatable: run each benchmark at least twice. If results vary by more than 5%, investigate sources of noise (CPU frequency scaling, background processes).
 
 {{% notice Tip %}}
-Disable CPU frequency scaling during benchmarks for more consistent results:
+Check if your system allows you to control CPU frequency scaling during benchmarks for more consistent results:
 ```bash
 echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
 ```
@@ -200,10 +184,10 @@ echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governo
 
 The examples here used AWS Graviton instances, but the methodology works on any Arm Linux machine with a NUMA-enabled kernel. To adapt it:
 
-1. **Install ASCT** on the target system following the [install guide](/install-guides/asct/).
-2. **Run all memory benchmarks**: `sudo asct run memory loaded-latency --format=csv --output-dir results_$(hostname)`
-3. **Compare with previous systems**: `asct diff results_new/ --baseline results_reference/`
-4. **Cross-validate**: check that latency boundaries, bandwidth plateaus, and peak numbers are consistent with each other and with the hardware documentation.
+1. Install ASCT on the target system following the [install guide](/install-guides/asct/).
+2. Run all memory benchmarks: `sudo asct run memory loaded-latency --format=csv --output-dir results_$(hostname)`
+3. Compare with previous systems: `asct diff results_new/ --baseline results_reference/`
+4. Cross-validate: check that latency boundaries, bandwidth plateaus, and peak numbers are consistent with each other and with the hardware documentation.
 
 
 ## What you've accomplished

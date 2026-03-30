@@ -17,14 +17,14 @@ ASCT includes two benchmarks that characterize multi-core memory behavior:
 - `peak-bandwidth` uses all cores on all NUMA nodes to measure the maximum achievable memory bandwidth under multiple traffic patterns.
 - `loaded-latency` measures how memory latency degrades as other cores generate increasing bandwidth pressure.
 
-Both benchmarks depend on `latency-sweep` to determine the optimal data size for targeting DRAM. If you haven't already run `latency-sweep`, ASCT runs it automatically as a dependency.
+Both benchmarks depend on `latency-sweep` to determine the optimal data size for targeting DRAM. ASCT runs it automatically as a dependency.
 
 ## Peak bandwidth
 
 The `peak-bandwidth` benchmark makes full use of all cores to measure the maximum system bandwidth. It tests multiple traffic patterns to show how the mix of reads and writes affects peak throughput.
 
 ```bash
-sudo asct run peak-bandwidth  --output-dir peakbw_results
+sudo asct run peak-bandwidth  --output-dir peakbw_results_$(hostname)
 ```
 
 The Graviton2 output:
@@ -71,10 +71,10 @@ The `loaded-latency` benchmark measures how memory latency changes as other core
 The `loaded-latency` benchmark takes several minutes to complete because it runs multiple measurement phases at different traffic levels.
 {{% /notice %}}
 
-To save the output to a specific directory:
+Run the command on both system and save the output to a specific directory:
 
 ```bash
-sudo asct run loaded-latency --output-dir loaded_latency_results
+sudo asct run loaded-latency --output-dir loaded_latency_results_$(hostname)
 ```
 
 The Graviton2 output:
