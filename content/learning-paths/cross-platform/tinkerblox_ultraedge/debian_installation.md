@@ -17,13 +17,13 @@ Follow these steps to initialize and register your device within the **Uncloud**
 * **Provision a New Device:**
     * Go to **Device Management** > **New Device**.
 
-![Device Management](https://raw.githubusercontent.com/Tinkerbloxsupport/arm-learning-path-support/main/static/images/Device_managment.png)
+![Screenshot of the Uncloud Dashboard showing the Device Management section with the navigation menu highlighting the option to create a new device#center](https://raw.githubusercontent.com/Tinkerbloxsupport/arm-learning-path-support/main/static/images/Device_managment.png "Device Management interface")
 
-![Creating New Device](https://raw.githubusercontent.com/Tinkerbloxsupport/arm-learning-path-support/main/static/images/creating_new_device.png)
+![Screenshot of the Uncloud interface showing the New Device creation form where you can configure device settings and register a new edge device#center](https://raw.githubusercontent.com/Tinkerbloxsupport/arm-learning-path-support/main/static/images/creating_new_device.png "Creating a new device")
 
 * Click the **three dots (options menu)** next to your device entry and select **Initialize**.
 
-![Initialize Device](https://raw.githubusercontent.com/Tinkerbloxsupport/arm-learning-path-support/main/static/images/Initialize%20.png)
+![Screenshot of the Uncloud Dashboard showing the device options menu with the Initialize option highlighted to begin the device setup process#center](https://raw.githubusercontent.com/Tinkerbloxsupport/arm-learning-path-support/main/static/images/Initialize%20.png "Initialize device option")
 
 * **Install prerequisites:**
 
@@ -39,7 +39,7 @@ sudo apt install -y curl jq
 
     Copy the generated device installation command or details from the **Uncloud** portal to your clipboard.
 
-![Installation Command](https://raw.githubusercontent.com/Tinkerbloxsupport/arm-learning-path-support/main/static/images/Initialize%20_command.png)
+![Screenshot of the Uncloud portal showing the device initialization screen with the installation command displayed that you need to copy and execute on your target device#center](https://raw.githubusercontent.com/Tinkerbloxsupport/arm-learning-path-support/main/static/images/Initialize%20_command.png "Installation command")
 
 You should be able to locate and copy the specific installation command appropriate for your account. Here is an example:
 
