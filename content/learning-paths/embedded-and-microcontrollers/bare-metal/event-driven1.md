@@ -28,7 +28,7 @@ Configure the [SCR_EL3, Secure Configuration Register](https://developer.arm.com
 	MSR  SCR_EL3, x1
 ```
 ### Point to the exception vector table
-Set the [VBAR_EL3, Vector Based Address Register](https://developer.arm.com/documentation/ddi0601/latest/AArch64-Registers/VBAR-EL3--Vector-Base-Address-Register--EL3-) to the location of the exception vector table. You will create `vectors` in the next section.
+Set the [VBAR_EL3, Vector Based Address Register](https://developer.arm.com/documentation/ddi0601/latest/AArch64-Registers/VBAR-EL3--Vector-Base-Address-Register--EL3-) to the location of the exception vector table. You'll create `vectors` in the next section.
 #### startup_el3.s
 ```C
 // Install vector table
@@ -53,7 +53,7 @@ The [exception vector table](https://developer.arm.com/documentation/den0024/lat
 Create `vectors.s` containing the following code.
 
 {{% notice Note%}}
-You will implement only the necessary FIQ exception for this example. A real system would need to implement all handlers.
+You'll implement only the necessary FIQ exception for this example. A real system would need to implement all handlers.
 {{% /notice %}}
 
 #### vectors.s
