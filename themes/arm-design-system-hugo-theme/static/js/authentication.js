@@ -98,10 +98,11 @@ function getEmailClaimValue(claims) {
     "emails"
   ]);
 
-  if (Array.isArray(value)) {
-    return value.find(Boolean);
+  const emailValue = Array.isArray(value) ? value.find(Boolean) : value;
+  if (typeof emailValue === "string") {
+    return emailValue.trim().toLowerCase();
   }
-  return value;
+  return undefined;
 }
 
 function normalizeToArray(value) {
@@ -149,97 +150,9 @@ async function getIdTokenClaimsForAccount(account) {
 
 function mapClaimsToDigitalData(claims) {
   const email = getEmailClaimValue(claims);
-  const canonicalArmId = getFirstClaimValue(claims, [
-    "extension_armId",
-    "armId",
-    "extension_arm_id",
-    "extension_canonical_arm_id"
-  ]) || getClaimValueBySuffix(claims, [
-    "_armid",
-    "_arm_id",
-    "_canonical_arm_id"
-  ]);
-  const adpMemberType = getFirstClaimValue(claims, [
-    "extension_adp_member_type",
-    "adp_member_type"
-  ]) || getClaimValueBySuffix(claims, [
-    "_adp_member_type"
-  ]);
-  const adpMemberStatus = getFirstClaimValue(claims, [
-    "extension_adp_member_status",
-    "adp_member_status"
-  ]) || getClaimValueBySuffix(claims, [
-    "_adp_member_status"
-  ]);
-  const companyName = getFirstClaimValue(claims, [
-    "extension_company_name",
-    "company_name",
-    "companyName"
-  ]) || getClaimValueBySuffix(claims, [
-    "_company_name",
-    "_companyname"
-  ]);
-  const targetStack = normalizeToArray(
-    getFirstClaimValue(claims, [
-      "extension_target_stack",
-      "target_stack",
-      "targetStack"
-    ]) || getClaimValueBySuffix(claims, [
-      "_target_stack",
-      "_targetstack"
-    ])
-  );
-  const targetHardware = normalizeToArray(
-    getFirstClaimValue(claims, [
-      "extension_target_hardware",
-      "target_hardware",
-      "targetHardware"
-    ]) || getClaimValueBySuffix(claims, [
-      "_target_hardware",
-      "_targethardware"
-    ])
-  );
-  const developerClassification = getFirstClaimValue(claims, [
-    "extension_developer_classification",
-    "developer_classification"
-  ]) || getClaimValueBySuffix(claims, [
-    "_developer_classification"
-  ]);
-  const jobFunction = getFirstClaimValue(claims, [
-    "extension_job_function",
-    "job_function"
-  ]) || getClaimValueBySuffix(claims, [
-    "_job_function"
-  ]);
-  const jobTitle = getFirstClaimValue(claims, [
-    "extension_job_title",
-    "job_title"
-  ]) || getClaimValueBySuffix(claims, [
-    "_job_title"
-  ]);
 
   return {
-    user_contact_email: email,
-    user: {
-      full_name: getFirstClaimValue(claims, [
-        "name"
-      ]),
-      first_name: getFirstClaimValue(claims, [
-        "given_name"
-      ]),
-      last_name: getFirstClaimValue(claims, [
-        "family_name"
-      ]),
-      user_id: "ARM123456",
-      adp_member_type: adpMemberType,
-      adp_member_status: adpMemberStatus,
-      company_name: companyName,
-      target_stack: targetStack,
-      target_hardware: targetHardware,
-      developer_classification: developerClassification,
-      job_function: jobFunction,
-      job_title: jobTitle
-    }
+    user_contact_email: email
   };
 }
 
