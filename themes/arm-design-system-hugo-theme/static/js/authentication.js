@@ -209,8 +209,6 @@ async function updateDigitalDataForCurrentUser() {
   delete digitalData.user_contact_email;
   delete digitalData.user;
   Object.assign(digitalData, prunedData);
-
-  console.log("Auth claims available for analytics mapping:", Object.keys(claims));
 }
 
 // Auth Init on pageload
