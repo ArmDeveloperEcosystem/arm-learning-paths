@@ -1,6 +1,8 @@
 ---
 title: Create an Armv8-A embedded application
 
+description: Learn how to create, build, and run a bare-metal embedded application for Armv8-A processors using Arm Compiler for Embedded and Fixed Virtual Platforms, including basic exception handling.
+
 minutes_to_complete: 60   
 
 who_is_this_for: This is an introductory topic for embedded software developers new to Armv8-A processors and/or the Arm Compiler for Embedded.
