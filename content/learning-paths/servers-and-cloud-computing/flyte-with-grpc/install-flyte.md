@@ -59,7 +59,7 @@ python3.11 --version
 The output is similar to:
 
 ```output
-Python 3.11.x
+Python 3.11.10
 ```
 
 **Why this matters:**
@@ -68,36 +68,57 @@ Python 3.11.x
 - Modern workflow libraries are optimized for Python 3.11
 - Ensures compatibility with Flyte and gRPC libraries
 
-## Install Flyte SDK
+## Create a virtual environment
 
-Install the Flyte Python SDK used to define and execute workflows.
+`flytekit 1.16.15` requires `setuptools<70`, while `grpcio-tools` requires `setuptools>=77`. These constraints are mutually exclusive at the system level. A virtual environment resolves this by isolating the dependency graph from any pre-installed system packages, allowing pip to resolve all constraints together from scratch.
 
-```bash
-python3.11 -m pip install --upgrade pip
-python3.11 -m pip install flytekit
-```
-
-**Verify installation:**
+Create and activate a virtual environment:
 
 ```bash
-python3.11 -c "import flytekit; print(flytekit.__version__)"
+python3.11 -m venv flyte-env
+source flyte-env/bin/activate
 ```
 
-This confirms that Flyte is correctly installed.
+Your prompt will change to show `(flyte-env)`, confirming the environment is active. All subsequent `pip install` commands in this Learning Path use this environment.
 
-## Install gRPC libraries
+## Install Flyte SDK and gRPC libraries
 
-Install the libraries required for communication between distributed services.
+With the virtual environment active, upgrade pip and install Flyte together with the gRPC communication libraries in a single step. This lets pip resolve a consistent set of versions, including `setuptools`, across all packages at once.
 
 ```bash
-python3.11 -m pip install grpcio grpcio-tools protobuf
+pip install --upgrade pip
+pip install flytekit grpcio grpcio-tools protobuf
 ```
 
-These libraries enable remote procedure calls between workflow tasks and microservices.
+**Verify Flyte installation:**
+
+```bash
+python -c "import flytekit; print(flytekit.__version__)"
+```
+
+The output is similar to:
+
+```output
+1.16.15
+```
+
+**Verify gRPC installation:**
+
+```bash
+python -c "import grpc; import grpc_tools; import google.protobuf; print('gRPC libraries OK')"
+```
+
+The output is similar to:
+
+```output
+gRPC libraries OK
+```
+
+This confirms that Flyte and the gRPC libraries are correctly installed and compatible within the virtual environment.
 
 ## Install Flyte CLI
 
-Download and install the Flyte command-line tool.
+The Flyte CLI is a standalone binary and doesn't use pip, so you install it to the system path independently of the virtual environment.
 
 ```bash
 curl -L https://github.com/flyteorg/flytectl/releases/latest/download/flytectl_Linux_arm64.tar.gz -o flytectl.tar.gz
@@ -126,10 +147,10 @@ This confirms that the Flyte CLI is correctly installed.
 
 In this section, you learned how to:
 
-- Prepared a SUSE arm64 environment for ML workflow development
-- Installed Python 3.11 and development dependencies
-- Installed Flyte SDK for workflow orchestration
-- Installed gRPC libraries for service communication
-- Configured Flyte CLI tools
+- Prepare a SUSE arm64 environment for ML workflow development
+- Install Python 3.11 and development dependencies
+- Create a virtual environment to resolve the `setuptools` conflict between `flytekit` and `grpcio-tools`
+- Install Flyte SDK and gRPC libraries in a single isolated environment
+- Install Flyte CLI tools
 
 In the next section, you will create a gRPC-based feature engineering service that will be integrated with the Flyte ML workflow pipeline.

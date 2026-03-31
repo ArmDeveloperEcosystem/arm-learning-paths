@@ -32,4 +32,4 @@ In this section, you learned about:
 * gRPC as a communication layer for distributed services
 * How Flyte and gRPC can be used together to build scalable ML training pipelines
 
-Next, You will deploy Flyte tools, create a gRPC-based feature engineering service, and build a distributed ML workflow pipeline that orchestrates data processing and model training tasks on Axion infrastructure.
+Next, you will deploy Flyte tools, create a gRPC-based feature engineering service, and build a distributed ML workflow pipeline that orchestrates data processing and model training tasks on Axion infrastructure.
