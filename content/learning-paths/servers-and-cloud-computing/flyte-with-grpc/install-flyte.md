@@ -59,7 +59,7 @@ python3.11 --version
 The output is similar to:
 
 ```output
-Python 3.11.x
+Python 3.11.10
 ```
 
 **Why this matters:**
@@ -81,6 +81,12 @@ python3.11 -m pip install flytekit
 
 ```bash
 python3.11 -c "import flytekit; print(flytekit.__version__)"
+```
+
+The output is similar to:
+
+```output
+1.16.15
 ```
 
 This confirms that Flyte is correctly installed.
