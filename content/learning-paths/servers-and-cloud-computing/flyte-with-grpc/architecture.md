@@ -6,8 +6,6 @@ weight: 8
 layout: learningpathall
 ---
 
-# ML Pipeline Architecture
-
 In this section, you explore the architecture behind the distributed machine learning pipeline built using Flyte and gRPC on Google Axion Arm-based infrastructure.
 
 This architecture demonstrates how modern ML workflows are orchestrated using workflow engines while delegating specific tasks to distributed services.

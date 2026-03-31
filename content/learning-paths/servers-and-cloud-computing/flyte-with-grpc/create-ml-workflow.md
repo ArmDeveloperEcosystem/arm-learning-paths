@@ -53,6 +53,7 @@ This architecture separates workflow orchestration from feature generation, allo
 Create the workflow file.
 
 ```bash
+cd $HOME/flyte-ml-pipeline
 vi workflow.py
 ```
 
@@ -179,4 +180,4 @@ In this section, you learned how to:
 - Integrate Flyte tasks with a gRPC microservice
 - Orchestrate ML pipeline execution
 
-In the next section, you will run the co**mplete ML training pipeline and observe how Flyte interacts with the feature engineering service during workflow execution**.
+In the next section, you will run the complete ML training pipeline and observe how Flyte interacts with the feature engineering service during workflow execution.

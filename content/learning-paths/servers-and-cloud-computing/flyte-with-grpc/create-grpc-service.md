@@ -6,9 +6,6 @@ weight: 5
 layout: learningpathall
 ---
 
-# Create Feature Engineering gRPC Service
-
-
 In modern machine learning pipelines, feature engineering is often implemented as a separate service so it can scale independently from the training workflow.
 
 In this section, you create a **gRPC-based feature engineering service** that generates features used by the machine learning pipeline.
@@ -46,7 +43,7 @@ vi feature.proto
 
 Add the following code.
 
-```python
+```protobuf
 syntax = "proto3";
 
 service FeatureService {
@@ -65,11 +62,17 @@ message FeatureResponse {
 This file defines the service interface used by the workflow and the feature service.
 
 ## Generate gRPC code
+
+Make sure the `flyte-env` virtual environment is active before running the following commands. If you opened a new terminal, reactivate it:
+
+```bash
+source ~/flyte-env/bin/activate
+```
+
 Compile the protobuf file to generate Python client and server code.
 
-
-```python
-python3.11 -m grpc_tools.protoc \
+```bash
+python -m grpc_tools.protoc \
 -I. \
 --python_out=. \
 --grpc_python_out=. \
@@ -147,7 +150,7 @@ This service receives a value from the workflow and generates a derived feature 
 Start the gRPC service.
 
 ```bash
-python3.11 feature_server.py
+python feature_server.py
 ```
 
 The output is similar to:
@@ -157,10 +160,10 @@ Feature gRPC service running on port 50051
 
 ## What you've learned and what's next
 
-- Created a project directory for the ML workflow
-- Defined a gRPC service using protobuf
-- Generated Python client and server code
-- Implemented a feature engineering microservice
-- Started the gRPC feature service
+- Create a project directory for the ML workflow
+- Define a gRPC service using protobuf
+- Generate Python client and server code
+- Implement a feature engineering microservice
+- Start the gRPC feature service
 
 In the next section, you will create a Flyte ML training workflow that calls this feature engineering service during pipeline execution.

@@ -6,8 +6,6 @@ weight: 7
 layout: learningpathall
 ---
 
-# Run ML Training Pipeline
-
 In this section, you execute the distributed machine learning pipeline built using **Flyte and gRPC**.
 
 The ML workflow will:
@@ -22,10 +20,16 @@ The feature engineering service runs independently and communicates with the wor
 
 ## Start the feature engineering service
 
-First, start the feature engineering service that was created in the previous section.
+Make sure the `flyte-env` virtual environment is active. If you opened a new terminal, reactivate it:
 
 ```bash
-python3.11 feature_server.py
+source ~/flyte-env/bin/activate
+```
+
+Start the feature engineering service that was created in the previous section.
+
+```bash
+python feature_server.py
 ```
 
 The output is similar to:
@@ -46,7 +50,7 @@ cd ~/flyte-ml-pipeline
 **Run the workflow:**
 
 ```bash
-python3.11 workflow.py
+python workflow.py
 ```
 
 ## Example pipeline execution output
