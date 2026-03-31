@@ -14,7 +14,7 @@ This section provides hands-on instructions for you to deploy pre-trained Paddle
 
 The steps involved in the model deployment are shown in the figure below:
 
-![End-to-end workflow#center](./figure3.webp "Figure 3. End-to-end workflow")
+![Flowchart showing the six-step deployment workflow from model training through TVMC compilation to final execution on Corstone-300 FVP with Cortex-M55 processor#center](./figure3.webp "End-to-end workflow")
 
 ## Deploy PaddleOCR text recognition model on the Corstone-300 FVP included with Arm Virtual Hardware
 
@@ -22,7 +22,7 @@ Start by launching the [Arm Virtual Hardware AMI](/install-guides/avh/).
 
 Alternatively, you can also download the Corstone-300 FVP from the [Arm Ecosystem FVP](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) page. For installation instructions see [Arm Ecosystem FVPs](/install-guides/fm_fvp/eco_fvp/).
 
-The code for this [project](https://github.com/ArmDeveloperEcosystem/Paddle-examples-for-AVH/tree/main/OCR-example), is available to download from [ArmDeveloperEcosystem](https://github.com/ArmDeveloperEcosystem/Paddle-examples-for-AVH) GitHub repository as well as [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR/tree/main/deploy/avh)'s GitHub repository.
+The code for this [project](https://github.com/ArmDeveloperEcosystem/Paddle-examples-for-AVH/tree/main/OCR-example) is available to download from the [ArmDeveloperEcosystem](https://github.com/ArmDeveloperEcosystem/Paddle-examples-for-AVH) GitHub repository as well as [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR/tree/main/deploy/avh)'s GitHub repository.
 
 Start by cloning the code repository on your running AVH AMI instance:
 
@@ -43,7 +43,7 @@ cd ./OCR-example/Text-recognition-example-m85/
 
 In this directory, there is a script named [run_demo.sh](https://github.com/ArmDeveloperEcosystem/Paddle-examples-for-AVH/blob/main/OCR-example/Text-recognition-example-m85/run_demo.sh) that automates the entire process described in the End-to-end workflow diagram.
 
-Update the FVP executable name in the `run_demo.sh` script. The `VHT_Platform` should match what is installed in the system. The executable starts with either `VHT_Corstone_SSE` or `FVP_Corstone_SSE`. Check which one is available in the `$PATH` by typing it out and using the Tab key to autocomplete. Then, using a code editor of your choice or `vim`, you can assign the correct executable:
+Update the FVP executable name in the `run_demo.sh` script. The `VHT_Platform` should match what's installed in the system. The executable starts with either `VHT_Corstone_SSE` or `FVP_Corstone_SSE`. Check which one is available in the `$PATH` by typing it out and using the Tab key to autocomplete. Then, using a code editor of your choice or `vim`, you can assign the correct executable:
 
 ```console
 vim run_demo.sh
@@ -80,7 +80,7 @@ Training the model usually takes a lot of time. In step 2, an already trained En
 
 By default, the script uses the image shown below (QBHOUSE) as an example to verify the inference results on the Corstone-300 FVP with Arm Cortex-M55.
 
-![QBHOUSE#center](./figure4.png)
+![Sample OCR input image showing the word QBHOUSE in bold uppercase letters on a white background, used to test the PaddleOCR text recognition model#center](./figure4.png "QBHOUSE test image")
 
 Make the script executable with `chmod`.
 
@@ -106,8 +106,8 @@ text: QBHOUSE, score: 0.986746
 EXITTHESIM
 Info: /OSCI/SystemC: Simulation stopped by user.
 ```
-The text recognition results are consistent with the input image text content `QBHOUSE` and has a high confidence score of 0.986746.
+The text recognition results are consistent with the input image text content `QBHOUSE` and have a high confidence score of 0.986746.
 
-You have successfully deployed a PP-OCRv3 English recognition model directly on the Corstone-300 FVP with the Arm Cortex-M55.
+You've successfully deployed a PP-OCRv3 English recognition model directly on the Corstone-300 FVP with the Arm Cortex-M55.
 
 
