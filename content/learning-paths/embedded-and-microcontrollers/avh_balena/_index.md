@@ -5,6 +5,13 @@ description: Learn how to create a custom Balena OS image, run it on Arm Virtual
 
 minutes_to_complete: 30
 
+who_is_this_for: This is an introductory topic for embedded software developers interested in Balena OS.
+
+learning_objectives: 
+    - Start a Raspberry Pi Arm Virtual Hardware instance
+    - Create a Balena OS image for Arm Virtual Hardware
+    - Deploy a pre-built Balena Hub application 
+
 prerequisites:
     - A Balena Cloud account
     - An Arm Virtual Hardware account
