@@ -109,7 +109,7 @@ Exit (`Ctrl+X`) and save your change.
 
 ## Push changes to GitHub repository and invoke workflow
 
-The workflow contains the below, which tells GitHub to invoke this workflow whenever there is a `push` to the repository.
+The workflow contains the below, which tells GitHub to invoke this workflow whenever there's a `push` to the repository.
 ```yml
 on:
   push:
