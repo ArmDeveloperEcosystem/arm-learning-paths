@@ -2,6 +2,7 @@
 title: Get started with Arm Development Studio
 
 minutes_to_complete: 30   
+description: Learn how to import and build example projects in Arm Development Studio and debug embedded applications using Fixed Virtual Platforms (FVPs) or hardware with DSTREAM debug probes.
 
 who_is_this_for: This is an introductory topic for embedded software developers new to Arm Development Studio.
 
