@@ -1,6 +1,8 @@
 ---
 title: Getting started with CMSIS-DSP using Python
 
+description: Learn how to prototype and port DSP algorithms using the CMSIS-DSP Python package, mapping Python code to efficient C implementations for embedded Cortex-M and Cortex-A platforms.
+
 minutes_to_complete: 45
 
 who_is_this_for: This is an advanced topic for developers looking to integrate the CMSIS-DSP library into their applications using Python.

@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Converting functions
 
-Now that your Python prototype is verified, it's time to translate the key functions into C using the CMSIS-DSP library. Because the CMSIS-DSP Python API closely mirrors the C API, the conversion is generally straightforward. In this section, you will have a look at two examples to understand how the conversion works.
+Now that your Python prototype is verified, it's time to translate the key functions into C using the CMSIS-DSP library. Because the CMSIS-DSP Python API closely mirrors the C API, the conversion is generally straightforward. In this section, you'll have a look at two examples to understand how the conversion works.
 
 ### Rescaling
 
@@ -108,7 +108,7 @@ int16_t signal_energy_q15(q15_t *window,uint32_t nb)
     // Fixed point format of result is on 16 bit
     // but the specific format has not been identified
     // to make this tutorial easier.
-    // We just know it is not q15
+    // We just know it's not q15
     int16_t dB;
 
     arm_vlog_q15(&energy,&dB,1);
@@ -119,4 +119,4 @@ int16_t signal_energy_q15(q15_t *window,uint32_t nb)
 
 As you can see, a DSP function written in Python using the CMSIS-DSP Python wrappers can be directly mapped to a very similar C function with only minor adjustments. This makes it easy to prototype quickly in Python and then migrate to efficient, production-ready C code for embedded platforms.
 
-In the final section, you will explore some additional resources to learn more and start using CMSIS-DSP in your applications.
+In the final section, you'll explore some additional resources to learn more and start using CMSIS-DSP in your applications.
