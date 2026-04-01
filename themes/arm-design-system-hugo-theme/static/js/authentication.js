@@ -61,71 +61,26 @@ function ensureDigitalDataRoot() {
   return window.digitalData;
 }
 
-function getFirstClaimValue(claims, keys) {
-  if (!claims) return undefined;
-  for (const key of keys) {
-    const value = claims[key];
-    if (value !== undefined && value !== null && value !== "") {
-      return value;
-    }
-  }
-  return undefined;
-}
-
-function getClaimValueBySuffix(claims, suffixes) {
-  if (!claims) return undefined;
-
-  const claimKeys = Object.keys(claims);
-  for (const suffix of suffixes) {
-    const suffixLower = suffix.toLowerCase();
-    const matchedKey = claimKeys.find((key) => key.toLowerCase().endsWith(suffixLower));
-    if (matchedKey) {
-      const value = claims[matchedKey];
-      if (value !== undefined && value !== null && value !== "") {
-        return value;
-      }
-    }
-  }
-
-  return undefined;
+function clearDigitalDataUser() {
+  const digitalData = ensureDigitalDataRoot();
+  delete digitalData.user_contact_email;
+  delete digitalData.user;
 }
 
 function getEmailClaimValue(claims) {
-  const value = getFirstClaimValue(claims, [
-    "signInNames.emailAddress",
-    "email",
-    "preferred_username",
-    "emails"
-  ]);
+  if (!claims) return undefined;
+
+  const value =
+    claims["signInNames.emailAddress"] ||
+    claims.email ||
+    claims.preferred_username ||
+    claims.emails;
 
   const emailValue = Array.isArray(value) ? value.find(Boolean) : value;
   if (typeof emailValue === "string") {
     return emailValue.trim().toLowerCase();
   }
-  return undefined;
-}
 
-function normalizeToArray(value) {
-  if (Array.isArray(value)) return value.filter(Boolean);
-  if (typeof value === "string") {
-    const trimmed = value.trim();
-    if (trimmed.startsWith("[") && trimmed.endsWith("]")) {
-      try {
-        const parsed = JSON.parse(trimmed);
-        if (Array.isArray(parsed)) {
-          return parsed.filter(Boolean);
-        }
-      } catch (error) {
-        // Fall through to comma-split parsing.
-      }
-    }
-
-    // Support comma-separated claim formats and single-value strings.
-    return value
-      .split(",")
-      .map((item) => item.trim())
-      .filter(Boolean);
-  }
   return undefined;
 }
 
@@ -148,45 +103,6 @@ async function getIdTokenClaimsForAccount(account) {
   }
 }
 
-function mapClaimsToDigitalData(claims) {
-  const email = getEmailClaimValue(claims);
-
-  return {
-    user_contact_email: email
-  };
-}
-
-function pruneEmptyDigitalDataFields(data) {
-  const pruned = {};
-
-  if (data.user_contact_email) {
-    pruned.user_contact_email = data.user_contact_email;
-  }
-
-  if (data.user && typeof data.user === "object") {
-    const user = {};
-    Object.entries(data.user).forEach(([key, value]) => {
-      if (Array.isArray(value) && value.length > 0) {
-        user[key] = value;
-      } else if (value !== undefined && value !== null && value !== "") {
-        user[key] = value;
-      }
-    });
-
-    if (Object.keys(user).length > 0) {
-      pruned.user = user;
-    }
-  }
-
-  return pruned;
-}
-
-function clearDigitalDataUser() {
-  const digitalData = ensureDigitalDataRoot();
-  delete digitalData.user_contact_email;
-  delete digitalData.user;
-}
-
 async function updateDigitalDataForCurrentUser() {
   const account =
     msalInstance.getActiveAccount() ||
@@ -203,12 +119,14 @@ async function updateDigitalDataForCurrentUser() {
     return;
   }
 
-  const mappedData = mapClaimsToDigitalData(claims);
-  const prunedData = pruneEmptyDigitalDataFields(mappedData);
+  const email = getEmailClaimValue(claims);
   const digitalData = ensureDigitalDataRoot();
   delete digitalData.user_contact_email;
   delete digitalData.user;
-  Object.assign(digitalData, prunedData);
+
+  if (email) {
+    digitalData.user_contact_email = email;
+  }
 }
 
 // Auth Init on pageload
@@ -338,9 +256,9 @@ document.addEventListener('arm-account-signout', (event) => {
           console.log("Sign-out button not found in DOM.");
       }
     }
-    
-  clearDigitalDataUser();
 
+  clearDigitalDataUser();
+    
   const account = getAccount();
   msalInstance.logoutRedirect({
     account,
