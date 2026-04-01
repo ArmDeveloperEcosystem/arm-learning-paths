@@ -6,8 +6,6 @@ weight: 6
 layout: learningpathall
 ---
 
-# Perform Semantic Search
-
 In this section, you query the Qdrant vector database using **semantic similarity search**.
 
 Unlike traditional keyword search, semantic search compares vector embeddings to identify the most relevant results based on **meaning and context** rather than exact keyword matches.
@@ -41,9 +39,10 @@ Top Matching Documents
 
 ## Create the search script
 
-Create the Python script used to query the vector database.
+Navigate to the project directory, then create the Python script used to query the vector database.
 
 ```bash
+cd ~/qdrant-rag-demo
 vi search.py
 ```
 
@@ -88,7 +87,7 @@ This script performs the following steps:
 Execute the search script.
 
 ```bash
-python3.11 search.py
+python search.py
 ```
 
 The output is similar to:

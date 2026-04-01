@@ -6,8 +6,6 @@ weight: 4
 layout: learningpathall
 ---
 
-# Install and Run Qdrant
-
 In this section, you prepare a SUSE Linux Enterprise Server (SLES) arm64 virtual machine and deploy **Qdrant**, an open-source vector database designed for efficient similarity search and vector indexing.
 
 Qdrant enables applications to store and retrieve embeddings — numerical vector representations of data such as text, images, and audio. These embeddings allow applications to perform **semantic search and AI-powered retrieval**.
@@ -34,7 +32,7 @@ Vector Embeddings Storage
 Semantic Similarity Search
 ```
 
-## Update the System
+## Update the system
 
 Update package repositories and installed packages.
 
@@ -43,15 +41,26 @@ sudo zypper refresh
 sudo zypper update -y
 ```
 
-## Install Required Packages
+## Install required packages
 
 Install Docker and Python dependencies.
 
 ```bash
 sudo zypper install -y docker python3 python3-pip git
 sudo zypper install -y python311 python311-pip
-python3.11 -m pip install --upgrade pip
 ```
+
+## Create a virtual environment
+
+Create and activate a virtual environment to isolate Python dependencies and avoid system-level package conflicts.
+
+```bash
+python3.11 -m venv qdrant-env
+source qdrant-env/bin/activate
+pip install --upgrade pip
+```
+
+Your prompt changes to show `(qdrant-env)` when the environment is active. Use this environment for all subsequent Python commands in this Learning Path.
 
 **Verify Python installation:**
 
@@ -76,22 +85,22 @@ Start and enable the Docker service.
 ```bash
 sudo systemctl enable docker
 sudo systemctl start docker
-sudo usermod -aG docker $USER
+sudo usermod -aG docker $USER ; newgrp docker
 ```
-Log out and log back in so the Docker group permissions take effect.
+The newgrp command avoids the need to logout and back in for the docker group permissions to take effect.
 
-## Verify installation:
+## Verify Docker installation
 
 ```bash
 docker --version
 ```
 
-You should see an output similar to:
+The output is similar to:
 ```output
 Docker version 28.5.1-ce, build f8215cc26
 ```
 
-Docker allows us to run Qdrant in an isolated container environment.
+Docker runs Qdrant in an isolated container environment.
 
 ## Run the Qdrant vector database
 
@@ -111,7 +120,7 @@ qdrant/qdrant
 - Exposes ports 6333 and 6334
 - Creates persistent storage for vector data
 
-You should see an output similar to:
+The output is similar to:
 ```output
 latest: Pulling from qdrant/qdrant
 3ea009573b47: Pull complete
@@ -135,7 +144,7 @@ Check running containers.
 docker ps
 ```
 
-You should see an output similar to:
+The output is similar to:
 ```output
 1af9f6ac9cef   qdrant/qdrant   "./entrypoint.sh"   13 seconds ago   Up 11 seconds   0.0.0.0:6333-6334->6333-6334/tcp, [::]:6333-6334>6333-6334/tcp   inspiring_dijkstra
 ```

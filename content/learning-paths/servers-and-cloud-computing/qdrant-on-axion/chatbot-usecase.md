@@ -6,8 +6,6 @@ weight: 7
 layout: learningpathall
 ---
 
-# Chatbot Use Case with Qdrant on Axion (Arm64)
-
 ## Overview
 
 In this section, you build a simple **chatbot-style knowledge retrieval system** using the Qdrant vector database running on Google Axion Arm-based infrastructure.
@@ -49,9 +47,9 @@ Chatbot Response
 ```
 
 
-## Navigate to Project Directory
+## Navigate to project directory
 
-You can move to the project directory created earlier.
+Move to the project directory created earlier.
 
 ```bash
 cd ~/qdrant-rag-demo
@@ -78,7 +76,7 @@ The ingestion script converts documents into embeddings and stores them in Qdran
 **Run the ingestion script:**
 
 ```bash
-python3.11 ingest.py
+python ingest.py
 ```
 
 The output is similar to: 
@@ -88,7 +86,9 @@ Documents indexed successfully in Qdrant!
 
 **Verify the collection:**
 
+```bash
 curl http://localhost:6333/collections
+```
 
 The output is similar to: 
 ```output
@@ -101,7 +101,7 @@ The output is similar to:
 
 This confirms the vector collection has been created successfully.
 
-## Create Chatbot Script
+## Create chatbot script
 
 Create a Python file that allows users to interactively query the vector database.
 
@@ -109,13 +109,7 @@ Create a Python file that allows users to interactively query the vector databas
 vi chatbot.py
 ```
 
-**Add the following code:**
-
-```bash
-vi chatbot.py
-```
-
-Paste the following code.
+Add the following code.
 
 ```python
 from qdrant_client import QdrantClient
@@ -125,7 +119,7 @@ client = QdrantClient(url="http://localhost:6333")
 
 model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
 
-print("Chatbot ready! Type a question or 'exit' to quit.")
+print("Chatbot ready! Ask a question (type 'exit' to quit).")
 
 while True:
 
@@ -153,7 +147,7 @@ while True:
 Start the chatbot application.
 
 ```bash
-python3.11 chatbot.py
+python chatbot.py
 ```
 
 The output is similar to: 
@@ -163,7 +157,7 @@ Chatbot ready! Ask a question (type 'exit' to quit)
 User:
 ```
 
-## Test the Chatbot
+## Test the chatbot
 
 Example interaction:
 
@@ -199,13 +193,13 @@ Chatbot Response:
 ```bash
 exit
 ```
-## Example Chatbot Interaction
+## Example chatbot interaction
 
 The following image shows the chatbot running on the Axion VM and retrieving relevant results from the Qdrant vector database.
 
-![Qdrant chatbot semantic search example running on Axion ARM alt-txt#center](images/chatbot.png "Qdrant chatbot semantic search demo on Axion")
+![Qdrant chatbot terminal showing user questions and semantic search responses retrieved from the Qdrant vector database on Axion#center](images/chatbot.png "Qdrant chatbot semantic search demo on Axion")
 
-## How the Chatbot Works
+## How the chatbot works
 
 1. The user asks a question.
 2. The system converts the question into a vector embedding.
@@ -241,7 +235,7 @@ Generated Answer
 
 Qdrant provides the **high-performance retrieval layer** for this architecture.
 
-## Real-World Applications
+## Real-world applications
 
 This architecture is widely used in:
 

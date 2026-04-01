@@ -6,8 +6,6 @@ weight: 8
 layout: learningpathall
 ---
 
-# Chatbot Architecture Using Qdrant
-
 In this section, you explore the architecture behind the chatbot retrieval system built using Qdrant on Google Axion Arm-based infrastructure.
 
 This architecture demonstrates how modern AI systems perform **semantic similarity search** to retrieve relevant information from stored knowledge.
@@ -88,7 +86,7 @@ When the user asks a question:
 
 This process enables the chatbot to understand intent and meaning, rather than relying solely on keyword matching.
 
-## Benefits of This Architecture
+## Benefits of this architecture
 
 This design provides several advantages:
 
@@ -101,7 +99,6 @@ This design provides several advantages:
 
 This example demonstrates that Axion Arm infrastructure can efficiently run vector search workloads.
 
-- Benefits include:
 - energy-efficient compute
 - scalable cloud infrastructure
 - optimized performance for AI workloads

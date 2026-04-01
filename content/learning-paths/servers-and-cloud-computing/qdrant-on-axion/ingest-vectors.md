@@ -6,8 +6,6 @@ weight: 5
 layout: learningpathall
 ---
 
-# Generate and Index Vectors
-
 In this section, you generate vector embeddings from sample text data and store them in the **Qdrant vector database**.
 
 Embeddings are numerical vector representations of data such as text, images, or audio. These vectors capture semantic meaning, allowing applications to perform similarity search and retrieve the most relevant results.
@@ -34,12 +32,18 @@ Qdrant Vector Database
 Indexed Vectors Ready for Search
 ```
 
-## Install Python Libraries
+## Install Python libraries
+
+Make sure the `qdrant-env` virtual environment is active before installing libraries. If you opened a new terminal, reactivate it:
+
+```bash
+source ~/qdrant-env/bin/activate
+```
 
 Install the Python libraries required for embedding generation and communication with the Qdrant API.
 
 ```bash
-python3.11 -m pip install qdrant-client sentence-transformers
+pip install qdrant-client sentence-transformers
 ```
 
 These libraries provide:
@@ -47,7 +51,7 @@ These libraries provide:
 - **qdrant-client** — Python interface for interacting with Qdrant
 - **sentence-transformers** — pretrained transformer models for generating embeddings
 
-## Create Project Directory
+## Create project directory
 
 Create a working directory for the vector ingestion scripts.
 ```bash
@@ -57,7 +61,7 @@ cd qdrant-rag-demo
 
 This directory will contain the Python scripts used to generate embeddings and query the vector database.
 
-## Create the Ingestion Script
+## Create the ingestion script
 
 **Create the Python file:**
 
@@ -68,7 +72,6 @@ vi ingest.py
 **Add the following code:**
 
 ```python
-ingest.py
 from qdrant_client import QdrantClient
 from qdrant_client.models import VectorParams, Distance, PointStruct
 from sentence_transformers import SentenceTransformer
@@ -118,7 +121,7 @@ This script performs several important operations:
 Execute the script to generate embeddings and store them in Qdrant.
 
 ```bash
-python3.11 ingest.py
+python ingest.py
 ```
 The output is similar to:
 ```output
