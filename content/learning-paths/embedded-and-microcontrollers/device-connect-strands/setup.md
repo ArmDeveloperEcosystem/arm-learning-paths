@@ -15,11 +15,11 @@ python3.12 --version
 git --version
 ```
 
-These instructions are tested on Python 3.12. Earlier versions of Python 3 may work but are not validated against the `feat/device-connect-integration-draft` branch used in this Learning Path.
+These instructions use Python 3.12. Earlier versions of Python 3 may work but aren't validated against the `feat/device-connect-integration-draft` branch used in this Learning Path.
 
 ## Clone the repository
 
-The code run in this Learning Path sits in the `robots` repository. It contains the robot runtime and the `robot_mesh` Strands tool.
+The code you'll run in this Learning Path sits in the `robots` repository, which contains the robot runtime and the `robot_mesh` Strands tool.
 
 ```bash
 mkdir ~/strands-device-connect
@@ -55,9 +55,9 @@ export PYTHONPATH="$PWD:$PYTHONPATH"
 
 ## How discovery works - no configuration needed
 
-The `strands-robots` SDK uses Device Connect's built-in device-to-device discovery: every `Robot()` instance announces itself on the local network at startup, and any process running `discover_devices()` or `robot_mesh(action='peers')` on the same network segment will find it automatically.
+The `strands-robots` SDK uses Device Connect's built-in device-to-device discovery: every `Robot()` instance announces itself on the local network at startup, and processes running `discover_devices()` or `robot_mesh(action='peers')` on the same network segment find it automatically.
 
-This means discovery works as long as the device process and the agent process are on the same LAN or on the same machine. Discovery is typically available on home and office networks. If you are behind a firewall or VPN that blocks local network traffic, devices will not discover each other - that scenario requires the infrastructure-backed setup with a Zenoh router, which is covered later in this Learning Path.
+Discovery works as long as the device process and the agent process run on the same LAN or on the same machine. Home and office networks typically support discovery. If you're behind a firewall or VPN that blocks local network traffic, devices won't discover each other - that scenario requires the infrastructure-backed setup with a Zenoh router, which is covered later in this Learning Path.
 
 ## What you've set up and what's next
 

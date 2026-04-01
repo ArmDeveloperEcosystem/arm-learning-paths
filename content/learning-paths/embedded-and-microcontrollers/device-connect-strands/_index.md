@@ -1,6 +1,8 @@
 ---
 title: Connect AI agents to edge devices using Device Connect and Strands
 
+description: Learn how to connect AI agents to Arm-based edge devices using Device Connect for discovery and RPC, with Strands agent tools for structured command execution across device meshes.
+
 draft: true
 cascade:
     draft: true

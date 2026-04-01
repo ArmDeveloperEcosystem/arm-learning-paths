@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Overview
 
-This section runs Device Connect's device-to-device discovery. There are two ways to walk through this setup. Optionally, you can connect an external device. 
+You'll run Device Connect's device-to-device discovery in this section. There are two ways to walk through this setup, with an option to connect an external device. 
 
 ### Option 1: run on a single machine
 
@@ -18,8 +18,8 @@ For a proof-of-concept, follow the steps using two terminal windows on your mach
 
 If you have access to an external device, you can use it with this setup as well. You'll need:
 
-- Your machine with the virtual environment set up. This machine will be referred to as the host.
-- A Raspberry Pi (or any similar device) connected to the same network as your host machine. This machine is your target. 
+- Your machine with the virtual environment set up (referred to as the host)
+- A Raspberry Pi (or any similar device) connected to the same network as your host machine (referred to as the target) 
 - An SSH connection or keyboard and monitor attached to the target.
 
 You'll need two terminal windows open at the same time: one to keep the simulated robot running, and one to invoke it from the agent side. Both terminals need the virtual environment activated.
@@ -50,7 +50,7 @@ r.run()
 PY
 ```
 
-When the `Robot('so100')` object is created, the SDK downloads the MuJoCo physics model for the SO-100 arm. This download happens only on the first run and takes a minute or two. After that, it starts the simulation and registers the robot on the Device Connect device mesh. The robot publishes a presence heartbeat every 0.5 seconds under a unique device ID, for example `so100-abc123`.
+When you create the `Robot('so100')` object, the SDK downloads the MuJoCo physics model for the SO-100 arm (on first run only, taking a minute or two). The SDK then starts the simulation and registers the robot on the Device Connect device mesh. The robot publishes a presence heartbeat every 0.5 seconds under a unique device ID, for example `so100-abc123`.
 
 You should see INFO-level log output similar to:
 
@@ -62,7 +62,7 @@ device_connect_sdk.device.so100-abc123 - INFO - Subscribed to commands on device
 🤖 so100-abc123 is online. Ctrl+C to stop.
 ```
 
-Leave this process running. The simulated robot is only discoverable as long as this process is alive.
+Leave this process running. The simulated robot becomes discoverable only while this process runs.
 
 ## Control the robot using the robot_mesh Strands tool
 
@@ -87,7 +87,7 @@ Discovered 1 device(s):
     Functions: execute, getFeatures, getStatus, reset, step, stop
 ```
 
-The peer ID (for example `so100-abc123`) is assigned at startup and changes each run. Note the actual ID shown in your terminal - you'll need it in the next step.
+Each run assigns a new peer ID at startup (for example `so100-abc123`). Note the actual ID shown in your terminal - you'll need it in the next step.
 
 ### Execute an instruction
 
@@ -105,7 +105,7 @@ print(robot_mesh(
 PY
 ```
 
-You will see the following output:
+You'll see output similar to:
 
 ```output
 -> so100-abc123: pick up the cube
@@ -113,7 +113,7 @@ You will see the following output:
 ```
 
 {{% notice Robot output in terminal 1 %}}
-The robot also logs event updates as it processes the task. If you switch back to terminal 1, it logs the execution of the task, similar to:
+The robot logs event updates as it processes the task. Switch back to terminal 1 to see execution logs similar to:
 
 ```output
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -126,7 +126,7 @@ The robot also logs event updates as it processes the task. If you switch back t
 
 ### Broadcast emergency stop to all devices
 
-The emergency stop broadcasts a halt command to every device on the mesh simultaneously. This is useful when you want to stop all robots without knowing their individual peer IDs:
+The emergency stop broadcasts a halt command to every device on the mesh simultaneously. Use this when you want to stop all robots without knowing their individual peer IDs:
 
 ```python
 python <<'PY'
@@ -143,7 +143,7 @@ E-STOP: 1/1 devices stopped
 
 ## Optional: discover and invoke the robot using the agent tools
 
-The `device-connect-agent-tools` package gives you direct programmatic access to the mesh, without involving an LLM. This is useful for testing, scripting, or validating the stack before wiring it up to an agent. Open terminal 2, activate the virtual environment, then run:
+The `device-connect-agent-tools` package gives you direct programmatic access to the mesh without involving an LLM. Use this for testing, scripting, or validating the stack before wiring it up to an agent. Open terminal 2, activate the virtual environment, then run:
 
 ```python
 python <<'PY'
@@ -189,8 +189,8 @@ Status: {'success': True, 'result': {...}}  # full sim state dict
 
 In this section you've:
 
-- Started a simulated SO-100 robot that registered itself on the Device Connect device mesh.
-- Used `device-connect-agent-tools` to discover the robot and invoke an RPC call against it.
-- Used the `robot_mesh` Strands tool to list peers, send an instruction, and trigger an emergency stop.
+- Started a simulated SO-100 robot that registered itself on the Device Connect device mesh
+- Used `device-connect-agent-tools` to discover the robot and invoke an RPC call against it
+- Used the `robot_mesh` Strands tool to list peers, send an instruction, and trigger an emergency stop
 
-This showcases the ease of setting up a mesh on a local network. In the next section, you can extend the configuration to a Docker-based approach, opening up a new category of possibilities with agent integration.
+You've now seen how to set up a mesh on a local network. The next section extends the configuration to a Docker-based approach, opening up new possibilities for agent integration.
