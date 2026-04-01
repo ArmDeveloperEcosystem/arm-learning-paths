@@ -195,6 +195,8 @@ To analyze a local codebase, use a `-v` argument to mount a volume to the Arm MC
 
 Replace the path `/Users/yourname01/yourlocalcodebase` with the path to your local codebase.
 
+##### **Option 1: edit the Codex configuration file**
+
 Add the following to your `~/.codex/config.toml` file:
 
 ```toml
@@ -214,6 +216,14 @@ startup_timeout_sec = 60
 {{% notice Note %}}
 The section must be named `mcp_servers` with an underscore. Using `mcp-servers` or `mcpservers` will cause Codex to ignore the configuration.
 {{% /notice %}}
+
+##### **Option 2: add from the Codex CLI**
+
+You can also add the Arm MCP server from the Codex CLI, after starting `codex` run:
+
+```bash
+codex mcp add arm-mcp -- sh -lc 'docker run --rm -i -v "$PWD:/workspace" --name arm-mcp armlimited/arm-mcp:latest'
+```
 
 ### How do I verify the Arm MCP server is working?
 
