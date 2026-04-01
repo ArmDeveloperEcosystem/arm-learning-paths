@@ -1,5 +1,6 @@
 ---
 title: Build Semantic Search and Chatbot Retrieval Systems with Qdrant on Google Cloud C4A Axion processors
+description: Learn how to deploy Qdrant on Google Cloud C4A Axion processors, generate vector embeddings with Sentence Transformers, and build a semantic search and chatbot retrieval system on Arm-based infrastructure.
 
 draft: true
 cascade:
