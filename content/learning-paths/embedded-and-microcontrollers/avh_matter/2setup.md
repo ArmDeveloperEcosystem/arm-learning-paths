@@ -10,11 +10,11 @@ layout: "learningpathall"
 
 ## Before you begin
 
-You will need a user account for [Arm Virtual Hardware 3rd Party Hardware](https://avh.arm.com/). Refer to [Arm Virtual Hardware install guide](/install-guides/avh#thirdparty) for more information.
+You need a user account for [Arm Virtual Hardware 3rd Party Hardware](https://avh.arm.com/). Refer to the [Arm Virtual Hardware install guide](/install-guides/avh#thirdparty) for more information.
 
 A [GitHub](https://github.com) account is also required.
 
-GitHub requires that a [Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) be set. If you do not have this on your account already, navigate to `Settings` > `Developer Settings` > `Personal Access Tokens`, click on `Generate new token`, and save the token locally.
+GitHub requires that a [Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) be set. If you don't have this on your account already, navigate to `Settings` > `Developer Settings` > `Personal Access Tokens`, click on `Generate new token`, and save the token locally.
 
 Ensure you have enabled the token to `Update GitHub Action workflows`.
 
@@ -33,7 +33,7 @@ Open your browser, and navigate to Arm Virtual Hardware dashboard:
 ```console
 https://app.avh.arm.com/
 ```
-## Create TWO Raspberry Pi 4 virtual devices
+## Create two Raspberry Pi 4 virtual devices
 
 Click on `Create Device`.
 
@@ -41,9 +41,9 @@ Select `Raspberry Pi 4` from the list of available devices.
 
 Select `Raspberry Pi OS lite` from the example firmware packages.
 
-Name the device `chip-tool` (though the naming is arbitrary `chip-tool` is used later in the session) and create device.
+Name the device `chip-tool` (the naming is arbitrary, but `chip-tool` is used later in the session) and create the device.
 
-While this is being created, click `Devices` and repeat steps to create a second instance (suggest `lighting-app` as name).
+While this is being created, click `Devices` and repeat the steps to create a second instance (use `lighting-app` as the name).
 
 Open each instance in its own browser pane.
 
@@ -56,13 +56,13 @@ When your instances are created, select the `Console` tab, and log into each Ras
 
 Repeat for the other instance.
 
-It is also possible to log in via the CLCD window view. However it is easier to copy and paste (`Shift+Insert`) to the Console view.
+It's also possible to log in via the CLCD window view. However, it's easier to copy and paste (`Shift+Insert`) to the Console view.
 
 ## (Optional) Connect via SSH
 
-The `Console` view within the browser will suffice to complete this Learning Path.
+The `Console` view within the browser is sufficient to complete this Learning Path.
 
-If you wish to connect via `SSH` (rather than `Console`), it is easiest to follow the SSH tunnel connection instructions specified in the `Connect` tab. 
+If you wish to connect via `SSH` (rather than `Console`), it's easiest to follow the SSH tunnel connection instructions specified in the `Connect` tab. 
 
 As an alternative, you can also download and install the appropriate [OpenVPN Community](https://openvpn.net/community/) version for your host. Click on `DOWNLOAD OVPN FILE` within the `Connect via VPN` section.
 
@@ -72,12 +72,12 @@ On your host, open terminal(s), and connect to the virtual hardware instance(s) 
 
 ## Install necessary software components
 
-You shall build the Matter examples on the virtual Raspberry Pi 4 instances. To prepare for this, install the necessary dependencies on **each** instance. This can be done in parallel on both instances.
+You'll build the Matter examples on the virtual Raspberry Pi 4 instances. To prepare for this, install the necessary dependencies on **each** instance. You can do this in parallel on both instances.
 ```console
 sudo apt-get update
 sudo apt-get install -y git gcc g++ pkg-config libssl-dev libdbus-1-dev libglib2.0-dev libavahi-client-dev ninja-build python3-venv python3-dev python3-pip unzip libgirepository1.0-dev libcairo2-dev libreadline-dev libpango1.0-dev
 ```
-We shall also build ZAP from source on our instances. ZAP is generally installed as a third-party tool via CIPD during the build environment bootstrap but zap packages are currently NOT available for arm64.
+You'll also build ZAP from source on your instances. ZAP is generally installed as a third-party tool via CIPD during the build environment bootstrap, but ZAP packages aren't currently available for arm64.
 ```console
 git clone https://github.com/project-chip/zap.git ~/zap
 cd ~/zap
