@@ -1,7 +1,7 @@
 ---
 title: Build MNN and prepare an Omni model on Armv9
 weight: 3
-layout: "learningpathall"
+layout: learningpathall
 ---
 
 ## Get source and native build
@@ -48,7 +48,6 @@ Verify that `llm_demo` was built:
 ls -l ~/mnn_lp/MNN/build/llm_demo
 ```
 
----
 
 ## Avoid library mismatch
 
@@ -71,7 +70,6 @@ export LD_LIBRARY_PATH=~/mnn_lp/MNN/build:$LD_LIBRARY_PATH
 
 Re-run `ldd` or `./llm_demo` to confirm the correct shared libraries are used.
 
----
 
 ## Download a prebuilt MNN Omni model
 
@@ -91,7 +89,6 @@ ls -l ~/mnn_lp/Qwen2.5-Omni-7B-MNN/config.json
 
 **Important:** This is an **MNN-ready Omni package**. You **do not** need to export from PyTorch or perform additional quantization.
 
----
 
 ## Checkpoint
 

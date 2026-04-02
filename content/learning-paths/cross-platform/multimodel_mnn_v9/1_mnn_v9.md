@@ -2,7 +2,6 @@
 title: Understand MNN and Omni for Armv9 on-device inference
 weight: 2
 
-### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 

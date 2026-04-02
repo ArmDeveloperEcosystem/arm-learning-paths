@@ -1,7 +1,7 @@
 ---
 title: Build a single-shot multimodal restock ticket on Armv9
 weight: 7
-layout: "learningpathall"
+layout: learningpathall
 ---
 
 ## Goal

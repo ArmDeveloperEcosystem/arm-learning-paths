@@ -1,7 +1,7 @@
 ---
 title: Convert audio restock instructions into tickets with MNN Omni
 weight: 6
-layout: "learningpathall"
+layout: learningpathall
 ---
 
 ## Scenario

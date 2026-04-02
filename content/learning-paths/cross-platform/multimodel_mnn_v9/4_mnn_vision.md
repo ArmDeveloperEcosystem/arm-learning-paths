@@ -1,7 +1,7 @@
 ---
 title: Run a vision retail shelf audit with MNN Omni
 weight: 5
-layout: "learningpathall"
+layout: learningpathall
 ---
 
 ## Scenario

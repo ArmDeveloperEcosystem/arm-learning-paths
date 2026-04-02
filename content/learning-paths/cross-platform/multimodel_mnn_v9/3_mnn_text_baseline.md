@@ -1,7 +1,7 @@
 ---
 title: Run a text baseline with an Omni model on MNN
 weight: 4
-layout: "learningpathall"
+layout: learningpathall
 ---
 
 ## Steps
