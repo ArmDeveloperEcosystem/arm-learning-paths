@@ -7,7 +7,7 @@ weight: 3 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-A real embedded system will need initialization before any other code is executed. You will create a minimal reset handler, putting all but one processor to sleep, and executing the application on just one processor.
+A real embedded system will need initialization before any other code is executed. You'll create a minimal reset handler, putting all but one processor to sleep, and executing the application on just one processor.
 
 ## Write a reset handler
 
