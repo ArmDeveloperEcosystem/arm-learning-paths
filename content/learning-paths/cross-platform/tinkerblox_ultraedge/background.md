@@ -71,7 +71,7 @@ UltraEdge orchestrates edge-native execution for high-performance compute infras
 
 UltraEdge is composed of layered systems, each responsible for a distinct aspect of execution and orchestration:
 
-![UltraEdge high-level architecture diagram showing layered execution systems for edge AI and mixed workloads alt-txt#center](https://raw.githubusercontent.com/Tinkerbloxsupport/arm-learning-path-support/main/static/images/High-level%20architecture%20diagram.png "UltraEdge high-level architecture")
+![UltraEdge high-level architecture diagram showing layered execution systems for edge AI and mixed workloads#center](https://raw.githubusercontent.com/Tinkerbloxsupport/arm-learning-path-support/main/static/images/High-level%20architecture%20diagram.png "UltraEdge high-level architecture")
 
 UltraEdge organizes functionality into five specialized layers. Each layer is responsible for a specific aspect of workload execution and orchestration:
 

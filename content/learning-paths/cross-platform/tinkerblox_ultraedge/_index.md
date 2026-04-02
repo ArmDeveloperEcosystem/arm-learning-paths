@@ -2,6 +2,8 @@
 title: Deploy Tinkerblox UltraEdge HPC-I for AI and mixed workloads on Arm
 minutes_to_complete: 60 
 
+description: Learn how to deploy Tinkerblox UltraEdge HPC-I for edge AI and mixed workloads on Arm platforms, including installation and configuration on Debian, Ubuntu, and Yocto systems.
+
 who_is_this_for: This is an advanced topic for business, R&D, and engineering teams seeking to optimize CPU and GPU infrastructure utilization while reducing total cost of ownership on edge and constrained environments. It's ideal for innovation and development teams building next-generation AI workloads using alternative runtime environments and packaging technologies.
 
 learning_objectives:

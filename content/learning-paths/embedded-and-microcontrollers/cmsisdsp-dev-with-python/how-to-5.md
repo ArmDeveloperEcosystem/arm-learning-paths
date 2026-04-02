@@ -8,11 +8,11 @@ layout: learningpathall
 
 ## Understand the mathematics behind noise suppression
 
-In this section, you will learn about the mathematics that serves as a basis for the use case. Then, you will use those principles to create a reference implementation using NumPy.
+In this section, you'll learn about the mathematics that serves as a basis for the use case. Then, you'll use those principles to create a reference implementation using NumPy.
 
 ### Overlapping windows
 
-The blocks of audio samples you created in the previous steps will be multiplied by a Hanning window function, which you will achieve by running the following in the Jupyter notebook:
+The blocks of audio samples you created in the previous steps will be multiplied by a Hanning window function, which you'll achieve by running the following in the Jupyter notebook:
 
 ```python
 window=dsp.arm_hanning_f32(winLength)
@@ -148,7 +148,7 @@ The constructor for `NoiseSuppressionReference`:
 
 #### Subnoise
 
-Calculates the approximate Wiener gain and it is applied to all frequency bands of the FFT. The `v` argument is a vector. If the gain is negative, it is set to 0. A small value is added to the energy to avoid division by zero.
+Calculates the approximate Wiener gain and it's applied to all frequency bands of the FFT. The `v` argument is a vector. If the gain is negative, it's set to 0. A small value is added to the energy to avoid division by zero.
 
 ```python
 def subnoise(self,v):

@@ -3,6 +3,8 @@ title: Sample Instructions with WindowsPerf and Arm SPE
 
 minutes_to_complete: 30
 
+description: Learn how to sample and profile CPU instructions using WindowsPerf with Arm Statistical Profiling Extension (SPE) on Windows on Arm, demonstrated with CPython workload analysis.
+
 who_is_this_for: This is an introductory topic for developers who would like to learn about sampling CPU instructions with WindowsPerf and the Arm Statistical Profiling Extension (SPE).
 
 learning_objectives:

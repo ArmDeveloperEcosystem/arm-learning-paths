@@ -12,7 +12,7 @@ layout: "learningpathall"
 
 While the embedded computing stack looks similar to an application stack, there are some important differences.
 
-![Embedded stack](_images/embedded_stack.png)
+![Diagram showing the embedded computing stack with hardware at the bottom, RTOS in the middle, and application at the top. Unlike traditional application stacks, there is no firmware layer abstracting the hardware, meaning embedded software must be built specifically for the target hardware and include all necessary drivers.#center](_images/embedded_stack.png)
 
 ## Hardware
 
