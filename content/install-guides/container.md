@@ -60,13 +60,13 @@ Go to the [GitHub Releases page](https://github.com/apple/container/releases) an
 For example:
 
 ```bash
-wget https://github.com/apple/container/releases/download/0.4.1/container-0.4.1-installer-signed.pkg
+wget https://github.com/apple/container/releases/download/0.11.0/container-0.11.0-installer-signed.pkg
 ```
 
 Install the package:
 
 ```bash
-sudo installer -pkg container-0.4.1-installer-signed.pkg -target /
+sudo installer -pkg container-0.11.0-installer-signed.pkg -target /
 ```
 
 This installs the Container binary at `/usr/local/bin/container`.
@@ -90,7 +90,7 @@ container --version
 Example output:
 
 ```output
-container CLI version 0.4.1 (build: release, commit: 4ac18b5)
+container CLI version 0.11.0 (build: release, commit: d9b8a8d)
 ```
 
 ## Build and run a container
