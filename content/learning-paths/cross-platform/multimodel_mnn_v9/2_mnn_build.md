@@ -14,7 +14,7 @@ mkdir -p ~/mnn_lp
 cd ~/mnn_lp
 ```
 
-Clone MNN and build:
+Clone and build MNN:
 
 ```bash
 git clone https://github.com/alibaba/MNN.git

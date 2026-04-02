@@ -4,7 +4,7 @@ weight: 7
 layout: learningpathall
 ---
 
-## Goal
+## Create the single-shot multimodal prompt (image + audio)
 
 In this final project you will combine:
 
@@ -44,7 +44,7 @@ cat > ~/mnn_lp/prompt_final_multimodal.txt <<'EOF'
 EOF
 ```
 
-Run the final multimodal demo:
+## Run the final multimodal demo:
 
 ```bash
 cd ~/mnn_lp/MNN/build
@@ -54,14 +54,10 @@ cd ~/mnn_lp/MNN/build
 ./llm_demo ~/mnn_lp/Qwen2.5-Omni-7B-MNN/config.json ~/mnn_lp/prompt_final_multimodal.txt
 ```
 
-This sequence lets you compare:
+## Verify image and audio are both used (optional)
 
-1. Vision-only output  
-2. Audio-only output  
-3. Combined multimodal output  
-
-
-## Verification
+- Swap the **audio** file: quantities/deadline/substitution should change.
+- Swap the **image** file: coverage/priority zone should change.
 
 To verify that the model is truly multimodal, perform a simple A/B test:
 

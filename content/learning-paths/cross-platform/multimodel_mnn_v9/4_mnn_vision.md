@@ -4,7 +4,7 @@ weight: 5
 layout: learningpathall
 ---
 
-## Scenario
+## Prepare a local image asset
 
 In this module you will implement a **smart retail shelf audit** using a single local image.
 
@@ -54,7 +54,7 @@ cat > ~/mnn_lp/prompt_picture_coverage.txt <<'EOF'
 EOF
 ```
 
-Run the vision demo:
+## Run the vision demo:
 
 ```bash
 cd ~/mnn_lp/MNN/build

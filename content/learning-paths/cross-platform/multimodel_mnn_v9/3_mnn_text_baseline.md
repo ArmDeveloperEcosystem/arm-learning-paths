@@ -4,7 +4,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## Steps
+## Run the text baseline
 
 Create a simple text prompt file:
 

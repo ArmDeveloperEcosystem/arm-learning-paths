@@ -1,5 +1,5 @@
 ---
-title: Understand MNN and Omni for Armv9 on-device inference
+title: Multimodal On-Device Inference on Arm v9 with MNN for Audio and Vision
 weight: 2
 
 layout: learningpathall
