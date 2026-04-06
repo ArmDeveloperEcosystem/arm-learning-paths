@@ -16,17 +16,6 @@ learning_objectives:
     - Aggregate sensor readings using an Azure Function that calculates average values from stored data.
     - Publish aggregated data to a public-facing web app hosted on Azure Blob Storage.
 
-who_is_this_for: This is an advanced topic for developers who want to build a comprehensive IoT solution in Azure that streams, stores, monitors, aggregates, and visualizes telemetry data from Arm IoT devices.
-
-learning_objectives:
-    - Set up and configure Azure IoT Hub for device communication.
-    - Register an IoT device and stream telemetry data using the Azure IoT SDK.
-    - Route IoT data to Azure services using Azure Stream Analytics.
-    - Store incoming data in Azure Cosmos DB through a Stream Analytics job.
-    - Monitor data and send alerts using an Azure Function that reads from Cosmos DB and triggers notifications based on thresholds.
-    - Aggregate sensor readings using an Azure Function that calculates average values from stored data.
-    - Publish aggregated data to a public-facing web app hosted on Azure Blob Storage.
-
 prerequisites:
     - A machine with Python 3 and Visual Studio Code installed
     - An active Azure account with sufficient permissions to create resources (such as IoT Hub, Functions, and Cosmos DB)
