@@ -135,7 +135,8 @@ This page is intended for scheduled automation, not regular user traffic.
 <main id="main">
     <div class="content-box">
         <h2>Content Inventory Emitter</h2>
-        <p>This page emits Adobe Analytics inventory events only when query param <code>aa_inventory=1</code> is present.</p>
+        <p>This page supports anonymous analytics reporting so our teams can prioritize the content developers care about most.</p>
+        <p>It emits Adobe Analytics inventory events only when query param <code>aa_inventory=1</code> is present.</p>
         <p>Example: <code>/stats/content-inventory/?aa_inventory=1</code></p>
         <p>Learning Path rows: {{ len $lpRows }} | Install Guide rows: {{ len $installGuideRows }}</p>
     </div>
