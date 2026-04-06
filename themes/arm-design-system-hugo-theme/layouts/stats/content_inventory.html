@@ -1,0 +1,193 @@
+{{ define "main" }}
+{{/* 
+Dedicated Adobe Analytics inventory emitter.
+This page is intended for scheduled automation, not regular user traffic.
+*/}}
+
+{{/* Build LP step-level rows */}}
+{{ $lpRows := slice }}
+{{ range where .Site.Pages "Section" "learning-paths" }}
+    {{ $lpPage := . }}
+    {{ if and $lpPage.File (eq $lpPage.File.TranslationBaseName "_index") }}
+        {{ $authors := $lpPage.Params.author }}
+        {{ if not (reflect.IsSlice $authors) }}
+            {{ if $authors }}
+                {{ $authors = slice $authors }}
+            {{ else }}
+                {{ $authors = slice }}
+            {{ end }}
+        {{ end }}
+
+        {{ $subjects := $lpPage.Params.subjects }}
+        {{ if not (reflect.IsSlice $subjects) }}
+            {{ if $subjects }}
+                {{ $subjects = slice $subjects }}
+            {{ else }}
+                {{ $subjects = slice }}
+            {{ end }}
+        {{ end }}
+
+        {{ $armIps := $lpPage.Params.armips }}
+        {{ if not (reflect.IsSlice $armIps) }}
+            {{ if $armIps }}
+                {{ $armIps = slice $armIps }}
+            {{ else }}
+                {{ $armIps = slice }}
+            {{ end }}
+        {{ end }}
+
+        {{ $operatingSystems := $lpPage.Params.operatingsystems }}
+        {{ if not (reflect.IsSlice $operatingSystems) }}
+            {{ if $operatingSystems }}
+                {{ $operatingSystems = slice $operatingSystems }}
+            {{ else }}
+                {{ $operatingSystems = slice }}
+            {{ end }}
+        {{ end }}
+
+        {{ $tools := $lpPage.Params.tools_software_languages }}
+        {{ if not (reflect.IsSlice $tools) }}
+            {{ if $tools }}
+                {{ $tools = slice $tools }}
+            {{ else }}
+                {{ $tools = slice }}
+            {{ end }}
+        {{ end }}
+
+        {{ $lastUpdated := partial "server-side-processing/calculate-last-update.html" $lpPage }}
+        {{ $category := $lpPage.Parent.Title }}
+
+        {{ range $lpPage.Site.Pages.ByWeight }}
+            {{ $step := . }}
+            {{ if and $step.File (eq $step.File.Dir $lpPage.File.Dir) (ne $step.Params.hide_from_navpane true) }}
+                {{ $lpRows = $lpRows | append (dict
+                    "full-url" ($step.RelPermalink | absURL)
+                    "learning-path-title" $lpPage.Title
+                    "weight" $step.Weight
+                    "step-title" $step.Title
+                    "author" (delimit $authors ", ")
+                    "skill-level" $lpPage.Params.skillLevels
+                    "subjects" (delimit $subjects ", ")
+                    "arm-ip" (delimit $armIps ", ")
+                    "os" (delimit $operatingSystems ", ")
+                    "tools-software-languages" (delimit $tools ", ")
+                    "content-category" $category
+                    "minutes-to-complete" $lpPage.Params.minutes_to_complete
+                    "last-updated-date" ($lastUpdated.Format "2-Jan-06")
+                ) }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{/* Build Install Guide rows */}}
+{{ $installGuideRows := slice }}
+{{ range where .Site.Pages "Section" "install-guides" }}
+    {{ $igStep := . }}
+    {{ if and $igStep.File (ne $igStep.RelPermalink "/install-guides/") }}
+        {{ $igRoot := $igStep }}
+        {{ if and $igStep.Parent $igStep.Parent.File (eq $igStep.Parent.File.TranslationBaseName "_index") }}
+            {{ $igRoot = $igStep.Parent }}
+        {{ end }}
+
+        {{ $igAuthors := $igRoot.Params.author }}
+        {{ if not (reflect.IsSlice $igAuthors) }}
+            {{ if $igAuthors }}
+                {{ $igAuthors = slice $igAuthors }}
+            {{ else }}
+                {{ $igAuthors = slice }}
+            {{ end }}
+        {{ end }}
+
+        {{ $igOperatingSystems := $igRoot.Params.operatingsystems }}
+        {{ if not (reflect.IsSlice $igOperatingSystems) }}
+            {{ if $igOperatingSystems }}
+                {{ $igOperatingSystems = slice $igOperatingSystems }}
+            {{ else }}
+                {{ $igOperatingSystems = slice }}
+            {{ end }}
+        {{ end }}
+
+        {{ $igTools := $igRoot.Params.tools_software_languages }}
+        {{ if not (reflect.IsSlice $igTools) }}
+            {{ if $igTools }}
+                {{ $igTools = slice $igTools }}
+            {{ else }}
+                {{ $igTools = slice }}
+            {{ end }}
+        {{ end }}
+
+        {{ $installGuideRows = $installGuideRows | append (dict
+            "full-url" ($igStep.RelPermalink | absURL)
+            "install-guide-title" $igRoot.Title
+            "weight" $igStep.Weight
+            "step-title" $igStep.Title
+            "author" (delimit $igAuthors ", ")
+            "os" (delimit $igOperatingSystems ", ")
+            "tools-software-languages" (delimit $igTools ", ")
+            "content-category" "Install Guides"
+            "minutes-to-complete" $igRoot.Params.minutes_to_complete
+            "last-updated-date" ($igStep.Lastmod.UTC.Format "2-Jan-06")
+        ) }}
+    {{ end }}
+{{ end }}
+
+<main id="main">
+    <div class="content-box">
+        <h2>Content Inventory Emitter</h2>
+        <p>This page supports anonymous analytics reporting so our teams can prioritize the content developers care about most.</p>
+        <p>It emits Adobe Analytics inventory events only when query param <code>aa_inventory=1</code> is present.</p>
+        <p>Example: <code>/stats/content-inventory/?aa_inventory=1</code></p>
+        <p>Learning Path rows: {{ len $lpRows }} | Install Guide rows: {{ len $installGuideRows }}</p>
+    </div>
+</main>
+
+<script id="inventory-lp-rows" type="application/json">{{ $lpRows | jsonify }}</script>
+<script id="inventory-install-guide-rows" type="application/json">{{ $installGuideRows | jsonify }}</script>
+
+<script>
+(function () {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get("aa_inventory") !== "1") {
+        return;
+    }
+
+    if (!window._satellite || typeof window._satellite.track !== "function") {
+        console.warn("Adobe _satellite is unavailable. Inventory events were not sent.");
+        return;
+    }
+
+    function parseRows(id) {
+        var el = document.getElementById(id);
+        if (!el || !el.textContent) return [];
+        try {
+            var parsed = JSON.parse(el.textContent);
+            if (typeof parsed === "string") return JSON.parse(parsed);
+            return Array.isArray(parsed) ? parsed : [];
+        } catch (error) {
+            console.warn("Failed to parse inventory rows for", id, error);
+            return [];
+        }
+    }
+
+    var lpRows = parseRows("inventory-lp-rows");
+    var installGuideRows = parseRows("inventory-install-guide-rows");
+
+    _satellite.track("content-inventory-summary", {
+        "inventory-type": "all",
+        "inventory-run-date": new Date().toISOString(),
+        "learning-path-row-count": lpRows.length,
+        "install-guide-row-count": installGuideRows.length,
+        "total-row-count": lpRows.length + installGuideRows.length
+    });
+
+    for (var i = 0; i < lpRows.length; i++) {
+        _satellite.track("learning-path-row-metadata", lpRows[i]);
+    }
+
+    for (var j = 0; j < installGuideRows.length; j++) {
+        _satellite.track("install-guide-row-metadata", installGuideRows[j]);
+    }
+})();
+</script>
+{{ end }}
