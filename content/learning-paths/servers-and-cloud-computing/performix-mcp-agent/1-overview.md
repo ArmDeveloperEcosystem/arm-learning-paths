@@ -12,7 +12,7 @@ The Arm MCP Server exposes Arm Performix as a first-class tool that AI coding as
 
 This removes the round-trip from profiling. Rather than switching between your IDE and the Performix GUI to analyze results and then back again to apply code changes, an AI agent can do all of this for you in a single agentic workflow.
 
-## How the `apx_recipe_run` MCP tool works
+## How the MCP tool works
 
 The `apx_recipe_run` tool in the Arm MCP Server accepts a recipe name, a binary path on the remote target, and SSH connection details. It starts the Performix collection run on the configured remote target, waits for the application to finish, and then returns a structured summary of the profiling results. The summary includes the top CPU-time-consuming functions ordered by sample percentage, call stack context for each hotspot, and any relevant observations about the application's runtime behavior.
 
