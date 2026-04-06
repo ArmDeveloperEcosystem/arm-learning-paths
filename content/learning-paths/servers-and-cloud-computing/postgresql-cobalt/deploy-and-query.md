@@ -58,7 +58,7 @@ Populate the `customers` table.
 ```sql
 INSERT INTO customers (name, email)
 SELECT 'user_' || i, 'user_' || i || '@example.com'
-FROM generate_series(1, 100000);
+FROM generate_series(1, 100000) AS i;
 ```
 
 Populate the `orders` table.
@@ -69,7 +69,7 @@ SELECT
     (floor(random() * 100000) + 1)::int,
     (random() * 1000),
     CASE WHEN random() > 0.5 THEN 'completed' ELSE 'pending' END
-FROM generate_series(1, 500000);
+FROM generate_series(1, 500000) AS i;
 ```
 
 **This generates:**
@@ -88,7 +88,9 @@ ALTER TABLE orders OWNER TO appuser;
 
 ## Run analytical queries
 
-Total revenue
+The queries in this section are analytical (OLAP-style) queries running against the transactional (OLTP) dataset you just loaded. PostgreSQL handles both workload types, which makes it well suited to applications that need operational reporting without a separate data warehouse.
+
+## Total revenue
 
 ```sql
 SELECT SUM(amount) FROM orders WHERE status = 'completed';
@@ -114,9 +116,7 @@ The output is similar to:
 
 ## Top customers by spending
 
-- Groups orders by each customer
-- Calculates total spending per customer
-- Sorts customers by highest spending
+This query aggregates order totals per customer across the full orders table — a typical OLAP aggregation on OLTP data.
 
 ```sql
 SELECT customer_id, SUM(amount) AS total_spent
@@ -154,13 +154,7 @@ The output is similar to:
 
 ## Customer order counts
 
-This is typical OLAP (analytical workload) on transactional data.
-
-**The query below does:**
-
-- Joins customers and orders
-- Counts how many orders each customer made
-- Ranks customers by activity
+This query joins customers and orders, counts how many orders each customer placed, and ranks them by activity. It's a multi-table analytical query — the join across two OLTP tables produces an OLAP-style activity report.
 
 ```sql
 SELECT c.name, COUNT(o.id)
@@ -198,11 +192,19 @@ The output is similar to:
 
 ## Validate as application user
 
+Exit the current session first.
+
+```sql
+\q
+```
+
 Connect using the application user.
 
 ```bash
 psql -h localhost -U appuser -d appdb
 ```
+
+When prompted for a password, enter `StrongPassword123`.
 
 ## What you've accomplished and what's next
 

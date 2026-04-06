@@ -24,7 +24,21 @@ Use `pgbench` to prepare a benchmarking dataset.
 ```console
 sudo -u postgres pgbench -i -s 50 appdb
 ```
-This creates standard benchmarking tables and loads data for testing.
+This creates standard benchmarking tables and loads data for testing. The output looks similar to:
+
+```output
+dropping old tables...
+NOTICE:  table "pgbench_accounts" does not exist, skipping
+NOTICE:  table "pgbench_branches" does not exist, skipping
+NOTICE:  table "pgbench_history" does not exist, skipping
+NOTICE:  table "pgbench_tellers" does not exist, skipping
+creating tables...
+generating data (client-side)...
+5000000 of 5000000 tuples (100%) done (elapsed 6.32 s, remaining 0.00 s)
+vacuuming...
+creating primary keys...
+done in 8.88 s (drop tables 0.00 s, create tables 0.02 s, client-side generate 6.36 s, vacuum 0.14 s, primary keys 2.37 s).
+```
 
 ## Run benchmark test
 
@@ -59,7 +73,7 @@ initial connection time = 10.771 ms
 tps = 2401.873115 (without initial connection time)
 ```
 
-This demonstrates strong transactional (OLTP) performance on Cobalt 100 ARM64 infrastructure.
+This demonstrates strong transactional (OLTP) performance on Cobalt 100 Arm64 infrastructure.
 
 ## Enable query monitoring
 
@@ -135,7 +149,49 @@ The output is similar to:
 (5 rows)
 ```
 
-A sequential scan is expected because a large portion of rows match the condition.
+A sequential scan is expected because a large portion of rows match the condition. When more than roughly 10–15% of rows qualify, the planner typically prefers a sequential scan over an index scan.
+
+## Add indexes for query performance
+
+PostgreSQL automatically creates indexes on primary key columns, but not on foreign key columns. The `customer_id` column in the `orders` table is a foreign key that join queries filter and group by. Without an index, those joins require a full scan of the orders table.
+
+Connect to the database as the application user if you aren't already.
+
+```bash
+psql -h localhost -U appuser -d appdb
+```
+
+Create an index on the foreign key column.
+
+```sql
+CREATE INDEX idx_orders_customer_id ON orders(customer_id);
+```
+
+Verify the index was created.
+
+```sql
+\d orders
+```
+
+The output is similar to:
+
+```output
+                                     Table "public.orders"
+   Column    |            Type             | Collation | Nullable |              Default
+-------------+-----------------------------+-----------+----------+------------------------------------
+ id          | integer                     |           | not null | nextval('orders_id_seq'::regclass)
+ customer_id | integer                     |           |          |
+ amount      | numeric                     |           |          |
+ status      | text                        |           |          |
+ created_at  | timestamp without time zone |           |          | CURRENT_TIMESTAMP
+Indexes:
+    "orders_pkey" PRIMARY KEY, btree (id)
+    "idx_orders_customer_id" btree (customer_id)
+Foreign-key constraints:
+    "orders_customer_id_fkey" FOREIGN KEY (customer_id) REFERENCES customers(id)
+```
+
+The index `idx_orders_customer_id` is now listed alongside the primary key index. PostgreSQL's query planner will use it for queries that filter or join on `customer_id`, reducing full table scans for those operations.
 
 ## What you've accomplished
 
