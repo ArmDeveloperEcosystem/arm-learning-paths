@@ -66,7 +66,7 @@ Switch to the PostgreSQL superuser and create a database and application user.
 sudo -u postgres psql
 ```
 
-```bash
+```sql
 CREATE USER appuser WITH PASSWORD 'StrongPassword123';
 CREATE DATABASE appdb OWNER appuser;
 GRANT ALL PRIVILEGES ON DATABASE appdb TO appuser;
@@ -121,12 +121,30 @@ sudo nano /etc/postgresql/16/main/postgresql.conf
 **Update or add the following parameters:**
 
 ```text
+# Controls how much memory PostgreSQL uses for caching data pages.
+# Set to 25-40% of total RAM. A 2GB shared buffer suits a VM with 8GB RAM.
 shared_buffers = 2GB
+
+# Memory allocated per sort or hash operation within a query.
+# Higher values improve complex sort and hash join performance.
 work_mem = 64MB
+
+# Memory for maintenance operations such as VACUUM and CREATE INDEX.
+# A larger value speeds up index builds and table maintenance.
 maintenance_work_mem = 512MB
+
+# Planner estimate of the total memory available for caching.
+# Helps the planner choose index scans over sequential scans.
+# Set to 75% of total RAM.
 effective_cache_size = 6GB
 
+# Maximum number of background parallel workers across all queries.
+# Match this to the number of vCPUs on the Cobalt 100 instance.
 max_parallel_workers = 8
+
+# Maximum parallel workers a single query can use.
+# Cobalt 100 dedicates one physical core per vCPU, so 4 workers
+# lets queries use half the cores without contention.
 max_parallel_workers_per_gather = 4
 ```
 
