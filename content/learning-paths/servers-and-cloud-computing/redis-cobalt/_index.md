@@ -1,7 +1,7 @@
 ---
 title: Deploy Redis on Azure Cobalt 100 Arm64 virtual machines for real-time messaging and event processing
 
- draft: true
+draft: true
 cascade:
     draft: true
     
