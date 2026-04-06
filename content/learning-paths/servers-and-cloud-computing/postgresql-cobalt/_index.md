@@ -1,5 +1,9 @@
 ---
 title: Deploy PostgreSQL on Azure Cobalt 100 Arm64 virtual machines
+
+draft: true
+cascade:
+    draft: true
     
 minutes_to_complete: 30
 
