@@ -73,7 +73,7 @@ initial connection time = 10.771 ms
 tps = 2401.873115 (without initial connection time)
 ```
 
-This demonstrates strong transactional (OLTP) performance on Cobalt 100 Arm64 infrastructure.
+This result shows the transactional (OLTP) throughput PostgreSQL achieves on this Cobalt 100 Arm64 instance under the configured load. TPS and latency will vary with instance size, client count, and workload shape.
 
 ## Enable query monitoring
 
@@ -192,8 +192,6 @@ Foreign-key constraints:
 ```
 
 The index `idx_orders_customer_id` is now listed alongside the primary key index. PostgreSQL's query planner will use it for queries that filter or join on `customer_id`, reducing full table scans for those operations.
-
-## What you've accomplished
 
 You've successfully benchmarked and optimized PostgreSQL on an Arm64 system. Your setup now includes:
 
