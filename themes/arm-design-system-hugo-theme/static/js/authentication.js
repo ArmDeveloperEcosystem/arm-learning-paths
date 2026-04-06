@@ -54,6 +54,81 @@ const msalInstance = window.msalInstance;
 //                 Authentication Functions
 // ----------------------------------------------------------------------
 
+function ensureDigitalDataRoot() {
+  if (!window.digitalData || typeof window.digitalData !== "object") {
+    window.digitalData = {};
+  }
+  return window.digitalData;
+}
+
+function clearDigitalDataUser() {
+  const digitalData = ensureDigitalDataRoot();
+  delete digitalData.user_contact_email;
+  delete digitalData.user;
+}
+
+function getEmailClaimValue(claims) {
+  if (!claims) return undefined;
+
+  const value =
+    claims["signInNames.emailAddress"] ||
+    claims.email ||
+    claims.preferred_username ||
+    claims.emails;
+
+  const emailValue = Array.isArray(value) ? value.find(Boolean) : value;
+  if (typeof emailValue === "string") {
+    return emailValue.trim().toLowerCase();
+  }
+
+  return undefined;
+}
+
+async function getIdTokenClaimsForAccount(account) {
+  if (!account) return null;
+
+  if (account.idTokenClaims && typeof account.idTokenClaims === "object") {
+    return account.idTokenClaims;
+  }
+
+  try {
+    const tokenResponse = await msalInstance.acquireTokenSilent({
+      ...window.loginRequest,
+      account
+    });
+    return tokenResponse?.idTokenClaims || null;
+  } catch (error) {
+    console.log("Unable to acquire token claims silently:", error);
+    return null;
+  }
+}
+
+async function updateDigitalDataForCurrentUser() {
+  const account =
+    msalInstance.getActiveAccount() ||
+    msalInstance.getAllAccounts()[0];
+
+  if (!account) {
+    clearDigitalDataUser();
+    return;
+  }
+
+  const claims = await getIdTokenClaimsForAccount(account);
+  if (!claims) {
+    clearDigitalDataUser();
+    return;
+  }
+
+  const email = getEmailClaimValue(claims);
+  const digitalData = ensureDigitalDataRoot();
+  delete digitalData.user_contact_email;
+  delete digitalData.user;
+
+  if (email) {
+    digitalData.user_contact_email = email;
+  }
+}
+
 // Auth Init on pageload
 let authInitPromise;
 async function initAuth() {
@@ -68,10 +143,13 @@ async function initAuth() {
         } else {
           getAccount();
         }
+
+        await updateDigitalDataForCurrentUser();
     
         renderAuthInTopNav();
       })().catch((e) => {
         console.log("Auth init failed:", e);
+        clearDigitalDataUser();
         renderAuthInTopNav();
       });
     
@@ -178,6 +256,8 @@ document.addEventListener('arm-account-signout', (event) => {
           console.log("Sign-out button not found in DOM.");
       }
     }
+
+  clearDigitalDataUser();
     
   const account = getAccount();
   msalInstance.logoutRedirect({
@@ -225,5 +305,3 @@ document.addEventListener("arm-top-navigation-ready", function (e) {
   await initAuth();   // IMPORTANT: await this before user clicks anything
 
 })();
-
-

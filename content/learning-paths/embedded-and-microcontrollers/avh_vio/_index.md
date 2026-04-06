@@ -1,6 +1,8 @@
 ---
 title: Implement an example Virtual Peripheral with Arm Virtual Hardware
 
+description: Learn how to create and integrate a virtual LED peripheral using the Virtual IO interface of Arm Virtual Hardware to simulate real-world peripherals.
+
 minutes_to_complete: 20
 
 who_is_this_for: This is an introductory topic for software developers new to Arm Virtual Hardware and its features.
@@ -10,7 +12,7 @@ learning_objectives:
 
 prerequisites:
     - A valid [AWS](https://aws.amazon.com/) account
-    - Some familiarity with Python 
+    - Some familiarity with Python
 
 author: Pareena Verma
 

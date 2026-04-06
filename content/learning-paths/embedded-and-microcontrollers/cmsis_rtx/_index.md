@@ -1,6 +1,7 @@
 ---
 title: Build an RTX5 RTOS application with Keil μVision
 
+description: Learn how to create, build, and debug an RTX5 RTOS-based application using Keil μVision with CMSIS-RTOS2 API and Event Recorder for embedded Cortex-M development.
 
 minutes_to_complete: 30
 

@@ -7,13 +7,13 @@ weight: 4 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-In this section you will learn how to manage ongoing development in an automated CI/CD workflow, using [GitHub Actions](https://github.com/features/actions) and self-hosted runner.
+In this section you'll learn how to manage ongoing development in an automated CI/CD workflow, using [GitHub Actions](https://github.com/features/actions) and self-hosted runner.
 
 In the `lighting-app` console, stop the app (`Ctrl+C`) if still running.
 
 ## Prepare repository for workflows
 
-The Matter repository from where the examples are sourced contains very many workflows for rebuilding different configurations. For the convenience of time, let us remove these, and install only the new workflow.
+The Matter repository from where the examples are sourced contains many workflows for rebuilding different configurations. For convenience, remove these, and install only the new workflow.
 
 In the `lighting-app` console, navigate to the `.github/workflows` directory, and delete all.
 ```console
@@ -70,7 +70,7 @@ Navigate to `Settings` > `Actions` > `Runners`, and then click on `New self-host
 
 Configure for `Linux` host on `ARM64` Architecture (the `host` of the runner will be the `lighting-app` Virtual Raspberry Pi 4 instance).
 
-You will see a set of commands (unique to you) to download and configure the `runner`.
+You'll see a set of commands (unique to you) to download and configure the `runner`.
 
 In the `lighting-app` console, return to your home directory:
 ```console
@@ -78,7 +78,7 @@ cd ~
 ```
 Copy and paste the `Download` and `Configure` commands (from GitHub) for your `self-hosted runner`.
 
-It is OK to select the default options when prompted during configuration.
+It's OK to select the default options when prompted during configuration.
 
 To keep the console available for later use, run the `self-hosted runner agent` as a background service (if started, first stop with `Ctrl+C`):
 ```console
@@ -86,7 +86,7 @@ sudo ./svc.sh install pi
 sudo ./svc.sh start
 sudo ./svc.sh status
 ```
-In your GitHub repository, you will see your runner listed (`Settings` > `Actions` > `Runners`), with `Idle` status.
+In your GitHub repository, you'll see your runner listed (`Settings` > `Actions` > `Runners`), with `Idle` status.
 
 ## Make a code change
 
@@ -109,7 +109,7 @@ Exit (`Ctrl+X`) and save your change.
 
 ## Push changes to GitHub repository and invoke workflow
 
-The workflow contains the below, which tells GitHub to invoke this workflow whenever there is a `push` to the repository.
+The workflow contains the below, which tells GitHub to invoke this workflow whenever there's a `push` to the repository.
 ```yml
 on:
   push:
@@ -130,7 +130,7 @@ git add .
 git commit -m "delete other workflows, update output message"
 git push
 ```
-You will be prompted for your GitHub username and `Personal Access Token` (password).
+You'll be prompted for your GitHub username and `Personal Access Token` (password).
 
 The workflow contains two `jobs`, which rebuild, and then run `lighting-app`:
 ```yml

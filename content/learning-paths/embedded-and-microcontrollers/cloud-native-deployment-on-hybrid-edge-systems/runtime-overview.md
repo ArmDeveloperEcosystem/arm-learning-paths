@@ -22,6 +22,6 @@ The list of commands are as per the v1.2 [specification](https://github.com/open
 
 You can review the runtime high-level architecture in the image below:
 
-![hybrid runtime alt-text#center](hybrid.jpg "Figure 1. Hybrid runtime high-level architecture")
+![Diagram showing the hybrid-runtime architecture with containerd at the top connecting to hybrid-shim, which connects to hybrid-runtime, which manages firmware deployment to Cortex-M processors#center](hybrid.jpg "Hybrid-runtime architecture diagram")
 
 Now that you have an understanding of the hybrid-runtime, let's move on to the deployment part.
