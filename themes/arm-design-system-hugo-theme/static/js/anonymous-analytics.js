@@ -308,9 +308,6 @@ function attachPageFindSearchTracker() {
                 trackSearchInteraction();
             });
 
-            // 1a) Dispatch LP metadata rows for Adobe Analytics ingestion
-            trackLearningPathListMetadata();
-
             // 2) Facet boxes
             let filter_facet_elements = document.querySelectorAll('ads-checkbox');            
             for (let facet of filter_facet_elements) {
