@@ -19,7 +19,6 @@ learning_objectives:
 
 prerequisites:
   - A [Microsoft Azure account](https://azure.microsoft.com/) with access to Cobalt 100-based instances (Dpsv6)
-  - Basic knowledge of Linux command-line operations
   - Familiarity with SSH and remote server access
   - Basic understanding of cloud storage concepts
 
