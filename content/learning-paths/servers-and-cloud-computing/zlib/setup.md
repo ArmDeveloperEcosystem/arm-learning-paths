@@ -1,79 +1,107 @@
 ---
 # User change
-title: "Build and install Cloudflare zlib on Arm servers"
+title: "Build and install zlib-ng on Arm servers"
 weight: 2
 layout: "learningpathall"
 ---
 
-## Detailed Steps
+## Overview
 
-Most Linux distributions use `zlib` without any optimizations. For the Arm architecture this means that CRC (cyclic redundancy check) instructions are not utilized for best performance. Installing and using a `zlib` which has been optimized may provide performance improvement for applications doing data compression. 
+Most Linux distributions ship `zlib` without Arm-specific optimizations. This means instruction extensions such as Neon SIMD and ARMv8 CRC32 are not used, leaving significant performance on the table for compression-heavy workloads.
 
-Cloudflare `zlib` is one version which has optimizations included. There are other `zlib` versions which have been optimized. The process to use them should be similar.
+`zlib-ng` is an actively maintained fork of zlib designed for modern systems. It includes Neon SIMD acceleration for adler32, inflate chunk copying, and hash operations, plus ARMv8 CRC32 and PMULL acceleration. It also supports a zlib-compatible API mode, allowing you to use it as a drop-in replacement without recompiling your applications.
 
-## Confirm crc32 is included in the processor flags
+## Confirm Arm SIMD capabilities in the processor
 
-All recent Arm servers and most Armv8.0-A and above processors have support for CRC instructions. 
+All Neoverse servers and processors implementing Armv8-A and above have support for Neon (Advanced SIMD) and CRC32 instructions.
 
-To check if a Linux system has support use the `lscpu` command and look for `crc32` in the listed flags.
+To check which capabilities a Linux system exposes, use `lscpu` and look at the `Flags` output:
+
 ```bash { ret_code="0" }
-lscpu | grep crc32
+lscpu | grep -E "asimd|crc32"
 ```
 
-If the machine is confirmed to include `crc32` it may benefit from `zlib-cloudflare`. 
+The `asimd` flag indicates Neon (Advanced SIMD) support. The `crc32` flag confirms hardware-accelerated CRC32. Both are present on all modern Arm server platforms, including AWS Graviton, Azure Cobalt 100, and Google Axion.
 
-## Check if the default zlib includes crc32 instructions
+## Check what the default zlib contains
+
+Install the packages you need for this Learning Path:
+
+```bash
+sudo apt update
+sudo apt install -y build-essential git cmake
+```
+
+Ubuntu and Debian put `zlib` in `/usr/lib/aarch64-linux-gnu`.
+
+You can inspect the default library with `objdump` to see whether it contains any Neon or CRC32 instructions before you replace it:
+
+```bash
+objdump -d /usr/lib/aarch64-linux-gnu/libz.so.1 | grep -cE "crc32|pmull|v[0-9]+\.(16b|8b|8h|4h|4s|2s|2d|1d)"
+```
+
+Recent Ubuntu releases on aarch64 typically return a non-zero value here — the system `zlib` has *some* Neon code, but the coverage is partial. `zlib-ng` provides dedicated Neon paths for adler32, inflate chunk copying, slide hash, and compare256, with significantly more instruction-level parallelism than the default library. Installing `zlib-ng` is worthwhile on any Arm server regardless of what the system `zlib` already contains.
+
+## Build and install zlib-ng
+
+Clone the `zlib-ng` source and build it in zlib-compatible mode. The `ZLIB_COMPAT=ON` option produces a standard `libz.so` that is API- and ABI-compatible with the system `zlib`, which allows you to use `LD_PRELOAD` to switch libraries without recompiling your applications.
+
+```bash
+git clone https://github.com/zlib-ng/zlib-ng.git
+cd zlib-ng
+mkdir build && cd build
+cmake .. -DZLIB_COMPAT=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_LIBDIR=lib
+cmake --build .
+sudo cmake --install .
+sudo ldconfig
+```
 
 {{% notice Note %}}
-Some Linux system may already make use of `crc32` with the default library. If the default `zlib` is already optimized, then using `zlib-cloudflare` may not have any impact on performance. 
+Without `-DCMAKE_INSTALL_LIBDIR=lib`, CMake's `GnuInstallDirs` on Ubuntu aarch64 installs libraries into `/usr/local/lib/aarch64-linux-gnu/` instead of `/usr/local/lib/`. Setting this explicitly keeps paths consistent across platforms.
 {{% /notice %}}
 
-If `zlib` is not installed, you can install it with the following command on Ubuntu, as well as additional packages for this Learning Path. 
+If successful, `zlib-ng` installs to `/usr/local/lib`:
 
 ```bash
-sudo apt install -y libzstd1 build-essential git
+ls /usr/local/lib/libz*
 ```
 
-Ubuntu and Debian Linux distributions put `zlib` in `/usr/lib/aarch64-linux-gnu`
+The output is similar to:
 
-To check if there are any CRC instructions in a library use `objdump` to disassemble and look for `crc32` instructions. 
+```output
+/usr/local/lib/libz.a
+/usr/local/lib/libz.so
+/usr/local/lib/libz.so.1
+/usr/local/lib/libz.so.1.3.1.zlib-ng
+```
+
+## Confirm the installation
+
+Query the dynamic linker cache to confirm `zlib-ng` is visible:
 
 ```bash
-objdump -d /usr/lib/aarch64-linux-gnu/libz.so.1 | awk -F" " '{print $3}' | grep crc32 | wc -l
+/sbin/ldconfig -p | grep "libz.so"
 ```
 
-If the result is 0 then there are no `crc32` instructions used in the library. 
+The output will show both the system `zlib` and the newly installed `zlib-ng`:
 
-## Install Cloudflare zlib
+```output
+	libz.so.1 (libc6,AArch64) => /usr/local/lib/libz.so.1
+	libz.so.1 (libc6,AArch64) => /lib/aarch64-linux-gnu/libz.so.1
+	libz.so (libc6,AArch64) => /usr/local/lib/libz.so
+```
 
-If there are no `crc32` instructions in `zlib` then `zlib-cloudflare` may increase application performance. 
+## Configure and test zlib-ng
 
-To build and install `zlib-cloudflare` navigate to an empty directory and use these commands.
+Since `zlib-ng` is a shared library, you can configure which version an application uses without relinking it.
+
+Navigate back to your home directory before creating the test files:
 
 ```bash
-mkdir tmp ; pushd tmp
-git clone https://github.com/cloudflare/zlib.git
-cd zlib && ./configure 
-make && sudo make install
-popd
-rm -rf tmp
+cd $HOME
 ```
 
-If successful, `zlib-cloudflare` is installed in `/usr/local/lib`
-
-To install `zlib` somewhere else which does not require `sudo` to install it, use the prefix argument to configure to select another location such as 
-```console
-./configure --prefix=$HOME/zlib
-```
-This results in `zlib` being installed in `$HOME/zlib` instead and the `sudo` is not needed for the `make install`.
-
-## Configuring zlib
-
-Since `zlib` is a shared library there are different ways to configure its usage. 
-
-Below is a simple C program to demonstrate `zlib` configuration.
-
-Use a text editor to save the code below in a file named `test.c`
+Use a text editor to save the following code in a file named `test.c`:
 
 ```C { file_name="test.c" }
 #include <stdio.h>
@@ -97,29 +125,32 @@ int main()
 }
 ```
 
-Compile the example program:
+Compile the example program, linking against the system `zlib`:
 
 ```bash
 gcc test.c -o test -lz
 ```
 
-Run the program and see the version.
+Run the program to confirm the system `zlib` version:
 
 ```bash
 ./test
 ```
 
-The printed version will be something like:
+The output will be the version of the system library, for example:
+
 ```output
-1.2.11
+1.3
 ```
 
-Use `ldd` to see the location of the shared library.
+Use `ldd` to confirm which shared library the binary loads:
+
 ```bash
 ldd ./test
 ```
 
-The output will show the shared libraries used by test.
+The output will show the shared libraries used:
+
 ```output
 linux-vdso.so.1 (0x0000ffffababe000)
 libz.so.1 => /lib/aarch64-linux-gnu/libz.so.1 (0x0000ffffaba52000)
@@ -127,16 +158,20 @@ libc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x0000ffffab8df000)
 /lib/ld-linux-aarch64.so.1 (0x0000ffffaba8e000)
 ```
 
-## Use zlib-cloudflare
+## Use zlib-ng instead of the default zlib
 
-To run `test` with `zlib-cloudflare` instead of the default.
+To run the same binary with `zlib-ng` instead of the default library, set `LD_PRELOAD` to point to the installed `zlib-ng` shared object:
 
 ```bash
-LD_PRELOAD=/usr/local/lib/libz.so ./test
+LD_PRELOAD=/usr/local/lib/libz.so.1 ./test
 ```
 
-The `LD_PRELOAD` variable informs the linker to use these libraries before the default libraries. 
+The `LD_PRELOAD` environment variable tells the dynamic linker to load this library before the system default.
 
-The version of `zlib-cloudflare` will print. It may be older than the default, but you are interested in `crc32` not using the latest.
+The `zlib-ng` version identifier will print. The version string includes the `.zlib-ng` suffix to distinguish it from the upstream library:
 
-In the next section you will explore how to use `zlib-cloudflare` in an application doing data compression. 
+```output
+1.3.1.zlib-ng
+```
+
+In the next section you will use `zlib-ng` to accelerate a Python application doing data compression.
