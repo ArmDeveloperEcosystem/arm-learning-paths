@@ -1,24 +1,30 @@
 ---
 layout: learningpathall
-title: Improve python application performance using Cloudflare zlib
+title: Improve Python application performance using zlib-ng
 weight: 3
 ---
 
 ## Install necessary software packages
 
-* Make sure `python3` is available when `python` is run.
+Make sure `python3` is available when `python` is run:
 
 ```bash
 sudo apt install python-is-python3 -y
 ```
 
-## Detailed Steps
+## Compress files with Python and zlib-ng
 
-The previous section explained how to build the Cloudflare `zlib` which includes the use of `crc32` instructions to improve performance on data compression.
+The previous section explained how to build `zlib-ng` with Neon SIMD and ARMv8 CRC32 optimizations enabled.
 
-Use a Python example and measure the performance difference with `zlib-cloudflare`.
+Use a Python example and measure the performance difference with `zlib-ng`.
 
-Use a text editor to copy and save the code below in a file named `zip.py`
+Navigate to your home directory before creating the example files:
+
+```bash
+cd $HOME
+```
+
+Use a text editor to copy and save the code below in a file named `zip.py`.
 
 ```python { file_name="zip.py" }
 import gzip
@@ -35,7 +41,7 @@ f_out.close()
 
 ## Create a large file to compress
 
-The above Python code will read a file named `largefile` and write a compressed version as `largefile.gz`
+The above Python code will read a file named `largefile` and write a compressed version as `largefile.gz`.
 
 To create the input file, use the `dd` command.
 
@@ -51,18 +57,34 @@ Run with the default `zlib` and time the execution.
 time python zip.py
 ```
 
-Make a note of how many seconds the program took.
+The output is similar to:
 
-## Run the example again with zlib-cloudflare
-
-This time, use `LD_PRELOAD` to change to `zlib-cloudflare` instead and check the performance difference.
-
-Adjust the path to `libz.so` as needed.
-
-```bash
-time LD_PRELOAD=/usr/local/lib/libz.so python ./zip.py
+```output
+real    0m4.662s
+user    0m4.544s
+sys     0m0.117s
 ```
 
-Notice the time saved using `zlib-cloudflare`.
+Make a note of the `real` time.
+
+## Run the example again with zlib-ng
+
+This time, use `LD_PRELOAD` to switch to `zlib-ng` and measure the performance difference.
+
+Adjust the path to `libz.so.1` as needed.
+
+```bash
+time LD_PRELOAD=/usr/local/lib/libz.so.1 python ./zip.py
+```
+
+The output is similar to:
+
+```output
+real    0m1.759s
+user    0m1.654s
+sys     0m0.105s
+```
+
+Compare the `real` time against the default `zlib` run. In this example, `zlib-ng` reduces compression time from 4.6 seconds to 1.8 seconds, roughly a 2.6x improvement — driven by the Neon-accelerated adler32 and inflate chunk copy routines.
 
 The next section introduces how to use Linux `perf` to profile applications and look for `zlib` activity.
