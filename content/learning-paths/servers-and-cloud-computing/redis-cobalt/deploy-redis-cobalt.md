@@ -40,12 +40,6 @@ cd redis-stable
 make -j$(nproc)
 ```
 
-(Optional) Run tests to validate the build:
-
-```bash
-make test
-```
-
 ## Start the Redis server
 
 Start the Redis server in a new terminal.
@@ -57,7 +51,28 @@ cd /tmp/redis-stable
 src/redis-server
 ```
 
-The output shows Redis starting successfully and listening on port 6379.
+The output shows Redis starting successfully and listening on port 6379:
+
+```output
+103702:M 07 Apr 2026 18:49:07.446 * monotonic clock: ARM CNTVCT @ 1000 ticks/us
+                _._
+           _.-``__ ''-._
+      _.-``    `.  `_.  ''-._           Redis Open Source
+  .-`` .-```.  ```\/    _.,_ ''-._      8.6.2 (00000000/1) 64 bit
+ (    '      ,       .-`  | `,    )     Running in standalone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|    Port: 6379
+ |    `-._   `._    /     _.-'    |     PID: 103702
+  `-._    `-._  `-./  _.-'    _.-'
+ |`-._`-._    `-.__.-'    _.-'_.-'|
+ |    `-._`-._        _.-'_.-'    |           https://redis.io
+  `-._    `-._`-.__.-'_.-'    _.-'
+      `-._    `-.__.-'    _.-'
+          `-._        _.-'
+              `-.__.-'
+
+103702:M 07 Apr 2026 18:49:07.446 * Server initialized
+103702:M 07 Apr 2026 18:49:07.446 * Ready to accept connections tcp
+```
 
 ## Verify Redis is running
 
@@ -68,12 +83,16 @@ Open another terminal and connect using the Redis CLI.
 ```bash
 cd /tmp/redis-stable
 src/redis-cli
+```
+
+At the Redis CLI prompt, run:
+
+```console
 PING
 ```
 
 The output is similar to:
 ```output
-127.0.0.1:6379> ping
 PONG
 ```
 
@@ -85,26 +104,35 @@ Redis Pub/Sub enables real-time communication between producers and consumers.
 
 **Terminal 2 (Subscriber):**
 
-```bash
+Terminal 2 is still connected to the Redis CLI from the previous step. At the `127.0.0.1:6379>` prompt, run:
+
+```console
 SUBSCRIBE chat_channel
 ```
 
 The output is similar to:
 
 ```output
-127.0.0.1:6379> SUBSCRIBE chat_channel
+127.0.0.1:6379(subscribed mode)> SUBSCRIBE chat_channel
 1) "subscribe"
 2) "chat_channel"
 3) (integer) 1
-1) "message"
-2) "chat_channel"
 ```
 
+Terminal 2 is now blocked waiting for messages on `chat_channel`.
+
 **Terminal 3 (Publisher):**
+
+Open a third terminal and start the Redis CLI:
 
 ```bash
 cd /tmp/redis-stable
 src/redis-cli
+```
+
+At the `127.0.0.1:6379>` prompt, run:
+
+```console
 PUBLISH chat_channel "Hello from Cobalt Arm!"
 ```
 
@@ -129,7 +157,9 @@ Redis Streams provide persistent messaging with replay capability.
 
 **Terminal 3 (Producer):**
 
-```bash
+At the `127.0.0.1:6379>` prompt in Terminal 3, run:
+
+```console
 XADD mystream * user jack action login
 XADD mystream * user yan action purchase
 ```
@@ -144,7 +174,15 @@ The output is similar to:
 
 **Terminal 2 (Consumer):**
 
-```bash
+Terminal 2 is still in subscribed mode. Run `RESET` to return to normal mode:
+
+```console
+RESET
+```
+
+Then read from the stream:
+
+```console
 XREAD COUNT 2 STREAMS mystream 0
 ```
 

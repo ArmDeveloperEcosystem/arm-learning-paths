@@ -17,7 +17,16 @@ You will validate Redis for high-throughput, low-latency workloads on Arm infras
 
 Consumer groups enable scalable and reliable message processing by distributing work across multiple consumers.
 
+Terminal 1 is still running the Redis server. Use Terminal 2 or Terminal 3 from the previous section, which already has the Redis CLI open. If you closed those sessions, open a new terminal and start the CLI:
+
 ```bash
+cd /tmp/redis-stable
+src/redis-cli
+```
+
+At the `127.0.0.1:6379>` prompt, create a consumer group on the existing stream:
+
+```console
 XGROUP CREATE mystream mygroup 0 MKSTREAM
 ```
 
@@ -29,9 +38,9 @@ OK
 
 ## Consume messages using a consumer group
 
-Read messages from the stream as part of the consumer group:
+At the `127.0.0.1:6379>` prompt, read messages from the stream as part of the consumer group:
 
-```bash
+```console
 XREADGROUP GROUP mygroup consumer1 COUNT 1 STREAMS mystream >
 ```
 
@@ -48,27 +57,44 @@ The output is similar to:
 
 ## Acknowledge processed messages
 
-Acknowledge messages after processing to prevent re-delivery:
+Acknowledge messages after processing to prevent re-delivery. Use the message ID returned in the `XREADGROUP` output above — for example `1774931844279-0`:
 
-```bash
-XACK mystream mygroup <message-id>
+```console
+XACK mystream mygroup 1774931844279-0
 ```
 
-Replace `<message-id>` with the ID returned from the previous command.
+The output is similar to:
+
+```output
+(integer) 1
+```
+
+A return value of `1` confirms the message was acknowledged successfully.
+
+Exit the Redis CLI before continuing:
+
+```console
+QUIT
+```
 
 ## Install Python Redis client
 
-Install the Redis Python library to simulate real-world producer and consumer applications:
+Install the Python venv module and create a virtual environment, then install the Redis client library:
 
 ```bash
-pip3 install redis
+sudo apt install -y python3-venv
+python3 -m venv ~/redis-venv
+source ~/redis-venv/bin/activate
+pip install redis
 ```
+
+The virtual environment remains active for the rest of this section. Your prompt will show `(redis-venv)` to confirm it is active.
 
 ## Create a Python producer
 
-Create a producer script to send events to the Redis stream:
+Create a producer script to send events to the Redis stream. Save the following code in a file named `producer.py`:
 
-```python
+```python { file_name="producer.py" }
 import redis
 
 r = redis.Redis(host='localhost', port=6379)
@@ -81,7 +107,7 @@ for i in range(10):
 Run the producer:
 
 ```bash
-python3 producer.py
+python producer.py
 ```
 
 The output is similar to:
@@ -95,9 +121,9 @@ Produced msg-9
 
 ## Create a Python consumer
 
-Create a consumer script to read and process messages:
+Create a consumer script to read and process messages. Save the following code in a file named `consumer.py`:
 
-```python
+```python { file_name="consumer.py" }
 import redis
 
 r = redis.Redis(host='localhost', port=6379, decode_responses=True)
@@ -112,10 +138,10 @@ while True:
 ```
 
 
-**Run the consumer:**
+### Run the consumer
 
 ```bash
-python3 consumer.py
+python consumer.py
 ```
 
 The output is similar to:
@@ -133,6 +159,8 @@ Consumed 1774935598722-3: {'event': 'msg-7'}
 Consumed 1774935598722-4: {'event': 'msg-8'}
 Consumed 1774935598722-5: {'event': 'msg-9'}
 ```
+
+The consumer blocks for 5 seconds when no new messages arrive and then checks again. Press Ctrl+C to stop it when you're done.
 
 ## Benchmark Redis performance
 
@@ -187,6 +215,7 @@ These results validate that Arm-based infrastructure can handle high-performance
 Run a publish benchmark to evaluate messaging throughput:
 
 ```bash
+cd /tmp/redis-stable
 src/redis-benchmark -t publish -n 100000
 ```
 
@@ -196,9 +225,10 @@ The Redis benchmark tool does not display detailed output for Pub/Sub operations
 
 ## Monitor Redis metrics
 
-Use the Redis INFO command to inspect runtime statistics:
+Open a new terminal and use the Redis INFO command to inspect runtime statistics:
 
 ```bash
+cd /tmp/redis-stable
 src/redis-cli info stats
 ```
 
@@ -283,7 +313,7 @@ acl_access_denied_channel:0
 - Streams provide reliable and scalable messaging
 - System remains stable under high throughput
 
-## What you've learned 
+## What you've learned
 
 You have successfully:
 
