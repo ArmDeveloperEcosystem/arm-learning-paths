@@ -6,14 +6,7 @@ weight: 7
 layout: learningpathall
 ---
 
-## Use MinIO for AI/ML Dataset and Model Storage
-
-In this section, you simulate a real-world AI/ML workflow using MinIO.
-
-MinIO serves as an object storage backend for datasets and trained models used in machine learning pipelines.
-
-This demonstrates how MinIO integrates into modern data-driven and AI/ML applications.
-
+In this section, you simulate a real-world AI/ML workflow using MinIO. You'll upload a training dataset and a model artifact, then retrieve them to simulate how a training or inference job would access data from object storage.
 
 ## Architecture overview
 
@@ -29,15 +22,9 @@ MinIO Object Storage (S3-compatible)
 Training / Inference Workloads
 ```
 
-## Scenario
+## Simulate an AI/ML storage workflow
 
-You will simulate a typical ML pipeline:
-
-- Upload a dataset
-- Upload a model artifact
-- Retrieve data for training or inference
-
-## Create dataset
+### Create a dataset
 
 Create a sample dataset to represent structured training data.
 
@@ -49,13 +36,7 @@ echo "2,nick,85" >> ai-dataset/data.csv
 echo "3,jack,95" >> ai-dataset/data.csv
 ```
 
-**Why this matters:**
-
-- Represents structured data used in ML training
-- Simulates dataset ingestion into object storage
-- Mimics real-world data lake inputs
-
-## Upload dataset
+### Upload the dataset
 
 Upload the dataset to MinIO.
 
@@ -63,73 +44,61 @@ Upload the dataset to MinIO.
 mc cp ai-dataset/data.csv local/ml-datasets/
 ```
 
-## Verify upload
+### Verify the upload
+
+Confirm the dataset is stored in the bucket:
 
 ```bash
 mc ls local/ml-datasets
 ```
 
-You should see `data.csv` in the output.
-
 The output is similar to:
 
 ```output
-[2026-03-24 04:28:25 UTC]    43B STANDARD data.csv
-[2026-03-24 04:29:59 UTC]    19B STANDARD model.bin
 [2026-03-24 04:16:22 UTC]    13B STANDARD test.txt
+[2026-03-24 04:28:25 UTC]    43B STANDARD data.csv
 [2026-03-24 05:21:04 UTC]     0B dataset/
 ```
 
-**Why this matters:**
+### Create a model artifact
 
-- Confirms successful data ingestion
-- Validates object storage functionality
-
-## Create model artifact
-
-Simulate a trained machine learning model.
+Create a file to represent a trained model. In a real pipeline this would be the output of a training job.
 
 ```bash
 mkdir model
 echo "fake-model-weights" > model/model.bin
 ```
 
-**Why this matters:**
-
-- Represents the output of training pipelines
-- Mimics model registry storage
-
-## Upload model artifact
+### Upload the model artifact
 
 ```bash
 mc cp model/model.bin local/ml-datasets/
 ```
 
-## Download data for usage
+### Download data for training or inference
 
-Simulate retrieving data for training or inference.
+Simulate a training or inference job retrieving data from storage.
 
 ```bash
 mkdir download-test
 mc cp --recursive local/ml-datasets download-test/
 ```
 
-## Verify downloaded data
+### Verify the downloaded data
+
+Confirm the files were retrieved successfully:
 
 ```bash
 ls download-test/ml-datasets
 ```
 
-You should see:
+The output is similar to:
 
-```bash
+```output
 data.csv  dataset  model.bin  test.txt
 ```
 
-Why this matters:
-
-- Confirms data retrieval works correctly
-- Simulates how ML jobs access datasets and models
+This confirms that both the dataset and model artifact are accessible from storage, as a real training or inference job would expect.
 
 ## What this demonstrates
 
@@ -141,21 +110,6 @@ Why this matters:
 | Inference          | Model retrieval            |
 
 
-## Explanation
+## What you've learned
 
-MinIO provides S3-compatible object storage for AI/ML workflows:
-
-- Datasets are stored as objects in buckets
-- Training jobs read datasets from storage
-- Models are stored after training
-- Inference systems retrieve models when required
-
-This workflow mirrors production-grade ML pipelines used in cloud environments.
-
-## What you've learned 
-In this section, you learned how to:
-
-- Use MinIO as object storage for AI/ML datasets
-- Store and retrieve model artifacts
-- Simulate a real-world ML workflow
-- Understand how object storage fits into data pipelines
+You've now completed the full Learning Path. You deployed MinIO on an Azure Cobalt 100 virtual machine, benchmarked its storage throughput, validated S3 API compatibility using boto3, and walked through an AI/ML workflow for storing and retrieving datasets and model artifacts.

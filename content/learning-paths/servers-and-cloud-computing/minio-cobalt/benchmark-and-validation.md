@@ -6,23 +6,19 @@ weight: 6
 layout: learningpathall
 ---
 
-## Benchmark and Validate MinIO Storage
-
 In this section, you evaluate MinIO's performance and validate its compatibility with the Amazon S3 API.
-
-This step demonstrates how MinIO can handle high-throughput workloads and confirms that it can be used as a drop-in replacement for S3 in real-world applications.
-
 
 ## High-throughput benchmark
 
 ### Generate test data
 
-Create a dataset to simulate large object storage workloads.
+Create a 1 GB dataset using random data to simulate a large object storage workload.
 
 ```bash
 mkdir dataset
 dd if=/dev/urandom of=dataset/file1.bin bs=100M count=10
 ```
+
 The output is similar to:
 
 ```output
@@ -31,16 +27,9 @@ The output is similar to:
 1048576000 bytes (1.0 GB, 1000 MiB) copied, 2.46018 s, 426 MB/s
 ```
 
-**Why this matters:**
+### Benchmark upload throughput
 
-- Simulates real-world large file uploads
-- Helps evaluate storage throughput
-- Mimics AI/ML dataset ingestion
-
-
-## Upload benchmark
-
-Measure the time required to upload data.
+Measure the time required to upload the dataset.
 
 ```bash
 time mc cp --recursive dataset local/ml-datasets/
@@ -55,15 +44,9 @@ user    0m0.812s
 sys     0m0.353s
 ```
 
-**Why this matters:**
+### Benchmark download throughput
 
-- Shows actual upload throughput
-- Helps estimate performance for large datasets
-- Demonstrates MinIO efficiency on Arm
-
-## Download benchmark
-
-Measure the time required to retrieve data.
+Measure the time required to retrieve the dataset.
 
 ```bash
 time mc cp --recursive local/ml-datasets dataset-download
@@ -78,82 +61,56 @@ user    0m0.058s
 sys     0m0.494s
 ```
 
-**Why this matters:**
+## Performance summary on Azure Cobalt 100
 
-- Demonstrates high-speed data retrieval
-- Validates low-latency access for workloads
-- Important for inference and analytics pipelines
+Running on a D4ps_v6 Cobalt 100 instance, MinIO achieved ~108 MiB/s upload throughput and ~1.50 GiB/s download throughput for 1 GB transfers. Upload time was approximately 9 seconds and download completed in under one second.
 
-## Performance summary on Azure Cobalt ARM (Arm64)
+The asymmetry between upload and download speeds is typical for object storage on local disk. The high download throughput is well suited to inference workloads and analytics pipelines that read large datasets repeatedly.
 
-The benchmark results demonstrate strong performance characteristics of MinIO running on Azure Cobalt ARM64 infrastructure.
+## Validate S3 compatibility using Python
 
-### Key observations
+MinIO implements the Amazon S3 API, which means any application or SDK written for S3 can connect to MinIO without modification. You can verify this using the `boto3` Python SDK.
 
-- **Upload throughput:** ~108 MiB/s  
-- **Download throughput:** ~1.50 GiB/s  
-- **Upload time (1 GB):** ~9 seconds  
-- **Download time (1 GB):** <1 second  
 
-### What this means
+### Create a virtual environment
 
-- MinIO delivers **high-throughput data ingestion**, suitable for large dataset uploads  
-- Extremely fast download speeds enable **low-latency data access** for inference workloads  
-- ARM64-based Cobalt processors provide **efficient and consistent performance** for storage-heavy applications  
-- The system handles **GB-scale object transfers smoothly**, making it ideal for AI/ML and analytics pipelines  
-
-### Why this is important
-
-- AI/ML workflows require fast access to large datasets and models  
-- Data pipelines benefit from high read/write throughput  
-- ARM-based infrastructure provides **cost-efficient performance at scale**  
-
-## Validate S3 compatibility (Python)
-
-MinIO provides an S3-compatible API. In this step, you verify compatibility using the Python SDK.
-
-- Ubuntu 24.04 restricts global pip installs, so a virtual environment is required.
-
-## Create a virtual environment
+Ubuntu 24.04 restricts global pip installs, so you need a virtual environment to install `boto3`. Create and activate one with:
 
 ```bash
 python3 -m venv minio-env
 source minio-env/bin/activate
 ```
 
-**Why this matters:**
-
-- Isolates Python dependencies
-- Avoids system conflicts
-- Follows best practices
-
-## Install boto3
+### Install boto3
 
 ```bash
 pip install boto3
 ```
 
-## Create test script
+### Create a test script
+
+Create a Python script that connects to MinIO using the `boto3` S3 client and lists your buckets. The script reads the password from the `MINIO_ROOT_PASSWORD` environment variable. Run the command below to create the file directly without using a text editor:
 
 ```bash
-nano s3_test.py
-```
-
-```python
+cat << 'EOF' > s3_test.py
 import boto3
+import os
 
 s3 = boto3.client(
     's3',
     endpoint_url='http://localhost:9000',
     aws_access_key_id='admin',
-    aws_secret_access_key='StrongPassword123'
+    aws_secret_access_key=os.environ['MINIO_ROOT_PASSWORD']
 )
 
 response = s3.list_buckets()
-print(response)
+print("Buckets:")
+for bucket in response['Buckets']:
+    print(f"  {bucket['Name']} (created {bucket['CreationDate'].strftime('%Y-%m-%d')})")
+EOF
 ```
 
-## Run the script
+### Run the script
 
 ```bash
 python s3_test.py
@@ -162,16 +119,13 @@ python s3_test.py
 The output is similar to:
 
 ```output
-{'ResponseMetadata': {'RequestId': '189FACF71514F6A5', 'HostId': 'dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8', 'HTTPStatusCode': 200, 'HTTPHeaders': {'accept-ranges': 'bytes', 'content-length': '369', 'content-type': 'application/xml', 'server': 'MinIO', 'strict-transport-security': 'max-age=31536000; includeSubDomains', 'vary': 'Origin, Accept-Encoding', 'x-amz-id-2': 'dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8', 'x-amz-request-id': '189FACF71514F6A5', 'x-content-type-options': 'nosniff', 'x-ratelimit-limit': '4562', 'x-ratelimit-remaining': '4562', 'x-xss-protection': '1; mode=block', 'date': 'Tue, 24 Mar 2026 04:35:55 GMT'}, 'RetryAttempts': 0}, 'Buckets': [{'Name': 'ml-datasets', 'CreationDate': datetime.datetime(2026, 3, 24, 4, 14, 28, 859000, tzinfo=tzlocal())}], 'Owner': {'DisplayName': 'minio', 'ID': '02d6176db174dc93cb1b899f7c6078f08654445fe8cf1b6ce98d8855f66bdbf4'}}
+Buckets:
+  ml-datasets (created 2026-03-24)
 ```
 
-**Why this matters:**
+A successful response confirms MinIO accepts S3 API requests and returns bucket metadata in the same format as AWS S3.
 
-- Confirms MinIO behaves like AWS S3
-- Validates SDK integration capability
-- Ensures compatibility with real applications
-
-**Exit environment**
+When you're done, deactivate the virtual environment:
 
 ```bash
 deactivate
@@ -191,5 +145,3 @@ In the next section, you will:
 - Use MinIO in a real AI/ML workflow
 - Store datasets and model artifacts
 - Simulate production data pipelines
-
-
