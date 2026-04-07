@@ -1,5 +1,5 @@
 ---
-title: "Overview of Azure Cobalt 100 and Redis"
+title: Overview of Azure Cobalt 100 and Redis
 
 weight: 2
 
@@ -37,3 +37,7 @@ Redis is commonly used in:
 - High-performance APIs  
 
 In this Learning Path, you'll deploy Redis on an Azure Cobalt 100 Arm64 virtual machine and build a real-time messaging and event processing system using Pub/Sub and Redis Streams. You will also benchmark Redis performance to validate its efficiency on Arm-based infrastructure.
+
+## What you've learned and what's next
+
+You now have the context for why Azure Cobalt 100 and Redis are a strong combination for high-performance, low-latency workloads. Next, you'll create the virtual machine that will run Redis throughout this Learning Path.
