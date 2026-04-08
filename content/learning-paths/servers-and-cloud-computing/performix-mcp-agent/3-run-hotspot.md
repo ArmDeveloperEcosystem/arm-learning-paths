@@ -51,7 +51,7 @@ Copilot reads the prompt file and walks you through a series of confirmation que
 
 ![GitHub Copilot agent chat asking what SSH username should be used to connect to the target machine#center](images/mcp-performix-setup3.png "Agent prompt: enter SSH username")
 
-**Step 4:** Enter the IP address of your remote Arm machine.
+**Step 4:** Enter the IP address or hostname of your remote Arm machine.
 
 ![GitHub Copilot agent chat asking for the IP address of the remote Arm machine#center](images/mcp-performix-setup4.png "Agent prompt: enter remote IP address")
 
