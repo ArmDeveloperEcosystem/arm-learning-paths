@@ -33,7 +33,6 @@ Clone the Mandelbrot repository. The repository is available under the [Arm Educ
 ```bash
 git clone https://github.com/arm-education/Mandelbrot-Example.git
 cd Mandelbrot-Example
-```bash
 make single_thread DEBUG=1
 ```
 
