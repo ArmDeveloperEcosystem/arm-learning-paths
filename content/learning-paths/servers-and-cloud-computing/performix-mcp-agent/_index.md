@@ -48,9 +48,9 @@ further_reading:
         link: https://github.com/arm/mcp
         type: website
     - resource:
-        title: Arm Performix User Guide
-        link: https://developer.arm.com/documentation/110163/latest
-        type: documentation
+        title: Arm Performix
+        link: https://developer.arm.com/servers-and-cloud-computing/arm-performix
+        type: website
     - resource:
         title: Optimize application performance using Arm Performix CPU microarchitecture analysis
         link: /learning-paths/servers-and-cloud-computing/performix-microarchitecture/
