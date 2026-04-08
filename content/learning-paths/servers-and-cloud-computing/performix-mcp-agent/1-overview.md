@@ -10,7 +10,7 @@ layout: learningpathall
 
 The Arm MCP Server exposes Arm Performix as a first-class tool that AI coding assistants can invoke directly. Arm Performix is a performance profiling tool that simplifies the workflow of collecting CPU samples, building flame graphs, and identifying the functions that dominate application runtime. When integrated into the MCP server, it lets an AI agent orchestrate the entire profiling pipeline — configuring the recipe, launching the collection run, and retrieving the resulting hotspot data — without manual interaction with the Performix engine. 
 
-This removes the round-trip from profiling. Rather than switching between your IDE and the Performix GUI to analyze results and then back again to apply code changes, an AI agent can do all of this for you in a single agentic workflow.
+This removes a context switch for profiling. Rather than switching between your IDE and the Performix GUI to analyze results and then back again to apply code changes, an AI agent can do all of this for you in a single agentic workflow.
 
 ## How the MCP tool works
 
