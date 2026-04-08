@@ -3,6 +3,7 @@ title: "Flatpak"
 minutes_to_complete: 10
 official_docs: "https://flatpak.org"
 author: "Jason Andrews"
+description: "Install Flatpak on Arm Linux, add the Flathub remote, and verify the setup by running a native aarch64 application."
 weight: 1
 draft: true
 tool_install: true
