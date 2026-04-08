@@ -1,5 +1,10 @@
 ---
 title: Identify code hotspots using Arm Performix through the Arm MCP Server
+
+draft: true
+cascade:
+    draft: true
+    
 description: Learn how to use an AI agent and the Performix tool through the Arm MCP Server to run the Code Hotspots recipe on a C++ application, interpret flame graph results, and apply targeted optimizations on Arm Neoverse.
 
 minutes_to_complete: 30
