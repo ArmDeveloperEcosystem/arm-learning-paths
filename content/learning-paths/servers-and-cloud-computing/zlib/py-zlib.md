@@ -4,19 +4,21 @@ title: Improve Python application performance using zlib-ng
 weight: 3
 ---
 
+## Accelerate a Python application doing data compression
+
+In the previous section, you learned how to build `zlib-ng` with Neon SIMD and ARMv8 CRC32 optimizations enabled.
+
+In this section, you will use a Python example application and measure the performance difference with `zlib-ng`.
+
 ## Install necessary software packages
 
-Make sure `python3` is available when `python` is run:
+Ensure that `python3` is available when you run `python`:
 
 ```bash
 sudo apt install python-is-python3 -y
 ```
 
 ## Compress files with Python and zlib-ng
-
-The previous section explained how to build `zlib-ng` with Neon SIMD and ARMv8 CRC32 optimizations enabled.
-
-Use a Python example and measure the performance difference with `zlib-ng`.
 
 Navigate to your home directory before creating the example files:
 
@@ -41,7 +43,7 @@ f_out.close()
 
 ## Create a large file to compress
 
-The above Python code will read a file named `largefile` and write a compressed version as `largefile.gz`.
+The Python code in `zip.py` will read an input file named `largefile` and write a compressed version as `largefile.gz`.
 
 To create the input file, use the `dd` command.
 
@@ -87,4 +89,8 @@ sys     0m0.105s
 
 Compare the `real` time against the default `zlib` run. In this example, `zlib-ng` reduces compression time from 4.6 seconds to 1.8 seconds, roughly a 2.6x improvement — driven by the Neon-accelerated adler32 and inflate chunk copy routines.
 
-The next section introduces how to use Linux `perf` to profile applications and look for `zlib` activity.
+## What you've learned and what's next
+
+In this section, you used `zlib-ng` to accelerate the performance of an example Python file compression application. You compared the difference in performance between `zlib` and `zlib-ng`.
+
+In the next section, you will learn how to use Linux `perf` to profile applications and look for `zlib` activity.
