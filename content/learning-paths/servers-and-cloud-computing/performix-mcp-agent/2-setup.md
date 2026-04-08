@@ -28,26 +28,11 @@ Connect to the remote server over SSH and install the required build tools. On `
 sudo dnf update && sudo dnf install -y git gcc-c++ make
 ```
 
-Clone the Mandelbrot repository and prepare the build directories. The repository is available under the [Arm Education License](https://github.com/arm-university/Mandelbrot-Example?tab=License-1-ov-file) for teaching and learning:
+Clone the Mandelbrot repository. The repository is available under the [Arm Education License](https://github.com/arm-university/Mandelbrot-Example?tab=License-1-ov-file) for teaching and learning:
 
 ```bash
 git clone https://github.com/arm-education/Mandelbrot-Example.git
 cd Mandelbrot-Example
-mkdir -p images build
-```
-
-Before building, update the output path in `src/main_single_thread.cpp`. Replace the first argument to `myplot.draw()` with the absolute path to your images directory:
-
-```cpp
-myplot.draw("/home/ec2-user/Mandelbrot-Example/images/green.bmp", Mandelbrot::Mandelbrot::GREEN);
-```
-
-{{% notice Note %}}
-Replace `/home/ec2-user` with your actual home directory path if it differs.
-{{% /notice %}}
-
-Now build the single-threaded debug binary. The `DEBUG=1` flag disables compiler optimizations (`-O0`) and includes debug symbols (`-g`) and frame pointers (`-fno-omit-frame-pointer`), both of which are required for accurate flame graphs:
-
 ```bash
 make single_thread DEBUG=1
 ```
