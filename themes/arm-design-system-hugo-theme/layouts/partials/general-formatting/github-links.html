@@ -21,7 +21,7 @@ Called from:
 
  {{ $viewURL := printf "%s/tree/%s" $gh_repo $gh_repo_path -}}
  {{ $editURL := printf "%s/edit/%s" $gh_repo $gh_repo_path -}}
- {{ $issuesURL := printf "%s/issues/new?title=%s" $gh_repo (safeURL $.Title ) -}}
+ {{ $issuesURL := printf "%s/issues/new?template=issue-report.md&title=%s" $gh_repo (safeURL $.Title ) -}}
 
 <!-- Display github elements -->
  <div class="github-div">

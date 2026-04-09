@@ -30,8 +30,6 @@ author: Arnaud de Grandmaison
 skilllevels: Advanced
 subjects: Performance and Architecture
 armips:
-    - Neoverse
-    - Cortex-A
     - Arm C1
 tools_software_languages:
     - C
