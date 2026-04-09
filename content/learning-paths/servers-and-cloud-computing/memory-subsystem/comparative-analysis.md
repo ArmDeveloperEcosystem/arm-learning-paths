@@ -167,11 +167,11 @@ Peak bandwidth from `peak-bandwidth` shows the system-level memory controller ca
 
 The credibility of this type of analysis comes from cross-validation. Check that:
 
-1. Latency steps match cache sizes: the `latency-sweep` boundaries should align with the cache sizes reported by `sysfs` and the TRM.
-2. Bandwidth plateaus match cache sizes: the `bandwidth-sweep` should show transitions at the same data sizes that `latency-sweep` identified.
-3. Peak bandwidth matches documented limits: compare the "All Reads" figure from `peak-bandwidth` against the theoretical peak from `asct system-info`. A well-configured system typically achieves 85-95% of theoretical peak.
-4. Idle loaded latency matches unloaded latency: the lowest-load row from `loaded-latency` should be close to the DRAM latency from `latency-sweep`.
-5. Results are repeatable: run each benchmark at least twice. If results vary by more than 5%, investigate sources of noise (CPU frequency scaling, background processes).
+- Latency steps match cache sizes: the `latency-sweep` boundaries should align with the cache sizes reported by `sysfs` and the TRM.
+- Bandwidth plateaus match cache sizes: the `bandwidth-sweep` should show transitions at the same data sizes that `latency-sweep` identified.
+- Peak bandwidth matches documented limits: compare the "All Reads" figure from `peak-bandwidth` against the theoretical peak from `asct system-info`. A well-configured system typically achieves 85-95% of theoretical peak.
+- Idle loaded latency matches unloaded latency: the lowest-load row from `loaded-latency` should be close to the DRAM latency from `latency-sweep`.
+- Results are repeatable: run each benchmark at least twice. If results vary by more than 5%, investigate sources of noise (CPU frequency scaling, background processes).
 
 {{% notice Tip %}}
 Check if your system allows you to control CPU frequency scaling during benchmarks for more consistent results:
@@ -184,13 +184,13 @@ echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governo
 
 The examples here used AWS Graviton instances, but the methodology works on any Arm Linux machine with a NUMA-enabled kernel. To adapt it:
 
-1. Install ASCT on the target system following the [install guide](/install-guides/asct/).
-2. Run all memory benchmarks: `sudo asct run memory loaded-latency --format=csv --output-dir results_$(hostname)`
-3. Compare with previous systems: `asct diff results_new/ --baseline results_reference/`
-4. Cross-validate: check that latency boundaries, bandwidth plateaus, and peak numbers are consistent with each other and with the hardware documentation.
+- Install ASCT on the target system following the [install guide](/install-guides/asct/).
+- Run all memory benchmarks: `sudo asct run memory loaded-latency --format=csv --output-dir results_$(hostname)`
+- Compare with previous systems: `asct diff results_new/ --baseline results_reference/`
+- Cross-validate: check that latency boundaries, bandwidth plateaus, and peak numbers are consistent with each other and with the hardware documentation.
 
 
-## What you've accomplished
+## What you've learned
 
 In this section you:
 - Identified the topology and cache hierarchy of Arm Linux systems using `sysfs` and `asct system-info`
