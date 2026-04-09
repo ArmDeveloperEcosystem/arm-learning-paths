@@ -34,7 +34,7 @@ dd if=/dev/zero of=largefile count=1M bs=1024
 
 ## Create an example Python file compression application
 
-To create a Python application for compressing `largefile`, use a text editor to copy and save the code below in a file named `zip.py`.
+To create the Python application for compressing `largefile`, use a text editor to copy and save the following code in a file named `zip.py`.
 
 ```python { file_name="zip.py" }
 import gzip
