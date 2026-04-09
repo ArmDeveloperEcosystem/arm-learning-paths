@@ -69,7 +69,7 @@ The output is similar to:
        0.126034000 seconds sys
 ```
 
-## Use perf record and generate the flame graph
+## Use perf record and generate a flame graph for zlib
 
 You can also record the application activity with `perf record`. `-F` specifies the sampling frequency and `--call-graph dwarf` collects call graphs using DWARF debug info, which works more reliably than frame pointers for Python on Arm cloud VMs:
 
@@ -193,7 +193,7 @@ The `-F 99` flag used in the `perf record` command sets a sampling frequency of 
 
 The function received *fewer* absolute samples with `zlib-ng`, meaning less real time was spent there. It appears as a higher percentage only because the total run time — and therefore total samples — shrank so much.
 
-## Generate the new flame graph
+## Generate a new flame graph for zlib-ng
 
 Run `perf record` again with `zlib-ng`:
 

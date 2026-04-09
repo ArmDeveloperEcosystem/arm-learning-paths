@@ -4,7 +4,7 @@ title: Improve Python application performance using zlib-ng
 weight: 3
 ---
 
-## Accelerate a Python application that compresses data
+## Reduce time taken by a Python application to compress data
 
 In the previous section, you learned how to build `zlib-ng` with Neon SIMD and ARMv8 CRC32 optimizations enabled.
 
