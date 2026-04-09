@@ -153,7 +153,7 @@ Comparing against the default `zlib` run:
 |---|---|---|---|
 | Cycles | 12,984,652,076 | 4,897,544,240 | -62% |
 | Instructions | 45,063,797,078 | 20,992,552,372 | -53% |
-| IPC | 3.47 | 4.29 | +24% |
+| Instructions Per Cycle (IPC) | 3.47 | 4.29 | +24% |
 | Cache references | 20,161,747,365 | 7,522,040,735 | -63% |
 | Elapsed time | 4.85s | 1.83s | -62% |
 
