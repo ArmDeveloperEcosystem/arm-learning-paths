@@ -1,16 +1,18 @@
 ---
-title: Create Feature Engineering gRPC Service
+title: Build a gRPC feature engineering service
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
+## Create distributed feature engineering with gRPC
+
 In modern machine learning pipelines, feature engineering is often implemented as a separate service so it can scale independently from the training workflow.
 
 In this section, you create a **gRPC-based feature engineering service** that generates features used by the machine learning pipeline.
 
-This service will later be called by the Flyte workflow during pipeline execution.
+The Flyte workflow will call this service during pipeline execution.
 
 ## Architecture overview
 
@@ -79,7 +81,7 @@ python -m grpc_tools.protoc \
 feature.proto
 ```
 
-This generates the following files:
+The command generates the following files:
 
 ```text
 feature_pb2.py
@@ -143,7 +145,7 @@ if __name__ == "__main__":
     serve()
 ```
 
-This service receives a value from the workflow and generates a derived feature used during model training.
+The service receives a value from the workflow and generates a derived feature used during model training.
 
 ## Run the feature service
 

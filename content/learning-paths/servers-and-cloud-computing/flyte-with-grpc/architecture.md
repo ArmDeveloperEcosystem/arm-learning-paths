@@ -1,14 +1,16 @@
 ---
-title: ML Pipeline Architecture
+title: Understand the distributed ML architecture
 weight: 8
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
+## Analyze the ML pipeline architecture
+
 In this section, you explore the architecture behind the distributed machine learning pipeline built using Flyte and gRPC on Google Axion Arm-based infrastructure.
 
-This architecture demonstrates how modern ML workflows are orchestrated using workflow engines while delegating specific tasks to distributed services.
+The architecture demonstrates how modern ML workflows are orchestrated using workflow engines while delegating specific tasks to distributed services.
 
 Flyte manages the pipeline orchestration, while gRPC enables efficient communication between workflow tasks and external services.
 
@@ -75,7 +77,7 @@ Typical preprocessing steps include:
 ### Feature engineering service (gRPC)
 Feature engineering is implemented as a gRPC microservice.
 
-This design allows feature-generation logic to run independently of the workflow engine.
+The design allows feature-generation logic to run independently of the workflow engine.
 
 Benefits include:
 
