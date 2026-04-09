@@ -149,7 +149,7 @@ The output is similar to:
 3) "Hello from Cobalt Arm!"
 ```
 
-This demonstrates real-time message delivery.
+The output demonstrates real-time message delivery.
 
 ## Build an event pipeline using Redis Streams
 
