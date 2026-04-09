@@ -33,7 +33,7 @@ For more information, refer to the [Linux kernel documentation](https://www.kern
 
 ## Profile the default zlib with perf
 
- Make sure that the `zip.py` program and `largefile` from the [previous section](/learning-paths/servers-and-cloud-computing/zlib/py-zlib/) are available. Confirm the application is working and `largefile.gz` is created when it is run.
+Make sure that the `zip.py` program and `largefile` from the [previous section](/learning-paths/servers-and-cloud-computing/zlib/py-zlib/) are available. Confirm the application is working and `largefile.gz` is created when it is run.
 
 ```console
 python zip.py
@@ -95,7 +95,7 @@ perf script > out.perf-script
 wc -l out.perf-folded
 ```
 
-The line count should be greater than 0. Then, generate the flame graph:
+The line count should be greater than 0. Then generate the flame graph:
 
 ```console
 ./FlameGraph/flamegraph.pl out.perf-folded > flamegraph1.svg
@@ -196,9 +196,12 @@ The function received *fewer* absolute samples with `zlib-ng`, meaning less real
 
 ## Generate the new flame graph
 
+Run `perf record` again with `zlib-ng`:
+
 ```console
 LD_PRELOAD=/usr/local/lib/libz.so.1 perf record -F 99 --call-graph dwarf python ./zip.py
 ```
+Convert the recorded data to folded stacks and verify the output is non-empty before generating the SVG:
 
 ```console
 perf script > out.perf-script
