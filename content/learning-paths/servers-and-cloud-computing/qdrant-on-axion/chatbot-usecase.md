@@ -99,7 +99,7 @@ The output is similar to:
 }
 ```
 
-This confirms the vector collection has been created successfully.
+The output confirms the vector collection has been created successfully.
 
 ## Create chatbot script
 
