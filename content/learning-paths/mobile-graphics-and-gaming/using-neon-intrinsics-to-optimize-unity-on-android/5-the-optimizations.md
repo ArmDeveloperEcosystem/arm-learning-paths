@@ -13,7 +13,7 @@ In order to leverage Neon intrinsics in code, you first have to ensure that your
 
 ### Enable Burst package
 
-1. In the Window menu, select _Package Manager_
+1. In the Window menu, select _Packet Management_ -> _Package Manager_
 
 1. Ensure that the Packages option in top left is set to _Unity Registry_
 
@@ -24,7 +24,7 @@ In order to leverage Neon intrinsics in code, you first have to ensure that your
 1. If Burst is already installed, it will be ticked. If not, select _Install_
 
 ### Turn off ARMv7 architecture support
-Neon intrinsics in Unity require ARMv8.
+Neon intrinsics in Unity require ARM64.
 
 1. Select _Project Settings_ from the _Edit_ menu
 
@@ -34,7 +34,7 @@ Neon intrinsics in Unity require ARMv8.
 
 1. Ensure ARMv7 is _not_ ticked
 
-1. Ensure ARMv8 _is_ ticked
+1. Ensure ARM64 _is_ ticked
 
 ### Allow unsafe code
 We need to make use of memory pointers. 

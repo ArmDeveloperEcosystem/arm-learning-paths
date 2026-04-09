@@ -17,7 +17,7 @@ First, you will need a consistent scenario in which you can reliably compare the
 
 The sample generates new characters every frame up to a maximum of 2401. This maximum is reached in a couple of minutes or so.
 
-Unfortunately, the sample code doesn’t display the character count but it can be added easily.
+Unfortunately, the sample code in the CollisionCalculationScript doesn’t display the character count but it can be added easily.
 
 ### Display character count
 First, pass the character count to the `ScreenWriteout` function call in _Update_. Line 265 becomes:
@@ -52,7 +52,7 @@ You will need to ensure plain (unoptimized) mode is active:
 public const Mode codeMode = Mode.Plain;
 ```
 
-4. Open _Build Settings_ from the _File_ menu
+4. Open _Build Profiles_ from the _File_ menu
 
 5. Ensure the following options:
 
