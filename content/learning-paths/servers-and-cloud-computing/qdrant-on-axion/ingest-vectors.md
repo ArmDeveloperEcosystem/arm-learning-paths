@@ -1,10 +1,12 @@
 ---
-title: Generate and Index Vectors
+title: Generate and index vector embeddings
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+
+## Create vector embeddings from text
 
 In this section, you generate vector embeddings from sample text data and store them in the **Qdrant vector database**.
 
@@ -14,7 +16,7 @@ Using **Sentence Transformers**, you convert text into embeddings and store them
 
 ## Architecture overview
 
-This stage of the workflow focuses on embedding generation and vector storage.
+The workflow focuses on embedding generation and vector storage.
 
 ```text
 Text Documents
@@ -59,7 +61,7 @@ mkdir qdrant-rag-demo
 cd qdrant-rag-demo
 ```
 
-This directory will contain the Python scripts used to generate embeddings and query the vector database.
+The directory will contain the Python scripts used to generate embeddings and query the vector database.
 
 ## Create the ingestion script
 
@@ -108,7 +110,7 @@ print("Documents indexed successfully in Qdrant")
 
 ### What this script does
 
-This script performs several important operations:
+The script performs several important operations:
 
 - Connects to the Qdrant API
 - Creates a vector collection
@@ -128,7 +130,7 @@ The output is similar to:
 Documents indexed successfully in Qdrant!
 ```
 
-This confirms that the vectors have been successfully inserted into the database.
+The output confirms that the vectors have been successfully inserted into the database.
 
 ## Verify the vector collection
 
