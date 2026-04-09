@@ -215,7 +215,7 @@ Flame graphs have no time axis — frame width represents the proportion of tota
 - In `flamegraph1.svg`, look at what fraction of the total width is occupied by `libz` frames. Then check the same in `flamegraph2.svg`. The `zlib-ng` run should show a similar or slightly larger fraction — because the run is 2.6x shorter but the library is still doing the same work. The meaningful comparison is the `perf stat` cycle and time data from the previous section, not the flame graph widths.
 - What the flame graph is useful for is identifying which functions dominate within the `zlib` stack. In `flamegraph1.svg` you should see `crc32_z` as a visible frame. In `flamegraph2.svg` it should be absent or too narrow to label, replaced by `insert_string_roll` as the top frame — confirming the hotspot has shifted from CRC32 to hash insertion after `zlib-ng`'s ARMv8 CRC32 acceleration removes the previous bottleneck.
 
-## What you've learned and what's next
+## What you've learned
 
 In this Learning Path, you replaced the system `zlib` with `zlib-ng` on an Arm server and measured the performance improvement.
 
