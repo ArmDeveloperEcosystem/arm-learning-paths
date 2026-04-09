@@ -1,12 +1,12 @@
 ---
-title: Understand the cache hierarchy
+title: Analyze Arm cache hierarchy and performance characteristics
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Cache levels and performance clifs
+## Cache levels and performance cliffs
 
 Each memory access is satisfied by the closest level of the hierarchy that contains the requested data. If the data is not found in the private caches, the request falls through to the next cache level and eventually to DRAM. Each level trades capacity for speed: L1 is tiny but fast, L2 is larger but slower, and L3 (or a system-level cache) is the largest on-chip cache but has the highest latency. Understanding this hierarchy for your specific system tells you where performance "cliffs" will occur as your working set grows.
 
@@ -80,7 +80,7 @@ When you access a single byte, the hardware fetches an entire 64-byte cache line
 
 A 4-way set associative cache can hold 4 lines that map to the same set. If your access pattern happens to map many addresses to the same set, lines get evicted even though the cache isn't full. Conflict misses are less likely with randomized pointer-chase patterns, but can still occur depending on address distribution and cache indexing, making this concept worth understanding.
 
-### Prefetching
+### Hardware prefetching and cache performance
 
 Modern Arm cores have hardware prefetchers that detect sequential and strided access patterns. They pull data into the cache before the CPU requests it, which can mask latency for predictable patterns. The pointer-chase benchmark in the next section defeats prefetching by design, giving you the true hardware latency rather than the prefetcher-assisted latency.
 

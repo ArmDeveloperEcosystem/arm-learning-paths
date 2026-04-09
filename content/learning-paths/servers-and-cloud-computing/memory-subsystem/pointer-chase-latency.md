@@ -1,5 +1,5 @@
 ---
-title: Measure cache and memory latency with a pointer chase
+title: Measure Arm cache and memory latency using ASCT pointer chase
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -74,7 +74,7 @@ Latency sweep for Graviton4:
 
 Your actual numbers will differ. The important pattern is the steps in latency as the working set exceeds each cache level.
 
-## Interpret the results
+## Interpret cache latency measurements
 
 Graviton2 uses Neoverse N1 cores with a 64 KB L1D, 1 MB private L2, and a 32 MB shared L3. DRAM is DDR4.
 

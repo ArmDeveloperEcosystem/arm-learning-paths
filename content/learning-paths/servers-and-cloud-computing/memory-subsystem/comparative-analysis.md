@@ -1,12 +1,12 @@
 ---
-title: Compare systems and draw conclusions
+title: Compare Arm memory subsystem performance across systems
 weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Bringing it all together
+## Complete memory subsystem analysis workflow
 
 You now have a complete set of memory subsystem measurements for each of your test systems. This section shows how to collect all results in one pass, compare systems using ASCT's built-in diff tool, and draw meaningful architectural conclusions.
 
@@ -149,15 +149,15 @@ Collect the key measurements from each system into a comparison table:
 
 The conclusions below are from running ASCT on AWS EC2 instances that are easily available for you to try so you can learn the process and learn how to think about the results. There are many more details that go into CPU microarchitecture and system design that are not covered here, but this is a good way to get an initial understanding of the memory system of an Arm Linux server. 
 
-### Latency
+### Latency analysis across generations
 
 The latency measurements from `latency-sweep` reveal how each generation's cache hierarchy performs. L1 latency is similar across both generations (1.6 ns vs 1.4 ns) because L1 caches are designed for very low latency, so the small difference reflects clock speed rather than cache microarchitecture. L2 latency improves by 27% on Graviton4 (4.0 ns vs 5.4 ns): Neoverse V2 has a 2 MB private L2 compared to Neoverse N1's 1 MB, and despite the larger size, the improved cache pipeline delivers lower latency. LLC latency improves by 24% on Graviton4 (21.8 ns vs 28.8 ns) even though the L3 is only slightly larger (36 MB vs 32 MB), which reflects microarchitectural improvements in the Neoverse V2 cache interconnect. DRAM latency is higher on Graviton4 (114.6 ns vs 95.5 ns, +20%) because DDR5 trades slightly higher access latency for significantly more bandwidth per channel compared to DDR4.
 
-### Loaded latency
+### Loaded latency comparison
 
 The `loaded-latency` results reveal the latency-bandwidth tradeoff. At low load (~3000 NOPs), latency matches the idle DRAM latency from `latency-sweep` (96.7 ns for Graviton2, 115.1 ns for Graviton4), confirming the two benchmarks are consistent. The knee on Graviton2 occurs between 70 and 50 NOPs, where latency nearly doubles from 134 ns to 266 ns before climbing to 344 ns at saturation. On Graviton4 the knee occurs between 30 and 20 NOPs at a much higher bandwidth (~340 GB/s vs ~126 GB/s on Graviton2), and latency plateaus around 190–198 ns at saturation rather than continuing to climb, suggesting the DDR5 memory controllers handle queue saturation more gracefully. Despite Graviton4's higher idle DRAM latency, its latency at saturation is 43% lower than Graviton2's (197 ns vs 344 ns), making it the better choice for workloads that operate near memory bandwidth limits.
 
-### Bandwidth
+### Bandwidth comparison across systems
 
 Single-core bandwidth from `bandwidth-sweep` shows the throughput capacity at each cache level. L1 bandwidth doubles on Graviton4 (321 vs 159 GB/s, +101%), likely reflecting a combination of higher clock speed and microarchitectural throughput improvements in Neoverse V2. L2 bandwidth improves by 29% (95 vs 73 GB/s) due to the wider L2 fill path, and LLC bandwidth more than doubles (80 vs 36 GB/s, +123%), reflecting improvements in the interconnect and shared cache design. Single-core DRAM bandwidth improves by 77% (37 vs 21 GB/s) because Neoverse V2 supports more outstanding memory requests than Neoverse N1 and DDR5 provides more bandwidth per channel than DDR4.
 

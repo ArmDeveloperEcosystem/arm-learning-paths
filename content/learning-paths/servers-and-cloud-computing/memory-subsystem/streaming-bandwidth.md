@@ -1,5 +1,5 @@
 ---
-title: Measure single-core streaming bandwidth
+title: Measure Arm single-core memory bandwidth with ASCT
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -52,7 +52,7 @@ Datasize Used Level Bandwidth [GB/s]
 
 Look at the stepping pattern: high bandwidth for L1, a lower plateau for L2, a further drop at the LLC, and then the DRAM floor.
 
-## Interpret the results
+## Interpret bandwidth benchmark results
 
 The `bandwidth-sweep` benchmark reports the bandwidth at the optimal data size for each cache level, using the boundaries that `latency-sweep` identified.
 
@@ -63,7 +63,7 @@ Key differences to look for between Graviton2 and Graviton4:
 - **LLC bandwidth**: Graviton4 more than doubles the LLC bandwidth of Graviton2, reflecting improvements in the interconnect and shared cache design on Neoverse V2.
 - **DRAM bandwidth (single core)**: Graviton4 achieves higher single-core DRAM throughput because Neoverse V2 supports more outstanding memory requests than Neoverse N1, and DDR5 provides more bandwidth per channel than DDR4.
 
-### Bytes per cycle
+### Convert bandwidth to bytes per cycle
 
 To convert GB/s to bytes per cycle, use your core's clock speed:
 

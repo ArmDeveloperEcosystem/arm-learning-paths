@@ -1,5 +1,5 @@
 ---
-title: Measure multi-core bandwidth and loaded latency
+title: Measure Arm multi-core memory bandwidth and loaded latency with ASCT
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -19,7 +19,7 @@ ASCT includes two benchmarks that characterize multi-core memory behavior:
 
 Both benchmarks depend on `latency-sweep` to determine the optimal data size for targeting DRAM. ASCT runs it automatically as a dependency.
 
-## Peak bandwidth
+## Measure peak system memory bandwidth
 
 The `peak-bandwidth` benchmark makes full use of all cores to measure the maximum system bandwidth. It tests multiple traffic patterns to show how the mix of reads and writes affects peak throughput.
 
@@ -63,7 +63,7 @@ Graviton4 with DDR5 delivers roughly 2.7x the peak all-reads bandwidth of Gravit
 
 Compare the "All Reads" figure with the theoretical peak bandwidth reported by `asct system-info` to see how close each system gets to its maximum. Well-configured systems typically achieve 85-95% of theoretical peak with all-read traffic.
 
-## Loaded latency
+## Measure memory latency under bandwidth load
 
 The `loaded-latency` benchmark measures how memory latency changes as other cores generate increasing bandwidth pressure. It pins a latency-measuring thread on the last core of the first NUMA node and uses the remaining cores to generate background memory traffic. The traffic intensity is controlled by interleaving memory reads with different numbers of no-operation (NOP) instructions. More NOPs means less bandwidth pressure.
 

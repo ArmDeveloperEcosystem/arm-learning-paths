@@ -1,5 +1,5 @@
 ---
-title: Identify the system topology and configuration
+title: Identify Arm CPU topology, cache hierarchy, and NUMA configuration
 weight: 2
 
 ### FIXED, DO NOT MODIFY
