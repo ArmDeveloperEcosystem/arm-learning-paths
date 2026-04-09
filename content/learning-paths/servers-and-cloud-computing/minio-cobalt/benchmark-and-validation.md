@@ -6,11 +6,9 @@ weight: 6
 layout: learningpathall
 ---
 
-## Evaluate MinIO performance and S3 compatibility
+## Benchmark MinIO throughput on Azure Cobalt 100
 
 In this section, you evaluate MinIO's performance and validate its compatibility with the Amazon S3 API.
-
-## Benchmark MinIO throughput on Azure Cobalt 100
 
 ### Generate test data
 
