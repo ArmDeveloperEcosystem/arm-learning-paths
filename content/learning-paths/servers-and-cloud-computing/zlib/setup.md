@@ -180,7 +180,7 @@ The `zlib-ng` version identifier will be printed:
 ```output
 1.3.1.zlib-ng
 ```
-The version string includes the `.zlib-ng` suffix to distinguish it from the upstream library.
+The version identifier includes the `.zlib-ng` suffix to distinguish it from the upstream library.
 
 ## What you've learned and what's next
 
