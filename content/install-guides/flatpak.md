@@ -14,13 +14,13 @@ multitool_install_part: false
 
 Flatpak is a framework for distributing Linux applications. It provides distribution-agnostic packaging and a sandboxed runtime, so the same application bundle runs on Ubuntu, Fedora, Arch, and openSUSE without repackaging. [Flathub](https://flathub.org/) is the primary community-maintained repository of Flatpak applications, many of which publish native Arm builds.
 
-## How does Flatpak sandboxing work?
+## How Flatpak sandboxing works
 
 Each Flatpak application runs inside an isolated environment built on three Linux kernel features: namespaces, seccomp, and cgroups. Namespaces give the application its own view of the filesystem, network, and process tree. Seccomp filters restrict the system calls the application can make. Together, these mechanisms prevent an application from reading files outside its sandbox or interfering with other processes on the host.
 
 The sandbox is implemented by [bubblewrap](https://github.com/containers/bubblewrap), a low-level sandboxing tool that Flatpak calls at launch time. Applications declare the permissions they need, such as access to the home directory, the network, or audio devices, in a manifest. You can inspect and override these permissions using `flatpak override`.
 
-## How are Flatpak applications packaged?
+## How Flatpak applications are packaged
 
 A Flatpak application is distributed as an OSTree commit, a content-addressed filesystem tree stored in a local repository. When you install an application, Flatpak fetches only the changed objects from the remote, similar to how Git fetches commits. This makes updates efficient even for large applications.
 
@@ -28,7 +28,7 @@ Applications either bundle their own libraries directly or declare runtime depen
 
 For Arm developers, the key advantage is that Flatpak applications can publish separate builds for `x86_64` and `aarch64` under the same application ID. Flatpak selects the correct architecture automatically at install time.
 
-## How does Flatpak compare to Linux package managers?
+## How Flatpak compares to Linux package managers
 
 Linux package managers like `apt`, `dnf`, and `pacman` are tightly coupled to the distribution release cycle. An application packaged for Ubuntu 24.04 may lag the upstream version, and some applications aren't packaged for every Linux distribution. Flatpak addresses this by letting upstream developers publish and maintain their own builds directly on Flathub. This allows you to get the current release of an application on any supported Linux distribution.
 
@@ -50,7 +50,7 @@ The output should be:
 aarch64
 ```
 
-## How do I install Flatpak?
+## Install Flatpak
 
 The installation steps depend on your Linux distribution.
 
@@ -98,13 +98,13 @@ Confirm Flatpak is available and check the version:
 flatpak --version
 ```
 
-The output will look similar to:
+The output is similar to:
 
 ```output
 Flatpak 1.16.1
 ```
 
-## How do I add the Flathub remote?
+## Add Flathub repository as remote 
 
 Add the Flathub repository as a remote source:
 
@@ -125,7 +125,7 @@ Name    Options
 flathub system
 ```
 
-## How do I install the VSCodium Flatpak?
+## Install the VSCodium Flatpak
 
 [VSCodium](https://vscodium.com/) is the telemetry-free build of VS Code, available on Flathub with a native Arm build, making it a useful application to test. 
 
@@ -185,7 +185,7 @@ Now, run using the alias:
 codium . &
 ```
 
-## What are some other useful Flatpak commands? 
+## Useful Flatpak commands
 
 If an installation becomes corrupted or incomplete, run `flatpak repair` to check your local Flatpak installation and fix any inconsistencies:
 
@@ -211,7 +211,7 @@ To open an interactive shell inside an application's sandbox, which is useful fo
 flatpak run --command=bash com.vscodium.codium
 ```
 
-Note that not all applications include `bash` in their sandbox, so this command may not work for every Flatpak. Your shell prompt may not look any different, but you are in the sandbox. To confirm run:
+Note that not all applications include `bash` in their sandbox, so this command may not work for every Flatpak. Your shell prompt may not look any different, but you are in the sandbox. To confirm, run:
 
 ```bash 
 ls /app
@@ -232,7 +232,7 @@ BUG_REPORT_URL=https://gitlab.com/freedesktop-sdk/freedesktop-sdk/issues
 
 The `/app` directory contains the application runtime files, and the `os-release` file shows the Flatpak runtime rather than the host OS. 
 
-## How can I find Arm-native applications on Flathub?
+## Find Arm-native applications on Flathub
 
 Flatpak makes it straightforward to discover which applications support aarch64. Visit the [Flathub app browser](https://flathub.org/apps) and filter by architecture to find applications with native Arm builds. You can also search from the command line after adding the Flathub remote:
 
