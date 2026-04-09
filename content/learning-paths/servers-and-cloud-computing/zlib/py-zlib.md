@@ -47,7 +47,7 @@ with open('largefile', 'rb') as f_in:
 
 f_out.close()
 ```
-The Python file compression application will read the input file named `largefile` and write a compressed version as `largefile.gz`.
+The Python file compression application will read `largefile` as input and write a compressed version as `largefile.gz`.
 
 ## Compress the file using the Python application and default zlib
 
