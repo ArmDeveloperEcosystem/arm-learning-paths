@@ -7,9 +7,16 @@ layout: "learningpathall"
 
 ## Overview
 
-Most Linux distributions ship `zlib` without Arm-specific optimizations. This means instruction extensions such as Neon SIMD and ARMv8 CRC32 are not used, leaving significant performance on the table for compression-heavy workloads.
+Most Linux distributions ship `zlib` without Arm-specific optimizations. This means instruction extensions such as Neon Single Instruction Multiple Data (SIMD) and ARMv8 CRC32 are not used, leaving significant performance on the table for compression-heavy workloads.
 
-`zlib-ng` is an actively maintained fork of zlib designed for modern systems. It includes Neon SIMD acceleration for adler32, inflate chunk copying, and hash operations, plus ARMv8 CRC32 and PMULL acceleration. It also supports a zlib-compatible API mode, allowing you to use it as a drop-in replacement without recompiling your applications.
+Designed for modern systems, `zlib-ng` is an actively maintained fork of `zlib` that includes the following enhancements:
+ 
+ - Neon SIMD acceleration for adler32
+ - Inflate chunk copying
+ - Hash operations
+ - ARMv8 CRC32 and PMULL acceleration
+ 
+ `zlib-ng` also supports a zlib-compatible API mode, allowing you to use it as a drop-in replacement without recompiling your applications.
 
 ## Confirm Arm SIMD capabilities in the processor
 
@@ -23,7 +30,7 @@ lscpu | grep -E "asimd|crc32"
 
 The `asimd` flag indicates Neon (Advanced SIMD) support. The `crc32` flag confirms hardware-accelerated CRC32. Both are present on all modern Arm server platforms, including AWS Graviton, Azure Cobalt 100, and Google Axion.
 
-## Check what the default zlib contains
+## Install prerequisite packages and inspect default zlib library
 
 Install the packages you need for this Learning Path:
 
@@ -40,7 +47,7 @@ You can inspect the default library with `objdump` to see whether it contains an
 objdump -d /usr/lib/aarch64-linux-gnu/libz.so.1 | grep -cE "crc32|pmull|v[0-9]+\.(16b|8b|8h|4h|4s|2s|2d|1d)"
 ```
 
-Recent Ubuntu releases on aarch64 typically return a non-zero value here — the system `zlib` has *some* Neon code, but the coverage is partial. `zlib-ng` provides dedicated Neon paths for adler32, inflate chunk copying, slide hash, and compare256, with significantly more instruction-level parallelism than the default library. Installing `zlib-ng` is worthwhile on any Arm server regardless of what the system `zlib` already contains.
+Recent Ubuntu releases on aarch64 typically return a non-zero value here — the system `zlib` has *some* Neon code, but the coverage is partial. `zlib-ng` provides dedicated Neon paths for adler32, inflate chunk copying, slide hash, and compare256, with significantly more instruction-level parallelism than the default library. This makes installing `zlib-ng` worthwhile on any Arm server regardless of what the system `zlib` already contains.
 
 ## Build and install zlib-ng
 
@@ -93,7 +100,7 @@ The output will show both the system `zlib` and the newly installed `zlib-ng`:
 
 ## Configure and test zlib-ng
 
-Since `zlib-ng` is a shared library, you can configure which version an application uses without relinking it.
+Because `zlib-ng` is a shared library, you can configure which version an application uses without relinking it.
 
 Navigate back to your home directory before creating the test files:
 
@@ -137,7 +144,7 @@ Run the program to confirm the system `zlib` version:
 ./test
 ```
 
-The output will be the version of the system library, for example:
+The output will be the version of the system library. For example:
 
 ```output
 1.3
@@ -168,10 +175,14 @@ LD_PRELOAD=/usr/local/lib/libz.so.1 ./test
 
 The `LD_PRELOAD` environment variable tells the dynamic linker to load this library before the system default.
 
-The `zlib-ng` version identifier will print. The version string includes the `.zlib-ng` suffix to distinguish it from the upstream library:
+The output shows the `zlib-ng` version:
 
 ```output
 1.3.1.zlib-ng
 ```
+The version identifier includes the `.zlib-ng` suffix to distinguish it from the upstream library.
 
-In the next section you will use `zlib-ng` to accelerate a Python application doing data compression.
+## What you've learned and what's next
+
+In this section, you built, installed, and tested `zlib-ng`. 
+In the next section you will use `zlib-ng` to accelerate a Python application that does data compression.

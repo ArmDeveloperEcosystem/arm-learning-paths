@@ -4,27 +4,36 @@ title: Improve Python application performance using zlib-ng
 weight: 3
 ---
 
+## Reduce time taken by a Python application to compress data
+
+In the previous section, you learned how to build `zlib-ng` with Neon SIMD and ARMv8 CRC32 optimizations enabled.
+
+In this section, you will accelerate the performance of an example Python application that compresses a large file and measure the performance difference when using `zlib-ng`.
+
 ## Install necessary software packages
 
-Make sure `python3` is available when `python` is run:
+Ensure that `python3` is available when you run `python`:
 
 ```bash
 sudo apt install python-is-python3 -y
 ```
 
-## Compress files with Python and zlib-ng
-
-The previous section explained how to build `zlib-ng` with Neon SIMD and ARMv8 CRC32 optimizations enabled.
-
-Use a Python example and measure the performance difference with `zlib-ng`.
+## Create a large file to compress
 
 Navigate to your home directory before creating the example files:
 
 ```bash
 cd $HOME
 ```
+To create an input file called `largefile`, use the `dd` command.
 
-Use a text editor to copy and save the code below in a file named `zip.py`.
+```bash
+dd if=/dev/zero of=largefile count=1M bs=1024
+```
+
+## Create an example Python file compression application
+
+To create the Python application for compressing `largefile`, use a text editor to copy and save the following code in a file named `zip.py`.
 
 ```python { file_name="zip.py" }
 import gzip
@@ -38,20 +47,11 @@ with open('largefile', 'rb') as f_in:
 
 f_out.close()
 ```
+The Python file compression application will read `largefile` as input and write a compressed version as `largefile.gz`.
 
-## Create a large file to compress
+## Compress the file using the Python application and default zlib
 
-The above Python code will read a file named `largefile` and write a compressed version as `largefile.gz`.
-
-To create the input file, use the `dd` command.
-
-```bash
-dd if=/dev/zero of=largefile count=1M bs=1024
-```
-
-## Run the example using the default zlib
-
-Run with the default `zlib` and time the execution.
+Run `zip.py` with the default `zlib` and time the execution.
 
 ```bash
 time python zip.py
@@ -67,7 +67,7 @@ sys     0m0.117s
 
 Make a note of the `real` time.
 
-## Run the example again with zlib-ng
+## Compress the file again using the Python application and zlib-ng
 
 This time, use `LD_PRELOAD` to switch to `zlib-ng` and measure the performance difference.
 
@@ -84,7 +84,10 @@ real    0m1.759s
 user    0m1.654s
 sys     0m0.105s
 ```
+In this example, `zlib-ng` reduces compression time from 4.6 seconds to 1.8 seconds, roughly a 2.6x improvement — driven by the Neon-accelerated adler32 and inflate chunk copy routines.
 
-Compare the `real` time against the default `zlib` run. In this example, `zlib-ng` reduces compression time from 4.6 seconds to 1.8 seconds, roughly a 2.6x improvement — driven by the Neon-accelerated adler32 and inflate chunk copy routines.
+## What you've learned and what's next
 
-The next section introduces how to use Linux `perf` to profile applications and look for `zlib` activity.
+In this section, you used `zlib-ng` to accelerate the performance of an example Python file compression application. You compared the difference in performance between `zlib` and `zlib-ng`.
+
+In the next section, you will learn how to use Linux `perf` to profile applications and look for `zlib` activity.

@@ -4,6 +4,12 @@ title: Use perf to analyze zlib-ng performance
 weight: 4
 ---
 
+## Analyze performance improvements with perf
+
+In the previous section, you learned how to use `zlib-ng` to improve the performance of a Python application for compressing large files.
+
+In this section, you will use `perf` to analyze the performance of the application.
+
 ## Install necessary software packages
 
 Install Linux `perf`:
@@ -12,9 +18,9 @@ Install Linux `perf`:
 sudo apt install linux-tools-common linux-tools-generic linux-tools-`uname -r` -y
 ```
 
-For more information about installing `perf` review [Perf for Linux on Arm](/install-guides/perf/).
+For more information about installing `perf`, review [Perf for Linux on Arm](/install-guides/perf/).
 
-Allow user access to PMU (Performance Monitoring Unit) registers and kernel symbol addresses:
+Allow user access to Performance Monitoring Unit (PMU) registers and kernel symbol addresses:
 
 ```console
 sudo sh -c "echo '1' > /proc/sys/kernel/perf_event_paranoid"
@@ -23,19 +29,17 @@ sudo sh -c "echo '0' > /proc/sys/kernel/kptr_restrict"
 
 The first setting allows unprivileged access to PMU counters. The second allows `perf` to read kernel symbol addresses from `/proc/kallsyms`, which is needed for complete call graph resolution in flame graphs.
 
-For more information refer to the [Linux kernel documentation](https://www.kernel.org/doc/html/latest/admin-guide/sysctl/kernel.html#perf-event-paranoid).
+For more information, refer to the [Linux kernel documentation](https://www.kernel.org/doc/html/latest/admin-guide/sysctl/kernel.html#perf-event-paranoid).
 
 ## Profile the default zlib with perf
 
-The previous section explained how to run a Python program to compress large files and measure performance with `zlib-ng`. Now use `perf` to look at the performance.
-
-Continue with the same `zip.py` program as the previous section. Make sure to start with `zip.py` and `largefile` available. Confirm the application is working and `largefile.gz` is created when it is run.
+Make sure that the `zip.py` program and `largefile` from the [previous section](/learning-paths/servers-and-cloud-computing/zlib/py-zlib/) are available. Confirm the application is working and `largefile.gz` is created when it is run.
 
 ```console
 python zip.py
 ```
 
-## Run the example with perf using the default zlib
+## Run the example with perf stat using the default zlib
 
 Run `perf stat` with a set of basic hardware events that are reliably available on virtualized Arm instances:
 
@@ -65,7 +69,7 @@ The output is similar to:
        0.126034000 seconds sys
 ```
 
-## Use perf record and generate the flame graph
+## Use perf record and generate a flame graph for zlib
 
 You can also record the application activity with `perf record`. `-F` specifies the sampling frequency and `--call-graph dwarf` collects call graphs using DWARF debug info, which works more reliably than frame pointers for Python on Arm cloud VMs:
 
@@ -74,7 +78,7 @@ perf record -F 99 --call-graph dwarf python ./zip.py
 ```
 
 {{% notice Note %}}
-On cloud VMs you may see warnings about kernel address maps and `kptr_restrict` even after setting it to 0. These are non-fatal — `perf record` still captures userspace samples successfully. Kernel frames in the flame graph may be unresolved, but the `zlib` and Python frames that matter for this analysis will be present.
+On cloud VMs, you may see warnings about kernel address maps and `kptr_restrict` even after setting it to 0. These are non-fatal — `perf record` still captures userspace samples successfully. Kernel frames in the flame graph may be unresolved, but the `zlib` and Python frames that matter for this analysis will be present.
 {{% /notice %}}
 
 To visualize the results, install `FlameGraph`:
@@ -99,7 +103,7 @@ The line count should be greater than 0. Then generate the flame graph:
 
 Copy the file `flamegraph1.svg` to your computer and open it in a browser or another image application.
 
-## Look at the report
+## Inspect the perf report
 
 As an alternative, use `perf report` to inspect the profiling data:
 
@@ -117,11 +121,11 @@ The output is similar to:
 
 The key observation is that `libz.so.1.3` accounts for a large share of the self time — roughly 43% in the primary deflate path and another 8% in `crc32_z`. This confirms that `zlib` compression is the dominant hotspot in the workload, and that the CRC32 calculation alone is a measurable fraction of total runtime. The many `[unknown]` frames are Python interpreter internals that `perf` cannot resolve without debug symbols, but they do not affect the conclusion.
 
-In the next section you will run the same workload with `zlib-ng` and compare the hotspot profile.
+In the next step, you will run the same workload with `zlib-ng` and compare the hotspot profile.
 
 ## Run the example again with perf stat and zlib-ng
 
-This time use `LD_PRELOAD` to switch to `zlib-ng` and check the performance difference.
+This time, use `LD_PRELOAD` to switch to `zlib-ng` and check the performance difference.
 
 ```console
 LD_PRELOAD=/usr/local/lib/libz.so.1 perf stat -e cycles,instructions,cache-references,cache-misses python ./zip.py
@@ -149,7 +153,7 @@ Comparing against the default `zlib` run:
 |---|---|---|---|
 | Cycles | 12,984,652,076 | 4,897,544,240 | -62% |
 | Instructions | 45,063,797,078 | 20,992,552,372 | -53% |
-| IPC | 3.47 | 4.29 | +24% |
+| Instructions Per Cycle (IPC) | 3.47 | 4.29 | +24% |
 | Cache references | 20,161,747,365 | 7,522,040,735 | -63% |
 | Elapsed time | 4.85s | 1.83s | -62% |
 
@@ -176,10 +180,11 @@ The output is similar to:
 There are two significant changes compared to the default `zlib` report:
 
 - **`libz.so.1.3.1.zlib-ng` is now named in the report**, confirming that `LD_PRELOAD` loaded `zlib-ng` correctly. The default `zlib` report showed an unresolved address at 43% self time; here the same hotspot is identified as `insert_string_roll` — `zlib-ng`'s Neon-accelerated hash chain insertion function.
-
 - **`crc32_z` has disappeared from the top entries entirely.** In the default `zlib` run, `crc32_z` accounted for 8.37% of samples. With `zlib-ng`, ARMv8 hardware CRC32 instructions execute fast enough that CRC32 no longer appears as a measurable hotspot.
 
-The 64.40% figure for `insert_string_roll` looks higher than the 43% from the default `zlib` run, but `perf report` percentages are relative to samples collected *within that run*, not across runs. The zlib-ng run completed in 1.83 seconds versus 4.85 seconds for the default `zlib`. The `-F 99` flag used in the `perf record` command sets a sampling frequency of 99 Hz, so the number of samples collected is roughly proportional to the run duration — approximately 181 samples for zlib-ng versus 480 for the default `zlib`. The absolute sample counts tell a different story:
+The 64.40% figure for `insert_string_roll` looks higher than the 43% from the default `zlib` run, but `perf report` percentages are relative to samples collected *within that run*, not across runs. The `zlib-ng` run completed in 1.83 seconds versus 4.85 seconds for the default `zlib`. 
+
+The `-F 99` flag used in the `perf record` command sets a sampling frequency of 99 Hz, so the number of samples collected is roughly proportional to the run duration — approximately 181 samples for zlib-ng versus 480 for the default `zlib`. The absolute sample counts tell a different story:
 
 | Function | Default zlib | zlib-ng |
 |---|---|---|
@@ -188,11 +193,14 @@ The 64.40% figure for `insert_string_roll` looks higher than the 43% from the de
 
 The function received *fewer* absolute samples with `zlib-ng`, meaning less real time was spent there. It appears as a higher percentage only because the total run time — and therefore total samples — shrank so much.
 
-## Generate the new flame graph
+## Generate a new flame graph for zlib-ng
+
+Run `perf record` again with `zlib-ng`:
 
 ```console
 LD_PRELOAD=/usr/local/lib/libz.so.1 perf record -F 99 --call-graph dwarf python ./zip.py
 ```
+Convert the recorded data to folded stacks and verify the output is non-empty before generating the SVG:
 
 ```console
 perf script > out.perf-script
@@ -205,10 +213,10 @@ Copy the file `flamegraph2.svg` to your computer. Open it in a browser or other 
 Flame graphs have no time axis — frame width represents the proportion of total samples, and each SVG scales to fill its full width regardless of how long the run took. This means you cannot compare absolute widths across the two graphs. What you can compare is the *relative proportion* that `zlib` occupies within each graph:
 
 - In `flamegraph1.svg`, look at what fraction of the total width is occupied by `libz` frames. Then check the same in `flamegraph2.svg`. The `zlib-ng` run should show a similar or slightly larger fraction — because the run is 2.6x shorter but the library is still doing the same work. The meaningful comparison is the `perf stat` cycle and time data from the previous section, not the flame graph widths.
-- **What the flame graph is useful for here** is identifying which functions dominate within the `zlib` stack. In `flamegraph1.svg` you should see `crc32_z` as a visible frame. In `flamegraph2.svg` it should be absent or too narrow to label, replaced by `insert_string_roll` as the top frame — confirming the hotspot has shifted from CRC32 to hash insertion after `zlib-ng`'s ARMv8 CRC32 acceleration removes the previous bottleneck.
+- What the flame graph is useful for is identifying which functions dominate within the `zlib` stack. In `flamegraph1.svg` you should see `crc32_z` as a visible frame. In `flamegraph2.svg` it should be absent or too narrow to label, replaced by `insert_string_roll` as the top frame — confirming the hotspot has shifted from CRC32 to hash insertion after `zlib-ng`'s ARMv8 CRC32 acceleration removes the previous bottleneck.
 
-## Summary
+## What you've learned
 
-In this Learning Path you replaced the system `zlib` with `zlib-ng` on an Arm server and measured the performance improvement.
+In this Learning Path, you replaced the system `zlib` with `zlib-ng` on an Arm server and measured the performance improvement.
 
 `zlib-ng` is built for modern Arm platforms. Its Neon SIMD and ARMv8 CRC32 acceleration deliver significantly faster compression than the default system library, without requiring any changes to your application code. Using `LD_PRELOAD` makes it straightforward to test and adopt `zlib-ng` for any dynamically linked application. Python, nginx, PostgreSQL, and many others all benefit from the same approach.
