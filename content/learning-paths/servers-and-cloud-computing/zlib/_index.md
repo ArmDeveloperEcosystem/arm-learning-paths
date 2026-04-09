@@ -1,5 +1,5 @@
 ---
-title: Improve data compression performnce on Arm servers with zlib-ng
+title: Improve data compression performance on Arm servers with zlib-ng
 
 description: Learn how to build and use zlib-ng on Arm servers, using its Neon SIMD and ARMv8 CRC32 optimizations to improve compression performance compared to the system default zlib.
 
