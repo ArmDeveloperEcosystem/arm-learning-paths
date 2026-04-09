@@ -142,7 +142,7 @@ On Graviton4, the knee appears between 30 and 20 injected NOPs, where latency ju
 
 Graviton4 has higher idle DRAM latency than Graviton2 (approximately 115 ns vs 96 ns), which is consistent with the `latency-sweep` results. Despite this higher baseline latency, Graviton4's knee occurs at a much higher absolute bandwidth (around 340 GB/s vs 126 GB/s), giving significantly more headroom for bandwidth-sensitive workloads before latency degrades.
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 In this section you:
 - Measured peak system bandwidth across multiple traffic patterns with `peak-bandwidth`

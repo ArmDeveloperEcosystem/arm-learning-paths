@@ -359,7 +359,7 @@ Below is a summary of each system.
 | L3 (shared) | 32 MB | 36 MB |
 | DRAM type | DDR4 | DDR5 |
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 In this section you:
 - Identified the CPU model, core count, and NUMA topology of your test systems

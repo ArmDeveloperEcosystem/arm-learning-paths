@@ -87,7 +87,7 @@ To run all bandwidth benchmarks at once:
 sudo asct run bandwidth
 ```
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 In this section you:
 - Ran the ASCT `bandwidth-sweep` benchmark to measure single-core streaming bandwidth at each cache level

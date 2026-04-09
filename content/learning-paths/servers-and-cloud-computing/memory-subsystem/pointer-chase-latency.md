@@ -117,7 +117,7 @@ You can view the full list of available benchmarks and their keywords with:
 asct list
 ```
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 In this section you:
 - Ran the ASCT `latency-sweep` benchmark to measure pointer-chase latency across the full cache hierarchy and DRAM
