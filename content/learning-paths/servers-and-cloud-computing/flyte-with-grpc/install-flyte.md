@@ -1,21 +1,22 @@
 ---
-title: Install Flyte and Dependencies
+title: Install Flyte and gRPC tools on Axion
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
+## Prepare the development environment
 
 In this section, you prepare a SUSE Linux Enterprise Server (SLES) arm64 virtual machine and install the core components required to build machine learning workflow pipelines using Flyte.
 
 Flyte provides workflow orchestration for scalable ML pipelines, while gRPC enables efficient communication between distributed services used within those pipelines.
 
-This environment ensures that the workflow orchestration tools and communication libraries run natively on Arm-based Axion processors.
+Running these tools natively on Arm-based Axion processors ensures efficient execution of ML workflows.
 
 ## Architecture overview
 
-This architecture represents a single-node development environment used to build and run distributed machine learning workflows.
+The development environment consists of a single-node setup used to build and run distributed machine learning workflows.
 
 ```text
 SUSE Linux Enterprise Server (arm64)
