@@ -1,5 +1,5 @@
 ---
-title: Run the Code Hotspots recipe using a GitHub Copilot agent
+title: Run Code Hotspots with an AI agent
 weight: 4
 
 ### FIXED, DO NOT MODIFY

@@ -36,7 +36,7 @@ You can ask your AI assistant direct questions and it will invoke the `apx_recip
 Run the Code Hotspots recipe on /home/ec2-user/Mandelbrot-Example/build/mandelbrot_single_thread_debug and tell me which functions are the hottest
 ```
 
-This is useful for quick, exploratory checks. It works well when you already know the binary path and just want a fast hotspot summary before committing to deeper analysis.
+Direct chat is useful for quick, exploratory checks. It works well when you already know the binary path and just want a fast hotspot summary before committing to deeper analysis.
 
 ### Prompt files
 
