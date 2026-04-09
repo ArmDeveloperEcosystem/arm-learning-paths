@@ -52,7 +52,7 @@ sudo apt install gcc-arm-linux-gnueabihf -y
 sudo apt install gcc-aarch64-linux-gnu -y
 ```
 
-These packages are maintained by Canonical and the GCC version you receive is tied to your Ubuntu release (for example, GCC 13 on Ubuntu 24.04 LTS, GCC 15 on Ubuntu 25.10). This is normal Ubuntu packaging behaviour and is not the same issue as with `arm-none-eabi`.
+These packages are maintained by Canonical and the GCC version you receive is tied to your Ubuntu release (for example, GCC 13 on Ubuntu 24.04 LTS, GCC 15 on Ubuntu 25.10). 
 
 For the bare-metal cross-compiler (`arm-none-eabi`), Arm no longer publishes new releases to Debian or Ubuntu package repositories. The version available through `apt` is older and may not include support for recent Arm cores or architecture features.
 
