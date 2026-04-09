@@ -1,14 +1,14 @@
 ---
-title: Benchmark and validate Redis on Azure Cobalt 100
+title: Benchmark Redis performance on Cobalt 100
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Benchmark and validate Redis performance
+## Validate Redis for production workloads
 
-This section demonstrates how to implement production-grade event processing using Redis Streams consumer groups, simulate real workloads using Python, and benchmark Redis performance on an Azure Cobalt 100 Arm-based virtual machine.
+In this section you implement production-grade event processing using Redis Streams consumer groups, simulate real workloads using Python, and benchmark Redis performance on an Azure Cobalt 100 Arm-based virtual machine.
 
 You will validate Redis for high-throughput, low-latency workloads on Arm infrastructure.
 

@@ -2,10 +2,6 @@
 title: Deploy Redis on Azure Cobalt 100 Arm64 virtual machines for real-time messaging and event processing
 description: Learn how to install and configure Redis on an Azure Cobalt 100 Arm64 virtual machine, implement real-time messaging with Pub/Sub and Streams, and benchmark throughput and latency on Arm infrastructure.
 
-draft: true
-cascade:
-    draft: true
-    
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for developers, DevOps engineers, and platform engineers who want to build real-time messaging systems and event-driven applications using Redis on Arm-based cloud environments.

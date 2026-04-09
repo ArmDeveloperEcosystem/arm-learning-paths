@@ -1,14 +1,14 @@
 ---
-title: Deploy Redis on Azure Cobalt 100
+title: Install Redis and build messaging pipelines
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Deploy Redis on Azure Cobalt 100 (Arm)
+## Deploy real-time messaging with Redis on Cobalt 100
 
-This section guides you through installing Redis on an Azure Cobalt 100 Arm-based virtual machine and building a real-time messaging and event processing system using Redis Pub/Sub and Streams.
+In this section you install Redis on an Azure Cobalt 100 Arm-based virtual machine and build a real-time messaging and event processing system using Redis Pub/Sub and Streams.
 
 You will implement low-latency messaging and event-driven pipelines optimized for Arm-based infrastructure.
 
@@ -96,7 +96,7 @@ The output is similar to:
 PONG
 ```
 
-This confirms that Redis is running and accepting connections.
+The output confirms that Redis is running and accepting connections.
 
 ## Implement real-time messaging using Pub/Sub
 
@@ -201,7 +201,7 @@ The output is similar to:
             4) "purchase"
 ```
 
-This confirms that events are stored and can be read reliably.
+The output confirms that events are stored and can be read reliably.
 
 ## Key differences between Pub/Sub and Streams
 

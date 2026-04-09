@@ -1,10 +1,14 @@
 ---
-title: Overview of Azure Cobalt 100 and Redis
+title: Understand Redis on Azure Cobalt 100
 
 weight: 2
 
 layout: "learningpathall"
 ---
+
+## Why run Redis on Azure Cobalt 100
+
+Redis on Arm-based Azure Cobalt 100 processors delivers high-performance, low-latency data operations for real-time messaging and event processing. Cobalt 100's dedicated physical cores per vCPU provide consistent performance that suits Redis's in-memory architecture and event-driven workloads.
 
 ## Azure Cobalt 100 Arm-based processor
 
