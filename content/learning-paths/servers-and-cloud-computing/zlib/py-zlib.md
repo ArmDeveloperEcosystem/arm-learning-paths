@@ -51,7 +51,7 @@ f_out.close()
 
 ## Compress the file using the Python application and default zlib
 
-Run with the default `zlib` and time the execution.
+Run `zip.py` with the default `zlib` and time the execution.
 
 ```bash
 time python zip.py
