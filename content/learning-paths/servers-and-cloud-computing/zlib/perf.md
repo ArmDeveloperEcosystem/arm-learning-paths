@@ -213,7 +213,7 @@ Copy the file `flamegraph2.svg` to your computer. Open it in a browser or other 
 Flame graphs have no time axis — frame width represents the proportion of total samples, and each SVG scales to fill its full width regardless of how long the run took. This means you cannot compare absolute widths across the two graphs. What you can compare is the *relative proportion* that `zlib` occupies within each graph:
 
 - In `flamegraph1.svg`, look at what fraction of the total width is occupied by `libz` frames. Then check the same in `flamegraph2.svg`. The `zlib-ng` run should show a similar or slightly larger fraction — because the run is 2.6x shorter but the library is still doing the same work. The meaningful comparison is the `perf stat` cycle and time data from the previous section, not the flame graph widths.
-- **What the flame graph is useful for here** is identifying which functions dominate within the `zlib` stack. In `flamegraph1.svg` you should see `crc32_z` as a visible frame. In `flamegraph2.svg` it should be absent or too narrow to label, replaced by `insert_string_roll` as the top frame — confirming the hotspot has shifted from CRC32 to hash insertion after `zlib-ng`'s ARMv8 CRC32 acceleration removes the previous bottleneck.
+- What the flame graph is useful for is identifying which functions dominate within the `zlib` stack. In `flamegraph1.svg` you should see `crc32_z` as a visible frame. In `flamegraph2.svg` it should be absent or too narrow to label, replaced by `insert_string_roll` as the top frame — confirming the hotspot has shifted from CRC32 to hash insertion after `zlib-ng`'s ARMv8 CRC32 acceleration removes the previous bottleneck.
 
 ## What you've learned and what's next
 
