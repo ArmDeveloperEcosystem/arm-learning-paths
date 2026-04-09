@@ -1,14 +1,16 @@
 ---
-title: Benchmark and Validate MinIO Storage
+title: Benchmark MinIO storage performance on Azure Cobalt 100
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
+## Evaluate MinIO performance and S3 compatibility
+
 In this section, you evaluate MinIO's performance and validate its compatibility with the Amazon S3 API.
 
-## High-throughput benchmark
+## Benchmark MinIO throughput on Azure Cobalt 100
 
 ### Generate test data
 
