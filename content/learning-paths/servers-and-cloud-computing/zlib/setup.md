@@ -175,12 +175,14 @@ LD_PRELOAD=/usr/local/lib/libz.so.1 ./test
 
 The `LD_PRELOAD` environment variable tells the dynamic linker to load this library before the system default.
 
-The `zlib-ng` version identifier will be printed. The version string includes the `.zlib-ng` suffix to distinguish it from the upstream library:
+The `zlib-ng` version identifier will be printed:
 
 ```output
 1.3.1.zlib-ng
 ```
+The version string includes the `.zlib-ng` suffix to distinguish it from the upstream library.
+
 ## What you've learned and what's next
 
 In this section, you built, installed, and tested `zlib-ng`. 
-In the next section you will use `zlib-ng` to accelerate a Python application doing data compression.
+In the next section you will use `zlib-ng` to accelerate a Python application that does data compression.

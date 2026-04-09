@@ -39,7 +39,7 @@ For more information, refer to the [Linux kernel documentation](https://www.kern
 python zip.py
 ```
 
-## Run the example with perf using the default zlib
+## Run the example with perf stat using the default zlib
 
 Run `perf stat` with a set of basic hardware events that are reliably available on virtualized Arm instances:
 
@@ -183,7 +183,9 @@ There are two significant changes compared to the default `zlib` report:
 
 - **`crc32_z` has disappeared from the top entries entirely.** In the default `zlib` run, `crc32_z` accounted for 8.37% of samples. With `zlib-ng`, ARMv8 hardware CRC32 instructions execute fast enough that CRC32 no longer appears as a measurable hotspot.
 
-The 64.40% figure for `insert_string_roll` looks higher than the 43% from the default `zlib` run, but `perf report` percentages are relative to samples collected *within that run*, not across runs. The zlib-ng run completed in 1.83 seconds versus 4.85 seconds for the default `zlib`. The `-F 99` flag used in the `perf record` command sets a sampling frequency of 99 Hz, so the number of samples collected is roughly proportional to the run duration — approximately 181 samples for zlib-ng versus 480 for the default `zlib`. The absolute sample counts tell a different story:
+The 64.40% figure for `insert_string_roll` looks higher than the 43% from the default `zlib` run, but `perf report` percentages are relative to samples collected *within that run*, not across runs. The `zlib-ng` run completed in 1.83 seconds versus 4.85 seconds for the default `zlib`. 
+
+The `-F 99` flag used in the `perf record` command sets a sampling frequency of 99 Hz, so the number of samples collected is roughly proportional to the run duration — approximately 181 samples for zlib-ng versus 480 for the default `zlib`. The absolute sample counts tell a different story:
 
 | Function | Default zlib | zlib-ng |
 |---|---|---|
