@@ -19,9 +19,11 @@ weight: 4
 
 ## Before you begin
 
-Arm GNU Toolchain is a community-supported, pre-built GNU compiler toolchain for Arm-based CPUs.
+Arm GNU Toolchain is a community-supported, pre-built GNU compiler toolchain for Arm-based CPUs. This guide covers installing the toolchain directly from the [Arm GNU Toolchain downloads page](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads), which is the recommended approach for bare-metal and embedded targets such as `arm-none-eabi`.
 
-There are many versions of the [Arm GNU Toolchain](https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain) available. In general, the latest version is recommended for use, as this will contain the latest optimization improvements, as well as support for the latest Arm IP.
+If you need a cross-compiler targeting Arm Linux (for example `aarch64-linux-gnu` or `arm-linux-gnueabihf`), see the [Cross-compiler](../cross) install guide instead, which installs those toolchains via the Linux package manager.
+
+There are many versions of the [Arm GNU Toolchain](https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain) available. In general, the latest version is recommended, as this will contain the latest optimization improvements and support for the latest Arm IP.
 
 However there are reasons you may wish to use earlier compiler versions, so older versions are also available.
 
@@ -44,18 +46,6 @@ macOS
 Download the correct toolchain variant for your development needs from the [Arm Developer website](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads).
 
 ## How do I install the Arm GNU Toolchain on Linux?
-
-### Use package installer
-
-Many Linux distributions make the toolchain available with their package installers. However they may not be the latest versions or desired variant.
-```command
-sudo apt update
-sudo apt install gcc-arm-none-eabi
-```
-
-If the installed version does not meet your needs, you can install another Arm GNU Toolchain version.
-
-### Manual install {#manual}
 
 Unpack the downloaded file to the install directory. The exact file name will depend on the flavor selected.
 
@@ -148,7 +138,7 @@ Double-click on the installer, such as  `arm-gnu-toolchain-15.2.rel1-mingw-w64-i
 To install silently from the command line, use similar to the following:
 
 ```console
- msiexec /i arm-gnu-toolchain-<version>--mingw-w64-i686-arm-none-eabi.msi EULA=1 /quiet
+ msiexec /i arm-gnu-toolchain-<version>-mingw-w64-i686-arm-none-eabi.msi EULA=1 /quiet
 ```
 
 The zip package is a backup to Windows installer for those who cannot run the installer. You can unzip the package and then run the tools directly.
@@ -161,12 +151,12 @@ To use the Arm GNU Toolchain in conjunction with [Arm Development Studio](https:
 
 ## Get started
 
-To verify the installation is correct enter:
+To verify the installation is correct, enter:
 ```console
 arm-none-eabi-gcc -v
 ```
 
-Additional examples are included in the toolchain installation at:
+Additional examples are included in the toolchain installation. If you installed to `$HOME` using the example above, you can find them at:
 ```console
-${install_dir}/share/gcc-arm-none-eabi/samples
+$HOME/arm-gnu-toolchain-15.2.rel1-aarch64-arm-none-eabi/share/doc/gcc-arm-none-eabi/examples
 ```
