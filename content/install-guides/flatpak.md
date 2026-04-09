@@ -52,6 +52,8 @@ aarch64
 
 ## How do I install Flatpak?
 
+The installation steps depend on your Linux distribution.
+
 ### Ubuntu or Debian
 
 Update your package lists and install Flatpak:
@@ -86,7 +88,7 @@ sudo zypper refresh
 sudo zypper install -y flatpak
 ```
 
-After installing, log out and back in to ensure desktop integration works correctly.
+After installing, log out and log back in to ensure that the desktop integration works correctly.
 
 ## Verify Flatpak is installed
 
