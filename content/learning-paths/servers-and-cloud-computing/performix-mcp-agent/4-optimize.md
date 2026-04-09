@@ -1,12 +1,12 @@
 ---
-title: Apply optimizations and verify improvements
+title: Optimize code with AI-driven profiling feedback
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Apply the agent's proposed optimizations
+## Apply AI-suggested optimizations
 
 In the previous section, the agent identified three optimization opportunities:
 
