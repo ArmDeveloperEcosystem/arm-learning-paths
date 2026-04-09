@@ -241,13 +241,13 @@ On both systems, every core has its own unique L1d, L1i, and L2 index, so those 
 
 ### Visualize the topology with hwloc
 
-The `hwloc` package provides a visual representation. Install it using the package manager:
+The `hwloc` package provides a visual representation of the hardware topology, including CPU cores, cache hierarchies, and NUMA nodes. The graphical output makes it easier to understand how cores are organized and which caches they share. Install it using the package manager:
 
 ```bash
 sudo apt-get install -y hwloc
 ```
 
-Generate a graphical representation of the hierarchy:
+Generate a PNG diagram of the complete hardware hierarchy. The `hwloc-ls` command enumerates the system topology and formats it as a tree diagram showing cores, caches, and memory:
 
 ```bash
 hwloc-ls --of png > topology.png

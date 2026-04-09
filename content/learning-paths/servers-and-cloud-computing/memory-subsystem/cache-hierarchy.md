@@ -78,7 +78,7 @@ When you access a single byte, the hardware fetches an entire 64-byte cache line
 
 ### Associativity and conflict misses
 
-A 4-way set associative cache can hold 4 lines that map to the same set. If your access pattern happens to map many addresses to the same set, lines get evicted even though the cache isn't full. This is less likely with randomized pointer-chase patterns, but can still occur depending on address distribution and cache indexing but worth understanding.
+A 4-way set associative cache can hold 4 lines that map to the same set. If your access pattern happens to map many addresses to the same set, lines get evicted even though the cache isn't full. Conflict misses are less likely with randomized pointer-chase patterns, but can still occur depending on address distribution and cache indexing, making this concept worth understanding.
 
 ### Prefetching
 
