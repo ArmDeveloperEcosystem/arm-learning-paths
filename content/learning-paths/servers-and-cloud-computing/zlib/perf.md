@@ -78,7 +78,7 @@ perf record -F 99 --call-graph dwarf python ./zip.py
 ```
 
 {{% notice Note %}}
-On cloud VMs you may see warnings about kernel address maps and `kptr_restrict` even after setting it to 0. These are non-fatal — `perf record` still captures userspace samples successfully. Kernel frames in the flame graph may be unresolved, but the `zlib` and Python frames that matter for this analysis will be present.
+On cloud VMs, you may see warnings about kernel address maps and `kptr_restrict` even after setting it to 0. These are non-fatal — `perf record` still captures userspace samples successfully. Kernel frames in the flame graph may be unresolved, but the `zlib` and Python frames that matter for this analysis will be present.
 {{% /notice %}}
 
 To visualize the results, install `FlameGraph`:
@@ -95,7 +95,7 @@ perf script > out.perf-script
 wc -l out.perf-folded
 ```
 
-The line count should be greater than 0. Then generate the flame graph:
+The line count should be greater than 0. Then, generate the flame graph:
 
 ```console
 ./FlameGraph/flamegraph.pl out.perf-folded > flamegraph1.svg
