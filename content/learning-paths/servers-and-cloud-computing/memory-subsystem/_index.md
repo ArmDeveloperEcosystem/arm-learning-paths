@@ -15,9 +15,9 @@ learning_objectives:
     - Compare results across Arm systems and draw conclusions
 
 prerequisites:
-    - Two or more Arm Linux systems with root or sudo access. The examples use AWS Graviton2 and Graviton4 instances, but other systems are possible.
-    - Arm System Characterization Tool (ASCT) installed on each system.
-    - A good understanding of CPU memory subsystems, including cache hierarchies, cache lines, and DRAM in the memory hierarchy.
+    - Two or more Arm Linux systems with root or sudo access. The examples use AWS Graviton2 and Graviton4 instances, but other systems are possible
+    - Arm System Characterization Tool (ASCT) installed on each system
+    - A good understanding of CPU memory subsystems, including cache hierarchies, cache lines, and DRAM in the memory hierarchy
 
 author: Jason Andrews
 
