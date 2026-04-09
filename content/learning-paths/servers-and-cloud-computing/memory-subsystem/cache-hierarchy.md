@@ -102,7 +102,7 @@ Compare your `sysfs` findings with the TRM. If the sizes differ, the SoC vendor 
 Arm publishes TRMs on the [Arm Developer documentation portal](https://developer.arm.com/documentation/). Search for the specific core name (for example, "Neoverse N1 TRM" or "Neoverse V2 TRM") to find the detailed cache specifications.
 {{% /notice %}}
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 In this section you:
 - Reviewed the cache hierarchy for Neoverse N1 (Graviton2) and Neoverse V2 (Graviton4)
