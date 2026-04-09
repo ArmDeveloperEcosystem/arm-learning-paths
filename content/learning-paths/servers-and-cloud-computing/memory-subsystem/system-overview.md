@@ -6,6 +6,8 @@ weight: 2
 layout: learningpathall
 ---
 
+## Memory subsystem impact on Arm server performance
+
 Memory behavior is one of the primary determinants of compute performance for memory-bound applications. The CPU-side memory subsystem, including caches, interconnects, and DRAM, directly impact performance. Understanding latency, streaming bandwidth, and how caches and cores share resources is essential for diagnosing bottlenecks and tuning software on Arm servers.
 
 ## Identify CPU, cache, and NUMA topology
