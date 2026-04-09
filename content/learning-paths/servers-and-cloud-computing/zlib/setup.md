@@ -14,7 +14,7 @@ Designed for modern systems, `zlib-ng` is an actively maintained fork of `zlib` 
  - Neon SIMD acceleration for adler32
  - Inflate chunk copying
  - Hash operations
- - ARMv8 CRC32 and PMULL acceleration 
+ - ARMv8 CRC32 and PMULL acceleration
  
  `zlib-ng` also supports a zlib-compatible API mode, allowing you to use it as a drop-in replacement without recompiling your applications.
 
@@ -175,7 +175,7 @@ LD_PRELOAD=/usr/local/lib/libz.so.1 ./test
 
 The `LD_PRELOAD` environment variable tells the dynamic linker to load this library before the system default.
 
-The `zlib-ng` version identifier will be printed:
+The output shows the `zlib-ng` version:
 
 ```output
 1.3.1.zlib-ng
