@@ -7,7 +7,7 @@ layout: "learningpathall"
 
 ## Overview
 
-Most Linux distributions ship `zlib` without Arm-specific optimizations. This means instruction extensions such as Neon SIMD and ARMv8 CRC32 are not used, leaving significant performance on the table for compression-heavy workloads.
+Most Linux distributions ship `zlib` without Arm-specific optimizations. This means instruction extensions such as Neon Single Instruction Multiple Data (SIMD) and ARMv8 CRC32 are not used, leaving significant performance on the table for compression-heavy workloads.
 
 Designed for modern systems, `zlib-ng` is an actively maintained fork of `zlib` that includes the following enhancements:
  
