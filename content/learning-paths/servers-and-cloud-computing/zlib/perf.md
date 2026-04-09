@@ -180,7 +180,6 @@ The output is similar to:
 There are two significant changes compared to the default `zlib` report:
 
 - **`libz.so.1.3.1.zlib-ng` is now named in the report**, confirming that `LD_PRELOAD` loaded `zlib-ng` correctly. The default `zlib` report showed an unresolved address at 43% self time; here the same hotspot is identified as `insert_string_roll` — `zlib-ng`'s Neon-accelerated hash chain insertion function.
-
 - **`crc32_z` has disappeared from the top entries entirely.** In the default `zlib` run, `crc32_z` accounted for 8.37% of samples. With `zlib-ng`, ARMv8 hardware CRC32 instructions execute fast enough that CRC32 no longer appears as a measurable hotspot.
 
 The 64.40% figure for `insert_string_roll` looks higher than the 43% from the default `zlib` run, but `perf report` percentages are relative to samples collected *within that run*, not across runs. The `zlib-ng` run completed in 1.83 seconds versus 4.85 seconds for the default `zlib`. 
