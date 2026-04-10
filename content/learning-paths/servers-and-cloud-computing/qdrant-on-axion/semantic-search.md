@@ -1,21 +1,23 @@
 ---
-title: Perform Semantic Search
+title: Query vector embeddings with semantic search
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
+## Implement semantic similarity queries
+
 In this section, you query the Qdrant vector database using **semantic similarity search**.
 
 Unlike traditional keyword search, semantic search compares vector embeddings to identify the most relevant results based on **meaning and context** rather than exact keyword matches.
 
-This capability enables AI applications such as chatbots, recommendation systems, and knowledge retrieval platforms.
+Semantic search enables AI applications such as chatbots, recommendation systems, and knowledge retrieval platforms.
 
 
 ## Architecture overview
 
-The semantic search workflow retrieves the most relevant documents using vector similarity.
+The workflow retrieves the most relevant documents using vector similarity.
 
 ```text
 User Query
@@ -74,7 +76,7 @@ for point in results.points:
 
 ### What this script does
 
-This script performs the following steps:
+The script performs the following steps:
 
 - Connects to the Qdrant vector database
 - Loads a pretrained transformer embedding model
@@ -96,7 +98,7 @@ Vector databases enable semantic search.
 Qdrant is optimized for vector similarity search.
 ```
 
-This confirms that the system successfully retrieved the most semantically relevant documents.
+The output confirms that the system successfully retrieved the most semantically relevant documents.
 
 ## Why semantic search is powerful
 
@@ -110,7 +112,7 @@ Semantic search uses vector embeddings to capture meaning.
 | Explain Qdrant          | Qdrant is optimized for vector similarity search |
 | How do embeddings work? | Vector databases enable semantic search          |
 
-This allows applications to understand **intent rather than exact wording**.
+Semantic search allows applications to understand **intent rather than exact wording**.
 
 ## What you've learned and what's next
 

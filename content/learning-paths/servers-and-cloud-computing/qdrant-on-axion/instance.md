@@ -1,12 +1,12 @@
 ---
-title: Create a Google Axion C4A arm64 virtual machine on GCP
+title: Create a Google Axion C4A Arm virtual machine
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Provision a Google Axion C4A arm64 virtual machine
+## Provision Axion infrastructure for Qdrant
 
 In this section you'll create a Google Axion C4A arm64 virtual machine on Google Cloud Platform. You'll use the `c4a-standard-4` machine type, which provides 4 vCPUs and 16 GB of memory. This virtual machine hosts your Qdrant applications.
 
@@ -45,7 +45,7 @@ A new browser window opens with a terminal connected to your VM.
 
 ![Browser-based SSH terminal window with black background showing Linux command prompt and Google Cloud branding at top#center](images/gcp-shell.png "Terminal session connected to the VM")
 
-## What you've learned and what's next
+## Summary
 
 In this section:
 

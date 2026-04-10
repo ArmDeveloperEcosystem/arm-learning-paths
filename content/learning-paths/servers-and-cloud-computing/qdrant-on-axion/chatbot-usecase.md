@@ -1,18 +1,18 @@
 ---
-title: Chatbot Use Case with Qdrant
+title: Build a chatbot with Qdrant on Axion
 weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Overview
+## Create a knowledge retrieval chatbot
 
 In this section, you build a simple **chatbot-style knowledge retrieval system** using the Qdrant vector database running on Google Axion Arm-based infrastructure.
 
 The chatbot retrieves relevant knowledge by performing **semantic similarity search** against stored vector embeddings.
 
-This architecture represents the **retrieval component of Retrieval-Augmented Generation (RAG) systems**, commonly used in modern AI assistants and enterprise knowledge platforms.
+The architecture represents the **retrieval component of Retrieval-Augmented Generation (RAG) systems**, commonly used in modern AI assistants and enterprise knowledge platforms.
 
 The chatbot uses:
 
@@ -99,7 +99,7 @@ The output is similar to:
 }
 ```
 
-This confirms the vector collection has been created successfully.
+The output confirms the vector collection has been created successfully.
 
 ## Create chatbot script
 
