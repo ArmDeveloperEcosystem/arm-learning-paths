@@ -44,7 +44,7 @@ Confirm your system is running a 64-bit Arm Linux distribution:
 uname -m
 ```
 
-The output should be:
+The output is similar to:
 
 ```output
 aarch64
@@ -104,7 +104,7 @@ The output is similar to:
 Flatpak 1.16.1
 ```
 
-## Add Flathub repository as remote
+## Add Flathub as a remote source
 
 Add the Flathub repository as a remote source:
 
@@ -124,19 +124,10 @@ The output should include a line for `flathub`:
 Name    Options
 flathub system
 ```
-## Find Arm-native applications on Flathub
-
-Flatpak makes it straightforward to discover which applications support aarch64. Visit the [Flathub app browser](https://flathub.org/apps) and filter by architecture to find applications with native Arm builds. You can also search from the command line after adding the Flathub remote:
-
-```bash
-flatpak remote-ls --app --arch=aarch64 flathub
-```
-
-This lists every application on Flathub that publishes a native aarch64 build. Use `grep` to narrow results by name or category.
 
 ## Verify Flatpak installation by installing VSCodium
 
-[VSCodium](https://vscodium.com/) is the telemetry-free build of VS Code that is available on Flathub with a native Arm build. This makes it a useful Arm-native application to test Flatpak with. 
+[VSCodium](https://vscodium.com/) is the telemetry-free build of VS Code that is available on Flathub with a native Arm build. It is a useful Arm-native application to test Flatpak with. 
 
 Install VSCodium with the `--assumeyes` flag, which automatically answers yes to any prompts during installation:
 
@@ -174,7 +165,7 @@ Installation: system
         Date: 2026-03-30 05:03:53 +0000
 ```
 
-The `Arch: aarch64` line confirms a native Arm build is installed.
+The `Arch: aarch64` line confirms that a native Arm build is installed.
 
 <!-- To start VSCodium on the project in your current directory, run:
 
@@ -194,41 +185,54 @@ Now, run VSCodium using the alias:
 codium . &
 ``` -->
 
+## Find Arm-native applications on Flathub
 
-## Troubleshooting
+Flatpak makes it straightforward to discover which applications support aarch64. Visit the [Flathub app browser](https://flathub.org/apps) and filter by architecture to find applications with native Arm builds. You can also search from the command line after adding the Flathub remote:
+
+```bash
+flatpak remote-ls --app --arch=aarch64 flathub
+```
+
+The command lists every application on Flathub that publishes a native aarch64 build. Use `grep` to narrow results by name or category.
+
+## Troubleshoot Flatpak issues
+
+You can use the following commands to troubleshoot issues with Flatpak.
+
+### Fix a corrupted, incomplete, or outdated installation
 
 If a Flatpak installation becomes corrupted or incomplete, run the following command to check your local Flatpak installation and fix any inconsistencies:
 
 ```bash
 flatpak repair
 ```
-
-If you need to update all installed Flatpak applications and runtimes to their latest versions, run:
+To keep installed Flatpak applications and runtimes up-to-date, run:
 
 ```bash
 flatpak update
 ```
+
+### Debug application permission or runtime issues
 
 If you need to inspect the sandbox permissions granted to a Flatpak application, run:
 
 ```bash
 flatpak info --show-permissions com.vscodium.codium
 ```
-In this example, the command returns the sandbox permissions granted to VSCodium.
+The example command returns the sandbox permissions granted to VSCodium installed in the previous step. Replace `com.vscodium.codium` with your application. 
 
 Opening an interactive shell is useful for debugging permission or runtime issues. If you need to open an interactive shell in a Flatpak application's sandbox, run:
 
 ```bash
 flatpak run --command=bash com.vscodium.codium
 ```
-
-In this example, the command opens a shell in VSCodium's sandbox.
+The example command opens a shell in VSCodium's sandbox. Replace `com.vscodium.codium` with your application. 
 
 {{% notice Note %}}
 Not all applications include `bash` in their sandbox, so this command may not work for every Flatpak. In such cases, your shell prompt may not look any different, but you are in the sandbox. 
 {{% /notice %}}
 
-<!-- To confirm that the shell is open, run:
+To confirm that the shell is open, run:
 
 ```bash
 ls /app
@@ -247,7 +251,7 @@ PRETTY_NAME="Freedesktop SDK 25.08 (Flatpak runtime)"
 BUG_REPORT_URL=https://gitlab.com/freedesktop-sdk/freedesktop-sdk/issues
 ```
 
-The `/app` directory contains the application runtime files, and the `os-release` file shows the Flatpak runtime rather than the host OS.  -->
+The `/app` directory contains the application runtime files, and the `os-release` file shows the Flatpak runtime rather than the host OS. 
 
 ## Clean up
 
@@ -262,3 +266,4 @@ To remove the Flathub remote, run:
 ```bash
 sudo flatpak remote-delete flathub
 ```
+
