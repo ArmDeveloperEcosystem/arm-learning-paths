@@ -226,7 +226,6 @@ On the target system, edit the sudoers file:
 sudo visudo
 ```
 
-
 Add the following line, replacing `<username>` with your actual username. Insert it after any existing entries for that user or their groups, since rules in the sudoers file are applied in order and later entries take precedence.
 
 ```bash
