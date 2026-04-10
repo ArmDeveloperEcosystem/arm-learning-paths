@@ -1,12 +1,12 @@
 ---
-title: Setup and Install PostgreSQL on Cobalt 100
+title: Install and configure PostgreSQL on Cobalt 100
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-# Setup and Install PostgreSQL on Cobalt 100 (Arm64)
+## Prepare PostgreSQL for Arm deployment
 
 In this section, you install and configure PostgreSQL on an Azure Ubuntu 24.04 Pro Arm64 virtual machine running on Cobalt 100 processors.
 
@@ -154,7 +154,7 @@ max_parallel_workers_per_gather = 4
 sudo systemctl restart postgresql
 ```
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 You've successfully installed and configured PostgreSQL on an Azure Ubuntu Arm64 virtual machine. Your setup includes:
 

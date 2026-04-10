@@ -6,6 +6,10 @@ weight: 3
 layout: learningpathall
 ---
 
+## Provision Azure infrastructure for PostgreSQL
+
+Create an Arm-based Cobalt 100 virtual machine to host your PostgreSQL database.
+
 ## Prerequisites and setup
 
 There are several common ways to create an Arm-based Cobalt 100 virtual machine, and you can choose the method that best fits your workflow or requirements:
@@ -16,7 +20,7 @@ There are several common ways to create an Arm-based Cobalt 100 virtual machine,
 
 In this section, you will launch the Azure Portal to create a virtual machine with the Arm-based Azure Cobalt 100 processor.
 
-This Learning Path focuses on general-purpose virtual machines in the Dpsv6 series. For more information, see the [Microsoft Azure guide for the Dpsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series).
+The Learning Path focuses on general-purpose virtual machines in the Dpsv6 series. For more information, see the [Microsoft Azure guide for the Dpsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series).
 
 While the steps to create this instance are included here for convenience, you can also refer to the [Deploy a Cobalt 100 virtual machine on Azure Learning Path](/learning-paths/servers-and-cloud-computing/cobalt/).
 
@@ -65,7 +69,7 @@ Your virtual machine should be ready and running in a few minutes. You can SSH i
 
 {{% notice Note %}}To learn more about Arm-based virtual machines in Azure, see "Getting Started with Microsoft Azure" in [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure/).{{% /notice %}}
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 You've successfully:
 

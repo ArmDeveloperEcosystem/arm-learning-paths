@@ -1,12 +1,12 @@
 ---
-title: Benchmark and Tune PostgreSQL
+title: Benchmark and optimize PostgreSQL on Cobalt 100
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-# Benchmark and Tune PostgreSQL
+## Measure and improve database performance
 
 In this section, you benchmark PostgreSQL performance and optimize query execution using monitoring and indexing techniques.
 
@@ -24,7 +24,8 @@ Use `pgbench` to prepare a benchmarking dataset.
 ```console
 sudo -u postgres pgbench -i -s 50 appdb
 ```
-This creates standard benchmarking tables and loads data for testing. The output looks similar to:
+
+The command creates standard benchmarking tables and loads data for testing. The output looks similar to:
 
 ```output
 dropping old tables...
@@ -73,7 +74,7 @@ initial connection time = 10.771 ms
 tps = 2401.873115 (without initial connection time)
 ```
 
-This result shows the transactional (OLTP) throughput PostgreSQL achieves on this Cobalt 100 Arm64 instance under the configured load. TPS and latency will vary with instance size, client count, and workload shape.
+The result shows the transactional (OLTP) throughput PostgreSQL achieves on this Cobalt 100 Arm64 instance under the configured load. TPS and latency will vary with instance size, client count, and workload shape.
 
 ## Enable query monitoring
 
@@ -125,7 +126,7 @@ The output is similar to:
 (1 row)
 ```
 
-This helps identify performance bottlenecks.
+The output helps identify performance bottlenecks.
 
 ## Analyze query execution
 
@@ -192,6 +193,8 @@ Foreign-key constraints:
 ```
 
 The index `idx_orders_customer_id` is now listed alongside the primary key index. PostgreSQL's query planner will use it for queries that filter or join on `customer_id`, reducing full table scans for those operations.
+
+## Summary
 
 You've successfully benchmarked and optimized PostgreSQL on an Arm64 system. Your setup now includes:
 

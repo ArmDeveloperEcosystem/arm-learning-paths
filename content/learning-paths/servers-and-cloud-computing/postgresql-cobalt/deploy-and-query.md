@@ -1,12 +1,12 @@
 ---
-title: Deploy Schema and Run Queries
+title: Deploy a relational schema and run queries
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-# Deploy Schema and Run Queries
+## Create transactional data for PostgreSQL
 
 In this section, you create database tables, load sample data, and execute analytical queries on PostgreSQL.
 
@@ -116,7 +116,7 @@ The output is similar to:
 
 ## Top customers by spending
 
-This query aggregates order totals per customer across the full orders table — a typical OLAP aggregation on OLTP data.
+The following query aggregates order totals per customer across the full orders table — a typical OLAP aggregation on OLTP data.
 
 ```sql
 SELECT customer_id, SUM(amount) AS total_spent
@@ -154,7 +154,7 @@ The output is similar to:
 
 ## Customer order counts
 
-This query joins customers and orders, counts how many orders each customer placed, and ranks them by activity. It's a multi-table analytical query — the join across two OLTP tables produces an OLAP-style activity report.
+The following query joins customers and orders, counts how many orders each customer placed, and ranks them by activity. It's a multi-table analytical query — the join across two OLTP tables produces an OLAP-style activity report.
 
 ```sql
 SELECT c.name, COUNT(o.id)
@@ -206,7 +206,7 @@ psql -h localhost -U appuser -d appdb
 
 When prompted for a password, enter `StrongPassword123`.
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 You've successfully deployed a relational schema and executed analytical queries on PostgreSQL. Your setup includes:
 

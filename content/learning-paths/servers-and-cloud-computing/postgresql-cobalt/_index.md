@@ -1,10 +1,6 @@
 ---
 title: Deploy PostgreSQL on Azure Cobalt 100 Arm64 virtual machines
 
-draft: true
-cascade:
-    draft: true
-    
 minutes_to_complete: 30
 
 who_is_this_for: This learning path is designed for developers, DevOps engineers, and platform engineers who want to deploy, manage, and optimize PostgreSQL databases on Arm-based cloud infrastructure.
