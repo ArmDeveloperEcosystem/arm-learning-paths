@@ -3,10 +3,6 @@ title: Deploy MinIO on Azure Cobalt 100
 
 description: Learn how to deploy and configure MinIO on an Azure Cobalt 100 virtual machine, benchmark object storage throughput, and validate S3 compatibility using the boto3 Python SDK.
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for developers, DevOps engineers, and platform engineers who want to deploy MinIO object storage on Microsoft Azure Cobalt 100 virtual machines.
