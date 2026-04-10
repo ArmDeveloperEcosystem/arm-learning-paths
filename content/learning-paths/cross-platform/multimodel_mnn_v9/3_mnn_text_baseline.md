@@ -61,6 +61,13 @@ Multimodal on-device inference has several benefits, including reducing the need
 ```
 
 
+{{% notice Note %}}
+When you run `llm_demo`, you may see a line like:
+`The device supports: i8sdot:1, fp16:1, i8mm: 1, sve2: 1, sme2: 0`
+This line reports hardware feature support on your CPU: **i8sdot**, **fp16**, **i8mm**, **sve2**, and **sme2**.  
+A value of `1` means the feature is supported in hardware, and `0` means it is not.
+{{% /notice %}}
+
 
 
 ## Step 3 - Add a second prompt to validate multi-line behavior
