@@ -1,16 +1,20 @@
 ---
-title: Understand Arm Performix in the Arm MCP Server
+title: Understand AI-driven profiling with Arm Performix MCP
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
+## Why AI-driven profiling with Arm Performix
+
+The Arm MCP Server exposes Arm Performix as a first-class tool that AI coding assistants can invoke directly. Rather than switching between your IDE and the Performix GUI to analyze results and then back again to apply code changes, an AI agent can orchestrate the entire profiling pipeline — configuring the recipe, launching the collection run, retrieving hotspot data, and proposing optimizations — all in a single agentic workflow.
+
 ## What is the Arm Performix tool in the MCP Server?
 
-The Arm MCP Server exposes Arm Performix as a first-class tool that AI coding assistants can invoke directly. Arm Performix is a performance profiling tool that simplifies the workflow of collecting CPU samples, building flame graphs, and identifying the functions that dominate application runtime. When integrated into the MCP server, it lets an AI agent orchestrate the entire profiling pipeline — configuring the recipe, launching the collection run, and retrieving the resulting hotspot data — without manual interaction with the Performix engine. 
+Arm Performix is a performance profiling tool that simplifies the workflow of collecting CPU samples, building flame graphs, and identifying the functions that dominate application runtime. When integrated into the MCP server, it lets an AI agent orchestrate the entire profiling pipeline — configuring the recipe, launching the collection run, and retrieving the resulting hotspot data — without manual interaction with the Performix engine.
 
-This removes a context switch for profiling. Rather than switching between your IDE and the Performix GUI to analyze results and then back again to apply code changes, an AI agent can do all of this for you in a single agentic workflow.
+Context switching for profiling is removed. Rather than switching between your IDE and the Performix GUI to analyze results and then back again to apply code changes, an AI agent can do all of this for you in a single agentic workflow.
 
 ## How the MCP tool works
 
@@ -32,7 +36,7 @@ You can ask your AI assistant direct questions and it will invoke the `apx_recip
 Run the Code Hotspots recipe on /home/ec2-user/Mandelbrot-Example/build/mandelbrot_single_thread_debug and tell me which functions are the hottest
 ```
 
-This is useful for quick, exploratory checks. It works well when you already know the binary path and just want a fast hotspot summary before committing to deeper analysis.
+Direct chat is useful for quick, exploratory checks. It works well when you already know the binary path and just want a fast hotspot summary before committing to deeper analysis.
 
 ### Prompt files
 
