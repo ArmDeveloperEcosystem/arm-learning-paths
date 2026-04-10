@@ -1,9 +1,13 @@
 ---
-title: Get started with Flyte ML Workflow Pipelines with gRPC on Google Axion C4A
+title: Understand Flyte and gRPC ML workflows on Google Axion
 weight: 2
 
 layout: "learningpathall"
 ---
+
+## Why Flyte and gRPC on Google Axion C4A
+
+Flyte is an open-source workflow orchestration platform used to build scalable and reproducible data and machine learning pipelines. Combined with gRPC for efficient distributed service communication, Flyte enables developers to define workflows as Python tasks while delegating specific operations to independent microservices. Running this stack on Google Axion C4A Arm-based processors provides efficient, scalable infrastructure for executing modern ML workflows and distributed data processing tasks.
 
 ## Explore Axion C4A Arm instances in Google Cloud
 
@@ -15,9 +19,9 @@ These characteristics make Axion C4A instances well-suited for modern analytics 
 
 To learn more, see the Google blog [Introducing Google Axion Processors, our new Arm-based CPUs](https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu).
 
-## Explore Flyte ML Workflow Pipelines with gRPC on Google Axion C4A (Arm Neoverse V2)
+## Flyte and gRPC for distributed ML workflows
 
-Flyte is an open-source workflow orchestration platform used to build scalable and reproducible data and machine learning pipelines. It allows developers to define workflows as Python tasks, simplifying the management of complex ML processes such as data preparation, feature engineering, and model training. 
+Flyte allows developers to define workflows as Python tasks, simplifying the management of complex ML processes such as data preparation, feature engineering, and model training. 
 
 gRPC enables fast communication between distributed services within these pipelines. Running Flyte with gRPC on Google Axion C4A Arm-based processors provides efficient, scalable infrastructure for executing modern ML workflows and distributed data processing tasks.
 

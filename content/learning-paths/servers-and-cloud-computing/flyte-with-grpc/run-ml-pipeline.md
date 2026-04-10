@@ -1,10 +1,12 @@
 ---
-title: Run ML Training Pipeline
+title: Execute and validate the ML pipeline
 weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+
+## Run the distributed ML workflow
 
 In this section, you execute the distributed machine learning pipeline built using **Flyte and gRPC**.
 
@@ -107,7 +109,7 @@ Feature gRPC service running on port 50051
 Generating feature for: 20
 ```
 
-This confirms that the Flyte workflow successfully communicated with the gRPC service.
+The output confirms that the Flyte workflow successfully communicated with the gRPC service.
 
 ## What you've learned and what's next
 
