@@ -1,23 +1,22 @@
 ---
-title: Run a text baseline with an Omni model on MNN
+title: Validate text-only inference with an Omni model on Armv9
 weight: 4
 layout: learningpathall
 ---
 
-## Overview
+## Introduction
 
-Before running vision and audio prompts, validate that your **runtime + model + prompt I/O** are working end-to-end. In this module you will run a **text-only baseline** using the same Omni model you will use later for multimodal prompts.
+Before you add image and audio inputs, validate the basic inference path with a text-only prompt. In this module, you use the same **Qwen2.5-Omni-7B-MNN** package from the previous section and confirm that `llm_demo` can run prompts from a file on your Armv9 system.
 
-By the end of this module you will confirm:
+At the end of this module, you will have verified:
 
-- `llm_demo` can load your `config.json` without errors
-- A prompt file is parsed correctly (one line per prompt)
-- The model returns stable, sensible text output
+- the model configuration loads correctly
+- prompt input from a text file is parsed as expected
+- the runtime returns usable text output without crashes or library errors
 
+## Create a text baseline prompt
 
-## Step 1 - Create a baseline prompt file
-
-Create a simple text prompt file. Keep it short so you can quickly verify the pipeline.
+Create a short prompt file in your workspace:
 
 ```bash
 cat > ~/mnn/text_baseline_prompt.txt <<'EOF'
@@ -26,23 +25,23 @@ EOF
 ```
 
 {{% notice Note %}}
-llm_demo commonly treats each line as a separate prompt. Keep prompts one per line.
+`llm_demo` commonly treats each line in the file as a separate prompt. Keep each prompt on a single line.
 {{% /notice %}}
 
+## Run `llm_demo` with the prompt file
 
-## Step 2 - Run llm_demo in batch mode
-
-Run llm_demo with your Omni model config.json and the prompt file:
+Run `llm_demo` from the MNN build directory and pass both the model configuration and prompt file:
 
 ```bash
-cd ~/mnn_lp/MNN/build
+cd ~/mnn/MNN/build
 ./llm_demo ~/mnn/Qwen2.5-Omni-7B-MNN/config.json ~/mnn/text_baseline_prompt.txt
 ```
 
-You should see a response describing the benefits of multimodal on-device inference.
+A successful run should load the model, report the detected CPU features, and return a text response for the prompt.
 
+Example output:
 
-```
+```text
 config path is /home/radxa/mnn/Qwen2.5-Omni-7B-MNN/config.json
 CPU Group: [ 1  2  3  4 ], 799999 - 1800968
 CPU Group: [ 7  8 ], 799897 - 2199795
@@ -68,18 +67,22 @@ This line reports hardware feature support on your CPU: **i8sdot**, **fp16**, **
 A value of `1` means the feature is supported in hardware, and `0` means it is not.
 {{% /notice %}}
 
+## Check how prompt files are processed
 
-
-## Step 3 - Add a second prompt to validate multi-line behavior
-
-Append a second prompt line to confirm that llm_demo processes prompts line-by-line.
+To verify that the prompt file is read line by line, append a second prompt:
 
 ```bash
-cat >> ~/mnn_lp/text_baseline_prompt.txt <<'EOF'
-What's Arm CPU arch?
+cat >> ~/mnn/text_baseline_prompt.txt <<'EOF'
+What is the Arm CPU architecture?
 EOF
 ```
 
+Run the same command again:
+```bash
+cd ~/mnn/MNN/build
+./llm_demo ~/mnn/Qwen2.5-Omni-7B-MNN/config.json ~/mnn/text_baseline_prompt.txt
+```
+You should now see two responses, one for each line in the prompt file.
 
 ```
 config path is /home/radxa/mnn/Qwen2.5-Omni-7B-MNN/config.json
@@ -99,7 +102,6 @@ prompt file is /home/radxa/mnn/text_baseline_prompt.txt
 
 You should now see two responses (one per line).
 
-## Step 4 - Start an interactive session (Optional)
 
 If you want to quickly sanity-check interactive mode:
 
@@ -108,13 +110,17 @@ cd ~/mnn/MNN/build
 ./llm_demo ~/mnn/Qwen2.5-Omni-7B-MNN/config.json
 ```
 
-Type a short prompt and confirm the model replies.
+Enter a short prompt and confirm that the model returns a reply.
 
-
-## Checkpoint
+## Check your results
 
 You have completed this module when:
-- `llm_demo` successfully loads the config and model
-- The prompt file produces one response per line
-- Responses are stable and sensible (not empty or repeated error text)
-- No crashes or runtime errors occur
+
+- `llm_demo` loads `config.json` successfully
+- the prompt file produces one response per line
+- the model returns non-empty text output
+- the runtime completes without crashes or missing-library errors
+
+## Next steps
+
+In the next module, you will add an image input and validate the vision path of the Omni model on Armv9.

@@ -1,44 +1,54 @@
 ---
-title: Multimodal On-Device Inference on Arm v9 with MNN for Audio and Vision
+title: Run multimodal inference with MNN on Armv9
 layout: learningpathall
 weight: 2
 ---
 
 ## Introduction
 
-This module explains why **[MNN](https://github.com/alibaba/MNN)** and an **Omni multimodal model** are a practical combination for **CPU-only on-device inference** on Arm v9 Linux. You will use a single runtime and a single model to run **vision**, **audio**, and **text** prompts, then combine image + audio inputs to generate an operational **restock ticket**.
+This section introduces the software stack used throughout this Learning Path. You will use **[MNN](https://github.com/alibaba/MNN)** to run a prebuilt **Omni multimodal model** on an Armv9 Linux system using only the CPU.
 
-## Why MNN for on-device deployment
+By the end of this section, you will understand why this combination is a practical starting point for reproducible multimodal inference on Armv9.
 
-MNN is a deployment-focused inference runtime that works well for edge and mobile-style workloads:
+## Why use MNN on Armv9
 
-- A **portable runtime** widely used across mobile and embedded environments
-- A **CPU-first workflow** that maps naturally to Arm v9 Linux systems
-- Native builds can take advantage of **Arm-specific optimizations** (for example, KleidiAI when enabled)
-- One codebase can target multiple platforms such as Arm Linux, Android, iOS, and x86 hosts
+MNN is a lightweight inference engine designed for deployment across mobile, embedded, and edge platforms. It is a good fit for this Learning Path for four reasons:
 
-## Why Omni multimodal
+- It provides a **portable runtime** that can be built and used across different device classes.
+- It supports a **CPU-first deployment flow**, which maps well to Armv9 development systems.
+- Native builds can take advantage of **Arm-specific optimizations** when they are enabled in the build.
+- The same runtime approach can be reused across **Arm Linux, Android, iOS, and x86-based development hosts**.
 
-Omni models simplify multimodal applications by keeping image, audio, and text in a single pipeline:
+For this Learning Path, MNN gives you a practical way to validate multimodal inference on Armv9 without introducing extra framework complexity.
 
-- One model can handle **image + audio + text** prompts
-- Enables cross-modal tasks such as **“audit the shelf image + listen to a voice note → produce a restock ticket”**
-- Prompt control using tags like `<img>...</img>` and `<audio>...</audio>`
-- Reduces operational complexity versus maintaining separate vision and speech models
+## Why use an Omni multimodal model
 
-## Scope
+An Omni model combines **text, image, and audio** understanding in a single inference pipeline. This makes it useful for building compact edge applications that need to reason over more than one input type.
 
-To keep this learning path reproducible and easy to complete, we intentionally constrain the scope:
+In this Learning Path, you use the model to:
 
-- **CPU-only**  
-  No GPU or NPU acceleration is required.
+- process **text-only prompts**
+- describe **image inputs**
+- interpret **audio inputs**
+- combine **image and audio context** to generate a structured **restock ticket**
 
-- **No export or quantization steps**  
-  You will use a **prebuilt MNN Omni model package** as-is.
+This single-model approach keeps the workflow easier to follow than maintaining separate models for vision and speech tasks.
 
-- **No CPU–NPU heterogeneous pipeline**  
-  All compute runs on the Arm v9 CPU. The focus is correctness and reproducibility.
+## Scope of this Learning Path
 
-## Next
+To keep the workflow reproducible, this Learning Path uses a deliberately narrow scope:
 
-In the next module, you will build MNN on Arm v9 and prepare the prebuilt Omni model and local demo assets.
+- **CPU-only execution**  
+  All inference runs on the Armv9 CPU.
+
+- **Prebuilt model assets**  
+  You use a prepared MNN Omni model package instead of exporting or converting models.
+
+- **No heterogeneous scheduling**  
+  This example does not use GPU, NPU, or split CPU-accelerator execution.
+
+This scope keeps the focus on setup, validation, and multimodal application flow.
+
+## Next steps
+
+In the next section, you will build MNN on Armv9 and prepare the model files and local assets used in the remaining examples.

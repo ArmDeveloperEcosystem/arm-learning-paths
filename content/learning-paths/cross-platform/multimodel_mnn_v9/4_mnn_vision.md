@@ -4,53 +4,56 @@ weight: 5
 layout: learningpathall
 ---
 
-## Prepare a local image asset
+## Introduction
 
-In this module you will run a **retail shelf walk audit** using a single image and an Omni multimodal model on MNN.
+In this module, you use a local image and an ***MNN Omni multimodal model*** to run a simple retail shelf audit on an ***Armv9*** system.
 
-Instead of trying to do SKU-accurate counting (which is difficult and unreliable on real-world shelf photos), you will generate an **actionable store-operations signal**:
+The goal is not to produce SKU-level counting. Instead, you generate an operational signal that is useful for store staff:
 
-- A coarse **facing coverage** estimate for **top / middle / bottom** shelf levels
-- A single **priority zone** that appears most sparse
-- A short **reason** grounded in what is visible
-- `NOT_SURE` when the image is ambiguous
+- estimate shelf coverage for the **top**, **middle**, and **bottom** levels
+- identify the **priority zone** that appears most sparse
+- provide a short reason based on visible evidence
+- return `NOT_SURE` when the image is unclear
 
-This is a common retail workflow: the goal is to decide **where to restock first**, not to perfectly count every unit.
+This keeps the task practical for on-device multimodal inference. In many retail workflows, deciding **where to restock first** is more useful than attempting perfect item counting from a single photo.
 
+## Prepare the image asset
 
-## Step 1 - Prepare the image asset
+Create a local directory for assets:
 
 ```bash
 mkdir -p ~/mnn/assets
 ```
 
-Download the tutorial image and validate it:
+Download the tutorial image and verify that it is a valid JPEG file:
 
 ```bash
 wget -P ~/mnn/assets https://upload.wikimedia.org/wikipedia/commons/e/e6/Pet_Food_Aisle.jpg
 file ~/mnn/assets/Pet_Food_Aisle.jpg
 ```
 
-The `file` command confirms that this is a valid JPEG image.
+You should see output similar to:
 
-```
+```text
 JPEG image data, JFIF standard 1.02, resolution (DPI), density 72x72, segment length 16, Exif Standard: [TIFF image data, little-endian, direntries=12, description=                               , manufacturer=SONY, model=DSC-W50, orientation=upper-left, xresolution=203, yresolution=211, resolutionunit=2, software=Adobe Photoshop CS Macintosh, datetime=2007:04:10 17:45:47], progressive, precision 8, 2816x2112, components 3
 ```
 
+This confirms that the image asset is ready for the vision prompt.
+
 ![image1 Pet Food Aisle](pet_food_aisle.jpg)
 
+## Create the vision prompt
 
-## Step 2 - Create the vision prompt (single line)
+Next, create a prompt that instructs the model to audit only the main shelf on the left side of the image.
 
-You will design a prompt that:
+The prompt does four things:
 
-- Uses `<img>…</img>` to attach the local image
-- Restricts the model to auditing **only the main left shelf**
-- Requests coverage as **high/medium/low** for each level
-- Asks for a single **priority zone** on the left shelf
-- Encodes the output as a **single line** with `;`-separated segments
+- attaches the local image with `<img>...</img>`
+- limits the analysis to the main left shelf
+- asks for coverage estimates using `high`, `medium`, or `low`
+- constrains the response to a single structured line
 
-Create the prompt file (adjust `/home/radxa` to your actual user home if needed):
+Create the prompt file:
 
 ```bash
 cat > ~/mnn/prompt_picture_coverage.txt <<'EOF'
@@ -58,18 +61,20 @@ cat > ~/mnn/prompt_picture_coverage.txt <<'EOF'
 EOF
 ```
 
+If your username or home directory is different, replace `/home/radxa` with the correct local path.
 
-## Step 3 - Run the vision demo
+## Run the vision demo
 
-Run llm_demo with your model config.json and the vision prompt file:
+Run `llm_demo` with the model `config.json` file and the vision prompt:
 
 ```bash
 cd ~/mnn/MNN/build
 ./llm_demo ~/mnn/Qwen2.5-Omni-7B-MNN/config.json ~/mnn/prompt_picture_coverage.txt
 ```
 
-The expected result will be: 
-```
+You should see output similar to:
+
+```text
 config path is /home/radxa/mnn/Qwen2.5-Omni-7B-MNN/config.json
 CPU Group: [ 1  2  3  4 ], 799999 - 1800968
 CPU Group: [ 7  8 ], 799897 - 2199795
@@ -86,10 +91,21 @@ Shelf audit; - Coverage: top=high, middle=high, bottom=medium; - Priority zone: 
 If you have any other questions about this shelf auditing, feel free to let me know! 😊
 ```
 
-The exact words may differ, but the output should contain:
-- Includes coverage estimates for **top / middle / bottom**
-- Identifies a **priority zone** such as `middle-center`
-- Provides a **short reason** that clearly references visible sparsity on the shelf
-- Uses `NOT_SURE` only where the image is genuinely unclear
+The exact wording can vary, but the response should still follow the requested structure.
 
-In the next module you will run an audio restock instruction demo using an <audio>...</audio> prompt.
+## Verify the result
+
+Check that the output meets these conditions:
+
+- it includes coverage estimates for **top**, **middle**, and **bottom**
+- it identifies one **priority zone**, such as `middle-center`
+- it provides a short reason tied to visible shelf sparsity
+- it uses `NOT_SURE` only when the image is genuinely ambiguous
+
+If the model returns extra conversational text, tighten the prompt further by repeating `Output ONE line only`.
+
+## Next steps
+
+You have now validated image-based multimodal inference with MNN Omni on Armv9.
+
+In the next module, you extend this workflow by running an audio-based restock instruction demo using an `<audio>...</audio>` prompt.

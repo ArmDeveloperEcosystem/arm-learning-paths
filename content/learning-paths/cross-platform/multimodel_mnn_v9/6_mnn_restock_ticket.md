@@ -1,12 +1,12 @@
 ---
-title: Build a single-shot multimodal restock ticket on Armv9
+title: Build a single-shot multimodal restock ticket with MNN Omni
 weight: 7
 layout: learningpathall
 ---
 
 ## Create the single-shot multimodal prompt (image + audio)
 
-In this final project you will generate an **operational restock ticket** from **one single-shot multimodal prompt**.
+In this final module, you combine image and audio inputs into a single multimodal prompt and generate one operational restock ticket on an Armv9 system.
 
 You will combine:
 - A **shelf image** to estimate shelf coverage and select a priority zone
@@ -14,38 +14,36 @@ You will combine:
 
 into **one multimodal inference** using MNN Omni.
 
-This mirrors a real retail workflow: a staff member captures a shelf photo and records a quick voice note, and the device produces a ticket that can be executed immediately.
+This mirrors a practical retail workflow. A store associate captures a shelf photo, records a short voice note, and the system produces a structured ticket that can be acted on immediately.
 
+## Reuse the local assets
 
-## Inputs
+This module reuses the same assets from the previous examples:
 
-You will reuse the same local assets from previous modules:
-
-- Shelf image: `~/mnn/assets/Pet_Food_Aisle.jpg.jpg`
-- Voice note: `~/mnn/assets/restock_note.wav`
+- shelf image: `~/mnn/assets/Pet_Food_Aisle.jpg.jpg`
+- voice note: `~/mnn/assets/restock_note.wav`
 
 {{% notice Note %}}
-Using local files avoids redirect and downloader issues.
+Using local files keeps the example reproducible and avoids downloader or redirect issues.
 {{% /notice %}}
 
+## Define the ticket structure
 
-## Output format
+To keep the output readable and easy to validate, request a single-line ticket with semicolon-separated fields.
 
-The output is a **single-line, bullet-style ticket** (segments separated by `;`), designed to remain readable even when terminals normalize newlines.
+The ticket should include:
 
-The ticket must include:
+- shelf coverage derived from the image
+- a priority zone derived from the image
+- tasks, quantities, and zones derived from the audio
+- a deadline and substitution policy derived from the audio
+- a short note and a confidence value
 
-- **Coverage (image-derived):** `top=<high|medium|low>, middle=..., bottom=...`
-- **Priority zone (image-derived):** `<top|middle|bottom>-<left|center|right>`
-- **Tasks (audio-derived):** Task 1 and Task 2 with item, quantity, and zone
-- **Deadline (audio-derived)**
-- **Substitution policy (audio-derived)**
-- **Notes and confidence**
+The goal is not perfect retail planning. The goal is to show that one prompt can combine visual context and spoken instructions into a compact result.
 
+## Create the multimodal prompt
 
-## Step 1 Create the multimodal prompt (single line)
-
-Create the multimodal prompt file. Keep the file as **one line**.
+Create the prompt file and keep the full prompt on one line:
 
 ```bash
 cat > ~/mnn/prompt_final_multimodal.txt <<'EOF'
@@ -53,17 +51,21 @@ cat > ~/mnn/prompt_final_multimodal.txt <<'EOF'
 EOF
 ```
 
-## Step 2 - Run the single-shot multimodal demo
+If your username or home directory is different, replace `/home/radxa` with the correct local path.
 
-Run `llm_demo` with the multimodal prompt:
+## Run the multimodal demo
+
+Run `llm_demo` with the model configuration and the multimodal prompt:
 
 ```bash
 cd ~/mnn/MNN/build
 ./llm_demo ~/mnn/Qwen2.5-Omni-7B-MNN/config.json ~/mnn/prompt_final_multimodal.txt
 ```
 
-Your output should be a single line similar to:
-```
+You should see output similar to:
+
+```text
+config path is /home/radxa/mnn/Qwen2.5-Omni-7B-MNN/config.json
 CPU Group: [ 1  2  3  4 ], 799999 - 1800968
 CPU Group: [ 7  8 ], 799897 - 2199795
 CPU Group: [ 5  6 ], 799897 - 2299896
@@ -79,10 +81,9 @@ Restock the bottom left large pet food bag, add 10 bags; also restock the middle
 
 ```
 
-Exact wording may differ, but the coverage/priority should be image-driven and the quantities/deadline/substitution should be audio-driven.
+The exact wording can vary. What matters is that image-derived fields stay tied to the shelf photo, and audio-derived fields stay tied to the spoken instruction.
 
-
-## Step 3 - Verify image and audio are both used (optional)
+## Verify that both modalities are used
 
 To verify true multimodal behavior, perform a simple A/B test.
 
@@ -93,23 +94,39 @@ To verify that the model is truly multimodal, perform a simple A/B test:
 
 **Swap the audio**
 
-- Keep the image fixed
-- Replace the voice note with a different restock instruction
-- **Expect:** `Coverage` and `Priority zone` remain the same; `Tasks`, `qty`, `Deadline`, and `Substitution` change according to the new audio
+Keep the image fixed and replace the voice note with a different instruction.
+
+Verify that:
+
+- `Coverage` and `Priority zone` stay similar
+- `Task`, `qty`, `Deadline`, and `Substitution` change to match the new audio
 
 **Swap the image**
 
-- Keep the audio fixed
-- Change to a different shelf image
-- **Expect:** `Coverage` and `Priority zone` change; `Tasks`, `qty`, and `Deadline` remain aligned with the original audio
+Keep the audio fixed and replace the shelf image.
 
+Verify that:
 
-## Checkpoint
+- `Coverage` and `Priority zone` change with the new image
+- `Task`, `qty`, `Deadline`, and `Substitution` remain aligned with the original audio
 
-You have completed this module when you can show:
+## Verify the result
 
-- At least one **baseline multimodal ticket**
-- One run where changing the **audio** changes only audio-derived fields
-- One run where changing the **image** changes only image-derived fields
+Check that:
 
-This demonstrates that your pipeline is performing **true multimodal reasoning** on-device.
+- the output stays on one structured line
+- the coverage and priority zone are based on the image
+- the quantities, deadline, and substitution policy are based on the audio
+- missing details are returned as `NOT_SURE` rather than invented
+
+If the model adds extra text before or after the ticket, tighten the prompt and repeat the run.
+
+## Next steps
+
+You have completed this learning path when you can:
+
+- run text, vision, audio, and combined multimodal examples on Armv9
+- generate a final ticket from one image and one voice note
+- show that changing one modality changes only the fields derived from that modality
+
+From here, you can extend the workflow by saving the ticket to JSON, sending it to a local service, or benchmarking latency and throughput across different Armv9 platforms.

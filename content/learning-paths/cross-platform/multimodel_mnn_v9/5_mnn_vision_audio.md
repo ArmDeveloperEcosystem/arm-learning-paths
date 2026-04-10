@@ -1,67 +1,71 @@
 ---
-title: Convert audio restock instructions into tickets with MNN Omni
+title: Convert spoken restock notes into structured tickets with MNN Omni
 weight: 6
 layout: learningpathall
 ---
 
-In this module you will convert a **spoken restock note** into a **readable, single-line restock ticket** using MNN Omni.
+## Introduction
 
-This mirrors a common retail workflow: an associate records a short voice note during a shelf walk, and the system converts it into an operational ticket that can be handed to staff or logged in a task system.
+In this module, you use an audio prompt and an MNN Omni model to convert a spoken restock note into a structured one-line ticket on an Armv9 system.
 
-Because `llm_demo` output may normalize newlines on some terminals, this module uses a **single-line** format with `;`-separated fields.
+This mirrors a simple retail workflow. A store associate records a short voice note during a shelf walk, and the system converts it into a task that can be reviewed by staff or passed to another tool.
 
-## Step 1 - Prepare the audio asset
+To keep the output predictable, this module uses a single-line format with semicolon-separated fields. This also helps when terminal output does not preserve line breaks consistently.
 
-Before you run the demo, make sure you know what your `restock_note.wav` contains. This learning path assumes the WAV is a short “store associate voice note” describing what to restock.
+## Prepare the audio asset
 
-### Suggested Audio Content Scenario
+This example assumes that `restock_note.wav` contains a short spoken instruction describing what to restock.
 
-Record (or provide) a short voice note similar to the following:
+A suitable recording might say:
 
-* Please restock the bottom-left large pet food bags, add ten bags.  
-* Also restock the middle-left canned pet food, add twenty-four cans.  
-* Finish before 3 PM today. If something is out of stock, use a similar substitute.
+- please restock the bottom-left large pet food bags, add ten bags
+- also restock the middle-left canned pet food, add twenty-four cans
+- finish before 3 PM today
+- if something is out of stock, use a similar substitute
 
-Your goal in this module is to extract these fields from the audio:
+From that audio, the model should extract:
 
-- **Items**
-- **Quantities**
-- **Zones**
-- **Deadline**
-- **Substitution policy**
+- items
+- quantities
+- shelf zones
+- deadline
+- substitution policy
 
-…and encode them as a **single-line ticket** with labeled fields.
+The goal is not full speech analytics. The goal is to turn a short spoken instruction into a compact operational ticket.
 
+## Verify the audio format
 
-### Verify the WAV file format
-
-This demo expects a WAV (RIFF) file: For example `restock_note.wav` 
+Check that the input file is a WAV file:
 
 ```bash
 file ~/mnn/assets/restock_note.wav
 ```
 
-If you only have an MP3 file, convert it to a suitable WAV format:
+You should see output indicating that the file is a RIFF/WAV audio file.
+
+If you only have an MP3 recording, convert it to a speech-friendly WAV format:
 
 ```bash
-ffmpeg -y -i input.mp3 -ac 1 -ar 16000 -c:a pcm_s16le ~/mnn_lp/assets/restock_note.wav
+ffmpeg -y -i input.mp3 -ac 1 -ar 16000 -c:a pcm_s16le ~/mnn/assets/restock_note.wav
 ```
 
-This produces a **mono, 16 kHz, 16-bit PCM** WAV file, which is commonly used for speech models.
+This creates a mono, 16 kHz, 16-bit PCM WAV file, which is a practical format for speech input.
 
-```
+The spoken content can be similar to:
+
+```text
 This is the pet food aisle, left shelf. Please restock the bottom left large pet food bags, add 10 bags. Also restock the middle left canned food, add 24 cans. Finish before 3 PM today. If something is out of stock, use a similar substitute.
 ```
 
-## Step 2 - Create the audio prompt
+## Create the audio prompt
 
-llm_demo commonly treats ***each line*** as a separate prompt. Keep this prompt file as ***one line***.
+Create a prompt file that attaches the WAV file and asks the model to return a single structured line.
 
-This prompt instructs the model to:
-- Use ***generic*** item labels (avoid brands unless clearly spoken)
-- Output ***NOT_SURE*** for fields not stated in the audio
-- Produce a single-line ticket that is easy to read and parse
+{{% notice Note %}}
+`llm_demo` commonly treats each line in the file as a separate prompt. Keep the full prompt on one line.
+{{% /notice %}}
 
+Create the prompt file:
 
 ```bash
 cat > ~/mnn/prompt_audio_ticket.txt <<'EOF'
@@ -69,17 +73,26 @@ cat > ~/mnn/prompt_audio_ticket.txt <<'EOF'
 EOF
 ```
 
-## Step 3 - Run the audio demo
+If your username or home directory is different, replace `/home/radxa` with the correct local path.
 
-Run the audio demo:
+This prompt asks the model to:
+
+- use generic item names instead of brands
+- return `NOT_SURE` for missing details
+- preserve a one-line structure that is easy to read and parse
+
+## Run the audio demo
+
+Run `llm_demo` with the model configuration and the audio prompt:
 
 ```bash
 cd ~/mnn/MNN/build
 ./llm_demo ~/mnn/Qwen2.5-Omni-7B-MNN/config.json ~/mnn/prompt_audio_ticket.txt
 ```
 
-The expected result will be: 
-```
+You should see output similar to:
+
+```text
 config path is /home/radxa/mnn/Qwen2.5-Omni-7B-MNN/config.json
 CPU Group: [ 1  2  3  4 ], 799999 - 1800968
 CPU Group: [ 7  8 ], 799897 - 2199795
@@ -102,14 +115,20 @@ Restock ticket;
 - Confidence: medium. Restock the large pet food bag and canned food as per the given quantities. If any item is out of stock, replace it with a similar substitute. Make sure it's done by 3 p.m. today. Let me know if you need further clarification or if there's anything else on your mind.
 
 ```
-
+The exact wording can vary. What matters is that the response stays close to the requested structure and reflects the spoken content rather than invented details.
 ![image2 Prompt Audio Ticket](prompt_audio_ticket.gif)
 
-## Checkpoint
+## Verify the result
 
-You have completed this module when:
+Check that:
 
-- The ticket’s **quantities and deadline** match what is actually spoken
-- Fields that are **not mentioned** in the audio are filled with `NOT_SURE` rather than invented values
-- The resulting line is easy to parse and understand
+- the quantities and deadline match the spoken note
+- any missing field is returned as `NOT_SURE`
+- the output remains on a single structured line
+- the ticket is readable enough for a simple downstream workflow
 
+If the model adds extra commentary after the ticket, tighten the prompt and rerun the command. If quantities or zones are wrong, verify the audio clarity and confirm that the WAV file was converted correctly.
+
+## Next steps
+
+In the next module, you will combine multimodal inference patterns into a practical restock workflow on Armv9.
