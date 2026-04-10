@@ -1,10 +1,12 @@
 ---
-title: Identify the system topology and configuration
+title: Identify Arm CPU topology, cache hierarchy, and NUMA configuration
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+
+## Memory subsystem impact on Arm server performance
 
 Memory behavior is one of the primary determinants of compute performance for memory-bound applications. The CPU-side memory subsystem, including caches, interconnects, and DRAM, directly impact performance. Understanding latency, streaming bandwidth, and how caches and cores share resources is essential for diagnosing bottlenecks and tuning software on Arm servers.
 
@@ -241,13 +243,13 @@ On both systems, every core has its own unique L1d, L1i, and L2 index, so those 
 
 ### Visualize the topology with hwloc
 
-The `hwloc` package provides a visual representation. Install it using the package manager:
+The `hwloc` package provides a visual representation of the hardware topology, including CPU cores, cache hierarchies, and NUMA nodes. The graphical output makes it easier to understand how cores are organized and which caches they share. Install it using the package manager:
 
 ```bash
 sudo apt-get install -y hwloc
 ```
 
-Generate a graphical representation of the hierarchy:
+Generate a PNG diagram of the complete hardware hierarchy. The `hwloc-ls` command enumerates the system topology and formats it as a tree diagram showing cores, caches, and memory:
 
 ```bash
 hwloc-ls --of png > topology.png
@@ -357,7 +359,7 @@ Below is a summary of each system.
 | L3 (shared) | 32 MB | 36 MB |
 | DRAM type | DDR4 | DDR5 |
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 In this section you:
 - Identified the CPU model, core count, and NUMA topology of your test systems
