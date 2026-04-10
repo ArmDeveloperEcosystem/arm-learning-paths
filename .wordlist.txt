@@ -5971,3 +5971,9 @@ osRtxTimerThread
 piezo
 safetyisolation
 solderless
+CMake's
+PMULL
+SVG
+adler
+asimd
+relinking
