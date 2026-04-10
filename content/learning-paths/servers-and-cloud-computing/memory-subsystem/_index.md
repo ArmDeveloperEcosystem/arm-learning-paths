@@ -3,10 +3,6 @@ title: Characterize the memory subsystem of an Arm Linux system using ASCT
 
 description: Use ASCT to measure cache latency, streaming bandwidth, and coherency latency on Arm Neoverse systems, and compare results across Graviton generations.
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 60
 
 who_is_this_for: This is an advanced topic for software developers and performance engineers who want to understand and characterize the CPU-side memory subsystem of Arm Linux systems.
@@ -19,9 +15,9 @@ learning_objectives:
     - Compare results across Arm systems and draw conclusions
 
 prerequisites:
-    - Two or more Arm Linux systems with root or sudo access. The examples use AWS Graviton2 and Graviton4 instances, but other systems are possible.
-    - Arm System Characterization Tool (ASCT) installed on each system.
-    - A good understanding of CPU memory subsystems, including cache hierarchies, cache lines, and DRAM in the memory hierarchy.
+    - Two or more Arm Linux systems with root or sudo access. The examples use AWS Graviton2 and Graviton4 instances, but other systems are possible
+    - Arm System Characterization Tool (ASCT) installed on each system
+    - A good understanding of CPU memory subsystems, including cache hierarchies, cache lines, and DRAM in the memory hierarchy
 
 author: Jason Andrews
 

@@ -22,7 +22,7 @@ Note that all site content, including new contributions, is licensed under a [Cr
 
 ## AI Development Tools
 
-When using AI coding assistants (GitHub Copilot, Amazon Q, Gemini, Cursor, etc.), refer to `.github/copilot-instructions.md` for project-specific guidelines including content requirements, writing style standards, and Arm terminology conventions for Learning Paths.
+When using AI coding assistants (GitHub Copilot, Kiro, Gemini, Cursor, etc.), refer to `.github/copilot-instructions.md` for project-specific guidelines including content requirements, writing style standards, and Arm terminology conventions for Learning Paths.
 
 <br/>
 
@@ -30,7 +30,7 @@ When using AI coding assistants (GitHub Copilot, Amazon Q, Gemini, Cursor, etc.)
 The Learning Path site contains software-based Learning Paths and Tool Install Guides, and complements the other Arm resources in the Arm Developer Hub and beyond. Here are links to other areas depending on what/how you want to learn:
   * [Learning Paths](https://learn.arm.com/learning-paths)
   * [Tool Install Guides](https://learn.arm.com/install-guides)
-  * [Arm IP Documentation](https://developer.arm.com)  
+  * [Arm Documentation](https://developer.arm.com)  
 
 
 

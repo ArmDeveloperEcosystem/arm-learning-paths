@@ -116,6 +116,66 @@ function trackHeaderInteraction(type,name){
     });
 }
 
+function trackLearningPathListMetadata() {
+    let learning_path_cards = document.querySelectorAll('.path-card:not(.global-nav-path-card)');
+    if (!learning_path_cards || learning_path_cards.length === 0) {
+        return;
+    }
+
+    let total_step_rows = 0;
+    for (let card of learning_path_cards) {
+        let steps_payload = card.getAttribute('data-lp-steps') || '[]';
+        try {
+            let steps = JSON.parse(steps_payload);
+            total_step_rows += Array.isArray(steps) ? steps.length : 0;
+        } catch (error) {
+            // Ignore malformed payload; fallback row is emitted below.
+        }
+    }
+
+    _satellite.track('learning-path-list-metadata', {
+        'lp-list-category': window.location.pathname.split('/')[2] || '',
+        'lp-list-count': learning_path_cards.length,
+        'lp-step-row-count': total_step_rows
+    });
+
+    for (let card of learning_path_cards) {
+        let steps = [];
+        try {
+            steps = JSON.parse(card.getAttribute('data-lp-steps') || '[]');
+        } catch (error) {
+            steps = [];
+        }
+
+        // Fallback for safety if step extraction fails.
+        if (!Array.isArray(steps) || steps.length === 0) {
+            steps = [{
+                'full-url': card.getAttribute('data-lp-url') || '',
+                'weight': '',
+                'step-title': card.getAttribute('data-lp-title') || ''
+            }];
+        }
+
+        for (let step of steps) {
+            _satellite.track('learning-path-row-metadata', {
+                'full-url': step['full-url'] || card.getAttribute('data-lp-url') || '',
+                'learning-path-title': card.getAttribute('data-lp-title') || '',
+                'weight': step['weight'] || '',
+                'step-title': step['step-title'] || '',
+                'author': card.getAttribute('data-lp-author') || '',
+                'skill-level': card.getAttribute('data-lp-skill-level') || '',
+                'subjects': card.getAttribute('data-lp-subjects') || '',
+                'arm-ip': card.getAttribute('data-lp-arm-ip') || '',
+                'os': card.getAttribute('data-lp-os') || '',
+                'tools-software-languages': card.getAttribute('data-lp-tools-software-languages') || '',
+                'content-category': card.getAttribute('data-lp-content-category') || '',
+                'minutes-to-complete': card.getAttribute('data-lp-minutes-to-complete') || '',
+                'last-updated-date': card.getAttribute('data-lp-last-updated-date') || ''
+            });
+        }
+    }
+}
+
 
 function doneTyping(search_str) {
     //console.log('send',search_str);
