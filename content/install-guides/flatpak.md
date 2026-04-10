@@ -104,18 +104,7 @@ The output is similar to:
 Flatpak 1.16.1
 ```
 
-If an installation becomes corrupted or incomplete, run the following command to check your local Flatpak installation and fix any inconsistencies:
-
-```bash
-flatpak repair
-```
-If you need to update all installed Flatpak applications and runtimes to their latest versions, run:
-
-```bash
-flatpak update
-```
-
-## Add Flathub repository as remote 
+## Add Flathub repository as remote
 
 Add the Flathub repository as a remote source:
 
@@ -135,7 +124,6 @@ The output should include a line for `flathub`:
 Name    Options
 flathub system
 ```
-
 ## Find Arm-native applications on Flathub
 
 Flatpak makes it straightforward to discover which applications support aarch64. Visit the [Flathub app browser](https://flathub.org/apps) and filter by architecture to find applications with native Arm builds. You can also search from the command line after adding the Flathub remote:
@@ -188,13 +176,7 @@ Installation: system
 
 The `Arch: aarch64` line confirms a native Arm build is installed.
 
-To inspect the sandbox permissions granted to VSCodium, run:
-
-```bash
-flatpak info --show-permissions com.vscodium.codium
-```
-
-To start VSCodium on the project in your current directory, run:
+<!-- To start VSCodium on the project in your current directory, run:
 
 ```bash
 flatpak run com.vscodium.codium . &
@@ -210,21 +192,44 @@ Now, run VSCodium using the alias:
 
 ```bash
 codium . &
+``` -->
+
+
+## Troubleshooting
+
+If a Flatpak installation becomes corrupted or incomplete, run the following command to check your local Flatpak installation and fix any inconsistencies:
+
+```bash
+flatpak repair
 ```
 
+If you need to update all installed Flatpak applications and runtimes to their latest versions, run:
 
-### Open an interactive shell in VSCodium's sandbox
+```bash
+flatpak update
+```
 
-Opening an interactive shell is useful for debugging permission or runtime issues. To open an interactive shell inside VSCodium's sandbox, run:
+If you need to inspect the sandbox permissions granted to a Flatpak application, run:
+
+```bash
+flatpak info --show-permissions com.vscodium.codium
+```
+
+In this example, the command returns the sandbox permissions granted to VSCodium.
+
+Opening an interactive shell is useful for debugging permission or runtime issues. If you need to open an interactive shell in a Flatpak application's sandbox, run:
 
 ```bash
 flatpak run --command=bash com.vscodium.codium
 ```
+
+In this example, the command opens a shell in VSCodium's sandbox.
+
 {{% notice Note %}}
 Not all applications include `bash` in their sandbox, so this command may not work for every Flatpak. In such cases, your shell prompt may not look any different, but you are in the sandbox. 
 {{% /notice %}}
 
-To confirm that the shell is open, run:
+<!-- To confirm that the shell is open, run:
 
 ```bash
 ls /app
@@ -243,8 +248,7 @@ PRETTY_NAME="Freedesktop SDK 25.08 (Flatpak runtime)"
 BUG_REPORT_URL=https://gitlab.com/freedesktop-sdk/freedesktop-sdk/issues
 ```
 
-The `/app` directory contains the application runtime files, and the `os-release` file shows the Flatpak runtime rather than the host OS. 
-
+The `/app` directory contains the application runtime files, and the `os-release` file shows the Flatpak runtime rather than the host OS.  -->
 
 ## Clean up
 
