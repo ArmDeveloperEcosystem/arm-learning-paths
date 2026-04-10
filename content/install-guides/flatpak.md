@@ -3,7 +3,7 @@ title: "Flatpak"
 minutes_to_complete: 10
 official_docs: "https://docs.flatpak.org/en/latest/"
 author: "Jason Andrews"
-description: "Install Flatpak on Arm Linux, add the Flathub remote, and verify the setup by running a native aarch64 application."
+description: "Install Flatpak on Arm Linux, add the Flathub remote, and verify the setup by installing a native aarch64 application."
 weight: 1
 draft: true
 tool_install: true
@@ -214,7 +214,6 @@ If you need to inspect the sandbox permissions granted to a Flatpak application,
 ```bash
 flatpak info --show-permissions com.vscodium.codium
 ```
-
 In this example, the command returns the sandbox permissions granted to VSCodium.
 
 Opening an interactive shell is useful for debugging permission or runtime issues. If you need to open an interactive shell in a Flatpak application's sandbox, run:
