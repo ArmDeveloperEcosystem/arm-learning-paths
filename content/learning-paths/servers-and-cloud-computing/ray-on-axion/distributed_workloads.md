@@ -32,7 +32,7 @@ results = ray.get([square.remote(i) for i in range(10)])
 print("Results:", results)
 ```
 
-### Explanation
+### Code explanation
 
 * `ray.init()` → connects to the running Ray cluster
 * `@ray.remote` → converts a function into a distributed task
@@ -92,7 +92,7 @@ trainer = TorchTrainer(
 trainer.fit()
 ```
 
-### Execute training
+### Run the training script
 
 ```bash
 python3 ray_train.py
@@ -115,14 +115,14 @@ The output is similar to:
 
 This confirms distributed training across multiple workers.
 
-## Explanation
+## Training code explanation
 
 * `TorchTrainer` → handles distributed training execution
 * `ScalingConfig(num_workers=2)` → runs training on 2 workers
 * Each worker executes training in parallel
 * Logs can appear from multiple processes
 
-## Ray Jobs View (Tasks & Training)
+## Ray Jobs view (tasks and training)
 
 ![Ray Dashboard Jobs tab showing successful execution of ray_test.py and ray_train.py#center](images/ray-jobs.png "Ray Jobs tab showing distributed tasks and training execution status")
 

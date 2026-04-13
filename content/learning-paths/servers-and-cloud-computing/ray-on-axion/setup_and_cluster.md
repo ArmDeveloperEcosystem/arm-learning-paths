@@ -175,9 +175,9 @@ http://<VM-IP>:8265
 
 The Ray Dashboard provides visibility into jobs, tasks, and resource utilization.
 
-## Ray Dashboard Overview
+## Ray Dashboard overview
 
-![Ray Dashboard showing cluster overview, utilization, and navigation tabs#center](images/ray-dashboard.png "Ray Dashboard Overview showing cluster status and metrics")
+![Ray Dashboard showing cluster overview, utilization, and navigation tabs#center](images/ray-dashboard.png "Ray Dashboard overview showing cluster status and metrics")
 
 The Ray Dashboard helps monitor distributed execution and debug workloads in real time.
 

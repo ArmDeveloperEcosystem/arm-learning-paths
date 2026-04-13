@@ -42,14 +42,14 @@ results = tuner.fit()
 print("Best result:", results.get_best_result(metric="score", mode="max"))
 ```
 
-### Explanation
+### Code explanation
 
 * `tune.grid_search()` → tries multiple hyperparameter values
 * Each value runs as a separate parallel trial
 * `session.report()` → sends metrics back to Ray
 * `Tuner.fit()` → executes all trials
 
-### Execute tuning
+### Run hyperparameter tuning
 
 ```bash
 python3 ray_tune.py
@@ -126,7 +126,7 @@ app = Model.bind()
 serve.run(app)
 ```
 
-### Explanation
+### Code explanation
 
 * `serve.start()` → initializes serving system
 * `@serve.deployment` → defines deployable service
@@ -150,7 +150,7 @@ The output is similar to:
 {"message":"Hello from Ray Serve on Arm VM!"}
 ```
 
-## Ray Tune Execution in Dashboard
+## Ray Tune execution in Ray Dashboard
 
 ![Ray Dashboard Jobs tab showing ray_tune.py trials with SUCCEEDED status#center](images/ray-jobs-status.png "Ray Tune trials executed successfully with different configurations")
 
@@ -183,7 +183,7 @@ print("Execution Time:", end - start)
 ```
 
 
-### Execute benchmark
+### Run the benchmark
 
 ```bash
 ray stop
