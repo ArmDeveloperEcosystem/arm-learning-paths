@@ -6,11 +6,11 @@ weight: 2
 layout: learningpathall
 ---
 
-## Introduction to SIMD on Arm and why it matters for performance on Arm CPUs
+## Introduction to SIMD on Arm
 
-Writing high-performance software on Arm often means using single-instruction, multiple-data (SIMD) technologies. Many developers start with Neon, a familiar fixed-width vector extension. As Arm architectures evolve, so do the SIMD capabilities available to you.
+Writing high-performance software on Arm often means using single-instruction, multiple-data (SIMD) technologies. Many developers start with Neon, a familiar fixed-width vector extension. As Arm architectures evolve, the SIMD capabilities available to you also expand.
 
-This Learning Path uses the Scalable Vector Extension (SVE) and the Scalable Matrix Extension (SME) to demonstrate modern SIMD patterns. They are two powerful, scalable vector extensions designed for modern workloads. Unlike Neon, these architecture extensions are not just wider; they are fundamentally different. They introduce predication, vector-length-agnostic (VLA) programming, gather/scatter, streaming modes, and tile-based compute with ZA state. The result is more power and flexibility, but there can be a learning curve to match.
+This Learning Path uses the Scalable Vector Extension (SVE) and the Scalable Matrix Extension (SME) to demonstrate modern SIMD patterns. These are two powerful, scalable vector extensions designed for modern workloads. Unlike Neon, these architecture extensions aren't just wider; they're fundamentally different. They introduce predication, vector-length-agnostic (VLA) programming, gather/scatter, streaming modes, and tile-based compute with ZA state. The result is more power and flexibility, but there can be a learning curve to match.
 
 ## What is the SIMD Loops project?
 
@@ -30,6 +30,6 @@ The project includes:
 - A simple command-line runner to execute any loop interactively
 - Optional standalone binaries for bare-metal and simulator use
 
-You do not need to rely on auto-vectorization or guess at compiler flags. Each loop is handwritten and annotated to make the intended use of SIMD features clear. Study a kernel, modify it, rebuild, and observe the effect - this is the core learning loop.
+You don't need to rely on auto-vectorization or guess at compiler flags. Each loop is handwritten and annotated to make the intended use of SIMD features clear. Study a kernel, modify it, rebuild, and observe the effect—this is the core learning loop.
 
 
