@@ -16,23 +16,23 @@ multitool_install_part: false
 
 ## How Flatpak sandboxing works
 
-Each Flatpak application runs inside an isolated environment built on three Linux kernel features: namespaces, seccomp, and cgroups. Namespaces give the application its own view of the filesystem, network, and process tree. Seccomp filters restrict the system calls the application can make. Together, these mechanisms prevent an application from reading files outside its sandbox or interfering with other processes on the host.
+Each Flatpak application runs inside an isolated environment built on three Linux kernel features: namespaces, secure computing mode (seccomp), and control groups (cgroups). Namespaces give the application its own view of the filesystem, network, and process tree. Seccomp filters restrict the system calls the application can make. Together, these mechanisms prevent an application from reading files outside its sandbox or interfering with other processes on the host.
 
 The sandbox is implemented by [bubblewrap](https://github.com/containers/bubblewrap), a low-level sandboxing tool that Flatpak calls at launch time. Applications declare the permissions they need, such as access to the home directory, the network, or audio devices, in a manifest. You can inspect and override these permissions using `flatpak override`.
 
 ## How Flatpak applications are packaged
 
-A Flatpak application is distributed as an OSTree commit, a content-addressed filesystem tree stored in a local repository. When you install an application, Flatpak fetches only the changed objects from the remote, similar to how Git fetches commits. This makes updates efficient even for large applications.
+A Flatpak application is distributed as an [OSTree](https://ostreedev.github.io/ostree/introduction/) commit, a content-addressed filesystem tree stored in a local repository. When you install an application, Flatpak fetches only the changed objects from the remote, similar to how Git fetches commits. This makes updates efficient even for large applications.
 
-Applications either bundle their own libraries directly or declare runtime dependencies, such as `org.freedesktop.Platform` or `org.gnome.Platform`. The runtime provides a consistent base set of libraries, such as libc and GTK, that multiple applications can share on disk, reducing total storage. The application and its runtime are kept separate from the host system libraries, which means you don't need to resolve conflicts.
+Applications either bundle their own libraries directly or declare runtime dependencies, such as `org.freedesktop.Platform` or `org.gnome.Platform`. The runtime provides a consistent base set of libraries, such as libc and GTK. Multiple applications can share these libraries on disk, reducing total storage. The application and its runtime are kept separate from the host system libraries, which means you don't need to resolve conflicts.
 
 For Arm developers, the key advantage is that Flatpak applications can publish separate builds for `x86_64` and `aarch64` under the same application ID. Flatpak selects the correct architecture automatically at install time.
 
 ## How Flatpak compares to Linux package managers
 
-Linux package managers like `apt`, `dnf`, and `pacman` are tightly coupled to the distribution release cycle. An application packaged for Ubuntu 24.04 may lag the upstream version, and some applications aren't packaged for every Linux distribution. Flatpak addresses this by letting upstream developers publish and maintain their own builds directly on Flathub. This allows you to get the current release of an application on any supported Linux distribution.
+Linux package managers such as `apt`, `dnf`, and `pacman` are tightly coupled to the distribution release cycle. An application packaged for Ubuntu 24.04 may lag the upstream version, and some applications aren't packaged for every Linux distribution. Flatpak addresses this by letting upstream developers publish and maintain their own builds directly on Flathub. This allows you to get the current release of an application on any supported Linux distribution.
 
-Because a Flatpak application bundles its own libraries or pins a specific runtime version, installing or updating it can't conflict with host system libraries or break other packages. A distro upgrade won't silently change the libraries an application links against. This also means you can run two different applications that require incompatible versions of the same library side by side without issues.
+A Flatpak application bundles its own libraries or pins a specific runtime version. This means installing or updating it can't conflict with host system libraries or break other packages. A distro upgrade won't silently change the libraries an application links against. This also means you can run two different applications that require incompatible versions of the same library side by side without issues.
 
 The following instructions cover installing Flatpak on Arm Linux (aarch64), adding the Flathub remote, and verifying the installation by installing VSCodium.
 
@@ -127,7 +127,7 @@ flathub system
 
 ## Verify Flatpak installation by installing VSCodium
 
-[VSCodium](https://vscodium.com/) is the telemetry-free build of VS Code that is available on Flathub with a native Arm build. It is a useful Arm-native application to test Flatpak with. 
+[VSCodium](https://vscodium.com/) is the telemetry-free build of VS Code that is available on Flathub with a native Arm build. This makes it a useful Arm-native application to test Flatpak with. 
 
 Install VSCodium with the `--assumeyes` flag, which automatically answers yes to any prompts during installation:
 
@@ -135,7 +135,7 @@ Install VSCodium with the `--assumeyes` flag, which automatically answers yes to
 flatpak install --assumeyes flathub com.vscodium.codium
 ```
 
-Confirm the installation and check the architecture:
+Confirm the installation was successful and check the architecture:
 
 ```bash
 flatpak info com.vscodium.codium
@@ -165,7 +165,7 @@ Installation: system
         Date: 2026-03-30 05:03:53 +0000
 ```
 
-The `Arch: aarch64` line confirms that a native Arm build is installed.
+The `Arch: aarch64` line in the output confirms that you installed a native Arm build.
 
 <!-- To start VSCodium on the project in your current directory, run:
 
@@ -219,14 +219,14 @@ If you need to inspect the sandbox permissions granted to a Flatpak application,
 ```bash
 flatpak info --show-permissions com.vscodium.codium
 ```
-The example command returns the sandbox permissions granted to VSCodium installed in the previous step. Replace `com.vscodium.codium` with your application. 
+The example command returns the sandbox permissions granted to VSCodium installed in the previous step. Replace `com.vscodium.codium` with your application's identifier. 
 
 Opening an interactive shell is useful for debugging permission or runtime issues. If you need to open an interactive shell in a Flatpak application's sandbox, run:
 
 ```bash
 flatpak run --command=bash com.vscodium.codium
 ```
-The example command opens a shell in VSCodium's sandbox. Replace `com.vscodium.codium` with your application. 
+The example command opens a shell in VSCodium's sandbox. Replace `com.vscodium.codium` with your application's identifier. 
 
 {{% notice Note %}}
 Not all applications include `bash` in their sandbox, so this command may not work for every Flatpak. In such cases, your shell prompt may not look any different, but you are in the sandbox. 
@@ -251,7 +251,7 @@ PRETTY_NAME="Freedesktop SDK 25.08 (Flatpak runtime)"
 BUG_REPORT_URL=https://gitlab.com/freedesktop-sdk/freedesktop-sdk/issues
 ```
 
-The `/app` directory contains the application runtime files, and the `os-release` file shows the Flatpak runtime rather than the host OS. 
+The `/app` directory contains the application runtime files. The `os-release` file shows the Flatpak runtime rather than the host OS. 
 
 ## Clean up
 
