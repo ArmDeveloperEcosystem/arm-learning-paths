@@ -90,7 +90,7 @@ sudo zypper install -y flatpak
 
 After installing, log out and log back in to ensure that the desktop integration works correctly.
 
-## Confirm Flatpak is installed
+## Confirm Flatpak is available
 
 Confirm Flatpak is available and check the version:
 
