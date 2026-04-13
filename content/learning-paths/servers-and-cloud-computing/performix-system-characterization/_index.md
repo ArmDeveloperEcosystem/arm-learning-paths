@@ -1,18 +1,18 @@
 ---
-title: Understand your system's characteristics with Arm Performix
+title: Understand system characteristics with Arm Performix
 
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic for anyone wanting to understand the performance characteristics of their hardware system.
+who_is_this_for: This is an introductory topic for anyone who wants to understand the performance characteristics of a hardware system.
 
 learning_objectives:
-    - Run Performix's System Characterization recipe to understand hardware configuration and performance
-    - Understand various memory latency and bandwidth benchmark results
-    - View output directory to see plots and results
+    - Run Arm Performix's System Characterization recipe to understand hardware configuration and performance
+    - Interpret memory latency and bandwidth benchmark results
+    - View the output directory to inspect generated plots and raw results
 
 prerequisites:
-    - A target machine to benchmark. The Arm System Characterization Tool itself (part of Performix) is cross-platform and cross-OS. 
+    - A target machine to benchmark. The Arm System Characterization Tool, included with Performix, is cross-platform and cross-OS.
 
 author:
 - Brendan Long

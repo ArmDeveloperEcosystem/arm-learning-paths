@@ -1,5 +1,5 @@
 ---
-title: View Benchmark results in Performix UI
+title: View benchmark results in the Performix UI
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -8,48 +8,53 @@ layout: learningpathall
 
 ## View the run results in the Performix GUI
 
-Since the System Charcterization recipe uses the standalone Arm System Characterization Tool (ASCT), it creates an output directory of all ASCT's results and brings some of them into the GUI. At the time of writing, Performix presents the data in tabular form and links to the output directory for plots and raw data.
+Because the System Characterization recipe uses the standalone Arm System Characterization Tool (ASCT), it creates an output directory for all ASCT results and imports a subset of those results into the GUI. At the time of writing, Performix presents the data in tabular form and links to the output directory for plots and raw data.
 
 ### Idle Latency
 
-In Idle Latency, ASCT reports a list of memory latency seen in each non-uniform memory access (NUMA) node while idle. This could be used to detect performance bottlenecks caused by workload configuration and identify which nodes are closer to memory resources.
-![Idle Latency#center](./idle-latency.webp "Idle Latency results")
+In **Idle Latency**, ASCT reports memory latency for each non-uniform memory access (NUMA) node while the system is idle. You can use this view to spot bottlenecks caused by workload placement and to identify which nodes are closest to memory resources.
 
-### Peak bandwidth
+![Arm Performix Idle Latency table showing NUMA-node memory latency#center](./idle-latency.webp "Idle Latency Results")
 
-Peak bandwidth shows the maximum measured memory bandwidth observed for different patterns of read-write behavior and how it compares to the expected theorical peak the system could achieve.
-![Peak Bandwidth#center](./peak-bandwidth.webp)
+### Peak Bandwidth
 
-### Cross-NUMA bandwidth
+**Peak Bandwidth** shows the maximum measured memory bandwidth for different read and write patterns, and compares those results with the theoretical peak bandwidth of the system.
 
-The cross-NUMA bandwidth results show the bandwidth achieved by memory requests crossing NUMA node boundaries.
-![Cross NUMA bandwidth#center](./cross-numa-bandwidth.webp "Cross-NUMA bandwidth")
+![Arm Performix Peak Bandwidth table comparing measured and theoretical bandwidth#center](./peak-bandwidth.webp "Peak Bandwidth Results")
 
-### Latency sweep
+### Cross-NUMA Bandwidth
 
-The latency sweep benchmarks measures latency by datasize to map cache hierarchy and find optimal datasize for other benchmarks.
-It detects the performance characteristics of each level of the memory and cache hierarchy.
-![Latency Sweep Table#center](./latency-sweep-table.webp "Latency Sweep Table")
+**Cross-NUMA Bandwidth** shows the bandwidth achieved when memory requests cross NUMA node boundaries.
 
-### Bandwidth sweep
+![Arm Performix Cross-NUMA Bandwidth table showing inter-node bandwidth#center](./cross-numa-bandwidth.webp "Cross-NUMA Bandwidth Results")
 
-Sweep bandwidth by datasize to map cache hierarchy.
-Similar to the latency sweep results, this benchmark varies the data size used to inject memory accesses and measures the bandwidth each level of the memory hierarchy.
-![Bandwith Sweep Table#center](./bandwidth-sweep-table.webp "Bandwidth Sweep Table")
+### Latency Sweep
 
-### Core-to-core latency
+The latency sweep benchmark measures latency by data size to map the cache hierarchy and identify appropriate data sizes for other benchmarks. It highlights the performance characteristics of each level of the cache and memory hierarchy.
 
-The core-to-core latency benchmark measures the latency of moving data from one core to another. Because of the combinatorial size of pairs of cores, this benchmark by default only runs on a small subset of the system cores by default.
-![Core to Core Latency Table#center](./core-to-core-ui.webp "Core to Core Latency Table")
+![Arm Performix Latency Sweep table mapping latency across data sizes#center](./latency-sweep-table.webp "Latency Sweep Table")
+
+### Bandwidth Sweep
+
+The bandwidth sweep benchmark varies the data size used to generate memory accesses and measures the bandwidth delivered by each level of the memory hierarchy.
+
+![Arm Performix Bandwidth Sweep table mapping bandwidth across data sizes#center](./bandwidth-sweep-table.webp "Bandwidth Sweep Table")
+
+### Core-to-Core Latency
+
+The core-to-core latency benchmark measures the latency of moving data from one core to another. Because the number of core pairs grows quickly, this benchmark runs on only a subset of system cores by default.
+
+![Arm Performix Core-to-Core Latency table showing latency between selected cores#center](./core-to-core-ui.webp "Core-to-Core Latency Table")
 
 ### System Information
 
 This table shows the system information collected by ASCT, including CPU, memory, and storage details.
-![System Information#center](./system-information.webp "System Information")
 
+![Arm Performix System Information table with CPU, memory, and storage details#center](./system-information.webp "System Information")
 
-## Summary
+## What you've learned and what's next
+
 In this section:
-- You viewed the benchmark results from ASCT in the Performix run results view.
+- You viewed benchmark results from ASCT in the Arm Performix results view.
 
-You're now ready to view plots from the ASCT results directory that can't yet be displayed natively in the Performix UI.
+Next, you'll inspect plots from the ASCT output directory that are not yet displayed directly in the Performix UI.
