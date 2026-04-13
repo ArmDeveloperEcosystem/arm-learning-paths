@@ -1,17 +1,20 @@
 ---
-title: Learn how to write SIMD code on Arm using Rust
+title: Write SIMD code on Arm using Rust
 
 minutes_to_complete: 30
 
 description: Learn how to write SIMD code in Rust on Arm platforms using Neon intrinsics, portable SIMD abstractions, and optimize performance with architecture-specific instructions.
 
-who_is_this_for: This is an advanced topic for software developers who want take advantage of SIMD code on Arm systems using Rust.
+who_is_this_for: This is an advanced topic for software developers who want to take advantage of SIMD code on Arm systems using Rust.
 
 learning_objectives: 
-    - Learn how to write SIMD code with Rust on Arm.
+    - Write SIMD code with Rust using std::arch and Neon intrinsics on Arm
+    - Use portable SIMD abstractions with std::simd for cross-platform code
+    - Apply feature detection and target attributes for architecture-specific optimizations
+    - Compare C and Rust SIMD implementations and disassembly output
 
 prerequisites:
-    - An Arm-based computer with recent versions of a C compiler (Clang or GCC) and a Rust compiler installed.
+    - An Arm-based computer with recent versions of a C compiler (Clang or GCC) and a Rust compiler installed
 
 author: Konstantinos Margaritis
 
