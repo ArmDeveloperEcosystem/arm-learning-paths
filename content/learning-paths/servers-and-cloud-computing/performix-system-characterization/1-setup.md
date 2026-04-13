@@ -11,6 +11,10 @@ layout: learningpathall
 The System Characterization recipe runs several low-level benchmarks, diagnostic scripts, and system tests to analyze performance on Arm-based platforms.
 It evaluates key hardware characteristics, such as memory latency and bandwidth, and is especially suited for platform bring-up, system tuning, and architectural comparison tasks. It helps developers and system architects gain early and repeatable insights into performance-critical subsystems.
 
+The latency sweep plot below demonstrates one benchmark that System Characterization provides: the average latency of a memory accesses of varying sizes, which shows latencies of the multi-level cache hierarchy.
+
+![Arm Performix latency-sweep#center](./latency-sweep-plot.webp "Latency Sweep")
+
 ## Before you begin
 
 Make sure Arm Performix is installed on your host machine. The host machine is your local computer where the Arm Performix GUI runs, and it can be a Windows, macOS, or Linux machine. The target machine is the Linux server where your application is compiled and where the application runs.
