@@ -32,7 +32,7 @@ For Arm developers, the key advantage is that Flatpak applications can publish s
 
 Linux package managers such as `apt`, `dnf`, and `pacman` are tightly coupled to the distribution release cycle. An application packaged for Ubuntu 24.04 may lag the upstream version, and some applications aren't packaged for every Linux distribution. Flatpak addresses this by letting upstream developers publish and maintain their own builds directly on Flathub. This allows you to get the current release of an application on any supported Linux distribution.
 
-A Flatpak application bundles its own libraries or pins a specific runtime version. This means installing or updating it can't conflict with host system libraries or break other packages. A distro upgrade won't silently change the libraries an application links against. This also means you can run two different applications that require incompatible versions of the same library side by side without issues. 
+A Flatpak application bundles its own libraries or pins a specific runtime version. This means installing or updating a Flatpak application can't conflict with host system libraries or break other packages. A distro upgrade won't silently change the libraries an application links against. This also means you can run two different applications that require incompatible versions of the same library side by side without issues. 
 
 The following instructions cover installing Flatpak on Arm Linux (aarch64), adding the Flathub remote, and verifying the installation by installing and running VSCodium.
 
@@ -127,7 +127,7 @@ flathub system
 
 ## Verify Flatpak installation by installing and running VSCodium
 
-[VSCodium](https://vscodium.com/) is the telemetry-free build of VS Code that is available on Flathub with a native Arm build. This makes it a useful Arm-native application to test Flatpak with. 
+[VSCodium](https://vscodium.com/) is the telemetry-free build of VS Code that is available on Flathub with a native Arm build. This makes it a useful application to test Flatpak with. 
 
 Install VSCodium with the `--assumeyes` flag, which automatically answers yes to any prompts during installation:
 
@@ -167,7 +167,7 @@ Installation: system
 
 The `Arch: aarch64` line in the output confirms that you installed a native Arm build. 
 
-To start VSCodium on the project in your current directory, run:
+To run VSCodium on the project in your current directory, run:
 
 ```bash
 flatpak run com.vscodium.codium . &
@@ -187,7 +187,7 @@ codium . &
 ```  
 {{% /notice %}}
 
-Installing and running VSCodium successfully indicates that the Flatpak installation was a success.
+By installing and running VSCodium successfully, you can confirm that the Flatpak installation was a success.
 
 ## Find Arm-native applications on Flathub
 
@@ -210,7 +210,7 @@ If a Flatpak installation becomes corrupted or incomplete, run the following com
 ```bash
 flatpak repair
 ```
-To keep installed Flatpak applications and runtimes up-to-date, run:
+To keep all installed Flatpak applications and runtimes up-to-date, run:
 
 ```bash
 flatpak update
@@ -223,14 +223,14 @@ If you need to inspect the sandbox permissions granted to a Flatpak application,
 ```bash
 flatpak info --show-permissions com.vscodium.codium
 ```
-The example command returns the sandbox permissions granted to VSCodium installed in the previous step. Replace `com.vscodium.codium` with your application's identifier. 
+The example command returns the sandbox permissions granted to VSCodium installed in the previous step. To adapt the command for your use case, replace `com.vscodium.codium` with your application's identifier. 
 
-Opening an interactive shell is useful for debugging permission or runtime issues. If you need to open an interactive shell in a Flatpak application's sandbox, run:
+Opening an interactive shell inside a Flatpak application's sandbox is useful for debugging permission or runtime issues. To do so, run:
 
 ```bash
 flatpak run --command=bash com.vscodium.codium
 ```
-The example command opens a shell in VSCodium's sandbox. Replace `com.vscodium.codium` with your application's identifier. 
+The example command opens a shell in VSCodium's sandbox. To adapt the command for your use case, replace `com.vscodium.codium` with your application's identifier. 
 
 {{% notice Note %}}
 Not all applications include `bash` in their sandbox, so this command may not work for every Flatpak. In such cases, your shell prompt may not look any different, but you are in the sandbox. 
