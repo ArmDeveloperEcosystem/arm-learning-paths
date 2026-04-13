@@ -1,5 +1,9 @@
 ---
 title: Scale AI workloads with Ray on Google Cloud C4A Axion VM
+
+draft: true
+cascade:
+    draft: true
     
 minutes_to_complete: 30
 
