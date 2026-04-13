@@ -16,7 +16,7 @@ The latency sweep plot below shows one of the benchmarks that System Characteriz
 
 ## Before you begin
 
-Make sure Arm Performix is installed on your host machine. The host machine is your local computer where the Arm Performix GUI runs, and it can be a Windows, macOS, or Linux machine. The target machine is the Linux server where your application is compiled and runs.
+Make sure Arm Performix is installed on your host machine. The host machine is your local computer where the Arm Performix GUI runs, and it can be a Windows, macOS, or Linux machine. The target machine is the Linux server you wish to benchmark and characterize.
 
 If you do not have Arm Performix installed, see the [Arm Performix install guide](/install-guides/performix/).
 
