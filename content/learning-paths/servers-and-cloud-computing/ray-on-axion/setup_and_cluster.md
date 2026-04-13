@@ -102,9 +102,34 @@ ray start --head --dashboard-host=0.0.0.0 --num-cpus=4
 The output is similar to:
 
 ```output
+Local node IP: 10.0.0.19
+
+--------------------
 Ray runtime started.
-Local node IP: 10.x.x.x
-Dashboard: 127.0.0.1:8265
+--------------------
+
+Next steps
+  To add another node to this Ray cluster, run
+    ray start --address='10.0.0.19:6379'
+  
+  To connect to this Ray cluster:
+    import ray
+    ray.init()
+  
+  To submit a Ray job using the Ray Jobs CLI:
+    RAY_API_SERVER_ADDRESS='http://10.0.0.19:8265' ray job submit --working-dir . -- python my_script.py
+  
+  See https://docs.ray.io/en/latest/cluster/running-applications/job-submission/index.html 
+  for more information on submitting Ray jobs to the Ray cluster.
+  
+  To terminate the Ray runtime, run
+    ray stop
+  
+  To view the status of the cluster, use
+    ray status
+  
+  To monitor and debug Ray, view the dashboard at 
+    10.0.0.19:8265
 ```
 
 ## Verify cluster status
@@ -115,12 +140,29 @@ Check cluster health and resource usage:
 ray status
 ```
 
-The output shows:
+The output is similar to:
 
 ```output
-1 node active
-4 CPUs available
-No failures
+Node status
+---------------------------------------------------------------
+Active:
+ 1 node_1819bcdd417a5b6945701142fdf1b90c68e8b4cfb6884d05e2e1be71
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Total Usage:
+ 0.0/4.0 CPU
+ 0B/10.48GiB memory
+ 0B/4.49GiB object_store_memory
+
+From request_resources:
+ (none)
+Pending Demands:
+ (no resource demands)
 ```
 
 ## Access the dashboard
