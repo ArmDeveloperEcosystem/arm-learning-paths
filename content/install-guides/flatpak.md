@@ -255,7 +255,7 @@ The `/app` directory contains the application runtime files. The `os-release` fi
 
 ## Clean up
 
-To remove VSCodium, run:
+To uninstall VSCodium, run:
 
 ```bash
 flatpak uninstall --assumeyes com.vscodium.codium
