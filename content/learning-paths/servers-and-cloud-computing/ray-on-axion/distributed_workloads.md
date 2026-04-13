@@ -100,12 +100,17 @@ python3 ray_train.py
 
 The output is similar to:
 ```output
-(RayTrainWorker pid=5335) Loss: 1.1982450485229492
-(RayTrainWorker pid=5335) Loss: 1.158831000328064
-(RayTrainWorker pid=5335) Loss: 1.1220906972885132
-(RayTrainWorker pid=5335) Loss: 1.088060736656189
-(RayTrainWorker pid=5335) Loss: 1.0567599534988403
-(RayTrainWorker pid=5336) Loss: 1.4622551202774048 [repeated 5x across cluster] (Ray deduplicates logs by default. Set RAY_DEDUP_LOGS=0 to disable log deduplication, or see https://docs.ray.io/en/master/ray-observability/user-guides/configure-logging.html#log-deduplication for more options.)
+(TrainController pid=5522) Attempting to start training worker group of size 2 with the following resources: [{'CPU': 1}] * 2
+(TrainController pid=5522) Started training worker group of size 2: 
+(TrainController pid=5522) - (ip=10.0.0.19, pid=5563) world_rank=0, local_rank=0, node_rank=0
+(TrainController pid=5522) - (ip=10.0.0.19, pid=5564) world_rank=1, local_rank=1, node_rank=0
+(RayTrainWorker pid=5563) Setting up process group for: env:// [rank=0, world_size=2]
+(RayTrainWorker pid=5563) Loss: 0.9711737036705017
+(RayTrainWorker pid=5563) Loss: 0.9491967558860779
+(RayTrainWorker pid=5563) Loss: 0.9295402765274048
+(RayTrainWorker pid=5563) Loss: 0.911673903465271
+(RayTrainWorker pid=5563) Loss: 0.895072340965271
+(RayTrainWorker pid=5564) Loss: 1.635019063949585 [repeated 5x across cluster] (Ray deduplicates logs by default. Set RAY_DEDUP_LOGS=0 to disable log deduplication, or see https://docs.ray.io/en/master/ray-observability/user-guides/configure-logging.html#log-deduplication for more options.)
 ```
 
 This confirms distributed training across multiple workers.
