@@ -6,7 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-Create a firewall rule in Google Cloud Console to expose required ports for the Ray dashboard and Ray Serve API.
+Create a firewall rule in Google Cloud Console to expose required ports for the Ray Dashboard and Ray Serve API.
 
 {{% notice Note %}}
 For help with GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
@@ -38,7 +38,7 @@ Finally, select **Specified protocols and ports** under the **Protocols and port
 
 Then select **Create**.
 
-![Google Cloud Console Protocols and ports section with TCP ports configured alt-txt#center](images/network-port.png "Setting Ray ports in the firewall rule")
+![Google Cloud Console Protocols and ports section showing TCP checkbox selected with ports 8265, 8000, and 6379 configured for Ray Dashboard, Serve API, and Head Node#center](images/network-port.png "Setting Ray ports in the firewall rule")
 
 ## What you've accomplished and what's next
 

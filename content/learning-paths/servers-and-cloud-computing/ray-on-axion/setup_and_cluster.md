@@ -10,7 +10,7 @@ layout: learningpathall
 
 This section guides you through installing Ray on a GCP Arm64 (Axion) virtual machine and setting up a single-node distributed computing cluster.
 
-You will configure the environment, install dependencies, and initialize a Ray cluster optimized for Arm-based infrastructure.
+You'll configure the environment, install dependencies, and initialize a Ray cluster optimized for Arm-based infrastructure.
 
 ## Update your system
 
@@ -96,7 +96,7 @@ ray start --head --dashboard-host=0.0.0.0 --num-cpus=4
 ```
 
 * `--head` → starts the main node (scheduler)
-* `--dashboard-host=0.0.0.0` → allows external dashboard access
+* `--dashboard-host=0.0.0.0` → allows external Ray Dashboard access
 * `--num-cpus=4` → allocates 4 CPU cores
 
 The output is similar to:
@@ -173,22 +173,22 @@ Open in browser:
 http://<VM-IP>:8265
 ```
 
-This dashboard provides visibility into jobs, tasks, and resource utilization.
+The Ray Dashboard provides visibility into jobs, tasks, and resource utilization.
 
 ## Ray Dashboard Overview
 
 ![Ray Dashboard showing cluster overview, utilization, and navigation tabs#center](images/ray-dashboard.png "Ray Dashboard Overview showing cluster status and metrics")
 
-This dashboard helps monitor distributed execution and debug workloads in real time.
+The Ray Dashboard helps monitor distributed execution and debug workloads in real time.
 
 ## What you've learned and what's next
 
 You have successfully:
 
-* Installed Ray on Arm-based SUSE VM
+* Installed Ray on an Arm-based SUSE VM
 * Created an isolated Python environment
 * Installed required dependencies
 * Initialized a Ray cluster
-* Verified cluster status and dashboard
+* Verified cluster status and Ray Dashboard
 
-Next, you will run distributed workloads using Ray.
+Next, you'll run distributed workloads using Ray.

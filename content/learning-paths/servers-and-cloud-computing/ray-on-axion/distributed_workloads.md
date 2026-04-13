@@ -6,11 +6,11 @@ weight: 6
 layout: learningpathall
 ---
 
-## Run Distributed Workloads with Ray
+## Run distributed workloads with Ray
 
 This section demonstrates how to execute parallel tasks and distributed training workloads using Ray on Arm.
 
-You will run simple distributed functions and then scale to multi-worker training using Ray.
+You'll run distributed functions and then scale to multi-worker training using Ray.
 
 ## Run distributed tasks
 
@@ -120,7 +120,7 @@ This confirms distributed training across multiple workers.
 * `TorchTrainer` → handles distributed training execution
 * `ScalingConfig(num_workers=2)` → runs training on 2 workers
 * Each worker executes training in parallel
-* Logs may appear from multiple processes
+* Logs can appear from multiple processes
 
 ## Ray Jobs View (Tasks & Training)
 
@@ -137,6 +137,6 @@ You have successfully:
 * Executed parallel tasks using Ray Core
 * Converted functions into distributed workloads
 * Performed distributed training using multiple workers
-* Observed execution in the Ray dashboard
+* Observed execution in the Ray Dashboard
 
-Next, you will perform hyperparameter tuning, deploy models, and benchmark performance.
+Next, you'll perform hyperparameter tuning, deploy models, and benchmark performance.

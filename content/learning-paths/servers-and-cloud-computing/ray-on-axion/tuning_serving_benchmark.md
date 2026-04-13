@@ -6,7 +6,7 @@ weight: 7
 layout: learningpathall
 ---
 
-## Ray Tune, Serve, and Benchmarking
+## Hyperparameter tuning, serving, and benchmarking
 
 This section demonstrates hyperparameter tuning, model serving, and performance benchmarking using Ray.
 
@@ -45,7 +45,7 @@ print("Best result:", results.get_best_result(metric="score", mode="max"))
 ### Explanation
 
 * `tune.grid_search()` → tries multiple hyperparameter values
-* Each value runs as a **separate parallel trial**
+* Each value runs as a separate parallel trial
 * `session.report()` → sends metrics back to Ray
 * `Tuner.fit()` → executes all trials
 
@@ -55,7 +55,6 @@ print("Best result:", results.get_best_result(metric="score", mode="max"))
 python3 ray_tune.py
 ```
 
-### Output
 The output is similar to:
 
 ```output
@@ -84,7 +83,7 @@ Best result: Result(
 
 ### Understanding the output
 
-* Ray created **3 parallel trials** using different learning rates
+* Ray created 3 parallel trials using different learning rates
 * Each trial executed independently on available CPU cores
 * Scores represent the performance of each configuration
 
@@ -96,7 +95,7 @@ Best result: Result(
 
 **Best configuration = learning rate 0.1**
 
-* Total runtime ≈ **1 second** (parallel execution)
+* Total runtime ≈ 1 second (parallel execution)
 * Results stored in:
 
 ```bash
@@ -148,14 +147,14 @@ curl http://127.0.0.1:8000/
 The output is similar to:
 
 ```output
-{"message":"Hello from Ray Serve on ARM VM!"}
+{"message":"Hello from Ray Serve on Arm VM!"}
 ```
 
 ## Ray Tune Execution in Dashboard
 
 ![Ray Dashboard Jobs tab showing ray_tune.py trials with SUCCEEDED status#center](images/ray-jobs-status.png "Ray Tune trials executed successfully with different configurations")
 
-The dashboard shows all jobs executed successfully, confirming correct Ray cluster operation.
+The Ray Dashboard shows all jobs executed successfully, confirming correct Ray cluster operation.
 
 ## Benchmark distributed execution
 
@@ -202,10 +201,10 @@ Execution Time: 5.171869277954102
 ## Understanding the benchmark
 
 * 20 tasks executed in parallel
-* Each task takes ~1 second
+* Each task takes approximately 1 second
 * With 4 CPUs → total time ≈ 5 seconds
 
-**Sequential execution would take ~20 seconds**
+**Sequential execution would take approximately 20 seconds**
 
 * Confirms Ray parallel execution
 
