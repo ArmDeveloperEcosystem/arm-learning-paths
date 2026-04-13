@@ -73,7 +73,7 @@ Install common ML libraries:
 pip install torch torchvision pandas scikit-learn
 ```
 
-## Verify installation:
+## Verify the installation
 
 Check that Ray is installed correctly:
 

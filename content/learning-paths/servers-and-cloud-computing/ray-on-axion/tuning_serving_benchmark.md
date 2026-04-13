@@ -1,5 +1,5 @@
 ---
-title: Ray Tune, Serve and Benchmarking
+title: Ray Tune, Serve, and Benchmarking
 weight: 7
 
 ### FIXED, DO NOT MODIFY
@@ -193,7 +193,7 @@ ray start --head --num-cpus=4
 python3 ray_benchmark.py
 ```
 
-Output:
+The output is similar to:
 
 ```output
 Execution Time: 5.171869277954102
