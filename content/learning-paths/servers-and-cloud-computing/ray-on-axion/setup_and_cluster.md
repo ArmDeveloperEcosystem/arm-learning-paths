@@ -165,9 +165,9 @@ Pending Demands:
  (no resource demands)
 ```
 
-## Access the dashboard
+## Access the Ray Dashboard
 
-Open in browser:
+Open the following URL in your browser:
 
 ```
 http://<VM-IP>:8265
