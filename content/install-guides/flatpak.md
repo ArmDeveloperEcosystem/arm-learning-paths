@@ -3,7 +3,7 @@ title: "Flatpak"
 minutes_to_complete: 10
 official_docs: "https://docs.flatpak.org/en/latest/"
 author: "Jason Andrews"
-description: "Install Flatpak on Arm Linux, add the Flathub remote, and verify the setup by installing a native aarch64 application."
+description: "Install Flatpak on Arm Linux, add the Flathub remote, and verify the setup by installing and running a native aarch64 application."
 weight: 1
 draft: true
 tool_install: true
@@ -32,9 +32,9 @@ For Arm developers, the key advantage is that Flatpak applications can publish s
 
 Linux package managers such as `apt`, `dnf`, and `pacman` are tightly coupled to the distribution release cycle. An application packaged for Ubuntu 24.04 may lag the upstream version, and some applications aren't packaged for every Linux distribution. Flatpak addresses this by letting upstream developers publish and maintain their own builds directly on Flathub. This allows you to get the current release of an application on any supported Linux distribution.
 
-A Flatpak application bundles its own libraries or pins a specific runtime version. This means installing or updating it can't conflict with host system libraries or break other packages. A distro upgrade won't silently change the libraries an application links against. This also means you can run two different applications that require incompatible versions of the same library side by side without issues.
+A Flatpak application bundles its own libraries or pins a specific runtime version. This means installing or updating it can't conflict with host system libraries or break other packages. A distro upgrade won't silently change the libraries an application links against. This also means you can run two different applications that require incompatible versions of the same library side by side without issues. 
 
-The following instructions cover installing Flatpak on Arm Linux (aarch64), adding the Flathub remote, and verifying the installation by installing VSCodium.
+The following instructions cover installing Flatpak on Arm Linux (aarch64), adding the Flathub remote, and verifying the installation by installing and running VSCodium.
 
 ## Before you begin
 
@@ -125,7 +125,7 @@ Name    Options
 flathub system
 ```
 
-## Verify Flatpak installation by installing VSCodium
+## Verify Flatpak installation by installing and running VSCodium
 
 [VSCodium](https://vscodium.com/) is the telemetry-free build of VS Code that is available on Flathub with a native Arm build. This makes it a useful Arm-native application to test Flatpak with. 
 
@@ -135,7 +135,7 @@ Install VSCodium with the `--assumeyes` flag, which automatically answers yes to
 flatpak install --assumeyes flathub com.vscodium.codium
 ```
 
-Confirm the installation was successful and check the architecture:
+Confirm the VSCodium installation and check the architecture:
 
 ```bash
 flatpak info com.vscodium.codium
@@ -165,25 +165,29 @@ Installation: system
         Date: 2026-03-30 05:03:53 +0000
 ```
 
-The `Arch: aarch64` line in the output confirms that you installed a native Arm build.
+The `Arch: aarch64` line in the output confirms that you installed a native Arm build. 
 
-<!-- To start VSCodium on the project in your current directory, run:
+To start VSCodium on the project in your current directory, run:
 
 ```bash
 flatpak run com.vscodium.codium . &
 ```
+{{% notice Tip %}}
 
-You can also create an alias to make starting a project easier:
+You can create an alias to make starting a project easier:
 
 ```bash
 alias codium='flatpak run com.vscodium.codium'
 ```
 
-Now, run VSCodium using the alias:
+To run VSCodium using the alias, run:
 
 ```bash
 codium . &
-``` -->
+```  
+{{% /notice %}}
+
+Installing and running VSCodium successfully indicates that the Flatpak installation was a success.
 
 ## Find Arm-native applications on Flathub
 
