@@ -63,14 +63,23 @@ Configuration for experiment trainable...
 
 Number of trials: 3
 
-Trial trainable_00000 (lr=0.001) → score = 0.00529
-Trial trainable_00001 (lr=0.01)  → score = 0.04468
-Trial trainable_00002 (lr=0.1)   → score = 0.28527
-
 Trial status: 3 TERMINATED
+Current time: 2026-04-13 13:21:47. Total running time: 1s
+Logical resource usage: 1.0/4 CPUs, 0/0 GPUs
+╭────────────────────────────────────────────────────────────────────────────────────╮
+│ Trial name              status          lr     iter     total time (s)       score │
+├────────────────────────────────────────────────────────────────────────────────────┤
+│ trainable_b83d8_00000   TERMINATED   0.001        1        0.000396013   0.0053353 │
+│ trainable_b83d8_00001   TERMINATED   0.01         1        0.000548363   0.0366355 │
+│ trainable_b83d8_00002   TERMINATED   0.1          1        0.000375986   0.363394  │
+╰────────────────────────────────────────────────────────────────────────────────────╯
 
-Best result:
-score = 0.28527 (lr = 0.1)
+Best result: Result(
+  metrics={'score': 0.36339389194042176},
+  path='/home/pareena_verma_arm_com/ray_results/trainable_2026-04-13_13-21-45/trainable_b83d8_00002_2_lr=0.1000_2026-04-13_13-21-46',
+  filesystem='local',
+  checkpoint=None
+)
 ```
 
 ### Understanding the output
@@ -82,8 +91,8 @@ score = 0.28527 (lr = 0.1)
 | Learning Rate | Score |
 | ------------- | ----- |
 | 0.001         | 0.005 |
-| 0.01          | 0.044 |
-| 0.1           | 0.285 |
+| 0.01          | 0.036 |
+| 0.1           | 0.363 |
 
 **Best configuration = learning rate 0.1**
 
@@ -91,7 +100,7 @@ score = 0.28527 (lr = 0.1)
 * Results stored in:
 
 ```bash
-/home/gcpuser/ray_results/
+$HOME/ray_results/
 ```
 
 ## Deploy model using Ray Serve
