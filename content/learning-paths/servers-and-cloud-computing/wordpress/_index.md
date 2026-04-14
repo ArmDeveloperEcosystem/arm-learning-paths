@@ -1,6 +1,8 @@
 ---
 title: Deploy MySQL and WordPress on an always free tier Arm shape
 
+description: Learn how to install and configure MySQL and WordPress on Oracle Cloud Infrastructure Arm instances using the always free tier for cost-effective content management deployment.
+
 minutes_to_complete: 30
 
 prerequisites:

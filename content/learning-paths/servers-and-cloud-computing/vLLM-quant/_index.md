@@ -1,6 +1,8 @@
 ---
 title: Quantize and Run an LLM using vLLM on Arm Servers
 
+description: Learn how to build OpenBLAS and vLLM optimized for Arm CPUs, quantize transformer LLMs using INT8 techniques, and run single-prompt and batch inference through vLLM's OpenAI-compatible API server.
+
 draft: true
 cascade:
     draft: true

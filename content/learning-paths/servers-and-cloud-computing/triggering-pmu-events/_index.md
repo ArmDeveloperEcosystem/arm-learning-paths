@@ -1,6 +1,8 @@
 ---
 title: Learn about Neoverse Cache PMU Events using C and Assembly Language
 
+description: Learn how common cache Performance Monitoring Unit (PMU) events occur on Arm Neoverse N2 cores by examining C and assembly code examples that trigger instruction cache, data cache, and last-level cache events.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for software and hardware engineers who want to learn about the causes of common Neoverse cache Performance Monitoring Unit (PMU) events.

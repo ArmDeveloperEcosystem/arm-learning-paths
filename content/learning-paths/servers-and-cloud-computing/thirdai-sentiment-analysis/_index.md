@@ -1,6 +1,8 @@
 ---
 title: Run Text Classification with ThirdAI on Arm servers
 
+description: Learn how to train, evaluate, and deploy a sentiment classification model using ThirdAI's UniversalDeepTransformer on Arm servers with real-world text data.
+
 minutes_to_complete: 10
 
 who_is_this_for: This is for software developers who want to learn how to run text classification tasks with ThirdAI on Arm servers.

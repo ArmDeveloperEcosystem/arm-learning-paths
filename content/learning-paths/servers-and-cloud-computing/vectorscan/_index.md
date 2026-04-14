@@ -1,6 +1,8 @@
 ---
 title: Install Vectorscan (Hyperscan on Arm) and use it with Snort 3
 
+description: Learn how to install and run Vectorscan, the Arm port of Hyperscan, on Arm servers and integrate it with Snort 3 for deep packet inspection and pattern matching performance measurement.
+
 minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for software developers using Hyperscan who want to migrate to Arm.

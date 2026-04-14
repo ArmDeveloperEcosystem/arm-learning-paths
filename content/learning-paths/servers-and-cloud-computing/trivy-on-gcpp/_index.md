@@ -1,6 +1,8 @@
 ---
 title: Scan multi-architecture containers with Trivy on Azure Cobalt 100
 
+description: Learn how to build, scan, and secure multi-architecture container images using Trivy on Azure Cobalt 100 Arm instances, with GitHub Actions runners and CI/CD security gates based on vulnerability severity.
+
 minutes_to_complete: 45
 
 who_is_this_for: This is an introductory topic for developers and DevOps engineers who want to integrate security scanning into CI/CD pipelines for multi-architecture container images.

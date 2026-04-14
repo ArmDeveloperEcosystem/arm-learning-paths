@@ -1,6 +1,8 @@
 ---
 title: Measure and accelerate PyTorch Inference on Arm servers
 
+description: Learn how to benchmark NLP, vision, and recommender PyTorch models on Arm servers using the PyTorch Benchmarks suite, comparing eager mode and torch.compile mode for optimized inference performance.
+
 minutes_to_complete: 20
 
 who_is_this_for: This is an introductory topic for software developers who want to learn how to measure and accelerate the performance of Natural Language Processing (NLP), vision and recommender PyTorch models on Arm-based servers.

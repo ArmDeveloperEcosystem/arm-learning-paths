@@ -1,6 +1,8 @@
 ---
 title: Run the vvenc H.266 encoder on Arm servers
 
+description: Learn how to build and run the VVenC H.266 encoder on Arm Neoverse servers, encode real 1080p video files, and measure video encoding performance on Arm architecture.
+
 author: Willen Yang
 
 minutes_to_complete: 20

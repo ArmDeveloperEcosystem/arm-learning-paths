@@ -1,6 +1,8 @@
 ---
 title: Build and Run vLLM on Arm Servers
 
+description: Learn how to build vLLM from source on Arm servers, download a Qwen LLM from Hugging Face, run local batch inference, and create an OpenAI-compatible API server for LLM deployment.
+
 minutes_to_complete: 45
 
 who_is_this_for: This is an introductory topic for software developers and AI engineers interested in learning how to use the vLLM library on Arm servers.

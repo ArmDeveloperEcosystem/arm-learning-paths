@@ -1,5 +1,7 @@
 ---
 title: Deploy a live sensor dashboard with TimescaleDB and Grafana on Google Cloud C4A
+
+description: Learn how to build and deploy TimescaleDB on Google Cloud Axion C4A processors, ingest live time-series sensor data with hypertables and continuous aggregates, and visualize real-time metrics in Grafana.
     
 minutes_to_complete: 45
 

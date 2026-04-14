@@ -1,6 +1,8 @@
 ---
 title: Learn about Neoverse Non-cache PMU events using C and Assembly Language 
 
+description: Learn how non-cache Performance Monitoring Unit (PMU) events such as TLB misses, branch mispredictions, and top-down analysis metrics occur on Arm Neoverse N2 cores using practical C and assembly examples.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for software and hardware engineers to learn about why common non-cache PMU events occur.

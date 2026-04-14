@@ -1,6 +1,8 @@
 ---
 title: Learn the Arm Neoverse N1 performance analysis methodology
 
+description: Learn how to analyze application performance on Arm Neoverse N1 using sampling and counting techniques with the Arm Telemetry Solution and Linux Perf, then optimize code based on hardware metrics.
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for software developers who want to learn about performance analysis methodology for Linux applications running on Arm Neoverse.

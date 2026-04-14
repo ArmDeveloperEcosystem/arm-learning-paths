@@ -1,5 +1,7 @@
 ---
 title: Deploy TypeScript on Google Cloud C4A virtual machines
+
+description: Learn how to install, validate, and benchmark TypeScript on Google Cloud C4A Axion Arm64 virtual machines using SUSE Linux Enterprise Server, with custom performance benchmarks using the perf_hooks module.
     
 minutes_to_complete: 30
 

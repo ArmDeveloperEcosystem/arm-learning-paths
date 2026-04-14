@@ -1,6 +1,8 @@
 ---
 title: Tune network workloads on Arm-based bare-metal instances
 
+description: Learn how to optimize network workload performance on Arm Neoverse bare-metal instances by tuning NIC queue count, NUMA locality, and IOMMU settings using Apache Tomcat and wrk2 benchmarks.
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an advanced topic for engineers who want to tune the performance of network workloads on Arm Neoverse-based bare-metal instances.

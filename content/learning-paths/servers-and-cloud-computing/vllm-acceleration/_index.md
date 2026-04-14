@@ -1,5 +1,7 @@
 ---
 title: Run vLLM inference with INT4 quantization on Arm servers
+
+description: Learn how to build vLLM with oneDNN and Arm Compute Library optimizations, quantize LLMs to INT4 precision, serve models via OpenAI-compatible APIs, and evaluate accuracy using the LM Evaluation Harness.
     
 minutes_to_complete: 60
 

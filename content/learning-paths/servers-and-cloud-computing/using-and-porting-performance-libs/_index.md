@@ -1,6 +1,8 @@
 ---
 title: Migrate applications that leverage performance libraries 
 
+description: Learn how to migrate C and C++ applications that use optimized performance libraries from x86 to Arm architecture by incorporating Arm Performance Libraries and understanding standard versus performance library differences.
+
 minutes_to_complete: 60
 
 who_is_this_for: This Learning Path is for both C and C++ developers who want to migrate applications that rely on optimized performance libraries from x86 to Arm Architecture.

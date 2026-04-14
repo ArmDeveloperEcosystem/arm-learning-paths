@@ -53,7 +53,7 @@ In the Query section:
 - **Query type:** SQL
 - **Format:** Time series
 
-![Grafana time series panel editor showing the visualization configuration screen with the time series panel type selected and panel title field alt-txt#center](images/data-source-visualization.png "Grafana visualization configuration")
+![Grafana panel editor showing the visualization dropdown with Time series selected, the panel title field, and the query editor interface with PostgreSQL data source configured#center](images/data-source-visualization.png "Grafana visualization configuration")
 
 Paste the following query after selecting **Code** on the right of the query editor:
 
@@ -89,7 +89,7 @@ These settings ensure the panel refreshes automatically with new data.
 
 Once configured, the panel should display a continuously updating temperature graph.
 
-![Grafana live sensor temperature time series panel showing a continuous line graph of temperature readings from multiple sensors over the last 5 minutes alt-txt#center](images/live-sensor-temperature.webp "Live sensor temperature panel")
+![Grafana time series visualization showing multiple colored lines representing real-time temperature data from different sensors over the last 5 minutes, with temperature values on the y-axis and time on the x-axis, automatically refreshing every 5 seconds#center](images/live-sensor-temperature.webp "Live sensor temperature panel")
 
 ## Save the dashboard
 

@@ -71,11 +71,11 @@ http://<VM-PUBLIC-IP>:3000
 
 You will be prompted to change the password on first login. Provide and save off a new password. Re-login if needed using the new password:
 
-![Grafana login page showing username and password fields with a Sign In button alt-txt#center](images/grafana-login-page.webp "Grafana login page")
+![Grafana login page with dark theme showing username and password input fields, a Sign in button, and the Grafana logo at the top#center](images/grafana-login-page.webp "Grafana login page")
 
 You will be presented with the main dashboard for Grafana:
 
-![Grafana main dashboard showing the Home screen with sidebar navigation including Dashboards, Explore, and Connections menu items alt-txt#center](images/grafana-dashboard.webp "Grafana main dashboard")
+![Grafana home dashboard with left sidebar showing navigation menu items including Home, Dashboards, Explore, Alerting, and Connections, with the main content area displaying the Welcome to Grafana message and quick start options#center](images/grafana-dashboard.webp "Grafana main dashboard")
 
 ## Add TimescaleDB as a data source
 
@@ -102,13 +102,13 @@ Fill the form exactly as below:
 | Password      | `<postgres password saved>`    |
 | TLS/SSL Mode  | `disable`                      |
 
-![PostgreSQL data source connection settings alt-txt#center](images/data-source-details.png "PostgreSQL data source settings")
+![Grafana PostgreSQL data source configuration form showing Host URL set to localhost:5432, Database name set to sensors, authentication fields for username and password, and TLS/SSL Mode dropdown set to disable#center](images/data-source-details.png "PostgreSQL data source settings")
 
 Scroll down and select **Save & Test**.
 
 You should see "Database connection OK."
 
-![Grafana PostgreSQL data source save and test success alt-txt#center](images/data-source-save-test.png "Grafana PostgreSQL data source save and test")
+![Grafana data source settings page showing a green success banner at the bottom with the message Database Connection OK after testing the PostgreSQL connection#center](images/data-source-save-test.png "Grafana PostgreSQL data source save and test")
 
 ## What you've accomplished and what's next
 

@@ -37,7 +37,7 @@ To create a virtual machine based on the C4A instance type:
 
 After the instance starts, select **SSH** next to the VM in the instance list to open a browser-based terminal session.
 
-![Google Cloud Console VM instances page displaying running instance with green checkmark and SSH button in the Connect column alt-txt#center](images/gcp-pubip-ssh.png "Connecting to a running C4A VM using SSH")
+![Google Cloud Console VM instances page showing a running C4A instance with green checkmark status indicator and SSH button in the Connect column for browser-based terminal access#center](images/gcp-pubip-ssh.png "Connecting to a running C4A VM using SSH")
 
 A new browser window opens with a terminal connected to your VM.
 
