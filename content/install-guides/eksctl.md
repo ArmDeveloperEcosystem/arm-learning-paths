@@ -114,7 +114,7 @@ The output is similar to:
 
 ## Verify eksctl installation by creating a simple EKS cluster
 
-With your AWS account configured, run `eksctl` to create a cluster with 2 nodes with AWS Graviton processors:
+With your AWS account configured, run `eksctl` to create a cluster with two nodes with AWS Graviton processors:
 
 ```console
 eksctl create cluster  \
