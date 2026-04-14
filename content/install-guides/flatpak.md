@@ -233,7 +233,7 @@ flatpak run --command=bash com.vscodium.codium
 The example command opens a shell in VSCodium's sandbox. To adapt the command for your use case, replace `com.vscodium.codium` with your application's identifier. 
 
 {{% notice Note %}}
-Not all applications include `bash` in their sandbox, so this command may not work for every Flatpak. In such cases, your shell prompt may not look any different, but you are in the sandbox. 
+Not all applications include `bash` in their sandbox, so this command may not work for every Flatpak application. In such cases, your shell prompt may not look any different, but you are in the sandbox. 
 {{% /notice %}}
 
 To confirm that the shell is open, run:
