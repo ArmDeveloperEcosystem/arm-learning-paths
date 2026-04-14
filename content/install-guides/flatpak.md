@@ -127,7 +127,7 @@ flathub system
 
 ## Verify Flatpak installation by installing and running VSCodium
 
-[VSCodium](https://vscodium.com/) is the telemetry-free build of VS Code that is available on Flathub with a native Arm build. This makes it a useful application to test Flatpak with. 
+[VSCodium](https://vscodium.com/) is the telemetry-free build of VS Code that's available on Flathub with a native Arm build. This makes it a useful application to test Flatpak with. 
 
 Install VSCodium with the `--assumeyes` flag, which automatically answers yes to any prompts during installation:
 
@@ -167,7 +167,7 @@ Installation: system
 
 The `Arch: aarch64` line in the output confirms that you installed a native Arm build. 
 
-To run VSCodium on the project in your current directory, run:
+To run VSCodium on a project in your current directory, run:
 
 ```bash
 flatpak run com.vscodium.codium . &
@@ -187,7 +187,7 @@ codium . &
 ```  
 {{% /notice %}}
 
-By installing and running VSCodium successfully, you can confirm that the Flatpak installation was a success.
+By using Flatpak to install and run VSCodium successfully, you've verified that the Flatpak installation was a success.
 
 ## Find Arm-native applications on Flathub
 
