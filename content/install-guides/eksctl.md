@@ -9,7 +9,7 @@ layout: installtoolsall
 minutes_to_complete: 5
 multi_install: false
 multitool_install_part: false
-official_docs: https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html
+official_docs: https://docs.aws.amazon.com/eks/latest/eksctl/what-is-eksctl.html
 test_images:
 - ubuntu:latest
 test_link: null
@@ -19,7 +19,7 @@ tool_install: true
 weight: 1
 ---
 
-`eksctl` is a command line tool to create and manage Kubernetes clusters in Amazon Elastic Kubernetes Service (Amazon EKS). It simplifies cluster creation and saves time compared to using the AWS console. For additional information, refer to the [eksctl official documentation](https://docs.aws.amazon.com/eks/latest/eksctl/what-is-eksctl.html).
+`eksctl` is a command line tool to create and manage Kubernetes clusters in [Amazon Elastic Kubernetes Service (Amazon EKS)](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html). It simplifies cluster creation and saves time compared to using the Amazon Web Services (AWS) console. For additional information, see [eksctl official documentation](https://docs.aws.amazon.com/eks/latest/eksctl/what-is-eksctl.html).
 
 `eksctl` is available for a variety of operating systems and Linux distributions. It runs on both Arm Linux distributions and Windows on Arm. The following steps show the different ways in which you can install `eksctl`.
 
@@ -46,12 +46,12 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 For Windows, follow these steps:
 
 1. Type "Settings" in the Windows search box.
-2. When the settings appear, click **System** on the left side and then **About** at the bottom.
-3. In the Device specifications section, look for **ARM-based processor** in the **System** type area.
+2. When the settings appear, select **System** on the left side and then select **About**.
+3. Under **Device specifications**, look for **System type**. You should see **ARM-based processor** listed for your computer.
 
 ### Install kubectl
 
-Install the Kubernetes command-line tool, `kubectl`, by following the steps in the [Kubectl install guide](/install-guides/kubectl/).
+Install the Kubernetes command-line tool `kubectl` by following the steps in the [Kubectl install guide](/install-guides/kubectl/).
 
 ### Configure the AWS CLI
 
@@ -86,13 +86,15 @@ sudo mv /tmp/eksctl /usr/local/bin
 eksctl version
 ```
 
-The output will be similar to:
+The output is similar to:
 
 ```output
 0.160.0
 ```
 
-### Windows
+### Windows on Arm
+
+To download and install `eksctl` on Windows, follow these steps:
 
 1. Use a browser to download the [EKS CLI latest release](https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_Windows_arm64.zip).
 
@@ -104,13 +106,13 @@ The output will be similar to:
 eksctl.exe version
 ```
 
-The output will be similar to:
+The output is similar to:
 
 ```output
 0.160.0
 ```
 
-## Use eksctl to create a simple EKS cluster
+## Verify eksctl installation by creating a simple EKS cluster
 
 With your AWS account configured, run `eksctl` to create a cluster with 2 nodes with AWS Graviton processors:
 
