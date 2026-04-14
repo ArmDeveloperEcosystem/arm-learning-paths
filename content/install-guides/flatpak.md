@@ -32,7 +32,7 @@ For Arm developers, the key advantage is that Flatpak applications can publish s
 
 Linux package managers such as `apt`, `dnf`, and `pacman` are tightly coupled to the distribution release cycle. An application packaged for Ubuntu 24.04 may lag the upstream version, and some applications aren't packaged for every Linux distribution. Flatpak addresses this by letting upstream developers publish and maintain their own builds directly on Flathub. This allows you to get the current release of an application on any supported Linux distribution.
 
-A Flatpak application bundles its own libraries or pins a specific runtime version. This means installing or updating a Flatpak application can't conflict with host system libraries or break other packages. A distro upgrade won't silently change the libraries an application links against. This also means you can run two different applications that require incompatible versions of the same library side by side without issues. 
+A Flatpak application bundles its own libraries or pins a specific runtime version. As a result, installing or updating a Flatpak application can't conflict with host system libraries or break other packages. A distro upgrade won't silently change the libraries an application links against. This also means you can run two different applications that require incompatible versions of the same library side by side without issues. 
 
 The following instructions cover installing Flatpak on Arm Linux (aarch64), adding the Flathub remote, and verifying the installation by installing and running VSCodium.
 
