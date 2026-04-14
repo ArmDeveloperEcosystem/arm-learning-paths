@@ -13,7 +13,7 @@ In this section, you will build an end-to-end pipeline that:
 
 This forms the foundation of your voice assistant.
 
-![Baseline voice-to-LLM pipeline#center](3_VSApipeline1.png "Baseline voice-to-LLM pipeline")
+![Baseline voice-to-LLM pipeline#center](3_vsapipeline1.png "Baseline voice-to-LLM pipeline")
 
 Before you begin, make sure you have completed the environment setup in the previous section and that your `llama-server` is still running.
 

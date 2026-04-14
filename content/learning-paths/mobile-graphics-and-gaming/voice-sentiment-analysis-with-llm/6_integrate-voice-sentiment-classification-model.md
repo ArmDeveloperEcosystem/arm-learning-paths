@@ -7,7 +7,7 @@ In this section, you will integrate the voice sentiment classification model int
 
 End-to-end response time may take a few seconds because the application runs Whisper transcription, ONNX sentiment inference, and local LLM generation for each interaction.
 
-![Integrated voice-to-LLM pipeline#center](6_VSApipeline4.png "Integrated voice-to-LLM pipeline")
+![Integrated voice-to-LLM pipeline#center](6_vsapipeline4.png "Integrated voice-to-LLM pipeline")
 
 
 

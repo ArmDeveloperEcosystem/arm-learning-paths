@@ -158,7 +158,7 @@ models/
 
 We can also compare the model metrics before and after quantization.
 
-![Model ONNX conversion and int-8 quantization results#center](4_ModelConversionandCompression.png "Model ONNX conversion and int-8 quantization results")
+![Model ONNX conversion and int-8 quantization results#center](4_modelconversionandcompression.png "Model ONNX conversion and int-8 quantization results")
 
 Typical results look like:
 
