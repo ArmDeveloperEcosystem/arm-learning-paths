@@ -123,7 +123,7 @@ eksctl create cluster  \
 --nodegroup-name node-group-1
 ```
 
-Use the AWS console to look at the resources associated with the cluster and monitor progress of cluster creation.
+Use the AWS console to look at the resources associated with the cluster and monitor the progress of cluster creation.
 
 When the cluster is created, use `kubectl` to get the status of the nodes in the cluster.
 
