@@ -45,7 +45,7 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 For Windows, follow these steps:
 
-1. Type "Settings" in the Windows search box.
+1. Right-click **Start** and choose **Windows Settings**.​​​​​​
 2. When the settings appear, select **System** on the left side and then select **About**.
 3. Under **Device specifications**, look for **System type**. You should see **ARM-based processor** listed for your computer.
 
