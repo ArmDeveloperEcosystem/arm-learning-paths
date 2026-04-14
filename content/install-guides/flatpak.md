@@ -191,7 +191,7 @@ By using Flatpak to install and run VSCodium successfully, you've verified that 
 
 ## Find Arm-native applications on Flathub
 
-Flatpak makes it straightforward to discover which applications support aarch64. Visit the [Flathub app browser](https://flathub.org/apps) and filter by architecture to find applications with native Arm builds. You can also search from the command line after adding the Flathub remote:
+You can now use Flatpak to install Arm-native applications. Flatpak makes it straightforward to discover which applications support aarch64. Visit the [Flathub app browser](https://flathub.org/apps) and filter by architecture to find applications with native Arm builds. You can also search from the command line after adding the Flathub remote:
 
 ```bash
 flatpak remote-ls --app --arch=aarch64 flathub
