@@ -14,20 +14,20 @@ test_images:
 - ubuntu:latest
 test_link: null
 test_maintenance: true
-title: AWS EKS CLI (eksctl)
+title: Amazon EKS CLI (eksctl)
 tool_install: true
 weight: 1
 ---
 
-The Amazon EKS CLI, `eksctl`, is a command line tool to create and manage Kubernetes clusters in Amazon Kubernetes Service (EKS). It simplifies cluster creation and saves time compared to using the AWS console. For additional information refer to the [EKS CLI official documentation](https://eksctl.io/).
+`eksctl` is a command line tool to create and manage Kubernetes clusters in Amazon Elastic Kubernetes Service (Amazon EKS). It simplifies cluster creation and saves time compared to using the AWS console. For additional information, refer to the [eksctl official documentation](https://docs.aws.amazon.com/eks/latest/eksctl/what-is-eksctl.html).
 
-The EKS CLI is available for a variety of operating systems and Linux distributions and there are multiple ways to install it. It runs on both Arm Linux distributions and Windows on Arm.
+`eksctl` is available for a variety of operating systems and Linux distributions. It runs on both Arm Linux distributions and Windows on Arm. The following steps show the different ways in which you can install `eksctl`.
 
-## What should I do before installing eksctl on Arm Linux and Windows on Arm?
+## Before you begin
 
-This install guide provides a quick solution to install `eksctl` on Arm Linux and Windows on Arm.
+Before installing `eksctl`, follow these steps:
 
-1. Confirm you have an Arm machine
+### Confirm you have an Arm machine
 
 For Linux, confirm you are using an Arm machine by running:
 
@@ -43,17 +43,29 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
-For Windows, confirm the Arm architecture by typing "Settings" in the Windows search box.
+For Windows, follow these steps:
 
-When the settings appear, click System on the left side and then About at the bottom.
+1. Type "Settings" in the Windows search box.
+2. When the settings appear, click **System** on the left side and then **About** at the bottom.
+3. In the Device specifications section, look for **ARM-based processor** in the **System** type area.
 
-In the Device specifications section look for "ARM-based processor" in the System type area.
+### Install kubectl
 
-2. Install `kubectl`
+Install the Kubernetes command-line tool, `kubectl`, by following the steps in the [Kubectl install guide](/install-guides/kubectl/).
 
-Install the Kubernetes command-line tool, `kubectl`, using the [Kubectl install guide](/install-guides/kubectl/).
+### Configure the AWS CLI
 
-## How do I download and install eksctl on Arm Linux?
+`eksctl` relies on the AWS CLI being installed and configured. Use the [AWS CLI install guide](/install-guides/aws-cli/) to install the AWS CLI. The CLI provides the `aws` command.
+
+You'll also need to configure the AWS CLI using the `aws configure` or the `aws configure sso` command. There are multiple ways to configure the CLI, including environment variables, command-line options, and credentials files. Refer to [Configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) for more details.
+
+## Download and install eksctl 
+
+The steps for downloading and installing `eksctl` depend on your operating system.
+
+### Arm Linux
+
+To download and install eksctl on Arm Linux, follow these steps:
 
 1. Download the `eksctl` package using `curl`:
 
@@ -61,7 +73,7 @@ Install the Kubernetes command-line tool, `kubectl`, using the [Kubectl install 
 curl -sLO "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_Linux_arm64.tar.gz"
 ```
 
-2. Install `eksctl` with:
+2. Install `eksctl`:
 
 ```bash { target="ubuntu:latest" }
 tar -xzf eksctl_Linux_arm64.tar.gz -C /tmp && rm eksctl_Linux_arm64.tar.gz
@@ -80,7 +92,7 @@ The output will be similar to:
 0.160.0
 ```
 
-## How do I download and install eksctl on Windows?
+### Windows
 
 1. Use a browser to download the [EKS CLI latest release](https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_Windows_arm64.zip).
 
@@ -98,13 +110,7 @@ The output will be similar to:
 0.160.0
 ```
 
-## How do I configure the AWS CLI?
-
-`eksctl` relies on the AWS CLI being installed and configured. Use the [AWS CLI install guide](/install-guides/aws-cli/) to install the AWS CLI. The CLI provides the `aws` command.
-
-You will also need to configure the AWS CLI using the `aws configure` or the `aws configure sso` command. There are multiple ways to configure the CLI, including environment variables, command-line options, and credentials files. Refer to the [Configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) for more details.
-
-## How do I use eksctl to create a simple EKS cluster?
+## Use eksctl to create a simple EKS cluster
 
 With your AWS account configured, run `eksctl` to create a cluster with 2 nodes with AWS Graviton processors:
 
@@ -133,7 +139,7 @@ ip-192-168-38-144.ec2.internal   Ready    <none>   2m31s   v1.25.13-eks-43840fb 
 ip-192-168-4-142.ec2.internal    Ready    <none>   2m31s   v1.25.13-eks-43840fb   192.168.4.142    54.175.254.219   Amazon Linux 2   5.10.192-183.736.amzn2.aarch64   containerd://1.6.19
 ```
 
-## How do I use eksctl to delete the cluster?
+## Use eksctl to delete the cluster
 
 To delete the resources associated with the cluster, run:
 
