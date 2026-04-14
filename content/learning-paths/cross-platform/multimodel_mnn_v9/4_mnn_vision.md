@@ -6,7 +6,7 @@ layout: learningpathall
 
 ## Introduction
 
-In this module, you use a local image and an ***MNN Omni multimodal model*** to run a simple retail shelf audit on an ***Armv9*** system.
+This section shows how Armv9 can run lightweight operational vision reasoning locally without requiring cloud round trips, making it a practical fit for store-side restocking workflows.
 
 The goal is not to produce SKU-level counting. Instead, you generate an operational signal that is useful for store staff:
 
@@ -16,6 +16,8 @@ The goal is not to produce SKU-level counting. Instead, you generate an operatio
 - return `NOT_SURE` when the image is unclear
 
 This keeps the task practical for on-device multimodal inference. In many retail workflows, deciding **where to restock first** is more useful than attempting perfect item counting from a single photo.
+
+By the end of this section, you will produce a structured shelf audit signal from a local image and verify that it can guide a restocking decision
 
 ## Prepare the image asset
 
@@ -93,6 +95,12 @@ If you have any other questions about this shelf auditing, feel free to let me k
 
 The exact wording can vary, but the response should still follow the requested structure.
 
+## Why a coarse coverage estimate is enough for edge workflows
+
+In many edge retail workflows, you do not need a perfectly precise inventory measurement to make a useful decision. A coarse estimate such as `High`, `Medium`, or `Low` coverage is often enough to identify which shelf area needs attention first and to generate a practical restocking signal.
+
+This keeps the prompt and output simple, reduces post-processing requirements, and makes the result easier to validate during early on-device prototyping. For this Learning Path, the goal is not to build a full inventory counting system, but to show how local vision reasoning on Armv9 can produce an operationally useful input for a restocking workflow.
+
 ## Verify the result
 
 Check that the output meets these conditions:
@@ -108,4 +116,4 @@ If the model returns extra conversational text, tighten the prompt further by re
 
 You have now validated image-based multimodal inference with MNN Omni on Armv9.
 
-In the next module, you extend this workflow by running an audio-based restock instruction demo using an `<audio>...</audio>` prompt.
+In the next section, you extend this workflow by running an audio-based restock instruction demo using an `<audio>...</audio>` prompt.

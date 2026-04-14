@@ -6,7 +6,9 @@ layout: learningpathall
 
 ## Create the single-shot multimodal prompt (image + audio)
 
-In this final module, you combine image and audio inputs into a single multimodal prompt and generate one operational restock ticket on an Armv9 system.
+In this final section, you combine image and audio inputs into a single multimodal prompt and generate one operational restock ticket on an Armv9 system.
+
+This section demonstrates end-to-end multimodal task synthesis on an Armv9 CPU. Instead of testing a single modality in isolation, you combine image and audio inputs to produce one structured restocking ticket that can support a store action.
 
 You will combine:
 - A **shelf image** to estimate shelf coverage and select a priority zone

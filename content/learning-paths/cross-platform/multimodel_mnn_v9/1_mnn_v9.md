@@ -8,18 +8,20 @@ weight: 2
 
 This section introduces the software stack used throughout this Learning Path. You will use **[MNN](https://github.com/alibaba/MNN)** to run a prebuilt **Omni multimodal model** on an Armv9 Linux system using only the CPU.
 
-By the end of this section, you will understand why this combination is a practical starting point for reproducible multimodal inference on Armv9.
+By the end of this section, you will understand why this combination is a practical starting point for reproducible multimodal inference on Armv9, and use retail restocking workflow as an example combines local image and audio inputs use case.
 
 ## Why use MNN on Armv9
 
 MNN is a lightweight inference engine designed for deployment across mobile, embedded, and edge platforms. It is a good fit for this Learning Path for four reasons:
 
-- It provides a **portable runtime** that can be built and used across different device classes.
-- It supports a **CPU-first deployment flow**, which maps well to Armv9 development systems.
-- Native builds can take advantage of **Arm-specific optimizations** when they are enabled in the build.
-- The same runtime approach can be reused across **Arm Linux, Android, iOS, and x86-based development hosts**.
+- It provides a **portable runtime** that can be built and reused across different eevice classes.
+- It supports a **CPU-first deployment flow**, which is useful when you want to validate multimodal inference on Armv9 without depending on a discrete GPU or dedicated accelerator.
+- Native builds can take advantage of **Armv9-specific CPU features and optimizations** when they are enabled in the build, making this a practical path for efficient local inference.
+- The same runtime approach can be reused across **Arm Linux, Android, iOS, and x86-based development hosts**, which improves portability from development to deployment.
 
-For this Learning Path, MNN gives you a practical way to validate multimodal inference on Armv9 without introducing extra framework complexity.
+For this Learning Path, MNN gives you a practical way to build a reproducible multimodal inference workflow on Armv9 while keeping the software stack compact and deployment-oriented.
+
+A retail restocking workflow is also a good use case example for Arm because it benefits from local CPU execution, simple deployment, and the ability to process store inputs close to where they are captured.
 
 ## Why use an Omni multimodal model
 

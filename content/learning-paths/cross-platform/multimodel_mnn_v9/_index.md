@@ -1,5 +1,5 @@
 ---
-title: Multimodal On-Device Inference on Armv9 with MNN for Audio and Vision
+title: Build a Multimodal Retail Restocking Assistant on Armv9 With MNN
 
 minutes_to_complete: 60
 

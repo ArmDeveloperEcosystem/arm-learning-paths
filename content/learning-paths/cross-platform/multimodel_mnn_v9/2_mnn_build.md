@@ -8,7 +8,7 @@ layout: learningpathall
 
 In this module you will build **MNN** natively on your Arm v9 Linux system and verify that the `llm_demo` binary can load a **prebuilt Omni MNN model package**. This sets up everything needed for the text, vision, and audio demos in later modules.
 
-This creates the software environment used in the next modules, where you run text, vision, and audio-enabled multimodal inference on Armv9.
+This module uses a native **CPU-only** MNN build on Armv9. That is a deliberate design choice, not a fallback. The goal is to show how a compact, reproducible, deployment-friendly software stack can run directly on an Armv9 CPU without depending on a discrete GPU or separate accelerator.
 
 At the end of this module, you will have:
 
@@ -24,6 +24,12 @@ Create a working directory under your home folder:
 mkdir -p ~/mnn
 cd ~/mnn
 ```
+
+## Why build natively on Armv9 first
+
+This Learning Path uses a native build on the target Armv9 system before introducing any cross-compilation workflow. Building directly on the target helps reduce environment drift, makes library and toolchain issues easier to diagnose, and lets you validate the runtime in the same environment where you will execute the model.
+
+A native-first approach also makes it easier to confirm that the final binary, shared libraries, and model assets work together correctly on the Armv9 platform. For a reproducible Learning Path, this is usually the fastest way to get to a working baseline before optimizing or automating the workflow further.
 
 ## Build MNN natively on Armv9
 
@@ -58,13 +64,18 @@ The most important CMake options are:
 - `MNN_BUILD_AUDIO=ON` to enable the audio components used by the Omni model
 - `MNN_BUILD_LLM_OMNI=ON` to enable multimodal Omni support
 - `MNN_LOW_MEMORY=ON` to prefer lower-memory runtime settings where available
-- `MNN_KLEIDIAI=ON` to enable KleidiAI optimizations on supported Arm platforms
+- `MNN_KLEIDIAI=ON` to enable Arm-specific optimizations through KleidiAI
+
+Among these options, `MNN_KLEIDIAI=ON` is the most important Arm-specific build flag in this workflow. It enables Arm-focused optimizations through KleidiAI, making it especially relevant when you want to validate efficient local inference on Armv9 CPUs.
+
+In this Learning Path, a CPU-first build keeps the setup simpler, reduces external dependencies, and makes the resulting workflow easier to reproduce across edge and embedded Arm systems.
 
 Verify that the `llm_demo` binary was created:
 
 ```bash
 ls -l ~/mnn/MNN/build/llm_demo
 ```
+
 
 ## Verify shared library resolution
 

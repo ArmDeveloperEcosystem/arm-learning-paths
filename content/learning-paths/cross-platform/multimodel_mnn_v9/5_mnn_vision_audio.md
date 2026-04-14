@@ -57,6 +57,10 @@ The spoken content can be similar to:
 This is the pet food aisle, left shelf. Please restock the bottom left large pet food bags, add 10 bags. Also restock the middle left canned food, add 24 cans. Finish before 3 PM today. If something is out of stock, use a similar substitute.
 ```
 
+In store inspection scenarios, unreliable connectivity, or environments where teams prefer not to upload audio in real time, local speech understanding on Armv9 has clear deployment value.
+
+In this module, the audio input is not just an audio prompt. It acts as on-device spoken task capture for store operations, turning a short spoken restocking note into structured operational input.
+
 ## Create the audio prompt
 
 Create a prompt file that attaches the WAV file and asks the model to return a single structured line.
@@ -120,15 +124,15 @@ The exact wording can vary. What matters is that the response stays close to the
 
 ## Verify the result
 
-Check that:
+A successful run should show that:
 
-- the quantities and deadline match the spoken note
-- any missing field is returned as `NOT_SURE`
-- the output remains on a single structured line
-- the ticket is readable enough for a simple downstream workflow
+- the model can process the local audio file on Armv9
+- the response keeps the requested ticket structure
+- explicit spoken values such as quantity or deadline appear in the output
+- missing or unclear fields are marked as `NOT_SURE` rather than invented
 
-If the model adds extra commentary after the ticket, tighten the prompt and rerun the command. If quantities or zones are wrong, verify the audio clarity and confirm that the WAV file was converted correctly.
+At this stage, the goal is not to evaluate full speech recognition quality. The goal is to validate that local audio understanding can extract operational task information that you can combine with other inputs later.
 
 ## Next steps
 
-In the next module, you will combine multimodal inference patterns into a practical restock workflow on Armv9.
+In the next section, you will combine multimodal inference patterns into a practical restock workflow on Armv9.

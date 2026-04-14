@@ -6,17 +6,19 @@ layout: learningpathall
 
 ## Introduction
 
-Before you add image and audio inputs, validate the basic inference path with a text-only prompt. In this module, you use the same **Qwen2.5-Omni-7B-MNN** package from the previous section and confirm that `llm_demo` can run prompts from a file on your Armv9 system.
+In this section, you run a **text-only baseline** using the Omni model on an Armv9 Linux system. Before adding image and audio inputs, this baseline helps you confirm that the core inference path is working correctly with a simple prompt and predictable output behavior.
 
-At the end of this module, you will have verified:
+This text-only baseline serves an important purpose in the Learning Path. Before adding image and audio inputs, it lets you verify the Armv9 runtime, basic token generation, and feature detection in isolation. That makes it easier to confirm that the core inference path is working correctly before you introduce additional multimodal variables.
 
-- the model configuration loads correctly
-- prompt input from a text file is parsed as expected
-- the runtime returns usable text output without crashes or library errors
+By the end of this module, you will be able to:
 
-## Create a text baseline prompt
+- run a reproducible text-only inference baseline on an Armv9 CPU
+- verify that the MNN runtime, prompt input path, and token generation are working correctly
+- establish a text baseline that you can use to compare later vision, audio, and multimodal runs
 
-Create a short prompt file in your workspace:
+## Create a baseline prompt
+
+Create a small prompt file in your workspace:
 
 ```bash
 cat > ~/mnn/text_baseline_prompt.txt <<'EOF'
