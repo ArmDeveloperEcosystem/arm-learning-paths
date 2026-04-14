@@ -8,7 +8,7 @@ layout: learningpathall
 
 In this section, you will create a function that implements the common operation `fdct_round_shift(a * c1 +/- b * c2)`. This operation is the basis of many discrete cosine transform (DCT) algorithms used in multiple video codecs, including VP9, AV1, etc.
 
-It is called a 'butterfly' operation in DCT and it is defined as the following:
+It's called a 'butterfly' operation in DCT and it's defined as follows:
 
 ```C
 #define ROUND_POWER_OF_TWO(value, n) (((value) + (1 << ((n)-1))) >> (n))
@@ -19,7 +19,7 @@ where `DCT_CONST_BITS` is defined with the value `14` for many codecs.
 
 SIMD implementations are able to calculate both the expressions `fdct_round_shift(a * c1 + b * c2)` and `fdct_round_shift(a * c1 - b * c2)` in a single function, for 8 x 16-bit pixel elements, reusing computations and saving multiple instructions in the process.
 
-Here is what one implementation looks like, as [taken from the `libvpx` video codec library](https://chromium.googlesource.com/webm/libvpx/+/refs/heads/main/vpx_dsp/arm/fdct_neon.h):
+Here's what one implementation looks like, as [taken from the `libvpx` video codec library](https://chromium.googlesource.com/webm/libvpx/+/refs/heads/main/vpx_dsp/arm/fdct_neon.h):
 
 ```C
 #define DCT_CONST_BITS 14
@@ -46,7 +46,7 @@ The above algorithm uses the widening versions of `mul` which is `mull`. This wi
 
 Next the `vmlal_n_s16` and `vmlsl_n_s16` intrinsics are used which produce the quantities `a * c1 + b * c2` or `a * c1 - b * c2` respectively.
 
-Finally, the rounding to the power of two is performed using a single intrinsic `vqrshrn_n_s32` which also narrows the results to half the original size. In effect this calls the `SQRSHRN` instruction which performs exactly the `ROUND_POWER_OF_TWO` operation, shifting right by `DCT_CONST_BITS`. The results are placed in the respective pointer variables, as C does not allow returning a pair of values.
+Finally, the rounding to the power of two is performed using a single intrinsic `vqrshrn_n_s32` which also narrows the results to half the original size. In effect this calls the `SQRSHRN` instruction which performs exactly the `ROUND_POWER_OF_TWO` operation, shifting right by `DCT_CONST_BITS`. The results are placed in the respective pointer variables, as C doesn't allow returning a pair of values.
 
 ### A complete DCT 4x4 example
 
@@ -204,12 +204,12 @@ Compile the program:
 ```bash 
 gcc -O3 butterfly1.c -o butterfly1
 ```
-Run it as follows:
+Run it:
 ```bash
 ./butterfly1
 ```
 
-The output should look like:
+The output should look similar to:
 ```output
 A[] =
 0001 0002 0003 0004
@@ -393,7 +393,7 @@ ff71 0000 0000 0000
 fff6 0000 0000 0000
 ```
 
-The [disassembly output](/learning-paths/cross-platform/simd-on-rust/butterfly2.asm) is available separately for size reasons. You will see that it is very similar to the C version, apart from the cpu feature check at the start.
+The [disassembly output](/learning-paths/cross-platform/simd-on-rust/butterfly2.asm) is available separately for size reasons. You'll see that it's very similar to the C version, apart from the cpu feature check at the start.
 
 ### Comments
 

@@ -27,7 +27,7 @@ Expected output on Linux:
 aarch64
 ```
 
-Expected output on macOS:
+On macOS, the expected output is:
 
 ```output
 arm64
@@ -86,29 +86,31 @@ Each loop is implemented in several SIMD extension variants. Conditional compila
 
 The native C implementation is written first, and it can be generated either when building natively with `-DHAVE_NATIVE` or through compiler auto-vectorization with `-DHAVE_AUTOVEC`.
 
-When SIMD ACLE is supported (SME, SVE, or Neon), the code is compiled using high-level intrinsics. If ACLE support is not available, the build process falls back to handwritten inline assembly targeting one of the available SIMD extensions, such as SME2.1, SME2, SVE2.1, SVE2, and others.
+When SIMD ACLE is supported (SME, SVE, or Neon), the code is compiled using high-level intrinsics. If ACLE support isn't available, the build process falls back to handwritten inline assembly targeting one of the available SIMD extensions, such as SME2.1, SME2, SVE2.1, SVE2, and others.
 
 The overall code structure also includes setup and cleanup code in the main function, where memory buffers are allocated, the selected loop kernel is executed, and results are verified for correctness.
 
-At compile time, you can select which loop optimization to compile, whether it is based on SME or SVE intrinsics, or one of the available inline assembly variants.
+At compile time, you can select which loop optimization to compile, whether it's based on SME or SVE intrinsics, or one of the available inline assembly variants.
+
+To compile the project, run make in the project directory:
 
 ```console
 make
 ```
 
-With no target specified, the list of targets is printed:
+With no target specified, the output shows the list of available targets:
 
 ```output
 all fmt clean c-scalar scalar autovec-sve autovec-sve2 neon sve sve2 sme2 sme-ssve sve2p1 sme2p1 sve-intrinsics sme-intrinsics
 ```
 
-Build all loops for all targets:
+To build all loops for all targets, run:
 
 ```console
 make all
 ```
 
-Build all loops for a single target, such as Neon:
+To build all loops for a single target, such as Neon, run:
 
 ```console
 make neon
@@ -116,15 +118,13 @@ make neon
 
 As a result of the build, two types of binaries are generated.
 
-The first is a single executable named `simd_loops`, which includes all loop implementations.
-
-Select a specific loop by passing parameters to the program. For example, to run loop 1 for 5 iterations using the Neon target:
+To select a specific loop, pass parameters to the program. For example, to run loop 1 for 5 iterations using the Neon target:
 
 ```console
 build/neon/bin/simd_loops -k 1 -n 5
 ```
 
-Example output:
+The expected output is:
 
 ```output
 Loop 001 - FP32 inner product
@@ -139,6 +139,8 @@ To run loop 1 as a standalone binary:
 ```console
 build/neon/standalone/bin/loop_001.elf
 ```
+
+The expected output is
 
 Example output:
 

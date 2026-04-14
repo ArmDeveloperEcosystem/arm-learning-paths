@@ -229,8 +229,6 @@ For instruction semantics and SME/SME2 optimization guidance, see the [SME Progr
 
 Beyond the SME2 and SVE implementations, this loop also includes additional optimized versions that leverage architecture-specific features:
 
-- **Neon**: the Neon version (lines 612–710) uses structure load/store combined with indexed `fmla` to vectorize the computation.
-
-- **SVE2.1**: the SVE2.1 version (lines 355–462) extends the base SVE approach using multi-vector loads and stores.
-
-- **SME2.1**: the SME2.1 version uses `movaz`/`svreadz_hor_za8_u8_vg4` to reinitialize `ZA` tile accumulators while moving data out to registers.
+- **Neon**: the Neon version (lines 612–710) uses structure load/store combined with indexed `fmla` to vectorize the computation
+- **SVE2.1**: the SVE2.1 version (lines 355–462) extends the base SVE approach using multi-vector loads and stores
+- **SME2.1**: the SME2.1 version uses `movaz`/`svreadz_hor_za8_u8_vg4` to reinitialize `ZA` tile accumulators while moving data out to registers
