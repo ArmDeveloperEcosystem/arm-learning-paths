@@ -1,6 +1,8 @@
 ---
 title: Build a Windows on Arm native application with clang
 
+description: Learn how to configure the LLVM toolchain with Visual Studio to build native Windows on Arm applications using the open-source PuTTY project.
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for software developers doing native development on Windows on Arm computers.
