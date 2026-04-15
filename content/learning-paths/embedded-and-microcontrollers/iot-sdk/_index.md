@@ -1,6 +1,8 @@
 ---
 title: Build and run Arm Total Solutions for IoT
 
+description: Learn how to build examples from the Open-IoT-SDK and run them on Corstone-300 virtual hardware to understand complete IoT software stack construction.
+
 minutes_to_complete: 30   
 
 who_is_this_for: This is an introductory topic for embedded software developers interested in learning how a complete IoT software stack is constructed.

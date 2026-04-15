@@ -1,6 +1,8 @@
 ---
 title: Get started with Microcontrollers
 
+description: Learn where Arm architecture is used in microcontrollers and discover microcontroller hardware options for software development on Arm Cortex-M processors.
+
 minutes_to_complete: 10
 
 who_is_this_for: This is an introductory topic for software developers working on microcontroller applications and new to the Arm architecture.
