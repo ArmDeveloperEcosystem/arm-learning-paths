@@ -1,5 +1,6 @@
 ---
 title: Generate audio with Stable Audio Open Small on LiteRT
+description: Learn how to convert and deploy the Stable Audio Open Small text-to-audio model to LiteRT format for audio generation on Android devices and macOS.
 
 minutes_to_complete: 30
 

@@ -20,15 +20,15 @@ For example, the Sponza scene shown below, on a Google Pixel 8 shows the differe
 &nbsp;
 | Memory footprint (lower is better) | Memory bandwidth (lower is better) |
 | ----------- | ----------- |
-| ![Footprint](images/sponza_footprint.png) | ![Bandwidth](images/sponza_bandwidth.png) |
+| ![Bar chart comparing memory footprint of uncompressed images versus AFBC and AFRC compression on Google Pixel 8, showing AFRC achieves the lowest memory footprint at approximately 48 MB compared to uncompressed at 144 MB#center](images/sponza_footprint.png "Memory footprint comparison") | ![Bar chart comparing memory bandwidth of uncompressed images versus AFBC and AFRC compression on Google Pixel 8, showing AFRC achieves the lowest bandwidth at approximately 1200 MB per second#center](images/sponza_bandwidth.png "Memory bandwidth comparison") |
 
 Fixed-rate compression is lossy but, despite this, AFRC achieves high quality results even with the highest compression ratios, preserving detail in edges and high-frequency areas.
-So much so that, to the naked eye, the compressed and uncompressed images look the same side-by-side, so that it may be called 'visually lossless':
+So much so that, to the naked eye, the compressed and uncompressed images look the same side-by-side, so that it can be called 'visually lossless':
 
 &nbsp;
 | Uncompressed | AFRC 2BPC (bits per component) |
 | ----------- | ----------- |
-| ![Uncompressed](images/sponza_default.webp) | ![AFRC 2BPC](images/sponza_afrc.webp) |
+| ![Reference image of the Sponza scene rendered without compression, showing detailed textures and architectural elements#center](images/sponza_default.webp "Uncompressed Sponza scene") | ![Sponza scene rendered with AFRC at 2 bits per component compression, visually identical to the uncompressed version demonstrating visually lossless quality#center](images/sponza_afrc.webp "Sponza scene with AFRC 2BPC compression") |
 
 More information can be found in [this blog on Arm® Immortalis™](https://developer.arm.com/community/arm-community-blogs/b/mobile-graphics-and-gaming-blog/posts/arm-immortalis-g715-developer-overview) and in [this Vulkan sample](https://github.com/KhronosGroup/Vulkan-Samples/blob/main/samples/performance/image_compression_control/README.adoc).
 

@@ -1,5 +1,6 @@
 ---
-title: Vision LLM inference on Android with KleidiAI and MNN
+title: Run Vision LLM inference on Android with KleidiAI and MNN
+description: Learn how to download, convert, and deploy Vision Transformers using the Mobile Neural Network framework on Android with KleidiAI micro-kernels for optimized performance.
 
 minutes_to_complete: 30
 
