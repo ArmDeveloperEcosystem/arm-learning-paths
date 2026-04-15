@@ -59,7 +59,7 @@ Install the Kubernetes command-line tool `kubectl` by following the steps in the
 
 `eksctl` relies on the AWS CLI being installed and configured. Use the [AWS CLI install guide](/install-guides/aws-cli/) to install the AWS CLI. The CLI provides the `aws` command.
 
-You'll also need to configure the AWS CLI using the `aws configure` or the `aws configure sso` command. There are multiple ways to configure the CLI, including environment variables, command-line options, and credentials files. Refer to [Configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) for more details.
+You'll also need to configure the AWS CLI using the `aws configure` or the `aws configure sso` command. There are multiple ways to configure the CLI, including environment variables, command-line options, and credentials files. Refer to [Configuring settings for the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) for more details.
 
 ## Download and install eksctl 
 
