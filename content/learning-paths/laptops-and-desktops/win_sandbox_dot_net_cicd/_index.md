@@ -1,6 +1,8 @@
 ---
 title: Deploy GitHub Actions workflows using Windows Sandbox
 
+description: Learn how to configure Windows Sandbox as a self-hosted GitHub Actions runner to build and run .NET 8 WPF applications in CI/CD workflows.
+
 minutes_to_complete: 20
 
 who_is_this_for: This is an introductory topic for software developers who are developing applications on Windows on Arm computers.

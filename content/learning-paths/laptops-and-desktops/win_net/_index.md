@@ -1,6 +1,8 @@
 ---
 title: Build a Windows on Arm native application with .NET
 
+description: Learn how to build and run a .NET 6 Windows Presentation Foundation (WPF) application on Windows on Arm machines.
+
 minutes_to_complete: 20
 
 who_is_this_for: This is an introductory topic for software developers doing native development on Windows on Arm computers.
