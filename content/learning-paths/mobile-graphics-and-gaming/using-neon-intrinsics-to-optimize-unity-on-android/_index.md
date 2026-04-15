@@ -5,6 +5,8 @@ minutes_to_complete: 90
 
 description: Learn how to use Arm Neon intrinsics in Unity C# scripts to optimize code on Android and collect performance data using Unity Profiler.
 
+who_is_this_for: Developers interested in leveraging the Unity Machine Learning Agents toolkit on Arm devices.
+
 learning_objectives:
     - Use Arm Neon intrinsics in your Unity C# scripts
     - Optimize your code
