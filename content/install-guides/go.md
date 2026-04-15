@@ -29,7 +29,7 @@ Confirm you are using an Arm machine by running:
 uname -m
 ```
 
-The output should be:
+The output is similar to:
 
 ```output
 aarch64
