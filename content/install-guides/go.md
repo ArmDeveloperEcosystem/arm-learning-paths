@@ -68,7 +68,7 @@ Confirm `go` is installed by printing the version:
 go version
 ```
 
-The output should print the version:
+The output should print the version and is similar to:
 
 ```output
 go version go1.24.5 linux/arm64
