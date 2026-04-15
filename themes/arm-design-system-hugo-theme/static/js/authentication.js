@@ -2,11 +2,20 @@
 //                 Azure AD B2C Configuration
 // ----------------------------------------------------------------------
 const POLICY          = "b2c_1a_arm_accounts.susi";
-const CLIENT_ID       = "20ede7b2-aeb1-43d4-81f9-fc1b7fbfca5e";  
+const ENV             = "prod"; // Change to "test" for testing environment
 
-// Change these in CI/CD pipeline depending on target environment
-const TENANT_DOMAIN   = "armb2ctest.onmicrosoft.com";
-const TENANT_ID       = "f15a8617-9b4e-41dd-8614-adea42784599";
+const CLIENT_ID_TEST       = "20ede7b2-aeb1-43d4-81f9-fc1b7fbfca5e";
+const CLIENT_ID_PROD       = "8234ed8a-6728-4a0b-bb7d-b2e5933e581d";
+const CLIENT_ID            = ENV === "prod" ? CLIENT_ID_PROD : CLIENT_ID_TEST;
+
+const TENANT_DOMAIN_TEST   = "armb2ctest.onmicrosoft.com";
+const TENANT_DOMAIN_PROD   = "armb2c.onmicrosoft.com";
+const TENANT_DOMAIN        = ENV === "prod" ? TENANT_DOMAIN_PROD : TENANT_DOMAIN_TEST;
+
+const TENANT_ID_TEST       = "f15a8617-9b4e-41dd-8614-adea42784599";
+const TENANT_ID_PROD       = "1eb62d43-db15-492b-beab-8a32f6d90351";
+const TENANT_ID            = ENV === "prod" ? TENANT_ID_PROD : TENANT_ID_TEST;
+
 const B2C_DOMAIN      = "account.arm.com";
 
 const REDIRECT_URI    = window.location.origin + "/";
@@ -22,12 +31,14 @@ window.msalConfig = {
     authority: AUTHORITY,
     knownAuthorities: [B2C_DOMAIN],      
     redirectUri: REDIRECT_URI,
-    postLogoutRedirectUri: REDIRECT_URI,
-    navigateToLoginRequestUrl: true 
+    postLogoutRedirectUri: REDIRECT_URI
   },
   cache: {
     cacheLocation: "sessionStorage", // Switch to localStorage for better persistence across tabs after testing
     storeAuthStateInCookie: false
+  },
+  system: {
+    allowRedirectInIframe: false,
   }
 };
 
@@ -35,9 +46,6 @@ window.loginRequest = {
   authority: AUTHORITY,
   scopes: [
     "openid",
-    "profile",
-    "offline_access",
-    `https://${TENANT_DOMAIN}/${CLIENT_ID}/User.Read`
   ]
 };
 
@@ -45,9 +53,6 @@ if (!window.msalInstance) {
     window.msalInstance = new msal.PublicClientApplication(window.msalConfig);
 }
 const msalInstance = window.msalInstance;
-
-
-
 
 
 // ----------------------------------------------------------------------

@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## An example with dot product instructions
 
-You can now continue with an example around `dotprod` intrinsics. Shown below is a program that calculates the sum of absolute differences (SAD) of a 32x32 array of 8-bit unsigned integers (`uint8_t`) using the `vdotq_u32` intrinsic. Save the contents in a file named `dotprod1.c` as shown below:
+You can now continue with an example around `dotprod` intrinsics. Shown below is a program that calculates the sum of absolute differences (SAD) of a 32x32 array of 8-bit unsigned integers (`uint8_t`) using the `vdotq_u32` intrinsic. Save the contents in a file named `dotprod1.c`:
 
 ```C
 #include <stdio.h>
@@ -59,17 +59,17 @@ int main() {
 }
 ```
 
-Now compile the program as follows:
+Compile the program as follows:
 
 ```bash 
 gcc -O3 -march=armv8.2-a+dotprod dotprod1.c -o dotprod1
 ```
 
-And run the program as per below:
+Run the program:
 ```bash
 ./dotprod1
 ```
-The output should look like the following:
+The output should look similar to:
 ```output
 A[0] = [ 00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f 10 11 12 13 14 15 16 17 18 19 1a 1b 1c 1d 1e 1f ]
 B[0] = [ 00 00 00 00 04 04 04 04 00 00 00 00 04 04 04 04 00 00 00 00 04 04 04 04 00 00 00 00 04 04 04 04 ]
@@ -198,12 +198,12 @@ Compile the program as follows:
 rustc -O dotprod2.rs
 ```
 
-Run the program as per below:
+Run the program:
 ```bash
 ./dotprod2
 ```
 
-The output should look like the following:
+The output should look similar to:
 
 ```output
 A[0] = [ 00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f 10 11 12 13 14 15 16 17 18 19 1a 1b 1c 1d 1e 1f ]
@@ -220,11 +220,11 @@ sad = 7400
 
 As you can see both executables produce the same output.
 
-Now generate the disassembly output as shown below:
+Generate the disassembly output:
 ```bash
 objdump -S dotprod2
 ```
-The output should look like the following:
+The output should look similar to:
 ```asm
 0000000000006394 <_ZN4core9core_arch10arm_shared4neon9generated9vdotq_u3217h5c7bc8d63e4a993fE>:
     6394:       3dc00000        ldr     q0, [x0]
@@ -275,11 +275,11 @@ The output should look like the following:
     6724:       d65f03c0        ret
 ```
 
-Note that where you might expect to see a `udot` instruction, there is a `bl` instruction which indicates a branch. The `udot` instruction is instead called in another function, which carries out the loads again.
+Note that where you might expect to see a `udot` instruction, there's a `bl` instruction which indicates a branch. The `udot` instruction is instead called in another function, which carries out the loads again.
 
 This seems counter-intuitive but the reason is that, unlike C, Rust treats the intrinsics like normal functions.
 
-Like functions, inlining them is not always guaranteed. If it is possible to inline the intrinsic, code generation and performance would be almost as that with C. If it is not possible, you might find that the same code in Rust performs worse than in C.
+Like functions, inlining them isn't always guaranteed. If it's possible to inline the intrinsic, code generation and performance would be almost as that with C. If it's not possible, you might find that the same code in Rust performs worse than in C.
 
 Because of this, you have to look carefully at the disassembly generated from your SIMD Rust code. So, how can you fix this behavior and get the expected generated code?
 
@@ -337,5 +337,5 @@ Now look at the changed disassembly output as follows:
     66bc:       d65f03c0        ret
 ```
 
-This disassembly output is now as you would expect it to be as well as being better performant. You will see that the compiler automatically unrolled the loop twice because it was able to figure out that the number of iterations was small. Increasing the iterations will probably disable aggressive unrolling but it will at least inline the intrinsics properly.
+This disassembly output is now as you would expect it to be as well as being better performant. You'll see that the compiler automatically unrolled the loop twice because it was able to figure out that the number of iterations was small. Increasing the iterations will probably disable aggressive unrolling but it will at least inline the intrinsics properly.
 
