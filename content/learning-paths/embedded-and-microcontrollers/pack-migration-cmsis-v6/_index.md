@@ -1,6 +1,8 @@
 ---
 title: Migrating CMSIS-Packs to CMSIS v6
 
+description: Learn how to migrate a CMSIS v5-based CMSIS-Pack with device support to CMSIS v6 and update example projects for compatibility with the new CMSIS version.
+
 minutes_to_complete: 10
 
 who_is_this_for: This is an advanced topic for maintainers of CMSIS-Packs with device support.

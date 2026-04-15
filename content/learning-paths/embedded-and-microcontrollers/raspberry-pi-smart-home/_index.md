@@ -1,6 +1,8 @@
 ---
 title: Build a Privacy-First LLM Smart Home on Raspberry Pi 5
 
+description: Learn how to run large language models locally on the Raspberry Pi 5 using Ollama, control GPIO-connected devices, and deploy a privacy-first web-based smart home assistant without cloud services.
+
 minutes_to_complete: 45
 
 who_is_this_for: This is an introductory topic for edge AI developers, Raspberry Pi hobbyists, and software engineers who want to build privacy-first smart home assistants. You’ll learn how to run large language models (LLMs) locally on the Raspberry Pi 5 using Ollama, control GPIO-connected devices, and deploy a web-based assistant without relying on cloud services.

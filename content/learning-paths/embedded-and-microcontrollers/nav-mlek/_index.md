@@ -1,6 +1,8 @@
 ---
 title: Navigate Machine Learning development with Ethos-U processors
 
+description: Learn how to understand and select physical and virtual hardware targets for ML application development with Cortex-M and Ethos-U, identify software tools, and find example applications.
+
 armips:
 - Cortex-M
 - Ethos-U

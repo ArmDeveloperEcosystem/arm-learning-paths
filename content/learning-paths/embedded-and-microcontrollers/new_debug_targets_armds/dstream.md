@@ -62,7 +62,7 @@ Ensure `DSTREAM family` is selected from the Target Connection pulldown, and Bro
 
 To load an image, navigate to the `Files` tab, and browse to the appropriate ELF image. Then, in the `Debugger` tab, select `Debug from entry point`.
 
-If the target is already running with an image you can also just the debug symbols from the `Files` tab. In that scenario, in the `Debugger` tab, select `Connect Only`.
+If the target is already running with an image you can also load the debug symbols from the `Files` tab. In that scenario, in the `Debugger` tab, select `Connect Only`.
 
 Click `Debug` to connect to the platform, and commence your debug session.
 
