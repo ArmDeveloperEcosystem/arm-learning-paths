@@ -1,7 +1,8 @@
 ---
-title: Learn about the Arm Memory Tagging Extension
+title: Explore Arm Memory Tagging Extension with example programs
+description: Learn how to run example C programs on AArch64 Linux to gain an introductory understanding of the Arm Memory Tagging Extension (MTE).
 
-minutes_to_complete: 20  
+minutes_to_complete: 20
 
 who_is_this_for: This is an introductory topic for developers who want to gain some experience with the Arm Memory Tagging Extension (MTE).
 

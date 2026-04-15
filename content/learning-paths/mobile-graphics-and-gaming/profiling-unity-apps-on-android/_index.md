@@ -1,9 +1,10 @@
 ---
-title: Profiling Unity apps on Android
+title: Profile Unity application performance on Android devices
+description: Learn how to deploy Unity applications to Android, profile code running on Arm devices, and analyze performance data for optimization.
 
 minutes_to_complete: 40
 
-who_is_this_for: Unity developers wanting to analyze the performance of their apps on Android devices
+
 
 learning_objectives:
     - Deploy to Android

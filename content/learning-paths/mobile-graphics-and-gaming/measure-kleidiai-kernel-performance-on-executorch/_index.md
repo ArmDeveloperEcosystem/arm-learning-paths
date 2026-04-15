@@ -1,5 +1,6 @@
 ---
 title: Benchmark a KleidiAI micro-kernel in ExecuTorch
+description: Learn how to benchmark KleidiAI micro-kernels in ExecuTorch using SME/SME2 instructions on Arm64 platforms with ETDump profiling and analysis.
 
 minutes_to_complete: 30
 

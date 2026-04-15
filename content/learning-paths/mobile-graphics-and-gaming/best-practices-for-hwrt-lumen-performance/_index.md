@@ -1,5 +1,6 @@
 ---
-title: Best Practices for hardware ray tracing with Lumen on Android Devices
+title: Optimize hardware ray tracing with Lumen on Android devices
+description: Learn how to optimize hardware ray tracing with Lumen on Android devices powered by Arm Mali GPUs to maximize performance.
 
 minutes_to_complete: 30
 
