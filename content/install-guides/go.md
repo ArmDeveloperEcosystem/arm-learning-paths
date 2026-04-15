@@ -2,8 +2,6 @@
 additional_search_terms:
 - linux
 - cloud
-
-
 layout: installtoolsall
 minutes_to_complete: 10
 author: Jason Andrews
@@ -19,13 +17,11 @@ tool_install: true
 weight: 1
 ---
 
-[Go](https://go.dev/) is an open source programming language. 
+[Go](https://go.dev/) is an open source programming language. It is available for a variety of operating systems and Linux distributions. 
 
-## What should I do before installing Go?
+There are multiple ways to install Go. In this guide, you'll learn how to install Go for Ubuntu on Arm.
 
-Go is available for a variety of operating systems and Linux distributions and has multiple ways to install it. 
-
-This article provides a quick solution to install Go for Ubuntu on Arm.
+## Before you begin
 
 Confirm you are using an Arm machine by running:
 
@@ -41,30 +37,30 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
-## How do I download and install Go?
+## Download and install Go
 
-The easiest way to install Go for Ubuntu on Arm is to download a release, extract it, and setup your `PATH` environment variable. 
+The easiest way to install Go for Ubuntu on Arm is to download a release, extract it, and set up your `PATH` environment variable. To do so, follow these steps:
 
-Download a Go release:
+1. Download a Go release:
 
 ```bash { target="ubuntu:latest" }
 wget https://go.dev/dl/go1.24.5.linux-arm64.tar.gz
 ```
 
-Extract the release to `/usr/local/go`:
+2. Extract the release to `/usr/local/go`:
 
 ```bash { target="ubuntu:latest" }
 sudo tar -C /usr/local -xzf ./go1.24.5.linux-arm64.tar.gz
 ```
 
-Add the path to `go` in your `.bashrc` file. 
+3. Add the path to `go` in your `.bashrc` file:
 
 ```bash { target="ubuntu:latest" }
 echo 'export PATH="$PATH:/usr/local/go/bin"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-## How do I verify Go is working?
+## Verify that Go is working
 
 Confirm `go` is installed by printing the version:
 
@@ -78,4 +74,4 @@ The output should print the version:
 go version go1.24.5 linux/arm64
 ```
 
-You are ready to use the Go programming language on your Arm machine running Ubuntu.
+You are now ready to use the Go programming language on your Arm machine running Ubuntu.
