@@ -1,6 +1,8 @@
 ---
 title: Install tools on the command line using vcpkg 
 
+description: Learn how to install vcpkg, initialize it, create vcpkg-configuration.json files, use vcpkg for tool management, activate tool licensing, and remove vcpkg for reproducible command-line tool installations.
+
 minutes_to_complete: 10
 
 who_is_this_for: This is an introductory topic for software developers who want to create reproducible tool installations on the command line.
