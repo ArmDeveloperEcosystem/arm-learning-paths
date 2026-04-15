@@ -6,11 +6,11 @@ weight: 6
 layout: learningpathall
 ---
 
-## Run Distributed Workloads with Ray
+## Run distributed workloads with Ray
 
 This section demonstrates how to execute parallel tasks and distributed training workloads using Ray on Arm.
 
-You will run simple distributed functions and then scale to multi-worker training using Ray.
+You'll run distributed functions and then scale to multi-worker training using Ray.
 
 ## Run distributed tasks
 
@@ -32,7 +32,7 @@ results = ray.get([square.remote(i) for i in range(10)])
 print("Results:", results)
 ```
 
-### Explanation
+### Code explanation
 
 * `ray.init()` → connects to the running Ray cluster
 * `@ray.remote` → converts a function into a distributed task
@@ -92,7 +92,7 @@ trainer = TorchTrainer(
 trainer.fit()
 ```
 
-### Execute training
+### Run the training script
 
 ```bash
 python3 ray_train.py
@@ -115,14 +115,14 @@ The output is similar to:
 
 This confirms distributed training across multiple workers.
 
-## Explanation
+## Training code explanation
 
 * `TorchTrainer` → handles distributed training execution
 * `ScalingConfig(num_workers=2)` → runs training on 2 workers
 * Each worker executes training in parallel
-* Logs may appear from multiple processes
+* Logs can appear from multiple processes
 
-## Ray Jobs View (Tasks & Training)
+## Ray Jobs view (tasks and training)
 
 ![Ray Dashboard Jobs tab showing successful execution of ray_test.py and ray_train.py#center](images/ray-jobs.png "Ray Jobs tab showing distributed tasks and training execution status")
 
@@ -137,6 +137,6 @@ You have successfully:
 * Executed parallel tasks using Ray Core
 * Converted functions into distributed workloads
 * Performed distributed training using multiple workers
-* Observed execution in the Ray dashboard
+* Observed execution in the Ray Dashboard
 
-Next, you will perform hyperparameter tuning, deploy models, and benchmark performance.
+Next, you'll perform hyperparameter tuning, deploy models, and benchmark performance.

@@ -1,9 +1,6 @@
 ---
 title: Scale AI workloads with Ray on Google Cloud C4A Axion VM
-
-draft: true
-cascade:
-    draft: true
+description: Deploy and run distributed AI workloads using Ray on Google Cloud Axion C4A Arm-based VMs, covering parallel tasks, hyperparameter tuning, and model serving with Ray Core, Train, Tune, and Serve.
     
 minutes_to_complete: 30
 

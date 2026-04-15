@@ -32,11 +32,12 @@ To create a virtual machine based on the C4A instance type:
   - For the license type, choose **Pay as you go**.
   - Increase **Size (GB)** from **10** to **100** to allocate sufficient disk space.
   - Select **Choose** to apply the changes.
+- Expand the **Networking** section and enter `allow-ray-ports` in the **Network tags** field. This tag links the VM to the firewall rule you created earlier, enabling external access to the Ray Dashboard and Serve API ports.
 - Select **Create** to launch the virtual machine.
 
 After the instance starts, select **SSH** next to the VM in the instance list to open a browser-based terminal session.
 
-![Google Cloud Console VM instances page displaying running instance with green checkmark and SSH button in the Connect column alt-txt#center](images/gcp-pubip-ssh.png "Connecting to a running C4A VM using SSH")
+![Google Cloud Console VM instances page showing the running C4A instance with a green status checkmark and the SSH button highlighted in the Connect column#center](images/gcp-pubip-ssh.png "Connecting to a running C4A VM using SSH")
 
 A new browser window opens with a terminal connected to your VM.
 
