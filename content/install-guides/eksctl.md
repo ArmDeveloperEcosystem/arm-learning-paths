@@ -67,7 +67,7 @@ The steps for downloading and installing `eksctl` depend on your operating syste
 
 ### Arm Linux
 
-To download and install eksctl on Arm Linux, follow these steps:
+To download and install `eksctl` on Arm Linux, follow these steps:
 
 1. Download the `eksctl` package using `curl`:
 
