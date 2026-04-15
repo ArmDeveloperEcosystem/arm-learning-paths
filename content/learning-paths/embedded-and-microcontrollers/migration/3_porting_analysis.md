@@ -62,7 +62,7 @@ p2 = _mm_loadu_si128((__m128i *)(inputPointer + i * width + j + 1));
 p3 = _mm_loadu_si128((__m128i *)(inputPointer + i * width + j + 2));
 ```
 
-The lines of code above is just a snippet from the function `SobelSimd` which has intrinsics prefixed with `_mm_`. These aren't supported on `aarch64` and will need to be ported for the application to compile on `aarch64`.
+The lines of code above are a snippet from the function `SobelSimd` which has intrinsics prefixed with `_mm_`. These aren't supported on `aarch64` and will need to be ported for the application to compile on `aarch64`.
 
 The table below summarizes the migration analysis.
 | | version | available on Arm | Comment |

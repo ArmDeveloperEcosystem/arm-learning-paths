@@ -1,6 +1,8 @@
 ---
 title: Run Llama 3 on a Raspberry Pi 5 using ExecuTorch
 
+description: Learn how to compile the Llama 3 large language model using ExecuTorch, deploy it to a Raspberry Pi 5, and understand techniques for running LLMs in embedded environments.
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for anyone interested in running the Llama 3 model on a Raspberry Pi 5, and learning about techniques for running large language models (LLMs) in an embedded environment.

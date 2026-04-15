@@ -1,6 +1,8 @@
 ---
 title: Migrating x86_64 workloads to aarch64
 
+description: Learn the software migration methodology for porting Linux workloads from x86_64 to aarch64, including using Arm compilers, porting compiler intrinsics, and deploying applications in containers.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for embedded software developers looking at migrating Linux workloads to aarch64.

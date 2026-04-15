@@ -345,9 +345,9 @@ These messages indicate that your model is working and processing voice input as
 ## Record your voice to toggle the LED
 
 - Wait for the **Recording...** message to appear on the Serial Monitor. This means the system is ready to capture voice input.  
-- Say your command (for example, "on" or "off") clearly and promptly. The system records for only about one second.  
+- Say your command (for example, "on" or "off") when prompted. The system records for only about one second.  
 - The model will make a prediction based on your voice input and toggle the LED accordingly.  
-- You can adjust the **threshold** values in the code to control how confident the prediction must be before the LED toggles. This helps fine-tune the system’s responsiveness.  
+- You can adjust the **threshold** values in the code to control how confident the prediction must be before the LED toggles. This helps fine-tune the system's responsiveness.  
 - If the LED turns on when you say "on" and turns off when you say "off", your system is working correctly.
 
 
@@ -355,7 +355,7 @@ These messages indicate that your model is working and processing voice input as
 
 Your Serial Monitor should look like the image below:
 
-![example image alt-text#center](images/serial_monitor.png "Circuit Connection")
+![Arduino IDE Serial Monitor output showing inference results with Recording message, label predictions (noise, off, on), and corresponding confidence scores for each voice command#center](images/serial_monitor.png "Serial Monitor showing voice command inference results")
 
 Congratulations, you’ve successfully programmed your first TinyML microcontroller! You've also built a functional, smart system to control an LED with your voice.
 
