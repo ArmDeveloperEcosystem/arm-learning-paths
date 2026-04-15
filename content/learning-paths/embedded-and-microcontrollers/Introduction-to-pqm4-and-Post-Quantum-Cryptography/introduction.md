@@ -8,16 +8,21 @@ layout: learningpathall
 
 The [pqm4](https://github.com/mupq/pqm4) library is a collection of post-quantum cryptographic algorithms designed for the ARM Cortex-M4 microcontrollers. It originated from the [PQCRYPTO](https://pqcrypto.eu.org) project, funded by the European Commission. The library includes implementations of post-quantum key-encapsulation mechanisms and signature schemes.
 
+### Benefits of pqm4 for ARM Developers
+
+- Efficient evaluation of post-quantum cryptographic algorithms on ARM Cortex-M4 microcontrollers.
+- Accurate measurement of performance, memory usage, and execution cycles on real embedded hardware.
+- Standardized framework for testing, benchmarking, and comparing multiple cryptographic implementations.
+- Simplified integration and experimentation with new cryptographic schemes and optimizations for ARM platforms.
+
 ### Design Goals
 
 The primary design goals of the pqm4 library are:
 
-- Automated functional testing on widely available development boards.
-- Automated generation of test vectors and comparison against reference implementations.
-- Automated benchmarking for speed, stack usage, and code size.
-- Automated profiling of cycles spent in symmetric primitives like SHA-2, SHA-3, and AES.
-- Integration of clean implementations from [PQClean](https://github.com/PQClean/PQClean).
-- Easy integration of new schemes and implementations into the framework.
+- Automated functional testing and test vector generation with validation against reference implementations.
+- Comprehensive benchmarking, including speed, stack usage, and code size analysis.
+- Profiling of cryptographic primitives such as SHA-2, SHA-3, and AES.
+- Easy integration of clean and optimized implementations (e.g., from [PQClean](https://github.com/PQClean/PQClean)) and new schemes.
 
 ### Scope of pqm4
 

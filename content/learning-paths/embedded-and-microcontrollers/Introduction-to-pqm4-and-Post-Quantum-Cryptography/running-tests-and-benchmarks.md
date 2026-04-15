@@ -34,8 +34,21 @@ It also checks failure cases such as :
 Expected Output :
 
 ```python
+==========================
+DONE key pair generation!
+DONE encapsulation!
+DONE decapsulation!
 OK KEYS
+
++
+...
+OK invalid sk_a
+
++
 OK invalid ciphertext
+
++
+#
 ```
 
 #### 2. Speed Binary
@@ -50,6 +63,21 @@ This binary measures execution time (in CPU cycles) for :
 
 This is used to evaluate performance on embedded hardware.
 
+Expected Output : 
+
+```python
+==========================
+keypair cycles:
+123456
+
+encaps cycles:
+234567
+
+decaps cycles:
+210000
+=
+```
+
 #### 3. Hashing Binary
 
 ```bash
@@ -62,6 +90,21 @@ This measures how many cycles are spent in:
 
 This helps analyze how much of the algorithm cost comes from symmetric cryptography.
 
+Expected Output :
+
+```python
+==========================
+keypair hash cycles:
+50000
+
+encaps hash cycles:
+80000
+
+decaps hash cycles:
+75000
+=
+```
+
 #### 4. Stack Binary
 
 ```bash
@@ -72,7 +115,24 @@ This measures stack memory usage of:
 * encapsulation
 * decapsulation
 
+Note: On some boards, stack measurement **may not work correctly** due to platform-specific memory layout.
+
 Note: Memory allocated outside functions (e.g., public keys, ciphertexts) is not included.
+
+Expected Output :
+
+```python
+==========================
+keypair stack usage:
+2048
+
+encaps stack usage:
+3072
+
+decaps stack usage:
+2800
+#
+```
 
 #### 5. Test Vectors Binary
 
@@ -137,6 +197,16 @@ This will:
 * **Run** them on the board
 * **Check** correctness automatically
 
+Expected Output :
+```python
+ml-kem-768 - m4fspeed SUCCESSFUL                                                                                                                                                                                                                                                                                                                                          
+ml-kem-768 - m4fstack SUCCESSFUL                                                                                                                                                                                                                                                                                                                                          
+ml-kem-768 - clean SUCCESSFUL                                                                                                                                                                                                                                                                                                                                             
+test: 100%|█████████████████████████████████████████████| 3/3 [00:12<00:00,  4.29s/it, ml-kem-768 - clean]
+
+```
+
+
 #### 2. Run Test Vectors
 
 ```bash
@@ -151,6 +221,15 @@ This will:
 * **generates** test vectors on the board
 * **compares** them with host-side results
 
+Expected Output :
+
+```python
+ml-kem-768 - m4fspeed SUCCESSFUL                                                                                                                                                                                                                                                                                                                                          
+ml-kem-768 - m4fstack SUCCESSFUL                                                                                                                                                                                                                                                                                                                                          
+ml-kem-768 - clean SUCCESSFUL   
+
+test: 100%|█████████████████████████████████████████████| 3/3 [00:12<00:00,  4.29s/it, ml-kem-768 - clean]
+```
 
 #### 2. Run Benchmarks
 
@@ -160,11 +239,25 @@ python3 benchmarks.py -p <platform> --uart <serial_port> <scheme>
 Example for NUCLEO-L476RG Board :
 
 ```bash
-python3 testvectors.py -p nucleo-l476rg --uart /dev/tty.usbmodemXXXX ml-kem-768
+python3 benchmarks.py -p nucleo-l476rg --uart /dev/tty.usbmodemXXXX ml-kem-768
 ```
 This will :
 * runs speed and stack benchmarks
 * stores results in **benchmarks/**
+
+Expected Output :
+
+```python
+speed:  33%|███████████████▍              | 1/3 [00:20<00:40, 20.00s/it, ml-kem-768 - m4fspeed]
+speed:  66%|██████████████████████████▊   | 2/3 [00:40<00:20, 20.00s/it, ml-kem-768 - m4fstack]
+speed: 100%|██████████████████████████████| 3/3 [01:00<00:00, 20.00s/it, ml-kem-768 - clean]
+```
+
+Expected output of the benchmark results is stored in the **benchmarks.csv** file
+
+![benchmarks.csv](./benchmarks.png)
+
+Note : On some boards, stack measurement may not work correctly due to platform-specific memory layout.
 
 ### Uisng QEMU(Optional)
 
