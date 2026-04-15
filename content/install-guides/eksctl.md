@@ -14,14 +14,14 @@ test_images:
 - ubuntu:latest
 test_link: null
 test_maintenance: true
-title: Amazon EKS CLI (eksctl)
+title: eksctl (Amazon EKS CLI)
 tool_install: true
 weight: 1
 ---
 
 `eksctl` is a command line tool to create and manage Kubernetes clusters in [Amazon Elastic Kubernetes Service (Amazon EKS)](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html). It simplifies cluster creation and saves time compared to using the Amazon Web Services (AWS) console. For additional information, see [eksctl official documentation](https://docs.aws.amazon.com/eks/latest/eksctl/what-is-eksctl.html).
 
-`eksctl` is available for a variety of operating systems and Linux distributions. It runs on both Arm Linux distributions and Windows on Arm. The following steps show the different ways in which you can install `eksctl`.
+`eksctl` is available for a variety of operating systems and Linux distributions. It runs on both Arm Linux distributions and Windows on Arm. The following steps show how you can install `eksctl` and verify the installation by creating a simple Amazon EKS cluster.
 
 ## Before you begin
 
@@ -48,6 +48,8 @@ For Windows, follow these steps:
 1. Right-click **Start** and choose **Windows Settings**.​​​​​​
 2. When the settings appear, select **System** on the left side and then select **About**.
 3. Under **Device specifications**, look for **System type**. You should see **ARM-based processor** listed for your computer.
+
+If you see a different result, you are not using an Arm computer running Windows.
 
 ### Install kubectl
 
