@@ -1,20 +1,24 @@
 ---
-title: Build the example application and configure the target
+title: Build the Mandelbrot example on Arm Neoverse
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
+## Prepare the profiling target
+
+In this section, you'll build the Mandelbrot C++ application on your remote Arm server and confirm that Arm Performix can reach the target.
+
 ## About the example application
 
 This Learning Path profiles the same Mandelbrot C++ application used in the [Find code hotspots with Arm Performix](/learning-paths/servers-and-cloud-computing/cpu_hotspot_performix/) Learning Path. It generates a 1920×1080 bitmap of the Mandelbrot set by iterating a simple recurrence for each pixel and is compute-heavy enough to produce clear profiling signal without requiring a long-running workload. The single-threaded build is intentionally unoptimized so that the hotspot analysis surfaces a meaningful target for improvement.
 
-You don't need to understand the Mandelbrot algorithm to follow this Learning Path. It's used here as a convenient, reproducible benchmark for profiling on Arm Neoverse.
+You don't need to understand the Mandelbrot algorithm to follow this Learning Path.
 
 ## Connect to your Arm target
 
-This Learning Path targets an AWS Graviton3 metal instance (`m7g.metal`) with 64 Neoverse V1 cores. Any Arm Linux server with multiple cores works for the parallelization step, but a metal instance gives you direct access to all hardware threads without the overhead of virtualization.
+For profiling, the Learning Path targets an AWS Graviton3 metal instance (`m7g.metal`) with 64 Neoverse V1 cores. Any Arm Linux server with multiple cores works for the parallelization step, but a metal instance gives you direct access to all hardware threads without the overhead of virtualization.
 
 You connect to the remote target via SSH through the Arm MCP Server. The `apx_recipe_run` tool accepts the target host IP address and SSH username directly as parameters, so there is no separate target configuration step required. Ensure your remote Arm server is reachable over SSH from the machine running your AI coding assistant, and follow the [Configure your MCP client](https://github.com/arm/mcp?tab=readme-ov-file#2-configure-your-mcp-client) instructions in the Arm MCP Server repository before continuing.
 
@@ -36,7 +40,7 @@ cd Mandelbrot-Example
 make single_thread DEBUG=1
 ```
 
-This produces the binary at `./build/mandelbrot_single_thread_debug`. Confirm it exists before continuing:
+The command produces the binary at `./build/mandelbrot_single_thread_debug`. Confirm it exists before continuing:
 
 ```bash
 ls -lh build/mandelbrot_single_thread_debug

@@ -1,12 +1,12 @@
 ---
-title: Apply optimizations and verify improvements
+title: Optimize code with AI-driven profiling feedback
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Apply the agent's proposed optimizations
+## Apply AI-suggested optimizations
 
 In the previous section, the agent identified three optimization opportunities:
 
@@ -47,7 +47,7 @@ The fix is to replace `std::complex<double>` in `getIterations` with plain `doub
 $$re_{new} = re_z^2 - im_z^2 + re_c$$
 $$im_{new} = 2 \cdot re_z \cdot im_z + im_c$$
 
-This eliminates every `std::complex` method call from the inner loop. If the agent hasn't already proposed this change, use the following prompt to direct it:
+The fix eliminates every `std::complex` method call from the inner loop. If the agent hasn't already proposed this change, use the following prompt to direct it:
 
 ```text
 On the remote server, rewrite the getIterations function in

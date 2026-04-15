@@ -1,10 +1,14 @@
 ---
-title: "Overview of Azure Cobalt 100 and PostgreSQL"
+title: Understand PostgreSQL on Azure Cobalt 100
 
 weight: 2
 
 layout: "learningpathall"
 ---
+
+## Why run PostgreSQL on Azure Cobalt 100
+
+PostgreSQL on Arm-based Azure Cobalt 100 processors delivers efficient database performance for both transactional and analytical workloads. Cobalt 100's dedicated physical cores per vCPU provide consistent performance that suits PostgreSQL's multi-process architecture and parallel query execution.
 
 ## Azure Cobalt 100 Arm-based processor
 

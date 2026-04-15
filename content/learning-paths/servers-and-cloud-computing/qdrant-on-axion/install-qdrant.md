@@ -1,10 +1,12 @@
 ---
-title: Install and Run Qdrant
+title: Install and run Qdrant on Axion
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+
+## Prepare the vector database environment
 
 In this section, you prepare a SUSE Linux Enterprise Server (SLES) arm64 virtual machine and deploy **Qdrant**, an open-source vector database designed for efficient similarity search and vector indexing.
 
@@ -14,7 +16,7 @@ Running Qdrant on **Google Axion Arm-based infrastructure** enables efficient ex
 
 ## Architecture overview
 
-This architecture represents a simple vector search system where embeddings are generated and stored in Qdrant, enabling fast semantic similarity queries.
+The deployment creates a simple vector search system where embeddings are generated and stored in Qdrant, enabling fast semantic similarity queries.
 
 ```text
 SUSE Linux Enterprise Server (arm64)

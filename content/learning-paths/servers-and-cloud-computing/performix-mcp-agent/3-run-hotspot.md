@@ -1,15 +1,19 @@
 ---
-title: Run the Code Hotspots recipe using a GitHub Copilot agent
+title: Run Code Hotspots with an AI agent
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
+## Execute profiling through the Arm MCP Server
+
+In this section, you'll use a GitHub Copilot prompt file to drive the Code Hotspots recipe through the Arm MCP Server. The agent confirms your target details, runs the recipe autonomously, and returns structured profiling results.
+
 ## Use the Arm MCP performance-beginner prompt file
 
 {{% notice Note %}}
-This section uses Visual Studio Code with GitHub Copilot. If you prefer a different AI assistant, see [Configure other AI agents](#configure-other-ai-agents) at the end of this section for equivalent configurations for Kiro and OpenAI Codex.
+The section uses Visual Studio Code with GitHub Copilot. If you prefer a different AI assistant, see [Configure other AI agents](#configure-other-ai-agents) at the end of this section for equivalent configurations for Kiro and OpenAI Codex.
 {{% /notice %}}
 
 The Arm MCP Server repository includes a ready-made prompt file called `performance-beginner` that guides an AI agent through the full Code Hotspots workflow: baseline profiling, hotspot identification, targeted code changes, and re-profiling to confirm the improvement. You don't need to write this file yourself, you copy it from the repository.

@@ -1,14 +1,16 @@
 ---
-title: Architecture
+title: Understand the vector search architecture
 weight: 8
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
+## How vector search enables intelligent retrieval
+
 In this section, you explore the architecture behind the chatbot retrieval system built using Qdrant on Google Axion Arm-based infrastructure.
 
-This architecture demonstrates how modern AI systems perform **semantic similarity search** to retrieve relevant information from stored knowledge.
+The architecture demonstrates how modern AI systems perform **semantic similarity search** to retrieve relevant information from stored knowledge.
 
 Unlike traditional keyword search systems, vector databases allow applications to retrieve information based on **semantic meaning and contextual similarity**.
 
@@ -88,7 +90,7 @@ This process enables the chatbot to understand intent and meaning, rather than r
 
 ## Benefits of this architecture
 
-This design provides several advantages:
+The design provides several advantages:
 
 - semantic search instead of keyword matching
 - scalable knowledge retrieval
@@ -97,7 +99,7 @@ This design provides several advantages:
 
 ## Running on Axion
 
-This example demonstrates that Axion Arm infrastructure can efficiently run vector search workloads.
+The example demonstrates that Axion Arm infrastructure can efficiently run vector search workloads.
 
 - energy-efficient compute
 - scalable cloud infrastructure

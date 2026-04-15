@@ -1,9 +1,13 @@
 ---
-title: Get started with Qdrant on Google Axion C4A
+title: Understand vector search with Qdrant on Google Axion
 weight: 2
 
 layout: "learningpathall"
 ---
+
+## Why vector search on Google Axion C4A
+
+Qdrant is an open-source vector database designed for efficient similarity search and high-performance vector indexing. Running Qdrant on Google Axion C4A Arm-based infrastructure enables efficient execution of AI and vector search workloads. Axion processors, based on the Arm Neoverse V2 architecture, provide high performance and improved energy efficiency for modern cloud-native applications and data services.
 
 ## Explore Axion C4A Arm instances in Google Cloud
 
@@ -15,13 +19,9 @@ These characteristics make Axion C4A instances well-suited for modern analytics 
 
 To learn more, see the Google blog [Introducing Google Axion Processors, our new Arm-based CPUs](https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu).
 
-## Explore Qdrant Vector Search on Google Axion C4A (Arm Neoverse V2)
-
-Qdrant is an open-source vector database designed for efficient similarity search and high-performance vector indexing. It enables applications to store and retrieve embeddings—numerical representations of data such as text, images, or audio—allowing systems to perform semantic search and AI-powered retrieval.
+## Qdrant for semantic search and AI retrieval
 
 Vector databases like Qdrant are commonly used in modern AI systems to support applications such as semantic search, recommendation systems, anomaly detection, and Retrieval-Augmented Generation (RAG) pipelines. By storing embeddings and performing nearest-neighbor search, Qdrant allows applications to retrieve the most relevant information based on semantic meaning rather than simple keyword matching.
-
-Running Qdrant on Google Axion C4A Arm-based infrastructure enables efficient execution of AI and vector search workloads. Axion processors, based on the Arm Neoverse V2 architecture, provide high performance and improved energy efficiency for modern cloud-native applications and data services.
 
 Using Qdrant on Axion allows you to achieve:
 

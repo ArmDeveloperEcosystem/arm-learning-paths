@@ -6,6 +6,8 @@ weight: 7
 layout: learningpathall
 ---
 
+## Overview
+
 In this section, you simulate a real-world AI/ML workflow using MinIO. You'll upload a training dataset and a model artifact, then retrieve them to simulate how a training or inference job would access data from object storage.
 
 ## Architecture overview

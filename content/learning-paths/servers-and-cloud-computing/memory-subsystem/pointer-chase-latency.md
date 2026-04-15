@@ -1,5 +1,5 @@
 ---
-title: Measure cache and memory latency with a pointer chase
+title: Measure Arm cache and memory latency using ASCT pointer chase
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## The pointer-chase technique
 
-Cache and memory latency is the single most important metric for characterizing a memory subsystem. The standard technique is a pointer chase, a linked list where each node points to the next, and the CPU must complete each load before it can issue the next one. This creates a chain of dependent loads that defeats both hardware prefetching and out-of-order execution, letting you measure the effective dependent-load latency for this access pattern at each level of the memory hierarchy.
+Cache and memory latency is the single most important metric for characterizing a memory subsystem. The standard technique is a pointer chase, a linked list where each node points to the next, and the CPU must complete each load before it can issue the next one. Making each load depend on the previous one creates a chain of dependent loads that defeats both hardware prefetching and out-of-order execution, letting you measure the effective dependent-load latency for this access pattern at each level of the memory hierarchy.
 
 ## Why pointer chasing works
 
@@ -74,7 +74,7 @@ Latency sweep for Graviton4:
 
 Your actual numbers will differ. The important pattern is the steps in latency as the working set exceeds each cache level.
 
-## Interpret the results
+## Interpret cache latency measurements
 
 Graviton2 uses Neoverse N1 cores with a 64 KB L1D, 1 MB private L2, and a 32 MB shared L3. DRAM is DDR4.
 
@@ -117,7 +117,7 @@ You can view the full list of available benchmarks and their keywords with:
 asct list
 ```
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 In this section you:
 - Ran the ASCT `latency-sweep` benchmark to measure pointer-chase latency across the full cache hierarchy and DRAM
