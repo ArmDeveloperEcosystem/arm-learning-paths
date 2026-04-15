@@ -48,12 +48,12 @@ In the following sections, you'll walk through each key page on the Edge Impulse
 
 
 
-![Screenshot of the Edge Impulse home page showing the main navigation and project dashboard alt-text#center](images/1.webp "Home page of Edge Impulse website")
+![Edge Impulse home page interface showing the main navigation menu at the top with Get Started, Platform, Resources, and Pricing options, and the central project dashboard area#center](images/1.webp "Home page of Edge Impulse website")
 
 
 ## Create a new project
 
-After you create your account and log in, the first step is to create a new project. Give your project a name that clearly reflects its purpose. This helps with easy identification, especially if you plan to build multiple models.
+After you create your account and log in, the first step is to create a new project. Give your project a name that reflects its purpose. This helps with easy identification, especially if you plan to build multiple models.
 
 For example, if you're building a keyword-spotting model, you might name it `Wake word detection`.
 

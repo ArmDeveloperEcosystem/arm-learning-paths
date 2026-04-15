@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 # Development environment
 
-The original application uses GNU Compiler Collection ([GCC](https://gcc.gnu.org/)) so you want to create a development environment with this compiler and with the same version (when possible). To migrate the application to `aarch64`, you can use the same `x86_64` machine you used to run the application. You can use an `aarch64` container for our development environment which allows you to compile and run the ported application on the `x86_64` machine.
+The original application uses GNU Compiler Collection ([GCC](https://gcc.gnu.org/)) so you want to create a development environment with this compiler and with the same version (when possible). To migrate the application to `aarch64`, you can use the same `x86_64` machine you used to run the application. You can use an `aarch64` container for your development environment which allows you to compile and run the ported application on the `x86_64` machine.
 
 See [Docker Engine](/install-guides/docker/docker-engine/) for instructions how to install Docker in your Linux environment.
 

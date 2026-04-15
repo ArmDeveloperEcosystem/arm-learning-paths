@@ -49,7 +49,7 @@ Install [Docker Engine](/install-guides/docker/docker-engine/) on the EC2 instan
 
 ### Raspberry Pi 4
 
-The Raspberry Pi is setup just like a normal desktop computer and the following is assumed:
+The Raspberry Pi is set up like a normal desktop computer and the following is assumed:
 * Running Raspberry Pi OS (64-bit)
 * Docker is installed
 * MicroSD card inserted

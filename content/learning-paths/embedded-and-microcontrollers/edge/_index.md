@@ -1,6 +1,8 @@
 ---
 title: Learn how to run AI on Edge devices using Arduino Nano RP2040
 
+description: Learn how to collect and preprocess audio data using Edge Impulse, train an audio classification model, and deploy it to the Arduino Nano RP2040 to control LEDs based on voice commands.
+
 minutes_to_complete: 90
 
 who_is_this_for: This Learning Path is for beginners in Edge AI and TinyML, including developers, engineers, hobbyists, AI/ML enthusiasts, and researchers working with embedded AI and IoT.
