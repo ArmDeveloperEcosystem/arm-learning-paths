@@ -60,7 +60,7 @@ echo 'export PATH="$PATH:/usr/local/go/bin"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-## Verify that Go is working
+## Verify Go installation
 
 Confirm `go` is installed by printing the version:
 
