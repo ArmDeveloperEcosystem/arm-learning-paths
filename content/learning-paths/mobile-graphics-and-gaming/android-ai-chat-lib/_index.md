@@ -15,7 +15,7 @@ prerequisites:
 author: Ben Clark
 
 ### Tags
-skilllevels: Beginner
+skilllevels: Introductory
 subjects: ML
 armips:
     - Arm AI Chat library
