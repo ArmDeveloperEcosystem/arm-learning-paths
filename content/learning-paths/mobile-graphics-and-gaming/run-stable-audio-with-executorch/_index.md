@@ -1,7 +1,6 @@
 ---
 title: Generate audio with Stable Audio Open Small using ExecuTorch
-
-    
+description: Learn how to convert the Stable Audio Open Small model to ExecuTorch format and build an audio generation application for Android or macOS.
 minutes_to_complete: 45
 
 who_is_this_for: This is an introductory topic for developers who want to deploy the Stable Audio Open Small text-to-audio model using ExecuTorch on an Android device or macOS.
