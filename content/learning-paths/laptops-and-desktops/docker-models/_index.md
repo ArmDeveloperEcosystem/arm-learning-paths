@@ -1,6 +1,7 @@
 ---
 title: Run AI models with Docker Model Runner
 
+description: Learn how to run pre-trained AI models locally using Docker Model Runner and build containerized applications integrating large language models.
 
 minutes_to_complete: 45
 

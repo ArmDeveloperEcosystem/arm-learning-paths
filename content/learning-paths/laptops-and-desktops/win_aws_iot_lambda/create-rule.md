@@ -56,6 +56,6 @@ This query ensures that only temperature readings are sent to the AWS Lambda fun
 
 ![fig8](figures/08.webp)
 
-This means that the AWS Lambda function you have just created has an input trigger set to AWS IoT. Specifically, the AWS Lambda function is invoked whenever a new message is sent to the 'Emulators/Weather/SensorReadings' topic.
+This means that the AWS Lambda function you created has an input trigger set to AWS IoT. Specifically, the AWS Lambda function is invoked whenever a new message is sent to the 'Emulators/Weather/SensorReadings' topic.
 
 You are now ready to implement and test the Lambda function.

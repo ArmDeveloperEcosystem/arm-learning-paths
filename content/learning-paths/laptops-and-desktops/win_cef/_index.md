@@ -1,6 +1,8 @@
 ---
 title: Develop desktop applications with Chromium Embedded Framework on Windows on Arm
 
+description: Learn how to create and build Chromium Embedded Framework desktop applications using CMake and web technologies on Windows on Arm.
+
 minutes_to_complete: 30
 
 who_is_this_for: This learning path is for developers who want to learn how to use web technologies for developing Desktop apps on Windows on Arm (WoA).

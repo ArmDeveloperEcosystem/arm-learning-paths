@@ -1,5 +1,7 @@
 ---
 title: Build an Android chat application with ONNX Runtime API
+description: Learn how to build ONNX Runtime and the generate() API for Android to run a Phi-3 model on Arm-based smartphones.
+
 
 minutes_to_complete: 60
 

@@ -1,6 +1,8 @@
 ---
 title: Port Applications to Arm64 using Arm64EC
 
+description: Learn how to port Qt-based Python desktop applications with C/C++ dependencies to Arm64 using Arm64EC on Windows on Arm.
+
 minutes_to_complete: 90
 
 who_is_this_for: This is an introductory topic for developers who want to learn how to port their applications to Arm64 using Arm64EC. 

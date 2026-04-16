@@ -1,6 +1,8 @@
 ---
 title: Get started with Windows Subsystem for Linux (WSL) on Arm
 
+description: Learn how to configure and run WSL with Linux distributions, graphical applications, remote desktop, and development tools on Windows on Arm computers.
+
 minutes_to_complete: 90 
 
 who_is_this_for: Software developers with Windows on Arm computers doing Linux or cloud native development.
