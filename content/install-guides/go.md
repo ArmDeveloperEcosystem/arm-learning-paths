@@ -17,7 +17,7 @@ tool_install: true
 weight: 1
 ---
 
-[Go](https://go.dev/) is an open source programming language. It is available for a variety of operating systems and Linux distributions. 
+[Go](https://go.dev/) is an open source programming language that's available for a variety of operating systems and Linux distributions. 
 
 There are multiple ways to install Go. In this guide, you'll learn how to install Go for Ubuntu on Arm.
 
