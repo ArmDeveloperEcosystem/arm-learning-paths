@@ -10,6 +10,7 @@ minutes_to_complete: 5
 multi_install: false
 multitool_install_part: false
 official_docs: https://docs.aws.amazon.com/eks/latest/eksctl/what-is-eksctl.html
+description: Install eksctl (Amazon EKS CLI) on Arm Linux and Windows on Arm to create and manage Kubernetes clusters on Amazon EKS.
 test_images:
 - ubuntu:latest
 test_link: null
