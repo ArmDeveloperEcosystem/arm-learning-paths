@@ -1,5 +1,6 @@
 ---
 title: Build a customer support chatbot on Android with Llama and ExecuTorch
+description: Learn how to build a customer support chatbot for Android using Llama 3.2, ExecuTorch, and KleidiAI to run on-device inference on Arm platforms.
 
 minutes_to_complete: 60
 

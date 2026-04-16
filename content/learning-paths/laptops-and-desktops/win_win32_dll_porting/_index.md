@@ -1,6 +1,8 @@
 ---
 title: How to port the Win32 library to Arm64
 
+description: Learn how to create C/C++ Win32 DLLs and port them to Arm64 for use in Windows console applications.
+
 minutes_to_complete: 90
 
 who_is_this_for: This is an introductory topic for developers who want to learn how to port their Win32 applications to Arm64 

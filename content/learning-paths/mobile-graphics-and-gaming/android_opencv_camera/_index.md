@@ -1,5 +1,6 @@
 ---
 title: Create Computer Vision Applications with OpenCV on Android Devices
+description: Learn how to create and configure an Android project with OpenCV support to process camera images for computer vision applications.
 
 minutes_to_complete: 30
 

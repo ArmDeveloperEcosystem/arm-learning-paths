@@ -1,5 +1,7 @@
 ---
-title: Get started with Neon Intrinsics on Android
+title: Accelerate Android applications with Neon intrinsics
+
+description: Learn how to enable and implement Neon intrinsics in Android NDK applications to calculate vector operations and measure performance improvements.
 
 draft: true
 cascade:

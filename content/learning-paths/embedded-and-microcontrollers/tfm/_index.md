@@ -1,6 +1,8 @@
 ---
 title: Get started with Trusted Firmware-M
 
+description: Learn how to build and run the reference Trusted Firmware-M tests and example application on Arm Fixed Virtual Platforms for secure microcontroller development.
+
 minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for software developers new to Trusted

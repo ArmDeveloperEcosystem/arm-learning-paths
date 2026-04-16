@@ -1,6 +1,8 @@
 ---
 title: Benchmarking .NET 8 applications on Windows on Arm
 
+description: Learn how to build, run, and benchmark .NET 8 Console applications to measure performance on Windows on Arm devices.
+
 minutes_to_complete: 20
 
 who_is_this_for: This learning path is for developers who want to benchmark the performance of the .NET 8 applications on Windows on Arm (WoA).

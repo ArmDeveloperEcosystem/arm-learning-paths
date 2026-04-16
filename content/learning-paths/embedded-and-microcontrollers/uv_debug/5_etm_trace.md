@@ -34,7 +34,7 @@ The Corstone-300 FVP can be used to collect instruction trace data with a two-st
 1. Open a Windows Explorer and copy the file `MTItoCoverage.dll` from `C:\Keil_v5\ARM\VHT` to `C:\Keil_v5\ARM\FVP\Corstone-300\models\Win64_VC2017`. This file is required to extract the coverage data from a previous run.
 1. In µVision, Go to ![Options for Target](./b_uv4_target_options.png) **Project - Options for Target... (Alt+F7)** and switch to the **Debug** tab.
 2. On the right-hand side, select **Models ARMv8-M Debugger** and click on **Settings**. The **Models ARMv8-M Target Driver Setup** window opens.
-3. Select a coverage file (simply enter a name for the file and it will be generated automatically).
+3. Select a coverage file (enter a name for the file and it will be generated automatically).
 1. Enable **Load Coverage on Connect** and **Store Coverage on Disconnect**:
    ![Models ARMv8-M Target Driver Setup](./models_coverage_setup.png)
 1. Click **OK** twice.
@@ -310,7 +310,7 @@ The hard fault handler exception vector is found in the startup file of your dev
 1. ![Step into](./b_uv4_stepinto.png) **Step (F11)** once. You will now see the hard fault branch as shown in the bottom screen:  
 ![Trace Data Window with Hard Fault Handler](./trace_data_window_w_hf.png)
 
-This example clearly shows how quickly ETM trace can help debug program flow bugs.
+This example shows how quickly ETM trace can help debug program flow bugs.
 
 {{% notice Note %}}
 Instead of setting a breakpoint on the hard fault vector, you could also right-click on it and select **Insert Tracepoint** and select **TraceHalt**. When hard fault is reached, trace collection will halt but the program will keep executing for testing and hard fault handlers.

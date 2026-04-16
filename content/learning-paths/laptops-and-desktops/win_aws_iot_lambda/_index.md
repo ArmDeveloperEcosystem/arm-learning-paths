@@ -1,6 +1,8 @@
 ---
 title: Use AWS Lambda for IoT applications running on Arm64
 
+description: Learn how to process IoT data using AWS Lambda functions triggered by AWS IoT Core messages from Windows on Arm devices.
+
 minutes_to_complete: 45
 
 who_is_this_for: This is an advanced topic for developers who are interested in using AWS Lambda for processing data streamed by IoT applications and devices.
