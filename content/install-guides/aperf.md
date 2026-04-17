@@ -57,31 +57,33 @@ To use APerf's Java profiling option (`--profile-java`), install the [async-prof
 ## Download and install APerf
 The easiest way to install APerf is to download a release from GitHub and extract it.
 
-To see available releases, visit the [releases page](https://github.com/aws/aperf/releases/).
-
 You can download a release from the command line:
 
+{{%notice Note%}}
+To install the latest version of APerf, replace `v.1.2.2` with the identifier for the latest version. To see available releases, visit the [releases page](https://github.com/aws/aperf/releases/).
+{{%/notice%}}
+
 ```bash { target="ubuntu:latest" }
-wget https://github.com/aws/aperf/releases/download/v1.0.0/aperf-v1.0.0-aarch64.tar.gz
+wget https://github.com/aws/aperf/releases/download/v1.2.2/aperf-v1.2.2-aarch64.tar.gz
 ```
 
 Extract the release:
 
 ```bash { target="ubuntu:latest" }
-tar xvfz aperf-v1.0.0-aarch64.tar.gz
+tar xvfz aperf-v1.2.2-aarch64.tar.gz
 ```
 
 Add the path to `aperf` in your `.bashrc` file.
 
 ```console
-echo 'export PATH="$PATH:$HOME/aperf-v1.0.0-aarch64"' >> ~/.bashrc
+echo 'export PATH="$PATH:$HOME/aperf-v1.2.2-aarch64"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
 Alternatively, you can copy the `aperf` executable to a directory already in your search path.
 
 ```bash { target="ubuntu:latest" }
-sudo cp aperf-v1.0.0-aarch64/aperf /usr/local/bin
+sudo cp aperf-v1.2.2-aarch64/aperf /usr/local/bin
 ```
 
 Confirm `aperf` is installed by printing the version:
@@ -93,7 +95,7 @@ aperf --version
 The output should be:
 
 ```output
-aperf 1.0.0 (4cf8d28)
+aperf 1.2.2 (4cf8d28)
 ```
 
 ## Verify APerf is working
