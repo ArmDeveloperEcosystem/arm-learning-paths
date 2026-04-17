@@ -253,6 +253,15 @@ speed:  66%|██████████████████████�
 speed: 100%|██████████████████████████████| 3/3 [01:00<00:00, 20.00s/it, ml-kem-768 - clean]
 ```
 
+For most of the schemes there are multiple implementations. 
+The naming scheme for these implementations is as follows:
+
+- clean: clean reference implementation from PQClean,
+- ref: the reference implementation submitted to NIST (will be replaced by clean in the long term),
+- opt: an optimized implementation in plain C (e.g., the optimized implementation submitted to NIST),
+- m4: an implementation with Cortex-M4 specific optimizations (typically in assembly).
+- m4f: an implementation with Cortex-M4F specific optimizations (typically assembly using floating-point registers).
+
 Expected output of the benchmark results is stored in the **benchmarks.csv** file
 
 ![benchmarks.csv](./benchmarks.png)
