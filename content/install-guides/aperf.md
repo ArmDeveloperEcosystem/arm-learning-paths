@@ -18,9 +18,7 @@ APerf is an open source command line tool maintained by AWS. It helps you monito
 
 APerf collects system data and saves it in an archive. It then generates a static HTML report from one or more archives to visualize the data. When you generate the report, APerf analyzes the data to automatically detect potential performance issues. You can open the report in a browser to view all collected data and analytical findings.
 
-## Install APerf
-
-In this guide, you'll learn how to install APerf on Arm Linux and get started.
+In this guide, you'll learn how to install APerf on Arm Linux and get started with reports.
 
 ## Before you begin
 
@@ -57,11 +55,11 @@ To use APerf's Java profiling option (`--profile-java`), install the [async-prof
 ## Download and install APerf
 The easiest way to install APerf is to download a release from GitHub and extract it.
 
-You can download a release from the command line:
-
 {{%notice Note%}}
-To install the latest version of APerf, replace `v.1.2.2` with the identifier for the latest version. To see available releases, visit the [releases page](https://github.com/aws/aperf/releases/).
+To install the latest version of APerf, replace `v.1.2.2` in the following commands with the identifier for the latest version. To see available releases, visit the [releases page](https://github.com/aws/aperf/releases/).
 {{%/notice%}}
+
+You can download a release from the command line:
 
 ```bash { target="ubuntu:latest" }
 wget https://github.com/aws/aperf/releases/download/v1.2.2/aperf-v1.2.2-aarch64.tar.gz
@@ -162,7 +160,7 @@ When you view metric graphs, APerf aligns graphs of the same metric from differe
 
 ![APerf report showing aligned metric graphs from multiple runs for comparison alt-text#center](/install-guides/_images/aperf_report_aligned_graphs.png "APerf report aligned graphs")
 
-### How do I view reports from a remote system?
+### View reports from a remote system
 
 If you're working on a remote system or cloud instance without a desktop environment, you can view APerf reports in your local browser by running a web server on the remote machine.
 

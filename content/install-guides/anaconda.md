@@ -26,7 +26,7 @@ weight: 1
 
 You can use the `conda` command to quickly install and use Python packages.
 
-To install and use Anaconda Distribution on an Arm server, follow these steps.
+In this guide, you'll learn how to install and use Anaconda Distribution on an Arm server.
 
 ## Before you begin
 
@@ -36,7 +36,7 @@ Confirm you are using an Arm machine by running:
 uname -m
 ```
 
-The output should be:
+The output is similar to:
 
 ```output
 aarch64
