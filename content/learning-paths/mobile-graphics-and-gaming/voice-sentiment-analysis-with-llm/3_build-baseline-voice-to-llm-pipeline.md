@@ -24,7 +24,14 @@ Gradio is a Python library for building simple browser-based interfaces. Here, y
 
 This is a good first step because it lets you confirm that microphone capture works before you add transcription and model inference.
 
-Create a file called `app.py`:
+Using a new terminal, navigate to the project directory you created in the last step and make sure the virtual environment is active:
+
+```
+cd $HOME/voice-sentiment-assistant
+source .venv/bin/activate
+```
+
+Create a file called `app.py` with the following contents:
 
 ```python
 import gradio as gr
