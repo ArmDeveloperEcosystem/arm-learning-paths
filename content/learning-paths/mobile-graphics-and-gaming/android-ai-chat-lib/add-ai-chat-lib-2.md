@@ -28,10 +28,10 @@ Finally, there will be a banner at the top of these settings files saying the "G
 ## Adjust the Manifest
 We need to adjust the `AndroidManifest.xml` file, which is in `app\src\main`.
 
-Most of the file is an xml tag `<application ...>`. Add in among the other similar looking options in the tag:
+Most of the file is an xml tag `<application ...>`. Within the tag are several `android:` options. Add in an additional flag to load the needed llama.cpp native libraries:
 ```xml
 <application
+    ...
     android:extractNativeLibs="true"
     ... >
 ```
-This enables the app to load the needed llama.cpp native libraries.
