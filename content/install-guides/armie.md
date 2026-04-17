@@ -14,6 +14,7 @@ official_docs: https://developer.arm.com/documentation/102190
 test_images:
 - ubuntu:latest
 test_maintenance: true
+description: Install Arm Instruction Emulator (armie) on Arm Linux (aarch64) to emulate Scalable Vector Extension (SVE) on hardware that doesn't support SVE.
 title: Arm Instruction Emulator (armie)
 tool_install: true
 weight: 1
