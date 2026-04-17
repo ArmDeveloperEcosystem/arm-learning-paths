@@ -15,7 +15,7 @@ Legend: [x] reviewed | [ ] not started | 🔒 hidden/not published
 | helm | Helm | ✓ | 2025-02-05 | [ ] |
 | py-woa | Python for Windows on Arm | ✓ | 2025-02-05 | [ ] |
 | sysbox | Sysbox | ✓ | 2025-02-05 | [ ] |
-| eksctl | AWS EKS CLI (eksctl) | ✓ | 2025-02-10 | [ ] |
+| eksctl | eksctl (Amazon EKS CLI) | ✓ | 2025-02-10 | [x] |
 | kubectl | Kubectl | ✓ | 2025-02-10 | [ ] |
 | bedrust | Bedrust - invoke models on Amazon Bedrock | ✓ | 2025-04-10 | [ ] |
 | anaconda | Anaconda | ✓ | 2025-04-25 | [ ] |
@@ -40,7 +40,7 @@ Legend: [x] reviewed | [ ] not started | 🔒 hidden/not published
 | ssh | SSH | ✓ | 2025-05-02 | [ ] |
 | finch | Finch on Arm Linux | ✓ | 2025-05-22 | [ ] |
 | browsers/ | Browsers on Arm (multi-page) | ✓ | 2025-06-18 | [ ] |
-| go | Go | ✓ | 2025-07-16 | [ ] |
+| go | Go | ✓ | 2025-07-16 | [x] |
 | nomachine | NoMachine | ✓ | 2025-07-16 | [ ] |
 | powershell | PowerShell | ✓ | 2025-07-16 | [ ] |
 | swift | Swift | ✓ | 2025-07-16 | [ ] |
