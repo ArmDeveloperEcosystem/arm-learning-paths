@@ -18,7 +18,7 @@ Legend: [x] reviewed | [ ] not started | 🔒 hidden/not published
 | eksctl | eksctl (Amazon EKS CLI) | ✓ | 2025-02-10 | [x] |
 | kubectl | Kubectl | ✓ | 2025-02-10 | [ ] |
 | bedrust | Bedrust - invoke models on Amazon Bedrock | ✓ | 2025-04-10 | [ ] |
-| anaconda | Anaconda | ✓ | 2025-04-25 | [ ] |
+| anaconda | Anaconda | ✓ | 2025-04-25 | [x] |
 | ansible | Ansible | ✓ | 2025-04-25 | [ ] |
 | armie | Arm Instruction Emulator (armie) | ✓ | 2025-04-25 | [ ] |
 | aws-copilot | AWS Copilot CLI | ✓ | 2025-04-25 | [ ] |
@@ -113,7 +113,7 @@ Legend: [x] reviewed | [ ] not started | 🔒 hidden/not published
 |-------|-------|-----------|--------------|----------|
 | forge | Linaro Forge | ✓ | 2025-04-30 | [ ] |
 | gfortran | GFortran | ✓ | 2025-04-30 | [ ] |
-| acfl | Arm Compiler for Linux | ✓ | 2026-01-29 | [ ] |
+| acfl | Arm Compiler for Linux | ✓ | 2026-01-29 | [x] |
 
 ---
 

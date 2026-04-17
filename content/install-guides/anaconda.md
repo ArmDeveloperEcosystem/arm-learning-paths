@@ -11,6 +11,7 @@ author: Jason Andrews
 multi_install: false
 multitool_install_part: false
 official_docs: https://docs.anaconda.com/
+description: Install Anaconda Distribution on Arm Linux (aarch64) and verify the setup by creating conda environments with TensorFlow and PyTorch.
 ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=anaconda
 test_images:
 - ubuntu:latest
