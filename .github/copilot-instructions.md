@@ -287,9 +287,15 @@ Use these preferred terms and phrases for consistency:
   - `therefore` instead of `ergo`
   - `namely` instead of `viz.`
   - `avoid` instead of `try not to`
+  - `such as` instead of `like`
+  - `after` instead of `once`
+  - `setup` as a noun, `set up` as a verb
 
 - Avoid condescending language:
   - Do not use `simply`, `just`, `obviously`, or `clearly`
+
+- Avoid using directions when referring to content that's been referenced previously or will be referenced next:
+ - Do not use `above`, `below`, `left`, `right`, `top`, or `bottom`
 
 - Acknowledge difficulty naturally:
   - Use phrases like `this step can be confusing at first`
