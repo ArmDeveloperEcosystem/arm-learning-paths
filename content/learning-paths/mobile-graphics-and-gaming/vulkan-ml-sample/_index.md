@@ -1,6 +1,6 @@
 ---
-title: Get started with neural graphics using ML Extensions for Vulkan®
-
+title: Enable neural graphics using ML Extensions for Vulkan
+description: Learn how to set up ML Emulation Layers for Vulkan, run sample applications using ML extensions, and debug the flow with RenderDoc.
 minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for engine developers interested in learning about neural graphics using ML Extensions for Vulkan.

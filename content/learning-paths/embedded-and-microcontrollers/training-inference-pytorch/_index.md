@@ -1,6 +1,8 @@
 ---
 title: "Edge AI on Arm: PyTorch and ExecuTorch rock-paper-scissors"
 
+description: Learn how to train a CNN image classification model using PyTorch, convert it to ExecuTorch format, and run it as an interactive mini-game on Arm-based edge devices.
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for machine learning developers who want to deploy TinyML models on Arm-based edge devices using PyTorch and ExecuTorch.

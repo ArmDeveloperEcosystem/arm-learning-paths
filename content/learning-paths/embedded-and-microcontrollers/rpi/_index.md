@@ -1,6 +1,8 @@
 ---
 title: Get started with the Raspberry Pi 4
 
+description: Learn how to build and run multiple software examples on the Raspberry Pi 4, including TensorFlow and Docker applications, and compare its performance to Arm cloud servers.
+
 minutes_to_complete: 90
 
 who_is_this_for: This is an introductory topic for software developers interested in the Raspberry Pi 4.

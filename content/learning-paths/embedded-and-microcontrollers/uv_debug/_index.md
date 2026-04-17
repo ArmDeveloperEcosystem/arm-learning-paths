@@ -2,8 +2,10 @@
 title: "Start Debugging with µVision"
 # Should start with a verb, have no adjectives (amazing, cool, etc.), and be as concise as possible.
 
+description: Learn how to debug microcontrollers using µVision with basic run/stop debug, advanced techniques using Event Recorder and Serial Wire Viewer, ETM Trace for performance analysis, and power measurement with ULINKplus.
+
 minutes_to_complete: 90
-# Always measured in minutes. Should be an integer, to complete the learning path (not just read it).
+# Always measured in minutes. Should be an integer, to complete the learning path (not read it).
 
 author: Christopher Seidl
 

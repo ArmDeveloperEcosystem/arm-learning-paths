@@ -1,5 +1,6 @@
 ---
-title: Optimizing graphics using Frame Advisor's render graphs
+title: Optimize graphics performance using Frame Advisor render graphs
+description: Learn how to use Frame Advisor's Render Graph view to identify and resolve graphics performance issues in Android applications.
 
 minutes_to_complete: 30
 

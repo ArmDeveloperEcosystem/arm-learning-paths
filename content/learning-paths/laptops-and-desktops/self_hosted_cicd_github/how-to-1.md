@@ -14,7 +14,7 @@ Before completing this Learning Path you can complete the Hello World [example](
 
 You will extend that knowledge here with a comprehensive set of operations critical for real-world application deployment:
 
-1. *Environment Set up*: There are detailed steps on preparing the self-hosted runner with the necessary tools such as .NET SDK and Docker, which are essential for building real applications, not just running simple scripts.
+1. *Environment Set up*: There are detailed steps on preparing the self-hosted runner with the necessary tools such as .NET SDK and Docker, which are essential for building real applications, not running simple scripts.
  
 2. *Complex Workflow Configuration*: This Learning Path demonstrates how to use GitHub Actions to manage complex workflows involving multiple jobs and steps, along with job dependencies, which are crucial for sophisticated CI/CD pipelines.
 

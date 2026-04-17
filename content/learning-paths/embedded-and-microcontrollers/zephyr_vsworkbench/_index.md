@@ -1,6 +1,8 @@
 ---
 title: Build Zephyr projects with Workbench for Zephyr in VS Code
 
+description: Learn how to install Workbench for Zephyr extension in VS Code, set up the complete Zephyr development environment, create and build Zephyr applications, debug embedded systems, and perform memory usage analysis.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for embedded developers targeting Arm-based platforms with the Zephyr RTOS using the Workbench for Zephyr extension for VS Code.
