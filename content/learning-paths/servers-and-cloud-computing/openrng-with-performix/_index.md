@@ -2,6 +2,10 @@
 title: Accelerate Random Number Generation with OpenRNG and Performix
 description: Learn how to profile an example C++ data-processing workload on Arm Linux with Arm Performix, then accelerate random distribution generation using OpenRNG and Arm Performance Libraries.
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 45
 
 who_is_this_for: This Learning Path is for C++ developers on Arm Linux who want to use profiling data to target optimization and speed up random number generation.
@@ -24,7 +28,6 @@ subjects: Performance and Architecture
 armips:
     - Neoverse
 tools_software_languages:
-    - C++
     - CMake
     - Arm Performix
     - OpenRNG
