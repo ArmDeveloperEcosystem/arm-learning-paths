@@ -1,5 +1,6 @@
 ---
 title: Create an Arm-based Kubernetes cluster on Microsoft Azure Kubernetes Service
+
 description: Learn how to automate the deployment of an Arm-based Kubernetes cluster on Azure AKS using Terraform and deploy a sample WordPress application as a workload.
 
 minutes_to_complete: 60   
