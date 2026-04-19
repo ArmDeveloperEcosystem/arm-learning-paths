@@ -1,5 +1,6 @@
 ---
 title: Run x265 (H.265 codec) on Arm servers
+description: Learn how to build and run the x265 H.265 codec on Arm servers with performance benchmarking across various video resolutions and encoding presets.
 
 minutes_to_complete: 10
 

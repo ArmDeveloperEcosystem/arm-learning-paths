@@ -1,5 +1,6 @@
 ---
 title: Learn how to migrate an x86 application to multi-architecture with Arm-based on Google Axion Processor on GKE
+description: Learn how to add Arm-based Google Axion nodes to an existing x86 GKE cluster and rebuild applications for multi-architecture support.
 
 minutes_to_complete: 30
 
