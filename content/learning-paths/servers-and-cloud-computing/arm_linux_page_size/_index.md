@@ -19,7 +19,8 @@ prerequisites:
 
 author: Geremy Cohen
 
-skill_level: Introductory
+### Tags
+skilllevels: Introductory
 subjects: Performance and Architecture
     
 armips:
