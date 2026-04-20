@@ -1,5 +1,5 @@
 ---
-title: Collection of Post-Quantum Cryptographic Algorithms for the ARM Cortex-M4
+title: Post-Quantum Cryptography on Arm Cortex
 
 description: Learn how to implement and test post-quantum cryptographic algorithms on ARM Cortex-M4 microcontrollers using the pqm4 library.
 
@@ -23,6 +23,7 @@ prerequisites:
 
 author: 
     - Akash Malik
+    - Odin Shen
 
 ### Tags
 skilllevels: Advanced
