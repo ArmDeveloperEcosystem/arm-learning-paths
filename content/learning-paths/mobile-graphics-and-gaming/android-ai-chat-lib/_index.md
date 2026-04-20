@@ -1,12 +1,16 @@
 ---
 title: Add an LLM to your Android app with Arm's AI Chat library
+draft: true
+cascade:
+    draft: true
 
 minutes_to_complete: 15
 
-who_is_this_for: Android App Developers who wish to add LLM capabilities to an app.
+who_is_this_for: This is an introductory topic for developers who want to add a local, on-device LLM chat experience using Arm's AI Chat library, Kotlin, and Android Studio.
 
 learning_objectives: 
-    - Easily add an on-device LLM to any Android app
+    - Create a simple Android chatbot app scaffold in Android Studio
+    - Load a mobile-friendly GGUF model on-device and run streamed chat inference
 
 prerequisites:
     - Android Studio

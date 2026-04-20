@@ -16,5 +16,5 @@ For other examples of chatbots using this library you can use:
 - the [AI Chat library GitHub example](https://github.com/arm/ai-chat/tree/use-maven-library/examples/llama.android), which is only slightly more complicated than this Learning Path.
 
 ## Project Setup 
-Open Android Studio and create a new project of the type "Empty Views Activity". Name it however you like, and leave other options on default - for instance Minimum SDK will be 33.
+Open Android Studio and create a new project of the type "Empty Views Activity". Name it `simpleaichat`, and set the Minimum SDK to 33.
 

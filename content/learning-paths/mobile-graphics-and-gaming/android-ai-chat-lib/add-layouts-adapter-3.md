@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Add Layouts
-Currently the `activity_main.xml` layout file in your `app\src\res\layout` directory is nearly empty, containing just a "Hello World!" piece of text that we wish to remove. Instead, replace it with the following, which will create a status area at the top, a place for messages in the middle, and a place for you to type at the bottom with a button to send:
+Currently the `activity_main.xml` layout file in your `app\src\main\res\layout` directory is nearly empty, containing just a "Hello World!" piece of text that we wish to remove. Instead, replace it with the following, which will create a status area at the top, a place for messages in the middle, and a place for you to type at the bottom with a button to send:
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -117,7 +117,12 @@ Then create `item_message_assistant.xml` and put the following as its contents:
 ## Add the MessageAdaptor class
 As a final bit of UI code, we add a `MessageAdapter.kt` code file to put our messages into the correct bit of layout. The file should sit alongside the `MainActivity` class that is auto-created with the project.
 
+{{% notice Package name %}}
+The `package` name below has to match that of your project name. If you named your project `simpleaichat`, you can copy the block without changes. If you named your project differently as you started out this Learning Path, make sure you update it after populating the file.
+{{% /notice %}}
+
 The file contents of `MessageAdapter.kt` are:
+
 ```kotlin
 package com.example.simpleaichat
 

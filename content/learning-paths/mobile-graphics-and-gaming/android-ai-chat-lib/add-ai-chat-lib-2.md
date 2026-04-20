@@ -21,7 +21,8 @@ This adds the library to your project, and all the LLM functionality. Also in th
 - the Java version in `compileOptions` is `JavaVersion.VERSION_17`
 - the `jvmTarget` in `kotlinOptions` is 17
 
-In `libs.version.toml` we need to change the `kotlin` version to `2.2.20`, as the library requires a more recent version than the default.
+In `libs.version.toml`, check that:
+- `kotlin` version is `2.2.20`
 
 Finally, there will be a banner at the top of these settings files saying the "Gradle files have changed since last project sync." Choose the option to "Sync Now", and let the project update. 
 
