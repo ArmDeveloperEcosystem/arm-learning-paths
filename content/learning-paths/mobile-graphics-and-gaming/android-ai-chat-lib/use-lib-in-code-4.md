@@ -35,8 +35,6 @@ import java.io.File
 import java.io.IOException
 import java.util.UUID
 import kotlin.math.max
-import com.example.simpleaichat.Message
-import com.example.simpleaichat.MessageAdapter
 ```
 
 Next, within the MainActivity class, we need to set all the class variables we'll need:
