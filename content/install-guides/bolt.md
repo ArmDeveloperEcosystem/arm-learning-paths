@@ -11,6 +11,7 @@ minutes_to_complete: 20
 author: Jonathan Davies
 
 official_docs: https://github.com/llvm/llvm-project/tree/main/bolt
+description: Install BOLT on Linux AArch64 to optimize binary code layout using performance profiles and improve the runtime performance of large applications on Arm.
 
 test_images:
 - ubuntu:latest
