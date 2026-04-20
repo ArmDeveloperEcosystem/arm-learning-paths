@@ -1,5 +1,6 @@
 ---
 title: Learn about optimization techniques using the g++ compiler
+description: Learn how to apply g++ compiler optimization techniques and flags to improve C++ application performance on Arm systems with hands-on examples.
 
 minutes_to_complete: 60
 

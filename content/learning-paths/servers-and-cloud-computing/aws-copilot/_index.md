@@ -1,5 +1,6 @@
 ---
 title: How to use AWS Graviton processors on AWS Fargate with Copilot
+description: Learn how to package multi-architecture container applications and deploy them on AWS Fargate with Graviton processors using the AWS Copilot CLI.
 
 minutes_to_complete: 45
 

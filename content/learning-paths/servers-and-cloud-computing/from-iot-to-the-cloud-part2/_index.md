@@ -1,5 +1,6 @@
 ---
 title: 'Deploy a containerized application using Azure Container Instances'
+description: Learn how to create and run Docker containers on Azure Container Instances for Arm64-based containerized application deployment.
 
 minutes_to_complete: 30
 

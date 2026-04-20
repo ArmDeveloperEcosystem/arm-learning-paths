@@ -1,5 +1,6 @@
 ---
 title: Deploy Couchbase on Google Cloud C4A
+description: Learn how to install and configure Couchbase on Google Cloud Axion C4A Arm64 instances and benchmark read/write performance using YCSB workloads.
 
     
 minutes_to_complete: 30

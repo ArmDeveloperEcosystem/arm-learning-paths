@@ -1,5 +1,6 @@
 ---
 title: Accelerate Bitmap Scanning with Neon and SVE Instructions on Arm servers
+description: Learn how to implement and benchmark bitmap scanning operations for database workloads using scalar, Neon, and SVE instructions on Arm-based cloud instances.
 
 minutes_to_complete: 20
 

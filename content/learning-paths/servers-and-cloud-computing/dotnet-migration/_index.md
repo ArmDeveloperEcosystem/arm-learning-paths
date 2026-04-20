@@ -1,5 +1,6 @@
 ---
 title: Migrate a .NET application to Azure Cobalt 100
+description: Learn how to build and run an OrchardCore CMS .NET application on Azure Cobalt 100 processors, covering AnyCPU configuration and shared C library integration.
 
   
 minutes_to_complete: 25

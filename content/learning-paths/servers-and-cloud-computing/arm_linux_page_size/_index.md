@@ -1,5 +1,6 @@
 ---
 title: Explore performance gains by increasing the Linux kernel page size on Arm
+description: Learn how to install and configure a Linux kernel with 64K page size support on Arm systems to improve memory efficiency and performance for memory-intensive workloads.
 
 minutes_to_complete: 30
 
@@ -18,7 +19,8 @@ prerequisites:
 
 author: Geremy Cohen
 
-skill_level: Introductory
+### Tags
+skilllevels: Introductory
 subjects: Performance and Architecture
     
 armips:

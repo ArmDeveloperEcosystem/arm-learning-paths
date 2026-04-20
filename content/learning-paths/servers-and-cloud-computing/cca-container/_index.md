@@ -1,5 +1,6 @@
 ---
 title: Run an application in a Realm using the Arm Confidential Compute Architecture (CCA)
+description: Learn how to run the Arm CCA reference software stack on an FVP with RME support, create a Realm virtual machine, and obtain attestation tokens for confidential computing.
 
 minutes_to_complete: 120
 

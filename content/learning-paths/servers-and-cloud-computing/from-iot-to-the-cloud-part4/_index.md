@@ -1,5 +1,6 @@
 ---
 title: 'Use Infrastructure as Code and Pulumi to provision Azure resources'
+description: Learn how to automate Azure resource deployment using Infrastructure as Code with Pulumi to provision Azure Container Instances for containerized applications.
 
 minutes_to_complete: 30
 

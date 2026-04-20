@@ -1,5 +1,6 @@
 ---
 title: 'Deploy .NET applications to Arm Virtual Machines and Container Registry in Microsoft Azure'
+description: Learn how to create an Arm64 Azure VM, install .NET SDK, containerize .NET applications, and push Docker images to Azure Container Registry.
 
 minutes_to_complete: 30
 

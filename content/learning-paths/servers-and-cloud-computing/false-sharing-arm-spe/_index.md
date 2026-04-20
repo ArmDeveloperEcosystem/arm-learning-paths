@@ -1,5 +1,6 @@
 ---
 title: Analyze cache behavior with Perf C2C on Arm
+description: Learn how to identify and fix false sharing issues using Perf C2C cache line analysis and Arm Statistical Profiling Extension on Arm-based cloud systems.
 
 minutes_to_complete: 15
 

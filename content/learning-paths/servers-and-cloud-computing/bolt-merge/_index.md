@@ -1,5 +1,6 @@
 ---
 title: Optimize Arm applications and shared libraries with BOLT
+description: Learn how to optimize Arm application binaries and shared libraries using BOLT profile instrumentation, merge multiple profiles for improved coverage, and integrate optimized libraries.
 
 minutes_to_complete: 30
 

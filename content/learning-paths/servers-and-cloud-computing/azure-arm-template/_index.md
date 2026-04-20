@@ -1,5 +1,6 @@
 ---
 title: Deploy Arm-based Cobalt 100 VMs using Azure Resource Manager templates
+description: Learn how to create and deploy Azure Resource Manager templates to provision Arm64-based Cobalt 100 virtual machines on Azure using the Azure CLI.
 
 minutes_to_complete: 45
 

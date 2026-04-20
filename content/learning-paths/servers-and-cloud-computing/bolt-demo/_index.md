@@ -1,6 +1,6 @@
 ---
 title: "Optimize AArch64 binaries with LLVM BOLT"
-
+description: Learn how to identify optimization candidates and apply LLVM BOLT post-link optimization to AArch64 binaries using BRBE, SPE, instrumentation, and PMU profiling techniques.
 
 minutes_to_complete: 20
 

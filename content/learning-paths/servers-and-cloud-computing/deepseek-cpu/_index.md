@@ -1,5 +1,6 @@
 ---
 title: Deploy DeepSeek-R1 on Arm Servers with llama.cpp
+description: Learn how to deploy and run the DeepSeek-R1 language model on Arm servers using llama.cpp with quantization for efficient CPU inference.
 
 minutes_to_complete: 30
 

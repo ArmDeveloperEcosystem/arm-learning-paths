@@ -1,5 +1,6 @@
 ---
 title: Deploy Arm Instances on AWS using Terraform
+description: Learn how to automate the creation and deployment of AWS Graviton instances using Terraform with jump server access for secure infrastructure management.
 
 minutes_to_complete: 60   
 
