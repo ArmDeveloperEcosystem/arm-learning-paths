@@ -1,5 +1,7 @@
 ---
 title: "Deploy WordPress with MySQL on Elastic Kubernetes Service (EKS)"
+description: Learn how to provision an Amazon EKS cluster on Arm-based Graviton instances and deploy a WordPress application with MySQL database.
+
 minutes_to_complete: 60
 
 who_is_this_for: >

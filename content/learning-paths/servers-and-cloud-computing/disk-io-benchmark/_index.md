@@ -1,5 +1,6 @@
 ---
 title: Microbenchmark storage performance with fio on Arm
+description: Learn how to use fio to microbenchmark storage performance on Arm systems and monitor storage using iostat, iotop, and pidstat to identify bottlenecks.
 
 minutes_to_complete: 30
 

@@ -1,5 +1,6 @@
 ---
 title: Optimize C++ performance with Profile-Guided Optimization and Google Benchmark
+description: Learn how to apply profile-guided optimization to C++ applications on Arm systems and measure performance improvements using Google Benchmark.
 
 minutes_to_complete: 15
 

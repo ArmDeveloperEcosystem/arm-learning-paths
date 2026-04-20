@@ -1,5 +1,6 @@
 ---
 title: Learn how to deploy a Django application
+description: Learn how to create a simple Django web application and deploy it on Arm machines using Nginx and PostgreSQL.
 
 minutes_to_complete: 30
 

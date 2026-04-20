@@ -1,5 +1,6 @@
 ---
 title: Use Clair to scan container images and generate vulnerability reports
+description: Learn how to install and run Clair on Arm servers using combined and distributed deployment models to scan container images and generate vulnerability reports.
 
 minutes_to_complete: 60
 
