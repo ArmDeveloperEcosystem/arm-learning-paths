@@ -5,6 +5,8 @@ minutes_to_complete: 90
 
 who_is_this_for: This is an advanced topic for software developers who want to learn how to use Kafka and Zookeeper.
 
+description: Deploy and configure a Kafka cluster with Zookeeper on Arm servers, test event streaming, and automate deployment on AWS and Google Cloud.
+
 learning_objectives:
     - Install Zookeeper and Kafka
     - Configure Zookeeper to work with Kafka
