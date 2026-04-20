@@ -1,5 +1,6 @@
 ---
 title: Build and share Docker images using AWS CodeBuild
+description: Learn how to automate Docker image creation for Arm using AWS CodeBuild with GitHub integration and run the images on any Arm system with Docker installed.
 
 minutes_to_complete: 30
 

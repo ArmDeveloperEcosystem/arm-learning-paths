@@ -2,7 +2,7 @@
 title: Migrate x86 workloads to Arm on Google Kubernetes Engine with Axion processors 
 
 minutes_to_complete: 90
-
+description: Learn how to create dual-architecture GKE clusters with arm64 and amd64 node pools, build multi-architecture Docker images, and migrate services to Google Axion processors.
 who_is_this_for: This is an advanced topic for cloud, platform, and site reliability engineers who operate Kubernetes on Google Cloud and need to build multi-architecture images and migrate services from x86 to Arm using Google Axion processors.
 
 learning_objectives:

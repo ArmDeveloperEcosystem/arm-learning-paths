@@ -1,5 +1,6 @@
 ---
 title: How to use the Arm Performance Monitoring Unit and System Counter
+description: Learn how to access and use Arm hardware performance counters and the system counter from user space using PAPI, perf_event_open, and assembly code for performance instrumentation.
 
 minutes_to_complete: 90
 

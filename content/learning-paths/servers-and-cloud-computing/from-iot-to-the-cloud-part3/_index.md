@@ -1,5 +1,6 @@
 ---
 title: 'Deploy an application to Azure Kubernetes Service'
+description: Learn how to create an Azure Kubernetes Service cluster with Arm64 virtual machines and deploy a containerized application to AKS.
 
 minutes_to_complete: 45
 

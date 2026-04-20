@@ -1,5 +1,6 @@
 ---
 title: Deploy Arcee AFM-4.5B on Arm-based AWS Graviton4 with Llama.cpp
+description: Learn how to build llama.cpp, quantize the Arcee AFM-4.5B model, and run optimized inference on AWS Graviton4 instances with perplexity-based quality evaluation.
 
 minutes_to_complete: 30
 

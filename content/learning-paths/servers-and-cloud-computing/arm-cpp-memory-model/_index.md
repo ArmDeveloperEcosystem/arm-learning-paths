@@ -1,5 +1,6 @@
 ---
 title: Learn about the C++ memory model for porting applications to Arm
+description: Learn how to write correct concurrent C++ code when porting applications from x86 to Arm by understanding memory ordering differences and using best practices to avoid race conditions.
 
 minutes_to_complete: 45
 

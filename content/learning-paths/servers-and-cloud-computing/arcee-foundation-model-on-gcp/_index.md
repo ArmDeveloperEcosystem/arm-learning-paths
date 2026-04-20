@@ -1,5 +1,6 @@
 ---
 title: Deploy Arcee AFM-4.5B on Arm-based Google Cloud Axion with Llama.cpp
+description: Learn how to build llama.cpp, quantize the Arcee AFM-4.5B model, and run optimized inference on Google Cloud Axion instances with perplexity-based quality evaluation.
 
 minutes_to_complete: 30
 

@@ -1,5 +1,6 @@
 ---
 title: Learn how to deploy Envoy
+description: Learn how to build, install, and run Envoy proxy on Arm servers and configure it as a web server for traffic management.
 
 minutes_to_complete: 60
 
