@@ -66,12 +66,12 @@ sudo apt update
 sudo apt install python3 python3-pip python-is-python3 gcc make numactl fio linux-tools-generic linux-tools-$(uname -r) -y
 ```
 
-These packages are required for:
-- `python3` - Python 3.10 or later for running ASCT
-- `gcc` and `make` - For compiling benchmark components
-- `numactl` - For NUMA-aware memory benchmarks
-- `fio` - Version 3.36 or later for storage benchmarks
-- `linux-tools-generic` and `linux-tools-$(uname -r)` - Linux Perf for performance analysis
+These packages are needed for:
+- `python3` — Python 3.10 or later for running ASCT
+- `gcc` and `make` — for compiling benchmark components
+- `numactl` — for NUMA-aware memory benchmarks
+- `fio` — version 3.36 or later for storage benchmarks
+- `linux-tools-generic` and `linux-tools-$(uname -r)` — Linux Perf for performance analysis
 
 For more information about installing Perf on different Linux distributions, see the [Perf install guide](/install-guides/perf/).
 
@@ -95,13 +95,13 @@ The recommended method uses [uv](https://github.com/astral-sh/uv), a fast Python
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-Extract the release archive
+Extract the release archive:
 
 ```bash
 tar xzf asct-0.5.1+11d418d-release.tar.gz
 ```
 
-Create the required directories
+Create the required directories:
 
 ```bash
 sudo mkdir -p /opt/uv/tools /usr/local/bin

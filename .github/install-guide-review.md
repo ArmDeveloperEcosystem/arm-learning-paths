@@ -17,10 +17,10 @@ Legend: [x] reviewed | [ ] not started | 🔒 hidden/not published
 | sysbox | Sysbox | ✓ | 2025-02-05 | [ ] |
 | eksctl | eksctl (Amazon EKS CLI) | ✓ | 2025-02-10 | [x] |
 | kubectl | Kubectl | ✓ | 2025-02-10 | [ ] |
-| bedrust | Bedrust - invoke models on Amazon Bedrock | ✓ | 2025-04-10 | [ ] |
+| bedrust | Bedrust - invoke models on Amazon Bedrock | ✓ | 2025-04-10 | [x] |
 | anaconda | Anaconda | ✓ | 2025-04-25 | [x] |
 | ansible | Ansible | ✓ | 2025-04-25 | [ ] |
-| armie | Arm Instruction Emulator (armie) | ✓ | 2025-04-25 | [ ] |
+| armie | Arm Instruction Emulator (armie) | ✓ | 2025-04-25 | [x] |
 | aws-copilot | AWS Copilot CLI | ✓ | 2025-04-25 | [ ] |
 | gcloud | Google Cloud Platform (GCP) CLI | ✓ | 2025-04-25 | [ ] |
 | nerdctl | Nerdctl | ✓ | 2025-04-25 | [ ] |
@@ -52,14 +52,14 @@ Legend: [x] reviewed | [ ] not started | 🔒 hidden/not published
 | vnc | VNC on Arm Linux | ✓ | 2025-11-24 | [ ] |
 | kiro-cli | Kiro CLI | ✓ | 2025-12-10 | [ ] |
 | linux-migration-tools | Arm Linux Migration Tools | ✓ | 2026-01-08 | [ ] |
-| aperf | APerf | ✓ | 2026-01-19 | [ ] |
+| aperf | APerf | ✓ | 2026-01-19 | [x] |
 | gcc/ | GNU Compiler (multi-page) | ✓ | 2026-01-28 | [ ] |
 | gemini | Gemini CLI | ✓ | 2026-01-30 | [ ] |
 | java | Java | ✓ | 2026-01-30 | [ ] |
 | openvscode-server | OpenVSCode Server | ✓ | 2026-01-30 | [ ] |
 | sbt | sbt | ✓ | 2026-01-30 | [ ] |
 | wperf | WindowsPerf (wperf) | ✓ | 2026-01-30 | [ ] |
-| asct | Arm System Characterization Tool | 🔒 hidden | 2026-02-06 | [ ] |
+| asct | Arm System Characterization Tool | 🔒 hidden | 2026-02-06 | [x] |
 | git-woa | Git for Windows on Arm | ✓ | 2026-02-26 | [ ] |
 | dotnet | .NET SDK | ✓ | 2026-03-02 | [ ] |
 
@@ -77,7 +77,7 @@ Legend: [x] reviewed | [ ] not started | 🔒 hidden/not published
 | mdk | Arm Keil uVision | ✓ | 2025-04-25 | [ ] |
 | socrates | Arm Socrates | ✓ | 2025-04-25 | [ ] |
 | successkits | Arm Success Kits | ✓ | 2025-04-25 | [ ] |
-| armclang | Arm Compiler for Embedded | ✓ | 2025-04-26 | [ ] |
+| armclang | Arm Compiler for Embedded | ✓ | 2025-04-26 | [x] |
 | avh | Arm Virtual Hardware | ✓ | 2025-04-26 | [ ] |
 | keilstudio_vs | Arm Keil Studio for VS Code | ✓ | 2025-04-26 | [ ] |
 | license/ | Arm Software Licensing (multi-page) | ✓ | 2025-04-26 | [ ] |
@@ -103,7 +103,7 @@ Legend: [x] reviewed | [ ] not started | 🔒 hidden/not published
 | pytorch-woa | PyTorch for Windows on Arm | ✓ | 2026-01-30 | [ ] |
 | atp | Arm Total Performance | 🔒 hidden | 2026-02-06 | [ ] |
 | vs-woa | Visual Studio for Windows on Arm | ✓ | 2026-02-26 | [ ] |
-| armpl | Arm Performance Libraries | ✓ | 2026-03-02 | [ ] |
+| armpl | Arm Performance Libraries | ✓ | 2026-03-02 | [x] |
 
 ---
 
@@ -127,7 +127,7 @@ Legend: [x] reviewed | [ ] not started | 🔒 hidden/not published
 | aws-greengrass-v2 | AWS IoT Greengrass | Michael Hall | ✓ | 2025-05-02 | [ ] |
 | dcperf | DCPerf | Kieran Hejmadi | ✓ | 2025-09-22 | [ ] |
 | container | Container CLI for macOS | Rani Chowdary Mandepudi | ✓ | 2025-09-29 | [ ] |
-| bolt | BOLT | Jonathan Davies | ✓ | 2025-10-22 | [ ] |
+| bolt | BOLT | Jonathan Davies | ✓ | 2025-10-22 | [x] |
 | arduino-pico | Arduino core for the Raspberry Pi Pico | Michael Hall | ✓ | 2025-11-11 | [ ] |
 | windows-perf-vs-extension | Visual Studio Extension for WindowsPerf | Nader Zouaoui | ✓ | 2025-11-11 | [ ] |
 | windows-perf-wpa-plugin | Windows Performance Analyzer (WPA) plugin | Alaaeddine Chakroun | ✓ | 2025-12-02 | [ ] |
