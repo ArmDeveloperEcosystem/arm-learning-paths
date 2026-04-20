@@ -26,16 +26,18 @@ Topo can also be leveraged by AI Agents to further streamline and automate.
 
 In this step, you install Topo on the host, along with other dependencies.
 
-On your host device, find the [latest release of Topo](https://github.com/arm/topo/releases), download the binary for your specific platform (x86/Arm, Linux/MacOS/Windows), and extract it. Topo is provided as a single executable file and `README.md`. Place Topo on your `PATH`:
+On your host device, run the following commands to install Topo:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux / MacOS">}}
-export PATH=$PATH:$HOME/your-topo-folder
+curl -fsSL https://raw.githubusercontent.com/arm/topo/refs/heads/main/scripts/install.sh | sh
   {{< /tab >}}
   {{< tab header="Windows" >}}
-set PATH=%PATH%;%USERPROFILE%\your-topo-folder
+irm https://raw.githubusercontent.com/arm/topo/refs/heads/main/scripts/install.ps1 | iex
   {{< /tab >}}
 {{< /tabpane >}}
+
+Alternatively, find the [latest release of Topo](https://github.com/arm/topo/releases), download the binary for your specific platform (x86/Arm, Linux/MacOS/Windows), and extract it. Topo is provided as a single executable file and `README.md`. Place Topo on your `PATH`:
 
 Run the following command in the terminal on your host device to confirm the installation:
 

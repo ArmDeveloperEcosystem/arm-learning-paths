@@ -100,6 +100,12 @@ Depending on the permissions you have setup with your target device, you may not
 ssh -L 3000:localhost:3000 user@my-target
 ```
 
+To stop a deployed Topo application on the target, run `topo stop` on the host:
+
+```bash
+topo stop --target user@my-target
+```
+
 ## (Optional) Repeat this learning path, using a CLI Agent
 
 Topo is packaged as a single executable with a `README.md` file. It is straightforward for agents to leverage.
