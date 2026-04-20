@@ -1,6 +1,8 @@
 ---
 title: Get started with TrustZone on NXP LPCXpresso55S69
 
+description: Learn how to install Keil MDK Tools, run a TrustZone hello world example on the NXP LPCXpresso55S69 board, and understand security state switching and secure function calls.
+
 minutes_to_complete: 20
 
 who_is_this_for: This is an introductory topic for software developers new to using TrustZone.

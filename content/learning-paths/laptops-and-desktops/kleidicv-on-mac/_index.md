@@ -1,6 +1,8 @@
 ---
 title: Build and test KleidiCV on macOS
 
+description: Learn how to build, test, and verify KleidiCV with Scalable Matrix Extensions (SME) on Apple Silicon Macs for accelerated computer vision performance.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for software developers who want to build and test KleidiCV on macOS.

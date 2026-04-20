@@ -1,5 +1,6 @@
 ---
 title: Building and Benchmarking DLRM on Arm Neoverse V2 with MLPerf
+description: Learn how to build and benchmark the Deep Learning Recommendation Model using PyTorch and MLPerf on Arm Neoverse V2 processors.
 
 
 minutes_to_complete: 90

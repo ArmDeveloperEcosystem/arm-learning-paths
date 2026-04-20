@@ -1,5 +1,6 @@
 ---
 title: Learn how to tune Envoy
+description: Learn how to optimize Envoy proxy performance on Arm servers using Transparent Huge Pages and Profile-Guided Optimization techniques.
 
 minutes_to_complete: 60
 

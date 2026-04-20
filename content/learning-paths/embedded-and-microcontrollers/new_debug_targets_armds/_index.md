@@ -1,6 +1,8 @@
 ---
 title: Add new debug targets to Arm Development Studio
 
+description: Learn how to create debug configurations for virtual platforms and development boards in Arm Development Studio, including setting up connections for Fast Models and DSTREAM debug probes.
+
 minutes_to_complete: 30   
 
 who_is_this_for: This is an introductory topic for embedded software developers new to Arm Development Studio.

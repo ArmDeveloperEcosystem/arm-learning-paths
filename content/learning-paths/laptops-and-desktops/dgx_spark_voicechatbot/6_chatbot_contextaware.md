@@ -304,7 +304,7 @@ Once both the STT and LLM services are live, you'll be able to speak naturally a
 
 ### Demo: Multi-turn voice chatbot with context memory on DGX Spark
 
-![Animated terminal session showing real-time speech-to-text transcription and AI responses in a multi-turn customer service conversation, with a volume bar at the bottom indicating live audio input levels from a microphone alt-txt#center](fasterwhipser_vllm_demo2.gif "Full function voice-to-AI with volume bar")
+![Animated terminal showing an offline voice assistant in action on DGX Spark. The session displays multi-turn customer service conversation with real-time speech transcription and AI responses. A volume bar at the bottom indicates live microphone input levels throughout the interaction.#center](fasterwhipser_vllm_demo2.gif "Full function voice-to-AI with volume bar")
 
 This demo showcases a fully offline voice assistant that combines real-time transcription (via faster-whisper) and intelligent response generation (via vLLM). Running on an Arm-based DGX Spark system, the assistant captures live audio, transcribes it, and generates context-aware replies using a local language model, all in a seamless loop.
 

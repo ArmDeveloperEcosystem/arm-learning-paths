@@ -1,5 +1,6 @@
 ---
 title: Build a real-time analytics pipeline with ClickHouse on Google Cloud Axion
+description: Learn how to deploy ClickHouse on Google Cloud Axion C4A processors and build a streaming ETL pipeline using Apache Beam, Dataflow, and Pub/Sub for real-time analytics.
     
 minutes_to_complete: 50
 

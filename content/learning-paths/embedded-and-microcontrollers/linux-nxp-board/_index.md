@@ -1,5 +1,7 @@
 ---
 title: Use Linux on the NXP FRDM i.MX 93 board
+
+description: Learn how to boot and configure the NXP FRDM i.MX 93 Arm board with Linux, create a user with sudo access, connect to WiFi using ConnMan, and transfer files over the network.
     
 minutes_to_complete: 120
 

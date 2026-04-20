@@ -34,7 +34,7 @@ This modular approach allows you to understand each component while maintaining 
 
 ## Virtual machine creation
 
-The creation script, `create-win11-vm.sh` is responsible for building a complete Windows 11 on Arm VM from scratch. It handles everything from directory setup to Windows installation, with each step clearly defined and independently executable.
+The creation script, `create-win11-vm.sh` is responsible for building a complete Windows 11 on Arm VM from scratch. It handles everything from directory setup to Windows installation, with each step defined and independently executable.
 
 The script handles resource detection and allocation, provides unattended Windows installation, and has a flexible command line to change default values.
 

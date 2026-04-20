@@ -1,5 +1,6 @@
 ---
 title: Get Started with CCA Attestation and Veraison
+description: Learn how to inspect and verify Arm CCA attestation tokens using command-line tools and the open-source Veraison attestation verification service.
 
 minutes_to_complete: 30
 

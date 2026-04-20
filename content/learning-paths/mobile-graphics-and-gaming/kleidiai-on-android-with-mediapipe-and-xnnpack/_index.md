@@ -1,5 +1,6 @@
 ---
-title: LLM inference on Android with KleidiAI, MediaPipe, and XNNPACK
+title: Run LLM inference on Android with KleidiAI, MediaPipe, and XNNPACK
+description: Learn how to run LLM inference on Android devices using MediaPipe with KleidiAI-enhanced Arm i8mm features to benchmark the Gemma 2B model.
 
 minutes_to_complete: 60
 

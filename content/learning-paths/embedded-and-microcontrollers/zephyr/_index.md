@@ -1,6 +1,8 @@
 ---
 title: Run the Zephyr RTOS on Arm Corstone-300
 
+description: Learn how to build and run Zephyr RTOS applications on the Arm Corstone-300 Fixed Virtual Platform using Arm Virtual Hardware.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for software developers getting started

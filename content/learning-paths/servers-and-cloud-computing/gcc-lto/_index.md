@@ -1,5 +1,6 @@
 ---
 title: Optimize performance using Link-Time Optimization with GCC
+description: Learn how to apply link-time optimization with the GCC toolchain to improve application performance by optimizing across compilation units.
 
     
 minutes_to_complete: 15
