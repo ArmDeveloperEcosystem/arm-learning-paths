@@ -8,15 +8,15 @@ minutes_to_complete: 30
 who_is_this_for: This is an introductory topic for software developers and performance engineers who want to prepare Arm Linux machines, including cloud-hosted systems, for Arm Performix memory access profiling.
 
 learning_objectives:
-    - Check whether Arm SPE is already available on an Arm Linux system using Sysreport and kernel-level checks.
-    - Explain the hardware, platform, and kernel requirements that allow Linux to expose the `arm_spe_pmu` driver.
-    - Apply Linux-side changes such as loading the SPE PMU module, installing matching kernel modules, or selecting a kernel with SPE support.
+    - Check whether Arm Statistical Profiling Extension (SPE) is already available on an Arm Linux system using Sysreport and kernel-level checks.
+    - Explain the hardware, platform, and kernel requirements that allow Linux to expose the SPE driver.
+    - Apply Linux-side changes such as loading the SPE PMU module, installing matching kernel modules, or selecting an OS/kernel with SPE support.
     - Identify when a cloud instance does not expose SPE to the guest OS and choose a suitable system for Arm Performix memory access analysis.
 
 prerequisites:
-    - Access to a Linux-based Arm system, such as an Arm cloud instance or bare-metal server, with `sudo` or root access.
+    - Access to a Linux-based Arm system, such as an Arm cloud instance or bare-metal server, with sudo or root access.
     - Access to Arm Performix on your host machine and SSH access to the target system. See the [Arm Performix install guide](/install-guides/performix/) for setup instructions.
-    - Familiarity with the Linux command line, SSH, and basic kernel module management.
+    - Familiarity with the Linux command line and SSH.
 
 author: Kieran Hejmadi
 

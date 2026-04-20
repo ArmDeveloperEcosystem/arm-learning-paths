@@ -1,44 +1,55 @@
 ---
-title: Assess System Configuration
+title: Assess OS kernel
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Step 1.0) Check whether the OS Kernel is built with SPE
+### Step 1.0) Check whether the OS kernel is built with SPE
 
-First check the kernel version. 
+From the Getting Started section, you know you need to verify both the kernel and driver layers. Start by checking the kernel version:
 
 ```bash
 uname -r
 ```
+The output will be similar to:
 
 ```output
 6.17.0-1010-aws
 ```
 
-This AWS instance is using the standard Ubuntu 24.04 LTS Amazon Machine Image (AMI) from the AWS Quick Start option. The second command informs us that we are using a Linux `6.17` kernel with the `1010-aws` suffix showing the specific build number and that this has been customized to run on AWS. 
+This AWS instance is running the standard Ubuntu 24.04 LTS Amazon Machine Image (AMI) provided through AWS Quick Start. The command output shows a Linux 6.17 kernel, and the `1010-aws` suffix indicates an AWS-specific build customized for the AWS environment.
 
-Next, we will check whether this kernel has been built with the SPE configuration enabled
+Now check whether this kernel was built with SPE support enabled:
 
 ```bash
 grep CONFIG_ARM_SPE_PMU /boot/config-$(uname -r) 2>/dev/null || true
 ```
 
-The potential outputs are `y`, `m` or `n`, corresponing to yes, module and no respectively. `y` indicates that that the kernel was built with SPE support, `m` indicates that SPE is available as a loadable kernel module. This is the typical output for cloud instances as this customization enables the kernel to be smaller, helping with boot times. 
+The possible outputs are `y`, `m`, or `n`, meaning built-in support, module support, or no support.
 
-If the output on your machine is `n`. This means the kernel was not built with SPE support. Your next steps depend on the use case for running the memory access recipe. In **the vast majority of cases**, you will be testing the performance of your application rather than the performance of the kernel or how your application interacts with the kernel. 
+- `y` indicates that the kernel was built with SPE support.
+- `m` indicates that SPE is available as a loadable kernel module. This is the typical output for cloud instances.
+- `n` means the kernel was **not** built with SPE support.
 
-## Step 1.1) Check whether the loadable kernel module is available
+If the output from the previous command is `n`, **skip directly to Step 3.0**.
 
-As per Getting started tab, we now need to check the driver layer. Run the following command which checks if the loadable kernel module (driver) is available on the target:
+### Step 1.1) Check whether the kernel module is available
 
-```bash
-modinfo arm_spe_pmu 2>/dev/null || echo “arm_spe_pmu not present for this kernel”
+If your output was `y` or `m`, as shown below, the OS kernel includes SPE support. You still need to confirm that the driver layer is present and can be loaded.
+
+```output
+CONFIG_ARM_SPE_PMU             = <m or y>
 ```
 
-If you see the following `modinfo` output, the kernel module is already available on your system. 
+Run the following command to check whether the loadable kernel module (driver) is available on the target:
+
+```bash
+modinfo arm_spe_pmu 2>/dev/null || echo "arm_spe_pmu not present for this kernel"
+```
+
+If you see output similar to the following, the kernel module is already available on your system.
 
 ```output
 filename:       /lib/modules/6.17.0-1010-aws/kernel/drivers/perf/arm_spe_pmu.ko.zst
@@ -49,15 +60,24 @@ srcversion:     3B6FCB5AD9B37B8BB9FF4A9
 ...
 ```
 
-However, if you observe `arm_spe_pmu not present for this kernel`, proceed to step 3.0.
-
-## Step 1.3) Run sysreport
-
-Follow the steps in the [getting started guide](https://learn.arm.com/learning-paths/servers-and-cloud-computing/sysreport/) and run `sysreport` on your system with the following command:
+If so, run the following command to load the driver:
 
 ```bash
-python sysreport/src/sysreport.py 
+sudo modprobe arm_spe_pmu
+lsmod | grep arm_spe_pmu
 ```
+
+In Step 1.2, use Sysreport to review system-level metrics, including SPE status.
+
+### Step 1.2) Run Sysreport
+
+Follow the steps in the [Get ready for performance analysis with Sysreport guide](https://learn.arm.com/learning-paths/servers-and-cloud-computing/sysreport/) and run `sysreport` on your system:
+
+```bash
+python /src/sysreport.py 
+```
+
+This prints information about your system, including whether SPE is enabled. The `perf sampling` label shows SPE status. It also provides useful details for further debugging.
 
 ```output
 System feature report:
@@ -128,15 +148,4 @@ Actions that can be taken to improve performance tools experience:
     ensure ACPI describes CoreSight trace fabric
 ```
 
-{{% notice Tip %}}
-If you want to set the `kernel.perf_event_paranoid` value on boot, create the following file.
-```bash
-sudo nano /etc/sysctl.d/99-perf.conf
-```
-
-add your preferred value, `kernel.perf_event_paranoid = X` and apply the change
-
-```bash
-sudo sysctl --system
-```
-{{% /notice %}}
+In this example, the output shows `perf sampling:       None`, so continue to the next step.

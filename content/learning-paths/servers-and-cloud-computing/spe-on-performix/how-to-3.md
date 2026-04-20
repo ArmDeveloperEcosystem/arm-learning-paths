@@ -1,27 +1,27 @@
 ---
-title: Enable SPE with Kernel Modules
+title: Install and load driver
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Step 2.0 ) Install Linux Kernel Extra Modules
+### Step 2.0) Install Linux kernel extra modules
 
-Typically, to reduce the size of an operating kernel and to configure a kernel to be optimized for a specific platform, the kernel modules are made available as a downloadable package. If your system outputted the following.
+To keep kernel images smaller and tuned for different platforms, many distributions ship extra kernel modules in a separate package. If your system returned the following from step 1.1, complete this step. Else skip to step 2.1
 
 ```output
-CONFIG_ARM_SPE_PMU             = m
+arm_spe_pmu not present for this kernel
 ```
 
-Run the following command, replacing `apt` with the package manager for your distribtion. This searches the packages index defined in your sources list for the extra modules package that matches your specific kernel version. We search first as there may be more than one result. 
+Run the following commands, replacing `apt` with your distribution's package manager if needed. This searches your package index for the extra modules package that matches your kernel version:
 
 ```bash
 sudo apt update
 apt search "linux-modules-extra-$(uname -r)"
 ```
 
-This shows there are 2 prebuild packages, a default version and one with `64kB page sizes`. 
+This example shows two prebuilt packages: a default version and one with `64 KB` page sizes.
 
 ```output
 Sorting... Done
@@ -33,17 +33,19 @@ linux-modules-extra-6.17.0-1010-aws-64k/noble-security,noble-updates 6.17.0-1010
   Linux kernel extra modules for version 6.17.0 on DESC
 ```
 
-Install the version for your system, in our case we are using regular page sizes. 
+Install the package that matches your system. In this example, regular page sizes are used.
 
 ```bash
 sudo apt install linux-modules-extra-6.17.0-1010-aws -y 
 ```
 
-Run the following command to try and extra information from the kernel module or display if it is not available.  
+Run the check again to confirm that the kernel module is installed:
 
 ```bash
 modinfo arm_spe_pmu 2>/dev/null || echo "arm_spe_pmu module not present"
 ```
+
+The output is similar to:
 
 ```output
 filename:       /lib/modules/6.17.0-1010-aws/kernel/drivers/perf/arm_spe_pmu.ko.zst
@@ -53,16 +55,16 @@ description:    Perf driver for the ARMv8.2 Statistical Profiling Extension
 ...
 ```
 
-## Step 2.1) Load the Kernel Module
+### Step 2.1) Load the kernel module
 
-Run the following command to load the kernel module and confirm it is running. 
+Run the following commands to load the kernel module and confirm it is running:
 
 ```bash
 sudo modprobe arm_spe_pmu
 lsmod | grep arm_spe_pmu
 ```
 
-If correctly loaded, you should see an output like the following. 
+If it loads correctly, the output is similar to:
 
 ```output
 arm_spe_pmu            24576  0
@@ -78,7 +80,7 @@ sudo systemctl restart systemd-modules-load.service
 ```
 
 
-You do not need to reboot, but the next time you do the kernel module should automatically be loaded. When you next boot, you can confirm with the following command.
+You do not need to reboot now, but after the next reboot the module should load automatically. You can confirm with:
 
 ```bash
 sudo dmesg | grep "arm_spe_pmu"
@@ -87,33 +89,33 @@ sudo dmesg | grep "arm_spe_pmu"
 
 {{% /notice %}}
 
-Rerunning `sysreport` you should observe the following.
+When you rerun `sysreport`, you should see:
 
 ```output
   perf sampling:       SPE
 ```
 
-Returning pack to performix the `memory access` recipe should now show `All checks passing!`. 
+Return to Performix. The `Memory Access` recipe should now show `All checks passing!`.
 
-![tests-passing#center](./memory-access-passing.png)
+![Screenshot of the Arm Performix memory access recipe showing all prerequisite checks passing, confirming that SPE is correctly enabled and the arm_spe_pmu module is loaded#center](./memory-access-passing.png "Arm Performix memory access recipe with all checks passing")
 
-If not, there is a known limitation when running SPE on Neoverse V1 systems. 
+If not, there is a known limitation when running SPE on Neoverse V1 systems.
 
-#### (for Neoverse V1 based systems) Enabling Kernel Page Table Isolation (KPTI)
+#### For Neoverse V1-based systems: adjust Kernel Page Table Isolation (KPTI)
 
-On certain Neoverse V1 systems, for example AWS Graviton 3, SPE buffer mapping can fail when Kernel Page Table Isolation (KPTI) is enabled. This issue has been observed in practice on Neoverse V1 and is not known to apply to other Neoverse cores. The `CPU types:` label in `sysreport.py` can confirm if your instance is based on Neoverse V1
+On some Neoverse V1 systems (for example AWS Graviton3), SPE buffer mapping can fail when Kernel Page Table Isolation (KPTI) is enabled. This issue has been observed on Neoverse V1 and is not known to affect other Neoverse cores. Use the `CPU types:` line in `sysreport.py` to confirm whether your instance is Neoverse V1.
 
 If all of the following conditions are met:
 
-	•	The system is based on Neoverse V1
-	•	The kernel includes SPE PMU support
-	•	The platform exposes the SPE PMU
-	•	sysreport still reports `perf sampling: None`
+- The system is based on Neoverse V1.
+- The kernel includes SPE PMU support.
+- The platform exposes the SPE PMU.
+- `sysreport` still reports `perf sampling: None`.
 
 
-Use an editor of your choice to update `GRUB_CMDLINE_LINUX` bootload configuration in the `/etc/default/grub` file with `kpti=off` as per the image below.  
+Use your preferred editor to update `GRUB_CMDLINE_LINUX` in `/etc/default/grub` and add `kpti=off`, as shown below.
 
-![terminal editor showing the grub configuration with kpti disabled#center](./grub_config_change.png)
+![Screenshot of a terminal text editor showing /etc/default/grub with GRUB_CMDLINE_LINUX updated to include kpti=off, the change required to allow SPE buffer mapping to succeed on Neoverse V1 systems#center](./grub_config_change.png "GRUB_CMDLINE_LINUX set to kpti=off in /etc/default/grub")
 
 {{% notice Please Note %}}
 
