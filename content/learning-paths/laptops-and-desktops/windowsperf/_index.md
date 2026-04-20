@@ -1,6 +1,8 @@
 ---
 title: Get started with WindowsPerf
 
+description: Learn how to install WindowsPerf on Windows on Arm machines and generate sample performance reports for CPU profiling.
+
 minutes_to_complete: 20
 
 who_is_this_for: This is an introductory topic for software developers working on laptops and desktops and new to the Arm architecture.

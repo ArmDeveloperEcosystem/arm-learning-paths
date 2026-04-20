@@ -1,6 +1,8 @@
 ---
 title: Use Amazon S3 for your IoT applications running Windows on Arm
 
+description: Learn how to create a static website hosted on Amazon S3 that interacts with AWS Lambda functions to display IoT data from Windows on Arm devices.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for developers who are interested in using Amazon Web Services (AWS) S3 for hosting their IoT websites.

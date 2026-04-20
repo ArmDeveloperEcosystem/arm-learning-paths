@@ -191,7 +191,7 @@ app.MapControllers();
 app.Run();
 ```
 
-This approach ensures that a single instance of the TemperatureSensor class is available to the entire application. Any web API controller requiring access to that sensor can simply use the constructor injection.
+This approach ensures that a single instance of the TemperatureSensor class is available to the entire application. Any web API controller requiring access to that sensor can use the constructor injection.
 
 You will also use the Swagger toolset. As shown above, the default ASP.NET Core Web API project template also registers two services, `EndpointsApiExplorer` and `SwaggerGen`:
 

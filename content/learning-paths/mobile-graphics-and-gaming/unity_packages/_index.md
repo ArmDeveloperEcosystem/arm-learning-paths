@@ -1,5 +1,6 @@
 ---
 title: Install and Use Arm integration packages for Unity
+description: Learn how to install Arm integration packages in Unity to view GPU metrics in Unity Profiler and annotate games with markers for Arm Performance Studio.
 
 minutes_to_complete: 20
 

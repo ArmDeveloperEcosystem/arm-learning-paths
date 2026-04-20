@@ -248,7 +248,7 @@ This demo shows the real-time transcription pipeline in action, running on an Ar
 
 Notice the clean terminal output and low latency, demonstrating how the pipeline is optimized for local, real-time voice recognition on resource-efficient hardware.
 
-![Real-time speech transcription demo with volume visualization alt-txt#center](fasterwhipser_demo1.gif "Real-time speech transcription with audio volume bar")
+![Animated terminal session demonstrating real-time speech-to-text transcription on DGX Spark. The terminal displays timestamped transcribed text as someone speaks into a USB microphone, with a volume visualization bar at the bottom showing live audio input levels.#center](fasterwhipser_demo1.gif "Real-time speech transcription with audio volume bar")
 
 The device runs audio capture and transcription in parallel. Use `threading.Thread` to collect audio without blocking, store audio frames in a `queue.Queue`, and in the main thread, poll for new data and run STT.
 

@@ -1,6 +1,8 @@
 ---
 title: Develop Windows applications with WinUI3 on Windows on Arm
 
+description: Learn how to create and build Windows UI Library (WinUI) applications and measure code execution performance on Arm64.
+
 minutes_to_complete: 30
 
 who_is_this_for: This learning path is for developers who want to learn how to create cross-platform applications and leverage performance improvements on Arm64.
