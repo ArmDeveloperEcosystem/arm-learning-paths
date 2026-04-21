@@ -1,6 +1,7 @@
 ---
-title: Accelerate Random Number Generation with OpenRNG and Performix
-description: Learn how to profile an example C++ data-processing workload on Arm Linux with Arm Performix, then accelerate random distribution generation using OpenRNG and Arm Performance Libraries.
+title: Accelerate random number generation with OpenRNG and Performix
+
+description: Learn how to profile an example C++ data-processing workload on Arm Linux with Arm Performix, then accelerate random number generation using OpenRNG and Arm Performance Libraries.
 
 draft: true
 cascade:
@@ -8,17 +9,17 @@ cascade:
 
 minutes_to_complete: 45
 
-who_is_this_for: This Learning Path is for C++ developers on Arm Linux who want to use profiling data to target optimization and speed up random number generation.
+who_is_this_for: This is an introductory topic for C++ developers who want to profile a data-processing workload on Arm Linux, identify performance bottlenecks with Arm Performix, and accelerate random number generation using OpenRNG and Arm Performance Libraries.
 
-learning_objectives: 
+learning_objectives:
     - Build and run a baseline C++ data-processing workload on Arm Linux
     - Use Arm Performix Code Hotspots to identify the highest-impact optimization target
-    - Build the workload with OpenRNG and Arm Performance Libraries
-    - Validate speedups with a microbenchmark sweep across multiple data sizes
+    - Accelerate random number generation by integrating OpenRNG and Arm Performance Libraries
+    - Measure performance improvements using a microbenchmark across multiple data sizes
 
 prerequisites:
-    - An Arm Linux (aarch64) system, such as AWS Graviton
-    - Basic C++ and CMake knowledge
+    - An Arm Linux (aarch64) server, such as an AWS Graviton3 instance
+    - Basic understanding of C++ and CMake
 
 author: Kieran Hejmadi
 
@@ -37,23 +38,17 @@ operatingsystems:
 
 further_reading:
     - resource:
-        title: Install Arm Performix
-        link: https://learn.arm.com/install-guides/performix/
-        type: documentation
-    - resource:
-        title: Install Arm Performance Libraries
-        link: https://learn.arm.com/install-guides/armpl/
-        type: documentation
-    - resource:
         title: OpenRNG project repository
         link: https://gitlab.arm.com/libraries/openrng
         type: documentation
     - resource:
-        title: Find Code Hotspots with Arm Performix
-        link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/cpu_hotspot_performix/
+        title: Find code hotspots with Arm Performix
+        link: /learning-paths/servers-and-cloud-computing/cpu_hotspot_performix/
         type: documentation
-
-
+    - resource:
+        title: Optimize application performance using Arm Performix CPU microarchitecture analysis
+        link: /learning-paths/servers-and-cloud-computing/performix-microarchitecture/
+        type: documentation
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

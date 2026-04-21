@@ -5,11 +5,13 @@ minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for software developers who want to ensure containers running in a Kubernetes cluster support the Arm architecture.
 
+description: Identify and migrate container images in a Kubernetes cluster to Arm-compatible versions using KubeArchInspect reports.
+
 learning_objectives: 
-    - Run KubeArchInspect to generate a report on the containers running in a Kubernetes cluster.
-    - Discover which images support the Arm architecture.
-    - Understand common reasons for an image not supporting Arm.
-    - Make configuration changes to upgrade images with Arm support.
+    - Run KubeArchInspect to generate a report on the containers running in a Kubernetes cluster
+    - Discover which images support the Arm architecture
+    - Understand common reasons for an image not supporting Arm
+    - Make configuration changes to upgrade images with Arm support
 
 prerequisites:
     - A running Kubernetes cluster accessible with `kubectl`.

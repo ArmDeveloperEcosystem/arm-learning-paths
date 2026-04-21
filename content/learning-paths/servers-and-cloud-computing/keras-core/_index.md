@@ -5,6 +5,8 @@ minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for engineers who want to create a neural network model on Arm machines.
 
+description: Create, train, and evaluate a neural network model on Arm servers using Keras Core with TensorFlow, PyTorch, and JAX backends.
+
 learning_objectives: 
     - Create a simple neural network model using Keras Core
     - Train and evaluate your neural network model with different backends

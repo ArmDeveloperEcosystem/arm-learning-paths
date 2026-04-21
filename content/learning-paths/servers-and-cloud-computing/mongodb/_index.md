@@ -5,10 +5,14 @@ author: Pareena Verma
 
 minutes_to_complete: 30
 
+who_is_this_for: This is an introductory topic for software developers who want to learn how to deploy and measure MongoDB performance on Arm servers.
+
+description: Install MongoDB on Arm servers and benchmark database performance using Yahoo Cloud Serving Benchmark (YCSB) to compare against other architectures.
+
 learning_objectives:
-- Install and run MongoDB on an Arm server.
-- Test MongoDB performance using open-source tooling.
-- Measure and compare the performance of MongoDB on Arm versus other architectures with Yahoo Cloud Serving Benchmark (YCSB). 
+- Install and run MongoDB on an Arm server
+- Test MongoDB performance using open-source tooling
+- Measure and compare the performance of MongoDB on Arm versus other architectures with Yahoo Cloud Serving Benchmark (YCSB)
 
 prerequisites:
 - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider.

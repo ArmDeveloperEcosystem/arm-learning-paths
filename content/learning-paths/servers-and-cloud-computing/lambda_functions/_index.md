@@ -3,7 +3,9 @@ title: Learn how to deploy AWS Lambda functions
 
 minutes_to_complete: 30   
 
-who_is_this_for: This is an introductory topic for software developers who want to learn how to deploy Lambda functions on AWS Graviton processors. 
+who_is_this_for: This is an introductory topic for software developers who want to learn how to deploy Lambda functions on AWS Graviton processors.
+
+description: Deploy AWS Lambda functions on Graviton processors using Terraform for Python and Node.js runtimes.
 
 learning_objectives: 
     - Deploy Lambda functions on Graviton processors using Terraform

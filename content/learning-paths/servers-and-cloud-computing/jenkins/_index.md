@@ -5,6 +5,8 @@ minutes_to_complete: 30
 
 who_is_this_for: This Learning Path is for software developers deploying and optimizing Jenkins workloads on Arm Linux environments, specifically on Microsoft Azure Cobalt 100 processors and Google Cloud C4A virtual machines powered by Axion processors.
 
+description: Deploy Jenkins on Azure Cobalt 100 and Google Axion virtual machines, validate installation, and execute Arm-native CI/CD pipelines including Docker workflows.
+
 learning_objectives: 
     - Provision an Azure Arm64 virtual machine using the Azure console with Ubuntu Pro 24.04 LTS
     - Provision an Arm-based SUSE Linux virtual machine on Google Cloud (C4A with Axion processors)

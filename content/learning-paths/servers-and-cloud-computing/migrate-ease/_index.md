@@ -6,11 +6,12 @@ minutes_to_complete: 45
 
 who_is_this_for: This is an introductory topic for developers looking to migrate applications to Arm-based servers using migrate-ease, a code analysis tool that scans source code repositories to identify architecture-specific porting issues before migration.
 
+description: Scan source code for architecture-specific portability issues using migrate-ease to identify and resolve AArch64 porting challenges before migration.
 
 learning_objectives:
-    - Identify architecture-specific dependencies in your application's source code.
-    - Recognize common migration challenges and how to resolve them.
-    - Use migrate-ease to detect and address AArch64 portability issues.
+    - Identify architecture-specific dependencies in your application's source code
+    - Recognize common migration challenges and how to resolve them
+    - Use migrate-ease to detect and address AArch64 portability issues
 
 prerequisites:
     - Access to an [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) for testing and validation.

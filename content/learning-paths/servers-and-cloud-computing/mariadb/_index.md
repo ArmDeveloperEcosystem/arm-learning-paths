@@ -5,6 +5,8 @@ minutes_to_complete: 90
 
 who_is_this_for: This is an introductory topic for software developers who want to deploy MariaDB on Arm servers.
 
+description: Deploy MariaDB on Arm cloud instances across AWS, Azure, and Google Cloud using Docker, Amazon RDS, and automation with Terraform and Ansible.
+
 learning_objectives: 
     - Deploy MariaDB on virtual machines from different cloud service providers 
     - Deploy MariaDB using Docker
