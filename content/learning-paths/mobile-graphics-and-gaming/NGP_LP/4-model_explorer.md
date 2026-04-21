@@ -27,6 +27,6 @@ you may have noticed various possible file extensions in the homepage for the mo
 Inside the model explorer we can view a variety of operations. in this case we have loaded the 
 .tosa buffer so we can see all the operations inside of our model. 
 
-{Insert photo of model ops}
+![Photo of model with operations](images/model-explorer-ops.png)
 
 Given that our model is of simple scale we can see a limited number of operations however as the models you use expand and grow this section will become much larger 
