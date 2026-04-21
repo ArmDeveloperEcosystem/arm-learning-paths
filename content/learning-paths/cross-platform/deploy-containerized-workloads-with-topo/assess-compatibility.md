@@ -121,7 +121,7 @@ An example output for an AWS Graviton instance is shown below:
   displays a lightbulb in either the on or off state. The lightbulb state is
   described by an LLM in any user-specified style.
 
-✅ topo-v9-cpu-chat | https://github.com/Arm-Examples/topo-v9-cpu-chat.git | main
+✅ topo-cpu-ai-chat | https://github.com/Arm-Examples/topo-cpu-ai-chat.git | main
   Features: SVE, NEON
   Complete LLM chat application optimized for Arm CPU inference.
 
