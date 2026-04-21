@@ -132,6 +132,7 @@ You can now correctly see the OpenRNG frames appearing above your calling functi
 In this section, you:
 - Replaced the standard library random generation path with the OpenRNG vector API from Arm Performance Libraries
 - Built and ran the accelerated executable 
-- Profiled the accelerated binary with Arm Performix and resolved missing symbol attribution by rebuilding OpenRNG from source with debug symbols
+- Profiled the accelerated binary with Arm Performix
+- Resolved missing symbol attribution by rebuilding OpenRNG from source with debug symbols
 
 Next, you'll measure the speedup of the hot function and examine how the improvement varies across different data sizes.

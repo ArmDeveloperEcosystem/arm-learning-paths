@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Run the microbenchmark sweep
 
-The microbenchmark in `tests/sweep-microbenchmark.cpp` isolates the `generateDistribution` function and times it across eight input sizes, from 2^8 to 2^15 elements (256 to 32,768 points). Each run generates the sum of two distributions and records the elapsed time in microseconds using a scoped timer. Running both the baseline build, using the `std::mt19937` class from the standard library, and the accelerated build using OpenRNG across this range lets you see how the speedup from OpenRNG scales with data size.
+The microbenchmark in `tests/sweep-microbenchmark.cpp` isolates the `generateDistribution` function and times it across eight input sizes, from 2^8 to 2^15 elements (256 to 32,768 points). Each run generates the sum of two distributions and records the elapsed time in microseconds using a scoped timer. By running both the baseline build and the accelerated build across this range, you can see how the speedup from OpenRNG scales with data size.
 
-Run the microbenchmark sweep to compare baseline versus accelerated generation across input sizes:
+Run the microbenchmark sweep to configure and build the baseline and accelerated benchmarks:
 
 ```bash
 make clean
@@ -59,7 +59,7 @@ Generating Distribution of size 16384 = 1431 us
 Generating Distribution of size 32768 = 2785 us
 ```
 
-The observed speedup of the `generateDistribution` function varies with distribution size, showing smaller gains at lower data sizes and larger gains as size grows, which indicates when Arm Performance Libraries are likely to provide meaningful performance improvements for a given application.
+The observed speedup of the `generateDistribution` function varies with distribution size, showing smaller gains at lower data sizes and larger gains as size grows. This indicates when Arm Performance Libraries are likely to provide meaningful performance improvements for a given application.
 
 ## What you've accomplished
 
