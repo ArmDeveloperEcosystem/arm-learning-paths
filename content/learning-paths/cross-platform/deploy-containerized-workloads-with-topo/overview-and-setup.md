@@ -21,7 +21,7 @@ The optional heterogeneous deployment with `remoteproc-runtime` requires a heter
 Topo streamlines deploying containerized workloads to Arm-based Linux devices.
 If you have an heterogeneous device (e.g. Cortex-A + Cortex-M SoC such as the i.MX 93), Topo enables you to use it fully, deploying both firmware and application as containerized workloads through standard container tooling.
 
-Once a template is defined, use of Topo removes the need to deal with low-level setup and compatibility issues manually. Topo first assesses the system to identify processor features such as SVE or Neon on CPU, then advises which templates are appropriate for the device, before automating the deployment.
+Once a template is defined, use of Topo removes the need to deal with low-level setup and compatibility issues manually. Topo first assesses the system to identify processor features such as SVE or Neon on CPU, then advises which templates are appropriate for the device, before automating the end to end deployment, for which Topo deals with all the low-level instructions.
 
 Topo can also be leveraged by AI Agents to further streamline and automate.
 
