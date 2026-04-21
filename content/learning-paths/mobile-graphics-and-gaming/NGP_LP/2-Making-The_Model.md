@@ -36,18 +36,28 @@ we can actally see the graph module of this model with the last line of code
 
 ## What is this all for? 
 
-Think of the Neural Graphics Pipeline (NGP) as a way of teaching a game to “fill in the visual details” using AI, instead of doing all the heavy work the traditional way.
+TThe Neural Graphics Pipeline (NGP) is a way of using AI to handle parts of graphics rendering more efficiently, especially on power-constrained devices like mobile phones.
 
-In a normal graphics pipeline, everything you see— textures, lighting, shadows— is calculated explicitly by the GPU. That can be expensive, especially on a mobile device. NGP changes this by using machine learning models to approximate or enhance parts of the image. The game can render something simpler first, then let a neural network improve it.
+In a traditional graphics pipeline, the GPU (such as an Arm Mali GPU) calculates everything explicitly—geometry, textures, lighting, and shadows. This produces high-quality visuals, but it can be computationally expensive and consume a lot of power.
 
-This is effectively like having a model trained to generate images based on smaller inputs and then we are sorting the model out to be put in the game. 
+With NGP, some of this work is offloaded to machine learning models. Instead of computing every visual detail directly, a neural network can learn how a scene should look and reconstruct or enhance details. This might mean rendering a simpler image on the GPU and then using AI to improve it, or using a neural model to represent parts of the scene itself.
 
-This is especially useful for mobile games because:
+On Arm-based systems, this is particularly powerful because different processors can share the workload:
 
-Better visuals with less power – you get high-quality graphics without overloading the GPU
-Longer battery life – less heavy rendering means lower energy use
-Smaller game sizes – fewer large textures are needed if detail can be reconstructed
-Real-time performance – AI models can run quickly on dedicated hardware like NPUs
+- The Mali GPU handles core rendering tasks
+
+- The Ethos NPU accelerates neural network inference efficiently
+
+- The CPU coordinates data and workloads between them
+
+This combination enables:
+
+* Better visuals with less power – AI reduces the need for heavy GPU computation
+* Longer battery life – NPUs are more energy-efficient for ML tasks than GPUs
+* Smaller game sizes – fewer large textures are needed if detail can be reconstructed
+* Real-time performance – dedicated ML hardware allows fast inference alongside rendering
+
+In short, NGP lets developers trade some traditional graphics work for AI-driven techniques, making it possible to deliver richer visuals within the tight power and performance budgets of Arm-based devices.
 
 In simple terms, NGP lets developers trade some smart AI computation for a big reduction in traditional graphics workload— making it possible to deliver richer visuals on devices with limited resources.
 
