@@ -62,7 +62,7 @@ Run the health command again to verify installation. Topo uses `remoteproc-runti
 
 ## Generate a target description
 
-In this step, you ask Topo to probe your target hardware and create a machine-readable YAML description.
+In this step, you ask Topo to probe your target and create a machine-readable YAML description of the hardware.
 
 On your host device, run:
 
