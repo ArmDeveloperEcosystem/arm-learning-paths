@@ -79,13 +79,15 @@ cmake --build build --target main_with_apl
 
 Now profile the accelerated binary in the Arm Performix GUI using `./build/src/main_with_apl` as the workload.
 
-![Arm Performix GUI showing a Code Hotspots run configured for the accelerated executable main_with_apl#center](./hotspot-with-apl.jpg)
+![A screenshot of the Arm Performix GUI showing a Code Hotspots run configured for the accelerated executable main_with_apl#center](./hotspot-with-apl.jpg)
 
-The flame graph shows `main`, but Arm Performance Libraries functions (including OpenRNG) don't appear above it. Instead, most samples are attributed to dynamic loader functions (for example, `_dl_*`), which indicates missing symbol resolution. This often happens on Linux when pre-built shared libraries (`*.so`) do not include debug symbols. The profiler cannot resolve internal library calls, so stacks appear truncated.
+When the run completes, Performix displays the flame graph:
+
+![Arm Performix flame graph for the accelerated executable with split attribution for shared-library calls from the OpenRNG path#center](./flame-graph-detached.jpg)
+
+The flame graph shows `main`, but Arm Performance Libraries functions (including OpenRNG) don't appear above it. Instead, most samples are attributed to dynamic loader functions (for example, `_dl_*`), which indicates missing symbol resolution. This often happens on Linux when pre-built shared libraries (`*.so`) don't include debug symbols. The profiler can't resolve internal library calls, so stacks appear truncated.
 
 To fix this, rebuild OpenRNG from source with debug information enabled (for example, `-g`), so the library functions show up correctly above main.
-
-![Arm Performix flame graph with split attribution for shared-library calls from the OpenRNG path#center](./flame-graph-detached.jpg)
 
 Clone and build OpenRNG from the project root with debug symbols enabled:
 
@@ -121,9 +123,9 @@ OpenRNG uses the CMake build system. As an alternative, you can update your CMak
 
 {{% /notice %}}
 
-From Performix, run the code hotspot recipe and target the `./build/debug_openrng` binary.
+From Performix, run the code hotspot recipe and target the `./build/debug_openrng` binary. When the run completes, Performix displays the flame graph:
 
-![Arm Performix flame graph with OpenRNG symbols correctly resolved and stacked above the calling functions#center](./openrng_flame_graph_with_debug.jpg)
+![Arm Performix flame graph after rebuilding OpenRNG, with OpenRNG symbols correctly resolved and stacked above the calling functions#center](./openrng_flame_graph_with_debug.jpg)
 
 You can now correctly see the OpenRNG frames appearing above your calling functions. Because hotspots are identified through periodic sampling, the measurements provide limited direct insight into exact wall-clock time.
 

@@ -20,7 +20,7 @@ To start, run the Code Hotspots recipe on the baseline executable:
 
 <!-- ![Arm Performix GUI showing where to create a new Code Hotspots analysis run for the baseline executable#center](./run-code-hotspot.jpg) -->
 
-![A screenshot of the Arm Performix GUI with the Code Hotspots recipe configuration for the baseline executable. The workload, profiling duration, and sample rate settings and their values are visible.#center](./run-code-hotspot.jpg "Arm Performix Code Hotspots recipe configuration for the baseline executable")
+![A screenshot of the Arm Performix GUI with the Code Hotspots recipe configuration for the baseline executable. The workload, profiling duration, and sample rate settings and their values are visible.#center](./run-code-hotspot.jpg)
 
 2. For **Workload**, specify the path to the baseline executable as `/home/ec2-user/Data-Processing-Example/build/src/main`.
 3. For **Set profiling duration**, select **No time limit** so the capture runs for the full workload.
@@ -32,7 +32,7 @@ To start, run the Code Hotspots recipe on the baseline executable:
 When the run completes, Performix displays the flame graph:
 
 <!-- ![Arm Performix GUI showing flame graph#center](./flame-graph.jpg) -->
-![Arm Performix flame graph for the baseline executable showing generateDistribution as the widest block at the base of the call stack, indicating it consumes the largest share of CPU time. The std::normal_distribution call path is visibly wider than std::uniform_real_distribution, identifying Gaussian sampling as the primary bottleneck.#center](./flame-graph.jpg "Arm Performix flame graph highlighting generateDistribution as the dominant hotspot")
+![Arm Performix flame graph for the baseline executable showing generateDistribution as the widest block at the base of the call stack, indicating it consumes the largest share of CPU time. The std::normal_distribution call path is visibly wider than std::uniform_real_distribution, identifying Gaussian sampling as the primary bottleneck.#center](./flame-graph.jpg)
 
 The flame graph shows CPU time distribution across the call stack, where wider blocks indicate higher cumulative execution time. The dominant feature is the wide base associated with `generateDistribution(...)`, indicating it is the primary hotspot and consumes the largest share of execution time.
 
