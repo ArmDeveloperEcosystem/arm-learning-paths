@@ -101,9 +101,9 @@ This is because Topo requires key-based SSH. You can use the command specified a
 
 If using a Cortex-A + Cortex-M device, such as the i.MX 93, you may see a `⚠️` warning if `remoteproc-runtime` is not installed on the target.
 
-[`remoteproc`](https://docs.kernel.org/staging/remoteproc.html) is a Linux kernel framework for managing remote / auxiliary processors in a heterogeneous SoC. It allows the main CPU (e.g., Cortex-A) to load firmware on to the auxiliary processors (e.g., Cortex-M), start and stop them, and to communicate with them (e.g. using `rpmsg`).
+[`remoteproc`](https://docs.kernel.org/staging/remoteproc.html) is a Linux kernel framework for managing remote / auxiliary processors in a heterogeneous SoC. It allows the main CPU (e.g., Cortex-A) to load firmware on to the auxiliary processors (e.g., Cortex-M), start and stop them, and to communicate with them (e.g. using [`rpmsg`](https://docs.kernel.org/staging/rpmsg.html)).
 
-[`remoteproc-runtime`](https://github.com/arm/remoteproc-runtime) builds on this by adding a container-style (OCI) interface. This lets you package and manage firmware like container images using standard tools (e.g. Docker or containerd), even though the code runs as firmware on the Cortex-M. OCI (Open Container Initiative) defines open standards for container image formats and runtimes, ensuring compatibility across container tools.
+[`remoteproc-runtime`](https://github.com/arm/remoteproc-runtime) builds on this by adding a container-style (OCI - Open Container Initiative) interface. This lets you package and manage firmware like container images using standard tools (e.g. Docker or containerd), even though the code runs as firmware on the Cortex-M. [OCI](https://opencontainers.org/) defines open standards for container image formats and runtimes, ensuring compatibility across container tools.
 
 You can use Topo to install `remoteproc-runtime`. Run the following command from the host device:
 
