@@ -19,7 +19,7 @@ sudo dnf install -y git cmake g++ environment-modules python3 python3-pip
 
 ## Install Arm Performix
 
-Arm Performix is a desktop application that connects to your remote Arm Linux target over SSH to capture and display profiling data. You need to install Performix on your local machine (Windows, macOS, or Linux). When you configure your new target, Performix copies the required software to the target. You don't need to install anything for Performix on the target.
+Arm Performix is a desktop application that connects to your remote Arm Linux target over SSH to capture and display profiling data. You need to install Performix on your local machine (Windows, macOS, or Linux). When you configure your new target, Performix copies the required software to the target. You don't need to install anything on the target for Performix.
 
 For more information about installing Performix on your local machine, see the [Arm Performix install guide](/install-guides/performix/).
 
