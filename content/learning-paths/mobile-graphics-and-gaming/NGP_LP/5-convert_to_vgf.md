@@ -107,8 +107,8 @@ we will now run our model on the VKML to see it's speed and correctness. The def
 this set of commands assumes your current setup for base is in the executorch repo: 
 
 {Code + commands to run vkml}
+    
     import subprocess
-
     # Setup paths
     et_dir = os.path.join(cwd_dir) # needs mods 
     et_dir = os.path.abspath(et_dir)
