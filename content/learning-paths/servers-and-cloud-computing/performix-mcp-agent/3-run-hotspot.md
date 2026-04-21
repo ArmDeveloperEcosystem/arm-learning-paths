@@ -10,13 +10,13 @@ layout: learningpathall
 
 In this section, you'll use a GitHub Copilot prompt file to drive the Code Hotspots recipe through the Arm MCP Server. The agent confirms your target details, runs the recipe autonomously, and returns structured profiling results.
 
-## Use the Arm MCP performance-beginner prompt file
+## Use the Arm MCP arm-hotspots-optimization prompt file
 
 {{% notice Note %}}
 The section uses Visual Studio Code with GitHub Copilot. If you prefer a different AI assistant, see [Configure other AI agents](#configure-other-ai-agents) at the end of this section for equivalent configurations for Kiro and OpenAI Codex.
 {{% /notice %}}
 
-The Arm MCP Server repository includes a ready-made prompt file called `performance-beginner` that guides an AI agent through the full Code Hotspots workflow: baseline profiling, hotspot identification, targeted code changes, and re-profiling to confirm the improvement. You don't need to write this file yourself, you copy it from the repository.
+The Arm MCP Server repository includes a ready-made prompt file called `arm-hotspots-optimization` that guides an AI agent through the full Code Hotspots workflow: baseline profiling, hotspot identification, targeted code changes, and re-profiling to confirm the improvement. You don't need to write this file yourself, you copy it from the repository.
 
 Open the Mandelbrot-Example repository in Visual Studio Code on your local machine. Create the directory `.github/prompts/` if it doesn't already exist:
 
@@ -27,18 +27,18 @@ mkdir -p .github/prompts
 Download the prompt file from the Arm MCP repository and place it in that directory:
 
 ```bash
-curl -o .github/prompts/performance-beginner.prompt.md \
-  https://raw.githubusercontent.com/arm/mcp/main/agent-integrations/vs-code/performance-beginner.prompt.md
+curl -o .github/prompts/arm-hotspots-optimization.prompt.md \
+  https://raw.githubusercontent.com/arm/mcp/main/agent-integrations/vs-code/arm-hotspots-optimization.prompt.md
 ```
 
-You can also view the full prompt at [github.com/arm/mcp](https://github.com/arm/mcp/blob/main/agent-integrations/vs-code/performance-beginner.prompt.md). It instructs the agent to confirm the workload command and target details with you before running, follow the loop of baseline profile → one focused code change → re-profile → compare delta, and report results in concrete numbers at each step.
+You can also view the full prompt at [github.com/arm/mcp](https://github.com/arm/mcp/blob/main/agent-integrations/vs-code/arm-hotspots-optimization.prompt.md). It instructs the agent to confirm the workload command and target details with you before running, follow the loop of baseline profile → one focused code change → re-profile → compare delta, and report results in concrete numbers at each step.
 
 ## Invoke the prompt file
 
 With GitHub Copilot connected to the Arm MCP Server, open Copilot Chat in Agent Mode and invoke the prompt with the slash command:
 
 ```text
-/performance-beginner
+/arm-hotspots-optimization
 ```
 
 Copilot reads the prompt file and walks you through a series of confirmation questions before running anything. Answer each question in turn:
@@ -119,7 +119,7 @@ The agent has surfaced the same hotspots that a manual Performix session would i
 
 ## What you've accomplished and what's next
 
-You've used the Arm MCP `performance-beginner` prompt file — invoked with `/performance-beginner` — to drive the Arm Performix Code Hotspots recipe end-to-end through the Arm MCP Server. The agent confirmed your target details, ran the recipe autonomously, and identified `getIterations` as the dominant hotspot. It found that ~33% of total CPU time is spent inside the sqrt-based escape condition check (`__complex_abs` and `hypotf64`), and noted significant `std::complex` operator overhead from the debug build. It proposed three targeted optimizations: eliminating the sqrt, replacing `std::complex` with raw double arithmetic, and enabling compiler optimizations.
+You've used the Arm MCP `arm-hotspots-optimization` prompt file — invoked with `/arm-hotspots-optimization` — to drive the Arm Performix Code Hotspots recipe end-to-end through the Arm MCP Server. The agent confirmed your target details, ran the recipe autonomously, and identified `getIterations` as the dominant hotspot. It found that ~33% of total CPU time is spent inside the sqrt-based escape condition check (`__complex_abs` and `hypotf64`), and noted significant `std::complex` operator overhead from the debug build. It proposed three targeted optimizations: eliminating the sqrt, replacing `std::complex` with raw double arithmetic, and enabling compiler optimizations.
 
 In the next section, you'll apply those optimizations one at a time, rebuilding and re-profiling after each change to confirm the improvement with real data.
 
@@ -135,11 +135,11 @@ The Arm MCP repository includes a ready-made Kiro steering document for this wor
 
 ```bash
 mkdir -p .kiro/steering
-curl -o .kiro/steering/performance-beginner.md \
-  https://raw.githubusercontent.com/arm/mcp/main/agent-integrations/kiro/performance-beginner.md
+curl -o .kiro/steering/arm-hotspots-optimization.md \
+  https://raw.githubusercontent.com/arm/mcp/main/agent-integrations/kiro/arm-hotspots-optimization.md
 ```
 
-You can view the full steering document at [github.com/arm/mcp](https://github.com/arm/mcp/blob/main/agent-integrations/kiro/performance-beginner.md). It uses `inclusion: always`, so Kiro loads it automatically for every session in the workspace. Reference it explicitly in chat by typing `#performance-beginner`.
+You can view the full steering document at [github.com/arm/mcp](https://github.com/arm/mcp/blob/main/agent-integrations/kiro/arm-hotspots-optimization.md). It uses `inclusion: always`, so Kiro loads it automatically for every session in the workspace. Reference it explicitly in chat by typing `#arm-hotspots-optimization`.
 
 ### OpenAI Codex prompt file
 
@@ -147,12 +147,12 @@ The Arm MCP repository also includes a ready-made Codex prompt file. Create the 
 
 ```bash
 mkdir -p ~/.codex/prompts
-curl -o ~/.codex/prompts/performance-beginner.md \
-  https://raw.githubusercontent.com/arm/mcp/main/agent-integrations/codex/performance-beginner.md
+curl -o ~/.codex/prompts/arm-hotspots-optimization \
+  https://raw.githubusercontent.com/arm/mcp/main/agent-integrations/codex/arm-hotspots-optimization.md
 ```
 
-You can view the full prompt at [github.com/arm/mcp](https://github.com/arm/mcp/blob/main/agent-integrations/codex/performance-beginner.md). Invoke it with:
+You can view the full prompt at [github.com/arm/mcp](https://github.com/arm/mcp/blob/main/agent-integrations/codex/arm-hotspots-optimization.md). Invoke it with:
 
 ```bash
-codex /prompts:performance-beginner
+codex /prompts:arm-hotspots-optimization
 ```
