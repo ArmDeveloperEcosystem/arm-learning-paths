@@ -4,7 +4,7 @@
 {{/* Hugo Processing  */}}
 {{/*===================================================================*/}}
     <!--  Create accessable data vars -->
-    {{ $this_week_stats := index .Site.Data.stats_weekly_data (sub (len .Site.Data.stats_weekly_data) 1) }}
+    {{ $this_week_stats := index hugo.Data.stats_weekly_data (sub (len hugo.Data.stats_weekly_data) 1) }}
 
     <!-- reorganize contributor data -->
     {{$authors_dict_array := slice }}
@@ -235,7 +235,7 @@
 {{$dates := slice}}
 {{$legend := slice         "Cross Platform"        "Embedded Systems"        "Install Guides"        "Laptops and Desktops"        "Microcontrollers"        "Servers and Cloud Computing"        "Smartphones and Mobile"}}
 {{$data_and_legend := dict "Cross Platform" slice  "Embedded Systems" slice  "Install Guides" slice  "Laptops and Desktops" slice  "Microcontrollers" slice  "Servers and Cloud Computing" slice  "Smartphones and Mobile" slice }}
-{{ range .Site.Data.stats_weekly_data }}
+{{ range hugo.Data.stats_weekly_data }}
 
     {{/* Add date to array */}}
     {{ $dates = append $dates (slice .a_date) }}
@@ -370,7 +370,7 @@
     {{$legend := slice         "Forks"        "Pull Requests"}}
     {{$data_and_legend := dict "Forks" slice  "Pull Requests" slice}}
     {{$data := slice}}
-    {{ range .Site.Data.stats_weekly_data }}
+    {{ range hugo.Data.stats_weekly_data }}
 
         {{/* Add date to array */}}
         {{ $dates = append $dates (slice .a_date) }}

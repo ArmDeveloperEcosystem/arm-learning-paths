@@ -9,7 +9,10 @@ Website homepage.
 
 
 <!-- GitHub links calculated from GitHub repo, defined in config.toml -->
-{{ $pathFormatted := replace .File.Path "\\" "/" -}}
+{{ $pathFormatted := "" -}}
+{{ with .File }}
+{{ $pathFormatted = replace .Path "\\" "/" -}}
+{{ end -}}
 {{ $gh_repo := ($.Param "github_repo") -}}
 {{ $gh_url := ($.Param "github_url") -}}
 {{ $gh_subdir := ($.Param "github_subdir") -}}
