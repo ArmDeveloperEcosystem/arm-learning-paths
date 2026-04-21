@@ -17,7 +17,7 @@ we do this in order to have proper visibility into our models operations
 
 now once the webpage has loaded please select the relevant .tosa file 
 
-![Photo of model-explorer](images/model-explorer-home.png)
+![Photo of model-explorer](images/model-explorer-home.PNG)
 
 you may have noticed various possible file extensions in the homepage for the model explorer. we will use one of them later but it is good to know what file extensions of your own personal models you can view. 
 
