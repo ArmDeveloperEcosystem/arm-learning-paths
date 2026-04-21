@@ -8,6 +8,56 @@ layout: learningpathall
 
 ## Run Topo health checks
 
+### Prepare host environment
+
+Confirm that the required dependencies are available on the host by running this command in your host terminal:
+
+```bash
+topo health
+```
+
+The output should appear similar to the following:
+
+```bash
+Host
+----
+SSH: ✅ (ssh)
+Container Engine: ✅ (docker)
+
+Target
+------
+ℹ️ provide --target or set TOPO_TARGET to check target health
+```
+
+If Docker is missing, please use [Install Docker](https://learn.arm.com/install-guides/docker/).
+
+If SSH is missing, please use [Install SSH](https://learn.arm.com/install-guides/ssh/).
+
+## Prepare target environment
+
+Now that the host device is prepared, we will setup the target. On the host device, connect to your target with SSH.
+
+```bash
+ssh user@your-target
+```
+
+Once connected to the target, use the following commands to verify both Docker and `lscpu` are installed:
+
+```bash
+docker --version
+lscpu
+```
+
+The output should apear similar to the following:
+
+```output
+Docker version xx.x.x
+Architecture:             aarch64
+CPU(s):                   ...
+```
+
+### Prepare Topo for target
+
 We will now run a health check against your target. Run the following command from the terminal of your host device.
 
 If you are using your host device simultaneously as your target, use `topo health --target localhost`.
@@ -21,14 +71,17 @@ The output should appear similar to:
 ```output
 Host
 ----
-SSH: ✅
-Container Engine: ✅
+SSH: ✅ (ssh)
+Container Engine: ✅ (docker)
 
 Target
 ------
 Connectivity: ✅
-Container Engine: ✅
-Hardware Info: ✅
+Container Engine: ✅ (docker)
+Remoteproc Runtime: ✅ (remoteproc-runtime)
+Remoteproc Shim: ✅ (containerd-shim-remoteproc-v1)
+Hardware Info: ✅ (lscpu)
+Subsystem Driver (remoteproc): ✅ (m33, m0)
 ```
 
 A Topo health check confirms connectivity between the host and target, as well as the verifying the presence of dependencies such as docker.

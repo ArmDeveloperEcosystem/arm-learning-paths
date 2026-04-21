@@ -25,7 +25,7 @@ Once a template is defined, use of Topo removes the need to deal with low-level 
 
 Topo can also be leveraged by AI Agents to further streamline and automate.
 
-## Prepare host environment
+## Install Topo
 
 In this step, you install Topo on the host, along with other dependencies.
 
@@ -50,47 +50,6 @@ topo --help
 
 You should see an output confirming Topo is present, and describing the available commands.
 
-Confirm that the required dependencies are available on the host bu running these commands in your host terminal:
-
-```bash
-ssh -V
-docker --version
-```
-
-You should see an output confirming version numbers, for example:
-
-```output
-OpenSSH_x.x
-Docker version xx.x.x
-```
-
-If Docker is missing, please use [Install Docker](https://learn.arm.com/install-guides/docker/).
-
-If SSH is missing, please use [Install SSH](https://learn.arm.com/install-guides/ssh/).
-
-## Prepare target environment
-
-Now that the host device is prepared, we will setup the target. On the host device, connect to your target with SSH.
-
-```bash
-ssh user@your-target
-```
-
-Once connected to the target, use the following commands to verify both Docker and `lscpu` are installed:
-
-```bash
-docker --version
-lscpu
-```
-
-The output should apear similar to the following:
-
-```output
-Docker version xx.x.x
-Architecture:             aarch64
-CPU(s):                   ...
-```
-
 ## What you've completed and what's next
 
-You have now prepared both your host and target for use with Topo. In the next step, you will utilize Topo to probe your target device for features, assessing its compability with template containerized workloads.
+You have now installed Topo on your host. In the next step, you will utilize Topo to prepare your host machine and to probe your target device for features, assessing its compability with template containerized workloads.
