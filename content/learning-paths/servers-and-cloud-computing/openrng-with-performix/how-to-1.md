@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Install dependencies
 
-Ensure that you're using an Arm Linux system (`aarch64`), such as an AWS Graviton-based Amazon EC2 instance running Amazon Linux 2023. This Learning Path has been tested on an AWS Graviton 3 `c7g.metal` instance with 64 Neoverse V1 cores. You can use other Arm Linux distributions. If you use a different distribution, replace `dnf` with your package manager, such as `apt` on Ubuntu or Debian.
+Ensure that you're using an Arm Linux system (`aarch64`), such as an AWS Graviton-based Amazon EC2 instance running Amazon Linux 2023. This Learning Path has been tested on an AWS Graviton 3 `c7g.metal` EC2 instance with 64 Neoverse V1 cores. You can use other Arm Linux distributions. If you use a different distribution, replace `dnf` with your package manager, such as `apt` on Ubuntu or Debian.
 
 On an Arm Linux system, install the following packages:
 
