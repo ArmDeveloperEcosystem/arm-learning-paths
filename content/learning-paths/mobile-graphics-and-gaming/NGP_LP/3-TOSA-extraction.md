@@ -6,8 +6,20 @@ weight: 4
 layout: learningpathall
 ---
 
-## Conversion Method
-we will cover how to convert model from base python code to a .pte with a chosen backend from executorch and then directly below we shall show the steps to do that 
+## What is TOSA and why are we exposing it
+TOSA (Tensor Operator Set Architecture) is a standardised intermediate representation for machine learning workloads, designed to provide a consistent and hardware-agnostic description of neural network operations.
+
+In practice, it acts as a bridge between high-level ML frameworks and low-level hardware implementations. Models from frameworks like TensorFlow or PyTorch can be lowered into TOSA, and from there compiled efficiently onto a wide range of targets, including CPUs, GPUs, and dedicated NPUs.
+
+We expose TOSA in this workflow to make that process visible and understandable, it's not a necesary step in the case of using executorch as you will see later.
+
+Rather than treating model deployment as a black box, TOSA highlights:
+
+- The structured sequence of operations that make up the model
+- How those operations are standardised and simplified
+- Where optimisation and hardware-specific mapping take place
+
+
 
 
 
@@ -44,6 +56,6 @@ For conversion via the executorch tosa backend we are going to import the tosa s
         print(f"  Total .tosa files so far: {len(tosa_files)}")
 
 
-This will become clearer in the next section. you will see 2 files in the "Executorch models" folder one is the tosa operators with the .tosa extension on the end and the other is the .vgf that exposes the vgf backend. the .vgf becomes important later 
+The next section will explore how we visualise the models
 
 
