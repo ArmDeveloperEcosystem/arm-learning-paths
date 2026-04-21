@@ -13,11 +13,10 @@ we will cover how to convert model from base python code to a .pte with a chosen
 
 ## Extracting the TOSA buffers
 
-For conversion via the executorch tosa backend we are going to import the tosa spec and then convert the model as seen below 
+For conversion via the executorch tosa backend we are going to import the tosa spec and then convert the model as seen below: 
 
-{insert sample code}
-    from pathlib import Path
     
+    from pathlib import Path
     BASE_DUMP = Path("Tosa_dump")
     
     def dump_tosa(ep, profile_str: str, label: str):
