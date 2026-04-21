@@ -16,17 +16,15 @@ To learn more about flame graphs and sample-based profiling, see the [Find code 
 
 To start, run the Code Hotspots recipe on the baseline executable: 
 
-1. From your local machine, open the Arm Performix GUI. 
+1. From your local machine, open the Arm Performix GUI. After connecting to your target, click **Recipes**. A configuration window opens.
+![A screenshot of the Arm Performix GUI with the Code Hotspots recipe configuration for the baseline executable. The workload, profiling duration, and sample rate settings and their values are visible.#center](./run-code-hotspot.jpg)
+2. For **Workload type**, select **Launch a new process**. 
+3. For **Workload**, specify the path to the baseline executable as `/home/ec2-user/Data-Processing-Example/build/src/main`.
+4. For **Set profiling duration**, select **No time limit** so the capture runs for the full workload.
+5. For **Sample rate**, select **High** for better resolution.
+6. To begin profiling, click **Run Recipe**.
 
 <!-- ![Arm Performix GUI showing where to create a new Code Hotspots analysis run for the baseline executable#center](./run-code-hotspot.jpg) -->
-
-![A screenshot of the Arm Performix GUI with the Code Hotspots recipe configuration for the baseline executable. The workload, profiling duration, and sample rate settings and their values are visible.#center](./run-code-hotspot.jpg)
-
-2. For **Workload**, specify the path to the baseline executable as `/home/ec2-user/Data-Processing-Example/build/src/main`.
-3. For **Set profiling duration**, select **No time limit** so the capture runs for the full workload.
-4. For **Sample rate**, select **High** for better resolution.
-5. To begin profiling, click **Run Recipe**.
-
 <!-- Configure the recipe with the path to the baseline executable, set the profiling duration to **No time limit** so the capture runs for the full workload, and set the sample rate to **High** for better resolution. Select **Run Recipe** to begin profiling. -->
 
 When the run completes, Performix displays the flame graph:
