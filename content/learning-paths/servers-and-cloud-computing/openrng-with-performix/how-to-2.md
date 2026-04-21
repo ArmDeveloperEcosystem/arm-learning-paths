@@ -84,4 +84,4 @@ In this section, you:
 - Built and ran the baseline executable to confirm expected output
 - Visualized the generated point distribution to verify the data is correct
 
-Next, you use Arm Performix Code Hotspots to profile the baseline and identify where CPU cycles are actually spent.
+Next, you'll use Arm Performix Code Hotspots to profile the baseline and identify where CPU cycles are actually spent.
