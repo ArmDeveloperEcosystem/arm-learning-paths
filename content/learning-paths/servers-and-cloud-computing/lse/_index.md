@@ -5,6 +5,8 @@ minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for software developers who want to learn about Large System Extensions and use them in an application.
 
+description: Understand Large System Extensions (LSE) for Arm processors and verify whether applications use LSE for improved atomic operation performance.
+
 learning_objectives:
     - Learn about Large System Extensions
     - Find out if an application uses Large System Extensions

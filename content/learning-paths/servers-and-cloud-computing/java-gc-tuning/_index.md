@@ -5,10 +5,12 @@ minutes_to_complete: 45
 
 who_is_this_for: This Learning Path is for Java developers aiming to optimize application performance on Arm-based servers, especially those migrating applications from x86-based to Arm-based instances. 
 
+description: Monitor, interpret, and optimize Java Garbage Collector performance on Arm servers by comparing different GCs and tuning parameters for your workload.
+
 learning_objectives: 
-    - Describe the key differences between individual Java Garbage Collectors (GCs).
-    - Monitor and interpret Garbage Collector performance metrics.
-    - Adjust core parameters to optimize performance for your specific workload.
+    - Describe the key differences between individual Java Garbage Collectors (GCs)
+    - Monitor and interpret Garbage Collector performance metrics
+    - Adjust core parameters to optimize performance for your specific workload
 
 prerequisites:
     - An Arm-based instance from a cloud service provider, or an on-premise Arm server.
