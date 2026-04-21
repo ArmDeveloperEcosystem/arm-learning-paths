@@ -3,6 +3,10 @@ title: Benchmark Gemma LiteRT-LM prefill performance with KleidiAI and SME2 on m
 
 minutes_to_complete: 45
 
+draft: true
+cascade:
+    draft: true
+
 who_is_this_for: This is an advanced topic for software developers and performance engineers who want a reproducible Gemma prefill benchmark workflow using LiteRT-LM, KleidiAI, and XNNPACK on macOS.
 
 learning_objectives:
