@@ -86,7 +86,7 @@ Subsystem Driver (remoteproc): ✅ (m33, m0)
 
 A Topo health check confirms connectivity between the host and target, as well as the verifying the presence of dependencies such as docker.
 
-You should resolve any `❌` errors before moving on. Warnings (`⚠️`) can indicate optional capabilities you can add later. `ℹ️` provides other information. A `✅` confirms the presence of dependencies and no warnings or errors.
+You should resolve any `❌` errors before moving on. Warnings (⚠️) can indicate optional capabilities that may be needed in certain projects. `ℹ️` provides other information. A `✅` confirms the presence of dependencies and no warnings or errors.
 
 If you are using password-based SSH, you will likely see the `❌` error below:
 
