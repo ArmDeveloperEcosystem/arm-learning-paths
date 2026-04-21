@@ -3,7 +3,7 @@ title: Deploy containerized workloads to Arm-based Linux targets with Topo
 
 description: Learn how to use Topo to detect device capabilities, select a compatible template, and deploy containerized workloads to Arm-based Linux targets over SSH.
 
-minutes_to_complete: 45
+minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for embedded, edge, and cloud software developers who want to easily deploy containerized workloads to Arm-based Linux targets with Topo.
 
