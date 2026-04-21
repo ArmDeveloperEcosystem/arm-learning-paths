@@ -5,6 +5,7 @@ minutes_to_complete: 10
 
 who_is_this_for: This is an introductory topic for developers who want to use memcached as their in-memory key-value store.
 
+description: Install memcached on Arm cloud servers and benchmark in-memory key-value store performance using open-source tools.
 
 learning_objectives:
 - Install and run memcached on your Arm-based cloud server

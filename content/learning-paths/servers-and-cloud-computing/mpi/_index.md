@@ -5,6 +5,8 @@ minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for HPC software developers writing MPI applications.
 
+description: Debug, profile, and optimize MPI parallel applications on Arm servers using Linaro Forge, gdb, and Arm Performance Libraries.
+
 learning_objectives: 
     - Debug and fix a parallel application
     - Profile and optimize your code
