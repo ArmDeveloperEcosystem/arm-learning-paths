@@ -48,7 +48,7 @@ For more information about installing the libraries on other operating systems o
 
 ## Clone the repository
 
-In this Learning Path, you'll work with a data processing example. The example simulates a common analytics pattern: generating random 2D point data, filtering points within a rectangular window, and computing a distance metric. You'll use it as a baseline to profile and then optimize with OpenRNG and Arm Performance Libraries.
+In this Learning Path, you'll work with a data-processing example. The example simulates a common analytics pattern: generating random 2D point data, filtering points within a rectangular window, and computing a distance metric. You'll use it as a baseline to profile and then optimize with OpenRNG and Arm Performance Libraries.
 
 Clone the example repository:
 

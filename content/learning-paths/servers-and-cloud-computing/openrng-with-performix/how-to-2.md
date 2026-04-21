@@ -54,9 +54,9 @@ The output is similar to:
 Number of Data Points = 16384 | Number of Points within Window ( [10, 10] , [50, 50] ) = 586
 Shortest Distance from Origin = 1.88536
 ```
-The example generates 16,384 points on an x and y axis. The distribution is the sum of a Gaussian distribution with a mean and standard deviation of 30 and 50 respectively, and a uniform distribution with a min and max of 10 and 100. For each point, the workload checks whether it lies within a window with bottom-left and top-right coordinates of [10,10] and [50,50] respectively, then finds the point closest to the origin.
+The example generates 16,384 points on an x and y axis. The distribution is the sum of a Gaussian distribution with a mean and standard deviation of 30 and 50 respectively, and a uniform distribution with a min and max of 10 and 100. For each point, the workload checks whether it lies within a window with bottom-left and top-right coordinates of [10,10] and [50,50] respectively. The workload then finds the point closest to the origin.
 
-To confirm the data distribution is being generated correctly, export the data and render it with a Python script:
+To confirm that the data distribution is being generated correctly, export the data and render it with a Python script:
 
 ```bash
 cmake -S . -B build -DBUILD_TESTS=1
@@ -80,8 +80,7 @@ The script generates an image similar to this:
 ## What you've accomplished and what's next
 
 In this section, you:
-- Reviewed the three-step data-processing workflow: generate, filter, and reduce
 - Built and ran the baseline executable to confirm expected output
 - Visualized the generated point distribution to verify the data is correct
 
-Next, you'll use Arm Performix Code Hotspots to profile the baseline and identify where CPU cycles are spent.
+Next, you'll use Arm Performix Code Hotspots to profile the baseline and identify the optimization target from measured runtime data.
