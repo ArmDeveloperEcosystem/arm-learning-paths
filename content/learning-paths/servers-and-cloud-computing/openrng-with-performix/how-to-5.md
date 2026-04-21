@@ -63,4 +63,4 @@ The observed speedup of the `generateDistribution` function varies with distribu
 
 ## What you've accomplished
 
-You completed a full profile-first optimization workflow on Arm. Starting from a baseline C++ workload, you used Arm Performix Code Hotspots to find the highest-cost function rather than guessing, then replaced it with OpenRNG and Arm Performance Libraries. The microbenchmark confirmed that the speedup scales with data size, giving you a repeatable method for identifying and targeting bottlenecks in your own Arm workloads.
+You completed a full profile-first optimization workflow on Arm. Starting from a baseline C++ workload, you used Arm Performix Code Hotspots to find the highest-cost function, then replaced it with OpenRNG and Arm Performance Libraries. The microbenchmark confirmed that the speedup scales with data size, giving you a repeatable method for identifying and targeting bottlenecks in your own Arm workloads.

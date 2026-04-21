@@ -8,15 +8,15 @@ layout: learningpathall
 
 ## Understand OpenRNG and Arm Performance Libraries
 
-Arm Performance Libraries includes numerical routines tuned for Arm processors. Those Arm-tuned routines can speed up execution by reducing overhead and improving throughput for compute-heavy kernels.
+Arm Performance Libraries include numerical routines tuned for Arm processors. These Arm-tuned routines can speed up execution by reducing overhead and improving throughput for compute-heavy kernels.
 
 OpenRNG is the random-number component in Arm Performance Libraries. It exposes a Vector Statistical Library (VSL) API, where *VSL* means generating distributions in vector form (many values per call) instead of one sample at a time.
 
-You'll use that vector API to generate Gaussian values in bulk. Bulk generation through a stream object lowers per-sample overhead, which is why this change can reduce runtime in the hotspot.
+You'll use this vector API to generate Gaussian values in bulk. Bulk generation through a stream object lowers per-sample overhead, which is why this change can reduce runtime in the hotspot.
 
-OpenRNG is API-compatible with the Intel oneMKL VSL RNG interface, so distribution call sites remain familiar when you move between x86 and AArch64 builds. You mainly switch build configuration, not workload logic. See the [OpenRNG developer reference guide](https://developer.arm.com/documentation/101004/2601/Open-Random-Number-Generation-Reference-Guide/RNG-Introduction/An-overview-of-OpenRNG?lang=en) for details.
+OpenRNG is API-compatible with the Intel oneMKL VSL RNG interface, so distribution call sites remain familiar when you move between `x86` and `aarch64` builds. You mainly switch build configuration, not workload logic. For more information, see the [OpenRNG developer reference guide](https://developer.arm.com/documentation/101004/2601/Open-Random-Number-Generation-Reference-Guide/RNG-Introduction/An-overview-of-OpenRNG?lang=en).
 
-In `src/vec1d.cpp`, the `USE_ARMPL` macro controls which implementation is compiled. In this project, enabling `USE_ARMPL` selects the AArch64 OpenRNG path:
+In `src/vec1d.cpp`, the `USE_ARMPL` macro controls which implementation is compiled. In this project, enabling `USE_ARMPL` selects the `aarch64` OpenRNG path:
 
 ```cpp
 #if USE_ARMPL
@@ -66,7 +66,7 @@ vslDeleteStream(&stream);
 
 ## Build and run the accelerated variant
 
-Build and run the accelerated variant:
+Build and run the accelerated variant by passing `-DUSE_APL=1` to enable the OpenRNG path in `vec1d.cpp`:
 
 ```bash
 make clean
@@ -81,7 +81,7 @@ Now profile the accelerated binary in the Arm Performix GUI using `./build/src/m
 
 ![Arm Performix GUI showing a Code Hotspots run configured for the accelerated executable main_with_apl#center](./hotspot-with-apl.jpg)
 
-The flame graph shows `main`, but Arm Performance Libraries functions (including OpenRNG) do not appear above it. Instead, most samples are attributed to dynamic loader functions (for example, `_dl_*`), which indicates missing symbol resolution. This often happens on Linux when pre-built shared libraries (`*.so`) do not include debug symbols. The profiler cannot resolve internal library calls, so stacks appear truncated.
+The flame graph shows `main`, but Arm Performance Libraries functions (including OpenRNG) don't appear above it. Instead, most samples are attributed to dynamic loader functions (for example, `_dl_*`), which indicates missing symbol resolution. This often happens on Linux when pre-built shared libraries (`*.so`) do not include debug symbols. The profiler cannot resolve internal library calls, so stacks appear truncated.
 
 To fix this, rebuild OpenRNG from source with debug information enabled (for example, `-g`), so the library functions show up correctly above main.
 
@@ -115,9 +115,9 @@ g++ --std=c++20 -g -O0 \
   -o ./build/debug_openrng
 ```
 
-{{% notice Please Note %}}
+{{% notice Note %}}
 
-OpenRNG uses the CMake build system, so as an alternative you can update your CMake configuration to fetch from the third-party library. The direct command above is used here primarily for convenience.
+OpenRNG uses the CMake build system. As an alternative, you can update your CMake configuration to fetch from the third-party library. The direct command is used here primarily for convenience.
 
 {{% /notice %}}
 
@@ -125,4 +125,13 @@ From Performix, run the code hotspot recipe and target the `./build/debug_openrn
 
 ![Arm Performix flame graph with OpenRNG symbols correctly resolved and stacked above the calling functions#center](./openrng_flame_graph_with_debug.jpg)
 
-You can now correctly see the OpenRNG frames appearing above your calling functions. Because hotspots are identified through periodic sampling, the measurements provide limited direct insight into exact wall-clock time. Next, you measure the speedup of the hot function and examine how it varies across different data sizes.
+You can now correctly see the OpenRNG frames appearing above your calling functions. Because hotspots are identified through periodic sampling, the measurements provide limited direct insight into exact wall-clock time.
+
+## What you've accomplished and what's next
+
+In this section, you:
+- Replaced the standard library random generation path with the OpenRNG vector API from Arm Performance Libraries
+- Built and ran the accelerated executable to confirm it produces the same output
+- Profiled the accelerated binary with Arm Performix and resolved missing symbol attribution by rebuilding OpenRNG from source with debug symbols
+
+Next, you measure the speedup of the hot function and examine how the improvement varies across different data sizes.
