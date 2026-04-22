@@ -27,11 +27,13 @@ author:
 
 ### Tags
 skilllevels: Advanced
-subjects: Performance and Architecture,cryptography
+subjects: 
+    - Performance and Architecture
+    - Security
 armips:
     - Cortex-M
 operatingsystems:
-    - Embedded Linux
+    - Linux
     - macOS
 tools_software_languages:
     - C
