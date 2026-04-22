@@ -19,14 +19,10 @@ This walkthrough uses [uv](https://docs.astral.sh/uv/) to manage the project and
 
 {{< tabpane code=true >}}
     {{< tab header="macOS or Linux" language="shell">}}
-```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
-```
     {{< /tab >}}
     {{< tab header="Windows" language="powershell">}}
-```powershell
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
-```
     {{< /tab >}}
 {{< /tabpane >}}
 
