@@ -105,7 +105,11 @@ With `snap`, the `cmake` executable is installed in `/snap/bin` which should alr
 
 ### Use a specific CMake release from GitHub
 
-If you need a specific version of CMake, see [releases](https://github.com/Kitware/CMake/releases). Substitute the release number you want to install in the following commands. 
+If you need a specific version of CMake, see [releases](https://github.com/Kitware/CMake/releases). 
+
+{{% notice Note %}}
+The following commands use CMake version 4.3.1. The same commands work with other versions. Replace the package used in these steps with the package for your version.
+{{% /notice %}} 
 
 1. Download a release from GitHub:
 
