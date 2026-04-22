@@ -13,7 +13,7 @@ Choose one of the pre-existing templates that is compatible with your target har
 To use a template, we clone it from git on our host device by running the following command:
 
 ```bash
-topo clone template:topo-v9-cpu-chat
+topo clone https://github.com/Arm-Examples/topo-cpu-ai-chat.git
 ```
 
 If a template asks for build arguments, Topo prompts you interactively.
@@ -29,7 +29,7 @@ services:
     build:
       context: ./llama-inference
       args:
-        ENABLE_SVE: ON
+        ENABLE_SVE: OFF
         HF_MODEL: bartowski/Qwen_Qwen3.5-0.8B-GGUF
         HF_MODEL_FILE: ""
     ports:
@@ -45,7 +45,7 @@ services:
     build:
       context: ./simple-chat
       args:
-        ENABLE_SVE: ON
+        ENABLE_SVE: OFF
     depends_on:
       llama-server:
         condition: service_healthy
@@ -76,10 +76,10 @@ Changes can be made to the `compose.yaml` files to adjust arguments after the fa
 
 ## Deploy the app on the target
 
-On your host device, enter the project directory created by the `topo clone` command. In the case of the LLM chatbot, this directory is `topo-v9-cpu-chat`:
+On your host device, enter the project directory created by the `topo clone` command. In the case of the LLM chatbot, this directory is `topo-cpu-ai-chat`:
 
 ```bash
-cd topo-v9-cpu-chat/
+cd topo-cpu-ai-chat/
 ```
 
 Then use `topo deploy` to automatically build the container images on the host, transfer the images to the target via SSH, and start the application on the target:

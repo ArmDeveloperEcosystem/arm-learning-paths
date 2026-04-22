@@ -8,6 +8,56 @@ layout: learningpathall
 
 ## Run Topo health checks
 
+### Prepare host environment
+
+Confirm that the required dependencies are available on the host by running this command in your host terminal:
+
+```bash
+topo health
+```
+
+The output should appear similar to the following:
+
+```bash
+Host
+----
+SSH: ✅ (ssh)
+Container Engine: ✅ (docker)
+
+Target
+------
+ℹ️ provide --target or set TOPO_TARGET to check target health
+```
+
+If Docker is missing, please use [Install Docker](https://learn.arm.com/install-guides/docker/).
+
+If SSH is missing, please use [Install SSH](https://learn.arm.com/install-guides/ssh/).
+
+## Prepare target environment
+
+Now that the host device is prepared, we will setup the target. On the host device, connect to your target with SSH.
+
+```bash
+ssh user@your-target
+```
+
+Once connected to the target, use the following commands to verify both Docker and `lscpu` are installed:
+
+```bash
+docker --version
+lscpu
+```
+
+The output should apear similar to the following:
+
+```output
+Docker version xx.x.x
+Architecture:             aarch64
+CPU(s):                   ...
+```
+
+### Prepare Topo for target
+
 We will now run a health check against your target. Run the following command from the terminal of your host device.
 
 If you are using your host device simultaneously as your target, use `topo health --target localhost`.
@@ -21,19 +71,22 @@ The output should appear similar to:
 ```output
 Host
 ----
-SSH: ✅
-Container Engine: ✅
+SSH: ✅ (ssh)
+Container Engine: ✅ (docker)
 
 Target
 ------
 Connectivity: ✅
-Container Engine: ✅
-Hardware Info: ✅
+Container Engine: ✅ (docker)
+Remoteproc Runtime: ✅ (remoteproc-runtime)
+Remoteproc Shim: ✅ (containerd-shim-remoteproc-v1)
+Hardware Info: ✅ (lscpu)
+Subsystem Driver (remoteproc): ✅ (m33, m0)
 ```
 
 A Topo health check confirms connectivity between the host and target, as well as the verifying the presence of dependencies such as docker.
 
-You should resolve any `❌` errors before moving on. Warnings (`⚠️`) can indicate optional capabilities you can add later. `ℹ️` provides other information. A `✅` confirms the presence of dependencies and no warnings or errors.
+You should resolve any `❌` errors before moving on. Warnings (⚠️) can indicate optional capabilities that may be needed in certain projects. `ℹ️` provides other information. A `✅` confirms the presence of dependencies and no warnings or errors.
 
 If you are using password-based SSH, you will likely see the `❌` error below:
 
@@ -48,9 +101,9 @@ This is because Topo requires key-based SSH. You can use the command specified a
 
 If using a Cortex-A + Cortex-M device, such as the i.MX 93, you may see a `⚠️` warning if `remoteproc-runtime` is not installed on the target.
 
-[`remoteproc`](https://docs.kernel.org/staging/remoteproc.html) is a Linux kernel framework for managing remote / auxiliary processors in a heterogeneous SoC. It allows the main CPU (e.g., Cortex-A) to load firmware on to the auxiliary processors (e.g., Cortex-M), start and stop them, and to communicate with them (e.g. using `rpmsg`).
+[`remoteproc`](https://docs.kernel.org/staging/remoteproc.html) is a Linux kernel framework for managing remote / auxiliary processors in a heterogeneous SoC. It allows the main CPU (e.g., Cortex-A) to load firmware on to the auxiliary processors (e.g., Cortex-M), start and stop them, and to communicate with them (e.g. using [`rpmsg`](https://docs.kernel.org/staging/rpmsg.html)).
 
-[`remoteproc-runtime`](https://github.com/arm/remoteproc-runtime) builds on this by adding a container-style (OCI) interface. This lets you package and manage firmware like container images using standard tools (e.g. Docker or containerd), even though the code runs as firmware on the Cortex-M. OCI (Open Container Initiative) defines open standards for container image formats and runtimes, ensuring compatibility across container tools.
+[`remoteproc-runtime`](https://github.com/arm/remoteproc-runtime) builds on this by adding a container-style (OCI - Open Container Initiative) interface. This lets you package and manage firmware like container images using standard tools (e.g. Docker or containerd), even though the code runs as firmware on the Cortex-M. [OCI](https://opencontainers.org/) defines open standards for container image formats and runtimes, ensuring compatibility across container tools.
 
 You can use Topo to install `remoteproc-runtime`. Run the following command from the host device:
 
@@ -62,7 +115,7 @@ Run the health command again to verify installation. Topo uses `remoteproc-runti
 
 ## Generate a target description
 
-In this step, you ask Topo to probe your target hardware and create a machine-readable YAML description.
+In this step, you ask Topo to probe your target and create a machine-readable YAML description of the hardware.
 
 On your host device, run:
 
@@ -121,7 +174,7 @@ An example output for an AWS Graviton instance is shown below:
   displays a lightbulb in either the on or off state. The lightbulb state is
   described by an LLM in any user-specified style.
 
-✅ topo-v9-cpu-chat | https://github.com/Arm-Examples/topo-v9-cpu-chat.git | main
+✅ topo-cpu-ai-chat | https://github.com/Arm-Examples/topo-cpu-ai-chat.git | main
   Features: SVE, NEON
   Complete LLM chat application optimized for Arm CPU inference.
 
