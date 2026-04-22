@@ -59,7 +59,4 @@ further_reading:
 
 
 weight: 1
-who_is_this_for: This is an introductory topic for software developers using MongoDB
-  as their database for mobile, IoT applications, content management, or real-time
-  analytics on Arm servers.
 ---

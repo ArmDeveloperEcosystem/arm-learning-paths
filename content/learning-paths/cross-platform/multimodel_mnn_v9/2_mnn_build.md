@@ -6,7 +6,7 @@ layout: learningpathall
 
 ## Introduction
 
-In this module you will build **MNN** natively on your Arm v9 Linux system and verify that the `llm_demo` binary can load a **prebuilt Omni MNN model package**. This sets up everything needed for the text, vision, and audio demos in later modules.
+In this module you will build **MNN** natively on your Armv9 Linux system and verify that the `llm_demo` binary can load a **prebuilt Omni MNN model package**. This sets up everything needed for the text, vision, and audio demos in later modules.
 
 This module uses a native **CPU-only** MNN build on Armv9. That is a deliberate design choice, not a fallback. The goal is to show how a compact, reproducible, deployment-friendly software stack can run directly on an Armv9 CPU without depending on a discrete GPU or separate accelerator.
 
@@ -15,6 +15,7 @@ At the end of this module, you will have:
 - a working `llm_demo` binary
 - a validated model directory that includes `config.json`
 - a runtime environment that resolves the correct MNN shared libraries
+- the required Omni model files available locally
 
 ## Create a workspace
 
@@ -111,45 +112,70 @@ Run the check again:
 ldd ./llm_demo | grep -E "libMNN|Express|Audio|OpenCV" || true
 ```
 
-## Download a prebuilt Omni model package
+## Download the prebuilt Omni model package
 
-This learning path uses a prebuilt [Omni model package](https://huggingface.co/taobao-mnn/Qwen2.5-Omni-7B-MNN) that is already in MNN deployable format.
+This learning path uses a prebuilt [Omni model package](https://huggingface.co/taobao-mnn/Qwen2.5-Omni-7B-MNN) that is already prepared for MNN deployment.
 
-Clone the model into your workspace:
+Clone the model repository into your workspace:
 
 ```bash
 cd ~/mnn
 git clone https://www.modelscope.cn/MNN/Qwen2.5-Omni-7B-MNN.git
+cd ~/mnn/Qwen2.5-Omni-7B-MNN
 ```
 
-Verify that the package includes `config.json`:
+## Verify that the required model files are present
+
+Check that the repository contains the expected configuration and model files:
+
+```bash id="vvl302"
+ls -lh ~/mnn/Qwen2.5-Omni-7B-MNN
+```
+
+Verify that `config.json` exists:
 
 ```bash
 cat ~/mnn/Qwen2.5-Omni-7B-MNN/config.json
 ```
 
-A valid configuration looks similar to:
+The presence of `config.json` alone does not guarantee that the full model weights are available locally. Confirm that the main model files are present:
 
-```json
-{
-    "llm_model": "llm.mnn",
-    "llm_weight": "llm.mnn.weight",
-    "backend_type": "cpu",
-    "thread_num": 4,
-    "precision": "low",
-    "memory": "low",
-    "system_prompt": "You are Qwen, a virtual human developed by the Qwen Team, Alibaba Group, capable of perceiving auditory and visual inputs, as well as generating text and speech.",
-    "talker_max_new_tokens": 2048,
-    "talker_speaker": "Chelsie",
-    "dit_steps": 5,
-    "dit_solver": 1,
-    "mllm": {
-        "backend_type": "cpu",
-        "thread_num": 4,
-        "precision": "normal",
-        "memory": "low"
-    }
-}
+- `llm.mnn`
+- `llm.mnn.weight`
+
+```bash
+ls -lh ~/mnn/Qwen2.5-Omni-7B-MNN/llm.mnn ~/mnn/Qwen2.5-Omni-7B-MNN/llm.mnn.weight
+```
+
+If both files exist and show non-trivial file sizes, the model package is ready for inference.
+
+## If the model weights are missing
+
+Some environments fetch the large model files automatically when you clone the repository, while others do not. If `llm.mnn` or `llm.mnn.weight` is missing, install **Git LFS** and pull the large files explicitly.
+
+Install Git LFS:
+
+```bash id="lfsins1"
+sudo apt-get update
+sudo apt-get install -y git-lfs
+git lfs install
+```
+
+Then download the large model files:
+
+```bash id="3hpv8k"
+cd ~/mnn/Qwen2.5-Omni-7B-MNN
+git lfs pull
+```
+
+{{% notice Note %}}
+Downloading the full model weights can take a while depending on your network connection and available bandwidth.
+{{% /notice %}}
+
+After `git lfs pull`, verify the files again:
+
+```bash id="mfchk2"
+ls -lh ~/mnn/Qwen2.5-Omni-7B-MNN/llm.mnn ~/mnn/Qwen2.5-Omni-7B-MNN/llm.mnn.weight
 ```
 
 {{% notice Note %}}
