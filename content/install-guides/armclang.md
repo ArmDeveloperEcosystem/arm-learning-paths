@@ -52,15 +52,18 @@ For more information on usage, see [Arm Product Download Hub](../pdh).
 
 ### Install compiler packages
 
+The installation steps depend on your operating system.
+
+#### Windows
+
 To install on Windows, unzip the downloaded package, launch the installer, and follow on-screen prompts.
 ```console
 win-x86_64\setup.exe
 ```
-To install on Linux hosts, `untar` the downloaded package and run the install script. The exact filenames are version and host dependent.
-
-For example:
 
 #### Linux
+To install on Linux hosts, `untar` the downloaded package and run the install script. The exact filenames are version and host dependent.
+
 You can use the `uname -m` call to determine whether your machine is running `aarch64` or `x86_64`, and target the downloaded package accordingly.
 
 ```console
@@ -71,22 +74,23 @@ tar xvfz ARMCompiler6.24_standalone_linux-`uname -m`.tar.gz
 ./install_`uname -m`.sh --i-agree-to-the-contained-eula --no-interactive -d /home/$USER/ArmCompilerforEmbedded6.24
 ```
 
-Remove the install data when complete.
+Remove the install data when complete:
 ```console
 cd ..
 rm -r tmp
 ```
 Add the `bin` directory of the installation to the `PATH` and confirm `armclang` can be invoked.
-#### bash
-```console
+
+{{< tabpane code=true >}}
+  {{< tab header="bash" language="shell">}}
 export PATH=/home/$USER/ArmCompilerforEmbedded6.24/bin:$PATH
 armclang --version
-```
-#### csh/tcsh
-```console
+  {{< /tab >}}
+  {{< tab header="csh/tcsh" language="shell">}}
 set path=(/home/$USER/ArmCompilerforEmbedded6.24/bin $path)
 armclang --version
-```
+  {{< /tab >}}
+{{< /tabpane >}}
 
 ### Download Arm Compiler for Embedded from the Arm Tools Artifactory {#artifactory}
 
@@ -95,7 +99,7 @@ The Arm Compiler for Embedded, as well as other tools and utilities, are availab
 You can also fetch directly from the artifactory. This is particularly useful for automated CI/CD flows.
 
 ```bash
-wget https://artifacts.tools.arm.com/arm-compiler/6.24/45/standalone-linux-armv8l_64-rel.tar.gz
+wget https://artifacts.tools.arm.com/arm-compiler/6.24/19/standalone-linux-armv8l_64-rel.tar.gz
 ```
 
 The artifactory packages don't have their own installers. You should manually extract files and configure. For example:
@@ -137,7 +141,7 @@ armclang --target=aarch64-arm-none-eabi hello.c
 
 If the command completes with no errors, the compiler is working.
 
-For more information about the example, see [Arm Compiler for Embedded User Guide](https://developer.arm.com/documentation/100748/latest/Getting-Started/Compiling-a-Hello-World-example).
+For more information about the example, see the [Arm Compiler for Embedded User Guide](https://developer.arm.com/documentation/100748/latest/Getting-Started/Compiling-a-Hello-World-example).
 
 ## Integrate with Arm Development Studio {#armds}
 

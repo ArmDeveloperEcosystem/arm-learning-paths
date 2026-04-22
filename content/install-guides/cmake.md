@@ -9,6 +9,8 @@ additional_search_terms:
 
 minutes_to_complete: 10
 
+description: Install CMake on Arm Linux (aarch64) and Windows on Arm to build and manage C and C++ projects using a cross-platform build system.
+
 author: Jason Andrews
 
 official_docs: https://cmake.org/documentation/
@@ -55,21 +57,18 @@ The following steps install CMake version 4.3.1. To find the latest Windows on A
 
 To download and install CMake on Windows on Arm, follow these steps: 
 
-1. Download the [Windows ARM64 Installer](https://github.com/Kitware/CMake/releases/download/v4.3.1/cmake-4.3.1-windows-arm64.msi) and run it. 
+1. Download the [Windows ARM64 Installer](https://github.com/Kitware/CMake/releases/download/v4.3.1/cmake-4.3.1-windows-arm64.msi) and run it. The welcome screen will appear.
 
-2. The welcome screen will appear. Click **Next** and then accept the End-User License Agreement.
+ ![A screenshot of the Windows CMake Setup Wizard welcome page that asks the user to click the Next button to contunue with installation. #center](/install-guides/_images/cmake-welcome.png)
 
-3. Under **Install Options**, to invoke CMake from any directory, check **Add CMake to the system PATH for the current user** and then click **Next**.
+2. Click **Next** and then accept the End-User License Agreement.
+
+3. Under **Install Options**, to invoke CMake from any directory, select **Add CMake to the system PATH for the current user** and then click **Next**.
 
 4. Follow the prompts to complete the installation. Wait for the installer to complete and then click **Finish**.
+![A screenshot of the CMake Windows Setup Wizard that shows that the installation is complete and asks the user to click the Finish button to exit the Wizard. #center](/install-guides/_images/cmake-finish.png) 
 
-<!-- ![Install #center](/install-guides/_images/cmake-welcome.png)
-
-
-![Install #center](/install-guides/_images/cmake-path.png)
-
-
-![Install #center](/install-guides/_images/cmake-finish.png) -->
+<!-- ![Install #center](/install-guides/_images/cmake-path.png) -->
 
 ## Download and install CMake on Linux
 
@@ -115,7 +114,7 @@ cd $HOME
 wget -N https://github.com/Kitware/CMake/releases/download/v4.3.1/cmake-4.3.1-linux-aarch64.sh
 ```
 
-2. Run the install script and set the search path using:
+2. Run the install script and set the search path:
 
 ```console
 mkdir cmake
