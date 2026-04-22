@@ -10,11 +10,11 @@ layout: learningpathall
 
 Manually timing specific sections of code can help identify bottlenecks, but it requires adding instrumentation and risks overlooking other hotspots that were not explicitly measured. For example, you might wrap `generateDistribution` in `src/main.cpp` in a timer and conclude it's the bottleneck. However, if you don't also measure `min_length`, you might never notice that it is also consuming a significant share of CPU cycles.
 
-Arm Performix Code Hotspots takes a different approach. It profiles the entire program using hardware performance counters and shows you where CPU cycles are actually spent, without any code changes. You get a ranked view of the hottest functions across your whole application. This helps you prioritize optimization work based on evidence instead of guesswork. 
+Arm Performix Code Hotspots takes a different approach. It profiles the entire program using hardware performance counters and shows you where CPU cycles are actually spent, without any code changes. You get a ranked view of the hottest functions across your whole application. This helps you prioritize optimization work based on evidence. 
 
 To learn more about flame graphs and sample-based profiling, see the [Find code hotspots with Arm Performix](/learning-paths/servers-and-cloud-computing/cpu_hotspot_performix/) Learning Path.
 
-To start, run the Code Hotspots recipe on the baseline executable: 
+To start, run the Arm Performix Code Hotspots recipe on the baseline executable: 
 
 1. In the Arm Performix GUI, click **Recipes**. A **Code Hotspots** page opens.
 ![A screenshot of the Arm Performix GUI with the Code Hotspots recipe configuration for the baseline executable. The workload, profiling duration, and sample rate settings and their values are visible.#center](./run-code-hotspot.jpg)

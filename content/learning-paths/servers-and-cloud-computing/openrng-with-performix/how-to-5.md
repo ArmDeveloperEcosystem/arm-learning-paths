@@ -27,7 +27,7 @@ Run the baseline benchmark first:
 ./build-baseline/tests/sweep_microbench_baseline
 ```
 
-The output shows elapsed time in microseconds for each input size:
+The output shows elapsed time in microseconds for each input size, and is similar to:
 
 ```output
 Generating Distribution of size 256 = 174 us
@@ -46,7 +46,7 @@ Then run the accelerated benchmark:
 ./build-apl/tests/sweep_microbench_with_apl
 ```
 
-The output shows the accelerated times across the same input sizes:
+The output shows the accelerated times across the same input sizes, and is similar to:
 
 ```output
 Generating Distribution of size 256 = 58 us

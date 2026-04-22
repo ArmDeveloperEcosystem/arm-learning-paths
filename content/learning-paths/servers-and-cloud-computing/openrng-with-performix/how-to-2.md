@@ -75,7 +75,7 @@ python3 scripts/visualize_vectors.py
 
 The script generates an image similar to this:
 
-![Scatter plot generated from vector_data.csv showing the point distribution#center](./vector_data.png)
+![Scatter plot showing the summed Gaussian and uniform point distribution, with points clustering around the centre of the plot area, confirming the expected distribution shape#center](./vector_data.png)
 
 ## What you've accomplished and what's next
 

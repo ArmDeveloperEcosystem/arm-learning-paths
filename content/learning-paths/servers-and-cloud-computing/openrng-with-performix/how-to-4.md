@@ -77,9 +77,9 @@ cmake --build build --target main_with_apl
 
 ## Analyze the flame graph
 
-Now profile the accelerated binary in the Arm Performix GUI using `./build/src/main_with_apl` as the workload.
+Now profile the accelerated binary in the Arm Performix GUI using `./build/src/main_with_apl` as the workload. Follow the same steps as the previous section.
 
-![A screenshot of the Arm Performix GUI showing a Code Hotspots run configured for the accelerated executable main_with_apl#center](./hotspot-with-apl.jpg)
+![A screenshot of the Arm Performix GUI showing a Code Hotspots run configured for the accelerated executable main_with_apl. The workload, profiling duration, and sample rate settings and their values are visible#center](./hotspot-with-apl.jpg)
 
 When the run completes, Performix displays the flame graph:
 
@@ -100,7 +100,6 @@ cd ..
 ```
 
 From the project root, compile the debug binary:
-
 
 ```bash
 g++ --std=c++20 -g -O0 \
