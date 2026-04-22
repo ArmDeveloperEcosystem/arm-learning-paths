@@ -60,7 +60,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 source "$HOME/.cargo/env"
 ```
 
-For more information, see [Rust install guide](/install-guides/rust/).
+For more information, see the [Rust install guide](/install-guides/rust/).
 
 ### Clone the repository and install Bedrust
 

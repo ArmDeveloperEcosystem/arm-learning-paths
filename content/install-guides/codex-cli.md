@@ -3,6 +3,7 @@ title: Codex CLI
 
 author: Joe Stech
 minutes_to_complete: 10
+description: Install Codex CLI on Arm Linux (aarch64) and macOS to use OpenAI's terminal-based coding agent for natural language code generation and codebase exploration.
 official_docs: https://developers.openai.com/codex/cli/
 
 test_maintenance: true

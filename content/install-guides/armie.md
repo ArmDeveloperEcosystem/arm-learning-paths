@@ -55,6 +55,10 @@ sudo apt-get install environment-modules -y
 
 You can download the appropriate Arm Instruction Emulator package for your host Linux platform from the [Product Downloads section](https://developer.arm.com/downloads/-/arm-instruction-emulator) of the Arm website.
 
+{{% notice Note %}}
+The following commands use Arm Instruction Emulator version 25.0 for Ubuntu 22.04. The same commands work with other versions and Linux platforms. Replace the package and script used in these steps with those for your version.
+{{% /notice %}}
+
 For Ubuntu Linux, download the installer package using `wget`:
 
 ```bash

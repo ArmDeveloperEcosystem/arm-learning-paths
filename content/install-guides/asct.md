@@ -77,7 +77,11 @@ For more information about installing Perf on different Linux distributions, see
 
 ## Download and install ASCT
 
-ASCT is distributed as a Python package and requires Python 3.10 or later. To find the latest ASCT release, see the [artifacts.tools.arm.com](https://artifacts.tools.arm.com/asct/dist/) page. The following steps use version `0.5.1`. 
+ASCT is distributed as a Python package and requires Python 3.10 or later. To find the latest ASCT release, see the [artifacts.tools.arm.com](https://artifacts.tools.arm.com/asct/dist/) page. 
+
+{{% notice Note %}}
+The following commands use ASCT version 0.5.1. The same commands work with other versions. Replace the package used in these steps with the package for your version.
+{{% /notice %}}
 
 ### Download ASCT
 

@@ -45,23 +45,23 @@ Click the **Download Windows** section and download the Windows Installer:
 
 Double-click to open the installer and start the Arm Performance Libraries Setup Wizard.
 
-![win_wizard00 #left](/install-guides/_images/armpl_wizard00.png)
+![Arm Performance Libraries Setup Wizard welcome screen prompting user to select Next to begin the installation.#center](/install-guides/_images/armpl_wizard00.png)
 
 Read and accept the End-User License Agreement by selecting the checkbox **I accept the terms of this License Agreement**.
 
-![win_wizard01 #left](/install-guides/_images/armpl_wizard01.png)
+![Arm Performance Libraries Setup Wizard showing the End-User License Agreement. A checkbox labeled 'I accept the terms of this License Agreement' is checked.#center](/install-guides/_images/armpl_wizard01.png)
 
 Enter a location for the installation on your system. The default is:
 
 `C:\Program Files\Arm Performance Libraries`
 
-![win_wizard02 #left](/install-guides/_images/armpl_wizard02.png)
+![Arm Performance Libraries Setup Wizard showing the installation directory field, set by default to C:\Program Files\Arm Performance Libraries. Change this path if needed before continuing.#center](/install-guides/_images/armpl_wizard02.png)
 
 Click **Install** and then **Finish** to complete the installation.
 
-![win_wizard03 #left](/install-guides/_images/armpl_wizard03.png)
+![Arm Performance Libraries Setup Wizard is ready to install, prompting user to select Install to begin copying files to the specified directory.#center](/install-guides/_images/armpl_wizard03.png)
 
-![win_wizard04 #left](/install-guides/_images/armpl_wizard04.png)
+![Arm Performance Libraries Setup Wizard showing the installation is complete, prompting user to select Finish to exit the wizard.#center](/install-guides/_images/armpl_wizard04.png)
 
 To install Arm Performance Libraries from a command prompt and automatically accept the End User License Agreement, run:
 ```console
@@ -81,6 +81,10 @@ For more information, see [Get started with Arm Performance Libraries](https://d
 ## Install Arm Performance Libraries on macOS {#macos}
 
 [Download](https://developer.arm.com/downloads/-/arm-performance-libraries) the appropriate package for your macOS distribution.
+
+{{% notice Note %}}
+The following commands use Arm Performance Libraries version 26.01. The same commands work with other versions. Replace the package used in these steps with the package for your version.
+{{% /notice %}}
 
 In a terminal, run the following command to download the macOS package:
 ```console
@@ -135,6 +139,10 @@ Arm Performance Libraries are supported on most Linux distributions such as Ubun
 - SLES-15 Service Packs 6 and 7
 
 The following instructions are for `deb`-based installers for GCC users.
+
+{{% notice Note %}}
+The following commands use Arm Performance Libraries version 26.01. The same commands work with other versions. Replace the package used in these steps with the package for your version.
+{{% /notice %}}
 
 In a terminal, run the following command to download the Debian package:
 

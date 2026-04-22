@@ -53,10 +53,11 @@ sudo sysctl -w kernel.kptr_restrict=0
 To use APerf's Java profiling option (`--profile-java`), install the [async-profiler](https://github.com/async-profiler/async-profiler) tool.
 
 ## Download and install APerf
-The easiest way to install APerf is to download a release from GitHub and extract it.
+
+You can install APerf by downloading a release from GitHub and extracting it.
 
 {{%notice Note%}}
-To install the latest version of APerf, replace `v.1.2.2` in the following commands with the identifier for the latest version. To see available releases, visit the [releases page](https://github.com/aws/aperf/releases/).
+The following commands use version `v.1.2.2`. To install the latest version of APerf, replace `v.1.2.2` in the following commands with the identifier for the latest version. To find the latest version, see [releases](https://github.com/aws/aperf/releases/) on GitHub.
 {{%/notice%}}
 
 You can download a release from the command line:
