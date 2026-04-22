@@ -1,13 +1,14 @@
 ---
-title: Add UI Code
+title: Create the UI layouts and message adapter
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Add Layouts
-Currently the `activity_main.xml` layout file in your `app\src\main\res\layout` directory is nearly empty, containing just a "Hello World!" piece of text that we wish to remove. Instead, replace it with the following, which will create a status area at the top, a place for messages in the middle, and a place for you to type at the bottom with a button to send:
+## Create the main activity layout
+
+Currently the `activity_main.xml` layout file in your `app\src\main\res\layout` directory is nearly empty, containing only a "Hello World!" text element. Replace the entire contents with the following XML, which creates a status area at the top, a message list in the middle, and a text input area with a send button at the bottom:
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -74,7 +75,9 @@ Currently the `activity_main.xml` layout file in your `app\src\main\res\layout` 
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
-We also need two small "helper" layouts to format the messages from the user and the AI assistant. In the `layout` folder alongside the main layout, first create `item_message_user.xml` and insert the following:
+## Create message bubble layouts
+
+Create two helper layouts to format messages from the user and the AI assistant. In the `layout` folder alongside the main layout, first create `item_message_user.xml` and insert the following:
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -114,8 +117,9 @@ Then create `item_message_assistant.xml` and put the following as its contents:
 </FrameLayout>
 ```
 
-## Add the MessageAdaptor class
-As a final bit of UI code, we add a `MessageAdapter.kt` code file to put our messages into the correct bit of layout. The file should sit alongside the `MainActivity` class that is auto-created with the project.
+## Create the MessageAdapter class
+
+Create a `MessageAdapter.kt` code file to bind chat messages to the appropriate layout. The file should sit alongside the `MainActivity` class that was auto-created with the project.
 
 {{% notice Package name %}}
 The `package` name below has to match that of your project name. If you named your project `simpleaichat`, you can copy the block without changes. If you named your project differently as you started out this Learning Path, make sure you update it after populating the file.
@@ -177,3 +181,5 @@ Quickly going through the important parts:
 - `onCreateViewHolder(...)` inflates either the user bubble or the assistant bubble layout.
 - `onBindViewHolder(...)` writes the current message text into the row.
 - `getItemCount()` tells the `RecyclerView` how many chat rows it should render.
+
+You've now created all the UI components for the chatbot: the main activity layout, message bubble layouts, and the adapter to display chat messages. In the next section, you'll implement the main activity logic to integrate the AI Chat library and handle user interactions.

@@ -1,22 +1,23 @@
 ---
-title: Add AI Chat Library
+title: Configure the AI Chat library dependency
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-Your freshly created Android Studio project should already have top-level repositories including `google()` and `mavenCentral()` in `settings.gradle.kts`, but check that it does, to ensure the app can find the library.
+Your freshly created Android Studio project should already have top-level repositories including `google()` and `mavenCentral()` in `settings.gradle.kts`. Verify that both repositories are present to ensure the app can find the AI Chat library.
 
-## Add the Maven Dependency
-We need to add the AI Chat library in the app module build file, `app/build.gradle.kts` (not the project `build.gradle.kts` in the root of the project).
+## Add the Maven dependency
 
-In here we add into the `dependencies` section at the bottom:
+Add the AI Chat library in the app module build file `app/build.gradle.kts` (not the project-level `build.gradle.kts` in the root of the project).
+
+In the `dependencies` section at the bottom, add:
 ```kotlin
     implementation("com.arm:ai-chat:0.1.0")
 ```
 
-This adds the library to your project, and all the LLM functionality. Also in this file, check that:
+This adds the library to your project along with all LLM functionality. Also in this file, verify that:
 - `targetSdk` and `compileSdk` are 36
 - the Java version in `compileOptions` is `JavaVersion.VERSION_17`
 - the `jvmTarget` in `kotlinOptions` is 17
@@ -24,15 +25,18 @@ This adds the library to your project, and all the LLM functionality. Also in th
 In `libs.version.toml`, check that:
 - `kotlin` version is `2.2.20`
 
-Finally, there will be a banner at the top of these settings files saying the "Gradle files have changed since last project sync." Choose the option to "Sync Now", and let the project update. 
+Finally, there will be a banner at the top of these settings files saying the "Gradle files have changed since last project sync." Select the option to "Sync Now" and let the project update.
 
-## Adjust the Manifest
-We need to adjust the `AndroidManifest.xml` file, which is in `app\src\main`.
+## Configure the manifest
 
-Most of the file is an xml tag `<application ...>`. Within the tag are several `android:` options. Add in an additional flag to load the needed llama.cpp native libraries:
+Adjust the `AndroidManifest.xml` file, which is in `app\src\main`.
+
+Most of the file consists of an XML tag `<application ...>`. Within the tag are several `android:` options. Add an additional flag to enable loading of the required llama.cpp native libraries:
 ```xml
 <application
     ...
     android:extractNativeLibs="true"
     ... >
 ```
+
+Your project is now configured with the AI Chat library dependency and the necessary manifest settings to load native libraries. In the next section, you'll create the user interface layouts and message adapter for the chat functionality.
