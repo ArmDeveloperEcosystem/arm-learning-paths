@@ -38,7 +38,7 @@ If SSH is missing, please use [Install SSH](https://learn.arm.com/install-guides
 Now that the host device is prepared, we will setup the target. On the host device, connect to your target with SSH.
 
 ```bash
-ssh user@your-target
+ssh user@my-target
 ```
 
 Once connected to the target, use the following commands to verify both Docker and `lscpu` are installed:
@@ -66,7 +66,7 @@ If you are using your host device simultaneously as your target, use `topo healt
 topo health --target user@my-target
 ```
 
-The output should appear similar to:
+The output should appear similar to the example from a heterogeneous SoC below, but will differ depending on your hardware:
 
 ```output
 Host

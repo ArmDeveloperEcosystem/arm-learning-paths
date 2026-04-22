@@ -94,10 +94,10 @@ The LLM chatbot application will appear as below:
 
 ![LLM Chatbot](llm_chatbot.png)
 
-Depending on the permissions you have setup with your target device, you may not be able to use the IP address directly. In this case, you may need to forward to a local port and view at `http://localhost:port_number` instead:
+Depending on the permissions you have setup with your target device, you may not be able to use the IP address directly. In this case, you may need to forward to a local port and view at `http://localhost:<port_number>` instead:
 
 ```bash
-ssh -L 3000:localhost:3000 user@my-target
+ssh -L <port_number>:localhost:<port_number> user@my-target
 ```
 
 To stop a deployed Topo application on the target, run `topo stop` on the host:

@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## What is Topo?
 
-[Topo](https://github.com/arm/topo) is an open-source command-line tool, developed by Arm. Topo connects from a host device (e.g., your development laptop) to an Arm-based Linux target (e.g., a Raspberry Pi) over SSH, detects hardware capabilities, and allows the user to deploy compatible containerized workloads with ease. Topo builds container images on the host, transfers them to the target, and starts the services on the target. Building and deploying on target is also possible. Topo also showcases several sample templates defining workloads you can deploy, including a "Hello World" webpage, an LLM Chatbot, and a SIMD Benchmark comparing Scalar, Neon, and the Scalable Vector Extension (SVE).
+[Topo](https://github.com/arm/topo) is an open-source command-line tool, developed by Arm. Topo connects from a host device (e.g., your development laptop) to an Arm-based Linux target (e.g., a Raspberry Pi) over SSH, detects hardware capabilities, and allows the user to deploy compatible containerized workloads with ease. Topo builds container images on the host, transfers them to the target, and starts the services on the target. Building and deploying on the target is also possible. Topo also showcases several sample templates defining workloads you can deploy, including a "Hello World" webpage, an LLM Chatbot, and a SIMD Benchmark comparing Scalar, Neon, and the Scalable Vector Extension (SVE).
 
 [Topo templates](https://github.com/arm/topo-template-format) are based on the [Compose Specification](https://github.com/compose-spec/compose-spec), extended with `x-topo` metadata that describes requirements such as CPU features and build arguments. The Compose Specification is a standard, YAML-based format for describing how to run multi-container applications. Instead of manually starting containers one-by-one, you define everything in a single file that includes which services to run, what images to use, how they connect, and what configuration they need.
 
@@ -21,7 +21,7 @@ The optional heterogeneous deployment with `remoteproc-runtime` requires a heter
 Topo streamlines deploying containerized workloads to Arm-based Linux devices.
 If you have an heterogeneous device (e.g. Cortex-A + Cortex-M SoC such as the i.MX 93), Topo enables you to use it fully, deploying both firmware and application as containerized workloads through standard container tooling.
 
-Once a template is defined, use of Topo removes the need to deal with low-level setup and compatibility issues manually. Topo first assesses the system to identify processor features such as SVE or Neon on CPU, then advises which templates are appropriate for the device, before automating the end to end deployment, for which Topo deals with all the low-level instructions.
+Once a template is defined, use of Topo removes the need to deal with low-level setup and compatibility issues manually. Topo first assesses the system to identify processor features such as SVE or Neon on CPU, then advises which templates are appropriate for the device. Finally, it automates the end to end deployment, dealing with all the low-level instructions.
 
 Topo can also be leveraged by AI Agents to further streamline and automate.
 
