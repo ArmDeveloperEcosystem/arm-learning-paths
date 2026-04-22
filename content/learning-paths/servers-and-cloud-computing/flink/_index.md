@@ -1,5 +1,6 @@
 ---
 title: Benchmark the performance of Flink on Arm servers
+description: Learn how to install and run Apache Flink on Arm servers and benchmark stream processing performance using the Nexmark benchmark suite.
 
 minutes_to_complete: 30
 

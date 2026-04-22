@@ -5,9 +5,11 @@ minutes_to_complete: 20
 
 who_is_this_for: This is an introductory topic for software developers who want to create a Retrieval-Augmented Generation (RAG) application on Arm servers.
 
+description: Build a Retrieval-Augmented Generation (RAG) application on Arm servers using Zilliz Cloud for vector search and llama.cpp for LLM inference.
+
 learning_objectives: 
-    - Create a simple RAG application using Zilliz Cloud.
-    - Launch an LLM service on Arm servers.
+    - Create a simple RAG application using Zilliz Cloud
+    - Launch an LLM service on Arm servers
 
 prerequisites:
     - A basic understanding of a RAG pipeline.

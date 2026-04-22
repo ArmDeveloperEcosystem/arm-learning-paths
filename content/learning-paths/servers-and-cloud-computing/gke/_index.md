@@ -1,5 +1,6 @@
 ---
 title: Create an Arm-based Kubernetes cluster on Google Cloud Platform (GCP)
+description: Learn how to automate the deployment of an Arm-based Google Kubernetes Engine cluster using Terraform for container orchestration.
  
 minutes_to_complete: 60   
 

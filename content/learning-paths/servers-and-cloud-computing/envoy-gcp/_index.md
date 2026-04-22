@@ -1,5 +1,6 @@
 ---
 title:  Deploy Envoy Proxy on Google Cloud C4A (Arm-based Axion VMs)
+description: Learn how to install and configure Envoy proxy on Google Cloud Axion C4A Arm64 instances and benchmark HTTP proxy performance with load testing.
 
 minutes_to_complete: 30
 

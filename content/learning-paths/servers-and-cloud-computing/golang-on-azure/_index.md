@@ -1,5 +1,6 @@
 ---
 title: Deploy Golang on Azure Cobalt 100 on Arm
+description: Learn how to provision Azure Cobalt 100 Arm64 virtual machines and deploy Golang applications with performance benchmarking on Arm architecture.
 
 minutes_to_complete: 30
 

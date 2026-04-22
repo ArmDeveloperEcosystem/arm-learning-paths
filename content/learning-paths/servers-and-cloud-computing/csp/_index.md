@@ -1,5 +1,6 @@
 ---
 title: Get started with Arm-based cloud instances
+description: Learn how to start an Arm-based virtual machine instance from major cloud service providers and verify the Arm architecture is being used.
 
 author: Ronan Synnott
 
