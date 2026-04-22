@@ -139,7 +139,9 @@ Add the model loading logic that copies the selected GGUF model file to local st
         }
 ```
 
-Next we add the functions for creating and initializing the app:
+## Initialize the app
+
+Add the functions for creating and initializing the app UI and inference engine:
 ```kotlin
     // Wires the UI and prepares the engine for model import.
     override fun onCreate(savedInstanceState: Bundle?) {
