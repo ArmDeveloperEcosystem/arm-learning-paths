@@ -6,6 +6,8 @@ weight: 3
 layout: learningpathall
 ---
 
+## Verify repository configuration
+
 Your freshly created Android Studio project should already have top-level repositories including `google()` and `mavenCentral()` in `settings.gradle.kts`. Verify that both repositories are present to ensure the app can find the AI Chat library.
 
 ## Add the Maven dependency

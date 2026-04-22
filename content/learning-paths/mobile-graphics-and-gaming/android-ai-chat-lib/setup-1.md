@@ -6,6 +6,8 @@ weight: 2
 layout: learningpathall
 ---
 
+## Overview
+
 In this Learning Path you will create a chatbot Android app from scratch that loads a GGUF model and runs it in a conversational format.
 
 The app uses Arm's AI Chat library, available from Maven Central. The library provides an Android wrapper around llama.cpp with optimizations for Arm CPUs, delivering high-performance execution of LLM models in the GGUF format.
