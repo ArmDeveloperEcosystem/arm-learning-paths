@@ -47,35 +47,36 @@ A typical OpenStack deployment consists of:
 * **Networking (Neutron):** Handles virtual networking, bridges, and routing
 * **Storage Services:** Provide block and object storage
 
-In this learning path, OpenStack is deployed using **Kolla-Ansible**, which runs services as containers for easier management.
+## Two deployment approaches
 
+This Learning Path covers two ways to deploy OpenStack on an Azure Cobalt 100 Arm64 VM. Each approach has different requirements and suits a different use case.
 
-## Use cases
+**DevStack** is a script-based installer designed for development and testing. It runs all OpenStack services directly on the host OS and is the fastest way to get a working OpenStack environment. It is not suitable for production.
 
-OpenStack is widely used across industries:
+**Kolla-Ansible** runs every OpenStack service as a Docker container and is the recommended approach for reproducible, production-grade deployments. It takes longer to set up but is easier to manage, upgrade, and extend.
 
-* **Private Cloud Infrastructure:** Build internal cloud platforms
-* **Dev/Test Environments:** Rapid provisioning of virtual machines
-* **Edge Computing:** Lightweight deployments on Arm-based hardware
-* **Telco Cloud:** Network function virtualization (NFV)
-* **Research and HPC:** Scalable compute environments
+| Feature | DevStack | Kolla-Ansible |
+|---------|----------|---------------|
+| Purpose | Development and testing | Production-grade deployment |
+| Deployment method | Shell scripts on host OS | Docker containers via Ansible |
+| Setup time | ~20 minutes | ~60 minutes |
+| Arm64 images required | No | Yes (Debian-based) |
+| Networking | Simplified (Neutron disabled) | Full Neutron with OVS |
+| Horizon dashboard | Yes | Yes |
 
-## Learn more about OpenStack
+Each approach runs on its own dedicated VM. Do not run both on the same virtual machine — they use the same ports and will conflict.
 
-To learn more about OpenStack, see:
+## VM requirements for each deployment
 
-- [OpenStack Official Website](https://www.openstack.org/)  
-- [OpenStack Documentation](https://docs.openstack.org/)  
-- [OpenStack GitHub Repository](https://github.com/openstack)  
-- [Kolla-Ansible Documentation](https://docs.openstack.org/kolla-ansible/latest/)  
+Because the two approaches have different infrastructure requirements, this Learning Path uses two separate Azure VMs.
 
-## What you will learn
+| | VM 1 — DevStack | VM 2 — Kolla-Ansible |
+|-|-----------------|----------------------|
+| vCPUs | 4 | 4 (8 recommended) |
+| RAM | 8 GB | 16 GB recommended |
+| OS disk | 80 GB | 100 GB |
+| Data disk | None | 32 GB (for Cinder/Docker) |
+| NICs | 1 (`eth0` with IP) | 2 (`eth0` management + `eth1` external) |
+| OS | Ubuntu 24.04 | Ubuntu 24.04 |
 
-In this learning path, you will:
-
-* Deploy OpenStack on an Azure Cobalt 100 Arm64 virtual machine
-* Configure core OpenStack services (Keystone, Nova, Neutron, Glance, Cinder)
-* Deploy containerized OpenStack using Kolla-Ansible
-* Set up networking and storage for OpenStack
-* Launch and manage virtual machine instances
-* Access and manage resources using CLI and Horizon dashboard
+You'll create VM 1 first, complete the DevStack deployment, then create and configure VM 2 before the Kolla-Ansible deployment.
