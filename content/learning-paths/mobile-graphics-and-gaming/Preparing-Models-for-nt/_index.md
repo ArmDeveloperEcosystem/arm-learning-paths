@@ -30,11 +30,11 @@ operatingsystems:
     - Mac
 
 further_reading: 
-    - quantize-neural-upscaling-models https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/quantize-neural-upscaling-models/
-    - model-training-gym https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/model-training-gym/
-    - vulkan-ml-sample https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/
-    - VGF library (GitHub) https://github.com/arm/ai-ml-sdk-vgf-library
-    - NSS on Hugging Face https://huggingface.co/Arm/neural-super-sampling
+  - [quantize-neural-upscaling-models](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/quantize-neural-upscaling-models/)
+  - [model-training-gym](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/model-training-gym/)
+  - [vulkan-ml-sample](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/)
+  - [VGF library (GitHub)](https://github.com/arm/ai-ml-sdk-vgf-library)
+  - [NSS on Hugging Face](https://huggingface.co/Arm/neural-super-sampling)
 
 
 
