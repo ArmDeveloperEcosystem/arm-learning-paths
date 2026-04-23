@@ -17,7 +17,7 @@ The goal is not to produce SKU-level counting. Instead, you generate an operatio
 
 This keeps the task practical for on-device multimodal inference. In many retail workflows, deciding **where to restock first** is more useful than attempting perfect item counting from a single photo.
 
-By the end of this section, you will produce a structured shelf audit signal from a local image and verify that it can guide a restocking decision
+By the end of this section, you will produce a structured shelf audit signal from a local image and verify that it can guide a restocking decision.
 
 ## Prepare the image asset
 
@@ -42,7 +42,7 @@ JPEG image data, JFIF standard 1.02, resolution (DPI), density 72x72, segment le
 
 This confirms that the image asset is ready for the vision prompt.
 
-![image1 Pet Food Aisle](pet_food_aisle.jpg)
+![Pet food aisle shelf with multiple levels stocked with pet food products, used as the vision prompt input for the shelf audit#center](pet_food_aisle.jpg "Pet food aisle shelf used for the vision audit prompt")
 
 ## Create the vision prompt
 
@@ -58,12 +58,10 @@ The prompt does four things:
 Create the prompt file:
 
 ```bash
-cat > ~/mnn/prompt_picture_coverage.txt <<'EOF'
-<img>/home/radxa/mnn/assets/Pet_Food_Aisle.jpg</img> You are an on-device retail shelf auditing assistant. Audit ONLY the main left shelf (ignore the aisle on the right, hanging toys, and floor items). Do NOT count every item. Estimate facing coverage for top/middle/bottom as high|medium|low and identify the sparsest zone. Output ONE line only using bullet-style segments separated by semicolons: Shelf audit; - Coverage: top=<high|medium|low>, middle=<high|medium|low>, bottom=<high|medium|low>; - Priority zone: <top|middle|bottom>-<left|center|right>; - Reason: <one short sentence>; - Notes: <NOT_SURE if unclear>.
+cat > ~/mnn/prompt_picture_coverage.txt <<EOF
+<img>$HOME/mnn/assets/Pet_Food_Aisle.jpg</img> You are an on-device retail shelf auditing assistant. Audit ONLY the main left shelf (ignore the aisle on the right, hanging toys, and floor items). Do NOT count every item. Estimate facing coverage for top/middle/bottom as high|medium|low and identify the sparsest zone. Output ONE line only using bullet-style segments separated by semicolons: Shelf audit; - Coverage: top=<high|medium|low>, middle=<high|medium|low>, bottom=<high|medium|low>; - Priority zone: <top|middle|bottom>-<left|center|right>; - Reason: <one short sentence>; - Notes: <NOT_SURE if unclear>.
 EOF
 ```
-
-If your username or home directory is different, replace `/home/radxa` with the correct local path.
 
 ## Run the vision demo
 
@@ -89,11 +87,10 @@ Prepare for tuning opt Begin
 Prepare for tuning opt End
 main, 282, cost time: 766.086975 ms
 prompt file is /home/radxa/mnn/prompt_picture_coverage.txt
-Shelf audit; - Coverage: top=high, middle=high, bottom=medium; - Priority zone: top-left; - Reason: top and middle have more variety than bottom, and left is where most items are; - Notes: NOT_SURE if unclear. How does this sound? Let me know if you need further clarification or have other questions! I'm here to help with more details if you want! 😊
-If you have any other questions about this shelf auditing, feel free to let me know! 😊
+Shelf audit; - Coverage: top=high, middle=high, bottom=medium; - Priority zone: top-left; - Reason: top and middle have more variety than bottom, and left is where most items are; - Notes: NOT_SURE if unclear.
 ```
 
-The exact wording can vary, but the response should still follow the requested structure.
+The exact wording can vary, but the structured fields should be present. If the model appends extra conversational text after the ticket line, tighten the prompt by repeating `Output ONE line only`.
 
 ## Why a coarse coverage estimate is enough for edge workflows
 
