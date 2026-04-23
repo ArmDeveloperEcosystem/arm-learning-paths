@@ -7,6 +7,7 @@ layout: learningpathall
 ---
 ## Installing the explorer
 you will need to download the model explorer and some extensions so use this command: 
+    
     pip install ai-edge-model-explorer 
     pip install torch ai-edge-model-explorer
     pip install pte-adapter-model-explorer
