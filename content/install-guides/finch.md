@@ -22,13 +22,13 @@ multitool_install_part: false
 weight: 1
 ---
 
-[Finch](https://runfinch.com) is an open-source container development tool from AWS. It offers a simple, Docker-compatible CLI powered by containerd and nerdctl. Designed for Linux, macOS, and Windows, Finch is especially useful on Arm-based systems for efficient container workflows.
+[Finch](https://runfinch.com) is an open-source container development tool from Amazon Web Services (AWS). It offers a simple, Docker-compatible CLI powered by containerd and nerdctl. Designed for Linux, macOS, and Windows, Finch is especially useful on Arm-based systems for efficient container workflows.
 
 In this guide, you'll learn how to install Finch on Arm Linux distributions, specifically Amazon Linux 2023 and Ubuntu 24.04.
 
 ## Before you begin
 
-Make sure you're using a system running Arm Linux. You can use a physical Arm device, a cloud instance from AWS, Azure, GCP, or OCI, or an Arm-based virtual machine. 
+Make sure you're using a system running Arm Linux. You can use a physical Arm device, a cloud instance from AWS, Azure, Google Cloud Platform (GCP), Oracle Cloud Infrastructure (OCI), or an Arm-based virtual machine. 
 
 To confirm the architecture, run:
 
