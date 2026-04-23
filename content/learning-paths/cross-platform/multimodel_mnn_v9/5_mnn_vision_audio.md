@@ -14,16 +14,21 @@ To keep the output predictable, this module uses a single-line format with semic
 
 ## Prepare the audio asset
 
-This example assumes that `restock_note.wav` contains a short spoken instruction describing what to restock.
+To simplify the demonstration and improve clarity for this learning path, directly download the prepared audio file:
 
-A suitable recording might say:
+```bash
+mkdir ~/mnn/assets
+wget wget https://github.com/odincodeshen/multimodel_mnn_armv9/raw/main/assets/restock_note.wav -P ~/mnn/assets
+```
+
+This audio `restock_note.wav` contains brief spoken instructions describing restocking tasks, such as:
 
 - please restock the bottom-left large pet food bags, add ten bags
 - also restock the middle-left canned pet food, add twenty-four cans
 - finish before 3 PM today
 - if something is out of stock, use a similar substitute
 
-From that audio, the model should extract:
+The model’s goal is to extract structured operational information from this audio, specifically:
 
 - items
 - quantities
@@ -31,7 +36,7 @@ From that audio, the model should extract:
 - deadline
 - substitution policy
 
-The goal is not full speech analytics. The goal is to turn a short spoken instruction into a compact operational ticket.
+The objective isn’t comprehensive speech analytics but efficiently converting spoken instructions into a compact operational ticket.
 
 ## Verify the audio format
 
@@ -43,7 +48,7 @@ file ~/mnn/assets/restock_note.wav
 
 You should see output indicating that the file is a RIFF/WAV audio file.
 
-If you only have an MP3 recording, convert it to a speech-friendly WAV format:
+If you'd like to record the audio by yourself as MP3 format, please convert it to a speech-friendly WAV format:
 
 ```bash
 ffmpeg -y -i input.mp3 -ac 1 -ar 16000 -c:a pcm_s16le ~/mnn/assets/restock_note.wav
