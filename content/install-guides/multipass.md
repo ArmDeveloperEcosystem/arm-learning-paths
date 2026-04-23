@@ -53,6 +53,10 @@ Multipass uses the terms virtual machine and instance synonymously.
 
 Download Multipass for macOS.
 
+{{% notice Note %}}
+The following commands use Multipass version 1.16.1. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Multipass releases](https://github.com/canonical/multipass/releases).
+{{% /notice %}}
+
 ```console
 wget https://github.com/canonical/multipass/releases/download/v1.16.1/multipass-1.16.1+mac-Darwin.pkg
 ```

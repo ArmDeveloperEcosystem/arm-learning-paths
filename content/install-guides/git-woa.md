@@ -36,6 +36,10 @@ Use a browser to download the desired release file. The Git releases for Windows
 
 You can also download from a Windows PowerShell with the following command:
 
+{{% notice Note %}}
+The following command uses Git version 2.53.0. The same command works with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest Git releases, see [GitHub releases](https://github.com/git-for-windows/git/releases/).
+{{% /notice %}}
+
 ```command
 curl https://github.com/git-for-windows/git/releases/download/v2.53.0.windows.1/Git-2.53.0-arm64.exe -o Git-2.53.0-arm64.exe
 ```

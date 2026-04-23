@@ -33,6 +33,10 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 ## How do I download and install the LLVM toolchain for Windows on Arm?
 
+{{% notice Note %}}
+The following commands use LLVM version 18.1.8. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [LLVM releases](https://github.com/llvm/llvm-project/releases).
+{{% /notice %}}
+
 The latest version (at the time of writing) of the LLVM toolchain with Windows on Arm native support is 18.1.8. [Download the pre-built binary](https://github.com/llvm/llvm-project/releases/download/llvmorg-18.1.8/LLVM-18.1.8-woa64.exe).
 
 {{% notice Note %}}

@@ -87,6 +87,10 @@ Download the `.zip` file from the [Windows Perf WPA plugin releases page](https:
 
 Alternatively, you can download the `.zip` file from a command prompt:
 
+{{% notice Note %}}
+The following commands use Windows Perf WPA Plugin version 1.0.3. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Windows Perf WPA Plugin releases](https://gitlab.com/Linaro/WindowsPerf/wpa-plugin/-/releases).
+{{% /notice %}}
+
 ```console
 mkdir wpa-plugin
 cd wpa-plugin

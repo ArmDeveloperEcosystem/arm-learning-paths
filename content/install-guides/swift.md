@@ -69,11 +69,11 @@ sudo apt-get -y install \
 
 ## How do I download and install Swift?
 
-This guide uses Swift version 6.1.2 on Ubuntu 24.04. 
-
-You can get more information about other versions and platforms from [Download Swift](https://www.swift.org/download/).
-
 Download Swift for Arm Linux:
+
+{{% notice Note %}}
+The following commands use Swift version 6.1.2 on Ubuntu 24.04. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find all available versions, see [Download Swift](https://www.swift.org/download/).
+{{% /notice %}}
 
 ```bash
 wget https://download.swift.org/swift-6.1.2-release/ubuntu2404-aarch64/swift-6.1.2-RELEASE/swift-6.1.2-RELEASE-ubuntu24.04-aarch64.tar.gz

@@ -52,6 +52,10 @@ Download a release of OpenVSCode Server from the [GitHub release area](https://g
 
 For example, use `wget` to download.
 
+{{% notice Note %}}
+The following commands use OpenVSCode Server version 1.101.2. The same command works with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [OpenVSCode Server releases](https://github.com/gitpod-io/openvscode-server/releases).
+{{% /notice %}}
+
 ```bash
 wget https://github.com/gitpod-io/openvscode-server/releases/download/openvscode-server-v1.101.2/openvscode-server-v1.101.2-linux-arm64.tar.gz 
 ```

@@ -66,6 +66,10 @@ Download the Sysbox official package from [Sysbox Releases](https://github.com/n
 
 You can download the Debian package for Arm from the command line:
 
+{{% notice Note %}}
+The following commands use Sysbox version 0.6.5. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Sysbox releases](https://github.com/nestybox/sysbox/releases/).
+{{% /notice %}}
+
 ```bash
 wget https://downloads.nestybox.com/sysbox/releases/v0.6.5/sysbox-ce_0.6.5-0.linux_arm64.deb
 ```

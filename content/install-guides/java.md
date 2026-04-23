@@ -96,6 +96,10 @@ You can download a tar.gz file from [Download the Microsoft Build of OpenJDK](ht
 
 For example:
 
+{{% notice Note %}}
+The following commands use Microsoft Build of OpenJDK version 21.0.4. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Download the Microsoft Build of OpenJDK](https://learn.microsoft.com/en-gb/java/openjdk/download).
+{{% /notice %}}
+
 ```console
 wget https://aka.ms/download-jdk/microsoft-jdk-21.0.4-linux-aarch64.tar.gz
 ```
@@ -295,6 +299,10 @@ sudo apt install gradle -y
 
 You can also install specific versions by downloading and extracting a zip file:
 
+{{% notice Note %}}
+The following commands use Gradle version 8.10. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Gradle releases](https://gradle.org/releases/).
+{{% /notice %}}
+
 ```console
 wget https://services.gradle.org/distributions/gradle-8.10-bin.zip -O gradle-8.10-bin.zip
 unzip gradle-8.10-bin.zip
@@ -350,6 +358,10 @@ sudo apt install ant -y
 
 You can also install specific versions by downloading and extracting a zip file:
 
+{{% notice Note %}}
+The following commands use Apache Ant version 1.10.14. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Apache Ant downloads](https://ant.apache.org/bindownload.cgi).
+{{% /notice %}}
+
 ```console
 wget https://downloads.apache.org/ant/binaries/apache-ant-1.10.14-bin.zip -O apache-ant-1.10.14-bin.zip
 unzip apache-ant-1.10.14-bin.zip
@@ -374,6 +386,10 @@ Apache Ant(TM) version 1.10.14 compiled on August 16 2023
 JMeter is an open-source tool designed for performance and load testing Java applications. 
 
 You can install it using:
+
+{{% notice Note %}}
+The following commands use Apache JMeter version 5.6.3. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Apache JMeter downloads](https://jmeter.apache.org/download_jmeter.cgi).
+{{% /notice %}}
 
 ```console
 wget https://downloads.apache.org/jmeter/binaries/apache-jmeter-5.6.3.tgz

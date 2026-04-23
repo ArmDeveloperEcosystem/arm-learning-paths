@@ -35,6 +35,10 @@ The [LLVM Embedded Toolchain for Arm](https://github.com/ARM-software/LLVM-embed
 
 Copy and paste the URL below into your browser to download the latest release from GitHub:
 
+{{% notice Note %}}
+The following step uses LLVM Embedded Toolchain for Arm version 18.1.3. The same step works with other versions. Replace the file used in this step with the file for your version of choice. To find the latest version, see [LLVM Embedded Toolchain releases](https://github.com/ARM-software/LLVM-embedded-toolchain-for-Arm/releases).
+{{% /notice %}}
+
 ```url
 https://github.com/ARM-software/LLVM-embedded-toolchain-for-Arm/releases/download/release-18.1.3/LLVM-ET-Arm-18.1.3-Windows-x86_64.zip
 ```
@@ -48,6 +52,10 @@ Open a `Command Prompt` and [test your installation](#test).
 ## How do I install the LLVM Embedded Toolchain for Arm on macOS? {#macos}
 
 Copy and paste the URL below into your browser to download the latest release from GitHub:
+
+{{% notice Note %}}
+The following step uses LLVM Embedded Toolchain for Arm version 18.1.3. The same step works with other versions. Replace the file used in this step with the file for your version of choice. To find the latest version, see [LLVM Embedded Toolchain releases](https://github.com/ARM-software/LLVM-embedded-toolchain-for-Arm/releases).
+{{% /notice %}}
 
 ```url
 https://github.com/ARM-software/LLVM-embedded-toolchain-for-Arm/releases/download/release-18.1.3/LLVM-ET-Arm-18.1.3-Darwin-universal.dmg
@@ -74,7 +82,11 @@ You can now [test your installation](#test).
 
 The information below assumes `Ubuntu Linux` on an `AArch64` host. Modify the filenames and paths as needed for other hosts.
 
-Download the latest release using `wget`: 
+Download the latest release using `wget`:
+
+{{% notice Note %}}
+The following commands use LLVM Embedded Toolchain for Arm version 18.1.3. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [LLVM Embedded Toolchain releases](https://github.com/ARM-software/LLVM-embedded-toolchain-for-Arm/releases).
+{{% /notice %}}
 
 ```command
 wget https://github.com/ARM-software/LLVM-embedded-toolchain-for-Arm/releases/download/release-18.1.3/LLVM-ET-Arm-18.1.3-Linux-AArch64.tar.xz

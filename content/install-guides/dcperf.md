@@ -183,8 +183,7 @@ You can use these metrics to evaluate the performance and reliability of the sys
 
 ## Next steps
 
-You are now ready to use DCPerf. The following are some activities you may like to try next:
-
+You are now ready to use DCPerf. The following are some activities you can try next:
 * Use the results to compare performance across different systems, hardware configurations, or after making system changes, such as kernel, compiler, or driver updates.
 
 * Consider tuning system parameters or trying alternative DCPerf benchmarks to further evaluate your environment.

@@ -35,7 +35,11 @@ This install guide assumes an Arm AArch64 platform running Ubuntu Linux.
 
 ## How do I download Linaro Forge?
 
-Download and extract the appropriate installation package from [Linaro Forge Downloads](https://www.linaroforge.com/downloadForge/).
+Download and extract the appropriate installation package: 
+
+{{% notice Note %}}
+The following command uses Linaro Forge version 24.0.3. The same command works with other versions. Replace the file used in this step with the file for your version of choice. To find the latest version, see [Linaro Forge Downloads](https://www.linaroforge.com/downloadForge/).
+{{% /notice %}}
 
 ```bash { target="ubuntu:latest" }
 sudo apt install wget

@@ -62,6 +62,10 @@ fi
 
 Use a text editor to copy and paste this script into a file on the remote machine at `$HOME/install-nomachine.sh`
 
+{{% notice Note %}}
+The following commands use NoMachine version 9.0.188. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [NoMachine downloads](https://downloads.nomachine.com/).
+{{% /notice %}}
+
 ```file { file_name="install-nomachine.sh" }
 #!/bin/bash
 

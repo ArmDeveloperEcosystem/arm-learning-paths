@@ -60,6 +60,10 @@ export PATH=/path/to/install/dir/bin:$PATH
 
 Here is a specific example for an Arm Linux host and the AArch32 bare-metal target.
 
+{{% notice Note %}}
+The following commands use Arm GNU Toolchain version 15.2.Rel1. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Arm GNU Toolchain downloads](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads).
+{{% /notice %}}
+
 ```bash { target="ubuntu:latest" }
 wget https://developer.arm.com/-/media/Files/downloads/gnu/15.2.rel1/binrel/arm-gnu-toolchain-15.2.rel1-aarch64-arm-none-eabi.tar.xz
 tar xJf arm-gnu-toolchain-15.2.rel1-aarch64-arm-none-eabi.tar.xz -C $HOME
@@ -104,6 +108,10 @@ The `/etc/paths` file is a list of paths to search.
 ### Apple Silicon
 
 Here is a specific example for macOS with Apple Silicon and the AArch32 bare-metal target.
+
+{{% notice Note %}}
+The following commands use Arm GNU Toolchain version 15.2.Rel1. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Arm GNU Toolchain downloads](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads).
+{{% /notice %}}
 
 ```console
 wget https://developer.arm.com/-/media/Files/downloads/gnu/15.2.rel1/binrel/arm-gnu-toolchain-15.2.rel1-darwin-arm64-arm-none-eabi.pkg

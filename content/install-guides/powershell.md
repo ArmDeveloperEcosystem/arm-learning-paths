@@ -49,6 +49,10 @@ The PowerShell installation documentation for Linux package managers does not wo
 
 You can download a release file for the Arm architecture from GitHub and install it using the steps below:
 
+{{% notice Note %}}
+The following commands use PowerShell version 7.5.2. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [PowerShell releases](https://github.com/PowerShell/PowerShell/releases).
+{{% /notice %}}
+
 1. Copy and paste the commands below to your Linux shell prompt:
 
 ```bash { target="ubuntu:latest" }
