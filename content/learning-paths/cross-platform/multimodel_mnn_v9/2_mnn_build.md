@@ -6,9 +6,9 @@ layout: learningpathall
 
 ## Introduction
 
-In this module you will build **MNN** natively on your Armv9 Linux system and verify that the `llm_demo` binary can load a **prebuilt Omni MNN model package**. This sets up everything needed for the text, vision, and audio demos in later modules.
+In this section, you will build **MNN** natively on your Armv9 Linux system and verify that the `llm_demo` binary can load a **prebuilt Omni MNN model package**. This sets up everything needed for the text, vision, and audio demos in later sections.
 
-This module uses a native **CPU-only** MNN build on Armv9. That is a deliberate design choice, not a fallback. The goal is to show how a compact, reproducible, deployment-friendly software stack can run directly on an Armv9 CPU without depending on a discrete GPU or separate accelerator.
+This section uses a native **CPU-only** MNN build on Armv9. That is a deliberate design choice, not a fallback. The goal is to show how a compact, reproducible, deployment-friendly software stack can run directly on an Armv9 CPU without depending on a discrete GPU or separate accelerator.
 
 At the end of this module, you will have:
 
@@ -44,11 +44,11 @@ cd MNN
 Configure and build MNN with LLM, audio, and Omni support enabled:
 
 ```bash
-
 rm -rf build
 mkdir build && cd build
 
 cmake .. \
+  -DCMAKE_BUILD_TYPE=Release \
   -DMNN_BUILD_SHARED=ON \
   -DMNN_BUILD_LLM=ON \
   -DMNN_BUILD_AUDIO=ON \
@@ -89,7 +89,14 @@ cd ~/mnn/MNN/build
 ldd ./llm_demo | grep -E "libMNN|Express|Audio|OpenCV" || true
 ```
 
-You should see `libMNN.so` and `libMNN_Express.so` resolving from the `~/mnn/MNN/build` tree.
+You should see `libMNN.so` and `libMNN_Express.so` resolving from the `~/mnn/MNN/build` tree. A correct result looks similar to:
+
+```text
+libMNNAudio.so => /home/radxa/mnn/MNN/build/tools/audio/libMNNAudio.so (0x0000ffffb6d00000)
+libMNN_Express.so => /home/radxa/mnn/MNN/build/express/libMNN_Express.so (0x0000ffffb6c00000)
+libMNN.so => /home/radxa/mnn/MNN/build/libMNN.so (0x0000ffffb6600000)
+libMNNOpenCV.so => /home/radxa/mnn/MNN/build/tools/cv/libMNNOpenCV.so (0x0000ffffb61a0000)
+```
 
 An incorrect result looks like this, where `libMNN.so` is loaded from another location:
 
@@ -106,6 +113,13 @@ If `libMNN.so` resolves from a different directory, update `LD_LIBRARY_PATH` to 
 export LD_LIBRARY_PATH=$HOME/mnn/MNN/build:$HOME/mnn/MNN/build/express:$HOME/mnn/MNN/build/tools/audio:$HOME/mnn/MNN/build/tools/cv:${LD_LIBRARY_PATH:-}
 ```
 
+To make this setting persistent across terminal sessions, add it to your shell profile:
+
+```bash
+echo 'export LD_LIBRARY_PATH=$HOME/mnn/MNN/build:$HOME/mnn/MNN/build/express:$HOME/mnn/MNN/build/tools/audio:$HOME/mnn/MNN/build/tools/cv:${LD_LIBRARY_PATH:-}' >> ~/.bashrc
+source ~/.bashrc
+```
+
 Run the check again:
 
 ```bash
@@ -114,7 +128,7 @@ ldd ./llm_demo | grep -E "libMNN|Express|Audio|OpenCV" || true
 
 ## Download the prebuilt Omni model package
 
-This learning path uses a prebuilt [Omni model package](https://huggingface.co/taobao-mnn/Qwen2.5-Omni-7B-MNN) that is already prepared for MNN deployment.
+This Learning Path uses a prebuilt [Omni model package](https://huggingface.co/taobao-mnn/Qwen2.5-Omni-7B-MNN) that is already prepared for MNN deployment.
 
 Clone the model repository into your workspace:
 
@@ -128,7 +142,7 @@ cd ~/mnn/Qwen2.5-Omni-7B-MNN
 
 Check that the repository contains the expected configuration and model files:
 
-```bash id="vvl302"
+```bash
 ls -lh ~/mnn/Qwen2.5-Omni-7B-MNN
 ```
 
@@ -155,7 +169,7 @@ Some environments fetch the large model files automatically when you clone the r
 
 Install Git LFS:
 
-```bash id="lfsins1"
+```bash
 sudo apt-get update
 sudo apt-get install -y git-lfs
 git lfs install
@@ -163,7 +177,7 @@ git lfs install
 
 Then download the large model files:
 
-```bash id="3hpv8k"
+```bash
 cd ~/mnn/Qwen2.5-Omni-7B-MNN
 git lfs pull
 ```
@@ -174,23 +188,23 @@ Downloading the full model weights can take a while depending on your network co
 
 After `git lfs pull`, verify the files again:
 
-```bash id="mfchk2"
+```bash
 ls -lh ~/mnn/Qwen2.5-Omni-7B-MNN/llm.mnn ~/mnn/Qwen2.5-Omni-7B-MNN/llm.mnn.weight
 ```
 
 {{% notice Note %}}
 This package is already prepared for MNN deployment.
 
-You do not need to export the model from PyTorch or run additional quantization steps before using it in this learning path.
+You do not need to export the model from PyTorch or run additional quantization steps before using it in this Learning Path.
 {{% /notice %}}
 
 ## Check your setup
 
-Start `llm_demo` with the model configuration:
+Run `llm_demo` with the model configuration to verify the binary loads correctly:
 
 ```bash
 cd ~/mnn/MNN/build
 ./llm_demo ~/mnn/Qwen2.5-Omni-7B-MNN/config.json
 ```
 
-If the binary starts without `undefined symbol` errors or missing library messages, your environment is ready for the next module.
+The binary starts an interactive session. Type `exit` or press Ctrl+C to quit. If the binary loads without `undefined symbol` errors or missing library messages, your environment is ready for the next section.

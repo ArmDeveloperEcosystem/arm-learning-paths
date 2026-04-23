@@ -5,7 +5,7 @@ draft: true
 cascade:
     draft: true
     
-minutes_to_complete: 60
+minutes_to_complete: 90
 
 who_is_this_for: This learning path is for developers and engineers who want to run multimodal image, audio, and text models on Armv9 Linux systems using MNN as a portable, CPU-first inference runtime. It is aimed at readers who are comfortable building software from source and want a reproducible on-device workflow without quantization or heterogeneous scheduling.
 
@@ -31,7 +31,7 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
-    - Python
+    - CMake
     - CPP
     - Bash
 
@@ -51,10 +51,6 @@ further_reading:
         title: ModelScope model hub
         link: https://modelscope.cn/models
         type: website
-    - resource:
-        title: Run ERNIE-4.5 Mixture of Experts model on Armv9 with llama.cpp
-        link: /learning-paths/cross-platform/ernie_moe_v9/
-        type: learningpath
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

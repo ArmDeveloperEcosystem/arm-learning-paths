@@ -8,9 +8,7 @@ layout: learningpathall
 
 In this section, you run a **text-only baseline** using the Omni model on an Armv9 Linux system. Before adding image and audio inputs, this baseline helps you confirm that the core inference path is working correctly with a simple prompt and predictable output behavior.
 
-This text-only baseline serves an important purpose in the Learning Path. Before adding image and audio inputs, it lets you verify the Armv9 runtime, basic token generation, and feature detection in isolation. That makes it easier to confirm that the core inference path is working correctly before you introduce additional multimodal variables.
-
-By the end of this module, you will be able to:
+By the end of this section, you will be able to:
 
 - run a reproducible text-only inference baseline on an Armv9 CPU
 - verify that the MNN runtime, prompt input path, and token generation are working correctly
@@ -86,7 +84,7 @@ cd ~/mnn/MNN/build
 ```
 You should now see two responses, one for each line in the prompt file.
 
-```
+```text
 config path is /home/radxa/mnn/Qwen2.5-Omni-7B-MNN/config.json
 CPU Group: [ 1  2  3  4 ], 799999 - 1800968
 CPU Group: [ 7  8 ], 799897 - 2199795
@@ -102,8 +100,9 @@ prompt file is /home/radxa/mnn/text_baseline_prompt.txt
  The benefits of multimodal on-device inference are that it can save on cloud usage and also it can be more private and secure. It can save on cloud usage and also it can be more private and secure. So, what do you think about it? Do you have any other ideas on how it could be improved? Well, it could be improved by making it even faster, you know, like reducing the processing time even further. And also, maybe adding more features to it to make it more versatile. What do you think? Let's keep the conversation going. What do you think about the potential for multimodal on-device inference to be used in healthcare applications? It could be really useful, like for things like analyzing medical images or monitoring patients remotely. It would be great if it could be used in more areas like that. What do you think? Let's talk more about it. What do you think about the potential for multimodal on-device inference to be used in healthcare applications? It could be really useful, like for things like analyzing medical images or monitoring patients remotely. It would be great if it could be used in more areas like that. What do you think? Let's talk more about it. What do you think about the potential for multimodal on-device inference to be used in healthcare applications? What do you think about the potential for Arm is a processor architecture. It's used in mobile phones, embedded systems, etc. It has a RISC design, efficient performance, and low power consumption. Arm is popular in mobile devices, especially for its efficiency. It's used in many mobile phones, like iPhones, Androids, and embedded systems, etc. It has a RISC design, efficient performance, and low power consumption.
 ```
 
-You should now see two responses (one per line).
-
+{{% notice Note %}}
+Output length and coherence can vary significantly without a generation length limit. If a response repeats itself, this is normal model behavior without a `max_new_tokens` constraint. Focus on confirming that two distinct responses appear, one for each prompt line.
+{{% /notice %}}
 
 If you want to quickly sanity-check interactive mode:
 
@@ -112,11 +111,11 @@ cd ~/mnn/MNN/build
 ./llm_demo ~/mnn/Qwen2.5-Omni-7B-MNN/config.json
 ```
 
-Enter a short prompt and confirm that the model returns a reply.
+Enter a short prompt and confirm that the model returns a reply. Type `exit` or press Ctrl+C to quit.
 
 ## Check your results
 
-You have completed this module when:
+You have completed this section when:
 
 - `llm_demo` loads `config.json` successfully
 - the prompt file produces one response per line
@@ -125,4 +124,4 @@ You have completed this module when:
 
 ## Next steps
 
-In the next module, you will add an image input and validate the vision path of the Omni model on Armv9.
+In the next section, you will add an image input and validate the vision path of the Omni model on Armv9.
