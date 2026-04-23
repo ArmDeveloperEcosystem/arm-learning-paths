@@ -17,9 +17,7 @@ This learning path will give you snippets of code. whilst it's relatively simple
 ## Setup requirements
 This learning path will be using python 3.11 so you will need to install that version alternatively you can run this script (Link to download setup script) to get the environment set-up and ready to go
 
-De sure to follow the steps below so we can start using the sample code
-
-{copy setup from min example/leoa}
+Be sure to follow the steps below so we can start using the sample code
 
     cd repo/executorch
     ./install_executorch.sh
