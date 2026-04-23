@@ -17,7 +17,7 @@ you will need to download the model explorer and some extensions so use this com
 
 we will now view our models in the model explorer with the below command 
 
-model-explorer --extensions=pte_adapter_model_explorer
+    model-explorer --extensions=pte_adapter_model_explorer
 
 we do this in order to have proper visibility into our models operations
 
