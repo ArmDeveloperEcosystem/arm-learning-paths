@@ -19,8 +19,6 @@ learning_objectives:
 prerequisites:
     - An Armv9 Linux device with at least 32 GB of available disk space, for example a Radxa Orion O6
     - Familiarity with the Linux command line, Git, and building C++ projects with CMake
-    - `cmake`, `git`, and `git-lfs` installed on your Armv9 system
-    - `ffmpeg` installed, required only if you need to convert an MP3 recording to WAV in the audio section
     - Internet access to download source code, model assets, and sample data
 
 author: Odin Shen
