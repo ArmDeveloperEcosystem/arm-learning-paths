@@ -15,13 +15,13 @@ This is effectively like having a model trained to generate images based on smal
 
 This is especially useful for mobile games because:
 
-    - Better visuals with less power – you get high-quality graphics without overloading the GPU.
+- Better visuals with less power – you get high-quality graphics without overloading the GPU.
 
-    - Longer battery life – less heavy rendering means lower energy use.
+- Longer battery life – less heavy rendering means lower energy use.
 
-    - Smaller game sizes – fewer large textures are needed if detail can be reconstructed.
+- Smaller game sizes – fewer large textures are needed if detail can be reconstructed.
 
-    - Real-time performance – ML models can run quickly on dedicated hardware like the Ethos-U NPUs.
+- Real-time performance – ML models can run quickly on dedicated hardware like the Ethos-U NPUs.
 
 This learning path aims to teach you the methodology of preparing a model for a neural graphics pipeline. we are using a basic model here for teaching purposes. 
 
