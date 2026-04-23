@@ -124,7 +124,8 @@ this set of commands assumes your current setup for base is in the executorch re
 
 note that we can only run the VKML on .pte so if you wish to use it then you stick to the executorch flow above 
 
-{Code + commands to run vkml}
+
+    
     import subprocess
 
     cwd_dir = os.getcwd()
@@ -140,10 +141,10 @@ note that we can only run the VKML on .pte so if you wish to use it then you sti
 
 
     
-    In our output we can see: 
+In our output we can see: 
 
     outputX 0: tensor(sizes = [1,1,1,1], [0.880797])
 
-    this final output value of 0.88797 is a presigmoid value of 2 whic is what we expect
+this final output value of 0.88797 is a presigmoid value of 2 which is what we expect
 
  
