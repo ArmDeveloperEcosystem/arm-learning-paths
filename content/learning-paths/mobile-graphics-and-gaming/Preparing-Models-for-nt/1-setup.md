@@ -15,7 +15,7 @@ This learning path requires that you are on linux or arm mac.
 This learning path will give you snippets of code. whilst it's relatively simple to slot the code snippets in the correct order we reccommend that you use a jupyter notebook for ease of understanding to ensure you get the most out of this. as sequencing is a very important especially as models get more complicated and we perform heavier operations 
 
 ## Setup requirements
-This learning path will be using python 3.11.14 so you will need to install that version alternatively you can run this script (Link to download setup script) to get the environment set-up and ready to go
+This learning path will be using python 3.11 so you will need to install that version alternatively you can run this script (Link to download setup script) to get the environment set-up and ready to go
 
 De sure to follow the steps below so we can start using the sample code
 
