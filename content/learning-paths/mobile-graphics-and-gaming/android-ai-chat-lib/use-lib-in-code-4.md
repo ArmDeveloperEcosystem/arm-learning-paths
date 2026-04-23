@@ -1,15 +1,16 @@
 ---
-title: Use AI Chat Library in Code
+title: Implement the main activity logic
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## MainActivity.kt
-Finally we need to put the app logic in `MainActivity.kt` and use the AI Chat library to interact with the LLM.
+## Implement MainActivity
 
-Firstly we need to add in all the imports the code will need. Replace the default imports with:
+Implement the app logic in `MainActivity.kt` to use the AI Chat library for LLM interaction.
+
+First, replace the default imports with the following:
 ```kotlin
 import android.os.Bundle
 import android.net.Uri
@@ -37,7 +38,9 @@ import java.util.UUID
 import kotlin.math.max
 ```
 
-Next, within the MainActivity class, we need to set all the class variables we'll need:
+## Define class variables
+
+Within the `MainActivity` class, define all the class variables needed for UI components and AI Chat functionality:
 ```kotlin
 class MainActivity : AppCompatActivity() {
     private lateinit var rootView: androidx.constraintlayout.widget.ConstraintLayout    // Root layout used to apply resizing.
@@ -57,9 +60,9 @@ class MainActivity : AppCompatActivity() {
     private var loadedModelName = "chat.gguf"    // Remembers the original imported filename for status text.
 ```
 
-Our last couple of variables and first few functions are for loading.  It copies the chosen GGUF model file to local storage as "chat.gguf" and loads it. There's also a function to keep track of the original name for display purposes.
+## Implement model loading
 
-```kotlin
+Add the model loading logic that copies the selected GGUF model file to local storage and loads it into the inference engine:
     // Fixed local destination for the copied model file.
     private val importedModelFile: File
         get() = File(ensureModelsDirectory(), "chat.gguf")
@@ -136,7 +139,9 @@ Our last couple of variables and first few functions are for loading.  It copies
         }
 ```
 
-Next we add the functions for creating and initializing the app:
+## Initialize the app
+
+Add the functions for creating and initializing the app UI and inference engine:
 ```kotlin
     // Wires the UI and prepares the engine for model import.
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -184,7 +189,9 @@ Next we add the functions for creating and initializing the app:
     }
 ```
 
-After initializing and loading, we have a function for the messaging that is the chatbot. It handles sending tokens you type to the LLM, and streaming back output tokens to the UI. Also below is a helper function for resizing the app with the keyboard showing etc.
+## Handle chat messaging
+
+Implement the chat messaging logic that sends user prompts to the LLM and streams the response tokens back to the UI:
 ```kotlin
     // Sends the current prompt and streams the assistant response into the last row.
     private fun sendCurrentPrompt() {
@@ -263,7 +270,9 @@ After initializing and loading, we have a function for the messaging that is the
     }
 ```
 
-And finally a clean-up function for app close:
+## Clean up resources
+
+Add the cleanup function to release native resources when the activity is destroyed:
 ```kotlin
     // Releases native resources when the activity is destroyed.
     override fun onDestroy() {
@@ -274,4 +283,4 @@ And finally a clean-up function for app close:
     }
 ```
 
-And that's it! You have a chatbot app that should compile, and on the next page we run it...
+The `MainActivity` class now contains all the logic needed to load models, send prompts, and display streamed responses. In the next section, you'll download a model and run the app on your device.
