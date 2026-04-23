@@ -145,6 +145,6 @@ In our output we can see:
 
     outputX 0: tensor(sizes = [1,1,1,1], [0.880797])
 
-this final output value of 0.88797 is a presigmoid value of 2 which is what we expect
+this final output value of 0.88797 has a presigmoid value of 2 which is what we expect
 
  
