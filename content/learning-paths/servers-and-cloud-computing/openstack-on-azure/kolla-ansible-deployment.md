@@ -10,6 +10,8 @@ layout: learningpathall
 
 {{% notice Note %}}Use the virtual machine prepared for Kolla-Ansible deployment (with dual NICs and a data disk). This setup is required for proper networking and storage configuration.{{% /notice %}}
 
+{{% notice Warning %}}**DevStack and Kolla-Ansible are separate deployment approaches and must not run on the same VM at the same time.** If you have previously run a DevStack deployment on this VM, stop it completely before proceeding. Kolla-Ansible deploys OpenStack services as Docker containers on the same ports that DevStack uses. Running both on the same host will cause port conflicts and service startup failures. Use a separate VM for each approach, or unstack DevStack fully before attempting this deployment.{{% /notice %}}
+
 This guide walks you through deploying OpenStack using Kolla-Ansible on an Azure Ubuntu 24.04 Arm64 virtual machine.
 
 Kolla-Ansible deploys OpenStack services as Docker containers, making the deployment modular, reproducible, and easier to manage.
@@ -56,7 +58,7 @@ meson ninja-build curl
 
 These packages are required for Python builds and OpenStack dependencies.
 
-## install Docker
+## Install Docker
 
 Docker is used to run all OpenStack services as containers.
 
@@ -139,6 +141,8 @@ neutron_external_interface: "eth1"
 kolla_internal_vip_address: "127.0.0.1"
 
 enable_keepalived: "no"
+
+nova_compute_virt_type: "qemu"
 ```
 
 ### Why this configuration?
@@ -146,7 +150,8 @@ enable_keepalived: "no"
 - **Debian base** → Arm images are available
 - **aarch64 suffix** → ensures correct image selection
 - **VIP = VM IP** → avoids Azure networking issues
-- **HA disabled**→ required for single-node deployments
+- **HA disabled** → required for single-node deployments
+- **nova_compute_virt_type=qemu** → overrides the default KVM setting globally; ensures Nova uses QEMU on Arm VMs where KVM is unavailable
 
 
 ## Configure Nova (Arm fix)
@@ -164,7 +169,7 @@ EOF
 
 ### Why this is required
 
-Arm-based Azure VMs do not support KVM virtualization. Using QEMU ensures that instances can be launched successfully.
+Arm-based Azure VMs do not support KVM virtualization. Setting `virt_type = qemu` and `cpu_mode = none` ensures Nova uses QEMU emulation, which works on Arm VMs where KVM is unavailable. Kolla deploys libvirt inside its own `nova_libvirt` container and manages the connection URI automatically.
 
 ## Generate passwords
 
@@ -176,7 +181,17 @@ This creates all required passwords for OpenStack services.
 
 ## Deploy OpenStack
 
-Run the following commands in order:
+The deployment runs in five stages. Each stage must complete successfully before the next one starts.
+
+| Stage | Command | What it does |
+|-------|---------|-------------|
+| Bootstrap | `bootstrap-servers` | Configures the host: Docker users, directories, and system settings |
+| Prechecks | `prechecks` | Validates that the environment meets all requirements |
+| Pull | `pull` | Downloads OpenStack container images from the registry |
+| Deploy | `deploy` | Starts all OpenStack service containers |
+| Post-deploy | `post-deploy` | Generates admin credentials and writes `admin-openrc.sh` |
+
+Run each command and wait for it to complete before proceeding:
 
 ```console
 kolla-ansible bootstrap-servers -i all-in-one
@@ -214,9 +229,10 @@ skipping: no hosts matched
 PLAY RECAP ***************************************************************************************************************************
 localhost                  : ok=33   changed=14   unreachable=0    failed=0    skipped=52   rescued=0    ignored=0
 ```
+
 ```console
-kolla-ansible deploy -i all-in-one deploy
-````
+kolla-ansible deploy -i all-in-one
+```
 
 The output is similar to:
 
@@ -228,39 +244,33 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=368  changed=34   unreachable=0    failed=0    skipped=267  rescued=0    ignored=0
 ```
 
-#### What happens during deployment?
-
-- **Bootstrap** → prepares system (Docker, users, configs)
-- **Prechecks** → validates environment
-- **Pull** → downloads OpenStack container images
-- **Deploy** → starts all services
-- **Post-deploy** → generates access credentials
+The deploy step starts all OpenStack service containers. It takes the longest of the five stages — allow 20 to 30 minutes.
 
 ```console
-kolla-ansible -i all-in-one post-deploy
+kolla-ansible post-deploy -i all-in-one
 ```
 
-## Load environment
+## Install the OpenStack client and load credentials
+
+The OpenStack CLI is not included in Kolla-Ansible. Install it inside the virtual environment, then load the admin credentials that `post-deploy` generated:
 
 ```console
+source ~/kolla-venv/bin/activate
+pip install python-openstackclient
 source /etc/kolla/admin-openrc.sh
 ```
 
-This enables OpenStack CLI commands.
-
 ## Verify services
+
+Confirm that all Nova compute services and Neutron network agents are running:
 
 ```console
 openstack compute service list
-openstack network agent list
 ```
-
-All services should be UP.
 
 The output is similar to:
 
 ```output
-openstack network agent list
 +--------------------------------------+----------------+--------------+----------+---------+-------+----------------------------+
 | ID                                   | Binary         | Host         | Zone     | Status  | State | Updated At                 |
 +--------------------------------------+----------------+--------------+----------+---------+-------+----------------------------+
@@ -268,6 +278,15 @@ openstack network agent list
 | 2054f4ad-2492-46e4-990a-4fdf7d40e20f | nova-conductor | ansible-d8ps | internal | enabled | up    | 2026-04-14T07:38:11.000000 |
 | b0d28456-483b-4a9c-bcaf-5932364e32b6 | nova-compute   | ansible-d8ps | nova     | enabled | up    | 2026-04-14T07:38:16.000000 |
 +--------------------------------------+----------------+--------------+----------+---------+-------+----------------------------+
+```
+
+```console
+openstack network agent list
+```
+
+The output is similar to:
+
+```output
 +------------------------+--------------------+--------------+-------------------+-------+-------+--------------------------+
 | ID                     | Agent Type         | Host         | Availability Zone | Alive | State | Binary                   |
 +------------------------+--------------------+--------------+-------------------+-------+-------+--------------------------+
@@ -282,16 +301,71 @@ openstack network agent list
 +------------------------+--------------------+--------------+-------------------+-------+-------+--------------------------+
 ```
 
+All services should show `enabled` and state `up`. If any service shows `down`, check the container logs with `docker logs <container_name>`.
+
 ## What you've learned
 
-You successfully deployed OpenStack using Kolla-Ansible on an Arm-based Azure VM.
+You deployed OpenStack using Kolla-Ansible on an Azure Cobalt 100 Arm64 VM. The deployment ran all OpenStack services as Docker containers, including Nova, Neutron, Keystone, Glance, and Horizon.
 
-You also resolved key challenges, including:
+Along the way, you worked through several challenges specific to Arm and Azure:
 
-- Docker permission issues
-- Arm virtualization limitations (QEMU)
-- Image compatibility (aarch64)
-- Azure networking constraints (VIP handling)
-- Single-node deployment limitations (HA disabled)
+- Applied the Debian-based Arm64 image suffix so Kolla pulls the correct container images
+- Configured Nova to use QEMU instead of KVM, because Azure Cobalt 100 VMs don't support nested virtualization
+- Disabled keepalived and used the VM's own IP as the internal VIP, which is required for single-node Azure deployments
+- Allowed Kolla to manage libvirt internally via its `nova_libvirt` container, rather than running host libvirt
 
-You now have a fully functional OpenStack environment capable of launching and managing virtual machines.
+Your environment is now ready to launch and manage virtual machines.
+
+## Troubleshooting
+
+### Docker fails to restart during bootstrap
+
+If `kolla-ansible bootstrap-servers` fails with the following error:
+
+```output
+RUNNING HANDLER [openstack.kolla.docker : Restart docker]
+fatal: [localhost]: FAILED! => {"changed": false, "msg": "Unable to start service docker: Job for docker.service failed because the control process exited with error code.\nSee \"systemctl status docker.service\" and \"journalctl -xeu docker.service\" for details.\n"}
+```
+
+Kolla-Ansible modifies Docker's systemd unit files during bootstrap. If Docker is already running, the service can enter a failed state that blocks restarts.
+
+Run these three commands to recover:
+
+```console
+sudo systemctl daemon-reload
+sudo systemctl reset-failed docker.socket docker.service
+sudo systemctl restart docker
+```
+
+- `daemon-reload` picks up the updated unit files written by Kolla-Ansible
+- `reset-failed` clears the failed state that was blocking the restart
+- `restart docker` starts Docker cleanly
+
+After Docker is running, re-run the bootstrap step:
+
+```console
+kolla-ansible bootstrap-servers -i all-in-one
+```
+
+### Prechecks fail with "host libvirt is running"
+
+Kolla-Ansible manages libvirt inside its own `nova_libvirt` container. If host `libvirtd` is running, prechecks will fail with:
+
+```output
+TASK [nova-cell : Checking that host libvirt is not running]
+fatal: [localhost]: FAILED!
+```
+
+Stop and disable the host libvirt service before running prechecks:
+
+```console
+sudo systemctl stop libvirtd 2>/dev/null || true
+sudo systemctl disable libvirtd 2>/dev/null || true
+sudo rm -f /var/run/libvirt/libvirt-sock
+```
+
+Then re-run prechecks:
+
+```console
+kolla-ansible prechecks -i all-in-one
+```

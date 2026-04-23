@@ -1,5 +1,5 @@
 ---
-title: Create an Azure Cobalt 100 Arm64 virtual machine
+title: Create an Azure Cobalt 100 Arm64 virtual machine for DevStack
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -31,7 +31,7 @@ Creating a virtual machine based on Azure Cobalt 100 is no different to creating
 - In the **Size** field, select **See all sizes** and select the D-Series v6 family of virtual machines.
 - Select **D4ps_v6** from the list as shown in the diagram below:
 
-![Azure Portal VM size selection showing the D-Series v6 (Dpsv6) family highlighted with D4ps_v6 option selected for Arm64 architecture alt-txt#center](images/instance.png "Select D4ps_v6 from the D-Series v6 family")
+![Azure Portal VM size selection showing the D-Series v6 (Dpsv6) family highlighted with the D4ps_v6 Arm64 instance selected#center](images/instance.png "Select D4ps_v6 from the D-Series v6 family")
 
 - For **Authentication type**, select **SSH public key**.
 
@@ -49,48 +49,24 @@ RSA offers better security with keys longer than 3072 bits.
 - Give your SSH key a key pair name.
 - In the **Inbound port rules**, select **HTTP (80)** and **SSH (22)** as the inbound ports, as shown below:
 
-![Azure Portal inbound port rules configuration showing HTTP (80) and SSH (22) selected as allowed incoming traffic alt-txt#center](images/instance1.png "Configure inbound port rules for HTTP and SSH access")
+![Azure Portal inbound port rules configuration showing HTTP (80) and SSH (22) selected as allowed incoming traffic#center](images/instance1.png "Configure inbound port rules for HTTP and SSH access")
 
 - Now select the **Review + Create** tab and review the configuration for your virtual machine. It should look like the following:
 
-![Azure Portal Review + Create tab showing VM configuration summary with Ubuntu Pro 24.04 LTS image, D4ps_v6 size, and networking settings configured alt-txt#center](images/ubuntu-pro.png "Review VM configuration before creation")
+![Azure Portal Review + Create tab showing VM configuration summary with Ubuntu Pro 24.04 LTS image, D4ps_v6 size, and networking settings configured#center](images/ubuntu-pro.png "Review VM configuration before creation")
 
 - When you are happy with your selection, select the **Create** button and then **Download Private key and Create Resource** button.
 
-![Azure Portal showing the Create button and Download Private key and Create Resource button to finalize VM creation alt-txt#center](images/instance4.png "Download SSH key and create the virtual machine")
+![Azure Portal showing the Create button and Download Private key and Create Resource button to finalize VM creation#center](images/instance4.png "Download SSH key and create the virtual machine")
 
 Your virtual machine should be ready and running in a few minutes. You can SSH into the virtual machine using the private key, along with the public IP details.
 
-![Azure Portal showing successful VM deployment with green checkmark, VM name, resource group, and public IP address displayed in the confirmation notification alt-txt#center](images/final-vm.png "Successful VM deployment confirmation")
+![Azure Portal showing successful VM deployment with green checkmark, VM name, resource group, and public IP address displayed in the confirmation notification#center](images/final-vm.png "Successful VM deployment confirmation")
 
 {{% notice Note %}}To learn more about Arm-based virtual machine in Azure, see “Getting Started with Microsoft Azure” in [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure).{{% /notice %}}
 
 ## What you've accomplished and what's next
 
-You've successfully:
+You've created an Azure Cobalt 100 Arm-based virtual machine using Ubuntu Pro 24.04 LTS on a D4ps_v6 instance. This VM is your **DevStack deployment target** — a single-NIC instance with at least 80 GB of disk.
 
-* Created an Azure Cobalt 100 Arm-based virtual machine using the D-Series v6 (Dpsv6) family
-* Selected Ubuntu Pro 24.04 LTS as the operating system
-* Configured SSH authentication for secure access
-
-## Additional setup for this learning path
-
-This learning path requires **two virtual machines** with the same base configuration:
-
-* VM 1 → Used for DevStack deployment (single NIC setup)
-* VM 2 → Used for Kolla-Ansible deployment (advanced setup)
-
-{{% notice Note %}}Two separate VMs are recommended because running DevStack and Kolla-Ansible on the same machine can lead to service and port conflicts during deployment.{{% /notice %}}
-
-Both virtual machines should be created using the steps described above.
-
-
-## What's next
-
-In the next section, you will prepare the second virtual machine for Kolla-Ansible by:
-
-* Adding an additional network interface (NIC)
-* Attaching a data disk
-* Configuring the system for OpenStack deployment
-
-This setup enables proper networking and storage configuration required for containerized OpenStack using Kolla-Ansible.
+In the next section, you'll deploy OpenStack on this VM using DevStack. After that, you'll create a second VM with additional networking and storage for the Kolla-Ansible deployment.

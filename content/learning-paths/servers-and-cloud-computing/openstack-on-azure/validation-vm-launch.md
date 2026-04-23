@@ -1,39 +1,21 @@
 ---
-title: Validate OpenStack Deployment and Launch VM on Azure Cobalt 100 vm
+title: Validate OpenStack deployment and launch a VM on Azure Cobalt 100
 weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Validate OpenStack Deployment and Launch a Virtual Machine
+## Validate OpenStack deployment and launch a virtual machine
 
-After deploying OpenStack using Kolla-Ansible, it is important to verify that all services are functioning correctly and that the environment can successfully launch virtual machines.
+This section validates the Kolla-Ansible deployment by checking service health, uploading a test image, creating network resources, and launching a virtual machine instance.
 
-In this guide, you will:
-
-* Validate OpenStack services
-* Fix common Arm + Azure networking issues
-* Upload an Arm-compatible image
-* Create network and compute resources
-* Launch and verify a virtual machine
-
-
-## Install OpenStack CLI (if not installed)
+If you closed your session since the Kolla-Ansible deployment, reactivate the virtual environment and reload the admin credentials:
 
 ```console
-pip install python-openstackclient
-```
-
-This tool allows you to interact with OpenStack services via the command line.
-
-## Load admin credentials
-
-```console
+source ~/kolla-venv/bin/activate
 source /etc/kolla/admin-openrc.sh
 ```
-
-This sets environment variables required to authenticate with OpenStack.
 
 ## Verify services
 
@@ -51,17 +33,11 @@ All services should show:
 
 If any service is down, the deployment is incomplete or misconfigured.
 
-## Open vSwitch bridges
+## Bring up Open vSwitch bridges
 
-In Arm + Azure environments, OVS bridges may not come up automatically.
+Kolla-Ansible creates Open vSwitch (OVS) bridges for internal networking. On Arm Azure VMs, these bridges may not come up automatically after deployment, which causes instances to get stuck in `ERROR` state with no IP assignment.
 
-This causes:
-
-* VM stuck in `ERROR`
-* No networking
-* No IP assignment
-
-Run the following commands:
+Bring the bridges up manually:
 
 ```console
 sudo ip link set br-int up
@@ -69,35 +45,77 @@ sudo ip link set br-ex up
 sudo ip link set br-tun up
 ```
 
-Verify OVS configuration:
+Verify OVS configuration. Kolla-Ansible runs OVS inside the `openvswitch_vswitchd` container, so use `docker exec` to query it:
 
 ```console
-sudo ovs-vsctl show
+docker exec openvswitch_vswitchd ovs-vsctl show
 ```
 
-**Expected output:**
+The output is similar to:
 
-You should see:
+```output
+65e7f7e-0018-4c05-84d6-83db06b812ee
+    Manager "ptcp:6640:127.0.0.1"
+        is_connected: true
+    Bridge br-ex
+        Controller "tcp:127.0.0.1:6633"
+            is_connected: true
+        fail_mode: secure
+        datapath_type: system
+        Port eth1
+            Interface eth1
+        Port br-ex
+            Interface br-ex
+                type: internal
+        Port phy-br-ex
+            Interface phy-br-ex
+                type: patch
+                options: {peer=int-br-ex}
+    Bridge br-int
+        Controller "tcp:127.0.0.1:6633"
+            is_connected: true
+        fail_mode: secure
+        datapath_type: system
+        Port patch-tun
+            Interface patch-tun
+                type: patch
+                options: {peer=patch-int}
+        Port int-br-ex
+            Interface int-br-ex
+                type: patch
+                options: {peer=phy-br-ex}
+        Port br-int
+            Interface br-int
+                type: internal
+    Bridge br-tun
+        Controller "tcp:127.0.0.1:6633"
+            is_connected: true
+        fail_mode: secure
+        datapath_type: system
+        Port br-tun
+            Interface br-tun
+                type: internal
+        Port patch-int
+            Interface patch-int
+                type: patch
+                options: {peer=patch-tun}
+```
 
-- br-int → integration bridge
-- br-ex → external bridge
-- br-tun → tunnel bridge
-
-All bridges must exist and be active.
+All three bridges must show `is_connected: true`. If a bridge is missing or shows `is_connected: false`, re-run the `ip link set` commands above and check that the `neutron-openvswitch-agent` container is running with `docker ps | grep openvswitch`.
 
 ## Upload image
 
 Download a Debian Arm64 cloud image:
 
 ```console
-wget https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-genericcloud-Arm64.qcow2
+wget https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-genericcloud-arm64.qcow2
 ```
 
 Upload it to OpenStack:
 
 ```console
 openstack image create "test-image" \
-  --file debian-12-genericcloud-Arm64.qcow2 \
+  --file debian-12-genericcloud-arm64.qcow2 \
   --disk-format qcow2 \
   --container-format bare \
   --public
@@ -174,19 +192,13 @@ Both should show your created resources.
 
 ## Create flavor
 
+A flavor defines the compute resources — vCPUs, RAM, and disk — allocated to a virtual machine instance. OpenStack does not create any default flavors during deployment, so you need to create at least one before you can launch a VM.
+
+The `m1.tiny` flavor used here is a minimal definition suitable for testing: 1 vCPU, 512 MB RAM, and a 5 GB root disk. This is enough to boot a Debian cloud image and confirm the environment is working.
+
 ```console
 openstack flavor create m1.tiny --ram 512 --disk 5 --vcpus 1
 ```
-
-### Why is flavor required
-
-A flavor defines:
-
-- CPU
-- RAM
-- Disk
-
-for the virtual machine.
 
 ## Verify flavor
 
@@ -258,7 +270,7 @@ Login:
 
 The following image shows a successfully launched instance in the OpenStack Horizon UI.
 
-![OpenStack Horizon dashboard showing running instance test-vm alt-txt#center](images/openstack-ui.png "OpenStack Horizon Instances view with ACTIVE VM")
+![OpenStack Horizon Instances page showing test-vm in ACTIVE state with an assigned IP address from the test-net network#center](images/openstack-ui.png "OpenStack Horizon Instances view with running VM")
 
 
 ## What you've learned
