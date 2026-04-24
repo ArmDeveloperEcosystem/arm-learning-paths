@@ -105,6 +105,11 @@ This installs the libraries needed for the Gradio interface, Whisper transcripti
 
 Next, clone the [llama.cpp GitHub repository](https://github.com/ggml-org/llama.cpp), build the local inference server, and start it. This server exposes an OpenAI-compatible API that the Python application will call later in the Learning Path.
 
+{{% notice Pre-built llama.cpp %}}
+If you prefer not to build from source, you can use pre-built binaries from [llama.cpp releases](https://github.com/ggml-org/llama.cpp/releases). Download the package for your platform, extract it, and use the `llama-server` executable from that package in the run commands later in this section.
+{{% /notice %}}
+
+
 {{< tabpane code=true >}}
   {{< tab header="Ubuntu/macOS" language="bash">}}
 git clone https://github.com/ggml-org/llama.cpp
