@@ -1,5 +1,5 @@
 ---
-title: Validate OpenStack deployment and launch a VM on Azure Cobalt 100
+title: Validate OpenStack deployment and launch a virtual machine on Azure Cobalt 100
 weight: 7
 
 ### FIXED, DO NOT MODIFY
@@ -113,7 +113,7 @@ openstack image create "test-image" \
   --public
 ```
 
- Verify image upload:
+Verify the image upload:
 
 ```console
 openstack image list
@@ -188,7 +188,7 @@ openstack flavor create m1.tiny --ram 512 --disk 5 --vcpus 1
 The `m1.tiny` flavor used here is a minimal definition suitable for testing: 1 vCPU, 512 MB RAM, and a 5 GB root disk. This is enough to boot a Debian cloud image and confirm the environment is working.
 
 
-Verify flavor:
+Verify the flavor:
 
 ```console
 openstack flavor list
@@ -241,22 +241,25 @@ If the VM stays in ERROR, check the following:
 
 ## Access Horizon dashboard
 
-Open a browser of your choice and paste the public IP address of the VM:
+Open a browser and navigate to the public IP address of the VM:
 
 ```text
 http://<VM_PUBLIC_IP>
 ```
 
-Use the command line to get a password:
+Retrieve the admin password:
 
 ```console
 cat /etc/kolla/passwords.yml | grep keystone_admin_password
 ```
 
-Login with the password and the following details:
+Log in with the following credentials:
 
-* Username: admin
-* Domain: Default
+| Field    | Value                        |
+|----------|------------------------------|
+| Username | admin                        |
+| Password | (output of command above)    |
+| Domain   | Default                      |
 
 The following image shows a successfully launched instance in the OpenStack Horizon UI.
 
@@ -265,13 +268,4 @@ The following image shows a successfully launched instance in the OpenStack Hori
 
 ## What you've learned
 
-You successfully validated your OpenStack deployment and confirmed that all services are operational.
-
-You also:
-
-- Created vSwitch networking specific to Arm + Azure
-- Uploaded an Arm-compatible image
-- Created network and compute resources
-- Launched and verified a virtual machine
-
-Your OpenStack environment is now fully functional and ready for use.
+You validated your Kolla-Ansible OpenStack deployment end-to-end. You checked service health, configured OVS bridges for Arm on Azure, uploaded an Arm-compatible Debian image, created network and compute resources, and launched a running virtual machine. Your OpenStack environment is now fully functional and ready for use.

@@ -1,5 +1,5 @@
 ---
-title: Deploy OpenStack on Azure Arm using DevStack (Cobalt 100)
+title: Deploy OpenStack on an Azure Cobalt 100 Arm64 virtual machine using DevStack
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -10,10 +10,9 @@ layout: learningpathall
 
 {{% notice Warning %}}You can't run DevStack and Kolla-Ansible on the same VM at the same time. Use separate VMs for each approach. If you run both on the same host, port conflicts will cause deployment failures.{{% /notice %}} -->
 
-In this section, you'll OpenStack using DevStack on the Arm-based Azure virtual machine (VM) running Azure Cobalt 100 that you created in the previous section. DevStack is a script-based installer designed for development and testing. It runs all OpenStack services directly on the host OS and deploys Nova, Keystone, Glance, and Horizon on a single node.
+In this section, you'll deploy OpenStack using DevStack on the Arm-based Azure virtual machine (VM) running Azure Cobalt 100 that you created in the previous section. DevStack is a script-based installer designed for development and testing. It runs all OpenStack services directly on the host OS and deploys Nova, Keystone, Glance, and Horizon on a single node.
 
-The environment that you'll create in this section will run OpenStack services on your Azure Cobalt 100 VM, provide access to the Horizon dashboard, and support Arm64 (`aarch64`) architecture. You'll be able to access the environment using both browser and CLI.
-
+The environment that you'll create will run OpenStack services on your Azure Cobalt 100 VM, provide access to the Horizon dashboard, and support Arm64 (`aarch64`) architecture. You'll be able to access the environment using both browser and CLI.
 
 ## Clean previous setup
 
@@ -26,7 +25,7 @@ sudo rm -rf /var/lib/etcd
 sudo rm -f /etc/systemd/system/etcd.service
 ```
 
-This ensures that there's no leftover configuration conflicts. It also helps clean the environment for deployment and avoid service startup failures. 
+This ensures there are no leftover configuration conflicts. It also helps clean the environment for deployment and avoid service startup failures. 
 
 ## System preparation
 
@@ -218,7 +217,7 @@ OS Version: Ubuntu 24.04 noble
 
 ## Access Horizon dashboard
 
-Open the Access Horizon dashboard in a browser of your choice by pasting a link similar to the following:
+Access the Horizon dashboard in a browser by pasting a link similar to the following:
 
 ```text
 http://<PUBLIC_IP>/dashboard
@@ -238,7 +237,8 @@ Enter the username and password as follows:
 Username: admin
 Password: admin
 ```
-If you see a `ServiceCatalogException: Invalid service catalog: network` error after logging in to Horizon, it means Horizon is trying to look up the Neutron network service in Keystone's service catalog. Because Neutron is disabled in this setup, the service doesn't exist.
+
+{{% notice Note %}}If you see a `ServiceCatalogException: Invalid service catalog: network` error after logging in to Horizon, it means Horizon is trying to look up the Neutron network service in Keystone's service catalog. Because Neutron is disabled in this setup, the service doesn't exist.
 
 To fix this, append a Horizon configuration override and restart Apache:
 
@@ -256,7 +256,8 @@ EOF
 sudo systemctl restart apache2
 ```
 
-Reload the dashboard in your browser. The error should no longer appear.
+Reload the dashboard in your browser. The error should no longer appear.{{% /notice %}}
+
 
 <!--## Login credentials
 
@@ -322,13 +323,7 @@ The Kolla-Ansible deployment runs on a separate VM, so this step is optional if 
 
 ## What you've learned and what's next
 
-In this section, you deployed OpenStack using DevStack on an Azure Cobalt 100 Arm64 VM. You worked through several Arm-specific issues along the way such as:
-
-* Replacing the Ubuntu etcd package with a stable Arm64 binary
-* Disabling Neutron to avoid networking compatibility issues on Arm
-* Configuring Nova to use QEMU instead of KVM, because nested virtualization is not available on Azure VMs
-
-You verified the deployment using the CLI and accessed the Horizon dashboard via browser.
+In this section, you deployed OpenStack using DevStack on an Azure Cobalt 100 Arm64 VM. You then verified the deployment using the CLI and accessed the Horizon dashboard using a browser.
 
 In the next section, you'll create a VM for deploying OpenStack using Kolla-Ansible.
 

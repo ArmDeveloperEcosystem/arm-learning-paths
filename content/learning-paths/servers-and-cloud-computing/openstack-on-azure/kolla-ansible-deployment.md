@@ -1,14 +1,10 @@
 ---
-title: Deploy OpenStack using Kolla-Ansible on Azure Ubuntu Arm64 VM
+title: Deploy OpenStack using Kolla-Ansible on an Azure Ubuntu Arm64 virtual machine
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-
-<!-- {{% notice Note %}}Use the virtual machine prepared for Kolla-Ansible deployment (with dual NICs and a data disk). This setup is required for proper networking and storage configuration.{{% /notice %}}
-
-{{% notice Warning %}}**DevStack and Kolla-Ansible are separate deployment approaches and must not run on the same VM at the same time.** If you have previously run a DevStack deployment on this VM, stop it completely before proceeding. Kolla-Ansible deploys OpenStack services as Docker containers on the same ports that DevStack uses. Running both on the same host will cause port conflicts and service startup failures. Use a separate VM for each approach, or unstack DevStack fully before attempting this deployment.{{% /notice %}} -->
 
 In this section, you'll deploy OpenStack using Kolla-Ansible on the Azure Ubuntu 24.04 Arm64 virtual machine that you created in the previous section.
 
@@ -61,9 +57,9 @@ Apply group permissions:
 ```console
 newgrp docker
 ```
-{{< notice Warning >}}
+{{% notice Warning %}}
 Without applying group permissions, Docker commands will fail with a permission error.
-{{< /notice >}}
+{{% /notice %}}
 
 Verify Docker installation:
 
@@ -133,11 +129,11 @@ nova_compute_virt_type: "qemu"
 
 The following are some of the key configuration choices:
 
-- Debian base - ensures Arm images are available
-- aarch64 suffix - ensures correct image selection
-- VIP = VM IP - avoids Azure networking issues
-- HA disabled - required for single-node deployments
-- nova_compute_virt_type=qemu - overrides the default KVM setting globally and ensures Nova uses QEMU on Arm VMs where KVM is unavailable
+- `kolla_base_distro: "debian"` — ensures Arm-compatible container images are available
+- `openstack_tag_suffix: "-aarch64"` — ensures the correct image variant is selected
+- `kolla_internal_vip_address: "127.0.0.1"` — avoids Azure networking issues on single-node deployments
+- `enable_keepalived: "no"` — required for single-node deployments
+- `nova_compute_virt_type: "qemu"` — ensures Nova uses QEMU (Quick Emulator) on Arm VMs where KVM (Kernel-based Virtual Machine) is unavailable
 
 
 ## Configure Nova
@@ -328,14 +324,7 @@ All services should show `enabled` and state `up`. If any service shows `down`, 
 
 ## What you've accomplished and what's next
 
-In this section, you deployed OpenStack using Kolla-Ansible on an Azure Cobalt 100 Arm64 VM. The deployment ran all OpenStack services as Docker containers, including Nova, Neutron, Keystone, Glance, and Horizon.
+In this section, you deployed OpenStack using Kolla-Ansible on an Azure Cobalt 100 Arm64 VM. The deployment ran all OpenStack services as Docker containers, including Nova, Neutron, Keystone, Glance, and Horizon. 
 
-Along the way, you worked through several challenges specific to Arm and Azure:
-
-- Applied the Debian-based Arm64 image suffix so Kolla pulls the correct container images
-- Configured Nova to use QEMU instead of KVM, because Azure Cobalt 100 VMs don't support nested virtualization
-- Disabled keepalived and used the VM's own IP as the internal VIP, which is required for single-node Azure deployments
-- Allowed Kolla to manage libvirt internally via its `nova_libvirt` container, rather than running host libvirt
-
-Your environment is now ready to launch and manage virtual machines. In the next section, you'll validate the OpenStack deployment and launch an Azure Cobalt VM instance.
+Your environment is now ready to launch and manage virtual machines. In the next section, you'll validate the OpenStack deployment and launch a test VM instance.
 

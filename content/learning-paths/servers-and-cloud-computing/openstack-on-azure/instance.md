@@ -6,25 +6,23 @@ weight: 3
 layout: learningpathall
 ---
 
-## Prerequisites and setup
-
-There are several common ways to create an Arm-based Cobalt 100 virtual machine (VM), and you can choose the method that best fits your workflow or requirements:
+You can create an Arm-based Cobalt 100 virtual machine (VM) in the following ways, depending on your workflow or requirements:
 
 - The Azure Portal
 - The Azure CLI
 - An infrastructure as code (IaC) tool
 
-In this section, you'll launch the Azure Portal to create a virtual machine with the Arm-based Azure Cobalt 100 processor.
+In this section, you'll use the Azure Portal to create a virtual machine with the Arm-based Azure Cobalt 100 processor.
 
 This Learning Path focuses on general-purpose virtual machines in the Dpsv6 series. For more information, see the [Microsoft Azure guide for the Dpsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series).
 
-While the steps to create this instance are included here for convenience, you can also refer to the [Deploy a Cobalt 100 virtual machine on Azure Learning Path](/learning-paths/servers-and-cloud-computing/cobalt/).
+The steps to create this instance are included here for convenience. For more detailed steps, see the [Deploy a Cobalt 100 virtual machine on Azure Learning Path](/learning-paths/servers-and-cloud-computing/cobalt/).
 
 ## Create an Arm-based Azure virtual machine
 
-Creating a virtual machine based on Azure Cobalt 100 is no different to creating any other virtual machine in Azure. To create an Azure virtual machine:
+To create an Azure virtual machine:
 
-1. Launch the Azure portal and navigate to **Virtual Machines**.
+1. Open the Azure portal and navigate to **Virtual Machines**.
 2. Select **Create**, and select **Virtual Machine** from the drop-down list.
 3. Inside the **Basic** tab, fill in the instance details such as **Virtual machine name** and **Region**.
 4. Select the image for your virtual machine (for example, Ubuntu Pro 24.04 LTS) and select **Arm64** as the VM architecture.

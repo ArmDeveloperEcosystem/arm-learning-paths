@@ -1,14 +1,12 @@
 ---
-title: Prepare Azure Arm64 VM for Kolla-Ansible 
+title: Prepare Azure Arm64 virtual machine for Kolla-Ansible 
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Prepare a second VM for Kolla-Ansible
-
-In the previous section, you completed the DevStack deployment on the first VM. The Kolla-Ansible deployment runs on a **separate** Azure VM with two network interfaces (NICs) and a dedicated data disk.
+In the previous section, you completed the DevStack deployment on the first VM. The Kolla-Ansible deployment runs on a separate Azure VM with two network interfaces (NICs) and a dedicated data disk.
 
 Create a new VM using the [same base process](/learning-paths/servers-and-cloud-computing/openstack-on-azure/instance/) as the first VM with the following specifications:
 
@@ -64,7 +62,7 @@ To restart the VM, go back to the VM overview and then click **Start**.
 
 After restarting the VM, attach a data disk to it by following these steps:
 
-1. Go to Azure Portal → Virtual Machine  
+1. In the Azure Portal, navigate to **Virtual Machines**
 2. Select **Disks**  
 3. Click **Create and attach a new disk**
 4. For **Disk name**, enter `openstack-disk`  
@@ -82,9 +80,6 @@ Using a separate disk keeps OpenStack data off the OS disk and avoids filling it
 
 ## What you've accomplished and what's next
 
-In this section, you've prepared a second Azure Arm64 VM for Kolla-Ansible with:
-
-* A second NIC (`eth1`) for OpenStack's provider network
-* A dedicated 32 GB data disk for Cinder and Docker volumes
+In this section, you've configured a second Azure Arm64 VM for Kolla-Ansible. The VM has a second NIC (`eth1`) for OpenStack's provider network, and a dedicated 32 GB data disk for Cinder and Docker volumes.
 
 In the next section, you'll install Kolla-Ansible and deploy OpenStack as containers on this VM.
