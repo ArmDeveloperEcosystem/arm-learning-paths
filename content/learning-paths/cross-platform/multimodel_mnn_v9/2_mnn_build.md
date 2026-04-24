@@ -168,9 +168,7 @@ ls -lh ~/mnn/Qwen2.5-Omni-7B-MNN/llm.mnn ~/mnn/Qwen2.5-Omni-7B-MNN/llm.mnn.weigh
 
 If either file is only a few hundred bytes, the LFS download did not complete. Run `git lfs pull` again to resume it.
 
-{{% notice Note %}}
-This package is already prepared for MNN deployment. You do not need to export the model from PyTorch or run additional quantization steps before using it in this Learning Path.
-{{% /notice %}}
+{{% notice Note %}}This package is already prepared for MNN deployment. You do not need to export the model from PyTorch or run additional quantization steps before using it in this Learning Path.{{% /notice %}}
 
 ## Check your setup
 

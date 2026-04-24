@@ -24,11 +24,9 @@ You are an on-device inference assistant. In one short sentence, describe the be
 EOF
 ```
 
-{{% notice Note %}}
-`llm_demo` commonly treats each line in the file as a separate prompt. Keep each prompt on a single line.
-{{% /notice %}}
+{{% notice Note %}}`llm_demo` commonly treats each line in the file as a separate prompt. Keep each prompt on a single line.{{% /notice %}}
 
-## Run `llm_demo` with the prompt file
+## Run llm_demo with the prompt file
 
 Run `llm_demo` from the MNN build directory and pass both the model configuration and prompt file:
 
@@ -59,12 +57,21 @@ prompt file is /home/radxa/mnn/text_baseline_prompt.txt
 Multimodal on-device inference has several benefits, including reducing the need for cloud-based services, allowing usage in areas with poor internet connectivity, saving on data transfer costs, enabling real-time processing, and enhancing privacy during data processing. It's a great way to handle various tasks efficiently, especially when you don't want to rely too much on the cloud.
 ```
 
-
 {{% notice Note %}}
-When you run `llm_demo`, you may see a line like:
-`The device supports: i8sdot:1, fp16:1, i8mm: 1, sve2: 1, sme2: 0`
-This line reports hardware feature support on your CPU: **i8sdot**, **fp16**, **i8mm**, **sve2**, and **sme2**.  
-A value of `1` means the feature is supported in hardware, and `0` means it is not.
+When you run `llm_demo`, you may see a line reporting CPU hardware features:
+
+```
+The device supports: i8sdot:1, fp16:1, i8mm: 1, sve2: 1, sme2: 0
+```
+
+This shows the Arm architecture features are available on your CPU:
+- **i8sdot** - 8-bit integer dot product
+- **fp16** - 16-bit floating point
+- **i8mm** - 8-bit integer matrix multiplication  
+- **sve2** - Scalable Vector Extension 2
+- **sme2** - Scalable Matrix Extension 2
+
+A value of `1` means supported, `0` means not supported.
 {{% /notice %}}
 
 ## Check how prompt files are processed
@@ -106,7 +113,7 @@ Arm is a processor architecture. It's used in mobile phones, embedded systems, e
 Output length and coherence can vary significantly without a generation length limit. If a response repeats itself, this is normal model behavior without a `max_new_tokens` constraint. Focus on confirming that two distinct responses appear, one for each prompt line.
 {{% /notice %}}
 
-If you want to quickly sanity-check interactive mode:
+If you want to quickly verify interactive mode:
 
 ```bash
 cd ~/mnn/MNN/build
