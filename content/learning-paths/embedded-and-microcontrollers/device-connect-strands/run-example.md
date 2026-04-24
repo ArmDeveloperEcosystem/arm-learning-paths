@@ -6,9 +6,9 @@ weight: 4
 layout: learningpathall
 ---
 
-## Overview
+## Run device-to-device discovery and control
 
-This section runs Device Connect's device-to-device discovery. There are two ways to walk through this setup. Optionally, you can connect an external device. 
+This section demonstrates Device Connect's device-to-device discovery. There are two ways to walk through this setup. Optionally, you can connect an external device. 
 
 ### Option 1: run on a single machine
 
