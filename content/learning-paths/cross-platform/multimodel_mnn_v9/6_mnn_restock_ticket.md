@@ -4,7 +4,7 @@ weight: 7
 layout: learningpathall
 ---
 
-## Introduction
+## Combine image and audio inputs for multimodal inference
 
 In the previous sections, you validated text, vision, and audio inference in isolation. This final section brings those three inputs together into a single prompt that combines a shelf image and a voice note to produce one structured restock ticket.
 
@@ -68,7 +68,7 @@ cd ~/mnn/MNN/build
 ./llm_demo ~/mnn/Qwen2.5-Omni-7B-MNN/config.json ~/mnn/prompt_final_multimodal.txt
 ```
 
-You should see output similar to:
+The output is similar to:
 
 ```text
 config path is /home/radxa/mnn/Qwen2.5-Omni-7B-MNN/config.json
@@ -122,14 +122,39 @@ Check that:
 
 If the model adds extra text before or after the ticket, tighten the prompt and repeat the run.
 
-## Next steps
-
-You have built a complete multimodal inference workflow on Armv9 using only the CPU. Starting from a text baseline, you validated vision reasoning from a shelf image, extracted structured tasks from a voice note, and combined both inputs into a single-shot restock ticket in one inference call.
+### Completion checklist
 
 You have completed this Learning Path when you can:
 
-- run text, vision, audio, and combined multimodal examples on Armv9
-- generate a final ticket from one image and one voice note
-- show that changing one modality changes only the fields derived from that modality
+✓ Run text, vision, audio, and combined multimodal examples on Armv9
 
-From here, you can extend the workflow by saving the ticket to JSON, sending it to a local service, or benchmarking latency and throughput across different Armv9 platforms.
+✓ Generate a final ticket from one image and one voice note
+
+✓ Verify that changing one modality only affects the fields derived from that modality
+
+## What you've learned and what's next
+
+In this section, you:
+
+- Combined image and audio inputs into a single multimodal prompt
+- Generated a complete restock ticket from one inference call
+- Verified that each modality contributes specific information to the final output
+
+### Your multimodal workflow is complete
+
+You've built a complete multimodal inference workflow on Armv9 using only the CPU:
+
+1. Started with a text-only baseline
+2. Added vision reasoning from a shelf image
+3. Extracted structured tasks from a voice note
+4. Combined both inputs into a single-shot restock ticket
+
+
+
+### Next steps
+
+Extend the workflow by:
+
+- Saving tickets to JSON format
+- Sending results to a local service or API
+- Benchmarking latency and throughput across different Armv9 platforms

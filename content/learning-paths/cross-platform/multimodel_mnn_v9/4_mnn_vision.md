@@ -4,7 +4,7 @@ weight: 5
 layout: learningpathall
 ---
 
-## Introduction
+## Analyze retail shelf images with vision inference
 
 This section shows how Armv9 can run lightweight operational vision reasoning locally without requiring cloud round trips, making it a practical fit for store-side restocking workflows.
 
@@ -27,14 +27,14 @@ Create a local directory for assets:
 mkdir -p ~/mnn/assets
 ```
 
-Download the tutorial image and verify that it is a valid JPEG file:
+Download the tutorial image and verify that it's a valid JPEG file:
 
 ```bash
 wget -P ~/mnn/assets https://upload.wikimedia.org/wikipedia/commons/e/e6/Pet_Food_Aisle.jpg
 file ~/mnn/assets/Pet_Food_Aisle.jpg
 ```
 
-You should see output similar to:
+The output is similar to:
 
 ```text
 JPEG image data, JFIF standard 1.02, resolution (DPI), density 72x72, segment length 16, Exif Standard: [TIFF image data, little-endian, direntries=12, description=                               , manufacturer=SONY, model=DSC-W50, orientation=upper-left, xresolution=203, yresolution=211, resolutionunit=2, software=Adobe Photoshop CS Macintosh, datetime=2007:04:10 17:45:47], progressive, precision 8, 2816x2112, components 3
@@ -42,7 +42,7 @@ JPEG image data, JFIF standard 1.02, resolution (DPI), density 72x72, segment le
 
 The key detail is that the output starts with `JPEG image data`, confirming the file is a valid JPEG. The remaining EXIF metadata can be ignored.
 
-![Pet food aisle shelf with multiple levels stocked with pet food products, used as the vision prompt input for the shelf audit#center](pet_food_aisle.jpg "Pet food aisle shelf used for the vision audit prompt")
+![Pet food aisle shelf with multiple levels stocked with pet food products, showing top, middle, and bottom shelf zones that will be analyzed by the vision model#center](pet_food_aisle.jpg "Pet food shelf for vision audit")
 
 ## Create the vision prompt
 
@@ -76,7 +76,7 @@ cd ~/mnn/MNN/build
 ./llm_demo ~/mnn/Qwen2.5-Omni-7B-MNN/config.json ~/mnn/prompt_picture_coverage.txt
 ```
 
-You should see output similar to:
+The output is similar to:
 
 ```text
 config path is /home/radxa/mnn/Qwen2.5-Omni-7B-MNN/config.json
@@ -98,23 +98,29 @@ The exact wording can vary, but the structured fields should be present. If the 
 
 ## Why a coarse coverage estimate is enough for edge workflows
 
-In many edge retail workflows, you do not need a perfectly precise inventory measurement to make a useful decision. A coarse estimate such as `High`, `Medium`, or `Low` coverage is often enough to identify which shelf area needs attention first and to generate a practical restocking signal.
+In many edge retail workflows, you don't need a perfectly precise inventory measurement to make a useful decision. A coarse estimate such as `High`, `Medium`, or `Low` coverage is often enough to identify which shelf area needs attention first and to generate a practical restocking signal.
 
-This keeps the prompt and output simple, reduces post-processing requirements, and makes the result easier to validate during early on-device prototyping. For this Learning Path, the goal is not to build a full inventory counting system, but to show how local vision reasoning on Armv9 can produce an operationally useful input for a restocking workflow.
+Keeping the prompt and output simple reduces post-processing requirements and makes the result easier to validate during early on-device prototyping. For this Learning Path, the goal isn't to build a full inventory counting system, but to show how local vision reasoning on Armv9 can produce an operationally useful input for a restocking workflow.
 
 ## Verify the result
 
 Check that the output meets these conditions:
 
-- it includes coverage estimates for **top**, **middle**, and **bottom**
-- it identifies one **priority zone**, such as `middle-center`
-- it provides a short reason tied to visible shelf sparsity
-- it uses `NOT_SURE` only when the image is genuinely ambiguous
+- includes coverage estimates for **top**, **middle**, and **bottom**
+- identifies one **priority zone**, such as `middle-center`
+- provides a short reason tied to visible shelf sparsity
+- uses `NOT_SURE` only when the image is genuinely ambiguous
 
 If the model returns extra conversational text, tighten the prompt further by repeating `Output ONE line only`.
 
-## Next steps
+## What you've learned and what's next
 
-You have now validated image-based multimodal inference with MNN Omni on Armv9.
+In this section, you:
 
-In the next section, you extend this workflow by running an audio-based restock instruction demo using an `<audio>...</audio>` prompt.
+- Ran vision-based inference using a shelf image as input
+- Generated a structured shelf audit with coverage estimates and priority zones
+- Validated that MNN Omni can process local images on Armv9 CPU for operational retail workflows
+
+You've confirmed that image-based multimodal inference works correctly and produces actionable output.
+
+In the next section, you'll extend this workflow by running an audio-based restock instruction demo using an `<audio>...</audio>` prompt.

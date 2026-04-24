@@ -1,13 +1,10 @@
 ---
 title: Build a Multimodal Retail Restocking Assistant on Armv9 With MNN
 
-draft: true
-cascade:
-    draft: true
     
 minutes_to_complete: 90
 
-who_is_this_for: This learning path is for developers and engineers who want to run multimodal image, audio, and text models on Armv9 Linux systems using MNN as a portable, CPU-first inference runtime. It is aimed at readers who are comfortable building software from source and want a reproducible on-device workflow without quantization or heterogeneous scheduling.
+who_is_this_for: This Learning Path is for developers and engineers who want to run multimodal image, audio, and text models on Armv9 Linux systems using MNN as a portable, CPU-first inference runtime. It is aimed at readers who are comfortable building software from source and want a reproducible on-device workflow without quantization or heterogeneous scheduling.
 
 description: Learn how to build MNN on an Armv9 system, run text, vision, and audio prompts with a multimodal Omni model, and combine image and audio inputs into a single-shot retail restock ticket workflow.
 
@@ -50,6 +47,18 @@ further_reading:
     - resource:
         title: ModelScope model hub
         link: https://modelscope.cn/models
+        type: website
+    - resource:
+        title: KleidiAI explainer
+        link: /learning-paths/cross-platform/kleidiai-explainer/
+        type: website
+    - resource:
+        title: Install CMake
+        link: /install-guides/cmake/
+        type: website
+    - resource:
+        title: Vision LLM inference on Android with KleidiAI and MNN
+        link: /learning-paths/mobile-graphics-and-gaming/vision-llm-inference-on-android-with-kleidiai-and-mnn/
         type: website
 
 ### FIXED, DO NOT MODIFY
