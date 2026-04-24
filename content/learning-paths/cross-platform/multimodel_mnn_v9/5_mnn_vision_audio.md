@@ -14,7 +14,7 @@ To keep the output predictable, this section uses a single-line format with semi
 
 ## Prepare the audio asset
 
-To simplify the demonstration and improve clarity for this learning path, directly download the prepared audio file:
+To simplify the demonstration and improve clarity for this Learning Path, directly download the prepared audio file:
 
 ```bash
 mkdir -p ~/mnn/assets
