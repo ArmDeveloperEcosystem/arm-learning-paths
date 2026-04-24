@@ -1,5 +1,5 @@
 ---
-title: Set up the developer environment
+title: Set up the Device Connect and Strands developer environment
 weight: 3
 
 # FIXED, DO NOT MODIFY
@@ -38,7 +38,7 @@ source .venv/bin/activate
 
 The `strands-robots` SDK uses Device Connect's built-in device-to-device discovery: every `Robot()` instance announces itself on the local network at startup, and any process running `discover_devices()` or `robot_mesh(action='peers')` on the same network segment will find it automatically.
 
-This means discovery works as long as the device process and the agent process are on the same LAN or on the same machine. Discovery is typically available on home and office networks. If you are behind a firewall or VPN that blocks local network traffic, devices will not discover each other - that scenario requires the infrastructure-backed setup with a Zenoh router, which is covered later in this Learning Path.
+This means discovery works as long as the device process and the agent process are on the same LAN or on the same machine. Discovery is typically available on home and office networks. If you're behind a firewall or VPN that blocks local network traffic, devices won't discover each other - that scenario requires the infrastructure-backed setup with a Zenoh router, which is covered later in this Learning Path.
 
 ## What you've set up and what's next
 
