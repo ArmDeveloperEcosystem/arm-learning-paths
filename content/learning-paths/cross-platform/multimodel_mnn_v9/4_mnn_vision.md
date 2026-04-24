@@ -113,8 +113,14 @@ Check that the output meets these conditions:
 
 If the model returns extra conversational text, tighten the prompt further by repeating `Output ONE line only`.
 
-## Next steps
+## What you've learned and what's next
 
-You have now validated image-based multimodal inference with MNN Omni on Armv9.
+In this section, you:
 
-In the next section, you extend this workflow by running an audio-based restock instruction demo using an `<audio>...</audio>` prompt.
+- Ran vision-based inference using a shelf image as input
+- Generated a structured shelf audit with coverage estimates and priority zones
+- Validated that MNN Omni can process local images on Armv9 CPU for operational retail workflows
+
+You've confirmed that image-based multimodal inference works correctly and produces actionable output.
+
+In the next section, you'll extend this workflow by running an audio-based restock instruction demo using an `<audio>...</audio>` prompt.

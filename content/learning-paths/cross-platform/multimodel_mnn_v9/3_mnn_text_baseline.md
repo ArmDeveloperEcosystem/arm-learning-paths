@@ -115,15 +115,14 @@ cd ~/mnn/MNN/build
 
 Enter a short prompt and confirm that the model returns a reply. Press Ctrl+C to quit.
 
-## Check your results
+## What you've learned and what's next
 
-You have completed this section when:
+In this section, you:
 
-- `llm_demo` loads `config.json` successfully
-- the prompt file produces one response per line
-- the model returns non-empty text output
-- the runtime completes without crashes or missing-library errors
+- Ran a text-only baseline to confirm the MNN runtime and Omni model load correctly
+- Verified that prompt files are processed line by line
+- Established a working text inference baseline on Armv9 CPU
 
-## Next steps
+You've confirmed that `llm_demo` loads `config.json` successfully, processes prompts correctly, and returns non-empty text output without crashes.
 
-In the next section, you will add an image input and validate the vision path of the Omni model on Armv9.
+In the next section, you'll add an image input and validate the vision path of the Omni model on Armv9.

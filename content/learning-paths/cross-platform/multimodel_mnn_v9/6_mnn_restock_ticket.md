@@ -122,14 +122,20 @@ Check that:
 
 If the model adds extra text before or after the ticket, tighten the prompt and repeat the run.
 
-## Next steps
+## What you've learned and what's next
 
-You have built a complete multimodal inference workflow on Armv9 using only the CPU. Starting from a text baseline, you validated vision reasoning from a shelf image, extracted structured tasks from a voice note, and combined both inputs into a single-shot restock ticket in one inference call.
+In this section, you:
+
+- Combined image and audio inputs into a single multimodal prompt
+- Generated a complete restock ticket from one inference call that merges visual shelf analysis with spoken task instructions
+- Verified that each modality contributes its specific information to the final output
+
+You've now built a complete multimodal inference workflow on Armv9 using only the CPU. Starting from a text baseline, you validated vision reasoning from a shelf image, extracted structured tasks from a voice note, and combined both inputs into a single-shot restock ticket.
 
 You have completed this Learning Path when you can:
 
-- run text, vision, audio, and combined multimodal examples on Armv9
-- generate a final ticket from one image and one voice note
-- show that changing one modality changes only the fields derived from that modality
+- Run text, vision, audio, and combined multimodal examples on Armv9
+- Generate a final ticket from one image and one voice note
+- Show that changing one modality changes only the fields derived from that modality
 
 From here, you can extend the workflow by saving the ticket to JSON, sending it to a local service, or benchmarking latency and throughput across different Armv9 platforms.

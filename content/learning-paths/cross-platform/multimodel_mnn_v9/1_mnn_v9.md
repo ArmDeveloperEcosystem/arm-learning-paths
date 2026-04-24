@@ -49,6 +49,12 @@ To keep the workflow reproducible, this Learning Path uses a deliberately narrow
 
 This scope keeps the focus on setup, validation, and multimodal application flow.
 
-## Next steps
+## What you've learned and what's next
 
-In the next section, you will build MNN on Armv9 and prepare the model files and local assets used in the remaining examples.
+In this section, you learned:
+
+- Why MNN is a practical inference engine for multimodal workflows on Armv9
+- How an Omni model combines text, image, and audio understanding in one pipeline
+- The deliberate scope choices that keep this Learning Path reproducible and focused on CPU-first inference
+
+In the next section, you'll build MNN natively on Armv9 and prepare the model files and local assets used in the remaining examples.

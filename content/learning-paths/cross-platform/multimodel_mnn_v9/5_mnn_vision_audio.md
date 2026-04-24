@@ -121,6 +121,14 @@ A successful run should show that:
 
 At this stage, the goal is not to evaluate full speech recognition quality. The goal is to validate that local audio understanding can extract operational task information that you can combine with other inputs later.
 
-## Next steps
+## What you've learned and what's next
 
-In the next section, you will combine multimodal inference patterns into a practical restock workflow on Armv9.
+In this section, you:
+
+- Converted a spoken restock note into a structured ticket using audio inference
+- Validated that MNN Omni can process local audio files on Armv9 CPU
+- Confirmed that the model extracts operational details like quantities, zones, and deadlines from voice input
+
+You've now validated text, vision, and audio inference independently.
+
+In the next section, you'll combine these multimodal patterns into a single inference call that processes both image and audio inputs together.

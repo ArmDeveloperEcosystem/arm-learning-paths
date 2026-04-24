@@ -182,3 +182,14 @@ cd ~/mnn/MNN/build
 ```
 
 The binary starts an interactive session. Type `exit` or press Ctrl+C to quit. If the binary loads without `undefined symbol` errors or missing library messages, your environment is ready for the next section.
+
+## What you've learned and what's next
+
+In this section, you:
+
+- Built MNN natively on Armv9 with multimodal and KleidiAI support enabled
+- Verified that shared libraries resolve correctly to avoid runtime conflicts
+- Downloaded and validated the prebuilt Omni model package and weights
+- Confirmed that `llm_demo` can load the model configuration
+
+In the next section, you'll run a text-only baseline to verify that the core inference path works correctly before adding vision and audio inputs.
