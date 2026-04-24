@@ -144,7 +144,9 @@ You've built a complete multimodal inference workflow on Armv9 using only the CP
 You have completed this Learning Path when you can:
 
 ✓ Run text, vision, audio, and combined multimodal examples on Armv9
+
 ✓ Generate a final ticket from one image and one voice note
+
 ✓ Verify that changing one modality only affects the fields derived from that modality
 
 ### Next steps
