@@ -40,13 +40,24 @@ dummy = feature_extractor(
 
 # Export model graph and IO signatures to ONNX.
 torch.onnx.export(
-    model,
-    (dummy["input_values"], dummy["attention_mask"]),
-    os.path.join(ONNX_DIR, "hubert_vsa_ravdess.onnx"),
-    input_names=["input_values", "attention_mask"],
-    output_names=["logits"],
-    opset_version=18
-)
+      model,
+      (dummy["input_values"], dummy["attention_mask"]),
+      os.path.join(ONNX_DIR, "hubert_vsa_ravdess.onnx"),
+      input_names=["input_values", "attention_mask"],
+      output_names=["logits"],
+      dynamic_axes={
+          "input_values": {0: "batch_size", 1: "sequence_length"},
+          "attention_mask": {0: "batch_size", 1: "sequence_length"},
+          "logits": {0: "batch_size"},
+      },
+      opset_version=18,
+  )
+```
+
+Run the script:
+
+```
+python convert_and_quantize_model.py
 ```
 
 After this step, you should have `hubert_vsa_ravdess.onnx` in the ONNX output directory.
@@ -63,16 +74,42 @@ ls models/hubert_vsa_ravdess_onnx
 
 This step applies dynamic INT8 quantization to the ONNX model. The model weights are quantized to integer 8 bits ahead of time, while activations are quantized dynamically during inference.
 
-Quantization typically reduces model size by around 3x to 4x and often improves CPU inference speed, depending on the hardware and model.
+Quantization typically reduces model size by around 3x to 4x and often improves CPU inference speed, depending on the hardware and model. 
+
+To your `convert_and_quantize_model.py`, add the following snippet to the end of the file:
 
 ```python
+import onnx
 from onnxruntime.quantization import quantize_dynamic, QuantType
 
-quantize_dynamic(
-    model_input="models/hubert_vsa_ravdess_onnx/hubert_vsa_ravdess.onnx",
-    model_output="models/hubert_vsa_ravdess_onnx/hubert_vsa_ravdess_int8.onnx",
-    weight_type=QuantType.QInt8
+def sanitize_onnx_for_dynamic_quantization(input_path: str, output_path: str) -> None:
+    # Remove intermediate value_info entries to avoid shape-inference conflicts
+    # triggered by ONNX Runtime's internal Gemm->MatMul rewrite.
+    model = onnx.load(input_path)
+    while len(model.graph.value_info):
+        model.graph.value_info.pop()
+    onnx.save(model, output_path)
+
+SANITIZED_ONNX_PATH = os.path.join(ONNX_DIR, "hubert_vsa_ravdess.sanitized.onnx")
+INT8_ONNX_PATH = os.path.join(ONNX_DIR, "hubert_vsa_ravdess_int8.onnx")
+
+sanitize_onnx_for_dynamic_quantization(
+    os.path.join(ONNX_DIR, "hubert_vsa_ravdess.onnx"),
+    SANITIZED_ONNX_PATH,
 )
+
+quantize_dynamic(
+    model_input=SANITIZED_ONNX_PATH,
+    model_output=INT8_ONNX_PATH,
+    weight_type=QuantType.QInt8,
+    op_types_to_quantize=["MatMul", "Gemm"],
+)
+```
+
+Re-run the script:
+
+```
+python convert_and_quantize_model.py
 ```
 
 After this step, you should have a smaller quantized model file for deployment.
@@ -88,6 +125,9 @@ To compare file sizes more easily, you can also run:
 ```bash
 ls -lh models/hubert_vsa_ravdess_onnx
 ```
+
+- `hubert_vsa_ravdess.onnx` + `hubert_vsa_ravdess.onnx.data` is your original FP32 model split into metadata + external weights
+- `hubert_vsa_ravdess_int8.onnx` is the quantized model, where you should be able to observe a smaller model size compared to the original model.
 
 ### Step 3.3 - Run ONNX inference
 
@@ -156,7 +196,7 @@ models/
 
 ### Model compression results
 
-We can also compare the model metrics before and after quantization.
+You can also compare the model metrics before and after quantization.
 
 ![Model ONNX conversion and int-8 quantization results#center](4_modelconversionandcompression.png "Model ONNX conversion and int-8 quantization results")
 

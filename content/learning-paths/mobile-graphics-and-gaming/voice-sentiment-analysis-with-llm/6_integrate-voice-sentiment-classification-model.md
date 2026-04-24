@@ -9,11 +9,15 @@ End-to-end response time may take a few seconds because the application runs Whi
 
 ![Integrated voice-to-LLM pipeline#center](6_vsapipeline4.png "Integrated voice-to-LLM pipeline")
 
-
+In Steps 4.1 to 4.4, continue editing the same `app.py` file you created in the baseline pipeline section (`~/voice-sentiment-assistant/app.py`).
 
 ### Step 4.1 - Load the voice sentiment classification model
 
 This step initializes the trained and quantized ONNX model, then loads the matching preprocessing components used during training. You will reuse these objects every time you run sentiment inference on new audio.
+
+Add these imports and model-loading definitions to `app.py`:
+- add the imports with your other imports at the top of the file
+- add `MODEL_DIR`, `ONNX_PATH`, `session`, `feature_extractor`, and `id2label` near `LOCAL_LLM_URL` and your other global setup values
 
 ```python
 import onnxruntime as ort
@@ -80,7 +84,10 @@ def handle_audio(audio_path):
         json={
             "model": "local-model",
             "messages": [
-                {"role": "system", "content": "Acknowledge the user sentiment. Respond with a joke on the sentiment."},
+                {
+                    "role": "system",
+                    "content": "Respond helpfully and acknowledge the user's emotional tone."
+                },
                 {"role": "user", "content": prompt},
             ],
         },
@@ -99,8 +106,6 @@ def handle_audio(audio_path):
 In this step, update the interface so it displays three outputs: the transcript, the predicted sentiment, and the final LLM response. For consistency with the earlier page, connect the microphone input with `mic.change(...)`.
 
 ```python
-import gradio as gr
-
 with gr.Blocks() as demo:
     mic = gr.Audio(sources="microphone", type="filepath")
 
