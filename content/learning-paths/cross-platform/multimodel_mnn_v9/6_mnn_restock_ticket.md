@@ -122,6 +122,16 @@ Check that:
 
 If the model adds extra text before or after the ticket, tighten the prompt and repeat the run.
 
+### Completion checklist
+
+You have completed this Learning Path when you can:
+
+✓ Run text, vision, audio, and combined multimodal examples on Armv9
+
+✓ Generate a final ticket from one image and one voice note
+
+✓ Verify that changing one modality only affects the fields derived from that modality
+
 ## What you've learned and what's next
 
 In this section, you:
@@ -139,15 +149,7 @@ You've built a complete multimodal inference workflow on Armv9 using only the CP
 3. Extracted structured tasks from a voice note
 4. Combined both inputs into a single-shot restock ticket
 
-### Completion checklist
 
-You have completed this Learning Path when you can:
-
-✓ Run text, vision, audio, and combined multimodal examples on Armv9
-
-✓ Generate a final ticket from one image and one voice note
-
-✓ Verify that changing one modality only affects the fields derived from that modality
 
 ### Next steps
 
