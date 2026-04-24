@@ -1,5 +1,5 @@
 ---
-title: Run the example end to end
+title: Run device discovery and agent control examples
 weight: 4
 
 # FIXED, DO NOT MODIFY

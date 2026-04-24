@@ -1,5 +1,5 @@
 ---
-title: Set up the developer environment
+title: Set up the Device Connect and Strands developer environment
 weight: 3
 
 # FIXED, DO NOT MODIFY
