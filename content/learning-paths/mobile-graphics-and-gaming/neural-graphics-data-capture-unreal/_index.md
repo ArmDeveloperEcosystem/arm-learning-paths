@@ -1,5 +1,6 @@
 ---
-title: Neural Graphics Data Capture in Unreal Engine
+title: Generate neural graphics datasets with Neural Graphics Data Capture in Unreal Engine
+description: Learn how to capture high-quality frame datasets from Unreal Engine 5.5 gameplay for training and evaluating neural graphics models like Neural Super Sampling.
 
 minutes_to_complete: 30
 
@@ -13,11 +14,13 @@ learning_objectives:
 
 prerequisites:
     - Windows 11
-    - Unreal Engine 5.5
+    - Unreal Engine 5.5 installed
     - Visual Studio with C++ game development tools
-    - A C++ Unreal project (for example, Third Person template)
+    - A C++ Unreal project (such as the Third Person template)
 
-author: Annie Tallund
+author: 
+- Annie Tallund
+- Richard Burton
 
 ### Tags
 skilllevels: Introductory
@@ -43,9 +46,17 @@ further_reading:
         link: https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics
         type: website
     - resource:
+        title: Neural Super Sampling in Unreal Engine
+        link: /learning-paths/mobile-graphics-and-gaming/nss-unreal/
+        type: documentation
+    - resource:
         title: Generate Unreal Engine project files for your IDE
         link: https://dev.epicgames.com/documentation/en-us/unreal-engine/how-to-generate-unreal-engine-project-files-for-your-ide
         type: documentation
+    - resource:
+        title: Neural Graphics Model Gym - NSS Data Generation
+        link: https://github.com/arm/neural-graphics-model-gym/blob/main/docs/nss/nss_data_generation.md
+        type: website
 
 
 

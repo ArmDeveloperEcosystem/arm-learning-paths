@@ -14,33 +14,31 @@ Use a **C++ Unreal project** so the plugin module can compile through Visual Stu
 
 ## Add plugin files to your project
 
-1. Open your Unreal project folder in File Explorer.
-2. Create a `Plugins` folder at the root of the project if it does not already exist.
-3. Copy the `NeuralGraphicsDataCapture` plugin folder into `Plugins/`.
+- Open your Unreal project folder in File Explorer.
+- Create a `Plugins` folder at the root of the project if it doesn't already exist.
+- Copy the `NeuralGraphicsDataCapture` plugin folder into `Plugins/`.
 
-![Windows File Explorer showing the project root with a Plugins folder#center](./images/project-plugins-folder.png "Figure 1: Create a Plugins directory in your Unreal project.")
+![Screenshot of Windows File Explorer showing the project root directory with a Plugins folder containing the NeuralGraphicsDataCapture folder. This confirms the plugin is in the correct location.#center](./images/project-plugins-folder.png "Project root with Plugins directory")
 
 ## Reopen project and build module
 
-1. Reopen the `.uproject` file.
-2. If prompted about missing modules, click **Yes** to rebuild.
+- Reopen the `.uproject` file.
+- If prompted about missing modules, select **Yes** to rebuild.
 
-![Missing modules dialog asking to rebuild NeuralGraphicsDataCapture#center](./images/missing-modules-rebuild-prompt.png "Figure 2: Rebuild the plugin module when Unreal prompts.")
+![Dialog box showing that the NeuralGraphicsDataCapture module is missing and asking whether to rebuild it. Select Yes to continue.#center](./images/missing-modules-rebuild-prompt.png "Missing module rebuild prompt")
 
-3. Build the project in Visual Studio.
+- Build the project in Visual Studio.
 
-{{% notice %}}
-If Unreal does not detect the plugin after copying files, regenerate project files and rebuild from Visual Studio.
-{{% /notice %}}
+{{% notice %}}If Unreal doesn't detect the plugin after copying files, regenerate project files and rebuild from Visual Studio.{{% /notice %}}
 
 ## Verify plugin is enabled
 
 In Unreal Editor:
 
-1. Go to **Edit > Plugins**.
-2. Search for `data cap`.
-3. Confirm **Neural Graphics Data Capture Plugin for Unreal Engine** is enabled.
+- Go to **Edit > Plugins**.
+- Search for `data cap`.
+- Confirm **Neural Graphics Data Capture Plugin for Unreal Engine** is enabled.
 
-![Plugins window showing Neural Graphics Data Capture enabled#center](./images/plugin-enabled-in-editor.png "Figure 3: Verify the plugin is enabled.")
+![Screenshot of the Unreal Engine Plugins window with the search results showing Neural Graphics Data Capture Plugin for Unreal Engine with the enabled checkbox selected. This confirms the plugin is active.#center](./images/plugin-enabled-in-editor.png "Plugin enabled in Unreal Editor")
 
 Next, add the capture graph to your Level Blueprint.

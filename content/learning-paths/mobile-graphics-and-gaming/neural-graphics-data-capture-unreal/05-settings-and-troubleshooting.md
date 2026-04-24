@@ -6,7 +6,7 @@ weight: 6
 layout: learningpathall
 ---
 
-## Useful capture settings
+## Available capture settings
 
 You can tune these in `NGDCRenderingSettings` and `NGDCExportSettings`:
 
@@ -24,22 +24,31 @@ For smooth out-of-box capture, a representative spec is:
 - GPU: NVIDIA GeForce RTX 4080 (driver 572.96 or newer)
 - OS: 64-bit Windows or Linux
 
-## Troubleshooting
+## Common issues and solutions
 
-1. Plugin not detected:
-   - Confirm plugin is under your project `Plugins/` directory.
-   - Regenerate project files and rebuild.
-2. Hotkeys do nothing:
-   - Verify Level Blueprint has `C` wired to **Begin Capture** and `V` wired to **End Capture**.
-3. Dataset folder is empty:
-   - Confirm capture actually started and that export path is writable.
-4. Stutter or instability:
-   - Lower `SupersamplingRatio` and test again.
-5. Unexpected output size:
-   - Use **Standalone Game** mode instead of **New Editor Window (PIE)**.
+**Plugin not detected:**
+- Confirm plugin is under your project `Plugins/` directory.
+- Regenerate project files and rebuild.
 
-## Result
+**Hotkeys don't work:**
+- Verify Level Blueprint has `C` wired to **Begin Capture** and `V` wired to **End Capture**.
 
-You now have a UE 5.5 workflow to capture neural graphics datasets directly from gameplay, without setting up Vulkan SDK or emulation layers.
+**Dataset folder is empty:**
+- Confirm capture started and that export path is writable.
 
-Use this as a repeatable data generation path for model experimentation and evaluation in your neural graphics pipeline.
+**Stutter or instability:**
+- Lower `SupersamplingRatio` and test again.
+
+**Unexpected output size:**
+- Use **Standalone Game** mode instead of **New Editor Window (PIE)**.
+
+## What you've learned
+
+You've successfully set up a workflow to capture neural graphics datasets directly from Unreal Engine 5.5 gameplay. You can now:
+
+- Generate training data from your own game content without graphics API configuration
+- Capture representative gameplay sequences with real motion and camera behavior
+- Export frame datasets ready for use with Model Gym's NSS data generation pipeline
+- Tune capture settings to match your specific quality and performance requirements
+
+Use this repeatable workflow for model experimentation and evaluation in your neural graphics pipeline.

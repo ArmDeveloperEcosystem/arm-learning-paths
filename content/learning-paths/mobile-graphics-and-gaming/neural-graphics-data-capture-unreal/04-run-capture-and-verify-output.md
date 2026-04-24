@@ -10,10 +10,10 @@ layout: learningpathall
 
 Use **Standalone Game** for capture:
 
-1. Open the play mode menu next to the **Play** button.
-2. Select **Standalone Game**.
+- Open the play mode menu next to the **Play** button.
+- Select **Standalone Game**.
 
-![Unreal Play mode menu with Standalone Game selected#center](./images/play-standalone-mode.png "Figure 7: Select Standalone Game before capturing.")
+![Screenshot of the Unreal Engine Play mode dropdown menu with Standalone Game option highlighted. Select this option instead of Play in Editor to ensure correct frame dimensions.#center](./images/play-standalone-mode.png "Standalone Game mode selection")
 
 {{% notice %}}
 If you use **New Editor Window (PIE)**, captured frame dimensions can differ from expected output sizes.
@@ -21,12 +21,12 @@ If you use **New Editor Window (PIE)**, captured frame dimensions can differ fro
 
 ## Start and stop capture
 
-1. Press **Play**.
-2. Press `C` to begin capture.
-3. Move through the level to capture frames.
-4. Press `V` to stop capture.
+- Press **Play**.
+- Press `C` to begin capture.
+- Move through the level to capture frames.
+- Press `V` to stop capture.
 
-![Standalone game window while capture is running#center](./images/standalone-capture-running.png "Figure 8: Capture running in Standalone mode.")
+![Screenshot of the Standalone Game window during active capture showing the game viewport with the character visible. This shows what you'll see while frames are being captured.#center](./images/standalone-capture-running.png "Capture running in Standalone mode")
 
 After stopping, you should see a completion notification in the bottom right corner. 
 
@@ -38,7 +38,7 @@ Captured output is written under:
 <YourProject>/Saved/NeuralGraphicsDataset/
 ```
 
-With the defaults from this tutorial, look for:
+With the defaults from this tutorial, see:
 
 ```
 <YourProject>/Saved/NeuralGraphicsDataset/0000
