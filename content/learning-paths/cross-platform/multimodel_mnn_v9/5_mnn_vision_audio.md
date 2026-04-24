@@ -6,37 +6,28 @@ layout: learningpathall
 
 ## Introduction
 
-In this module, you use an audio prompt and an MNN Omni model to convert a spoken restock note into a structured one-line ticket on an Armv9 system.
+In this section, you use an audio prompt and an MNN Omni model to convert a spoken restock note into a structured one-line ticket on an Armv9 system.
 
 This mirrors a simple retail workflow. A store associate records a short voice note during a shelf walk, and the system converts it into a task that can be reviewed by staff or passed to another tool.
 
-To keep the output predictable, this module uses a single-line format with semicolon-separated fields. This also helps when terminal output does not preserve line breaks consistently.
+To keep the output predictable, this section uses a single-line format with semicolon-separated fields. This also helps when terminal output does not preserve line breaks consistently.
 
 ## Prepare the audio asset
 
 To simplify the demonstration and improve clarity for this learning path, directly download the prepared audio file:
 
 ```bash
-mkdir ~/mnn/assets
-wget wget https://github.com/odincodeshen/multimodel_mnn_armv9/raw/main/assets/restock_note.wav -P ~/mnn/assets
+mkdir -p ~/mnn/assets
+wget https://github.com/odincodeshen/multimodel_mnn_armv9/raw/main/assets/restock_note.wav -P ~/mnn/assets
 ```
 
-This audio `restock_note.wav` contains brief spoken instructions describing restocking tasks, such as:
+The audio file contains a spoken restocking instruction. The content is similar to:
 
-- please restock the bottom-left large pet food bags, add ten bags
-- also restock the middle-left canned pet food, add twenty-four cans
-- finish before 3 PM today
-- if something is out of stock, use a similar substitute
+```text
+This is the pet food aisle, left shelf. Please restock the bottom left large pet food bags, add 10 bags. Also restock the middle left canned food, add 24 cans. Finish before 3 PM today. If something is out of stock, use a similar substitute.
+```
 
-The model’s goal is to extract structured operational information from this audio, specifically:
-
-- items
-- quantities
-- shelf zones
-- deadline
-- substitution policy
-
-The objective isn’t comprehensive speech analytics but efficiently converting spoken instructions into a compact operational ticket.
+From this spoken note, the model extracts item names, quantities, shelf zones, a deadline, and a substitution policy. The goal isn't comprehensive speech analytics — it's converting a short spoken instruction into a compact operational ticket.
 
 ## Verify the audio format
 
@@ -48,7 +39,7 @@ file ~/mnn/assets/restock_note.wav
 
 You should see output indicating that the file is a RIFF/WAV audio file.
 
-If you'd like to record the audio by yourself as MP3 format, please convert it to a speech-friendly WAV format:
+If you have your own MP3 recording, convert it to a speech-friendly WAV format:
 
 ```bash
 ffmpeg -y -i input.mp3 -ac 1 -ar 16000 -c:a pcm_s16le ~/mnn/assets/restock_note.wav
@@ -56,15 +47,9 @@ ffmpeg -y -i input.mp3 -ac 1 -ar 16000 -c:a pcm_s16le ~/mnn/assets/restock_note.
 
 This creates a mono, 16 kHz, 16-bit PCM WAV file, which is a practical format for speech input.
 
-The spoken content can be similar to:
-
-```text
-This is the pet food aisle, left shelf. Please restock the bottom left large pet food bags, add 10 bags. Also restock the middle left canned food, add 24 cans. Finish before 3 PM today. If something is out of stock, use a similar substitute.
-```
-
 In store inspection scenarios, unreliable connectivity, or environments where teams prefer not to upload audio in real time, local speech understanding on Armv9 has clear deployment value.
 
-In this module, the audio input is not just an audio prompt. It acts as on-device spoken task capture for store operations, turning a short spoken restocking note into structured operational input.
+In this section, the audio input is not just an audio prompt. It acts as on-device spoken task capture for store operations, turning a short spoken restocking note into structured operational input.
 
 ## Create the audio prompt
 
@@ -77,12 +62,10 @@ Create a prompt file that attaches the WAV file and asks the model to return a s
 Create the prompt file:
 
 ```bash
-cat > ~/mnn/prompt_audio_ticket.txt <<'EOF'
-<audio>/home/radxa/mnn/assets/restock_note.wav</audio> You are a retail store replenishment assistant. Convert the spoken note into a restocking ticket. Output EXACTLY ONE line using bullet-style segments separated by semicolons: Restock ticket; - Location: pet food aisle left shelf; - Task 1: <generic item> | qty <number or NOT_SURE> | zone <top|middle|bottom>-<left|center|right or NOT_SURE>; - Task 2: <generic item> | qty <number or NOT_SURE> | zone <top|middle|bottom>-<left|center|right or NOT_SURE>; - Deadline: <time or NOT_SURE>; - Substitution: <use similar substitute|no substitute|NOT_SURE>; - Notes: <short note>; - Confidence: <high|medium|low>. Rules: do not invent quantities if not in audio.
+cat > ~/mnn/prompt_audio_ticket.txt <<EOF
+<audio>$HOME/mnn/assets/restock_note.wav</audio> You are a retail store replenishment assistant. Convert the spoken note into a restocking ticket. Output EXACTLY ONE line using bullet-style segments separated by semicolons: Restock ticket; - Location: pet food aisle left shelf; - Task 1: <generic item> | qty <number or NOT_SURE> | zone <top|middle|bottom>-<left|center|right or NOT_SURE>; - Task 2: <generic item> | qty <number or NOT_SURE> | zone <top|middle|bottom>-<left|center|right or NOT_SURE>; - Deadline: <time or NOT_SURE>; - Substitution: <use similar substitute|no substitute|NOT_SURE>; - Notes: <short note>; - Confidence: <high|medium|low>. Rules: do not invent quantities if not in audio.
 EOF
 ```
-
-If your username or home directory is different, replace `/home/radxa` with the correct local path.
 
 This prompt asks the model to:
 
@@ -125,7 +108,7 @@ Restock ticket;
 
 ```
 The exact wording can vary. What matters is that the response stays close to the requested structure and reflects the spoken content rather than invented details.
-![image2 Prompt Audio Ticket](prompt_audio_ticket.gif)
+![Animated terminal output showing llm_demo processing an audio prompt and returning a structured restock ticket on Armv9#center](prompt_audio_ticket.gif "llm_demo audio prompt output on Armv9")
 
 ## Verify the result
 

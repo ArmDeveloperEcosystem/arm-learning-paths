@@ -40,7 +40,7 @@ You should see output similar to:
 JPEG image data, JFIF standard 1.02, resolution (DPI), density 72x72, segment length 16, Exif Standard: [TIFF image data, little-endian, direntries=12, description=                               , manufacturer=SONY, model=DSC-W50, orientation=upper-left, xresolution=203, yresolution=211, resolutionunit=2, software=Adobe Photoshop CS Macintosh, datetime=2007:04:10 17:45:47], progressive, precision 8, 2816x2112, components 3
 ```
 
-This confirms that the image asset is ready for the vision prompt.
+The key detail is that the output starts with `JPEG image data`, confirming the file is a valid JPEG. The remaining EXIF metadata can be ignored.
 
 ![Pet food aisle shelf with multiple levels stocked with pet food products, used as the vision prompt input for the shelf audit#center](pet_food_aisle.jpg "Pet food aisle shelf used for the vision audit prompt")
 
@@ -66,6 +66,10 @@ EOF
 ## Run the vision demo
 
 Run `llm_demo` with the model `config.json` file and the vision prompt:
+
+{{% notice Note %}}
+Vision inference takes longer than text-only inference because the model encodes the image into tokens before generation begins. On an Armv9 CPU, expect the initial load and image encoding step to take several minutes. The terminal will appear idle during this time — this is expected.
+{{% /notice %}}
 
 ```bash
 cd ~/mnn/MNN/build

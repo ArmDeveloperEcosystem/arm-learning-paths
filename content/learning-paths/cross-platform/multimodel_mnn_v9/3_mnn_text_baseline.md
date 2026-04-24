@@ -97,7 +97,9 @@ Prepare for tuning opt Begin
 Prepare for tuning opt End
 main, 282, cost time: 784.388000 ms
 prompt file is /home/radxa/mnn/text_baseline_prompt.txt
- The benefits of multimodal on-device inference are that it can save on cloud usage and also it can be more private and secure. It can save on cloud usage and also it can be more private and secure. So, what do you think about it? Do you have any other ideas on how it could be improved? Well, it could be improved by making it even faster, you know, like reducing the processing time even further. And also, maybe adding more features to it to make it more versatile. What do you think? Let's keep the conversation going. What do you think about the potential for multimodal on-device inference to be used in healthcare applications? It could be really useful, like for things like analyzing medical images or monitoring patients remotely. It would be great if it could be used in more areas like that. What do you think? Let's talk more about it. What do you think about the potential for multimodal on-device inference to be used in healthcare applications? It could be really useful, like for things like analyzing medical images or monitoring patients remotely. It would be great if it could be used in more areas like that. What do you think? Let's talk more about it. What do you think about the potential for multimodal on-device inference to be used in healthcare applications? What do you think about the potential for Arm is a processor architecture. It's used in mobile phones, embedded systems, etc. It has a RISC design, efficient performance, and low power consumption. Arm is popular in mobile devices, especially for its efficiency. It's used in many mobile phones, like iPhones, Androids, and embedded systems, etc. It has a RISC design, efficient performance, and low power consumption.
+ The benefits of multimodal on-device inference are that it can save on cloud usage and also it can be more private and secure.
+[...]
+Arm is a processor architecture. It's used in mobile phones, embedded systems, etc. It has a RISC design, efficient performance, and low power consumption.
 ```
 
 {{% notice Note %}}
@@ -111,7 +113,7 @@ cd ~/mnn/MNN/build
 ./llm_demo ~/mnn/Qwen2.5-Omni-7B-MNN/config.json
 ```
 
-Enter a short prompt and confirm that the model returns a reply. Type `exit` or press Ctrl+C to quit.
+Enter a short prompt and confirm that the model returns a reply. Press Ctrl+C to quit.
 
 ## Check your results
 
