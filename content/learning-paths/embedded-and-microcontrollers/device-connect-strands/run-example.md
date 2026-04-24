@@ -64,7 +64,7 @@ Two things happen when this script runs.
 
 ![Sequence diagram showing the call flow when r.run() executes: the script calls Robot() and DeviceRuntime, which announces presence to the Zenoh mesh, subscribes to the command topic, registers RPC handlers, and starts emitting stateUpdate events at 10 Hz#center](./images/visual2.png "Call flow inside r.run(): device registration and event publishing over Zenoh")
 
-You should see INFO-level log output similar to:
+The output is similar to:
 
 ```output
 device_connect_sdk.device.so100-abc123 - INFO - Using ZENOH messaging backend
