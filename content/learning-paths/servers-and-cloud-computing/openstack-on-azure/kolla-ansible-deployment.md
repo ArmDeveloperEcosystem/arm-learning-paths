@@ -95,6 +95,7 @@ kolla-ansible install-deps
 
 ## Configure Kolla
 
+Copy the default configuration files and inventory into place:
 
 ```console
 sudo mkdir -p /etc/kolla

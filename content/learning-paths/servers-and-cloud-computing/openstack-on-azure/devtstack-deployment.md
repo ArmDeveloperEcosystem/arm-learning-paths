@@ -321,7 +321,7 @@ cd /home/azureuser/devstack && ./unstack.sh 2>&1 | tail -10
 
 The Kolla-Ansible deployment runs on a separate VM, so this step is optional if you're done with DevStack. Run it if you want to reuse this VM later or clean up resources.
 
-## What you've learned and what's next
+## What you've accomplished and what's next
 
 In this section, you deployed OpenStack using DevStack on an Azure Cobalt 100 Arm64 VM. You then verified the deployment using the CLI and accessed the Horizon dashboard using a browser.
 

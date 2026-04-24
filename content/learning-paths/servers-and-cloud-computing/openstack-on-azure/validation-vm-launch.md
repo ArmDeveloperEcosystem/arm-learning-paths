@@ -266,6 +266,6 @@ The following image shows a successfully launched instance in the OpenStack Hori
 ![OpenStack Horizon Instances page showing test-vm in ACTIVE state with an assigned IP address from the test-net network#center](images/openstack-ui.png "OpenStack Horizon Instances view with running VM")
 
 
-## What you've learned
+## What you've accomplished
 
 You validated your Kolla-Ansible OpenStack deployment end-to-end. You checked service health, configured OVS bridges for Arm on Azure, uploaded an Arm-compatible Debian image, created network and compute resources, and launched a running virtual machine. Your OpenStack environment is now fully functional and ready for use.
