@@ -7,7 +7,7 @@ layout: "learningpathall"
 
 ## Azure Cobalt 100 Arm-based processor
 
-Azure’s Cobalt 100 is Microsoft’s first-generation, in-house Arm-based processor. Built on Arm Neoverse N2, Cobalt 100 is a 64-bit CPU that delivers strong performance and energy efficiency for cloud-native, scale-out Linux workloads such as web and application servers, data analytics, open-source databases, and caching systems. Running at 3.4 GHz, Cobalt 100 allocates a dedicated physical core for each vCPU, which helps ensure consistent and predictable performance.
+Azure’s Cobalt 100 is Microsoft’s first-generation, in-house Arm-based processor. Built on Arm Neoverse N2, Cobalt 100 is a 64-bit CPU that delivers strong performance and energy efficiency for cloud-native, scale-out Linux workloads. These workloads include web and application servers, data analytics, open-source databases, and caching systems. Running at 3.4 GHz, Cobalt 100 allocates a dedicated physical core for each vCPU, which helps ensure consistent and predictable performance.
 
 To learn more, see the Microsoft blog [Announcing the preview of new Azure VMs based on the Azure Cobalt 100 processor](https://techcommunity.microsoft.com/blog/azurecompute/announcing-the-preview-of-new-azure-vms-based-on-the-azure-cobalt-100-processor/4146353).
 
@@ -24,7 +24,7 @@ OpenStack runs efficiently on Arm-based architectures such as Azure Cobalt 100, 
 OpenStack is composed of modular services that handle different aspects of cloud infrastructure:
 
 * Keystone (Identity): Authentication and authorization service
-* Nova (Compute): Manages virtual machine lifecycle
+* Nova (Compute): Manages virtual machine (VM) lifecycle
 * Glance (Image): Stores and manages VM images
 * Neutron (Networking): Provides networking and connectivity
 * Cinder (Block Storage): Persistent block storage for instances
@@ -61,7 +61,7 @@ Kolla-Ansible runs every OpenStack service as a Docker container and is the reco
 You should run each approach on its own dedicated virtual machine (VM). Don't run both on the same VM because they use the same ports and will conflict.
 {{< /notice >}}
 
-## VM requirements for each deployment
+## Virtual machine requirements for each deployment
 
 Because the two approaches have different infrastructure requirements, this Learning Path uses two separate Azure VMs.
 

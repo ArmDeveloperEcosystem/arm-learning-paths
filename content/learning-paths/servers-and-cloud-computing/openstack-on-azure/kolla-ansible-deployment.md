@@ -12,6 +12,8 @@ Kolla-Ansible deploys OpenStack services as Docker containers, making the deploy
 
 After completing this guide, your environment will run core OpenStack services such as Nova, Neutron, Keystone, and Glance. The environment will support Arm64 (`aarch64`) architecture, provide CLI and Horizon access, and allow launching virtual machines. 
 
+{{% notice Warning %}}You can't run DevStack and Kolla-Ansible on the same VM at the same time. Use separate VMs for each approach. If you run both on the same host, port conflicts will cause deployment failures.{{% /notice %}} 
+
 ## Configure an external network interface
 
 Configure an external network interface to ensure that OpenStack can use `eth1` as the external/provider network:

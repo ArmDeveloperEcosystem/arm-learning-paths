@@ -8,11 +8,13 @@ layout: learningpathall
 
 <!-- {{% notice Note %}}Use the VM you created in the previous step: a single-NIC D4ps_v6 instance with at least 80 GB of disk. You do not need an extra NIC or data disk for DevStack.{{% /notice %}}
 
-{{% notice Warning %}}You can't run DevStack and Kolla-Ansible on the same VM at the same time. Use separate VMs for each approach. If you run both on the same host, port conflicts will cause deployment failures.{{% /notice %}} -->
+-->
 
 In this section, you'll deploy OpenStack using DevStack on the Arm-based Azure virtual machine (VM) running Azure Cobalt 100 that you created in the previous section. DevStack is a script-based installer designed for development and testing. It runs all OpenStack services directly on the host OS and deploys Nova, Keystone, Glance, and Horizon on a single node.
 
 The environment that you'll create will run OpenStack services on your Azure Cobalt 100 VM, provide access to the Horizon dashboard, and support Arm64 (`aarch64`) architecture. You'll be able to access the environment using both browser and CLI.
+
+{{% notice Warning %}}You can't run DevStack and Kolla-Ansible on the same VM at the same time. Use separate VMs for each approach. If you run both on the same host, port conflicts will cause deployment failures.{{% /notice %}} 
 
 ## Clean previous setup
 
