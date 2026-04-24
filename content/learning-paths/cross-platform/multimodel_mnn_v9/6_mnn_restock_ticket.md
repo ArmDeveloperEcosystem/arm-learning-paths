@@ -68,7 +68,7 @@ cd ~/mnn/MNN/build
 ./llm_demo ~/mnn/Qwen2.5-Omni-7B-MNN/config.json ~/mnn/prompt_final_multimodal.txt
 ```
 
-You should see output similar to:
+The output is similar to:
 
 ```text
 config path is /home/radxa/mnn/Qwen2.5-Omni-7B-MNN/config.json

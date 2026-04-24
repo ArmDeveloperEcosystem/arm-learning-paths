@@ -8,7 +8,7 @@ layout: learningpathall
 
 In this section, you use an audio prompt and an MNN Omni model to convert a spoken restock note into a structured one-line ticket on an Armv9 system.
 
-This mirrors a simple retail workflow. A store associate records a short voice note during a shelf walk, and the system converts it into a task that can be reviewed by staff or passed to another tool.
+This mirrors a simple retail workflow where a store associate records a short voice note during a shelf walk, and the system converts it into a task that can be reviewed by staff or passed to another tool.
 
 To keep the output predictable, this section uses a single-line format with semicolon-separated fields. This also helps when terminal output does not preserve line breaks consistently.
 
@@ -21,7 +21,7 @@ mkdir -p ~/mnn/assets
 wget https://github.com/odincodeshen/multimodel_mnn_armv9/raw/main/assets/restock_note.wav -P ~/mnn/assets
 ```
 
-The audio file contains a spoken restocking instruction. The content is similar to:
+The audio file contains a spoken restocking instruction similar to:
 
 ```text
 This is the pet food aisle, left shelf. Please restock the bottom left large pet food bags, add 10 bags. Also restock the middle left canned food, add 24 cans. Finish before 3 PM today. If something is out of stock, use a similar substitute.
@@ -37,7 +37,7 @@ Check that the input file is a WAV file:
 file ~/mnn/assets/restock_note.wav
 ```
 
-You should see output indicating that the file is a RIFF/WAV audio file.
+The output should indicate that the file is a RIFF/WAV audio file.
 
 If you have your own MP3 recording, convert it to a speech-friendly WAV format:
 
@@ -47,9 +47,9 @@ ffmpeg -y -i input.mp3 -ac 1 -ar 16000 -c:a pcm_s16le ~/mnn/assets/restock_note.
 
 This creates a mono, 16 kHz, 16-bit PCM WAV file, which is a practical format for speech input.
 
-In store inspection scenarios, unreliable connectivity, or environments where teams prefer not to upload audio in real time, local speech understanding on Armv9 has clear deployment value.
+In store inspection scenarios with unreliable connectivity or environments where teams prefer not to upload audio in real time, local speech understanding on Armv9 has clear deployment value.
 
-In this section, the audio input is not just an audio prompt. It acts as on-device spoken task capture for store operations, turning a short spoken restocking note into structured operational input.
+In this section, the audio input isn't just an audio prompt — it acts as on-device spoken task capture for store operations, turning a short spoken restocking note into structured operational input.
 
 ## Create the audio prompt
 
@@ -82,7 +82,7 @@ cd ~/mnn/MNN/build
 ./llm_demo ~/mnn/Qwen2.5-Omni-7B-MNN/config.json ~/mnn/prompt_audio_ticket.txt
 ```
 
-You should see output similar to:
+The output is similar to:
 
 ```text
 config path is /home/radxa/mnn/Qwen2.5-Omni-7B-MNN/config.json

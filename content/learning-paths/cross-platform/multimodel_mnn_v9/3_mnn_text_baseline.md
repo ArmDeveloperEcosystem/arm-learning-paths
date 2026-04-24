@@ -39,7 +39,7 @@ cd ~/mnn/MNN/build
 
 A successful run should load the model, report the detected CPU features, and return a text response for the prompt.
 
-Example output:
+The output is similar to:
 
 ```text
 config path is /home/radxa/mnn/Qwen2.5-Omni-7B-MNN/config.json

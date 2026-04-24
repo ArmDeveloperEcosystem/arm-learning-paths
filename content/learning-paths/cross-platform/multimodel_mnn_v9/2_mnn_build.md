@@ -6,11 +6,11 @@ layout: learningpathall
 
 ## Introduction
 
-In this section, you will build **MNN** natively on your Armv9 Linux system and verify that the `llm_demo` binary can load a prebuilt Omni MNN model package. This sets up everything needed for the text, vision, and audio demos in later sections.
+In this section, you'll build **MNN** natively on your Armv9 Linux system and verify that the `llm_demo` binary can load a prebuilt Omni MNN model package. This sets up everything needed for the text, vision, and audio demos in later sections.
 
-This section uses a native CPU-only MNN build on Armv9. That is a deliberate design choice, not a fallback. The goal is to show how a compact, reproducible, deployment-friendly software stack can run directly on an Armv9 CPU without depending on a discrete GPU or separate accelerator.
+This section uses a native CPU-only MNN build on Armv9 — a deliberate design choice, not a fallback. The goal is to show how a compact, reproducible, deployment-friendly software stack can run directly on an Armv9 CPU without depending on a discrete GPU or separate accelerator.
 
-At the end of this section, you will have:
+At the end of this section, you'll have:
 
 - a working `llm_demo` binary
 - a validated model directory that includes `config.json`
@@ -28,7 +28,7 @@ cd ~/mnn
 
 ## Why build natively on Armv9
 
-Building, running inference, and deploying all happen directly on the Armv9 device. There is no cross-compilation involved. This keeps the toolchain simple, eliminates environment drift between build and target, and means any library or configuration issue you encounter is the same one you would hit in production.
+Building, running inference, and deploying all happen directly on the Armv9 device. There's no cross-compilation involved. This keeps the toolchain simple, eliminates environment drift between build and target, and means any library or configuration issue you encounter is the same one you'd hit in production.
 
 Building on the target also makes it straightforward to confirm that the binary, shared libraries, and model assets all resolve correctly in the same environment where you will run the model.
 

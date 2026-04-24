@@ -1,9 +1,6 @@
 ---
 title: Build a Multimodal Retail Restocking Assistant on Armv9 With MNN
 
-draft: true
-cascade:
-    draft: true
     
 minutes_to_complete: 90
 
@@ -50,6 +47,18 @@ further_reading:
     - resource:
         title: ModelScope model hub
         link: https://modelscope.cn/models
+        type: website
+    - resource:
+        title: KleidiAI explainer
+        link: /learning-paths/cross-platform/kleidiai-explainer/
+        type: website
+    - resource:
+        title: Install CMake
+        link: /install-guides/cmake/
+        type: website
+    - resource:
+        title: Vision LLM inference on Android with KleidiAI and MNN
+        link: /learning-paths/mobile-graphics-and-gaming/vision-llm-inference-on-android-with-kleidiai-and-mnn/
         type: website
 
 ### FIXED, DO NOT MODIFY
