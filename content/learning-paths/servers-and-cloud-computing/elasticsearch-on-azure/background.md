@@ -6,6 +6,18 @@ weight: 2
 layout: "learningpathall"
 ---
 
+## Learning Path overview
+
+In this Learning Path, you deploy Elasticsearch on an Arm-based Azure Cobalt 100 virtual machine and run a baseline benchmark with ESRally. You then review key latency and throughput metrics so you can assess initial performance on Arm.
+
+## What you will do
+
+You will complete one end-to-end developer task:
+
+1. Create an Azure Cobalt 100 Arm virtual machine.
+2. Install Elasticsearch and ESRally.
+3. Run the geonames track and review benchmark results.
+
 ## Azure Cobalt 100 Arm-based processor
 
 Azure’s Cobalt 100 is Microsoft’s first-generation, in-house Arm-based processor. Built on Arm Neoverse N2, Cobalt 100 is a 64-bit CPU that delivers strong performance and energy efficiency for cloud-native, scale-out Linux workloads such as web and application servers, data analytics, open-source databases, and caching systems. Running at 3.4 GHz, Cobalt 100 allocates a dedicated physical core for each vCPU, which helps ensure consistent and predictable performance.

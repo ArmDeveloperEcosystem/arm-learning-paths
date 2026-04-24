@@ -41,6 +41,9 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
+# ================================================================================
+#       FIXED, DO NOT MODIFY
+# ================================================================================
 further_reading:
   - resource:
       title: Azure Virtual Machines documentation
@@ -55,21 +58,7 @@ further_reading:
       link: https://esrally.readthedocs.io/en/stable/index.html
       type: documentation
 
-### FIXED, DO NOT MODIFY
-# ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
-learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
+learning_path_main_page: "yes"  
 ---
-
-## Learning Path overview
-
-In this Learning Path, you deploy Elasticsearch on an Arm-based Azure Cobalt 100 virtual machine and run a baseline benchmark with ESRally. You then review key latency and throughput metrics so you can assess initial performance on Arm.
-
-## What you will do
-
-You will complete one end-to-end developer task:
-
-1. Create an Azure Cobalt 100 Arm virtual machine.
-2. Install Elasticsearch and ESRally.
-3. Run the geonames track and review benchmark results.
