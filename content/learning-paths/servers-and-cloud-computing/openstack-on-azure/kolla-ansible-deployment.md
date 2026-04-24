@@ -6,45 +6,28 @@ weight: 6
 layout: learningpathall
 ---
 
-## Deploy OpenStack on Azure Cobalt 100 VM using Kolla-Ansible
+<!-- {{% notice Note %}}Use the virtual machine prepared for Kolla-Ansible deployment (with dual NICs and a data disk). This setup is required for proper networking and storage configuration.{{% /notice %}}
 
-{{% notice Note %}}Use the virtual machine prepared for Kolla-Ansible deployment (with dual NICs and a data disk). This setup is required for proper networking and storage configuration.{{% /notice %}}
+{{% notice Warning %}}**DevStack and Kolla-Ansible are separate deployment approaches and must not run on the same VM at the same time.** If you have previously run a DevStack deployment on this VM, stop it completely before proceeding. Kolla-Ansible deploys OpenStack services as Docker containers on the same ports that DevStack uses. Running both on the same host will cause port conflicts and service startup failures. Use a separate VM for each approach, or unstack DevStack fully before attempting this deployment.{{% /notice %}} -->
 
-{{% notice Warning %}}**DevStack and Kolla-Ansible are separate deployment approaches and must not run on the same VM at the same time.** If you have previously run a DevStack deployment on this VM, stop it completely before proceeding. Kolla-Ansible deploys OpenStack services as Docker containers on the same ports that DevStack uses. Running both on the same host will cause port conflicts and service startup failures. Use a separate VM for each approach, or unstack DevStack fully before attempting this deployment.{{% /notice %}}
-
-This guide walks you through deploying OpenStack using Kolla-Ansible on an Azure Ubuntu 24.04 Arm64 virtual machine.
+In this section, you'll deploy OpenStack using Kolla-Ansible on the Azure Ubuntu 24.04 Arm64 virtual machine that you created in the previous section.
 
 Kolla-Ansible deploys OpenStack services as Docker containers, making the deployment modular, reproducible, and easier to manage.
 
-After completing this guide, your environment will:
-
-* Run core OpenStack services (Nova, Neutron, Keystone, Glance)
-* Support Arm64 (`aarch64`) architecture
-* Provide CLI and Horizon access
-* Allow launching virtual machines
-
-
-## Prerequisites
-
-* Ubuntu 24.04 Arm64 VM (Azure)
-* Minimum 4 vCPU, 8 GB RAM (16 GB recommended)
-* Disk: 100 GB+
-* Two network interfaces:
-
-  * `eth0` → management (with IP)
-  * `eth1` → external (no IP)
+After completing this guide, your environment will run core OpenStack services such as Nova, Neutron, Keystone, and Glance. The environment will support Arm64 (`aarch64`) architecture, provide CLI and Horizon access, and allow launching virtual machines. 
 
 ## Configure external interface
+
+Configure external interface to ensure that OpenStack can use `eth1` as the external/provider network:
 
 ```console
 sudo ip addr flush dev eth1
 sudo ip link set eth1 up
 ```
 
-This ensures that OpenStack can use `eth1` as the external/provider network.
-
-
 ## Install system dependencies
+
+Install packages for Python builds and OpenStack dependencies:
 
 ```console
 sudo apt update
@@ -56,11 +39,9 @@ libdbus-1-dev libglib2.0-dev pkg-config \
 meson ninja-build curl
 ```
 
-These packages are required for Python builds and OpenStack dependencies.
-
 ## Install Docker
 
-Docker is used to run all OpenStack services as containers.
+Install Docker to run all OpenStack services as containers:
 
 ```console
 sudo apt install -y docker.io
@@ -69,36 +50,39 @@ sudo systemctl enable docker
 sudo systemctl start docker
 ```
 
-**Add user to Docker group:**
+Add user to Docker group:
 
 ```console
 sudo usermod -aG docker $USER
 ```
 
-**Apply group permissions (IMPORTANT):**
+Apply group permissions:
 
 ```console
 newgrp docker
 ```
+{{< notice Warning >}}
+Without applying group permissions, Docker commands will fail with a permission error.
+{{< /notice >}}
 
-**Verify Docker installation:**
+Verify Docker installation:
 
 ```console
 docker run hello-world
 ```
 
-This step is critical. Without applying group permissions, Docker commands will fail with a permission error.
-
 ## Create Python virtual environment
+
+To isolate dependencies required for Kolla-Ansible, create a virtual environment:
 
 ```console
 python3 -m venv ~/kolla-venv
 source ~/kolla-venv/bin/activate
 ```
 
-A virtual environment isolates dependencies required for Kolla-Ansible.
-
 ## Install Kolla-Ansible and dependencies
+
+Install the following tools to deploy and manage OpenStack services:
 
 ```console
 pip install -U pip
@@ -112,9 +96,9 @@ ansible-galaxy collection install openstack.kolla
 kolla-ansible install-deps
 ```
 
-These tools are required to deploy and manage OpenStack services.
 
 ## Configure Kolla
+
 
 ```console
 sudo mkdir -p /etc/kolla
@@ -126,6 +110,8 @@ cp ~/kolla-venv/share/kolla-ansible/ansible/inventory/all-in-one .
 
 
 ## Edit globals.yml
+
+Edit the configuration in `globals.yml`:
 
 ```console
 vi /etc/kolla/globals.yml
@@ -145,17 +131,18 @@ enable_keepalived: "no"
 nova_compute_virt_type: "qemu"
 ```
 
-### Why this configuration?
+The following are some of the key configuration choices:
 
-- **Debian base** → Arm images are available
-- **aarch64 suffix** → ensures correct image selection
-- **VIP = VM IP** → avoids Azure networking issues
-- **HA disabled** → required for single-node deployments
-- **nova_compute_virt_type=qemu** → overrides the default KVM setting globally; ensures Nova uses QEMU on Arm VMs where KVM is unavailable
+- Debian base - ensures Arm images are available
+- aarch64 suffix - ensures correct image selection
+- VIP = VM IP - avoids Azure networking issues
+- HA disabled - required for single-node deployments
+- nova_compute_virt_type=qemu - overrides the default KVM setting globally and ensures Nova uses QEMU on Arm VMs where KVM is unavailable
 
 
-## Configure Nova (Arm fix)
+## Configure Nova
 
+Arm-based Azure VMs do not support KVM virtualization. Update the configuration for Nova to account for this:
 
 ```console
 sudo mkdir -p /etc/kolla/config
@@ -167,17 +154,15 @@ cpu_mode = none
 EOF
 ```
 
-### Why this is required
-
-Arm-based Azure VMs do not support KVM virtualization. Setting `virt_type = qemu` and `cpu_mode = none` ensures Nova uses QEMU emulation, which works on Arm VMs where KVM is unavailable. Kolla deploys libvirt inside its own `nova_libvirt` container and manages the connection URI automatically.
+Setting `virt_type = qemu` and `cpu_mode = none` ensures Nova uses QEMU emulation, which works on Arm VMs where KVM is unavailable. Kolla deploys libvirt inside its own `nova_libvirt` container and manages the connection URI automatically.
 
 ## Generate passwords
+
+Create all required passwords for OpenStack services:
 
 ```console
 kolla-genpwd
 ```
-
-This creates all required passwords for OpenStack services.
 
 ## Deploy OpenStack
 
@@ -205,6 +190,26 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=41   changed=13   unreachable=0    failed=0    skipped=30   rescued=0    ignored=0
 ```
 
+{{% notice Note %}}
+Kolla-Ansible modifies Docker's systemd unit files during bootstrap. If Docker is already running, the service can fail with the following error:
+
+```output
+RUNNING HANDLER [openstack.kolla.docker : Restart docker]
+fatal: [localhost]: FAILED! => {"changed": false, "msg": "Unable to start service docker: Job for docker.service failed because the control process exited with error code.\nSee \"systemctl status docker.service\" and \"journalctl -xeu docker.service\" for details.\n"}
+```
+Run these three commands to recover:
+
+```console
+sudo systemctl daemon-reload
+sudo systemctl reset-failed docker.socket docker.service
+sudo systemctl restart docker
+```
+`daemon-reload` picks up the updated unit files written by Kolla-Ansible.`reset-failed` clears the failed state that was blocking the restart.`restart docker` starts Docker cleanly.
+
+After Docker is running, re-run the bootstrap step.
+{{% /notice %}}
+
+
 ```console
 kolla-ansible prechecks -i all-in-one 
 ```
@@ -215,6 +220,24 @@ The output is similar to:
 PLAY RECAP ***************************************************************************************************************************
 localhost                  : ok=96   changed=0    unreachable=0    failed=0    skipped=142  rescued=0    ignored=0
 ```
+ {{% notice Note %}}
+Kolla-Ansible manages libvirt inside its own `nova_libvirt` container. If host `libvirtd` is running, prechecks will fail with:
+
+```output
+TASK [nova-cell : Checking that host libvirt is not running]
+fatal: [localhost]: FAILED!
+```
+
+To fix this, stop and disable the host libvirt service before running prechecks:
+
+```console
+sudo systemctl stop libvirtd 2>/dev/null || true
+sudo systemctl disable libvirtd 2>/dev/null || true
+sudo rm -f /var/run/libvirt/libvirt-sock
+```
+
+Then re-run prechecks.
+{{% /notice %}}
 
 ```console
 kolla-ansible pull -i all-in-one
@@ -303,9 +326,9 @@ The output is similar to:
 
 All services should show `enabled` and state `up`. If any service shows `down`, check the container logs with `docker logs <container_name>`.
 
-## What you've learned
+## What you've accomplished and what's next
 
-You deployed OpenStack using Kolla-Ansible on an Azure Cobalt 100 Arm64 VM. The deployment ran all OpenStack services as Docker containers, including Nova, Neutron, Keystone, Glance, and Horizon.
+In this section, you deployed OpenStack using Kolla-Ansible on an Azure Cobalt 100 Arm64 VM. The deployment ran all OpenStack services as Docker containers, including Nova, Neutron, Keystone, Glance, and Horizon.
 
 Along the way, you worked through several challenges specific to Arm and Azure:
 
@@ -314,58 +337,5 @@ Along the way, you worked through several challenges specific to Arm and Azure:
 - Disabled keepalived and used the VM's own IP as the internal VIP, which is required for single-node Azure deployments
 - Allowed Kolla to manage libvirt internally via its `nova_libvirt` container, rather than running host libvirt
 
-Your environment is now ready to launch and manage virtual machines.
+Your environment is now ready to launch and manage virtual machines. In the next section, you'll validate the OpenStack deployment and launch an Azure Cobalt VM instance.
 
-## Troubleshooting
-
-### Docker fails to restart during bootstrap
-
-If `kolla-ansible bootstrap-servers` fails with the following error:
-
-```output
-RUNNING HANDLER [openstack.kolla.docker : Restart docker]
-fatal: [localhost]: FAILED! => {"changed": false, "msg": "Unable to start service docker: Job for docker.service failed because the control process exited with error code.\nSee \"systemctl status docker.service\" and \"journalctl -xeu docker.service\" for details.\n"}
-```
-
-Kolla-Ansible modifies Docker's systemd unit files during bootstrap. If Docker is already running, the service can enter a failed state that blocks restarts.
-
-Run these three commands to recover:
-
-```console
-sudo systemctl daemon-reload
-sudo systemctl reset-failed docker.socket docker.service
-sudo systemctl restart docker
-```
-
-- `daemon-reload` picks up the updated unit files written by Kolla-Ansible
-- `reset-failed` clears the failed state that was blocking the restart
-- `restart docker` starts Docker cleanly
-
-After Docker is running, re-run the bootstrap step:
-
-```console
-kolla-ansible bootstrap-servers -i all-in-one
-```
-
-### Prechecks fail with "host libvirt is running"
-
-Kolla-Ansible manages libvirt inside its own `nova_libvirt` container. If host `libvirtd` is running, prechecks will fail with:
-
-```output
-TASK [nova-cell : Checking that host libvirt is not running]
-fatal: [localhost]: FAILED!
-```
-
-Stop and disable the host libvirt service before running prechecks:
-
-```console
-sudo systemctl stop libvirtd 2>/dev/null || true
-sudo systemctl disable libvirtd 2>/dev/null || true
-sudo rm -f /var/run/libvirt/libvirt-sock
-```
-
-Then re-run prechecks:
-
-```console
-kolla-ansible prechecks -i all-in-one
-```

@@ -6,9 +6,7 @@ weight: 7
 layout: learningpathall
 ---
 
-## Validate OpenStack deployment and launch a virtual machine
-
-This section validates the Kolla-Ansible deployment by checking service health, uploading a test image, creating network resources, and launching a virtual machine instance.
+In this section, you'll validate the Kolla-Ansible deployment by checking service health, uploading a test image, creating network resources, and launching a virtual machine instance.
 
 If you closed your session since the Kolla-Ansible deployment, reactivate the virtual environment and reload the admin credentials:
 
@@ -19,19 +17,13 @@ source /etc/kolla/admin-openrc.sh
 
 ## Verify services
 
+Verify the OpenStack services:
+
 ```console
 openstack compute service list
 openstack network agent list
 ```
-
-**Expected result:**
-
-All services should show:
-
-- Status → enabled
-- State → up
-
-If any service is down, the deployment is incomplete or misconfigured.
+All services should show **Status** as **enabled** and **State** as **up**. If any service is down, the deployment is incomplete or misconfigured.
 
 ## Bring up Open vSwitch bridges
 
@@ -121,7 +113,7 @@ openstack image create "test-image" \
   --public
 ```
 
-## Verify image upload
+ Verify image upload:
 
 ```console
 openstack image list
@@ -141,6 +133,8 @@ The image must be in an active state before launching VMs.
 
 ## Create network
 
+OpenStack networking (Neutron) requires a logical network and an IP range for instances. Create a network:
+
 ```console
 openstack network create test-net
 
@@ -149,14 +143,7 @@ openstack subnet create test-subnet \
   --subnet-range 192.168.0.0/24
 ```
 
-### Why this is required
-
-OpenStack networking (Neutron) requires:
-
-- Network → logical network
-- Subnet → IP range for instances
-
-## Verify network
+Verify the network:
 
 ```console
 openstack network list
@@ -172,7 +159,7 @@ The output is similar to:
 +--------------------------------------+----------+--------------------------------------+
 ```
 
-## Verify subnet
+Verify the subnet:
 
 ```console
 openstack subnet list
@@ -188,19 +175,20 @@ The output is similar to:
 +--------------------------------------+-------------+--------------------------------------+----------------+
 ```
 
-Both should show your created resources.
+Both outputs should show your created resources.
 
 ## Create flavor
 
-A flavor defines the compute resources — vCPUs, RAM, and disk — allocated to a virtual machine instance. OpenStack does not create any default flavors during deployment, so you need to create at least one before you can launch a VM.
-
-The `m1.tiny` flavor used here is a minimal definition suitable for testing: 1 vCPU, 512 MB RAM, and a 5 GB root disk. This is enough to boot a Debian cloud image and confirm the environment is working.
+A flavor defines the compute resources — vCPUs, RAM, and disk — allocated to a virtual machine instance. OpenStack does not create any default flavors during deployment, so you need to create at least one before you can launch a VM:
 
 ```console
 openstack flavor create m1.tiny --ram 512 --disk 5 --vcpus 1
 ```
 
-## Verify flavor
+The `m1.tiny` flavor used here is a minimal definition suitable for testing: 1 vCPU, 512 MB RAM, and a 5 GB root disk. This is enough to boot a Debian cloud image and confirm the environment is working.
+
+
+Verify flavor:
 
 ```console
 openstack flavor list
@@ -216,7 +204,9 @@ The output is similar to:
 +--------------------------------------+---------+-----+------+-----------+-------+-----------+
 ```
 
-## Launch VM
+## Launch a virtual machine
+
+To launch a VM, run:
 
 ```console
 openstack server create \
@@ -227,7 +217,7 @@ openstack server create \
 ```
 
 
-## Verify VM status
+Verify VM status:
 
 ```console
 watch -n 2 openstack server list
@@ -243,7 +233,7 @@ The output is similar to:
 +--------------------------------------+---------+--------+------------------------+------------+---------+
 ```
 
-If the VM stays in ERROR, check:
+If the VM stays in ERROR, check the following:
 
 - OVS bridges
 - compute service status
@@ -251,19 +241,19 @@ If the VM stays in ERROR, check:
 
 ## Access Horizon dashboard
 
-Open browser:
+Open a browser of your choice and paste the public IP address of the VM:
 
 ```text
 http://<VM_PUBLIC_IP>
 ```
 
-Get password:
+Use the command line to get a password:
 
 ```console
 cat /etc/kolla/passwords.yml | grep keystone_admin_password
 ```
 
-Login:
+Login with the password and the following details:
 
 * Username: admin
 * Domain: Default
