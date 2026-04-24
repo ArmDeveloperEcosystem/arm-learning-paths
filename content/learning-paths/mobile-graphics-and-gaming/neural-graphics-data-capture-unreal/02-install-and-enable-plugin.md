@@ -12,11 +12,19 @@ This plugin currently supports **Unreal Engine 5.5**.
 
 Use a **C++ Unreal project** so the plugin module can compile through Visual Studio.
 
+## Clone the repository
+
+The plugin lives in a GitHub repository. Start by cloning it:
+
+```
+git clone https://github.com/arm/neural-graphics-data-capture-for-unreal
+```
+
 ## Add plugin files to your project
 
 - Open your Unreal project folder in File Explorer.
 - Create a `Plugins` folder at the root of the project if it doesn't already exist.
-- Copy the `NeuralGraphicsDataCapture` plugin folder into `Plugins/`.
+- Copy the `NeuralGraphicsDataCapture` plugin folder from the `Source` directory into your new `Plugins/` directory. 
 
 ![Screenshot of Windows File Explorer showing the project root directory with a Plugins folder containing the NeuralGraphicsDataCapture folder. This confirms the plugin is in the correct location.#center](./images/project-plugins-folder.png "Project root with Plugins directory")
 
