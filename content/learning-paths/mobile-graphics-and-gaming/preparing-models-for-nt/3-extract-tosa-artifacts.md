@@ -42,7 +42,7 @@ For conversion via the executorch tosa backend we are going to import the tosa s
     from executorch.backends.arm.util._factory import create_partitioner
 
 
-    BASE_DUMP = Path("Tosa_dump")
+    BASE_DUMP = Path("tosa-dump")
 
     def dump_tosa(ep, profile_str: str, label: str):
         BASE_DUMP.mkdir(parents=True, exist_ok=True)

@@ -13,8 +13,8 @@ in order to have the model ready for NGP we need to get the model as in the vgf 
 
     # code to convert the .tosa of a model to a .vgf
 
-    tosa_path = pathlib.Path("./executorch_model/model.tosa")
-    vgf_path = pathlib.Path("./executorch_model/model.vgf")
+    tosa_path = pathlib.Path("./executorch-model/model.tosa")
+    vgf_path = pathlib.Path("./executorch-model/model.vgf")
 
     subprocess.run(
         [
@@ -48,12 +48,12 @@ Be sure to modify this code in your own testing as it is purely sample code:
     import os
     import torch
 
-    os.makedirs("executorch_model", exist_ok=True)
+    os.makedirs("executorch-model", exist_ok=True)
 
 
     # VGF lowering
     compile_spec = VgfCompileSpec()    
-    compile_spec.dump_intermediate_artifacts_to("executorch_model")   # default FP compile spec
+    compile_spec.dump_intermediate_artifacts_to("executorch-model")   # default FP compile spec
     partitioner = VgfPartitioner(compile_spec)
 
     edge_pm = to_edge_transform_and_lower(
@@ -68,7 +68,7 @@ Be sure to modify this code in your own testing as it is purely sample code:
 
     # Save .pte
     cwd_dir = os.getcwd()
-    pte_base_name = "AS_vgf"
+    pte_base_name = "as-vgf"
     out_name = pte_base_name + ".pte"
     save_pte_program(et_pm, out_name)
     print("Wrote:", os.path.abspath(out_name))
