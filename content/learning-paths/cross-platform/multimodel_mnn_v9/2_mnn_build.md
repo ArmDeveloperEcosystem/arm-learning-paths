@@ -4,7 +4,7 @@ weight: 3
 layout: learningpathall
 ---
 
-## Introduction
+## Build MNN for Armv9 multimodal inference
 
 In this section, you'll build **MNN** natively on your Armv9 Linux system and verify that the `llm_demo` binary can load a prebuilt Omni MNN model package. This sets up everything needed for the text, vision, and audio demos in later sections.
 

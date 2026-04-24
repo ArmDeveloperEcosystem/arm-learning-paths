@@ -4,7 +4,7 @@ weight: 5
 layout: learningpathall
 ---
 
-## Introduction
+## Analyze retail shelf images with vision inference
 
 This section shows how Armv9 can run lightweight operational vision reasoning locally without requiring cloud round trips, making it a practical fit for store-side restocking workflows.
 

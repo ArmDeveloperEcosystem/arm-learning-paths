@@ -4,7 +4,7 @@ weight: 6
 layout: learningpathall
 ---
 
-## Introduction
+## Convert audio restock notes to structured output
 
 In this section, you use an audio prompt and an MNN Omni model to convert a spoken restock note into a structured one-line ticket on an Armv9 system.
 

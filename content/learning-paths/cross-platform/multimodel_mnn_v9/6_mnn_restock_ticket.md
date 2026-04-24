@@ -4,7 +4,7 @@ weight: 7
 layout: learningpathall
 ---
 
-## Introduction
+## Combine image and audio inputs for multimodal inference
 
 In the previous sections, you validated text, vision, and audio inference in isolation. This final section brings those three inputs together into a single prompt that combines a shelf image and a voice note to produce one structured restock ticket.
 

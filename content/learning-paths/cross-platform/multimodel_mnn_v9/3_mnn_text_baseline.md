@@ -4,7 +4,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## Introduction
+## Run text-only baseline inference with MNN Omni
 
 In this section, you run a **text-only baseline** using the Omni model on an Armv9 Linux system. Before adding image and audio inputs, this baseline helps you confirm that the core inference path is working correctly with a simple prompt and predictable output behavior.
 

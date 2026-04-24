@@ -4,7 +4,7 @@ layout: learningpathall
 weight: 2
 ---
 
-## Introduction
+## Understand MNN and multimodal inference on Armv9
 
 This section introduces the software stack used throughout this Learning Path. You will use **[MNN](https://github.com/alibaba/MNN)** (Mobile Neural Network), a lightweight inference engine, to run a prebuilt **Omni multimodal model** on an Armv9 Linux system using only the CPU.
 
