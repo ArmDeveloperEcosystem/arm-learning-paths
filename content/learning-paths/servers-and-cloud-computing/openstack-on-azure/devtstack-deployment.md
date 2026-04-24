@@ -53,7 +53,7 @@ exec bash
 
 ## Install stable etcd package
 
-DevStack uses etcd internally for service coordination. The etcd package included in Ubuntu 24.04 is not built for Arm and is unstable in this environment. Install a known-stable Arm64 binary directly from the etcd GitHub releases instead:
+DevStack uses etcd internally for service coordination. The etcd package included in Ubuntu 24.04 is not built for Arm and is unstable in this environment. Install a stable Arm64 binary directly from the etcd GitHub releases instead:
 
 ```console
 cd /tmp
@@ -180,11 +180,11 @@ Replace `<Private_IP>` with the IP address from the previous step.
 
 The following are some of the key configuration choices:
 
-* Neutron disabled — simplifies the deployment by removing advanced networking, which has compatibility issues on Arm Azure VMs
-* etcd3 disabled — DevStack's built-in etcd setup does not work reliably on Arm; this delegates etcd to the version you installed manually
-* LIBVIRT_TYPE=qemu — Azure Cobalt 100 VMs do not support nested KVM virtualization, so Nova uses QEMU software emulation instead
-* Horizon enabled — enables the web dashboard
-* GIT_DEPTH=1 — performs shallow clones to reduce download size and avoid failures on slow or rate-limited connections
+- `disable_service neutron` — simplifies the deployment by removing advanced networking, which has compatibility issues on Arm Azure VMs
+- `disable_service etcd3` —  delegates etcd to the version you installed manually and disables DevStack's built-in etcd setup that doesn't work reliably on Arm
+- `LIBVIRT_TYPE=qemu` — Azure Cobalt 100 VMs do not support nested Kernel-based Virtual Machine (KVM) virtualization, so Nova uses Quick Emulator (QEMU) software emulation instead
+- `enable_service horizon` — enables the web dashboard
+- `GIT_DEPTH=1` — performs shallow clones to reduce download size and avoid failures on slow or rate-limited connections
 
 ## Deploy OpenStack
 
@@ -321,7 +321,7 @@ Before moving on to the Kolla-Ansible deployment, stop all DevStack services to 
 cd /home/azureuser/devstack && ./unstack.sh 2>&1 | tail -10
 ```
 
-The Kolla-Ansible deployment runs on a separate VM, so this step is optional if you're done with DevStack. Run it if you want to reuse this VM later or clean up resources.
+The Kolla-Ansible deployment must run on a separate VM, so this step is optional if you're done with DevStack. Run it if you want to reuse this VM later or clean up resources.
 
 ## What you've accomplished and what's next
 

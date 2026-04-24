@@ -39,7 +39,7 @@ Navigate to **Virtual Machines**, select your VM, and click **Stop**.
 
 After stopping the VM, to attach a new NIC, follow these steps:
 
-1. Go to **Networking → Network settings**
+1. In the Azure portal, navigate to **Networking** and then **Network settings**
 2. Click **Attach network interface**
 3. Select **Create new NIC**
 
@@ -63,7 +63,7 @@ To restart the VM, go back to the VM overview and then click **Start**.
 After restarting the VM, attach a data disk to it by following these steps:
 
 1. In the Azure Portal, navigate to **Virtual Machines**
-2. Select **Disks**  
+2. Click **Disks**  
 3. Click **Create and attach a new disk**
 4. For **Disk name**, enter `openstack-disk`  
 5. For **Size**, enter **32 GB**, which is the recommended minimum

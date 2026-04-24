@@ -93,7 +93,7 @@ The output is similar to:
                 options: {peer=patch-tun}
 ```
 
-All three bridges must show `is_connected: true`. If a bridge is missing or shows `is_connected: false`, re-run the `ip link set` commands above and check that the `neutron-openvswitch-agent` container is running with `docker ps | grep openvswitch`.
+All three bridges must show `is_connected: true`. If a bridge is missing or shows `is_connected: false`, re-run the `ip link set` commands and check that the `neutron-openvswitch-agent` container is running with `docker ps | grep openvswitch`.
 
 ## Upload image
 
@@ -258,7 +258,7 @@ Log in with the following credentials:
 | Field    | Value                        |
 |----------|------------------------------|
 | Username | admin                        |
-| Password | (output of command above)    |
+| Password | (output of password retrieval command)    |
 | Domain   | Default                      |
 
 The following image shows a successfully launched instance in the OpenStack Horizon UI.

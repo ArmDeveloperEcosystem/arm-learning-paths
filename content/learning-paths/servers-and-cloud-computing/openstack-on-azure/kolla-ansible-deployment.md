@@ -6,11 +6,11 @@ weight: 6
 layout: learningpathall
 ---
 
-In this section, you'll deploy OpenStack using Kolla-Ansible on the Azure Ubuntu 24.04 Arm64 virtual machine that you created in the previous section.
+In this section, you'll deploy OpenStack using Kolla-Ansible on the Azure Ubuntu 24.04 Arm64 virtual machine (VM) that you created in the previous section.
 
 Kolla-Ansible deploys OpenStack services as Docker containers, making the deployment modular, reproducible, and easier to manage.
 
-After completing this guide, your environment will run core OpenStack services such as Nova, Neutron, Keystone, and Glance. The environment will support Arm64 (`aarch64`) architecture, provide CLI and Horizon access, and allow launching virtual machines. 
+After completing this guide, your environment will run core OpenStack services such as Nova, Neutron, Keystone, and Glance. The environment will support Arm64 (`aarch64`) architecture, provide CLI and Horizon access, and allow launching VMs. 
 
 {{% notice Warning %}}You can't run DevStack and Kolla-Ansible on the same VM at the same time. Use separate VMs for each approach. If you run both on the same host, port conflicts will cause deployment failures.{{% /notice %}} 
 
@@ -141,7 +141,7 @@ The following are some of the key configuration choices:
 
 ## Configure Nova
 
-Arm-based Azure VMs do not support KVM virtualization. Update the configuration for Nova to account for this:
+Arm-based Azure VMs don't support KVM virtualization. Update the configuration for Nova:
 
 ```console
 sudo mkdir -p /etc/kolla/config
@@ -208,6 +208,7 @@ sudo systemctl restart docker
 After Docker is running, re-run the bootstrap step.
 {{% /notice %}}
 
+After running bootstrap successfully, run:
 
 ```console
 kolla-ansible prechecks -i all-in-one 
@@ -238,6 +239,8 @@ sudo rm -f /var/run/libvirt/libvirt-sock
 Then re-run prechecks.
 {{% /notice %}}
 
+After running prechecks successfully, run:
+
 ```console
 kolla-ansible pull -i all-in-one
 ```
@@ -251,6 +254,7 @@ skipping: no hosts matched
 PLAY RECAP ***************************************************************************************************************************
 localhost                  : ok=33   changed=14   unreachable=0    failed=0    skipped=52   rescued=0    ignored=0
 ```
+After running pull successfully, run:
 
 ```console
 kolla-ansible deploy -i all-in-one
@@ -268,6 +272,8 @@ localhost                  : ok=368  changed=34   unreachable=0    failed=0    s
 
 The deploy step starts all OpenStack service containers. It takes the longest of the five stages — allow 20 to 30 minutes.
 
+After running deploy, run:
+
 ```console
 kolla-ansible post-deploy -i all-in-one
 ```
@@ -284,7 +290,7 @@ source /etc/kolla/admin-openrc.sh
 
 ## Verify services
 
-Confirm that all Nova compute services and Neutron network agents are running:
+Confirm that all Nova compute services are running:
 
 ```console
 openstack compute service list
@@ -301,6 +307,8 @@ The output is similar to:
 | b0d28456-483b-4a9c-bcaf-5932364e32b6 | nova-compute   | ansible-d8ps | nova     | enabled | up    | 2026-04-14T07:38:16.000000 |
 +--------------------------------------+----------------+--------------+----------+---------+-------+----------------------------+
 ```
+
+Confirm all Neutron network agents are running successfully:
 
 ```console
 openstack network agent list
