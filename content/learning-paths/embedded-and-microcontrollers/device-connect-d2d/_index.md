@@ -3,9 +3,6 @@ title: Device-to-Device communication with Device Connect
 
 minutes_to_complete: 25
 
-draft: true
-cascade:
-    draft: true
 
 who_is_this_for: This is an introductory topic for developers wiring up heterogeneous edge fleets, where devices need a shared way to find each other and a shared way to be controlled by agents. Device Connect provides this communication protocol between agents and devices, and standardizes how devices from different vendors advertise themselves and exchange structured messages, so both peer devices and AI agents can discover and invoke them through the same driver model. You'll use it to stand up peer-to-peer communication between two devices, with no broker or cloud service in between.
 
