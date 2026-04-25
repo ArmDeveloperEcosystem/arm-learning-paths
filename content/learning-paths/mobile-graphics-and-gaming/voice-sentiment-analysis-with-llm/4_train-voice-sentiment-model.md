@@ -11,11 +11,21 @@ Before you begin, make sure you have completed the environment setup from the pr
 
 This example uses a simple per-sample training loop for clarity. On CPU, training can take 10 to 30 minutes or more depending on your machine. Apple Silicon `mps` and CUDA-enabled GPUs are often faster.
 
+All code snippets in Steps 2.1 to 2.5 are meant to be added to a single Python file: `train_sentiment_model.py` in your project root (`$HOME/voice-sentiment-assistant`).
+
+Make sure you are located in the project directory:
+
+```bash
+cd $HOME/voice-sentiment-assistant
+```
+
 ### Step 2.1 - Prepare the dataset
 
-This step downloads the RAVDESS speech dataset, extracts it locally, and builds a dataframe that maps each audio file to a sentiment label. RAVDESS encodes emotion labels in the filename format, which we use to select the classes for this demo.
+This step downloads the RAVDESS speech dataset, extracts it locally, and builds a dataframe that maps each audio file to a sentiment label. RAVDESS encodes emotion labels in the filename format, which you use to select the classes for this demo.
 
 In practice, this turns a folder of audio files into a structured table that your training code can work with. Each row is one example, and each column stores details such as the file path, actor ID, and sentiment label.
+
+Add this to a new file called `train_sentiment_model.py`:
 
 ```python
 import os
@@ -25,25 +35,24 @@ import pandas as pd
 
 # Download and unpack the dataset into the local project directory.
 RAVDESS_URL = "https://zenodo.org/records/1188976/files/Audio_Speech_Actors_01-24.zip?download=1"
-output_dir = "data/ravdess"
-os.makedirs(output_dir, exist_ok=True)
+OUTPUT_DIR = "data/ravdess"
+ZIP_PATH = f"{OUTPUT_DIR}/Audio_Speech_Actors_01-24.zip"
+EXTRACT_DIR = f"{OUTPUT_DIR}/Audio_Speech_Actors_01-24"
 
-zip_path = f"{output_dir}/Audio_Speech_Actors_01-24.zip"
-extract_dir = f"{output_dir}/Audio_Speech_Actors_01-24"
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-if not os.path.exists(zip_path):
+if not os.path.exists(ZIP_PATH):
     print("Downloading dataset...")
-    urllib.request.urlretrieve(RAVDESS_URL, zip_path)
+    urllib.request.urlretrieve(RAVDESS_URL, ZIP_PATH)
 
-if not os.path.exists(extract_dir):
-    zipfile.ZipFile(zip_path).extractall(extract_dir)
+if not os.path.exists(EXTRACT_DIR):
+    zipfile.ZipFile(ZIP_PATH).extractall(EXTRACT_DIR)
 
-DATASET_PATH = "data/ravdess/Audio_Speech_Actors_01-24"
 emotion_map = {1: "neutral", 3: "happy", 5: "angry"}
 data = []
 
-for actor in os.listdir(DATASET_PATH):
-    actor_path = os.path.join(DATASET_PATH, actor)
+for actor in os.listdir(EXTRACT_DIR):
+    actor_path = os.path.join(EXTRACT_DIR, actor)
     if not os.path.isdir(actor_path):
         continue
 
@@ -73,6 +82,8 @@ Next, split the dataset by speaker so the same speaker does not appear in both t
 This matters because a speech model can accidentally learn speaker-specific traits instead of sentiment if the same speakers appear in both splits. Separating speakers gives you a better measure of how well the model generalizes.
 The training split is the data the model learns from. The validation split is held back and used only to test how well the model performs on unseen examples.
 
+Append this to the same `train_sentiment_model.py` file:
+
 ```python
 import random
 
@@ -96,6 +107,8 @@ print(f"Validation samples: {len(val_df)}")
 
 This step loads the HuBERT feature extractor and initializes a sequence classification model. The pre-trained HuBERT base model provides a strong starting point for transfer learning on speech sentiment classification.
 The feature extractor prepares raw audio in the format expected by the model. The HuBERT model then uses those inputs to predict one of the target sentiment classes.
+
+Append this below the previous code in `train_sentiment_model.py`:
 
 ```python
 from transformers import AutoFeatureExtractor, HubertForSequenceClassification
@@ -121,6 +134,8 @@ This step performs the core training pass: load audio, extract features, compute
 During training, the model compares its predictions with the correct labels and updates its weights to reduce the error. After each epoch, the validation loop checks how well the model performs on held-out speakers.
 
 For better performance in a production training pipeline, you would typically use batching and a PyTorch `DataLoader`.
+
+Append this below the previous code in `train_sentiment_model.py`:
 
 ```python
 import librosa
@@ -200,23 +215,27 @@ At the end of this step, you will have a trained model and a simple validation a
 Save both the trained model and the feature extractor so they can be reused later for inference and ONNX export. Keeping them together helps avoid preprocessing mismatches.
 This is an important final step because the model weights alone are not enough. You also need the matching feature extractor so inference uses the same preprocessing as training.
 
-```python
-import os
+Append this at the end of `train_sentiment_model.py`:
 
+```python
 SAVE_DIR = "models/hubert_vsa_ravdess"
 os.makedirs(SAVE_DIR, exist_ok=True)
 
 # Save both the trained model and the preprocessing configuration.
 model.save_pretrained(SAVE_DIR)
 feature_extractor.save_pretrained(SAVE_DIR)
+
+print("Training complete. Model saved successfully.")
+print(f"Saved model to {SAVE_DIR}")
 ```
 
 After this step, the trained model should be saved in `models/hubert_vsa_ravdess`.
 
 ## Full training script
 
-The following script combines the previous steps into one runnable example. Save it as `train_sentiment_model.py` and run it from the root of your project.
-Use this script if you want to run the full workflow without copying each block separately.
+The following script combines the previous steps into one runnable example.
+If you already built `train_sentiment_model.py` using Steps 2.1 to 2.5, you can skip this section.
+If not, copy this full script into `train_sentiment_model.py` and run it from the root of your project.
 
 ```python
 import os

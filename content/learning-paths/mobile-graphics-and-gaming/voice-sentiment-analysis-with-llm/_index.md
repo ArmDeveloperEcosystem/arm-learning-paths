@@ -21,8 +21,6 @@ learning_objectives:
 prerequisites:
     - Python 3.9 or later for programming.
     - A working microphone for voice input.
-    - "ffmpeg installed on your system (required by Whisper for audio decoding)."
-    - "Build tools to compile llama.cpp (git, make, gcc/g++)."
     - Basic Python and command-line knowledge.
 
 author: Bhanu Arya

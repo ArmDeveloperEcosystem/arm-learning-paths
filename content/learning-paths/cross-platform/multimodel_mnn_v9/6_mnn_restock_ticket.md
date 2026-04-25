@@ -4,6 +4,12 @@ weight: 7
 layout: learningpathall
 ---
 
+## Combine image and audio inputs for multimodal inference
+
+In the previous sections, you validated text, vision, and audio inference in isolation. This final section brings those three inputs together into a single prompt that combines a shelf image and a voice note to produce one structured restock ticket.
+
+By the end of this section, you will have completed a full end-to-end multimodal workflow on an Armv9 CPU: shelf coverage from an image, tasks and deadlines from audio, and a combined ticket from one inference call.
+
 ## Create the single-shot multimodal prompt (image + audio)
 
 In this final section, you combine image and audio inputs into a single multimodal prompt and generate one operational restock ticket on an Armv9 system.
@@ -20,7 +26,7 @@ This mirrors a practical retail workflow. A store associate captures a shelf pho
 
 ## Reuse the local assets
 
-This module reuses the same assets from the previous examples:
+This section reuses the same assets from the previous examples:
 
 - shelf image: `~/mnn/assets/Pet_Food_Aisle.jpg`
 - voice note: `~/mnn/assets/restock_note.wav`
@@ -48,12 +54,10 @@ The goal is not perfect retail planning. The goal is to show that one prompt can
 Create the prompt file and keep the full prompt on one line:
 
 ```bash
-cat > ~/mnn/prompt_final_multimodal.txt <<'EOF'
-<img>/home/radxa/mnn/assets/Pet_Food_Aisle.jpg</img> <audio>/home/radxa/mnn/assets/restock_note.wav</audio> You are an on-device retail replenishment assistant. Use the IMAGE to estimate facing coverage for the main LEFT shelf by level as high|medium|low and pick a priority zone. Use the AUDIO to extract item requests including quantities, zones, deadline, and substitution policy. Output EXACTLY ONE line using bullet-style segments separated by semicolons: Restock ticket; - Location: pet food aisle left shelf; - Coverage: top=<high|medium|low>, middle=<high|medium|low>, bottom=<high|medium|low>; - Priority zone: <top|middle|bottom>-<left|center|right>; - Task 1: <generic item> | qty <number or NOT_SURE> | zone <top|middle|bottom>-<left|center|right or NOT_SURE>; - Task 2: <generic item> | qty <number or NOT_SURE> | zone <top|middle|bottom>-<left|center|right or NOT_SURE>; - Deadline: <time or NOT_SURE>; - Substitution: <use similar substitute|no substitute|NOT_SURE>; - Notes: <short operational note>; - Confidence: <high|medium|low>. Rules: Qty/Deadline/Substitution must come from audio; if audio contains explicit numbers you must output them.
+cat > ~/mnn/prompt_final_multimodal.txt <<EOF
+<img>$HOME/mnn/assets/Pet_Food_Aisle.jpg</img> <audio>$HOME/mnn/assets/restock_note.wav</audio> You are an on-device retail replenishment assistant. Use the IMAGE to estimate facing coverage for the main LEFT shelf by level as high|medium|low and pick a priority zone. Use the AUDIO to extract item requests including quantities, zones, deadline, and substitution policy. Output EXACTLY ONE line using bullet-style segments separated by semicolons: Restock ticket; - Location: pet food aisle left shelf; - Coverage: top=<high|medium|low>, middle=<high|medium|low>, bottom=<high|medium|low>; - Priority zone: <top|middle|bottom>-<left|center|right>; - Task 1: <generic item> | qty <number or NOT_SURE> | zone <top|middle|bottom>-<left|center|right or NOT_SURE>; - Task 2: <generic item> | qty <number or NOT_SURE> | zone <top|middle|bottom>-<left|center|right or NOT_SURE>; - Deadline: <time or NOT_SURE>; - Substitution: <use similar substitute|no substitute|NOT_SURE>; - Notes: <short operational note>; - Confidence: <high|medium|low>. Rules: Qty/Deadline/Substitution must come from audio; if audio contains explicit numbers you must output them.
 EOF
 ```
-
-If your username or home directory is different, replace `/home/radxa` with the correct local path.
 
 ## Run the multimodal demo
 
@@ -64,7 +68,7 @@ cd ~/mnn/MNN/build
 ./llm_demo ~/mnn/Qwen2.5-Omni-7B-MNN/config.json ~/mnn/prompt_final_multimodal.txt
 ```
 
-You should see output similar to:
+The output is similar to:
 
 ```text
 config path is /home/radxa/mnn/Qwen2.5-Omni-7B-MNN/config.json
@@ -86,11 +90,6 @@ Restock the bottom left large pet food bag, add 10 bags; also restock the middle
 The exact wording can vary. What matters is that image-derived fields stay tied to the shelf photo, and audio-derived fields stay tied to the spoken instruction.
 
 ## Verify that both modalities are used
-
-To verify true multimodal behavior, perform a simple A/B test.
-
-- Swap the **audio** file: quantities/deadline/substitution should change.
-- Swap the **image** file: coverage/priority zone should change.
 
 To verify that the model is truly multimodal, perform a simple A/B test:
 
@@ -123,12 +122,39 @@ Check that:
 
 If the model adds extra text before or after the ticket, tighten the prompt and repeat the run.
 
-## Next steps
+### Completion checklist
 
-You have completed this learning path when you can:
+You have completed this Learning Path when you can:
 
-- run text, vision, audio, and combined multimodal examples on Armv9
-- generate a final ticket from one image and one voice note
-- show that changing one modality changes only the fields derived from that modality
+✓ Run text, vision, audio, and combined multimodal examples on Armv9
 
-From here, you can extend the workflow by saving the ticket to JSON, sending it to a local service, or benchmarking latency and throughput across different Armv9 platforms.
+✓ Generate a final ticket from one image and one voice note
+
+✓ Verify that changing one modality only affects the fields derived from that modality
+
+## What you've learned and what's next
+
+In this section, you:
+
+- Combined image and audio inputs into a single multimodal prompt
+- Generated a complete restock ticket from one inference call
+- Verified that each modality contributes specific information to the final output
+
+### Your multimodal workflow is complete
+
+You've built a complete multimodal inference workflow on Armv9 using only the CPU:
+
+1. Started with a text-only baseline
+2. Added vision reasoning from a shelf image
+3. Extracted structured tasks from a voice note
+4. Combined both inputs into a single-shot restock ticket
+
+
+
+### Next steps
+
+Extend the workflow by:
+
+- Saving tickets to JSON format
+- Sending results to a local service or API
+- Benchmarking latency and throughput across different Armv9 platforms

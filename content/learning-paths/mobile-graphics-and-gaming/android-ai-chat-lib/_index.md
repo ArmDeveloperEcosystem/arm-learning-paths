@@ -1,8 +1,7 @@
 ---
 title: Add an LLM to your Android app with Arm's AI Chat library
-draft: true
-cascade:
-    draft: true
+description: Learn how to build an Android chatbot app using Arm's AI Chat library to run GGUF models on-device with optimized performance on Arm CPUs.
+
 
 minutes_to_complete: 15
 
@@ -13,8 +12,9 @@ learning_objectives:
     - Load a mobile-friendly GGUF model on-device and run streamed chat inference
 
 prerequisites:
-    - Android Studio
-    - Android phone for testing (in Developer Mode, with USB cable to connect)
+    - An Android development environment with Android Studio installed
+    - An Android phone for testing, in Developer Mode, with USB cable for connection
+    - Basic familiarity with Kotlin and Android app development
 
 author: Ben Clark
 
