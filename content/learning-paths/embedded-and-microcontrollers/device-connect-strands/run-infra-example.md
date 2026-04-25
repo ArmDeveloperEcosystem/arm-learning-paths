@@ -108,7 +108,9 @@ r.run()
 PY
 ```
 
-Because `ZENOH_CONNECT` points at your host, the SDK routes traffic through the Device Connect router instead of using local network discovery. The robot registers with the persistent registry and you should see output similar to:
+Because `ZENOH_CONNECT` points at your host, the SDK routes traffic through the Device Connect router instead of using local network discovery. The robot registers with the persistent registry.
+
+The output is similar to:
 
 ```output
 INFO:strands_robots.mesh:Zenoh session started

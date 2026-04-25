@@ -1,5 +1,6 @@
 ---
 title: Optimize MLOps with Arm-hosted GitHub Runners
+description: Learn how to set up Arm-hosted GitHub runners and train PyTorch ML models using the German Traffic Sign Recognition Benchmark dataset with automated workflows.
 
 minutes_to_complete: 60
 

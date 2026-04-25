@@ -1,5 +1,6 @@
 ---
 title: Benchmark Go performance with Sweet and Benchstat
+description: Learn how to provision Arm64 and x86_64 VM instances on Google Cloud, then install and use Sweet and Benchstat to measure and compare Go application performance.
 
 minutes_to_complete: 60
 

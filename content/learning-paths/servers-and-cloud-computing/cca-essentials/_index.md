@@ -1,5 +1,6 @@
 ---
 title: Run an end-to-end Attestation Flow with Arm CCA
+description: Learn how to deploy a CCA realm on an FVP with RME support and connect it with attestation services to create an end-to-end confidential computing workflow.
 
 minutes_to_complete: 120
 

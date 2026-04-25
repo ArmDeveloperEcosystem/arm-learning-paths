@@ -1,5 +1,6 @@
 ---
 title: Monitor Azure Cobalt 100 Arm64 virtual machines using Dynatrace OneAgent
+description: Learn how to deploy Dynatrace OneAgent on Azure Cobalt 100 Arm64 virtual machines and configure ActiveGate for secure infrastructure and application monitoring.
     
 minutes_to_complete: 30
 

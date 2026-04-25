@@ -1,5 +1,6 @@
 ---
 title: Optimize exponential functions with FEXPA
+description: Learn how to implement exponential functions using Arm SVE intrinsics with the FEXPA instruction for hardware-accelerated computations on Neoverse processors.
 
     
 minutes_to_complete: 15

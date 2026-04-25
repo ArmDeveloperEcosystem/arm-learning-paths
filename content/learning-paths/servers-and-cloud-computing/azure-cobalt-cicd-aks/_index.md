@@ -1,5 +1,6 @@
 ---
 title: Deploy a .NET application on Microsoft Azure Cobalt 100 VMs
+description: Learn how to configure a self-hosted GitHub runner on Azure Cobalt 100, create an AKS cluster with Terraform, and deploy a .NET application using GitHub Actions CI/CD.
 
 minutes_to_complete: 60   
 

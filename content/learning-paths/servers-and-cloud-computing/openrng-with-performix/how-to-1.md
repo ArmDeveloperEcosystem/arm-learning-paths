@@ -1,49 +1,68 @@
 ---
-title: Get started
+title: Set up your environment
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Prepare your environment
+## Install dependencies
 
-For this learning path, you will use an Arm Linux system (aarch64), such as an AWS Graviton instance running Amazon Linux 2023; it has been tested on an AWS Graviton 3 `c7g.metal` instance with 64 Neoverse V1 cores.
+Ensure that you're using an Arm Linux system (`aarch64`), such as an AWS Graviton-based Amazon EC2 instance running Amazon Linux 2023. This Learning Path has been tested on an AWS Graviton 3-based `c7g.metal` EC2 instance with 64 Neoverse V1 cores. You can use other Arm Linux distributions. If you use a different distribution, replace `dnf` with your package manager, such as `apt` on Ubuntu or Debian.
 
-Install the following packages, replacing `dnf` with the package manager for your Linux distribution.
+On an Arm Linux system, use your package manager to install the following packages:
 
 ```bash
 sudo dnf update -y
 sudo dnf install -y git cmake g++ environment-modules python3 python3-pip
 ```
 
-Next, [install Arm Performix](https://learn.arm.com/install-guides/performix/) on the remote Arm Linux target (`c7g.metal` instance) and the graphical user interface on your local machine. There's no need to use the command-line interface (CLI).
+## Install Arm Performix
 
-Install the prebuilt Arm Performance Libraries on your Arm Linux system using the [install guide](https://learn.arm.com/install-guides/armpl/). Follow the instructions and load the module file. A module file configures your environment by setting paths and variables so the correct software and libraries are available. To verify the module loaded successfully, run:
+Arm Performix is a desktop application that connects to your remote Arm Linux target over SSH to capture and display profiling data. You need to install Performix on your local machine (Windows, macOS, or Linux). When you configure your new target, Performix copies the required software to the target. You don't need to install anything on the target for Performix.
+
+For more information about installing Performix on your local machine, see the [Arm Performix install guide](/install-guides/performix/).
+
+## Install Arm Performance Libraries
+
+Install the prebuilt Arm Performance Libraries on your Arm Linux system using the following commands:
 
 ```bash
-module list
+wget https://developer.arm.com/-/cdn-downloads/permalink/Arm-Performance-Libraries/Version_26.01/arm-performance-libraries_26.01_rpm_gcc.tar -O /tmp/armpl.tar
+cd /tmp && tar xf armpl.tar
+cd /tmp/arm-performance-libraries_26.01_rpm
+sudo bash arm-performance-libraries_26.01_rpm.sh --accept
+
+echo 'export ARMPL_DIR=/opt/arm/armpl_26.01_gcc' >> ~/.bashrc
+echo 'export LD_LIBRARY_PATH=$ARMPL_DIR/lib:$LD_LIBRARY_PATH' >> ~/.bashrc
+echo 'export C_INCLUDE_PATH=$ARMPL_DIR/include:$C_INCLUDE_PATH' >> ~/.bashrc
 ```
 
-You should see the output below. You'll need to load the environment module with the `module load <arm-performance-lib>` command if it isn't already loaded.
+Update your environment variables:
 
-```output
-Currently Loaded Modulefiles:
- 1) arm-performance-libraries
-```
-
-{{% notice Please Note %}}
-When you open a new terminal, you will need to reload the modulefile. To simplify this, you can add the modulefile path to your `~/.bashrc` so modules can be loaded directly with the `module load <arm-performance-lib>` command
 ```bash
-echo "export MODULEPATH=$MODULEPATH:/opt/arm/modulefiles" >> ~/.bashrc
+cd ~/
+source ~/.bashrc
 ```
-{{% /notice %}}
+For more information about installing the libraries on other operating systems or Linux distributions, see the [Arm Performance Libraries install guide](/install-guides/armpl/).
 
-Clone and build the example project:
+## Clone the repository
+
+In this Learning Path, you'll work with a data-processing example. The example simulates a common analytics pattern: generating random 2D point data, filtering points within a rectangular window, and computing a distance metric. You'll use it as a baseline to profile and then optimize with OpenRNG and Arm Performance Libraries.
+
+Clone the example repository:
 
 ```bash
 git clone https://github.com/arm-education/Data-Processing-Example.git
 cd Data-Processing-Example
 ```
 
-In the next section, you examine what the data-processing example does and run the visualization helper.
+## What you've accomplished and what's next
+
+In this section, you:
+- Installed the required system dependencies on your Arm Linux system
+- Installed Arm Performix on your local machine for remote profiling
+- Installed Arm Performance Libraries and configured environment variables
+- Cloned the data-processing example repository
+
+Next, you'll examine what the example does and run the visualization helper to understand the baseline workload before profiling.

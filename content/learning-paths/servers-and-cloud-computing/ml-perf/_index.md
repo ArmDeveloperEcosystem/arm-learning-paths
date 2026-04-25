@@ -3,14 +3,13 @@ title: Measure Machine Learning Inference Performance on Arm servers
 
 minutes_to_complete: 20
 
-who_is_this_for: This is an introductory topic for software developers interested
-  in benchmarking machine learning workloads on Arm servers.
+who_is_this_for: This is an introductory topic for software developers interested in benchmarking machine learning workloads on Arm servers.
 
+description: Benchmark machine learning inference performance on Arm servers using TensorFlow and the MLPerf Inference benchmark suite from MLCommons.
 
 learning_objectives:
-- Install and run TensorFlow on your Arm-based cloud server.
-- Use MLPerf Inference benchmark suite, an open-sourced benchmark from MLCommons to
-  test ML performance on your Arm server.
+- Install and run TensorFlow on your Arm-based cloud server
+- Use MLPerf Inference benchmark suite, an open-sourced benchmark from MLCommons to test ML performance on your Arm server
 
 prerequisites:
 - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from an appropriate
