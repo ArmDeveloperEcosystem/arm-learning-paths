@@ -8,10 +8,10 @@ layout: learningpathall
 
 In this section, you'll build an end-to-end pipeline that:
 
-1. Records audio from your microphone
-2. Transcribes it to text using Whisper
-3. Sends the text to a locally hosted LLM
-4. Displays the model's response
+- Records audio from your microphone
+- Transcribes it to text using Whisper
+- Sends the text to a locally hosted LLM
+- Displays the model's response
 
 This forms the foundation of your voice assistant.
 
