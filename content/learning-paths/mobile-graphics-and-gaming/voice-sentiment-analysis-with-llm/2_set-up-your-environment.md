@@ -6,6 +6,8 @@ weight: 3
 layout: learningpathall
 ---
 
+## Prepare the development environment for voice sentiment classification
+
 Before building the voice assistant, create a project workspace and set up an isolated `UV` environment. This keeps project dependencies separate from your system installation and makes it easier to reproduce the steps in the rest of the Learning Path.
 
 These instructions support Ubuntu, macOS, and Windows, with Python 3.9 or later and a working microphone.
@@ -42,7 +44,7 @@ py -3 --version
 
 ## Set up the Python environment with UV
 
-Install `UV` first so the `uv` command is available in your terminal. `UV` is a fast Python package and environment manager that you will use throughout this Learning Path to create the project environment and install dependencies.
+Install `UV` first so the `uv` command is available in your terminal. `UV` is a fast Python package and environment manager that you'll use throughout this Learning Path to create the project environment and install dependencies.
 
 {{< tabpane code=true >}}
   {{< tab header="Ubuntu/macOS" language="bash">}}
@@ -152,4 +154,13 @@ Run the following command from the `llama.cpp` directory:
 
 Leave this terminal running while you test the application in later steps. The server listens on a local OpenAI-compatible endpoint that your app will call to generate responses.
 
-At this point, your development environment is ready. You have installed the required audio and build tools, created a `UV` environment, installed the Python dependencies, and started a local `llama.cpp` server. In the next section, you will use this setup to build the baseline voice-to-LLM pipeline by creating a simple Gradio interface, transcribing microphone input with Whisper, and sending the transcript to the local LLM.
+## What you've learned and what's next
+
+In this section, you:
+
+- Installed system dependencies for audio processing and building llama.cpp
+- Created a UV-managed Python environment with required packages
+- Built llama.cpp from source for local LLM inference
+- Started the llama-server with a quantized Gemma model
+
+Your development environment is now ready with all tools needed for voice transcription, model training, and local LLM inference. In the next section, you'll build the baseline voice-to-LLM pipeline using Gradio, Whisper, and llama.cpp.
