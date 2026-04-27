@@ -31,6 +31,7 @@ armips:
 tools_software_languages:
     - Unreal Engine
     - Visual Studio
+    - NX
 operatingsystems:
     - Windows
 
