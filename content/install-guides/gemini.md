@@ -325,7 +325,7 @@ If context is loaded correctly, Gemini should provide Arm-specific recommendatio
 
 The Arm Model Context Protocol (MCP) server provides Gemini CLI with specialized tools and knowledge for Arm architecture development, migration, and optimization. By integrating the Arm MCP server, you gain access to Arm-specific documentation, code analysis tools, and optimization recommendations directly through your Gemini conversations.
 
-### Det up the Arm MCP server with Docker
+### Set up the Arm MCP server with Docker
 
 The Arm MCP server runs as a Docker container that Gemini CLI connects to via the Model Context Protocol. You need Docker installed on your system to use the MCP server.
 

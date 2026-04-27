@@ -80,7 +80,7 @@ The `_index.md` file should contain the following front matter and content secti
 
 ### Install guide requirements
 
-Install guides focus on installing and verifying one tool on Arm platforms. They do not teach workflows or applied usage.
+Install guides focus on installing and verifying one tool on Arm platforms. They do not teach workflows or applied usage. Use existing install guides as reference.
 
 #### Front matter requirements
 
@@ -136,6 +136,14 @@ Install guides must not include:
 - Comparative marketing claims
 
 Learning Paths may link to install guides for setup steps. Install guides should not duplicate workflow content.
+
+### Tool versions
+
+When providing commands for downloading or installing software, use a specific version in the example. This ensures that the instructions are accurate and verifiable. However, also include a note similar to the following that tells readers the same commands work with other versions. Provide a link to where the latest version can be found. 
+
+{{% notice Note %}}
+The following commands use <tool> version <version>. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Link to page with release info](URL).
+{{% /notice %}}
 
 ### Further reading curation
 
