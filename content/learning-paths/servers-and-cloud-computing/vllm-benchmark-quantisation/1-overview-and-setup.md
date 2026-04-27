@@ -1,5 +1,5 @@
 ---
-title: Install vLLM
+title: Setup vLLM
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -8,15 +8,13 @@ layout: learningpathall
 
 ## What is vLLM
 
-vLLM is an open-source, high-throughput inference and serving engine for large language models (LLMs). It’s designed to maximise hardware efficiency, making LLM inference faster, more memory-efficient, and scalable.
+[vLLM](https://docs.vllm.ai/en/latest/) is an open-source, high-throughput inference and serving engine for large language models (LLMs). It’s designed to maximise hardware efficiency, making LLM inference faster, more memory-efficient, and scalable.
 
 ## Understanding the Llama models
 
-Llama 3.1 8B is an open-weight, text-only LLM with 8 billion parameters that can understand and generate text. You can view the model card at https://huggingface.co/meta-llama/Llama-3.1-8B
+Llama 3.1 8B is an open-weight, text-only LLM with 8 billion parameters that can understand and generate text. You can view the model card at https://huggingface.co/meta-llama/Llama-3.1-8B.
 
-Quantised models have their weights converted to a lower precision data type, which reduces the memory requirements of the model and can improve performance significantly. In the [Run vLLM inference with INT4 quantization on Arm servers](/learning-paths/servers-and-cloud-computing/vllm-acceleration/) Learning Path we have covered how to quantise a model yourself. There are also many publicly available quantised versions of popular models, such as https://huggingface.co/RedHatAI/Meta-Llama-3.1-8B-quantized.w8a8
-
-The notation w8a8 means that the weights have been quantised to 8-bit integers and the activations (the input data) are dynamically quantised to the same. The recipe used to quantise this model can be found [in the model card](https://huggingface.co/RedHatAI/Meta-Llama-3.1-8B-quantized.w8a8#creation).
+Quantised models have their weights converted to a lower precision data type, which reduces the memory requirements of the model and can improve performance significantly. In the [Run vLLM inference with INT4 quantization on Arm servers](/learning-paths/servers-and-cloud-computing/vllm-acceleration/) Learning Path we have covered how to quantise a model yourself. There are also many publicly available quantised versions of popular models, such as https://huggingface.co/RedHatAI/Meta-Llama-3.1-8B-quantized.w8a8. The notation w8a8 means that the weights have been quantised to 8-bit integers and the activations (the input data) are dynamically quantised to the same.
 
 ## Set up your environment
 
@@ -34,15 +32,10 @@ sudo apt-get update -y
 sudo apt install -y python3.12-venv python3.12-dev
 ```
 
-You can optionally install tcmalloc, a fast memory allocator from Google’s gperftools, which improves performance under high concurrency:
+Now install tcmalloc, a fast memory allocator from Google’s gperftools, which improves performance under high concurrency:
 ```bash
 sudo apt-get install -y libtcmalloc-minimal4
 ```
-
-{{% notice Note %}}
-On aarch64, vLLM's CPU backend is built with the Arm Compute Library (ACL) through oneDNN.
-This ensures optimized Arm kernels are used for matrix multiplications, layer normalization, and activation functions without additional configuration.
-{{% /notice %}}
 
 ## Create and activate a Python virtual environment
 
@@ -60,5 +53,7 @@ Install a recent CPU specific build of vLLM:
 export VLLM_VERSION=0.19.1
 pip install https://github.com/vllm-project/vllm/releases/download/v${VLLM_VERSION}/vllm-${VLLM_VERSION}+cpu-cp38-abi3-manylinux_2_35_aarch64.whl
 ```
+
+If you wish to build vLLM from source you can follow the instructions in the [Build and Run vLLM on Arm Servers Learning Path](/learning-paths/servers-and-cloud-computing/vllm/vllm-setup/).
 
 Your environment is now setup to run inference with vLLM. Next, you'll use vLLM to run inference on both quantised and non-quantised Llama models.
