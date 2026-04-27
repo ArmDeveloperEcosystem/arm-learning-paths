@@ -33,7 +33,9 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 ## Download and install the LLVM toolchain for Windows on Arm
 
-The latest version (at the time of writing) of the LLVM toolchain with Windows on Arm native support is 22.1.4. To find the latest version, see [LLVM releases](https://github.com/llvm/llvm-project/releases). [Download the pre-built binary](https://github.com/llvm/llvm-project/releases/download/llvmorg-22.1.4/LLVM-22.1.4-woa64.exe).
+The latest version (at the time of writing) of the LLVM toolchain with Windows on Arm native support is 22.1.4. To find the latest version, see [LLVM releases](https://github.com/llvm/llvm-project/releases). 
+
+[Download the pre-built binary](https://github.com/llvm/llvm-project/releases/download/llvmorg-22.1.4/LLVM-22.1.4-woa64.exe).
 
 {{% notice Note %}}
 A warning message may appear in your browser due to the publisher being listed as `Unknown`. The warning is:
