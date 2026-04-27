@@ -36,7 +36,7 @@ The [LLVM Embedded Toolchain for Arm](https://github.com/ARM-software/LLVM-embed
 To download the latest release from GitHub, copy and paste the following URL into your browser:
 
 {{% notice Note %}}
-The following step uses LLVM Embedded Toolchain for Arm version 18.1.3. The same step works with other versions. Replace the file used in this step with the file for your version of choice. To find the latest version, see [LLVM Embedded Toolchain releases](https://github.com/ARM-software/LLVM-embedded-toolchain-for-Arm/releases).
+The following step uses LLVM Embedded Toolchain for Arm version 19.1.5. The same step works with other versions. Replace the file used in this step with the file for your version of choice. To find the latest version, see [LLVM Embedded Toolchain releases](https://github.com/ARM-software/LLVM-embedded-toolchain-for-Arm/releases).
 {{% /notice %}}
 
 ```url
@@ -49,7 +49,7 @@ Open Windows `Control Panel` and add the LLVM `bin` directory to the `Path`.
 
 Open a `Command Prompt` and [test your installation](#test).
 
-## Install the LLVM Embedded Toolchain for Arm on macOS? {#macos}
+## Install the LLVM Embedded Toolchain for Arm on macOS {#macos}
 
 To download the latest release from GitHub, copy and paste the following URL into your browser:
 
