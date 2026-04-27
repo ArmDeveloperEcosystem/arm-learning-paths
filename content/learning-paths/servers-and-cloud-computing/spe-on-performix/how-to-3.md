@@ -45,7 +45,7 @@ Run the check again to confirm that the kernel module is installed:
 modinfo arm_spe_pmu 2>/dev/null || echo "arm_spe_pmu module not present"
 ```
 
-The output is similar to:
+The output should be similar to:
 
 ```output
 filename:       /lib/modules/6.17.0-1010-aws/kernel/drivers/perf/arm_spe_pmu.ko.zst

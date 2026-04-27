@@ -33,14 +33,16 @@ The possible outputs are `y`, `m`, or `n`, meaning built-in support, module supp
 - `m` indicates that SPE is available as a loadable kernel module. This is the typical output for cloud instances.
 - `n` means the kernel was **not** built with SPE support.
 
-If the output from the previous command is `n`, **skip directly to Step 3.0**.
+If the output from the previous command is `CONFIG_ARM_SPE_PMU = n`, **skip directly to Step 3.0**.
+
+If the output from the previous command is `CONFIG_ARM_SPE_PMU = y`, **you can skip directly to step 1.2.**
 
 ### Step 1.1) Check whether the kernel module is available
 
-If your output was `y` or `m`, as shown below, the OS kernel includes SPE support. You still need to confirm that the driver layer is present and can be loaded.
+If your output was `CONFIG_ARM_SPE_PMU = m`, as shown below, the OS kernel includes SPE support. However, you still need to confirm that the driver layer is present and can be loaded.
 
 ```output
-CONFIG_ARM_SPE_PMU             = <m or y>
+CONFIG_ARM_SPE_PMU             = m
 ```
 
 Run the following command to check whether the loadable kernel module (driver) is available on the target:
@@ -49,7 +51,7 @@ Run the following command to check whether the loadable kernel module (driver) i
 modinfo arm_spe_pmu 2>/dev/null || echo "arm_spe_pmu not present for this kernel"
 ```
 
-If you see output similar to the following, the kernel module is already available on your system.
+If you see output similar to the following, `arm_spe_pmu` is built as a module. If you see `arm_spe_pmu not present for this kernel`, continue to step 1.2. We will attempt to find and install the module for our specific kernel in later steps.
 
 ```output
 filename:       /lib/modules/6.17.0-1010-aws/kernel/drivers/perf/arm_spe_pmu.ko.zst
@@ -60,11 +62,17 @@ srcversion:     3B6FCB5AD9B37B8BB9FF4A9
 ...
 ```
 
-If so, run the following command to load the driver:
+Next, run the following command to load the driver:
 
 ```bash
 sudo modprobe arm_spe_pmu
 lsmod | grep arm_spe_pmu
+```
+
+If it loads correctly, the output will be similar to:
+
+```output
+arm_spe_pmu            24576  0
 ```
 
 In Step 1.2, use Sysreport to review system-level metrics, including SPE status.
@@ -148,4 +156,4 @@ Actions that can be taken to improve performance tools experience:
     ensure ACPI describes CoreSight trace fabric
 ```
 
-In this example, the output shows `perf sampling:       None`, so continue to the next step.
+In this example, the output shows `perf sampling:       None`, so continue to the next step. 

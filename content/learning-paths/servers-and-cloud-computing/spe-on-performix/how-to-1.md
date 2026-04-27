@@ -20,10 +20,10 @@ On Linux, SPE is available only when all required layers are aligned:
 
 - **Architecture layer**: the CPU must implement SPE (common on Arm Neoverse systems and the Arm AGI CPU).
 - **Firmware layer**: platform firmware must advertise the SPE PMU and its interrupt path through ACPI or Device Tree. This is usually already enabled, so this check is often skipped.
-- **Kernel layer**: the running kernel must include SPE PMU support through `CONFIG_ARM_SPE_PMU`.
-- **Driver layer**: the `arm_spe_pmu` driver must initialize successfully (built-in or loaded as a module).
+- **Kernel layer**: the running kernel must be built with Arm SPE PMU support through the `CONFIG_ARM_SPE_PMU` kernel build option.
+- **Driver layer**: the `arm_spe_pmu` driver must initialize successfully (built-in or loaded as a module). This requires all the above layers to have Arm SPE support.
 
-If any of these layers is missing, Linux cannot expose SPE to profiling tools. Also, cloud-based applications usually run on top of a hypervisor unless you use a bare-metal instance type.
+If any of these layers are missing, Linux cannot expose SPE to profiling tools. Additionally, cloud-based applications usually run on top of a hypervisor which typically disables SPE.
 
 {{% notice Please Note %}}
  

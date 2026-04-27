@@ -44,7 +44,7 @@ further_reading:
         type: documentation
     - resource:
         title: Arm Statistical Profiling Extension documentation
-        link: https://developer.arm.com/documentation/100616/0301/debug-descriptions/statistical-profiling-extension
+        link: https://developer.arm.com/documentation/100616/0401/?lang=en
         type: documentation
     - resource:
         title: Arm Performix
