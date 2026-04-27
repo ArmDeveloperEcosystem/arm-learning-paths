@@ -4,26 +4,26 @@ layout: learningpathall
 weight: 2
 ---
 
-## Introduction
+## Understand MNN and multimodal inference on Armv9
 
-This section introduces the software stack used throughout this Learning Path. You will use **[MNN](https://github.com/alibaba/MNN)** to run a prebuilt **Omni multimodal model** on an Armv9 Linux system using only the CPU.
+This section introduces the software stack used throughout this Learning Path. You will use **[MNN](https://github.com/alibaba/MNN)** (Mobile Neural Network), a lightweight inference engine, to run a prebuilt **Omni multimodal model** on an Armv9 Linux system using only the CPU.
 
-By the end of this section, you will understand why this combination is a practical starting point for reproducible multimodal inference on Armv9. A retail restocking workflow that combines local image and audio inputs is used as the example throughout.
+By the end of this section, you'll understand why this combination is a practical starting point for reproducible multimodal inference on Armv9. A retail restocking workflow that combines local image and audio inputs is used as the example throughout.
 
 ## Why use MNN on Armv9
 
-MNN is a lightweight inference engine designed for deployment across mobile, embedded, and edge platforms. It is a good fit for this Learning Path for four reasons:
+MNN is a lightweight inference engine designed for deployment across mobile, embedded, and edge platforms. It's a good fit for this Learning Path for four reasons:
 
-- It provides a **portable runtime** that can be built and reused across different device classes.
-- It supports a **CPU-first deployment flow**, which is useful when you want to validate multimodal inference on Armv9 without depending on a discrete GPU or dedicated accelerator.
-- Native builds can take advantage of **Armv9-specific CPU features and optimizations** when they are enabled in the build, making this a practical path for efficient local inference.
-- The same runtime approach can be reused across **Arm Linux, Android, iOS, and x86-based development hosts**, which improves portability from development to deployment.
+- Provides a **portable runtime** that can be built and reused across different device classes
+- Supports a **CPU-first deployment flow**, useful when you want to validate multimodal inference on Armv9 without depending on a discrete GPU or dedicated accelerator
+- Native builds take advantage of **Armv9-specific CPU features and optimizations** when enabled in the build, making this a practical path for efficient local inference
+- The same runtime approach can be reused across **Arm Linux, Android, iOS, and x86-based development hosts**, improving portability from development to deployment
 
 For this Learning Path, MNN gives you a practical way to build a reproducible multimodal inference workflow on Armv9 while keeping the software stack compact and deployment-oriented.
 
 ## Why use an Omni multimodal model
 
-An Omni model combines **text, image, and audio** understanding in a single inference pipeline. This makes it useful for building compact edge applications that need to reason over more than one input type.
+An Omni model combines **text, image, and audio** understanding in a single inference pipeline, making it useful for building compact edge applications that need to reason over more than one input type.
 
 In this Learning Path, you use the model to:
 
@@ -49,6 +49,12 @@ To keep the workflow reproducible, this Learning Path uses a deliberately narrow
 
 This scope keeps the focus on setup, validation, and multimodal application flow.
 
-## Next steps
+## What you've learned and what's next
 
-In the next section, you will build MNN on Armv9 and prepare the model files and local assets used in the remaining examples.
+In this section, you learned:
+
+- Why MNN is a practical inference engine for multimodal workflows on Armv9
+- How an Omni model combines text, image, and audio understanding in one pipeline
+- The deliberate scope choices that keep this Learning Path reproducible and focused on CPU-first inference
+
+In the next section, you'll build MNN natively on Armv9 and prepare the model files and local assets used in the remaining examples.

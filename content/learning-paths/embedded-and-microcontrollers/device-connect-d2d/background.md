@@ -51,13 +51,4 @@ In D2D mode, every participant is a peer. Each device runtime joins the same pub
 
 No central server sits between the sensor and the monitor. They advertise themselves, find each other by event name, and exchange typed payloads directly.
 
-## What you'll learn
-
-By the end of this Learning Path you will:
-
-- set up a Python project with uv, the Device Connect runtime, and the agent tools
-- write two cooperating drivers: a simulated sensor and a threshold monitor that reacts to it
-- run both as independent device runtimes on one machine
-- use the Device Connect agent tools to discover both peers and invoke their RPCs
-
-The next section covers the developer model.
+Move on to the next section to have a look at the developer model.

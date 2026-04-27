@@ -17,17 +17,14 @@ This mirrors a real edge scenario, a room supervisor watching environmental sens
 
 This walkthrough uses [uv](https://docs.astral.sh/uv/) to manage the project and its Python dependencies. uv will resolve a compatible Python interpreter, create a virtual environment, and install packages for you, so no manual `venv` or `pip` steps are needed.
 
-If you do not already have uv installed, run the official installer for your platform:
-
-```bash
-# macOS or Linux
+{{< tabpane code=true >}}
+    {{< tab header="macOS or Linux" language="shell">}}
 curl -LsSf https://astral.sh/uv/install.sh | sh
-```
-
-```powershell
-# Windows PowerShell
+    {{< /tab >}}
+    {{< tab header="Windows" language="powershell">}}
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
-```
+    {{< /tab >}}
+{{< /tabpane >}}
 
 Alternative install methods (Homebrew, pipx, and others) are listed in the [uv installation docs](https://docs.astral.sh/uv/getting-started/installation/). Verify the install with:
 
@@ -244,7 +241,15 @@ print("recent alerts:", invoke_device(monitor_id, "get_recent_alerts"))
 PY
 ```
 
-The script discovers both devices, invokes `get_reading` on the sensor, and invokes `get_recent_alerts` on the monitor. The alert list should contain every breach the monitor has observed since it started.
+The script discovers both devices, invokes `get_reading` on the sensor, and invokes `get_recent_alerts` on the monitor. The alert list should contain every breach the monitor has observed since it started:
+
+```
+Found 2 device(s)
+  monitor-001 (threshold_monitor)
+  sensor-001 (simulated_sensor)
+latest reading: {'success': True, 'result': {'temperature': 27.5, 'humidity': 53.5}}
+recent alerts: {'success': True, 'result': [{'device_id': 'sensor-001', 'temperature': 27.9}, {'device_id': 'sensor-001', 'temperature': 28.7}, {'device_id': 'sensor-001', 'temperature': 28.2}, {'device_id': 'sensor-001', 'temperature': 28.1}, {'device_id': 'sensor-001', 'temperature': 29.2}, {'device_id': 'sensor-001', 'temperature': 28.6}, {'device_id': 'sensor-001', 'temperature': 27.7}, {'device_id': 'sensor-001', 'temperature': 28.9}, {'device_id': 'sensor-001', 'temperature': 29.0}, {'device_id': 'sensor-001', 'temperature': 27.5}]}
+```
 
 ## What happened
 

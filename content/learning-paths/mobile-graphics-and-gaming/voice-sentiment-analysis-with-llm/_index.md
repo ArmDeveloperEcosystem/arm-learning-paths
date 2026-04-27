@@ -1,10 +1,6 @@
 ---
 title: Build a Sentiment-Aware Voice Assistant with On-Device LLMs
 
-draft: true
-cascade:
-    draft: true
-
 description: Build an end-to-end, on-device voice assistant that understands both speech and emotion using Whisper, HuBERT, ONNX Runtime, and a local LLM with llama.cpp on Arm.
 
 minutes_to_complete: 90
@@ -21,8 +17,6 @@ learning_objectives:
 prerequisites:
     - Python 3.9 or later for programming.
     - A working microphone for voice input.
-    - "ffmpeg installed on your system (required by Whisper for audio decoding)."
-    - "Build tools to compile llama.cpp (git, make, gcc/g++)."
     - Basic Python and command-line knowledge.
 
 author: Bhanu Arya
