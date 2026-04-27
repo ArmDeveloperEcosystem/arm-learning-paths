@@ -12,8 +12,8 @@ We have used a publicly available w8a8 quantised model to improve performance wi
 
 You will need to install the required packages before running the quantisation script.
 ```bash
-pip install compressed-tensors
-pip install llmcompressor
+pip install compressed-tensors==0.14.0.1
+pip install llmcompressor==0.10.0.1
 pip install datasets==4.6.0
  
 python w4a8_quant.py

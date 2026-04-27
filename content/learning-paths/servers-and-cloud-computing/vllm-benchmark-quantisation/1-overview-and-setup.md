@@ -14,7 +14,11 @@ layout: learningpathall
 
 Llama 3.1 8B is an open-weight, text-only LLM with 8 billion parameters that can understand and generate text. You can view the model card at https://huggingface.co/meta-llama/Llama-3.1-8B.
 
-Quantised models have their weights converted to a lower precision data type, which reduces the memory requirements of the model and can improve performance significantly. In the [Run vLLM inference with INT4 quantization on Arm servers](/learning-paths/servers-and-cloud-computing/vllm-acceleration/) Learning Path we have covered how to quantise a model yourself. There are also many publicly available quantised versions of popular models, such as https://huggingface.co/RedHatAI/Meta-Llama-3.1-8B-quantized.w8a8. The notation w8a8 means that the weights have been quantised to 8-bit integers and the activations (the input data) are dynamically quantised to the same.
+Quantised models have their weights converted to a lower precision data type, which reduces the memory requirements of the model and can improve performance significantly. In the [Run vLLM inference with INT4 quantization on Arm servers](/learning-paths/servers-and-cloud-computing/vllm-acceleration/) Learning Path we have covered how to quantise a model yourself. There are also many publicly available quantised versions of popular models, such as https://huggingface.co/RedHatAI/Meta-Llama-3.1-8B-quantized.w8a8. 
+
+The notation w8a8 means that the weights have been quantised to 8-bit integers and the activations (the input data) are dynamically quantised to the same. This allows our kernels to utilise Arm's 8-bit integer matrix multiply feature I8MM. You can learn more about this in the [KleidiAI and matrix multiplication](/learning-paths/cross-platform/kleidiai-explainer/) Learning Path.
+
+The RedHatAI/Meta-Llama-3.1-8B-quantized.w8a8 model we are using in this Learning Path only applies quantisation to the weights and activations in the linear layers of the transformer blocks. The activation quantisations are applied per-token and the weights are quantised per-channel. That is, each output channel dimension has a scaling factor applied between INT8 and BF16 representations.
 
 ## Set up your environment
 
