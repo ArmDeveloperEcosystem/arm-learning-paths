@@ -41,11 +41,13 @@ The Security Toolkit (SETOOLS) programs firmware images onto the DevKit.
 
 - Download the macOS version of SETOOLS from the [Alif Ensemble E8 DevKit support page](https://alifsemi.com/support/kits/ensemble-e8devkit/).
 
-- Extract it into `~/alif`. This creates the toolkit directory under a stable location, for example `~/alif/app-release-exec-macos/`.
+- Extract it into `~/alif`. This creates the toolkit directory under a stable location, for example `~/alif/app-release-exec-macos/`. 
+
+- Update the command below to reflect the filename that you download.
 
 ```bash
 cd ~/Downloads
-tar xvf APFW0003-app-release-exec-macos-SW_FW_1.107.00_DEV-4.tar -C ~/alif
+tar xvf replace_with_your_alif_security_toolkit_download.tar -C ~/alif
 ```
 
 - Open a terminal in the SETOOLS directory and run:
