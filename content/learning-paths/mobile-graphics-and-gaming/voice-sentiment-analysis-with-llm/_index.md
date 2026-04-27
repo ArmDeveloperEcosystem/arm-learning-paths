@@ -1,10 +1,6 @@
 ---
 title: Build a Sentiment-Aware Voice Assistant with On-Device LLMs
 
-draft: true
-cascade:
-    draft: true
-
 description: Build an end-to-end, on-device voice assistant that understands both speech and emotion using Whisper, HuBERT, ONNX Runtime, and a local LLM with llama.cpp on Arm.
 
 minutes_to_complete: 90
