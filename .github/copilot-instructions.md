@@ -80,7 +80,7 @@ The `_index.md` file should contain the following front matter and content secti
 
 ### Install guide requirements
 
-Install guides focus on installing and verifying one tool on Arm platforms. They do not teach workflows or applied usage. Use existing install guides as reference.
+Install guides focus on installing and verifying one tool on Arm platforms. They do not teach workflows or applied usage.
 
 #### Front matter requirements
 
