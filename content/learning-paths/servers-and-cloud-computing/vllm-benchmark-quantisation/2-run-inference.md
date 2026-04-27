@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Set up access to LLama3.1-8B models
 
-To access the Llama models hosted by Hugging Face, you will need to install the Hugging Face cli so that you can authenticate yourself and the harness can download what it needs. You should create an account on https://huggingface.co/ and follow the instructions [in the Hugging Face cli guide](https://huggingface.co/docs/huggingface_hub/en/guides/cli) to set up your access token. You can then install the cli and login:
+To access the Llama models hosted by Hugging Face, you will need to install the Hugging Face CLI so that you can authenticate yourself and the harness can download what it needs. You should create an account on https://huggingface.co/ and follow the instructions [in the Hugging Face cli guide](https://huggingface.co/docs/huggingface_hub/en/guides/cli) to set up your access token. You can then install the CLI and login:
 ```bash
 curl -LsSf https://hf.co/cli/install.sh | bash
 hf auth login
@@ -20,21 +20,14 @@ Now you can check that you are able to run inference on the non-quantised Llama 
 
 ## Run inference on LLama3.1-8B
 
-We will use the vLLM bench cli to measure the throughput of our models later on. Install the required library and use a limited number of prompts to validate your environment. This will run a little slow the first time through as you download the models.
+We will use the vLLM bench CLI to measure the throughput of our models later on. Install the required library and use a limited number of prompts to validate your environment. This will run a little slow the first time through as you download the models.
 ```bash
 pip install vllm[bench]
  
 vllm bench throughput \
 --num-prompts 10 \
---seed 0 \
 --dataset-name random \
---random-input-len 256 \
---random-output-len 256 \
---max-model-len 4096 \
---max-num-batched-tokens 4096 \
---model meta-llama/Llama-3.1-8B \
---no-enable-prefix-caching \
---load-format dummy
+--model meta-llama/Llama-3.1-8B
 ```
 
 This will report the number of requests per second, the total number of tokens generated per second and the number of output tokens generated per second.
@@ -43,15 +36,8 @@ You can do the same for the quantised model:
 ```bash
 vllm bench throughput \
 --num-prompts 10 \
---seed 0 \
 --dataset-name random \
---random-input-len 256 \
---random-output-len 256 \
---max-model-len 4096 \
---max-num-batched-tokens 4096 \
---model RedHatAI/Meta-Llama-3.1-8B-quantized.w8a8 \
---no-enable-prefix-caching \
---load-format dummy
+--model RedHatAI/Meta-Llama-3.1-8B-quantized.w8a8 
 ```
 
 You now have the quantised and non-quantised Llama models on your local machine. You have installed vLLM and demonstrated you can run inference on both your models. Now you can move on to benchmarking these models and compare their performance.

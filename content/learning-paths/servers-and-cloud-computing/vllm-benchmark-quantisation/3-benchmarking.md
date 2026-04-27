@@ -6,13 +6,10 @@ weight: 4
 layout: learningpathall
 ---
 
-## Llama throughput benchmarking
+## Llama performance benchmarking
 
 We will use the vLLM bench cli to measure the throughput of our models. First, start the server and keep it running:
 ```bash
-export VLLM_TARGET_DEVICE=cpu
-export LD_PRELOAD=/usr/lib/aarch64-linux-gnu/libtcmalloc_minimal.so.4:/usr/lib/aarch64-linux-gnu/libgomp.so.1
- 
 vllm serve \
   --model meta-llama/Llama-3.1-8B-Instruct \
   --max-num-batched-tokens 16000 \

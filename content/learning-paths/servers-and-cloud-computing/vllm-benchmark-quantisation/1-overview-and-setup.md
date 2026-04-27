@@ -21,7 +21,7 @@ Quantised models have their weights converted to a lower precision data type, wh
 Before you begin, make sure your environment meets these requirements:
 
 - Python 3.12 on Ubuntu 22.04 LTS or newer
-- At least 32 vCPUs, 64 GB RAM, and 64 GB of free disk space
+- At least 32 vCPUs, 96 GB RAM, and 64 GB of free disk space
 This Learning Path was tested on an AWS Graviton4 c8g.12xlarge instance with 200 GB of attached storage.
 
 ## Install build dependencies

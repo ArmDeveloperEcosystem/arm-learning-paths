@@ -89,10 +89,6 @@ oneshot(
 model.save_pretrained("Meta-Llama-3.1-8B-quantized.w4a8")
 ```
 
-{{% notice Note %}}
-Running this script will take a long time and you will need at least 96GB of RAM if quantising Llama3.1-8B. On a machine with 64GB of RAM you can experiment with quantising DeepSeek-V2-Lite instead.
-{{% /notice %}}
-
 ## Next steps
 
 Now that you have your environment set up for benchmarking and quantising different models, you can experiment with:
