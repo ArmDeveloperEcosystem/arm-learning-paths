@@ -50,10 +50,10 @@ It also sets these export defaults to match this tutorial:
 - `Dataset Dir`: `NeuralGraphicsDataset`
 - `Capture Name`: `0000`
 
-![Close-up screenshot of the Level Blueprint showing the capture settings nodes and the Neural Graphics Data Capture Subsystem being wired to Begin Capture and End Capture nodes. This shows how the settings are configured.#center](./images/blueprint-capture-subsystem-closeup.png "Capture settings and subsystem wiring")
+![Close-up screenshot of the Level Blueprint showing the capture settings nodes and the Neural Graphics Data Capture Subsystem being wired to Begin Capture and End Capture nodes. This shows how the settings are configured.#center](./images/blueprint-capture-subsystem-closeup.webp "Capture settings and subsystem wiring")
 
 The full event graph should look similar to this:
 
-![Screenshot of the complete Level Blueprint event graph showing keyboard input C connected to Begin Capture and keyboard input V connected to End Capture, with all necessary settings nodes connected. This is the expected final blueprint configuration.#center](./images/level-blueprint-full-graph.png "Complete blueprint graph")
+![Screenshot of the complete Level Blueprint event graph showing keyboard input C connected to Begin Capture and keyboard input V connected to End Capture, with all necessary settings nodes connected. This is the expected final blueprint configuration.#center](./images/level-blueprint-full-graph.webp "Complete blueprint graph")
 
 Continue to run the level in Standalone mode and test capture.

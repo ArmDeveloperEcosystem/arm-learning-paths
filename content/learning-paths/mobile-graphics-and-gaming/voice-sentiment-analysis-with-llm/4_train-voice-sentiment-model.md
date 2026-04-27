@@ -3,6 +3,7 @@ title: Train the voice sentiment classification model
 weight: 5
 layout: learningpathall
 ---
+## Train a HuBERT model for voice sentiment classification
 In this section, you will train a model to classify voice sentiment directly from audio. The raw waveform is converted into audio-based features, then passed through a pre-trained HuBERT model with a classification head.
 
 For this Learning Path, you train the model on the RAVDESS dataset using three sentiment classes: `neutral`, `happy`, and `angry`. This keeps the demo manageable while still showing a realistic transfer-learning workflow. You can extend the same approach to more sentiment classes or other datasets.
@@ -13,7 +14,7 @@ This example uses a simple per-sample training loop for clarity. On CPU, trainin
 
 All code snippets in Steps 2.1 to 2.5 are meant to be added to a single Python file: `train_sentiment_model.py` in your project root (`$HOME/voice-sentiment-assistant`).
 
-Make sure you are located in the project directory:
+Make sure you're located in the project directory:
 
 ```bash
 cd $HOME/voice-sentiment-assistant
@@ -208,7 +209,7 @@ for epoch in range(EPOCHS):
     print(f"Validation accuracy: {accuracy:.2f}")
 ```
 
-At the end of this step, you will have a trained model and a simple validation accuracy printed after each epoch. You should typically see validation accuracy improve over time, although the exact values will vary depending on randomness and hardware.
+At the end of this step, you'll have a trained model and a simple validation accuracy printed after each epoch. You should typically see validation accuracy improve over time, although the exact values will vary depending on randomness and hardware.
 
 ### Step 2.5 - Save the model
 
@@ -392,4 +393,13 @@ Run the training script:
 python train_sentiment_model.py
 ```
 
-At this point, you have a trained voice sentiment classification model saved locally. In the next section, you will convert this model to ONNX format and compress it for more efficient inference.
+## What you've learned and what's next
+
+In this section, you:
+
+- Downloaded and prepared the RAVDESS speech emotion dataset
+- Fine-tuned a HuBERT model for voice sentiment classification
+- Validated the model's accuracy on neutral, happy, and angry emotions
+- Saved the trained model and feature extractor for inference
+
+You now have a trained voice sentiment model ready for deployment. In the next section, you'll export this model to ONNX format and apply int-8 quantization to optimize it for efficient on-device inference.
