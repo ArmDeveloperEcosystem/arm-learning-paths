@@ -1,6 +1,10 @@
 ---
 title: Run Apache Spark SQL workloads on Azure Cobalt 100 Arm64 using Gluten and Velox for accelerated analytics
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 120
 
 who_is_this_for: This is an intermediate topic for data engineers, platform engineers, and developers who want to build and optimize high-performance Spark SQL workloads using native execution engines on Arm-based cloud environments.
