@@ -52,12 +52,12 @@ Unpack the downloaded file to the install directory. The exact file name will de
 tar xJf arm-gnu-toolchain-<version>-<host-arch>-<TRIPLE>.tar.xz -C /path/to/install/dir
 ```
 
-Add the `bin` directory to the `PATH` environment variable (bash).
+Add the `bin` directory to the `PATH` environment variable (bash):
 ```console
 export PATH=/path/to/install/dir/bin:$PATH
 ```
 
-The following is an example of a specific version for an Arm Linux host and the AArch32 bare-metal target.
+The following is an example of a specific version for an Arm Linux host and the AArch32 bare-metal target:
 
 {{% notice Note %}}
 The following commands uses Arm GNU Toolchain version 15.2.Rel1. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Arm GNU Toolchain downloads](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads).
@@ -94,7 +94,7 @@ Use a text editor to add the `bin` directory as a new line in `/etc/paths`.
 
 For example, for version 15.2.rel1, the path could be: `/Applications/ArmGNUToolchain/15.2.rel1/arm-none-eabi/bin`
 
-The `/etc/paths` file is a list of paths to search.
+The `/etc/paths` file is a list of paths to search:
 
 ```console
 /usr/local/bin
@@ -108,7 +108,7 @@ The `/etc/paths` file is a list of paths to search.
 
 ### Apple Silicon
 
-The following is a specific example for macOS with Apple Silicon and the AArch32 bare-metal target.
+The following is a specific example for macOS with Apple Silicon and the AArch32 bare-metal target:
 
 {{% notice Note %}}
 The following commands use Arm GNU Toolchain version 15.2.Rel1. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Arm GNU Toolchain downloads](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads).
