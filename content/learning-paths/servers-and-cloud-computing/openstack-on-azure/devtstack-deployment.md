@@ -182,7 +182,7 @@ The following are some of the key configuration choices:
 
 - `disable_service neutron` — simplifies the deployment by removing advanced networking, which has compatibility issues on Arm Azure VMs
 - `disable_service etcd3` —  delegates etcd to the version you installed manually and disables DevStack's built-in etcd setup that doesn't work reliably on Arm
-- `LIBVIRT_TYPE=qemu` — Azure Cobalt 100 VMs do not support nested Kernel-based Virtual Machine (KVM) virtualization, so Nova uses Quick Emulator (QEMU) software emulation instead
+- `LIBVIRT_TYPE=qemu` — ensures Nova uses Quick Emulator (QEMU) software emulation because Azure Cobalt 100 VMs don't support nested Kernel-based Virtual Machine (KVM) virtualization
 - `enable_service horizon` — enables the web dashboard
 - `GIT_DEPTH=1` — performs shallow clones to reduce download size and avoid failures on slow or rate-limited connections
 

@@ -175,7 +175,7 @@ The deployment runs in five stages. Each stage must complete successfully before
 | Deploy | `deploy` | Starts all OpenStack service containers |
 | Post-deploy | `post-deploy` | Generates admin credentials and writes `admin-openrc.sh` |
 
-Run each command and wait for it to complete before proceeding:
+Run each command and wait for it to complete before proceeding. Start by running the bootstrap command:
 
 ```console
 kolla-ansible bootstrap-servers -i all-in-one
@@ -236,7 +236,7 @@ sudo systemctl disable libvirtd 2>/dev/null || true
 sudo rm -f /var/run/libvirt/libvirt-sock
 ```
 
-Then re-run prechecks.
+Then, re-run prechecks.
 {{% /notice %}}
 
 After running prechecks successfully, run:

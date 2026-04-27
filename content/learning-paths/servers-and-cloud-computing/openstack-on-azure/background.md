@@ -7,7 +7,7 @@ layout: "learningpathall"
 
 ## Azure Cobalt 100 Arm-based processor
 
-Azure’s Cobalt 100 is Microsoft’s first-generation, in-house Arm-based processor. Built on Arm Neoverse N2, Cobalt 100 is a 64-bit CPU that delivers strong performance and energy efficiency for cloud-native, scale-out Linux workloads. These workloads include web and application servers, data analytics, open-source databases, and caching systems. Running at 3.4 GHz, Cobalt 100 allocates a dedicated physical core for each vCPU, which helps ensure consistent and predictable performance.
+Azure’s Cobalt 100 is Microsoft’s first-generation, in-house Arm-based processor. Built on Arm Neoverse N2, Cobalt 100 is a 64-bit CPU that delivers strong performance and energy efficiency for cloud-native, scale-out Linux workloads. These workloads include web and application servers, data analytics, open-source databases, and caching systems. Running at 3.4 GHz, Cobalt 100 allocates a dedicated physical core for each vCPU, which ensures consistent and predictable performance.
 
 To learn more, see the Microsoft blog [Announcing the preview of new Azure VMs based on the Azure Cobalt 100 processor](https://techcommunity.microsoft.com/blog/azurecompute/announcing-the-preview-of-new-azure-vms-based-on-the-azure-cobalt-100-processor/4146353).
 
@@ -21,14 +21,14 @@ OpenStack runs efficiently on Arm-based architectures such as Azure Cobalt 100, 
 
 ## Key services in OpenStack
 
-OpenStack is composed of modular services that handle different aspects of cloud infrastructure:
+OpenStack is composed of the following modular services that handle different aspects of cloud infrastructure:
 
-* Keystone (Identity): Authentication and authorization service
+* Keystone (Identity): Manages authentication and authorization
 * Nova (Compute): Manages virtual machine (VM) lifecycle
 * Glance (Image): Stores and manages VM images
 * Neutron (Networking): Provides networking and connectivity
-* Cinder (Block Storage): Persistent block storage for instances
-* Horizon (Dashboard): Web-based user interface for managing resources
+* Cinder (Block Storage): Provides persistent block storage for instances
+* Horizon (Dashboard): Provides a web-based user interface for managing resources
 
 
 ## OpenStack architecture components
@@ -40,7 +40,7 @@ A typical OpenStack deployment consists of the following:
 * Networking (Neutron): Handles virtual networking, bridges, and routing
 * Storage Services: Provide block and object storage
 
-## Two deployment approaches
+## Two deployment approaches: DevStack and Kolla-Ansible
 
 In this Learning Path, you'll learn two ways to deploy OpenStack on an Azure Cobalt 100 Arm64 VM. Each approach has different requirements and suits a different use case.
 
@@ -58,12 +58,12 @@ Kolla-Ansible runs every OpenStack service as a Docker container and is the reco
 | Horizon dashboard | Yes | Yes |
 
 {{< notice Warning >}}
-You should run each approach on its own dedicated virtual machine (VM). Don't run both on the same VM because they use the same ports and will conflict.
+You need to run each approach on its own dedicated virtual machine (VM). Don't run both on the same VM because they use the same ports and will conflict.
 {{< /notice >}}
 
 ## Virtual machine requirements for each deployment
 
-Because the two approaches have different infrastructure requirements, this Learning Path uses two separate Azure VMs.
+Because the two approaches have different infrastructure requirements, you'll be creating two separate Azure VMs in this Learning Path.
 
 | | VM for DevStack | VM for Kolla-Ansible |
 |-|-----------------|----------------------|

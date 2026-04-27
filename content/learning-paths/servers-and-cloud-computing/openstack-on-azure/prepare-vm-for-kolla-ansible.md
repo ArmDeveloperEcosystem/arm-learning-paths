@@ -41,7 +41,7 @@ After stopping the VM, to attach a new NIC, follow these steps:
 
 1. In the Azure portal, navigate to **Networking** and then **Network settings**
 2. Click **Attach network interface**
-3. Select **Create new NIC**
+3. Click **Create new NIC**
 
 ![Azure Portal Create NIC configuration screen showing subnet selection and name field for the new network interface#center](images/kolla-ansible-nic2.png "Create a new NIC for the OpenStack external network")
 
@@ -80,6 +80,6 @@ Using a separate disk keeps OpenStack data off the OS disk and avoids filling it
 
 ## What you've accomplished and what's next
 
-In this section, you've configured a second Azure Arm64 VM for Kolla-Ansible. The VM has a second NIC (`eth1`) for OpenStack's provider network, and a dedicated 32 GB data disk for Cinder and Docker volumes.
+In this section, you configured a second Azure Arm64 VM for Kolla-Ansible. The VM has a second NIC (`eth1`) for OpenStack's provider network, and a dedicated 32 GB data disk for Cinder and Docker volumes.
 
 In the next section, you'll install Kolla-Ansible and deploy OpenStack as containers on this VM.
