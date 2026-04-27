@@ -281,6 +281,56 @@ Add the following configuration to the user-level `mcp.json` file:
 
 After saving your `mcp.json` file, a **Start** button appears at the top of the servers list. Select this button to start the Arm MCP Server.
 
+## Use Podman as a Docker drop-in replacement
+
+Podman's CLI is command-compatible with Docker. By creating a `docker` alias you can run existing Docker commands, including those in the Arm MCP Server docs, without changes.
+
+###### **macOS / Linux (bash / zsh)**
+
+Add to your `~/.bashrc`, `~/.zshrc`, or `~/.profile`:
+
+```bash
+alias docker=podman
+```
+
+Reload your shell:
+
+```bash
+source ~/.zshrc   # or ~/.bashrc
+```
+
+###### **Windows (PowerShell)**
+
+Add to your PowerShell profile (`$PROFILE`):
+
+```powershell
+Set-Alias -Name docker -Value podman
+```
+
+Reload:
+
+```powershell
+. $PROFILE
+```
+
+###### **Verify the alias**
+
+After setting the alias, all Docker commands are transparently handled by Podman:
+
+```console
+docker info                                   # -> podman info
+docker pull armlimited/arm-mcp:latest         # -> podman pull ...
+docker run -i --rm armlimited/arm-mcp:latest  # -> podman run ...
+```
+
+{{% notice Note %}}
+Remember to change your `mcp.json` from `"command": "docker"` to `"command": "podman"`. If you still run into issues, set `"command"` to the full path of the Podman binary.
+{{% /notice %}}
+
+{{% notice Note %}}
+You can also use other container platforms like [Finch](https://runfinch.com/). We recommend aliasing `docker` to `finch` (or your chosen platform) so the commands remain the same, and update `"command"` in `mcp.json` to that platform.
+{{% /notice %}}
+
 ## How do I analyze a local codebase with the Arm MCP Server?
 
 To analyze code in your workspace, mount your local directory to the MCP server's `/workspace` folder using a volume mount.
