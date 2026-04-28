@@ -1,18 +1,13 @@
 ---
-title: Create an Azure X64 virtual machine as an "on-prem simulator"
+title: Create an Azure x64 virtual machine as an on-premises simulator
 weight: 3
 
-### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-### Overview
+## Configure the virtual machine
 
-In this section, you'll use the Azure portal to create a virtual machine with an x64 processor architecture.
-
-This VM acts as your simulated on-premises x64 MySQL server.
-
-### Create an Azure x64 virtual machine
+Use the Azure portal to create a virtual machine with an x64 processor architecture. This VM acts as your simulated on-premises x64 MySQL server.
 
 To create an Azure virtual machine:
 
@@ -21,9 +16,11 @@ To create an Azure virtual machine:
 - Inside the **Basic** tab, fill in the instance details such as **Virtual machine name** and **Region**.
 - Select the image for your virtual machine (for example, Ubuntu Pro 24.04 LTS) and select **x64** as the VM architecture.
 - In the **Size** field, select **See all sizes** and select the D-Series v6 family of virtual machines.
-- Select **D4ads_v6** from the list as shown in the diagram below:
+- Select **D4ads_v6** from the list as shown below:
 
 ![Azure Portal showing D-Series v6 VM size selection with x64 D4ads_v6 highlighted#center](images/instance.png "Select D4ads_v6 from the D-Series v6 x64 family")
+
+## Configure authentication and networking
 
 - For **Authentication type**, select **SSH public key**.
 
@@ -43,11 +40,11 @@ RSA offers better security with keys longer than 3072 bits.
 
 ![Azure Portal showing inbound port rules with HTTP (80) and SSH (22) selected#center](images/instance1.png "Configure inbound port rules for HTTP and SSH access")
 
-- Now select the **Review + Create** tab and review the configuration for your virtual machine. It should look like the following:
+- Select the **Review + Create** tab and review the configuration for your virtual machine. It should look like the following:
 
 ![Azure Portal Review + Create tab showing VM configuration summary ready for deployment#center](images/instance3.png "Review VM configuration before creation")
 
-- When you're happy with your selection, select the **Create** button and then **Download Private key and Create Resource** button.
+- After reviewing your configuration, select the **Create** button and then **Download Private key and Create Resource**.
 
 ![Azure Portal showing Create button and SSH key download dialog#center](images/instance4.png "Download SSH key and create the virtual machine")
 
@@ -55,7 +52,9 @@ Your virtual machine should be ready and running in a few minutes. You can SSH i
 
 ![Azure Portal showing successful VM deployment with confirmation details#center](images/final-vm.png "Successful VM deployment confirmation")
 
-{{% notice Note %}}To learn more about virtual machines in Azure, see "Getting Started with Microsoft Azure" in [Get started with cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure/).{{% /notice %}}
+{{% notice Note %}}
+To learn more about virtual machines in Azure, see "Getting Started with Microsoft Azure" in [Get started with cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure/).
+{{% /notice %}}
 
 ## What you've learned and what's next
 

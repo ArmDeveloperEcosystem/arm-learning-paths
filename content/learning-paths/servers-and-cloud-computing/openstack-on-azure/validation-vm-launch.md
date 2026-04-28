@@ -1,14 +1,12 @@
 ---
-title: Validate OpenStack deployment and launch a VM on Azure Cobalt 100
+title: Validate OpenStack deployment and launch a virtual machine on Azure Cobalt 100
 weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Validate OpenStack deployment and launch a virtual machine
-
-This section validates the Kolla-Ansible deployment by checking service health, uploading a test image, creating network resources, and launching a virtual machine instance.
+In this section, you'll validate the Kolla-Ansible deployment by checking service health, uploading a test image, creating network resources, and launching a virtual machine instance.
 
 If you closed your session since the Kolla-Ansible deployment, reactivate the virtual environment and reload the admin credentials:
 
@@ -19,19 +17,13 @@ source /etc/kolla/admin-openrc.sh
 
 ## Verify services
 
+Verify the OpenStack services:
+
 ```console
 openstack compute service list
 openstack network agent list
 ```
-
-**Expected result:**
-
-All services should show:
-
-- Status → enabled
-- State → up
-
-If any service is down, the deployment is incomplete or misconfigured.
+All services should show **Status** as **enabled** and **State** as **up**. If any service is down, the deployment is incomplete or misconfigured.
 
 ## Bring up Open vSwitch bridges
 
@@ -101,7 +93,7 @@ The output is similar to:
                 options: {peer=patch-tun}
 ```
 
-All three bridges must show `is_connected: true`. If a bridge is missing or shows `is_connected: false`, re-run the `ip link set` commands above and check that the `neutron-openvswitch-agent` container is running with `docker ps | grep openvswitch`.
+All three bridges must show `is_connected: true`. If a bridge is missing or shows `is_connected: false`, re-run the `ip link set` commands and check that the `neutron-openvswitch-agent` container is running with `docker ps | grep openvswitch`.
 
 ## Upload image
 
@@ -121,7 +113,7 @@ openstack image create "test-image" \
   --public
 ```
 
-## Verify image upload
+Verify the image upload:
 
 ```console
 openstack image list
@@ -141,6 +133,8 @@ The image must be in an active state before launching VMs.
 
 ## Create network
 
+OpenStack networking (Neutron) requires a logical network and an IP range for instances. Create a network:
+
 ```console
 openstack network create test-net
 
@@ -149,14 +143,7 @@ openstack subnet create test-subnet \
   --subnet-range 192.168.0.0/24
 ```
 
-### Why this is required
-
-OpenStack networking (Neutron) requires:
-
-- Network → logical network
-- Subnet → IP range for instances
-
-## Verify network
+Verify the network:
 
 ```console
 openstack network list
@@ -172,7 +159,7 @@ The output is similar to:
 +--------------------------------------+----------+--------------------------------------+
 ```
 
-## Verify subnet
+Verify the subnet:
 
 ```console
 openstack subnet list
@@ -188,19 +175,20 @@ The output is similar to:
 +--------------------------------------+-------------+--------------------------------------+----------------+
 ```
 
-Both should show your created resources.
+Both outputs should show your created resources.
 
 ## Create flavor
 
-A flavor defines the compute resources — vCPUs, RAM, and disk — allocated to a virtual machine instance. OpenStack does not create any default flavors during deployment, so you need to create at least one before you can launch a VM.
-
-The `m1.tiny` flavor used here is a minimal definition suitable for testing: 1 vCPU, 512 MB RAM, and a 5 GB root disk. This is enough to boot a Debian cloud image and confirm the environment is working.
+A flavor defines the compute resources — vCPUs, RAM, and disk — allocated to a virtual machine instance. OpenStack does not create any default flavors during deployment, so you need to create at least one before you can launch a VM:
 
 ```console
 openstack flavor create m1.tiny --ram 512 --disk 5 --vcpus 1
 ```
 
-## Verify flavor
+The `m1.tiny` flavor used here is a minimal definition suitable for testing: 1 vCPU, 512 MB RAM, and a 5 GB root disk. This is enough to boot a Debian cloud image and confirm the environment is working.
+
+
+Verify the flavor:
 
 ```console
 openstack flavor list
@@ -216,7 +204,9 @@ The output is similar to:
 +--------------------------------------+---------+-----+------+-----------+-------+-----------+
 ```
 
-## Launch VM
+## Launch a virtual machine
+
+To launch a VM, run:
 
 ```console
 openstack server create \
@@ -227,7 +217,7 @@ openstack server create \
 ```
 
 
-## Verify VM status
+Verify VM status:
 
 ```console
 watch -n 2 openstack server list
@@ -243,7 +233,7 @@ The output is similar to:
 +--------------------------------------+---------+--------+------------------------+------------+---------+
 ```
 
-If the VM stays in ERROR, check:
+If the VM stays in ERROR, check the following:
 
 - OVS bridges
 - compute service status
@@ -251,37 +241,31 @@ If the VM stays in ERROR, check:
 
 ## Access Horizon dashboard
 
-Open browser:
+Open a browser and navigate to the public IP address of the VM:
 
 ```text
 http://<VM_PUBLIC_IP>
 ```
 
-Get password:
+Retrieve the admin password:
 
 ```console
 cat /etc/kolla/passwords.yml | grep keystone_admin_password
 ```
 
-Login:
+Log in with the following credentials:
 
-* Username: admin
-* Domain: Default
+| Field    | Value                        |
+|----------|------------------------------|
+| Username | admin                        |
+| Password | (output of password retrieval command)    |
+| Domain   | Default                      |
 
 The following image shows a successfully launched instance in the OpenStack Horizon UI.
 
 ![OpenStack Horizon Instances page showing test-vm in ACTIVE state with an assigned IP address from the test-net network#center](images/openstack-ui.png "OpenStack Horizon Instances view with running VM")
 
 
-## What you've learned
+## What you've accomplished
 
-You successfully validated your OpenStack deployment and confirmed that all services are operational.
-
-You also:
-
-- Created vSwitch networking specific to Arm + Azure
-- Uploaded an Arm-compatible image
-- Created network and compute resources
-- Launched and verified a virtual machine
-
-Your OpenStack environment is now fully functional and ready for use.
+You validated your Kolla-Ansible OpenStack deployment end-to-end. You checked service health, configured OVS bridges for Arm on Azure, uploaded an Arm-compatible Debian image, created network and compute resources, and launched a running virtual machine. Your OpenStack environment is now fully functional and ready for use.

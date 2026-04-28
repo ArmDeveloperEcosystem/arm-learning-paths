@@ -6,56 +6,54 @@ weight: 3
 layout: learningpathall
 ---
 
-## Prerequisites and setup
+You can create an Arm-based Cobalt 100 virtual machine (VM) in the following ways, depending on your workflow and requirements:
 
-There are several common ways to create an Arm-based Cobalt 100 virtual machine, and you can choose the method that best fits your workflow or requirements:
-
-- The Azure Portal
+- The Azure portal
 - The Azure CLI
 - An infrastructure as code (IaC) tool
 
-In this section, you will launch the Azure Portal to create a virtual machine with the Arm-based Azure Cobalt 100 processor.
+In this section, you'll use the Azure Portal to create a virtual machine with the Arm-based Azure Cobalt 100 processor.
 
 This Learning Path focuses on general-purpose virtual machines in the Dpsv6 series. For more information, see the [Microsoft Azure guide for the Dpsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series).
 
-While the steps to create this instance are included here for convenience, you can also refer to the [Deploy a Cobalt 100 virtual machine on Azure Learning Path](/learning-paths/servers-and-cloud-computing/cobalt/).
+The steps to create this instance are included here for convenience. For more detailed steps, see the [Deploy a Cobalt 100 virtual machine on Azure Learning Path](/learning-paths/servers-and-cloud-computing/cobalt/).
 
-## Create an Arm-based Azure virtual machine
+## Create an Arm-based Azure virtual machine on Azure portal
 
-Creating a virtual machine based on Azure Cobalt 100 is no different to creating any other virtual machine in Azure. To create an Azure virtual machine:
+To create an Azure virtual machine:
 
-- Launch the Azure portal and navigate to **Virtual Machines**.
-- Select **Create**, and select **Virtual Machine** from the drop-down list.
-- Inside the **Basic** tab, fill in the instance details such as **Virtual machine name** and **Region**.
-- Select the image for your virtual machine (for example, Ubuntu Pro 24.04 LTS) and select **Arm64** as the VM architecture.
-- In the **Size** field, select **See all sizes** and select the D-Series v6 family of virtual machines.
-- Select **D4ps_v6** from the list as shown in the diagram below:
+1. Open the Azure portal and navigate to **Virtual Machines**.
+2. Click **Create**, and click **Virtual Machine** from the drop-down list.
+3. Inside the **Basic** tab, fill in the instance details such as **Virtual machine name** and **Region**.
+4. Select the image for your virtual machine (for example, Ubuntu Pro 24.04 LTS) and select **Arm64** as the VM architecture.
+5. In the **Size** field, select **See all sizes** and select the D-Series v6 family of virtual machines.
+6. Select **D4ps_v6** from the list as shown in the following screenshot:
 
 ![Azure Portal VM size selection showing the D-Series v6 (Dpsv6) family highlighted with the D4ps_v6 Arm64 instance selected#center](images/instance.png "Select D4ps_v6 from the D-Series v6 family")
 
-- For **Authentication type**, select **SSH public key**.
+7. For **Authentication type**, select **SSH public key**.
 
 {{% notice Note %}}
 Azure generates an SSH key pair for you and lets you save it for future use. This method is fast, secure, and easy for connecting to your virtual machine.
 {{% /notice %}}
 
-- Fill in the **Administrator username** for your VM.
-- Select **Generate new key pair**, and select **RSA SSH Format** as the SSH Key Type.
+8. Fill in the **Administrator username** for your VM.
+9. Select **Generate new key pair**, and select **RSA SSH Format** as the SSH Key Type.
 
 {{% notice Note %}}
 RSA offers better security with keys longer than 3072 bits.
 {{% /notice %}}
 
-- Give your SSH key a key pair name.
-- In the **Inbound port rules**, select **HTTP (80)** and **SSH (22)** as the inbound ports, as shown below:
+10. Give your SSH key a key pair name.
+11. In the **Inbound port rules**, select **HTTP (80)** and **SSH (22)** as the inbound ports, as shown in the following screenshot:
 
 ![Azure Portal inbound port rules configuration showing HTTP (80) and SSH (22) selected as allowed incoming traffic#center](images/instance1.png "Configure inbound port rules for HTTP and SSH access")
 
-- Now select the **Review + Create** tab and review the configuration for your virtual machine. It should look like the following:
+12. Now select the **Review + Create** tab and review the configuration for your virtual machine. It should look like the following:
 
 ![Azure Portal Review + Create tab showing VM configuration summary with Ubuntu Pro 24.04 LTS image, D4ps_v6 size, and networking settings configured#center](images/ubuntu-pro.png "Review VM configuration before creation")
 
-- When you are happy with your selection, select the **Create** button and then **Download Private key and Create Resource** button.
+13. After reviewing your configuration, click the **Create** button and then the **Download Private key and Create Resource** button.
 
 ![Azure Portal showing the Create button and Download Private key and Create Resource button to finalize VM creation#center](images/instance4.png "Download SSH key and create the virtual machine")
 
@@ -67,6 +65,6 @@ Your virtual machine should be ready and running in a few minutes. You can SSH i
 
 ## What you've accomplished and what's next
 
-You've created an Azure Cobalt 100 Arm-based virtual machine using Ubuntu Pro 24.04 LTS on a D4ps_v6 instance. This VM is your **DevStack deployment target** — a single-NIC instance with at least 80 GB of disk.
+In this section, you created an Azure Cobalt 100 Arm-based virtual machine using Ubuntu Pro 24.04 LTS on a D4ps_v6 instance. This VM is your DevStack deployment target — a single-network interface instance with at least 80 GB of disk.
 
 In the next section, you'll deploy OpenStack on this VM using DevStack. After that, you'll create a second VM with additional networking and storage for the Kolla-Ansible deployment.
