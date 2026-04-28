@@ -1,6 +1,6 @@
 ---
 title: Optimize with BRBE profiling
-weight: 5
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

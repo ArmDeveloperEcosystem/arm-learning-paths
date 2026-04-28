@@ -1,6 +1,6 @@
 ---
 title: Verify BOLT optimization results
-weight: 9
+weight: 10
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
