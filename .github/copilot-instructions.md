@@ -103,7 +103,7 @@ Do not modify fixed template fields.
 
 If `multi_install` is set to true, the first page must act as an overview for the series. Sub-pages must set `multitool_install_part: true`.
 
-### Required content structure
+#### Required content structure
 
 Install guides should include:
 
@@ -127,7 +127,7 @@ Install guides should include:
 Optional:
 - Uninstall instructions
 
-### Scope boundaries
+#### Scope boundaries
 
 Install guides must not include:
 - End-to-end workflows
@@ -137,7 +137,7 @@ Install guides must not include:
 
 Learning Paths may link to install guides for setup steps. Install guides should not duplicate workflow content.
 
-### Tool versions
+#### Tool versions
 
 When providing commands for downloading or installing software, use a specific version in the example. This ensures that the instructions are accurate and verifiable. However, also include a note before the commandsthat tells readers the same commands work with other versions. Provide a link to where the latest version can be found. The note can be formatted as follows:
 
