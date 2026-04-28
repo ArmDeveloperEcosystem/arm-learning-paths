@@ -8,7 +8,7 @@ layout: learningpathall
 
 In this section, you'll run a modified version of the [MLPerf benchmark for DLRM](https://github.com/mlcommons/inference_results_v4.0/tree/main/closed/Intel/code/dlrm-v2-99.9/pytorch-cpu-int8) and inspect the results.
 
-You'll use a nightly PyTorch wheel that features optimizations designed to improve the performance of recommendation models on Arm.
+You'll use PyTorch 2.9.0+cpu that features optimizations designed to improve the performance of recommendation models on Arm.
 
 
 ## Run the benchmark
@@ -33,7 +33,7 @@ You can now run the main script `run_dlrm_benchmark.sh`. This script automates t
 
 * Initializes and configures the MLPerf repositories.
 * Applies required patches (from `mlperf_patches/`) and compiles the MLPerf codebase.
-* Leverages PyTorch nightly wheel `torch==2.8.0.dev20250324+cpu` with the Arm performance improvements.
+* Leverages PyTorch `torch==2.9.0+cpu` with the Arm performance improvements.
 * Converts pretrained weights into a usable model format.
 * Performs INT8 calibration if needed.
 * Executes the offline benchmark test, generating large-scale binary data during runtime.
