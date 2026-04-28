@@ -121,6 +121,6 @@ There are command line options to change the port, the token, and other configur
 
 If you are running entirely on a local machine, you can eliminate the token using the `--without-connection-token` option.
 
-It's also possible to run an existing Docker image which uses Ubuntu Linux for Arm and mounts your host directory to access files on your computer. For more information, see the [GitHub README](https://github.com/gitpod-io/openvscode-server#readme).
+You can also run an existing Docker image which uses Ubuntu Linux for Arm and mounts your host directory to access files on your computer. For more information, see the [GitHub README](https://github.com/gitpod-io/openvscode-server#readme).
 
 You're now ready to use OpenVSCode. You can install your favorite Extensions, select your favorite Color Theme, and enjoy VS Code in the browser.
