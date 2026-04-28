@@ -28,7 +28,7 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-Python has native support for [Windows on Arm](https://learn.microsoft.com/en-us/windows/arm/overview). Starting with version 3.11, an official installer is available. The latest version is 3.13.0.
+Python has native support for [Windows on Arm](https://learn.microsoft.com/en-us/windows/arm/overview). Starting with version 3.11, an official installer is available. 
 
 You can find a number of developer-ready Windows on Arm [devices](/learning-paths/laptops-and-desktops/intro/find-hardware/).
 
