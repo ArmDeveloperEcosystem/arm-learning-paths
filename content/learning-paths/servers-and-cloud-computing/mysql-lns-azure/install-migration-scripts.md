@@ -6,11 +6,7 @@ weight: 5
 layout: "learningpathall"
 ---
 
-### Introduction
-
-In this section, you'll use the lift-and-shift scripts to migrate MySQL from your on-premises x64 simulator to an Arm-based Azure VM.
-
-### Download the lift-n-shift script set
+## Download the migration scripts
 
 Open an SSH shell into your on-premises instance and go to the asset repository you already downloaded:
 
@@ -18,7 +14,7 @@ Open an SSH shell into your on-premises instance and go to the asset repository 
 cd $HOME/lift-n-shift-assets
 ```
 
-### Configure the lift-n-shift script
+## Configure the migration script
 
 Run the following script to create an SSH key pair. Press Enter when prompted for a passphrase:
 
@@ -26,7 +22,7 @@ Run the following script to create an SSH key pair. Press Enter when prompted fo
 scripts/create_ssh_key.sh
 ```
 
-You should get a key that looks something like this:
+The output is similar to:
 
 ```output
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDczfgUuS4pnNSXnNeK4lRR+CcmxCH+/Vl+aP9dhtGYX7DEVrWrKy9Hq7AKs3y1AUyW85MGBJEkgy8WQZui6T92UNZz+MGVoKm/++SyO/
@@ -76,7 +72,7 @@ You need to edit:
 
 You can leave the remaining values unchanged for this tutorial.
 
-### Log into Azure with the CLI
+## Log in to Azure
 
 On the on-premises SSH shell, run:
 
@@ -84,9 +80,9 @@ On the on-premises SSH shell, run:
 az login
 ```
 
-And follow the prompts to log into your Azure account. 
+Follow the prompts to log in to your Azure account.
 
-### Start the migration
+## Start the migration
 
 On the on-premises SSH shell, run:
 
@@ -106,7 +102,7 @@ Backing up the local DB testdb...
 Enter password:
 ```
 
-Supply the password you set for the local MySQL `admin` user in the previous section. 
+Supply the password you set for the local MySQL `admin` user in the previous section.
 
 ```output
 Migrating local DB: testdb to Cloud...
@@ -158,7 +154,7 @@ Enter password:
 ```
 
 {{% notice Note %}}
-The original script may time out waiting for this second password. If it does, right in that same shell, type the following replacing YOUR_ARM_BASED_VM_PUBLIC_IP_ADDRESS with the public IP address of your newly created Arm-based VM:
+The original script may time out waiting for this second password. If it does, in the same shell, run the following command replacing YOUR_ARM_BASED_VM_PUBLIC_IP_ADDRESS with the public IP address of your newly created Arm-based VM:
 
 ```bash
  gunzip -c testdb.sql.gz | mysql -h YOUR_ARM_BASED_VM_PUBLIC_IP_ADDRESS -u admin -p 
@@ -169,6 +165,6 @@ You will be prompted again for the second password you retrieved previously. Ent
 
 At this point, your on-premises MySQL database (`testdb`) has been migrated to a new Arm-based VM in Azure.
 
-### What we learned and what's next
+## What you've learned and what's next
 
 This script and procedure migrates a MySQL database from an on-premises x64 source to an Arm-based Azure VM. Your `testdb` database is now ready for benchmarking with sysbench in the target environment.
