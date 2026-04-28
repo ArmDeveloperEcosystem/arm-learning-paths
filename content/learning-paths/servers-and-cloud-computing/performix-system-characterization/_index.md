@@ -1,18 +1,23 @@
 ---
-title: Understand system characteristics with Arm Performix
+title: Characterize system performance with Arm Performix
 
+description: Learn how to run the Arm Performix System Characterization recipe to benchmark memory latency and bandwidth on Arm hardware and interpret the generated results.
+
+draft: true
+cascade:
+    draft: true
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic for anyone who wants to understand the performance characteristics of a hardware system.
+who_is_this_for: This is an introductory topic for developers and performance engineers who want to characterize the hardware performance of Arm-based Linux systems using Arm Performix.
 
 learning_objectives:
     - Run Arm Performix's System Characterization recipe to understand hardware configuration and performance
     - Interpret memory latency and bandwidth benchmark results
-    - View the output directory to inspect generated plots and raw results
+    - Locate and interpret the generated plots and raw benchmark data in the output directory
 
 prerequisites:
-    - A target machine to benchmark. The Arm System Characterization Tool, included with Performix, is cross-platform and cross-OS.
+    - A Arm Linux target machine accessible via SSH to characterize.
 
 author:
 - Brendan Long
@@ -35,7 +40,7 @@ further_reading:
     - resource:
         title: "Find CPU Cycle Hotspots with Arm Performix"
         link: /learning-paths/servers-and-cloud-computing/cpu_hotspot_performix/
-        type: documentation
+        type: website
     - resource:
         title: Arm Performix User Guide
         link: https://developer.arm.com/documentation/110163/latest
