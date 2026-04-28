@@ -2,9 +2,6 @@
 title: Deploy OpenStack on Azure Cobalt 100 Arm64 Virtual Machine
 description: Deploy OpenStack on Azure Cobalt 100 Arm64 virtual machines using DevStack for development and Kolla-Ansible for containerized production deployments.
 
-draft: true
-cascade:
-    draft: true
     
 minutes_to_complete: 90
 
