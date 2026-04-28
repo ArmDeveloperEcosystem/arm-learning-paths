@@ -71,7 +71,7 @@ tags = {
 You need to edit:
 1. `location` with the Azure region you want to use.
 2. `prefix` to match your naming preference.
-3. `RSA_KEY_GOES_HERE` with the SSH public key created above.
+3. `RSA_KEY_GOES_HERE` with the SSH public key created above. Make sure to include the `ssh-rsa` keyword as well within the RSA Key.
 4. `YOUR_PUBLIC_IP` with the public IP address of your on-premises x64 instance.
 
 You can leave the remaining values unchanged for this tutorial.
@@ -106,7 +106,7 @@ Backing up the local DB testdb...
 Enter password:
 ```
 
-Supply the password you set for the local MySQL `admin` user in the previous section. You'll then be prompted again:
+Supply the password you set for the local MySQL `admin` user in the previous section. 
 
 ```output
 Migrating local DB: testdb to Cloud...
@@ -114,6 +114,11 @@ Creating Cloud VM...
 Cloud VM created.
 Backing up the local DB testdb...
 Enter password: 
+```
+
+You'll now be prompted for password again. Follow the detailed steps below to fetch this password.
+
+```output
 Restoring local DB testdb onto the Cloud VM: Admin: admin IP: 20.98.229.225
 You will need to open a second window and ssh into the VM and then look in /root for the password
 Enter password:
@@ -153,7 +158,7 @@ Enter password:
 ```
 
 {{% notice Note %}}
-The original script may time out waiting for this second password. If it does, right in that same shell, type the following replacing YOUR_ARM_BASED_VM_PUBLIC_IP_ADDRESS with the public IP address of your Arm-based VM:
+The original script may time out waiting for this second password. If it does, right in that same shell, type the following replacing YOUR_ARM_BASED_VM_PUBLIC_IP_ADDRESS with the public IP address of your newly created Arm-based VM:
 
 ```bash
  gunzip -c testdb.sql.gz | mysql -h YOUR_ARM_BASED_VM_PUBLIC_IP_ADDRESS -u admin -p 

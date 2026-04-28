@@ -72,6 +72,7 @@ In the same shell, retrieve the MySQL root password file used by the migration s
 ```bash
 sudo su - 
 cat /root/mysql_root_password.txt
+exit
 ```
 
 ### Running the benchmark
@@ -93,11 +94,11 @@ cd $HOME
 scp -i $HOME/.ssh/AZURE_CLOUD_RSA_FILENAME azureadmin@YOUR_ARM_BASED_VM_PUBLIC_IP_ADDRESS:*.perf .
 ```
 
-Next, from your local machine, copy those files from the on-premises simulator to your local host. Replace `ON_PREM_RSA_FILENAME` and `YOUR_ON_PREM_SIM_IP_ADDRESS`:
+Next, from your local machine, copy those files from the on-premises simulator to your local host. Replace `ON_PREM_RSA_FILENAME`(private key/pem file downloaded earlier) and `YOUR_ON_PREM_SIM_IP_ADDRESS`:
 
 ```bash
 cd $HOME
-scp -i $HOME/.ssh/ON_PREM_RSA_FILENAME azureuser@YOUR_ON_PREM_SIM_IP_ADDRESS:*.perf .
+scp -i $HOME/.ssh/ON_PREM_RSA_FILENAME azureuser@YOUR_ON_PREM_SIM_IP_ADDRESS:\*.perf .
 ```
 
 You should now have five `.perf` files on your local host.
