@@ -11,7 +11,7 @@ layout: learningpathall
 On your AArch64 Linux machine, navigate to your home directory (or another empty working directory) and download the `bsort.cpp` source file:
 
 ```bash
-wget https://learn.arm.com/learning-paths/servers-and-cloud-computing/bolt-demo/bsort.cpp
+wget https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-learning-paths/main/content/learning-paths/servers-and-cloud-computing/bolt-demo/bsort.cpp
 ```
 
 The [Why Bubble Sort?](#why-bubble-sort) section explains why BubbleSort is used as the demonstration workload.
