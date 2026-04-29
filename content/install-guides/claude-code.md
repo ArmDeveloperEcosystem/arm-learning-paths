@@ -218,6 +218,81 @@ To analyze a different directory, modify the volume mount in the `docker run` co
 claude mcp add --transport stdio arm-mcp -- docker run --rm -i -v "/Users/username/myproject:/workspace" armlimited/arm-mcp:latest
 ```
 
+### Optional: Use a Docker replacement containerization tool
+
+You can use other containerization tools besides Docker that are free and do not require licenses, such as Podman, Finch, Colima, and Rancher Desktop. Choose one of the options below and use its CLI in place of `docker`.
+
+{{< tabpane-normal >}}
+  {{< tab header="Podman" >}}
+Install: [Podman](https://podman.io/docs/installation)
+
+Pull the Arm MCP Server image:
+```console
+podman pull armlimited/arm-mcp:latest
+```
+
+To make the Arm MCP Server available across all your projects (user scope):
+
+```console
+claude mcp add --scope user --transport stdio arm-mcp -- podman run --rm -i --pull=always -v "$(pwd):/workspace" armlimited/arm-mcp:latest
+```
+This configuration is stored in `~/.claude.json` and is accessible from any project directory.
+You can choose other scopes (local or project) as described in the Docker section above.
+  {{< /tab >}}
+  {{< tab header="Finch" >}}
+Install: [Finch](https://runfinch.com/docs/getting-started/installation/)
+
+Pull the Arm MCP Server image:
+```console
+finch pull armlimited/arm-mcp:latest
+```
+
+To make the Arm MCP Server available across all your projects (user scope):
+
+```console
+claude mcp add --scope user --transport stdio arm-mcp -- finch run --rm -i --pull=always -v "$(pwd):/workspace" armlimited/arm-mcp:latest
+```
+This configuration is stored in `~/.claude.json` and is accessible from any project directory.
+You can choose other scopes (local or project) as described in the Docker section above.
+  {{< /tab >}}
+  {{< tab header="Colima" >}}
+Install: [Colima](https://github.com/abiosoft/colima#installation)
+
+Colima provides a Docker-compatible CLI via Docker contexts.
+
+Pull the Arm MCP Server image:
+```console
+docker pull armlimited/arm-mcp:latest
+```
+
+To make the Arm MCP Server available across all your projects (user scope):
+
+```console
+claude mcp add --scope user --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "$(pwd):/workspace" armlimited/arm-mcp:latest
+```
+This configuration is stored in `~/.claude.json` and is accessible from any project directory.
+You can choose other scopes (local or project) as described in the Docker section above.
+  {{< /tab >}}
+  {{< tab header="Rancher Desktop" >}}
+Install: [Rancher Desktop](https://docs.rancherdesktop.io/getting-started/installation/)
+
+Rancher Desktop uses the Docker container engine via Morby.
+
+Pull the Arm MCP Server image:
+```console
+docker pull armlimited/arm-mcp:latest
+```
+
+To make the Arm MCP Server available across all your projects (user scope):
+
+```console
+claude mcp add --scope user --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "$(pwd):/workspace" armlimited/arm-mcp:latest
+```
+This configuration is stored in `~/.claude.json` and is accessible from any project directory.
+You can choose other scopes (local or project) as described in the Docker section above.
+  {{< /tab >}}
+{{< /tabpane-normal >}}
+
 ## Verify the Arm MCP Server is working
 
 List configured MCP servers:
@@ -297,4 +372,3 @@ If you encounter issues or have questions, reach out to mcpserver@arm.com.
 ## Custom prompts and workflows
 
 Create custom prompts for common tasks in your workflow. Refer to the [Claude Code documentation](https://code.claude.com/docs) for advanced configuration options.
-
