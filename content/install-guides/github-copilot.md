@@ -277,7 +277,7 @@ Add the following configuration to the user-level `mcp.json` file:
 
 After saving your `mcp.json` file, a **Start** button appears at the top of the servers list. Select this button to start the Arm MCP Server.
 
-## Use a Docker replacement containerization tool
+## Optional: Use a Docker replacement containerization tool
 
 You can use other containerization tools besides Docker that are free and do not require licenses, such as Podman, Finch, Colima, and Rancher Desktop. Choose one of the options below and use its CLI in place of docker.
 
