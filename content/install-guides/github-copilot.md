@@ -277,55 +277,129 @@ Add the following configuration to the user-level `mcp.json` file:
 
 After saving your `mcp.json` file, a **Start** button appears at the top of the servers list. Select this button to start the Arm MCP Server.
 
-## Use Podman as a Docker drop-in replacement
+## Use a Docker replacement containerization tool
 
-Podman's CLI is command-compatible with Docker. By creating a `docker` alias you can run existing Docker commands, including those in the Arm MCP Server docs, without changes.
+You can use other containerization tools besides Docker that are free and do not require licenses, such as Podman, Finch, Colima, and Rancher Desktop. Choose one of the options below and use its CLI in place of docker.
 
-###### **macOS / Linux (bash / zsh)**
+{{< tabpane-normal >}}
+  {{< tab header="Podman" >}}
+Install: [Podman](https://podman.io/docs/installation)
 
-Add to your `~/.bashrc`, `~/.zshrc`, or `~/.profile`:
-
-```bash
-alias docker=podman
-```
-
-Reload your shell:
-
-```bash
-source ~/.zshrc   # or ~/.bashrc
-```
-
-###### **Windows (PowerShell)**
-
-Add to your PowerShell profile (`$PROFILE`):
-
-```powershell
-Set-Alias -Name docker -Value podman
-```
-
-Reload:
-
-```powershell
-. $PROFILE
-```
-
-###### **Verify the alias**
-
-After setting the alias, all Docker commands are transparently handled by Podman:
-
+Pull the Arm MCP Server image:
 ```console
-docker info                                   # -> podman info
-docker pull armlimited/arm-mcp:latest         # -> podman pull ...
-docker run -i --rm armlimited/arm-mcp:latest  # -> podman run ...
+podman pull armlimited/arm-mcp:latest
 ```
 
-{{% notice Note %}}
-Remember to change your `mcp.json` from `"command": "docker"` to `"command": "podman"`. If you still run into issues, set `"command"` to the full path of the Podman binary.
-{{% /notice %}}
+Add the following configuration to the user-level `mcp.json` file:
+```json
+{
+  "servers": {
+    "arm-mcp": {
+      "type": "stdio",
+      "command": "podman",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "-v", "/path/to/your/codebase:/workspace",
+        "armlimited/arm-mcp:latest"
+      ]
+    }
+  }
+}
+```
+If you still run into issues, set `"command"` to the full path of the Podman binary.
+After saving your `mcp.json` file, a **Start** button appears at the top of the servers list. Select this button to start the Arm MCP Server.
+  {{< /tab >}}
+  {{< tab header="Finch" >}}
+Install: [Finch](https://runfinch.com/docs/getting-started/installation/)
 
-{{% notice Note %}}
-You can also use other container platforms like [Finch](https://runfinch.com/). We recommend aliasing `docker` to `finch` (or your chosen platform) so the commands remain the same, and update `"command"` in `mcp.json` to that platform.
-{{% /notice %}}
+Pull the Arm MCP Server image:
+```console
+finch pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `mcp.json` file:
+```json
+{
+  "servers": {
+    "arm-mcp": {
+      "type": "stdio",
+      "command": "finch",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "-v", "/path/to/your/codebase:/workspace",
+        "armlimited/arm-mcp:latest"
+      ]
+    }
+  }
+}
+```
+After saving your `mcp.json` file, a **Start** button appears at the top of the servers list. Select this button to start the Arm MCP Server.
+  {{< /tab >}}
+  {{< tab header="Colima" >}}
+Install: [Colima](https://github.com/abiosoft/colima#installation)
+
+Colima provides a Docker-compatible CLI via Docker contexts.
+
+Pull the Arm MCP Server image:
+```console
+docker pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `mcp.json` file:
+```json
+{
+  "servers": {
+    "arm-mcp": {
+      "type": "stdio",
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "-v", "/path/to/your/codebase:/workspace",
+        "armlimited/arm-mcp:latest"
+      ]
+    }
+  }
+}
+```
+After saving your `mcp.json` file, a **Start** button appears at the top of the servers list. Select this button to start the Arm MCP Server.
+  {{< /tab >}}
+  {{< tab header="Rancher Desktop" >}}
+Install: [Rancher Desktop](https://docs.rancherdesktop.io/getting-started/installation/)
+
+Rancher Desktop uses the Docker container engine via Morby.
+
+Pull the Arm MCP Server image:
+```console
+docker pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `mcp.json` file:
+```json
+{
+  "servers": {
+    "arm-mcp": {
+      "type": "stdio",
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "-v", "/path/to/your/codebase:/workspace",
+        "armlimited/arm-mcp:latest"
+      ]
+    }
+  }
+}
+```
+After saving your `mcp.json` file, a **Start** button appears at the top of the servers list. Select this button to start the Arm MCP Server.
+  {{< /tab >}}
+{{< /tabpane-normal >}}
 
 ## How do I analyze a local codebase with the Arm MCP Server?
 
