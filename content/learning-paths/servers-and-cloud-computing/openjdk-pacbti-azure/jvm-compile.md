@@ -1,14 +1,14 @@
 ---
-title: Compile the OpenJDK JVM source
+title: Compile OpenJDK from source
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-### Install build prerequisites
+## Install build prerequisites
 
-Install these prerequisites in an SSH shell on your Cobalt 100 VM. Also install a bootstrap JVM to build the PAC/BTI-enabled JVM:
+Install these prerequisites in a terminal on your Cobalt 100 VM. Also install a bootstrap JVM to build the PAC/BTI-enabled JVM:
 
 ```bash
 sudo apt update
@@ -18,7 +18,7 @@ sudo apt install -y libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-
 sudo apt install -y openjdk-25-jdk
 ```
 
-### Download the OpenJDK source
+## Download the OpenJDK source
 
 Download OpenJDK. Since the bootstrap JVM is v25, build v26 with PAC/BTI support enabled:
 
@@ -29,7 +29,7 @@ cd jdk
 git checkout jdk-26+35
 ```
 
-### Configure the OpenJDK source build
+## Configure the OpenJDK source build
 
 Configure the OpenJDK source build and enable branch protection support:
 
@@ -37,7 +37,7 @@ Configure the OpenJDK source build and enable branch protection support:
 bash configure --enable-branch-protection 
 ```
 
-### Build the JVM
+## Build the JVM
 
 Run the build to create the JVM. This process can take more than 30 minutes:
 
@@ -45,7 +45,7 @@ Run the build to create the JVM. This process can take more than 30 minutes:
 make images
 ```
 
-### Register the JVM with the system
+## Register the JVM with the system
 
 Run the following commands to register the newly created JDK/JVM with the system:
 
@@ -72,4 +72,8 @@ OpenJDK Runtime Environment (build 26-internal-adhoc.ubuntu.jdk)
 OpenJDK 64-Bit Server VM (build 26-internal-adhoc.ubuntu.jdk, mixed mode)
 ```
 
-Next, run a script to confirm PAC/BTI readiness in the JVM you just built and installed.
+## What you've learned and what's next
+
+You've compiled OpenJDK from source with branch protection enabled, registered the resulting JVM with the system, and confirmed the installation with `java --version`.
+
+Next, you'll run a test script to verify that PAC/BTI is active in the JVM you just built.

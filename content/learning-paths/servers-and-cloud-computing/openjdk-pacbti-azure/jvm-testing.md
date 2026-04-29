@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 
-### Setup the test script
+## Set up the test script
 
 Clone this repo and set execute permissions for the downloaded test script:
 
@@ -17,7 +17,7 @@ cd pac-bti-jdk-assets
 chmod 755 ./test-pacbti.sh
 ```
 
-### Run the test script
+## Run the test script
 
 Run the test script to confirm PAC/BTI enablement:
 
@@ -55,7 +55,7 @@ Interpretation:
   BTI is likely enabled in the runtime binaries.
 ```
 
-### What you've learned
+## What you've learned
 
 Some OpenJDK builds are not distributed with PAC/BTI enabled by default because they must remain compatible with older Arm platforms. When you need these protections, you can build and register your own JVM with branch protection support.
 
