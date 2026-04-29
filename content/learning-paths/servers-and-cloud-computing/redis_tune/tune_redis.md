@@ -4,58 +4,116 @@ weight: 3
 layout: "learningpathall"
 ---
 
-##  Redis Deployment Tuning
+## Redis Deployment Tuning
 
-Optimizing Redis allows you to gain performance improvement without scaling your deployment up (bigger machines/nodes) or out (more machines/nodes). This gained performance can either be used, or traded for cost savings by reducing the amount of compute resources provisioned. The profile of requests made by clients will vary based on the use case. This means there is no one size fits all set of tuning parameters for Redis. Use the information below as general guidance on tuning Redis.
+Optimizing Redis can improve performance without scaling your deployment up to larger machines or out to more nodes. The gained performance can be used directly, or traded for cost savings by reducing provisioned compute resources.
 
-##  Redis File Configuration
+The profile of requests made by clients varies by use case, so there is no one-size-fits-all Redis configuration. Start with a small, explicit `redis.conf`, measure throughput, latency, memory use, and CPU use, then change one setting at a time.
 
-In the [Configure Redis single-node](/learning-paths/servers-and-cloud-computing/redis/single-node_deployment/) section of the [Learn how to deploy Redis on Arm](/learning-paths/servers-and-cloud-computing/redis/) learning path, a bare minimum file server configuration was discussed. In this section, a tuned file server configuration is discussed.
+If you do not already have a Redis server running, review [Learn how to deploy Redis on Arm](/learning-paths/servers-and-cloud-computing/redis/) and the [Configure Redis single-node](/learning-paths/servers-and-cloud-computing/redis/single-node_deployment/) section before applying these tuning settings.
 
-### Top Level redis.conf
+For the complete list of Redis configuration directives, see the [Redis configuration documentation](https://redis.io/docs/latest/operate/oss_and_stack/management/config/) and the self-documented `redis.conf` file shipped with your Redis release.
 
-A tuned top level configuration file [/etc/redis/redis.conf](https://raw.githubusercontent.com/redis/redis/7.0/redis.conf) is shown below. Only performance relevant parameters are discussed.
+## Baseline redis.conf
+
+The following configuration is a good starting point for performance tuning on a dedicated Redis server. It includes performance-related settings and a small number of operational settings that make results easier to compare. Replace the placeholder values before applying the configuration.
+
+Add these settings to the Redis configuration file used by your server, commonly `/etc/redis/redis.conf`. If Redis is managed by `systemd`, restart the service after editing the file:
+
+```bash
+sudo systemctl restart redis-server
+```
+
+If you start Redis manually, pass the configuration file path to `redis-server`:
+
+```bash
+redis-server /etc/redis/redis.conf
+```
 
 ```console
-################################ SNAPSHOTTING  #################################
+################################## NETWORK #####################################
 
-save ""
+bind <server-private-ip>
+protected-mode yes
+port 6379
+tcp-backlog 511
+tcp-keepalive 300
+timeout 0
 
-stop-writes-on-bgsave-error no
+################################## GENERAL #####################################
+
+daemonize no
+supervised no
+databases 16
 
 ################################### CLIENTS ####################################
 
-maxclients 10000 
+maxclients 10000
 
-############################## MEMORY MANAGEMENT ################################
+################################ SNAPSHOTTING ##################################
+
+save ""
+stop-writes-on-bgsave-error yes
+
+################################ APPEND ONLY MODE ##############################
+
+appendonly no
+appendfsync everysec
+no-appendfsync-on-rewrite no
+
+############################### MEMORY MANAGEMENT ##############################
 
 maxmemory <bytes>
- 
+maxmemory-policy noeviction
+maxmemory-samples 5
+lazyfree-lazy-eviction no
+lazyfree-lazy-expire no
+lazyfree-lazy-server-del no
+replica-lazy-flush no
+activedefrag no
 
-################################ THREADED I/O #################################
+################################ THREADED I/O ##################################
 
 io-threads 1
+
+################################### LATENCY ####################################
+
+hz 10
+dynamic-hz yes
 ```
 
-* `save`:
-  * Redis by default tries to store data on the disk which creates forks that can result in overall system slowdown. You can prevent this by commenting out the lines that begin with "save".
-  * To entirely disable snapshotting, you can provide a single empty string argument.
-* `stop-writes-on-bgsave-error`:
-  *  If you have setup your proper monitoring of the Redis server and persistence, you may want to disable background saving so that Redis will continue to work as usual even if there are problems with disk, permissions, and so forth.
-* `maxclients`:
-  * If your system has a many connections, set the maxclients to a higher value (default is 10000). 
-  * If your resources are limited but you are employing efficient horizontal sharding through a Redis cluster, consider reducing this value to prevent potential bottlenecks from arising.
-* `maxmemory`:
-  * If maxmemory is not defined, Redis will continuously allocate memory based on its requirements, potentially consuming all available free memory over time. Therefore, it is generally recommended to configure this value to certain limits to prevent this from occurring. 
-  * You can allocate 75-80% of your memory to Redis by changing maxmemory value in the configuration file. 
-* `io-thread`:
-  * Redis is mostly single threaded and usually threading reads does not help much. 
-  * Redis documentation advises to use default value because if you need more threads, sharding redis or using pipeline > 1 is a better way to add parallelism.
-  * The commented io-threads value in the configuration file is 4, which means Redis will use the default value for io-threads which is 1.  
+## Configuration options
 
-  #### Client side pipelining
+| Setting | Starting value | Why it matters and when to change it |
+| --- | --- | --- |
+| `bind` | Private server IP | Bind to the private or VPN interface used by benchmark clients. Use `0.0.0.0` only in isolated benchmark environments where clients may connect through multiple private interfaces and access to port `6379` is already restricted by network controls. |
+| `protected-mode` | `yes` | Keep enabled by default. Set to `no` only for isolated benchmark networks where Redis access is already restricted by VPN, firewall rules, cloud security groups, or equivalent controls. |
+| `port` | `6379` | Change only to avoid a port conflict or to run multiple Redis instances on the same host. |
+| `tcp-backlog` | `511` | Increase for high connection churn. The Linux `net.core.somaxconn` value must be at least as large. |
+| `tcp-keepalive` | `300` | Reduce when you need faster detection of dead TCP peers. Increase if idle connections are long lived and stable. |
+| `timeout` | `0` | Keep `0` for benchmarks so idle clients are not disconnected. Set a finite value for production connection cleanup. |
+| `supervised` | `no` | Use `systemd` when Redis is managed as a system service. Use `no` for manual foreground testing. |
+| `databases` | `16` | Use the default unless the application requires fewer logical databases. Redis Cluster only uses database `0`. |
+| `maxclients` | `10000` | Increase only if the workload needs more concurrent connections and the OS file descriptor limit has been raised. Lower it to fail early on small test systems. |
+| `save` | `""` | Disables RDB snapshots. Use this for pure cache or throughput tests. Add snapshot intervals when restart recovery from disk is required. |
+| `stop-writes-on-bgsave-error` | `yes` | Keep `yes` when RDB persistence is required and failed snapshots must stop writes. Use `no` only when monitoring catches persistence failures. |
+| `appendonly` | `no` | Keep disabled for cache-style or maximum throughput tests. Enable AOF when durability is required. |
+| `appendfsync` | `everysec` | Relevant only when `appendonly yes` is set. Use `always` for stronger durability with higher latency. Use `no` only when OS-managed flushing is acceptable. |
+| `no-appendfsync-on-rewrite` | `no` | Relevant only with AOF. Use `yes` to reduce latency spikes during AOF rewrite at the cost of more data-loss exposure during the rewrite window. |
+| `maxmemory` | Host-specific | Set this explicitly. Start at 70-80% of RAM on a dedicated Redis server, leaving memory for the OS, replicas, forked persistence, and client buffers. |
+| `maxmemory-policy` | `noeviction` | Use `noeviction` for correctness testing because writes fail instead of silently evicting keys. Use `allkeys-lru` or `allkeys-lfu` for cache workloads. Use `volatile-*` policies only when the application reliably sets TTLs. |
+| `maxmemory-samples` | `5` | Increase to improve LRU/LFU eviction accuracy with more CPU cost. Leave unchanged for a first test. |
+| `lazyfree-lazy-eviction` | `no` | Enable when eviction of large values causes latency spikes. Background freeing can increase memory pressure temporarily. |
+| `lazyfree-lazy-expire` | `no` | Enable when expiration of large values causes latency spikes. |
+| `lazyfree-lazy-server-del` | `no` | Enable when commands that replace or delete large values, such as `DEL`, `RENAME`, or writes over existing keys, cause latency spikes. |
+| `replica-lazy-flush` | `no` | Enable on replicas when full resynchronization or flush operations create latency spikes. |
+| `activedefrag` | `no` | Enable for long-running write-heavy workloads with high memory fragmentation. Keep disabled for first-pass throughput tests because it consumes CPU. |
+| `io-threads` | `1` | `1` uses the main thread only, which is the standard starting point. Increase only when Redis is CPU-bound on network I/O, the server has at least four cores, and the workload benefits in measurement. Redis 8 uses I/O threads for reads and writes when this is enabled. |
+| `hz` | `10` | Increase only when background maintenance, key expiration, or client timeout responsiveness is too slow. Higher values use more CPU. |
+| `dynamic-hz` | `yes` | Keep enabled so Redis can adjust background task frequency as client count changes. |
 
-Pipelining is a feature primarily implemented on the client side. When a client uses the Redis client library like [memtier](https://github.com/RedisLabs/memtier_benchmark) does then the client can choose to use pipelining, which is a more effective approach for achieving parallelism. You should use a pipeline ranging from 1 (default) to approximately 20 as a large pipeline value (> 20) will increase latency. You will need to experiment and decide what pipeline value makes the most sense for your use case.
+## Client-side pipelining
 
+Test client-side pipelining separately from Redis I/O threads. Pipelining reduces round-trip and socket syscall overhead, and is often the simplest way to increase throughput from benchmark clients such as [memtier_benchmark](https://github.com/RedisLabs/memtier_benchmark). I/O threads are a server-side option for workloads limited by Redis network I/O.
 
-
+Start with pipeline depth `1`, then test values such as `4`, `8`, `16`, and `32`. Larger pipeline depths can increase throughput, but they also increase tail latency and client-side memory use.
