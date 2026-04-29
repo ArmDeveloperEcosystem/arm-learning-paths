@@ -27,7 +27,7 @@ For Ubuntu and other Debian-based distributions, run the following command:
 
 ```bash
 sudo apt-get update
-sudo apt-get install python3 python3-venv numactl python-is-python3 -y
+sudo apt install python3 python3-venv python3-pip python-is-python3 gcc make numactl fio linux-tools-generic linux-tools-$(uname -r) -y
 ```
 
 ## What you've learned and what's next
