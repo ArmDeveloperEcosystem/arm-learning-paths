@@ -26,7 +26,7 @@ author: Doug Anson
 
 ### Tags
 skilllevels: Introductory
-subjects: Security
+subjects: Performance and Architecture
 cloud_service_providers:
   - Microsoft Azure
 
