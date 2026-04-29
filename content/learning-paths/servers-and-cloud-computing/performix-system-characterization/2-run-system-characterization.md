@@ -2,7 +2,6 @@
 title: Benchmark your platform with System Characterization
 weight: 3
 
-### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
@@ -10,7 +9,7 @@ layout: learningpathall
 
 To understand your platform's memory performance in its current configuration, run the System Characterization recipe in Arm Performix.
 
-![Arm Performix System Characterization configuration screen with benchmark selection options#center](./preparing-target.webp "System Characterization Configuration")
+![Arm Performix System Characterization configuration screen with benchmark selection options#center](./preparing-target.webp "System Characterization configuration screen in Arm Performix")
 
 You can collect the default benchmark set, gather only static system configuration details, or select individual benchmarks to run.
 
@@ -20,17 +19,21 @@ The **Workload type** field is fixed at **Profile the whole system**. System Cha
 
 At the bottom of the recipe configuration page, Arm Performix runs a pre-run check to confirm that required packages such as `numactl` are installed.
 
-![Arm Performix pre-run check confirming required packages are installed#center](./pre-run-check-succeeds.webp "Pre-Run Check")
+![Arm Performix pre-run check showing all required packages are present and the target is ready to run#center](./pre-run-check-succeeds.webp "Pre-run check confirming required packages are available")
 
 When the configuration is complete, select **Run Recipe** to launch the workload and collect performance data. Arm Performix shows a progress indicator with an estimated completion time. If you manually select many benchmarks, the run can take around 30 minutes.
 
-![Arm Performix System Characterization progress view while collecting benchmarks#center](./collecting-benchmarks.webp "Collecting Benchmarks")
+{{% notice Note %}}
+Ensure you have passwordless `sudo` configured for the user account you are using to SSH. See the [Arm Performix User Guide](https://developer.arm.com/documentation/110163/2026-2-1/Prepare-your-target-for-Arm-Performix-connections/Configure-SSH-access-and-privileges-on-Linux-targets/Set-up-passwordless-sudo-access-on-Linux) for details on preparing your target for Arm Performix connections.
+{{% /notice %}}
+
+![Arm Performix System Characterization progress view while collecting benchmarks#center](./collecting-benchmarks.webp "System Characterization progress view during benchmark collection")
 
 ## View the run results
 
-The System Characterization recipe generates several result views. Arm Performix presents tabular data in views such as **Idle Latency** and **Peak Bandwidth**. Raw data, `.csv` files, and plots are available through the **Open Run Directory** button on the **Summary** tab. The next sections walk through several of these results.
+The System Characterization recipe generates several result views. Arm Performix presents tabular data in views such as **Idle Latency** and **Peak Bandwidth**. Raw data, `.csv` files, and plots are available through the **Open Run Directory** button on the **Summary** tab. The following pages walk through several of these result views.
 
-![Arm Performix System Characterization summary view after report generation#center](./report-generated.webp "Results Summary for Run")
+![Arm Performix System Characterization summary view after report generation#center](./report-generated.webp "System Characterization summary view after the run completes")
 
 ## What you've learned and what's next
 
