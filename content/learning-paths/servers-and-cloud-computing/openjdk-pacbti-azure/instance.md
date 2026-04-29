@@ -6,21 +6,13 @@ weight: 3
 layout: learningpathall
 ---
 
-## Prerequisites and setup
+## Create an Arm-based Azure virtual machine
 
-There are several common ways to create an Arm-based Cobalt 100 virtual machine, and you can choose the method that best fits your workflow or requirements:
-
-- The Azure Portal
-- The Azure CLI
-- An infrastructure as code (IaC) tool
-
-In this section, you'll launch the Azure Portal to create a virtual machine with the Arm-based Azure Cobalt 100 processor.
+There are several common ways to create an Arm-based Cobalt 100 virtual machine, and you can choose the method that best fits your workflow or requirements: the Azure Portal, the Azure CLI, or an infrastructure as code (IaC) tool. This Learning Path uses the Azure Portal.
 
 This Learning Path focuses on general-purpose virtual machines in the Dpsv6 series. For more information, see the [Microsoft Azure guide for the Dpsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series).
 
 While the steps to create this instance are included here for convenience, you can also refer to the [Deploy a Cobalt 100 virtual machine on Azure Learning Path](/learning-paths/servers-and-cloud-computing/cobalt/).
-
-## Create an Arm-based Azure virtual machine
 
 Creating a virtual machine based on Azure Cobalt 100 is no different from creating any other virtual machine in Azure. To create an Azure virtual machine:
 
@@ -47,9 +39,13 @@ RSA offers better security with keys longer than 3072 bits.
 {{% /notice %}}
 
 - Give your SSH key a key pair name.
-- In the **Inbound port rules**, select **HTTP (80)** and **SSH (22)** as the inbound ports, as shown below:
+- In the **Inbound port rules**, select **SSH (22)** as the inbound port.
 
-![Azure Portal showing inbound port rules with HTTP (80) and SSH (22) selected#center](images/instance1.png "Configure inbound port rules for HTTP and SSH access")
+{{% notice Security %}}
+Azure sets the source to **Any** by default, which allows SSH connections from the entire internet. After creating the VM, update the SSH inbound rule in the Network Security Group to restrict the source to your own IP address.
+{{% /notice %}}
+
+![Azure Portal inbound port rules configuration showing SSH (22) selected as the allowed incoming port#center](images/instance1.png "Configure inbound port rules for SSH access")
 
 - Now select the **Review + Create** tab and review the configuration for your virtual machine. It should look like the following:
 
@@ -67,6 +63,6 @@ Your virtual machine should be ready and running in a few minutes. You can SSH i
 
 ## What you've learned and what's next
 
-You've created an Azure Cobalt 100 Arm64 virtual machine running Ubuntu 24.04 LTS with SSH authentication configured. The virtual machine is now ready for compiling and installing OpenJDK with PAC/BTI support.
+You've created an Azure Cobalt 100 Arm-based virtual machine running Ubuntu 24.04 LTS with SSH authentication configured. The virtual machine is now ready for compiling and installing OpenJDK with PAC/BTI support.
 
 Next, you'll download and compile OpenJDK on the VM, register the resulting JVM runtime, and run validation checks for PAC/BTI support.
