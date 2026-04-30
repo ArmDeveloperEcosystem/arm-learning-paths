@@ -64,7 +64,7 @@ If you are using your host device simultaneously as your target, use `topo healt
 
 ```bash
 topo health --target user@my-target
-```
+``` 
 
 The output should appear similar to the example from a heterogeneous SoC below, but will differ depending on your hardware:
 
@@ -115,7 +115,7 @@ Run the health command again to verify installation. Topo uses `remoteproc-runti
 
 ## Generate a target description
 
-In this step, you ask Topo to probe your target and create a machine-readable YAML description of the hardware.
+In this step, you ask Topo to probe your target and output a description of the hardware in your terminal. 
 
 On your host device, run:
 
@@ -123,11 +123,9 @@ On your host device, run:
 topo describe --target user@my-target
 ```
 
-This writes a `target-description.yaml` file in your current directory.
+The output captures details such as CPU architecture features, which Topo uses to select compatible templates.
 
-The file captures details such as CPU architecture features, which Topo uses to select compatible templates.
-
-Open the file and have a look. An example snippet from an AWS Graviton instance is shown below, showing the main processor and its features, an absence of any remote / auxiliary processors, and the total memory:
+An example snippet from an AWS Graviton instance is shown below, showing the main processor and its features, an absence of any remote / auxiliary processors, and the total memory:
 
 ```output
 host:
@@ -145,15 +143,9 @@ totalmemory_kb: 16044280
 
 ## List templates compatible with your target
 
-Now that Topo understand the capabilities of your target device, it can advise on the compatibility of templates.
+Since Topo can identify the capabilities of your target device, it can also advise on the compatibility of templates.
 
-Use the following command on your host device to to list templates according to the target description:
-
-```bash
-topo templates --target-description target-description.yaml
-```
-
-You can also query templates directly by specifying the target:
+Use the following command on your host device to to list compatible templates:
 
 ```bash
 topo templates --target user@my-target
