@@ -154,7 +154,7 @@ Enter password:
 ```
 
 {{% notice Note %}}
-The original script may time out waiting for this second password. If it does, in the same shell, run the following command, replacing YOUR_ARM_BASED_VM_PUBLIC_IP_ADDRESS with the public IP address of your newly created Arm-based VM:
+The original script may time out waiting for this second password. If it does, in the same shell, run the following command by replacing YOUR_ARM_BASED_VM_PUBLIC_IP_ADDRESS with the public IP address of your newly created Arm-based VM:
 
 ```bash
 gunzip -c testdb.sql.gz | mysql -h YOUR_ARM_BASED_VM_PUBLIC_IP_ADDRESS -u admin -p 
