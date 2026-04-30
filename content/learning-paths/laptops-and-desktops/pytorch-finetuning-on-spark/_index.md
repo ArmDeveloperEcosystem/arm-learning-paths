@@ -19,6 +19,48 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:16Z'
+  generator: template
+  source_hash: aa2a78baf3e52172e37506c3f75254968d775b4eb516f9696a0a6998aba50e97
+  summary: >-
+    Learn how to fine-tune large language models using PyTorch and Hugging Face on NVIDIA DGX
+    Spark to improve domain-specific accuracy. It is designed for AI developers and ML engineers
+    who want to fine-tune large language models using PyTorch and Hugging Face on the NVIDIA DGX
+    Spark platform. By the end, you will be able to understand how fine-tuning teaches a model
+    domain-specific knowledge, prepare a custom JSONL dataset for supervised fine-tuning, and
+    fine-tune Llama 3.2 3B on Raspberry Pi datasheet content using PyTorch and Hugging Face. It
+    focuses on tools and technologies such as Python, PyTorch, Docker, and Hugging Face, Linux
+    environments, and Arm platforms including Cortex-A and Neoverse. The main steps cover Set
+    up your NVIDIA DGX Spark, Understand fine-tuning, Fine-tune a model with PyTorch and Hugging
+    Face, and Test your fine-tuned model with vLLM.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will understand how fine-tuning teaches a model domain-specific knowledge, prepare a
+      custom JSONL dataset for supervised fine-tuning, and fine-tune Llama 3.2 3B on Raspberry
+      Pi datasheet content using PyTorch and Hugging Face. Learn how to fine-tune large language
+      models using PyTorch and Hugging Face on NVIDIA DGX Spark to improve domain-specific accuracy.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is an advanced topic for AI developers and ML engineers who want to fine-tune large
+      language models using PyTorch and Hugging Face on the NVIDIA DGX Spark platform.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: Hugging Face account and access token;
+      NVIDIA DGX Spark workstation.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including Python, PyTorch, Docker, and Hugging Face, Linux
+      environments, and Arm platforms such as Cortex-A and Neoverse.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Set up your NVIDIA DGX Spark, Understand fine-tuning,
+      Fine-tune a model with PyTorch and Hugging Face, and Test your fine-tuned model with vLLM.
+# END generated_summary_faq
+
 author: Michael Hall
 
 ### Tags
@@ -67,3 +109,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

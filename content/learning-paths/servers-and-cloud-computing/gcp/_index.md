@@ -18,6 +18,49 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:18Z'
+  generator: template
+  source_hash: 24e2ffcf9b7cda919e6e864f18bb9424c0c328242c92f491c1b284e317ed7e1c
+  summary: >-
+    Learn how to automate the creation of Arm virtual machines on Google Cloud Platform using
+    Terraform with jump server access configuration. It is designed for anyone new to using Arm
+    virtual machines in the Google Cloud Platform (GCP). By the end, you will be able to automate
+    Arm virtual machine creation using Terraform, deploy Arm instances on GCP and provide access
+    via Jump Server, and provide infrastructure basics, code knowledge and files that could help
+    with future learning paths. It focuses on tools and technologies such as Terraform and Bastion,
+    Linux environments, Arm platforms including Neoverse, and cloud platforms such as Google Cloud.
+    The main steps cover Automate virtual machine creation with Terraform and Deploy Arm instances
+    on GCP and provide access via Jump Server.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will automate Arm virtual machine creation using Terraform, deploy Arm instances on
+      GCP and provide access via Jump Server, and provide infrastructure basics, code knowledge
+      and files that could help with future learning paths. Learn how to automate the creation
+      of Arm virtual machines on Google Cloud Platform using Terraform with jump server access
+      configuration.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is an introductory topic for anyone new to using Arm virtual machines in the Google
+      Cloud Platform (GCP).
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: A [Google Cloud account](https://console.cloud.google.com/).
+      Create an account if needed.; A computer with [Terraform](/install-guides/terraform) installed.;
+      A computer with [Google Cloud CLI](/install-guides/gcloud) installed.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including Terraform and Bastion, Linux environments, Arm platforms
+      such as Neoverse, and cloud platforms such as Google Cloud.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Automate virtual machine creation with Terraform and
+      Deploy Arm instances on GCP and provide access via Jump Server.
+# END generated_summary_faq
+
 author: Jason Andrews
 
 ##### Tags
@@ -56,3 +99,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # Indicates this should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

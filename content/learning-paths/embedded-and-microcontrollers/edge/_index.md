@@ -21,6 +21,52 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:15Z'
+  generator: template
+  source_hash: 8a7ec29d10a89649662ebb0fa4f14712984786902b6e7343a195abb1f3cbc00b
+  summary: >-
+    Learn how to collect and preprocess audio data using Edge Impulse, train an audio classification
+    model, and deploy it to the Arduino Nano RP2040 to control LEDs based on voice commands. It
+    is designed for beginners in Edge AI and TinyML, including developers, engineers, hobbyists,
+    AI/ML enthusiasts, and researchers working with embedded AI and IoT. By the end, you will
+    be able to understand the basics of Edge AI and TinyML, collect and preprocess audio data
+    using Edge Impulse, and train and deploy an audio classification model on the Arduino Nano
+    RP2040. It focuses on tools and technologies such as Edge Impulse, tinyML, Edge AI, and Arduino,
+    Baremetal environments, and Arm platforms including Cortex-M. The main steps cover Overview,
+    Train and deploy a TinyML audio classifier with Edge Impulse, Board connection and IDE setup,
+    and Program your first TinyML device.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will understand the basics of Edge AI and TinyML, collect and preprocess audio data
+      using Edge Impulse, and train and deploy an audio classification model on the Arduino Nano
+      RP2040. Learn how to collect and preprocess audio data using Edge Impulse, train an audio
+      classification model, and deploy it to the Arduino Nano RP2040 to control LEDs based on
+      voice commands.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This Learning Path is for beginners in Edge AI and TinyML, including developers, engineers,
+      hobbyists, AI/ML enthusiasts, and researchers working with embedded AI and IoT.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: Completion of [Embedded programming
+      with Arduino on the Raspberry Pi Pico](/learning-paths/embedded-and-microcontrollers/arduino-pico/)
+      if you're an absolute beginner.; An [Edge Impulse Studio](https://studio.edgeimpulse.com/signup)
+      account.; The [Arduino IDE](/install-guides/arduino-pico/) with the RP2040 board support
+      package installed on your computer.; An [Arduino Nano RP2040 Connect board](https://store.arduino.cc/products/arduino-nano-rp2040-connect-with-headers).
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including Edge Impulse, tinyML, Edge AI, and Arduino, Baremetal
+      environments, and Arm platforms such as Cortex-M.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Overview, Train and deploy a TinyML audio classifier
+      with Edge Impulse, Board connection and IDE setup, and Program your first TinyML device.
+# END generated_summary_faq
+
 author: Bright Edudzi Gershon Kordorwu
 ### Tags
 skilllevels: Introductory
@@ -58,3 +104,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

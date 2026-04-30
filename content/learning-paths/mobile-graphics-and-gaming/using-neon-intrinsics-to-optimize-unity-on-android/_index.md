@@ -20,6 +20,46 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:17Z'
+  generator: template
+  source_hash: f17ab3c4216495b88cee75a81612c11a4727d874114f914edf97c467f0d1c125
+  summary: >-
+    Learn how to use Arm Neon intrinsics in Unity C# scripts to optimize code on Android and collect
+    performance data using Unity Profiler. It is designed for Developers interested in leveraging
+    the Unity Machine Learning Agents toolkit on Arm devices. By the end, you will be able to
+    use Arm Neon intrinsics in your Unity C# scripts, optimize your code, and collect and compare
+    performance data using the Unity Profiler and Analyzer tools. It focuses on tools and technologies
+    such as Unity and C#, Android environments, and Arm platforms including armv8, aarch64, arm64,
+    and arm architecture. The main steps cover Set up, Arm Neon and the Unity Burst compiler,
+    The sample project, The plain (unoptimized) code, and The optimizations.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will use Arm Neon intrinsics in your Unity C# scripts, optimize your code, and collect
+      and compare performance data using the Unity Profiler and Analyzer tools. Learn how to use
+      Arm Neon intrinsics in Unity C# scripts to optimize code on Android and collect performance
+      data using Unity Profiler.
+  - question: Who is this Learning Path for?
+    answer: >-
+      Developers interested in leveraging the Unity Machine Learning Agents toolkit on Arm devices.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: Basic knowledge of Unity and C#; Recent
+      Android device, such as a mobile phone or tablet; Desktop computer capable of running Unity;
+      Unity version compatible with Unity Burst compiler 1.5 or later.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including Unity and C#, Android environments, and Arm platforms
+      such as armv8, aarch64, arm64, and arm architecture.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Set up, Arm Neon and the Unity Burst compiler, The
+      sample project, The plain (unoptimized) code, and The optimizations.
+# END generated_summary_faq
+
 author: Ben Clark, Joshua Marshall-Law
 
 ### Tags
@@ -56,3 +96,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

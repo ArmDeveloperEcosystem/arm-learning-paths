@@ -18,6 +18,49 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:17Z'
+  generator: template
+  source_hash: 3947ebbac742399e70001e41ac5face92819bed0deb55aba3e2414f98432023e
+  summary: >-
+    Learn how to run the Arm CCA reference software stack on an FVP with RME support, create a
+    Realm virtual machine, and obtain attestation tokens for confidential computing. It is designed
+    for software developers who want to learn how to run their applications in a Realm using the
+    Arm Confidential Compute Architecture (CCA). By the end, you will be able to run the Arm reference
+    CCA software stack on an Armv-A AEM Base FVP (Fixed Virtual Platform) with support for RME
+    extensions, create a virtual machine in a Realm running guest Linux using a pre-built docker
+    container, and run a simple application in a Realm running guest Linux. It focuses on tools
+    and technologies such as GCC, FVP, RME, CCA, and Docker, Linux environments, and Arm platforms
+    including Neoverse. The main steps cover Overview: Realms, Run the Arm CCA stack using a pre-built
+    docker container, Run an application in a Realm, and Use memory encryption.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will run the Arm reference CCA software stack on an Armv-A AEM Base FVP (Fixed Virtual
+      Platform) with support for RME extensions, create a virtual machine in a Realm running guest
+      Linux using a pre-built docker container, and run a simple application in a Realm running
+      guest Linux. Learn how to run the Arm CCA reference software stack on an FVP with RME support,
+      create a Realm virtual machine, and obtain attestation tokens for confidential computing.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is an introductory topic for software developers who want to learn how to run their
+      applications in a Realm using the Arm Confidential Compute Architecture (CCA).
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: An AArch64 or x86_64 computer running
+      Linux or macOS. You can use cloud instances, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including GCC, FVP, RME, CCA, and Docker, Linux environments,
+      and Arm platforms such as Neoverse.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Overview: Realms, Run the Arm CCA stack using a pre-built
+      docker container, Run an application in a Realm, and Use memory encryption.
+# END generated_summary_faq
+
 author:
     - Pareena Verma
     - Arnaud de Grandmaison
@@ -67,3 +110,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -18,6 +18,49 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:16Z'
+  generator: template
+  source_hash: 915f6eb5e95bd42ed09b727b4599855d965125e67a8761fbd48a124e9e74b1bc
+  summary: >-
+    Learn how to automate Windows on Arm VM creation on Arm Linux systems using QEMU, KVM, and
+    Bash scripts for development and testing. It is designed for developers and system administrators
+    who want to automate Windows on Arm virtual machine (VM) creation on Arm Linux systems using
+    QEMU and KVM. By the end, you will be able to understand the process of creating a Windows
+    on Arm virtual machine using Bash scripts, run scripts for VM creation and management, and
+    troubleshoot common VM setup and runtime issues. It focuses on tools and technologies such
+    as QEMU, KVM, Bash, and RDP, Linux and Windows environments, and Arm platforms including Neoverse
+    and Cortex-A. The main steps cover Check system requirements, Understand and customize Windows
+    on Arm VM automation scripts, Create a Windows on Arm virtual machine, and Run a Windows on
+    Arm virtual machine.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will understand the process of creating a Windows on Arm virtual machine using Bash
+      scripts, run scripts for VM creation and management, and troubleshoot common VM setup and
+      runtime issues. Learn how to automate Windows on Arm VM creation on Arm Linux systems using
+      QEMU, KVM, and Bash scripts for development and testing.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is an introductory topic for developers and system administrators who want to automate
+      Windows on Arm virtual machine (VM) creation on Arm Linux systems using QEMU and KVM.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: An Arm Linux system with KVM support
+      and a minimum of 8GB RAM and 50GB free disk space.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including QEMU, KVM, Bash, and RDP, Linux and Windows environments,
+      and Arm platforms such as Neoverse and Cortex-A.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Check system requirements, Understand and customize
+      Windows on Arm VM automation scripts, Create a Windows on Arm virtual machine, and Run a
+      Windows on Arm virtual machine.
+# END generated_summary_faq
+
 author: Jason Andrews
 
 ### Tags
@@ -51,3 +94,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

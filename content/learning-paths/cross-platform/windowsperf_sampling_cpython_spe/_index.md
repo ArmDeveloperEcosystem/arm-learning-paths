@@ -22,6 +22,48 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:15Z'
+  generator: template
+  source_hash: bf887ef2481b51cf6c32e49e3eb1d5577346b7b9b1e4d6a604c559597b5306f0
+  summary: >-
+    Learn how to sample and profile CPU instructions using WindowsPerf with Arm Statistical Profiling
+    Extension (SPE) on Windows on Arm, demonstrated with CPython workload analysis. It is designed
+    for developers who would like to learn about sampling CPU instructions with WindowsPerf and
+    the Arm Statistical Profiling Extension (SPE). By the end, you will be able to use WindowsPerf
+    with a native Windows on Arm workload, describe the basic concepts of sampling with Arm SPE,
+    and explore the WindowsPerf command line. It focuses on tools and technologies such as WindowsPerf,
+    Python, and perf, Windows environments, and Arm platforms including Neoverse and Cortex-A.
+    The main steps cover Overview of Arm Statistical Profiling Extension, Setup, WindowsPerf Sample
+    using SPE, WindowsPerf Record using SPE, and Summary.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will use WindowsPerf with a native Windows on Arm workload, describe the basic concepts
+      of sampling with Arm SPE, and explore the WindowsPerf command line. Learn how to sample
+      and profile CPU instructions using WindowsPerf with Arm Statistical Profiling Extension
+      (SPE) on Windows on Arm, demonstrated with CPython workload analysis.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is an introductory topic for developers who would like to learn about sampling CPU
+      instructions with WindowsPerf and the Arm Statistical Profiling Extension (SPE).
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: A Windows on Arm desktop or development
+      machine, with CPU support for SPE.; An installation of [WindowsPerf](/install-guides/wperf).;
+      An installation of [Visual Studio](/install-guides/vs-woa/).; An installation of [Git](/install-guides/git-woa/).
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including WindowsPerf, Python, and perf, Windows environments,
+      and Arm platforms such as Neoverse and Cortex-A.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Overview of Arm Statistical Profiling Extension, Setup,
+      WindowsPerf Sample using SPE, WindowsPerf Record using SPE, and Summary.
+# END generated_summary_faq
+
 author: Przemyslaw Wirkus
 
 ### Tags
@@ -103,3 +145,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

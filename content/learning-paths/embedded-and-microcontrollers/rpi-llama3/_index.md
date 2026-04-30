@@ -22,6 +22,49 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:16Z'
+  generator: template
+  source_hash: 9cd2c3082c4874dc596e1b7b59c3dc2143aaf1ce3e66948ab8b6af190ffa3776
+  summary: >-
+    Learn how to compile the Llama 3 large language model using ExecuTorch, deploy it to a Raspberry
+    Pi 5, and understand techniques for running LLMs in embedded environments. It is designed
+    for anyone interested in running the Llama 3 model on a Raspberry Pi 5, and learning about
+    techniques for running large language models (LLMs) in an embedded environment. By the end,
+    you will be able to use Docker to run Raspberry Pi OS on an Arm Linux server, compile a Large
+    Language Model (LLM) using ExecuTorch, and deploy the Llama 3 model on an edge device. It
+    focuses on tools and technologies such as LLM, Generative AI, Raspberry Pi, Hugging Face,
+    and ExecuTorch, Linux environments, and Arm platforms including Cortex-A. The main steps cover
+    Set up the development environment, Set up ExecuTorch, Set up Llama 3, and Run the model on
+    a Raspberry Pi 5.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will use Docker to run Raspberry Pi OS on an Arm Linux server, compile a Large Language
+      Model (LLM) using ExecuTorch, and deploy the Llama 3 model on an edge device. Learn how
+      to compile the Llama 3 large language model using ExecuTorch, deploy it to a Raspberry Pi
+      5, and understand techniques for running LLMs in embedded environments.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is an introductory topic for anyone interested in running the Llama 3 model on a Raspberry
+      Pi 5, and learning about techniques for running large language models (LLMs) in an embedded
+      environment.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: An Arm Linux machine or an [Arm cloud
+      instance](/learning-paths/servers-and-cloud-computing/csp/).; A Raspberry Pi 5.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including LLM, Generative AI, Raspberry Pi, Hugging Face,
+      and ExecuTorch, Linux environments, and Arm platforms such as Cortex-A.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Set up the development environment, Set up ExecuTorch,
+      Set up Llama 3, and Run the model on a Raspberry Pi 5.
+# END generated_summary_faq
+
 author: Annie Tallund
 
 ### Tags
@@ -67,3 +110,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -18,6 +18,48 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:15Z'
+  generator: template
+  source_hash: a051c519c1a4969f30d5a81e46823e77f0c15f163011b3a38f4c05104d853249
+  summary: >-
+    Learn how to write SIMD code in Rust on Arm platforms using Neon intrinsics, portable SIMD
+    abstractions, and optimize performance with architecture-specific instructions. It is designed
+    for software developers who want to take advantage of SIMD code on Arm systems using Rust.
+    By the end, you will be able to write SIMD code with Rust using std::arch and Neon intrinsics
+    on Arm, use portable SIMD abstractions with std::simd for cross-platform code, and apply feature
+    detection and target attributes for architecture-specific optimizations. It focuses on tools
+    and technologies such as GCC, Clang, Rust, and Runbook, Linux environments, and Arm platforms
+    including Cortex-A and Neoverse. The main steps cover Introduction to Rust, Arm SIMD on Rust,
+    Inlining Intrinsics, Matrix transpose, and A more complicated example.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will write SIMD code with Rust using std::arch and Neon intrinsics on Arm, use portable
+      SIMD abstractions with std::simd for cross-platform code, and apply feature detection and
+      target attributes for architecture-specific optimizations. Learn how to write SIMD code
+      in Rust on Arm platforms using Neon intrinsics, portable SIMD abstractions, and optimize
+      performance with architecture-specific instructions.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is an advanced topic for software developers who want to take advantage of SIMD code
+      on Arm systems using Rust.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: An Arm-based computer with recent versions
+      of a C compiler (Clang or GCC) and a Rust compiler installed.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including GCC, Clang, Rust, and Runbook, Linux environments,
+      and Arm platforms such as Cortex-A and Neoverse.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Introduction to Rust, Arm SIMD on Rust, Inlining Intrinsics,
+      Matrix transpose, and A more complicated example.
+# END generated_summary_faq
+
 author: Konstantinos Margaritis
 
 ### Tags
@@ -66,3 +108,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

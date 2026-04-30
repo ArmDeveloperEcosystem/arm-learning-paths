@@ -16,6 +16,47 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:19Z'
+  generator: template
+  source_hash: 7b2074e39243a5cd0ccb6a01317c700a4797d8c66353f39aa4197237b6672027
+  summary: >-
+    Port Code to Arm Scalable Vector Extension (SVE) walks you through an end-to-end Arm software
+    workflow. It is designed for software developers using SIMD instructions for High-Performance
+    Computing, Machine Learning, Digital Signal Processing, Audio and Video Codec applications.
+    By the end, you will be able to understand the differences between SVE and Neon for vectorization,
+    compile code for SVE-capable Arm processors, and run SVE instructions on any Armv8-A processor.
+    It focuses on tools and technologies such as SVE, Neon, armie, GCC, and armclang, Linux environments,
+    Arm platforms including Neoverse and Cortex-A, and cloud platforms such as AWS, Microsoft
+    Azure, Google Cloud, and Oracle. The main steps cover From Arm Neon to SVE, Compile for SVE,
+    and Run SVE without capable hardware.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will understand the differences between SVE and Neon for vectorization, compile code
+      for SVE-capable Arm processors, and run SVE instructions on any Armv8-A processor.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is an introductory topic for software developers using SIMD instructions for High-Performance
+      Computing, Machine Learning, Digital Signal Processing, Audio and Video Codec applications.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: General knowledge about SIMD processing,
+      vectorization or Arm Neon.; An Arm computer running Linux. Cloud instances can be used,
+      refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including SVE, Neon, armie, GCC, and armclang, Linux environments,
+      Arm platforms such as Neoverse and Cortex-A, and cloud platforms such as AWS, Microsoft
+      Azure, Google Cloud, and Oracle.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around From Arm Neon to SVE, Compile for SVE, and Run SVE
+      without capable hardware.
+# END generated_summary_faq
+
 author: Florent Lebeau
 
 ### Tags
@@ -73,3 +114,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -22,6 +22,53 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:18Z'
+  generator: template
+  source_hash: 36bf3c45f0b38350714ba41ea88c1551b33f6d299a65b3b0d6668fee2d88d835
+  summary: >-
+    Optimize llama.cpp on Arm CPUs by integrating Streamline Annotations to profile Prefill and
+    Decode stages, analyze operators, and evaluate multi-core execution. It is designed for software
+    developers, performance engineers, and AI practitioners who want to optimize llama.cpp performance
+    on Arm-based CPUs. By the end, you will be able to profile llama.cpp architecture and identify
+    the role of the Prefill and Decode stages, integrate Streamline Annotations into llama.cpp
+    for fine-grained performance insights, and capture and interpret profiling data with Streamline.
+    It focuses on tools and technologies such as Arm Streamline, CPP, llama.cpp, and Profiling,
+    Linux and Android environments, and Arm platforms including Cortex-A and Neoverse. The main
+    steps cover Overview, Explore llama.cpp architecture and the inference workflow, Integrate
+    Streamline Annotations into llama.cpp, Analyze token generation performance with Streamline
+    profiling, and Implement operator-level performance analysis with Annotation Channels.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will profile llama.cpp architecture and identify the role of the Prefill and Decode
+      stages, integrate Streamline Annotations into llama.cpp for fine-grained performance insights,
+      and capture and interpret profiling data with Streamline. Optimize llama.cpp on Arm CPUs
+      by integrating Streamline Annotations to profile Prefill and Decode stages, analyze operators,
+      and evaluate multi-core execution.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is an advanced topic for software developers, performance engineers, and AI practitioners
+      who want to optimize llama.cpp performance on Arm-based CPUs.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: Basic understanding of llama.cpp; Understanding
+      of transformer models; Knowledge of Arm Streamline usage; An Arm Neoverse or Cortex-A hardware
+      platform running Linux or Android.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including Arm Streamline, CPP, llama.cpp, and Profiling, Linux
+      and Android environments, and Arm platforms such as Cortex-A and Neoverse.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Overview, Explore llama.cpp architecture and the inference
+      workflow, Integrate Streamline Annotations into llama.cpp, Analyze token generation performance
+      with Streamline profiling, and Implement operator-level performance analysis with Annotation
+      Channels.
+# END generated_summary_faq
+
 author: 
     - Zenon Zhilong Xiu
     - Odin Shen
@@ -69,3 +116,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

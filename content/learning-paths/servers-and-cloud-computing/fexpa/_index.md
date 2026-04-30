@@ -17,6 +17,50 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:18Z'
+  generator: template
+  source_hash: a67c552b76df6323eccc331c9146d0fcbdb8ad222fe81dbf2e1c2339c7609b61
+  summary: >-
+    Learn how to implement exponential functions using Arm SVE intrinsics with the FEXPA instruction
+    for hardware-accelerated computations on Neoverse processors. It is designed for developers
+    interested in accelerating exponential function computations using Arm's Scalable Vector Extension
+    (SVE). The FEXPA instruction provides hardware acceleration for exponential calculations on
+    Arm Neoverse processors. By the end, you will be able to implement the exponential function
+    using SVE intrinsics and optimize the function with FEXPA. It focuses on tools and technologies
+    such as C and CPP, Linux and macOS environments, Arm platforms including Neoverse, and cloud
+    platforms such as AWS, Microsoft Azure, and Google Cloud. The main steps cover Learn exponential
+    function optimization techniques, Implement exponential with SVE intrinsics, Optimize with
+    FEXPA instruction, and Review benefits and next steps.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will implement the exponential function using SVE intrinsics and optimize the function
+      with FEXPA. Learn how to implement exponential functions using Arm SVE intrinsics with the
+      FEXPA instruction for hardware-accelerated computations on Neoverse processors.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is an introductory topic for developers interested in accelerating exponential function
+      computations using Arm's Scalable Vector Extension (SVE). The FEXPA instruction provides
+      hardware acceleration for exponential calculations on Arm Neoverse processors.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: Access to an [AWS Graviton4, Google
+      Axion, or Azure Cobalt 100 virtual machine from a cloud service provider](/learning-paths/servers-and-cloud-computing/csp/);
+      Some familiarity with SIMD programming and SVE intrinsics.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including C and CPP, Linux and macOS environments, Arm platforms
+      such as Neoverse, and cloud platforms such as AWS, Microsoft Azure, and Google Cloud.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Learn exponential function optimization techniques,
+      Implement exponential with SVE intrinsics, Optimize with FEXPA instruction, and Review benefits
+      and next steps.
+# END generated_summary_faq
+
 author: 
 - Arnaud Grasset
 - Claudio Martino

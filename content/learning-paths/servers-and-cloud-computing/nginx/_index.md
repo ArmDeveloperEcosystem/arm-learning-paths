@@ -17,6 +17,48 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:18Z'
+  generator: template
+  source_hash: c5e077458808373c8ce9660235716b5bb55e4e7eb8b6300c162c041ef1c96cb0
+  summary: >-
+    Learn how to deploy Nginx walks you through an end-to-end Arm software workflow. It is designed
+    for engineers who want to use Nginx on Arm. By the end, you will be able to install and run
+    Nginx on Arm servers, set up Nginx as a web server, reverse proxy, or an API Gateway, and
+    verify Nginx is working correctly. It focuses on tools and technologies such as NGINX, Linux
+    environments, Arm platforms including Neoverse, and cloud platforms such as AWS, Microsoft
+    Azure, Google Cloud, and Oracle. The main steps cover Install Nginx using a package manager
+    and check the build configuration, Build Nginx from source, Setup a static file server, and
+    Setup a reverse proxy and API gateway.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will install and run Nginx on Arm servers, set up Nginx as a web server, reverse proxy,
+      or an API Gateway, and verify Nginx is working correctly.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is an introductory topic for engineers who want to use Nginx on Arm.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: To create a file server you will need
+      at least one [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from
+      a cloud service provider or one on-premises Arm server.; To create a reverse proxy or API
+      gateway you will need at least three Arm based instances from a cloud service provider or
+      at least three on-premises Arm servers.; Network settings (firewalls and security groups)
+      which allow communication on port 22 (SSH) and port 443 (HTTPS).
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including NGINX, Linux environments, Arm platforms such as
+      Neoverse, and cloud platforms such as AWS, Microsoft Azure, Google Cloud, and Oracle.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Install Nginx using a package manager and check the
+      build configuration, Build Nginx from source, Setup a static file server, and Setup a reverse
+      proxy and API gateway.
+# END generated_summary_faq
+
 author: Julio Suarez
 
 ### Tags
@@ -60,3 +102,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -17,6 +17,40 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:16Z'
+  generator: template
+  source_hash: f3a01adf18ad93027b6ab61ceb5b0c470e6b5c298f9d4f944989a96ff64eec81
+  summary: >-
+    Learn how to import, build, and debug your first Keil Studio Cloud project. It is designed
+    for embedded software developers new to Keil Studio Cloud. By the end, you will be able to
+    import and build an example project and run the example on Arm Virtual Hardware. It focuses
+    on tools and technologies such as Arm Compiler for Embedded, Arm Virtual Hardware, and CMSIS,
+    Baremetal and RTOS environments, and Arm platforms including Cortex-M. The main steps cover
+    Work with an example project.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will import and build an example project and run the example on Arm Virtual Hardware.
+      Learn how to import, build, and debug your first Keil Studio Cloud project.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is an introductory topic for embedded software developers new to Keil Studio Cloud.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: Some familiarity with embedded programming
+      is assumed; An [Arm Account](https://developer.arm.com/register) is required.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including Arm Compiler for Embedded, Arm Virtual Hardware,
+      and CMSIS, Baremetal and RTOS environments, and Arm platforms such as Cortex-M.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Work with an example project.
+# END generated_summary_faq
+
 author: Christopher Seidl 
 
 
@@ -59,3 +93,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

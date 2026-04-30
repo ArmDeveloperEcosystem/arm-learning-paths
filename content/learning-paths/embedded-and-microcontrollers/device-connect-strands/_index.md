@@ -19,6 +19,57 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:15Z'
+  generator: template
+  source_hash: c31d398d3ce965a4193fca45cd025182d788a2fc603fbe8c828dfbd5a1c599ba
+  summary: >-
+    Learn how to connect AI agents to Arm-based edge devices using Device Connect for structured
+    device access and Strands for agent orchestration, with examples for both simulated and physical
+    robots. It is designed for software developers who want to connect AI agents to edge devices.
+    You'll use Device Connect, Arm's platform for structured device access, and Strands, AWS's
+    open-source agent SDK. The examples cover both physical and simulated devices. By the end,
+    you will be able to understand how Device Connect and Strands work together to give AI agents
+    structured access to Arm-based edge devices, set up a Python environment with the Device Connect
+    SDK and agent tools installed from source, and start a simulated robot that registers itself
+    on the local network and is discovered automatically by an agent. It focuses on tools and
+    technologies such as Python, Docker, and strands-agents, Linux and macOS environments, and
+    Arm platforms including Cortex-A and Neoverse. The main steps cover Learn Device Connect and
+    Strands architecture for edge devices, Set up the Device Connect and Strands developer environment,
+    Run device discovery and agent control examples, and Run with full Device Connect infrastructure
+    (optional).
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will understand how Device Connect and Strands work together to give AI agents structured
+      access to Arm-based edge devices, set up a Python environment with the Device Connect SDK
+      and agent tools installed from source, and start a simulated robot that registers itself
+      on the local network and is discovered automatically by an agent. Learn how to connect AI
+      agents to Arm-based edge devices using Device Connect for structured device access and Strands
+      for agent orchestration, with examples for both simulated and physical robots.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is an introductory topic for software developers who want to connect AI agents to edge
+      devices. You'll use Device Connect, Arm's platform for structured device access, and Strands,
+      AWS's open-source agent SDK. The examples cover both physical and simulated devices.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: A development machine with git installed;
+      Basic familiarity with command-line tools; (Optional) A Raspberry Pi for testing a full
+      device-to-device (D2D) setup.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including Python, Docker, and strands-agents, Linux and macOS
+      environments, and Arm platforms such as Cortex-A and Neoverse.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Learn Device Connect and Strands architecture for
+      edge devices, Set up the Device Connect and Strands developer environment, Run device discovery
+      and agent control examples, and Run with full Device Connect infrastructure (optional).
+# END generated_summary_faq
+
 author: 
     - Annie Tallund
     - Kavya Sri Chennoju
@@ -63,3 +114,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

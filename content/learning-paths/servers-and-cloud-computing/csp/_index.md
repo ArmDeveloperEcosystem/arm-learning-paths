@@ -4,6 +4,45 @@ description: Learn how to start an Arm-based virtual machine instance from major
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:17Z'
+  generator: template
+  source_hash: 9e94b69eabf35677c48db812bb85ea9cef184efc078a826b96954f540a45e915
+  summary: >-
+    Learn how to start an Arm-based virtual machine instance from major cloud service providers
+    and verify the Arm architecture is being used. It is designed for software developers who
+    are new to Arm-based cloud instances. By the end, you will be able to start an Arm-based instance
+    in the cloud and verify that the instance is using the Arm architecture. It focuses on Linux
+    environments, Arm platforms including Neoverse, and cloud platforms such as AWS, Microsoft
+    Azure, Google Cloud, and Oracle. The main steps cover Getting Started with AWS, Getting Started
+    with Microsoft Azure, Getting Started with Google Cloud Platform, Getting Started with Oracle
+    OCI, and Getting Started with Alibaba Cloud Services.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will start an Arm-based instance in the cloud and verify that the instance is using
+      the Arm architecture. Learn how to start an Arm-based virtual machine instance from major
+      cloud service providers and verify the Arm architecture is being used.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is an introductory topic for software developers who are new to Arm-based cloud instances.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: An account with your preferred cloud
+      service provider.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers Linux environments, Arm platforms such as Neoverse, and cloud platforms such as
+      AWS, Microsoft Azure, Google Cloud, and Oracle.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Getting Started with AWS, Getting Started with Microsoft
+      Azure, Getting Started with Google Cloud Platform, Getting Started with Oracle OCI, and
+      Getting Started with Alibaba Cloud Services.
+# END generated_summary_faq
+
 author: Ronan Synnott
 
 minutes_to_complete: 15
@@ -66,3 +105,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

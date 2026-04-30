@@ -22,6 +22,50 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:16Z'
+  generator: template
+  source_hash: 808f1c99409f9ca3bb72419eaf950bc097f1c7af6c2dcade6385be97fdbbf713
+  summary: >-
+    Learn how to install Workbench for Zephyr extension in VS Code, set up the complete Zephyr
+    development environment, create and build Zephyr applications, debug embedded systems, and
+    perform memory usage analysis. It is designed for embedded developers targeting Arm-based
+    platforms with the Zephyr RTOS using the Workbench for Zephyr extension for VS Code. By the
+    end, you will be able to install and configure the Workbench for Zephyr extension in VS Code,
+    set up a complete Zephyr development environment including the SDK and toolchain, and create,
+    build, and debug Zephyr applications using hands-on examples. It focuses on tools and technologies
+    such as Zephyr and C, RTOS environments, and Arm platforms including Cortex-M. The main steps
+    cover Set up your environment, Build a Zephyr application with Zephyr workbench, and Analyze
+    and debug a Zephyr application.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will install and configure the Workbench for Zephyr extension in VS Code, set up a complete
+      Zephyr development environment including the SDK and toolchain, and create, build, and debug
+      Zephyr applications using hands-on examples. Learn how to install Workbench for Zephyr extension
+      in VS Code, set up the complete Zephyr development environment, create and build Zephyr
+      applications, debug embedded systems, and perform memory usage analysis.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is an introductory topic for embedded developers targeting Arm-based platforms with
+      the Zephyr RTOS using the Workbench for Zephyr extension for VS Code.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: Basic familiarity with embedded C programming;
+      Visual Studio Code; A Cortex-M development board; Windows 10+ (64-bit), macOS with Homebrew,
+      or Linux (preferably Ubuntu 20.04+).
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including Zephyr and C, RTOS environments, and Arm platforms
+      such as Cortex-M.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Set up your environment, Build a Zephyr application
+      with Zephyr workbench, and Analyze and debug a Zephyr application.
+# END generated_summary_faq
+
 author: 
     - Ayoub Bourjilat
     - Odin Shen
@@ -55,3 +99,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

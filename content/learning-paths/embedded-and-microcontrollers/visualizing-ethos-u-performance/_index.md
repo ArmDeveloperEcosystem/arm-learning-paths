@@ -20,6 +20,52 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:16Z'
+  generator: template
+  source_hash: dcdbc4cecc376ed4c0df9377d13cb4fe792ad7c68acfe0610d75cf41898804ff
+  summary: >-
+    Learn how to identify Arm-based targets for TinyML, install Fixed Virtual Platforms, deploy
+    ExecuTorch models on Corstone-320 FVP, and visualize model execution using the FVP graphical
+    interface. It is designed for developers and data scientists who are new to TinyML and want
+    to visualize ExecuTorch model performance on virtual Arm hardware. By the end, you will be
+    able to identify Arm-based targets suitable for TinyML workloads, install and configure Fixed
+    Virtual Platforms (FVPs), and deploy a TinyML model using ExecuTorch on a Corstone-320 FVP.
+    It focuses on tools and technologies such as Arm Virtual Hardware, FVP, Python, PyTorch, and
+    ExecuTorch, Linux and macOS environments, and Arm platforms including Cortex-A, Cortex-M,
+    and Ethos-U. The main steps cover Overview, Understand the ExecuTorch workflow, Set up your
+    ExecuTorch environment, Set up the Corstone-320 Fixed Virtual Platform, and Deploy and run
+    Mobilenet V2 on the Corstone-320 FVP.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will identify Arm-based targets suitable for TinyML workloads, install and configure
+      Fixed Virtual Platforms (FVPs), and deploy a TinyML model using ExecuTorch on a Corstone-320
+      FVP. Learn how to identify Arm-based targets for TinyML, install Fixed Virtual Platforms,
+      deploy ExecuTorch models on Corstone-320 FVP, and visualize model execution using the FVP
+      graphical interface.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is an introductory topic for developers and data scientists who are new to TinyML and
+      want to visualize ExecuTorch model performance on virtual Arm hardware.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: Familiarity with basic machine learning
+      concepts; A Linux or macOS computer with Python 3 installed.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including Arm Virtual Hardware, FVP, Python, PyTorch, and
+      ExecuTorch, Linux and macOS environments, and Arm platforms such as Cortex-A, Cortex-M,
+      and Ethos-U.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Overview, Understand the ExecuTorch workflow, Set
+      up your ExecuTorch environment, Set up the Corstone-320 Fixed Virtual Platform, and Deploy
+      and run Mobilenet V2 on the Corstone-320 FVP.
+# END generated_summary_faq
+
 author: Waheed Brown
 
 ### Tags
@@ -67,3 +113,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

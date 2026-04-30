@@ -17,6 +17,44 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:15Z'
+  generator: template
+  source_hash: 251b6edf6a016f9fc73eb35216f56b2001465fbca8253bd7b6e6f9f4afcd25e6
+  summary: >-
+    Learn how to integrate Arm Virtual Hardware with AWS and GitHub Actions for automated CI/CD
+    workflows, including CloudFormation setup and test automation. It is designed for DevOps integrating
+    AVH into their CI/CD flows. By the end, you will be able to prepare AWS account for GitHub
+    integration and integrate Arm Virtual Hardware into CI/CD flow with GitHub Actions. It focuses
+    on tools and technologies such as Arm Virtual Hardware and GitHub, Baremetal environments,
+    and Arm platforms including Cortex-M. The main steps cover Prepare AWS account for GitHub
+    integration and Automate build and validation example.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will prepare AWS account for GitHub integration and integrate Arm Virtual Hardware into
+      CI/CD flow with GitHub Actions. Learn how to integrate Arm Virtual Hardware with AWS and
+      GitHub Actions for automated CI/CD workflows, including CloudFormation setup and test automation.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is an advanced topic for DevOps integrating AVH into their CI/CD flows.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: This learning path builds on [Integrate
+      Arm Virtual Hardware into CI/CD workflow 1](/learning-paths/cross-platform/avh_cicd/).;
+      Valid AWS and GitHub accounts are required.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including Arm Virtual Hardware and GitHub, Baremetal environments,
+      and Arm platforms such as Cortex-M.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Prepare AWS account for GitHub integration and Automate
+      build and validation example.
+# END generated_summary_faq
+
 author: Pareena Verma
 
 ##### Tags
@@ -53,3 +91,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

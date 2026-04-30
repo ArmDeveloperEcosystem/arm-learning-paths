@@ -16,6 +16,46 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:17Z'
+  generator: template
+  source_hash: 68cdc7315795b6ffa794c0a1fd4cf325ab39ebb65e23efd27b7760ece76a2ec9
+  summary: >-
+    Learn how to build the libGPUInfo library using Android NDK and query configuration details
+    of Arm Mali or Immortalis GPUs on Android devices. It is designed for Android developers who
+    want to adjust application complexity to match device performance. By the end, you will be
+    able to build the libGPUInfo library using the Android NDK and run an example application
+    to query the configuration details of an Arm Mali or Arm Immortalis GPU. It focuses on tools
+    and technologies such as Android NDK and adb, Android environments, and Arm platforms including
+    Cortex-A, Mali, and Immortalis. The main steps cover Build and run an example application
+    to obtain Arm GPU configuration information.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will build the libGPUInfo library using the Android NDK and run an example application
+      to query the configuration details of an Arm Mali or Arm Immortalis GPU. Learn how to build
+      the libGPUInfo library using Android NDK and query configuration details of Arm Mali or
+      Immortalis GPUs on Android devices.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is an introductory topic for Android developers who want to adjust application complexity
+      to match device performance.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: A development machine running Ubuntu
+      or Debian Linux with `x86_64` architecture; An Android device with an Arm GPU.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including Android NDK and adb, Android environments, and Arm
+      platforms such as Cortex-A, Mali, and Immortalis.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Build and run an example application to obtain Arm
+      GPU configuration information.
+# END generated_summary_faq
+
 author: Jason Andrews
 
 ##### Tags
@@ -55,3 +95,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

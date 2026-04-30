@@ -18,6 +18,61 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:15Z'
+  generator: template
+  source_hash: 92a6dac2b1674a44cd623a0c8c3189b38438124a6067ed7ca776999ff1d8b5bf
+  summary: >-
+    Learn how to implement functional safety isolation for autonomous driving systems on Arm Neoverse
+    using DDS-based communication, containerized deployment, and ISO 26262 compliance principles.
+    It is designed for automotive engineers developing safety-critical systems. You'll learn how
+    to accelerate ISO 26262-compliant development workflows using Arm-based cloud compute, containerized
+    simulation, and DDS-based communication. By the end, you will be able to apply functional
+    safety principles, including risk prevention, fault detection, and ASIL compliance, to build
+    robust, certifiable automotive systems, use DDS and a publish-subscribe architecture for low-latency,
+    scalable, and fault-tolerant communication in autonomous driving systems, and implement distributed
+    development by separating the simulation platform into independent, safety-isolated components.
+    It focuses on tools and technologies such as Python, Docker, ROS 2, and DDS, Linux environments,
+    and Arm platforms including Neoverse. The main steps cover Why functional safety matters in
+    software systems, Understand functional safety risks, Apply ISO 26262 and ASIL levels, Implement
+    safety-critical isolation using safety island architecture, and Functional safety for automotive
+    software development.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will apply functional safety principles, including risk prevention, fault detection,
+      and ASIL compliance, to build robust, certifiable automotive systems, use DDS and a publish-subscribe
+      architecture for low-latency, scalable, and fault-tolerant communication in autonomous driving
+      systems, and implement distributed development by separating the simulation platform into
+      independent, safety-isolated components. Learn how to implement functional safety isolation
+      for autonomous driving systems on Arm Neoverse using DDS-based communication, containerized
+      deployment, and ISO 26262 compliance principles.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This Learning Path is for automotive engineers developing safety-critical systems. You'll
+      learn how to accelerate ISO 26262-compliant development workflows using Arm-based cloud
+      compute, containerized simulation, and DDS-based communication.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: Access to two Arm-based Neoverse cloud
+      instances, or a local Arm Neoverse Linux system with at least 16 CPUs and 32 GB of RAM;
+      Completion of the [Deploy Open AD Kit containerized autonomous driving simulation on Arm
+      Neoverse](/learning-paths/automotive/openadkit1_container/) Learning Path; Basic familiarity
+      with Docker.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including Python, Docker, ROS 2, and DDS, Linux environments,
+      and Arm platforms such as Neoverse.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Why functional safety matters in software systems,
+      Understand functional safety risks, Apply ISO 26262 and ASIL levels, Implement safety-critical
+      isolation using safety island architecture, and Functional safety for automotive software
+      development.
+# END generated_summary_faq
+
 author: 
     - Odin Shen
     - Julien Jayat
@@ -77,3 +132,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -17,6 +17,53 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:17Z'
+  generator: template
+  source_hash: 649957b07b2bde05bc11047bd12bfc4f697c1a55eef1c3a25b5fafc95cda893d
+  summary: >-
+    Learn how to deploy Confidential Containers from encrypted images inside Arm CCA Realms using
+    Trustee services for attestation-based authorization on an FVP with RME support. It is designed
+    for developers who want to understand how Confidential Containers run in Arm CCA Realms. By
+    the end, you will be able to gain an overview of Confidential Containers and their role in
+    confidential computing, understand how Trustee services are used with Arm CCA attestation
+    to authorize and unlock confidential workloads, and deploy a Confidential Container from an
+    encrypted image inside an Arm CCA Realm using an Armv9-A AEM Base Fixed Virtual Platform (FVP)
+    with RME support. It focuses on tools and technologies such as FVP, RME, CCA, Docker, and
+    Veraison, Linux and macOS environments, and Arm platforms including Neoverse and Cortex-A.
+    The main steps cover Overview of Confidential Containers and Arm CCA Attestation with Trustee
+    and Run a confidential container with an encrypted image.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will gain an overview of Confidential Containers and their role in confidential computing,
+      understand how Trustee services are used with Arm CCA attestation to authorize and unlock
+      confidential workloads, and deploy a Confidential Container from an encrypted image inside
+      an Arm CCA Realm using an Armv9-A AEM Base Fixed Virtual Platform (FVP) with RME support.
+      Learn how to deploy Confidential Containers from encrypted images inside Arm CCA Realms
+      using Trustee services for attestation-based authorization on an FVP with RME support.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This Learning Path is for developers who want to understand how Confidential Containers
+      run in Arm CCA Realms.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: An AArch64 or x86_64 computer running
+      Linux or macOS. Cloud-based instances can also be used; see the [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/);
+      Completion of the [Run an end-to-end Attestation with Arm CCA and Trustee](/learning-paths/servers-and-cloud-computing/cca-trustee)
+      Learning Path.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including FVP, RME, CCA, Docker, and Veraison, Linux and macOS
+      environments, and Arm platforms such as Neoverse and Cortex-A.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Overview of Confidential Containers and Arm CCA Attestation
+      with Trustee and Run a confidential container with an encrypted image.
+# END generated_summary_faq
+
 author:
   - Anton Antonov
 
@@ -63,3 +110,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

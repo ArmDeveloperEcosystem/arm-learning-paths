@@ -18,6 +18,48 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:19Z'
+  generator: template
+  source_hash: cc3f88ce181b1614f959497a24fafe736b26e55615792faab6b5dce29fac8d77
+  summary: >-
+    Accelerate search performance with SVE2 MATCH on Arm servers walks you through an end-to-end
+    Arm software workflow. It is designed for database developers, performance engineers, and
+    anyone optimizing data processing workloads on Arm-based cloud instances. By the end, you
+    will be able to understand the purpose and function of SVE2 MATCH instructions, implement
+    a search algorithm using both scalar and SVE2-based MATCH approaches, and benchmark and compare
+    performance between scalar and vectorized implementations. It focuses on tools and technologies
+    such as SVE2, Neon, and Runbook, Linux environments, Arm platforms including Neoverse, and
+    cloud platforms such as AWS, Microsoft Azure, and Google Cloud. The main steps cover Compare
+    search performance using scalar and SVE2 MATCH on Arm Servers.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will understand the purpose and function of SVE2 MATCH instructions, implement a search
+      algorithm using both scalar and SVE2-based MATCH approaches, and benchmark and compare performance
+      between scalar and vectorized implementations.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is an introductory topic for database developers, performance engineers, and anyone
+      optimizing data processing workloads on Arm-based cloud instances.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: Access to an [AWS Graviton4, Google
+      Axion, or Azure Cobalt 100 virtual machine](/learning-paths/servers-and-cloud-computing/csp/)
+      from a cloud service provider.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including SVE2, Neon, and Runbook, Linux environments, Arm
+      platforms such as Neoverse, and cloud platforms such as AWS, Microsoft Azure, and Google
+      Cloud.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Compare search performance using scalar and SVE2 MATCH
+      on Arm Servers.
+# END generated_summary_faq
+
 author: Pareena Verma
 
 
@@ -53,3 +95,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

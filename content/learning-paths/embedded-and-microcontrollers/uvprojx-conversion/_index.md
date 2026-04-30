@@ -20,6 +20,48 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:16Z'
+  generator: template
+  source_hash: 179b0318bbef9cef31ca6bb82de853597a609f61d6868aaaa85cfb40a27a051a
+  summary: >-
+    Learn how to import, convert, and build uvprojx-based projects to csolution format using Keil
+    Studio, µVision, and command-line tools for CMSIS-Toolbox compatibility. It is designed for
+    This is a topic for users of µVision who want to migrate to the new project format (csolution)
+    required by CMSIS-Toolbox. By the end, you will be able to import, convert, and build uvprojx-based
+    projects in Keil Studio, convert uvprojx-based projects in µVision, and convert and build
+    uvprojx-based projects on the command line. It focuses on tools and technologies such as Keil
+    MDK and CMSIS-Toolbox, Windows, Linux, and macOS environments, and Arm platforms including
+    Cortex-M. The main steps cover Using Keil Studio, Using µVision, and Using the command line.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will import, convert, and build uvprojx-based projects in Keil Studio, convert uvprojx-based
+      projects in µVision, and convert and build uvprojx-based projects on the command line. Learn
+      how to import, convert, and build uvprojx-based projects to csolution format using Keil
+      Studio, µVision, and command-line tools for CMSIS-Toolbox compatibility.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is a topic for users of µVision who want to migrate to the new project format (csolution)
+      required by CMSIS-Toolbox.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: Install [Keil Studio](/install-guides/keilstudio_vs/)
+      on your machine.; Install [µVision](/install-guides/mdk/) on your machine.; Install [uv2csolution](https://arm-software.github.io/MDK-Toolbox/01_installation/)
+      for the command line flow.; The &micro;Vision project must use Arm Compiler 6 as the default
+      toolchain. Arm Compiler 5 is not supported.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including Keil MDK and CMSIS-Toolbox, Windows, Linux, and
+      macOS environments, and Arm platforms such as Cortex-M.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Using Keil Studio, Using µVision, and Using the command
+      line.
+# END generated_summary_faq
+
 author: Christopher Seidl
 
 ### Tags
@@ -59,3 +101,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

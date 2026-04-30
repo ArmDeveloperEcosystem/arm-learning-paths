@@ -16,6 +16,42 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:16Z'
+  generator: template
+  source_hash: 61a6390d42ce6bfc37a3bb981710dc23b8566070733f7979f9ec37bc63ab7d78
+  summary: >-
+    Learn how to install WindowsPerf on Windows on Arm machines and generate sample performance
+    reports for CPU profiling. It is designed for software developers working on laptops and desktops
+    and new to the Arm architecture. By the end, you will be able to install WindowsPerf on Windows
+    on Arm machine and generate a sample report. It focuses on tools and technologies such as
+    WindowsPerf, Windows environments, and Arm platforms including Cortex-A and Neoverse. The
+    main steps cover WindowsPerf and WindowsPerf cheat sheet.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will install WindowsPerf on Windows on Arm machine and generate a sample report. Learn
+      how to install WindowsPerf on Windows on Arm machines and generate sample performance reports
+      for CPU profiling.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is an introductory topic for software developers working on laptops and desktops and
+      new to the Arm architecture.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: Windows on Arm desktop or development
+      machine.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including WindowsPerf, Windows environments, and Arm platforms
+      such as Cortex-A and Neoverse.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around WindowsPerf and WindowsPerf cheat sheet.
+# END generated_summary_faq
+
 author: Ronan Synnott
 
 ### Tags
@@ -65,3 +101,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -16,6 +16,46 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:15Z'
+  generator: template
+  source_hash: 47cd598f6e33c12d3729c319a1d6a7afcd748de7acd6faea639f2e8600a085ed
+  summary: >-
+    Learn how to run custom software benchmarks on IP Explorer simulation platforms and compare
+    performance across Arm Cortex-M processors using cycle count analysis. It is designed for
+    IP Explorer users using the software simulation platforms available. By the end, you will
+    be able to run a pre-installed example on IP Explorer simulation platform, create your own
+    example benchmark, and upload and run your benchmark. It focuses on tools and technologies
+    such as IP Explorer, Baremetal environments, and Arm platforms including Cortex-A, Cortex-R,
+    and Cortex-M. The main steps cover Run a pre-installed example and compare performance, Create
+    a custom example, and Upload and run your custom example.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will run a pre-installed example on IP Explorer simulation platform, create your own
+      example benchmark, and upload and run your benchmark. Learn how to run custom software benchmarks
+      on IP Explorer simulation platforms and compare performance across Arm Cortex-M processors
+      using cycle count analysis.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is an introductory topic for IP Explorer users using the software simulation platforms
+      available.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: An Arm account that can access IP Explorer;
+      (Optional) A Linux machine with the desired compilers installed.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including IP Explorer, Baremetal environments, and Arm platforms
+      such as Cortex-A, Cortex-R, and Cortex-M.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Run a pre-installed example and compare performance,
+      Create a custom example, and Upload and run your custom example.
+# END generated_summary_faq
+
 author: Ronan Synnott
 
 ### Tags
@@ -52,3 +92,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

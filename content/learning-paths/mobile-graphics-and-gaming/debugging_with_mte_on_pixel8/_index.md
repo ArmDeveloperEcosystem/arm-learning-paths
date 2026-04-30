@@ -21,6 +21,51 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:17Z'
+  generator: template
+  source_hash: 95d4fb855552939d1a0e9cccfe46333692ea291ee85dd08b816321db29ceebdc
+  summary: >-
+    Learn how to detect and debug memory safety bugs in Android applications using Arm Memory
+    Tagging Extension (MTE) on a Google Pixel 8 smartphone. It is designed for developers interested
+    in learning how to use the Arm Memory Tagging Extension (MTE) to detect memory safety bugs
+    with Android Studio on a Google Pixel 8 smartphone. By the end, you will be able to recognize
+    common memory safety bugs in Android applications, describe how you can use an Android MTE
+    Test app to implement common memory bugs, and build the MTE Test app in Android Studio. It
+    focuses on tools and technologies such as Android Studio and MTE, Android environments, and
+    Arm platforms including Cortex-A. The main steps cover Background, Implement memory safety
+    bugs with the Android app, Set up the app for debugging with MTE, and Debug in Android Studio
+    with MTE.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will recognize common memory safety bugs in Android applications, describe how you can
+      use an Android MTE Test app to implement common memory bugs, and build the MTE Test app
+      in Android Studio. Learn how to detect and debug memory safety bugs in Android applications
+      using Arm Memory Tagging Extension (MTE) on a Google Pixel 8 smartphone.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is an advanced topic for developers interested in learning how to use the Arm Memory
+      Tagging Extension (MTE) to detect memory safety bugs with Android Studio on a Google Pixel
+      8 smartphone.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: A Google Pixel 8 smartphone.; Android
+      Studio installed on your development computer.; A USB cable to connect your computer to
+      your Google Pixel 8.; Android Debug Bridge (adb) installed on your device. If needed, follow
+      the steps in the [Android Debug Bridge](https://developer.android.com/tools/adb) documentation.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including Android Studio and MTE, Android environments, and
+      Arm platforms such as Cortex-A.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Background, Implement memory safety bugs with the
+      Android app, Set up the app for debugging with MTE, and Debug in Android Studio with MTE.
+# END generated_summary_faq
+
 author: Roberto Lopez Mendez
 
 ### Tags
@@ -61,3 +106,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

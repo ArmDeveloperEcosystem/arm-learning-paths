@@ -17,6 +17,46 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:17Z'
+  generator: template
+  source_hash: ced3882cf8be11a55304d2697f450a2c862a81d87317ab42298148755e9f272c
+  summary: >-
+    Learn how to package multi-architecture container applications and deploy them on AWS Fargate
+    with Graviton processors using the AWS Copilot CLI. It is designed for software developers
+    who want to learn how to use the command line to deploy Arm containers on AWS Fargate. By
+    the end, you will be able to package applications using a multi-architecture containers, deploy
+    containers on AWS Fargate with the AWS Copilot CLI, and configure Copilot to use AWS Graviton
+    processors. It focuses on tools and technologies such as Docker, Linux environments, Arm platforms
+    including Neoverse, and cloud platforms such as AWS. The main steps cover Containerize an
+    example application and Deploy with Copilot.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will package applications using a multi-architecture containers, deploy containers on
+      AWS Fargate with the AWS Copilot CLI, and configure Copilot to use AWS Graviton processors.
+      Learn how to package multi-architecture container applications and deploy them on AWS Fargate
+      with Graviton processors using the AWS Copilot CLI.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is an introductory topic for software developers who want to learn how to use the command
+      line to deploy Arm containers on AWS Fargate.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: An Amazon Web Services (AWS) account;
+      A local computer with Docker, AWS CLI, and AWS Copilot CLI installed.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including Docker, Linux environments, Arm platforms such as
+      Neoverse, and cloud platforms such as AWS.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Containerize an example application and Deploy with
+      Copilot.
+# END generated_summary_faq
+
 author: Jason Andrews
 
 ### Tags
@@ -54,3 +94,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

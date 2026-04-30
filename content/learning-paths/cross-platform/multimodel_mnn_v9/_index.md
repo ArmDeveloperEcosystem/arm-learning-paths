@@ -20,6 +20,60 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:15Z'
+  generator: template
+  source_hash: bf3183bd62b590d4930f0bcf9c9dc836bbc5206a991be7bec5e18e9c20942352
+  summary: >-
+    Learn how to build MNN on an Armv9 system, run text, vision, and audio prompts with a multimodal
+    Omni model, and combine image and audio inputs into a single-shot retail restock ticket workflow.
+    It is designed for developers and engineers who want to run multimodal image, audio, and text
+    models on Armv9 Linux systems using MNN as a portable, CPU-first inference runtime. It is
+    aimed at readers who are comfortable building software from source and want a reproducible
+    on-device workflow without quantization or heterogeneous scheduling. By the end, you will
+    be able to build MNN natively on an Armv9 Linux system for multimodal inference, verify a
+    CPU-only Omni model workflow with text, vision, and audio prompts, and create a reproducible
+    multimodal application flow that combines image and audio inputs into an actionable restock
+    ticket. It focuses on tools and technologies such as CMake, CPP, and Bash, Linux environments,
+    and Arm platforms including Cortex-A. The main steps cover Run multimodal inference with MNN
+    on Armv9, Build MNN and prepare an Omni model on Armv9, Validate text-only inference with
+    an Omni model on Armv9, Run a vision retail shelf audit with MNN Omni, and Convert spoken
+    restock notes into structured tickets with MNN Omni.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will build MNN natively on an Armv9 Linux system for multimodal inference, verify a
+      CPU-only Omni model workflow with text, vision, and audio prompts, and create a reproducible
+      multimodal application flow that combines image and audio inputs into an actionable restock
+      ticket. Learn how to build MNN on an Armv9 system, run text, vision, and audio prompts with
+      a multimodal Omni model, and combine image and audio inputs into a single-shot retail restock
+      ticket workflow.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This Learning Path is for developers and engineers who want to run multimodal image, audio,
+      and text models on Armv9 Linux systems using MNN as a portable, CPU-first inference runtime.
+      It is aimed at readers who are comfortable building software from source and want a reproducible
+      on-device workflow without quantization or heterogeneous scheduling.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: An Armv9 Linux device with at least
+      32 GB of available disk space, for example a Radxa Orion O6; Familiarity with the Linux
+      command line, Git, and building C++ projects with CMake; Internet access to download source
+      code, model assets, and sample data.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including CMake, CPP, and Bash, Linux environments, and Arm
+      platforms such as Cortex-A.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Run multimodal inference with MNN on Armv9, Build
+      MNN and prepare an Omni model on Armv9, Validate text-only inference with an Omni model
+      on Armv9, Run a vision retail shelf audit with MNN Omni, and Convert spoken restock notes
+      into structured tickets with MNN Omni.
+# END generated_summary_faq
+
 author: Odin Shen
 
 ### Tags
@@ -69,3 +123,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

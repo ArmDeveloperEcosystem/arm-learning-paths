@@ -21,6 +21,47 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:16Z'
+  generator: template
+  source_hash: 03d816ff419e6e5b1533f95e9d4ffa087b9c0c9aefeee112f67b70223c8aedc3
+  summary: >-
+    Learn how to configure and run WSL with Linux distributions, graphical applications, remote
+    desktop, and development tools on Windows on Arm computers. It is designed for Software developers
+    with Windows on Arm computers doing Linux or cloud native development. By the end, you will
+    be able to configure and run WSL with various Linux distributions, run graphical Linux applications
+    on Windows, and use ssh to connect to WSL. It focuses on tools and technologies such as WSL
+    and Visual Studio Code, Windows and Linux environments, and Arm platforms including Cortex-A.
+    The main steps cover Configure and run WSL with various Linux distributions, Run graphical
+    Linux applications, Enable systemd in WSL, Use SSH to connect to WSL, and Connect to WSL using
+    RDP and VNC.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will configure and run WSL with various Linux distributions, run graphical Linux applications
+      on Windows, and use ssh to connect to WSL. Learn how to configure and run WSL with Linux
+      distributions, graphical applications, remote desktop, and development tools on Windows
+      on Arm computers.
+  - question: Who is this Learning Path for?
+    answer: >-
+      Software developers with Windows on Arm computers doing Linux or cloud native development.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: A Windows on Arm computer such as the
+      Lenovo Thinkpad X13s running Windows 11.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including WSL and Visual Studio Code, Windows and Linux environments,
+      and Arm platforms such as Cortex-A.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Configure and run WSL with various Linux distributions,
+      Run graphical Linux applications, Enable systemd in WSL, Use SSH to connect to WSL, and
+      Connect to WSL using RDP and VNC.
+# END generated_summary_faq
+
 author: Jason Andrews
 
 ### Tags
@@ -52,3 +93,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

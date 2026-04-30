@@ -25,6 +25,56 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:18Z'
+  generator: template
+  source_hash: 87e9d25d5fb1f45d126aa4ca2fa1e13d6a470f2bcdc70968aa4622790106e629
+  summary: >-
+    Learn how to install Helm on Google Cloud Axion C4A SUSE VMs and deploy applications like
+    NGINX, PostgreSQL, and Redis using Helm charts. It is designed for This is an introductory
+    topic intended for developers who want to get hands-on experience using Helm on Linux Arm64
+    systems, specifically Google Cloud C4A virtual machines powered by Axion processors. By the
+    end, you will be able to provision an Arm-based SUSE Linux Enterprise Server (SLES) virtual
+    machine on Google Cloud (C4A with Axion processors), install and configure Helm and kubectl
+    on a SUSE Arm64 (C4A) instance, and create and connect to a Google Kubernetes Engine (GKE)
+    cluster running on Arm-based nodes. It focuses on tools and technologies such as Helm, Kubernetes,
+    kubectl, GKE, and PostgreSQL, Linux environments, Arm platforms including Neoverse, and cloud
+    platforms such as Google Cloud. The main steps cover Get started with Helm on Google Axion
+    C4A (Arm-based), Create a Google Axion C4A virtual machine on Google Cloud, Install Helm,
+    Validate Helm workflows on a Google Axion C4A virtual machine, and Prepare a GKE cluster for
+    Helm deployments.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will provision an Arm-based SUSE Linux Enterprise Server (SLES) virtual machine on Google
+      Cloud (C4A with Axion processors), install and configure Helm and kubectl on a SUSE Arm64
+      (C4A) instance, and create and connect to a Google Kubernetes Engine (GKE) cluster running
+      on Arm-based nodes. Learn how to install Helm on Google Cloud Axion C4A SUSE VMs and deploy
+      applications like NGINX, PostgreSQL, and Redis using Helm charts.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is an introductory topic intended for developers who want to get hands-on experience
+      using Helm on Linux Arm64 systems, specifically Google Cloud C4A virtual machines powered
+      by Axion processors.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: A [Google Cloud Platform (GCP)](https://cloud.google.com/free)
+      account with billing enabled; Basic familiarity with [Kubernetes concepts](https://kubernetes.io/docs/concepts/);
+      Basic understanding of [Helm](https://helm.sh/docs/topics/architecture/) and Kubernetes
+      manifests; Familiarity with basic Linux command-line usage.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including Helm, Kubernetes, kubectl, GKE, and PostgreSQL,
+      Linux environments, Arm platforms such as Neoverse, and cloud platforms such as Google Cloud.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Get started with Helm on Google Axion C4A (Arm-based),
+      Create a Google Axion C4A virtual machine on Google Cloud, Install Helm, Validate Helm workflows
+      on a Google Axion C4A virtual machine, and Prepare a GKE cluster for Helm deployments.
+# END generated_summary_faq
+
 author: Pareena Verma
 
 ##### Tags

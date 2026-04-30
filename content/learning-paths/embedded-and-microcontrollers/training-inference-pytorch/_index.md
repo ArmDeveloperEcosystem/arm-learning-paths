@@ -21,6 +21,51 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:16Z'
+  generator: template
+  source_hash: 20c500fd5174c9901058676d4619981ee1c8a8cf8e331affea8c0292112651c9
+  summary: >-
+    Learn how to train a CNN image classification model using PyTorch, convert it to ExecuTorch
+    format, and run it as an interactive mini-game on Arm-based edge devices. It is designed for
+    machine learning developers who want to deploy TinyML models on Arm-based edge devices using
+    PyTorch and ExecuTorch. By the end, you will be able to train a small Convolutional Neural
+    Network (CNN) for image classification using PyTorch, use synthetic data generation for training
+    a model when real data is limited, and convert and optimize a PyTorch model to an ExecuTorch
+    program (`.pte`) for Arm-based devices. It focuses on tools and technologies such as tinyML,
+    Computer Vision, Edge AI, CNN, and PyTorch, Linux environments, and Arm platforms including
+    Cortex-M and Ethos-U. The main steps cover Set up your environment, Train and Test the rock-paper-scissors
+    Model, and Run the model on Corstone-320 FVP.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will train a small Convolutional Neural Network (CNN) for image classification using
+      PyTorch, use synthetic data generation for training a model when real data is limited, and
+      convert and optimize a PyTorch model to an ExecuTorch program (`.pte`) for Arm-based devices.
+      Learn how to train a CNN image classification model using PyTorch, convert it to ExecuTorch
+      format, and run it as an interactive mini-game on Arm-based edge devices.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is an introductory topic for machine learning developers who want to deploy TinyML
+      models on Arm-based edge devices using PyTorch and ExecuTorch.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: Basic understanding of machine learning
+      concepts; Familiarity with Python and the PyTorch library; Completion of the Learning Path
+      [Introduction to TinyML on Arm using PyTorch and ExecuTorch](/learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm/);
+      An x86 Linux host machine or VM running Ubuntu 22.04 or later.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including tinyML, Computer Vision, Edge AI, CNN, and PyTorch,
+      Linux environments, and Arm platforms such as Cortex-M and Ethos-U.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Set up your environment, Train and Test the rock-paper-scissors
+      Model, and Run the model on Corstone-320 FVP.
+# END generated_summary_faq
+
 author: Dominica Abena O. Amanfo
 
 ### Tags
@@ -56,3 +101,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -18,6 +18,48 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:15Z'
+  generator: template
+  source_hash: 26450ae17f7ed4242c52456c2780ffce5fad36b56dfc4a8482e8f236f855e134
+  summary: >-
+    Learn how to migrate x86-64 SIMD code to Arm64 by mapping Intel SSE/AVX to Arm Neon, SVE,
+    and SME, with code examples and migration strategies using autovectorization or intrinsics.
+    It is designed for developers migrating vectorized (SIMD) code from x86-64 to Arm64. By the
+    end, you will be able to identify how Arm vector extensions including Neon, Scalable Vector
+    Extension (SVE), and Scalable Matrix Extension (SME) map to vector extensions from other architectures
+    and plan a migration strategy using autovectorization, intrinsics, or library substitution.
+    It focuses on tools and technologies such as GCC and Clang, Linux environments, and Arm platforms
+    including Neoverse. The main steps cover Migrate SIMD code to the Arm architecture and Explore
+    vector extension code examples.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will identify how Arm vector extensions including Neon, Scalable Vector Extension (SVE),
+      and Scalable Matrix Extension (SME) map to vector extensions from other architectures and
+      plan a migration strategy using autovectorization, intrinsics, or library substitution.
+      Learn how to migrate x86-64 SIMD code to Arm64 by mapping Intel SSE/AVX to Arm Neon, SVE,
+      and SME, with code examples and migration strategies using autovectorization or intrinsics.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is an advanced topic for developers migrating vectorized (SIMD) code from x86-64 to
+      Arm64.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: Familiarity with vector extensions,
+      SIMD programming, and compiler intrinsics; Access to Linux systems with Neon and SVE support.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including GCC and Clang, Linux environments, and Arm platforms
+      such as Neoverse.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Migrate SIMD code to the Arm architecture and Explore
+      vector extension code examples.
+# END generated_summary_faq
+
 author:
     - Jason Andrews
 
@@ -83,6 +125,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-
-   
 

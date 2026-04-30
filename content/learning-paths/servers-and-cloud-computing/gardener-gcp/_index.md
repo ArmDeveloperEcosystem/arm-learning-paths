@@ -20,6 +20,56 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:18Z'
+  generator: template
+  source_hash: 85d3d64e0eb0c3cfa0eee29cf1e4199049a6dcbf69634e578dad2b5443ca2b7f
+  summary: >-
+    Learn how to install and configure Gardener Kubernetes management platform on Google Cloud
+    Axion C4A SUSE Arm64 instances and deploy workload clusters. It is designed for software developers
+    deploying and optimizing Gardener workloads on Linux Arm64 environments, specifically using
+    Google Cloud C4A virtual machines powered by Axion processors. By the end, you will be able
+    to provision an Arm-based SUSE Linux Enterprise Server (SLES) virtual machine on Google Cloud
+    (C4A with Axion processors), install and configure Gardener on a SUSE Arm64 (C4A) instance,
+    and deploy Garden, Seed, and Shoot clusters locally using Kubernetes in Docker (KinD). It
+    focuses on tools and technologies such as Gardener, Kubernetes, Docker, KinD, and Helm, Linux
+    environments, Arm platforms including Neoverse, and cloud platforms such as Google Cloud.
+    The main steps cover Get started with Gardener on Google Axion C4A (Arm Neoverse-V2), Create
+    a Google Axion C4A Arm virtual machine for Gardener, Install Gardener on your Arm-based SUSE
+    VM, Verify Gardener cluster health and functionality, and Benchmark Gardener cluster security
+    with kube-bench.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will provision an Arm-based SUSE Linux Enterprise Server (SLES) virtual machine on Google
+      Cloud (C4A with Axion processors), install and configure Gardener on a SUSE Arm64 (C4A)
+      instance, and deploy Garden, Seed, and Shoot clusters locally using Kubernetes in Docker
+      (KinD). Learn how to install and configure Gardener Kubernetes management platform on Google
+      Cloud Axion C4A SUSE Arm64 instances and deploy workload clusters.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is an introductory topic for software developers deploying and optimizing Gardener
+      workloads on Linux Arm64 environments, specifically using Google Cloud C4A virtual machines
+      powered by Axion processors.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: A [Google Cloud Platform (GCP)](https://cloud.google.com/free)
+      account with billing enabled; Basic familiarity with [Kubernetes](https://kubernetes.io/);
+      Familiarity with container concepts ([Docker](https://www.docker.com/)).
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including Gardener, Kubernetes, Docker, KinD, and Helm, Linux
+      environments, Arm platforms such as Neoverse, and cloud platforms such as Google Cloud.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Get started with Gardener on Google Axion C4A (Arm
+      Neoverse-V2), Create a Google Axion C4A Arm virtual machine for Gardener, Install Gardener
+      on your Arm-based SUSE VM, Verify Gardener cluster health and functionality, and Benchmark
+      Gardener cluster security with kube-bench.
+# END generated_summary_faq
+
 author: Pareena Verma
 
 ##### Tags
@@ -70,3 +120,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

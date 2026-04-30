@@ -16,6 +16,46 @@ prerequisites:
 
 generate_summary_faq: true
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v1
+  generated_at: '2026-04-30T18:58:19Z'
+  generator: template
+  source_hash: db5987ec7987375d9b51de843b0e1faf0e61731b14c5a563d19aaad26f50f6bb
+  summary: >-
+    Build and Run vLLM on Arm Servers walks you through an end-to-end Arm software workflow. It
+    is designed for software developers and AI engineers interested in learning how to use the
+    vLLM library on Arm servers. By the end, you will be able to build vLLM from source on an
+    Arm server, download a Qwen LLM from Hugging Face, and run local batch inference using vLLM.
+    It focuses on tools and technologies such as vLLM, LLM, Generative AI, Python, and Hugging
+    Face, Linux environments, Arm platforms including Neoverse, and cloud platforms such as AWS,
+    Microsoft Azure, Google Cloud, and Oracle. The main steps cover Build a vLLM from Source Code,
+    Run batch inference using vLLM, and Run an OpenAI-compatible server.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will build vLLM from source on an Arm server, download a Qwen LLM from Hugging Face,
+      and run local batch inference using vLLM.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This is an introductory topic for software developers and AI engineers interested in learning
+      how to use the vLLM library on Arm servers.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/)
+      from a cloud service provider, or a local Arm Linux computer with at least 8 CPUs and 16
+      GB RAM.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including vLLM, LLM, Generative AI, Python, and Hugging Face,
+      Linux environments, Arm platforms such as Neoverse, and cloud platforms such as AWS, Microsoft
+      Azure, Google Cloud, and Oracle.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Build a vLLM from Source Code, Run batch inference
+      using vLLM, and Run an OpenAI-compatible server.
+# END generated_summary_faq
+
 author: Jason Andrews
 
 ### Tags
@@ -59,3 +99,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+
