@@ -51,10 +51,10 @@ In the subscriptions area of the MQTT test client window, you should see results
   "binary": "/greengrass/v2/work/danson-com.arm.demo.PacBtiDemo/build/armv9-protected/vuln_demo",
   "build_flavor": "armv9-protected",
   "device": "thor",
-  "executed_at": "2026-04-13T14:37:02.512938+00:00",
+  "executed_at": "2026-04-30T21:33:18.796870+00:00",
   "exploit_run": {
-    "returncode": 1,
-    "stderr": "Traceback (most recent call last):\n  File \"/greengrass/v2/packages/artifacts-unarchived/danson-com.arm.demo.PacBtiDemo/1.0.4/arm-pac-bti-greengrass-demo-mqtt-trigger/arm-pac-bti-greengrass-demo/tools/exploit.py\", line 74, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/greengrass/v2/packages/artifacts-unarchived/danson-com.arm.demo.PacBtiDemo/1.0.4/arm-pac-bti-greengrass-demo-mqtt-trigger/arm-pac-bti-greengrass-demo/tools/exploit.py\", line 66, in main\n    result = run_exploit(args.binary, args.marker)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/greengrass/v2/packages/artifacts-unarchived/danson-com.arm.demo.PacBtiDemo/1.0.4/arm-pac-bti-greengrass-demo-mqtt-trigger/arm-pac-bti-greengrass-demo/tools/exploit.py\", line 43, in run_exploit\n    payload = build_payload(target_addr, padding)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/greengrass/v2/packages/artifacts-unarchived/danson-com.arm.demo.PacBtiDemo/1.0.4/arm-pac-bti-greengrass-demo-mqtt-trigger/arm-pac-bti-greengrass-demo/tools/exploit.py\", line 37, in build_payload\n    return (b\"A\" * padding) + raw\n            ~~~~~^~~~~~~~~\nOverflowError: cannot fit 'int' into an index-sized integer\n",
+    "returncode": 252,
+    "stderr": "",
     "stdout": ""
   },
   "exploit_succeeded": false,
@@ -108,16 +108,16 @@ Your output should be similar to the following:
   "binary": "/greengrass/v2/work/danson-com.arm.demo.PacBtiDemo/build/armv8-unprotected/vuln_demo",
   "build_flavor": "armv8-unprotected",
   "device": "rpi5-desktop-16",
-  "executed_at": "2026-04-13T14:44:07.485179+00:00",
+  "executed_at": "2026-04-30T21:33:53.526756+00:00",
   "exploit_run": {
-    "returncode": 1,
-    "stderr": "Traceback (most recent call last):\n  File \"/greengrass/v2/packages/artifacts-unarchived/danson-com.arm.demo.PacBtiDemo/1.0.4/arm-pac-bti-greengrass-demo-mqtt-trigger/arm-pac-bti-greengrass-demo/tools/exploit.py\", line 74, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/greengrass/v2/packages/artifacts-unarchived/danson-com.arm.demo.PacBtiDemo/1.0.4/arm-pac-bti-greengrass-demo-mqtt-trigger/arm-pac-bti-greengrass-demo/tools/exploit.py\", line 66, in main\n    result = run_exploit(args.binary, args.marker)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/greengrass/v2/packages/artifacts-unarchived/danson-com.arm.demo.PacBtiDemo/1.0.4/arm-pac-bti-greengrass-demo-mqtt-trigger/arm-pac-bti-greengrass-demo/tools/exploit.py\", line 43, in run_exploit\n    payload = build_payload(target_addr, padding)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/greengrass/v2/packages/artifacts-unarchived/danson-com.arm.demo.PacBtiDemo/1.0.4/arm-pac-bti-greengrass-demo-mqtt-trigger/arm-pac-bti-greengrass-demo/tools/exploit.py\", line 37, in build_payload\n    return (b\"A\" * padding) + raw\n            ~~~~~^~~~~~~~~\nOverflowError: cannot fit 'int' into an index-sized integer\n",
+    "returncode": 0,
+    "stderr": "",
     "stdout": ""
   },
-  "exploit_succeeded": false,
-  "interpretation": "Exploit did not reach malicious_success(); on PAC/BTI builds a crash or early termination is expected.",
+  "exploit_succeeded": true,
+  "interpretation": "Exploit reached malicious_success()",
   "machine": "aarch64",
-  "marker_found": false,
+  "marker_found": true,
   "normal_run": {
     "returncode": 0,
     "stderr": "",
@@ -137,9 +137,8 @@ Your output should be similar to the following:
     "source_topic": "arm/demo/Dougs_RPi5_Hailo_16/security/pacbti/attack/trigger"
   }
 }
-```
 
-This result indicates the RPi5 device (Armv8) does not report PAC and BTI capabilities.
+This result indicates the RPi5 device (Armv8) does not report PAC and BTI capabilities and thus is vulnerable to some attacks that PAC/BTI inhibits.
 
 ### What we learned
 
