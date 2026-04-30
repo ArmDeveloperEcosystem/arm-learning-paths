@@ -1,5 +1,5 @@
 ---
-title: Set up Performix and the target machine
+title: Set up Performix and the target machine.
 weight: 2
 
 layout: learningpathall
