@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 ## Install system dependencies
 
-SSH into your x64 on-premises VM and run the following commands to update the system and install build tools, Python 3.10, and a Python virtual environment. The migration scripts require Python 3.10:
+SSH into your x64 on-premises VM. Then, run the following commands to update the system and install prequisites for the migration scripts such as build tools, Python 3.10, and a Python virtual environment:
 
 ```bash
 sudo apt update
