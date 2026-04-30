@@ -1,0 +1,137 @@
+name: Generate Learning Path Summary and FAQ
+
+on:
+  workflow_dispatch:
+    inputs:
+      paths:
+        description: "Optional comma or newline separated Learning Path directories or _index.md files. Leave blank to process all eligible paths."
+        required: false
+        type: string
+      limit:
+        description: "Optional limit when paths is empty. Use 0 to process all eligible Learning Paths."
+        required: false
+        default: "0"
+        type: string
+      require_flag:
+        description: "Only process Learning Paths where generate_summary_faq is true."
+        required: true
+        default: true
+        type: boolean
+      dry_run:
+        description: "Generate the report without changing any _index.md files."
+        required: true
+        default: false
+        type: boolean
+      commit_changes:
+        description: "Commit changed _index.md files and the central report back to the selected branch."
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  generate_summary_faq:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out current repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python dependencies
+        run: python -m pip install pyyaml
+
+      - name: Generate summary and FAQ content
+        env:
+          INPUT_PATHS: ${{ inputs.paths }}
+          INPUT_LIMIT: ${{ inputs.limit }}
+          INPUT_REQUIRE_FLAG: ${{ inputs.require_flag }}
+          INPUT_DRY_RUN: ${{ inputs.dry_run }}
+          REPORT_FILE: reports/generated-summary-faq/latest-run.yml
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          GIT_REF_NAME: ${{ github.ref_name }}
+          GIT_SHA: ${{ github.sha }}
+          GITHUB_ACTOR_NAME: ${{ github.actor }}
+        run: |
+          CMD=(
+            python tools/generate_summary_faq.py
+            --path-filter "$INPUT_PATHS"
+            --limit "$INPUT_LIMIT"
+            --report-file "$REPORT_FILE"
+            --run-url "$RUN_URL"
+            --git-ref "$GIT_REF_NAME"
+            --git-sha "$GIT_SHA"
+            --actor "$GITHUB_ACTOR_NAME"
+          )
+
+          if [ "$INPUT_REQUIRE_FLAG" != "true" ]; then
+            CMD+=(--allow-unflagged)
+          fi
+
+          if [ "$INPUT_DRY_RUN" = "true" ]; then
+            CMD+=(--dry-run)
+          else
+            CMD+=(--write)
+          fi
+
+          "${CMD[@]}"
+
+      - name: Upload latest run report
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-summary-faq-report
+          path: reports/generated-summary-faq/latest-run.yml
+          retention-days: 14
+
+      - name: Configure git
+        if: ${{ !inputs.dry_run && inputs.commit_changes }}
+        run: |
+          git config user.name "GitHub Actions Summary FAQ Bot"
+          git config user.email "<>"
+
+      - name: Commit generated content
+        if: ${{ !inputs.dry_run && inputs.commit_changes }}
+        env:
+          TARGET_REF: ${{ github.ref_name }}
+        run: |
+          git add content/learning-paths reports/generated-summary-faq/latest-run.yml
+          git commit -m "Generate Learning Path summary and FAQ content" && git push origin HEAD:$TARGET_REF || echo "No changes to commit"
+
+      - name: Add workflow summary
+        if: always()
+        run: |
+          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import pathlib
+          import yaml
+
+          report_path = pathlib.Path("reports/generated-summary-faq/latest-run.yml")
+          print("Generated summary/FAQ report: `reports/generated-summary-faq/latest-run.yml`")
+          print("")
+
+          if not report_path.exists():
+              print("Report file was not created.")
+              raise SystemExit(0)
+
+          report = yaml.safe_load(report_path.read_text(encoding="utf-8")) or {}
+          latest = report.get("latest_run", {})
+          totals = latest.get("totals", {})
+          print("## Run totals")
+          print("")
+          print(f"- Processed: {totals.get('processed', 0)}")
+          print(f"- Added: {totals.get('added', 0)}")
+          print(f"- Updated: {totals.get('updated', 0)}")
+          print(f"- Unchanged: {totals.get('unchanged', 0)}")
+          print(f"- Errors: {totals.get('errors', 0)}")
+          print("")
+          print("## Paths")
+          print("")
+          for entry in latest.get("paths", []):
+              print(f"- {entry.get('status', 'unknown')}: {entry.get('path', '')}")
+          PY
