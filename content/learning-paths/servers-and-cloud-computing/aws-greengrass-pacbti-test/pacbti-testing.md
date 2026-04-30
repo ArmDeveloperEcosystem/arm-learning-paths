@@ -137,8 +137,11 @@ Your output should be similar to the following:
     "source_topic": "arm/demo/Dougs_RPi5_Hailo_16/security/pacbti/attack/trigger"
   }
 }
+```
 
-This result indicates the RPi5 device (Armv8) does not report PAC and BTI capabilities and thus is vulnerable to some attacks that PAC/BTI inhibits.
+### Conclusions
+
+This result indicates the RPi5 device (Armv8) does not report PAC and BTI capabilities and thus could potentially be vulnerable to some attacks that PAC/BTI inhibits.
 
 ### What we learned
 
