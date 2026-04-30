@@ -193,7 +193,7 @@ Codex CLI uses a TOML configuration file for MCP servers. Modify the file `~/.co
 
 To analyze a local codebase, use a `-v` argument to mount a volume to the Arm MCP server `/workspace` folder so it can access code you want to analyze with migrate-ease and other tools.
 
-Replace the path `/Users/yourname01/yourlocalcodebase` with the path to your local codebase.
+Replace the path `/path/to/your/workspace` with the path to your local codebase.
 
 ##### **Option 1: edit the Codex configuration file**
 
@@ -206,8 +206,13 @@ args = [
     "run",
     "--rm",
     "-i",
-    "-v", "/Users/yourname01/yourlocalcodebase:/workspace",
-    "--name", "arm-mcp",
+    "--pull=always",
+    "-v",
+    "/path/to/your/workspace:/workspace",
+    "-v",
+    "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+    "-v",
+    "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
     "armlimited/arm-mcp:latest"
 ]
 startup_timeout_sec = 60
@@ -222,8 +227,10 @@ The section must be named `mcp_servers` with an underscore. Using `mcp-servers` 
 You can also add the Arm MCP server from the Codex CLI, after starting `codex` run:
 
 ```bash
-codex mcp add arm-mcp -- sh -lc 'docker run --rm -i -v "$PWD:/workspace" --name arm-mcp armlimited/arm-mcp:latest'
+codex mcp add arm-mcp -- sh -lc 'docker run --rm -i --pull=always -v "$PWD:/workspace" -v "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro" -v "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro" armlimited/arm-mcp:latest'
 ```
+
+To enable Arm Performix features through the Arm MCP Server, replace `/path/to/your/ssh/private_key` and `/path/to/your/ssh/known_hosts` with the SSH private key and `known_hosts` file used for your target device.
 
 ### How do I verify the Arm MCP server is working?
 
