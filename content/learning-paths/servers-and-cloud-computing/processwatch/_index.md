@@ -13,6 +13,8 @@ prerequisites:
     - An Arm-based system (bare metal server, cloud instance, or developer board) running Linux with kernel version 5.8.0 or later.
     - Root access, or the ability to run the sudo command.
 
+generate_summary_faq: true
+
 author: Graham Woodward
 
 ### Tags

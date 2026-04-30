@@ -18,6 +18,8 @@ prerequisites:
     - Install [uv2csolution](https://arm-software.github.io/MDK-Toolbox/01_installation/) for the command line flow.
     - The &micro;Vision project must use Arm Compiler 6 as the default toolchain. Arm Compiler 5 is not supported.
 
+generate_summary_faq: true
+
 author: Christopher Seidl
 
 ### Tags

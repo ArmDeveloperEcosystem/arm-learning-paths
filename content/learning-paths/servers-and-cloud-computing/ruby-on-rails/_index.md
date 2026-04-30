@@ -16,6 +16,8 @@ prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
   - Basic familiarity with Ruby programming, the Rails framework, and the [PostgreSQL Relational Database](https://www.postgresql.org/)
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ### Tags

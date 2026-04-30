@@ -16,6 +16,8 @@ prerequisites:
 - An Arm64 Linux development machine 
 - An Android device that supports Arm SME2 architecture features - see this [list of devices with SME2 support](/learning-paths/cross-platform/multiplying-matrices-with-sme2/1-get-started/#devices)
 
+generate_summary_faq: true
+
 author: Jiaming Guo
 
 ### Tags

@@ -14,6 +14,8 @@ learning_objectives:
 prerequisites:
     - An Arm Neoverse N1 computer running Linux. A bare metal or cloud metal instance is best because they expose more counters. You can use a virtual machine (VM), but it may offer fewer counters and some commands might not succeed. These instructions have been tested on the `a1.metal` instance type.
 
+generate_summary_faq: true
+
 author: Jason Andrews
 
 ### Tags

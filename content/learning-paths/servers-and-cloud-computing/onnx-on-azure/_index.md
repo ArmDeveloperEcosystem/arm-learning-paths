@@ -15,6 +15,8 @@ prerequisites:
     - Basic understanding of Python and machine learning concepts
     - Familiarity with [ONNX Runtime](https://onnxruntime.ai/docs/) and Azure cloud services
 
+generate_summary_faq: true
+
 author: Pareena Verma    
 
 ### Tags

@@ -14,6 +14,8 @@ prerequisites:
     - Basic understanding of C++.
     - Basic understanding of compilers.
 
+generate_summary_faq: true
+
 author: Kieran Hejmadi
 
 ### Tags

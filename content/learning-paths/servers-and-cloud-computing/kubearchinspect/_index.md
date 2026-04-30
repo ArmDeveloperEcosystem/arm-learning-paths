@@ -16,6 +16,8 @@ learning_objectives:
 prerequisites:
     - A running Kubernetes cluster accessible with `kubectl`.
 
+generate_summary_faq: true
+
 author: Jason Andrews
 
 ### Tags

@@ -15,6 +15,8 @@ prerequisites:
     - Some understanding of the Arm architecture
     - Arm Development Studio, 2023.0 or later
 
+generate_summary_faq: true
+
 author: Ronan Synnott
 
 ### Tags

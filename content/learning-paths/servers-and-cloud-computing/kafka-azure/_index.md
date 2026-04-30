@@ -17,6 +17,8 @@ prerequisites:
     - Basic understanding of Linux command line
     - Familiarity with the [Apache Kafka architecture](https://kafka.apache.org/) and deployment practices on Arm64 platforms
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ### Tags

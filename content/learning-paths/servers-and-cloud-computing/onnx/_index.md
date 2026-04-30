@@ -16,6 +16,8 @@ prerequisites:
     - Knowledge of Large Language Model (LLM) fundamentals.
 
 
+generate_summary_faq: true
+
 author: Nobel Chowdary Mandepudi
 
 ### Tags

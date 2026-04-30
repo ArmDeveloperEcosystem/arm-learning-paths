@@ -18,6 +18,8 @@ learning_objectives:
 prerequisites:
     - A GitLab account (free tier includes Arm64 runner access)
 
+generate_summary_faq: true
+
 author: Mohamed Ismail
 
 ### Tags

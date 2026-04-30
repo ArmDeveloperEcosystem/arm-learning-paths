@@ -18,6 +18,8 @@ prerequisites:
   - Familiarity with SSH and remote server access
   - Basic understanding of cloud infrastructure and monitoring concepts
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ### Tags

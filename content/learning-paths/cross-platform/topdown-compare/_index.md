@@ -17,6 +17,8 @@ prerequisites:
     - Access to Arm Neoverse V2 and Intel x86 Linux systems to run the code example
     - Basic understanding of CPU pipeline concepts and performance bottlenecks
 
+generate_summary_faq: true
+
 author:
     - Jason Andrews
 

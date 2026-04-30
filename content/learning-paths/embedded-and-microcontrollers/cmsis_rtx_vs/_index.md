@@ -16,6 +16,8 @@ prerequisites:
     - Installation of [Arm Keil Studio for VS Code](/install-guides/keilstudio_vs)
     - Some familiarity with CMSIS is assumed
 
+generate_summary_faq: true
+
 author: Ronan Synnott
 
 ### Tags

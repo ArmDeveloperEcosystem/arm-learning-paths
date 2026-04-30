@@ -15,6 +15,8 @@ prerequisites:
     - Access to an x86 and an Arm cloud instance (virtual machine).
     - Proficiency in C++ programming.
 
+generate_summary_faq: true
+
 author: Kieran Hejmadi
 
 ### Tags

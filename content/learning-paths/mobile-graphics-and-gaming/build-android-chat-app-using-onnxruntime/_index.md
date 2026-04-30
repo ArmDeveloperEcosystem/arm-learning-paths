@@ -15,6 +15,8 @@ prerequisites:
     - A Windows x86_64 development machine with at least 16GB of RAM.
     - An Android phone with at least 8GB of RAM. This learning path was tested on Samsung Galaxy S24.
 
+generate_summary_faq: true
+
 author: Koki Mitsunami
 
 ### Tags

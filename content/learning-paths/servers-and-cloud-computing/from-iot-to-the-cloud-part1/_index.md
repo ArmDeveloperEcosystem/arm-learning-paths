@@ -21,6 +21,8 @@ prerequisites:
     - 'C# Extension for Visual Studio Code: https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp'
     - '[Install Docker on Arm64](/install-guides/docker/docker-desktop/)'
 
+generate_summary_faq: true
+
 author: Dawid Borycki
 
 ### Tags

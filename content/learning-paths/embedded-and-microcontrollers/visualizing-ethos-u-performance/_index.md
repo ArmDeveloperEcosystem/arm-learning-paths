@@ -18,6 +18,8 @@ prerequisites:
     - A Linux or macOS computer with Python 3 installed
 
 
+generate_summary_faq: true
+
 author: Waheed Brown
 
 ### Tags

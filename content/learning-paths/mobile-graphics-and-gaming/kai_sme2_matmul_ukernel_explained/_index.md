@@ -16,6 +16,8 @@ prerequisites:
     - Basic understanding of quantization concepts for neural networks
     - (Optional) Access to an Arm CPU with SME2 support (Linux or Android) for hands-on verification steps
 
+generate_summary_faq: true
+
 author: Zenon Zhilong Xiu
 
 ### Tags

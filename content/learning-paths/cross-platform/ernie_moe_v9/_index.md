@@ -15,6 +15,8 @@ learning_objectives:
 prerequisites:
     - An Armv9 device with at least 32 GB of available disk space, for example, Radxa Orion O6
 
+generate_summary_faq: true
+
 author: Odin Shen
 
 ### Tags

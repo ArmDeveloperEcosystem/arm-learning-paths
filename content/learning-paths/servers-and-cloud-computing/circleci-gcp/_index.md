@@ -23,6 +23,8 @@ prerequisites:
     [runners](https://circleci.com/docs/guides/execution-runner/runner-overview/)
 
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ##### Tags

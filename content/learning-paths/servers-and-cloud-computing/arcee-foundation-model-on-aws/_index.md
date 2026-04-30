@@ -17,6 +17,8 @@ prerequisites:
     - An [AWS account](https://aws.amazon.com/) with permission to launch Graviton4 (`c8g.4xlarge` or larger) instances
     - Basic familiarity with Linux and SSH
 
+generate_summary_faq: true
+
 author: Julien Simon
 
 # Tags

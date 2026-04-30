@@ -16,6 +16,8 @@ prerequisites:
     - An Azure account
     - A computer with Terraform installed
 
+generate_summary_faq: true
+
 author: Jason Andrews
 
 ### Tags

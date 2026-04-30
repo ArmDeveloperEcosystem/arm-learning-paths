@@ -19,6 +19,8 @@ prerequisites:
     - Ubuntu host or access to AWS
     - Optional MPS3 FPGA prototyping board
 
+generate_summary_faq: true
+
 author: Ronan Synnott
 
 ### Tags

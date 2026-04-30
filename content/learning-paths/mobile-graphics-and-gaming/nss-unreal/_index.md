@@ -20,6 +20,8 @@ prerequisites:
     - Visual Studio (with Desktop Development with C++ and .NET desktop build tools)
 
 
+generate_summary_faq: true
+
 author: Annie Tallund
 
 ### Tags

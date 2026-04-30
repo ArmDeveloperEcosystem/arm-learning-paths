@@ -17,6 +17,8 @@ prerequisites:
     - Familiarity with Android development concepts.
     - An Android smartphone.
 
+generate_summary_faq: true
+
 author: Dawid Borycki
 
 ### Tags

@@ -16,6 +16,8 @@ learning_objectives:
 prerequisites:
     - Some familiarity with embedded programming is assumed
 
+generate_summary_faq: true
+
 author: Ronan Synnott
 
 ### Tags

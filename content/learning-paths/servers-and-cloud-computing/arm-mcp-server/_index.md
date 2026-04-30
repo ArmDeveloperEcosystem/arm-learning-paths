@@ -17,6 +17,9 @@ prerequisites:
     - An AI-powered IDE such as VS Code, Copilot in VS Code, Kiro (IDE or CLI) or Codex
     - Basic familiarity with Docker and C/C++ development
     - Access to an Arm-based cloud instance or local Arm computer running Linux or macOS
+
+generate_summary_faq: true
+
 author: Joe Stech
 
 ### Tags

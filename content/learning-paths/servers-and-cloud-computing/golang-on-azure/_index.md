@@ -16,6 +16,8 @@ prerequisites:
     - Basic familiarity with the [Go programming language](https://go.dev/) and cloud deployment practices
     - Understanding of Linux command line and virtual machine management
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ### Tags

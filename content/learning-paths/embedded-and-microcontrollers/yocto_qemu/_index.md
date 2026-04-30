@@ -15,6 +15,8 @@ prerequisites:
     - Some familiarity with embedded Linux.
     - A linux machine running Ubuntu 22.04 with at least 60 GB of disk space.
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ### Tags

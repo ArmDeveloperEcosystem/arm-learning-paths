@@ -17,6 +17,8 @@ prerequisites:
     - A Windows, macOS, or Linux computer with Docker installed, any architecture can be used
     - An Arm Linux server with Docker installed 
 
+generate_summary_faq: true
+
 author: Jason Andrews
 
 ### Tags

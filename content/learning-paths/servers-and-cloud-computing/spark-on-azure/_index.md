@@ -16,6 +16,8 @@ prerequisites:
     - A machine with [Docker](/install-guides/docker/) installed
     - Familiarity with distributed computing concepts and the [Apache Spark architecture](https://spark.apache.org/docs/latest/)
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ### Tags

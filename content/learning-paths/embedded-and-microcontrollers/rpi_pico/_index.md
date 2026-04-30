@@ -17,6 +17,8 @@ prerequisites:
     - Raspberry Pi Pico board.
     - Raspberry Pi 3, 4, 400, or 5 as a development computer.
 
+generate_summary_faq: true
+
 author: Jason Andrews
 
 ### Tags

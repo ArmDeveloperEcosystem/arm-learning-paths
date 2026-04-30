@@ -18,6 +18,8 @@ prerequisites:
     - An NVIDIA DGX Spark system with at least 15 GB of available disk space
     - A USB microphone for audio input
 
+generate_summary_faq: true
+
 author: Odin Shen
 
 ### Tags

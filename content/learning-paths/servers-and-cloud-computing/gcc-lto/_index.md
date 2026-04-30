@@ -16,6 +16,8 @@ prerequisites:
     - An Arm Linux system (cloud instance, on-premises hardware, or a virtual machine)
     - A recent version of the [GCC toolchain](/install-guides/gcc/)
 
+generate_summary_faq: true
+
 author: Victor Do Nascimento
 
 ### Tags

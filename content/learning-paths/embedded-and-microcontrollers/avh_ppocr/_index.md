@@ -17,6 +17,8 @@ prerequisites:
     - Some familiarity with AI/ML software development 
     - An Amazon Web Services(AWS) [account](https://aws.amazon.com/) to subscribe [Arm Virtual Hardware](https://aws.amazon.com/marketplace/pp/prodview-urbpq7yo5va7g) Amazon Machine Image(AMI)
 
+generate_summary_faq: true
+
 author: Liliya Wu
 
 ### Tags

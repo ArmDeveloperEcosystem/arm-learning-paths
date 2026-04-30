@@ -19,6 +19,8 @@ prerequisites:
   - An Arm64 device such as a Raspberry Pi or Android smartphone
   - Android Studio (required only for the final deployment section)
 
+generate_summary_faq: true
+
 author: Dawid Borycki
 
 ### Tags

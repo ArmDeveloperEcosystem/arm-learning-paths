@@ -20,6 +20,8 @@ prerequisites:
     - A x86_64 or Apple M1 development machine with Android Studio installed.
     - A 64-bit Arm powered smartphone running Android.
 
+generate_summary_faq: true
+
 author: Dawid Borycki
 
 ### Tags

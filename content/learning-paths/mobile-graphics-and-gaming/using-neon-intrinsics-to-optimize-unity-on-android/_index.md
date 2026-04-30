@@ -18,6 +18,8 @@ prerequisites:
     - Desktop computer capable of running Unity
     - Unity version compatible with Unity Burst compiler 1.5 or later
 
+generate_summary_faq: true
+
 author: Ben Clark, Joshua Marshall-Law
 
 ### Tags

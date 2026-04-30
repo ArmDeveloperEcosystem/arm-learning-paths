@@ -18,6 +18,8 @@ prerequisites:
     - 'Node.js (details provided in this learning path)'
     - 'Azure CLI (details provided in this learning path)'
 
+generate_summary_faq: true
+
 author: Dawid Borycki
 
 ### Tags

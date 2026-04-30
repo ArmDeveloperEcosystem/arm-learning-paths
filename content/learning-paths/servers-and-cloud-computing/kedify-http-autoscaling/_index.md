@@ -17,6 +17,8 @@ prerequisites:
   - Kubectl and Helm installed 
   - Access to the Kedify Service dashboard to obtain your Organization ID and API key (sign up at [Kedify dashboard](https://dashboard.kedify.io/))
 
+generate_summary_faq: true
+
 author: Zbynek Roubalik
 
 ### Tags

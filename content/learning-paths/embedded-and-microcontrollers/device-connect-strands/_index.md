@@ -17,6 +17,8 @@ prerequisites:
     - Basic familiarity with command-line tools
     - (Optional) A Raspberry Pi for testing a full device-to-device (D2D) setup
 
+generate_summary_faq: true
+
 author: 
     - Annie Tallund
     - Kavya Sri Chennoju

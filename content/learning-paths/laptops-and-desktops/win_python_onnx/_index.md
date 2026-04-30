@@ -19,6 +19,8 @@ prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/). 
     - Any code editor like [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user).    
 
+generate_summary_faq: true
+
 author: Dawid Borycki
 
 ### Tags

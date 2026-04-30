@@ -17,6 +17,8 @@ prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled  
   - Basic familiarity with [Rust](https://www.rust-lang.org/)
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ##### Tags

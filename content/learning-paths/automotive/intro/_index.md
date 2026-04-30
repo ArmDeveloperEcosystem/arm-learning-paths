@@ -16,6 +16,8 @@ draft: true
 cascade:
     draft: true
 
+generate_summary_faq: true
+
 author: Jason Andrews
 
 ### Tags

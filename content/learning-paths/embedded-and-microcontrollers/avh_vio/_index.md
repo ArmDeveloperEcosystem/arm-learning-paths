@@ -14,6 +14,8 @@ prerequisites:
     - A valid [AWS](https://aws.amazon.com/) account
     - Some familiarity with Python
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ### Tags

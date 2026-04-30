@@ -17,6 +17,8 @@ prerequisites:
     - Hugging Face account and access token
     - NVIDIA DGX Spark workstation
 
+generate_summary_faq: true
+
 author: Michael Hall
 
 ### Tags

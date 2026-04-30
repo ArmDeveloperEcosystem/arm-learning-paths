@@ -22,6 +22,8 @@ prerequisites:
   - Familiarity with SSH and remote server access
   - Basic understanding of distributed systems and Apache Spark
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ### Tags

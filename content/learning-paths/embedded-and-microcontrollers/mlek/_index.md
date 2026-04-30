@@ -15,6 +15,8 @@ prerequisites:
     - Some familiarity with embedded programming
     - A Linux host machine running Ubuntu
 
+generate_summary_faq: true
+
 author: Ronan Synnott
 
 ### RS: Learning Path hidden until AWS instance updated

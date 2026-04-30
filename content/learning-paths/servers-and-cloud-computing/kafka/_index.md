@@ -17,6 +17,8 @@ learning_objectives:
 prerequisites:
     - Seven physical Arm machines or cloud instances with either Ubuntu or Debian installed. 
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ### Tags

@@ -11,6 +11,8 @@ learning_objectives:
 prerequisites:
     - Bare-metal or cloud [installation of PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql/)
 
+generate_summary_faq: true
+
 author: Julio Suarez
 
 test_images:

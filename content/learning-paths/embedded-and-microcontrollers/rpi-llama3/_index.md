@@ -20,6 +20,8 @@ prerequisites:
     - An Arm Linux machine or an [Arm cloud instance](/learning-paths/servers-and-cloud-computing/csp/).
     - A Raspberry Pi 5.
 
+generate_summary_faq: true
+
 author: Annie Tallund
 
 ### Tags

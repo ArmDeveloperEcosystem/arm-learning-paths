@@ -17,6 +17,8 @@ prerequisites:
     - Understanding of build systems and computer architecture concepts
     - Familiarity with Linux command-line tools
 
+generate_summary_faq: true
+
 author: Kieran Hejmadi
 
 ### Tags

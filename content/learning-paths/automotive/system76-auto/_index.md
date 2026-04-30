@@ -14,6 +14,8 @@ learning_objectives:
 prerequisites:
     - A System76 Thelio Astra desktop computer running Ubuntu 24.04. 
 
+generate_summary_faq: true
+
 author: Jason Andrews
 
 ### Tags

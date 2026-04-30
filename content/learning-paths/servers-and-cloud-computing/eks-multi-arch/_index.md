@@ -16,6 +16,8 @@ prerequisites:
     - A computer with [Amazon eksctl CLI](/install-guides/eksctl) and [kubectl](/install-guides/kubectl/)installed.
     - Docker installed on local computer [Docker](/install-guides/docker)
 
+generate_summary_faq: true
+
 author: Pranay Bakre
 
 ### Tags

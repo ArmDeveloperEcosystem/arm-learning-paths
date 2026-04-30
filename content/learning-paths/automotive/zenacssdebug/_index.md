@@ -18,6 +18,8 @@ prerequisites:
   - Arm Development Studio 2024.1 or later with a valid license - for support see the [Install Guide for Arm DS](/install-guides/armds) 
   - Basic understanding of the Arm Zena CSS software stack, Armv8-A/Armv9-A cores, and Linux
 
+generate_summary_faq: true
+
 author: Ronan Synnott
 
 ### Tags

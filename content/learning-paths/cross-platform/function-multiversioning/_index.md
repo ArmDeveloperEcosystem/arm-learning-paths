@@ -21,6 +21,8 @@ prerequisites:
     - Familiarity with Arm assembly.
     - A LLVM 20 compiler with runtime library support or GCC 16.
 
+generate_summary_faq: true
+
 author: Alexandros Lamprineas
 
 ### Tags

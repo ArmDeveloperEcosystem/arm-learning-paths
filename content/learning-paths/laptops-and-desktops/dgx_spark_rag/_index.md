@@ -16,6 +16,8 @@ learning_objectives:
 prerequisites:
     - An NVIDIA DGX Spark system with at least 15 GB of available disk space
 
+generate_summary_faq: true
+
 author: Odin Shen
 
 ### Tags

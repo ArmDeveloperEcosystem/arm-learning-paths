@@ -18,6 +18,8 @@ prerequisites:
   - Familiarity with SSH and remote server access
   - Basic understanding of cloud storage concepts
 
+generate_summary_faq: true
+
 author: Jason Andrews
 
 ### Tags

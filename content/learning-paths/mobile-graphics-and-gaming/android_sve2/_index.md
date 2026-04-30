@@ -16,6 +16,8 @@ prerequisites:
     - Knowledge of [Neon](https://developer.arm.com/documentation/102474/latest)
     - Knowledge of [Scalable Vector Extension (SVE)](https://developer.arm.com/documentation/101726/4-0)
 
+generate_summary_faq: true
+
 author: Dawid Borycki
 
 ### Tags

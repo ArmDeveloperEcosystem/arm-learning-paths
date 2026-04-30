@@ -16,6 +16,8 @@ prerequisites:
     - A valid [GitHub account](https://github.com/) to complete this Learning Path.
     
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ### Tags

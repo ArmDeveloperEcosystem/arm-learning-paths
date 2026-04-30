@@ -18,6 +18,8 @@ prerequisites:
     - Visual Studio with C++ game development tools
     - A C++ Unreal project (such as the Third Person template)
 
+generate_summary_faq: true
+
 author: 
 - Annie Tallund
 - Richard Burton

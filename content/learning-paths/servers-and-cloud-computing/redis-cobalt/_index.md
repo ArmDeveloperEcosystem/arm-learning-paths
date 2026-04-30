@@ -18,6 +18,8 @@ prerequisites:
   - Familiarity with SSH and remote server access
   - Basic understanding of databases, caching, and messaging systems
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ### Tags

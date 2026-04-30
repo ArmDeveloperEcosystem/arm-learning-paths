@@ -25,6 +25,8 @@ prerequisites:
     - Arm Performance Studio.
     - Python 3.10 or later.
 
+generate_summary_faq: true
+
 author:
     - Varun Chari
     - Albin Bernhardsson

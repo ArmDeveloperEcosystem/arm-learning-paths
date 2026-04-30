@@ -13,6 +13,8 @@ prerequisites:
     - Access to both an Arm and an x86-based cloud instance.
     - Intermediate understanding of C++, compilers, and Linux. 
 
+generate_summary_faq: true
+
 author: Kieran Hejmadi
 
 ### Tags

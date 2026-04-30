@@ -19,6 +19,8 @@ prerequisites:
   - Basic knowledge of communication protocols (MQTT, HTTP, and others)
   - Familiarity with edge-cloud architectures and data-flow orchestration
 
+generate_summary_faq: true
+
 author: Tinkerblox
 
 ### Tags

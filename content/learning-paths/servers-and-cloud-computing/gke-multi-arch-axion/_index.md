@@ -17,6 +17,8 @@ prerequisites:
     - A local Linux or macOS computer with Docker, Kubernetes CLI (kubectl), Google Cloud CLI (gcloud), and Git installed, or access to Google Cloud Shell
     - Basic familiarity with Docker, Kubernetes, and gcloud
 
+generate_summary_faq: true
+
 author: 
    - Rani Chowdary Mandepudi
 

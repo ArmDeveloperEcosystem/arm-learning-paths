@@ -1,6 +1,8 @@
 ---
 title: Analyze the performance of MongoDB on Arm servers
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 minutes_to_complete: 30

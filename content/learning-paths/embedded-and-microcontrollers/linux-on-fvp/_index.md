@@ -15,6 +15,8 @@ prerequisites:
     - Basic understanding of Assembly and C programming.
    
 
+generate_summary_faq: true
+
 author: Qixiang Xu
 
 ### Tags

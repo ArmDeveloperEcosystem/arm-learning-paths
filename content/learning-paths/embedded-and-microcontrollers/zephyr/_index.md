@@ -16,6 +16,8 @@ prerequisites:
 - Some familiarity with embedded C programming
 - A Linux machine running Ubuntu, or an AWS account to use [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware)
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 test_images:

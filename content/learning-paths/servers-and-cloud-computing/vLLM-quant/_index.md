@@ -22,6 +22,8 @@ prerequisites:
     - Familiarity with Python and basic understanding of transformer models and quantization techniques.
     - An active Hugging Face account with access to the target model.
 
+generate_summary_faq: true
+
 author: 
    - Rani Chowdary Mandepudi
    - Phalani Paladugu

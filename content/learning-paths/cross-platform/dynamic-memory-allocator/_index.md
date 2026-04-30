@@ -16,6 +16,8 @@ prerequisites:
 - Familiarity with C programming, with a good understanding of pointers.
 - A Linux machine to run the example code.
 
+generate_summary_faq: true
+
 author: David Spickett
 
 test_images:

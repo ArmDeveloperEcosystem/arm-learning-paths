@@ -16,6 +16,8 @@ prerequisites:
     - Any code editor. [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user) is suitable.    
     - Completion of the [Use AWS Lambda for IoT applications](/learning-paths/laptops-and-desktops/win_aws_iot_lambda/) Learning Path.
 
+generate_summary_faq: true
+
 author: Dawid Borycki
 
 ### Tags

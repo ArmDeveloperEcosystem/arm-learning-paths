@@ -18,6 +18,8 @@ prerequisites:
     - Download and install Arm Performance Studio from [Product Download Hub](https://developer.arm.com/downloads/view/MOBST-PRO0). It is supported on Windows, Linux, and macOS host platforms.
     - Download and install [Android SDK Platform tools](https://developer.android.com/studio/releases/platform-tools.html). Required for [Android Debug bridge (adb)](https://developer.android.com/studio/command-line/adb).
 
+generate_summary_faq: true
+
 author: Julie Gaskin
 
 ### Tags

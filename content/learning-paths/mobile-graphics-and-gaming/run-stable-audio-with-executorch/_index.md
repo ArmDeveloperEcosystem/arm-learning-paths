@@ -16,6 +16,8 @@ prerequisites:
     - A [Hugging Face](https://huggingface.co/) account
     - An Android phone in [developer mode](https://developer.android.com/studio/debug/dev-options) with at least 8 GB of RAM and a cable to connect it to your development machine
 
+generate_summary_faq: true
+
 author:
     - Adnan AlSinan
     - Pareena Verma

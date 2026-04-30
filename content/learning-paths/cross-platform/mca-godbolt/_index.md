@@ -15,6 +15,8 @@ prerequisites:
     - Familiarity with Arm assembly.
     - LLVM version 16 or newer, which includes support for Neoverse V2.
 
+generate_summary_faq: true
+
 author: Asher Dobrescu
 
 ### Tags

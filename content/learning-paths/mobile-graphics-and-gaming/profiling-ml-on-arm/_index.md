@@ -17,6 +17,8 @@ prerequisites:
     - Android Studio Profiler.
   
 
+generate_summary_faq: true
+
 author: Ben Clark
 
 ### Tags

@@ -11,6 +11,8 @@ learning_objectives:
 prerequisites:
     - None
 
+generate_summary_faq: true
+
 author: Jason Andrews
 
 ### Tags

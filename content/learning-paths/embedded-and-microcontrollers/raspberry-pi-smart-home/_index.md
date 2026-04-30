@@ -19,6 +19,8 @@ prerequisites:
   - Electronic components (breadboard, LEDs, resistors, jumper wires) for GPIO testing
   - Familiarity with Python programming, Raspberry Pi GPIO pinout, and basic electronics
 
+generate_summary_faq: true
+
 author: Fidel Makatia Omusilibwa
 
 skilllevels: Introductory

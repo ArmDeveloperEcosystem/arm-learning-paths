@@ -14,6 +14,8 @@ learning_objectives:
 prerequisites:
     - A computer running Arm Linux or macOS with Docker installed
 
+generate_summary_faq: true
+
 author: Arnaud de Grandmaison
 
 test_images:

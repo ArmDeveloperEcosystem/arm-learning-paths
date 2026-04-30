@@ -16,6 +16,8 @@ prerequisites:
     - Familiarity with C++ development and compiling programs from the command line
     - A Windows on Arm machine with [Visual Studio](/install-guides/vs-woa/) and the C++ desktop development tools installed
 
+generate_summary_faq: true
+
 author: Tom Dunkle
 
 ### Tags

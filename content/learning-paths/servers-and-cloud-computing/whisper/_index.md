@@ -18,6 +18,8 @@ prerequisites:
     - Familiarity with machine learning concepts.
     - Familiarity with the fundamentals of the Whisper ASR Model.
 
+generate_summary_faq: true
+
 author: Nobel Chowdary Mandepudi
 
 ### Tags

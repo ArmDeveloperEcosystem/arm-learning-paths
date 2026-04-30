@@ -14,6 +14,8 @@ prerequisites:
     - Any code editor. [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user) is suitable.
     - Completion of the Learning Path that shows you how to [Deploy AWS services using the Serverless Framework](/learning-paths/servers-and-cloud-computing/serverless-framework-aws-intro/).
 
+generate_summary_faq: true
+
 author: Dawid Borycki
 
 ### Tags

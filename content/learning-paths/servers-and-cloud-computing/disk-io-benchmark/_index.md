@@ -15,6 +15,8 @@ prerequisites:
     - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an Arm Linux server.
     - Familiarity with Linux.
 
+generate_summary_faq: true
+
 author: Kieran Hejmadi
 
 ### Tags

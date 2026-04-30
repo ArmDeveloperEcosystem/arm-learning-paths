@@ -20,6 +20,8 @@ prerequisites:
     - Arm Performance Studio installed. Follow the [Arm Performance Studio install guide](/install-guides/ams) for instructions.
     - Android SDK Platform tools installed. Required for the Android Debug bridge (adb).
 
+generate_summary_faq: true
+
 author: Ronan Synnott
 
 ### Tags

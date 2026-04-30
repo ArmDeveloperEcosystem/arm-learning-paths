@@ -19,6 +19,8 @@ prerequisites:
 
 
 
+generate_summary_faq: true
+
 author: Annie Tallund
 
 ### Tags

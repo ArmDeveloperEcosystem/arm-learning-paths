@@ -24,6 +24,8 @@ prerequisites:
     - Installation of Android Development Studio and adb (if you're targeting an Android phone with SME2 support)
     - Compiler support for SME2 instructions (for example, LLVM 18 or later with SME2 backend support)
 
+generate_summary_faq: true
+
 author: Arnaud de Grandmaison
 
 ### Tags

@@ -17,6 +17,8 @@ prerequisites:
     - An Arm Linux (aarch64) server, such as an AWS Graviton3 instance
     - Basic understanding of C++ and CMake
 
+generate_summary_faq: true
+
 author: Kieran Hejmadi
 
 ### Tags

@@ -16,6 +16,8 @@ learning_objectives:
 prerequisites:
     - An Arm computer running Linux. You can also use a virtual machine from a [cloud service provider](/learning-paths/servers-and-cloud-computing/csp/).
 
+generate_summary_faq: true
+
 author: Kieran Hejmadi
 
 ### Tags

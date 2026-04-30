@@ -15,6 +15,8 @@ prerequisites:
     - A basic understanding of Snort's operation and configuration.
     
 
+generate_summary_faq: true
+
 author: Preema Merlin Dsouza
 
 ### Tags

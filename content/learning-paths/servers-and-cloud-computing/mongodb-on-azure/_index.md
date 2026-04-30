@@ -16,6 +16,8 @@ prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 (Dpsv6) instances
     - Familiarity with the [MongoDB architecture](https://www.mongodb.com/) and deployment practices on Arm64 platforms
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ### Tags

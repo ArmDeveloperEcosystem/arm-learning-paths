@@ -18,6 +18,8 @@ prerequisites:
     - A Docker Hub account for storing container images.
     - Familiarity with the concepts of ML and continuous integration and deployment (CI/CD).
 
+generate_summary_faq: true
+
 author:
     - Pareena Verma
     - Annie Tallund

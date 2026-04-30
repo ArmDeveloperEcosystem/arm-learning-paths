@@ -14,6 +14,8 @@ learning_objectives:
 prerequisites:
 - An Arm based instance server from a cloud service provider.
 
+generate_summary_faq: true
+
 author: Ying Yu
 
 ### Tags

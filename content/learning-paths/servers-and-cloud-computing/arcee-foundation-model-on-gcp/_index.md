@@ -17,6 +17,8 @@ prerequisites:
     - A [Google Cloud account](https://console.cloud.google.com/) with permission to launch Axion (`c4a-standard-16` or larger) instances
     - Basic familiarity with Linux and SSH
 
+generate_summary_faq: true
+
 author: Julien Simon
 
 # Tags

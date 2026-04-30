@@ -20,6 +20,8 @@ prerequisites:
     - Knowledge of Arm Streamline usage
     - An Arm Neoverse or Cortex-A hardware platform running Linux or Android
 
+generate_summary_faq: true
+
 author: 
     - Zenon Zhilong Xiu
     - Odin Shen

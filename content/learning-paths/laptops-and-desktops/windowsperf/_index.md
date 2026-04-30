@@ -14,6 +14,8 @@ learning_objectives:
 prerequisites:
     - Windows on Arm desktop or development machine
 
+generate_summary_faq: true
+
 author: Ronan Synnott
 
 ### Tags

@@ -18,6 +18,8 @@ prerequisites:
     - This Learning Path was tested on a Vivo X300 Pro.
     - A development machine with [Android Studio](https://developer.android.com/studio) installed.
 
+generate_summary_faq: true
+
 author:
     - Arnaud de Grandmaison
     - Nina Drozd

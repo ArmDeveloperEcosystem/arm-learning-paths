@@ -13,6 +13,8 @@ learning_objectives:
 prerequisites:
     - An Arm computer running Linux with recent versions of Clang or GCC installed.
 
+generate_summary_faq: true
+
 author: Konstantinos Margaritis
 
 ### Tags

@@ -14,6 +14,8 @@ learning_objectives:
 prerequisites:
     - Nothing
 
+generate_summary_faq: true
+
 author: Jason Andrews
 
 

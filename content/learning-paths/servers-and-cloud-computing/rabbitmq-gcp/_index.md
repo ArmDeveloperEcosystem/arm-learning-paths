@@ -19,6 +19,8 @@ prerequisites:
   - Basic understanding of message queues and messaging concepts (publishers, consumers)
   - Familiarity with Linux command-line operations
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ##### Tags

@@ -19,6 +19,8 @@ prerequisites:
   - Completion of the Learning Path [Introduction to TinyML on Arm using PyTorch and ExecuTorch](/learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm/)
   - An x86 Linux host machine or VM running Ubuntu 22.04 or later
 
+generate_summary_faq: true
+
 author: Dominica Abena O. Amanfo
 
 ### Tags

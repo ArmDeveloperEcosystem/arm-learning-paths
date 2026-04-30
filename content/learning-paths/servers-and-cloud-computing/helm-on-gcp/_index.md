@@ -22,6 +22,9 @@ prerequisites:
   - Basic understanding of [Helm](https://helm.sh/docs/topics/architecture/) and Kubernetes manifests
   - Familiarity with basic Linux command-line usage
     
+
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ##### Tags

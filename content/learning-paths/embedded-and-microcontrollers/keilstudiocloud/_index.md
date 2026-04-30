@@ -15,6 +15,8 @@ prerequisites:
     - Some familiarity with embedded programming is assumed
     - An [Arm Account](https://developer.arm.com/register) is required
 
+generate_summary_faq: true
+
 author: Christopher Seidl 
 
 

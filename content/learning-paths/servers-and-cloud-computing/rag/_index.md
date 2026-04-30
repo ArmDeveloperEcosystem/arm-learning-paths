@@ -19,6 +19,8 @@ prerequisites:
     - Basic knowledge of vector databases.
     - Understanding of LLM fundamentals.
 
+generate_summary_faq: true
+
 author: Nobel Chowdary Mandepudi
 
 ### Tags

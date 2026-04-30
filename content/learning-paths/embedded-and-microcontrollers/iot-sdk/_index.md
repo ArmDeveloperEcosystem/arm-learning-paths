@@ -15,6 +15,8 @@ prerequisites:
     - Some familiarity with embedded programming
     - An AWS account (required for Arm Virtual Hardware)
 
+generate_summary_faq: true
+
 author: Ronan Synnott
 
 ### Tags

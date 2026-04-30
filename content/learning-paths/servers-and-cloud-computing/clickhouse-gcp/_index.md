@@ -21,6 +21,8 @@ prerequisites:
   - Basic familiarity with [ClickHouse](https://clickhouse.com/)
   - Basic understanding of databases and SQL
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ##### Tags

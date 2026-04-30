@@ -19,6 +19,8 @@ prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
   - Familiarity with networking concepts and [Node.js event-driven architecture](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick)
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ##### Tags

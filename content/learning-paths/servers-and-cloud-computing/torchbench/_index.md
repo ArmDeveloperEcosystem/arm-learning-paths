@@ -13,6 +13,8 @@ learning_objectives:
 prerequisites:
     - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server.
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ### Tags

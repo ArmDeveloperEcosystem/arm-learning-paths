@@ -19,6 +19,8 @@ prerequisites:
     - An Arm-based or x86 computer running Ubuntu. You can use a server instance from a cloud service provider of your choice.
 
 
+generate_summary_faq: true
+
 author: Paul Howard
 
 ### Tags

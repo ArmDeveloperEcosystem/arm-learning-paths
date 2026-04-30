@@ -17,6 +17,8 @@ prerequisites:
     - Basic understanding of machine learning model inference
     - Familiarity with Android NDK and cross-compilation
 
+generate_summary_faq: true
+
 author: Zenon Zhilong Xiu
 
 ### Tags

@@ -15,6 +15,8 @@ prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
     - Familiarity with relational databases and the basics of [MySQL](https://dev.mysql.com/doc/refman/8.0/en/introduction.html)
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ### Tags

@@ -19,6 +19,8 @@ prerequisites:
     - A basic understanding of Streamlit.
     - A basic understanding of LLM fundamentals.
 
+generate_summary_faq: true
+
 author: Nobel Chowdary Mandepudi
 
 ### Tags

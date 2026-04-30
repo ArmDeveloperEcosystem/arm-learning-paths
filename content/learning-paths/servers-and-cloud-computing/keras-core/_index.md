@@ -17,6 +17,8 @@ prerequisites:
     - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider, an on-premises Arm server, or a Linux virtual machine on your Arm device. 
     - Familiarity with SSH, the Linux command line, and basic system administration tasks.
 
+generate_summary_faq: true
+
 author: 
     - Diego Russo
     - Leandro Nunes

@@ -16,6 +16,8 @@ prerequisites:
     - Familiarity with vector extensions, SIMD programming, and compiler intrinsics
     - Access to Linux systems with Neon and SVE support
 
+generate_summary_faq: true
+
 author:
     - Jason Andrews
 

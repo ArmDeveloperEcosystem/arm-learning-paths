@@ -16,6 +16,8 @@ prerequisites:
   - A CircleCI account
   - Basic understanding of CircleCI workflows, jobs and resource classes
 
+generate_summary_faq: true
+
 author: Annie Tallund
 
 ##### Tags

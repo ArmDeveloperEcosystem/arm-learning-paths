@@ -16,6 +16,8 @@ prerequisites:
   - Basic familiarity with [TypeScript](https://www.typescriptlang.org/) and Node.js runtime environment
 
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ##### Tags

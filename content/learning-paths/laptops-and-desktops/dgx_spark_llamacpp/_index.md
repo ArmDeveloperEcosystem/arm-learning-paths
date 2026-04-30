@@ -21,6 +21,8 @@ prerequisites:
     - Experience building software from source using CMake and make
 
 
+generate_summary_faq: true
+
 author: Odin Shen
 
 ### Tags

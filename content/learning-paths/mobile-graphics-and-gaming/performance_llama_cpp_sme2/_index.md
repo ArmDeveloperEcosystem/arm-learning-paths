@@ -17,6 +17,8 @@ prerequisites:
     - Git, CMake, and Android Debug Bridge (ADB) installed on your host machine
     - An Android device with Arm SME2 support for running and profiling the executable
 
+generate_summary_faq: true
+
 author: Zenon Zhilong Xiu
 
 ### Tags

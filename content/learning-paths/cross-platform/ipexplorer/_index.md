@@ -14,6 +14,8 @@ prerequisites:
     - An Arm account that can access IP Explorer
     - (Optional) A Linux machine with the desired compilers installed
 
+generate_summary_faq: true
+
 author: Ronan Synnott
 
 ### Tags

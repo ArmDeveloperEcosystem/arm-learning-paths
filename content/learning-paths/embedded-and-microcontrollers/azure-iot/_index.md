@@ -20,6 +20,8 @@ prerequisites:
     - A machine with Python 3 and Visual Studio Code installed
     - An active Azure account with sufficient permissions to create resources (such as IoT Hub, Functions, and Cosmos DB)
 
+generate_summary_faq: true
+
 author: Dawid Borycki
 
 ### Tags

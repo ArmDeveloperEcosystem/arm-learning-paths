@@ -18,6 +18,8 @@ prerequisites:
   - Basic familiarity with [Kubernetes](https://kubernetes.io/)
   - Familiarity with container concepts ([Docker](https://www.docker.com/))
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ##### Tags

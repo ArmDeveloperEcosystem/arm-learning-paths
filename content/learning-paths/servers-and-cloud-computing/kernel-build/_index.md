@@ -18,6 +18,8 @@ prerequisites:
     - Understanding of kernel images and modules
     - Familiarity with GRUB bootloader and initramfs
 
+generate_summary_faq: true
+
 author: Geremy Cohen
 
 ### Tags

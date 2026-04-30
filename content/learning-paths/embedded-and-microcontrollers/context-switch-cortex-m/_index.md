@@ -16,6 +16,8 @@ learning_objectives:
 prerequisites:
     - Basic knowledge and familiarity with Cortex-M processors.
 
+generate_summary_faq: true
+
 author: Uma Ramalingam
 
 ### Tags

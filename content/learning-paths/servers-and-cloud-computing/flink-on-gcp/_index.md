@@ -16,6 +16,8 @@ prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
   - Basic familiarity with [Apache Flink](https://flink.apache.org/) and its runtime environment
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ##### Tags

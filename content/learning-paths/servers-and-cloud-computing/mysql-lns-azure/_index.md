@@ -21,6 +21,8 @@ prerequisites:
     - Basic familiarity with SSH and MySQL command-line tools
 
 
+generate_summary_faq: true
+
 author: Doug Anson
 
 ### Tags

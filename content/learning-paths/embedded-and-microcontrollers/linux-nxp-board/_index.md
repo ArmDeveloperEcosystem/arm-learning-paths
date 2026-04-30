@@ -20,6 +20,8 @@ prerequisites:
     - A USB-C cable for the board's **DBG** serial connection.
     - A USB-C power supply/cable for the board's **POWER** port.
 
+generate_summary_faq: true
+
 author: Waheed Brown
 
 ### Tags

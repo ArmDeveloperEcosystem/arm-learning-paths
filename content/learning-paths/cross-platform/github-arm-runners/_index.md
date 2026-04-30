@@ -15,6 +15,8 @@ prerequisites:
     - A GitHub account (a Team or Enterprise Cloud plan is required for private repositories).
     - A Docker Hub account.
 
+generate_summary_faq: true
+
 author: Jason Andrews
 
 ### Tags

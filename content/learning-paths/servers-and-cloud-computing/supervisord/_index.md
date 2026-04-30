@@ -14,6 +14,8 @@ prerequisites:
     - An AWS account
     - A Remote.It account
 
+generate_summary_faq: true
+
 author: Jason Andrews
 
 ### Tags

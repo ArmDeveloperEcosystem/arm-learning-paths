@@ -17,6 +17,8 @@ prerequisites:
     - A development machine running Ubuntu 22.04, with a CUDA-capable NVIDIA® GPU
     - CUDA Toolkit version 11.8 or later
 
+generate_summary_faq: true
+
 author: Annie Tallund
 
 ### Tags

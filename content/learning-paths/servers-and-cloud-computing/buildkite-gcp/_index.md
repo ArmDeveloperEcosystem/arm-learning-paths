@@ -19,6 +19,8 @@ prerequisites:
   - Familiarity with [Docker](https://docs.docker.com/get-started/) and container concepts
   - A [GitHub account](https://github.com/join) to host your application repository
 
+generate_summary_faq: true
+
 author: Jason Andrews
 
 ##### Tags

@@ -15,6 +15,8 @@ prerequisites:
     - If you wish to analyze your own applications you will need a supported Android device.
     - Some basic familiarity with Frame Advisor. Review the [Frame Advisor](/learning-paths/mobile-graphics-and-gaming/ams/fa/) section in [Get started with Arm Performance Studio for mobile](/learning-paths/mobile-graphics-and-gaming/ams/).
 
+generate_summary_faq: true
+
 author: Mark Thurman
 
 further_reading:

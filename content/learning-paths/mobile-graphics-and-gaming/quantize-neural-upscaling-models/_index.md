@@ -16,6 +16,8 @@ prerequisites:
     - Basic PyTorch model training and evaluation experience
     - A development machine with Python 3.10+ and PyTorch installed that runs ExecuTorch
 
+generate_summary_faq: true
+
 author:
 - Richard Burton
 - Annie Tallund

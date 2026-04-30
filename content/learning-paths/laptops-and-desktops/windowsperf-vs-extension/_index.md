@@ -17,6 +17,8 @@ prerequisites:
   - A desktop or laptop running Windows on Arm.
   - Visual Studio 2022 Community Edition, WindowsPerf, WindowsPerf Visual Studio extension, and Windows Performance Analyzer (WPA) installed. 
 
+generate_summary_faq: true
+
 author: 
   - Nader Zouaoui
 

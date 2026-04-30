@@ -19,6 +19,9 @@ prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with permission to create resources, including instances using Cobalt 100 processors
     - A Linux machine with [QEMU](https://www.qemu.org/download/) and the [Azure CLI](/install-guides/azure-cli/) installed and authenticated
     
+
+generate_summary_faq: true
+
 author: Jason Andrews
 
 ### Tags

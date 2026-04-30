@@ -23,6 +23,8 @@ prerequisites:
     - A system with with sufficient hardware performance counters to use the [TopDown](/install-guides/topdown-tool) methodology. This typically requires running on bare metal rather than a virtualized environment.
 
 
+generate_summary_faq: true
+
 author: Paschalis Mpeis
 
 ### Tags

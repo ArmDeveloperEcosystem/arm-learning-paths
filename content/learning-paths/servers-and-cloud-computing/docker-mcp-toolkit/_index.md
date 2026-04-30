@@ -22,6 +22,9 @@ prerequisites:
     - A GitHub account with a personal access token
     - A machine with at least 8 GB RAM (16 GB recommended)
     - Basic familiarity with Docker, C++, and SIMD intrinsics concepts
+
+generate_summary_faq: true
+
 author: Ajeet Singh Raina
 
 ### Tags

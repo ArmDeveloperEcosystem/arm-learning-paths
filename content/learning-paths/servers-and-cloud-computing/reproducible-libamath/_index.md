@@ -2,6 +2,9 @@
 title: Enable reproducible math functions across vector extensions with Arm Performance Libraries
 
 minutes_to_complete: 10
+
+generate_summary_faq: true
+
 author: Joana Cruz
 
 who_is_this_for: This is an introductory topic for developers who want to produce reproducible code across vector extensions using math functions in Libamath, a component of Arm Performance Libraries. 

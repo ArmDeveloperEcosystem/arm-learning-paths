@@ -17,6 +17,8 @@ prerequisites:
 - Xcode command line tools installed
 - Basic familiarity with using the Terminal and command-line tools
 
+generate_summary_faq: true
+
 author: Jett Zhou
 
 ### Tags

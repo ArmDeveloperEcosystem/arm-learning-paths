@@ -18,6 +18,8 @@ prerequisites:
     - A USB cable to connect your Google Pixel 8 to your desktop machine
     - Android Debug Bridge (adb) installed on your device. Follow the steps in https://developer.android.com/tools/adb to install Android SDK Platform Tools. The adb tool is included in this package.
 
+generate_summary_faq: true
+
 author: Roberto Lopez Mendez
 
 ### Tags

@@ -24,6 +24,8 @@ prerequisites:
     - An SSH client and familiarity with the Linux command line
     - Basic understanding of ML concepts
 
+generate_summary_faq: true
+
 author: Doug Anson
 
 ### Tags

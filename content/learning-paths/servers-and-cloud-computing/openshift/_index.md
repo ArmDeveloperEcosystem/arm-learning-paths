@@ -14,6 +14,8 @@ prerequisites:
   - Familiarity with the `oc` CLI, container fundamentals, and basic Tekton concepts (Task, Pipeline, PipelineRun)
   - Cluster access with cluster-admin or equivalent permissions to configure nodes and pipelines
 
+generate_summary_faq: true
+
 author: Jeff Young
 
 # Tags

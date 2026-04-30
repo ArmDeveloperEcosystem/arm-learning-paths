@@ -18,6 +18,8 @@ prerequisites:
     - Familiarity with the Linux command line, Git, and building C++ projects with CMake
     - Internet access to download source code, model assets, and sample data
 
+generate_summary_faq: true
+
 author: Odin Shen
 
 ### Tags

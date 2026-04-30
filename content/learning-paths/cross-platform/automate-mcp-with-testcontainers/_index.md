@@ -17,6 +17,8 @@ prerequisites:
     - Basic familiarity with Python, PyTest, and container concepts
     - Familiarity with the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) specification
 
+generate_summary_faq: true
+
 author: Neethu Elizabeth Simon
 
 ### Tags

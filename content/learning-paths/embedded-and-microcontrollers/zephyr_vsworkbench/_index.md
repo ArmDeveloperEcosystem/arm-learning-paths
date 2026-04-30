@@ -20,6 +20,8 @@ prerequisites:
     - A Cortex-M development board
     - Windows 10+ (64-bit), macOS with Homebrew, or Linux (preferably Ubuntu 20.04+)
 
+generate_summary_faq: true
+
 author: 
     - Ayoub Bourjilat
     - Odin Shen

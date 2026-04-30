@@ -16,6 +16,8 @@ learning_objectives:
 prerequisites:
     - Access to an [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) for testing and validation.
 
+generate_summary_faq: true
+
 author: 
     - Odin Shen
     - Jun He

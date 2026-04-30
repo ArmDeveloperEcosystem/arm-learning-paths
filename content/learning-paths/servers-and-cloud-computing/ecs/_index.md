@@ -15,6 +15,8 @@ prerequisites:
     - An AWS account
     - A computer with Docker, AWS CLI, and Terraform installed
 
+generate_summary_faq: true
+
 author: Jason Andrews
 
 ##### Tags

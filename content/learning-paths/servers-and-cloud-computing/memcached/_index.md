@@ -14,6 +14,8 @@ learning_objectives:
 prerequisites:
 - An Arm based instance from an appropriate cloud service provider.
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 test_images:

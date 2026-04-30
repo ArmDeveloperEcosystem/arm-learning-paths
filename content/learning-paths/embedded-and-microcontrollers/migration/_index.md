@@ -17,6 +17,8 @@ prerequisites:
     - Knowledge about building workflows
     - Access to an aarch64 or x86_64 machine running Linux
 
+generate_summary_faq: true
+
 author: Kasper Mecklenburg
 
 ### Tags

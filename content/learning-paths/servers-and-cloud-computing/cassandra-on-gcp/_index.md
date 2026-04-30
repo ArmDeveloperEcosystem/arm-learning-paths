@@ -17,6 +17,8 @@ prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
   - Familiarity with Cassandra architecture, replication, and [Cassandra partitioning and event-driven I/O](https://cassandra.apache.org/doc/stable/cassandra/architecture/)
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ##### Tags

@@ -15,6 +15,8 @@ prerequisites:
     - Some understanding of the Linux command line.
     - Optionally a basic understanding of Docker and containers.
 
+generate_summary_faq: true
+
 author: 
     - Tom Pilar
     - Daniel Nguyen

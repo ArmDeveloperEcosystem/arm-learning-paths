@@ -16,6 +16,8 @@ prerequisites:
     - A GitHub account. 
     - Familiarity with GitHub Actions.
 
+generate_summary_faq: true
+
 author: 
     - Pareena Verma
 

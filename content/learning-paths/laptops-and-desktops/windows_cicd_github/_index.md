@@ -16,6 +16,8 @@ prerequisites:
     - Valid GitHub account
     - Microsoft Azure account (if using virtual machine)
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ### Tags

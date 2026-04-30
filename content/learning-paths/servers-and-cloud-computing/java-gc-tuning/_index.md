@@ -17,6 +17,8 @@ prerequisites:
     - Basic understanding of Java.
     - An [installation of Java](/install-guides/java/) on your machine.
 
+generate_summary_faq: true
+
 author: Kieran Hejmadi
 
 ### Tags

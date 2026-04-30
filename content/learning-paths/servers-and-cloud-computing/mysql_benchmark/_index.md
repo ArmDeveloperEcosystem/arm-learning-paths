@@ -13,6 +13,8 @@ prerequisites:
     - Basic knowledge of [MySQL databases](https://www.mysql.com/)
     - Two Arm servers running Ubuntu 22.04, one for the MySQL server and the other for the Sysbench client
 
+generate_summary_faq: true
+
 author: Bolt Liu
 
 skilllevels: Introductory

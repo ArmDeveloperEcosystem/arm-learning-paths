@@ -14,6 +14,8 @@ prerequisites:
     - An installation of [Arm Keil MDK](/install-guides/mdk) or [Arm Development Studio](/install-guides/armds) (MDK recommended)
     - Some familiarity with CMSIS is assumed
 
+generate_summary_faq: true
+
 author: Ronan Synnott
 
 ### Tags

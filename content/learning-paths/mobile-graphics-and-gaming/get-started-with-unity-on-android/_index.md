@@ -15,6 +15,8 @@ prerequisites:
     - Recent Android device, such as a mobile phone or tablet
     - Desktop computer capable of running Unity
 
+generate_summary_faq: true
+
 author: Joshua Marshall-Law
 
 ### Tags

@@ -18,6 +18,8 @@ prerequisites:
     - A computer with [Google Cloud CLI](/install-guides/gcloud) and [kubectl](/install-guides/kubectl/)installed.
     - A valid GitLab account
 
+generate_summary_faq: true
+
 author: Pranay Bakre
 
 ### Tags

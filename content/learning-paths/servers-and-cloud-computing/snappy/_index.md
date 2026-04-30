@@ -15,6 +15,8 @@ prerequisites:
 - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from an appropriate
   cloud service provider.
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 test_images:

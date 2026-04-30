@@ -19,6 +19,8 @@ prerequisites:
     - Understanding of firmware boot stages and SoC-level architecture
     - Docker installed, or a GitHub Codespaces-compatible development environment
 
+generate_summary_faq: true
+
 author:
     - Odin Shen
     - Ann Cheng

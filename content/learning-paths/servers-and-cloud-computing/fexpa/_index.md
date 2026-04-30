@@ -15,6 +15,8 @@ prerequisites:
     - Access to an [AWS Graviton4, Google Axion, or Azure Cobalt 100 virtual machine from a cloud service provider](/learning-paths/servers-and-cloud-computing/csp/)
     - Some familiarity with SIMD programming and SVE intrinsics
 
+generate_summary_faq: true
+
 author: 
 - Arnaud Grasset
 - Claudio Martino

@@ -15,6 +15,8 @@ prerequisites:
     - A development machine with [Android Studio](https://developer.android.com/studio) installed. 
     - An Android smartphone.
 
+generate_summary_faq: true
+
 author: Dawid Borycki
 
 ### Tags

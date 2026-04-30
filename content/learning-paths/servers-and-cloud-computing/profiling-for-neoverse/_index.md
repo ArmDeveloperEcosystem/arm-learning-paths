@@ -12,6 +12,8 @@ learning_objectives:
 prerequisites:
     - An Arm Neoverse-based (N1, N2 or V1) computer running Linux. For your host OS, you can use Amazon Linux 2023 or newer, Debian 10 or newer, RHEL 8 or newer, or Ubuntu 20.04 or newer.
 
+generate_summary_faq: true
+
 author: Julie Gaskin
 
 ### Tags

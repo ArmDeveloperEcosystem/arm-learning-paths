@@ -14,6 +14,8 @@ learning_objectives:
 prerequisites:
     - Some familiarity with CI/CD concepts is assumed
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ### Tags

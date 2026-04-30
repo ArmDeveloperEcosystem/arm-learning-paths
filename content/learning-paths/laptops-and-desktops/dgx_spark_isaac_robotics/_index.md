@@ -19,6 +19,8 @@ prerequisites:
     - Experience with Python scripting and virtual environments
     - Basic understanding of reinforcement learning concepts (rewards, policies, episodes)
 
+generate_summary_faq: true
+
 author:
     - Johnny Nunez
     - Odin Shen

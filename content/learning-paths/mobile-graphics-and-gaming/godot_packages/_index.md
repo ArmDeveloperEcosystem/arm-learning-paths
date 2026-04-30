@@ -13,6 +13,8 @@ prerequisites:
     - Familiarity with Godot
     - Familiarity with Arm Performance Studio tools
 
+generate_summary_faq: true
+
 author: Albin Bernhardsson, Julie Gaskin
 
 ### Tags

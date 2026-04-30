@@ -14,6 +14,9 @@ prerequisites:
     - 'Azure subscription. Use this link to sign up for a free account: https://azure.microsoft.com/en-us/free/.'
     - 'Complete the [first](/learning-paths/servers-and-cloud-computing/from-iot-to-the-cloud-part1) and [second](/learning-paths/servers-and-cloud-computing/from-iot-to-the-cloud-part2) learning paths of this series.'
   
+
+generate_summary_faq: true
+
 author: Dawid Borycki
 
 ### Tags

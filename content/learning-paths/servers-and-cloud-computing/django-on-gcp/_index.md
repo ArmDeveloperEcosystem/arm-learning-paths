@@ -21,6 +21,8 @@ prerequisites:
   - Basic familiarity with [Django](https://www.djangoproject.com/)
   - Basic understanding of containers and Kubernetes concepts
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ##### Tags

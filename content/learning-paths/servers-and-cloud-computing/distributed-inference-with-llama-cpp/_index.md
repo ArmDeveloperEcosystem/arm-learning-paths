@@ -17,6 +17,8 @@ prerequisites:
     - Familiarity with the Learning Path [Deploy a Large Language Model (LLM) chatbot with llama.cpp using KleidiAI on Arm servers](/learning-paths/servers-and-cloud-computing/llama-cpu)
     - Familiarity with AWS
 
+generate_summary_faq: true
+
 author: 
     - Aryan Bhusari
     - Joe Stech

@@ -19,6 +19,8 @@ prerequisites:
   - Basic understanding of machine learning embeddings
   - Familiarity with Linux command-line operations
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ##### Tags

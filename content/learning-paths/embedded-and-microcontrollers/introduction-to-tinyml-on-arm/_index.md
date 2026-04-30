@@ -18,6 +18,8 @@ prerequisites:
     - A Linux computer
 
 
+generate_summary_faq: true
+
 author: Dominica Abena O. Amanfo
 
 ### Tags

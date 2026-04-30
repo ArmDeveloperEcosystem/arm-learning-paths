@@ -14,6 +14,8 @@ prerequisites:
     - A game project that uses advanced rendering features (such as hardware ray tracing) that stretch the performance capabilities of everyday smartphones.
     - A development machine with Git installed.
 
+generate_summary_faq: true
+
 author: Julie Gaskin
 
 ### Tags

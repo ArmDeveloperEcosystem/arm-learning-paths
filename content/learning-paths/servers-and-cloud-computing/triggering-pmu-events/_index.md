@@ -14,6 +14,8 @@ prerequisites:
     - Knowledge of performance analysis. 
     - The ability to read Arm assembly code.
 
+generate_summary_faq: true
+
 author: Johanna Skinnider
 
 ### Tags

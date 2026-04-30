@@ -16,6 +16,8 @@ prerequisites:
     - A Pinebook Pro laptop
     - A microSD card (8GB or greater; class 10 or faster)
 
+generate_summary_faq: true
+
 author: Gabriel Peterson
 
 ### Tags

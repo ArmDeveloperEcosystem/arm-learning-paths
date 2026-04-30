@@ -22,6 +22,8 @@ prerequisites:
     - Python 3.10 or later
     - A [Hugging Face](https://huggingface.co/) account with access to Meta Llama models
 
+generate_summary_faq: true
+
 author: Parichay Das
 
 ### Tags

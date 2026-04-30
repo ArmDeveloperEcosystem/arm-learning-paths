@@ -18,6 +18,8 @@ prerequisites:
     - A Raspberry Pi 3 or 4 board
 
 
+generate_summary_faq: true
+
 author: Jason Andrews
 
 ### Tags

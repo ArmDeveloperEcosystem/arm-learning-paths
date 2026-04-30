@@ -15,6 +15,8 @@ prerequisites:
     - An Amazon Web Services (AWS) account
     - A local computer with Docker, AWS CLI, and AWS Copilot CLI installed
 
+generate_summary_faq: true
+
 author: Jason Andrews
 
 ### Tags

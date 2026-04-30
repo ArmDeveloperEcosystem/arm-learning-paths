@@ -14,6 +14,8 @@ prerequisites:
     - A development machine running Ubuntu or Debian Linux with `x86_64` architecture
     - An Android device with an Arm GPU
 
+generate_summary_faq: true
+
 author: Jason Andrews
 
 ##### Tags

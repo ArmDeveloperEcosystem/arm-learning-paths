@@ -19,6 +19,8 @@ prerequisites:
   - Basic understanding of machine learning pipelines
 
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ##### Tags

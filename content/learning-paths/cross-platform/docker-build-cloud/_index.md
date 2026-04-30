@@ -16,6 +16,8 @@ prerequisites:
     - A GitHub account
     - A Docker Hub account
 
+generate_summary_faq: true
+
 author: Jason Andrews
 
 ### Tags

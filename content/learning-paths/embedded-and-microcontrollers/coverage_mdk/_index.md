@@ -14,6 +14,8 @@ learning_objectives:
 prerequisites:
     - Basic familiarity with Keil MDK
 
+generate_summary_faq: true
+
 author: Ronan Synnott
 
 ### Tags

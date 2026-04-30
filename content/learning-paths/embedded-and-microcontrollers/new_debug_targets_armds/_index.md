@@ -14,6 +14,8 @@ learning_objectives:
 prerequisites:
     - Some familiarity with embedded debug
 
+generate_summary_faq: true
+
 author: Ronan Synnott
 
 ### Tags

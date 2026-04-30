@@ -17,6 +17,8 @@ prerequisites:
     - A computer with [Google Cloud CLI](/install-guides/gcloud) and [kubectl](/install-guides/kubectl/)installed.
     - An existing Google Kubernetes Engine (GKE) cluster with x86-based nodes
 
+generate_summary_faq: true
+
 author: Pranay Bakre
 
 ### Tags

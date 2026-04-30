@@ -17,6 +17,9 @@ prerequisites:
     - An [Azure account](https://azure.microsoft.com/en-us/free/)
     - A local machine with [`jq`](https://jqlang.org/download/), [`curl`](https://curl.se/download.html), [`wrk`](https://github.com/wg/wrk), [Azure CLI](/install-guides/azure-cli/), and [`kubectl`](/install-guides/kubectl/) installed
    
+
+generate_summary_faq: true
+
 author:
     - Geremy Cohen
 

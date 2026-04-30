@@ -17,6 +17,8 @@ prerequisites:
     - Basic understanding of Python and prompt engineering.
     - Understanding of LLM fundamentals.
 
+generate_summary_faq: true
+
 author: Andrew Choi
 
 ### Tags

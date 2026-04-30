@@ -15,6 +15,8 @@ prerequisites:
     - An Arm based system running Linux with [BOLT](/install-guides/bolt/) and [Linux Perf](/install-guides/perf/) installed. The Linux kernel should be version 5.15 or later. Earlier kernel versions can be used, but some Linux Perf features may be limited or not available. For [SPE](./bolt-spe) the version should be 6.14 or later.
     - (Optional) A second, more powerful Linux system to build the software executable and run BOLT.
 
+generate_summary_faq: true
+
 author: Jonathan Davies
 
 ### Tags

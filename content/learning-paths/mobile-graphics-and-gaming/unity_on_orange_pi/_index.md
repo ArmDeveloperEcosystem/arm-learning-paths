@@ -17,6 +17,8 @@ prerequisites:
     - An ethernet connection
     - A mouse and keyboard connected to the Orange Pi
 
+generate_summary_faq: true
+
 author: Gabriel Peterson
 
 ### Tags

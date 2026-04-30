@@ -15,6 +15,8 @@ prerequisites:
     - This learning path builds on [Integrate Arm Virtual Hardware into CI/CD workflow 1](/learning-paths/cross-platform/avh_cicd/).
     - Valid AWS and GitHub accounts are required
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ##### Tags

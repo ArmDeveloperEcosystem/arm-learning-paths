@@ -17,6 +17,8 @@ prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free?utm_source=google&hl=en) account with billing enabled
   - Familiarity with networking concepts and the [Envoy architecture](https://www.envoyproxy.io/docs/envoy/latest/)
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ##### Tags

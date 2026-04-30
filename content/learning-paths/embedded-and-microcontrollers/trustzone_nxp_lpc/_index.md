@@ -18,6 +18,8 @@ prerequisites:
     - Comfortable with Windows 
     - NXP LPCXpresso55S69 board
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ### Tags

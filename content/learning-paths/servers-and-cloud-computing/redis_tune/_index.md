@@ -14,6 +14,8 @@ prerequisites:
     - Cloud or bare-metal installation of an Redis file server
     - Review [Learn how to deploy Redis](/learning-paths/servers-and-cloud-computing/redis/) if you do not already have Redis setup
 
+generate_summary_faq: true
+
 author: Elham Harirpoush
 
 ### Tags

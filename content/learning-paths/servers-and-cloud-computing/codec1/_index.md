@@ -2,6 +2,8 @@
 title: Run the AV1 and VP9 codecs on Arm Linux
 description: Learn how to build and run the AV1 and VP9 video codecs on Arm Linux systems with performance benchmarking across various resolutions and encoding configurations.
 
+generate_summary_faq: true
+
 author: Odin Shen
 
 minutes_to_complete: 30

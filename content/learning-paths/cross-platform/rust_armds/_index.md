@@ -15,6 +15,8 @@ prerequisites:
     - An installation of Arm Development Studio.
     - A basic understanding of Rust programming.
 
+generate_summary_faq: true
+
 author: Ronan Synnott
 
 

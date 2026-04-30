@@ -18,6 +18,8 @@ prerequisites:
     - A Linux machine with root access
     - Some familiarity with embedded Linux
 
+generate_summary_faq: true
+
 author: Michael Hall
 
 ### Tags

@@ -17,6 +17,8 @@ prerequisites:
 - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from an appropriate
   cloud service provider. This Learning Path has been verified on AWS EC2 and Oracle cloud services, running `Ubuntu Linux 20.04.`
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 test_images:

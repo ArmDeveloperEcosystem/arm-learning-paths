@@ -18,6 +18,8 @@ prerequisites:
   - Familiarity with SSH and remote server access
   - Basic understanding of databases and SQL
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 description: Deploy PostgreSQL on Azure Cobalt 100 Arm64 virtual machines, load a relational schema with transactional data, and benchmark and optimize query performance using pgbench and pg_stat_statements.

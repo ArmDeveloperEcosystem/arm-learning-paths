@@ -17,6 +17,8 @@ prerequisites:
     - Azure CLI installed on your local machine - see the [Azure CLI install guide](/install-guides/azure-cli/)
     - An SSH key pair for authentication
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ### Tags

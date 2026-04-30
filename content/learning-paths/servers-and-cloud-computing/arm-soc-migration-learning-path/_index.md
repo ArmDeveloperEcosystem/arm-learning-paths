@@ -19,6 +19,8 @@ prerequisites:
     - Familiarity with Linux development environments and basic embedded or cloud deployment concepts
     - Experience building applications with GCC and CMake
 
+generate_summary_faq: true
+
 author: Daniel Schleicher
 
 ### Tags

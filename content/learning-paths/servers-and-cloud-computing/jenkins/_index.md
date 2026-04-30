@@ -21,6 +21,8 @@ prerequisites:
     - Basic understanding of Linux command line
     - Familiarity with CI/CD concepts and [Jenkins fundamentals](https://www.jenkins.io/doc/book/pipeline/)
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ##### Tags

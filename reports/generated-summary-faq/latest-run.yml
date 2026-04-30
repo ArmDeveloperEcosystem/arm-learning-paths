@@ -1,0 +1,21 @@
+latest_run:
+  timestamp: ""
+  mode: ""
+  require_enable_flag: true
+  path_filter: ""
+  limit: 0
+  run_url: ""
+  git_ref: ""
+  git_sha: ""
+  actor: ""
+  template_version: summary-faq-v1
+  totals:
+    processed: 0
+    added: 0
+    updated: 0
+    unchanged: 0
+    skipped: 0
+    errors: 0
+    removed: 0
+  paths: []
+history: []

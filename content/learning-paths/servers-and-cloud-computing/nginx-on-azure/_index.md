@@ -15,6 +15,8 @@ learning_objectives:
 prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ### Tags

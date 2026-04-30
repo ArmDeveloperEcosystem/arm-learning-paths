@@ -15,6 +15,8 @@ prerequisites:
     - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from AWS or GCP.
     - Any code editor. [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user) is an example of a suitable editor.    
 
+generate_summary_faq: true
+
 author: Dawid Borycki
 
 ### Tags

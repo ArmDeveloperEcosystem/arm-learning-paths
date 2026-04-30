@@ -16,6 +16,8 @@ prerequisites:
   - Basic familiarity with Python and Flask
   - Basic understanding of containers and Kubernetes concepts
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ##### Tags

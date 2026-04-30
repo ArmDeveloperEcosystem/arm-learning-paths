@@ -16,6 +16,8 @@ prerequisites:
     - Completion of the [Deploy Open AD Kit containerized autonomous driving simulation on Arm Neoverse](/learning-paths/automotive/openadkit1_container/) Learning Path
     - Basic familiarity with Docker
 
+generate_summary_faq: true
+
 author: 
     - Odin Shen
     - Julien Jayat

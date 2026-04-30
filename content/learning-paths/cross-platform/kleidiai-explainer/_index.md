@@ -14,6 +14,8 @@ prerequisites:
     - An Arm-based Linux machine that implements the Int8 Matrix Multiplication (*i8mm*) architecture feature. The example in this Learning Path is run on an AWS Graviton 3 instance. Instructions on setting up an Arm-based server are [found here](/learning-paths/servers-and-cloud-computing/csp/aws/).
     - A basic understanding of linear algebra terminology, such as dot product and matrix multiplication.
 
+generate_summary_faq: true
+
 author: Zach Lasiuk
 ### Tags
 skilllevels: Introductory 

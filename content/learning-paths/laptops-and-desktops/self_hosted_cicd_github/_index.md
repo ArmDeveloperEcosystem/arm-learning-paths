@@ -17,6 +17,8 @@ prerequisites:
     - A DockerHub account. You can [set up a free DockerHub account](https://hub.docker.com/signup).
     - A GitHub account. You can [sign up for GitHub](https://github.com/signup).
 
+generate_summary_faq: true
+
 author: Dawid Borycki
 
 ### Tags

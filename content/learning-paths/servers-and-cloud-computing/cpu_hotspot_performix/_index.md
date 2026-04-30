@@ -14,6 +14,8 @@ prerequisites:
     - Access to Arm Performix
     - Basic understanding of C++
 
+generate_summary_faq: true
+
 author: Kieran Hejmadi
 
 ### Tags

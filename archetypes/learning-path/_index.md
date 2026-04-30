@@ -13,6 +13,10 @@ prerequisites:
     - PLACEHOLDER PREREQ 1
     - PLACEHOLDER PREREQ 2
 
+# Optional: set to true to include this Learning Path in the manual
+# generated summary/FAQ GitHub Action.
+generate_summary_faq: false
+
 author: PLACEHOLDER NAME
 
 ### Tags

@@ -18,6 +18,8 @@ prerequisites:
     - Basic knowledge of Machine Learning concepts
     - A host computer to compile ExecuTorch libraries
 
+generate_summary_faq: true
+
 author: 
 - Waheed Brown
 - Fidel Makatia Omusilibwa

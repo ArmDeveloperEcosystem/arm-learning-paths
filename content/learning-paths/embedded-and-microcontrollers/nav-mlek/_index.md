@@ -8,6 +8,8 @@ armips:
 - Ethos-U
 - Corstone
 
+generate_summary_faq: true
+
 author: Jason Andrews
 
 learning_objectives:

@@ -16,6 +16,8 @@ prerequisites:
     - Familiarity with C programming on microcontrollers
     - STM32 B-L475E-IOT01A2 board
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ### Tags

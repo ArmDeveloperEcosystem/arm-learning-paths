@@ -19,6 +19,9 @@ prerequisites:
     - An installation of [Visual Studio](/install-guides/vs-woa/).
     - An installation of [Git](/install-guides/git-woa/).
   
+
+generate_summary_faq: true
+
 author: Przemyslaw Wirkus
 
 ### Tags

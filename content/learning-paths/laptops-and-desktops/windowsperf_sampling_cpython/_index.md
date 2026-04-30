@@ -17,6 +17,8 @@ prerequisites:
     - Windows on Arm desktop or development machine with [WindowsPerf installed](/install-guides/wperf)
     - Windows x86_64 desktop machine with [Visual Studio 2022 Community Edition](https://visualstudio.microsoft.com/vs/) installed.
 
+generate_summary_faq: true
+
 author: Przemyslaw Wirkus
 
 ### Tags

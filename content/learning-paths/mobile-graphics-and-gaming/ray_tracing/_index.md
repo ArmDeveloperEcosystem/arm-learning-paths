@@ -16,6 +16,8 @@ prerequisites:
     - Knowledge of the Vulkan API.
     - A Vulkan renderer. Most code is generic and should be easy to incorporate into any deferred PBR renderer.
 
+generate_summary_faq: true
+
 author: Iago Calvo Lista
 
 ### Tags

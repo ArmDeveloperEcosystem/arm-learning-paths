@@ -1,6 +1,8 @@
 ---
 title: Run the vvenc H.266 encoder on Arm servers
 
+generate_summary_faq: true
+
 author: Willen Yang
 
 minutes_to_complete: 20

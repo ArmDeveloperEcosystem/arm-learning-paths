@@ -20,6 +20,8 @@ prerequisites:
     - A USB-C cable.
     - An x86 Linux machine, or a Mac running macOS.
 
+generate_summary_faq: true
+
 author:
     - Chaodong Gong
     - Alex Su

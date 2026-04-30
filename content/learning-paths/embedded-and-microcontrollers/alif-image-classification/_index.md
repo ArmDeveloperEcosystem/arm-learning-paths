@@ -20,6 +20,8 @@ prerequisites:
     - A development machine running macOS on Apple Silicon with Visual Studio Code installed
     - An AWS account or access to an Arm-based cloud instance for native Arm compilation
 
+generate_summary_faq: true
+
 author: Gabriel Peterson
 
 skilllevels: Advanced

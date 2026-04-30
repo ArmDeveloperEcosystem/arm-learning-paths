@@ -18,6 +18,9 @@ prerequisites:
     - Access to an Arm-based cloud instance running Linux, such as an AWS Graviton3 instance
     - Access to Arm Performix configured with the remote Arm target. See the [Arm Performix install guide](/install-guides/performix/) for setup instructions
     - Basic understanding of C++
+
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ### Tags

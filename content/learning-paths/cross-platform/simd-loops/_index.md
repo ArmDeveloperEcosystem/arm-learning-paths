@@ -18,6 +18,8 @@ prerequisites:
     - Some familiarity with SIMD programming and Neon intrinsics
     - Recent toolchains that support SVE/SME (GCC 13+ or Clang 16+ recommended)
 
+generate_summary_faq: true
+
 author:
     - Alejandro Martinez Vicente
     - Mohamad Najem

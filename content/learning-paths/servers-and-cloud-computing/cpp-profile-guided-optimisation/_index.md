@@ -14,6 +14,8 @@ prerequisites:
     - Basic C++ understanding.
     - Access to an Arm-based Linux machine.
 
+generate_summary_faq: true
+
 author: Kieran Hejmadi
 
 ### Tags

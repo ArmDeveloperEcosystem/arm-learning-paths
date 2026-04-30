@@ -21,6 +21,8 @@ prerequisites:
   - Familiarity with SSH and remote server access
   - Basic understanding of cloud computing and virtualization concepts
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ### Tags

@@ -15,6 +15,8 @@ learning_objectives:
 prerequisites:
     - Basic familiarity with Python and the command line
 
+generate_summary_faq: true
+
 author:
     - Kavya Sri Chennoju
     - Annie Tallund

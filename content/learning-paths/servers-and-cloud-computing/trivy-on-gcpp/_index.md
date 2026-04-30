@@ -17,6 +17,8 @@ prerequisites:
   - Basic knowledge of Linux command-line operations
   - Familiarity with GitHub Actions runners
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ### Tags

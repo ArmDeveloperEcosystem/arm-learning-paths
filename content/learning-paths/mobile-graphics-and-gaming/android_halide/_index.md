@@ -16,6 +16,8 @@ prerequisites:
     - Basic C++ knowledge
     - Android Studio with Android Emulator
 
+generate_summary_faq: true
+
 author: Éliás Bálint, Dawid Borycki, Steve Suzuki
 
 ### Tags

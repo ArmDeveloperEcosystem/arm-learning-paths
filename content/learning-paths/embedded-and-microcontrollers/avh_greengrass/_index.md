@@ -16,6 +16,8 @@ prerequisites:
     - An Arm Virtual Hardware account
     - Some familiarity with embedded Linux
 
+generate_summary_faq: true
+
 author: Michael Hall
 
 ### Tags

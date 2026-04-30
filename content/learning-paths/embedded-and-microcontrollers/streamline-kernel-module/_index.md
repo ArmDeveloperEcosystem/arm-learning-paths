@@ -20,6 +20,8 @@ prerequisites:
     - Arm-based Linux target device (such as a Raspberry Pi, BeagleBone, or similar board) with Secure Shell (SSH) access
     - A host machine that meets [Buildroot system requirements](https://buildroot.org/downloads/manual/manual.html#requirement)
 
+generate_summary_faq: true
+
 author: Yahya Abouelseoud
 
 ### Tags

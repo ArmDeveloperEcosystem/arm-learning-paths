@@ -1,0 +1,39 @@
+{{/*
+Render a generated summary paragraph and FAQ block for Learning Path introduction pages.
+
+Expected front-matter shape:
+  generated_summary_faq:
+    summary: ...
+    faqs:
+      - question: ...
+        answer: ...
+*/}}
+
+{{ $generated := .Params.generated_summary_faq }}
+{{ if $generated }}
+    {{ $summary := $generated.summary }}
+    {{ $faqs := $generated.faqs }}
+
+    {{ if or $summary $faqs }}
+        <div id="generated-summary-faq" class="u-margin-top-2">
+            {{ with $summary }}
+                <h3>Summary</h3>
+                <div class="u-margin-left-1">
+                    {{ . | markdownify }}
+                </div>
+            {{ end }}
+
+            {{ with $faqs }}
+                <h3 class="u-margin-top-2">Frequently asked questions</h3>
+                {{ range . }}
+                    <details class="u-margin-left-1 u-margin-bottom-1">
+                        <summary>{{ .question }}</summary>
+                        <div class="u-margin-top-1 u-margin-left-1">
+                            {{ .answer | markdownify }}
+                        </div>
+                    </details>
+                {{ end }}
+            {{ end }}
+        </div>
+    {{ end }}
+{{ end }}

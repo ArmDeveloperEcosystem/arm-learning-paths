@@ -16,6 +16,8 @@ prerequisites:
     - An Android phone for testing, in Developer Mode, with USB cable for connection
     - Basic familiarity with Kotlin and Android app development
 
+generate_summary_faq: true
+
 author: Ben Clark
 
 ### Tags

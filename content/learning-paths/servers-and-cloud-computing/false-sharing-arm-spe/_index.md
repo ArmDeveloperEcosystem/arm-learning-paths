@@ -16,6 +16,8 @@ prerequisites:
     - A basic understanding of cache coherency and its impact on performance.
     - Familiarity with Linux Perf tools.
 
+generate_summary_faq: true
+
 author: Kieran Hejmadi
 
 ### Tags

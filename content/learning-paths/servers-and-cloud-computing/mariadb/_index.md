@@ -17,6 +17,8 @@ prerequisites:
     - Cloud service provider accounts for each service you want to use including AWS, Azure, and GCP
     - A local computer with [Docker](/install-guides/docker/), [Terraform](/install-guides/terraform/), [AWS CLI](/install-guides/aws-cli/), [Azure CLI](/install-guides/azure-cli/), [Google Cloud CLI](/install-guides/gcloud/), and [Ansible](/install-guides/ansible/) installed
 
+generate_summary_faq: true
+
 author: Jason Andrews
 ### Tags
 skilllevels: Introductory

@@ -22,6 +22,8 @@ prerequisites:
     - For the OS, you can use Windows, Linux, or macOS.
   
 
+generate_summary_faq: true
+
 author: Dawid Borycki
 
 ### Tags

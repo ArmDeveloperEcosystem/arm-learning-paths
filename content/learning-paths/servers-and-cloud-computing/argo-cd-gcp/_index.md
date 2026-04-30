@@ -21,6 +21,8 @@ prerequisites:
   - Basic understanding of Git and GitHub workflows
   - Familiarity with basic Linux command-line usage
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 ##### Tags

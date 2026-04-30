@@ -14,6 +14,8 @@ learning_objectives:
 prerequisites:
     - An Amazon Web Services (AWS) [account](https://aws.amazon.com/)
 
+generate_summary_faq: true
+
 author: Jason Andrews
 
 ### Tags

@@ -16,6 +16,8 @@ prerequisites:
 - Some familiarity with embedded C programming
 - A machine running Ubuntu Linux
 
+generate_summary_faq: true
+
 author: Pareena Verma
 
 test_images:

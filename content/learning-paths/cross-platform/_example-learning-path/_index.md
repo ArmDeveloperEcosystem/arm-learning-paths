@@ -16,6 +16,8 @@ learning_objectives:
 prerequisites:
     - A [GitHub](https://github.com/) account
 
+generate_summary_faq: true
+
 author: Zach Lasiuk
 
 ### Tags

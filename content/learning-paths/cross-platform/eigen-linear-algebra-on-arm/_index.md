@@ -14,6 +14,8 @@ learning_objectives:
 prerequisites:
     - An Arm-based computer running Linux and a recent version of a C++ compiler (Clang or GCC).
 
+generate_summary_faq: true
+
 author: Konstantinos Margaritis
 
 ### Tags

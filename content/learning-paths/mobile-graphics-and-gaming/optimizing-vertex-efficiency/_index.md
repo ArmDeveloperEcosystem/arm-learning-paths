@@ -14,6 +14,8 @@ prerequisites:
     - Understanding of vertex attributes.
     - Familiarity with Arm Frame Advisor (part of Arm Performance Studio).
 
+generate_summary_faq: true
+
 author:
     - Andrew Kilroy
     - Peter Harris

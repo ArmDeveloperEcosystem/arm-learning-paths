@@ -19,6 +19,8 @@ prerequisites:
     - A working microphone for voice input.
     - Basic Python and command-line knowledge.
 
+generate_summary_faq: true
+
 author: Bhanu Arya
 
 ### Tags

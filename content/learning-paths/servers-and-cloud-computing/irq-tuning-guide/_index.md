@@ -17,6 +17,8 @@ prerequisites:
     - An Arm computer running Linux
     - Some familiarity with the Linux command line
 
+generate_summary_faq: true
+
 author: Kiel Friedt
 
 ### Tags

@@ -17,6 +17,8 @@ prerequisites:
     - A valid account with [Arm Virtual Hardware](https://app.avh.arm.com/login)
     - An Arm Linux host machine (if you want to build your own runtime and container image)
 
+generate_summary_faq: true
+
 author: Basma El Gaabouri
 
 ### Tags

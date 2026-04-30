@@ -16,6 +16,8 @@ prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11
     - A code editor such as [Visual Studio Code for Windows on Arm](https://code.visualstudio.com/docs/?dv=win32arm64user) 
 
+generate_summary_faq: true
+
 author: Ruifeng Wang
 
 ### Tags

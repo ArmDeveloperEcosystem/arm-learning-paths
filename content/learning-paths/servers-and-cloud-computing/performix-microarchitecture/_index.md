@@ -17,6 +17,8 @@ prerequisites:
     - Familiarity with Linux command line
     - Basic understanding of CPU performance concepts
 
+generate_summary_faq: true
+
 author:
 - Brendan Long
 - Kieran Hejmadi

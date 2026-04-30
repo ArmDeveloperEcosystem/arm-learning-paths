@@ -18,6 +18,8 @@ prerequisites:
   - Working knowledge of Docker, Git, and common Linux terminal tools
   - Basic understanding of the server firmware stack (such as UEFI, BMC, and TF-A)
 
+generate_summary_faq: true
+
 author:
   - Odin Shen
   - Ken Zhang
