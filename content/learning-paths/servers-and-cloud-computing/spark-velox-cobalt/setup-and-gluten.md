@@ -40,7 +40,7 @@ Append the hostname to `/etc/hosts` to ensure all Hadoop and Spark services reso
 echo "127.0.0.1 spark-master" >> /etc/hosts
 ```
 
-## Setup passwordless SSH
+## Set up passwordless SSH
 
 Generate an SSH key pair for passwordless authentication. Hadoop daemons use SSH to manage services internally, so this step is required for smooth operation.
 
@@ -97,7 +97,7 @@ tar -xvf apache-hive-3.1.3-bin.tar.gz
 ln -s apache-hive-3.1.3-bin hive
 ```
 
-## Environment variables
+## Set up environment variables
 
 Set up environment variables for Java, Hadoop, Spark, and Hive. This ensures all commands and scripts can find the correct binaries and configuration files.
 
@@ -122,7 +122,7 @@ Apply the environment changes to your current shell:
 source ~/.consolerc
 ```
 
-## Hadoop directory setup
+## Set up Hadoop directories
 
 HDFS needs storage directories.
 
@@ -190,7 +190,7 @@ cat > $HADOOP_HOME/etc/hadoop/yarn-site.xml <<EOF
 EOF
 ```
 
-### Java 17 compatibility fix
+### Fix Java 17 compatibility issue
 
 Create `hadoop-env.sh` to fix Java 17 reflection issues and ensure Hadoop, Spark, and Gluten stability:
 
@@ -237,7 +237,7 @@ Starting resourcemanager
 Starting nodemanagers
 ```
 
-Verify:
+Verify that all Hadoop daemons are running:
 
 ```console
 jps
@@ -376,7 +376,7 @@ Start the Spark Thrift Server, which allows you to connect to Spark SQL using JD
 $SPARK_HOME/sbin/start-thriftserver.sh
 ```
 
-Verify:
+Verify that the Thrift Server processes are running:
 
 ```console
 jps
@@ -398,6 +398,6 @@ The output is similar to:
 
 ## What you've accomplished and what's next
 
-You've now created a fully operational Spark SQL cluster on Arm64 with native acceleration enabled. You installed and confgured Hadoop, Spark, and Hive, built Gluten with the Velox backend, and set up native off-JVM query execution on your Azure Cobalt 100 VM.
+You've now created a fully operational Spark SQL cluster on Arm64 with native acceleration enabled. You installed and configured Hadoop, Spark, and Hive, built Gluten with the Velox backend, and set up native off-JVM query execution on your Azure Cobalt 100 VM.
 
 Next, you'll generate a TPC-DS dataset, load it into HDFS, create Spark SQL tables, and run analytical queries to measure the performance improvement over standard Spark.

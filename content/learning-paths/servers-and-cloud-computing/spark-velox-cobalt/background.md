@@ -30,7 +30,7 @@ Together, Gluten and Velox provide the following:
 - Improved performance on Arm-based infrastructure  
 
 
-### What you learned and what's next
+### What you've learned and what's next
 
 You've now learned about Azure Cobalt 100 Arm-based processors and Apache Spark. You've also understood how frameworks such as Gluten and Velox improve Spark SQL performance.  
 

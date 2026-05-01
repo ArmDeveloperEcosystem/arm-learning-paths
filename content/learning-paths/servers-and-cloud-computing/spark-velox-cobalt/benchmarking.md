@@ -388,12 +388,6 @@ The output is similar to:
 +-------+-------------------+
 ```
 
-
-<!-- ## Summary
-
-You've run a complete TPC-DS benchmark baseline on Spark with an Arm64 VM. These results represent execution with Gluten disabled. You can enable Gluten and re-run the same queries to measure the performance improvement provided by the Velox native engine on Arm64. -->
-
-
 ## Re-run with Gluten and Velox enabled
 
 Now that you have a baseline, re-run the same queries with the Gluten native engine active. Gluten intercepts Spark's physical plan and replaces JVM-based operators with equivalent Velox C++ operators. The Parquet data and SQL queries are unchanged — only the `spark-shell` launch flags differ.
