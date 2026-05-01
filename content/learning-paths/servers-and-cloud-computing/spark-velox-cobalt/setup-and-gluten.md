@@ -8,29 +8,6 @@ layout: learningpathall
 
 In this section, you'll set up Spark with Gluten and Velox on Arm64 (Azure Cobalt 100). You'll install Hadoop, Spark, and Hive, and configure a single-node cluster.
 
-<!-- ## Objective
-
-In this guide, you will:
-
-- Install Hadoop, Spark, and Hive
-- Configure a single-node cluster
-- Fix Java 17 compatibility issues
-- Build Gluten with Velox backend
-- Enable native execution (off-JVM)
-- Prepare system for benchmarking
-
-
-
-## Environment
-
-| Component | Value |
-|----------|------|
-| Architecture | Arm64 |
-| OS | Ubuntu 22.04 / 24.04 |
-| CPU | 4–8 vCPU |
-| RAM | 8–32 GB |
-| Disk | ≥ 80 GB | -->
-
 ## Before you begin
 
 Switch to the root user and install all required system packages. This ensures you have the correct Java version, build tools, and database dependencies for Spark, Hadoop, Hive, and Gluten on Arm64.
@@ -421,6 +398,6 @@ The output is similar to:
 
 ## What you've accomplished and what's next
 
-You now have a fully operational Spark SQL cluster on Arm64 with native acceleration enabled. Hadoop, Spark, and Hive are installed and configured, Gluten is built with the Velox backend, and native off-JVM query execution is active on your Azure Cobalt 100 VM.
+You've now created a fully operational Spark SQL cluster on Arm64 with native acceleration enabled. You installed and confgured Hadoop, Spark, and Hive, built Gluten with the Velox backend, and set up native off-JVM query execution on your Azure Cobalt 100 VM.
 
 Next, you'll generate a TPC-DS dataset, load it into HDFS, create Spark SQL tables, and run analytical queries to measure the performance improvement over standard Spark.

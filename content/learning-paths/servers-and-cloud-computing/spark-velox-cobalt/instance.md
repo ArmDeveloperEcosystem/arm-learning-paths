@@ -67,6 +67,6 @@ Your virtual machine should be ready and running in a few minutes. You can SSH i
 
 ## What you've learned and what's next
 
-You have successfully created an Azure Cobalt 100 Arm64 virtual machine running Ubuntu 22.04 LTS Server with SSH authentication configured. The VM is now fully prepared for running distributed data processing workloads.
+You've now successfully created an Azure Cobalt 100 Arm64 virtual machine running Ubuntu 22.04 LTS Server with SSH authentication configured. The VM is now fully prepared for running distributed data processing workloads.
 
 Next, you'll build a high-performance Spark SQL analytics platform using modern acceleration technologies.

@@ -30,20 +30,8 @@ Together, Gluten and Velox provide the following:
 - Improved performance on Arm-based infrastructure  
 
 
-<!-- ### In This Learning Path
-
-In this Learning Path, you will:
-
-- Deploy Apache Spark on an Azure Cobalt 100 Arm64 virtual machine  
-- Build and integrate Gluten with the Velox backend  
-- Configure Spark to use native execution  
-- Run Spark SQL workloads using Gluten + Velox  
-- Generate and load TPC-DS benchmark datasets  
-- Execute analytical queries and measure performance  
-- Compare accelerated workloads against vanilla Spark   -->
-
 ### What you learned and what's next
 
-You've learned about Azure Cobalt 100 Arm-based processors and Apache Spark. You've also understood how frameworks such as Gluten and Velox improve Spark SQL performance.  
+You've now learned about Azure Cobalt 100 Arm-based processors and Apache Spark. You've also understood how frameworks such as Gluten and Velox improve Spark SQL performance.  
 
 In the next section, you'll create a Cobalt 100 virtual machine for building a Spark SQL workload.

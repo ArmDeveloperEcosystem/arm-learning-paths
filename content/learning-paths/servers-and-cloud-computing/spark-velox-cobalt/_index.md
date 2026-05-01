@@ -16,7 +16,7 @@ learning_objectives:
   - Build and integrate Gluten with the Velox backend for native query execution
   - Configure Spark SQL for columnar and vectorized execution
   - Generate and load TPC-DS datasets for benchmarking
-  - Run Spark SQL workloads and compare performance between vanilla Spark and Gluten + Velox
+  - Run Spark SQL workloads and compare performance between vanilla Spark and Gluten with Velox
 
 prerequisites:
   - A [Microsoft Azure account](https://azure.microsoft.com/) with access to Cobalt 100 based instances (Dpsv6)

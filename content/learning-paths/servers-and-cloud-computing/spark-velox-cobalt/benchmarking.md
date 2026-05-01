@@ -6,8 +6,6 @@ weight: 5
 layout: learningpathall
 ---
 
-## Run TPC-DS Benchmark on Spark
-
 TPC-DS is an industry-standard benchmark that simulates a decision support workload across a realistic retail data model. In this section, you'll generate a 10 GB TPC-DS dataset, load it into Spark, and run five analytical queries to measure execution time on your Arm64 VM.
 
 You'll run Spark in local mode using Parquet-formatted data and hand-written SQL queries. This avoids the schema mismatches and resource contention that commonly affect automated benchmarking frameworks such as `spark-sql-perf`, and gives you a reproducible, stable baseline.
@@ -20,7 +18,7 @@ To avoid these issues, you can convert the raw data to Parquet before querying. 
 
 ## Generate TPC-DS data
 
-Clone the Databricks fork of `tpcds-kit` and build the `dsdgen` data generation tool. The Databricks fork is required here because the original `gregrahn/tpcds-kit` source does not build cleanly on Ubuntu 22.04 or 24.04 with GCC 10+.
+Clone the Databricks fork of `tpcds-kit` and build the `dsdgen` data generation tool. The Databricks fork is required here because the original `gregrahn/tpcds-kit` source does not build cleanly on Ubuntu 22.04 or 24.04 with GCC 10+
 
 ```console
 cd /opt
@@ -544,5 +542,5 @@ Full offload of the `Exchange` operator to Velox (eliminating JVM fallback) requ
 
 ## What you've accomplished 
 
-You've run a complete TPC-DS benchmark on an Arm64 Azure Cobalt 100 VM, comparing standard JVM execution against Gluten and Velox native acceleration. You generated a 10 GB dataset, converted it to Parquet, registered all 24 TPC-DS tables as Spark views, and ran five analytical queries across both configurations. The dimension join query showed a 28% improvement with Gluten and Velox, demonstrating the benefit of native Velox execution for large join workloads on Arm64.
+You've now run a complete TPC-DS benchmark on an Arm64 Azure Cobalt 100 VM, comparing standard JVM execution against Gluten and Velox native acceleration. You generated a 10 GB dataset, converted it to Parquet, registered all 24 TPC-DS tables as Spark views, and ran five analytical queries across both configurations. The dimension join query showed a 28% improvement with Gluten and Velox, demonstrating the benefit of native Velox execution for large join workloads on Arm64.
 
