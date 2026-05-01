@@ -3,10 +3,6 @@ title: Migrate MySQL from on-premises x64 to Azure Cobalt 100 Arm VMs
 
 description: Learn how to migrate a MySQL database from an on-premises x64 environment to an Arm-based Azure Cobalt 100 VM and validate performance with sysbench.
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 30
 
 who_is_this_for: This Learning Path is for developers who want to migrate MySQL from an on-premises x64 environment to an Arm-based Azure Cobalt 100 virtual machine.

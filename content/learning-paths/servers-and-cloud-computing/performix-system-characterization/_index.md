@@ -3,10 +3,6 @@ title: Characterize system performance with Arm Performix
 
 description: Learn how to run the Arm Performix System Characterization recipe to benchmark memory latency and bandwidth on Arm hardware and interpret the generated results.
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for developers and performance engineers who want to characterize the hardware performance of Arm-based Linux systems using Arm Performix.
@@ -17,7 +13,7 @@ learning_objectives:
     - Locate and interpret the generated plots and raw benchmark data in the output directory
 
 prerequisites:
-    - A Arm Linux target machine accessible via SSH to characterize.
+    - An Arm Linux target machine accessible via SSH to characterize.
 
 author:
 - Brendan Long

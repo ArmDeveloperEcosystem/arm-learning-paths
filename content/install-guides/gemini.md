@@ -359,8 +359,13 @@ Make sure to use a `,` at the end of each object that is not the last one. For e
         "run",
         "--rm",
         "-i",
-        "-v", "$HOME/workspace:/workspace",
-        "--name", "arm-mcp",
+        "--pull=always",
+        "-v",
+        "/path/to/your/workspace:/workspace",
+        "-v",
+        "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v",
+        "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ],
       "env": {},
@@ -371,6 +376,8 @@ Make sure to use a `,` at the end of each object that is not the last one. For e
 ```
 
 This configuration tells Gemini CLI to connect to the Arm MCP server running in the Docker container.
+
+To enable Arm Performix features through the Arm MCP Server, replace `/path/to/your/ssh/private_key` and `/path/to/your/ssh/known_hosts` with the SSH private key and `known_hosts` file used for your target device.
 
 ### Verify the Arm MCP server is working
 
