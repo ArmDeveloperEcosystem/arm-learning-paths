@@ -5,10 +5,6 @@ author: Pareena Verma
 minutes_to_complete: 10
 official_docs: https://docs.github.com/en/copilot
 
-test_maintenance: true
-test_images:
-- ubuntu:latest
-
 layout: installtoolsall
 multi_install: false
 multitool_install_part: false
@@ -294,6 +290,142 @@ Add the following configuration to the user-level `mcp.json` file:
 After saving your `mcp.json` file, a **Start** button appears at the top of the servers list. Select this button to start the Arm MCP Server.
 
 To enable Arm Performix features through the Arm MCP Server, replace `/path/to/your/ssh/private_key` and `/path/to/your/ssh/known_hosts` with the SSH private key and `known_hosts` file used for your target device.
+
+## Optional: Use a Docker replacement containerization tool
+
+You can use other containerization tools besides Docker that are free and do not require licenses, such as Podman, Finch, Colima, and Rancher Desktop. Choose one of the options below and use its CLI in place of docker.
+
+{{< tabpane-normal >}}
+  {{< tab header="Podman" >}}
+Install: [Podman](https://podman.io/docs/installation)
+
+Pull the Arm MCP Server image:
+```console
+podman pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `mcp.json` file:
+```json
+{
+  "servers": {
+    "arm-mcp": {
+      "type": "stdio",
+      "command": "podman",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--pull=always",
+        "-v", "/path/to/your/workspace:/workspace",
+        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+        "armlimited/arm-mcp:latest"
+      ]
+    }
+  }
+}
+```
+If you still run into issues, set `"command"` to the full path of the Podman binary.
+After saving your `mcp.json` file, a **Start** button appears at the top of the servers list. Select this button to start the Arm MCP Server.
+  {{< /tab >}}
+  {{< tab header="Finch" >}}
+Install: [Finch](https://runfinch.com/docs/getting-started/installation/)
+
+Pull the Arm MCP Server image:
+```console
+finch pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `mcp.json` file:
+```json
+{
+  "servers": {
+    "arm-mcp": {
+      "type": "stdio",
+      "command": "finch",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--pull=always",
+        "-v", "/path/to/your/workspace:/workspace",
+        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+        "armlimited/arm-mcp:latest"
+      ]
+    }
+  }
+}
+```
+After saving your `mcp.json` file, a **Start** button appears at the top of the servers list. Select this button to start the Arm MCP Server.
+  {{< /tab >}}
+  {{< tab header="Colima" >}}
+Install: [Colima](https://github.com/abiosoft/colima#installation)
+
+Colima provides a Docker-compatible CLI via Docker contexts.
+
+Pull the Arm MCP Server image:
+```console
+docker pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `mcp.json` file:
+```json
+{
+  "servers": {
+    "arm-mcp": {
+      "type": "stdio",
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--pull=always",
+        "-v", "/path/to/your/workspace:/workspace",
+        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+        "armlimited/arm-mcp:latest"
+      ]
+    }
+  }
+}
+```
+After saving your `mcp.json` file, a **Start** button appears at the top of the servers list. Select this button to start the Arm MCP Server.
+  {{< /tab >}}
+  {{< tab header="Rancher Desktop" >}}
+Install: [Rancher Desktop](https://docs.rancherdesktop.io/getting-started/installation/)
+
+Rancher Desktop uses the Docker container engine via Morby.
+
+Pull the Arm MCP Server image:
+```console
+docker pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `mcp.json` file:
+```json
+{
+  "servers": {
+    "arm-mcp": {
+      "type": "stdio",
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--pull=always",
+        "-v", "/path/to/your/workspace:/workspace",
+        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+        "armlimited/arm-mcp:latest"
+      ]
+    }
+  }
+}
+```
+After saving your `mcp.json` file, a **Start** button appears at the top of the servers list. Select this button to start the Arm MCP Server.
+  {{< /tab >}}
+{{< /tabpane-normal >}}
 
 ## How do I analyze a local codebase with the Arm MCP Server?
 
