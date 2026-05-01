@@ -315,7 +315,10 @@ Add the following configuration to the user-level `mcp.json` file:
         "run",
         "--rm",
         "-i",
-        "-v", "/path/to/your/codebase:/workspace",
+        "--pull=always",
+        "-v", "/path/to/your/workspace:/workspace",
+        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ]
     }
@@ -344,7 +347,10 @@ Add the following configuration to the user-level `mcp.json` file:
         "run",
         "--rm",
         "-i",
-        "-v", "/path/to/your/codebase:/workspace",
+        "--pull=always",
+        "-v", "/path/to/your/workspace:/workspace",
+        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ]
     }
@@ -374,7 +380,10 @@ Add the following configuration to the user-level `mcp.json` file:
         "run",
         "--rm",
         "-i",
-        "-v", "/path/to/your/codebase:/workspace",
+        "--pull=always",
+        "-v", "/path/to/your/workspace:/workspace",
+        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ]
     }
@@ -404,7 +413,10 @@ Add the following configuration to the user-level `mcp.json` file:
         "run",
         "--rm",
         "-i",
-        "-v", "/path/to/your/codebase:/workspace",
+        "--pull=always",
+        "-v", "/path/to/your/workspace:/workspace",
+        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ]
     }

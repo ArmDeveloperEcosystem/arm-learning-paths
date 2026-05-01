@@ -236,7 +236,7 @@ podman pull armlimited/arm-mcp:latest
 To make the Arm MCP Server available across all your projects (user scope):
 
 ```console
-claude mcp add --scope user --transport stdio arm-mcp -- podman run --rm -i --pull=always -v "$(pwd):/workspace" armlimited/arm-mcp:latest
+claude mcp add --scope user --transport stdio arm-mcp -- podman run --rm -i --pull=always -v "$(pwd):/workspace" -v "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro" -v "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro" armlimited/arm-mcp:latest
 ```
 This configuration is stored in `~/.claude.json` and is accessible from any project directory.
 You can choose other scopes (local or project) as described in the Docker section above.
@@ -252,7 +252,7 @@ finch pull armlimited/arm-mcp:latest
 To make the Arm MCP Server available across all your projects (user scope):
 
 ```console
-claude mcp add --scope user --transport stdio arm-mcp -- finch run --rm -i --pull=always -v "$(pwd):/workspace" armlimited/arm-mcp:latest
+claude mcp add --scope user --transport stdio arm-mcp -- finch run --rm -i --pull=always -v "$(pwd):/workspace" -v "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro" -v "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro" armlimited/arm-mcp:latest
 ```
 This configuration is stored in `~/.claude.json` and is accessible from any project directory.
 You can choose other scopes (local or project) as described in the Docker section above.
@@ -270,7 +270,7 @@ docker pull armlimited/arm-mcp:latest
 To make the Arm MCP Server available across all your projects (user scope):
 
 ```console
-claude mcp add --scope user --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "$(pwd):/workspace" armlimited/arm-mcp:latest
+claude mcp add --scope user --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "$(pwd):/workspace" -v "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro" -v "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro" armlimited/arm-mcp:latest
 ```
 This configuration is stored in `~/.claude.json` and is accessible from any project directory.
 You can choose other scopes (local or project) as described in the Docker section above.
@@ -288,7 +288,7 @@ docker pull armlimited/arm-mcp:latest
 To make the Arm MCP Server available across all your projects (user scope):
 
 ```console
-claude mcp add --scope user --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "$(pwd):/workspace" armlimited/arm-mcp:latest
+claude mcp add --scope user --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "$(pwd):/workspace" -v "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro" -v "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro" armlimited/arm-mcp:latest
 ```
 This configuration is stored in `~/.claude.json` and is accessible from any project directory.
 You can choose other scopes (local or project) as described in the Docker section above.

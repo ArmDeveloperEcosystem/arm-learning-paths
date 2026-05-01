@@ -253,8 +253,10 @@ args = [
     "run",
     "--rm",
     "-i",
-    "-v", "/Users/yourname01/yourlocalcodebase:/workspace",
-    "--name", "arm-mcp",
+  "--pull=always",
+  "-v", "/path/to/your/workspace:/workspace",
+  "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+  "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
     "armlimited/arm-mcp:latest"
 ]
 startup_timeout_sec = 60
@@ -276,8 +278,10 @@ args = [
     "run",
     "--rm",
     "-i",
-    "-v", "/Users/yourname01/yourlocalcodebase:/workspace",
-    "--name", "arm-mcp",
+  "--pull=always",
+  "-v", "/path/to/your/workspace:/workspace",
+  "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+  "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
     "armlimited/arm-mcp:latest"
 ]
 startup_timeout_sec = 60
@@ -301,8 +305,10 @@ args = [
     "run",
     "--rm",
     "-i",
-    "-v", "/Users/yourname01/yourlocalcodebase:/workspace",
-    "--name", "arm-mcp",
+  "--pull=always",
+  "-v", "/path/to/your/workspace:/workspace",
+  "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+  "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
     "armlimited/arm-mcp:latest"
 ]
 startup_timeout_sec = 60
@@ -326,8 +332,10 @@ args = [
     "run",
     "--rm",
     "-i",
-    "-v", "/Users/yourname01/yourlocalcodebase:/workspace",
-    "--name", "arm-mcp",
+  "--pull=always",
+  "-v", "/path/to/your/workspace:/workspace",
+  "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+  "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
     "armlimited/arm-mcp:latest"
 ]
 startup_timeout_sec = 60
