@@ -8,12 +8,12 @@ layout: "learningpathall"
 
 ## Install system dependencies
 
-SSH into your x64 on-premises VM and run the following commands to update the system and install build tools, Python 3.10, and a Python virtual environment. The migration scripts require Python 3.10:
+SSH into your x64 on-premises VM. Then, run the following commands to update the system and install prequisites for the migration scripts such as build tools, Python 3.10, and a Python virtual environment:
 
 ```bash
 sudo apt update
 sudo apt -y dist-upgrade
-sudo apt install -y build-essential net-tools curl wget python3-dev python3-venv python3-pip openjdk-21-jdk apt-transport-https ca-certificates curl software-properties-common
+sudo apt install -y build-essential net-tools curl wget python3-dev python3-venv python3-pip openjdk-21-jdk apt-transport-https ca-certificates software-properties-common
 sudo add-apt-repository -y ppa:deadsnakes/ppa
 sudo apt update
 sudo apt install -y python3.10-dev python3.10 python3.10-venv
@@ -142,6 +142,8 @@ cd lift-n-shift-assets/testdb
 gunzip -c testdb.sql.gz | mysql -h localhost -u admin -p
 ```
 
-## What you've learned and what's next
+## What you've accomplished and what's next
 
-You prepared the on-premises x64 simulator with MySQL, sysbench, Terraform, and Azure CLI. In the next section, you'll run the migration workflow to move `testdb` to an Arm-based Azure VM.
+You've now prepared the on-premises x64 simulator with MySQL, sysbench, Terraform, and Azure CLI. 
+
+In the next section, you'll run the migration workflow to move `testdb` to an Arm-based Azure VM.
