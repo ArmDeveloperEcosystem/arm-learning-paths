@@ -3,18 +3,14 @@ title: Migrate MySQL from on-premises x64 to Azure Cobalt 100 Arm VMs
 
 description: Learn how to migrate a MySQL database from an on-premises x64 environment to an Arm-based Azure Cobalt 100 VM and validate performance with sysbench.
 
-draft: true
-cascade:
-    draft: true
-
-minutes_to_complete: 30   
+minutes_to_complete: 30
 
 who_is_this_for: This Learning Path is for developers who want to migrate MySQL from an on-premises x64 environment to an Arm-based Azure Cobalt 100 virtual machine.
 
 learning_objectives: 
-    - Provision an Arm-based Azure Cobalt 100 virtual machine by using Terraform and Azure CLI.
-    - Export and restore a MySQL database from an on-premises x64 simulator into the Arm VM.
-    - Run sysbench on the migrated database and interpret key performance metrics.
+    - Provision an Arm-based Azure Cobalt 100 virtual machine using Terraform and Azure CLI
+    - Export and restore a MySQL database from an on-premises x64 simulator into the Arm VM
+    - Run sysbench on the migrated database and interpret key performance metrics
 
 prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
@@ -25,7 +21,7 @@ author: Doug Anson
 
 ### Tags
 skilllevels: Introductory
-subjects: Performance and Architecture
+subjects: Databases
 cloud_service_providers:
   - Microsoft Azure
 
@@ -57,8 +53,8 @@ further_reading:
       type: documentation
   - resource:
       title: sysbench benchmarking tools for MySQL
-      link: https://manpages.ubuntu.com/manpages/trusty/man1/sysbench.1.html 
-      type: documentation
+      link: https://github.com/akopytov/sysbench
+      type: website
 
 
 ### FIXED, DO NOT MODIFY

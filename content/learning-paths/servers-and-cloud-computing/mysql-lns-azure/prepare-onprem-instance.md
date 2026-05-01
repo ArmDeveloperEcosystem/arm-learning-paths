@@ -6,18 +6,14 @@ weight: 4
 layout: "learningpathall"
 ---
 
-### Introduction
+## Install system dependencies
 
-In this section, you'll install required tools on the on-premises x64 simulator and prepare it as the MySQL migration source.
-
-### Install MySQL Server "on-prem"
-
-Update the on-premises instance and install MySQL server and sysbench. In an SSH session to the on-premises instance, run:
+SSH into your x64 on-premises VM. Then, run the following commands to update the system and install prequisites for the migration scripts such as build tools, Python 3.10, and a Python virtual environment:
 
 ```bash
 sudo apt update
 sudo apt -y dist-upgrade
-sudo apt install -y build-essential net-tools curl wget python3-dev python3-venv python3-pip openjdk-21-jdk apt-transport-https ca-certificates curl software-properties-common
+sudo apt install -y build-essential net-tools curl wget python3-dev python3-venv python3-pip openjdk-21-jdk apt-transport-https ca-certificates software-properties-common
 sudo add-apt-repository -y ppa:deadsnakes/ppa
 sudo apt update
 sudo apt install -y python3.10-dev python3.10 python3.10-venv
@@ -26,7 +22,9 @@ echo "source $HOME/LnS/bin/activate" >> $HOME/.bashrc
 sudo reboot
 ```
 
-Log back in to the x64 on-premises server and continue:
+## Install MySQL, sysbench, Azure CLI, and Terraform
+
+Log back in to the x64 on-premises server. Install MySQL Server and sysbench, then apply InnoDB tuning parameters suited to the VM size:
 
 ```bash
 sudo apt install -y mysql-server
@@ -34,6 +32,11 @@ sudo apt install -y sysbench
 echo innodb_buffer_pool_size = 16G | sudo tee -a /etc/mysql/mysql.conf.d/mysqld.cnf > /dev/null
 echo innodb_flush_log_at_trx_commit = 2  | sudo tee -a  /etc/mysql/mysql.conf.d/mysqld.cnf > /dev/null
 echo innodb_log_file_size = 3G  | sudo tee -a   /etc/mysql/mysql.conf.d/mysqld.cnf > /dev/null
+```
+
+Install Azure CLI and Terraform. These tools are used later to provision the Arm-based target VM and run the migration:
+
+```bash
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
@@ -41,7 +44,7 @@ sudo apt update && sudo apt install terraform
 sudo reboot
 ```
 
-### Confirm mysql client, terraform and Azure CLI are operational
+## Confirm MySQL, Terraform, and Azure CLI installations
 
 Open a new SSH shell into your x64 VM and confirm the MySQL client is available:
 
@@ -49,7 +52,7 @@ Open a new SSH shell into your x64 VM and confirm the MySQL client is available:
 sudo mysql --version
 ```
 
-Should see output similar to:
+The output is similar to:
 
 ```output
 mysql  Ver 8.0.45-0ubuntu0.24.04.1 for Linux on x86_64 ((Ubuntu))
@@ -61,7 +64,7 @@ Confirm the Terraform installation version:
 terraform --version
 ```
 
-Should see output similar to:
+The output is similar to:
 
 ```output
 Terraform v1.14.8
@@ -74,7 +77,7 @@ Confirm the Azure CLI installation version:
 az --version
 ```
 
-Should see output similar to:
+The output is similar to:
 
 ```output
 azure-cli                         2.85.0
@@ -98,9 +101,9 @@ Legal docs and information: aka.ms/AzureCliLegal
 Your CLI is up-to-date.
 ```
 
-### Create an admin user in MySQL that has a password 
+## Create a MySQL admin user
 
-With the MySQL client, enter mysql:
+Create an admin user that the migration scripts will use to access the database. Connect to MySQL as root:
 
 ```bash
 sudo mysql
@@ -123,22 +126,24 @@ mysql -u admin -p
 
 After you supply the password, you should see the MySQL prompt. Type `quit;` to exit.
 
-### Install the sysbench test database as our sample DB to "migrate"
+## Load the sample database
 
-Clone the asset repo:
+Clone the asset repository that contains the migration scripts and sample database:
 
 ```bash
 cd $HOME
 git clone https://github.com/DougAnsonAustinTX/lift-n-shift-assets
 ```
 
-Once downloaded, restore the DB as follows:
+Restore the sample database into MySQL:
 
 ```bash
 cd lift-n-shift-assets/testdb
 gunzip -c testdb.sql.gz | mysql -h localhost -u admin -p
 ```
 
-### What we learned and what's next
+## What you've accomplished and what's next
 
-You prepared the on-premises x64 simulator with MySQL, sysbench, Terraform, and Azure CLI. In the next section, you'll run the migration workflow to move `testdb` to an Arm-based Azure VM.
+You've now prepared the on-premises x64 simulator with MySQL, sysbench, Terraform, and Azure CLI. 
+
+In the next section, you'll run the migration workflow to move `testdb` to an Arm-based Azure VM.

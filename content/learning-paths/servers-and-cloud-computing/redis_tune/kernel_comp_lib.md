@@ -4,41 +4,53 @@ weight: 2
 layout: "learningpathall"
 ---
 
-In this section you can get an overview of the linux kernel, compiler and OpenSSL settings that impact the performance of Redis.
+This section gives an overview of Linux kernel, compiler, and OpenSSL settings that can impact Redis performance.
 
-##  Kernel configuration
+## Kernel Configuration
 
-The profile of requests made by clients will differ based on the use case. This means there is no one size fits all set of tuning parameters for Redis. Use the information below as general guidance to tune Redis.
+The request profile varies by use case, so there is no one-size-fits-all set of tuning parameters for Redis. Use the information below as a starting point, then measure the impact for your workload.
 
 ### Memory Management
 
-The memory related kernel parameters can be changed either temporarily through the `/proc` file system or permanently using the `sysctl` command.
-To improve memory utilization on your system, use the following commands:
+Memory-related kernel parameters can be changed temporarily with `sysctl -w` or made persistent by adding them to a file under `/etc/sysctl.d/`.
+
+Use the following commands to apply the settings immediately:
 
 ```console
-sudo echo 'vm.overcommit_memory = 1' >> /etc/sysctl.conf 
-sudo echo 'vm.swappiness=1' >> /etc/sysctl.conf 
+sudo sysctl -w vm.overcommit_memory=1
+sudo sysctl -w vm.swappiness=1
 ```
-Understand the parameters:
 
-* `vm.overcommit_memory`:
-  * Enabling overcommit_memory to avoid out of memory space issues. If the overcommit memory value is 0 then there is chance that Redis will get an OOM (out of memory) error.  
-* `vm.swappiness`:
-  * When the Redis server consuming high memory, configuring the swappiness to its lowest value could be helpful. 
+To make the settings persistent across reboots, create a Redis-specific sysctl file:
+
+```console
+printf "vm.overcommit_memory = 1\nvm.swappiness = 1\n" | sudo tee /etc/sysctl.d/99-redis.conf
+sudo sysctl --system
+```
+
+`vm.overcommit_memory` should be set to `1` so Redis background save and rewrite operations are less likely to fail during `fork()`.
+
+`vm.swappiness` controls how aggressively Linux swaps memory pages. A low value helps reduce Redis latency caused by paging under memory pressure.
 
 ### Transparent Huge Page
 
-Redis by default will disable transparent huge page (THP) if it is enabled for Redis process to avoid latency problems. You should disable this parameter in case this config has no effect.
+Transparent Huge Pages (THP) can increase Redis latency and memory use, especially when Redis forks for RDB snapshots or AOF rewrite. Disable THP at the kernel level on systems used for Redis performance tuning.
 
-The command to disable this setting is shown below:
+Check the current THP setting:
 
 ```console
-sudo echo never > /sys/kernel/mm/transparent_hugepage/enabled  
+cat /sys/kernel/mm/transparent_hugepage/enabled
+```
+
+Disable THP until the next reboot:
+
+```console
+echo never | sudo tee /sys/kernel/mm/transparent_hugepage/enabled
 ```
 
 ### Linux Network Stack
 
-The Linux Network stack settings can be changed in the `/etc/sysctl.conf` file, or by using the `sysctl` command.
+Linux network stack settings can be changed temporarily with `sysctl -w` or made persistent by adding them to a file under `/etc/sysctl.d/`.
 
 Documentation on each of the parameters discussed below can be found in the [admin-guide](https://github.com/torvalds/linux/blob/master/Documentation/admin-guide/sysctl/net.rst) and [networking](https://github.com/torvalds/linux/blob/master/Documentation/networking/ip-sysctl.rst) documentation within the Linux source.
 
@@ -48,34 +60,39 @@ Run the command below to list all kernel parameters.
 sudo sysctl -a
 ```
 
-Shown below are the network stack settings used for performance testing.
+Shown below are network stack settings used for Redis performance tuning.
 
 ```console
 sudo sysctl -w net.core.somaxconn=65535
 sudo sysctl -w net.ipv4.tcp_max_syn_backlog=65535
-
 ```
 
-These settings open up the network stack to make sure it is not a bottleneck.
+These settings raise connection queue limits so the kernel is less likely to be the bottleneck during high connection churn.
 
 * `net.core.somaxconn`:
-  * This setting is used to select the maximum number of connections the kernel will allow.
+  * This setting controls the maximum listen backlog the kernel allows.
   * If the Redis server is expected to support a large number of clients, it may be helpful to increase this parameter.
-  * A value of 65535 is probably excessively large for production. In practice, this just needs to be large enough to support the peak number of connections that will be made.
+  * The value should be at least as large as the Redis `tcp-backlog` setting.
+  * A value of 65535 is probably too large for production. In practice, this only needs to support the expected peak connection backlog.
 * `net.ipv4.tcp_max_syn_backlog`:
-  * This setting is used to select the maximum number of connection requests that are pending but not established yet.
-  * A value of 65535 is probably excessively large for production. In practice, this just needs to be large enough to support the peak number of connection requests that will be made.
+  * This setting controls the maximum number of connection requests that are pending but not established.
+  * A value of 65535 is probably too large for production. In practice, this only needs to support the expected peak rate of new connection attempts.
 
 
-##  Compiler Considerations
+## Compiler Considerations
 
-The easiest way to gain performance is to use the latest version of GCC. Aside from that, the flag `-mcpu` and `-flto` can be used to potentially gain additional performance. Usage of these flags is explained in the [Migrating C/C++ applications](/learning-paths/servers-and-cloud-computing/migration/c/) section of the [Migrating applications to Arm servers](/learning-paths/servers-and-cloud-computing/migration/) learning path.
+If you build Redis from source, use a recent GCC version from your Linux distribution. Compiler flags such as `-mcpu` and `-flto` can change performance, but they should be tested against your workload before use. Usage of these flags is explained in the [Migrating C/C++ applications](/learning-paths/servers-and-cloud-computing/migration/c/) section of the [Migrating applications to Arm servers](/learning-paths/servers-and-cloud-computing/migration/) learning path.
 
-If you need to understand how to configure a build of Redis. Please review the [build Redis from source](https://redis.io/docs/latest/operate/oss_and_stack/install/archive/install-redis/install-redis-from-source/).
+For Redis build instructions, review the [build Redis from source](https://redis.io/docs/latest/operate/oss_and_stack/install/archive/install-redis/install-redis-from-source/) documentation.
 
-##  OpenSSL Considerations
+## OpenSSL Considerations
 
-Redis relies on [OpenSSL](https://www.openssl.org/) for cryptographic operations. Thus, the version of OpenSSL used with Redis (and the GCC version and switches used to compile it) can impact performance. Typically using the Linux distribution default version of OpenSSL is sufficient.
+Redis uses [OpenSSL](https://www.openssl.org/) for TLS. TLS adds encryption and integrity-check overhead, so it can reduce the maximum throughput of a Redis instance. Typically, the Linux distribution default OpenSSL version is sufficient.
 
-However, it is possible to use newer versions of OpenSSL which could yield performance improvements. This is achieved by using the `--with-openssl` switch when configuring the Redis build. Point this switch to the directory that contains the source code of the version of OpenSSL you'd like to have Redis link to. The Redis build system takes care of the rest. There is also a `--with-openssl-opt` switch which allows you to add options to the build for OpenSSL.
+To build Redis with TLS support, install the OpenSSL development libraries for your distribution and build Redis with:
 
+```console
+make BUILD_TLS=yes
+```
+
+Only test a newer OpenSSL version if TLS is part of the workload. If clients connect without TLS, OpenSSL does not affect Redis command throughput.

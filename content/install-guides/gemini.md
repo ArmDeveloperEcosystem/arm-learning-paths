@@ -359,8 +359,13 @@ You may have other objects already in the file so make sure to use a `,` at the 
         "run",
         "--rm",
         "-i",
-        "-v", "$HOME/workspace:/workspace",
-        "--name", "arm-mcp",
+        "--pull=always",
+        "-v",
+        "/path/to/your/workspace:/workspace",
+        "-v",
+        "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v",
+        "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ],
       "env": {},
@@ -371,6 +376,8 @@ You may have other objects already in the file so make sure to use a `,` at the 
 ```
 
 This configuration tells Gemini CLI to connect to the Arm MCP server running in the Docker container.
+
+To enable Arm Performix features through the Arm MCP Server, replace `/path/to/your/ssh/private_key` and `/path/to/your/ssh/known_hosts` with the SSH private key and `known_hosts` file used for your target device.
 
 ### Optional: Use a Docker replacement containerization tool
 

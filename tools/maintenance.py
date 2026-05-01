@@ -153,9 +153,6 @@ def main():
         elif "/migration" in os.path.abspath(args.instructions):
                 logging.info("Migration paths are not supported for maintenance tests yet.")
                 exit(0)
-        elif "/stats" in os.path.abspath(args.instructions):
-                logging.info("Stats paths are not supported for maintenance tests.")
-                exit(0)
         else:
             logging.error("-i/--instructions expects a .md file, a CSV with a list of files or a Learning Path directory")
         if results_dict is not None:
