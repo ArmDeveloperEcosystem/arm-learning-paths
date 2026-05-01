@@ -6,8 +6,6 @@ weight: 4
 layout: learningpathall
 ---
 
-In this section, you'll set up Spark with Gluten and Velox on Arm64 (Azure Cobalt 100). You'll install Hadoop, Spark, and Hive, and configure a single-node cluster.
-
 ## Before you begin
 
 Switch to the root user and install all required system packages. This ensures you have the correct Java version, build tools, and database dependencies for Spark, Hadoop, Hive, and Gluten on Arm64.
