@@ -3,17 +3,20 @@ title: Integrate the voice sentiment classification model
 weight: 7
 layout: learningpathall
 ---
-In this section, you will integrate the voice sentiment classification model into the baseline voice-to-LLM pipeline and build a sentiment-aware voice assistant. You will update the prompt sent to the LLM so it includes both the transcript and the predicted sentiment, combining speech, emotion, and language understanding into a single application.
+
+## Build the complete sentiment-aware voice assistant
+
+In this section, you'll integrate the voice sentiment classification model into the baseline voice-to-LLM pipeline and build a sentiment-aware voice assistant. You'll update the prompt sent to the LLM so it includes both the transcript and the predicted sentiment, combining speech, emotion, and language understanding into a single application.
 
 End-to-end response time may take a few seconds because the application runs Whisper transcription, ONNX sentiment inference, and local LLM generation for each interaction.
 
-![Integrated voice-to-LLM pipeline#center](6_vsapipeline4.png "Integrated voice-to-LLM pipeline")
+![Integrated pipeline diagram showing audio input splitting into two parallel paths: Whisper produces transcript text and HuBERT produces sentiment label, both feeding into an LLM prompt that generates context-aware responses#center](6_vsapipeline4.png "Integrated voice-to-LLM pipeline")
 
 In Steps 4.1 to 4.4, continue editing the same `app.py` file you created in the baseline pipeline section (`~/voice-sentiment-assistant/app.py`).
 
 ### Step 4.1 - Load the voice sentiment classification model
 
-This step initializes the trained and quantized ONNX model, then loads the matching preprocessing components used during training. You will reuse these objects every time you run sentiment inference on new audio.
+This step initializes the trained and quantized ONNX model, then loads the matching preprocessing components used during training. You'll reuse these objects every time you run sentiment inference on new audio.
 
 Add these imports and model-loading definitions to `app.py`:
 - add the imports with your other imports at the top of the file
@@ -37,7 +40,7 @@ feature_extractor = AutoFeatureExtractor.from_pretrained(MODEL_DIR)
 id2label = AutoConfig.from_pretrained(MODEL_DIR).id2label
 ```
 
-### Step 4.2 - Create sentiment prediction function
+### Step 4.2 - Create the sentiment prediction function
 
 Next, create a helper function that takes an audio file path, runs the sentiment model, and returns the predicted label. This adds the emotion-aware part of the assistant.
 
@@ -101,7 +104,7 @@ def handle_audio(audio_path):
     return text, sentiment, answer
 ```
 
-### Step 4.4 - Update User Interface (UI)
+### Step 4.4 - Update user interface (UI)
 
 In this step, update the interface so it displays three outputs: the transcript, the predicted sentiment, and the final LLM response. For consistency with the earlier page, connect the microphone input with `mic.change(...)`.
 
@@ -244,7 +247,7 @@ A more robust approach is to combine voice with other modalities such as text an
 ## Troubleshooting
 
 - No sentiment output: check that `ONNX_PATH` points to the quantized ONNX model from the previous section.
-- Slow response: make sure you are using `hubert_vsa_ravdess_int8.onnx` and that `llama-server` is already running.
+- Slow response: make sure you're using `hubert_vsa_ravdess_int8.onnx` and that `llama-server` is already running.
 - LLM not responding: verify that `llama-server` is still available at `http://127.0.0.1:8080`.
 - Microphone input not updating: check browser microphone permissions.
 

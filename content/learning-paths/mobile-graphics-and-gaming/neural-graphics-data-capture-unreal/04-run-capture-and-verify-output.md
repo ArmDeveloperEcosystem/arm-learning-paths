@@ -26,7 +26,7 @@ If you use **New Editor Window (PIE)**, captured frame dimensions can differ fro
 - Move through the level to capture frames.
 - Press `V` to stop capture.
 
-![Screenshot of the Standalone Game window during active capture showing the game viewport with the character visible. This shows what you'll see while frames are being captured.#center](./images/standalone-capture-running.png "Capture running in Standalone mode")
+![Screenshot of the Standalone Game window during active capture showing the game viewport with the character visible. This shows what you'll see while frames are being captured.#center](./images/standalone-capture-running.webp "Capture running in Standalone mode")
 
 After stopping, you should see a completion notification in the bottom right corner. 
 

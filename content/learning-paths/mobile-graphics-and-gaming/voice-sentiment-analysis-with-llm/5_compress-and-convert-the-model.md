@@ -3,7 +3,10 @@ title: Convert and quantize the model
 weight: 6
 layout: learningpathall
 ---
-In this section, you will convert the trained model to ONNX format and compress it for efficient on-device inference. First, export the trained PyTorch model to ONNX. Then apply post-training quantization to reduce model size and improve runtime efficiency.
+
+## Export and optimize the model for on-device inference
+
+In this section, you'll convert the trained model to ONNX format and compress it for efficient on-device inference. First, export the trained PyTorch model to ONNX. Then apply post-training quantization to reduce model size and improve runtime efficiency.
 
 ### Step 3.1 - Export to ONNX
 
@@ -70,7 +73,7 @@ You can verify the exported file with:
 ls models/hubert_vsa_ravdess_onnx
 ```
 
-### Step 3.2 - Quantize model
+### Step 3.2 - Quantize the model
 
 This step applies dynamic INT8 quantization to the ONNX model. The model weights are quantized to integer 8 bits ahead of time, while activations are quantized dynamically during inference.
 
@@ -178,7 +181,7 @@ If this file does not exist on your system, replace `SAMPLE_PATH` with any `.wav
 
 After this step, you have verified that quantized ONNX inference works with your trained model.
 
-You should see a predicted label such as:
+The output is similar to:
 
 ```text
 Predicted: happy
@@ -198,7 +201,7 @@ models/
 
 You can also compare the model metrics before and after quantization.
 
-![Model ONNX conversion and int-8 quantization results#center](4_modelconversionandcompression.png "Model ONNX conversion and int-8 quantization results")
+![Diagram showing model file sizes and performance metrics comparing the original ONNX model to the int-8 quantized version, demonstrating reduced size and improved inference speed#center](4_modelconversionandcompression.png "Model ONNX conversion and int-8 quantization results")
 
 Typical results look like:
 
@@ -211,6 +214,15 @@ Quantized INT8 ONNX model: smaller size, lower memory footprint, faster CPU infe
 
 - ONNX export fails: ensure the trained model exists in `models/hubert_vsa_ravdess`.
 - Inference error about missing inputs: confirm that both `input_values` and `attention_mask` are passed to the ONNX session.
-- Slow inference: make sure you are using `hubert_vsa_ravdess_int8.onnx` rather than the unquantized ONNX model.
+- Slow inference: make sure you're using `hubert_vsa_ravdess_int8.onnx` rather than the unquantized ONNX model.
 
-The model is now ready for integration into the voice pipeline in the next section.
+## What you've learned and what's next
+
+In this section, you:
+
+- Exported the PyTorch sentiment model to ONNX format
+- Applied int-8 quantization to reduce model size and improve inference speed
+- Verified that the quantized ONNX model produces correct predictions
+- Prepared the model for efficient CPU inference on Arm devices
+
+You now have an optimized sentiment classification model ready for production use. In the next section, you'll integrate this ONNX model into the voice-to-LLM pipeline to create a complete sentiment-aware voice assistant.

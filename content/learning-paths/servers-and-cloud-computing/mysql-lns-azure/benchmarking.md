@@ -1,17 +1,12 @@
 ---
-title: Benchmarking with Arm-based Azure Cloud MySQL
+title: Benchmark MySQL performance on Azure Cobalt 100
 
 weight: 6
 
 layout: "learningpathall"
 ---
 
-### Introduction
-
-In this section, you'll run sysbench on the Arm-based Azure MySQL instance and review core performance metrics.
-
-
-### Preparing to run the benchmark
+## Prepare to run the benchmark
 
 From your local machine, open an SSH shell to the on-premises simulator by replacing `YOUR_RSA_FILENAME` and `YOUR_ONPREM_IP_ADDRESS`:
 
@@ -27,7 +22,7 @@ ssh -i $HOME/.ssh/AZURE_CLOUD_RSA_FILENAME azureadmin@YOUR_ARM_BASED_VM_PUBLIC_I
 
 You should now have an SSH shell into your Arm-based Azure VM.
 
-Next, create a file named `run.sh` with the following content:
+Create a file named `run.sh` with the following content. The script runs sysbench `oltp_read_write` at five thread counts (16, 32, 64, 96, and 128), each for 60 seconds, and writes the results to separate `.perf` files.
 
 ```bash
 #!/bin/bash
@@ -72,19 +67,18 @@ In the same shell, retrieve the MySQL root password file used by the migration s
 ```bash
 sudo su - 
 cat /root/mysql_root_password.txt
+exit
 ```
 
-### Running the benchmark
+## Run the benchmark
 
-Run `run.sh`, replacing `AZURE_CLOUD_MYSQL_ADMIN_PW` with the password value you just retrieved:
+The script creates five `.perf` files with sysbench `oltp_read_write` results at different thread counts. Run `run.sh`, replacing `AZURE_CLOUD_MYSQL_ADMIN_PW` with the password value you retrieved:
 
 ```bash
 ./run.sh admin AZURE_CLOUD_MYSQL_ADMIN_PW cobalt_100_arm64
 ```
 
-The script creates five `.perf` files with sysbench `oltp_read_write` results at different thread counts.
-
-### Interpreting the results
+## Interpret the results
 
 First, download the five `.perf` files from the Azure VM to your on-premises simulator shell. Replace `AZURE_CLOUD_RSA_FILENAME` and `YOUR_ARM_BASED_VM_PUBLIC_IP_ADDRESS`:
 
@@ -93,11 +87,11 @@ cd $HOME
 scp -i $HOME/.ssh/AZURE_CLOUD_RSA_FILENAME azureadmin@YOUR_ARM_BASED_VM_PUBLIC_IP_ADDRESS:*.perf .
 ```
 
-Next, from your local machine, copy those files from the on-premises simulator to your local host. Replace `ON_PREM_RSA_FILENAME` and `YOUR_ON_PREM_SIM_IP_ADDRESS`:
+Next, from your local machine, copy those files from the on-premises simulator to your local host. Replace `ON_PREM_RSA_FILENAME`(private key/pem file downloaded earlier) and `YOUR_ON_PREM_SIM_IP_ADDRESS`:
 
 ```bash
 cd $HOME
-scp -i $HOME/.ssh/ON_PREM_RSA_FILENAME azureuser@YOUR_ON_PREM_SIM_IP_ADDRESS:*.perf .
+scp -i $HOME/.ssh/ON_PREM_RSA_FILENAME azureuser@YOUR_ON_PREM_SIM_IP_ADDRESS:\*.perf .
 ```
 
 You should now have five `.perf` files on your local host.
@@ -112,16 +106,17 @@ for f in *.perf; do
 done
 ```
 
-Use these values to compare throughput and latency across thread counts:
+To compare throughput and latency across thread counts, look at:
 
-- Higher `transactions:` values indicate better throughput.
-- Lower `95th percentile:` values indicate better tail latency.
-- Look for where adding threads no longer increases throughput meaningfully.
+- Higher `transactions:` values that indicate better throughput.
+- Lower `95th percentile:` values that indicate better tail latency.
+
+You can also look for where adding threads no longer increases throughput meaningfully.
 
 The following example image shows benchmark output from this workflow:
 
-![Azure Cobalt 100 Arm64 E4pds_v6 sysbench results#center](images/benchmark.png "Azure Cobalt 100 Arm64 E4pds_v6 sysbench results")
+![sysbench oltp_read_write results for Azure Cobalt 100 Arm64 E4pds_v6 showing transactions per second and 95th percentile latency across thread counts#center](images/benchmark.png "Azure Cobalt 100 Arm64 E4pds_v6 sysbench results")
 
-### What we learned
+## What you've accomplished
 
-You learned how to provision an Arm-based Azure VM for MySQL migration, move a database from an on-premises x64 simulator, and evaluate performance by reading sysbench throughput and latency metrics.
+You've provisioned an Arm-based Azure VM for MySQL migration, moved a database from an on-premises x64 simulator, and evaluated performance by reading sysbench throughput and latency metrics.

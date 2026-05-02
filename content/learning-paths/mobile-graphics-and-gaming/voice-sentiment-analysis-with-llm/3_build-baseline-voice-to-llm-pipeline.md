@@ -4,16 +4,18 @@ weight: 4
 layout: learningpathall
 ---
 
-In this section, you will build an end-to-end pipeline that:
+## Create the baseline voice-to-LLM pipeline
 
-1. Records audio from your microphone
-2. Transcribes it to text using Whisper
-3. Sends the text to a locally hosted LLM
-4. Displays the model's response
+In this section, you'll build an end-to-end pipeline that:
+
+- Records audio from your microphone
+- Transcribes it to text using Whisper
+- Sends the text to a locally hosted LLM
+- Displays the model's response
 
 This forms the foundation of your voice assistant.
 
-![Baseline voice-to-LLM pipeline#center](3_vsapipeline1.png "Baseline voice-to-LLM pipeline")
+![Diagram showing the baseline pipeline with three stages: audio input from microphone flows to Whisper for transcription, then transcript text is sent to local LLM, which returns a response#center](3_vsapipeline1.png "Baseline voice-to-LLM pipeline")
 
 Before you begin, make sure you have completed the environment setup in the previous section and that your `llama-server` is still running.
 
@@ -177,7 +179,7 @@ with gr.Blocks() as demo:
 demo.launch()
 ```
 
-## What you should see
+## Expected output
 
 After recording audio in the browser:
 
@@ -191,4 +193,13 @@ After recording audio in the browser:
 - Whisper is slow on first run: this is expected due to model download and initialization.
 - Microphone not working: check browser permissions for microphone access.
 
-At this point, you have a working voice-to-LLM pipeline. In the next section, you will extend this pipeline by adding a voice sentiment classification model.
+## What you've learned and what's next
+
+In this section, you:
+
+- Created a Gradio web interface with microphone input
+- Integrated Whisper for speech-to-text transcription
+- Connected to a local LLM endpoint using llama.cpp
+- Built a working voice-to-LLM pipeline
+
+You now have a baseline voice assistant that transcribes speech and generates responses. In the next section, you'll train a voice sentiment classification model to extend this pipeline with emotion awareness.

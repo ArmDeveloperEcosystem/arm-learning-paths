@@ -359,8 +359,13 @@ You may have other objects already in the file so make sure to use a `,` at the 
         "run",
         "--rm",
         "-i",
-        "-v", "$HOME/workspace:/workspace",
-        "--name", "arm-mcp",
+        "--pull=always",
+        "-v",
+        "/path/to/your/workspace:/workspace",
+        "-v",
+        "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v",
+        "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ],
       "env": {},
@@ -371,6 +376,163 @@ You may have other objects already in the file so make sure to use a `,` at the 
 ```
 
 This configuration tells Gemini CLI to connect to the Arm MCP server running in the Docker container.
+
+To enable Arm Performix features through the Arm MCP Server, replace `/path/to/your/ssh/private_key` and `/path/to/your/ssh/known_hosts` with the SSH private key and `known_hosts` file used for your target device.
+
+### Optional: Use a Docker replacement containerization tool
+
+You can use other containerization tools besides Docker that are free and do not require licenses, such as Podman, Finch, Colima, and Rancher Desktop. Choose one of the options below and use its CLI in place of `docker`.
+
+{{< tabpane-normal >}}
+  {{< tab header="Podman" >}}
+Install: [Podman](https://podman.io/docs/installation)
+
+Pull the Arm MCP Server image:
+```console
+podman pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `~/.gemini/settings.json` file:
+```json
+{
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "mcpServers": {
+    "arm_mcp_server": {
+      "command": "podman",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--pull=always",
+        "-v", "/path/to/your/workspace:/workspace",
+        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+        "armlimited/arm-mcp:latest"
+      ],
+      "env": {},
+      "timeout": 60000
+    }
+  }
+}
+```
+  {{< /tab >}}
+  {{< tab header="Finch" >}}
+Install: [Finch](https://runfinch.com/docs/getting-started/installation/)
+
+Pull the Arm MCP Server image:
+```console
+finch pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `~/.gemini/settings.json` file:
+```json
+{
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "mcpServers": {
+    "arm_mcp_server": {
+      "command": "finch",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--pull=always",
+        "-v", "/path/to/your/workspace:/workspace",
+        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+        "armlimited/arm-mcp:latest"
+      ],
+      "env": {},
+      "timeout": 60000
+    }
+  }
+}
+```
+  {{< /tab >}}
+  {{< tab header="Colima" >}}
+Install: [Colima](https://github.com/abiosoft/colima#installation)
+
+Colima provides a Docker-compatible CLI via Docker contexts.
+
+Pull the Arm MCP Server image:
+```console
+docker pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `~/.gemini/settings.json` file:
+```json
+{
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "mcpServers": {
+    "arm_mcp_server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--pull=always",
+        "-v", "/path/to/your/workspace:/workspace",
+        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+        "armlimited/arm-mcp:latest"
+      ],
+      "env": {},
+      "timeout": 60000
+    }
+  }
+}
+```
+  {{< /tab >}}
+  {{< tab header="Rancher Desktop" >}}
+Install: [Rancher Desktop](https://docs.rancherdesktop.io/getting-started/installation/)
+
+Rancher Desktop uses the Docker container engine via Morby.
+
+Pull the Arm MCP Server image:
+```console
+docker pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `~/.gemini/settings.json` file:
+```json
+{
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "mcpServers": {
+    "arm_mcp_server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--pull=always",
+        "-v", "/path/to/your/workspace:/workspace",
+        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+        "armlimited/arm-mcp:latest"
+      ],
+      "env": {},
+      "timeout": 60000
+    }
+  }
+}
+```
+  {{< /tab >}}
+{{< /tabpane-normal >}}
 
 ### How do I verify the Arm MCP server is working?
 
