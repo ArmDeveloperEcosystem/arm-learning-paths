@@ -83,7 +83,7 @@ For more information, see [Get started with Arm Performance Libraries](https://d
 [Download](https://developer.arm.com/downloads/-/arm-performance-libraries) the appropriate package for your macOS distribution.
 
 {{% notice Note %}}
-The following commands use Arm Performance Libraries version 26.01. The same commands work with other versions. Replace the package used in these steps with the package for your version.
+The following commands use Arm Performance Libraries version 26.01. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Arm Performance Libraries downloads](https://developer.arm.com/downloads/-/arm-performance-libraries).
 {{% /notice %}}
 
 In a terminal, run the following command to download the macOS package:
@@ -132,7 +132,7 @@ Arm Performance Libraries are supported on most Linux distributions such as Ubun
 
 ### Manually download and install Arm Performance Libraries
 
-[Download](https://developer.arm.com/downloads/-/arm-performance-libraries) the appropriate package for your Linux distribution. The `deb`-based installers can be used on Ubuntu 22 and Ubuntu 24. The RPM-based installers can be used on the following supported distributions:
+Download the appropriate package for your Linux distribution. The `deb`-based installers can be used on Ubuntu 22 and Ubuntu 24. The RPM-based installers can be used on the following supported distributions:
 
 - Amazon Linux 2, Amazon Linux 2023
 - RHEL-8, RHEL-9, RHEL-10
@@ -141,7 +141,7 @@ Arm Performance Libraries are supported on most Linux distributions such as Ubun
 The following instructions are for `deb`-based installers for GCC users.
 
 {{% notice Note %}}
-The following commands use Arm Performance Libraries version 26.01. The same commands work with other versions. Replace the package used in these steps with the package for your version.
+The following commands use Arm Performance Libraries version 26.01. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Arm Performance Libraries downloads](https://developer.arm.com/downloads/-/arm-performance-libraries).
 {{% /notice %}}
 
 In a terminal, run the following command to download the Debian package:

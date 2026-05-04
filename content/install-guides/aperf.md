@@ -56,9 +56,9 @@ To use APerf's Java profiling option (`--profile-java`), install the [async-prof
 
 You can install APerf by downloading a release from GitHub and extracting it.
 
-{{%notice Note%}}
-The following commands use version `v.1.2.2`. The same commands work with other versions. To install the latest version of APerf, replace `v.1.2.2` in the following commands with the identifier for the latest version. To find the latest version, see [releases](https://github.com/aws/aperf/releases/) on GitHub.
-{{%/notice%}}
+{{% notice Note %}}
+The following commands use APerf version 1.2.2. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [APerf releases](https://github.com/aws/aperf/releases/).
+{{% /notice %}}
 
 You can download a release from the command line:
 

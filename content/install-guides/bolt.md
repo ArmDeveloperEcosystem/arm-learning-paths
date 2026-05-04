@@ -151,10 +151,10 @@ You are now ready to [verify BOLT is installed](#verify).
 
 ### Install BOLT using a binary release
 
-To find the latest binary release, see [Releases](https://github.com/llvm/llvm-project/releases?q=&expanded=true). 
+To install BOLT using a binary release, follow these steps:
 
 {{% notice Note %}}
-The following commands use BOLT version 22.1.3. The same commands work with other versions. Replace the package used in these steps with the package for your version.
+The following commands use BOLT version 22.1.3. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [LLVM Project releases](https://github.com/llvm/llvm-project/releases).
 {{% /notice %}} 
 
 1. Download a binary release

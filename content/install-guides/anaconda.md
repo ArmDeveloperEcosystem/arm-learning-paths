@@ -61,7 +61,7 @@ sudo amazon-linux-extras install mate-desktop1.x
 To download Anaconda Distribution, run:
 
 {{% notice Note %}}
-The following commands use Anaconda version 2025.12.2. The same commands work with other versions. Replace the package used in these steps with the package for your version. For the latest version of Anaconda Distribution, see [Anaconda Distribution release notes](https://www.anaconda.com/docs/getting-started/anaconda/release-notes). 
+The following commands use Anaconda version 2025.12.2. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Anaconda Distribution release notes](https://www.anaconda.com/docs/getting-started/anaconda/release-notes).
 {{% /notice %}}
 
 ```bash
