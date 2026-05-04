@@ -1,5 +1,5 @@
 ---
-title: Overview of the Adler-32 algorithm and optimization approach
+title: Understand the Adler-32 algorithm and optimization approach
 weight: 2
 
 ### FIXED, DO NOT MODIFY
