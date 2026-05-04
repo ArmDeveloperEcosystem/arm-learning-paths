@@ -1,6 +1,10 @@
 ---
 title: Manage the ML lifecycle with MLflow on Google Cloud C4A Axion VM
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for DevOps engineers, ML engineers, and software developers who want to manage the machine learning lifecycle using MLflow on SUSE Linux Enterprise Server (SLES) Arm64, track experiments, version models, and deploy models as scalable APIs.
