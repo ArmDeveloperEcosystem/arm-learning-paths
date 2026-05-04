@@ -6,30 +6,33 @@ weight: 2
 layout: learningpathall
 ---
 
+
 ## What is Topo?
 
-[Topo](https://github.com/arm/topo) is an open-source command-line tool, developed by Arm. Topo connects from a host device (e.g., your development laptop) to an Arm-based Linux target (e.g., a Raspberry Pi) over SSH, detects hardware capabilities, and allows the user to deploy compatible containerized workloads with ease. Topo builds container images on the host, transfers them to the target, and starts the services on the target. Building and deploying on the target is also possible. Topo also showcases several sample templates defining workloads you can deploy, including a "Hello World" webpage, an LLM Chatbot, and a SIMD Benchmark comparing Scalar, Neon, and the Scalable Vector Extension (SVE).
+[Topo](https://github.com/arm/topo) is an open-source command-line tool developed by Arm. It uses a host/target model: the host (your development machine, which can be x86 or Arm, running Linux, macOS, or Windows) runs the Topo CLI and connects to an Arm-based Linux target over SSH. Topo builds container images on the host, transfers them to the target, and starts the services on the target. Building and deploying directly on the target is also supported.
 
-[Topo templates](https://github.com/arm/topo-template-format) are based on the [Compose Specification](https://github.com/compose-spec/compose-spec), extended with `x-topo` metadata that describes requirements such as CPU features and build arguments. The Compose Specification is a standard, YAML-based format for describing how to run multi-container applications. Instead of manually starting containers one-by-one, you define everything in a single file that includes which services to run, what images to use, how they connect, and what configuration they need.
+Topo detects the hardware capabilities of the target — such as Arm CPU features including Neon and SVE — and uses this information to identify which containerized workload templates are compatible. Topo also provides sample templates for common use cases, including a "Hello World" webpage, an LLM chatbot, and a SIMD benchmark comparing scalar, Neon (128-bit fixed-width), and SVE (scalable-width vector) implementations.
 
-In this learning path, you can use a target device of your choice, whether that be Raspberry Pi, AWS Graviton instance, DGX Spark, NXP i.MX 93, or similar. The only stipulation is that the device must be Arm-based, running Linux, and accessible over SSH. Your host can also function as your target simultaneously, but only if your host is an Arm-based Linux device.
+[Topo templates](https://github.com/arm/topo-template-format) are based on the [Compose Specification](https://github.com/compose-spec/compose-spec), extended with `x-topo` metadata that describes requirements such as CPU features and build arguments. The Compose Specification is a standard, YAML-based format for describing multi-container applications. Instead of starting containers individually, you define all services, images, connections, and configuration in a single `compose.yaml` file.
 
-The optional heterogeneous deployment with `remoteproc-runtime` requires a heterogeneous Cortex-A + Cortex-M SoC, such as the i.MX 93.
+You can use any compatible target device in this Learning Path, for example a Raspberry Pi, an AWS Graviton instance, a DGX Spark, or an NXP i.MX 93. The target must be Arm-based, running Linux, and accessible over SSH. Your host can also function as the target simultaneously, provided it is an Arm-based Linux device.
+
+The optional heterogeneous deployment section requires a Cortex-A + Cortex-M SoC, such as the i.MX 93.
 
 ## Why use Topo?
 
-Topo streamlines deploying containerized workloads to Arm-based Linux devices.
-If you have an heterogeneous device (e.g. Cortex-A + Cortex-M SoC such as the i.MX 93), Topo enables you to use it fully, deploying both firmware and application as containerized workloads through standard container tooling.
+Topo removes the need to handle low-level setup and compatibility checks manually. It queries the target to identify processor features such as SVE or Neon, advises which templates are appropriate for the device, and automates the end-to-end deployment.
 
-Once a template is defined, use of Topo removes the need to deal with low-level setup and compatibility issues manually. Topo first assesses the system to identify processor features such as SVE or Neon on CPU, then advises which templates are appropriate for the device. Finally, it automates the end to end deployment, dealing with all the low-level instructions.
+If you have a heterogeneous SoC (for example, a Cortex-A + Cortex-M device such as the i.MX 93), Topo lets you deploy both firmware and application as containerized workloads through standard container tooling, making full use of all processors on the device.
 
-Topo can also be leveraged by AI Agents to further streamline and automate.
+Topo can also be used by CLI agents to further streamline and automate deployment workflows.
+
 
 ## Install Topo
 
-In this step, you install Topo on the host, along with other dependencies.
+Install Topo on your host using the install script below, or download the binary manually.
 
-On your host device, run the following commands to install Topo:
+On your host device, run the following command:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux / MacOS">}}
@@ -40,7 +43,7 @@ irm https://raw.githubusercontent.com/arm/topo/refs/heads/main/scripts/install.p
   {{< /tab >}}
 {{< /tabpane >}}
 
-Alternatively, find the [latest release of Topo](https://github.com/arm/topo/releases), download the binary for your specific platform (x86/Arm, Linux/MacOS/Windows), and extract it. Topo is provided as a single executable file and `README.md`. Place Topo on your `PATH`:
+Alternatively, find the [latest release of Topo](https://github.com/arm/topo/releases), download the binary for your platform (x86/Arm, Linux/macOS/Windows), and extract it. Topo is a single executable file. Move it to a directory on your `PATH`, for example `/usr/local/bin/` on Linux and macOS.
 
 Run the following command in the terminal on your host device to confirm the installation:
 
@@ -50,6 +53,35 @@ topo --help
 
 You should see an output confirming Topo is present, and describing the available commands.
 
-## What you've completed and what's next
+```output
+Topo CLI
 
-You have now installed Topo on your host. In the next step, you will utilize Topo to prepare your host machine and to probe your target device for features, assessing its compability with template containerized workloads.
+Usage:
+  topo [command]
+
+Available Commands:
+  clone       Clone an example project
+  completion  Generate the autocompletion script for the specified shell
+  deploy      Deploy services using the compose file
+  extend      Add services from a template to the compose file
+  health      Check the target host environment
+  help        Help about any command
+  init        Initialise a new project in the current directory
+  install     Install components to the target
+  service     Manage services in compose files
+  setup-keys  Generate SSH keys for the target and install the public key on the target host
+  stop        Stop a currently running deployment
+  templates   List available service templates
+  upgrade     Upgrade topo to the latest version
+
+Flags:
+  -h, --help            help for topo
+  -o, --output string   output format: plain or json (default "plain")
+  -v, --version         version for topo
+
+Use "topo [command] --help" for more information about a command.
+```
+
+## What you've accomplished and what's next
+
+You have now installed Topo on your host and confirmed it is available. Next, you will use Topo to prepare your host and probe your target device for features, assessing its compatibility with template containerized workloads.

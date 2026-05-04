@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Choose a starter template and clone it
 
-Choose one of the pre-existing templates that is compatible with your target hardware. This learning path will showcase deploying an LLM chatbot, but the same steps apply for the other templates.
+This Learning Path uses the LLM chatbot template to demonstrate the workflow, but the same steps apply to all Topo templates.
 
-To use a template, we clone it from git on our host device by running the following command:
+To clone a template onto your host device, run:
 
 ```bash
 topo clone https://github.com/Arm-Examples/topo-cpu-ai-chat.git
@@ -18,11 +18,46 @@ topo clone https://github.com/Arm-Examples/topo-cpu-ai-chat.git
 
 If a template asks for build arguments, Topo prompts you interactively.
 
+For this template, accept the defaults at each prompt by pressing Enter. The default configuration uses the `bartowski/Qwen_Qwen3.5-0.8B-GGUF` model and builds with Neon optimizations. SVE — Arm's Scalable Vector Extension, which provides wider vector operations than Neon's fixed 128-bit width — is disabled by default. If `topo describe` shows your target supports SVE, you can enable it by setting `ENABLE_SVE` to `ON`, or edit `compose.yaml` to change it later.
+
+You will see:
+```output
+┌─ Copy files ──────────────────────────────────────────
+Cloning into 'topo-cpu-ai-chat'...
+remote: Enumerating objects: 21, done.
+remote: Counting objects: 100% (21/21), done.
+remote: Compressing objects: 100% (17/17), done.
+remote: Total 21 (delta 0), reused 11 (delta 0), pack-reused 0 (from 0)
+Receiving objects: 100% (21/21), 17.43 KiB | 8.72 MiB/s, done.
+
+┌─ Input args ──────────────────────────────────────────
+Provide: Hugging Face model repo ID containing a supported single-file GGUF model
+Example: unsloth/SmolLM2-135M-Instruct-GGUF
+Default: bartowski/Qwen_Qwen3.5-0.8B-GGUF
+HF_MODEL> 
+
+Provide: Exact supported GGUF filename to download; sharded and mmproj files are rejected
+Example: Qwen_Qwen3.5-0.8B-Q4_0.gguf
+HF_MODEL_FILE> 
+
+Provide: Enables building with SVE instructions (OFF/ON)
+Example: ON
+Default: OFF
+ENABLE_SVE> 
+
+┌─ Project ready ───────────────────────────────────────
+Created in 'topo-cpu-ai-chat'
+
+Now run:
+  cd topo-cpu-ai-chat
+  topo deploy
+```
+
 This creates a project directory using the template. The directory will contain template source files and `compose.yaml`.
 
 You may find it interesting to examine the `compose.yaml` file. An example for the LLM chatbot application is provided below:
 
-```output
+```yaml
 services:
   llama-server:
     platform: linux/arm64
@@ -72,7 +107,7 @@ x-topo:
       example: "ON"
 ```
 
-Changes can be made to the `compose.yaml` files to adjust arguments after the fact - for example, SVE can be turned ON or OFF for the LLM chatbot, and the LLM can be changed to use a different model.
+You can edit `compose.yaml` at any time to adjust build arguments — for example, to enable or disable SVE, or to switch to a different LLM model.
 
 ## Deploy the app on the target
 
@@ -82,23 +117,40 @@ On your host device, enter the project directory created by the `topo clone` com
 cd topo-cpu-ai-chat/
 ```
 
-Then use `topo deploy` to automatically build the container images on the host, transfer the images to the target via SSH, and start the application on the target:
+Then use `topo deploy` to build the container images on the host, transfer them to the target over SSH, and start the application on the target:
 
-```
+```bash
 topo deploy --target user@my-target
 ```
 
-Once deployed, you can view the webpage at `http://<ip_address_of_target>:3000`. The port used depends on the template application chosen - you can see this in the `compose.yaml`.
+The output is similar to:
+
+```output
+┌─ Start services ──────────────────────────────────────
+[+] up 3/3
+ ✔ Network topo-cpu-ai-chat_default          Created                                                                                               0.0ss
+ ✔ Container topo-cpu-ai-chat-llama-server-1 Healthy                                                                                               10.6s
+ ✔ Container topo-cpu-ai-chat-chat-ui-1      Started                                                                                               5.9ss
+```
+
+Once deployment is complete, access the web application by opening a browser and navigating to `http://<ip_address_of_target>:<port_number>`, where `<port_number>` matches the port exposed by your template (for the LLM chatbot, this is `3000`).
+
+You can find the correct port in the `compose.yaml` file for your chosen template. For example, if you deployed the LLM chatbot, use `http://<ip_address_of_target>:3000`.
+
+**Important:** If your target is a Linux VM (for example, on a cloud provider), ensure that the chosen port (such as 3000) is open as an inbound rule in your VM's firewall or security group. Otherwise, you will not be able to access the application from your browser.
 
 The LLM chatbot application will appear as below:
 
-![LLM Chatbot](llm_chatbot.png)
 
-Depending on the permissions you have setup with your target device, you may not be able to use the IP address directly. In this case, you may need to forward to a local port and view at `http://localhost:<port_number>` instead:
+![Screenshot of the LLM Chatbot web interface running on an Arm-based target, showing a chat window and model response. This confirms successful deployment and provides a visual reference for the expected result.#center](llm_chatbot.png "LLM Chatbot web interface on Arm target")
+
+If the target is not directly accessible from your browser (for example, if it is behind a NAT or you prefer not to open inbound firewall ports), use SSH port forwarding to tunnel the connection to your local machine:
 
 ```bash
 ssh -L <port_number>:localhost:<port_number> user@my-target
 ```
+
+Then open `http://localhost:<port_number>` in your browser.
 
 To stop a deployed Topo application on the target, run `topo stop` on the host:
 
@@ -106,10 +158,25 @@ To stop a deployed Topo application on the target, run `topo stop` on the host:
 topo stop --target user@my-target
 ```
 
-## (Optional) Repeat this learning path, using a CLI Agent
 
-Topo is packaged as a single executable with a `README.md` file. It is straightforward for agents to leverage.
+## Recap: deployment and validation
 
-Choose your preferred agent. If you do not have a CLI Agent pre-configured, you can follow our guides to [Install Codex](https://learn.arm.com/install-guides/codex-cli/), [Install Claude Code](https://learn.arm.com/install-guides/claude-code/), or [Install Gemini](https://learn.arm.com/install-guides/gemini/).
+You have now deployed a containerized workload to your Arm-based Linux target using Topo. You validated the deployment by accessing the application in a web browser. You also learned how to stop the deployment and forward ports if needed.
 
-Once your agent is ready, ensure you have setup your host and target to have the required dependencies. Then ask your agent to leverage Topo to deploy an application to your target device.
+## (Optional) Deploy with a CLI agent
+
+Topo is well-suited for use with CLI agents. It ships as a single executable alongside a `README.md` that describes all commands and flags. You can also pass `--output json` to any Topo command for machine-readable output that agents can parse reliably.
+
+Before starting, confirm that your host and target are set up with the required dependencies as described in the previous sections.
+
+If you don't already have a CLI agent installed, see one of these install guides:
+
+- [Install Claude Code](/install-guides/claude-code/)
+- [Install Codex CLI](/install-guides/codex-cli/)
+- [Install Gemini CLI](/install-guides/gemini/)
+
+With your agent ready, you can delegate the full workflow. For example:
+
+> Use Topo to deploy a containerized workload to my Arm target at `user@my-target`. Run a health check first, list compatible templates, choose a suitable one, clone it, and deploy it.
+
+The agent reads the Topo `README.md`, runs health checks, selects a compatible template, and executes the deployment — handling the end-to-end workflow with minimal manual input.
