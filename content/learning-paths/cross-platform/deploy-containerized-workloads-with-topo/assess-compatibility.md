@@ -18,15 +18,17 @@ topo health
 
 The output should appear similar to the following:
 
-```bash
+```output
 Host
 ----
+Topo: ✅ (topo)
 SSH: ✅ (ssh)
 Container Engine: ✅ (docker)
 
 Target
 ------
 ℹ️ provide --target or set TOPO_TARGET to check target health
+
 ```
 
 If Docker is missing, please use [Install Docker](https://learn.arm.com/install-guides/docker/).
@@ -35,7 +37,7 @@ If SSH is missing, please use [Install SSH](https://learn.arm.com/install-guides
 
 ## Prepare target environment
 
-Now that the host device is prepared, we will setup the target. On the host device, connect to your target with SSH.
+Now that the host is prepared, connect to your target over SSH to verify its dependencies:
 
 ```bash
 ssh user@my-target
@@ -48,7 +50,7 @@ docker --version
 lscpu
 ```
 
-The output should apear similar to the following:
+The output should appear similar to the following:
 
 ```output
 Docker version xx.x.x
@@ -56,9 +58,10 @@ Architecture:             aarch64
 CPU(s):                   ...
 ```
 
-### Prepare Topo for target
 
-We will now run a health check against your target. Run the following command from the terminal of your host device.
+### Run a health check against the target
+
+Run the following command from the terminal of your host device.
 
 If you are using your host device simultaneously as your target, use `topo health --target localhost`.
 
@@ -71,6 +74,7 @@ The output should appear similar to the example from a heterogeneous SoC below, 
 ```output
 Host
 ----
+Topo: ✅ (topo)
 SSH: ✅ (ssh)
 Container Engine: ✅ (docker)
 
@@ -84,9 +88,12 @@ Hardware Info: ✅ (lscpu)
 Subsystem Driver (remoteproc): ✅ (m33, m0)
 ```
 
-A Topo health check confirms connectivity between the host and target, as well as the verifying the presence of dependencies such as docker.
+A Topo health check confirms connectivity between the host and target, and verifies the presence of dependencies such as Docker.
 
 You should resolve any `❌` errors before moving on. Warnings (⚠️) can indicate optional capabilities that may be needed in certain projects. `ℹ️` provides other information. A `✅` confirms the presence of dependencies and no warnings or errors.
+
+
+#### Troubleshooting SSH authentication
 
 If you are using password-based SSH, you will likely see the `❌` error below:
 
@@ -95,15 +102,24 @@ Connectivity: ❌ (key-based SSH authentication is not setup)
   → run `topo setup-keys --target user@my-target` or manually setup SSH keys for the target
 ```
 
-This is because Topo requires key-based SSH. You can use the command specified above, and Topo will setup the key-based SSH for you. Ensure that if prompted to set a passphrase, you leave it empty. Afterwards, run `topo health` again to confirm it has correctly setup the key-based authentication.
+This is because Topo requires key-based SSH for secure, automated access. You can use the command specified above, and Topo will set up the key-based SSH for you. When prompted to set a passphrase, leave it empty for automation (or use a passphrase and an SSH agent for added security). Afterwards, run `topo health` again to confirm it has correctly set up key-based authentication.
+
+If you encounter SSH errors, check:
+- The target device is powered on and accessible from the host
+- The correct username and IP address are used
+- Your firewall allows SSH traffic
+
 
 ## Optional: install remoteproc-runtime on heterogeneous devices
 
 If using a Cortex-A + Cortex-M device, such as the i.MX 93, you may see a `⚠️` warning if `remoteproc-runtime` is not installed on the target.
 
-[`remoteproc`](https://docs.kernel.org/staging/remoteproc.html) is a Linux kernel framework for managing remote / auxiliary processors in a heterogeneous SoC. It allows the main CPU (e.g., Cortex-A) to load firmware on to the auxiliary processors (e.g., Cortex-M), start and stop them, and to communicate with them (e.g. using [`rpmsg`](https://docs.kernel.org/staging/rpmsg.html)).
+[`remoteproc`](https://docs.kernel.org/staging/remoteproc.html) is a Linux kernel framework for managing remote or auxiliary processors in a heterogeneous SoC. It allows the main CPU (for example, Cortex-A) to load firmware onto the auxiliary processors (for example, Cortex-M), start and stop them, and communicate with them using [`rpmsg`](https://docs.kernel.org/staging/rpmsg.html).
 
-[`remoteproc-runtime`](https://github.com/arm/remoteproc-runtime) builds on this by adding a container-style (OCI - Open Container Initiative) interface. This lets you package and manage firmware like container images using standard tools (e.g. Docker or containerd), even though the code runs as firmware on the Cortex-M. [OCI](https://opencontainers.org/) defines open standards for container image formats and runtimes, ensuring compatibility across container tools.
+[`remoteproc-runtime`](https://github.com/arm/remoteproc-runtime) builds on this by adding an OCI (Open Container Initiative) interface. This lets you package and manage firmware like container images using standard tools such as Docker or containerd, even though the code runs as firmware on the Cortex-M. [OCI](https://opencontainers.org/) defines open standards for container image formats and runtimes, ensuring compatibility across container tools.
+
+
+You only need remoteproc-runtime if your target is a heterogeneous SoC (for example, Cortex-A + Cortex-M, such as i.MX 93). For most single-CPU Arm Linux targets, you can skip this step.
 
 You can use Topo to install `remoteproc-runtime`. Run the following command from the host device:
 
@@ -112,6 +128,11 @@ topo install remoteproc-runtime --target user@my-target
 ```
 
 Run the health command again to verify installation. Topo uses `remoteproc-runtime` under the hood when deploying to heterogeneous devices.
+
+
+## Recap: health checks and compatibility
+
+You have now verified your host and target environments, resolved any missing dependencies, and (optionally) enabled heterogeneous deployment. Next, you will generate a target description and list compatible templates.
 
 ## Generate a target description
 
@@ -125,7 +146,7 @@ topo describe --target user@my-target
 
 The output captures details such as CPU architecture features, which Topo uses to select compatible templates.
 
-An example snippet from an AWS Graviton instance is shown below, showing the main processor and its features, an absence of any remote / auxiliary processors, and the total memory:
+An example snippet from an AWS Graviton instance is shown below, showing the main processor and its features, an absence of any remote or auxiliary processors, and the total memory:
 
 ```output
 host:
@@ -141,11 +162,13 @@ remoteprocs: []
 totalmemory_kb: 16044280
 ```
 
+The `features` list mirrors the CPU feature flags reported by the Linux kernel. Key flags include `fp` (hardware floating-point), `asimd` (Neon Advanced SIMD — 128-bit vector acceleration), and `aes` (hardware AES encryption). Topo uses this feature list to determine which templates are compatible with your target.
+
 ## List templates compatible with your target
 
 Since Topo can identify the capabilities of your target device, it can also advise on the compatibility of templates.
 
-Use the following command on your host device to to list compatible templates:
+Use the following command on your host device to list compatible templates:
 
 ```bash
 topo templates --target user@my-target
@@ -204,7 +227,7 @@ An example output for an AWS Graviton instance is shown below:
 
 In the above example, `topo-lightbulb-moment` is marked as incompatible, since it requires an SoC with both a Cortex-A and a Cortex-M. The Graviton instance used contains Arm Neoverse cores only. All other templates are marked as compatible. You may see different results depending on the target hardware you use.
 
-## What you've learned and what's next
+## What you've accomplished and what's next
 
-You have performed a health check on your target device and generated a description of its hardware features. Topo has informed you which templates are compatible with your target. In the next step, you will choose and deploy a template containerized workload.
+You have performed a health check on your target device, generated a description of its hardware features, and identified compatible templates. In the next step, you will choose and deploy a template containerized workload.
 

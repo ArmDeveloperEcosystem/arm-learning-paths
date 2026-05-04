@@ -232,6 +232,117 @@ codex mcp add arm-mcp -- sh -lc 'docker run --rm -i --pull=always -v "$PWD:/work
 
 To enable Arm Performix features through the Arm MCP Server, replace `/path/to/your/ssh/private_key` and `/path/to/your/ssh/known_hosts` with the SSH private key and `known_hosts` file used for your target device.
 
+### Optional: Use a Docker replacement containerization tool
+
+You can use other containerization tools besides Docker that are free and do not require licenses, such as Podman, Finch, Colima, and Rancher Desktop. Choose one of the options below and use its CLI in place of `docker`.
+
+{{< tabpane-normal >}}
+  {{< tab header="Podman" >}}
+Install: [Podman](https://podman.io/docs/installation)
+
+Pull the Arm MCP Server image:
+```console
+podman pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `~/.codex/config.toml` file:
+```toml
+[mcp_servers.arm-mcp]
+command = "podman"
+args = [
+    "run",
+    "--rm",
+    "-i",
+  "--pull=always",
+  "-v", "/path/to/your/workspace:/workspace",
+  "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+  "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+    "armlimited/arm-mcp:latest"
+]
+startup_timeout_sec = 60
+```
+  {{< /tab >}}
+  {{< tab header="Finch" >}}
+Install: [Finch](https://runfinch.com/docs/getting-started/installation/)
+
+Pull the Arm MCP Server image:
+```console
+finch pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `~/.codex/config.toml` file:
+```toml
+[mcp_servers.arm-mcp]
+command = "finch"
+args = [
+    "run",
+    "--rm",
+    "-i",
+  "--pull=always",
+  "-v", "/path/to/your/workspace:/workspace",
+  "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+  "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+    "armlimited/arm-mcp:latest"
+]
+startup_timeout_sec = 60
+```
+  {{< /tab >}}
+  {{< tab header="Colima" >}}
+Install: [Colima](https://github.com/abiosoft/colima#installation)
+
+Colima provides a Docker-compatible CLI via Docker contexts.
+
+Pull the Arm MCP Server image:
+```console
+docker pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `~/.codex/config.toml` file:
+```toml
+[mcp_servers.arm-mcp]
+command = "docker"
+args = [
+    "run",
+    "--rm",
+    "-i",
+  "--pull=always",
+  "-v", "/path/to/your/workspace:/workspace",
+  "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+  "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+    "armlimited/arm-mcp:latest"
+]
+startup_timeout_sec = 60
+```
+  {{< /tab >}}
+  {{< tab header="Rancher Desktop" >}}
+Install: [Rancher Desktop](https://docs.rancherdesktop.io/getting-started/installation/)
+
+Rancher Desktop uses the Docker container engine via Morby.
+
+Pull the Arm MCP Server image:
+```console
+docker pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `~/.codex/config.toml` file:
+```toml
+[mcp_servers.arm-mcp]
+command = "docker"
+args = [
+    "run",
+    "--rm",
+    "-i",
+  "--pull=always",
+  "-v", "/path/to/your/workspace:/workspace",
+  "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+  "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+    "armlimited/arm-mcp:latest"
+]
+startup_timeout_sec = 60
+```
+  {{< /tab >}}
+{{< /tabpane-normal >}}
+
 ### How do I verify the Arm MCP server is working?
 
 Start Codex CLI and list the tools from the MCP server to verify it is working:
