@@ -146,19 +146,19 @@ The following commands use Arm Performance Libraries version 26.01. The same com
 
 In a terminal, run the following command to download the Debian package:
 
-```bash
+```console
 wget https://developer.arm.com/-/cdn-downloads/permalink/Arm-Performance-Libraries/Version_26.01/arm-performance-libraries_26.01_deb_gcc.tar
 ```
 
 Use `tar` to extract the file and then change directory:
 
-```bash
+```console
 tar xf arm-performance-libraries_26.01_deb_gcc.tar
 ```
 
 Run the installation script as a super user:
 
-```bash
+```console
 sudo ./arm-performance-libraries_26.01_deb/arm-performance-libraries_26.01_deb.sh --accept
 ```
 

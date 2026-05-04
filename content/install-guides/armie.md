@@ -62,13 +62,13 @@ To install the Arm Instruction Emulator, extract the downloaded package and run 
 
 Extract the downloaded package:
 
-```bash
+```console
 tar -xvzf ARMIE-BN-UBUNT-r25p0-00rel0.tgz
 ```
 
 Run the install script:
 
-```bash
+```console
 sudo ./arm-instruction-emulator_25.0_Ubuntu-22.04/arm-instruction-emulator_25.0_Ubuntu-22.04.sh -a
 ```
 

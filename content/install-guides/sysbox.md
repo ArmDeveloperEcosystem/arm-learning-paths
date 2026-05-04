@@ -69,7 +69,7 @@ The following commands use Sysbox version 0.6.7. The same commands work with oth
 {{% /notice %}}
 
 ```bash
-wget https://downloads.nestybox.com/sysbox/releases/v0.6.7/sysbox-ce_0.6.7-0.linux_arm64.deb
+wget https://github.com/nestybox/sysbox/releases/download/v0.6.7/sysbox-ce_0.6.7.linux_arm64.deb
 ```
 
 Install the package using the `apt` command:
