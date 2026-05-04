@@ -139,7 +139,7 @@ Learning Paths may link to install guides for setup steps. Install guides should
 
 #### Tool versions
 
-When providing commands for downloading or installing software, use a specific version in the example. This ensures that the instructions are accurate and verifiable. However, also include a note before the commandsthat tells readers the same commands work with other versions. Provide a link to where the latest version can be found. The note can be formatted as follows:
+When providing commands for downloading or installing software, use a specific version in the example. This ensures that the instructions are accurate and verifiable. However, also include a note before the commands that tells readers the same commands work with other versions. Provide a link to where the latest version can be found. The note can be formatted as follows:
 
 {{% notice Note %}}
 The following commands use <tool> version <version>. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Link to page with release info](URL).
