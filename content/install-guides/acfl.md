@@ -129,7 +129,7 @@ sudo ./arm-compiler-for-linux_24.10.1_RHEL-9.sh --accept
 ⚠️ On RPM based systems (such as Red Hat), if an
 alternative version of GCC (not the GCC bundled with ACfL) is installed
 **after** ACfL, you will not be able to uninstall ACfL fully. For example, a GDB
-(GNU Project Debugger) installation will install the native system GCC.  If this
+(GNU Project Debugger) installation will install the native system GCC. If this
 install takes place **after** ACfL, you will no longer be able to fully
 uninstall ACfL.
 {{% /notice %}}
@@ -147,7 +147,7 @@ Arm Compiler for Linux is available to install with the Ubuntu system package ma
 Add the ACfL `apt` package repository to your system. 
 
 {{% notice Note %}}
- These instructions apply for Ubuntu 22.04. You can check the [available versions](https://developer.arm.com/packages/) for other releases.
+These instructions are for Ubuntu 22.04. For other releases, see [available versions](https://developer.arm.com/packages/).
 {{% /notice %}}
 
 
