@@ -53,16 +53,8 @@ sudo apt-get install environment-modules -y
 
 ## Download Arm Instruction Emulator
 
-For Ubuntu Linux, download the installer package using `wget`:
+For Ubuntu Linux, download the installer package from [Arm Instruction Emulator downloads](https://developer.arm.com/downloads/-/arm-instruction-emulator).
 
-{{% notice Note %}}
-The following download and install commands use Arm Instruction Emulator version 25.0 for Ubuntu 22.04. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Arm Instruction Emulator downloads](https://developer.arm.com/downloads/-/arm-instruction-emulator).
-{{% /notice %}}
-
-
-```bash
-wget https://developer.arm.com/-/media/Files/downloads/hpc/arm-instruction-emulator/25-0/ARM-Instruction-Emulator_25.0_AArch64_Ubuntu_22.04.tar.gz
-```
 
 ## Install Arm Instruction Emulator
 
@@ -71,7 +63,7 @@ To install the Arm Instruction Emulator, extract the downloaded package and run 
 Extract the downloaded package:
 
 ```bash
-tar -xf ARM-Instruction-Emulator_25.0_AArch64_Ubuntu_22.04.tar.gz
+tar -xvzf ARMIE-BN-UBUNT-r25p0-00rel0.tgz
 ```
 
 Run the install script:
