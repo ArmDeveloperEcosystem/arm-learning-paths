@@ -8,26 +8,16 @@ layout: learningpathall
 
 ## Deploy MLflow on GCP SUSE Arm64
 
-In this section, you will learn how to set up MLflow on a GCP Arm64 (Axion) virtual machine using SUSE Linux and Python 3.11.
+In this section, you install MLflow on a GCP Arm64 (Axion) virtual machine running SUSE Linux with Python 3.11, start the MLflow tracking server, and run machine learning experiments.
 
-By the end of this section, you will be able to:
+## Terminal usage
 
-- Install MLflow and required dependencies  
-- Start the MLflow tracking server  
-- Run machine learning experiments  
-- View results in the MLflow UI
+This Learning Path uses two terminals throughout:
 
-## Terminal usage (Important)
+- **Terminal A** → For setup, training, and running commands
+- **Terminal B** → For running the MLflow tracking server (keep this running)
 
-To keep things simple, we will use only **two terminals**:
-
-- **Terminal A** → For setup, training, and running commands  
-- **Terminal B** → For running the MLflow server (keep this running)
-
-Think of it like:
-
-- Terminal A = “work terminal”
-- Terminal B = “server terminal”
+Open both terminals connected to the VM before starting.
 
 ## Connect to the VM
 
@@ -37,7 +27,7 @@ Open **Terminal A** and connect:
 ssh <your-user>@<your-vm-ip>
 ```
 
-## Verify system:
+## Verify system
 
 Check your system architecture:
 
@@ -61,7 +51,7 @@ CPE_NAME="cpe:/o:suse:sles:15:sp5"
 DOCUMENTATION_URL="https://documentation.suse.com/"
 ```
 
-This confirms you are on an Arm-based VM
+This confirms you are on an Arm-based VM.
 
 ## Update your system
 
@@ -108,10 +98,12 @@ The output is similar to:
 
 ```output
 Python 3.11.10
-pip 26.0.1 from /home/gcpuser/mlflow-learning-path/mlflow-env/lib64/python3.11/site-packages/pip (python 3.11)
+pip 22.3.1 from /usr/lib/python3.11/site-packages/pip (python 3.11)
 ```
 
 ## Create Python environment
+
+Create the project directory and a Python virtual environment to isolate the MLflow dependencies from the system Python installation:
 
 ```bash
 mkdir -p ~/mlflow-learning-path
@@ -120,9 +112,8 @@ cd ~/mlflow-learning-path
 python3.11 -m venv mlflow-env
 source mlflow-env/bin/activate
 ```
-This is where all your MLflow files will live.
 
-**Upgrade tools:**
+Upgrade the packaging tools inside the virtual environment:
 
 ```bash
 pip install --upgrade pip setuptools wheel
@@ -130,23 +121,23 @@ pip install --upgrade pip setuptools wheel
 
 ## Install MLflow
 
+Install MLflow and the machine learning libraries used in this Learning Path:
+
 ```bash
 pip install mlflow scikit-learn pandas numpy matplotlib
 ```
-This installs MLflow + ML libraries.
 
 ## Create directories
 
+Create the directory structure that the MLflow server uses to store experiment metadata and model artifacts:
+
 ```bash
 mkdir -p backend artifacts demo
-touch backend/mlflow.db
 ```
 
-**These folders store:**
-
-- experiments
-- models
-- logs
+- `backend/` — stores experiment metadata in a SQLite database (created automatically by the server on first run)
+- `artifacts/` — stores model files and other artifacts logged during training runs
+- `demo/` — stores the training and alias scripts you create in this Learning Path
 
 ## Start MLflow server
 
@@ -160,7 +151,15 @@ source mlflow-env/bin/activate
 
 **Start MLflow server:**
 
-```bahs
+This command starts the MLflow tracking server and keeps it running in Terminal B. The key flags configure how it binds to the network and where it stores data:
+
+- `--host 0.0.0.0` — listens on all network interfaces so the UI is reachable from your browser via the VM's public IP
+- `--port 5000` — serves the tracking UI and REST API on port 5000
+- `--backend-store-uri` — stores experiment metadata (parameters, metrics, run IDs) in a local SQLite database
+- `--artifacts-destination` — stores model files and other artifacts on the local filesystem
+- `--allowed-hosts "*"` and `--cors-allowed-origins "*"` — permit connections from any origin; suitable for this tutorial but not for production deployments
+
+```bash
 mlflow server \
   --host 0.0.0.0 \
   --port 5000 \
@@ -169,13 +168,33 @@ mlflow server \
   --allowed-hosts "*" \
   --cors-allowed-origins "*"
 ```
+The output is similar to:
+```output
+2026/05/04 13:33:43 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/05/04 13:33:43 INFO mlflow.store.db.utils: Updating database tables
+[MLflow] Security middleware enabled. Allowed hosts: *. CORS origins: *.
+2026/05/04 13:33:44 INFO:     Uvicorn running on http://0.0.0.0:5000 (Press CTRL+C to quit)
+2026/05/04 13:33:44 INFO:     Started parent process [3817]
+2026/05/04 13:33:45 INFO:     Started server process [3820]
+2026/05/04 13:33:45 INFO:     Waiting for application startup.
+2026/05/04 13:33:45 INFO:     Application startup complete.
+2026/05/04 13:33:45 INFO:     Started server process [3821]
+2026/05/04 13:33:45 INFO:     Waiting for application startup.
+2026/05/04 13:33:45 INFO:     Application startup complete.
+2026/05/04 13:33:46 INFO:     Started server process [3823]
+2026/05/04 13:33:46 INFO:     Waiting for application startup.
+2026/05/04 13:33:46 INFO:     Application startup complete.
+2026/05/04 13:33:46 INFO:     Started server process [3822]
+2026/05/04 13:33:46 INFO:     Waiting for application startup.
+2026/05/04 13:33:46 INFO:     Application startup complete.
+2026/05/04 13:33:47 INFO mlflow.server.jobs.utils: Registered online_scoring_scheduler periodic task (runs every 1 minute)
+```
 
-- Keep this terminal running.
-- This is your MLflow backend.
+Leave Terminal B running. The server must stay active throughout the rest of this Learning Path.
 
 ## Access MLflow UI
 
-**Open in browser:**
+Open a browser and navigate to:
 
 ```text
 http://<VM-IP>:5000
@@ -183,20 +202,15 @@ http://<VM-IP>:5000
 
 ![MLflow UI Home Screen#center](images/mlflow-ui.png "MLflow UI Home Page")
 
-- Select **Model training**
-- See experiments
-- Compare runs
-- View accuracy
+Select the **Experiments** tab to see tracked runs, compare metrics across runs, and inspect logged parameters.
 
 ## Create training script
 
-**Go back to Terminal A:**
+In **Terminal A**, navigate to the demo directory and create the training script:
 
 ```bash
 cd ~/mlflow-learning-path/demo
 ```
-
-**Create the file:**
 
 ```bash
 cat > train.py <<'EOF'
@@ -236,21 +250,23 @@ with mlflow.start_run():
 EOF
 ```
 
-**This script:**
+This script:
 
-- trains a model
-- logs accuracy
-- registers the model
+- trains a logistic regression model on the Iris dataset
+- logs the `C` parameter and accuracy metric to MLflow Tracking
+- registers the trained model in the MLflow Model Registry under the name `iris-model`
 
 ## Run experiments
 
-**Set MLflow server:**
+Set the tracking URI so the MLflow client sends data to Terminal B's server:
 
 ```bash
 export MLFLOW_TRACKING_URI=http://127.0.0.1:5000
 ```
 
 **Run experiments:**
+
+The `C` argument in `train.py` is the inverse regularization strength in logistic regression. A lower value of `C` applies stronger regularization, which can reduce overfitting. Running with different `C` values simulates a hyperparameter sweep — each run is tracked separately in MLflow so you can compare results:
 
 ```bash
 python train.py
@@ -260,10 +276,7 @@ export C=2.0
 python train.py
 ```
 
-**Each run creates:**
-
-- new experiment entry
-- new model version
+Each run logs the `C` value and accuracy as a separate entry in the `iris-exp` experiment and registers a new model version in the MLflow Model Registry.
 
 The output is similar to:
 
@@ -295,25 +308,9 @@ Accuracy: 1.0
 🧪 View experiment at: http://127.0.0.1:5000/#/experiments/1
 ```
 
-## Verify results
+## Verify results in the MLflow UI
 
-In UI:
-
-- Open Model training
-- Select iris-exp
-- Go to Runs
-
-**You should see:**
-
-- Multiple runs
-- Accuracy metrics
-- Model versions (v1, v2, v3)
-
-## View experiment runs
-
-Go to:
-
-- Model training → iris-exp → Runs
+In the MLflow UI at `http://<VM-IP>:5000`, go to the **Experiments** tab, select **iris-exp**, and open the **Runs** view. You should see three runs with their `C` parameter values and accuracy metrics. Select the **Models** tab to see the three registered model versions.
 
 ![MLflow Runs View showing experiments and metrics#center](images/mlflow-runs.png "MLflow Runs showing experiment tracking")
 

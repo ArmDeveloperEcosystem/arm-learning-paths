@@ -34,8 +34,8 @@ To learn more, visit the [MLflow documentation](https://mlflow.org/docs/latest/i
 
 In this section, you:
 
-* Explored Google Axion C4A Arm-based VMs and their performance advantages for ML workflows  
-* Reviewed MLflow components, including Tracking, Projects, Models, and Model Registry  
-* Understood how Arm architecture improves efficiency and scalability for ML lifecycle management  
+* Explored Google Axion C4A Arm-based VMs and their performance advantages for ML workflows
+* Reviewed MLflow components, including Tracking, Projects, Models, and Model Registry
+* Explored how Arm architecture improves efficiency and scalability for ML lifecycle management  
 
 Next, you'll create a firewall rule to enable remote access to the MLflow UI and model serving APIs used in this Learning Path.
