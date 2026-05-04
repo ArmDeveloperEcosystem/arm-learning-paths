@@ -90,6 +90,7 @@ To use the Arm MCP Server with an AI coding assistant, you need to configure the
 The required configuration steps vary by AI coding assistant. Refer to the installation guides below for step-by-step instructions on connecting the following AI coding assistants to the Arm MCP server:
 
 - [GitHub Copilot](/install-guides/github-copilot/)
+- [Claude Code](/install-guides/claude-code/)
 - [Gemini CLI](/install-guides/gemini/)
 - [Kiro CLI](/install-guides/kiro-cli/)
 - [Codex CLI](/install-guides/codex-cli/)
