@@ -8,23 +8,23 @@ layout: learningpathall
 
 ## SVE concepts you need before writing code
 
-SVE is different from fixed width SIMD like Neon. The vector length is not fixed at compile time. It is determined at runtime by the hardware. This means you can't write `for (i = 0; i < n; i += 16)` and assume you're processing 16 bytes per iteration. SVE code must be vector length agnostic (VLA) to work correctly on any processor with SVE support.
+SVE is different from fixed width SIMD such as Neon. The vector length is not fixed at compile time. It is determined at runtime by the hardware. This means you can't write `for (i = 0; i < n; i += 16)` and assume you're processing 16 bytes per iteration. SVE code must be vector length agnostic (VLA) to work correctly on any processor with SVE support.
 
 Before writing SVE intrinsics, it's helpful to understand three things:
 
-1. How SVE predicates control which elements are active
-2. How to handle loop tails when data length isn't a multiple of the vector length
-3. How to widen narrow data types for accumulation
+- How SVE predicates control which elements are active
+- How to handle loop tails when data length isn't a multiple of the vector length
+- How to widen narrow data types for accumulation
 
-The Arm MCP server is the right tool for this. Ask your AI assistant the questions below and read the responses. The goal isn't to memorize intrinsic names, but to understand the concepts well enough to recognize when you need each one.
+The Arm MCP server is the right tool for this. Ask your AI assistant the following questions and read the responses. By doing this, you can understand the concepts well enough to recognize when you need each one, without needing to memorize intrinsic names. 
 
 ## Comparing SVE and Neon
 
 Start with understanding the big picture about SVE.
 
-### ASK AI: about SVE versus Neon
+### Ask AI about SVE versus Neon
 
-Ask your assistant:
+Ask your assistant the following question. The prompt can be similar to:
 
 ```text
 Ask the Arm MCP server what is SVE and how does it differ from Neon? My Makefile targets the native CPU on a Neoverse processor. 
@@ -84,13 +84,11 @@ The response explains that Neon uses fixed 128 bit vectors, while SVE uses vecto
 
 ## Predicates and loop tails
 
-Predicates and loop tails may be new to software developers.
+In fixed-width SIMD such as Neon, every lane in a vector always participates in every operation. This works fine when your data length is a multiple of the vector width, but it forces you to write special-case scalar code to handle the leftover elements at the end of a loop. With SVE's variable vector length, you don't know the vector width at compile time, so that approach breaks down entirely.
 
-In fixed-width SIMD like Neon, every lane in a vector always participates in every operation. That works fine when your data length is a multiple of the vector width, but it forces you to write special-case scalar code to handle the leftover elements at the end of a loop. With SVE's variable vector length, you don't even know the vector width at compile time, so that approach breaks down entirely.
+SVE solves this with predicate registers. A predicate is a bitmask with one bit per vector element. Each bit controls whether the corresponding lane is active or inactive for a given operation. Inactive lanes are ignored: they don't load memory, don't compute, and don't write results. This lets you run the same vector code on the final partial chunk of data as on every full chunk before it. You don't need a special-case tail loop.
 
-SVE solves this with predicate registers. A predicate is a bitmask with one bit per vector element. Each bit controls whether the corresponding lane is active or inactive for a given operation. Inactive lanes are ignored: they don't load memory, don't compute, and don't write results. This lets you run the same vector code on the final partial chunk of data as on every full chunk before it, there is no special-case tail loop needed.
-
-### ASK AI: about how predicate registers work
+### Ask AI how predicate registers work
 
 Ask your assistant:
 

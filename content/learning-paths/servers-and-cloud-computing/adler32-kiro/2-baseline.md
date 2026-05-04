@@ -8,12 +8,12 @@ layout: learningpathall
 
 ## Before you begin
 
-To get started, you need an Arm Linux system with SVE support. Suitable cloud instances include AWS Graviton3 or Graviton4, Microsoft Cobalt 100, or Google Axion. The examples in this Learning Path were tested on Ubuntu 26.04.
+To get started, you need an Arm Linux system with SVE support. Suitable cloud instances can run on AWS Graviton3 or Graviton4, Microsoft Cobalt 100, or Google Axion. The examples in this Learning Path were tested on Ubuntu 26.04.
 
 You also need an AI coding assistant with the Arm MCP server configured. Supported assistants include [GitHub Copilot](/install-guides/github-copilot/), [Kiro CLI](/install-guides/kiro-cli/), [Claude Code](/install-guides/claude-code/), [Gemini CLI](/install-guides/gemini/), and [Codex CLI](/install-guides/codex-cli/). See the [Arm MCP server Learning Path](/learning-paths/servers-and-cloud-computing/arm-mcp-server/) for setup instructions.
 
 {{< notice Note >}}
-The AI responses shown are samples. Your AI assistant may word responses differently, include more or less detail, or structure the output differently depending on the tool and model you are using. Focus on the key concepts rather than the exact wording.
+The AI responses shown are samples. The AI assistant you use might generate responses that are worded differently, include more or less detail, or structure the output differently depending on the tool and model you are using. Focus on the key concepts rather than the exact wording.
 {{< /notice >}}
 
 Start by installing the required software and check your system includes SVE.
@@ -40,7 +40,7 @@ If `sve` does not appear, the system does not support SVE and the final implemen
 
 ## Create the project files
 
-On your Arm Neoverse system, create a working directory and add the source files.
+On your Arm Neoverse system, create a working directory and add the source files:
 
 ```bash
 mkdir adler32-sve && cd adler32-sve
@@ -177,9 +177,11 @@ clean:
 
 The `-mcpu=native` flag tells GCC to optimize for the exact CPU you're running on, which enables SVE code generation on Neoverse processors that have SVE.
 
-### ASK AI: about compiler flags
+### Ask AI about compiler flags
 
 Before running anything, ask your AI assistant to confirm that your build setup is correct for SVE.
+
+Your prompt can be similar to:
 
 ```text
 My Makefile uses `-O3 -mcpu=native`. Does this enable SVE code generation on a Neoverse processor? Do I need any special flags for SVE intrinsics?
@@ -213,11 +215,9 @@ For more on SVE programming, Arm has a good learning path: Port Code to Arm SVE
 (https://learn.arm.com/learning-paths/servers-and-cloud-computing/sve/).         
 ```
 
-The response explains that `-mcpu=native` enables SVE. It also provides useful info about running on other systems and confirm special flags, such as `-march=armv8-a+sve` are not needed. The response also tells you to include `<arm_sve.h>`.
+The response explains that `-mcpu=native` enables SVE. It also provides useful information about running on other systems and confirms special flags, such as `-march=armv8-a+sve`, are not needed. The response also tells you to include `<arm_sve.h>`. All of this is information you'll need when you create the SVE source later.
 
-You also notice the reference to a Learning Path about SVE at the end. This confirms the Arm MCP server is consulted on answering the question.
-
-This is good information you'll need when you create the SVE source later.
+The end of the response includes a reference to a Learning Path about SVE. This confirms that the Arm MCP server is consulted on answering the question.
 
 ## Build and run the baseline
 
@@ -240,11 +240,11 @@ Performance:
   10 MB     10485760 bytes      10 iters   262.388 ms     381.1 MB/s  checksum=0x285FF1B1
 ```
 
-Your numbers will differ depending on your specific Neoverse processor and memory configuration. Make a note of the MB/s values for the 1 MB and 10 MB cases, as these are your baseline numbers to compare against after each optimization.
+Your numbers will differ depending on your specific Neoverse processor and memory configuration. Note the MB/s values for the 1 MB and 10 MB cases, as these are your baseline numbers to compare against after each optimization.
 
-### ASK AI: about auto-vectorization
+### Ask AI about auto-vectorization
 
-Now ask your AI assistant a question that many developers wonder about:
+Now ask your AI assistant the following question about auto-vectorization. The prompt can be similar to:
 
 ```text
 Can GCC auto-vectorize my adler32 function with SVE if I just use `-mcpu=native`? What would prevent auto-vectorization?
@@ -279,14 +279,10 @@ No, GCC cannot auto-vectorize your adler32 function. It tried every vector mode 
 
 The response explains that the modulo operation in every iteration (`% MOD_ADLER`) is the main blocker. The compiler can't easily prove that the intermediate values won't overflow in a way that changes the result when operations are reordered. The loop-carried dependency between iterations also makes it difficult.
 
-Since auto-vectorization won't work, you need to restructure the algorithm before SVE can be applied effectively. The restructuring is explained in the next two sections.
+Because auto-vectorization won't work, you need to restructure the algorithm before SVE can be applied effectively. You'll learn more about the restructuring in the next two sections.
 
-## What you've learned and what's next
+## What you've accomplished and what's next
 
-In this section:
+You've now created the scalar Adler-32 implementation and benchmark harness, and recorded your baseline performance numbers. Using the Arm MCP server and your AI assistant of choice, you've learned that auto-vectorization won't work.
 
-- You created the scalar Adler-32 implementation and benchmark harness
-- You recorded your baseline performance numbers
-- You learned that auto-vectorization won't work 
-
-In the next section, you'll use the Arm MCP server to learn the core SVE concepts you need before writing any intrinsics code.
+In the next section, you'll use your AI assistant and the Arm MCP server to learn core SVE concepts before writing intrinsics code.
