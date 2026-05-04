@@ -18,11 +18,11 @@ In this section, you'll launch the Azure Portal to create a virtual machine (VM)
 
 This Learning Path focuses on general-purpose virtual machines in the Dpsv6 series. For more information, see the [Microsoft Azure guide for the Dpsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series).
 
-While the steps to create this instance are included here for convenience, for detailed steps, see the [Deploy a Cobalt 100 virtual machine on Azure Learning Path](/learning-paths/servers-and-cloud-computing/cobalt/).
+While the steps to create this instance are included here for convenience, for detailed steps, see the [Deploy a Cobalt 100 virtual machine on Azure Learning Path](/learning-paths/servers-and-cloud-computing/cobalt/). To learn more about Arm-based virtual machines in Azure, see "Getting Started with Microsoft Azure" in [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure/).
 
 ## Create an Arm-based Azure virtual machine on the Azure portal
 
-Creating a virtual machine based on Azure Cobalt 100 is no different from creating any other virtual machine in Azure. To create an Azure virtual machine:
+To create an Azure virtual machine:
 
 1. Launch the Azure portal and navigate to **Virtual Machines**.
 2. Select **Create**, and select **Virtual Machine** from the drop-down list.
@@ -55,15 +55,13 @@ RSA offers better security with keys longer than 3072 bits.
 
 ![Azure Portal Review + Create tab showing VM configuration summary ready for deployment#center](images/ubuntu-pro.png "Review VM configuration before creation")
 
-13. When you're happy with your selection, select the **Create** button and then **Download Private key and Create Resource** button.
+13. After reviewing the configuration, select the **Create** button and then the **Download Private key and Create Resource** button.
 
 ![Azure Portal showing Create button and SSH key download dialog#center](images/instance4.png "Download SSH key and create the virtual machine")
 
 Your virtual machine should be ready and running in a few minutes. You can SSH into the virtual machine using the private key, along with the public IP details.
 
 ![Azure Portal showing successful VM deployment with confirmation details#center](images/final-vm.png "Successful VM deployment confirmation")
-
-{{% notice Note %}}To learn more about Arm-based virtual machines in Azure, see "Getting Started with Microsoft Azure" in [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure/).{{% /notice %}}
 
 ## What you've learned and what's next
 

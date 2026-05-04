@@ -6,15 +6,9 @@ weight: 5
 layout: learningpathall
 ---
 
-TPC-DS is an industry-standard benchmark that simulates a decision support workload across a realistic retail data model. In this section, you'll generate a 10 GB TPC-DS dataset, load it into Spark, and run five analytical queries to measure execution time on your Arm64 VM.
+TPC-DS is an industry-standard benchmark that simulates a decision support workload across a realistic retail data model. In this section, you'll generate a 10 GB TPC-DS dataset, load it into Spark, and run five analytical queries to measure execution time on your Arm64 virtual machine (VM). 
 
-You'll run Spark in local mode using Parquet-formatted data and hand-written SQL queries. This avoids the schema mismatches and resource contention that commonly affect automated benchmarking frameworks such as `spark-sql-perf`, and gives you a reproducible, stable baseline.
-
-## Why Parquet and local mode?
-
-Tools like `spark-sql-perf` often fail against raw TPC-DS data because of schema mismatches between the generated CSV files and the expected column names, missing columns in certain query templates, and YARN resource allocation instability on a single-node VM.
-
-To avoid these issues, you can convert the raw data to Parquet before querying. Parquet is a columnar format that Spark reads more efficiently than CSV, and it preserves schema consistently across sessions. Running Spark in local mode eliminates YARN scheduling overhead, which makes query times more reproducible and directly comparable.
+Automated benchmarking frameworks such as `spark-sql-perf` are commonly affected by  schema mismatches and resource contention. To avoid this, you'll run Spark in local mode using Parquet-formatted data and hand-written SQL queries. Parquet is a columnar format that Spark reads more efficiently than CSV, and it preserves schema consistently across sessions. Running Spark in local mode eliminates scheduling overhead, which makes query times more reproducible and directly comparable.
 
 ## Generate TPC-DS data
 
@@ -119,7 +113,7 @@ Create a symlink so that Spark picks up the Hive configuration automatically. Sp
 ln -s /opt/apache-hive-3.1.3-bin/conf/hive-site.xml /opt/spark/conf/hive-site.xml
 ```
 
-If the symlink already exists from a previous run, remove it first with `rm /opt/spark/conf/hive-site.xml` before re-creating it.
+If the symlink already exists from a previous run, remove it with `rm /opt/spark/conf/hive-site.xml` before re-creating it.
 
 ## Start Spark shell
 
@@ -357,7 +351,7 @@ q_join_store_sales_item took 2.203225285 seconds
 
 ## Inspect sample results
 
-To verify the query results are meaningful, display the top 10 items by total sales. Items with negative `total_sales` values appear because the TPC-DS schema includes returns and price adjustments that can reduce net sales below zero — this is expected behavior.
+To verify the query results are meaningful, display the top 10 items by total sales:
 
 ```scala
 spark.sql("""
@@ -387,6 +381,7 @@ The output is similar to:
 |12552  |-31864.710000000006|
 +-------+-------------------+
 ```
+Items with negative `total_sales` values appear because the TPC-DS schema includes returns and price adjustments that can reduce net sales below zero. 
 
 ## Re-run with Gluten and Velox enabled
 
@@ -507,7 +502,7 @@ AdaptiveSparkPlan isFinalPlan=false
             PartitionFilters: [], PushedFilters: [], ReadSchema: struct<_c2:int,_c22:double>
 ```
 
-The `HashAggregate` and `Exchange` operators are standard Spark JVM operators, which indicates that Gluten is falling back to JVM execution for this aggregation. However, `Batched: true` on the `FileScan` line is significant — this means Spark is reading the Parquet file in columnar batch mode, which Gluten enables for its native Parquet reader. The scan is offloaded to Velox even when the aggregation is not.
+The `HashAggregate` and `Exchange` operators are standard Spark JVM operators, which indicates that Gluten is falling back to JVM execution for this aggregation. However, `Batched: true` on the `FileScan` line is significant. This means Spark is reading the Parquet file in columnar batch mode, which Gluten enables for its native Parquet reader. The scan is offloaded to Velox even when the aggregation is not.
 
 When Gluten successfully takes over the full query path, the plan would instead show operators such as `VeloxColumnarToRow`, `GlutenHashAggregateExecTransformer`, and `GlutenColumnarExchange`. If you see only standard Spark operator names, the aggregation and join operators are running on the JVM.
 
@@ -517,14 +512,11 @@ To check whether the Gluten plugin loaded at all, search the driver log for init
 grep -i "gluten\|velox" $SPARK_HOME/logs/spark-root-*.out | head -20
 ```
 
-If Gluten loaded successfully you will see lines similar to `GlutenPlugin: Gluten build info` and `VeloxBackend: Velox backend initialised` near startup.
+If Gluten loaded successfully, you'll see lines similar to `GlutenPlugin: Gluten build info` and `VeloxBackend: Velox backend initialised` near startup.
 
-## Compare baseline vs Gluten + Velox
+## Compare dimension join between baseline and Gluten with Velox 
 
-
-### Dimension join performance comparison
-
-The most meaningful performance difference between JVM-only and Gluten + Velox is seen in the dimension join query, which joins the large `store_sales` fact table (28 million rows) with the `item` dimension table. This query exercises Spark's hash join and shuffle paths, and benefits most from Velox's native columnar execution before the shuffle boundary.
+The most meaningful performance difference between JVM-only and Gluten with Velox is seen in the dimension join query, which joins the large `store_sales` fact table (28 million rows) with the `item` dimension table. This query exercises Spark's hash join and shuffle paths, and benefits most from Velox's native columnar execution before the shuffle boundary.
 
 | Query | Baseline (JVM) | Gluten + Velox | Change |
 |-------|---------------|----------------|--------|
@@ -532,7 +524,7 @@ The most meaningful performance difference between JVM-only and Gluten + Velox i
 
 In this scenario, Velox offloads the Parquet scan and the hash join to native C++ code, while the shuffle (`Exchange`) and final aggregation still fall back to JVM execution. The result is a significant speedup for this join-heavy query, as the most expensive part—the join itself—is accelerated by Velox. Other queries in the benchmark might not show improvement or can be slower due to the overhead of converting between columnar and row formats at the shuffle boundary, but the dimension join demonstrates the clear benefit of native execution for large, complex operations.
 
-Full offload of the `Exchange` operator to Velox (eliminating JVM fallback) requires enabling the Gluten columnar shuffle, which is configured separately and not covered in this Learning Path.
+Fully offloading the `Exchange` operator to Velox and eliminating JVM fallback requires enabling the Gluten columnar shuffle. This is configured separately and not covered in this Learning Path.
 
 ## What you've accomplished 
 

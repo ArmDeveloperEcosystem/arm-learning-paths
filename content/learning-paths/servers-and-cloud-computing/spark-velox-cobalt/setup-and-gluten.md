@@ -21,9 +21,9 @@ python3-pip mysql-server maven cmake ninja-build pkg-config libssl-dev
 Java runtime is necessary for Spark and Hadoop. C++ dependencies are necessary for building Gluten. MySQL is necessary for Hive metastore. 
 
 ## Configure hostname
-Hadoop requires proper hostname for internal communication.
+Hadoop requires a proper hostname for internal communication.
 
-Set the hostname to `spark-master` so Hadoop and Spark can communicate reliably on a single-node cluster. This prevents networking issues during service startup.
+Set the hostname to `spark-master` so that Hadoop and Spark can communicate reliably on a single-node cluster. This prevents networking issues during service startup.
 
 ```console
 hostnamectl set-hostname spark-master
@@ -62,7 +62,7 @@ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 
 ## Install Hadoop
 
-Hadoop provides Hadoop Distributed File System (HDFS) for storage and YARN for resource management.
+Hadoop provides HDFS for storage and YARN for resource management.
 
 Install Hadoop:
 
@@ -368,7 +368,7 @@ EOF
 
 ## Start Spark Thrift Server
 
-Start the Spark Thrift Server, which allows you to connect to Spark SQL using JDBC/ODBC clients. This is the main entry point for running SQL queries and benchmarks.
+Start the Spark Thrift Server, which allows you to connect to Spark SQL using JDBC/Open Database Connectivity (ODBC) clients. This is the main entry point for running SQL queries and benchmarks.
 
 ```console
 $SPARK_HOME/sbin/start-thriftserver.sh

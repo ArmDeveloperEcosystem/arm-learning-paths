@@ -22,14 +22,6 @@ Gluten is an open-source Spark plugin that offloads Spark SQL execution from the
 
 Velox is a high-performance, vectorized execution engine written in C++. It is optimized for modern hardware, including Arm64 architectures such as Azure Cobalt 100. Velox processes data in a columnar format and uses vectorized execution to significantly reduce CPU overhead and improve query performance. For more information about Velox, see [Velox Engine](https://github.com/facebookincubator/velox).
 
-Together, Gluten and Velox provide the following:
-
-- Native (off-JVM) execution of Spark SQL queries  
-- Vectorized processing for faster computation  
-- Reduced memory and CPU overhead  
-- Improved performance on Arm-based infrastructure  
-
-
 ### What you've learned and what's next
 
 You've now learned about Azure Cobalt 100 Arm-based processors and Apache Spark. You've also understood how frameworks such as Gluten and Velox improve Spark SQL performance.  
