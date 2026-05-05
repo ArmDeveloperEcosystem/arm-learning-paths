@@ -18,11 +18,13 @@ Before writing SVE intrinsics, it's helpful to understand three things:
 
 Use the Arm MCP server with your AI assistant to ask the following questions and read the responses. By doing this, you can understand the concepts well enough to recognize when you need each one, without needing to memorize intrinsic names. 
 
+## Comparing SVE and Neon
 
+Start with understanding the big picture about SVE.
 
-## Ask AI about SVE versus Neon
+### Ask AI about SVE versus Neon
 
-Ask your assistant to compare between SVE and Neon. Your prompt can be similar to:
+Ask your assistant the following question. Your prompt can be similar to:
 
 ```text
 Ask the Arm MCP server what is SVE and how does it differ from Neon? My Makefile targets the native CPU on a Neoverse processor. 
