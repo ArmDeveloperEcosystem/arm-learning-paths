@@ -57,16 +57,6 @@ The Arm MCP server gives your AI coding assistant access to Arm-specific knowled
 
 This means you don't need to keep referring to the intrinsics reference material. You can ask questions in plain language and get precise, actionable answers grounded in Arm documentation.
 
-<!-- ## Outline of each section
-
-Each section follows a consistent pattern:
-
-1. A short explanation of what you need to understand at this stage
-2. Suggested prompts to ask your AI assistant
-3. An explanation of what to look for in the response
-4. The code or configuration changes that result from the conversation
-
-You can follow along exactly, or adapt the prompts to your own style. The goal is to learn the process of using an AI assistant to apply SVE and achieve improved performance. -->
 
 ## What you've learned and what's next
 

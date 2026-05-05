@@ -18,11 +18,9 @@ Your numbers will vary by processor. Compare against the two baselines you recor
 
 The SVE version is roughly 10x faster than the NMAX scalar version, and about 55x faster than the original. The exact ratio depends on your SVE vector length. You can also use a Graviton3-based instance to try on a processor with 256-bit SVE vectors and compare the results. The 256-bit vector length on Graviton3 shows faster performance than the 128-bit vector length on Graviton4, but Graviton3 is slower than Graviton4 on the scalar versions.
 
-## Ask about the assembly
+## Ask AI about the inner loop assembly code
 
 By understanding the generated assembly, you can verify that the compiler is producing the instructions you expect.
-
-### Ask AI about the inner loop assembly code
 
 Ask your assistant to explain the inner loop assembly code. Your prompt can be similar to:
 
