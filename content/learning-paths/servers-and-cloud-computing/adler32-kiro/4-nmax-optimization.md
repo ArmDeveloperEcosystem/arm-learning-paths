@@ -19,11 +19,11 @@ for (size_t i = 0; i < len; i++) {
 
 The `% MOD_ADLER` operation runs on every single byte. Division is expensive, and doing it 10 million times for a 10 MB buffer is a significant cost. More importantly, it prevents vectorization because each iteration depends on the modulo-reduced result of the previous one.
 
-The standard solution is to defer the modulo. Of course, you might not see this immediately, but may be able to ask a question about optimizing Adler-32. 
+The standard solution is to defer the modulo. You can ask your AI assistant a question about optimizing Adler-32. 
 
-### ASK AI: about the cost of modulo operations
+### Ask AI about the cost of modulo operations
 
-Ask your assistant:
+Ask your assistant the following question. The prompt can be similar to:
 
 ```text
 Are there any common techniques to optimize adler-32 and reduce modulo operations?
@@ -133,7 +133,7 @@ uint32_t adler32(const uint8_t *data, size_t len)
 }
 ```
 
-The structure is now an outer loop that processes NMAX-byte blocks, and an inner loop with no modulo at all. The modulo only runs once per 5552 bytes instead of once per byte.
+The structure is now an outer loop that processes NMAX-byte blocks, and an inner loop with no modulo at all. The modulo runs only once per 5552 bytes instead of once per byte.
 
 ## Update the Makefile to test the NMAX version
 
@@ -180,12 +180,10 @@ Performance:
   10 MB     10485760 bytes      10 iters    50.097 ms    1996.1 MB/s  checksum=0x285FF1B1
 ```
 
-This is a substantial improvement over the original scalar version, achieved simply by removing the per-byte modulo. Make a note of these numbers as your new intermediate baseline.
+This is a substantial improvement over the original scalar version, achieved by removing the per-byte modulo. Make a note of these numbers as your new intermediate baseline.
 
-In this section:
+## What you've accomplished and what's next
 
-- You learned why deferring the modulo is safe and how to calculate the NMAX bound
-- You implemented the scalar NMAX optimization and measured a significant speedup
-- You now have a clean inner loop with no modulo which is the right structure for SVE vectorization
+You now have a clean inner loop with no modulo, which is the right structure for SVE vectorization. You learned why deferring the modulo is safe and how to calculate the NMAX bound. You then implemented the scalar NMAX optimization and measured a significant speedup.  
 
-The inner loop of the NMAX version is now a simple accumulation loop. In the next section, you'll vectorize it with SVE intrinsics.
+The inner loop of the NMAX version is now a simple accumulation loop. Next, you'll vectorize it with SVE intrinsics.

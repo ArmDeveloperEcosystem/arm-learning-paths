@@ -90,7 +90,7 @@ SVE solves this with predicate registers. A predicate is a bitmask with one bit 
 
 ### Ask AI how predicate registers work
 
-Ask your assistant:
+Ask your assistant the following questions. The prompt can be simiilar to:
 
 ```text
 Masking with predicate registers seems like a key concept in SVE. How does it work to handle loops when my data length isn't a multiple of the vector length? 
@@ -163,7 +163,7 @@ A sample response is:
 
 The response explains that the `svwhilelt_b8(i, n)` intrinsic creates a predicate where element `k` is active if `i + k < n`. This handles the loop tail automatically. When you're near the end of the data, the predicate deactivates the elements that would go out of bounds.
 
-A typical SVE loop looks like this:
+An SVE loop usually looks like this:
 
 ```c
 uint64_t vl = svcntb();          // vector length in bytes, determined at runtime
@@ -180,9 +180,9 @@ The loop body runs even for the final partial vector. The predicate ensures only
 
 For Adler-32, you're loading `uint8_t` bytes but accumulating into `uint32_t` sums.
 
-### ASK AI: about widening
+### Ask AI about widening
 
-Ask your assistant:
+Ask your assistant the following question. The prompt can be similar to:
 
 ```text
 The adler32 loop accumulates uint8_t values into a uint32_t sum. How does SVE handle widening from 8 bit to 32 bit elements?
@@ -266,11 +266,11 @@ This loads one byte per active 32 bit lane and extends each byte with zeroes to 
 
 ## The dot product intrinsic
 
-You may see things in the AI assistant responses you don't understand. You can continue to ask for more explanation until you are totally comfortable. One of the responses above implies svdot is commonly used for arithmetic. You can ask more for information about what it does.
+To understand things in the AI assistant response that you might not understand, you can continue to ask for more explanation. For example, one of the previous responses implies svdot is commonly used for arithmetic. You can ask for more information about what it does.
 
-### ASK AI: about the svdot instruction
+### Ask AI about the svdot instruction
 
-Ask your assistant:
+Ask your assistant the following question. The prompt can be similar to:
 
 ```text
 What is the svdot intrinsic? How does it differ from a simple multiply and accumulate operation?
@@ -331,7 +331,7 @@ A sample output is:
   just acc[i] += bytes[4i+0] + bytes[4i+1] + bytes[4i+2] + bytes[4i+3].        
 ```
 
-The response explains that `svdot` computes a dot product between two vectors of narrow elements and accumulates the result into a vector of wider elements. For example, `svdot_u32` takes two `svuint8_t` vectors and a `svuint32_t` accumulator, multiplying corresponding 8 bit elements and adding the products into 32 bit lanes.
+The response explains that `svdot` computes a dot product between two vectors of narrow elements and accumulates the result into a vector of wider elements. For example, `svdot_u32` takes two `svuint8_t` vectors and a `svuint32_t` accumulator, multiplying corresponding 8 bit elements and adding the products into 32-bit lanes.
 
 The signature is:
 
@@ -342,15 +342,11 @@ svuint32_t svdot_u32(svuint32_t op1, svuint8_t op2, svuint8_t op3);
 You'll use this to compute the weighted sum for the `B` accumulator. The reason will become clear in the SVE implementation section.
 
 {{< notice Note >}}
-You may notice your AI assistant asking to just create the code for you. Resist the urge to say yes and continue to ask questions and understand the theory of operation. You need to do this to get a functional result with the best performance. You also need to be able to explain and maintain the code so it's worth the extra time to learn how SVE works.
+You might notice your AI assistant asking to create the code for you. Resist the urge to say yes and continue to ask questions and understand the theory of operation. You need to do this to get a functional result with the best performance. You also need to be able to explain and maintain the code, so it's worth the extra time to learn how SVE works.
 {{< /notice >}}
 
 ## What you've learned and what's next
 
-In this section:
+You've now learned how SVE predicates handle loop tails without special case code. You've investigated intrinsics for loading bytes and dot product and learned how to ask for more details. You've also understood that SVE code must be vector length agnostic.
 
-1. You learned how SVE predicates handle loop tails without special case code
-2. You investigated intrinsics for loading bytes and dot product and learned how to ask for more details
-3. You understand that SVE code must be vector length agnostic
-
-Before you can use these intrinsics effectively, you need to restructure the Adler-32 algorithm to remove the modulo operation on each byte. That's the subject of the next section.
+Next, you'll restructure the Adler-32 algorithm to remove the modulo operation on each byte. This is necessary to use these intrinsics effectively.

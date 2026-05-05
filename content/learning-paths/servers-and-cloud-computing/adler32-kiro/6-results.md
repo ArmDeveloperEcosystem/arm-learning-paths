@@ -16,21 +16,21 @@ Your numbers will vary by processor. Compare against the two baselines you recor
 | Scalar NMAX | ~2,000 MB/s | ~5x |
 | SVE | ~21,000 MB/s | ~55x |
 
-The SVE version is roughly 10x faster than the NMAX scalar version, and about 55x faster than the original. The exact ratio depends on your SVE vector length. You can also use a Graviton3 instance to try on a processor with 256-bit SVE vectors and compare the results. The 256-bit vector length on Graviton3 shows faster performance than the 128-bit vector length on Graviton4, but Graviton3 is slower than Graviton4 on the scalar versions.
+The SVE version is roughly 10x faster than the NMAX scalar version, and about 55x faster than the original. The exact ratio depends on your SVE vector length. You can also use a Graviton3-based instance to try on a processor with 256-bit SVE vectors and compare the results. The 256-bit vector length on Graviton3 shows faster performance than the 128-bit vector length on Graviton4, but Graviton3 is slower than Graviton4 on the scalar versions.
 
 ## Ask about the assembly
 
 Understanding the generated assembly helps you verify that the compiler is producing the instructions you expect.
 
-### ASK AI: about the inner loop assembly code
+### Ask AI about the inner loop assembly code
 
-Ask your assistant:
+Ask your assistant to do the following. The prompt can be similar to:
 
 ```text
 disassemble ~/adler32-sve/adler32-test and explain the assembly code for the inner loop.  
 ```
 
-The response explains the mapping of the C code to the assembly instructions, explains the intrinsics used.
+The response explains the mapping of the C code to the assembly instructions and the intrinsics used.
 
 A partial example response is:
 
@@ -62,19 +62,11 @@ Look for the `WHILELT` and `UDOT` instructions in the inner loop. If you see the
 
 ## Ask about debugging and performance tuning
 
-You can also use your AI assistant to debug any issues or clarify performance, but be careful, it is easy to divert into an endless loop of trial and error as today's assistants can easily make things worse.
+You can also use your AI assistant to debug any issues or clarify performance. However, it is easy to divert into an endless loop of trial and error as today's assistants can easily make things worse.
 
 ## What you've accomplished
 
-You've completed the full optimization journey for Adler-32 on Arm Neoverse using an AI Assistant and the Arm MCP server:
-
-1. You started with a simple scalar implementation and measured its baseline performance
-2. You used the Arm MCP server to learn SVE concepts such as predicates, widening loads, dot products, and reductions without looking up documentation 
-3. You applied the NMAX modulo-deferral technique to restructure the algorithm for vectorization
-4. You built a vector-length-agnostic SVE implementation that works correctly on any SVE-capable processor
-5. You measured a performance improvement and learned how to read the generated assembly
-
-## Apply this process to your own code
+You've now completed the full optimization journey for Adler-32 on Arm Neoverse using an AI assistant and the Arm MCP server. You started with a simple scalar implementation, measured its baseline performance, and used the Arm MCP server to learn SVE concepts. You then applied the NMAX modulo-deferral technique to prepare the algorithm for vectorization. From there, you built a vector-length-agnostic SVE implementation, verified its correctness, and measured the resulting performance improvement by reading the generated assembly.
 
 The process you followed here applies directly to other scalar loops in your own projects:
 
