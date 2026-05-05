@@ -19,11 +19,11 @@ for (size_t i = 0; i < len; i++) {
 
 The `% MOD_ADLER` operation runs on every single byte. Division is expensive, and doing it 10 million times for a 10 MB buffer is a significant cost. More importantly, it prevents vectorization because each iteration depends on the modulo-reduced result of the previous one.
 
-The standard solution is to defer the modulo. You can ask your AI assistant a question about optimizing Adler-32. 
+The standard solution is to defer the modulo. You can ask your AI assistant how to optimize Adler-32. 
 
 ### Ask AI about the cost of modulo operations
 
-Ask your assistant the following question. The prompt can be similar to:
+Ask your assistant the following question. Your prompt can be similar to:
 
 ```text
 Are there any common techniques to optimize adler-32 and reduce modulo operations?
@@ -137,7 +137,7 @@ The structure is now an outer loop that processes NMAX-byte blocks, and an inner
 
 ## Update the Makefile to test the NMAX version
 
-Update your `Makefile` to make it easy to switch between implementations:
+Update your `Makefile` to make it easy to switch from `adler32-simple.c` to `adler32-nmax.c`
 
 ```makefile
 CC      = gcc
@@ -161,7 +161,7 @@ clean:
 .PHONY: run clean
 ```
 
-Edit the Makefile to use `adler32-nmax.c` and build and run with the NMAX version:
+Build and run with the NMAX version:
 
 ```bash
 make clean && make run
@@ -180,7 +180,7 @@ Performance:
   10 MB     10485760 bytes      10 iters    50.097 ms    1996.1 MB/s  checksum=0x285FF1B1
 ```
 
-This is a substantial improvement over the original scalar version, achieved by removing the per-byte modulo. Make a note of these numbers as your new intermediate baseline.
+This is a substantial improvement over the original scalar version, achieved by removing the per-byte modulo. Make a note of these numbers as your intermediate baseline.
 
 ## What you've accomplished and what's next
 

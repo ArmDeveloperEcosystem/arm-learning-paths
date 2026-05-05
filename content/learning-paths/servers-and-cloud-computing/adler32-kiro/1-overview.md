@@ -12,7 +12,7 @@ In this Learning Path, you'll take a simple scalar implementation of the Adler-3
 
 This Learning Path is different from a typical optimization tutorial. Rather than starting with a finished SVE implementation, you'll use an AI coding assistant connected to the Arm MCP server to guide you through each step. You'll ask questions, look up intrinsics, understand the algorithm's constraints, and build the solution piece by piece.
 
-AI coding assistants are not yet able to generate optimized code, but you can use them to guide your learning and the implementation details. This way, you can maintain and explain the code and arrive at optimized solutions, mirroring what you'd do on your own projects.
+AI coding assistants are not yet able to generate optimized code, but you can use them to guide your learning and the implementation details. By working this way, you can maintain and explain the code and arrive at optimized solutions, mirroring what you'd do on your own projects.
 
 ## The Adler-32 algorithm
 
@@ -70,6 +70,6 @@ You can follow along exactly, or adapt the prompts to your own style. The goal i
 
 ## What you've learned and what's next
 
-You now understand the Adler-32 algorithm and how you can use the Arm MCP to optimize the algorithm to use SVE intrinsics.
+You now understand the Adler-32 algorithm and how you can use the Arm MCP server to optimize the algorithm to use SVE intrinsics.
 
-Next, you'll set up the project and establish a performance baseline for the scalar implementation. The baseline is required before you can measure any improvement.
+Next, you'll set up the project and establish a performance baseline for the scalar implementation. 

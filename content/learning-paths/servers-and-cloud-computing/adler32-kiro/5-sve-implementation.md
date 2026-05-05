@@ -23,7 +23,7 @@ Ask your AI assistant to help you think through this.
 
 ### Ask AI how to vectorize the loop
 
-Ask your assistant the following question. The prompt can be similar to:
+Ask your assistant the following question. Your prompt can be similar to:
 
 ```text
 How can I vectorize the inner loop of the NMAX version using SVE? Provide a detailed explanation for how to do it and teach me about the intrinsics used. 
@@ -171,7 +171,7 @@ This is the skeleton. The full implementation requires careful handling of the w
 
 You can continue learning by asking questions and coding. You can also use your AI assistant to check your code and explain it.
 
-It's unlikely that only asking your assistant to write the code using SVE intrinsics will function correctly with best performance.
+Asking your assistant to generate the full SVE implementation directly, without the guided learning steps, is unlikely to produce correct or well-optimised code.
 
 ## The complete SVE implementation
 

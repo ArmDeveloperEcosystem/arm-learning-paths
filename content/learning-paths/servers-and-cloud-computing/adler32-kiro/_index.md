@@ -1,9 +1,6 @@
 ---
 title: Optimize an Adler-32 checksum function with SVE intrinsics using the Arm MCP server
 
-draft: true
-cascade:
-    draft: true
 
 description: Use the Arm MCP server with an AI coding assistant to incrementally optimize a scalar C Adler-32 checksum function using SVE intrinsics on Arm Neoverse servers.
 
@@ -19,7 +16,7 @@ learning_objectives:
   - Validate correctness and measure the performance improvement of the SVE implementation
 
 prerequisites:
-  - An AI coding assistant configured with the Arm MCP server, such as Kiro CLI, GitHub Copilot, or Gemini CLI. See the [Arm MCP server Learning Path](/learning-paths/servers-and-cloud-computing/arm-mcp-server/) for setup instructions.
+  - An AI coding assistant configured with the Arm MCP server, such as Kiro CLI, GitHub Copilot, or Gemini CLI. For setup instructions, see the [Arm MCP server Learning Path](/learning-paths/servers-and-cloud-computing/arm-mcp-server/).
   - An Arm Neoverse server running Ubuntu 26.04 with SVE support (for example, AWS Graviton3 or later, Google Axion, or Microsoft Cobalt 100)
   - Basic familiarity with C programming
 

@@ -20,11 +20,11 @@ The SVE version is roughly 10x faster than the NMAX scalar version, and about 55
 
 ## Ask about the assembly
 
-Understanding the generated assembly helps you verify that the compiler is producing the instructions you expect.
+By understanding the generated assembly, you can verify that the compiler is producing the instructions you expect.
 
 ### Ask AI about the inner loop assembly code
 
-Ask your assistant to do the following. The prompt can be similar to:
+Ask your assistant to explain the inner loop assembly code. Your prompt can be similar to:
 
 ```text
 disassemble ~/adler32-sve/adler32-test and explain the assembly code for the inner loop.  
@@ -60,15 +60,16 @@ objdump -d adler32-test | grep -A 40 "<adler32>"
 
 Look for the `WHILELT` and `UDOT` instructions in the inner loop. If you see them, the SVE code path is active.
 
-## Ask about debugging and performance tuning
+{{< notice Note >}}
+You can use your AI assistant to debug any issues or clarify performance. However, it is easy to fall into an endless loop of trial and error as today's assistants can easily make things worse.
+{{< /notice >}}
 
-You can also use your AI assistant to debug any issues or clarify performance. However, it is easy to divert into an endless loop of trial and error as today's assistants can easily make things worse.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
 You've now completed the full optimization journey for Adler-32 on Arm Neoverse using an AI assistant and the Arm MCP server. You started with a simple scalar implementation, measured its baseline performance, and used the Arm MCP server to learn SVE concepts. You then applied the NMAX modulo-deferral technique to prepare the algorithm for vectorization. From there, you built a vector-length-agnostic SVE implementation, verified its correctness, and measured the resulting performance improvement by reading the generated assembly.
 
-The process you followed here applies directly to other scalar loops in your own projects:
+You can apply the process you followed in this Learning Path directly to other scalar loops in your own projects:
 
 1. Establish a correctness test and a performance baseline before changing anything
 2. Ask your AI assistant to guide you and keep explaining along the way
