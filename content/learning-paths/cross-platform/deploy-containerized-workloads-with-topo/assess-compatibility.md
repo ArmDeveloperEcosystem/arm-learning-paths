@@ -106,7 +106,7 @@ Connectivity: ❌ (key-based SSH authentication is not setup)
 
 This is because Topo requires key-based SSH for secure, automated access. You can use the command specified in the output, and Topo will set up the key-based SSH for you. When prompted to set a passphrase, leave it empty for automation, or use a passphrase and an SSH agent for added security. Afterwards, run `topo health` again to confirm it has correctly set up key-based authentication.
 
-If you encounter SSH errors, check:
+If you encounter SSH errors, check that:
 - The target device is powered on and accessible from the host
 - The correct username and IP address are used
 - Your firewall allows SSH traffic
@@ -131,10 +131,6 @@ topo install remoteproc-runtime --target user@my-target
 
 Run the health command again to verify installation. Topo uses `remoteproc-runtime` internally when deploying to heterogeneous devices.
 
-
-<!-- ## Recap: health checks and compatibility
-
-You have now verified your host and target environments, resolved any missing dependencies, and (optionally) enabled heterogeneous deployment. Next, you will generate a target description and list compatible templates. -->
 
 ## Generate a target description
 
