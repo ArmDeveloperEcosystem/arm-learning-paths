@@ -19,6 +19,8 @@ prerequisites:
     - Basic experience building C++ software from source
 author: Chris Moroney
 
+generate_summary_faq: true
+
 ### Tags
 skilllevels: Intermediate
 subjects: Servers and Cloud Computing
