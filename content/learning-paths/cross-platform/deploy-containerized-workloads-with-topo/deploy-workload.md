@@ -117,7 +117,7 @@ On your host device, enter the project directory created by the `topo clone` com
 cd topo-cpu-ai-chat/
 ```
 
-Then use `topo deploy` to build the container images on the host, transfer them to the target over SSH, and start the application on the target:
+Then, use `topo deploy` to build the container images on the host, transfer them to the target over SSH, and start the application on the target:
 
 ```bash
 topo deploy --target user@my-target
@@ -150,7 +150,7 @@ If the target is not directly accessible from your browser (for example, if it i
 ssh -L <port_number>:localhost:<port_number> user@my-target
 ```
 
-Then open `http://localhost:<port_number>` in your browser.
+Then, open `http://localhost:<port_number>` in your browser.
 
 To stop a deployed Topo application on the target, run `topo stop` on the host:
 
@@ -170,7 +170,7 @@ If you don't already have a CLI agent installed, see one of these install guides
 - [Install Codex CLI](/install-guides/codex-cli/)
 - [Install Gemini CLI](/install-guides/gemini/)
 
-With your agent ready, you can delegate the full workflow. For example:
+With your agent ready, you can delegate the full workflow using a prompt. For example:
 
 ```text
 Use Topo to deploy a containerized workload to my Arm target at user@my-target. Run a health check first, list compatible templates, choose a suitable one, clone it, and deploy it.
