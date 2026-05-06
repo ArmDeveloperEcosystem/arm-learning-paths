@@ -1,5 +1,5 @@
 ---
-title: Install and load the SPE kernel module
+title: Install and load the Arm SPE kernel module
 weight: 4
 
 ### FIXED, DO NOT MODIFY

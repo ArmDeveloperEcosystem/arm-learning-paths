@@ -35,13 +35,13 @@ Be aware that this instance type typically has a higher cost.
 
 On Neoverse-based systems, architecture support is already present, and firmware support is usually present.
 
-In this Learning Path, you'll follow a step-by-step diagnostic flow with remediation paths based on what you find. Because Linux distributions and kernel versions vary widely, this Learning Path provides practical guidance rather than an exhaustive set of steps.
+In this Learning Path, you'll follow a diagnostic flow with remediation paths based on what you find. Because Linux distributions and kernel versions vary widely, this Learning Path provides practical guidance rather than an exhaustive set of steps.
 
 ## Check if Arm SPE is enabled
 
 Open Performix from your local machine. If this is your first time using or installing Performix, see the [Performix install guide](/install-guides/performix/).
 
-Connect to your instance, select the `Recipes` tab, and then select the `Memory Access` recipe. This automatically runs a precheck and prints the status at the bottom of the page. If you receive the following **SPE is not configured** status, you need to enable SPE before you can run the recipe.
+Connect to your instance, select the `Recipes` tab, and then select the `Memory Access` recipe. This automatically runs a precheck and prints the status at the end of the page. If you receive the **SPE is not configured** status as shown in the following screenshot, you need to enable SPE before you can run the recipe.
 
 ![Screenshot of the Arm Performix Memory Access recipe showing a red status notification at the bottom of the page indicating that SPE has not been configured for the target system. This is the expected message when the arm_spe_pmu driver is missing or not loaded.#center](./memory-access-no-spe.png "Arm Performix Memory Access recipe reporting that SPE is not configured")
 
@@ -51,4 +51,4 @@ If you receive a different error message, SPE is likely not the cause of your is
 
 You now know what Arm SPE is and what platform layers need to be present to support SPE. You also checked whether Arm SPE is enabled on your instance. 
 
-Next, you'll check whether the OS kernel of the instance is built with ARM SPE or includes modules that can be loaded.
+Next, you'll check whether the OS kernel of the instance is built with Arm SPE or includes modules that can be loaded.
