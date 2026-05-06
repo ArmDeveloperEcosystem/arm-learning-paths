@@ -12,7 +12,7 @@ generate_summary_faq: true
 # START generated_summary_faq
 generated_summary_faq:
   template_version: summary-faq-v1
-  generated_at: '2026-04-30T18:58:19Z'
+  generated_at: '2026-05-06T17:17:59Z'
   generator: template
   source_hash: 46f2645fb6ef298508af93569554315cfa2564be9891acabf1c874c94e52d70d
   summary: >-
