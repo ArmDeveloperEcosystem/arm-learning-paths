@@ -31,10 +31,9 @@ These tools are required for downloading and extracting software:
 sudo apt install -y wget curl tar rsync nano
 ```
 
-## Install Java 11 (Required)
+## Install Java 11
 
-Alluxio supports **Java 8 and Java 11**.
-Java 17 will cause runtime errors sometimes (as already experienced).
+Alluxio requires Java 8 or Java 11. Java 17 is not supported and causes runtime errors at startup.
 
 ```bash
 wget -qO - https://packages.adoptium.net/artifactory/api/gpg/key/public | \
@@ -47,13 +46,13 @@ sudo apt update
 sudo apt install -y temurin-11-jdk
 ```
 
-**Set Java:**
+Run the following command to set Java 11 as the default:
 
 ```bash
 sudo update-alternatives --config java
 ```
 
-- Select Java 11
+When prompted, enter the selection number corresponding to the `temurin-11` entry in the list.
 
 **Verify:**
 
@@ -89,7 +88,8 @@ source ~/.bashrc
 ```
 
 ## Configure Alluxio
-Navigate to configuration directory:
+
+Navigate to the configuration directory and create working copies of the template files:
 
 ```bash
 cd /opt/alluxio/conf
@@ -98,23 +98,22 @@ cp alluxio-site.properties.template alluxio-site.properties
 ```
 
 ## Configure RAM-based storage
-Alluxio uses memory for fast data access.
 
-**Edit:**
+Alluxio stores cached data in a RAM folder for fast access. `/dev/shm` is a Linux tmpfs filesystem backed by RAM, giving Alluxio direct access to in-memory storage.
+
+Open `alluxio-env.sh` and add the following line:
 
 ```bash
 nano alluxio-env.sh
 ```
 
-**Add:**
-
 ```bash
 export ALLUXIO_RAM_FOLDER=/dev/shm
 ```
 
-`/dev/shm` is a Linux in-memory filesystem (RAM-backed storage)
-
 ## Configure core properties
+
+Open `alluxio-site.properties` and add the following configuration:
 
 ```bash
 nano alluxio-site.properties
@@ -126,28 +125,26 @@ alluxio.worker.memory.size=6GB
 alluxio.master.mount.table.root.ufs=/mnt/data
 ```
 
-**Explanation:**
+`master.hostname` sets the host where the Alluxio master process runs. `worker.memory.size` controls how much RAM is reserved as the caching layer — 6 GB is appropriate for the D4ps_v6 VM, which has 16 GB of total memory. `root.ufs` points to the underlying storage directory that Alluxio manages.
 
-- `master.hostname` → where Alluxio master runs
-- `worker.memory.size` → RAM allocated for caching
-- `root.ufs` → underlying storage (your disk)
+## Set up the storage directory
 
-## Setup storage directory
-This is your underlying file system (UFS).
+Create the directory that Alluxio will use as its underlying file system (UFS) and set the ownership to your current user:
 
 ```bash
 sudo mkdir -p /mnt/data
-sudo chmod -R 777 /mnt/data
+sudo chown -R $USER:$USER /mnt/data
 ```
 
 ## Start Alluxio
-Format metadata (first time only):
+
+Before starting Alluxio for the first time, format the metadata store. This initializes the journal and clears any previous state:
 
 ```bash
 alluxio format
 ```
 
-**Start Alluxio in local mode:**
+Start all Alluxio services in local mode, where the master, worker, and proxy run on the same VM:
 
 ```bash
 alluxio-start.sh local NoMount
@@ -182,8 +179,7 @@ AlluxioProxy
 AlluxioWorker
 ```
 
-**Open:**
-Open in your browser:
+Open the Alluxio Web UI in your browser:
 
 ```text
 http://<VM-IP>:19999
@@ -203,11 +199,6 @@ What you can see:
 
 ## What you've learned and what's next
 
-You have successfully:
+Alluxio is now running on your Azure Cobalt 100 virtual machine with a memory-backed cache layer configured and all services reporting healthy. The Web UI at port 19999 gives you visibility into worker status, storage capacity, and cached data blocks.
 
-- Installed Alluxio on an Arm-based VM
-- Configured compute and storage layers
-- Enabled memory-based data caching
-- Verified cluster health via UI
-
-You are now ready to integrate Alluxio with analytics frameworks.
+Next, you'll install Apache Spark and integrate it with Alluxio to run analytics workloads against the cache layer.
