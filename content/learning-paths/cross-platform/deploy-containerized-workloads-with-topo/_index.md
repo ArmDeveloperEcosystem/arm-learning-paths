@@ -1,10 +1,6 @@
 ---
 title: Deploy containerized workloads to Arm-based Linux targets with Topo
 
-draft: true
-cascade:
-    draft: true
-
 description: Use Topo to detect Arm processor capabilities on a target device, select a compatible container template, and deploy containerized workloads to Arm-based Linux targets over SSH.
 
 minutes_to_complete: 30
@@ -20,7 +16,7 @@ learning_objectives:
 prerequisites:
     - A host machine (x86 or Arm) with Linux, macOS, or Windows
     - An Arm-based Linux target accessible over SSH, for example an Arm-based Linux VM, Raspberry Pi, DGX Spark, or NXP i.MX 93
-    - Docker installed on the host and target. See [Install Docker](/install-guides/docker/) if needed
+    - Docker installed on the host and target. For installation steps, see [Install Docker](/install-guides/docker/).
     - lscpu installed on the target (pre-installed on most Linux distributions)
     - Basic familiarity with containers and CLI tools
 
@@ -41,6 +37,12 @@ operatingsystems:
     - Linux
     - macOS
     - Windows
+    
+### Cross-platform metadata only
+shared_path: true
+shared_between:
+    - servers-and-cloud-computing
+    - laptops-and-desktops
 
 further_reading:
     - resource:
