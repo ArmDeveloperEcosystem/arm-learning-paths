@@ -52,13 +52,12 @@ source ~/.bashrc
 ```
 
 ## Connect Spark with Alluxio
-Edit Spark configuration:
+
+Open the Spark configuration file and add the Alluxio filesystem implementation and client JAR paths:
 
 ```bash
 nano $SPARK_HOME/conf/spark-defaults.conf
 ```
-
-**Add:**
 
 ```bash
 spark.hadoop.fs.alluxio.impl=alluxio.hadoop.FileSystem
@@ -66,17 +65,18 @@ spark.driver.extraClassPath=/opt/alluxio/client/alluxio-2.9.4-client.jar
 spark.executor.extraClassPath=/opt/alluxio/client/alluxio-2.9.4-client.jar
 ```
 
-**Explanation:**
+These properties register Alluxio's Hadoop-compatible filesystem implementation so Spark can resolve `alluxio://` URIs, and add the Alluxio client JAR to both the driver and executor classpaths.
 
-- Enables Spark to read from `alluxio://`
-- Adds Alluxio client libraries to Spark
+## Create a dataset
 
-## Create dataset
+Create a sample dataset in `/mnt/data/demo`. Files placed in `/mnt/data` are accessible to Spark through the `alluxio:///` URI prefix because `/mnt/data` is configured as Alluxio's root underlying file system:
 
 ```bash
 rm -rf /mnt/data/demo
 mkdir -p /mnt/data/demo
 ```
+
+The following loop generates 100,000 records, creating a small but representative dataset for the caching benchmark:
 
 ```bash
 for i in {1..100000}; do
@@ -84,7 +84,7 @@ for i in {1..100000}; do
 done
 ```
 
-**Verify:**
+Verify the file was created successfully:
 
 ```bash
 wc -l /mnt/data/demo/data.txt
@@ -96,7 +96,9 @@ The output is similar to:
 100000 /mnt/data/demo/data.txt
 ```
 
-## Run Spark
+## Start the Spark shell
+
+Start the interactive Spark shell. This opens a Scala REPL with a pre-configured `SparkSession` available as `spark`. All commands in the following sections run inside this shell:
 
 ```bash
 spark-shell
@@ -121,12 +123,12 @@ scala>
 
 ## Load data via Alluxio
 
-```bash
+```scala
 val df = spark.read.text("alluxio:///demo/data.txt")
 df.count()
 ```
 
-**Expected output:**
+The expected output is:
 
 ```output
 100000
@@ -134,18 +136,18 @@ df.count()
 
 ## Enable caching
 
-```bash
+`df.cache()` marks the DataFrame for Spark's in-memory caching. The subsequent `df.count()` triggers a full read, loading the data from Alluxio into Spark's cache. After this step, repeat reads on `df` are served from Spark's in-memory cache rather than going back through Alluxio:
+
+```scala
 df.cache()
 df.count()
 ```
-
-This loads data into memory (Alluxio + Spark cache)
 
 ## Measure performance
 
 **First run:**
 
-```bash
+```scala
 val t1 = System.nanoTime()
 df.count()
 val t2 = System.nanoTime()
@@ -154,24 +156,21 @@ println((t2 - t1)/1e9 + " seconds")
 
 **Second run (cached):**
 
-```bash
+```scala
 val t3 = System.nanoTime()
 df.count()
 val t4 = System.nanoTime()
 println((t4 - t3)/1e9 + " seconds")
 ```
 
+Run both timing blocks and compare the printed values. The output is similar to:
+
 ```output
-Disk read:            ~0.44 seconds
-Alluxio first read:   ~0.44 seconds
-Alluxio cached read:  ~0.39 seconds
+0.44 seconds
+0.39 seconds
 ```
 
-**Performance analysis**
-
-- First read → data comes from disk
-- Second read → data is served from memory (cache)
-- Cached read is faster due to reduced disk I/O
+The second run is faster because Spark serves the result directly from its in-memory cache, bypassing Alluxio and the underlying storage entirely.
 
 
 ## Verify in Alluxio UI
@@ -192,21 +191,15 @@ http://<VM-IP>:19999
 - Cached dataset visibility
 - Data available for fast access
 
-### Alluxio UI (Caching in Action)
+### Alluxio caching activity
 
-What to observe:
-Increased worker memory usage
-Cached file blocks
-Active data access
+After running `df.cache()` and `df.count()`, return to the Alluxio Web UI and look for:
 
-## Compare with direct file access
+- Increased worker memory usage in the worker summary
+- Cached file blocks listed in the data browser
+- Active data access reflected in the cluster metrics
 
-```bash
-val df1 = spark.read.text("file:///mnt/data/demo/data.txt")
-val df2 = spark.read.text("alluxio:///demo/data.txt")
-```
-
-This shows the advantage of using Alluxio as a caching layer.
+{{% notice Note %}}This Learning Path uses local disk as the underlying storage to keep the setup self-contained. The performance advantage of Alluxio is most significant when the underlying storage is remote — for example, Azure Blob Storage, Amazon S3, or HDFS. In those configurations, Alluxio caches data in local worker memory after the first read, so subsequent Spark jobs access cached data at memory speed instead of making repeated remote storage round-trips.{{% /notice %}}
 
 ## Key concepts
 
@@ -217,11 +210,6 @@ This shows the advantage of using Alluxio as a caching layer.
 
 ## What you've learned and what's next
 
-You have successfully:
+You've connected Apache Spark to Alluxio on an Azure Cobalt 100 Arm64 VM, loaded data through the Alluxio namespace, and measured the difference between an uncached and a cached read. You can verify the caching activity in the Alluxio Web UI, where worker memory usage increases and cached file blocks become visible after the first read.
 
-- Integrated Spark with Alluxio
-- Enabled distributed caching
-- Measured performance improvements
-- Validated results using real data
-
-You are now ready to extend this setup with cloud storage, Spark SQL, and distributed clusters.
+To see the full performance benefit of Alluxio, you can replace the local disk UFS with a remote storage backend such as Azure Blob Storage. In that configuration, Alluxio caches data in local worker memory after the first read, eliminating repeated remote storage round-trips for subsequent Spark jobs.
