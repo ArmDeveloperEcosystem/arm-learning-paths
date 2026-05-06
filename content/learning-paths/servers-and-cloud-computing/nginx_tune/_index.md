@@ -17,6 +17,8 @@ prerequisites:
     - If you do not already have a Nginx setup, a review of [Learn how to deploy Nginx](/learning-paths/servers-and-cloud-computing/nginx/).
 
 generate_summary_faq: true
+rerun_summary: true
+rerun_faqs: false
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -93,4 +95,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

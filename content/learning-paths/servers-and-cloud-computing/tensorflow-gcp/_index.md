@@ -15,6 +15,8 @@ prerequisites:
   - Basic familiarity with [TensorFlow](https://www.tensorflow.org/)
 
 generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -101,4 +103,3 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
-
