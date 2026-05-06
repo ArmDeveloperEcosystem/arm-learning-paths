@@ -112,6 +112,8 @@ jobs:
           import yaml
 
           report_path = pathlib.Path("reports/generated-summary-faq/latest-run.yml")
+          print("# Generate summary/FAQ report")
+          print("")
           print("Generated summary/FAQ report: `reports/generated-summary-faq/latest-run.yml`")
           print("")
 
@@ -122,16 +124,75 @@ jobs:
           report = yaml.safe_load(report_path.read_text(encoding="utf-8")) or {}
           latest = report.get("latest_run", {})
           totals = latest.get("totals", {})
-          print("## Run totals")
+          section_totals = latest.get("section_totals", {})
+          reason_totals = latest.get("reason_totals", {})
+          paths = latest.get("paths", [])
+
+          def metric_row(label, value):
+              return f"| {label} | {value} |"
+
+          print("## Run overview")
           print("")
-          print(f"- Processed: {totals.get('processed', 0)}")
-          print(f"- Added: {totals.get('added', 0)}")
-          print(f"- Updated: {totals.get('updated', 0)}")
-          print(f"- Unchanged: {totals.get('unchanged', 0)}")
-          print(f"- Errors: {totals.get('errors', 0)}")
+          print("| Metric | Count |")
+          print("| --- | ---: |")
+          print(metric_row("Processed", totals.get("processed", 0)))
+          print(metric_row("Added", totals.get("added", 0)))
+          print(metric_row("Updated", totals.get("updated", 0)))
+          print(metric_row("Drift detected", totals.get("drift_detected", 0)))
+          print(metric_row("Unchanged", totals.get("unchanged", 0)))
+          print(metric_row("Errors", totals.get("errors", 0)))
+          print(metric_row("Summary changed", totals.get("summary_changed", 0)))
+          print(metric_row("FAQs changed", totals.get("faq_changed", 0)))
+          print(metric_row("Rerun flags reset", totals.get("rerun_flags_reset", 0)))
           print("")
-          print("## Paths")
-          print("")
-          for entry in latest.get("paths", []):
-              print(f"- {entry.get('status', 'unknown')}: {entry.get('path', '')}")
+
+          for section_name, title in (("summary", "Summary actions"), ("faqs", "FAQ actions")):
+              actions = section_totals.get(section_name, {})
+              print(f"## {title}")
+              print("")
+              print("| Action | Count |")
+              print("| --- | ---: |")
+              for action in (
+                  "created",
+                  "repaired_missing",
+                  "rerun_requested",
+                  "drift_detected_preserved",
+                  "unchanged",
+              ):
+                  print(metric_row(action, actions.get(action, 0)))
+              print("")
+
+          nonzero_reasons = [(reason, count) for reason, count in reason_totals.items() if count]
+          if nonzero_reasons:
+              print("## Change reasons")
+              print("")
+              print("| Reason | Count |")
+              print("| --- | ---: |")
+              for reason, count in nonzero_reasons:
+                  print(metric_row(reason, count))
+              print("")
+
+          interesting_paths = [
+              entry for entry in paths
+              if entry.get("status") != "unchanged" or entry.get("change_reasons")
+          ]
+
+          if interesting_paths:
+              print("## Path details")
+              print("")
+              print("| Path | Status | Summary | FAQs | Reasons |")
+              print("| --- | --- | --- | --- | --- |")
+              for entry in interesting_paths[:50]:
+                  summary_action = entry.get("summary", {}).get("action", "")
+                  faq_action = entry.get("faqs", {}).get("action", "")
+                  reasons = ", ".join(entry.get("change_reasons", [])) or "none"
+                  print(
+                      f"| `{entry.get('path', '')}` | {entry.get('status', 'unknown')} | "
+                      f"{summary_action} | {faq_action} | {reasons} |"
+                  )
+              if len(interesting_paths) > 50:
+                  print("")
+                  print(f"_Showing the first 50 path rows out of {len(interesting_paths)}._")
+          else:
+              print("All processed Learning Paths were fully unchanged.")
           PY

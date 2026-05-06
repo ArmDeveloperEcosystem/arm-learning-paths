@@ -3,24 +3,31 @@
 """
 Generate summary and FAQ content for Learning Path _index.md files.
 
-This script is intentionally template-driven for the first iteration so it can
-run in CI without external AI dependencies. It:
+This script is intentionally template-driven so it can run in CI without
+external AI dependencies. It:
 
 - selects eligible Learning Paths using a front-matter flag or explicit paths
-- generates a managed `generated_summary_faq` front-matter block
-- updates `_index.md` files in place when requested
-- writes a central run report with per-path change details
+- manages a `generated_summary_faq` front-matter block
+- supports one-shot `rerun_summary` / `rerun_faqs` controls
+- auto-repairs missing generated summary/FAQ sections
+- reports section-level changes, drift, and reasons in a central YAML file
 
 Managed front-matter contract:
 
     generate_summary_faq: true
+    rerun_summary: false
+    rerun_faqs: false
 
     # START generated_summary_faq
     generated_summary_faq:
-      template_version: summary-faq-v1
-      generated_at: "2026-04-30T19:40:00Z"
+      template_version: summary-faq-v2
+      generated_at: "2026-05-06T19:40:00Z"
       generator: template
       source_hash: "..."
+      summary_generated_at: "2026-05-06T19:40:00Z"
+      summary_source_hash: "..."
+      faq_generated_at: "2026-05-06T19:40:00Z"
+      faq_source_hash: "..."
       summary: >-
         ...
       faqs:
@@ -36,7 +43,6 @@ import argparse
 import copy
 import hashlib
 import json
-import os
 import re
 import sys
 from dataclasses import dataclass
@@ -52,11 +58,40 @@ LEARNING_PATH_ROOT = REPO_ROOT / "content" / "learning-paths"
 DEFAULT_REPORT_PATH = REPO_ROOT / "reports" / "generated-summary-faq" / "latest-run.yml"
 
 ENABLE_FLAG = "generate_summary_faq"
+RERUN_SUMMARY_FLAG = "rerun_summary"
+RERUN_FAQS_FLAG = "rerun_faqs"
+
 GENERATED_KEY = "generated_summary_faq"
 MANAGED_START = "# START generated_summary_faq"
 MANAGED_END = "# END generated_summary_faq"
-TEMPLATE_VERSION = "summary-faq-v1"
+
+TEMPLATE_VERSION = "summary-faq-v2"
 DEFAULT_HISTORY_LIMIT = 20
+
+SUMMARY_SOURCE_HASH_KEY = "summary_source_hash"
+SUMMARY_GENERATED_AT_KEY = "summary_generated_at"
+FAQ_SOURCE_HASH_KEY = "faq_source_hash"
+FAQ_GENERATED_AT_KEY = "faq_generated_at"
+
+SUMMARY_ACTIONS = (
+    "created",
+    "repaired_missing",
+    "rerun_requested",
+    "drift_detected_preserved",
+    "unchanged",
+)
+FAQ_ACTIONS = SUMMARY_ACTIONS
+REASON_ORDER = (
+    "initial_generation",
+    "missing_summary",
+    "missing_faqs",
+    "rerun_summary",
+    "rerun_faqs",
+    "summary_drift_detected",
+    "faq_drift_detected",
+    "rerun_flags_reset",
+)
+CHANGE_ACTIONS = {"created", "repaired_missing", "rerun_requested"}
 
 
 class BlockString(str):
@@ -159,6 +194,10 @@ def parse_args() -> argparse.Namespace:
     return args
 
 
+def current_timestamp() -> str:
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
 def read_markdown_document(path: Path, require_front_matter: bool = True) -> MarkdownDocument:
     raw_text = path.read_text(encoding="utf-8")
     match = re.match(r"\A---\s*\n(.*?)\n---\s*\n?(.*)\Z", raw_text, re.DOTALL)
@@ -224,12 +263,20 @@ def discover_learning_path_indexes() -> List[Path]:
     return [path for path in indexes if path.is_file()]
 
 
+def as_bool(value: Any) -> bool:
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        return value.strip().lower() in {"1", "true", "yes", "on"}
+    return bool(value)
+
+
 def has_enable_flag(doc: MarkdownDocument) -> bool:
-    return bool(doc.metadata.get(ENABLE_FLAG))
+    return as_bool(doc.metadata.get(ENABLE_FLAG))
 
 
 def is_draft(doc: MarkdownDocument) -> bool:
-    return bool(doc.metadata.get("draft", False))
+    return as_bool(doc.metadata.get("draft", False))
 
 
 def load_steps(index_path: Path) -> List[StepPage]:
@@ -275,6 +322,13 @@ def strip_markdown_links(text: str) -> str:
     text = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", text)
     text = re.sub(r"`([^`]+)`", r"\1", text)
     return compact_whitespace(text)
+
+
+def preview_text(value: str, limit: int = 200) -> str:
+    preview = compact_whitespace(strip_markdown_links(str(value or "")))
+    if len(preview) > limit:
+        preview = preview[:limit] + "..."
+    return preview
 
 
 def normalize_audience(value: str) -> str:
@@ -361,7 +415,7 @@ def build_step_sentence(steps: Sequence[StepPage]) -> str:
         step.title
         for step in steps
         if step.path.name not in {"_index.md", "_next-steps.md", "_review.md", "_demo.md"}
-        and not step.metadata.get("hide_from_navpane", False)
+        and not as_bool(step.metadata.get("hide_from_navpane", False))
         and step.title
     ]
     if not visible_titles:
@@ -417,7 +471,7 @@ def build_faqs(metadata: Dict[str, Any], steps: Sequence[StepPage]) -> List[Dict
         step.title
         for step in steps
         if step.path.name not in {"_index.md", "_next-steps.md", "_review.md", "_demo.md"}
-        and not step.metadata.get("hide_from_navpane", False)
+        and not as_bool(step.metadata.get("hide_from_navpane", False))
         and step.title
     ]
 
@@ -503,28 +557,113 @@ def build_source_hash(metadata: Dict[str, Any], steps: Sequence[StepPage]) -> st
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
-def build_generated_block(metadata: Dict[str, Any], steps: Sequence[StepPage]) -> Dict[str, Any]:
-    generated_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
-    summary = build_summary(metadata, steps)
-    faqs = build_faqs(metadata, steps)
+def extract_existing_summary(existing_generated: Dict[str, Any] | None) -> str:
+    if not isinstance(existing_generated, dict):
+        return ""
+    value = existing_generated.get("summary", "")
+    if value is None:
+        return ""
+    return str(value).strip()
 
-    wrapped_faqs = []
+
+def extract_existing_faqs(existing_generated: Dict[str, Any] | None) -> List[Dict[str, str]]:
+    if not isinstance(existing_generated, dict):
+        return []
+
+    raw_faqs = existing_generated.get("faqs")
+    if not isinstance(raw_faqs, list):
+        return []
+
+    normalized: List[Dict[str, str]] = []
+    for raw_faq in raw_faqs:
+        if not isinstance(raw_faq, dict):
+            continue
+        question = str(raw_faq.get("question", "")).strip()
+        answer = str(raw_faq.get("answer", "")).strip()
+        if question and answer:
+            normalized.append({"question": question, "answer": answer})
+    return normalized
+
+
+def summaries_differ(existing: str, new: str) -> bool:
+    return compact_whitespace(existing) != compact_whitespace(new)
+
+
+def faq_mapping(faqs: Sequence[Dict[str, Any]]) -> Dict[str, str]:
+    mapping: Dict[str, str] = {}
     for faq in faqs:
-        wrapped_faqs.append(
-            {
-                "question": faq["question"],
-                "answer": BlockString(faq["answer"]),
-            }
-        )
+        if not isinstance(faq, dict):
+            continue
+        question = compact_whitespace(str(faq.get("question", "")))
+        answer = compact_whitespace(str(faq.get("answer", "")))
+        if question:
+            mapping[question] = answer
+    return mapping
+
+
+def classify_faq_changes(existing_faqs: Sequence[Dict[str, Any]], new_faqs: Sequence[Dict[str, Any]]) -> Dict[str, Any]:
+    existing_by_question = faq_mapping(existing_faqs)
+    new_by_question = faq_mapping(new_faqs)
+
+    added_questions = [question for question in new_by_question if question not in existing_by_question]
+    removed_questions = [question for question in existing_by_question if question not in new_by_question]
+    updated_questions = [
+        question
+        for question in new_by_question
+        if question in existing_by_question and new_by_question[question] != existing_by_question[question]
+    ]
 
     return {
-        "template_version": TEMPLATE_VERSION,
-        "generated_at": generated_at,
-        "generator": "template",
-        "source_hash": build_source_hash(metadata, steps),
-        "summary": BlockString(summary),
-        "faqs": wrapped_faqs,
+        "before_count": len(existing_by_question),
+        "after_count": len(new_by_question),
+        "added_questions": added_questions,
+        "removed_questions": removed_questions,
+        "updated_questions": updated_questions,
     }
+
+
+def faq_differences_exist(change_details: Dict[str, Any]) -> bool:
+    return bool(
+        change_details["added_questions"]
+        or change_details["removed_questions"]
+        or change_details["updated_questions"]
+        or change_details["before_count"] != change_details["after_count"]
+    )
+
+
+def get_existing_section_source_hash(existing_generated: Dict[str, Any] | None, section: str) -> str:
+    if not isinstance(existing_generated, dict):
+        return ""
+
+    key = SUMMARY_SOURCE_HASH_KEY if section == "summary" else FAQ_SOURCE_HASH_KEY
+    value = compact_whitespace(str(existing_generated.get(key, "")))
+    if value:
+        return value
+
+    return compact_whitespace(str(existing_generated.get("source_hash", "")))
+
+
+def get_existing_section_generated_at(existing_generated: Dict[str, Any] | None, section: str) -> str:
+    if not isinstance(existing_generated, dict):
+        return ""
+
+    key = SUMMARY_GENERATED_AT_KEY if section == "summary" else FAQ_GENERATED_AT_KEY
+    value = compact_whitespace(str(existing_generated.get(key, "")))
+    if value:
+        return value
+
+    return compact_whitespace(str(existing_generated.get("generated_at", "")))
+
+
+def normalize_faqs_for_output(faqs: Sequence[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    wrapped_faqs: List[Dict[str, Any]] = []
+    for faq in faqs:
+        question = str(faq.get("question", "")).strip()
+        answer = str(faq.get("answer", "")).strip()
+        if not question or not answer:
+            continue
+        wrapped_faqs.append({"question": question, "answer": BlockString(answer)})
+    return wrapped_faqs
 
 
 def make_managed_yaml_block(generated_block: Dict[str, Any]) -> str:
@@ -570,75 +709,16 @@ def insert_or_replace_managed_block(front_matter_text: str, generated_block: Dic
     return (front_matter_text.rstrip() + "\n\n" + managed_block).rstrip()
 
 
+def replace_top_level_scalar_line(front_matter_text: str, key: str, new_value: str) -> str:
+    pattern = re.compile(rf"(?m)^{re.escape(key)}:\s*.*$")
+    if not pattern.search(front_matter_text):
+        return front_matter_text
+    return pattern.sub(f"{key}: {new_value}", front_matter_text, count=1)
+
+
 def rebuild_markdown(doc: MarkdownDocument, updated_front_matter_text: str) -> str:
     content = doc.content.lstrip("\n")
     return f"---\n{updated_front_matter_text.rstrip()}\n---\n\n{content}"
-
-
-def classify_faq_changes(existing: Dict[str, Any], new: Dict[str, Any]) -> Dict[str, Any]:
-    existing_faqs = existing.get("faqs") or []
-    new_faqs = new.get("faqs") or []
-
-    existing_by_question = {
-        faq.get("question"): compact_whitespace(str(faq.get("answer", "")))
-        for faq in existing_faqs
-        if isinstance(faq, dict) and faq.get("question")
-    }
-    new_by_question = {
-        faq.get("question"): compact_whitespace(str(faq.get("answer", "")))
-        for faq in new_faqs
-        if isinstance(faq, dict) and faq.get("question")
-    }
-
-    added_questions = [question for question in new_by_question if question not in existing_by_question]
-    removed_questions = [question for question in existing_by_question if question not in new_by_question]
-    updated_questions = [
-        question
-        for question in new_by_question
-        if question in existing_by_question and new_by_question[question] != existing_by_question[question]
-    ]
-
-    return {
-        "before_count": len(existing_by_question),
-        "after_count": len(new_by_question),
-        "added_questions": added_questions,
-        "removed_questions": removed_questions,
-        "updated_questions": updated_questions,
-    }
-
-
-def classify_change(existing: Dict[str, Any] | None, new: Dict[str, Any]) -> Dict[str, Any]:
-    if existing is None:
-        faq_changes = classify_faq_changes({}, new)
-        return {
-            "status": "added",
-            "summary_changed": True,
-            "faq_changed": bool(new.get("faqs")),
-            "faq_changes": faq_changes,
-        }
-
-    existing_for_compare = copy.deepcopy(existing)
-    new_for_compare = copy.deepcopy(new)
-
-    existing_for_compare.pop("generated_at", None)
-    new_for_compare.pop("generated_at", None)
-
-    summary_changed = compact_whitespace(str(existing_for_compare.get("summary", ""))) != compact_whitespace(
-        str(new_for_compare.get("summary", ""))
-    )
-
-    faq_changes = classify_faq_changes(existing_for_compare, new_for_compare)
-    faq_changed = bool(
-        faq_changes["added_questions"] or faq_changes["removed_questions"] or faq_changes["updated_questions"]
-    )
-
-    status = "updated" if existing_for_compare != new_for_compare else "unchanged"
-    return {
-        "status": status,
-        "summary_changed": summary_changed,
-        "faq_changed": faq_changed,
-        "faq_changes": faq_changes,
-    }
 
 
 def report_path_for_output(path: Path) -> str:
@@ -648,6 +728,112 @@ def report_path_for_output(path: Path) -> str:
         return str(path)
 
 
+def build_section_output_metadata(
+    existing_generated: Dict[str, Any] | None,
+    current_source_hash: str,
+    generated_at: str,
+    section: str,
+    action: str,
+    section_matches_current: bool,
+) -> Dict[str, str]:
+    existing_source_hash = get_existing_section_source_hash(existing_generated, section)
+    existing_generated_at = get_existing_section_generated_at(existing_generated, section)
+
+    if action in CHANGE_ACTIONS:
+        return {
+            "source_hash": current_source_hash,
+            "generated_at": generated_at,
+        }
+
+    if existing_source_hash:
+        source_hash = existing_source_hash
+    elif section_matches_current:
+        source_hash = current_source_hash
+    else:
+        source_hash = ""
+
+    if existing_generated_at:
+        section_generated_at = existing_generated_at
+    elif section_matches_current:
+        section_generated_at = generated_at
+    else:
+        section_generated_at = ""
+
+    return {
+        "source_hash": source_hash,
+        "generated_at": section_generated_at,
+    }
+
+
+def build_updated_generated_block(
+    existing_generated: Dict[str, Any] | None,
+    summary_after: str,
+    faqs_after: Sequence[Dict[str, Any]],
+    desired_summary: str,
+    desired_faqs: Sequence[Dict[str, Any]],
+    current_source_hash: str,
+    generated_at: str,
+    summary_action: str,
+    faq_action: str,
+) -> Dict[str, Any]:
+    summary_matches_current = not summaries_differ(summary_after, desired_summary)
+    faqs_match_current = not faq_differences_exist(classify_faq_changes(faqs_after, desired_faqs))
+
+    summary_meta = build_section_output_metadata(
+        existing_generated=existing_generated,
+        current_source_hash=current_source_hash,
+        generated_at=generated_at,
+        section="summary",
+        action=summary_action,
+        section_matches_current=summary_matches_current,
+    )
+    faq_meta = build_section_output_metadata(
+        existing_generated=existing_generated,
+        current_source_hash=current_source_hash,
+        generated_at=generated_at,
+        section="faqs",
+        action=faq_action,
+        section_matches_current=faqs_match_current,
+    )
+
+    if summary_matches_current and faqs_match_current:
+        top_level_source_hash = current_source_hash
+    else:
+        top_level_source_hash = compact_whitespace(str((existing_generated or {}).get("source_hash", ""))) or current_source_hash
+
+    return {
+        "template_version": TEMPLATE_VERSION,
+        "generated_at": generated_at,
+        "generator": "template",
+        "source_hash": top_level_source_hash,
+        SUMMARY_GENERATED_AT_KEY: summary_meta["generated_at"],
+        SUMMARY_SOURCE_HASH_KEY: summary_meta["source_hash"],
+        FAQ_GENERATED_AT_KEY: faq_meta["generated_at"],
+        FAQ_SOURCE_HASH_KEY: faq_meta["source_hash"],
+        "summary": BlockString(summary_after),
+        "faqs": normalize_faqs_for_output(faqs_after),
+    }
+
+
+def build_result_status(
+    existing_generated: Dict[str, Any] | None,
+    changed_on_disk: bool,
+    summary_drift_detected: bool,
+    faq_drift_detected: bool,
+) -> str:
+    if existing_generated is None and changed_on_disk:
+        return "added"
+    if changed_on_disk:
+        return "updated"
+    if summary_drift_detected or faq_drift_detected:
+        return "drift_detected"
+    return "unchanged"
+
+
+def zeroed_action_counts(actions: Sequence[str]) -> Dict[str, int]:
+    return {action: 0 for action in actions}
+
+
 def build_run_report(
     args: argparse.Namespace,
     processed_paths: Sequence[Path],
@@ -655,16 +841,54 @@ def build_run_report(
 ) -> Dict[str, Any]:
     totals = {
         "processed": len(processed_paths),
-        "added": sum(1 for result in per_path_results if result["status"] == "added"),
-        "updated": sum(1 for result in per_path_results if result["status"] == "updated"),
-        "unchanged": sum(1 for result in per_path_results if result["status"] == "unchanged"),
-        "skipped": sum(1 for result in per_path_results if result["status"] == "skipped"),
-        "errors": sum(1 for result in per_path_results if result["status"] == "error"),
+        "added": 0,
+        "updated": 0,
+        "unchanged": 0,
+        "drift_detected": 0,
+        "skipped": 0,
+        "errors": 0,
         "removed": 0,
+        "summary_changed": 0,
+        "faq_changed": 0,
+        "rerun_flags_reset": 0,
     }
+    section_totals = {
+        "summary": zeroed_action_counts(SUMMARY_ACTIONS),
+        "faqs": zeroed_action_counts(FAQ_ACTIONS),
+    }
+    reason_totals = {reason: 0 for reason in REASON_ORDER}
+
+    for result in per_path_results:
+        status = result.get("status", "error")
+        totals_key = "errors" if status == "error" else status
+        if totals_key in totals:
+            totals[totals_key] += 1
+
+        summary_result = result.get("summary", {})
+        if summary_result.get("changed"):
+            totals["summary_changed"] += 1
+        summary_action = summary_result.get("action")
+        if summary_action in section_totals["summary"]:
+            section_totals["summary"][summary_action] += 1
+
+        faq_result = result.get("faqs", {})
+        if faq_result.get("changed"):
+            totals["faq_changed"] += 1
+        faq_action = faq_result.get("action")
+        if faq_action in section_totals["faqs"]:
+            section_totals["faqs"][faq_action] += 1
+
+        rerun_flags_reset = result.get("rerun_flags_reset", [])
+        if rerun_flags_reset:
+            totals["rerun_flags_reset"] += 1
+
+        for reason in result.get("change_reasons", []):
+            if reason not in reason_totals:
+                reason_totals[reason] = 0
+            reason_totals[reason] += 1
 
     return {
-        "timestamp": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
+        "timestamp": current_timestamp(),
         "mode": "write" if args.write else "dry-run",
         "require_enable_flag": not args.allow_unflagged,
         "path_filter": args.path_filter or "",
@@ -675,6 +899,8 @@ def build_run_report(
         "actor": args.actor or "",
         "template_version": TEMPLATE_VERSION,
         "totals": totals,
+        "section_totals": section_totals,
+        "reason_totals": reason_totals,
         "paths": per_path_results,
     }
 
@@ -713,11 +939,33 @@ def print_result_summary(run_report: Dict[str, Any]) -> None:
     totals = run_report["totals"]
     print(
         "Processed {processed} Learning Paths: "
-        "{added} added, {updated} updated, {unchanged} unchanged, {errors} errors.".format(**totals)
+        "{added} added, {updated} updated, {drift_detected} drift detected, "
+        "{unchanged} unchanged, {errors} errors.".format(**totals)
     )
+
+    summary_actions = run_report["section_totals"]["summary"]
+    faq_actions = run_report["section_totals"]["faqs"]
+    print(
+        "Summary actions: "
+        f"{summary_actions['created']} created, "
+        f"{summary_actions['repaired_missing']} repaired_missing, "
+        f"{summary_actions['rerun_requested']} rerun_requested, "
+        f"{summary_actions['drift_detected_preserved']} drift_detected_preserved."
+    )
+    print(
+        "FAQ actions: "
+        f"{faq_actions['created']} created, "
+        f"{faq_actions['repaired_missing']} repaired_missing, "
+        f"{faq_actions['rerun_requested']} rerun_requested, "
+        f"{faq_actions['drift_detected_preserved']} drift_detected_preserved."
+    )
+
     for result in run_report["paths"]:
         status = result["status"]
-        print(f"- {status.upper():9s} {result['path']}")
+        summary_action = result.get("summary", {}).get("action", "")
+        faq_action = result.get("faqs", {}).get("action", "")
+        reasons = ", ".join(result.get("change_reasons", [])) or "none"
+        print(f"- {status.upper():14s} {result['path']} | summary={summary_action} | faqs={faq_action} | reasons={reasons}")
 
 
 def select_learning_paths(args: argparse.Namespace) -> List[Path]:
@@ -743,32 +991,175 @@ def process_learning_path(index_path: Path, args: argparse.Namespace) -> Dict[st
     try:
         doc = read_markdown_document(index_path)
         steps = load_steps(index_path)
+
         existing_generated = doc.metadata.get(GENERATED_KEY)
         if existing_generated is not None and not isinstance(existing_generated, dict):
             raise ValueError(f"{GENERATED_KEY} in {index_path} must be a mapping when present.")
 
-        new_generated = build_generated_block(doc.metadata, steps)
-        change = classify_change(existing_generated, new_generated)
+        rerun_summary_requested = as_bool(doc.metadata.get(RERUN_SUMMARY_FLAG))
+        rerun_faqs_requested = as_bool(doc.metadata.get(RERUN_FAQS_FLAG))
 
-        updated_front_matter = insert_or_replace_managed_block(doc.front_matter_text, new_generated)
+        generated_at = current_timestamp()
+        current_source_hash = build_source_hash(doc.metadata, steps)
+        desired_summary = build_summary(doc.metadata, steps)
+        desired_faqs = build_faqs(doc.metadata, steps)
+
+        existing_summary = extract_existing_summary(existing_generated)
+        existing_faqs = extract_existing_faqs(existing_generated)
+
+        summary_missing_before = existing_generated is not None and not compact_whitespace(existing_summary)
+        faqs_missing_before = existing_generated is not None and not existing_faqs
+
+        change_reasons: List[str] = []
+        if existing_generated is None:
+            change_reasons.append("initial_generation")
+
+        if summary_missing_before:
+            change_reasons.append("missing_summary")
+        if faqs_missing_before:
+            change_reasons.append("missing_faqs")
+
+        if rerun_summary_requested:
+            change_reasons.append("rerun_summary")
+        if rerun_faqs_requested:
+            change_reasons.append("rerun_faqs")
+
+        if existing_generated is None:
+            summary_action = "created"
+            summary_after = desired_summary
+        elif summary_missing_before:
+            summary_action = "repaired_missing"
+            summary_after = desired_summary
+        elif rerun_summary_requested:
+            summary_action = "rerun_requested"
+            summary_after = desired_summary
+        else:
+            summary_after = existing_summary
+            if summaries_differ(existing_summary, desired_summary):
+                summary_action = "drift_detected_preserved"
+                change_reasons.append("summary_drift_detected")
+            else:
+                summary_action = "unchanged"
+
+        if existing_generated is None:
+            faq_action = "created"
+            faqs_after = desired_faqs
+        elif faqs_missing_before:
+            faq_action = "repaired_missing"
+            faqs_after = desired_faqs
+        elif rerun_faqs_requested:
+            faq_action = "rerun_requested"
+            faqs_after = desired_faqs
+        else:
+            faqs_after = existing_faqs
+            if faq_differences_exist(classify_faq_changes(existing_faqs, desired_faqs)):
+                faq_action = "drift_detected_preserved"
+                change_reasons.append("faq_drift_detected")
+            else:
+                faq_action = "unchanged"
+
+        summary_changed = summaries_differ(existing_summary, summary_after)
+        faq_change_details = classify_faq_changes(existing_faqs, faqs_after)
+        faq_changed = faq_differences_exist(faq_change_details)
+
+        summary_drift_detected = summary_action == "drift_detected_preserved"
+        faq_generated_diff = classify_faq_changes(existing_faqs, desired_faqs)
+        faq_drift_detected = faq_action == "drift_detected_preserved"
+
+        managed_block_updated = existing_generated is None or summary_action in CHANGE_ACTIONS or faq_action in CHANGE_ACTIONS
+        rerun_flags_reset = []
+        if rerun_summary_requested:
+            rerun_flags_reset.append(RERUN_SUMMARY_FLAG)
+        if rerun_faqs_requested:
+            rerun_flags_reset.append(RERUN_FAQS_FLAG)
+        if rerun_flags_reset:
+            change_reasons.append("rerun_flags_reset")
+
+        updated_front_matter = doc.front_matter_text
+        summary_source_hash_after = get_existing_section_source_hash(existing_generated, "summary")
+        summary_generated_at_after = get_existing_section_generated_at(existing_generated, "summary")
+        faq_source_hash_after = get_existing_section_source_hash(existing_generated, "faqs")
+        faq_generated_at_after = get_existing_section_generated_at(existing_generated, "faqs")
+        template_version_after = compact_whitespace(str((existing_generated or {}).get("template_version", "")))
+
+        if managed_block_updated:
+            updated_generated = build_updated_generated_block(
+                existing_generated=existing_generated,
+                summary_after=summary_after,
+                faqs_after=faqs_after,
+                desired_summary=desired_summary,
+                desired_faqs=desired_faqs,
+                current_source_hash=current_source_hash,
+                generated_at=generated_at,
+                summary_action=summary_action,
+                faq_action=faq_action,
+            )
+            updated_front_matter = insert_or_replace_managed_block(updated_front_matter, updated_generated)
+            summary_source_hash_after = compact_whitespace(str(updated_generated.get(SUMMARY_SOURCE_HASH_KEY, "")))
+            summary_generated_at_after = compact_whitespace(str(updated_generated.get(SUMMARY_GENERATED_AT_KEY, "")))
+            faq_source_hash_after = compact_whitespace(str(updated_generated.get(FAQ_SOURCE_HASH_KEY, "")))
+            faq_generated_at_after = compact_whitespace(str(updated_generated.get(FAQ_GENERATED_AT_KEY, "")))
+            template_version_after = compact_whitespace(str(updated_generated.get("template_version", "")))
+
+        if rerun_summary_requested:
+            updated_front_matter = replace_top_level_scalar_line(updated_front_matter, RERUN_SUMMARY_FLAG, "false")
+        if rerun_faqs_requested:
+            updated_front_matter = replace_top_level_scalar_line(updated_front_matter, RERUN_FAQS_FLAG, "false")
+
         updated_markdown = rebuild_markdown(doc, updated_front_matter)
         changed_on_disk = updated_markdown != doc.raw_text
 
         if args.write and changed_on_disk:
             index_path.write_text(updated_markdown, encoding="utf-8")
 
-        preview_summary = compact_whitespace(strip_markdown_links(str(new_generated.get("summary", ""))))
-        preview_summary = preview_summary[:200] + ("..." if len(preview_summary) > 200 else "")
+        result_status = build_result_status(
+            existing_generated=existing_generated,
+            changed_on_disk=changed_on_disk,
+            summary_drift_detected=summary_drift_detected,
+            faq_drift_detected=faq_drift_detected,
+        )
 
         return {
             "path": report_path_for_output(index_path),
-            "status": change["status"] if changed_on_disk else "unchanged",
+            "status": result_status,
             "changed_on_disk": changed_on_disk,
-            "summary_changed": change["summary_changed"],
-            "faq_changed": change["faq_changed"],
-            "faq_changes": change["faq_changes"],
-            "summary_preview": preview_summary,
-            "source_hash": new_generated["source_hash"],
+            "managed_block_updated": managed_block_updated,
+            "rerun_flags_reset": rerun_flags_reset,
+            "change_reasons": change_reasons,
+            "template_version_before": compact_whitespace(str((existing_generated or {}).get("template_version", ""))),
+            "template_version_after": template_version_after,
+            "summary": {
+                "action": summary_action,
+                "missing_before": summary_missing_before,
+                "rerun_requested": rerun_summary_requested,
+                "changed": summary_changed,
+                "drift_detected": summary_drift_detected,
+                "source_hash_before": get_existing_section_source_hash(existing_generated, "summary"),
+                "source_hash_after": summary_source_hash_after,
+                "current_source_hash": current_source_hash,
+                "generated_at_before": get_existing_section_generated_at(existing_generated, "summary"),
+                "generated_at_after": summary_generated_at_after,
+                "preview_before": preview_text(existing_summary),
+                "preview_after": preview_text(summary_after),
+                "preview_generated": preview_text(desired_summary),
+            },
+            "faqs": {
+                "action": faq_action,
+                "missing_before": faqs_missing_before,
+                "rerun_requested": rerun_faqs_requested,
+                "changed": faq_changed,
+                "drift_detected": faq_drift_detected,
+                "source_hash_before": get_existing_section_source_hash(existing_generated, "faqs"),
+                "source_hash_after": faq_source_hash_after,
+                "current_source_hash": current_source_hash,
+                "generated_at_before": get_existing_section_generated_at(existing_generated, "faqs"),
+                "generated_at_after": faq_generated_at_after,
+                "before_count": len(existing_faqs),
+                "after_count": len(faqs_after),
+                "generated_count": len(desired_faqs),
+                "change_details": faq_change_details,
+                "generated_diff": faq_generated_diff,
+            },
         }
     except Exception as exc:
         return {

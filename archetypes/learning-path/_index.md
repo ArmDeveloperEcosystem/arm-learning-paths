@@ -17,6 +17,12 @@ prerequisites:
 # generated summary/FAQ GitHub Action.
 generate_summary_faq: false
 
+# Optional one-shot controls: set either field to true to regenerate just that
+# generated section the next time the summary/FAQ workflow runs. The workflow
+# resets them to false after a successful write.
+rerun_summary: false
+rerun_faqs: false
+
 author: PLACEHOLDER NAME
 
 ### Tags
