@@ -20,7 +20,7 @@ If a template asks for build arguments, Topo prompts you interactively.
 
 For this template, accept the defaults for each prompt by pressing Enter. The default configuration uses the `bartowski/Qwen_Qwen3.5-0.8B-GGUF` model and builds with Neon optimizations. SVE — Arm's Scalable Vector Extension, which provides wider vector operations than Neon's fixed 128-bit width — is disabled by default. If `topo describe` shows your target supports SVE, you can enable it by setting `ENABLE_SVE` to `ON`, or edit `compose.yaml` to change it later.
 
-The output should be:
+The output is similar to:
 ```output
 ┌─ Copy files ──────────────────────────────────────────
 Cloning into 'topo-cpu-ai-chat'...
@@ -55,7 +55,7 @@ Now run:
 
 This creates a project directory using the template. The directory will contain template source files and `compose.yaml`.
 
-You might find it interesting to examine the `compose.yaml` file. The following is an example file for the LLM chatbot application:
+The following is an example `compose.yaml` file for the LLM chatbot application:
 
 ```yaml
 services:
@@ -133,15 +133,13 @@ The output is similar to:
  ✔ Container topo-cpu-ai-chat-chat-ui-1      Started                                                                                               5.9ss
 ```
 
-After deployment is complete, access the web application by opening a browser and navigating to `http://<ip_address_of_target>:<port_number>`, where `<port_number>` matches the port exposed by your template (for the LLM chatbot, this is `3000`).
-
-You can find the correct port in the `compose.yaml` file for your chosen template. For example, if you deployed the LLM chatbot, use `http://<ip_address_of_target>:3000`.
+After deployment is complete, access the web application by opening a browser and navigating to `http://<ip_address_of_target>:<port_number>`, where `<port_number>` matches the port exposed by your template. For the LLM chatbot, this is `3000`. You can find the port in the `compose.yaml` file for your template.
 
 {{< notice Important >}}
 If your target is a Linux virtual machine (for example, on a cloud provider), ensure that the chosen port (such as 3000) is open as an inbound rule in your virtual machine's firewall or security group. Otherwise, you won't be able to access the application from your browser.
 {{< /notice >}}
 
-The LLM chatbot application will appear as follows:
+The LLM chatbot application appears as follows:
 
 
 ![Screenshot of the LLM Chatbot web interface running on an Arm-based target, showing a chat window and model response. This confirms successful deployment and provides a visual reference for the expected result.#center](llm_chatbot.png "LLM Chatbot web interface on Arm target")
@@ -174,7 +172,9 @@ If you don't already have a CLI agent installed, see one of these install guides
 
 With your agent ready, you can delegate the full workflow. For example:
 
-> Use Topo to deploy a containerized workload to my Arm target at `user@my-target`. Run a health check first, list compatible templates, choose a suitable one, clone it, and deploy it.
+```text
+Use Topo to deploy a containerized workload to my Arm target at user@my-target. Run a health check first, list compatible templates, choose a suitable one, clone it, and deploy it.
+```
 
 The agent reads the Topo `README.md`, runs health checks, selects a template, and deploys it end-to-end with minimal manual input.
 

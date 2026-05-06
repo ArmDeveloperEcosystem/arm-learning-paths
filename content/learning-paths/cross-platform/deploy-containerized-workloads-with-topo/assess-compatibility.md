@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Run Topo health checks
 
-To assess target compatibility, start by running a Topo health check. To run a health check, follow these steps.
+Start by running a Topo health check to confirm that all required dependencies are available on the host and the target.
 
 ### Prepare host environment
 
@@ -92,7 +92,7 @@ Subsystem Driver (remoteproc): ✅ (m33, m0)
 
 A Topo health check confirms connectivity between the host and target, and verifies the presence of dependencies such as Docker.
 
-You should resolve any `❌` errors before moving on. Warnings (⚠️) can indicate optional capabilities that may be needed in certain projects. `ℹ️` provides other information. A `✅` confirms the presence of dependencies without warnings or errors.
+Resolve any `❌` errors before moving on. Warnings (⚠️) can indicate optional capabilities that may be needed in certain projects. `ℹ️` provides other information. A `✅` confirms the presence of dependencies without warnings or errors.
 
 
 #### Troubleshoot SSH authentication
@@ -129,7 +129,7 @@ You can use Topo to install `remoteproc-runtime`. Run the following command from
 topo install remoteproc-runtime --target user@my-target
 ```
 
-Run the health command again to verify installation. Topo uses `remoteproc-runtime` under the hood when deploying to heterogeneous devices.
+Run the health command again to verify installation. Topo uses `remoteproc-runtime` internally when deploying to heterogeneous devices.
 
 
 <!-- ## Recap: health checks and compatibility
@@ -138,7 +138,7 @@ You have now verified your host and target environments, resolved any missing de
 
 ## Generate a target description
 
-In this step, you ask Topo to probe your target and output a description of the hardware in your terminal. 
+Ask Topo to probe your target and output a description of the hardware in your terminal. 
 
 On your host device, run:
 
@@ -231,4 +231,4 @@ In this example, `topo-lightbulb-moment` is marked as incompatible, because it r
 
 ## What you've accomplished and what's next
 
-You have performed a health check on your target device, generated a description of its hardware features, and identified compatible templates. In the next step, you will choose and deploy a template containerized workload.
+You have now verified your host and target environments, resolved any missing dependencies, and optionally enabled heterogeneous deployment. You also generated a description of your target's hardware features and identified compatible templates. Next, you'll choose a template containerized workload and deploy it to your target.
