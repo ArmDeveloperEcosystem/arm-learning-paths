@@ -1,64 +1,14 @@
 ---
-title: Deploy Spark SQL with Gluten + Velox on Arm64 (Stable Setup)
+title: Deploy Apache Spark SQL with Gluten and Velox on Arm64 
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Deploy Apache Spark with Gluten + Velox on Arm64
+## Before you begin
 
-This guide helps you **set up Spark with native acceleration (Gluten + Velox)** on Arm64 (Azure Cobalt 100).
-
-We will build everything step-by-step from scratch.
-
-- Apache Hadoop
-- Apache Spark
-- Apache Hive Metastore
-- Gluten + Velox native engine
-
-## Objective
-
-In this guide, you will:
-
-- Install Hadoop, Spark, and Hive
-- Configure a single-node cluster
-- Fix Java 17 compatibility issues
-- Build Gluten with Velox backend
-- Enable native execution (off-JVM)
-- Prepare system for benchmarking
-
-
-## Why Gluten + Velox?
-
-- Spark (default) runs on JVM ❌
-- Gluten + Velox runs queries in native C++ engine -
-
-**Benefits:**
-
-- Faster execution  
-- Lower CPU usage  
-- Better ARM performance  
-
-## Environment
-
-| Component | Value |
-|----------|------|
-| Architecture | Arm64 |
-| OS | Ubuntu 22.04 / 24.04 |
-| CPU | 4–8 vCPU |
-| RAM | 8–32 GB |
-| Disk | ≥ 80 GB |
-
-## System preparation
-
-We install all required tools for:
-
-- Java (Spark/Hadoop)
-- Build tools (Gluten)
-- Database (Hive metastore)
-
-Before you begin, switch to the root user and install all required system packages. This ensures you have the correct Java version, build tools, and database dependencies for Spark, Hadoop, Hive, and Gluten on Arm64.
+Switch to the root user and install all required system packages. This ensures you have the correct Java version, build tools, and database dependencies for Spark, Hadoop, Hive, and Gluten on Arm64.
 
 ```console
 sudo -i
@@ -68,15 +18,12 @@ openjdk-17-jdk wget tar git curl unzip build-essential \
 python3-pip mysql-server maven cmake ninja-build pkg-config libssl-dev
 ```
 
-These tools are required for:
-- Java runtime (Spark/Hadoop)
-- Building Gluten (C++ dependencies)
-- Hive metastore (MySQL)
+Java runtime is necessary for Spark and Hadoop. C++ dependencies are necessary for building Gluten. MySQL is necessary for Hive metastore. 
 
 ## Configure hostname
-Hadoop requires proper hostname for internal communication.
+Hadoop requires a proper hostname for internal communication.
 
-Set the hostname to `spark-master` so Hadoop and Spark can communicate reliably on a single-node cluster. This prevents common networking issues during service startup.
+Set the hostname to `spark-master` so that Hadoop and Spark can communicate reliably on a single-node cluster. This prevents networking issues during service startup.
 
 ```console
 hostnamectl set-hostname spark-master
@@ -85,19 +32,13 @@ exec bash
 
 ## Configure hosts
 
-Prevents connection errors (very important)
-
-Append the hostname to `/etc/hosts` to ensure all Hadoop and Spark services resolve the local node correctly.
+Append the hostname to `/etc/hosts` to ensure all Hadoop and Spark services resolve the local node correctly. This prevents connection errors.
 
 ```console
 echo "127.0.0.1 spark-master" >> /etc/hosts
 ```
 
-## Setup passwordless SSH
-
-**Why?**
-
-- Hadoop services use SSH internally.
+## Set up passwordless SSH
 
 Generate an SSH key pair for passwordless authentication. Hadoop daemons use SSH to manage services internally, so this step is required for smooth operation.
 
@@ -105,7 +46,7 @@ Generate an SSH key pair for passwordless authentication. Hadoop daemons use SSH
 ssh-keygen -t rsa -P ""
 ```
 
-When prompted to enter the file location, press Enter to accept the default:
+When prompted to enter the file location, press the Enter button to accept the default:
 
 ```output
 Enter file in which to save the key (/root/.ssh/id_rsa):
@@ -121,12 +62,9 @@ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 
 ## Install Hadoop
 
-**Why?**
+Hadoop provides HDFS for storage and YARN for resource management.
 
-Hadoop provides:
-
-- HDFS → Storage
-- YARN → Resource manager
+Install Hadoop:
 
 ```console
 cd /opt
@@ -149,19 +87,15 @@ ln -s spark-3.4.2-bin-hadoop3 spark
 
 ## Install Hive
 
-Hive provides:
-
-- Metadata (table structure)
-- SQL layer for Spark
-
 Download and extract Apache Hive 3.1.3. Hive provides the SQL metadata layer and metastore for Spark SQL.
+
 ```console
 wget https://archive.apache.org/dist/hive/hive-3.1.3/apache-hive-3.1.3-bin.tar.gz
 tar -xvf apache-hive-3.1.3-bin.tar.gz
 ln -s apache-hive-3.1.3-bin hive
 ```
 
-## Environment variables
+## Set up environment variables
 
 Set up environment variables for Java, Hadoop, Spark, and Hive. This ensures all commands and scripts can find the correct binaries and configuration files.
 
@@ -186,7 +120,7 @@ Apply the environment changes to your current shell:
 source ~/.consolerc
 ```
 
-## Hadoop directory setup
+## Set up Hadoop directories
 
 HDFS needs storage directories.
 
@@ -200,11 +134,7 @@ mkdir -p /opt/dfs/data
 
 ## Configure Hadoop
 
-Define cluster behavior (single node setup)
-
-**core-site.xml**
-
-Create a minimal `core-site.xml` to define the default HDFS URI for your single-node cluster.
+Create a minimal `core-site.xml` to define the default HDFS URI for a single-node cluster.
 
 ```console
 cat > $HADOOP_HOME/etc/hadoop/core-site.xml <<EOF
@@ -216,8 +146,6 @@ cat > $HADOOP_HOME/etc/hadoop/core-site.xml <<EOF
 </configuration>
 EOF
 ```
-
-**hdfs-site.xml**
 
 Create a minimal `hdfs-site.xml` to configure HDFS for single-node operation.
 
@@ -248,8 +176,6 @@ cat > $HADOOP_HOME/etc/hadoop/hdfs-site.xml <<EOF
 EOF
 ```
 
-**yarn-site.xml (ARM optimized)**
-
 Create a minimal `yarn-site.xml` optimized for Arm64, specifying the resource manager hostname and available resources.
 
 ```console
@@ -262,9 +188,9 @@ cat > $HADOOP_HOME/etc/hadoop/yarn-site.xml <<EOF
 EOF
 ```
 
-## Java 17 compatibility fix
+### Fix Java 17 compatibility issue
 
-- Without this → Hadoop & Spark crash
+Create `hadoop-env.sh` to fix Java 17 reflection issues and ensure Hadoop, Spark, and Gluten stability:
 
 ```console
 cat >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh <<EOF
@@ -282,12 +208,9 @@ export HADOOP_OPTS="--add-opens java.base/java.lang=ALL-UNNAMED"
 EOF
 ```
 
-**Why:**
-
-- Fixes Java 17 reflection issues
-- Required for Spark + Gluten stability
-
 ## Start Hadoop
+
+To start Hadoop, run:
 
 ```console
 hdfs namenode -format
@@ -312,7 +235,7 @@ Starting resourcemanager
 Starting nodemanagers
 ```
 
-**Verify:**
+Verify that all Hadoop daemons are running:
 
 ```console
 jps
@@ -328,9 +251,9 @@ The output is similar to:
 53276 DataNode
 ```
 
-## Setup Hive Metastore
+## Set up Hive Metastore
 
-Hive stores table metadata.
+Hive stores table metadata. To set up Hive Metastore, run:
 
 ```console
 mysql -u root <<EOF
@@ -343,7 +266,7 @@ EOF
 
 ## Configure Hive to use MySQL
 
-By default, Hive uses the embedded Derby database for its metastore. Derby does not support MySQL SQL syntax, which causes the schema initialization to fail. You need to download the MySQL JDBC connector and configure Hive to connect to the MySQL metastore you created in the previous step.
+By default, Hive uses the embedded Derby database for its metastore. Derby does not support MySQL SQL syntax, which causes the schema initialization to fail. You need to download the MySQL Java Database Connectivity (JDBC) connector. Then, configure Hive to connect to the MySQL metastore you created in the previous step.
 
 Download the MySQL JDBC connector:
 
@@ -398,7 +321,7 @@ schemaTool completed
 
 ## Build Gluten with Velox
 
-Build the Gluten project with the Velox backend to enable native C++ query execution in Spark. This process downloads all dependencies, compiles the engine, and prepares the JARs needed for Spark integration. The `sed` commands ensure the build targets Spark 3.4 and disables S3 support for simplicity.
+Build the Gluten project with the Velox backend to enable native C++ query execution in Spark. This process downloads all dependencies, compiles the engine, and prepares the Java Archives (JARs) needed for Spark integration. The `sed` commands ensure the build targets Spark 3.4 and disables S3 support for simplicity.
 
 ```console
 cd /opt
@@ -412,7 +335,7 @@ mkdir -p /opt/gluten-jars
 cp package/target/*.jar /opt/gluten-jars/
 ```
 
-## Configure Spark (Gluten enabled)
+## Configure Spark to use Gluten
 
 Configure Spark to use the Gluten plugin and Velox backend by creating a `spark-defaults.conf` file. This enables native execution, sets resource limits, and ensures the correct JARs are loaded for both the driver and executors.
 
@@ -445,13 +368,13 @@ EOF
 
 ## Start Spark Thrift Server
 
-Start the Spark Thrift Server, which allows you to connect to Spark SQL using JDBC/ODBC clients. This is the main entry point for running SQL queries and benchmarks.
+Start the Spark Thrift Server, which allows you to connect to Spark SQL using JDBC/Open Database Connectivity (ODBC) clients. This is the main entry point for running SQL queries and benchmarks.
 
 ```console
 $SPARK_HOME/sbin/start-thriftserver.sh
 ```
 
-**Validation**
+Verify that the Thrift Server processes are running:
 
 ```console
 jps
@@ -471,28 +394,8 @@ The output is similar to:
 53276 DataNode
 ```
 
-##  What You Have Accomplished
+## What you've accomplished and what's next
 
-You have successfully:
+You've now created a fully operational Spark SQL cluster on Arm64 with native acceleration enabled. You installed and configured Hadoop, Spark, and Hive, built Gluten with the Velox backend, and set up native off-JVM query execution on your Azure Cobalt 100 VM.
 
-- Installed Hadoop, Spark, and Hive  
-- Configured a stable Arm64 single-node cluster  
-- Fixed Java 17 compatibility issues for Hadoop/Spark  
-- Built and integrated Gluten with the Velox backend  
-- Enabled native (off-JVM) query execution  
-- Optimized Spark configuration for ARM workloads  
-- Prepared the environment for large-scale analytics  
-
-## What’s Next
-
-Now that the platform is fully ready, the next step is to **evaluate performance**.
-
-In the next phase, you will:
-
-- Generate TPC-DS dataset (10GB)  
-- Load data into HDFS  
-- Create Spark SQL tables  
-- Run analytical queries  
-- Measure execution time  
-- Compare performance improvements  
-
+Next, you'll generate a TPC-DS dataset, load it into HDFS, create Spark SQL tables, and run analytical queries to measure the performance improvement over standard Spark.
