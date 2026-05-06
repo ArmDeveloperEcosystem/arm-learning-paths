@@ -22,8 +22,8 @@ author: Chris Moroney
 generate_summary_faq: true
 
 ### Tags
-skilllevels: Intermediate
-subjects: Servers and Cloud Computing
+skilllevels: Introductory
+subjects: Performance and Architecture
 armips:
     - Neoverse
 tools_software_languages:
