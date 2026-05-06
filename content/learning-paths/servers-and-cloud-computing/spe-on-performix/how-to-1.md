@@ -49,4 +49,6 @@ If you receive a different error message, SPE is likely not the cause of your is
 
 ## What you've learned and what's next
 
-You now know what Arm SPE is and what platform layers need to be present to support SPE. You also checked whether Arm SPE is enabled on 
+You now know what Arm SPE is and what platform layers need to be present to support SPE. You also checked whether Arm SPE is enabled on your instance. 
+
+Next, you'll check whether the OS kernel of the instance is built with ARM SPE or includes modules that can be loaded.
