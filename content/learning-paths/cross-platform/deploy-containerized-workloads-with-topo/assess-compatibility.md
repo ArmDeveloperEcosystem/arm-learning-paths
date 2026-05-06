@@ -92,7 +92,7 @@ Subsystem Driver (remoteproc): ✅ (m33, m0)
 
 A Topo health check confirms connectivity between the host and target, and verifies the presence of dependencies such as Docker.
 
-Resolve any `❌` errors before moving on. Warnings (⚠️) can indicate optional capabilities that may be needed in certain projects. `ℹ️` provides other information. A `✅` confirms the presence of dependencies without warnings or errors.
+Resolve any `❌` errors before moving on. Warnings (⚠️) can indicate optional capabilities that might be needed in certain projects. `ℹ️` provides other information. A `✅` confirms the presence of dependencies without warnings or errors.
 
 
 #### Troubleshoot SSH authentication
@@ -114,7 +114,7 @@ If you encounter SSH errors, check that:
 
 ## (Optional) Install remoteproc-runtime on heterogeneous devices
 
-If you're using a Cortex-A + Cortex-M device such as the i.MX 93, you may see a `⚠️` warning if `remoteproc-runtime` is not installed on the target.
+If you're using a Cortex-A + Cortex-M device such as the i.MX 93, you might see a `⚠️` warning if `remoteproc-runtime` is not installed on the target.
 
 [`remoteproc`](https://docs.kernel.org/staging/remoteproc.html) is a Linux kernel framework for managing remote or auxiliary processors in a heterogeneous SoC. It allows the main CPU (for example, Cortex-A) to load firmware onto the auxiliary processors (for example, Cortex-M), start and stop them, and communicate with them using [`rpmsg`](https://docs.kernel.org/staging/rpmsg.html).
 
@@ -223,7 +223,7 @@ The following is an example output for an AWS Graviton-based instance:
   of SIMD optimizations, with visual results and quantified speedups.
 ```
 
-In this example, `topo-lightbulb-moment` is marked as incompatible, because it requires an SoC with both a Cortex-A and a Cortex-M. The instance contains Arm Neoverse cores only. All other templates are marked as compatible. You may see different results depending on the target hardware you use.
+In this example, `topo-lightbulb-moment` is marked as incompatible, because it requires an SoC with both a Cortex-A and a Cortex-M. The instance contains Arm Neoverse cores only. All other templates are marked as compatible. You might see different results depending on the target hardware you use.
 
 ## What you've accomplished and what's next
 
