@@ -37,12 +37,13 @@ operatingsystems:
     - Linux
     - macOS
     - Windows
-    
+
 ### Cross-platform metadata only
 shared_path: true
 shared_between:
     - servers-and-cloud-computing
     - laptops-and-desktops
+    - embedded-and-microcontrollers
 
 further_reading:
     - resource:
