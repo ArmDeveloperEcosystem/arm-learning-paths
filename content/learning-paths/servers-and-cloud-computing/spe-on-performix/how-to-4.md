@@ -6,7 +6,9 @@ weight: 5
 layout: learningpathall
 ---
 
-### Step 3.0) Try another Operating System / Kernel
+## Alternative solutions
+
+### Step 3.0) Try another operating system or kernel
 
 Many applications spend most execution time in user space, with relatively little time in kernel mode for tasks such as file handling. Even when an application spends meaningful time in kernel mode, switching to a newer or different kernel usually does not create a large performance change unless you are intentionally using a newer kernel feature.
 
@@ -19,7 +21,7 @@ If you are unsure where your application is spending time, a basic command such 
 /usr/bin/time -v <path to your application> 2>&1 | grep -e "User time" -e "System time"
 ```
 
-In the [Mandelbrot example](https://learn.arm.com/learning-paths/servers-and-cloud-computing/cpu_hotspot_performix/how-to-3/), about 0.3% of execution time is in kernel space.
+In the [Mandelbrot example](/learning-paths/servers-and-cloud-computing/cpu_hotspot_performix/how-to-3/), about 0.3% of execution time is in kernel space.
 
 ```output
         User time (seconds): 47.52
@@ -38,13 +40,30 @@ Amazon Linux 2023 AMI
 Run on a metal instance (for example, `c<n>g.metal`, where `<n>` matches the required Graviton generation).
 {{< /tab >}}
 {{< tab header="Google Cloud Services (GCP)" >}}
-Ubuntu 25.10 Public Image
+The following images have been tested on Google Axion C4A metal instances and confirm SPE support.
 
-Google Axion C4A metal instances enable SPE at the OS level and include the `arm_spe_pmu.ko` kernel module in the base Ubuntu 25.10 public image.
+**Ubuntu 24.04 LTS** and **Ubuntu 25.10** — both provide `arm_spe_pmu` as a loadable kernel module:
+
+```
+CONFIG_ARM_SPE_PMU=m
+```
+
+After loading the module, Sysreport confirms:
+
+```
+perf sampling:    SPE
+```
+
+**CentOS Stream 10 (Coughlan)** — also builds `arm_spe_pmu` as a loadable kernel module, and additionally includes Embedded Trace Macrocell (ETM) hardware trace support:
+
+```
+perf sampling:    SPE
+perf HW trace:    ETM
+```
 {{< /tab >}}
 {{< /tabpane >}}
 
-### Step 3.1) (Advanced) Rebuild kernel from source with Arm SPE
+### Step 3.1) Rebuild the kernel from source with Arm SPE
 
 If your current system does not provide a kernel with Statistical Profiling Extension (SPE) enabled, you can rebuild the kernel with the required configuration. This approach is more involved than switching operating systems and should only be used if necessary.
 
@@ -63,7 +82,8 @@ If you already have a configured kernel tree, you can enable it directly using:
 scripts/config --enable ARM_SPE_PMU
 ```
 
-This modifies the `.config` file programmatically and sets:
+Note that `scripts/config` automatically strips the `CONFIG_` prefix from option names, so `ARM_SPE_PMU` is the correct argument even though the option is named `CONFIG_ARM_SPE_PMU` in the `.config` file. This modifies the `.config` file and sets:
+
 ```
 CONFIG_ARM_SPE_PMU=y
 ```
@@ -74,7 +94,7 @@ After modifying the config, run:
 make olddefconfig
 ```
 
-to resolve any dependencies and ensure the configuration is consistent.
+This resolves any new dependencies introduced by enabling `CONFIG_ARM_SPE_PMU` and sets unset options to their defaults. It is non-interactive and will not prompt you for input.
 
 ### Use the interactive configuration menu
 
@@ -85,7 +105,7 @@ make menuconfig
 ```
 
 - Press `/` to search.
-- Enter `ARM_SPE_PMU`.
+- Enter `ARM_SPE_PMU`. The `menuconfig` search also strips the `CONFIG_` prefix, so entering `ARM_SPE_PMU` is correct.
 - Select the option when it appears.
 - Press:
   - `y` to build it into the kernel (`=y`)
@@ -113,6 +133,14 @@ sudo reboot
 Replace `<your-kernel-version>` with the version string of your newly built kernel. You can list available entries with `grep menuentry /boot/grub/grub.cfg`.
 {{% /notice %}}
 
-## What you've accomplished
+## Summary
 
-You verified the full SPE enablement path across earlier steps by checking kernel support with `CONFIG_ARM_SPE_PMU`, validating module availability, and using Sysreport to confirm whether `perf sampling` reports `SPE` or `None`. You then applied the appropriate remediation path for your environment, from loading or installing `arm_spe_pmu` to selecting a supported cloud image or rebuilding the kernel with `CONFIG_ARM_SPE_PMU` enabled, so your system is ready to run the Arm Performix memory access recipe.
+Your Arm Linux target now has SPE enabled and is ready for memory access profiling with Arm Performix.
+
+Across this Learning Path you:
+
+- Checked whether Arm SPE was already active on your target using Sysreport and kernel-level configuration checks.
+- Identified the correct remediation path for your environment, whether that meant loading the `arm_spe_pmu` kernel module, installing matching extra-modules packages, selecting a supported cloud image, or rebuilding the kernel with `CONFIG_ARM_SPE_PMU` enabled.
+- Verified the final state using Sysreport, confirming that `perf sampling` reports `SPE` rather than `None`.
+
+With SPE confirmed as active, you can now open Arm Performix on your host machine, connect to the target over SSH, and run the Memory Access recipe to begin profiling memory access patterns on your Arm Neoverse system.

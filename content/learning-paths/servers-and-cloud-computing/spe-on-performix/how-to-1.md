@@ -25,24 +25,24 @@ On Linux, SPE is available only when all required layers are aligned:
 
 If any of these layers are missing, Linux cannot expose SPE to profiling tools. Additionally, cloud-based applications usually run on top of a hypervisor which typically disables SPE.
 
-{{% notice Please Note %}}
- 
+{{% notice Note %}}
+
 Cloud providers often disable low-level profiling features on shared (multi-tenant) instances. To use Performix memory access profiling, run your application on an Arm-based **bare-metal instance** with full hardware access. These instances are typically named `metal` instances.
 
 Be aware that this instance type typically has a higher cost.
 
-{{% /notice %}}
+{{%/ notice %}}
 
 
 ## What is usually already present
 
 On Neoverse-based systems, architecture support is already present, and firmware support is usually present.
 
-This Learning Path helps you determine which case applies to your system and what action to take next. Because Linux distributions and kernel versions vary widely, this Learning Path provides practical guidance rather than an exhaustive set of steps.
+This Learning Path walks you through a diagnostic flow structured as numbered steps. The next page starts at Step 1.0 and routes you to the appropriate remediation path based on what you find. Because Linux distributions and kernel versions vary widely, this Learning Path provides practical guidance rather than an exhaustive set of steps.
 
 ## Check if Arm SPE is enabled
 
-Open Performix from your local machine. If this is your first time using or installing Performix, see the [install guide](https://learn.arm.com/install-guides/performix/).
+Open Performix from your local machine. If this is your first time using or installing Performix, see the [install guide](/install-guides/performix/).
 
 Connect to your instance, select the `Recipes` tab, and then select the `Memory Access` recipe. This automatically runs a precheck and prints the status at the bottom of the page. If you receive the **SPE is not configured** status shown below, you need to enable SPE before you can run the recipe.
 

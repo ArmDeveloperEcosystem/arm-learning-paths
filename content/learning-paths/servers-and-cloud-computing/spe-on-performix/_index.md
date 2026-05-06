@@ -18,7 +18,7 @@ learning_objectives:
     - Identify when a cloud instance does not expose SPE to the guest OS and choose a suitable system for Arm Performix memory access analysis.
 
 prerequisites:
-    - Access to a Linux-based Arm system, such as an Arm cloud instance or bare-metal server, with sudo or root access.
+    - Access to a Linux-based Arm bare-metal system with sudo or root access. Cloud VMs typically do not expose SPE to guest operating systems; use a bare-metal (metal) instance from your cloud provider instead.
     - Access to Arm Performix on your host machine and SSH access to the target system. See the [Arm Performix install guide](/install-guides/performix/) for setup instructions.
     - Familiarity with the Linux command line and SSH.
 

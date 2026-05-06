@@ -6,9 +6,11 @@ weight: 4
 layout: learningpathall
 ---
 
+## Install and load the SPE kernel module
+
 ### Step 2.0) Install Linux kernel extra modules
 
-To keep kernel images smaller and tuned for different platforms, many distributions ship extra kernel modules in a separate package. If your system returned the following from step 1.1, complete this step. Else skip to step 2.1
+To keep kernel images smaller and tuned for different platforms, many distributions ship extra kernel modules in a separate package. Follow this step if your system returned the following from Step 1.1, indicating the module file was not included in your kernel package. If you arrived here with `CONFIG_ARM_SPE_PMU=y`, or already loaded the module in Step 1.1, skip directly to **Step 2.2**.
 
 ```output
 arm_spe_pmu not present for this kernel
@@ -57,7 +59,7 @@ description:    Perf driver for the ARMv8.2 Statistical Profiling Extension
 
 ### Step 2.1) Load the kernel module
 
-Run the following commands to load the kernel module and confirm it is running:
+If you installed the extra modules package in Step 2.0, load the module now:
 
 ```bash
 sudo modprobe arm_spe_pmu
@@ -72,7 +74,7 @@ arm_spe_pmu            24576  0
 
 {{% notice Tip %}}
 
-To load the `arm_spe_pmu` kernel module during boot, create the `arm_spe_pmu.conf` file with the following command. This means you no longer need to manually load the module each time the system is restarted. 
+To load the `arm_spe_pmu` kernel module automatically at boot, create a `.conf` file in `/etc/modules-load.d/`. The `systemd-modules-load` service reads files in that directory at boot and loads the listed modules. Restarting the service applies the change immediately without requiring a reboot. 
 
 ```bash
 echo arm_spe_pmu | sudo tee /etc/modules-load.d/arm_spe_pmu.conf
@@ -89,7 +91,17 @@ sudo dmesg | grep "arm_spe_pmu"
 
 {{% /notice %}}
 
-When you rerun `sysreport`, you should see:
+### Step 2.2) Verify SPE is active with Sysreport
+
+All paths converge here. Whether the driver is built into your kernel (`y`), was already loaded in Step 1.1, or has just been loaded in Step 2.1, run Sysreport now to confirm SPE is active.
+
+Follow the setup steps in the [Get ready for performance analysis with Sysreport guide](/learning-paths/servers-and-cloud-computing/sysreport/), then run:
+
+```bash
+python src/sysreport.py
+```
+
+Look for the `perf sampling` field in the output. If SPE is active, you should see:
 
 ```output
   perf sampling:       SPE
@@ -99,7 +111,7 @@ Return to Performix. The `Memory Access` recipe should now show `All checks pass
 
 ![Screenshot of the Arm Performix memory access recipe showing all prerequisite checks passing, confirming that SPE is correctly enabled and the arm_spe_pmu module is loaded#center](./memory-access-passing.png "Arm Performix memory access recipe with all checks passing")
 
-If not, there is a known limitation when running SPE on Neoverse V1 systems.
+If `perf sampling` still shows `None`, check the KPTI section below if your system is Neoverse V1. For all other systems, see Step 3.0 for alternative approaches.
 
 #### For Neoverse V1-based systems: adjust Kernel Page Table Isolation (KPTI)
 
@@ -117,13 +129,13 @@ Use your preferred editor to update `GRUB_CMDLINE_LINUX` in `/etc/default/grub` 
 
 ![Screenshot of a terminal text editor showing /etc/default/grub with GRUB_CMDLINE_LINUX updated to include kpti=off, the change required to allow SPE buffer mapping to succeed on Neoverse V1 systems#center](./grub_config_change.png "GRUB_CMDLINE_LINUX set to kpti=off in /etc/default/grub")
 
-{{% notice Please Note %}}
+{{% notice Note %}}
 
-**Please Note:** Disabling KPTI has security implications and should only be done on trusted systems.
+Disabling KPTI has security implications and should only be done on trusted systems.
 
 {{% /notice %}}
 
-Run the following command to reboot the system.
+Run the following commands to update the GRUB configuration and reboot. `update-grub` regenerates the bootloader configuration from `/etc/default/grub`. Ensure it completes without errors before rebooting.
 
 ```bash
 sudo update-grub
