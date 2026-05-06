@@ -19,14 +19,18 @@ prerequisites:
 
 generate_summary_faq: true
 rerun_summary: false
-rerun_faqs: true
+rerun_faqs: false
 
 # START generated_summary_faq
 generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:57Z'
+  template_version: summary-faq-v2
+  generated_at: '2026-05-06T18:52:13Z'
   generator: template
   source_hash: c316c81de911ecd7f8e517f4ae5e5006d66a637199b8952fe195a74f3456a5e0
+  summary_generated_at: '2026-05-06T17:17:57Z'
+  summary_source_hash: c316c81de911ecd7f8e517f4ae5e5006d66a637199b8952fe195a74f3456a5e0
+  faq_generated_at: '2026-05-06T18:52:13Z'
+  faq_source_hash: c316c81de911ecd7f8e517f4ae5e5006d66a637199b8952fe195a74f3456a5e0
   summary: >-
     Learn how to create a simple Django web application and deploy it on Arm machines using Nginx
     and PostgreSQL. It is designed for engineers who want to deploy a Django based application
@@ -107,3 +111,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+
