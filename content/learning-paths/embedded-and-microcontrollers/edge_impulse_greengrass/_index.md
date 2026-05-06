@@ -26,6 +26,8 @@ prerequisites:
 
 generate_summary_faq: true
 
+# rerun_summary: false
+# rerun_faqs: false
 author: Doug Anson
 
 ### Tags
