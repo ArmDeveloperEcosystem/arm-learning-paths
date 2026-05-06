@@ -1,6 +1,10 @@
 ---
 title: Deploy Alluxio on Azure Cobalt 100 Arm64 virtual machines for data orchestration and caching
 
+draft: true
+cascade:
+    draft: true
+
 description: Learn how to install and configure Alluxio on an Azure Cobalt 100 Arm64 virtual machine, integrate it with Apache Spark, enable data caching, and benchmark performance improvements for analytics workloads.
 
    
