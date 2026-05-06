@@ -112,7 +112,7 @@ If you encounter SSH errors, check:
 - Your firewall allows SSH traffic
 
 
-## Optional: install remoteproc-runtime on heterogeneous devices
+## (Optional) Install remoteproc-runtime on heterogeneous devices
 
 If you're using a Cortex-A + Cortex-M device such as the i.MX 93, you may see a `⚠️` warning if `remoteproc-runtime` is not installed on the target.
 
