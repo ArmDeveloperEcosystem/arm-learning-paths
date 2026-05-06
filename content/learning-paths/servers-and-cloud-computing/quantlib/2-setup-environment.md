@@ -44,6 +44,8 @@ ssh -i ~/Downloads/quantlib-cobalt-vm_key.pem azureuser@<VM_PUBLIC_IP>
 
 Replace <VM_PUBLIC_IP> with the public IP address of your VM.
 
+### (Optional) Reconnect to cobalt frequently
+
 If you’ll reconnect often, add a shortcut entry to your SSH config:
 
 ```bash
@@ -140,7 +142,7 @@ Expected output is simlar to:
 QuantLib-1.41.tar.gz: gzip compressed data, max compression, from Unix, original size modulo 2^32 42721280
 ```
 
-## (Optional) Test archive integrity
+### (Optional) Test archive integrity
 
 To check that the archive is not corrupted, run:
 ```bash
