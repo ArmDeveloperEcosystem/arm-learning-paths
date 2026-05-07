@@ -13,7 +13,9 @@ prerequisites:
     - Familiarity with Godot
     - Familiarity with Arm Performance Studio tools
 
-author: Albin Bernhardsson, Julie Gaskin
+author:
+    - Albin Bernhardsson
+    - Julie Gaskin
 
 ### Tags
 skilllevels: Introductory
