@@ -15,27 +15,23 @@ To learn more, see the Google blog [Introducing Google Axion Processors, our new
 
 ## Explore MLflow on Google Axion C4A (Arm Neoverse V2)
 
-MLflow is an open-source platform designed to manage the end-to-end machine learning lifecycle. It is widely used for experiment tracking, model management, reproducibility, and deployment.
+MLflow is an open-source platform designed to manage the end-to-end machine learning lifecycle. It's widely used for experiment tracking, model management, reproducibility, and deployment.
 
 MLflow provides a unified platform with components such as:
 
-* **MLflow Tracking** for logging parameters, metrics, and artifacts  
-* **MLflow Projects** for packaging and reproducible execution  
-* **MLflow Models** for standardized model formats and deployment  
-* **MLflow Model Registry** for versioning, lifecycle management, and model governance  
+* MLflow Tracking for logging parameters, metrics, and artifacts  
+* MLflow Projects for packaging and reproducible execution  
+* MLflow Models for standardized model formats and deployment  
+* MLflow Model Registry for versioning, lifecycle management, and model governance  
 
-Running MLflow on Google Axion C4A Arm-based infrastructure enables efficient execution of machine learning workflows by leveraging multi-core CPUs and optimized memory performance. This results in improved performance per watt, reduced infrastructure costs, and better scalability for ML experimentation and deployment pipelines.
+Running MLflow on Google Axion C4A Arm-based infrastructure enables efficient execution of machine learning workflows by using multi-core CPUs and optimized memory performance. This results in improved performance per watt, reduced infrastructure costs, and better scalability for ML experimentation and deployment pipelines.
 
 Common use cases include experiment tracking, model versioning, reproducible ML workflows, CI/CD integration for ML pipelines, and deploying models as scalable APIs for real-time inference.
 
-To learn more, visit the [MLflow documentation](https://mlflow.org/docs/latest/index.html) and explore the [MLflow GitHub repository](https://github.com/mlflow/mlflow).
+To learn more, see the [MLflow documentation](https://mlflow.org/docs/latest/index.html) and the [MLflow GitHub repository](https://github.com/mlflow/mlflow).
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
-In this section, you:
-
-* Explored Google Axion C4A Arm-based VMs and their performance advantages for ML workflows
-* Reviewed MLflow components, including Tracking, Projects, Models, and Model Registry
-* Explored how Arm architecture improves efficiency and scalability for ML lifecycle management  
+In this section, you explored Google Axion C4A Arm-based virtual machines and their performance advantages for machine learning workflows. You learned about core MLflow components including Tracking, Projects, Models, and Model Registry, and examined how Arm architecture improves efficiency and scalability for machine learning lifecycle management. 
 
 Next, you'll create a firewall rule to enable remote access to the MLflow UI and model serving APIs used in this Learning Path.
