@@ -16,7 +16,10 @@ prerequisites:
     - Basic C++ knowledge
     - Android Studio with Android Emulator
 
-author: Éliás Bálint, Dawid Borycki, Steve Suzuki
+author:
+    - Éliás Bálint
+    - Dawid Borycki
+    - Steve Suzuki
 
 ### Tags
 skilllevels: Introductory

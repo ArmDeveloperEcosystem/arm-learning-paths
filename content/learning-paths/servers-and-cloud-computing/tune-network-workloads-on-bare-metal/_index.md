@@ -17,7 +17,10 @@ prerequisites:
     - Access to an x86_64 bare-metal server running Ubuntu 24.04 to run `wrk2`
     - Basic familiarity with Java applications
 
-author: Ying Yu, Ker Liu, Rui Chang
+author:
+    - Ying Yu
+    - Ker Liu
+    - Rui Chang
 
 ### Tags
 skilllevels: Advanced
