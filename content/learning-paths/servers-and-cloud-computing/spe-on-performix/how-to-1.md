@@ -1,5 +1,5 @@
 ---
-title: Get started with Arm Statistical Profiling Extension (SPE)
+title: Understand Arm Statistical Profiling Extension (Arm SPE)
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -12,7 +12,7 @@ Arm Statistical Profiling Extension (SPE) is a hardware-assisted profiling featu
 
 Unlike traditional interrupt-driven sampling, SPE records rich metadata for sampled operations, including instruction context, memory address information, and latency-related attributes. This improves attribution accuracy and helps reduce drift (also called skid) when mapping instructions to sampled counts. For more information, see the [performance analysis white paper](https://developer.arm.com/documentation/109429/latest/).
 
-For Arm Performix, this matters because SPE needs to be enabled to use the `Memory Access` recipe.
+For Arm Performix, this matters because SPE must be available to use the `Memory Access` recipe.
 
 ## Understand the platform layers that enable Arm SPE
 
@@ -29,7 +29,7 @@ If any of these layers are missing, Linux can't expose SPE to profiling tools. A
 
 Cloud providers often disable low-level profiling features on shared (multi-tenant) instances. To use Performix memory access profiling, run your application on an Arm-based bare-metal instance with full hardware access. These instances are typically named `metal` instances.
 
-Be aware that this instance type typically has a higher cost.
+These instance types typically cost more than virtualized instances.
 
 {{%/ notice %}}
 
@@ -37,18 +37,18 @@ On Neoverse-based systems, architecture support is already present, and firmware
 
 In this Learning Path, you'll follow a diagnostic flow with remediation paths based on what you find. Because Linux distributions and kernel versions vary widely, this Learning Path provides practical guidance rather than an exhaustive set of steps.
 
-## Check if Arm SPE is enabled
+## Check whether Arm SPE is enabled
 
-Open Performix from your local machine. If this is your first time using or installing Performix, see the [Performix install guide](/install-guides/performix/).
+Open Performix from your local machine. If this is your first time using Performix, see the [Performix install guide](/install-guides/performix/).
 
-Connect to your instance, select the `Recipes` tab, and then select the `Memory Access` recipe. This automatically runs a precheck and prints the status at the end of the page. If you receive the **SPE is not configured** status as shown in the following screenshot, you need to enable SPE before you can run the recipe.
+Connect to your instance, select the `Recipes` tab, and then select the `Memory Access` recipe. Performix automatically runs a precheck and prints the status at the end of the page. If you receive the **SPE is not configured** status shown in the following screenshot, you need to enable SPE before you can run the recipe.
 
 ![Screenshot of the Arm Performix Memory Access recipe showing a red status notification at the bottom of the page indicating that SPE has not been configured for the target system. This is the expected message when the arm_spe_pmu driver is missing or not loaded.#center](./memory-access-no-spe.png "Arm Performix Memory Access recipe reporting that SPE is not configured")
 
-If you receive a different error message, SPE is likely not the cause of your issue. For more information, see the [Performix user guide](https://developer.arm.com/documentation/110163/latest).
+If you receive a different error message, SPE might not be the cause of your issue. For more information, see the [Performix user guide](https://developer.arm.com/documentation/110163/latest).
 
 ## What you've learned and what's next
 
 You now know what Arm SPE is and what platform layers need to be present to support SPE. You also checked whether Arm SPE is enabled on your instance. 
 
-Next, you'll check whether the OS kernel of the instance is built with Arm SPE or includes modules that can be loaded.
+Next, you'll check whether the OS kernel of the instance is built with Arm SPE or includes modules that can be loaded. You'll learn about different remediation steps based on your environment.

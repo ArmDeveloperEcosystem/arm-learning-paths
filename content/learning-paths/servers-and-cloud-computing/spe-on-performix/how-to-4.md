@@ -6,14 +6,14 @@ weight: 5
 layout: learningpathall
 ---
 
-### Try another operating system or kernel {#try-another-os}
+### Use another operating system or kernel {#try-another-os}
 
-Many applications spend most execution time in user space, with relatively little time in kernel mode for tasks such as file handling. Even when an application spends meaningful time in kernel mode, switching to a newer or different kernel usually doesn't create a large performance change unless you're intentionally using a newer kernel feature.
+Many applications spend most execution time in user space, with relatively little time in kernel mode for tasks such as file handling. Because of that, it's usually faster to try a different OS or kernel image before rebuilding your current kernel with SPE enabled. If you specifically need to rebuild your current kernel, follow the steps in [Rebuild the kernel from source with Arm SPE](#rebuild-kernel).
 
-Because of that, it's usually faster to try a different OS or kernel image before rebuilding your current kernel with SPE enabled. If you specifically need to rebuild your current kernel, continue to [Rebuild the kernel from source with Arm SPE](#rebuild-kernel).
+Even when an application spends meaningful time in kernel mode, switching to a newer or different kernel usually doesn't create a large performance change unless you're intentionally using a newer kernel feature.
 
 {{% notice Tip %}}
-If you are unsure where your application is spending time, the following command can give you a high-level estimate of the ratio of user to kernel (also known as system) time.
+If you are unsure where your application is spending time, the following command can give you a high-level estimate of the ratio of user to kernel time (also known as system time).
 ```bash
 /usr/bin/time -v <path to your application> 2>&1 | grep -e "User time" -e "System time"
 ```
@@ -26,7 +26,7 @@ In the [Mandelbrot example](/learning-paths/servers-and-cloud-computing/cpu_hots
 ```
 {{% /notice %}}
 
-The quickest way to run the memory access recipe is often to test on a different operating system image. On cloud platforms, this is usually straightforward.
+The quickest way to run the memory access recipe is often to test on a different operating system image.
 
 If you have access to the following cloud providers, use the following recommended operating systems. Note that SPE support can change over time.
 
@@ -39,7 +39,7 @@ Run on a metal instance (for example, `c<n>g.metal`, where `<n>` matches the req
 {{< tab header="Google Cloud Services (GCP)" >}}
 The following images have been tested on Google Axion C4A metal instances and confirm SPE support.
 
-**Ubuntu 24.04 LTS** and **Ubuntu 25.10** — both provide `arm_spe_pmu` as a loadable kernel module:
+Ubuntu 24.04 LTS and Ubuntu 25.10 — both provide `arm_spe_pmu` as a loadable kernel module:
 
 ```
 CONFIG_ARM_SPE_PMU=m
@@ -51,7 +51,7 @@ After loading the module, Sysreport confirms:
 perf sampling:    SPE
 ```
 
-**CentOS Stream 10 (Coughlan)** — also builds `arm_spe_pmu` as a loadable kernel module, and additionally includes Embedded Trace Macrocell (ETM) hardware trace support:
+CentOS Stream 10 (Coughlan) — also builds `arm_spe_pmu` as a loadable kernel module, and additionally includes Embedded Trace Macrocell (ETM) hardware trace support:
 
 ```
 perf sampling:    SPE
@@ -62,7 +62,7 @@ perf HW trace:    ETM
 
 ### Rebuild the kernel from source with Arm SPE {#rebuild-kernel}
 
-If your current system does not provide a kernel with Statistical Profiling Extension (SPE) enabled, you can rebuild the kernel with the required configuration. This approach is more involved than switching operating systems and should be used only if necessary.
+If your current system does not provide a kernel with Arm SPE enabled, you can rebuild the kernel with the required configuration. This approach is more involved than switching operating systems and should be used only if necessary.
 
 #### Distribution-specific considerations
 
@@ -105,12 +105,10 @@ Alternatively, you can enable the option using the interactive terminal UI from 
 make menuconfig
 ```
 
-- Press `/` to search.
-- Enter `ARM_SPE_PMU`. The `menuconfig` search also strips the `CONFIG_` prefix, so entering `ARM_SPE_PMU` is correct.
-- Select the option when it appears.
-- Press:
-  - `y` to build it into the kernel (`=y`)
-  - `m` to build it as a module (`=m`)
+1. Press `/` to search.
+2. Enter `ARM_SPE_PMU`. The `menuconfig` search also strips the `CONFIG_` prefix, so entering `ARM_SPE_PMU` is correct.
+3. Select the option when it appears.
+4. Press `y` to build it into the kernel (`=y`) or `m` to build it as a module (`=m`).
 
 In most cases, building it into the kernel (`y`) is preferred for profiling.
 
@@ -121,10 +119,10 @@ After the kernel has been built, set your system to boot from the new kernel.
 {{% notice Warning %}}
 Before rebooting into a custom kernel, take the following precautions to avoid being locked out of your system:
 
-- **Take a snapshot or backup** of your instance before rebooting. On cloud platforms, create a machine image or disk snapshot so you can restore quickly if the new kernel fails to boot.
-- **Keep the original kernel as a fallback.** Most bootloaders (for example GRUB) retain previous kernel entries. Confirm the original kernel is still listed before you reboot.
-- **Verify the bootloader configuration.** Check `/etc/default/grub` and confirm `GRUB_DEFAULT` points to your new kernel entry, then run `update-grub` to apply the change.
-- **Test the new kernel without changing the default boot entry.** Use `grub-reboot` to boot into the new kernel exactly once, so the system automatically reverts to the previous kernel on the next reboot if something goes wrong:
+- Take a snapshot or backup of your instance before rebooting. On cloud platforms, create a machine image or disk snapshot so you can restore quickly if the new kernel fails to boot.
+- Keep the original kernel as a fallback. Most bootloaders (for example GRUB) retain previous kernel entries. Confirm the original kernel is still listed before you reboot.
+- Verify the bootloader configuration. Check `/etc/default/grub` and confirm `GRUB_DEFAULT` points to your new kernel entry, then run `update-grub` to apply the change.
+- Test the new kernel without changing the default boot entry. Use `grub-reboot` to boot into the new kernel exactly once, so the system automatically reverts to the previous kernel on the next reboot if something goes wrong:
 
 ```bash
 sudo grub-reboot "Advanced options for Ubuntu>Ubuntu, with Linux <your-kernel-version>"

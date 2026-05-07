@@ -13,7 +13,7 @@ layout: learningpathall
 The steps in this section use an AWS Graviton-based Amazon EC2 `c7g.metal` instance running Ubuntu 24.04 LTS. Commands and outputs on other platforms or distributions might differ slightly.
 {{% /notice %}}
 
-From the Getting Started section, you know you need to verify both the kernel and driver layers. Start by checking the kernel version:
+You need to verify both the kernel and driver layers. Start by checking the kernel version:
 
 ```bash
 uname -r
@@ -24,7 +24,7 @@ The output is similar to:
 6.17.0-1010-aws
 ```
 
-The example Amazon EC2 instance is running the standard Ubuntu 24.04 LTS Amazon Machine Image (AMI) provided through AWS Quick Start. The command output shows a Linux 6.17 kernel, and the `1010-aws` suffix indicates an AWS-specific build customized for the AWS environment.
+The example Amazon EC2 instance is running the standard Ubuntu 24.04 LTS Amazon Machine Image (AMI) provided through AWS Quick Start. The command output shows a Linux 6.17 kernel. The `1010-aws` suffix indicates an AWS-specific build customized for the AWS environment.
 
 Now, check whether the kernel was built with SPE support enabled:
 
@@ -34,11 +34,11 @@ grep CONFIG_ARM_SPE_PMU /boot/config-$(uname -r) 2>/dev/null || true
 
 The possible outputs for a kernel are `y`, `m`, or `n`, meaning built-in support, module support, or no support. The output determines your next step.
 
-- `y` indicates that the kernel has built-in SPE support. If your kernel has built-in SPE support, follow the steps to [verify SPE is active with Sysreport](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-3/#verify-spe-active).
-- `m` indicates that SPE is available as a loadable kernel module. This is the typical output for cloud instances. If SPE is available as a loadable kernel module, follow the steps to [check whether the kernel module is available](#check-kernel-module).
-- `n` means the kernel was not built with SPE support. If your kernel isn't built with SPE support, [try another operating system or kernel](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-4/#try-another-os).
+- `CONFIG_ARM_SPE_PMU=y` indicates that the kernel has built-in SPE support. If your kernel has built-in SPE support, follow the steps in [Verify SPE is active with Sysreport](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-3/#verify-spe-active).
+- `CONFIG_ARM_SPE_PMU=m` indicates that SPE is available as a loadable kernel module. This is the typical output for cloud instances. If SPE is available as a loadable kernel module, follow the steps in [Check whether the kernel module is available](#check-kernel-module).
+- `CONFIG_ARM_SPE_PMU=n` indicates that the kernel was not built with SPE support. If your kernel isn't built with SPE support, follow the steps in [Try another operating system or kernel](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-4/#try-another-os).
 
-If the command produces no output, the kernel config file might not be present on your system. In this case, [try another operating system or kernel](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-4/#try-another-os).
+If the command produces no output, the kernel config file might not be present on your system. In this case, follow the steps in [Try another operating system or kernel](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-4/#try-another-os).
 
 ### Check whether the kernel module is available {#check-kernel-module}
 
@@ -50,7 +50,7 @@ Run the following command to check whether the loadable kernel module (driver) i
 modinfo arm_spe_pmu 2>/dev/null || echo "arm_spe_pmu not present for this kernel"
 ```
 
-If you see output similar to the following, the module file exists and is ready to load. Next, [confirm that the module is active](learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-2/#load-kernel-module).
+If you see output similar to the following, the module file exists and is ready to load. Next, follow the steps in [Load kernel module](learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-2/#load-kernel-module).
 
 ```output
 filename:       /lib/modules/6.17.0-1010-aws/kernel/drivers/perf/arm_spe_pmu.ko.zst
@@ -60,11 +60,11 @@ description:    Perf driver for the ARMv8.2 Statistical Profiling Extension
 srcversion:     3B6FCB5AD9B37B8BB9FF4A9
 ...
 ```
-If you see `arm_spe_pmu not present for this kernel`, the module was not included in your kernel package. Next, follow the steps to [install Linux kernel extra modules](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-3/#install-extra-modules).
+If you see `arm_spe_pmu not present for this kernel`, the module was not included in your kernel package. Next, follow the steps in [Install Linux kernel extra modules](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-3/#install-extra-modules).
 
-### Load module if available for kernel {#load-kernel-module}
+### Load kernel module {#load-kernel-module}
 
-Load the module and confirm it is active:
+If a loadable module is available, load the module and confirm it is active:
 
 ```bash
 sudo modprobe arm_spe_pmu
@@ -83,4 +83,4 @@ The module is now loaded. Next, [verify SPE is active with Sysreport](/learning-
 
 You've now checked whether your kernel supports Arm SPE, verified whether the `arm_spe_pmu` module file is available, and loaded the module when applicable.
 
-Next, if the module is available and loaded, follow steps to [verify SPE is active with Sysreport](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-3/#verify-spe-active). If your kernel or modules package does not provide SPE support, follow steps to [try another operating system or kernel](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-4/#try-another-os).
+Next, if the module is available and loaded, follow the steps in [Verify SPE is active with Sysreport](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-3/#verify-spe-active). If your kernel or modules package does not provide SPE support, follow the steps in [Try another operating system or kernel](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-4/#try-another-os).
