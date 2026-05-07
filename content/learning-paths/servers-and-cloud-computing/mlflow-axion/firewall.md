@@ -10,9 +10,7 @@ layout: learningpathall
 
 Create a firewall rule in Google Cloud Console to expose required ports for the MLflow UI and model serving API.
 
-{{% notice Note %}}
-For help with GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
-{{% /notice %}}
+{{% notice Note %}}For help with GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).{{% /notice %}}
 
 ## Configure the firewall rule
 
