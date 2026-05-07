@@ -19,7 +19,10 @@ prerequisites:
   - Basic familiarity with ExecuTorch or PyTorch
   - Optionally, an Android device with Armv9 and SME2 support for on-device testing (if used, configure power management settings to ensure consistent performance measurements)
     
-author: Jason Zhu, Tyler Mullenbach, Damien Dooley 
+author:
+    - Jason Zhu
+    - Tyler Mullenbach
+    - Damien Dooley
 
 ### Tags
 skilllevels: Advanced

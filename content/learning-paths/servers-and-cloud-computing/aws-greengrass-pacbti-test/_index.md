@@ -20,7 +20,9 @@ prerequisites:
     - A [Amazon AWS](https://aws.amazon.com/) account with access to AWS IoT Greengrass and AWS S3
 
 
-author: Varun Chari, Doug Anson
+author:
+    - Varun Chari
+    - Doug Anson
 
 ### Tags
 skilllevels: Introductory

@@ -14,7 +14,9 @@ prerequisites:
     - Cloud or bare-metal installation of a Redis server
     - Review [Learn how to deploy Redis](/learning-paths/servers-and-cloud-computing/redis/) if you do not already have Redis setup
 
-author: Elham Harirpoush, Kelsey Steele
+author:
+    - Elham Harirpoush
+    - Kelsey Steele
 
 ### Tags
 skilllevels: Advanced
