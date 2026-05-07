@@ -1,10 +1,6 @@
 ---
 title: Enable Arm SPE for Performix memory access analysis
 
-draft: true
-cascade:
-    draft: true
-
 description: Learn how to verify and enable Arm Statistical Profiling Extension (SPE) on Arm Linux machines, including systems hosted through cloud service providers, so the Memory Access recipe in Arm Performix can run on supported environments.
 
 minutes_to_complete: 30

@@ -97,7 +97,7 @@ make olddefconfig
 
 This resolves any new dependencies introduced by enabling `CONFIG_ARM_SPE_PMU` and sets unset options to their defaults. It's non-interactive and won't prompt you for input.
 
-### Use the interactive configuration menu
+#### Use the interactive configuration menu
 
 Alternatively, you can enable the option using the interactive terminal UI from the root of the kernel directory:
 
