@@ -1,10 +1,12 @@
 ---
-title: Create a firewall rule for MLflow
+title: Configure Google Cloud firewall rules for MLflow
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+
+## Create a firewall rule in Google Cloud Console
 
 Create a firewall rule in Google Cloud Console to expose required ports for the MLflow UI and model serving API.
 

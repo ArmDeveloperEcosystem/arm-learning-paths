@@ -1,12 +1,12 @@
 ---
-title: Deploy MLflow on GCP SUSE Arm64 (Setup & Tracking)
+title: Install MLflow and track machine learning experiments
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Deploy MLflow on GCP SUSE Arm64
+## Install and configure MLflow on SUSE Linux
 
 In this section, you install MLflow on a GCP Arm64 (Axion) virtual machine running SUSE Linux with Python 3.11, start the MLflow tracking server, and run machine learning experiments.
 
@@ -204,7 +204,7 @@ http://<VM-IP>:5000
 
 Select the **Experiments** tab to see tracked runs, compare metrics across runs, and inspect logged parameters.
 
-## Create training script
+## Create a machine learning training script
 
 In **Terminal A**, navigate to the demo directory and create the training script:
 
@@ -256,7 +256,7 @@ This script:
 - logs the `C` parameter and accuracy metric to MLflow Tracking
 - registers the trained model in the MLflow Model Registry under the name `iris-model`
 
-## Run experiments
+## Run machine learning experiments with MLflow
 
 Set the tracking URI so the MLflow client sends data to Terminal B's server:
 
@@ -310,7 +310,7 @@ Accuracy: 1.0
 
 Each subsequent run creates a new model version and logs its accuracy metric.
 
-## Verify results in the MLflow UI
+## View experiment results in the MLflow UI
 
 In the MLflow UI at `http://<VM-IP>:5000`, go to the **Experiments** tab, select **iris-exp**, and open the **Runs** view. You should see three runs with their `C` parameter values and accuracy metrics. Select the **Models** tab to see the three registered model versions.
 

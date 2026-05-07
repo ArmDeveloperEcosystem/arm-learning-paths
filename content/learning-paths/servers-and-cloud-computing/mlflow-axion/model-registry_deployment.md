@@ -1,12 +1,12 @@
 ---
-title: Deploy MLflow on GCP SUSE Arm64 (Model Registry & Serving)
+title: Deploy MLflow models as REST APIs
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Model Registry and Deployment
+## Model registry and deployment
 
 This section covers model versioning, alias assignment, and serving the model as an API.
 
@@ -77,7 +77,7 @@ Production version: 1
 
 This script queries all registered versions of `iris-model`, finds the version with the highest `accuracy` metric, and assigns it the `production` alias. The alias is how `mlflow models serve` identifies which model version to load.
 
-## Serve model
+## Deploy the model as a REST API
 
 With Terminal B still running the MLflow tracking server, use Terminal A to start the model serving API. `mlflow models serve` loads the aliased model from the registry and starts a uvicorn HTTP server that exposes a `/invocations` endpoint for inference.
 
@@ -118,7 +118,7 @@ In the MLflow UI at `http://<VM-IP>:5000`, select the **Models** tab. You should
 
 ![MLflow Model Registry showing iris-model with multiple registered versions and the production alias visible next to the best-performing version in the versions table#center](images/mlflow-model.png "MLflow Model Registry with production alias assigned")
 
-## Test the API from Terminal A
+## Test the model API with sample data
 
 The `/invocations` endpoint accepts data in the `dataframe_records` format — a list of JSON objects where each object represents one row, with column names as keys. The model returns a prediction for each row. Send a single Iris flower measurement to test inference:
 
