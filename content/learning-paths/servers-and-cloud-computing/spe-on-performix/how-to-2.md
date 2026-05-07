@@ -49,8 +49,9 @@ Run the following command to check whether the loadable kernel module (driver) i
 ```bash
 modinfo arm_spe_pmu 2>/dev/null || echo "arm_spe_pmu not present for this kernel"
 ```
+If you see `arm_spe_pmu not present for this kernel`, the module was not included in your kernel package. Next, [install Linux kernel extra modules](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-3/#install-extra-modules).
 
-If you see output similar to the following, the module file exists and is ready to load. Next, [load the kernel module](learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-2/#load-kernel-module).
+If you see output similar to the following, the module file exists and is ready to load. Follow the steps in the next section to load the kernel module.
 
 ```output
 filename:       /lib/modules/6.17.0-1010-aws/kernel/drivers/perf/arm_spe_pmu.ko.zst
@@ -60,7 +61,6 @@ description:    Perf driver for the ARMv8.2 Statistical Profiling Extension
 srcversion:     3B6FCB5AD9B37B8BB9FF4A9
 ...
 ```
-If you see `arm_spe_pmu not present for this kernel`, the module was not included in your kernel package. Next, [install Linux kernel extra modules](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-3/#install-extra-modules).
 
 ### Load the kernel module {#load-kernel-module}
 
