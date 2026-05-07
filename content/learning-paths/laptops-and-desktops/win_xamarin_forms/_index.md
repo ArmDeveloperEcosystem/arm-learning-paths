@@ -1,6 +1,8 @@
 ---
 title: Develop cross-platform applications with Xamarin Forms on Windows on Arm
 
+description: Learn how to create and build Xamarin Forms applications using the MVVM pattern and measure code execution performance uplift on Arm64.
+
 minutes_to_complete: 30
 
 who_is_this_for: This learning path is for developers who want to learn how to create cross-platform applications and leverage performance improvements on Arm64.

@@ -1,5 +1,6 @@
 ---
-title: Fine-tuning neural graphics models with Model Gym
+title: Fine-tune neural graphics models using Model Gym
+description: Learn how to fine-tune and evaluate Neural Super Sampling (NSS) models using PyTorch and Arm's Model Gym API with hardware-aware optimization.
    
 minutes_to_complete: 45
 

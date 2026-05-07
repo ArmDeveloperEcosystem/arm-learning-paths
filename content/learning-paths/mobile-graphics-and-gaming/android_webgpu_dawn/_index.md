@@ -1,5 +1,6 @@
 ---
 title: Build and profile a simple WebGPU Android Application
+description: Learn how to integrate Dawn WebGPU in an Android application, render 3D objects, and profile the application using Streamline.
 cascade:
 minutes_to_complete: 90
 

@@ -65,7 +65,7 @@ myvenv/bin/pip3 install -r trusted-firmware-m/tools/requirements.txt
 
 ## Configure and build the TF-M tests
 
-Activate the python environment, navigate to the test suite we want to build and run and set the relevant `cmake` variables to build TF-M and its suite of tests. The `TFM_TOOLCHAIN_FILE` parameter is used to select a toolchain. The build is done in `Debug` mode in order to get progresses and results displayed when they will be executed. All the parameters are defined in the [Trusted Firmware-M documentation](https://tf-m-user-guide.trustedfirmware.org/getting_started/index.html#build-and-run-instructions). For example, to build with Arm GNU Compiler:
+Activate the python environment, navigate to the test suite and set the relevant `cmake` variables to build TF-M and its suite of tests. The `TFM_TOOLCHAIN_FILE` parameter is used to select a toolchain. The build is done in `Debug` mode to get progress and results displayed when they are executed. All the parameters are defined in the [Trusted Firmware-M documentation](https://tf-m-user-guide.trustedfirmware.org/getting_started/index.html#build-and-run-instructions). For example, to build with Arm GNU Compiler:
 
 ```bash
 . myvenv/bin/activate
@@ -92,7 +92,7 @@ On a successful build, the TF-M test executables are created in the `build/tests
 
 ## Run the TF-M tests on the Corstone-300 FVP
 
-The tests we have just built can now be run on the Corstone-300 FVP. This is done by providing the following arguments to the FVP:
+The tests built can now be run on the Corstone-300 FVP. This is done by providing the following arguments to the FVP:
 - `build/tests-spe/bin/bl2.axf` is the MCUBoot bootloader image.
 - `build/tests/tfm_s_ns_signed.bin` is the combined signed image for the TF-M secure and non-secure image.
 - `@<addr>` indicates where in the Corstone-300 FVP memory the image is loaded. The memory map for the FVP is documented in the [FVP Reference Guide](https://developer.arm.com/documentation/100966/1118/Arm--Corstone-SSE-300-FVP/Memory-map-overview-for-Corstone-SSE-300).
@@ -174,7 +174,7 @@ cmake -S trusted-firmware-m -B build/spe \
 cmake --build build/spe -- install
 ```
 
-The `CMakeLists.txt` for the TF-M example application requires a minor fix for the build to go smoothly. In `tf-m-extras/examples/tf-m-example-ns-app/CMakeLists.txt`, move command `add_subdirectory(${CONFIG_SPE_PATH} ${CMAKE_BINARY_DIR}/spe)` (at line 36) *after* the next statement (`add_executable(tfm_ns ...)` ). We can now build the application with:
+The `CMakeLists.txt` for the TF-M example application requires a minor fix for the build to go smoothly. In `tf-m-extras/examples/tf-m-example-ns-app/CMakeLists.txt`, move command `add_subdirectory(${CONFIG_SPE_PATH} ${CMAKE_BINARY_DIR}/spe)` (at line 36) *after* the next statement (`add_executable(tfm_ns ...)` ). Build the application with:
 
 ```bash
 cmake -S tf-m-extras/examples/tf-m-example-ns-app -B build/example \
@@ -183,7 +183,7 @@ cmake -S tf-m-extras/examples/tf-m-example-ns-app -B build/example \
 cmake --build build/example
 ```
 
-To run the image on the FVP, the command line is very similar to the one we used with the tests, we only have to change the paths to the example application images:
+To run the image on the FVP, the command line is very similar to the one used with the tests, with changes to the paths for the example application images:
 
 ```console
 FVP_Corstone_SSE-300_Ethos-U55 \

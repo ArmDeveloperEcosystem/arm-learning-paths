@@ -203,7 +203,7 @@ FVP_Base_AEMvA -a hello.axf
 ```
 All `printf()` output is now directed to `UART0` of the FVP.
 
-You will see a terminal pop-up with the output:
+You'll see a terminal pop-up with the output:
 ```output
 Hello World!
 In _sys_exit. Use Ctrl+C to quit.

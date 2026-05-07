@@ -1,6 +1,8 @@
 ---
 title: Prepare Docker image for Arm embedded development
 
+description: Learn how to create a Dockerfile, build a Docker image with Arm Compiler for Embedded and Fixed Virtual Platforms, and test the containerized Arm development environment.
+
 minutes_to_complete: 30   
 
 who_is_this_for: This is an introductory topic for embedded software developers new to Docker.

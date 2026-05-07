@@ -1,81 +1,77 @@
 ---
 # User change
-title: "Boot the NXP FRDM i.MX 93 Board"
+title: "Boot the NXP FRDM i.MX 93 board"
 
 weight: 3
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
+## Connect to the board
 
-In this section, you will prepare the NXP [FRDM i.MX 93](https://www.nxp.com/design/design-center/development-boards-and-designs/frdm-i-mx-93-development-board:FRDM-IMX93) board for ML development.
+This section walks through powering on the board and establishing a serial console connection. If your board is already running Linux and you can log in, skip ahead to the next section.
 
-## Unbox the NXP Board
-
-Follow NXP's getting started instructions: [Getting Started with FRDM-IMX93](https://www.nxp.com/document/guide/getting-started-with-frdm-imx93:GS-FRDM-IMX93):
-* Stop when you complete section "1.6 Connect Power Supply"
-
-## Connect to the NXP Board
-
-Prior to logging in to the NXP board, you need to configure `picocom`. This allows you to connect to the board using a USB cable.
+You need a serial terminal to see the boot console and log in.
 
 {{% notice macOS %}}
+On macOS as your host, you'll need the following set up before getting started: 
 
-1. Install the Silicon Labs driver:
-
-   https://www.silabs.com/developer-tools/usb-to-uart-bridge-vcp-drivers?tab=downloads
-   
-2. Install [picocom](https://github.com/npat-efault/picocom):
+- Install the [Silicon Labs USB-to-UART driver](https://www.silabs.com/developer-tools/usb-to-uart-bridge-vcp-drivers?tab=downloads)
+- Install [picocom](https://github.com/npat-efault/picocom)
    ```bash
    brew install picocom
    ```
 {{% /notice %}}
 
-1. Establish a USB-to-UART (serial) connection:
-   - Connect the board's "DEBUG" USB-C connector to your laptop
-   - Find the NXP board's USB connections in your computer's terminal:
-     ```bash { output_lines = "2-7" }
-     ls /dev/tty.*
-     # output lines
-     ...
-     /dev/tty.debug-console
-     /dev/tty.usbmodem56D70442811
-     /dev/tty.usbmodem56D70442813
-     ...
-     ```
+Connect the board's **DEBUG** USB-C connector to your host machine.
 
-   - Connect to the NXP board:
-     ```bash { output_lines = "2-5" }
-     sudo picocom -b 115200 /dev/tty.usbmodem56D70442811
-     # output lines
-     picocom v3.1
-     ...
-     Terminal ready
-     ```
-2. Log in to the NXP board:
-   - Connect the board's "POWER" USB-C connector to your laptop
-   - At this point you should see one red and one white light on the board
-   - Next you should see scrolling text in your `picocom` window, as the NXP board boots
-   - The last line should say `login:`
-     ```bash { output_lines = "1-9" }
-     # output lines
-     ...
-     [  OK  ] Reached target Graphical Interface.
-              Starting Record Runlevel Change in UTMP...
-     [  OK  ] Finished Record Runlevel Change in UTMP.
+Find the board's serial device:
 
-     NXP i.MX Release Distro 6.6-scarthgap imx93frdm ttyLP0
+   ```bash { output_lines = "2-5" }
+   ls /dev/tty.*
+   ...
+   /dev/tty.usbmodem<SERIAL_ID_1>
+   /dev/tty.usbmodem<SERIAL_ID_2>
+   ...
+   ```
 
-     imx93frdm login: 
-     ```
+   The exact device names vary per board. Look for entries containing `usbmodem`.
 
-3. [Optional] Troubleshooting:
-     - Restart the NXP board, to get to the `login:` prompt:
-       - Hold the NXP board's power button for 2-seconds, until the lights turn off
-       - Hold the NXP board's power button again for 2-seconds, until the lights turn on
+Open a serial connection using the first `usbmodem` device:
 
-## [Optional] Run the Built-In NXP Demos
-* Connect the NXP board to a monitor via HDMI
-* Connect a mouse to the NXP board's USB-A port
+   ```bash { output_lines = "2-4" }
+   sudo picocom -b 115200 /dev/tty.usbmodem<SERIAL_ID_1>
+   picocom v3.1
+   ...
+   Terminal ready
+   ```
+
+Connect the board's **POWER** USB-C connector to your host machine. You should see a red and a white LED on the board.
+
+Wait for the boot log to scroll past in the picocom window. When it finishes, you'll see a login prompt:
+
+   ```output
+   NXP i.MX Release Distro 6.6-scarthgap imx93frdm ttyLP0
+
+   imx93frdm login:
+   ```
+
+{{% notice Tip %}}
+If you miss the login prompt, hold the board's power button for two seconds to power off, then press it again to reboot.
+{{% /notice %}}
+
+## Run the built-in NXP demos (optional)
+
+Connect the board to a monitor via HDMI and plug a mouse into the board's USB-A port. NXP includes several ML demos that run out of the box.
 
 ![NXP board built-in ML demos alt-text#center](./nxp-board-built-in-ml-demos.png "NXP board built-in ML demos")
+
+## What you've learned and what's next
+
+In this section you've:
+
+- Connected to the board via serial console
+- Booted the NXP FRDM i.MX 93 board and confirmed Linux is running
+- Verified you can access the login prompt
+
+With the board running and Linux accessible, the next step is setting up the build environment for ExecuTorch.

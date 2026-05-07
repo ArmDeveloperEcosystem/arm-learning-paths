@@ -1,5 +1,6 @@
 ---
 title: Create an Azure Linux 3.0 virtual machine with Cobalt 100 processors
+description: Learn how to create a custom Azure Linux 3.0 VM image using QEMU, upload it to Azure Shared Image Gallery, and deploy it on Arm-based Cobalt 100 processors.
 
 minutes_to_complete: 120
 

@@ -8,7 +8,7 @@ layout: learningpathall
 
 You have learned that Eigen has been ported to Neon/ASIMD in the past and recently to SVE. Now you are going to investigate how to use Eigen to get best performance on Arm systems with SIMD engines.
 
-## Example 1: Arbitrary-Size Matrix Sum of all Elements
+## Example 1: arbitrary-size matrix sum of all elements
 
 This example demonstrates the benefits of Eigen's vectorization with some simple expressions on matrices. It first constructs a large random matrix of 100 x 100 `float` elements, and performs some simple operation for `N` iterations on it. Finally, it returns the sum of all the elements of the final matrix as a `double`.
 
@@ -63,7 +63,7 @@ sys     0m0.000s
 
 ### Testing on ASIMD
 
-To compare with the SIMD (ASIMD/NEON in the case of Arm), remove the define from compilation and run the same way:
+To compare with the SIMD (ASIMD/Neon in the case of Arm), remove the define from compilation and run the same way:
 
 
 ```bash  { output_lines = "3-7" }

@@ -1,5 +1,6 @@
 ---
 title: Learn how to optimize an application with BOLT
+description: Learn how to build, profile, and optimize Arm executables using BOLT post-link binary optimization to improve application performance through code layout improvements.
 
 minutes_to_complete: 30
 

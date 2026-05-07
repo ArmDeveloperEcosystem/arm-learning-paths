@@ -3,6 +3,7 @@ title: Embedded programming with Arduino on the Raspberry Pi Pico
 
 who_is_this_for: This is an introductory topic for software developers interested in embedded programming.
 minutes_to_complete: 60
+description: Learn how to build a motion-detection device with Raspberry Pi Pico (RP2040 Cortex-M0+) using Arduino IDE, PIR sensors, and interrupt-driven programming on baremetal.
 
 learning_objectives: 
     - Understand the basics of embedded programming

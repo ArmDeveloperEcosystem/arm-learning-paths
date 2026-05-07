@@ -1,20 +1,21 @@
 ---
-title: Learn how to build and use Cloudflare zlib on Arm servers
+title: Improve data compression performance on Arm servers with zlib-ng
+
+description: Learn how to build and use zlib-ng on Arm servers, using its Neon SIMD and ARMv8 CRC32 optimizations to improve compression performance compared to the system default zlib.
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for software developers to learn how
-  to to build and use Cloudflare zlib on Arm servers.
+who_is_this_for: This is an introductory topic for software developers who want to improve data compression performance on Arm servers by replacing the default zlib with zlib-ng, an actively maintained fork that includes Neon SIMD and ARMv8 CRC32 optimizations.
 
 learning_objectives:
-- Build zlib-cloudflare on an Arm server
-- Run example applications using zlib
-- Measure and analyze performance to see improvements
+- Build zlib-ng in zlib-compatible mode on an Arm server
+- Run example applications using zlib-ng as a drop-in replacement
+- Measure and analyze performance improvements with zlib-ng
 
 prerequisites:
-- An Arm Linux computer or an [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider running Ubuntu 20.04 or Ubuntu 22.04.
+- An Arm Linux computer or an [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider running Ubuntu 22.04 or Ubuntu 24.04.
 
-author: Jason Andrews
+author: Pareena Verma
 
 test_images:
 - ubuntu:latest
@@ -33,8 +34,8 @@ tools_software_languages:
 
 further_reading:
     - resource:
-        title: Cloudflare zlib on GitHub
-        link: https://github.com/cloudflare/zlib
+        title: zlib-ng on GitHub
+        link: https://github.com/zlib-ng/zlib-ng
         type: documentation
     - resource:
         title: Improving zlib-cloudflare and comparing performance with other zlib forks

@@ -1,6 +1,8 @@
 ---
 title: Run Phi-3 on Windows on Arm using ONNX Runtime
 
+description: Learn how to build ONNX Runtime with the Generate() API and run Phi-3 model inference with KleidiAI acceleration on Windows on Arm.
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an advanced topic for developers looking to build ONNX Runtime for Windows on Arm (WoA) and leverage the Generate() API to run Phi-3 inference with KleidiAI acceleration.

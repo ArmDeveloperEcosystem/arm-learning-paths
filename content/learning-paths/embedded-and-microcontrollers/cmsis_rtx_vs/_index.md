@@ -1,6 +1,7 @@
 ---
 title: Build an RTX5 RTOS application with Keil Studio (VS Code)
 
+description: Learn how to create, configure, and debug an RTX5 RTOS application using Keil Studio for VS Code with CMSIS-RTOS2 API for embedded Cortex-M development.
 
 minutes_to_complete: 30
 

@@ -3,6 +3,8 @@ title: Access remote devices with Remote.It
 
 minutes_to_complete: 45
 
+description: Learn how to install and configure Remote.It for secure remote device access using SSH and other services, with proxy and peer-to-peer connection options.
+
 who_is_this_for: This is an introductory topic for software developers who want to use Remote.It to establish private network connections between users and devices or devices to device.
 
 learning_objectives:

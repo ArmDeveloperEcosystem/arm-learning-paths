@@ -1,6 +1,8 @@
 ---
 title: Detect faces with OpenCV on Android Devices
 
+description: Learn how to implement face detection on Android devices using OpenCV, camera frame retrieval, and Haar cascade classifiers.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for developers who are interested in creating Computer Vision applications with OpenCV on Android devices. 

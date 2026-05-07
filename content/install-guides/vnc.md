@@ -16,6 +16,7 @@ author: Jason Andrews
 
 ### Link to official documentation
 official_docs: https://tigervnc.org/
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=TurboVNC
 
 test_images:
 - ubuntu:latest

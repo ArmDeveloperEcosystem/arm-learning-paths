@@ -1,6 +1,8 @@
 ---
 title: Build embedded Linux applications on an Arm server
 
+description: Learn how to reduce compile time for embedded Linux projects by installing a Raspberry Pi OS file system on an Arm server, building the MXNet machine learning framework, and transferring it to a Raspberry Pi.
+
 minutes_to_complete: 90
 
 who_is_this_for: This is an advanced topic for software developers who want to reduce compile time for embedded Linux software projects.

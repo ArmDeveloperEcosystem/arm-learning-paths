@@ -1,5 +1,6 @@
 ---
 title: Develop a native C++ library on an Arm-based machine
+description: Learn how to develop and test a modern C++ library using CMake, GoogleTest, and matrix processing as a practical example on Arm platforms.
 
 minutes_to_complete: 120
 

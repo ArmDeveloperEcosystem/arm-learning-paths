@@ -25,7 +25,7 @@ After you select **vmlinux** as the capture image in the **Capture settings** di
 Now, start the capture session. Streamline collects profiling data from the in-tree kernel driver and the rest of the kernel. When the capture completes, analyze the results using the same workflow as before. 
 
 You can review function-level metrics, explore call paths, and identify performance hotspots within both your driver and the kernel.
-![Streamline function tab displaying profiling data for vmlinux. The main area shows a list of kernel functions with columns for metrics such as sample count and percentage of total samples. The function names are clearly listed, and the selected function is highlighted. The interface uses a neutral, technical design typical of performance profiling tools. Visible text includes Function, Sample Count, and Percentage. The wider environment includes other Streamline tabs and configuration options, reinforcing a focused, analytical workflow. alt-text #center](./images/img12_vmlinux_function_tab.png "Streamline function tab displaying profiling data for vmlinux")
+![Streamline function tab displaying a list of kernel functions with sample count and percentage columns. The selected function is highlighted in the list. The interface uses a neutral technical design with clear column headers showing Function, Sample Count, and Percentage labels.#center](./images/img12_vmlinux_function_tab.png "Streamline function tab displaying profiling data for vmlinux")
 
 Because you selected the `vmlinux` image, Streamline displays both your driver functions and all other kernel functions sampled during profiling. This lets you see how your driver interacts with the rest of the kernel.
 

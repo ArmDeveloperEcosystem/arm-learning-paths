@@ -1,6 +1,8 @@
 ---
 title: Build .NET MAUI Applications on Arm64
 
+description: Learn how to create and build cross-platform .NET MAUI applications and measure code execution performance uplift on Arm64.
+
 minutes_to_complete: 30
 
 who_is_this_for: This learning path is for developers who want to learn how to create cross-platform applications with .NET MAUI and leverage performance improvements on Arm64.

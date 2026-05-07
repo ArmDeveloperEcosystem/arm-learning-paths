@@ -79,7 +79,7 @@ slices = sliding_window_view(data,winLength)[::winOverlap,:]
 slices_q15 = sliding_window_view(dataQ15,winLength)[::winOverlap,:]
 ```
 
-Refer to the [NumPy documentation](https://numpy.org/doc/stable/reference/generated/numpy.lib.stride_tricks.sliding_window_view.html) for details about `sliding_window_view`. It's not the most efficient function, but it is sufficient for this tutorial. The signal is split into overlapping blocks: each block reuses half of the samples from the previous block as defined by the `winOverlap` variable.
+Refer to the [NumPy documentation](https://numpy.org/doc/stable/reference/generated/numpy.lib.stride_tricks.sliding_window_view.html) for details about `sliding_window_view`. It's not the most efficient function, but it's sufficient for this tutorial. The signal is split into overlapping blocks: each block reuses half of the samples from the previous block as defined by the `winOverlap` variable.
 
 By running that last block, you have an audio signal that has been split into overlapping blocks. 
 

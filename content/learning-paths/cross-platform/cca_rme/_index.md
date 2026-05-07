@@ -1,6 +1,8 @@
 ---
 title: Get started with Realm Management Extension (RME)
 
+description: Learn how to use Arm Development Studio to explore Realm Management Extension (RME) and Arm Confidential Compute Architecture (CCA) through a bare-metal example running on the Arm Architecture Envelope Model.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for developers interested in learning the concepts of Realm Management Extension and the Arm Confidential Compute Architecture (CCA).

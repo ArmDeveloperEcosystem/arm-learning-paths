@@ -1,5 +1,5 @@
 ---
-title: Essential automotive software technologies
+title: Learn about ROS 2 and Open AD Kit
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -55,4 +55,6 @@ The Open AD Kit project continues to be developed by the Open AD Kit working gro
 
 The Open AD Kit Blueprint has been widely adopted by many ecosystem players to develop their own custom-flavored implementations. The blueprint provides a practical and demonstrable example of building SDV applications, particularly in the autonomous driving domain. Additionally, it serves as a model for creating SOAFEE blueprints, fostering a dynamic ecosystem around them.
 
-In the following sections, you will learn how to use the Open AD Kit autonomous driving simulation environment to run SOAFEE within a container and facilitate communication through ROS 2.
+## What you've learned and what's next
+
+You now understand how ROS 2 provides the foundation for autonomous driving middleware, and how Open AD Kit leverages this foundation to create a SOAFEE-compliant autonomous driving platform. In the next section, you'll set up Open AD Kit on an Arm Neoverse platform.

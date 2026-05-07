@@ -1,5 +1,6 @@
 ---
 title: Debug with MTE on Google Pixel 8
+description: Learn how to detect and debug memory safety bugs in Android applications using Arm Memory Tagging Extension (MTE) on a Google Pixel 8 smartphone.
 
 minutes_to_complete: 20
 

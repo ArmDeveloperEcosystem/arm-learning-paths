@@ -5,10 +5,12 @@ minutes_to_complete: 45
 
 who_is_this_for: This Learning Path is for software developers and ML engineers who are interested in deploying a production-ready vision chatbot for their application with optimized performance on the Arm Architecture.
 
+description: Build a production-ready vision chatbot on Google Axion using Streamlit, PyTorch, and Hugging Face Transformers with a quantized Llama 3.2-Vision model.
+
 learning_objectives:
-    - Build a frontend with Streamlit to input images and prompts.
-    - Build the backend to download a Llama 3.2-Vision model, quantize it, and run it using PyTorch and Hugging Face Transformers.
-    - Monitor and analyze inference on Arm CPUs.
+    - Build a frontend with Streamlit to input images and prompts
+    - Build the backend to download a Llama 3.2-Vision model, quantize it, and run it using PyTorch and Hugging Face Transformers
+    - Monitor and analyze inference on Arm CPUs
 
 prerequisites:
     - A Google Cloud Axion compute instance or [any Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider with at least 32 cores.

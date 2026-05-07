@@ -1,6 +1,8 @@
 ---
 title: Create Linux virtual machines with Hyper-V
 
+description: Learn how to create and manage Arm-based Linux virtual machines using Hyper-V on Windows on Arm devices.
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for software developers who want to use Linux virtual machines with Windows on Arm devices. 

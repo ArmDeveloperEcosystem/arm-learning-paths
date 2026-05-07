@@ -1,5 +1,6 @@
 ---
 title: Deploy ModelScope FunASR Model on Arm Servers
+description: Learn how to deploy the ModelScope FunASR Chinese automatic speech recognition model on Arm-based servers with real-time transcription and sentiment analysis.
 
 minutes_to_complete: 60
 

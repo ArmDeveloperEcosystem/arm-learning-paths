@@ -1,7 +1,8 @@
 ---
 title: Query Arm GPU configuration information
+description: Learn how to build the libGPUInfo library using Android NDK and query configuration details of Arm Mali or Immortalis GPUs on Android devices.
 
-minutes_to_complete: 15  
+minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for Android developers who want to adjust application complexity to match device performance. 
 

@@ -32,7 +32,7 @@ LOGI("Created image reports {}", compression_to_string(applied_compression_prope
 LOGI("Created image reports {}", fixed_rate_flags_to_string(applied_compression_properties.imageCompressionFixedRateFlags));
 ```
 
-The output may then look like this:
+The output might then look like this:
 
 ```output
 I/VulkanSamples: [info] Created image reports VK_IMAGE_COMPRESSION_FIXED_RATE_EXPLICIT_EXT

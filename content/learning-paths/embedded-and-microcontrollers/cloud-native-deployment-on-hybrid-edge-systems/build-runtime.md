@@ -53,7 +53,7 @@ scp  -J 95757722-1eb3-4e69-8cad-54f0400aa3d2@proxy.app.avh.arm.com cortexm_conso
 ```
 
 {{% notice Note %}}
-You will need to edit the above commands to fit your IP address and paths.
+You'll need to edit the above commands to fit your IP address and paths.
 {{% /notice %}}
 
 ## Building the hello-world firmware container image

@@ -32,7 +32,7 @@ Within the 1.0.0 directory in S3, upload these files from your cloned repo (loca
 		models.tar.gz
 		samples.tar.gz
 
-Next, we need to edit the EdgeImpulseRunnerRuntimeInstallerComponent.yaml and change the artifact location from "YOUR\_S3\_ARTIFACT\_BUCKET" to the actual name of your S3 bucket name (you'll see "YOUR\_S3\_ARTIFACT\_BUCKET" near the bottom of the yaml file). Save the file. 
+Next, edit the EdgeImpulseRunnerRuntimeInstallerComponent.yaml and change the artifact location from "YOUR\_S3\_ARTIFACT\_BUCKET" to the actual name of your S3 bucket name (you'll see "YOUR\_S3\_ARTIFACT\_BUCKET" near the bottom of the yaml file). Save the file. 
 
 ### 3. Create the custom component
 
@@ -48,6 +48,6 @@ Finally, press "Create Component" and you should now have 2 custom components re
 
 ![CreateComponent](./images/GG_Create_NC_Component_3.png)
 
-Awesome!  Now that the non-camera support component is created, we can go back and continue with the deployment of these components to your edge device via the AWS IoT Greengrass deployment mechanism. Press "Return to Deployment Steps" below and continue!
+Now that the non-camera support component is created, return to the deployment steps and continue with deploying these components to your edge device via the AWS IoT Greengrass deployment mechanism. Select "Return to Deployment Steps" below to continue.
 
 ### [Return to Deployment Steps](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/customcomponentdeployment/)

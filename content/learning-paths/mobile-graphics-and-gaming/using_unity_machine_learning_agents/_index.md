@@ -1,5 +1,6 @@
 ---
-title: Using Unity's Machine Learning Agents on Arm
+title: Deploy Unity Machine Learning Agents on Arm Android devices
+description: Learn how to integrate Unity's Machine Learning Agents toolkit into games deployable to Arm-powered Android devices.
 
 minutes_to_complete: 60
 

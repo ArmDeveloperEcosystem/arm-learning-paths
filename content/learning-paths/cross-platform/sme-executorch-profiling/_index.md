@@ -3,6 +3,8 @@ title: Profile ExecuTorch models with SME2 on Arm
 
 minutes_to_complete: 90
 
+description: Learn how to profile and optimize ExecuTorch models using SME2 acceleration on Arm platforms, including operator-level analysis and performance bottleneck identification.
+
 who_is_this_for: This is an advanced topic for developers and performance engineers who deploy ExecuTorch models on Arm devices and want to understand and reduce inference latency.
 
 learning_objectives:

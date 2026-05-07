@@ -5,11 +5,11 @@ weight: 6
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-K3s is a lightweight Kubernetes distribution, built to work well in embedded environments. It is optimized for Arm.
+K3s is a lightweight Kubernetes distribution, built to work well in embedded environments. It's optimized for Arm.
 
 ## K3s setup
 
-You will use a single node K3s cluster setup. To download K3s and set it up, run the following commands:
+You'll use a single node K3s cluster setup. To download K3s and set it up, run the following commands:
 ```bash
 export INSTALL_K3S_EXEC="server --disable traefik --disable metrics-server --disable coredns --disable local-storage --flannel-backend=none --cluster-dns 169.254.0.2 --container-runtime-endpoint=unix://var/run/containerd/containerd.sock"
 ```
@@ -54,7 +54,7 @@ Restart `containerd`, and make sure that it's running:
 systemctl restart containerd
 systemctl status containerd
 ```
-If you run the `kubectl` command below, you will see that the node is not ready:
+If you run the `kubectl` command below, you'll see that the node isn't ready:
 ```bash
 kubectl get nodes
 ```
@@ -132,7 +132,7 @@ To make sure the pod was terminated, check the following:
 
 1. Go to the Cortex-M Console and check that there are no new outputs:
 
-![Cortex-M output alt-text#center](k3s.png "Figure 1. Cortex-M output")
+![Screenshot of the Cortex-M Console showing timestamp outputs from the hello-world firmware running on the Cortex-M7 core#center](k3s.png "Cortex-M Console output with firmware timestamps")
 
 2.	Check that the firmware is offline:
 ```bash

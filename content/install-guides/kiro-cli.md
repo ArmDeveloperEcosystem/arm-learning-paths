@@ -106,7 +106,7 @@ kiro-cli version
 The output shows the version:
 
 ```output
-kiro-cli 1.21.0
+kiro-cli 1.28.1
 ```
 
 ## How can I configure my AWS account to get the most from Kiro CLI?
@@ -224,7 +224,7 @@ Modify the file `~/.kiro/settings/mcp.json` to add the Arm MCP server via a Dock
 
 To analyze a local codebase, use a `-v` command to mount a volume to the Arm MCP server `/workspace` folder so it can access code you want to analyze with migrate-ease and other tools.
 
-Replace the path `/Users/yourname01/yourlocalcodebase` with the path to your local codebase:
+Replace the path `/path/to/your/workspace` with the path to your local codebase:
 
 ```json
 {
@@ -235,8 +235,13 @@ Replace the path `/Users/yourname01/yourlocalcodebase` with the path to your loc
         "run",
         "--rm",
         "-i",
-        "-v", "/Users/yourname01/yourlocalcodebase:/workspace",
-        "--name", "arm-mcp",
+        "--pull=always",
+        "-v",
+        "/path/to/your/workspace:/workspace",
+        "-v",
+        "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v",
+        "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ],
       "env": {},
@@ -245,6 +250,143 @@ Replace the path `/Users/yourname01/yourlocalcodebase` with the path to your loc
   }
 }
 ```
+
+To enable Arm Performix features through the Arm MCP Server, replace `/path/to/your/ssh/private_key` and `/path/to/your/ssh/known_hosts` with the SSH private key and `known_hosts` file used for your target device.
+
+### Optional: Use a Docker replacement containerization tool
+
+You can use other containerization tools besides Docker that are free and do not require licenses, such as Podman, Finch, Colima, and Rancher Desktop. Choose one of the options below and use its CLI in place of `docker`.
+
+{{< tabpane-normal >}}
+  {{< tab header="Podman" >}}
+Install: [Podman](https://podman.io/docs/installation)
+
+Pull the Arm MCP Server image:
+```console
+podman pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `~/.kiro/settings/mcp.json` file:
+```json
+{
+  "mcpServers": {
+    "arm_mcp_server": {
+      "command": "podman",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--pull=always",
+        "-v", "/path/to/your/workspace:/workspace",
+        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+        "armlimited/arm-mcp:latest"
+      ],
+      "env": {},
+      "timeout": 60000
+    }
+  }
+}
+```
+  {{< /tab >}}
+  {{< tab header="Finch" >}}
+Install: [Finch](https://runfinch.com/docs/getting-started/installation/)
+
+Pull the Arm MCP Server image:
+```console
+finch pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `~/.kiro/settings/mcp.json` file:
+```json
+{
+  "mcpServers": {
+    "arm_mcp_server": {
+      "command": "finch",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--pull=always",
+        "-v", "/path/to/your/workspace:/workspace",
+        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+        "armlimited/arm-mcp:latest"
+      ],
+      "env": {},
+      "timeout": 60000
+    }
+  }
+}
+```
+  {{< /tab >}}
+  {{< tab header="Colima" >}}
+Install: [Colima](https://github.com/abiosoft/colima#installation)
+
+Colima provides a Docker-compatible CLI via Docker contexts.
+
+Pull the Arm MCP Server image:
+```console
+docker pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `~/.kiro/settings/mcp.json` file:
+```json
+{
+  "mcpServers": {
+    "arm_mcp_server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--pull=always",
+        "-v", "/path/to/your/workspace:/workspace",
+        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+        "armlimited/arm-mcp:latest"
+      ],
+      "env": {},
+      "timeout": 60000
+    }
+  }
+}
+```
+  {{< /tab >}}
+  {{< tab header="Rancher Desktop" >}}
+Install: [Rancher Desktop](https://docs.rancherdesktop.io/getting-started/installation/)
+
+Rancher Desktop uses the Docker container engine via Morby.
+
+Pull the Arm MCP Server image:
+```console
+docker pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `~/.kiro/settings/mcp.json` file:
+```json
+{
+  "mcpServers": {
+    "arm_mcp_server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--pull=always",
+        "-v", "/path/to/your/workspace:/workspace",
+        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+        "armlimited/arm-mcp:latest"
+      ],
+      "env": {},
+      "timeout": 60000
+    }
+  }
+}
+```
+  {{< /tab >}}
+{{< /tabpane-normal >}}
 
 ### How do I verify the Arm MCP server is working?
 
@@ -262,6 +404,18 @@ Use the `/tools` command to list the available tools:
 
 You should see the Arm MCP server tools listed in the output. If the arm-mcp server says it's still loading, wait a moment and run `/tools` again.
 
-If you are facing issues or have questions, reach out to mcpserver@arm.com.
+### Use Arm prompt files with the MCP Server
 
-You're ready to use Kiro CLI.
+The Arm MCP Server provides a rich set of tools and knowledge base, but to make the best use of it, you should pair it with Arm-specific prompt files. These prompt files supply task-oriented context, best practices, and structured workflows that guide the agent in using MCP tools more effectively across common Arm development tasks.
+
+#### Get the prompt files
+
+Browse the [agent integrations directory for Kiro](https://github.com/arm/mcp/tree/main/agent-integrations/kiro) to find prompt files for specific use cases:
+
+- **Arm migration** ([arm-migration.md](https://github.com/arm/mcp/blob/main/agent-integrations/kiro/arm-migration.md)): Helps the agent systematically migrate applications from x86 to Arm, including dependency analysis, compatibility checks, and optimization recommendations.
+
+Each prompt file is a Markdown configuration that you can reference in your Kiro CLI sessions to enable more targeted, task-specific assistance.
+
+If you're facing issues or have questions, reach out to mcpserver@arm.com.
+
+You're now ready to use Kiro CLI with the Arm MCP server for Arm-specific development assistance.

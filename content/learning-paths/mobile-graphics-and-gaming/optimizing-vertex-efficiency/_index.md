@@ -1,5 +1,6 @@
 ---
 title: Optimize graphics vertex efficiency for Arm GPUs
+description: Learn how to optimize vertex representations and analyze Vertex Memory Efficiency using Arm Frame Advisor for improved GPU performance on Android.
 
 minutes_to_complete: 10
 

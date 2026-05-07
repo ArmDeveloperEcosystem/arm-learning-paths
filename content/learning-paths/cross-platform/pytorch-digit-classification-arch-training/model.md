@@ -9,7 +9,7 @@ layout: "learningpathall"
 
 You can create and train a feedforward neural network to classify handwritten digits from the MNIST dataset. This dataset contains 70,000 images, comprising 60,000 training images and 10,000 testing images of handwritten numerals (0-9), each with dimensions of 28x28 pixels. Some representative MNIST digits with their corresponding labels are shown in Figure 3:
 
-![img3 alt-text#center](figures/3.png "Figure 3: MNIST Digits and Labels.")
+![Grid showing sample handwritten digits from the MNIST dataset, displaying examples of digits 0 through 9 with their corresponding numeric labels underneath each image, demonstrating the variety of handwriting styles the model will need to classify#center](figures/3.png "Sample MNIST digits with labels")
 
 The neural network begins with an input layer containing 28x28 = 784 input nodes, with each node accepting a single pixel from a MNIST image. 
 
@@ -94,7 +94,7 @@ summary(model, (1, 28, 28))
 
 After running the notebook, you will see the output as shown in Figure 4:
 
-![img4 alt-text#center](figures/4.webp "Figure 4: Notebook Output.")
+![Screenshot of Jupyter Notebook output showing the PyTorch model summary with layer-by-layer details including the input shape, output shape, and number of parameters for each layer in the neural network architecture#center](figures/4.webp "Model architecture summary output")
 
 You will see a detailed summary of the NeuralNetwork model's architecture, including the following information:
 

@@ -3,6 +3,8 @@ title: Optimize SIMD code with vectorization-friendly data layout
 
 minutes_to_complete: 45
 
+description: Learn how to optimize SIMD performance on Arm by restructuring data layouts from Array-of-Structures to Structure-of-Arrays, with practical examples using Neon and SVE intrinsics.
+
 who_is_this_for: This is an advanced topic for C/C++ developers who are interested in improving the performance of SIMD code.
 
 learning_objectives: 

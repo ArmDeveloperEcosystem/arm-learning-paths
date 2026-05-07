@@ -1,6 +1,8 @@
 ---
 title: Use Amazon DynamoDB for your IoT applications running on Arm64
 
+description: Learn how to configure AWS IoT Core rules to parse MQTT messages and store IoT data in Amazon DynamoDB from Windows on Arm devices.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for developers who are interested in using Amazon DynamoDB as a database for storing data.

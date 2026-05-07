@@ -1,5 +1,6 @@
 ---
 title: Build an Android chat app with Llama, KleidiAI, ExecuTorch, and XNNPACK 
+description: Learn how to build an Android chat application with Llama models using ExecuTorch, XNNPACK, and KleidiAI for accelerated performance on Arm smartphones.
 
 minutes_to_complete: 60
 

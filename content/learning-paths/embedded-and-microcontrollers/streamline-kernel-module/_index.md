@@ -1,6 +1,8 @@
 ---
 title: Profile the Linux kernel with Arm Streamline
 
+description: Learn how to profile Linux kernel modules using Arm Streamline to identify performance bottlenecks, analyze both out-of-tree and in-tree modules, and use Statistical Profiling Extension (SPE) for deeper insights.
+
 
 minutes_to_complete: 60
 

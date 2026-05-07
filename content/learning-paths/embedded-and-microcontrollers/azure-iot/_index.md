@@ -1,6 +1,8 @@
 ---
 title: Build IoT Solutions in Azure for Arm Devices
 
+description: Learn how to build a complete IoT solution in Azure that streams, stores, monitors, aggregates, and visualizes telemetry data from Arm devices using IoT Hub, Stream Analytics, Cosmos DB, and Azure Functions.
+
 minutes_to_complete: 180
 
 who_is_this_for: This is an advanced topic for developers who want to build a comprehensive IoT solution in Azure that streams, stores, monitors, aggregates, and visualizes telemetry data from Arm IoT devices.
@@ -15,8 +17,8 @@ learning_objectives:
     - Publish aggregated data to a public-facing web app hosted on Azure Blob Storage.
 
 prerequisites:
-    - A machine with Python 3 and Visual Studio Code installed. 
-    - An active Azure account with sufficient permissions to create resources (such as IoT Hub, Functions, and Cosmos DB).
+    - A machine with Python 3 and Visual Studio Code installed
+    - An active Azure account with sufficient permissions to create resources (such as IoT Hub, Functions, and Cosmos DB)
 
 author: Dawid Borycki
 

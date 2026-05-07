@@ -1,5 +1,8 @@
 ---
 title: Use the Eigen Linear Algebra Library on Arm
+
+description: Learn how to use the Eigen linear algebra library on Arm systems with ASIMD and SVE vectorization, including building TensorFlow with SVE support for optimized performance.
+
 minutes_to_complete: 45
 
 who_is_this_for: This is an advanced topic for C/C++ developers who want to create high performance applications using the Eigen linear algebra library.

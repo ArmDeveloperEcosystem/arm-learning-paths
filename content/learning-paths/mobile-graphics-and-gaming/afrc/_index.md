@@ -3,6 +3,8 @@ title: Learn about Arm Fixed Rate Compression (AFRC)
 
 minutes_to_complete: 25
 
+description: Learn how to enable and verify Arm Fixed Rate Compression in Vulkan applications on Android devices to reduce memory footprint and bandwidth.
+
 who_is_this_for: Software developers of Android applications and mobile games who are interested in learning how to enable Arm Fixed Rate Compression (AFRC) to improve performance.
 
 learning_objectives:

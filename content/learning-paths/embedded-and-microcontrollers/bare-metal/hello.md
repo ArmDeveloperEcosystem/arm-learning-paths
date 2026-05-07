@@ -106,7 +106,7 @@ In the scatter file, all read-only (`RO`) code/data (including the entry point `
     * (+RW, +ZI)
   }
 ```
-`RAM_EXEC` contains any read-write (`RW`) or zero-initialised (`ZI`) data. Because this has been located at a different address (0x04000000, in SRAM), it is not a root region.
+`RAM_EXEC` contains any read-write (`RW`) or zero-initialised (`ZI`) data. Because this has been located at a different address (0x04000000, in SRAM), it's not a root region.
 
 Region names (such as `ROM_LOAD`, `ROM_EXEC`, and `RAM_EXEC` above) are arbitrary. However there are [reserved names](https://developer.arm.com/documentation/100748/latest/Embedded-Software-Development/Placing-the-stack-and-heap) for the Stack and Heap regions. This example uses a single region (`ARM_LIB_STACKHEAP`) for both.
 ```output
@@ -146,4 +146,4 @@ In this case, only one instance of the output is shown:
 ```output
 Hello World!
 ```
-In the next section you will learn how to manage this in software.
+In the next section you'll learn how to manage this in software.

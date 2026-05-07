@@ -1,18 +1,19 @@
 ---
 title: Deploy Open AD Kit containerized autonomous driving simulation on Arm Neoverse
+description: Learn how to deploy and run containerized autonomous driving simulations using Autoware Open AD Kit on Arm Neoverse with Docker, demonstrating SOAFEE-based Shift-Left development workflows.
 
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for automotive developers, aimed at helping them accelerate autonomous driving software development before automotive hardware is available.
 
 learning_objectives: 
-    - Understand the SOAFEE architecture and its role in supporting Shift-Left software development strategies to optimize the autonomous driving development process.
-    - Use the Autoware Open AD Kit simulation environment.
-    - Run containerized workloads on Arm Neoverse processors with Docker, supporting execution on both cloud-based and on-premise servers.
-    - Explore advanced configurations and future development prospects.
+    - Understand the SOAFEE architecture and its role in supporting Shift-Left software development strategies to optimize the autonomous driving development process
+    - Use the Autoware Open AD Kit simulation environment
+    - Run containerized workloads on Arm Neoverse processors with Docker, supporting execution on both cloud-based and on-premise servers
+    - Explore advanced configurations and future development prospects
 prerequisites:
-    - An Arm Neoverse cloud instance, or a local Arm Neoverse Linux computer with at least 16 CPUs and 32GB of RAM.
-    - Familiarity with Docker and Docker Compose.
+    - An Arm Neoverse cloud instance, or a local Arm Neoverse Linux computer with at least 16 CPUs and 32GB of RAM
+    - Familiarity with Docker and Docker Compose
 
 author: Odin Shen
 

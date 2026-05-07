@@ -30,7 +30,7 @@ Add two secrets using the `New repository secret` button:
 - `DOCKER_USER` with your Docker ID.
 - `DOCKER_PAT` with your Personal Access Token. 
 
-![GitHub Actions Secrets #center](_images/secrets.png)
+![Screenshot of GitHub repository Settings page showing the Secrets and variables section under Actions, with two repository secrets listed: DOCKER_USER and DOCKER_PAT, which enable automated Docker Hub authentication in GitHub Actions workflows#center](_images/secrets.png "GitHub Actions repository secrets configuration")
 
 You have stored the secrets that allow you to login to Docker Hub and save container images.
 
@@ -108,7 +108,7 @@ Select the `image-build` on the left.
 
 Use the `Run workflow` drop-down on the right-hand side to click `Run workflow`. 
 
-![Run workflow #center](_images/run-action.png)
+![Screenshot of GitHub Actions tab showing the image-build workflow selected on the left sidebar with a Run workflow dropdown button on the right side, which allows manual triggering of the container image build workflow#center](_images/run-action.png "GitHub Actions workflow manual trigger interface")
 
 This triggers the `image-build` workflow to start, performing the following steps:
 - Checkout the repository.
@@ -121,7 +121,7 @@ When the workflow completes, the new image is available in your Docker Hub accou
 
 You can use the `Actions` tab in your repository to see if the workflow runs, click on each one to review the commands, and check errors.
 
-![Run workflow #center](_images/matrix.png)
+![Screenshot of GitHub Actions workflow run showing a matrix strategy build with two parallel jobs: one for ubuntu-latest (amd64) and one for ubuntu-22.04-arm (arm64), demonstrating multi-architecture container image building in a single workflow#center](_images/matrix.png "GitHub Actions matrix build status for multi-architecture images")
 
 ## Automate the build
 

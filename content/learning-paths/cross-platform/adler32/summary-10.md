@@ -35,9 +35,9 @@ The Adler-32 checksum is an algorithm invented by Mark Adler, used in the zlib c
 This project provides and compares two implementations of the Adler-32 checksum algorithm:
 
 1.  A simple, standard C implementation.
-2.  An optimized implementation using ARM NEON SIMD instructions.
+2.  An optimized implementation using ARM Neon SIMD instructions.
 
-The goal is to demonstrate the performance benefits of using NEON intrinsics for this type of computation on compatible ARM architectures, such as the Neoverse N1.
+The goal is to demonstrate the performance benefits of using Neon intrinsics for this type of computation on compatible ARM architectures, such as the Neoverse N1.
 
 The project includes:
 *   Source code for both implementations (`adler32-simple.c`, `adler32-neon.c`).
@@ -51,11 +51,11 @@ The project includes:
 
 The code in `adler32-simple.c` is a straightforward C implementation following the standard Adler-32 algorithm definition. It processes the input data byte by byte, updating two 16-bit accumulators (`a` and `b`) modulo 65521 (the largest prime smaller than 2^16).
 
-#### 2. NEON-Optimized Implementation
+#### 2. Neon-Optimized Implementation
 
-The code in `adler32-neon.c` leverages ARM NEON SIMD (Single Instruction, Multiple Data) instructions to accelerate the checksum calculation. Key aspects include:
+The code in `adler32-neon.c` leverages ARM Neon SIMD (Single Instruction, Multiple Data) instructions to accelerate the checksum calculation. Key aspects include:
 *   Processing data in blocks (16 bytes at a time).
-*   Using NEON intrinsics (`vld1q_u8`, `vmovl_u8`, `vaddq_u16`, `vpaddlq_u16`, `vmulq_u16`, etc.) to perform parallel operations on data vectors.
+*   Using Neon intrinsics (`vld1q_u8`, `vmovl_u8`, `vaddq_u16`, `vpaddlq_u16`, `vmulq_u16`, etc.) to perform parallel operations on data vectors.
 *   Calculating the sums `S1` (sum of bytes) and `S2` (weighted sum) for each block using vector operations.
 *   Updating the scalar `a` and `b` accumulators based on the block results.
 *   Falling back to the standard implementation for data lengths smaller than the block size or for the remaining bytes after processing full blocks.
@@ -64,9 +64,9 @@ The code in `adler32-neon.c` leverages ARM NEON SIMD (Single Instruction, Multip
 
 The performance of both implementations was measured on an **AWS Graviton2 processor (based on Arm Neoverse N1 cores)**. The benchmark program (`adler32-test`) calculates the checksum for various data sizes and measures the time taken and throughput (in MB/s).
 
-The following table summarizes the throughput results and the performance improvement factor of the NEON version compared to the simple version:
+The following table summarizes the throughput results and the performance improvement factor of the Neon version compared to the simple version:
 
-| Data Size | Simple Throughput (MB/s) | NEON Throughput (MB/s) | Speedup Factor |
+| Data Size | Simple Throughput (MB/s) | Neon Throughput (MB/s) | Speedup Factor |
 | :-------- | :----------------------- | :--------------------- | :------------- |
 | 1 KB      | 244.14                   | 976.56                 | 4.00x          |
 | 10 KB     | 295.93                   | 3255.21                | 11.00x         |
@@ -74,7 +74,7 @@ The following table summarizes the throughput results and the performance improv
 | 1 MB      | 298.33                   | 3215.43                | 10.78x         |
 | 10 MB     | 298.37                   | 3194.89                | 10.71x         |
 
-**Note:** Performance results can vary based on the specific hardware, compiler, and system load. The results above demonstrate a significant performance improvement (around **10-11x** for larger data sizes) when using NEON optimization on the Neoverse N1 architecture.
+**Note:** Performance results can vary based on the specific hardware, compiler, and system load. The results above demonstrate a significant performance improvement (around **10-11x** for larger data sizes) when using Neon optimization on the Neoverse N1 architecture.
 
 ### Building and Running
 
@@ -91,17 +91,17 @@ make run
 make clean
 ```
 
-The table summarizes the speedup obtained by the NEON version. 
+The table summarizes the speedup obtained by the Neon version. 
 
 Using Agent mode in GitHub Copilot is a significant benefit when you are actively building and running software. Agent mode can create files and modify them to make needed improvements. 
 
 ### Tips for Using GitHub Copilot Effectively
 
-This project was completed using GitHub Copilot Agent without modifying the generated files. While that might not be practical in every case, the demonstration shows how NEON intrinsics can significantly boost performance. 
+This project was completed using GitHub Copilot Agent without modifying the generated files. While that might not be practical in every case, the demonstration shows how Neon intrinsics can significantly boost performance. 
 
 GitHub Copilot is especially useful for:
 * Generating vectorized versions of scalar code.
-* Writing and adapting NEON intrinsics.
+* Writing and adapting Neon intrinsics.
 * Identifying and fixing bugs in complex low-level code, even for developers who aren’t SIMD experts.
 
 Make sure to try different LLMs with Copilot as the results will vary greatly depending on the model.

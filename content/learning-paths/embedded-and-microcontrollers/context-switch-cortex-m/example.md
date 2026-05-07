@@ -1,6 +1,6 @@
 ---
 # User change
-title: Example Arm DS project for demonstrate context switching operations
+title: Example Arm DS project to demonstrate context switching operations
 
 weight: 2 # 1 is first, 2 is second, etc.
 

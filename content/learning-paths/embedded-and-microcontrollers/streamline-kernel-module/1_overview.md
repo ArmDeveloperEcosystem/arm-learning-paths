@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Overview
-Performance tuning is just as important for kernel modules as it is for user-space applications. Arm Streamline is a powerful profiling tool that helps you find performance bottlenecks, hotspots, and memory issues - even inside the Linux kernel. In this Learning Path, you'll learn how to use Arm Streamline to profile a simple kernel module on Arm-based systems. You'll see how profiling can reveal optimization opportunities and help you improve your module's efficiency.
+Performance tuning is as important for kernel modules as it is for user-space applications. Arm Streamline is a powerful profiling tool that helps you find performance bottlenecks, hotspots, and memory issues - even inside the Linux kernel. In this Learning Path, you'll learn how to use Arm Streamline to profile a simple kernel module on Arm-based systems. You'll see how profiling can reveal optimization opportunities and help you improve your module's efficiency.
 ## Benefits of profiling Linux kernel modules with Arm Streamline
 
 Kernel modules often operate in performance-critical paths, such as device drivers or networking subsystems. Even a small inefficiency in a module can affect the overall system performance.

@@ -47,7 +47,7 @@ Prepare the dataset for fine-tuning by formatting it to match the LLaMA-3.1 chat
 
     The image below shows the dataset loading:
 
-![example image alt-text#center](2.png )
+![Screenshot showing the successful loading of the Bitext customer support chatbot training dataset from Hugging Face. The output displays dataset information including the number of examples, features (instruction, intent, response columns), and the dataset split confirmation.#center](2.png )
 
 5. Import the standardization function.
 
@@ -77,4 +77,4 @@ Prepare the dataset for fine-tuning by formatting it to match the LLaMA-3.1 chat
 
     The image below shows batch processing progress:
 
-![example image alt-text#center](3.png )
+![Screenshot showing the batch processing progress bar during dataset formatting. The output displays the map operation applying the formatting function across dataset batches, with progress percentage, number of examples processed, and processing speed metrics.#center](3.png )

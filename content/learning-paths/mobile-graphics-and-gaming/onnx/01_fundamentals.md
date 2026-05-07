@@ -33,7 +33,7 @@ ONNX addresses this challenge by acting as a universal exchange format that sepa
 
 The key reasons ONNX matters are:
 - Interoperability: ONNX decouples training from inference. Models trained in PyTorch or TensorFlow can be exported into a common format and executed in a different runtime environment without embedding the original framework.
-- Performance: ONNX Runtime includes highly optimized execution backends, supporting hardware acceleration through Arm NEON, CUDA, DirectML, and Android NNAPI. This means the same model can run efficiently across a wide spectrum of hardware.
+- Performance: ONNX Runtime includes highly optimized execution backends, supporting hardware acceleration through Arm Neon, CUDA, DirectML, and Android NNAPI. This means the same model can run efficiently across a wide spectrum of hardware.
 - Portability: a single `.onnx` model file can be deployed across Arm-based cloud servers, embedded Arm devices, and mobile applications, provided the required operators are supported by the target runtime.
 - Ecosystem: the ONNX Model Zoo and broad industry adoption make it easier to reuse validated architectures across platforms.
 - Extensibility: custom operators and execution providers allow researchers and hardware vendors to extend ONNX without breaking compatibility with the broader ecosystem.
@@ -76,7 +76,7 @@ ONNX Runtime provides:
 **Cross-platform support** – ORT runs on Windows, Linux, and macOS, as well as mobile platforms like Android and iOS. It supports both x86 and Arm64 architectures, making it suitable for deployment from cloud servers to edge devices such as Raspberry Pi boards and smartphones.
 
 **Hardware acceleration** – ORT integrates with a wide range of execution providers (EPs) that tap into hardware capabilities:
-* Arm Kleidi kernels accelerated with Arm NEON, SVE2, and SME2 instructions for efficient CPU execution on Arm64
+* Arm Kleidi kernels accelerated with Arm Neon, SVE2, and SME2 instructions for efficient CPU execution on Arm64
 * CUDA for NVIDIA GPUs
 * DirectML for Windows
 * NNAPI on Android, enabling direct access to mobile accelerators (DSPs, NPUs)
@@ -92,7 +92,7 @@ One of ONNX’s greatest strengths is how naturally it integrates into a modern 
 A typical ONNX workflow looks like this:
 - Train the model: you first use your preferred framework (e.g., PyTorch, TensorFlow, or scikit-learn) to design and train a model. At this stage, you benefit from the flexibility and ecosystem of the framework of your choice.
 - Export to ONNX: once trained, the model is exported into the ONNX format using built-in converters (such as torch.onnx.export for PyTorch). This produces a portable .onnx file describing the network architecture, weights, and metadata.
-- Run inference with ONNX Runtime: the ONNX model can now be executed on different devices using ONNX Runtime. On Arm64 hardware, ONNX Runtime can take advantage of Arm Kleidi kernels accelerated with NEON, SVE2, and SME2 instructions, while on Android devices it can leverage NNAPI to access mobile accelerators (where available).
+- Run inference with ONNX Runtime: the ONNX model can now be executed on different devices using ONNX Runtime. On Arm64 hardware, ONNX Runtime can take advantage of Arm Kleidi kernels accelerated with Neon, SVE2, and SME2 instructions, while on Android devices it can leverage NNAPI to access mobile accelerators (where available).
 - Optimize the model: apply graph optimizations like layer fusion, constant folding, or quantization to improve performance and reduce memory usage, making the model more suitable for edge and mobile deployments.
 - Deploy: finally, the optimized ONNX model is packaged into its target environment. This could be an Arm64-based embedded system (e.g., Raspberry Pi), a server powered by Arm CPUs (e.g., AWS Graviton), or an Android application distributed via the Play Store.
 

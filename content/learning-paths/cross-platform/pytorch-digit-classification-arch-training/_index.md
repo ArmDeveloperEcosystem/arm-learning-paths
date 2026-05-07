@@ -3,6 +3,8 @@ title: Create and train a PyTorch model for digit classification using the MNIST
 
 minutes_to_complete: 160
 
+description: Learn how to create and train a PyTorch neural network for MNIST digit classification, optimize it with quantization and fusing, and deploy it in an Android application with performance measurement.
+
 who_is_this_for: This is an advanced topic for software developers interested in learning how to use PyTorch to create and train a feedforward neural network for digit classification, and also software developers interested in learning how to use and apply optimizations to the trained model in an Android application.
 
 learning_objectives:

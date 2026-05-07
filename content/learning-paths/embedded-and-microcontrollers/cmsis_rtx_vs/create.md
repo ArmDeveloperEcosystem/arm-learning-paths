@@ -11,7 +11,7 @@ This learning path will introduce the steps to create a basic RTX-based RTOS app
 
 For more information on the latest update, see the [CMSIS v6 is here](https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/cmsis-v6-is-here) blog.
 
-You will use **[Keil Studio for VS Code](/install-guides/keilstudio_vs)** in this Learning Path.
+You'll use **[Keil Studio for VS Code](/install-guides/keilstudio_vs)** in this Learning Path.
 
 This Learning Path is written for the supplied **Cortex-M4 Fixed Virtual Platform (FVP)**, but you can run it on any of the 10,000+ devices supported by [CMSIS-Pack](https://open-cmsis-pack.github.io/Open-CMSIS-Pack-Spec/main/html/index.html/).
 
@@ -23,12 +23,12 @@ If using `Arm Keil μVision IDE` or Arm Development Studio, refer to the [Build 
 
 Keil Studio projects are based on the [CMSIS Solution](https://github.com/Open-CMSIS-Pack/cmsis-toolbox/blob/main/docs/YML-Input-Format.md) standard.
 
-1. Open the VS Code IDE, and select `File` > `New File` from the `File` menu. You will be prompted for the type of file. Select `New Solution` (`Arm CMSIS Solution`).
+1. Open the VS Code IDE, and select `File` > `New File` from the `File` menu. You'll be prompted for the type of file. Select `New Solution` (`Arm CMSIS Solution`).
 2. The `Create New Solution` window will open. Click the `Target Device` pulldown, and search for `ARMCM4`.
 3. From the `Templates, Reference Applications, and Examples` pulldown, select `Blank Solution`.
 4. Ensure `Arm Compiler 6` is the selected compiler.
 5. Enter an appropriate `Solution Name`. This will define the folder name that the project will be created into. You can also change the folder location if necessary.
-6. Click `Create`. You will be prompted to open the solution in the current window, or open a new window.
+6. Click `Create`. You'll be prompted to open the solution in the current window, or open a new window.
 
 ## Configure the Solution Environment
 
@@ -54,7 +54,7 @@ All necessary components will be downloaded and installed as necessary (if not a
 
 ## Configure CMSIS Options
 
-1. Select **CMSIS** from the Extensions icon list in VS Code. You will see the project structure.
+1. Select **CMSIS** from the Extensions icon list in VS Code. You'll see the project structure.
 2. Hover over the top-level project and click **Manage Software Components** to add CMSIS Software Packs to your project.
 
 Enable the following components:

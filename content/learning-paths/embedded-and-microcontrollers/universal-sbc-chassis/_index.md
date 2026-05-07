@@ -1,6 +1,8 @@
 ---
 title: Build a Universal Single Board Computer Rack Mount System
 
+description: Learn how to acquire and print materials, assemble a universal SBC rack mount system in a 4U chassis, and install single board computers in the racks using 3D-printed parts.
+
 who_is_this_for: This is an introductory topic for software developers and hobbyists who want to build a rack mount system for housing single board computers. 
 
 minutes_to_complete: 120

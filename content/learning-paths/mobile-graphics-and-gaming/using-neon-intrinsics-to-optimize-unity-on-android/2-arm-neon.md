@@ -5,7 +5,7 @@ weight: 3
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-In 2021 Unity released version 1.5 of the Burst compiler. The headline feature of this version was new support for Neon intrinsics. Since then there have been various improvements in both Burst and Neon support. This learning path was written using Unity 2022.3 and [Burst 1.8.12](https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/index.html).
+In 2021 Unity released version 1.5 of the Burst compiler. The headline feature of this version was new support for Neon intrinsics. Since then there have been various improvements in both Burst and Neon support. This learning path was written using Unity v6.3 and [Burst 1.8.28](https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/index.html).
 
 ## Unity Burst compiler
 Burst is an advanced compiler that compiles specific parts of your code. It translates .NET byte code into CPU native instructions. It is part of Unity's [DOTS (Data Oriented Technology Stack](https://unity.com/dots). Your project and code need some minimal setup in order to use the Burst compiler.

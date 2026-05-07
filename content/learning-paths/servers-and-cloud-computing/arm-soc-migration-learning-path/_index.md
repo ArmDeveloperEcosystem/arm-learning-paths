@@ -1,6 +1,7 @@
 ---
 title: Migrate applications between Arm platforms using Kiro Arm SoC Migration Power
-    
+description: Learn how to migrate C applications between Arm platforms using Kiro's AI-assisted tooling to identify hardware dependencies and implement abstraction layers for cross-platform compatibility.
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an advanced topic for experienced developers who need to migrate applications between Arm-based platforms using AI-assisted tooling. You will work through a structured, repeatable migration workflow using Kiro Arm SoC Migration Power, moving an application from AWS Graviton3 (Neoverse) to Raspberry Pi 5 (Cortex-A). The techniques apply broadly to cloud-to-edge and cross-architecture migrations across the Arm ecosystem.

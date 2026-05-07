@@ -1,6 +1,8 @@
 ---
 title: Build multi-architecture container images with Docker Build Cloud
 
+description: Learn how to build multi-architecture Docker images for Arm and x86 using Docker Build Cloud, with GitHub Actions automation for faster builds without emulation.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for software developers who want to learn how to use Docker Build Cloud.

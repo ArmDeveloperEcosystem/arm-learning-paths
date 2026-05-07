@@ -13,6 +13,7 @@ additional_search_terms:
 minutes_to_complete: 30
 
 official_docs: https://learn.microsoft.com/en-us/visualstudio/install/visual-studio-on-arm-devices 
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/windows?package=Visual%20Studio
 
 author: Pareena Verma
 

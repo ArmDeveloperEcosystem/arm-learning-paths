@@ -6,18 +6,22 @@ differentiating_info:
 key_ip:
 - Cortex-A
 maintopic: true
+pinned_learning_paths:
+- wsl2
+- dgx_spark_isaac_robotics
+- learning-paths/cross-platform/multiplying-matrices-with-sme2
 operatingsystems_filter:
-- Android: 2
+- Android: 3
 - ChromeOS: 2
-- Linux: 38
-- macOS: 10
+- Linux: 41
+- macOS: 11
 - Windows: 47
 subjects_filter:
-- CI-CD: 6
-- Containers and Virtualization: 7
+- CI-CD: 7
+- Containers and Virtualization: 6
 - Migration to Arm: 30
-- ML: 6
-- Performance and Architecture: 28
+- ML: 8
+- Performance and Architecture: 30
 subtitle: Build native Windows on Arm applications that are fast and efficient.
 title: Laptops and Desktops
 tools_software_languages_filter:
@@ -28,28 +32,31 @@ tools_software_languages_filter:
 - Arm Performance Libraries: 2
 - Arm64EC: 1
 - Assembly: 1
-- Bash: 3
-- C: 11
+- Bash: 4
+- C: 12
 - C#: 6
 - CCA: 1
 - Clang: 13
-- CMake: 3
+- CMake: 4
 - CPP: 12
 - CSS: 1
-- Daytona: 1
-- Docker: 6
+- Docker: 9
+- ExecuTorch: 1
 - FFmpeg: 1
 - GCC: 12
 - Git: 1
 - GitHub: 3
+- GitHub Actions: 1
 - GitLab: 2
 - Google Benchmark: 1
 - Google Test: 1
 - HTML: 2
-- Hugging Face: 1
+- Hugging Face: 2
 - Hyper-V: 1
 - i3: 1
 - Intrinsics: 1
+- IsaacLab: 1
+- IsaacSim: 1
 - JavaScript: 2
 - KleidiCV: 1
 - Kubernetes: 1
@@ -59,25 +66,32 @@ tools_software_languages_filter:
 - LLM: 1
 - LLVM: 2
 - llvm-mca: 1
+- MCP: 1
 - MSBuild: 1
+- MSVC: 1
 - MTE: 1
-- NEON: 1
+- Neon: 1
 - Neovim: 1
 - Node.js: 3
 - ONNX Runtime: 1
 - OpenCV: 1
 - perf: 4
+- PGO: 1
 - PowerShell: 1
-- Python: 9
+- Pytest: 1
+- Python: 14
+- PyTorch: 1
 - QEMU: 1
 - Qt: 2
 - RDP: 1
 - Remote.It: 1
 - RME: 1
-- Runbook: 18
+- Runbook: 17
 - Rust: 2
+- SME2: 3
 - SVE: 1
 - SVE2: 1
+- Testcontainers: 1
 - Trusted Firmware: 1
 - Ubuntu: 1
 - Visual Studio: 14
@@ -91,4 +105,13 @@ tools_software_languages_filter:
 - WSL: 1
 - Xamarin Forms: 1
 weight: 2
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
 ---

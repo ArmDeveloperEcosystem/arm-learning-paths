@@ -1,6 +1,8 @@
 ---
 title: Optimize Windows applications using Arm Performance Libraries
 
+description: Learn how to develop Windows on Arm applications using Visual Studio and optimize performance with Arm Performance Libraries.
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for software developers who want to improve the performance of Windows on Arm applications using Arm Performance Libraries.

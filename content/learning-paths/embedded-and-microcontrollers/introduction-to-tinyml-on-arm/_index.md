@@ -1,6 +1,8 @@
 ---
 title: Introduction to TinyML on Arm using PyTorch and ExecuTorch
 
+description: Learn what differentiates TinyML from other AI domains, explore Arm-based edge devices for TinyML, and set up a development environment using ExecuTorch and Corstone-320 Fixed Virtual Platform.
+
 minutes_to_complete: 40
 
 who_is_this_for: This is an introductory topic for developers and data scientists new to Tiny Machine Learning (TinyML) who want to explore its potential using PyTorch and ExecuTorch.

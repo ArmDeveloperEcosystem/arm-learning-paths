@@ -1,5 +1,6 @@
 ---
-title: Neural Super Sampling in Unreal Engine
+title: Enable Neural Super Sampling in Unreal Engine with ML Extensions
+description: Learn how to configure ML Extensions for Vulkan emulation and enable Neural Super Sampling (NSS) in Unreal Engine for real-time upscaling.
 
 minutes_to_complete: 30
 

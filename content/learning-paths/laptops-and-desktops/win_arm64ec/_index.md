@@ -1,6 +1,8 @@
 ---
 title: Use Arm64EC with Windows 11 on Arm
 
+description: Learn how to build native Arm applications and migrate x86/x64 applications to Arm using Arm64EC on Windows on Arm devices.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for software developers who want to use Arm64EC with Windows on Arm devices. 

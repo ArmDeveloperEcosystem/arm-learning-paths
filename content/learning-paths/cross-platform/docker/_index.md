@@ -1,7 +1,7 @@
 ---
 title: Learn how to use Docker
 
-description: Build, share, and run for multi-architecture use cases.
+description: Learn how to build, run, and share multi-architecture Docker images for Arm and x86 platforms using buildx, manifest, and remote builders.
 
 minutes_to_complete: 30
 

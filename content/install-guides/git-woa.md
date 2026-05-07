@@ -12,6 +12,7 @@ minutes_to_complete: 10
 
 ### Link to official documentation
 official_docs: https://git-scm.com/doc
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/windows?package=git
 
 author: Jason Andrews
 

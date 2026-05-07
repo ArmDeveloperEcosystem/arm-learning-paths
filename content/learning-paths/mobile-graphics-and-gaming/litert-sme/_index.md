@@ -1,5 +1,6 @@
 ---
 title: Accelerate LiteRT Models on Android with KleidiAI and SME2
+description: Learn how to accelerate LiteRT model inference on Android using KleidiAI with SME2 instructions and validate performance with the benchmark tool.
 
 minutes_to_complete: 45
 

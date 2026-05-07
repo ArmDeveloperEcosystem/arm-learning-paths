@@ -1,5 +1,6 @@
 ---
 title: Measure LLM inference performance with KleidiAI and SME2 on Android
+description: Learn how to build llama.cpp with KleidiAI and SME2 support to profile and accelerate LLM inference performance on Android devices.
     
 minutes_to_complete: 40
 

@@ -1,6 +1,8 @@
 ---
 title: Install Ubuntu on ChromeOS Crostini as an LXC container
 
+description: Learn how to create and run Ubuntu containers on ChromeOS Crostini using LXC with file sharing and GUI application support on Arm-based Chromebooks.
+
 minutes_to_complete: 60
 
 who_is_this_for: This Learning Path is for software developers who want to install Ubuntu and other Linux distributions on their Arm-based Chromebook with ChromeOS file sharing and GUI support.

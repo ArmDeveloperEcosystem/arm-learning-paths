@@ -1,5 +1,7 @@
 ---
 title: Accelerate an OpenCV-based Android Application with KleidiCV
+description: Learn how to accelerate OpenCV-based Android applications using KleidiCV for enhanced computer vision performance.
+
 
 minutes_to_complete: 45
 

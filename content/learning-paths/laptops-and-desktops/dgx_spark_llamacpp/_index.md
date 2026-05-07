@@ -1,6 +1,8 @@
 ---
 title: Unlock quantized LLM performance on Arm-based NVIDIA DGX Spark
 
+description: Learn how to build and optimize quantized LLMs using llama.cpp on NVIDIA DGX Spark with Grace-Blackwell architecture, leveraging Armv9 SIMD acceleration.
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for AI practitioners, performance engineers, and system architects who want to learn how to deploy and optimize quantized large language models (LLMs) on NVIDIA DGX Spark systems powered by the Grace-Blackwell (GB10) architecture.

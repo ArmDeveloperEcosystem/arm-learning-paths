@@ -23,9 +23,9 @@ Click `Run` (`F5`) to start the application, and after a short time, click `Stop
 
 Observe in the `RTX RTOS` view that the threads have been created. Two other threads, `osRtxIdleThread` and `osRtxTimerThread` will also be created.
 
-![RTX RTOS #center](keil_rtos.png)
+![Screenshot of the RTX RTOS view in Keil μVision showing the list of created threads including thread_1, thread_2, osRtxIdleThread, and osRtxTimerThread with their status and priority information#center](keil_rtos.png "RTX RTOS threads view")
 
-However no output is seen in the `printf viewer`. This is because semihosting is not supported. You will learn how to address this in the next section.
+However no output is seen in the `printf viewer`. This is because semihosting isn't supported. You'll learn how to address this in the next section.
 
 Exit the debug session (`Ctrl+F5`).
 
@@ -48,13 +48,13 @@ You must now create a `Debug Configuration`:
 
 When debugging, use the `OS Data` view to observe RTOS information. Open from the `Window` > `Show View` menu. Use the pull down to select different categories.
 
-![OS Data #center](os_data.png)
+![Screenshot of the OS Data view showing RTOS thread information including task names, states, and stack usage#center](os_data.png "OS Data view with thread details")
 
 For thread aware debug, right-click on the debug connection in the `Debug Control` view, and select `Display threads`.
 
-![Debug Control #center](debug_control.png)
+![Screenshot of the Debug Control view with the context menu showing the Display threads option for thread-aware debugging#center](debug_control.png "Debug Control view with thread display option")
 
-You will see the printf() output in `Target Console` pane.
+You'll see the printf() output in `Target Console` pane.
 ```
 hello from thread 1
 hello from thread 2

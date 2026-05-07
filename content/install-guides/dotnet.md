@@ -5,6 +5,7 @@ author: Jason Andrews
 multi_install: false
 multitool_install_part: false
 official_docs: https://learn.microsoft.com/en-us/dotnet/
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=.net
 additional_search_terms:
 - .NET SDK
 test_images:

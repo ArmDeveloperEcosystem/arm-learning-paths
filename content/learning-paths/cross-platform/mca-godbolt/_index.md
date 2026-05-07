@@ -1,5 +1,6 @@
 ---
 title: Learn about LLVM Machine Code Analyzer
+description: Learn how to use llvm-mca with Compiler Explorer to analyze Arm assembly performance, estimate hardware resource pressure, and diagnose performance issues.
 
 minutes_to_complete: 60
 

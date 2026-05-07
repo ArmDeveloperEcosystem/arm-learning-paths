@@ -1,6 +1,8 @@
 ---
 title: Develop cross-platform desktop applications with Electron on Windows on Arm
 
+description: Learn how to develop and build cross-platform desktop applications using the Electron Framework on Windows on Arm devices.
+
 minutes_to_complete: 30
 
 who_is_this_for: This learning path is for developers who want to learn how to develop cross-platform desktop applications using the Electron Framework on Windows on Arm (WoA).

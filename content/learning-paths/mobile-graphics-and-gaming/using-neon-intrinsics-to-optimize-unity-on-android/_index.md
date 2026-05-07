@@ -1,9 +1,11 @@
 ---
-title: Using Neon intrinsics to optimize Unity on Android
+title: Optimize Unity applications on Android using Neon intrinsics
 
 minutes_to_complete: 90
 
-who_is_this_for: Developers who want to optimize their Unity apps on Android
+description: Learn how to use Arm Neon intrinsics in Unity C# scripts to optimize code on Android and collect performance data using Unity Profiler.
+
+who_is_this_for: Developers interested in leveraging the Unity Machine Learning Agents toolkit on Arm devices.
 
 learning_objectives:
     - Use Arm Neon intrinsics in your Unity C# scripts
@@ -16,7 +18,7 @@ prerequisites:
     - Desktop computer capable of running Unity
     - Unity version compatible with Unity Burst compiler 1.5 or later
 
-author: Arm
+author: Ben Clark, Joshua Marshall-Law
 
 ### Tags
 skilllevels: Advanced
@@ -26,7 +28,7 @@ armips:
     - aarch64
     - arm64
     - arm architecture
-    - NEON
+    - Neon
 tools_software_languages:
     - Unity
     - C#

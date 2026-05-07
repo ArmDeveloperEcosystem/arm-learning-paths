@@ -7,9 +7,9 @@ weight: 4 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-In this step, you will implement the main RTOS thread (`app_main`), which is primarily responsible for starting and managing the other threads in the system.
+In this step, you'll implement the main RTOS thread (`app_main`), which is primarily responsible for starting and managing the other threads in the system.
 
-You will create three threads. The number and naming of the threads are flexible, so feel free to adjust as needed.
+You'll create three threads. The number and naming of the threads are flexible, so feel free to adjust as needed.
 
 ## Create the app_main() function
 

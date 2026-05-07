@@ -16,7 +16,7 @@ There are essentially two types of KleidiAI micro-kernels today:
 2. Matrix Multiplication routines - the three directories with the prefix `matmul_clamp`. Each directory contains routines specialized for a specific input data type.
 
 
-![KleidiAI stuff](kleidiai-src.JPG "KleidiAI src directory")
+![Screenshot of the KleidiAI GitLab repository source directory structure showing the kai/ukernels/matmul folder. The directory contains a pack subdirectory for quantization routines and three matmul_clamp directories (for f16, f32, and mixed precision types) containing specialized matrix multiplication micro-kernels.#center](kleidiai-src.JPG "KleidiAI src directory")
 
 ### What are the quantization levels that KleidiAI supports?
 KleidiAI has multiple matrix multiplication micro-kernels, and dynamic quantization routines, to optimally support all model quantization levels. To learn more about model quantization and how selecting the right quantization level affects your AI-based application, refer to [this Learning Path](/learning-paths/servers-and-cloud-computing/llama-cpu/llama-chatbot#quantization-format).
@@ -36,7 +36,7 @@ Only one matrix multiply micro-kernel is used for your given AI application. Eac
 ## KleidiAI in a real-world example 
 Before deep-diving into KleidiAI's code, it is helpful to see how KleidiAI micro-kernels interact with a GenAI model and a ML Framework at a high-level. The steps below describe how KleidiAI speeds up matrix multiplication. The example is of a user asking a chatbot app a question on their smartphone. This is the example application stack to analyze:
 
-![KleidiAI in Stack](sw-stack.png "KleidiAI in a real-world software stack.")
+![Diagram showing a complete software stack for a chatbot application on a smartphone. From top to bottom, the layers include the chatbot application, MediaPipe ML framework, a Gemma-2b model, and at the base the KleidiAI micro-kernels that accelerate matrix multiplication operations. This illustrates where KleidiAI fits in a real-world GenAI inference pipeline.#center](sw-stack.png "KleidiAI in a real-world software stack.")
 
 ### Simple inference walk through
 

@@ -1,5 +1,7 @@
 ---
 title: Analyze a frame with Frame Advisor
+description: Learn how to capture frame data from Android applications and analyze performance inefficiencies using Frame Advisor in Arm Performance Studio.
+
 
 minutes_to_complete: 10
 

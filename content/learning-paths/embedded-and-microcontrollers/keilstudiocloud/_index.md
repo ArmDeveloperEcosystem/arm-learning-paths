@@ -27,7 +27,6 @@ operatingsystems:
     - Baremetal
     - RTOS
 tools_software_languages:
-    - Keil Studio Cloud
     - Arm Compiler for Embedded
     - Arm Virtual Hardware
     - CMSIS

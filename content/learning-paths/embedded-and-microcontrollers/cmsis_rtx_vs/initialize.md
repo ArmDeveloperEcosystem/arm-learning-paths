@@ -54,6 +54,6 @@ void thread(void *);
 ```
 The argument for this function is provided as the second parameter of the [osThreadNew()](https://arm-software.github.io/CMSIS_6/latest/RTOS2/group__CMSIS__RTOS__ThreadMgmt.html#ga48d68b8666d99d28fa646ee1d2182b8f) function. Use `NULL` if no argument to pass.
 
-In the example above, `app_main` is used as the main application thread, but this naming is arbitrary. From here, you will spawn all other threads in the RTOS.
+In the example above, `app_main` is used as the main application thread, but this naming is arbitrary. From here, you'll spawn all other threads in the RTOS.
 
 {{% notice %}} Tip: Naming the main application thread is flexible. Choose a name that clearly reflects its function. {{% /notice %}}

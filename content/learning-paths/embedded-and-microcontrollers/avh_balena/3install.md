@@ -8,31 +8,31 @@ layout: learningpathall
 
 ## Create a new device
 
-To create a new device, you need a user account for [Arm Virtual Hardware (AVH)](https://app.avh.arm.com/). If you don't have an account, you can create one using the `Create an Arm account` link below the `LOGIN` button. If you create a new account, you will be automatically enrolled in a free 30-day trial. 
+To create a new device, you need a user account for [Arm Virtual Hardware (AVH)](https://app.avh.arm.com/). If you don't have an account, you can create one using the `Create an Arm account` link below the `LOGIN` button. If you create a new account, you'll be automatically enrolled in a free 30-day trial. 
 
-From the AVH dashboard, click on the `Create Device` button. Select Raspberry Pi 4 from the list of devices. 
+From the AVH dashboard, click on the `Create Device` button. Select Raspberry Pi 4 from the list of devices.
 
-On the next screen you will be asked to configure your device by choosing the firmware to use. 
+On the next screen you'll be asked to configure your device by choosing the firmware to use.
 
-Use the `Upload your own firmwware` on the right side to drag or browse for the file  `balenaos_rpi4b.zip`. 
+Use the `Upload your own firmwware` on the right side to drag or browse for the file  `balenaos_rpi4b.zip`.
 
-![upload custom firmware screen](upload_firmware.webp)
+![AVH firmware upload screen showing drag-and-drop area for uploading custom firmware file with Raspberry Pi 4 device selected#center](upload_firmware.webp "Upload custom firmware screen")
 
-Uploading the file takes some time. 
+Uploading the file takes some time.
 
 After the file is uploaded, click `NEXT`.
 
 The final step is to name the AVH device. Select your own name or use `balena-testing-device`.
 
-You do not need to set any advanced boot options.
+You don't need to set any advanced boot options.
 
-Wait for the device to be created. It is ready to use when you see the ready message:
+Wait for the device to be created. It's ready to use when you see the ready message:
 
-![device ready](device_ready.webp)
+![AVH console showing device status message indicating the Raspberry Pi 4 virtual device is ready and displaying boot completion logs#center](device_ready.webp "Device ready message")
 
 ## Verify your device is ready
 
-You now have access to the console and be are presented with a log in prompt. 
+You now have access to the console and are presented with a log in prompt. 
 
 Log in with the username `root`. If a password is required, use `balena`.
 
@@ -44,7 +44,7 @@ Verify `balena` available by running:
 balena version
 ```
 
-You will see output similar to:
+You'll see output similar to:
 
 ```output
 Client:
@@ -77,8 +77,8 @@ Server:
   GitCommit:        949e6fa-dirty
 ```
 
-Return to your Balena Cloud dashboard and refresh the `Devices` page. 
+Return to your Balena Cloud dashboard and refresh the `Devices` page.
 
-You will see your newly deployed device is registered and connected to your fleet. You are now ready to deploy applications to your device!
+You'll see your newly deployed device is registered and connected to your fleet. You're now ready to deploy applications to your device!
 
-![devices](balena_devices.png)
+![Balena Cloud dashboard showing the Devices page with one Raspberry Pi 4 device connected, online, and ready to receive application deployments in the AVH-Testing fleet#center](balena_devices.png "Connected device in Balena Cloud")

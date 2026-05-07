@@ -1,6 +1,8 @@
 ---
 title: Build native Windows on Arm applications with Python
 
+description: Learn how to build Python applications on Windows on Arm and leverage native Arm64 performance for platform-dependent packages.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for developers who are interested in building Python applications on Arm.

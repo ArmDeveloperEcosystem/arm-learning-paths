@@ -32,7 +32,7 @@ A number of submodules must also be cloned, which can be done with a provided sc
 ```
 Repeat on other Virtual Hardware instance. You can set up each instance in parallel.
 
-## Prepare Matter Development Environment
+## Prepare Matter development environment
 
 Configure the Matter development environment on each instance, which again can be done with a provided script(s):
 ```console
@@ -49,9 +49,9 @@ Full [documentation](https://github.com/project-chip/connectedhomeip/blob/master
 
 ## Build the examples
 
-You are now ready to build the examples.
+You're now ready to build the examples.
 
-In the first Virtual Hardware instance you shall build `chip-tool`, a Matter controller implementation that allows to commission a Matter device into the network and to communicate with it using Matter messages.
+In the first Virtual Hardware instance you'll build `chip-tool`, a Matter controller implementation that allows to commission a Matter device into the network and to communicate with it using Matter messages.
 ```console
 cd examples/chip-tool
 gn gen out/debug
@@ -59,7 +59,7 @@ ninja -C out/debug
 ```
 Full [documentation](https://github.com/project-chip/connectedhomeip/tree/master/examples/chip-tool) for `chip-tool` is provided in the repository.
 
-In the other instance you shall build the reference `lighting-app` for Linux, which will be controlled by the above `chip-tool`.
+In the other instance you'll build the reference `lighting-app` for Linux, which will be controlled by the above `chip-tool`.
 ```console
 cd examples/lighting-app/linux
 gn gen out/debug
@@ -75,11 +75,11 @@ In the `lighting-app` instance, run that application.
 ```console
 ./out/debug/chip-lighting-app
 ```
-The application will initialize, and you will see boot log echoed in the console. You will see in the log:
+The application will initialize, and you'll see the boot log echoed in the console. You'll see in the log:
 ```output
 [TIMESTAMP][INSTANCEID] CHIP:DL: PlatformBlueZInit init success
 ```
-Confirming it is ready to use (other messages in the log can be ignored).
+Confirming it's ready to use (other messages in the log can be ignored).
 
 Leave the `lighting-app` application running on this instance.
 
@@ -89,9 +89,9 @@ On the `chip-tool` instance, pair `chip-tool` with the `lighting-app` instance, 
 ```console
 ./out/debug/chip-tool pairing onnetwork-long 0x11 20202021 3840
 ```
-You will see a long stream of messages echoed in console of both instances. Wait for this command to complete and return.
+You'll see a long stream of messages echoed in the console of both instances. Wait for this command to complete and return.
 
-If you wish to confirm success, you can see this in the logs (you will need to scroll back).
+If you wish to confirm success, you can see this in the logs (you'll need to scroll back).
 
 In `chip-tool`, you will see:
 ```

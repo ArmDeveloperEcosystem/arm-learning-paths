@@ -1,5 +1,6 @@
 ---
 title: Build a Hands-Free Selfie Android Application with MediaPipe
+description: Learn how to build a hands-free selfie Android application using MediaPipe multimodal AI, Kotlin flows, CameraX, and MVVM architecture.
 
 minutes_to_complete: 120
 

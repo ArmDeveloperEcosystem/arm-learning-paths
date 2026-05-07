@@ -66,9 +66,9 @@ The L1 table defines permissions for each 16KB granule.
 
 Use the Arm Debugger MMU/MPU pane to observe these attributes:
 
-![0xA0000000 #center](_images/l1gpt_0xA.png)
+![Screenshot of Arm Debugger MMU/MPU pane showing L1 Granule Protection Table entries for memory region 0xA0000000, displaying Realm access permissions for 16KB granules#center](_images/l1gpt_0xA.png)
 
-![0x80000000 #center](_images/l1gpt_0x8.png)
+![Screenshot of Arm Debugger MMU/MPU pane showing L1 Granule Protection Table entries for memory region 0x80000000, displaying the protection attributes for this address range#center](_images/l1gpt_0x8.png)
 
 
 ### EL2
@@ -79,7 +79,7 @@ This table is located by the [Virtualization Translation Table Base Register (VT
 
 The example maps 0x5xxxxxxx to the Physical Address 0xBxxxxxxx.
 
-![0x50000000 #center](_images/l2gpt.png)
+![Screenshot of Arm Debugger MMU/MPU pane showing EL2 translation table mapping virtual address 0x5xxxxxxx to physical address 0xBxxxxxxx through the Intermediate Physical Address#center](_images/l2gpt.png)
 
 ### EL1 (and EL0)
 
@@ -146,11 +146,11 @@ Set a breakpoint on the STR instruction that writes to 0xFFFFFFFF00000100, which
 ```
 And run (F8) to there. Observe that the physical address (0xA0000100) requires secure access permissions:
 
-![0xA0000000 #center](_images/l1gpt_change.png)
+![Screenshot of Arm Debugger MMU/MPU pane showing L1 Granule Protection Table after modification, where the 0xA0000000 region now requires secure access permissions indicated by the 0x8 value#center](_images/l1gpt_change.png)
 
 However, the Realm (`0xFFFFFFFF00000100`) MMU is unchanged.
 
-![0xFFFFFFFF0000000 #center](_images/el1.png)
+![Screenshot of Arm Debugger MMU/MPU pane showing the Realm EL1 translation table for address 0xFFFFFFFF00000100, which remains unchanged despite the physical address protection change#center](_images/el1.png)
 
 Execute (F5) the STR instruction, and a memory exception correctly occurs, and the code branches to the vector table (at 0x200).
 

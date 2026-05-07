@@ -1,5 +1,6 @@
 ---
 title: Measure performance of ClickHouse on Arm servers
+description: Learn how to install ClickHouse on Arm-based cloud instances and measure database performance using ClickBench to determine appropriate instance configurations.
 
 minutes_to_complete: 45
 

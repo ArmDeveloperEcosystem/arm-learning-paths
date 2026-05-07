@@ -7,6 +7,7 @@ author: Jason Andrews
 multi_install: false
 multitool_install_part: true
 official_docs: https://gcc.gnu.org/onlinedocs/
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=GNU%20Toolchain%20%28GCC%29
 test_images:
 - ubuntu:latest
 - fedora:latest

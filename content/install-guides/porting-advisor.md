@@ -21,6 +21,7 @@ author: Jason Andrews
 
 ### Link to official documentation
 official_docs: https://github.com/aws/porting-advisor-for-graviton/
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=Porting%20Advisor
 
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.

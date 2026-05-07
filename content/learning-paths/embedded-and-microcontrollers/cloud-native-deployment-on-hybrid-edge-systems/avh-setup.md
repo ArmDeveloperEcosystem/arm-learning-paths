@@ -12,20 +12,20 @@ AVH offers a 30-day free trial to use.
 -	Create an account in [Arm Virtual Hardware](https://app.avh.arm.com/login)
 -	Once logged in, you should see a similar screen as shown in the image below. Click on **Create device**:
   
-![create device alt-text#center](avh_images/avh1.png "Figure 1. Create device")
+![Screenshot of the Arm Virtual Hardware dashboard showing the Create device button in the top right corner#center](avh_images/avh1.png "Arm Virtual Hardware dashboard with Create device button")
 - Next, click on **Default Project**:
   
-![select project alt-text#center](avh_images/avh2.png "Figure 2. Select project")
+![Screenshot showing the project selection screen with Default Project highlighted#center](avh_images/avh2.png "Project selection screen")
 - Select the **i.MX 8M Plus** device. The platform runs four Cortex-A53 processors:
 
-![Select the i.MX 8M Plus device alt-text#center](avh_images/avh3.png "Figure 3. Select device")
+![Screenshot of the device selection list with i.MX 8M Plus highlighted, showing it contains four Cortex-A53 processors and one Cortex-M7#center](avh_images/avh3.png "Device selection showing i.MX 8M Plus")
 
 - Select the Yocto Linux (full) (2.2.1) image and click **Select**:
   
-![Select the Yocto Linux (full) (2.2.1) alt-text#center](avh_images/avh4.png "Figure 4. Select the Yocto Linux (full) (2.2.1) image")
+![Screenshot of the firmware image selection showing Yocto Linux (full) version 2.2.1 selected#center](avh_images/avh4.png "Firmware image selection for Yocto Linux")
 - Click on **Create device** (note that this could take few minutes):
 
-![confirm create device alt-text#center](avh_images/avh5.png "Figure 5. Confirm create device")
+![Screenshot showing the device configuration summary with the Create device button at the bottom#center](avh_images/avh5.png "Device creation confirmation screen")
 
 -	A console to Linux running on the Cortex-A should appear. Use “root” to login.
 
@@ -33,7 +33,7 @@ AVH offers a 30-day free trial to use.
 ```bash
 ip addr
 ```
-![A running model alt-text#center](avh_images/avh6.png "Figure 6. A running model")
+![Screenshot of the AVH interface showing the running i.MX 8M Plus model with Linux console on the left and GUI display on the right#center](avh_images/avh6.png "Running AVH model with console and display")
 
 {{% notice Note %}}
 The GUI on the right side may not work. You can safely ignore the error you see in the picture above and continue with the learning path.
@@ -43,11 +43,11 @@ The GUI on the right side may not work. You can safely ignore the error you see 
 
 The **Connect** pane shows the different ways that you can connect to the simulated board. The IP address specified should be the same as that visible in the output of the `ip addr` command.
 
-![AVH connect interface alt-text#center](avh_images/avh7.png "Figure 7. AVH connect interface")
+![Screenshot of the AVH Connect pane displaying connection options including VPN configuration, Quick Connect with SSH commands, and the device IP address#center](avh_images/avh7.png "AVH Connect interface with connection options")
 
-**Quick Connect** lets you connect SSH to the AVH model without having to use a VPN configuration. Similarly, you can replace `ssh` for `scp` to copy files from and to the virtual device. In order to use Quick Connect, it is necessary to add your public key via the **Manage SSH keys here** link.
+**Quick Connect** lets you connect SSH to the AVH model without having to use a VPN configuration. Similarly, you can replace `ssh` for `scp` to copy files from and to the virtual device. In order to use Quick Connect, it's necessary to add your public key via the **Manage SSH keys here** link.
 
-![Generate SSH key alt-text#center](avh_images/avh8.png "Figure 8. Generate SSH key")
+![Screenshot showing the SSH key management interface where you can add or generate SSH keys for Quick Connect access#center](avh_images/avh8.png "SSH key management interface")
 
 To generate an SSH key, you can run the following command on your machine:
 ```bash

@@ -1,6 +1,8 @@
 ---
 title: Create IoT applications with Windows on Arm and AWS IoT Core
 
+description: Learn how to create Node.js IoT applications that stream sensor data from Windows on Arm devices to AWS IoT Core using MQTT.
+
 minutes_to_complete: 120
 
 who_is_this_for: This learning path is for developers who want to learn how to create IoT applications using Windows on Arm and AWS IoT Core.

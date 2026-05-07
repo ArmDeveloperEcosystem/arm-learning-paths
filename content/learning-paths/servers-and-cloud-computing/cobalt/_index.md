@@ -1,5 +1,6 @@
 ---
 title: Deploy a Cobalt 100 Virtual Machine on Azure
+description: Learn how to deploy an Arm-based Cobalt 100 virtual machine on Azure, connect via SSH, and configure network security group rules for external connectivity.
 
 minutes_to_complete: 10
 

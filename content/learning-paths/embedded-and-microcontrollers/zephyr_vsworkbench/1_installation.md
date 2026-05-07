@@ -81,7 +81,7 @@ Next, specify the directory where you want to install the SDK. Select **Import**
 If you see errors during import, check your internet connection and confirm you have at least 2 GB of free disk space. For more troubleshooting tips, review the extension's documentation or check the Visual Studio Code output panel.
 
 
-![Workbench for Zephyr Import Toolchain panel in Visual Studio Code. The panel displays options for selecting the toolchain family, SDK type, version, and target architectures. Visible text includes Import Toolchain, Zephyr SDK, Minimal, v0.17.0, v0.17.3, and arm. The interface is organized and user-friendly, with clearly labeled dropdown menus and buttons. The overall tone is instructional and welcoming, set within a modern code editor workspace. alt-text #center](images/import_toolchain.png "Workbench for Zephyr Import Toolchain panel")
+![Workbench for Zephyr Import Toolchain panel in Visual Studio Code showing dropdown menus for selecting toolchain family, SDK type, version, and target architectures including Zephyr SDK, Minimal, and arm options#center](images/import_toolchain.png "Workbench for Zephyr Import Toolchain panel")
 
 
 ## Initialize the Zephyr project workspace
@@ -94,7 +94,7 @@ Choose a target-specific template (such as STM32 or NXP) and select your Zephyr 
 
 Select **Import** to create and update the workspace.
 
-![Workbench for Zephyr Initialize Workspace panel in Visual Studio Code. The panel displays options for setting up a new West workspace, including fields for source location, template selection, Zephyr version, and workspace directory. Visible text includes Initialize Workspace, Minimal from template, https://github.com/zephyrproject-rtos/zephyr, STM32, NXP, v3.7.0, v4.1.0, and Import. The interface is organized and user-friendly, with dropdown menus and buttons clearly labeled. The overall tone is instructional and welcoming, set within a modern code editor workspace. alt-text#center](images/initialize_workspace.png "Workbench for Zephyr Initialize Workspace panel in Visual Studio Code.")
+![Workbench for Zephyr Initialize Workspace panel in Visual Studio Code showing fields for setting up a West workspace, including template selection from Minimal, STM32, and NXP options, with Zephyr version dropdown listing v3.7.0 and v4.1.0#center](images/initialize_workspace.png "Workbench for Zephyr Initialize Workspace panel in Visual Studio Code.")
    
 {{% notice Note %}}
 The workspace initialization downloads the Zephyr source code and dependencies. This process can take several minutes depending on your internet connection speed.

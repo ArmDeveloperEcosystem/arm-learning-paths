@@ -9,7 +9,7 @@ layout: "learningpathall"
 ---
 We saw in the last section that Keil MDK does not support semihosting.
 
-[CMSIS-View](https://arm-software.github.io/CMSIS_6/latest/View/index.html) provides [Event Recorder](https://arm-software.github.io/CMSIS-View/latest/evr.html) which can be used instead for the printf functionality. It is supported for both FVPs and real hardware.
+[CMSIS-View](https://arm-software.github.io/CMSIS_6/latest/View/index.html) provides [Event Recorder](https://arm-software.github.io/CMSIS-View/latest/evr.html) which can be used instead for the printf functionality. It's supported for both FVPs and real hardware.
 
 {{% notice  Arm Development Studio%}}
 Event Recorder and Component Viewer are not supported. This section can be ignored.
@@ -19,7 +19,7 @@ Event Recorder and Component Viewer are not supported. This section can be ignor
 
 Open the `Manage run-time environment` dialog, and enable `CMSIS-View` > `Event Recorder` (`DAP` variant).
 
-Enable `CMSIS-Compiler` > `STDOUT (API)`, and set to `Event recorder`. You will also need to enable `CMSIS-Compiler` > `Core`.
+Enable `CMSIS-Compiler` > `STDOUT (API)`, and set to `Event recorder`. You'll also need to enable `CMSIS-Compiler` > `Core`.
 
 Click `OK` to save.
 
@@ -87,13 +87,13 @@ Note that the RTX source contains many Event Recorder annotations.
 
 For ease of readability, click the `Filter` icon to hide these events. Ensure `STDIO` events are enabled.
 
-![Event Viewer filter #center](ev_filter.png)
+![Screenshot of the Event Viewer filter dialog showing event categories with STDIO enabled and RTX events disabled for easier readability#center](ev_filter.png "Event Viewer filter settings")
 
 Observe that printf output is in the form of the ASCII codes of the text output.
 
-![Event Viewer #center](ev_raw.png)
+![Screenshot of the Event Viewer showing STDIO events with printf output displayed as ASCII codes#center](ev_raw.png "Event Viewer showing ASCII output")
 
-For this view it is better to use [EventRecorder Data](https://www.keil.com/pack/doc/compiler/EventRecorder/html/group__EventRecorder__Data.html) rather than printf statements.
+For this view it's better to use [EventRecorder Data](https://www.keil.com/pack/doc/compiler/EventRecorder/html/group__EventRecorder__Data.html) rather than printf statements.
 
 
 ## EventRecorder Data
@@ -125,7 +125,7 @@ Use the filter to hide `STDIO` events, which shall remove the printf strings. En
 
 The thread number is output as the first `Value`:
 
-![Event Viewer #center](ev_data.png)
+![Screenshot of the Event Viewer displaying EventRecorder Data with thread numbers shown in the Value column#center](ev_data.png "Event Viewer showing thread data values")
 
 ## Component Viewer
 
@@ -156,8 +156,8 @@ Click `Debug` (`Ctrl+F5`), then `Run` (`F5`) to start the application.
 
 This file has now defined event `0x0`, and this is reflected in the filter view:
 
-![Event Viewer filter #center](ev_component.png)
+![Screenshot of the Event Viewer filter showing the custom EVR_Demo component with event 0x0 defined from the SCVD file#center](ev_component.png "Event Viewer filter with custom component")
 
 These events are now processed into meaningful messages in the Event Recorder viewer:
 
-![Event Viewer #center](ev_cv.png)
+![Screenshot of the Event Viewer displaying decoded messages from the Component Viewer showing goodbye from thread messages instead of raw data#center](ev_cv.png "Event Viewer with Component Viewer decoded messages")

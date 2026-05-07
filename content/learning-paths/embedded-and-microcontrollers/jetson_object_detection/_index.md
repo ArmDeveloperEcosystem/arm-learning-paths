@@ -1,6 +1,8 @@
 ---
 title: Get started with object detection using a Jetson Orin Nano
 
+description: Learn how to set up a Jetson Orin Nano with a MIPI CSI-2 camera and perform real-time object detection from live video and image files using DetectNet and TensorRT.
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for developers interested in integrating object detection into their applications.

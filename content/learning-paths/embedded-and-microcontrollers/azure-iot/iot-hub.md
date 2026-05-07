@@ -30,14 +30,14 @@ Start by creating an Azure IoT Hub by following these steps:
 
 2. Create a new Azure IoT Hub resource:
 * On the Azure portal home page, select **Create a resource** at the top left as shown below:
-![img1 alt-text#center](figures/01.png "Create a resource on the Azure IoT Hub portal.")
+![Azure Portal home page showing the Create a resource button in the top left corner of the navigation menu#center](figures/01.png "Create a resource on the Azure IoT Hub portal")
 
 * In the **Search resources, services, and docs** search box, type “iot hub” and press **Enter**.
 * From the search results, select the IoT Hub icon, as shown below:
-![img2 alt-text#center](figures/02.webp "Select IoT Hub icon.")
+![Search results page displaying the IoT Hub service icon among other Azure services#center](figures/02.webp "Select IoT Hub icon")
 
 3. Click the **Create** button:
-![img3 alt-text#center](figures/03.png "Select the Create button.")
+![IoT Hub service page showing the Create button to begin provisioning a new IoT Hub resource#center](figures/03.png "Select the Create button")
 
 4. Configure the **Basics** IoT Hub settings:
 * Subscription: select your Azure subscription.
@@ -45,7 +45,7 @@ Start by creating an Azure IoT Hub by following these steps:
 * IoT hub name: enter a unique name for your IoT Hub. This must be globally unique; for example, "iot-hub-arm-64".
 * Region: select a region closest to your location or users.
 * Tier: "Free". This updates the daily message limit accordingly:
-![img4 alt-text#center](figures/04.png "Configure the IoT Hub settings.")
+![IoT Hub creation form displaying configuration fields including subscription, resource group, region, hub name, and pricing tier with Free tier selected#center](figures/04.png "Configure the IoT Hub settings")
 
 5. Click **Next: Networking**.
 6. Configure Networking:
@@ -63,7 +63,7 @@ Start by creating an Azure IoT Hub by following these steps:
 * Click **Go to resource** to open the newly-created Azure IoT Hub.
 12. Check IoT Hub Overview and Details:
 * From the IoT Hub overview page, verify important details such as the hub name, region, status, and hostname, which you’ll use to connect devices:
-![img5 alt-text#center](figures/05.webp "Verify  IoT Hub overview")
+![IoT Hub overview page showing key details including hub name, resource group, status Active, location, subscription, and the hostname used for device connections#center](figures/05.webp "Verify IoT Hub overview")
 
 ## Next steps
 Now that your Azure IoT Hub is ready, you can proceed to register and configure your IoT devices. In the next step, you’ll learn how to register an Arm64-based IoT device and start streaming data using Python and Azure IoT SDK.

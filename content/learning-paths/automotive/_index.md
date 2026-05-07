@@ -7,6 +7,10 @@ key_ip:
 - Cortex-A
 - Cortex-R
 maintopic: true
+pinned_learning_paths:
+- openadkit1_container
+- learning-paths/cross-platform/simd-loops
+- openadkit2_safetyisolation
 subtitle: Build smarter, real-time vehicle software on reliable Arm platforms.
 title: Automotive
 weight: 4
@@ -34,7 +38,34 @@ tools_software_languages_filter:
 - Raspberry Pi: 1
 - ROS 2: 3
 - Rust: 1
+- SME2: 1
 - Tinkerblox: 1
 - topdown-tool: 1
 - Zenoh: 1
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
+# auto-generated padding to avoid Hugo YAML alias limit
 ---

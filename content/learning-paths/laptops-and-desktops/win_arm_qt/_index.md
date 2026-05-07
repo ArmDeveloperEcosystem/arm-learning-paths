@@ -1,6 +1,8 @@
 ---
 title: Build and run a native Windows on Arm Qt application 
 
+description: Learn how to build and run Qt-based desktop applications on Windows on Arm and investigate native Arm64 performance improvements.
+
 minutes_to_complete: 20
 
 who_is_this_for: This is an introductory topic for software developers who want to use the native performance of the Qt framework for building desktop applications on Windows on Arm (WoA).

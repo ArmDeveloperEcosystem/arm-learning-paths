@@ -6,6 +6,8 @@ minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for DevOps engineers who want to build CI/CD pipelines on Arm-based infrastructure using GitLab-hosted runners.
 
+description: Learn how to build GitLab CI/CD pipelines using GitLab-hosted Arm64 runners to containerize C applications, store images in GitLab Container Registry, and deploy on Arm infrastructure.
+
 learning_objectives: 
     - Create a GitLab project with CI/CD configuration
     - Configure pipeline stages to use Arm64 runners

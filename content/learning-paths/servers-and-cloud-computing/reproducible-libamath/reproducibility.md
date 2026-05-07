@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## What is reproducibility?
 
-In numerical software, reproducibility (also referred to as determinism) means you get the exact same floating-point bits for the same inputs, even if you run a different implementation (scalar vs NEON vs SVE).
+In numerical software, reproducibility (also referred to as determinism) means you get the exact same floating-point bits for the same inputs, even if you run a different implementation (scalar vs Neon vs SVE).
 
 In pure mathematics, two functions `𝑓(𝑥)` and `𝑔(𝑥)` are equivalent if, for all `𝑥` in their domain `𝑓(𝑥) = 𝑔(𝑥)`.
 
@@ -33,9 +33,9 @@ Reproducibility can be defined at different levels, depending on how similar or 
   Reproducibility across different processor architectures, such as x86 and AArch64.
 * **Cross-vector-extension reproducibility**
 
-  Reproducibility across different vector execution paths on the same architecture, such as scalar, NEON, and SVE on AArch64.
+  Reproducibility across different vector execution paths on the same architecture, such as scalar, Neon, and SVE on AArch64.
 
-This Learning Path focuses on cross-vector-extension reproducibility (scalar, NEON, SVE on AArch64).
+This Learning Path focuses on cross-vector-extension reproducibility (scalar, Neon, SVE on AArch64).
 
 Now that you understand what numerical reproducibility means and the different levels it can operate at, the next section covers real-world applications where this property is critical.
 

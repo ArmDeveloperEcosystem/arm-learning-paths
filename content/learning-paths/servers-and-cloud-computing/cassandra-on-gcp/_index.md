@@ -1,5 +1,6 @@
 ---
 title: Deploy Cassandra on a Google Axion C4A virtual machine
+description: Learn how to install and configure Apache Cassandra on Google Cloud Axion C4A Arm64 instances and benchmark read/write performance using cassandra-stress.
 
 minutes_to_complete: 30
 

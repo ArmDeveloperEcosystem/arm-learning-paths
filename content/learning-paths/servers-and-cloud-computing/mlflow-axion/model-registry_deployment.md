@@ -1,0 +1,165 @@
+---
+title: Deploy MLflow on GCP SUSE Arm64 (Model Registry & Serving)
+weight: 6
+
+### FIXED, DO NOT MODIFY
+layout: learningpathall
+---
+
+## Model Registry and Deployment
+
+This section covers model versioning, alias assignment, and serving the model as an API.
+
+
+## Terminal usage
+
+This section continues with the same two terminals from the previous step:
+
+- **Terminal A** → Run scripts, start model serving, and test the API
+- **Terminal B** → MLflow tracking server (keep this running)
+
+## Set tracking URI
+
+In **Terminal A**, run:
+
+```bash
+export MLFLOW_TRACKING_URI=http://127.0.0.1:5000
+```
+
+This tells the MLflow client which tracking server to connect to. Without it, the client defaults to a local directory and won't find the models registered on your server.
+
+## Create alias script
+
+```bash
+cd ~/mlflow-learning-path/demo
+```
+
+Create a script to select the best model automatically:
+
+```bash
+cat > set_prod.py <<'EOF'
+import os
+from mlflow import MlflowClient
+
+tracking_uri = os.environ.get("MLFLOW_TRACKING_URI", "http://127.0.0.1:5000")
+client = MlflowClient(tracking_uri=tracking_uri)
+
+versions = client.search_model_versions("name='iris-model'")
+
+best_v = None
+best_acc = -1
+
+for v in versions:
+    run = client.get_run(v.run_id)
+    acc = run.data.metrics.get("accuracy", -1)
+    if acc > best_acc:
+        best_acc = acc
+        best_v = v.version
+
+client.set_registered_model_alias("iris-model", "production", best_v)
+print("Production version:", best_v)
+EOF
+```
+
+## Assign production model
+
+Run the script:
+
+```bash
+python set_prod.py
+```
+The output is similar to:
+
+```output
+Production version: 1
+```
+**What this does:**
+
+This script queries all registered versions of `iris-model`, finds the version with the highest `accuracy` metric, and assigns it the `production` alias. The alias is how `mlflow models serve` identifies which model version to load.
+
+## Serve model
+
+With Terminal B still running the MLflow tracking server, use Terminal A to start the model serving API. `mlflow models serve` loads the aliased model from the registry and starts a uvicorn HTTP server that exposes a `/invocations` endpoint for inference.
+
+In **Terminal A**, navigate to the project directory and set the tracking URI:
+
+```bash
+cd ~/mlflow-learning-path
+export MLFLOW_TRACKING_URI=http://127.0.0.1:5000
+```
+
+Start the model server in the background using `&` so Terminal A stays free for testing:
+
+```bash
+mlflow models serve \
+  -m "models:/iris-model@production" \
+  -p 6000 \
+  --no-conda &
+```
+
+- `-m "models:/iris-model@production"` — loads the model version with the `production` alias from the registry
+- `-p 6000` — serves on port 6000
+- `--no-conda` — uses the active virtual environment instead of creating a new conda environment
+
+The output is similar to:
+
+```output
+2026/05/04 13:42:12 INFO mlflow.models.flavor_backend_registry: Selected backend for flavor 'python_function'
+2026/05/04 13:42:12 INFO mlflow.pyfunc.backend: === Running command 'exec uvicorn --host 127.0.0.1 --port 6000 --workers 1 mlflow.pyfunc.scoring_server.app:app'
+INFO:     Started server process [4527]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:6000 (Press CTRL+C to quit)
+```
+## View registered models
+
+In the MLflow UI at `http://<VM-IP>:5000`, select the **Models** tab. You should see the `iris-model` entry with multiple registered versions and the `production` alias assigned to the best-performing one.
+
+
+![MLflow Model Registry showing iris-model with multiple registered versions and the production alias assigned to the best run#center](images/mlflow-model.png "MLflow Model Registry with versions")
+
+## Test the API from Terminal A
+
+The `/invocations` endpoint accepts data in the `dataframe_records` format — a list of JSON objects where each object represents one row, with column names as keys. The model returns a prediction for each row. Send a single Iris flower measurement to test inference:
+
+```bash
+curl -X POST http://127.0.0.1:6000/invocations \
+  -H "Content-Type: application/json" \
+  -d '{
+    "dataframe_records": [
+      {
+        "sepal length (cm)": 5.1,
+        "sepal width (cm)": 3.5,
+        "petal length (cm)": 1.4,
+        "petal width (cm)": 0.2
+      }
+    ]
+  }'
+```
+
+The expected output is:
+
+```output
+INFO:     127.0.0.1:41158 - "POST /invocations HTTP/1.1" 200 OK
+{"predictions": [0]}
+```
+
+The prediction `0` corresponds to Iris setosa, which is the correct class for these measurements. The Iris dataset has three classes: `0` = setosa, `1` = versicolor, `2` = virginica.
+
+## What you've learned
+
+You have successfully:
+
+- Selected the best model from experiments
+- Assigned a production alias
+- Deployed the model as an API
+- Performed inference using curl
+
+## Summary
+
+You have completed the full MLflow lifecycle on a Google Cloud C4A Axion Arm VM running SUSE Linux.
+
+Starting from a freshly provisioned Arm-based VM, you installed MLflow and its dependencies in an isolated Python virtual environment, then started the MLflow tracking server backed by a local SQLite database. You trained a logistic regression model on the Iris dataset across three hyperparameter configurations, with each run automatically logged to the MLflow Tracking UI and each model version registered in the Model Registry.
+
+In this final section, you used the Model Registry to select the best-performing version by accuracy, assigned it a `production` alias, and served it as a REST API using `mlflow models serve`. You then validated the end-to-end workflow by sending a live inference request using curl and interpreting the prediction.
+

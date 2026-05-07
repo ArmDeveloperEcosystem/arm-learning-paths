@@ -1,6 +1,8 @@
 ---
 title: Get started with Laptops and Desktops
 
+description: Learn where the Arm architecture is used in desktop and laptop computers and find hardware for software development on Arm platforms.
+
 minutes_to_complete: 10
 
 who_is_this_for: This is an introductory topic for developers working on laptops and desktops and new to the Arm architecture.

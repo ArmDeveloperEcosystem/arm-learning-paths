@@ -12,6 +12,7 @@ author: Jason Andrews
 multi_install: false
 multitool_install_part: false
 official_docs: https://developer.hashicorp.com/terraform/docs
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=terraform
 test_images:
 - ubuntu:latest
 test_link: false

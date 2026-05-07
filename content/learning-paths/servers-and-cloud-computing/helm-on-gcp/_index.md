@@ -1,5 +1,6 @@
 ---
 title: Install and validate Helm on Google Cloud C4A Arm-based VMs
+description: Learn how to install Helm on Google Cloud Axion C4A SUSE VMs and deploy applications like NGINX, PostgreSQL, and Redis using Helm charts.
 
 minutes_to_complete: 60
 

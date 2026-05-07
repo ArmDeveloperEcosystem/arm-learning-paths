@@ -1,6 +1,8 @@
 ---
 title: Learn how to use the Visual Studio extension for WindowsPerf
 
+description: Learn how to install and use the WindowsPerf Visual Studio extension to generate counting and sampling reports and analyze performance data in Windows Performance Analyzer.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for software developers using Visual Studio on Windows on Arm who want to integrate WindowsPerf into their development flow.

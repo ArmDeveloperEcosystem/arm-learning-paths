@@ -1,7 +1,6 @@
 ---
 title: Profile ONNX model performance with SME2 using KleidiAI and ONNX Runtime
-
-
+description: Learn how to build ONNX Runtime with KleidiAI and SME2 support for Android and profile ONNX model performance to compare acceleration improvements.
 
 minutes_to_complete: 40
 

@@ -1,5 +1,7 @@
 ---
-title: Deploy IoT apps using Balena Cloud and Arm Virtual Hardware
+title: Deploy IoT applications with Balena Cloud and Arm Virtual Hardware
+
+description: Learn how to create a custom Balena OS image, run it on Arm Virtual Hardware, and deploy IoT applications to a virtual Raspberry Pi 4 device.
 
 minutes_to_complete: 30
 

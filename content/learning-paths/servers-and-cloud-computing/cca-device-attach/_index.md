@@ -1,5 +1,6 @@
 ---
 title: Explore secure device attach in Arm CCA Realms
+description: Learn how Arm CCA Realms interact with I/O devices using VirtIO paravirtualization, SWIOTLB bounce buffers, and PCIe-TDISP secure device attach mechanisms with attestation.
 
 minutes_to_complete: 90
 

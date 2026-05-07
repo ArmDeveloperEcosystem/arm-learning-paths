@@ -3,16 +3,18 @@ title: "Migrate x86-64 SIMD to Arm64"
 
 minutes_to_complete: 30
 
+description: Learn how to migrate x86-64 SIMD code to Arm64 by mapping Intel SSE/AVX to Arm Neon, SVE, and SME, with code examples and migration strategies using autovectorization or intrinsics.
+
 who_is_this_for: This is an advanced topic for developers migrating vectorized (SIMD) code from x86-64 to Arm64.
 
 learning_objectives:
-     - Identify how Arm vector extensions including NEON, Scalable Vector Extension (SVE), and Scalable Matrix Extension (SME) map to vector extensions from other architectures
+     - Identify how Arm vector extensions including Neon, Scalable Vector Extension (SVE), and Scalable Matrix Extension (SME) map to vector extensions from other architectures
      - Plan a migration strategy using autovectorization, intrinsics, or library substitution
    
 
 prerequisites:
     - Familiarity with vector extensions, SIMD programming, and compiler intrinsics
-    - Access to Linux systems with NEON and SVE support
+    - Access to Linux systems with Neon and SVE support
 
 author:
     - Jason Andrews

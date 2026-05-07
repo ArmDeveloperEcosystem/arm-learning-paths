@@ -1,5 +1,6 @@
 ---
 title: LLM fine-tuning for web and mobile applications
+description: Learn how to fine-tune large language models using parameter-efficient techniques and deploy them to mobile devices using ExecuTorch on Arm processors.
 
 draft: true
 cascade:

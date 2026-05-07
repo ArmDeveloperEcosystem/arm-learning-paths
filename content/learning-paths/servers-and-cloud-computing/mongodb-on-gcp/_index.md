@@ -5,6 +5,8 @@ minutes_to_complete: 15
 
 who_is_this_for: This introductory topic is for software developers who want to migrate MongoDB workloads from x86_64 to Arm-based platforms, specifically on Google Axion-based C4A virtual machines.
 
+description: Deploy MongoDB on Google Cloud Axion C4A virtual machines and benchmark database performance with Yahoo Cloud Serving Benchmark (YCSB).
+
 learning_objectives:
   - Create an Arm virtual machine on Google Cloud (C4A Axion family)
   - Install and run MongoDB on the Arm-based C4A instance

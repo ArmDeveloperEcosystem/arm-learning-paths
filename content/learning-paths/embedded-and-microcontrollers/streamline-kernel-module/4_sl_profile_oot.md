@@ -23,7 +23,7 @@ For step-by-step guidance on setting up Streamline on your host machine, follow 
 
 ## Push Gator to the target and make a capture
 
-Once Streamline is installed on the host machine, you can capture trace data of our Linux kernel module. On Linux, the binaries will be installed where you extracted the package.
+Once Streamline is installed on the host machine, you can capture trace data of the Linux kernel module. On Linux, the binaries will be installed where you extracted the package.
 
 To communicate with the target device, Streamline uses a background service called gatord. This daemon must be running on the target before you can capture trace data. Streamline provides two pre-built gatord binaries in the installation directory: one for Armv7 (AArch32) and one for Armv8 or later (AArch64) systems.
 
@@ -77,13 +77,11 @@ Start the capture and enter a name and location for the capture file. Streamline
 
 ## Analyze the capture and inspect the code
 
-Once the capture is stopped, Streamline automatically analyzes the collected data and provides insights to help you identify performance issues and bottlenecks. This section describes how to view these insights, starting with locating the functions related to our kernel module and narrowing down to the exact lines of code that may be responsible for the performance problems.
+Once the capture is stopped, Streamline automatically analyzes the collected data and provides insights to help you identify performance issues and bottlenecks. This section describes how to view these insights, starting with locating the functions related to the kernel module and narrowing down to the exact lines of code that may be responsible for the performance problems.
 
 Open the **Functions** tab. In the counters list, select one of the counters you enabled earlier in the **counter configuration** dialog, as shown:
-<!--
-Alt text: Screenshot of the Streamline profiling tool interface showing the process of selecting a data source for counters. The main panel displays a list of available data sources with one highlighted, and a sidebar provides navigation options. The environment is a typical software profiling application window with a neutral, professional tone. Visible text includes Counter selection and labels for different data sources.
--->
-![Counter selection alt-text#center](./images/img07_select_datasource.png "Select data source for counters")
+
+![Streamline counter selection interface showing a dropdown list of available data sources for performance counters. The main panel displays counter options with one highlighted for selection. The interface uses neutral technical design with labeled sections for Counter selection and data source names.#center](./images/img07_select_datasource.png "Select data source for counters")
 
 In the **Functions** tab, look for the function `char_dev_cache_traverse()`. You'll see that it has the highest L1 Cache refill rate, which is expected for this example. Check the **Image** column on the right. This should show your module file name, `mychardrv.ko`. This confirms that Streamline is capturing performance data for your kernel module.
 

@@ -156,11 +156,11 @@ ALL      ALL              2.52     8.37     0.00     0.00     100.00   26566
 ```
 
 Here is an interpretation of the values:
-- NEON: 7–15% for SIMD integer and floating-point operations
+- Neon: 7–15% for SIMD integer and floating-point operations
 - FPARMv8: 2-5% for scalar FP operations such as activation and normalization
 - SVE/SVE2: 0%, the kernel does not issue SVE instructions
 
-This confirms that the Grace CPU performs quantized inference primarily using NEON.
+This confirms that the Grace CPU performs quantized inference primarily using Neon.
 
 ## Why are SVE and SVE2 inactive?
 
@@ -201,7 +201,7 @@ Throughout this Learning Path, you have learned how to:
 - Download and run quantized TinyLlama models for efficient testing and benchmarking
 - Monitor GPU utilization and performance using tools like nvtop
 - Analyze CPU instruction mix with Process Watch to understand how Armv9 vector instructions are used during inference
-- Interpret the impact of NEON, SVE, and SVE2 on AI workloads, and recognize current kernel limitations for vector execution
+- Interpret the impact of Neon, SVE, and SVE2 on AI workloads, and recognize current kernel limitations for vector execution
 
 By completing these steps, you are now equipped to:
 

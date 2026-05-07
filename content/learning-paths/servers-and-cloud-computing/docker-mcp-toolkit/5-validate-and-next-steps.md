@@ -105,8 +105,8 @@ Not all AI models produce equal results for migration tasks. While the Arm MCP S
 
 - Always use a current foundational model for best results.
 - Test any performance predictions the model makes against actual benchmarks.
-- Review the generated NEON code for correctness, especially horizontal reductions and lane indexing.
-- NEON lane indices must be compile-time constants, not variables.
+- Review the generated Neon code for correctness, especially horizontal reductions and lane indexing.
+- Neon lane indices must be compile-time constants, not variables.
 
 ## Explore further
 

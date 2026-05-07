@@ -30,7 +30,7 @@ layout: "learningpathall"
    ```c
    #include "EventRecorder.h"
    ```
-10. In the `main()` function (near line 39), just after `SystemCoreClockUpdate();`, add these lines:
+10. In the `main()` function (near line 39), after `SystemCoreClockUpdate();`, add these lines:
     ```c
     EventRecorderInitialize(EventRecordAll,1);
     EventRecorderStart();
@@ -44,7 +44,7 @@ Now, create a global variable named `counter` whose value will be printed on **D
    ```c
    uint32_t counter = 0;
    ```
-2. Add these two lines just after the `Delay(1000)` statement at line 46:  
+2. Add these two lines after the `Delay(1000)` statement at line 46:  
    ```c
    counter++;
    if (counter > 0x0F) counter = 0;
@@ -53,7 +53,7 @@ Now, create a global variable named `counter` whose value will be printed on **D
    ```c
    #include "stdio.h"
    ```
-2. Near line 48, just after the statement `if (counter > 0x0F…`), add:
+2. Near line 48, after the statement `if (counter > 0x0F…`), add:
    ```c
    printf("Hello %d\n", counter);
    ```

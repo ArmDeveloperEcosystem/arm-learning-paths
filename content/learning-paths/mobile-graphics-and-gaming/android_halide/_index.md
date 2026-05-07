@@ -1,5 +1,6 @@
 ---
-title: Build high-performance image processing with Halide on Android
+title: Optimize image processing on Android using Halide
+description: Learn how to build real-time image processing pipelines using Halide on Android, combining operations for improved performance in Kotlin applications.
 
 minutes_to_complete: 180
 

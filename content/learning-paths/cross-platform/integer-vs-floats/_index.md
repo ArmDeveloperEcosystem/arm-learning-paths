@@ -5,6 +5,8 @@ minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for C/C++ developers who are interested in learning about the intricacies of conversions between floating-point numbers and integers.
 
+description: Learn how to identify and fix potential problems with integer and floating-point conversions in C/C++ code on Arm, including explicit conversions, implicit conversions, and type demotion issues.
+
 learning_objectives: 
     - Learn how to identify and fix potential problems in integer/float conversions in C/C++ on Arm
 

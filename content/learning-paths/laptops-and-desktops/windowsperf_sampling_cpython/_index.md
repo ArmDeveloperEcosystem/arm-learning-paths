@@ -1,6 +1,8 @@
 ---
 title: Sampling CPython with WindowsPerf
 
+description: Learn how to use WindowsPerf for performance sampling on Windows on Arm, build CPython from sources, and analyze native workload performance.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for developers keen to understand sampling and who are new to the Arm architecture.

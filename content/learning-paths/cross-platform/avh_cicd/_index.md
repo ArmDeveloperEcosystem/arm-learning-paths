@@ -1,6 +1,8 @@
 ---
 title: Integrate Arm Virtual Hardware into CI/CD workflow 1
 
+description: Learn how to integrate Arm Virtual Hardware into a GitHub Actions CI/CD workflow for automated embedded software testing and validation.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for embedded software developers new to Arm Virtual Hardware and its features.

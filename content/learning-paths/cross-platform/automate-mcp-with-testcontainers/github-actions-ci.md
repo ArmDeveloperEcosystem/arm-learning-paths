@@ -1,6 +1,6 @@
 ---
 title: Configure GitHub Actions for CI/CD
-weight: 5
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -8,12 +8,12 @@ layout: learningpathall
 
 ## Why use GitHub Actions for MCP testing?
 
-GitHub Actions provide automated CI/CD directly in your repository. For MCP server testing, it offers:
+GitHub Actions provides automated CI/CD directly in your repository. For MCP server testing, it offers:
 
-- **Arm runner support**: GitHub provides native Arm64 runners for building and testing.
-- **Docker integration**: Runners come with Docker pre-installed.
-- **Automatic triggers**: Tests run on every push and pull request.
-- **Parallel execution**: Multiple jobs can run simultaneously.
+- **Arm runner support**: GitHub provides native Arm64 runners for building and testing
+- **Docker integration**: Runners come with Docker pre-installed
+- **Automatic triggers**: Tests run on every push and pull request
+- **Parallel execution**: Multiple jobs can run simultaneously
 
 ## Create the workflow file
 
@@ -143,7 +143,7 @@ This runs the integration tests in parallel on both architectures.
 
 ## Monitor workflow runs
 
-After pushing the workflow file, navigate to the Actions tab in your GitHub repository. Each workflow run shows:
+After you push the workflow file, navigate to the Actions tab in your GitHub repository. Each workflow run shows:
 
 - Build steps and their status
 - Execution time for each step
@@ -154,7 +154,7 @@ After pushing the workflow file, navigate to the Actions tab in your GitHub repo
 
 If the workflow fails, check these common causes:
 
-**Docker build timeout**: The initial image build can take 10+ minutes. GitHub Actions has a default timeout of 360 minutes per job, but individual steps might need explicit timeouts:
+**Docker build timeout**: The initial image build can take more than 10 minutes. GitHub Actions has a default timeout of 360 minutes per job, but individual steps might need explicit timeouts:
 
 ```yaml
 - name: Build MCP Docker image
@@ -177,21 +177,11 @@ If the workflow fails, check these common causes:
 
 ## What you've accomplished and what's next
 
-In this section:
-- You created a GitHub Actions workflow for automated testing.
-- You learned how to use Arm64 runners for native execution.
-- You added test artifacts and multi-platform support.
-- You explored troubleshooting techniques for CI failures.
-
-You now have a complete CI/CD pipeline that automatically tests your MCP server on every code change. 
-
-## Summary
-
 In this Learning Path, you learned how to:
 
-- Set up testcontainers for Docker-based integration testing.
-- Write pytest tests that communicate with MCP servers over stdio transport.
-- Parse MCP JSON-RPC responses and validate tool outputs.
-- Configure GitHub Actions with Arm64 runners for automated testing.
+- Set up Testcontainers for Docker-based integration testing
+- Write pytest tests that communicate with MCP servers over stdio transport
+- Parse MCP JSON-RPC responses and validate tool outputs
+- Configure GitHub Actions with Arm64 runners for automated testing
 
 These techniques apply to any MCP server implementation, not just the Arm MCP Server. Use this foundation to build comprehensive test suites that ensure your MCP tools work correctly across updates and deployments.

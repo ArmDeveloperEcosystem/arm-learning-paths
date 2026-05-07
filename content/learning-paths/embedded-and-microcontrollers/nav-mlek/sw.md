@@ -106,7 +106,7 @@ The [Micro speech example for TensorFlow Lite](https://github.com/ARM-software/A
  
 Refer to the information included in the [AVH documentation](https://arm-software.github.io/AVH/main/examples/html/MicroSpeech.html) for more details. 
 
-You can run micro speech is just a few steps on the AVH AMI:
+You can run micro speech in a few steps on the AVH AMI:
 
 ```console
 git clone https://github.com/ARM-software/AVH-TFLmicrospeech.git

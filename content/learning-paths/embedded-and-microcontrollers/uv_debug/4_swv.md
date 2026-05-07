@@ -22,13 +22,13 @@ layout: "learningpathall"
 1. Global variables.
 2. Static variables.
 3. Structures.
-4. Can see Peripheral registers – just read or write to them. The same is true for memory locations.
+4. Can see Peripheral registers – read or write to them. The same is true for memory locations.
 5. Can see executed instructions. SWV only samples them. Use ETM to capture all instructions executed.
 6. CPU counters. Folded instructions, extra cycles and interrupt overhead.
 
 #### What types of data can the Serial Wire Viewer not display?
 
-1. Can’t see local variables (just make them global or static).
+1. Can't see local variables (make them global or static).
 2. Can’t see register operations. PC Samples records some of the instructions but not the data values.
 3. SWV can’t see DMA transfers. This is because by definition these transfers bypass the CPU. SWV and ETM can only see CPU actions.
 

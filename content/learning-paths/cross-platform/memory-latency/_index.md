@@ -1,5 +1,6 @@
 ---
 title: Memory latency for application software developers
+description: Learn how to reduce memory latency impact in applications using cache alignment and prefetching techniques on Arm processors for improved performance.
 minutes_to_complete: 40
 
 who_is_this_for: This is an introductory topic for Arm developers who want to learn about memory latency and cache usage in application programming. 

@@ -39,7 +39,7 @@ el1_entry:
 
 ## Modify EL3 initialization
 
-You will also need to modify the `EL3` initialization from before:
+You'll also need to modify the `EL3` initialization from before:
 * Create an `EL3` stack (as `__main` will now be called in `EL1`)
 * Disable timer exceptions at `EL3`
 * Execute any privileged code (`gicInit`)

@@ -12,43 +12,43 @@ In this section you will generate the bitstream for this project and write a C p
 
 1. Under the “Sources” tab on the left, expand the “Design Sources” folder, right-click the design1.bd file, choose the “Create HDL Wrapper” and select all default options. 
 
-    ![Creating HDL Wrapper](images/picture23.png) 
+    ![Screenshot of Vivado Sources panel showing the right-click context menu on design1.bd with Create HDL Wrapper option highlighted, which generates the top-level Verilog wrapper needed for synthesis](images/picture23.png) 
 
     *Figure 3.1. Creating HDL Wrapper*
 
 2. Save any other changes and click “Generate Bitstream” on the left and click “Ok” for all pop-ups. This process takes some time. Once the process is done, select “Open Hardware Manager”:
 
-    ![Generating bitstream and uploading to board](images/picture24.png) 
+    ![Screenshot of Vivado Bitstream Generation Completed dialog showing the Open Hardware Manager option selected, which you use to program the FPGA with the generated bitstream file](images/picture24.png) 
 
     *Figure 3.2. Generating bitstream and uploading to board*
 
 3. Connect the board and make sure the jumper (JP3) above the red LED on the Zybo board is in JTAG mode. Then, in Vivado, click “Auto Connect” in the Hardware Manager as shown below:
 
-    ![Connecting the board](images/picture25.png) 
+    ![Screenshot of Vivado Hardware Manager showing the Auto Connect button which detects and connects to the Zybo board via JTAG for programming](images/picture25.png) 
 
     *Figure 3.3. Connecting the board*
 
 4. Right-click on the board, select “Program Device” as shown below and click “Program” on the pop-up window. 
 
-    ![Programming the board](images/picture26.png) 
+    ![Screenshot of Vivado Hardware Manager showing the right-click context menu on the detected FPGA device with Program Device option highlighted to upload the bitstream to the Zybo board](images/picture26.png) 
 
     *Figure 3.4. Programming the board*
 
 5. Once the board is programmed, the green LED labeled “LD12” should light up on the board. Click “File” on the main menu bar and select “Export” -> “Export Hardware” and click “Next” on the pop-up window. Choose the following option on the next page:
 
-    ![Exporting hardware and bitstream file](images/picture27.png) 
+    ![Screenshot of Vivado Export Hardware dialog showing the Include bitstream option selected, which packages the hardware design and bitstream into an XSA file for use in Vitis IDE software development](images/picture27.png) 
 
     *Figure 3.5. Exporting hardware and bitstream file* 
 
 6. Choose the “export to” location as the project folder and save the file. Then click “Finish”. Next, click “Tools” on the main menu bar and select “Launch Vitis IDE”. Choose the same project folder as your workspace. Click “File” -> “New” -> “Application Project”.
 
-    ![Creating a new application project](images/picture28.png) 
+    ![Screenshot of Vitis IDE showing the File menu with New > Application Project option selected to create a new embedded software project for the Cortex-A9 processor](images/picture28.png) 
 
     *Figure 3.6. Creating a new application project*
 
 7. Select the “Create a new platform from hardware (XSA)” tab and click browse to select the XSA file you saved earlier:
 
-    ![Adding the XSA file](images/picture29.png) 
+    ![Screenshot of Vitis New Application Project wizard showing the Create a new platform from hardware (XSA) option with a browse button to select the exported hardware description file containing the FPGA design and processor configuration](images/picture29.png) 
 
     *Figure 3.7. Adding the XSA file*
 

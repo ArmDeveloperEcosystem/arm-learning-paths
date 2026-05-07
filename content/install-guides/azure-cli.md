@@ -8,6 +8,7 @@ minutes_to_complete: 15
 multi_install: false
 multitool_install_part: false
 official_docs: https://learn.microsoft.com/en-us/cli/azure
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=microsoft-azure-cli
 test_images:
 - ubuntu:latest
 test_maintenance: true

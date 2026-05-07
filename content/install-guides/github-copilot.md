@@ -5,10 +5,6 @@ author: Pareena Verma
 minutes_to_complete: 10
 official_docs: https://docs.github.com/en/copilot
 
-test_maintenance: true
-test_images:
-- ubuntu:latest
-
 layout: installtoolsall
 multi_install: false
 multitool_install_part: false
@@ -247,7 +243,13 @@ Create an `mcp.json` file in the `.vscode` directory with the following configur
         "run",
         "--rm",
         "-i",
-        "-v", "/path/to/your/codebase:/workspace",
+        "--pull=always",
+        "-v",
+        "/path/to/your/workspace:/workspace",
+        "-v",
+        "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v",
+        "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ]
     }
@@ -271,7 +273,13 @@ Add the following configuration to the user-level `mcp.json` file:
         "run",
         "--rm",
         "-i",
-        "-v", "/path/to/your/codebase:/workspace",
+        "--pull=always",
+        "-v",
+        "/path/to/your/workspace:/workspace",
+        "-v",
+        "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v",
+        "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ]
     }
@@ -281,11 +289,149 @@ Add the following configuration to the user-level `mcp.json` file:
 
 After saving your `mcp.json` file, a **Start** button appears at the top of the servers list. Select this button to start the Arm MCP Server.
 
+To enable Arm Performix features through the Arm MCP Server, replace `/path/to/your/ssh/private_key` and `/path/to/your/ssh/known_hosts` with the SSH private key and `known_hosts` file used for your target device.
+
+## Optional: Use a Docker replacement containerization tool
+
+You can use other containerization tools besides Docker that are free and do not require licenses, such as Podman, Finch, Colima, and Rancher Desktop. Choose one of the options below and use its CLI in place of docker.
+
+{{< tabpane-normal >}}
+  {{< tab header="Podman" >}}
+Install: [Podman](https://podman.io/docs/installation)
+
+Pull the Arm MCP Server image:
+```console
+podman pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `mcp.json` file:
+```json
+{
+  "servers": {
+    "arm-mcp": {
+      "type": "stdio",
+      "command": "podman",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--pull=always",
+        "-v", "/path/to/your/workspace:/workspace",
+        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+        "armlimited/arm-mcp:latest"
+      ]
+    }
+  }
+}
+```
+If you still run into issues, set `"command"` to the full path of the Podman binary.
+After saving your `mcp.json` file, a **Start** button appears at the top of the servers list. Select this button to start the Arm MCP Server.
+  {{< /tab >}}
+  {{< tab header="Finch" >}}
+Install: [Finch](https://runfinch.com/docs/getting-started/installation/)
+
+Pull the Arm MCP Server image:
+```console
+finch pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `mcp.json` file:
+```json
+{
+  "servers": {
+    "arm-mcp": {
+      "type": "stdio",
+      "command": "finch",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--pull=always",
+        "-v", "/path/to/your/workspace:/workspace",
+        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+        "armlimited/arm-mcp:latest"
+      ]
+    }
+  }
+}
+```
+After saving your `mcp.json` file, a **Start** button appears at the top of the servers list. Select this button to start the Arm MCP Server.
+  {{< /tab >}}
+  {{< tab header="Colima" >}}
+Install: [Colima](https://github.com/abiosoft/colima#installation)
+
+Colima provides a Docker-compatible CLI via Docker contexts.
+
+Pull the Arm MCP Server image:
+```console
+docker pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `mcp.json` file:
+```json
+{
+  "servers": {
+    "arm-mcp": {
+      "type": "stdio",
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--pull=always",
+        "-v", "/path/to/your/workspace:/workspace",
+        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+        "armlimited/arm-mcp:latest"
+      ]
+    }
+  }
+}
+```
+After saving your `mcp.json` file, a **Start** button appears at the top of the servers list. Select this button to start the Arm MCP Server.
+  {{< /tab >}}
+  {{< tab header="Rancher Desktop" >}}
+Install: [Rancher Desktop](https://docs.rancherdesktop.io/getting-started/installation/)
+
+Rancher Desktop uses the Docker container engine via Morby.
+
+Pull the Arm MCP Server image:
+```console
+docker pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `mcp.json` file:
+```json
+{
+  "servers": {
+    "arm-mcp": {
+      "type": "stdio",
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--pull=always",
+        "-v", "/path/to/your/workspace:/workspace",
+        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+        "armlimited/arm-mcp:latest"
+      ]
+    }
+  }
+}
+```
+After saving your `mcp.json` file, a **Start** button appears at the top of the servers list. Select this button to start the Arm MCP Server.
+  {{< /tab >}}
+{{< /tabpane-normal >}}
+
 ## How do I analyze a local codebase with the Arm MCP Server?
 
 To analyze code in your workspace, mount your local directory to the MCP server's `/workspace` folder using a volume mount.
 
-Update your `.vscode/mcp.json` configuration to include the volume mount. Replace `/path/to/your/codebase` with the actual path to your project
+Update your `.vscode/mcp.json` configuration to include the volume mount. Replace `/path/to/your/workspace` with the actual path to your project
 
 For example, if your project is at `/Users/username/myproject`, the volume mount configuration is:
 
@@ -332,8 +478,22 @@ Example prompts that use the Arm MCP Server:
 
 - `Scan my workspace for code that needs updating for Arm compatibility`
 - `Check if the postgres:latest container image supports Arm64 architecture`
-- `Search the Arm knowledge base for NEON intrinsics examples`
+- `Search the Arm knowledge base for Neon intrinsics examples`
 - `Find learning resources about migrating from x86 to Arm`
+
+## Use Arm prompt files with the MCP Server
+
+The Arm MCP Server provides a rich set of tools and knowledge base, but to make the best use of it, you should pair it with Arm-specific prompt files. These prompt files supply task-oriented context, best practices, and structured workflows that guide the agent in using MCP tools more effectively across common Arm development tasks.
+
+### Get the prompt files
+
+Browse the [agent integrations directory for Visual Studio Code](https://github.com/arm/mcp/tree/main/agent-integrations/vs-code) to find prompt files for specific use cases:
+
+- **Arm migration** ([arm-migration.prompt.md](https://github.com/arm/mcp/blob/main/agent-integrations/vs-code/arm-migration.prompt.md)): Helps the agent systematically migrate applications from x86 to Arm, including dependency analysis, compatibility checks, and optimization recommendations.
+
+Each prompt file is a Markdown configuration that you can reference in your GitHub Copilot sessions to enable more targeted, task-specific assistance.
+
+If you're facing issues or have questions, reach out to mcpserver@arm.com.
 
 ## Troubleshooting MCP Server connections
 
@@ -349,4 +509,4 @@ If the Arm MCP Server doesn't connect:
 
 
 
-You're now ready to use GitHub Copilot with the Arm MCP Server to enhance your Arm development workflow!
+You're now ready to use GitHub Copilot with the Arm MCP server for Arm-specific development assistance.

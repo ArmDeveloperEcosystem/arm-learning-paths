@@ -1,5 +1,6 @@
 ---
 title: Run an end-to-end attestation flow with Arm CCA and Trustee
+description: Learn how to deploy a CCA realm workload on an FVP and connect it with Trustee services to enable attestation-based confidential data processing.
    
 minutes_to_complete: 60
 

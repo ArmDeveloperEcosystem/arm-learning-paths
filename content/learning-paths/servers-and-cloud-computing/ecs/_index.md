@@ -1,5 +1,6 @@
 ---
 title: "Deploy containers on Amazon ECS with AWS Graviton processors"
+description: Learn how to create an AWS ECS cluster with Fargate and AWS Graviton processors, then create and run containerized tasks on Arm infrastructure.
 
 minutes_to_complete: 60
 

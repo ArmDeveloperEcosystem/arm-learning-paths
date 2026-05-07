@@ -1,6 +1,8 @@
 ---
 title: Visualize Ethos-U NPU performance with ExecuTorch on Arm FVPs
 
+description: Learn how to identify Arm-based targets for TinyML, install Fixed Virtual Platforms, deploy ExecuTorch models on Corstone-320 FVP, and visualize model execution using the FVP graphical interface.
+
 minutes_to_complete: 120
 
 who_is_this_for: This is an introductory topic for developers and data scientists who are new to TinyML and want to visualize ExecuTorch model performance on virtual Arm hardware.

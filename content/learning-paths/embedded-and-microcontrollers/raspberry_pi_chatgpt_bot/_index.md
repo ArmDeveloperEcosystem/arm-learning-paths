@@ -1,6 +1,8 @@
 ---
 title: Create a ChatGPT voice bot on a Raspberry Pi
 
+description: Learn how to build a voice-controlled bot on a Raspberry Pi that listens for a wake word, converts speech to text using Google Speech Recognition, sends requests to ChatGPT's API, and plays audio responses.
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory project for developers interested in integrating a Chatbot (namely ChatGPT) into Raspberry Pi projects.

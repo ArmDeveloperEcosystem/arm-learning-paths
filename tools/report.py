@@ -55,10 +55,25 @@ def content_parser(directory, period):
             date = date.stdout.rstrip().decode("utf-8")
             logging.debug(f"Last updated: {date}")
             author = "None"
-            for directory_list in open(directory +"/" + item):
-                if re.search("^author:", directory_list):
-                    # split and strip out '\n'
-                    author = directory_list.split(": ")[1].rstrip()
+            lines = open(directory +"/" + item).readlines()
+            for idx, line in enumerate(lines):
+                if re.search("^author:", line):
+                    parts = line.split(": ", 1)
+                    if len(parts) > 1 and parts[1].strip():
+                        # Inline single author: "author: Name"
+                        author = parts[1].rstrip()
+                    else:
+                        # YAML list format, collect "- name" entries
+                        authors = []
+                        for subsequent in lines[idx+1:]:
+                            m = re.match(r'^\s+-\s+(.+)', subsequent)
+                            if m:
+                                authors.append(m.group(1).strip())
+                            else:
+                                break
+                        if authors:
+                            author = ", ".join(authors)
+                    break
             logging.debug(f"Primary author {author}")
             if not author in auth_list:
                 auth_list.append(author)

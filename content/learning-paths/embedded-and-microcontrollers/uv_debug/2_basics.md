@@ -197,5 +197,5 @@ If you put a RAM address as the expression with no value, the next read and/or w
 - The instruction causing the break is probably a few instructions before this one in the execution stream.
 - To edit a watchpoint, double-click on it in the **Breakpoints** window and its information will be dropped down into the configuration area. Clicking on **Define** will create another watchpoint. You should delete the old one by highlighting it and click on Kill Selected or use the following tip.
 - The checkbox beside the expression in **Current Breakpoints:** as shown above allows you to temporarily unselect or disable a watchpoint without deleting it.
-- You can create a watchpoint with a raw address and no variable value. This is useful for detecting stack overruns. Physical addresses can be entered as `*((unsigned long *)0x20000000)`. Or simply enter the address as shown above.
+- You can create a watchpoint with a raw address and no variable value. This is useful for detecting stack overruns. Physical addresses can be entered as `*((unsigned long *)0x20000000)`. Or enter the address as shown above.
 {{% /notice %}}

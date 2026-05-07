@@ -1,6 +1,6 @@
 ---
 # User change
-title: "From Arm NEON to SVE"
+title: "From Arm Neon to SVE"
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -8,18 +8,18 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Arm NEON
+## Arm Neon
 
 Modern CPUs have vector units that operate in a SIMD fashion. This greatly improves application performance, depending on the vector width.
 
-The Armv7-A Instruction Set Architecture (ISA) introduced Advanced SIMD or Arm NEON instructions. These instructions are supported on the latest Armv8-A and Armv9-A architectures. NEON registers are composed of 32 128-bit registers V0-V31 and support multiple data types: integer, single-precision (SP) floating-point and double-precision (DP) floating-point.
+The Armv7-A Instruction Set Architecture (ISA) introduced Advanced SIMD or Arm Neon instructions. These instructions are supported on the latest Armv8-A and Armv9-A architectures. Neon registers are composed of 32 128-bit registers V0-V31 and support multiple data types: integer, single-precision (SP) floating-point and double-precision (DP) floating-point.
 
 ## Arm SVE
 
 In order to reduce restrictions regarding fixed-length vector sizes, Arm introduced the Scalable Vector Extension (SVE).
 Arm SVE is vector-length agnostic, allowing vector width from 128 up to 2048 bits. This enables software to scale dynamically to any SVE capable Arm hardware. 
 
-SVE is not an extension of NEON but a separate, optional extension of Arm v8-A with a new set of instruction encodings.
+SVE is not an extension of Neon but a separate, optional extension of Arm v8-A with a new set of instruction encodings.
 SVE is used in HPC and general-purpose server software. SVE2 adds capabilities to enable more data-processing domains.
 
 ## SVE Vector Length
@@ -67,7 +67,7 @@ If the hardware doesn't support SVE the program will crash with an illegal instr
 SVE is a predicate-centric architecture with:
 
 - Scalable vector registers
-    - Z0-Z31 extends NEON's 128-bit V0-V31
+    - Z0-Z31 extends Neon's 128-bit V0-V31
     - Supported data types
         - packed DP, SP, half-precision (HP) floating-point elements
         - packed 64, 32, 16 and 8-bit integer elements
@@ -78,11 +78,11 @@ SVE is a predicate-centric architecture with:
 
 ### Simple addition example
 
-Take a look at the example code compiled for SVE (left) and for NEON (right):
+Take a look at the example code compiled for SVE (left) and for Neon (right):
 
 {{< godbolt width="100%" height="700px" mode="diff" lopt="-O3 -march=armv8-a" ropt="-O3 -march=armv8-a+sve" src="int fun(double * restrict a, double * restrict b, int size)\n{\n  for (int i=0; i < size; ++i)\n  {\n    b[i] += a[i];\n  }\n}" >}}
 
-Notice how small the SVE assembly is in comparison to NEON. This is due to the predicate behavior which avoids generating assembly for remainder loops (scalar operations performed when the iteration domain is not a multiple of the vector length. 
+Notice how small the SVE assembly is in comparison to Neon. This is due to the predicate behavior which avoids generating assembly for remainder loops (scalar operations performed when the iteration domain is not a multiple of the vector length. 
 
 Observe what the SVE assembly instructions are doing:
 

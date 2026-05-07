@@ -6,12 +6,12 @@ minutes_to_complete: 30
 who_is_this_for: This is an introductory topic for software developers using SIMD instructions for High-Performance Computing, Machine Learning, Digital Signal Processing, Audio and Video Codec applications.
 
 learning_objectives: 
-    - Understand the differences between SVE and NEON for vectorization
+    - Understand the differences between SVE and Neon for vectorization
     - Compile code for SVE-capable Arm processors
     - Run SVE instructions on any Armv8-A processor
 
 prerequisites:
-    - General knowledge about SIMD processing, vectorization or Arm NEON.
+    - General knowledge about SIMD processing, vectorization or Arm Neon.
     - An Arm computer running Linux. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
 
 author: Florent Lebeau
@@ -31,7 +31,7 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - SVE
-    - NEON
+    - Neon
     - armie
     - GCC
     - armclang

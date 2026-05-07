@@ -1,5 +1,6 @@
 ---
 title: Quantize neural upscaling models with ExecuTorch
+description: Learn how to apply post-training quantization to PyTorch models using TorchAO and export INT8 models to .vgf format with the ExecuTorch Arm backend.
     
 minutes_to_complete: 60
 

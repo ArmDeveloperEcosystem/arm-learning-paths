@@ -1,5 +1,6 @@
 ---
-title: Learn about Ray Tracing with Vulkan on Android
+title: Implement ray tracing effects with Vulkan on Android
+description: Learn how to use the Vulkan ray tracing API to implement realistic shadows, reflections, and refractions in Android applications.
 
 minutes_to_complete: 120
 

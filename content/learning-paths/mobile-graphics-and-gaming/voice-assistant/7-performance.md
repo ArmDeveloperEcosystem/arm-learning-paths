@@ -15,7 +15,7 @@ layout: learningpathall
 You can also benchmark the LLM functionality on Android phone outside of RTVA application. For this, you can use the Large Language Models repository:
 
 ```
-https://gitlab.arm.com/kleidi/kleidi-examples/large-language-models
+https://github.com/Arm-Examples/LLM-Runner
 ```
 
 and build for your chosen LLM backend, ensure that `NDK_PATH` is set properly. SME kernels are enabled by default, so let's first build with SME disabled:
@@ -26,7 +26,7 @@ cmake --build ./build
 ```
 
 {{% notice %}}
-For troubleshooting any build issues, refer to [large-language-models README](https://gitlab.arm.com/kleidi/kleidi-examples/large-language-models/-/blob/main/README.md?ref_type=heads)
+For troubleshooting any build issues, refer to [large-language-models README](https://github.com/Arm-Examples/LLM-Runner/blob/main/README.md)
 {{% /notice %}}
 
 ### Phone setup

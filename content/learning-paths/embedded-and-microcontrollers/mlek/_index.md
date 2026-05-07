@@ -1,6 +1,8 @@
 ---
 title: Build and run the Arm Machine Learning Evaluation Kit examples
 
+description: Learn how to build examples from the Machine Learning Evaluation Kit (MLEK) and run them on the Arm Ecosystem FVP for machine learning application development on microcontrollers.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for embedded software developers interested in machine learning applications.
