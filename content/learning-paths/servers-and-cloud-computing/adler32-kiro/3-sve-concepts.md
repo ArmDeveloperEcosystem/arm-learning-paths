@@ -8,23 +8,23 @@ layout: learningpathall
 
 ## SVE concepts you need before writing code
 
-SVE is different from fixed width SIMD like Neon. The vector length is not fixed at compile time. It is determined at runtime by the hardware. This means you can't write `for (i = 0; i < n; i += 16)` and assume you're processing 16 bytes per iteration. SVE code must be vector length agnostic (VLA) to work correctly on any processor with SVE support.
+SVE is different from fixed-width SIMD such as Neon. The vector length is not fixed at compile time and is determined at runtime by the hardware. This means you can't write `for (i = 0; i < n; i += 16)` and assume you're processing 16 bytes per iteration. SVE code must be Vector Length Agnostic (VLA) to work correctly on any processor with SVE support.
 
 Before writing SVE intrinsics, it's helpful to understand three things:
 
-1. How SVE predicates control which elements are active
-2. How to handle loop tails when data length isn't a multiple of the vector length
-3. How to widen narrow data types for accumulation
+- How SVE predicates control which elements are active
+- How to handle loop tails when data length isn't a multiple of the vector length
+- How to widen narrow data types for accumulation
 
-The Arm MCP server is the right tool for this. Ask your AI assistant the questions below and read the responses. The goal isn't to memorize intrinsic names, but to understand the concepts well enough to recognize when you need each one.
+Use the Arm MCP server with your AI assistant to ask the following questions and read the responses. By doing this, you can understand the concepts well enough to recognize when you need each one, without needing to memorize intrinsic names. 
 
 ## Comparing SVE and Neon
 
 Start with understanding the big picture about SVE.
 
-### ASK AI: about SVE versus Neon
+### Ask AI about SVE versus Neon
 
-Ask your assistant:
+Ask your assistant the following question. Your prompt can be similar to:
 
 ```text
 Ask the Arm MCP server what is SVE and how does it differ from Neon? My Makefile targets the native CPU on a Neoverse processor. 
@@ -80,19 +80,17 @@ Here's what the Arm knowledge base says:
   (https://learn.arm.com/learning-paths/servers-and-cloud-computing/bitmap_scan_sve2/)      
 ```
 
-The response explains that Neon uses fixed 128 bit vectors, while SVE uses vectors of variable length (a multiple of 128 bits, from 128 to 2048 bits). Neoverse N2 and Neoverse V2 support SVE with 128 bit vectors. Neoverse V1 supports SVE with 256 bit vectors. The key point is that your code doesn't need to know the vector length at compile time. SVE intrinsics handle it at runtime.
+The response explains that Neon uses fixed 128-bit vectors, while SVE uses vectors of variable length (a multiple of 128 bits, from 128 to 2048 bits). Neoverse N2 and Neoverse V2 support SVE with 128-bit vectors. Neoverse V1 supports SVE with 256 bit vectors. The key point is that your code doesn't need to know the vector length at compile time. SVE intrinsics handle it at runtime.
 
 ## Predicates and loop tails
 
-Predicates and loop tails may be new to software developers.
+In fixed-width SIMD such as Neon, every lane in a vector always participates in every operation. This works fine when your data length is a multiple of the vector width. However, it forces you to write special-case scalar code to handle the leftover elements at the end of a loop. With SVE's variable vector length, you don't know the vector width at compile time, so that approach breaks down entirely.
 
-In fixed-width SIMD like Neon, every lane in a vector always participates in every operation. That works fine when your data length is a multiple of the vector width, but it forces you to write special-case scalar code to handle the leftover elements at the end of a loop. With SVE's variable vector length, you don't even know the vector width at compile time, so that approach breaks down entirely.
+SVE solves this with predicate registers. A predicate is a bitmask with one bit per vector element. Each bit controls whether the corresponding lane is active or inactive for a given operation. Inactive lanes are ignored: they don't load memory, don't compute, and don't write results. This lets you run the same vector code on the final partial chunk of data as on every full chunk before it. You don't need a special-case tail loop.
 
-SVE solves this with predicate registers. A predicate is a bitmask with one bit per vector element. Each bit controls whether the corresponding lane is active or inactive for a given operation. Inactive lanes are ignored: they don't load memory, don't compute, and don't write results. This lets you run the same vector code on the final partial chunk of data as on every full chunk before it, there is no special-case tail loop needed.
+### Ask AI how predicate registers work
 
-### ASK AI: about how predicate registers work
-
-Ask your assistant:
+Ask your assistant the following question. Your prompt can be similar to:
 
 ```text
 Masking with predicate registers seems like a key concept in SVE. How does it work to handle loops when my data length isn't a multiple of the vector length? 
@@ -165,7 +163,7 @@ A sample response is:
 
 The response explains that the `svwhilelt_b8(i, n)` intrinsic creates a predicate where element `k` is active if `i + k < n`. This handles the loop tail automatically. When you're near the end of the data, the predicate deactivates the elements that would go out of bounds.
 
-A typical SVE loop looks like this:
+An SVE loop usually looks like this:
 
 ```c
 uint64_t vl = svcntb();          // vector length in bytes, determined at runtime
@@ -182,9 +180,9 @@ The loop body runs even for the final partial vector. The predicate ensures only
 
 For Adler-32, you're loading `uint8_t` bytes but accumulating into `uint32_t` sums.
 
-### ASK AI: about widening
+### Ask AI about widening
 
-Ask your assistant:
+Ask your assistant the following question. Your prompt can be similar to:
 
 ```text
 The adler32 loop accumulates uint8_t values into a uint32_t sum. How does SVE handle widening from 8 bit to 32 bit elements?
@@ -256,7 +254,7 @@ Loading uint8_t values
   trickiest part.
 ```
 
-The response introduces `svld1_u8` for loading bytes, and explains that SVE doesn't have a single "load and widen" intrinsic. Instead, you use `svld1ub_u32` to load bytes and extend them with zeroes directly into a 32 bit vector. This is the right approach for Adler-32 because your accumulators are 32 bit.
+The response introduces `svld1_u8` for loading bytes, and explains that SVE doesn't have a single "load and widen" intrinsic. Instead, you use `svld1ub_u32` to load bytes and extend them with zeroes directly into a 32-bit vector. This is the right approach for Adler-32 because your accumulators are 32 bit.
 
 The Arm MCP server will return the exact signature:
 
@@ -264,15 +262,15 @@ The Arm MCP server will return the exact signature:
 svuint32_t svld1ub_u32(svbool_t pg, const uint8_t *base);
 ```
 
-This loads one byte per active 32 bit lane and extends each byte with zeroes to 32 bits. On a processor with 256 bit SVE vectors, this loads 8 bytes per iteration (8 lanes × 32 bits = 256 bits).
+This loads one byte per active 32-bit lane and extends each byte with zeroes to 32 bits. On a processor with 256 bit SVE vectors, this loads 8 bytes per iteration (8 lanes × 32 bits = 256 bits).
 
 ## The dot product intrinsic
 
-You may see things in the AI assistant responses you don't understand. You can continue to ask for more explanation until you are totally comfortable. One of the responses above implies svdot is commonly used for arithmetic. You can ask more for information about what it does.
+If the AI assistant response includes something you don't understand, you can continue to ask for more explanation. For example, one of the previous responses implies svdot is commonly used for arithmetic. You can ask for more information about what it does.
 
-### ASK AI: about the svdot instruction
+### Ask AI about the svdot instruction
 
-Ask your assistant:
+Ask your assistant the following questions. Your prompt can be similar to:
 
 ```text
 What is the svdot intrinsic? How does it differ from a simple multiply and accumulate operation?
@@ -333,7 +331,7 @@ A sample output is:
   just acc[i] += bytes[4i+0] + bytes[4i+1] + bytes[4i+2] + bytes[4i+3].        
 ```
 
-The response explains that `svdot` computes a dot product between two vectors of narrow elements and accumulates the result into a vector of wider elements. For example, `svdot_u32` takes two `svuint8_t` vectors and a `svuint32_t` accumulator, multiplying corresponding 8 bit elements and adding the products into 32 bit lanes.
+The response explains that `svdot` computes a dot product between two vectors of narrow elements and accumulates the result into a vector of wider elements. For example, `svdot_u32` takes two `svuint8_t` vectors and a `svuint32_t` accumulator, multiplying corresponding 8-bit elements and adding the products into 32-bit lanes.
 
 The signature is:
 
@@ -344,15 +342,11 @@ svuint32_t svdot_u32(svuint32_t op1, svuint8_t op2, svuint8_t op3);
 You'll use this to compute the weighted sum for the `B` accumulator. The reason will become clear in the SVE implementation section.
 
 {{< notice Note >}}
-You may notice your AI assistant asking to just create the code for you. Resist the urge to say yes and continue to ask questions and understand the theory of operation. You need to do this to get a functional result with the best performance. You also need to be able to explain and maintain the code so it's worth the extra time to learn how SVE works.
+You might notice your AI assistant asking to create the code for you. Resist the urge to say yes and continue to ask questions and understand the theory of operation. You need to do this to get a functional result with the best performance. You also need to be able to explain and maintain the code, so it's worth the extra time to learn how SVE works.
 {{< /notice >}}
 
 ## What you've learned and what's next
 
-In this section:
+You've now learned how SVE predicates handle loop tails without special-case code. You've investigated intrinsics for loading bytes and dot product and learned how to ask for more details. You've also understood that SVE code must be Vector Length Agnostic.
 
-1. You learned how SVE predicates handle loop tails without special case code
-2. You investigated intrinsics for loading bytes and dot product and learned how to ask for more details
-3. You understand that SVE code must be vector length agnostic
-
-Before you can use these intrinsics effectively, you need to restructure the Adler-32 algorithm to remove the modulo operation on each byte. That's the subject of the next section.
+Next, you'll restructure the Adler-32 algorithm to remove the modulo operation on each byte. This is necessary to use these intrinsics effectively.

@@ -17,13 +17,13 @@ for (size_t i = 0; i < n; i++) {
 }
 ```
 
-Vectorizing the `a` accumulator is straightforward: load a vector of bytes, sum them all, add to `a`. The `b` accumulator is harder. Each byte's contribution to `b` depends on how many bytes come after it in the block. If you process N bytes at once, `data[0]` contributes N times to `b`, `data[1]` contributes N-1 times, and so on.
+Vectorizing the `a` accumulator is straightforward: load a vector of bytes, sum them all, add to `a`. The `b` accumulator is harder to vectorize. Each byte's contribution to `b` depends on how many bytes come after it in the block. If you process N bytes at once, `data[0]` contributes N times to `b`, `data[1]` contributes N-1 times, and so on.
 
 Ask your AI assistant to help you think through this.
 
-### ASK AI: about how to vectorize the loop
+### Ask AI how to vectorize the loop
 
-Ask your assistant:
+Ask your assistant the following question. Your prompt can be similar to:
 
 ```text
 How can I vectorize the inner loop of the NMAX version using SVE? Provide a detailed explanation for how to do it and teach me about the intrinsics used. 
@@ -171,7 +171,7 @@ This is the skeleton. The full implementation requires careful handling of the w
 
 You can continue learning by asking questions and coding. You can also use your AI assistant to check your code and explain it.
 
-It's unlikely that just asking your assistant to write the code using SVE intrinsics will function correctly with best performance.
+Asking your assistant to generate the full SVE implementation directly, without the guided learning steps, is unlikely to produce correct or well-optimised code.
 
 ## The complete SVE implementation
 
@@ -290,12 +290,8 @@ Performance:
   10 MB     10485760 bytes      10 iters     4.743 ms   21084.6 MB/s  checksum=0x649EF1B1
 ```
 
-## What you've learned and what's next
+## What you've accomplished and what's next
 
-In this section:
+You've now learned how to use `svindex_u32` to create position-weight vectors. You used `svdot` to compute the weighted sum for the `b` accumulator and built a complete, vector-length-agnostic SVE implementation.
 
-- You learned how to use `svindex_u32` to create position-weight vectors
-- You used `svdot` to compute the weighted sum for the `b` accumulator
-- You built a complete, vector-length-agnostic SVE implementation
-
-In the final section, you'll benchmark the SVE version against the scalar and NMAX baselines, and look at the generated assembly to understand what the CPU is actually executing.
+Next, you'll benchmark the SVE version against the scalar and NMAX baselines, and look at the generated assembly to understand what the CPU is actually executing.
