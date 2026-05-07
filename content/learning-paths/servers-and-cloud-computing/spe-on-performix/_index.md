@@ -1,10 +1,6 @@
 ---
 title: Enable Arm SPE for Performix memory access analysis
 
-draft: true
-cascade:
-    draft: true
-
 description: Learn how to verify and enable Arm Statistical Profiling Extension (SPE) on Arm Linux machines, including systems hosted through cloud service providers, so the Memory Access recipe in Arm Performix can run on supported environments.
 
 minutes_to_complete: 30
@@ -18,8 +14,8 @@ learning_objectives:
     - Identify when a cloud instance does not expose SPE to the guest OS and choose a suitable system for Arm Performix memory access analysis.
 
 prerequisites:
-    - Access to a Linux-based Arm bare-metal system with sudo or root access. Cloud VMs typically do not expose SPE to guest operating systems; use a bare-metal (metal) instance from your cloud provider instead.
-    - Access to Arm Performix on your host machine and SSH access to the target system. See the [Arm Performix install guide](/install-guides/performix/) for setup instructions.
+    - Access to a Linux-based Arm bare-metal system with sudo or root access. Cloud VMs typically don't expose SPE to guest operating systems. Use a bare-metal (metal) instance from your cloud provider instead.
+    - Access to Arm Performix on your host machine and SSH access to the target system. For setup instructions, see the [Arm Performix install guide](/install-guides/performix/).
     - Familiarity with the Linux command line and SSH.
 
 author: Kieran Hejmadi
