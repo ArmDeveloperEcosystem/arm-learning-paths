@@ -39,7 +39,7 @@ Then select **Create**.
 
 ![Google Cloud Console Protocols and ports section with TCP selected and ports 5000 and 6000 entered#center](images/network-port.png "Setting MLflow ports in the firewall rule")
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 In this section, you:
 

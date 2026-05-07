@@ -148,5 +148,9 @@ The prediction `0` corresponds to Iris setosa, which is the correct class for th
 
 ## What you've learned
 
-You have completed the full MLflow lifecycle on a Google Cloud C4A Axion Arm VM running SUSE Linux. Starting from a freshly provisioned Arm-based VM, you installed MLflow and its dependencies in an isolated Python virtual environment, started the MLflow tracking server backed by a local SQLite database, trained a logistic regression model on the Iris dataset across three hyperparameter configurations with each run automatically logged to the MLflow Tracking UI, selected the best-performing model version by accuracy from the Model Registry, assigned a `production` alias to the top model for deployment, served it as a REST API using `mlflow models serve`, and validated the end-to-end workflow by sending a live inference request using curl. You've now experienced the complete machine learning lifecycle on Arm-based infrastructure, from experiment tracking and model versioning to production deployment.
+In this Learning Path you have completed the full MLflow lifecycle on a Google Cloud C4A Axion Arm VM running SUSE Linux. 
+
+Starting from a freshly provisioned Arm-based VM, you installed MLflow and its dependencies in an isolated Python virtual environment, then started the MLflow tracking server backed by a local SQLite database. You trained a logistic regression model on the Iris dataset across three hyperparameter configurations, with each run automatically logged to the MLflow Tracking UI.
+
+In the final section, you selected the best-performing model version by accuracy, assigned it a `production` alias, served it as a REST API, and validated the workflow by sending a live inference request. You've now experienced the complete machine learning lifecycle on Arm-based infrastructure, from experiment tracking and model versioning to production deployment.
 

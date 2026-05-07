@@ -30,7 +30,7 @@ Common use cases include experiment tracking, model versioning, reproducible ML 
 
 To learn more, visit the [MLflow documentation](https://mlflow.org/docs/latest/index.html) and explore the [MLflow GitHub repository](https://github.com/mlflow/mlflow).
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 In this section, you:
 
