@@ -36,9 +36,9 @@ The possible outputs for a kernel are `y`, `m`, or `n`, meaning built-in support
 
 - `CONFIG_ARM_SPE_PMU=y` indicates that the kernel has built-in SPE support. If your kernel has built-in SPE support, follow the steps in [Verify SPE is active with Sysreport](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-3/#verify-spe-active).
 - `CONFIG_ARM_SPE_PMU=m` indicates that SPE is available as a loadable kernel module. This is the typical output for cloud instances. If SPE is available as a loadable kernel module, follow the steps in [Check whether the kernel module is available](#check-kernel-module).
-- `CONFIG_ARM_SPE_PMU=n` indicates that the kernel was not built with SPE support. If your kernel isn't built with SPE support, follow the steps in [Try another operating system or kernel](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-4/#try-another-os).
+- `CONFIG_ARM_SPE_PMU=n` indicates that the kernel was not built with SPE support. If your kernel isn't built with SPE support, follow the steps in [Use another operating system or kernel](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-4/#try-another-os).
 
-If the command produces no output, the kernel config file might not be present on your system. In this case, follow the steps in [Try another operating system or kernel](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-4/#try-another-os).
+If the command produces no output, the kernel config file might not be present on your system. In this case, follow the steps in [Use another operating system or kernel](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-4/#try-another-os).
 
 ### Check whether the kernel module is available {#check-kernel-module}
 

@@ -62,7 +62,7 @@ perf HW trace:    ETM
 
 ### Rebuild the kernel from source with Arm SPE {#rebuild-kernel}
 
-If your current system does not provide a kernel with Arm SPE enabled, you can rebuild the kernel with the required configuration. This approach is more involved than switching operating systems and should be used only if necessary.
+If your current system doesn't provide a kernel with Arm SPE enabled, you can rebuild the kernel with the required configuration. This approach is more involved than switching operating systems and should be used only if necessary.
 
 #### Distribution-specific considerations
 

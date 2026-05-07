@@ -12,7 +12,7 @@ Arm Statistical Profiling Extension (SPE) is a hardware-assisted profiling featu
 
 Unlike traditional interrupt-driven sampling, SPE records rich metadata for sampled operations, including instruction context, memory address information, and latency-related attributes. This improves attribution accuracy and helps reduce drift (also called skid) when mapping instructions to sampled counts. For more information, see the [performance analysis white paper](https://developer.arm.com/documentation/109429/latest/).
 
-For Arm Performix, this matters because SPE must be available to use the `Memory Access` recipe.
+For Arm Performix, this matters because SPE must be enabled to use the `Memory Access` recipe.
 
 ## Understand the platform layers that enable Arm SPE
 
@@ -27,9 +27,7 @@ If any of these layers are missing, Linux can't expose SPE to profiling tools. A
 
 {{% notice Note %}}
 
-Cloud providers often disable low-level profiling features on shared (multi-tenant) instances. To use Performix memory access profiling, run your application on an Arm-based bare-metal instance with full hardware access. These instances are typically named `metal` instances.
-
-These instance types typically cost more than virtualized instances.
+Cloud providers often disable low-level profiling features on shared (multi-tenant) instances. To use Performix memory access profiling, run your application on an Arm-based bare-metal instance with full hardware access. These instances are typically named `metal` instances and typically cost more than virtualized instances.
 
 {{%/ notice %}}
 
