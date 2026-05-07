@@ -148,18 +148,5 @@ The prediction `0` corresponds to Iris setosa, which is the correct class for th
 
 ## What you've learned
 
-You have successfully:
-
-- Selected the best model from experiments
-- Assigned a production alias
-- Deployed the model as an API
-- Performed inference using curl
-
-## Summary
-
-You have completed the full MLflow lifecycle on a Google Cloud C4A Axion Arm VM running SUSE Linux.
-
-Starting from a freshly provisioned Arm-based VM, you installed MLflow and its dependencies in an isolated Python virtual environment, then started the MLflow tracking server backed by a local SQLite database. You trained a logistic regression model on the Iris dataset across three hyperparameter configurations, with each run automatically logged to the MLflow Tracking UI and each model version registered in the Model Registry.
-
-In this final section, you used the Model Registry to select the best-performing version by accuracy, assigned it a `production` alias, and served it as a REST API using `mlflow models serve`. You then validated the end-to-end workflow by sending a live inference request using curl and interpreting the prediction.
+You have completed the full MLflow lifecycle on a Google Cloud C4A Axion Arm VM running SUSE Linux. Starting from a freshly provisioned Arm-based VM, you installed MLflow and its dependencies in an isolated Python virtual environment, started the MLflow tracking server backed by a local SQLite database, trained a logistic regression model on the Iris dataset across three hyperparameter configurations with each run automatically logged to the MLflow Tracking UI, selected the best-performing model version by accuracy from the Model Registry, assigned a `production` alias to the top model for deployment, served it as a REST API using `mlflow models serve`, and validated the end-to-end workflow by sending a live inference request using curl. You've now experienced the complete machine learning lifecycle on Arm-based infrastructure, from experiment tracking and model versioning to production deployment.
 
