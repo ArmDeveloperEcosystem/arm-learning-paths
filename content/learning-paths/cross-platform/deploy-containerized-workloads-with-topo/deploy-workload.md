@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Choose a starter template and clone it
 
-This Learning Path uses the LLM chatbot template to demonstrate the workflow, but the same steps apply to all Topo templates.
+In this Learning Path, you'll use the LLM chatbot template to explore the workflow. The same steps apply to all Topo templates.
 
-To clone a template onto your host device, run:
+To clone the template onto your host device, run:
 
 ```bash
 topo clone https://github.com/Arm-Examples/topo-cpu-ai-chat.git
@@ -18,9 +18,9 @@ topo clone https://github.com/Arm-Examples/topo-cpu-ai-chat.git
 
 If a template asks for build arguments, Topo prompts you interactively.
 
-For this template, accept the defaults at each prompt by pressing Enter. The default configuration uses the `bartowski/Qwen_Qwen3.5-0.8B-GGUF` model and builds with Neon optimizations. SVE — Arm's Scalable Vector Extension, which provides wider vector operations than Neon's fixed 128-bit width — is disabled by default. If `topo describe` shows your target supports SVE, you can enable it by setting `ENABLE_SVE` to `ON`, or edit `compose.yaml` to change it later.
+For this template, accept the defaults for each prompt by pressing Enter. The default configuration uses the `bartowski/Qwen_Qwen3.5-0.8B-GGUF` model and builds with Neon optimizations. SVE — Arm's Scalable Vector Extension, which provides wider vector operations than Neon's fixed 128-bit width — is disabled by default. If `topo describe` shows your target supports SVE, you can enable it by setting `ENABLE_SVE` to `ON`, or edit `compose.yaml` to change it later.
 
-You will see:
+The output is similar to:
 ```output
 ┌─ Copy files ──────────────────────────────────────────
 Cloning into 'topo-cpu-ai-chat'...
@@ -55,7 +55,7 @@ Now run:
 
 This creates a project directory using the template. The directory will contain template source files and `compose.yaml`.
 
-You may find it interesting to examine the `compose.yaml` file. An example for the LLM chatbot application is provided below:
+The following is an example `compose.yaml` file for the LLM chatbot application:
 
 ```yaml
 services:
@@ -107,7 +107,7 @@ x-topo:
       example: "ON"
 ```
 
-You can edit `compose.yaml` at any time to adjust build arguments — for example, to enable or disable SVE, or to switch to a different LLM model.
+You can edit `compose.yaml` at any time to adjust build arguments such as enabling or disabling SVE, or switching to a different LLM model.
 
 ## Deploy the app on the target
 
@@ -117,7 +117,7 @@ On your host device, enter the project directory created by the `topo clone` com
 cd topo-cpu-ai-chat/
 ```
 
-Then use `topo deploy` to build the container images on the host, transfer them to the target over SSH, and start the application on the target:
+Then, use `topo deploy` to build the container images on the host, transfer them to the target over SSH, and start the application on the target:
 
 ```bash
 topo deploy --target user@my-target
@@ -133,13 +133,13 @@ The output is similar to:
  ✔ Container topo-cpu-ai-chat-chat-ui-1      Started                                                                                               5.9ss
 ```
 
-Once deployment is complete, access the web application by opening a browser and navigating to `http://<ip_address_of_target>:<port_number>`, where `<port_number>` matches the port exposed by your template (for the LLM chatbot, this is `3000`).
+After deployment is complete, access the web application by opening a browser and navigating to `http://<ip_address_of_target>:<port_number>`, where `<port_number>` matches the port exposed by your template. For the LLM chatbot, this is `3000`. You can find the port in the `compose.yaml` file for your template.
 
-You can find the correct port in the `compose.yaml` file for your chosen template. For example, if you deployed the LLM chatbot, use `http://<ip_address_of_target>:3000`.
+{{< notice Important >}}
+If your target is a Linux virtual machine (for example, on a cloud provider), ensure that the chosen port (such as 3000) is open as an inbound rule in your virtual machine's firewall or security group. Otherwise, you won't be able to access the application from your browser.
+{{< /notice >}}
 
-**Important:** If your target is a Linux VM (for example, on a cloud provider), ensure that the chosen port (such as 3000) is open as an inbound rule in your VM's firewall or security group. Otherwise, you will not be able to access the application from your browser.
-
-The LLM chatbot application will appear as below:
+The LLM chatbot application appears as follows:
 
 
 ![Screenshot of the LLM Chatbot web interface running on an Arm-based target, showing a chat window and model response. This confirms successful deployment and provides a visual reference for the expected result.#center](llm_chatbot.png "LLM Chatbot web interface on Arm target")
@@ -150,18 +150,13 @@ If the target is not directly accessible from your browser (for example, if it i
 ssh -L <port_number>:localhost:<port_number> user@my-target
 ```
 
-Then open `http://localhost:<port_number>` in your browser.
+Then, open `http://localhost:<port_number>` in your browser.
 
 To stop a deployed Topo application on the target, run `topo stop` on the host:
 
 ```bash
 topo stop --target user@my-target
 ```
-
-
-## Recap: deployment and validation
-
-You have now deployed a containerized workload to your Arm-based Linux target using Topo. You validated the deployment by accessing the application in a web browser. You also learned how to stop the deployment and forward ports if needed.
 
 ## (Optional) Deploy with a CLI agent
 
@@ -175,8 +170,14 @@ If you don't already have a CLI agent installed, see one of these install guides
 - [Install Codex CLI](/install-guides/codex-cli/)
 - [Install Gemini CLI](/install-guides/gemini/)
 
-With your agent ready, you can delegate the full workflow. For example:
+With your agent ready, you can delegate the full workflow using a prompt. For example:
 
-> Use Topo to deploy a containerized workload to my Arm target at `user@my-target`. Run a health check first, list compatible templates, choose a suitable one, clone it, and deploy it.
+```text
+Use Topo to deploy a containerized workload to my Arm target at user@my-target. Run a health check first, list compatible templates, choose a suitable one, clone it, and deploy it.
+```
 
-The agent reads the Topo `README.md`, runs health checks, selects a compatible template, and executes the deployment — handling the end-to-end workflow with minimal manual input.
+The agent reads the Topo `README.md`, runs health checks, selects a template, and deploys it end-to-end with minimal manual input.
+
+## What you've accomplished
+
+You have now deployed a containerized workload to your Arm-based Linux target using Topo. You validated the deployment by accessing the application in a web browser. You also learned how to stop the deployment and forward ports if needed.

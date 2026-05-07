@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 Alluxio on Arm-based Azure Cobalt 100 processors delivers high-performance data access for analytics and AI workloads. Cobalt 100's dedicated physical cores per vCPU provide consistent and predictable performance, which complements Alluxio’s in-memory caching and data orchestration capabilities.
 
-By combining Alluxio’s memory-centric architecture with the efficiency of Arm-based infrastructure, you can significantly reduce data access latency, accelerate compute frameworks like Apache Spark, and optimize overall data pipeline performance.sors delivers high-performance, low-latency data operations for real-time messaging and event processing. Cobalt 100's dedicated physical cores per vCPU provide consistent performance that suits Redis's in-memory architecture and event-driven workloads.
+By combining Alluxio's memory-centric architecture with the efficiency of Arm-based infrastructure, you can significantly reduce data access latency, accelerate compute frameworks like Apache Spark, and optimize overall data pipeline performance.
 
 ## Azure Cobalt 100 Arm-based processor
 
