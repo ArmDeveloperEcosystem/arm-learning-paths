@@ -32,15 +32,15 @@ Now, check whether the kernel was built with SPE support enabled:
 grep CONFIG_ARM_SPE_PMU /boot/config-$(uname -r) 2>/dev/null || true
 ```
 
-The possible outputs for a kernel are `y`, `m`, or `n`, meaning built-in support, module support, or no support. The output determines your next step.
+The possible outputs for a kernel are `y`, `m`, or `n`. The output determines your next step.
 
-- `CONFIG_ARM_SPE_PMU=y` indicates that the kernel has built-in SPE support. If your kernel has built-in SPE support, follow the steps in [Verify SPE is active with Sysreport](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-3/#verify-spe-active).
-- `CONFIG_ARM_SPE_PMU=m` indicates that SPE is available as a loadable kernel module. This is the typical output for cloud instances. If SPE is available as a loadable kernel module, follow the steps in [Check whether the kernel module is available](#check-kernel-module).
-- `CONFIG_ARM_SPE_PMU=n` indicates that the kernel was not built with SPE support. If your kernel isn't built with SPE support, follow the steps in [Use another operating system or kernel](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-4/#try-another-os).
+- If the output is `y`, the kernel has built-in SPE support. Next, [verify SPE is active with Sysreport](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-3/#verify-spe-active).
+- If the output is `m`, SPE is available as a loadable kernel module. This is the typical output for cloud instances. Next, [confirm that the kernel module is available](#check-kernel-module).
+- If the output is `n`, the kernel was not built with SPE support. Next, [use another operating system or kernel](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-4/#try-another-os).
 
-If the command produces no output, the kernel config file might not be present on your system. In this case, follow the steps in [Use another operating system or kernel](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-4/#try-another-os).
+If the command produces no output, the kernel config file might not be present on your system. In this case, [use another operating system or kernel](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-4/#try-another-os).
 
-### Check whether the kernel module is available {#check-kernel-module}
+### Confirm that the kernel module is available {#check-kernel-module}
 
 If your OS kernel includes SPE support as a loadable module, you need to confirm that the module file is present on the filesystem before attempting to load it.
 
@@ -50,7 +50,7 @@ Run the following command to check whether the loadable kernel module (driver) i
 modinfo arm_spe_pmu 2>/dev/null || echo "arm_spe_pmu not present for this kernel"
 ```
 
-If you see output similar to the following, the module file exists and is ready to load. Next, follow the steps in [Load kernel module](learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-2/#load-kernel-module).
+If you see output similar to the following, the module file exists and is ready to load. Next, [load the kernel module](learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-2/#load-kernel-module).
 
 ```output
 filename:       /lib/modules/6.17.0-1010-aws/kernel/drivers/perf/arm_spe_pmu.ko.zst
@@ -60,9 +60,9 @@ description:    Perf driver for the ARMv8.2 Statistical Profiling Extension
 srcversion:     3B6FCB5AD9B37B8BB9FF4A9
 ...
 ```
-If you see `arm_spe_pmu not present for this kernel`, the module was not included in your kernel package. Next, follow the steps in [Install Linux kernel extra modules](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-3/#install-extra-modules).
+If you see `arm_spe_pmu not present for this kernel`, the module was not included in your kernel package. Next, [install Linux kernel extra modules](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-3/#install-extra-modules).
 
-### Load kernel module {#load-kernel-module}
+### Load the kernel module {#load-kernel-module}
 
 If a loadable module is available, load the module and confirm it is active:
 
@@ -83,4 +83,4 @@ The module is now loaded. Next, [verify SPE is active with Sysreport](/learning-
 
 You've now checked whether your kernel supports Arm SPE, verified whether the `arm_spe_pmu` module file is available, and loaded the module when applicable.
 
-Next, if the module is available and loaded, follow the steps in [Verify SPE is active with Sysreport](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-3/#verify-spe-active). If your kernel or modules package does not provide SPE support, follow the steps in [Try another operating system or kernel](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-4/#try-another-os).
+Next, if the module is available and loaded, [verify SPE is active with Sysreport](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-3/#verify-spe-active). If your kernel or modules package does not provide SPE support, [use another operating system or kernel](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-4/#try-another-os).

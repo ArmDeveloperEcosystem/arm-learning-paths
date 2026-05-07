@@ -8,10 +8,10 @@ layout: learningpathall
 
 ### Install Linux kernel extra modules {#install-extra-modules}
 
-To keep kernel images smaller and tuned for different platforms, many distributions ship extra kernel modules in a separate package. If your system's kernel doesn't include a module file (`arm_spe_pmu not present for this kernel`), follow these steps. 
+To keep kernel images smaller and tuned for different platforms, many distributions ship extra kernel modules in a separate package. If your system's kernel doesn't include a module file (`arm_spe_pmu not present for this kernel`), follow the steps to install and load the module before verifying. 
 
 {{% notice Note %}}
-If your system's kernel includes a module file, or you were able to load a module, follow the steps in [Verify SPE is active with Sysreport](#verify-spe-active) instead.
+If your system's kernel includes a module file, or you were able to load a module, follow the steps to [verify SPE is active with Sysreport](#verify-spe-active) instead. If your system's kernel was not built with SPE support, see [Use another operating system or kernel](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-4/#try-another-os) instead.
 {{% /notice %}}
 
 Run the following commands, replacing `apt` with your distribution's package manager if needed. This searches your package index for the extra modules package that matches your kernel version:
@@ -109,7 +109,7 @@ Return to Performix. The `Memory Access` recipe should now show `All checks pass
 
 ![Screenshot of the Arm Performix memory access recipe showing all prerequisite checks passing, confirming that SPE is correctly enabled and the arm_spe_pmu module is loaded#center](./memory-access-passing.png "Arm Performix memory access recipe with all checks passing")
 
-If `perf sampling` still shows `None` and your system is Neoverse V1, check the following section to adjust Kernel Page Table Isolation (KPTI). For all other systems, see [Try another operating system or kernel](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-4/#try-another-os) for alternative approaches.
+If `perf sampling` still shows `None` and your system is Neoverse V1, follow the steps in the next section to adjust Kernel Page Table Isolation (KPTI). For all other systems, see [Use another operating system or kernel](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-4/#try-another-os) for alternative approaches.
 
 #### Adjust KPTI on Neoverse V1-based systems
 
