@@ -13,10 +13,10 @@ This section covers model versioning, alias assignment, and serving the model as
 
 ## Terminal usage
 
-This section continues with the same two terminals from the previous step:
+Continue using the same terminals from the previous section:
 
 - **Terminal A** → Run scripts, start model serving, and test the API
-- **Terminal B** → MLflow tracking server (keep this running)
+- **Terminal B** → MLflow tracking server (must remain running)
 
 ## Set tracking URI
 
@@ -116,7 +116,7 @@ INFO:     Uvicorn running on http://127.0.0.1:6000 (Press CTRL+C to quit)
 In the MLflow UI at `http://<VM-IP>:5000`, select the **Models** tab. You should see the `iris-model` entry with multiple registered versions and the `production` alias assigned to the best-performing one.
 
 
-![MLflow Model Registry showing iris-model with multiple registered versions and the production alias assigned to the best run#center](images/mlflow-model.png "MLflow Model Registry with versions")
+![MLflow Model Registry showing iris-model with multiple registered versions and the production alias visible next to the best-performing version in the versions table#center](images/mlflow-model.png "MLflow Model Registry with production alias assigned")
 
 ## Test the API from Terminal A
 

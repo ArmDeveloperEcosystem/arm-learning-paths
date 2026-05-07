@@ -1,11 +1,7 @@
 ---
 title: Manage the ML lifecycle with MLflow on Google Cloud C4A Axion VM
-
-draft: true
-cascade:
-    draft: true
     
-description: Install MLflow on a Google Cloud C4A Axion Arm VM running SUSE Linux, track experiments with MLflow Tracking, version models using the Model Registry, and deploy a model as a REST API.
+description: Set up MLflow on Google Cloud C4A Axion Arm VMs running SUSE Linux to track ML experiments, version models with the Model Registry, and deploy a trained model as a REST API.
 
 minutes_to_complete: 30
 
