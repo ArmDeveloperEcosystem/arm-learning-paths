@@ -17,16 +17,16 @@ prerequisites:
     - If you do not already have a Nginx setup, a review of [Learn how to deploy Nginx](/learning-paths/servers-and-cloud-computing/nginx/).
 
 generate_summary_faq: true
-rerun_summary: true
+rerun_summary: false
 # rerun_faqs: false
 
 # START generated_summary_faq
 generated_summary_faq:
   template_version: summary-faq-v2
-  generated_at: '2026-05-06T18:52:14Z'
+  generated_at: '2026-05-08T16:31:32Z'
   generator: template
   source_hash: 10f13dee3459577fcadf5966cf80d990f3396321189f638432a3308699e773a8
-  summary_generated_at: '2026-05-06T18:52:14Z'
+  summary_generated_at: '2026-05-08T16:31:32Z'
   summary_source_hash: 10f13dee3459577fcadf5966cf80d990f3396321189f638432a3308699e773a8
   faq_generated_at: '2026-05-06T17:17:58Z'
   faq_source_hash: 10f13dee3459577fcadf5966cf80d990f3396321189f638432a3308699e773a8
@@ -99,3 +99,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+
