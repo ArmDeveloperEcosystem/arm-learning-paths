@@ -41,7 +41,7 @@ Use port mapping **5000** for the MLflow Tracking UI and **6000** for the MLflow
 
 7. Select **Create**.
 
-## What you've learned and what's next
+## What you've accomplished and what's next
 
 You've created a firewall rule to expose the MLflow UI and the model serving API. You also enabled external access to monitor experiments and access deployed models.
 
