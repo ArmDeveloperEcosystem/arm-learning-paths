@@ -29,6 +29,7 @@ In this section, you create an AWS IoT Greengrass custom component that uses an 
 5. On your local machine, clone the asset repository:
 
 ```bash
+cd $HOME
 git clone https://github.com/DougAnsonAustinTx/pac-bti-gg-assets
 cd ./pac-bti-gg-assets
 ```
@@ -163,6 +164,127 @@ Manifests:
 6. Confirm the custom component appears in the component list.
 
 ![Greengrass Components list showing the newly created arm-com.arm.demo.PacBtiDemo component#center](images/custom-4.png "Greengrass component list with new component")
+
+Your Greengrass custom component is now ready for deployment. 
+
+Before deployment, lets briefly take a look at some of the details of the PAC/BTI tester artifact that is part of our custom component.
+
+### Deeper look into the PAC/BTI Tester artifact
+
+Lets go back to the cloned repo:
+
+```bash
+cd $HOME/pac-bti-gg-assets
+```
+
+Next, lets unzip the PAC/BTI tester artifact and explore it a bit:
+
+```bash
+unzip arm-pac-bti-greengrass-demo-mqtt-trigger.zip
+cd ./arm-pac-bti-greengrass-demo
+```
+
+### Details on the PAC/BTI Tester
+
+The PAC/BTI tester is a proof-of-concept that deploys the **same vulnerable C application** to Armv8 and Armv9 devices through **AWS IoT Greengrass**, then runs the same exploit attempt and records the outcome.
+
+The intent of the PAC/BTI tester is to demonstrate that:
+
+- an unprotected build can be exploited,
+- the same source built for Armv9 **without** branch protection remains exploitable, and
+- the Armv9 build compiled with `-mbranch-protection=standard` blocks the exploit from reaching the attacker-controlled function.
+
+##### Invocation and Execution model
+
+The component chooses the build flavor **at runtime on the target** and then waits for an MQTT trigger from AWS IoT Core before it runs the attack.
+
+Selection priority:
+
+1. `armv9-protected` when PAC/BTI-related CPU features are detected
+2. `armv9-unprotected` on `aarch64` when PAC/BTI hints are not detected
+3. `armv8-unprotected` as the fallback
+
+The selector writes its decision into `{work:path}/state/` and the Greengrass run step adds that metadata into `result.json`.
+
+##### MQTT control plane
+
+Default AWS IoT Core topics:
+
+- test trigger invocation topic: `arm/demo/{iot:thingName}/security/pacbti/attack/trigger`
+- test result topic: `arm/demo/{iot:thingName}/security/pacbti/attack/result`
+
+When the component starts, it publishes a `ready` event on the result topic. A user or test harness then publishes a trigger on the trigger topic, and the component runs the exploit and publishes the JSON result to the result topic.
+
+Example trigger payload:
+
+```json
+{
+  "action": "run_attack",
+  "request_id": "demo-001"
+}
+```
+
+##### PAC/BTI "tester" directory layout
+
+The PAC/BTI "tester" project has the following layout:
+
+```text
+arm-pac-bti-greengrass-demo/
+├── README.md
+├── build/
+│   ├── build_demo.sh
+│   └── detect_capabilities.sh
+├── docs/
+│   └── deployment_notes.md
+├── greengrass/
+│   ├── com.arm.demo.PacBtiGreengrassDemo-1.0.0.yaml
+│   ├── install.sh
+│   ├── run.sh
+│   └── select_flavor.sh
+├── src/
+│   └── vuln_demo.c
+└── tools/
+    ├── demo_runner.py
+    ├── exploit.py
+    └── render_results.py
+```
+
+##### Greengrass component behavior
+
+During the Greengrass component install, the PAC/BTI tester:
+
+- detects CPU architecture and PAC/BTI hints
+- chooses a build flavor
+- builds a binary into the component work directory as the main "tester"
+- connects to Greengrass MQTT broker
+- subscribes to the trigger topic in AWS IoT Core
+- waits for the user to publish an attack trigger
+
+
+When the Greengrass component receives a message, the component:
+- runs the compiled demo "tester" when triggered
+- publishes the result JSON to the result topic
+- writes the same result into the local `result.json` file
+
+##### Example result JSON
+
+```json
+{
+  "runtime_selection": {
+    "selected_flavor": "armv9-protected",
+    "selection_reason": "PAC/BTI-related CPU features detected",
+    "detected_arch": "aarch64",
+    "detected_features": ["bti", "paca"]
+  },
+  "trigger": {
+    "source_topic": "arm/demo/myThing/security/pacbti/attack/trigger",
+    "payload": {
+      "action": "run_attack",
+      "request_id": "demo-001"
+    }
+  }
+}
+```
 
 ### What you've accomplished
 
