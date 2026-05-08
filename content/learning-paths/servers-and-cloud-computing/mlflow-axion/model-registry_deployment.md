@@ -6,21 +6,15 @@ weight: 6
 layout: learningpathall
 ---
 
-## Model registry and deployment
+## Deploy and register a model
 
-This section covers model versioning, alias assignment, and serving the model as an API.
+In this section, you'll learn about model versioning, alias assignment, and serving the model as an API.
 
-
-## Terminal usage
-
-Continue using the same terminals from the previous section:
-
-- **Terminal A** → Run scripts, start model serving, and test the API
-- **Terminal B** → MLflow tracking server (must remain running)
+Continue using the same terminals from the previous section: terminal A to run scripts, start model serving, and test the API, and terminal B to keep the MLflow tracking server running.
 
 ## Set tracking URI
 
-In **Terminal A**, run:
+In terminal A, run:
 
 ```bash
 export MLFLOW_TRACKING_URI=http://127.0.0.1:5000
@@ -29,6 +23,8 @@ export MLFLOW_TRACKING_URI=http://127.0.0.1:5000
 This tells the MLflow client which tracking server to connect to. Without it, the client defaults to a local directory and won't find the models registered on your server.
 
 ## Create alias script
+
+Navigate to the demo directory:
 
 ```bash
 cd ~/mlflow-learning-path/demo
@@ -60,6 +56,7 @@ client.set_registered_model_alias("iris-model", "production", best_v)
 print("Production version:", best_v)
 EOF
 ```
+The script queries all registered versions of `iris-model`, finds the version with the highest `accuracy` metric, and assigns it the `production` alias. The alias is how `mlflow models serve` identifies which model version to load.
 
 ## Assign production model
 
@@ -73,15 +70,12 @@ The output is similar to:
 ```output
 Production version: 1
 ```
-**What this does:**
-
-This script queries all registered versions of `iris-model`, finds the version with the highest `accuracy` metric, and assigns it the `production` alias. The alias is how `mlflow models serve` identifies which model version to load.
 
 ## Deploy the model as a REST API
 
-With Terminal B still running the MLflow tracking server, use Terminal A to start the model serving API. `mlflow models serve` loads the aliased model from the registry and starts a uvicorn HTTP server that exposes a `/invocations` endpoint for inference.
+With terminal B still running the MLflow tracking server, use terminal A to start the model serving API. `mlflow models serve` loads the aliased model from the registry and starts a uvicorn HTTP server that exposes a `/invocations` endpoint for inference.
 
-In **Terminal A**, navigate to the project directory and set the tracking URI:
+In terminal A, navigate to the project directory and set the tracking URI:
 
 ```bash
 cd ~/mlflow-learning-path
@@ -96,6 +90,8 @@ mlflow models serve \
   -p 6000 \
   --no-conda &
 ```
+
+The following key flags configure the model server: 
 
 - `-m "models:/iris-model@production"` — loads the model version with the `production` alias from the registry
 - `-p 6000` — serves on port 6000
@@ -120,7 +116,7 @@ In the MLflow UI at `http://<VM-IP>:5000`, select the **Models** tab. You should
 
 ## Test the model API with sample data
 
-The `/invocations` endpoint accepts data in the `dataframe_records` format — a list of JSON objects where each object represents one row, with column names as keys. The model returns a prediction for each row. Send a single Iris flower measurement to test inference:
+The `/invocations` endpoint accepts data in the `dataframe_records` format — a list of JSON objects where each object represents one row, with column names as keys. The model returns a prediction for each row. Send a single Iris flower measurement from terminal A to test inference:
 
 ```bash
 curl -X POST http://127.0.0.1:6000/invocations \
@@ -137,7 +133,7 @@ curl -X POST http://127.0.0.1:6000/invocations \
   }'
 ```
 
-The expected output is:
+The output is similar to:
 
 ```output
 INFO:     127.0.0.1:41158 - "POST /invocations HTTP/1.1" 200 OK
@@ -146,9 +142,9 @@ INFO:     127.0.0.1:41158 - "POST /invocations HTTP/1.1" 200 OK
 
 The prediction `0` corresponds to Iris setosa, which is the correct class for these measurements. The Iris dataset has three classes: `0` = setosa, `1` = versicolor, `2` = virginica.
 
-## What you've learned
+## What you've accomplished
 
-In this Learning Path you have completed the full MLflow lifecycle on a Google Cloud C4A Axion Arm VM running SUSE Linux. 
+You have now completed the full MLflow lifecycle on a Google Cloud C4A Axion Arm VM running SUSE Linux.
 
 Starting from a freshly provisioned Arm-based VM, you installed MLflow and its dependencies in an isolated Python virtual environment, then started the MLflow tracking server backed by a local SQLite database. You trained a logistic regression model on the Iris dataset across three hyperparameter configurations, with each run automatically logged to the MLflow Tracking UI.
 
