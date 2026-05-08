@@ -1,20 +1,18 @@
 ---
-title: Create a Google Axion C4A Arm virtual machine on GCP
+title: Create a Google Axion C4A virtual machine for MLflow
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Provision a Google Axion C4A Arm VM
+## Create a Google Axion C4A virtual machine
 
 In this section, you'll create a Google Axion C4A Arm-based virtual machine (VM) on Google Cloud Platform (GCP). You'll use the `c4a-standard-4` machine type, which provides 4 vCPUs and 16 GB of memory. This VM will host your MLflow tracking server and model serving API.
 
-{{% notice Note %}}
-For more information about setting up GCP, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
-{{% /notice %}}
+{{% notice Note %}}For help with GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).{{% /notice %}}
 
-## Create the VM in Google Cloud Console
+## Configure the C4A virtual machine in Google Cloud Console
 
 To create a virtual machine based on the C4A instance type in the console:
 

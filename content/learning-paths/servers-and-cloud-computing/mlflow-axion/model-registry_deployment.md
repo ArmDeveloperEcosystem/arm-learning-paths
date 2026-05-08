@@ -1,5 +1,5 @@
 ---
-title: Register and serve an MLflow model on GCP SUSE Arm64
+title: Deploy MLflow models as REST APIs
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -10,7 +10,7 @@ layout: learningpathall
 
 In this section, you'll learn about model versioning, alias assignment, and serving the model as an API.
 
-You'll use the same terminals from the previous section: terminal A to run scripts, start model serving, and test the API, and terminal B to keep the MLflow tracking server running.
+Continue using the same terminals from the previous section: terminal A to run scripts, start model serving, and test the API, and terminal B to keep the MLflow tracking server running.
 
 ## Set tracking URI
 
@@ -71,7 +71,7 @@ The output is similar to:
 Production version: 1
 ```
 
-## Serve model
+## Deploy the model as a REST API
 
 With terminal B still running the MLflow tracking server, use terminal A to start the model serving API. `mlflow models serve` loads the aliased model from the registry and starts a uvicorn HTTP server that exposes a `/invocations` endpoint for inference.
 
@@ -112,9 +112,9 @@ INFO:     Uvicorn running on http://127.0.0.1:6000 (Press CTRL+C to quit)
 In the MLflow UI at `http://<VM-IP>:5000`, select the **Models** tab. You should see the `iris-model` entry with multiple registered versions and the `production` alias assigned to the best-performing one.
 
 
-![MLflow Model Registry showing iris-model with multiple registered versions and the production alias assigned to the best run#center](images/mlflow-model.png "MLflow Model Registry with versions")
+![MLflow Model Registry showing iris-model with multiple registered versions and the production alias visible next to the best-performing version in the versions table#center](images/mlflow-model.png "MLflow Model Registry with production alias assigned")
 
-## Test the API 
+## Test the model API with sample data
 
 The `/invocations` endpoint accepts data in the `dataframe_records` format — a list of JSON objects where each object represents one row, with column names as keys. The model returns a prediction for each row. Send a single Iris flower measurement from terminal A to test inference:
 
@@ -144,9 +144,9 @@ The prediction `0` corresponds to Iris setosa, which is the correct class for th
 
 ## What you've accomplished
 
-You have completed the full MLflow lifecycle on a Google Cloud C4A Axion Arm VM running SUSE Linux.
+You have now completed the full MLflow lifecycle on a Google Cloud C4A Axion Arm VM running SUSE Linux.
 
-Starting from a freshly provisioned Arm-based VM, you installed MLflow and its dependencies in an isolated Python virtual environment, then started the MLflow tracking server backed by a local SQLite database. You trained a logistic regression model on the Iris dataset across three hyperparameter configurations, with each run automatically logged to the MLflow Tracking UI and each model version registered in the Model Registry.
+Starting from a freshly provisioned Arm-based VM, you installed MLflow and its dependencies in an isolated Python virtual environment, then started the MLflow tracking server backed by a local SQLite database. You trained a logistic regression model on the Iris dataset across three hyperparameter configurations, with each run automatically logged to the MLflow Tracking UI.
 
-In this final section, you used the Model Registry to select the best-performing version by accuracy, assigned it a `production` alias, and served it as a REST API using `mlflow models serve`. You then validated the end-to-end workflow by sending a live inference request using curl and interpreting the prediction.
+In the final section, you selected the best-performing model version by accuracy, assigned it a `production` alias, served it as a REST API, and validated the workflow by sending a live inference request. You've now experienced the complete machine learning lifecycle on Arm-based infrastructure, from experiment tracking and model versioning to production deployment.
 
