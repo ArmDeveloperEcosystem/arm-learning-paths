@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## Create a Google Axion C4A virtual machine
+## Set up the virtual machine
 
 In this section, you'll create a Google Axion C4A Arm-based virtual machine (VM) on Google Cloud Platform (GCP). You'll use the `c4a-standard-4` machine type, which provides 4 vCPUs and 16 GB of memory. This VM will host your MLflow tracking server and model serving API.
 
