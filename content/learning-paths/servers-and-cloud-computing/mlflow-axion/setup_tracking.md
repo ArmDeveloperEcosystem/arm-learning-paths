@@ -1,12 +1,12 @@
 ---
-title: Deploy MLflow on GCP SUSE Arm64 (Setup & Tracking)
+title: Install MLflow and track machine learning experiments
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Deploy MLflow on GCP SUSE Arm64
+## Install and configure MLflow on SUSE Linux
 
 In this section, you install MLflow on a GCP Arm64 (Axion) virtual machine running SUSE Linux with Python 3.11, start the MLflow tracking server, and run machine learning experiments.
 
@@ -200,11 +200,11 @@ Open a browser and navigate to:
 http://<VM-IP>:5000
 ```
 
-![MLflow UI Home Screen#center](images/mlflow-ui.png "MLflow UI Home Page")
+![MLflow UI landing page showing Experiments and Models tabs in the top navigation bar with an empty experiments list below#center](images/mlflow-ui.png "MLflow UI landing page after first launch")
 
 Select the **Experiments** tab to see tracked runs, compare metrics across runs, and inspect logged parameters.
 
-## Create training script
+## Create a machine learning training script
 
 In **Terminal A**, navigate to the demo directory and create the training script:
 
@@ -256,7 +256,7 @@ This script:
 - logs the `C` parameter and accuracy metric to MLflow Tracking
 - registers the trained model in the MLflow Model Registry under the name `iris-model`
 
-## Run experiments
+## Run machine learning experiments with MLflow
 
 Set the tracking URI so the MLflow client sends data to Terminal B's server:
 
@@ -278,7 +278,7 @@ python train.py
 
 Each run logs the `C` value and accuracy as a separate entry in the `iris-exp` experiment and registers a new model version in the MLflow Model Registry.
 
-The output is similar to:
+The output for the first run is similar to:
 
 ```output
 Registered model 'iris-model' already exists. Creating a new version of this model...
@@ -308,11 +308,13 @@ Accuracy: 1.0
 🧪 View experiment at: http://127.0.0.1:5000/#/experiments/1
 ```
 
-## Verify results in the MLflow UI
+Each subsequent run creates a new model version and logs its accuracy metric.
+
+## View experiment results in the MLflow UI
 
 In the MLflow UI at `http://<VM-IP>:5000`, go to the **Experiments** tab, select **iris-exp**, and open the **Runs** view. You should see three runs with their `C` parameter values and accuracy metrics. Select the **Models** tab to see the three registered model versions.
 
-![MLflow Runs View showing experiments and metrics#center](images/mlflow-runs.png "MLflow Runs showing experiment tracking")
+![MLflow Experiments page showing iris-exp experiment with three completed runs, displaying the C parameter values and accuracy metrics for each run in a table view#center](images/mlflow-runs.png "MLflow Runs view showing three tracked experiments with different C values")
 
 ## What you've learned
 
