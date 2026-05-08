@@ -12,11 +12,11 @@ To allow external traffic on port **19999** for Alluxio running on an Azure virt
 
 {{% notice Note %}}For more information about Azure setup, see [Getting started with Microsoft Azure Platform](/learning-paths/servers-and-cloud-computing/csp/azure/).{{% /notice %}}
 
-## Add an inbound firewall rule in Azure
+### Add an inbound firewall rule in Azure
 
 To expose the TCP port **19999**, create a firewall rule.
 
-1. Navigate to the [Azure Portal](https://portal.azure.com), go to **Virtual Machines**, and select your virtual machine.
+1. Navigate to the [Azure portal](https://portal.azure.com), go to **Virtual Machines**, and select your virtual machine.
 
 ![Azure Portal Virtual Machines page with the target VM selected. Check that you are opening the correct virtual machine before configuring its network access.#center](images/virtual_machine.png "Virtual Machines")
 

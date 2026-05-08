@@ -14,14 +14,14 @@ This Learning Path focuses on general-purpose virtual machines in the Dpsv6 seri
 
 While the steps to create this instance are included here for convenience, you can also see [Deploy a Cobalt 100 virtual machine on Azure Learning Path](/learning-paths/servers-and-cloud-computing/cobalt/).
 
-## Create an Arm-based Azure virtual machine in the Azure portal
+### Create an Arm-based virtual machine in the Azure portal
 
 To create an Azure virtual machine using the Azure portal:
 
 1. Launch the Azure portal and navigate to **Virtual Machines**.
 2. Select **Create**, and select **Virtual Machine** from the drop-down list.
-3. Inside the **Basic** tab, fill in the instance details such as **Virtual machine name** and **Region**.
-4. Select the image for your virtual machine, for example Ubuntu Pro 24.04 LTS, and select **Arm64** as the VM architecture.
+3. In the **Basic** tab, fill in the instance details such as **Virtual machine name** and **Region**.
+4. Select **Ubuntu Pro 24.04 LTS** as the image for your virtual machine, and select **Arm64** as the VM architecture.
 5. In the **Size** field, select **See all sizes** and select the D-Series v6 family of virtual machines.
 6. Select **D4ps_v6** from the list as shown in the diagram below:
 

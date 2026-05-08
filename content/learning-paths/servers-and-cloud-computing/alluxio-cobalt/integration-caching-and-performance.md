@@ -8,27 +8,13 @@ layout: learningpathall
 
 ## Set up Apache Spark with Alluxio
 
-In this section, you'll integrate Alluxio with Apache Spark, enable caching, and optimize data access performance.
+In this section, you'll connect Apache Spark to Alluxio and enable in-memory caching.
 
-You'll learn how to connect Spark with Alluxio, enable in-memory caching, and measure performance improvements as a result of reduced repeated disk reads.
+Without caching, Spark re-reads data from storage on each pass. With Alluxio in the path, frequently accessed data can stay in memory, which reduces repeated storage reads.
 
-<!-- ## Why integrate Alluxio with Spark?
+You'll then measure the difference between uncached and cached reads.
 
-**Without Alluxio:**
-
-```text
-Spark → Disk → Slow (every time)
-```
-
-**With Alluxio:**
-
-```text
-Spark → Alluxio → Memory → Fast
-```
-
-Alluxio caches frequently accessed data in memory, reducing repeated disk reads. -->
-
-## Install Apache Spark
+### Install Apache Spark
 
 Download Apache Spark, extract it, and place it under `/opt`:
 
@@ -41,7 +27,7 @@ sudo mv spark-3.4.2-bin-hadoop3 /opt/spark
 sudo chown -R $USER:$USER /opt/spark
 ```
 
-## Configure Spark environment
+### Configure Spark environment
 
 Set the Spark environment variables so you can run Spark commands from your shell:
 
@@ -51,7 +37,7 @@ echo 'export PATH=$PATH:$SPARK_HOME/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-## Connect Spark with Alluxio
+### Connect Spark with Alluxio
 
 Open the Spark configuration file and add the Alluxio filesystem implementation and client JAR paths:
 
@@ -175,7 +161,7 @@ Run both timing blocks and compare the printed values. The output is similar to:
 The second run is faster because Spark serves the result directly from its in-memory cache, bypassing Alluxio and the underlying storage entirely.
 
 
-## Verify in Alluxio UI
+### Verify in Alluxio UI
 
 Open the Alluxio UI. Replace `<VM-IP>` with the public IP of your VM:
 
@@ -189,22 +175,13 @@ http://<VM-IP>:19999
 
 The UI shows files stored in Alluxio namespace. You can see cached files and directories available for fast access. 
 
-### Alluxio caching activity
-
-After running `df.cache()` and `df.count()`, return to the Alluxio Web UI and look for:
+In the Alluxio Web UI, confirm the following:
 
 - Increased worker memory usage in the worker summary
 - Cached file blocks listed in the data browser
 - Active data access reflected in the cluster metrics
 
 {{% notice Note %}}This Learning Path uses local disk as the underlying storage to keep the setup self-contained. The performance advantage of Alluxio is most significant when the underlying storage is remote — for example, Azure Blob Storage, Amazon S3, or HDFS. In those configurations, Alluxio caches data in local worker memory after the first read, so subsequent Spark jobs access cached data at memory speed instead of making repeated remote storage round-trips.{{% /notice %}}
-
-<!-- ## Key concepts
-
-- Alluxio sits between compute and storage
-- Frequently used data is cached in memory
-- Spark reads cached data instead of disk
-- This improves analytics performance significantly -->
 
 ## What you've accomplished 
 

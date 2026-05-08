@@ -8,13 +8,13 @@ layout: "learningpathall"
 
 ## Why run Alluxio on Azure Cobalt 100
 
-Alluxio on Arm-based Azure Cobalt 100 processors delivers high-performance data access for analytics and AI workloads. Cobalt 100's dedicated physical cores per vCPU provide consistent and predictable performance, which complements Alluxio’s in-memory caching and data orchestration capabilities.
+Alluxio on Arm-based Azure Cobalt 100 processors delivers high-performance data access for analytics and AI workloads. Cobalt 100's dedicated physical cores per vCPU provide consistent and predictable performance, which complements Alluxio’s in-memory caching and data orchestration capabilities. 
 
-Together, Alluxio's memory-centric architecture and efficient Arm-based architecture can reduce data latency. Alluxio on Arm-based compute helps accelerate frameworks such as Apache Spark and optimize overall data performance.
+Together, Alluxio's memory-centric architecture on Arm can reduce data latency. Alluxio on Arm-based compute helps accelerate frameworks such as Apache Spark and optimize overall data performance.
 
 ## Azure Cobalt 100 Arm-based processor
 
-Azure’s Cobalt 100 is Microsoft’s first-generation, in-house Arm-based processor. Built on Arm Neoverse N2, Cobalt 100 is a 64-bit CPU that delivers strong performance and energy efficiency for cloud-native, scale-out Linux workloads. These workloads include web and application servers, data analytics, open-source databases, and caching systems. Running at 3.4 GHz, Cobalt 100 allocates a dedicated physical core for each vCPU, which ensures consistent and predictable performance.
+Azure’s Cobalt 100 is Microsoft’s first-generation, in-house Arm-based processor. Built on Arm Neoverse N2, Cobalt 100 is a 64-bit CPU that delivers strong performance and energy efficiency for cloud-native, scale-out Linux workloads. These workloads include web and application servers, data analytics, open-source databases, and caching systems. Running at 3.4 GHz, Cobalt 100 allocates a dedicated physical core for each vCPU, ensuring consistent and predictable performance.
 
 To learn more, see the Microsoft blog [Announcing the preview of new Azure VMs based on the Azure Cobalt 100 processor](https://techcommunity.microsoft.com/blog/azurecompute/announcing-the-preview-of-new-azure-vms-based-on-the-azure-cobalt-100-processor/4146353).
 
@@ -22,16 +22,16 @@ To learn more, see the Microsoft blog [Announcing the preview of new Azure VMs b
 
 Alluxio is an open-source data orchestration platform that enables fast and reliable access to data across distributed storage systems. It acts as a unified layer between compute frameworks and storage systems, improving performance for data-intensive applications.
 
-Alluxio is widely used in modern data platforms to accelerate analytics workloads by caching frequently accessed data in memory, reducing latency and minimizing repeated reads from slower storage systems such as local disks or cloud storage.
+Alluxio is widely used in modern data platforms to accelerate analytics workloads by caching frequently accessed data in memory. This reduces latency and minimizes repeated reads from slower storage systems such as local disks or cloud storage.
 
-Alluxio integrates with popular analytics frameworks such as Apache Spark, Presto, and Hadoop, making it ideal for building high-performance data pipelines and AI/ML workloads.
+Alluxio integrates with popular analytics frameworks such as Apache Spark, Presto, and Hadoop. This makes it ideal for building high-performance data pipelines and AI/ML workloads.
 
 To learn more, see the official [Alluxio documentation](https://docs.alluxio.io/).
 
 Alluxio provides key capabilities for data orchestration and performance optimization:
 
-- Data Caching: Frequently accessed data is stored in memory, significantly reducing access time compared to disk-based reads.
-- Unified Namespace: Alluxio presents a single logical view of data across multiple storage systems, simplifying data access.
+- Data Caching: Stores frequently accessed data in memory, significantly reducing access time compared to disk-based reads.
+- Unified Namespace: Presents a single logical view of data across multiple storage systems, simplifying data access.
 - Tiered Storage: Supports multiple storage layers (memory, SSD, HDD), enabling efficient data management based on access patterns.
 - Compute Integration: Works with analytics engines such as Apache Spark to accelerate data processing without modifying application logic.
 
