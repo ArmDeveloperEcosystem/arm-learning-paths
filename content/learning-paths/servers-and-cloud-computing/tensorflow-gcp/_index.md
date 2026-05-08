@@ -21,13 +21,26 @@ generate_summary_faq: true
 # START generated_summary_faq
 generated_summary_faq:
   template_version: summary-faq-v2
-  generated_at: '2026-05-08T16:31:32Z'
+  generated_at: '2026-05-08T18:10:04Z'
   generator: template
   source_hash: 2c20d30d25a0bb871bdb935d18f7ad8e0740139948133dbd728e10f0add0f94e
-  summary_generated_at: '2026-05-08T16:31:32Z'
+  summary_generated_at: '2026-05-08T18:10:04Z'
   summary_source_hash: 2c20d30d25a0bb871bdb935d18f7ad8e0740139948133dbd728e10f0add0f94e
   faq_generated_at: '2026-05-06T17:17:59Z'
   faq_source_hash: 2c20d30d25a0bb871bdb935d18f7ad8e0740139948133dbd728e10f0add0f94e
+  summary: >-
+    Deploy TensorFlow on Google Cloud C4A (Arm-based Axion VMs) walks you through an end-to-end
+    Arm software workflow. It is designed for software developers deploying and optimizing TensorFlow
+    workloads on Arm64 Linux environments, specifically using Google Cloud C4A virtual machines
+    powered by Axion processors. By the end, you will be able to provision an Arm-based SUSE Linux
+    Enterprise Server (SLES) virtual machine on Google Cloud (C4A with Axion processors), install
+    TensorFlow on a SUSE Arm64 (C4A) instance, and verify TensorFlow by running basic computation
+    and model training tests on Arm64. It focuses on tools and technologies such as TensorFlow,
+    Python, and Keras, Linux environments, Arm platforms including Neoverse, and cloud platforms
+    such as Google Cloud. The main steps cover Get started with TensorFlow on Google Axion C4A,
+    Create a Google Axion C4A Arm virtual machine on GCP, Install TensorFlow, Test TensorFlow
+    baseline performance on Google Axion C4A, and Benchmark TensorFlow model performance using
+    tf.keras.
   faqs:
   - question: What will you accomplish in this Learning Path?
     answer: >-
@@ -94,3 +107,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

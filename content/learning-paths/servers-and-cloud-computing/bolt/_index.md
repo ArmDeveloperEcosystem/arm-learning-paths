@@ -16,18 +16,18 @@ prerequisites:
     - (Optional) A second, more powerful Linux system to build the software executable and run BOLT.
 
 generate_summary_faq: true
-rerun_summary: true
-rerun_faqs: true
+rerun_summary: false
+rerun_faqs: false
 
 # START generated_summary_faq
 generated_summary_faq:
   template_version: summary-faq-v2
-  generated_at: '2026-05-08T16:31:30Z'
+  generated_at: '2026-05-08T18:10:01Z'
   generator: template
   source_hash: 2e9ac8a3c73b7d3d59fe6ba20fb6d61fc2b7e5e9320aaadc20af0a8bbb3ff959
-  summary_generated_at: '2026-05-08T16:31:30Z'
+  summary_generated_at: '2026-05-08T18:10:01Z'
   summary_source_hash: 2e9ac8a3c73b7d3d59fe6ba20fb6d61fc2b7e5e9320aaadc20af0a8bbb3ff959
-  faq_generated_at: '2026-05-08T16:31:30Z'
+  faq_generated_at: '2026-05-08T18:10:01Z'
   faq_source_hash: 2e9ac8a3c73b7d3d59fe6ba20fb6d61fc2b7e5e9320aaadc20af0a8bbb3ff959
   summary: >-
     Learn how to build, profile, and optimize Arm executables using BOLT post-link binary optimization
@@ -102,3 +102,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+
