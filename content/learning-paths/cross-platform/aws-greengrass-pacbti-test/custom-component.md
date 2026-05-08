@@ -1,68 +1,67 @@
 ---
-title: Creating an AWS IoT Greengrass custom component
+title: Create an AWS IoT Greengrass custom component
 
 weight: 5
 
 layout: "learningpathall"
 ---
 
-### Introduction
+### Overview
 
 In this section, you create an AWS IoT Greengrass custom component that uses an artifact package to test PAC/BTI support on target Arm devices.
 
-### S3 bucket creation for the custom component artifact
+### Upload the component artifact to S3
 
 1. In the AWS Console, go to **S3**.
 
-![Creating an S3 bucket](images/s3-1.png "Creating an S3 bucket to store our component's artifact")
+![AWS S3 console showing the bucket list and the Create bucket button#center](images/s3-1.png "AWS S3 console")
 
 2. Create a bucket and give it a name. Keep the default settings for this tutorial.
 
-![Creating an S3 bucket](images/s3-2.png "Creating an S3 bucket to store our component's artifact")
+![S3 bucket creation form with the bucket name field and default settings#center](images/s3-2.png "S3 bucket creation form")
 
 3. Select **Create bucket**.
 
-![Creating an S3 bucket](images/s3-3.png "Creating an S3 bucket to store our component's artifact")
+![S3 console confirming the new bucket has been created and appears in the bucket list#center](images/s3-3.png "New S3 bucket created")
 
 4. Record the bucket name. You will use it in the YAML recipe.
 
 5. On your local machine, clone the asset repository:
 
 ```bash
-git clone https://github.com/DougAnsonAustinTx/pac-bti-gg-assets 
+git clone https://github.com/DougAnsonAustinTx/pac-bti-gg-assets
 cd ./pac-bti-gg-assets
 ```
 
-6. In the S3 bucket view, select **Upload** and upload this artifact from the cloned repository:
-`./arm-pac-bti-greengrass-demo-mqtt-trigger.zip`
+6. In the S3 bucket view, select **Upload**. Upload the following artifact from the cloned repository:
 
-![Upload to an S3 bucket](images/upload-1.png "Uploading to our S3 bucket")
+   `arm-pac-bti-greengrass-demo-mqtt-trigger.zip`
+
+![S3 bucket view showing the Upload button used to add the component artifact#center](images/upload-1.png "S3 bucket upload view")
 
 7. Select **Add files**, choose the artifact, and then select **Upload**.
 
-![Upload to an S3 bucket](images/upload-2.png "Uploading to our S3 bucket")
+![S3 upload dialog with the artifact file selected and the Upload button highlighted#center](images/upload-2.png "S3 upload dialog with artifact selected")
 
 Your artifact is now available in S3. Next, create the custom Greengrass component.
 
-### Custom component creation
+### Create the custom component
 
-1. In the AWS Console, go to **IoT Core** -> **Greengrass devices** and select **Components**.
+1. In the AWS Console, go to **IoT Core** > **Greengrass devices** and select **Components**.
 
 2. Select **Create component**.
 
-![Creating a Greengrass custom component](images/custom-1.png "Creating a custom component")
+![Greengrass Components page showing the Create component button#center](images/custom-1.png "Greengrass Components page")
 
 3. Select **Enter recipe as YAML** and clear the default sample content.
 
-![Creating a Greengrass custom component](images/custom-2.png "Creating a custom component")
+![Greengrass component recipe editor with the Enter recipe as YAML option selected and the editor cleared#center](images/custom-2.png "Greengrass YAML recipe editor")
 
 4. Copy and paste the following YAML recipe into the editor.
 
 {{% notice Note %}}
 In the YAML code below, locate **YOUR_S3_BUCKET** and replace it with the S3 bucket name you created in the previous step.
 {{% /notice %}}
-
-
 
 ```yaml
 RecipeFormatVersion: '2020-01-25'
@@ -159,12 +158,12 @@ Manifests:
 
 5. After you update the bucket name, select **Create component**.
 
-![Creating a Greengrass custom component](images/custom-3.png "Creating a custom component")
+![Greengrass component creation confirmation screen showing the component being created#center](images/custom-3.png "Greengrass component creation confirmation")
 
 6. Confirm the custom component appears in the component list.
 
-![Creating a Greengrass custom component](images/custom-4.png "Creating a custom component")
+![Greengrass Components list showing the newly created arm-com.arm.demo.PacBtiDemo component#center](images/custom-4.png "Greengrass component list with new component")
 
-### What we've accomplished
+### What you've accomplished
 
 You created an AWS IoT Greengrass custom component and connected it to the S3-hosted artifact. In the next section, you'll deploy it to both Greengrass core devices.

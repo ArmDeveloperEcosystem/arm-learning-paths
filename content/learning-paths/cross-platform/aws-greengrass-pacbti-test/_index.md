@@ -12,10 +12,10 @@ minutes_to_complete: 30
 who_is_this_for: This Learning Path is for IoT and embedded developers who want to deploy and manage components on Arm devices using AWS IoT Greengrass, and verify PAC/BTI security feature support across different Arm platforms.
 
 learning_objectives: 
-    - Register Armv8 and Armv9 Arm devices as AWS IoT Greengrass core devices.
-    - Build an AWS IoT Greengrass custom component that tests PAC/BTI support.
-    - Deploy the component to multiple Arm devices using a Greengrass thing group.
-    - Use MQTT to trigger PAC/BTI checks and interpret the results for each platform.
+    - Register Armv8 and Armv9 devices as AWS IoT Greengrass core devices
+    - Build an AWS IoT Greengrass custom component that tests PAC/BTI support
+    - Deploy the component to multiple Arm devices using a Greengrass Thing Group
+    - Use MQTT to trigger PAC/BTI checks and interpret the results for each platform
 
 prerequisites:
     - An [Amazon AWS](https://aws.amazon.com/) account with access to AWS IoT Greengrass and Amazon S3
@@ -30,7 +30,7 @@ author:
 
 ### Tags
 skilllevels: Introductory
-subjects: Security
+subjects: Performance and Architecture
 cloud_service_providers:
     - AWS
 

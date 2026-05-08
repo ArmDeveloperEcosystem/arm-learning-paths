@@ -1,19 +1,18 @@
 ---
-title: Set up and prepare an RPi5 for AWS IoT Greengrass
+title: Set up an RPi5 as an AWS IoT Greengrass core device
 
 weight: 3
 
 layout: "learningpathall"
 ---
 
-### Introduction
+### About the Raspberry Pi 5
 
-In this section, you prepare an RPi5 device to become an AWS IoT Greengrass core device. The RPi5 is a suitable Armv8 platform where PAC/BTI instruction support is not available, so it serves as the negative comparison platform for this test.
+In this section, you prepare an RPi5 device to become an AWS IoT Greengrass core device. The RPi5 uses a Cortex-A76 processor, which is Armv8.2-A. Because PAC requires Armv8.3-A and BTI requires Armv8.5-A, the RPi5 does not support either feature. It serves as the negative comparison platform in this test.
 
-### Basic OS Install
+### Basic OS install
 
-To install the latest Raspberry Pi OS on your RPi, follow the Raspberry Pi setup guide:
-https://www.raspberrypi.com/documentation/computers/getting-started.html
+To install the latest Raspberry Pi OS on your RPi, follow the [Getting started - Raspberry Pi documentation](https://www.raspberrypi.com/documentation/computers/getting-started.html).
 
 
 ### Install Java
@@ -42,32 +41,33 @@ OpenJDK 64-Bit Server VM (build 21.0.10+7-Debian-1deb13u1, mixed mode, sharing)
 
 ### Install AWS IoT Greengrass
 
-Before you complete these steps, create an AWS access key pair for the account you will use. You can follow this short video (or ask your AWS administrator):
-https://www.youtube.com/watch?v=QzTkIfQNsVw
+Before you complete these steps, create an AWS access key pair for the account you will use. You can follow the [AWS Setup Tutorial: Create Account, IAM User & AWS CLI](https://www.youtube.com/watch?v=QzTkIfQNsVw) or ask your AWS administrator.
 
-1. Open the AWS Console and go to **IoT Core** -> **Greengrass devices** -> **Core devices**.
+1. Open the AWS Console and go to **IoT Core** > **Greengrass devices** > **Core devices**.
 
-2. Select **Set up core device** -> **Set up one core device**.
+2. Select **Set up core device** > **Set up one core device**.
 
 3. Enter a name for your core device.
 
 4. Select **Enter a new group name**.
-Use `My_PAC_BTI_Test_Devices` and save it because you'll reuse this group for your Armv9 device in the next section.
+
+   Use `My_PAC_BTI_Test_Devices` and save it because you'll reuse this group for your Armv9 device in the next section.
 
 5. Select **Greengrass nucleus** for installation.
 
 6. Select **Linux**.
 
-![Creating new AWS IoT Greengrass device](images/greengrass-1.png "Creating an AWS IoT Greengrass device")
+![AWS IoT Greengrass setup wizard showing Linux selected as the operating system and the installer method options#center](images/greengrass-1.png "Greengrass core device setup — Linux and installer selection")
 
 7. Select **Set up a device by downloading and running an installer locally on device**.
 
 8. Follow the generated installer instructions on the RPi5 and authenticate with the AWS credentials you created.
 
-![Creating new AWS IoT Greengrass device](images/greengrass-2.png "Creating an AWS IoT Greengrass device")
+![Generated Greengrass installer commands to run on the RPi5 to complete core device registration#center](images/greengrass-2.png "Generated installer commands for the RPi5")
 
 9. Confirm registration by selecting **View core devices**.
-You should see your RPi5 listed with recent activity.
+
+   You should see your RPi5 listed with recent activity.
 
 ### What's next
 
