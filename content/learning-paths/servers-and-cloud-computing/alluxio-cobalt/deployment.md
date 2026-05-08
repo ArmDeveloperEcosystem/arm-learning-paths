@@ -8,15 +8,15 @@ layout: learningpathall
 
 ## Deploy Alluxio on Azure Cobalt 100 (Arm)
 
-This section guides you through installing Alluxio on an Azure Cobalt 100 Arm-based virtual machine and configuring it with local storage.
+In this section, you'll learn how to install Alluxio on an Azure Cobalt 100 Arm-based virtual machine and configure it with local storage.
 
-You will set up a unified data orchestration layer that sits between compute frameworks and storage systems.
+You'll set up a unified data orchestration layer that sits between compute frameworks and storage systems.
 
-### Why Alluxio?
+<!-- ### Why Alluxio?
 
 - Speeds up data access using memory caching 
 - Reduces repeated disk I/O  
-- Improves performance for analytics workloads  
+- Improves performance for analytics workloads   -->
 
 ## Update your system
 
@@ -25,6 +25,7 @@ sudo apt update && sudo apt upgrade -y
 ```
 
 ## Install required dependencies
+
 These tools are required for downloading and extracting software:
 
 ```bash
@@ -54,7 +55,7 @@ sudo update-alternatives --config java
 
 When prompted, enter the selection number corresponding to the `temurin-11` entry in the list.
 
-**Verify:**
+Verify:
 
 ```bash
 java -version
@@ -78,7 +79,8 @@ sudo mv alluxio-2.9.4 alluxio
 sudo chown -R $USER:$USER /opt/alluxio
 ```
 
-## Configure environment variables
+## Configure environment variables\
+
 This allows you to run Alluxio commands globally.
 
 ```bash
@@ -168,7 +170,7 @@ Starting to monitor all local services.
 jps
 ```
 
-**Expected output:**
+The output is similar to:
 
 ```output
 AlluxioJobWorker
@@ -187,18 +189,10 @@ http://<VM-IP>:19999
 
 ![Alluxio dashboard showing cluster summary and worker status on Azure Cobalt 100 VM#center](images/alluxio-ui.png "Alluxio Web UI with cluster summary and worker details")
 
-## Alluxio UI Overview
-
-What you can see:
-
-- Master status (Leader node)
-- Worker memory usage
-- Storage capacity
-- Cached data blocks
-- Cluster health
+In the Alluxio Web UI, you can see the master status for the leader node, worker memory usage, storage capacity, cached data blocks, and overall cluster health.
 
 ## What you've learned and what's next
 
-Alluxio is now running on your Azure Cobalt 100 virtual machine with a memory-backed cache layer configured and all services reporting healthy. The Web UI at port 19999 gives you visibility into worker status, storage capacity, and cached data blocks.
+You now have Alluxio running on your Azure Cobalt 100 virtual machine with a memory-backed cache layer configured and all services reporting healthy. The Web UI at port 19999 gives you visibility into worker status, storage capacity, and cached data blocks.
 
 Next, you'll install Apache Spark and integrate it with Alluxio to run analytics workloads against the cache layer.
