@@ -6,7 +6,7 @@ weight: 6
 layout: learningpathall
 ---
 
-## Integrate Alluxio with Apache Spark
+## Set up Apache Spark with Alluxio
 
 In this section, you'll integrate Alluxio with Apache Spark, enable caching, and optimize data access performance.
 
@@ -30,6 +30,8 @@ Alluxio caches frequently accessed data in memory, reducing repeated disk reads.
 
 ## Install Apache Spark
 
+Download Apache Spark, extract it, and place it under `/opt`:
+
 ```bash
 cd ~
 wget https://archive.apache.org/dist/spark/spark-3.4.2/spark-3.4.2-bin-hadoop3.tgz
@@ -40,6 +42,8 @@ sudo chown -R $USER:$USER /opt/spark
 ```
 
 ## Configure Spark environment
+
+Set the Spark environment variables so you can run Spark commands from your shell:
 
 ```bash
 echo 'export SPARK_HOME=/opt/spark' >> ~/.bashrc
@@ -119,6 +123,8 @@ scala>
 
 ## Load data via Alluxio
 
+Load the sample dataset through the Alluxio namespace and confirm that Spark can read it successfully:
+
 ```scala
 val df = spark.read.text("alluxio:///demo/data.txt")
 df.count()
@@ -141,7 +147,7 @@ df.count()
 
 ## Measure performance
 
-First run:
+Run for the first time:
 
 ```scala
 val t1 = System.nanoTime()
@@ -150,7 +156,7 @@ val t2 = System.nanoTime()
 println((t2 - t1)/1e9 + " seconds")
 ```
 
-Second run after caching:
+Run for the second time after caching:
 
 ```scala
 val t3 = System.nanoTime()
@@ -177,9 +183,9 @@ Open the Alluxio UI. Replace `<VM-IP>` with the public IP of your VM:
 http://<VM-IP>:19999
 ```
 
-![Alluxio cluster load and worker resource usage during Spark job execution on Azure Cobalt 100 VM#center](images/alluxio-load.png "Alluxio cluster load and worker utilization during processing")
+![Alluxio Web UI showing cluster load and worker resource usage during the Spark job. Check for active worker memory usage and cluster activity after running the caching steps.#center](images/alluxio-load.png "Alluxio cluster load and worker utilization during processing")
 
-![Alluxio data browser showing cached files and directories on Azure Cobalt 100 VM#center](images/alluxio-data.png "Alluxio data view displaying cached datasets")
+![Alluxio data browser showing cached files and directories. Look for the dataset you loaded through Spark to confirm that cached data is now visible in the Alluxio namespace.#center](images/alluxio-data.png "Alluxio data view displaying cached datasets")
 
 The UI shows files stored in Alluxio namespace. You can see cached files and directories available for fast access. 
 

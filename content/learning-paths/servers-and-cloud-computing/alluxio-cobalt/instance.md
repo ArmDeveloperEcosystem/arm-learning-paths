@@ -6,23 +6,15 @@ weight: 3
 layout: learningpathall
 ---
 
-## Provision Azure infrastructure for Alluxio
+## Set up the Azure virtual machine
 
-Create an Arm-based Cobalt 100 virtual machine to host your Alluxio deployment.
+In this section, you'll launch the Azure portal to create a virtual machine with the Arm-based Azure Cobalt 100 processor.
 
-There are several common ways to create an Arm-based Cobalt 100 virtual machine, and you can choose the method that best fits your workflow or requirements:
-
-- The Azure portal
-- The Azure CLI
-- An infrastructure as code (IaC) tool
-
-In this section, you'll launch the Azure Portal to create a virtual machine with the Arm-based Azure Cobalt 100 processor.
-
-The Learning Path focuses on general-purpose virtual machines in the Dpsv6 series. For more information, see the [Microsoft Azure guide for the Dpsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series).
+This Learning Path focuses on general-purpose virtual machines in the Dpsv6 series. For more information, see the [Microsoft Azure guide for the Dpsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series).
 
 While the steps to create this instance are included here for convenience, you can also see [Deploy a Cobalt 100 virtual machine on Azure Learning Path](/learning-paths/servers-and-cloud-computing/cobalt/).
 
-## Create an Arm-based Azure virtual machine 
+## Create an Arm-based Azure virtual machine in the Azure portal
 
 To create an Azure virtual machine using the Azure portal:
 
@@ -49,9 +41,9 @@ RSA offers better security with keys longer than 3072 bits.
 {{% /notice %}}
 
 10. Give your SSH key a key pair name.
-11. In the **Inbound port rules**, select **HTTP (80)** and **SSH (22)** as the inbound ports, as shown below:
+11. In the **Inbound port rules**, select **HTTP (80)** and **SSH (22)** as the inbound ports, as shown in the following image:
 
-![Azure Portal showing inbound port rules with HTTP (80) and SSH (22) selected#center](images/instance1.png "Configure inbound port rules for HTTP and SSH access")
+![Azure Portal inbound port configuration showing SSH and HTTP selected. Check that the required access settings are in place before creating the virtual machine.#center](images/instance1.png "Configure inbound port rules for HTTP and SSH access")
 
 12. Select the **Review + Create** tab and review the configuration for your virtual machine. It should look like the following:
 
@@ -63,7 +55,7 @@ RSA offers better security with keys longer than 3072 bits.
 
 Your virtual machine should be ready and running in a few minutes. You can SSH into the virtual machine using the private key, along with the public IP details.
 
-![Azure Portal showing successful VM deployment with confirmation details#center](images/final-vm.png "Successful VM deployment confirmation")
+![Azure Portal deployment result showing that the virtual machine was created successfully. Look for the successful deployment status and the connection details you will use to access the virtual machine in the next step.#center](images/final-vm.png "Successful VM deployment confirmation")
 
 {{% notice Note %}}To learn more about Arm-based virtual machines in Azure, see "Getting Started with Microsoft Azure" in [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure/).{{% /notice %}}
 

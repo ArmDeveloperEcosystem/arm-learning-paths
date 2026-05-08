@@ -6,19 +6,16 @@ weight: 5
 layout: learningpathall
 ---
 
-## Deploy Alluxio on Azure Cobalt 100 (Arm)
+## Set up Alluxio on the VM
 
 In this section, you'll learn how to install Alluxio on an Azure Cobalt 100 Arm-based virtual machine and configure it with local storage.
 
 You'll set up a unified data orchestration layer that sits between compute frameworks and storage systems.
 
-<!-- ### Why Alluxio?
-
-- Speeds up data access using memory caching 
-- Reduces repeated disk I/O  
-- Improves performance for analytics workloads   -->
 
 ## Update your system
+
+Start by updating the package index and installing the latest available package updates on the virtual machine.
 
 ```bash
 sudo apt update && sudo apt upgrade -y
@@ -71,6 +68,8 @@ openJDK 64-Bit Server VM Temurin-11.0.30+7 (build 11.0.30+7, mixed mode)
 
 ## Download and install Alluxio
 
+Download the Alluxio binary release, extract it under `/opt`, and set ownership to your current user.
+
 ```bash
 cd /opt
 sudo wget https://downloads.alluxio.io/downloads/files/2.9.4/alluxio-2.9.4-bin.tar.gz
@@ -79,7 +78,7 @@ sudo mv alluxio-2.9.4 alluxio
 sudo chown -R $USER:$USER /opt/alluxio
 ```
 
-## Configure environment variables\
+## Configure environment variables
 
 This allows you to run Alluxio commands globally.
 
@@ -127,7 +126,7 @@ alluxio.worker.memory.size=6GB
 alluxio.master.mount.table.root.ufs=/mnt/data
 ```
 
-`master.hostname` sets the host where the Alluxio master process runs. `worker.memory.size` controls how much RAM is reserved as the caching layer — 6 GB is appropriate for the D4ps_v6 VM, which has 16 GB of total memory. `root.ufs` points to the underlying storage directory that Alluxio manages.
+`master.hostname` sets the host where the Alluxio master process runs. `worker.memory.size` controls how much RAM is reserved as the caching layer. 6 GB is appropriate for the D4ps_v6 VM, which has 16 GB of total memory. `root.ufs` points to the underlying storage directory that Alluxio manages.
 
 ## Set up the storage directory
 
@@ -166,6 +165,8 @@ Starting to monitor all local services.
 
 ## Verify Alluxio services
 
+Confirm that the Alluxio services are running before opening the Web UI.
+
 ```bash
 jps
 ```
@@ -187,7 +188,7 @@ Open the Alluxio Web UI in your browser:
 http://<VM-IP>:19999
 ```
 
-![Alluxio dashboard showing cluster summary and worker status on Azure Cobalt 100 VM#center](images/alluxio-ui.png "Alluxio Web UI with cluster summary and worker details")
+![Alluxio Web UI showing the cluster summary and worker status on the Azure Cobalt 100 virtual machine. Check that the leader is active, worker memory is in use, and cluster health is reported correctly before moving to the next step.#center](images/alluxio-ui.png "Alluxio Web UI with cluster summary and worker details")
 
 In the Alluxio Web UI, you can see the master status for the leader node, worker memory usage, storage capacity, cached data blocks, and overall cluster health.
 
