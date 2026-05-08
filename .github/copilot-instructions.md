@@ -103,7 +103,7 @@ Do not modify fixed template fields.
 
 If `multi_install` is set to true, the first page must act as an overview for the series. Sub-pages must set `multitool_install_part: true`.
 
-### Required content structure
+#### Required content structure
 
 Install guides should include:
 
@@ -127,7 +127,7 @@ Install guides should include:
 Optional:
 - Uninstall instructions
 
-### Scope boundaries
+#### Scope boundaries
 
 Install guides must not include:
 - End-to-end workflows
@@ -136,6 +136,14 @@ Install guides must not include:
 - Comparative marketing claims
 
 Learning Paths may link to install guides for setup steps. Install guides should not duplicate workflow content.
+
+#### Tool versions
+
+When providing commands for downloading or installing software, use a specific version in the example. This ensures that the instructions are accurate and verifiable. However, also include a note before the commands that tells readers the same commands work with other versions. Provide a link to where the latest version can be found. The note can be formatted as follows:
+
+{{% notice Note %}}
+The following commands use <tool> version <version>. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Link to page with release info](URL).
+{{% /notice %}}
 
 ### Further reading curation
 
@@ -288,9 +296,15 @@ Use these preferred terms and phrases for consistency:
   - `therefore` instead of `ergo`
   - `namely` instead of `viz.`
   - `avoid` instead of `try not to`
+  - `such as` instead of `like`
+  - `after` instead of `once`
+  - `setup` as a noun, `set up` as a verb
 
 - Avoid condescending language:
   - Do not use `simply`, `just`, `obviously`, or `clearly`
+
+- Avoid using directions when referring to content that's been referenced previously or will be referenced next:
+ - Do not use `above`, `below`, `left`, `right`, `top`, or `bottom`
 
 - Acknowledge difficulty naturally:
   - Use phrases like `this step can be confusing at first`

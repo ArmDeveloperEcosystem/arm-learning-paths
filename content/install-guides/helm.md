@@ -26,11 +26,9 @@ weight: 1
 
 Helm supports the Arm architecture, and is available for Windows, macOS, and Linux.
 
+In this Install Guide, you'll learn how to install Helm for Ubuntu on Arm. For more information, see [Installing Helm](https://helm.sh/docs/intro/install/) which covers all supported operating systems. 
+
 ## Before you begin
-
-There is documentation available on [Installing Helm](https://helm.sh/docs/intro/install/) which covers all supported operating systems. 
-
-This Install Guide gives you a quick solution for installing Helm for Ubuntu on Arm.
 
 To start, confirm you are using an Arm machine by running:
 
@@ -43,23 +41,23 @@ The output should be:
 aarch64
 ```
 
-If you see a different result, you are not using an Arm computer running 64-bit Linux.
+If you see a different result, you're not using an Arm computer running 64-bit Linux.
 
-You might need to install `curl` and `wget` if you do not already have them installed:
+You might need to install `curl` and `wget` if you don't already have them installed:
 
 ```bash
 sudo apt install -y curl wget
 ```
 
-## How do I download and install Helm?
+## Download and install Helm
 
-There are multiple ways to install Helm for Ubuntu on Arm. Here are three options from which you can choose.
+There are multiple ways to install Helm for Ubuntu on Arm. The following are three options from which you can choose.
 
 ### Option 1: Install using the release tar file
 
 Download and install the latest version. 
 
-There is just one executable to copy to the desired location:
+There is only one executable to copy to the desired location:
 
 ```bash
 HELM_VER=`curl -s https://api.github.com/repos/helm/helm/releases/latest | grep tag_name | cut -d: -f2 | tr -d \"\,\v | awk '{$1=$1};1'`
@@ -88,7 +86,7 @@ Snap is another option for installing Helm:
 sudo snap install helm --classic
 ```
 
-### How do I confirm that Helm is installed?
+### Confirm that Helm is installed
 
 Regardless of which option you are using, confirm the executable is available:
 
@@ -96,7 +94,7 @@ Regardless of which option you are using, confirm the executable is available:
 helm version
 ```
 
-You see the version information printed:
+The output is similar to:
 
 ```output
 version.BuildInfo{Version:"v3.16.3", GitCommit:"cfd07493f46efc9debd9cc1b02a0961186df7fdf", GitTreeState:"clean", GoVersion:"go1.22.7"}

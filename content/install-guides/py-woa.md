@@ -28,13 +28,13 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-Python has native support for [Windows on Arm](https://learn.microsoft.com/en-us/windows/arm/overview). Starting with version 3.11, an official installer is available. The latest version is 3.13.0.
+Python has native support for [Windows on Arm](https://learn.microsoft.com/en-us/windows/arm/overview). Starting with version 3.11, an official installer is available. 
 
-A number of developer-ready Windows on Arm [devices](/learning-paths/laptops-and-desktops/intro/find-hardware/) are available.
+You can find a number of developer-ready Windows on Arm [devices](/learning-paths/laptops-and-desktops/intro/find-hardware/).
 
-Windows on Arm instances are available with Microsoft Azure. For further information, see [Deploy a Windows on Arm virtual machine on Microsoft Azure](/learning-paths/cross-platform/woa_azure/).
+Windows on Arm instances are available with Microsoft Azure. For more information, see [Deploy a Windows on Arm virtual machine on Microsoft Azure](/learning-paths/cross-platform/woa_azure/).
 
-## How do I download and install Python for Windows on Arm?
+## Download and install Python for Windows on Arm
 
 To download and install Python for Windows on Arm, there is more than one option:
 
@@ -45,19 +45,19 @@ To download and install Python for Windows on Arm, there is more than one option
 curl https://www.python.org/ftp/python/3.13.0/python-3.13.0-arm64.exe --output python-3.13.0-arm64.exe
 ```
 
-Once you have downloaded Python, run the installer `exe` file on a Windows on Arm machine. 
+After you have downloaded Python, run the installer `exe` file on a Windows on Arm machine. 
 
 The installer will start. 
 
-Tick the checkbox **Add python.exe to PATH** to enable you to easily invoke Python from any directory.
+Tick the checkbox **Add python.exe to PATH** to allow you to easily invoke Python from any directory.
 
-![Install #center](/install-guides/_images/py1-woa.png)
+![Screenshot of the Python ARM64 installer on Windows on Arm with the Add python.exe to PATH checkbox selected so Python can run from any terminal directory.#center](/install-guides/_images/py1-woa.png)
 
-**Setup was successful** is displayed when complete.
+When the installation completes, you'll see a window with the message **Setup was successful**.
 
-![Complete #center](/install-guides/_images/py2-woa.png)
+![Screenshot of the Python installer completion screen showing Setup was successful, confirming the ARM64 installation finished correctly.#center](/install-guides/_images/py2-woa.png)
 
-## How do I start Python on Windows? 
+## Start Python on Windows
 
 To start Python on Windows, at a Windows Command prompt or a PowerShell prompt, use `python` or `py` to start the interpreter:
 
@@ -79,9 +79,9 @@ Enter `exit()` to leave the interpreter:
 exit()
 ```
 
-## How can I run a Python example?
+## Verify installation by running a Python example
 
-To run a Python example, and confirm that Python is working, use a text editor to save the code below to a file named `uname.py`.
+To confirm that Python is working, you can run a Python example. Use a text editor to save the following code to a file named `uname.py`:
 
 ```python
 import platform
@@ -95,14 +95,14 @@ Run the code:
 py uname.py
 ```
 
-Running on a Windows on Arm machine produces an output similar to:
+The output is similar to:
 
 ```output
 Python version 3.13.0
 Machine is Windows 11 ARM64
 ```
 
-## How do I install Python packages?
+## Install Python packages
 
 To install Python packages, you can use Python `pip`. 
 
@@ -111,7 +111,7 @@ For example, to install [Flask](https://palletsprojects.com/p/flask/):
 pip install Flask
 ```
 
-Use a text editor to save the code below as `hello.py`:
+Use a text editor to save the following code as `hello.py`:
 
 ```python
 import platform
@@ -131,7 +131,7 @@ Run the application:
 python hello.py
 ```
 
-The output will be similar to:
+The output is similar to:
 ```output
  * Serving Flask app 'hello'
  * Debug mode: off
@@ -141,13 +141,13 @@ WARNING: This is a development server. Do not use it in a production deployment.
  * Running on http://10.8.0.10:5000
 Press CTRL+C to quit
 ```
-Using the URL that the application prints, open a browser. Here is an example:
+Using the URL that the application prints, open a browser. The following is an example URL:
 ```url
 http://127.0.0.1:5000
 ```
 The output is displayed in the browser window.
 
-![Complete #center](/install-guides/_images/flask-woa.png)
+![Browser screenshot showing the Flask hello page with Windows and ARM64 platform details, verifying your Python web app runs on Windows on Arm.#center](/install-guides/_images/flask-woa.png)
 
 The accesses are reported in the command window:
 
@@ -160,17 +160,17 @@ The accesses are reported in the command window:
 
 Use **Ctrl + C** to stop the application.
 
-## Is Python IDLE available?
+## Find Python IDLE
 
 Python `IDLE` is included in the installation. IDLE is a simple IDE for Python development. You can locate it in the start menu.
 
 You can create and run Python applications in this environment.
 
-For example, use **File**, then **Open...** (or **Ctrl + O**) to open the above `uname.py`.
+For example, use **File**, then **Open...** (or **Ctrl + O**) to open `uname.py`.
 
 Then select **Run** and **Run module** (or **F5**) to execute.
 
-![IDLE uname #center](/install-guides/_images/py3-woa.png)
+![Screenshot of Python IDLE running uname.py and displaying Windows 11 ARM64 output, confirming script execution in the IDLE environment.#center](/install-guides/_images/py3-woa.png)
 
 
 You are now ready to use Python on your Windows on Arm device. 

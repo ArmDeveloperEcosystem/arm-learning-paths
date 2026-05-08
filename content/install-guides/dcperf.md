@@ -21,26 +21,26 @@ weight: 1
 
 ## Introduction
 
-DCPerf is an open-source benchmarking and microbenchmarking suite originally developed by Meta. It faithfully replicates the characteristics of general-purpose data center workloads, with particular attention to microarchitectural fidelity. DCPerf stands out for accurate simulation of behaviors such as cache misses and branch mispredictions, which are details that many other benchmarking tools overlook.
+DCPerf is an open-source benchmarking and microbenchmarking suite originally developed by Meta. It replicates the characteristics of general-purpose data center workloads, with particular attention to microarchitectural fidelity. DCPerf stands out for accurate simulation of behaviors such as cache misses and branch mispredictions, which are details that many other benchmarking tools overlook.
 
-You can use DCPerf to generate performance data to inform procurement decisions, and for regression testing to detect changes in the environment, such as kernel and compiler changes.
+You can use DCPerf to generate performance data to inform procurement decisions and for regression testing to detect changes in the environment, such as kernel and compiler changes.
 
-DCPerf runs on Arm-based servers. The examples below have been tested on an AWS `c7g.metal` instance running Ubuntu 22.04 LTS.
+DCPerf runs on Arm-based servers. The following examples have been tested on an Amazon EC2 `c7g.metal` instance running Ubuntu 22.04 LTS.
 
 {{% notice Note %}}
-When running on a server provided by a cloud service, you have limited access to some parameters, such as UEFI settings, which can affect performance.
+When running on a server provided by a cloud service, you have limited access to some parameters such as UEFI settings, which can affect performance.
 {{% /notice %}}
 
-## Install prerequisites
+## Before you begin
 
-To get started, install the required software:
+Install the required software:
 
 ```bash
 sudo apt update
 sudo apt install -y python-is-python3 python3-pip python3-venv git
 ```
 
-It is recommended that you install Python packages in a Python virtual environment.
+We recommend that you install Python packages in a Python virtual environment.
 
 Set up your virtual environment:
 
@@ -63,11 +63,11 @@ git clone https://github.com/facebookresearch/DCPerf.git
 cd DCPerf
 ```
 
-## Running the MediaWiki benchmark
+## Run the MediaWiki benchmark
 
-DCPerf offers many benchmarks. See the official documentation for the benchmark of your choice.
+DCPerf offers many benchmarks. To find a benchmark of your choice, see the [official documentation](https://github.com/facebookresearch/DCPerf?tab=readme-ov-file#install-and-run-benchmarks). 
 
-One example is the MediaWiki benchmark, designed to faithfully reproduce the workload of the Facebook social networking site.
+One such benchmark is MediaWiki, designed to reproduce the workload of the Facebook social networking site.
 
 Install HipHop Virtual Machine (HHVM), a virtual machine used to execute the web application code:
 
@@ -87,7 +87,7 @@ hhvm --version
 cd ..
 ```
 
-You should see output similar to:
+The output is similar to:
 
 ```output
 HipHop VM 3.30.12 (rel)
@@ -95,20 +95,20 @@ Compiler: 1704922878_080332982
 Repo schema: 4239d11395efb06bee3ab2923797fedfee64738e
 ```
 
-Confirm security-enhanced Linux (SELinux) is disabled with the following commands:
+Confirm security-enhanced Linux (SELinux) is not enabled with the following commands:
 
 ```bash
 sudo apt install selinux-utils
 getenforce
 ```
 
-You should see the following response:
+The output is similar to:
 
 ```output
 Disabled
 ```
 
-If you do not see the `Disabled` output, see your Linux distribution documentation for information about how to disable SELinux.
+If you don't see the `Disabled` output, see the documentation for your Linux distribution for information about how to disable SELinux.
 
 You can automatically install all dependencies for each benchmark using the `install` argument with the `benchpress_cli.py` command-line script:
 
@@ -116,11 +116,11 @@ You can automatically install all dependencies for each benchmark using the `ins
 sudo ./benchpress_cli.py install oss_performance_mediawiki_mlp
 ```
 
-This step might take several minutes to complete, depending on your system's download and setup speed.
+This step may take several minutes to complete, depending on your system's download and setup speed.
 
 ## Run the MediaWiki benchmark
 
-For the sake of brevity, you can provide the duration and timeout arguments using a `JSON` dictionary with the `-i` argument:
+For brevity, you can provide the duration and timeout arguments using a `JSON` dictionary with the `-i` argument:
 
 ```console
 sudo ./benchpress_cli.py run oss_performance_mediawiki_mlp -i '{
@@ -131,7 +131,7 @@ sudo ./benchpress_cli.py run oss_performance_mediawiki_mlp -i '{
 
 While the benchmark is running, you can monitor CPU activity and observe benchmark-related processes using the `top` command.
 
-When the benchmark is complete, a `benchmark_metrics_*` directory is created within the `DCPerf` directory, containing a `JSON` file for the system specs and another for the metrics.
+When the benchmark is complete, a `benchmark_metrics_*` directory is created within the `DCPerf` directory. The directory contains one `JSON` file for the system specs and another for the metrics.
 
 For example, the metrics file lists the following:
 
@@ -158,7 +158,7 @@ For example, the metrics file lists the following:
     "score": 2.4692578125
 ```
 
-## Understanding the benchmark results
+## Understand the benchmark results
 
 The metrics file contains several key performance indicators from the benchmark run:
 
@@ -179,12 +179,11 @@ The metrics file contains several key performance indicators from the benchmark 
  `wrk` is a modern HTTP benchmarking tool used to generate load and measure web server performance. It is widely used for benchmarking because it can produce significant load and provides detailed statistics. For more information, see [wrk's GitHub page](https://github.com/wg/wrk).
 {{% /notice %}}
 
-These metrics help you evaluate the performance and reliability of the system under test. Higher values for successful requests and RPS, and lower response times, generally indicate better performance. The score provides a single value for easy comparison across runs or systems.
+You can use these metrics to evaluate the performance and reliability of the system under test. Higher values for successful requests and RPS, and lower response times, generally indicate better performance. The score provides a single value for easy comparison across runs or systems.
 
 ## Next steps
 
-These are some activities you might like to try next:
-
+You are now ready to use DCPerf. The following are some activities you can try next:
 * Use the results to compare performance across different systems, hardware configurations, or after making system changes, such as kernel, compiler, or driver updates.
 
 * Consider tuning system parameters or trying alternative DCPerf benchmarks to further evaluate your environment.

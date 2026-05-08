@@ -29,13 +29,13 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-PyTorch has native support for [Windows on Arm](https://learn.microsoft.com/en-us/windows/arm/overview). Starting with PyTorch 2.7 release, you can access Arm native builds of PyTorch for Windows available for Python 3.12. 
+PyTorch has native support for [Windows on Arm](https://learn.microsoft.com/en-us/windows/arm/overview). Starting with the PyTorch 2.7 release, you can access Arm native builds of PyTorch for Windows available for Python 3.12. 
 
 A number of developer-ready Windows on Arm [devices](/learning-paths/laptops-and-desktops/intro/find-hardware/) are available.
 
-Windows on Arm instances are available with Microsoft Azure. For further information, see [Deploy a Windows on Arm virtual machine on Microsoft Azure](/learning-paths/cross-platform/woa_azure/).
+Windows on Arm instances are available with Microsoft Azure. For more information, see [Deploy a Windows on Arm virtual machine on Microsoft Azure](/learning-paths/cross-platform/woa_azure/).
 
-## How do I install PyTorch for Windows on Arm?
+## Install PyTorch for Windows on Arm
 
 {{% notice Environment Details %}}
 * PyTorch 2.7.0
@@ -43,7 +43,7 @@ Windows on Arm instances are available with Microsoft Azure. For further informa
 * Windows 11 for Arm64
 {{% /notice %}}
 
-Before you install PyTorch on your Windows on Arm machine, you will need to install [Python version 3.12 for Windows on Arm](https://www.python.org/downloads/release/python-3129/). Select the Windows ARM64 installer.
+Before you install PyTorch on your Windows on Arm machine, you'll need to install [Python version 3.12 for Windows on Arm](https://www.python.org/downloads/release/python-3129/). Select the Windows ARM64 installer.
 
 {{% notice Note %}} Make sure to install Python 3.12 as the Arm native builds for PyTorch on Windows are built with Python version 3.12 {{% /notice %}}
 
@@ -52,18 +52,18 @@ Verify your Python installation at a Windows Command prompt or a PowerShell prom
 ```command
 python --version
 ```
-The output should look like:
+The output is similar to:
 
 ```output
 Python 3.12.9
 ```
-Once you have downloaded Python, you can install the PyTorch Stable release (2.7.0) on your Windows on Arm machine. 
+After you have downloaded Python, you can install the PyTorch Stable release (2.7.0) on your Windows on Arm machine. 
 
 ```command
 pip3 install torch==2.7.0 --index-url https://download.pytorch.org/whl/cpu
 ```
 
-You will see that the `arm64` wheel for PyTorch is installed on your machine:
+You'll see that the `arm64` wheel for PyTorch is installed on your machine:
 ```output
 Downloading https://download.pytorch.org/whl/cpu/torch-2.7.0%2Bcpu-cp312-cp312-win_arm64.whl (107.9 MB)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 107.9/107.9 MB 29.7 MB/s eta 0:00:00
@@ -83,9 +83,9 @@ You can also install the nightly preview versions of PyTorch on your Windows Arm
 pip install --pre torch --index-url https://download.pytorch.org/whl/nightly/cpu
 ```
 
-## How can I run a PyTorch example?
+## Run a PyTorch example
 
-To run a PyTorch example and confirm that PyTorch is working, use a text editor to save the code below to a file named `pytorch_woa.py`:
+To run a PyTorch example and confirm that PyTorch is working, use a text editor to save the followiing code to a file named `pytorch_woa.py`:
 
 ```python
 import torch
@@ -119,7 +119,7 @@ Run the code:
 ```console
 python pytorch_woa.py
 ```
-Running on a Windows on Arm machine produces an output similar to:
+The output is similar to:
 
 ```output
 PyTorch version: 2.7.0+cpu

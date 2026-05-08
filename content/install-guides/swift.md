@@ -19,13 +19,11 @@ tool_install: true
 weight: 1
 ---
 
-[Swift](https://swift.org/) is an open-source programming language developed by Apple. It was initially created for use with Apple's iOS, macOS, watchOS, and tvOS operating systems, but has since gained popularity as a general-purpose language suitable for a wide range of Linux and Windows applications. Swift is known for its safety, speed, and expressiveness, making it ideal for both beginners and experienced programmers.
+[Swift](https://swift.org/) is an open-source programming language initially developed by Apple for use with Apple's iOS, macOS, watchOS, and tvOS operating systems. It has since gained popularity as a general-purpose language suitable for a wide range of Linux and Windows applications. Swift is known for its safety, speed, and expressiveness, making it ideal for both beginners and experienced programmers.
 
-## What do I need to install Swift?
+Swift is available for macOS, Windows, and Linux, including Arm Linux distributions. In this guide, you'll learn how to install Swift on Ubuntu for Arm. 
 
-Swift is available for macOS, Windows, and Linux, including Arm Linux distributions. 
-
-This guide provides a quick solution to install Swift on Ubuntu for Arm.
+## Before you begin
 
 Confirm you are using an Arm machine by running:
 
@@ -41,7 +39,7 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
-### What software packages are needed?
+### Required software packages
 
 Before you install Swift on Ubuntu 24.04, install the following packages: 
 
@@ -67,43 +65,43 @@ sudo apt-get -y install \
           zlib1g-dev
 ```
 
-## How do I download and install Swift?
-
-This guide uses Swift version 6.1.2 on Ubuntu 24.04. 
-
-You can get more information about other versions and platforms from [Download Swift](https://www.swift.org/download/).
+## Dwnload and install Swift
 
 Download Swift for Arm Linux:
 
+{{% notice Note %}}
+The following commands use Swift version 6.3.1 on Ubuntu 24.04. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find all available versions, see [Download Swift](https://www.swift.org/download/).
+{{% /notice %}}
+
 ```bash
-wget https://download.swift.org/swift-6.1.2-release/ubuntu2404-aarch64/swift-6.1.2-RELEASE/swift-6.1.2-RELEASE-ubuntu24.04-aarch64.tar.gz
+wget https://download.swift.org/swift-6.3.1-release/ubuntu2404-aarch64/swift-6.3.1-RELEASE/swift-6.3.1-RELEASE-ubuntu24.04-aarch64.tar.gz
 ```
 
 Extract the archive:
 
 ```bash
-sudo tar -xf swift-6.1.2-RELEASE-ubuntu24.04-aarch64.tar.gz -C /usr/local
+sudo tar -xf swift-6.3.1-RELEASE-ubuntu24.04-aarch64.tar.gz -C /usr/local
 ```
 
 Add the `bin/` directory to your search path:
 
 ```bash
-echo 'export PATH="$PATH:/usr/local/swift-6.1.2-RELEASE-ubuntu24.04-aarch64/usr/bin"' >> ~/.bashrc
+echo 'export PATH="$PATH:/usr/local/swift-6.3.1-RELEASE-ubuntu24.04-aarch64/usr/bin"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-## How can I confirm Swift is working? 
+## Confirm Swift is working
 
-You can print the version with:
+To confirm Swift is working, print the version:
 
 ```bash
 swift --version
 ```
 
-The expected output is:
+The output is similar to:
 
 ```output
-Swift version 6.1.2 (swift-6.1.2-RELEASE)
+Swift version 6.3.1 (swift-6.3.1-RELEASE)
 Target: aarch64-unknown-linux-gnu
 ```
 
@@ -121,7 +119,7 @@ Compile and run the program:
 swift hello.swift
 ```
 
-The output will be:
+The output will be similar to:
 
 ```output
 Hello from Swift on Arm Linux!
@@ -140,5 +138,5 @@ The output will be the same:
 Hello from Swift on Arm Linux!
 ```
 
-You are ready to use the Swift programming language on your Arm Linux computer.
+You are now ready to use the Swift programming language on your Arm Linux computer.
 

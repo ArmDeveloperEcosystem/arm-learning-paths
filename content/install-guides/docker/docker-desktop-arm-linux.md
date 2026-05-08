@@ -24,11 +24,11 @@ multitool_install_part: true    # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-## How do I install Docker Desktop for Arm Linux?
+## Install Docker Desktop for Arm Linux
 
 Docker Desktop is available for Arm Linux, but not yet documented.
 
-Make sure you are on an Arm Linux computer by running:
+To make sure you are on an Arm Linux computer, run:
 
 ```console
 uname -m
@@ -40,21 +40,23 @@ The output should be:
 aarch64
 ```
 
-Before installing Docker Desktop install Docker Engine using:
+Before installing Docker Desktop, install Docker Engine. For installation steps, see [Docker Engine](/install-guides/docker/docker-engine/).
 
-```console
+<!-- ```console
 curl -fsSL get.docker.com -o get-docker.sh && sh get-docker.sh
 sudo usermod -aG docker $USER ; newgrp docker
-```
+``` -->
 
-You can download and install Docker Desktop on Ubuntu and Debian distributions. 
+After installing Docker Engine, you can download and install Docker Desktop on Ubuntu and Debian distributions. 
 
-The path to the download depends on the version. The easiest way is to copy the link for the Debian download of Docker Desktop from the latest [Docker Desktop release notes](https://docs.docker.com/desktop/release-notes/) and replace the instances of `amd64` with `arm64`. This will provide the URL to download.
+{{% notice Note %}}
+The following command uses Docker Desktop version 4.70.0 for Debian. The same command works with other versions. Replace the download link used in this step with the link for your version of choice. To find the latest version, see [Docker Desktop release notes](https://docs.docker.com/desktop/release-notes/). Replace the instances of `amd64` in the download URL with `arm64`.
+{{% /notice %}}
 
 For example:
 
 ```console
-wget https://desktop.docker.com/linux/main/arm64/187762/docker-desktop-arm64.deb
+wget https://desktop.docker.com/linux/main/arm64/224270/docker-desktop-arm64.deb
 ```
 
 Install Docker Desktop using:
@@ -65,41 +67,41 @@ sudo apt install ./docker-desktop-arm64.deb
 
 The Docker icon is now available to start Docker Desktop.
 
-![img1 #center](/install-guides/_images/docker-icon.png)
+![A screenshot of applications on a Linux desktop with an icon for Docker Desktop #center](/install-guides/_images/docker-icon.png)
 
-To print the Docker Desktop version use:
+To print the Docker Desktop version, run:
 
 ```console
 docker version
 ```
 
-The output may be different depending on your version:
+The output depends on your version and is similar to:
 
 ```output
-Server: Docker Desktop 4.40.0 (187762)
+Server: Docker Desktop 4.70.0 (224270)
  Engine:
-  Version:          28.0.4
-  API version:      1.48 (minimum version 1.24)
-  Go version:       go1.23.7
-  Git commit:       6430e49
-  Built:            Tue Mar 25 15:07:18 2025
+  Version:          29.4.0
+  API version:      1.54 (minimum version 1.40)
+  Go version:       go1.26.1
+  Git commit:       daa0cb7
+  Built:            Tue Apr  7 08:36:25 2026
   OS/Arch:          linux/arm64
   Experimental:     false
  containerd:
-  Version:          1.7.26
-  GitCommit:        753481ec61c7c8955a23d6ff7bc8e4daed455734
+  Version:          v2.2.1
+  GitCommit:        dea7da592f5d1d2b7755e3a161be07f43fad8f75
  runc:
-  Version:          1.2.5
-  GitCommit:        v1.2.5-0-g59923ef
+  Version:          1.3.4
+  GitCommit:        v1.3.4-0-gd6d73eb8
  docker-init:
   Version:          0.19.0
   GitCommit:        de40ad0
 ```
 
-You can now use Docker Desktop on Arm Linux. The image below shows Docker Desktop running on a System76 Thelio Astra with Ubuntu 24.04 desktop.
+You can now use Docker Desktop on Arm Linux. The following image shows Docker Desktop running on a System76 Thelio Astra desktop with Ubuntu 24.04.
 
-![img1 #center](/install-guides/_images/docker-desktop.png)
+![A screenshot showing a list of local container images on the Docker Desktop application. The application is running on a System76 Thelio Astra desktop with Ubuntu 24.04. #center](/install-guides/_images/docker-desktop.png)
 
-Docker Desktop is now ready to use. You can explore [Docker related Learning Paths](/tag/docker/).
+You're now ready to use Docker Desktop. You can explore [Docker related Learning Paths](/tag/docker/).
 
-You may want to create an account on [Docker Hub](https://hub.docker.com) to share images and automate workflows.
+You can also create an account on [Docker Hub](https://hub.docker.com) to share images and automate workflows.
