@@ -58,7 +58,7 @@ cmake --version
 The output is similar to:
 
 ```output
-cmake version 3.22.1
+cmake version 3.28.3
 
 CMake suite maintained and supported by Kitware (kitware.com/cmake).
 ```
@@ -80,7 +80,7 @@ ninja --version
 The output is similar to:
 
 ```output
-1.10.0
+1.11.1
 ```
 
 4. Install Clang
@@ -98,7 +98,7 @@ clang --version
 The output is similar to:
 
 ```output
-Ubuntu clang version 14.0.0-1ubuntu1.1
+Ubuntu clang version 18.1.3 (1ubuntu1)
 Target: aarch64-unknown-linux-gnu
 Thread model: posix
 InstalledDir: /usr/bin
@@ -159,22 +159,22 @@ The following commands use BOLT version 22.1.3. The same commands work with othe
 
 1. Download a binary release
 
-For Arm Linux, use the file with `aarch64` in the name:
+For Arm Linux, use the file with `ARM64` in the name:
 
 ```bash
-wget https://github.com/llvm/llvm-project/releases/download/llvmorg-22.1.3/clang+llvm-22.1.3-armv7a-linux-gnueabihf.tar.gz
+wget https://github.com/llvm/llvm-project/releases/download/llvmorg-22.1.3/LLVM-22.1.3-Linux-ARM64.tar.xz
 ```
 
 2. Extract the downloaded file
 
 ```bash
-tar -xvf clang+llvm-22.1.3-armv7a-linux-gnueabihf.tar.gz
+tar -xvf LLVM-22.1.3-Linux-ARM64.tar.xz
 ```
 
 3. Add the path to BOLT in your `.bashrc` file
 
 ```bash
-echo 'export PATH="$PATH:$HOME/clang+llvm-22.1.3-armv7a-linux-gnueabihf/bin"' >> ~/.bashrc
+echo 'export PATH="$PATH:$HOME/LLVM-22.1.3-Linux-ARM64/bin"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
@@ -221,7 +221,8 @@ The output is similar to:
 ```output
 LLVM (http://llvm.org/):
   LLVM version 22.1.3
-  Optimized build with assertions.
+  Optimized build.
+BOLT revision e9846648fd6183ee6d8cbdb4502213fcf902a211
 
   Registered Targets:
     aarch64    - AArch64 (little endian)
@@ -229,6 +230,10 @@ LLVM (http://llvm.org/):
     aarch64_be - AArch64 (big endian)
     arm64      - ARM64 (little endian)
     arm64_32   - ARM64 (little endian ILP32)
+    riscv32    - 32-bit RISC-V
+    riscv32be  - 32-bit big endian RISC-V
+    riscv64    - 64-bit RISC-V
+    riscv64be  - 64-bit big endian RISC-V
     x86        - 32-bit X86: Pentium-Pro and above
     x86-64     - 64-bit X86: EM64T and AMD64
 ```
