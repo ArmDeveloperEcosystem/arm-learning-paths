@@ -75,7 +75,7 @@ wget https://github.com/nestybox/sysbox/releases/download/v0.6.7/sysbox-ce_0.6.7
 Install the package using the `apt` command:
 
 ```bash
-sudo apt-get install ./sysbox-ce_0.6.7-0.linux_arm64.deb -y
+sudo apt-get install ./sysbox-ce_0.6.7.linux_arm64.deb -y
 ```
 
 If you are not using a Debian-based Linux distribution, you can use instructions to build Sysbox from the source code. For more information, see [Sysbox Developer's Guide: Building & Installing](https://github.com/nestybox/sysbox/blob/master/docs/developers-guide/build.md).
