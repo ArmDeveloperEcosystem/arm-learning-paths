@@ -139,6 +139,7 @@ jobs:
           print(metric_row("Added", totals.get("added", 0)))
           print(metric_row("Updated", totals.get("updated", 0)))
           print(metric_row("Drift detected", totals.get("drift_detected", 0)))
+          print(metric_row("Paths with drift", totals.get("paths_with_drift", 0)))
           print(metric_row("Unchanged", totals.get("unchanged", 0)))
           print(metric_row("Errors", totals.get("errors", 0)))
           print(metric_row("Summary changed", totals.get("summary_changed", 0)))

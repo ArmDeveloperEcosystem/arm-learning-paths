@@ -845,6 +845,7 @@ def build_run_report(
         "updated": 0,
         "unchanged": 0,
         "drift_detected": 0,
+        "paths_with_drift": 0,
         "skipped": 0,
         "errors": 0,
         "removed": 0,
@@ -877,6 +878,9 @@ def build_run_report(
         faq_action = faq_result.get("action")
         if faq_action in section_totals["faqs"]:
             section_totals["faqs"][faq_action] += 1
+
+        if summary_result.get("drift_detected") or faq_result.get("drift_detected"):
+            totals["paths_with_drift"] += 1
 
         rerun_flags_reset = result.get("rerun_flags_reset", [])
         if rerun_flags_reset:
@@ -940,6 +944,7 @@ def print_result_summary(run_report: Dict[str, Any]) -> None:
     print(
         "Processed {processed} Learning Paths: "
         "{added} added, {updated} updated, {drift_detected} drift detected, "
+        "{paths_with_drift} paths with drift, "
         "{unchanged} unchanged, {errors} errors.".format(**totals)
     )
 
