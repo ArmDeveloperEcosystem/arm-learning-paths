@@ -6,15 +6,17 @@ weight: 3
 layout: learningpathall
 ---
 
+## Allow inbound access to MLflow
+
 Create a firewall rule in Google Cloud Console to expose required ports for the MLflow UI and Model Serving API.
 
 {{% notice Note %}}
-For help with GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
+For help with Google Cloud Platform setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
 {{% /notice %}}
 
 ## Configure the firewall rule
 
-To configure a firewall rule for the MLFlow UI and the Model Serving API: 
+To configure a firewall rule for the MLflow UI and the Model Serving API: 
 
 1. Navigate to the [Google Cloud Console](https://console.cloud.google.com/), go to **VPC Network > Firewall**, and select **Create firewall rule**.
 
@@ -43,6 +45,6 @@ Use port mapping **5000** for the MLflow Tracking UI and **6000** for the MLflow
 
 ## What you've accomplished and what's next
 
-You've created a firewall rule to expose MLflow UI and model serving API. You also enabled external access to monitor experiments and access deployed models.
+You've created a firewall rule to expose the MLflow UI and the model serving API. You also enabled external access to monitor experiments and access deployed models.
 
 Next, you'll create a C4A Arm virtual machine and attach it to this firewall rule.

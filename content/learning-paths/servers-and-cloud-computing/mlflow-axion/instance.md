@@ -14,7 +14,7 @@ In this section, you'll create a Google Axion C4A Arm-based virtual machine (VM)
 For more information about setting up GCP, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
 {{% /notice %}}
 
-## Provision a Google Axion C4A Arm VM in Google Cloud Console
+## Create the VM in Google Cloud Console
 
 To create a virtual machine based on the C4A instance type in the console:
 
@@ -27,7 +27,7 @@ To create a virtual machine based on the C4A instance type in the console:
 
 5. Under **OS and storage**, select **Change** and then choose an Arm64-based operating system image. For this Learning Path, select **SUSE Linux Enterprise Server**. 
 6. For the license type, choose **Pay as you go**. 
-7. Increase **Size (GB)** from **10** to **100** to allocate suffcient disk space, and then select **Choose**.
+7. Increase **Size (GB)** from **10** to **100** to allocate sufficient disk space, and then select **Choose**.
 8. Expand **Advanced options** and select **Networking**.
 9. Under **Network tags**, enter `allow-mlflow-ports` to link the VM to the firewall rule from the previous step and allow inbound access to ports 5000 (MLflow UI) and 6000 (model serving API).
 10. Select **Create** to launch the virtual machine.
@@ -38,7 +38,7 @@ After the instance starts, select **SSH** next to the VM in the instance list to
 
 A new browser window opens with a terminal connected to your VM.
 
-![Browser-based SSH terminal window with black background showing Linux command prompt and Google Cloud branding at top#center](images/gcp-shell.png "Terminal session connected to the VM")
+![Browser-based SSH terminal connected to the Google Axion C4A VM. The shell prompt confirms that the instance is running and ready for the next step, where you'll install MLflow and its dependencies.#center](images/gcp-shell.png "Terminal session connected to the VM")
 
 ## What you've accomplished and what's next
 

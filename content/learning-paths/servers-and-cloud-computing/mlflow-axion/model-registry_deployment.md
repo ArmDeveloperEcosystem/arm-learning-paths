@@ -114,9 +114,9 @@ In the MLflow UI at `http://<VM-IP>:5000`, select the **Models** tab. You should
 
 ![MLflow Model Registry showing iris-model with multiple registered versions and the production alias assigned to the best run#center](images/mlflow-model.png "MLflow Model Registry with versions")
 
-## Test the API from terminal A
+## Test the API 
 
-The `/invocations` endpoint accepts data in the `dataframe_records` format — a list of JSON objects where each object represents one row, with column names as keys. The model returns a prediction for each row. Send a single Iris flower measurement to test inference:
+The `/invocations` endpoint accepts data in the `dataframe_records` format — a list of JSON objects where each object represents one row, with column names as keys. The model returns a prediction for each row. Send a single Iris flower measurement from terminal A to test inference:
 
 ```bash
 curl -X POST http://127.0.0.1:6000/invocations \
