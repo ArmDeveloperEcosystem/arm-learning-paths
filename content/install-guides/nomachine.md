@@ -29,13 +29,10 @@ In this guide, you'll learn how to set up NoMachine on a remote Arm Linux machin
 
 To connect to a remote desktop, you need to install desktop software. You can use [xfce4](https://www.xfce.org/) for a minimal install with good performance. 
 
-Install the desktop software.
+Install the desktop software:
 
 ```bash
-sudo apt update; sudo apt upgrade -y
-```
-
-```bash
+sudo apt update && sudo apt upgrade -y
 sudo apt-get install xfce4 xfce4-goodies xorg dbus-x11 x11-xserver-utils xfce4-terminal -y
 ```
 
@@ -57,15 +54,15 @@ fi
 Use a text editor to copy and paste this script into a file on the remote machine at `$HOME/install-nomachine.sh`:
 
 {{% notice Note %}}
-The following commands use NoMachine version 9.0.188. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To download the latest version, see [NoMachine downloads](https://downloads.nomachine.com/).
+The following commands use NoMachine version 9.5.7. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To download the latest version, see [NoMachine downloads](https://downloads.nomachine.com/).
 {{% /notice %}}
 
 ```file { file_name="install-nomachine.sh" }
 #!/bin/bash
 
 # install NoMachine for remote desktop
-wget https://download.nomachine.com/download/9.0/Arm/nomachine_9.0.188_11_arm64.deb
-sudo dpkg -i nomachine_9.0.188_11_arm64.deb
+wget https://download.nomachine.com/download/9.5/Arm/nomachine_9.5.7_2_arm64.deb
+sudo dpkg -i nomachine_9.5.7_2_arm64.deb
 if [ $? != 0 ]; then
   exit 1
 fi
@@ -147,6 +144,6 @@ Start NoMachine on the client computer by following these steps:
 
 5. Finally, the desktop will appear and is ready to use. 
 
-![Linux desktop #center](/install-guides/_images/nx-desktop.png)
+![Linux xfce4 remote desktop rendered in the NoMachine client window, confirming the remote desktop session is active and ready to use#center](/install-guides/_images/nx-desktop.png "NoMachine remote desktop session")
 
 You're now ready to use NoMachine.
