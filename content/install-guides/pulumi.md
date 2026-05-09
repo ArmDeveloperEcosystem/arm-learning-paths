@@ -16,15 +16,11 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-[Pulumi](https://www.pulumi.com/) is a multi-language infrastructure as code tool. Pulumi is [open source](https://github.com/pulumi/pulumi) and makes it easy to deploy cloud infrastructure.
+[Pulumi](https://www.pulumi.com/) is a multi-language infrastructure as code (IaC) tool. Pulumi is [open source](https://github.com/pulumi/pulumi) and makes it easy to deploy cloud infrastructure.
 
-## What do I need before installing Pulumi?
+Pulumi is available for a variety of operating systems and Linux distributions. In this guide, you'll learn how to install Pulumi on Linux.
 
-Pulumi is available for a variety of operating systems and Linux distributions and has multiple ways to install it.
-
-This article provides a quick solution to install Pulumi on Linux.
-
-## How do I install Pulumi? {#install}
+## Install Pulumi {#install}
 
 Run the following command to download and install Pulumi on Linux:
 
@@ -32,11 +28,11 @@ Run the following command to download and install Pulumi on Linux:
 curl -fsSL https://get.pulumi.com | sh
 ```
 
-The installer output will be similar to:
+The installer output is similar to:
 
 ```output
-=== Installing Pulumi v3.77.1 ===
-+ Downloading https://github.com/pulumi/pulumi/releases/download/v3.77.1/pulumi-v3.77.1-linux-arm64.tar.gz...
+=== Installing Pulumi v3.232.0 ===
++ Downloading https://github.com/pulumi/pulumi/releases/download/v3.232.0/pulumi-v3.232.0-linux-arm64.tar.gz...
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
@@ -72,26 +68,22 @@ pulumi version
 ```
 
 ```output
-v3.135.1
+v3.232.0
 ```
 
-You are ready to use Pulumi on your Linux machine.
+## Verify Pulumi installation with an example {#start}
 
-## How do I get started with Pulumi? {#start}
+Pulumi keeps your projects and state information in Pulumi Cloud, making it easy to access them from anywhere. If you want to use Pulumi Cloud, see [app.pulumi.com](https://app.pulumi.com/).
 
-Pulumi keeps your projects and state information in Pulumi Cloud, making it easy to access them from anywhere. If you want to use Pulumi Cloud visit [app.pulumi.com](https://app.pulumi.com/) and sign up.
+It's not necessary to use Pulumi Cloud to get started. You can store project information on your local computer.
 
-It's not necessary to use Pulumi Cloud to get started, you can store project information on your local computer.
+The following is an example to try out Pulumi. The example uses Docker to pull a container image from Docker Hub to your local machine using Python.
 
-Below is a simple example to try out Pulumi.
-
-The example demonstrates using Docker to pull a container image from Docker Hub to your local machine using Python.
-
-To run the example, you need to install Docker. Refer to the [Docker install guide](/install-guides/docker/) for instructions.
+To run the example, you need to install Docker. For instructions, see the [Docker install guide](/install-guides/docker/).
 
 You also need Python. Make sure you have `python` and `pip` installed.
 
-For `Ubuntu 22.04` on Arm you can run the commands below to install:
+For `Ubuntu 22.04` on Arm, you can run the following commands to install:
 
 ```bash
 sudo apt install python-is-python3 -y
@@ -110,7 +102,7 @@ Log in to your local machine, a shortcut to use `~/.pulumi` to store project dat
 pulumi login --local
 ```
 
-For the example you need to create 3 files:
+For the example, you need to create 3 files:
 - Python required package list in `requirements.txt`
 - Pulumi project information in `Pulumi.yaml`
 - Python code in `__main__.py`
@@ -157,15 +149,15 @@ pulumi up
 
 There are 4 prompts to respond to:
 
-1. Confirm you want to create a new stack. (just hit return)
+1. Confirm you want to create a new stack. Press return
 
 2. Enter a name for the stack.
 
-3. When prompted, enter a passphrase for the stack (twice).
+3. When prompted, enter a passphrase for the stack twice.
 
 4. Answer `yes` to the final question to create the stack.
 
-An example output for `pulumi up` is shown below:
+The output of `pulumi up` is similar to:
 
 ```output
 Please choose a stack, or create a new one:  [Use arrows to move, type to filterPlease choose a stack, or create a new one: <create a new stack>
@@ -202,17 +194,17 @@ Duration: 1s
 
 ```
 
-After the Python script runs you have the container on your machine. Confirm this using the `docker images` command:
+After the Python script runs, you have the container on your machine. Confirm this using the `docker images` command:
 
 ```console
 docker images
 ```
 
-The output will be similar to:
+The output is similar to:
 
 ```output
 REPOSITORY   TAG       IMAGE ID       CREATED      SIZE
 alpine       latest    f6648c04cd6c   2 days ago   7.66MB
 ```
 
-
+You are now ready to use Pulumi on your Linux machine.

@@ -31,9 +31,11 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 [LLVM version 12 or higher](https://llvm.org/) natively supports Windows on Arm. [View the supported Arm architecture features](https://developer.arm.com/Tools%20and%20Software/LLVM%20Toolchain#Supported-Devices) in the open-sourced LLVM toolchain.
 
-## How do I download and install the LLVM toolchain for Windows on Arm?
+## Download and install the LLVM toolchain for Windows on Arm
 
-The latest version (at the time of writing) of the LLVM toolchain with Windows on Arm native support is 18.1.8. [Download the pre-built binary](https://github.com/llvm/llvm-project/releases/download/llvmorg-18.1.8/LLVM-18.1.8-woa64.exe).
+The latest version (at the time of writing) of the LLVM toolchain with Windows on Arm native support is 22.1.4. To find the latest version, see [LLVM releases](https://github.com/llvm/llvm-project/releases). 
+
+[Download the pre-built binary](https://github.com/llvm/llvm-project/releases/download/llvmorg-22.1.4/LLVM-22.1.4-woa64.exe).
 
 {{% notice Note %}}
 A warning message may appear in your browser due to the publisher being listed as `Unknown`. The warning is:
@@ -43,7 +45,7 @@ A warning message may appear in your browser due to the publisher being listed a
 It is safe to ignore this warning and proceed.
 {{% /notice %}}
 
-After download, run `LLVM-18.1.8-woa64.exe` on a Windows on Arm machine. The installer will start. By default, the installer does not add LLVM to the system `PATH`. If you easily want to invoke LLVM from any directory, select the option to `Add LLVM to the system PATH for all users`.
+After download, run `LLVM-22.1.4-woa64.exe` on a Windows on Arm machine. The installer will start. By default, the installer does not add LLVM to the system `PATH`. If you easily want to invoke LLVM from any directory, select the option to `Add LLVM to the system PATH for all users`.
 
 ![img1 #center](/install-guides/_images/llvm-setup.png)
 
@@ -53,7 +55,7 @@ The setup will complete successfully. Select `Finish` to close the installer.
 
 ![img2 #center](/install-guides/_images/llvm-finish.png)
 
-## How do I check the LLVM toolchain installation?
+## Verify the LLVM toolchain installation
 
 Open a Windows Command prompt or a PowerShell prompt and run:
 
@@ -63,16 +65,18 @@ clang --version
 The output should look like:
 
 ```output
-clang version 18.1.8
+clang version 22.1.4
 Target: aarch64-pc-windows-msvc
 Thread model: posix
 InstalledDir: C:\Program Files\LLVM\bin
 ```
  
-## What other LLVM versions are available?
+## Other available LLVM versions
 
 You can download other LLVM builds from [the download repository](https://releases.llvm.org/download.html).
 
 {{% notice Note%}}
 The pre-built binary for Windows on Arm is typically named `LLVM-<version>-woa64.exe`.
 {{% /notice %}}
+
+You're now ready to use LLVM toolchain for Windows on Arm.

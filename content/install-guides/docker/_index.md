@@ -17,16 +17,16 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 ## Why use Docker?
 
-Docker containers are widely used, primarily because they run the same everywhere. Containers are used on all operating systems, on all computing architectures, to build, share, and run software.
+Docker containers are widely used, primarily because they run the same everywhere. Containers are used on all operating systems and computing architectures to build, share, and run software.
 
 The operating system of the computer and the architecture (x86 or Arm) determines how to install Docker.
 
-### How do I install Docker on Linux and Chrome OS?
+### Docker on Linux and Chrome OS
 
 - Docker Engine on Linux runs on a variety of Linux distributions and architectures, including arm32v7 and arm64v8 (AArch64). Use the Docker Engine instructions for Linux and Chrome OS (using the Linux feature). This includes the Windows Subsystem for Linux 2 (WSL 2).
 
-### How do I install Docker on Windows and macOS?
+### Docker on Windows and macOS
 
-- Docker Desktop is the easiest way to install Docker on Windows and macOS. The macOS version supports both Intel and Apple Silicon. 
+- You can use Docker Desktop to install Docker on Windows and macOS. The macOS version supports both Intel and Apple Silicon. 
 - The Windows on Arm version of Docker Desktop was announced at Microsoft Build 2024 and is available as a Beta release.
-- Docker Desktop for Arm Linux is available if your machine has KVM support and is running a KDE or Gnome desktop environment. Refer to Docker Desktop for Arm Linux below for details.
+- Docker Desktop for Arm Linux is available if your machine has KVM support and is running a KDE or Gnome desktop environment. For more information, see [Docker Desktop for Arm Linux](/install-guides/docker/docker-desktop-arm-linux/).

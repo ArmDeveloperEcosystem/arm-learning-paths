@@ -23,7 +23,7 @@ multitool_install_part: true    # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-## How do I install and test Docker Desktop?
+## Install and test Docker Desktop
 
 All of the download files are available on the 
 [Docker Desktop product page](https://www.docker.com/products/docker-desktop/).
@@ -38,16 +38,14 @@ All of the download files are available on the
 {{% notice Note %}}
 Docker Desktop for Windows on Arm is available as a Beta release. It is fully documented and works the same as the x86 platform.
 
-For information about Docker Desktop on Arm Linux refer to [Docker Desktop on Arm Linux](/install-guides/docker/docker-desktop-arm-linux/).
+For information about Docker Desktop on Arm Linux, see [Docker Desktop on Arm Linux](/install-guides/docker/docker-desktop-arm-linux/).
 {{% /notice %}}
 
-
-
-On any platform, confirm the Docker Desktop installation is successful with:
+On any platform, confirm the Docker Desktop installation is successful:
 ```console
 docker run hello-world
 ```
-The output should be a welcome message such as:
+The output is a welcome message similar:
 ```output
 Hello from Docker!
 This message shows that your installation appears to be working correctly.
@@ -71,13 +69,13 @@ For more examples and ideas, visit:
  https://docs.docker.com/get-started/
 ```
 
-Use the `uname` command to identify the architecture:
+To identify the architecture, run:
 ```console
 uname -m
 ```
 
 Apple Silicon is reported as `arm64`.
 
-Docker Desktop is now ready to use. You can explore [Docker related Learning Paths](/tag/docker/).
+You can now use Docker Desktop and explore [Docker related Learning Paths](/tag/docker/).
 
-You may want to create an account on [Docker Hub](https://hub.docker.com) to share images and automate workflows.
+You can also create an account on [Docker Hub](https://hub.docker.com) to share images and automate workflows.

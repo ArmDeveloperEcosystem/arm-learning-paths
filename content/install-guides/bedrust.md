@@ -19,15 +19,15 @@ tool_install: true
 weight: 1
 ---
 
-Bedrust is a command-line program you can use to easily invoke models on Amazon Bedrock, a managed service that makes it easy for developers to build and scale generative AI applications using foundation models (FMs) from leading AI model providers.
+Bedrust is a command-line program that you can use to invoke models on Amazon Bedrock. Amazon Bedrock is a managed service on Amazon Web Services (AWS) that allows developers to build and scale generative AI applications using foundation models (FMs) from leading AI model providers.
 
 Bedrust is available as Rust source code, and you can build and run it on an Arm Linux computer. 
 
-## What should I consider before installing Bedrust?
+## Before you begin
 
-You will need an AWS account to access Bedrock, which you can create at https://aws.amazon.com. (Click on **Create an AWS Account** in the top right corner. Follow the instructions to register. See the [Creating an AWS account documentation](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-creating.html) for full instructions.)
+You'll need an [AWS account](https://aws.amazon.com) to access Bedrock. To learn how to create an AWS account, see [Create an AWS account](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-creating.html).
 
-To use Bedrust you need to:
+To use Bedrust, you need to:
 
 - Configure your AWS account credentials to talk to the Bedrock service
 - Enable foundation model access in the Bedrock console
@@ -36,23 +36,23 @@ To use Bedrust you need to:
 
 To connect to Bedrock, you need to install the [AWS CLI](/install-guides/aws-cli/), generate an access key ID and secret access key, and use the `aws configure` command to enter your credentials. 
 
-Refer to [AWS Credentials](/install-guides/aws_access_keys/) for more details. 
+For more information about configuring credentials, see [AWS Credentials](/install-guides/aws_access_keys/). 
 
 ### Enable model access in Bedrock
 
-To use Bedrock models you need to request access to specific foundation models through the AWS Bedrock console. 
+To use Bedrock models, you need to request access to specific foundation models through the Amazon Bedrock console. 
 
-In your AWS account, navigate to "Model access" in the Bedrock console and select the models you want to use. 
+In your AWS account, navigate to **Model access** in the Bedrock console and select the models you want to use. 
 
-Refer to [Getting started with Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html) for additional documentation.
+For more information, see [Access Amazon Bedrock foundation models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html).
 
-## How do I download and install Bedrust?
+## Download and install Bedrust
 
-The easiest way to install Bedrust is by using Cargo, the Rust package manager. 
+One way to install Bedrust is by using Cargo, the Rust package manager. 
 
 ### Install Rust
 
-Ensure you have Rust and Cargo installed on your computer. If not, install them using the commands: 
+Ensure you have Rust and Cargo installed on your computer. If not, install them using the following commands: 
 
 ```bash
 sudo apt install curl gcc -y
@@ -60,7 +60,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 source "$HOME/.cargo/env"
 ```
 
-Refer to the [Rust install guide](/install-guides/rust/) for more information.
+For more information, see the [Rust install guide](/install-guides/rust/).
 
 ### Clone the repository and install Bedrust
 
@@ -77,7 +77,7 @@ With Rust and Cargo installed, you can install Bedrust:
 cargo install bedrust
 ```
 
-### Verify the Installation
+### Verify the installation
 
 After installation, confirm that Bedrust is installed and available in your search path by checking the version:
 
@@ -85,13 +85,13 @@ After installation, confirm that Bedrust is installed and available in your sear
 bedrust --version
 ```
 
-The output displays the installed version:
+The output is similar to:
 
 ```output
 bedrust 0.8.8
 ```
 
-## How do I configure Bedrust?
+## Configure Bedrust
 
 You can set the default foundation model you want to use:
 
@@ -130,15 +130,15 @@ Use the menu to select the default model:
   us.amazon.nova-pro-v1:0
 ```
 
-## How do I use Bedrust?
+## How to use Bedrust
 
-Just run `bedrust` to invoke the CLI with the default model.
+Run `bedrust` to invoke the CLI with the default model.
 
 ```console
 bedrust 
 ```
 
-You will see the prompt and can start asking questions like `how do I install the AWS CLI?` to see how it works.
+You'll see the prompt and can start asking questions such as `how do I install the AWS CLI?` to see how it works.
 
 ```output
 bedrust
@@ -164,7 +164,7 @@ Currently supported chat commands:
 😎 | Human:
 ```
 
-## How do I change foundation models?
+## Change foundation models
 
 You can use `-m` to change the model:
 
@@ -174,7 +174,7 @@ bedrust -m nova-micro
 
 Your queries are now sent to the Amazon Nova Micro model.
 
-## How do I know which models I can use?
+## Identify which models you can use
 
 Use `--help` to see your models. 
 
@@ -182,7 +182,7 @@ Use `--help` to see your models.
 bedrust --help
 ```
 
-The models are printed in the output:
+The output is similar to:
 
 ```output
 A command-line tool to invoke and work with Large Language models on AWS, using Amazon Bedrock
@@ -201,7 +201,7 @@ Options:
 
 The output shows the model strings you can use. Make sure to enable the models you want to use in the Bedrock console. 
 
-Bedrust is a quick way to explore many Bedrock models and easily compare them.
+You are now ready to use Bedrust as a quick way to explore many Bedrock models and compare them.
 
 
 
