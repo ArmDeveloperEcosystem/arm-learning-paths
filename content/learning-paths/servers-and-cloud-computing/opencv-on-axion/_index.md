@@ -1,6 +1,10 @@
 ---
 title: Build Computer Vision Pipelines with OpenCV on Google Cloud C4A Axion VM
 description: Deploy and run OpenCV-based computer vision pipelines on Google Cloud Axion C4A Arm-based VMs, covering image processing, video pipelines, browser-based visualization, and integration with machine learning models.
+
+draft: true
+cascade:
+    draft: true
     
 minutes_to_complete: 45
 
