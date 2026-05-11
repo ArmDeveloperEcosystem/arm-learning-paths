@@ -1,5 +1,5 @@
 ---
-title: Verify OpenJDK PAC/BTI support on Google Cloud C4A VMs
+title: Verify OpenJDK PAC/BTI using a Google Cloud C4A VM
 
 description: Learn how to verify PAC/BTI support in OpenJDK on a Google Cloud C4A Arm-based VM and interpret the JVM readiness result.
 
@@ -63,16 +63,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-
-## Verify OpenJDK PAC/BTI support on Google Cloud C4A VMs
-
-In this Learning Path, you create a Google Cloud C4A Arm-based virtual machine, install OpenJDK on SUSE Linux Enterprise Server, and run a JVM probe that checks whether PAC and BTI are exposed to userspace. The result tells you whether the installed Java runtime can use these Armv9 security features on the VM.
-
-## What you'll do
-
-You will complete one task from start to finish:
-
-1. Create a Google Cloud C4A virtual machine.
-2. Install OpenJDK on the VM.
-3. Run the PAC/BTI validation script inside the JVM.
-4. Interpret the final result as positive, negative, or inconclusive.
