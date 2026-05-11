@@ -6,9 +6,9 @@ weight: 7
 layout: "learningpathall"
 ---
 
-### Overview
+## Use MQTT to test PAC/BTI support
 
-In this section, you run a test through the AWS IoT Core MQTT test client to check PAC/BTI availability on each platform.
+In this section, you'll run a test through the AWS IoT Core MQTT test client to check PAC/BTI availability on each platform.
 
 ### Run the PAC/BTI test
 
@@ -18,25 +18,25 @@ In this section, you run a test through the AWS IoT Core MQTT test client to che
 
 2. In the AWS Console, open **IoT Core** > **MQTT test client** and select **Subscribe to a topic**.
 
-Enter the following topic:
+3. For **Topic filter**, enter the following topic:
 
 ```
 arm/demo/+/security/pacbti/attack/result
 ```
 
-Select **Subscribe**.
+3. Select **Subscribe**.
 
 ![AWS IoT Core MQTT test client showing the Subscribe to a topic tab with the wildcard PAC/BTI result topic entered#center](images/test-2.png "MQTT test client subscribed to the PAC/BTI result topic")
 
-3. While still in MQTT test client, select **Publish to a topic**, replacing **YOUR_CORE_DEVICE_NAME** with your Thor device name.
+3. On the same page, select the **Publish to a topic** tab.
 
-Set the **Topic name**:
+4. For **Topic name**, enter the following, replacing **YOUR_CORE_DEVICE_NAME** with the name of your Jetson Thor device:
 
 ```
 arm/demo/YOUR_CORE_DEVICE_NAME/security/pacbti/attack/trigger
 ```
 
-Set the **Message payload**:
+5. Set the **Message payload**:
 
 ```json
 {
@@ -45,13 +45,13 @@ Set the **Message payload**:
 }
 ```
 
-Select **Publish**.
+4. Select **Publish**.
 
 ![AWS IoT Core MQTT test client Publish to a topic tab with the Thor device trigger topic and run_attack payload ready to publish#center](images/test-3.png "MQTT publish to Thor device trigger topic")
 
 ### Review the results
 
-In the subscriptions area of the MQTT test client window, you should see results resembling this for your Thor device:
+In the subscriptions area of the MQTT test client window, you should see results similar to the following for your Thor device:
 
 ```output
 {
@@ -89,17 +89,17 @@ In the subscriptions area of the MQTT test client window, you should see results
 }
 ```
 
-This result indicates the Thor device (Armv9) reports PAC and BTI capabilities.
+This result indicates that the Thor device (Armv9) reports PAC and BTI capabilities.
 
-Now test the RPi5. In **Publish to a topic**, replace **YOUR_CORE_DEVICE_NAME** with your RPi5 core device name.
+Now test the RPi5. 
 
-Set the **Topic name**:
+1. Under **Publish to a topic**, set the **Topic name** as follows. Replace **YOUR_CORE_DEVICE_NAME** with your RPi5 core device name:
 
 ```
 arm/demo/YOUR_CORE_DEVICE_NAME/security/pacbti/attack/trigger
 ```
 
-Set the **Message payload**:
+2. Set the **Message payload**:
 
 ```json
 {
@@ -108,7 +108,7 @@ Set the **Message payload**:
 }
 ```
 
-Select **Publish**.
+3. Select **Publish**.
 
 ![AWS IoT Core MQTT test client Publish to a topic tab with the RPi5 device trigger topic and run_attack payload ready to publish#center](images/test-4.png "MQTT publish to RPi5 device trigger topic")
 
@@ -154,4 +154,4 @@ This result indicates the RPi5 device (Armv8) does not report PAC and BTI capabi
 
 ### What you've accomplished
 
-You used AWS IoT Greengrass to deploy and trigger a custom PAC/BTI validation component across two Arm devices. The Jetson Thor (Armv9) reported PAC and BTI protections active and blocked the exploit. The RPi5 (Armv8) reported no PAC or BTI support and the exploit succeeded, confirming the architectural difference between the two platforms.
+You've now used AWS IoT Greengrass to deploy and trigger a custom PAC/BTI validation component across two Arm devices. The Jetson Thor (Armv9) reported PAC and BTI protections active and blocked the exploit. The RPi5 (Armv8) reported no PAC or BTI support and the exploit succeeded, confirming the architectural difference between the two platforms.
