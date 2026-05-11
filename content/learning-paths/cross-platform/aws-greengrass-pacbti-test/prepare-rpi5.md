@@ -41,7 +41,7 @@ OpenJDK 64-Bit Server VM (build 21.0.10+7-Debian-1deb13u1, mixed mode, sharing)
 
 ### Install AWS IoT Greengrass
 
-Before you complete these steps, create an AWS access key pair for the account you'll use. You can follow the [AWS Credentials](https://learn.arm.com/install-guides/aws_access_keys/) install guide or ask your AWS administrator.
+Before you complete these steps, create an AWS access key pair for the account you'll use. You can follow the [AWS IoT Greengrass](/install-guides/aws-greengrass-v2/) install guide or ask your AWS administrator.
 
 To install AWS IoT Greengrass:
 
