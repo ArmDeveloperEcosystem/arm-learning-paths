@@ -27,9 +27,7 @@ author:
 
 ### Tags
 skilllevels: Advanced
-subjects: 
-    - Performance and Architecture
-    - Security
+subjects: Security
 armips:
     - Cortex-M
 operatingsystems:
