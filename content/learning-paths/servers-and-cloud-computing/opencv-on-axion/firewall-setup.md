@@ -36,7 +36,15 @@ Set **Targets** to "Specified target tags".
 
 Enter "allow-opencv" in the **Target tags** field.  
 
-Set **Source IPv4 ranges** to "0.0.0.0/0".
+Set **Source IPv4 ranges** to your current machine's public IP address. Run the following command in a terminal on your local machine (not on the VM) to find it:
+
+```bash
+curl -4 ifconfig.me
+```
+
+The `-4` flag forces an IPv4 response. Take the returned address and append `/32` to convert it to CIDR notation, for example `203.0.113.42/32`. Restricting access to your own IP prevents port 8000 from being exposed to the public internet.
+
+{{% notice Note %}}If your IP address changes or you need to access the visualization from a different machine, update this field with the new IP address. Using `0.0.0.0/0` opens the port to all traffic and is not recommended.{{% /notice %}}
  
 ![Google Cloud Console Create firewall rule form configured for OpenCV with Ingress and Allow settings#center](images/network-rule.png "Configuring the OpenCV firewall rule")
  

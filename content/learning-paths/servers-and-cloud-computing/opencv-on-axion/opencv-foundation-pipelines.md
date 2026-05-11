@@ -6,44 +6,48 @@ weight: 5
 layout: learningpathall
 ---
 
-## Build OpenCV Pipelines on GCP Axion (Arm)
+## Build OpenCV pipelines on GCP Axion
 
-This section guides you through setting up OpenCV on an Arm-based VM and building **image and video processing pipelines with browser visualization**.
+This section guides you through setting up OpenCV on an Arm-based VM and building image and video processing pipelines with browser visualization.
 
-## Learning Objectives
+## Learning objectives
 
-- Install OpenCV on Arm  
-- Build image pipeline  
-- Build video pipeline  
-- Visualize output in browser  
+- Install OpenCV on Arm
+- Build an image processing pipeline
+- Build a video processing pipeline
+- Visualize pipeline output in a browser
 
 
 ## Update your system
-Refresh package metadata to ensure latest packages are available.
+
+Refresh the package metadata to ensure you install the latest available versions:
 
 ```bash
 sudo zypper refresh
 ```
 
 ## Install dependencies
-Install Python and build tools required to run OpenCV pipelines.
+
+Install Python 3.11 and the build tools that OpenCV's pip package requires to compile native extensions:
 
 ```bash
 sudo zypper install -y \
 python311 python311-pip python311-devel \
-gcc gcc-c++ make cmake \
+gcc gcc-c++ make cmake 
 ```
 
-## Create project
-Create a dedicated workspace for your OpenCV project.
+## Create the project directory
+
+Create a dedicated workspace for your OpenCV project and change into it:
 
 ```bash
 mkdir -p ~/opencv-project
 cd ~/opencv-project
 ```
 
-## Setup Python environment
-Create an isolated Python environment to avoid dependency conflicts.
+## Set up a Python virtual environment
+
+Create an isolated Python environment to keep OpenCV and its dependencies separate from the system Python installation:
 
 ```bash
 python3.11 -m venv cv-env
@@ -51,21 +55,30 @@ source cv-env/bin/activate
 ```
 
 ## Install Python packages
-Install OpenCV and required Python libraries.
+
+`opencv-python-headless` is the server-appropriate OpenCV build — it omits GUI window support, which is not available on a remote VM. `flask` is included for optional HTTP serving use cases.
 
 ```bash
 pip install --upgrade pip
 pip install numpy opencv-python-headless flask
 ```
 
-## Quick OpenCV Test
+## Start the browser server
 
-Before building pipelines, verify that OpenCV is working correctly.
-
-This step creates a simple image using OpenCV and saves it for browser viewing.
+Before verifying any output in the browser, start a simple HTTP server in the background. This server serves files from `~/opencv-project` on port 8000 and must remain running throughout this Learning Path.
 
 ```bash
-python3.11 - <<EOF
+python -m http.server 8000 &
+```
+
+The `&` runs the server as a background process so you can continue using the same terminal. To stop it later, run `kill %1` or `pkill -f "http.server"`.
+
+## Quick OpenCV test
+
+Before building pipelines, verify that OpenCV is working correctly. This step creates a simple image using OpenCV and saves it for browser viewing.
+
+```bash
+python - <<EOF
 import cv2
 import numpy as np
 
@@ -86,7 +99,7 @@ EOF
 
 ## Verify OpenCV setup
 
-Open in browser:
+Open the following URL in your browser, replacing `<VM-IP>` with your VM's external IP address:
 
 ```text
 http://<VM-IP>:8000/test.jpg
@@ -100,28 +113,11 @@ OpenCV OK
 
 ![OpenCV test image showing "OpenCV OK" text rendered using OpenCV on Arm VM#center](images/opencv-test.png "OpenCV verification output")
 
-## Start browser server (used in all steps)
-Start a simple HTTP server to view output images in browser.
+## Image pipeline
 
-```bash
-python -m http.server 8000
-```
+The image pipeline reads an input image, applies transformations using OpenCV, and saves the result so the HTTP server can serve it to your browser.
 
-Open:
-
-```text
-http://<VM-IP>:8000/
-```
-
-## Image Pipeline
-
-**Create script**
-
-This script reads an image, processes it, and saves the result for browser viewing.
-
-```bash
-vi image_pipeline.py
-```
+Create the pipeline script:
 
 ```python
 import cv2
@@ -147,12 +143,12 @@ cv2.imwrite("latest.jpg", img)
 - Saves output as `latest.jpg`
 - This file is used for browser visualization
 
-## Generate sample ARM image
+## Generate a sample input image
 
-Instead of downloading external images, generate a sample image locally. This ensures the guide works in all environments without internet dependency.
+Instead of downloading an external image, generate one locally. This ensures the pipeline works in all environments without an internet dependency.
 
 ```bash
-python3.11 - <<EOF
+python - <<EOF
 import cv2
 import numpy as np
 
@@ -173,45 +169,38 @@ print("Generated input.jpg")
 EOF
 ```
 
-## What this step does
+The output is similar to:
 
-- Creates an image using NumPy
-- Uses OpenCV to draw text
-- Saves it as input.jpg
-- Removes dependency on external downloads
+```output
+Generated input.jpg
+```
 
-## Execute image pipeline
-Run the pipeline using generated image.
+## Run the image pipeline
+
+Run the pipeline against the generated input image:
 
 ```bash
 python image_pipeline.py
 ```
 
-## Verify
-Open the processed image in browser.
+Open the processed image in your browser, replacing `<VM-IP>` with your VM's external IP address:
 
 ```text
 http://<VM-IP>:8000/latest.jpg
 ```
 
-## You should see:
-
-- ARM PROCESSOR text
-- OpenCV processing applied
+You should see the resized image with the `IMAGE PIPELINE` label overlaid in green.
 
 ![Processed image showing ARM PROCESSOR text with OpenCV transformations on Arm VM#center](images/opencv-image.png "OpenCV image pipeline output")
 
-## Video Pipeline
+## Video pipeline
 
-**Create synthetic video:**
+The video pipeline reads frames from a video file in a loop, overlays a text label on each frame, and writes the current frame to `latest.jpg`. Because the HTTP server always serves the latest file on disk, refreshing `latest.jpg` in your browser shows the current frame — giving a live video effect without requiring a streaming protocol.
 
-This script generates a sample video so you don’t depend on external files.
+First, create a synthetic video file so you don't depend on an external video source.
 
 ```bash
-vi create_video.py
-```
-
-```python
+cat > create_video.py <<'EOF'
 import cv2
 import numpy as np
 
@@ -227,22 +216,35 @@ for i in range(200):
     out.write(frame)
 
 out.release()
+EOF
 ```
 
-### What this script does
+This creates a 200-frame MP4 at 20 fps (10 seconds total). Each frame is a black 640×480 image with the frame number written in white.
 
-- Creates a synthetic video
-- Generates frames dynamically
-- Writes them into video.mp4
-- Helps simulate real video input
-
-## Create video pipeline
+Run the script to generate `video.mp4`:
 
 ```bash
-vi video_pipeline.py
+python create_video.py
 ```
 
-```python
+When the script completes, verify the file was created:
+
+```bash
+ls -lh video.mp4
+```
+
+The output is similar to:
+
+```output
+-rw-r--r-- 1 user user 1.2M May 11 10:00 video.mp4
+```
+
+## Create the video pipeline
+
+The pipeline reads frames from `video.mp4` in a continuous loop. When the video ends, `cap.set(cv2.CAP_PROP_POS_FRAMES, 0)` resets playback to the first frame so it loops indefinitely. Each frame is written to `latest.jpg` and the loop sleeps for 50 ms, giving an effective frame rate of 20 fps in the browser.
+
+```bash
+cat > video_pipeline.py <<'EOF'
 import cv2
 import time
 
@@ -261,24 +263,25 @@ while True:
     cv2.imwrite("latest.jpg", frame)
 
     time.sleep(0.05)
+EOF
 ```
 
-## Run video pipeline
+## Run the video pipeline
+
+The pipeline runs as a foreground process and loops continuously. Press `Ctrl+C` to stop it.
 
 ```bash
 python video_pipeline.py
 ```
 
-## Correct browser visualization
-Do NOT open latest.jpg directly. Instead, create a live viewer.
+## View the live feed in your browser
 
-### Create live viewer
+The `index.html` viewer uses a JavaScript `setInterval` to reload `latest.jpg` every 200 ms with a cache-busting query string. This gives a live video effect without requiring a streaming protocol — the browser simply keeps fetching the latest frame written to disk by the pipeline.
+
+Create the viewer:
 
 ```bash
-vi index.html
-```
-
-```html
+cat > index.html <<'EOF'
 <html>
 <head>
 <title>Video Pipeline</title>
@@ -298,34 +301,21 @@ setInterval(function(){
 
 </body>
 </html>
+EOF
 ```
 
-## Verify
-Open the continuously updating frame in browser.
+Open the viewer in your browser, replacing `<VM-IP>` with your VM's external IP address:
 
 ```text
 http://<VM-IP>:8000/index.html
 ```
 
-You should see a live video effect where:
+With the video pipeline running in the terminal, you should see frames update automatically in the browser with the `VIDEO PIPELINE` label overlaid in blue.
 
-- Frames update automatically in the browser
-- OpenCV processes each frame in real-time
-- "VIDEO PIPELINE" text is overlaid on the video
+![Video pipeline browser output showing the live viewer with a frame from the synthetic video and the VIDEO PIPELINE label overlaid in blue#center](images/opencv-video.png "OpenCV video pipeline browser output")
 
-![Processed image showing ARM PROCESSOR text with OpenCV transformations on Arm VM#center](images/opencv-video.png "OpenCV image pipeline output")
+## What you've learned and what's next
 
-## What you've learned
+You've installed OpenCV on a GCP Axion Arm VM, built an image pipeline that applies transformations and saves output for browser viewing, and built a video pipeline that loops frames and serves them as a live feed via a lightweight HTTP server.
 
-- Installed OpenCV on Arm
-- Built image processing pipeline
-- Built video pipeline
-- Implemented browser-based visualization
-
-## Next
-
-You will:
-
-- Integrate ML (YOLO)
-- Enable real-time detection
-- Optimize performance for Arm
+Next, you'll extend this setup by integrating a machine learning model with the OpenCV pipeline.
