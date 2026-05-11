@@ -1,16 +1,18 @@
 ---
-title: Understand Azure Cobalt 100, OpenJDK, and Armv9 PAC/BTI
+title: Understand Google Cloud C4A Axion processors, OpenJDK, and Armv9 PAC/BTI
 
 weight: 2
 
 layout: "learningpathall"
 ---
 
-## Azure Cobalt 100 Arm-based processor
+## Explore Google Axion C4A instances in Google Cloud
 
-Azure’s Cobalt 100 is Microsoft’s first-generation, in-house Arm-based processor. Built on Arm Neoverse N2, Cobalt 100 is a 64-bit CPU that delivers strong performance and energy efficiency for cloud-native, scale-out Linux workloads such as web and application servers, data analytics, open-source databases, and caching systems. Running at 3.4 GHz, Cobalt 100 allocates a dedicated physical core for each vCPU, which helps ensure consistent and predictable performance.
+Google Axion C4A is a family of Arm-based VMs built on Google's custom Axion processors, which use Arm Neoverse-V2 cores. These VMs deliver high performance with improved energy efficiency for modern cloud workloads such as CI/CD pipelines, microservices, media processing, and general-purpose applications.
 
-To learn more, see the Microsoft blog [Announcing the preview of new Azure VMs based on the Azure Cobalt 100 processor](https://techcommunity.microsoft.com/blog/azurecompute/announcing-the-preview-of-new-azure-vms-based-on-the-azure-cobalt-100-processor/4146353).
+The C4A series provides an Arm-based alternative to x86 VMs, enabling developers to evaluate cost, performance, and efficiency trade-offs in Google Cloud. For Kubernetes users, C4A instances provide a practical way to run Arm-native clusters and validate tooling such as Helm on modern cloud infrastructure.
+
+To learn more about Google Axion, see the Google blog [Introducing Google Axion Processors, our new Arm-based CPUs](https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu).
 
 ## OpenJDK and the PAC/BTI Arm v9 instructions
 
@@ -22,4 +24,4 @@ Armv9 Pointer Authentication (PAC) and Branch Target Identification (BTI) are se
 
 You now have the background on Azure Cobalt 100, OpenJDK, and Armv9 PAC/BTI features.
 
-Next, you'll create an Arm-based Azure VM, build OpenJDK with branch protection, and validate PAC/BTI readiness in the installed JVM.
+Next, you'll create an Arm-based Azure VM, install OpenJDK, and validate PAC/BTI readiness in the installed JVM.

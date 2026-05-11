@@ -1,7 +1,7 @@
 ---
-title: Build an OpenJDK JVM with PAC/BTI on Azure Cobalt 100
+title: Test for PAC/BTI support within OpenJDK on Google Cloud C4A Arm-based VMs
 
-description: Learn how to compile OpenJDK with branch protection on an Azure Cobalt 100 Arm VM and verify PAC/BTI support in the resulting JVM.
+description: Learn how to test OpenJDK and verify PAC/BTI support using a Google Cloud C4A Arm-based VM.
 
 draft: true
 cascade:
@@ -9,16 +9,14 @@ cascade:
     
 minutes_to_complete: 30   
 
-who_is_this_for: This Learning Path is for developers who want to build and validate an OpenJDK JVM with PAC/BTI support on Azure Cobalt 100 Arm-based virtual machines.
+who_is_this_for: This Learning Path is for developers who want to validate OpenJDK JVM PAC/BTI support on Google Cloud C4A Arm-based virtual machines.
 
 learning_objectives: 
-    - Provision an Azure Cobalt 100 Arm-based virtual machine with Ubuntu Pro 24.04 LTS.
-    - Build OpenJDK on Arm64 with branch protection support enabled.
+    - Provision an Google Cloud C4A Arm-based virtual machine with SuSE Enterprise Server.
     - Verify PAC/BTI readiness in the installed JVM runtime.
 
 prerequisites:
-    - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
-
+    - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
 
 author: Doug Anson
 
@@ -26,7 +24,7 @@ author: Doug Anson
 skilllevels: Introductory
 subjects: Performance and Architecture
 cloud_service_providers:
-  - Microsoft Azure
+  - Google Cloud
 
 armips:
     - Neoverse
@@ -41,8 +39,8 @@ operatingsystems:
 
 further_reading:
   - resource:
-      title: Azure Virtual Machines documentation
-      link: https://learn.microsoft.com/en-us/azure/virtual-machines/
+      title: Google Cloud documentation
+      link: https://cloud.google.com/docs
       type: documentation
   - resource:
       title: OpenJDK build documentation
@@ -53,7 +51,7 @@ further_reading:
       link: https://github.com/openjdk/jdk
       type: documentation
   - resource:
-      title: Arm A64 instruction reference
+      title: Arm "Arm64" machine instruction reference
       link: https://developer.arm.com/documentation/100076/latest/
       type: documentation
 
