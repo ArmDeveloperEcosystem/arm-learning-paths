@@ -133,7 +133,7 @@ docker build -t sysbox-test -f Dockerfile .
 Use Sysbox as the container runtime to create a new container:
 
 ```console
-docker run --runtime=sysbox-runc -P --hostname=sbox sysbox-test
+docker run --runtime=sysbox-runc -P --hostname=sbox -it sysbox-test
 ```
 
 The following animated output shows the Linux init process running. You can log in with the password `ubuntu`, or change it in the Dockerfile.
