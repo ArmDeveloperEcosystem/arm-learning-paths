@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 In this section, you'll run a test through the AWS IoT Core MQTT test client to check PAC/BTI availability on each platform.
 
-### Run the PAC/BTI test on Thor device
+### Run the PAC/BTI test on the Thor device
 
 Test the Thor device to see whether the exploit is successful on a device with PAC/BTI capabilities.
 
@@ -51,7 +51,7 @@ arm/demo/YOUR_CORE_DEVICE_NAME/security/pacbti/attack/trigger
 
 ![AWS IoT Core MQTT test client Publish to a topic tab with the Thor device trigger topic and run_attack payload ready to publish#center](images/test-3.png "MQTT publish to Thor device trigger topic")
 
-### Review the result for Thor device
+### Review the result for the Thor device
 
 In the subscriptions area of the MQTT test client window, you should see results similar to the following for your Thor device. The exploit fails as expected due to the presence of PAC/BTI capabilities:
 
@@ -93,7 +93,7 @@ In the subscriptions area of the MQTT test client window, you should see results
 
 This result indicates that the Thor device (Armv9) reports PAC and BTI capabilities.
 
-### Run the PAC/BTI test on Raspberry Pi 5 device
+### Run the PAC/BTI test on the Raspberry Pi 5 device
 
 Now test the RPi5 to see whether the exploit is successful on a device without PAC/BTI capabilities. 
 
