@@ -194,8 +194,8 @@ The PAC/BTI tester is a proof-of-concept that deploys the same vulnerable C appl
 
 The intent of the PAC/BTI tester is to demonstrate that:
 
-- an unprotected build can be exploited,
-- the same source built for Armv9 *without* branch protection remains exploitable
+- an unprotected build can be exploited
+- the same source built for Armv9 without branch protection remains exploitable
 - the Armv9 build compiled with `-mbranch-protection=standard` blocks the exploit from reaching the attacker-controlled function
 
 #### Invocation and execution model
