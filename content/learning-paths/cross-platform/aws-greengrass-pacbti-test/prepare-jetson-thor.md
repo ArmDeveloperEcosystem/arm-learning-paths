@@ -6,13 +6,13 @@ weight: 4
 layout: "learningpathall"
 ---
 
-### About Jetson Thor
+## Configure a Jetson Thor as a positive comparison platform
 
 In this section, you'll prepare a Jetson Thor device to become an AWS IoT Greengrass core device. Jetson Thor uses the Arm Neoverse V3AE processor, which is Armv9-A. Because PAC and BTI are mandatory in Armv9-A, the Jetson Thor fully supports both features. The device serves as the positive comparison platform in this test.
 
-### OS install
+### Install JetPack
 
-To install NVIDIA JetPack 7.1 on Jetson Thor, follow the [NVIDIA JetPack 7.1 installation guide](https://www.youtube.com/watch?v=IpiZyoqQTl8).
+Install NVIDIA JetPack 7.1 on Jetson Thor. For instructions, see [NVIDIA JetPack 7.1 installation guide](https://www.youtube.com/watch?v=IpiZyoqQTl8).
 
 
 ### Install Java
@@ -57,7 +57,7 @@ Use the same AWS account and its credentials that you used for the Raspberry Pi 
 
 ![AWS IoT Greengrass setup wizard showing Linux selected and the existing device group My_PAC_BTI_Test_Devices selected#center](images/greengrass-1a.png "Greengrass core device setup — selecting the existing thing group")
 
-7. Select **Set up a device by downloading and running an installer locally on device**.
+7. For **Device setup method**, select **Set up a device by downloading and running an installer locally on device**.
 
 8. Follow the generated installer instructions on the Jetson Thor and authenticate with your AWS credentials.
 
@@ -67,8 +67,8 @@ Use the same AWS account and its credentials that you used for the Raspberry Pi 
 
    You should see the Jetson Thor listed with recent activity.
 
-### What you've accomplished and what's next
+## What you've accomplished and what's next
 
-You've now set up your Jetson Thor as an AWS IoT Greengrass core device. 
+You've now set up your Jetson Thor as an AWS IoT Greengrass core device as the positive comparison platform for PAC/BTI tests. 
 
 Next, you'll create the custom component used to test PAC/BTI on both devices.

@@ -171,17 +171,17 @@ Manifests:
 
 Your Greengrass custom component is now ready for deployment. 
 
-## Explore the PAC/BTI Tester artifact
+## Explore the PAC/BTI tester artifact
 
 Before deployment, look at some of the details of the PAC/BTI tester artifact that is part of the custom component. 
 
-Navigate to the cloned repo:
+Start by navigating to the cloned repo:
 
 ```bash
 cd $HOME/pac-bti-gg-assets
 ```
 
-Next, unzip the PAC/BTI tester artifact:
+Next, unzip the PAC/BTI tester artifact to see the files that it contains:
 
 ```bash
 unzip arm-pac-bti-greengrass-demo-mqtt-trigger.zip
@@ -198,7 +198,7 @@ The intent of the PAC/BTI tester is to demonstrate that:
 - the same source built for Armv9 *without* branch protection remains exploitable
 - the Armv9 build compiled with `-mbranch-protection=standard` blocks the exploit from reaching the attacker-controlled function
 
-#### Invocation and Execution model
+#### Invocation and execution model
 
 The component chooses the build flavor at runtime on the target and then waits for an MQTT trigger from AWS IoT Core before it runs the attack.
 
@@ -254,7 +254,7 @@ arm-pac-bti-greengrass-demo/
 ```
 
 
-##### Example result JSON
+#### Example result JSON
 
 The result payload includes runtime flavor selection details and the trigger metadata that initiated the attack run.
 
@@ -276,8 +276,8 @@ The result payload includes runtime flavor selection details and the trigger met
 }
 ```
 
-### What you've accomplished and what's next
+## What you've accomplished and what's next
 
-You've now  created an AWS IoT Greengrass custom component and connected it to the Amazon S3-hosted artifact. 
+You've now created an AWS IoT Greengrass custom component and connected it to the Amazon S3-hosted artifact. You also learned how the PAC/BTI test works and how the result is expressed in JSON.
 
 Next, you'll deploy the component to both Greengrass core devices.

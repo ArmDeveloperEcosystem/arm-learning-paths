@@ -1,18 +1,18 @@
 ---
-title: Set up an RPi5 as an AWS IoT Greengrass core device
+title: Set up a Raspberry Pi 5 as an AWS IoT Greengrass core device
 
 weight: 3
 
 layout: "learningpathall"
 ---
 
-### About the Raspberry Pi 5
+## Configure a Raspberry Pi 5 as a negative comparison platform
 
-In this section, you'll prepare an Raspberry Pi 5 (RPi5) device to become an AWS IoT Greengrass core device. The RPi5 uses a Cortex-A76 processor, which is Armv8.2-A. Because PAC requires Armv8.3-A and BTI requires Armv8.5-A, the RPi5 does not support either feature. The device serves as the negative comparison platform in this test.
+In this section, you'll prepare a Raspberry Pi 5 (RPi5) device to become an AWS IoT Greengrass core device. The RPi5 uses a Cortex-A76 processor, which is Armv8.2-A. Because PAC requires Armv8.3-A and BTI requires Armv8.5-A, the RPi5 does not support either feature. The device serves as the negative comparison platform in this test.
 
-### OS install
+### Install Raspberry Pi OS
 
-To install the latest Raspberry Pi OS on your RPi, follow the [Getting started - Raspberry Pi documentation](https://www.raspberrypi.com/documentation/computers/getting-started.html).
+Install the latest Raspberry Pi OS on your RPi. For instructions, see the [Getting started - Raspberry Pi documentation](https://www.raspberrypi.com/documentation/computers/getting-started.html).
 
 
 ### Install Java
@@ -71,8 +71,8 @@ To install AWS IoT Greengrass:
 
    You should see your RPi5 listed with recent activity.
 
-### What you've accomplished and what's next
+## What you've accomplished and what's next
 
-You've now set up your RPi5 device as an AWS IoT Greengrass core device. 
+You've now set up your RPi5 device as an AWS IoT Greengrass core device as the negative comparison platform for PAC/BTI tests. 
 
 Next, you will set up your Armv9 PAC/BTI positive test platform.

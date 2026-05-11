@@ -14,7 +14,7 @@ learning_objectives:
     - Use MQTT to trigger PAC/BTI checks and interpret the results for each platform
 
 prerequisites:
-    - An [Amazon AWS](https://aws.amazon.com/) account with access to AWS IoT Greengrass and Amazon S3
+    - An [Amazon Web Services (AWS)](https://aws.amazon.com/) account with access to AWS IoT Greengrass and Amazon S3
     - A Raspberry Pi 5 running Raspberry Pi OS
     - An NVIDIA Jetson Thor device running JetPack 7.1 or later
     - Familiarity with AWS IoT Core and basic cloud concepts

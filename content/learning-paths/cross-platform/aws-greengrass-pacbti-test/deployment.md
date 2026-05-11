@@ -6,7 +6,7 @@ weight: 6
 layout: "learningpathall"
 ---
 
-## Deploy component using Greengrass thing group
+## Deploy PAC/BTI test using a Greengrass thing group
 
 In this section, you'll use a Greengrass thing group to deploy a set of components, including your PAC/BTI test component, to both Greengrass core devices.
 
@@ -20,7 +20,7 @@ In this section, you'll use a Greengrass thing group to deploy a set of componen
 
 ![Greengrass deployment configuration showing the deployment name and the My_PAC_BTI_Test_Devices thing group selected#center](images/deploy-2.png "Deployment name and thing group selection")
 
-3. Select the components to deploy and then select **Next**.
+3. Select the test component that you created in the previous section, as well as default Greengrass components, and then select **Next**.
 
 ![Greengrass deployment step 2 showing component selection with default components listed#center](images/deploy-3.png "Deployment component selection step")
 
@@ -42,8 +42,8 @@ In this section, you'll use a Greengrass thing group to deploy a set of componen
 
 When both devices show successful deployment, you're ready to run PAC/BTI tests on each device.
 
-### What you've accomplished and what's next
+## What you've accomplished and what's next
 
-You've now created a Greengrass deployment that targeted the thing group containing both PAC/BTI test devices. The deployment installed the PAC/BTI custom component on each device by following the YAML recipe you defined.
+You've now created a Greengrass deployment that targeted the thing group containing both PAC/BTI test devices. The deployment installed the PAC/BTI custom component on both the Raspberry Pi 5 and the Jetson Thor devices by following the YAML recipe.
 
-Next, you'll run PAC/BTI tests on both the Raspberry Pi 5 and the Jetson Thor devices using AWS IoT Core MQTT.
+Next, you'll run PAC/BTI tests on each device using AWS IoT Core MQTT.
