@@ -43,4 +43,4 @@ In this section, you:
 * Understood OpenCV capabilities for image and video processing  
 * Learned how Arm architecture improves performance and efficiency for OpenCV pipelines  
 
-Next, you'll create a firewall rule to enable browser-based visualization of OpenCV pipelines running on your Arm-based virtual machine.d in this Learning Path.
+Next, you'll create a firewall rule to enable browser-based visualization of OpenCV pipelines running on your Arm-based virtual machine.

@@ -6,13 +6,14 @@ weight: 6
 layout: learningpathall
 ---
  
-## Integrate ML Models with OpenCV on GCP Axion (Arm)
-This section extends the OpenCV learning path by integrating a machine learning model with an OpenCV pipeline. You will train a simple ML model, load it inside an OpenCV-based Python script, generate a visual prediction output, and view the result in a browser.
+## Integrate ML models with OpenCV on GCP Axion
+
+This section extends the OpenCV Learning Path by integrating a machine learning model with an OpenCV pipeline. You will train a simple ML model, load it inside an OpenCV-based Python script, generate a visual prediction output, and view the result in a browser.
+
+This section assumes you have completed the OpenCV installation, Python virtual environment setup, and browser visualization setup from the previous section.
  
-This guide assumes that you have already completed the OpenCV installation, Python virtual environment setup, and browser visualization setup from the previous section.
- 
-## Learning Objectives
- 
+## Learning objectives
+
 - Install ML dependencies in the existing OpenCV environment
 - Train a simple machine learning model
 - Integrate the ML model with an OpenCV pipeline
@@ -20,54 +21,59 @@ This guide assumes that you have already completed the OpenCV installation, Pyth
 - View the ML pipeline result in a browser
  
 ## Prerequisites
+
 Before starting this section, make sure you have:
- 
-- A running GCP Axion Arm-based VM
-- SUSE Linux running on the VM
+
+- A running GCP Axion Arm-based VM with SUSE Linux
 - Python 3.11 installed
-- OpenCV project directory created at `~/opencv-project`
-- Python virtual environment created at `~/opencv-project/cv-env`
-- OpenCV installed in the virtual environment
-- Port `8000` allowed in the GCP firewall if you want to view output from a browser
- 
-## Terminal usage
-Use two terminals for this section:
- 
-- **Terminal A:** Train the ML model and run the OpenCV + ML pipeline
-- **Terminal B:** Run the browser HTTP server
+- The OpenCV project directory at `~/opencv-project` with the `cv-env` virtual environment created and OpenCV installed
+- Port `8000` open in the GCP firewall
  
 ## Go to the project directory
-Run the following commands in Terminal A.
+
+Navigate to the project directory and activate the virtual environment:
  
 ```bash
 cd ~/opencv-project
 source cv-env/bin/activate
 ```
  
-**Verify Python and OpenCV:**
- 
+Verify Python is version 3.11:
+
 ```bash
 python --version
+```
+
+The output is similar to:
+
+```output
+Python 3.11.10
+```
+
+Verify OpenCV is installed:
+
+```bash
 python - <<'PYEOF'
 import cv2
 print("OpenCV version:", cv2.__version__)
 PYEOF
 ```
- 
-Expected output is similar to:
+
+The output is similar to:
+
 ```output
-Python 3.11.10
 OpenCV version: 4.13.0
 ```
  
 ## Install ML dependencies
-Install `scikit-learn` to train a simple model and `joblib` to save and load the model.
+
+`scikit-learn` provides the machine learning algorithms and datasets used in this section. `joblib` handles serialization — saving the trained model to disk so it can be loaded later without retraining:
  
 ```bash
 pip install scikit-learn joblib
 ```
-**Verify the installation:**
- 
+Verify the installation:
+
 ```bash
 python - <<'PYEOF'
 import sklearn
@@ -76,10 +82,18 @@ print("scikit-learn version:", sklearn.__version__)
 print("joblib imported successfully")
 PYEOF
 ```
- 
+
+The output should look similar to:
+
+```output
+scikit-learn version: 1.8.0
+joblib imported successfully
+```
+
 ## Train a simple ML model
-Create a training script that uses the Iris dataset and trains a Random Forest classifier.
- 
+
+The training script uses the Iris dataset — a standard benchmark dataset with 150 samples across three flower species — and trains a Random Forest classifier. The trained model and label names are saved to disk with `joblib` so the OpenCV pipeline can load them without retraining.
+
 ```bash
 cat > train_ml_model.py <<'EOF'
 from sklearn.datasets import load_iris
@@ -119,8 +133,8 @@ print(f"Accuracy: {accuracy:.2f}")
 EOF
 ```
  
-**Run the script:**
- 
+Run the training script:
+
 ```bash
 python train_ml_model.py
 ```
@@ -134,14 +148,15 @@ Label file: iris_labels.joblib
 Accuracy: 1.00
 ```
  
-**Verify that the model files were created:**
+Verify that both model files were created:
  
 ```bash
 ls -lh iris_model.joblib iris_labels.joblib
 ```
-## Create the OpenCV + ML pipeline
-Create a script that loads the trained model, runs prediction, and uses OpenCV to generate a visual output image.
- 
+## Create the OpenCV and ML pipeline
+
+The pipeline loads the trained model and label names, runs a prediction on a fixed sample input, and uses OpenCV to render the input features and prediction result as text on an output image. The image is saved as `ml_output.jpg` for the HTTP server to serve.
+
 ```bash
 cat > opencv_ml_pipeline.py <<'EOF'
 import cv2
@@ -218,8 +233,8 @@ print("Output image saved as ml_output.jpg")
 EOF
 ```
  
-**Run the pipeline:**
- 
+Run the pipeline:
+
 ```bash
 python opencv_ml_pipeline.py
 ```
@@ -232,80 +247,68 @@ Prediction: setosa
 Output image saved as ml_output.jpg
 ```
  
-Verify the output file:
+Verify the output image was created:
+
 ```bash
 ls -lh ml_output.jpg
 ```
- 
-## Start the browser server
-Open Terminal B and run:
- 
+
+## View the ML output in your browser
+
+If the HTTP server from the previous section is no longer running, restart it:
+
 ```bash
 cd ~/opencv-project
 source cv-env/bin/activate
-python -m http.server 8000
+python -m http.server 8000 &
 ```
- 
-The output is similar to:
- 
-```output
-Serving HTTP on 0.0.0.0 port 8000 ...
-```
-Keep this terminal running.
- 
-## View the ML output in browser
-Open the following URL in your browser:
- 
+
+Open the following URL in your browser, replacing `<VM-PUBLIC-IP>` with the external IP address of your GCP Axion VM:
+
 ```text
 http://<VM-PUBLIC-IP>:8000/ml_output.jpg
 ```
-Replace `<VM-PUBLIC-IP>` with the external IP address of your GCP Axion VM.
- 
-**You should see an image showing:**
- 
-```output
-OpenCV + ML Pipeline on GCP Axion
-Platform: Arm64
-Input features
-Prediction result
-ML execution confirmation
-```
+
+You should see an image showing the pipeline title, the Arm64 platform label, the input feature values, and the predicted Iris species.
 ![OpenCV ML pipeline output showing prediction result on GCP Axion Arm VM#center](images/opencv-ml.png "OpenCV ML pipeline output")
  
 ## Troubleshooting
-**Issue:** `ModuleNotFoundError: No module named 'sklearn'`
- 
-Make sure the virtual environment is activated and install the dependency again.
- 
+
+**`ModuleNotFoundError: No module named 'sklearn'`**
+
+Make sure the virtual environment is activated and reinstall the dependency:
+
 ```bash
 cd ~/opencv-project
 source cv-env/bin/activate
 pip install scikit-learn joblib
 ```
- 
-**Issue:** `iris_model.joblib` not found
- 
-Run the training script before running the ML pipeline.
+
+**`iris_model.joblib` not found**
+
+Run the training script before running the ML pipeline:
+
 ```bash
 python train_ml_model.py
 ```
- 
-**Issue:** Browser cannot access the output image
- 
-Check that the HTTP server is running in Terminal B.
+
+**Browser cannot access the output image**
+
+Check that the HTTP server is running:
+
 ```bash
-python -m http.server 8000
+python -m http.server 8000 &
 ```
- 
+
 Also make sure port `8000` is allowed in the GCP firewall.
- 
-**Issue:** Output image does not update
- 
-Run the ML pipeline again after changing the sample input.
+
+**Output image does not update**
+
+Run the pipeline again after changing the sample input, then refresh the browser:
+
 ```bash
 python opencv_ml_pipeline.py
 ```
-Then refresh the browser page.
  
 **Clean up generated files**
  
@@ -316,10 +319,5 @@ rm -f iris_model.joblib iris_labels.joblib ml_output.jpg
 ```
  
 ## What you've learned
-In this section, you learned how to:
- 
-- Install ML libraries in an OpenCV environment
-- Train a machine learning model on an Arm-based GCP Axion VM
-- Save and load a trained model using `joblib`
-- Integrate ML inference with an OpenCV pipeline
-- Generate browser-viewable ML prediction output
+
+You've trained a Random Forest classifier on the Iris dataset, saved it with `joblib`, and loaded it inside an OpenCV pipeline to generate a browser-viewable prediction image on a GCP Axion Arm64 VM. This pattern — train offline, load at inference time, render output with OpenCV — applies directly to production vision pipelines where models are updated independently of the display layer.
