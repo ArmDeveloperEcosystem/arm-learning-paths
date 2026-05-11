@@ -278,6 +278,6 @@ The result payload includes runtime flavor selection details and the trigger met
 
 ## What you've accomplished and what's next
 
-You've now created an AWS IoT Greengrass custom component and connected it to the Amazon S3-hosted artifact. You also learned how the PAC/BTI test works and how the result is expressed in JSON.
+You've now created an AWS IoT Greengrass custom component and connected it to the Amazon S3-hosted artifact. You also learned how the PAC/BTI test works.
 
 Next, you'll deploy the component to both Greengrass core devices.
