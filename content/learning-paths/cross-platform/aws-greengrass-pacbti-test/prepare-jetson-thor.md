@@ -12,7 +12,7 @@ In this section, you'll prepare a Jetson Thor device to become an AWS IoT Greeng
 
 ### Install JetPack
 
-Install NVIDIA JetPack 7.1 on Jetson Thor. For instructions, see [NVIDIA JetPack 7.1 installation guide](https://www.youtube.com/watch?v=IpiZyoqQTl8).
+Install NVIDIA JetPack 7.1 on Jetson Thor. For instructions on getting started with a Jetson Thor device, see [Quick Start](https://docs.nvidia.com/jetson/agx-thor-devkit/user-guide/latest/quick_start.html).
 
 
 ### Install Java
