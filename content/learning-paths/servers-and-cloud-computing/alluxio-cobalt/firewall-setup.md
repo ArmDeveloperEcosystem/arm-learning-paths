@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Configure external traffic for Alluxio Web UI
 
-To allow external traffic on port **19999** for Alluxio running on an Azure virtual machine, open the port in the Network Security Group (NSG) attached to the virtual machine's network interface or subnet.
+To allow external traffic on port **19999** for Alluxio on an Azure virtual machine, open the port in the Network Security Group (NSG). The NSG can be attached to the virtual machine's network interface or subnet.
 
 {{% notice Note %}}For more information about Azure setup, see [Getting started with Microsoft Azure Platform](/learning-paths/servers-and-cloud-computing/csp/azure/).{{% /notice %}}
 
@@ -43,7 +43,7 @@ To expose the TCP port **19999**, create a firewall rule.
 
 5. After filling in the details, select **Add** to save the rule.
 
-The Alluxio Web UI can now be accessed over port **19999**.
+You can now access the Alluxio Web UI over port **19999**.
 
 ## What you've learned and what's next
 

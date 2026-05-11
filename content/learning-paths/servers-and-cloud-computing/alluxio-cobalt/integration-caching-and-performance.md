@@ -51,7 +51,7 @@ spark.driver.extraClassPath=/opt/alluxio/client/alluxio-2.9.4-client.jar
 spark.executor.extraClassPath=/opt/alluxio/client/alluxio-2.9.4-client.jar
 ```
 
-These properties register Alluxio's Hadoop-compatible filesystem implementation so Spark can resolve `alluxio://` URIs, and add the Alluxio client JAR to both the driver and executor classpaths.
+These properties register Alluxio's Hadoop-compatible filesystem implementation so Spark can resolve `alluxio://` URIs. They also add the Alluxio client JAR to both the driver and executor classpaths.
 
 ## Create a dataset
 
@@ -158,7 +158,7 @@ Run both timing blocks and compare the printed values. The output is similar to:
 0.39 seconds
 ```
 
-The second run is faster because Spark serves the result directly from its in-memory cache, bypassing Alluxio and the underlying storage entirely.
+The second run is faster because Spark serves the result directly from its in-memory cache. Spark bypasses Alluxio and the underlying storage entirely.
 
 
 ### Verify in Alluxio UI
@@ -185,6 +185,6 @@ In the Alluxio Web UI, confirm the following:
 
 ## What you've accomplished 
 
-You've now connected Apache Spark to Alluxio on an Azure Cobalt 100 Arm64 VM, loaded data through the Alluxio namespace, and measured the difference between an uncached and a cached read. You can verify the caching activity in the Alluxio Web UI, where worker memory usage increases and cached file blocks become visible after the first read.
+You've now connected Apache Spark to Alluxio on an Azure Cobalt 100 Arm64 VM and loaded data through the Alluxio namespace. You measured the difference between an uncached and a cached read. You then verified the caching activity in the Alluxio Web UI, where worker memory usage increases and cached file blocks became visible after the first read.
 
 To see the full performance benefit of Alluxio, you can replace the local disk UFS with a remote storage backend such as Azure Blob Storage. In that configuration, Alluxio caches data in local worker memory after the first read, eliminating repeated remote storage round-trips for subsequent Spark jobs.

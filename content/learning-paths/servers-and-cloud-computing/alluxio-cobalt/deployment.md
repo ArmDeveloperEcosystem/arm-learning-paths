@@ -68,7 +68,7 @@ openJDK 64-Bit Server VM Temurin-11.0.30+7 (build 11.0.30+7, mixed mode)
 
 ### Download and install Alluxio
 
-Download the Alluxio binary release, extract it under `/opt`, and set ownership to your current user.
+Download the Alluxio binary release, extract it under `/opt`, and set ownership to your current user:
 
 ```bash
 cd /opt
@@ -80,7 +80,7 @@ sudo chown -R $USER:$USER /opt/alluxio
 
 ### Configure environment variables
 
-Set environment variables to run Alluxio commands globally.
+Set environment variables to run Alluxio commands globally:
 
 ```bash
 echo 'export ALLUXIO_HOME=/opt/alluxio' >> ~/.bashrc

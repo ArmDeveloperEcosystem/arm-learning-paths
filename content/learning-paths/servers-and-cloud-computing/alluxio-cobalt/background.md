@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 Alluxio on Arm-based Azure Cobalt 100 processors delivers high-performance data access for analytics and AI workloads. Cobalt 100's dedicated physical cores per vCPU provide consistent and predictable performance, which complements Alluxio’s in-memory caching and data orchestration capabilities. 
 
-Together, Alluxio's memory-centric architecture on Arm can reduce data latency. Alluxio on Arm-based compute helps accelerate frameworks such as Apache Spark and optimize overall data performance.
+Alluxio's memory-centric architecture on Arm-based compute can reduce data latency and help accelerate frameworks such as Apache Spark.
 
 ## Azure Cobalt 100 Arm-based processor
 
@@ -22,9 +22,9 @@ To learn more, see the Microsoft blog [Announcing the preview of new Azure VMs b
 
 Alluxio is an open-source data orchestration platform that enables fast and reliable access to data across distributed storage systems. It acts as a unified layer between compute frameworks and storage systems, improving performance for data-intensive applications.
 
-Alluxio is widely used in modern data platforms to accelerate analytics workloads by caching frequently accessed data in memory. This reduces latency and minimizes repeated reads from slower storage systems such as local disks or cloud storage.
+Alluxio is widely used in modern data platforms to accelerate analytics workloads by caching frequently accessed data in memory. The caching reduces latency and minimizes repeated reads from slower storage systems such as local disks or cloud storage.
 
-Alluxio integrates with popular analytics frameworks such as Apache Spark, Presto, and Hadoop. This makes it ideal for building high-performance data pipelines and AI/ML workloads.
+Alluxio integrates with popular analytics frameworks such as Apache Spark, Presto, and Hadoop. The integration makes it ideal for building high-performance data pipelines and AI/ML workloads.
 
 To learn more, see the official [Alluxio documentation](https://docs.alluxio.io/).
 
