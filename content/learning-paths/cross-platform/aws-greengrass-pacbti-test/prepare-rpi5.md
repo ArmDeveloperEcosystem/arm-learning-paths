@@ -63,7 +63,7 @@ Before you complete these steps, create an AWS access key pair for the account y
 
 8. Follow the generated installer instructions on the RPi5 and authenticate with the AWS credentials you created.
 
-![Generated Greengrass installer commands to run on the RPi5 to complete core device registration#center](images/greengrass-2.png "Generated installer commands for the RPi5")
+![Generated Greengrass installer commands to run on the RPi5 to complete core device registration#center](images/greengrass-2.webp "Generated installer commands for the RPi5")
 
 9. Confirm registration by selecting **View core devices**.
 
