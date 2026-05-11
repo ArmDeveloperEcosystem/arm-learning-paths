@@ -61,7 +61,7 @@ Before you complete these steps, create an AWS access key pair for the account y
 
 8. Follow the generated installer instructions on the Jetson Thor and authenticate with your AWS credentials.
 
-![Generated Greengrass installer commands to run on the Jetson Thor to complete core device registration#center](images/greengrass-2.png "Generated installer commands for the Jetson Thor")
+![Generated Greengrass installer commands to run on the Jetson Thor to complete core device registration#center](images/greengrass-2.webp "Generated installer commands for the Jetson Thor")
 
 9. Confirm registration by selecting **View core devices**.
 

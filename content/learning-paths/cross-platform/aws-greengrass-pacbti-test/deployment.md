@@ -38,7 +38,7 @@ In this section, you use a Greengrass thing group to deploy a set of components,
 
 7. After deployment starts, Greengrass installs and prepares the custom component on each PAC/BTI test device (Thor and RPi5). Wait until the **Execution overview** shows **2** successful targets.
 
-![Greengrass deployment status page showing the Execution overview with 2 successful targets, confirming both devices received the component#center](images/deploy-7.png "Deployment status showing 2 successful targets")
+![Greengrass deployment status page showing the Execution overview with 2 successful targets, confirming both devices received the component#center](images/deploy-7.webp "Deployment status showing 2 successful targets")
 
 When both devices show successful deployment, you're ready to run PAC/BTI tests on each device.
 

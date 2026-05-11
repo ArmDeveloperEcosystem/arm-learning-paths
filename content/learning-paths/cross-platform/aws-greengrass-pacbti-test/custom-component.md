@@ -163,7 +163,7 @@ Manifests:
 
 6. Confirm the custom component appears in the component list.
 
-![Greengrass Components list showing the newly created arm-com.arm.demo.PacBtiDemo component#center](images/custom-4.png "Greengrass component list with new component")
+![Greengrass Components list showing the newly created arm-com.arm.demo.PacBtiDemo component#center](images/custom-4.webp "Greengrass component list with new component")
 
 Your Greengrass custom component is now ready for deployment. 
 
