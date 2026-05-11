@@ -56,7 +56,7 @@ Table lookup function except when an index is out of range as it leaves the exis
 ```
 Line 751: results = vmvn_u8(...)
 ```
-Bitwise NOT operation. This negates each of the 8 character-wall comparisons. It is effectively the _!_ (NOT) in our [AABB intersection function](/learning-paths/mobile-graphics-and-gaming/using-neon-intrinsics-to-optimize-unity-on-android/5-the-optimizations#the-aabb-intersection-function) except that it is working on 8 results instead of 1.
+Bitwise NOT operation. This negates each of the 8 character-wall comparisons. It is effectively the _!_ (NOT) in our [AABB intersection function](/learning-paths/mobile-graphics-and-gaming/using-neon-intrinsics-to-optimize-unity-on-android/5-the-optimizations/#the-aabb-intersection-function) except that it is working on 8 results instead of 1.
 
 `Unity.Burst.Intrinsics.v64` (storing to memory)
 ```

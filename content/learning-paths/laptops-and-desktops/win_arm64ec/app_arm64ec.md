@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 You will need a Arm computer running Windows 11 to use Arm64EC.
 
-You also need to [install Visual Studio 2022 or higher](/install-guides/vs-woa) on your machine.
+You also need to [install Visual Studio 2022 or higher](/install-guides/vs-woa/) on your machine.
 
 ## Overview of Arm64EC
 

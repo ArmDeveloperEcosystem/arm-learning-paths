@@ -17,8 +17,8 @@ This learning path demonstrates how to employ Arm64EC to port a complete applica
 ## Before you begin
 To follow this learning path:
 
-1. Install [Visual Studio 2022 or higher](/install-guides/vs-woa) with Arm64 build tools.
-2. Install [Python](/install-guides/py-woa) on your machine. In this learning path, Python version 3.11.3 was used.
+1. Install [Visual Studio 2022 or higher](/install-guides/vs-woa/) with Arm64 build tools.
+2. Install [Python](/install-guides/py-woa/) on your machine. In this learning path, Python version 3.11.3 was used.
 
 The [complete project code](https://github.com/dawidborycki/ARM64EC.Porting) is hosted on GitHub.
 

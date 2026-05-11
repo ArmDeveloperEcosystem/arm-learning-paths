@@ -13,7 +13,7 @@ learning_objectives:
 
 prerequisites:
     - An Azure account
-    - A machine with [Terraform](/install-guides/terraform/), [Azure CLI](/install-guides/azure-cli), and [Kubectl](/install-guides/kubectl/) installed
+    - A machine with [Terraform](/install-guides/terraform/), [Azure CLI](/install-guides/azure-cli/), and [Kubectl](/install-guides/kubectl/) installed
 
 author: Jason Andrews
 

@@ -34,7 +34,7 @@ The default container starts with a Bash shell. Both `tdnf` and `dnf` are availa
 
 Currently, the Azure Marketplace offers official virtual machine images of Azure Linux 3.0 only for `x86_64` architectures, published by Ntegral Inc. While native Arm64 (AArch64) images are not yet available, you can create your own custom Azure Linux 3.0 virtual machine image for AArch64 using the [AArch64 ISO for Azure Linux 3.0](https://github.com/microsoft/azurelinux#iso).
 
-For detailed steps, see [Create an Azure Linux 3.0 virtual machine with Cobalt 100 processors](/learning-paths/servers-and-cloud-computing/azure-vm).
+For detailed steps, see [Create an Azure Linux 3.0 virtual machine with Cobalt 100 processors](/learning-paths/servers-and-cloud-computing/azure-vm/).
 
 ## Next steps
 

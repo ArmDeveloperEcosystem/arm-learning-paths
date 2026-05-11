@@ -44,7 +44,7 @@ The diagram below shows a simplified view of the attestation flow.
 
 In this Learning Path, attestation is used to obtain the encryption key required to decrypt a container image.
 Learn more about how Trustee services are used to evaluate the trustworthiness of a CCA Realm and how attestation policy gates secrets release in the
-["Run an end-to-end Attestation with Arm CCA and Trustee"](/learning-paths/servers-and-cloud-computing/cca-trustee) Learning Path.
+["Run an end-to-end Attestation with Arm CCA and Trustee"](/learning-paths/servers-and-cloud-computing/cca-trustee/) Learning Path.
 
 ### Full architecture overview
 

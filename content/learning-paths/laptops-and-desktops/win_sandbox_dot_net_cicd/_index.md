@@ -12,7 +12,7 @@ learning_objectives:
     - Build and run a .NET 8 Windows Presentation Foundation (WPF) application using a self-hosted GitHub Actions runner in your CI/CD workflow. 
 
 prerequisites:
-    - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 Version 22H2 which has [Windows Sandbox enabled](/install-guides/windows-sandbox-woa).
+    - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 Version 22H2 which has [Windows Sandbox enabled](/install-guides/windows-sandbox-woa/).
     - A valid [GitHub account](https://github.com/) to complete this Learning Path.
     
 

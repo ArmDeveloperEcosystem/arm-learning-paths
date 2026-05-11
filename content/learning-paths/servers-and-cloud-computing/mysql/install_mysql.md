@@ -10,25 +10,25 @@ layout: "learningpathall"
 
 ##  MySQL Tuning
 
-If you already know how to deploy a MySQL database. You might want to skip this learning path, and instead explore the [Learn how to Tune MySQL](/learning-paths/servers-and-cloud-computing/mysql_tune) learning path. That learning path covers how to get more performance out of an Arm based MySQL server.
+If you already know how to deploy a MySQL database. You might want to skip this learning path, and instead explore the [Learn how to Tune MySQL](/learning-paths/servers-and-cloud-computing/mysql_tune/) learning path. That learning path covers how to get more performance out of an Arm based MySQL server.
 
 ##  Arm deployment options
 
 There are numerous ways to deploy MySQL on Arm. Bare metal, cloud VMs, or the various SQL services that cloud providers offer. If you already have an Arm system, you can skip over this subsection and continue reading.
 
 * Arm Cloud VMs
-  * [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp) learning path
+  * [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) learning path
   * [AWS EC2](https://aws.amazon.com/ec2/)
-    * [Deploy Arm Instances on AWS using Terraform](/learning-paths/servers-and-cloud-computing/aws-terraform) learning path
+    * [Deploy Arm Instances on AWS using Terraform](/learning-paths/servers-and-cloud-computing/aws-terraform/) learning path
   * [Azure VMs](https://azure.microsoft.com/en-us/products/virtual-machines/)
-    * [Deploy Arm virtual machines on Azure with Terraform](/learning-paths/servers-and-cloud-computing/azure-terraform) learning path
+    * [Deploy Arm virtual machines on Azure with Terraform](/learning-paths/servers-and-cloud-computing/azure-terraform/) learning path
   * [GCP Compute Engine](https://cloud.google.com/compute)
-    * [Deploy Arm virtual machines on Google Cloud Platform (GCP) using Terraform](/learning-paths/servers-and-cloud-computing/gcp) learning path
+    * [Deploy Arm virtual machines on Google Cloud Platform (GCP) using Terraform](/learning-paths/servers-and-cloud-computing/gcp/) learning path
   * [Oracle Cloud Infrastructure](https://www.oracle.com/cloud/)
 * MySQL services
   * [AWS RDS](https://aws.amazon.com/rds)
     * Simply select an Arm based instance for deployment
-* Additional options are listed in the [Get started with Servers and Cloud Computing](/learning-paths/servers-and-cloud-computing/intro) learning path
+* Additional options are listed in the [Get started with Servers and Cloud Computing](/learning-paths/servers-and-cloud-computing/intro/) learning path
 
 ##  MySQL Documentation
 
@@ -40,7 +40,7 @@ If you are using a cloud service like AWS RDS, then the installation of MySQL is
 
 ##  MySQL Server Configuration
 
-Getting MySQL server up and running is easy. This is because the default out of box configuration will work. However, this out of box configuration is most likely under optimized. In fact, a [graph](/learning-paths/servers-and-cloud-computing/mysql_tune/tuning/) of the performance difference between an out of box MySQL server and a tuned server is shown in the [Learn how to Tune MySQL](/learning-paths/servers-and-cloud-computing/mysql_tune/) learning path. That said, for the purpose of learning, it's ok to start with the out of box configuration. Once you have that working, you should read the [MySQL server configuration documentation](https://dev.mysql.com/doc/refman/8.1/en/mysqld-server.html), and follow the [Learn how to Tune MySQL](/learning-paths/servers-and-cloud-computing/mysql_tune) learning path.
+Getting MySQL server up and running is easy. This is because the default out of box configuration will work. However, this out of box configuration is most likely under optimized. In fact, a [graph](/learning-paths/servers-and-cloud-computing/mysql_tune/tuning/) of the performance difference between an out of box MySQL server and a tuned server is shown in the [Learn how to Tune MySQL](/learning-paths/servers-and-cloud-computing/mysql_tune/) learning path. That said, for the purpose of learning, it's ok to start with the out of box configuration. Once you have that working, you should read the [MySQL server configuration documentation](https://dev.mysql.com/doc/refman/8.1/en/mysqld-server.html), and follow the [Learn how to Tune MySQL](/learning-paths/servers-and-cloud-computing/mysql_tune/) learning path.
 
 ## Connect to Database
 

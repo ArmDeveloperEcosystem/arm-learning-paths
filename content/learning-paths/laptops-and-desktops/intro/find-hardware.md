@@ -25,7 +25,7 @@ The Lenovo [Duet Gen 9](https://www.lenovo.com/us/en/p/laptops/lenovo/lenovo-edu
 
 The System76 [Thelio Astra](https://www.system76.com/arm/) is a powerful Arm-based desktop computer designed by System76 and ships with Ubuntu installed. 
 
-Both Windows and ChromeOS have a Linux subsystem which can be used for software development tasks. Read [WSL for Windows on Arm](/learning-paths/laptops-and-desktops/wsl2) to learn more.
+Both Windows and ChromeOS have a Linux subsystem which can be used for software development tasks. Read [WSL for Windows on Arm](/learning-paths/laptops-and-desktops/wsl2/) to learn more.
 
 Some single board computers have enough performance to implement Linux based desktop computers. The [Pinebook Pro](https://pine64.org/devices/pinebook_pro/) and the [Raspberry Pi 400](https://www.raspberrypi.com/products/raspberry-pi-400/) are examples.
 
@@ -33,4 +33,4 @@ Some single board computers have enough performance to implement Linux based des
 
 A popular alternative to using local hardware is to use a virtual machine in the cloud. Most cloud service providers offer Arm-based instances.
 
-Read [Get started with Servers and Cloud Computing](/learning-paths/servers-and-cloud-computing/intro) to learn more.
+Read [Get started with Servers and Cloud Computing](/learning-paths/servers-and-cloud-computing/intro/) to learn more.

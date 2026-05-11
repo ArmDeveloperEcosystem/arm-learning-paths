@@ -8,7 +8,7 @@ weight: 3 # (intro is 1), 2 is first, 3 is second, etc.
 layout: "learningpathall"
 ---
 ## MongoDB test scenarios
-To test MongoDB you need two parts. An instance running the testing software ([YCSB](/learning-paths/servers-and-cloud-computing/mongodb/benchmark_mongodb-8.0)). One or more instances running MongoDB in some configuration. The recommended MongoDB test setup is a three node replica set. These three nodes are of equal size with one instance being designated as the primary node (the target for test traffic) and the others as secondary nodes.
+To test MongoDB you need two parts. An instance running the testing software ([YCSB](/learning-paths/servers-and-cloud-computing/mongodb/benchmark_mongodb-8.0/)). One or more instances running MongoDB in some configuration. The recommended MongoDB test setup is a three node replica set. These three nodes are of equal size with one instance being designated as the primary node (the target for test traffic) and the others as secondary nodes.
 
 ## What is a replica set?
 
@@ -28,7 +28,7 @@ You can create replica sets of any size (two is the minimum). Three is recommend
 
 To create a three node replica set, start by launching three Arm-based instances of equal size.
 
-[Install](/learning-paths/servers-and-cloud-computing/mongodb/run_mongodb) MongoDB on all three instances.
+[Install](/learning-paths/servers-and-cloud-computing/mongodb/run_mongodb/) MongoDB on all three instances.
 
 Once all three instances are up and running, modify the service and configuration file for all instances.
 

@@ -19,15 +19,15 @@ In this section you will learn about the different options available to install,
 There are numerous ways to deploy Envoy on Arm: bare metal, cloud VMs, or the various Envoy services that cloud providers offer. If you already have an Arm system, you can skip over this subsection and continue with installation options.
 
 * Arm Cloud VMs
-  * [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp) learning path
+  * [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) learning path
   * [AWS EC2](https://aws.amazon.com/ec2/)
-    * [Deploy Arm Instances on AWS using Terraform](/learning-paths/servers-and-cloud-computing/aws-terraform) learning path
+    * [Deploy Arm Instances on AWS using Terraform](/learning-paths/servers-and-cloud-computing/aws-terraform/) learning path
   * [Azure VMs](https://azure.microsoft.com/en-us/products/virtual-machines/)
-    * [Deploy Arm virtual machines on Azure with Terraform](/learning-paths/servers-and-cloud-computing/azure-terraform) learning path
+    * [Deploy Arm virtual machines on Azure with Terraform](/learning-paths/servers-and-cloud-computing/azure-terraform/) learning path
   * [GCP Compute Engine](https://cloud.google.com/compute)
-    * [Deploy Arm virtual machines on Google Cloud Platform (GCP) using Terraform](/learning-paths/servers-and-cloud-computing/gcp) learning path
+    * [Deploy Arm virtual machines on Google Cloud Platform (GCP) using Terraform](/learning-paths/servers-and-cloud-computing/gcp/) learning path
   * [Oracle Cloud Infrastructure](https://www.oracle.com/cloud/)
-* Additional options are listed in the [Get started with Servers and Cloud Computing](/learning-paths/servers-and-cloud-computing/intro) learning path
+* Additional options are listed in the [Get started with Servers and Cloud Computing](/learning-paths/servers-and-cloud-computing/intro/) learning path
 
 ### Envoy installation options
 

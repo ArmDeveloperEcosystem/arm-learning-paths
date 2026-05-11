@@ -90,7 +90,7 @@ The Arm Linux Migration Tools package supports Ubuntu 22.04 and Ubuntu 24.04.
 
 Some tools in the package require additional software to function properly:
 
-Docker or Podman is required for Migrate Ease. You can install Docker with the [Docker install guide](/install-guides/docker/docker-engine).
+Docker or Podman is required for Migrate Ease. You can install Docker with the [Docker install guide](/install-guides/docker/docker-engine/).
 
 Alternatively, if you prefer Podman over Docker, install it with the Ubuntu package manager:
 

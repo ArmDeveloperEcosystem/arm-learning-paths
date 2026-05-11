@@ -91,7 +91,7 @@ sudo sh -c 'echo "vm.nr_hugepages=500" >> /etc/sysctl.conf'
 
 ### Selecting the number of huge pages to use
 
-You should set `vm.nr_hugepages` to a value that gives a total huge page space equal to or slightly larger than the `MySQL` buffer pool size. Selecting the buffer pool size is discussed in the [Tuning MySQL](/learning-paths/servers-and-cloud-computing/mysql_tune/tuning) section.
+You should set `vm.nr_hugepages` to a value that gives a total huge page space equal to or slightly larger than the `MySQL` buffer pool size. Selecting the buffer pool size is discussed in the [Tuning MySQL](/learning-paths/servers-and-cloud-computing/mysql_tune/tuning/) section.
 
 Typically, only the number of huge pages needs to be configured. However, for more information on the different parameters that affect the configuration of huge pages, review the [admin-guide for hugetlbpage in the Linux source code](https://github.com/torvalds/linux/blob/master/Documentation/admin-guide/mm/hugetlbpage.rst).
 

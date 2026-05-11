@@ -56,6 +56,6 @@ The required configuration steps vary by AI coding assistant. Refer to the insta
 - [Gemini CLI](/install-guides/gemini/)
 - [Kiro CLI](/install-guides/kiro-cli/)
 - [Codex CLI](/install-guides/codex-cli/)
-- [Claude Code](/install-guides/claude-code)
+- [Claude Code](/install-guides/claude-code/)
 
 In the next section, you'll build the Mandelbrot example application on your remote Arm server and confirm that Arm Performix can reach the target.

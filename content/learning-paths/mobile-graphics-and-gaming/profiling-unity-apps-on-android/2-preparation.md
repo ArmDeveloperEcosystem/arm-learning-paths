@@ -6,7 +6,7 @@ layout: learningpathall
 ---
 
 ## Create a blank project
-You'll need Unity installed with Android build support. Read [Get started with Unity on Android](/learning-paths/mobile-graphics-and-gaming/get-started-with-unity-on-android) for help installing Unity, as well as building and deploying to an Android device.
+You'll need Unity installed with Android build support. Read [Get started with Unity on Android](/learning-paths/mobile-graphics-and-gaming/get-started-with-unity-on-android/) for help installing Unity, as well as building and deploying to an Android device.
 
 Although the sample application is itself a project, you will still need to create a blank project to import it into.
 
@@ -120,7 +120,7 @@ The game will launch, and you will see an empty environment begin to fill with m
 ![Screenshot at runtime#center](images/game-view.png "Figure 8. Sample running in Game view.")
 
 ## Deploy to Android
-You will now deploy the sample to your Android device. Your device must already be set up for development. For detailed instructions, read the learning path [Get started with Unity on Android](/learning-paths/mobile-graphics-and-gaming/get-started-with-unity-on-android).
+You will now deploy the sample to your Android device. Your device must already be set up for development. For detailed instructions, read the learning path [Get started with Unity on Android](/learning-paths/mobile-graphics-and-gaming/get-started-with-unity-on-android/).
 
 1. Open _Build Profiles_ from the _File_ menu
 

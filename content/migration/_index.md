@@ -81,7 +81,7 @@ Alibaba Cloud offers [3 instance types](https://www.alibabacloud.com/help/en/ecs
   {{< /tab >}}
 {{< /tabpane-normal >}}
 
-Read [Get started with Servers and Cloud Computing](/learning-paths/servers-and-cloud-computing/intro) to learn more and find additional cloud service providers.
+Read [Get started with Servers and Cloud Computing](/learning-paths/servers-and-cloud-computing/intro/) to learn more and find additional cloud service providers.
 
 ## STEP 1: Plan your transition
 
@@ -109,7 +109,7 @@ You can quickly find out if software dependencies are available for Arm using th
 
 The below resources are curated to address migration challenges on specific cloud providers. Look through them for additional context.
 - [Porting architecture specific intrinsics](/learning-paths/cross-platform/intrinsics/) - perfect for porting intrinsics from another architecture.
-- [Arm software install guides](/install-guides) - good for quickly installing common tools and software.
+- [Arm software install guides](/install-guides/) - good for quickly installing common tools and software.
 - [simd.info](https://simd.info/) - a searchable reference tool for C intrinsics for SIMD engines.
 - [migrate-ease](https://github.com/migrate-ease/migrate-ease) - scan your source code for suggestions to migrate to Arm Neoverse, get started with [Migrate applications to Arm servers using migrate-ease](/learning-paths/servers-and-cloud-computing/migrate-ease/).
 - [Arm Infrastructure Solutions blog](https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/) - an Arm-specific technical blog.
@@ -231,7 +231,7 @@ Which AI/ML software stack can I run on Arm servers?
 |-----------|----------------|----------------------------------------|
 | MLPerf | [Measure Machine Learning Inference Performance on Arm servers](/learning-paths/servers-and-cloud-computing/ml-perf/) | |
 | vLLM | [Run vLLM inference with INT4 quantization on Arm servers](/learning-paths/servers-and-cloud-computing/vllm-acceleration/) | |
-| KleidiAI | [Accelerate Generative AI workloads using KleidiAI](/learning-paths/cross-platform/kleidiai-explainer) | |
+| KleidiAI | [Accelerate Generative AI workloads using KleidiAI](/learning-paths/cross-platform/kleidiai-explainer/) | |
 | Llama.cpp | [Run distributed inference with llama.cpp on Arm-based AWS Graviton4 instances](/learning-paths/servers-and-cloud-computing/distributed-inference-with-llama-cpp/) | |
   {{< /tab >}}
 
