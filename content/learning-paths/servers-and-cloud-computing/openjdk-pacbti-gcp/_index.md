@@ -1,18 +1,19 @@
 ---
-title: Test for PAC/BTI support within OpenJDK on Google Cloud C4A Arm-based VMs
+title: Verify OpenJDK PAC/BTI support on Google Cloud C4A VMs
 
-description: Learn how to test OpenJDK and verify PAC/BTI support using a Google Cloud C4A Arm-based VM.
+description: Learn how to verify PAC/BTI support in OpenJDK on a Google Cloud C4A Arm-based VM and interpret the JVM readiness result.
 
 draft: true
 cascade:
     draft: true
     
-minutes_to_complete: 30   
+minutes_to_complete: 30
 
-who_is_this_for: This Learning Path is for developers who want to validate OpenJDK JVM PAC/BTI support on Google Cloud C4A Arm-based virtual machines.
+who_is_this_for: This Learning Path is for developers who want to validate OpenJDK PAC/BTI support on Google Cloud C4A Arm-based virtual machines.
 
 learning_objectives: 
-    - Provision an Google Cloud C4A Arm-based virtual machine with SuSE Enterprise Server.
+    - Provision a Google Cloud C4A Arm-based virtual machine with SUSE Linux Enterprise Server.
+    - Install OpenJDK on the Arm-based VM.
     - Verify PAC/BTI readiness in the installed JVM runtime.
 
 prerequisites:
@@ -62,3 +63,16 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+
+## Verify OpenJDK PAC/BTI support on Google Cloud C4A VMs
+
+In this Learning Path, you create a Google Cloud C4A Arm-based virtual machine, install OpenJDK on SUSE Linux Enterprise Server, and run a JVM probe that checks whether PAC and BTI are exposed to userspace. The result tells you whether the installed Java runtime can use these Armv9 security features on the VM.
+
+## What you'll do
+
+You will complete one task from start to finish:
+
+1. Create a Google Cloud C4A virtual machine.
+2. Install OpenJDK on the VM.
+3. Run the PAC/BTI validation script inside the JVM.
+4. Interpret the final result as positive, negative, or inconclusive.

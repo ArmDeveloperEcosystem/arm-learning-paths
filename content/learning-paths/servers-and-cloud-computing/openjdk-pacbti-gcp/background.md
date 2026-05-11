@@ -6,7 +6,7 @@ weight: 2
 layout: "learningpathall"
 ---
 
-## Explore Google Axion C4A instances in Google Cloud
+## Explore Google Cloud C4A instances
 
 Google Axion C4A is a family of Arm-based VMs built on Google's custom Axion processors, which use Arm Neoverse-V2 cores. These VMs deliver high performance with improved energy efficiency for modern cloud workloads such as CI/CD pipelines, microservices, media processing, and general-purpose applications.
 
@@ -22,6 +22,6 @@ Armv9 Pointer Authentication (PAC) and Branch Target Identification (BTI) are se
 
 ## What you've learned and what's next
 
-You now have the background on Azure Cobalt 100, OpenJDK, and Armv9 PAC/BTI features.
+You now have the background on Google Cloud C4A, OpenJDK, and Armv9 PAC/BTI features.
 
-Next, you'll create an Arm-based Azure VM, install OpenJDK, and validate PAC/BTI readiness in the installed JVM.
+Next, you'll create an Arm-based Google Cloud VM, install OpenJDK, and validate PAC/BTI readiness in the installed JVM.

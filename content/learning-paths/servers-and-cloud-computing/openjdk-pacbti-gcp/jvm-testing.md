@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-### Install the default OpenJDK JVM
+## Install the default OpenJDK JVM
 
 Install the default OpenJDK Java VM:
 
@@ -29,11 +29,11 @@ OpenJDK Runtime Environment (build 17.0.13+11-suse-150400.3.48.2-aarch64)
 OpenJDK 64-Bit Server VM (build 17.0.13+11-suse-150400.3.48.2-aarch64, mixed mode, sharing)
 ```
 
-Next, download and run a script to confirm PAC/BTI readiness in the JVM you just built and installed.
+Next, download and run a script to confirm PAC/BTI readiness in the JVM you just installed.
 
-### Setup the test script
+## Set up the test script
 
-Copy and paste the following script into your C4A ssh session. Save this as file "test-pacbti.sh":
+Copy and paste the following script into your C4A SSH session. Save it as `test-pacbti.sh`:
 
 ```bash
 #!/usr/bin/env bash
@@ -76,11 +76,11 @@ Copy and paste the following script into your C4A ssh session. Save this as file
 #   - OpenJDK 11+ for Java source-file mode, or javac available as fallback
 #
 # Usage:
-#   chmod +x jvm-aarch64-pac-bti-test.sh
-#   ./jvm-aarch64-pac-bti-test.sh
+#   chmod +x test-pacbti.sh
+#   ./test-pacbti.sh
 #
 # Optional:
-#   JAVA=/path/to/java ./jvm-aarch64-pac-bti-test.sh
+#   JAVA=/path/to/java ./test-pacbti.sh
 
 set -u
 
@@ -331,7 +331,7 @@ else
 fi
 ```
 
-### Run the test script
+## Run the test script
 
 In your SSH session, run the test script to confirm PAC/BTI enablement:
 
@@ -384,7 +384,7 @@ FINAL RESULT: POSITIVE
 Meaning     : The JVM is executing on Linux/AArch64 with PAC and BTI exposed to userspace.
 ```
 
-### What you've learned
+## What you've learned and what's next
 
 Most OpenJDK builds are distributed with PAC/BTI enabled but optionally used by default because they must remain compatible with older Arm platforms. When you need these protections, you can build and register your own JVM with branch protection support.
 
