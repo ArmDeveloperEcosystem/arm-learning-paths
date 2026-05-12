@@ -6,42 +6,56 @@ weight: 2
 layout: learningpathall
 ---
 
-## What D2D mode gives you, and where it stops
+## From device-to-device (D2D) to server
 
-In device-to-device (D2D) mode, every Device Connect runtime is a peer on the same local network. Devices find each other through the messaging backend's local discovery (Zenoh's multicast scouting, or NATS running in a peer-to-peer configuration), exchange typed events, and call each other's RPCs directly. There is no central process to provision or maintain.
+The [device-to-device Learning Path](/learning-paths/embedded-and-microcontrollers/device-connect-d2d/) showed Device Connect in its simplest shape. Each runtime is a peer on the same local network. Devices find each other automatically, exchange typed events, and call each other's remote procedure calls (RPCs) directly. There is no broker, registry, or cloud service to run.
 
-That is a great fit for prototyping, for small fleets on a shared LAN, and for time-sensitive applications where a cloud round-trip would be wasteful. It stops being a great fit when you need any of the following:
+That model is useful when everything is close together. It works well for prototypes, lab demos, and small fleets on one local area network (LAN). It is also a good fit when a cloud round-trip would add unnecessary delay.
 
-- a **persistent registry** that survives device reboots and lets a new client list every device that has ever connected, not just the ones online right this second
-- **distributed state** shared between devices and agents, with leases and watches (for example, "which experiment is each device currently running?")
-- **multi-network reach** for devices and agents on different LANs, behind NAT, or in the cloud
-- **fleet-wide operations** like commissioning new devices, rotating credentials, or auditing every RPC that has ever been issued
-- **security guarantees** beyond TLS on the wire, including per-device cryptographic identity, PIN-based onboarding, role-based ACLs, and audit logs
+As soon as the fleet grows, D2D mode starts to run out of road. You may need devices on different networks to talk to each other. You may need a registry that remembers devices after they disconnect. You may also need stronger identity, credential rotation, or audit logs.
 
-The [`device-connect-server`](https://github.com/arm/device-connect/tree/main/packages/device-connect-server) package is the layer that adds those capabilities on top of the edge SDK you already know.
+Use a Device Connect server when you need:
+
+- a **persistent registry** that survives device reboots and lets new clients list known devices
+- **distributed state** shared between devices and agents, with leases and watches
+- **multi-network reach** for devices and agents on different LANs, behind network address translation (NAT), or in the cloud
+- **fleet-wide operations** such as commissioning devices and rotating credentials
+- **stronger security controls** such as per-device identity, JSON Web Token (JWT) credentials, role-based access control lists (ACLs), and audit logs
+
+The [`device-connect-server`](https://github.com/arm/device-connect/tree/main/packages/device-connect-server) package is the layer that adds those capabilities on top of the edge software development kit (SDK) you already know.
 
 ## What the server adds
 
-The server runtime ships as a small set of services you run alongside (or instead of) raw D2D scouting:
+The server does not change how you write device code. Devices still use `DeviceDriver`, `@rpc`, `@emit`, `@periodic`, and `@on`. Clients and artificial intelligence (AI) agents still use `discover_devices()` and `invoke_device()`.
 
-- a **messaging router** (Zenoh by default; NATS or MQTT as alternatives) so devices on different networks can reach the same mesh
-- a **device registry service** that records every device, its identity, capabilities, and last-known status, in a persistent store
-- an **etcd-backed distributed state store** that any device or agent can read and write through the Python API
-- a **device commissioning flow** with PIN-based onboarding and per-device cryptographic identity (covered later in this Learning Path)
-- optional **security infrastructure**: TLS/mTLS for Zenoh, JWT auth for NATS, role-based access control, audit logging
+The server changes how devices find and trust each other. In D2D mode, each runtime discovers nearby peers directly. With a server, every device and agent connects to a shared service.
 
-You can adopt these incrementally: run the dev-mode Docker Compose to get a router and registry running locally with no auth, then layer in TLS or JWT once you have the basics working.
+That shared service gives you a few fleet-level building blocks:
+
+- **routing** so devices on different networks can join the same mesh
+- **registry** so clients can see known devices, their capabilities, and their last-known status
+- **shared state** so devices and agents can coordinate through a common store
+- **commissioning** so each device gets its own trusted credential
+- **security controls** such as Transport Layer Security (TLS), mutual TLS (mTLS), JSON Web Token (JWT) authentication, role-based access control, and audit logging
+
+Device Connect supports different messaging backends, including Zenoh, NATS, and Message Queuing Telemetry Transport (MQTT). In this Learning Path, you will use the hosted portal with NATS credentials. That lets you focus on the device and agent code instead of running the server yourself.
 
 ## A note on commissioning
 
-In a serious deployment, no device joins the mesh until it has been **commissioned**, meaning it has been given a cryptographic identity that the server trusts. The shape of that identity depends on the messaging backend:
+Commissioning means giving a device or agent a trusted identity before it joins the mesh. Without commissioning, a process is just code trying to connect. With commissioning, the server can decide whether that process is allowed to publish, subscribe, register itself, or call an RPC.
 
-- with **Zenoh**, commissioning means issuing the device a client TLS certificate signed by a shared CA
+The credential format depends on the messaging backend:
+
+- with **Zenoh**, commissioning means issuing the device a client TLS certificate signed by a shared certificate authority (CA)
 - with **NATS**, commissioning means issuing the device a JWT credential bound to its tenant
 
-In both cases, the credential answers the question "is this device allowed on this tenant's mesh?" and prevents anyone else from impersonating it. In this Learning Path you will use the [Device Connect portal](https://portal.deviceconnect.dev/) to mint NATS credentials for your devices and your agent, then point each runtime at the tenant's NATS server. That replaces the local Docker setup with a hosted server you do not need to operate yourself.
+In both cases, the credential answers the same question: is this identity allowed on this mesh?
+
+In this Learning Path, you will use the [Device Connect portal](https://portal.deviceconnect.dev/) to download NATS credentials for three default identities on your tenant. Two identities will run simulated robot arms. The third identity will run the Python client or agent.
 
 ## Where this sits in the architecture
+
+In the diagram, pub/sub means publish/subscribe, KV means key-value, LC means LangChain, and MCP means Model Context Protocol.
 
 ```
 ┌──────────────────┐     ┌──────────────────────┐     ┌─────────────────────┐
@@ -55,7 +69,7 @@ In both cases, the credential answers the question "is this device allowed on th
 
 Devices and agents still talk to each other through the same primitives (`@rpc`, `@emit`, `discover_devices`, `invoke_device`). The Device Connect server runs the pub/sub messaging, the persistent registry, the shared key-value store, and the security layer in one place.
 
-The animation below shows the same idea end to end: a Device Connect server runs in Berlin (with Zenoh, NATS, or MQTT as the messaging backend), robots in San Francisco and Tokyo install `device-connect-edge` and register with it, and an AI agent in Bangalore installs `device-connect-agent-tools` and drives both robots through the server. Every `invoke_device` call and every event flows through Berlin.
+The animation below shows the same idea end to end. A Device Connect server runs in Berlin. Robots in San Francisco and Tokyo install `device-connect-edge` and register with it. An AI agent in Bangalore installs `device-connect-agent-tools` and drives both robots through the server. Every `invoke_device` call and every event flows through the server.
 
 <video width="100%" controls muted playsinline>
   <source src="https://raw.githubusercontent.com/kavya-chennoju/arm-learning-path-assets/main/videos/device-connect-server-overview.mp4" type="video/mp4">
@@ -66,9 +80,10 @@ The animation below shows the same idea end to end: a Device Connect server runs
 
 In the rest of this Learning Path you will:
 
-- start the server stack locally with Docker Compose
-- connect a simulated number-generator device to it
-- discover the registered device from a short Python client using `device-connect-agent-tools`
-- attach a Strands AI agent that subscribes to events on the mesh
+- sign in to the Device Connect portal and identify your tenant slug
+- download credentials for the three default device identities
+- run two simulated robot arms with `device-connect-edge`
+- discover and invoke both devices from a Python client using `device-connect-agent-tools`
+- optionally attach a Strands AI agent to the same tenant
 
 The next section walks through the setup.

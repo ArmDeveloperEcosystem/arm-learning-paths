@@ -6,22 +6,27 @@ weight: 3
 layout: learningpathall
 ---
 
-In this section you will use the hosted Device Connect service to provision a tenant, commission a simulated device with NATS JWT credentials, and verify it from a Python client. The hosted service runs the messaging router (NATS) and the registry for you, so the only thing you operate is the device itself and the agent that talks to it.
+## Setup of Device Connect portal
 
-## Mint device and agent credentials from the Device Connect portal
+The Device Connect portal is operated by Arm as a hosted developer service for the open-source [Device Connect](https://github.com/arm/device-connect) framework. Signing in creates a private **tenant** for your account. A tenant is an isolated namespace on the shared Device Connect service: devices and agents commissioned to your tenant can discover and invoke each other, but other tenants cannot see or use them.
 
-The Device Connect portal is operated by Arm as a hosted developer service for the open-source [Device Connect](https://github.com/arm/device-connect) framework. Sign-in provisions a private **tenant** for your account, an isolated namespace on a hosted NATS messaging server, and lets you mint per-device and per-agent JWT credentials so your devices and AI agents can discover and invoke one another across networks. Only your account email and the cryptographic identities (device IDs, JWTs, public keys) you create on the portal are stored; the contents of messages your devices exchange are not stored, seen, or proxied. Treat each `.creds.json` you download like a private key, and do not put secrets, API keys, or personal data into device names or descriptions. For questions or issues, open one at [`arm/device-connect`](https://github.com/arm/device-connect/issues).
+Only your account email and the cryptographic identities (device IDs, JWTs, public keys) you create on the portal are stored. The contents of messages your devices exchange are not stored, seen, or proxied. Treat each `.creds.json` file like a private key, and do not put secrets, API keys, or personal data into device names or descriptions. For questions or issues, open one at [`arm/device-connect`](https://github.com/arm/device-connect/issues).
 
-1. Open [`https://portal.deviceconnect.dev/`](https://portal.deviceconnect.dev/) and sign in. Signing in gives you a **tenant** — an isolated namespace on the shared Device Connect server that only the devices and agents you commission against it can join. Nothing from another tenant can see, publish to, or invoke anything in yours.
-2. Open the **My Devices** section. The page header reads `Manage device credentials for tenant <slug>` — the value of `<slug>` is your **tenant slug** (for example, `beta`). The portal uses it to namespace every identity you create, so `sf-robot` on the `beta` tenant becomes `beta-sf-robot`. The NATS server URL is the same for every tenant: `nats://portal.deviceconnect.dev:4222`.
-3. From the same **My Devices** page, add three identities. Type the short names below and the portal prefixes each one with your tenant slug automatically:
-   - `sf-robot`: the San Francisco robot arm
-   - `tokyo-robot`: the Tokyo robot arm
-   - `bangalore-agent`: the orchestrating agent
+The portal page header shows your tenant slug in `Manage device credentials for tenant <slug>`. For a new account, the slug is your username. If your account has a different slug, use the value shown in the portal. The portal prefixes every device identity with this slug, so this Learning Path uses names such as `${TENANT}-device-001`.
 
-For each identity, the portal exposes a **Download** button that gives you a NATS JWT credentials file named `<identity>.creds.json`. Treat each `.creds.json` file like a private key: anyone who has it can act as that identity on your tenant.
+New tenants include three device identities by default:
 
-Export the tenant settings so the rest of the walkthrough can reuse them.
+- `${TENANT}-device-001`
+- `${TENANT}-device-002`
+- `${TENANT}-device-003`
+
+This Learning Path uses `device-001` and `device-002` for the simulated robot arms, and `device-003` for the Python client or AI agent. You can create your own device identities in the portal if you prefer, but using the default names lets you run the commands below without editing the device names.
+
+1. Open [`https://portal.deviceconnect.dev/`](https://portal.deviceconnect.dev/) and sign in.
+2. Open **My Devices** and copy the tenant slug from the page header.
+3. Download the credentials for the three default identities.
+
+Export the tenant settings so the rest of the walkthrough can reuse them. Replace `<tenant-slug>` with the slug from the portal.
 
 ```bash
 export TENANT=<tenant-slug>
@@ -33,17 +38,21 @@ Now save the downloaded credentials to a stable directory:
 
 ```bash
 mkdir -p ~/.device-connect/credentials
-mv ~/Downloads/${TENANT}-sf-robot.creds.json        ~/.device-connect/credentials/
-mv ~/Downloads/${TENANT}-tokyo-robot.creds.json     ~/.device-connect/credentials/
-mv ~/Downloads/${TENANT}-bangalore-agent.creds.json ~/.device-connect/credentials/
+mv ~/Downloads/${TENANT}-device-001.creds.json ~/.device-connect/credentials/
+mv ~/Downloads/${TENANT}-device-002.creds.json ~/.device-connect/credentials/
+mv ~/Downloads/${TENANT}-device-003.creds.json ~/.device-connect/credentials/
 chmod 600 ~/.device-connect/credentials/*.creds.json
 ```
 
-The agent-tools `connect()` function reads `TENANT` only when its `zone` argument is left unset, so always call it as `connect(zone=os.environ["TENANT"])` in the Python snippets below.
+Verify that all three credential files are in place:
 
-The portal also exposes a **Coding Agents** tab that can drive this whole step for you — pointing a coding agent (such as Claude Code or Codex) at it will provision identities and download the credentials on your behalf. The manual flow above is what the agent automates, and is useful to walk through once so you understand what the agent is doing.
+```bash
+ls ~/.device-connect/credentials/
+```
 
-## Install the SDKs
+The portal also exposes a **Coding Agents** tab that can download credentials on your behalf. The manual flow above is useful to walk through once so you understand what the agent automates.
+
+## Install the Device Connect packages
 
 Create a virtual environment and install the edge runtime and the agent tools:
 
@@ -54,9 +63,13 @@ source .venv/bin/activate
 pip install device-connect-edge device-connect-agent-tools
 ```
 
-You do not need `device-connect-server` locally; Fabric runs that for you in this case. If you would rather self-host, you can install it with `pip install device-connect-server` and run the router and registry yourself; see the [device-connect-server README](https://github.com/arm/device-connect/tree/main/packages/device-connect-server) for the Docker Compose deployment options.
+{{% notice Note %}}
+Fabric is the hosted Device Connect service used by the portal. In this Learning Path, Fabric runs the NATS router and registry for you, so you do not install or run `device-connect-server` locally.
 
-## Write a simulated robot-arm driver
+If you would rather self-host, install `device-connect-server` with `pip install device-connect-server` and run the router and registry yourself. See the [device-connect-server README](https://github.com/arm/device-connect/tree/main/packages/device-connect-server) for the Docker Compose deployment options.
+{{% /notice %}}
+
+## Create a simulated robot arm 
 
 Create a file called `robot_arm.py`. The driver pretends to be a 6-DOF robot arm: it exposes RPCs for moving to a target pose and homing, tracks its current position, and emits a `motion_completed` event after every move.
 
@@ -128,39 +141,62 @@ Note that there is no `allow_insecure=True` on the runtime. The runtime will onl
 
 ## Connect the device to the server
 
-Point the runtime at the Fabric NATS server and at the device's `.creds.json` file. The combination of `NATS_URL` and `NATS_CREDENTIALS_FILE` is what turns the device from "an unauthenticated process" into "a commissioned member of your tenant":
+You will use three terminals: two for simulated devices and one for the Python client. Each terminal must have the virtual environment active and the shared tenant enviroment variables exported.
+
+| Terminal | Purpose | Credential |
+|----------|---------|------------|
+| 1 | First simulated robot arm | `${TENANT}-device-001.creds.json` |
+| 2 | Second simulated robot arm | `${TENANT}-device-002.creds.json` |
+| 3 | Python client or AI agent | `${TENANT}-device-003.creds.json` |
+
+In every new terminal, run:
 
 ```bash
-NATS_URL=$NATS_URL \
-  NATS_CREDENTIALS_FILE=~/.device-connect/credentials/${TENANT}-sf-robot.creds.json \
-  python robot_arm.py --device-id ${TENANT}-sf-robot
+cd ~/device-connect-fabric
+source .venv/bin/activate
+export TENANT=<tenant-slug>
+export NATS_URL=nats://portal.deviceconnect.dev:4222
+export MESSAGING_BACKEND=nats
 ```
 
-On startup, the runtime presents its JWT to NATS, NATS verifies it against your tenant's signing key, and the device is allowed to publish, subscribe, and register itself. From this moment it shows up in the portal under your tenant, with its identity, capabilities, and live status.
+Replace `<tenant-slug>` with the slug from the portal.
 
-The `--device-id` you pass on the command line must match the identity inside the credentials file (so `${TENANT}-sf-robot.creds.json` requires `--device-id ${TENANT}-sf-robot`).
+For each process, `NATS_URL` points at the hosted NATS server and `NATS_CREDENTIALS_FILE` selects the identity that process will use. The `--device-id` value must match the identity inside the credentials file.
 
-In a second terminal, do the same for the Tokyo arm:
+In terminal 1, start the first simulated robot arm:
 
 ```bash
-source ~/device-connect-fabric/.venv/bin/activate
-NATS_URL=$NATS_URL \
-  NATS_CREDENTIALS_FILE=~/.device-connect/credentials/${TENANT}-tokyo-robot.creds.json \
-  python robot_arm.py --device-id ${TENANT}-tokyo-robot
+NATS_CREDENTIALS_FILE=~/.device-connect/credentials/${TENANT}-device-001.creds.json \
+  python robot_arm.py --device-id ${TENANT}-device-001
 ```
 
-You now have two commissioned devices on your tenant.
+On startup, the runtime presents its JWT to NATS. NATS verifies it against your tenant's signing key, and the device is allowed to publish, subscribe, and register itself. From this moment it shows up in the portal under your tenant, with its identity, capabilities, and live status.
+
+The output should look like:
+
+```output
+2026-05-12 14:26:01,582 - device_connect_edge.device.<tenant-slug>-device-001 - INFO - Registering device
+2026-05-12 14:26:01,761 - device_connect_edge.device.<tenant-slug>-device-001 - INFO - Device registered: registration_id=16d550ee-b287-41af-ac69-d3faabfc8178
+2026-05-12 14:26:01,762 - device_connect_edge.device.<tenant-slug>-device-001 - INFO - Subscribed to commands on device-connect.<tenant-slug>.<tenant-slug>-device-001.cmd
+```
+
+In terminal 2, start the second simulated robot arm:
+
+```bash
+NATS_CREDENTIALS_FILE=~/.device-connect/credentials/${TENANT}-device-002.creds.json \
+  python robot_arm.py --device-id ${TENANT}-device-002
+```
+
+The output should be similar to that in the first terminal. You now have two commissioned devices on your tenant.
 
 ## Discover and invoke from Python
 
-Open a third terminal and run a short client using the agent's credentials. This is the same `device-connect-agent-tools` API you would use from a Strands or LangChain agent. Agents authenticate to the same tenant in the same way devices do, just with a different `.creds.json` file:
+In terminal 3, run a short client with the third credential. This is the same `device-connect-agent-tools` API you would use from a Strands or LangChain agent.
+
+The agent-tools `connect()` function reads `TENANT` only when its `zone` argument is left unset, so call it as `connect(zone=os.environ["TENANT"])` in the Python snippets below.
 
 ```bash
-source ~/device-connect-fabric/.venv/bin/activate
-NATS_URL=$NATS_URL \
-  MESSAGING_BACKEND=nats \
-  TENANT=$TENANT \
-  NATS_CREDENTIALS_FILE=~/.device-connect/credentials/${TENANT}-bangalore-agent.creds.json \
+NATS_CREDENTIALS_FILE=~/.device-connect/credentials/${TENANT}-device-003.creds.json \
   python - <<'PY'
 import os
 from device_connect_agent_tools import connect, discover_devices, invoke_device
@@ -178,15 +214,23 @@ for d in devices:
     print(f"\nhome on {d['device_id']}:")
     print(invoke_device(d['device_id'], 'home'))
 
-print(f"\nmove {tenant}-sf-robot to (0.2, 0.1, 0.3):")
-print(invoke_device(f'{tenant}-sf-robot', 'move_to', x=0.2, y=0.1, z=0.3))
+print(f"\nmove {tenant}-device-001 to (0.2, 0.1, 0.3):")
+print(invoke_device(f'{tenant}-device-001', 'move_to', {'x': 0.2, 'y': 0.1, 'z': 0.3}))
 
-print(f"\nposition of {tenant}-tokyo-robot:")
-print(invoke_device(f'{tenant}-tokyo-robot', 'get_position'))
+print(f"\nposition of {tenant}-device-002:")
+print(invoke_device(f'{tenant}-device-002', 'get_position'))
 PY
 ```
 
-You should see both `sf-robot` and `tokyo-robot` listed, then each one home, then the SF arm move, then Tokyo's position read. The agent never needs to know which network the arms are on; it only needs the tenant's NATS URL and its own credentials.
+You should see `${TENANT}-device-001` and `${TENANT}-device-002` listed, then each one home, then the first arm move, then the second arm's position read. The client never needs to know which network the arms are on; it only needs the tenant's NATS URL and its own credentials. Your output should end with confirmation that one of the device positions has been updated:
+
+```output
+move <tenant-slug>-device-001 to (0.2, 0.1, 0.3):
+{'success': True, 'result': {'position': {'x': 0.2, 'y': 0.1, 'z': 0.3}}}
+
+position of <tenant-slug>-device-002:
+{'success': True, 'result': {'x': 0.0, 'y': 0.0, 'z': 0.0}}
+```
 
 ## (Optional) Attach a Strands AI agent
 
@@ -214,9 +258,7 @@ asyncio.run(main())
 Run it with the agent's credentials and an Anthropic API key:
 
 ```bash
-NATS_URL=$NATS_URL \
-  NATS_CREDENTIALS_FILE=~/.device-connect/credentials/${TENANT}-bangalore-agent.creds.json \
-  TENANT=$TENANT \
+NATS_CREDENTIALS_FILE=~/.device-connect/credentials/${TENANT}-device-003.creds.json \
   ANTHROPIC_API_KEY="sk-ant-..." \
   python my_agent.py
 ```
@@ -240,7 +282,7 @@ You now have a working Device Connect deployment with a hosted server in the loo
 
 - a hosted NATS router and persistent registry on your tenant
 - two commissioned simulated robot arms, each authenticated by its own JWT credential
-- a Python client using `device-connect-agent-tools` to discover the arms and drive them through the server
+- a third credential used by a Python client with `device-connect-agent-tools` to discover the arms and drive them through the server
 - (optionally) a Strands agent coordinating both arms over the same mesh
 
 This is the same shape of deployment you would use to put real robot arms, conveyors, cameras, or actuators on the mesh; only the driver code and the credential names change.
