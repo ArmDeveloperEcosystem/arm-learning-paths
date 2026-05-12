@@ -76,7 +76,7 @@ The output is similar to:
              └─25841 /usr/bin/containerd
 ```
 
-The `finch` command is now available in your PATH. You can now skip to the section on [verifying the Finch installation](#how-do-i-verify-the-finch-installation).
+The `finch` command is now available in your PATH. You can now skip to the section on [verifying the Finch installation](#verify-the-finch-installation).
 
 
 ## Install Finch on Ubuntu 24.04 for Arm
