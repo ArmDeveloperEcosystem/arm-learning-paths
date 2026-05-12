@@ -1,18 +1,22 @@
 ---
-title: Preparing models for NGP 
+title: Prepare models for neural graphics with Arm neural technology
+description: Learn how to export a PyTorch model through the ExecuTorch VGF backend, inspect the generated artifacts, and use TOSA IR when you need deeper debugging for neural graphics workflows.
 
-minutes_to_complete: 30
+minutes_to_complete: 45
 
-who_is_this_for: Developers who want to learn about NGP and how to use their models
+who_is_this_for: This is an advanced topic for developers who want to understand and debug the model preparation flow used by Arm neural technology in neural graphics pipelines.
 
 learning_objectives:
-    - Use the Model explorer to view your models operations
-    - Learn how to lower and convert your models to relevant formats (.vgf, .tosa)
-    - Learn aboiut the tooling Arm has for scenarios like this. 
+    - Build and export a simple PyTorch model for ExecuTorch
+    - Generate `.vgf` artifacts with the ExecuTorch VGF backend
+    - Visualize model structure and generated artifacts using Model Explorer
+    - Inspect TOSA intermediate representation when you need to debug operator lowering
+    - Validate the generated model with an ExecuTorch runner and connect it to ML Extensions for Vulkan workflows
 
 prerequisites:
-    - Basic knowledge of Python
-    - Linux or Arm Mac device with Python installed 
+    - Basic PyTorch and Python experience
+    - A Linux machine or macOS machine with Apple Silicon
+    - Python 3.10+ <3.14, and Git installed
 
 author: Joshua Marshall-Law
 
@@ -20,23 +24,44 @@ author: Joshua Marshall-Law
 skilllevels: Advanced
 subjects: ML
 armips:
-    - mali
-    - Ethos-U
+    - Mali
 tools_software_languages:
-    - Python
-    - C++
+    - ExecuTorch
+    - PyTorch
+    - Model Explorer
+    - Jupyter Notebook
+    - Vulkan
+    - TOSA
+    - NX
 operatingsystems:
-    - Linux 
-    - Mac
+    - Linux
+    - macOS
 
 further_reading:
-  - "[quantize-neural-upscaling-models](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/quantize-neural-upscaling-models/)"
-  - "[model-training-gym](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/model-training-gym/)"
-  - "[vulkan-ml-sample](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/)"
-  - "[VGF library (GitHub)](https://github.com/arm/ai-ml-sdk-vgf-library)"
-  - "[NSS on Hugging Face](https://huggingface.co/Arm/neural-super-sampling)"
-
-
+    - resource:
+        title: Fine-tune neural graphics models using Model Gym
+        link: /learning-paths/mobile-graphics-and-gaming/model-training-gym/
+        type: learningpath
+    - resource:
+        title: Quantize neural upscaling models with ExecuTorch
+        link: /learning-paths/mobile-graphics-and-gaming/quantize-neural-upscaling-models/
+        type: learningpath
+    - resource:
+        title: Enable neural graphics using ML Extensions for Vulkan
+        link: /learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/
+        type: learningpath
+    - resource:
+        title: Enable Neural Super Sampling in Unreal Engine with ML Extensions
+        link: /learning-paths/mobile-graphics-and-gaming/nss-unreal/
+        type: learningpath
+    - resource:
+        title: Neural Graphics Development Kit
+        link: https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics
+        type: website
+    - resource:
+        title: VGF library (GitHub)
+        link: https://github.com/arm/ai-ml-sdk-vgf-library
+        type: code
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

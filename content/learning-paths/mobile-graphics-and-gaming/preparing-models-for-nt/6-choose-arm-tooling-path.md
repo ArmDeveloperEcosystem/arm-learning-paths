@@ -1,43 +1,37 @@
 ---
-title: Arm-Tooling
+title: Choose the right Arm tooling path
 weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
+## Model Gym vs manual lowering with ExecuTorch
 
-# The Model Gym
+You now have two practical ways to prepare neural graphics models:
 
-the model gym is a tool that allows users to export models in the vgf file format similar to how we have done in this learning path. 
+- Model Gym: higher-level workflow for training, evaluation, and export
+- Manual ExecuTorch flow: low-level control over VGF export, TOSA inspection, and runtime validation
 
-Steps for that can be found here: https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/model-training-gym/1-introduction/
+## When to use Model Gym
 
-it gives a good run down into the VGF backend and is something that is incredibly useful for this subject as a whole.
+Use [Model Gym](/learning-paths/mobile-graphics-and-gaming/model-training-gym/) when you want to:
+- Fine-tune NSS quickly
+- Work through notebook-based training and evaluation
+- Standardize export pipelines with less backend-level tuning
 
+## When to use manual lowering
 
-# Arm ExecuTorch: Model Gym vs Arm ExecuTorch: Manual Lowering 
+Use the manual flow from this Learning Path when you need to:
+- Debug export correctness at the TOSA level
+- Control backend partitioning and artifact generation
+- Validate backend/runtime behavior with custom test graphs
+- Build confidence with a toy model before moving to Scenario Runner or engine-level validation
 
-## Overview
-- **Model Gym**: High-level automated pipeline for lowering and running models
-- **Manual VGF Lowering**: Low-level, developer-controlled process using the VGF file format
+## Recommended next learning paths
 
-
-
-## When to Use Model Gym
-- Rapid prototyping
-- Standard models (CNNs, Transformers)
-- Benchmarking baseline performance
-- You want results quickly without deep backend knowledge
-
----
-
-## When to Use Manual VGF Lowering
-- Performance optimization is critical
-- Debugging incorrect outputs or crashes
-- Working with custom operators
-- Backend development or research
-- Needing explicit control over execution
-
----
-
+- [Fine-tune neural graphics models using Model Gym](/learning-paths/mobile-graphics-and-gaming/model-training-gym/)
+- [Quantize neural upscaling models with ExecuTorch](/learning-paths/mobile-graphics-and-gaming/quantize-neural-upscaling-models/)
+- [Enable neural graphics using ML Extensions for Vulkan](/learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/)
+- [Running a test with the Scenario Runner](/learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/4-scenario-runner/)
+- [Enable Neural Super Sampling in Unreal Engine with ML Extensions](/learning-paths/mobile-graphics-and-gaming/nss-unreal/)

@@ -1,41 +1,41 @@
 ---
-title: Model Explorer
+title: Inspect the model in Model Explorer
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## Installing the explorer
-you will need to download the model explorer and some extensions so use this command: 
 
-    pip install torch ai-edge-model-explorer
-    pip install pte-adapter-model-explorer
-    pip install tosa-adapter-model-explorer
-    pip install vgf-adapter-model-explorer
+## Install Model Explorer and adapters
 
-Don't worry about any conflicting dependencis in this case as the rest of the tools will work
+Use the following commands in your active virtual environment:
 
-## Loading the explorer with the correct extensions
+```bash
+pip install torch ai-edge-model-explorer
+pip install pte-adapter-model-explorer
+pip install tosa-adapter-model-explorer
+pip install vgf-adapter-model-explorer
+```
 
-we will now view our models in the model explorer with the below command 
+## Launch Model Explorer
 
-model-explorer --extensions=pte_adapter_model_explorer
+Run:
 
-we do this in order to have proper visibility into our models operations
+```bash
+model-explorer --extensions=pte_adapter_model_explorer,tosa_adapter_model_explorer,vgf_adapter_model_explorer
+```
 
-now once the webpage has loaded please select the relevant .tosa file 
+When the web UI opens, start with the `.vgf` artifacts in `executorch-model/` or the generated `as-vgf.pte` file. If you later inspect the optional TOSA artifacts, you can use the same Model Explorer flow to compare the intermediate representation with the deployable output.
 
 ![Photo of model-explorer](images/model-explorer-home.png)
 
+## What to check
 
-you may have noticed various possible file extensions in the homepage for the model explorer. we will use one of them later but it is good to know what file extensions of your own personal models you can view. 
-
-
-## Exploring the explorer 
-
-Inside the model explorer we can view a variety of operations. in this case we have loaded the 
-.tosa buffer so we can see all the operations inside of our model. 
+Start by confirming:
+- The graph contains the expected add and sigmoid flow
+- Input/output tensor shapes match your exported model
+- No unexpected decompositions are introduced
 
 ![Photo of model with operations](images/model-ops.png)
 
-Given that our model is of simple scale we can see a limited number of operations however as the models you use expand and grow this section will become much larger 
+This same inspection approach is used in [Model Gym](/learning-paths/mobile-graphics-and-gaming/model-training-gym/) and [quantization workflows](/learning-paths/mobile-graphics-and-gaming/quantize-neural-upscaling-models/). If you want to go deeper after this point, inspect the TOSA artifacts to understand the intermediate lowering step.
