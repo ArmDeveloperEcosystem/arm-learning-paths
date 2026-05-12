@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 ## Before you begin
 
-You need a user account for [Arm Virtual Hardware 3rd Party Hardware](https://avh.arm.com/). Refer to the [Arm Virtual Hardware install guide](/install-guides/avh#thirdparty) for more information.
+You need a user account for [Arm Virtual Hardware 3rd Party Hardware](https://avh.arm.com/). Refer to the [Arm Virtual Hardware install guide](/install-guides/avh/#thirdparty) for more information.
 
 A [GitHub](https://github.com) account is also required.
 

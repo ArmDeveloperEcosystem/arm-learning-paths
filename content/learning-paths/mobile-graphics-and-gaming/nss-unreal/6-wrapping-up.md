@@ -20,6 +20,6 @@ To learn more about the different aspects in this Learning Path, check out the f
 - [Neural Graphics Development Kit landing page](https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics)
 - [NSS Use Case Guide](https://developer.arm.com/documentation/111009/latest/)
 - [Debugging NSS content with RenderDoc](https://developer.arm.com/documentation/109669/latest)
-- [Learning Path: Get started with neural graphics using ML Extensions for Vulkan](/learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample)
+- [Learning Path: Get started with neural graphics using ML Extensions for Vulkan](/learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/)
 
 Happy building - and welcome to the future of neural upscaling in Unreal!

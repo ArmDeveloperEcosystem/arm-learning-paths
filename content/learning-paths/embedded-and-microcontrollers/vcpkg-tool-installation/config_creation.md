@@ -47,7 +47,7 @@ If you are using the [conversion flow for MDK v5 uvprojx files](/learning-paths/
 
 {{% notice Tip %}}
 - Refer to the [vcpkg-configuration.json reference](https://learn.microsoft.com/en-gb/vcpkg/reference/vcpkg-configuration-json) for more information.
-- You can also use vcpkg commands to work with the configuration file. Refer to [Working with the vcpkg-configuration.json file](/learning-paths/embedded-and-microcontrollers/vcpkg-tool-installation/usage#working-with-the-vcpkg-configurationjson-file)
+- You can also use vcpkg commands to work with the configuration file. Refer to [Working with the vcpkg-configuration.json file](/learning-paths/embedded-and-microcontrollers/vcpkg-tool-installation/usage/#working-with-the-vcpkg-configurationjson-file)
 {{% /notice %}}
 
 You can now start using the vcpkg environment.

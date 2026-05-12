@@ -19,7 +19,7 @@ Before starting, ensure you have Docker and Copilot installed on your computer.
 
 For Docker installation, refer to the [Docker install guide](/install-guides/docker/).
 
-For Copilot installation, refer to the [AWS Copilot CLI install guide](/install-guides/aws-copilot).
+For Copilot installation, refer to the [AWS Copilot CLI install guide](/install-guides/aws-copilot/).
 
 You will also need an AWS account, which you can create at https://aws.amazon.com. (Click on **Create an AWS Account** in the top right corner. Follow the instructions to register. See the [Creating an AWS account documentation](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-creating.html) for full instructions.)
 

@@ -32,12 +32,12 @@ The instructions to login to Google Cloud CLI and to create the keys are below.
 
 Terraform on your local machine needs to communicate with GCP.
 
-To obtain GCP user credentials, follow the [Google Cloud Credentials](/install-guides/gcloud#acquire-user-credentials) install guide.
+To obtain GCP user credentials, follow the [Google Cloud Credentials](/install-guides/gcloud/#acquire-user-credentials) install guide.
 
 ### Generate an SSH key-pair
 
 Generate an SSH key-pair (public key, private key) using `ssh-keygen` to use for Arm VMs access. To generate the key-pair, follow this [
-documentation](/install-guides/ssh#ssh-keys).
+documentation](/install-guides/ssh/#ssh-keys).
 
 {{% notice Note %}} 
 If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
@@ -190,7 +190,7 @@ Master_public_IP = [
 
 You can install the MariaDB and the required dependencies using Ansible.
 
-You can use the same `playbook.yaml` file used in the topic, [Install MariaDB on an AWS Arm based instance](/learning-paths/servers-and-cloud-computing/mariadb/ec2_deployment#configure-mariadb-through-ansible).
+You can use the same `playbook.yaml` file used in the topic, [Install MariaDB on an AWS Arm based instance](/learning-paths/servers-and-cloud-computing/mariadb/ec2_deployment/#configure-mariadb-through-ansible).
 
 Use a text editor to save the `playbook.yaml` file if you don't already have it. 
 
@@ -245,7 +245,7 @@ ansible-target1            : ok=8    changed=6    unreachable=0    failed=0    s
 
 ## Connect to Database from local machine
 
-Follow the instructions from the previous section to [connect to the database](/learning-paths/servers-and-cloud-computing/mariadb/ec2_deployment#connect-to-database-from-local-machine).
+Follow the instructions from the previous section to [connect to the database](/learning-paths/servers-and-cloud-computing/mariadb/ec2_deployment/#connect-to-database-from-local-machine).
 
 You have successfully deploy MariaDB on a Google Cloud instance.
 

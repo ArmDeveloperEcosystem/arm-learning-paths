@@ -14,7 +14,7 @@ The [Open-IoT-SDK](https://github.com/ARM-software/open-iot-sdk) is designed to 
 
 ## Arm Virtual Hardware
 
-Setup your AVH instance, following the instructions in the [Arm Virtual Hardware install guide](/install-guides/avh#corstone).
+Setup your AVH instance, following the instructions in the [Arm Virtual Hardware install guide](/install-guides/avh/#corstone).
 
 ## Install the required software
 

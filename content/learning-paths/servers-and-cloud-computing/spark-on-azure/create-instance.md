@@ -26,6 +26,6 @@ Once the Arm64 virtual machine is running, you can SSH into it using the generat
 
 {{% notice Note %}}
 
-To learn more about Arm-based virtual machines in Azure, see the Learning Path [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure).
+To learn more about Arm-based virtual machines in Azure, see the Learning Path [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure/).
 
 {{% /notice %}}

@@ -59,7 +59,7 @@ Your virtual machine should be ready and running in a few minutes. You can SSH i
 
 {{% notice Note %}}
 
-To learn more about Arm-based virtual machine in Azure, see “Getting Started with Microsoft Azure” in [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure).
+To learn more about Arm-based virtual machine in Azure, see “Getting Started with Microsoft Azure” in [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure/).
 
 {{% /notice %}}
 

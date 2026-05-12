@@ -29,7 +29,7 @@ Currently there are 2 SIMD programming interfaces in Rust:
 
 You will learn how to use both of these interfaces to write code that uses Advanced SIMD/Neon instructions on an Arm CPU.
 
-Before you start, make sure you have the [Rust compiler installed](/install-guides/rust). 
+Before you start, make sure you have the [Rust compiler installed](/install-guides/rust/). 
 
 To check if you have a working `rustc` compiler installed, run the following command:
 

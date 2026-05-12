@@ -17,7 +17,7 @@ GitHub requires that a [Personal Access Token](https://docs.github.com/en/authen
 
 Ensure you have enabled the token to `Update GitHub Action workflows`.
 
-Setup your AVH instance, following the instructions in the [Arm Virtual Hardware install guide](/install-guides/avh#corstone). An [AWS account](https://aws.amazon.com/) is  required.
+Setup your AVH instance, following the instructions in the [Arm Virtual Hardware install guide](/install-guides/avh/#corstone). An [AWS account](https://aws.amazon.com/) is  required.
 
 
 ## Fork the example repository

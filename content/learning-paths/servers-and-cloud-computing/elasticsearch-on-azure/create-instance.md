@@ -61,7 +61,7 @@ Your virtual machine should be ready in a few minutes. You can then connect over
 
 ![Screenshot of the Azure portal deployment result showing the VM in a running state with public IP information. Use this page to confirm deployment completed successfully before continuing.#center](images/final-vm.png "VM deployment confirmation in the Azure portal")
 
-{{% notice Note %}}To learn more about Arm-based virtual machines on Azure, see the section *Getting Started with Microsoft Azure* within the Learning Path [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure).{{% /notice %}}
+{{% notice Note %}}To learn more about Arm-based virtual machines on Azure, see the section *Getting Started with Microsoft Azure* within the Learning Path [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure/).{{% /notice %}}
 
 ## What you've learned and what's next
 

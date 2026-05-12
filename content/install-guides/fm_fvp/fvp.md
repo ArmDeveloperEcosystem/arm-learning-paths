@@ -19,7 +19,7 @@ From 11.29 onwards the FVPs are provided solely as part of Arm Development Studi
 
 This install guide is only applicable to the legacy FVP library.
 
-See the [Arm Development Studio Install Guide](/install-guides/armds) and the [Introduction to FVPs](https://developer.arm.com/documentation/110379/1129/Introduction-to-FVPs) documentation.
+See the [Arm Development Studio Install Guide](/install-guides/armds/) and the [Introduction to FVPs](https://developer.arm.com/documentation/110379/1129/Introduction-to-FVPs) documentation.
 {{% /notice %}}
 
 ## Download installer packages
@@ -28,7 +28,7 @@ You can download the FVP library installer from the [Product Download Hub](https
 
 Linux (AArch64 and x86) and Windows (x86 only) hosts are supported.
 
-For more information about the Product Download Hub, refer to the [Product Download Hub installation guide](/install-guides/pdh).
+For more information about the Product Download Hub, refer to the [Product Download Hub installation guide](/install-guides/pdh/).
 
 ## Install FVP library
 
@@ -50,7 +50,7 @@ For full list of available options, use:
 
 ## Set up the product license
 
-FVPs are license managed. License setup instructions are available in the [Arm Licensing install guide](/install-guides/license).
+FVPs are license managed. License setup instructions are available in the [Arm Licensing install guide](/install-guides/license/).
 
 ## Verify installation
 
