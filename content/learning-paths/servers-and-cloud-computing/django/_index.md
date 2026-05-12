@@ -18,7 +18,7 @@ prerequisites:
     - To install both [Nginx](/learning-paths/servers-and-cloud-computing/nginx/) and [PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql/)
 
 generate_summary_faq: true
-# rerun_summary: false
+rerun_summary: false
 rerun_faqs: false
 
 # START generated_summary_faq

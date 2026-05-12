@@ -21,8 +21,8 @@ prerequisites:
 
 generate_summary_faq: true
 
-# rerun_summary: false
-# rerun_faqs: false
+rerun_summary: false
+rerun_faqs: false
 author: Annie Tallund
 
 ### Tags
