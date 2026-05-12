@@ -22,6 +22,52 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v2
+  generated_at: '2026-05-12T18:20:22Z'
+  generator: template
+  source_hash: 964c1e6a87810dca686a7b3218433ce09d31bd92882db10af355e8c50bb6091c
+  summary_generated_at: '2026-05-12T18:20:22Z'
+  summary_source_hash: 964c1e6a87810dca686a7b3218433ce09d31bd92882db10af355e8c50bb6091c
+  faq_generated_at: '2026-05-12T18:20:22Z'
+  faq_source_hash: 964c1e6a87810dca686a7b3218433ce09d31bd92882db10af355e8c50bb6091c
+  summary: >-
+    Learn how to build llama.cpp, quantize the Arcee AFM-4.5B model, and run optimized inference
+    on AWS Graviton4 instances with perplexity-based quality evaluation. It is designed for developers
+    and ML engineers who want to deploy Arcee's AFM-4.5B small language model on AWS Graviton4
+    instances using Llama.cpp. By the end, you will be able to launch an Arm-based EC2 instance
+    on AWS Graviton4, build and install Llama.cpp from source, and download and quantize the AFM-4.5B
+    model from Hugging Face. It focuses on tools and technologies such as AWS, Hugging Face, Python,
+    and Llama.cpp, Linux environments, Arm platforms including Neoverse, and cloud platforms such
+    as AWS. The main steps cover Overview, Provision your Graviton4 environment, Configure your
+    Graviton4 environment, Build Llama.cpp, and Install Python dependencies.
+  faqs:
+  - question: What will you accomplish in this Learning Path?
+    answer: >-
+      You will launch an Arm-based EC2 instance on AWS Graviton4, build and install Llama.cpp
+      from source, and download and quantize the AFM-4.5B model from Hugging Face. Learn how to
+      build llama.cpp, quantize the Arcee AFM-4.5B model, and run optimized inference on AWS Graviton4
+      instances with perplexity-based quality evaluation.
+  - question: Who is this Learning Path for?
+    answer: >-
+      This Learning Path is for developers and ML engineers who want to deploy Arcee's AFM-4.5B
+      small language model on AWS Graviton4 instances using Llama.cpp.
+  - question: What do you need before you start?
+    answer: >-
+      Before you start, make sure you have the following: An [AWS account](https://aws.amazon.com/)
+      with permission to launch Graviton4 (`c8g.4xlarge` or larger) instances; Basic familiarity
+      with Linux and SSH.
+  - question: Which tools, languages, or platforms does it cover?
+    answer: >-
+      It covers tools and languages including AWS, Hugging Face, Python, and Llama.cpp, Linux
+      environments, Arm platforms such as Neoverse, and cloud platforms such as AWS.
+  - question: How is the Learning Path structured?
+    answer: >-
+      The Learning Path is organized around Overview, Provision your Graviton4 environment, Configure
+      your Graviton4 environment, Build Llama.cpp, and Install Python dependencies.
+# END generated_summary_faq
+
 author: Julien Simon
 
 # Tags
