@@ -1,5 +1,5 @@
 ---
-title: Learn about OpenCV on Google Axion C4A
+title: Understand OpenCV on Google Axion C4A
 weight: 2
 
 layout: "learningpathall"
@@ -13,23 +13,16 @@ The C4A series provides a cost-effective alternative to x86 virtual machines whi
 
 To learn more, see the Google blog [Introducing Google Axion Processors, our new Arm-based CPUs](https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu).
 
-## OpenCV on Google Axion C4A 
+## OpenCV on Google Axion C4A
 
-Open Source Computer Vision Library (OpenCV) is a widely used open-source library for building real-time computer vision and image processing applications. It provides optimized implementations for image transformations, video processing, object detection, and integration with machine learning models.
+Open Source Computer Vision Library (OpenCV) is an open-source library for real-time computer vision and image processing applications. It includes implementations for image transforms, video processing, object detection, and integration with machine learning models.
 
-<!-- Key capabilities of OpenCV include:
+When you run OpenCV on Google Axion C4A infrastructure, you can use multi-core CPU parallelism to scale image and video workloads on Arm. In practice, this helps you:
 
-* **Image Processing** for transformations, filtering, and feature extraction  
-* **Video Processing** for frame-by-frame analysis and real-time pipelines  
-* **Drawing & Visualization** for overlaying text, shapes, and annotations  
-* **ML Integration** for combining computer vision with machine learning models   -->
-
-When you run OpenCV on Google Axion C4A Arm-based infrastructure, you can execute image and video workloads efficiently by using multi-core CPU parallelism. This allows:
-
-* Faster frame processing for video pipelines  
-* Efficient memory utilization for image transformations  
-* Improved performance-per-watt compared to x86 systems  
-* Cost-effective scaling for computer vision workloads  
+* Process video frames faster in CPU-based pipelines
+* Use memory efficiently for common image transformations
+* Improve performance-per-watt for sustained processing jobs
+* Scale vision services in cloud environments with predictable costs
 
 Common use cases include real-time video analytics, image transformation pipelines, automated inspection systems, and ML-powered vision applications.
 
@@ -37,6 +30,6 @@ To learn more, see the [OpenCV documentation](https://docs.opencv.org/) and expl
 
 ## What you've learned and what's next
 
-You've now learned about Google Axion C4A Arm-based VMs and their benefits for computer vision workloads. You also understood how OpenCV supports image and video processing, and how the Arm architecture improves performance and efficiency for OpenCV pipelines.   
+You've now reviewed what Google Axion C4A instances provide on Arm and why they are a good fit for OpenCV workloads. You also mapped OpenCV capabilities to practical cloud use cases you can run on C4A.
 
-Next, you'll create a firewall rule to enable browser-based visualization of OpenCV pipelines running on your Arm-based virtual machine.
+Next, you'll create a firewall rule so you can view OpenCV pipeline output from your browser while your application runs on an Arm-based virtual machine.

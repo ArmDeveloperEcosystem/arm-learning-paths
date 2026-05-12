@@ -1,6 +1,6 @@
 ---
 
-title: Create a firewall rule for OpenCV Browser Visualization
+title: Create a firewall rule for OpenCV browser visualization
 
 weight: 3
  
@@ -12,11 +12,11 @@ layout: learningpathall
 
 ## Expose port for OpenCV browser-based visualization
 
-Create a firewall rule in Google Cloud Console to expose the required port for OpenCV browser-based visualization.
+Create a firewall rule in Google Cloud Console to allow browser access to your OpenCV output on port 8000.
  
 {{% notice Note %}}
 
-For help with GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
+For help with Google Cloud Platform setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
 
 {{% /notice %}}
  
@@ -57,7 +57,7 @@ The `-4` flag forces an IPv4 response. Take the returned address and append `/32
  
 10. Select **Create**.
 
-![Google Cloud Console Protocols and ports section showing TCP checkbox selected with port 8000 configured for OpenCV Browser Visualization#center](images/network-port.png "Setting Ray ports in the firewall rule")
+![Google Cloud Console Protocols and ports section showing TCP checkbox selected with port 8000 configured for OpenCV browser visualization#center](images/network-port.png "Setting ports in the firewall rule")
 
 ## What you've accomplished and what's next
 

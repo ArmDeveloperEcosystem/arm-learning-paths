@@ -8,13 +8,13 @@ layout: learningpathall
  
 ## Integrate a machine learning model with an OpenCV pipeline
 
-This section extends the OpenCV Learning Path by integrating a machine learning model with an OpenCV pipeline. You will train a simple ML model, load it inside an OpenCV-based Python script, generate a visual prediction output, and view the result in a browser.
+In this section, you'll integrate a machine learning model with an OpenCV pipeline. You'll train a simple ML model, load it inside an OpenCV-based Python script, generate a visual prediction output, and view the result in your browser.
  
 ### Before you begin
 
 Make sure you have:
 
-- A running GCP Axion Arm-based VM with SUSE Linux
+- A running Google Axion Arm-based VM with SUSE Linux
 - Python 3.11 installed
 - The OpenCV project directory at `~/opencv-project` with the `cv-env` virtual environment created and OpenCV installed
 - Port `8000` open in the GCP firewall
@@ -258,11 +258,13 @@ http://<VM-PUBLIC-IP>:8000/ml_output.jpg
 ```
 
 You should see an image showing the pipeline title, the Arm64 platform label, the input feature values, and the predicted Iris species.
-![OpenCV ML pipeline output showing prediction result on GCP Axion Arm VM#center](images/opencv-ml.png "OpenCV ML pipeline output")
+
+![OpenCV ML pipeline output image showing the predicted Iris class and input feature values, confirming successful inference and OpenCV rendering on Axion Arm VM.#center](images/opencv-ml.png "OpenCV ML pipeline output")
+
  
 ### Troubleshoot integration issues
 
-**`ModuleNotFoundError: No module named 'sklearn'`**
+#### ModuleNotFoundError: No module named 'sklearn'
 
 Make sure the virtual environment is activated and reinstall the dependency:
 
@@ -272,7 +274,7 @@ source cv-env/bin/activate
 pip install scikit-learn joblib
 ```
 
-**`iris_model.joblib` not found**
+#### iris_model.joblib not found
 
 Run the training script before running the ML pipeline:
 
@@ -280,7 +282,7 @@ Run the training script before running the ML pipeline:
 python train_ml_model.py
 ```
 
-**Browser cannot access the output image**
+#### Browser cannot access the output image
 
 Check that the HTTP server is running:
 
@@ -290,7 +292,7 @@ python -m http.server 8000 &
 
 Also make sure port `8000` is allowed in the GCP firewall.
 
-**Output image does not update**
+#### Output image does not update
 
 Run the pipeline again after changing the sample input, then refresh the browser:
 
@@ -298,7 +300,7 @@ Run the pipeline again after changing the sample input, then refresh the browser
 python opencv_ml_pipeline.py
 ```
  
-**Clean up generated files**
+#### Clean up generated files
  
 Use this only if you want to remove generated ML and output files.
  

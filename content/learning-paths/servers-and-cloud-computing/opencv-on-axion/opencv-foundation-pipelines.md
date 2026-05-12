@@ -1,5 +1,5 @@
 ---
-title: Build OpenCV Pipelines on Google Axion 
+title: Build OpenCV pipelines on Google Axion 
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -113,7 +113,7 @@ The image pipeline reads an input image, applies transformations using OpenCV, a
 
 First, create the image pipeline.
 
-Create the pipeline script:
+Create the pipeline script by saving the following in `image_pipeline.py`:
 
 ```python
 import cv2
@@ -309,6 +309,6 @@ With the video pipeline running in the terminal, you should see frames update au
 
 ## What you've learned and what's next
 
-You've now installed OpenCV on a Google Axion Arm VM. You've built an image pipeline that applies transformations and saves output for browser viewing. You've also built a video pipeline that loops frames and serves them as a live feed via a lightweight HTTP server.
+You've now installed OpenCV on a Google Axion Arm VM. You've built an image pipeline that applies transformations and saves output for browser viewing. You've also created a video pipeline that loops frames and serves them as a live feed via a lightweight HTTP server.
 
 Next, you'll extend this setup by integrating a machine learning model with the OpenCV pipeline.

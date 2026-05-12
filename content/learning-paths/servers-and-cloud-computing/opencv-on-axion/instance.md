@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Provision a Google Axion C4A Arm-based VM
 
-In this section, you'll create a Google Axion C4A Arm-based virtual machine (VM) on Google Cloud Platform (GCP). You'll use the `c4a-standard-4` machine type, which provides 4 vCPUs and 16 GB of memory. This VM will host your OpenCV application.
+In this section, you'll create a Google Axion C4A Arm-based virtual machine (VM) on Google Cloud Platform (GCP). You'll use the `c4a-standard-4` machine type with four vCPUs and 16 GB of memory. This VM will host your OpenCV application.
 
 {{% notice Note %}}
 For help with GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
@@ -31,7 +31,7 @@ To create a virtual machine based on the C4A instance type:
     - For the license type, choose **Pay as you go**.
     - Increase **Size (GB)** from **10** to **100** to allocate sufficient disk space.
     - Select **Choose** to apply the changes.
-5. Expand the **Networking** section and enter `allow-opencv` in the **Network tags** field. This tag links the VM to the firewall rule you created earlier, enabling external access to the OpenCV Dashboard and Serve API ports.
+5. Expand the **Networking** section and enter `allow-opencv` in the **Network tags** field. This tag links the VM to the firewall rule you created earlier, so your browser can access the OpenCV output.
 6. Select **Create** to launch the virtual machine.
 
 After the instance starts, select **SSH** next to the VM in the instance list to open a browser-based terminal session.
@@ -44,6 +44,6 @@ A new browser window opens with a terminal connected to your VM.
 
 ## What you've accomplished and what's next
 
-In this section, you provisioned a Google Axion C4A Arm VM and connected to it using SSH. You'll use this VM to run your OpenCV application.
+You've now provisioned a Google Axion C4A Arm VM and connected to it using SSH. You'll use this VM to run your OpenCV application.
 
 Next, you'll install OpenCV and the required dependencies on your VM.
