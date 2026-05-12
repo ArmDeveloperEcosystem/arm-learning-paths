@@ -69,7 +69,7 @@ The `&` runs the server as a background process so you can continue using the sa
 
 ### Verify OpenCV is working
 
-Before building pipelines, verify that OpenCV is working correctly. This file creates an image using OpenCV and saves it for browser viewing.
+Before building pipelines, verify that OpenCV is working correctly. This script creates an image using OpenCV and saves it for browser viewing.
 
 ```bash
 python - <<EOF
