@@ -66,18 +66,17 @@ Source the generated path script in the same shell session:
 source ./examples/arm/arm-scratch/setup_path.sh
 ```
 
-Verify key tools are available:
-
-```bash
-command -v model-converter || command -v model_converter
-command -v model-explorer
-```
-
 Return to the Learning Path working directory:
 
 ```bash
 cd ../..
 ```
+
+alternatively you can use the attached setup script: 
+
+<a href="{{ '/assets/scripts/install.sh' | relative_url }}" download>
+  Download install.sh
+</a>
 
 ## Optional: use the notebook
 
