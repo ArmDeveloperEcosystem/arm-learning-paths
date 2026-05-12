@@ -143,7 +143,7 @@ ls -lh iris_model.joblib iris_labels.joblib
 ```
 ### Create the OpenCV and ML pipeline
 
-The pipeline loads the trained model and label names, runs a prediction on a fixed sample input, and uses OpenCV to render the input features and prediction result as text on an output image. The image is saved as `ml_output.jpg` for the HTTP server to serve.
+The pipeline loads the trained model and label names, and runs a prediction on a fixed sample input. It then uses OpenCV to render the input features and prediction result as text on an output image. The image is saved as `ml_output.jpg` for the HTTP server to serve.
 
 ```bash
 cat > opencv_ml_pipeline.py <<'EOF'
@@ -251,7 +251,7 @@ source cv-env/bin/activate
 python -m http.server 8000 &
 ```
 
-Open the following URL in your browser, replacing `<VM-PUBLIC-IP>` with the external IP address of your GCP Axion VM:
+Open the following URL in your browser, replacing `<VM-PUBLIC-IP>` with the external IP address of your Google Axion VM:
 
 ```text
 http://<VM-PUBLIC-IP>:8000/ml_output.jpg
@@ -310,4 +310,4 @@ rm -f iris_model.joblib iris_labels.joblib ml_output.jpg
  
 ## What you've accomplished
 
-You've trained a Random Forest classifier on the Iris dataset, saved it with `joblib`, and loaded it inside an OpenCV pipeline to generate a browser-viewable prediction image on a Google Axion Arm64 VM. This pattern — train offline, load at inference time, render output with OpenCV — applies directly to production vision pipelines where models are updated independently of the display layer.
+You've trained a Random Forest classifier on the Iris dataset, saved it with `joblib`, and loaded it inside an OpenCV pipeline to generate a browser-viewable prediction image on a Google Axion Arm64 VM. This pattern — train offline, load at inference time, render output with OpenCV — mirrors production vision pipelines, where models are updated independently of the display layer.

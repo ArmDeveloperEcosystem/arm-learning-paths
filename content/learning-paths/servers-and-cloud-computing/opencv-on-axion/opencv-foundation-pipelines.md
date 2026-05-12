@@ -30,7 +30,7 @@ gcc gcc-c++ make cmake
 
 ### Create the project directory
 
-Create a dedicated workspace for your OpenCV project and change into it:
+Create a dedicated workspace for your OpenCV project and navigate to it:
 
 ```bash
 mkdir -p ~/opencv-project
