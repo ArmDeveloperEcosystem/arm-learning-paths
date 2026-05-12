@@ -3,6 +3,7 @@ title: Deploy Java applications on Azure Cobalt 100 processors
 
 minutes_to_complete: 30   
 
+description: Deploy Java on Azure Cobalt 100 Arm virtual machines and benchmark application performance with JMH microbenchmarks.
 who_is_this_for: This is an introductory topic about Java deployment and benchmarking on Microsoft Azure Cobalt 100 Arm-based virtual machines. It is designed for developers migrating Java applications from x86_64 to Arm architecture.
 
 learning_objectives: 

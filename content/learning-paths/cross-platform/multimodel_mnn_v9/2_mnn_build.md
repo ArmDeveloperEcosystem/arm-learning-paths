@@ -4,17 +4,18 @@ weight: 3
 layout: learningpathall
 ---
 
-## Introduction
+## Build MNN for Armv9 multimodal inference
 
-In this module you will build **MNN** natively on your Arm v9 Linux system and verify that the `llm_demo` binary can load a **prebuilt Omni MNN model package**. This sets up everything needed for the text, vision, and audio demos in later modules.
+In this section, you'll build **MNN** natively on your Armv9 Linux system and verify that the `llm_demo` binary can load a prebuilt Omni MNN model package. This sets up everything needed for the text, vision, and audio demos in later sections.
 
-This module uses a native **CPU-only** MNN build on Armv9. That is a deliberate design choice, not a fallback. The goal is to show how a compact, reproducible, deployment-friendly software stack can run directly on an Armv9 CPU without depending on a discrete GPU or separate accelerator.
+This section uses a native CPU-only MNN build on Armv9 — a deliberate design choice, not a fallback. The goal is to show how a compact, reproducible, deployment-friendly software stack can run directly on an Armv9 CPU without depending on a discrete GPU or separate accelerator.
 
-At the end of this module, you will have:
+At the end of this section, you'll have:
 
 - a working `llm_demo` binary
 - a validated model directory that includes `config.json`
 - a runtime environment that resolves the correct MNN shared libraries
+- the required Omni model files available locally
 
 ## Create a workspace
 
@@ -25,13 +26,13 @@ mkdir -p ~/mnn
 cd ~/mnn
 ```
 
-## Why build natively on Armv9 first
+## Why build natively on Armv9
 
-This Learning Path uses a native build on the target Armv9 system before introducing any cross-compilation workflow. Building directly on the target helps reduce environment drift, makes library and toolchain issues easier to diagnose, and lets you validate the runtime in the same environment where you will execute the model.
+Building, running inference, and deploying all happen directly on the Armv9 device. There's no cross-compilation involved. This keeps the toolchain simple, eliminates environment drift between build and target, and means any library or configuration issue you encounter is the same one you'd hit in production.
 
-A native-first approach also makes it easier to confirm that the final binary, shared libraries, and model assets work together correctly on the Armv9 platform. For a reproducible Learning Path, this is usually the fastest way to get to a working baseline before optimizing or automating the workflow further.
+Building on the target also makes it straightforward to confirm that the binary, shared libraries, and model assets all resolve correctly in the same environment where you will run the model.
 
-## Build MNN natively on Armv9
+## Build MNN
 
 Clone the MNN repository:
 
@@ -40,14 +41,22 @@ git clone https://github.com/alibaba/MNN.git
 cd MNN
 ```
 
+Install the required build dependencies:
+
+```bash
+sudo apt update
+sudo apt install -y build-essential gcc g++ cmake
+```
+
 Configure and build MNN with LLM, audio, and Omni support enabled:
 
 ```bash
-
-rm -rf build
 mkdir build && cd build
+```
 
+```bash
 cmake .. \
+  -DCMAKE_BUILD_TYPE=Release \
   -DMNN_BUILD_SHARED=ON \
   -DMNN_BUILD_LLM=ON \
   -DMNN_BUILD_AUDIO=ON \
@@ -84,11 +93,17 @@ If your system already has another MNN installation, `llm_demo` can load a diffe
 From the build directory, inspect the runtime dependencies:
 
 ```bash
-cd ~/mnn/MNN/build
 ldd ./llm_demo | grep -E "libMNN|Express|Audio|OpenCV" || true
 ```
 
-You should see `libMNN.so` and `libMNN_Express.so` resolving from the `~/mnn/MNN/build` tree.
+You should see `libMNN.so` and `libMNN_Express.so` resolving from the `~/mnn/MNN/build` tree. A correct result looks similar to:
+
+```text
+libMNNAudio.so => /home/radxa/mnn/MNN/build/tools/audio/libMNNAudio.so (0x0000ffffb6d00000)
+libMNN_Express.so => /home/radxa/mnn/MNN/build/express/libMNN_Express.so (0x0000ffffb6c00000)
+libMNN.so => /home/radxa/mnn/MNN/build/libMNN.so (0x0000ffffb6600000)
+libMNNOpenCV.so => /home/radxa/mnn/MNN/build/tools/cv/libMNNOpenCV.so (0x0000ffffb61a0000)
+```
 
 An incorrect result looks like this, where `libMNN.so` is loaded from another location:
 
@@ -105,66 +120,74 @@ If `libMNN.so` resolves from a different directory, update `LD_LIBRARY_PATH` to 
 export LD_LIBRARY_PATH=$HOME/mnn/MNN/build:$HOME/mnn/MNN/build/express:$HOME/mnn/MNN/build/tools/audio:$HOME/mnn/MNN/build/tools/cv:${LD_LIBRARY_PATH:-}
 ```
 
+To make this setting persistent across terminal sessions, add it to your shell profile:
+
+```bash
+echo 'export LD_LIBRARY_PATH=$HOME/mnn/MNN/build:$HOME/mnn/MNN/build/express:$HOME/mnn/MNN/build/tools/audio:$HOME/mnn/MNN/build/tools/cv:${LD_LIBRARY_PATH:-}' >> ~/.bashrc
+source ~/.bashrc
+```
+
 Run the check again:
 
 ```bash
 ldd ./llm_demo | grep -E "libMNN|Express|Audio|OpenCV" || true
 ```
 
-## Download a prebuilt Omni model package
+## Download the prebuilt Omni model package
 
-This learning path uses a prebuilt [Omni model package](https://huggingface.co/taobao-mnn/Qwen2.5-Omni-7B-MNN) that is already in MNN deployable format.
+This Learning Path uses a prebuilt [Omni model package](https://www.modelscope.cn/MNN/Qwen2.5-Omni-7B-MNN) that is already prepared for MNN deployment. The full package is approximately 15 GB, so ensure you have sufficient disk space and a stable internet connection before cloning.
 
-Clone the model into your workspace:
+Clone the model repository into your workspace:
 
 ```bash
 cd ~/mnn
 git clone https://www.modelscope.cn/MNN/Qwen2.5-Omni-7B-MNN.git
+cd ~/mnn/Qwen2.5-Omni-7B-MNN
 ```
 
-Verify that the package includes `config.json`:
+## Download the model weights
+
+After cloning, install Git LFS and pull the large model files:
 
 ```bash
-cat ~/mnn/Qwen2.5-Omni-7B-MNN/config.json
-```
-
-A valid configuration looks similar to:
-
-```json
-{
-    "llm_model": "llm.mnn",
-    "llm_weight": "llm.mnn.weight",
-    "backend_type": "cpu",
-    "thread_num": 4,
-    "precision": "low",
-    "memory": "low",
-    "system_prompt": "You are Qwen, a virtual human developed by the Qwen Team, Alibaba Group, capable of perceiving auditory and visual inputs, as well as generating text and speech.",
-    "talker_max_new_tokens": 2048,
-    "talker_speaker": "Chelsie",
-    "dit_steps": 5,
-    "dit_solver": 1,
-    "mllm": {
-        "backend_type": "cpu",
-        "thread_num": 4,
-        "precision": "normal",
-        "memory": "low"
-    }
-}
+sudo apt-get install -y git-lfs
+git lfs install
+cd ~/mnn/Qwen2.5-Omni-7B-MNN
+git lfs pull
 ```
 
 {{% notice Note %}}
-This package is already prepared for MNN deployment.
-
-You do not need to export the model from PyTorch or run additional quantization steps before using it in this learning path.
+The full model weights are approximately 15 GB. Downloading can take a while depending on your network connection.
 {{% /notice %}}
+
+Verify that the main model files are present and several gigabytes in size:
+
+```bash
+ls -lh ~/mnn/Qwen2.5-Omni-7B-MNN/llm.mnn ~/mnn/Qwen2.5-Omni-7B-MNN/llm.mnn.weight
+```
+
+If either file is only a few hundred bytes, the LFS download did not complete. Run `git lfs pull` again to resume it.
+
+{{% notice Note %}}This package is already prepared for MNN deployment. You do not need to export the model from PyTorch or run additional quantization steps before using it in this Learning Path.{{% /notice %}}
 
 ## Check your setup
 
-Start `llm_demo` with the model configuration:
+Run `llm_demo` with the model configuration to verify the binary loads correctly:
 
 ```bash
 cd ~/mnn/MNN/build
 ./llm_demo ~/mnn/Qwen2.5-Omni-7B-MNN/config.json
 ```
 
-If the binary starts without `undefined symbol` errors or missing library messages, your environment is ready for the next module.
+The binary starts an interactive session. Type `exit` or press Ctrl+C to quit. If the binary loads without `undefined symbol` errors or missing library messages, your environment is ready for the next section.
+
+## What you've learned and what's next
+
+In this section, you:
+
+- Built MNN natively on Armv9 with multimodal and KleidiAI support enabled
+- Verified that shared libraries resolve correctly to avoid runtime conflicts
+- Downloaded and validated the prebuilt Omni model package and weights
+- Confirmed that `llm_demo` can load the model configuration
+
+In the next section, you'll run a text-only baseline to verify that the core inference path works correctly before adding vision and audio inputs.

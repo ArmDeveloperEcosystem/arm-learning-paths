@@ -103,7 +103,7 @@ Do not modify fixed template fields.
 
 If `multi_install` is set to true, the first page must act as an overview for the series. Sub-pages must set `multitool_install_part: true`.
 
-### Required content structure
+#### Required content structure
 
 Install guides should include:
 
@@ -127,7 +127,7 @@ Install guides should include:
 Optional:
 - Uninstall instructions
 
-### Scope boundaries
+#### Scope boundaries
 
 Install guides must not include:
 - End-to-end workflows
@@ -136,6 +136,14 @@ Install guides must not include:
 - Comparative marketing claims
 
 Learning Paths may link to install guides for setup steps. Install guides should not duplicate workflow content.
+
+#### Tool versions
+
+When providing commands for downloading or installing software, use a specific version in the example. This ensures that the instructions are accurate and verifiable. However, also include a note before the commands that tells readers the same commands work with other versions. Provide a link to where the latest version can be found. The note can be formatted as follows:
+
+{{% notice Note %}}
+The following commands use <tool> version <version>. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Link to page with release info](URL).
+{{% /notice %}}
 
 ### Further reading curation
 
@@ -246,6 +254,7 @@ When adding or revising `description` fields:
 - Use visual breaks to prevent walls of text. Code blocks count as visual breaks
 - If you explain three or more things in one section, split it into separate sections
 - Each code block should be preceded by one to three sentences explaining what it does
+- If a section is long because of code or output rather than explanation, do not treat length alone as a readability problem
 - For Learning Paths, include a short recap and forward-looking transition at the end of each major instructional section or module
 
 Example recap pattern for Learning Paths:
@@ -287,9 +296,15 @@ Use these preferred terms and phrases for consistency:
   - `therefore` instead of `ergo`
   - `namely` instead of `viz.`
   - `avoid` instead of `try not to`
+  - `such as` instead of `like`
+  - `after` instead of `once`
+  - `setup` as a noun, `set up` as a verb
 
 - Avoid condescending language:
   - Do not use `simply`, `just`, `obviously`, or `clearly`
+
+- Avoid using directions when referring to content that's been referenced previously or will be referenced next:
+ - Do not use `above`, `below`, `left`, `right`, `top`, or `bottom`
 
 - Acknowledge difficulty naturally:
   - Use phrases like `this step can be confusing at first`
@@ -685,6 +700,34 @@ Learning Paths should optimize for selection, not ranking.
 - Write content that can safely be chosen by an AI agent to complete a task
 
 If an AI agent were asked to complete this task, the Learning Path should be the safest source to select.
+
+### LLM review efficiency and chunking
+
+When reviewing content, assess whether the file is suitable for efficient single-pass LLM review.
+
+- Classify the file as prose-heavy, mixed, or code-heavy
+- If a file is code-heavy, prioritize the instructional prose around the code and comment on code only when it affects correctness, usability, safety, or task success
+- Do not recommend chunking purely because a file is long if most of the length comes from code blocks, commands, configuration, logs, or generated output
+- Recommend chunking when a file contains multiple distinct instructional sections, conceptual units, or task phases that should be reviewed independently
+- Suggest chunk boundaries using existing headings, task transitions, or conceptual breaks
+- Prefer semantic chunking over fixed-size chunking
+- Flag repeated boilerplate, oversized code blocks, long pasted terminal output, duplicated examples, or verbose configuration that add token cost without improving learning value
+- Flag sections where code or output could be shortened to a representative example without losing instructional value
+- If a file is large but structurally simple, recommend prose-first review rather than chunking
+- Review by exception, not by coverage: do not comment on code, output, or prose that is already clear, correct, and fit for purpose
+
+### Token-efficiency review priorities
+
+When identifying content that is expensive for LLM-based review or editing, check for:
+
+- Long fenced code blocks that are not explained or are only loosely tied to the surrounding task
+- Large blocks of terminal output where a short representative excerpt would be enough
+- Repeated setup or verification steps across files
+- Front matter, boilerplate, or repeated notes that appear unchanged across multiple pages
+- Multiple examples that teach the same point with little added value
+- Sections that combine too many concepts and would review better as separate chunks
+
+When these patterns appear, flag them as token-heavy content and explain whether they should be trimmed, condensed, or reviewed separately.
 
 ### Performance and Arm acceleration integrity
 

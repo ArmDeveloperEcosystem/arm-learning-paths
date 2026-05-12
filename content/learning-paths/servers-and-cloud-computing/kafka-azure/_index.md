@@ -5,6 +5,8 @@ minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for developers looking to migrate their Apache Kafka workloads from x86_64 to Arm-based platforms, specifically on Microsoft Azure Cobalt 100 (arm64) virtual machines.
 
+description: Deploy Apache Kafka on Azure Cobalt 100 Arm virtual machines and benchmark message throughput performance.
+
 learning_objectives: 
     - Provision an Azure Arm64 virtual machine using Azure console, with Ubuntu Pro 24.04 LTS as the base image
     - Deploy Kafka on an Ubuntu virtual machine

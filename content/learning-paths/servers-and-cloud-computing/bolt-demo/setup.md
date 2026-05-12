@@ -1,6 +1,6 @@
 ---
-title: Prepare your environment for BOLT
-weight: 3
+title: Prepare your environment
+weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

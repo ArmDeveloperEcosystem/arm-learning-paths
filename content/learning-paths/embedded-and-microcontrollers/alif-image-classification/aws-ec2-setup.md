@@ -116,7 +116,7 @@ python -m pip install -e . --no-build-isolation
 
 ## Set up the Arm/Ethos-U toolchain
 
-ExecuTorch includes a setup script that downloads the Arm GNU toolchain, CMSIS, and the Vela compiler:
+ExecuTorch includes a setup script that downloads the Arm GNU toolchain, CMSIS, and the Vela compiler. We expect this script to fail due to a known issue. If / when it does, check that it has failed in the expected place, and if so, move onto the next steps - don't try to fix it yourself:
 
 ```bash
 ./examples/arm/setup.sh --i-agree-to-the-contained-eula

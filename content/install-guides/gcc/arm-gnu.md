@@ -15,19 +15,18 @@ test_maintenance: true
 title: Arm GNU Toolchain
 tool_install: false
 weight: 4
+description: Install the Arm GNU Toolchain on Linux, macOS, or Windows for bare-metal and embedded Arm targets such as arm-none-eabi.
 ---
 
-## Before you begin
+Arm GNU Toolchain is a community-supported, pre-built GNU compiler toolchain for Arm-based CPUs. In this guide, you'll learn how to install the toolchain directly from the [Arm GNU Toolchain downloads page](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads). This is the recommended approach for bare-metal and embedded targets such as `arm-none-eabi`.
 
-Arm GNU Toolchain is a community-supported, pre-built GNU compiler toolchain for Arm-based CPUs. This guide covers installing the toolchain directly from the [Arm GNU Toolchain downloads page](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads), which is the recommended approach for bare-metal and embedded targets such as `arm-none-eabi`.
+For a cross-compiler targeting Arm Linux (for example `aarch64-linux-gnu` or `arm-linux-gnueabihf`), see the [Cross-compiler](../cross) install guide instead, which installs those toolchains using the Linux package manager.
 
-If you need a cross-compiler targeting Arm Linux (for example `aarch64-linux-gnu` or `arm-linux-gnueabihf`), see the [Cross-compiler](../cross) install guide instead, which installs those toolchains via the Linux package manager.
-
-There are many versions of the [Arm GNU Toolchain](https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain) available. In general, the latest version is recommended, as this will contain the latest optimization improvements and support for the latest Arm IP.
+There are many versions of the [Arm GNU Toolchain](https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain) available. We generally recommend the latest version, as this will contain the latest optimization improvements and support for the latest Arm IP. 
 
 However there are reasons you may wish to use earlier compiler versions, so older versions are also available.
 
-## How do I download the Arm GNU Toolchain? {#download}
+## Download the Arm GNU Toolchain {#download}
 
 Arm GNU Toolchain releases consist of cross toolchains for the following host operating systems:
 
@@ -45,20 +44,24 @@ macOS
 
 Download the correct toolchain variant for your development needs from the [Arm Developer website](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads).
 
-## How do I install the Arm GNU Toolchain on Linux?
+## Install the Arm GNU Toolchain on Linux
 
-Unpack the downloaded file to the install directory. The exact file name will depend on the flavor selected.
+Unpack the downloaded file to the install directory. The exact file name will depend on the flavor selected and will be formatted as follows:
 
 ```console
 tar xJf arm-gnu-toolchain-<version>-<host-arch>-<TRIPLE>.tar.xz -C /path/to/install/dir
 ```
 
-Add the `bin` directory to the `PATH` environment variable (bash).
+Add the `bin` directory to the `PATH` environment variable (bash):
 ```console
 export PATH=/path/to/install/dir/bin:$PATH
 ```
 
-Here is a specific example for an Arm Linux host and the AArch32 bare-metal target.
+The following is an example of a specific version for an Arm Linux host and the AArch32 bare-metal target:
+
+{{% notice Note %}}
+The following commands uses Arm GNU Toolchain version 15.2.Rel1. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Arm GNU Toolchain downloads](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads).
+{{% /notice %}}
 
 ```bash { target="ubuntu:latest" }
 wget https://developer.arm.com/-/media/Files/downloads/gnu/15.2.rel1/binrel/arm-gnu-toolchain-15.2.rel1-aarch64-arm-none-eabi.tar.xz
@@ -67,18 +70,20 @@ echo 'export PATH="$PATH:$HOME/arm-gnu-toolchain-15.2.rel1-aarch64-arm-none-eabi
 source ~/.bashrc
 ```
 
-## How do I install the Arm GNU Toolchain on macOS?
+## Install the Arm GNU Toolchain on macOS
 
 Downloads for `macOS` are available as tar files (`.tar.xz`) and package files (`.pkg`).
 
 ### tar files
-For `.tar.xz` files, unpack the downloaded file to the install directory.
+For `.tar.xz` files, unpack the downloaded file to the install directory. Replace the <version> and <host-arch> with the version and host architecture of your choice:
+
 ```console
 tar xJf arm-gnu-toolchain-<version>-<host-arch>-<TRIPLE>.tar.xz -C /path/to/install/dir
 ```
 
 ### pkg files
-For `.pkg` files use the installer.
+For `.pkg` files, use the installer. Replace the <version> and <host-arch> with the version and host architecture of your choice:
+
 ```console
 sudo installer -pkg arm-gnu-toolchain-<version>-<host-arch>-<TRIPLE>.pkg -target /
 ```
@@ -87,9 +92,9 @@ sudo installer -pkg arm-gnu-toolchain-<version>-<host-arch>-<TRIPLE>.pkg -target
 
 Use a text editor to add the `bin` directory as a new line in `/etc/paths`.
 
-For example the path could be: `/Applications/ArmGNUToolchain/15.2.rel1/arm-none-eabi/bin`
+For example, for version 15.2.rel1, the path could be: `/Applications/ArmGNUToolchain/15.2.rel1/arm-none-eabi/bin`
 
-The `/etc/paths` file is a list of paths to search.
+The `/etc/paths` file is a list of paths to search:
 
 ```console
 /usr/local/bin
@@ -103,7 +108,11 @@ The `/etc/paths` file is a list of paths to search.
 
 ### Apple Silicon
 
-Here is a specific example for macOS with Apple Silicon and the AArch32 bare-metal target.
+The following is a specific example for macOS with Apple Silicon and the AArch32 bare-metal target:
+
+{{% notice Note %}}
+The following commands use Arm GNU Toolchain version 15.2.Rel1. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Arm GNU Toolchain downloads](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads).
+{{% /notice %}}
 
 ```console
 wget https://developer.arm.com/-/media/Files/downloads/gnu/15.2.rel1/binrel/arm-gnu-toolchain-15.2.rel1-darwin-arm64-arm-none-eabi.pkg
@@ -111,52 +120,55 @@ sudo installer -pkg arm-gnu-toolchain-15.2.rel1-darwin-arm64-arm-none-eabi.pkg -
 echo '/Applications/ArmGNUToolchain/15.2.rel1/arm-none-eabi/bin' | sudo tee -a /etc/paths
 ```
 
-## How do I install the Arm GNU Toolchain on Windows?
+## Install the Arm GNU Toolchain on Windows
+
+The steps depend on the release version.
 
 ### Releases prior to 15.2.Rel1
 
-Double-click on the installer, such as `arm-gnu-toolchain-14.3.rel1-mingw-w64-i686-arm-none-eabi.exe`, and follow on-screen instructions.
+Double-click the installer, such as `arm-gnu-toolchain-14.3.rel1-mingw-w64-i686-arm-none-eabi.exe`, and follow the on-screen instructions.
 
 The installer can also be run on the command line. When run on
-the command-line, the following options can be set:
+the command-line, you can set the following options:
   - `/S` Run in silent mode
   - `/P` Adds the installation `bin` directory to the system `PATH`
   - `/R` Adds Install Folder registry entry for the install.
 
-For example, to install the tools silently, update the search path, and add the registry entry run:
+For example, to install the tools silently, update the search path and add the registry entry run. Replace <version> with a release version prior to 15.2.Rel1 of your choice:
 
 ```console
 arm-gnu-toolchain-<version>-mingw-w64-i686-arm-none-eabi.exe /S /P /R
 ```
 
-The zip package is a backup to Windows installer for those who cannot run the installer. You can unzip the package and then run the tools directly.
+The zip package is a backup to Windows installer for those who can't run the installer. You can unzip the package and then run the tools directly.
 
 ### Releases starting from 15.2.Rel1
 
 Double-click on the installer, such as  `arm-gnu-toolchain-15.2.rel1-mingw-w64-i686-arm-none-eabi.msi`, and follow on-screen instructions.
 
-To install silently from the command line, use similar to the following:
+To install silently from the command line, run the following. Replace <version> with a release version starting from 15.2.Rel1 of your choice:
 
 ```console
  msiexec /i arm-gnu-toolchain-<version>-mingw-w64-i686-arm-none-eabi.msi EULA=1 /quiet
 ```
 
-The zip package is a backup to Windows installer for those who cannot run the installer. You can unzip the package and then run the tools directly.
+The zip package is a backup to Windows installer for those who can't run the installer. You can unzip the package and then run the tools directly.
 
 ## Setting up product license
 
-Arm GNU Toolchain is open source software. No licenses are required.
+Arm GNU Toolchain is open source software. You don't need any licenses to use it.
 
-To use the Arm GNU Toolchain in conjunction with [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio) you must [register the toolchain](https://developer.arm.com/documentation/101469/2022-0/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain).
+To use the Arm GNU Toolchain with [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio), you need to [register the toolchain](https://developer.arm.com/documentation/101469/2022-0/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain).
 
-## Get started
+## Verify the installation
 
 To verify the installation is correct, enter:
 ```console
 arm-none-eabi-gcc -v
 ```
 
-Additional examples are included in the toolchain installation. If you installed to `$HOME` using the example above, you can find them at:
+Additional examples are included in the toolchain installation. If you installed to `$HOME` using the example provided in this guide, you can find them at:
 ```console
 $HOME/arm-gnu-toolchain-15.2.rel1-aarch64-arm-none-eabi/share/doc/gcc-arm-none-eabi/examples
 ```
+You're now ready to use Arm GNU Toolchain.

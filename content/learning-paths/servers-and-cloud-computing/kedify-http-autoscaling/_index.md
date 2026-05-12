@@ -5,6 +5,8 @@ minutes_to_complete: 45
 
 who_is_this_for: This is an introductory topic for developers running HTTP workloads on Kubernetes who want to enable event-driven autoscaling with KEDA and Kedify.
 
+description: Enable event-driven autoscaling for HTTP workloads on Kubernetes by installing Kedify and KEDA with Helm and testing autoscaling behavior.
+
 learning_objectives:
   - Install Kedify (KEDA build, HTTP Scaler, and Kedify Agent) with Helm
   - Verify that Kedify and KEDA components are running in the cluster

@@ -5,9 +5,11 @@ minutes_to_complete: 60
 
 who_is_this_for: This is an advanced topic for engineers looking for ways to increase performance on Arm servers.
 
+description: Enable and measure libhugetlbfs performance improvements for MySQL and other workloads on Arm Linux servers.
+
 learning_objectives:
     - Enable libhugetlbfs on an Arm server running Linux
-    - Evaluate performance improvements for workloads such as MySQL.
+    - Evaluate performance improvements for workloads such as MySQL
 
 prerequisites:
     - An Arm server or virtual machine instance from a cloud service provider with Ubuntu installed

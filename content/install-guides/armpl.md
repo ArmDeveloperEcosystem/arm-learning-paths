@@ -20,6 +20,7 @@ test_images:
 
 ### Link to official documentation
 official_docs: https://developer.arm.com/documentation/101004
+description: Install Arm Performance Libraries on Windows on Arm, macOS, and Linux AArch64 to access optimized BLAS, LAPACK, FFT, and math functions for high-performance computing on Arm.
 author: Pareena Verma
 
 ### PAGE SETUP
@@ -30,59 +31,62 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-[Arm Performance Libraries](https://developer.arm.com/downloads/-/arm-performance-libraries#documentation) provides developers with optimized math libraries for high performance computing applications on Arm Neoverse based hardware.
+[Arm Performance Libraries](https://developer.arm.com/downloads/-/arm-performance-libraries#documentation) provides developers with optimized math libraries for high-performance computing applications on Arm Neoverse-based hardware.
 
-These libraries include highly optimized functions for BLAS, LAPACK, FFT, sparse linear algebra, random number generation, libamath and libastring.
-These libraries are free to use and do not require a license.
+These libraries include highly-optimized functions for BLAS, LAPACK, FFT, sparse linear algebra, random number generation, libamath, and libastring.
 
-Arm Performance Libraries are available for use on [Windows 11 on Arm](#windows), [macOS](#macos) (Apple Silicon), and [Linux](#linux) (AArch64) hosts.
+Arm Performance Libraries are free to use and don't require a license. These libraries are available for use on [Windows 11 on Arm](#windows), [macOS](#macos) (Apple Silicon), and [Linux](#linux) (AArch64) hosts.
 
-## How do I install Arm Performance Libraries on Windows? {#windows}
+## Install Arm Performance Libraries on Windows {#windows}
 
 On your Windows 11 Arm machine, go to the [Arm Performance Libraries download page](https://developer.arm.com/downloads/-/arm-performance-libraries).
-Click on the Download Windows section and download the Windows Installer:
+Click the **Download Windows** section and download the Windows Installer:
 `arm-performance-libraries_<version>_Windows.msi`
 
-Double click to open this file and start the Arm Performance Libraries Setup Wizard.
+Double-click to open the installer and start the Arm Performance Libraries Setup Wizard.
 
-![win_wizard00 #left](/install-guides/_images/armpl_wizard00.png)
+![Arm Performance Libraries Setup Wizard welcome screen prompting user to select Next to begin the installation.#center](/install-guides/_images/armpl_wizard00.png)
 
-Read and accept the End-User License Agreement by clicking the checkbox 'I accept the terms of this License Agreement'.
+Read and accept the End-User License Agreement by selecting the checkbox **I accept the terms of this License Agreement**.
 
-![win_wizard01 #left](/install-guides/_images/armpl_wizard01.png)
+![Arm Performance Libraries Setup Wizard showing the End-User License Agreement. A checkbox labeled 'I accept the terms of this License Agreement' is checked.#center](/install-guides/_images/armpl_wizard01.png)
 
-Select a location for the installation on your system. The default is:
+Enter a location for the installation on your system. The default is:
 
 `C:\Program Files\Arm Performance Libraries`
 
-![win_wizard02 #left](/install-guides/_images/armpl_wizard02.png)
+![Arm Performance Libraries Setup Wizard showing the installation directory field, set by default to C:\Program Files\Arm Performance Libraries. Change this path if needed before continuing.#center](/install-guides/_images/armpl_wizard02.png)
 
-Click 'Install' and then 'Finish' to complete the installation.
+Click **Install** and then **Finish** to complete the installation.
 
-![win_wizard03 #left](/install-guides/_images/armpl_wizard03.png)
+![Arm Performance Libraries Setup Wizard is ready to install, prompting user to select Install to begin copying files to the specified directory.#center](/install-guides/_images/armpl_wizard03.png)
 
-![win_wizard04 #left](/install-guides/_images/armpl_wizard04.png)
+![Arm Performance Libraries Setup Wizard showing the installation is complete, prompting user to select Finish to exit the wizard.#center](/install-guides/_images/armpl_wizard04.png)
 
-To install Arm Performance Libraries from a command prompt and automatically accept the End User License Agreement use:
+To install Arm Performance Libraries from a command prompt and automatically accept the End User License Agreement, run:
 ```console
 msiexec.exe /i arm-performance-libraries_<version>_Windows.msi /quiet ACCEPT_EULA=1
 ```
 
-To install Arm Performance Libraries using the `winget` package manager and automatically accept the End User License Agreement use:
+To install Arm Performance Libraries using the `winget` package manager and automatically accept the End User License Agreement, run:
 ```console
 winget install --accept-package-agreements Arm.ArmPerformanceLibraries
 ```
 
 You can now start linking your application to the Arm Performance libraries on your Windows on Arm device. Follow the examples in the included `RELEASE_NOTES` file of your extracted installation directory to get started.
 
-For more information refer to [Get started with Arm Performance Libraries](https://developer.arm.com/documentation/109361).
+For more information, see [Get started with Arm Performance Libraries](https://developer.arm.com/documentation/109361).
 
 
-## How do I install Arm Performance Libraries on macOS? {#macos}
+## Install Arm Performance Libraries on macOS {#macos}
 
 [Download](https://developer.arm.com/downloads/-/arm-performance-libraries) the appropriate package for your macOS distribution.
 
-In a terminal, run the command shown below to download the macOS package:
+{{% notice Note %}}
+The following commands use Arm Performance Libraries version 26.01. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Arm Performance Libraries downloads](https://developer.arm.com/downloads/-/arm-performance-libraries).
+{{% /notice %}}
+
+In a terminal, run the following command to download the macOS package:
 ```console
 wget https://developer.arm.com/-/cdn-downloads/permalink/Arm-Performance-Libraries/Version_26.01/arm-performance-libraries_26.01_macOS.tgz
 ```
@@ -92,12 +96,12 @@ Use tar to extract the file:
 tar zxvf arm-performance-libraries_26.01_macOS.tgz
 ```
 
-Output of above command:
+The output is similar to:
 ```console
 armpl_26.01_flang-21.dmg
 ```
 
-Mount the disk image by running from a terminal:
+Mount the disk image by running the following command from a terminal:
 ```console
 hdiutil attach armpl_26.01_flang-21.dmg
 ```
@@ -108,60 +112,63 @@ Now run the installation script as a superuser:
 /Volumes/armpl_26.01_flang-21_installer/armpl_26.01_flang-21_install.sh -y
 ```
 
-Using this command you automatically accept the End User License Agreement and the packages are installed to the `/opt/arm` directory. If you want to change the installation directory location use the `--install_dir=` option with the script and provide the desired directory location.
+Using this command, you automatically accept the End User License Agreement and install packages to the `/opt/arm` directory. If you want to change the installation directory location, use the `--install_dir=` option with the script and provide the desired directory location.
 
-To install Arm Performance Libraries using Homebrew in a terminal and automatically accept the End User License Agreement use:
+To install Arm Performance Libraries using Homebrew in a terminal and automatically accept the End User License Agreement, run:
 
 ```console
 brew install arm-performance-libraries
 ```
 
-The installer runs using `sudo` so you may be asked to input your password.
+The installer runs using `sudo`, so you may be asked to input your password.
 
-To get started, compile and test the examples included in the `/opt/arm/<armpl_dir>/examples/`, or `<install_dir>/<armpl_dir>/examples/` directory, if you have installed to a different location than the default.
+To get started with Arm Performance Libraries on macOS, compile and test the examples in the `/opt/arm/<armpl_dir>/examples/` directory, or `<install_dir>/<armpl_dir>/examples/` if you installed to a different location.
 
-For more information refer to [Get started with Arm Performance Libraries](https://developer.arm.com/documentation/109362).
+For more information, see [Get started with Arm Performance Libraries](https://developer.arm.com/documentation/109362).
 
+## Install Arm Performance Libraries on Linux {#linux}
 
-## How do I install Arm Performance Libraries on Linux? {#linux}
+Arm Performance Libraries are supported on most Linux distributions such as Ubuntu, RHEL, SLES, and Amazon Linux on an `AArch64` host. The libraries are compatible with various versions of GCC, LLVM, and NVHPC. The GCC-compatible releases are built with GCC 14 and tested with GCC versions 7 to 14. The LLVM-compatible releases are tested with LLVM 21.1. The NVHPC-compatible releases are tested with NVHPC 25.11.
 
-Arm Performance Libraries are supported on most Linux distributions like Ubuntu, RHEL, SLES and Amazon Linux on an `AArch64` host and compatible with various versions of GCC, LLVM, and NVHPC. The GCC compatible releases are built with GCC 14 and tested with GCC versions 7 to 14. The LLVM compatible releases are tested with LLVM 21.1. The NVHPC compatible releases are tested with NVHPC 25.11.
+### Manually download and install Arm Performance Libraries
 
-### How do I manually download and install Arm Performance Libraries on Linux?
-
-[Download](https://developer.arm.com/downloads/-/arm-performance-libraries) the appropriate package for your Linux distribution. The deb based installers can be used on Ubuntu 22 and Ubuntu 24. The RPM based installers can be used on the following supported distributions:
+Download the appropriate package for your Linux distribution. The `deb`-based installers can be used on Ubuntu 22 and Ubuntu 24. The RPM-based installers can be used on the following supported distributions:
 
 - Amazon Linux 2, Amazon Linux 2023
 - RHEL-8, RHEL-9, RHEL-10
 - SLES-15 Service Packs 6 and 7
 
-The instructions shown below are for deb based installers for GCC users.
+The following instructions are for `deb`-based installers for GCC users.
 
-In a terminal, run the command shown below to download the Debian package:
+{{% notice Note %}}
+The following commands use Arm Performance Libraries version 26.01. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Arm Performance Libraries downloads](https://developer.arm.com/downloads/-/arm-performance-libraries).
+{{% /notice %}}
 
-```bash
+In a terminal, run the following command to download the Debian package:
+
+```console
 wget https://developer.arm.com/-/cdn-downloads/permalink/Arm-Performance-Libraries/Version_26.01/arm-performance-libraries_26.01_deb_gcc.tar
 ```
 
 Use `tar` to extract the file and then change directory:
 
-```bash
+```console
 tar xf arm-performance-libraries_26.01_deb_gcc.tar
 ```
 
 Run the installation script as a super user:
 
-```bash
+```console
 sudo ./arm-performance-libraries_26.01_deb/arm-performance-libraries_26.01_deb.sh --accept
 ```
 
-Using the `--accept` switch you automatically accept the End User License Agreement and the packages are installed to the `/opt/arm` directory.
+Using the `--accept` switch, you automatically accept the End User License Agreement and the packages are installed to the `/opt/arm` directory.
 
-If you want to change the installation directory location use the `--install-to` option with the script and provide the desired directory location.
+If you want to change the installation directory location, use the `--install-to` option with the script and provide the desired directory location.
 
-### How do I download and install Arm Performance Libraries using system packages on Linux?
+### Download and install Arm Performance Libraries using system packages
 
-Arm Performance Libraries are available to install using Linux system package managers. The instructions shown below are for the Ubuntu system package manager `apt` command.
+Arm Performance Libraries are available to install using Linux system package managers. The following instructions are for the Ubuntu system package manager `apt` command.
 
 Add the Arm Performance Libraries `apt` package repository to your system:
 
@@ -172,21 +179,21 @@ echo "deb https://developer.arm.com/packages/arm-toolchains:${NAME,,}-${VERSION_
 sudo apt update
 ```
 
-Download and install Arm Performance Libraries with:
+Download and install Arm Performance Libraries:
 
 ```bash
 sudo apt install arm-performance-libraries
 ```
 
-### How do I set up the environment for Arm Performance Libraries on Linux?
+### Set up the environment for Arm Performance Libraries
 
-Install environment modules on your machine:
+Install environment modules on your Linux machine:
 
 ```console
 sudo apt install environment-modules
 ```
 
-Set your bash environment to use modules:
+Set your bash environment to use the modules:
 
 ```console
 source /usr/share/modules/init/bash
@@ -204,7 +211,7 @@ List the available modules:
 module avail
 ```
 
-The output should be similar to:
+The output is similar to:
 
 ```output
 armpl/26.01.0_gcc
@@ -216,7 +223,6 @@ Load the appropriate module:
 module load armpl/26.01.0_gcc
 ```
 
-You can now compile and test the examples included in the `/opt/arm/<armpl_dir>/examples/`, or `<install_dir>/<armpl_dir>/examples/` directory, if you have installed to a different location than the default.
+To get started with Arm Performance Libraries on Linux, compile and test the examples in the `/opt/arm/<armpl_dir>/examples/` directory, or `<install_dir>/<armpl_dir>/examples/` if you installed to a different location.
 
-For more information refer to [Get started with Arm Performance Libraries](https://developer.arm.com/documentation/102620).
-
+For more information, see [Get started with Arm Performance Libraries](https://developer.arm.com/documentation/109362).

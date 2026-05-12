@@ -1,5 +1,6 @@
 ---
 title: Optimize network interrupt handling on Arm servers
+description: Analyze and optimize interrupt request (IRQ) patterns on Arm Linux servers to improve network workload performance through IRQ distribution strategies.
 
    
 minutes_to_complete: 20

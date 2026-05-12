@@ -28,9 +28,9 @@ layout: installtoolsall # DO NOT MODIFY. Always true for tool install articles
 
 WindowsPerf is a lightweight performance profiling tool inspired by Linux Perf, and designed specifically for Windows on Arm. 
 
-The WindowsPerf GUI is a Visual Studio 2022 extension that provides an intuitive, integrated experience within the Visual Studio Integrated Development Environment (IDE). The extension enables developers to interact with WindowsPerf, adjust settings, and visualize performance data seamlessly in Visual Studio.
+The WindowsPerf GUI is a Visual Studio 2022 extension that provides an intuitive, integrated experience within the Visual Studio Integrated Development Environment (IDE). The extension allows developers to interact with WindowsPerf, adjust settings, and visualize performance data seamlessly in Visual Studio.
 
-## What steps must I complete before installing the Visual Studio Extension for WindowsPerf?
+## Before you begin
 
 Before installing the Visual Studio Extension for WindowsPerf, complete the following steps:
 
@@ -42,7 +42,7 @@ Before installing the Visual Studio Extension for WindowsPerf, complete the foll
 The disassembly feature requires `llvm-objdump` in the search path. Verify that your `%PATH%` variable includes the location of `llvm-objdump` to ensure proper functionality. 
 {{% /notice %}}
 
-### How do I install the extension using the Visual Studio Extension Manager?
+### Install the extension using the Visual Studio Extension Manager
 
 To install the Visual Studio extension for WindowsPerf from Visual Studio, use the Extension Manager:
 
@@ -52,53 +52,55 @@ To install the Visual Studio extension for WindowsPerf from Visual Studio, use t
 4. Select the `Install` button. 
 5. Restart Visual Studio to complete installation.
 
-![Install #center](/install-guides/_images/wperf-vs-extension-install-page.png)
+![Screenshot of the Visual Studio Extension Manager search results showing the WindowsPerf extension with the Install button highlighted, ready to begin installation.#center](/install-guides/_images/wperf-vs-extension-install-page.png)
 
-### How do I install the extension from GitLab?
+### Install the extension from GitLab
 
 You can also install the WindowsPerf Visual Studio Extension from GitLab. 
 
-Using a browser, visit the [Releases](https://gitlab.com/Linaro/WindowsPerf/vs-extension/-/releases) page and download the latest file. For example, `windowsperf-gui-3.1.3.zip`.
+Using a browser, visit the [Releases](https://gitlab.com/Linaro/WindowsPerf/vs-extension/-/releases) page and download the latest file. For example, `windowsperf-gui-5.4.0.zip`.
 
-Unzip the downloaded file and double click on the `WindowsPerfGUI.vsix` file.
+Unzip the downloaded file and double-click on the `WindowsPerfGUI.vsix` file.
 
 Follow the prompts to install the Visual Studio extension.
 
-![VSIX Install #center](/install-guides/_images/vs-ext-install.png)
+![Screenshot of the VSIX installer dialog confirming the WindowsPerfGUI extension is being installed into Visual Studio 2022.#center](/install-guides/_images/vs-ext-install.png)
 
 {{% notice Note %}}
 Ensure that any previous version of the extension is uninstalled and that Visual Studio is closed before installing the extension.
 {{% /notice %}}
 
-### How do I build and install the extension from source code?
+### Build and install the extension from source code
 
-Building the source is not required, but is an alternative installation method if you want to customize the extension. 
+You don't need to build the source, but it is an alternative installation method if you want to customize the extension. 
 
-To build the source code, clone [the repository](https://gitlab.com/Linaro/WindowsPerf/vs-extension.git) using Git. 
+To build the source code, clone [the repository](https://gitlab.com/Linaro/WindowsPerf/vs-extension.git) using Git:
 
 ```console
 git clone https://gitlab.com/Linaro/WindowsPerf/vs-extension.git
 ```
 
-Double click the `WindowsPerfGUI.sln` solution file to open the project Visual Studio. 
+Double-click the `WindowsPerfGUI.sln` solution file to open the project Visual Studio. 
 
 {{% notice Note %}}
-Visual Studio may prompt you to install additional components required to build the project, install these components. 
+Visual Studio might prompt you to install additional components required to build the project. Install these components. 
 {{% /notice %}}
 
-Open the `Build` menu and select `Build Solution` to create `WindowsPerfGUI.dll` and `WindowsPerfGUI.vsix`. You can replace the currently installed files with these files to try any changes you have made.
+Open the `Build` menu and select `Build Solution` to create `WindowsPerfGUI.dll` and `WindowsPerfGUI.vsix`. You can replace the currently installed files with these files to try any changes you've made.
 
-### How do I set up WindowsPerf in Visual Studio?
+### Set up WindowsPerf in Visual Studio
 
-After the extension is installed, you must link the extension with the `wperf.exe` file by navigating to `Tools > Options > WindowsPerf > WindowsPerf Path` in Visual Studio.
+After installing the extension, you need to link the extension with the `wperf.exe` file by navigating to `Tools > Options > WindowsPerf > WindowsPerf Path` in Visual Studio.
 
 Use the `Select` button to navigate to your `wperf.exe` and the `Validate` button to confirm the executable is found. 
 
-![Validate #center](/install-guides/_images/wperf-validate.png)
+![Screenshot of the Visual Studio Options page for WindowsPerf showing the wperf.exe path field and the Validate button, which must succeed before the extension can run.#center](/install-guides/_images/wperf-validate.png)
 
-This step is crucial for utilizing the extension, and the extension will not work without this configuration.
+{{% notice Warning %}}
+This step is crucial for utilizing the extension. The extension will not work without this configuration.
+{{% /notice %}}
 
-## What are the key features of the WindowsPerf extension?
+## Key features of the WindowsPerf extension
 
 The WindowsPerf extension is composed of several key features, each designed to streamline the user experience:
 
@@ -107,16 +109,18 @@ The WindowsPerf extension is composed of several key features, each designed to 
 * Output Logging: All commands executed through the GUI are logged, ensuring transparency and aiding with performance analysis.
 * Sampling UI: Customize your sampling experience by selecting events, setting frequency and duration, choosing programs for sampling, and comprehensively analyzing results. 
 
-The sampling interface is shown below:
+The sampling interface is shown as follows:
 
-![Sampling preview #center](/install-guides/_images/wperf-vs-extension-sampling-preview.webp)
+![Screenshot of the WindowsPerf Visual Studio extension sampling UI showing event selection, frequency and duration controls, and the program to sample, giving an overview of available sampling options.#center](/install-guides/_images/wperf-vs-extension-sampling-preview.webp)
 
 * Counting Settings UI: Build a `wperf stat` command from scratch using the configuration interface, then view the output in VS Code or open it with Windows Performance Analyzer (WPA). 
-The interface to configure counting is shown below:
+The interface to configure counting is shown as follows:
 
-![Counting preview #center](/install-guides/_images/wperf-vs-extension-counting-preview.png)
+![Screenshot of the WindowsPerf Visual Studio extension counting configuration UI for building a wperf stat command, showing event and core selection fields before starting a counting session.#center](/install-guides/_images/wperf-vs-extension-counting-preview.png)
 
-## How do I uninstall the WindowsPerf extension?
+You're now ready to use the WindowsPerf extension on VSCode.
+
+## Uninstall the WindowsPerf extension
 
 To uninstall the extension in Visual Studio:
 

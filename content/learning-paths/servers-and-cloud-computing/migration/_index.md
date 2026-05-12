@@ -5,6 +5,8 @@ minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for software developers looking to migrate applications to Arm servers.
 
+description: Set up an Arm development environment, analyze dependencies, and understand common challenges and scenarios for migrating applications to Arm servers.
+
 learning_objectives:
     - Set up an Arm development machine
     - Analyze application dependencies

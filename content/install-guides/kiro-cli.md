@@ -224,7 +224,7 @@ Modify the file `~/.kiro/settings/mcp.json` to add the Arm MCP server via a Dock
 
 To analyze a local codebase, use a `-v` command to mount a volume to the Arm MCP server `/workspace` folder so it can access code you want to analyze with migrate-ease and other tools.
 
-Replace the path `/Users/yourname01/yourlocalcodebase` with the path to your local codebase:
+Replace the path `/path/to/your/workspace` with the path to your local codebase:
 
 ```json
 {
@@ -235,8 +235,13 @@ Replace the path `/Users/yourname01/yourlocalcodebase` with the path to your loc
         "run",
         "--rm",
         "-i",
-        "-v", "/Users/yourname01/yourlocalcodebase:/workspace",
-        "--name", "arm-mcp",
+        "--pull=always",
+        "-v",
+        "/path/to/your/workspace:/workspace",
+        "-v",
+        "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v",
+        "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ],
       "env": {},
@@ -245,6 +250,143 @@ Replace the path `/Users/yourname01/yourlocalcodebase` with the path to your loc
   }
 }
 ```
+
+To enable Arm Performix features through the Arm MCP Server, replace `/path/to/your/ssh/private_key` and `/path/to/your/ssh/known_hosts` with the SSH private key and `known_hosts` file used for your target device.
+
+### Optional: Use a Docker replacement containerization tool
+
+You can use other containerization tools besides Docker that are free and do not require licenses, such as Podman, Finch, Colima, and Rancher Desktop. Choose one of the options below and use its CLI in place of `docker`.
+
+{{< tabpane-normal >}}
+  {{< tab header="Podman" >}}
+Install: [Podman](https://podman.io/docs/installation)
+
+Pull the Arm MCP Server image:
+```console
+podman pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `~/.kiro/settings/mcp.json` file:
+```json
+{
+  "mcpServers": {
+    "arm_mcp_server": {
+      "command": "podman",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--pull=always",
+        "-v", "/path/to/your/workspace:/workspace",
+        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+        "armlimited/arm-mcp:latest"
+      ],
+      "env": {},
+      "timeout": 60000
+    }
+  }
+}
+```
+  {{< /tab >}}
+  {{< tab header="Finch" >}}
+Install: [Finch](https://runfinch.com/docs/getting-started/installation/)
+
+Pull the Arm MCP Server image:
+```console
+finch pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `~/.kiro/settings/mcp.json` file:
+```json
+{
+  "mcpServers": {
+    "arm_mcp_server": {
+      "command": "finch",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--pull=always",
+        "-v", "/path/to/your/workspace:/workspace",
+        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+        "armlimited/arm-mcp:latest"
+      ],
+      "env": {},
+      "timeout": 60000
+    }
+  }
+}
+```
+  {{< /tab >}}
+  {{< tab header="Colima" >}}
+Install: [Colima](https://github.com/abiosoft/colima#installation)
+
+Colima provides a Docker-compatible CLI via Docker contexts.
+
+Pull the Arm MCP Server image:
+```console
+docker pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `~/.kiro/settings/mcp.json` file:
+```json
+{
+  "mcpServers": {
+    "arm_mcp_server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--pull=always",
+        "-v", "/path/to/your/workspace:/workspace",
+        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+        "armlimited/arm-mcp:latest"
+      ],
+      "env": {},
+      "timeout": 60000
+    }
+  }
+}
+```
+  {{< /tab >}}
+  {{< tab header="Rancher Desktop" >}}
+Install: [Rancher Desktop](https://docs.rancherdesktop.io/getting-started/installation/)
+
+Rancher Desktop uses the Docker container engine via Morby.
+
+Pull the Arm MCP Server image:
+```console
+docker pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `~/.kiro/settings/mcp.json` file:
+```json
+{
+  "mcpServers": {
+    "arm_mcp_server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--pull=always",
+        "-v", "/path/to/your/workspace:/workspace",
+        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+        "armlimited/arm-mcp:latest"
+      ],
+      "env": {},
+      "timeout": 60000
+    }
+  }
+}
+```
+  {{< /tab >}}
+{{< /tabpane-normal >}}
 
 ### How do I verify the Arm MCP server is working?
 

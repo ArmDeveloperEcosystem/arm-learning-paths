@@ -4,7 +4,9 @@ title: Control floating-point accuracy modes in Arm Performance Libraries
 minutes_to_complete: 20
 author: Joana Cruz
 
-who_is_this_for: This is an introductory topic for developers who want to use the different accuracy modes for vectorized math functions in Libamath, a component of Arm Performance Libraries. 
+who_is_this_for: This is an introductory topic for developers who want to use the different accuracy modes for vectorized math functions in Libamath, a component of Arm Performance Libraries.
+
+description: Select and apply accuracy modes for vectorized math functions in Libamath to balance performance and precision for your application.
 
 learning_objectives: 
     - Describe how accuracy is defined and measured in Libamath

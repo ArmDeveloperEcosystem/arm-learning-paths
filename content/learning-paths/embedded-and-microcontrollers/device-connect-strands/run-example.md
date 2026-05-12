@@ -1,14 +1,14 @@
 ---
-title: Run the example end to end
+title: Run device discovery and agent control examples
 weight: 4
 
 # FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Overview
+## Run device-to-device discovery and control
 
-This section runs Device Connect's device-to-device discovery. There are two ways to walk through this setup. Optionally, you can connect an external device. 
+This section demonstrates Device Connect's device-to-device discovery. There are two ways to walk through this setup. Optionally, you can connect an external device. 
 
 ### Option 1: run on a single machine
 
@@ -64,7 +64,7 @@ Two things happen when this script runs.
 
 ![Sequence diagram showing the call flow when r.run() executes: the script calls Robot() and DeviceRuntime, which announces presence to the Zenoh mesh, subscribes to the command topic, registers RPC handlers, and starts emitting stateUpdate events at 10 Hz#center](./images/visual2.png "Call flow inside r.run(): device registration and event publishing over Zenoh")
 
-You should see INFO-level log output similar to:
+The output is similar to:
 
 ```output
 device_connect_sdk.device.so100-abc123 - INFO - Using ZENOH messaging backend

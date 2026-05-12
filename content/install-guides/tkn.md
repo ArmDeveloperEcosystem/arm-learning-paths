@@ -23,13 +23,11 @@ tool_install: true
 weight: 1
 ---
 
-The Tekton CLI, `tkn`, is a command-line interface for Tekton Pipelines. It allows you to create, manage, and interact with Tekton resources such as tasks, pipelines, and pipeline runs from your terminal.
+The Tekton CLI, `tkn`, is a command-line interface for Tekton Pipelines. You can use `tkn` to create, manage, and interact with Tekton resources such as tasks, pipelines, and pipeline runs from your terminal.
 
-Tekton CLI is available for macOS and Linux and supports the Arm architecture.
+Tekton CLI is available for macOS and Linux and supports the Arm architecture. In this guide, you'll learn how to install the latest version of the Tekton CLI for Ubuntu on Arm and macOS with Apple Silicon.
 
-## What should I consider before installing the Tekton CLI?
-
-This article provides a quick way to install the latest version of the Tekton CLI for Ubuntu on Arm and macOS with Apple Silicon.
+## Before you begin
 
 Confirm you are using an Arm computer by running:
 
@@ -49,7 +47,7 @@ If you are on macOS with Apple Silicon the output should be:
 arm64
 ```
 
-## How do I download and install the Tekton CLI?
+## Download and install the Tekton CLIs
 
 You can install the Tekton CLI in multiple ways. The following methods download the latest stable release directly from GitHub.
 
@@ -64,7 +62,7 @@ sudo apt install ./tektoncd-cli-${TKN_VERSION#v}_Linux-ARM64.deb
 ```
 
 {{% notice Tip %}}
-If the version query fails, you can manually set `TKN_VERSION` to a known stable version like `v0.41.0`.
+If the version query fails, you can manually set `TKN_VERSION` to a known stable version such as `v0.41.0`.
 {{% /notice %}}
 
 ### Install on macOS
@@ -85,7 +83,7 @@ Alternatively, you can install using Homebrew on macOS:
 brew install tektoncd-cli
 ```
 
-## How do I verify the Tekton CLI installation?
+## Verify the Tekton CLI installation
 
 Verify the Tekton CLI is installed by checking the version:
 
@@ -93,7 +91,7 @@ Verify the Tekton CLI is installed by checking the version:
 tkn version
 ```
 
-The output shows the client version information:
+The output shows the client version information and is similar to:
 
 ```output
 Client version: 0.41.0
@@ -138,7 +136,7 @@ Flags:
 Use "tkn [command] --help" for more information about a command.
 ```
 
-## How do I get started with the Tekton CLI?
+## Get started with the Tekton CLI
 
 To use the Tekton CLI effectively, you need access to a Kubernetes cluster with Tekton Pipelines installed. You can check if Tekton is available in your cluster:
 
@@ -150,7 +148,7 @@ If Tekton Pipelines is not installed, you might see an error message. In that ca
 
 ### Common Tekton CLI commands
 
-Below are some common commands to get you started.
+The following are some common commands to get you started.
 
 List pipelines:
 

@@ -9,6 +9,7 @@ who_is_this_for: This is an introductory topic for developers who have compiled 
 
 learning_objectives:
     - Identify whether a program is a good candidate for code layout optimization
+    - Install LLVM BOLT on Linux
     - Use LLVM BOLT to perform profile-guided post-link optimization of an AArch64 binary with poor spatial locality
     - Collect profile data using multiple techniques, including BRBE, instrumentation, SPE, and PMU event sampling
     - Evaluate the impact of BOLT optimizations using performance metrics and profiling data
@@ -19,7 +20,6 @@ prerequisites:
     - Linux kernel version 6.17 or later to enable Branch Record Buffer Extension ([BRBE profiling](/learning-paths/servers-and-cloud-computing/bolt-demo/brbe/))
     - Linux kernel version 6.14 or later for Arm Statistical Profiling Extension ([SPE profiling](/learning-paths/servers-and-cloud-computing/bolt-demo/spe/))
     - GCC version 13.3 or later to compile the example program ([GCC](/install-guides/gcc/) )
-    - LLVM BOLT version [21.1.8](https://github.com/llvm/llvm-project/releases/tag/llvmorg-21.1.8) or later (download [zip](https://github.com/llvm/llvm-project/releases/download/llvmorg-21.1.8/LLVM-21.1.8-Linux-ARM64.tar.xz))
     - A system with with sufficient hardware performance counters to use the [TopDown](/install-guides/topdown-tool) methodology. This typically requires running on bare metal rather than a virtualized environment.
 
 
