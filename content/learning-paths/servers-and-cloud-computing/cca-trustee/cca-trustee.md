@@ -87,7 +87,7 @@ To prove the environment’s trustworthiness, the KBS Client sends CCA attestati
 [Get Started with CCA Attestation and Veraison](/learning-paths/servers-and-cloud-computing/cca-veraison/).
 
 For convenience, Trustee services and the client software are packaged in Docker containers, which you can run on any suitable AArch64 or x86_64 development host. Because the client runs in a realm, it uses the Fixed Virtual Platform (FVP) and the reference software stack for Arm CCA. If you are new to running applications in realms with FVP, see
-[Run an application in a Realm using the Arm Confidential Computing Architecture (CCA)](/learning-paths/servers-and-cloud-computing/cca-container).
+[Run an application in a Realm using the Arm Confidential Computing Architecture (CCA)](/learning-paths/servers-and-cloud-computing/cca-container/).
 
 When the AS receives an attestation token from the realm using the KBS, it:
 

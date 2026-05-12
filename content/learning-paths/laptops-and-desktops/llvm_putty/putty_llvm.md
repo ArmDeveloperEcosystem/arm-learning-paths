@@ -13,7 +13,7 @@ Any Windows on Arm computer which has the required tools installed can be used f
 
 Follow the links to install the required tools. 
 
-* [Visual Studio 2022 or higher](/install-guides/vs-woa). 
+* [Visual Studio 2022 or higher](/install-guides/vs-woa/). 
 * [Install LLVM support in Visual Studio](/install-guides/vs-woa/#install-llvm-support-in-visual-studio).
 * [Strawberry Perl](https://strawberryperl.com/) 
 
@@ -152,7 +152,7 @@ If you would like to build with a different version of LLVM, you will need to ma
 
 At the time of writing, the latest version with Windows on Arm support is LLVM 18.1.8. 
 
-Ensure you have downloaded and installed [LLVM 18.1.8](/install-guides/llvm-woa)
+Ensure you have downloaded and installed [LLVM 18.1.8](/install-guides/llvm-woa/)
 
 On `CMake Settings` page in Visual Studio, select the `Show advanced variables`checkbox under `CMake variables and cache`.
 

@@ -32,7 +32,7 @@ In this learning path, you will learn how to build and run the reference integra
 ## Build the docker container
 
 You can build the Arm CCA reference software stack in a docker container which contains all the build dependencies. 
-Install [docker engine](/install-guides/docker/docker-engine) on your machine.
+Install [docker engine](/install-guides/docker/docker-engine/) on your machine.
 
 Clone the repository that contains the docker container file and utility scripts:
 

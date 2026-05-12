@@ -114,8 +114,8 @@ tar -xf cmsis-toolbox-darwin-amd64.tar.gz
 Projects can be built with Arm Compiler for Embedded 6, Arm GNU Toolchain, LLVM Embedded Toolchain, or IAR tools.
 
 For further setup instructions, see the following Install Guides:
-* [Arm Compiler for Embedded](/install-guides/armclang)
-* [Arm GNU Toolchain](/install-guides/gcc/arm-gnu)
+* [Arm Compiler for Embedded](/install-guides/armclang/)
+* [Arm GNU Toolchain](/install-guides/gcc/arm-gnu/)
 * [LLVM Embedded Toolchain for Arm](/install-guides/llvm-embedded/)
 
 This Install Guide uses `Arm Compiler for Embedded`, which is supported on Windows and Linux.

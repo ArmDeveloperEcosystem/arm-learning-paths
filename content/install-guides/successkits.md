@@ -39,7 +39,7 @@ Arm Success Kits are a component of:
 
 All downloads are provided via the [Arm Product Download Hub](https://developer.arm.com/downloads).
 
-For more information on the Download Hub, refer to the [Arm Product Download Hub install guide](/install-guides/pdh).
+For more information on the Download Hub, refer to the [Arm Product Download Hub install guide](/install-guides/pdh/).
 
 You can download individual components, or the complete Success Kits.
 

@@ -47,7 +47,7 @@ A number of other tools are common in ML applications.
 
 ## Using Docker
 
-You may want to use [Docker](/install-guides/docker) to simplify ML development environment creation. 
+You may want to use [Docker](/install-guides/docker/) to simplify ML development environment creation. 
 
 As an example, clone the MLEK repository and look at the `Dockerfile` at the top of the repository to see one way to use Docker in ML application development:
 

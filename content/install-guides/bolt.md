@@ -63,7 +63,7 @@ cmake version 3.28.3
 CMake suite maintained and supported by Kitware (kitware.com/cmake).
 ```
 
-For more information, see [CMake install guide.](/install-guides/cmake)
+For more information, see [CMake install guide.](/install-guides/cmake/)
 
 3. Install Ninja
 

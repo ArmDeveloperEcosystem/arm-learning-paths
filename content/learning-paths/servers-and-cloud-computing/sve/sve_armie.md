@@ -94,7 +94,7 @@ The application now runs and prints the expected message.
 
 You can also run the application containing SVE instructions using the the Arm Instruction Emulator.
 
-Download and install the [Arm Instruction Emulator](https://developer.arm.com/downloads/-/arm-instruction-emulator) (see [installation instructions](/install-guides/armie) ) on any Arm v8-A system. The Arm Instruction Emulator intercepts and emulates unsupported SVE instructions. It also support plugins for application analysis.
+Download and install the [Arm Instruction Emulator](https://developer.arm.com/downloads/-/arm-instruction-emulator) (see [installation instructions](/install-guides/armie/) ) on any Arm v8-A system. The Arm Instruction Emulator intercepts and emulates unsupported SVE instructions. It also support plugins for application analysis.
 
 {{% notice Note %}}
 The Arm Instruction Emulator has been deprecated. It is still available for download, but there is no active development. 

@@ -10,7 +10,7 @@ As with any typical software development, once you have reached an optimization 
 
 To keep this learning path a reasonable length, we will just measure and compare the final optimized versions against the original. We’ll collect data for plain, Burst and neon modes. This section will cover this using the Profiler and Analyzer tools in Unity.
 
-For more detail regarding the Profiler and Analyzer, please read the previous learning path in this series, [Profiling Unity apps on Android](/learning-paths/mobile-graphics-and-gaming/profiling-unity-apps-on-android).
+For more detail regarding the Profiler and Analyzer, please read the previous learning path in this series, [Profiling Unity apps on Android](/learning-paths/mobile-graphics-and-gaming/profiling-unity-apps-on-android/).
 
 ## Create a consistent scenario
 First, you will need a consistent scenario in which you can reliably compare the three modes. We need to compare the data when all the versions are processing the same amount of data. It's important to note that the randomness of the scene can make it harder to pick representative frames but we can wait until the number of characters is the same in each run.

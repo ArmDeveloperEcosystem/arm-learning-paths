@@ -231,4 +231,4 @@ Here are some general points that you will find useful when you review the sampl
 - It may sound obvious but don’t use the optimizations when they are slower! For the collision sample, the best gain is when there are lots of characters but earlier on, there aren’t that many so, when there aren’t many characters in the scene, the code could switch to whichever is the fastest version.
 
 ## The Neon intrinsics we used
-For a brief description of some of the Neon intrinsics we used in the collision detection functions, please read the [Appendix](/learning-paths/mobile-graphics-and-gaming/using-neon-intrinsics-to-optimize-unity-on-android/10-appendix).
+For a brief description of some of the Neon intrinsics we used in the collision detection functions, please read the [Appendix](/learning-paths/mobile-graphics-and-gaming/using-neon-intrinsics-to-optimize-unity-on-android/10-appendix/).

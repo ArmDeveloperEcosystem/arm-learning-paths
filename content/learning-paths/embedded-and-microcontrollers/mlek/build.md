@@ -44,7 +44,7 @@ export PATH=~/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/:$PATH
 You can review the installation guides for further details.
 
 - [Arm Compiler for Embedded](/install-guides/armclang/)
-- [Arm GNU Toolchain](/install-guides/gcc/arm-gnu)
+- [Arm GNU Toolchain](/install-guides/gcc/arm-gnu/)
 
 {{% /notice %}}
 

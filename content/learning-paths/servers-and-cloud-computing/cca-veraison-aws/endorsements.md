@@ -56,7 +56,7 @@ Delete these lines, and replace them with the contents of `/tmp/vconfig/cocli/co
 
 ## Provision the Endorsements to Veraison
 The provisioning tool runs inside a Docker container. 
-First, make sure you have [installed Docker](/install-guides/docker) on your machine.
+First, make sure you have [installed Docker](/install-guides/docker/) on your machine.
 In the command shell where you have cloned the endorsement tool, run the following command:
 
 ```bash

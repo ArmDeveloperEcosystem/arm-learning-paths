@@ -79,7 +79,7 @@ kubectl version -o json --client
 
 If `kubectl` is installed the version information is printed. 
 
-If you don't see the version information printed refer to the [gcloud](/install-guides/gcloud) and [kubectl](/install-guides/kubectl/) install guides.
+If you don't see the version information printed refer to the [gcloud](/install-guides/gcloud/) and [kubectl](/install-guides/kubectl/) install guides.
 
 Now you can set up your newly-created K8s cluster credentials using the gcloud utility.  
 

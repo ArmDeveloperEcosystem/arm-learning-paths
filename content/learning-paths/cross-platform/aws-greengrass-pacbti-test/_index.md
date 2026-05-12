@@ -2,10 +2,6 @@
 title: Deploy an AWS IoT Greengrass custom component to Arm devices and verify PAC/BTI support
 
 description: Learn how to register Arm devices as AWS IoT Greengrass core devices, build and deploy a custom component, and use MQTT to verify PAC/BTI support across Armv8 and Armv9 platforms.
-
-draft: true
-cascade:
-    draft: true
     
 minutes_to_complete: 30   
 
@@ -18,7 +14,7 @@ learning_objectives:
     - Use MQTT to trigger PAC/BTI checks and interpret the results for each platform
 
 prerequisites:
-    - An [Amazon AWS](https://aws.amazon.com/) account with access to AWS IoT Greengrass and Amazon S3
+    - An [Amazon Web Services (AWS)](https://aws.amazon.com/) account with access to AWS IoT Greengrass and Amazon S3
     - A Raspberry Pi 5 running Raspberry Pi OS
     - An NVIDIA Jetson Thor device running JetPack 7.1 or later
     - Familiarity with AWS IoT Core and basic cloud concepts

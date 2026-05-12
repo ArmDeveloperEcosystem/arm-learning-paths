@@ -71,6 +71,6 @@ Terminate the FVP with `Ctrl+C`.
 
 ## Integration with Arm Toolchains
 
-These FVPs can be used in conjunction with [Arm Development Studio](/install-guides/armds) or [Keil MDK](/install-guides/mdk) (Cortex-M FVPs only) to provide a debug target without the need for real hardware.
+These FVPs can be used in conjunction with [Arm Development Studio](/install-guides/armds/) or [Keil MDK](/install-guides/mdk/) (Cortex-M FVPs only) to provide a debug target without the need for real hardware.
 
 Some of these FVPs are also directly supplied with these toolchains.

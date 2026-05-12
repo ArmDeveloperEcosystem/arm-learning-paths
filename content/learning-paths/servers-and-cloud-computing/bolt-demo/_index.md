@@ -20,7 +20,7 @@ prerequisites:
     - Linux kernel version 6.17 or later to enable Branch Record Buffer Extension ([BRBE profiling](/learning-paths/servers-and-cloud-computing/bolt-demo/brbe/))
     - Linux kernel version 6.14 or later for Arm Statistical Profiling Extension ([SPE profiling](/learning-paths/servers-and-cloud-computing/bolt-demo/spe/))
     - GCC version 13.3 or later to compile the example program ([GCC](/install-guides/gcc/) )
-    - A system with with sufficient hardware performance counters to use the [TopDown](/install-guides/topdown-tool) methodology. This typically requires running on bare metal rather than a virtualized environment.
+    - A system with with sufficient hardware performance counters to use the [TopDown](/install-guides/topdown-tool/) methodology. This typically requires running on bare metal rather than a virtualized environment.
 
 
 author: Paschalis Mpeis

@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 ## Before you begin
 
-Install [Keil MDK](/install-guides/mdk) and [Arm Compiler for Embedded](/install-guides/armclang) on a Windows machine and connect the NXP LPCXpresso55S69 board to it.
+Install [Keil MDK](/install-guides/mdk/) and [Arm Compiler for Embedded](/install-guides/armclang/) on a Windows machine and connect the NXP LPCXpresso55S69 board to it.
 
 ## Build and Run the Hello World TrustZone example
 

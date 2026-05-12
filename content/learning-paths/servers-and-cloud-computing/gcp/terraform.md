@@ -12,7 +12,7 @@ layout: "learningpathall"
 
 ### Generate an SSH key pair
 
-Generate an SSH key pair (public key, private key) using `ssh-keygen` to use for Arm VMs access. To generate the key pair, follow this [guide](/install-guides/ssh#ssh-keys).
+Generate an SSH key pair (public key, private key) using `ssh-keygen` to use for Arm VMs access. To generate the key pair, follow this [guide](/install-guides/ssh/#ssh-keys).
 
 {{% notice Note %}}
 If you already have an SSH key pair present in the `~/.ssh` directory, you can skip this step.
@@ -23,7 +23,7 @@ If you already have an SSH key pair present in the `~/.ssh` directory, you can s
 
 The installation of Terraform on your Desktop/Laptop needs to communicate with GCP. Thus, Terraform needs to be authenticated.
 
-To obtain GCP user credentials, follow this [guide](/install-guides/gcloud#acquire-user-credentials).
+To obtain GCP user credentials, follow this [guide](/install-guides/gcloud/#acquire-user-credentials).
 
 ### Terraform infrastructure
 Add resources required to create a VM in `main.tf`.

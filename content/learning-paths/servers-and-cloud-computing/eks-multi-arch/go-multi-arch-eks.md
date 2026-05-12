@@ -17,8 +17,8 @@ You will need an [AWS account](https://aws.amazon.com/). Create an account if ne
 Three tools are required on your local machine. Follow the links to install the required tools.
 
 * [Kubectl](/install-guides/kubectl/)
-* [Amazon eksctl CLI](/install-guides/eksctl)
-* [Docker](/install-guides/docker)
+* [Amazon eksctl CLI](/install-guides/eksctl/)
+* [Docker](/install-guides/docker/)
 
 ## Create a multi-architecture Amazon EKS Cluster
 

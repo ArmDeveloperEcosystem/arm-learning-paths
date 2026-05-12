@@ -14,7 +14,7 @@ learning_objectives:
 
 prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).    
-    - Refer to [Visual Studio 2022 with Arm build tools](/install-guides/vs-woa).
+    - Refer to [Visual Studio 2022 with Arm build tools](/install-guides/vs-woa/).
     
 author: Dawid Borycki
 

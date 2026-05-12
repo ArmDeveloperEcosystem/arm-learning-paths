@@ -35,7 +35,7 @@ You can download the Fast Models installation package from the [Product Download
 
 Linux (AArch64 and x86) and Windows (x86 only) hosts are supported.
 
-For more information about the Product Download Hub, refer to the [Product Download Hub installation guide](/install-guides/pdh).
+For more information about the Product Download Hub, refer to the [Product Download Hub installation guide](/install-guides/pdh/).
 
 ## Install Arm Fast Models
 
@@ -69,7 +69,7 @@ Full instructions are provided in the [Fast Models User Guide](https://developer
 
 ## Set up the product license
 
-Arm Fast Models are license managed. License setup instructions are available in the [Arm Licensing install guide](/install-guides/license).
+Arm Fast Models are license managed. License setup instructions are available in the [Arm Licensing install guide](/install-guides/license/).
 
 
 ## Verify installation

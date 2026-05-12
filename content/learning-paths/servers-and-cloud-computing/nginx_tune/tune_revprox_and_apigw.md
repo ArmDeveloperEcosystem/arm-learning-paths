@@ -8,15 +8,15 @@ Use the information below as general guidance for tuning Nginx.
 
 ##  Nginx Reverse Proxy and API Gateway Configuration
 
-In the [Setup Reverse Proxy and API Gateway](/learning-paths/servers-and-cloud-computing/nginx/basic_static_file_server) section of the [Learn how to deploy Nginx](/learning-paths/servers-and-cloud-computing/nginx/) learning path, a bare minimum Reverse Proxy and API Gateway configuration was discussed. In this section, you will look at a tuned configuration.
+In the [Setup Reverse Proxy and API Gateway](/learning-paths/servers-and-cloud-computing/nginx/basic_static_file_server/) section of the [Learn how to deploy Nginx](/learning-paths/servers-and-cloud-computing/nginx/) learning path, a bare minimum Reverse Proxy and API Gateway configuration was discussed. In this section, you will look at a tuned configuration.
 
 ### Top Level nginx.conf
 
-The same top level config used in [Tune a static file server](/learning-paths/servers-and-cloud-computing/nginx_tune/tune_static_file_server) is suggested.
+The same top level config used in [Tune a static file server](/learning-paths/servers-and-cloud-computing/nginx_tune/tune_static_file_server/) is suggested.
 
   ### Reverse Proxy and API Gateway configuration
 
-A tuned configuration (`/etc/nginx/conf.d/loadbalancer.conf`) is shown below. Only performance relevant directives that were not discussed in the [file server section](/learning-paths/servers-and-cloud-computing/nginx_tune/tune_static_file_server) are explained here.
+A tuned configuration (`/etc/nginx/conf.d/loadbalancer.conf`) is shown below. Only performance relevant directives that were not discussed in the [file server section](/learning-paths/servers-and-cloud-computing/nginx_tune/tune_static_file_server/) are explained here.
 ```
 # Upstreams for https
 upstream ssl_file_server_com {
