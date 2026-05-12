@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 ---
 
-# Go on Arm Neoverse processors
+## Go on Arm Neoverse processors
 
 [Go](https://go.dev/) is a statically typed, compiled programming language supported by Google. 
 
