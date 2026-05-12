@@ -80,7 +80,7 @@ joblib imported successfully
 
 ### Train an ML model
 
-The training script uses the Iris dataset — a standard benchmark dataset with 150 samples across three flower species — and trains a Random Forest classifier. The trained model and label names are saved to disk with `joblib` so the OpenCV pipeline can load them without retraining.
+The training script uses the Iris dataset — a standard benchmark dataset with 150 samples across three flower species — and trains a random forest classifier. The trained model and label names are saved to disk with `joblib` so the OpenCV pipeline can load them without retraining.
 
 ```bash
 cat > train_ml_model.py <<'EOF'
@@ -310,4 +310,4 @@ rm -f iris_model.joblib iris_labels.joblib ml_output.jpg
  
 ## What you've accomplished
 
-You've trained a Random Forest classifier on the Iris dataset, saved it with `joblib`, and loaded it inside an OpenCV pipeline to generate a browser-viewable prediction image on a Google Axion Arm64 VM. This pattern — train offline, load at inference time, render output with OpenCV — mirrors production vision pipelines, where models are updated independently of the display layer.
+You've trained a random forest classifier on the Iris dataset, saved it with `joblib`, and loaded it inside an OpenCV pipeline to generate a browser-viewable prediction image on a Google Axion Arm64 VM. This pattern — train offline, load at inference time, render output with OpenCV — mirrors production vision pipelines, where models are updated independently of the display layer.
