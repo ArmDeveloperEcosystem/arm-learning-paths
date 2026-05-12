@@ -49,6 +49,15 @@ cd repo/executorch
 ./install_executorch.sh
 ```
 
+alternatively you can use the attached setup script: 
+
+<a href="{{ '/assets/scripts/setup.sh' | relative_url }}" download>
+  Download setup.sh
+</a>
+
+to do all of the above under python version 3.11
+
+
 ## Install Arm backend dependencies
 
 From the root of `repo/executorch`, run:
@@ -72,11 +81,7 @@ Return to the Learning Path working directory:
 cd ../..
 ```
 
-alternatively you can use the attached setup script: 
 
-<a href="{{ '/assets/scripts/install.sh' | relative_url }}" download>
-  Download install.sh
-</a>
 
 ## Optional: use the notebook
 
