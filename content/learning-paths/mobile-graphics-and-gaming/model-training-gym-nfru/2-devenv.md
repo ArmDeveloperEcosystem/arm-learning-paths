@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Overview
 
-In this section, you will install a few dependencies into your Ubuntu environment. You'll need a working Python 3.10+ environment with some ML and system dependencies. 
+In this section, you will install a few dependencies into your Ubuntu environment. You'll need a working Python 3.10+ environment with some ML and system dependencies.
 
 Start by making sure Python is installed by verifying that the version is >3.10:
 
@@ -32,10 +32,18 @@ git clone https://github.com/arm/neural-graphics-model-gym-examples.git
 cd neural-graphics-model-gym-examples
 ```
 
+{{% notice NFRU examples tag %}}
+The NFRU notebooks will be provided from a dedicated examples repository tag. After that tag is available, check it out before running the setup script:
+
+```bash
+git checkout <nfru-examples-tag>
+```
+{{% /notice %}}
+
 From inside the `neural-graphics-model-gym-examples/` folder, run the setup script:
 
 ```bash
-python create_env.py
+python3 create_env.py
 ```
 
 This will do the following:
@@ -60,4 +68,3 @@ print("Model Gym version:", ng_model_gym.__version__)
 ```
 
 You’ve completed your environment setup - great work! You’re now ready to start walking through the training and evaluation steps.
-
