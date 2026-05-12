@@ -290,7 +290,7 @@ Check that the HTTP server is running:
 python -m http.server 8000 &
 ```
 
-Also make sure port `8000` is allowed in the Google Cloud Platform firewall.
+Also make sure port `8000` is allowed in the GCP firewall.
 
 #### Output image does not update
 
