@@ -8,52 +8,73 @@ layout: learningpathall
 
 ## From device-to-device (D2D) to server
 
-The [device-to-device Learning Path](/learning-paths/embedded-and-microcontrollers/device-connect-d2d/) showed Device Connect in its simplest shape. Each runtime is a peer on the same local network. Devices find each other automatically, exchange typed events, and call each other's remote procedure calls (RPCs) directly. There is no broker, registry, or cloud service to run.
+### The D2D model
 
-That model is useful when everything is close together. It works well for prototypes, lab demos, and small fleets on one local area network (LAN). It is also a good fit when a cloud round-trip would add unnecessary delay.
+The [device-to-device Learning Path](/learning-paths/embedded-and-microcontrollers/device-connect-d2d/) showed Device Connect in its simplest form. Each runtime is a peer on the same local network. Devices find each other automatically, exchange typed events, and call each other's remote procedure calls (RPCs) directly. There's no broker, registry, or cloud service to run.
 
-As soon as the fleet grows, D2D mode starts to run out of road. You may need devices on different networks to talk to each other. You may need a registry that remembers devices after they disconnect. You may also need stronger identity, credential rotation, or audit logs.
+This model works well for:
+- Prototypes and lab demos
+- Small fleets on one local area network (LAN)
+- Scenarios where cloud round-trips would add unnecessary delay
+
+### When D2D isn't enough
+
+As your fleet grows, D2D mode has limitations. You might need devices on different networks to communicate, or a registry that remembers devices after they disconnect. You might also need stronger identity controls, credential rotation, or audit logs.
+
+### When to add a server
 
 Use a Device Connect server when you need:
 
-- a **persistent registry** that survives device reboots and lets new clients list known devices
-- **distributed state** shared between devices and agents, with leases and watches
-- **multi-network reach** for devices and agents on different LANs, behind network address translation (NAT), or in the cloud
-- **fleet-wide operations** such as commissioning devices and rotating credentials
-- **stronger security controls** such as per-device identity, JSON Web Token (JWT) credentials, role-based access control lists (ACLs), and audit logs
+- **Persistent registry** - survives device reboots and lets new clients list known devices
+- **Distributed state** - shared between devices and agents, with leases and watches
+- **Multi-network reach** - for devices and agents on different LANs, behind NAT, or in the cloud
+- **Fleet-wide operations** - commissioning devices and rotating credentials
+- **Stronger security** - per-device identity, JWT credentials, role-based ACLs, and audit logs
 
 The [`device-connect-server`](https://github.com/arm/device-connect/tree/main/packages/device-connect-server) package is the layer that adds those capabilities on top of the edge software development kit (SDK) you already know.
 
 ## What the server adds
 
+### Your device code stays the same
+
 The server doesn't change how you write device code. Devices still use `DeviceDriver`, `@rpc`, `@emit`, `@periodic`, and `@on`. Clients and AI agents still use `discover_devices()` and `invoke_device()`.
 
-The server changes how devices find and trust each other. In D2D mode, each runtime discovers nearby peers directly. With a server, every device and agent connects to a shared service.
+### What changes: device discovery and trust
 
-That shared service gives you a few fleet-level building blocks:
+In D2D mode, each runtime discovers nearby peers directly. With a server, every device and agent connects to a shared service that handles:
 
-- **routing** so devices on different networks can join the same mesh
-- **registry** so clients can see known devices, their capabilities, and their last-known status
-- **shared state** so devices and agents can coordinate through a common store
-- **commissioning** so each device gets its own trusted credential
-- **security controls** such as Transport Layer Security (TLS), mutual TLS (mTLS), JSON Web Token (JWT) authentication, role-based access control, and audit logging
+- **Routing** - devices on different networks can join the same mesh
+- **Registry** - clients can see known devices, their capabilities, and their last-known status
+- **Shared state** - devices and agents coordinate through a common store
+- **Commissioning** - each device gets its own trusted credential
+- **Security controls** - TLS, mutual TLS (mTLS), JWT authentication, role-based access control, and audit logging
+
+### Messaging backend options
 
 Device Connect supports different messaging backends, including Zenoh, NATS, and Message Queuing Telemetry Transport (MQTT). In this Learning Path, you'll use the hosted portal with NATS credentials. That lets you focus on the device and agent code instead of running the server yourself.
 
-## A note on commissioning
+## Commissioning: trusted device identity
 
-Commissioning means giving a device or agent a trusted identity before it joins the mesh. Without commissioning, a process is just code trying to connect. With commissioning, the server can decide whether that process is allowed to publish, subscribe, register itself, or call an RPC.
+Commissioning means giving a device or agent a trusted identity before it joins the mesh.
 
-The credential format depends on the messaging backend:
+**Without commissioning**: A process is just code trying to connect.
 
-- with **Zenoh**, commissioning means issuing the device a client TLS certificate signed by a shared certificate authority (CA)
-- with **NATS**, commissioning means issuing the device a JWT credential bound to its tenant
+**With commissioning**: The server can decide whether that process is allowed to publish, subscribe, register itself, or call RPCs.
 
-In both cases, the credential answers the same question: is this identity allowed on this mesh?
+### Credential formats by backend
+
+- **Zenoh** - issues client TLS certificates signed by a shared certificate authority (CA)
+- **NATS** - issues JWT credentials bound to your tenant
+
+Both answer the same question: is this identity allowed on this mesh?
+
+### What you'll use in this Learning Path
 
 In this Learning Path, you'll use the [Device Connect portal](https://portal.deviceconnect.dev/) to download NATS credentials for three default identities on your tenant. Two identities will run simulated robot arms. The third identity will run the Python client or agent.
 
-## Where this sits in the architecture
+## Architecture overview
+
+### How components connect
 
 In the diagram, pub/sub means publish/subscribe, KV means key-value, LC means LangChain, and MCP means Model Context Protocol.
 
