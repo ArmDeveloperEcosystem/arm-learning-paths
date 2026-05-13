@@ -152,7 +152,9 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-Note that there's no `allow_insecure=True` on the runtime. The runtime will only join the mesh if it has valid credentials, which is what makes commissioning meaningful.
+The key detail: there's no `allow_insecure=True` parameter. The runtime will only join the mesh if it has valid credentials, which is what makes commissioning secure and meaningful.
+
+## Connect devices to the server
 
 You'll run three processes: two simulated robot arms and one Python client. Each needs its own terminal.
 
@@ -180,7 +182,9 @@ Replace `<tenant-slug>` with the slug from the portal.
 
 For each process, `NATS_URL` points at the hosted NATS server and `NATS_CREDENTIALS_FILE` selects the identity that process will use. The `--device-id` value must match the identity inside the credentials file.
 
-In terminal 1, start the first simulated robot arm:
+### Start the first robot arm (Terminal 1)
+
+Run the first robot arm with its credential file:
 
 ```bash
 NATS_CREDENTIALS_FILE=~/.device-connect/credentials/${TENANT}-device-001.creds.json \

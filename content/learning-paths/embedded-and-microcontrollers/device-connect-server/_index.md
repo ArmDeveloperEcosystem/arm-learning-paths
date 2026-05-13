@@ -4,7 +4,7 @@ title: Connect devices and AI agents using Device Connect server
 description: Learn how to connect devices and AI agents across networks using Device Connect server with NATS credentials, persistent device registry, and distributed state management.
 minutes_to_complete: 30
 
-who_is_this_for: This is a follow-on topic for developers who have a working Device Connect mesh and want to add a server layer on top. The server gives you a persistent device registry, distributed state, and security primitives (commissioning, ACLs) so you can operate a multi-network fleet from one place.
+who_is_this_for: This is for developers who have completed the [device-to-device Learning Path](/learning-paths/embedded-and-microcontrollers/device-connect-d2d/) and want to add a server layer to their Device Connect mesh. You'll learn to use persistent registry, distributed state, and security features (commissioning, ACLs) to operate a multi-network fleet. If you're new to Device Connect, start with the device-to-device Learning Path first.
 
 learning_objectives:
     - Understand what the Device Connect server adds on top of the edge SDK and when you'd reach for it
@@ -14,7 +14,7 @@ learning_objectives:
     - Connect a Strands AI agent to the same tenant
 
 prerequisites:
-    - Familiarity with the Device Connect edge SDK (the [device-to-device Learning Path](/learning-paths/embedded-and-microcontrollers/device-connect-d2d/) is a good starting point)
+    - Complete the [device-to-device Learning Path](/learning-paths/embedded-and-microcontrollers/device-connect-d2d/) to understand Device Connect edge SDK basics
     - An account on the [Device Connect portal](https://portal.deviceconnect.dev/)
     - Basic familiarity with Python and the command line
 
