@@ -19,7 +19,7 @@ NIST has standardized the following core PQC primitives to replace classical sch
 - ML-KEM (FIPS 203): a key encapsulation mechanism (KEM) for establishing shared secrets, replacing ECDH in protocols such as TLS
 - ML-DSA (FIPS 204): a digital signature algorithm for authentication and integrity, replacing ECDSA
 
-These algorithms are more demanding in terms of computation, memory, and code size than their classical counterparts, which makes evaluating them on real Cortex-M4 hardware non-trivial. In this Learning Path, you'll focus on KEM implementations.
+These algorithms demand more computation, memory, and code size than their classical counterparts, making evaluating them on real Cortex-M4 hardware non-trivial. In this Learning Path, you'll focus on KEM implementations.
 
 ## What pqm4 provides
 
