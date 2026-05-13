@@ -1,10 +1,10 @@
 ---
-title: Introduction to pqm4 and Post-Quantum Cryptography
+title: Understand pqm4 and Post-Quantum Cryptography
 weight: 2
 layout: learningpathall
 ---
 
-## What is pqm4?
+## What pqm4 is
 
 [pqm4](https://github.com/mupq/pqm4) is a benchmarking and implementation framework for post-quantum cryptography (PQC) on Arm Cortex-M4 microcontrollers. It provides optimized implementations of NIST-standardized algorithms, standardized benchmarks for cycle counts, stack usage, and code size, and a test harness for validating implementations against known test vectors.
 
@@ -12,14 +12,14 @@ pqm4 originated from the [PQCRYPTO](https://pqcrypto.eu.org) project and has bec
 
 ## Why post-quantum cryptography matters for embedded systems
 
-Classical public-key schemes such as RSA and elliptic curve cryptography will become insecure once sufficiently powerful quantum computers exist. Embedded devices are particularly exposed because they often remain deployed for 10 to 20 years, which is longer than the expected timeline for quantum threats to mature.
+Classical public-key schemes such as RSA and elliptic curve cryptography will become insecure after sufficiently powerful quantum computers exist. Embedded devices are particularly exposed because they often remain deployed for 10 to 20 years, which is longer than the expected timeline for quantum threats to mature.
 
 NIST has standardized two core PQC primitives to replace classical schemes:
 
 - ML-KEM (FIPS 203): a key encapsulation mechanism (KEM) for establishing shared secrets, replacing ECDH in protocols such as TLS
 - ML-DSA (FIPS 204): a digital signature algorithm for authentication and integrity, replacing ECDSA
 
-These algorithms are significantly more demanding in terms of computation, memory, and code size than their classical counterparts, which makes evaluating them on real Cortex-M4 hardware non-trivial. This Learning Path focuses on KEM implementations.
+These algorithms are more demanding in terms of computation, memory, and code size than their classical counterparts, which makes evaluating them on real Cortex-M4 hardware non-trivial. In this Learning Path, you'll focus on KEM implementations.
 
 ## What pqm4 provides
 
@@ -40,4 +40,8 @@ pqm4 includes schemes that are:
 - Part of the first round of additional signatures of the NIST PQC standardization process
 - Part of the second round of the KpqC competition, a Korean national PQC standardization effort running in parallel to NIST
 
-In the next section, you'll set up the development environment needed to build and run pqm4 on your Cortex-M4 board or in QEMU.
+## What you've learned and what's next
+
+You've now learned what pqm4 is, why post-quantum cryptography matters for long-lived embedded devices, and how pqm4 helps evaluate PQC implementations on Arm Cortex-M4 microcontrollers. You also reviewed the main NIST-standardized algorithms and the types of schemes included in the pqm4 framework.
+
+Next, you'll set up the development environment needed to build and run pqm4 on your Cortex-M4 board or in QEMU.

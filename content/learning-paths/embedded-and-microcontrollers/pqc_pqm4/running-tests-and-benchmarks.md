@@ -7,11 +7,11 @@ weight: 4
 layout: learningpathall
 ---
 
-## Overview
+## Understand generated pqm4 binaries
 
-After building pqm4, a set of binaries is generated for each scheme and implementation. These binaries let you verify correctness, measure performance, and analyze resource usage on your Cortex-M4 board or in QEMU.
+After building pqm4, a set of binaries is generated for each scheme and implementation. You can use these binaries to verify correctness, measure performance, and analyze resource usage on your Cortex-M4 board or in QEMU.
 
-Before running any Python scripts on this page, make sure your virtual environment is active:
+Before running any Python scripts in this section, make sure your virtual environment is active:
 
 ```bash
 source venv/bin/activate
@@ -38,7 +38,9 @@ The `<type>` field identifies what the binary measures. The sections below expla
 
 How you run a binary depends on whether you are using a physical board or QEMU.
 
-**Physical board:** flash the binary and read the serial output.
+### Physical board
+
+Flash the binary and read the serial output.
 
 Flash the binary:
 
@@ -54,7 +56,9 @@ python3 hostside/host_unidirectional.py
 
 Press the RESET button on the board to trigger execution and see the output.
 
-**QEMU:** run the corresponding ELF file directly.
+### QEMU
+
+Run the corresponding ELF file directly.
 
 ```bash
 qemu-system-arm -M mps2-an386 -nographic -semihosting -kernel elf/<binary_name>.elf
@@ -64,15 +68,23 @@ To exit QEMU, press `Ctrl+A` then `X`.
 
 ## Binary types
 
+The following types of binaries are generated after building pqm4.
+
 ### Test binary
 
-The test binary verifies that a scheme works correctly end to end. For ML-KEM-768 on a physical board:
+The test binary verifies that a scheme works correctly end to end.
+
+#### Physical board
+
+Flash the ML-KEM-768 test binary on a physical board:
 
 ```bash
 st-flash write bin/crypto_kem_ml-kem-768_m4fspeed_test.bin 0x8000000
 ```
 
-On QEMU:
+#### QEMU
+
+Run the ML-KEM-768 test binary on QEMU:
 
 ```bash
 qemu-system-arm -M mps2-an386 -nographic -semihosting -kernel elf/crypto_kem_ml-kem-768_m4fspeed_test.elf
@@ -80,7 +92,7 @@ qemu-system-arm -M mps2-an386 -nographic -semihosting -kernel elf/crypto_kem_ml-
 
 It generates a keypair, performs encapsulation and decapsulation, and checks that both sides derive the same shared secret. It also tests failure cases such as an invalid secret key or invalid ciphertext.
 
-The output is similar to:
+The output after running the binary is similar to:
 
 ```output
 ==========================
@@ -102,19 +114,25 @@ OK invalid ciphertext
 
 ### Speed binary
 
-The speed binary measures execution time in CPU cycles for each operation. For ML-KEM-768 on a physical board:
+The speed binary measures execution time in CPU cycles for each operation.
+
+#### Physical board
+
+Flash the ML-KEM-768 speed binary on a physical board:
 
 ```bash
 st-flash write bin/crypto_kem_ml-kem-768_m4fspeed_speed.bin 0x8000000
 ```
 
-On QEMU:
+#### QEMU
+
+Run the ML-KEM-768 speed binary on QEMU:
 
 ```bash
 qemu-system-arm -M mps2-an386 -nographic -semihosting -kernel elf/crypto_kem_ml-kem-768_m4fspeed_speed.elf
 ```
 
-The output is similar to:
+The output after running the binary is similar to:
 
 ```output
 ==========================
@@ -131,19 +149,25 @@ decaps cycles:
 
 ### Hashing binary
 
-The hashing binary measures how many cycles are spent in symmetric primitives such as SHA-2, SHA-3, and AES. This shows how much of the overall algorithm cost comes from hashing. For ML-KEM-768 on a physical board:
+The hashing binary measures how many cycles are spent in symmetric primitives such as SHA-2, SHA-3, and AES. This shows how much of the overall algorithm cost comes from hashing.
+
+#### Physical board
+
+Flash the ML-KEM-768 hashing binary on a physical board:
 
 ```bash
 st-flash write bin/crypto_kem_ml-kem-768_m4fspeed_hashing.bin 0x8000000
 ```
 
-On QEMU:
+#### QEMU
+
+Run the ML-KEM-768 hashing binary on QEMU:
 
 ```bash
 qemu-system-arm -M mps2-an386 -nographic -semihosting -kernel elf/crypto_kem_ml-kem-768_m4fspeed_hashing.elf
 ```
 
-The output is similar to:
+The output after running the binary is similar to:
 
 ```output
 ==========================
@@ -160,19 +184,25 @@ decaps hash cycles:
 
 ### Stack binary
 
-The stack binary measures peak stack memory usage for each operation. For ML-KEM-768 on a physical board:
+The stack binary measures peak stack memory usage for each operation.
+
+#### Physical board
+
+Flash the ML-KEM-768 stack binary on a physical board:
 
 ```bash
 st-flash write bin/crypto_kem_ml-kem-768_m4fspeed_stack.bin 0x8000000
 ```
 
-On QEMU:
+#### QEMU
+
+Run the ML-KEM-768 stack binary on QEMU:
 
 ```bash
 qemu-system-arm -M mps2-an386 -nographic -semihosting -kernel elf/crypto_kem_ml-kem-768_m4fspeed_stack.elf
 ```
 
-The output is similar to:
+The output after running the binary is similar to:
 
 ```output
 ==========================
@@ -188,20 +218,24 @@ decaps stack usage:
 ```
 
 {{% notice Note %}}
-Stack measurement may not work correctly on some boards due to platform-specific memory layout. Memory allocated outside functions, such as public keys and ciphertexts, is not included in these measurements.
+Stack measurement might not work correctly on some boards due to platform-specific memory layout. Memory allocated outside functions, such as public keys and ciphertexts, is not included in these measurements.
 {{% /notice %}}
 
 ### Test vectors binary
 
 The test vectors binary generates deterministic test vectors using a fixed random seed. These are used to validate correctness and compare different implementations against each other.
 
-On a physical board:
+#### Physical board
+
+Flash the ML-KEM-768 test vectors binary on a physical board:
 
 ```bash
 st-flash write bin/crypto_kem_ml-kem-768_m4fspeed_testvectors.bin 0x8000000
 ```
 
-On QEMU:
+#### QEMU
+
+Run the ML-KEM-768 test vectors binary on QEMU:
 
 ```bash
 qemu-system-arm -M mps2-an386 -nographic -semihosting -kernel elf/crypto_kem_ml-kem-768_m4fspeed_testvectors.elf
@@ -209,7 +243,7 @@ qemu-system-arm -M mps2-an386 -nographic -semihosting -kernel elf/crypto_kem_ml-
 
 To compare the on-device vectors against host-generated reference vectors, use the `testvectors.py` script described in the automated testing section.
 
-## Automated testing and benchmarking
+## Use scripts to automate testing and benchmarking
 
 pqm4 includes Python scripts that automate flashing, running, and checking results across multiple implementations.
 
@@ -217,19 +251,23 @@ pqm4 includes Python scripts that automate flashing, running, and checking resul
 
 The `test.py` script flashes the test binary, runs it on the board, and checks correctness automatically.
 
-For ML-KEM-768 on NUCLEO-L476RG:
+#### NUCLEO-L476RG
+
+Run functional tests on NUCLEO-L476RG:
 
 ```bash
 python3 test.py -p nucleo-l476rg --uart /dev/tty.usbmodemXXXX ml-kem-768
 ```
 
-For ML-KEM-768 on QEMU:
+#### QEMU
+
+Run functional tests on QEMU:
 
 ```bash
 python3 test.py -p mps2-an386 ml-kem-768
 ```
 
-The output is similar to:
+The output after running functional tests is similar to:
 
 ```output
 ml-kem-768 - m4fspeed SUCCESSFUL
@@ -242,19 +280,23 @@ test: 100%|#############################################| 3/3 [00:12<00:00,  4.2
 
 The `testvectors.py` script generates test vectors on the board and compares them with host-side results.
 
-For NUCLEO-L476RG:
+#### NUCLEO-L476RG
+
+Run test vector validation on NUCLEO-L476RG:
 
 ```bash
 python3 testvectors.py -p nucleo-l476rg --uart /dev/tty.usbmodemXXXX ml-kem-768
 ```
 
-For QEMU:
+#### QEMU
+
+Run test vector validation on QEMU:
 
 ```bash
 python3 testvectors.py -p mps2-an386 ml-kem-768
 ```
 
-The output is similar to:
+The output after running test vector validation is similar to:
 
 ```output
 ml-kem-768 - m4fspeed SUCCESSFUL
@@ -267,19 +309,23 @@ test: 100%|#############################################| 3/3 [00:12<00:00,  4.2
 
 The `benchmarks.py` script runs speed and stack benchmarks and stores the results in a `benchmarks/` directory.
 
-For NUCLEO-L476RG:
+#### NUCLEO-L476RG
+
+Run benchmarks on NUCLEO-L476RG:
 
 ```bash
 python3 benchmarks.py -p nucleo-l476rg --uart /dev/tty.usbmodemXXXX ml-kem-768
 ```
 
-For QEMU:
+#### QEMU
+
+Run benchmarks on QEMU:
 
 ```bash
 python3 benchmarks.py -p mps2-an386 ml-kem-768
 ```
 
-The output is similar to:
+The output of running benchmarks is similar to:
 
 ```output
 speed:  33%|################              | 1/3 [00:20<00:40, 20.00s/it, ml-kem-768 - m4fspeed]
@@ -291,8 +337,8 @@ Results are saved to `benchmarks.csv`. The screenshot shows an example of the be
 
 ![Screenshot of benchmarks.csv showing cycle counts and stack usage for ML-KEM-768 implementations including the m4fspeed, m4fstack, and clean variants#center](./benchmarks.png "Example benchmark results for ML-KEM-768")
 
-## Summary
+## What you've accomplished and what's next
 
 You've now run functional tests, measured cycle counts and stack usage, and validated test vectors for a post-quantum KEM on Arm Cortex-M4. You can apply the same steps to any scheme included in pqm4 by substituting the scheme name in the binary path or script arguments.
 
-In the next section, you'll learn how to add a new cryptographic scheme or implementation to the pqm4 framework.
+Next, you'll learn how to add a new cryptographic scheme or implementation to the pqm4 framework.
