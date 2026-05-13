@@ -255,4 +255,4 @@ Communication with QEMU is covered in the next section.
 
 You've now installed the Arm GNU Toolchain, installed required Python dependencies, and cloned the pqm4 repository. You've also set up either a physical Arm Cortex-M4 development board or QEMU to build and run pqm4.
 
-Next, you'll run the pqm4 test suite and benchmarks to measure the performance of post-quantum algorithms on your Cortex-M4 board.
+Next, you'll run the pqm4 test suite and benchmarks to measure the performance of post-quantum algorithms.
