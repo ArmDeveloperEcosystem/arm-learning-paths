@@ -1,11 +1,7 @@
 ---
-title: Build Computer Vision Pipelines with OpenCV on Google Cloud C4A Axion VM
+title: Build computer vision pipelines with OpenCV on a Google Cloud C4A Axion VM
 description: Deploy and run OpenCV-based computer vision pipelines on Google Cloud Axion C4A Arm-based VMs, covering image processing, video pipelines, browser-based visualization, and integration with machine learning models.
-
-draft: true
-cascade:
-    draft: true
-    
+  
 minutes_to_complete: 45
 
 who_is_this_for: This is an introductory topic for DevOps engineers, software developers, and AI practitioners who want to build and run computer vision pipelines on SUSE Linux Enterprise Server (SLES) Arm64 using OpenCV, process images and videos, visualize outputs in real time, and integrate ML models.
