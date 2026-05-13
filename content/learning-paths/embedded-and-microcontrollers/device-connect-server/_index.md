@@ -1,13 +1,10 @@
 ---
-title: Connect Devices and AI agents through Device Connect Server
+title: Deploy multi-network device meshes using Device Connect server and NATS
 
-draft: true
-cascade:
-    draft: true
-
+description: Connect devices and AI agents across networks using Device Connect server. Learn to provision NATS credentials, commission devices, manage persistent registry, and orchestrate multi-network IoT fleets with secure authentication.
 minutes_to_complete: 30
 
-who_is_this_for: This is a follow-on topic for developers who have a working Device Connect mesh and want to add a server layer on top. The server gives you a persistent device registry, distributed state, and security primitives (commissioning, ACLs) so you can operate a multi-network fleet from one place.
+who_is_this_for: This Learning Path is for developers who have completed the Device-to-device Learning Path and want to add a server layer to their Device Connect mesh. You'll learn to use persistent registry, distributed state, and security features (commissioning, ACLs) to operate a multi-network fleet. If you're new to Device Connect, start with the device-to-device Learning Path first.
 
 learning_objectives:
     - Understand what the Device Connect server adds on top of the edge SDK and when you'd reach for it
@@ -17,7 +14,7 @@ learning_objectives:
     - Connect a Strands AI agent to the same tenant
 
 prerequisites:
-    - Familiarity with the Device Connect edge SDK (the [device-to-device Learning Path](/learning-paths/embedded-and-microcontrollers/device-connect-d2d/) is a good starting point)
+    - Complete the [Device-to-device Learning Path](/learning-paths/embedded-and-microcontrollers/device-connect-d2d/) to understand Device Connect edge SDK basics
     - An account on the [Device Connect portal](https://portal.deviceconnect.dev/)
     - Basic familiarity with Python and the command line
 
@@ -46,6 +43,14 @@ further_reading:
     - resource:
         title: device-connect-server package
         link: https://github.com/arm/device-connect/tree/main/packages/device-connect-server
+        type: documentation
+    - resource:
+        title: device-to-device Learning Path
+        link: /learning-paths/embedded-and-microcontrollers/device-connect-d2d/
+        type: website
+    - resource:
+        title: NATS documentation
+        link: https://docs.nats.io/
         type: documentation
 
 ### FIXED, DO NOT MODIFY
