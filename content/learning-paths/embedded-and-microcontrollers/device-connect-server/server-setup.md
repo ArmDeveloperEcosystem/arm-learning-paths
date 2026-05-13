@@ -118,7 +118,7 @@ class RobotArmDriver(DeviceDriver):
 
     @rpc()
     async def move_to(self, x: float, y: float, z: float) -> dict:
-        # pretend to physically traverse to the target
+        # Simulate physical movement with a short delay
         await asyncio.sleep(random.uniform(0.2, 0.6))
         self._position = {"x": x, "y": y, "z": z}
         await self.motion_completed(target=self._position)
@@ -126,6 +126,7 @@ class RobotArmDriver(DeviceDriver):
 
     @rpc()
     async def home(self) -> dict:
+        # Return to origin position
         return await self.move_to(0.0, 0.0, 0.0)
 
     @rpc()
@@ -142,6 +143,7 @@ async def main():
     parser.add_argument("--device-id", required=True)
     args = parser.parse_args()
 
+    # No allow_insecure=True - the runtime requires valid credentials
     runtime = DeviceRuntime(driver=RobotArmDriver(), device_id=args.device_id)
     await runtime.run()
 
@@ -158,9 +160,9 @@ You'll run three processes: two simulated robot arms and one Python client. Each
 
 | Terminal | Purpose | Credential |
 |----------|---------|------------|
-| 1 | First simulated robot arm | `${TENANT}-device-001.creds.json` |
-| 2 | Second simulated robot arm | `${TENANT}-device-002.creds.json` |
-| 3 | Python client or AI agent | `${TENANT}-device-003.creds.json` |
+| 1 | First robot arm | `${TENANT}-device-001.creds.json` |
+| 2 | Second robot arm | `${TENANT}-device-002.creds.json` |
+| 3 | Python client | `${TENANT}-device-003.creds.json` |
 
 ### Configure each terminal
 
