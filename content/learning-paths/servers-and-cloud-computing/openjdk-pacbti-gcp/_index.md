@@ -18,6 +18,7 @@ learning_objectives:
 
 prerequisites:
     - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
+    - Optionally, [install the gcloud CLI](/install-guides/gcloud/) to connect to the VM from a local terminal instead of using the browser-based SSH
 
 author: Doug Anson
 
@@ -40,19 +41,19 @@ operatingsystems:
 
 further_reading:
   - resource:
-      title: Google Cloud documentation
-      link: https://cloud.google.com/docs
+      title: Understand Arm Pointer Authentication
+      link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/pac/
+      type: website
+  - resource:
+      title: Google Axion C4A machine series
+      link: https://cloud.google.com/compute/docs/general-purpose-machines#c4a_series
       type: documentation
   - resource:
-      title: OpenJDK build documentation
-      link: https://openjdk.org/groups/build/doc/building.html
+      title: OpenJDK 17 project page
+      link: https://openjdk.org/projects/jdk/17/
       type: documentation
   - resource:
-      title: OpenJDK source repository
-      link: https://github.com/openjdk/jdk
-      type: documentation
-  - resource:
-      title: Arm "Arm64" machine instruction reference
+      title: Arm A64 instruction set architecture reference
       link: https://developer.arm.com/documentation/100076/latest/
       type: documentation
 

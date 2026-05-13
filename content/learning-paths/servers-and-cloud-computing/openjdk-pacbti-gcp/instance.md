@@ -16,25 +16,22 @@ For general guidance on setting up a Google Cloud account and project, see the L
 
 ## Provision a Google Axion C4A VM in the Google Cloud Console
 
-To create a VM using the C4A instance type:
+Open the [Google Cloud Console](https://console.cloud.google.com/) and go to **Compute Engine** > **VM instances**, then select **Create instance**. Give the instance a name, and choose your preferred **Region** and **Zone**.
 
-- Open the [Google Cloud Console](https://console.cloud.google.com/).
-- Go to **Compute Engine** > **VM instances**, and then select **Create instance**.
-- Under **Machine configuration**:
-  - Specify an **Instance name**, **Region**, and **Zone**.
-  - Set **Series** to **C4A**.
-  - Select **c4a-standard-4** as the machine type.
+Under **Machine configuration**, set the series and machine type:
+
+- Set **Series** to **C4A**
+- Set **Machine type** to **c4a-standard-4**
 
 ![Google Cloud Console VM creation page showing the C4A series and c4a-standard-4 machine type selection. Use this screen to confirm you are creating an Arm-based C4A instance.#center](images/gcp-vm.png "Creating a Google Axion C4A VM in the Google Cloud Console")
 
-- Under **OS and storage**, select **Change**, and then choose an Arm64-based operating system image.
-  - For this Learning Path, select **SUSE Linux Enterprise Server**.
-  - For the license type, choose **Pay as you go**.
-  - Select **Select** to apply the changes.
-- Under **Networking**, enable **Allow HTTP traffic** and **Allow HTTPS traffic**.
-- Select **Create** to launch the virtual machine.
+Under **OS and storage**, select **Change** and choose an Arm64-based image. For this Learning Path, select **SUSE Linux Enterprise Server** with the **Pay as you go** license type, then select **Select** to apply.
 
-After the instance starts, click **SSH** next to the VM in the instance list to open a browser-based terminal session.
+Under **Networking**, enable **Allow HTTP traffic** and **Allow HTTPS traffic**, then select **Create** to launch the VM.
+
+After the instance starts, select **SSH** next to the VM in the instance list to open a browser-based terminal session. 
+
+Alternatively, if you have the [gcloud CLI](/install-guides/gcloud/) installed, you can connect from a local terminal using `gcloud`. From the **SSH** drop down, select `View gcloud command` and run that command from your terminal. 
 
 ![Google Cloud Console VM instances list showing the SSH button for a running C4A instance. Use SSH to open a terminal session on the new VM.#center](images/gcp-ssh.png "Connecting to a running C4A VM using SSH")
 
@@ -44,4 +41,4 @@ A new browser window opens with a terminal connected to your VM.
 
 ## What you've learned and what's next
 
-In this section, you created a Google Cloud C4A virtual machine and opened an SSH session to the VM. Next, you will install OpenJDK and prepare the PAC/BTI validation script. Next, install the OpenJDK JVM on your VM.
+In this section, you created a Google Cloud C4A virtual machine and opened an SSH session to the VM. Next, you'll install OpenJDK and run the PAC/BTI validation script.
