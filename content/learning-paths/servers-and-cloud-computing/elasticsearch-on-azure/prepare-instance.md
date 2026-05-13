@@ -12,7 +12,7 @@ In this section, you prepare your Cobalt 100 virtual machine for Elasticsearch a
 
 ## Prepare the virtual machine
 
-Start by updating the virtual machine and installing required dependencies.
+Start by updating the package index and installing the system dependencies. This includes `openjdk-21-jdk`, which Elasticsearch requires, and `apt-transport-https`, `ca-certificates`, and `software-properties-common`, which are needed to add external package repositories in the next step:
 
 ```bash
 sudo apt update
@@ -20,16 +20,33 @@ sudo apt install -y build-essential net-tools curl wget python3-dev python3-venv
 sudo apt -y dist-upgrade
 sudo apt -y autoremove
 sudo apt -y autoclean
+```
+
+ESRally requires Python 3.10. Ubuntu 24.04 ships with Python 3.12 by default, which ESRally does not support. The `deadsnakes` PPA provides older Python versions for Ubuntu and lets you install Python 3.10 alongside the system default without replacing it.
+
+Add the deadsnakes PPA and install Python 3.10:
+
+```bash
 sudo add-apt-repository -y ppa:deadsnakes/ppa
 sudo apt update
 sudo apt install -y python3.10-dev python3.10 python3.10-venv
+```
+
+Create a dedicated virtual environment for ESRally named `rally` using Python 3.10, then add two lines to `.bashrc` so both the virtual environment and the `JAVA21_HOME` variable are available in every new shell session. ESRally uses `JAVA21_HOME` to locate the correct JDK at runtime:
+
+```bash
 python3.10 -m venv rally
 echo "source $HOME/rally/bin/activate" >> $HOME/.bashrc
 echo "export JAVA21_HOME=/usr/lib/jvm/java-21-openjdk-arm64" >> $HOME/.bashrc
-sudo reboot
 ```
 
-Open a new SSH shell and confirm that Java is available and points to OpenJDK 21.
+Reload your shell configuration to activate the `rally` virtual environment and set the `JAVA21_HOME` environment variable:
+
+```bash
+source $HOME/.bashrc
+```
+
+Confirm that Java is available and points to OpenJDK 21.
 
 ```bash
 which java
@@ -48,7 +65,7 @@ OpenJDK 64-Bit Server VM (build 21.0.10+7-Ubuntu-124.04, mixed mode, sharing)
 
 ## Install Elasticsearch and ESRally
 
-Now install Elasticsearch from the official package repository, then install ESRally into the virtual environment.
+Add the Elastic APT package repository and install Elasticsearch. The first command imports the Elastic GPG signing key so `apt` can verify package authenticity. The second registers the Elastic 9.x repository. After installation, enable the service so it starts automatically on reboot, then start it now:
 
 ```bash
 curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
@@ -56,11 +73,16 @@ echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://arti
 sudo apt update && sudo apt install elasticsearch -y
 sudo systemctl enable elasticsearch
 sudo systemctl start elasticsearch
+```
+
+With Elasticsearch running, install ESRally into the active `rally` virtual environment:
+
+```bash
 pip install --upgrade pip
 pip install esrally
 ```
 
-Confirm that Elasticsearch is installed and running.
+Confirm that Elasticsearch is installed and running:
 
 ```bash
 sudo systemctl status elasticsearch
@@ -80,7 +102,7 @@ elasticsearch.service - Elasticsearch
      CGroup: /system.slice/elasticsearch.service
 ```
 
-Confirm that ESRally is installed.
+Confirm that ESRally is installed:
 
 ```bash
 esrally --version
@@ -91,6 +113,20 @@ Output should be similar to:
 ```output
 esrally 2.13.0
 ```
+
+Note the Elasticsearch version your instance is running, as you'll need it in the next section. Elasticsearch 9.x enables HTTPS and authentication by default, so a plain HTTP request to `localhost:9200` returns an HTML redirect rather than JSON. Check the installed package version instead:
+
+```bash
+dpkg -l elasticsearch | grep elasticsearch
+```
+
+The output shows the installed package version in the third column, for example:
+
+```output
+ii  elasticsearch  9.4.0  arm64  Distributed RESTful search engine built for the cloud
+```
+
+Use this version value for the `--distribution-version` flag when running ESRally.
 
 ## What you've learned and what's next
 
