@@ -7,7 +7,7 @@ weight: 5
 layout: learningpathall
 ---
 
-## Understand how pqm4 adds schemes
+## Understand schemes in pqm4
 
 pqm4 ships with a curated set of NIST-standardized schemes, but you can extend it with additional algorithms. You might want to do this to evaluate an experimental scheme, test a custom Cortex-M4 assembly optimization, or contribute a new implementation to the community.
 
