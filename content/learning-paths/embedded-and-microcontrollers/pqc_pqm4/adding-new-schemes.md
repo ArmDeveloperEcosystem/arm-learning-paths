@@ -91,7 +91,7 @@ int crypto_kem_dec(unsigned char *ss, const unsigned char *ct, const unsigned ch
 
 Clean and rebuild pqm4 with your target platform.
 
-### Physical board
+#### Physical board
 
 To clean and rebuild pqm4 on a physical board:
 
@@ -100,7 +100,7 @@ make clean
 make -j4 PLATFORM=nucleo-l476rg
 ```
 
-### QEMU
+#### QEMU
 
 To clean and rebuild pqm4 on QEMU:
 
