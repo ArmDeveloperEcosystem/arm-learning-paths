@@ -129,7 +129,7 @@ crypto_kem_newhope512cpa_m4_testvectors.elf
 
 Make sure your virtual environment is active, then run the automated test script to verify correctness.
 
-### Physical board
+#### Physical board
 
 Run the automated test script on a physical board:
 
@@ -137,7 +137,7 @@ Run the automated test script on a physical board:
 python3 test.py -p nucleo-l476rg --uart /dev/tty.usbmodemXXXX newhope512cpa
 ```
 
-### QEMU
+#### QEMU
 
 Run the automated test script on QEMU:
 
