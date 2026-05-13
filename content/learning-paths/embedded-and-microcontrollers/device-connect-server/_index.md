@@ -14,7 +14,7 @@ learning_objectives:
     - Connect a Strands AI agent to the same tenant
 
 prerequisites:
-    - Complete the [device-to-device Learning Path](/learning-paths/embedded-and-microcontrollers/device-connect-d2d/) to understand Device Connect edge SDK basics
+    - Complete the [Device-to-device Learning Path](/learning-paths/embedded-and-microcontrollers/device-connect-d2d/) to understand Device Connect edge SDK basics
     - An account on the [Device Connect portal](https://portal.deviceconnect.dev/)
     - Basic familiarity with Python and the command line
 
