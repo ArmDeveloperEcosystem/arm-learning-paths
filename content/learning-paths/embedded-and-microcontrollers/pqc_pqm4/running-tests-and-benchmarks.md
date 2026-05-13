@@ -1,5 +1,5 @@
 ---
-title: Running Tests and Benchmarks with pqm4
+title: Run tests and benchmarks
 
 weight: 4
 
@@ -7,33 +7,82 @@ weight: 4
 layout: learningpathall
 ---
 
-### Testing and Benchmarking
+## Overview
 
-After building pqm4, multiple binaries are generated for each scheme and implementation.  
-These binaries are used to verify correctness, measure performance, and analyze resource usage.
+After building pqm4, a set of binaries is generated for each scheme and implementation. These binaries let you verify correctness, measure performance, and analyze resource usage on your Cortex-M4 board or in QEMU.
 
-For example, for a KEM such as **ML-KEM-768**, the following binaries are generated: 
-
-#### 1. Test Binary
+Before running any Python scripts on this page, make sure your virtual environment is active:
 
 ```bash
-bin/crypto_kem_ml-kem-768_m4_test.bin
+source venv/bin/activate
 ```
-This binary verifies that the scheme works correctly.
 
-For KEMs:
-* Generates a keypair
-* Performs encapsulation
-* Performs decapsulation
-* Verifies that both parties derive the same shared secret
+For example, building ML-KEM-768 produces binaries with names in this pattern:
 
-It also checks failure cases such as :
-* invalid secret key
-* invalid ciphertext
+```output
+bin/crypto_kem_ml-kem-768_<impl>_<type>.bin
+```
 
-Expected Output :
+The `<impl>` field identifies the implementation variant. The exact suffix depends on the scheme:
 
-```python
+- `m4fspeed`: Cortex-M4F implementation optimized for speed (used by ML-KEM)
+- `m4fstack`: Cortex-M4F implementation optimized for stack size (used by ML-KEM)
+- `m4f`: Cortex-M4F implementation (used by some schemes such as BIKE)
+- `clean`: clean reference implementation from PQClean
+
+The `clean` variant uses a different file prefix: `mupq_pqclean_crypto_kem_<scheme>_clean_<type>.elf`
+
+The `<type>` field identifies what the binary measures. The sections below explain each type.
+
+## Flash and run a binary
+
+How you run a binary depends on whether you are using a physical board or QEMU.
+
+**Physical board:** flash the binary and read the serial output.
+
+Flash the binary:
+
+```bash
+st-flash write bin/<binary_name>.bin 0x8000000
+```
+
+Read the output from the board:
+
+```bash
+python3 hostside/host_unidirectional.py
+```
+
+Press the RESET button on the board to trigger execution and see the output.
+
+**QEMU:** run the corresponding ELF file directly.
+
+```bash
+qemu-system-arm -M mps2-an386 -nographic -semihosting -kernel elf/<binary_name>.elf
+```
+
+To exit QEMU, press `Ctrl+A` then `X`.
+
+## Binary types
+
+### Test binary
+
+The test binary verifies that a scheme works correctly end to end. For ML-KEM-768 on a physical board:
+
+```bash
+st-flash write bin/crypto_kem_ml-kem-768_m4fspeed_test.bin 0x8000000
+```
+
+On QEMU:
+
+```bash
+qemu-system-arm -M mps2-an386 -nographic -semihosting -kernel elf/crypto_kem_ml-kem-768_m4fspeed_test.elf
+```
+
+It generates a keypair, performs encapsulation and decapsulation, and checks that both sides derive the same shared secret. It also tests failure cases such as an invalid secret key or invalid ciphertext.
+
+The output is similar to:
+
+```output
 ==========================
 DONE key pair generation!
 DONE encapsulation!
@@ -51,21 +100,23 @@ OK invalid ciphertext
 #
 ```
 
-#### 2. Speed Binary
+### Speed binary
+
+The speed binary measures execution time in CPU cycles for each operation. For ML-KEM-768 on a physical board:
 
 ```bash
-bin/crypto_kem_ml-kem-768_m4_speed.bin
+st-flash write bin/crypto_kem_ml-kem-768_m4fspeed_speed.bin 0x8000000
 ```
-This binary measures execution time (in CPU cycles) for :
-* crypto_kem_keypair
-* crypto_kem_enc
-* crypto_kem_dec
 
-This is used to evaluate performance on embedded hardware.
+On QEMU:
 
-Expected Output : 
+```bash
+qemu-system-arm -M mps2-an386 -nographic -semihosting -kernel elf/crypto_kem_ml-kem-768_m4fspeed_speed.elf
+```
 
-```python
+The output is similar to:
+
+```output
 ==========================
 keypair cycles:
 123456
@@ -78,21 +129,23 @@ decaps cycles:
 =
 ```
 
-#### 3. Hashing Binary
+### Hashing binary
+
+The hashing binary measures how many cycles are spent in symmetric primitives such as SHA-2, SHA-3, and AES. This shows how much of the overall algorithm cost comes from hashing. For ML-KEM-768 on a physical board:
 
 ```bash
-bin/crypto_kem_ml-kem-768_m4_hashing.bin
+st-flash write bin/crypto_kem_ml-kem-768_m4fspeed_hashing.bin 0x8000000
 ```
-This measures how many cycles are spent in:
-* SHA-2
-* SHA-3
-* AES
 
-This helps analyze how much of the algorithm cost comes from symmetric cryptography.
+On QEMU:
 
-Expected Output :
+```bash
+qemu-system-arm -M mps2-an386 -nographic -semihosting -kernel elf/crypto_kem_ml-kem-768_m4fspeed_hashing.elf
+```
 
-```python
+The output is similar to:
+
+```output
 ==========================
 keypair hash cycles:
 50000
@@ -105,23 +158,23 @@ decaps hash cycles:
 =
 ```
 
-#### 4. Stack Binary
+### Stack binary
+
+The stack binary measures peak stack memory usage for each operation. For ML-KEM-768 on a physical board:
 
 ```bash
-bin/crypto_kem_ml-kem-768_m4_stack.bin
+st-flash write bin/crypto_kem_ml-kem-768_m4fspeed_stack.bin 0x8000000
 ```
-This measures stack memory usage of:
-* keypair
-* encapsulation
-* decapsulation
 
-Note: On some boards, stack measurement **may not work correctly** due to platform-specific memory layout.
+On QEMU:
 
-Note: Memory allocated outside functions (e.g., public keys, ciphertexts) is not included.
+```bash
+qemu-system-arm -M mps2-an386 -nographic -semihosting -kernel elf/crypto_kem_ml-kem-768_m4fspeed_stack.elf
+```
 
-Expected Output :
+The output is similar to:
 
-```python
+```output
 ==========================
 keypair stack usage:
 2048
@@ -134,153 +187,112 @@ decaps stack usage:
 #
 ```
 
-#### 5. Test Vectors Binary
+{{% notice Note %}}
+Stack measurement may not work correctly on some boards due to platform-specific memory layout. Memory allocated outside functions, such as public keys and ciphertexts, is not included in these measurements.
+{{% /notice %}}
+
+### Test vectors binary
+
+The test vectors binary generates deterministic test vectors using a fixed random seed. These are used to validate correctness and compare different implementations against each other.
+
+On a physical board:
 
 ```bash
-bin/crypto_kem_ml-kem-768_m4_testvectors.bin
+st-flash write bin/crypto_kem_ml-kem-768_m4fspeed_testvectors.bin 0x8000000
 ```
-This generates deterministic test vectors using a fixed random seed.
 
-These vectors are used to:
-* validate correctness
-* compare different implementations
-
-#### 6. Host Test Vectors
+On QEMU:
 
 ```bash
-bin-host/crypto_kem_ml-kem-768_m4_testvectors
+qemu-system-arm -M mps2-an386 -nographic -semihosting -kernel elf/crypto_kem_ml-kem-768_m4fspeed_testvectors.elf
 ```
 
-This runs on the host (PC) and generates the same deterministic test vectors for comparison.
+To compare the on-device vectors against host-generated reference vectors, use the `testvectors.py` script described in the automated testing section.
 
-### Running Binaries Manually 
+## Automated testing and benchmarking
 
-To test a binary on the board:
+pqm4 includes Python scripts that automate flashing, running, and checking results across multiple implementations.
 
-#### Flash the binary
+### Run functional tests
 
-```bash
-st-flash write bin/<binary_name>.bin 0x8000000
-```
+The `test.py` script flashes the test binary, runs it on the board, and checks correctness automatically.
 
-Example 
-
-```bash
-st-flash write bin/crypto_kem_ml-kem-768_m4_test.bin 0x8000000 
-```
-#### Read output from the board
-
-```bash
-python3 hostside/host_unidirectional.py
-```
-    note: Press the RESET button on the board to see the output.
-
-
-### Automated Testing and Benchmarking
-
-pqm4 provides Python scripts to automate testing and benchmarking.
-
-#### 1. Run Functional Tests
-
-```bash
-python3 test.py -p <platform> --uart <serial_port> <scheme>
-```
-
-Example for NUCLEO-L476RG Board : 
+For ML-KEM-768 on NUCLEO-L476RG:
 
 ```bash
 python3 test.py -p nucleo-l476rg --uart /dev/tty.usbmodemXXXX ml-kem-768
 ```
 
-This will:
-* **Flash** test binaries
-* **Run** them on the board
-* **Check** correctness automatically
-
-Expected Output :
-```python
-ml-kem-768 - m4fspeed SUCCESSFUL                                                                                                                                                                                                                                                                                                                                          
-ml-kem-768 - m4fstack SUCCESSFUL                                                                                                                                                                                                                                                                                                                                          
-ml-kem-768 - clean SUCCESSFUL                                                                                                                                                                                                                                                                                                                                             
-test: 100%|█████████████████████████████████████████████| 3/3 [00:12<00:00,  4.29s/it, ml-kem-768 - clean]
-
-```
-
-
-#### 2. Run Test Vectors
+For ML-KEM-768 on QEMU:
 
 ```bash
-python3 testvectors.py -p <platform> --uart <serial_port> <scheme>
+python3 test.py -p mps2-an386 ml-kem-768
 ```
-Example for NUCLEO-L476RG Board :
+
+The output is similar to:
+
+```output
+ml-kem-768 - m4fspeed SUCCESSFUL
+ml-kem-768 - m4fstack SUCCESSFUL
+ml-kem-768 - clean SUCCESSFUL
+test: 100%|#############################################| 3/3 [00:12<00:00,  4.29s/it, ml-kem-768 - clean]
+```
+
+### Run test vectors
+
+The `testvectors.py` script generates test vectors on the board and compares them with host-side results.
+
+For NUCLEO-L476RG:
 
 ```bash
 python3 testvectors.py -p nucleo-l476rg --uart /dev/tty.usbmodemXXXX ml-kem-768
 ```
-This will:
-* **generates** test vectors on the board
-* **compares** them with host-side results
 
-Expected Output :
-
-```python
-ml-kem-768 - m4fspeed SUCCESSFUL                                                                                                                                                                                                                                                                                                                                          
-ml-kem-768 - m4fstack SUCCESSFUL                                                                                                                                                                                                                                                                                                                                          
-ml-kem-768 - clean SUCCESSFUL   
-
-test: 100%|█████████████████████████████████████████████| 3/3 [00:12<00:00,  4.29s/it, ml-kem-768 - clean]
-```
-
-#### 2. Run Benchmarks
+For QEMU:
 
 ```bash
-python3 benchmarks.py -p <platform> --uart <serial_port> <scheme>
+python3 testvectors.py -p mps2-an386 ml-kem-768
 ```
-Example for NUCLEO-L476RG Board :
+
+The output is similar to:
+
+```output
+ml-kem-768 - m4fspeed SUCCESSFUL
+ml-kem-768 - m4fstack SUCCESSFUL
+ml-kem-768 - clean SUCCESSFUL
+test: 100%|#############################################| 3/3 [00:12<00:00,  4.29s/it, ml-kem-768 - clean]
+```
+
+### Run benchmarks
+
+The `benchmarks.py` script runs speed and stack benchmarks and stores the results in a `benchmarks/` directory.
+
+For NUCLEO-L476RG:
 
 ```bash
 python3 benchmarks.py -p nucleo-l476rg --uart /dev/tty.usbmodemXXXX ml-kem-768
 ```
-This will :
-* runs speed and stack benchmarks
-* stores results in **benchmarks/**
 
-Expected Output :
-
-```python
-speed:  33%|███████████████▍              | 1/3 [00:20<00:40, 20.00s/it, ml-kem-768 - m4fspeed]
-speed:  66%|██████████████████████████▊   | 2/3 [00:40<00:20, 20.00s/it, ml-kem-768 - m4fstack]
-speed: 100%|██████████████████████████████| 3/3 [01:00<00:00, 20.00s/it, ml-kem-768 - clean]
-```
-
-For most of the schemes there are multiple implementations. 
-The naming scheme for these implementations is as follows:
-
-- clean: clean reference implementation from PQClean,
-- ref: the reference implementation submitted to NIST (will be replaced by clean in the long term),
-- opt: an optimized implementation in plain C (e.g., the optimized implementation submitted to NIST),
-- m4: an implementation with Cortex-M4 specific optimizations (typically in assembly).
-- m4f: an implementation with Cortex-M4F specific optimizations (typically assembly using floating-point registers).
-
-Expected output of the benchmark results is stored in the **benchmarks.csv** file
-
-![benchmarks.csv](./benchmarks.png)
-
-Note : On some boards, stack measurement may not work correctly due to platform-specific memory layout.
-
-### Uisng QEMU(Optional)
-
-For the mps2-an386 platform, binaries can be executed in QEMU:
+For QEMU:
 
 ```bash
-qemu-system-arm -M mps2-an386 -nographic -semihosting -kernel elf/<binary>.elf
+python3 benchmarks.py -p mps2-an386 ml-kem-768
 ```
 
-Example : 
+The output is similar to:
 
-```bash
-qemu-system-arm -M mps2-an386 -nographic -semihosting -kernel elf/crypto_kem_ml-kem-512_m4_test.elf
+```output
+speed:  33%|################              | 1/3 [00:20<00:40, 20.00s/it, ml-kem-768 - m4fspeed]
+speed:  66%|###########################   | 2/3 [00:40<00:20, 20.00s/it, ml-kem-768 - m4fstack]
+speed: 100%|##############################| 3/3 [01:00<00:00, 20.00s/it, ml-kem-768 - clean]
 ```
 
-To exit QEMU :
-* Press Ctrl + A, then X
+Results are saved to `benchmarks.csv`. The screenshot shows an example of the benchmark output:
+
+![Screenshot of benchmarks.csv showing cycle counts and stack usage for ML-KEM-768 implementations including the m4fspeed, m4fstack, and clean variants#center](./benchmarks.png "Example benchmark results for ML-KEM-768")
+
+## Summary
+
+You've now run functional tests, measured cycle counts and stack usage, and validated test vectors for a post-quantum KEM on Arm Cortex-M4. You can apply the same steps to any scheme included in pqm4 by substituting the scheme name in the binary path or script arguments.
+
+In the next section, you'll learn how to add a new cryptographic scheme or implementation to the pqm4 framework.
