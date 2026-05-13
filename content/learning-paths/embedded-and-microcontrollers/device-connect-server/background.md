@@ -92,6 +92,8 @@ In the diagram, pub/sub means publish/subscribe, KV means key-value, LC means La
 └──────────────────┘     └──────────────────────┘     └─────────────────────┘
 ```
 
+*The Device Connect server acts as the central hub, routing messages and managing security between edge devices and AI agents.*
+
 Devices and agents still talk to each other through the same primitives (`@rpc`, `@emit`, `discover_devices`, `invoke_device`). The Device Connect server runs the publish/subscribe messaging, the persistent registry, the shared key-value store, and the security layer in one place.
 
 ### Real-world example: global device coordination
