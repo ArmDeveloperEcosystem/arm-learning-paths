@@ -6,9 +6,9 @@ weight: 3
 layout: learningpathall
 ---
 
-## Provision your tenant and download credentials
+## Provision your tenant and download NATS credentials
 
-### Setup of Device Connect portal
+### Set up your Device Connect portal account
 
 The Device Connect portal is operated by Arm as a hosted developer service for the open-source [Device Connect](https://github.com/arm/device-connect) framework. Signing in creates a private **tenant** for your account. A tenant is an isolated namespace on the shared Device Connect service: devices and agents commissioned to your tenant can discover and invoke each other, but other tenants can't see or use them.
 

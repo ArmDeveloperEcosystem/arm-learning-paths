@@ -1,5 +1,5 @@
 ---
-title: Understand Device Connect server capabilities
+title: Learn when to use Device Connect server for multi-network deployments
 weight: 2
 
 # FIXED, DO NOT MODIFY
@@ -72,9 +72,11 @@ Both answer the same question: is this identity allowed on this mesh?
 
 In this Learning Path, you'll use the [Device Connect portal](https://portal.deviceconnect.dev/) to download NATS credentials for three default identities on your tenant. Two identities will run simulated robot arms. The third identity will run the Python client or agent.
 
-## Architecture overview
+## Multi-network deployment architecture
 
 ### How components connect
+
+The Device Connect server acts as the central coordination point for devices and agents across different networks.
 
 In the diagram, pub/sub means publish/subscribe, KV means key-value, LC means LangChain, and MCP means Model Context Protocol.
 
@@ -90,7 +92,9 @@ In the diagram, pub/sub means publish/subscribe, KV means key-value, LC means La
 
 Devices and agents still talk to each other through the same primitives (`@rpc`, `@emit`, `discover_devices`, `invoke_device`). The Device Connect server runs the publish/subscribe messaging, the persistent registry, the shared key-value store, and the security layer in one place.
 
-The animation shows a complete workflow: a Device Connect server runs in Berlin, robot arms in San Francisco and Tokyo register with it using `device-connect-edge`, and an AI agent in Bangalore orchestrates both robots using `device-connect-agent-tools`. Every `invoke_device` call and event flows through the server, demonstrating how the server enables multi-network device coordination.
+### Real-world example: global device coordination
+
+The animation demonstrates a complete multi-network workflow: a Device Connect server runs in Berlin, robot arms in San Francisco and Tokyo register with it using `device-connect-edge`, and an AI agent in Bangalore orchestrates both robots using `device-connect-agent-tools`. Every `invoke_device` call and event flows through the server, demonstrating how the server enables secure, multi-network device coordination.
 
 <video width="100%" controls muted playsinline>
   <source src="https://raw.githubusercontent.com/kavya-chennoju/arm-learning-path-assets/main/videos/device-connect-server-overview.mp4" type="video/mp4">

@@ -1,7 +1,7 @@
 ---
-title: Connect devices and AI agents using Device Connect server
+title: Deploy multi-network device meshes using Device Connect server and NATS
 
-description: Learn how to connect devices and AI agents across networks using Device Connect server with NATS credentials, persistent device registry, and distributed state management.
+description: Connect devices and AI agents across networks using Device Connect server. Learn to provision NATS credentials, commission devices, manage persistent registry, and orchestrate multi-network IoT fleets with secure authentication.
 minutes_to_complete: 30
 
 who_is_this_for: This is for developers who have completed the [device-to-device Learning Path](/learning-paths/embedded-and-microcontrollers/device-connect-d2d/) and want to add a server layer to their Device Connect mesh. You'll learn to use persistent registry, distributed state, and security features (commissioning, ACLs) to operate a multi-network fleet. If you're new to Device Connect, start with the device-to-device Learning Path first.
