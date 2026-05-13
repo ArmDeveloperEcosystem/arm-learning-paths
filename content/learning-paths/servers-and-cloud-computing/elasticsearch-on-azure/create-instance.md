@@ -15,7 +15,7 @@ There are several common ways to create an Arm-based Cobalt 100 virtual machine,
 
 In this section, you will launch the Azure Portal to create a virtual machine with the Arm-based Azure Cobalt 100 processor.
 
-This Learning Path focuses on general-purpose virtual machines in the Dpsv6 series. For more information, see the [Microsoft Azure guide for the Epdsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/memory-optimized/epdsv6-series?tabs=sizebasic).
+This Learning Path uses a memory-optimized virtual machine in the Epdsv6 series. For more information, see the [Microsoft Azure guide for the Epdsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/memory-optimized/epdsv6-series?tabs=sizebasic).
 
 While the steps to create this instance are included here for convenience, you can also refer to the [Deploy a Cobalt 100 virtual machine on Azure Learning Path](/learning-paths/servers-and-cloud-computing/cobalt/).
 

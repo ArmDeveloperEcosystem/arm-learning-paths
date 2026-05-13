@@ -16,23 +16,25 @@ The geonames track is a general-purpose Elasticsearch workload based on the GeoN
 
 ## Run the benchmark
 
-Open an SSH shell on the virtual machine and run the benchmark command:
+Run the benchmark command from the virtual machine:
 
 ```bash
-esrally race --distribution-version=9.3.0 --track=geonames --kill-running-processes
+esrally race --distribution-version=9.4.0 --track=geonames --kill-running-processes
 ```
 
-The benchmark starts and runs through the geonames "racetrack".
+Replace `9.4.0` with the Elasticsearch version you confirmed in the previous section.
+
+By default, ESRally downloads and manages its own Elasticsearch process for the duration of the benchmark — it does not use the Elasticsearch instance you started with `systemctl`. The `--distribution-version` flag tells ESRally which Elasticsearch version to download and run. The `--kill-running-processes` flag stops any existing Elasticsearch processes before starting, including the one started by `systemctl`, so there is no port conflict on 9200.
 
 {{% notice Note %}}
-This benchmarking test will take 15-20 minutes to complete. Please do not interrupt or pause the benchmark because doing so will skew the results.
+This benchmarking test takes approximately 85-90 minutes to complete on an E4pds_v6 instance. Do not interrupt or pause the benchmark because doing so will skew the results.
 {{% /notice %}}
 
 ## Interpreting the benchmark results
 
-The following sample output shows a baseline geonames run on an Azure Cobalt 100 E4pds_v6 virtual machine. Indexing
-sustained about 27,530 docs/s with 0% errors, while common read-path workloads such as default search, term
-search, phrase search, and cached aggregation stayed in an excellent 3-4 ms p50 range. The system also completed
+The following sample output shows a baseline geonames run on an Azure Cobalt 100 E4pds_v6 virtual machine. Your results will be similar but may vary slightly depending on VM load, Elasticsearch version, and available memory. Indexing
+sustained a mean of about 61,054 docs/s with 0% errors, while common read-path workloads such as default search,
+term search, phrase search, and cached aggregation stayed in an excellent 3-4 ms p50 range. The system completed
 the run without any old-generation garbage collections, suggesting healthy JVM behavior under this benchmark. The
 main latency costs appeared in heavier workloads such as uncached aggregation, scroll, expression queries, and
 script-based scoring, which is consistent with Elasticsearch performance expectations for compute-intensive query
@@ -48,25 +50,18 @@ patterns.
 
 ## Key findings
 
-1. Indexing throughput averaged 27,530 docs/s and completed without reported errors.
-2. Common search workloads were consistently fast, with default, term, and phrase queries all clustered around 3-4
-ms p50 latency.
-3. Caching made a major difference for aggregation: cached country aggregation was about 32.7x faster than
-uncached at p50 latency.
-4. Scripted scoring remained expensive: field_value_script_score was about 1.33x slower than
-field_value_function_score at p50 latency, and painless_static was one of the slowest tasks in the run.
-5. Scroll and uncached aggregation were the most notable non-script latency costs at about 199 ms and 103 ms p50
-latency, respectively.
-6. JVM behavior looked stable because 844 young-generation collections consumed only 5.76 seconds total and
-there were no old-generation collections.
-7. Merge work totaled 5.76 minutes with 2.36 minutes of throttle time, indicating some ingest-side background
-pressure but not a throughput collapse.
-8. The final store footprint matched the dataset size at 2.68 GB, suggesting low additional storage overhead in this
-run.
+1. Indexing throughput averaged 61,054 docs/s (min 58,586 docs/s, max 64,191 docs/s) and completed with 0% errors.
+2. Common search workloads were consistently fast, with default, term, and phrase queries all clustered around 3-4 ms p50 latency.
+3. Caching made a major difference for aggregation: cached country aggregation was about 36.5x faster than uncached at p50 latency (2.88 ms vs 105.1 ms).
+4. Scripted scoring remained expensive: `field_value_script_score` was about 1.39x slower than `field_value_function_score` at p50 latency (197.8 ms vs 142.1 ms). `painless_static` was the slowest task in the run at 410.9 ms p50, slightly ahead of `painless_dynamic` at 384.9 ms p50.
+5. Scroll and uncached aggregation were the most notable non-script latency costs at about 222 ms and 105 ms p50 latency, respectively.
+6. JVM behavior looked stable: 983 young-generation collections consumed 6.40 seconds total and there were no old-generation collections.
+7. Merge work totaled 3.34 minutes with 1.25 minutes of throttle time, indicating some ingest-side background pressure but not a throughput collapse.
+8. The final store footprint matched the dataset size at 2.67 GB, suggesting low additional storage overhead in this run.
 
 ## Conclusions
 
-This benchmark result supports the view that Azure Cobalt 100 E4pds_v6 is capable of delivering strong Elasticsearch baseline performance for the geonames track, especially for ordinary search, sort, and cached aggregation paths. The run also suggests good operational stability under this workload because the benchmark completed successfully with zero errors, no old-generation GC, and sustained ingest throughput. The main practical limitation is query complexity: scripting, score computation, scroll, and uncached aggregation create a clear latency step-up relative to fast-path queries, so these workloads should be isolated, cached, or minimized when low latency matters.
+This benchmark result supports the view that Azure Cobalt 100 E4pds_v6 is capable of delivering strong Elasticsearch baseline performance for the geonames track, especially for ordinary search, sort, and cached aggregation paths. Indexing sustained over 61,000 docs/s on average with zero errors, and the JVM remained stable throughout with no old-generation collections. The main practical limitation is query complexity: scripting, score computation, scroll, and uncached aggregation create a clear latency step-up relative to fast-path queries, so these workloads should be isolated, cached, or minimized when low latency matters.
 
 ## What you've learned and what's next
 
