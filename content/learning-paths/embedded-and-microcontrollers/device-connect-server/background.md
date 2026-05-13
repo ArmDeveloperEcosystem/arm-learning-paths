@@ -1,5 +1,5 @@
 ---
-title: Why add a Device Connect server
+title: Understand Device Connect server capabilities
 weight: 2
 
 # FIXED, DO NOT MODIFY
@@ -26,7 +26,7 @@ The [`device-connect-server`](https://github.com/arm/device-connect/tree/main/pa
 
 ## What the server adds
 
-The server does not change how you write device code. Devices still use `DeviceDriver`, `@rpc`, `@emit`, `@periodic`, and `@on`. Clients and artificial intelligence (AI) agents still use `discover_devices()` and `invoke_device()`.
+The server doesn't change how you write device code. Devices still use `DeviceDriver`, `@rpc`, `@emit`, `@periodic`, and `@on`. Clients and AI agents still use `discover_devices()` and `invoke_device()`.
 
 The server changes how devices find and trust each other. In D2D mode, each runtime discovers nearby peers directly. With a server, every device and agent connects to a shared service.
 
@@ -38,7 +38,7 @@ That shared service gives you a few fleet-level building blocks:
 - **commissioning** so each device gets its own trusted credential
 - **security controls** such as Transport Layer Security (TLS), mutual TLS (mTLS), JSON Web Token (JWT) authentication, role-based access control, and audit logging
 
-Device Connect supports different messaging backends, including Zenoh, NATS, and Message Queuing Telemetry Transport (MQTT). In this Learning Path, you will use the hosted portal with NATS credentials. That lets you focus on the device and agent code instead of running the server yourself.
+Device Connect supports different messaging backends, including Zenoh, NATS, and Message Queuing Telemetry Transport (MQTT). In this Learning Path, you'll use the hosted portal with NATS credentials. That lets you focus on the device and agent code instead of running the server yourself.
 
 ## A note on commissioning
 
@@ -51,7 +51,7 @@ The credential format depends on the messaging backend:
 
 In both cases, the credential answers the same question: is this identity allowed on this mesh?
 
-In this Learning Path, you will use the [Device Connect portal](https://portal.deviceconnect.dev/) to download NATS credentials for three default identities on your tenant. Two identities will run simulated robot arms. The third identity will run the Python client or agent.
+In this Learning Path, you'll use the [Device Connect portal](https://portal.deviceconnect.dev/) to download NATS credentials for three default identities on your tenant. Two identities will run simulated robot arms. The third identity will run the Python client or agent.
 
 ## Where this sits in the architecture
 
@@ -67,9 +67,9 @@ In the diagram, pub/sub means publish/subscribe, KV means key-value, LC means La
 └──────────────────┘     └──────────────────────┘     └─────────────────────┘
 ```
 
-Devices and agents still talk to each other through the same primitives (`@rpc`, `@emit`, `discover_devices`, `invoke_device`). The Device Connect server runs the pub/sub messaging, the persistent registry, the shared key-value store, and the security layer in one place.
+Devices and agents still talk to each other through the same primitives (`@rpc`, `@emit`, `discover_devices`, `invoke_device`). The Device Connect server runs the publish/subscribe messaging, the persistent registry, the shared key-value store, and the security layer in one place.
 
-The animation below shows the same idea end to end. A Device Connect server runs in Berlin. Robots in San Francisco and Tokyo install `device-connect-edge` and register with it. An AI agent in Bangalore installs `device-connect-agent-tools` and drives both robots through the server. Every `invoke_device` call and every event flows through the server.
+The animation shows a complete workflow: a Device Connect server runs in Berlin, robot arms in San Francisco and Tokyo register with it using `device-connect-edge`, and an AI agent in Bangalore orchestrates both robots using `device-connect-agent-tools`. Every `invoke_device` call and event flows through the server, demonstrating how the server enables multi-network device coordination.
 
 <video width="100%" controls muted playsinline>
   <source src="https://raw.githubusercontent.com/kavya-chennoju/arm-learning-path-assets/main/videos/device-connect-server-overview.mp4" type="video/mp4">
@@ -78,7 +78,7 @@ The animation below shows the same idea end to end. A Device Connect server runs
 
 ## What you'll do in this Learning Path
 
-In the rest of this Learning Path you will:
+In the rest of this Learning Path you'll:
 
 - sign in to the Device Connect portal and identify your tenant slug
 - download credentials for the three default device identities

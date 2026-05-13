@@ -1,10 +1,7 @@
 ---
-title: Connect Devices and AI agents through Device Connect Server
+title: Connect devices and AI agents using Device Connect server
 
-draft: true
-cascade:
-    draft: true
-
+description: Learn how to connect devices and AI agents across networks using Device Connect server with NATS credentials, persistent device registry, and distributed state management.
 minutes_to_complete: 30
 
 who_is_this_for: This is a follow-on topic for developers who have a working Device Connect mesh and want to add a server layer on top. The server gives you a persistent device registry, distributed state, and security primitives (commissioning, ACLs) so you can operate a multi-network fleet from one place.
@@ -46,6 +43,14 @@ further_reading:
     - resource:
         title: device-connect-server package
         link: https://github.com/arm/device-connect/tree/main/packages/device-connect-server
+        type: documentation
+    - resource:
+        title: device-to-device Learning Path
+        link: /learning-paths/embedded-and-microcontrollers/device-connect-d2d/
+        type: website
+    - resource:
+        title: NATS documentation
+        link: https://docs.nats.io/
         type: documentation
 
 ### FIXED, DO NOT MODIFY

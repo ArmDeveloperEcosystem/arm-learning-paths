@@ -6,11 +6,13 @@ weight: 3
 layout: learningpathall
 ---
 
-## Setup of Device Connect portal
+## Provision your tenant and download credentials
 
-The Device Connect portal is operated by Arm as a hosted developer service for the open-source [Device Connect](https://github.com/arm/device-connect) framework. Signing in creates a private **tenant** for your account. A tenant is an isolated namespace on the shared Device Connect service: devices and agents commissioned to your tenant can discover and invoke each other, but other tenants cannot see or use them.
+### Setup of Device Connect portal
 
-Only your account email and the cryptographic identities (device IDs, JWTs, public keys) you create on the portal are stored. The contents of messages your devices exchange are not stored, seen, or proxied. Treat each `.creds.json` file like a private key, and do not put secrets, API keys, or personal data into device names or descriptions. For questions or issues, open one at [`arm/device-connect`](https://github.com/arm/device-connect/issues).
+The Device Connect portal is operated by Arm as a hosted developer service for the open-source [Device Connect](https://github.com/arm/device-connect) framework. Signing in creates a private **tenant** for your account. A tenant is an isolated namespace on the shared Device Connect service: devices and agents commissioned to your tenant can discover and invoke each other, but other tenants can't see or use them.
+
+{{% notice Note %}}Only your account email and the cryptographic identities (device IDs, JWTs, public keys) you create on the portal are stored. The contents of messages your devices exchange aren't stored, seen, or proxied. Treat each `.creds.json` file like a private key, and don't put secrets, API keys, or personal data into device names or descriptions. For questions or issues, open one at [`arm/device-connect`](https://github.com/arm/device-connect/issues).{{% /notice %}}
 
 The portal page header shows your tenant slug in `Manage device credentials for tenant <slug>`. For a new account, the slug is your username. If your account has a different slug, use the value shown in the portal. The portal prefixes every device identity with this slug, so this Learning Path uses names such as `${TENANT}-device-001`.
 
@@ -50,7 +52,7 @@ Verify that all three credential files are in place:
 ls ~/.device-connect/credentials/
 ```
 
-The portal also exposes a **Coding Agents** tab that can download credentials on your behalf. The manual flow above is useful to walk through once so you understand what the agent automates.
+The portal also exposes a **Coding Agents** tab that can download credentials on your behalf. The manual flow is useful to walk through once so you understand what the agent automates.
 
 ## Install the Device Connect packages
 
@@ -64,9 +66,9 @@ pip install device-connect-edge device-connect-agent-tools
 ```
 
 {{% notice Note %}}
-Fabric is the hosted Device Connect service used by the portal. In this Learning Path, Fabric runs the NATS router and registry for you, so you do not install or run `device-connect-server` locally.
+Fabric is the hosted Device Connect service used by the portal. In this Learning Path, Fabric runs the NATS router and registry for you, so you don't install or run `device-connect-server` locally.
 
-If you would rather self-host, install `device-connect-server` with `pip install device-connect-server` and run the router and registry yourself. See the [device-connect-server README](https://github.com/arm/device-connect/tree/main/packages/device-connect-server) for the Docker Compose deployment options.
+If you'd rather self-host, install `device-connect-server` with `pip install device-connect-server` and run the router and registry yourself. See the [device-connect-server README](https://github.com/arm/device-connect/tree/main/packages/device-connect-server) for the Docker Compose deployment options.
 {{% /notice %}}
 
 ## Create a simulated robot arm 
@@ -137,11 +139,11 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-Note that there is no `allow_insecure=True` on the runtime. The runtime will only join the mesh if it has valid credentials, which is what makes commissioning meaningful.
+Note that there's no `allow_insecure=True` on the runtime. The runtime will only join the mesh if it has valid credentials, which is what makes commissioning meaningful.
 
 ## Connect the device to the server
 
-You will use three terminals: two for simulated devices and one for the Python client. Each terminal must have the virtual environment active and the shared tenant enviroment variables exported.
+You'll use three terminals: two for simulated devices and one for the Python client. Each terminal must have the virtual environment active and the shared tenant environment variables exported.
 
 | Terminal | Purpose | Credential |
 |----------|---------|------------|
@@ -172,7 +174,7 @@ NATS_CREDENTIALS_FILE=~/.device-connect/credentials/${TENANT}-device-001.creds.j
 
 On startup, the runtime presents its JWT to NATS. NATS verifies it against your tenant's signing key, and the device is allowed to publish, subscribe, and register itself. From this moment it shows up in the portal under your tenant, with its identity, capabilities, and live status.
 
-The output should look like:
+The output is similar to:
 
 ```output
 2026-05-12 14:26:01,582 - device_connect_edge.device.<tenant-slug>-device-001 - INFO - Registering device
@@ -267,7 +269,7 @@ The agent subscribes to events on your tenant, batches them over a short window,
 
 ## Tear down
 
-Stop the running terminals with `Ctrl-C`. Your tenant and credentials remain valid until you revoke them from the portal, so there is nothing on your machine to clean up beyond the virtual environment:
+Stop the running terminals with `Ctrl-C`. Your tenant and credentials remain valid until you revoke them from the portal, so there's nothing on your machine to clean up beyond the virtual environment:
 
 ```bash
 deactivate
