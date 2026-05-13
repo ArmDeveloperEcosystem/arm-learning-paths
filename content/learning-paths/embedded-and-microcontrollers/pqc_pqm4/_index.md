@@ -1,29 +1,27 @@
 ---
-title: Post-Quantum Cryptography on Arm Cortex
+title: Implement post-quantum cryptography on Arm Cortex-M4
 
 draft: true
 cascade:
     draft: true
     
-description: Learn how to implement and test post-quantum cryptographic algorithms on ARM Cortex-M4 microcontrollers using the pqm4 library.
+description: Learn how to implement and test post-quantum cryptographic algorithms on Arm Cortex-M4 microcontrollers using the pqm4 library.
 
 minutes_to_complete: 120
 
-who_is_this_for: This tutorial is for software developers and cryptography enthusiasts interested in implementing and testing post-quantum cryptographic algorithms on ARM Cortex-M4 microcontrollers.
+who_is_this_for: This is an advanced topic for software developers and cryptography enthusiasts interested in implementing and testing post-quantum cryptographic algorithms on Arm Cortex-M4 microcontrollers.
 
 learning_objectives:
-    - Understand the design goals of the pqm4 library.
-    - Set up the development environment for ARM Cortex-M4.
+    - Describe the design goals and supported algorithms of the pqm4 library.
+    - Set up the development environment for Arm Cortex-M4.
     - Implement and test post-quantum cryptographic algorithms.
     - Benchmark and profile cryptographic implementations.
     - Integrate new cryptographic schemes into the pqm4 framework.
 
 prerequisites:
-    - ARM Cortex-M4 development board (e.g., NUCLEO-L4R5ZI, STM32F4 Discovery)
     - Computer with Python 3.8 or higher
-    - ARM toolchain (arm-none-eabi)
-    - stlink and OpenOCD for flashing binaries
-    - QEMU 5.2 or higher for simulation
+    - Install the [Arm GNU Toolchain](/install-guides/gcc/arm-gnu/)
+    - An Arm Cortex-M4 development board such as NUCLEO-L4R5ZI, NUCLEO-L476RG, or STM32F4 Discovery, with stlink or OpenOCD for flashing. Alternatively, install QEMU to simulate the hardware without a physical board.
 
 author: 
     - Akash Malik
@@ -40,11 +38,15 @@ operatingsystems:
 tools_software_languages:
     - C
     - Python
-    - ARM toolchain
+    - GCC
     - stlink
     - QEMU
 
 further_reading:
+    - resource:
+        title: pqm4 GitHub Repository
+        link: https://github.com/mupq/pqm4
+        type: repository
     - resource:
         title: PQCRYPTO Project
         link: https://pqcrypto.eu.org
@@ -52,6 +54,10 @@ further_reading:
     - resource:
         title: PQClean GitHub Repository
         link: https://github.com/PQClean/PQClean
+        type: repository
+    - resource:
+        title: stlink open source STM32 programming toolset
+        link: https://github.com/stlink-org/stlink
         type: repository
 
 ### FIXED, DO NOT MODIFY

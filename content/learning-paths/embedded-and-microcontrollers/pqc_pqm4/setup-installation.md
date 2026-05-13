@@ -1,156 +1,253 @@
 ---
-title: Setting Up the Development Environment
+title: Set up the pqm4 development environment
 
 weight: 3
 
 layout: learningpathall
 ---
 
-## Required Hardware and Software
+## Required hardware and software
 
-Before you begin, ensure you have the following hardware and software:
+This page walks you through installing all dependencies needed to build and run pqm4. By the end, you'll have:
 
-- **Development Board**: ARM Cortex-M4 based board such as:
-  - NUCLEO-L476RG  
-  - NUCLEO-L4R5ZI (default in pqm4)  
-  - STM32F4 Discovery  
-- **ARM Toolchain**: arm-none-eabi toolchain  
-- **Flashing Tools**: stlink or OpenOCD  
-- **Python 3.8+**
-- **Python Modules**: pyserial, tqdm  
+- The Arm GNU Toolchain (`arm-none-eabi-gcc`) for compiling pqm4
+- Python 3.8 or higher with the `pyserial` and `tqdm` modules
+- The pqm4 repository cloned with all submodules
 
-## Installing the ARM Toolchain
+You'll also need one of the following to run pqm4:
 
+- A physical Arm Cortex-M4 development board such as NUCLEO-L4R5ZI (the pqm4 default), NUCLEO-L476RG, or STM32F4 Discovery, plus stlink or OpenOCD for flashing
+- QEMU, if you want to simulate a Cortex-M4 environment using the `mps2-an386` platform without physical hardware
 
-Download the ARM GNU toolchain from the official website:
+If you're using QEMU, you can skip the stlink, OpenOCD, and serial port configuration sections on this page. If you're using a physical board, you can skip the QEMU section.
 
-https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads
+Optionally, install ChipWhisperer if you're using the `cw308t-stm32f3` platform.
 
-Download and install **gcc-arm-none-eabi** for your system.
+## Install the Arm GNU Toolchain
 
-Recommended version: **12.x**  
-Avoid newer versions (e.g., 15.x) as they may cause build/linker issues with pqm4.
+Follow the [Arm GNU Toolchain install guide](https://learn.arm.com/install-guides/gcc/arm-gnu/) to install `arm-none-eabi-gcc` on your system.
 
-## Installing stlink
+{{% notice Note %}}
+Use toolchain version 12.x. Other versions may work but have not been tested.
+{{% /notice %}}
 
-For flashing binaries, install stlink using your package manager or compile it from source:
+Verify the installation by running:
 
 ```bash
-git clone https://github.com/texane/stlink.git
+arm-none-eabi-gcc --version
+```
+
+The output is similar to:
+
+```output
+arm-none-eabi-gcc (Arm GNU Toolchain 12.3.Rel1) 12.3.1 20230626
+Copyright (C) 2022 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
+
+## Install stlink (physical board only)
+
+If you are using a physical board, install stlink using your package manager.
+
+On Linux:
+
+```bash
+sudo apt-get install stlink-tools
+```
+
+On macOS:
+
+```bash
+brew install stlink
+```
+
+If you need to build from source on Linux:
+
+```bash
+sudo apt-get install libusb-1.0-0-dev -y
+git clone https://github.com/stlink-org/stlink.git
 cd stlink
 make release
 ```
 
-Verify connection
+Verify the connection to your board:
 
 ```bash
 st-info --probe
 ```
-Expected output:
+
+The output is similar to:
+
+```output
 Found 1 stlink programmers
+```
 
-## Installing OpenOCD
+## Install OpenOCD (physical board only)
 
-For the NUCLEO-L4R5ZI board, OpenOCD is used. Install it via your package manager or compile from source:
+If you are using a physical board and stlink does not support it, install OpenOCD as an alternative.
+
+On Linux:
 
 ```bash
-git clone http://openocd.org
+sudo apt-get install openocd -y
+```
+
+On macOS:
+
+```bash
+brew install openocd
+```
+
+If your package manager provides an older version that doesn't support your board, you can build from source instead:
+
+```bash
+sudo apt install libjim-dev libtool-bin -y
+git clone https://github.com/openocd-org/openocd.git
 cd openocd
+./bootstrap
 ./configure
 make
+sudo make install
 ```
-## Installing ChipWhisperer (Optional)
-The ChipWhisperer module is only required if you are using the `cw308t-stm32f3` platform.  
-If you are using other boards (e.g., NUCLEO or STM32 Discovery), you can skip this step.
+
+## Install ChipWhisperer (optional)
+
+ChipWhisperer is only required if you are using the `cw308t-stm32f3` platform. If you are using another board such as NUCLEO or STM32 Discovery, skip this section.
+
+Install it using pip:
 
 ```bash
 python3 -m pip install chipwhisperer
 ```
 
-## Installing QEMU (Optional)
-QEMU is required only if you are using the mps2-an386 platform (simulated ARM Cortex-M4 environment).
-If you are using a physical board, you can skip this step.
+## Install QEMU (simulation only)
 
-For macOS: 
+If you are using a physical board, skip this section.
+
+Install QEMU to simulate a Cortex-M4 environment using the `mps2-an386` machine type.
+
+On macOS:
+
 ```bash
 brew install qemu
 ```
-For Linux:
-```bash
-sudo apt-get install qemu-system-arm
-```
-Note : Ensure the version is 5.2 or higher.
 
-## Installing Python Dependencies
-
-Install the required Python modules using pip:
+On Linux:
 
 ```bash
-python3 -m pip install pyserial tqdm
+sudo apt-get install qemu-system-arm -y
 ```
 
-## Downloading pqm4 and Submodules
+## Install Python dependencies
+
+Create a virtual environment inside the pqm4 directory and install the required modules:
 
 ```bash
-git clone --recursive https://github.com/mupq/pqm4.git  
+python3 -m venv venv
+source venv/bin/activate
+pip install pyserial tqdm
+```
+
+Activate the virtual environment each time you open a new terminal before running pqm4 Python scripts:
+
+```bash
+source venv/bin/activate
+```
+
+## Download pqm4 and submodules
+
+Clone the pqm4 repository including all submodules:
+
+```bash
+git clone --recursive https://github.com/mupq/pqm4.git
 cd pqm4
-
 ```
 
-## Building for a Target Platform 
+## Build for a target platform
+
+Build pqm4 by specifying the platform identifier for your board using the `PLATFORM` variable.
+
+For NUCLEO-L4R5ZI (the pqm4 default):
 
 ```bash
-make -j4 PLATFORM=<platform>
+make -j4 PLATFORM=nucleo-l4r5zi
 ```
 
-Example for NUCLEO-L476RG board:
+For NUCLEO-L476RG:
+
+```bash
 make -j4 PLATFORM=nucleo-l476rg
+```
 
+For STM32F4 Discovery:
 
-## Configuring Serial Port in host_unidirectional.py
-
-The script `host_unidirectional.py` uses a default serial port (often `/dev/ttyUSB0`) which may not match your system.
-
-You must update it to match your board’s serial port.
-
-Open the file:
 ```bash
-nano hostside/host_unidirectional.py
+make -j4 PLATFORM=stm32f4discovery
 ```
-replace the port shown in below line with your actual port  
-```python
-dev = serial.Serial("/dev/tty.usbmodemXXXX", 38400)
+
+For QEMU simulation:
+
+```bash
+make -j4 PLATFORM=mps2-an386
 ```
-to find your port 
+
+See the [pqm4 README](https://github.com/mupq/pqm4) for the full list of supported platforms.
+
+## Configure the serial port (physical board only)
+
+If you are using QEMU, skip this section.
+
+The script `host_unidirectional.py` uses a default serial port (often `/dev/ttyUSB0`) which may not match your system. Update it to match your board's serial port.
+
+On macOS:
+
 ```bash
 ls /dev/tty.*
 ```
 
+On Linux:
 
-## Flashing and Testing Communication
+```bash
+ls /dev/ttyACM* /dev/ttyUSB*
+```
 
-Connect the board to your host machine using the mini-USB port. This provides it with power, and allows you to flash binaries onto the board
+Open the script:
 
+```bash
+nano hostside/host_unidirectional.py
+```
 
-Flash a basic test:
+Update this line with your actual port:
+
+```python
+dev = serial.Serial("/dev/tty.usbmodemXXXX", 38400)
+```
+
+## Flash and verify communication (physical board only)
+
+If you are using QEMU, skip this section. Communication with QEMU is covered in the next page.
+
+Connect the board to your host machine using the mini-USB port to provide power and enable flashing.
+
+Flash a basic test binary:
 
 ```bash
 st-flash write bin/boardtest.bin 0x8000000
 ```
 
-Read output:
+Read the output from the board:
 
 ```bash
 python3 hostside/host_unidirectional.py
 ```
 
-Press RESET button on board 
+Press the RESET button on the board. The output is similar to:
 
-Expected output :
-```python
-Hello world  
-Stack Size  
+```output
+Hello world
+Stack Size
 Random number
 ```
-  
 
+If you see this output, your board is flashed, communicating over serial, and ready to run pqm4. In the next section, you'll run the pqm4 test suite and benchmarks to measure the performance of post-quantum algorithms on your Cortex-M4 board.
