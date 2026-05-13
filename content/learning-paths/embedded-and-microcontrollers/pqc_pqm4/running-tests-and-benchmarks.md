@@ -1,5 +1,5 @@
 ---
-title: Run tests and benchmarks
+title: Run pqm4 tests and benchmarks
 
 weight: 4
 
@@ -10,12 +10,6 @@ layout: learningpathall
 ## Understand generated pqm4 binaries
 
 After building pqm4, a set of binaries is generated for each scheme and implementation. You can use these binaries to verify correctness, measure performance, and analyze resource usage on your Cortex-M4 board or in QEMU.
-
-Before running any Python scripts in this section, make sure your virtual environment is active:
-
-```bash
-source venv/bin/activate
-```
 
 For example, building ML-KEM-768 produces binaries with names in this pattern:
 
@@ -32,13 +26,13 @@ The `<impl>` field identifies the implementation variant. The exact suffix depen
 
 The `clean` variant uses a different file prefix: `mupq_pqclean_crypto_kem_<scheme>_clean_<type>.elf`
 
-The `<type>` field identifies what the binary measures. The sections below explain each type.
+The `<type>` field identifies what the binary measures. The following section explains each type and how you can run them.
 
-## Flash and run a binary
+## Flash and run a generated binary
 
 How you run a binary depends on whether you are using a physical board or QEMU.
 
-### Physical board
+#### Physical board
 
 Flash the binary and read the serial output.
 
@@ -56,7 +50,7 @@ python3 hostside/host_unidirectional.py
 
 Press the RESET button on the board to trigger execution and see the output.
 
-### QEMU
+#### QEMU
 
 Run the corresponding ELF file directly.
 
@@ -66,11 +60,7 @@ qemu-system-arm -M mps2-an386 -nographic -semihosting -kernel elf/<binary_name>.
 
 To exit QEMU, press `Ctrl+A` then `X`.
 
-## Binary types
-
-The following types of binaries are generated after building pqm4.
-
-### Test binary
+### Run a test binary
 
 The test binary verifies that a scheme works correctly end to end.
 
@@ -112,7 +102,7 @@ OK invalid ciphertext
 #
 ```
 
-### Speed binary
+### Run a speed binary
 
 The speed binary measures execution time in CPU cycles for each operation.
 
@@ -147,9 +137,9 @@ decaps cycles:
 =
 ```
 
-### Hashing binary
+### Run a hashing binary
 
-The hashing binary measures how many cycles are spent in symmetric primitives such as SHA-2, SHA-3, and AES. This shows how much of the overall algorithm cost comes from hashing.
+The hashing binary measures how many cycles are spent in symmetric primitives such as SHA-2, SHA-3, and AES. The number of cycles shows how much of the overall algorithm cost comes from hashing.
 
 #### Physical board
 
@@ -182,7 +172,7 @@ decaps hash cycles:
 =
 ```
 
-### Stack binary
+### Run a stack binary
 
 The stack binary measures peak stack memory usage for each operation.
 
@@ -221,7 +211,7 @@ decaps stack usage:
 Stack measurement might not work correctly on some boards due to platform-specific memory layout. Memory allocated outside functions, such as public keys and ciphertexts, is not included in these measurements.
 {{% /notice %}}
 
-### Test vectors binary
+### Run a test vectors binary
 
 The test vectors binary generates deterministic test vectors using a fixed random seed. These are used to validate correctness and compare different implementations against each other.
 
@@ -247,9 +237,15 @@ To compare the on-device vectors against host-generated reference vectors, use t
 
 pqm4 includes Python scripts that automate flashing, running, and checking results across multiple implementations.
 
+Before running any Python scripts in this section, make sure your virtual environment is active:
+
+```bash
+source venv/bin/activate
+```
+
 ### Run functional tests
 
-The `test.py` script flashes the test binary, runs it on the board, and checks correctness automatically.
+The `test.py` script runs the test binary on your chosen platform and checks correctness automatically.
 
 #### NUCLEO-L476RG
 
@@ -278,7 +274,7 @@ test: 100%|#############################################| 3/3 [00:12<00:00,  4.2
 
 ### Run test vectors
 
-The `testvectors.py` script generates test vectors on the board and compares them with host-side results.
+The `testvectors.py` script generates test vectors on your chosen platform and compares them with host-side results.
 
 #### NUCLEO-L476RG
 

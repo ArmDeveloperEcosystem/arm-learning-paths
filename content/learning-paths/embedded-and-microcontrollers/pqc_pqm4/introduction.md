@@ -1,12 +1,12 @@
 ---
-title: Understand pqm4 and Post-Quantum Cryptography
+title: Understand pqm4 and post-quantum cryptography
 weight: 2
 layout: learningpathall
 ---
 
 ## What pqm4 is
 
-[pqm4](https://github.com/mupq/pqm4) is a benchmarking and implementation framework for post-quantum cryptography (PQC) on Arm Cortex-M4 microcontrollers. It provides optimized implementations of NIST-standardized algorithms, standardized benchmarks for cycle counts, stack usage, and code size, and a test harness for validating implementations against known test vectors.
+[pqm4](https://github.com/mupq/pqm4) is a benchmarking and implementation framework for post-quantum cryptography (PQC) on Arm Cortex-M4 microcontrollers. pqm4 provides optimized implementations of NIST-standardized algorithms and standardized benchmarks for cycle counts, stack usage, and code size. It also provides a test harness for validating implementations against known test vectors.
 
 pqm4 originated from the [PQCRYPTO](https://pqcrypto.eu.org) project and has become the standard platform for evaluating PQC on constrained embedded hardware.
 
@@ -14,7 +14,7 @@ pqm4 originated from the [PQCRYPTO](https://pqcrypto.eu.org) project and has bec
 
 Classical public-key schemes such as RSA and elliptic curve cryptography will become insecure after sufficiently powerful quantum computers exist. Embedded devices are particularly exposed because they often remain deployed for 10 to 20 years, which is longer than the expected timeline for quantum threats to mature.
 
-NIST has standardized two core PQC primitives to replace classical schemes:
+NIST has standardized the following core PQC primitives to replace classical schemes:
 
 - ML-KEM (FIPS 203): a key encapsulation mechanism (KEM) for establishing shared secrets, replacing ECDH in protocols such as TLS
 - ML-DSA (FIPS 204): a digital signature algorithm for authentication and integrity, replacing ECDSA
@@ -30,7 +30,7 @@ pqm4 is designed around four practical goals that make it useful for embedded PQ
 - Profiling of underlying primitives such as SHA-2, SHA-3, and AES
 - Integration of implementations from [PQClean](https://github.com/PQClean/PQClean) and new schemes
 
-## Scope of pqm4
+## Supported pqm4 schemes
 
 pqm4 includes schemes that are:
 

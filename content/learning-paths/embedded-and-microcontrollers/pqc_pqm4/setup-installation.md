@@ -6,7 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-## Configure required hardware and software
+## Download and install dependencies for pqm4
 
 In this section, you'll install all dependencies needed to build and run pqm4. 
 
@@ -62,11 +62,11 @@ Activate the virtual environment each time you open a new terminal before runnin
 source venv/bin/activate
 ```
 
-### Configure physical board
+## Configure a physical board
 
 If you're using a physical development board, follow these steps to configure it.
 
-#### Install stlink 
+### Install stlink 
 
 Install stlink using your package manager.
 
@@ -103,7 +103,7 @@ The output is similar to:
 Found 1 stlink programmers
 ```
 
-#### (Optional) Install OpenOCD 
+### (Optional) Install OpenOCD 
 
 If you are using a physical board and stlink does not support it, install OpenOCD as an alternative.
 
@@ -131,7 +131,7 @@ make
 sudo make install
 ```
 
-#### (Optional) Install ChipWhisperer 
+### (Optional) Install ChipWhisperer 
 
 ChipWhisperer is required only if you're using the `cw308t-stm32f3` platform. If you're using another board such as NUCLEO or STM32 Discovery, skip this section.
 
@@ -142,7 +142,7 @@ python3 -m pip install chipwhisperer
 ```
 
 
-#### Build for a target platform
+### Build for a target platform
 
 Build pqm4 by specifying the platform identifier for your board using the `PLATFORM` variable.
 
@@ -165,7 +165,7 @@ make -j4 PLATFORM=stm32f4discovery
 ```
 For a full list of supported platforms, see the [pqm4 README](https://github.com/mupq/pqm4).
 
-#### Configure the serial port 
+### Configure the serial port 
 
 The script `host_unidirectional.py` uses a default serial port (often `/dev/ttyUSB0`) which might not match your system. Update it to match your board's serial port.
 
@@ -193,7 +193,7 @@ Update this line with your actual port:
 dev = serial.Serial("/dev/tty.usbmodemXXXX", 38400)
 ```
 
-#### Flash and verify communication
+### Flash and verify communication
 
 Connect the board to your host machine using the mini-USB port to provide power and enable flashing.
 
@@ -219,11 +219,11 @@ Random number
 
 If you see this output, your board is flashed, communicating over serial, and ready to run pqm4. 
 
-### Configure QEMU
+## Configure QEMU
 
 If you're using QEMU instead of a physical board, follow these steps:
 
-#### Install QEMU
+### Install QEMU
 
 Install QEMU to simulate a Cortex-M4 environment using the `mps2-an386` machine type.
 
@@ -239,7 +239,7 @@ On Linux:
 sudo apt-get install qemu-system-arm -y
 ```
 
-#### Build for a target platform
+### Build for a target platform
 
 Build pqm4 by specifying the platform identifier for QEMU simulation using the `PLATFORM` variable:
 
@@ -253,6 +253,6 @@ Communication with QEMU is covered in the next section.
 
 ## What you've accomplished and what's next
 
-You've now downloaded the Arm GNU Toolchain, installed required Python dependencies, and cloned the pqm4 repository. You've also set up either a physical Arm Cortex-M4 development board or QEMU to build and run pqm4.
+You've now installed the Arm GNU Toolchain, installed required Python dependencies, and cloned the pqm4 repository. You've also set up either a physical Arm Cortex-M4 development board or QEMU to build and run pqm4.
 
 Next, you'll run the pqm4 test suite and benchmarks to measure the performance of post-quantum algorithms on your Cortex-M4 board.

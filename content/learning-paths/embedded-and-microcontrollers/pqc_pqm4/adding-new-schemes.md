@@ -1,5 +1,5 @@
 ---
-title: Add new schemes and implementations
+title: Add a KEM implementation to pqm4
 
 weight: 5
 
@@ -11,11 +11,11 @@ layout: learningpathall
 
 pqm4 ships with a curated set of NIST-standardized schemes, but you can extend it with additional algorithms. You might want to do this to evaluate an experimental scheme, test a custom Cortex-M4 assembly optimization, or contribute a new implementation to the community.
 
-A "scheme" in pqm4 is a self-contained cryptographic algorithm implementation, in this case a key encapsulation mechanism (KEM). Each scheme lives in its own directory under `crypto_kem/`, and pqm4's build system automatically discovers and compiles it alongside the existing schemes.
+A scheme in pqm4 is a self-contained cryptographic algorithm implementation. Each scheme lives in its own directory under `crypto_kem/`, and pqm4's build system automatically discovers and compiles it alongside the existing schemes.
 
-## Integrate NewHope implementation into pqm4
+## Integrate the NewHope implementation into pqm4
 
-In this section, you'll use NewHope-512-CPA-KEM as a concrete example. NewHope is a lattice-based KEM that was a candidate in the NIST PQC standardization process. Although NewHope was not selected for standardization, it remains a useful example because it shares structural similarities with ML-KEM. It also has a clean, well-documented reference implementation. The steps apply equally to any KEM that follows the NIST/SUPERCOP/PQClean API.
+In this section, you'll use NewHope-512-CPA-KEM as a concrete example of a scheme. NewHope is a lattice-based KEM that was a candidate in the NIST PQC standardization process. Although NewHope was not selected for standardization, it remains a useful example because it shares structural similarities with ML-KEM. It also has a clean, well-documented reference implementation. The following steps apply equally to any KEM that follows the NIST/SUPERCOP/PQClean API.
 
 ### Download the scheme implementation
 
@@ -87,7 +87,7 @@ int crypto_kem_dec(unsigned char *ss, const unsigned char *ct, const unsigned ch
 #endif
 ```
 
-## Build and verify
+## Build and verify pqm4
 
 Clean and rebuild pqm4 with your target platform.
 
@@ -172,3 +172,5 @@ After your implementation is working and tested, you can contribute it upstream:
 ## What you've accomplished
 
 You've now set up the pqm4 environment, run tests and benchmarks for a NIST-standardized post-quantum KEM on Arm Cortex-M4, and integrated a new scheme into the framework.
+
+You can now create your own post-quantum cryptography algorithm implementations for pqm4 and contribute them upstream.
