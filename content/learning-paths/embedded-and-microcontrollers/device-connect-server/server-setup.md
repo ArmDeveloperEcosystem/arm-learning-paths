@@ -28,9 +28,9 @@ This Learning Path uses `device-001` and `device-002` for the simulated robot ar
 
 ### Download credentials from the portal
 
-1. Open [`https://portal.deviceconnect.dev/`](https://portal.deviceconnect.dev/) and sign in.
-2. Select **My Devices** and copy the tenant slug from the page header.
-3. Download the credentials for the three default identities: `device-001`, `device-002`, and `device-003`.
+- Open [`https://portal.deviceconnect.dev/`](https://portal.deviceconnect.dev/) and sign in.
+- Select **My Devices** and copy the tenant slug from the page header.
+- Download the credentials for the three default identities: `device-001`, `device-002`, and `device-003`.
 
 ### Configure your environment
 
@@ -252,10 +252,10 @@ PY
 ### Expected results
 
 The script will:
-1. Discover both robot arms on your tenant
-2. Home both arms (move to origin)
-3. Move the first arm to a new position
-4. Read the second arm's position
+- Discover both robot arms on your tenant
+- Home both arms (move to origin)
+- Move the first arm to a new position
+- Read the second arm's position
 
 The client doesn't need to know which network the arms are on - it only needs the tenant's NATS URL and its credential.
 
