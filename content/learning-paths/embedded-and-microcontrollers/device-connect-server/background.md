@@ -80,6 +80,8 @@ The Device Connect server acts as the central coordination point for devices and
 
 In the diagram, pub/sub means publish/subscribe, KV means key-value, LC means LangChain, and MCP means Model Context Protocol.
 
+**Device Connect server architecture**
+
 ```
 ┌──────────────────┐     ┌──────────────────────┐     ┌─────────────────────┐
 │  Devices         │     │  Device Connect      │     │  AI agents          │
