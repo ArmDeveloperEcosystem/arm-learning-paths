@@ -40,7 +40,7 @@ sudo apt-get install -y libtcmalloc-minimal4
 
 ## Create and activate a Python virtual environment
 
-It’s best practice to install vLLM inside an isolated environment to prevent conflicts between system and project dependencies:
+It is considered best practice to install vLLM inside an isolated environment to prevent conflicts between system and project dependencies:
 ```bash
 python3.12 -m venv vllm_env
 source vllm_env/bin/activate
@@ -49,7 +49,7 @@ python -m pip install --upgrade pip
 
 ## Install vLLM for CPU
 
-Install a recent CPU specific build of vLLM:
+Install a CPU-specific build of vLLM:
 ```bash
 export VLLM_VERSION=0.20.0
 pip install https://github.com/vllm-project/vllm/releases/download/v${VLLM_VERSION}/vllm-${VLLM_VERSION}+cpu-cp38-abi3-manylinux_2_35_aarch64.whl --extra-index-url https://download.pytorch.org/whl/cpu
@@ -60,9 +60,8 @@ If you wish to build vLLM from source you can follow the instructions in the [Bu
 
 ## Set up access to LLama3.1-8B models
 
-To access the Llama models hosted by Hugging Face, you will need to install the Hugging Face CLI so that you can authenticate yourself and the harness can download what it needs. You should create an account on https://huggingface.co/ and follow the instructions [in the Hugging Face CLI guide](https://huggingface.co/docs/huggingface_hub/en/guides/cli) to set up your access token. You can then install the CLI and login:
+To access the Llama models hosted by Hugging Face, you will need to install the Hugging Face CLI so that you can authenticate yourself and the harness can download what it needs. You should create an account on https://huggingface.co/ and follow the instructions [in the Hugging Face CLI guide](https://huggingface.co/docs/huggingface_hub/en/guides/cli) to install the CLI and setup your access token. You can then login to HF:
 ```bash
-curl -LsSf https://hf.co/cli/install.sh | bash
 hf auth login
 ```
 

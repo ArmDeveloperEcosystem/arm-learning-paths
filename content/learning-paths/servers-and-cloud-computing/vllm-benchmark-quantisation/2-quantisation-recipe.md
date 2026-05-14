@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Understanding quantisation
 
-Quantised models have their weights converted to a lower precision data type, which reduces the memory requirements of the model and can improve performance significantly. In the [Run vLLM inference with INT4 quantization on Arm servers](/learning-paths/servers-and-cloud-computing/vllm-acceleration/) Learning Path we have covered how to quantise a model yourself. There are also many publicly available quantised versions of popular models, such as https://huggingface.co/RedHatAI/Meta-Llama-3.1-8B-quantized.w8a8 and https://huggingface.co/RedHatAI/whisper-large-v3-quantized.w8a8, which we will be using in this Learning Path.
+Quantised models have their weights converted to a lower precision data type which reduces the memory requirements of the model and can improve performance significantly. In the [Run vLLM inference with INT4 quantization on Arm servers](/learning-paths/servers-and-cloud-computing/vllm-acceleration/) Learning Path we have covered how to quantise a model yourself. There are also many publicly available quantised versions of popular models, such as https://huggingface.co/RedHatAI/Meta-Llama-3.1-8B-quantized.w8a8 and https://huggingface.co/RedHatAI/whisper-large-v3-quantized.w8a8, which we will be using in this Learning Path.
 
 The notation w8a8 means that the weights have been quantised to 8-bit integers and the activations (the input data) are dynamically quantised to the same. This allows our kernels to utilise Arm's 8-bit integer matrix multiply feature I8MM. You can learn more about this in the [KleidiAI and matrix multiplication](/learning-paths/cross-platform/kleidiai-explainer/) Learning Path.
 

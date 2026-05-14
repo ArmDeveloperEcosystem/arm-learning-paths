@@ -19,8 +19,8 @@ vllm serve \
 ```
 
 vLLM uses dynamic continuous batching to maximise hardware utilisation. Two key parameters govern this process:
-  * max-model-len, which is the maximum sequence length (number of tokens per request). No single prompt or generated sequence can exceed this limit.
-  * max-num-batched-tokens, which is the total number of tokens processed in one batch across all requests. The sum of input and output tokens from all concurrent requests must stay within this limit.
+  * max-model-len, which is the maximum sequence length (number of tokens per request). No single prompt or generated sequence can exceed this limit. We've chosen a value large enough for the selected model and dataset.
+  * max-num-batched-tokens, which is the total number of tokens processed in one batch across all requests. The sum of input and output tokens from all concurrent requests must stay within this limit. We've chosen a value that, combined with our concurrency limit shown below, gives optimal throughput and latency.
 
 Now the server is running, we can benchmark using the public ShareGPT dataset.
 ```bash
@@ -33,10 +33,13 @@ vllm bench serve \
   --num-prompts 256 \
   --request-rate 8 \
   --max-concurrency 10 \
+  --top-p 1 --temperature 0 \
   --percentile-metrics ttft,tpot \
   --metric-percentiles 50,95,99 \
   --save-result --result-dir bench_out --result-filename serve.json
 ```
+Here we are using greedy decoding: '''--top-p 1 --temperature 0'''. This selects the next token with the highest probability at each step, instead of sampling from a selection of likely tokens.
+
 The interesting results are request throughput, output token throughput, total token throughput, TTFT (time to first token) and TPOT (time per output token). We're aiming for a mean TPOT < 100ms, so the maximum concurrency selected should be as high as possible while meeting that TPOT requirement.
 
 Repeat with the quantised model. The smaller model allows us to increase the concurrency. You should see a significant improvement in the throughput results (increased tokens/s).
@@ -53,6 +56,7 @@ vllm bench serve \
   --num-prompts 256 \
   --request-rate 8 \
   --max-concurrency 24 \
+  --top-p 1 --temperature 0 \
   --percentile-metrics ttft,tpot \
   --metric-percentiles 50,95,99 \
   --save-result --result-dir bench_out --result-filename serve.json
@@ -60,7 +64,7 @@ vllm bench serve \
 
 ## Llama accuracy benchmarking
 
-The lm-evaluation-harness is the standard way to measure model accuracy across common academic benchmarks (for example MMLU, HellaSwag, GSM8K) and runtimes (such as Hugging Face, vLLM, and llama.cpp). In this section, you’ll run accuracy tests for both BF16 and INT8 deployments of your Llama models served by vLLM on Arm-based servers.
+The lm-evaluation-harness is the standard way to measure model accuracy across common academic benchmarks (for example [MMLU](https://github.com/EleutherAI/lm-evaluation-harness/tree/main/lm_eval/tasks/mmlu), [HellaSwag](https://github.com/EleutherAI/lm-evaluation-harness/tree/main/lm_eval/tasks/hellaswag), [GSM8K](https://github.com/EleutherAI/lm-evaluation-harness/tree/main/lm_eval/tasks/gsm8k)) and runtimes (such as [Hugging Face](https://github.com/huggingface/transformers), [vLLM](https://github.com/vllm-project/vllm), and [llama.cpp](https://github.com/ggml-org/llama.cpp)). In this section, you’ll run accuracy tests for both BF16 and INT8 deployments of your Llama models served by vLLM on Arm-based servers.
 
 You will:
 - Install the lm-eval harness with vLLM support
