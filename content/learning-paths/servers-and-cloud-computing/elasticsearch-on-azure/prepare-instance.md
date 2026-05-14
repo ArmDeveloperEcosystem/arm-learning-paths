@@ -6,11 +6,11 @@ weight: 4
 layout: "learningpathall"
 ---
 
-## Introduction
+## Set up the virutal machine for Elasticsearch and ESRally
 
-In this section, you prepare your Cobalt 100 virtual machine for Elasticsearch and ESRally. After the base packages are installed, you install Elasticsearch and the benchmarking tool.
+In this section, you'll prepare your Cobalt 100 virtual machine for Elasticsearch and ESRally. After installing the base packages, you'll install Elasticsearch and the benchmarking tool.
 
-## Prepare the virtual machine
+### Install dependencies on virtual machine
 
 Start by updating the package index and installing the system dependencies. This includes `openjdk-21-jdk`, which Elasticsearch requires, and `apt-transport-https`, `ca-certificates`, and `software-properties-common`, which are needed to add external package repositories in the next step:
 
@@ -53,7 +53,7 @@ which java
 java --version
 ```
 
-Output should be similar to:
+The output is similar to:
 
 ```output
 /usr/bin/java
@@ -63,7 +63,7 @@ OpenJDK Runtime Environment (build 21.0.10+7-Ubuntu-124.04)
 OpenJDK 64-Bit Server VM (build 21.0.10+7-Ubuntu-124.04, mixed mode, sharing)
 ```
 
-## Install Elasticsearch and ESRally
+### Install Elasticsearch and ESRally
 
 Add the Elastic APT package repository and install Elasticsearch. The first command imports the Elastic GPG signing key so `apt` can verify package authenticity. The second registers the Elastic 9.x repository. After installation, enable the service so it starts automatically on reboot, then start it now:
 
@@ -88,7 +88,7 @@ Confirm that Elasticsearch is installed and running:
 sudo systemctl status elasticsearch
 ```
 
-Output should be similar to:
+The output is similar to:
 
 ```output
 elasticsearch.service - Elasticsearch
@@ -108,7 +108,7 @@ Confirm that ESRally is installed:
 esrally --version
 ```
 
-Output should be similar to:
+The output is similar to:
 
 ```output
 esrally 2.13.0
@@ -130,4 +130,4 @@ Use this version value for the `--distribution-version` flag when running ESRall
 
 ## What you've learned and what's next
 
-In this section, you prepared the VM and installed both Elasticsearch and ESRally. In the next section, you will run the geonames benchmark and review the baseline performance results.
+You've now prepared the virtual machine and installed both Elasticsearch and ESRally. Next, you'll run the geonames benchmark and review the baseline performance results.

@@ -6,21 +6,9 @@ weight: 2
 layout: "learningpathall"
 ---
 
-## Learning Path overview
-
-In this Learning Path, you deploy Elasticsearch on an Arm-based Azure Cobalt 100 virtual machine and run a baseline benchmark with ESRally. You then review key latency and throughput metrics so you can assess initial performance on Arm.
-
-## What you will do
-
-You will complete one end-to-end developer task:
-
-1. Create an Azure Cobalt 100 Arm virtual machine.
-2. Install Elasticsearch and ESRally.
-3. Run the geonames track and review benchmark results.
-
 ## Azure Cobalt 100 Arm-based processor
 
-Azure’s Cobalt 100 is Microsoft’s first-generation, in-house Arm-based processor. Built on Arm Neoverse N2, Cobalt 100 is a 64-bit CPU that delivers strong performance and energy efficiency for cloud-native, scale-out Linux workloads such as web and application servers, data analytics, open-source databases, and caching systems. Running at 3.4 GHz, Cobalt 100 allocates a dedicated physical core for each vCPU, which helps ensure consistent and predictable performance.
+Azure’s Cobalt 100 is Microsoft’s first-generation, in-house Arm-based processor. Built on Arm Neoverse N2, Cobalt 100 is a 64-bit CPU that delivers strong performance and energy efficiency for cloud-native, scale-out Linux workloads. These workloads include web and application servers, data analytics, open-source databases, and caching systems. Running at 3.4 GHz, Cobalt 100 allocates a dedicated physical core for each vCPU, which ensures consistent and predictable performance.
 
 To learn more, see the Microsoft blog [Announcing the preview of new Azure VMs based on the Azure Cobalt 100 processor](https://techcommunity.microsoft.com/blog/azurecompute/announcing-the-preview-of-new-azure-vms-based-on-the-azure-cobalt-100-processor/4146353).
 
@@ -34,4 +22,7 @@ ESRally is Elastic's benchmarking tool for Elasticsearch, designed to measure in
 
 ## What you've learned and what's next
 
-Next, you'll create a Cobalt 100 Azure VM and prepare it to install the Elasticsearch runtime and ESRally benchmark tool.
+You've learned why Azure Cobalt 100 Arm-based VMs are a good fit for scale-out Linux workloads, and how Elasticsearch supports search and analytics workloads. You also learned how ESRally provides repeatable benchmarks for measuring Elasticsearch indexing and query performance.
+
+Next, you'll create a Cobalt 100 Azure VM that will host Elasticsearch and the ESRally benchmark environment.
+
