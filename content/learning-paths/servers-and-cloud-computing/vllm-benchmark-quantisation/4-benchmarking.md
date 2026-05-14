@@ -90,7 +90,7 @@ Repeat with the quantised model.
 lm_eval --model vllm --model_args pretrained=RedHatAI/Meta-Llama-3.1-8B-quantized.w8a8,dtype=bfloat16,max_model_len=4096 --tasks mmlu,gsm8k --batch_size auto
 ```
 
-We would expect to see the precision is slightly lower with INT8.
+We expect INT8 inference to show a slight accuracy drop compared to BF16. For reference results and expected accuracy differences, see the Red Hat model card: https://huggingface.co/RedHatAI/Meta-Llama-3.1-8B-quantized.w8a8#accuracy
 
 ## Summary of results
 
