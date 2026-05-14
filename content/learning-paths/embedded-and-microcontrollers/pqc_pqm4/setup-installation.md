@@ -15,6 +15,8 @@ You'll need Python 3.8 or higher on your host machine. You'll also need one of t
 - A physical Arm Cortex-M4 development board such as NUCLEO-L4R5ZI (the pqm4 default), NUCLEO-L476RG, or STM32F4 Discovery, plus stlink or OpenOCD for flashing
 - QEMU, if you want to simulate a Cortex-M4 environment using the `mps2-an386` platform without physical hardware
 
+After downloading and installing dependencies, follow the steps to configure either a physical board or QEMU. 
+
 ### Install the Arm GNU Toolchain
 
 Follow the [Arm GNU Toolchain install guide](https://learn.arm.com/install-guides/gcc/arm-gnu/) to install `arm-none-eabi-gcc` on your host machine.
