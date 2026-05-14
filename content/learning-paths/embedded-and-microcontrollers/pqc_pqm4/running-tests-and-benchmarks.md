@@ -19,9 +19,9 @@ bin/crypto_kem_ml-kem-768_<impl>_<type>.bin
 
 The `<impl>` field identifies the implementation variant. The exact suffix depends on the scheme:
 
-- `m4fspeed`: Cortex-M4F implementation optimized for speed (used by ML-KEM)
-- `m4fstack`: Cortex-M4F implementation optimized for stack size (used by ML-KEM)
-- `m4f`: Cortex-M4F implementation (used by some schemes such as BIKE)
+- `m4fspeed`: Cortex-M4F implementation optimized for speed used by ML-KEM
+- `m4fstack`: Cortex-M4F implementation optimized for stack size used by ML-KEM
+- `m4f`: Cortex-M4F implementation used by some schemes such as BIKE
 - `clean`: clean reference implementation from PQClean
 
 The `clean` variant uses a different file prefix: `mupq_pqclean_crypto_kem_<scheme>_clean_<type>.elf`
