@@ -22,16 +22,19 @@ Run the benchmark command from the virtual machine. Replace `9.4.0` with the Ela
 esrally race --distribution-version=9.4.0 --track=geonames --kill-running-processes
 ```
 
-By default, ESRally downloads and manages its own Elasticsearch process for the duration of the benchmark — it does not use the Elasticsearch instance you started with `systemctl`. The `--distribution-version` flag tells ESRally which Elasticsearch version to download and run. The `--kill-running-processes` flag stops any existing Elasticsearch processes before starting, including the one started by `systemctl`, so there is no port conflict on 9200.
+By default, ESRally downloads and manages its own Elasticsearch process for the duration of the benchmark. It does not use the Elasticsearch instance you started with `systemctl`. The `--distribution-version` flag tells ESRally which Elasticsearch version to download and run. The `--kill-running-processes` flag stops any existing Elasticsearch processes before starting, including the one started by `systemctl`, so there is no port conflict on 9200.
 
 {{% notice Note %}}
-This benchmarking test takes approximately 85-90 minutes to complete on an E4pds_v6 instance. Do not interrupt or pause the benchmark because doing so will skew the results.
+This benchmarking test takes approximately 85-90 minutes to complete on an E4pds_v6 instance. To avoid skewing the results, don't interrupt or pause the benchmark.
 {{% /notice %}}
 
 ## Interpret the benchmark results
 
-The following sample output shows a baseline geonames run on an Azure Cobalt 100 E4pds_v6 virtual machine. Your results will be similar but may vary slightly depending on VM load, Elasticsearch version, and available memory. Indexing sustained a mean of about 61,054 docs/s with 0% errors, while common read-path workloads such as default search, term search, phrase search, and cached aggregation stayed in an excellent 3-4 ms p50 range. The system completed the run without any old-generation garbage collections, suggesting healthy JVM behavior under this benchmark. The main latency costs appeared in heavier workloads such as uncached aggregation, scroll, expression queries, and script-based scoring, which is consistent with Elasticsearch performance expectations for compute-intensive query
-patterns.
+The following sample output shows a baseline geonames run on an Azure Cobalt 100 E4pds_v6 virtual machine. Your results will be similar but might vary slightly depending on VM load, Elasticsearch version, and available memory. 
+
+Indexing sustained a mean of about 61,054 docs/s with 0% errors. Common read-path workloads such as default search, term search, phrase search, and cached aggregation stayed in an excellent 3-4 ms p50 range.
+
+The system completed the run without any old-generation garbage collections, suggesting healthy JVM behavior under this benchmark. The main latency costs appeared in heavier workloads such as uncached aggregation, scroll, expression queries, and script-based scoring. This is consistent with Elasticsearch performance expectations for compute-intensive query patterns.
 
 ### Example performance summary
 
@@ -45,16 +48,18 @@ patterns.
 
 - Indexing throughput averaged 61,054 docs/s (min 58,586 docs/s, max 64,191 docs/s) and completed with 0% errors.
 - Common search workloads were consistently fast, with default, term, and phrase queries all clustered around 3-4 ms p50 latency.
-- Caching made a major difference for aggregation: cached country aggregation was about 36.5x faster than uncached at p50 latency (2.88 ms vs 105.1 ms).
+- Caching made a major difference for aggregation: Cached country aggregation was about 36.5x faster than uncached at p50 latency (2.88 ms vs 105.1 ms).
 - Scripted scoring remained expensive: `field_value_script_score` was about 1.39x slower than `field_value_function_score` at p50 latency (197.8 ms vs 142.1 ms). `painless_static` was the slowest task in the run at 410.9 ms p50, slightly ahead of `painless_dynamic` at 384.9 ms p50.
 - Scroll and uncached aggregation were the most notable non-script latency costs at about 222 ms and 105 ms p50 latency, respectively.
-- JVM behavior looked stable: 983 young-generation collections consumed 6.40 seconds total and there were no old-generation collections.
+- JVM behavior looked stable: 983 young-generation collections consumed 6.40 seconds total, and there were no old-generation collections.
 - Merge work totaled 3.34 minutes with 1.25 minutes of throttle time, indicating some ingest-side background pressure but not a throughput collapse.
 - The final store footprint matched the dataset size at 2.67 GB, suggesting low additional storage overhead in this run.
 
 ### Conclusions
 
-This benchmark result supports the view that Azure Cobalt 100 E4pds_v6 is capable of delivering strong Elasticsearch baseline performance for the geonames track, especially for ordinary search, sort, and cached aggregation paths. Indexing sustained over 61,000 docs/s on average with zero errors, and the JVM remained stable throughout with no old-generation collections. The main practical limitation is query complexity: scripting, score computation, scroll, and uncached aggregation create a clear latency step-up relative to fast-path queries, so these workloads should be isolated, cached, or minimized when low latency matters.
+This benchmark result supports the view that Azure Cobalt 100 E4pds_v6 is capable of delivering strong Elasticsearch baseline performance for the geonames track, especially for ordinary search, sort, and cached aggregation paths. Indexing sustained over 61,000 docs/s on average with zero errors, and the JVM remained stable throughout with no old-generation collections. 
+
+The main practical limitation is query complexity. Scripting, score computation, scroll, and uncached aggregation create a clear latency step-up relative to fast-path queries. These workloads should be isolated, cached, or minimized when low latency matters.
 
 ## What you've accomplished
 

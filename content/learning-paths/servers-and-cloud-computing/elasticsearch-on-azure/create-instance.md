@@ -31,7 +31,7 @@ To create a VM using the Azure portal, follow these steps:
 
 5. In **Size**, select **See all sizes**, choose the **E-series v6** series, then select **E4pds_v6**.
 
-   ![Screenshot of Azure portal VM creation options showing the Arm64 architecture and E4pds_v6 size selection for Cobalt 100. Confirm these fields so your VM runs on Arm hardware.#center](images/instance.png "Select the Epsv6 series and E4pds_v6")
+   ![Screenshot of Azure portal VM creation options showing the Arm64 architecture and E4pds_v6 size selection for Cobalt 100. Confirm these fields so your VM runs on Arm hardware.#center](images/instance.png "Select the E-series v6 series and E4pds_v6")
 
 6. Under **Authentication type**, choose **SSH public key**. Azure can generate a key pair and store it for future use. For **SSH key type**, **ED25519** is recommended (RSA is also supported).
 
@@ -63,4 +63,4 @@ Your virtual machine should be ready in a few minutes. You can then connect over
 
 You've now created an Arm-based Azure Cobalt 100 virtual machine and confirmed the deployment details needed for SSH access. 
 
-Next, you will install Elasticsearch and ESRally on the VM.
+Next, you'll install Elasticsearch and ESRally on the virtual machine.

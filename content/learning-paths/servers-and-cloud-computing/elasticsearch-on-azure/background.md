@@ -16,7 +16,7 @@ To learn more, see the Microsoft blog [Announcing the preview of new Azure VMs b
 
 Elasticsearch is a distributed search and analytics engine built on Apache Lucene that is used to index, store, search, and analyze large volumes of structured and unstructured data in near real time. It is commonly used for full-text search, log and event analytics, observability, security workloads, and increasingly as a vector database for AI-powered retrieval use cases.
 
-## ESRally benchmarking tools for Elasticsearch
+## ESRally benchmarking for Elasticsearch
 
 ESRally is Elastic's benchmarking tool for Elasticsearch, designed to measure indexing, query, and cluster performance under realistic workloads so teams can compare configurations, detect regressions, and evaluate tuning changes. It works by running repeatable benchmark races against Elasticsearch using predefined or custom tracks, making it useful for both local testing and larger-scale performance validation.
 

@@ -6,7 +6,7 @@ weight: 4
 layout: "learningpathall"
 ---
 
-## Set up the virutal machine for Elasticsearch and ESRally
+## Set up the virtual machine for Elasticsearch and ESRally
 
 In this section, you'll prepare your Cobalt 100 virtual machine for Elasticsearch and ESRally. After installing the base packages, you'll install Elasticsearch and the benchmarking tool.
 
@@ -22,7 +22,7 @@ sudo apt -y autoremove
 sudo apt -y autoclean
 ```
 
-ESRally requires Python 3.10. Ubuntu 24.04 ships with Python 3.12 by default, which ESRally does not support. The `deadsnakes` PPA provides older Python versions for Ubuntu and lets you install Python 3.10 alongside the system default without replacing it.
+ESRally requires Python 3.10. Ubuntu 24.04 ships with Python 3.12 by default, which ESRally doesn't support. The `deadsnakes` PPA provides older Python versions for Ubuntu that you can use to install Python 3.10 alongside the system default without replacing it.
 
 Add the deadsnakes PPA and install Python 3.10:
 
@@ -32,7 +32,7 @@ sudo apt update
 sudo apt install -y python3.10-dev python3.10 python3.10-venv
 ```
 
-Create a dedicated virtual environment for ESRally named `rally` using Python 3.10, then add two lines to `.bashrc` so both the virtual environment and the `JAVA21_HOME` variable are available in every new shell session. ESRally uses `JAVA21_HOME` to locate the correct JDK at runtime:
+Create a dedicated virtual environment for ESRally named `rally` using Python 3.10. Then, add two lines to `.bashrc` so both the virtual environment and the `JAVA21_HOME` variable are available in every new shell session. ESRally uses `JAVA21_HOME` to locate the correct JDK at runtime:
 
 ```bash
 python3.10 -m venv rally
@@ -46,7 +46,7 @@ Reload your shell configuration to activate the `rally` virtual environment and 
 source $HOME/.bashrc
 ```
 
-Confirm that Java is available and points to OpenJDK 21.
+Confirm that Java is available and points to OpenJDK 21:
 
 ```bash
 which java
@@ -65,7 +65,7 @@ OpenJDK 64-Bit Server VM (build 21.0.10+7-Ubuntu-124.04, mixed mode, sharing)
 
 ### Install Elasticsearch and ESRally
 
-Add the Elastic APT package repository and install Elasticsearch. The first command imports the Elastic GPG signing key so `apt` can verify package authenticity. The second registers the Elastic 9.x repository. After installation, enable the service so it starts automatically on reboot, then start it now:
+Add the Elastic APT package repository and install Elasticsearch. The first command imports the Elastic GPG signing key so `apt` can verify package authenticity. The second registers the Elastic 9.x repository. After installation, enable the service so it starts automatically on reboot, then start it:
 
 ```bash
 curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
@@ -120,7 +120,7 @@ Note the Elasticsearch version your instance is running, as you'll need it in th
 dpkg -l elasticsearch | grep elasticsearch
 ```
 
-The output shows the installed package version in the third column, for example:
+The output shows the installed package version in the third column. For example:
 
 ```output
 ii  elasticsearch  9.4.0  arm64  Distributed RESTful search engine built for the cloud
@@ -130,4 +130,6 @@ Use this version value for the `--distribution-version` flag when running ESRall
 
 ## What you've learned and what's next
 
-You've now prepared the virtual machine and installed both Elasticsearch and ESRally. Next, you'll run the geonames benchmark and review the baseline performance results.
+You've now prepared the virtual machine and installed both Elasticsearch and ESRally. 
+
+Next, you'll run the geonames benchmark and review the baseline performance results.
