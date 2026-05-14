@@ -11,7 +11,7 @@ layout: learningpathall
 In this section, you provision a Google Axion C4A VM on Google Cloud Platform (GCP) using the `c4a-standard-4` machine type, which provides 4 vCPUs and 16 GB of memory.
 
 {{% notice Note %}}
-For general guidance on setting up a Google Cloud account and project, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
+For general guidance on setting up a Google Cloud account and project, see the Learning Path [Getting started with Google Cloud Platform](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/google).
 {{% /notice %}}
 
 ## Provision a Google Axion C4A VM in the Google Cloud Console
