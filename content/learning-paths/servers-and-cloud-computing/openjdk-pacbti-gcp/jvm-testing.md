@@ -1,10 +1,14 @@
 ---
-title: Install OpenJDK and verify PAC/BTI support
+title: Test PAC/BTI support with SUSE OpenJDK
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+
+## Validate hardware and JVM security features
+
+In this section, you'll install the default OpenJDK package and run a comprehensive test script to check PAC/BTI support at both the hardware level and in the JVM compiler.
 
 ## Install the default OpenJDK JVM
 
@@ -28,6 +32,8 @@ openjdk 17.0.13 2024-10-15
 OpenJDK Runtime Environment (build 17.0.13+11-suse-150400.3.48.2-aarch64)
 OpenJDK 64-Bit Server VM (build 17.0.13+11-suse-150400.3.48.2-aarch64, mixed mode, sharing)
 ```
+
+✅ OpenJDK 17 is now installed and ready to test.
 
 Next, download and run a script to confirm PAC/BTI readiness in the JVM you just installed.
 
@@ -446,24 +452,24 @@ Meaning     : The JVM is executing on Linux/AArch64 with PAC and BTI exposed to 
 
 ## Interpret the results
 
-The output tells you two separate things. Use the following table to understand what you have and what you don't:
+The output shows you two separate things:
 
 | Layer | Status | What it means |
 |-------|--------|---------------|
 | Hardware + kernel (auxv probe) | ✅ PAC and BTI exposed | The C4A Arm Neoverse-V2 hardware and Linux kernel advertise PAC/BTI to userspace. The SUMMARY confirms platform PAC/BTI is YES. |
 | OS and native libraries | ✅ Protected | The kernel, glibc, and other system libraries on C4A are compiled with PAC/BTI. Native code in the JVM process is already protected. |
-| JVM JIT compiler | ❌ Not enabled | The SUSE OpenJDK 17 package was not built with `--enable-branch-protection`. The JIT compiler does not emit PAC/BTI instructions in dynamically compiled Java code. |
+| JVM JIT compiler | ❌ Not enabled | The SUSE OpenJDK 17 package wasn't built with `--enable-branch-protection`. The JIT compiler doesn't emit PAC/BTI instructions in dynamically compiled Java code. |
 
-The `-XX:UseBranchProtection=standard` rejection confirms the JIT limitation. This flag only exists in OpenJDK builds that were compiled from source with branch protection enabled. The SUSE-packaged JDK 17 does not include this support.
+The `-XX:UseBranchProtection=standard` rejection confirms the JIT limitation. This flag only exists in OpenJDK builds that were compiled from source with branch protection enabled. The SUSE-packaged JDK 17 doesn't include this support.
 
 ## What does this mean in practice?
 
-Your Java application runs on a PAC/BTI-capable platform, and native code paths (system libraries, the JVM's own C++ runtime) are already protected. However, the hot Java methods that the JIT compiler turns into native machine code at runtime do **not** contain PAC/BTI instructions. This means JIT-compiled code does not benefit from hardware-enforced return address signing or branch target restrictions.
+Your Java application runs on a PAC/BTI-capable platform, and native code paths (system libraries, the JVM's own C++ runtime) are already protected. However, the hot Java methods that the JIT compiler turns into native machine code at runtime **don't** contain PAC/BTI instructions. This means JIT-compiled code doesn't benefit from hardware-enforced return address signing or branch target restrictions.
 
 To get full end-to-end PAC/BTI protection, including JIT-compiled Java code, you need a JVM that was built with branch protection enabled.
 
 ## What you've learned and what's next
 
-You've confirmed that the Google Cloud C4A platform exposes PAC and BTI at the hardware level, and that the OS and native libraries are already protected. The gap is in the JVM's JIT compiler: the SUSE OpenJDK 17 package does not generate PAC/BTI instructions in compiled Java code.
+You've confirmed that the Google Cloud C4A platform exposes PAC and BTI at the hardware level, and that the OS and native libraries are already protected. The gap is in the JVM's JIT compiler: the SUSE OpenJDK 17 package doesn't generate PAC/BTI instructions in compiled Java code.
 
 In the next section, you'll install a JVM build that includes full PAC/BTI JIT support, closing this gap so that dynamically compiled Java code also benefits from hardware-enforced control-flow integrity.

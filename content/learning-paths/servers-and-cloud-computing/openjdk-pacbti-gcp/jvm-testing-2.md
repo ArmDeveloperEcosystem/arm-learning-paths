@@ -1,5 +1,5 @@
 ---
-title: Install Oracle JVM and verify PAC/BTI support
+title: Test PAC/BTI support with Oracle JDK
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Install the Oracle JDK
 
-The SUSE-packaged OpenJDK 17 confirmed that the C4A platform exposes PAC and BTI, but its JIT compiler does not emit PAC/BTI instructions. Oracle's JDK 21 for Linux/AArch64 is built with `--enable-branch-protection`, so the JIT compiler generates PAC/BTI instructions in compiled Java code.
+The SUSE-packaged OpenJDK 17 confirmed that the C4A platform exposes PAC and BTI, but its JIT compiler doesn't emit PAC/BTI instructions. Oracle's JDK 21 for Linux/AArch64 is built with `--enable-branch-protection`, so the JIT compiler generates PAC/BTI instructions in compiled Java code.
 
 Download and install Oracle JDK 21:
 
@@ -101,17 +101,19 @@ Meaning     : The JVM is executing on Linux/AArch64 with PAC and BTI exposed to 
 
 The Oracle JDK 21 output shows three key improvements over the SUSE OpenJDK 17:
 
-1. **`UseBranchProtection` flag is visible.** The JVM exposes this as a configurable option, confirming it was built with branch protection support.
-2. **`-XX:UseBranchProtection=standard` is accepted.** The JIT compiler can be told to emit PAC/BTI instructions in compiled Java code.
-3. **SUMMARY shows FULL PAC/BTI SUPPORT.** The platform exposes PAC/BTI and the JVM JIT can use it.
+- **`UseBranchProtection` flag is visible.** The JVM exposes this as a configurable option, confirming it was built with branch protection support.
+- **`-XX:UseBranchProtection=standard` is accepted.** The JIT compiler can be told to emit PAC/BTI instructions in compiled Java code.
+- **SUMMARY shows FULL PAC/BTI SUPPORT.** The platform exposes PAC/BTI and the JVM JIT can use it.
 
-The default value of `UseBranchProtection = none` means the JIT does not emit PAC/BTI instructions unless you opt in with `-XX:UseBranchProtection=standard`. This gives you control over whether to enable the feature for your workloads.
+The default value of `UseBranchProtection = none` means the JIT doesn't emit PAC/BTI instructions unless you opt in with `-XX:UseBranchProtection=standard`. This gives you control over whether to enable the feature for your workloads.
 
 | Layer | SUSE OpenJDK 17 | Oracle JDK 21 |
 |-------|-----------------|---------------|
 | Hardware + kernel | ✅ PAC/BTI exposed | ✅ PAC/BTI exposed |
 | OS and native libraries | ✅ Protected | ✅ Protected |
 | JVM JIT compiler | ❌ Not enabled | ✅ Available (opt-in via `-XX:UseBranchProtection=standard`) |
+
+✅ Full PAC/BTI protection achieved!
 
 To run your Java application with full PAC/BTI JIT protection:
 

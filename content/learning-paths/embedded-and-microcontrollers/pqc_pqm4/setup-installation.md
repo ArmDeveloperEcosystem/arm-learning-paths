@@ -6,26 +6,20 @@ weight: 3
 layout: learningpathall
 ---
 
-## Required hardware and software
+## Download and install dependencies for pqm4
 
-This page walks you through installing all dependencies needed to build and run pqm4. By the end, you'll have:
+In this section, you'll install all dependencies needed to build and run pqm4. 
 
-- The Arm GNU Toolchain (`arm-none-eabi-gcc`) for compiling pqm4
-- Python 3.8 or higher with the `pyserial` and `tqdm` modules
-- The pqm4 repository cloned with all submodules
-
-You'll also need one of the following to run pqm4:
+You'll need Python 3.8 or higher on your host machine. You'll also need one of the following to run pqm4:
 
 - A physical Arm Cortex-M4 development board such as NUCLEO-L4R5ZI (the pqm4 default), NUCLEO-L476RG, or STM32F4 Discovery, plus stlink or OpenOCD for flashing
 - QEMU, if you want to simulate a Cortex-M4 environment using the `mps2-an386` platform without physical hardware
 
-If you're using QEMU, you can skip the stlink, OpenOCD, and serial port configuration sections on this page. If you're using a physical board, you can skip the QEMU section.
+After downloading and installing dependencies, follow the steps to configure either a physical board or QEMU. 
 
-Optionally, install ChipWhisperer if you're using the `cw308t-stm32f3` platform.
+### Install the Arm GNU Toolchain
 
-## Install the Arm GNU Toolchain
-
-Follow the [Arm GNU Toolchain install guide](https://learn.arm.com/install-guides/gcc/arm-gnu/) to install `arm-none-eabi-gcc` on your system.
+Follow the [Arm GNU Toolchain install guide](https://learn.arm.com/install-guides/gcc/arm-gnu/) to install `arm-none-eabi-gcc` on your host machine.
 
 {{% notice Note %}}
 Use toolchain version 12.x. Other versions may work but have not been tested.
@@ -45,10 +39,38 @@ Copyright (C) 2022 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
+### Download pqm4 and submodules
 
-## Install stlink (physical board only)
+Clone the pqm4 repository including all submodules:
 
-If you are using a physical board, install stlink using your package manager.
+```bash
+git clone --recursive https://github.com/mupq/pqm4.git
+cd pqm4
+```
+
+### Install Python dependencies
+
+Create a virtual environment inside the pqm4 directory and install the required modules:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install pyserial tqdm
+```
+
+Activate the virtual environment each time you open a new terminal before running pqm4 Python scripts:
+
+```bash
+source venv/bin/activate
+```
+
+## Configure a physical board
+
+If you're using a physical development board, follow these steps to configure it.
+
+### Install stlink 
+
+Install stlink using your package manager.
 
 On Linux:
 
@@ -83,7 +105,7 @@ The output is similar to:
 Found 1 stlink programmers
 ```
 
-## Install OpenOCD (physical board only)
+### (Optional) Install OpenOCD 
 
 If you are using a physical board and stlink does not support it, install OpenOCD as an alternative.
 
@@ -111,9 +133,9 @@ make
 sudo make install
 ```
 
-## Install ChipWhisperer (optional)
+### (Optional) Install ChipWhisperer 
 
-ChipWhisperer is only required if you are using the `cw308t-stm32f3` platform. If you are using another board such as NUCLEO or STM32 Discovery, skip this section.
+ChipWhisperer is required only if you're using the `cw308t-stm32f3` platform. If you're using another board such as NUCLEO or STM32 Discovery, skip this section.
 
 Install it using pip:
 
@@ -121,50 +143,8 @@ Install it using pip:
 python3 -m pip install chipwhisperer
 ```
 
-## Install QEMU (simulation only)
 
-If you are using a physical board, skip this section.
-
-Install QEMU to simulate a Cortex-M4 environment using the `mps2-an386` machine type.
-
-On macOS:
-
-```bash
-brew install qemu
-```
-
-On Linux:
-
-```bash
-sudo apt-get install qemu-system-arm -y
-```
-
-## Install Python dependencies
-
-Create a virtual environment inside the pqm4 directory and install the required modules:
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install pyserial tqdm
-```
-
-Activate the virtual environment each time you open a new terminal before running pqm4 Python scripts:
-
-```bash
-source venv/bin/activate
-```
-
-## Download pqm4 and submodules
-
-Clone the pqm4 repository including all submodules:
-
-```bash
-git clone --recursive https://github.com/mupq/pqm4.git
-cd pqm4
-```
-
-## Build for a target platform
+### Build for a target platform
 
 Build pqm4 by specifying the platform identifier for your board using the `PLATFORM` variable.
 
@@ -185,20 +165,11 @@ For STM32F4 Discovery:
 ```bash
 make -j4 PLATFORM=stm32f4discovery
 ```
+For a full list of supported platforms, see the [pqm4 README](https://github.com/mupq/pqm4).
 
-For QEMU simulation:
+### Configure the serial port 
 
-```bash
-make -j4 PLATFORM=mps2-an386
-```
-
-See the [pqm4 README](https://github.com/mupq/pqm4) for the full list of supported platforms.
-
-## Configure the serial port (physical board only)
-
-If you are using QEMU, skip this section.
-
-The script `host_unidirectional.py` uses a default serial port (often `/dev/ttyUSB0`) which may not match your system. Update it to match your board's serial port.
+The script `host_unidirectional.py` uses a default serial port (often `/dev/ttyUSB0`) which might not match your system. Update it to match your board's serial port.
 
 On macOS:
 
@@ -224,13 +195,11 @@ Update this line with your actual port:
 dev = serial.Serial("/dev/tty.usbmodemXXXX", 38400)
 ```
 
-## Flash and verify communication (physical board only)
-
-If you are using QEMU, skip this section. Communication with QEMU is covered in the next page.
+### Flash and verify communication
 
 Connect the board to your host machine using the mini-USB port to provide power and enable flashing.
 
-Flash a basic test binary:
+Flash a test binary:
 
 ```bash
 st-flash write bin/boardtest.bin 0x8000000
@@ -250,4 +219,42 @@ Stack Size
 Random number
 ```
 
-If you see this output, your board is flashed, communicating over serial, and ready to run pqm4. In the next section, you'll run the pqm4 test suite and benchmarks to measure the performance of post-quantum algorithms on your Cortex-M4 board.
+If you see this output, your board is flashed, communicating over serial, and ready to run pqm4. 
+
+## Configure QEMU
+
+If you're using QEMU instead of a physical board, follow these steps:
+
+### Install QEMU
+
+Install QEMU to simulate a Cortex-M4 environment using the `mps2-an386` machine type.
+
+On macOS:
+
+```bash
+brew install qemu
+```
+
+On Linux:
+
+```bash
+sudo apt-get install qemu-system-arm -y
+```
+
+### Build for a target platform
+
+Build pqm4 by specifying the platform identifier for QEMU simulation using the `PLATFORM` variable:
+
+```bash
+make -j4 PLATFORM=mps2-an386
+```
+
+For a full list of supported platforms, see the [pqm4 README](https://github.com/mupq/pqm4).
+
+Communication with QEMU is covered in the next section.
+
+## What you've accomplished and what's next
+
+You've now installed the Arm GNU Toolchain, installed required Python dependencies, and cloned the pqm4 repository. You've also set up either a physical Arm Cortex-M4 development board or QEMU to build and run pqm4.
+
+Next, you'll run the pqm4 test suite and benchmarks to measure the performance of post-quantum algorithms.
