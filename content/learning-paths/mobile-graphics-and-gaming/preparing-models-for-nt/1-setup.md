@@ -6,15 +6,15 @@ weight: 2
 layout: learningpathall
 ---
 
-## OS and tooling requirements
+## Prepare your host system
 
-Before you can create a reference PyTorch model, you need to set up Python, ExecuTorch, and  Arm backend dependencies
+Before you can create a reference PyTorch model, you need to set up Python, ExecuTorch, and Arm backend dependencies.
 
 Use one of the following:
 - Linux
 - macOS with Apple Silicon
 
-Install and verify Python 3.10+, <3.14:
+Verify that your Python version is 3.10 or later and earlier than 3.14:
 
 ```bash
 python3 --version
@@ -97,6 +97,6 @@ prepare-models-for-nt.ipynb
 
 ## What you've accomplished and what's next
 
-You've now set up the Python environment and ExecuTorch for creating PyTorch models.
+You've now set up the Python environment, installed ExecuTorch, and configured Arm backend dependencies for creating and exporting PyTorch models.
 
 Next, you'll create and export your first test model, either from the Learning Path pages or from the optional Jupyter notebook.

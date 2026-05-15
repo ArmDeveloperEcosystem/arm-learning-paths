@@ -11,6 +11,7 @@ layout: learningpathall
 The primary workflow in this Learning Path is PyTorch export to `.vgf` with the ExecuTorch VGF backend. If you want to understand what happens in the middle, Tensor Operator Set Architecture (TOSA) is the stable intermediate representation (IR) between PyTorch export and backend-specific artifacts such as `.vgf`.
 
 By extracting TOSA, you can:
+
 - Check operator lowering before backend compilation
 - Confirm tensor layout and shape flow
 - Compare behavior when different backends produce different results

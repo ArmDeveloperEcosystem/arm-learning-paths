@@ -1,5 +1,5 @@
 ---
-title: Export reference model with the ExecuTorch VGF backend
+title: Export the reference model with the ExecuTorch VGF backend
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -123,6 +123,6 @@ If you want to run a packaged end-to-end sample after validating this toy model,
 
 ## What you've accomplished and what's next
 
-You've now exported the `AddSigmoid` model with the ExecuTorch VGF backend, generated a `.pte` artifact, and optionally built and ran the VKML validation path.
+You've now exported the `AddSigmoid` model with the ExecuTorch VGF backend, generated `.vgf` artifacts, and optionally built and ran the VKML validation path.
 
 Next, you'll inspect the generated model artifacts in Model Explorer to confirm the graph structure, tensor shapes, and backend output.

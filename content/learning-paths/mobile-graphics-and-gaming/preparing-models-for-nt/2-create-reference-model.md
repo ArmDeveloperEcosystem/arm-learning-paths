@@ -11,13 +11,16 @@ layout: learningpathall
 Before using a production NSS model, it helps to validate the toolchain with a small graph that is easy to inspect.
 
 In this section, you'll use a minimal `AddSigmoid` model so you can focus on the conversion flow:
+
 1. PyTorch export
 2. VGF export with the ExecuTorch backend
 3. Artifact inspection in Model Explorer
 4. Optional TOSA inspection when you need to debug the lowering path
 5. Runtime validation with an ExecuTorch runner
 
-This matters because neural graphics models sit between ML tooling and real-time graphics runtimes. In Arm's neural accelerator ecosystem, a trained PyTorch model usually needs to become a deployable artifact that can be consumed by ML Extensions for Vulkan. It then needs to be inspected with graphics-oriented tooling and validated before it is integrated into an engine or sample application. This is the same workflow pattern used in other NX Learning Paths, including [Quantize neural upscaling models with ExecuTorch](/learning-paths/mobile-graphics-and-gaming/quantize-neural-upscaling-models/) and [Fine-tune neural graphics models using Model Gym](/learning-paths/mobile-graphics-and-gaming/model-training-gym/).
+Neural graphics models sit between ML tooling and real-time graphics runtimes. In Arm's neural accelerator ecosystem, a trained PyTorch model usually needs to become a deployable artifact that can be consumed by ML Extensions for Vulkan. It then needs to be inspected with graphics-oriented tooling and validated before it is integrated into an engine or sample application. 
+
+This is the same workflow pattern used in other NX Learning Paths, including [Quantize neural upscaling models with ExecuTorch](/learning-paths/mobile-graphics-and-gaming/quantize-neural-upscaling-models/) and [Fine-tune neural graphics models using Model Gym](/learning-paths/mobile-graphics-and-gaming/model-training-gym/).
 
 ### Create and export an AddSigmoid model
 
@@ -58,6 +61,6 @@ The printed graph confirms the model was exported correctly. The saved `add_sigm
 
 ## What you've accomplished and what's next
 
-You've now createdand exported a minimal `AddSigmoid` PyTorch model that you'll use to validate the model preparation worklow.
+You've now created and exported a minimal `AddSigmoid` PyTorch model that you'll use to validate the model preparation workflow.
 
 Next, you'll export this model with the ExecuTorch VGF backend.
