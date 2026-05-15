@@ -6,26 +6,9 @@ weight: 4
 layout: learningpathall
 ---
 
-## Setup PyTorch and DeepSpeed on GCP Axion (Arm)
+## Set up the Python environment
 
-This section guides you through setting up a Python AI/ML environment on a Google Cloud Axion Arm64 VM using SUSE Linux Enterprise Server.
-
-The setup validates:
-
-- PyTorch execution on Arm64
-- DeepSpeed installation in compatibility mode
-- CPU-only AI/ML runtime configuration
-- Arm64 AI development environment preparation
-
-## Learning Objectives
-
-- Verify Arm64 environment
-- Configure Python 3.11
-- Create Python virtual environment
-- Install PyTorch on Arm
-- Install DeepSpeed in compatibility mode
-- Validate AI/ML environment setup
-- Understand DeepSpeed limitations on SUSE Arm64
+This section walks through installing Python 3.11, creating a virtual environment, and installing PyTorch and DeepSpeed on the GCP Axion VM running SUSE Linux.
 
 
 ## Verify ARM64 architecture
@@ -48,27 +31,31 @@ Check CPU details:
 lscpu
 ```
 
+The output is similar to:
 
-## Install Python 
-Deep learning frameworks such as PyTorch and DeepSpeed work more reliably with modern Python versions.
+```output
+Architecture:                aarch64
+  CPU op-mode(s):            64-bit
+  Byte Order:                Little Endian
+CPU(s):                      4
+  On-line CPU(s) list:       0-3
+Vendor ID:                   ARM
+  Model name:                Neoverse-V2
+```
+
+The `Neoverse-V2` model name confirms you're running on a Google Axion processor. The `aarch64` architecture confirms the 64-bit Arm environment that PyTorch and DeepSpeed will target.
+
+## Install Python
+
+The default Python version on SUSE Linux may conflict with PyTorch and DeepSpeed dependencies. Python 3.11 provides stable support for both frameworks and avoids compatibility issues commonly seen with older or newer releases:
 
 ```bash
 sudo zypper install -y python311 python311-pip python311-devel
 ```
 
-## Why Python 3.11 is used
+## Create a Python virtual environment
 
-Python 3.11 provides:
-
-- Better runtime performance
-- Improved package compatibility
-- Stable PyTorch support
-- Better support for AI/ML frameworks
-
-Using Python 3.11 avoids compatibility issues commonly seen with older Python releases.
-
-## Create Python virtual environment
-Create an isolated Python environment to prevent dependency conflicts with system packages.
+Create an isolated Python environment to prevent dependency conflicts with system packages:
 
 ```bash
 python3.11 -m venv deepspeed-env
@@ -86,26 +73,24 @@ Verify:
 python --version
 ```
 
+The output is similar to:
 
-## Upgrade Python tools
-Upgrade Python package management tools.
+```output
+Python 3.11.10
+```
+
+
+## Upgrade pip
+
+Upgrade pip, setuptools, and wheel before installing packages. Outdated packaging tools can cause installation failures or wheel compatibility issues, particularly on Arm64:
 
 ```bash
 pip install --upgrade pip setuptools wheel
 ```
 
-## Why this step is important
-
-Updated packaging tools help:
-
-- Avoid installation failures
-- Improve wheel compatibility
-- Reduce dependency resolution issues
-- Improve Arm64 package installation reliability
-
 ## Install Ninja
 
-Install Ninja using pip instead of zypper.
+Ninja is a lightweight build system used by PyTorch and DeepSpeed to compile native extensions at runtime. Install it via pip rather than zypper to avoid SUSE repository dependency issues sometimes seen on cloud Arm64 images:
 
 ```bash
 pip install ninja
@@ -118,21 +103,14 @@ ninja --version
 ```
 
 The output is similar to:
+
 ```output
 1.13.0.git.kitware.jobserver-pipe-1
 ```
 
-Ninja is a lightweight build system used by:
-
-- PyTorch
-- DeepSpeed
-- native extension compilation workflows
-
-Using pip avoids SUSE repository dependency issues sometimes observed on cloud Arm64 images.
-
-
 ## Install CPU-only PyTorch
-Install CPU-only PyTorch packages:
+
+GCP Axion VMs have no GPU, so install the CPU-only PyTorch build. This avoids unnecessary CUDA dependencies and reduces package size:
 
 ```bash
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
@@ -157,7 +135,7 @@ python -c "import torch; print(torch.__version__)"
 
 The output is similar to:
 ```output
-2.11.0+cpu
+2.12.0+cpu
 ```
 
 Check CUDA availability:
@@ -176,60 +154,31 @@ This is expected because GCP Axion VMs are CPU-only systems.
 
 ## DeepSpeed limitation on SUSE Arm64
 
-DeepSpeed distributed CPU extensions require newer GCC versions.
-
-Default SUSE Arm64 images typically include:
+DeepSpeed's distributed CPU extensions require GCC 9 or later to compile. The default SUSE Linux image on GCP Axion ships with GCC 7.5.0:
 
 ```bash
-GCC 7.x
+gcc --version
 ```
 
-However, DeepSpeed native communication extensions require:
-
-```bash
-GCC 9+
+```output
+gcc (SUSE Linux) 7.5.0
 ```
 
-DeepSpeed attempts to compile:
-
-```bash
-deepspeed_shm_comm
-```
-
-during launcher initialization.
-
-Because of this limitation, install DeepSpeed in compatibility mode without native extension compilation.
+When DeepSpeed initializes its launcher, it attempts to compile the `deepspeed_shm_comm` shared memory communication extension. This compilation fails on GCC 7.5.0. To work around this, install DeepSpeed with all native extension compilation disabled.
 
 ## Install DeepSpeed
 
-DeepSpeed distributed CPU extensions require newer GCC versions.
-
-Since default SUSE Arm64 images use GCC 7.x, install DeepSpeed without native extension compilation.
-
-Export environment variables:
-
-```bash
-export DS_BUILD_OPS=0
-export DS_BUILD_SHM_COMM=0
-export DS_BUILD_CPU_ADAM=0
-export DS_BUILD_AIO=0
-```
-
-## What these variables do
+Install DeepSpeed with native extension compilation disabled. Each variable tells the build system to skip a specific extension that requires GCC 9 or later:
 
 | Variable | Purpose |
 |---|---|
-| DS_BUILD_OPS=0 | Disables native op compilation |
-| DS_BUILD_SHM_COMM=0 | Disables shared memory communication extension |
-| DS_BUILD_CPU_ADAM=0 | Disables CPU Adam optimizer compilation |
-| DS_BUILD_AIO=0 | Disables async I/O extensions |
-
-This prevents DeepSpeed from compiling unsupported native CPU extensions on SUSE Arm64.
-
-## Install DeepSpeed:
+| `DS_BUILD_OPS=0` | Disables native op compilation |
+| `DS_BUILD_SHM_COMM=0` | Disables the shared memory communication extension |
+| `DS_BUILD_CPU_ADAM=0` | Disables the CPU Adam optimizer extension |
+| `DS_BUILD_AIO=0` | Disables async I/O extensions |
 
 ```bash
-DS_BUILD_OPS=0 pip install deepspeed
+DS_BUILD_OPS=0 DS_BUILD_SHM_COMM=0 DS_BUILD_CPU_ADAM=0 DS_BUILD_AIO=0 pip install deepspeed
 ```
 
 
@@ -242,66 +191,67 @@ ds_report
 The output is similar to:
 
 ```output
-[NO] ....... [OKAY]
+[WARNING] Setting accelerator to CPU. If you have GPU or other accelerator, we were unable to detect it.
+--------------------------------------------------
+DeepSpeed C++/CUDA extension op report
+--------------------------------------------------
+NOTE: Ops not installed will be just-in-time (JIT) compiled at
+      runtime if needed. Op compatibility means that your system
+      meet the required dependencies to JIT install the op.
+--------------------------------------------------
+JIT compiled ops requires ninja
+ninja .................. [OKAY]
+--------------------------------------------------
+op name ................ installed .. compatible
+--------------------------------------------------
+deepspeed_not_implemented  [NO] ....... [OKAY]
+ [WARNING]  async_io requires the dev libaio .so object and headers but these were not found.
+ [WARNING]  async_io: please install the libaio-devel package with yum
+async_io ............... [NO] ....... [NO]
+deepspeed_ccl_comm ..... [NO] ....... [OKAY]
+deepspeed_shm_comm ..... [NO] ....... [OKAY]
+cpu_adam ............... [NO] ....... [OKAY]
+fused_adam ............. [NO] ....... [OKAY]
+--------------------------------------------------
+DeepSpeed general environment info:
+torch install path ............... ['/home/user/deepspeed-env/lib64/python3.11/site-packages/torch']
+torch version .................... 2.12.0+cpu
+deepspeed install path ........... ['/home/user/deepspeed-env/lib64/python3.11/site-packages/deepspeed']
+deepspeed info ................... 0.19.0, unknown, unknown
+deepspeed wheel compiled w. ...... torch 0.0
+shared memory (/dev/shm) size .... 7.80 GB
 ```
 
-This is expected on CPU-only Arm64 environments.
+The CPU accelerator warning is expected — GCP Axion VMs have no GPU. Most ops show `[NO] ... [OKAY]`, meaning they are not pre-installed but are compatible for just-in-time compilation via Ninja if needed at runtime. The one exception is `async_io`, which shows `[NO] ... [NO]` because it requires the `libaio-devel` system package. Since async I/O is not needed for the training workloads in this Learning Path and was disabled with `DS_BUILD_AIO=0`, you can ignore this warning.
 
 
-## Create project directory
+## Create a project directory
+
+Create a working directory for your DeepSpeed training scripts:
 
 ```bash
 mkdir ~/deepspeed-demo
-
 cd ~/deepspeed-demo
 ```
 
-## Important note
-
-Do NOT run:
-
-```bash
-deepspeed train.py
-```
-
-on this VM because DeepSpeed attempts to compile native CPU communication extensions which require GCC 9 or later.
+{{% notice Note %}}
+Do not run `deepspeed train.py` directly on this VM. DeepSpeed's launcher attempts to compile the `deepspeed_shm_comm` native extension during initialization, which requires GCC 9 or later. Use `python train.py` instead, as shown in the next section.
+{{% /notice %}}
 
 
 ## Troubleshooting
 
 ### SUSE repository refresh issue
 
-You may encounter:
+You may see the following error during `zypper` commands:
 
-```text
+```output
 Receive: script died unexpectedly
 ```
 
-If this occurs:
-
-- Continue if Python 3.11 is already installed
-- Install Python packages using `pip`
-- Avoid dependency on SUSE development repositories
+If Python 3.11 is already installed when this occurs, you can continue. Install all remaining packages using `pip` inside the virtual environment and avoid relying on SUSE development repositories.
 
 
-## What you've learned
+## What you've accomplished and what's next
 
-You have learned how to:
-
-- Verify Arm64 environment
-- Configure Python 3.11
-- Create isolated AI/ML environments
-- Install PyTorch on Arm64
-- Install DeepSpeed in compatibility mode
-- Handle GCC limitations on SUSE Arm64
-- Prepare AI training environments on GCP Axion
-
-
-## Next
-
-You will:
-
-- Build AI training workloads
-- Run neural network training
-- Benchmark Arm64 AI workloads
-- Validate CPU training performance
+You've installed Python 3.11, PyTorch, and DeepSpeed on a GCP Axion Arm64 VM running SUSE Linux, verified the environment with `ds_report`, and created the project directory for training scripts. Next, you'll create and run neural network training and benchmarking workloads on the Axion processor.

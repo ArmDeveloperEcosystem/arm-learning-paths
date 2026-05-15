@@ -6,39 +6,20 @@ weight: 5
 layout: learningpathall
 ---
 
-## Train and Benchmark AI Workloads on GCP Axion (Arm)
+## Train and benchmark AI workloads
 
-This section demonstrates neural network training and benchmarking on GCP Axion Arm64 processors using PyTorch.
+This section demonstrates neural network training and benchmarking on GCP Axion Arm64 processors using PyTorch. Two workloads are covered: a small baseline model to verify the environment, and a larger benchmark to evaluate CPU scaling behavior.
 
-## Learning Objectives
-
-- Create AI training workloads
-- Train neural network models
-- Benchmark CPU workloads
-- Measure Arm64 AI performance
-- Validate large model execution
-
-
-## Activate environment
-Activate the Python virtual environment created during the installation setup.
+If you're continuing in the same SSH session from the previous section, the `deepspeed-env` virtual environment is already active and your working directory is `~/deepspeed-demo`. If you've opened a new session, re-activate the environment and navigate to the project directory:
 
 ```bash
 source ~/deepspeed-env/bin/activate
-```
-
-Go to project directory:
-
-```bash
 cd ~/deepspeed-demo
 ```
 
-## Baseline AI Training Workload
+## Baseline training workload
 
-This section creates and executes a lightweight neural network training workload to validate the AI/ML environment on GCP Axion Arm64 processors.
-
-### Create baseline training script
-
-Create the baseline training script:
+Create a lightweight neural network training script to verify the environment. The script defines a three-layer feedforward network, generates synthetic training data, runs five epochs of mini-batch gradient descent using the Adam optimizer, and prints the total training time:
 
 ```bash
 cat > train.py << 'EOF'
@@ -100,24 +81,7 @@ print("Total Training Time:", end - start)
 EOF
 ```
 
-### What this script does
-
-The script performs the following tasks:
-
-- Creates a multi-layer neural network using PyTorch
-- Generates synthetic training data
-- Executes forward and backward propagation
-- Optimizes the model using Adam optimizer
-- Measures total training execution time
-
-The model architecture contains:
-
-- Input layer: 128 features
-- Hidden layers: 256 and 64 neurons
-- Output layer: 1 neuron
-
-
-### Execute baseline training
+### Run the baseline training
 
 ```bash
 python train.py
@@ -134,23 +98,11 @@ Epoch 5, Loss: 65.7514722738415
 Total Training Time: 0.7545099258422852
 ```
 
-### Analyze baseline results
+The loss decreases across all five epochs, confirming that gradient updates are working correctly and PyTorch is running properly on Arm64.
 
-Observe the following:
+### Benchmark with timing
 
-- Loss decreases continuously across epochs
-- The model is learning successfully
-- Training completes in less than one second
-- Axion Arm64 processors efficiently execute small AI workloads
-
-The decreasing loss confirms that:
-
-- Gradient updates are working correctly
-- CPU computation pipeline is stable
-- PyTorch runtime is functioning properly on Arm64
-
-### Benchmark baseline workload
-Measure real execution time:
+Run the same script under `time` and save the output for comparison:
 
 ```bash
 time python train.py | tee pytorch_baseline_result.txt
@@ -171,32 +123,11 @@ user    0m3.700s
 sys     0m0.137s
 ```
 
-The benchmark output provides:
+The `real` time is total wall-clock duration. The `user` time exceeds `real` here because PyTorch uses multiple threads across all 4 vCPUs, so CPU time is summed across cores.
 
-| Metric | Description |
-|---|---|
-| real | Total wall-clock execution time |
-| user | CPU execution time spent in user space |
-| sys | CPU time spent in kernel operations |
+## Large-scale benchmark
 
-The results indicate:
-
-- Fast execution on Arm64 CPUs
-- Efficient tensor computation
-- Low system overhead
-
-## Large Scale AI Benchmark
-
-This section increases:
-
-- dataset size
-- model complexity
-- CPU workload intensity
-
-This helps evaluate scalable AI training performance on Axion Arm processors.
-
-
-### Create large benchmark workload
+This workload increases dataset size, input dimensionality, batch size, and model depth to stress CPU compute, memory bandwidth, and tensor operation throughput. It also calls `torch.set_num_threads(os.cpu_count())` to explicitly pin PyTorch to all available cores:
 
 ```bash
 cat > train_large.py << 'EOF'
@@ -263,26 +194,9 @@ print("Total Training Time:", end - start)
 EOF
 ```
 
-### What this workload changes
+To observe CPU utilization while this runs, open a second terminal and run `top`. Look for the Python process — the CPU percentage reflects multi-threaded utilization across all 4 vCPUs.
 
-Compared to the baseline workload:
-
-| Component | Baseline | Large Benchmark |
-|---|---|---|
-| Features | 128 | 512 |
-| Dataset Size | 5,000 | 20,000 |
-| Batch Size | 32 | 64 |
-| Model Complexity | Smaller | Larger |
-
-The benchmark stresses:
-
-- CPU compute capability
-- Memory bandwidth
-- Tensor operation throughput
-- Multi-threaded execution
-
-
-### Run large benchmark
+### Run the large benchmark
 
 ```bash
 time python train_large.py | tee pytorch_large_result.txt
@@ -303,46 +217,11 @@ user    0m19.630s
 sys     0m0.251s
 ```
 
-### Analyze large workload results
-
-The large benchmark demonstrates:
-
-- Stable execution under higher CPU load
-- Increased training duration due to larger tensors
-- Effective CPU thread utilization
-- Successful Arm64 scaling behavior
-
-Key observations:
-
-- Training remains stable
-- Loss decreases consistently
-- CPU utilization increases significantly
-- Multi-core execution improves performance
-
-## Monitor CPU utilization
-
-Open another terminal.
-
-Run:
-
-```bash
-top
-```
-
-In the first terminal:
-
-```bash
-python train_large.py
-```
-
-Observe:
-
-- CPU usage
-- Memory utilization
-- Python process behavior
-
+Training time scales roughly linearly with dataset size and model depth. The `user` time being approximately 4x `real` time confirms that PyTorch is distributing work across all 4 vCPUs effectively.
 
 ## Verify generated files
+
+After both scripts complete, confirm the output files are present:
 
 ```bash
 ls -lh
@@ -351,61 +230,21 @@ ls -lh
 The output is similar to:
 
 ```output
-environment.txt
-pytorch_baseline_result.txt
-pytorch_large_result.txt
-train.py
-train_large.py
+-rw-r--r-- 1 user user  12K May 15 13:50 pytorch_baseline_result.txt
+-rw-r--r-- 1 user user  12K May 15 13:55 pytorch_large_result.txt
+-rw-r--r-- 1 user user 1.1K May 15 13:48 train.py
+-rw-r--r-- 1 user user 1.2K May 15 13:48 train_large.py
 ```
 
-## Benchmark observations
+## Benchmark summary
 
-| Workload | Approx Training Time |
+| Workload | Approximate training time |
 |---|---|
-| Baseline Model | ~0.8 seconds |
-| Large Model | ~5.4 seconds |
+| Baseline model (5K samples, 128 features) | ~0.7–0.8 seconds |
+| Large benchmark (20K samples, 512 features) | ~4.8–5.4 seconds |
 
-These files contain:
+Both workloads trained to completion with steadily decreasing loss, confirming stable PyTorch CPU execution on GCP Axion Arm64. Your results may vary depending on VM load at the time of the run.
 
-| File | Purpose |
-|---|---|
-| train.py | Baseline training workload |
-| train_large.py | Large benchmark workload |
-| pytorch_baseline_result.txt | Baseline benchmark results |
-| pytorch_large_result.txt | Large benchmark results |
+## What you've accomplished and what's next
 
-## Benchmark Summary
-
-| Workload | Training Time | Observation |
-|---|---|---|
-| Baseline Model | ~0.7–0.8 seconds | Fast lightweight execution |
-| Large Benchmark | ~4.8–5.4 seconds | Higher CPU utilization and larger workload handling |
-
-
-## Result Analysis
-
-The benchmark validates that:
-
-- GCP Axion Arm64 processors can efficiently execute AI workloads
-- PyTorch runs successfully on Arm64 architecture
-- CPU-only AI training is stable on SUSE Arm64
-- Larger workloads scale predictably with increased compute demand
-
-The benchmark also demonstrates:
-
-- Multi-layer neural network execution
-- Tensor computation stability
-- Efficient CPU utilization on Arm64 processors
-
-
-## What you've learned
-
-You have learned how to:
-
-- Create AI training workloads
-- Train neural network models on Arm64
-- Benchmark CPU-based AI workloads
-- Measure training execution performance
-- Validate scalable AI execution on GCP Axion
-- Analyze workload scaling behavior
-- Explore distributed AI training
+You've run two PyTorch training workloads on a GCP Axion Arm64 VM, measured wall-clock and CPU execution time, and confirmed stable multi-threaded neural network training on SUSE Linux.
