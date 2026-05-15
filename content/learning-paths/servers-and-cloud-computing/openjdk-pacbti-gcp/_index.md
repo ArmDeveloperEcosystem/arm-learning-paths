@@ -1,5 +1,5 @@
 ---
-title: Validate PAC/BTI security features in OpenJDK on Arm Neoverse C4A
+title: Validate PAC/BTI security features in OpenJDK on Google Cloud C4A
 
 description: Test Pointer Authentication (PAC) and Branch Target Identification (BTI) support in OpenJDK on Google Cloud C4A. Learn to validate hardware security capabilities and verify JVM compiler support for Arm security features.
     
