@@ -10,7 +10,7 @@ This Learning Path will guide you through your first steps in analyzing the perf
 
 The sample project has been written in Unity and is freely available on the Unity Asset Store. You will build and deploy the application to your Android device.
 
-Building and deploying Unity applications for profiling on Android devices is covered in the Learning Path [Get started with Unity on Android](/learning-paths/mobile-graphics-and-gaming/get-started-with-unity-on-android).
+Building and deploying Unity applications for profiling on Android devices is covered in the Learning Path [Get started with Unity on Android](/learning-paths/mobile-graphics-and-gaming/get-started-with-unity-on-android/).
 
 You will use the Profiler and Analyzer tools to collect and analyze performance data. While the Profiler is focused more on examining specific frames, the Analyzer allows developers to compare frames over time or between two different captures (for example, before and after a change to the code).
 

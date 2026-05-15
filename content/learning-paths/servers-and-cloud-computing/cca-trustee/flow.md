@@ -197,7 +197,7 @@ Error: verifying signed EAR from "ear.jwt" using "JWK header" key: failed verify
 The `arc verify` command produces quite a lot of output.
 
 However, the main part is the CCA attestation token that is similar to the one you inspected in
-[Get Started with CCA Attestation and Veraison](/learning-paths/servers-and-cloud-computing/cca-veraison) Learning Path.
+[Get Started with CCA Attestation and Veraison](/learning-paths/servers-and-cloud-computing/cca-veraison/) Learning Path.
 
 Check the trustworthiness vectors near the end of the output:
 

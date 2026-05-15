@@ -13,7 +13,7 @@ learning_objectives:
 
 prerequisites:
     - An Amazon Web Services (AWS) [account](https://aws.amazon.com/)
-    - A computer with [Terraform](/install-guides/terraform) installed
+    - A computer with [Terraform](/install-guides/terraform/) installed
 
 author: Jason Andrews
 

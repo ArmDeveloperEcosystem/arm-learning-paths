@@ -13,7 +13,7 @@ This section describes installation of the [Corstone-320 FVP](https://developer.
 
 Arm provides a selection of free to use Ecosystem Fixed Virtual Platforms (FVPs) that can be downloaded from the [Arm Developer](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms#Downloads) website.
 
-You can review Arm's full FVP offering and general installation steps in the [Fast Model and Fixed Virtual Platform](/install-guides/fm_fvp) install guide.
+You can review Arm's full FVP offering and general installation steps in the [Fast Model and Fixed Virtual Platform](/install-guides/fm_fvp/) install guide.
 
 {{% notice Note %}}
 It is recommended to perform these steps in a new terminal window.

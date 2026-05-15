@@ -15,7 +15,7 @@ learning_objectives:
 
 prerequisites:
     - A Windows on Arm desktop or development machine, with CPU support for SPE.
-    - An installation of [WindowsPerf](/install-guides/wperf).
+    - An installation of [WindowsPerf](/install-guides/wperf/).
     - An installation of [Visual Studio](/install-guides/vs-woa/).
     - An installation of [Git](/install-guides/git-woa/).
   

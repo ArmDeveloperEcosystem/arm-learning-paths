@@ -6,32 +6,30 @@ weight: 5
 layout: learningpathall
 ---
 
-## Deploy Alluxio on Azure Cobalt 100 (Arm)
+## Set up Alluxio on the VM
 
-This section guides you through installing Alluxio on an Azure Cobalt 100 Arm-based virtual machine and configuring it with local storage.
+In this section, you'll learn how to install Alluxio on an Azure Cobalt 100 Arm-based virtual machine (VM) and configure it with local storage.
 
-You will set up a unified data orchestration layer that sits between compute frameworks and storage systems.
+You'll set up a unified data orchestration layer that sits between compute frameworks and storage systems.
 
-### Why Alluxio?
 
-- Speeds up data access using memory caching 
-- Reduces repeated disk I/O  
-- Improves performance for analytics workloads  
+### Update your system
 
-## Update your system
+Start by updating the package index and installing the latest available package updates on the virtual machine.
 
 ```bash
 sudo apt update && sudo apt upgrade -y
 ```
 
-## Install required dependencies
+### Install required dependencies
+
 These tools are required for downloading and extracting software:
 
 ```bash
 sudo apt install -y wget curl tar rsync nano
 ```
 
-## Install Java 11
+### Install Java 11
 
 Alluxio requires Java 8 or Java 11. Java 17 is not supported and causes runtime errors at startup.
 
@@ -54,7 +52,7 @@ sudo update-alternatives --config java
 
 When prompted, enter the selection number corresponding to the `temurin-11` entry in the list.
 
-**Verify:**
+Verify:
 
 ```bash
 java -version
@@ -68,7 +66,9 @@ openJDK Runtime Environment Temurin-11.0.30+7 (build 11.0.30+7)
 openJDK 64-Bit Server VM Temurin-11.0.30+7 (build 11.0.30+7, mixed mode)
 ```
 
-## Download and install Alluxio
+### Download and install Alluxio
+
+Download the Alluxio binary release, extract it under `/opt`, and set ownership to your current user:
 
 ```bash
 cd /opt
@@ -78,8 +78,9 @@ sudo mv alluxio-2.9.4 alluxio
 sudo chown -R $USER:$USER /opt/alluxio
 ```
 
-## Configure environment variables
-This allows you to run Alluxio commands globally.
+### Configure environment variables
+
+Set environment variables to run Alluxio commands globally:
 
 ```bash
 echo 'export ALLUXIO_HOME=/opt/alluxio' >> ~/.bashrc
@@ -97,7 +98,7 @@ cp alluxio-env.sh.template alluxio-env.sh
 cp alluxio-site.properties.template alluxio-site.properties
 ```
 
-## Configure RAM-based storage
+### Configure RAM-based storage
 
 Alluxio stores cached data in a RAM folder for fast access. `/dev/shm` is a Linux tmpfs filesystem backed by RAM, giving Alluxio direct access to in-memory storage.
 
@@ -111,7 +112,7 @@ nano alluxio-env.sh
 export ALLUXIO_RAM_FOLDER=/dev/shm
 ```
 
-## Configure core properties
+### Configure core properties
 
 Open `alluxio-site.properties` and add the following configuration:
 
@@ -125,9 +126,9 @@ alluxio.worker.memory.size=6GB
 alluxio.master.mount.table.root.ufs=/mnt/data
 ```
 
-`master.hostname` sets the host where the Alluxio master process runs. `worker.memory.size` controls how much RAM is reserved as the caching layer — 6 GB is appropriate for the D4ps_v6 VM, which has 16 GB of total memory. `root.ufs` points to the underlying storage directory that Alluxio manages.
+`master.hostname` sets the host where the Alluxio master process runs. `worker.memory.size` controls how much RAM is reserved as the caching layer. 6 GB is appropriate for the D4ps_v6 VM, which has 16 GB of total memory. `root.ufs` points to the underlying storage directory that Alluxio manages.
 
-## Set up the storage directory
+### Set up the storage directory
 
 Create the directory that Alluxio will use as its underlying file system (UFS) and set the ownership to your current user:
 
@@ -136,7 +137,11 @@ sudo mkdir -p /mnt/data
 sudo chown -R $USER:$USER /mnt/data
 ```
 
-## Start Alluxio
+## Start and verify Alluxio
+
+Start the Alluxio services on the virtual machine, then confirm that the master, worker, and Web UI are all running as expected.
+
+### Start Alluxio
 
 Before starting Alluxio for the first time, format the metadata store. This initializes the journal and clears any previous state:
 
@@ -162,13 +167,15 @@ Starting to monitor all local services.
  --- [ OK ] The proxy service @ alluxio-arm64.xaxcsurvhrzefjc5ihdpsf2vbc.rx.internal.cloudapp.net is in a healthy state.
 ```
 
-## Verify Alluxio services
+### Verify Alluxio services
+
+Confirm that the Alluxio services are running before opening the Web UI:
 
 ```bash
 jps
 ```
 
-**Expected output:**
+The output is similar to:
 
 ```output
 AlluxioJobWorker
@@ -179,26 +186,18 @@ AlluxioProxy
 AlluxioWorker
 ```
 
-Open the Alluxio Web UI in your browser:
+Open the Alluxio Web UI in your browser. Replace `<VM-IP>` with the public IP of your VM:
 
 ```text
 http://<VM-IP>:19999
 ```
 
-![Alluxio dashboard showing cluster summary and worker status on Azure Cobalt 100 VM#center](images/alluxio-ui.png "Alluxio Web UI with cluster summary and worker details")
+![Alluxio Web UI showing the cluster summary and worker status on the Azure Cobalt 100 virtual machine. Check that the leader is active, worker memory is in use, and cluster health is reported correctly before moving to the next step.#center](images/alluxio-ui.png "Alluxio Web UI with cluster summary and worker details")
 
-## Alluxio UI Overview
-
-What you can see:
-
-- Master status (Leader node)
-- Worker memory usage
-- Storage capacity
-- Cached data blocks
-- Cluster health
+In the Alluxio Web UI, you can see the master status for the leader node, worker memory usage, storage capacity, cached data blocks, and overall cluster health.
 
 ## What you've learned and what's next
 
-Alluxio is now running on your Azure Cobalt 100 virtual machine with a memory-backed cache layer configured and all services reporting healthy. The Web UI at port 19999 gives you visibility into worker status, storage capacity, and cached data blocks.
+You now have Alluxio running on your Azure Cobalt 100 virtual machine with a memory-backed cache layer configured and all services reporting healthy. The Web UI at port 19999 gives you visibility into worker status, storage capacity, and cached data blocks.
 
 Next, you'll install Apache Spark and integrate it with Alluxio to run analytics workloads against the cache layer.

@@ -63,7 +63,7 @@ Your virtual machine should be ready and running in a few minutes. You can SSH i
 
 ![Azure Portal showing successful VM deployment with green checkmark, VM name, resource group, and public IP address displayed in the confirmation notification alt-txt#center](images/final-vm.png "Successful VM deployment confirmation")
 
-{{% notice Note %}}To learn more about Arm-based virtual machine in Azure, see “Getting Started with Microsoft Azure” in [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure).{{% /notice %}}
+{{% notice Note %}}To learn more about Arm-based virtual machine in Azure, see “Getting Started with Microsoft Azure” in [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure/).{{% /notice %}}
 
 ## What you've accomplished and what's next
 

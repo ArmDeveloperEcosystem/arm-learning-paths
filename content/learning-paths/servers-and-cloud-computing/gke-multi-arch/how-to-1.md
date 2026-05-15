@@ -19,8 +19,8 @@ You will need a [Google Cloud account](https://console.cloud.google.com/). Creat
 Three tools are required on your local machine. Follow the links to install the required tools.
 
 * [Kubectl](/install-guides/kubectl/)
-* [Google Cloud CLI](/install-guides/gcloud)
-* [Docker](/install-guides/docker)
+* [Google Cloud CLI](/install-guides/gcloud/)
+* [Docker](/install-guides/docker/)
 
 ## Create a Docker repository in Google Artifact Registry
 

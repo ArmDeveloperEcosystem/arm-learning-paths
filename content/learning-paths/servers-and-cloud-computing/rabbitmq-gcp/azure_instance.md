@@ -47,6 +47,6 @@ Your virtual machine deploys within a few minutes. SSH into the virtual machine 
 
 {{% notice Note %}}
 
-To learn more about Arm-based virtual machines in Azure, refer to “Getting Started with Microsoft Azure” in [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure).
+To learn more about Arm-based virtual machines in Azure, refer to “Getting Started with Microsoft Azure” in [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure/).
 
 {{% /notice %}}

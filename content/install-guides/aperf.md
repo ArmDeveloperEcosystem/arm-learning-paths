@@ -42,7 +42,7 @@ To allow APerf to collect Processor Monitoring Unit (PMU) metrics without `sudo`
 sudo sysctl -w kernel.perf_event_paranoid=-1
 ```
 
-To use APerf's CPU profiling option (`--profile`), install the `perf` binary. For more information, see the [Perf for Linux on Arm](/install-guides/perf) install guide. 
+To use APerf's CPU profiling option (`--profile`), install the `perf` binary. For more information, see the [Perf for Linux on Arm](/install-guides/perf/) install guide. 
 
 For kernel address visibility, set `/proc/sys/kernel/kptr_restrict` to `0`:
 

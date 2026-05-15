@@ -16,7 +16,7 @@ This learning path will explain the basic steps to enable you to create your own
 
 ## Access IP Explorer
 
-First ensure you can access [IP Explorer](https://ipexplorer.arm.com/) and login. For more information, see the [Install Guide](/install-guides/ipexplorer).
+First ensure you can access [IP Explorer](https://ipexplorer.arm.com/) and login. For more information, see the [Install Guide](/install-guides/ipexplorer/).
 
 ## Run a pre-installed example
 

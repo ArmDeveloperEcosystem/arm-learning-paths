@@ -22,7 +22,7 @@ You can find all [WindowsPerf binary releases](https://github.com/arm-developer-
 
 # Installation
 
-For installation instructions see the [install guide](/install-guides/wperf).
+For installation instructions see the [install guide](/install-guides/wperf/).
 
 ## Using WindowsPerf
 

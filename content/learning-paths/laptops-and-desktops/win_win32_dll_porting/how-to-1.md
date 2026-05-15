@@ -21,7 +21,7 @@ Therefore, as developers, we can now leverage Arm64 to accelerate our applicatio
 In this learning path, we will demonstrate how to update your Win32 DLL for Arm64 compatibility. Our DLL will perform vector operations, specifically the multiply-add operation, which is commonly used in many modern machine learning architectures.
 
 ## Before you begin
-To follow this learning path you will need to install [Visual Studio 2022 or higher](/install-guides/vs-woa) with Arm64 build tools and desktop development with C++ workload.
+To follow this learning path you will need to install [Visual Studio 2022 or higher](/install-guides/vs-woa/) with Arm64 build tools and desktop development with C++ workload.
 
 The [complete project code](https://github.com/dawidborycki/Win32.Porting.git) is hosted on GitHub.
 

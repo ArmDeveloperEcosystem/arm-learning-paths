@@ -13,7 +13,7 @@ learning_objectives:
 
 prerequisites:
   - An AArch64 or x86_64 computer running Linux or macOS; you can use cloud instances - see the [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/)
-  - Completion of the [Get started with CCA attestation and Veraison](/learning-paths/servers-and-cloud-computing/cca-veraison) Learning Path
+  - Completion of the [Get started with CCA attestation and Veraison](/learning-paths/servers-and-cloud-computing/cca-veraison/) Learning Path
   - Completion of the [Run an end-to-end attestation flow with Arm CCA](/learning-paths/servers-and-cloud-computing/cca-essentials/) Learning Path
 
 author:

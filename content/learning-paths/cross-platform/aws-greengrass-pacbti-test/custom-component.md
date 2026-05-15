@@ -6,11 +6,13 @@ weight: 5
 layout: "learningpathall"
 ---
 
-### Overview
+## Create a custom component to test PAC/BTI 
 
-In this section, you create an AWS IoT Greengrass custom component that uses an artifact package to test PAC/BTI support on target Arm devices.
+In this section, you'll create an AWS IoT Greengrass custom component that uses an artifact package to test PAC/BTI support on target Arm devices.
 
-### Upload the component artifact to S3
+### Upload the component artifact to Amazon S3
+
+Create an Amazon S3 bucket and upload the component artifact:
 
 1. In the AWS Console, go to **S3**.
 
@@ -24,7 +26,7 @@ In this section, you create an AWS IoT Greengrass custom component that uses an 
 
 ![S3 console confirming the new bucket has been created and appears in the bucket list#center](images/s3-3.png "New S3 bucket created")
 
-4. Record the bucket name. You will use it in the YAML recipe.
+4. Record the bucket name. You'll use it in the YAML recipe.
 
 5. On your local machine, clone the asset repository:
 
@@ -48,6 +50,8 @@ Your artifact is now available in S3. Next, create the custom Greengrass compone
 
 ### Create the custom component
 
+Create a custom component in AWS IoT Greengrass:
+
 1. In the AWS Console, go to **IoT Core** > **Greengrass devices** and select **Components**.
 
 2. Select **Create component**.
@@ -61,7 +65,7 @@ Your artifact is now available in S3. Next, create the custom Greengrass compone
 4. Copy and paste the following YAML recipe into the editor.
 
 {{% notice Note %}}
-In the YAML code below, locate **YOUR_S3_BUCKET** and replace it with the S3 bucket name you created in the previous step.
+In the following YAML code, locate **YOUR_S3_BUCKET** and replace it with the name of the S3 bucket that you created in the previous step.
 {{% /notice %}}
 
 ```yaml
@@ -157,46 +161,46 @@ Manifests:
             --result-topic "${RESULT_TOPIC}"
 ```
 
-5. After you update the bucket name, select **Create component**.
+5. After you update the bucket name in the YAML, select **Create component**.
 
 ![Greengrass component creation confirmation screen showing the component being created#center](images/custom-3.png "Greengrass component creation confirmation")
 
 6. Confirm the custom component appears in the component list.
 
-![Greengrass Components list showing the newly created arm-com.arm.demo.PacBtiDemo component#center](images/custom-4.png "Greengrass component list with new component")
+![Greengrass Components list showing the newly created arm-com.arm.demo.PacBtiDemo component#center](images/custom-4.webp "Greengrass component list with new component")
 
 Your Greengrass custom component is now ready for deployment. 
 
-Before deployment, lets briefly take a look at some of the details of the PAC/BTI tester artifact that is part of our custom component.
+## Explore the PAC/BTI tester artifact
 
-### Deeper look into the PAC/BTI Tester artifact
+Before deployment, look at some of the details of the PAC/BTI tester artifact that is part of the custom component. 
 
-Lets go back to the cloned repo:
+Start by navigating to the cloned repo:
 
 ```bash
 cd $HOME/pac-bti-gg-assets
 ```
 
-Next, lets unzip the PAC/BTI tester artifact and explore it a bit:
+Next, unzip the PAC/BTI tester artifact to see the files that it contains:
 
 ```bash
 unzip arm-pac-bti-greengrass-demo-mqtt-trigger.zip
 cd ./arm-pac-bti-greengrass-demo
 ```
 
-### Details on the PAC/BTI Tester
+### Details of the PAC/BTI tester
 
-The PAC/BTI tester is a proof-of-concept that deploys the **same vulnerable C application** to Armv8 and Armv9 devices through **AWS IoT Greengrass**, then runs the same exploit attempt and records the outcome.
+The PAC/BTI tester is a proof-of-concept that deploys the same vulnerable C application to Armv8 and Armv9 devices through AWS IoT Greengrass. The tester then runs the same exploit attempt and records the outcome.
 
 The intent of the PAC/BTI tester is to demonstrate that:
 
-- an unprotected build can be exploited,
-- the same source built for Armv9 **without** branch protection remains exploitable, and
-- the Armv9 build compiled with `-mbranch-protection=standard` blocks the exploit from reaching the attacker-controlled function.
+- an unprotected build can be exploited
+- the same source built for Armv9 without branch protection remains exploitable
+- the Armv9 build compiled with `-mbranch-protection=standard` blocks the exploit from reaching the attacker-controlled function
 
-##### Invocation and Execution model
+#### Invocation and execution model
 
-The component chooses the build flavor **at runtime on the target** and then waits for an MQTT trigger from AWS IoT Core before it runs the attack.
+The component chooses the build flavor at runtime on the target and then waits for an MQTT trigger from AWS IoT Core before it runs the attack.
 
 Selection priority:
 
@@ -206,14 +210,14 @@ Selection priority:
 
 The selector writes its decision into `{work:path}/state/` and the Greengrass run step adds that metadata into `result.json`.
 
-##### MQTT control plane
+#### MQTT control plane
 
 Default AWS IoT Core topics:
 
 - test trigger invocation topic: `arm/demo/{iot:thingName}/security/pacbti/attack/trigger`
 - test result topic: `arm/demo/{iot:thingName}/security/pacbti/attack/result`
 
-When the component starts, it publishes a `ready` event on the result topic. A user or test harness then publishes a trigger on the trigger topic, and the component runs the exploit and publishes the JSON result to the result topic.
+When the component starts, it publishes a `ready` event on the result topic. A user or test harness then publishes a trigger on the trigger topic. The component then runs the exploit and publishes the JSON result to the result topic.
 
 Example trigger payload:
 
@@ -224,9 +228,9 @@ Example trigger payload:
 }
 ```
 
-##### PAC/BTI "tester" directory layout
+#### PAC/BTI tester directory layout
 
-The PAC/BTI "tester" project has the following layout:
+The PAC/BTI tester project has the following layout:
 
 ```text
 arm-pac-bti-greengrass-demo/
@@ -249,24 +253,10 @@ arm-pac-bti-greengrass-demo/
     └── render_results.py
 ```
 
-##### Greengrass component behavior
 
-During the Greengrass component install, the PAC/BTI tester:
+#### Example result JSON
 
-- detects CPU architecture and PAC/BTI hints
-- chooses a build flavor
-- builds a binary into the component work directory as the main "tester"
-- connects to Greengrass MQTT broker
-- subscribes to the trigger topic in AWS IoT Core
-- waits for the user to publish an attack trigger
-
-
-When the Greengrass component receives a message, the component:
-- runs the compiled demo "tester" when triggered
-- publishes the result JSON to the result topic
-- writes the same result into the local `result.json` file
-
-##### Example result JSON
+The result payload includes runtime flavor selection details and the trigger metadata that initiated the attack run.
 
 ```json
 {
@@ -286,6 +276,8 @@ When the Greengrass component receives a message, the component:
 }
 ```
 
-### What you've accomplished
+## What you've accomplished and what's next
 
-You created an AWS IoT Greengrass custom component and connected it to the S3-hosted artifact. In the next section, you'll deploy it to both Greengrass core devices.
+You've now created an AWS IoT Greengrass custom component and connected it to the Amazon S3-hosted artifact. You also learned how the PAC/BTI test works.
+
+Next, you'll deploy the component to both Greengrass core devices.

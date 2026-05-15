@@ -14,7 +14,7 @@ There are two options outlined in this Learning Path to install the dependencies
   * [Option 2: Install dependencies on an x86_64 Linux machine running Ubuntu](#option-2-install-dependencies-on-an-x86_64-linux-machine-running-ubuntu).
 
 #### Option 1: Build a Docker container with the dependencies
-Install [docker engine](/install-guides/docker/docker-engine) on your machine.
+Install [docker engine](/install-guides/docker/docker-engine/) on your machine.
 
 Use a file editor of your choice and save the following lines in a file named `Dockerfile`:
 

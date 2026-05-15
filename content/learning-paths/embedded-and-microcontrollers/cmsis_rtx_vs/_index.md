@@ -13,7 +13,7 @@ learning_objectives:
     - Create and manage multiple threads within an RTX5 RTOS application
 
 prerequisites:
-    - Installation of [Arm Keil Studio for VS Code](/install-guides/keilstudio_vs)
+    - Installation of [Arm Keil Studio for VS Code](/install-guides/keilstudio_vs/)
     - Some familiarity with CMSIS is assumed
 
 author: Ronan Synnott

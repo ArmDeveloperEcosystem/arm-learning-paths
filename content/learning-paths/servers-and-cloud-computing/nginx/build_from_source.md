@@ -6,7 +6,7 @@ layout: "learningpathall"
 
 ## Before you begin
 
-Before building from source, it's helpful to look at the build configuration of a prebuilt version of Nginx. Refer to the previous section, [Install Nginx via a package manager](/learning-paths/servers-and-cloud-computing/nginx/install_from_package) for more information. 
+Before building from source, it's helpful to look at the build configuration of a prebuilt version of Nginx. Refer to the previous section, [Install Nginx via a package manager](/learning-paths/servers-and-cloud-computing/nginx/install_from_package/) for more information. 
 
 ## Build Nginx from source
 
@@ -39,11 +39,11 @@ The final build configuration is now reduced to:
 --with-cc-opt='-g -O2 -flto=auto -ffat-lto-objects -flto=auto -ffat-lto-objects -fstack-protector-strong -Wformat -Werror=format-security -fPIC -Wdate-time -D_FORTIFY_SOURCE=2' --with-ld-opt='-Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -flto=auto -Wl,-z,relro -Wl,-z,now -fPIC' --prefix=/usr/share/nginx --conf-path=/etc/nginx/nginx.conf --http-log-path=/var/log/nginx/access.log --error-log-path=/var/log/nginx/error.log --lock-path=/var/lock/nginx.lock --pid-path=/run/nginx.pid --modules-path=/usr/lib/nginx/modules --with-compat --with-debug --with-pcre-jit --with-http_ssl_module --with-http_stub_status_module --with-http_realip_module --with-http_auth_request_module --with-http_v2_module --with-http_dav_module --with-http_slice_module --with-threads --with-http_addition_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_sub_module
 ```
 
-You will have to use your judgment to figure out which configuration options to use. In the advanced [Learn how to Tune Nginx](/learning-paths/servers-and-cloud-computing/nginx_tune) learning path, GCC options that can be used to improve performance will be explored.
+You will have to use your judgment to figure out which configuration options to use. In the advanced [Learn how to Tune Nginx](/learning-paths/servers-and-cloud-computing/nginx_tune/) learning path, GCC options that can be used to improve performance will be explored.
 
 ### Building Nginx and dependencies
 
-Once you know your configuration options, you can follow the build [instructions](https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/#compiling-and-installing-from-source). With respect to the three dependencies of PCRE, zlib, and OpenSSL; you can also install prebuilt versions of those libraries using a Linux package manager and skip building them from source as shown in the instructions. That said, it may be advantageous to build these as additional performance benefits could be gained. This point will be explored in the [Learn how to Tune Nginx](/learning-paths/servers-and-cloud-computing/nginx_tune) learning path.
+Once you know your configuration options, you can follow the build [instructions](https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/#compiling-and-installing-from-source). With respect to the three dependencies of PCRE, zlib, and OpenSSL; you can also install prebuilt versions of those libraries using a Linux package manager and skip building them from source as shown in the instructions. That said, it may be advantageous to build these as additional performance benefits could be gained. This point will be explored in the [Learn how to Tune Nginx](/learning-paths/servers-and-cloud-computing/nginx_tune/) learning path.
 
 ### Running Nginx as a service
 

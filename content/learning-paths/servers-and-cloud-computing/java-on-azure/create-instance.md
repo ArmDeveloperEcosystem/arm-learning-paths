@@ -48,5 +48,5 @@ ssh -i <path-to-private-key> <username>@<public-ip-address>
 ```
 
 {{% notice Note %}}
-To learn more about Arm-based virtual machines in Azure, see "Getting started with Microsoft Azure" in [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure).
+To learn more about Arm-based virtual machines in Azure, see "Getting started with Microsoft Azure" in [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure/).
 {{% /notice %}}

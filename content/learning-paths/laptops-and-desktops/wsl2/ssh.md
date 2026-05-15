@@ -80,7 +80,7 @@ There are two options to SSH from another machine on the local network:
  - Bridged networking
  - Port forwarding
 
-# Bridged networking
+### Bridged networking
 
 WSL uses NAT by default. This means the Linux distribution running in WSL will get an IP address starting with 172.X.X.X and not an IP address on the local network. NAT makes it impossible to SSH to WSL.
 
@@ -88,7 +88,7 @@ One way to get an IP on the local network is to use a bridged network.
 
 For more information refer to the [short WSL bridging and networking reference](https://github.com/luxzg/WSL2-fixes/blob/master/networkingMode%3Dbridged%20-%20quick%20setup.md)
 
-# Port forwarding
+### Port forwarding
 
 Another way to connect to WSL via SSH is to forward or proxy the Windows port for SSH, such as 2022, to the WSL instance. 
 
@@ -120,8 +120,13 @@ Get the IP address of Windows:
 ipconfig
 ```
 
-From another local machine SSH to the Windows IP on port 2022 and it should forward to WSL running on that Windows computer. 
+From another local machine, SSH to the Windows IP on port 2022. It should forward to WSL running on that Windows computer. 
 
+## What you've accomplished and what's next
+
+You've now learned when SSH is useful for WSL and when the built-in `/mnt/c` mount is enough for local file transfers. You installed and started the OpenSSH server inside your Linux distribution, connected from Windows using `ssh.exe`, changed the SSH port when needed, and reviewed options for connecting to WSL from another machine on your local network.
+
+Next, you'll learn how to connect to WSL using RDP and VNC so you can work with a full Linux desktop environment from Windows.
 
 
 

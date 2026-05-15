@@ -6,7 +6,7 @@ layout: "learningpathall"
 
 ## Before you begin
 
-This section gives you an overview of how to setup a bare minimum HTTPS file server. To understand how to use Nginx configurations files, you should read the [documentation on serving static content](https://docs.nginx.com/nginx/admin-guide/web-server/serving-static-content/). Tuning of a file server configuration will be explored in the advanced [Learn how to Tune Nginx](/learning-paths/servers-and-cloud-computing/nginx_tune) learning path.
+This section gives you an overview of how to setup a bare minimum HTTPS file server. To understand how to use Nginx configurations files, you should read the [documentation on serving static content](https://docs.nginx.com/nginx/admin-guide/web-server/serving-static-content/). Tuning of a file server configuration will be explored in the advanced [Learn how to Tune Nginx](/learning-paths/servers-and-cloud-computing/nginx_tune/) learning path.
 
 ## Setup a static file server
 

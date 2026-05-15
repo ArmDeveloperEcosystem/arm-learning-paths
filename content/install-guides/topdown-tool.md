@@ -59,7 +59,7 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 2. Install Perf
 
-Install Perf using the [Perf for Linux on Arm install guide](/install-guides/perf).
+Install Perf using the [Perf for Linux on Arm install guide](/install-guides/perf/).
 
 3. Install Python 3 and pip
 

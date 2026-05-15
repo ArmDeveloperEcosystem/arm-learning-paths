@@ -27,7 +27,7 @@ Its aim is to have as few implementation dependencies as possible, making it a v
 
 Java is available for Arm Linux. In this guide, you'll learn different ways to install Java on Arm Linux distributions. This includes both the Java runtime environment (JRE), which is used to run Java applications, and the Java Development Kit (JDK), which is used to create Java applications.
 
-The following are some of the common methods that you can use to install Java. This includes both the Java runtime environment (JRE), which is used to run Java applications, and the Java Development Kit (JDK), which is used to create Java applications.
+The following are some of the common methods that you can use to install Java.
 
 {{% notice Note %}}
 The Java Technology Compatibility Kit (TCK) is a test suite that you can use to verify whether a Java implementation conforms to the Java SE Platform Specification. It is a crucial tool for ensuring that Java applications can run consistently across different platforms and implementations.
@@ -105,13 +105,13 @@ tar xvf microsoft-jdk-25.0.2-linux-aarch64.tar.gz
 Move the contents to a directory of your choice: 
 
 ```console
-sudo mv  jdk-25.0.2+7/ /usr/local
+sudo mv  jdk-25.0.2+10/ /usr/local
 ```
 
 Set up environment variables to locate your installation:
 
 ```console
-export JAVA_HOME=/usr/local/jdk-25.0.2+7
+export JAVA_HOME=/usr/local/jdk-25.0.2+10
 export PATH=$JAVA_HOME/bin:$PATH
 ```
 
@@ -152,13 +152,13 @@ tar xvf jdk-25_linux-aarch64_bin.tar.gz
 Move the contents to a directory of your choice: 
 
 ```console
-sudo mv jdk-25.0.2 /usr/local/
+sudo mv jdk-25.0.3 /usr/local/
 ```
 
 Set up environment variables to locate your installation:
 
 ```console
-export JAVA_HOME=/usr/local/jdk-25.0.2
+export JAVA_HOME=/usr/local/jdk-25.0.3
 export PATH=$JAVA_HOME/bin:$PATH
 ```
 
@@ -200,9 +200,9 @@ java -version
 The output will be similar to:
 
 ```output
-openjdk version "25.0.2" 2024-07-16
-OpenJDK Runtime Environment (build 25.0.2+7-Ubuntu-1ubuntu224.04)
-OpenJDK 64-Bit Server VM (build 25.0.2+7-Ubuntu-1ubuntu224.04, mixed mode, sharing)
+openjdk version "25.0.2" 2026-01-20 LTS
+OpenJDK Runtime Environment Microsoft-13053556 (build 25.0.2+10-LTS)
+OpenJDK 64-Bit Server VM Microsoft-13053556 (build 25.0.2+10-LTS, mixed mode, sharing)
 ```
 
 Print the version of the Java compiler:
@@ -290,7 +290,7 @@ sudo apt install gradle -y
 You can also install specific versions by downloading and extracting a zip file:
 
 {{% notice Note %}}
-The following commands use Gradle version 8.10. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Gradle releases](https://gradle.org/releases/).
+The following commands use Gradle version 9.4.1. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Gradle releases](https://gradle.org/releases/).
 {{% /notice %}}
 
 ```console

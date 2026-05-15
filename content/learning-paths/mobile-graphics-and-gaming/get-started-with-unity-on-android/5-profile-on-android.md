@@ -49,6 +49,6 @@ Try fixing the performance issue yourself.
 
 Hint: To solve the problem, try looking for a very unnecessary function call in Spin.Update(). Remove the call and then re-deploy to your Android device. The cube will now be spinning smoothly.
 
-For more on using the Profiler to find performance issues, see [Profiling Unity Apps on Android](/learning-paths/mobile-graphics-and-gaming/profiling-unity-apps-on-android).
+For more on using the Profiler to find performance issues, see [Profiling Unity Apps on Android](/learning-paths/mobile-graphics-and-gaming/profiling-unity-apps-on-android/).
 
 
