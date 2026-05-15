@@ -1,20 +1,14 @@
 ---
-title: Set up your environment
+title: Set up your environment 
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Overview
-
-This Learning Path walks through every step directly in the web pages. If you prefer working in a notebook, you can download the optional notebook and run the same workflow in Jupyter.
-
-{{% notice Note %}}
-The notebook is optional. The commands and code snippets in the following sections are the source of truth for the Learning Path.
-{{% /notice %}}
-
 ## OS and tooling requirements
+
+Before you can create a reference PyTorch model, you need to set up Python, ExecuTorch, and  Arm backend dependencies
 
 Use one of the following:
 - Linux
@@ -26,7 +20,7 @@ Install and verify Python 3.10+, <3.14:
 python3 --version
 ```
 
-## Create a Python virtual environment
+### Create a Python virtual environment
 
 Create a working directory for this Learning Path:
 
@@ -34,6 +28,7 @@ Create a working directory for this Learning Path:
 mkdir preparing-models-for-nt
 cd preparing-models-for-nt
 ```
+Create a virtual environment:
 
 ```bash
 python3 -m venv venv
@@ -41,7 +36,9 @@ source venv/bin/activate
 python -m pip install --upgrade pip
 ```
 
-## Clone and install ExecuTorch
+### Clone and install ExecuTorch
+
+Clone ExecuTorch from GitHub and install:
 
 ```bash
 git clone https://github.com/pytorch/executorch.git repo/executorch
@@ -49,16 +46,7 @@ cd repo/executorch
 ./install_executorch.sh
 ```
 
-alternatively you can use the attached setup script: 
-
-<a href="{{ '/assets/scripts/setup.sh' | relative_url }}" download>
-  Download setup.sh
-</a>
-
-to do all of the above under python version 3.11
-
-
-## Install Arm backend dependencies
+### Install Arm backend dependencies
 
 From the root of `repo/executorch`, run:
 
@@ -81,9 +69,7 @@ Return to the Learning Path working directory:
 cd ../..
 ```
 
-
-
-## Optional: use the notebook
+## (Optional) Use a Jupyter notebook
 
 If you prefer to work through the same steps in Jupyter, download the notebook from the `arm-learning-paths` repository:
 
@@ -109,4 +95,8 @@ Open the notebook:
 prepare-models-for-nt.ipynb
 ```
 
-You are now ready to create and export your first test model, either from the Learning Path pages or from the optional notebook.
+## What you've accomplished and what's next
+
+You've now set up the Python environment and ExecuTorch for creating PyTorch models.
+
+Next, you'll create and export your first test model, either from the Learning Path pages or from the optional Jupyter notebook.

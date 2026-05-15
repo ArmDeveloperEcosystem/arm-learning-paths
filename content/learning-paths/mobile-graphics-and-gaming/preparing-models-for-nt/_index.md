@@ -7,7 +7,7 @@ minutes_to_complete: 45
 who_is_this_for: This is an advanced topic for developers who want to understand and debug the model preparation flow used by Arm neural technology in neural graphics pipelines.
 
 learning_objectives:
-    - Build and export a simple PyTorch model for ExecuTorch
+    - Build and export a PyTorch model for ExecuTorch
     - Generate `.vgf` artifacts with the ExecuTorch VGF backend
     - Visualize model structure and generated artifacts using Model Explorer
     - Inspect TOSA intermediate representation when you need to debug operator lowering
@@ -53,6 +53,10 @@ further_reading:
     - resource:
         title: Enable Neural Super Sampling in Unreal Engine with ML Extensions
         link: /learning-paths/mobile-graphics-and-gaming/nss-unreal/
+        type: learningpath
+    - resource:
+        title: Running a test with the Scenario Runner
+        link: /learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/4-scenario-runner/
         type: learningpath
     - resource:
         title: Neural Graphics Development Kit
