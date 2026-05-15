@@ -7,8 +7,12 @@ on:
         description: "Optional comma or newline separated Learning Path directories or _index.md files. Leave blank to process all eligible paths."
         required: false
         type: string
+      category:
+        description: "Optional top-level Learning Path category slug. Leave blank to process all categories unless paths is set."
+        required: false
+        type: string
       limit:
-        description: "Optional limit when paths is empty. Use 0 to process all eligible Learning Paths."
+        description: "Optional limit when paths and category are empty. Use 0 to process all eligible Learning Paths."
         required: false
         default: "0"
         type: string
@@ -64,6 +68,7 @@ jobs:
       - name: Generate summary and FAQ content
         env:
           INPUT_PATHS: ${{ inputs.paths }}
+          INPUT_CATEGORY: ${{ inputs.category }}
           INPUT_LIMIT: ${{ inputs.limit }}
           INPUT_REQUIRE_FLAG: ${{ inputs.require_flag }}
           INPUT_GENERATION_MODE: ${{ inputs.generation_mode }}
@@ -72,6 +77,7 @@ jobs:
           OPENAI_BASE_URL: ${{ vars.OPENAI_BASE_URL || 'https://openai-api-proxy.geo.arm.com/api/providers/openai/v1/responses/' }}
           INPUT_DRY_RUN: ${{ inputs.dry_run }}
           REPORT_FILE: reports/generated-summary-faq/latest-run.yml
+          LOG_FILE: reports/generated-summary-faq/latest-run.txt
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           GIT_REF_NAME: ${{ github.ref_name }}
           GIT_SHA: ${{ github.sha }}
@@ -80,11 +86,13 @@ jobs:
           CMD=(
             python tools/generate_summary_faq.py
             --path-filter "$INPUT_PATHS"
+            --category "$INPUT_CATEGORY"
             --limit "$INPUT_LIMIT"
             --generation-mode "$INPUT_GENERATION_MODE"
             --openai-base-url "$OPENAI_BASE_URL"
             --openai-model "$INPUT_OPENAI_MODEL"
             --report-file "$REPORT_FILE"
+            --log-file "$LOG_FILE"
             --run-url "$RUN_URL"
             --git-ref "$GIT_REF_NAME"
             --git-sha "$GIT_SHA"
@@ -104,10 +112,13 @@ jobs:
           "${CMD[@]}"
 
       - name: Upload latest run report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: generated-summary-faq-report
-          path: reports/generated-summary-faq/latest-run.yml
+          path: |
+            reports/generated-summary-faq/latest-run.yml
+            reports/generated-summary-faq/latest-run.txt
           retention-days: 14
 
       - name: Configure git
@@ -177,6 +188,7 @@ jobs:
                   "created",
                   "repaired_missing",
                   "rerun_requested",
+                  "generator_changed",
                   "drift_detected_preserved",
                   "unchanged",
               ):
