@@ -10,7 +10,7 @@ layout: learningpathall
 
 `.vgf` is the deployable format used by Arm neural technology with ML Extensions for Vulkan. In this section, you'll use the ExecuTorch VGF backend to generate deployable artifacts directly from the exported PyTorch model. You'll then run a quick validation pass.
 
-This is the path to use first because it matches the model preparation workflow you'll use before connecting a model to downstream Vulkan samples, engine integrations, or the Scenario Runner. TOSA is still useful, but treat it as the deeper inspection step when you need to debug what happened between PyTorch export and backend output.
+This is the path to use first because it matches the model preparation workflow you'll use before connecting a model to downstream Vulkan samples, engine integrations, or the Scenario Runner. Tensor Operator Set Architecture (TOSA) is still useful, but treat it as the deeper inspection step when you need to debug what happened between PyTorch export and backend output.
 
 ## Lower directly with the ExecuTorch VGF backend
 
@@ -119,10 +119,10 @@ python run_vgf_pte.py
 
 For an input tensor of ones, `x + y = 2`, so the expected output is close to `sigmoid(2) = 0.880797`.
 
-If you want to run a packaged end-to-end sample after validating this toy model, see [Running a test with the Scenario Runner](/learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/4-scenario-runner/). For the simplest toy ML Extensions for Vulkan run command, see [Simple Tensor and Data Graph](/learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/3-first-sample/).
+If you want to run a packaged end-to-end sample after validating this toy model, see [Running a test with the Scenario Runner](/learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/4-scenario-runner/). For toy ML Extensions for Vulkan run command, see [Simple Tensor and Data Graph](/learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/3-first-sample/).
 
 ## What you've accomplished and what's next
 
-You've now exported the `AddSigmoid` model with the ExecuTorch VGF backend, generated `.vgf` artifacts, and optionally built and ran the VKML validation path.
+You've now exported the `AddSigmoid` model with the ExecuTorch VGF backend, generated `.vgf` artifacts, and optionally built and run the VKML validation path.
 
 Next, you'll inspect the generated model artifacts in Model Explorer to confirm the graph structure, tensor shapes, and backend output.

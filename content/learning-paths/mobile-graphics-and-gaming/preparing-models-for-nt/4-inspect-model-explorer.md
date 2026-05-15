@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Install Model Explorer and adapters
 
-Use the following commands in your active virtual environment:
+Use the following commands in your active virtual environment to make sure the Model Explorer and the adapters are installed:
 
 ```bash
 pip install torch ai-edge-model-explorer
@@ -19,7 +19,7 @@ pip install vgf-adapter-model-explorer
 
 ## Launch Model Explorer
 
-Run Model Explorer with PTE, TOSA, and VGF adapters:
+Run Model Explorer with the PTE, TOSA, and VGF adapters:
 
 ```bash
 model-explorer --extensions=pte_adapter_model_explorer,tosa_adapter_model_explorer,vgf_adapter_model_explorer
@@ -41,4 +41,4 @@ This same inspection approach is described in the [Model Gym](/learning-paths/mo
 
 You've now installed Model Explorer adapters, launched Model Explorer, and inspected the generated `.vgf` or `.pte` artifacts for the expected graph structure and tensor shapes.
 
-Next, you'll extract Tensor Operator Set Architecture (TOSA) artifacts to examine the intermediate representation between PyTorch export and backend-specific output.
+Next, you'll extract TOSA artifacts to examine the intermediate representation between PyTorch export and backend-specific output.

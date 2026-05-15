@@ -110,10 +110,7 @@ You can now compare the direct ExecuTorch VGF backend output with the `.vgf` gen
 
 You've now completed a manual model preparation workflow for Arm neural technology. You set up the ExecuTorch environment and created and exported an `AddSigmoid` PyTorch reference model. You then lowered it with the ExecuTorch VGF backend, generated `.vgf` and `.pte` artifacts, validated the output with an ExecuTorch runner, and inspected the generated graph in Model Explorer. You also learned where TOSA fits in the workflow.
 
-You now have two practical ways to prepare neural graphics models:
-
-- Model Gym: higher-level workflow for training, evaluation, and export
-- Manual ExecuTorch flow: low-level control over VGF export, TOSA inspection, and runtime validation
+In addition to Model Gym for higher-level training, evaluation, and export workflows, you now have this manual ExecuTorch flow. 
 
 Use [Model Gym](/learning-paths/mobile-graphics-and-gaming/model-training-gym/) when you want to:
 - Fine-tune NSS quickly
