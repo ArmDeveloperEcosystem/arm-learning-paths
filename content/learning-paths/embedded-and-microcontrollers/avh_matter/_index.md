@@ -20,46 +20,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:54Z'
-  generator: template
-  source_hash: bd39d50c93219201ead5de5da627447a91a82ea9c65e232350facd0c3516bedc
-  summary: >-
-    Learn how to build Matter reference examples on Arm Virtual Hardware, demonstrate device communication,
-    and automate testing with GitHub Actions CI/CD workflows. It is designed for embedded software
-    developers new to Arm Virtual Hardware. By the end, you will be able to instantiate Arm Virtual
-    Hardware instances, build and run Matter examples on Arm Virtual Hardware, and demonstrate
-    communication between two virtual hardware targets. It focuses on tools and technologies such
-    as Matter, Arm Virtual Hardware, and GitHub, Linux environments, and Arm platforms including
-    Cortex-A. The main steps cover Prepare AVH instances of Raspberry Pi 4, Build and run Matter
-    examples on Arm Virtual Hardware, Manage development in a CI/CD workflow with Self-Hosted
-    Runner, and Control Arm Virtual Hardware with API.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will instantiate Arm Virtual Hardware instances, build and run Matter examples on Arm
-      Virtual Hardware, and demonstrate communication between two virtual hardware targets. Learn
-      how to build Matter reference examples on Arm Virtual Hardware, demonstrate device communication,
-      and automate testing with GitHub Actions CI/CD workflows.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for embedded software developers new to Arm Virtual Hardware.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: Some familiarity with embedded programming
-      is assumed.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Matter, Arm Virtual Hardware, and GitHub, Linux
-      environments, and Arm platforms such as Cortex-A.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Prepare AVH instances of Raspberry Pi 4, Build and
-      run Matter examples on Arm Virtual Hardware, Manage development in a CI/CD workflow with
-      Self-Hosted Runner, and Control Arm Virtual Hardware with API.
-# END generated_summary_faq
+
 
 author: Ronan Synnott
 

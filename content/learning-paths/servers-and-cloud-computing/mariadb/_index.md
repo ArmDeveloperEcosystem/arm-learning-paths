@@ -21,51 +21,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:58Z'
-  generator: template
-  source_hash: db4ce1c59ad10bd127b4990c82ce876311d7dc7e1ad5d39ec132daf82ceb8b79
-  summary: >-
-    Deploy MariaDB on Arm cloud instances across AWS, Azure, and Google Cloud using Docker, Amazon
-    RDS, and automation with Terraform and Ansible. It is designed for software developers who
-    want to deploy MariaDB on Arm servers. By the end, you will be able to deploy MariaDB on virtual
-    machines from different cloud service providers, deploy MariaDB using Docker, and deploy MariaDB
-    using Amazon RDS (Relational Database Service). It focuses on tools and technologies such
-    as Terraform, Ansible, MariaDB, Docker, and Runbook, Linux environments, Arm platforms including
-    Neoverse, and cloud platforms such as AWS, Microsoft Azure, and Google Cloud. The main steps
-    cover Install MariaDB on an AWS Arm based instance, Deploy MariaDB using RDS(AWS), Install
-    MariaDB on an Azure Arm based instance, Install MariaDB on a GCP Arm based instance, and Deploy
-    MariaDB via Docker.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will deploy MariaDB on virtual machines from different cloud service providers, deploy
-      MariaDB using Docker, and deploy MariaDB using Amazon RDS (Relational Database Service).
-      Deploy MariaDB on Arm cloud instances across AWS, Azure, and Google Cloud using Docker,
-      Amazon RDS, and automation with Terraform and Ansible.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for software developers who want to deploy MariaDB on Arm
-      servers.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: Cloud service provider accounts for
-      each service you want to use including AWS, Azure, and GCP; A local computer with [Docker](/install-guides/docker/),
-      [Terraform](/install-guides/terraform/), [AWS CLI](/install-guides/aws-cli/), [Azure CLI](/install-guides/azure-cli/),
-      [Google Cloud CLI](/install-guides/gcloud/), and [Ansible](/install-guides/ansible/) installed.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Terraform, Ansible, MariaDB, Docker, and Runbook,
-      Linux environments, Arm platforms such as Neoverse, and cloud platforms such as AWS, Microsoft
-      Azure, and Google Cloud.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Install MariaDB on an AWS Arm based instance, Deploy
-      MariaDB using RDS(AWS), Install MariaDB on an Azure Arm based instance, Install MariaDB
-      on a GCP Arm based instance, and Deploy MariaDB via Docker.
-# END generated_summary_faq
+
 
 author: Jason Andrews
 ### Tags

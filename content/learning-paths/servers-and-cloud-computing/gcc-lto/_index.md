@@ -20,44 +20,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:57Z'
-  generator: template
-  source_hash: 2e53b87d4dc7a7d1984e3bbe035038a60e619aea2f5793cb3082f3b59084bbf9
-  summary: >-
-    Learn how to apply link-time optimization with the GCC toolchain to improve application performance
-    by optimizing across compilation units. It is designed for developers who want to improve
-    application performance using link-time optimization (LTO) with the GCC toolchain. By the
-    end, you will be able to understand how link-time optimization (LTO) works and when to apply
-    it, enable and configure LTO with GCC compiler flags, and evaluate the performance and code
-    size trade-offs of LTO. It focuses on tools and technologies such as GCC, Linux environments,
-    and Arm platforms including Neoverse and Cortex-A. The main steps cover An LTO Primer, Deploying
-    LTO, and Potential Gains.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will understand how link-time optimization (LTO) works and when to apply it, enable
-      and configure LTO with GCC compiler flags, and evaluate the performance and code size trade-offs
-      of LTO. Learn how to apply link-time optimization with the GCC toolchain to improve application
-      performance by optimizing across compilation units.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for developers who want to improve application performance
-      using link-time optimization (LTO) with the GCC toolchain.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: An Arm Linux system (cloud instance,
-      on-premises hardware, or a virtual machine); A recent version of the [GCC toolchain](/install-guides/gcc/).
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including GCC, Linux environments, and Arm platforms such
-      as Neoverse and Cortex-A.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around An LTO Primer, Deploying LTO, and Potential Gains.
-# END generated_summary_faq
+
 
 author: Victor Do Nascimento
 

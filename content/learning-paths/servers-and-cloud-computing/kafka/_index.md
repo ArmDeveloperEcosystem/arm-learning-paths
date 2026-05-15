@@ -21,46 +21,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:58Z'
-  generator: template
-  source_hash: b7f36df881c2c436143c1e5579d2c54cb5930f52998904098829c52fa7290f38
-  summary: >-
-    Deploy and configure a Kafka cluster with Zookeeper on Arm servers, test event streaming,
-    and automate deployment on AWS and Google Cloud. It is designed for software developers who
-    want to learn how to use Kafka and Zookeeper. By the end, you will be able to install Zookeeper
-    and Kafka, configure Zookeeper to work with Kafka, and test write/read events into the Kafka
-    cluster. It focuses on tools and technologies such as Kafka and ZooKeeper, Linux environments,
-    Arm platforms including Neoverse, and cloud platforms such as AWS and Google Cloud. The main
-    steps cover Introduction to Kafka and Zookeeper, Setup a 3 node Zookeeper Cluster, Set up
-    a 3 node Kafka Cluster, Verify that the Kafka Cluster is working, and Deploy Cluster Automatically
-    (AWS).
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will install Zookeeper and Kafka, configure Zookeeper to work with Kafka, and test write/read
-      events into the Kafka cluster. Deploy and configure a Kafka cluster with Zookeeper on Arm
-      servers, test event streaming, and automate deployment on AWS and Google Cloud.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an advanced topic for software developers who want to learn how to use Kafka and
-      Zookeeper.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: Seven physical Arm machines or cloud
-      instances with either Ubuntu or Debian installed.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Kafka and ZooKeeper, Linux environments, Arm platforms
-      such as Neoverse, and cloud platforms such as AWS and Google Cloud.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Introduction to Kafka and Zookeeper, Setup a 3 node
-      Zookeeper Cluster, Set up a 3 node Kafka Cluster, Verify that the Kafka Cluster is working,
-      and Deploy Cluster Automatically (AWS).
-# END generated_summary_faq
+
 
 author: Pareena Verma
 

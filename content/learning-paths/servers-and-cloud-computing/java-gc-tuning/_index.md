@@ -21,49 +21,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:57Z'
-  generator: template
-  source_hash: f57dd99bad280f64f53071373519e2d3ba8ae50b94fe1ad0a9cc40d02b458b9b
-  summary: >-
-    Monitor, interpret, and optimize Java Garbage Collector performance on Arm servers by comparing
-    different GCs and tuning parameters for your workload. It is designed for Java developers
-    aiming to optimize application performance on Arm-based servers, especially those migrating
-    applications from x86-based to Arm-based instances. By the end, you will be able to describe
-    the key differences between individual Java Garbage Collectors (GCs), monitor and interpret
-    Garbage Collector performance metrics, and adjust core parameters to optimize performance
-    for your specific workload. It focuses on tools and technologies such as Java and Runbook,
-    Linux environments, Arm platforms including Neoverse, and cloud platforms such as AWS, Microsoft
-    Azure, Google Cloud, and Oracle. The main steps cover Overview, Setup, Types of Garbage Collector,
-    Example Application, and Basic GC Tuning Options.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will describe the key differences between individual Java Garbage Collectors (GCs),
-      monitor and interpret Garbage Collector performance metrics, and adjust core parameters
-      to optimize performance for your specific workload. Monitor, interpret, and optimize Java
-      Garbage Collector performance on Arm servers by comparing different GCs and tuning parameters
-      for your workload.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This Learning Path is for Java developers aiming to optimize application performance on
-      Arm-based servers, especially those migrating applications from x86-based to Arm-based instances.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: An Arm-based instance from a cloud service
-      provider, or an on-premise Arm server.; Basic understanding of Java.; An [installation of
-      Java](/install-guides/java/) on your machine.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Java and Runbook, Linux environments, Arm platforms
-      such as Neoverse, and cloud platforms such as AWS, Microsoft Azure, Google Cloud, and Oracle.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Overview, Setup, Types of Garbage Collector, Example
-      Application, and Basic GC Tuning Options.
-# END generated_summary_faq
+
 
 author: Kieran Hejmadi
 

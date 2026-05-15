@@ -24,47 +24,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:54Z'
-  generator: template
-  source_hash: 3ddb97eb97a4c7ede7951410086198ee793a9d452a79b607f211873971bd375d
-  summary: >-
-    Learn how to build a motion-detection device with Raspberry Pi Pico (RP2040 Cortex-M0+) using
-    Arduino IDE, PIR sensors, and interrupt-driven programming on baremetal. It is designed for
-    software developers interested in embedded programming. By the end, you will be able to understand
-    the basics of embedded programming, know the differences between embedded and application
-    development, and write a simple embedded application. It focuses on tools and technologies
-    such as Arduino, Baremetal environments, and Arm platforms including Cortex-M. The main steps
-    cover About Embedded Programming, Application Programming, Embedded Programming, Embedded
-    Programming on Arm, and Build a smart device prototype.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will understand the basics of embedded programming, know the differences between embedded
-      and application development, and write a simple embedded application. Learn how to build
-      a motion-detection device with Raspberry Pi Pico (RP2040 Cortex-M0+) using Arduino IDE,
-      PIR sensors, and interrupt-driven programming on baremetal.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for software developers interested in embedded programming.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: The [Arduino IDE with the RP2040 board
-      support package](/install-guides/arduino-pico/) installed on your computer; A [Raspberry
-      Pi Pico](https://www.raspberrypi.com/products/raspberry-pi-pico/) board; A [PIR sensor](https://www.amazon.com/HiLetgo-HC-SR501-Infrared-Sensor-Arduino/dp/B07KZW86YR/ref=sr_1_3?keywords=pir+sensor&qid=1698432931&sr=8-3)
-      for detecting motion; A [peizo-electric buzzer](https://www.amazon.com/mxuteuk-Electronic-Computers-Printers-Components/dp/B07VK1GJ9X/ref=sr_1_4?crid=2FAXYI17HZKDB&keywords=piezo+buzzer&qid=1698432968&sprefix=peizo%2Caps%2C148&sr=8-4)
-      for signaling motion.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Arduino, Baremetal environments, and Arm platforms
-      such as Cortex-M.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around About Embedded Programming, Application Programming,
-      Embedded Programming, Embedded Programming on Arm, and Build a smart device prototype.
-# END generated_summary_faq
+
 
 author: Michael Hall
 

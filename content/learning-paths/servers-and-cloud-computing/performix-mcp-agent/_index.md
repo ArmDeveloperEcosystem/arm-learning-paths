@@ -23,57 +23,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:58Z'
-  generator: template
-  source_hash: 0599665da13e9e1a8b017b0dac87c63f323ef769b1a5be62a60a32a36bc82696
-  summary: >-
-    Learn how to use an AI agent and the Performix tool through the Arm MCP Server to run the
-    Code Hotspots recipe on a C++ application, interpret flame graph results, and apply targeted
-    optimizations on Arm Neoverse. It is designed for developers who want to use AI-powered tools
-    to automate performance profiling and optimization of C++ applications on Arm Neoverse servers.
-    By the end, you will be able to describe how the Arm Performix tool in the Arm MCP Server
-    enables AI-driven profiling workflows, configure a GitHub Copilot prompt file to run the Code
-    Hotspots recipe on a remote Arm target, and use an AI agent to interpret flame graph results
-    and identify the hottest functions in a C++ application. It focuses on tools and technologies
-    such as Arm Performix, MCP, C++, and GitHub Copilot, Linux environments, and Arm platforms
-    including Neoverse. The main steps cover Understand AI-driven profiling with Arm Performix
-    MCP, Build the Mandelbrot example on Arm Neoverse, Run Code Hotspots with an AI agent, and
-    Optimize code with AI-driven profiling feedback.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will describe how the Arm Performix tool in the Arm MCP Server enables AI-driven profiling
-      workflows, configure a GitHub Copilot prompt file to run the Code Hotspots recipe on a remote
-      Arm target, and use an AI agent to interpret flame graph results and identify the hottest
-      functions in a C++ application. Learn how to use an AI agent and the Performix tool through
-      the Arm MCP Server to run the Code Hotspots recipe on a C++ application, interpret flame
-      graph results, and apply targeted optimizations on Arm Neoverse.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an advanced topic for developers who want to use AI-powered tools to automate performance
-      profiling and optimization of C++ applications on Arm Neoverse servers.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: Completion of the [Automate x86-to-Arm
-      application migration using Arm MCP Server](/learning-paths/servers-and-cloud-computing/arm-mcp-server/)
-      Learning Path, or equivalent familiarity with configuring the Arm MCP Server in an AI coding
-      assistant; Access to an Arm-based cloud instance running Linux, such as an AWS Graviton3
-      instance; Access to Arm Performix configured with the remote Arm target. See the [Arm Performix
-      install guide](/install-guides/performix/) for setup instructions; Basic understanding of
-      C++.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Arm Performix, MCP, C++, and GitHub Copilot, Linux
-      environments, and Arm platforms such as Neoverse.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Understand AI-driven profiling with Arm Performix
-      MCP, Build the Mandelbrot example on Arm Neoverse, Run Code Hotspots with an AI agent, and
-      Optimize code with AI-driven profiling feedback.
-# END generated_summary_faq
+
 
 author: Pareena Verma
 

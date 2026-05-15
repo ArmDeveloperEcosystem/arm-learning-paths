@@ -20,49 +20,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:56Z'
-  generator: template
-  source_hash: 84a8b96fe7df302e0a2a6e4645bbb6170b45a3e0b55e0ea3682ec47663d34819
-  summary: >-
-    Learn how to optimize Arm application binaries and shared libraries using BOLT profile instrumentation,
-    merge multiple profiles for improved coverage, and integrate optimized libraries. It is designed
-    for performance engineers and software developers targeting Arm platforms who want to optimize
-    application binaries and shared libraries using BOLT. By the end, you will be able to instrument
-    and optimize application binaries for individual workload features using BOLT, collect and
-    merge separate BOLT profiles to improve code coverage, and optimize shared libraries independently
-    of application binaries. It focuses on tools and technologies such as BOLT, perf, and Runbook,
-    Linux environments, and Arm platforms including Neoverse and Cortex-A. The main steps cover
-    Overview, Instrument MySQL with BOLT, Run a new workload using BOLT and merge the results,
-    Instrument shared libraries with BOLT, and Review the performance results.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will instrument and optimize application binaries for individual workload features using
-      BOLT, collect and merge separate BOLT profiles to improve code coverage, and optimize shared
-      libraries independently of application binaries. Learn how to optimize Arm application binaries
-      and shared libraries using BOLT profile instrumentation, merge multiple profiles for improved
-      coverage, and integrate optimized libraries.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an advanced topic for performance engineers and software developers targeting Arm
-      platforms who want to optimize application binaries and shared libraries using BOLT.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: An Arm-based Linux system with [BOLT](/install-guides/bolt/)
-      and [Linux Perf](/install-guides/perf/) installed.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including BOLT, perf, and Runbook, Linux environments, and
-      Arm platforms such as Neoverse and Cortex-A.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Overview, Instrument MySQL with BOLT, Run a new workload
-      using BOLT and merge the results, Instrument shared libraries with BOLT, and Review the
-      performance results.
-# END generated_summary_faq
+
 
 author: Gayathri Narayana Yegna Narayanan
 

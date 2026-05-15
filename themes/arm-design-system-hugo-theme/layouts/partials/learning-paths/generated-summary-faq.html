@@ -1,39 +1,70 @@
 {{/*
 Render a generated summary paragraph and FAQ block for Learning Path introduction pages.
 
-Expected front-matter shape:
-  generated_summary_faq:
-    summary: ...
-    faqs:
-      - question: ...
-        answer: ...
+	Expected front-matter shape:
+	  generated_summary_faq:
+	    ai_assisted: true
+	    summary: ...
+	    faqs:
+	      - question: ...
+	        answer: ...
 */}}
 
 {{ $generated := .Params.generated_summary_faq }}
 {{ if $generated }}
-    {{ $summary := $generated.summary }}
-    {{ $faqs := $generated.faqs }}
+	{{ $summary := $generated.summary }}
+	{{ $faqs := $generated.faqs }}
+	{{ $ai_assisted := $generated.ai_assisted }}
 
-    {{ if or $summary $faqs }}
-        <div id="generated-summary-faq" class="u-margin-top-2">
-            {{ with $summary }}
-                <h3>Summary</h3>
-                <div class="u-margin-left-1">
-                    {{ . | markdownify }}
+	{{ if or $summary $faqs }}
+		<div id="generated-summary-faq" class="u-margin-top-2">
+			{{ if $ai_assisted }}
+				<div class="generated-summary-faq__label u-margin-bottom-1">
+					<span class="generated-summary-faq__badge">AI-assisted</span>
+					<ads-modal id="ai-assisted-summary-faq-modal" modal-title="What AI-assisted means">
+						<div slot="body">
+							<p>
+								This summary and FAQ were drafted with an approved AI-assisted workflow and are reviewed by Arm contributors before publication.
+								Human technical review remains part of the process so the final page reflects engineering rigor, accuracy, and Arm editorial standards.
+							</p>
+						</div>
+						<div slot="actions">
+							<ads-cta-button class="ai-assisted-summary-faq-close" level="primary" type="button" sr-label="close">Close</ads-cta-button>
+						</div>
+						<div slot="trigger">
+							<button class="generated-summary-faq__info" type="button" aria-label="Learn what AI-assisted means">?</button>
+						</div>
+					</ads-modal>
+				</div>
+				<script>
+					(() => {
+						const modal = document.getElementById('ai-assisted-summary-faq-modal');
+						if (!modal) return;
+						modal.querySelectorAll('.ai-assisted-summary-faq-close').forEach((button) => {
+							button.addEventListener('click', () => modal.close());
+						});
+					})();
+				</script>
+			{{ end }}
+
+			{{ with $summary }}
+				<h3>Summary</h3>
+				<div class="u-margin-left-1">
+					{{ . | markdownify }}
                 </div>
             {{ end }}
 
-            {{ with $faqs }}
-                <h3 class="u-margin-top-2">Frequently asked questions</h3>
-                {{ range . }}
-                    <details class="u-margin-left-1 u-margin-bottom-1">
-                        <summary>{{ .question }}</summary>
-                        <div class="u-margin-top-1 u-margin-left-1">
-                            {{ .answer | markdownify }}
-                        </div>
-                    </details>
-                {{ end }}
-            {{ end }}
-        </div>
-    {{ end }}
+			{{ with $faqs }}
+				<h3 class="u-margin-top-2">Frequently asked questions</h3>
+				{{ range . }}
+					<ads-expansion-panel class="generated-summary-faq__panel u-margin-left-1 u-margin-bottom-1">
+						<span slot="toggle">{{ .question }}</span>
+						<div slot="content" class="u-margin-top-1">
+							{{ .answer | markdownify }}
+						</div>
+					</ads-expansion-panel>
+				{{ end }}
+			{{ end }}
+		</div>
+	{{ end }}
 {{ end }}

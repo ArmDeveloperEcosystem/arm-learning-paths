@@ -18,43 +18,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:57Z'
-  generator: template
-  source_hash: 4f1c448eef66300e024bda27c420f9746047c0c4b76e8556d3d8693382206055
-  summary: >-
-    Learn how to provision an Amazon EKS cluster on Arm-based Graviton instances and deploy a
-    WordPress application with MySQL database. It is designed for software developers new to Kubernetes
-    on AWS who want to gain experience with cloud applications. By the end, you will be able to
-    provision an Amazon Elastic Kubernetes Service (EKS) cluster on Arm-based instances and deploy
-    Wordpress with MySQL on EKS. It focuses on tools and technologies such as AWS Elastic Kubernetes
-    Service (EKS), Kubernetes, SQL, MySQL, and WordPress, Linux environments, Arm platforms including
-    Neoverse, and cloud platforms such as AWS. The main steps cover Create an EKS cluster and
-    Deploy WordPress.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will provision an Amazon Elastic Kubernetes Service (EKS) cluster on Arm-based instances
-      and deploy Wordpress with MySQL on EKS. Learn how to provision an Amazon EKS cluster on
-      Arm-based Graviton instances and deploy a WordPress application with MySQL database.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for software developers new to Kubernetes on AWS who want
-      to gain experience with cloud applications.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: An Amazon Web Services (AWS) [account](https://aws.amazon.com/).
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including AWS Elastic Kubernetes Service (EKS), Kubernetes,
-      SQL, MySQL, and WordPress, Linux environments, Arm platforms such as Neoverse, and cloud
-      platforms such as AWS.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Create an EKS cluster and Deploy WordPress.
-# END generated_summary_faq
+
 
 author: Jason Andrews
 

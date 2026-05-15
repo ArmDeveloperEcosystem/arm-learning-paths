@@ -21,45 +21,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:55Z'
-  generator: template
-  source_hash: 3e93048b46c24514a89ccc2f277b53111a419c049b53662e1461be38a22e83f7
-  summary: >-
-    Learn how to build, test, and verify KleidiCV with Scalable Matrix Extensions (SME) on Apple
-    Silicon Macs for accelerated computer vision performance. It is designed for software developers
-    who want to build and test KleidiCV on macOS. By the end, you will be able to install and
-    compile KleidiCV on macOS, run KleidiCV example tests, and enable Scalable Matrix Extensions
-    (SME) and verify increased SME performance. It focuses on tools and technologies such as KleidiCV
-    and C, macOS environments, and Arm platforms including Cortex-A. The main steps cover Download
-    and build KleidiCV software and Test KleidiCV and verify SME backend support.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will install and compile KleidiCV on macOS, run KleidiCV example tests, and enable Scalable
-      Matrix Extensions (SME) and verify increased SME performance. Learn how to build, test,
-      and verify KleidiCV with Scalable Matrix Extensions (SME) on Apple Silicon Macs for accelerated
-      computer vision performance.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for software developers who want to build and test KleidiCV
-      on macOS.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: A Mac with Apple Silicon (M4 generation
-      or newer); Xcode command line tools installed; Basic familiarity with using the Terminal
-      and command-line tools.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including KleidiCV and C, macOS environments, and Arm platforms
-      such as Cortex-A.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Download and build KleidiCV software and Test KleidiCV
-      and verify SME backend support.
-# END generated_summary_faq
+
 
 author: Jett Zhou
 

@@ -21,53 +21,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:54Z'
-  generator: template
-  source_hash: 927cfebb8ebf9595922dad115c9a8d10900e43c4f80e73e6102a71e3e4ca2da1
-  summary: >-
-    Learn how to install and configure Remote.It for secure remote device access using SSH and
-    other services, with proxy and peer-to-peer connection options. It is designed for software
-    developers who want to use Remote.It to establish private network connections between users
-    and devices or devices to device. By the end, you will be able to install Remote.It on target
-    devices (devices you would like to access remotely), access your Remote.It enabled devices
-    from anywhere, and understand the different types of network connections (proxy vs. Peer to
-    peer). It focuses on tools and technologies such as Remote.It, Linux, Windows, and macOS environments,
-    and Arm platforms including Neoverse and Cortex-A. The main steps cover Remote.It Packages,
-    Installing the Remote.It Device Package, Remote.It CLI, and Connections.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will install Remote.It on target devices (devices you would like to access remotely),
-      access your Remote.It enabled devices from anywhere, and understand the different types
-      of network connections (proxy vs. Peer to peer). Learn how to install and configure Remote.It
-      for secure remote device access using SSH and other services, with proxy and peer-to-peer
-      connection options.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for software developers who want to use Remote.It to establish
-      private network connections between users and devices or devices to device.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: A Windows, macOS, or Linux computer
-      which you will use to configure your devices as well as connect to your remote devices.;
-      A device/computer to which you would like remote access. A device can be a Windows, Mac,
-      or Linux computer including development kits such as Raspberry Pi or cloud-hosted such as
-      within Arm Virtual Hardware or within AWS. You will need a method to control this device
-      before Remote.It is deployed which can be local access or access via another remote connectivity
-      solution (Remote Desktop, VPN, etc.); Determine if your device that you would like to access
-      remotely also needs to make connections to other Remote.It devices.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Remote.It, Linux, Windows, and macOS environments,
-      and Arm platforms such as Neoverse and Cortex-A.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Remote.It Packages, Installing the Remote.It Device
-      Package, Remote.It CLI, and Connections.
-# END generated_summary_faq
+
 
 author: Brenda Strech
 

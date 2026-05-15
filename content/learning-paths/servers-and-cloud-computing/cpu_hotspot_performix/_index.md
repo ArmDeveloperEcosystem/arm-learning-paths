@@ -18,45 +18,6 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:57Z'
-  generator: template
-  source_hash: 58dba071f70b4f85b87b3bd27b3a7ba3ff985f80079a42e05b797a998aeaf104
-  summary: >-
-    Learn how to profile and identify CPU hotspots in C++ applications on Arm Neoverse using Arm
-    Performix flame graphs to guide optimization. It is designed for software developers and performance
-    engineers who want to identify code hotspots in applications running on Arm Linux systems.
-    By the end, you will be able to run the Code Hotspots recipe in Arm Performix and identify
-    which functions consume the most CPU cycles and target them for optimization. It focuses on
-    tools and technologies such as Arm Performix, C++, and Runbook, Linux environments, and Arm
-    platforms including Neoverse. The main steps cover Understand flame graphs and profiling tools,
-    Build the example application, Profile baseline performance, and Optimize application performance.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will run the Code Hotspots recipe in Arm Performix and identify which functions consume
-      the most CPU cycles and target them for optimization. Learn how to profile and identify
-      CPU hotspots in C++ applications on Arm Neoverse using Arm Performix flame graphs to guide
-      optimization.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for software developers and performance engineers who want
-      to identify code hotspots in applications running on Arm Linux systems.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: Access to Arm Performix; Basic understanding
-      of C++.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Arm Performix, C++, and Runbook, Linux environments,
-      and Arm platforms such as Neoverse.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Understand flame graphs and profiling tools, Build
-      the example application, Profile baseline performance, and Optimize application performance.
-# END generated_summary_faq
 
 author: Kieran Hejmadi
 

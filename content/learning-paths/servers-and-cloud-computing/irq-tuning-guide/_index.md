@@ -21,46 +21,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:57Z'
-  generator: template
-  source_hash: 6fc608d45c4fdf85a77bddd4f8c26b05a7950d1086e578a8be0dd637feeb5d79
-  summary: >-
-    Analyze and optimize interrupt request (IRQ) patterns on Arm Linux servers to improve network
-    workload performance through IRQ distribution strategies. It is designed for developers and
-    performance engineers who are interested in understanding how network interrupt patterns can
-    impact performance on cloud servers. By the end, you will be able to analyze the current interrupt
-    request (IRQ) layout on an Arm Linux system, experiment with different interrupt options and
-    patterns to improve performance, and configure optimal IRQ distribution strategies for your
-    workload. It focuses on Linux environments and Arm platforms including Neoverse and Cortex-A.
-    The main steps cover Understand and analyze network IRQ configuration, IRQ management patterns
-    for performance optimization, and Conclusion and recommendations.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will analyze the current interrupt request (IRQ) layout on an Arm Linux system, experiment
-      with different interrupt options and patterns to improve performance, and configure optimal
-      IRQ distribution strategies for your workload. Analyze and optimize interrupt request (IRQ)
-      patterns on Arm Linux servers to improve network workload performance through IRQ distribution
-      strategies.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for developers and performance engineers who are interested
-      in understanding how network interrupt patterns can impact performance on cloud servers.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: An Arm computer running Linux; Some
-      familiarity with the Linux command line.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers Linux environments and Arm platforms such as Neoverse and Cortex-A.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Understand and analyze network IRQ configuration,
-      IRQ management patterns for performance optimization, and Conclusion and recommendations.
-# END generated_summary_faq
+
 
 author: Kiel Friedt
 

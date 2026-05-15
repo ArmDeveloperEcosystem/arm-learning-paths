@@ -19,48 +19,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:58Z'
-  generator: template
-  source_hash: 3ec6ae40daff557dd05cd092ff7d6b5a63954a1618605030a443f56fe5ffe490
-  summary: >-
-    Implement Code level Performance Analysis using the PMUv3 plugin walks you through an end-to-end
-    Arm software workflow. It is designed for Engineers who want to carry out C/C++ performance
-    analysis by instrumenting code at the block level. By the end, you will be able to generate
-    a fine-grained, precise measurement of functions and other sections of code, instrument your
-    code to analyze a single section or multiple sections using the provided instrumentation scenarios,
-    and run and collect performance metrics and raw event values for any of the 15 event groups
-    (bundles) in a single run. It focuses on tools and technologies such as C, CPP, Python, and
-    Runbook, Linux environments, and Arm platforms including Neoverse. The main steps cover PMUv3
-    plugin features, Download and build the PMUv3 plugin, Instrument one section of code, Plot,
-    visualize, and analyze the results, and Instrument multiple sections of code.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will generate a fine-grained, precise measurement of functions and other sections of
-      code, instrument your code to analyze a single section or multiple sections using the provided
-      instrumentation scenarios, and run and collect performance metrics and raw event values
-      for any of the 15 event groups (bundles) in a single run.
-  - question: Who is this Learning Path for?
-    answer: >-
-      Engineers who want to carry out C/C++ performance analysis by instrumenting code at the
-      block level.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: An Arm-based computer running Linux.;
-      Some familiarity with Linux application performance analysis.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including C, CPP, Python, and Runbook, Linux environments,
-      and Arm platforms such as Neoverse.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around PMUv3 plugin features, Download and build the PMUv3
-      plugin, Instrument one section of code, Plot, visualize, and analyze the results, and Instrument
-      multiple sections of code.
-# END generated_summary_faq
+
 
 author: Gayathri Narayana Yegna Narayanan
 

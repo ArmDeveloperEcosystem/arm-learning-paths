@@ -3,8 +3,8 @@
 """
 Generate summary and FAQ content for Learning Path _index.md files.
 
-This script is intentionally template-driven so it can run in CI without
-external AI dependencies. It:
+This script uses an OpenAI-compatible endpoint to generate AI-assisted content.
+It keeps a deterministic template fallback for local smoke tests. It:
 
 - selects eligible Learning Paths using a front-matter flag or explicit paths
 - manages a `generated_summary_faq` front-matter block
@@ -22,7 +22,11 @@ Managed front-matter contract:
     generated_summary_faq:
       template_version: summary-faq-v2
       generated_at: "2026-05-06T19:40:00Z"
-      generator: template
+      generator: ai
+      ai_assisted: true
+      ai_review_required: true
+      model: "..."
+      prompt_template: summary-faq-v3
       source_hash: "..."
       summary_generated_at: "2026-05-06T19:40:00Z"
       summary_source_hash: "..."
@@ -43,8 +47,12 @@ import argparse
 import copy
 import hashlib
 import json
+import os
 import re
+import ssl
 import sys
+import urllib.error
+import urllib.request
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -56,6 +64,9 @@ import yaml
 REPO_ROOT = Path(__file__).resolve().parent.parent
 LEARNING_PATH_ROOT = REPO_ROOT / "content" / "learning-paths"
 DEFAULT_REPORT_PATH = REPO_ROOT / "reports" / "generated-summary-faq" / "latest-run.yml"
+DEFAULT_PROMPT_DIR = REPO_ROOT / "tools" / "prompts"
+DEFAULT_OPENAI_BASE_URL = "https://openai-api-proxy.geo.arm.com/api/providers/openai/v1/responses/"
+DEFAULT_OPENAI_MODEL = "gpt-4.1-mini"
 
 ENABLE_FLAG = "generate_summary_faq"
 RERUN_SUMMARY_FLAG = "rerun_summary"
@@ -65,7 +76,8 @@ GENERATED_KEY = "generated_summary_faq"
 MANAGED_START = "# START generated_summary_faq"
 MANAGED_END = "# END generated_summary_faq"
 
-TEMPLATE_VERSION = "summary-faq-v2"
+TEMPLATE_VERSION = "summary-faq-v3"
+PROMPT_TEMPLATE_VERSION = "summary-faq-v3"
 DEFAULT_HISTORY_LIMIT = 20
 
 SUMMARY_SOURCE_HASH_KEY = "summary_source_hash"
@@ -77,6 +89,7 @@ SUMMARY_ACTIONS = (
     "created",
     "repaired_missing",
     "rerun_requested",
+    "generator_changed",
     "drift_detected_preserved",
     "unchanged",
 )
@@ -87,11 +100,12 @@ REASON_ORDER = (
     "missing_faqs",
     "rerun_summary",
     "rerun_faqs",
+    "generator_changed",
     "summary_drift_detected",
     "faq_drift_detected",
     "rerun_flags_reset",
 )
-CHANGE_ACTIONS = {"created", "repaired_missing", "rerun_requested"}
+CHANGE_ACTIONS = {"created", "repaired_missing", "rerun_requested", "generator_changed"}
 
 
 class BlockString(str):
@@ -143,6 +157,11 @@ def parse_args() -> argparse.Namespace:
         help="Optional comma/newline-separated list of Learning Path directories or _index.md files.",
     )
     parser.add_argument(
+        "--category",
+        default="",
+        help="Optional top-level Learning Path category slug, for example servers-and-cloud-computing.",
+    )
+    parser.add_argument(
         "--limit",
         type=int,
         default=0,
@@ -152,6 +171,38 @@ def parse_args() -> argparse.Namespace:
         "--allow-unflagged",
         action="store_true",
         help=f"Process explicit or discovered Learning Paths even when `{ENABLE_FLAG}` is not true.",
+    )
+    parser.add_argument(
+        "--generation-mode",
+        choices=("ai", "template"),
+        default=os.getenv("SUMMARY_FAQ_GENERATION_MODE", "ai"),
+        help="Use the Arm OpenAI-compatible endpoint, or the deterministic local template fallback.",
+    )
+    parser.add_argument(
+        "--openai-base-url",
+        default=os.getenv("OPENAI_BASE_URL", DEFAULT_OPENAI_BASE_URL),
+        help="OpenAI-compatible Responses endpoint URL. Defaults to Arm's OpenAI proxy.",
+    )
+    parser.add_argument(
+        "--openai-model",
+        default=os.getenv("OPENAI_MODEL", DEFAULT_OPENAI_MODEL),
+        help="Model or deployment name exposed by the configured OpenAI-compatible endpoint.",
+    )
+    parser.add_argument(
+        "--openai-ca-bundle",
+        default=os.getenv("OPENAI_CA_BUNDLE", os.getenv("SSL_CERT_FILE", "")),
+        help="Optional CA bundle file for the OpenAI-compatible endpoint.",
+    )
+    parser.add_argument(
+        "--openai-insecure-skip-verify",
+        action="store_true",
+        default=as_bool(os.getenv("OPENAI_INSECURE_SKIP_VERIFY", "")),
+        help="Skip TLS certificate verification for local endpoint testing only.",
+    )
+    parser.add_argument(
+        "--prompt-dir",
+        default=str(DEFAULT_PROMPT_DIR),
+        help="Directory containing summary/FAQ system and user prompt templates.",
     )
     parser.add_argument(
         "--write",
@@ -169,6 +220,11 @@ def parse_args() -> argparse.Namespace:
         help="Path to the central run report YAML file.",
     )
     parser.add_argument(
+        "--log-file",
+        default="",
+        help="Optional text file that captures progress, errors, and summary output for this run.",
+    )
+    parser.add_argument(
         "--no-write-report",
         action="store_true",
         help="Skip writing the central report file.",
@@ -183,15 +239,61 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--git-ref", default="", help="Optional Git ref or branch name to store in the report.")
     parser.add_argument("--git-sha", default="", help="Optional commit SHA to store in the report.")
     parser.add_argument("--actor", default="", help="Optional workflow actor to store in the report.")
+    parser.add_argument(
+        "--quiet-progress",
+        action="store_true",
+        help="Hide per-Learning Path progress output.",
+    )
 
     args = parser.parse_args()
 
     if args.write and args.dry_run:
         parser.error("Use either --write or --dry-run, not both.")
+    if args.path_filter and args.category:
+        parser.error("Use either --path-filter or --category, not both.")
     if not args.write and not args.dry_run:
         args.dry_run = True
 
     return args
+
+
+def append_log_line(log_file: str, message: str) -> None:
+    if not log_file:
+        return
+
+    path = Path(log_file)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8") as log:
+        log.write(message + "\n")
+
+
+def emit(args: argparse.Namespace, message: str, flush: bool = False) -> None:
+    print(message, flush=flush)
+    append_log_line(args.log_file, message)
+
+
+def initialize_log(args: argparse.Namespace) -> None:
+    if not args.log_file:
+        return
+
+    path = Path(args.log_file)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        "\n".join(
+            [
+                "Generate summary/FAQ local run",
+                f"timestamp: {current_timestamp()}",
+                f"mode: {'write' if args.write else 'dry-run'}",
+                f"generation_mode: {args.generation_mode}",
+                f"openai_base_url: {args.openai_base_url if args.generation_mode == 'ai' else ''}",
+                f"openai_model: {args.openai_model if args.generation_mode == 'ai' else ''}",
+                f"category: {args.category or ''}",
+                f"path_filter: {args.path_filter or ''}",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
 
 
 def current_timestamp() -> str:
@@ -260,6 +362,19 @@ def normalize_path_filter(path_filter: str) -> List[Path]:
 
 def discover_learning_path_indexes() -> List[Path]:
     indexes = sorted(LEARNING_PATH_ROOT.glob("*/*/_index.md"))
+    return [path for path in indexes if path.is_file()]
+
+
+def discover_category_indexes(category: str) -> List[Path]:
+    category_slug = category.strip().strip("/")
+    if not category_slug:
+        return []
+
+    category_path = LEARNING_PATH_ROOT / category_slug
+    if not category_path.is_dir():
+        raise FileNotFoundError(f"Could not resolve Learning Path category from '{category}'.")
+
+    indexes = sorted(category_path.glob("*/_index.md"))
     return [path for path in indexes if path.is_file()]
 
 
@@ -532,6 +647,255 @@ def build_faqs(metadata: Dict[str, Any], steps: Sequence[StepPage]) -> List[Dict
     return faqs
 
 
+def prompt_metadata(metadata: Dict[str, Any]) -> Dict[str, Any]:
+    keys = (
+        "title",
+        "description",
+        "who_is_this_for",
+        "learning_objectives",
+        "prerequisites",
+        "skilllevels",
+        "subjects",
+        "tools_software_languages",
+        "operatingsystems",
+        "armips",
+        "cloud_service_providers",
+        "minutes_to_complete",
+    )
+    return {key: metadata.get(key) for key in keys if metadata.get(key) not in (None, "", [])}
+
+
+def prompt_steps(steps: Sequence[StepPage]) -> List[Dict[str, Any]]:
+    prompt_pages: List[Dict[str, Any]] = []
+    for step in steps:
+        if step.path.name in {"_index.md", "_next-steps.md", "_review.md", "_demo.md"}:
+            continue
+        if as_bool(step.metadata.get("hide_from_navpane", False)):
+            continue
+
+        excerpt = compact_whitespace(strip_markdown_links(step.content))
+        prompt_pages.append(
+            {
+                "file": step.path.name,
+                "title": step.title,
+                "weight": step.weight,
+                "excerpt": excerpt[:1600],
+            }
+        )
+
+    return prompt_pages[:12]
+
+
+def build_learning_path_prompt_context(metadata: Dict[str, Any], steps: Sequence[StepPage]) -> Dict[str, Any]:
+    return {
+        "metadata": prompt_metadata(metadata),
+        "steps": prompt_steps(steps),
+        "output_requirements": {
+            "summary": "One concise paragraph, approximately 70-120 words.",
+            "faqs": "Exactly 5 FAQs. Each answer should be 1-3 sentences.",
+            "voice": "Clear, specific, technically accurate, and aligned with Arm developer education content.",
+            "review": "Output will be reviewed by human contributors before publication.",
+        },
+    }
+
+
+def read_prompt_template(prompt_dir: Path, filename: str) -> str:
+    path = prompt_dir / filename
+    if not path.exists():
+        raise FileNotFoundError(f"Prompt template not found: {path}")
+    return path.read_text(encoding="utf-8").strip()
+
+
+def render_user_prompt(template: str, context: Dict[str, Any]) -> str:
+    context_json = json.dumps(context, ensure_ascii=False, indent=2, sort_keys=True)
+    return template.replace("{{ learning_path_context }}", context_json)
+
+
+def extract_json_object(text: str) -> Dict[str, Any]:
+    cleaned = text.strip()
+    fenced_match = re.search(r"```(?:json)?\s*(.*?)\s*```", cleaned, re.DOTALL)
+    if fenced_match:
+        cleaned = fenced_match.group(1).strip()
+
+    try:
+        payload = json.loads(cleaned)
+    except json.JSONDecodeError:
+        start = cleaned.find("{")
+        end = cleaned.rfind("}")
+        if start == -1 or end == -1 or end <= start:
+            raise
+        payload = json.loads(cleaned[start : end + 1])
+
+    if not isinstance(payload, dict):
+        raise ValueError("AI response must be a JSON object.")
+    return payload
+
+
+def validate_ai_summary_faq(payload: Dict[str, Any]) -> Dict[str, Any]:
+    summary = compact_whitespace(str(payload.get("summary", "")))
+    raw_faqs = payload.get("faqs")
+
+    if not summary:
+        raise ValueError("AI response did not include a non-empty summary.")
+    if not isinstance(raw_faqs, list) or not raw_faqs:
+        raise ValueError("AI response did not include a non-empty faqs list.")
+
+    faqs: List[Dict[str, str]] = []
+    for raw_faq in raw_faqs:
+        if not isinstance(raw_faq, dict):
+            continue
+        question = compact_whitespace(str(raw_faq.get("question", "")))
+        answer = compact_whitespace(str(raw_faq.get("answer", "")))
+        if question and answer:
+            faqs.append({"question": question, "answer": answer})
+
+    if len(faqs) != 5:
+        raise ValueError(f"AI response must include exactly 5 valid FAQs; received {len(faqs)}.")
+
+    return {
+        "summary": summary,
+        "faqs": faqs,
+    }
+
+
+def extract_response_text(response_payload: Dict[str, Any]) -> str:
+    output_text = response_payload.get("output_text")
+    if isinstance(output_text, str) and output_text.strip():
+        return output_text
+
+    output = response_payload.get("output")
+    if isinstance(output, list):
+        chunks: List[str] = []
+        for item in output:
+            if not isinstance(item, dict):
+                continue
+            content = item.get("content")
+            if not isinstance(content, list):
+                continue
+            for content_item in content:
+                if not isinstance(content_item, dict):
+                    continue
+                text = content_item.get("text")
+                if isinstance(text, str):
+                    chunks.append(text)
+        if chunks:
+            return "\n".join(chunks)
+
+    choices = response_payload.get("choices")
+    if isinstance(choices, list) and choices:
+        message = choices[0].get("message") if isinstance(choices[0], dict) else None
+        if isinstance(message, dict) and isinstance(message.get("content"), str):
+            return message["content"]
+
+    raise ValueError("Could not find text output in AI response.")
+
+
+def build_ssl_context(ca_bundle: str = "", insecure_skip_verify: bool = False) -> ssl.SSLContext:
+    if insecure_skip_verify:
+        return ssl._create_unverified_context()
+    if ca_bundle:
+        return ssl.create_default_context(cafile=ca_bundle)
+    return ssl.create_default_context()
+
+
+def post_responses_request(
+    endpoint: str,
+    api_key: str,
+    payload: Dict[str, Any],
+    ca_bundle: str = "",
+    insecure_skip_verify: bool = False,
+) -> Dict[str, Any]:
+    request = urllib.request.Request(
+        endpoint,
+        data=json.dumps(payload).encode("utf-8"),
+        headers={
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+
+    ssl_context = build_ssl_context(ca_bundle=ca_bundle, insecure_skip_verify=insecure_skip_verify)
+
+    try:
+        with urllib.request.urlopen(request, timeout=60, context=ssl_context) as response:
+            body = response.read().decode("utf-8")
+    except urllib.error.HTTPError as exc:
+        error_body = exc.read().decode("utf-8", errors="replace")
+        raise RuntimeError(f"AI endpoint returned HTTP {exc.code}: {error_body}") from exc
+    except urllib.error.URLError as exc:
+        reason = str(exc.reason)
+        if "CERTIFICATE_VERIFY_FAILED" in reason:
+            raise RuntimeError(
+                "Could not verify the AI endpoint TLS certificate. "
+                "Set OPENAI_CA_BUNDLE to your Arm corporate CA bundle, or use "
+                "OPENAI_INSECURE_SKIP_VERIFY=true for local testing only. "
+                f"Original error: {reason}"
+            ) from exc
+        raise RuntimeError(f"Could not reach AI endpoint: {exc.reason}") from exc
+
+    try:
+        parsed = json.loads(body)
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"AI endpoint returned non-JSON response: {body[:500]}") from exc
+
+    if not isinstance(parsed, dict):
+        raise ValueError("AI endpoint response must be a JSON object.")
+
+    return parsed
+
+
+def generate_ai_summary_faq(metadata: Dict[str, Any], steps: Sequence[StepPage], args: argparse.Namespace) -> Dict[str, Any]:
+    api_key = os.getenv("OPENAI_API_KEY", "").strip()
+    if not api_key:
+        raise RuntimeError("OPENAI_API_KEY is required when --generation-mode ai is used.")
+
+    prompt_dir = Path(args.prompt_dir)
+    system_prompt = read_prompt_template(prompt_dir, "summary_faq_system.md")
+    user_template = read_prompt_template(prompt_dir, "summary_faq_user.md")
+    user_prompt = render_user_prompt(
+        user_template,
+        build_learning_path_prompt_context(metadata, steps),
+    )
+
+    prompt_input = (
+        f"{system_prompt}\n\n"
+        "Use the following Learning Path context to produce the required JSON response.\n\n"
+        f"{user_prompt}"
+    )
+
+    response_payload = post_responses_request(
+        endpoint=args.openai_base_url,
+        api_key=api_key,
+        payload={
+            "model": args.openai_model,
+            "input": prompt_input,
+        },
+        ca_bundle=args.openai_ca_bundle,
+        insecure_skip_verify=args.openai_insecure_skip_verify,
+    )
+
+    content = extract_response_text(response_payload)
+    return validate_ai_summary_faq(extract_json_object(content))
+
+
+def build_desired_summary_faq(
+    metadata: Dict[str, Any],
+    steps: Sequence[StepPage],
+    args: argparse.Namespace,
+) -> Dict[str, Any]:
+    if args.generation_mode == "template":
+        return {
+            "summary": build_summary(metadata, steps),
+            "faqs": build_faqs(metadata, steps),
+            "generator": "template",
+        }
+
+    generated = generate_ai_summary_faq(metadata, steps, args)
+    generated["generator"] = "ai"
+    return generated
+
+
 def build_source_hash(metadata: Dict[str, Any], steps: Sequence[StepPage]) -> str:
     relevant = {
         "title": metadata.get("title"),
@@ -775,6 +1139,8 @@ def build_updated_generated_block(
     generated_at: str,
     summary_action: str,
     faq_action: str,
+    generator: str,
+    model: str,
 ) -> Dict[str, Any]:
     summary_matches_current = not summaries_differ(summary_after, desired_summary)
     faqs_match_current = not faq_differences_exist(classify_faq_changes(faqs_after, desired_faqs))
@@ -804,7 +1170,11 @@ def build_updated_generated_block(
     return {
         "template_version": TEMPLATE_VERSION,
         "generated_at": generated_at,
-        "generator": "template",
+        "generator": generator,
+        "ai_assisted": generator == "ai",
+        "ai_review_required": generator == "ai",
+        "model": model if generator == "ai" else "",
+        "prompt_template": PROMPT_TEMPLATE_VERSION if generator == "ai" else "",
         "source_hash": top_level_source_hash,
         SUMMARY_GENERATED_AT_KEY: summary_meta["generated_at"],
         SUMMARY_SOURCE_HASH_KEY: summary_meta["source_hash"],
@@ -902,6 +1272,10 @@ def build_run_report(
         "git_sha": args.git_sha or "",
         "actor": args.actor or "",
         "template_version": TEMPLATE_VERSION,
+        "generation_mode": args.generation_mode,
+        "openai_base_url": args.openai_base_url if args.generation_mode == "ai" else "",
+        "openai_model": args.openai_model if args.generation_mode == "ai" else "",
+        "prompt_template": PROMPT_TEMPLATE_VERSION if args.generation_mode == "ai" else "",
         "totals": totals,
         "section_totals": section_totals,
         "reason_totals": reason_totals,
@@ -939,9 +1313,10 @@ def write_report(report_file: Path, run_report: Dict[str, Any], history_limit: i
     report_file.write_text(report_text, encoding="utf-8")
 
 
-def print_result_summary(run_report: Dict[str, Any]) -> None:
+def print_result_summary(args: argparse.Namespace, run_report: Dict[str, Any]) -> None:
     totals = run_report["totals"]
-    print(
+    emit(
+        args,
         "Processed {processed} Learning Paths: "
         "{added} added, {updated} updated, {drift_detected} drift detected, "
         "{paths_with_drift} paths with drift, "
@@ -950,18 +1325,22 @@ def print_result_summary(run_report: Dict[str, Any]) -> None:
 
     summary_actions = run_report["section_totals"]["summary"]
     faq_actions = run_report["section_totals"]["faqs"]
-    print(
+    emit(
+        args,
         "Summary actions: "
         f"{summary_actions['created']} created, "
         f"{summary_actions['repaired_missing']} repaired_missing, "
         f"{summary_actions['rerun_requested']} rerun_requested, "
+        f"{summary_actions['generator_changed']} generator_changed, "
         f"{summary_actions['drift_detected_preserved']} drift_detected_preserved."
     )
-    print(
+    emit(
+        args,
         "FAQ actions: "
         f"{faq_actions['created']} created, "
         f"{faq_actions['repaired_missing']} repaired_missing, "
         f"{faq_actions['rerun_requested']} rerun_requested, "
+        f"{faq_actions['generator_changed']} generator_changed, "
         f"{faq_actions['drift_detected_preserved']} drift_detected_preserved."
     )
 
@@ -970,12 +1349,20 @@ def print_result_summary(run_report: Dict[str, Any]) -> None:
         summary_action = result.get("summary", {}).get("action", "")
         faq_action = result.get("faqs", {}).get("action", "")
         reasons = ", ".join(result.get("change_reasons", [])) or "none"
-        print(f"- {status.upper():14s} {result['path']} | summary={summary_action} | faqs={faq_action} | reasons={reasons}")
+        line = f"- {status.upper():14s} {result['path']} | summary={summary_action} | faqs={faq_action} | reasons={reasons}"
+        if status == "error":
+            line += f" | error={result.get('error', 'Unknown error')}"
+        emit(args, line)
 
 
 def select_learning_paths(args: argparse.Namespace) -> List[Path]:
     explicit_paths = normalize_path_filter(args.path_filter) if args.path_filter else []
-    selected = explicit_paths or discover_learning_path_indexes()
+    if explicit_paths:
+        selected = explicit_paths
+    elif args.category:
+        selected = discover_category_indexes(args.category)
+    else:
+        selected = discover_learning_path_indexes()
     filtered: List[Path] = []
 
     for index_path in selected:
@@ -1006,11 +1393,15 @@ def process_learning_path(index_path: Path, args: argparse.Namespace) -> Dict[st
 
         generated_at = current_timestamp()
         current_source_hash = build_source_hash(doc.metadata, steps)
-        desired_summary = build_summary(doc.metadata, steps)
-        desired_faqs = build_faqs(doc.metadata, steps)
+        desired_content = build_desired_summary_faq(doc.metadata, steps, args)
+        desired_summary = desired_content["summary"]
+        desired_faqs = desired_content["faqs"]
+        generator = desired_content["generator"]
 
         existing_summary = extract_existing_summary(existing_generated)
         existing_faqs = extract_existing_faqs(existing_generated)
+        existing_generator = compact_whitespace(str((existing_generated or {}).get("generator", "")))
+        generator_changed = bool(existing_generated is not None and existing_generator != generator)
 
         summary_missing_before = existing_generated is not None and not compact_whitespace(existing_summary)
         faqs_missing_before = existing_generated is not None and not existing_faqs
@@ -1028,9 +1419,14 @@ def process_learning_path(index_path: Path, args: argparse.Namespace) -> Dict[st
             change_reasons.append("rerun_summary")
         if rerun_faqs_requested:
             change_reasons.append("rerun_faqs")
+        if generator_changed:
+            change_reasons.append("generator_changed")
 
         if existing_generated is None:
             summary_action = "created"
+            summary_after = desired_summary
+        elif generator_changed:
+            summary_action = "generator_changed"
             summary_after = desired_summary
         elif summary_missing_before:
             summary_action = "repaired_missing"
@@ -1048,6 +1444,9 @@ def process_learning_path(index_path: Path, args: argparse.Namespace) -> Dict[st
 
         if existing_generated is None:
             faq_action = "created"
+            faqs_after = desired_faqs
+        elif generator_changed:
+            faq_action = "generator_changed"
             faqs_after = desired_faqs
         elif faqs_missing_before:
             faq_action = "repaired_missing"
@@ -1098,6 +1497,8 @@ def process_learning_path(index_path: Path, args: argparse.Namespace) -> Dict[st
                 generated_at=generated_at,
                 summary_action=summary_action,
                 faq_action=faq_action,
+                generator=generator,
+                model=args.openai_model,
             )
             updated_front_matter = insert_or_replace_managed_block(updated_front_matter, updated_generated)
             summary_source_hash_after = compact_whitespace(str(updated_generated.get(SUMMARY_SOURCE_HASH_KEY, "")))
@@ -1176,24 +1577,34 @@ def process_learning_path(index_path: Path, args: argparse.Namespace) -> Dict[st
 
 def main() -> int:
     args = parse_args()
+    initialize_log(args)
     selected_paths = select_learning_paths(args)
 
     if not selected_paths:
-        print("No Learning Paths matched the current selection rules.")
+        emit(args, "No Learning Paths matched the current selection rules.")
         run_report = build_run_report(args, [], [])
         if not args.no_write_report:
             write_report(Path(args.report_file), run_report, args.history_limit)
-            print(f"Wrote report to {report_path_for_output(Path(args.report_file))}")
+            emit(args, f"Wrote report to {report_path_for_output(Path(args.report_file))}")
         return 0
 
-    results = [process_learning_path(path, args) for path in selected_paths]
+    results = []
+    total_paths = len(selected_paths)
+    for index, path in enumerate(selected_paths, start=1):
+        if not args.quiet_progress:
+            emit(args, f"[{index}/{total_paths}] Processing {report_path_for_output(path)}", flush=True)
+        result = process_learning_path(path, args)
+        results.append(result)
+        if not args.quiet_progress and result.get("status") == "error":
+            emit(args, f"[{index}/{total_paths}] ERROR {result.get('error', 'Unknown error')}", flush=True)
+
     run_report = build_run_report(args, selected_paths, results)
 
     if not args.no_write_report:
         write_report(Path(args.report_file), run_report, args.history_limit)
-        print(f"Wrote report to {report_path_for_output(Path(args.report_file))}")
+        emit(args, f"Wrote report to {report_path_for_output(Path(args.report_file))}")
 
-    print_result_summary(run_report)
+    print_result_summary(args, run_report)
 
     if run_report["totals"]["errors"] > 0:
         return 1

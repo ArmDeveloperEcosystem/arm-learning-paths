@@ -8,46 +8,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:54Z'
-  generator: template
-  source_hash: 24245102b7b6cefd0d4f67fbfaff1fb27c913de33665929ec3cb15293a1b3b51
-  summary: >-
-    Learn how to write mixed C and assembly programs for Cortex-M microcontrollers using Keil
-    MDK, following Arm Procedure Call Standard conventions. It is designed for software developers
-    who are interested in programming microcontrollers with C/Assembly. By the end, you will be
-    able to write a mixed C program and assembly language subroutines for the microcontroller,
-    call the subroutines written in assembly in a C function, and use Arm register calling conventions
-    when writing subroutines in assembly language. It focuses on tools and technologies such as
-    Keil MDK, Baremetal environments, and Arm platforms including Cortex-M. The main steps cover
-    Keil MDK versions, Setting up a Project in Keil Studio (VS Code), Setting up a Project in
-    Keil MDK (μVision), and Writing assembly functions.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will write a mixed C program and assembly language subroutines for the microcontroller,
-      call the subroutines written in assembly in a C function, and use Arm register calling conventions
-      when writing subroutines in assembly language. Learn how to write mixed C and assembly programs
-      for Cortex-M microcontrollers using Keil MDK, following Arm Procedure Call Standard conventions.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for software developers who are interested in programming
-      microcontrollers with C/Assembly.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: Some familiarity with C/Assembly.; An
-      installation of Keil MDK.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Keil MDK, Baremetal environments, and Arm platforms
-      such as Cortex-M.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Keil MDK versions, Setting up a Project in Keil Studio
-      (VS Code), Setting up a Project in Keil MDK (μVision), and Writing assembly functions.
-# END generated_summary_faq
+
 
 author: Ronan Synnott
 

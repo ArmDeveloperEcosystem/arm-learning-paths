@@ -23,46 +23,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:55Z'
-  generator: template
-  source_hash: 0c3422e1cd571e6abff676c28ec32c2ec69a626a406167f9166e57daa6829252
-  summary: >-
-    Learn how to install vcpkg, initialize it, create vcpkg-configuration.json files, use vcpkg
-    for tool management, activate tool licensing, and remove vcpkg for reproducible command-line
-    tool installations. It is designed for software developers who want to create reproducible
-    tool installations on the command line. By the end, you will be able to install vcpkg, initialize
-    vcpkg, and create a vcpkg-configuration.json file. It focuses on tools and technologies such
-    as vcpkg, Linux, Windows, and macOS environments, and Arm platforms including Cortex-M. The
-    main steps cover Install vcpkg, Initialize vcpkg, Create a vcpkg-configuration.json file,
-    Use vcpkg, and Activate a license.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will install vcpkg, initialize vcpkg, and create a vcpkg-configuration.json file. Learn
-      how to install vcpkg, initialize it, create vcpkg-configuration.json files, use vcpkg for
-      tool management, activate tool licensing, and remove vcpkg for reproducible command-line
-      tool installations.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for software developers who want to create reproducible tool
-      installations on the command line.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: A basic understanding of the [development
-      tools for Arm Cortex-M](https://developer.arm.com/Tools%20and%20Software/); Command line
-      access to your machine.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including vcpkg, Linux, Windows, and macOS environments, and
-      Arm platforms such as Cortex-M.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Install vcpkg, Initialize vcpkg, Create a vcpkg-configuration.json
-      file, Use vcpkg, and Activate a license.
-# END generated_summary_faq
+
 
 author: Christopher Seidl
 

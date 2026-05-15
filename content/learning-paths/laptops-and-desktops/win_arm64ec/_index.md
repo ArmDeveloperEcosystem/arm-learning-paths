@@ -18,43 +18,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:55Z'
-  generator: template
-  source_hash: 4069c5bce1ce4b689a7a67d740fc077dc55c9b0bfbab392f5984ba0bdd9e59c3
-  summary: >-
-    Learn how to build native Arm applications and migrate x86/x64 applications to Arm using Arm64EC
-    on Windows on Arm devices. It is designed for software developers who want to use Arm64EC
-    with Windows on Arm devices. By the end, you will be able to build native Arm applications
-    and migrate x86 or x64 applications to Arm using Arm64EC and compare the performance of a
-    simple application using different build configurations. It focuses on tools and technologies
-    such as Arm64EC and Visual Studio, Windows environments, and Arm platforms including Cortex-A.
-    The main steps cover Build an application on Windows 11 using Arm64EC.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will build native Arm applications and migrate x86 or x64 applications to Arm using
-      Arm64EC and compare the performance of a simple application using different build configurations.
-      Learn how to build native Arm applications and migrate x86/x64 applications to Arm using
-      Arm64EC on Windows on Arm devices.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for software developers who want to use Arm64EC with Windows
-      on Arm devices.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: A Windows on Arm computer such as the
-      Lenovo Thinkpad X13s running Windows 11.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Arm64EC and Visual Studio, Windows environments,
-      and Arm platforms such as Cortex-A.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Build an application on Windows 11 using Arm64EC.
-# END generated_summary_faq
+
 
 author: Pareena Verma
 

@@ -21,51 +21,6 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:56Z'
-  generator: template
-  source_hash: 01138f6538c655f866fb034a983461b2ac9b793142775465233b2ec8ec18d0c5
-  summary: >-
-    Learn how to profile ML model execution times and application performance on Arm Android devices
-    using Arm Performance Studio and Android Studio Profiler. It is designed for software developers
-    who want to learn how to profile the performance of Machine Learning (ML) models running on
-    Arm devices. By the end, you will be able to profile the execution times of ML models on Arm
-    devices, profile ML application performance on Arm devices, and describe how profiling can
-    help optimize the performance of Machine Learning applications. It focuses on tools and technologies
-    such as Android Studio, LiteRT, and Hugging Face, Android and Linux environments, and Arm
-    platforms including Cortex-A, Mali, and Immortalis. The main steps cover Why should you profile
-    your ML application?, Profile your application with Streamline, Memory Profiling with Android
-    Studio, Profiling the Neural Network, and ML Profiling of a LiteRT model with ExecuteNetwork.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will profile the execution times of ML models on Arm devices, profile ML application
-      performance on Arm devices, and describe how profiling can help optimize the performance
-      of Machine Learning applications. Learn how to profile ML model execution times and application
-      performance on Arm Android devices using Arm Performance Studio and Android Studio Profiler.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for software developers who want to learn how to profile the
-      performance of Machine Learning (ML) models running on Arm devices.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: An Arm-powered Android smartphone, and
-      a USB cable to connect to it.; For profiling the ML inference, [Arm NN ExecuteNetwork](https://github.com/ARM-software/armnn/releases)
-      or [ExecuTorch](https://github.com/pytorch/executorch).; For profiling the application,
-      [Arm Performance Studio with Streamline](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio).;
-      Android Studio Profiler.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Android Studio, LiteRT, and Hugging Face, Android
-      and Linux environments, and Arm platforms such as Cortex-A, Mali, and Immortalis.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Why should you profile your ML application?, Profile
-      your application with Streamline, Memory Profiling with Android Studio, Profiling the Neural
-      Network, and ML Profiling of a LiteRT model with ExecuteNetwork.
-# END generated_summary_faq
 
 author: Ben Clark
 

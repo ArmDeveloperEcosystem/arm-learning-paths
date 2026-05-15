@@ -19,48 +19,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:56Z'
-  generator: template
-  source_hash: e2f6f3005c119e6f6fe97612d4e2600849106f244bce729d56bfeeedb30637c2
-  summary: >-
-    Learn how to use Frame Advisor's Render Graph view to identify and resolve graphics performance
-    issues in Android applications. It is designed for Mobile application developers who wish
-    to improve graphics performance. By the end, you will be able to understand Frame Advisor's
-    Render Graph view and use the Render Graph view to identify and resolve performance issues
-    in your application. It focuses on tools and technologies such as OpenGL ES and Vulkan, Linux,
-    Windows, macOS, and Android environments, and Arm platforms including Mali and Immortalis.
-    The main steps cover What are render graphs?, Generating a render graph for your application,
-    Understanding your render graph, Problem solving – unused resources, and Problem solving –
-    unwanted execution nodes.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will understand Frame Advisor's Render Graph view and use the Render Graph view to identify
-      and resolve performance issues in your application. Learn how to use Frame Advisor's Render
-      Graph view to identify and resolve graphics performance issues in Android applications.
-  - question: Who is this Learning Path for?
-    answer: >-
-      Mobile application developers who wish to improve graphics performance.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: Frame Advisor, part of Arm Performance
-      Studio, installed. Refer to the [Arm Performance Studio](/install-guides/ams/) install guide.;
-      If you wish to analyze your own applications you will need a supported Android device.;
-      Some basic familiarity with Frame Advisor. Review the [Frame Advisor](/learning-paths/mobile-graphics-and-gaming/ams/fa/)
-      section in [Get started with Arm Performance Studio for mobile](/learning-paths/mobile-graphics-and-gaming/ams/).
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including OpenGL ES and Vulkan, Linux, Windows, macOS, and
-      Android environments, and Arm platforms such as Mali and Immortalis.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around What are render graphs?, Generating a render graph
-      for your application, Understanding your render graph, Problem solving – unused resources,
-      and Problem solving – unwanted execution nodes.
-# END generated_summary_faq
+
 
 author: Mark Thurman
 

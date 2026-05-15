@@ -19,40 +19,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:58Z'
-  generator: template
-  source_hash: 2b329c566f7fea90010c52f1ce1cb11bccf9d32cf604aaa720bfca5ef1f85fae
-  summary: >-
-    Get started with the Arm 5G RAN Acceleration Library (ArmRAL) walks you through an end-to-end
-    Arm software workflow. It is designed for software developers new to the Arm RAN Acceleration
-    Library (ArmRAL). By the end, you will be able to build and install the Arm RAN Acceleration
-    Library and test the capabilities of your platform. It focuses on tools and technologies such
-    as ArmRAL, 5G, GCC, and Runbook, Linux environments, and Arm platforms including Neoverse.
-    The main steps cover Build and run ArmRAL.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will build and install the Arm RAN Acceleration Library and test the capabilities of
-      your platform.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for software developers new to the Arm RAN Acceleration Library
-      (ArmRAL).
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: An Arm computer running Linux. Cloud
-      instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including ArmRAL, 5G, GCC, and Runbook, Linux environments,
-      and Arm platforms such as Neoverse.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Build and run ArmRAL.
-# END generated_summary_faq
+
 
 author: Ronan Synnott
 

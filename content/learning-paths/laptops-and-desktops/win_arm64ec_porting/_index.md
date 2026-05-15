@@ -22,47 +22,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:55Z'
-  generator: template
-  source_hash: 3b3ecd451ed8b634c7fbe194248cdf1d33432633efbcbef5de713495041ff425
-  summary: >-
-    Learn how to port Qt-based Python desktop applications with C/C++ dependencies to Arm64 using
-    Arm64EC on Windows on Arm. It is designed for developers who want to learn how to port their
-    applications to Arm64 using Arm64EC. By the end, you will be able to build a Qt-based Python
-    desktop application, create C/C++ dependencies and use them in the Qt-based Python app, and
-    learn how to port the C/C++ based dependencies to Arm64 using Arm64EC. It focuses on tools
-    and technologies such as C, CPP, and Qt, Windows environments, and Arm platforms including
-    Cortex-A. The main steps cover Application, Porting using CMake, and Porting using MSBuild.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will build a Qt-based Python desktop application, create C/C++ dependencies and use
-      them in the Qt-based Python app, and learn how to port the C/C++ based dependencies to Arm64
-      using Arm64EC. Learn how to port Qt-based Python desktop applications with C/C++ dependencies
-      to Arm64 using Arm64EC on Windows on Arm.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for developers who want to learn how to port their applications
-      to Arm64 using Arm64EC.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: A Windows on Arm computer such as the
-      Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).;
-      Any code editor. [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user)
-      is suitable.; Visual Studio 2022 with Arm build tools. [Refer to this guide for the installation
-      steps](https://developer.arm.com/documentation/102528/0100/Install-Visual-Studio).
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including C, CPP, and Qt, Windows environments, and Arm platforms
-      such as Cortex-A.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Application, Porting using CMake, and Porting using
-      MSBuild.
-# END generated_summary_faq
+
 
 author: Dawid Borycki
 

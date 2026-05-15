@@ -20,46 +20,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:54Z'
-  generator: template
-  source_hash: fdf582f1b54f372768a2c896e1da152c50d22c3bd238848253cdbe18cc68222d
-  summary: >-
-    Learn how to set up a Jetson Orin Nano with a MIPI CSI-2 camera and perform real-time object
-    detection from live video and image files using DetectNet and TensorRT. It is designed for
-    developers interested in integrating object detection into their applications. By the end,
-    you will be able to set up a Jetson Orin Nano with a MIPI CSI-2 camera for object detection
-    and detect objects from both live video and image files. It focuses on tools and technologies
-    such as DetectNet, TensorRT, and Docker, Linux environments, and Arm platforms including Cortex-A.
-    The main steps cover Set up your Jetson Orin Nano, Launch the image classification Docker
-    container, and Detect objects in video and images.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will set up a Jetson Orin Nano with a MIPI CSI-2 camera for object detection and detect
-      objects from both live video and image files. Learn how to set up a Jetson Orin Nano with
-      a MIPI CSI-2 camera and perform real-time object detection from live video and image files
-      using DetectNet and TensorRT.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for developers interested in integrating object detection
-      into their applications.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: A [Jetson Orin Nano](https://developer.nvidia.com/embedded/learn/jetson-orin-nano-devkit-user-guide/index.html);
-      A microSD card (64GB UHS-1 or larger is recommended); A MIPI CSI-2 camera, with a 22 pin
-      connector on at least one end.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including DetectNet, TensorRT, and Docker, Linux environments,
-      and Arm platforms such as Cortex-A.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Set up your Jetson Orin Nano, Launch the image classification
-      Docker container, and Detect objects in video and images.
-# END generated_summary_faq
+
 
 author: Gabriel Peterson
 

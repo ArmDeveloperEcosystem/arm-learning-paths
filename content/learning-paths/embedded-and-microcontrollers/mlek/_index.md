@@ -19,45 +19,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:54Z'
-  generator: template
-  source_hash: acf43df3c6f344b55bb413b7483d60e26d0e137489ac148bca64500e443140ab
-  summary: >-
-    Learn how to build examples from the Machine Learning Evaluation Kit (MLEK) and run them on
-    the Arm Ecosystem FVP for machine learning application development on microcontrollers. It
-    is designed for embedded software developers interested in machine learning applications.
-    By the end, you will be able to build examples from Machine Learning Evaluation Kit (MLEK)
-    and run the examples on Arm Ecosystem FVP. It focuses on tools and technologies such as Arm
-    Virtual Hardware, FVP, GCC, and Arm Compiler for Embedded, Baremetal environments, and Arm
-    platforms including Cortex-M, Ethos-U, and Corstone. The main steps cover Build the ML Evaluation
-    Kit examples, Install Arm Ecosystem FVP, and Run the examples on the FVP.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will build examples from Machine Learning Evaluation Kit (MLEK) and run the examples
-      on Arm Ecosystem FVP. Learn how to build examples from the Machine Learning Evaluation Kit
-      (MLEK) and run them on the Arm Ecosystem FVP for machine learning application development
-      on microcontrollers.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for embedded software developers interested in machine learning
-      applications.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: Some familiarity with embedded programming;
-      A Linux host machine running Ubuntu.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Arm Virtual Hardware, FVP, GCC, and Arm Compiler
-      for Embedded, Baremetal environments, and Arm platforms such as Cortex-M, Ethos-U, and Corstone.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Build the ML Evaluation Kit examples, Install Arm
-      Ecosystem FVP, and Run the examples on the FVP.
-# END generated_summary_faq
+
 
 author: Ronan Synnott
 

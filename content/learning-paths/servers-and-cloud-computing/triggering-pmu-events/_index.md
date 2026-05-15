@@ -18,43 +18,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:59Z'
-  generator: template
-  source_hash: 1b309980bef983966d948036e309e132b56f767161967187e72c6a9f81f17dce
-  summary: >-
-    Learn about Neoverse Cache PMU Events using C and Assembly Language walks you through an end-to-end
-    Arm software workflow. It is designed for software and hardware engineers who want to learn
-    about the causes of common Neoverse cache Performance Monitoring Unit (PMU) events. By the
-    end, you will be able to describe common cache PMU events, describe why some code triggers
-    PMU events on the Neoverse N2 core, and describe the events triggered during common scenarios.
-    It focuses on tools and technologies such as C, Assembly, and Runbook, Linux environments,
-    and Arm platforms including Neoverse. The main steps cover Introduction to the PMU, L1 Data
-    Cache Events, L1 Instruction Cache Events, L2 Unified Cache Events, and LL Cache Events.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will describe common cache PMU events, describe why some code triggers PMU events on
-      the Neoverse N2 core, and describe the events triggered during common scenarios.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an advanced topic for software and hardware engineers who want to learn about the
-      causes of common Neoverse cache Performance Monitoring Unit (PMU) events.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: Knowledge of performance analysis.;
-      The ability to read Arm assembly code.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including C, Assembly, and Runbook, Linux environments, and
-      Arm platforms such as Neoverse.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Introduction to the PMU, L1 Data Cache Events, L1
-      Instruction Cache Events, L2 Unified Cache Events, and LL Cache Events.
-# END generated_summary_faq
+
 
 author: Johanna Skinnider
 

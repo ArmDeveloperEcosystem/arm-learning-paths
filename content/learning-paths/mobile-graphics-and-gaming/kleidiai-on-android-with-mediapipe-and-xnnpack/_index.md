@@ -19,48 +19,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:56Z'
-  generator: template
-  source_hash: 0e51db9ceb25c31c42608f3c6744a4fa8f9d995805ed44a7d7fc83324889ea12
-  summary: >-
-    Learn how to run LLM inference on Android devices using MediaPipe with KleidiAI-enhanced Arm
-    i8mm features to benchmark the Gemma 2B model. It is designed for Android developers who want
-    to efficiently run LLMs on-device. By the end, you will be able to install the prerequisites
-    for cross-compiling new inference engines for Android, run LLM inference on an Android device
-    with the Gemma 2B model using the Google AI Edge's MediaPipe framework, and benchmark LLM
-    inference speed with and without the KleidiAI-enhanced Arm i8mm processor feature. It focuses
-    on tools and technologies such as Java, MediaPipe, Android SDK, Android NDK, and Bazel, Linux
-    environments, and Arm platforms including Cortex-A. The main steps cover Install dependencies,
-    Run the Gemma 2B model using MediaPipe with XNNPACK, and Benchmark the Gemma 2B Model with
-    KleidiAI.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will install the prerequisites for cross-compiling new inference engines for Android,
-      run LLM inference on an Android device with the Gemma 2B model using the Google AI Edge's
-      MediaPipe framework, and benchmark LLM inference speed with and without the KleidiAI-enhanced
-      Arm i8mm processor feature. Learn how to run LLM inference on Android devices using MediaPipe
-      with KleidiAI-enhanced Arm i8mm features to benchmark the Gemma 2B model.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an advanced topic for Android developers who want to efficiently run LLMs on-device.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: An x86_64 Linux machine running Ubuntu
-      with approximately 500 MB of free space, or a docker daemon that can build and run a provided
-      x86_64 Dockerfile.; An Android phone with support for i8mm (tested on Google Pixel 8 Pro).
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Java, MediaPipe, Android SDK, Android NDK, and Bazel,
-      Linux environments, and Arm platforms such as Cortex-A.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Install dependencies, Run the Gemma 2B model using
-      MediaPipe with XNNPACK, and Benchmark the Gemma 2B Model with KleidiAI.
-# END generated_summary_faq
+
 
 author: 
     - Pareena Verma

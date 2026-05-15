@@ -21,44 +21,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:55Z'
-  generator: template
-  source_hash: e23de84e7e05d771072ab799f5cc802476fd5e3c23da41a202c9c50fe9980e25
-  summary: >-
-    Learn how to use WindowsPerf for performance sampling on Windows on Arm, build CPython from
-    sources, and analyze native workload performance. It is designed for developers keen to understand
-    sampling and who are new to the Arm architecture. By the end, you will be able to use WindowsPerf
-    with native Windows on Arm workload, understand the basics of sampling, and explore the WindowsPerf
-    command line. It focuses on tools and technologies such as WindowsPerf, Python, and perf,
-    Windows environments, and Arm platforms including Cortex-A. The main steps cover CPython Sampling
-    Example Overview, WindowsPerf sample example, and WindowsPerf record example.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will use WindowsPerf with native Windows on Arm workload, understand the basics of sampling,
-      and explore the WindowsPerf command line. Learn how to use WindowsPerf for performance sampling
-      on Windows on Arm, build CPython from sources, and analyze native workload performance.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for developers keen to understand sampling and who are new
-      to the Arm architecture.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: Windows on Arm desktop or development
-      machine with [WindowsPerf installed](/install-guides/wperf); Windows x86_64 desktop machine
-      with [Visual Studio 2022 Community Edition](https://visualstudio.microsoft.com/vs/) installed.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including WindowsPerf, Python, and perf, Windows environments,
-      and Arm platforms such as Cortex-A.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around CPython Sampling Example Overview, WindowsPerf sample
-      example, and WindowsPerf record example.
-# END generated_summary_faq
+
 
 author: Przemyslaw Wirkus
 

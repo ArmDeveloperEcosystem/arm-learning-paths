@@ -17,49 +17,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v2
-  generated_at: '2026-05-08T18:10:03Z'
-  generator: template
-  source_hash: ed85d6171f3c05bfdf1b396065fb0c73ce88724ff63fd1c3c8a93d4c27dd59f8
-  summary_generated_at: '2026-05-06T17:17:58Z'
-  summary_source_hash: ed85d6171f3c05bfdf1b396065fb0c73ce88724ff63fd1c3c8a93d4c27dd59f8
-  faq_generated_at: '2026-05-08T18:10:03Z'
-  faq_source_hash: ed85d6171f3c05bfdf1b396065fb0c73ce88724ff63fd1c3c8a93d4c27dd59f8
-  summary: >-
-    Run Process watch on your Arm machine walks you through an end-to-end Arm software workflow.
-    It is designed for software developers who want to build and run the Process Watch tool on
-    an Arm-based machine. By the end, you will be able to build and run the Process Watch tool
-    on your Arm machine, describe how Process Watch works, and check in real-time whether any
-    workloads are using specific Arm instructions or features. It focuses on tools and technologies
-    such as bpftool, libbpf, Capstone, C, and CPP, Linux environments, and Arm platforms including
-    Cortex-A and Neoverse. The main steps cover Install dependencies, Run Process Watch, Learn
-    how Process Watch works, and Using Process Watch.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will build and run the Process Watch tool on your Arm machine, describe how Process
-      Watch works, and check in real-time whether any workloads are using specific Arm instructions
-      or features.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for software developers who want to build and run the Process
-      Watch tool on an Arm-based machine.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: An Arm-based system (bare metal server,
-      cloud instance, or developer board) running Linux with kernel version 5.8.0 or later.; Root
-      access, or the ability to run the sudo command.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including bpftool, libbpf, Capstone, C, and CPP, Linux environments,
-      and Arm platforms such as Cortex-A and Neoverse.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Install dependencies, Run Process Watch, Learn how
-      Process Watch works, and Using Process Watch.
-# END generated_summary_faq
+
 
 author: Graham Woodward
 

@@ -21,51 +21,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:58Z'
-  generator: template
-  source_hash: cd31c217eaeab6faad263728c446ee188cd9d542904d87ae7bfd5120713dfaa4
-  summary: >-
-    Add Arm nodes to your GKE cluster using a multi-architecture Ollama container image walks
-    you through an end-to-end Arm software workflow. It is designed for developers who want to
-    compare the performance of amd64 and arm64 deployments by running inferences on a hybrid GKE
-    cluster using an Ollama multi-architecture container image. By the end, you will be able to
-    create a hybrid GKE cluster with amd64 and arm64 nodes, deploy Ollama services for amd64 and
-    arm64 architectures using a single multi-architecture container image, and validate deployments
-    by pinging, pulling models, and running inferences to compare architecture performance. It
-    focuses on tools and technologies such as LLM, Ollama, and Generative AI, Linux and macOS
-    environments, Arm platforms including Neoverse, and cloud platforms such as Google Cloud.
-    The main steps cover Create the GKE Cluster, Deploy Ollama amd64 to the cluster, Deploy Ollama
-    arm64 to the cluster, and Test functionality and performance.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will create a hybrid GKE cluster with amd64 and arm64 nodes, deploy Ollama services
-      for amd64 and arm64 architectures using a single multi-architecture container image, and
-      validate deployments by pinging, pulling models, and running inferences to compare architecture
-      performance.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This Learning Path is for developers who want to compare the performance of amd64 and arm64
-      deployments by running inferences on a hybrid GKE cluster using an Ollama multi-architecture
-      container image.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: A [Google Cloud account](https://console.cloud.google.com/).;
-      A local machine with [Google Cloud CLI](/install-guides/gcloud/) and [kubectl](/install-guides/kubectl/)
-      installed.; The [GKE Cloud Plugin](https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl#gcloud)
-      installed.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including LLM, Ollama, and Generative AI, Linux and macOS
-      environments, Arm platforms such as Neoverse, and cloud platforms such as Google Cloud.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Create the GKE Cluster, Deploy Ollama amd64 to the
-      cluster, Deploy Ollama arm64 to the cluster, and Test functionality and performance.
-# END generated_summary_faq
+
 
 author:
     - Geremy Cohen

@@ -18,43 +18,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:54Z'
-  generator: template
-  source_hash: d2c403c7fd1001dbd985697c9eb018951a955358c2be39c727183a87a3dfdf51
-  summary: >-
-    Learn how to create debug configurations for virtual platforms and development boards in Arm
-    Development Studio, including setting up connections for Fast Models and DSTREAM debug probes.
-    It is designed for embedded software developers new to Arm Development Studio. By the end,
-    you will be able to create a debug configuration for a virtual platform and create a debug
-    configuration for a development board. It focuses on tools and technologies such as Arm Development
-    Studio, Arm Fast Models, and DSTREAM, Baremetal environments, and Arm platforms including
-    Cortex-A, Cortex-R, Cortex-M, and Neoverse. The main steps cover Debug connection to Arm Fast
-    Models and Debug connection with Arm DSTREAM.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will create a debug configuration for a virtual platform and create a debug configuration
-      for a development board. Learn how to create debug configurations for virtual platforms
-      and development boards in Arm Development Studio, including setting up connections for Fast
-      Models and DSTREAM debug probes.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for embedded software developers new to Arm Development Studio.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: Some familiarity with embedded debug.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Arm Development Studio, Arm Fast Models, and DSTREAM,
-      Baremetal environments, and Arm platforms such as Cortex-A, Cortex-R, Cortex-M, and Neoverse.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Debug connection to Arm Fast Models and Debug connection
-      with Arm DSTREAM.
-# END generated_summary_faq
+
 
 author: Ronan Synnott
 

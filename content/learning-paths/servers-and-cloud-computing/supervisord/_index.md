@@ -18,46 +18,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:59Z'
-  generator: template
-  source_hash: d3fa3b409ed7cf2ecb521fa4d19af8411718909881861ef3885214824031b541
-  summary: >-
-    Access running containers using Supervisor, SSH, and Remote.It walks you through an end-to-end
-    Arm software workflow. It is designed for software developers who want to learn how to run
-    multiple services in a container and access running containers using Supervisor, SSH, and
-    Remote.It during the debug and test phases of a project. By the end, you will be able to use
-    Supervisor to run multiple services in a container and access a container running in AWS Fargate
-    without changing the security group for debug and test. It focuses on tools and technologies
-    such as Docker, Remote.It, and Supervisor, Linux environments, Arm platforms including Neoverse
-    and Cortex-A, and cloud platforms such as AWS. The main steps cover Introduction to remote
-    container access, Install Supervisor, SSH, and Remote.It, and Access the container running
-    in AWS.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will use Supervisor to run multiple services in a container and access a container running
-      in AWS Fargate without changing the security group for debug and test.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for software developers who want to learn how to run multiple
-      services in a container and access running containers using Supervisor, SSH, and Remote.It
-      during the debug and test phases of a project.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: An Arm Linux computer running Docker;
-      An AWS account; A Remote.It account.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Docker, Remote.It, and Supervisor, Linux environments,
-      Arm platforms such as Neoverse and Cortex-A, and cloud platforms such as AWS.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Introduction to remote container access, Install Supervisor,
-      SSH, and Remote.It, and Access the container running in AWS.
-# END generated_summary_faq
+
 
 author: Jason Andrews
 

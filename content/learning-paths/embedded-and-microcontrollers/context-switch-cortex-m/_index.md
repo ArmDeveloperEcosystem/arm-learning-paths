@@ -20,45 +20,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:54Z'
-  generator: template
-  source_hash: 0b7a5895a87de83903c223215845b6c840602663838c0682f46e50d139d69c59
-  summary: >-
-    Learn how to implement context switching operations on Arm Cortex-M processors using the Memory
-    Protection Unit and SysTick exception in a bare-metal environment. It is designed for software
-    developers who would like to learn about context switching operations on Cortex-M processors
-    in a bare-metal environment. By the end, you will be able to understand the basics of context
-    switching, learn how to program the Memory Protection Unit (MPU), and learn how to use the
-    SysTick exception with context switching operations. It focuses on tools and technologies
-    such as CMSIS and Arm Development Studio, Baremetal environments, and Arm platforms including
-    Cortex-M. The main steps cover Example Arm DS project to demonstrate context switching operations.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will understand the basics of context switching, learn how to program the Memory Protection
-      Unit (MPU), and learn how to use the SysTick exception with context switching operations.
-      Learn how to implement context switching operations on Arm Cortex-M processors using the
-      Memory Protection Unit and SysTick exception in a bare-metal environment.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for software developers who would like to learn about context
-      switching operations on Cortex-M processors in a bare-metal environment.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: Basic knowledge and familiarity with
-      Cortex-M processors.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including CMSIS and Arm Development Studio, Baremetal environments,
-      and Arm platforms such as Cortex-M.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Example Arm DS project to demonstrate context switching
-      operations.
-# END generated_summary_faq
+
 
 author: Uma Ramalingam
 

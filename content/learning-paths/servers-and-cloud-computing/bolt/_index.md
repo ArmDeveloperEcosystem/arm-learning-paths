@@ -19,54 +19,6 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v2
-  generated_at: '2026-05-08T18:10:01Z'
-  generator: template
-  source_hash: 2e9ac8a3c73b7d3d59fe6ba20fb6d61fc2b7e5e9320aaadc20af0a8bbb3ff959
-  summary_generated_at: '2026-05-08T18:10:01Z'
-  summary_source_hash: 2e9ac8a3c73b7d3d59fe6ba20fb6d61fc2b7e5e9320aaadc20af0a8bbb3ff959
-  faq_generated_at: '2026-05-08T18:10:01Z'
-  faq_source_hash: 2e9ac8a3c73b7d3d59fe6ba20fb6d61fc2b7e5e9320aaadc20af0a8bbb3ff959
-  summary: >-
-    Learn how to build, profile, and optimize Arm executables using BOLT post-link binary optimization
-    to improve application performance through code layout improvements. It is designed for software
-    developers who want to learn how to use BOLT on an Arm executable. By the end, you will be
-    able to build an application which is ready to be optimized by BOLT, profile an application
-    and collect performance information, and run BOLT to create an optimized executable. It focuses
-    on tools and technologies such as BOLT, perf, and Runbook, Linux environments, and Arm platforms
-    including Neoverse and Cortex-A. The main steps cover Overview of the BOLT optimization process,
-    Prepare your BOLT environment, Use BOLT with Samples, Use BOLT with ETM, and Use BOLT with
-    SPE.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will build an application which is ready to be optimized by BOLT, profile an application
-      and collect performance information, and run BOLT to create an optimized executable. Learn
-      how to build, profile, and optimize Arm executables using BOLT post-link binary optimization
-      to improve application performance through code layout improvements.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for software developers who want to learn how to use BOLT
-      on an Arm executable.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: An Arm based system running Linux with
-      [BOLT](/install-guides/bolt/) and [Linux Perf](/install-guides/perf/) installed. The Linux
-      kernel should be version 5.15 or later. Earlier kernel versions can be used, but some Linux
-      Perf features may be limited or not available. For [SPE](./bolt-spe) the version should
-      be 6.14 or later.; (Optional) A second, more powerful Linux system to build the software
-      executable and run BOLT.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including BOLT, perf, and Runbook, Linux environments, and
-      Arm platforms such as Neoverse and Cortex-A.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Overview of the BOLT optimization process, Prepare
-      your BOLT environment, Use BOLT with Samples, Use BOLT with ETM, and Use BOLT with SPE.
-# END generated_summary_faq
 
 author: Jonathan Davies
 

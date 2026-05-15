@@ -22,55 +22,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:54Z'
-  generator: template
-  source_hash: 39d489081bfa22125a4046c17d5c00a32c0d7b298cba7b6a12373cf3cf6bac04
-  summary: >-
-    Learn how to deploy a Model Context Protocol server on Raspberry Pi 5 and use the OpenAI Agent
-    SDK to create AI agents with custom tools for local inference. It is designed for LLM and
-    IoT developers who want to run and interact with AI agents on edge devices like the Raspberry
-    Pi 5. You'll learn how to deploy a lightweight Model Context Protocol (MCP) server and use
-    the OpenAI Agent SDK to create and register tools for intelligent local inference. By the
-    end, you will be able to deploy a lightweight Model Context Protocol (MCP) server on Raspberry
-    Pi 5 for local AI agent execution, use the OpenAI Agent SDK to interact with a local AI agent,
-    and design and register custom tools for the agent tasks. It focuses on tools and technologies
-    such as Python, AI, Raspberry Pi, and MCP, Linux environments, and Arm platforms including
-    Cortex-A. The main steps cover Introduction to Model Context Protocol (MCP) and Python uv
-    package for local AI agents, Set up an MCP server on Raspberry Pi 5, and Build and run an
-    AI agent on your development machine.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will deploy a lightweight Model Context Protocol (MCP) server on Raspberry Pi 5 for
-      local AI agent execution, use the OpenAI Agent SDK to interact with a local AI agent, and
-      design and register custom tools for the agent tasks. Learn how to deploy a Model Context
-      Protocol server on Raspberry Pi 5 and use the OpenAI Agent SDK to create AI agents with
-      custom tools for local inference.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This Learning Path is for LLM and IoT developers who want to run and interact with AI agents
-      on edge devices like the Raspberry Pi 5. You'll learn how to deploy a lightweight Model
-      Context Protocol (MCP) server and use the OpenAI Agent SDK to create and register tools
-      for intelligent local inference.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: A [Raspberry Pi 5](https://www.raspberrypi.com/products/raspberry-pi-5/)
-      with a Linux-based OS installed.; Familiarity with Python programming and prompt engineering
-      techniques.; Basic understanding of Large Language Models (LLMs) and how they are used in
-      local inference.; Understanding of AI agents and the OpenAI Agent SDK (or similar frameworks).
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Python, AI, Raspberry Pi, and MCP, Linux environments,
-      and Arm platforms such as Cortex-A.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Introduction to Model Context Protocol (MCP) and Python
-      uv package for local AI agents, Set up an MCP server on Raspberry Pi 5, and Build and run
-      an AI agent on your development machine.
-# END generated_summary_faq
+
 
 author: Andrew Choi
 

@@ -20,40 +20,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:55Z'
-  generator: template
-  source_hash: 89f599ab33721a2d578d4fc39e505b5aed8d930aabac71f22d1ba28bfc4a5cf8
-  summary: >-
-    Learn how to build and run Zephyr RTOS applications on the Arm Corstone-300 Fixed Virtual
-    Platform using Arm Virtual Hardware. It is designed for software developers getting started
-    with the Zephyr RTOS. By the end, you will be able to build and run Zephyr applications on
-    the Corstone-300. It focuses on tools and technologies such as Zephyr, Arm Virtual Hardware,
-    and FVP, RTOS environments, and Arm platforms including Cortex-M. The main steps cover Build
-    and run Zephyr applications.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will build and run Zephyr applications on the Corstone-300. Learn how to build and run
-      Zephyr RTOS applications on the Arm Corstone-300 Fixed Virtual Platform using Arm Virtual
-      Hardware.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for software developers getting started with the Zephyr RTOS.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: Some familiarity with embedded C programming;
-      A Linux machine running Ubuntu, or an AWS account to use [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware).
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Zephyr, Arm Virtual Hardware, and FVP, RTOS environments,
-      and Arm platforms such as Cortex-M.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Build and run Zephyr applications.
-# END generated_summary_faq
+
 
 author: Pareena Verma
 

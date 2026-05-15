@@ -11,49 +11,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:55Z'
-  generator: template
-  source_hash: 27ced3e9f69dbe51e75dcf13999ae1745a994137f31c86d6f17d4de341c7fa2a
-  summary: >-
-    Learn how to debug microcontrollers using µVision with basic run/stop debug, advanced techniques
-    using Event Recorder and Serial Wire Viewer, ETM Trace for performance analysis, and power
-    measurement with ULINKplus. It is designed for software developers who want to debug microcontrollers
-    using µVision. By the end, you will be able to use basic run/stop debug, learn advanced debug
-    techniques using Event Recorder and Serial Wire Viewer, and learn to use ETM Trace for optimum
-    performance. It focuses on tools and technologies such as Keil MDK and FVP, RTOS and Baremetal
-    environments, and Arm platforms including Cortex-M. The main steps cover Use basic run/stop
-    debug, Debug using Event Recorder, Debug using Serial Wire Viewer, Advanced debug with ETM
-    trace, and Measure Power with ULINKplus.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will use basic run/stop debug, learn advanced debug techniques using Event Recorder
-      and Serial Wire Viewer, and learn to use ETM Trace for optimum performance. Learn how to
-      debug microcontrollers using µVision with basic run/stop debug, advanced techniques using
-      Event Recorder and Serial Wire Viewer, ETM Trace for performance analysis, and power measurement
-      with ULINKplus.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an advanced topic for software developers who want to debug microcontrollers using
-      µVision.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: Some familiarity with embedded programming
-      is assumed; An [Arm Account](https://developer.arm.com/register) is required; A Windows
-      machine; Installation of [Arm Keil MDK](/install-guides/mdk/) with an active MDK-Community
-      license; Installation of the [Corstone-300 Ecosystem FVP](/install-guides/fm_fvp/eco_fvp/).
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Keil MDK and FVP, RTOS and Baremetal environments,
-      and Arm platforms such as Cortex-M.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Use basic run/stop debug, Debug using Event Recorder,
-      Debug using Serial Wire Viewer, Advanced debug with ETM trace, and Measure Power with ULINKplus.
-# END generated_summary_faq
+
 
 author: Christopher Seidl
 

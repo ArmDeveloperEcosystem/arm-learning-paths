@@ -17,42 +17,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:59Z'
-  generator: template
-  source_hash: 523ff99ccb8d13543f64839fa21040191d2a9ff7ce7c78fa590e8775fac754a6
-  summary: >-
-    Learn about Neoverse Non-cache PMU events using C and Assembly Language walks you through
-    an end-to-end Arm software workflow. It is designed for software and hardware engineers to
-    learn about why common non-cache PMU events occur. By the end, you will be able to describe
-    common non-cache PMU events and understand why specific code triggers specific PMU events
-    on the Neoverse N2 Core. It focuses on tools and technologies such as C, Assembly, and Runbook,
-    Linux environments, and Arm platforms including Neoverse. The main steps cover Introduction
-    to the PMU, Topdown Methodology L1 Events, TLB Events, and Operation Mix Events.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will describe common non-cache PMU events and understand why specific code triggers
-      specific PMU events on the Neoverse N2 Core.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an advanced topic for software and hardware engineers to learn about why common
-      non-cache PMU events occur.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: Some familiarity with performance analysis.;
-      The ability to read Arm assembly code.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including C, Assembly, and Runbook, Linux environments, and
-      Arm platforms such as Neoverse.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Introduction to the PMU, Topdown Methodology L1 Events,
-      TLB Events, and Operation Mix Events.
-# END generated_summary_faq
+
 
 author: Johanna Skinnider
 

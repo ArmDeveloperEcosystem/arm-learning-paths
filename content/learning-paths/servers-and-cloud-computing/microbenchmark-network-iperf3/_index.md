@@ -18,40 +18,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:58Z'
-  generator: template
-  source_hash: a67d36fb650b77c170c15f193049490286a3f097801d0c79d701d3f5610fe1dc
-  summary: >-
-    This branch-only testing summary is intentionally out of sync with the current Learning Path
-    source content so the workflow report records preserved summary drift for this LP.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      This branch-only testing answer is intentionally stale so the workflow report records preserved
-      FAQ drift for this LP.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for performance engineers, Linux system administrators, and
-      application developers who want to microbenchmark, simulate, or tune the networking performance
-      of distributed systems.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: Basic understanding of networking principles
-      such as Transmission Control Protocol/Internet Protocol (TCP/IP) and User Datagram Protocol
-      (UDP).; Access to two [Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/).
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including iPerf3, Linux environments, Arm platforms such as
-      Neoverse, and cloud platforms such as AWS, Microsoft Azure, Google Cloud, and Oracle.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Set up Arm-based Linux systems for network performance
-      testing with iPerf3, Microbenchmark the network connection, Simulate different network conditions,
-      and Tune kernel parameters.
-# END generated_summary_faq
+
 
 author: Kieran Hejmadi
 

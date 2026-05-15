@@ -17,42 +17,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:57Z'
-  generator: template
-  source_hash: 7c3d37545c93db584d6e0ce88d8feaf0bf690e0c8786b664a6643be713d0336f
-  summary: >-
-    Learn how to automate the deployment of an Arm-based Google Kubernetes Engine cluster using
-    Terraform for container orchestration. It is designed for software developers who want to
-    deploy an Arm-based Kubernetes cluster using Google Kubernetes Engine (GKE). By the end, you
-    will be able to automate the deployment of an Arm-based GKE cluster using Terraform. It focuses
-    on tools and technologies such as Terraform and Kubernetes, Linux environments, Arm platforms
-    including Neoverse, and cloud platforms such as Google Cloud. The main steps cover Deploy
-    an Arm-based GKE Cluster using Terraform.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will automate the deployment of an Arm-based GKE cluster using Terraform. Learn how
-      to automate the deployment of an Arm-based Google Kubernetes Engine cluster using Terraform
-      for container orchestration.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an advanced topic for software developers who want to deploy an Arm-based Kubernetes
-      cluster using Google Kubernetes Engine (GKE).
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: A Google Cloud account; A computer with
-      the following tools installed`:` Terraform, Google Cloud CLI (gcloud), Kubernetes CLI (kubectl).
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Terraform and Kubernetes, Linux environments, Arm
-      platforms such as Neoverse, and cloud platforms such as Google Cloud.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Deploy an Arm-based GKE Cluster using Terraform.
-# END generated_summary_faq
+
 
 author: Jason Andrews
 

@@ -19,46 +19,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:57Z'
-  generator: template
-  source_hash: ef5f9e7c8844b20b9044b43f4758bc1d74374521093d7738a7f8832d21f1dcac
-  summary: >-
-    Learn how to create an AWS ECS cluster with Fargate and AWS Graviton processors, then create
-    and run containerized tasks on Arm infrastructure. It is designed for developers who want
-    to use AWS Graviton processors with Amazon Elastic Container Service (ECS). By the end, you
-    will be able to create an AWS ECS cluster with Fargate and AWS Graviton processors, create
-    and run an AWS ECS task, and use Terraform to automate deployment of an ECS cluster. It focuses
-    on tools and technologies such as Terraform and AWS Elastic Container Service (ECS), Linux
-    environments, Arm platforms including Neoverse, and cloud platforms such as AWS. The main
-    steps cover Deploy containers using ECS on AWS Graviton processors and Deploy ECS containers
-    on AWS Graviton processor using Terraform.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will create an AWS ECS cluster with Fargate and AWS Graviton processors, create and
-      run an AWS ECS task, and use Terraform to automate deployment of an ECS cluster. Learn how
-      to create an AWS ECS cluster with Fargate and AWS Graviton processors, then create and run
-      containerized tasks on Arm infrastructure.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for developers who want to use AWS Graviton processors with
-      Amazon Elastic Container Service (ECS).
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: An AWS account; A computer with Docker,
-      AWS CLI, and Terraform installed.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Terraform and AWS Elastic Container Service (ECS),
-      Linux environments, Arm platforms such as Neoverse, and cloud platforms such as AWS.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Deploy containers using ECS on AWS Graviton processors
-      and Deploy ECS containers on AWS Graviton processor using Terraform.
-# END generated_summary_faq
+
 
 author: Jason Andrews
 

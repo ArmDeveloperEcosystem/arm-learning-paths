@@ -20,43 +20,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:59Z'
-  generator: template
-  source_hash: d060151c5f6ac7a743fb53cd3d2a10aa23f8f09245122a199a84ae17a8ab5ff9
-  summary: >-
-    Debug Neoverse N2 Reference Design with Arm Development Studio walks you through an end-to-end
-    Arm software workflow. It is designed for software developers who are interested in debugging
-    the Arm Neoverse N2 Reference Firmware Stack. By the end, you will be able to create a debug
-    connection, debug a System Control Processor (SCP), and debug Arm TF-A (Trusted Firmware-A).
-    It focuses on tools and technologies such as Arm Development Studio, Linux environments, and
-    Arm platforms including Neoverse. The main steps cover Set up your development environment,
-    Debugging SCP/LCP/RSE, Debugging BL1, Debugging BL31, and Debugging BL33 / UEFI.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will create a debug connection, debug a System Control Processor (SCP), and debug Arm
-      TF-A (Trusted Firmware-A).
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an advanced topic for software developers who are interested in debugging the Arm
-      Neoverse N2 Reference Firmware Stack.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: Arm Development Studio, and a license
-      to use it.; An Arm Neoverse Reference Design (RD) Software Stack.; A Fixed Virtual Platform
-      (FVP).; A basic understanding of Neoverse Reference Design (RD) platform boot.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Arm Development Studio, Linux environments, and
-      Arm platforms such as Neoverse.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Set up your development environment, Debugging SCP/LCP/RSE,
-      Debugging BL1, Debugging BL31, and Debugging BL33 / UEFI.
-# END generated_summary_faq
+
 
 author: Daniel Nguyen
 

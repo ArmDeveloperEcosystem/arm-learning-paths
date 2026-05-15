@@ -17,46 +17,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:54Z'
-  generator: template
-  source_hash: 72e5ffe5091311850d17f30ed3ab4bd7487cbbd862d0d8751cc73bd91fff00e2
-  summary: >-
-    Learn how to reduce memory latency impact in applications using cache alignment and prefetching
-    techniques on Arm processors for improved performance. It is designed for Arm developers who
-    want to learn about memory latency and cache usage in application programming. By the end,
-    you will be able to explain the importance of memory latency and how to reduce its impact,
-    identify how cache alignment impacts performance, and use cache prefetching to improve performance.
-    It focuses on tools and technologies such as GCC, Clang, and Runbook, Linux environments,
-    and Arm platforms including Cortex-A and Neoverse. The main steps cover About memory latency,
-    How latency impacts performance - part 1, How latency impacts performance - part 2, Cache
-    alignment, and Cache prefetching.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will explain the importance of memory latency and how to reduce its impact, identify
-      how cache alignment impacts performance, and use cache prefetching to improve performance.
-      Learn how to reduce memory latency impact in applications using cache alignment and prefetching
-      techniques on Arm processors for improved performance.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for Arm developers who want to learn about memory latency
-      and cache usage in application programming.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: An Arm computer running Linux with recent
-      versions of Clang or GCC installed.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including GCC, Clang, and Runbook, Linux environments, and
-      Arm platforms such as Cortex-A and Neoverse.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around About memory latency, How latency impacts performance
-      - part 1, How latency impacts performance - part 2, Cache alignment, and Cache prefetching.
-# END generated_summary_faq
+
 
 author: Konstantinos Margaritis
 

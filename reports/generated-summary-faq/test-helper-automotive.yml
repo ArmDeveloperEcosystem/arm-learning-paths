@@ -1,0 +1,612 @@
+latest_run:
+  timestamp: '2026-05-15T21:58:56Z'
+  mode: dry-run
+  require_enable_flag: true
+  path_filter: ''
+  limit: 0
+  run_url: ''
+  git_ref: ''
+  git_sha: ''
+  actor: ''
+  template_version: summary-faq-v3
+  generation_mode: template
+  openai_base_url: ''
+  openai_model: ''
+  prompt_template: ''
+  totals:
+    processed: 4
+    added: 4
+    updated: 0
+    unchanged: 0
+    drift_detected: 0
+    paths_with_drift: 0
+    skipped: 0
+    errors: 0
+    removed: 0
+    summary_changed: 4
+    faq_changed: 4
+    rerun_flags_reset: 0
+  section_totals:
+    summary:
+      created: 4
+      repaired_missing: 0
+      rerun_requested: 0
+      generator_changed: 0
+      drift_detected_preserved: 0
+      unchanged: 0
+    faqs:
+      created: 4
+      repaired_missing: 0
+      rerun_requested: 0
+      generator_changed: 0
+      drift_detected_preserved: 0
+      unchanged: 0
+  reason_totals:
+    initial_generation: 4
+    missing_summary: 0
+    missing_faqs: 0
+    rerun_summary: 0
+    rerun_faqs: 0
+    generator_changed: 0
+    summary_drift_detected: 0
+    faq_drift_detected: 0
+    rerun_flags_reset: 0
+  paths:
+  - path: content/learning-paths/automotive/openadkit1_container/_index.md
+    status: added
+    changed_on_disk: true
+    managed_block_updated: true
+    rerun_flags_reset: []
+    change_reasons:
+    - initial_generation
+    template_version_before: ''
+    template_version_after: summary-faq-v3
+    summary:
+      action: created
+      missing_before: false
+      rerun_requested: false
+      changed: true
+      drift_detected: false
+      source_hash_before: ''
+      source_hash_after: 37913b2c4aed914d32dbdad054ebdd2b1d4587da3ede1a33ba81e3e68bf504a3
+      current_source_hash: 37913b2c4aed914d32dbdad054ebdd2b1d4587da3ede1a33ba81e3e68bf504a3
+      generated_at_before: ''
+      generated_at_after: '2026-05-15T21:58:56Z'
+      preview_before: ''
+      preview_after: Learn how to deploy and run containerized autonomous driving simulations using Autoware
+        Open AD Kit on Arm Neoverse with Docker, demonstrating SOAFEE-based Shift-Left development workflows.
+        It is desi...
+      preview_generated: Learn how to deploy and run containerized autonomous driving simulations using
+        Autoware Open AD Kit on Arm Neoverse with Docker, demonstrating SOAFEE-based Shift-Left development
+        workflows. It is desi...
+    faqs:
+      action: created
+      missing_before: false
+      rerun_requested: false
+      changed: true
+      drift_detected: false
+      source_hash_before: ''
+      source_hash_after: 37913b2c4aed914d32dbdad054ebdd2b1d4587da3ede1a33ba81e3e68bf504a3
+      current_source_hash: 37913b2c4aed914d32dbdad054ebdd2b1d4587da3ede1a33ba81e3e68bf504a3
+      generated_at_before: ''
+      generated_at_after: '2026-05-15T21:58:56Z'
+      before_count: 0
+      after_count: 5
+      generated_count: 5
+      change_details:
+        before_count: 0
+        after_count: 5
+        added_questions:
+        - What will you accomplish in this Learning Path?
+        - Who is this Learning Path for?
+        - What do you need before you start?
+        - Which tools, languages, or platforms does it cover?
+        - How is the Learning Path structured?
+        removed_questions: []
+        updated_questions: []
+      generated_diff:
+        before_count: 0
+        after_count: 5
+        added_questions:
+        - What will you accomplish in this Learning Path?
+        - Who is this Learning Path for?
+        - What do you need before you start?
+        - Which tools, languages, or platforms does it cover?
+        - How is the Learning Path structured?
+        removed_questions: []
+        updated_questions: []
+  - path: content/learning-paths/automotive/openadkit2_safetyisolation/_index.md
+    status: added
+    changed_on_disk: true
+    managed_block_updated: true
+    rerun_flags_reset: []
+    change_reasons:
+    - initial_generation
+    template_version_before: ''
+    template_version_after: summary-faq-v3
+    summary:
+      action: created
+      missing_before: false
+      rerun_requested: false
+      changed: true
+      drift_detected: false
+      source_hash_before: ''
+      source_hash_after: 92a6dac2b1674a44cd623a0c8c3189b38438124a6067ed7ca776999ff1d8b5bf
+      current_source_hash: 92a6dac2b1674a44cd623a0c8c3189b38438124a6067ed7ca776999ff1d8b5bf
+      generated_at_before: ''
+      generated_at_after: '2026-05-15T21:58:56Z'
+      preview_before: ''
+      preview_after: Learn how to implement functional safety isolation for autonomous driving systems
+        on Arm Neoverse using DDS-based communication, containerized deployment, and ISO 26262 compliance
+        principles. It is de...
+      preview_generated: Learn how to implement functional safety isolation for autonomous driving systems
+        on Arm Neoverse using DDS-based communication, containerized deployment, and ISO 26262 compliance
+        principles. It is de...
+    faqs:
+      action: created
+      missing_before: false
+      rerun_requested: false
+      changed: true
+      drift_detected: false
+      source_hash_before: ''
+      source_hash_after: 92a6dac2b1674a44cd623a0c8c3189b38438124a6067ed7ca776999ff1d8b5bf
+      current_source_hash: 92a6dac2b1674a44cd623a0c8c3189b38438124a6067ed7ca776999ff1d8b5bf
+      generated_at_before: ''
+      generated_at_after: '2026-05-15T21:58:56Z'
+      before_count: 0
+      after_count: 5
+      generated_count: 5
+      change_details:
+        before_count: 0
+        after_count: 5
+        added_questions:
+        - What will you accomplish in this Learning Path?
+        - Who is this Learning Path for?
+        - What do you need before you start?
+        - Which tools, languages, or platforms does it cover?
+        - How is the Learning Path structured?
+        removed_questions: []
+        updated_questions: []
+      generated_diff:
+        before_count: 0
+        after_count: 5
+        added_questions:
+        - What will you accomplish in this Learning Path?
+        - Who is this Learning Path for?
+        - What do you need before you start?
+        - Which tools, languages, or platforms does it cover?
+        - How is the Learning Path structured?
+        removed_questions: []
+        updated_questions: []
+  - path: content/learning-paths/automotive/system76-auto/_index.md
+    status: added
+    changed_on_disk: true
+    managed_block_updated: true
+    rerun_flags_reset: []
+    change_reasons:
+    - initial_generation
+    template_version_before: ''
+    template_version_after: summary-faq-v3
+    summary:
+      action: created
+      missing_before: false
+      rerun_requested: false
+      changed: true
+      drift_detected: false
+      source_hash_before: ''
+      source_hash_after: 2b758d2dcf28a683ab164e28578a736d6d730b81dfbc01a6765619052fcdebd0
+      current_source_hash: 2b758d2dcf28a683ab164e28578a736d6d730b81dfbc01a6765619052fcdebd0
+      generated_at_before: ''
+      generated_at_after: '2026-05-15T21:58:56Z'
+      preview_before: ''
+      preview_after: Learn how to build and run the Arm Automotive Solutions Software Reference Stack
+        locally on the System76 Thelio Astra desktop using Multipass virtualization and Yocto build tools.
+        It is designed for a...
+      preview_generated: Learn how to build and run the Arm Automotive Solutions Software Reference Stack
+        locally on the System76 Thelio Astra desktop using Multipass virtualization and Yocto build tools.
+        It is designed for a...
+    faqs:
+      action: created
+      missing_before: false
+      rerun_requested: false
+      changed: true
+      drift_detected: false
+      source_hash_before: ''
+      source_hash_after: 2b758d2dcf28a683ab164e28578a736d6d730b81dfbc01a6765619052fcdebd0
+      current_source_hash: 2b758d2dcf28a683ab164e28578a736d6d730b81dfbc01a6765619052fcdebd0
+      generated_at_before: ''
+      generated_at_after: '2026-05-15T21:58:56Z'
+      before_count: 0
+      after_count: 5
+      generated_count: 5
+      change_details:
+        before_count: 0
+        after_count: 5
+        added_questions:
+        - What will you accomplish in this Learning Path?
+        - Who is this Learning Path for?
+        - What do you need before you start?
+        - Which tools, languages, or platforms does it cover?
+        - How is the Learning Path structured?
+        removed_questions: []
+        updated_questions: []
+      generated_diff:
+        before_count: 0
+        after_count: 5
+        added_questions:
+        - What will you accomplish in this Learning Path?
+        - Who is this Learning Path for?
+        - What do you need before you start?
+        - Which tools, languages, or platforms does it cover?
+        - How is the Learning Path structured?
+        removed_questions: []
+        updated_questions: []
+  - path: content/learning-paths/automotive/zenacssdebug/_index.md
+    status: added
+    changed_on_disk: true
+    managed_block_updated: true
+    rerun_flags_reset: []
+    change_reasons:
+    - initial_generation
+    template_version_before: ''
+    template_version_after: summary-faq-v3
+    summary:
+      action: created
+      missing_before: false
+      rerun_requested: false
+      changed: true
+      drift_detected: false
+      source_hash_before: ''
+      source_hash_after: 8dccdbdd4d9727f3466987ce918d9df0ed9d4d4f28cd613162bacab01d9c18f3
+      current_source_hash: 8dccdbdd4d9727f3466987ce918d9df0ed9d4d4f28cd613162bacab01d9c18f3
+      generated_at_before: ''
+      generated_at_after: '2026-05-15T21:58:56Z'
+      preview_before: ''
+      preview_after: Learn how to debug the Arm Zena CSS Reference Software Stack using Arm Development
+        Studio on a Fixed Virtual Platform, covering RSE, Safety Island, and Linux kernel debugging workflows.
+        It is designed...
+      preview_generated: Learn how to debug the Arm Zena CSS Reference Software Stack using Arm Development
+        Studio on a Fixed Virtual Platform, covering RSE, Safety Island, and Linux kernel debugging workflows.
+        It is designed...
+    faqs:
+      action: created
+      missing_before: false
+      rerun_requested: false
+      changed: true
+      drift_detected: false
+      source_hash_before: ''
+      source_hash_after: 8dccdbdd4d9727f3466987ce918d9df0ed9d4d4f28cd613162bacab01d9c18f3
+      current_source_hash: 8dccdbdd4d9727f3466987ce918d9df0ed9d4d4f28cd613162bacab01d9c18f3
+      generated_at_before: ''
+      generated_at_after: '2026-05-15T21:58:56Z'
+      before_count: 0
+      after_count: 5
+      generated_count: 5
+      change_details:
+        before_count: 0
+        after_count: 5
+        added_questions:
+        - What will you accomplish in this Learning Path?
+        - Who is this Learning Path for?
+        - What do you need before you start?
+        - Which tools, languages, or platforms does it cover?
+        - How is the Learning Path structured?
+        removed_questions: []
+        updated_questions: []
+      generated_diff:
+        before_count: 0
+        after_count: 5
+        added_questions:
+        - What will you accomplish in this Learning Path?
+        - Who is this Learning Path for?
+        - What do you need before you start?
+        - Which tools, languages, or platforms does it cover?
+        - How is the Learning Path structured?
+        removed_questions: []
+        updated_questions: []
+history:
+- timestamp: '2026-05-15T21:58:56Z'
+  mode: dry-run
+  require_enable_flag: true
+  path_filter: ''
+  limit: 0
+  run_url: ''
+  git_ref: ''
+  git_sha: ''
+  actor: ''
+  template_version: summary-faq-v3
+  generation_mode: template
+  openai_base_url: ''
+  openai_model: ''
+  prompt_template: ''
+  totals:
+    processed: 4
+    added: 4
+    updated: 0
+    unchanged: 0
+    drift_detected: 0
+    paths_with_drift: 0
+    skipped: 0
+    errors: 0
+    removed: 0
+    summary_changed: 4
+    faq_changed: 4
+    rerun_flags_reset: 0
+  section_totals:
+    summary:
+      created: 4
+      repaired_missing: 0
+      rerun_requested: 0
+      generator_changed: 0
+      drift_detected_preserved: 0
+      unchanged: 0
+    faqs:
+      created: 4
+      repaired_missing: 0
+      rerun_requested: 0
+      generator_changed: 0
+      drift_detected_preserved: 0
+      unchanged: 0
+  reason_totals:
+    initial_generation: 4
+    missing_summary: 0
+    missing_faqs: 0
+    rerun_summary: 0
+    rerun_faqs: 0
+    generator_changed: 0
+    summary_drift_detected: 0
+    faq_drift_detected: 0
+    rerun_flags_reset: 0
+  paths:
+  - path: content/learning-paths/automotive/openadkit1_container/_index.md
+    status: added
+    changed_on_disk: true
+    managed_block_updated: true
+    rerun_flags_reset: []
+    change_reasons:
+    - initial_generation
+    template_version_before: ''
+    template_version_after: summary-faq-v3
+    summary:
+      action: created
+      missing_before: false
+      rerun_requested: false
+      changed: true
+      drift_detected: false
+      source_hash_before: ''
+      source_hash_after: 37913b2c4aed914d32dbdad054ebdd2b1d4587da3ede1a33ba81e3e68bf504a3
+      current_source_hash: 37913b2c4aed914d32dbdad054ebdd2b1d4587da3ede1a33ba81e3e68bf504a3
+      generated_at_before: ''
+      generated_at_after: '2026-05-15T21:58:56Z'
+      preview_before: ''
+      preview_after: Learn how to deploy and run containerized autonomous driving simulations using Autoware
+        Open AD Kit on Arm Neoverse with Docker, demonstrating SOAFEE-based Shift-Left development workflows.
+        It is desi...
+      preview_generated: Learn how to deploy and run containerized autonomous driving simulations using
+        Autoware Open AD Kit on Arm Neoverse with Docker, demonstrating SOAFEE-based Shift-Left development
+        workflows. It is desi...
+    faqs:
+      action: created
+      missing_before: false
+      rerun_requested: false
+      changed: true
+      drift_detected: false
+      source_hash_before: ''
+      source_hash_after: 37913b2c4aed914d32dbdad054ebdd2b1d4587da3ede1a33ba81e3e68bf504a3
+      current_source_hash: 37913b2c4aed914d32dbdad054ebdd2b1d4587da3ede1a33ba81e3e68bf504a3
+      generated_at_before: ''
+      generated_at_after: '2026-05-15T21:58:56Z'
+      before_count: 0
+      after_count: 5
+      generated_count: 5
+      change_details:
+        before_count: 0
+        after_count: 5
+        added_questions:
+        - What will you accomplish in this Learning Path?
+        - Who is this Learning Path for?
+        - What do you need before you start?
+        - Which tools, languages, or platforms does it cover?
+        - How is the Learning Path structured?
+        removed_questions: []
+        updated_questions: []
+      generated_diff:
+        before_count: 0
+        after_count: 5
+        added_questions:
+        - What will you accomplish in this Learning Path?
+        - Who is this Learning Path for?
+        - What do you need before you start?
+        - Which tools, languages, or platforms does it cover?
+        - How is the Learning Path structured?
+        removed_questions: []
+        updated_questions: []
+  - path: content/learning-paths/automotive/openadkit2_safetyisolation/_index.md
+    status: added
+    changed_on_disk: true
+    managed_block_updated: true
+    rerun_flags_reset: []
+    change_reasons:
+    - initial_generation
+    template_version_before: ''
+    template_version_after: summary-faq-v3
+    summary:
+      action: created
+      missing_before: false
+      rerun_requested: false
+      changed: true
+      drift_detected: false
+      source_hash_before: ''
+      source_hash_after: 92a6dac2b1674a44cd623a0c8c3189b38438124a6067ed7ca776999ff1d8b5bf
+      current_source_hash: 92a6dac2b1674a44cd623a0c8c3189b38438124a6067ed7ca776999ff1d8b5bf
+      generated_at_before: ''
+      generated_at_after: '2026-05-15T21:58:56Z'
+      preview_before: ''
+      preview_after: Learn how to implement functional safety isolation for autonomous driving systems
+        on Arm Neoverse using DDS-based communication, containerized deployment, and ISO 26262 compliance
+        principles. It is de...
+      preview_generated: Learn how to implement functional safety isolation for autonomous driving systems
+        on Arm Neoverse using DDS-based communication, containerized deployment, and ISO 26262 compliance
+        principles. It is de...
+    faqs:
+      action: created
+      missing_before: false
+      rerun_requested: false
+      changed: true
+      drift_detected: false
+      source_hash_before: ''
+      source_hash_after: 92a6dac2b1674a44cd623a0c8c3189b38438124a6067ed7ca776999ff1d8b5bf
+      current_source_hash: 92a6dac2b1674a44cd623a0c8c3189b38438124a6067ed7ca776999ff1d8b5bf
+      generated_at_before: ''
+      generated_at_after: '2026-05-15T21:58:56Z'
+      before_count: 0
+      after_count: 5
+      generated_count: 5
+      change_details:
+        before_count: 0
+        after_count: 5
+        added_questions:
+        - What will you accomplish in this Learning Path?
+        - Who is this Learning Path for?
+        - What do you need before you start?
+        - Which tools, languages, or platforms does it cover?
+        - How is the Learning Path structured?
+        removed_questions: []
+        updated_questions: []
+      generated_diff:
+        before_count: 0
+        after_count: 5
+        added_questions:
+        - What will you accomplish in this Learning Path?
+        - Who is this Learning Path for?
+        - What do you need before you start?
+        - Which tools, languages, or platforms does it cover?
+        - How is the Learning Path structured?
+        removed_questions: []
+        updated_questions: []
+  - path: content/learning-paths/automotive/system76-auto/_index.md
+    status: added
+    changed_on_disk: true
+    managed_block_updated: true
+    rerun_flags_reset: []
+    change_reasons:
+    - initial_generation
+    template_version_before: ''
+    template_version_after: summary-faq-v3
+    summary:
+      action: created
+      missing_before: false
+      rerun_requested: false
+      changed: true
+      drift_detected: false
+      source_hash_before: ''
+      source_hash_after: 2b758d2dcf28a683ab164e28578a736d6d730b81dfbc01a6765619052fcdebd0
+      current_source_hash: 2b758d2dcf28a683ab164e28578a736d6d730b81dfbc01a6765619052fcdebd0
+      generated_at_before: ''
+      generated_at_after: '2026-05-15T21:58:56Z'
+      preview_before: ''
+      preview_after: Learn how to build and run the Arm Automotive Solutions Software Reference Stack
+        locally on the System76 Thelio Astra desktop using Multipass virtualization and Yocto build tools.
+        It is designed for a...
+      preview_generated: Learn how to build and run the Arm Automotive Solutions Software Reference Stack
+        locally on the System76 Thelio Astra desktop using Multipass virtualization and Yocto build tools.
+        It is designed for a...
+    faqs:
+      action: created
+      missing_before: false
+      rerun_requested: false
+      changed: true
+      drift_detected: false
+      source_hash_before: ''
+      source_hash_after: 2b758d2dcf28a683ab164e28578a736d6d730b81dfbc01a6765619052fcdebd0
+      current_source_hash: 2b758d2dcf28a683ab164e28578a736d6d730b81dfbc01a6765619052fcdebd0
+      generated_at_before: ''
+      generated_at_after: '2026-05-15T21:58:56Z'
+      before_count: 0
+      after_count: 5
+      generated_count: 5
+      change_details:
+        before_count: 0
+        after_count: 5
+        added_questions:
+        - What will you accomplish in this Learning Path?
+        - Who is this Learning Path for?
+        - What do you need before you start?
+        - Which tools, languages, or platforms does it cover?
+        - How is the Learning Path structured?
+        removed_questions: []
+        updated_questions: []
+      generated_diff:
+        before_count: 0
+        after_count: 5
+        added_questions:
+        - What will you accomplish in this Learning Path?
+        - Who is this Learning Path for?
+        - What do you need before you start?
+        - Which tools, languages, or platforms does it cover?
+        - How is the Learning Path structured?
+        removed_questions: []
+        updated_questions: []
+  - path: content/learning-paths/automotive/zenacssdebug/_index.md
+    status: added
+    changed_on_disk: true
+    managed_block_updated: true
+    rerun_flags_reset: []
+    change_reasons:
+    - initial_generation
+    template_version_before: ''
+    template_version_after: summary-faq-v3
+    summary:
+      action: created
+      missing_before: false
+      rerun_requested: false
+      changed: true
+      drift_detected: false
+      source_hash_before: ''
+      source_hash_after: 8dccdbdd4d9727f3466987ce918d9df0ed9d4d4f28cd613162bacab01d9c18f3
+      current_source_hash: 8dccdbdd4d9727f3466987ce918d9df0ed9d4d4f28cd613162bacab01d9c18f3
+      generated_at_before: ''
+      generated_at_after: '2026-05-15T21:58:56Z'
+      preview_before: ''
+      preview_after: Learn how to debug the Arm Zena CSS Reference Software Stack using Arm Development
+        Studio on a Fixed Virtual Platform, covering RSE, Safety Island, and Linux kernel debugging workflows.
+        It is designed...
+      preview_generated: Learn how to debug the Arm Zena CSS Reference Software Stack using Arm Development
+        Studio on a Fixed Virtual Platform, covering RSE, Safety Island, and Linux kernel debugging workflows.
+        It is designed...
+    faqs:
+      action: created
+      missing_before: false
+      rerun_requested: false
+      changed: true
+      drift_detected: false
+      source_hash_before: ''
+      source_hash_after: 8dccdbdd4d9727f3466987ce918d9df0ed9d4d4f28cd613162bacab01d9c18f3
+      current_source_hash: 8dccdbdd4d9727f3466987ce918d9df0ed9d4d4f28cd613162bacab01d9c18f3
+      generated_at_before: ''
+      generated_at_after: '2026-05-15T21:58:56Z'
+      before_count: 0
+      after_count: 5
+      generated_count: 5
+      change_details:
+        before_count: 0
+        after_count: 5
+        added_questions:
+        - What will you accomplish in this Learning Path?
+        - Who is this Learning Path for?
+        - What do you need before you start?
+        - Which tools, languages, or platforms does it cover?
+        - How is the Learning Path structured?
+        removed_questions: []
+        updated_questions: []
+      generated_diff:
+        before_count: 0
+        after_count: 5
+        added_questions:
+        - What will you accomplish in this Learning Path?
+        - Who is this Learning Path for?
+        - What do you need before you start?
+        - Which tools, languages, or platforms does it cover?
+        - How is the Learning Path structured?
+        removed_questions: []
+        updated_questions: []

@@ -18,42 +18,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:58Z'
-  generator: template
-  source_hash: 22fa96e29143f2e0dc0c204919422914b3f70d63ddf833cf1067fbf67b525aa0
-  summary: >-
-    Deploy AWS Lambda functions on Graviton processors using Terraform for Python and Node.js
-    runtimes. It is designed for software developers who want to learn how to deploy Lambda functions
-    on AWS Graviton processors. By the end, you will be able to deploy Lambda functions on Graviton
-    processors using Terraform. It focuses on tools and technologies such as Terraform and AWS
-    Lambda, Linux environments, Arm platforms including Neoverse, and cloud platforms such as
-    AWS. The main steps cover Deploy Node.js Lambda functions on Graviton processors with Terraform
-    and Deploy Python Lambda functions on Graviton processors with Terraform.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will deploy Lambda functions on Graviton processors using Terraform. Deploy AWS Lambda
-      functions on Graviton processors using Terraform for Python and Node.js runtimes.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for software developers who want to learn how to deploy Lambda
-      functions on AWS Graviton processors.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: A computer with [Terraform](/install-guides/terraform/)
-      and the [AWS CLI](/install-guides/aws-cli/) installed.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Terraform and AWS Lambda, Linux environments, Arm
-      platforms such as Neoverse, and cloud platforms such as AWS.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Deploy Node.js Lambda functions on Graviton processors
-      with Terraform and Deploy Python Lambda functions on Graviton processors with Terraform.
-# END generated_summary_faq
+
 
 author: Jason Andrews
 

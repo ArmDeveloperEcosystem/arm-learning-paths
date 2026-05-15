@@ -17,40 +17,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:55Z'
-  generator: template
-  source_hash: 829130636ec6969f791826ef731b38f7bb87c025d910218822a113ecdef62306
-  summary: >-
-    Learn how to create and manage Arm-based Linux virtual machines using Hyper-V on Windows on
-    Arm devices. It is designed for software developers who want to use Linux virtual machines
-    with Windows on Arm devices. By the end, you will be able to create Arm-based Linux virtual
-    machines using Hyper-V. It focuses on tools and technologies such as Hyper-V, Windows and
-    Linux environments, and Arm platforms including Cortex-A. The main steps cover Create a Linux
-    virtual machine using Hyper-V.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will create Arm-based Linux virtual machines using Hyper-V. Learn how to create and
-      manage Arm-based Linux virtual machines using Hyper-V on Windows on Arm devices.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for software developers who want to use Linux virtual machines
-      with Windows on Arm devices.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: A Windows on Arm computer such as the
-      Lenovo Thinkpad X13s running Windows 11 with [Hyper-V](/install-guides/hyper-v/) installed.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Hyper-V, Windows and Linux environments, and Arm
-      platforms such as Cortex-A.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Create a Linux virtual machine using Hyper-V.
-# END generated_summary_faq
+
 
 author: Jason Andrews
 

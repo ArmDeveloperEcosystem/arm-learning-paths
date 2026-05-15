@@ -22,49 +22,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:55Z'
-  generator: template
-  source_hash: 137e974aee0ccba78e3375a1c8179af392e54a0304cfecdcd53cf4ac5c38917b
-  summary: >-
-    Learn how to create and run Ubuntu containers on ChromeOS Crostini using LXC with file sharing
-    and GUI application support on Arm-based Chromebooks. It is designed for software developers
-    who want to install Ubuntu and other Linux distributions on their Arm-based Chromebook with
-    ChromeOS file sharing and GUI support. By the end, you will be able to create and run an Ubuntu
-    24.04 container on ChromeOS Crostini using LXC and Termina shell, set up ChromeOS integration
-    for file sharing and GUI applications, and manage LXC containers on ChromeOS. It focuses on
-    tools and technologies such as Ubuntu, ChromeOS environments, and Arm platforms including
-    Cortex-A. The main steps cover Create an Ubuntu 24.04 container on ChromeOS, Integrate ChromeOS
-    with Linux containers, Enable desktop applications, and Manage Linux containers with additional
-    commands.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will create and run an Ubuntu 24.04 container on ChromeOS Crostini using LXC and Termina
-      shell, set up ChromeOS integration for file sharing and GUI applications, and manage LXC
-      containers on ChromeOS. Learn how to create and run Ubuntu containers on ChromeOS Crostini
-      using LXC with file sharing and GUI application support on Arm-based Chromebooks.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This Learning Path is for software developers who want to install Ubuntu and other Linux
-      distributions on their Arm-based Chromebook with ChromeOS file sharing and GUI support.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: A ChromeOS device with the Linux development
-      environment enabled. The Lenovo Chromebook Plus 14 is recommended.; Basic knowledge of the
-      Linux command line.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Ubuntu, ChromeOS environments, and Arm platforms
-      such as Cortex-A.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Create an Ubuntu 24.04 container on ChromeOS, Integrate
-      ChromeOS with Linux containers, Enable desktop applications, and Manage Linux containers
-      with additional commands.
-# END generated_summary_faq
+
 
 author: Jason Andrews
 

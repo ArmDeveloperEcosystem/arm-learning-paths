@@ -19,47 +19,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:58Z'
-  generator: template
-  source_hash: e6f6f4d843b4974d1c1d67a35009b4428d08bb356d26c08a441f82726e002fb2
-  summary: >-
-    Deploy NGINX on Azure Cobalt 100 Arm-based virtual machines walks you through an end-to-end
-    Arm software workflow. It is designed for system administrators and developers who want to
-    learn how to deploy and benchmark NGINX on Microsoft Azure Cobalt 100 Arm-based instances.
-    By the end, you will be able to create an Arm64 virtual machine on Azure Cobalt 100 (Dpsv6)
-    using the Azure console with Ubuntu Pro 24.04 LTS as the base image, install and configure
-    the NGINX web server on the Azure Arm64 virtual machine, and configure and test a static website
-    with NGINX on the virtual machine. It focuses on tools and technologies such as NGINX and
-    ApacheBench, Linux environments, Arm platforms including Neoverse, and cloud platforms such
-    as Microsoft Azure. The main steps cover Overview of Azure Cobalt 100 and NGINX, Create an
-    Arm-based Azure VM with Cobalt 100, Install NGINX, NGINX Baseline Testing, and NGINX Benchmarking.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will create an Arm64 virtual machine on Azure Cobalt 100 (Dpsv6) using the Azure console
-      with Ubuntu Pro 24.04 LTS as the base image, install and configure the NGINX web server
-      on the Azure Arm64 virtual machine, and configure and test a static website with NGINX on
-      the virtual machine.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for system administrators and developers who want to learn
-      how to deploy and benchmark NGINX on Microsoft Azure Cobalt 100 Arm-based instances.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: A [Microsoft Azure](https://azure.microsoft.com/)
-      account with access to Cobalt 100 based instances (Dpsv6).
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including NGINX and ApacheBench, Linux environments, Arm platforms
-      such as Neoverse, and cloud platforms such as Microsoft Azure.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Overview of Azure Cobalt 100 and NGINX, Create an
-      Arm-based Azure VM with Cobalt 100, Install NGINX, NGINX Baseline Testing, and NGINX Benchmarking.
-# END generated_summary_faq
+
 
 author: Pareena Verma
 

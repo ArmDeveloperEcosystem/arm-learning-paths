@@ -20,48 +20,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:55Z'
-  generator: template
-  source_hash: e63ac917c218aa5e5981f96a9821567d0f8ba9761d5ce6e4c9d7b6dea7ed5c5f
-  summary: >-
-    Learn how to build an Android chatbot app using Arm's AI Chat library to run GGUF models on-device
-    with optimized performance on Arm CPUs. It is designed for developers who want to add a local,
-    on-device LLM chat experience using Arm's AI Chat library, Kotlin, and Android Studio. By
-    the end, you will be able to create a simple Android chatbot app scaffold in Android Studio
-    and load a mobile-friendly GGUF model on-device and run streamed chat inference. It focuses
-    on tools and technologies such as Kotlin, Neon, SVE2, SME2, and LLM, Android environments,
-    and Arm platforms including Arm AI Chat library. The main steps cover Create the Android project,
-    Configure the AI Chat library dependency, Create the UI layouts and message adapter, Implement
-    the main activity logic, and Download a model and run the app.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will create a simple Android chatbot app scaffold in Android Studio and load a mobile-friendly
-      GGUF model on-device and run streamed chat inference. Learn how to build an Android chatbot
-      app using Arm's AI Chat library to run GGUF models on-device with optimized performance
-      on Arm CPUs.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for developers who want to add a local, on-device LLM chat
-      experience using Arm's AI Chat library, Kotlin, and Android Studio.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: An Android development environment with
-      Android Studio installed; An Android phone for testing, in Developer Mode, with USB cable
-      for connection; Basic familiarity with Kotlin and Android app development.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Kotlin, Neon, SVE2, SME2, and LLM, Android environments,
-      and Arm platforms such as Arm AI Chat library.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Create the Android project, Configure the AI Chat
-      library dependency, Create the UI layouts and message adapter, Implement the main activity
-      logic, and Download a model and run the app.
-# END generated_summary_faq
+
 
 author: Ben Clark
 

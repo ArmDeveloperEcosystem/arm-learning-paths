@@ -18,47 +18,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:54Z'
-  generator: template
-  source_hash: 0103f51d42c230dbe75ff5b78ac15a33dfd2f2c0f4906fb665a8dd681512d2e1
-  summary: >-
-    Learn how to import and build example projects in Arm Development Studio and debug embedded
-    applications using Fixed Virtual Platforms (FVPs) or hardware with DSTREAM debug probes. It
-    is designed for embedded software developers new to Arm Development Studio. By the end, you
-    will be able to import and build an example project, debug the example code running on a Fixed
-    Virtual Platform (FVP), and debug the example code running on a board with a DSTREAM debug
-    probe. It focuses on tools and technologies such as Arm Development Studio, Arm Compiler for
-    Embedded, Arm Fast Models, and DSTREAM, Baremetal environments, and Arm platforms including
-    Cortex-A, Cortex-R, Cortex-M, and Neoverse. The main steps cover Import and build example
-    project, Debug the example, and Other compilers and project types.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will import and build an example project, debug the example code running on a Fixed
-      Virtual Platform (FVP), and debug the example code running on a board with a DSTREAM debug
-      probe. Learn how to import and build example projects in Arm Development Studio and debug
-      embedded applications using Fixed Virtual Platforms (FVPs) or hardware with DSTREAM debug
-      probes.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for embedded software developers new to Arm Development Studio.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: Some familiarity with embedded programming
-      is assumed.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Arm Development Studio, Arm Compiler for Embedded,
-      Arm Fast Models, and DSTREAM, Baremetal environments, and Arm platforms such as Cortex-A,
-      Cortex-R, Cortex-M, and Neoverse.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Import and build example project, Debug the example,
-      and Other compilers and project types.
-# END generated_summary_faq
+
 
 author: Ronan Synnott
 

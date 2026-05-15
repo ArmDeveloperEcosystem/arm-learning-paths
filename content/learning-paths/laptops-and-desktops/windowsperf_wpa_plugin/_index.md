@@ -18,43 +18,6 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:55Z'
-  generator: template
-  source_hash: 1fd4d85855933a5dfc5edf5ae3abf5f4388d94c9ee69aff12b77eb766e88301f
-  summary: >-
-    Learn how to import WindowsPerf data in Windows Performance Analyzer (WPA) and visualize timeline
-    and telemetry data using the WPA plugin. It is designed for software developers interested
-    in using the Windows Performance Analyzer (WPA) plugin for performance analysis. By the end,
-    you will be able to import WindowsPerf data as a .json file in WPA and visualize the timeline
-    and telemetry data in WPA using the WPA plugin. It focuses on tools and technologies such
-    as WindowsPerf, perf, and Windows Performance Analyzer, Windows environments, and Arm platforms
-    including Cortex-A and Neoverse. The main steps cover Visualize data from WindowsPerf using
-    WPA.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will import WindowsPerf data as a .json file in WPA and visualize the timeline and telemetry
-      data in WPA using the WPA plugin. Learn how to import WindowsPerf data in Windows Performance
-      Analyzer (WPA) and visualize timeline and telemetry data using the WPA plugin.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for software developers interested in using the Windows Performance
-      Analyzer (WPA) plugin for performance analysis.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: A Windows on Arm laptop with WindowsPerf,
-      Windows Performance Analyzer (WPA), and the WPA plugin installed.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including WindowsPerf, perf, and Windows Performance Analyzer,
-      Windows environments, and Arm platforms such as Cortex-A and Neoverse.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Visualize data from WindowsPerf using WPA.
-# END generated_summary_faq
 
 author: Alaaeddine Chakroun
 

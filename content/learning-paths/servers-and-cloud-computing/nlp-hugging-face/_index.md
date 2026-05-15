@@ -16,45 +16,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:58Z'
-  generator: template
-  source_hash: 81bdee16a18b09da91a7514eb70368771b251ed3f8ec657ec105ca10ecead038
-  summary: >-
-    Run a Natural Language Processing (NLP) model from Hugging Face on Arm servers walks you through
-    an end-to-end Arm software workflow. It is designed for software developers who want to learn
-    how to run a Natural Language Processing (NLP) model from Hugging Face using PyTorch on Arm
-    based servers. By the end, you will be able to deploy a PyTorch NLP model from Hugging Face
-    on an Arm AArch64 CPU and use the PyTorch profiler to analyze the execution time of the model.
-    It focuses on tools and technologies such as Python, PyTorch, and Hugging Face, Linux environments,
-    Arm platforms including Neoverse, and cloud platforms such as AWS, Microsoft Azure, Google
-    Cloud, and Oracle. The main steps cover Run a Natural Language Processing (NLP) model from
-    Hugging Face on Arm servers.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will deploy a PyTorch NLP model from Hugging Face on an Arm AArch64 CPU and use the
-      PyTorch profiler to analyze the execution time of the model.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for software developers who want to learn how to run a Natural
-      Language Processing (NLP) model from Hugging Face using PyTorch on Arm based servers.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/)
-      from a cloud service provider or an on-premise Arm server.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Python, PyTorch, and Hugging Face, Linux environments,
-      Arm platforms such as Neoverse, and cloud platforms such as AWS, Microsoft Azure, Google
-      Cloud, and Oracle.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Run a Natural Language Processing (NLP) model from
-      Hugging Face on Arm servers.
-# END generated_summary_faq
+
 
 author: Pareena Verma
 

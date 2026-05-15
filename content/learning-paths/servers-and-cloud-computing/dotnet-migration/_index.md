@@ -24,50 +24,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:57Z'
-  generator: template
-  source_hash: 08d8f0c86625ef41476d3a8b24bad9b0a0820797022ef847bf9bb17a976726a7
-  summary: >-
-    Learn how to build and run an OrchardCore CMS .NET application on Azure Cobalt 100 processors,
-    covering AnyCPU configuration and shared C library integration. It is designed for .NET developers
-    who want to take advantage of the performance and cost benefits of Azure Cobalt processors.
-    By the end, you will be able to build and run a basic OrchardCore CMS application, integrate
-    a simple C shared library into a .NET application, and configure architecture-agnostic builds
-    using AnyCPU. It focuses on tools and technologies such as .NET, Orchard Core, and C, Linux
-    environments, Arm platforms including Neoverse, and cloud platforms such as Microsoft Azure.
-    The main steps cover Build and run an OrchardCore CMS app on Azure Cobalt (Arm64), Integrate
-    a C shared library into your .NET OrchardCore app, Configure and run an OrchardCore app, and
-    Evaluate .NET performance across versions on Arm.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will build and run a basic OrchardCore CMS application, integrate a simple C shared
-      library into a .NET application, and configure architecture-agnostic builds using AnyCPU.
-      Learn how to build and run an OrchardCore CMS .NET application on Azure Cobalt 100 processors,
-      covering AnyCPU configuration and shared C library integration.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an advanced topic for .NET developers who want to take advantage of the performance
-      and cost benefits of Azure Cobalt processors.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: A Microsoft Azure account with permissions
-      to deploy virtual machines; .NET SDK 8.0 or later; Basic knowledge of C and C#; GCC installed
-      (Linux) or access to a cross-compiler; OrchardCore application created using the .NET CLI
-      or Visual Studio.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including .NET, Orchard Core, and C, Linux environments, Arm
-      platforms such as Neoverse, and cloud platforms such as Microsoft Azure.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Build and run an OrchardCore CMS app on Azure Cobalt
-      (Arm64), Integrate a C shared library into your .NET OrchardCore app, Configure and run
-      an OrchardCore app, and Evaluate .NET performance across versions on Arm.
-# END generated_summary_faq
+
 
 author: Joe Stech
 

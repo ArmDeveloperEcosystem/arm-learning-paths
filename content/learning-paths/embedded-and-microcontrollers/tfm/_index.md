@@ -20,41 +20,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:55Z'
-  generator: template
-  source_hash: 8d8f9df559ff1b1570dc98baf640fc2d4c4d225d69f22529e1881b62d4017752
-  summary: >-
-    Learn how to build and run the reference Trusted Firmware-M tests and example application
-    on Arm Fixed Virtual Platforms for secure microcontroller development. It is designed for
-    software developers new to Trusted Firmware-M. By the end, you will be able to build and run
-    the reference TF-M tests and example application. It focuses on tools and technologies such
-    as Arm Virtual Hardware, FVP, TrustZone, and Trusted Firmware, Baremetal environments, and
-    Arm platforms including Cortex-M and Corstone. The main steps cover Build and run TF-M tests
-    and example application.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will build and run the reference TF-M tests and example application. Learn how to build
-      and run the reference Trusted Firmware-M tests and example application on Arm Fixed Virtual
-      Platforms for secure microcontroller development.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for software developers new to Trusted Firmware-M.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: Some familiarity with embedded C programming;
-      A machine running Ubuntu Linux.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Arm Virtual Hardware, FVP, TrustZone, and Trusted
-      Firmware, Baremetal environments, and Arm platforms such as Cortex-M and Corstone.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Build and run TF-M tests and example application.
-# END generated_summary_faq
+
 
 author: Pareena Verma
 

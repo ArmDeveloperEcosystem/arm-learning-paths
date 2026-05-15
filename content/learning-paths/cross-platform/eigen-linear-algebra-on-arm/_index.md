@@ -18,43 +18,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:53Z'
-  generator: template
-  source_hash: 39c5e146afbfc74c3076d2cf3f1a67ddc0e4715f39b2cff1ccf76b288415bdc0
-  summary: >-
-    Learn how to use the Eigen linear algebra library on Arm systems with ASIMD and SVE vectorization,
-    including building TensorFlow with SVE support for optimized performance. It is designed for
-    C/C++ developers who want to create high performance applications using the Eigen linear algebra
-    library. By the end, you will be able to describe how to use Eigen on Arm systems and build
-    TensorFlow with SVE on Arm systems. It focuses on tools and technologies such as GCC, Clang,
-    and Runbook, Linux environments, and Arm platforms including Cortex-A and Neoverse. The main
-    steps cover About Eigen, Eigen examples, Eigen on Arm, and Build and Run TensorFlow with SVE.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will describe how to use Eigen on Arm systems and build TensorFlow with SVE on Arm systems.
-      Learn how to use the Eigen linear algebra library on Arm systems with ASIMD and SVE vectorization,
-      including building TensorFlow with SVE support for optimized performance.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an advanced topic for C/C++ developers who want to create high performance applications
-      using the Eigen linear algebra library.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: An Arm-based computer running Linux
-      and a recent version of a C++ compiler (Clang or GCC).
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including GCC, Clang, and Runbook, Linux environments, and
-      Arm platforms such as Cortex-A and Neoverse.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around About Eigen, Eigen examples, Eigen on Arm, and Build
-      and Run TensorFlow with SVE.
-# END generated_summary_faq
+
 
 author: Konstantinos Margaritis
 

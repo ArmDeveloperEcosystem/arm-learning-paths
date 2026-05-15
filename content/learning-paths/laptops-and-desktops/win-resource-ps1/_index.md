@@ -20,48 +20,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:55Z'
-  generator: template
-  source_hash: fc0d79605640cc8e7a36070a044323d6e278335484949921d0aa4e9cd163d4bd
-  summary: >-
-    Learn how to measure application resource usage, benchmark video encoding tasks, and monitor
-    CPU, memory, and power consumption on Windows on Arm using FFmpeg and PowerShell. It is designed
-    for developers who want to measure resource usage of applications on Windows on Arm devices
-    using FFmpeg. By the end, you will be able to measure application resource usage using FFmpeg
-    and PowerShell, benchmark a video encoding task, and monitor CPU, memory, and power consumption
-    during a video decode task. It focuses on tools and technologies such as FFmpeg and PowerShell,
-    Windows environments, and Arm platforms including Cortex-A. The main steps cover Set up FFmpeg
-    and encode a test video, Track system resource usage on Windows on Arm with PowerShell, and
-    Measure power usage on Windows on Arm with PowerShell.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will measure application resource usage using FFmpeg and PowerShell, benchmark a video
-      encoding task, and monitor CPU, memory, and power consumption during a video decode task.
-      Learn how to measure application resource usage, benchmark video encoding tasks, and monitor
-      CPU, memory, and power consumption on Windows on Arm using FFmpeg and PowerShell.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for developers who want to measure resource usage of applications
-      on Windows on Arm devices using FFmpeg.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: A Windows on Arm computer such as the
-      Lenovo Thinkpad X13s running Windows 11; A code editor such as [Visual Studio Code for Windows
-      on Arm](https://code.visualstudio.com/docs/?dv=win32arm64user).
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including FFmpeg and PowerShell, Windows environments, and
-      Arm platforms such as Cortex-A.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Set up FFmpeg and encode a test video, Track system
-      resource usage on Windows on Arm with PowerShell, and Measure power usage on Windows on
-      Arm with PowerShell.
-# END generated_summary_faq
+
 
 author: Ruifeng Wang
 

@@ -21,47 +21,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:53Z'
-  generator: template
-  source_hash: 058f779bc7dd9faef294a57f4524bf525046d757e21a287744825fb9b290935e
-  summary: >-
-    Learn how to build, run, and share multi-architecture Docker images for Arm and x86 platforms
-    using buildx, manifest, and remote builders. It is designed for software developers who want
-    to learn about Docker for the Arm architecture. By the end, you will be able to build, run,
-    and share Docker images, perform multi-architecture builds using Docker buildx, and use a
-    remote server to build a Docker image for the Arm architecture. It focuses on tools and technologies
-    such as Docker, Linux environments, and Arm platforms including Neoverse and Cortex-A. The
-    main steps cover Build, run, and share a Docker image, Build multi-architecture images with
-    Docker buildx, Perform remote Docker builds on an Arm server, Use Docker manifest to create
-    multi-architecture images, and Check container images for multi-architecture support.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will build, run, and share Docker images, perform multi-architecture builds using Docker
-      buildx, and use a remote server to build a Docker image for the Arm architecture. Learn
-      how to build, run, and share multi-architecture Docker images for Arm and x86 platforms
-      using buildx, manifest, and remote builders.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for software developers who want to learn about Docker for
-      the Arm architecture.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: A Windows, macOS, or Linux computer
-      with Docker installed, any architecture can be used; An Arm Linux server with Docker installed.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Docker, Linux environments, and Arm platforms such
-      as Neoverse and Cortex-A.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Build, run, and share a Docker image, Build multi-architecture
-      images with Docker buildx, Perform remote Docker builds on an Arm server, Use Docker manifest
-      to create multi-architecture images, and Check container images for multi-architecture support.
-# END generated_summary_faq
+
 
 author: Jason Andrews
 

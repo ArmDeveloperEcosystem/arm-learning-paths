@@ -22,52 +22,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:56Z'
-  generator: template
-  source_hash: 192f5919261cfef88c107576dc444d2db3a07fbad98100d9c758bb75670a5a00
-  summary: >-
-    Learn how to build and optimize a multimodal Voice Assistant application on Android using
-    KleidiAI and SME2 for accelerated performance. It is designed for developers who want to implement
-    a multimodal pipeline for a Voice Assistant application and accelerate the performance on
-    Android devices using KleidiAI and SME2. By the end, you will be able to learn about the multimodal
-    Voice Assistant pipeline and different components used, learn about the functionality of ML
-    components used and how these can be built and benchmarked on various platforms, and compile
-    and run a multimodal Voice Assistant example based on Android OS. It focuses on tools and
-    technologies such as Java, Kotlin, CPP, and SME2, Android, Linux, and macOS environments,
-    and Arm platforms including Cortex-A and Arm C1. The main steps cover Set up your environment,
-    Overview, Build the Voice Assistant, Run the Voice Assistant, and KleidiAI.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will learn about the multimodal Voice Assistant pipeline and different components used,
-      learn about the functionality of ML components used and how these can be built and benchmarked
-      on various platforms, and compile and run a multimodal Voice Assistant example based on
-      Android OS. Learn how to build and optimize a multimodal Voice Assistant application on
-      Android using KleidiAI and SME2 for accelerated performance.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for developers who want to implement a multimodal pipeline
-      for a Voice Assistant application and accelerate the performance on Android devices using
-      KleidiAI and SME2.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: An Android phone that supports the i8mm
-      Arm architecture feature (8-bit integer matrix multiplication).; An Android phone with support
-      for SME (Scalable Matrix Extension) instructions, required for SME performance checking;
-      This Learning Path was tested on a Vivo X300 Pro.; A development machine with [Android Studio](https://developer.android.com/studio)
-      installed.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Java, Kotlin, CPP, and SME2, Android, Linux, and
-      macOS environments, and Arm platforms such as Cortex-A and Arm C1.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Set up your environment, Overview, Build the Voice
-      Assistant, Run the Voice Assistant, and KleidiAI.
-# END generated_summary_faq
+
 
 author:
     - Arnaud de Grandmaison

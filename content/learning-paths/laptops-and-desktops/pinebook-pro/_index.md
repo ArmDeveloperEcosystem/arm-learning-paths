@@ -20,44 +20,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:55Z'
-  generator: template
-  source_hash: e1befed4cafab0eaee29a31c2f259a6a90a14d9f8230c570b6c10a9840b761d5
-  summary: >-
-    Learn how to install and configure Arch Linux for Arm with the i3 window manager and Neovim
-    editor on the Pinebook Pro laptop. It is designed for developers who want to use the Pinebook
-    Pro as an Arm Linux development machine. By the end, you will be able to install and configure
-    Arch Linux for Arm, install and configure the i3 window manager, and install and configure
-    the Neovim editor. It focuses on tools and technologies such as i3, Alacritty, and Neovim,
-    Linux environments, and Arm platforms including Cortex-A72 and Cortex-A53. The main steps
-    cover How do I install Arch Linux?, How do you install the i3 Windows Manager?, and How do
-    I install and configure Neovim?
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will install and configure Arch Linux for Arm, install and configure the i3 window manager,
-      and install and configure the Neovim editor. Learn how to install and configure Arch Linux
-      for Arm with the i3 window manager and Neovim editor on the Pinebook Pro laptop.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an advanced topic for developers who want to use the Pinebook Pro as an Arm Linux
-      development machine.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: A Pinebook Pro laptop; A microSD card
-      (8GB or greater; class 10 or faster).
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including i3, Alacritty, and Neovim, Linux environments, and
-      Arm platforms such as Cortex-A72 and Cortex-A53.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around How do I install Arch Linux?, How do you install the
-      i3 Windows Manager?, and How do I install and configure Neovim?
-# END generated_summary_faq
+
 
 author: Gabriel Peterson
 

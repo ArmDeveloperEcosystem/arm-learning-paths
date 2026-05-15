@@ -20,41 +20,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:53Z'
-  generator: template
-  source_hash: a58d5eb4c4256f3e4f4374344ef0e73836e8b51ac7223b0a5238b22137ec0819
-  summary: >-
-    Learn what type of content belongs in a Learning Path and how to format it. It is designed
-    for content creators and software developers who want to share Arm related information as
-    a step-by-step guide called a Learning Path. By the end, you will be able to understand what
-    type of content belongs in a Learning Path, set up the required tools for Learning Path creation,
-    and write and format your own Learning Path using markdown. It focuses on tools and technologies
-    such as Hugo. The main steps cover Learning Path basics, Learning Path setup, Create a new
-    Learning Path, Modify Learning Path metadata, and Contribute.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will understand what type of content belongs in a Learning Path, set up the required
-      tools for Learning Path creation, and write and format your own Learning Path using markdown.
-      Learn what type of content belongs in a Learning Path and how to format it.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This topic is for content creators and software developers who want to share Arm related
-      information as a step-by-step guide called a Learning Path.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: A [GitHub](https://github.com/) account.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Hugo.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Learning Path basics, Learning Path setup, Create
-      a new Learning Path, Modify Learning Path metadata, and Contribute.
-# END generated_summary_faq
+
 
 author: Zach Lasiuk
 

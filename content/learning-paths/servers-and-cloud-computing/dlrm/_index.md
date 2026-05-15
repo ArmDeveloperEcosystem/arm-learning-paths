@@ -18,47 +18,6 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:57Z'
-  generator: template
-  source_hash: 82716c2de19d18a154c85d03b7f2ec01839284262914f7bb3ad04b18a105379d
-  summary: >-
-    Learn how to build and benchmark the Deep Learning Recommendation Model using PyTorch and
-    MLPerf on Arm Neoverse V2 processors. It is designed for software developers who want to set
-    up a pipeline in the cloud for recommendation models. You'll build and run the Deep Learning
-    Recommendation Model (DLRM) and benchmark its performance using MLPerf and PyTorch. By the
-    end, you will be able to build the Deep Learning Recommendation Model (DLRM) and run a modified
-    performant DLRMv2 benchmark and inspect the results. It focuses on tools and technologies
-    such as Docker, MLPerf, and Google Cloud, Linux environments, Arm platforms including Neoverse,
-    and cloud platforms such as AWS and Google Cloud. The main steps cover Overview and setup,
-    Download model weights and data, and Run the benchmark.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will build the Deep Learning Recommendation Model (DLRM) and run a modified performant
-      DLRMv2 benchmark and inspect the results. Learn how to build and benchmark the Deep Learning
-      Recommendation Model using PyTorch and MLPerf on Arm Neoverse V2 processors.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for software developers who want to set up a pipeline in the
-      cloud for recommendation models. You'll build and run the Deep Learning Recommendation Model
-      (DLRM) and benchmark its performance using MLPerf and PyTorch.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: Any [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/)
-      from a cloud service provider (CSP), or an on-premise Arm server with at least 400GB of
-      RAM and 800 GB of disk space.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Docker, MLPerf, and Google Cloud, Linux environments,
-      Arm platforms such as Neoverse, and cloud platforms such as AWS and Google Cloud.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Overview and setup, Download model weights and data,
-      and Run the benchmark.
-# END generated_summary_faq
 
 author: 
     - Phalani Paladugu

@@ -21,45 +21,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:57Z'
-  generator: template
-  source_hash: 908a750f2a891a0c4c9d1183c2130ac5ac0fdcfb4a45185cef6ed6da47c9aaa9
-  summary: >-
-    Learn how to build and run the x265 H.265 codec on Arm servers with performance benchmarking
-    across various video resolutions and encoding presets. It is designed for software developers
-    who want to build and run an x265 codec on Arm servers and measure performance. By the end,
-    you will be able to build x265 codec on Arm server and run x265 codec on Arm server with the
-    same video of various resolutions and encoding presets to measure the performance impact.
-    It focuses on tools and technologies such as x265, Linux environments, Arm platforms including
-    Neoverse, and cloud platforms such as AWS and Oracle. The main steps cover Build and Run x265
-    codec on Arm servers.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will build x265 codec on Arm server and run x265 codec on Arm server with the same video
-      of various resolutions and encoding presets to measure the performance impact. Learn how
-      to build and run the x265 H.265 codec on Arm servers with performance benchmarking across
-      various video resolutions and encoding presets.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for software developers who want to build and run an x265
-      codec on Arm servers and measure performance.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/)
-      from an appropriate cloud service provider. This Learning Path has been verified on AWS
-      EC2 and Oracle cloud services, running `Ubuntu Linux 20.04.`.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including x265, Linux environments, Arm platforms such as
-      Neoverse, and cloud platforms such as AWS and Oracle.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Build and Run x265 codec on Arm servers.
-# END generated_summary_faq
+
 
 author: Pareena Verma
 

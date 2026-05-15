@@ -18,47 +18,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:55Z'
-  generator: template
-  source_hash: dee181248ecc8cb40e3ad76642fdb216cbf1e7610dde2f2605ba04f111b8926a
-  summary: >-
-    Learn how to build and optimize AI-powered camera pipeline applications on Arm Linux using
-    KleidiAI, KleidiCV, and SME2 to accelerate denoising, background blur, and low-light effects.
-    It is designed for This introductory topic is for mobile and computer-vision developers, camera
-    pipeline engineers, and performance-minded practitioners who want to optimize real-time camera
-    effects on Arm using KleidiAI and KleidiCV. By the end, you will be able to build and run
-    AI-powered camera pipeline applications and use SME2 to improve the performance of real-time
-    camera pipelines. It focuses on tools and technologies such as CPP, Docker, and SME2, Linux
-    and macOS environments, and Arm platforms including Cortex-A and Arm C1. The main steps cover
-    Prerequisites, Overview, Build the pipelines, Run the pipelines, and Performance.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will build and run AI-powered camera pipeline applications and use SME2 to improve the
-      performance of real-time camera pipelines. Learn how to build and optimize AI-powered camera
-      pipeline applications on Arm Linux using KleidiAI, KleidiCV, and SME2 to accelerate denoising,
-      background blur, and low-light effects.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This introductory topic is for mobile and computer-vision developers, camera pipeline engineers,
-      and performance-minded practitioners who want to optimize real-time camera effects on Arm
-      using KleidiAI and KleidiCV.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: A computer running Arm Linux or macOS
-      with Docker installed.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including CPP, Docker, and SME2, Linux and macOS environments,
-      and Arm platforms such as Cortex-A and Arm C1.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Prerequisites, Overview, Build the pipelines, Run
-      the pipelines, and Performance.
-# END generated_summary_faq
+
 
 author: Arnaud de Grandmaison
 

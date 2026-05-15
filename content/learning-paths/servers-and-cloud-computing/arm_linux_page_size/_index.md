@@ -22,51 +22,6 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v2
-  generated_at: '2026-05-12T18:20:22Z'
-  generator: template
-  source_hash: 67004eb9a75926144eb6f75124104972b3cf20a57a22b698c9359d20db3eca02
-  summary_generated_at: '2026-05-12T18:20:22Z'
-  summary_source_hash: 67004eb9a75926144eb6f75124104972b3cf20a57a22b698c9359d20db3eca02
-  faq_generated_at: '2026-05-12T18:20:22Z'
-  faq_source_hash: 67004eb9a75926144eb6f75124104972b3cf20a57a22b698c9359d20db3eca02
-  summary: >-
-    Learn how to install and configure a Linux kernel with 64K page size support on Arm systems
-    to improve memory efficiency and performance for memory-intensive workloads. It is designed
-    for developers who want to modify the Linux kernel page size on Arm-based systems to improve
-    performance for memory-intensive workloads. By the end, you will be able to explain the differences
-    in page size configuration between Arm64 and x86 architectures, understand how page size affects
-    memory efficiency and system performance, and check the current memory page size on an Arm-based
-    Linux system. It focuses on tools and technologies such as bash, Linux environments, and Arm
-    platforms including Neoverse. The main steps cover Overview, Change page size on Ubuntu, Change
-    page size on Debian, and Change page size on CentOS.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will explain the differences in page size configuration between Arm64 and x86 architectures,
-      understand how page size affects memory efficiency and system performance, and check the
-      current memory page size on an Arm-based Linux system. Learn how to install and configure
-      a Linux kernel with 64K page size support on Arm systems to improve memory efficiency and
-      performance for memory-intensive workloads.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for developers who want to modify the Linux kernel page size
-      on Arm-based systems to improve performance for memory-intensive workloads.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: Access to an Arm-based Linux system
-      running Ubuntu, Debian, or CentOS.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including bash, Linux environments, and Arm platforms such
-      as Neoverse.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Overview, Change page size on Ubuntu, Change page
-      size on Debian, and Change page size on CentOS.
-# END generated_summary_faq
 
 author: Geremy Cohen
 

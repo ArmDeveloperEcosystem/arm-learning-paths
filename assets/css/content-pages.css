@@ -261,6 +261,73 @@ html[theme='dark'] .incorrect-explain {color: #e86868} /* 27% lighter than arm's
     color: var(--arm-green);
 }
 
+
+
+/* Generated AI-assisted summary/FAQ block
+*******************************************************************/
+.generated-summary-faq__label {
+    align-items: center;
+    display: flex;
+    gap: 8px;
+}
+
+.generated-summary-faq__badge {
+    border: 1px solid var(--arm-web-safe-blue);
+    color: var(--arm-web-safe-blue);
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1;
+    padding: 5px 8px;
+    text-transform: uppercase;
+}
+
+html[theme='dark'] .generated-summary-faq__badge {
+    border-color: var(--arm-light-blue);
+    color: var(--arm-light-blue);
+}
+
+.generated-summary-faq__info {
+    align-items: center;
+    background: transparent;
+    border: 1px solid var(--arm-web-safe-blue);
+    color: var(--arm-web-safe-blue);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 0.8rem;
+    font-weight: 700;
+    height: 24px;
+    justify-content: center;
+    padding: 0;
+    width: 24px;
+}
+
+.generated-summary-faq__info:hover {
+    border-color: var(--arm-green);
+    color: var(--arm-green);
+}
+
+html[theme='dark'] .generated-summary-faq__info {
+    border-color: var(--arm-light-blue);
+    color: var(--arm-light-blue);
+}
+
+ads-expansion-panel.generated-summary-faq__panel {
+    --ads-expansion-panel-border-color: var(--arm-light-grey);
+    --ads-expansion-panel-content-background-color: transparent;
+    --ads-expansion-panel-toggle-background-color: transparent;
+    --ads-expansion-panel-toggle-background-color-hover: transparent;
+    --ads-expansion-panel-toggle-icon-color-hover: var(--arm-green);
+}
+
+html[theme='dark'] ads-expansion-panel.generated-summary-faq__panel {
+    --ads-expansion-panel-border-color: rgba(163, 168, 174, 0.25);
+    --ads-expansion-panel-content-background-color: transparent;
+    --ads-expansion-panel-toggle-background-color: transparent;
+    --ads-expansion-panel-toggle-background-color-hover: transparent;
+    --ads-expansion-panel-toggle-icon-color-hover: var(--arm-green);
+}
+
 .share-icon {
     width: 36px;
     height: 36px;

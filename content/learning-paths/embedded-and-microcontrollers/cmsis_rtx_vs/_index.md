@@ -20,48 +20,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:54Z'
-  generator: template
-  source_hash: f4d1ab3448590c5654e2479937c9eec3e378d05229b29a45b8675139f40ac177
-  summary: >-
-    Learn how to create, configure, and debug an RTX5 RTOS application using Keil Studio for VS
-    Code with CMSIS-RTOS2 API for embedded Cortex-M development. It is designed for software developers
-    new to RTOS development. By the end, you will be able to understand the basics of RTX-based
-    RTOS application development, configure and manage an RTOS project in Keil Studio, including
-    defining the memory map, selecting software components, and setting up debugging configurations
-    for Cortex-M processors, and create and manage multiple threads within an RTX5 RTOS application.
-    It focuses on tools and technologies such as Keil RTX RTOS, Keil MDK, and Arm Development
-    Studio, RTOS environments, and Arm platforms including Cortex-M. The main steps cover Create
-    csolution project, Initialize the Operating System, Create RTOS Threads, and Build and run
-    the application.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will understand the basics of RTX-based RTOS application development, configure and
-      manage an RTOS project in Keil Studio, including defining the memory map, selecting software
-      components, and setting up debugging configurations for Cortex-M processors, and create
-      and manage multiple threads within an RTX5 RTOS application. Learn how to create, configure,
-      and debug an RTX5 RTOS application using Keil Studio for VS Code with CMSIS-RTOS2 API for
-      embedded Cortex-M development.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for software developers new to RTOS development.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: Installation of [Arm Keil Studio for
-      VS Code](/install-guides/keilstudio_vs); Some familiarity with CMSIS is assumed.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Keil RTX RTOS, Keil MDK, and Arm Development Studio,
-      RTOS environments, and Arm platforms such as Cortex-M.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Create csolution project, Initialize the Operating
-      System, Create RTOS Threads, and Build and run the application.
-# END generated_summary_faq
+
 
 author: Ronan Synnott
 

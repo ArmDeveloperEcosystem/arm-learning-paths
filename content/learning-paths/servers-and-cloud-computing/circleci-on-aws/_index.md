@@ -20,51 +20,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:57Z'
-  generator: template
-  source_hash: e04982fd668765fa2ab25f943f020b8d2b4a5e9b5ff3a51b7431cc4d93730180
-  summary: >-
-    Learn how to install and configure CircleCI self-hosted machine runners on AWS Graviton Arm64
-    instances to execute CI/CD workflows natively on Arm. It is designed for developers and DevOps
-    engineers who want to set up and run CircleCI Arm native workflows on Linux Arm64 virtual
-    machines. You'll use AWS EC2 Graviton instances (Neoverse N1) and self-hosted runners. By
-    the end, you will be able to create an AWS EC2 Graviton Arm64 virtual machine, install and
-    configure CircleCI self-hosted machine runners on Arm64, and verify the runner by running
-    a simple workflow and test computation. It focuses on tools and technologies such as CircleCI,
-    Bash, and Git, Linux environments, Arm platforms including Neoverse, and cloud platforms such
-    as AWS. The main steps cover Get Started with CircleCI on AWS Graviton, Create an AWS EC2
-    Arm64 Graviton Instance, Install CircleCI CLI, Create a resource class in CircleCI, and Install
-    CircleCI machine runner on AWS Graviton.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will create an AWS EC2 Graviton Arm64 virtual machine, install and configure CircleCI
-      self-hosted machine runners on Arm64, and verify the runner by running a simple workflow
-      and test computation. Learn how to install and configure CircleCI self-hosted machine runners
-      on AWS Graviton Arm64 instances to execute CI/CD workflows natively on Arm.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an introductory topic for developers and DevOps engineers who want to set up and
-      run CircleCI Arm native workflows on Linux Arm64 virtual machines. You'll use AWS EC2 Graviton
-      instances (Neoverse N1) and self-hosted runners.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: An [AWS account](https://aws.amazon.com/free/)
-      with billing enabled; A CircleCI account; Basic understanding of CircleCI workflows, jobs
-      and resource classes.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including CircleCI, Bash, and Git, Linux environments, Arm
-      platforms such as Neoverse, and cloud platforms such as AWS.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Get Started with CircleCI on AWS Graviton, Create
-      an AWS EC2 Arm64 Graviton Instance, Install CircleCI CLI, Create a resource class in CircleCI,
-      and Install CircleCI machine runner on AWS Graviton.
-# END generated_summary_faq
+
 
 author: Annie Tallund
 

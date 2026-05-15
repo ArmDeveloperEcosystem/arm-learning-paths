@@ -22,55 +22,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:58Z'
-  generator: template
-  source_hash: 4efe46aaf4580a6b8f263b69e8f072211bfd24fcf7f7a885689c927fc05a4c63
-  summary: >-
-    Deploy Memcached as a cache for MySQL and PostgreSQL on Arm servers. It is designed for developers
-    who want to use memcached as their in-memory key-value store. By the end, you will be able
-    to deploy memcached as a cache for MySQL on AWS, Azure and GCP Arm based Instance and deploy
-    memcached as a cache for PostgreSQL on AWS, Azure and GCP Arm based Instance. It focuses on
-    tools and technologies such as Memcached, SQL, MySQL, and PostgreSQL, Linux environments,
-    Arm platforms including Neoverse, and cloud platforms such as AWS, Microsoft Azure, and Google
-    Cloud. The main steps cover Deploy Memcached as a cache for MySQL on an AWS Arm based Instance,
-    Deploy Memcached as a cache for MySQL on an Azure Arm based Instance, Deploy Memcached as
-    a cache for MySQL on a Google Cloud Arm based Instance, Deploy Memcached as a cache for Postgres
-    on an AWS Arm based Instance, and Deploy Memcached as a cache for Postgres on an Azure Arm
-    based Instance.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will deploy memcached as a cache for MySQL on AWS, Azure and GCP Arm based Instance
-      and deploy memcached as a cache for PostgreSQL on AWS, Azure and GCP Arm based Instance.
-      Deploy Memcached as a cache for MySQL and PostgreSQL on Arm servers.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an advanced topic for developers who want to use memcached as their in-memory key-value
-      store.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: An Amazon Web Services (AWS) [account](https://aws.amazon.com/);
-      An Azure portal [account](https://azure.microsoft.com/en-in/get-started/azure-portal); A
-      Google Cloud [account](https://console.cloud.google.com/); A machine with [Terraform](/install-guides/terraform/),
-      [AWS CLI](/install-guides/aws-cli), [Google Cloud CLI](/install-guides/gcloud), [Azure CLI](/install-guides/azure-cli),
-      [AWS IAM authenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html),
-      and [Ansible](/install-guides/ansible/) installed.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including Memcached, SQL, MySQL, and PostgreSQL, Linux environments,
-      Arm platforms such as Neoverse, and cloud platforms such as AWS, Microsoft Azure, and Google
-      Cloud.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Deploy Memcached as a cache for MySQL on an AWS Arm
-      based Instance, Deploy Memcached as a cache for MySQL on an Azure Arm based Instance, Deploy
-      Memcached as a cache for MySQL on a Google Cloud Arm based Instance, Deploy Memcached as
-      a cache for Postgres on an AWS Arm based Instance, and Deploy Memcached as a cache for Postgres
-      on an Azure Arm based Instance.
-# END generated_summary_faq
+
 
 author: Pareena Verma
 

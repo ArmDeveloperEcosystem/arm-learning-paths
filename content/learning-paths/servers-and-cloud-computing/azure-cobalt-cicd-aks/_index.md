@@ -20,49 +20,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:56Z'
-  generator: template
-  source_hash: b5bd3abde8d9dd3146e0f11f4819ac510417ad7f707b4d0970c02fd63801b358
-  summary: >-
-    Learn how to configure a self-hosted GitHub runner on Azure Cobalt 100, create an AKS cluster
-    with Terraform, and deploy a .NET application using GitHub Actions CI/CD. It is designed for
-    software developers who want to develop cloud-native applications using GitHub Actions and
-    Azure Kubernetes Service (AKS), and run them on Microsoft Azure Cobalt 100 VMs. By the end,
-    you will be able to configure an Azure Cobalt 100 VM as a self-hosted GitHub runner, create
-    an AKS cluster with Arm-based Azure Cobalt 100 nodes using Terraform, and deploy a .NET application
-    to AKS with GitHub Actions using the self-hosted Arm64-based runner. It focuses on tools and
-    technologies such as .NET, Kubernetes, and Docker, Linux environments, Arm platforms including
-    Neoverse, and cloud platforms such as Microsoft Azure. The main steps cover Background and
-    Build and deploy a .NET application.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will configure an Azure Cobalt 100 VM as a self-hosted GitHub runner, create an AKS
-      cluster with Arm-based Azure Cobalt 100 nodes using Terraform, and deploy a .NET application
-      to AKS with GitHub Actions using the self-hosted Arm64-based runner. Learn how to configure
-      a self-hosted GitHub runner on Azure Cobalt 100, create an AKS cluster with Terraform, and
-      deploy a .NET application using GitHub Actions CI/CD.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an advanced topic for software developers who want to develop cloud-native applications
-      using GitHub Actions and Azure Kubernetes Service (AKS), and run them on Microsoft Azure
-      Cobalt 100 VMs.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: A Microsoft Azure account.; A GitHub
-      account.; A machine with [Terraform](/install-guides/terraform/),[Azure CLI](/install-guides/azure-cli),
-      and [Kubectl](/install-guides/kubectl/) installed.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including .NET, Kubernetes, and Docker, Linux environments,
-      Arm platforms such as Neoverse, and cloud platforms such as Microsoft Azure.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Background and Build and deploy a .NET application.
-# END generated_summary_faq
+
 
 author: Pranay Bakre
 

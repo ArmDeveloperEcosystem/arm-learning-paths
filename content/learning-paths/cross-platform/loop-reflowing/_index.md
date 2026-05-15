@@ -16,45 +16,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:54Z'
-  generator: template
-  source_hash: 4218b8b0c1dee3862bb9765a83dfed0cb38555d1da7425e791c5c16b17f98c21
-  summary: >-
-    Learn how to optimize C/C++ code using compiler autovectorization techniques including loop
-    modifications, restrict qualifiers, and conditional handling for Arm processors. It is designed
-    for C/C++ developers who are interested in taking advantage of autovectorization in compilers.
-    By the end, you will be able to modify loops to take advantage of autovectorization in compilers.
-    It focuses on tools and technologies such as GCC, Clang, and Runbook, Linux environments,
-    and Arm platforms including Neoverse and Cortex-A. The main steps cover An introduction to
-    autovectorization, Autovectorization using the restrict keyword, Autovectorization limits,
-    Autovectorization and conditionals, and Autovectorization on Arm.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will modify loops to take advantage of autovectorization in compilers. Learn how to
-      optimize C/C++ code using compiler autovectorization techniques including loop modifications,
-      restrict qualifiers, and conditional handling for Arm processors.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This is an advanced topic for C/C++ developers who are interested in taking advantage of
-      autovectorization in compilers.
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: An Arm computer running Linux and a
-      recent version of Clang or the GNU compiler (gcc) installed.
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including GCC, Clang, and Runbook, Linux environments, and
-      Arm platforms such as Neoverse and Cortex-A.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around An introduction to autovectorization, Autovectorization
-      using the restrict keyword, Autovectorization limits, Autovectorization and conditionals,
-      and Autovectorization on Arm.
-# END generated_summary_faq
+
 
 author: Konstantinos Margaritis
 

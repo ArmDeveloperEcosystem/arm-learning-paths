@@ -28,57 +28,7 @@ generate_summary_faq: true
 
 rerun_summary: false
 rerun_faqs: false
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v1
-  generated_at: '2026-05-06T17:17:54Z'
-  generator: template
-  source_hash: eb01b77f36323331c080615edcbddbf8cb56cf005f2249f1ea309ab1dbec8616
-  summary: >-
-    Learn how to implement and optimize matrix multiplication using Arm's Scalable Matrix Extension
-    2 (SME2) with assembly and intrinsics, including benchmarking and validation on Arm hardware.
-    It is designed for This Learning Path is an advanced topic for developers who want to accelerate
-    the performance of matrix multiplication using Arm's Scalable Matrix Extension Version 2 (SME2).
-    By the end, you will be able to implement a baseline matrix multiplication kernel in C without
-    SME2, use SME2 assembly instructions to accelerate matrix multiplication performance, and
-    use SME2 intrinsics to vectorize and optimize matrix multiplication. It focuses on tools and
-    technologies such as C, Clang, LLVM, and SME2, Linux, macOS, and Windows environments, and
-    Arm platforms including Arm C1. The main steps cover Overview, Set up your SME2 development
-    environment, Test your SME2 development environment, Streaming mode and ZA state in SME, and
-    Vanilla matrix multiplication.
-  faqs:
-  - question: What will you accomplish in this Learning Path?
-    answer: >-
-      You will implement a baseline matrix multiplication kernel in C without SME2, use SME2 assembly
-      instructions to accelerate matrix multiplication performance, and use SME2 intrinsics to
-      vectorize and optimize matrix multiplication. Learn how to implement and optimize matrix
-      multiplication using Arm's Scalable Matrix Extension 2 (SME2) with assembly and intrinsics,
-      including benchmarking and validation on Arm hardware.
-  - question: Who is this Learning Path for?
-    answer: >-
-      This Learning Path is an advanced topic for developers who want to accelerate the performance
-      of matrix multiplication using Arm's Scalable Matrix Extension Version 2 (SME2).
-  - question: What do you need before you start?
-    answer: >-
-      Before you start, make sure you have the following: Working knowledge of Arm’s SVE and SME2
-      instruction sets; Intermediate proficiency with the C programming language and the Armv9-A
-      assembly language; A computer running Linux, macOS, or Windows; Installations of Git, CMake
-      and Ninja for project setup; A platform that supports SME2 - see the list of [devices with
-      SME2 support](/learning-paths/cross-platform/multiplying-matrices-with-sme2/1-get-started/#devices)
-      or an emulator to run code with SME2 instructions; Installation of Docker for SME2 emulation
-      (if you don't have SME2 available); Installation of Android Development Studio and adb (if
-      you're targeting an Android phone with SME2 support); Compiler support for SME2 instructions
-      (for example, LLVM 18 or later with SME2 backend support).
-  - question: Which tools, languages, or platforms does it cover?
-    answer: >-
-      It covers tools and languages including C, Clang, LLVM, and SME2, Linux, macOS, and Windows
-      environments, and Arm platforms such as Arm C1.
-  - question: How is the Learning Path structured?
-    answer: >-
-      The Learning Path is organized around Overview, Set up your SME2 development environment,
-      Test your SME2 development environment, Streaming mode and ZA state in SME, and Vanilla
-      matrix multiplication.
-# END generated_summary_faq
+
 
 author: Arnaud de Grandmaison
 
