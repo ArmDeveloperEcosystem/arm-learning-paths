@@ -6180,3 +6180,13 @@ uncached
 uvicorn
 versicolor
 virginica
+AddSigmoid
+ESRally
+GeoNames
+JVM's
+Lucene
+OpenJDK's
+auxv
+elasticsearch
+esrally
+geonames
