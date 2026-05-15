@@ -16,7 +16,7 @@ learning_objectives:
 prerequisites:
     - Basic PyTorch and Python experience
     - A Linux machine or macOS machine with Apple Silicon
-    - Python 3.10+ <3.14, and Git installed
+    - Python version greater than 3.10 and less than 3.14, and Git installed
 
 author: Joshua Marshall-Law
 
