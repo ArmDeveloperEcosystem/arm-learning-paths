@@ -8,13 +8,11 @@ layout: learningpathall
 
 ## Set up the virtual machine
 
-In this section, you'll create a Google Axion C4A Arm-based virtual machine (VM) on Google Cloud Platform (GCP). You'll use the `c4a-standard-4` machine type, which provides 4 vCPUs and 16 GB of memory. This VM will host your DeepSpeed tracking server and model serving API.
+Create a Google Axion C4A Arm-based virtual machine on Google Cloud Platform. This Learning Path uses the `c4a-standard-4` machine type, which provides 4 vCPUs and 16 GB of memory. This VM hosts PyTorch and DeepSpeed training and benchmarking workloads.
 
 {{% notice Note %}}For help with GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).{{% /notice %}}
 
-## Configure the C4A virtual machine in Google Cloud Console
-
-To create a virtual machine based on the C4A instance type in the console:
+To create a C4A virtual machine in the Google Cloud Console:
 
 1. Navigate to the [Google Cloud Console](https://console.cloud.google.com/).
 2. Go to **Compute Engine** > **VM Instances** and select **Create Instance**.
@@ -38,6 +36,4 @@ A new browser window opens with a terminal connected to your VM.
 
 ## What you've accomplished and what's next
 
-You've now provisioned a Google Axion C4A Arm VM and connected to it using SSH.
-
-Next, you'll install DeepSpeed and the required dependencies on your VM.
+You've provisioned a Google Axion C4A Arm VM and connected to it using SSH. Next, you'll install PyTorch and DeepSpeed and configure the Python environment for AI training.

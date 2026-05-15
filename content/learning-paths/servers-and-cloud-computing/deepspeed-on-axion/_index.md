@@ -60,6 +60,16 @@ further_reading:
       link: https://pytorch.org/docs/stable/index.html
       type: documentation
 
+  - resource:
+      title: Introducing Google Axion Processors
+      link: https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu
+      type: blog
+
+  - resource:
+      title: Arm Neoverse V2 platform
+      link: https://www.arm.com/products/silicon-ip-cpu/neoverse/neoverse-v2
+      type: website
+
 weight: 1
 layout: "learningpathall"
 learning_path_main_page: yes
