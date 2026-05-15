@@ -8,13 +8,11 @@ layout: learningpathall
 
 ## Set up the virtual machine
 
-In this section, you'll create a Google Axion C4A Arm-based virtual machine (VM) on Google Cloud Platform (GCP). You'll use the `c4a-standard-4` machine type, which provides 4 vCPUs and 16 GB of memory. This VM will be used for XGBoost model training, hyperparameter tuning, benchmarking, and inference API deployment.
- 
+Create a Google Axion C4A Arm-based virtual machine on Google Cloud Platform. This Learning Path uses the `c4a-standard-4` machine type, which provides 4 vCPUs and 16 GB of memory. This VM hosts XGBoost model training, hyperparameter tuning, benchmarking, and the inference API.
+
 {{% notice Note %}}For help with GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).{{% /notice %}}
 
-## Configure the C4A virtual machine in Google Cloud Console
-
-To create a virtual machine based on the C4A instance type in the console:
+To create a C4A virtual machine in the Google Cloud Console:
 
 1. Navigate to the [Google Cloud Console](https://console.cloud.google.com/).
 2. Go to **Compute Engine** > **VM Instances** and select **Create Instance**.
@@ -27,7 +25,7 @@ To create a virtual machine based on the C4A instance type in the console:
 6. For the license type, choose **Pay as you go**. 
 7. Increase **Size (GB)** from **10** to **100** to allocate sufficient disk space, and then select **Choose**.
 8. Expand **Advanced options** and select **Networking**.
-9. Under **Network tags**, enter `allow-xgboost-port` to link the VM to the firewall rule used for external API access and browser connectivity.
+9. Under **Network tags**, enter `allow-xgboost-8080` to link the VM to the firewall rule used for external API access and browser connectivity.
 10. Select **Create** to launch the virtual machine.
 
 After the instance starts, select **SSH** next to the VM in the instance list to open a browser-based terminal session.
@@ -36,10 +34,8 @@ After the instance starts, select **SSH** next to the VM in the instance list to
 
 A new browser window opens with a terminal connected to your VM.
 
-![Browser-based SSH terminal connected to the Google Axion C4A VM. The shell prompt confirms that the instance is running and ready for the next step, where you'll install MLflow and its dependencies.#center](images/gcp-shell.png "Terminal session connected to the VM")
+![Browser-based SSH terminal connected to the Google Axion C4A VM, showing the shell prompt ready for the next step#center](images/gcp-shell.png "Terminal session connected to the VM")
 
 ## What you've accomplished and what's next
 
-You've now provisioned a Google Axion C4A Arm VM and connected to it using SSH. You also configured firewall access for the XGBoost inference API.
-
-Next, you'll install XGBoost and configure a Python 3.11 environment on your VM for machine learning model training and benchmarking.
+You've provisioned a Google Axion C4A Arm VM and connected to it using SSH. The VM is linked to the firewall rule that exposes port 8080 for the XGBoost inference API. Next, you'll install XGBoost and configure a Python 3.11 environment for model training and benchmarking.

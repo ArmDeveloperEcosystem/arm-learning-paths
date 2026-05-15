@@ -15,35 +15,14 @@ To learn more, see the Google blog [Introducing Google Axion Processors, our new
 
 ## XGBoost for scalable machine learning on Arm
 
-XGBoost (Extreme Gradient Boosting) is a high-performance machine learning library designed for supervised learning tasks such as classification, regression, and ranking. It's widely used for tabular machine learning workloads because of its speed, scalability, and strong predictive accuracy.
-
-XGBoost provides features such as:
-
-* Parallelized tree boosting for fast model training  
-* Built-in regularization to reduce overfitting  
-* Hyperparameter tuning support for performance optimization  
-* Efficient handling of large-scale datasets  
-* Optimized CPU execution for multi-core systems  
-* Model export and deployment for inference workloads  
+XGBoost (Extreme Gradient Boosting) is a high-performance machine learning library designed for supervised learning tasks such as classification, regression, and ranking. It's widely used for tabular machine learning workloads because of its speed, scalability, and strong predictive accuracy. It provides parallelized tree boosting for fast model training, built-in regularization to reduce overfitting, hyperparameter tuning support, and efficient handling of large-scale datasets. XGBoost also supports model export and deployment for inference workloads, making it suitable for both experimentation and production use.
 
 Running XGBoost on Google Axion C4A Arm-based infrastructure enables efficient execution of machine learning workloads by using the high core-count architecture and optimized memory bandwidth available on Arm processors. This helps improve performance-per-watt, reduce infrastructure costs, and scale machine learning pipelines efficiently.
 
-Common use cases include:
-
-* Fraud detection  
-* Recommendation systems  
-* Customer churn prediction  
-* Financial forecasting  
-* Classification and regression workloads  
-* Large-scale tabular data training  
-* Real-time inference APIs  
-
-XGBoost integrates easily with Python machine learning ecosystems such as Scikit-learn, NumPy, and Pandas, making it suitable for both experimentation and production deployment workflows.
+Common use cases include fraud detection, recommendation systems, customer churn prediction, financial forecasting, and real-time inference APIs. XGBoost integrates with Python machine learning ecosystems such as scikit-learn, NumPy, and pandas, making it a practical choice across the full workflow from experimentation to production.
 
 To learn more, see the [XGBoost documentation](https://xgboost.readthedocs.io/en/stable/) and the [XGBoost GitHub repository](https://github.com/dmlc/xgboost).
 
 ## What you've learned and what's next
 
-You've now learned about Google Axion C4A Arm-based virtual machines and their performance advantages for machine learning workloads. You were also introduced to XGBoost and its capabilities for scalable training, hyperparameter tuning, and high-performance inference on Arm processors.
-
-Next, you'll install XGBoost and configure a Python 3.11 environment on a GCP Axion Arm64 VM for model training and benchmarking.
+This section introduced Google Axion C4A Arm-based virtual machines and XGBoost as a high-performance machine learning library suited to Arm processors. Next, you'll create a firewall rule to expose the inference API port, then provision a C4A VM for model training and deployment.
