@@ -50,7 +50,7 @@ permissions:
 
 jobs:
   generate_summary_faq:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted-ubuntu-24.04-x64
     steps:
       - name: Check out current repo
         uses: actions/checkout@v4
