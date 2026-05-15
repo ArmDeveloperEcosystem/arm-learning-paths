@@ -1,6 +1,6 @@
 ---
 title: Install XGBoost and train machine learning models
-weight: 7
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Install and configure XGBoost on SUSE Linux
 
-In this section, you install XGBoost on a GCP Axion Arm64 VM running SUSE Linux with Python 3.11, train a machine learning model, and tune model performance using hyperparameter optimization.
+In this section, you'll install XGBoost on a GCP Axion Arm64 VM running SUSE Linux with Python 3.11, train a machine learning model, and tune model performance using hyperparameter optimization.
 
-## Update the system
+### Update the system
 
 Update all system packages before installing Python and machine learning dependencies. This avoids package conflicts and ensures the latest security updates are applied:
 
@@ -19,7 +19,7 @@ sudo zypper refresh
 sudo zypper update -y
 ```
 
-## Install required dependencies
+### Install required dependencies
 
 Install Python 3.11, development libraries, and build tools required for XGBoost:
 
@@ -41,7 +41,7 @@ Verify that Python 3.11 is installed correctly.
 python3.11 --version
 ```
 
-## Create a Python environment
+### Create a Python environment
 
 Create a dedicated project directory and an isolated Python virtual environment for the XGBoost Learning Path. Using a virtual environment keeps the XGBoost packages separate from the system Python installation:
 
@@ -55,7 +55,7 @@ source xgb-env/bin/activate
 
 The virtual environment helps isolate Python packages from the system installation.
 
-## Upgrade pip
+### Upgrade pip
 
 Upgrade pip, setuptools, and wheel to ensure compatibility with the latest Python packages and build dependencies:
 
@@ -63,7 +63,7 @@ Upgrade pip, setuptools, and wheel to ensure compatibility with the latest Pytho
 pip install --upgrade pip setuptools wheel
 ```
 
-## Create a requirements file
+### Create a requirements file
 
 Create a requirements file listing the Python packages needed for XGBoost training and benchmarking:
 
@@ -78,7 +78,7 @@ joblib
 EOF
 ```
 
-## Install dependencies
+### Install dependencies
 
 Install all machine learning dependencies inside the virtual environment:
 
@@ -97,8 +97,11 @@ The output is similar to:
 ```output
 3.2.0
 ```
+## Train a machine learning model
 
-## Create XGBoost training script
+After configuring XGBoost, you'll train and tune an XGBoost classification model.
+
+### Create XGBoost training script
 In this step, you'll create a machine learning training script using the Breast Cancer dataset from Scikit-learn.
 
 The script trains an XGBoost classification model, measures training time, evaluates accuracy, and saves the trained model for inference.
@@ -150,7 +153,8 @@ print("Model saved successfully")
 EOF
 ```
 
-## Train the model
+### Start model training
+
 Run the training script to start XGBoost model training on the Arm64 processor.
 
 ```bash
@@ -167,7 +171,7 @@ Model saved successfully
 
 The model trained on the breast cancer dataset and saved both a JSON and a pickle file to the project directory.
 
-## Verify generated model files
+### Verify generated model files
 Verify that the trained model files were created successfully after training.
 
 ```bash
@@ -186,7 +190,8 @@ drwxr-xr-x  5 user user 4.0K May 13 10:20 xgb-env
 
 The `.json` and `.pkl` files are the trained model artifacts used later for inference API deployment.
 
-## Hyperparameter tuning
+## Use hyperparameter tuning to optimize model
+
 In this step, you'll optimize model performance using GridSearchCV and multiple hyperparameter combinations.
 
 The script tests different values for tree depth, learning rate, and estimators to identify the best-performing model configuration.
@@ -249,9 +254,12 @@ Best Parameters:
 The search tested 12 combinations (3 depths × 2 learning rates × 2 estimator counts) using 3-fold cross-validation. The best parameters shown are the combination that produced the highest cross-validated accuracy.
 
 ## Benchmark large-scale training
+
 In this step, you'll benchmark XGBoost training performance using a larger synthetic dataset.
 
 The benchmark simulates large-scale tabular machine learning workloads on the GCP Axion Arm64 processor.
+
+### Create benchmark
 
 Create benchmark script:
 
@@ -285,7 +293,8 @@ print(f"\nBenchmark completed in {end - start:.2f} seconds")
 EOF
 ```
 
-## Run benchmark
+### Run benchmark
+
 Run the benchmark script to measure large-scale training performance on Arm64.
 
 ```bash
@@ -302,4 +311,6 @@ The benchmark used a synthetic dataset of 500,000 samples and 50 features. Your 
 
 ## What you've accomplished and what's next
 
-You've installed XGBoost on a GCP Axion Arm64 VM, trained a classification model on the breast cancer dataset, tuned hyperparameters with GridSearchCV, and benchmarked large-scale training performance. Next, you'll deploy the trained model as a Flask inference API and access it from your browser using the VM public IP.
+You've now installed XGBoost on a GCP Axion Arm64 VM, trained a classification model on the breast cancer dataset, tuned hyperparameters with GridSearchCV, and benchmarked large-scale training performance. 
+
+Next, you'll deploy the trained model as a Flask inference API and access it from your browser using the VM public IP.

@@ -15,7 +15,7 @@ To learn more, see the Google blog [Introducing Google Axion Processors, our new
 
 ## XGBoost for scalable machine learning on Arm
 
-XGBoost (Extreme Gradient Boosting) is a high-performance machine learning library designed for supervised learning tasks such as classification, regression, and ranking. It's widely used for tabular machine learning workloads because of its speed, scalability, and strong predictive accuracy. It provides parallelized tree boosting for fast model training, built-in regularization to reduce overfitting, hyperparameter tuning support, and efficient handling of large-scale datasets. XGBoost also supports model export and deployment for inference workloads, making it suitable for both experimentation and production use.
+ Extreme Gradient Boosting (XGBoost) is a high-performance machine learning library designed for supervised learning tasks such as classification, regression, and ranking. It's widely used for tabular machine learning workloads because of its speed, scalability, and strong predictive accuracy. XGBoost provides parallelized tree boosting for fast model training, built-in regularization to reduce overfitting, hyperparameter tuning support, and efficient handling of large-scale datasets. XGBoost also supports model export and deployment for inference workloads, making it suitable for both experimentation and production use.
 
 Running XGBoost on Google Axion C4A Arm-based infrastructure enables efficient execution of machine learning workloads by using the high core-count architecture and optimized memory bandwidth available on Arm processors. This helps improve performance-per-watt, reduce infrastructure costs, and scale machine learning pipelines efficiently.
 
@@ -25,4 +25,6 @@ To learn more, see the [XGBoost documentation](https://xgboost.readthedocs.io/en
 
 ## What you've learned and what's next
 
-This section introduced Google Axion C4A Arm-based virtual machines and XGBoost as a high-performance machine learning library suited to Arm processors. Next, you'll create a firewall rule to expose the inference API port, then provision a C4A VM for model training and deployment.
+You've now learned about Google Axion C4A Arm-based virtual machines and XGBoost as a high-performance machine learning library suited to Arm processors. 
+
+Next, you'll create a firewall rule to expose the inference API port, then provision a C4A virtual machine for model training and deployment.

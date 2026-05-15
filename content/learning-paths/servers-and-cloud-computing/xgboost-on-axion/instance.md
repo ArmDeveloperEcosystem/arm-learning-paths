@@ -8,11 +8,11 @@ layout: learningpathall
 
 ## Set up the virtual machine
 
-Create a Google Axion C4A Arm-based virtual machine on Google Cloud Platform. This Learning Path uses the `c4a-standard-4` machine type, which provides 4 vCPUs and 16 GB of memory. This VM hosts XGBoost model training, hyperparameter tuning, benchmarking, and the inference API.
+Create a Google Axion C4A Arm-based virtual machine (VM) on Google Cloud Platform. For this Learning Path, you'll use the `c4a-standard-4` machine type, which provides 4 vCPUs and 16 GB of memory. This VM hosts XGBoost model training, hyperparameter tuning, benchmarking, and the inference API.
 
 {{% notice Note %}}For help with GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).{{% /notice %}}
 
-To create a C4A virtual machine in the Google Cloud Console:
+To create a C4A VM in the Google Cloud Console:
 
 1. Navigate to the [Google Cloud Console](https://console.cloud.google.com/).
 2. Go to **Compute Engine** > **VM Instances** and select **Create Instance**.
@@ -38,4 +38,4 @@ A new browser window opens with a terminal connected to your VM.
 
 ## What you've accomplished and what's next
 
-You've provisioned a Google Axion C4A Arm VM and connected to it using SSH. The VM is linked to the firewall rule that exposes port 8080 for the XGBoost inference API. Next, you'll install XGBoost and configure a Python 3.11 environment for model training and benchmarking.
+You've now provisioned a Google Axion C4A Arm VM and connected to it using SSH. The VM is linked to the firewall rule that exposes port 8080 for the XGBoost inference API. Next, you'll install XGBoost and configure a Python 3.11 environment for model training and benchmarking.

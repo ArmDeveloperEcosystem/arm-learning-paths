@@ -12,7 +12,7 @@ Create a firewall rule in Google Cloud Console to expose the required port for t
 
 {{% notice Note %}} For help with GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).{{% /notice %}}
 
-## Configure the firewall rule in Google Cloud Console
+### Configure the firewall rule in Google Cloud Console
 
 To configure a firewall rule for the XGBoost inference API:
 
@@ -53,6 +53,6 @@ Port 8080 is used by the XGBoost inference API for browser-based validation and 
 
 ## What you've accomplished and what's next
 
-You've created a firewall rule to expose the XGBoost inference API externally. You also enabled browser access and remote API connectivity for inference testing.
+You've now created a firewall rule to expose the XGBoost inference API externally. You also enabled browser access and remote API connectivity for inference testing.
 
 Next, you'll create a Google Axion C4A Arm virtual machine and attach it to this firewall rule.
