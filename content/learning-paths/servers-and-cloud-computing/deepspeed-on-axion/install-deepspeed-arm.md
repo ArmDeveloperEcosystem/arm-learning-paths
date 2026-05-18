@@ -10,7 +10,6 @@ layout: learningpathall
 
 In this section, you'll install Python 3.11, create a virtual environment, and install PyTorch and DeepSpeed on the Google Axion virtual machine (VM) running SUSE Linux.
 
-
 ### Verify ARM64 architecture
 
 Verify that the VM is running on Arm64 architecture:
@@ -161,7 +160,7 @@ gcc (SUSE Linux) 7.5.0
 
 When DeepSpeed initializes its launcher, it attempts to compile the `deepspeed_shm_comm` shared memory communication extension. This compilation fails on GCC 7.5.0. To work around this, install DeepSpeed with all native extension compilation disabled. -->
 
-## Install DeepSpeed
+### Install DeepSpeed
 
 DeepSpeed's distributed CPU extensions require GCC 9 or later to compile. The default SUSE Linux image on Google Axion ships with GCC 7.5.0. When DeepSpeed initializes its launcher, it attempts to compile the `deepspeed_shm_comm` shared memory communication extension. This compilation fails on GCC 7.5.0. To work around this, install DeepSpeed with all native extension compilation disabled.
 
@@ -222,7 +221,7 @@ shared memory (/dev/shm) size .... 7.80 GB
 The CPU accelerator warning is expected because Google Axion VMs have no GPU. Most ops show `[NO] ... [OKAY]`, meaning they are not pre-installed but are compatible for just-in-time compilation via Ninja if needed at runtime. The one exception is `async_io`, which shows `[NO] ... [NO]` because it requires the `libaio-devel` system package. Because async I/O isn't needed for the training workloads in this Learning Path, and it was disabled with `DS_BUILD_AIO=0`, you can ignore this warning.
 
 
-## Create a project directory
+### Create a project directory
 
 Create a working directory for your DeepSpeed training scripts:
 
@@ -236,11 +235,13 @@ Don't run `deepspeed train.py` directly on this VM. DeepSpeed's launcher attempt
 {{% /notice %}}
 
 
-## Troubleshooting
+## Troubleshoot setup issues
+
+Use the following guidance to troubleshoot issues with setting up the Python environment for the project.
 
 ### SUSE repository refresh issue
 
-You may see the following error during `zypper` commands:
+You might see the following error during `zypper` commands:
 
 ```output
 Receive: script died unexpectedly

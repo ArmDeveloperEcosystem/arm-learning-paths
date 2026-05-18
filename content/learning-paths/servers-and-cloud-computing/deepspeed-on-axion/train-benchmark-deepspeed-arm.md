@@ -1,5 +1,5 @@
 ---
-title: Train and Benchmark AI workloads an Arm-based Google Axion virtual machine
+title: Train and benchmark AI workloads on an Arm-based Google Axion virtual machine
 weight: 5
 
 ### FIXED, DO NOT MODIFY
