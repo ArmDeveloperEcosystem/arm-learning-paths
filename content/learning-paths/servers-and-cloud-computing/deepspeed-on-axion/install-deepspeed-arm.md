@@ -1,5 +1,5 @@
 ---
-title: Setup PyTorch and DeepSpeed on GCP Axion (Arm)
+title: Set up PyTorch and DeepSpeed on an Arm-based Google Axion virtual machine
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -8,18 +8,18 @@ layout: learningpathall
 
 ## Set up the Python environment
 
-This section walks through installing Python 3.11, creating a virtual environment, and installing PyTorch and DeepSpeed on the GCP Axion VM running SUSE Linux.
+In this section, you'll install Python 3.11, create a virtual environment, and install PyTorch and DeepSpeed on the Google Axion virtual machine (VM) running SUSE Linux.
 
 
-## Verify ARM64 architecture
+### Verify ARM64 architecture
 
-Verify that the VM is running on Arm64 architecture.
+Verify that the VM is running on Arm64 architecture:
 
 ```bash
 uname -m
 ```
 
-Expected output:
+The output is similar to:
 
 ```text
 aarch64
@@ -45,15 +45,15 @@ Vendor ID:                   ARM
 
 The `Neoverse-V2` model name confirms you're running on a Google Axion processor. The `aarch64` architecture confirms the 64-bit Arm environment that PyTorch and DeepSpeed will target.
 
-## Install Python
+### Install Python
 
-The default Python version on SUSE Linux may conflict with PyTorch and DeepSpeed dependencies. Python 3.11 provides stable support for both frameworks and avoids compatibility issues commonly seen with older or newer releases:
+The default Python version on SUSE Linux might conflict with PyTorch and DeepSpeed dependencies. Python 3.11 provides stable support for both frameworks and avoids compatibility issues commonly seen with older or newer releases:
 
 ```bash
 sudo zypper install -y python311 python311-pip python311-devel
 ```
 
-## Create a Python virtual environment
+### Create a Python virtual environment
 
 Create an isolated Python environment to prevent dependency conflicts with system packages:
 
@@ -80,7 +80,7 @@ Python 3.11.10
 ```
 
 
-## Upgrade pip
+### Upgrade pip
 
 Upgrade pip, setuptools, and wheel before installing packages. Outdated packaging tools can cause installation failures or wheel compatibility issues, particularly on Arm64:
 
@@ -88,9 +88,9 @@ Upgrade pip, setuptools, and wheel before installing packages. Outdated packagin
 pip install --upgrade pip setuptools wheel
 ```
 
-## Install Ninja
+### Install Ninja
 
-Ninja is a lightweight build system used by PyTorch and DeepSpeed to compile native extensions at runtime. Install it via pip rather than zypper to avoid SUSE repository dependency issues sometimes seen on cloud Arm64 images:
+Ninja is a lightweight build system used by PyTorch and DeepSpeed to compile native extensions at runtime. Install it using pip rather than zypper to avoid SUSE repository dependency issues sometimes seen on cloud Arm64 images:
 
 ```bash
 pip install ninja
@@ -108,9 +108,9 @@ The output is similar to:
 1.13.0.git.kitware.jobserver-pipe-1
 ```
 
-## Install CPU-only PyTorch
+### Install CPU-only PyTorch
 
-GCP Axion VMs have no GPU, so install the CPU-only PyTorch build. This avoids unnecessary CUDA dependencies and reduces package size:
+Google Axion VMs have no GPU, so install the CPU-only PyTorch build. This avoids unnecessary CUDA dependencies and reduces package size:
 
 ```bash
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
@@ -127,7 +127,7 @@ The CPU-only build:
 - Improves installation stability
 - Matches the Axion hardware architecture
 
-## Verify PyTorch installation
+### Verify PyTorch installation
 
 ```bash
 python -c "import torch; print(torch.__version__)"
