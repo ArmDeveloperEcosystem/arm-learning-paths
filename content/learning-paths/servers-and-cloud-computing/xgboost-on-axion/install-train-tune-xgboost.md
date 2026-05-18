@@ -41,7 +41,7 @@ Verify that Python 3.11 is installed correctly:
 python3.11 --version
 ```
 
-### Create a Python environment
+### Create a Python virtual environment
 
 Create a dedicated project directory and an isolated Python virtual environment for the XGBoost Learning Path. Using a virtual environment keeps the XGBoost packages separate from the system Python installation:
 
@@ -55,7 +55,7 @@ source xgb-env/bin/activate
 
 The virtual environment helps isolate Python packages from the system installation.
 
-#### Upgrade pip
+### Upgrade pip
 
 Upgrade pip, setuptools, and wheel to ensure compatibility with the latest Python packages and build dependencies:
 
@@ -63,7 +63,7 @@ Upgrade pip, setuptools, and wheel to ensure compatibility with the latest Pytho
 pip install --upgrade pip setuptools wheel
 ```
 
-#### Create a requirements file
+### Create a requirements file
 
 Create a requirements file listing the Python packages needed for XGBoost training and benchmarking:
 
@@ -78,7 +78,7 @@ joblib
 EOF
 ```
 
-#### Install machine learning dependencies
+### Install machine learning dependencies
 
 Install all machine learning dependencies inside the virtual environment:
 
