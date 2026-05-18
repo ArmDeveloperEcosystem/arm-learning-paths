@@ -8,18 +8,18 @@ layout: learningpathall
 
 ## Install and configure XGBoost on SUSE Linux
 
-In this section, you'll install XGBoost on a GCP Axion Arm64 VM running SUSE Linux with Python 3.11, train a machine learning model, and tune model performance using hyperparameter optimization.
+In this section, you'll install XGBoost on a Google Axion Arm64 VM running SUSE Linux with Python 3.11. You'll then train a machine learning model and tune model performance using hyperparameter optimization.
 
-### Update the system
+### Update system packages
 
-Update all system packages before installing Python and machine learning dependencies. This avoids package conflicts and ensures the latest security updates are applied:
+Update all system packages before installing Python and machine learning dependencies. By updating packages, you can avoid package conflicts and ensure the latest security updates are applied:
 
 ```bash
 sudo zypper refresh
 sudo zypper update -y
 ```
 
-### Install required dependencies
+### Install XGBoost dependencies
 
 Install Python 3.11, development libraries, and build tools required for XGBoost:
 
@@ -35,7 +35,7 @@ sudo zypper install -y \
   wget
 ```
 
-Verify that Python 3.11 is installed correctly.
+Verify that Python 3.11 is installed correctly:
 
 ```bash
 python3.11 --version
@@ -55,7 +55,7 @@ source xgb-env/bin/activate
 
 The virtual environment helps isolate Python packages from the system installation.
 
-### Upgrade pip
+#### Upgrade pip
 
 Upgrade pip, setuptools, and wheel to ensure compatibility with the latest Python packages and build dependencies:
 
@@ -63,7 +63,7 @@ Upgrade pip, setuptools, and wheel to ensure compatibility with the latest Pytho
 pip install --upgrade pip setuptools wheel
 ```
 
-### Create a requirements file
+#### Create a requirements file
 
 Create a requirements file listing the Python packages needed for XGBoost training and benchmarking:
 
@@ -78,7 +78,7 @@ joblib
 EOF
 ```
 
-### Install dependencies
+#### Install machine learning dependencies
 
 Install all machine learning dependencies inside the virtual environment:
 
@@ -86,7 +86,7 @@ Install all machine learning dependencies inside the virtual environment:
 pip install -r requirements.txt
 ```
 
-Verify that XGBoost is installed correctly.
+Verify that XGBoost is installed correctly:
 
 ```bash
 python -c "import xgboost; print(xgboost.__version__)"
@@ -190,7 +190,7 @@ drwxr-xr-x  5 user user 4.0K May 13 10:20 xgb-env
 
 The `.json` and `.pkl` files are the trained model artifacts used later for inference API deployment.
 
-## Use hyperparameter tuning to optimize model
+## Use GridSearchCV to tune hyperparameters
 
 In this step, you'll optimize model performance using GridSearchCV and multiple hyperparameter combinations.
 
@@ -259,7 +259,7 @@ In this step, you'll benchmark XGBoost training performance using a larger synth
 
 The benchmark simulates large-scale tabular machine learning workloads on the GCP Axion Arm64 processor.
 
-### Create benchmark
+### Create the benchmark script
 
 Create benchmark script:
 
@@ -293,7 +293,7 @@ print(f"\nBenchmark completed in {end - start:.2f} seconds")
 EOF
 ```
 
-### Run benchmark
+### Run the benchmark script
 
 Run the benchmark script to measure large-scale training performance on Arm64.
 
@@ -311,6 +311,6 @@ The benchmark used a synthetic dataset of 500,000 samples and 50 features. Your 
 
 ## What you've accomplished and what's next
 
-You've now installed XGBoost on a GCP Axion Arm64 VM, trained a classification model on the breast cancer dataset, tuned hyperparameters with GridSearchCV, and benchmarked large-scale training performance. 
+You've now installed XGBoost on a GCP Axion Arm64 VM, trained and saved a classification model on the breast cancer dataset, tuned hyperparameters with GridSearchCV, and benchmarked large-scale training performance. 
 
 Next, you'll deploy the trained model as a Flask inference API and access it from your browser using the VM public IP.

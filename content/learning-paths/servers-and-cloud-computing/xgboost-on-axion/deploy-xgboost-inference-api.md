@@ -1,16 +1,16 @@
 ---
-title: Deploy and access XGBoost inference API
+title: Deploy and access an XGBoost inference API
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Deploy XGBoost inference API on SUSE Linux
+## Run the XGBoost inference API on SUSE Linux
 
-In this section, you deploy the trained XGBoost model as a Flask-based inference API on the GCP Axion Arm64 VM and test it with a sample prediction request.
+In this section, you'll deploy the trained XGBoost model as a Flask-based inference API on the Google Axion Arm64 VM and test it with a sample prediction request.
 
-Navigate to the XGBoost project directory and activate the virtual environment:
+Navigate to the XGBoost project directory and make sure the virtual environment is active:
 
 ```bash
 cd ~/xgboost-learning-path
@@ -133,7 +133,7 @@ The page displays the HTML response from the `/` route, confirming the API is ru
 
 ### Test inference
 
-Send a prediction request to the `/predict` endpoint using `curl`. The input data is a 30-feature vector from the breast cancer dataset — the same format used during training. The `features` array must contain exactly 30 values to match the model's expected input shape:
+Send a prediction request to the `/predict` endpoint using `curl`. The input data is a 30-feature vector from the breast cancer dataset — the same format used during training. The `features` array must contain exactly 30 values to match the model's expected input shape. For example:
 
 ```bash
 curl -X POST http://127.0.0.1:8080/predict \
@@ -147,8 +147,8 @@ The output is similar to:
 {"prediction":0}
 ```
 
-A prediction of `0` corresponds to a malignant classification in the breast cancer dataset (where `0` = malignant, `1` = benign). The model received the feature array, ran inference, and returned the result through the REST API.
+A prediction of `0` corresponds to a malignant classification in the breast cancer dataset, and a prediction of `1` corresponds to a benign classification. The model received the feature array, ran inference, and returned the result through the REST API.
 
 ## What you've accomplished 
 
-You've successfully deployed a trained XGBoost model as a Flask REST API on a GCP Axion Arm64 VM, confirmed browser access through the external IP, and validated inference with a live prediction request. 
+You've successfully deployed a trained XGBoost model as a Flask REST API on a Google Axion Arm64 VM, confirmed browser access through the external IP, and validated inference with a live prediction request. 
