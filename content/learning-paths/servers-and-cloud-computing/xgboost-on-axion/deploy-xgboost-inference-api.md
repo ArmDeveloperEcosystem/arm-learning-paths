@@ -10,7 +10,7 @@ layout: learningpathall
 
 In this section, you'll deploy the trained XGBoost model as a Flask-based inference API on the Google Axion Arm64 VM and test it with a sample prediction request.
 
-Navigate to the XGBoost project directory and make sure the virtual environment is active:
+If you're continuing in the same SSH session from the previous section, the `xgb-env` virtual environment is already active and your working directory is `~/xgboost-learning-path`. If you've opened a new session, re-activate the environment and navigate to the project directory:
 
 ```bash
 cd ~/xgboost-learning-path
