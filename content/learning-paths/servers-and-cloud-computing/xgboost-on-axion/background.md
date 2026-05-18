@@ -11,7 +11,7 @@ Google Axion C4A is a family of Arm-based virtual machines built on Google’s c
 
 The C4A series provides a cost-effective alternative to x86 virtual machines while benefiting from the scalability and performance of Arm architecture in Google Cloud.
 
-To learn more, see the Google blog [C4A VMs now GA: Our first custom Arm-based Axion CPU](https://cloud.google.com/blog/products/compute/try-c4a-the-first-google-axion-processor).
+To learn more, see the Google blog [Introducing Google Axion Processors, our new Arm-based CPUs](https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu).
 
 ## XGBoost for scalable machine learning on Arm
 
