@@ -12,10 +12,10 @@ The **Simple Tensor and Data Graph** sample is your starting point for working w
 
 ## Clone the Vulkan Samples
 
-With the environment set up, you can now grab the sample code. These examples are maintained in a fork of the Khronos Group's repository.
+With the environment set up, you can now grab the sample code. These examples sit in the the Khronos Group's repository.
 
 ```bash
-git clone --recurse-submodules https://github.com/ARM-software/Vulkan-Samples --branch tensor_and_data_graph
+git clone --recurse-submodules https://github.com/KhronosGroup/Vulkan-Samples.git
 cd Vulkan-Samples
 ```
 
