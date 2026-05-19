@@ -1,5 +1,5 @@
 ---
-title: Set up PyTorch and DeepSpeed on an Arm-based Google Axion virtual machine
+title: Set up PyTorch and DeepSpeed on a Google Axion C4A virtual machine
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Set up the Python environment
 
-In this section, you'll install Python 3.11, create a virtual environment, and install PyTorch and DeepSpeed on the Google Axion virtual machine (VM) running SUSE Linux.
+First, install Python 3.11 and create a virtual environment on the Google Axion virtual machine (VM) running SUSE Linux.
 
-### Verify ARM64 architecture
+### Verify Arm64 architecture
 
 Verify that the VM is running on Arm64 architecture:
 
@@ -60,13 +60,13 @@ Create an isolated Python environment to prevent dependency conflicts with syste
 python3.11 -m venv deepspeed-env
 ```
 
-Activate environment:
+Activate the virtual environment:
 
 ```bash
 source ~/deepspeed-env/bin/activate
 ```
 
-Verify:
+Verify the Python version in the environment:
 
 ```bash
 python --version
@@ -91,7 +91,7 @@ pip install --upgrade pip setuptools wheel
 
 Ninja is a lightweight build system used by PyTorch and DeepSpeed to compile native extensions at runtime. 
 
-To avoid SUSE repository dependency issues sometimes seen on cloud Arm64 images, install Ninja using pip rather than zypper:
+To avoid SUSE repository dependency issues sometimes seen on cloud Arm64 images, install Ninja using `pip` rather than `zypper`:
 
 ```bash
 pip install ninja
@@ -108,6 +108,9 @@ The output is similar to:
 ```output
 1.13.0.git.kitware.jobserver-pipe-1
 ```
+## Install PyTorch and DeepSpeed
+
+After setting up the Python environment, install PyTorch and DeepSpeed on the VM.
 
 ### Install CPU-only PyTorch
 
@@ -145,26 +148,11 @@ False
 
 This is expected because Google Axion VMs are CPU-only systems.
 
-
-<!-- ## DeepSpeed limitation on SUSE Arm64
-
-DeepSpeed's distributed CPU extensions require GCC 9 or later to compile. The default SUSE Linux image on Google Axion ships with GCC 7.5.0:
-
-```bash
-gcc --version
-```
-
-```output
-gcc (SUSE Linux) 7.5.0
-```
-
-When DeepSpeed initializes its launcher, it attempts to compile the `deepspeed_shm_comm` shared memory communication extension. This compilation fails on GCC 7.5.0. To work around this, install DeepSpeed with all native extension compilation disabled. -->
-
 ### Install DeepSpeed
 
-DeepSpeed's distributed CPU extensions require GCC 9 or later to compile. The default SUSE Linux image on Google Axion ships with GCC 7.5.0. When DeepSpeed initializes its launcher, it attempts to compile the `deepspeed_shm_comm` shared memory communication extension. This compilation fails on GCC 7.5.0. To work around this, install DeepSpeed with all native extension compilation disabled.
+DeepSpeed's distributed CPU extensions require GCC 9 or later to compile. The default SUSE Linux image on Google Axion ships with GCC 7.5.0. When DeepSpeed initializes its launcher, it attempts to compile the `deepspeed_shm_comm` shared memory communication extension. This compilation fails on GCC 7.5.0. 
 
-Install DeepSpeed with native extension compilation disabled. Each variable tells the build system to skip a specific extension that requires GCC 9 or later:
+To work around this, install DeepSpeed with all native extension compilation disabled. Each variable tells the build system to skip a specific extension that requires GCC 9 or later:
 
 | Variable | Purpose |
 |---|---|
@@ -177,8 +165,9 @@ Install DeepSpeed with native extension compilation disabled. Each variable tell
 DS_BUILD_OPS=0 DS_BUILD_SHM_COMM=0 DS_BUILD_CPU_ADAM=0 DS_BUILD_AIO=0 pip install deepspeed
 ```
 
+### Verify DeepSpeed installation
 
-Verify DeepSpeed installation:
+Verify that DeepSpeed was installed successfully:
 
 ```bash
 ds_report
@@ -218,10 +207,10 @@ deepspeed wheel compiled w. ...... torch 0.0
 shared memory (/dev/shm) size .... 7.80 GB
 ```
 
-The CPU accelerator warning is expected because Google Axion VMs have no GPU. Most ops show `[NO] ... [OKAY]`, meaning they are not pre-installed but are compatible for just-in-time compilation via Ninja if needed at runtime. The one exception is `async_io`, which shows `[NO] ... [NO]` because it requires the `libaio-devel` system package. Because async I/O isn't needed for the training workloads in this Learning Path, and it was disabled with `DS_BUILD_AIO=0`, you can ignore this warning.
+The CPU accelerator warning is expected because Google Axion VMs have no GPU. Most ops show `[NO] ... [OKAY]`, meaning they are not pre-installed but are compatible for just-in-time compilation with Ninja if needed at runtime. The one exception is `async_io`, which shows `[NO] ... [NO]` because it requires the `libaio-devel` system package. Because async I/O isn't needed for the training workloads in this Learning Path, and it was disabled with `DS_BUILD_AIO=0`, you can ignore this warning.
 
 
-### Create a project directory
+## Create a project directory
 
 Create a working directory for your DeepSpeed training scripts:
 
@@ -252,6 +241,6 @@ If Python 3.11 is already installed when this occurs, you can continue. Install 
 
 ## What you've accomplished and what's next
 
-You've now installed Python 3.11, PyTorch, and DeepSpeed on a Google Axion Arm64 VM running SUSE Linux, verified the environment with `ds_report`, and created the project directory for training scripts.
+You've now installed Python 3.11, PyTorch, and DeepSpeed on a Google Axion C4A VM running SUSE Linux, verified the environment with `ds_report`, and created the project directory for training scripts.
 
-Next, you'll create and run neural network training and benchmarking workloads on the Axion processor.
+Next, you'll create and run neural network training and benchmarking workloads on the VM.

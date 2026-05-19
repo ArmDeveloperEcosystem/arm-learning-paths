@@ -19,9 +19,9 @@ DeepSpeed is an open-source deep learning optimization framework developed by Mi
 
 By running DeepSpeed on Google Axion C4A Arm-based infrastructure, you can perform efficient CPU-based AI training and benchmarking with multi-core Arm processors and optimized memory performance. This improves performance-per-watt and reduces infrastructure costs.
 
-On SUSE Linux Enterprise Server Arm64 environments, some DeepSpeed native CPU communication extensions require GCC 9 or later to compile. The default SUSE image ships with GCC 7.5.0, so in this Learning Path, you'll install DeepSpeed in compatibility mode alongside PyTorch CPU execution. This provides a stable and reproducible AI training and benchmarking environment.
+On SUSE Linux Enterprise Server Arm64 environments, some DeepSpeed native CPU communication extensions require GCC 9 or later to compile. Because the default SUSE image ships with GCC 7.5.0., you'll install DeepSpeed in compatibility mode alongside PyTorch CPU execution. This provides a stable and reproducible AI training and benchmarking environment.
 
-Common use cases include neural network training, AI benchmarking, scalable experimentation pipelines, and CPU-based inference validation.
+Common use cases of DeepSpeed include neural network training, AI benchmarking, scalable experimentation pipelines, and CPU-based inference validation.
 
 To learn more, see the [DeepSpeed documentation](https://www.deepspeed.ai/) and the [DeepSpeed GitHub repository](https://github.com/microsoft/DeepSpeed).
 
@@ -29,4 +29,4 @@ To learn more, see the [DeepSpeed documentation](https://www.deepspeed.ai/) and 
 
 You've now learned about Google Axion C4A Arm-based virtual machines and DeepSpeed as a scalable AI training framework suited to Arm processors. 
 
-Next, you'll provision a C4A virtual machine and install PyTorch and DeepSpeed to begin running training and benchmarking workloads.
+Next, you'll provision a C4A virtual machine, then install PyTorch and DeepSpeed to run training and benchmarking workloads.

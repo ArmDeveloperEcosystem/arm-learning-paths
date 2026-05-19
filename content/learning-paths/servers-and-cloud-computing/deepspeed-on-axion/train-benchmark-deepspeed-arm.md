@@ -6,9 +6,9 @@ weight: 5
 layout: learningpathall
 ---
 
-## Train and benchmark AI workloads
+## Prepare training and benchmarking AI workloads
 
-In this section, you'll train neural network training and benchmarking on Google Axion Arm64 processors using PyTorch. You'll run two workloads: a small baseline model to verify the environment, and a larger benchmark to evaluate CPU scaling behavior.
+In this section, you'll run neural network training and benchmarking workloads on an Arm-based Google Axion C4A VM using PyTorch. You'll run two workloads: a small baseline model to verify the environment, and a larger benchmark to evaluate CPU scaling behavior.
 
 If you're continuing in the same SSH session from the previous section, the `deepspeed-env` virtual environment is already active and your working directory is `~/deepspeed-demo`. If you've opened a new session, re-activate the environment and navigate to the project directory:
 
@@ -22,7 +22,7 @@ First, create and run a baseline model to verify the environment.
 
 ### Create a baseline training workload
 
-Create a lightweight neural network training script to verify the environment. The script defines a three-layer feedforward network, generates synthetic training data, runs five epochs of mini-batch gradient descent using the Adam optimizer, and prints the total training time:
+Create a lightweight neural network training script to verify the environment. The script defines a three-layer feedforward network and generates synthetic training data. It runs five epochs of mini-batch gradient descent using the Adam optimizer, and prints the total training time:
 
 ```bash
 cat > train.py << 'EOF'
@@ -205,15 +205,17 @@ EOF
 
 To observe CPU utilization while this runs, open a second terminal and run `top`. Look for the Python process — the CPU percentage reflects multi-threaded utilization across all 4 vCPUs.
 
-### Run the large benchmark 
+### Run the large benchmark with timing
+
+Run the benchmark script under `time`:
 
 ```bash
 time python train_large.py | tee pytorch_large_result.txt
 ```
 
-Expected output:
+The output is similar to:
 
-```text
+```output
 Epoch 1, Loss: 319.07712411880493
 Epoch 2, Loss: 308.4675619006157
 Epoch 3, Loss: 273.5877128839493
@@ -226,11 +228,15 @@ user    0m19.630s
 sys     0m0.251s
 ```
 
-Training time scales roughly linearly with dataset size and model depth. The `user` time being approximately 4x `real` time confirms that PyTorch is distributing work across all 4 vCPUs effectively.
+Training time scales roughly linearly with dataset size and model depth. The `user` time being approximately 4x `real` time indicates that PyTorch is distributing work across all 4 vCPUs effectively.
 
-## Verify generated files for both workloads
+## Review benchmark outputs
 
-After both scripts complete, confirm the output files are present:
+After both scripts complete, review the timing outputs and compare the two workloads.
+
+### Verify generated files for both workloads
+
+Confirm that the output files are present:
 
 ```bash
 ls -lh
@@ -245,14 +251,16 @@ The output is similar to:
 -rw-r--r-- 1 user user 1.2K May 15 13:48 train_large.py
 ```
 
-## Benchmark summary
+### Compare training times
+
+The following table describes approximate training times:
 
 | Workload | Approximate training time |
 |---|---|
 | Baseline model (5K samples, 128 features) | ~0.7–0.8 seconds |
 | Large benchmark (20K samples, 512 features) | ~4.8–5.4 seconds |
 
-Both workloads trained to completion with steadily decreasing loss, confirming stable PyTorch CPU execution on GCP Axion Arm64. Your results may vary depending on VM load at the time of the run.
+Both workloads trained to completion with steadily decreasing loss, indicating stable PyTorch CPU execution on Google Axion C4A. Your results may vary depending on VM load at the time of the run.
 
 ## What you've accomplished
 
