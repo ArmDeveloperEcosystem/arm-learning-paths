@@ -101,5 +101,6 @@ The output for macOS is similar to:
 Terraform v1.14.9
 on darwin_arm64
 ```
+## Next steps
 
 You are now ready to use Terraform. You can explore Learning Paths to work with Terraform on Arm, such as [Deploy Arm virtual machines on Google Cloud Platform (GCP) using Terraform](/learning-paths/servers-and-cloud-computing/gcp/) and [Deploy Arm instances on AWS using Terraform](/learning-paths/servers-and-cloud-computing/aws-terraform/).
