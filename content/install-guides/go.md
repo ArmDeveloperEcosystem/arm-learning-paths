@@ -79,4 +79,4 @@ The output is similar to:
 go version go1.24.5 linux/arm64
 ```
 
-You are now ready to use the Go programming language on your Arm machine running Ubuntu.
+You are now ready to use the Go programming language on your Arm machine running Ubuntu. You can explore Learning Paths for working with Go on Arm, such as [Deploy Golang on Azure Cobalt 100 on Arm](/learning-paths/servers-and-cloud-computing/golang-on-azure/) and [Benchmark Go performance with Sweet and Benchstat](/learning-paths/servers-and-cloud-computing/go-benchmarking-with-sweet/).
