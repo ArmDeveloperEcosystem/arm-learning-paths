@@ -1,21 +1,22 @@
 ---
-title: Go deeper with TOSA artifacts
+title: Inspect TOSA artifacts
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Why look at TOSA?
+## Understand the role of TOSA
 
-The primary workflow in this Learning Path is PyTorch export to `.vgf` with the ExecuTorch VGF backend. If you want to understand what happens in the middle, TOSA is the stable intermediate representation (IR) between PyTorch export and backend-specific artifacts such as `.vgf`.
+The primary workflow in this Learning Path is PyTorch export to `.vgf` with the ExecuTorch VGF backend. If you want to understand what happens in the middle, Tensor Operator Set Architecture (TOSA) is the stable intermediate representation (IR) between PyTorch export and backend-specific artifacts such as `.vgf`.
 
-Extracting TOSA helps you:
+By extracting TOSA, you can:
+
 - Check operator lowering before backend compilation
 - Confirm tensor layout and shape flow
 - Compare behavior when different backends produce different results
 
-This is especially useful when you debug export issues before deployment to NX-enabled pipelines, but you do not need to start here for the normal model preparation workflow.
+This is especially useful when you debug export issues before deployment to NX-enabled pipelines, but you don't need to start here for the normal model preparation workflow.
 
 ## Dump TOSA for the exported model
 
@@ -70,7 +71,7 @@ python dump_tosa.py
 
 You should now have one or more `.tosa` files under `tosa-dump/` for inspection.
 
-## Optional: Convert TOSA to VGF with `model_converter`
+## (Optional) Convert TOSA to VGF with model_converter
 
 The ExecuTorch VGF backend is the recommended path in this Learning Path. When you need to compare the intermediate TOSA route explicitly, create a Python file named `convert_tosa_to_vgf.py`:
 
@@ -104,3 +105,21 @@ python convert_tosa_to_vgf.py
 ```
 
 You can now compare the direct ExecuTorch VGF backend output with the `.vgf` generated from TOSA.
+
+## What you've accomplished
+
+You've now completed a manual model preparation workflow for Arm neural technology. You set up the ExecuTorch environment and created and exported an `AddSigmoid` PyTorch reference model. You then lowered it with the ExecuTorch VGF backend, generated `.vgf` and `.pte` artifacts, validated the output with an ExecuTorch runner, and inspected the generated graph in Model Explorer. You also learned where TOSA fits in the workflow.
+
+In addition to Model Gym for higher-level training, evaluation, and export workflows, you now have this manual ExecuTorch flow. 
+
+Use [Model Gym](/learning-paths/mobile-graphics-and-gaming/model-training-gym/) when you want to:
+- Fine-tune NSS quickly
+- Work through notebook-based training and evaluation
+- Standardize export pipelines with less backend-level tuning
+
+Use the manual flow from this Learning Path when you need to:
+- Debug export correctness at the TOSA level
+- Control backend partitioning and artifact generation
+- Validate backend/runtime behavior with custom test graphs
+- Build confidence with a toy model before moving to Scenario Runner or engine-level validation
+
