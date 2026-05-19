@@ -1,5 +1,5 @@
 ---
-title: Train and benchmark AI Workloads with DeepSpeed on Google Cloud C4A Axion VMs
+title: Train and benchmark AI workloads with DeepSpeed on Google Cloud C4A Axion VMs
     
 description: Set up PyTorch and DeepSpeed on Google Cloud C4A Axion Arm VMs running SUSE Linux to train neural network models, benchmark AI workloads, and validate scalable CPU-based AI execution on Arm64 processors.
 
