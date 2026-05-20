@@ -16,19 +16,28 @@ Package manager versions might be older, so verify the installed version before 
 
 Install BOLT from a prebuilt [LLVM release](https://github.com/llvm/llvm-project/releases).
 This method provides a consistent version across systems. It also lets you use newer releases when available.
-The following example uses LLVM 22.1.0.
+The following example uses LLVM 22.1.5, the latest LLVM release available at the time of writing (May 2026).
+
+{{% notice Please Note %}}
+
+If you are using a 1st generation Arm AGI CPU, we recommend installing the latest LLVM release to ensure support for the processor. However due to backwards compatibility, LLVM BOLT 22.1.0 or later can still be used to complete this learning path.
+
+Arm AGI CPU support is expected to be introduced no earlier than LLVM 23. 
+
+{{% /notice %}}
+
 
 Download and extract LLVM:
 
 ```bash
-wget https://github.com/llvm/llvm-project/releases/download/llvmorg-22.1.0/LLVM-22.1.0-Linux-ARM64.tar.xz
-tar xf LLVM-22.1.0-Linux-ARM64.tar.xz
+wget https://github.com/llvm/llvm-project/releases/download/llvmorg-22.1.5/LLVM-22.1.5-Linux-ARM64.tar.xz
+tar xf LLVM-22.1.5-Linux-ARM64.tar.xz
 ```
 
 Add LLVM tools to your PATH:
 
 ```bash
-export PATH="$(pwd)/LLVM-22.1.0-Linux-ARM64/bin:$PATH"
+export PATH="$(pwd)/LLVM-22.1.5-Linux-ARM64/bin:$PATH"
 ```
 
 
