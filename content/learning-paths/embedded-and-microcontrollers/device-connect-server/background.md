@@ -70,7 +70,7 @@ Both answer the same question: is this identity allowed on this mesh?
 
 ### What you'll use in this Learning Path
 
-In this Learning Path, you'll use the [Device Connect portal](https://portal.deviceconnect.dev/) to download NATS credentials for three default identities on your tenant. The primary identity runs on a Raspberry Pi 5, the second identity runs on your development machine as another device, and the third identity runs the Python client or agent.
+In this Learning Path, you'll use the [Device Connect portal](https://portal.deviceconnect.dev/) to download NATS credentials for three default identities on your tenant. The primary identity is shown running on a Raspberry Pi 5, the second identity runs on your development machine as another device, and the third identity runs the Python client or agent. You can use another device, or run the primary identity on your development machine as a simulated device.
 
 ## Multi-network deployment architecture
 
@@ -111,7 +111,7 @@ In the rest of this Learning Path you'll:
 
 - sign in to the Device Connect portal and identify your tenant slug
 - download credentials for the three default device identities
-- run a Raspberry Pi 5 primary device and a secondary device with `device-connect-edge`
+- run an example primary device and a secondary device with `device-connect-edge`
 - discover and invoke both devices from a Python client using `device-connect-agent-tools`
 - optionally attach a Strands AI agent to the same tenant
 

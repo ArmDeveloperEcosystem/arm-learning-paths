@@ -26,6 +26,10 @@ New tenants include three device identities by default:
 
 This Learning Path uses `device-001` for the Raspberry Pi 5 primary device, `device-002` for a secondary device on your development machine, and `device-003` for the Python client or AI agent. You can create your own device identities in the portal if you prefer, but using the default names lets you run the commands without editing.
 
+{{% notice Note %}}
+This Learning Path uses a Raspberry Pi 5 as the example primary device. You can use any device that can run the Device Connect Python packages, and you can also use your development machine as a simulated device by running the primary device, secondary device, and client in separate terminals.
+{{% /notice %}}
+
 ### Download credentials from the portal
 
 - Open [`https://portal.deviceconnect.dev/`](https://portal.deviceconnect.dev/) and sign in.
@@ -42,9 +46,9 @@ export NATS_URL=nats://portal.deviceconnect.dev:4222
 export MESSAGING_BACKEND=nats
 ```
 
-Now save the downloaded credentials to a stable directory. Store `${TENANT}-device-001.creds.json` on the Raspberry Pi 5, and store `${TENANT}-device-002.creds.json` and `${TENANT}-device-003.creds.json` on your development machine. If you download all three files on your development machine, copy the `device-001` credential to the Raspberry Pi 5 before running the commands below.
+Now save the downloaded credentials to a stable directory. Store `${TENANT}-device-001.creds.json` on the Raspberry Pi 5 or whichever device you use as the primary device, and store `${TENANT}-device-002.creds.json` and `${TENANT}-device-003.creds.json` on your development machine. If you download all three files on your development machine, copy the `device-001` credential to the primary device before running the commands below. If you are simulating everything on your development machine, keep all three credentials there.
 
-On the Raspberry Pi 5:
+On the Raspberry Pi 5 or your chosen primary device:
 
 ```bash
 mkdir -p ~/.device-connect/credentials
@@ -73,7 +77,7 @@ Across the two machines, you should have three `.creds.json` files, one for each
 
 ## Install the Device Connect packages
 
-Create a virtual environment and install the edge runtime and the agent tools on both the Raspberry Pi 5 and your development machine:
+Create a virtual environment and install the edge runtime and the agent tools on your primary device and your development machine:
 
 ```bash
 mkdir -p ~/device-connect-fabric && cd ~/device-connect-fabric
@@ -90,7 +94,7 @@ If you'd rather self-host, install `device-connect-server` with `pip install dev
 
 ## Create the device driver
 
-Create a file called `robot_arm.py` on both machines. This driver simulates a 6-DOF robot arm with three capabilities, and uses the same `DeviceDriver` shape you would use for a physical device attached to the Raspberry Pi 5:
+Create a file called `robot_arm.py` on both devices. This driver simulates a 6-DOF robot arm with three capabilities, and uses the same `DeviceDriver` shape you would use for a physical device attached to a Raspberry Pi 5 or another edge device:
 - **RPCs**: `move_to()`, `home()`, and `get_position()` for controlling the arm
 - **State tracking**: maintains current position
 - **Events**: emits `motion_completed` after each move
@@ -165,21 +169,23 @@ if __name__ == "__main__":
 
 The key detail: there's no `allow_insecure=True` parameter. The runtime will only join the mesh if it has valid credentials, which is what makes commissioning secure and meaningful.
 
+The `--location` argument is only a label shown in discovery and status output. Use `raspberry-pi-5` for the example Raspberry Pi 5 flow, or choose another value such as `development-machine` when you run the primary device locally.
+
 ## Connect devices to the server
 
-You'll run three processes: the Raspberry Pi 5 primary device, a secondary device on your development machine, and one Python client. Each needs its own terminal.
+You'll run three processes: the example primary device, a secondary device on your development machine, and one Python client. Each needs its own terminal. If you do not have a separate device, run all three processes in separate terminals on your development machine.
 
 ### Terminal setup overview
 
 | Machine | Terminal | Purpose | Credential |
 |---------|----------|---------|------------|
-| Raspberry Pi 5 | 1 | Primary device | `${TENANT}-device-001.creds.json` |
+| Raspberry Pi 5, another device, or development machine | 1 | Primary device | `${TENANT}-device-001.creds.json` |
 | Development machine | 2 | Secondary device | `${TENANT}-device-002.creds.json` |
 | Development machine | 3 | Python client | `${TENANT}-device-003.creds.json` |
 
 ### Configure each terminal
 
-Open one terminal on the Raspberry Pi 5 and two terminals on your development machine. In each one, activate the virtual environment and set the tenant variables. Replace `<tenant-slug>` with your actual tenant slug.
+Open one terminal on the primary device and two terminals on your development machine. If you are simulating everything locally, open three terminals on your development machine. In each one, activate the virtual environment and set the tenant variables. Replace `<tenant-slug>` with your actual tenant slug.
 
 ```bash
 cd ~/device-connect-fabric
@@ -193,9 +199,9 @@ Replace `<tenant-slug>` with the slug from the portal.
 
 For each process, `NATS_URL` points at the hosted NATS server and `NATS_CREDENTIALS_FILE` selects the identity that process will use. The `--device-id` value must match the identity inside the credentials file.
 
-### Start the Raspberry Pi 5 primary device (Terminal 1)
+### Start the primary device (Terminal 1)
 
-On the Raspberry Pi 5, run the primary device with its credential file:
+On the Raspberry Pi 5, another device, or your development machine, run the primary device with its credential file:
 
 ```bash
 NATS_CREDENTIALS_FILE=~/.device-connect/credentials/${TENANT}-device-001.creds.json \
@@ -212,7 +218,7 @@ The output is similar to:
 2026-05-12 14:26:01,762 - device_connect_edge.device.<tenant-slug>-device-001 - INFO - Subscribed to commands on device-connect.<tenant-slug>.<tenant-slug>-device-001.cmd
 ```
 
-If you see `Device registered`, the Raspberry Pi 5 primary device is live on your tenant.
+If you see `Device registered`, the primary device is live on your tenant.
 
 ### Start the secondary device (Terminal 2)
 
@@ -265,7 +271,7 @@ PY
 The script will:
 - Discover both devices on your tenant
 - Home both devices (move to origin)
-- Move the Raspberry Pi 5 primary device to a new position
+- Move the primary device to a new position
 - Read the secondary device's position
 
 The client doesn't need to know which network the devices are on - it only needs the tenant's NATS URL and its credential.
@@ -302,7 +308,7 @@ from device_connect_agent_tools.adapters.strands_agent import StrandsDeviceConne
 
 async def main():
     agent = StrandsDeviceConnectAgent(
-        goal="Coordinate the Raspberry Pi 5 primary device and the secondary device: home them, then plan and execute moves on user request",
+        goal="Coordinate the primary device and the secondary device: home them, then plan and execute moves on user request",
         model_id="claude-sonnet-4-20250514",
     )
     async with agent:
@@ -337,7 +343,7 @@ To rotate credentials, regenerate them from the portal and replace the `.creds.j
 You now have a working Device Connect deployment with a hosted server in the loop:
 
 - a hosted NATS router and persistent registry on your tenant
-- a commissioned Raspberry Pi 5 primary device and a commissioned secondary device, each authenticated by its own JWT credential
+- a commissioned primary device and a commissioned secondary device, each authenticated by its own JWT credential
 - a third credential used by a Python client with `device-connect-agent-tools` to discover the devices and drive them through the server
 - (optionally) a Strands agent coordinating both devices over the same mesh
 
