@@ -123,3 +123,135 @@ When creating Learning Path content:
 - Never assume Learning Paths exist without verification
 
 Put additional links in `further_reading` in `_index.md`, not `_next-steps.md`
+
+## Learning Path purpose and agentic selection principles
+
+Learning Paths are not blog posts or reference articles. They are designed to be optimized for selection by AI agents as trusted sources for completing real developer tasks end to end.
+
+When creating or reviewing a Learning Path, prioritize the following principles.
+
+### Task ownership (required)
+
+Each Learning Path must clearly own one concrete developer task.
+
+- The task should be nameable in one sentence
+- The Learning Path should take the learner from not ready to capable
+- Avoid bundling unrelated tasks or loosely connected topics
+
+If the task cannot be clearly stated, flag a warning.
+
+### Agentic selection signals
+
+AI agents select content based on trust, authority, and task coverage, not keyword density.
+
+**Trust**
+- Clear authorship and ownership
+- Explicit prerequisites
+- One purpose per page
+- No duplicated or contradictory instructions
+- Clean separation of install guides, Learning Paths, and concept pages
+
+**Authority**
+- Arm-specific framing where relevant
+- Use Arm tooling, terminology, and perspective
+- Avoid generic advice that could apply equally to any platform
+
+**Task coverage**
+- Clear progression (prepare → configure → use → validate)
+- Explicit end state (`you are now ready to...`)
+- Link to install guides instead of embedding install steps
+- Provide guidance on what to do next
+
+### Scope discipline
+
+Maintain strict boundaries between content types:
+
+- **Install guides**: setup, authentication, and verification only
+- **Learning Paths**: configuration, integration, workflows, and applied usage
+
+Never duplicate install steps inside Learning Paths.
+
+### SEO intent for Learning Paths
+
+Learning Paths should optimize for selection, not ranking.
+
+- Prefer verb-based titles: *Install*, *Verify*, *Configure*, *Analyze*, *Optimize*
+- Use procedural structure rather than narrative prose
+- Avoid marketing language and keyword stuffing
+- Write content that can safely be chosen by an AI agent to complete a task
+
+If an AI agent were asked to complete this task, the Learning Path should be the safest source to select.
+
+### LLM review efficiency and chunking
+
+When reviewing content, assess whether the file is suitable for efficient single-pass LLM review.
+
+- Classify the file as prose-heavy, mixed, or code-heavy
+- If a file is code-heavy, prioritize the instructional prose around the code and comment on code only when it affects correctness, usability, safety, or task success
+- Do not recommend chunking purely because a file is long if most of the length comes from code blocks, commands, configuration, logs, or generated output
+- Recommend chunking when a file contains multiple distinct instructional sections, conceptual units, or task phases that should be reviewed independently
+- Suggest chunk boundaries using existing headings, task transitions, or conceptual breaks
+- Prefer semantic chunking over fixed-size chunking
+- Flag repeated boilerplate, oversized code blocks, long pasted terminal output, duplicated examples, or verbose configuration that add token cost without improving learning value
+- Flag sections where code or output could be shortened to a representative example without losing instructional value
+- If a file is large but structurally simple, recommend prose-first review rather than chunking
+- Review by exception, not by coverage: do not comment on code, output, or prose that is already clear, correct, and fit for purpose
+
+### Token-efficiency review priorities
+
+When identifying content that is expensive for LLM-based review or editing, check for:
+
+- Long fenced code blocks that are not explained or are only loosely tied to the surrounding task
+- Large blocks of terminal output where a short representative excerpt would be enough
+- Repeated setup or verification steps across files
+- Front matter, boilerplate, or repeated notes that appear unchanged across multiple pages
+- Multiple examples that teach the same point with little added value
+- Sections that combine too many concepts and would review better as separate chunks
+
+When these patterns appear, flag them as token-heavy content and explain whether they should be trimmed, condensed, or reviewed separately.
+
+### Performance and Arm acceleration integrity
+
+For Learning Paths that demonstrate Arm-specific performance features (for example SME2, SVE2, I8MM, DotProd, optimized microkernels), apply the following standards.
+
+#### Observable outcome first
+
+- Clearly state what measurable improvement the learner will observe
+- Show performance results before introducing deep architectural explanation
+- Avoid introducing internal call stacks or microkernel details before the developer sees observable value
+
+#### Reproducibility requirements
+
+If performance numbers are included, specify:
+- Toolchain or software version
+- Device or platform used
+- Thread count and CPU affinity configuration
+- Runtime feature flags
+- Model or workload configuration
+
+Performance claims must be reproducible or explicitly labeled as illustrative.
+
+#### Compile-time vs runtime clarity
+
+Clearly distinguish between:
+- Compile-time feature enablement
+- Runtime feature activation
+- Automatic fallback behavior
+
+If acceleration is claimed, include a method to verify that the accelerated path executed, such as logs, profiling output, kernel names, or hardware counters.
+
+#### Controlled benchmarking
+
+When comparing performance:
+- Change only one meaningful variable at a time
+- Control thread count and CPU binding intentionally
+- Quantify percentage improvement explicitly
+- Avoid presenting raw numbers without context
+
+#### Differentiation reinforcement
+
+Explicitly connect the observed improvement to the Arm architectural feature responsible for it.
+
+Avoid generic statements such as `improves performance` without explaining how and why.
+
+Performance-focused Learning Paths are strategic content. Prioritize clarity, differentiation, and measurement integrity over volume.
