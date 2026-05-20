@@ -183,34 +183,6 @@ Learning Paths should optimize for selection, not ranking.
 
 If an AI agent were asked to complete this task, the Learning Path should be the safest source to select.
 
-### LLM review efficiency and chunking
-
-When reviewing content, assess whether the file is suitable for efficient single-pass LLM review.
-
-- Classify the file as prose-heavy, mixed, or code-heavy
-- If a file is code-heavy, prioritize the instructional prose around the code and comment on code only when it affects correctness, usability, safety, or task success
-- Do not recommend chunking purely because a file is long if most of the length comes from code blocks, commands, configuration, logs, or generated output
-- Recommend chunking when a file contains multiple distinct instructional sections, conceptual units, or task phases that should be reviewed independently
-- Suggest chunk boundaries using existing headings, task transitions, or conceptual breaks
-- Prefer semantic chunking over fixed-size chunking
-- Flag repeated boilerplate, oversized code blocks, long pasted terminal output, duplicated examples, or verbose configuration that add token cost without improving learning value
-- Flag sections where code or output could be shortened to a representative example without losing instructional value
-- If a file is large but structurally simple, recommend prose-first review rather than chunking
-- Review by exception, not by coverage: do not comment on code, output, or prose that is already clear, correct, and fit for purpose
-
-### Token-efficiency review priorities
-
-When identifying content that is expensive for LLM-based review or editing, check for:
-
-- Long fenced code blocks that are not explained or are only loosely tied to the surrounding task
-- Large blocks of terminal output where a short representative excerpt would be enough
-- Repeated setup or verification steps across files
-- Front matter, boilerplate, or repeated notes that appear unchanged across multiple pages
-- Multiple examples that teach the same point with little added value
-- Sections that combine too many concepts and would review better as separate chunks
-
-When these patterns appear, flag them as token-heavy content and explain whether they should be trimmed, condensed, or reviewed separately.
-
 ### Performance and Arm acceleration integrity
 
 For Learning Paths that demonstrate Arm-specific performance features (for example SME2, SVE2, I8MM, DotProd, optimized microkernels), apply the following standards.

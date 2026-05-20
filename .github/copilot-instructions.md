@@ -158,28 +158,12 @@ Use these preferred terms and phrases for consistency:
 
 ### Cross-file and quality assurance
 
-- Use the same technical terms consistently throughout all sections
-- Apply the word choice and style guidelines uniformly across all files
-- Maintain consistent capitalization of product names, technologies, and concepts
-- Use the same abbreviations and acronyms throughout
-- Maintain the same voice and tone across all sections
-- Ensure consistent use of second person throughout
-- Apply the same level of formality and technical depth across sections
-- Keep instructional style consistent
-- Follow consistent heading hierarchy throughout the Learning Path
-- Use parallel structure in similar sections across different files
-- Maintain consistent section organization and flow
-- Apply uniform formatting for code blocks, lists, and callouts
-- Ensure appropriate skill level consistency
-- Maintain consistent technical detail appropriate for the target audience
-- Balance complexity appropriately across all sections
-- Provide consistent prerequisite assumptions throughout
-- Flag inconsistent terminology usage across sections
-- Identify missing error handling or troubleshooting guidance
-- Suggest where visual aids would improve understanding
-- Recommend splitting overly complex sections
-- Verify that code examples follow established patterns in the repository
-- Add or improve metadata descriptions systematically across content
+- Keep terminology, capitalization, abbreviations, voice, tone, formatting, and technical depth consistent across related files.
+- Match content complexity to the stated audience, prerequisites, and skill level.
+- Use consistent heading hierarchy, section flow, code block formatting, lists, and callouts.
+- Flag inconsistent terminology, missing troubleshooting, unclear prerequisites, overly complex sections, and places where visuals would improve understanding.
+- Verify code examples follow established repository patterns.
+- Add or improve metadata descriptions when editing related content.
 
 ## Formatting and code samples
 
@@ -291,76 +275,4 @@ Use calm, natural transitions that focus on what happens next.
 
 Also avoid multiple consecutive sentences starting with `This`. Vary sentence structure to maintain natural flow.
 
-## Content quality and discoverability
-
-### Context awareness
-
-- Consider the learner's likely environment (development vs. production, local vs. cloud)
-- Recognize when content assumes x86 defaults and suggest Arm alternatives
-- Flag when third-party tools may have limited Arm support
-- Suggest Arm-native alternatives when available
-
-### Technical depth consistency
-
-- Maintain appropriate complexity level throughout the Learning Path
-- Avoid oversimplifying for Advanced skill level content
-- Do not assume prior knowledge beyond stated prerequisites
-- Balance theoretical explanation with practical implementation
-
-### Platform-specific considerations
-
-- Default to Arm-optimized solutions and configurations
-- Mention x86 alternatives only when Arm solutions do not exist
-- Consider performance implications specific to Arm architectures
-- Address common Arm migration challenges when relevant
-
-### Accessibility and inclusivity
-
-- Ensure content is screen reader compatible
-- Provide descriptive alt text for images and diagrams
-- Use clear, descriptive link text
-- Avoid assumptions about the user's physical capabilities or setup
-
-### SEO and discoverability
-
-- Use Arm-specific keywords naturally throughout content
-- Include relevant technical terms that developers search for
-- Optimize titles and headings for search engines
-- Use semantic HTML structure in markdown when possible
-- Consider how content will appear in search results
-
-### Cross-reference validation
-
-- Verify all internal links point to existing content
-- Check that referenced Learning Paths and install guides are current
-- Ensure cross-references between sections remain accurate after edits
-- Flag broken or outdated external links
-- Maintain consistency in how related content is referenced
-
-### AI optimization (AIO) guidance
-
-- Structure content with clear, semantic headings that AI can parse and understand
-- Use descriptive, standalone sentences that make sense without surrounding context
-- Include explicit problem statements and clear solutions for AI to reference
-- Format code examples with proper language tags and clear explanations
-- Use consistent terminology that AI systems can reliably associate with Arm development
-- Include complete, self-contained examples rather than partial snippets
-- Write FAQ-style sections that directly answer common developer questions
-- Use bullet points and numbered lists for for AI to easily extract key information
-- Include explicit `what you'll learn` and `prerequisites` sections for AI context
-- Structure troubleshooting sections with clear problem-solution pairs
-- Use standard markdown formatting that AI crawlers can parse effectively
-- Include relevant technical keywords naturally throughout the content
-- Write comprehensive summaries that AI can use as content overviews
-- Ensure each section can stand alone as a coherent piece of information
-- Use clear, declarative statements rather than implied or contextual references
-
-### Editorial decision priorities
-
-When content trade-offs are required, prioritize the following in order:
-
-- Alignment with the stated purpose and positioning of the content
-- Clarity and readability for the intended skill level
-- Consistency with existing Learning Paths and install guides
-- Completeness within the stated scope
-
+For additional instructions related to images, Learning Paths, Install Guides, and content quality, see [instructions](./instructions/).
