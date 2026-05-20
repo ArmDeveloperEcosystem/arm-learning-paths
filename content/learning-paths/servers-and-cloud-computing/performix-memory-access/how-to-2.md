@@ -1,5 +1,5 @@
 ---
-title: Inspect with Performix
+title: Profile memory access behavior with Arm Performix
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -14,7 +14,7 @@ Start by inspecting the baseline particle model in `src/baseline/particle.hpp`.
 
 If you are using an IDE or editor with an LLM-based coding assistant, the `AGENT.md` file can improve your learning experience. This file provides repository context and helps guide the agent to give more useful assistance.
 
-![Screenshot showing the AGENT.md file in the repository, highlighting the context file your coding assistant uses to provide more relevant guidance during this task.#center](./agent_screen_shot.png "Screenshot of GitHub Copilot in VSCode using AGENTS.md as a system prompt to act as a learning assistant.")
+![Screenshot showing the AGENT.md file in the repository, highlighting the context file your coding assistant uses to provide more relevant guidance during this task.#center](./agent_screen_shot.webp "Screenshot of GitHub Copilot in VSCode using AGENTS.md as a system prompt to act as a learning assistant.")
 
 {{% /notice %}}
 
@@ -67,24 +67,24 @@ Configure the recipe to launch the baseline workload on your remote Arm target:
 - Set **Workload** to the baseline executable:
 
 ```output
-<path to build directory>/baseline
+~/Orbiting-Galaxy-Example/build/baseline
 ```
 
 Keep the default profiling duration so Performix records until the workload exits.
 
-![Performix Memory Access recipe setup showing the selected remote Arm target and the workload path field populated with the baseline binary, which confirms the run configuration before profiling starts.#center](./setup.png "Configure the Performix Memory Access recipe")
+![Performix Memory Access recipe setup showing the selected remote Arm target and the workload path field populated with the baseline binary, which confirms the run configuration before profiling starts.#center](./setup.webp "Configure the Performix Memory Access recipe")
 
 Start the recipe and wait for the results to load.
 
 ## Assess Performance
 
-![Performix Memory Access results for the baseline binary showing update_positions with about 66 percent L1C load hits and around 26-cycle average L1C latency, indicating weak cache locality in the hot path.#center](./performix_before_optimizations.png "Baseline memory access results before optimization")
+![Performix Memory Access results for the baseline binary showing update_positions with about 66 percent L1C load hits and around 26-cycle average L1C latency, indicating weak cache locality in the hot path.#center](./performix_before_optimizations.webp "Baseline memory access results before optimization")
 
 Look at the memory access results for the baseline binary. Most samples are associated with the `update_positions()` function. The `L1C % Loads` value shows that only about two thirds of loads hit in L1 cache, and the average L1 cache load latency is about 26 cycles. A cache-friendly hot loop should have a much higher L1 hit rate and lower average latency.
 
 To investigate further, check the TLB walk data. As described in the background section, the TLB caches virtual-to-physical address translations. As per the image below, the `TLB Walk Breakdown` tab shows no significant TLB walks. That means address translation is not the main issue.
 
-![Performix Memory Access results show 0% TLB walks across all functions in the baseline binary, indicating that TLB pressure and costly address translation misses are not contributing to the performance issue.#center](./no_tlb_walks.png "TLB walk results showing 0 page table walks for all functions in baseline implementation")
+![Performix Memory Access results show 0% TLB walks across all functions in the baseline binary, indicating that TLB pressure and costly address translation misses are not contributing to the performance issue.#center](./no_tlb_walks.webp "TLB walk results showing 0 page table walks for all functions in baseline implementation")
 
 In summary:
 
@@ -94,7 +94,7 @@ In summary:
 
 Double-click the `update_positions()` row to open the source code view. The source view shows that the samples concentrate on the per-particle position updates.
 
-![Performix source code view for update_positions showing sample concentration on the x, y, and z update statements, helping you confirm that this loop is the main optimization target.#center](./source_code.png "Baseline source-level samples in update_positions")
+![Performix source code view for update_positions showing sample concentration on the x, y, and z update statements, helping you confirm that this loop is the main optimization target.#center](./source_code.webp "Baseline source-level samples in update_positions")
 
 Given that the majority of samples are associated with accessing the `Particle` data structure and that we fall back to L2 cache ~1/3 of the time, to improve the execution time of this example we will need to focus on more efficient ways, if any, of accessing the `Particle` member variables. For example, there may be an alternative data structure that has better cache utilization.
 
