@@ -59,6 +59,14 @@ clang bsort.cpp -o out/bsort -O3 -fuse-ld=lld -ffunction-sections -Wl,--emit-rel
   {{< /tab >}}
 {{< /tabpane >}}
 
+{{% notice Please Note %}}
+
+If you want to use BOLT with your own application running on the 1st-generation Arm AGI CPU, we recommend using the latest version of GCC/LLVM. 
+
+For the GNU toolchain, the `-mcpu=armagicpu` defintion was added in [GCC 16.1.0](https://github.com/gcc-mirror/gcc/commit/0f5f728854d2ea93e6806a8632c04383502b0386). As of May 2026, this is the same as the `-march=neoverse-v3ae` option available from [GCC 15](https://gcc.gnu.org/gcc-15/changes.html) onwards. However, in the future there may be differences between `neoverse-v3ae` and `armagicpu`. Similarly for LLVM, Arm AGI CPU support is expected to be introduced no earlier than LLVM 23.
+
+{{% /notice %}}
+
 ## Verify the function order
 Verify that the compiler preserved the intended function order by inspecting the symbols in the `.text` section of the binary.
 Run the following command:
