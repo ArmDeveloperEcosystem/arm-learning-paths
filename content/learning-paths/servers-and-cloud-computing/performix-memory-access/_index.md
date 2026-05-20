@@ -9,16 +9,16 @@ description: Learn how to profile memory access behavior in a C++ particle simul
 
 minutes_to_complete: 45
 
-who_is_this_for: This is an introductory topic for C++ developers who want to use Arm Performix and the Arm MCP Server to diagnose cache and translation behavior in applications running on Arm Neoverse systems.
+who_is_this_for: This is an introductory topic for C++ developers who want to use Arm Performix and the Arm MCP Server to diagnose cache and address translation behavior in applications running on Arm Neoverse servers.
 
 learning_objectives:
-  - Explain how L1 cache hits, TLB misses, and page walks affect C++ application runtime.
-  - Build and visualize the orbiting galaxies example on an Arm Linux target.
+  - Explain how L1 cache hits, TLB misses, and page walks affect C++ application performance.
+  - Build and visualize the orbiting galaxies example on an Arm Neoverse server.
   - Inspect and optimize particle data structure using insights from the memory access recipe.
   - Use the Arm MCP Server in combination with Arm Performix for an agentic solution.
 
 prerequisites:
-  - Access to an Arm Neoverse-based Linux metal instance.
+  - Access to an Arm Neoverse bare metal server. 
   - Basic understanding of memory hierarchy within a CPU.
   - Basic C++ development experience.
   - Familiarity with the Linux command line.
