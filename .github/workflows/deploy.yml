@@ -12,9 +12,14 @@ on:
         required: false
         type: string
         default: "us-west-2"
+      deploy-role-arn:
+        description: "AWS OIDC role ARN to assume"
+        required: false
+        type: string
+        default: ""
     secrets:
       AWS_OIDC_ROLE:
-        required: true
+        required: false
       HUGO_LLM_API:
         required: true
       HUGO_RAG_API:
@@ -40,7 +45,7 @@ jobs:
       contents: read
     steps:
       # Checks-out the repository under $GITHUB_WORKSPACE, so the job can access it
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           submodules: true # Fetch Hugo Themes
           fetch-depth: 0
@@ -60,9 +65,9 @@ jobs:
         run: npm install postcss-cli
 
       - name: AWS Github OIDC Login
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
-          role-to-assume: ${{ secrets.AWS_OIDC_ROLE }}
+          role-to-assume: ${{ inputs.deploy-role-arn || secrets.AWS_OIDC_ROLE }}
           aws-region: ${{ inputs.aws-region }}
 
       # Builds arm-software-developer repo
