@@ -190,18 +190,18 @@ The configuration file lives at `/etc/memgraph/memgraph.conf`. After editing it,
 
 ## How do I increase the memory map area limit?
 
-Memgraph allocates many small memory mappings, and on larger graphs the default Linux limit (`vm.max_map_count = 65530`) can be hit. This typically surfaces as a hung transaction, `munmap` errors, or `bad_alloc` crashes. Memgraph recommends roughly one memory map area per 128 KB of system RAM. The full table and background are in the [system configuration docs](https://memgraph.com/docs/database-management/system-configuration#increasing-memory-map-areas).
+Memgraph allocates many small memory mappings, and on larger graphs the default Linux limit (`vm.max_map_count = 65530`) can be hit. This typically surfaces as a hung transaction, `munmap` errors, or `bad_alloc` crashes. Memgraph recommends roughly one memory map area per 64 KB of system RAM. The full table and background are in the [system configuration docs](https://memgraph.com/docs/database-management/system-configuration#increasing-memory-map-areas).
 
-For an 8–32 GB host, `262144` is the recommended starting value. Set it for the current session:
+For an 8–32 GB host, `524288` is the recommended starting value. Set it for the current session:
 
 ```bash { target="ubuntu:latest" }
-sudo sysctl -w vm.max_map_count=262144
+sudo sysctl -w vm.max_map_count=524288
 ```
 
 To persist the change across reboots, add it to `/etc/sysctl.conf` or a drop-in under `/etc/sysctl.d/`, then reload:
 
 ```bash { target="ubuntu:latest" }
-echo 'vm.max_map_count=262144' | sudo tee -a /etc/sysctl.conf
+echo 'vm.max_map_count=524288' | sudo tee -a /etc/sysctl.conf
 sudo sysctl -p
 ```
 
