@@ -6,16 +6,21 @@ weight: 4
 layout: learningpathall
 ---
 
-In this section you'll build two simulated devices on the same mesh:
+In this section you'll build two device runtimes on the same mesh, with the Raspberry Pi 5 as the primary edge device:
 
-- a **sensor** that publishes temperature and humidity readings on a schedule
-- a **threshold monitor** that subscribes to those readings and raises an alert when the temperature crosses a configurable threshold
+- a **sensor** that runs on the Raspberry Pi 5 and publishes temperature and humidity readings on a schedule
+- a **threshold monitor** that runs on your development machine, subscribes to those readings, and raises an alert when the temperature crosses a configurable threshold
 
 This mirrors a real edge scenario, a room supervisor watching environmental sensors for out-of-bounds conditions, and exercises every Device Connect primitive across two cooperating devices.
 
 ## Install uv
 
-This walkthrough uses [uv](https://docs.astral.sh/uv/) to manage the project and its Python dependencies. uv will resolve a compatible Python interpreter, create a virtual environment, and install packages for you, so no manual `venv` or `pip` steps are needed.
+This walkthrough uses [uv](https://docs.astral.sh/uv/) to manage the project and its Python dependencies. Install uv on both machines:
+
+- the Raspberry Pi 5, which runs the sensor runtime
+- your development machine, which runs the monitor and the agent-tools client
+
+uv will resolve a compatible Python interpreter, create a virtual environment, and install packages for you, so no manual `venv` or `pip` steps are needed.
 
 {{< tabpane code=true >}}
     {{< tab header="macOS or Linux" language="shell">}}
@@ -34,7 +39,7 @@ uv --version
 
 ## Create the project
 
-Create a new project and add the Device Connect packages:
+Create the same project on both the Raspberry Pi 5 and your development machine, and add the Device Connect packages:
 
 ```bash
 mkdir ~/device-connect-d2d
@@ -45,9 +50,11 @@ uv add device-connect-edge device-connect-agent-tools
 
 The [`device-connect-edge`](https://pypi.org/project/device-connect-edge/) package is the device runtime SDK. It is what turns a Python class into a live peer on the messaging mesh. The [`device-connect-agent-tools`](https://pypi.org/project/device-connect-agent-tools/) package is the client side: it lets an agent or script discover devices and invoke their RPCs. In production you might consume devices from a different client, but for this walkthrough it is the fastest way to confirm that discovery and RPC are working.
 
-## Write a simulated sensor device
+Keep both machines on the same local network. D2D discovery uses local network discovery, so VPNs, guest Wi-Fi isolation, or firewall rules that block local traffic can prevent the Raspberry Pi 5 and your development machine from seeing each other.
 
-Create a file called `sensor.py`:
+## Write the Raspberry Pi 5 sensor device
+
+On the Raspberry Pi 5, create a file called `sensor.py`:
 
 ```python
 import argparse
@@ -72,12 +79,12 @@ class SimulatedSensor(DeviceDriver):
             device_type="simulated_sensor",
             manufacturer="Device Connect",
             model="SIM-TH-100",
-            description="Simulated temperature and humidity sensor",
+            description="Raspberry Pi 5 temperature and humidity sensor example",
         )
 
     @property
     def status(self) -> DeviceStatus:
-        return DeviceStatus(availability="available", location="simulator")
+        return DeviceStatus(availability="available", location="raspberry-pi-5")
 
     @rpc()
     async def get_reading(self) -> dict:
@@ -120,11 +127,11 @@ This driver uses three of the decorators introduced in the overview:
 - `@emit` declares `reading_ready` as an event the device publishes to the mesh
 - `@periodic` runs `publish_reading` every five seconds so the sensor produces fresh data on its own
 
-The `identity` and `status` properties are what other peers see during discovery. They are how this device advertises itself as a `simulated_sensor` with a known manufacturer, model, and availability.
+The `identity` and `status` properties are what other peers see during discovery. They are how the Raspberry Pi 5 advertises itself as a `simulated_sensor` with a known manufacturer, model, and availability. The readings are generated so you can focus on Device Connect behavior first; you can replace `publish_reading()` with a real sensor read later without changing the runtime structure.
 
 ## Write a threshold monitor device
 
-Now create a second device that consumes the sensor's data. Create a file called `monitor.py`:
+Now create a second device that consumes the Raspberry Pi 5 sensor's data. On your development machine, create a file called `monitor.py`:
 
 ```python
 import argparse
@@ -155,7 +162,7 @@ class ThresholdMonitor(DeviceDriver):
 
     @property
     def status(self) -> DeviceStatus:
-        return DeviceStatus(availability="available", location="simulator")
+        return DeviceStatus(availability="available", location="development-machine")
 
     @on(event_name="reading_ready")
     async def on_reading(self, device_id: str, event_name: str, payload: dict):
@@ -200,15 +207,15 @@ The monitor adds one primitive you haven't seen yet:
 - `@emit alert_raised` lets the monitor publish its own events when a threshold is crossed, so another peer or agent could subscribe to alerts in turn.
 - `@rpc get_recent_alerts` exposes the monitor's recent history so an external caller can query what it has seen.
 
-## Run the sensor and the monitor
+## Run the Raspberry Pi 5 sensor and the monitor
 
-Open two terminals in the project directory (`~/device-connect-d2d`). In terminal 1, start the sensor:
+Open a terminal on the Raspberry Pi 5 in the project directory (`~/device-connect-d2d`). Start the sensor:
 
 ```bash
 uv run python sensor.py --device-id sensor-001
 ```
 
-In terminal 2, start the monitor with a threshold below the sensor's typical temperature range so you see alerts quickly:
+On your development machine, open a terminal in the project directory (`~/device-connect-d2d`). Start the monitor with a threshold below the sensor's typical temperature range so you see alerts quickly:
 
 ```bash
 uv run python monitor.py --device-id monitor-001 --threshold 27.0
@@ -216,11 +223,11 @@ uv run python monitor.py --device-id monitor-001 --threshold 27.0
 
 `uv run` executes the command inside the project's managed environment, so you do not need to activate a virtual environment manually.
 
-Within a few seconds, the monitor terminal should start printing `received ... from sensor-001` lines, and an `ALERT:` line each time the simulated temperature rises above 27.0 °C. This is the sensor invoking the monitor across the mesh through its emitted event, and you did not configure any address or pairing between them.
+Within a few seconds, the monitor terminal should start printing `received ... from sensor-001` lines, and an `ALERT:` line each time the temperature rises above 27.0 degrees C. This is the Raspberry Pi 5 sensor invoking the monitor across the mesh through its emitted event, and you did not configure any address or pairing between them.
 
 ## Query the monitor from agent tools
 
-Open a third terminal in the project directory and run:
+Open a second terminal on your development machine in the project directory and run:
 
 ```bash
 uv run python - <<'PY'
@@ -241,7 +248,7 @@ print("recent alerts:", invoke_device(monitor_id, "get_recent_alerts"))
 PY
 ```
 
-The script discovers both devices, invokes `get_reading` on the sensor, and invokes `get_recent_alerts` on the monitor. The alert list should contain every breach the monitor has observed since it started:
+The script discovers both devices, invokes `get_reading` on the Raspberry Pi 5 sensor, and invokes `get_recent_alerts` on the monitor. The alert list should contain every breach the monitor has observed since it started:
 
 ```
 Found 2 device(s)
@@ -260,8 +267,8 @@ You have exercised every Device Connect primitive across two cooperating devices
 - **Events**: the sensor emitted `reading_ready`; the monitor reacted through `@on` and emitted its own `alert_raised`
 - **Status**: both runtimes advertised themselves as `available` through the `status` property
 
-The sensor and monitor did not know about each other before they started. They found each other on the local network and communicated purely through typed events and RPCs, with no broker, no registry, and no cloud service.
+The Raspberry Pi 5 sensor and monitor did not know about each other before they started. They found each other on the local network and communicated purely through typed events and RPCs, with no broker, no registry, and no cloud service.
 
 ## Outcome
 
-You now have a working D2D deployment where two simulated devices cooperate on the same mesh: a sensor that publishes data and a monitor that reacts to it and exposes its own state. This same driver pattern (a class, a handful of decorators, and a runtime) is how you would describe a real sensor, actuator, or monitor on the network.
+You now have a working D2D deployment where a Raspberry Pi 5 primary device cooperates with a monitor on the same mesh: the Pi publishes data, and the monitor reacts to it and exposes its own state. This same driver pattern (a class, a handful of decorators, and a runtime) is how you would describe a real sensor, actuator, or monitor on the network.

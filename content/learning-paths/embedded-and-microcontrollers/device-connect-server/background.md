@@ -70,7 +70,7 @@ Both answer the same question: is this identity allowed on this mesh?
 
 ### What you'll use in this Learning Path
 
-In this Learning Path, you'll use the [Device Connect portal](https://portal.deviceconnect.dev/) to download NATS credentials for three default identities on your tenant. Two identities will run simulated robot arms. The third identity will run the Python client or agent.
+In this Learning Path, you'll use the [Device Connect portal](https://portal.deviceconnect.dev/) to download NATS credentials for three default identities on your tenant. The primary identity runs on a Raspberry Pi 5, the second identity runs on your development machine as another device, and the third identity runs the Python client or agent.
 
 ## Multi-network deployment architecture
 
@@ -98,7 +98,7 @@ Devices and agents still talk to each other through the same primitives (`@rpc`,
 
 ### Real-world example: global device coordination
 
-The animation demonstrates a complete multi-network workflow: a Device Connect server runs in Berlin, robot arms in San Francisco and Tokyo register with it using `device-connect-edge`, and an AI agent in Bangalore orchestrates both robots using `device-connect-agent-tools`. Every `invoke_device` call and event flows through the server, demonstrating how the server enables secure, multi-network device coordination.
+The animation demonstrates a complete multi-network workflow: a Device Connect server runs in Berlin, devices in San Francisco and Tokyo register with it using `device-connect-edge`, and an AI agent in Bangalore orchestrates both devices using `device-connect-agent-tools`. Every `invoke_device` call and event flows through the server, demonstrating how the server enables secure, multi-network device coordination.
 
 <video width="100%" controls muted playsinline>
   <source src="https://raw.githubusercontent.com/kavya-chennoju/arm-learning-path-assets/main/videos/device-connect-server-overview.mp4" type="video/mp4">
@@ -111,7 +111,7 @@ In the rest of this Learning Path you'll:
 
 - sign in to the Device Connect portal and identify your tenant slug
 - download credentials for the three default device identities
-- run two simulated robot arms with `device-connect-edge`
+- run a Raspberry Pi 5 primary device and a secondary device with `device-connect-edge`
 - discover and invoke both devices from a Python client using `device-connect-agent-tools`
 - optionally attach a Strands AI agent to the same tenant
 
