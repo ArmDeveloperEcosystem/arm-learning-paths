@@ -11,8 +11,9 @@ on:
   workflow_dispatch:
 
 jobs:
+  # Deprecated: kept temporarily while the prod deployment is validated.
   build_and_deploy_production:
-    name: Build and Deploy Production
+    name: Build and Deploy Production Deprecated
     uses: ./.github/workflows/deploy.yml
     permissions:
       id-token: write
@@ -21,6 +22,24 @@ jobs:
       target: production
     secrets:
       AWS_OIDC_ROLE: ${{ secrets.AWS_OIDC_ROLE_PRODUCTION }}
+      HUGO_LLM_API: ${{ secrets.HUGO_LLM_API }}
+      HUGO_RAG_API: ${{ secrets.HUGO_RAG_API }}
+      HUGO_AUDIO_API: ${{ secrets.HUGO_AUDIO_API }}
+      HUGO_PHI_ONNX_LLM_API: ${{ secrets.HUGO_PHI_ONNX_LLM_API }}
+      HUGO_DEV_PROG_SIGNIUP_FORM_MUNCHKIN_ID: ${{ secrets.HUGO_DEV_PROG_SIGNIUP_FORM_MUNCHKIN_ID }}
+      HUGO_FORM_ID_FOR_PROGRAM_SIGNUP: ${{ secrets.HUGO_FORM_ID_FOR_PROGRAM_SIGNUP }}
+
+  build_and_deploy_prod:
+    name: Build and Deploy Prod
+    uses: ./.github/workflows/deploy.yml
+    permissions:
+      id-token: write
+      contents: read
+    with:
+      target: prod
+      aws-region: us-east-1
+      deploy-role-arn: arn:aws:iam::084149021538:role/Proj-GHA-arm-learning-paths-prod
+    secrets:
       HUGO_LLM_API: ${{ secrets.HUGO_LLM_API }}
       HUGO_RAG_API: ${{ secrets.HUGO_RAG_API }}
       HUGO_AUDIO_API: ${{ secrets.HUGO_AUDIO_API }}
