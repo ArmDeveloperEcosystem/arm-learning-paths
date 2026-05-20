@@ -53,7 +53,7 @@ For title formatting:
 - Must include SEO keywords (technology names, tools)
 - Examples: `Deploy applications on Arm servers`, `Configure Arm processors for optimal performance`
 
-The term "Learning Path" should always be capitalized.
+
 
 ### Learning Path metadata description requirements
 

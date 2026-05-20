@@ -6,7 +6,7 @@ Assume the audience is made up of Arm software developers. Bias all information 
 
 ## Highest priority rules
 
-- One Learning Path must own one clear developer task
+- Each Learning Path must own one clear developer task
 - Install guides are for installation and verification only
 - Every Learning Path `_index.md` must include a `description` field
 - Use task-led titles, introductions, and metadata
@@ -152,6 +152,8 @@ Use these preferred terms and phrases for consistency:
   - Use `fixed-width`, not `fixed-length`
   - Use `read-to-write ratio`, not `read to write ratio`
 
+- The term "Learning Path" should always be capitalized.
+
 ## Content structure and consistency
 
 ### Cross-file and quality assurance
@@ -289,7 +291,7 @@ Use calm, natural transitions that focus on what happens next.
 
 Also avoid multiple consecutive sentences starting with `This`. Vary sentence structure to maintain natural flow.
 
-## AI-specific guidelines for content creation and editing
+## Content quality and discoverability
 
 ### Context awareness
 
@@ -319,7 +321,6 @@ Also avoid multiple consecutive sentences starting with `This`. Vary sentence st
 - Use clear, descriptive link text
 - Avoid assumptions about the user's physical capabilities or setup
 
-
 ### SEO and discoverability
 
 - Use Arm-specific keywords naturally throughout content
@@ -336,7 +337,6 @@ Also avoid multiple consecutive sentences starting with `This`. Vary sentence st
 - Flag broken or outdated external links
 - Maintain consistency in how related content is referenced
 
-
 ### AI optimization (AIO) guidance
 
 - Structure content with clear, semantic headings that AI can parse and understand
@@ -346,7 +346,7 @@ Also avoid multiple consecutive sentences starting with `This`. Vary sentence st
 - Use consistent terminology that AI systems can reliably associate with Arm development
 - Include complete, self-contained examples rather than partial snippets
 - Write FAQ-style sections that directly answer common developer questions
-- Use bullet points and numbered lists for AI to easily extract key information
+- Use bullet points and numbered lists for for AI to easily extract key information
 - Include explicit `what you'll learn` and `prerequisites` sections for AI context
 - Structure troubleshooting sections with clear problem-solution pairs
 - Use standard markdown formatting that AI crawlers can parse effectively
