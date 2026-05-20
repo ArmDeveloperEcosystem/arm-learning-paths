@@ -1,4 +1,5 @@
 ---
+name: Learning Paths general guidance
 applyTo: "content/learning-paths/**/*.md"
 ---
 
@@ -93,9 +94,9 @@ When adding or revising `description` fields:
 
 ### Recap section 
 
-For Learning Paths, include a short recap paragraph and forward-looking transition at the end of each major instructional section or module
+Include a short recap paragraph and forward-looking transition at the end of each major instructional section or module
 
-Example recap pattern for Learning Paths:
+Example recap pattern:
 
 ```md
 ## What you've learned and what's next
@@ -255,3 +256,11 @@ Explicitly connect the observed improvement to the Arm architectural feature res
 Avoid generic statements such as `improves performance` without explaining how and why.
 
 Performance-focused Learning Paths are strategic content. Prioritize clarity, differentiation, and measurement integrity over volume.
+
+### Performance testing guidance for Learning Paths
+
+- Include benchmarks when comparing Arm vs. x86 performance
+- Suggest performance testing steps for resource-intensive applications
+- Recommend profiling tools that work well on Arm platforms
+- Include guidance on measuring and optimizing for Arm-specific performance characteristics
+- Mention when performance improvements are architecture-specific

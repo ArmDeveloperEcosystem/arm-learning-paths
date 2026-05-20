@@ -125,13 +125,12 @@ Use these preferred terms and phrases for consistency:
   - `avoid` instead of `try not to`
   - `such as` instead of `like`
   - `after` instead of `once`
-  - `setup` as a noun, `set up` as a verb
 
 - Avoid condescending language:
   - Do not use `simply`, `just`, `obviously`, or `clearly`
 
 - Avoid using directions when referring to content that's been referenced previously or will be referenced next:
- - Do not use `above`, `below`, `left`, `right`, `top`, or `bottom`
+- Do not use `above`, `below`, `left`, `right`, `top`, or `bottom`
 
 - Acknowledge difficulty naturally:
   - Use phrases like `this step can be confusing at first`
@@ -178,6 +177,7 @@ Use these preferred terms and phrases for consistency:
 - Suggest where visual aids would improve understanding
 - Recommend splitting overly complex sections
 - Verify that code examples follow established patterns in the repository
+- Add or improve metadata descriptions systematically across content
 
 ## Formatting and code samples
 
@@ -336,14 +336,6 @@ Also avoid multiple consecutive sentences starting with `This`. Vary sentence st
 - Flag broken or outdated external links
 - Maintain consistency in how related content is referenced
 
-### Performance testing guidance
-
-- Include benchmarks when comparing Arm vs. x86 performance
-- Suggest performance testing steps for resource-intensive applications
-- Recommend profiling tools that work well on Arm platforms
-- Include guidance on measuring and optimizing for Arm-specific performance characteristics
-- Mention when performance improvements are architecture-specific
-- Applies to Learning Paths only. Install guides must not include benchmarking
 
 ### AI optimization (AIO) guidance
 

@@ -1,4 +1,5 @@
 ---
+name: Install guides general guidance
 applyTo: "content/install-guides/**/*.md"
 ---
 
@@ -98,9 +99,9 @@ When adding or revising `description` fields:
 
 ### Recap section 
 
-For Install Guides, include a short recap paragraph and forward-looking transition at the end of each major instructional section or module
+Include a short recap paragraph and forward-looking transition at the end of each major instructional section or module
 
-Example recap pattern for Learning Paths:
+Example recap pattern:
 
 ```md
 ## Next steps

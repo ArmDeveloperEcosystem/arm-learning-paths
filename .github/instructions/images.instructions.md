@@ -1,5 +1,6 @@
 ---
-applyTo: "content/learning-paths/**/*.md,content/install-guides/**/*.md"
+name: Image guidance
+description: Use when the task involves adding, editing, reviewing, or fixing Markdown images in Arm Learning Paths or install guides, including image syntax, `#center` alignment, alt text, captions, screenshots, diagrams, terminal-output images, hardware photos, or placeholder alt text.
 ---
 
 ### Image formatting, alt text, and captions
@@ -87,10 +88,9 @@ Preferred example:
 ![Screenshot of the Arm Performance Studio timeline showing CPU activity spikes during Mandelbrot rendering. The Timeline tab is selected and the spike region is highlighted so the learner can identify where CPU activity increases during the run.#center](images/timeline-spike.png "Arm Performance Studio timeline showing CPU activity during Mandelbrot rendering")
 ```
 
-### Image and metadata cleanup workflow
+### Image cleanup workflow
 
 - Replace all placeholder alt text such as `alt-txt` with meaningful descriptions
 - Keep the repository-specific `#center` syntax when fixing alt text
 - Do not remove valid alignment syntax during cleanup
-- Add or improve metadata descriptions systematically across content
 - For bulk cleanup, update the guidance first, then fix content by category or directory in manageable batches
