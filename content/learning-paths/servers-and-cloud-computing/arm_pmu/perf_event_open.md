@@ -213,6 +213,7 @@ int main() {
     for(int j = 0; j < TOTAL_EVENTS ;j++){
       if(counter_results.values[i].id == id[j]){
         pe_val[j] = counter_results.values[i].value;
+        break;
       }
     }
   }
