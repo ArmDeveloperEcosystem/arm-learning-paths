@@ -1,5 +1,5 @@
 ---
-title: Build and run the hello_world sample for CS320 MPS4 platform
+title: Build and run the hello_world sample on the Corstone-320 MPS4 platform
 weight: 4
 
 ### FIXED, DO NOT MODIFY
