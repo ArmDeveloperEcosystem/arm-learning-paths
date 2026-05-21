@@ -11,10 +11,10 @@ layout: learningpathall
 The Zephyr hello_world sample prints “Hello World” to the console. Use it to validate that your board support and toolchain configuration work.
 
 1. Activate your Python virtual environment for Zephyr.
-2. Set the toolchain environment variables. Replace <toolchain_install_path> with the directory where you installed the Arm GNU Toolchain.
+2. Set the toolchain environment variables. Set `GNUARMEMB_TOOLCHAIN_PATH` to the directory where you installed the Arm GNU Toolchain. The directory name includes your host architecture: `arm-gnu-toolchain-<version>-aarch64-arm-none-eabi` on aarch64, or `arm-gnu-toolchain-<version>-x86_64-arm-none-eabi` on x86_64.
    ```bash 
 	export ZEPHYR_TOOLCHAIN_VARIANT=gnuarmemb
-	export GNUARMEMB_TOOLCHAIN_PATH=arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi-install-path/
+	export GNUARMEMB_TOOLCHAIN_PATH=<toolchain_install_path>
    ```
 3. Build the sample for the Corstone-320 FPGA variant:
    ```bash
