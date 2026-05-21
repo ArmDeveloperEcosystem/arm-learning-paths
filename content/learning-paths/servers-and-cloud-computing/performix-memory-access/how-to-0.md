@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Review of the CPU memory hierarchy
 
-In this section, you'll learn the memory hierarchy concepts the worked example builds on. It is not an exhaustive explanation, but covers what you'll need to interpret the profiling results.
+In this section, you'll learn the memory hierarchy concepts the worked example builds on. It's not an exhaustive explanation, but it covers what you'll need to interpret the profiling results.
 
 Modern Arm Neoverse server CPUs use a hierarchy of memories to reduce the cost of loading and storing data. The fastest storage sits close to each CPU core, while larger memories sit farther away and take more cycles to access.
 
@@ -50,7 +50,7 @@ hwloc-ls --of png > topology.png
 
 ![Hardware locality topology for an Arm server showing per-core L1 and L2 caches and a shared L3 cache across all cores, which helps you verify cache hierarchy before profiling.#center](./topology.webp "Example hardware locality topology")
 
-The diagram illustrates cache tiers on an AWS Graviton3 bare metal server based on Neoverse V1. Each of the 64 cores has private `L1d`, `L1i`, and `L2` caches, and all cores share one `L3` cache, sometimes referred to as last-level cache (LLC). Cache sizes, especially at later levels, are not fixed by the Neoverse architecture. Implementers such as AWS or Google can configure larger or smaller caches based on design goals.
+The diagram shows cache tiers on an AWS Graviton3 bare metal server based on Neoverse V1. Each of the 64 cores has private `L1d`, `L1i`, and `L2` caches, and all cores share one `L3` cache, sometimes referred to as last-level cache (LLC). Cache sizes, especially at later levels, are not fixed by the Neoverse architecture. Implementers such as AWS or Google can configure larger or smaller caches based on design goals.
 
 Non-uniform memory access (NUMA) means memory latency can depend on which processor or socket owns the memory being accessed. On this AWS Graviton3 instance, there is only one NUMA node.
 

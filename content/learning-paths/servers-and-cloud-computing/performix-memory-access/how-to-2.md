@@ -12,7 +12,7 @@ Start by inspecting the baseline particle model in `src/baseline/particle.hpp`.
 
 {{% notice Tip %}}
 
-If you are using an IDE or editor with an LLM-based coding assistant, the `AGENTS.md` file can improve your learning experience. This file provides repository context and helps guide the agent to give more useful assistance.
+If you are using an IDE or editor with an LLM-based coding assistant, the `AGENTS.md` file can improve your learning experience. The `AGENTS.md` file provides the repository context and helps guide the agent to give more useful assistance.
 
 ![Screenshot showing the AGENTS.md file in the repository, highlighting the context file your coding assistant uses to provide more relevant guidance during this task.#center](./agent_screen_shot.webp "Screenshot of GitHub Copilot in VSCode using AGENTS.md as a system prompt to act as a learning assistant.")
 
