@@ -40,7 +40,6 @@ operatingsystems:
     - Linux
     - macOS
     - Windows
-    - Raspberry Pi OS
 
 ### Cross-platform metadata only
 shared_path: true
