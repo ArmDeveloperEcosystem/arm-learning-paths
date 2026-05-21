@@ -1,5 +1,5 @@
 ---
-title: Add Zephyr board support for Corstone-320 MPS4 platform
+title: Add Zephyr board support for the Corstone-320 MPS4 platform
 weight: 3
 
 ### FIXED, DO NOT MODIFY

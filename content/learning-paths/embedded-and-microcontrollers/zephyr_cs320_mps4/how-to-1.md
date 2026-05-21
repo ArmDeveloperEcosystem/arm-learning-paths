@@ -1,5 +1,5 @@
 ---
-title: Set up Zephyr build environment
+title: Set up the Zephyr build environment
 weight: 2
 
 ### FIXED, DO NOT MODIFY
