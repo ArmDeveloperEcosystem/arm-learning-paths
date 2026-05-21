@@ -45,7 +45,7 @@ If you're using a `c7g.metal` instance, you also need to turn Kernel Page Table 
 
 The fastest way on AWS is to use an editor to add `kpti=off` to the `GRUB_CMDLINE_LINUX_DEFAULT` line in `/etc/default/grub.d/50-cloudimg-settings.cfg`.
 
-After editing the file:
+After editing the file, run:
 
 ```bash
 sudo update-grub
