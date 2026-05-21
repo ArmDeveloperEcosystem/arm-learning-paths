@@ -30,7 +30,8 @@ tools_software_languages:
   - GCC
   - C
   - MPS4 board
-
+operatingsystems:
+  - Linux
 
 further_reading:
   - resource:
