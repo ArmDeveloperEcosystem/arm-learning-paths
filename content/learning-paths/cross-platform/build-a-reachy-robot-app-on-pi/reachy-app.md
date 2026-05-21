@@ -1,0 +1,123 @@
+---
+title: Learn about Reachy and understand the application
+weight: 2
+
+### FIXED, DO NOT MODIFY
+layout: learningpathall
+---
+
+## Reachy Gladiator - Decide Reachy's Fate
+
+In this Learning Path, Reachy is stepping out onto the sands of the Arena. Reachy has practiced their gladiator moves, but are they good enough?
+
+You will decide Reachy's fate in the classic Roman way - a 👍 for **Victory**, or a 👎 for **Defeat**.
+
+![Illustration of Reachy Mini in a gladiator style pose. The app uses this arena theme for its moves, verdicts, and dashboard.#center](reachy_gladiator.png "Reachy Mini Gladiator App Concept")
+
+## What is Reachy Mini?
+
+Reachy Mini is a small open robotics platform from Pollen Robotics. It is designed for expressive head, antenna, and body motion, and it can be controlled from Python with the Reachy Mini SDK. The Reachy Mini Wireless version includes an onboard Arm-powered Raspberry Pi 4 Compute Module, and the Lite version is operated with external compute (e.g., Raspberry Pi, DGX Spark, Mac/PC).
+
+Reachy can also be simulated using MuJoCo software. Most developers do not have a physical Reachy Mini robot on their desk, and it is often useful to develop software before hardware is available. Extrapolating from Reachy to more industrial robotics, it is also important to test applications in simulation in advance for safety.
+
+{{% notice Warning %}}
+If using a physical Reachy Mini, use caution and ensure the robot is used in an area with appropriate space. The robot has moving parts and could be a health & safety risk. You are responsible for your safety and the safety of others around you when using physical robotic devices
+{{% /notice %}}
+
+## What will you build?
+
+The workflow of this learning path is split across two machines:
+
+**Laptop/Desktop: macOS, Linux, or Windows with WSL2**
+  - Runs the Reachy Mini daemon
+  - Runs the MuJoCo simulation
+  - Displays simulated Reachy movement
+  - Displays the Pi-hosted dashboard at `http://<pi-ip-address>:8042`
+
+**Raspberry Pi 5: Raspberry Pi OS**
+  - Captures frames from a USB webcam
+  - Runs the Edge AI application (local MediaPipe gesture recognition)
+  - Serves a dashboard on port 8042
+  - Sends robot movement commands to the simulation host daemon
+
+This split is a common edge/physical AI pattern:
+
+- A small edge device handles sensors and inference close to the user.
+- A robot API or daemon receives movement commands.
+- A dashboard gives visibility into the live state of the system.
+- Digital twin simulation reduces hardware access as a blocker and allows for safer development.
+
+This is similar to how larger industrial robotics systems are often built.
+Keeping perception, robot control, and observability as separate pieces makes it easier to test, replace, and deploy parts of the system independently.
+
+## What does the app do?
+
+The app is called Reachy Gladiator. Reachy (in simulation or otherwise) performs a randomly-chosen scripted gladiator move. You provide a 👍 for **Victory**, or a 👎 for **Defeat**. **Victory** makes Reachy celebrate, **Defeat** makes Reachy react sadly.
+
+This learning path starts from the complete `reachy_gladiator_lp` project instead of asking you to create every file from scratch. The simulation host only needs a launcher script, but the Raspberry Pi will clone and run the full project. You will inspect the different parts of the system so you can recreate your own apps running on Reachy or in simulation.
+
+The Reachy Gladiator app runs a repeated loop:
+
+1. Start with a 10-second preparing countdown
+2. Randomly pick one gladiator move
+3. Repeat the selected move three times
+4. Return Reachy to a neutral pose
+5. Watch for a 👍 or a 👎
+6. Run a victory or defeat reaction
+7. Repeat with another move
+
+There are four preset moves:
+
+- `Salute`
+![Salute Move#center](salute.gif "Salute Move")
+- `Sword Swing`
+![Sword Swing Move#center](sword.gif "Sword Swing Move")
+- `Shield Up`
+![Shield Up Move#center](shield.gif "Shield Up Move")
+- `Battle Cry`
+![Battle Cry Move#center](battle-cry.gif "Battle Cry Move")
+
+The app shuffles all four moves and performs each once before any move repeats. When the bag is empty, it reshuffles and avoids repeating the same move at the shuffle boundary.
+
+## Use a compatible terminal
+
+The commands in this learning path use a Bash-style shell. They work directly on macOS and Linux.
+
+On Windows, use WSL2 with an Ubuntu distribution for the simulation host commands. This keeps the commands almost identical to the macOS and Linux flow:
+
+- Use the WSL terminal for `python3`, `source .venv/bin/activate`, and `./scripts/start_sim.sh`.
+- Keep the browser on Windows if you prefer; open the Pi dashboard from any browser that can reach the Raspberry Pi.
+- If the Pi cannot reach a daemon running inside WSL2, check Windows firewall and WSL networking. WSL2 uses virtualized networking, so inbound access from another device on your LAN may require Windows port forwarding.
+
+The rest of this learning path shows the common Bash commands and calls out the one IP-address command that differs by host operating system.
+
+## Project structure
+
+The simulation host does not need the full project checkout. In the next
+section, you will download only the simulation launcher script on that machine.
+
+You will clone the full `reachy_gladiator_lp` project on the Raspberry Pi later on.
+
+The key files are:
+
+```text
+reachy_gladiator_lp/
+├── pyproject.toml
+├── scripts/
+│   ├── start_sim.sh
+│   ├── setup_pi.sh
+│   ├── run_pi_app.sh
+│   └── check_pi_camera.sh
+└── reachy_gladiator_lp/
+    ├── main.py
+    ├── camera.py
+    ├── gesture.py
+    ├── moves.py
+    ├── assets/
+    │   └── gesture_recognizer.task
+    └── static/           # dashboard HTML, CSS, JavaScript, and media
+```
+
+## What you learned and what is next
+
+You learned what Reachy Mini is, why simulation is useful for edge/physical AI development, and how the app splits work between a simulation host and a Raspberry Pi. You are now ready to start the simulation host with a lightweight launcher script.
