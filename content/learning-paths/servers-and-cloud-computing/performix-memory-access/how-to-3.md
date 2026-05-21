@@ -1,5 +1,5 @@
 ---
-title: Optimize manually and with the Arm MCP Server
+title: Optimize the application manually and with the Arm MCP Server
 weight: 5
 
 ### FIXED, DO NOT MODIFY
