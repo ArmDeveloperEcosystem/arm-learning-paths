@@ -41,7 +41,7 @@ sudo apt install -y linux-modules-extra-$(uname -r)
 sudo modprobe arm_spe_pmu
 ```
 
-If you are using a `c7g.metal` instance, you also need turn Kernel Page Table Isolation (KPTI) off.
+If you're using a `c7g.metal` instance, you also need to turn Kernel Page Table Isolation (KPTI) off.
 
 The fastest way on AWS is to use an editor to add `kpti=off` to the `GRUB_CMDLINE_LINUX_DEFAULT` line in `/etc/default/grub.d/50-cloudimg-settings.cfg`.
 
@@ -54,7 +54,11 @@ sudo reboot
 
 For a complete explanation of SPE, see [Enable Arm SPE for Performix memory access analysis](/learning-paths/servers-and-cloud-computing/spe-on-performix/).
 
-## Clone the example repository
+## Build the sample application
+
+After setting up the build environment, clone and build the sample application.
+
+### Clone the example repository
 
 Clone the orbiting galaxies repository and check out the tagged release to work from a known starting point:
 
@@ -64,7 +68,7 @@ cd Orbiting-Galaxy-Example
 git checkout -b my-work v1.0.3
 ```
 
-## Build with CMake
+### Build with CMake
 
 Build the project using CMake:
 
@@ -83,7 +87,7 @@ This produces three binaries in `build/`:
 
 ## Set up a Python virtual environment and run visualization
 
-From the repository root, run:
+After building the application, from the repository root, run:
 
 ```bash
 cd ..

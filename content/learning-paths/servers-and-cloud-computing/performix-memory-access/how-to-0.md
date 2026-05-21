@@ -15,8 +15,8 @@ Modern Arm Neoverse server CPUs use a hierarchy of memories to reduce the cost o
 You usually see the following:
 
 - L1 data cache (`L1d`) and L1 instruction cache (`L1i`) close to each core with each access usually taking up to 10 cycles.
-- L2 cache, often private to each core, with each access usually taking 10-20 cycles.
-- Last-level cache, often shared across multiple cores, and usually taking 20+ cycles.
+- L2 cache, often private to each core, with each access usually taking 10 to 20 cycles.
+- Last-level cache, often shared across multiple cores, and usually taking more than 20 cycles.
 - DRAM, which is much larger but much slower than on-chip cache.
 
 To inspect cache topology on an Arm Neoverse server, see the [Learning Path for Arm's Sysreport tool](/learning-paths/servers-and-cloud-computing/sysreport/) or use the `lscpu` command. Unlike `lscpu`, Sysreport also reports the set associativity for each cache level. For example, you can run the following command on a system with `git` and `python` installed:

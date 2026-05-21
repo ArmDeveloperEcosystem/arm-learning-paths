@@ -10,7 +10,7 @@ who_is_this_for: This is an introductory topic for C++ developers who want to us
 learning_objectives:
   - Explain how L1 cache hits, TLB misses, and page walks affect C++ application performance.
   - Build and visualize the orbiting galaxies example on an Arm Neoverse server.
-  - Inspect and optimize particle data structure using insights from the memory access recipe.
+  - Inspect and optimize the particle data structure using insights from the memory access recipe.
   - Use the Arm MCP Server in combination with Arm Performix for an agentic solution.
 
 prerequisites:
@@ -29,7 +29,7 @@ armips:
 tools_software_languages:
   - Arm Performix
   - MCP
-  - C
+  - C++
   - CMake
   - Python
   - perf

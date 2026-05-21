@@ -1,5 +1,5 @@
 ---
-title: Optimize manually and with the Arm MCP server
+title: Optimize manually and with the Arm MCP Server
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -31,11 +31,11 @@ To measure wall time and compare it against the baseline, run:
 /usr/bin/time -v ~/Orbiting-Galaxy-Example/build/users_solution
 ```
 
-The hot loop is instrumented with `scopedTimer`, so you'll also see the loop duration printed directly to the terminal. Compare it with the baseline result of 571 milliseconds shown at the end of this page.
+The hot loop is instrumented with `scopedTimer`, so you'll also see the loop duration printed directly to the terminal. Compare it with the baseline result of 571 milliseconds shown at the end of the section.
 
-## (Optional) Optimize with an AI agent and the Arm MCP server
+## Optimize with an AI agent and the Arm MCP server
 
-If you have access to a code assistant such as Kiro, Gemini, Codex, or GitHub Copilot, you can also use the Arm Model Context Protocol (MCP) server. The MCP server includes direct tool support to invoke Performix on a remote target. It integrates with MCP-compatible coding assistants and can provide performance insights to create a useful feedback loop. The following example shows how to connect to OpenAI Codex. For other tools, see [your preferred coding assistant](/learning-paths/servers-and-cloud-computing/arm-mcp-server/1-overview/).
+If you have access to a code assistant such as Kiro, Gemini, Codex, or GitHub Copilot, you can also use the Arm Model Context Protocol (MCP) Server. The MCP server includes direct tool support to invoke Performix on a remote target. It integrates with MCP-compatible coding assistants and can provide performance insights to create a useful feedback loop. The following example shows how to connect to OpenAI Codex. For other tools, see [your preferred coding assistant](/learning-paths/servers-and-cloud-computing/arm-mcp-server/1-overview/).
 
 {{% notice Note %}}
 

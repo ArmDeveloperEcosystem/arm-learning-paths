@@ -12,9 +12,9 @@ Start by inspecting the baseline particle model in `src/baseline/particle.hpp`.
 
 {{% notice Tip %}}
 
-If you are using an IDE or editor with an LLM-based coding assistant, the `AGENT.md` file can improve your learning experience. This file provides repository context and helps guide the agent to give more useful assistance.
+If you are using an IDE or editor with an LLM-based coding assistant, the `AGENTS.md` file can improve your learning experience. This file provides repository context and helps guide the agent to give more useful assistance.
 
-![Screenshot showing the AGENT.md file in the repository, highlighting the context file your coding assistant uses to provide more relevant guidance during this task.#center](./agent_screen_shot.webp "Screenshot of GitHub Copilot in VSCode using AGENTS.md as a system prompt to act as a learning assistant.")
+![Screenshot showing the AGENTS.md file in the repository, highlighting the context file your coding assistant uses to provide more relevant guidance during this task.#center](./agent_screen_shot.webp "Screenshot of GitHub Copilot in VSCode using AGENTS.md as a system prompt to act as a learning assistant.")
 
 {{% /notice %}}
 
@@ -96,10 +96,10 @@ Double-click the `update_positions()` row to open the source code view. The sour
 
 ![Performix source code view for update_positions showing sample concentration on the x, y, and z update statements, helping you confirm that this loop is the main optimization target.#center](./source_code.webp "Baseline source-level samples in update_positions")
 
-The majority of samples are associated with accessing the `Particle` data structure, and we fall back to L2 cache ~1/3 of the time. Considering this, to improve the execution time of the example, we'll need to focus on more efficient ways, if any, of accessing the `Particle` member variables. For example, there might be an alternative data structure that has better cache utilization.
+The majority of samples are associated with accessing the `Particle` data structure, and the samples fall back to L2 cache approximately one-third of the time. Considering this, to improve the execution time of the example, you'll need to focus on more efficient ways, if any, of accessing the `Particle` member variables. For example, there might be an alternative data structure that has better cache utilization.
 
 ## What you've accomplished and what's next
 
-You've now used Arm Performix to assess the memory performance of the oribiting galaxy particle simulator application using the Memory Access recipe. 
+You've now used Arm Performix to assess the memory performance of the orbiting galaxy particle simulator application using the Memory Access recipe. 
 
 Next, you'll use these performance results to guide optimization of the application.
