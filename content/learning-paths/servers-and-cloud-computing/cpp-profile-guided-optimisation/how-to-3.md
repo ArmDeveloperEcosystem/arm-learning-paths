@@ -14,7 +14,7 @@ Integer division is ideal for benchmarking because it's significantly more expen
 
 ## What tools are needed to run a Google Benchmark example?
 
-For this example, you can use any Arm Linux computer. For example, an AWS EC2 `c7g.xlarge` instance running Ubuntu 24.04 LTS can be used.
+For this example, you can use any Arm Linux computer. For example, the 1st generation Arm AGI CPU running Ubuntu 24.04 LTS.
 
 Run the following commands to install the prerequisite packages:
 
@@ -57,29 +57,40 @@ Compile with the command:
 g++ -O3 -std=c++17 div_bench.cpp -lbenchmark -lpthread -o div_bench.base
 ```
 
+{{% notice Please Note %}}
+
+Since the command above does not specify `-mcpu` or `-march`, GCC targets a generic baseline architecture. If you want to apply PGO specifically for the 1st generation Arm AGI CPU, the `-mcpu=armagicpu` was added in [GCC 16.1.0](https://github.com/gcc-mirror/gcc/commit/0f5f728854d2ea93e6806a8632c04383502b0386). As of May 2026, it enables the same architectural features as `-march=neoverse-v3ae` from [GCC 15](https://gcc.gnu.org/gcc-15/changes.html). However in the future there may be differences.
+
+As such, we recommend installing the latest version of GCC/G++ if you are targeting the Arm AGI CPU. Use the `-mcpu=native` flag if compiling on the target machine or `-mcpu=armagicpu` if cross compiling.
+
+{{% /notice %}}
+
 Run the program:
 
-```bash
-./div_bench.base
-```
-
-### Example output
-
-```output
+```bash { command_line="user@localhost | 2-16" }
+./div_bench.base 
+2026-05-21T08:12:08+00:00
 Running ./div_bench.base
-Run on (4 X 2100 MHz CPU s)
+Run on (128 X 2800 MHz CPU s)
 CPU Caches:
-  L1 Data 64 KiB (x4)
-  L1 Instruction 64 KiB (x4)
-  L2 Unified 1024 KiB (x4)
-  L3 Unified 32768 KiB (x1)
-Load Average: 0.00, 0.00, 0.00
+  L1 Data 64 KiB (x128)
+  L1 Instruction 64 KiB (x128)
+  L2 Unified 2048 KiB (x128)
+  L3 Unified 131072 KiB (x1)
+Load Average: 0.13, 0.05, 0.02
+***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
 ***WARNING*** Library was built as DEBUG. Timings may be affected.
 -------------------------------------------------------
 Benchmark             Time             CPU   Iterations
 -------------------------------------------------------
-baseDiv/1500       7.90 us         7.90 us        88512
+baseDiv/1500       7.37 us         7.37 us        79910
 ```
+
+{{% notice Please Note%}}
+
+Since we are not interested in exact timings but the relative change we can ignore the warnings about CPU scaling and library debug. We expect the speed up from PGO to be beyond the reasonable margin or error caused by said affects.
+
+{{% /notice %}}
 
 ### Inspect assembly
 
@@ -101,4 +112,3 @@ sudo perf report --input=perf-division-base
 As the `perf report` graphic below shows, the program spends a significant amount of time in the short loops with no loop unrolling. There is also an expensive `sdiv` operation, and most of the execution time is spent storing the result of the operation.
 
 ![before-pgo](./before-pgo.gif)
-

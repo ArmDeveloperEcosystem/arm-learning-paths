@@ -32,29 +32,26 @@ g++ -O3 -std=c++17 -fprofile-use div_bench.cpp -lbenchmark -lpthread -o div_benc
 
 Now run the optimized binary:
 
-```bash
+```bash {command_line="user@localhost | 2-16" }
 ./div_bench.opt
-```
-
-The following output shows the performance improvement:
-
-```output
+2026-05-21T09:20:23+00:00
 Running ./div_bench.opt
-Run on (4 X 2100 MHz CPU s)
+Run on (128 X 2800 MHz CPU s)
 CPU Caches:
-  L1 Data 64 KiB (x4)
-  L1 Instruction 64 KiB (x4)
-  L2 Unified 1024 KiB (x4)
-  L3 Unified 32768 KiB (x1)
-Load Average: 0.10, 0.03, 0.01
+  L1 Data 64 KiB (x128)
+  L1 Instruction 64 KiB (x128)
+  L2 Unified 2048 KiB (x128)
+  L3 Unified 131072 KiB (x1)
+Load Average: 0.00, 0.00, 0.00
+***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
 ***WARNING*** Library was built as DEBUG. Timings may be affected.
 -------------------------------------------------------
 Benchmark             Time             CPU   Iterations
 -------------------------------------------------------
-baseDiv/1500       2.86 us         2.86 us       244429
+baseDiv/1500       2.06 us         2.06 us       315065
 ```
 
-As the terminal output above shows, the average execution time is reduced from 7.90 to 2.86 microseconds. This improvement occurs because the profile data informed the compiler that the input divisor was consistently 1500 during the profiled runs, allowing it to apply specific optimizations.
+As the terminal output above shows, the average execution time is reduced from 7.37 to 2.06 microseconds. This improvement occurs because the profile data informed the compiler that the input divisor was consistently 1500 during the profiled runs, allowing it to apply specific optimizations.
 
 Next, let's examine how the code was optimized at the assembly level.
 
