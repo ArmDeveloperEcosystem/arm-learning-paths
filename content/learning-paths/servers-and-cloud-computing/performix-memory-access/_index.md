@@ -1,10 +1,6 @@
 ---
 title: Analyze memory access behavior using Arm Performix and the Arm MCP Server
 
-draft: true
-cascade:
-    draft: true
-
 description: Learn how to profile memory access behavior in a C++ particle simulation on Arm Linux using the Arm Performix Memory Access recipe through the Arm MCP Server.
 
 minutes_to_complete: 45
