@@ -1,10 +1,14 @@
 ---
-title: Install and test the OpenJDK JVM for PAC/BTI enablement
+title: Test PAC/BTI support with SUSE OpenJDK
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+
+## Validate hardware and JVM security features
+
+In this section, you'll install the default OpenJDK package and run a comprehensive test script to check PAC/BTI support at both the hardware level and in the JVM compiler.
 
 ## Install the default OpenJDK JVM
 
@@ -21,7 +25,7 @@ Confirm the newly installed JVM:
 java --version
 ```
 
-Output should be similar to:
+The output is similar to:
 
 ```output
 openjdk 17.0.13 2024-10-15
@@ -29,11 +33,13 @@ OpenJDK Runtime Environment (build 17.0.13+11-suse-150400.3.48.2-aarch64)
 OpenJDK 64-Bit Server VM (build 17.0.13+11-suse-150400.3.48.2-aarch64, mixed mode, sharing)
 ```
 
+✅ OpenJDK 17 is now installed and ready to test.
+
 Next, download and run a script to confirm PAC/BTI readiness in the JVM you just installed.
 
-## Set up the test script
+## Create the test script
 
-Copy and paste the following script into your C4A SSH session. Save it as `test-pacbti.sh`:
+Create a file called `test-pacbti.sh` in your SSH session and paste in the following script:
 
 ```bash
 #!/usr/bin/env bash
@@ -44,22 +50,26 @@ Copy and paste the following script into your C4A SSH session. Save it as `test-
 #   Exercise an OpenJDK JVM on Linux/AArch64 and determine whether the
 #   JVM process is running on a platform that exposes Arm Pointer
 #   Authentication Code features and Branch Target Identification to
-#   userspace.
+#   userspace, and whether the JVM's JIT compiler supports PAC/BTI.
 #
 # Expected results:
-#   - Armv9 platform with PAC + BTI exposed:
-#       FINAL RESULT: POSITIVE
+#   The script prints a SUMMARY block at the end with one of:
 #
-#   - Armv8 platform lacking PAC + BTI:
-#       FINAL RESULT: NEGATIVE
+#   - FULL PAC/BTI SUPPORT:
+#       Platform exposes PAC/BTI and the JVM JIT can use it.
 #
-#   - Non-AArch64, missing /proc/self/auxv, or partial exposure:
-#       FINAL RESULT: INCONCLUSIVE
+#   - PARTIAL PAC/BTI SUPPORT:
+#       Platform exposes PAC/BTI but the JVM JIT does not use it.
+#
+#   - NO PAC/BTI SUPPORT:
+#       Platform does not expose PAC/BTI to userspace.
 #
 # What this tests:
 #   This script does not merely inspect the host from the shell. It launches
 #   a Java probe inside the target JVM. The Java process reads its own
 #   /proc/self/auxv, so the HWCAP/HWCAP2 values are those visible to the JVM.
+#   It also checks whether the JVM accepts -XX:UseBranchProtection=standard
+#   to determine if the JIT compiler can emit PAC/BTI instructions.
 #
 # Notes:
 #   - PAC and BTI are architectural/security features. On Linux/AArch64,
@@ -287,7 +297,8 @@ echo "--- java -version ---"
 echo
 
 echo "--- JVM branch-protection flag visibility check ---"
-echo "This is informational. The final result comes from the JVM process auxv probe."
+echo "This is informational."
+JIT_PACBTI="no"
 if "${JAVA_BIN}" -XX:+UnlockDiagnosticVMOptions -XX:+PrintFlagsFinal -version 2>&1 \
     | grep -E 'UseBranchProtection|BranchProtection' ; then
   :
@@ -300,6 +311,7 @@ echo "--- Optional runtime flag exercise: -XX:UseBranchProtection=standard ---"
 echo "This should be accepted by branch-protection-aware OpenJDK builds; older builds may reject it."
 if "${JAVA_BIN}" -XX:UseBranchProtection=standard -version >/tmp/jvm_pac_bti_flag_check.out 2>&1; then
   echo "Accepted: -XX:UseBranchProtection=standard"
+  JIT_PACBTI="yes"
 else
   echo "Not accepted or not supported by this JVM:"
   sed 's/^/  /' /tmp/jvm_pac_bti_flag_check.out
@@ -314,22 +326,64 @@ echo "--- Running in-JVM auxv probe ---"
 "${JAVA_BIN}" "${tmpdir}/JvmAarch64PacBtiProbe.java"
 rc=$?
 
-if [ "${rc}" -eq 0 ]; then
-  exit 0
-elif [ "${rc}" -eq 1 ]; then
-  exit 1
-else
+if [ "${rc}" -ne 0 ] && [ "${rc}" -ne 1 ]; then
   if command -v javac >/dev/null 2>&1; then
     echo
     echo "Source-file mode failed or was unavailable; retrying with javac fallback..."
     javac "${tmpdir}/JvmAarch64PacBtiProbe.java" &&
       "${JAVA_BIN}" -cp "${tmpdir}" JvmAarch64PacBtiProbe
-    exit $?
+    rc=$?
   fi
-
-  exit "${rc}"
 fi
+
+echo
+echo "==========================================="
+echo "  SUMMARY"
+echo "==========================================="
+if [ "${rc}" -eq 0 ]; then
+  echo "  Platform PAC/BTI (hardware + kernel): YES"
+else
+  echo "  Platform PAC/BTI (hardware + kernel): NO"
+fi
+
+if [ "${JIT_PACBTI}" = "yes" ]; then
+  echo "  JVM JIT PAC/BTI support:              YES"
+else
+  echo "  JVM JIT PAC/BTI support:              NO"
+fi
+echo
+
+if [ "${rc}" -eq 0 ] && [ "${JIT_PACBTI}" = "yes" ]; then
+  echo "  FULL PAC/BTI SUPPORT"
+  echo "  The platform exposes PAC/BTI and this JVM can use it in JIT-compiled code."
+  echo "  Use -XX:UseBranchProtection=standard to enable it."
+elif [ "${rc}" -eq 0 ] && [ "${JIT_PACBTI}" = "no" ]; then
+  echo "  PARTIAL PAC/BTI SUPPORT"
+  echo "  The platform exposes PAC/BTI but this JVM does not use it in JIT-compiled code."
+  echo "  Native libraries and the OS are still protected."
+  echo "  To get full support, use a JVM built with --enable-branch-protection."
+else
+  echo "  NO PAC/BTI SUPPORT"
+  echo "  The platform does not expose PAC/BTI to userspace."
+fi
+echo "==========================================="
+
+exit "${rc}"
 ```
+
+The script runs three checks in sequence:
+
+1. **JVM flag visibility:** queries the JVM with `-XX:+PrintFlagsFinal` to check whether this build exposes a `UseBranchProtection` flag.
+
+2. **Branch protection flag exercise:** attempts to start the JVM with `-XX:UseBranchProtection=standard`. If accepted, the JVM was built with branch protection support and can emit PAC/BTI instructions in JIT-compiled code.
+
+3. **Hardware capability probe:** compiles and runs a small Java class inside the JVM that reads `/proc/self/auxv` to check whether the hardware and kernel expose PAC and BTI to userspace.
+
+After all three checks, the script prints a `SUMMARY` block that combines the results into one of three verdicts:
+
+- **FULL PAC/BTI SUPPORT:** The platform exposes PAC/BTI and the JVM JIT can use it.
+- **PARTIAL PAC/BTI SUPPORT:** The platform exposes PAC/BTI but the JVM JIT does not use it.
+- **NO PAC/BTI SUPPORT:** The platform does not expose PAC/BTI.
 
 ## Run the test script
 
@@ -340,7 +394,7 @@ chmod 755 ./test-pacbti.sh
 ./test-pacbti.sh
 ```
 
-Output should resemble:
+The output is similar to:
 
 ```output
 === OpenJDK JVM PAC/BTI platform exercise ===
@@ -352,7 +406,7 @@ OpenJDK Runtime Environment (build 17.0.13+11-suse-150400.3.48.2-aarch64)
 OpenJDK 64-Bit Server VM (build 17.0.13+11-suse-150400.3.48.2-aarch64, mixed mode, sharing)
 
 --- JVM branch-protection flag visibility check ---
-This is informational. The final result comes from the JVM process auxv probe.
+This is informational.
 No UseBranchProtection flag printed. This can happen with older JVMs or builds that do not expose the flag.
 
 --- Optional runtime flag exercise: -XX:UseBranchProtection=standard ---
@@ -382,10 +436,40 @@ Decoded AArch64 features visible to this JVM process:
 
 FINAL RESULT: POSITIVE
 Meaning     : The JVM is executing on Linux/AArch64 with PAC and BTI exposed to userspace.
+
+===========================================
+  SUMMARY
+===========================================
+  Platform PAC/BTI (hardware + kernel): YES
+  JVM JIT PAC/BTI support:              NO
+
+  PARTIAL PAC/BTI SUPPORT
+  The platform exposes PAC/BTI but this JVM does not use it in JIT-compiled code.
+  Native libraries and the OS are still protected.
+  To get full support, use a JVM built with --enable-branch-protection.
+===========================================
 ```
+
+## Interpret the results
+
+The output shows you two separate things:
+
+| Layer | Status | What it means |
+|-------|--------|---------------|
+| Hardware + kernel (auxv probe) | ✅ PAC and BTI exposed | The C4A Arm Neoverse-V2 hardware and Linux kernel advertise PAC/BTI to userspace. The SUMMARY confirms platform PAC/BTI is YES. |
+| OS and native libraries | ✅ Protected | The kernel, glibc, and other system libraries on C4A are compiled with PAC/BTI. Native code in the JVM process is already protected. |
+| JVM JIT compiler | ❌ Not enabled | The SUSE OpenJDK 17 package wasn't built with `--enable-branch-protection`. The JIT compiler doesn't emit PAC/BTI instructions in dynamically compiled Java code. |
+
+The `-XX:UseBranchProtection=standard` rejection confirms the JIT limitation. This flag only exists in OpenJDK builds that were compiled from source with branch protection enabled. The SUSE-packaged JDK 17 doesn't include this support.
+
+## What does this mean in practice?
+
+Your Java application runs on a PAC/BTI-capable platform, and native code paths (system libraries, the JVM's own C++ runtime) are already protected. However, the hot Java methods that the JIT compiler turns into native machine code at runtime **don't** contain PAC/BTI instructions. This means JIT-compiled code doesn't benefit from hardware-enforced return address signing or branch target restrictions.
+
+To get full end-to-end PAC/BTI protection, including JIT-compiled Java code, you need a JVM that was built with branch protection enabled.
 
 ## What you've learned and what's next
 
-Most OpenJDK builds are distributed with PAC/BTI enabled but optionally used by default because they must remain compatible with older Arm platforms. When you need these protections, you can build and register your own JVM with branch protection support.
+You've confirmed that the Google Cloud C4A platform exposes PAC and BTI at the hardware level, and that the OS and native libraries are already protected. The gap is in the JVM's JIT compiler: the SUSE OpenJDK 17 package doesn't generate PAC/BTI instructions in compiled Java code.
 
-When a PAC/BTI-enabled JVM runs on a platform that supports these features, Java workloads gain additional control-flow protection.
+In the next section, you'll install a JVM build that includes full PAC/BTI JIT support, closing this gap so that dynamically compiled Java code also benefits from hardware-enforced control-flow integrity.

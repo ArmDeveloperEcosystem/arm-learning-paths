@@ -3,11 +3,7 @@ title: Deploy Elasticsearch on Azure Cobalt 100 Arm virtual machines
 
 description: Learn how to deploy Elasticsearch on an Azure Cobalt 100 Arm virtual machine, validate the service, and run a baseline ESRally benchmark.
 
-draft: true
-cascade:
-    draft: true
-
-minutes_to_complete: 30
+minutes_to_complete: 120
 
 who_is_this_for: This Learning Path is for developers who want to deploy and benchmark Elasticsearch on Azure Cobalt 100 Arm virtual machines.
 
@@ -17,7 +13,7 @@ learning_objectives:
     - Run a baseline ESRally benchmark and interpret key performance metrics
 
 prerequisites:
-    - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 instances (Dpsv6)
+    - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 instances (Epdsv6 series)
     - Basic familiarity with SSH
     - Familiarity with Elasticsearch and ESRally
 
