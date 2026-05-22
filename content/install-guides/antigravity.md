@@ -31,10 +31,6 @@ After installation, running the tool (via the `agy` command) will initiate the a
 - **Local Machine:** It will automatically open your default browser for Google Sign-In.
 - **Remote/SSH Sessions:** It will detect the environment and print a secure authorization URL that you can copy and open in your local browser to complete the login.
 
-If you are migrating from the older Gemini CLI, you can use the built-in migration command to import your existing settings, skills, and configuration:
-```bash
-agy plugin import gemini
-```
 
 ## Install Antigravity CLI on macOS
 
@@ -52,7 +48,7 @@ The installer detects your macOS environment and downloads the appropriate binar
 
 To run the command globally, ensure this directory is included in your system's `PATH`. Add the following line to your shell configuration file (e.g., `~/.zshrc` or `~/.bash_profile`):
 
-```bash
+```console
 export PATH="$HOME/.local/bin:$PATH"
 ```
 
@@ -140,6 +136,12 @@ agy --help
 
 Inside the interactive TUI session, you can type `?` to list all available slash commands (e.g., `/settings`, `/clear`, `/fork`, `/logout`).
 
+If you are migrating from the older Gemini CLI, you can use the built-in migration command to import your existing settings, skills, and configuration:
+
+```console
+agy plugin import gemini
+```
+
 ## Configure context for Arm development
 
 Context configuration allows you to provide the Antigravity agent with persistent information about your development environment, preferences, and project details. This helps it generate highly relevant and tailored responses for Arm architecture development.
@@ -152,13 +154,13 @@ Antigravity CLI respects both global and workspace-level context files to guide 
 
 Create the global configuration directory if it does not exist:
 
-```bash
+```console
 mkdir -p ~/.gemini
 ```
 
 Create a global context file with your Arm development preferences:
 
-```bash
+```console
 cat > ~/.gemini/GEMINI.md << 'EOF'
 I am an Arm Linux developer. I prefer Ubuntu and other Debian based distributions. I don't use any x86 computers so please provide all information assuming I'm working on Arm Linux. Sometimes I use macOS and Windows on Arm, but please only provide information about these operating systems when I ask for it.
 EOF
