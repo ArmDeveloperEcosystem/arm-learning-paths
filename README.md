@@ -22,7 +22,7 @@ Note that all site content, including new contributions, is licensed under a [Cr
 
 ## AI Development Tools
 
-When using AI coding assistants (GitHub Copilot, Kiro, Gemini, Cursor, etc.), refer to `.github/copilot-instructions.md` for project-specific guidelines including content requirements, writing style standards, and Arm terminology conventions for Learning Paths.
+When using AI coding assistants (GitHub Copilot, Kiro, Antigravity, Cursor, etc.), refer to `.github/copilot-instructions.md` for project-specific guidelines including content requirements, writing style standards, and Arm terminology conventions for Learning Paths.
 
 <br/>
 

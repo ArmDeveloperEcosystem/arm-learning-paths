@@ -1,9 +1,5 @@
 ---
 title: Train and deploy XGBoost models on Google Cloud C4A Axion VM
-
-draft: true
-cascade:
-    draft: true
     
 description: Set up XGBoost on Google Cloud C4A Axion Arm VMs running SUSE Linux to train machine learning models, tune model performance, benchmark large-scale datasets, and deploy trained models as REST APIs.
 
@@ -12,10 +8,10 @@ minutes_to_complete: 90
 who_is_this_for: This is an introductory topic for DevOps engineers, ML engineers, data engineers, and software developers who want to train and deploy XGBoost machine learning models on SUSE Linux Enterprise Server (SLES) Arm64, optimize model performance, benchmark training workloads, and expose models through scalable inference APIs.
 
 learning_objectives:
-    - Install and configure XGBoost on Google Cloud C4A Axion processors for Arm64
-    - Train and evaluate machine learning models using XGBoost
-    - Tune model hyperparameters and benchmark large-scale datasets
-    - Deploy trained XGBoost models as REST APIs and validate inference workflows
+  - Install and configure XGBoost on Google Cloud C4A Axion processors for Arm64
+  - Train and evaluate machine learning models using XGBoost
+  - Tune model hyperparameters and benchmark large-scale datasets
+  - Deploy trained XGBoost models as REST APIs and validate inference workflows
 
 prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled

@@ -19,7 +19,7 @@ This model works well for:
 
 ### When D2D isn't enough
 
-As your fleet grows, D2D mode has limitations. You might need devices on different networks to communicate, or a registry that remembers devices after they disconnect. You might also need stronger identity controls, credential rotation, or audit logs.
+As your fleet grows beyond a single local network, D2D mode has limitations. You might need devices in different sites or regions to find and call each other, or a registry that remembers devices after they disconnect. You might also need stronger identity controls, credential rotation, or audit logs.
 
 ### When to add a server
 

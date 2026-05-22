@@ -54,10 +54,10 @@ Run the program:
 ./sve
 ```
 
-On AWS Graviton3 processors, based on the Neoverse V2, the output is:
+On the 1st generation AGI CPU processors the output is:
 
 ```output
-SVE vector length is: 32 bytes
+SVE vector length is: 16 bytes
 ```
 
 If the hardware doesn't support SVE the program will crash with an illegal instruction.
