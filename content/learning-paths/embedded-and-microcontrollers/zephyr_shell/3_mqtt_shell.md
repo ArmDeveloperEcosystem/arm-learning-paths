@@ -416,4 +416,4 @@ A pristine build is required when you change the board because Workbench for Zep
 
 ## What's next?
 
-You now have a working Zephyr shell over MQTT on the FRDM-MCXN947. In the next section, you will enable the RTT shell backend on the Silicon Labs xG27 Dev Kit and interact with the shell through J-Link RTT Viewer.
+You now have a working Zephyr shell over MQTT on the FRDM-MCXN947. In the next section, you will enable the UART shell backend on the FRDM-MCXN947 and interact with the shell through a USB serial connection using PuTTY on Windows or the built-in `screen` utility on macOS

@@ -18,6 +18,7 @@ prerequisites:
 author: 
     - Ayoub Bourjilat
     - Odin Shen
+    - Akash Malik
 
 skilllevels: Introductory
 subjects: RTOS Fundamentals
