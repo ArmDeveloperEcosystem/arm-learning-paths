@@ -94,7 +94,7 @@ Configure PuTTY with:
 Select **Open** to connect.
 
 <p style="text-align:center;">
-  <img src="/learning-paths/embedded-and-microcontrollers/zephyr_shell/images/Putty-Installation.png"
+  <img src="/learning-paths/embedded-and-microcontrollers/zephyr_shell/images/putty_installation.png"
        alt="PuTTY Installation"
        width="640"
        style="max-width:100%;height:auto;" />
@@ -145,7 +145,7 @@ kernel thread list
 ```
 
 <p style="text-align:center;">
-  <img src="/learning-paths/embedded-and-microcontrollers/zephyr_shell/images/Uart_Shell_Output.png"
+  <img src="/learning-paths/embedded-and-microcontrollers/zephyr_shell/images/uart_shell_output.png"
        alt="Uart Shell Output"
        width="640"
        style="max-width:100%;height:auto;" />

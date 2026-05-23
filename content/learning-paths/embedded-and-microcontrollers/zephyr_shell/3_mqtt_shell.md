@@ -44,7 +44,7 @@ In the **Workbench for Zephyr** panel, select **New Application** to open the **
 Select **Create** to generate the project.
 
 <p style="text-align:center;">
-  <img src="/learning-paths/embedded-and-microcontrollers/zephyr_shell/images/WZ-new_project.png"
+  <img src="/learning-paths/embedded-and-microcontrollers/zephyr_shell/images/wz_new_project.png"
        alt="Workbench for Zephyr Create a new Zephyr Application Project wizard with West Workspace zephyr, Toolchain zephyr-sdk-1.0.1, Board NXP FRDM-MCXN947 CPU0, Application type Create new application, Sample project hello_world, Project Name mqtt_shell_backend, Project Location zephyr/apps, and Debug preset checked."
        width="640"
        style="max-width:100%;height:auto;" />

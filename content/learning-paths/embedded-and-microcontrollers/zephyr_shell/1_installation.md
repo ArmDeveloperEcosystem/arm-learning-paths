@@ -63,7 +63,7 @@ After installation:
 Select **Open** to connect to the Zephyr UART shell.
 
 <p style="text-align:center;">
-  <img src="/learning-paths/embedded-and-microcontrollers/zephyr_shell/images/Putty-Installation.png"
+  <img src="/learning-paths/embedded-and-microcontrollers/zephyr_shell/images/putty_installation.png"
        alt="PuTTY Installation"
        width="640"
        style="max-width:100%;height:auto;" />
