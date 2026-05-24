@@ -185,32 +185,53 @@ Run a CUDA validation container:
 
 ```bash
 docker run --rm --gpus all \
-nvcr.io/nvidia/cuda:12.4.1-base-ubuntu22.04 \
+nvcr.io/nvidia/cuda:13.0.1-devel-ubuntu24.04 \
 nvidia-smi
 ```
 
 If you have not pulled this image before, Docker downloads it before running `nvidia-smi`. This can take a few minutes depending on your network connection.
 
 ```text
-Unable to find image 'nvcr.io/nvidia/cuda:12.4.1-base-ubuntu22.04' locally
-12.4.1-base-ubuntu22.04: Pulling from nvidia/cuda
-70104cd59e2a: Pull complete 
-35e6dd55b641: Pull complete 
-56c8cdb42d24: Pull complete 
-22748568967f: Pull complete 
-56dc85502937: Pull complete 
-Digest: sha256:0f6bfcbf267e65123bcc2287e2153dedfc0f24772fb5ce84afe16ac4b2fada95
-Status: Downloaded newer image for nvcr.io/nvidia/cuda:12.4.1-base-ubuntu22.04
-Wed May 20 18:15:08 2026       
+Unable to find image 'nvcr.io/nvidia/cuda:13.0.1-devel-ubuntu24.04' locally
+13.0.1-devel-ubuntu24.04: Pulling from nvidia/cuda
+03f66a4525ea: Pull complete 
+c03b8ec8dd33: Pull complete 
+cae1e96ffa7d: Pull complete 
+2cb956a72162: Pull complete 
+817eab9d3c52: Pull complete 
+cc43ec4c1381: Pull complete 
+30fc8198a31e: Pull complete 
+c88eadd06616: Pull complete 
+c7ba38867e8d: Pull complete 
+fd2e70db7702: Pull complete 
+85eb6b47da08: Pull complete 
+Digest: sha256:7d2f6a8c2071d911524f95061a0db363e24d27aa51ec831fcccf9e76eb72bc92
+Status: Downloaded newer image for nvcr.io/nvidia/cuda:13.0.1-devel-ubuntu24.04
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 13.0.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+Sun May 24 10:13:04 2026       
 +-----------------------------------------------------------------------------------------+
-| NVIDIA-SMI 580.95.05              Driver Version: 580.95.05      CUDA Version: 13.0     |
+| NVIDIA-SMI 580.159.03             Driver Version: 580.159.03     CUDA Version: 13.0     |
 +-----------------------------------------+------------------------+----------------------+
 | GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
 | Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
 |                                         |                        |               MIG M. |
 |=========================================+========================+======================|
-|   0  NVIDIA GB10                    On  |   0000000F:01:00.0  On |                  N/A |
-| N/A   37C    P0              5W /  N/A  | Not Supported          |      0%      Default |
+|   0  NVIDIA GB10                    On  |   0000000F:01:00.0 Off |                  N/A |
+| N/A   44C    P0             10W /  N/A  | Not Supported          |      0%      Default |
 |                                         |                        |                  N/A |
 +-----------------------------------------+------------------------+----------------------+
 
