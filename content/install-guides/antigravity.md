@@ -1,6 +1,6 @@
 ---
 title: Antigravity CLI
-description: Install Antigravity CLI on macOS and Arm Linux to interact with the Antigravity 2.0 development platform, then configure it with the Arm MCP Server for Arm-focused development.
+description: Install Antigravity CLI on macOS and Arm Linux to interact with the Antigravity 2.0 development platform, then integrate it with the Arm MCP Server for Arm-focused development.
 author: Jason Andrews
 minutes_to_complete: 15
 official_docs: https://www.antigravity.google/docs/cli-overview
