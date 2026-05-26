@@ -13,10 +13,12 @@ official_docs: https://docs.aws.amazon.com/cdk/v2/guide/home.html
 test_images:
 - ubuntu:latest
 test_maintenance: true
+draft: true
 title: AWS CDK 
 tool_install: true
 weight: 1
 ---
 
-The AWS Cloud Development Kit (CDK) is an open-source software development framework that you can use to define and deploy Arm-based cloud infrastructure in code. 
+The AWS Cloud Development Kit (CDK) is an open-source software development framework that you can use to define and deploy cloud infrastructure in code. You can use AWS CDK to 
 
+In this guide, you'll learn how to install the AWS CDK CLI and build an app that uses.
