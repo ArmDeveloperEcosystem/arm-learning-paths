@@ -25,12 +25,16 @@ Before you begin, make sure your environment meets these requirements:
 
 This Learning Path was tested on a 96 core machine with 128-bit SVE, 192 GB of RAM and 500 GB of attached storage.
 
+{{% notice Note %}}
+Ubuntu 26.04 and later ship with Python 3.14 as the system default. vLLM does not currently support Python 3.14. This Learning Path explicitly installs and uses Python 3.12, so follow the steps as written regardless of your Ubuntu version.
+{{% /notice %}}
+
 ## Install build dependencies
 
 Install the following packages required for running inference with vLLM on Arm64:
 ```bash
 sudo apt-get update -y
-sudo apt install -y python3.12-venv python3.12-dev
+sudo apt install -y python3.12-venv python3.12-dev gcc g++ build-essential
 ```
 
 Now install tcmalloc, a fast memory allocator from Google’s gperftools, which improves performance under high concurrency:
@@ -49,6 +53,10 @@ python -m pip install --upgrade pip
 
 ## Install vLLM for CPU
 
+{{% notice Note %}}
+The following command installs vLLM version 0.20.0. The same steps work with other versions — replace the version number in the URL with your chosen release. To find the latest version, see the [vLLM releases page](https://github.com/vllm-project/vllm/releases).
+{{% /notice %}}
+
 Install a CPU-specific build of vLLM:
 ```bash
 export VLLM_VERSION=0.20.0
@@ -60,11 +68,18 @@ If you wish to build vLLM from source you can follow the instructions in the [Bu
 
 ## Set up access to LLama3.1-8B models
 
-To access the Llama models hosted by Hugging Face, you will need to install the Hugging Face CLI so that you can authenticate yourself and the harness can download what it needs. You should create an account on https://huggingface.co/ and follow the instructions [in the Hugging Face CLI guide](https://huggingface.co/docs/huggingface_hub/en/guides/cli) to install the CLI and setup your access token. You can then login to HF:
+To access the Llama models hosted by Hugging Face, you need to install the Hugging Face CLI and authenticate with your access token. Install the CLI with:
+```bash
+curl -LsSf https://hf.co/cli/install.sh | bash
+```
+
+For more details and alternative installation methods, see the [Hugging Face CLI guide](https://huggingface.co/docs/huggingface_hub/en/guides/cli).
+
+Create an account on [huggingface.co](https://huggingface.co/) if you don't already have one, then generate an access token in your account settings. Log in with:
 ```bash
 hf auth login
 ```
 
-Paste your access token into the terminal when prompted. To access Llama3.1-8B you need to request access on the Hugging Face website. Visit https://huggingface.co/meta-llama/Llama-3.1-8B and select "Expand to review and access". Complete the form and you should be granted access in a matter of minutes.
+Paste your access token into the terminal when prompted. To access Llama3.1-8B you need to request access on the Hugging Face website. Visit [meta-llama/Llama-3.1-8B](https://huggingface.co/meta-llama/Llama-3.1-8B) and select "Expand to review and access". Complete the form and you should be granted access in a matter of minutes.
 
-Your environment is now setup to run inference with vLLM. Next, we'll review model quantisation and then you'll use vLLM to run inference on both quantised and non-quantised Llama and Whisper models.
+Your environment is now setup to run inference with vLLM. Next, we'll review model quantization and then you'll use vLLM to run inference on both quantized and non-quantized Llama and Whisper models.
