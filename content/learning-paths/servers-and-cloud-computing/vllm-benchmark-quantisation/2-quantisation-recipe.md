@@ -8,11 +8,11 @@ layout: learningpathall
 
 ## Understand quantization
 
-Quantized models have their weights converted to a lower precision data type, which reduces the memory requirements of the model and can improve performance significantly. In the [Run vLLM inference with INT4 quantization on Arm servers](/learning-paths/servers-and-cloud-computing/vllm-acceleration/) Learning Path, you can learn how to quantize a model yourself. There are also many publicly available quantized versions of popular models, such as [RedHatAI/Meta-Llama-3.1-8B-quantized.w8a8](https://huggingface.co/RedHatAI/Meta-Llama-3.1-8B-quantized.w8a8) and [RedHatAI/whisper-large-v3-quantized.w8a8](https://huggingface.co/RedHatAI/whisper-large-v3-quantized.w8a8), which this Learning Path uses.
+Quantized models have their weights converted to a lower precision data type, which reduces the memory requirements of the model and can improve performance significantly. In the [Run vLLM inference with INT4 quantization on Arm servers](/learning-paths/servers-and-cloud-computing/vllm-acceleration/) Learning Path, you can learn how to quantize a model yourself. There are also many publicly available quantized versions of popular models, such as [RedHatAI/Meta-Llama-3.1-8B-quantized.w8a8](https://huggingface.co/RedHatAI/Meta-Llama-3.1-8B-quantized.w8a8) and [RedHatAI/whisper-large-v3-quantized.w8a8](https://huggingface.co/RedHatAI/whisper-large-v3-quantized.w8a8), which you'll use in this Learning Path.
 
-The notation w8a8 means that the weights have been quantized to 8-bit integers and the activations (the input data) are dynamically quantized to the same. This allows Arm's 8-bit integer matrix multiply feature I8MM to be used. You can learn more about this in the [KleidiAI and matrix multiplication](/learning-paths/cross-platform/kleidiai-explainer/) Learning Path.
+The notation `w8a8` means that the weights have been quantized to 8-bit integers and the activations (the input data) are dynamically quantized to the same. This allows Arm's 8-bit integer matrix multiply feature I8MM to be used. For more information, see the [KleidiAI and matrix multiplication](/learning-paths/cross-platform/kleidiai-explainer/) Learning Path.
 
-The w8a8 models used in this Learning Path only apply quantization to the weights and activations in the linear layers of the transformer blocks. The activation quantizations are applied per-token and the weights are quantized per-channel. That is, each output channel dimension has a scaling factor applied between INT8 and BF16 representations.
+The w8a8 models used in this Learning Path apply quantization only to the weights and activations in the linear layers of the transformer blocks. The activation quantizations are applied per-token and the weights are quantized per-channel. That is, each output channel dimension has a scaling factor applied between INT8 and BF16 representations.
 
 ## (Optional) Quantize your own models 
 
