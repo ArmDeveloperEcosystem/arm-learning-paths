@@ -139,7 +139,7 @@ Expert community
 Batch completed in : 7.93s
 ```
 
-The quantized model completed the request in 7.93s compared to 16.50s for the non-quantized model — roughly a 2x speedup. The response quality differs between the two models because quantization reduces model precision, which can affect output style and coherence. The quantized model identified the Big O examples but formatted them as if pulling from a Q&A website rather than producing a clean explanation.
+The quantized model completes the same request in roughly half the time of the non-quantized model — approximately a 2x speedup. The response quality differs between the two models because quantization reduces model precision, which can affect output style and coherence. The quantized model identified the Big O examples but formatted them as if pulling from a Q&A website rather than producing a clean explanation.
 
 You have now run inference using both the non-quantized and quantized Llama3.1-8B models.
 
@@ -254,4 +254,4 @@ The output is similar to:
 Batch completed in : 8.14s
 ```
 
-The quantized Whisper model completed in 8.14s compared to 31.85s for the non-quantized model — roughly a 4x speedup, while producing an identical transcription. You have installed vLLM and demonstrated you can run inference on your models. Now you can move on to benchmarking the Llama models and compare their performance.
+The quantized Whisper model completes the same transcription in roughly a quarter of the time — approximately a 4x speedup — while producing an identical transcription. You have installed vLLM and demonstrated you can run inference on your models. Now you can move on to benchmarking the Llama models and compare their performance.

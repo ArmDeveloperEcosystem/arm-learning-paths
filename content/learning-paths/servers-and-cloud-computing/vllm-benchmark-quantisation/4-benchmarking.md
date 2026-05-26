@@ -70,7 +70,7 @@ P99 TPOT (ms):                           966.98
 ==================================================
 ```
 
-Here greedy decoding (`--top-p 1 --temperature 0`) selects the highest-probability token at each step rather than sampling, giving deterministic and reproducible results. The key metrics to focus on are output token throughput (64.26 tok/s), total token throughput (162.24 tok/s), mean TTFT (1077ms), and mean TPOT (168ms). The mean TPOT of 168ms exceeds the 100ms target at `max-concurrency 10` for the BF16 model — the quantized model run below uses higher concurrency to demonstrate the throughput improvement.
+Here greedy decoding (`--top-p 1 --temperature 0`) selects the highest-probability token at each step rather than sampling, giving deterministic and reproducible results. The key metrics to focus on are output token throughput, total token throughput, mean TTFT, and mean TPOT. As shown in the output above, the mean TPOT exceeds the 100ms target at `max-concurrency 10` for the BF16 model — the quantized model run below uses higher concurrency to demonstrate the throughput improvement.
 
 Repeat with the quantized model. The reduced model size allows you to increase concurrency, which results in a significant throughput improvement. Stop the running BF16 server first with Ctrl+C, then start the quantized model server:
 ```bash
@@ -124,7 +124,7 @@ P99 TPOT (ms):                           1221.36
 ==================================================
 ```
 
-The quantized model completes the same benchmark in 210s versus 552s for BF16 — a 2.6x reduction in benchmark duration. Output token throughput increases from 64.26 to 138.36 tok/s and total token throughput from 162.24 to 395.89 tok/s, confirming significant throughput gains from INT8 quantization at higher concurrency.
+The quantized model completes the same benchmark in roughly 2.6x less time than the BF16 model. Output token throughput and total token throughput both increase by over 2x, confirming significant throughput gains from INT8 quantization at higher concurrency.
 
 ## Llama accuracy benchmarking
 
@@ -176,11 +176,11 @@ The output is similar to:
 | - stem           |      2|none  |     0|acc   |↑  |0.6053|±  |0.0345|
 ```
 
-The INT8 model scores 0.6614 on MMLU compared to 0.6895 for BF16 — a drop of approximately 3%, which is consistent with the expected accuracy cost of INT8 weight quantization. For full reference results, see the [Red Hat model card](https://huggingface.co/RedHatAI/Meta-Llama-3.1-8B-quantized.w8a8#accuracy).
+The INT8 model scores approximately 3% lower on MMLU than the BF16 model, which is consistent with the expected accuracy cost of INT8 weight quantization. For full reference results, see the [Red Hat model card](https://huggingface.co/RedHatAI/Meta-Llama-3.1-8B-quantized.w8a8#accuracy).
 
 ## Summary of results
 
-The benchmarking results you generate will depend on the hardware you are using. The values below were measured on a 96 core machine with 128-bit SVE and 192 GB of RAM. Using the INT8 quantized Llama3.1-8B model we observe throughput improvements of over 2x. The accuracy results below used `--limit 10`; a full dataset run may show up to ~8% accuracy drop.
+The benchmarking results you generate will depend on the hardware you are using. The values below are illustrative examples measured on a 96-core machine with 128-bit SVE and 192 GB of RAM — treat them as a guide to the relative improvements rather than absolute targets. Using the INT8 quantized Llama3.1-8B model, throughput improvements of over 2x are observed. The accuracy results below used `--limit 10`; a full dataset run may show up to ~8% accuracy drop.
 
 ### Throughput: BF16 vs INT8 (max-concurrency 10 vs 24)
 | Metric | BF16 | INT8 | Ratio |
