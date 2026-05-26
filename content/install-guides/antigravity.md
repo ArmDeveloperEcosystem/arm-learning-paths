@@ -233,7 +233,7 @@ Select your container tool from the following tabs to view setup instructions an
 
 {{< tabpane-normal >}}
   {{< tab header="Podman" >}}
-Install: [Podman](https://podman.io/docs/installation)
+Install [Podman](https://podman.io/docs/installation).
 
 Pull the Arm MCP Server image:
 ```console
@@ -266,7 +266,7 @@ Add the following configuration to `~/.gemini/antigravity-cli/mcp_config.json`:
 ```
   {{< /tab >}}
   {{< tab header="Finch" >}}
-Install: [Finch](/install-guides/finch/)
+Install [Finch](/install-guides/finch/).
 
 Pull the Arm MCP Server image:
 ```console
@@ -299,7 +299,7 @@ Add the following configuration to `~/.gemini/antigravity-cli/mcp_config.json`:
 ```
   {{< /tab >}}
   {{< tab header="Colima" >}}
-Install: [Colima](https://github.com/abiosoft/colima#installation)
+Install [Colima](https://github.com/abiosoft/colima#installation).
 
 Colima is a lightweight, open-source command-line alternative to Docker Desktop (primarily for macOS). It runs a minimal virtual machine in the background, allowing you to use your standard `docker` command-line tool without installing Docker Desktop.
 
@@ -334,7 +334,7 @@ Add the following configuration to `~/.gemini/antigravity-cli/mcp_config.json`:
 ```
   {{< /tab >}}
   {{< tab header="Rancher Desktop" >}}
-Install: [Rancher Desktop](https://docs.rancherdesktop.io/getting-started/installation/)
+Install [Rancher Desktop](https://docs.rancherdesktop.io/getting-started/installation/).
 
 Rancher Desktop uses Docker via Moby.
 
@@ -407,5 +407,5 @@ If you are facing issues or have questions, reach out to mcpserver@arm.com.
 
 You're now ready to use Antigravity CLI for Arm architecture development, migration, and optimization.
 
-For a general workflow that shows how you can automate migration to Arm, see the Learning Path [Automate x86-to-Arm application migration using the Arm MCP server](/learning-paths/servers-and-cloud-computing/arm-mcp-server/).
+To test a workflow for migrating an application from x86 to Arm, see the Learning Path [Automate x86-to-Arm application migration using the Arm MCP server](/learning-paths/servers-and-cloud-computing/arm-mcp-server/).
 
