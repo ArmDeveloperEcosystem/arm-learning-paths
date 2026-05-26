@@ -5,8 +5,6 @@ author: Jason Andrews
 minutes_to_complete: 15
 official_docs: https://www.antigravity.google/docs/cli-overview
 
-draft: true
-
 test_maintenance: true
 test_images:
 - ubuntu:latest
