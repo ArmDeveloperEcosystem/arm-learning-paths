@@ -14,7 +14,7 @@ To learn more about markdown formatting, you can also refer to other Markdown re
 
 ## Learning Path formatting
 
-Use the following quick links to jump to the appropriate section for each type of formatting. 
+Use the following quick links to jump to the section for each type of formatting. 
 
 - [Markdown syntax](#markdown-syntax)
 - [Code snippets](#code-snippets)
