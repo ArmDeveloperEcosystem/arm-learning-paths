@@ -28,17 +28,17 @@ In this guide, you'll learn how to install Antigravity CLI on macOS and Arm Linu
 You need a Google account to use Antigravity CLI. If you don't have one, visit [Google Account Creation](https://accounts.google.com/signup) to create an account.
 
 After installation, running the tool (via the `agy` command) will initiate the authentication process:
-- **Local Machine:** It will automatically open your default browser for Google Sign-In.
-- **Remote/SSH Sessions:** It will detect the environment and print a secure authorization URL that you can copy and open in your local browser to complete the login.
+- Local Machine: It will automatically open your default browser for Google Sign-In.
+- Remote/SSH Sessions: It will detect the environment and print a secure authorization URL that you can copy and open in your local browser to complete the login.
 
 
 ## Install Antigravity CLI on macOS
 
 You can install Antigravity CLI on macOS using either the official one-liner script or Homebrew.
 
-### Option 1: Install using the official installer script (Recommended)
+### Install using the official installer script (Recommended)
 
-First, verify that `curl` is available on your system, then run the installer:
+To install using the official installer script, first verify that `curl` is available on your system. Then, run the installer:
 
 ```console
 curl -fsSL https://antigravity.google/cli/install.sh | bash
@@ -58,7 +58,7 @@ Apply the changes to your current terminal session:
 source ~/.zshrc
 ```
 
-### Option 2: Install using Homebrew
+### Install using Homebrew
 
 If you prefer using Homebrew for package management, you can install the CLI using the Homebrew cask:
 
@@ -124,7 +124,7 @@ Start an interactive session to authenticate and test basic functionality:
 agy
 ```
 
-This launches the terminal user interface (TUI). On your first run, follow the prompt to authenticate with your Google account. Once authenticated, you can immediately begin asking questions.
+The command launches the terminal user interface (TUI). On your first run, follow the prompt to authenticate with your Google account. After you've authenticated, you can start asking questions.
 
 ### View the available command-line options
 
@@ -144,21 +144,21 @@ agy plugin import gemini
 
 ## Configure context for Arm development
 
-Context configuration allows you to provide the Antigravity agent with persistent information about your development environment, preferences, and project details. This helps it generate highly relevant and tailored responses for Arm architecture development.
+You can use context configuration to provide the Antigravity agent with persistent information about your development environment, preferences, and project details. Context helps the agent generate relevant and tailored responses for Arm architecture development.
 
 ### Create a context file
 
 Antigravity CLI respects both global and workspace-level context files to guide agent behavior:
-- **Global Context:** The CLI automatically loads and enforces user-wide rules located at `~/.gemini/GEMINI.md` across all workspaces.
-- **Workspace Context:** The CLI reads `.antigravity.md` (recommended for Antigravity CLI) or `GEMINI.md` (fully supported for backward compatibility) as well as `AGENTS.md` from your active project directory. If both `.antigravity.md` and `GEMINI.md` are present, `.antigravity.md` takes precedence.
+- Global Context: The CLI automatically loads and enforces user-wide rules located at `~/.gemini/GEMINI.md` across all workspaces.
+- Workspace Context: The CLI reads `.antigravity.md` (recommended for Antigravity CLI) or `GEMINI.md` (fully supported for backward compatibility), as well as `AGENTS.md` from your active project directory. If both `.antigravity.md` and `GEMINI.md` are present, `.antigravity.md` takes precedence.
 
-Create the global configuration directory if it does not exist:
+Create the global configuration directory if it doesn't already exist:
 
 ```console
 mkdir -p ~/.gemini
 ```
 
-Create a global context file with your Arm development preferences:
+Create a global context file with your Arm development preferences. For example:
 
 ```console
 cat > ~/.gemini/GEMINI.md << 'EOF'
@@ -166,11 +166,11 @@ I am an Arm Linux developer. I prefer Ubuntu and other Debian based distribution
 EOF
 ```
 
-### Managing settings
+### Manage settings
 
 Antigravity CLI settings are stored in `~/.gemini/antigravity-cli/settings.json`. You can manage settings in two ways:
-1. **Interactive Menu:** Run `agy` and type `/settings` or `/config` to open a full-screen overlay menu to browse and modify settings.
-2. **Manual Editing:** Open `~/.gemini/antigravity-cli/settings.json` in a text editor to update your preferences manually.
+- Interactive Menu: Run `agy` and type `/settings` or `/config` to open a full-screen overlay menu to browse and modify settings.
+- Manual Editing: Open `~/.gemini/antigravity-cli/settings.json` in a text editor to update your preferences manually.
 
 ---
 
@@ -182,11 +182,11 @@ Unlike the older Gemini CLI which stored MCP settings inline inside `settings.js
 
 ### Set up the Arm MCP server with Docker
 
-The Arm MCP server runs as a Docker container that Antigravity CLI connects to via the Model Context Protocol. 
+The Arm MCP server runs as a Docker container that Antigravity CLI connects to using the Model Context Protocol. 
 
-First, ensure Docker is installed and running on your system. If needed, follow the [Docker installation guide](/install-guides/docker/).
+First, ensure Docker is installed and running on your system. If needed, follow the [Docker installation guide](/install-guides/docker/) to set up Docker.
 
-Pull the Arm MCP server Docker image:
+After ensuring Docker is running, pull the Arm MCP server Docker image:
 
 ```console
 docker pull armlimited/arm-mcp:latest
@@ -222,9 +222,9 @@ Add the following JSON configuration to `~/.gemini/antigravity-cli/mcp_config.js
 }
 ```
 
-Replace `/path/to/your/workspace`, `/path/to/your/ssh/private_key`, and `/path/to/your/ssh/known_hosts` with your actual workspace directory, SSH private key, and `known_hosts` file to enable remote testing features on your target device.
+Replace `/path/to/your/workspace`, `/path/to/your/ssh/private_key`, and `/path/to/your/ssh/known_hosts` with your workspace directory, SSH private key, and `known_hosts` file to enable remote testing features on your target device.
 
-### Optional: Use alternative container tools
+### (Optional) Use alternative container tools
 
 If you prefer not to use Docker, you can run the Arm MCP server using other compatible container tools such as Podman, Finch, Colima, or Rancher Desktop. 
 
