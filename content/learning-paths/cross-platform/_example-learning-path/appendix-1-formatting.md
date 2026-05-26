@@ -8,24 +8,22 @@ weight: 7 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-Learning Paths are created using Markdown. 
+Learning Paths are created using Markdown. You can use this section as a guide for how to format your content correctly.
 
-Refer to this section when you have questions on how to format your content correctly.
+To learn more about markdown formatting, you can also refer to other Markdown resources or view the source for [this page on GitHub](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/cross-platform/_example-learning-path/appendix-1-formatting.md?plain=1).
 
-You can also refer to other Markdown resources, and if you are unsure, look [this page in GitHub](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/cross-platform/_example-learning-path/appendix-1-formatting.md?plain=1) to see how to do formatting.
+## Learning Path formatting
 
-## Learning Path Formatting
+Use the following quick links to jump to the appropriate section for each type of formatting. 
 
-Use the quick links below to jump to the appropriate section for each type of formatting. 
-
-- [Markdown Syntax](#markdown-syntax)
-- [Code Snippets](#code-snippets)
+- [Markdown syntax](#markdown-syntax)
+- [Code snippets](#code-snippets)
 - [Images](#images)
-- [Notice Callout](#notice-callout)
+- [Notice callout](#notice-callout)
 
-## Markdown Syntax
+## Markdown syntax
 
-The most common Markdown syntax is in the table.
+The most common Markdown syntax is in the following table.
 
 | Element     | Syntax                   |
 | ----------- | ----------- |
@@ -36,17 +34,25 @@ The most common Markdown syntax is in the table.
 | *Italic text* | \*Italic text\*     |
 | `Code font`   | \`code font\`       |
 
-## Code Snippets
+## Code snippets
 
-You can add code snippets in the standard markdown format. You can also add additional options for the code snippet. 
+You can add code snippets in the standard Markdown format. You can also add options to change how the code snippet is displayed.
 
-Here is a simple example:
+Markdown source:
+
+````markdown
+```console
+echo 'hello world'
+```
+````
+
+The source is rendered as:
 
 ```console
-echo ‘hello world’
+echo 'hello world'
 ```
 
-These are the range of options to add to a code snippet:
+These are the available options for code snippets:
 - Language highlighting
 - Line numbers
 - Line highlighting
@@ -55,22 +61,35 @@ These are the range of options to add to a code snippet:
 - Output lines
 
 ### Language highlighting
-Add the specific language name at the start of the code snippet:
+Add the specific language name at the start of the code snippet.
 
-\`\`\`python \
-print(hello world) \
-\`\`\`
+Markdown source:
+
+````markdown
+```python
+print('hello world')
+```
+````
+
+The source is rendered as:
 
 ```python
-print(hello world)
+print('hello world')
 ```
 
-\`\`\`C \
-int foo(void){ \
-  return 0; \
-} \
-\`\`\`
-```C
+Markdown source:
+
+````markdown
+```c
+int foo(void){
+  return 0;
+}
+```
+````
+
+The source is rendered as:
+
+```c
 int foo(void){
   return 0;
 }
@@ -78,38 +97,50 @@ int foo(void){
 
 ### Line numbers
 
-Specify that line_numbers are true in the following way:
+Specify that line_numbers are true in the following way.
 
-\`\`\`bash { line_numbers = "true" } \
-echo 'hello world' \
-echo ‘I am line two’ \
-\`\`\`
+Markdown source:
+
+````markdown
+```bash { line_numbers = "true" }
+echo 'hello world'
+echo 'I am line two'
+```
+````
+
+The source is rendered as:
 
 ```bash { line_numbers = "true" }
-echo ‘hello world’
-echo ‘I am line two’
+echo 'hello world'
+echo 'I am line two'
 ```
 
 In some cases, the line numbering should not start from one but from another
-value, e.g. if the code excerpt is extracted from a larger file. Use the
-`line_start` attribute to achieve this:
+value, for example if the code excerpt is extracted from a larger file. Use the
+`line_start` attribute to achieve this.
 
-\`\`\`bash { line_numbers = "true" line_start = "10" } \
-echo 'hello world' \
-echo ‘I am line two’ \
-\`\`\`
+Markdown source:
+
+````markdown
+```bash { line_numbers = "true" line_start = "10" }
+echo 'hello world'
+echo 'I am line eleven'
+```
+````
+
+The source is rendered as:
 
 ```bash { line_numbers = "true" line_start = "10" }
-echo ‘hello world’
-echo ‘I am line eleven’
+echo 'hello world'
+echo 'I am line eleven'
 ```
 
-### Output Lines
+### Output lines
 
 There are three ways you can specify command outputs in code:
-1.    Standalone via marking the language as 'output'
-2.    Alongside the 'command_line' functionality 
-3.    Alongside any other language via the 'output_lines' shortcode
+- Standalone via marking the language as 'output'
+- Alongside the 'command_line' functionality
+- Alongside any other language via the 'output_lines' shortcode
 
 {{% notice Note %}}
 In each of the three situations, code marked as 'output' will:
@@ -118,16 +149,37 @@ In each of the three situations, code marked as 'output' will:
 - appear slightly darker
 {{% /notice %}}
 
-Keep reading to see an example of each.
+The following examples show the Markdown source and the rendered output for each approach.
 
 #### Output - standalone block
-Specify this case by making the language 'output'. An example in context:
+Specify this case by making the language 'output'. An example in context.
+
+Markdown source for a command:
+
+````markdown
+```bash
+echo 'hello world'
+echo 'test'
+```
+````
+
+The source is rendered as:
 
 ```bash
 echo 'hello world'
 echo 'test'
 ```
-The output from the above command is:
+
+Markdown source for output:
+
+````markdown
+```output
+hello world
+test
+```
+````
+
+The source is rendered as:
 ```output
 hello world
 test
@@ -137,7 +189,21 @@ test
 
 Use the following syntax by specifying the output lines after a pipe as follows: { command_line="root@localhost | 2-6" }
 
-Example in context:
+Markdown source:
+
+````markdown
+```bash { command_line="root@localhost | 2-6" }
+printf 'HelloWorld\n%.0s' {1..5}
+HelloWorld
+HelloWorld
+HelloWorld
+HelloWorld
+HelloWorld
+```
+````
+
+The source is rendered as:
+
 ```bash { command_line="root@localhost | 2-6" }
 printf 'HelloWorld\n%.0s' {1..5}
 HelloWorld
@@ -149,7 +215,27 @@ HelloWorld
 
 #### Output - alongside any language
 
-To place output in the same code block as the generating command, use the shortcode `{ output_lines = "2-3, 5, 7-11" }` styling. Note that when hitting the `copy` button, only the commands are copied to the clipboard, not the specified output. For example:
+To place output in the same code block as the generating command, use the shortcode `{ output_lines = "2-3, 5, 7-11" }` styling. Note that when hitting the `copy` button, only the commands are copied to the clipboard, not the specified output.
+
+Markdown source:
+
+````markdown
+```bash { output_lines = "2-3,5,7-11" }
+echo 'hello world\nh'
+hello world
+h
+echo 'one line output'
+one line output
+printf 'outputline\n%.0s' {1..5}
+outputline
+outputline
+outputline
+outputline
+outputline
+```
+````
+
+The source is rendered as:
 
 ```bash { output_lines = "2-3,5,7-11" }
 echo 'hello world\nh'
@@ -167,13 +253,38 @@ outputline
 
 ### Command line view
 
-Add command line user context:
+Add user context to a command.
+
+Markdown source:
+
+````markdown
+```bash { command_line="root@localhost" }
+echo 'hello world'
+```
+````
+
+The source is rendered as:
 
 ```bash { command_line="root@localhost" }
-echo ‘hello world’
+echo 'hello world'
 ```
 
-With output:
+Add user context to a command output.
+
+Markdown source:
+
+````markdown
+```bash { command_line="root@localhost | 2-6" }
+printf 'HelloWorld\n%.0s' {1..5}
+HelloWorld
+HelloWorld
+HelloWorld
+HelloWorld
+HelloWorld
+```
+````
+
+The source is rendered as:
 
 ```bash { command_line="root@localhost | 2-6" }
 printf 'HelloWorld\n%.0s' {1..5}
@@ -185,11 +296,27 @@ HelloWorld
 ```
 
 
-### Code Panes  
+### Code panes  
 
-Adding a code pane, for code dependent on OS or architecture. Code panes are incompatible with the other forms of code styling.
+Add a code pane for code dependent on OS or architecture. Code panes are incompatible with the other forms of code styling.
 
-Code pane example with language selector:
+The following is a code pane example with a language selector.
+
+Markdown source:
+
+```markdown
+{{</* tabpane code=true */>}}
+  {{</* tab header="Python" language="python" output_lines="2" */>}}
+print('hello world')
+hello world
+  {{</* /tab */>}}
+  {{</* tab header="Bash" language="bash" */>}}
+echo 'hello world'
+  {{</* /tab */>}}
+{{</* /tabpane */>}}
+```
+
+The source is rendered as:
 
 {{< tabpane code=true >}}
   {{< tab header="Python" language="python" output_lines="2">}}
@@ -202,6 +329,27 @@ echo 'hello world'
 {{< /tabpane >}}
 
 &nbsp;  
+
+Markdown source:
+
+```markdown
+{{</* tabpane code=true */>}}
+  {{</* tab header="Python" language="python" output_lines="2-4,6" */>}}
+print('hello world')*3
+hello world
+hello world
+hello world
+print('another example')
+another example
+  {{</* /tab */>}}
+  {{</* tab header="Bash" language="bash" command_line="root@localhost | 2" */>}}
+echo 'hello world'
+hello world
+  {{</* /tab */>}}
+{{</* /tabpane */>}}
+```
+
+The source is rendered as:
 
 {{< tabpane code=true >}}
   {{< tab header="Python" language="python" output_lines="2-4,6">}}
@@ -220,6 +368,24 @@ hello world
 
 &nbsp;  
 
+Markdown source:
+
+```markdown
+{{</* tabpane code=true */>}}
+  {{</* tab header="Ubuntu 22.04" line_numbers="true" */>}}
+sudo apt-get install jq minicom make cmake gdb-multiarch automake autoconf libtool libftdi-dev libusb-1.0-0-dev pkg-config clang-format -y
+  {{</* /tab */>}}
+  {{</* tab header="Ubuntu 20.04" line_numbers="true" */>}}
+sudo apt-get install jq minicom make cmake gdb-multiarch automake autoconf libtool libftdi-dev libusb-1.0-0-dev pkg-config clang-format -y
+sudo snap install cmake --classic
+  {{</* /tab */>}}
+  {{</* tab header="Raspberry Pi OS" */>}}
+Nothing more to install!
+  {{</* /tab */>}}
+{{</* /tabpane */>}}
+```
+
+The source is rendered as:
 
 {{< tabpane code=true >}}
   {{< tab header="Ubuntu 22.04"  line_numbers="true">}}
@@ -254,7 +420,7 @@ These are the options when adding an image:
     - Left-aligned (default)
     - Center-aligned
 
-### Image Hosting (internal or external)
+### Image hosting (internal or external)
 
 Internal hosting is straightforward. Add the picture (.png or .jpeg format) into the Learning Path directory alongside the *.md files, and refer to it by name. This example is using 'arm-pic.png' which you can find in this directory:
 
@@ -264,7 +430,7 @@ External image referencing is also simple. Obtain the picture link and place tha
 
 ![Arm sample pic](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuMSonKjWrTHvrR00sIUfPtOAxJ-RjUKmWUqCai5hMWC6MiHq8ZsUYBDWYDQ1WsjTb2e4&usqp=CAU "Figure 4. External hosting example")
 
-### Image Alignment (left or center) 
+### Image alignment (left or center) 
 
 Left-alignment is the default image behavior. 
 To center an image, add '#center' at the end of the alt-text and the image + subtitle will render in the center of the page.
@@ -272,33 +438,47 @@ To center an image, add '#center' at the end of the alt-text and the image + sub
 Center aligned:
 ![alt-text #center](arm-pic.png "Figure 5. Centered example")
 
-### Image Sizing
+### Image sizing
 
 Images are displayed in their specified size. To resize an image:
 1. Download the image
 2. Modify the size
 3. Host the image locally.
 
-## Notice Callout
+## Notice callout
 
-Use the following format to add a note / tip for a reader in a highlighted way.
+Use the following syntax to add a highlighted note or tip.
 
-{{%/* notice *optional_title* */%}}  
-Text inside  
+Markdown source:
+
+```markdown
+{{%/* notice */%}}  
+Note that you can use `markdown` formatting in these notices as *well*
+- Bullets
+- Also
+- Work
 {{%/* /notice */%}}  
+```
 
-Simple example:
+The source renders as:
 
-{{% notice  %}}Note that you can use `markdown` formatting in these notices as *well*.{{% /notice %}}
-
-You can add a custom title as well if you desire as so:
-
-{{% notice Important Note %}}
-You can also give a custom title as specified here.
+{{% notice  %}}Note that you can use `markdown` formatting in these notices as *well*.
 - Bullets
 - Also
 - Work
 {{% /notice %}}
 
+The default title for a note is `Tip`. You can add a custom title for a note.
 
+Markdown source:
 
+```markdown
+{{%/* notice Important Note */%}}  
+You can also give a custom title as specified here.
+{{%/* /notice */%}}  
+```
+The source renders as:
+
+{{% notice Important Note %}}
+You can also give a custom title as specified here.
+{{% /notice %}}
