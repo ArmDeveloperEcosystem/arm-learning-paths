@@ -1,12 +1,12 @@
 ---
-title: Quantization Recipe
+title: Quantization recipe
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Understanding quantization
+## Understand quantization
 
 Quantized models have their weights converted to a lower precision data type, which reduces the memory requirements of the model and can improve performance significantly. In the [Run vLLM inference with INT4 quantization on Arm servers](/learning-paths/servers-and-cloud-computing/vllm-acceleration/) Learning Path, you can learn how to quantize a model yourself. There are also many publicly available quantized versions of popular models, such as [RedHatAI/Meta-Llama-3.1-8B-quantized.w8a8](https://huggingface.co/RedHatAI/Meta-Llama-3.1-8B-quantized.w8a8) and [RedHatAI/whisper-large-v3-quantized.w8a8](https://huggingface.co/RedHatAI/whisper-large-v3-quantized.w8a8), which this Learning Path uses.
 
@@ -14,7 +14,7 @@ The notation w8a8 means that the weights have been quantized to 8-bit integers a
 
 The w8a8 models used in this Learning Path only apply quantization to the weights and activations in the linear layers of the transformer blocks. The activation quantizations are applied per-token and the weights are quantized per-channel. That is, each output channel dimension has a scaling factor applied between INT8 and BF16 representations.
 
-## Quantizing your own models (optional)
+## (Optional) Quantize your own models 
 
 {{% notice Note %}}
 This section is optional. The rest of this Learning Path uses pre-quantized models from Hugging Face and does not require you to run this recipe. Quantizing a model yourself can take several hours.
@@ -118,6 +118,10 @@ for f in tokenizer.json tokenizer_config.json special_tokens_map.json tokenizer.
 done
 ```
 
-Your quantized model is ready. Next, you'll use vLLM to run inference on both the quantized and non-quantized models and compare their outputs.
+## What you've accomplished and what's next
+
+Your quantized model is now ready.
+
+ Next, you'll use vLLM to run inference on both the quantized and non-quantized models and compare their outputs.
 
 

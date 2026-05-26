@@ -254,4 +254,8 @@ The output is similar to:
 Batch completed in : 8.14s
 ```
 
-The quantized Whisper model completes the same transcription in roughly a quarter of the time — approximately a 4x speedup — while producing an identical transcription. You have installed vLLM and demonstrated you can run inference on your models. Now you can move on to benchmarking the Llama models and compare their performance.
+The quantized Whisper model completes the same transcription in roughly a quarter of the time — approximately a 4x speedup — while producing an identical transcription. 
+
+## What you've accomplished and what's next
+
+You have installed vLLM and demonstrated you can run inference on your models. Next, you'll benchmark the Llama models and compare their performance.

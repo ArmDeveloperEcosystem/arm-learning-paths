@@ -6,7 +6,7 @@ weight: 5
 layout: learningpathall
 ---
 
-## Llama performance benchmarking
+## Benchmark Llama performance
 
 Use the vLLM bench CLI to measure the throughput of your models. First, install the required library then start the server in the background:
 ```bash
@@ -126,7 +126,7 @@ P99 TPOT (ms):                           1221.36
 
 The quantized model completes the same benchmark in roughly 2.6x less time than the BF16 model. Output token throughput and total token throughput both increase by over 2x, confirming significant throughput gains from INT8 quantization at higher concurrency.
 
-## Llama accuracy benchmarking
+## Benchmark Llama accuracy 
 
 The lm-evaluation-harness is the standard way to measure model accuracy across common academic benchmarks (for example [MMLU](https://github.com/EleutherAI/lm-evaluation-harness/tree/main/lm_eval/tasks/mmlu), [HellaSwag](https://github.com/EleutherAI/lm-evaluation-harness/tree/main/lm_eval/tasks/hellaswag), [GSM8K](https://github.com/EleutherAI/lm-evaluation-harness/tree/main/lm_eval/tasks/gsm8k)) and runtimes (such as [Hugging Face](https://github.com/huggingface/transformers), [vLLM](https://github.com/vllm-project/vllm), and [llama.cpp](https://github.com/ggml-org/llama.cpp)). In this section you'll install the lm-eval harness with vLLM support, run benchmarks on both the BF16 and INT8 deployments, and interpret the accuracy difference between precisions.
 
@@ -178,7 +178,7 @@ The output is similar to:
 
 The INT8 model scores approximately 3% lower on MMLU than the BF16 model, which is consistent with the expected accuracy cost of INT8 weight quantization. For full reference results, see the [Red Hat model card](https://huggingface.co/RedHatAI/Meta-Llama-3.1-8B-quantized.w8a8#accuracy).
 
-## Summary of results
+## Summary of benchmarking results
 
 The benchmarking results you generate will depend on the hardware you are using. The values below are illustrative examples measured on a 96-core machine with 128-bit SVE and 192 GB of RAM — treat them as a guide to the relative improvements rather than absolute targets. Using the INT8 quantized Llama3.1-8B model, throughput improvements of over 2x are observed. The accuracy results below used `--limit 10`; a full dataset run may show up to ~8% accuracy drop.
 
@@ -196,6 +196,6 @@ The benchmarking results you generate will depend on the hardware you are using.
 
 These results were generated with `--limit 10`. Run without `--limit` for a statistically representative accuracy comparison.
 
-## Next steps
+## What you've accomplished
 
 Now that your environment is set up for running inference, benchmarking, and quantizing different models, you can experiment further. Try benchmarking accuracy with different tasks, different quantization techniques, or different models. Your results will allow you to balance accuracy and performance when making decisions about model deployment.
