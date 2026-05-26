@@ -395,7 +395,7 @@ Plugins (~/.gemini/antigravity-cli/plugins)
 ```
 
 
-### Use Arm prompt files with Antigravity and the MCP server
+### Use Arm prompt files with the MCP server
 
 To guide the agent in using MCP tools effectively across common Arm development tasks, pair the MCP server with Arm-specific prompt files. 
 
@@ -407,5 +407,5 @@ If you are facing issues or have questions, reach out to mcpserver@arm.com.
 
 You're now ready to use Antigravity CLI for Arm architecture development, migration, and optimization.
 
-For a general workflow that you can use to automate migration to Arm, see the Learning Path [Automate x86-to-Arm application migration using the Arm MCP server](learning-paths/servers-and-cloud-computing/arm-mcp-server/).
+For a general workflow that shows how you can automate migration to Arm, see the Learning Path [Automate x86-to-Arm application migration using the Arm MCP server](/learning-paths/servers-and-cloud-computing/arm-mcp-server/).
 
