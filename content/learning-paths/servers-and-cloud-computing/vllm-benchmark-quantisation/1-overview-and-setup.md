@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## What is vLLM? 
 
-[vLLM](https://docs.vllm.ai/en/latest/) is an open-source, high-throughput inference and serving engine for large language models (LLMs). It’s designed to maximise hardware efficiency, making LLM inference faster, more memory-efficient, and scalable.
+[vLLM](https://docs.vllm.ai/en/latest/) is an open-source, high-throughput inference and serving engine for large language models (LLMs). It’s designed to maximize hardware efficiency, making LLM inference faster, more memory-efficient, and scalable.
 
 ## Understand the models you'll use
 

@@ -1,12 +1,12 @@
 ---
-title: Evaluate Llama3.1-8B throughput and accuracy
+title: Evaluate Llama 3.1 8B throughput and accuracy
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Benchmark Llama performance
+## Benchmark Llama throughput
 
 Use the vLLM bench CLI to measure the throughput of your models. First, install the required library then start the server in the background:
 ```bash
@@ -20,7 +20,7 @@ vllm serve \
 
 Wait for `Application startup complete` in the server output before continuing. The following `wget` command will take a few seconds, which usually gives the server enough time to start.
 
-vLLM uses dynamic continuous batching to maximise hardware utilisation. Two key parameters govern this process:
+vLLM uses dynamic continuous batching to maximize hardware utilization. Two key parameters govern this process:
 - `max-model-len`: the maximum sequence length (number of tokens per request). No single prompt or generated sequence can exceed this limit. The value chosen here is large enough for the selected model and dataset.
 - `max-num-batched-tokens`: the total number of tokens processed in one batch across all requests. The sum of input and output tokens from all concurrent requests must stay within this limit. The value chosen here, combined with the concurrency limit shown as follows, gives optimal throughput and latency.
 
@@ -135,9 +135,9 @@ First, install the required libraries for benchmarking with `lm_eval`:
 pip install ray lm_eval[vllm] 
 ```
 
-You can use a limited number of prompts to validate your environment by appending ```--limit 10``` to the following command:
+You can use a limited number of prompts to validate your environment by using the ```--limit 10``` flag:
 ```bash
-lm_eval --model vllm --model_args pretrained=meta-llama/Llama-3.1-8B,dtype=bfloat16,max_model_len=4096 --tasks mmlu,gsm8k --batch_size auto
+lm_eval --model vllm --model_args pretrained=meta-llama/Llama-3.1-8B,dtype=bfloat16,max_model_len=4096 --tasks mmlu,gsm8k --batch_size auto --limit 10
 ```
 A proper accuracy benchmark should be run over the whole dataset, though this can be time consuming and is considered optional for this Learning Path. This accuracy benchmark will be slower the first time through as you will download the test data associated with your selected task
 
@@ -153,7 +153,7 @@ The output is similar to:
 ```
 
 {{% notice Note %}}
-This output was generated with `--limit 10`, which runs only 10 prompts per task. Results will vary between runs at this sample size. Remove `--limit 10` for a full benchmark over the complete dataset.
+This output was generated with `--limit 10`, which runs only 10 prompts per task. Results will vary between runs at this sample size. Remove `--limit 10` for a benchmark over the complete dataset.
 {{% /notice %}}
 
 The [MMLU task](https://github.com/EleutherAI/lm-evaluation-harness/tree/main/lm_eval/tasks/mmlu) is a set of multiple choice questions split into the subgroups listed in the output. The task allows you to measure the ability of an LLM to understand questions and select the right answers.
@@ -201,6 +201,6 @@ Run without `--limit` for a statistically representative accuracy comparison.
 
 ## What you've accomplished
 
-You've now succesfully benchmarked quantized and non-quantized LLama3.1-8B models for throughput and accuracy. The results suggest that quantization improves a model's throughput but can reduce its accuracy.
+You've now successfully benchmarked quantized and non-quantized LLama 3.1 8B models for throughput and accuracy. The results suggest that quantization improves a model's throughput but can reduce its accuracy.
 
 Now that your environment is set up for running inference, benchmarking, and quantizing different models, you can experiment further. Try benchmarking accuracy with different tasks, different quantization techniques, or different models. Your results will allow you to balance accuracy and performance when making decisions about model deployment.

@@ -14,7 +14,12 @@ prerequisites:
     - An Arm-based Linux server (Ubuntu 22.04+ recommended) with a minimum of 32 vCPUs, 96 GB RAM, and 64 GB free disk space
     - Python 3.12 and basic familiarity with Hugging Face Transformers and quantization schemes
 
-author: Anna Mayne, Nikhil Gupta, Marek Michałowski
+description: Learn how to run Llama 3.1 8B and Whisper inference with BF16 and W8A8 quantized models on Arm servers, then compare throughput and accuracy with vLLM benchmark tools.
+
+author:
+  - Anna Mayne
+  - Nikhil Gupta
+  - Marek Michałowski
 
 ### Tags
 skilllevels: Introductory
