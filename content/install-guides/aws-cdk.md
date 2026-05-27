@@ -63,7 +63,7 @@ cdk --version
 The output is similar to:
 
 ```output
-
+2.1125.0 (build 71fd29e)
 ```
 ## Next steps
 
