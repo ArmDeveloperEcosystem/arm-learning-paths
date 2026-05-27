@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Overview
 
-In this section, you install the macOS dependencies required to build LiteRT-LM and prepare a Gemma model in LiteRT-LM `.litertlm` format.
+In this section, you install the macOS dependencies required to build LiteRT-LM and prepare a Gemma 4 model in LiteRT-LM `.litertlm` format.
 
 ## Install prerequisites on macOS
 
@@ -48,44 +48,43 @@ mkdir -p $HOME/gemma4-prefill-bench/LiteRT-LM/models
 The benchmark commands in this Learning Path assume your model directory is under `LiteRT-LM/models/`.
 {{% /notice %}}
 
-## Prepare a LiteRT-LM-compatible model
+## Prepare a LiteRT-LM-compatible Gemma 4 model
 
 LiteRT-LM benchmark commands in this Learning Path use `litert_lm_advanced_main`, which expects a LiteRT-LM model artifact (`.litertlm`) for `--model_path`.
 
-The `google/gemma-3-4b-it` repository on Hugging Face follows the Transformers layout (multiple `safetensors` files), so it is not directly consumable by `litert_lm_advanced_main`.
+The base Gemma model repositories on Hugging Face follow the Transformers layout, so they are not directly consumable by `litert_lm_advanced_main`.
 
 Use a prebuilt LiteRT-LM model artifact instead:
 
 ```bash
 cd $HOME/gemma4-prefill-bench/LiteRT-LM/models
-hf auth login
-hf download google/gemma-3n-E4B-it-litert-lm \
-  --include "gemma-3n-E4B-it-int4.litertlm" \
-  --local-dir ./gemma-3n-E4B-it-litert-lm
+hf download litert-community/gemma-4-E4B-it-litert-lm \
+  gemma-4-E4B-it.litertlm \
+  --local-dir ./gemma-4-E4B-it-litert-lm
 
-cp ./gemma-3n-E4B-it-litert-lm/gemma-3n-E4B-it-int4.litertlm \
-   ./gemma-3n-E4B-it-int4.litertlm
+cp ./gemma-4-E4B-it-litert-lm/gemma-4-E4B-it.litertlm \
+   ./gemma-4-E4B-it.litertlm
 
-ls -lh ./gemma-3n-E4B-it-int4.litertlm
+ls -lh ./gemma-4-E4B-it.litertlm
 ```
 
 {{% notice Note %}}
-The model repository is gated. Make sure your Hugging Face account has accepted the model terms before downloading.
+If the download is denied, run `hf auth login`, accept the model terms in Hugging Face, and repeat the download command.
 {{% /notice %}}
 
 Expected layout:
 
 ```text
 LiteRT-LM/models/
-├── gemma-3n-E4B-it-int4.litertlm
-└── gemma-3n-E4B-it-litert-lm/
-    └── gemma-3n-E4B-it-int4.litertlm
+├── gemma-4-E4B-it.litertlm
+└── gemma-4-E4B-it-litert-lm/
+    └── gemma-4-E4B-it.litertlm
 ```
 
 ## What you've accomplished and what's next
 
 In this section:
 - You installed macOS prerequisites and pinned Bazel for LiteRT-LM
-- You created the local model directory and prepared a LiteRT-LM-compatible `.litertlm` Gemma model
+- You created the local model directory and prepared a LiteRT-LM-compatible `.litertlm` Gemma 4 model
 
 In the next section, you will build and run the benchmark workflow.

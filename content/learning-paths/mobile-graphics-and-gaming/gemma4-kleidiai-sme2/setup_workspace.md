@@ -10,6 +10,10 @@ layout: learningpathall
 
 In this section, you prepare a local workspace and clone the exact LiteRT-LM, KleidiAI, and XNNPACK commits used for this benchmark flow.
 
+{{% notice Note %}}
+TODO before publication: replace the pinned KleidiAI and XNNPACK commits below with the final known-good upstream commits after the LiteRT-LM dependency update lands. If LiteRT-LM consumes those upstream revisions directly, remove the local `--override_repository` flags in the build commands and simplify this section to clone only LiteRT-LM.
+{{% /notice %}}
+
 Create a working directory and move into it:
 
 ```bash
