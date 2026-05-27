@@ -3,7 +3,7 @@ title: Run vLLM inference with quantized models and benchmark on Arm servers
     
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic for developers interested in running inference on quantized models. In this Learning Path, you'll learn how to run inference on Llama 3.1-8B and Whisper with and without quantization, and benchmark Llama performance and accuracy with vLLM's bench CLI and the LM Evaluation Harness.
+who_is_this_for: This is an introductory topic for developers interested in running inference on quantized models. In this Learning Path, you'll learn how to run inference on Llama 3.1-8B and Whisper with and without quantization. You'll then benchmark Llama performance and accuracy with vLLM's bench CLI and the LM Evaluation Harness.
 
 learning_objectives: 
     - Install a recent release of vLLM

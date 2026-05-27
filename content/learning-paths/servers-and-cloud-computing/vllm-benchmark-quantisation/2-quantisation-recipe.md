@@ -17,10 +17,10 @@ The w8a8 models used in this Learning Path apply quantization only to the weight
 ## (Optional) Quantize your own models 
 
 {{% notice Note %}}
-This section is optional. The rest of this Learning Path uses pre-quantized models from Hugging Face and does not require you to run this recipe. Quantizing a model yourself can take several hours.
+This step is optional. You'll be using pre-quantized models from Hugging Face for the rest of this Learning Path, so you don't need to run this recipe. Quantizing a model yourself can take several hours.
 {{% /notice %}}
 
-If you prefer to generate your own w8a8 quantized model rather than using the pre-quantized RedHat models, the recipe below shows how. Install the required packages before running the quantization script.
+If you prefer to generate your own w8a8 quantized model rather than using the pre-quantized RedHat models, the following recipe shows how. Install the required packages before running the quantization script.
 
 {{% notice Note %}}
 The following commands use specific package versions that were tested with this recipe. To find the latest versions, see [llmcompressor](https://github.com/vllm-project/llm-compressor/releases), [compressed-tensors](https://github.com/neuralmagic/compressed-tensors/releases), and [datasets](https://github.com/huggingface/datasets/releases) on GitHub.
@@ -32,7 +32,7 @@ pip install llmcompressor==0.10.0.1
 pip install datasets==4.6.0
 ```
 
-The script uses GPTQ (Generalized Post-Training Quantization) to calibrate the quantization scales. It loads 256 samples from a calibration dataset, runs a forward pass through each linear layer, and computes per-channel weight scales and per-token activation scales. The output is saved as a quantized model in the `Meta-Llama-3.1-8B-quantized.w8a8` directory.
+The script uses Generalized Post-Training Quantization (GPTQ) to calibrate the quantization scales. It loads 256 samples from a calibration dataset, runs a forward pass through each linear layer, and computes per-channel weight scales and per-token activation scales. The output is saved as a quantized model in the `Meta-Llama-3.1-8B-quantized.w8a8` directory.
 
 Create a file named `w8a8_quant.py` with the following content:
 
@@ -111,7 +111,7 @@ Run the script. This step can take several hours depending on your hardware:
 python w8a8_quant.py
 ```
 
-When this has completed, copy the tokenizer files from the original model into your quantized model directory before running inference:
+When quantization is completed, copy the tokenizer files from the original model into your quantized model directory before running inference:
 ```bash
 for f in tokenizer.json tokenizer_config.json special_tokens_map.json tokenizer.model; do
   cp ~/.cache/huggingface/hub/models--meta-llama--Meta-Llama-3.1-8B/snapshots/*/"$f" Meta-Llama-3.1-8B-quantized.w8a8/ 2>/dev/null || true
@@ -120,8 +120,8 @@ done
 
 ## What you've accomplished and what's next
 
-Your quantized model is now ready.
+You've now learned about quantization of models and the steps to quantize a model if you want to. 
 
- Next, you'll use vLLM to run inference on both the quantized and non-quantized models and compare their outputs.
+Next, you'll use vLLM to run inference on both quantized and non-quantized models and compare their outputs.
 
 

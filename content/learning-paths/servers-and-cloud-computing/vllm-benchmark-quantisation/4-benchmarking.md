@@ -18,13 +18,13 @@ vllm serve \
   --max-model-len 4096 &
 ```
 
-Wait for `Application startup complete` in the server output before continuing. The `wget` command below will take a few seconds, which usually gives the server enough time to start.
+Wait for `Application startup complete` in the server output before continuing. The following `wget` command will take a few seconds, which usually gives the server enough time to start.
 
 vLLM uses dynamic continuous batching to maximise hardware utilisation. Two key parameters govern this process:
 - `max-model-len`: the maximum sequence length (number of tokens per request). No single prompt or generated sequence can exceed this limit. The value chosen here is large enough for the selected model and dataset.
-- `max-num-batched-tokens`: the total number of tokens processed in one batch across all requests. The sum of input and output tokens from all concurrent requests must stay within this limit. The value chosen here, combined with the concurrency limit shown below, gives optimal throughput and latency.
+- `max-num-batched-tokens`: the total number of tokens processed in one batch across all requests. The sum of input and output tokens from all concurrent requests must stay within this limit. The value chosen here, combined with the concurrency limit shown as follows, gives optimal throughput and latency.
 
-Now the server is running, you can benchmark using the public ShareGPT dataset.
+Now the server is running, you can benchmark using the public ShareGPT dataset:
 ```bash
 wget https://huggingface.co/datasets/anon8231489123/ShareGPT_Vicuna_unfiltered/resolve/main/ShareGPT_V3_unfiltered_cleaned_split.json
  
@@ -70,9 +70,9 @@ P99 TPOT (ms):                           966.98
 ==================================================
 ```
 
-Here greedy decoding (`--top-p 1 --temperature 0`) selects the highest-probability token at each step rather than sampling, giving deterministic and reproducible results. The key metrics to focus on are output token throughput, total token throughput, mean TTFT, and mean TPOT. As shown in the output above, the mean TPOT exceeds the 100ms target at `max-concurrency 10` for the BF16 model — the quantized model run below uses higher concurrency to demonstrate the throughput improvement.
+Here greedy decoding (`--top-p 1 --temperature 0`) selects the highest-probability token at each step rather than sampling, giving deterministic and reproducible results. The key metrics to focus on are output token throughput, total token throughput, mean TTFT, and mean TPOT. As shown in the output, the mean TPOT exceeds the 100ms target at `max-concurrency 10` for the BF16 model. The quantized model that you'll run next uses higher concurrency to demonstrate the throughput improvement.
 
-Repeat with the quantized model. The reduced model size allows you to increase concurrency, which results in a significant throughput improvement. Stop the running BF16 server first with Ctrl+C, then start the quantized model server:
+Repeat with the quantized model. With the reduced model size, you can increase concurrency, which results in a significant throughput improvement. Stop the running BF16 server first with Ctrl+C, then start the quantized model server:
 ```bash
 vllm serve \
   --model RedHatAI/Meta-Llama-3.1-8B-quantized.w8a8 \
@@ -128,17 +128,18 @@ The quantized model completes the same benchmark in roughly 2.6x less time than 
 
 ## Benchmark Llama accuracy 
 
-The lm-evaluation-harness is the standard way to measure model accuracy across common academic benchmarks (for example [MMLU](https://github.com/EleutherAI/lm-evaluation-harness/tree/main/lm_eval/tasks/mmlu), [HellaSwag](https://github.com/EleutherAI/lm-evaluation-harness/tree/main/lm_eval/tasks/hellaswag), [GSM8K](https://github.com/EleutherAI/lm-evaluation-harness/tree/main/lm_eval/tasks/gsm8k)) and runtimes (such as [Hugging Face](https://github.com/huggingface/transformers), [vLLM](https://github.com/vllm-project/vllm), and [llama.cpp](https://github.com/ggml-org/llama.cpp)). In this section you'll install the lm-eval harness with vLLM support, run benchmarks on both the BF16 and INT8 deployments, and interpret the accuracy difference between precisions.
+The lm-evaluation-harness is the standard way to measure model accuracy across common academic benchmarks (for example [MMLU](https://github.com/EleutherAI/lm-evaluation-harness/tree/main/lm_eval/tasks/mmlu), [HellaSwag](https://github.com/EleutherAI/lm-evaluation-harness/tree/main/lm_eval/tasks/hellaswag), [GSM8K](https://github.com/EleutherAI/lm-evaluation-harness/tree/main/lm_eval/tasks/gsm8k)) and runtimes (such as [Hugging Face](https://github.com/huggingface/transformers), [vLLM](https://github.com/vllm-project/vllm), and [llama.cpp](https://github.com/ggml-org/llama.cpp)). In this step, you'll install the `lm_eval` harness with vLLM support, run benchmarks on both the BF16 and INT8 deployments, and interpret the accuracy difference between precisions.
 
-First install the required libraries for benchmarking with lm_eval.
+First, install the required libraries for benchmarking with `lm_eval`:
 ```bash
 pip install ray lm_eval[vllm] 
 ```
 
-You can use a limited number of prompts to validate your environment by appending ```--limit 10``` to the command below. A proper accuracy benchmark should be run over the whole dataset, though this can be time consuming and is considered optional for this Learning Path. This accuracy benchmark will be slower the first time through as you will download the test data associated with your selected task:
+You can use a limited number of prompts to validate your environment by appending ```--limit 10``` to the following command:
 ```bash
 lm_eval --model vllm --model_args pretrained=meta-llama/Llama-3.1-8B,dtype=bfloat16,max_model_len=4096 --tasks mmlu,gsm8k --batch_size auto
 ```
+A proper accuracy benchmark should be run over the whole dataset, though this can be time consuming and is considered optional for this Learning Path. This accuracy benchmark will be slower the first time through as you will download the test data associated with your selected task
 
 The output is similar to:
 
@@ -155,11 +156,11 @@ The output is similar to:
 This output was generated with `--limit 10`, which runs only 10 prompts per task. Results will vary between runs at this sample size. Remove `--limit 10` for a full benchmark over the complete dataset.
 {{% /notice %}}
 
-The [MMLU task](https://github.com/EleutherAI/lm-evaluation-harness/tree/main/lm_eval/tasks/mmlu) is a set of multiple choice questions split into the subgroups listed above. It allows you to measure the ability of an LLM to understand questions and select the right answers.
+The [MMLU task](https://github.com/EleutherAI/lm-evaluation-harness/tree/main/lm_eval/tasks/mmlu) is a set of multiple choice questions split into the subgroups listed in the output. The task allows you to measure the ability of an LLM to understand questions and select the right answers.
 
 The [GSM8k task](https://github.com/EleutherAI/lm-evaluation-harness/tree/main/lm_eval/tasks/gsm8k) is a set of math problems that test an LLM's mathematical reasoning ability.
 
-Repeat with the quantized model.
+Repeat with the quantized model:
 ```bash
 lm_eval --model vllm --model_args pretrained=RedHatAI/Meta-Llama-3.1-8B-quantized.w8a8,dtype=bfloat16,max_model_len=4096 --tasks mmlu,gsm8k --batch_size auto
 ```
@@ -180,7 +181,9 @@ The INT8 model scores approximately 3% lower on MMLU than the BF16 model, which 
 
 ## Summary of benchmarking results
 
-The benchmarking results you generate will depend on the hardware you are using. The values below are illustrative examples measured on a 96-core machine with 128-bit SVE and 192 GB of RAM — treat them as a guide to the relative improvements rather than absolute targets. Using the INT8 quantized Llama3.1-8B model, throughput improvements of over 2x are observed. The accuracy results below used `--limit 10`; a full dataset run may show up to ~8% accuracy drop.
+The benchmarking results you generate will depend on the hardware you are using. The following values are illustrative examples measured on a 96-core machine with 128-bit SVE and 192 GB of RAM. Treat them as a guide to the relative improvements rather than absolute targets.
+
+Using the INT8 quantized Llama3.1-8B model resulted in throughput improvements of over 2x. The following accuracy results used `--limit 10`. A full dataset run might show up to an 8% accuracy drop.
 
 ### Throughput: BF16 vs INT8 (max-concurrency 10 vs 24)
 | Metric | BF16 | INT8 | Ratio |
@@ -194,8 +197,10 @@ The benchmarking results you generate will depend on the hardware you are using.
 |---|---|
 | 97% | 92% |
 
-These results were generated with `--limit 10`. Run without `--limit` for a statistically representative accuracy comparison.
+Run without `--limit` for a statistically representative accuracy comparison.
 
 ## What you've accomplished
+
+You've now succesfully benchmarked quantized and non-quantized LLama3.1-8B models for throughput and accuracy. The results suggest that quantization improves a model's throughput but can reduce its accuracy.
 
 Now that your environment is set up for running inference, benchmarking, and quantizing different models, you can experiment further. Try benchmarking accuracy with different tasks, different quantization techniques, or different models. Your results will allow you to balance accuracy and performance when making decisions about model deployment.

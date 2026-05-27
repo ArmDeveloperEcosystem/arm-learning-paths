@@ -6,11 +6,13 @@ weight: 2
 layout: learningpathall
 ---
 
-## What vLLM is
+## What is vLLM? 
 
 [vLLM](https://docs.vllm.ai/en/latest/) is an open-source, high-throughput inference and serving engine for large language models (LLMs). It’s designed to maximise hardware efficiency, making LLM inference faster, more memory-efficient, and scalable.
 
 ## Understand the models you'll use
+
+You'll use LLama 3.1 8B and Whisper large V3 in this Learning Path.
 
 Llama 3.1 8B is an open-weight, text-only LLM with 8 billion parameters that can understand and generate text. You can view the model card at https://huggingface.co/meta-llama/Llama-3.1-8B.
 
@@ -26,7 +28,7 @@ Before you begin, make sure your environment meets these requirements:
 This Learning Path was tested on a 96 core machine with 128-bit SVE, 192 GB of RAM and 500 GB of attached storage.
 
 {{% notice Note %}}
-Ubuntu 26.04 and later ship with Python 3.14 as the system default. vLLM doesn't currently support Python 3.14. This Learning Path explicitly installs and uses Python 3.12, so follow the steps as written regardless of your Ubuntu version.
+Ubuntu 26.04 and later ship with Python 3.14 as the system default. vLLM doesn't currently support Python 3.14. In this Learning Path, you'll install and use Python 3.12 regardless of your Ubuntu version.
 {{% /notice %}}
 
 ### Install build dependencies
