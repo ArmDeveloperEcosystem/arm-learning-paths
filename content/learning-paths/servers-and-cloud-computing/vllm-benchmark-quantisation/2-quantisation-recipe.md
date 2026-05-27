@@ -22,7 +22,7 @@ This step is optional. You'll be using pre-quantized models from Hugging Face fo
 To learn more about quantizing your own models, see the [Run vLLM inference with INT4 quantization on Arm servers](/learning-paths/servers-and-cloud-computing/vllm-acceleration/) Learning Path. 
 {{% /notice %}}
 
-If you prefer to generate your own `w8a8` quantized model rather than using the pre-quantized Red Hat models, the following recipe shows how. Install the required packages before running the quantization script:
+If you prefer to generate your own `w8a8` quantized model rather than using the pre-quantized Red Hat models, you can use the following recipe. Install the required packages before running the quantization script:
 
 {{% notice Note %}}
 The following commands use specific package versions that were tested with this recipe. To find the latest versions, see [llmcompressor](https://github.com/vllm-project/llm-compressor/releases), [compressed-tensors](https://github.com/neuralmagic/compressed-tensors/releases), and [datasets](https://github.com/huggingface/datasets/releases) on GitHub.

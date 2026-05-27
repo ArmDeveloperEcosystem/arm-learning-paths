@@ -18,13 +18,14 @@ vllm serve \
   --max-model-len 4096 &
 ```
 
-Wait for `Application startup complete` in the server output before continuing. The following `wget` command will take a few seconds, which usually gives the server enough time to start.
+Wait for `Application startup complete` in the server output before continuing. After the server is running,  benchmark using the public ShareGPT dataset.
 
 vLLM uses dynamic continuous batching to maximize hardware utilization. Two key parameters govern this process:
 - `max-model-len`: the maximum sequence length (number of tokens per request). No single prompt or generated sequence can exceed this limit. The value chosen here is large enough for the selected model and dataset.
 - `max-num-batched-tokens`: the total number of tokens processed in one batch across all requests. The sum of input and output tokens from all concurrent requests must stay within this limit. The value chosen here, combined with the concurrency limit shown as follows, gives optimal throughput and latency.
 
-Now the server is running, you can benchmark using the public ShareGPT dataset:
+The following `wget` command takes a few seconds, which usually gives the server enough time to start:
+
 ```bash
 wget https://huggingface.co/datasets/anon8231489123/ShareGPT_Vicuna_unfiltered/resolve/main/ShareGPT_V3_unfiltered_cleaned_split.json
  
@@ -128,7 +129,7 @@ The quantized model completes the same benchmark in roughly 2.6x less time than 
 
 ## Benchmark Llama accuracy 
 
-The lm-evaluation-harness is the standard way to measure model accuracy across common academic benchmarks (for example [MMLU](https://github.com/EleutherAI/lm-evaluation-harness/tree/main/lm_eval/tasks/mmlu), [HellaSwag](https://github.com/EleutherAI/lm-evaluation-harness/tree/main/lm_eval/tasks/hellaswag), [GSM8K](https://github.com/EleutherAI/lm-evaluation-harness/tree/main/lm_eval/tasks/gsm8k)) and runtimes (such as [Hugging Face](https://github.com/huggingface/transformers), [vLLM](https://github.com/vllm-project/vllm), and [llama.cpp](https://github.com/ggml-org/llama.cpp)). In this step, you'll install the `lm_eval` harness with vLLM support, run benchmarks on both the BF16 and INT8 deployments, and interpret the accuracy difference between precisions.
+The Language Model Evaluation Harness is the standard way to measure model accuracy across common academic benchmarks (for example [MMLU](https://github.com/EleutherAI/lm-evaluation-harness/tree/main/lm_eval/tasks/mmlu), [HellaSwag](https://github.com/EleutherAI/lm-evaluation-harness/tree/main/lm_eval/tasks/hellaswag), [GSM8K](https://github.com/EleutherAI/lm-evaluation-harness/tree/main/lm_eval/tasks/gsm8k)) and runtimes (such as [Hugging Face](https://github.com/huggingface/transformers), [vLLM](https://github.com/vllm-project/vllm), and [llama.cpp](https://github.com/ggml-org/llama.cpp)). In this step, you'll install the `lm_eval` harness with vLLM support, run benchmarks on both the BF16 and INT8 deployments, and interpret the accuracy difference between precisions.
 
 First, install the required libraries for benchmarking with `lm_eval`:
 ```bash
@@ -139,7 +140,7 @@ You can use a limited number of prompts to validate your environment by using th
 ```bash
 lm_eval --model vllm --model_args pretrained=meta-llama/Llama-3.1-8B,dtype=bfloat16,max_model_len=4096 --tasks mmlu,gsm8k --batch_size auto --limit 10
 ```
-A proper accuracy benchmark should be run over the whole dataset, though this can be time consuming and is considered optional for this Learning Path. This accuracy benchmark will be slower the first time through as you will download the test data associated with your selected task
+A proper accuracy benchmark should be run over the whole dataset, though this can be time consuming and is considered optional for this Learning Path. The accuracy benchmark will be slower the first time you run it as you'll download the test data associated with your selected task.
 
 The output is similar to:
 
@@ -156,9 +157,9 @@ The output is similar to:
 This output was generated with `--limit 10`, which runs only 10 prompts per task. Results will vary between runs at this sample size. Remove `--limit 10` for a benchmark over the complete dataset.
 {{% /notice %}}
 
-The [MMLU task](https://github.com/EleutherAI/lm-evaluation-harness/tree/main/lm_eval/tasks/mmlu) is a set of multiple choice questions split into the subgroups listed in the output. The task allows you to measure the ability of an LLM to understand questions and select the right answers.
+The [MMLU task](https://github.com/EleutherAI/lm-evaluation-harness/tree/main/lm_eval/tasks/mmlu) is a set of multiple choice questions split into the subgroups listed in the output. You can use this task to measure the ability of an LLM to understand questions and select the right answers.
 
-The [GSM8k task](https://github.com/EleutherAI/lm-evaluation-harness/tree/main/lm_eval/tasks/gsm8k) is a set of math problems that test an LLM's mathematical reasoning ability.
+The [GSM8k task](https://github.com/EleutherAI/lm-evaluation-harness/tree/main/lm_eval/tasks/gsm8k) is a set of math problems that you can use to test an LLM's mathematical reasoning ability.
 
 Repeat with the quantized model:
 ```bash

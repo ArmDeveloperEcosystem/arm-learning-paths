@@ -86,6 +86,6 @@ Paste your access token into the terminal when prompted. To access Llama3.1-8B, 
 
 ## What you've accomplished and what's next
 
-Your environment is now set up to run inference with vLLM. 
+You've now set up your environment to run inference with vLLM. 
 
 Next, you'll review model quantization and then use vLLM to run inference on both quantized and non-quantized Llama and Whisper models.

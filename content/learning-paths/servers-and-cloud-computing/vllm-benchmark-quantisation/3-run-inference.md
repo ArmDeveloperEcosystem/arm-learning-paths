@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Run inference on LLama3.1-8B
 
-vLLM serves an OpenAI-compatible API that you use to run inference on Llama3.1-8B and confirm that the local environment is set up correctly.
+vLLM serves an OpenAI-compatible API that you'll use to run inference on Llama3.1-8B and confirm that the local environment is set up correctly.
 
 Start vLLM’s OpenAI-compatible API server using Llama3.1-8B:
 ```bash
@@ -27,7 +27,7 @@ The server prints its available routes and then confirms it's ready:
 (APIServer pid=27612) INFO:     Application startup complete.
 ```
 
-Wait until you see `Application startup complete` before continuing. The server is now listening on port 8000. Open a new terminal to run the client script while the server continues running in the first terminal.
+Wait until you see `Application startup complete` before continuing. The server is now listening on port `8000`. Open a new terminal to run the client script while the server continues running in the first terminal.
 
 Then create a test script that sends a request to the server using the OpenAI library. Copy the following Python script to a file named `llama_test.py`:
 
