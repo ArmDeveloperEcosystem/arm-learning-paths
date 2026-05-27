@@ -33,7 +33,7 @@ Ubuntu 26.04 and later ship with Python 3.14 as the system default. vLLM doesn't
 
 ### Install build dependencies
 
-Install the following packages required for running inference with vLLM on Arm64:
+Install the following packages required for running inference with vLLM on Arm-based Linux:
 ```bash
 sudo apt-get update -y
 sudo apt install -y python3.12-venv python3.12-dev gcc g++ build-essential

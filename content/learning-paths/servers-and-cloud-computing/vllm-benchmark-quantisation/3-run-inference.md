@@ -218,7 +218,7 @@ The output is similar to:
 Batch completed in : 31.85s
 ```
 
-The script uses `AudioAsset("winning_call")`, a sample audio clip bundled with vLLM. The transcription confirms Whisper is processing audio correctly on Arm64.
+The script uses `AudioAsset("winning_call")`, a sample audio clip bundled with vLLM. The transcription confirms Whisper is processing audio correctly on Arm-based Linux.
 
 You can do the same for the pre-quantized Whisper model loaded directly from Hugging Face. Start the server:
 ```bash
