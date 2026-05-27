@@ -1,5 +1,5 @@
 ---
-title: Run vLLM inference with quantised models and benchmark on Arm servers
+title: Run vLLM inference with quantized models and benchmark on Arm servers
 
 draft: true
 cascade:
@@ -7,16 +7,16 @@ cascade:
     
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic for developers interested in running inference on quantised models. This Learning Path shows you how to run inference on Llama 3.1-8B and Whisper, with and without quantisation, and benchmark Llama performance and accuracy with vLLM's bench CLI and the LM Evaluation Harness.
+who_is_this_for: This is an introductory topic for developers interested in running inference on quantized models. This Learning Path shows you how to run inference on Llama 3.1-8B and Whisper, with and without quantization, and benchmark Llama performance and accuracy with vLLM's bench CLI and the LM Evaluation Harness.
 
 learning_objectives: 
     - Install a recent release of vLLM
-    - Run both quantised and non-quantised variants of Llama3.1-8B and Whisper using vLLM
+    - Run both quantized and non-quantized variants of Llama3.1-8B and Whisper using vLLM
     - Evaluate and compare model performance and accuracy using vLLM's bench CLI and the LM Evaluation Harness
 
 prerequisites:
     - An Arm-based Linux server (Ubuntu 22.04+ recommended) with a minimum of 32 vCPUs, 96 GB RAM, and 64 GB free disk space
-    - Python 3.12 and basic familiarity with Hugging Face Transformers and quantisation
+    - Python 3.12 and basic familiarity with Hugging Face Transformers and quantization schemes
 
 author: Anna Mayne, Nikhil Gupta, Marek Michałowski
 
@@ -27,9 +27,6 @@ armips:
     - Neoverse
 tools_software_languages:
     - vLLM
-    - LM Evaluation Harness
-    - LLM
-    - Generative AI
     - Python
     - PyTorch
     - Hugging Face
