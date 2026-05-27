@@ -19,9 +19,8 @@ prerequisites:
   - Basic familiarity with embedded C programming
   - Basic knowledge of Zephyr RTOS
   - A Corstone-320 MPS4 FPGA development board
-  - A Linux development environment, for example Ubuntu 20.04 or later
-  - Git
-  - Python 3.8 or higher
+  - A Linux development environment, for example Ubuntu 22.04 or later
+  - Git and Python
 
 author: Sue Wu
 
