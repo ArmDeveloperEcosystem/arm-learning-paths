@@ -91,7 +91,7 @@ The required configuration steps vary by AI coding assistant. Refer to the insta
 
 - [GitHub Copilot](/install-guides/github-copilot/)
 - [Claude Code](/install-guides/claude-code/)
-- [Gemini CLI](/install-guides/gemini/)
+- [Antigravity CLI](/install-guides/antigravity/)
 - [Kiro CLI](/install-guides/kiro-cli/)
 - [Codex CLI](/install-guides/codex-cli/)
 

@@ -1,10 +1,9 @@
 ---
 title: Antigravity CLI
+description: Install Antigravity CLI on macOS and Arm Linux to interact with the Antigravity 2.0 development platform, then integrate it with the Arm MCP Server for Arm-focused development.
 author: Jason Andrews
 minutes_to_complete: 15
-official_docs: https://antigravity.google/
-
-draft: true
+official_docs: https://www.antigravity.google/docs/cli-overview
 
 test_maintenance: true
 test_images:
@@ -19,26 +18,26 @@ weight: 1
 
 Antigravity CLI is Google's terminal-based interface for interacting with the Antigravity 2.0 agent-first development platform. You can use it to ask questions, perform multi-file code editing, and invoke AI agents directly from your terminal.
 
-It supports multiple operating systems, including Arm Linux distributions and macOS, and provides powerful AI assistance for developers working on Arm platforms.
+Antigravity CLI supports multiple operating systems, including Arm Linux distributions and macOS. It provides AI assistance for developers working on Arm platforms.
 
-In this guide, you'll learn how to install Antigravity CLI on macOS and Arm Linux.
+In this guide, you'll learn how to install Antigravity CLI on macOS and Arm Linux, then integrate it with the Arm MCP server for Arm architecture development. 
 
 ## Before you begin
 
 You need a Google account to use Antigravity CLI. If you don't have one, visit [Google Account Creation](https://accounts.google.com/signup) to create an account.
 
 After installation, running the tool (via the `agy` command) will initiate the authentication process:
-- **Local Machine:** It will automatically open your default browser for Google Sign-In.
-- **Remote/SSH Sessions:** It will detect the environment and print a secure authorization URL that you can copy and open in your local browser to complete the login.
+- Local machine: It will automatically open your default browser for Google Sign-In.
+- Remote/SSH sessions: It will detect the environment and print a secure authorization URL that you can copy and open in your local browser to complete the login.
 
 
 ## Install Antigravity CLI on macOS
 
 You can install Antigravity CLI on macOS using either the official one-liner script or Homebrew.
 
-### Option 1: Install using the official installer script (Recommended)
+### (Recommended) Install using the official installer script 
 
-First, verify that `curl` is available on your system, then run the installer:
+To install using the official installer script, first verify that `curl` is available on your system. Then, run the installer:
 
 ```console
 curl -fsSL https://antigravity.google/cli/install.sh | bash
@@ -46,7 +45,7 @@ curl -fsSL https://antigravity.google/cli/install.sh | bash
 
 The installer detects your macOS environment and downloads the appropriate binary. By default, the binary is installed to `~/.local/bin`. 
 
-To run the command globally, ensure this directory is included in your system's `PATH`. Add the following line to your shell configuration file (e.g., `~/.zshrc` or `~/.bash_profile`):
+To run the command globally, ensure this directory is included in your system's `PATH`. Add the following line to your shell configuration file (For example, `~/.zshrc` or `~/.bash_profile`):
 
 ```console
 export PATH="$HOME/.local/bin:$PATH"
@@ -58,7 +57,7 @@ Apply the changes to your current terminal session:
 source ~/.zshrc
 ```
 
-### Option 2: Install using Homebrew
+### Install using Homebrew
 
 If you prefer using Homebrew for package management, you can install the CLI using the Homebrew cask:
 
@@ -92,7 +91,7 @@ curl -fsSL https://antigravity.google/cli/install.sh | bash
 
 The script automatically detects the CPU architecture (such as `aarch64` / `arm64`) and installs the compatible Arm Linux binary to `~/.local/bin`.
 
-Ensure the installation directory is in your `PATH` by adding it to your shell configuration file (e.g., `~/.bashrc` or `~/.zshrc`):
+Ensure the installation directory is in your `PATH` by adding it to your shell configuration file (For example, `~/.bashrc` or `~/.zshrc`):
 
 ```bash
 export PATH="$HOME/.local/bin:$PATH"
@@ -124,7 +123,7 @@ Start an interactive session to authenticate and test basic functionality:
 agy
 ```
 
-This launches the terminal user interface (TUI). On your first run, follow the prompt to authenticate with your Google account. Once authenticated, you can immediately begin asking questions.
+The command launches the terminal user interface (TUI). On your first run, follow the prompt to authenticate with your Google account. After you've authenticated, you can start asking questions.
 
 ### View the available command-line options
 
@@ -134,7 +133,7 @@ To print the available commands and options, use the `--help` flag:
 agy --help
 ```
 
-Inside the interactive TUI session, you can type `?` to list all available slash commands (e.g., `/settings`, `/clear`, `/fork`, `/logout`).
+Inside the interactive TUI session, you can type `?` to list all available slash commands (For example, `/settings`, `/clear`, `/fork`, `/logout`).
 
 If you are migrating from the older Gemini CLI, you can use the built-in migration command to import your existing settings, skills, and configuration:
 
@@ -144,21 +143,21 @@ agy plugin import gemini
 
 ## Configure context for Arm development
 
-Context configuration allows you to provide the Antigravity agent with persistent information about your development environment, preferences, and project details. This helps it generate highly relevant and tailored responses for Arm architecture development.
+You can use context configuration to provide the Antigravity agent with persistent information about your development environment, preferences, and project details. Context helps the agent generate relevant and tailored responses for Arm architecture development.
 
 ### Create a context file
 
 Antigravity CLI respects both global and workspace-level context files to guide agent behavior:
-- **Global Context:** The CLI automatically loads and enforces user-wide rules located at `~/.gemini/GEMINI.md` across all workspaces.
-- **Workspace Context:** The CLI reads `.antigravity.md` (recommended for Antigravity CLI) or `GEMINI.md` (fully supported for backward compatibility) as well as `AGENTS.md` from your active project directory. If both `.antigravity.md` and `GEMINI.md` are present, `.antigravity.md` takes precedence.
+- Global context: The CLI automatically loads and enforces user-wide rules located at `~/.gemini/GEMINI.md` across all workspaces.
+- Workspace context: The CLI reads `.antigravity.md` (recommended for Antigravity CLI) or `GEMINI.md` (fully supported for backward compatibility), as well as `AGENTS.md` from your active project directory. If both `.antigravity.md` and `GEMINI.md` are present, `.antigravity.md` takes precedence.
 
-Create the global configuration directory if it does not exist:
+Create the global configuration directory if it doesn't already exist:
 
 ```console
 mkdir -p ~/.gemini
 ```
 
-Create a global context file with your Arm development preferences:
+Create a global context file with your Arm development preferences. For example:
 
 ```console
 cat > ~/.gemini/GEMINI.md << 'EOF'
@@ -166,33 +165,33 @@ I am an Arm Linux developer. I prefer Ubuntu and other Debian based distribution
 EOF
 ```
 
-### Managing settings
+### Manage settings
 
 Antigravity CLI settings are stored in `~/.gemini/antigravity-cli/settings.json`. You can manage settings in two ways:
-1. **Interactive Menu:** Run `agy` and type `/settings` or `/config` to open a full-screen overlay menu to browse and modify settings.
-2. **Manual Editing:** Open `~/.gemini/antigravity-cli/settings.json` in a text editor to update your preferences manually.
+- Interactive menu: Run `agy` and type `/settings` or `/config` to open a full-screen overlay menu to browse and modify settings.
+- Manual editing: Open `~/.gemini/antigravity-cli/settings.json` in a text editor to update your preferences manually.
 
 ---
 
-## Integrate the Arm MCP server with Antigravity CLI
+## Integrate the Arm MCP Server with Antigravity CLI
 
-The Arm Model Context Protocol (MCP) server provides Antigravity CLI with specialized tools and knowledge for Arm architecture development, migration, and optimization. By integrating the Arm MCP server, you gain access to Arm-specific documentation, code analysis tools, and optimization recommendations.
+The Arm Model Context Protocol (MCP) Server provides Antigravity CLI with specialized tools and knowledge for Arm architecture development, migration, and optimization. By integrating the Arm MCP Server, you gain access to Arm-specific documentation, code analysis tools, and optimization recommendations.
 
 Unlike the older Gemini CLI which stored MCP settings inline inside `settings.json`, Antigravity CLI uses a dedicated configuration file for managing MCP servers.
 
-### Set up the Arm MCP server with Docker
+### Set up the Arm MCP Server with Docker
 
-The Arm MCP server runs as a Docker container that Antigravity CLI connects to via the Model Context Protocol. 
+The Arm MCP Server runs as a Docker container that Antigravity CLI connects to using the Model Context Protocol. 
 
-First, ensure Docker is installed and running on your system. If needed, follow the [Docker installation guide](/install-guides/docker/).
+First, ensure Docker is installed and running on your system. If needed, follow the [Docker installation guide](/install-guides/docker/) to set up Docker.
 
-Pull the Arm MCP server Docker image:
+After ensuring Docker is running, pull the Arm MCP server Docker image:
 
 ```console
 docker pull armlimited/arm-mcp:latest
 ```
 
-### Configure Antigravity CLI to use the Arm MCP server
+### Configure Antigravity CLI to use the Arm MCP Server
 
 Create or update the dedicated global MCP configuration file at `~/.gemini/antigravity-cli/mcp_config.json` (or `.agents/mcp_config.json` inside your active workspace to enable it only for a specific project).
 
@@ -222,17 +221,17 @@ Add the following JSON configuration to `~/.gemini/antigravity-cli/mcp_config.js
 }
 ```
 
-Replace `/path/to/your/workspace`, `/path/to/your/ssh/private_key`, and `/path/to/your/ssh/known_hosts` with your actual workspace directory, SSH private key, and `known_hosts` file to enable remote testing features on your target device.
+Replace `/path/to/your/workspace`, `/path/to/your/ssh/private_key`, and `/path/to/your/ssh/known_hosts` with your workspace directory, SSH private key, and `known_hosts` file to enable remote testing features on your target device.
 
-### Optional: Use alternative container tools
+### (Optional) Use alternative container tools
 
-If you prefer not to use Docker, you can run the Arm MCP server using other compatible container tools such as Podman, Finch, Colima, or Rancher Desktop. 
+If you prefer not to use Docker, you can run the Arm MCP Server using other compatible container tools such as Podman, Finch, Colima, or Rancher Desktop. 
 
-Select your container tool from the tabs below to view setup instructions and configuration for `~/.gemini/antigravity-cli/mcp_config.json`:
+Select your container tool from the following tabs to view setup instructions and configuration for `~/.gemini/antigravity-cli/mcp_config.json`:
 
 {{< tabpane-normal >}}
   {{< tab header="Podman" >}}
-Install: [Podman](https://podman.io/docs/installation)
+Install [Podman](https://podman.io/docs/installation).
 
 Pull the Arm MCP Server image:
 ```console
@@ -265,7 +264,7 @@ Add the following configuration to `~/.gemini/antigravity-cli/mcp_config.json`:
 ```
   {{< /tab >}}
   {{< tab header="Finch" >}}
-Install: [Finch](/install-guides/finch/)
+Install [Finch](/install-guides/finch/).
 
 Pull the Arm MCP Server image:
 ```console
@@ -298,7 +297,7 @@ Add the following configuration to `~/.gemini/antigravity-cli/mcp_config.json`:
 ```
   {{< /tab >}}
   {{< tab header="Colima" >}}
-Install: [Colima](https://github.com/abiosoft/colima#installation)
+Install [Colima](https://github.com/abiosoft/colima#installation).
 
 Colima is a lightweight, open-source command-line alternative to Docker Desktop (primarily for macOS). It runs a minimal virtual machine in the background, allowing you to use your standard `docker` command-line tool without installing Docker Desktop.
 
@@ -333,7 +332,7 @@ Add the following configuration to `~/.gemini/antigravity-cli/mcp_config.json`:
 ```
   {{< /tab >}}
   {{< tab header="Rancher Desktop" >}}
-Install: [Rancher Desktop](https://docs.rancherdesktop.io/getting-started/installation/)
+Install [Rancher Desktop](https://docs.rancherdesktop.io/getting-started/installation/).
 
 Rancher Desktop uses Docker via Moby.
 
@@ -369,7 +368,7 @@ Add the following configuration to `~/.gemini/antigravity-cli/mcp_config.json`:
   {{< /tab >}}
 {{< /tabpane-normal >}}
 
-### Verify the Arm MCP server is working
+### Verify the Arm MCP Server is working
 
 Start an interactive Antigravity CLI session:
 
@@ -383,7 +382,7 @@ Use the `/mcp` command to list the active MCP servers and verify that `arm_mcp_s
 /mcp
 ```
 
-The Arm MCP server tools are listed in the output:
+The output lists the Arm MCP Server tools and is similar to:
 
 ```output
 MCP Servers
@@ -394,11 +393,17 @@ Plugins (~/.gemini/antigravity-cli/plugins)
 ```
 
 
-### Use Arm prompt files with the MCP Server
+### Use Arm prompt files with the MCP server
 
-To guide the agent in using MCP tools effectively across common Arm development tasks, pair the server with Arm-specific prompt files. 
+To guide the agent in using MCP tools effectively across common Arm development tasks, pair the MCP server with Arm-specific prompt files. 
 
-Browse the [agent integrations directory](https://github.com/arm/mcp/tree/main/agent-integrations/gemini) to find prompt files for specific use cases, such as:
-- **Arm migration** ([arm-migration.toml](https://github.com/arm/mcp/blob/main/agent-integrations/gemini/arm-migration.toml)): Helps the agent systematically migrate applications from x86 to Arm, including dependency analysis, compatibility checks, and optimization recommendations.
+Browse the [agent integrations directory](https://github.com/arm/mcp/tree/main/agent-integrations/gemini) to find prompt files for specific use cases, such as Arm migration ([arm-migration.toml](https://github.com/arm/mcp/blob/main/agent-integrations/gemini/arm-migration.toml)). The Arm migration prompt file helps the agent systematically migrate applications from x86 to Arm, including dependency analysis, compatibility checks, and optimization recommendations.
 
 If you are facing issues or have questions, reach out to mcpserver@arm.com.
+
+## Next steps
+
+You're now ready to use Antigravity CLI for Arm architecture development, migration, and optimization.
+
+To test a workflow for migrating an application from x86 to Arm, see the Learning Path [Automate x86-to-Arm application migration using the Arm MCP server](/learning-paths/servers-and-cloud-computing/arm-mcp-server/).
+
