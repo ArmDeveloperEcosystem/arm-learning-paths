@@ -40,6 +40,8 @@ If you are on macOS with Apple Silicon the output should be:
 ```output
 arm64
 ```
+If you see a different result, you are not using an Arm computer running 64-bit Linux. 
+
 Before you can use the AWS CDK, you need to set up AWS credentials and install the AWS CLI. For more information about setting up AWS credentials and installing the AWS CLI, see the [AWS Credentials](/install-guides/aws_access_keys) and [AWS CLI](/install-guides/aws-cli) install guides. 
 
 You'll also need to install Node.js 22 or later, and prerequisites specific to the programming languages you want to use. For more information about Node.js and language-specific prerequisites, see [Install Node.js and programming language prerequisites](https://docs.aws.amazon.com/cdk/v2/guide/prerequisites.html#prerequisites-node) in the AWS CDK documentation.
