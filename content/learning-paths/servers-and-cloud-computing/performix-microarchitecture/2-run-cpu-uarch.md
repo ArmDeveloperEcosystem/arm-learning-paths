@@ -30,10 +30,6 @@ int main(int argc, char* argv[]){
 }
 ```
 
-When Arm Performix launches the executable on the target machine, it does so from a temporary agent directory. If your code uses a relative path to save the image, the image is written to that temporary folder and might be deleted or you can't find it. 
-
-To prevent this, edit the `myplot.draw()` line in `main.cpp` to use the absolute path to your project's image folder (for example, `/home/ubuntu/mandelbrot-example/Green-Parallel-512.bmp`), and then rebuild the application.
-
 In the Arm Performix application on your host machine, select the **CPU Microarchitecture** recipe.
 
 ![Arm Performix CPU Microarchitecture configuration screen#center](./cpu-uarch-config.webp "CPU Microarchitecture Configuration")
@@ -58,13 +54,13 @@ Arm Performix generates a high-level instruction pipeline view, highlighting whe
 
 ![Arm Performix high-level instruction pipeline results#center](cpu-uarch-results.webp "Instruction Pipeline View")
 
-In this breakdown, you see frontend and backend Stalls. Within the backend stalls, work is split between integer and floating-point operations.
+In this breakdown, you see frontend, backend, retiring and bad speculation categories. Clicking on the retiring section, work is split between integer and floating-point operations.
 
 There is no measured SIMD activity, even though this workload is highly parallelizable.
 
-The **Insights** panel explains the highest category, which is frontend stalls for this system.
+The **Insights** panel explains the highest category, which is backend bound for this system. One possible cause is contention for the execution units: the integer and floating-point units may be under too much pressure. Using SIMD could reduce that pressure and make the CPU less backend bound.
 
-![Arm Performix insights panel highlighting frontend stalls#center](cpu-uarch-insights.webp "Insights Panel")
+![Arm Performix insights panel highlighting retiring slots#center](cpu-uarch-insights.webp "Insights Panel")
 
 To inspect executed instruction types in more detail, use the Instruction Mix recipe in the next step.
 
