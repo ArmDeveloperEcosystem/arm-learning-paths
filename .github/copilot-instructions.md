@@ -274,5 +274,3 @@ Avoid robotic or generic encouragement phrases such as:
 Use calm, natural transitions that focus on what happens next.
 
 Also avoid multiple consecutive sentences starting with `This`. Vary sentence structure to maintain natural flow.
-
-For additional instructions related to images, Learning Paths, Install Guides, and content quality, see [instructions](./instructions/).

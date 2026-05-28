@@ -28,5 +28,8 @@ Use skills for repeatable workflows such as image audits, metadata description u
 Current shared skills:
 
 - `.github/skills/arm-content-editor/SKILL.md` for reviewing and editing Arm Learning Paths and install guides.
+- `.github/skills/audit-images/SKILL.md` for auditing Markdown image references, deficient alt text, captions, alignment syntax, and before/after image quality counts.
 
 Keep deterministic scans in scripts when possible, and keep long reference material out of always-loaded instructions.
+
+When creating new skills, prefer a structured `SKILL.md` with concise sections such as description, prerequisites, trigger, workflow, validation rules, and error handling. Keep the workflow explicit enough to be repeatable without turning the skill into a full style guide.
