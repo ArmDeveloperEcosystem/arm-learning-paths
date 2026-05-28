@@ -110,8 +110,6 @@ Keep this concise and encouraging. Do not repeat earlier content verbatim.
 
 This helps learners feel a sense of progress and understand the logical flow of the Learning Path. 
 
-The recap for the last section of the Learning Path might not include a forward-looking transition and might recap the whole Path.
-
 Use 'what you've learned' for conceptual sections and 'what you've accomplished' for task sections. 
 
 ### Hyperlink guidelines
