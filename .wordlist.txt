@@ -6209,7 +6209,7 @@ Cypher
 Marek
 Mayne
 Memgraph
-Memgraph’s
+Memgraph's
 Micha
 NetworkX
 PageRank
