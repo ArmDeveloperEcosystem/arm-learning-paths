@@ -1,24 +1,22 @@
 ---
 additional_search_terms:
-  - graph database
-  - database
-  - cypher
-  - graph analytics
-  - graph algorithms
-  - docker
-  - arm64
-  - aarch64
-
+- graph database
+- database
+- cypher
+- graph analytics 
+- graph algorithms
+- docker
+- arm64
+- aarch64
 
 layout: installtoolsall
 minutes_to_complete: 20
-multi_install: true
+multi_install: false
 multitool_install_part: false
 official_docs: https://memgraph.com/docs/getting-started/install-memgraph
 title: Memgraph on Arm
 tool_install: true
 weight: 1
-draft: true
 author: Sabika Tasneem
 ---
 
