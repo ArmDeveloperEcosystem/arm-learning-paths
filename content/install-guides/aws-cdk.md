@@ -26,25 +26,6 @@ The CDK CLI supports different operating systems and the Arm architecture. In th
 
 ## Before you begin
 
-Confirm you are using an Arm computer by running:
-
-```bash { target="ubuntu:latest" }
-uname -m
-```
-
-If you are on Arm Linux the output should be:
-
-```output
-aarch64
-```
-
-If you are on macOS with Apple Silicon the output should be:
-
-```output
-arm64
-```
-If you see a different result, you are not using an Arm computer. 
-
 Before you can use the AWS CDK, you need to set up AWS credentials and install the AWS CLI. For more information about setting up AWS credentials and installing the AWS CLI, see the [AWS Credentials](/install-guides/aws_access_keys) and [AWS CLI](/install-guides/aws-cli) install guides. 
 
 To install AWS CDK CLI, you'll need Node.js 22 or later. You'll also need to install prerequisites specific to the programming languages you want to use. For more information about Node.js and language-specific prerequisites, see [Install Node.js and programming language prerequisites](https://docs.aws.amazon.com/cdk/v2/guide/prerequisites.html#prerequisites-node) in the AWS CDK documentation.
