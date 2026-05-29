@@ -202,6 +202,6 @@ Run without `--limit` for a statistically representative accuracy comparison.
 
 ## What you've accomplished
 
-You've now successfully benchmarked quantized and non-quantized LLama 3.1 8B models for throughput and accuracy. The results suggest that quantization improves a model's throughput but can reduce its accuracy.
+You've now successfully benchmarked quantized and non-quantized Llama 3.1 8B models for throughput and accuracy. The results suggest that quantization improves a model's throughput but can reduce its accuracy.
 
 Now that your environment is set up for running inference, benchmarking, and quantizing different models, you can experiment further. Try benchmarking accuracy with different tasks, different quantization techniques, or different models. Your results will allow you to balance accuracy and performance when making decisions about model deployment.

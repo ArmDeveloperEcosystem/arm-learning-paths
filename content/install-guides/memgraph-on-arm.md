@@ -32,7 +32,7 @@ In this install guide, you'll learn two installation paths:
 - Docker: the quickest way to try Memgraph, and the portable option for macOS, Windows, and any Linux distribution.
 - Native Linux packages: a good choice when Docker is unavailable or not preferred, or when you want to benchmark Memgraph directly on the host.
 
-At the end of each path, you'll run a few Cypher queries with `mgconsole`, then optionally add [MAGE](https://memgraph.com/docs/advanced-algorithms), Memgraph’s graph-algorithm and query-module extension library.
+At the end of each path, you'll run a few Cypher queries with `mgconsole`, then optionally add [MAGE](https://memgraph.com/docs/advanced-algorithms), Memgraph's graph-algorithm and query-module extension library.
 
 ## Before you begin
 
@@ -97,7 +97,7 @@ The following are Docker images that you can choose depending on the Memgraph fe
 | `memgraph/mgconsole` | Standalone CLI client. |
 | `memgraph/lab` | Memgraph Lab web UI. |
 
-Start with `memgraph/memgraph` to get the Memgraph database. If you later want PageRank, community detection, node embeddings, NetworkX integration, or other advanced query modules, see the [MAGE section](#install-the-mage-graph-algorithm-library).
+Start with `memgraph/memgraph` to get the Memgraph database. If you later want PageRank, community detection, node embeddings, NetworkX integration, or other advanced query modules, see the [MAGE section](#optional-install-the-mage-graph-algorithm-library).
 
 ### Connect with mgconsole inside the container
 
@@ -117,7 +117,7 @@ Quit the shell by typing Ctrl-D(eof) or :quit
 memgraph>
 ```
 
-For example `mgconsole` queries, see the [example queries](#how-do-i-run-example-cypher-queries) section.
+For example `mgconsole` queries, see the [example queries](#run-example-cypher-queries-through-mgconsole) section.
 
 ## Install Memgraph natively on Linux
 
@@ -237,7 +237,7 @@ This setting is applied on the Linux host, so it is relevant for both the native
 
 ## (Optional) Install mgconsole separately
 
-`mgconsole` is Memgraph’s command-line client for executing Cypher queries. It is already included in the Memgraph Linux packages, and in the `memgraph/memgraph:3.10.1` and `memgraph/memgraph-mage:3.10.1` Docker images. You need a separate install only if you want to run it from a different machine.
+`mgconsole` is Memgraph's command-line client for executing Cypher queries. It is already included in the Memgraph Linux packages, and in the `memgraph/memgraph:3.10.1` and `memgraph/memgraph-mage:3.10.1` Docker images. You need a separate install only if you want to run it from a different machine.
 
 To install it standalone, download the binary for your platform from the [Memgraph Download Hub](https://memgraph.com/download#individual), or pull the Docker image.
 
@@ -334,7 +334,7 @@ mgconsole --host localhost --port 7687
 
 ### Pattern-matching example
 
-Memgraph’s strength is pattern matching. Try a slightly richer graph:
+Memgraph's strength is pattern matching. Try a slightly richer graph:
 
 ```bash { target="ubuntu:latest" }
 mgconsole --host localhost --port 7687 <<'EOF'
