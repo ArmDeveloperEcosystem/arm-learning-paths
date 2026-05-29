@@ -117,7 +117,7 @@ Quit the shell by typing Ctrl-D(eof) or :quit
 memgraph>
 ```
 
-To try querying with `mgconsole`, skip to the [example queries](#how-do-i-run-example-cypher-queries) section.
+For example `mgconsole` queries, see the [example queries](#how-do-i-run-example-cypher-queries) section.
 
 ## Install Memgraph natively on Linux
 
@@ -175,7 +175,7 @@ sudo dnf install ./memgraph-3.10.1_1-1.aarch64.rpm
   {{< /tab >}}
 {{< /tabpane-normal >}}
 
-### Verify that Memgraph is running
+### Check that Memgraph is running
 
 The package installs a `systemd` service. Check the status of the service:
 
@@ -202,14 +202,13 @@ The output is similar to:
 You are running Memgraph v3.10.1
 ```
 
-The configuration file can be found at `/etc/memgraph/memgraph.conf`. You can fine-tune Memgraph by editing the configuration file. For a full configuration reference, see the [Memgraph configuration docs](https://memgraph.com/docs/database-management/configuration). 
+You can find the configuration file at `/etc/memgraph/memgraph.conf`. To fine-tune Memgraph, edit the configuration file. For a full configuration reference, see the [Memgraph configuration docs](https://memgraph.com/docs/database-management/configuration). 
 
 After editing the configuration file, restart the service:
 
 ```bash
 sudo systemctl restart memgraph
 ``` 
-
 
 ## Increase the memory map area limit
 
@@ -256,9 +255,9 @@ docker run -it memgraph/mgconsole:latest --host <memgraph-host> --port 7687
 
 For `mgconsole` documentation, including all command-line flags, see the [mgconsole CLI docs](https://memgraph.com/docs/getting-started/cli).
 
-## Verify mgconsole installation by running example Cypher queries
+## Run example Cypher queries through mgconsole
 
-With Memgraph running either in Docker or as a native service, you can send queries non-interactively through `mgconsole`.
+With Memgraph running either in Docker or as a native service, you can verify the installation by sending queries non-interactively through `mgconsole`.
 
 {{% notice Note %}}
 If you installed Memgraph with Docker, replace `mgconsole --host localhost --port 7687` with `sudo docker exec -i memgraph mgconsole` in piped commands, or run `docker exec -it memgraph mgconsole` for an interactive session.
