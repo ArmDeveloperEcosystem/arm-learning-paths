@@ -26,14 +26,14 @@ Memgraph publishes native `aarch64` Linux packages and multi-architecture Docker
 
 Graph algorithms parallelize well and scale with core count. Arm server instances can offer a lower cost per query than equivalent x86 instances for memory-intensive graph workloads.
 
-This guide covers two installation paths:
+In this install guide, you'll learn two installation paths:
 
-- **Docker**: the quickest way to try Memgraph, and the portable option for macOS, Windows, and any Linux distribution.
-- **Native Linux packages**: a good choice when Docker is unavailable or not preferred, or when you want to benchmark Memgraph directly on the host.
+- Docker: the quickest way to try Memgraph, and the portable option for macOS, Windows, and any Linux distribution.
+- Native Linux packages: a good choice when Docker is unavailable or not preferred, or when you want to benchmark Memgraph directly on the host.
 
-At the end of each path, you will run a few Cypher queries with `mgconsole`, then optionally add [MAGE](https://memgraph.com/docs/advanced-algorithms), Memgraph’s graph-algorithm and query-module extension library.
+At the end of each path, you'll run a few Cypher queries with `mgconsole`, then optionally add [MAGE](https://memgraph.com/docs/advanced-algorithms), Memgraph’s graph-algorithm and query-module extension library.
 
-## What should I do before installing Memgraph?
+## Before you begin
 
 Confirm you are using an Arm computer with 64-bit Linux by running:
 
@@ -47,16 +47,16 @@ The output should be:
 aarch64
 ```
 
-If you see a different result, you are not using an Arm computer running 64-bit Linux.
+If you see a different result, you aren't using an Arm computer running 64-bit Linux.
 
 
-## How do I install Memgraph with Docker?
+## Install Memgraph with Docker
 
-Docker is the simplest way to run Memgraph on any operating system. The official images on [Docker Hub](https://hub.docker.com/u/memgraph) are multi-arch manifests, so `docker pull` automatically selects the `arm64` variant on Arm hosts.
+You can use Docker to run Memgraph on any operating system. The official images on [Docker Hub](https://hub.docker.com/u/memgraph) are multi-arch manifests, so `docker pull` automatically selects the `arm64` variant on Arm hosts.
 
-If Docker is not already installed, follow the [Docker install guide](/install-guides/docker/).
+If you've not already installed Docker, follow the steps in the [Docker install guide](/install-guides/docker/) to do so.
 
-### How do I start the Memgraph container?
+### Start the Memgraph container
 
 {{% notice Note %}}
 The following commands use Memgraph version 3.10.1. The same steps work with other versions. Replace the version number in image tags, package filenames, and download URLs with your chosen version. To find the latest release, see the [Memgraph GitHub releases page](https://github.com/memgraph/memgraph/releases).
@@ -79,13 +79,15 @@ To confirm that the Arm image was pulled, inspect it:
 docker inspect memgraph/memgraph:3.10.1 --format '{{.Architecture}}'
 ```
 
-The expected output is:
+The output is similar to:
 
 ```output
 arm64
 ```
 
-### Which Docker image should I choose?
+### Choose a Docker image 
+
+The following are Docker images that you can choose depending on the Memgraph features that you want to use:
 
 | Image | Includes |
 | --- | --- |
@@ -94,9 +96,9 @@ arm64
 | `memgraph/mgconsole` | Standalone CLI client. |
 | `memgraph/lab` | Memgraph Lab web UI. |
 
-Start with `memgraph/memgraph` to get the database itself. If you later want PageRank, community detection, node embeddings, NetworkX integration, or other advanced query modules, see the [MAGE section](#how-do-i-install-the-mage-graph-algorithm-library) below.
+Start with `memgraph/memgraph` to get the Memgraph database. If you later want PageRank, community detection, node embeddings, NetworkX integration, or other advanced query modules, see the [MAGE section](#install-the-mage-graph-algorithm-library).
 
-### How do I connect with mgconsole inside the container?
+### Connect with mgconsole inside the container
 
 The `memgraph/memgraph:3.10.1` image ships with `mgconsole` already inside the container:
 
@@ -104,7 +106,7 @@ The `memgraph/memgraph:3.10.1` image ships with `mgconsole` already inside the c
 docker exec -it memgraph mgconsole
 ```
 
-You should see a prompt similar to:
+The output is similar to:
 
 ```output
 mgconsole 1.5.2
@@ -116,7 +118,7 @@ memgraph>
 
 Skip to the [example queries](#how-do-i-run-example-cypher-queries) section to try it out.
 
-## How do I install Memgraph natively on Linux?
+## Install Memgraph natively on Linux
 
 Memgraph provides native `aarch64` packages for the following distributions:
 
@@ -124,7 +126,7 @@ Memgraph provides native `aarch64` packages for the following distributions:
 - Debian 12 and Debian 13
 - Fedora 42
 
-Choose the package that matches your distribution from the [Memgraph Download Hub](https://memgraph.com/download). For convenience, direct download URLs for every supported platform are listed in the [direct download links](https://memgraph.com/docs/getting-started/install-memgraph/direct-download-links) page.
+Choose the package that matches your distribution from the [Memgraph Download Hub](https://memgraph.com/download). For convenience, direct download URLs for every supported platform are listed on the [direct download links](https://memgraph.com/docs/getting-started/install-memgraph/direct-download-links) page.
 
 {{< tabpane-normal >}}
   {{< tab header="Ubuntu / Debian" >}}
@@ -135,7 +137,7 @@ Download the `arm64` `.deb` package. For Ubuntu 24.04 on Arm:
 wget https://download.memgraph.com/memgraph/v3.10.1/ubuntu-24.04-aarch64/memgraph_3.10.1-1_arm64.deb
 ```
 
-Before installing, update the package index and install the required dependency:
+Before installing Memgraph, update the package index and install the required dependency:
 
 ```bash { target="ubuntu:latest" }
 sudo apt update
@@ -163,7 +165,7 @@ Download the Fedora `aarch64` `.rpm`:
 wget https://download.memgraph.com/memgraph/v3.10.1/fedora-42-aarch64/memgraph-3.10.1_1-1.aarch64.rpm
 ```
 
-Install it:
+Install Memgraph:
 
 ```bash
 sudo dnf install ./memgraph-3.10.1_1-1.aarch64.rpm
@@ -172,7 +174,7 @@ sudo dnf install ./memgraph-3.10.1_1-1.aarch64.rpm
   {{< /tab >}}
 {{< /tabpane-normal >}}
 
-### How do I verify Memgraph is running?
+### Verify that Memgraph is running
 
 The package installs a `systemd` service. Check its status:
 
@@ -180,7 +182,7 @@ The package installs a `systemd` service. Check its status:
 sudo systemctl status memgraph
 ```
 
-If it is not already running, start it and enable it on boot:
+If it's not already running, start it and enable it on boot:
 
 ```bash { target="ubuntu:latest" }
 sudo systemctl start memgraph
@@ -193,7 +195,7 @@ Inspect the startup log to confirm the version:
 sudo journalctl --unit memgraph --no-pager | head
 ```
 
-You should see output similar to:
+The output is similar to:
 
 ```output
 You are running Memgraph v3.10.1
@@ -201,9 +203,9 @@ You are running Memgraph v3.10.1
 
 The configuration file lives at `/etc/memgraph/memgraph.conf`. After editing it, restart the service with `sudo systemctl restart memgraph`. The full configuration reference is in the [Memgraph configuration docs](https://memgraph.com/docs/database-management/configuration).
 
-## How do I increase the memory map area limit?
+## Increase the memory map area limit
 
-Memgraph allocates many small memory mappings, and on larger graphs the default Linux limit (`vm.max_map_count = 65530`) can be hit. This typically surfaces as a hung transaction, `munmap` errors, or `bad_alloc` crashes. Memgraph recommends roughly one memory map area per 64 KB of system RAM. The full table and background are in the [system configuration docs](https://memgraph.com/docs/database-management/system-configuration#increasing-memory-map-areas).
+Memgraph allocates many small memory mappings. On larger graphs, the default Linux limit (`vm.max_map_count = 65530`) can be hit. This typically surfaces as a hung transaction, `munmap` errors, or `bad_alloc` crashes. Memgraph recommends roughly one memory map area per 64 KB of system RAM. For more information, including a list of recommended map count values, see the [system configuration docs](https://memgraph.com/docs/database-management/system-configuration#increasing-memory-map-areas).
 
 For an 8–32 GB host, `524288` is the recommended starting value. Set it for the current session:
 
@@ -226,9 +228,9 @@ sysctl vm.max_map_count
 
 This setting is applied on the Linux host, so it is relevant for both the native and Docker installs. Docker containers inherit the host's `vm.max_map_count`.
 
-## How do I install mgconsole?
+## Install mgconsole
 
-`mgconsole` is Memgraph’s command-line client for executing Cypher queries. It is already included in the Memgraph Linux packages and in the `memgraph/memgraph:3.10.1` and `memgraph/memgraph-mage:3.10.1` Docker images, so you only need a separate install if you want to run it from a different machine.
+`mgconsole` is Memgraph’s command-line client for executing Cypher queries. It is already included in the Memgraph Linux packages, and in the `memgraph/memgraph:3.10.1` and `memgraph/memgraph-mage:3.10.1` Docker images. You need a separate install only if you want to run it from a different machine.
 
 To install it standalone, download the binary for your platform from the [Memgraph Download Hub](https://memgraph.com/download#individual), or pull the Docker image.
 
@@ -244,9 +246,9 @@ If Memgraph is running in another container or on a remote host, replace `localh
 docker run -it memgraph/mgconsole:latest --host <memgraph-host> --port 7687
 ```
 
-Full `mgconsole` documentation, including all command-line flags, is available in the [CLI docs](https://memgraph.com/docs/getting-started/cli).
+For `mgconsole` documentation, including all command-line flags, see the [mgconsole CLI docs](https://memgraph.com/docs/getting-started/cli).
 
-## How do I run example Cypher queries?
+## Use mgconsole to run example Cypher queries
 
 With Memgraph running either in Docker or as a native service, you can send queries non-interactively through `mgconsole`.
 
@@ -285,7 +287,7 @@ echo "MATCH (n) RETURN count(n) AS node_count;" \
   | mgconsole --host localhost --port 7687
 ```
 
-Expected output:
+The output is similar to:
 
 ```output
 +------------+
@@ -307,7 +309,7 @@ Re-running the count confirms the graph is empty:
 echo "MATCH (n) RETURN count(n) AS node_count;" | mgconsole --host localhost --port 7687
 ```
 
-Expected output:
+The output is similar to:
 
 ```output
 +------------+
@@ -323,7 +325,7 @@ If you prefer an interactive session, run `mgconsole` without piping input:
 mgconsole --host localhost --port 7687
 ```
 
-### A quick pattern-matching example
+### Pattern-matching example
 
 Memgraph’s strength is pattern matching. Try a slightly richer graph:
 
@@ -337,11 +339,11 @@ RETURN DISTINCT friend.name AS friend_of_alice;
 EOF
 ```
 
-This returns everyone reachable from Alice via one or two `KNOWS` hops.
+This returns everyone reachable from Alice in one or two `KNOWS` hops.
 
-## How do I install the MAGE graph-algorithm library?
+## Install the MAGE graph-algorithm library
 
-[MAGE](https://memgraph.com/docs/advanced-algorithms) is an open-source library that extends Memgraph with advanced graph algorithms and query modules, such as PageRank, community detection, shortest paths, node embeddings, NetworkX integration, and more, all callable from Cypher. MAGE is a separate add-on. If you want these capabilities, install the MAGE variant described below.
+[MAGE](https://memgraph.com/docs/advanced-algorithms) is an open-source library that extends Memgraph with advanced graph algorithms and query modules, such as PageRank, community detection, shortest paths, node embeddings, NetworkX integration, and more, all callable from Cypher. MAGE is a separate add-on. If you want these capabilities, install the MAGE variant described as follows.
 
 ### MAGE with Docker
 
@@ -363,7 +365,7 @@ You should see entries such as `pagerank.get`.
 
 ### MAGE with native Linux packages
 
-Memgraph provides a prebuilt MAGE `arm64` `.deb` package for Ubuntu 24.04. It is installed on top of an existing Memgraph package install:
+Memgraph provides a prebuilt MAGE `arm64` `.deb` package for Ubuntu 24.04. It's installed on top of an existing Memgraph package install:
 
 ```bash { target="ubuntu:latest" }
 wget https://download.memgraph.com/memgraph-mage/v3.10.1/ubuntu-24.04/memgraph-mage_3.10.1-1_arm64.deb
@@ -371,24 +373,23 @@ sudo dpkg -i memgraph-mage_3.10.1-1_arm64.deb
 sudo systemctl restart memgraph
 ```
 
-For other distributions, or to build MAGE from source with custom algorithms, follow the [MAGE install guide](https://memgraph.com/docs/advanced-algorithms/install-mage).
+For other distributions, or to build MAGE from source with custom algorithms, see [Install MAGE graph algorithm library](https://memgraph.com/docs/advanced-algorithms/install-mage) in the Memgraph documentation.
 
-### Run a MAGE algorithm
+### Verify installation by running a MAGE algorithm
 
-With MAGE loaded, you can call any of its algorithms from Cypher. For example, compute PageRank on the small graph created earlier:
+With MAGE loaded, you can call any of its algorithms from Cypher. For example, compute PageRank on the small graph that you created earlier:
 
 ```bash { target="ubuntu:latest" }
 echo "CALL pagerank.get() YIELD node, rank RETURN node, rank ORDER BY rank DESC;" \
   | mgconsole --host localhost --port 7687
 ```
 
-The complete algorithm catalog is documented at [Available algorithms](https://memgraph.com/docs/advanced-algorithms/available-algorithms).
+For the complete algorithm catalog, see [Available algorithms](https://memgraph.com/docs/advanced-algorithms/available-algorithms) in the Memgraph documentation.
 
-## Where do I go next?
-
-- Explore the [Cypher query language](https://memgraph.com/docs/querying) and the [Memgraph data model](https://memgraph.com/docs/fundamentals).
-- Install the visual [Memgraph Lab](https://memgraph.com/docs/memgraph-lab) for browsing and visualizing graphs.
-- Pick a [client library](https://memgraph.com/docs/client-libraries) for Python, Go, Rust, Java, JavaScript, or C#.
-- Join the Memgraph community on [Discord](https://discord.gg/memgraph).
+## Next steps
 
 You are now ready to build and query graphs with Memgraph on Arm.
+
+Next, you can explore the [Cypher query language](https://memgraph.com/docs/querying) and the [Memgraph data model](https://memgraph.com/docs/fundamentals). You can install the visual [Memgraph Lab](https://memgraph.com/docs/memgraph-lab) for browsing and visualizing graphs, and pick a [client library](https://memgraph.com/docs/client-libraries) for Python, Go, Rust, Java, JavaScript, or C#. You can also join the Memgraph community on [Discord](https://discord.gg/memgraph).
+
+
