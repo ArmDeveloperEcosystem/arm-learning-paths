@@ -1,80 +1,19 @@
-# Next steps:
-#       Add 'cross platform' into category checking and addition
-#       Record same for install guides
-#       Verify test data & totals matches reality
-#       -------- move on to individual_authors&contributors
-#       -------- move on to GitHub API
+"""
+Generate weekly stats for the Arm Learning Paths /stats page.
 
+Reads content summary data from the roadmap repo for accurate category counts,
+reads author metadata from local content directories, queries the GitHub API
+for repo stats, and appends a new weekly entry to data/stats_weekly_data.yml.
 
+Usage (in CI):
+    python3 stats_data_generate.py --token $GITHUB_TOKEN
 
-'''
-Goal: Every week, update the stats_data.yml file automatically by reading the current state and GitHub API
-
-Steps:
-    1) Read in stats_data.yml as a python dict
-    2) Verify we can read in new stats, via a function for each datapoint to log
-        2a) Directory structure read
-        2b) GitHub API obtain data
-    3) If we have new data, append to stats_data.yml. If not, fail script to notify GitHub folks
-'''
-
-'''
-weekly_in_YYYY_MMM_DD:
-    2023-Mar-03:                    # Date, updated weekly, in YYYY-MMM-DD format
-    content:                      # Dict of content related stats. Source: # of LP in each directory
-        total: 33                 # raw sum of all all below
-        ucontroller: 5            
-        embedded: 2               
-        desktop: 1                
-        server: 10                
-        mobile: 3                 
-        cross: 2                  # Number of learning paths in cross-platform area; for awareness
-        install_guides: 10        
-    individual_authors:                      # Dict of author stats. Source: Crawl over each LP and IG, urlize author name, and add totals
-        jason_andrews: 24
-        pareena_verma: 22
-        ronan_synnott: 15
-        florent_lebeau: 9
-        jane_doe: 2
-        john_smith: 2
-    contributions:                # Dict of contribution stats. Source: Cross-match found author names in LPs and IGs with 'contributors.csv' to identify them as internal (with company Arm) or external (all others)
-        internal: 70
-        external: 4
-    issues:                               # Dict of GitHub issues raised in this repo. Source: GitHub API
-        avg_close_time_hrs: 42            
-        percent_closed_vs_total: 90.5
-        num_issues: 66
-    github_engagement:                    # Dict of GitHub repo webpage engagement numbers. Source: GitHub API
-        num_prs: 34
-        num_forks: 20
-'''
-
-
-'''
----
-summary:                                # Basic summary of tests in this site. Source: adding numbers when iterating over sw_categories below
-  content_total: 30             
-  content_with_tests_enabled: 10        # Will match the number of learning paths
-  content_with_all_tests_passing: 9
-
-
-sw_categories:                             # Dict of content test status. Source: Iterate over each LP category and IGs _index.md files to scrape data and store in this one place.
-  server:
-    intrinsics:
-      title: Integrate Intrinsics here
-      tests_and_status: 
-        - amd64/ubuntu:latest: passed
-        - arm64v8/ubuntu:latest: passed
-    avh_cicd:
-      title: AVH Title
-      tests_and_status: 
-        - RPi3:latest: passed
-'''
-
-
+Usage (local, without GitHub stats):
+    python3 stats_data_generate.py --no-github
+"""
 
 import os
-import sys
+import re
 import csv
 import yaml
 import argparse
@@ -83,292 +22,275 @@ from pathlib import Path
 from datetime import datetime
 
 
-# Set paths 
-data_weekly_file_path  = Path('../data/stats_weekly_data.yml')
-learning_path_dir = Path('../content/learning-paths/')
-install_guide_dir = Path('../content/install-guides/')
-lp_and_ig_content_dirs = ['embedded-and-microcontrollers','laptops-and-desktops','servers-and-cloud-computing','mobile-graphics-and-gaming','automotive','cross-platform','install-guides']
+REPO_ROOT = Path(__file__).resolve().parent.parent
+DATA_FILE = REPO_ROOT / 'data' / 'stats_weekly_data.yml'
+LP_DIR = REPO_ROOT / 'content' / 'learning-paths'
+IG_DIR = REPO_ROOT / 'content' / 'install-guides'
+CONTRIBUTORS_CSV = REPO_ROOT / 'assets' / 'contributors.csv'
+GITHUB_API = 'https://api.github.com/repos/ArmDeveloperEcosystem/arm-learning-paths'
+ROADMAP_RAW = 'https://raw.githubusercontent.com/ArmDeveloperEcosystem/roadmap/main/reports/content-count'
 
 
-# Obtain today's date in YYYY-MM-DD
-date_today =  datetime.now().strftime("%Y-%m-%d")
-
-# Set global vars for processing ease
-new_weekly_entry = {}
-
-#############################################################################
-#############################################################################
+def urlize(s):
+    return s.replace(' ', '-').lower()
 
 
-def pretty(d, indent=0):
-   for key, value in d.items():
-      print('\t' * indent + str(key))
-      if isinstance(value, dict):
-         pretty(value, indent+1)
-      else:
-         print('\t' * (indent+1) + str(value))
-
-def printInfo(week):
-    print('============================================================================')
-    print('New weekly entry dict appended:')
-    pretty(week)
-    print('============================================================================')
+def load_contributors_csv():
+    authors = {}
+    with open(CONTRIBUTORS_CSV, mode='r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            name = row['author'].strip().lower()
+            authors[name] = row['company'].strip()
+    return authors
 
 
-def urlize(in_str):
-    # Replacate Hugo urlize function to make it easier to process strings for consistent analysis.
-        # ' ' -> '-'
-        # capitals -> lowercase
-    return in_str.replace(' ','-').lower()
-
-def mdToMetadata(md_file_path):
-    metadata_text = ""
-    content_text  = "" 
-    inMetadata = False
-
-    # Remove last '---' to propery read in yaml metadata component of .md file
-    with open(md_file_path, encoding="utf8") as f:
-        for line in (f.readlines()):
-            if ('---' in line) and inMetadata:
-                break                # go on when needed to gather content text
-            elif ('---' in line) and (not inMetadata):
-                inMetadata = True
-            metadata_text += line
-
-    # Load yaml
-    metadata_dic = yaml.safe_load(metadata_text)
-    return metadata_dic
-
-def authorAdd(author_names,tracking_dic):
-    ### Update 'individual_authors' area, raw number by each author.
-
-    # Support multiple authors by iterating through a list. 
-    # First, check if author_name is a list or not. If not, make it a list
-    if not isinstance(author_names, list):
-        author_names = [author_names]
-    for author_name in author_names:
-
-        # Check if author already exists as key. If not, add new key
-        author_urlized = urlize(author_name)
-        if author_urlized in tracking_dic['individual_authors']:
-            # Update number for this author
-            tracking_dic['individual_authors'][author_urlized] = tracking_dic['individual_authors'][author_urlized] + 1
-        else:
-            # Add key to dic with 1 to their name
-            tracking_dic['individual_authors'][author_urlized] = 1
-
-        ### Update 'contributions' area, internal vs external contributions
-        
-        # open the contributors CSV file
-        with open('../assets/contributors.csv', mode ='r')as file:
-            csvFile = csv.reader(file)
-            for line in csvFile:
-                company = line[1]
-                # If author in the line, check if they work at Arm or not, and increment contributions number for internal or external
-                if author_name in line:
-                    if company == 'Arm':
-                        tracking_dic['contributions']['internal'] = tracking_dic['contributions']['internal'] + 1
-                    else:
-                        tracking_dic['contributions']['external'] = tracking_dic['contributions']['external'] + 1
-        
-    return tracking_dic
-
-def iterateContentIndexMdFiles():
-    # set variables to track as we iterate
-        # weekly -> content:
-    weekly_count_dic = {'total': 0, 'cross-platform': 0,   'install-guides': 0}
-    for category in lp_and_ig_content_dirs:
-        weekly_count_dic[category] = 0
-
-        # weekly -> authors AND contributions
-    weekly_authors_contributions_dic = {'individual_authors': {}, 'contributions':{'internal': 0, 'external': 0}}
-
-    # start iterating over all sw_categories including install guides
-    for category in lp_and_ig_content_dirs:
-
-        # Get list of content to iterate over.
-        content_in_dir = []
-        if category != 'install-guides': # Learning Path processing
-            category_dir = learning_path_dir.parent / (learning_path_dir.name + '/' + category)  
-            content_in_dir = [ Path(f.path+"/_index.md") for f in os.scandir(category_dir) if f.is_dir() ]
-
-        else: # Install Guide Processing.   ### Get array of install guide files (everything that IS NOT an _index.md file; so count docker_desktop.md seperate than docker_woa.md under docker dir)
-            for ig in os.scandir(install_guide_dir):
-                if not ig.is_dir():
-                    # Append normal .md files
-                    if ig.name != '_index.md': # ignore top level file
-                        content_in_dir.append(Path(ig))
-                else: # iterate over multi-layer files
-                    if ig.name != '_images': # ignore image directory
-                        for ig_part in os.scandir(ig): #iterate over all files in multiparge ig dir
-                            if ig_part.name != '_index.md': # ignore top level file
-                                content_in_dir.append(Path(ig_part))
-
-
-
-
-        # Iterate over all content files
-        for content_index_file in content_in_dir:
-            content_metadic = mdToMetadata(content_index_file)
-            
-            # If draft, ignore by continuing right away to the next file
-            try:
-                if content_metadic['draft']:
-                    continue
-            except:
-                pass
-            # If the example learning path, continue
-            if '_example-learning-path' in str(content_index_file.parent):
+def read_metadata(md_path):
+    lines = []
+    in_meta = False
+    with open(md_path, encoding='utf-8') as f:
+        for line in f:
+            if line.strip() == '---':
+                if in_meta:
+                    break
+                in_meta = True
                 continue
+            if in_meta:
+                lines.append(line)
+    return yaml.safe_load(''.join(lines)) or {}
 
 
-            # Add to content total (weekly)
-            weekly_count_dic['total'] = weekly_count_dic['total'] + 1
-            # Add to category total
-            weekly_count_dic[category] = weekly_count_dic[category] + 1
+def fetch_content_summary():
+    """Fetch the latest content_summary from the roadmap repo.
 
-            ######### AUTHOR info
-            weekly_authors_contributions_dic = authorAdd(content_metadic['author'],weekly_authors_contributions_dic)
+    File naming: content_summary_MM-01-YYYY.md where date is first of next month.
+    Tries next month first, then current month, then previous months going back.
+    """
+    now = datetime.now()
+    candidates = []
 
-    # Update stats
-    new_weekly_entry['content'] = weekly_count_dic
-    new_weekly_entry['individual_authors'] = weekly_authors_contributions_dic['individual_authors']
-    new_weekly_entry['contributions'] = weekly_authors_contributions_dic['contributions']            
+    # Try next month, current month, and previous months
+    for offset in range(1, -6, -1):
+        month = now.month + offset
+        year = now.year
+        while month > 12:
+            month -= 12
+            year += 1
+        while month < 1:
+            month += 12
+            year -= 1
+        candidates.append(f'{month:02d}-01-{year}')
+        candidates.append(f'{month:02d}-1-{year}')
 
-def callGitHubAPI(GitHub_token,GitHub_repo_name):
+    for date_str in candidates:
+        url = f'{ROADMAP_RAW}/content_summary_{date_str}.md'
+        resp = requests.get(url)
+        if resp.status_code == 200:
+            print(f'Fetched content summary: content_summary_{date_str}.md')
+            return resp.text
 
-    weekly_github_dic = {'issues': {}, 'github_engagement': {}}
+    print('ERROR: Could not fetch any content summary from roadmap repo.')
+    return None
 
 
+def parse_content_summary(md_text):
+    """Parse content summary markdown for category totals and headline number."""
+    result = {'total_published': 0, 'categories': {}, 'install_guides': 0}
+
+    match = re.search(r'Total Published Content.*?\|\s*(\d+)\s*\|', md_text)
+    if match:
+        result['total_published'] = int(match.group(1))
+
+    cat_pattern = re.compile(
+        r'\|\s*(.+?)\s*\|\s*(\d+)\s*\|\s*(\d+)\s*\|\s*(\d+)\s*\|\s*(\d+)\s*\|\s*(\d+)\s*\|'
+    )
+    for m in cat_pattern.finditer(md_text):
+        cat_name = m.group(1).strip().strip('|').strip()
+        total = int(m.group(2))
+        if not cat_name or cat_name.startswith('-'):
+            continue
+        result['categories'][cat_name] = total
+
+    ig_match = re.search(r'Install Guides\s*\|\s*(\d+)\s*\|', md_text)
+    if ig_match:
+        result['install_guides'] = int(ig_match.group(1))
+
+    return result
+
+
+def discover_categories():
+    return sorted([
+        d.name for d in LP_DIR.iterdir()
+        if d.is_dir() and d.name != '_example-learning-path'
+    ])
+
+
+def count_authors():
+    """Count authors from all published content."""
+    categories = discover_categories()
+    authors = {}
+
+    for cat in categories:
+        cat_dir = LP_DIR / cat
+        for item in cat_dir.iterdir():
+            if not item.is_dir() or item.name.startswith('_'):
+                continue
+            index_file = item / '_index.md'
+            if not index_file.exists():
+                continue
+            meta = read_metadata(index_file)
+            if meta.get('draft', False):
+                continue
+            author_field = meta.get('author', '')
+            if author_field:
+                author_names = author_field if isinstance(author_field, list) else [author_field]
+                for name in author_names:
+                    key = urlize(name.strip())
+                    if key:
+                        authors[key] = authors.get(key, 0) + 1
+
+    for item in IG_DIR.iterdir():
+        if item.name.startswith('_') or item.name == '_images':
+            continue
+        if item.is_file() and item.suffix == '.md':
+            meta = read_metadata(item)
+            if not meta.get('draft', False):
+                author_field = meta.get('author', '')
+                if author_field:
+                    for name in (author_field if isinstance(author_field, list) else [author_field]):
+                        key = urlize(name.strip())
+                        if key:
+                            authors[key] = authors.get(key, 0) + 1
+        elif item.is_dir():
+            for sub in item.iterdir():
+                if sub.name.startswith('_') or sub.suffix != '.md':
+                    continue
+                meta = read_metadata(sub)
+                if not meta.get('draft', False):
+                    author_field = meta.get('author', '')
+                    if author_field:
+                        for name in (author_field if isinstance(author_field, list) else [author_field]):
+                            key = urlize(name.strip())
+                            if key:
+                                authors[key] = authors.get(key, 0) + 1
+
+    return authors
+
+
+def classify_contributions(authors_dict):
+    csv_authors = load_contributors_csv()
+    internal = 0
+    external = 0
+    for author_key, count in authors_dict.items():
+        matched = False
+        for csv_name, company in csv_authors.items():
+            if urlize(csv_name) == author_key:
+                if company.lower() == 'arm':
+                    internal += count
+                else:
+                    external += count
+                matched = True
+                break
+        if not matched:
+            external += count
+    return {'internal': internal, 'external': external}
+
+
+def get_github_stats(token):
     headers = {
-        'Authorization': f'token {GitHub_token}',
+        'Authorization': f'token {token}',
         'Accept': 'application/vnd.github.v3+json'
     }
-    url_issues = f'{GitHub_repo_name}issues'
-    url_pulls  = f'{GitHub_repo_name}pulls'
-    url_forks  = f'{GitHub_repo_name}forks'
+    resp = requests.get(GITHUB_API, headers=headers)
+    resp.raise_for_status()
+    repo = resp.json()
 
-    # Get Number of Forks
-    response = requests.get(url_forks, headers=headers)
-    if response.ok:
-        forks = response.json()
-        weekly_github_dic['github_engagement']['num_forks'] = len(forks)
+    pr_resp = requests.get(
+        f'{GITHUB_API}/pulls', headers=headers,
+        params={'state': 'open', 'per_page': 1}
+    )
+    pr_resp.raise_for_status()
+    open_prs = 0
+    if 'Link' in pr_resp.headers:
+        match = re.search(r'page=(\d+)>; rel="last"', pr_resp.headers['Link'])
+        if match:
+            open_prs = int(match.group(1))
     else:
-        print(f'ERROR: Failed to fetch GitHub API forks: {url_forks} {response.status_code} {response.reason}')
-        sys.exit(1)
+        open_prs = len(pr_resp.json())
 
-    # Get Number of Pull Requests
-    response = requests.get(url_pulls, headers=headers)
-    if response.ok:
-        pulls = response.json()
-        weekly_github_dic['github_engagement']['num_prs'] = len(pulls)
+    return {
+        'stars': repo.get('stargazers_count', 0),
+        'forks': repo.get('forks_count', 0),
+        'open_prs': open_prs
+    }
+
+
+def build_entry(token=None, no_github=False):
+    authors = count_authors()
+    contributions = classify_contributions(authors)
+
+    # Get content counts from roadmap repo
+    summary_md = fetch_content_summary()
+    if not summary_md:
+        raise SystemExit('ERROR: No content summary available from roadmap repo. Cannot generate stats.')
+
+    summary = parse_content_summary(summary_md)
+    content = {
+        'total': summary['total_published'],
+        'install-guides': summary.get('install_guides', 0),
+    }
+    for cat_name, total in summary['categories'].items():
+        content[urlize(cat_name)] = total
+
+    entry = {
+        'date': datetime.now().strftime('%Y-%m-%d'),
+        'content': content,
+        'individual_authors': dict(sorted(authors.items())),
+        'contributions': contributions,
+    }
+
+    if not no_github and token:
+        try:
+            entry['github'] = get_github_stats(token)
+        except Exception as e:
+            print(f'WARNING: GitHub API call failed: {e}')
+            entry['github'] = {'stars': 0, 'forks': 0, 'open_prs': 0}
     else:
-        print(f'ERROR: Failed to fetch GitHub API forks: {url_pulls} {response.status_code} {response.reason}')
-        sys.exit(1)
+        entry['github'] = {'stars': 0, 'forks': 0, 'open_prs': 0}
 
-    # Get Issues information
-    response = requests.get(url_issues, headers=headers)
-    if response.ok:
-        issues = response.json()
-
-        # Iterate over each issue and read the state
-        closed_num = 0
-        time_differences = []
-        for issue in issues:
-            if issue['state'] == 'closed':
-                # Increment number of closed
-                closed_num = closed_num + 1
-
-                # Get average time
-                created_at = datetime.fromisoformat(issue['created_at'][:-1])
-                closed_at = datetime.fromisoformat(issue['closed_at'][:-1])
-                difference = closed_at - created_at
-                time_differences.append(difference.total_seconds() / 3600)  # Convert to hours
-                
-            print(issue['title'],issue['state'])
-
-        # Calculate average time to close
-        if time_differences:
-            avg_time_to_close = sum(time_differences) / len(time_differences)
-        else:
-            avg_time_to_close = 0
-
-        # Store all stats in github dic            
-        weekly_github_dic['issues']['num_issues'] = len(issues)
-        weekly_github_dic['issues']['percent_closed_vs_total'] = round( (closed_num/len(issues)) * 100, 1) 
-        weekly_github_dic['issues']['avg_close_time_hrs'] = round(avg_time_to_close,1)
-           
-    else:
-        print(f'ERROR: Failed to fetch GitHub API issues:  {url_issues} {response.status_code} {response.reason}')
-        sys.exit(1)
-    
-
-    # Assign to main file
-    new_weekly_entry['issues'] = weekly_github_dic['issues']
-    new_weekly_entry['github_engagement'] = weekly_github_dic['github_engagement']
+    return entry
 
 
 def main():
-    global data_weekly_file_path, learning_path_dir, install_guide_dir, date_today, new_weekly_entry
+    parser = argparse.ArgumentParser(description='Generate weekly stats for /stats page')
+    parser.add_argument('-t', '--token', help='GitHub personal access token')
+    parser.add_argument('--no-github', action='store_true', help='Skip GitHub API calls')
+    args = parser.parse_args()
 
-    # Read in params needed for reading GitHub API
-    arg_parser = argparse.ArgumentParser(description='Update Stats')
-    arg_parser.add_argument('-t','--token', help='GitHub personal access token', required=True)
-    arg_parser.add_argument('-r','--repo', help='GitHub repository name', required=True)
-    args = arg_parser.parse_args()
+    if DATA_FILE.exists():
+        existing = yaml.safe_load(DATA_FILE.read_text()) or []
+    else:
+        existing = []
+
+    entry = build_entry(token=args.token, no_github=args.no_github)
+    today = entry['date']
+
+    for i, e in enumerate(existing):
+        if e.get('date') == today:
+            print(f'Entry for {today} already exists, updating.')
+            existing[i] = entry
+            break
+    else:
+        existing.append(entry)
+        print(f'Appended new entry for {today}.')
+
+    with open(DATA_FILE, 'w') as f:
+        yaml.dump(existing, f, default_flow_style=False, allow_unicode=True, sort_keys=False)
+
+    print(f'Total content: {entry["content"]["total"]}')
+    print(f'Unique authors: {len(entry["individual_authors"])}')
+    print(f'Written to: {DATA_FILE}')
 
 
-
-    # Read in data file as python dict
-    existing_weekly_dic = yaml.safe_load(data_weekly_file_path.read_text())
-
-    # Structure new data formats:
-    new_weekly_entry = { 
-        "a_date": date_today,
-        "content": {},
-        "individual_authors": {},
-        "contributions": {},
-        "issues": {},
-        "github_engagement": {}    
-    }
-
-
-    # Get new stats, filling in new stat dictionaries:
-    iterateContentIndexMdFiles()
-    callGitHubAPI(args.token, args.repo)
-
-    
-
-    # Debug prints in flow
-    printInfo(new_weekly_entry)
-
-    # Update/replace yaml files
-
-    ### Weekly
-    # if weekly dict is empty, create key
-    if not existing_weekly_dic:
-        print('no existing dic, starting from scratch.')
-        existing_weekly_dic = [new_weekly_entry]
-    # Otherwise append it
-    else:  
-        print('weekly data exists...checking to see if date exists.')
-        # Check if date already a key in there
-        exists=False
-        for dic in existing_weekly_dic:
-            if date_today == dic["a_date"]:
-                print('date today included, don"t save')
-                exists=True
-                break
-        if not exists:
-            print('date doesn"t exist, appending data')
-            existing_weekly_dic.append(new_weekly_entry)
-
-    # Alter existing dic to be a list of dates for easier processing:
-    with open(data_weekly_file_path, 'w') as outfile:
-        print('printing weekly dict format, and dumping into this file: ')
-        print(outfile)
-        print(existing_weekly_dic)
-        yaml.dump(existing_weekly_dic, outfile, default_flow_style=False)
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
