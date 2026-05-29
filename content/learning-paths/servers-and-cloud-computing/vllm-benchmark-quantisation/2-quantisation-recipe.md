@@ -1,33 +1,43 @@
 ---
-title: Quantisation Recipe
+title: Understand W8A8 quantization for vLLM models
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Understanding quantisation
+## How W8A8 quantization works
 
-Quantised models have their weights converted to a lower precision data type which reduces the memory requirements of the model and can improve performance significantly. In the [Run vLLM inference with INT4 quantization on Arm servers](/learning-paths/servers-and-cloud-computing/vllm-acceleration/) Learning Path we have covered how to quantise a model yourself. There are also many publicly available quantised versions of popular models, such as https://huggingface.co/RedHatAI/Meta-Llama-3.1-8B-quantized.w8a8 and https://huggingface.co/RedHatAI/whisper-large-v3-quantized.w8a8, which we will be using in this Learning Path.
+Quantized models have their weights converted to a lower precision data type, which reduces the memory requirements of the model and can improve performance significantly. There are many publicly available quantized versions of popular models, such as [RedHatAI/Meta-Llama-3.1-8B-quantized.w8a8](https://huggingface.co/RedHatAI/Meta-Llama-3.1-8B-quantized.w8a8) and [RedHatAI/whisper-large-v3-quantized.w8a8](https://huggingface.co/RedHatAI/whisper-large-v3-quantized.w8a8), which you'll use in this Learning Path.
 
-The notation w8a8 means that the weights have been quantised to 8-bit integers and the activations (the input data) are dynamically quantised to the same. This allows our kernels to utilise Arm's 8-bit integer matrix multiply feature I8MM. You can learn more about this in the [KleidiAI and matrix multiplication](/learning-paths/cross-platform/kleidiai-explainer/) Learning Path.
+The notation `w8a8` means that the weights have been quantized to 8-bit integers and the activations (the input data) are dynamically quantized to the same. This allows Arm's 8-bit integer matrix multiply feature I8MM to be used. For more information, see the [KleidiAI and matrix multiplication](/learning-paths/cross-platform/kleidiai-explainer/) Learning Path.
 
-The w8a8 models we are using in this Learning Path only apply quantisation to the weights and activations in the linear layers of the transformer blocks. The activation quantisations are applied per-token and the weights are quantised per-channel. That is, each output channel dimension has a scaling factor applied between INT8 and BF16 representations.
+The `w8a8` models that you'll use in this Learning Path apply quantization only to the weights and activations in the linear layers of the transformer blocks. The activation quantizations are applied per-token and the weights are quantized per-channel. That is, each output channel dimension has a scaling factor applied between INT8 and BF16 representations.
 
-## Quantising your own models
+## (Optional) Quantize your own models 
 
-If you would prefer to generate your own w8a8 quantised models, the recipe below is provided as an example. This is an optional activity and not a core part of this Learning Path, as it can take several hours to run.
+{{% notice Note %}}
+This step is optional. You'll be using pre-quantized models from Hugging Face for the rest of this Learning Path, so you don't need to run this recipe. Quantizing a model yourself can take several hours. 
 
-You will need to install the required packages before running the quantisation script.
+To learn more about quantizing your own models, see the [Run vLLM inference with INT4 quantization on Arm servers](/learning-paths/servers-and-cloud-computing/vllm-acceleration/) Learning Path. 
+{{% /notice %}}
+
+If you prefer to generate your own `w8a8` quantized model rather than using the pre-quantized Red Hat models, you can use the following recipe. Install the required packages before running the quantization script:
+
+{{% notice Note %}}
+The following commands use specific package versions that were tested with this recipe. To find the latest versions, see [llmcompressor](https://github.com/vllm-project/llm-compressor/releases), [compressed-tensors](https://github.com/neuralmagic/compressed-tensors/releases), and [datasets](https://github.com/huggingface/datasets/releases) on GitHub.
+{{% /notice %}}
+
 ```bash
 pip install compressed-tensors==0.14.0.1
 pip install llmcompressor==0.10.0.1
 pip install datasets==4.6.0
- 
-python w8a8_quant.py
 ```
 
-Where w8a8_quant.py contains:
+The script uses Generalized Post-Training Quantization (GPTQ) to calibrate the quantization scales. It loads 256 samples from a calibration dataset, runs a forward pass through each linear layer, and computes per-channel weight scales and per-token activation scales. The output is saved as a quantized model in the `Meta-Llama-3.1-8B-quantized.w8a8` directory.
+
+Create a file named `w8a8_quant.py` with the following content:
+
 ```python
 from transformers import AutoTokenizer
 from datasets import Dataset, load_dataset
@@ -37,7 +47,7 @@ from llmcompressor.modifiers.quantization import GPTQModifier
 from compressed_tensors.quantization import QuantizationType, QuantizationStrategy
 import random
  
-model_id = "meta-llama/Meta-Llama-3.1-8B"
+model_id = "meta-llama/Meta-Llama-3.1-8B"  # Note: this uses the Meta-prefixed model ID required by llmcompressor
  
 num_samples = 256
 max_seq_len = 4096
@@ -97,8 +107,23 @@ oneshot(
 model.save_pretrained("Meta-Llama-3.1-8B-quantized.w8a8")
 ```
 
-When this has completed you will need to copy over the tokeniser specific files from the original model before you can run inference on your quantised model.
+Run the script. This step can take several hours depending on your hardware:
 
 ```bash
-cp ~/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/*/*token*  Meta-Llama-3.1-8B-quantized.w8a8/
+python w8a8_quant.py
 ```
+
+When quantization is completed, copy the tokenizer files from the original model into your quantized model directory before running inference:
+```bash
+for f in tokenizer.json tokenizer_config.json special_tokens_map.json tokenizer.model; do
+  cp ~/.cache/huggingface/hub/models--meta-llama--Meta-Llama-3.1-8B/snapshots/*/"$f" Meta-Llama-3.1-8B-quantized.w8a8/ 2>/dev/null || true
+done
+```
+
+## What you've accomplished and what's next
+
+You've now learned about quantization of vLLM models and the steps to quantize a model if you want to. 
+
+Next, you'll use vLLM to run inference on both quantized and non-quantized models and compare their outputs.
+
+

@@ -1,11 +1,7 @@
 ---
-title: Analyze memory access behavior using Arm Performix and the Arm MCP Server
+title: Optimize memory access behavior using Arm Performix and the Arm MCP Server
 
-draft: true
-cascade:
-    draft: true
-
-description: Learn how to profile memory access behavior in a C++ particle simulation on Arm Linux using the Arm Performix Memory Access recipe through the Arm MCP Server.
+description: Learn how to profile and optimize memory access behavior in a C++ particle simulation on Arm Linux using the Arm Performix Memory Access recipe through the Arm MCP Server.
 
 minutes_to_complete: 45
 
@@ -14,7 +10,7 @@ who_is_this_for: This is an introductory topic for C++ developers who want to us
 learning_objectives:
   - Explain how L1 cache hits, TLB misses, and page walks affect C++ application performance.
   - Build and visualize the orbiting galaxies example on an Arm Neoverse server.
-  - Inspect and optimize particle data structure using insights from the memory access recipe.
+  - Inspect and optimize the particle data structure using insights from the memory access recipe.
   - Use the Arm MCP Server in combination with Arm Performix for an agentic solution.
 
 prerequisites:
@@ -33,7 +29,7 @@ armips:
 tools_software_languages:
   - Arm Performix
   - MCP
-  - C
+  - C++
   - CMake
   - Python
   - perf

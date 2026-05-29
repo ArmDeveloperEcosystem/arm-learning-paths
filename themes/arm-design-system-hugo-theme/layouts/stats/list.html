@@ -1,78 +1,83 @@
 {{define "main"}}
 
+{{/* Hugo Processing */}}
+{{ $data := .Site.Data.stats_weekly_data }}
+{{ $this_week := index $data (sub (len $data) 1) }}
 
-{{/* Hugo Processing  */}}
-{{/*===================================================================*/}}
-    <!--  Create accessable data vars -->
-    {{ $this_week_stats := index .Site.Data.stats_weekly_data (sub (len .Site.Data.stats_weekly_data) 1) }}
+<!-- Author processing -->
+{{ $authors_dict_array := slice }}
+{{ $csv := resources.Get "contributors.csv" }}
+{{ $csv_content := $csv | transform.Unmarshal (dict "delimiter" ",") }}
+{{ $unique_authors := len $this_week.individual_authors }}
 
-    <!-- reorganize contributor data -->
-    {{$authors_dict_array := slice }}
-    {{$unique_internal := 0}}
-    {{$unique_external := 0}}
+<!-- Build author metadata lookup from CSV -->
+{{ $author_meta := dict }}
+{{ range $index, $row := $csv_content }}
+    {{ $name := index $row 0 }}
+    {{ $meta := dict
+        "company"  (cond (and (gt (len $row) 1) (ne (index $row 1) "")) (index $row 1) "")
+        "github"   (cond (and (gt (len $row) 2) (ne (index $row 2) "")) (printf "https://github.com/%s" (index $row 2)) "")
+        "linkedin" (cond (and (gt (len $row) 3) (ne (index $row 3) "")) (printf "https://linkedin.com/in/%s" (index $row 3)) "")
+        "twitter"  (cond (and (gt (len $row) 4) (ne (index $row 4) "")) (printf "https://twitter.com/%s" (index $row 4)) "")
+        "website"  (cond (and (gt (len $row) 5) (ne (index $row 5) "")) (index $row 5) "")
+    }}
+    {{ $author_meta = merge $author_meta (dict $name $meta) }}
+{{ end }}
 
-    {{range $author_urlized, $contributions := $this_week_stats.individual_authors}}
-        <!-- find company name of author -->
-        {{$company := ""}}
-        {{$author := replace $author_urlized "-" " " | title }}
-        {{ $csv := resources.Get "contributors.csv" }}
-        {{ $csv_content := $csv | transform.Unmarshal (dict "delimiter" ",") }}
-        {{ range $i, $row := $csv_content }}
-            {{ if eq  $author (index $row 0)}}
-                <!-- Get company name of author -->
-                {{ $company = index $row 1 }}
-
-                <!-- Get unique internal/external contributor numbers -->
-                {{ if eq $company "Arm"}}
-                    {{$unique_internal = add 1 $unique_internal}}
-                {{else}}
-                    {{$unique_external = add 1 $unique_external}}
-                {{end}}
-            {{ end }}
+{{ range $author_urlized, $contributions := $this_week.individual_authors }}
+    {{ $company := "" }}
+    {{ $github := "" }}
+    {{ $linkedin := "" }}
+    {{ $twitter := "" }}
+    {{ $website := "" }}
+    {{ $author := replace $author_urlized "-" " " | title }}
+    {{ range $name, $meta := $author_meta }}
+        {{ if eq (lower $name) (lower $author) }}
+            {{ $company = $meta.company }}
+            {{ $github = $meta.github }}
+            {{ $linkedin = $meta.linkedin }}
+            {{ $twitter = $meta.twitter }}
+            {{ $website = $meta.website }}
         {{ end }}
-        <!-- create sortable dict -->
-        {{ $temp := dict "author" $author "contributions" $contributions "company" $company }}
-        {{ $authors_dict_array = $authors_dict_array | append $temp }}
-    {{end}}
-{{/*===================================================================*/}}
-{{/*===================================================================*/}}
-
-
-
-
+    {{ end }}
+    {{ $temp := dict "author" $author "contributions" $contributions "company" $company "github" $github "linkedin" $linkedin "twitter" $twitter "website" $website }}
+    {{ $authors_dict_array = $authors_dict_array | append $temp }}
+{{ end }}
 
 
 <div class="c-row">
     <div class="c-col">
         <div class="u-display-grid sm:u-gap-0 md:u-gap-2 sm:u-grid-columns-1 md:u-grid-columns-2">
-            <!-- left card = total content -->
+            <!-- Total content card -->
             <ads-card class="stats-card" has-hover-effect>
                 <ads-card-content slot="content">
                     <h1 id="total-content-num" class="orchard-breeze-text">
-                        {{$this_week_stats.content.total}}
+                        {{ $this_week.content.total }}
                     </h1>
-                    <p class="u-margin-left-1 total-content-context">Total Learning Paths and Install Guides as of {{$this_week_stats.a_date}}</p>
-                </ads-card-content>   
+                    <p class="u-margin-left-1 total-content-context">Total Learning Paths and Install Guides as of {{ $this_week.date }}</p>
+                    <h1 class="unique-contributor-num fullbourn-sunrise-text u-margin-top-1">
+                        {{ $unique_authors }}
+                    </h1>
+                    <p class="u-margin-left-1">Authors</p>
+                </ads-card-content>
             </ads-card>
-            <!-- right card = internal AND external contributors -->
+            <!-- Growth + contributors -->
             <div class="u-display-grid u-grid-columns-1">
-                <!-- Internal -->
                 <ads-card class="stats-card" has-hover-effect>
                     <ads-card-content slot="content">
                         <h1 class="unique-contributor-num fullbourn-sunrise-text">
-                            {{$unique_internal}}
+                            {{ $this_week.github.stars }}
                         </h1>
-                        <p class="u-margin-left-1">Internal unique contributors</p>
-                    </ads-card-content>   
+                        <p class="u-margin-left-1">GitHub Stars</p>
+                    </ads-card-content>
                 </ads-card>
-                <!-- External -->
                 <ads-card class="stats-card" has-hover-effect>
                     <ads-card-content slot="content">
                         <h1 class="unique-contributor-num fullbourn-sunrise-text">
-                            {{$unique_external}}
+                            {{ $this_week.github.forks }}
                         </h1>
-                        <p class="u-margin-left-1">External unique contributors</p>                    
-                    </ads-card-content>   
+                        <p class="u-margin-left-1">GitHub Forks</p>
+                    </ads-card-content>
                 </ads-card>
             </div>
         </div>
@@ -85,14 +90,13 @@
 
 <div class="c-row">
     <div class="c-col">
-        <h1>Content History</h1>
-        <p class="subtitle-stats">Tracks the number of individual Learning Paths (and Install Guides) created, updated every week.</p>
+        <h1>Content Growth</h1>
+        <p class="subtitle-stats">Total published Learning Paths and Install Guides over time.</p>
     </div>
 </div>
 <div class="c-row u-margin-top-2">
     <div class="c-col">
-        <!-- Content line chart container -->
-        <canvas id="content-history-chart"></canvas>
+        <img src="/stats/content_over_time.png" alt="Content growth over time" style="width:100%; max-width:900px;">
     </div>
 </div>
 
@@ -102,14 +106,13 @@
 
 <div class="c-row">
     <div class="c-col">
-        <h1>Contributions History</h1>
-        <p class="subtitle-stats">Tracks the number of GitHub related engagement stats, updated every week.</p>
+        <h1>Content by Category</h1>
+        <p class="subtitle-stats">Published Learning Paths by category, including shared content.</p>
     </div>
 </div>
 <div class="c-row u-margin-top-2">
     <div class="c-col">
-        <!-- Contributions line chart container -->
-        <canvas id="contribution-history-chart"></canvas>    
+        <canvas id="category-chart"></canvas>
     </div>
 </div>
 
@@ -117,43 +120,12 @@
 <hr class="stats-dividing-bar">
 <br>
 
-<div class="c-row">
-    <div class="c-col">
-        <h1>Logged Issues History</h1>
-    </div>
-</div>
-<div class="c-row">
-    <div class="c-col">
-        <div class="u-display-grid sm:u-gap-0 md:u-gap-2 sm:u-grid-columns-1 md:u-grid-columns-3">
-            <ads-card class="stats-card" has-hover-effect>
-                <ads-card-content slot="content">
-                    <p>Average time to close issues:</p>
-                    <h1 style="width:fit-content;" class="minhang-mist-text">{{$this_week_stats.issues.avg_close_time_hrs}} hours</h1>
-                </ads-card-content>   
-            </ads-card>
-            <ads-card class="stats-card" has-hover-effect>
-                <ads-card-content slot="content">
-                    <p>Issues raised, total:</p>
-                    <h1 style="width:fit-content;" class="minhang-mist-text">{{$this_week_stats.issues.num_issues}}</h1>
-                </ads-card-content>   
-            </ads-card>
-            <ads-card class="stats-card" has-hover-effect>
-                <ads-card-content slot="content">
-                    <p>Current open issue percentage:</p>
-                    <h1 style="width:fit-content;" class="minhang-mist-text">{{$this_week_stats.issues.percent_closed_vs_total}} %</h1>
-                </ads-card-content>   
-            </ads-card>            
-        </div>
-    </div>
-</div>
 
-<br>
-<hr class="stats-dividing-bar">
-<br>
 
 <div class="c-row">
     <div class="c-col">
         <h2>Authors</h2>
+        <p class="subtitle-stats">Authors listed in published Learning Paths and Install Guides.</p>
     </div>
 </div>
 <div class="c-row">
@@ -162,29 +134,23 @@
             <table class="stats-table">
                 <thead>
                     <tr>
-                        <th>
-                            Author
-                        </th>
-                        <th>
-                            Company
-                        </th>
-                        <th>
-                            Content written
-                        </th>
+                        <th>Author</th>
+                        <th>Company</th>
+                        <th>Content written</th>
                     </tr>
                 </thead>
                 <tbody>
                     {{ range sort $authors_dict_array "contributions" "desc" }}
                     <tr>
                         <td>
-                            {{.author}} 
+                            {{ .author }}
+                            {{ with .github }}<a href="{{ . }}" target="_blank" aria-label="github"><i class="author-social-icon fab fa-github"></i></a>{{ end }}
+                            {{ with .linkedin }}<a href="{{ . }}" target="_blank" aria-label="linkedin"><i class="author-social-icon fab fa-linkedin"></i></a>{{ end }}
+                            {{ with .twitter }}<a href="{{ . }}" target="_blank" aria-label="twitter"><i class="author-social-icon fab fa-twitter"></i></a>{{ end }}
+                            {{ with .website }}<a href='{{ if in . "http" }}{{ . | safeURL }}{{ else }}https://{{ . | safeURL }}{{ end }}' target="_blank" aria-label="website"><i class="author-social-icon fa fa-blog"></i></a>{{ end }}
                         </td>
-                        <td>
-                            {{.company}} 
-                        </td>
-                        <td>
-                            {{.contributions}} 
-                        </td>
+                        <td>{{ .company }}</td>
+                        <td>{{ .contributions }}</td>
                     </tr>
                     {{ end }}
                 </tbody>
@@ -196,323 +162,60 @@
 <div style="margin-bottom:150px"></div>
 
 
-
-
-
-
-
-
-
-
-
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
 
 <script>
-    function getArmColor(i) {
-        var armColorsHex = [
-            "#0091bd", // arm blue
-            "#95d600", // arm green
-            "#ffc700", // arm yellow
-            "#ff6b00", // arm orange
-            "#6f777c", // arm websafe grey
-            "#e03030", // arm websafe red
-            "#eff5f4"  // arm light grey alt 2
-        ]
-      return armColorsHex[i];
-    }
+function getArmColor(i) {
+    var colors = [
+        "#0091bd", "#95d600", "#ffc700", "#ff6b00",
+        "#6f777c", "#e03030", "#00c1de", "#b8e600"
+    ];
+    return colors[i % colors.length];
+}
 </script>
 
-
+<script>
+/* Content Growth - using static image from roadmap repo */
+</script>
 
 <script>
-/* CONTENT - Line chart */
-/////////////////////////////////////////////////////////    
+/* Category breakdown - horizontal bar */
+var catLabels = ["Servers And Cloud Computing", "Laptops And Desktops", "Embedded And Microcontrollers", "Mobile Graphics And Gaming", "Automotive"];
+var catValues = [
+    {{ index $this_week.content "servers-and-cloud-computing" | default 0 }},
+    {{ index $this_week.content "laptops-and-desktops" | default 0 }},
+    {{ index $this_week.content "embedded-and-microcontrollers" | default 0 }},
+    {{ index $this_week.content "mobile-graphics-and-gaming" | default 0 }},
+    {{ index $this_week.content "automotive" | default 0 }}
+];
+var catColors = catLabels.map(function(_, i) { return getArmColor(i); });
 
-
-/***********************************************************************/
-/* Hugo Processing for this chart */
-/***********************************************************************/
-{{$dates := slice}}
-{{$legend := slice         "Cross Platform"        "Embedded Systems"        "Install Guides"        "Laptops and Desktops"        "Microcontrollers"        "Servers and Cloud Computing"        "Smartphones and Mobile"}}
-{{$data_and_legend := dict "Cross Platform" slice  "Embedded Systems" slice  "Install Guides" slice  "Laptops and Desktops" slice  "Microcontrollers" slice  "Servers and Cloud Computing" slice  "Smartphones and Mobile" slice }}
-{{ range .Site.Data.stats_weekly_data }}
-
-    {{/* Add date to array */}}
-    {{ $dates = append $dates (slice .a_date) }}
-
-    {{range $category, $num_content := .content}}
-        {{ if ne $category "total" }}
-            {{ $key := replace $category "-" " " | title }}
-            {{ $updated_content_slice := append (index $data_and_legend $key) (slice $num_content) }}
-            {{ $data_and_legend = merge $data_and_legend (dict $key $updated_content_slice) }}
-            {{/* Example of what is happening:
-                {{ $countries := dict "1" "Germany" "2" "France" "3" "Italy" }}
-                {{ $change := dict "2" "Belgium" }}
-                {{ $countries := merge $countries $change }}
-                    $countries -> "1": "Germany", "2": Belgium, "3": "Italy"
-            */}}
-        {{ end }}
-    {{end}}
-{{end}}
-
-
-
-/***********************************************************************/
-/* End Hugo Processing for this chart */
-    var dates_content_line = []     // [ '2023-06-23' , '2023-06-30' ]
-    var data_content_line = []      // [ [3,4,5,6] [3,5,5,6] ]
-    var legend_content_line = []    // [ 'Servers', 'uControllers']
-    {{range $dates}}
-        dates_content_line.push({{.}})
-    {{end}}
-    dates_content_line.reverse();
-    {{range $legend}}
-        legend_content_line.push({{.}})
-    {{end}}
-    {{range $name, $data_array := $data_and_legend}}
-        var temp = {{$data_array}};
-        
-        data_content_line.push(temp.reverse());
-    {{end}}
-
-    console.log(data_content_line)
-
-
-    var max_y = parseInt("{{$this_week_stats.content.total}}")
-
-    // Format data in Chart.JS format:
-    var line_datasets = [];
-    for (var i = 0; i < data_content_line.length; i++) {
-      var dataset = {
-        label: legend_content_line[i], // Server and Cloud
-        data: data_content_line[i],     // [5,6,4,3]
-        borderColor: getArmColor(i),    //#91bb00
-        fill: false
-      };
-      line_datasets.push(dataset);
-    }
-    // Format data in Chart.JS format:
-    var bar_datasets = [];
-    for (var i = 0; i < data_content_line.length; i++) {
-        var dataset = {
-            label: legend_content_line[i], // Server and Cloud
-            data: data_content_line[i],     // [5,6,4,3]
-            backgroundColor: getArmColor(i),
-            borderColor: getArmColor(i),
-            borderWidth: 1,
-            stack: 'stack 1' // Assign the stack name
-        };
-        bar_datasets.push(dataset);
-    }
-
-
-
-
-
-
-    const ctx = document.getElementById('content-history-chart');
-
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: dates_content_line,
-        datasets: bar_datasets
-      },
-      options: {
+new Chart(document.getElementById('category-chart'), {
+    type: 'bar',
+    data: {
+        labels: catLabels,
+        datasets: [{
+            data: catValues,
+            backgroundColor: catColors,
+            borderColor: catColors,
+            borderWidth: 1
+        }]
+    },
+    plugins: [ChartDataLabels],
+    options: {
+        indexAxis: 'y',
         responsive: true,
         plugins: {
-            legend: {
-                labels: { color: 'white'}
-            }
+            legend: { display: false },
+            datalabels: { color: 'white', anchor: 'end', align: 'end', font: { weight: 'bold' } }
         },
         scales: {
-          y: {
-            max: max_y,
-            ticks: { color: 'white', beginAtZero: true }
-          },
-          x: {
-            ticks: { color: 'white' }
-          }
+            x: { ticks: { color: 'white', beginAtZero: true } },
+            y: { ticks: { color: 'white' } }
         }
-      },
-      plugins: {
-        tooltip: {
-          enabled: true,
-          mode: 'index',
-          intersect: false,
-          callbacks: {
-            label: function(context) {
-              var label = context.dataset.label || '';
-              if (label) {
-                label += ': ';
-              }
-              label += context.parsed.y;
-              return label;
-            }
-          }
-        }
-      }
-    });
-
+    }
+});
 </script>
 
-
-
-
-<script>
-    /* CONTRIBUTION - Line chart */
-    /////////////////////////////////////////////////////////    
-
-    /***********************************************************************/
-    /* Hugo Processing for this chart */
-    /***********************************************************************/
-    {{$dates := slice}}
-    {{$legend := slice         "Forks"        "Pull Requests"}}
-    {{$data_and_legend := dict "Forks" slice  "Pull Requests" slice}}
-    {{$data := slice}}
-    {{ range .Site.Data.stats_weekly_data }}
-
-        {{/* Add date to array */}}
-        {{ $dates = append $dates (slice .a_date) }}
-
-        {{range $name, $val := .github_engagement}}
-            {{ $key := ""}}
-            {{if eq $name "num_forks"}}
-                {{ $key = "Forks" }}
-            {{ else if eq $name "num_prs"}}
-                {{ $key = "Pull Requests" }}
-            {{end}}
-            {{/* Append a new content value to its array of the current key */}}
-            {{ $updated_content_slice := append (index $data_and_legend $key) (slice $val) }}
-            {{ $change := dict $key $updated_content_slice}}
-            {{ $data_and_legend = merge $data_and_legend $change }}            
-                    {{/* Example of what is happening:
-                        {{ $countries := dict "1" "Germany" "2" "France" "3" "Italy" }}
-                        {{ $change := dict "2" "Belgium" }}
-                        {{ $countries := merge $countries $change }}
-                            $countries -> "1": "Germany", "2": Belgium, "3": "Italy"
-                    */}}
-
-        {{end}}
-    {{end}}
-    /***********************************************************************/
-    /* End Hugo Processing for this chart */
-
-
-
-        var dates_content_line = []     // [ '2023-06-23' , '2023-06-30' ]
-        var data_content_line = []      // [ [3,4,5,6] [3,5,5,6] ]
-        var legend_content_line = []    // [ 'Servers', 'uControllers']
-        {{range $dates}}
-            dates_content_line.push({{.}})
-        {{end}}
-        dates_content_line.reverse();
-        {{range $legend}}
-            legend_content_line.push({{.}})
-        {{end}}
-        {{range $name, $data_array := $data_and_legend}}
-            var temp = {{$data_array}};
-            
-            data_content_line.push(temp.reverse());
-        {{end}}
-
-
-
-
-
-
-
-
-    // Format data in Chart.JS format:
-    var line_datasets = [];
-    for (var i = 0; i < data_content_line.length; i++) {
-    var dataset = {
-        label: legend_content_line[i], // Server and Cloud
-        data: data_content_line[i],     // [5,6,4,3]
-        borderColor: getArmColor(i),    //#91bb00
-        fill: false
-    };
-    line_datasets.push(dataset);
-    }
-    // Format data in Chart.JS format:
-    var bar_datasets = [];
-    for (var i = 0; i < data_content_line.length; i++) {
-        var dataset = {
-            label: legend_content_line[i], // Server and Cloud
-            data: data_content_line[i],     // [5,6,4,3]
-            backgroundColor: getArmColor(i),
-            borderColor: getArmColor(i),
-            borderWidth: 1,
-            stack: 'stack 1' // Assign the stack name
-        };
-        bar_datasets.push(dataset);
-    }
-
-
-
-
-        const ctxx = document.getElementById('contribution-history-chart');
-
-        new Chart(ctxx, {
-          type: 'bar',
-          data: {
-            labels: dates_content_line,
-            datasets: bar_datasets
-          },
-          options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    labels: { color: 'white'}
-                }
-            },
-            scales: {
-              y: {
-                ticks: { color: 'white', beginAtZero: true }
-              },
-              x: {
-                ticks: { color: 'white' }
-              }
-            }
-          },
-          plugins: {
-            tooltip: {
-              enabled: true,
-              mode: 'index',
-              intersect: false,
-              callbacks: {
-                label: function(context) {
-                  var label = context.dataset.label || '';
-                  if (label) {
-                    label += ': ';
-                  }
-                  label += context.parsed.y;
-                  return label;
-                }
-              }
-            }
-          }
-        });
-
-
-    </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{{end}}
+{{ end }}
