@@ -59,7 +59,7 @@ If you've not already installed Docker, follow the steps in the [Docker install 
 ### Start the Memgraph container
 
 {{% notice Note %}}
-The following commands use Memgraph version 3.10.1. The same steps work with other versions. Replace the version number in image tags, package filenames, and download URLs with your chosen version. To find the latest release, see the [Memgraph GitHub releases page](https://github.com/memgraph/memgraph/releases).
+The commands in this install guide use Memgraph version 3.10.1. The same steps work with other versions. Replace the version number in image tags, package filenames, and download URLs with your chosen version. To find the latest release, see the [Memgraph GitHub releases page](https://github.com/memgraph/memgraph/releases).
 {{% /notice %}}
 
 The core image is `memgraph/memgraph`, which includes the Memgraph database plus the bundled `mgconsole` CLI. Start it with:
