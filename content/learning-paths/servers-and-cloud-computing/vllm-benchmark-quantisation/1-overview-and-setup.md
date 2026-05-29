@@ -12,7 +12,7 @@ layout: learningpathall
 
 ## Understand the models you'll use
 
-You'll use LLama 3.1 8B and Whisper large V3 in this Learning Path.
+You'll use Llama 3.1 8B and Whisper large V3 in this Learning Path.
 
 Llama 3.1 8B is an open-weight, text-only LLM with 8 billion parameters that can understand and generate text. You can view the model card at https://huggingface.co/meta-llama/Llama-3.1-8B.
 
@@ -68,7 +68,7 @@ pip install https://github.com/vllm-project/vllm/releases/download/v${VLLM_VERSI
 If you want to build vLLM from source, follow the instructions in the [Build and Run vLLM on Arm Servers Learning Path](/learning-paths/servers-and-cloud-computing/vllm/vllm-setup/).
 
 
-### Set up access to LLama3.1-8B models
+### Set up access to Llama3.1-8B models
 
 To access the Llama models hosted by Hugging Face, install the Hugging Face CLI and authenticate with your access token. Install the CLI:
 ```bash

@@ -97,7 +97,7 @@ The following are Docker images that you can choose depending on the Memgraph fe
 | `memgraph/mgconsole` | Standalone CLI client. |
 | `memgraph/lab` | Memgraph Lab web UI. |
 
-Start with `memgraph/memgraph` to get the Memgraph database. If you later want PageRank, community detection, node embeddings, NetworkX integration, or other advanced query modules, see the [MAGE section](#install-the-mage-graph-algorithm-library).
+Start with `memgraph/memgraph` to get the Memgraph database. If you later want PageRank, community detection, node embeddings, NetworkX integration, or other advanced query modules, see the [MAGE section](#optional-install-the-mage-graph-algorithm-library).
 
 ### Connect with mgconsole inside the container
 
@@ -117,7 +117,7 @@ Quit the shell by typing Ctrl-D(eof) or :quit
 memgraph>
 ```
 
-For example `mgconsole` queries, see the [example queries](#how-do-i-run-example-cypher-queries) section.
+For example `mgconsole` queries, see the [example queries](#run-example-cypher-queries-through-mgconsole) section.
 
 ## Install Memgraph natively on Linux
 

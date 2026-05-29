@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## Run inference on LLama3.1-8B
+## Run inference on Llama3.1-8B
 
 vLLM serves an OpenAI-compatible API that you'll use to run inference on Llama3.1-8B and confirm that the local environment is set up correctly.
 
@@ -260,6 +260,6 @@ The quantized Whisper model completes the same transcription in roughly a quarte
 
 ## What you've accomplished and what's next
 
-You've now installed vLLM and run inference on your LLama and Whisper models. You've seen speedups in task completion between quantized and non-quantized models.
+You've now installed vLLM and run inference on your Llama and Whisper models. You've seen speedups in task completion between quantized and non-quantized models.
 
 Next, you'll benchmark the Llama models and compare their performance.
