@@ -14,6 +14,7 @@ minutes_to_complete: 20
 multi_install: false
 multitool_install_part: false
 official_docs: https://memgraph.com/docs/getting-started/install-memgraph
+description: Install Memgraph on Arm Linux using Docker or native aarch64 packages, then verify installation by running Cypher queries with mgconsole.
 title: Memgraph on Arm
 tool_install: true
 weight: 1
@@ -100,7 +101,7 @@ Start with `memgraph/memgraph` to get the Memgraph database. If you later want P
 
 ### Connect with mgconsole inside the container
 
-The `memgraph/memgraph:3.10.1` image ships with `mgconsole` already inside the container:
+The `memgraph/memgraph:3.10.1` image ships with `mgconsole` already inside the container. Run `mgconsole` in the container:
 
 ```bash { target="ubuntu:latest" }
 docker exec -it memgraph mgconsole
@@ -398,5 +399,4 @@ For the complete algorithm catalog, see [Available algorithms](https://memgraph.
 You are now ready to build and query graphs with Memgraph on Arm.
 
 Next, you can explore the [Cypher query language](https://memgraph.com/docs/querying) and the [Memgraph data model](https://memgraph.com/docs/fundamentals). You can install the visual [Memgraph Lab](https://memgraph.com/docs/memgraph-lab) for browsing and visualizing graphs, and pick a [client library](https://memgraph.com/docs/client-libraries) for Python, Go, Rust, Java, JavaScript, or C#. You can also join the Memgraph community on [Discord](https://discord.gg/memgraph).
-
 
