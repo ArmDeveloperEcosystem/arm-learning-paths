@@ -55,4 +55,4 @@ The output is similar to:
 
 You've now installed the AWS CDK CLI and verified that the installation was successful.
 
-Next, you can use the CDK CLI to create an application and deploy it to AWS.
+Next, you can use the AWS CDK to create an application and deploy it to AWS.

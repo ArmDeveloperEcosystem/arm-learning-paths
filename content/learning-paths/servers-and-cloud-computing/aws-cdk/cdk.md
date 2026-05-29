@@ -35,3 +35,7 @@ The output is similar to:
 ## Validate the deployment
 
 ## What you've accomplished
+
+You've now synthesized and deployed a sample application using Amazon ECS and the AWS CDK. 
+
+You can use this workflow to programmatically deploy and manage containerized applications on AWS Graviton-based compute. 
