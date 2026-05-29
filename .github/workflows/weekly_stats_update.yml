@@ -31,8 +31,7 @@ jobs:
 
       - name: Fetch content_over_time.png from roadmap repo
         run: |
-          mkdir -p static/images/stats
-          curl -sL -o static/images/stats/content_over_time.png \
+          curl -sL -o content/stats/content_over_time.png \
             "https://raw.githubusercontent.com/ArmDeveloperEcosystem/roadmap/main/reports/content-count/content_over_time.png"
 
       - name: Setup git config
@@ -42,5 +41,5 @@ jobs:
 
       - name: Commit updated stats files
         run: |
-          git add data/stats_weekly_data.yml static/images/stats/content_over_time.png
+          git add data/stats_weekly_data.yml content/stats/content_over_time.png
           git commit -m 'automatic update of stats files' && git push origin main || echo "No changes to commit"

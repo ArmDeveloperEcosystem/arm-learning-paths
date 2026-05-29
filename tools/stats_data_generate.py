@@ -196,27 +196,27 @@ def classify_contributions(authors_dict):
     return {'internal': internal, 'external': external}
 
 
-def get_github_stats(token):
-    headers = {
-        'Authorization': f'token {token}',
-        'Accept': 'application/vnd.github.v3+json'
-    }
+def get_github_stats(token=None):
+    headers = {'Accept': 'application/vnd.github.v3+json'}
+    if token:
+        headers['Authorization'] = f'token {token}'
+
     resp = requests.get(GITHUB_API, headers=headers)
     resp.raise_for_status()
     repo = resp.json()
 
+    open_prs = 0
     pr_resp = requests.get(
         f'{GITHUB_API}/pulls', headers=headers,
         params={'state': 'open', 'per_page': 1}
     )
-    pr_resp.raise_for_status()
-    open_prs = 0
-    if 'Link' in pr_resp.headers:
-        match = re.search(r'page=(\d+)>; rel="last"', pr_resp.headers['Link'])
-        if match:
-            open_prs = int(match.group(1))
-    else:
-        open_prs = len(pr_resp.json())
+    if pr_resp.ok:
+        if 'Link' in pr_resp.headers:
+            match = re.search(r'page=(\d+)>; rel="last"', pr_resp.headers['Link'])
+            if match:
+                open_prs = int(match.group(1))
+        else:
+            open_prs = len(pr_resp.json())
 
     return {
         'stars': repo.get('stargazers_count', 0),
@@ -249,7 +249,7 @@ def build_entry(token=None, no_github=False):
         'contributions': contributions,
     }
 
-    if not no_github and token:
+    if not no_github:
         try:
             entry['github'] = get_github_stats(token)
         except Exception as e:
