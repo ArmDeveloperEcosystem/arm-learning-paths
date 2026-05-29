@@ -1,16 +1,18 @@
 ---
-title: Setup vLLM
+title: Set up vLLM
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## What is vLLM
+## What is vLLM? 
 
-[vLLM](https://docs.vllm.ai/en/latest/) is an open-source, high-throughput inference and serving engine for large language models (LLMs). It’s designed to maximise hardware efficiency, making LLM inference faster, more memory-efficient, and scalable.
+[vLLM](https://docs.vllm.ai/en/latest/) is an open-source, high-throughput inference and serving engine for large language models (LLMs). It’s designed to maximize hardware efficiency, making LLM inference faster, more memory-efficient, and scalable.
 
-## Understanding the models
+## Understand the models you'll use
+
+You'll use LLama 3.1 8B and Whisper large V3 in this Learning Path.
 
 Llama 3.1 8B is an open-weight, text-only LLM with 8 billion parameters that can understand and generate text. You can view the model card at https://huggingface.co/meta-llama/Llama-3.1-8B.
 
@@ -26,35 +28,35 @@ Before you begin, make sure your environment meets these requirements:
 This Learning Path was tested on a 96 core machine with 128-bit SVE, 192 GB of RAM and 500 GB of attached storage.
 
 {{% notice Note %}}
-Ubuntu 26.04 and later ship with Python 3.14 as the system default. vLLM does not currently support Python 3.14. This Learning Path explicitly installs and uses Python 3.12, so follow the steps as written regardless of your Ubuntu version.
+Ubuntu 26.04 and later ship with Python 3.14 as the system default. vLLM doesn't currently support Python 3.14. In this Learning Path, you'll install and use Python 3.12 regardless of your Ubuntu version.
 {{% /notice %}}
 
-## Install build dependencies
+### Install build dependencies
 
-Install the following packages required for running inference with vLLM on Arm64:
+Install the following packages required for running inference with vLLM on Arm-based Linux:
 ```bash
 sudo apt-get update -y
 sudo apt install -y python3.12-venv python3.12-dev gcc g++ build-essential
 ```
 
-Now install tcmalloc, a fast memory allocator from Google’s gperftools, which improves performance under high concurrency:
+Next, install tcmalloc, a fast memory allocator from Google’s gperftools that improves performance under high concurrency:
 ```bash
 sudo apt-get install -y libtcmalloc-minimal4
 ```
 
-## Create and activate a Python virtual environment
+### Create and activate a Python virtual environment
 
-It is considered best practice to install vLLM inside an isolated environment to prevent conflicts between system and project dependencies:
+As a best practice, install vLLM inside an isolated environment to prevent conflicts between system and project dependencies:
 ```bash
 python3.12 -m venv vllm_env
 source vllm_env/bin/activate
 python -m pip install --upgrade pip
 ```
 
-## Install vLLM for CPU
+### Install vLLM for CPU
 
 {{% notice Note %}}
-The following command installs vLLM version 0.20.0. The same steps work with other versions — replace the version number in the URL with your chosen release. To find the latest version, see the [vLLM releases page](https://github.com/vllm-project/vllm/releases).
+The following command installs vLLM version 0.20.0. The same steps work with other versions. Replace the version number in the URL with the version of your choice. To find the latest version, see the [vLLM releases page](https://github.com/vllm-project/vllm/releases).
 {{% /notice %}}
 
 Install a CPU-specific build of vLLM:
@@ -63,12 +65,12 @@ export VLLM_VERSION=0.20.0
 pip install https://github.com/vllm-project/vllm/releases/download/v${VLLM_VERSION}/vllm-${VLLM_VERSION}+cpu-cp38-abi3-manylinux_2_35_aarch64.whl --extra-index-url https://download.pytorch.org/whl/cpu
 ```
 
-If you wish to build vLLM from source you can follow the instructions in the [Build and Run vLLM on Arm Servers Learning Path](/learning-paths/servers-and-cloud-computing/vllm/vllm-setup/).
+If you want to build vLLM from source, follow the instructions in the [Build and Run vLLM on Arm Servers Learning Path](/learning-paths/servers-and-cloud-computing/vllm/vllm-setup/).
 
 
-## Set up access to LLama3.1-8B models
+### Set up access to LLama3.1-8B models
 
-To access the Llama models hosted by Hugging Face, you need to install the Hugging Face CLI and authenticate with your access token. Install the CLI with:
+To access the Llama models hosted by Hugging Face, install the Hugging Face CLI and authenticate with your access token. Install the CLI:
 ```bash
 curl -LsSf https://hf.co/cli/install.sh | bash
 ```
@@ -80,6 +82,10 @@ Create an account on [huggingface.co](https://huggingface.co/) if you don't alre
 hf auth login
 ```
 
-Paste your access token into the terminal when prompted. To access Llama3.1-8B you need to request access on the Hugging Face website. Visit [meta-llama/Llama-3.1-8B](https://huggingface.co/meta-llama/Llama-3.1-8B) and select "Expand to review and access". Complete the form and you should be granted access in a matter of minutes.
+Paste your access token into the terminal when prompted. To access Llama3.1-8B, request access on the Hugging Face website. Visit [meta-llama/Llama-3.1-8B](https://huggingface.co/meta-llama/Llama-3.1-8B) and select **Expand to review and access**. Within a couple minutes of completing the form, you should be granted access to the model.
 
-Your environment is now setup to run inference with vLLM. Next, we'll review model quantization and then you'll use vLLM to run inference on both quantized and non-quantized Llama and Whisper models.
+## What you've accomplished and what's next
+
+You've now set up your environment to run inference with vLLM. 
+
+Next, you'll review model quantization and then use vLLM to run inference on both quantized and non-quantized Llama and Whisper models.
