@@ -350,7 +350,7 @@ This query returns everyone reachable from Alice in one or two `KNOWS` hops.
 
 ## (Optional) Install the MAGE graph-algorithm library
 
-[MAGE](https://memgraph.com/docs/advanced-algorithms) is an open-source library that extends Memgraph with advanced graph algorithms and query modules, such as PageRank, community detection, shortest paths, node embeddings, NetworkX integration, and more, all callable from Cypher. MAGE is a separate add-on. If you want these capabilities, install the MAGE variant described as follows.
+[MAGE](https://memgraph.com/docs/advanced-algorithms) is an open-source library that extends Memgraph with advanced graph algorithms and query modules such as PageRank, community detection, shortest paths, node embeddings, NetworkX integration, and more. These algorithms and modules are all callable from Cypher. MAGE is a separate add-on. If you want these capabilities, install the MAGE variant described as follows.
 
 ### MAGE with Docker
 
