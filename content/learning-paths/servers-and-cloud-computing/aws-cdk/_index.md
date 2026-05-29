@@ -2,19 +2,23 @@
 title: Deploy applications on Arm servers using the AWS CDK
 description: Learn how to define and deploy AWS infrastructure for Arm-based applications using the AWS Cloud Development Kit.
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 45
 
 who_is_this_for: This is an introductory topic for software developers who want to use the AWS Cloud Development Kit to deploy applications on Arm-based AWS infrastructure.
 
 learning_objectives:
-    - Create an example AWS CDK application
+    - Create an example AWS CDK application in JavaScript
     - Define AWS infrastructure using the AWS CDK
     - Deploy application resources on Arm-based AWS infrastructure
 
 prerequisites:
     - An Amazon Web Services (AWS) account
     - A local computer with the AWS CLI, AWS CDK CLI, and Node.js installed
-    - Familiarity with the Linux command line
+    - Familiarity with the Linux command line and JavaScript
 
 author: Anupras Mohapatra
 
