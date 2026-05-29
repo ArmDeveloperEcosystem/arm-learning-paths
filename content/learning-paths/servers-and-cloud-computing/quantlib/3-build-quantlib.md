@@ -6,15 +6,15 @@ weight: 4
 layout: learningpathall
 ---
 
-## Configure the QuantLib build
+## Configure the build
 
-From the QuantLib source directory:
+Return to the QuantLib source directory. This uses the `QL_VER` variable you exported when downloading the source archive:
 
 ```bash
 cd ~/QuantLib-$QL_VER
 ```
 
-Run the configure script:
+Run the configure script with benchmark support enabled:
 ```bash
 ./configure \
 --prefix=/usr/local \
@@ -32,35 +32,30 @@ This configuration:
 - applies CPU-specific optimization flags
 
 
-## Build QuantLib
+## Install QuantLib
 
-Compile using all available cores:
+Compile using all available cores. The `nproc` command returns the number of processing units visible to the VM, so `make -j$(nproc)` keeps the build command portable across VM sizes:
 
 ```bash
 make -j$(nproc)
 ```
 
 {{% notice Note %}}
-The build may take 30–45 minutes on smaller instances. Use tmux to avoid losing progress if your SSH session disconnects.
+The build may take 30–45 minutes on the Standard_D4ps_v5. If your SSH session might disconnect, set up tmux before running `make` — see the optional setup steps in the previous section.
 {{% /notice %}}
 
-## Install QuantLib
-
-After the build completes:
+After the build completes, install QuantLib into `/usr/local` and refresh the dynamic linker cache:
 
 ```bash
 sudo make install
 sudo ldconfig
 ```
 
-## Verify the build
+Move to the test suite and check that the benchmark executable was created:
 
-Move to the test suite:
 ```bash
 cd ~/QuantLib-$QL_VER/test-suite
-```
-
-Check that the benchmark executable exists:
-```bash
 ls quantlib-benchmark
 ```
+
+You should see `quantlib-benchmark` in the output. You will use this executable in the next section.

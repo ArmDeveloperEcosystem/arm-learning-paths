@@ -29,6 +29,8 @@ generate_summary_faq: true
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
+cloud_service_providers:
+    - Microsoft Azure
 armips:
     - Neoverse
 tools_software_languages:
