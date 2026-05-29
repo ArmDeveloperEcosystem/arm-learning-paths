@@ -15,20 +15,18 @@ minutes_to_complete: 20
 multi_install: true
 multitool_install_part: false
 official_docs: https://memgraph.com/docs/getting-started/install-memgraph
-test_images:
-- ubuntu:24.04
-test_maintenance: true
 title: Memgraph on Arm
 tool_install: true
 weight: 1
 draft: true
+author: Sabika Tasneem
 ---
 
 [Memgraph](https://memgraph.com/) is an open-source, in-memory graph database built for real-time streaming and analytical workloads. It is compatible with the [Cypher](https://memgraph.com/docs/querying) query language and the Bolt protocol used by Neo4j drivers, so existing Cypher/Bolt applications can connect without changes.
 
 Memgraph publishes native `aarch64` Linux packages and multi-architecture Docker images, so it runs unmodified on Arm-based hardware.
 
-Graph algorithms parallelize well and scale with core count, and Arm servers often have a meaningful cost-per-query advantage over equivalent x86 instances that make them an increasingly popular fit for graph workloads.
+Graph algorithms parallelize well and scale with core count. Arm server instances can offer a lower cost per query than equivalent x86 instances for memory-intensive graph workloads.
 
 This guide covers two installation paths:
 
@@ -61,6 +59,10 @@ Docker is the simplest way to run Memgraph on any operating system. The official
 If Docker is not already installed, follow the [Docker install guide](/install-guides/docker/).
 
 ### How do I start the Memgraph container?
+
+{{% notice Note %}}
+The following commands use Memgraph version 3.10.1. The same steps work with other versions. Replace the version number in image tags, package filenames, and download URLs with your chosen version. To find the latest release, see the [Memgraph GitHub releases page](https://github.com/memgraph/memgraph/releases).
+{{% /notice %}}
 
 The core image is `memgraph/memgraph`, which includes the Memgraph database plus the bundled `mgconsole` CLI. Start it with:
 
@@ -107,7 +109,7 @@ docker exec -it memgraph mgconsole
 You should see a prompt similar to:
 
 ```output
-mgconsole X.X
+mgconsole 1.5.2
 Connected to 'memgraph://127.0.0.1:7687'
 Type :help for shell usage
 Quit the shell by typing Ctrl-D(eof) or :quit
@@ -126,12 +128,20 @@ Memgraph provides native `aarch64` packages for the following distributions:
 
 Choose the package that matches your distribution from the [Memgraph Download Hub](https://memgraph.com/download). For convenience, direct download URLs for every supported platform are listed in the [direct download links](https://memgraph.com/docs/getting-started/install-memgraph/direct-download-links) page.
 
-### How do I install on Ubuntu or Debian?
+{{< tabpane-normal >}}
+  {{< tab header="Ubuntu / Debian" >}}
 
 Download the `arm64` `.deb` package. For Ubuntu 24.04 on Arm:
 
 ```bash { target="ubuntu:latest" }
 wget https://download.memgraph.com/memgraph/v3.10.1/ubuntu-24.04-aarch64/memgraph_3.10.1-1_arm64.deb
+```
+
+Before installing, update the package index and install the required dependency:
+
+```bash { target="ubuntu:latest" }
+sudo apt update
+sudo apt install -y libatomic1
 ```
 
 Install the package:
@@ -146,7 +156,8 @@ If `dpkg` reports missing dependencies, resolve them with:
 sudo apt-get install -f
 ```
 
-### How do I install on Fedora?
+  {{< /tab >}}
+  {{< tab header="Fedora" >}}
 
 Download the Fedora `aarch64` `.rpm`:
 
@@ -159,6 +170,9 @@ Install it:
 ```bash
 sudo dnf install ./memgraph-3.10.1_1-1.aarch64.rpm
 ```
+
+  {{< /tab >}}
+{{< /tabpane-normal >}}
 
 ### How do I verify Memgraph is running?
 
@@ -181,7 +195,7 @@ Inspect the startup log to confirm the version:
 sudo journalctl --unit memgraph --no-pager | head
 ```
 
-You should see a line similar to:
+You should see output similar to:
 
 ```output
 You are running Memgraph v3.10.1
@@ -218,7 +232,15 @@ This setting is applied on the Linux host, so it is relevant for both the native
 
 `mgconsole` is Memgraph’s command-line client for executing Cypher queries. It is already included in the Memgraph Linux packages and in the `memgraph/memgraph:3.10.1` and `memgraph/memgraph-mage:3.10.1` Docker images, so you only need a separate install if you want to run it from a different machine.
 
-To install it standalone, download the binary for your platform from the [Memgraph Download Hub](https://memgraph.com/download#individual), or pull the Docker image:
+To install it standalone, download the binary for your platform from the [Memgraph Download Hub](https://memgraph.com/download#individual), or pull the Docker image.
+
+If Memgraph is installed directly on the host machine, use host networking so the container can reach it on `localhost`:
+
+```bash { target="ubuntu:latest" }
+docker run -it --network host memgraph/mgconsole:latest --host localhost --port 7687
+```
+
+If Memgraph is running in another container or on a remote host, replace `localhost` with the appropriate hostname or IP address:
 
 ```bash { target="ubuntu:latest" }
 docker run -it memgraph/mgconsole:latest --host <memgraph-host> --port 7687
@@ -229,6 +251,10 @@ Full `mgconsole` documentation, including all command-line flags, is available i
 ## How do I run example Cypher queries?
 
 With Memgraph running either in Docker or as a native service, you can send queries non-interactively through `mgconsole`.
+
+{{% notice Note %}}
+If you installed Memgraph with Docker, replace `mgconsole --host localhost --port 7687` with `sudo docker exec -i memgraph mgconsole` in piped commands, or run `docker exec -it memgraph mgconsole` for an interactive session.
+{{% /notice %}}
 
 Create two nodes and a relationship:
 
@@ -243,7 +269,16 @@ Read them back:
 echo "MATCH (n) RETURN n;" | mgconsole --host localhost --port 7687
 ```
 
-The expected output is a two-row tabular result listing the `Alice` and `Bob` nodes.
+The output is similar to:
+
+```output
++------------------------------+
+| n                            |
++------------------------------+
+| (:Person {name: 'Alice'})    |
+| (:Person {name: 'Bob'})      |
++------------------------------+
+```
 
 Count the nodes:
 
@@ -289,8 +324,6 @@ If you prefer an interactive session, run `mgconsole` without piping input:
 ```bash { target="ubuntu:latest" }
 mgconsole --host localhost --port 7687
 ```
-
-If you are using the Docker install, substitute `docker exec -it memgraph mgconsole` for `mgconsole` in any of the commands above.
 
 ### A quick pattern-matching example
 
