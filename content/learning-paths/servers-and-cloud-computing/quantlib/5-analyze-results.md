@@ -44,13 +44,8 @@ and throughput increases almost linearly.
 
 From the results:
 
-- 1 to 2 workers:
-  - runtime drops from ~5h 11m to ~2h 30m  
-  - throughput nearly doubles  
-
-- 2 to 4 workers:
-  - runtime drops again to ~1h 15m  
-  - throughput doubles again  
+- With 1 to 2 workers, runtime drops from ~5h 11m to ~2h 30m, and throughput nearly doubles.
+- With 2 to 4 workers, runtime drops again to ~1h 15m, and throughput doubles again.  
 
 The decrease in runtime and increase in throughput indicates near-linear scaling on this system.
 
