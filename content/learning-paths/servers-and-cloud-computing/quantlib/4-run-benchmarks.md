@@ -24,7 +24,7 @@ To understand how performance scales across the Arm cores in the VM, keep the wo
 ./quantlib-benchmark --size=80 --nProc=4
 ```
 
-The `Standard_D4ps_v5` virtual machine has a limited number of cores. Start with one, two, and four workers. Larger values such as 12, 24, or 48 are better suited to larger machines and can oversubscribe this VM, which makes the results harder to interpret.
+The `Standard_D4ps_v5` virtual machine has a limited number of cores. Start with 1, 2, and 4 workers. Larger values such as 12, 24, or 48 are better suited to larger machines and can oversubscribe this VM, which makes the results harder to interpret.
 
 ## Vary workload size
 
