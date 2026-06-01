@@ -6,22 +6,20 @@ weight: 2
 layout: learningpathall
 ---
 
-## Reachy Gladiator - Decide Reachy's Fate
+## Reachy Gladiator - Decide Reachy's fate
 
-In this Learning Path, Reachy is stepping out onto the sands of the Arena. Reachy has practiced their gladiator moves, but are they good enough?
-
-You will decide Reachy's fate in the classic Roman way - a 👍 for **Victory**, or a 👎 for **Defeat**.
+In this Learning Path, you build a distributed edge AI application where a Raspberry Pi runs local gesture inference and sends robot motion commands to a simulated Reachy Mini. The app follows a gladiator arena theme: Reachy performs a move, and you give a thumbs-up 👍 for **Victory** or thumbs-down 👎 for **Defeat** to trigger a victory or defeat reaction.
 
 ![Illustration of Reachy Mini in a gladiator style pose. The app uses this arena theme for its moves, verdicts, and dashboard.#center](reachy_gladiator.png "Reachy Mini Gladiator App Concept")
 
 ## What is Reachy Mini?
 
-Reachy Mini is a small open robotics platform from Pollen Robotics. It is designed for expressive head, antenna, and body motion, and it can be controlled from Python with the Reachy Mini SDK. The Reachy Mini Wireless version includes an onboard Arm-powered Raspberry Pi 4 Compute Module, and the Lite version is operated with external compute (e.g., Raspberry Pi, DGX Spark, Mac/PC).
+Reachy Mini is a small open robotics platform from Pollen Robotics. It is designed for expressive head, antenna, and body motion, and it can be controlled from Python with the Reachy Mini SDK. The Reachy Mini Wireless version includes an onboard Arm-powered Raspberry Pi 4 Compute Module, and the Lite version is operated with external compute such as a Raspberry Pi, DGX Spark, or Mac/PC.
 
 Reachy can also be simulated using MuJoCo software. Most developers do not have a physical Reachy Mini robot on their desk, and it is often useful to develop software before hardware is available. Extrapolating from Reachy to more industrial robotics, it is also important to test applications in simulation in advance for safety.
 
 {{% notice Warning %}}
-If using a physical Reachy Mini, use caution and ensure the robot is used in an area with appropriate space. The robot has moving parts and could be a health & safety risk. You are responsible for your safety and the safety of others around you when using physical robotic devices
+If using a physical Reachy Mini, use caution and ensure the robot is used in an area with appropriate space. The robot has moving parts and could be a health & safety risk. You are responsible for your safety and the safety of others around you when using physical robotic devices.
 {{% /notice %}}
 
 ## What will you build?
@@ -54,7 +52,7 @@ Keeping perception, robot control, and observability as separate pieces makes it
 
 The app is called Reachy Gladiator. Reachy (in simulation or otherwise) performs a randomly-chosen scripted gladiator move. You provide a 👍 for **Victory**, or a 👎 for **Defeat**. **Victory** makes Reachy celebrate, **Defeat** makes Reachy react sadly.
 
-This learning path starts from the complete `reachy_gladiator_lp` project instead of asking you to create every file from scratch. The simulation host only needs a launcher script, but the Raspberry Pi will clone and run the full project. You will inspect the different parts of the system so you can recreate your own apps running on Reachy or in simulation.
+This Learning Path starts from the complete [`reachy_gladiator_lp`](https://github.com/matt-cossins/reachy_gladiator_lp) project instead of asking you to create every file from scratch. The simulation host only needs a launcher script, but the Raspberry Pi will clone and run the full project. You will inspect the different parts of the system so you can recreate your own apps running on Reachy or in simulation.
 
 The Reachy Gladiator app runs a repeated loop:
 
@@ -96,7 +94,7 @@ The rest of this learning path shows the common Bash commands and calls out the 
 The simulation host does not need the full project checkout. In the next
 section, you will download only the simulation launcher script on that machine.
 
-You will clone the full `reachy_gladiator_lp` project on the Raspberry Pi later on.
+You will clone the full `reachy_gladiator_lp` project on the Raspberry Pi later.
 
 The key files are:
 

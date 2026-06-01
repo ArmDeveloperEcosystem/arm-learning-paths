@@ -214,7 +214,7 @@ XNNPACK delegate to speed up neural-network operations on Arm CPUs.
 
 The detector runs in a worker process instead of the main app thread. This
 keeps MediaPipe inference separate from the robot-control loop, dashboard
-responses, and camera capture. Other processes therefore don't pause the MediaPipe worker while it is classifying frames.
+responses, and camera capture. The robot-control loop and dashboard server therefore remain responsive while MediaPipe is classifying a frame.
 
 The app uses the CPU delegate:
 
@@ -415,7 +415,7 @@ if __name__ == "__main__":
     app.wrapped_run(host=daemon_host, port=daemon_port, timeout=daemon_timeout)
 ```
 
-Take some time to look through the files and try to understand the different parts. Feel free to ask a coding agent or LLM to help explain any areas you are unsure about.
+Take some time to read through the files and understand the different parts before moving on to extend the project.
 
 ## What you learned
 
