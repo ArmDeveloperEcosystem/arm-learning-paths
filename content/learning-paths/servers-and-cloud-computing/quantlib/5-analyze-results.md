@@ -68,7 +68,7 @@ From these results:
 - QuantLib scales well across multiple cores on Azure Cobalt  
 - Throughput increases proportionally with thread count  
 - Runtime grows with workload size, as expected  
-- The system shows efficient utilization of available cores  
+- The system shows efficient usage of available cores  
 
 
 {{% notice Practical guidance %}}
