@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Record your results
 
-The following results were collected on a `Standard_D4ps_v5` Azure Cobalt virtual machine.
+The following results were collected on a `Standard_D4ps_v5` Azure Cobalt virtual machine (VM).
 
 ### Workload scaling (single thread)
 
