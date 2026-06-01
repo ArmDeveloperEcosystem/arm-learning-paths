@@ -22,13 +22,19 @@ The simulation host does not need the full `reachy_gladiator_lp` project. It
 only needs the Reachy Mini SDK with MuJoCo support and the `start_sim.sh`
 launcher script.
 
+### macOS prerequisites
+
+{{% notice Note %}}
+Python 3.12 is required for the simulation environment. Python 3.13 can cause dependency resolution failures because pre-built wheels for some SDK dependencies are not yet available for that version. Check your version with `python3 --version`. On macOS, install Python 3.12 with [Homebrew](https://brew.sh): `brew install python@3.12`. On Ubuntu or WSL2, install it with `sudo apt install python3.12 python3.12-venv`.
+{{% /notice %}}
+
 On the machine that will run the simulation, create a small workspace and a
 Python virtual environment:
 
 ```bash
 mkdir -p ~/reachy_projects/reachy_sim/scripts
 cd ~/reachy_projects/reachy_sim
-python3 -m venv .venv
+python3.12 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
 ```
@@ -43,7 +49,7 @@ The `mujoco` extra is required for `--sim`. If you install only `reachy-mini`, t
 
 If you already have a working Reachy Mini simulation environment, you can activate that environment instead.
 
-Download the simulation launcher script from the project repository:
+Download the simulation launcher script from the [reachy_gladiator_lp repository](https://github.com/matt-cossins/reachy_gladiator_lp):
 
 ```bash
 curl -L https://raw.githubusercontent.com/matt-cossins/reachy_gladiator_lp/main/scripts/start_sim.sh -o scripts/start_sim.sh
@@ -64,9 +70,19 @@ source .venv/bin/activate
 REACHY_SIM_PORT=18000 ./scripts/start_sim.sh
 ```
 
-This can take several minutes to start up. Leave this terminal running after it completes and boots the simulation view.
+This can take several minutes to start up. When the simulation is ready, the output is similar to:
 
-![MuJoCo Simulation#center](MuJoCo.png "MuJoCo Simulation")
+```output
+reachy_mini.daemon.daemon - INFO - Daemon started successfully.
+uvicorn.error - INFO - Application startup complete.
+uvicorn.error - INFO - Uvicorn running on http://0.0.0.0:18000 (Press CTRL+C to quit)
+reachy_mini.utils.discovery - INFO - mDNS service registered: reachy_mini on port 18000
+reachy_mini.media.media_server - INFO - Pipeline latency (live=True, min_latency=30000000, max_latency=1200000000)
+```
+
+Leave this terminal running after it completes and boots the simulation view.
+
+![MuJoCo physics simulation window showing the Reachy Mini robot in a standing position, confirming the simulation started successfully#center](mujoco.png "MuJoCo simulation window with Reachy Mini")
 
 
 The script starts the Reachy Mini daemon with simulation enabled, binds FastAPI to `0.0.0.0`, and disables localhost-only mode so the Raspberry Pi can connect. This Learning Path uses port `18000`.

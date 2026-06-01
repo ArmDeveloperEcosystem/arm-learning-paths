@@ -25,14 +25,14 @@ motion, or packaging.
 
 ## Change the classifier
 
-Trying adding new gesture controls. Start in `gesture.py`, where the app maps MediaPipe labels such as `Thumb_Up` and `Thumb_Down` to app labels. Then add matching robot behavior in `moves.py` and branch on the new label in `main.py`.
+Try adding new gesture controls. Start in `gesture.py`, where the app maps MediaPipe labels such as `Thumb_Up` and `Thumb_Down` to app labels. Then add matching robot behavior in `moves.py` and branch on the new label in `main.py`.
 
 Some game-themed ideas:
 
 - Map `Closed_Fist` to `challenge`, and make Reachy repeat the current move
 - Map `Pointing_Up` to `reroll`, and make Reachy reject the current move and
   choose another one.
-- Map `Number of fingers` to choosing a specific move.
+- Map the number of fingers shown to choose a specific move.
 
 ## Add audio output
 
@@ -50,7 +50,7 @@ robot motion and sound effects easy to change independently.
 ## Replace thumbs with audio input
 
 The vision-based verdict is one edge AI input modality. You can replace
-or complement it with audio - many webcams include microphones or you can use a USB microphone.
+or complement it with audio. Many webcams include microphones, or you can use a USB microphone.
 
 - say "yes" for victory and "no" for defeat,
 - clap once for victory and twice for defeat,
@@ -62,10 +62,10 @@ A lightweight keyword-spotting model can map spoken commands to the same game st
 If you have a physical Reachy Mini, the quickest way to try the finished
 experience is to install the packaged [Reachy Gladiator app](https://huggingface.co/spaces/cossinsmatthew/reachy_gladiator) through the [Reachy Mini Control app](https://github.com/pollen-robotics/reachy-mini-desktop-app).
 
-Simply install Reachy Mini Control on a supported machine, connected to your Reachy, and search for the reachy gladiator app.
+Install Reachy Mini Control on a supported machine, connect it to your Reachy, and search for the Reachy Gladiator app.
 
 {{% notice Warning %}}
-If using a physical Reachy Mini, use caution and ensure the robot is used in an area with appropriate space. The robot has moving parts and could be a health & safety risk. You are responsible for your safety and the safety of others around you when using physical robotic devices
+If using a physical Reachy Mini, use caution and ensure the robot is used in an area with appropriate space. The robot has moving parts and could be a health & safety risk. You are responsible for your safety and the safety of others around you when using physical robotic devices.
 {{% /notice %}}
 
 ## Adapt this source project for physical Reachy
@@ -129,4 +129,4 @@ Pollen Robotics `AGENTS.md` instructions, provided by the [Reachy Mini project](
 
 ## What you learned
 
-You explored options for extending from simulation to a physical Reachy, as well ideas for changing the project to include audio, new vision gestures, or different behaviours.
+You explored options for extending from simulation to a physical Reachy, as well as ideas for changing the project to include audio, new vision gestures, or different behaviors.

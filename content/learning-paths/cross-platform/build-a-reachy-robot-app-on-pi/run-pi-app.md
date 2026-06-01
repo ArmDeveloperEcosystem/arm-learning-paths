@@ -1,5 +1,5 @@
 ---
-title: Setup Pi and run Edge AI app
+title: Set up the Pi and run the Edge AI app
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Prepare the Raspberry Pi
 
-The Raspberry Pi should be installed with Raspberry Pi OS Trixie, and be accessible over SSH.
+The Raspberry Pi should be installed with Raspberry Pi OS Trixie (Debian 13-based), and be accessible over SSH.
 
-Connect to your Raspberry Pi over SSH using [VSCode Remote - SSH](https://code.visualstudio.com/docs/remote/ssh), or via terminal e.g.,
+Connect to your Raspberry Pi over SSH. If you use VS Code, you can use the [Remote - SSH](https://code.visualstudio.com/docs/remote/ssh) extension. From a terminal:
 
 ```bash
 ssh <user>@<pi-ip-address>
@@ -33,7 +33,7 @@ sudo apt install git-lfs
 git lfs install
 ```
 
-Clone the `reachy_gladiator_lp` project into this directory:
+Clone the [`reachy_gladiator_lp`](https://github.com/matt-cossins/reachy_gladiator_lp) project into this directory:
 
 ```bash
 git clone https://github.com/matt-cossins/reachy_gladiator_lp.git
@@ -52,7 +52,7 @@ again before continuing.
 
 ## Install the Pi runtime
 
-Run the Pi setup script:
+Run the Pi setup script. This can take several minutes because it installs `pyenv`, builds Python 3.12, and installs all Python dependencies:
 
 ```bash
 ./scripts/setup_pi.sh
@@ -78,7 +78,7 @@ source .venv/bin/activate
 
 The setup script runs an import smoke test. It also runs `pip check`; a MediaPipe NumPy metadata warning is expected for this Pi setup.
 
-Test the MediaPipe gesture worker from a real Python file:
+Test the MediaPipe gesture worker by writing a small test script and running it. The `cat` command below creates the file at `/tmp/test_gesture_worker.py` using a heredoc — the text between `<<'PY'` and the closing `PY` becomes the file contents:
 
 ```bash
 cat > /tmp/test_gesture_worker.py <<'PY'

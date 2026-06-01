@@ -31,7 +31,7 @@ http://<pi-ip-address>:8042
 This works even when the Pi is headless. The browser only needs network access
 to the Pi and port `8042`.
 
-The app will countdown from 10, and then Reachy will start performing moves. Reachy will perform the same move three times, and then await your verdict. After a verdict is given, Reachy will perform the **Victory** or **Defeat** moves. Reachy will then randomly select another move the cycle will repeat.
+The app will count down from 10, and then Reachy will start performing moves. Reachy will perform the same move three times, and then await your verdict. After a verdict is given, Reachy will perform the **Victory** or **Defeat** moves. Reachy will then randomly select another move, and the cycle repeats.
 
 ![Thumbs Up Victory#center](thumbs-up.gif "Thumbs Up Victory")
 
