@@ -46,7 +46,7 @@ ssh -i ~/Downloads/quantlib-cobalt-vm_key.pem azureuser@<VM_PUBLIC_IP>
 Replace `<VM_PUBLIC_IP>` with the public IP address of your VM.
 
 
-After logging in, verify the architecture before installing packages. The rest of this Learning Path is intended for an Arm64 system:
+After logging in, verify the architecture before installing packages. The rest of this Learning Path is intended to be run on an Arm64 system:
 
 ```bash
 uname -m
