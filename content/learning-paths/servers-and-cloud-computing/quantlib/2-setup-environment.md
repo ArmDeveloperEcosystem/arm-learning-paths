@@ -15,7 +15,7 @@ Use the following settings:
 | Setting | Value |
 |---|---|
 | Virtual machine name | `quantlib-cobalt-vm` |
-| Region | a Cobalt-supported region such as **West US 2** |
+| Region | A Cobalt-supported region such as **West US 2** |
 | Availability options | No infrastructure redundancy required |
 | Security type | Standard |
 | Image | Ubuntu Server 22.04 LTS |
@@ -58,7 +58,7 @@ The expected output is:
 aarch64
 ```
 
-If you don't see aarch64, check that you created the VM with Arm64 architecture and selected an Azure Cobalt-compatible instance type.
+If you don't see `aarch64`, check that you created the VM with Arm64 architecture and selected an Azure Cobalt-compatible instance type.
 
 ## Install dependencies and download QuantLib
 

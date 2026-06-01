@@ -10,7 +10,7 @@ layout: learningpathall
 
 QuantLib is an open-source C++ library for quantitative finance. It provides tools for pricing, modeling, trading, and risk management, and is widely used as both a development library and a representative financial computing workload.
 
-Because QuantLib is a substantial C++ codebase with realistic compute behavior, it is also useful as a benchmark when evaluating cloud systems and processor architectures. In this Learning Path, you'll build QuantLib from source and run its benchmark executable on an Arm-based Azure Cobalt virtual machine.
+Because QuantLib is a substantial C++ codebase with realistic compute behavior, it's also useful as a benchmark when evaluating cloud systems and processor architectures. In this Learning Path, you'll build QuantLib from source and run its benchmark executable on an Arm-based Azure Cobalt virtual machine.
 
 ## Why use Azure Cobalt?
 
@@ -47,11 +47,11 @@ The benchmark executable runs approximately 85 tests drawn directly from QuantLi
 - Energy: Swing options and virtual power plant pricing
 - Math: Gaussian quadratures, low-discrepancy sequences, statistics, and special functions
 
-Each test has a fixed iteration count built in. Some run once per task, others run hundreds or thousands of times to produce a measurable signal. The `--size` argument multiplies the entire set: `--size=2` runs each test twice, `--size=5` runs it five times, and so on. Doubling `--size` doubles runtime while leaving throughput unchanged — this is the expected weak scaling behavior of the benchmark.
+Each test has a fixed iteration count built in. Some run once per task, and others run hundreds or thousands of times to produce a measurable signal. The `--size` argument multiplies the entire set: `--size=2` runs each test twice, `--size=5` runs it five times, and so on. Doubling `--size` doubles runtime while leaving throughput unchanged — this is the expected weak scaling behavior of the benchmark.
 
 The `--nProc` argument controls the number of worker processes. Because QuantLib is not thread-safe, the benchmark uses separate processes rather than threads, coordinated through Boost IPC. Before timing begins, the benchmark runs every test once through the Boost unit test framework to verify correctness. The tests produce the `*** No errors detected` line in the output.
 
-`System Throughput` is calculated as `(size × number_of_tests) / total_runtime`. It is the primary metric for comparing runs across thread counts and system configurations.
+`System Throughput` is calculated as `(size × number_of_tests) / total_runtime` and is the primary metric for comparing runs across thread counts and system configurations.
 
 ## Benchmarking goals
 
