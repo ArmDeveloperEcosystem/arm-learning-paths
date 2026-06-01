@@ -19,8 +19,8 @@ Azure Cobalt provides Arm64 virtual machines for cloud-native development and pe
 You'll use:
 
 - Ubuntu Server 22.04 LTS 
-- an Arm64 Azure Cobalt virtual machine
-- a source build of QuantLib
+- An Arm64 Azure Cobalt virtual machine
+- A source build of QuantLib
 - QuantLib's benchmark executable for repeatable performance testing
 
 ## Benchmark workflow
@@ -51,7 +51,7 @@ Each test has a fixed iteration count built in. Some run once per task, others r
 
 The `--nProc` argument controls the number of worker processes. Because QuantLib is not thread-safe, the benchmark uses separate processes rather than threads, coordinated through Boost IPC. Before timing begins, the benchmark runs every test once through the Boost unit test framework to verify correctness. The tests produce the `*** No errors detected` line in the output.
 
-System Throughput is calculated as `(size × number_of_tests) / total_runtime`. It is the primary metric for comparing runs across thread counts and system configurations.
+`System Throughput` is calculated as `(size × number_of_tests) / total_runtime`. It is the primary metric for comparing runs across thread counts and system configurations.
 
 ## Benchmarking goals
 
@@ -59,10 +59,10 @@ When benchmarking a workload such as QuantLib, the goal is not just to obtain on
 
 For that reason, this Learning Path emphasizes:
 
-- using a known VM configuration
-- keeping the software environment consistent
-- changing one benchmark variable at a time
-- recording commands and results so runs can be reproduced later
+- Using a known VM configuration
+- Keeping the software environment consistent
+- Changing one benchmark variable at a time
+- Recording commands and results so runs can be reproduced later
 
 ## What you've learned and what's next
 
