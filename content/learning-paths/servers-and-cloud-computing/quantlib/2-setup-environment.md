@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Create and connect to an Arm64 Azure Cobalt virtual machine
 
-To run QuantLib on Azure Cobalt, first create an Arm64 Ubuntu virtual machine in the Azure portal.
+To run QuantLib on Azure Cobalt, first create an Arm64 Ubuntu virtual machine (VM) in the Azure portal. For detailed steps, see the Azure documentation [Quickstart: Create a Linux virtual machine in the Azure portal](https://learn.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-portal?tabs=ubuntu). 
 
 Use the following settings:
 
@@ -25,13 +25,13 @@ Use the following settings:
 | SSH public key name | `quantlib-cobalt-vm_key` |
 | Username | `azureuser` |
 
-For storage, a `64 GB` OS disk is sufficient for this workflow.
+A `64 GB` OS disk is sufficient storage for this workflow.
 
 For networking, allow inbound SSH on port `22`. Restricting the source to **My IP** is recommended.
 
 After creating the VM, download the generated private key in `.pem` format if Azure provides one during setup.
 
-Before connecting, update the permissions on the private key from your local machine. SSH refuses to use keys that are readable by other users:
+SSH refuses to use keys that are readable by other users. Before connecting to the VM, update the permissions on the private key from your local machine:
 
 ```bash
 chmod 600 ~/Downloads/quantlib-cobalt-vm_key.pem
@@ -58,7 +58,7 @@ The expected output is:
 aarch64
 ```
 
-If you do not see aarch64, check that you created the VM with Arm64 architecture and selected an Azure Cobalt-compatible instance type.
+If you don't see aarch64, check that you created the VM with Arm64 architecture and selected an Azure Cobalt-compatible instance type.
 
 ## Install dependencies and download QuantLib
 
@@ -86,7 +86,7 @@ Check that the file exists and has a non-zero size:
 ls -lh QuantLib-$QL_VER.tar.gz
 ```
 
-You should see output showing the file name and size, for example:
+The output shows the file name and size, and is similar to:
 
 ```bash
 -rw-r--r-- 1 azureuser azureuser 41M QuantLib-1.41.tar.gz
@@ -102,20 +102,18 @@ Use the `file` command to confirm that the archive is a gzip-compressed tar file
 file QuantLib-$QL_VER.tar.gz
 ```
 
-Expected output is similar to:
+The output is similar to:
 
 ```bash
 QuantLib-1.41.tar.gz: gzip compressed data, max compression, from Unix, original size modulo 2^32 42721280
 ```
 
-Once confirmed, extract it and move into the extracted directory:
+After you've confirmed, extract the archive and move into the extracted directory:
 
 ```bash
 tar -xzf QuantLib-$QL_VER.tar.gz
 cd QuantLib-$QL_VER
 ```
-
-
 
 List the contents to confirm that the source code is ready to configure and build:
 
@@ -123,7 +121,7 @@ List the contents to confirm that the source code is ready to configure and buil
 ls
 ```
 
-You should see files and directories such as:
+The output is similar to:
 
 ```bash
 configure
@@ -132,12 +130,11 @@ ql/
 test-suite/
 ```
 
-This confirms that the source code has been unpacked correctly and is ready to configure and build.
+The output confirms that the source code has been unpacked correctly and is ready to configure and build.
 
-{{% notice Optional Setup %}}
-## Reconnect to Cobalt frequently
+## (Optional) Set up shortcut for reconnecting to Cobalt frequently
 
-If you'll reconnect often, add a shortcut entry to your SSH config:
+If you'll reconnect to the VM often, add a shortcut entry to your SSH config:
 
 ```bash
 nano ~/.ssh/config
@@ -158,7 +155,7 @@ Then connect with:
 ssh quantlib-cobalt
 ```
 
-## Use tmux for remote builds
+## (Optional) Use tmux for remote builds
 
 If your SSH session disconnects during the build, the compile job will be killed. To prevent this, install tmux and start a session before running `make`:
 
@@ -168,11 +165,14 @@ sudo apt install -y tmux
 tmux
 ```
 
-Run the build commands from inside the tmux session. If your connection drops, reconnect to the VM and re-attach with:
+Run the build commands from inside the tmux session. If your connection drops, reconnect to the VM and re-attach:
 
 ```bash
 tmux attach
 ```
-{{% /notice %}}
 
-With your environment set up, move on to the next section to build QuantLib.
+## What you've accomplished and what's next
+
+You've now set up an Azure Cobalt virtual machine to run QuantLib on. You've also installed QuantLib dependencies and then downloaded QuantLib.
+
+Next, with your environment set up, you'll build QuantLib.

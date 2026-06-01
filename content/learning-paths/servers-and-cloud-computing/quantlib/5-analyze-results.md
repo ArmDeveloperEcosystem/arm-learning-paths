@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Record your results
 
-The following results were collected on a Standard_D4ps_v5 Azure Cobalt virtual machine.
+The following results were collected on a `Standard_D4ps_v5` Azure Cobalt virtual machine.
 
 ### Workload scaling (single thread)
 
@@ -28,24 +28,19 @@ The following results were collected on a Standard_D4ps_v5 Azure Cobalt virtual 
 
 ## Understand workload scaling
 
-When increasing the workload size while keeping the thread count fixed:
-
-- runtime increases significantly as size increases  
-- throughput remains relatively stable  
+When you increase the workload size while keeping the thread count fixed, the runtime increases significantly with the size increase, and throughput remains relatively stable.  
 
 For example:
 
 - `--size=1` completes in ~2 minutes 25 seconds  
 - `--size=8` completes in ~28 minutes 55 seconds  
 
-This shows that the benchmark is scaling the amount of work, not changing execution efficiency.
+The increase in runtime shows that the benchmark is scaling the amount of work, not changing execution efficiency.
 
 ## Understand thread scaling
 
-When increasing the number of worker processes:
-
-- runtime decreases significantly  
-- throughput increases almost linearly  
+When increasing the number of worker processes, runtime decreases significantly  
+and throughput increases almost linearly. 
 
 From the results:
 
@@ -57,7 +52,7 @@ From the results:
   - runtime drops again to ~1h 15m  
   - throughput doubles again  
 
-This indicates **near-linear scaling** on this system.
+The decrease in runtime and increase in throughput indicates near-linear scaling on this system.
 
 ## Calculate speedup
 
@@ -69,7 +64,7 @@ Speedup compares performance relative to a single thread.
 | 2 | 2h 30m | ~2.08× |
 | 4 | 1h 15m | ~4.16× |
 
-This shows slightly better than linear scaling, which can occur due to improved cache utilization or measurement variability.
+This shows slightly better speedup than linear scaling, which can occur due to improved cache utilization or measurement variability.
 
 ## Key observations
 
@@ -85,8 +80,8 @@ From these results:
 Large benchmark sizes such as `--size=80` can take several hours to complete on smaller virtual machines. For most use cases, smaller sizes such as 1, 5, or 8 are sufficient to demonstrate scaling behavior.
 {{% /notice %}}
 
-## What you learned
+## What you've accomplished
 
-You built QuantLib from source on an Arm-based Azure Cobalt VM, enabled its benchmark executable, and ran controlled tests that varied one parameter at a time. You also recorded enough context to compare runs later: VM size, workload size, worker count, runtime, and throughput.
+You've now analyzed benchmark results after building QuantLib from source on an Arm-based Azure Cobalt VM and running controlled tests. You've also recorded enough context to compare runs later: VM size, workload size, worker count, runtime, and throughput.
 
-Use this workflow as a starting point for evaluating other C++ financial computing workloads on Arm cloud instances. For deeper comparisons, repeat the same benchmark process across VM sizes, compiler options, QuantLib versions, or cloud regions, and keep the command lines and environment details with the results.
+Next, you can use this workflow as a starting point for evaluating other C++ financial computing workloads on Arm cloud instances. For deeper comparisons, repeat the same benchmark process across VM sizes, compiler options, QuantLib versions, or cloud regions. Keep the command lines and environment details with the results.
