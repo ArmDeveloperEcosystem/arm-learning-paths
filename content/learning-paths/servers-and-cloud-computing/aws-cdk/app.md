@@ -17,7 +17,7 @@ Make sure that you've completed all prerequisite steps and installed the AWS CDK
 
 ### Initialize a CDK project
 
-In this Learning Path, you'll use Amazon Elastic Container Service (ECS) to deploy containers on AWS Graviton-based Amazon EC2 instances. 
+In this Learning Path, you'll use Amazon Elastic Container Service (ECS) to deploy containers on AWS Graviton-based compute. 
 
 Create a directory for your CDK project and navigate to it:
 

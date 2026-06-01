@@ -34,6 +34,9 @@ The output is similar to:
 
 ## Validate the deployment
 
+Paste the URL from the deployment output into a web browser of your choice. 
+
+The output is similar to:
 
 ## Clean up resources
 
