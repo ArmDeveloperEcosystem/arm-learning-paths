@@ -8,7 +8,7 @@ minutes_to_complete: 60
 who_is_this_for: This is an advanced topic for developers who want to build and benchmark QuantLib on Arm-based cloud instances.
 
 learning_objectives:
-  - Explain why QuantLib is a useful benchmark for Arm-based cloud systems
+  - Understand why QuantLib is a useful benchmark for Arm-based cloud systems
   - Create and connect to an Arm64 Azure Cobalt virtual machine running Ubuntu
   - Build QuantLib from source with benchmark support enabled
   - Run QuantLib benchmark workloads with different sizes and thread counts
