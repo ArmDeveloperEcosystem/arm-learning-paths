@@ -7,7 +7,7 @@ layout: "learningpathall"
 
 ## Set up a sample AWS CDK application
 
-The AWS Cloud Development Kit (CDK) is an open-source software development framework that you can use to define and deploy applications on Arm-based cloud infrastructure on AWS. 
+The AWS Cloud Development Kit (CDK) is an open-source Infrastructure as Code (IaC)software development framework that you can use to define and deploy applications on Arm-based cloud infrastructure on AWS. 
 
 To deploy an application using the CDK, you'll create the application in a supported programming language. You'll then use the CDK CLI to synthesize the application to an AWS CloudFormation template that's deploys resources on AWS. 
 
@@ -60,50 +60,25 @@ Update `lib/arm-cdk-app-stack.js` with the following:
 
 ```javascript
 const cdk = require('aws-cdk-lib');
-const ec2 = require('aws-cdk-lib/aws-ec2');
 const ecs = require('aws-cdk-lib/aws-ecs');
 const ecsPatterns = require('aws-cdk-lib/aws-ecs-patterns');
+const ecrAssets = require('aws-cdk-lib/aws-ecr-assets');
 
 class ArmCdkAppStack extends cdk.Stack {
   constructor(scope, id, props) {
     super(scope, id, props);
-    
-    //creates a VPC
-    const vpc = new ec2.Vpc(this, 'Vpc', {
-      maxAzs: 2,
-    });
-    
-    //creates a cluster
-    const cluster = new ecs.Cluster(this, 'Cluster', {
-      vpc,
-    });
 
-    //adds Graviton-based c6g.large instance to the cluster
-    cluster.addCapacity('GravitonCapacity', {
-      minCapacity: 1,
-      desiredCapacity: 1,
-      instanceType: new ec2.InstanceType('c6g.large'),
-      machineImage: ecs.EcsOptimizedImage.amazonLinux2(ecs.AmiHardwareType.ARM),
-    });
-
-    //creates a task definition
-    const taskDefinition = new ecs.Ec2TaskDefinition(this, 'TaskDef');
-
-    //adds container to task definition that uses a hello-world container image
-    const container = taskDefinition.addContainer('DefaultContainer', {
-      image: ecs.ContainerImage.fromRegistry('hello-world'),
+    new ecsPatterns.ApplicationLoadBalancedFargateService(this, 'Service', {
+      taskImageOptions: {
+       image: ecs.ContainerImage.fromRegistry("nginx:latest"),
+        containerPort: 8080,
+      },
+      runtimePlatform: {
+        cpuArchitecture: ecs.CpuArchitecture.ARM64,
+        operatingSystemFamily: ecs.OperatingSystemFamily.LINUX,
+      },
+      cpu: 256,
       memoryLimitMiB: 512,
-    });
-
-    container.addPortMappings({
-      containerPort: 80,
-    });
-
-    //deploys a load balanced service with one instantiation of the containerized app
-    new ecsPatterns.ApplicationLoadBalancedEc2Service(this, 'Service', {
-      cluster,
-      taskDefinition,
-      desiredCount: 1,
       publicLoadBalancer: true,
     });
   }
@@ -112,7 +87,7 @@ class ArmCdkAppStack extends cdk.Stack {
 module.exports = { ArmCdkAppStack };
 ```
 
-The application uses Amazon ECS to deploy a `hello-world` container image on an AWS Graviton-based `c6g.large` instance. 
+The application defines a load balanced Fargate service that runs an nginx web server on an Arm-based platform. 
 
 ## What you've accomplished and what's next
 

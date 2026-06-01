@@ -34,8 +34,17 @@ The output is similar to:
 
 ## Validate the deployment
 
+
+## Clean up resources
+
+After you've validated the deployment, clean up the AWS resources that you created with AWS CDK:
+
+```bash
+cdk destroy
+```
+
 ## What you've accomplished
 
-You've now synthesized and deployed a sample application using Amazon ECS and the AWS CDK. 
+You've now synthesized and deployed a sample application using Amazon ECS and the AWS CDK that runs on an Arm platform. After validating deployment, you cleaned up resources.
 
 You can use this workflow to programmatically deploy and manage containerized applications on AWS Graviton-based compute. 

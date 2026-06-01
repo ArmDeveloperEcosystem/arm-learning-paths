@@ -18,7 +18,7 @@ tool_install: true
 weight: 1
 ---
 
-The AWS Cloud Development Kit (CDK) is an open-source software development framework that you can use to define and deploy applications on Arm-based cloud infrastructure on AWS. 
+The AWS Cloud Development Kit (CDK) is an open-source Infrastructure as Code (IaC)software development framework that you can use to define and deploy applications on Arm-based cloud infrastructure on AWS. 
 
 With the CDK, you can write applications in a supported programming language of your choice. You can then use the AWS CDK CLI to translate the code into an AWS CloudFormation template and deploy to the cloud. 
 
