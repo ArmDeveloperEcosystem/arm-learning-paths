@@ -71,7 +71,7 @@ From these results:
 - The system shows efficient usage of available cores  
 
 
-{{% notice Practical guidance %}}
+{{% notice Note %}}
 Large benchmark sizes such as `--size=80` can take several hours to complete on smaller virtual machines. For most use cases, smaller sizes such as 1, 5, or 8 are sufficient to demonstrate scaling behavior.
 {{% /notice %}}
 
