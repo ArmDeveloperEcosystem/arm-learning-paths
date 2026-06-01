@@ -18,7 +18,7 @@ Azure Cobalt provides Arm64 virtual machines for cloud-native development and pe
 
 You'll use:
 
-- Ubuntu Server 22.04 LTS (this Learning Path is also tested on 24.04 LTS)
+- Ubuntu Server 22.04 LTS 
 - an Arm64 Azure Cobalt virtual machine
 - a source build of QuantLib
 - QuantLib's benchmark executable for repeatable performance testing
