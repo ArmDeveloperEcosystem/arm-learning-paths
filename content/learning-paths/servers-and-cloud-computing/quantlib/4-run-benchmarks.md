@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 ## Run a baseline benchmark
 
-After building QuantLib, move to the test suite directory and run the benchmark with its default settings:
+After building QuantLib, move to the test suite directory and run the benchmark with its default settings. The command uses the `QL_VER` variable that you exported when downloading the source archive:
 
 ```bash
 cd ~/QuantLib-$QL_VER/test-suite

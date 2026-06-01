@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Configure the build
 
-Return to the QuantLib source directory. The directory uses the `QL_VER` variable that you exported when downloading the source archive:
+Return to the QuantLib source directory. The command uses the `QL_VER` variable that you exported when downloading the source archive:
 
 ```bash
 cd ~/QuantLib-$QL_VER
