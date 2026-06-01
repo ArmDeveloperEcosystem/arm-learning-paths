@@ -72,9 +72,9 @@ The `System Throughput` and `Benchmark Runtime` values are what you'll compare a
 
 For meaningful comparisons:
 
-* Change one parameter at a time
-* Keep the environment consistent
-* Repeat runs if results vary
+- Change one parameter at a time
+- Keep the environment consistent
+- Repeat runs if results vary
 
 Doing so ensures that differences in runtime reflect real performance changes.
 

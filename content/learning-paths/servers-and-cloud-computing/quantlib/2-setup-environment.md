@@ -54,7 +54,7 @@ uname -m
 
 The expected output is:
 
-```bash
+```output
 aarch64
 ```
 
@@ -88,7 +88,7 @@ ls -lh QuantLib-$QL_VER.tar.gz
 
 The output shows the file name and size, and is similar to:
 
-```bash
+```output
 -rw-r--r-- 1 azureuser azureuser 41M QuantLib-1.41.tar.gz
 ```
 
@@ -104,7 +104,7 @@ file QuantLib-$QL_VER.tar.gz
 
 The output is similar to:
 
-```bash
+```output
 QuantLib-1.41.tar.gz: gzip compressed data, max compression, from Unix, original size modulo 2^32 42721280
 ```
 
@@ -123,7 +123,7 @@ ls
 
 The output is similar to:
 
-```bash
+```output
 configure
 Makefile.am
 ql/
