@@ -1,5 +1,5 @@
 ---
-title: Benchmark QuantLib on Arm64 Azure Cobalt
+title: Benchmark QuantLib on Azure Cobalt
     
 description: Learn how to build QuantLib on an Arm-based Azure Cobalt virtual machine and run benchmark workloads to evaluate performance on Arm64 cloud infrastructure.
 
