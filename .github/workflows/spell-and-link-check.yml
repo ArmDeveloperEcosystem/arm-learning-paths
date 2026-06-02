@@ -10,6 +10,7 @@ on:
 
 jobs:
   spell_and_link_check:
+    if: github.repository == 'ArmDeveloperEcosystem/arm-learning-paths' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
 
     steps:
