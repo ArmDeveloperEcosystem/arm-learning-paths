@@ -1,5 +1,6 @@
 ---
 title: (Optional) Extend the project
+description: Explore ways to extend Reachy Gladiator with new gestures, audio output, physical Reachy Mini support, and custom Reachy Mini app packaging.
 weight: 7
 
 ### FIXED, DO NOT MODIFY
@@ -67,7 +68,7 @@ experience by installing the packaged [Reachy Gladiator app](https://huggingface
 Install Reachy Mini Control on a supported machine, connect it to your Reachy, and search for the Reachy Gladiator app.
 
 {{% notice Warning %}}
-If you use a physical Reachy Mini, exercise caution and ensure the robot is used in an area with appropriate space. The robot has moving parts and could be a health & safety risk. You're responsible for your safety and the safety of others around you when using physical robotic devices.
+If you use a physical Reachy Mini, exercise caution and ensure the robot is used in an area with appropriate space. The robot has moving parts and could be a health and safety risk. You're responsible for your safety and the safety of others around you when using physical robotic devices.
 {{% /notice %}}
 
 ## Adapt this source project for physical Reachy

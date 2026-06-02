@@ -1,5 +1,6 @@
 ---
 title: Understand the Reachy Gladiator application code
+description: Inspect the Reachy Gladiator Python code to understand the app lifecycle, camera frame capture, MediaPipe gesture recognition, robot motion commands, and dashboard rendering.
 weight: 6
 
 ### FIXED, DO NOT MODIFY

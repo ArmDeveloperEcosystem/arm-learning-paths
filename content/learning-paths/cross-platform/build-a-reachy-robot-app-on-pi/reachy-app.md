@@ -1,5 +1,6 @@
 ---
 title: Learn about Reachy and understand the application
+description: Learn how the Reachy Gladiator app splits gesture inference, robot control, simulation, and dashboard display across a Raspberry Pi and a development machine.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -24,7 +25,7 @@ If using a physical Reachy Mini, exercise caution and ensure the robot is used i
 
 ## What you will build
 
-The workflow of this learning path is split across two machines:
+The workflow of this Learning Path is split across two machines:
 
 Laptop/Desktop: macOS, Linux, or Windows with WSL2
   - Runs the Reachy Mini daemon
@@ -67,13 +68,13 @@ The Reachy Gladiator app runs a repeated loop:
 There are four preset moves:
 
 - `Salute`
-![Salute Move#center](salute.gif "Salute Move")
+![Animated MuJoCo simulation showing Reachy Mini performing the Salute preset move. This shows one of the scripted motions that the app can select during a round.#center](salute.gif "Salute move")
 - `Sword Swing`
-![Sword Swing Move#center](sword.gif "Sword Swing Move")
+![Animated MuJoCo simulation showing Reachy Mini performing the Sword Swing preset move. This demonstrates another scripted gladiator motion sent through the Reachy Mini SDK.#center](sword.gif "Sword swing move")
 - `Shield Up`
-![Shield Up Move#center](shield.gif "Shield Up Move")
+![Animated MuJoCo simulation showing Reachy Mini performing the Shield Up preset move. This confirms that the app can play defensive-themed robot motions in simulation.#center](shield.gif "Shield up move")
 - `Battle Cry`
-![Battle Cry Move#center](battle-cry.gif "Battle Cry Move")
+![Animated MuJoCo simulation showing Reachy Mini performing the Battle Cry preset move. This shows the expressive motion style used before the thumbs-up or thumbs-down verdict.#center](battle-cry.gif "Battle cry move")
 
 The app shuffles all four moves and performs each once before any move repeats. When the bag is empty, it reshuffles and avoids repeating the same move at the shuffle boundary.
 

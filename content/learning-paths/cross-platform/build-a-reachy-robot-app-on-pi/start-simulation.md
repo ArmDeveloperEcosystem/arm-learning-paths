@@ -1,5 +1,6 @@
 ---
 title: Start the Reachy simulation
+description: Set up a Python 3.12 simulation environment, start the Reachy Mini MuJoCo daemon, and find the host IP address for Raspberry Pi connections.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -21,27 +22,26 @@ before moving to physical testing.
 The simulation host doesn't need the full `reachy_gladiator_lp` project. It needs only the Reachy Mini SDK with MuJoCo support and the `start_sim.sh`
 launcher script.
 
-### macOS prerequisites
-
+### Set up Python environment
 
 Python 3.12 is required for the simulation environment. Python 3.13 can cause dependency resolution failures because pre-built wheels for some SDK dependencies are not yet available for that version. 
 
 Check your Python version:
 
 ```bash
- python3 --version
+python3 --version
 ```
- On macOS, install Python 3.12 with [Homebrew](https://brew.sh): 
 
-```bash
- brew install python@3.12
-```
- 
- On Ubuntu or WSL2, install Python 3.12 with the following:
- 
-```bash
-  sudo apt install python3.12 python3.12-venv
-```
+If Python 3.12 isn't installed, install it by using one of the following commands. On macOS, install Python 3.12 with [Homebrew](https://brew.sh). On Ubuntu or WSL2, use `apt`:
+
+{{< tabpane code=true >}}
+  {{< tab header="macOS" language="bash">}}
+brew install python@3.12
+  {{< /tab >}}
+  {{< tab header="Ubuntu or WSL2" language="bash">}}
+sudo apt install python3.12 python3.12-venv
+  {{< /tab >}}
+{{< /tabpane >}}
 
 After ensuring you have Python 3.12 installed, on the machine that will run the simulation, create a small workspace and a Python virtual environment:
 
@@ -97,7 +97,6 @@ reachy_mini.media.media_server - INFO - Pipeline latency (live=True, min_latency
 Leave this terminal running after it completes and boots the simulation view.
 
 ![MuJoCo physics simulation window showing the Reachy Mini robot in a standing position, confirming the simulation started successfully#center](mujoco.png "MuJoCo simulation window with Reachy Mini")
-
 
 The script starts the Reachy Mini daemon with simulation enabled, binds FastAPI to `0.0.0.0`, and disables localhost-only mode so the Raspberry Pi can connect. In this Learning Path, you'll use port `18000`.
 

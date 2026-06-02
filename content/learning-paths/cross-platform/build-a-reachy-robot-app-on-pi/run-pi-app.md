@@ -1,5 +1,6 @@
 ---
 title: Set up the Raspberry Pi and run the edge AI app
+description: Prepare Raspberry Pi OS, install the Reachy Gladiator runtime, verify the MediaPipe gesture worker and USB webcam, and connect the Pi app to the simulation.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +9,7 @@ layout: learningpathall
 
 ## Prepare the Raspberry Pi
 
-You should install Raspberry Pi OS Trixie (Debian 13-based) on your Raspberry Pi. Ensure the Pi is accessible over SSH.
+Install Raspberry Pi OS Trixie (Debian 13-based) on your Raspberry Pi. Ensure the Pi is accessible over SSH.
 
 Connect to your Raspberry Pi over SSH. If you use VS Code, you can use the [Remote - SSH](https://code.visualstudio.com/docs/remote/ssh) extension. From a terminal:
 

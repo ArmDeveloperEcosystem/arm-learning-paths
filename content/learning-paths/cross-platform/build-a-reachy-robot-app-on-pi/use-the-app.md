@@ -1,5 +1,6 @@
 ---
 title: Look at the dashboard and use the Reachy Gladiator application
+description: Open the Raspberry Pi dashboard, watch the live camera and robot state, and use thumbs-up or thumbs-down gestures to control Reachy Gladiator.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -35,9 +36,9 @@ to the Pi and port `8042`.
 
 The app will count down from 10, and then Reachy will start performing moves. Reachy will perform the same move three times, and then await your thumbs-up or thumbs-down verdict. After you give a verdict, Reachy will perform the victory or defeat moves. Reachy will then randomly select another move, and the cycle repeats.
 
-![Thumbs Up Victory#center](thumbs-up.gif "Thumbs Up Victory")
+![Animated dashboard and simulation showing a thumbs-up gesture triggering Reachy's victory reaction. This confirms that the Pi app recognized the gesture and sent the matching robot command.#center](thumbs-up.gif "Thumbs up victory")
 
-![Thumbs Down Defeat#center](thumbs-down.gif "Thumbs Down Defeat")
+![Animated dashboard and simulation showing a thumbs-down gesture triggering Reachy's defeat reaction. This confirms that the Pi app can classify the opposite verdict and update Reachy's behavior.#center](thumbs-down.gif "Thumbs down defeat")
 
 When you're finished with the Pi app, you can stop it with `Ctrl+C` in the terminal that you ran the application from.
 
