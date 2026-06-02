@@ -11,11 +11,11 @@ layout: learningpathall
 
 In this Learning Path, you'll build a distributed edge AI application where a Raspberry Pi runs local gesture inference and sends robot motion commands to a simulated Reachy Mini. The app follows a gladiator arena theme: Reachy performs a move, and you give a thumbs-up for victory or thumbs-down for defeat to trigger a victory or defeat reaction.
 
-![Illustration of Reachy Mini in a gladiator style pose. The app uses this arena theme for its moves, verdicts, and dashboard.#center](reachy_gladiator.png "Reachy Mini Gladiator App Concept")
+![Illustration of Reachy Mini in a gladiator style pose. The app uses this arena theme for its moves, verdicts, and dashboard.#center](reachy_gladiator.png "Reachy Mini Gladiator app concept")
 
 ## What is Reachy Mini?
 
-Reachy Mini is a small open robotics platform from Pollen Robotics. It's designed for expressive head, antenna, and body motion, and it can be controlled with Python using the Reachy Mini SDK. The Reachy Mini Wireless version includes an onboard Arm-powered Raspberry Pi 4 Compute Module, and the Lite version is operated with external compute such as a Raspberry Pi, DGX Spark, or Mac/PC.
+Reachy Mini is a small open robotics platform from Pollen Robotics. It's designed for expressive head, antenna, and body motion, and it can be controlled with Python using the Reachy Mini SDK. The Reachy Mini Wireless version includes an onboard Arm-powered Raspberry Pi 4 Compute Module, and the Lite version is operated with external compute such as a Raspberry Pi, DGX Spark, or a Mac or PC.
 
 Reachy can also be simulated using MuJoCo software. Most developers don't have a physical Reachy Mini robot on their desk, and it's often useful to develop software before hardware is available. Extrapolating from Reachy to more industrial robotics, it's also important to test applications in simulation in advance for safety.
 
