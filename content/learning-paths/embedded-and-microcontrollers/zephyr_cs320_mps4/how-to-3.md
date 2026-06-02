@@ -28,7 +28,7 @@ Replace the path with your actual toolchain directory. On x86_64, the directory 
 From the `~/zephyrproject/zephyr` directory, build the `hello_world` example for the Corstone-320 FPGA variant:
 
 ```bash
-west build -p always -b mps4/corstone320/fpga samples/hello_world
+west build -p always -b mps4/corstone320/fpga zephyr/samples/hello_world -- -DCONFIG_ROMSTART_RELOCATION_ROM=y
 ```
 
 A successful build ends with output similar to:
@@ -62,8 +62,8 @@ The ELF image contains the application and the Zephyr kernel libraries. You can 
 For the hello_world application, place the vector table in the FPGA boot ROM at address `0x11000000`, and place the remaining code and data in SRAM at address `0x31000000`. Use `arm-none-eabi-objcopy` to extract these two regions from `zephyr.elf`:
 
 ```bash
-arm-none-eabi-objcopy -O binary --only-section=.vectors build/zephyr/zephyr.elf vector.bin
-arm-none-eabi-objcopy -O binary --remove-section=.vectors build/zephyr/zephyr.elf app.bin
+arm-none-eabi-objcopy  -O binary --only-section=rom_start zephyr.elf vector.bin
+arm-none-eabi-objcopy  -O binary --remove-section=rom_start zephyr.elf app.bin
 ```
 
 Update `images.txt` under `/MB/HBI0376B/FI101` to load the two images. The paths use the `\SOFTWARE\` folder on the MPS4 SD card, which is where you will copy the binary files:
