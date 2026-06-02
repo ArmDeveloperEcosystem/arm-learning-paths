@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Set up the development environment
 
-Before you build Zephyr for the Corstone-320 MPS4 platform, you need to install the required host packages, initialize a Zephyr workspace, and install the Arm GNU Toolchain.
+Before you build Zephyr for the Arm Corstone-320 MPS4 platform, you need to install the required host packages, initialize a Zephyr workspace, and install the Arm GNU Toolchain.
 
 ## Install host dependencies
 
@@ -78,7 +78,7 @@ west packages pip --install
 
 ## Install the Arm GNU Toolchain
 
-The Corstone-320 target uses the Cortex-M85 processor, so you need the `arm-none-eabi` bare-metal toolchain from the Arm GNU Toolchain. For a detailed installation guide covering all platforms, refer to the [Arm GNU Toolchain](/install-guides/gcc/arm-gnu/) install guide.
+The Corstone-320 target uses the Cortex-M85 processor, so you need the `arm-none-eabi` bare-metal toolchain from the Arm GNU Toolchain. For a detailed installation guide covering all platforms, see the [Arm GNU Toolchain](/install-guides/gcc/arm-gnu/) install guide.
 
 {{% notice Note %}}
 The following commands use Arm GNU Toolchain version 15.2.Rel1. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Arm GNU Toolchain downloads](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads).
@@ -143,4 +143,8 @@ export GNUARMEMB_TOOLCHAIN_PATH=$HOME/arm-gnu-toolchain-15.2.rel1-x86_64-arm-non
   {{< /tab >}}
 {{< /tabpane-normal >}}
 
-Your build environment is now ready. The next section covers adding Zephyr board support files for the Corstone-320 MPS4 platform.
+## What you've accomplished and what's next
+
+You've now set up a build environment to build Zephyr. 
+
+Next, you'll add Zephyr board support files for the Corstone-320 MPS4 platform.
