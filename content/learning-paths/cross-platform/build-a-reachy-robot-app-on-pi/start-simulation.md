@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## What is MuJoCo?
 
-MuJoCo is an open-source physics engine from Google DeepMind, used for simulating articulated bodies such as robots. It can model joints, contacts, gravity, and rigid-body dynamics, which makes it useful for robotics prototyping, control development, reinforcement learning, and safety testing before hardware is available.
+MuJoCo is an open-source physics engine from Google DeepMind, used for simulating articulated bodies such as robots. It can model joints, contacts, gravity, and rigid-body dynamics. This makes MuJoCo useful for robotics prototyping, control development, reinforcement learning, and safety testing before hardware is available.
 
 In this project, you'll use MuJoCo to see Reachy Mini move without owning a physical
 Reachy. It's not a perfect replacement for hardware: real cameras, lighting,

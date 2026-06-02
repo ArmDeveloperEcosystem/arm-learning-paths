@@ -27,7 +27,7 @@ If using a physical Reachy Mini, exercise caution and ensure the robot is used i
 
 The workflow of this Learning Path is split across two machines:
 
-Laptop/Desktop: macOS, Linux, or Windows with WSL2
+Laptop or Desktop: macOS, Linux, or Windows with WSL2
   - Runs the Reachy Mini daemon
   - Runs the MuJoCo simulation
   - Displays simulated Reachy movement
@@ -39,7 +39,7 @@ Raspberry Pi 5: Raspberry Pi OS
   - Serves a dashboard on port 8042
   - Sends robot movement commands to the simulation host daemon
 
-This split is a common edge/physical AI pattern:
+This split is a common edge or physical AI pattern:
 
 - A small edge device handles sensors and inference close to the user.
 - A robot API or daemon receives movement commands.

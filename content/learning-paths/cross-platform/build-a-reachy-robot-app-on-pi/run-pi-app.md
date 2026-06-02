@@ -79,6 +79,8 @@ source .venv/bin/activate
 
 The setup script runs an import smoke test. It also runs `pip check`. A MediaPipe NumPy metadata warning is expected for this Pi setup.
 
+## Validate the MediaPipe gesture worker
+
 Test the MediaPipe gesture worker by writing a small test script and running it. The following `cat` command creates the file at `/tmp/test_gesture_worker.py` using a heredoc — the text between `<<'PY'` and the closing `PY` becomes the file contents:
 
 ```bash
