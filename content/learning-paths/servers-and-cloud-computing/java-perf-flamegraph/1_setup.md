@@ -30,9 +30,10 @@ sudo apt install -y openjdk-21-jdk
 Download and extract Tomcat:
 
 ```bash
-wget -c https://dlcdn.apache.org/tomcat/tomcat-11/v11.0.9/bin/apache-tomcat-11.0.9.tar.gz
-tar xzf apache-tomcat-11.0.9.tar.gz
+wget -c https://dlcdn.apache.org/tomcat/tomcat-11/v11.0.22/bin/apache-tomcat-11.0.22.tar.gz
+tar xzf apache-tomcat-11.0.22.tar.gz
 ```
+
 Alternatively, you can build Tomcat [from source](https://github.com/apache/tomcat).
 
 ## Enable access to Tomcat examples
@@ -42,32 +43,32 @@ To access the built-in examples from your local network or external IP, use a te
 The file is at:
 
 ```bash
-apache-tomcat-11.0.9/webapps/examples/META-INF/context.xml
+apache-tomcat-11.0.22/webapps/examples/META-INF/context.xml
 ```
 
-<!-- Before -->
-<Valve className="org.apache.catalina.valves.RemoteAddrValve" allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" />
-
-<!-- After -->
+```output
+from ...
+<Valve className="org.apache.catalina.valves.RemoteCIDRValve"
+         allow="127.0.0.0/8,::1/128" />
+to ...
 <Valve className="org.apache.catalina.valves.RemoteAddrValve" allow=".*" />
-
+```
 ## Start the Tomcat server
 
 Start the server:
 
 ```bash
-./apache-tomcat-11.0.9/bin/startup.sh
-```
+./apache-tomcat-11.0.22/bin/startup.sh```
 
 You should see output like:
 
 ```output
-Using CATALINA_BASE:   /home/ubuntu/apache-tomcat-11.0.9
-Using CATALINA_HOME:   /home/ubuntu/apache-tomcat-11.0.9
-Using CATALINA_TMPDIR: /home/ubuntu/apache-tomcat-11.0.9/temp
+Using CATALINA_BASE:   /home/cesw/kiehej01/java-flamegraphs/apache-tomcat-11.0.22
+Using CATALINA_HOME:   /home/cesw/kiehej01/java-flamegraphs/apache-tomcat-11.0.22
+Using CATALINA_TMPDIR: /home/cesw/kiehej01/java-flamegraphs/apache-tomcat-11.0.22/temp
 Using JRE_HOME:        /usr
-Using CLASSPATH:       /home/ubuntu/apache-tomcat-11.0.9/bin/bootstrap.jar:/home/ubuntu/apache-tomcat-11.0.9/bin/tomcat-juli.jar
-Using CATALINA_OPTS:
+Using CLASSPATH:       /home/cesw/kiehej01/java-flamegraphs/apache-tomcat-11.0.22/bin/bootstrap.jar:/home/cesw/kiehej01/java-flamegraphs/apache-tomcat-11.0.22/bin/tomcat-juli.jar
+Using CATALINA_OPTS:   
 Tomcat started.
 ```
 
