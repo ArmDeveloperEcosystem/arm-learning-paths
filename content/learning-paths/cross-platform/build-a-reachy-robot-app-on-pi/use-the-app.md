@@ -1,13 +1,13 @@
 ---
-title: Look at the dashboard and use the Reachy Gladiator application
-description: Open the Raspberry Pi dashboard, watch the live camera and robot state, and use thumbs-up or thumbs-down gestures to control Reachy Gladiator.
+title: Use the Reachy Gladiator application
+description: Open the dashboard on the Raspberry Pi, watch the live camera and robot state, and use thumbs-up or thumbs-down gestures to control Reachy Gladiator.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Open the dashboard
+## Open the application dashboard
 
 If you're connected to the Raspberry Pi with VS Code Remote SSH, VS Code can forward the dashboard port to your laptop. Open the dashboard from your laptop browser:
 
@@ -15,7 +15,7 @@ If you're connected to the Raspberry Pi with VS Code Remote SSH, VS Code can for
 http://localhost:8042
 ```
 
-If you are not using Remote SSH port forwarding, use the Pi IP address directly.
+If you aren't using Remote SSH port forwarding, use the Pi IP address directly.
 
 Find the Raspberry Pi IP address:
 
@@ -32,7 +32,7 @@ http://<pi-ip-address>:8042
 This method works even when the Pi is headless. The browser needs network access only
 to the Pi and port `8042`.
 
-## Use Reachy Gladiator
+## Control Reachy with thumbs-up and thumbs-down gestures
 
 The app will count down from 10, and then Reachy will start performing moves. Reachy will perform the same move three times, and then await your thumbs-up or thumbs-down verdict. After you give a verdict, Reachy will perform the victory or defeat moves. Reachy will then randomly select another move, and the cycle repeats.
 

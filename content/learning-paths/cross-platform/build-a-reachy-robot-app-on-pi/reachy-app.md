@@ -1,5 +1,5 @@
 ---
-title: Learn about Reachy and understand the application
+title: Learn about Reachy and the Reachy Gladiator application
 description: Learn how the Reachy Gladiator app splits gesture inference, robot control, simulation, and dashboard display across a Raspberry Pi and a development machine.
 weight: 2
 
@@ -17,13 +17,13 @@ In this Learning Path, you'll build a distributed edge AI application where a Ra
 
 Reachy Mini is a small open robotics platform from Pollen Robotics. It's designed for expressive head, antenna, and body motion, and it can be controlled with Python using the Reachy Mini SDK. The Reachy Mini Wireless version includes an onboard Arm-powered Raspberry Pi 4 Compute Module, and the Lite version is operated with external compute such as a Raspberry Pi, DGX Spark, or Mac/PC.
 
-Reachy can also be simulated using MuJoCo software. Most developers don't have a physical Reachy Mini robot on their desk, and it is often useful to develop software before hardware is available. Extrapolating from Reachy to more industrial robotics, it's also important to test applications in simulation in advance for safety.
+Reachy can also be simulated using MuJoCo software. Most developers don't have a physical Reachy Mini robot on their desk, and it's often useful to develop software before hardware is available. Extrapolating from Reachy to more industrial robotics, it's also important to test applications in simulation in advance for safety.
 
 {{% notice Warning %}}
 If using a physical Reachy Mini, exercise caution and ensure the robot is used in an area with appropriate space. The robot has moving parts and could be a health and safety risk. You're responsible for your safety and the safety of others around you when using physical robotic devices.
 {{% /notice %}}
 
-## What you will build
+## What you'll build
 
 The workflow of this Learning Path is split across two machines:
 
@@ -86,7 +86,7 @@ On Windows, use WSL2 with an Ubuntu distribution for the simulation host command
 
 - Use the WSL terminal for `python3`, `source .venv/bin/activate`, and `./scripts/start_sim.sh`.
 - Keep the browser on Windows if you prefer; open the Pi dashboard from any browser that can reach the Raspberry Pi.
-- If the Pi cannot reach a daemon running inside WSL2, check Windows firewall and WSL networking. WSL2 uses virtualized networking, so inbound access from another device on your LAN might require Windows port forwarding.
+- If the Pi can't reach a daemon running inside WSL2, check Windows firewall and WSL networking. WSL2 uses virtualized networking, so inbound access from another device on your LAN might require Windows port forwarding.
 
 In the rest of this learning path, you'll see common Bash commands and note the one IP-address command that differs by host operating system.
 
@@ -117,7 +117,7 @@ reachy_gladiator_lp/
     └── static/           # dashboard HTML, CSS, JavaScript, and media
 ```
 
-## What you've learned and what is next
+## What you've learned and what's next
 
 You learned what Reachy Mini is, why simulation is useful for edge/physical AI development, and how the app splits work between a simulation host and a Raspberry Pi. 
 

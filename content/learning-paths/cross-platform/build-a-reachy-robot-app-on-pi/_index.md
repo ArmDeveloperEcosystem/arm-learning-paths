@@ -13,7 +13,7 @@ learning_objectives:
     - Use MediaPipe and TensorFlow Lite gesture recognition on Raspberry Pi 5.
     - Connect an edge inference node to a robot daemon over the network.
     - Display results over a web dashboard.
-    - (Optional) Extend the project toward a physical Reachy Mini, audio or multimodal interaction, or your own app.
+    - Optionally extend the project toward a physical Reachy Mini, audio or multimodal interaction, or your own app.
 
 prerequisites:
     - A Raspberry Pi 5, ideally with 16 GB RAM.

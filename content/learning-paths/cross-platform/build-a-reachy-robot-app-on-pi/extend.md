@@ -113,7 +113,7 @@ To build a fresh app:
    endpoint.
 4. Add a dashboard only after the core loop works.
 5. Test in simulation before physical hardware.
-6. Package the app when it is stable enough for repeated use.
+6. Package the app when it's stable enough for repeated use.
 
 The Reachy Mini tooling can scaffold and validate a shareable app:
 

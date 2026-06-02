@@ -1,5 +1,5 @@
 ---
-title: Start the Reachy simulation
+title: Start the Reachy simulation on MuJoCo
 description: Set up a Python 3.12 simulation environment, start the Reachy Mini MuJoCo daemon, and find the host IP address for Raspberry Pi connections.
 weight: 3
 
