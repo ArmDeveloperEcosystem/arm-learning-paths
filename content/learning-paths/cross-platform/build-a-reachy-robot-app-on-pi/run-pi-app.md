@@ -1,5 +1,5 @@
 ---
-title: Set up the Pi and run the Edge AI app
+title: Set up the Raspberry Pi and run the edge AI app
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Prepare the Raspberry Pi
 
-The Raspberry Pi should be installed with Raspberry Pi OS Trixie (Debian 13-based), and be accessible over SSH.
+You should install Raspberry Pi OS Trixie (Debian 13-based) on your Raspberry Pi. Ensure the Pi is accessible over SSH.
 
 Connect to your Raspberry Pi over SSH. If you use VS Code, you can use the [Remote - SSH](https://code.visualstudio.com/docs/remote/ssh) extension. From a terminal:
 
@@ -47,38 +47,38 @@ Check that the gesture model was downloaded:
 ls -lh reachy_gladiator_lp/assets/gesture_recognizer.task
 ```
 
-The file should be about 8 MB. If it is only 132 bytes, run `git lfs pull`
+The file should be about 8 MB. If it's only 132 bytes, run `git lfs pull`
 again before continuing.
 
 ## Install the Pi runtime
 
-Run the Pi setup script. This can take several minutes because it installs `pyenv`, builds Python 3.12, and installs all Python dependencies:
+Run the Pi setup script. The script can take several minutes to finish running because it installs `pyenv`, builds Python 3.12, and installs all Python dependencies:
 
 ```bash
 ./scripts/setup_pi.sh
 ```
 
-The script installs the system packages, Python version, Python packages, and app entry point used by this Learning Path.
+The script installs the system packages, Python version, Python packages, and app entry point that you'll use in this Learning Path.
 
-Raspberry Pi OS Trixie can use Python 3.13 as the default `python3`, but the tested Pi environment for this app uses Python 3.12. The setup script installs Python 3.12.3 with `pyenv` so you do not need to modify the system Python.
+Raspberry Pi OS Trixie can use Python 3.13 as the default `python3`, but the tested Pi environment for this app uses Python 3.12. The setup script installs Python 3.12.3 with `pyenv` so you don't need to modify the system Python.
 
 The script also handles the Pi-specific package versions:
 
-- `mediapipe==0.10.18`, because newer MediaPipe wheels are not available for the tested Pi environment.
+- `mediapipe==0.10.18`, because newer MediaPipe wheels aren't available for the tested Pi environment.
 - `numpy==2.4.4`, which is required by the Reachy Mini SDK and has been tested with the gesture worker.
-- `reachy-mini==1.7.3`, installed without dependency resolution so pip does not reject the MediaPipe and NumPy combination.
+- `reachy-mini==1.7.3`, installed without dependency resolution so pip doesn't reject the MediaPipe and NumPy combination.
 - `git-lfs`, so the MediaPipe gesture model is downloaded as the real binary asset rather than an LFS pointer file.
 - `v4l-utils`, so you can inspect connected camera devices with `v4l2-ctl`.
 
-When setup finishes, activate the virtual environment:
+After setup finishes, activate the virtual environment:
 
 ```bash
 source .venv/bin/activate
 ```
 
-The setup script runs an import smoke test. It also runs `pip check`; a MediaPipe NumPy metadata warning is expected for this Pi setup.
+The setup script runs an import smoke test. It also runs `pip check`. A MediaPipe NumPy metadata warning is expected for this Pi setup.
 
-Test the MediaPipe gesture worker by writing a small test script and running it. The `cat` command below creates the file at `/tmp/test_gesture_worker.py` using a heredoc — the text between `<<'PY'` and the closing `PY` becomes the file contents:
+Test the MediaPipe gesture worker by writing a small test script and running it. The following `cat` command creates the file at `/tmp/test_gesture_worker.py` using a heredoc — the text between `<<'PY'` and the closing `PY` becomes the file contents:
 
 ```bash
 cat > /tmp/test_gesture_worker.py <<'PY'
@@ -108,7 +108,7 @@ GestureResult(label=None, x_px=320, y_px=240, confidence=0.0)
 gesture detector OK
 ```
 
-MediaPipe may also print TensorFlow Lite or CPU delegate warnings before the result. The important line is `gesture detector OK`.
+MediaPipe might also print TensorFlow Lite or CPU delegate warnings before the result. The important line is `gesture detector OK`.
 
 ## Check the USB webcam
 
@@ -158,7 +158,7 @@ REACHY_GLADIATOR_DAEMON_PORT=18000 ./scripts/run_pi_app.sh <simulation-host-ip>
 
 If you started the simulation on a different port, pass that same value in `REACHY_GLADIATOR_DAEMON_PORT`.
 
-## What is the script doing?
+## Understand what the script is doing
 
 The script sets the app configuration:
 
@@ -179,10 +179,12 @@ python -m reachy_gladiator_lp.main
 ```
 
 `REACHY_GLADIATOR_MEDIA_BACKEND=no_media` tells the Reachy SDK not to request
-camera media from the daemon. This is the right default for the learning path
+camera media from the daemon. This is the right default for the Learning Path
 because the Pi owns the USB webcam. `REACHY_GLADIATOR_CAMERA=opencv` tells the
 gesture recognizer to read frames from that local webcam.
 
-## What you learned and what is next
+## What you've accomplished and what is next
 
-You installed the Pi runtime with the project setup script, validated the MediaPipe gesture worker, checked the USB webcam, and started the edge AI app so it can run the application, perform inference on incoming frames, and send Reachy commands to the simulation host. Now you get to try out the app!
+You installed the Pi runtime with the project setup script, validated the MediaPipe gesture worker, checked the USB webcam, and started the edge AI app. The edge AI app can run Reachy Gladiator, perform inference on incoming frames, and send Reachy commands to the simulation host. 
+
+Next, you'll try out Reachy Gladiator.

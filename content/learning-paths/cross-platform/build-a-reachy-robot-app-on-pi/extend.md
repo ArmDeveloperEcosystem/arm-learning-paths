@@ -38,10 +38,10 @@ Some game-themed ideas:
 
 The gladiator theme is a good fit for sound. Try adding audio cues such as:
 
-- a crowd cheer during victory,
-- a dramatic sound during defeat,
-- a short drum hit before each move,
-- a spoken move name before Reachy performs it.
+- a crowd cheer during victory
+- a dramatic sound during defeat
+- a short drum hit before each move
+- a spoken move name before Reachy performs it
 
 Keep audio output separate from `moves.py` at first. For example, create an
 `audio.py` helper and call it from `main.py` when the state changes. This keeps
@@ -52,34 +52,35 @@ robot motion and sound effects easy to change independently.
 The vision-based verdict is one edge AI input modality. You can replace
 or complement it with audio. Many webcams include microphones, or you can use a USB microphone.
 
-- say "yes" for victory and "no" for defeat,
-- clap once for victory and twice for defeat,
+Try adding audio inputs such as:
+
+- say "yes" for victory and "no" for defeat
+- clap once for victory and twice for defeat
 
 A lightweight keyword-spotting model can map spoken commands to the same game states currently triggered by MediaPipe gestures.
 
 ## Try the packaged app on a physical Reachy
 
-If you have a physical Reachy Mini, the quickest way to try the finished
-experience is to install the packaged [Reachy Gladiator app](https://huggingface.co/spaces/cossinsmatthew/reachy_gladiator) through the [Reachy Mini Control app](https://github.com/pollen-robotics/reachy-mini-desktop-app).
+If you have a physical Reachy Mini, you can try the finished
+experience by installing the packaged [Reachy Gladiator app](https://huggingface.co/spaces/cossinsmatthew/reachy_gladiator) through the [Reachy Mini Control app](https://github.com/pollen-robotics/reachy-mini-desktop-app).
 
 Install Reachy Mini Control on a supported machine, connect it to your Reachy, and search for the Reachy Gladiator app.
 
 {{% notice Warning %}}
-If using a physical Reachy Mini, use caution and ensure the robot is used in an area with appropriate space. The robot has moving parts and could be a health & safety risk. You are responsible for your safety and the safety of others around you when using physical robotic devices.
+If you use a physical Reachy Mini, exercise caution and ensure the robot is used in an area with appropriate space. The robot has moving parts and could be a health & safety risk. You're responsible for your safety and the safety of others around you when using physical robotic devices.
 {{% /notice %}}
 
 ## Adapt this source project for physical Reachy
 
-The main learning path uses the Raspberry Pi USB webcam for perception and a
+The main Learning Path uses the Raspberry Pi USB webcam for perception and a
 remote MuJoCo daemon for robot motion. A physical Reachy route changes two
 things:
 
-- camera frames come from the Reachy daemon instead of the Pi USB webcam,
+- camera frames come from the Reachy daemon instead of the Pi USB webcam
 - the Pi app connects to the physical Reachy daemon instead of the simulation
-  daemon.
+  daemon
 
-The source project exposes these switches as environment variables, so you do
-not need to edit the Python source:
+The source project exposes these switches as environment variables, so you don't need to edit the Python source:
 
 ```bash
 REACHY_GLADIATOR_MEDIA_BACKEND=reachy \
@@ -95,9 +96,9 @@ IP address and set `REACHY_GLADIATOR_DAEMON_PORT` to the daemon port.
 These variables map to the code in two places:
 
 - `REACHY_GLADIATOR_MEDIA_BACKEND=reachy` lets `ReachyMiniApp` request daemon
-  camera media.
+  camera media
 - `REACHY_GLADIATOR_CAMERA=reachy` tells `camera.py` to use
-  `ReachyMediaFrameSource` instead of `OpenCVCameraFrameSource`.
+  `ReachyMediaFrameSource` instead of `OpenCVCameraFrameSource`
 
 ## Build your own Reachy Mini app
 
@@ -120,13 +121,12 @@ reachy-mini-app-assistant create my_app ~/reachy_projects
 reachy-mini-app-assistant check ~/reachy_projects/my_app
 ```
 
-The [Reachy Mini app publishing guide](https://huggingface.co/blog/pollen-robotics/make-and-publish-your-reachy-mini-apps)
-explains the packaging and publishing workflow in more detail.
+For more information about the packaging and publishing workflow, see the [Reachy Mini app publishing guide](https://huggingface.co/blog/pollen-robotics/make-and-publish-your-reachy-mini-apps).
 
 Use the Reachy Mini SDK documentation and examples to understand available
 motion, media, and daemon APIs. If you use an AI coding agent, give it the
 Pollen Robotics `AGENTS.md` instructions, provided by the [Reachy Mini project](https://github.com/pollen-robotics/reachy_mini) so it follows the expected app structure.
 
-## What you learned
+## What you've learned
 
-You explored options for extending from simulation to a physical Reachy, as well as ideas for changing the project to include audio, new vision gestures, or different behaviors.
+You've now explored options for extending from simulation to a physical Reachy, as well as ideas for changing the project to include audio, new vision gestures, or different behaviors.
