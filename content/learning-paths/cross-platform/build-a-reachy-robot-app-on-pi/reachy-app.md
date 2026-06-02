@@ -1,6 +1,6 @@
 ---
 title: Learn about Reachy and the Reachy Gladiator application
-description: Learn how the Reachy Gladiator app splits gesture inference, robot control, simulation, and dashboard display across a Raspberry Pi and a development machine.
+description: Learn how the Reachy Gladiator app splits gesture inference, robot control, simulation, and dashboard display between a simulation host and a Raspberry Pi.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

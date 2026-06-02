@@ -1,6 +1,6 @@
 ---
 title: (Optional) Extend the project
-description: Explore ways to extend Reachy Gladiator with new gestures, audio output, physical Reachy Mini support, and custom Reachy Mini app packaging.
+description: Explore approaches you can take to extend Reachy Gladiator with new gestures, audio output, physical Reachy Mini support, and custom Reachy Mini app packaging.
 weight: 7
 
 ### FIXED, DO NOT MODIFY
