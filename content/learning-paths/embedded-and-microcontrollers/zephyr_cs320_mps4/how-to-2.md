@@ -1,5 +1,6 @@
 ---
 title: Add Zephyr board support for the Corstone-320 MPS4 platform
+description: Add Corstone-320 MPS4 FPGA board metadata, device tree files, and Kconfig settings so Zephyr can build for the physical MPS4 board.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
