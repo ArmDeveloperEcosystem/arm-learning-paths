@@ -1,5 +1,5 @@
 ---
-title: Build an edge AI Reachy Mini App with Raspberry Pi, MediaPipe, and MuJoCo
+title: Build an edge AI Reachy Mini app with Raspberry Pi, MediaPipe, and MuJoCo
     
 description: Run MediaPipe gesture inference on a Raspberry Pi 5, connect to a Reachy Mini MuJoCo simulation on a development machine, and use a browser dashboard to decide Reachy's fate with a thumbs-up or thumbs-down.
 
