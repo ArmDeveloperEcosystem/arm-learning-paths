@@ -119,6 +119,6 @@ reachy_gladiator_lp/
 
 ## What you've learned and what's next
 
-You learned what Reachy Mini is, why simulation is useful for edge/physical AI development, and how the app splits work between a simulation host and a Raspberry Pi. 
+You learned what Reachy Mini is, why simulation is useful for edge or physical AI development, and how the app splits work between a simulation host and a Raspberry Pi. 
 
 Next, you'll start the simulation host with a lightweight launcher script.
