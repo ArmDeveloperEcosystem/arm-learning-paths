@@ -22,7 +22,7 @@ before moving to physical testing.
 The simulation host doesn't need the full `reachy_gladiator_lp` project. It needs only the Reachy Mini SDK with MuJoCo support and the `start_sim.sh`
 launcher script.
 
-### Set up Python environment
+### Create a simulation environment
 
 Python 3.12 is required for the simulation environment. Python 3.13 can cause dependency resolution failures because pre-built wheels for some SDK dependencies are not yet available for that version. 
 
@@ -60,6 +60,8 @@ python -m pip install --upgrade "reachy-mini[mujoco]"
 ```
 
 The `mujoco` extra is required for `--sim`. If you install only `reachy-mini`, the daemon can start but simulation fails with `MuJoCo is not installed`.
+
+### Activate an existing simulation environment
 
 If you already have a working Reachy Mini simulation environment, you can activate that environment instead.
 
@@ -118,7 +120,7 @@ On macOS, `mjpython` is often needed because MuJoCo opens a native graphics
 window. On Linux, regular `python` is usually enough. The provided script picks
 an appropriate runtime when it can.
 
-### Troubleshoot the simulation
+### Troubleshoot port and connection issues
 
 If the script reports that address `0.0.0.0:18000` is already in use, another daemon or server is already using port `18000`. 
 

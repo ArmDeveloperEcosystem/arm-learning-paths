@@ -153,7 +153,7 @@ REACHY_GLADIATOR_DAEMON_PORT=18000 \
 
 Keep the simulation terminal running on your simulation host.
 
-On the Raspberry Pi, run the app with the simulation host IP address and the simulation port. This learning path uses port `18000`:
+On the Raspberry Pi, run the app with the simulation host IP address and the simulation port `18000`:
 
 ```bash
 REACHY_GLADIATOR_DAEMON_PORT=18000 ./scripts/run_pi_app.sh <simulation-host-ip>
@@ -161,7 +161,7 @@ REACHY_GLADIATOR_DAEMON_PORT=18000 ./scripts/run_pi_app.sh <simulation-host-ip>
 
 If you started the simulation on a different port, pass that same value in `REACHY_GLADIATOR_DAEMON_PORT`.
 
-## Understand what the script is doing
+### Understand what the script is doing
 
 The script sets the app configuration:
 
@@ -186,8 +186,8 @@ camera media from the daemon. This is the right default for the Learning Path
 because the Pi owns the USB webcam. `REACHY_GLADIATOR_CAMERA=opencv` tells the
 gesture recognizer to read frames from that local webcam.
 
-## What you've accomplished and what is next
+## What you've accomplished and what's next
 
-You installed the Pi runtime with the project setup script, validated the MediaPipe gesture worker, checked the USB webcam, and started the edge AI app. The edge AI app can run Reachy Gladiator, perform inference on incoming frames, and send Reachy commands to the simulation host. 
+You've now installed the Pi runtime with the project setup script, validated the MediaPipe gesture worker, checked the USB webcam, and started the edge AI app. The edge AI app can run Reachy Gladiator, perform inference on incoming frames, and send Reachy commands to the simulation host. 
 
-Next, you'll try out Reachy Gladiator.
+Next, you'll try out Reachy Gladiator using the application dashboard.

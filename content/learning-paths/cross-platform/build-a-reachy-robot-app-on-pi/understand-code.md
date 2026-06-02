@@ -422,4 +422,4 @@ Take some time to read through the files and understand the different parts befo
 
 You've now inspected how the app captures camera frames and runs MediaPipe gesture recognition on the Pi. You've also learned how the app debounces thumbs-up and thumbs-down verdicts, sends Reachy SDK motion commands, and renders a browser dashboard. 
 
-Next, you can experiment with adapting this project, or building your own app.
+Next, you can experiment with adapting this project or building your own app.

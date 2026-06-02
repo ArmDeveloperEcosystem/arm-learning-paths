@@ -42,8 +42,8 @@ The app will count down from 10, and then Reachy will start performing moves. Re
 
 When you're finished with the Pi app, you can stop it with `Ctrl+C` in the terminal that you ran the application from.
 
-## What you've learned and what's next
+## What you've accomplished and what's next
 
 You've now opened the dashboard, watched the live camera and app state, given thumbs-up and thumbs-down verdicts, and seen how edge AI gesture recognition changes Reachy's next action. This is a simple application premise using vision to control expressive robot outputs. 
 
-Next, you'll learn how the app works and how you can take this further or make your own.
+Next, you'll learn how the app works.
