@@ -9,17 +9,13 @@ on:
         type: string
       aws-region:
         description: "AWS Region to use for fetching credentials"
-        required: false
+        required: true
         type: string
-        default: "us-west-2"
       deploy-role-arn:
         description: "AWS OIDC role ARN to assume"
-        required: false
+        required: true
         type: string
-        default: ""
     secrets:
-      AWS_OIDC_ROLE:
-        required: false
       HUGO_LLM_API:
         required: true
       HUGO_RAG_API:
@@ -64,20 +60,10 @@ jobs:
       - name: Install Post-CSS
         run: npm install postcss-cli
 
-      - name: Validate AWS OIDC role
-        run: |
-          if [ -z "$DEPLOY_ROLE_ARN" ] && [ -z "$AWS_OIDC_ROLE" ]; then
-            printf '%s\n' "Either the deploy-role-arn input or AWS_OIDC_ROLE secret must be provided." >&2
-            exit 1
-          fi
-        env:
-          DEPLOY_ROLE_ARN: ${{ inputs.deploy-role-arn }}
-          AWS_OIDC_ROLE: ${{ secrets.AWS_OIDC_ROLE }}
-
       - name: AWS Github OIDC Login
         uses: aws-actions/configure-aws-credentials@v6
         with:
-          role-to-assume: ${{ inputs.deploy-role-arn || secrets.AWS_OIDC_ROLE }}
+          role-to-assume: ${{ inputs.deploy-role-arn }}
           aws-region: ${{ inputs.aws-region }}
 
       # Builds arm-software-developer repo
