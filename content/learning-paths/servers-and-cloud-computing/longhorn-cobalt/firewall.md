@@ -1,5 +1,5 @@
 ---
-title: Allow access to the Longhorn Web UI on Azure
+title: Allow network access to the Longhorn Web UI on Azure
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -15,7 +15,7 @@ To allow external traffic for the Longhorn Web UI and Kubernetes services on an 
 
 ### Add inbound firewall rules in Azure
 
-To expose the required TCP ports for Kubernetes and Longhorn, create an inbound firewall rule.
+To expose the required TCP ports for Kubernetes and Longhorn, create an inbound firewall rule:
 
 1. Navigate to the [Azure portal](https://portal.azure.com), go to **Virtual Machines**, and select your virtual machine.
 
@@ -40,11 +40,7 @@ To expose the required TCP ports for Kubernetes and Longhorn, create an inbound 
 - **Action:** Allow  
 - **Name:** allow-longhorn-kubernetes
 
-This rule allows external access for:
-
-- Port `80` → HTTP workloads
-- Port `8080` → Longhorn Web UI
-- Port `6443` → Kubernetes API server
+This rule allows external access for port `80` for HTTP workloads, port `8080` for the Longhorn web UI, and port `6443` for the Kubernetes API server.
 
 {{% notice Note %}}Setting **Source** to **My IP address** restricts access to these ports to your current machine only. If your public IP address changes or you access the environment from another system, update the source IP in the NSG rule accordingly.{{% /notice %}}
 
@@ -52,8 +48,6 @@ This rule allows external access for:
 
 ## What you've learned and what's next
 
-You've now configured the Azure Network Security Group to allow external traffic for Kubernetes API access, HTTP workloads, and the Longhorn Web UI.
+You've now configured the Azure Network Security Group to allow external traffic for Kubernetes API access, HTTP workloads, and the Longhorn Web UI. These firewall rules allow secure remote management of the Azure Cobalt 100 virtual machine and external access to the Kubernetes storage dashboard.
 
-These firewall rules allow secure remote management of the Azure Cobalt 100 virtual machine and external access to the Kubernetes storage dashboard.
-
-Next, you'll install K3s Kubernetes and Longhorn on the virtual machine, then deploy and configure persistent storage.
+Next, you'll install K3s Kubernetes and Longhorn on the virtual machine.

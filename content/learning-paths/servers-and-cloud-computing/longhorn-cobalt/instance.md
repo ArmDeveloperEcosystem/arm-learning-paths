@@ -8,11 +8,11 @@ layout: learningpathall
 
 ## Set up the Azure virtual machine
 
-In this section, you'll launch the Azure portal to create a virtual machine (VM) with the Arm-based Azure Cobalt 100 processor.
+In this section, you'll use the Azure portal to create a virtual machine (VM) with the Arm-based Azure Cobalt 100 processor.
 
-This Learning Path focuses on general-purpose virtual machines in the Dpsv6 series. For more information, see the [Microsoft Azure guide for the Dpsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series).
+The steps in this Learning Path focus on general-purpose virtual machines in the Dpsv6 series. For more information, see the [Microsoft Azure guide for the Dpsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series).
 
-While the steps to create this instance are included here for convenience, you can also see [Deploy a Cobalt 100 virtual machine on Azure Learning Path](/learning-paths/servers-and-cloud-computing/cobalt/).
+While the steps to create this instance are included here for convenience, you can also see the [Deploy a Cobalt 100 virtual machine on Azure Learning Path](/learning-paths/servers-and-cloud-computing/cobalt/).
 
 ### Create an Arm-based virtual machine in the Azure portal
 
@@ -61,6 +61,6 @@ Your virtual machine should be ready and running in a few minutes. You can SSH i
 
 ## What you've accomplished and what's next
 
-You've created an Azure Cobalt 100 Arm64 virtual machine running Ubuntu 24.04 LTS with SSH and HTTP access configured. The virtual machine is now ready for the next steps.
+You've now created an Azure Cobalt 100 Arm64 VM running Ubuntu 24.04 LTS with SSH and HTTP access configured. You'll use this VM to install Longhorn and manage persistent volumes on Kubernetes.
 
 Next, you'll open the additional ports required for Kubernetes and Longhorn access in the Azure Network Security Group.
