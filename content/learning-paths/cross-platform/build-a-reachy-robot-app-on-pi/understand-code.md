@@ -1,5 +1,6 @@
 ---
-title: Understand the app code
+title: Understand the Reachy Gladiator application code
+description: Inspect the Reachy Gladiator Python code to understand the app lifecycle, camera frame capture, MediaPipe gesture recognition, robot motion commands, and dashboard rendering.
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -62,7 +63,7 @@ def run(self, reachy_mini: ReachyMini, stop_event: threading.Event) -> None:
 ```
 
 This state drives both sides of the app: robot behavior and dashboard display.
-The `run()` method keeps track of:
+The `run()` method keeps track of the following:
 
 - `move_queue` stores the shuffled bag of moves.
 - `last_move` prevents immediate repeats at a shuffle boundary.
@@ -100,7 +101,7 @@ def capture_frames(frame_source: FrameSource) -> None:
 - `/status` returns the latest round, state, move, gesture, confidence, and camera status.
 - `/video` streams resized JPEG frames as an MJPEG feed for the browser dashboard.
 
-Those routes are registered inside the app class:
+These routes are registered inside the app class:
 
 ```python
 @self.settings_app.get("/status")
@@ -147,7 +148,7 @@ verdict, detector = self._await_verdict(
 
 The app is still a normal Reachy Mini app. It receives a connected
 `ReachyMini` object in `run()`. That object is the SDK boundary, so the rest of
-the app does not need to know whether commands go to MuJoCo simulation or to a
+the app doesn't need to know whether commands go to MuJoCo simulation or to a
 physical robot.
 
 ## Capture camera frames - camera.py
@@ -163,12 +164,12 @@ self._capture = cv2.VideoCapture(camera_index)
 ```
 
 `camera_index` is the local video-device number on the Pi. Index `0` usually
-means the first camera OpenCV can open; index `1` means the next one. If
+means the first camera OpenCV can open, and index `1` means the next one. If
 `REACHY_GLADIATOR_CAMERA_INDEX=1` worked in the camera check, use the same
 value when running the app.
 
 For the physical Reachy route, frames come from the Reachy daemon media
-pipeline instead. In that case, `camera_index` is not used.
+pipeline instead. In that case, `camera_index` isn't used.
 
 The `REACHY_GLADIATOR_CAMERA` environment variable chooses the route:
 
@@ -196,7 +197,7 @@ changing the gesture-recognition code.
 
 `reachy_gladiator_lp/gesture.py` runs the MediaPipe Gesture Recognizer. This is
 the edge AI part of the app: the Raspberry Pi classifies camera frames locally
-and only sends robot commands over the network.
+and sends only robot commands over the network.
 
 The recognizer loads this model bundle:
 
@@ -214,7 +215,7 @@ XNNPACK delegate to speed up neural-network operations on Arm CPUs.
 
 The detector runs in a worker process instead of the main app thread. This
 keeps MediaPipe inference separate from the robot-control loop, dashboard
-responses, and camera capture. The robot-control loop and dashboard server therefore remain responsive while MediaPipe is classifying a frame.
+responses, and camera capture. The robot-control loop and dashboard server therefore remain responsive when MediaPipe is classifying a frame.
 
 The app uses the CPU delegate:
 
@@ -240,7 +241,7 @@ options = vision.GestureRecognizerOptions(
 
 Each OpenCV frame is converted from BGR to RGB before MediaPipe sees it. BGR
 and RGB contain the same red, green, and blue color channels, but in a different
-order. OpenCV returns webcam frames as blue-green-red, while MediaPipe expects
+order. OpenCV returns webcam frames as blue-green-red, but MediaPipe expects
 red-green-blue:
 
 ```python
@@ -263,7 +264,7 @@ else:
 The returned `GestureResult` also includes the thumb tip pixel position. The worker queues have `maxsize=1`, which keeps detection biased toward the newest camera frame.
 
 The app also warms the detector in the background while Reachy is preparing.
-This means the first verdict window does not have to pay all of the detector
+This means the first verdict window doesn't have to pay all of the detector
 startup cost:
 
 ```python
@@ -277,7 +278,7 @@ def warmup_detector() -> None:
         time.sleep(LOOP_SLEEP_S)
 ```
 
-When the verdict window starts, the app reuses the warmed detector if it is
+When the verdict window starts, the app reuses the warmed detector if it's
 ready:
 
 ```python
@@ -288,7 +289,7 @@ if detector is None:
         detector_warmup["detector"] = None
 ```
 
-The debounce logic accepts a verdict only after two matching confident frames:
+The debounce logic accepts a verdict after only two matching confident frames:
 
 ```python
 if (
@@ -333,7 +334,7 @@ reachy_mini.goto_target(body_yaw=yaw_rad, duration=duration, method=method)
 
 The helper `_safe_body_yaw()` catches SDK or hardware cases where body yaw is unavailable and falls back to a smaller head motion.
 
-The move catalogue is deliberately simple:
+The move catalogue is as follows:
 
 ```python
 MOVE_CATALOGUE: dict[str, MoveFn] = {
@@ -361,7 +362,7 @@ if not move_queue:
 return [move_queue.pop(0)]
 ```
 
-The victory and defeat reactions are also just move functions. The state machine decides when to call them:
+The victory and defeat reactions are also move functions. The state machine decides when to call them:
 
 ```python
 if verdict == "thumbs_up":
@@ -384,7 +385,7 @@ therefore the dashboard you view in the browser:
 - `style.css` controls the arena theme, verdict colors, and responsive layout.
 - `reachy_gladiator.png` is the gladiator image shown in the dashboard.
 
-The JavaScript does not control the robot. It only renders state produced by
+The JavaScript code doesn't control the robot. It only renders state produced by
 the Python app.
 
 The dashboard camera feed is an MJPEG stream from `/video`. Python resizes each frame and encodes it as JPEG:
@@ -417,6 +418,8 @@ if __name__ == "__main__":
 
 Take some time to read through the files and understand the different parts before moving on to extend the project.
 
-## What you learned
+## What you've learned
 
-You inspected how the app captures camera frames, runs MediaPipe gesture recognition on the Pi, debounces thumbs-up and thumbs-down verdicts, sends Reachy SDK motion commands, and renders a browser dashboard. You are now ready to experiment with adapting this project, or building your own app.
+You've now inspected how the app captures camera frames and runs MediaPipe gesture recognition on the Pi. You've also learned how the app debounces thumbs-up and thumbs-down verdicts, sends Reachy SDK motion commands, and renders a browser dashboard. 
+
+Next, you can experiment with adapting this project or building your own app.
