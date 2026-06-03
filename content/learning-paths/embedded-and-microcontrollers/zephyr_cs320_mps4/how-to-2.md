@@ -1,14 +1,15 @@
 ---
-title: Add Zephyr board support for the Corstone-320 MPS4 platform
+title: Add Zephyr board support for the Arm Corstone-320 MPS4 platform
+description: Add Corstone-320 MPS4 FPGA board metadata, device tree files, and Kconfig settings so Zephyr can build for the physical MPS4 board.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Corstone-320 MPS4 platform overview
+## Understand the Arm Corstone-320 MPS4 platform 
 
-The Arm Corstone SSE-320 FPGA Image for MPS4 (FI101) provides an FPGA implementation that runs on the MPS4 board. The image includes an Arm Cortex-M85 processor, an Arm Ethos-U85 NPU, and an Arm CoreLink DMA-350 direct memory access (DMA) controller. This setup provides a practical environment for developing and evaluating embedded applications, including machine learning workloads.
+The Arm Corstone SSE-320 FPGA Image for MPS4 (FI101) provides an FPGA implementation that runs on the MPS4 board. The image includes an Arm Cortex-M85 processor, an Arm Ethos-U85 NPU, and an Arm CoreLink DMA-350 direct memory access (DMA) controller. With this setup, you get a practical environment for developing and evaluating embedded applications, including machine learning workloads.
 
 Download the latest Corstone-320 FPGA image and review the platform documentation:
 
@@ -19,7 +20,7 @@ Download the latest Corstone-320 FPGA image and review the platform documentatio
 
 ## Understand Zephyr board support architecture
 
-Zephyr organizes hardware support in a hierarchy:
+Zephyr organizes hardware support in the following hierarchy:
 
 ```output
 Board → SoC → CPU Cluster → CPU Core → Architecture
@@ -35,9 +36,9 @@ For Corstone-320 MPS4, this hierarchy maps as follows:
 | CPU Core | — | Single Cortex-M85 core |
 | Architecture | — | ARMv8.1-M with Helium |
 
-## Add to the existing board directory
+## Add files to the existing board directory
 
-The `boards/arm/mps4/` directory already exists in the Zephyr tree with support for the Corstone-315 and Corstone-320 FVP variants. This section adds the Corstone-320 FPGA variant by modifying three existing files and creating three new ones.
+The `boards/arm/mps4/` directory already exists in the Zephyr tree with support for the Corstone-315 and Corstone-320 FVP variants. In this section, you'll add the Corstone-320 FPGA variant by modifying three existing files and creating three new ones.
 
 Navigate to the MPS4 board directory:
 
@@ -45,9 +46,9 @@ Navigate to the MPS4 board directory:
 cd ~/zephyrproject/zephyr/boards/arm/mps4
 ```
 
-The files you modify or create are:
+You'll modify or create the following files:
 
-```
+```text
 boards/arm/mps4/
 ├── board.yml                            # Board metadata (modify)
 ├── Kconfig.mps4                         # Board Kconfig entry (modify)
@@ -57,11 +58,9 @@ boards/arm/mps4/
 └── mps4_common_soc_peripheral_fpga.dtsi # SoC peripheral definitions (new)
 ```
 
-## Add the board files
-
 ### board.yml
 
-`board.yml` describes the board name, vendor, SoC, and supported variants. Zephyr reads this file to recognize the board target you pass to `west build`.
+`board.yml` describes the board name, vendor, SoC, and supported variants. Zephyr reads this file to recognize the board target that you pass to `west build`.
 
 The existing `board.yml` already defines the FVP variants. Add the `fpga` variant under the `corstone320` SoC entry so the file looks like this:
 
@@ -190,9 +189,9 @@ Create `boards/arm/mps4/mps4_corstone320_fpga.dts` with the following content:
 ```
 ### mps4_common_soc_peripheral_fpga.dtsi
 
-This file defines the SoC peripherals for the MPS4 FPGA build and is included by `mps4_corstone320_fpga.dts`. It is not a standalone file — the `.dts` file pulls it in during compilation with `#include`.
+This file defines the SoC peripherals for the MPS4 FPGA build and is included by `mps4_corstone320_fpga.dts`. It's not a standalone file — the `.dts` file pulls it in during compilation with `#include`.
 
-Create `boards/arm/mps4/mps4_common_soc_peripheral_fpga.dtsi` with the following content. This configures the 50 MHz peripheral clock and two UART instances using the MPS4 peripheral addresses from the [SSE-320 FPGA Image for MPS4 Application Note](https://developer.arm.com/documentation/109762/0100/?lang=en):
+The `boards/arm/mps4/mps4_common_soc_peripheral_fpga.dtsi` file is used to configure the 50 MHz peripheral clock and two UART instances using the MPS4 peripheral addresses from the [SSE-320 FPGA Image for MPS4 Application Note](https://developer.arm.com/documentation/109762/0100/?lang=en). Create the file with the following content:
 
 ```dts
 sysclk: system-clock {
@@ -267,9 +266,9 @@ endif
 
 ### Kconfig.mps4
 
-`Kconfig.mps4` is the base software configuration for selecting SoC and other board and SoC related settings. Add the FPGA support in the file.
+`Kconfig.mps4` is the base software configuration for selecting SoC and other board and SoC related settings. Add the FPGA support in the file:
 
-```
+```kconfig
 config BOARD_MPS4
         select SOC_SERIES_MPS4
         select SOC_MPS4_CORSTONE315 if BOARD_MPS4_CORSTONE315_FVP || BOARD_MPS4_CORSTONE315_FVP_NS
@@ -279,7 +278,7 @@ config BOARD_MPS4
 
 ### mps4_corstone320_fpga_defconfig
 
-`mps4_corstone320_fpga_defconfig` is a Kconfig fragment that Zephyr merges into the final `.config` when building for this board target. It enables TrustZone, MPU support, GPIO, and console over UART, and configures the build as a Secure image with ROM-region relocation.
+`mps4_corstone320_fpga_defconfig` is a Kconfig fragment that Zephyr merges into the final `.config` when building for this board target. The fragment enables TrustZone, MPU support, GPIO, and console over UART. It configures the build as a secure image with ROM-region relocation.
 
 Create `boards/arm/mps4/mps4_corstone320_fpga_defconfig` with the following content:
 
@@ -301,5 +300,8 @@ CONFIG_TRUSTED_EXECUTION_SECURE=y
 # ROMSTART_REGION address and size are defined in Kconfig.defconfig
 CONFIG_ROMSTART_RELOCATION_ROM=y
 ```
+## What you've accomplished and what's next
 
-After creating all these files, you're ready to build the `hello_world` sample for your new board target.
+You've now created and updated board support files, including device tree and Kconfig configuration, to port Zephyr RTOS to the Corstone-320 MPS4 platform.
+
+Next, you'll build the `hello_world` sample for your new board target.
