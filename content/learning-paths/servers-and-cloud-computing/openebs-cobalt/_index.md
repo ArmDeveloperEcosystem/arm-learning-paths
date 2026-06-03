@@ -1,6 +1,9 @@
 ---
 title: Deploy OpenEBS on Azure Cobalt 100 Arm64 virtual machines for Kubernetes-native persistent storage
 
+draft: true
+cascade:
+    draft: true
 
 description: Learn how to install and configure OpenEBS LocalPV on an Azure Cobalt 100 Arm64 virtual machine using K3s Kubernetes, provision persistent storage dynamically, deploy stateful applications, and validate persistent storage functionality.
    
