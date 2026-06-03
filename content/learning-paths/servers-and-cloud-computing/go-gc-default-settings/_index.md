@@ -1,15 +1,14 @@
 ---
-title: Measure Go GC behavior on AWS Graviton with default runtime settings
-description: Learn how to run a Go allocation benchmark on AWS Graviton and measure garbage collection behavior without changing Go runtime settings.
+title: Measure Go GC behavior on AWS Graviton
+description: Learn how to measure and observe Go garbage collection metrics on AWS Graviton instances.
 
 minutes_to_complete: 75
 
-who_is_this_for: This Learning Path is for Go developers and performance engineers who want to measure garbage collection behavior on Arm servers without changing Go runtime GC settings.
+who_is_this_for: This Learning Path is for engineers interested in learning more about Go garbage collection (GC) behavior on Arm.
 
 learning_objectives:
     - Select an AWS Graviton instance for repeatable Go GC measurements
     - Install Go and Benchstat on an Arm Linux server
-    - Confirm that Go runtime tuning variables are unset
     - Run a Go benchmark that reports allocation, GC, and pause-time metrics
     - Capture CPU and heap profiles without changing GC behavior
 
@@ -66,11 +65,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-
-## Measure default Go GC behavior on Arm servers
-
-Go applications can spend meaningful time allocating memory and running garbage collection (GC). You should measure that behavior before you change runtime settings.
-
-In this Learning Path, you run Go benchmarks on an AWS Graviton instance and keep the Go runtime in its default GC mode. You do not set `GOGC`, `GOMEMLIMIT`, `GODEBUG`, or `GOMAXPROCS`.
-
-The goal is to build a clean baseline. You will measure operation time, allocation rate, GC frequency, GC pause cost, and profiles before making tuning decisions.

@@ -6,15 +6,15 @@ weight: 6
 layout: learningpathall
 ---
 
-## Read the benchmark metrics
+## Understanding the benchmark metrics
 
-Open the Benchstat summary:
+To understand better what these benchmarks results are showing, firt open the Benchstat summary:
 
-```console
+```bash
 cat default_gc_benchstat.txt
 ```
 
-Use the metrics as follows:
+The the metrics you see explain the following:
 
 | Metric | Read |
 | --- | --- |
@@ -27,11 +27,11 @@ Use the metrics as follows:
 
 These metrics answer different questions. For example, `stw-ns/GC` can increase while `stw-ns/op` stays flat or decreases if GC runs less often per completed operation.
 
-## Read the profiles
+## Reading the profiles
 
-Open the CPU profile summary:
+ Next, open the CPU profile summary:
 
-```console
+```bash
 cat cpu_default_top.txt
 ```
 
@@ -50,7 +50,7 @@ On the validated `m8g.xlarge` instance, the top CPU profile entries included str
 
 Open the heap allocation profile summary:
 
-```console
+```bash
 cat mem_default_alloc_top.txt
 ```
 
@@ -66,9 +66,9 @@ On the validated `m8g.xlarge` instance, the allocation profile showed that `stri
          0     0% 99.94%     4.67GB 39.79%  strings.SplitN (inline)
 ```
 
-## Keep this result as the baseline
+## Keeping a baseline to compare to future changes
 
-This result is your default Go GC baseline on AWS Graviton. Keep the following files together when you compare future changes:
+These results show your default Go GC baseline stats for this benchmarking app on AWS Graviton. By keeping the following files together (eg, each stored in their own zip file, folder, etc) you can easily see how making code changes affects your apps overall performance:
 
 ```output
 default_runtime_baseline.txt
@@ -80,5 +80,75 @@ cpu_default_top.txt
 mem_default.out
 mem_default_alloc_top.txt
 ```
+
+Example of changes you can experiment with include:
+
+### Simple changes that can improve GC performance
+
+1. **Reduce the payload size**
+   ```go
+   payload := strings.Repeat(
+       "name=arm&runtime=go&gc=default&value=12345;",
+       512,
+   )
+   ```
+   A smaller payload creates fewer temporary objects and less garbage each iteration.
+
+2. **Move `strings.Split(payload, ";")` outside the benchmark loop**
+   ```go
+   parts := strings.Split(payload, ";")
+
+   b.ResetTimer()
+
+   for i := 0; i < b.N; i++ {
+       ...
+   }
+   ```
+   This avoids repeatedly allocating the same slice of records on every iteration.
+
+3. **Reuse the output slice**
+   ```go
+   out := make([]string, 0, len(parts))
+
+   for i := 0; i < b.N; i++ {
+       out = out[:0]
+       ...
+   }
+   ```
+   Reusing the backing array reduces allocations and GC pressure.
+
+4. **Replace `strings.SplitN()` with `strings.IndexByte()`**
+   ```go
+   idx := strings.IndexByte(part, '=')
+   if idx >= 0 {
+       key := part[:idx]
+       value := part[idx+1:]
+       ...
+   }
+   ```
+   This avoids allocating a temporary `[]string` for every record processed.
+
+5. **Avoid creating new strings in the hot loop**
+   ```go
+   out = append(out, fields[0])
+   ```
+   Instead of building `"key:length"` strings, store existing strings or simpler values to reduce allocations.
+
+6. **Reduce the number of records processed**
+   ```go
+   payload := strings.Repeat(
+       "name=arm&runtime=go&gc=default&value=12345;",
+       1024, // instead of 2048
+   )
+   ```
+   Fewer records means less allocation work and fewer GC cycles.
+
+### Biggest GC wins
+
+For this benchmark, the largest improvements typically come from:
+
+- Moving `strings.Split(payload, ";")` outside the benchmark loop.
+- Reusing the `out` slice instead of allocating a new one every iteration.
+- Replacing `strings.SplitN()` with `strings.IndexByte()`.
 
 When you test code changes, compare against this baseline before changing Go runtime settings. If you later tune `GOGC`, `GOMEMLIMIT`, `GODEBUG`, or `GOMAXPROCS`, treat that as a separate experiment because it changes the runtime operating mode.

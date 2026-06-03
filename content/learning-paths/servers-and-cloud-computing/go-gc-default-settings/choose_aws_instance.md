@@ -5,35 +5,31 @@ weight: 2
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## What is Garbage Collection? (GC)
+Memory management is a critical aspects of application performance, and Garbage Collection (GC) plays a central role in automating that process. GC continuously identifies and removes objects that are no longer needed, freeing memory for re-use for other purposes..
 
-## Select an instance for Go GC measurements
+While this automation improves productivity and application safety, inefficient garbage collection can lead to increased CPU usage, longer response times, and unexpected application pauses. 
 
-Use an AWS Graviton instance that has enough CPU and memory to make Go runtime behavior visible, while keeping the Learning Path inexpensive to run.
+Tracking GC metrics provides a window into an application's memory health, helping engineers optimize performance, and ensuring the system can scale efficiently under load.
 
-For the first prototype, use `m8g.xlarge`.
+## Measuring default Go GC behavior on Arm servers
 
-`m8g.xlarge` is a good starting point because it provides four vCPUs and 16 GiB of memory on AWS Graviton4. Four vCPUs are enough to observe default Go CPU parallelism and GC worker behavior without requiring a large benchmark host. The 16 GiB memory size is enough for allocation-heavy benchmarks without immediately making the lab memory-bound.
+Go is one such language which implements GC.  As Go applications can spend meaningful time allocating memory and running garbage collection, it is important to understand how the Go runtime behaves under default settings. 
 
-Avoid burstable `t4g` instances for this Learning Path. CPU credits can affect benchmark repeatability and make GC measurements harder to explain.
+In this Learning Path, you'll run Go benchmarks on an AWS Graviton instance. The goal is to build a clean baseline, measuring operation time, allocation rate, GC frequency, and GC pause cost.
 
-If `m8g.xlarge` is not available in your AWS Region or Availability Zone, use `m7g.xlarge` as the fallback. It has the same vCPU and memory shape on an earlier Graviton generation, so the commands and benchmark workflow remain the same.
+## Selecting an instance for Go GC measurements
 
-## Recommended prototype machine
+An AWS Graviton `m8g.xlarge` instance has enough CPU and memory to make Go runtime behavior visible, while keeping costs minimal. It's a good starting point as it provides four vCPUs and 16 GiB of memory on AWS Graviton4. If you choose to run this Learning Path on a different instance, make sure it has at least 4 vCPUs and 16 GiB of memory to ensure the benchmark runs smoothly and provides meaningful GC metrics.
 
-Use this instance shape for the first version of the Learning Path:
-
-| Purpose | Instance type | Processor | vCPUs | Memory |
-| --- | --- | --- | ---: | ---: |
-| Default prototype | `m8g.xlarge` | AWS Graviton4 | 4 | 16 GiB |
-| Fallback | `m7g.xlarge` | AWS Graviton3 | 4 | 16 GiB |
+Avoid burstable `t4g` instances as CPU credits can affect benchmark repeatability and make GC measurements harder to explain.
 
 {{% notice Note %}}
 You can use larger instances, such as `m8g.2xlarge`, when you want more CPU width or more memory headroom. Start with `m8g.xlarge` so the first benchmark run is easy to reproduce and inexpensive.
 {{% /notice %}}
 
-The commands in this Learning Path were validated on an `m8g.xlarge` instance running Ubuntu 24.04 LTS Arm64 and Go 1.26.3.
 
-## Check instance availability
+## Checking instance availability
 
 Use the AWS CLI to check whether `m8g.xlarge` is available in your selected Region.
 
@@ -48,9 +44,7 @@ aws ec2 describe-instance-type-offerings \
     --output table
 ```
 
-If the command returns one or more Availability Zones, you can use `m8g.xlarge` in that Region.
-
-Run the same command for `m7g.xlarge` if `m8g.xlarge` is not available:
+If the command returns one or more Availability Zones, you can use `m8g.xlarge` in that Region.  If you are unable to find `m8g.xlarge` in your Region, you can try a different Region, or fallback to an 'm7g.xlarge' instance, which is based on the previous generation AWS Graviton3:
 
 ```console
 aws ec2 describe-instance-type-offerings \
@@ -61,4 +55,4 @@ aws ec2 describe-instance-type-offerings \
     --output table
 ```
 
-You have now selected a repeatable AWS Graviton test machine. You will confirm the default Go runtime environment before running the benchmark.
+Once you have chosen an instance type, provision it to run Ubuntu 24.04 LTS Arm64.  Once the instance is running, and you are ssh'd into it, you can proceed to the next step.

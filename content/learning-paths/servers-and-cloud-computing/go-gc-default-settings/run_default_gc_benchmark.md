@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Confirm runtime tuning variables are unset
 
-Before you run the benchmark, confirm that the shell is not setting Go runtime tuning variables:
+Before you run the benchmark, confirm that the shell is not setting Go runtime tuning variables.  This could happen especially if you have experimented with Go GC tuning variables in the past on the same machine.
 
-```console
+```bash
 env | grep -E '^(GOGC|GOMEMLIMIT|GODEBUG|GOMAXPROCS)=' || true
 ```
 
@@ -18,20 +18,18 @@ The command should not print any matching variables.
 
 If it prints one or more variables, unset them:
 
-```console
+```bash
 unset GOGC
 unset GOMEMLIMIT
 unset GODEBUG
 unset GOMAXPROCS
 ```
 
-This keeps GC pacing, memory-limit behavior, debug behavior, and CPU parallelism at the Go runtime defaults.
-
 ## Record the runtime baseline
 
-Record the Go version, architecture, CPU count, and memory size before the benchmark:
+Before running the benchmark, record the Go version, architecture, CPU count, and memory size before the benchmark:
 
-```console
+```bash
 cd $HOME/go-gc-default
 {
     go version
@@ -41,7 +39,7 @@ cd $HOME/go-gc-default
 } | tee default_runtime_baseline.txt
 ```
 
-On the validated `m8g.xlarge` instance, the output was:
+Your output should look similar to this:
 
 ```output
 go version go1.26.3 linux/arm64
@@ -55,9 +53,9 @@ Swap:             0B          0B          0B
 
 ## Run repeated benchmark samples
 
-Run the benchmark with repeated samples and save the output:
+Run the benchmark with repeated samples and save the output.  In this example, the benchmark runs for 5 seconds and repeats 10 times:
 
-```console
+```bash
 go test ./parsebench \
     -run '^$' \
     -bench BenchmarkParseAndAllocate \
@@ -66,17 +64,17 @@ go test ./parsebench \
     -benchtime=5s | tee default_gc_benchmark.txt
 ```
 
-The benchmark output includes operation time, allocation rate, allocation count, GC cycles per operation, pause time per operation, and pause time per GC cycle.
+The output is tee'd to a file which includes the benchmark's outputs of operation time, allocation rate, allocation count, GC cycles per operation, pause time per operation, and pause time per GC cycle.
 
-Summarize the repeated samples with Benchstat:
+With this information saved, we can now aggregate the repeated samples with Benchstat:
 
-```console
+```bash
 benchstat default_gc_benchmark.txt | tee default_gc_benchstat.txt
 ```
 
 Benchstat may scale nanosecond metrics to seconds in the summary. For example, raw `stw-ns/op` benchmark output can appear as `stw-sec/op` in the Benchstat table.
 
-On the validated `m8g.xlarge` instance, the Benchstat summary was:
+You should see output similar to this:
 
 ```output
 goos: linux
@@ -111,7 +109,7 @@ ParseAndAllocate-4                4.098k ± 0%
 
 Create a test binary and run one longer benchmark pass with CPU and heap profiles enabled:
 
-```console
+```bash
 go test -c -o parsebench.test ./parsebench
 
 ./parsebench.test \
@@ -124,16 +122,19 @@ go test -c -o parsebench.test ./parsebench
     -test.memprofile mem_default.out | tee default_gc_profile_run.txt
 ```
 
-Inspect the CPU profile:
+Inspect the CPU profile to display the functions that consumed the most CPU time during benchmark execution, ranked from highest to lowest:
 
-```console
+```bash
 go tool pprof -top ./parsebench.test cpu_default.out | tee cpu_default_top.txt
 ```
 
-Inspect the heap allocation profile:
+Inspect the heap allocation profile to display the functions responsible for allocating the most total memory over the lifetime of the benchmark, ranked from highest to lowest.
 
-```console
+```bash
 go tool pprof -top -alloc_space ./parsebench.test mem_default.out | tee mem_default_alloc_top.txt
 ```
 
-You now have a default-GC benchmark result, a Benchstat summary, and CPU and heap profiles from the same workload.
+You now have a default-GC benchmark result, a Benchstat summary, and CPU and heap profiles from the same workload.  From here, we can dive deeper into analyzing all of these results.
+
+
+
