@@ -9,21 +9,18 @@ layout: "learningpathall"
 
 ## Why run Longhorn on Azure Cobalt 100
 
-Longhorn on Arm-based Azure Cobalt 100 processors provides lightweight, Kubernetes-native distributed storage for cloud-native workloads running on Arm64 infrastructure.
+Longhorn on Arm-based Azure Cobalt 100 processors provides lightweight, Kubernetes-native, persistent distributed storage for cloud-native workloads running on Arm64 infrastructure.
 
 Azure Cobalt 100 processors deliver dedicated physical cores per vCPU, providing predictable and consistent performance for Kubernetes storage workloads. This architecture complements Longhorn’s distributed block storage model and delivers stable storage performance for stateful applications running on Kubernetes.
 
-Longhorn enables persistent storage for Kubernetes workloads such as databases, analytics platforms, monitoring stacks, and stateful cloud-native applications running on Azure Cobalt 100 Arm64 virtual machines.
-
 ## Azure Cobalt 100 Arm-based processor
 
-Azure’s Cobalt 100 is Microsoft’s first-generation, in-house Arm-based processor. Built on Arm Neoverse N2, Cobalt 100 is a 64-bit CPU that delivers strong performance and energy efficiency for cloud-native, scale-out Linux workloads.
+Azure’s Cobalt 100 is Microsoft’s first-generation, in-house Arm-based processor. Built on Arm Neoverse N2, Cobalt 100 is a 64-bit CPU that delivers strong performance and energy efficiency for cloud-native, scale-out Linux workloads. 
 
 These workloads include:
-
 - Kubernetes platforms
 - Containerized applications
-- Open-source databases
+- Open-source databases 
 - Data analytics systems
 - Storage and caching platforms
 
@@ -49,9 +46,9 @@ Longhorn provides several important capabilities for Kubernetes storage manageme
 - Snapshot and backup support: Supports volume snapshots and backup operations for Kubernetes workloads.
 - Stateful workload support: Enables databases, monitoring stacks, and analytics applications to run with persistent storage.
 
-Longhorn is widely used in Kubernetes environments to provide lightweight and reliable storage without requiring external SAN or NAS infrastructure.
+Longhorn is widely used in Kubernetes environments to provide lightweight and reliable storage without requiring external Storage Area Network (SAN) or Network Attached Storage (NAS) infrastructure.
 
-In this Learning Path, you'll deploy Longhorn on an Azure Cobalt 100 Arm64 virtual machine using K3s Kubernetes. You'll configure Longhorn for a single-node Kubernetes cluster, create persistent volumes, validate storage persistence, and benchmark storage performance using fio.
+In this Learning Path, you'll deploy Longhorn on an Azure Cobalt 100 Arm64 virtual machine using K3s. You'll configure Longhorn for a single-node Kubernetes cluster, create persistent volumes, validate storage persistence, and benchmark storage performance using fio.
 
 ## What you've learned and what's next
 
