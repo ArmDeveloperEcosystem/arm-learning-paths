@@ -1,5 +1,6 @@
 ---
 title: Create an Azure Cobalt 100 Arm64 virtual machine
+description: Create an Azure Cobalt 100 Arm64 virtual machine with Ubuntu, SSH access, and HTTP access before installing K3s and Longhorn.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -20,9 +21,9 @@ To create an Azure virtual machine using the Azure portal:
 
 1. Launch the Azure portal and navigate to **Virtual Machines**.
 2. Select **Create**, and select **Virtual Machine** from the drop-down list.
-3. In the **Basic** tab, fill in the instance details such as **Virtual machine name** and **Region**.
+3. In the **Basic** tab, fill in the instance details such as **Virtual machine name** and **Region**. Choose a region that supports D4ps_v6 VMs.
 4. Select **Ubuntu Pro 24.04 LTS** as the image for your virtual machine, and select **Arm64** as the VM architecture.
-5. In the **Size** field, select **See all sizes** and select the D-Series v6 family of virtual machines.
+5. In the **Size** field, select **See all sizes** and select the D-Series v6 family of VMs.
 6. Select **D4ps_v6** from the list as shown in the diagram below:
 
 ![Azure Portal showing D-Series v6 VM size selection with D4ps_v6 highlighted#center](images/instance.png "Select D4ps_v6 from the D-Series v6 family")

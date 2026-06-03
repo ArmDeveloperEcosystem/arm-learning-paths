@@ -1,5 +1,6 @@
 ---
 title: Understand Longhorn on Azure Cobalt 100
+description: Understand how Longhorn provides Kubernetes persistent storage on Azure Cobalt 100 Arm64 virtual machines.
 
 weight: 2
 
@@ -30,7 +31,7 @@ Running at 3.4 GHz, Cobalt 100 allocates a dedicated physical core for each vCPU
 
 To learn more, see the Microsoft blog [Announcing the preview of new Azure VMs based on the Azure Cobalt 100 processor](https://techcommunity.microsoft.com/blog/azurecompute/announcing-the-preview-of-new-azure-vms-based-on-the-azure-cobalt-100-processor/4146353).
 
-## How Longhorn improves Kubernetes storage
+## How Longhorn provides Kubernetes storage
 
 Longhorn is an open-source cloud-native distributed block storage platform designed specifically for Kubernetes environments.
 

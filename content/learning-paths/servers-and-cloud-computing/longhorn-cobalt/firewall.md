@@ -1,5 +1,6 @@
 ---
 title: Allow network access to the Longhorn Web UI on Azure
+description: Configure Azure Network Security Group inbound rules for Kubernetes API access, HTTP workloads, and the Longhorn web UI on an Azure Cobalt 100 virtual machine.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +9,7 @@ layout: learningpathall
 
 ## Configure external traffic for Longhorn and Kubernetes
 
-To allow external traffic for the Longhorn Web UI and Kubernetes services on an Azure virtual machine, open the required ports in the Network Security Group (NSG). The NSG can be attached to the virtual machine's network interface or subnet.
+To allow external traffic for the Longhorn web UI and Kubernetes services on an Azure virtual machine, open the required ports in the Network Security Group (NSG). The NSG can be attached to the virtual machine's network interface or subnet.
 
 {{% notice Note %}}For more information about Azure setup, see [Getting started with Microsoft Azure Platform](/learning-paths/servers-and-cloud-computing/csp/azure/).{{% /notice %}}
 
@@ -35,10 +36,10 @@ To expose the required TCP ports for Kubernetes and Longhorn, create an inbound 
 - **Source IP addresses:** *(auto-populated with your current public IP)*  
 - **Source port ranges:** *  
 - **Destination:** Any  
-- **Destination port ranges:** **80,8080,6443**  
+- **Destination port ranges:** `80`,`8080`,`6443`
 - **Protocol:** TCP  
 - **Action:** Allow  
-- **Name:** allow-longhorn-kubernetes
+- **Name:** `allow-longhorn-kubernetes`
 
 This rule allows external access for port `80` for HTTP workloads, port `8080` for the Longhorn web UI, and port `6443` for the Kubernetes API server.
 

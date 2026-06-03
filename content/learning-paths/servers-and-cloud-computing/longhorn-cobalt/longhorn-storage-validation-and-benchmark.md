@@ -1,5 +1,6 @@
 ---
-title: Validate persistent Kubernetes storage and benchmark Longhorn on fio
+title: Validate persistent Kubernetes storage and benchmark Longhorn with fio
+description: Create a Longhorn-backed PersistentVolumeClaim, verify data persistence after pod recreation, and run a fio benchmark on an Azure Cobalt 100 Arm64 virtual machine.
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -38,7 +39,7 @@ Apply the PVC configuration:
 kubectl apply -f pvc.yaml
 ```
 
-The PVC requests a 5 GB Longhorn-backed volume that can be mounted by a single Kubernetes node in read-write mode.
+The PVC requests a 5 GiB Longhorn-backed volume that can be mounted by a single Kubernetes node in read-write mode.
 
 ### Verify the PersistentVolumeClaim
 
@@ -254,7 +255,7 @@ After the benchmark completes, exit the container shell:
 exit
 ```
 
-The benchmark confirms that Longhorn volumes are functioning correctly on the Azure Cobalt 100 Arm64 virtual machine.
+The benchmark shows that Longhorn volumes are functioning correctly on the Azure Cobalt 100 Arm64 virtual machine.
 
 ## What you've accomplished
 

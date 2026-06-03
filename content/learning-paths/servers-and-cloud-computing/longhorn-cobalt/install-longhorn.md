@@ -1,5 +1,6 @@
 ---
 title: Install and run Longhorn on a single-node Kubernetes cluster
+description: Install K3s and Longhorn on an Azure Cobalt 100 Arm64 virtual machine, verify the Longhorn pods, access the web UI, and configure a single-node replica count.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -148,7 +149,7 @@ df -h
 After setting up the Kubernetes environment, install Longhorn on the Kubernetes cluster using the official Longhorn manifest:
 
 {{% notice Note %}}
-The following command uses Longhorn version 1.10.0. The same approach works with other versions. Replace the version in the URL with your version of choice. To find the latest version, see [Longhorn releases on GitHub](https://github.com/longhorn/longhorn/releases).
+The following command uses Longhorn version 1.10.0. The same approach works with other versions. Replace the version in the URL with your version of choice that's compatible with your K3s version. To find the latest version, see [Longhorn releases on GitHub](https://github.com/longhorn/longhorn/releases).
 {{% /notice %}}
 
 ```bash
@@ -205,7 +206,7 @@ kubectl -n longhorn-system port-forward --address 0.0.0.0 service/longhorn-front
 The port-forward connection closes when the terminal session ends. If you lose access to the dashboard, run the command again in a new terminal.
 {{% /notice %}}
 
-Open the Longhorn Web UI in your browser. Replace `<PUBLIC_IP>` with the public IP address of your Azure VM.
+Open the Longhorn web UI in your browser. Replace `<PUBLIC_IP>` with the public IP address of your Azure VM.
 
 ```text
 http://<PUBLIC_IP>:8080
