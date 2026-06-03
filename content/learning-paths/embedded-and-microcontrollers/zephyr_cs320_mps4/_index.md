@@ -1,6 +1,6 @@
 ---
 title: Port Zephyr RTOS and run applications on the Arm Corstone-320 MPS4 platform
-description: Port Zephyr RTOS to the Arm Corstone-320 MPS4 FPGA platform by creating board support files and device tree configuration, then build and run the hello_world sample on the physical board.
+description: Port Zephyr RTOS to the Arm Corstone-320 MPS4 FPGA platform by creating board support files and device tree configuration, then build and run a hello_world sample on the physical board.
 
 minutes_to_complete: 45
 

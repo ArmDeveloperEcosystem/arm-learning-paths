@@ -17,7 +17,7 @@ Activate your Python virtual environment:
 source ~/zephyrproject/.venv/bin/activate
 ```
 
-If the toolchain environment variables aren't set in your current terminal, set them now (For full setup steps, see [Set up the Zephyr build environment](../how-to-1/)):
+If you haven't set the toolchain environment variables in your current terminal, set them now. For full setup steps, see [Set up the Zephyr build environment](/learning-paths/embedded-and-microcontrollers/zephyr_cs320_mps4/how-to-1/):
 
 ```bash
 export ZEPHYR_TOOLCHAIN_VARIANT=gnuarmemb
@@ -60,10 +60,10 @@ The ELF image contains the application and the Zephyr kernel libraries. You can 
 
 To run the application on the MPS4 board, follow these steps:
 
-1. Download the board files from [FI101](https://developer.arm.com/downloads/view/FI101?sortBy=availableBy&revision=r1p0-00eac0-2), 
+1. Download the board files from [FI101](https://developer.arm.com/downloads/view/FI101?sortBy=availableBy&revision=r1p0-00eac0-2).
 2. Set up the MPS4 platform according to the [Using the FI101 on MPS4 board](https://developer.arm.com/documentation/109762/0100/?lang=en).
 
-3. For the hello_world application, place the vector table in the FPGA boot ROM at address `0x11000000`, and place the remaining code and data in SRAM at address `0x31000000`. Use `arm-none-eabi-objcopy` to extract these two regions from `zephyr.elf`:
+3. For the hello_world application, place the vector table in the FPGA boot ROM at address `0x11000000`, and place the remaining code and data in SRAM at address `0x31000000`. Use `arm-none-eabi-objcopy` to extract these two regions from `build/zephyr/zephyr.elf`:
 
 ```bash
 arm-none-eabi-objcopy  -O binary --only-section=rom_start zephyr.elf vector.bin
@@ -72,7 +72,7 @@ arm-none-eabi-objcopy  -O binary --remove-section=rom_start zephyr.elf app.bin
 
 4. Update `images.txt` under `/MB/HBI0376B/FI101` to load the two images. The paths use the `\SOFTWARE\` folder on the MPS4 SD card, which is where you will copy the binary files:
 
-```
+```text
 IMAGE0PORT: 2
 IMAGE0ADDRESS: 0x00_1100_0000           ; Address to load into
 IMAGE0UPDATE: RAM
@@ -91,6 +91,6 @@ If the setup is correct, the UART console prints the “Hello World” message, 
 
 ## What you've accomplished
 
-You've now created board support files, including device tree and Kconfig configuration, to port Zephyr RTOS to the Corstone-320 MPS4 platform. You've then built and run the Zephyr `hello_world` example on the MPS4 board.
+You've now built and run the Zephyr `hello_world` example on the MPS4 board. 
 
-You can use these steps as a foundation to further customize Zephyr on the Corstone-320 MPS4 platform and validate a complete build-and-run workflow.
+You can use the workflow outlined in this Learning Path as a foundation to further customize Zephyr on the Corstone-320 MPS4 platform and validate a complete build-and-run workflow.
