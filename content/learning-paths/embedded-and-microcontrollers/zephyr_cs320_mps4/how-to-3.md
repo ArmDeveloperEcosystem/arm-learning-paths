@@ -56,7 +56,7 @@ build/zephyr/zephyr.elf
 
 The ELF image contains the application and the Zephyr kernel libraries. You can now load it onto the MPS4 board.
 
-## Run the application on the MPS4 board
+## Run the hello_world application on the MPS4 board
 
 To run the application on the MPS4 board, follow these steps:
 
