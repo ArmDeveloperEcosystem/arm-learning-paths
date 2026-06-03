@@ -1,11 +1,15 @@
 ---
-title: Orchestrate a Persistent Local AI Agent with Hermes on DGX Spark
+title: Orchestrate a persistent local AI agent with Hermes on DGX Spark
 
-description: Learn how to build a persistent local AI agent on NVIDIA DGX Spark using event-driven orchestration, semantic memory, and heterogeneous Arm CPU + GPU workloads. You'll combine Hermes Agent, Ollama, and Qdrant to create a continuously running local AI runtime capable of event-driven document ingestion, contextual retrieval, and scheduled workspace cognition.
+draft: true
+cascade:
+    draft: true
+
+description: Learn how to build a continuously running local AI agent on NVIDIA DGX Spark by combining Hermes Agent, Ollama, and Qdrant to handle event-driven document ingestion, semantic memory, and contextual retrieval using Arm Grace CPUs.
 
 minutes_to_complete: 90
 
-who_is_this_for: This is an advanced topic for developers interested in persistent local AI agent systems, semantic memory architectures, and heterogeneous AI computing on NVIDIA DGX Spark. You'll learn how Arm-based Grace CPUs orchestrate long-running AI workflows including filesystem monitoring, semantic retrieval, runtime scheduling, and autonomous cognition, while Blackwell GPUs accelerate local language model inference and embeddings generation using Ollama. This Learning Path is a great fit if you want to understand how persistent AI runtimes operate continuously using coordinated CPU and GPU workloads.
+who_is_this_for: This is an advanced topic for developers building persistent local AI agent systems on NVIDIA DGX Spark who want to use Arm Grace CPUs for orchestration and Blackwell GPUs for local LLM inference and embeddings.
 
 learning_objectives:
     - Describe how persistent AI runtimes combine orchestration, semantic memory, and local inference
@@ -15,6 +19,7 @@ learning_objectives:
 
 prerequisites:
     - An NVIDIA DGX Spark system with at least 15 GB of available disk space
+    - Familiarity with running Python scripts and basic Docker container workflows
 
 author: Odin Shen
 
@@ -36,13 +41,13 @@ further_reading:
         link: https://www.nvidia.com/en-gb/products/workstations/dgx-spark/
         type: website
     - resource:
-        title: RAG Learning Path
-        link: https://learn.arm.com/learning-paths/laptops-and-desktops/dgx_spark_rag/
-        type: website
+        title: Build a RAG pipeline on Arm-based NVIDIA DGX Spark
+        link: /learning-paths/laptops-and-desktops/dgx_spark_rag/
+        type: Learning Path
     - resource:
-        title: Offline Voice Chatbot Learning Path
-        link: https://learn.arm.com/learning-paths/laptops-and-desktops/dgx_spark_voicechatbot/
-        type: documentation
+        title: Build an offline voice chatbot with faster-whisper and vLLM on DGX Spark
+        link: /learning-paths/laptops-and-desktops/dgx_spark_voicechatbot/
+        type: Learning Path
     - resource:
         title: Unlock quantized LLM performance on Arm-based NVIDIA DGX Spark
         link: /learning-paths/laptops-and-desktops/dgx_spark_llamacpp/
