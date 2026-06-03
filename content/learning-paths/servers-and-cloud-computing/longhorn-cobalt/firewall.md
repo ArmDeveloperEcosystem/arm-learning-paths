@@ -1,6 +1,6 @@
 ---
 title: Allow network access to the Longhorn Web UI on Azure
-description: Configure Azure Network Security Group inbound rules for Kubernetes API access, HTTP workloads, and the Longhorn web UI on an Azure Cobalt 100 virtual machine.
+description: Configure Azure Network Security Group inbound rules for Kubernetes API access, HTTP workloads, and the Longhorn web UI on an Arm64 Azure VM powered by Azure Cobalt 100.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -20,7 +20,7 @@ To expose the required TCP ports for Kubernetes and Longhorn, create an inbound 
 
 1. Navigate to the [Azure portal](https://portal.azure.com), go to **Virtual Machines**, and select your virtual machine.
 
-![Azure Portal Virtual Machines page with the target VM selected. Verify that the correct Azure Cobalt 100 virtual machine is selected before configuring network access.#center](images/virtual_machine.png "Azure Virtual Machine")
+![Azure Portal Virtual Machines page with the target VM selected. Verify that the correct Arm64 Azure VM powered by Azure Cobalt 100 is selected before configuring network access.#center](images/virtual_machine.png "Azure Virtual Machine")
 
 2. In the left menu, select **Networking**, then select **Network settings**.
 
@@ -49,6 +49,6 @@ This rule allows external access for port `80` for HTTP workloads, port `8080` f
 
 ## What you've learned and what's next
 
-You've now configured the Azure Network Security Group to allow external traffic for Kubernetes API access, HTTP workloads, and the Longhorn Web UI. These firewall rules allow secure remote management of the Azure Cobalt 100 virtual machine and external access to the Kubernetes storage dashboard.
+You've now configured the Azure Network Security Group to allow external traffic for Kubernetes API access, HTTP workloads, and the Longhorn Web UI. These firewall rules allow secure remote management of the Arm64 Azure VM powered by Azure Cobalt 100 and external access to the Kubernetes storage dashboard.
 
 Next, you'll install K3s Kubernetes and Longhorn on the virtual machine.

@@ -1,6 +1,6 @@
 ---
 title: Install and run Longhorn on a single-node Kubernetes cluster
-description: Install K3s and Longhorn on an Azure Cobalt 100 Arm64 virtual machine, verify the Longhorn pods, access the web UI, and configure a single-node replica count.
+description: Install K3s and Longhorn on an Arm64 Azure VM powered by Azure Cobalt 100, verify the Longhorn pods, access the web UI, and configure a single-node replica count.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -63,7 +63,7 @@ Active: active (running)
 
 ### Install K3s 
 
-K3s is a lightweight Kubernetes distribution suitable for a single-node Azure Cobalt 100 Arm64 VM.
+K3s is a lightweight Kubernetes distribution suitable for a single-node Arm64 Azure VM powered by Azure Cobalt 100.
 
 Install K3s:
 
@@ -212,13 +212,13 @@ Open the Longhorn web UI in your browser. Replace `<PUBLIC_IP>` with the public 
 http://<PUBLIC_IP>:8080
 ```
 
-![Longhorn UI Dashboard showing the cluster summary, storage schedulable capacity, volume health, and node status on the Azure Cobalt 100 Arm64 virtual machine. Verify that the Kubernetes node is schedulable, Longhorn storage is available, and the dashboard is accessible before proceeding to persistent volume configuration.#center](images/longhorn-ui.png "Longhorn UI Dashboard with storage and node summary")
+![Longhorn UI Dashboard showing the cluster summary, storage schedulable capacity, volume health, and node status on the Arm64 Azure VM powered by Azure Cobalt 100. Verify that the Kubernetes node is schedulable, Longhorn storage is available, and the dashboard is accessible before proceeding to persistent volume configuration.#center](images/longhorn-ui.png "Longhorn UI Dashboard with storage and node summary")
 
 In the Longhorn dashboard, you can view the number of volumes, available schedulable storage, node status, and overall storage health.
 
 ## Configure Longhorn for a single-node cluster
 
-By default, Longhorn expects multiple nodes and uses a higher replica count. Because you're using a single Azure Cobalt 100 VM in this Learning Path, configure the replica count to `1` so that volumes can be scheduled on a single node.
+By default, Longhorn expects multiple nodes and uses a higher replica count. Because you're using a single Arm64 Azure VM powered by Azure Cobalt 100 in this Learning Path, configure the replica count to `1` so that volumes can be scheduled on a single node.
 
 To configure the replica count, follow these steps:
 
@@ -226,7 +226,7 @@ To configure the replica count, follow these steps:
 2. Find the **Default Replica Count** setting and set both **V1 Data Engine** and **V2 Data Engine** to `1`. 
 3. Select **Save**.
 
-![Longhorn Settings page showing the Default Replica Count configuration for single-node Kubernetes deployment on Azure Cobalt 100 Arm64 virtual machine. Ensure both V1 and V2 Data Engine replica counts are configured to 1 before creating Persistent Volumes in the single-node Longhorn environment.#center](images/longhorn-replica.png "Longhorn Replica Configuration for Single-Node Kubernetes Cluster")
+![Longhorn Settings page showing the Default Replica Count configuration for a single-node Kubernetes deployment on an Arm64 Azure VM powered by Azure Cobalt 100. Ensure both V1 and V2 Data Engine replica counts are configured to 1 before creating Persistent Volumes in the single-node Longhorn environment.#center](images/longhorn-replica.png "Longhorn Replica Configuration for Single-Node Kubernetes Cluster")
 
 This configuration allows Longhorn volumes to be scheduled successfully on a single-node Kubernetes cluster.
 
@@ -251,6 +251,6 @@ The `longhorn` StorageClass confirms that Longhorn is available for dynamic pers
 
 ## What you've accomplished and what's next
 
-You now have Longhorn installed on an Azure Cobalt 100 Arm64 virtual machine with K3s. You've installed the required dependencies, enabled iSCSI, installed Longhorn, accessed the Longhorn Web UI, and configured the replica count for a single-node Kubernetes environment.
+You now have Longhorn installed with K3s on an Arm64 Azure VM powered by Azure Cobalt 100. You've installed the required dependencies, enabled iSCSI, installed Longhorn, accessed the Longhorn Web UI, and configured the replica count for a single-node Kubernetes environment.
 
 Next, you'll create persistent volume claims, deploy an application using Longhorn storage, validate data persistence, and benchmark storage performance using fio.

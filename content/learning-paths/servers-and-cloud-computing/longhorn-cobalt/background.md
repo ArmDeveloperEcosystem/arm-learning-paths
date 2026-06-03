@@ -13,6 +13,8 @@ Longhorn on Arm-based Azure Cobalt 100 processors provides lightweight, Kubernet
 
 Azure Cobalt 100 processors deliver dedicated physical cores per vCPU, providing predictable and consistent performance for Kubernetes storage workloads. This architecture complements Longhorn’s distributed block storage model and delivers stable storage performance for stateful applications running on Kubernetes.
 
+You’ll use this architecture in the following sections to install Longhorn on K3s, create a Longhorn-backed PersistentVolume, and validate storage behavior with fio.
+
 ## Azure Cobalt 100 Arm-based processor
 
 Azure’s Cobalt 100 is Microsoft’s first-generation, in-house Arm-based processor. Built on Arm Neoverse N2, Cobalt 100 is a 64-bit CPU that delivers strong performance and energy efficiency for cloud-native, scale-out Linux workloads. 
@@ -47,8 +49,6 @@ Longhorn provides several important capabilities for Kubernetes storage manageme
 - Stateful workload support: Enables databases, monitoring stacks, and analytics applications to run with persistent storage.
 
 Longhorn is widely used in Kubernetes environments to provide lightweight and reliable storage without requiring external Storage Area Network (SAN) or Network Attached Storage (NAS) infrastructure.
-
-In this Learning Path, you'll deploy Longhorn on an Azure Cobalt 100 Arm64 virtual machine using K3s. You'll configure Longhorn for a single-node Kubernetes cluster, create persistent volumes, validate storage persistence, and benchmark storage performance using fio.
 
 ## What you've learned and what's next
 

@@ -1,19 +1,19 @@
 ---
-title: Create an Azure Cobalt 100 Arm64 virtual machine
-description: Create an Azure Cobalt 100 Arm64 virtual machine with Ubuntu, SSH access, and HTTP access before installing K3s and Longhorn.
+title: Create an Arm64 Azure virtual machine powered by Azure Cobalt 100
+description: Create an Arm64 Azure virtual machine powered by Azure Cobalt 100 with Ubuntu, SSH access, and HTTP access before installing K3s and Longhorn.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Set up the Azure virtual machine
+## Set up an Azure virtual machine
 
 In this section, you'll use the Azure portal to create a virtual machine (VM) with the Arm-based Azure Cobalt 100 processor.
 
 The steps in this Learning Path focus on general-purpose virtual machines in the Dpsv6 series. For more information, see the [Microsoft Azure guide for the Dpsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series).
 
-While the steps to create this instance are included here for convenience, you can also see the [Deploy a Cobalt 100 virtual machine on Azure Learning Path](/learning-paths/servers-and-cloud-computing/cobalt/).
+While the steps to create this instance are included here for convenience, you can also see the [Deploy an Arm-based virtual machine on Azure with Cobalt 100 Learning Path](/learning-paths/servers-and-cloud-computing/cobalt/).
 
 ### Use the Azure portal to create an Arm-based virtual machine 
 
@@ -62,6 +62,6 @@ Your virtual machine should be ready and running in a few minutes. You can SSH i
 
 ## What you've accomplished and what's next
 
-You've now created an Azure Cobalt 100 Arm64 VM running Ubuntu 24.04 LTS with SSH and HTTP access configured. You'll use this VM to install Longhorn and manage persistent volumes on Kubernetes.
+You've now created an Arm64 Azure VM powered by Azure Cobalt 100 running Ubuntu 24.04 LTS with SSH and HTTP access configured. You'll use this VM to install Longhorn and manage persistent volumes on Kubernetes.
 
 Next, you'll open the additional ports required for Kubernetes and Longhorn access in the Azure Network Security Group.
