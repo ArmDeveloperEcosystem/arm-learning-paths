@@ -50,16 +50,10 @@ This rule allows external access for:
 
 5. After filling in the details, select **Add** to save the rule.
 
-You can now access the Longhorn Web UI externally using:
-
-```text
-http://<PUBLIC_IP>:8080
-```
-
 ## What you've learned and what's next
 
-You've now configured the Azure Network Security Group to allow external traffic for SSH, Kubernetes API access, HTTP workloads, and the Longhorn Web UI.
+You've now configured the Azure Network Security Group to allow external traffic for Kubernetes API access, HTTP workloads, and the Longhorn Web UI.
 
 These firewall rules allow secure remote management of the Azure Cobalt 100 virtual machine and external access to the Kubernetes storage dashboard.
 
-Next, you'll create Persistent Volume Claims, deploy workloads using Longhorn storage, and benchmark Kubernetes storage performance on ARM64 infrastructure.
+Next, you'll install K3s Kubernetes and Longhorn on the virtual machine, then deploy and configure persistent storage.

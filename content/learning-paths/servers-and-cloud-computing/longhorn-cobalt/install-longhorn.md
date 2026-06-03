@@ -57,7 +57,8 @@ sudo systemctl status iscsid
 The output should show that the service is active:
 
 ```output
-active (running)
+Loaded: loaded (/usr/lib/systemd/system/iscsid.service; enabled; preset: enabled)
+Active: active (running) 
 ```
 
 ### Install K3s Kubernetes
@@ -70,7 +71,7 @@ curl -sfL https://get.k3s.io | sh -
 
 ### Verify Kubernetes installation
 
-Check that the Kubernetes node is ready.
+Wait a few seconds for K3s to fully initialize, then check that the Kubernetes node is ready.
 
 ```bash
 sudo kubectl get nodes
@@ -82,6 +83,10 @@ The output is similar to:
 NAME             STATUS   ROLES                  AGE   VERSION
 longhorn-Arm64   Ready    control-plane,master   1m    v1.35.5+k3s1
 ```
+
+{{% notice Note %}}
+If the ROLES column shows `<none>` immediately after installation, wait 30 to 60 seconds and run the command again. Role labels are applied after the node completes initialization.
+{{% /notice %}}
 
 ### Configure kubectl access
 
@@ -129,31 +134,21 @@ NAME             STATUS   ROLES           AGE   VERSION
 longhorn-Arm64   Ready    control-plane   5s    v1.35.5+k3s1
 ```
 
-### Create Longhorn storage directory
+### Check available disk space
 
-Create a local directory that Longhorn can use for storing volume replicas on the VM.
-
-```bash
-sudo mkdir -p /longhorn
-```
-
-Set permissions for the directory:
-
-```bash
-sudo chmod 777 /longhorn
-```
-
-Verify available disk space:
+Verify that enough disk space is available on the virtual machine before creating Longhorn volumes. Longhorn stores volume replicas in `/var/lib/longhorn` by default.
 
 ```bash
 df -h
 ```
 
-This helps confirm that enough disk space is available before creating Longhorn volumes.
-
 ### Install Longhorn
 
 Deploy Longhorn into the Kubernetes cluster using the official Longhorn manifest.
+
+{{% notice Note %}}
+The following command uses Longhorn version 1.10.0. The same approach works with other versions. Replace the version in the URL with your version of choice. To find the latest version, see [Longhorn releases on GitHub](https://github.com/longhorn/longhorn/releases).
+{{% /notice %}}
 
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/v1.10.0/deploy/longhorn.yaml
@@ -161,13 +156,17 @@ kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/v1.10.0/dep
 
 ### Verify Longhorn installation
 
-Check the Longhorn pods in the `longhorn-system` namespace.
+Longhorn deploys several components including the manager, driver, UI, and CSI controllers. These take several minutes to fully start. Monitor the pod rollout in the `longhorn-system` namespace.
+
+```bash
+kubectl rollout status deployment/longhorn-driver-deployer -n longhorn-system
+```
+
+Once the deployment is ready, check that all Longhorn pods are running.
 
 ```bash
 kubectl get pods -n longhorn-system
 ```
-
-Wait until the pods are running. The output is similar to:
 
 ```output
 NAME                                                READY   STATUS    RESTARTS   AGE
@@ -193,11 +192,15 @@ longhorn-ui-77cdc466b5-dbsx5                        1/1     Running   0         
 
 ### Access the Longhorn UI
 
-Expose the Longhorn frontend service using port forwarding.
+Expose the Longhorn frontend service using port forwarding. Run this command in a dedicated terminal session, as it must remain active while you use the dashboard.
 
 ```bash
 kubectl -n longhorn-system port-forward --address 0.0.0.0 service/longhorn-frontend 8080:80
 ```
+
+{{% notice Note %}}
+The port-forward connection closes when the terminal session ends. If you lose access to the dashboard, run the command again in a new terminal.
+{{% /notice %}}
 
 Open the Longhorn Web UI in your browser. Replace `<PUBLIC_IP>` with the public IP address of your Azure VM.
 
@@ -211,32 +214,9 @@ In the Longhorn dashboard, you can view the number of volumes, available schedul
 
 ### Configure Longhorn for a single-node cluster
 
-By default, Longhorn expects multiple nodes and uses a higher replica count. Since this learning path uses a single Azure Cobalt 100 VM, configure the replica count as `1`.
+By default, Longhorn expects multiple nodes and uses a higher replica count. Since this Learning Path uses a single Azure Cobalt 100 VM, configure the replica count to `1` so that volumes can be scheduled on a single node.
 
-Inside the Longhorn UI, go to:
-
-```text
-Settings
-```
-
-Find the following setting:
-
-```text
-Default Replica Count
-```
-
-Update the values:
-
-```text
-V1 Data Engine: 1
-V2 Data Engine: 1
-```
-
-Click:
-
-```text
-Save
-```
+In the Longhorn UI, select **Settings**. Find the **Default Replica Count** setting and set both **V1 Data Engine** and **V2 Data Engine** to `1`. Select **Save**.
 
 ![Longhorn Settings page showing the Default Replica Count configuration for single-node Kubernetes deployment on Azure Cobalt 100 Arm64 virtual machine. Ensure both V1 and V2 Data Engine replica counts are configured to 1 before creating Persistent Volumes in the single-node Longhorn environment.#center](images/longhorn-replica.png "Longhorn Replica Configuration for Single-Node Kubernetes Cluster")
 
