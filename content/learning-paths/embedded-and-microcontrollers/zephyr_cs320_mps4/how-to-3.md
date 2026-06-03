@@ -1,5 +1,5 @@
 ---
-title: Build and run the hello_world sample on the Corstone-320 MPS4 platform
+title: Build and run the hello_world sample on Arm Corstone-320 MPS4
 description: Build the Zephyr hello_world sample for the Corstone-320 MPS4 FPGA target, split the ELF image, and run the application on the MPS4 board.
 weight: 4
 
