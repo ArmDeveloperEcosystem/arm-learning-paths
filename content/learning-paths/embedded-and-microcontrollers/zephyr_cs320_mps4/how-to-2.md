@@ -302,6 +302,6 @@ CONFIG_ROMSTART_RELOCATION_ROM=y
 ```
 ## What you've accomplished and what's next
 
-You've now learned about Arm Corstone-320 MPS4, then created and updated board support files, including device tree and Kconfig configuration, to port Zephyr RTOS to the Corstone-320 MPS4 platform.
+You've now created and updated board support files, including device tree and Kconfig configuration, to port Zephyr RTOS to the Corstone-320 MPS4 platform.
 
 Next, you'll build the `hello_world` sample for your new board target.
