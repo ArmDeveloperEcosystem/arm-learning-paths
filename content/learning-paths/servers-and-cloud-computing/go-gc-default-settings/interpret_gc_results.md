@@ -81,74 +81,133 @@ mem_default.out
 mem_default_alloc_top.txt
 ```
 
-Example of changes you can experiment with include:
+## Experiment with Code Changes that influence GC Behavior
+Now that you have a baseline, you can experiment with code changes that influence GC behavior. For example, you could try:
 
-### Simple changes that can improve GC performance
+## Challenge 1
 
-1. **Reduce the payload size**
-   ```go
-   payload := strings.Repeat(
-       "name=arm&runtime=go&gc=default&value=12345;",
-       512,
-   )
-   ```
-   A smaller payload creates fewer temporary objects and less garbage each iteration.
+You just found out that the payload size this benchmark is intended to represent is actually only 128 records instead of 2048. What changes can we make from the baseline to test whether optimizing for this smaller workload affects GC frequency, pause times, and overall application performance?
 
-2. **Move `strings.Split(payload, ";")` outside the benchmark loop**
-   ```go
-   parts := strings.Split(payload, ";")
+### Idea: Reduce the payload size
 
-   b.ResetTimer()
+### How
 
-   for i := 0; i < b.N; i++ {
-       ...
-   }
-   ```
-   This avoids repeatedly allocating the same slice of records on every iteration.
+```go
+payload := strings.Repeat(
+    "name=arm&runtime=go&gc=default&value=12345;",
+    512,
+)
+```
 
-3. **Reuse the output slice**
-   ```go
-   out := make([]string, 0, len(parts))
+### Why
 
-   for i := 0; i < b.N; i++ {
-       out = out[:0]
-       ...
-   }
-   ```
-   Reusing the backing array reduces allocations and GC pressure.
+A smaller payload creates fewer temporary objects and less garbage each iteration.
 
-4. **Replace `strings.SplitN()` with `strings.IndexByte()`**
-   ```go
-   idx := strings.IndexByte(part, '=')
-   if idx >= 0 {
-       key := part[:idx]
-       value := part[idx+1:]
-       ...
-   }
-   ```
-   This avoids allocating a temporary `[]string` for every record processed.
+---
 
-5. **Avoid creating new strings in the hot loop**
-   ```go
-   out = append(out, fields[0])
-   ```
-   Instead of building `"key:length"` strings, store existing strings or simpler values to reduce allocations.
+## Challenge 2
 
-6. **Reduce the number of records processed**
-   ```go
-   payload := strings.Repeat(
-       "name=arm&runtime=go&gc=default&value=12345;",
-       1024, // instead of 2048
-   )
-   ```
-   Fewer records means less allocation work and fewer GC cycles.
+After profiling the application, you discover that the input payload rarely changes between requests. What modifications can we make to reuse preprocessing work and determine whether reducing repeated allocations improves GC behavior and throughput?
 
-### Biggest GC wins
+### Idea: Move `strings.Split(payload, ";")` outside the benchmark loop
 
-For this benchmark, the largest improvements typically come from:
+### How
 
-- Moving `strings.Split(payload, ";")` outside the benchmark loop.
-- Reusing the `out` slice instead of allocating a new one every iteration.
-- Replacing `strings.SplitN()` with `strings.IndexByte()`.
+```go
+parts := strings.Split(payload, ";")
 
-When you test code changes, compare against this baseline before changing Go runtime settings. If you later tune `GOGC`, `GOMEMLIMIT`, `GODEBUG`, or `GOMAXPROCS`, treat that as a separate experiment because it changes the runtime operating mode.
+b.ResetTimer()
+
+for i := 0; i < b.N; i++ {
+    ...
+}
+```
+
+### Why
+
+This avoids repeatedly allocating the same slice of records on every iteration.
+
+---
+
+## Challenge 3
+
+The benchmark currently creates a new output buffer for every operation, but production code processes millions of requests using the same worker. How can we modify the benchmark to reuse memory and evaluate the impact on GC activity and memory consumption?
+
+### Idea: Reuse the output slice
+
+### How
+
+```go
+out := make([]string, 0, len(parts))
+
+for i := 0; i < b.N; i++ {
+    out = out[:0]
+    ...
+}
+```
+
+### Why
+
+Reusing the backing array reduces allocations and GC pressure.
+
+---
+
+## Challenge 4
+
+A CPU profile shows that string parsing is one of the hottest code paths in the application. What changes can we make to reduce temporary allocations during parsing and measure whether this reduces GC overhead?
+
+### Idea: Replace `strings.SplitN()` with `strings.IndexByte()`
+
+### How
+
+```go
+idx := strings.IndexByte(part, '=')
+if idx >= 0 {
+    key := part[:idx]
+    value := part[idx+1:]
+    ...
+}
+```
+
+### Why
+
+This avoids allocating a temporary `[]string` for every record processed.
+
+---
+
+## Challenge 5
+
+Product requirements change and the application no longer needs to generate derived `"key:length"` strings. What modifications can we make to avoid unnecessary string allocations and test their effect on garbage collection performance?
+
+### Idea: Avoid creating new strings in the hot loop
+
+### How
+
+```go
+out = append(out, fields[0])
+```
+
+### Why
+
+Instead of building `"key:length"` strings, store existing strings or simpler values to reduce allocations.
+
+---
+
+## Challenge 6
+
+Usage analytics show that most customers send payloads that are half the size represented by the current benchmark. How can we adjust the workload to better reflect real-world traffic and evaluate whether the resulting reduction in allocations improves GC efficiency?
+
+### Idea: Reduce the number of records processed
+
+### How
+
+```go
+payload := strings.Repeat(
+    "name=arm&runtime=go&gc=default&value=12345;",
+    1024,
+)
+```
+
+### Why
+
+Fewer records means less allocation work and fewer GC cycles.
