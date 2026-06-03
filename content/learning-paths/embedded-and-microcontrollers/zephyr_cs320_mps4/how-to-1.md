@@ -146,6 +146,6 @@ export GNUARMEMB_TOOLCHAIN_PATH=$HOME/arm-gnu-toolchain-15.2.rel1-x86_64-arm-non
 
 ## What you've accomplished and what's next
 
-You've now set up a build environment to build Zephyr. 
+You've now set up a development environment to build Zephyr. 
 
-Next, you'll add Zephyr board support files for the Corstone-320 MPS4 platform.
+Next, you'll add board support files to port Zephyr to the Corstone-320 MPS4 platform.
