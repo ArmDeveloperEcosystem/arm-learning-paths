@@ -7,7 +7,7 @@ weight: 3
 layout: learningpathall
 ---
 
-## Arm Corstone-320 MPS4 platform 
+## Understand the Arm Corstone-320 MPS4 platform 
 
 The Arm Corstone SSE-320 FPGA Image for MPS4 (FI101) provides an FPGA implementation that runs on the MPS4 board. The image includes an Arm Cortex-M85 processor, an Arm Ethos-U85 NPU, and an Arm CoreLink DMA-350 direct memory access (DMA) controller. With this setup, you get a practical environment for developing and evaluating embedded applications, including machine learning workloads.
 
@@ -18,7 +18,7 @@ Download the latest Corstone-320 FPGA image and review the platform documentatio
 - [Arm MPS4 FPGA Prototyping Board Technical Reference Manual](https://developer.arm.com/documentation/102577/latest/)
 - [Arm Corstone SSE-320 Example Subsystem Software Programmers Guide](https://developer.arm.com/documentation/109759/latest/)
 
-## Zephyr board support architecture
+## Understand Zephyr board support architecture
 
 Zephyr organizes hardware support in the following hierarchy:
 
