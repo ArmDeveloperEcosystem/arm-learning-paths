@@ -61,6 +61,6 @@ Your virtual machine should be ready and running in a few minutes. You can SSH i
 
 ## What you've accomplished and what's next
 
-You've created an Azure Cobalt 100 Arm64 virtual machine running Ubuntu 24.04 LTS with K3s Kubernetes installed and networking configured for Longhorn access. The Kubernetes environment is now ready for deploying and managing persistent storage workloads.
+You've created an Azure Cobalt 100 Arm64 virtual machine running Ubuntu 24.04 LTS with SSH and HTTP access configured. The virtual machine is now ready for the next steps.
 
-Next, you'll install Longhorn on the Kubernetes cluster, configure the Longhorn Web UI, create Persistent Volumes, and validate Kubernetes-native storage functionality on Azure Cobalt 100 Arm64 infrastructure.
+Next, you'll open the additional ports required for Kubernetes and Longhorn access in the Azure Network Security Group.

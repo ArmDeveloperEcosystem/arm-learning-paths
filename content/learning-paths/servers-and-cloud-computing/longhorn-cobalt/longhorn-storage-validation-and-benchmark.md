@@ -197,7 +197,7 @@ The fio pod will install the benchmarking utility and keep the container running
 
 ### Open fio container shell
 
-Open a shell inside the fio container.
+Open a shell inside the fio container. The following commands in this section run inside the container, not on the host VM.
 
 ```bash
 kubectl exec -it fio-test -- bash
@@ -244,15 +244,13 @@ benchmark: (groupid=0, jobs=2): err= 0: pid=3344: Tue May 26 04:06:33 2026
   write: IOPS=40.5k, BW=158MiB/s (166MB/s)(10.0GiB/64649msec)
 ```
 
-The benchmark validates storage performance and confirms that Longhorn volumes are functioning correctly on the Azure Cobalt 100 Arm64 virtual machine.
+After the benchmark completes, exit the container shell.
 
-You should observe:
+```bash
+exit
+```
 
-- PVC successfully provisioned
-- Longhorn storage mounted correctly
-- Data persists after pod recreation
-- fio benchmark completes successfully
-- Stable storage performance on Arm64 Kubernetes
+The benchmark confirms that Longhorn volumes are functioning correctly on the Azure Cobalt 100 Arm64 virtual machine.
 
 ## What you've learned
 
