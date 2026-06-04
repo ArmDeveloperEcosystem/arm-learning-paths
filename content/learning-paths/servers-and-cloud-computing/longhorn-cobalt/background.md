@@ -46,7 +46,7 @@ Longhorn provides several important capabilities for Kubernetes storage manageme
 - Snapshot and backup support: Supports volume snapshots and backup operations.
 - Stateful workload support: Enables databases, monitoring stacks, and analytics applications to run with persistent storage.
 
-It is widely used in Kubernetes environments to provide lightweight and reliable storage without requiring external Storage Area Network (SAN) or Network Attached Storage (NAS) infrastructure.
+It's widely used in Kubernetes environments to provide lightweight and reliable storage without requiring external Storage Area Network (SAN) or Network Attached Storage (NAS) infrastructure.
 
 To learn more about Longhorn, see the official [Longhorn documentation](https://longhorn.io/docs/).
 
