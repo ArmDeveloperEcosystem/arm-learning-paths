@@ -33,14 +33,9 @@ Keycloak integrates with web applications, APIs, Kubernetes platforms, microserv
 
 To learn more, see the official [Keycloak documentation](https://www.keycloak.org/documentation).
 
-Keycloak provides several important capabilities for authentication and security management:
+Keycloak provides several important capabilities for authentication and security management. Its Single Sign-On (SSO) support lets users authenticate once and access multiple applications without logging in again. Centralized Identity Management means you can manage users, roles, groups, and authentication policies from a single platform, while OAuth2 and OpenID Connect support simplifies secure API and application authentication workflows.
 
-- Single Sign-On (SSO): Enables users to authenticate once and access multiple applications securely.
-- Centralized Identity Management: Manages users, roles, groups, and authentication policies from a single platform.
-- OAuth2 and OpenID Connect Support: Simplifies secure API and application authentication workflows.
-- Multi-factor Authentication (MFA): Improves account security using additional authentication methods.
-- User Federation: Integrates with enterprise identity systems such as LDAP and Active Directory.
-- Role-Based Access Control (RBAC): Controls user permissions and application access securely.
+Keycloak also supports Multi-factor Authentication (MFA) for stronger account security, User Federation for integrating with enterprise identity systems such as LDAP and Active Directory, and Role-Based Access Control (RBAC) to control user permissions and application access.
 
 In this Learning Path, you'll deploy Keycloak on an Azure Cobalt 100 Arm64 virtual machine and configure PostgreSQL as the backend database. You'll create realms, users, and OAuth2/OpenID Connect clients, then integrate a Flask application with Keycloak authentication.
 

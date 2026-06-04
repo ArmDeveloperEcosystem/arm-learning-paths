@@ -59,6 +59,16 @@ Your virtual machine should be ready and running in a few minutes. You can SSH i
 
 {{% notice Note %}}To learn more about Arm-based virtual machines in Azure, see "Getting Started with Microsoft Azure" in [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure/).{{% /notice %}}
 
+### Connect to your virtual machine
+
+Use the private key file you downloaded and the public IP address shown in the Azure portal to connect to your virtual machine.
+
+```bash
+ssh -i <your-key-name>.pem azureuser@YOUR_PUBLIC_IP
+```
+
+Replace `<your-key-name>` with the name of your SSH key pair and `YOUR_PUBLIC_IP` with the public IP address shown in the Azure portal after deployment.
+
 ## What you've accomplished and what's next
 
 You've created an Azure Cobalt 100 Arm64 virtual machine running Ubuntu 24.04 LTS with SSH authentication configured. The virtual machine is now ready for installing PostgreSQL, Keycloak, and the Flask OAuth2 demo application.

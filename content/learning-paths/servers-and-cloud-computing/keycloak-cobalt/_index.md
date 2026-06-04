@@ -28,7 +28,7 @@ author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
-subjects: Containers and Virtualization
+subjects: Web
 cloud_service_providers:
   - Microsoft Azure
 
