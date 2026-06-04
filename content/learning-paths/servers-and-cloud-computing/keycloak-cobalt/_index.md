@@ -1,6 +1,10 @@
 ---
 title: Deploy Keycloak on Azure Cobalt 100 Arm64 virtual machines for identity and access management
 
+draft: true
+cascade:
+    draft: true
+    
 description: Learn how to install and configure Keycloak on an Azure Cobalt 100 Arm64 virtual machine, integrate it with PostgreSQL, configure OAuth2/OpenID Connect authentication, and secure applications using centralized identity management.
 
 minutes_to_complete: 90
