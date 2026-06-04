@@ -1,18 +1,24 @@
 ---
-title: Build a Lightweight Shell on Cortex-M with Zephyr RTOS
+title: Create an interactive shell for Zephyr RTOS on Cortex-M
+
+draft: true
+cascade:
+    draft: true
 
 minutes_to_complete: 30
 
-who_is_this_for: This learning path is for embedded developers targeting Arm Cortex-M microcontrollers who want a small, configurable command-line shell (CLI) for bring-up, diagnostics, and interactive testing using Zephyr RTOS. You will use VS Code with the Workbench for Zephyr extension to build, flash, and debug on supported boards.
+who_is_this_for: This is an introductory topic for embedded developers who want to add an interactive command-line shell to a Zephyr RTOS application on Arm Cortex-M.
 
 learning_objectives:
     - Enable and tailor Zephyr Shell (Kconfig/prj.conf) to produce a minimal CLI footprint
-    - Build, flash, and debug the shell-enabled Zephyr app on an Arm Cortex-M board (UART/RTT logging, breakpoints)
+    - Build and flash shell-enabled Zephyr apps using MQTT and UART shell backends on an Arm Cortex-M board
+    - Use the Zephyr Shell for board bring-up, diagnostics, and interactive testing
 
 prerequisites:
     - Basic familiarity with embedded C programming
-    - Visual Studio Code with the Workbench for Zephyr extension installed and configured. Follow the [Build Zephyr projects with Workbench for Zephyr in VS Code](/learning-paths/embedded-and-microcontrollers/zephyr_vsworkbench/) Learning Path if you have not done this yet.
-    - A Zephyr-supported Arm Cortex-M board (for example, NXP FRDM-MCXN947) 
+    - Visual Studio Code with the Workbench for Zephyr extension installed and configured
+    - Docker Desktop, Docker Engine, or another Docker-compatible runtime installed on your host computer
+    - A Zephyr-supported Arm Cortex-M board (for example, NXP FRDM-MCXN947)
     - Windows 10+ (64-bit), macOS with Homebrew, or Linux (preferably Ubuntu 20.04+)
 
 author: 
@@ -39,6 +45,10 @@ further_reading:
         title: Workbench for Zephyr Official Website
         link: https://z-workbench.com/
         type: website
+    - resource:
+        title: Zephyr Shell subsystem documentation
+        link: https://docs.zephyrproject.org/latest/services/shell/index.html
+        type: documentation
     - resource:
         title: AC6 Zephyr Training
         link: https://www.ac6-training.com/en/cours.php/cat_oRT/ref_oRT5/zephyr-rtos-programming
