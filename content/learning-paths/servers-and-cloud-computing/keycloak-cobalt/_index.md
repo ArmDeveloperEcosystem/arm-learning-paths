@@ -29,7 +29,7 @@ author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
-subjects: Security
+subjects: Web
 cloud_service_providers:
   - Microsoft Azure
 
