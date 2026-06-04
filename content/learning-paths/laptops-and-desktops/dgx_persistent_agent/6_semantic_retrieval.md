@@ -1,5 +1,6 @@
 ---
-title: Add semantic retrieval and contextual reasoning to the Hermes Agent
+title: Add semantic retrieval and contextual reasoning to Hermes Agent
+description: Add semantic retrieval to Hermes Agent so questions search Qdrant memory and use retrieved context for local model responses.
 weight: 7
 layout: "learningpathall"
 ---
@@ -14,7 +15,7 @@ The runtime can already ingest documents, summarize them, generate embeddings, a
 
 The workflow becomes:
 
-```output
+```text
 /workspace/query.txt
     -> Hermes embeds the question
     -> Qdrant returns relevant memories
@@ -43,7 +44,7 @@ The runtime keeps the same fixed memory configuration:
 | Qdrant collection | `workspace_memory` |
 | Retrieval limit | `3` |
 
-Hermes will watch for a query file at:
+Hermes watches for a query file at:
 
 ```text
 /workspace/query.txt
@@ -315,7 +316,7 @@ After adding semantic retrieval and contextual reasoning to Hermes, verify that 
 
 ### Create test memory
 
-In terminal 2, create a few new documents so Qdrant contains useful semantic memory.
+In a second terminal, create a few new documents so Qdrant contains useful semantic memory.
 
 For each document, write the file in `/tmp` first and then move it into `workspace/inbox/`. This gives Hermes a completed file when the `on_created()` event fires.
 
@@ -357,7 +358,7 @@ mv /tmp/semantic-memory-note.txt \
 ~/dgx-hermes-agent/workspace/inbox/semantic-memory-note.txt
 ```
 
-Watch terminal 1 until each document is summarized, embedded, and stored.
+Watch the terminal running Hermes logs until each document is summarized, embedded, and stored.
 
 The output is similar to:
 
@@ -477,7 +478,7 @@ echo "Why does the runtime need semantic memory?" \
 
 Hermes embeds the question and Qdrant retrieves relevant summaries. Hermes then assembles those summaries into context, and Ollama generates an answer grounded in the retrieved memory.
 
-The logs should include a retrieved memory from the semantic memory document that you created earlier.
+The logs include a retrieved memory from the semantic memory document that you created earlier.
 
 The output is similar to:
 

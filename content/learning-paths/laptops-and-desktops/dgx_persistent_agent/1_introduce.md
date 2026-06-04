@@ -1,5 +1,6 @@
 ---
-title: Understand persistent AI runtime architecture
+title: Expplore persistent AI runtime architecture on NVIDIA DGX Spark
+description: Explore the persistent AI runtime architecture for NVIDIA DGX Spark, including Hermes Agent orchestration, Ollama inference, Qdrant memory, and CPU/GPU responsibilities.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -8,13 +9,15 @@ layout: learningpathall
 
 ## Persistent AI runtime capabilities
 
-In this Learning Path, you'll build a persistent local AI runtime on NVIDIA [DGX Spark](https://www.nvidia.com/en-gb/products/workstations/dgx-spark/). The implementation is validated on DGX Spark, but the architecture also applies to other Arm Cortex-A platforms that can run containerized services and local AI runtimes.
+In this Learning Path, you'll build a persistent local AI runtime on NVIDIA [DGX Spark](https://www.nvidia.com/en-gb/products/workstations/dgx-spark/). The implementation is validated on DGX Spark, but the architecture can also apply to other Arm Cortex-A platforms that can run containerized services and local AI runtimes.
 
-The final system is not a single chatbot process. It is a set of local services that run continuously, share a workspace, react to file events, generate summaries, create embeddings, store vector memory, retrieve context, and periodically reason about the state of the workspace.
+The final system isn't a single chatbot process. It's a set of local services that run continuously, share a workspace, react to file events, generate summaries, create embeddings, store vector memory, retrieve context, and periodically reason about the state of the workspace.
 
 The core idea is that AI systems are orchestration systems, not just inference systems.
 
-DGX Spark is well suited to this type of workload because it combines Arm CPU orchestration with local GPU acceleration. In the [Grace Blackwell architecture](https://learn.arm.com/learning-paths/laptops-and-desktops/dgx_spark_llamacpp/1_gb10_introduction/), the Arm Grace CPU coordinates background services, filesystem events, scheduling, document processing, metadata handling, and service-to-service communication. The Blackwell GPU accelerates local LLM inference, token generation, summarization, and embedding generation.
+DGX Spark is well suited to this type of workload because it combines Arm CPU orchestration with local GPU acceleration. In the [Grace Blackwell architecture](/learning-paths/laptops-and-desktops/dgx_spark_llamacpp/1_gb10_introduction/), the Arm Grace CPU coordinates background services, filesystem events, scheduling, document processing, metadata handling, and service-to-service communication. 
+
+The Blackwell GPU accelerates local LLM inference, token generation, summarization, and embedding generation.
 
 By the end of this Learning Path, you'll have a local runtime with these capabilities:
 

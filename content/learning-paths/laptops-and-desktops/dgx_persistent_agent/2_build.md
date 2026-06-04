@@ -1,5 +1,6 @@
 ---
 title: Build the DGX Spark AI runtime foundation
+description: Build the DGX Spark AI runtime foundation by installing Docker, enabling GPU containers, creating a shared workspace, and starting Ollama, Qdrant, and Open WebUI.
 weight: 3
 layout: "learningpathall"
 ---
@@ -28,7 +29,7 @@ uname -m
 
 The expected output is:
 
-```text
+```output
 aarch64
 ```
 
@@ -46,7 +47,7 @@ nvidia-smi
 
 The output is similar to:
 
-```text
+```output
 nvidia-smi
 Wed May 20 18:12:05 2026       
 +-----------------------------------------------------------------------------------------+
@@ -72,7 +73,7 @@ Wed May 20 18:12:05 2026
 |    0   N/A  N/A           85940      G   ...m Performix/arm-performix-gui         54MiB |
 +-----------------------------------------------------------------------------------------+
 ```
-Confirm that the command shows the GPU name (NVIDIA GB10), driver version, and CUDA version. Make a note of the CUDA version, as you will use a matching container image when verifying GPU passthrough in the next step.
+Confirm that the command shows the GPU name (NVIDIA GB10), driver version, and CUDA version. Make a note of the CUDA version, as you'll use a matching container image when verifying GPU passthrough in the next step.
 
 ### Install Docker
 
@@ -97,7 +98,7 @@ Verify Docker is working:
 docker run hello-world
 ```
 
-You should see a message confirming that Docker is installed and working.
+You'll see a message confirming that Docker is installed and working.
 
 ### Install NVIDIA Container Toolkit
 
@@ -151,7 +152,7 @@ If you have not pulled this image before, Docker downloads it before running `nv
 
 The output is similar to:
 
-```text
+```output
 Unable to find image 'nvcr.io/nvidia/cuda:13.0.1-devel-ubuntu24.04' locally
 13.0.1-devel-ubuntu24.04: Pulling from nvidia/cuda
 03f66a4525ea: Pull complete 
@@ -231,7 +232,7 @@ compose \
 qdrant
 ```
 
-The workspace should now look like this:
+The workspace now looks like this:
 
 ```text
 dgx-hermes-agent/
@@ -364,7 +365,7 @@ docker ps
 
 The output is similar to:
 
-```text
+```output
 NAME         IMAGE                                COMMAND               SERVICE      CREATED         STATUS                            PORTS
 ollama       ollama/ollama:latest                 "/bin/ollama serve"   ollama       5 seconds ago   Up 4 seconds                      0.0.0.0:11434->11434/tcp, [::]:11434->11434/tcp
 open-webui   ghcr.io/open-webui/open-webui:main   "bash start.sh"       open-webui   4 seconds ago   Up 4 seconds (health: starting)   0.0.0.0:3000->8080/tcp, [::]:3000->8080/tcp
@@ -392,7 +393,7 @@ getent hosts registry.ollama.ai
 
 The output is similar to:
 
-```text
+```output
 root@367b013fd34c:/# getent hosts registry.ollama.ai
 2606:4700:3036::6815:4be3 registry.ollama.ai
 2606:4700:3034::ac43:b6e5 registry.ollama.ai
@@ -469,7 +470,7 @@ You can also monitor GPU activity from another terminal when the model is runnin
 nvtop
 ```
 
-During inference, you should see GPU utilization rise on the Blackwell GPU as the model processes the prompt and generates tokens. The change in GPU utilization confirms the model is running on the GPU rather than falling back to the CPU.
+During inference, you'll see GPU utilization rise on the Blackwell GPU as the model processes the prompt and generates tokens. The change in GPU utilization shows that the model is running on the GPU rather than falling back to the CPU.
 
 This step shows that local inference is available before Hermes begins calling Ollama programmatically.
 
@@ -481,7 +482,7 @@ Open a browser and navigate to:
 http://localhost:3000
 ```
 
-On first launch, Open WebUI presents a setup screen asking for a name and email address to create a local admin account. The email doesn't need to be real and no data leaves your system. Enter any values and continue to the main interface.
+On first launch, Open WebUI presents a setup screen asking for a name and email address to create a local admin account. The email can be a placeholder and no data leaves your system. Enter any values and continue to the main interface.
 
 To verify that Ollama is reachable from the host, navigate to:
 
@@ -529,7 +530,7 @@ cat /workspace/inbox/test.txt
 
 The output is similar to:
 
-```text
+```output
 drwxrwxr-x 2 1001 1001 4096 May 20 18:16 config
 drwxrwxr-x 2 1001 1001 4096 May 20 18:37 inbox
 drwxrwxr-x 2 1001 1001 4096 May 20 18:16 logs
@@ -539,7 +540,7 @@ drwxrwxr-x 2 1001 1001 4096 May 20 18:16 processed
 
 The file contains the following:
 
-```text
+```output
 Arm CPUs orchestrate persistent AI workflows.
 ```
 

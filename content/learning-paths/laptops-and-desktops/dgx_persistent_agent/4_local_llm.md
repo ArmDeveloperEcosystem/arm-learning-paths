@@ -1,5 +1,6 @@
 ---
-title: Add local LLM inference to the Hermes Agent
+title: Add local LLM inference to Hermes Agent
+description: Connect Hermes Agent to Ollama so new workspace files trigger local LLM summarization on DGX Spark.
 weight: 5
 layout: "learningpathall"
 ---
@@ -10,11 +11,11 @@ In this section, you'll connect Hermes Agent to Ollama.
 
 This step turns Hermes from a file watcher into an inference orchestrator. Hermes still controls the workflow, but it now sends document content to Ollama and uses the model response as part of the runtime output.
 
-The runtime already watches `workspace/inbox/` and reacts when a file is created. You'll now extend that workflow so Hermes sends file content to a local language model and prints an AI-generated summary.
+The runtime already watches `workspace/inbox/` and reacts when a file is created. You'll now extend that workflow so Hermes sends file content to a local large language model (LLM) and prints an AI-generated summary.
 
 The workflow becomes:
 
-```output
+```text
 workspace/inbox document
     -> Hermes on_created() handler
     -> Hermes calls Ollama
@@ -29,7 +30,7 @@ Hermes reaches Ollama through the Docker Compose network.
 
 In the Hermes Compose service, you added this environment variable earlier:
 
-```output
+```yaml
 environment:
   - OLLAMA_HOST=http://ollama:11434
 ```
@@ -43,7 +44,7 @@ cd ~/dgx-hermes-agent/compose
 docker ps
 ```
 
-You should see both `ollama` and `hermes` running.
+You'll see both `ollama` and `hermes` running.
 
 ### Verify the local language model
 
@@ -214,7 +215,9 @@ mv /tmp/ai-runtime-note.txt \
 ~/dgx-hermes-agent/workspace/inbox/ai-runtime-note.txt
 ```
 
-Return to terminal 1 to see the Hermes log output. You should see output similar to:
+Return to terminal 1 to see the Hermes log output. 
+
+The output similar to:
 
 ```output
 [Agent] New file detected:
@@ -232,7 +235,7 @@ The generated summary text will vary because it is produced by the local model.
 
 ### Verify GPU-accelerated inference
 
-To observe GPU activity during inference, keep terminal 1 open with the Hermes log stream running. In terminal 2, schedule a new file to be created after a short delay, then start `nvtop` immediately:
+To observe GPU activity during inference, keep a terminal open with the Hermes log stream running. In another terminal, schedule a new file to be created after a short delay, then start `nvtop` immediately:
 
 ```bash
 (
@@ -249,7 +252,7 @@ mv /tmp/gpu-inference-test.txt \
 nvtop
 ```
 
-The background command creates the file after five seconds, giving `nvtop` time to start before Ollama begins inference. During summarization, `nvtop` should show GPU activity from the Ollama model runtime. Watch terminal 1 to see the Hermes log output as inference runs.
+The background command creates the file after five seconds, giving `nvtop` time to start before Ollama begins inference. During summarization, `nvtop` shows GPU activity from the Ollama model runtime. Watch the terminal running Hermes logs to see the Hermes log output as inference runs.
 
 Press `q` to quit `nvtop` after reviewing the GPU activity.
 
@@ -265,4 +268,4 @@ The runtime has moved from file detection to event-driven AI summarization.
 
 Next, you'll add persistent semantic memory with embeddings and Qdrant.
 
-Before moving to the next section, press `Ctrl+C` in terminal 1 to stop the Hermes log stream. In the next section, you'll rebuild the Hermes container and run `docker logs -f hermes` again.
+Before moving to the next section, press `Ctrl+C` in the terminal running Hermes logs to stop the Hermes log stream. In the next section, you'll rebuild the Hermes container and run `docker logs -f hermes` again.

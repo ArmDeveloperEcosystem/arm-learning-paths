@@ -1,18 +1,19 @@
 ---
-title: Deploy Hermes orchestration runtime
+title: Deploy Hermes Agent as an orchestration runtime
+description: Deploy Hermes Agent as a containerized orchestration runtime that watches a shared workspace and logs file events on DGX Spark.
 weight: 4
 layout: "learningpathall"
 ---
 
-## Set up Hermes Agent
+## Add Hermes Agent to the runtime stack
 
 In this section, you'll add Hermes Agent to the runtime stack.
 
-The purpose of Hermes Agent is to act as the orchestration layer for the local AI runtime. It watches the workspace, detects runtime events, and coordinates the next action without requiring a user to manually run each step.
+Hermes Agent acts as the orchestration layer for the local AI runtime. It watches the workspace, detects runtime events, and coordinates the next action without requiring a user to manually run each step.
 
 Hermes is the CPU-side orchestration runtime. It runs continuously, watches the shared workspace, and reacts when new files are created. This is the first step toward a persistent local AI agent.
 
-In this section, Hermes doesn't call a language model yet. You'll first build the event-driven runtime foundation, where a new file in `workspace/inbox/` triggers a filesystem event, Hermes handles it, and a content preview is printed to the logs.
+In this section, Hermes doesn't call a language model yet. You'll first build the event-driven runtime foundation, where a new file in `workspace/inbox/` triggers a filesystem event, Hermes handles it, and prints a content preview to the logs.
 
 In later sections, you'll add local inference, persistent memory, semantic retrieval, and autonomous cognition.
 
@@ -30,9 +31,9 @@ Create the Hermes source directory:
 mkdir -p hermes
 ```
 
-The project directory should now look like this:
+The project directory now looks like this:
 
-```output
+```text
 dgx-hermes-agent/
 |-- compose/
 |-- hermes/
@@ -206,14 +207,14 @@ docker ps
 
 The output is similar to:
 
-```text
+```output
 CONTAINER ID   IMAGE                                COMMAND                CREATED         STATUS                 PORTS                                                             NAMES
 8439b1e36b6c   compose-hermes                       "python -u agent.py"   2 seconds ago   Up 2 seconds                                                                             hermes
 8cb62495cb7b   ghcr.io/open-webui/open-webui:main   "bash start.sh"        3 hours ago     Up 3 hours (healthy)   0.0.0.0:3000->8080/tcp, [::]:3000->8080/tcp                       open-webui
 367b013fd34c   ollama/ollama:latest                 "/bin/ollama serve"    3 hours ago     Up 3 hours             0.0.0.0:11434->11434/tcp, [::]:11434->11434/tcp                   ollama
 e770401a4a0f   qdrant/qdrant:latest                 "./entrypoint.sh"      3 hours ago     Up 3 hours             0.0.0.0:6333-6334->6333-6334/tcp, [::]:6333-6334->6333-6334/tcp   qdrant
 ```
-You should see `hermes` alongside the existing runtime services.
+You'll see `hermes` alongside the existing runtime services.
 
 ## Validate the Hermes runtime 
 
