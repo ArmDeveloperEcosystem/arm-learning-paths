@@ -1,5 +1,6 @@
 ---
 title: Deploy Keycloak on Azure Cobalt 100 Arm64 virtual machines for identity and access management
+weight: 1
 
 draft: true
 cascade:
@@ -28,7 +29,7 @@ author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
-subjects: Containers and Virtualization
+subjects: Security
 cloud_service_providers:
   - Microsoft Azure
 
