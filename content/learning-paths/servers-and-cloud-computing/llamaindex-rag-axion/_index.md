@@ -1,10 +1,6 @@
 ---
 title: Build RAG applications with LlamaIndex on Google Cloud C4A Axion VM
 
-draft: true
-cascade:
-    draft: true
-    
 description: Set up LlamaIndex on Google Cloud C4A Axion Arm VMs running SUSE Linux to build browser-based Retrieval-Augmented Generation (RAG) applications using local LLMs, vector databases, and FastAPI.
 
 minutes_to_complete: 30
@@ -42,25 +38,33 @@ tools_software_languages:
 operatingsystems:
   - Linux
 
-# ================================================================================
-#       FIXED, DO NOT MODIFY
-# ================================================================================
-
 further_reading:
-  - resource:
+    - resource:
       title: LlamaIndex official documentation
       link: https://docs.llamaindex.ai/en/stable/
       type: documentation
-
-  - resource:
+    - resource:
       title: LlamaIndex GitHub repository
       link: https://github.com/run-llama/llama_index
       type: documentation
-
-  - resource:
+    - resource:
       title: Ollama documentation
       link: https://ollama.com/library
       type: documentation
+    - resource:
+        title: Introducing Google Axion Processors, our new Arm-based CPUs
+        link: https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu
+        type: documentation
+    - resource:
+        title: Getting started with Google Cloud Platform
+        link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/google/
+        type: documentation
+
+
+
+# ================================================================================
+#       FIXED, DO NOT MODIFY
+# ================================================================================
 
 weight: 1
 layout: "learningpathall"

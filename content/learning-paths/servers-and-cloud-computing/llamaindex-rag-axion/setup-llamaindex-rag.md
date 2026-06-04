@@ -174,8 +174,10 @@ ollama version is 0.24.0
 
 ## Start Ollama
 
+When Ollama is installed via the official script, it sets up a systemd background service and automatically starts the service. Use the following command to check the status of ollama service.
+
 ```bash
-ollama serve
+sudo systemctl status ollama
 ```
 
 Leave Terminal B open and don't run any other commands in it. Ollama must stay running throughout the rest of this Learning Path.

@@ -11,8 +11,6 @@ Google Axion C4A is a family of Arm-based virtual machines built on Google’s c
 
 The C4A series provides a cost-effective alternative to x86 virtual machines while using the scalability and performance benefits of the Arm architecture in Google Cloud.
 
-To learn more, see the Google blog [Introducing Google Axion Processors, our new Arm-based CPUs](https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu).
-
 ## LlamaIndex for RAG and context-aware AI applications on Arm
 
 LlamaIndex is an open-source framework designed to build context-aware AI applications using Large Language Models (LLMs). It's widely used for Retrieval-Augmented Generation (RAG), document indexing, vector search, semantic retrieval, and integrating custom data sources with LLMs.
@@ -28,8 +26,6 @@ LlamaIndex provides a unified framework with components such as:
 Running LlamaIndex on Google Axion C4A Arm-based infrastructure enables efficient execution of AI and RAG workloads by using multi-core Arm CPUs and optimized memory performance. This results in improved performance per watt, reduced infrastructure costs, and better scalability for browser-based AI applications and local inference pipelines.
 
 Common use cases include browser-based AI assistants, document search applications, semantic retrieval systems, vector database integrations, enterprise knowledge bases, and context-aware chatbot applications.
-
-To learn more, see the [LlamaIndex documentation](https://docs.llamaindex.ai/en/stable/) and the [LlamaIndex GitHub repository](https://github.com/run-llama/llama_index).
 
 ## What you've learned and what's next
 

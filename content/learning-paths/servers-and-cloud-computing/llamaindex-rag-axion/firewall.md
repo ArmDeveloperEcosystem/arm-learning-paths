@@ -10,8 +10,6 @@ layout: learningpathall
 
 Create a firewall rule in Google Cloud Console to expose the required port for the browser-based LlamaIndex RAG application.
 
-{{% notice Note %}}For help with GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).{{% /notice %}}
-
 ## Configure the firewall rule in Google Cloud Console
 
 To configure a firewall rule for the LlamaIndex browser-based RAG application:
@@ -40,7 +38,9 @@ Use port mapping **8000** for the browser-based LlamaIndex RAG application runni
 
 ![Google Cloud Console Protocols and ports section with TCP selected and port 8000 entered#center](images/network-port.png "Setting the LlamaIndex browser application port in the firewall rule")
 
-7. Select **Create**.
+7. Also add port 22 in **TCP** checkbox for ssh access.
+
+8. Select **Create**.
 
 ## What you've accomplished and what's next
 
