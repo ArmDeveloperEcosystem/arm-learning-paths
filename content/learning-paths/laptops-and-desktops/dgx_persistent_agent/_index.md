@@ -1,9 +1,5 @@
 ---
-title: Orchestrate a persistent local AI agent with Hermes on DGX Spark
-
-draft: true
-cascade:
-    draft: true
+title: Orchestrate a persistent local AI agent with Hermes on NVIDIA DGX Spark
 
 description: Learn how to build a continuously running local AI agent on NVIDIA DGX Spark by combining Hermes Agent, Ollama, and Qdrant to handle event-driven document ingestion, semantic memory, and contextual retrieval using Arm Grace CPUs.
 

@@ -1,16 +1,16 @@
 ---
-title: Add local LLM inference
+title: Add local LLM inference to the Hermes Agent
 weight: 5
 layout: "learningpathall"
 ---
 
-## Add local LLM inference
+## Connect Hermes Agent to Ollama
 
-In this section, you will connect Hermes Agent to Ollama.
+In this section, you'll connect Hermes Agent to Ollama.
 
 This step turns Hermes from a file watcher into an inference orchestrator. Hermes still controls the workflow, but it now sends document content to Ollama and uses the model response as part of the runtime output.
 
-The runtime already watches `workspace/inbox/` and reacts when a file is created. You will now extend that workflow so Hermes sends file content to a local language model and prints an AI-generated summary.
+The runtime already watches `workspace/inbox/` and reacts when a file is created. You'll now extend that workflow so Hermes sends file content to a local language model and prints an AI-generated summary.
 
 The workflow becomes:
 
@@ -23,11 +23,11 @@ workspace/inbox document
 
 This introduces the first GPU-accelerated step in the persistent runtime.
 
-## Configure Ollama runtime access
+### Configure Ollama runtime access
 
 Hermes reaches Ollama through the Docker Compose network.
 
-In the Hermes Compose service, this environment variable was added earlier:
+In the Hermes Compose service, you added this environment variable earlier:
 
 ```output
 environment:
@@ -45,9 +45,9 @@ docker ps
 
 You should see both `ollama` and `hermes` running.
 
-## Verify the local language model
+### Verify the local language model
 
-You pulled `qwen2.5:7b` when you built the runtime foundation. In this section, run a quick inference test to confirm that the model is still available inside the Ollama container:
+You pulled `qwen2.5:7b` when you built the runtime foundation. Run an inference test to confirm that the model is still available inside the Ollama container:
 
 ```bash
 docker exec -it ollama ollama run qwen2.5:7b
@@ -61,7 +61,7 @@ Summarize persistent AI runtimes in one sentence.
 
 Type `/bye` to exit the model session.
 
-## Add inference support to Hermes
+### Add inference support to Hermes
 
 Open and edit the file `~/dgx-hermes-agent/hermes/agent.py`.
 
@@ -158,13 +158,13 @@ if __name__ == "__main__":
     observer.join()
 ```
 
-## Code trace
+#### Understand the code trace
 
 The updated agent imports the `ollama` package and reads `OLLAMA_HOST` from the container environment, with `http://ollama:11434` as the fallback. An `ollama.Client` is created at startup so the connection is ready before any files arrive.
 
 When a new file is detected, `summarize_file()` sends the content to `qwen2.5:7b` using the chat API with a system prompt that requests a three-point bullet summary. The input is capped at 4000 characters to keep requests manageable and avoid sending very large files to the model.
 
-## Rebuild Hermes
+### Rebuild Hermes to connect to Ollama
 
 Rebuild the Hermes container:
 
@@ -194,7 +194,11 @@ Expected startup output:
 
 Leave this terminal open with the log stream running and open a second terminal for the next step.
 
-## Validate AI summarization
+## Validate Hermes connection to Ollama
+
+After rebuilding Hermes, verify that it's connected to Ollama as expected.
+
+### Validate AI summarization
 
 Create a new file in another terminal. Write the file outside the inbox first, then move it into `workspace/inbox/` so Hermes sees a completed file.
 
@@ -226,7 +230,7 @@ Return to terminal 1 to see the Hermes log output. You should see output similar
 
 The generated summary text will vary because it is produced by the local model.
 
-## Verify GPU-accelerated inference
+### Verify GPU-accelerated inference
 
 To observe GPU activity during inference, keep terminal 1 open with the Hermes log stream running. In terminal 2, schedule a new file to be created after a short delay, then start `nvtop` immediately:
 
@@ -249,20 +253,16 @@ The background command creates the file after five seconds, giving `nvtop` time 
 
 Press `q` to quit `nvtop` after reviewing the GPU activity.
 
-## Runtime responsibilities
+## Understand CPU and GPU responsibilities
 
-Hermes monitors the workspace, reads new files, prepares prompts, calls the Ollama API, and logs the results. Ollama loads the model, runs token generation, and returns the generated summary.
+The Arm Grace CPU coordinates the full workflow: watching the workspace, handling filesystem events, reading files, preparing model requests, and sending API calls to Ollama. The Blackwell GPU accelerates the model workload, running LLM inference, generating tokens, and producing the summary. This pattern repeats throughout the Learning Path. Hermes orchestrates and Ollama executes.
 
-## CPU and GPU responsibilities
+## What you've accomplished and what's next
 
-The Arm Grace CPU coordinates the full workflow: watching the workspace, handling filesystem events, reading files, preparing model requests, and sending API calls to Ollama. The Blackwell GPU accelerates the model workload, running LLM inference, generating tokens, and producing the summary. This pattern repeats throughout the Learning Path. Hermes orchestrates; Ollama executes.
+You've now extended Hermes with local LLM inference through the Ollama Python SDK and the `OLLAMA_HOST` runtime setting. New files in the workspace can now trigger summarization with `qwen2.5:7b`, and you can validate GPU activity with `nvtop`.
 
-## Summary
+The runtime has moved from file detection to event-driven AI summarization.
 
-Before moving to the next section, press `Ctrl+C` in terminal 1 to stop the Hermes log stream. The next section rebuilds the Hermes container and runs `docker logs -f hermes` again.
+Next, you'll add persistent semantic memory with embeddings and Qdrant.
 
-You extended Hermes with local LLM inference through the Ollama Python SDK and the `OLLAMA_HOST` runtime setting. New files in the workspace can now trigger summarization with `qwen2.5:7b`, and GPU activity can be validated with `nvtop`.
-
-The runtime has moved from simple file detection to event-driven AI summarization.
-
-Next, you will add persistent semantic memory with embeddings and Qdrant.
+Before moving to the next section, press `Ctrl+C` in terminal 1 to stop the Hermes log stream. In the next section, you'll rebuild the Hermes container and run `docker logs -f hermes` again.

@@ -6,17 +6,17 @@ weight: 2
 layout: learningpathall
 ---
 
-## Understand persistent AI runtime architecture
+## Persistent AI runtime capabilities
 
-You will build a persistent local AI runtime on NVIDIA [DGX Spark](https://www.nvidia.com/en-gb/products/workstations/dgx-spark/). The implementation is validated on DGX Spark, but the architecture also applies to other Arm Cortex-A platforms that can run containerized services and local AI runtimes.
+In this Learning Path, you'll build a persistent local AI runtime on NVIDIA [DGX Spark](https://www.nvidia.com/en-gb/products/workstations/dgx-spark/). The implementation is validated on DGX Spark, but the architecture also applies to other Arm Cortex-A platforms that can run containerized services and local AI runtimes.
 
 The final system is not a single chatbot process. It is a set of local services that run continuously, share a workspace, react to file events, generate summaries, create embeddings, store vector memory, retrieve context, and periodically reason about the state of the workspace.
 
-The core idea is: **AI systems are orchestration systems, not just inference systems.**
+The core idea is that AI systems are orchestration systems, not just inference systems.
 
 DGX Spark is well suited to this type of workload because it combines Arm CPU orchestration with local GPU acceleration. In the [Grace Blackwell architecture](https://learn.arm.com/learning-paths/laptops-and-desktops/dgx_spark_llamacpp/1_gb10_introduction/), the Arm Grace CPU coordinates background services, filesystem events, scheduling, document processing, metadata handling, and service-to-service communication. The Blackwell GPU accelerates local LLM inference, token generation, summarization, and embedding generation.
 
-By the end of this Learning Path, you will have a local runtime with these capabilities:
+By the end of this Learning Path, you'll have a local runtime with these capabilities:
 
 | Capability | Runtime component |
 |---|---|
@@ -27,7 +27,7 @@ By the end of this Learning Path, you will have a local runtime with these capab
 | Semantic retrieval | Hermes Agent + Qdrant + Ollama |
 | Autonomous workspace cognition | Hermes Agent + Ollama |
 
-## Runtime architecture overview
+## Persistent AI runtime components
 
 The runtime uses four containerized services:
 
@@ -70,21 +70,19 @@ The important architectural pattern is separation of responsibilities. Each serv
 | Memory layer | Qdrant | Stores and searches vector memory |
 | Orchestration layer | Hermes Agent | Watches files, schedules work, coordinates services |
 
-## Runtime components
-
 ### Hermes runtime
 
-Hermes is the orchestration runtime you will build.
+Hermes is the orchestration runtime you'll build.
 
-It runs as a persistent Python service inside a container. It watches the shared workspace, detects new files, reads documents, sends requests to Ollama, stores memory in Qdrant, performs semantic retrieval, and later generates autonomous workspace summaries. Hermes doesn't run the language model itself. It coordinates AI workflows across local services.
+Hermes runs as a persistent Python service inside a container. It watches the shared workspace, detects new files, and reads documents. It sends requests to Ollama, stores memory in Qdrant, performs semantic retrieval, and later generates autonomous workspace summaries. Hermes doesn't run the language model itself. Instead, it coordinates AI workflows across local services.
 
-This is the main CPU-side workload in the system. The Arm CPU keeps the runtime alive, schedules background loops, tracks file events, moves data between services, and manages runtime state.
+The Hermes runtime is the main CPU-side workload in the system. The Arm CPU keeps the runtime alive, schedules background loops, tracks file events, moves data between services, and manages runtime state.
 
 ### Ollama runtime
 
 Ollama provides the local inference runtime. It's a convenient way to run local models and expose a simple API, but the architecture isn't limited to Ollama.
 
-Conceptually, Ollama is one possible inference backend. Hermes can orchestrate any local or remote inference service that exposes a compatible API, such as llama.cpp server, vLLM, a custom PyTorch service, or another model runtime.
+Conceptually, Ollama is one possible inference backend. Hermes can orchestrate any local or remote inference service that exposes a compatible API, such as `llama.cpp` server, vLLM, a custom PyTorch service, or another model runtime.
 
 Hermes uses Ollama for two types of model calls:
 
@@ -106,7 +104,7 @@ Open WebUI provides a local browser interface for interacting with the Ollama ru
 
 Use it to confirm that local models are available, test prompts, or explore the inference runtime in a browser. The persistent AI runtime is still coordinated by Hermes.
 
-## Shared workspace
+## Shared workspace structure
 
 The services use a shared workspace mounted into the containers.
 
@@ -169,7 +167,7 @@ This is different from storing plain text files and searching for keywords. Vect
 
 ## Autonomous workspace cognition
 
-The final stage of this Learning Path adds autonomous workspace cognition.
+In the final stage of this Learning Path, you'll add autonomous workspace cognition.
 
 Instead of responding only when a new file appears or when a query is submitted, Hermes periodically reviews the accumulated semantic memory and generates a workspace-level summary.
 
@@ -185,7 +183,7 @@ Runtime behavior is controlled by a configuration file:
 /workspace/config/runtime.json
 ```
 
-This allows the runtime to adjust settings such as supported file extensions, retrieval depth, summary interval, and summary output path without hardcoding every behavior into the agent.
+This file allows the runtime to adjust settings such as supported file extensions, retrieval depth, summary interval, and summary output path without hardcoding every behavior into the agent.
 
 ## CPU and GPU responsibilities
 
@@ -195,6 +193,8 @@ The Arm Grace CPU handles the persistent runtime side: watching the filesystem, 
 
 This separation is central to the architecture. The GPU accelerates model-heavy operations, while the CPU keeps the runtime organized and continuously operating.
 
-## Next step
+## What you've learned and what's next
 
-Next, you will build the DGX Spark runtime foundation: Docker, GPU-enabled containers, the shared workspace, and the initial Ollama, Qdrant, and Open WebUI services.
+You've now learned about the persistent AI runtime architecture that you'll be building on NVIDIA DGX Spark. You've explored the different components and workflows of this architecture, and how the CPU and GPU perform different roles.
+
+Next, you'll build the DGX Spark runtime foundation: Docker, GPU-enabled containers, the shared workspace, and the initial Ollama, Qdrant, and Open WebUI services.
