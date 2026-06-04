@@ -1,24 +1,20 @@
 ---
-title: Deploy Longhorn on Azure Cobalt 100 Arm64 virtual machines for Kubernetes persistent storage
-
-draft: true
-cascade:
-    draft: true
+title: Use Longhorn to deploy persistent storage for Kubernetes workloads on Arm-based Azure virtual machines
     
-description: Learn how to install and configure Longhorn on an Azure Cobalt 100 Arm64 virtual machine, deploy Kubernetes persistent storage using K3s, create Persistent Volumes, and benchmark storage performance for cloud-native workloads.
+description: Learn how to install and configure Longhorn on an Arm64 Azure virtual machine powered by Azure Cobalt 100, deploy Kubernetes persistent storage using Longhorn on K3s, create persistent volumes, and benchmark storage performance for cloud-native workloads.
 
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for developers, DevOps engineers, platform engineers, and Kubernetes administrators who want to deploy persistent storage for Kubernetes workloads using Longhorn on Arm-based cloud infrastructure.
 
 learning_objectives:
-    - Install and configure K3s Kubernetes on Azure Cobalt 100 Arm64 virtual machines
-    - Deploy and configure Longhorn distributed block storage on Arm64
-    - Create and manage Kubernetes Persistent Volumes using Longhorn
+    - Install and configure K3s Kubernetes on an Arm64 Azure virtual machine powered by Azure Cobalt 100
+    - Install and configure Longhorn distributed block storage on Arm64
+    - Create and manage Kubernetes persistent volumes using Longhorn
     - Benchmark Kubernetes storage performance using fio
 
 prerequisites:
-  - A [Microsoft Azure account](https://azure.microsoft.com/) with access to Cobalt 100 based instances (Dpsv6)
+  - A [Microsoft Azure account](https://azure.microsoft.com/) with access to Cobalt 100-based instances (Dpsv6)
   - Basic knowledge of Linux command-line operations
   - Familiarity with SSH and remote server access
   - Basic understanding of Kubernetes and containerized workloads
