@@ -38,8 +38,6 @@ It provides persistent storage volumes for Kubernetes workloads and enables appl
 
 Longhorn integrates directly with Kubernetes through the Container Storage Interface (CSI) and provides dynamic volume provisioning, storage management, and persistent storage capabilities for stateful workloads.
 
-To learn more, see the official [Longhorn documentation](https://longhorn.io/docs/).
-
 Longhorn provides several important capabilities for Kubernetes storage management:
 
 - Persistent volumes: Dynamically provisions Kubernetes persistent volumes for stateful workloads.
@@ -48,7 +46,9 @@ Longhorn provides several important capabilities for Kubernetes storage manageme
 - Snapshot and backup support: Supports volume snapshots and backup operations.
 - Stateful workload support: Enables databases, monitoring stacks, and analytics applications to run with persistent storage.
 
-Longhorn is widely used in Kubernetes environments to provide lightweight and reliable storage without requiring external Storage Area Network (SAN) or Network Attached Storage (NAS) infrastructure.
+It is widely used in Kubernetes environments to provide lightweight and reliable storage without requiring external Storage Area Network (SAN) or Network Attached Storage (NAS) infrastructure.
+
+To learn more about Longhorn, see the official [Longhorn documentation](https://longhorn.io/docs/).
 
 ## What you've learned and what's next
 
