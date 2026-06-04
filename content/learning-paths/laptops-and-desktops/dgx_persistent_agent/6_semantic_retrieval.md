@@ -1,5 +1,5 @@
 ---
-title: Add semantic retrieval and contextual reasoning to Hermes Agent
+title: Add semantic retrieval and contextual reasoning to the Hermes Agent
 weight: 7
 layout: "learningpathall"
 ---

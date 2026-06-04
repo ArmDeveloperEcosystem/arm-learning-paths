@@ -1,5 +1,5 @@
 ---
-title: Build persistent semantic memory
+title: Build persistent semantic memory for the Hermes agent
 weight: 6
 layout: "learningpathall"
 ---

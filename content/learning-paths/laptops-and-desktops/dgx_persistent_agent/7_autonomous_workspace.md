@@ -1,5 +1,5 @@
 ---
-title: Add autonomous workspace cognition to Hermes Agent
+title: Add autonomous workspace cognition to the Hermes Agent
 weight: 8
 layout: "learningpathall"
 ---
