@@ -42,16 +42,16 @@ To learn more, see the official [Longhorn documentation](https://longhorn.io/doc
 
 Longhorn provides several important capabilities for Kubernetes storage management:
 
-- Persistent volumes: Dynamically provisions Kubernetes Persistent Volumes for stateful workloads.
+- Persistent volumes: Dynamically provisions Kubernetes persistent volumes for stateful workloads.
 - Distributed storage: Replicates and manages block storage volumes across Kubernetes nodes.
-- CSI integration: Integrates natively with Kubernetes using the Container Storage Interface.
-- Snapshot and backup support: Supports volume snapshots and backup operations for Kubernetes workloads.
+- CSI integration: Integrates natively with Kubernetes using CSI.
+- Snapshot and backup support: Supports volume snapshots and backup operations.
 - Stateful workload support: Enables databases, monitoring stacks, and analytics applications to run with persistent storage.
 
 Longhorn is widely used in Kubernetes environments to provide lightweight and reliable storage without requiring external Storage Area Network (SAN) or Network Attached Storage (NAS) infrastructure.
 
 ## What you've learned and what's next
 
-You now understand why Azure Cobalt 100 and Longhorn are a strong combination for Kubernetes-native persistent storage on Arm64 infrastructure.
+You now understand why Azure Cobalt 100 and Longhorn are a strong combination for Kubernetes-native persistent storage on Arm64 infrastructure. You also learned about the Kubernetes storage management capabilities that Longhorn provides.
 
 Next, you'll create a virtual machine with Azure Cobalt 100.

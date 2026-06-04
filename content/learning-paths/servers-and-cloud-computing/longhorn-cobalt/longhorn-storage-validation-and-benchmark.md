@@ -56,7 +56,7 @@ NAME           STATUS   VOLUME                                     CAPACITY   AC
 longhorn-pvc   Bound    pvc-14ab1c22-be1c-4706-b9bc-f5b228007814   5Gi        RWO            longhorn       <unset>                 7s
 ```
 
-The `Bound` status confirms that Longhorn successfully created and attached the Persistent Volume.
+The `Bound` status confirms that Longhorn successfully created and attached the persistent volume.
 
 ### Deploy a test NGINX application
 
@@ -92,7 +92,7 @@ This pod mounts the Longhorn volume inside the NGINX container and allows Kubern
 
 ### Verify the NGINX application pod
 
-Check that the NGINX pod is running successfully.
+Check that the NGINX pod is running successfully:
 
 ```bash
 kubectl get pods
@@ -107,13 +107,13 @@ nginx-longhorn   1/1     Running   0          31s
 
 ### Write data to the persistent volume
 
-Open a shell inside the running NGINX container.
+Open a shell inside the running NGINX container:
 
 ```bash
 kubectl exec -it nginx-longhorn -- bash
 ```
 
-Write sample data to the mounted Longhorn volume.
+Write sample data to the mounted Longhorn volume:
 
 ```bash
 echo "Longhorn Storage Working on Arm64" > /usr/share/nginx/html/index.html
@@ -153,7 +153,7 @@ The output is similar to:
 Longhorn Storage Working on Arm64
 ```
 
-This confirms that the data persists independently of the Kubernetes pod lifecycle.
+This output confirms that the data persists independently of the Kubernetes pod lifecycle.
 
 ## Run storage benchmark tests using fio
 
@@ -202,13 +202,13 @@ The fio pod will install the benchmarking utility and keep the container running
 
 ### Open fio container shell
 
-Open a shell inside the fio container. The following commands in this section run inside the container, not on the host VM.
+Open a shell inside the fio container:
 
 ```bash
 kubectl exec -it fio-test -- bash
 ```
 
-Verify that fio is installed correctly.
+Verify that fio is installed correctly:
 
 ```bash
 which fio
@@ -223,7 +223,7 @@ apt install -y fio
 
 ### Run fio storage benchmark
 
-Run a random write workload against the Longhorn-backed persistent volume:
+In the container, run a random write workload against the Longhorn-backed persistent volume:
 
 ```bash
 fio --name=benchmark \
@@ -255,10 +255,10 @@ After the benchmark completes, exit the container shell:
 exit
 ```
 
-The benchmark shows that Longhorn volumes are functioning correctly on the Arm64 Azure VM powered by Azure Cobalt 100.
+The benchmark shows that Longhorn volumes are functioning correctly on the VM.
 
 ## What you've accomplished
 
-You now have a working Longhorn-backed Persistent Volume running on Kubernetes with validated storage persistence and benchmarking results.
+You now have a working Longhorn-backed persistent volume running on Kubernetes with validated storage persistence and benchmarking results.
 
 Next, you can extend this workflow to deploy persistent storage for your Kubernetes workloads on Arm-based compute. 

@@ -138,7 +138,7 @@ longhorn-Arm64   Ready    control-plane   5s    v1.35.5+k3s1
 
 ### Check available disk space
 
-Verify that enough disk space is available on the virtual machine before creating Longhorn volumes. Longhorn stores volume replicas in `/var/lib/longhorn` by default.
+By default, Longhorn stores volume replicas in `/var/lib/longhorn`. Verify that enough disk space is available on the VM before creating Longhorn volumes: 
 
 ```bash
 df -h
@@ -218,7 +218,7 @@ In the Longhorn dashboard, you can view the number of volumes, available schedul
 
 ## Configure Longhorn for a single-node cluster
 
-By default, Longhorn expects multiple nodes and uses a higher replica count. Because you're using a single Arm64 Azure VM powered by Azure Cobalt 100 in this Learning Path, configure the replica count to `1` so that volumes can be scheduled on a single node.
+By default, Longhorn expects multiple nodes and uses a higher replica count. Because you're using a single VM in this Learning Path, configure the replica count to `1` so that volumes can be scheduled on a single node.
 
 To configure the replica count, follow these steps:
 
@@ -226,7 +226,7 @@ To configure the replica count, follow these steps:
 2. Find the **Default Replica Count** setting and set both **V1 Data Engine** and **V2 Data Engine** to `1`. 
 3. Select **Save**.
 
-![Longhorn Settings page showing the Default Replica Count configuration for a single-node Kubernetes deployment on an Arm64 Azure VM powered by Azure Cobalt 100. Ensure both V1 and V2 Data Engine replica counts are configured to 1 before creating Persistent Volumes in the single-node Longhorn environment.#center](images/longhorn-replica.png "Longhorn Replica Configuration for Single-Node Kubernetes Cluster")
+![Longhorn Settings page showing the Default Replica Count configuration for a single-node Kubernetes deployment on an Arm64 Azure VM powered by Azure Cobalt 100. Ensure both V1 and V2 Data Engine replica counts are configured to 1 before creating persistent volumes in the single-node Longhorn environment.#center](images/longhorn-replica.png "Longhorn Replica configuration for single-node Kubernetes cluster")
 
 This configuration allows Longhorn volumes to be scheduled successfully on a single-node Kubernetes cluster.
 
@@ -251,6 +251,6 @@ The `longhorn` StorageClass confirms that Longhorn is available for dynamic pers
 
 ## What you've accomplished and what's next
 
-You now have Longhorn installed with K3s on an Arm64 Azure VM powered by Azure Cobalt 100. You've installed the required dependencies, enabled iSCSI, installed Longhorn, accessed the Longhorn Web UI, and configured the replica count for a single-node Kubernetes environment.
+You've now installed required dependencies, enabled iSCSI, installed Longhorn, accessed the Longhorn Web UI, and configured the replica count for a single-node Kubernetes environment.
 
 Next, you'll create persistent volume claims, deploy an application using Longhorn storage, validate data persistence, and benchmark storage performance using fio.

@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Configure external traffic for Longhorn and Kubernetes
 
-To allow external traffic for the Longhorn web UI and Kubernetes services on an Azure virtual machine, open the required ports in the Network Security Group (NSG). The NSG can be attached to the virtual machine's network interface or subnet.
+To allow external traffic for the Longhorn web UI and Kubernetes services on an Azure virtual machine (VM), open the required ports in the Network Security Group (NSG). The NSG can be attached to the VM's network interface or subnet.
 
 {{% notice Note %}}For more information about Azure setup, see [Getting started with Microsoft Azure Platform](/learning-paths/servers-and-cloud-computing/csp/azure/).{{% /notice %}}
 
@@ -18,7 +18,7 @@ To allow external traffic for the Longhorn web UI and Kubernetes services on an 
 
 To expose the required TCP ports for Kubernetes and Longhorn, create an inbound firewall rule:
 
-1. Navigate to the [Azure portal](https://portal.azure.com), go to **Virtual Machines**, and select your virtual machine.
+1. Navigate to the [Azure portal](https://portal.azure.com), go to **Virtual Machines**, and select your VM.
 
 ![Azure Portal Virtual Machines page with the target VM selected. Verify that the correct Arm64 Azure VM powered by Azure Cobalt 100 is selected before configuring network access.#center](images/virtual_machine.png "Azure Virtual Machine")
 
@@ -45,10 +45,10 @@ This rule allows external access for port `80` for HTTP workloads, port `8080` f
 
 {{% notice Note %}}Setting **Source** to **My IP address** restricts access to these ports to your current machine only. If your public IP address changes or you access the environment from another system, update the source IP in the NSG rule accordingly.{{% /notice %}}
 
-5. After filling in the details, select **Add** to save the rule.
+5. After configuring the rule, select **Add** to save the rule.
 
 ## What you've learned and what's next
 
-You've now configured the Azure Network Security Group to allow external traffic for Kubernetes API access, HTTP workloads, and the Longhorn Web UI. These firewall rules allow secure remote management of the Arm64 Azure VM powered by Azure Cobalt 100 and external access to the Kubernetes storage dashboard.
+You've now configured the Azure Network Security Group to allow external traffic for Kubernetes API access, HTTP workloads, and the Longhorn Web UI. These firewall rules allow secure remote management of the VM and external access to the Kubernetes storage dashboard.
 
-Next, you'll install K3s Kubernetes and Longhorn on the virtual machine.
+Next, you'll install K3s Kubernetes and Longhorn on the VM.
