@@ -1,6 +1,6 @@
 ---
 title: Deploy OpenEBS on Azure Cobalt 100
-weight: 5
+weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -75,7 +75,7 @@ sudo chown $USER:$USER ~/.kube/config
 
 Set the Kubernetes configuration environment variable:
 
-```bahs
+```bash
 export KUBECONFIG=$HOME/.kube/config
 ```
 
@@ -128,15 +128,22 @@ Add the official OpenEBS Helm repository:
 helm repo add openebs https://openebs.github.io/openebs
 ```
 
-## Update Helm repositories:
+## Update Helm repositories
 
 ```bash
 helm repo update
 ```
 
+The output will look similar to:
+
+```output
+...Successfully got an update from the "openebs" chart repository
+Update Complete. ⎈Happy Helming!⎈
+```
+
 ## Deploy OpenEBS LocalPV
 
-Create the OpenEBS namespace
+Create the `openebs` namespace that will hold all OpenEBS components.
 
 ```bash
 kubectl create namespace openebs
@@ -145,6 +152,10 @@ kubectl create namespace openebs
 ## Install lightweight OpenEBS
 
 This deployment installs only OpenEBS LocalPV components and disables Mayastor, Loki, Alloy, and observability services, which are unnecessary for a single-node setup.
+
+{{% notice Note %}}
+The following command installs the latest available OpenEBS chart. To pin to a specific version, add `--version <version>` to the command. To find available versions, run `helm search repo openebs/openebs --versions`.
+{{% /notice %}}
 
 ```bash
 helm install openebs openebs/openebs \
@@ -157,7 +168,13 @@ helm install openebs openebs/openebs \
 
 ### Verify OpenEBS installation
 
-Check the OpenEBS pods:
+OpenEBS components take a moment to start. Wait for the pods to become ready before continuing.
+
+```bash
+kubectl wait --for=condition=Ready pod -l app=openebs-localpv-provisioner -n openebs --timeout=120s
+```
+
+Then check all OpenEBS pods are running.
 
 ```bash
 kubectl get pods -n openebs
@@ -233,4 +250,4 @@ At this stage, OpenEBS LocalPV is successfully configured and ready to provision
 
 You now have a lightweight single-node Kubernetes cluster running on Azure Cobalt 100 Arm64 with OpenEBS LocalPV configured as the default storage class.
 
-Next, you'll create Persistent Volume Claims (PVCs), deploy a stateful NGINX application, and validate persistent storage functionality using OpenEBS.
+Next, you'll create a Persistent Volume Claim, deploy a stateful NGINX application, validate data persistence, and expose the application so you can open the required port in the Azure Network Security Group.

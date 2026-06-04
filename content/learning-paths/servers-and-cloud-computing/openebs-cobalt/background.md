@@ -63,4 +63,4 @@ You'll learn how to:
 
 You now understand why Azure Cobalt 100 and OpenEBS are a strong combination for lightweight Kubernetes-native persistent storage on Arm64 infrastructure.
 
-Next, you'll configure Azure networking to allow external access to the Kubernetes application deployed with OpenEBS persistent storage.
+Next, you'll create an Azure Cobalt 100 Arm64 virtual machine to host the Kubernetes cluster.

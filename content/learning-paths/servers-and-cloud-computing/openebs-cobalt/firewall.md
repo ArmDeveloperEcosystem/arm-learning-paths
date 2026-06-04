@@ -1,6 +1,6 @@
 ---
 title: Allow access to the OpenEBS application on Azure
-weight: 5
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -14,9 +14,9 @@ The NSG can be attached to the virtual machine's network interface or subnet.
 
 {{% notice Note %}}For more information about Azure setup, see [Getting started with Microsoft Azure Platform](/learning-paths/servers-and-cloud-computing/csp/azure/).{{% /notice %}}
 
-## Verify the Kubernetes service
+## Identify the Kubernetes NodePort
 
-Check the Kubernetes service to identify the exposed NodePort:
+In the previous step you exposed the NGINX deployment as a NodePort service. Run the following command on your VM to find the port that Kubernetes assigned.
 
 ```bash
 kubectl get svc
@@ -29,7 +29,7 @@ NAME            TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)
 nginx-openebs   NodePort    10.x.x.x        <none>        80:31635/TCP
 ```
 
-In this example, the NodePort exposed externally is  `31635`.
+In this example, the NodePort exposed externally is `31635`. Kubernetes assigns this port dynamically, so your value may differ. Use the port shown in your own output in the firewall rule below.
 
 ### Add an inbound firewall rule in Azure
 
@@ -53,7 +53,7 @@ To expose the Kubernetes NodePort externally, create a firewall rule.
 - **Source IP addresses:** *(auto-populated with your current public IP)*  
 - **Source port ranges:** *  
 - **Destination:** Any  
-- **Destination port ranges:** **31635**  
+- **Destination port ranges:** **31635** *(replace with your actual NodePort)*  
 - **Protocol:** TCP  
 - **Action:** Allow  
 - **Name:** allow-openebs-port
@@ -62,12 +62,26 @@ To expose the Kubernetes NodePort externally, create a firewall rule.
 
 5. After filling in the details, select **Add** to save the rule.
 
-You can now access the Kubernetes application externally using the NodePort.
+## Access the application
 
-## What you've learned and what's next
+Open the following URL in your browser. Replace `<VM_PUBLIC_IP>` with the public IP address of your Azure virtual machine, and replace `31635` with your actual NodePort if it differs.
 
-You've now configured the Azure Network Security Group to allow external access to the Kubernetes application running with OpenEBS LocalPV persistent storage.
+```text
+http://<VM_PUBLIC_IP>:31635
+```
 
-This firewall rule enables external browser access to the application deployed on your single-node Kubernetes cluster running on Azure Cobalt 100 Arm64.
+You should see the content written to the Persistent Volume in the previous step:
 
-Next, you'll install OpenEBS LocalPV on Kubernetes and configure persistent storage provisioning for stateful workloads.
+```output
+OpenEBS on Azure Cobalt D4ps Arm64
+```
+
+![NGINX application running on Kubernetes with persistent storage provisioned by OpenEBS LocalPV on Azure Cobalt 100 Arm64.#center](images/openebs-browser.png "NGINX application using OpenEBS persistent storage")
+
+## What you've learned
+
+You've configured the Azure Network Security Group to allow external access to the Kubernetes application running with OpenEBS LocalPV persistent storage, and confirmed that the application is reachable from your browser.
+
+The persistent data written earlier survived pod recreation and is now served by a stateful NGINX workload backed by OpenEBS on an Azure Cobalt 100 Arm64 virtual machine.
+
+In this Learning Path, you provisioned an Azure Cobalt 100 Arm64 virtual machine, installed a single-node K3s Kubernetes cluster, deployed OpenEBS LocalPV as the default storage class, created persistent volumes for a stateful application, and validated that data survived pod restarts on Arm64 infrastructure.

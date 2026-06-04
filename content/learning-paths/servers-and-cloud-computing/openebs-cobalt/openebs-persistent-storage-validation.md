@@ -1,6 +1,6 @@
 ---
 title: Validate Persistent Storage with OpenEBS on Azure Cobalt 100
-weight: 6
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -36,6 +36,12 @@ Apply the PVC:
 
 ```bash
 kubectl apply -f pvc.yaml
+```
+
+The output is similar to:
+
+```output
+persistentvolumeclaim/openebs-pvc created
 ```
 
 Verify:
@@ -92,6 +98,11 @@ Deploy the application:
 
 ```bash
 kubectl apply -f nginx-openebs.yaml
+```
+
+The output is similar to:
+```output
+deployment.apps/nginx-openebs created
 ```
 
 ## Verify Kubernetes resources
@@ -201,7 +212,7 @@ This confirms that the Persistent Volume retains data even after the pod is dele
 
 ## Expose the application
 
-Create a NodePort service:
+Create a NodePort service to expose the NGINX application externally. Kubernetes assigns the external port dynamically — you'll use the assigned port to open the corresponding firewall rule in the next step.
 
 ```bash
 kubectl expose deployment nginx-openebs \
@@ -209,7 +220,7 @@ kubectl expose deployment nginx-openebs \
   --port 80
 ```
 
-Verify the service:
+Verify the service and note the NodePort assigned.
 
 ```bash
 kubectl get svc
@@ -219,25 +230,11 @@ The output is similar to:
 
 ```output
 NAME            TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
-kubernetes      ClusterIP   10.x.x.x      <none>        443/TCP        143m
-nginx-openebs   NodePort    10.x.x.x  <none>        80:31635/TCP   7s
+kubernetes      ClusterIP   10.x.x.x       <none>        443/TCP        143m
+nginx-openebs   NodePort    10.x.x.x       <none>        80:31635/TCP   7s
 ```
 
-## Access the application
-
-Open the following URL in your browser:
-
-```text
-http://<VM_PUBLIC_IP>:31635
-```
-
-You should see:
-
-```output
-OpenEBS on Azure Cobalt D4ps Arm64
-```
-
-![NGINX application running on Kubernetes with persistent storage provisioned by OpenEBS LocalPV on Azure Cobalt 100 Arm64.#center](images/openebs-browser.png "NGINX application using OpenEBS persistent storage")
+Note the NodePort value (in this example `31635`). You'll need it to create the Azure firewall rule in the next step. Your value may differ because Kubernetes assigns NodePorts dynamically.
 
 ## Cleanup resources
 
@@ -257,4 +254,6 @@ kubectl delete -f pvc.yaml
 
 You successfully created dynamically provisioned Persistent Volumes using OpenEBS LocalPV on a single-node Kubernetes cluster running on Azure Cobalt 100 Arm64.
 
-You validated persistent storage functionality by recreating application pods while preserving data across restarts.
+You validated persistent storage functionality by recreating application pods while preserving data across restarts, and exposed the application as a Kubernetes NodePort service.
+
+Next, you'll open the NodePort in the Azure Network Security Group so the application is reachable from your browser.
