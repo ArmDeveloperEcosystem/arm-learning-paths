@@ -21,6 +21,54 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-02T23:29:33Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: b975cc83674410ec50ca49a31744eee4ac5a63c994dd28e46ed84f7afda0568d
+  summary_generated_at: '2026-06-01T22:18:09Z'
+  summary_source_hash: b975cc83674410ec50ca49a31744eee4ac5a63c994dd28e46ed84f7afda0568d
+  faq_generated_at: '2026-06-02T23:29:33Z'
+  faq_source_hash: b975cc83674410ec50ca49a31744eee4ac5a63c994dd28e46ed84f7afda0568d
+  summary: >-
+    This Learning Path guides you through applying Profile-Guided Optimization (PGO) to C++ code
+    and measuring the impact with Google Benchmark on Windows on Arm. You start by understanding
+    PGO fundamentals, then create a baseline microbenchmark of an integer division function. Using
+    MSVC on a Windows on Arm system, you build an instrumented binary, run it to collect profile
+    data, and rebuild using that profile to produce a PGO-optimized binary. You then compare benchmark
+    results between the baseline and optimized builds. Prerequisites are C++ command-line experience
+    and a Windows on Arm machine with Visual Studio and the C++ desktop development tools installed.
+    Estimated time: about 30 minutes.
+  faqs:
+  - question: What do I need before running the steps?
+    answer: >-
+      You need a Windows on Arm machine with Visual Studio and the C++ desktop development tools
+      installed. Familiarity with C++ and compiling from the command line is expected.
+  - question: Which build environment should I use on Windows on Arm?
+    answer: >-
+      Open an ARM64 Native Tools Command Prompt and use PowerShell if instructed. Navigate to
+      your project directory and set any environment variables (such as VCPKG) as shown in the
+      steps.
+  - question: What does the baseline benchmark measure, and why was it chosen?
+    answer: >-
+      The baseline measures an integer division operation. Division is used because it typically
+      has higher latency and lower throughput than addition, subtraction, or multiplication, making
+      changes measurable.
+  - question: How do I apply PGO here, and how do I know it worked?
+    answer: >-
+      You build an instrumented binary, run it to collect profile data, and rebuild using that
+      profile with MSVC. You then run Google Benchmark to compare the optimized build against
+      the baseline and observe the measured differences.
+  - question: Do I need to install Google Benchmark before starting?
+    answer: >-
+      No. The path first introduces Google Benchmark, then guides you through setting up your
+      environment and running your first benchmark in the following section.
+# END generated_summary_faq
 
 author: Tom Dunkle
 

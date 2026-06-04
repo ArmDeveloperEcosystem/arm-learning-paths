@@ -19,6 +19,56 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T00:25:57Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 2e9ac8a3c73b7d3d59fe6ba20fb6d61fc2b7e5e9320aaadc20af0a8bbb3ff959
+  summary_generated_at: '2026-06-02T03:12:45Z'
+  summary_source_hash: 2e9ac8a3c73b7d3d59fe6ba20fb6d61fc2b7e5e9320aaadc20af0a8bbb3ff959
+  faq_generated_at: '2026-06-03T00:25:57Z'
+  faq_source_hash: 2e9ac8a3c73b7d3d59fe6ba20fb6d61fc2b7e5e9320aaadc20af0a8bbb3ff959
+  summary: >-
+    This Learning Path shows how to build, profile, and post-link optimize an Arm Linux executable
+    with BOLT. You will collect runtime profiles on an Arm-based target using Linux Perf (via
+    samples, ETM, or SPE), convert the profile into the format BOLT expects, and run BOLT to produce
+    a new optimized binary with improved code layout. You can work on a single Arm Linux system
+    or split tasks across two systems, using a second, more powerful Linux host for building and
+    running BOLT if preferred. Prerequisites include an Arm system running Linux with BOLT and
+    Linux Perf installed, a kernel version 5.15 or later (earlier versions may limit Perf features),
+    and for SPE, version 6.14 or later. Estimated time: about 30 minutes.
+  faqs:
+  - question: Do I need one or two Linux systems for this workflow?
+    answer: >-
+      You can complete all steps on a single Arm Linux system. Alternatively, profile on an Arm
+      Linux target system and use a second, more powerful Linux system to build the executable
+      and run BOLT.
+  - question: 'Which profiling option should I choose: samples, ETM, or SPE?'
+    answer: >-
+      Use the samples method for a straightforward profile, ETM if ETM tracing is available, or
+      SPE when you need SPE branch information. The SPE workflow requires Linux Perf version 6.14
+      or later; follow the dedicated steps for each option.
+  - question: What versions of Linux kernel and Perf are required before I start?
+    answer: >-
+      Use a Linux kernel version 5.15 or later; earlier kernels can work but some Perf features
+      may be limited or unavailable. For SPE, use Linux Perf version 6.14 or later, and the prerequisites
+      note that 6.14 or later is required for SPE.
+  - question: How do I collect the performance profile and verify that it worked?
+    answer: >-
+      For samples, run: perf record -e cycles:u -o perf.data -- ./executable. For ETM, run: perf
+      record -e cs_etm//u -o perf.data -- ./executable. Perf reports the total number of samples
+      and/or the perf.data size; confirm that perf.data is created.
+  - question: What does BOLT produce after profiling, and how is it used?
+    answer: >-
+      After collecting perf.data, convert the profile to BOLT’s format and run BOLT to create
+      a new optimized executable. The optimized binary is saved separately, and the expected outcome
+      is improved performance compared to the original executable.
+# END generated_summary_faq
 
 author: Jonathan Davies
 

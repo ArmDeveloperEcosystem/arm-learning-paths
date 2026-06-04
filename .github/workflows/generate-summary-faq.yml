@@ -21,14 +21,6 @@ on:
         required: true
         default: true
         type: boolean
-      generation_mode:
-        description: "Use ai for the Arm OpenAI proxy, or template for local deterministic fallback."
-        required: true
-        default: ai
-        type: choice
-        options:
-          - ai
-          - template
       openai_model:
         description: "Model or deployment name exposed by the configured OpenAI-compatible endpoint."
         required: true
@@ -71,13 +63,13 @@ jobs:
           INPUT_CATEGORY: ${{ inputs.category }}
           INPUT_LIMIT: ${{ inputs.limit }}
           INPUT_REQUIRE_FLAG: ${{ inputs.require_flag }}
-          INPUT_GENERATION_MODE: ${{ inputs.generation_mode }}
           INPUT_OPENAI_MODEL: ${{ inputs.openai_model }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_BASE_URL: ${{ vars.OPENAI_BASE_URL || 'https://openai-api-proxy.geo.arm.com/api/providers/openai/v1/responses/' }}
           INPUT_DRY_RUN: ${{ inputs.dry_run }}
           REPORT_FILE: reports/generated-summary-faq/latest-run.yml
           LOG_FILE: reports/generated-summary-faq/latest-run.txt
+          MARKDOWN_REPORT_FILE: reports/generated-summary-faq/latest-run.md
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           GIT_REF_NAME: ${{ github.ref_name }}
           GIT_SHA: ${{ github.sha }}
@@ -88,10 +80,10 @@ jobs:
             --path-filter "$INPUT_PATHS"
             --category "$INPUT_CATEGORY"
             --limit "$INPUT_LIMIT"
-            --generation-mode "$INPUT_GENERATION_MODE"
             --openai-base-url "$OPENAI_BASE_URL"
             --openai-model "$INPUT_OPENAI_MODEL"
             --report-file "$REPORT_FILE"
+            --markdown-report-file "$MARKDOWN_REPORT_FILE"
             --log-file "$LOG_FILE"
             --run-url "$RUN_URL"
             --git-ref "$GIT_REF_NAME"
@@ -119,6 +111,7 @@ jobs:
           path: |
             reports/generated-summary-faq/latest-run.yml
             reports/generated-summary-faq/latest-run.txt
+            reports/generated-summary-faq/latest-run.md
           retention-days: 14
 
       - name: Configure git

@@ -21,6 +21,51 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T00:46:43Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: e32bdb090c422d1fb5bb1f9bd3af56c55fdf8989e6a7fe6a101e90dcb6f3eadd
+  summary_generated_at: '2026-06-02T03:43:01Z'
+  summary_source_hash: e32bdb090c422d1fb5bb1f9bd3af56c55fdf8989e6a7fe6a101e90dcb6f3eadd
+  faq_generated_at: '2026-06-03T00:46:43Z'
+  faq_source_hash: e32bdb090c422d1fb5bb1f9bd3af56c55fdf8989e6a7fe6a101e90dcb6f3eadd
+  summary: >-
+    This Learning Path shows how to build and deploy a multi-architecture container application
+    for x86/amd64 and arm64 on Amazon EKS using docker buildx and docker manifest. You will create
+    a hybrid EKS cluster with both x86 and Arm-based (Graviton) nodes, then build images for each
+    architecture and understand the key nuances of multi-arch container builds. The environment
+    assumes Linux, and you need an AWS account plus eksctl, kubectl, and Docker installed locally.
+    By the end, you will have deployed a multi-arch application to a single EKS cluster that can
+    run across both architectures. The topic is advanced and is designed for developers targeting
+    multi-arch Kubernetes on AWS.
+  faqs:
+  - question: What do I need before running the steps?
+    answer: >-
+      You need an AWS account and a Linux machine with eksctl, kubectl, and Docker installed.
+      No other prerequisites are explicitly listed.
+  - question: Which tools are used to build multi-architecture images, and where do I run them?
+    answer: >-
+      You will use docker buildx and docker manifest. These are run with your local Docker installation.
+  - question: How is the Amazon EKS cluster set up for multiple architectures?
+    answer: >-
+      You create a hybrid EKS cluster that includes both x86/amd64 and Arm-based (Graviton) nodes.
+      This lets you run workloads across both architectures in a single cluster.
+  - question: What result should I expect after deployment?
+    answer: >-
+      A multi-architecture container application runs on a single Amazon EKS cluster that supports
+      both arm64 and amd64. The image you build is suitable for both architectures using a multi-arch
+      manifest.
+  - question: What should I check if the application only runs on one node type?
+    answer: >-
+      Confirm that you built images for both amd64 and arm64 and that your docker manifest includes
+      both. Also verify your EKS cluster has both x86 and Arm-based (Graviton) nodes available.
+# END generated_summary_faq
 
 author: Pranay Bakre
 

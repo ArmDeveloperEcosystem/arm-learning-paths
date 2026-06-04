@@ -22,6 +22,53 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T01:15:30Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: b7f36df881c2c436143c1e5579d2c54cb5930f52998904098829c52fa7290f38
+  summary_generated_at: '2026-06-02T04:11:38Z'
+  summary_source_hash: b7f36df881c2c436143c1e5579d2c54cb5930f52998904098829c52fa7290f38
+  faq_generated_at: '2026-06-03T01:15:30Z'
+  faq_source_hash: b7f36df881c2c436143c1e5579d2c54cb5930f52998904098829c52fa7290f38
+  summary: >-
+    This advanced Learning Path guides you through deploying a production-style Kafka event streaming
+    cluster on Arm-based Linux servers. You will install and configure a three-node ZooKeeper
+    ensemble and a three-node Kafka cluster on Ubuntu or Debian, then validate the setup by creating
+    a topic and writing/reading events from a client node. The path also covers automating deployment
+    on AWS Graviton processors using Terraform and Ansible, with objectives that include automation
+    on Google Cloud. You need seven Arm machines or cloud instances and appropriate network ports
+    opened. After about 90 minutes, you will have a working Kafka cluster on Arm and a repeatable
+    deployment approach for cloud environments.
+  faqs:
+  - question: What do I need before running the setup?
+    answer: >-
+      You need seven physical Arm machines or cloud instances running Ubuntu or Debian. Ensure
+      ports 8080, 2888, 3888, 2181, and 9092 are open in the security groups for these machines.
+  - question: How should I assign roles to the seven machines?
+    answer: >-
+      Use three machines for the ZooKeeper cluster, three machines for the Kafka cluster, and
+      one machine as the client.
+  - question: Which configuration values do I change on Kafka nodes to connect to ZooKeeper?
+    answer: >-
+      Edit config/server.properties on each Kafka node and replace zk_1_ip, zk_2_ip, and zk_3_ip
+      with the IP addresses of your three ZooKeeper nodes.
+  - question: Where do I run the validation and what result should I expect?
+    answer: >-
+      Install Kafka on the client machine, create a topic, write events to it, and read them back.
+      Successfully reading the events you produced confirms the Kafka cluster is working.
+  - question: Which options are available for automated deployment on cloud platforms?
+    answer: >-
+      The path covers automated deployment on AWS and Google Cloud. On AWS, Terraform and Ansible
+      are used to deploy a three-node ZooKeeper cluster, a three-node Kafka cluster, and one client
+      on AWS Graviton, and you should have the required tools installed on a computer you can
+      run them from.
+# END generated_summary_faq
 
 author: Pareena Verma
 

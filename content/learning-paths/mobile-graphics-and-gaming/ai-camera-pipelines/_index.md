@@ -19,6 +19,56 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-02T23:39:57Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: dee181248ecc8cb40e3ad76642fdb216cbf1e7610dde2f2605ba04f111b8926a
+  summary_generated_at: '2026-06-02T02:40:04Z'
+  summary_source_hash: dee181248ecc8cb40e3ad76642fdb216cbf1e7610dde2f2605ba04f111b8926a
+  faq_generated_at: '2026-06-02T23:39:57Z'
+  faq_source_hash: dee181248ecc8cb40e3ad76642fdb216cbf1e7610dde2f2605ba04f111b8926a
+  summary: >-
+    Build and run AI-powered camera pipeline applications on Arm using SME2 with KleidiAI and
+    KleidiCV. You will clone the ai-camera-pipelines repository with Git LFS, build a Docker container,
+    compile the C++ pipelines, apply background blur, denoising, and low-light effects, and run
+    provided benchmark binaries to exercise the hot loop and observe improvements from KleidiCV
+    and KleidiAI. The steps target an Arm64 system with SME2 support, with instructions tested
+    on Ubuntu 24.04. Prerequisites list a computer running Arm Linux or macOS with Docker installed,
+    plus Git and Git LFS. After completing the path, you can build, run, and benchmark these real-time
+    camera effects.
+  faqs:
+  - question: What do I need before running the steps?
+    answer: >-
+      Use an Arm64 machine with SME2 support; the instructions were tested on Ubuntu 24.04. The
+      prerequisites list a computer running Arm Linux or macOS with Docker installed, plus Git
+      and Git LFS.
+  - question: Which repository do I clone and why is Git LFS required?
+    answer: >-
+      Clone git.gitlab.arm.com/kleidi/kleidi-examples/ai-camera-pipelines.git. Git LFS is needed
+      to fetch the large files referenced by the project.
+  - question: How do I build the container used to compile the pipelines?
+    answer: >-
+      Build the Docker image from docker/Dockerfile with tag ai-camera-pipelines, passing the
+      build args DOCKERHUB_MIRROR=docker.io and CI_UID=$(id -u), targeting the docker/ directory.
+      Then start a shell in the container to compile the pipelines as shown in the steps.
+  - question: How do I run a background blur or other effect and verify success?
+    answer: >-
+      Create a Python virtual environment, install numpy, opencv-python, pillow, and torch, then
+      run the provided binaries from the bin directory. For background blur, run cinematic_mode
+      with resources/test_input.png and expect an output image like test_output_cinematic_mode.png.
+  - question: How do I run benchmarks and what result should I expect?
+    answer: >-
+      Use the benchmark executables: cinematic_mode_benchmark, low_light_image_enhancement_benchmark,
+      and neural_denoiser_temporal_benchmark_4K. They run the core processing loop multiple times
+      and demonstrate improvements enabled by KleidiCV (OpenCV kernels on Arm) and KleidiAI (LiteRT+XNNPack
+      inference micro-kernels).
+# END generated_summary_faq
 
 author: Arnaud de Grandmaison
 

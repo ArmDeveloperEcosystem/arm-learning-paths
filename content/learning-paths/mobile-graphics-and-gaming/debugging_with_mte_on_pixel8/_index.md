@@ -24,6 +24,54 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-02T23:51:15Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 95d4fb855552939d1a0e9cccfe46333692ea291ee85dd08b816321db29ceebdc
+  summary_generated_at: '2026-06-02T02:48:04Z'
+  summary_source_hash: 95d4fb855552939d1a0e9cccfe46333692ea291ee85dd08b816321db29ceebdc
+  faq_generated_at: '2026-06-02T23:51:15Z'
+  faq_source_hash: 95d4fb855552939d1a0e9cccfe46333692ea291ee85dd08b816321db29ceebdc
+  summary: >-
+    This Learning Path shows how to detect and debug memory safety bugs in Android applications
+    using Arm Memory Tagging Extension (MTE) on a Google Pixel 8. You will clone an Android MTE
+    Test app from GitHub, open it in Android Studio, explore common native memory bug patterns,
+    enable or disable MTE via the AndroidManifest, then build and debug the app on a connected
+    Pixel 8. The path targets advanced developers and takes about 20 minutes. Prerequisites include
+    a Google Pixel 8 smartphone, Android Studio on your development computer, a USB cable, and
+    Android Debug Bridge (adb) installed.
+  faqs:
+  - question: What do I need before running the steps?
+    answer: >-
+      You need a Google Pixel 8 smartphone, Android Studio on your development computer, a USB
+      cable, and adb. If adb is not installed, follow the Android Debug Bridge documentation linked
+      in the prerequisites.
+  - question: How do I get the MTE Test app project into Android Studio?
+    answer: >-
+      Clone the repository from GitHub using the provided git clone command, then launch Android
+      Studio and open the cloned project. The path guides you to view the project files as needed.
+  - question: Which file do I edit to enable or disable MTE?
+    answer: >-
+      Use the AndroidManifest.xml in the app module. Switch the project view to Project Files,
+      navigate to app -> src -> main -> res, and open AndroidManifest.xml to apply the settings
+      shown in the steps.
+  - question: How do I run and debug the app on my Pixel 8?
+    answer: >-
+      Connect the Pixel 8 via USB, ensure it appears in the device selector in Android Studio,
+      and press the Debug button to build and start debugging. On the device, you will see a startup
+      message, then the app interface appears for you to continue debugging.
+  - question: What should I check if my Pixel 8 does not appear in Android Studio?
+    answer: >-
+      Verify the USB connection and confirm that adb is installed as listed in the prerequisites.
+      Reconnect the device and reopen the project if it still does not show up.
+# END generated_summary_faq
+
 author: Roberto Lopez Mendez
 
 ### Tags

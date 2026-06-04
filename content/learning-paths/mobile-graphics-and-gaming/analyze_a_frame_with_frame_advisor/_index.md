@@ -23,6 +23,56 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-02T23:42:06Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: d5406f24ab38522b21e348ed3829ede7b1bcdce28e81ec4fddebbec280d2cb89
+  summary_generated_at: '2026-06-02T02:41:30Z'
+  summary_source_hash: d5406f24ab38522b21e348ed3829ede7b1bcdce28e81ec4fddebbec280d2cb89
+  faq_generated_at: '2026-06-02T23:42:06Z'
+  faq_source_hash: d5406f24ab38522b21e348ed3829ede7b1bcdce28e81ec4fddebbec280d2cb89
+  summary: >-
+    This introductory Learning Path shows how to use Frame Advisor in Arm Performance Studio to
+    capture a significant frame from an Android application and analyze where time is spent. You
+    will connect a supported device, start a trace from Frame Advisor, and examine the captured
+    frame’s render passes and draw calls, including primitive counts. You will use the Render
+    Graph to understand how data flows between passes and to spot attachments that do not contribute
+    to the final output, and the Content Metrics view to identify complex meshes by sorting and
+    navigating to high-primitive draw calls. Prerequisites include a debuggable build, Arm Performance
+    Studio on Windows, Linux, or macOS, Android SDK Platform-tools (adb), and an Android device
+    running OpenGL ES 2.0–3.2 (Android 10+) or Vulkan 1.0–1.2 (Android 9+).
+  faqs:
+  - question: What do I need before running Frame Advisor?
+    answer: >-
+      You need a supported Android device, a debuggable build of your app, Arm Performance Studio
+      installed on Windows, Linux, or macOS, and Android SDK Platform Tools (adb). Frame Advisor
+      supports OpenGL ES 2.0–3.2 on Android 10+ and Vulkan 1.0–1.2 on Android 9+.
+  - question: How do I start a capture trace from my device?
+    answer: >-
+      Open Frame Advisor and choose New Trace. Select your connected device and the target application,
+      switch the API to Vulkan if needed, then click Next to start the capture session; the app
+      launches automatically on the device.
+  - question: How do I know the capture and analysis worked?
+    answer: >-
+      When analysis completes, the Analysis screen appears with the Frame Hierarchy listing captured
+      frames, render passes, and draw calls. You can step through draw calls to see how the scene
+      is built.
+  - question: Which view helps me find unused render passes or attachments?
+    answer: >-
+      Use the render graph. It visualizes how data flows between render passes and resources so
+      you can spot passes or attachments that are not used in the final output to the swapchain.
+  - question: How can I locate the most complex meshes in my scene?
+    answer: >-
+      Open the Content Metrics view, select Draws, and sort by the highest number of primitives
+      (Prims). Right-click a top entry and choose Navigate to call to select it in the Frame Hierarchy
+      and view it in the Framebuffers view.
+# END generated_summary_faq
 
 author: Julie Gaskin
 

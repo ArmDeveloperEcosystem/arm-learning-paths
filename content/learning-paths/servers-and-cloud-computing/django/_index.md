@@ -21,6 +21,55 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T00:41:18Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: c316c81de911ecd7f8e517f4ae5e5006d66a637199b8952fe195a74f3456a5e0
+  summary_generated_at: '2026-06-02T03:33:56Z'
+  summary_source_hash: c316c81de911ecd7f8e517f4ae5e5006d66a637199b8952fe195a74f3456a5e0
+  faq_generated_at: '2026-06-03T00:41:18Z'
+  faq_source_hash: c316c81de911ecd7f8e517f4ae5e5006d66a637199b8952fe195a74f3456a5e0
+  summary: >-
+    Build and deploy a simple Django web application on Arm-based Linux machines using Nginx and
+    PostgreSQL. This introductory path uses Ubuntu 22.04 LTS and walks you through creating a
+    Django project, configuring its PostgreSQL database settings, creating the database and user,
+    deploying behind Nginx, and verifying the application is working. You can run the steps on
+    an Arm instance from AWS, Microsoft Azure, Google Cloud, or Oracle, on an on-premises Arm
+    server, or on a Linux VM on your Arm device. Prerequisites include sudo access, comfort with
+    SSH and basic Linux administration, and the ability to install Nginx and PostgreSQL.
+  faqs:
+  - question: What environment do I need to run this?
+    answer: >-
+      Use an Arm-based instance from a cloud provider, an on-premises Arm server, or a Linux VM
+      on your Arm device. The instructions use Ubuntu 22.04 LTS and are the same regardless of
+      the Arm machine type.
+  - question: Do I need a specific Python version or a virtual environment?
+    answer: >-
+      Ubuntu 22.04 provides Python 3.10, which you can use, or you may optionally install a newer
+      Python via the Deadsnakes PPA. The steps assume you are working in a terminal with a Python
+      virtual environment activated.
+  - question: Do I need to install Nginx and PostgreSQL before deploying?
+    answer: >-
+      Yes. Installing both Nginx and PostgreSQL is listed as a prerequisite for this path. Follow
+      the referenced Learning Paths for Nginx and PostgreSQL if you need installation guidance.
+  - question: How do I know the Django project was created correctly?
+    answer: >-
+      After running django-admin startproject myproject, you should see a myproject directory
+      with manage.py and a myproject package containing asgi.py, __init__.py, settings.py, urls.py,
+      and wsgi.py. You can start the development server from the project directory to quickly
+      validate it runs.
+  - question: Which PostgreSQL settings should I use and how do I create the database?
+    answer: >-
+      In settings.py set ENGINE to django.db.backends.postgresql with NAME myprojectdb, USER usr,
+      PASSWORD mypassword, HOST as localhost or your machine’s IP, and PORT 5432. Open the PostgreSQL
+      prompt with sudo -u postgres psql and create the database and user to match those values.
+# END generated_summary_faq
 
 author: Diego Russo
 

@@ -20,6 +20,56 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T01:38:53Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 5a5fd9b66a09de71009ccb098c7ef08a848463a8a7956643020ab1fb1db22fbb
+  summary_generated_at: '2026-06-02T04:36:04Z'
+  summary_source_hash: 5a5fd9b66a09de71009ccb098c7ef08a848463a8a7956643020ab1fb1db22fbb
+  faq_generated_at: '2026-06-03T01:38:53Z'
+  faq_source_hash: 5a5fd9b66a09de71009ccb098c7ef08a848463a8a7956643020ab1fb1db22fbb
+  summary: >-
+    This introductory Learning Path guides you through creating, running, modifying, and deploying
+    a .NET Aspire application using a Windows on Arm development machine and Arm-based virtual
+    machines on AWS and Google Cloud. You will verify .NET 8.0 or later, install the Aspire workload,
+    generate and run the project (including trusting the HTTPS development certificate and using
+    the Aspire dashboard), and add a computation service to simulate intensive work. The path
+    then shows how to deploy to an Arm-powered EC2 instance, such as AWS Graviton; Google Cloud
+    Arm-based VMs are also targeted. Prerequisites include a Windows on Arm device, an Arm-based
+    instance from AWS or GCP, and a code editor (for example, Visual Studio Code for Arm64).
+  faqs:
+  - question: What do I need before running the steps?
+    answer: >-
+      You need a Windows on Arm machine (for example, a Lenovo ThinkPad X13s running Windows 11),
+      access to an Arm-based instance on AWS or GCP, and a code editor. Visual Studio Code for
+      Arm64 is an example of a suitable editor.
+  - question: How do I check my .NET version and install the Aspire workload?
+    answer: >-
+      Open a PowerShell terminal and run dotnet --version to confirm .NET 8.0 or later is installed.
+      Then install the Aspire workload with dotnet workload install aspire and wait for the download
+      and installation to complete without errors.
+  - question: How do I run the application locally and confirm it started correctly?
+    answer: >-
+      First trust the HTTPS development certificate by running dotnet dev-certs https --trust.
+      Then change into the project directory and run dotnet run --project NetAspire.Arm.AppHost;
+      you should see build output, an Aspire version line, and messages such as “Distributed application
+      starting.”
+  - question: Where do I add the computational code, and what does it do?
+    answer: >-
+      Add a new file named ComputationService.cs in the NetAspire.Arm.ApiService project. The
+      provided code performs matrix multiplication to mimic computationally intensive work.
+  - question: Which cloud targets are supported, and how do I begin with AWS?
+    answer: >-
+      The path targets Arm-based VMs on AWS and Google Cloud. For AWS, sign in to the AWS Management
+      Console, navigate to the EC2 service, and choose an Arm-powered instance type such as those
+      based on AWS Graviton.
+# END generated_summary_faq
 
 author: Dawid Borycki
 

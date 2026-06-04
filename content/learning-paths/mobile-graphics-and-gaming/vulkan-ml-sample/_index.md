@@ -24,6 +24,57 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T00:13:13Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: af4f1c8964e0970c187643bcd0330a63a6ce66c38a2e6b4d2fc17857a12a3d7f
+  summary_generated_at: '2026-06-02T03:03:08Z'
+  summary_source_hash: af4f1c8964e0970c187643bcd0330a63a6ce66c38a2e6b4d2fc17857a12a3d7f
+  faq_generated_at: '2026-06-03T00:13:13Z'
+  faq_source_hash: af4f1c8964e0970c187643bcd0330a63a6ce66c38a2e6b4d2fc17857a12a3d7f
+  summary: >-
+    This Learning Path shows how to enable neural graphics workflows on Windows by using ML Extensions
+    for Vulkan. You install the ML Emulation Layers to simulate VK_ARM_data_graph and VK_ARM_tensors,
+    set up build tools (CMake, Python 3, Git), and use Visual Studio 2022 on a Windows 11 development
+    machine. You then build and run the Vulkan Samples fork, starting with the Simple Tensor and
+    Data Graph example that executes a 2D average pooling operation via a data graph pipeline.
+    You also run an end-to-end inference test with the Scenario Runner from Arm’s ML SDK for Vulkan,
+    and debug or inspect frames with RenderDoc. By the end, you can run sample workloads using
+    the ML extensions and analyze their execution.
+  faqs:
+  - question: What do I need installed before building and running the samples?
+    answer: >-
+      Use a Windows 11 development machine with Visual Studio 2022 and the Desktop development
+      with C++ and .NET desktop build tools workloads. Install CMake (3.12+), Python 3, and Git,
+      then download the ML Emulation Layers for Vulkan. You can verify tools with commands like
+      cmake --version and python3 --version.
+  - question: Which Vulkan ML extensions does this path use, and how are they enabled?
+    answer: >-
+      The path uses VK_ARM_data_graph and VK_ARM_tensors. These are enabled on your machine by
+      installing the ML Emulation Layers for Vulkan, which simulate the extensions so the samples
+      can run.
+  - question: How do I get and build the first sample?
+    answer: >-
+      Clone Arm’s fork of Vulkan Samples on the tensor_and_data_graph branch with submodules as
+      shown in the steps. Build it with the tools you installed; the Simple Tensor and Data Graph
+      sample demonstrates a 2D average pooling operation via a data graph pipeline.
+  - question: How do I run a complete inference test beyond the simple sample?
+    answer: >-
+      Use the Scenario Runner from Arm’s ML SDK for Vulkan. The Learning Path points to Arm’s
+      Hugging Face page where you can download binaries and assets that demonstrate the ML extensions
+      in action.
+  - question: When should I use RenderDoc with these samples, and what can I inspect?
+    answer: >-
+      Use RenderDoc to capture frames when you need to visualize and debug ML-integrated rendering.
+      You can step through frames, inspect Vulkan API calls, view shader inputs and outputs, examine
+      tensors, and review GPU resource states and memory usage.
+# END generated_summary_faq
 
 author: Annie Tallund
 

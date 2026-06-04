@@ -19,6 +19,56 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T00:37:40Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 4e7de348514d0b5a742fa47bb85a2a5814fa9bd587478e7ef08365d16273f6bf
+  summary_generated_at: '2026-06-02T03:29:36Z'
+  summary_source_hash: 4e7de348514d0b5a742fa47bb85a2a5814fa9bd587478e7ef08365d16273f6bf
+  faq_generated_at: '2026-06-03T00:37:40Z'
+  faq_source_hash: 4e7de348514d0b5a742fa47bb85a2a5814fa9bd587478e7ef08365d16273f6bf
+  summary: >-
+    Learn to measure and tune C++ code on Arm-based Linux systems using Profile-Guided Optimization
+    (PGO) and Google Benchmark. You will compile an instrumented binary with GCC/G++ using -fprofile-generate,
+    run it to emit profile data (.gcda), and rebuild with -fprofile-use to create a profile-tuned
+    executable. An integer division example demonstrates microbenchmarking and comparing baseline
+    versus PGO builds with Google Benchmark. The path also shows how to integrate PGO into a Makefile
+    and a GitHub Actions workflow, with cautions on when PGO is appropriate. Prerequisites are
+    basic C++ knowledge and access to an Arm-based Linux machine. Estimated time is 15 minutes;
+    the approach applies to Arm environments, including cloud instances on AWS, Microsoft Azure,
+    Google Cloud, or Oracle.
+  faqs:
+  - question: What do I need before running the steps?
+    answer: >-
+      You need basic C++ understanding and access to an Arm-based Linux machine. The path uses
+      GCC/G++ and Google Benchmark to build and run the examples.
+  - question: Which compiler options should I use for PGO with GCC/G++ and in what order?
+    answer: >-
+      First compile with -fprofile-generate to create an instrumented binary, then run that binary
+      to collect profile data. Recompile the program with -fprofile-use to apply the collected
+      data during optimization.
+  - question: How do I know the profiling run succeeded and where are the files?
+    answer: >-
+      After running the instrumented binary, expect profile data files (typically .gcda) to appear
+      in the same directory. Their presence indicates that execution generated the data needed
+      for the -fprofile-use rebuild.
+  - question: What will I benchmark in this path and why that example?
+    answer: >-
+      You will benchmark a simple integer division operation. Division is chosen because it is
+      typically more expensive than addition, subtraction, or multiplication, making performance
+      differences easier to observe.
+  - question: When should I apply PGO in my project or CI workflow?
+    answer: >-
+      Use PGO for performance-critical code that is heavily influenced by runtime behavior, and
+      consider integrating it via a Makefile or GitHub Actions. Be aware that PGO adds build steps
+      and time, and it may not be ideal for early-stage development or highly variable workloads.
+# END generated_summary_faq
 
 author: Kieran Hejmadi
 

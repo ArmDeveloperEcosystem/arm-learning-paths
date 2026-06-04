@@ -28,6 +28,53 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T01:08:45Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 87e9d25d5fb1f45d126aa4ca2fa1e13d6a470f2bcdc70968aa4622790106e629
+  summary_generated_at: '2026-06-02T04:06:17Z'
+  summary_source_hash: 87e9d25d5fb1f45d126aa4ca2fa1e13d6a470f2bcdc70968aa4622790106e629
+  faq_generated_at: '2026-06-03T01:08:45Z'
+  faq_source_hash: 87e9d25d5fb1f45d126aa4ca2fa1e13d6a470f2bcdc70968aa4622790106e629
+  summary: >-
+    Follow this introductory, hands-on path to install and validate Helm on Arm-based Google Cloud
+    Axion C4A virtual machines running SUSE Linux Enterprise Server. You will provision a C4A
+    instance, install Docker, kubectl, Helm, and KinD, and verify Helm workflows on a local Arm64
+    Kubernetes cluster. Next, you create and connect to a Google Kubernetes Engine (GKE) cluster
+    on Arm-based nodes and deploy PostgreSQL, Redis, and NGINX using official Helm charts. You
+    will perform install, upgrade, rollback, and uninstall operations, check application readiness
+    and service access, and observe Helm behavior under concurrent CLI operations. Prerequisites
+    include a GCP account with billing enabled and basic familiarity with Kubernetes, Helm, and
+    the Linux command line.
+  faqs:
+  - question: What do I need before running the steps?
+    answer: >-
+      You need a Google Cloud Platform account with billing enabled, basic familiarity with Kubernetes
+      concepts, a basic understanding of Helm and Kubernetes manifests, and comfort with the Linux
+      command line.
+  - question: Which Google Cloud machine type is used for the C4A VM in this path?
+    answer: >-
+      The steps use the c4a-standard-4 machine type, which provides 4 vCPUs and 16 GB of memory.
+  - question: Which tools are installed on the SUSE Arm64 VM to prepare for Helm testing?
+    answer: >-
+      You install Docker, kubectl, Helm, and KinD, and enable the SUSE Containers Module. This
+      setup lets you create and verify a local Kubernetes cluster for validating Helm workflows.
+  - question: How do I confirm that Helm and the chart repository are set up correctly?
+    answer: >-
+      Add the Bitnami chart repository and run a repository update. You should see output indicating
+      that "bitnami" was added and the repositories were successfully updated.
+  - question: What is deployed to GKE, and how does that differ from the local KinD cluster?
+    answer: >-
+      On GKE you deploy PostgreSQL, Redis, and NGINX using official Helm charts, and verify readiness
+      and service access. The earlier KinD-based cluster is used only for local validation before
+      targeting GKE; verify kubectl availability with the command kubectl version -.
+# END generated_summary_faq
 
 author: Pareena Verma
 

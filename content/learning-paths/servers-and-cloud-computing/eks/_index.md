@@ -19,6 +19,54 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T00:45:59Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 4f1c448eef66300e024bda27c420f9746047c0c4b76e8556d3d8693382206055
+  summary_generated_at: '2026-06-02T03:42:15Z'
+  summary_source_hash: 4f1c448eef66300e024bda27c420f9746047c0c4b76e8556d3d8693382206055
+  faq_generated_at: '2026-06-03T00:45:59Z'
+  faq_source_hash: 4f1c448eef66300e024bda27c420f9746047c0c4b76e8556d3d8693382206055
+  summary: >-
+    Provision an Amazon EKS cluster on Arm-based Graviton instances and deploy a WordPress application
+    with a MySQL database. Working from a machine with the AWS CLI, EKS CLI, and Kubernetes CLI
+    installed, you will configure AWS credentials, create the cluster, and use three Kubernetes
+    YAML files (kustomization.yaml, mysql-deployment.yaml, and wordpress-deployment.yaml) to deploy
+    the application with kubectl. The path is introductory and aimed at developers new to Kubernetes
+    on AWS. It focuses on practical setup and deployment steps, including setting a MySQL password
+    via Kustomize. An AWS account is required; no other explicit prerequisites are listed. Estimated
+    time to complete is about 60 minutes.
+  faqs:
+  - question: What do I need before running the steps?
+    answer: >-
+      You need an AWS account and must configure your AWS access key ID and secret access key.
+      Install the EKS CLI, AWS CLI, and Kubernetes CLI, and confirm you can run the aws, ekscli,
+      and kubectl commands.
+  - question: Which machine can I use to run the setup?
+    answer: >-
+      Any computer with the required tools installed can be used. The operating system listed
+      for this path is Linux.
+  - question: How do I create an EKS cluster on Arm-based instances?
+    answer: >-
+      Follow the Create an EKS cluster step to provision an Amazon EKS cluster on Arm-based Graviton
+      instances. You will use the EKS CLI together with the AWS CLI during this step.
+  - question: Which files are required to deploy WordPress and where do I set the MySQL password?
+    answer: >-
+      You need kustomization.yaml, mysql-deployment.yaml, and wordpress-deployment.yaml. In kustomization.yaml,
+      the secretGenerator named mysql-pass sets the database password using a literal such as
+      password=YourPassword.
+  - question: How do I apply the deployment and know it targets my EKS cluster?
+    answer: >-
+      Use kubectl with the kustomization.yaml that references the MySQL and WordPress resources.
+      Ensure kubectl is configured to communicate with your newly created EKS cluster before applying
+      the files.
+# END generated_summary_faq
 
 author: Jason Andrews
 

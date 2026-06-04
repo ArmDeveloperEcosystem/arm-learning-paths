@@ -20,6 +20,52 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T00:20:41Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: ced3882cf8be11a55304d2697f450a2c862a81d87317ab42298148755e9f272c
+  summary_generated_at: '2026-06-02T03:08:36Z'
+  summary_source_hash: ced3882cf8be11a55304d2697f450a2c862a81d87317ab42298148755e9f272c
+  faq_generated_at: '2026-06-03T00:20:41Z'
+  faq_source_hash: ced3882cf8be11a55304d2697f450a2c862a81d87317ab42298148755e9f272c
+  summary: >-
+    This Learning Path shows how to package a multi-architecture container and deploy it to AWS
+    Fargate using the AWS Copilot CLI, configured to run on AWS Graviton processors. You will
+    containerize an example service, use copilot init to build locally, push the image to Amazon
+    ECR, and provision a load balanced web service on Fargate. It explains Copilot’s default amd64
+    behavior and where to set the architecture to Arm for Graviton. Prerequisites are an AWS account
+    and a local machine with Docker, AWS CLI, and AWS Copilot CLI installed. The guide is applicable
+    to Linux and macOS users.
+  faqs:
+  - question: What do I need before running the steps?
+    answer: >-
+      You need an AWS account and a local environment with Docker, AWS CLI, and the AWS Copilot
+      CLI installed. The path targets Linux, and the steps note macOS is also applicable.
+  - question: What architecture does Copilot use by default, and how does this affect deploying
+      on Graviton?
+    answer: >-
+      Copilot defaults to amd64. To run on AWS Graviton processors with Fargate, you must explicitly
+      set the architecture to Arm as described in the steps.
+  - question: How do I deploy the sample service with Copilot?
+    answer: >-
+      Use the copilot init command shown in the path to build from your Dockerfile, create a Load
+      Balanced Web Service, and deploy to an environment. Copilot builds locally, pushes the image
+      to Amazon ECR, and provisions the Fargate resources.
+  - question: Can I use an existing container image instead of building from a Dockerfile?
+    answer: >-
+      Yes. Use the --image option instead of --dockerfile, and ensure the image is multi-architecture.
+  - question: What result should I expect after a successful deployment?
+    answer: >-
+      A running service on AWS Fargate with the image stored in Amazon ECR, configured as a Load
+      Balanced Web Service. Copilot will have created the required infrastructure in the specified
+      environment.
+# END generated_summary_faq
 
 author: Jason Andrews
 

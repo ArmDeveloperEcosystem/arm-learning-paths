@@ -20,6 +20,51 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T00:21:25Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 087a4d56914e5b53cec5ad17e8d682e72d04ba6b394237c081efe4a3f939e04e
+  summary_generated_at: '2026-06-02T03:09:04Z'
+  summary_source_hash: 087a4d56914e5b53cec5ad17e8d682e72d04ba6b394237c081efe4a3f939e04e
+  faq_generated_at: '2026-06-03T00:21:25Z'
+  faq_source_hash: 087a4d56914e5b53cec5ad17e8d682e72d04ba6b394237c081efe4a3f939e04e
+  summary: >-
+    This Learning Path shows how to automate the provisioning of Arm-based AWS Graviton instances
+    using Terraform, with access provided through a Jump Server (bastion) for secure infrastructure
+    management. You will use Terraform Cloud to define and deploy EC2 resources on AWS and work
+    with reusable infrastructure-as-code files that you can adapt for future Learning Paths. Prerequisites
+    are an AWS account and a computer with Terraform installed; any desktop, laptop, or VM with
+    the required tools is suitable. By the end, you will have Arm instances deployed on AWS with
+    jump server access and a foundation for modifying the provided Terraform for related exercises.
+    Estimated time to complete is about 60 minutes.
+  faqs:
+  - question: What do I need before running the Terraform steps?
+    answer: >-
+      You need an AWS account and a computer with Terraform installed. Any computer with the required
+      tools can be used.
+  - question: Does this path use Terraform Cloud or local Terraform?
+    answer: >-
+      The steps use Terraform Cloud to automate the creation of Arm instances. Follow the instructions
+      in the path to run the workflow in Terraform Cloud.
+  - question: What infrastructure gets created by the configuration?
+    answer: >-
+      It provisions AWS EC2 Arm instances (Graviton) and sets up access through a Jump Server
+      (bastion). The Jump Server provides a supervised, secure channel between networks.
+  - question: How do I access the deployed instances?
+    answer: >-
+      Access is provided via the Jump Server (bastion). Traffic is funneled through this intermediary
+      host to add a security barrier between networks.
+  - question: Can I reuse or modify the Terraform files for other Learning Paths?
+    answer: >-
+      Yes. The Terraform files are intended as a platform you can adapt to support other Learning
+      Paths that require one or more server nodes.
+# END generated_summary_faq
 
 author: Jason Andrews
 

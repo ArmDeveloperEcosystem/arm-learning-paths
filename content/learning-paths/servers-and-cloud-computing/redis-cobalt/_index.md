@@ -23,6 +23,54 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T01:59:01Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 9b306bc318491834d0d74dd75221b24081acc20dac7993ccdbd1cb40ba6158ac
+  summary_generated_at: '2026-06-02T04:58:08Z'
+  summary_source_hash: 9b306bc318491834d0d74dd75221b24081acc20dac7993ccdbd1cb40ba6158ac
+  faq_generated_at: '2026-06-03T01:59:01Z'
+  faq_source_hash: 9b306bc318491834d0d74dd75221b24081acc20dac7993ccdbd1cb40ba6158ac
+  summary: >-
+    Learn how to deploy Redis on Azure Cobalt 100 Arm64 virtual machines running Linux, then build
+    and validate real-time messaging and event-driven processing on Arm. You will provision a
+    Cobalt 100 VM in the Dpsv6 series (via the Azure Portal, with options to use the CLI or IaC),
+    install and configure Redis, implement Pub/Sub for low-latency messaging, and use Redis Streams
+    with consumer groups to create scalable pipelines. You will simulate workloads with Python
+    and benchmark throughput and latency to validate performance on Arm-based infrastructure.
+    Prerequisites include an Azure account with Cobalt 100 access, basic Linux and SSH skills,
+    and familiarity with databases and messaging.
+  faqs:
+  - question: What do I need before running the steps?
+    answer: >-
+      You need a Microsoft Azure account with access to Cobalt 100 based instances (Dpsv6), basic
+      Linux command-line skills, familiarity with SSH, and a basic understanding of databases,
+      caching, and messaging systems.
+  - question: Which Azure VM type and creation method should I use?
+    answer: >-
+      The Learning Path focuses on general-purpose Cobalt 100 Arm-based virtual machines in the
+      Dpsv6 series. You can create the VM via the Azure Portal (used in this path), or use the
+      Azure CLI or an infrastructure as code tool if that better fits your workflow.
+  - question: How do I confirm I’m using an Arm-based Cobalt 100 VM?
+    answer: >-
+      During provisioning, ensure you select a Cobalt 100 Arm64 instance in the Dpsv6 series.
+      The path targets an Arm-based Linux VM on Azure Cobalt 100.
+  - question: Do I need Python, and where is it used?
+    answer: >-
+      Yes. Python is used to simulate workloads when validating and benchmarking Redis in the
+      final section.
+  - question: What result should I expect after completing the examples and benchmarks?
+    answer: >-
+      You will have Redis installed and running on a Cobalt 100 VM, with working Pub/Sub messaging
+      and Streams using consumer groups. You will also collect throughput and latency measurements
+      to validate Redis performance on Arm infrastructure.
+# END generated_summary_faq
 
 author: Pareena Verma
 

@@ -28,6 +28,56 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T00:33:06Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: ec9cdca7aa9a5670f54ea3646f965149460d8e66d9d5d904e1b6dcf09867df39
+  summary_generated_at: '2026-06-02T03:22:01Z'
+  summary_source_hash: ec9cdca7aa9a5670f54ea3646f965149460d8e66d9d5d904e1b6dcf09867df39
+  faq_generated_at: '2026-06-03T00:33:06Z'
+  faq_source_hash: ec9cdca7aa9a5670f54ea3646f965149460d8e66d9d5d904e1b6dcf09867df39
+  summary: >-
+    Set up a SUSE Linux Arm64 virtual machine on Google Cloud C4A with Axion processors and run
+    CircleCI Arm-native CI/CD workflows using self-hosted machine runners. You will provision
+    a c4a instance via the Google Cloud Console, install the CircleCI CLI and Machine Runner on
+    SUSE, create a custom resource class in the CircleCI dashboard, and target it from a workflow.
+    The path also includes creating a simple Node.js demo app and testing workflows locally to
+    understand job execution on Arm64 runners. Prerequisites include a GCP account with billing
+    enabled, basic Linux command line, Node.js/npm familiarity, and a basic understanding of CircleCI
+    workflows, jobs, resource classes, and runners. Estimated time to complete is about 45 minutes.
+  faqs:
+  - question: What do I need before running the steps?
+    answer: >-
+      You need a Google Cloud Platform account with billing enabled, plus basic familiarity with
+      the Linux command line, Node.js and npm. You should also understand CircleCI concepts such
+      as workflows, jobs, resource classes, and runners.
+  - question: Which Google Cloud VM type and OS should I use for the self-hosted runner?
+    answer: >-
+      Provision a SUSE Linux (Arm64) VM using the C4A series, specifically c4a-standard-4 in the
+      Google Cloud Console. This VM runs on Google’s Axion processors based on Arm Neoverse-V2
+      cores.
+  - question: How is the CircleCI CLI used in this path?
+    answer: >-
+      The CLI lets you validate CircleCI configuration, run jobs locally, and manage runners from
+      the terminal. You will install it on SUSE Arm64 to test workflows and interact with your
+      setup.
+  - question: How do resource classes direct jobs to my Arm VM?
+    answer: >-
+      You create a custom resource class in the CircleCI dashboard that links your self-hosted
+      runner to your organization. Reference this resource class in your workflow so jobs target
+      the SUSE Arm64 VM.
+  - question: How do I know the self-hosted runner is working with my Node.js demo workflow?
+    answer: >-
+      Run the provided CircleCI workflow that specifies your custom Arm resource class; the job
+      should execute on the SUSE Arm64 VM. You can also use the CircleCI CLI to test and validate
+      the configuration locally.
+# END generated_summary_faq
 
 author: Pareena Verma
 

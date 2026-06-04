@@ -24,6 +24,55 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T01:28:34Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 6aa61de638be961339d958345225d696ff2b83b8f9cab22bf956f9bf2d15c1aa
+  summary_generated_at: '2026-06-02T04:22:41Z'
+  summary_source_hash: 6aa61de638be961339d958345225d696ff2b83b8f9cab22bf956f9bf2d15c1aa
+  faq_generated_at: '2026-06-03T01:28:34Z'
+  faq_source_hash: 6aa61de638be961339d958345225d696ff2b83b8f9cab22bf956f9bf2d15c1aa
+  summary: >-
+    This advanced Learning Path guides you through testing and validating thread synchronization
+    in the Arm memory model on Linux using Herd7, Litmus7, and Arm hardware. You will create and
+    run litmus tests, including an abbreviated MP.litmus example, to compare formal model predictions
+    against observed hardware behavior. The exercises focus on Arm ISA acquire-release semantics
+    with LDAR and STLR, and show how to compare results from different synchronization approaches.
+    The path is intended for developers with knowledge of memory consistency models, thread synchronization,
+    Arm assembly, general-purpose registers, and memory barriers (including acquire-release semantics).
+    No additional prerequisites are explicitly listed beyond these skills.
+  faqs:
+  - question: Do I need access to Arm hardware, and what operating system is used?
+    answer: >-
+      Yes, testing on Arm hardware is part of the Learning Path. The target operating system is
+      Linux, and no specific hardware platform or distribution is explicitly listed.
+  - question: Which tools should I use for modeling versus running on hardware?
+    answer: >-
+      Use Herd7 to test snippets against the formal definition of the Arm memory model, and Litmus7
+      to run litmus tests on Arm hardware. A Runbook structures the steps; diy7 is referenced
+      only in additional resources.
+  - question: How do I start with a litmus test in this path?
+    answer: >-
+      Follow the Herd7 and Litmus7 primer to create the provided abbreviated MP.litmus example
+      as test.litmus. Run it with Herd7 to confirm the syntax is correct and to produce results
+      you can later compare with hardware runs.
+  - question: Which Arm synchronization instructions are covered in the examples?
+    answer: >-
+      The path focuses on acquire-release ordering using LDAR (load-acquire) and STLR (store-release).
+      Other atomic instructions like CAS, SWP, LDADD, and STADD are mentioned but are outside
+      the scope of this Learning Path.
+  - question: What results should I expect to compare when I finish?
+    answer: >-
+      You will compare the observed outcomes of different thread synchronization approaches between
+      the formal model (Herd7) and runs on Arm hardware (Litmus7). Specific expected result values
+      are not listed in the context.
+# END generated_summary_faq
 
 author: Julio Suarez
 

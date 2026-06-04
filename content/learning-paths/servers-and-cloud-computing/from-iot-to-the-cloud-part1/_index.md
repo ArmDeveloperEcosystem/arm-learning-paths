@@ -26,6 +26,53 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T00:54:23Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 94866800acca2c5f9cd89f76f972af1a343aad5777b6844d49fac09eb764f580
+  summary_generated_at: '2026-06-02T03:53:58Z'
+  summary_source_hash: 94866800acca2c5f9cd89f76f972af1a343aad5777b6844d49fac09eb764f580
+  faq_generated_at: '2026-06-03T00:54:23Z'
+  faq_source_hash: 94866800acca2c5f9cd89f76f972af1a343aad5777b6844d49fac09eb764f580
+  summary: >-
+    This introductory path shows how to deploy a .NET application on Arm64 in Microsoft Azure.
+    You will create a Linux Arm64 virtual machine, connect over SSH using Azure Cloud Shell, install
+    the .NET 7 SDK and git, then build and run the app. You will configure the VM’s network security
+    group to expose the application over the Internet. Next, you will containerize the People.WebApp
+    with a Dockerfile in Visual Studio Code and push the resulting image to Azure Container Registry.
+    Prerequisites include an Azure subscription, Visual Studio Code with the Docker and C# extensions,
+    and Docker on Arm64. By the end, you have a running app and an image stored in ACR.
+  faqs:
+  - question: What do I need before running the steps?
+    answer: >-
+      You need an Azure subscription, Visual Studio Code with the Docker and C# extensions, and
+      Docker installed on an Arm64 system. These prerequisites are listed so you can build the
+      app locally and containerize it before pushing to Azure Container Registry.
+  - question: How do I connect to the VM and which IP address should I use?
+    answer: >-
+      Connect over SSH using Azure Cloud Shell from the portal. Always use the public IP address
+      of your own VM shown in the Azure portal and not the sample IP provided in the tutorial
+      text.
+  - question: Which SDK and tools are installed on the VM to build the app?
+    answer: >-
+      You install the .NET 7 SDK using the dotnet-install.sh script and also install git to clone
+      the application sources. These are used to build and run the .NET application on the VM.
+  - question: How will the application be accessible from the internet?
+    answer: >-
+      You will configure the VM’s network security group to expose the application. This step
+      opens access so the running app can be reached externally.
+  - question: Where should I build the Docker image and how is it published to Azure?
+    answer: >-
+      You can containerize the People.WebApp using Visual Studio Code on a Windows on Arm device
+      (via WSL) or on the previously created VM, then push the local Docker image to Azure Container
+      Registry. The application sources are cloned from https://github.com/dawidborycki/People.WebApp.git.
+# END generated_summary_faq
 
 author: Dawid Borycki
 

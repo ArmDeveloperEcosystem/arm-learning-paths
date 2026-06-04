@@ -21,6 +21,55 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-02T23:23:55Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: f5a93346a0fd55659b7c0a6df501db97742ec71755b6443051b654f3ce871cdf
+  summary_generated_at: '2026-06-01T22:14:53Z'
+  summary_source_hash: f5a93346a0fd55659b7c0a6df501db97742ec71755b6443051b654f3ce871cdf
+  faq_generated_at: '2026-06-02T23:23:55Z'
+  faq_source_hash: f5a93346a0fd55659b7c0a6df501db97742ec71755b6443051b654f3ce871cdf
+  summary: >-
+    This Learning Path shows how to implement and test an AWS Lambda function on Windows on Arm
+    that scans and aggregates IoT data stored in Amazon DynamoDB. You will create a Lambda function
+    in the AWS console using the Node.js 20.x runtime, implement the handler as an ES module (index.mjs)
+    to scan a table (SensorReadings) and compute an average temperature value, then deploy and
+    invoke a test event to view results. The path assumes your DynamoDB table already contains
+    records written by an IoT emulator from a prior exercise. Prerequisites include a Windows
+    on Arm computer or VM, a code editor such as Visual Studio Code for Arm64, and completion
+    of the earlier Windows on Arm and AWS IoT Core Learning Path. Estimated time: 45 minutes.
+  faqs:
+  - question: What do I need before running these steps?
+    answer: >-
+      You need a Windows on Arm computer (for example, a Lenovo ThinkPad X13s running Windows
+      11 or a Windows on Arm virtual machine), any code editor such as Visual Studio Code for
+      Arm64, and completion of the “Create IoT applications with Windows on Arm and AWS IoT Core”
+      Learning Path.
+  - question: Which options should I choose when creating the Lambda function?
+    answer: >-
+      In the AWS Lambda console, select Create function, choose Author from scratch, set the Function
+      name to GetAverageTemperature, and select Node.js 20.x as the runtime.
+  - question: Where do I add the code and what file name should I use?
+    answer: >-
+      Paste the code in the Code source section under index.mjs. The .mjs extension indicates
+      the Lambda entry file is an ECMAScript (ES) module.
+  - question: How do I populate data and test the function?
+    answer: >-
+      Launch the IoT emulator to write data to your DynamoDB table, then click Deploy in the function
+      dashboard. Click Test, create a test event named Test, and run it to see execution status
+      and the average temperature in the console.
+  - question: What should I check if the function returns no average or errors?
+    answer: >-
+      Verify the DynamoDB table SensorReadings exists in the eu-central-1 region and contains
+      items with a temperature attribute. Also confirm you completed the prior steps that write
+      records to the table.
+# END generated_summary_faq
 
 author: Dawid Borycki
 

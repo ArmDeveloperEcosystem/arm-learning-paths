@@ -24,6 +24,58 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T01:46:30Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 0599665da13e9e1a8b017b0dac87c63f323ef769b1a5be62a60a32a36bc82696
+  summary_generated_at: '2026-06-02T04:46:21Z'
+  summary_source_hash: 0599665da13e9e1a8b017b0dac87c63f323ef769b1a5be62a60a32a36bc82696
+  faq_generated_at: '2026-06-03T01:46:30Z'
+  faq_source_hash: 0599665da13e9e1a8b017b0dac87c63f323ef769b1a5be62a60a32a36bc82696
+  summary: >-
+    Use an AI coding assistant with the Arm MCP Server to run Arm Performix Code Hotspots on a
+    C++ application and act on the results on Arm Neoverse. You configure a GitHub Copilot prompt
+    file to launch profiling on a remote Linux-based Arm instance, interpret flame graph output,
+    and apply agent-suggested changes to the Mandelbrot example, such as a squared-magnitude check,
+    raw double arithmetic instead of std::complex, and compiling with -O3. Prerequisites include
+    familiarity with configuring the Arm MCP Server in an AI assistant (or completion of the related
+    Learning Path), access to an Arm-based cloud instance (for example, AWS Graviton3) with Arm
+    Performix set up for the target, and basic C++ knowledge.
+  faqs:
+  - question: What do I need before running this Learning Path?
+    answer: >-
+      You need familiarity with configuring the Arm MCP Server in an AI coding assistant (or completion
+      of the referenced Learning Path), access to an Arm-based Linux cloud instance such as an
+      AWS Graviton3 instance, access to Arm Performix configured with the remote Arm target, and
+      a basic understanding of C++.
+  - question: Do I have to use Visual Studio Code and GitHub Copilot?
+    answer: >-
+      The steps use Visual Studio Code with GitHub Copilot as the example AI assistant. Equivalent
+      configurations for other AI agents (Kiro and OpenAI Codex) are referenced at the end of
+      the section.
+  - question: Which prompt file should I use to run the Code Hotspots recipe?
+    answer: >-
+      Use the Arm MCP arm-hotspots-optimization prompt file with GitHub Copilot. It drives the
+      Code Hotspots recipe through the MCP Server, confirms your target details, runs the collection,
+      and returns structured profiling results.
+  - question: How do I know Arm Performix can reach my remote Arm target?
+    answer: >-
+      You will build the Mandelbrot C++ application on the remote server and follow a step that
+      confirms Performix can access the target. Complete this confirmation before launching the
+      Code Hotspots run.
+  - question: What result should I expect, and what optimizations are applied?
+    answer: >-
+      Expect structured profiling output and a flame graph that highlights the hottest functions
+      in the Mandelbrot application. The path applies AI-suggested changes: replacing std::abs
+      with a squared-magnitude check, replacing std::complex<double> with raw double arithmetic,
+      and rebuilding with -O3; the agent can edit the remote source via SSH through the MCP Server.
+# END generated_summary_faq
 
 author: Pareena Verma
 

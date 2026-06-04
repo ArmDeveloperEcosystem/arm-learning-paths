@@ -22,6 +22,53 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-02T23:37:32Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: e23de84e7e05d771072ab799f5cc802476fd5e3c23da41a202c9c50fe9980e25
+  summary_generated_at: '2026-06-02T02:37:39Z'
+  summary_source_hash: e23de84e7e05d771072ab799f5cc802476fd5e3c23da41a202c9c50fe9980e25
+  faq_generated_at: '2026-06-02T23:37:32Z'
+  faq_source_hash: e23de84e7e05d771072ab799f5cc802476fd5e3c23da41a202c9c50fe9980e25
+  summary: >-
+    This Learning Path shows how to use WindowsPerf to sample a native Windows on Arm workload
+    by building CPython from sources for the ARM64 target and analyzing its runtime. You will
+    create a debug build, run CPython interactively, pin python_d.exe to a selected core, and
+    collect both counting and sampling data to locate hot code paths using PMU event frequencies.
+    The path also shows how to streamline the workflow with the WindowsPerf record command to
+    spawn and pin the process and forward arguments. Prerequisites include a Windows on Arm machine
+    with WindowsPerf installed and a Windows x86_64 desktop with Visual Studio 2022 Community
+    Edition. After completing, you will understand basic sampling and the WindowsPerf command
+    line for this scenario.
+  faqs:
+  - question: What do I need before running the examples?
+    answer: >-
+      You need a Windows on Arm desktop or development machine with WindowsPerf installed, and
+      a Windows x86_64 desktop with Visual Studio 2022 Community Edition installed. The sampling
+      examples are run on a native ARM64 Windows on Arm machine.
+  - question: Which CPython build should I use during the sampling exercises?
+    answer: >-
+      Use the debug build of CPython targeting ARM64 that you built from sources in the previous
+      step. The examples reference these pre-built ARM64 debug binaries.
+  - question: Which WindowsPerf command should I use to spawn and pin CPython to a core?
+    answer: >-
+      Use the record command with the -c option to pin to a specific core. You can specify the
+      process with --pe_file or place the process to spawn at the end of the wperf command.
+  - question: How do I pass command-line arguments to my program when using WindowsPerf?
+    answer: >-
+      Place all application arguments after the WindowsPerf options. They are passed verbatim
+      to the spawned program.
+  - question: What result should I expect when I run counting and sampling on the Googolplex workload?
+    answer: >-
+      Counting provides aggregate event counts, while sampling reports frequencies of PMU events.
+      Together they help you see hot locations in the CPython runtime image under the chosen workload.
+# END generated_summary_faq
 
 author: Przemyslaw Wirkus
 

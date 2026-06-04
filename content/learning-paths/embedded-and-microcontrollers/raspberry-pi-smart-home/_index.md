@@ -24,6 +24,58 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-02T22:37:58Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: a0145c77b3d4a8bb25a32c62adaa3ad378e65fccbe6db88d9a46a569897d238a
+  summary_generated_at: '2026-06-01T21:50:06Z'
+  summary_source_hash: a0145c77b3d4a8bb25a32c62adaa3ad378e65fccbe6db88d9a46a569897d238a
+  faq_generated_at: '2026-06-02T22:37:58Z'
+  faq_source_hash: a0145c77b3d4a8bb25a32c62adaa3ad378e65fccbe6db88d9a46a569897d238a
+  summary: >-
+    This introductory Learning Path guides you through building a fully local, privacy-first smart
+    home assistant on Raspberry Pi 5 with an Arm Cortex-A76 CPU. You install Python and required
+    libraries, set up Ollama to run a local large language model, and validate GPIO by wiring
+    an LED with a resistor to GPIO 17 and controlling it from a Python script. You then clone
+    a GitHub project that initializes devices, exposes a local FastAPI web server, and uses the
+    model’s JSON responses to execute actions from natural-language commands. Prerequisites include
+    a Raspberry Pi 5 running Raspberry Pi OS, basic electronics components, and familiarity with
+    Python and Raspberry Pi GPIO.
+  faqs:
+  - question: What do I need before running the setup?
+    answer: >-
+      You need an Arm-based single board computer such as a Raspberry Pi 5 running Raspberry Pi
+      OS with network connectivity. Have a breadboard, LEDs, 220Ω resistors, and jumper wires
+      for GPIO testing, plus familiarity with Python, the Raspberry Pi GPIO pinout, and basic
+      electronics.
+  - question: How should I connect to my Raspberry Pi 5 to install dependencies?
+    answer: >-
+      Connect the Raspberry Pi 5 to an external display through a micro‑HDMI port for local access.
+      The Learning Path assumes Raspberry Pi OS and network connectivity are already configured.
+  - question: How do I wire and verify the GPIO LED test?
+    answer: >-
+      Connect the LED anode in series with a 220Ω resistor to GPIO 17 (physical pin 11), and connect
+      the cathode to a GND pin. Create and run the testgpio.py script as shown; the LED should
+      respond to the script, confirming the wiring and GPIO control.
+  - question: Where do I get the assistant code and what does the main script do?
+    answer: >-
+      The assistant is available on GitHub; clone the repository and navigate to the project directory
+      as directed in the steps. Running smart_home_assistant.py initializes devices on specific
+      GPIO pins, starts a local web server, and uses a local model via Ollama to parse JSON commands
+      and control devices.
+  - question: How do I interact with the assistant and what behavior should I expect from the
+      LLM?
+    answer: >-
+      You can issue commands from the terminal or use the local web interface started by the script.
+      The Learning Path notes the system can achieve 15+ tokens per second while operating without
+      cloud services for a privacy-first setup.
+# END generated_summary_faq
 
 author: Fidel Makatia Omusilibwa
 

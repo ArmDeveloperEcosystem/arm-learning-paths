@@ -20,6 +20,54 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T01:59:24Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: eb008543ea4248b231be5e6345546164533edf2bc149613693095812bbbba3d9
+  summary_generated_at: '2026-06-02T04:58:42Z'
+  summary_source_hash: eb008543ea4248b231be5e6345546164533edf2bc149613693095812bbbba3d9
+  faq_generated_at: '2026-06-03T01:59:24Z'
+  faq_source_hash: eb008543ea4248b231be5e6345546164533edf2bc149613693095812bbbba3d9
+  summary: >-
+    This Learning Path guides you through deploying Redis for data searching on Google Cloud C4A
+    virtual machines powered by Axion processors (Arm Neoverse-V2 cores). You will provision a
+    SUSE Linux (SLES) Arm64 instance in Compute Engine, build and install Redis from source with
+    TLS support, verify the server using redis-cli, and run baseline data insertion and retrieval
+    tests. You will then measure Redis SET and GET throughput and latency using the official redis-benchmark
+    tool on Arm64. It is introductory in scope and intended for developers working with Redis-based
+    data searching on Linux/Arm64. Prerequisites are a Google Cloud account with billing enabled
+    and basic familiarity with Redis.
+  faqs:
+  - question: What do I need before running this Learning Path?
+    answer: >-
+      You need a Google Cloud Platform account with billing enabled and basic familiarity with
+      Redis. No other explicit prerequisites are listed.
+  - question: Which Google Cloud instance and OS should I use?
+    answer: >-
+      Use the C4A family with the c4a-standard-4 machine type (4 vCPUs, 16 GB memory). Provision
+      a SUSE SLES Arm64 virtual machine from the Google Cloud Console.
+  - question: How is Redis installed on the SUSE Arm64 VM?
+    answer: >-
+      You install build prerequisites using zypper, then download Redis 8.2.2 from the official
+      GitHub repository and build from source. Building from source ensures compatibility on Arm
+      and enables TLS support.
+  - question: How do I start Redis and confirm it is running?
+    answer: >-
+      Start the server in the background with redis-server & and verify responsiveness with redis-cli
+      ping, which should return PONG. The steps then insert and retrieve sample data to validate
+      baseline functionality.
+  - question: How do I benchmark Redis and what results should I look for?
+    answer: >-
+      Use the official redis-benchmark tool; the path demonstrates SET testing with redis-benchmark
+      -t set -n 100000 -c 50 and also measures GET. Review requests per second and latency metrics
+      reported by the tool.
+# END generated_summary_faq
 
 author: Pareena Verma
 

@@ -22,6 +22,55 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-02T22:32:21Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 81a15ff0d5579be9529a8c9c444be57521ebc48bbf5234f042f5a47a8a709b5c
+  summary_generated_at: '2026-06-01T21:45:31Z'
+  summary_source_hash: 81a15ff0d5579be9529a8c9c444be57521ebc48bbf5234f042f5a47a8a709b5c
+  faq_generated_at: '2026-06-02T22:32:21Z'
+  faq_source_hash: 81a15ff0d5579be9529a8c9c444be57521ebc48bbf5234f042f5a47a8a709b5c
+  summary: >-
+    This advanced Learning Path guides you through migrating an x86_64 Linux application to aarch64
+    using a practical porting methodology. You will set up an aarch64 GCC development environment
+    in a Docker container on a Linux host, analyze a Sobel filter workload implemented as non-SIMD
+    C++, x86_64 intrinsics, and OpenCV, and iteratively port code to Arm, including translating
+    intrinsics to Neon using SIMDe. You will build and run the application and evaluate console
+    timing results and image outputs. Emulation, remote hardware, or physical Arm hardware can
+    be used; physical hardware is not required. Prerequisites include introductory container knowledge,
+    familiarity with build workflows, and access to an aarch64 or x86_64 Linux machine. The path
+    also introduces using Arm compilers and libraries.
+  faqs:
+  - question: What do I need before running the steps?
+    answer: >-
+      You need an introductory understanding of software containers, knowledge about building
+      workflows, and access to a Linux machine on either aarch64 or x86_64. This is an advanced
+      topic aimed at developers migrating Linux workloads.
+  - question: Can I complete this Learning Path without physical Arm hardware?
+    answer: >-
+      Yes. Physical Arm hardware is not required; you can use emulation or remote hardware to
+      run the aarch64 application.
+  - question: Which compiler and environment should I use for the port?
+    answer: >-
+      The example uses GCC and recommends matching the original GCC version when possible. Set
+      up an aarch64 GCC development container with Docker and run all build and test commands
+      inside that container.
+  - question: How should I handle x86 SIMD intrinsics during the port?
+    answer: >-
+      Use SIMD Everywhere (SIMDe) to port AVX intrinsics. This enables keeping a single source
+      base while targeting aarch64.
+  - question: What result should I expect when I run the ported application?
+    answer: >-
+      The program prints execution time measurements in microseconds for the non-SIMD, SIMD, and
+      OpenCV implementations, and opens four image windows including the original and processed
+      outputs. The example runs on CPU only (no hardware acceleration).
+# END generated_summary_faq
 
 author: Kasper Mecklenburg
 

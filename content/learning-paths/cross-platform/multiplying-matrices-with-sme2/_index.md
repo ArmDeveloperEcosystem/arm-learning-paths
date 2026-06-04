@@ -29,6 +29,62 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-02T21:48:10Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: eb01b77f36323331c080615edcbddbf8cb56cf005f2249f1ea309ab1dbec8616
+  summary_generated_at: '2026-06-01T21:13:59Z'
+  summary_source_hash: eb01b77f36323331c080615edcbddbf8cb56cf005f2249f1ea309ab1dbec8616
+  faq_generated_at: '2026-06-02T21:48:10Z'
+  faq_source_hash: eb01b77f36323331c080615edcbddbf8cb56cf005f2249f1ea309ab1dbec8616
+  summary: >-
+    This advanced Learning Path shows how to implement, build, and evaluate matrix multiplication
+    using Arm’s Scalable Matrix Extension 2 (SME2) with both assembly and intrinsics. You will
+    set up a development environment on Linux, macOS, or Windows and choose either native SME2
+    hardware (demonstrated on macOS with an M4 chip or some Android phones) or a Linux-based emulation
+    flow. After verifying your toolchain with CMake/Ninja and Clang/LLVM (LLVM 18+), you will
+    create a vanilla C matmul as a correctness reference, then add SME2 intrinsics and assembly,
+    learn how streaming mode and ZA state are handled via ACLE annotations, and benchmark and
+    validate results. Prerequisites include working knowledge of SVE/SME2, intermediate C and
+    Armv9-A assembly, Git, CMake, Ninja, and optionally Docker or Android Development Studio and
+    adb.
+  faqs:
+  - question: What do I need before running the examples?
+    answer: >-
+      You need working knowledge of SVE and SME2, intermediate C and Armv9-A assembly skills,
+      and a computer running Linux, macOS, or Windows. Install Git, CMake, Ninja, and a compiler
+      with SME2 support (for example, LLVM 18+). For emulation, install Docker; for Android targets,
+      install Android Studio and adb, and use a phone with SME2 support.
+  - question: Should I use native SME2 hardware or an emulator?
+    answer: >-
+      Use native SME2 hardware when available for direct execution; this Learning Path demonstrates
+      macOS with an M4 chip and some Android phones with SME2 support. If you lack SME2 hardware,
+      use the Linux-based emulation option. iPhone and iPad are not covered by the instructions,
+      even though they have SME2 support.
+  - question: How do I verify my SME2 toolchain and environment are set up correctly?
+    answer: >-
+      Build the provided code examples with CMake to confirm the compiler, hardware (or emulator),
+      and tools are working. For native builds, you may need to tell CMake which Clang to use
+      if the system default is not suitable. A successful, error-free build indicates your environment
+      is ready.
+  - question: How do I use streaming mode and handle ZA state in SME?
+    answer: >-
+      Annotate the relevant functions to enable streaming mode as defined by the Arm C Language
+      Extensions (ACLE). The compiler manages saving and restoring state, including ZA storage,
+      when streaming-mode functions call each other. No manual state management is required.
+  - question: How do I validate and benchmark the SME2-optimized matrix multiplication?
+    answer: >-
+      First implement the vanilla C matrix multiplication as a correctness reference. Then compile
+      the SME2 intrinsics and assembly implementations and run benchmarks on SME2 hardware or
+      in a Linux-based emulation environment. Compare the performance metrics to the baseline
+      and confirm numerical results match.
+# END generated_summary_faq
 
 author: Arnaud de Grandmaison
 

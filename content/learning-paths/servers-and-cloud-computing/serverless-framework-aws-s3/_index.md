@@ -19,6 +19,55 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T02:05:45Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: a31c6f9d674bf41cee16066708c884ca587289e181b7754ff75cdbd85bdb30e3
+  summary_generated_at: '2026-06-02T05:10:00Z'
+  summary_source_hash: a31c6f9d674bf41cee16066708c884ca587289e181b7754ff75cdbd85bdb30e3
+  faq_generated_at: '2026-06-03T02:05:45Z'
+  faq_source_hash: a31c6f9d674bf41cee16066708c884ca587289e181b7754ff75cdbd85bdb30e3
+  summary: >-
+    Build and deploy a multi-resource serverless application on AWS using the Serverless Framework.
+    You will declare a service that provisions an Amazon S3 bucket to host a static website, a
+    DynamoDB table for sample sensor data, two AWS Lambda functions (one to write temperatures
+    and one to return an average), and the required IAM role. You will add website files (including
+    index.html) under your Serverless project and deploy the stack using Serverless Framework
+    commands. This introductory path targets developers using Windows on Arm and assumes completion
+    of the introductory Serverless Framework on AWS Learning Path. Estimated time to complete
+    is about 60 minutes.
+  faqs:
+  - question: What do I need before running the steps?
+    answer: >-
+      Have a Windows on Arm computer or a Windows on Arm virtual machine, a code editor such as
+      Visual Studio Code for Arm64, and completion of the Learning Path on deploying AWS services
+      with the Serverless Framework. This path uses Node.js and npm.
+  - question: Where should I create the website files?
+    answer: >-
+      Create a subfolder under the folder where you created the serverless project (for example,
+      AwsServerlessDynamoDbLambdaS3). Inside that website folder, create index.html as shown in
+      the steps.
+  - question: Which AWS resources does the service declare and deploy?
+    answer: >-
+      A DynamoDB table for hypothetical sensor data, two AWS Lambda functions (one writes temperatures,
+      the other retrieves the average), an IAM role granting the functions access to the table,
+      and an S3 bucket to host the static website.
+  - question: From which directory and with which commands do I deploy?
+    answer: >-
+      Open a terminal and navigate to the AwsServerlessDynamoDbLambda folder. Run npm install
+      --save-dev serverless, then run serverless deploy.
+  - question: What result should I expect after deployment?
+    answer: >-
+      You should see packaging and deployment logs, including a line like "Deploying 'AwsServerlessDynamoDbLambdaS3'
+      to stage 'dev' (us-east-1)". This indicates the service and its AWS resources were deployed.
+# END generated_summary_faq
+
 author: Dawid Borycki
 
 ### Tags

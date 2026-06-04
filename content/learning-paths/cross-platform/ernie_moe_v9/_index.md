@@ -20,6 +20,55 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-02T21:37:05Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: e835a550c955b13805c7859ff64e3b8d7fdee68222569225c53a0f15db72f046
+  summary_generated_at: '2026-06-01T21:05:21Z'
+  summary_source_hash: e835a550c955b13805c7859ff64e3b8d7fdee68222569225c53a0f15db72f046
+  faq_generated_at: '2026-06-02T21:37:05Z'
+  faq_source_hash: e835a550c955b13805c7859ff64e3b8d7fdee68222569225c53a0f15db72f046
+  summary: >-
+    This advanced Learning Path shows how to deploy ERNIE-4.5 Mixture of Experts (MoE) models
+    on Armv9 devices using llama.cpp on Linux. You will set up an Armv9 development board (for
+    example, a Radxa Orion O6 with at least 32 GB of available disk space), run and verify inference,
+    and validate multilingual outputs with the ERNIE-4.5 Thinking variant. You then compare the
+    PT and Thinking models, inspect MoE expert routing, and benchmark a baseline CPU build against
+    an Armv9-optimized build that enables SVE, i8mm, and dotprod instructions to measure their
+    impact. The outcome is the ability to deploy, compare, and benchmark ERNIE-4.5 MoE models
+    on Armv9 in about 60 minutes.
+  faqs:
+  - question: What do I need before running this Learning Path?
+    answer: >-
+      You need an Armv9 device with at least 32 GB of available disk space. The steps assume a
+      Linux environment and use a Radxa Orion O6 as an example platform.
+  - question: Which ERNIE-4.5 variants are used, and what will I compare?
+    answer: >-
+      You will work with the PT and Thinking variants of ERNIE-4.5. The path compares their inference
+      behavior on the same task and shows how to inspect internal MoE expert routing. Both share
+      the same MoE architecture and parameter count (around 21B total, about 3B active at runtime).
+  - question: How do I validate that my setup and model inference are working?
+    answer: >-
+      You verify inference on an Armv9 development board and validate multilingual outputs using
+      the ERNIE Thinking variant. Successful inference confirms the environment and model setup
+      are ready for the comparison and benchmarking steps.
+  - question: What Armv9 optimizations are benchmarked, and how are they tested?
+    answer: >-
+      You measure performance with and without Armv9 vector instruction optimizations. The comparison
+      is between a baseline regular CPU build and an Armv9-specific build with SVE, i8mm, and
+      dotprod enabled.
+  - question: How can I observe which MoE experts are used during generation?
+    answer: >-
+      The path includes steps to inspect internal MoE expert routing behavior while generating
+      outputs. You use this to understand how the PT and Thinking variants route tokens to experts
+      during inference.
+# END generated_summary_faq
 
 author: Odin Shen
 

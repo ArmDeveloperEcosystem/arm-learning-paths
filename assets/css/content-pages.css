@@ -265,51 +265,58 @@ html[theme='dark'] .incorrect-explain {color: #e86868} /* 27% lighter than arm's
 
 /* Generated AI-assisted summary/FAQ block
 *******************************************************************/
-.generated-summary-faq__label {
+.generated-summary-faq__heading {
     align-items: center;
     display: flex;
-    gap: 8px;
+    flex-wrap: wrap;
+    column-gap: 12px;
+    margin-bottom: 16px;
+    row-gap: 8px;
 }
 
-.generated-summary-faq__badge {
-    border: 1px solid var(--arm-web-safe-blue);
-    color: var(--arm-web-safe-blue);
-    display: inline-block;
-    font-size: 0.8rem;
-    font-weight: 700;
-    line-height: 1;
-    padding: 5px 8px;
-    text-transform: uppercase;
+.generated-summary-faq__heading h3 {
+    line-height: 1.1;
+    margin: 0;
 }
 
-html[theme='dark'] .generated-summary-faq__badge {
-    border-color: var(--arm-light-blue);
-    color: var(--arm-light-blue);
-}
-
-.generated-summary-faq__info {
+.generated-summary-faq__assist {
     align-items: center;
-    background: transparent;
-    border: 1px solid var(--arm-web-safe-blue);
-    color: var(--arm-web-safe-blue);
-    cursor: pointer;
     display: inline-flex;
-    font-size: 0.8rem;
-    font-weight: 700;
-    height: 24px;
-    justify-content: center;
-    padding: 0;
-    width: 24px;
+    gap: 6px;
 }
 
-.generated-summary-faq__info:hover {
-    border-color: var(--arm-green);
-    color: var(--arm-green);
+.generated-summary-faq__assist ads-modal {
+    display: inline-flex;
 }
 
-html[theme='dark'] .generated-summary-faq__info {
-    border-color: var(--arm-light-blue);
-    color: var(--arm-light-blue);
+ads-tag.generated-summary-faq__ai-tag {
+    --ads-tag-background-color: transparent;
+    --ads-tag-background-color-hover: transparent;
+    --ads-tag-border-color: 1px solid var(--arm-web-safe-blue);
+    --ads-tag-border-color-hover: 1px solid var(--arm-green);
+    --ads-tag-color: var(--arm-web-safe-blue);
+    --ads-tag-color-hover: var(--arm-green);
+}
+
+html[theme='dark'] ads-tag.generated-summary-faq__ai-tag {
+    --ads-tag-border-color: 1px solid var(--arm-light-blue);
+    --ads-tag-border-color-hover: 1px solid var(--arm-green);
+    --ads-tag-color: var(--arm-light-blue);
+    --ads-tag-color-hover: var(--arm-green);
+}
+
+ads-button.generated-summary-faq__info {
+    --ads-button-color: var(--arm-web-safe-blue);
+    --ads-button-color-hover: var(--arm-green);
+    --ads-button-border-color: var(--arm-web-safe-blue);
+    --ads-button-border-color-hover: var(--arm-green);
+}
+
+html[theme='dark'] ads-button.generated-summary-faq__info {
+    --ads-button-color: var(--arm-light-blue);
+    --ads-button-color-hover: var(--arm-green);
+    --ads-button-border-color: var(--arm-light-blue);
+    --ads-button-border-color-hover: var(--arm-green);
 }
 
 ads-expansion-panel.generated-summary-faq__panel {

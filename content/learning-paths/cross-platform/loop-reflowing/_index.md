@@ -17,6 +17,55 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-02T21:44:40Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 4218b8b0c1dee3862bb9765a83dfed0cb38555d1da7425e791c5c16b17f98c21
+  summary_generated_at: '2026-06-01T21:10:12Z'
+  summary_source_hash: 4218b8b0c1dee3862bb9765a83dfed0cb38555d1da7425e791c5c16b17f98c21
+  faq_generated_at: '2026-06-02T21:44:40Z'
+  faq_source_hash: 4218b8b0c1dee3862bb9765a83dfed0cb38555d1da7425e791c5c16b17f98c21
+  summary: >-
+    This advanced, 45-minute Learning Path guides C/C++ developers on Arm Linux through practical
+    compiler autovectorization techniques on Arm processors. You will compile small examples (such
+    as addvec, addvec_neon, and dotprod) with GCC or Clang at -O2, generate and inspect assembly
+    with objdump, and learn how to structure loops so compilers can vectorize them. The steps
+    cover using the C99 restrict qualifier, recognizing limits like non-countable loops and branches,
+    and adapting conditionals to enable the vectorizer. Prerequisite: an Arm computer running
+    Linux with a recent GCC or Clang installed. By the end, you will be able to modify loops to
+    help mainstream compilers autovectorize on Arm.
+  faqs:
+  - question: What do I need before running the examples?
+    answer: >-
+      You need an Arm computer running Linux and a recent version of GCC or Clang. The examples
+      use gcc, and the path references the GNU compiler install guide if you need installation
+      help.
+  - question: When should I use the restrict qualifier in the examples?
+    answer: >-
+      The path shows a classic case where adding restrict to pointer parameters removes potential
+      aliasing and enables autovectorization. You will compile both restricted and non-restricted
+      versions and compare their generated assembly.
+  - question: Which commands does the path use to compile and inspect the code?
+    answer: >-
+      It compiles with gcc -O2 addvec.c -o addvec and gcc -O2 addvec_neon.c -o addvec_neon. To
+      view the generated assembly, it uses objdump -D addvec.
+  - question: How do I know if a loop is eligible for autovectorization?
+    answer: >-
+      The path explains that countable loops—where the number of iterations is known before entry—are
+      candidates for vectorization. Examples show that loops with unknown trip counts or early
+      breaks are not vectorized.
+  - question: What should I check if my loop has conditionals and isn’t being vectorized?
+    answer: >-
+      Branches inside loops can inhibit autovectorization. The steps demonstrate when you can
+      adapt or restructure the loop to enable the vectorizer and when an algorithm change or manually
+      optimized code may be required.
+# END generated_summary_faq
 
 author: Konstantinos Margaritis
 

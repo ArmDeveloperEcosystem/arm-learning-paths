@@ -20,6 +20,56 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T00:06:38Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: e2f6f3005c119e6f6fe97612d4e2600849106f244bce729d56bfeeedb30637c2
+  summary_generated_at: '2026-06-02T02:57:43Z'
+  summary_source_hash: e2f6f3005c119e6f6fe97612d4e2600849106f244bce729d56bfeeedb30637c2
+  faq_generated_at: '2026-06-03T00:06:38Z'
+  faq_source_hash: e2f6f3005c119e6f6fe97612d4e2600849106f244bce729d56bfeeedb30637c2
+  summary: >-
+    Learn to analyze Android graphics workloads using Frame Advisor’s Render Graph view in Arm
+    Performance Studio. You will capture GPU data with Streamline Performance Analyzer, then inspect
+    the directed acyclic graph of workloads and resources to find GPU‑heavy sections, spot unused
+    resources, and detect unwanted execution nodes. The path explains render graph concepts, shows
+    how to generate a capture, and demonstrates actionable fixes such as removing unnecessary
+    API calls. It applies to applications using OpenGL ES or Vulkan. Prerequisites include having
+    Frame Advisor installed; a supported Android device is needed if you plan to analyze your
+    own applications. Basic familiarity with Frame Advisor is recommended. Estimated time to complete
+    is about 30 minutes on Linux, Windows, or macOS hosts.
+  faqs:
+  - question: What do I need before running this Learning Path?
+    answer: >-
+      Install Frame Advisor (part of Arm Performance Studio). If you plan to analyze your own
+      applications, use a supported Android device. Basic familiarity with Frame Advisor is recommended;
+      review the “Get started with Arm Performance Studio for mobile” section.
+  - question: Which Streamline capture settings should I use to record GPU data for the render
+      graph?
+    answer: >-
+      In Streamline’s Start view, open Configure Capture and enable GPU data collection. For an
+      Arm GPU, deselect “Use advanced mode” and select the “Capture Arm GPU” checkbox.
+  - question: What result should I expect from the Render Graph view?
+    answer: >-
+      You will see a directed acyclic graph of nodes and edges that summarizes GPU workloads (execution
+      nodes) and resources for a single frame. It shows how data flows between passes and where
+      outputs are consumed.
+  - question: What should I check if the graph shows resources that are never consumed?
+    answer: >-
+      Identify outputs from a render or transfer node that have no downstream consumers in the
+      graph. These indicate data written but not used in the frame and are candidates for review
+      or removal in your application.
+  - question: How do I decide whether an execution node can be removed?
+    answer: >-
+      If all outputs from a node are unnecessary, the computation is unnecessary and you can remove
+      the corresponding API calls. Make changes carefully and verify the application after adjustments.
+# END generated_summary_faq
 
 author: Mark Thurman
 

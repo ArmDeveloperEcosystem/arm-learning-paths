@@ -20,6 +20,52 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T01:33:34Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: abbdde22271151fb1485c54bafe463e7797a0b913c7d4c99245d2914a3f9bb82
+  summary_generated_at: '2026-06-02T04:28:40Z'
+  summary_source_hash: abbdde22271151fb1485c54bafe463e7797a0b913c7d4c99245d2914a3f9bb82
+  faq_generated_at: '2026-06-03T01:33:34Z'
+  faq_source_hash: abbdde22271151fb1485c54bafe463e7797a0b913c7d4c99245d2914a3f9bb82
+  summary: >-
+    Learn how to deploy MongoDB on Arm-based Google Axion C4A virtual machines and benchmark it
+    with the Yahoo Cloud Serving Benchmark (YCSB). You will create a c4a-standard-4 VM in Google
+    Cloud using the Console, install MongoDB and mongosh on Red Hat Enterprise Linux with Arm64
+    (aarch64) binaries for RHEL 9, and verify the server locally. Then you will build YCSB’s MongoDB
+    binding from source (Maven/Java 11), load a starter dataset, and run workloads to capture
+    a quick baseline and benchmark results. The C4A family uses Google’s Axion CPU based on Arm
+    Neoverse‑V2 cores. Prerequisite: a Google Cloud Platform account with billing enabled.
+  faqs:
+  - question: What do I need before creating the VM on Google Cloud?
+    answer: >-
+      You need a Google Cloud Platform (GCP) account with billing enabled. All setup and deployment
+      takes place in your GCP project.
+  - question: Which VM configuration does this path use for Axion C4A?
+    answer: >-
+      The steps create an Arm-based C4A VM using the c4a-standard-4 machine type (4 vCPUs, 16
+      GB memory). You create it in the Google Cloud Console under Compute Engine by selecting
+      the C4A series.
+  - question: Which operating system and MongoDB package are assumed?
+    answer: >-
+      The installation targets Red Hat Enterprise Linux on Arm. The steps fetch the Arm64 (aarch64)
+      MongoDB binaries for RHEL 9.3.
+  - question: How do I verify that MongoDB is running correctly?
+    answer: >-
+      Connect locally with mongosh using mongodb://127.0.0.1:27017. Create a test database and
+      collection, perform basic CRUD operations, and record a quick insert-time baseline.
+  - question: How do I install and run YCSB for MongoDB, and what data size is loaded initially?
+    answer: >-
+      Install git, Maven, and Java 11, clone the YCSB repository, and build the MongoDB binding
+      with Maven. Use YCSB to load the starter dataset, which defaults to 1,000 records, and then
+      run the workloads to benchmark MongoDB.
+# END generated_summary_faq
 
 author: Annie Tallund
 

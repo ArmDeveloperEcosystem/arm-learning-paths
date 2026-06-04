@@ -22,6 +22,51 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T00:36:00Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 908a750f2a891a0c4c9d1183c2130ac5ac0fdcfb4a45185cef6ed6da47c9aaa9
+  summary_generated_at: '2026-06-02T03:26:25Z'
+  summary_source_hash: 908a750f2a891a0c4c9d1183c2130ac5ac0fdcfb4a45185cef6ed6da47c9aaa9
+  faq_generated_at: '2026-06-03T00:36:00Z'
+  faq_source_hash: 908a750f2a891a0c4c9d1183c2130ac5ac0fdcfb4a45185cef6ed6da47c9aaa9
+  summary: >-
+    Build and run the x265 H.265 encoder on Arm servers and benchmark its performance across different
+    video resolutions and encoding presets. You will use an Arm-based cloud instance—verified
+    on AWS EC2 and Oracle Cloud Services—running Ubuntu Linux 20.04, install GCC, CMake, and required
+    packages, then compile x265 and execute the same video under varied configurations to observe
+    performance impact. The open-source libx265 includes optimizations for Arm Neoverse with Neon,
+    and optimized code is available on Bitbucket. This introductory path focuses on practical
+    build-and-run steps so you finish with a working x265 on Arm and comparative measurements.
+    Estimated time to complete is about 10 minutes.
+  faqs:
+  - question: What do I need before running the steps?
+    answer: >-
+      An Arm-based instance from a cloud service provider. This Learning Path has been verified
+      on AWS EC2 and Oracle Cloud, running Ubuntu Linux 20.04.
+  - question: Which packages should I install to build x265 on Ubuntu?
+    answer: >-
+      Update apt and install wget, git, cmake, cmake-curses-gui, and build-essential. You also
+      need GCC for your Arm Linux distribution.
+  - question: Where do the Arm optimizations for x265 come from?
+    answer: >-
+      The path uses the open-source libx265, which includes optimizations for Arm Neoverse platforms
+      with Neon support. The optimized code is available on Bitbucket.
+  - question: How will I measure the performance impact of different settings?
+    answer: >-
+      You will run x265 on the same video using various resolutions and encoding presets. Compare
+      the results to assess the performance impact of those choices.
+  - question: Which operating systems and platforms are validated for these steps?
+    answer: >-
+      The steps target Linux and have been verified on Ubuntu 20.04 running on Arm-based servers
+      from AWS EC2 and Oracle Cloud. Other operating systems are not explicitly listed.
+# END generated_summary_faq
 
 author: Pareena Verma
 

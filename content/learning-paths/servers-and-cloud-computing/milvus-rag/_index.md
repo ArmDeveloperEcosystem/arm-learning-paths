@@ -21,6 +21,51 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T01:30:54Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 2eb252b19b7535fbb776a3153bfc9f70b6217088e5b4b55deb56d01393abaf3b
+  summary_generated_at: '2026-06-02T04:25:25Z'
+  summary_source_hash: 2eb252b19b7535fbb776a3153bfc9f70b6217088e5b4b55deb56d01393abaf3b
+  faq_generated_at: '2026-06-03T01:30:54Z'
+  faq_source_hash: 2eb252b19b7535fbb776a3153bfc9f70b6217088e5b4b55deb56d01393abaf3b
+  summary: >-
+    Build a Retrieval-Augmented Generation application on Arm-based servers using Zilliz Cloud
+    for vector search and llama.cpp for LLM inference. You will create a Dedicated Zilliz Cloud
+    cluster on AWS using Arm-based machines, then build and run a local llama.cpp server that
+    exposes an OpenAI-compatible API with the Llama‑3.1‑8B model. In Python, prepare embeddings
+    and call the local LLM to perform an online RAG query, validating by printing the embedding
+    dimension and sample values. Prerequisites: basic RAG knowledge, access to an Arm-based instance
+    (for example, an AWS Graviton3 C7g.2xlarge or other Arm server), a Zilliz account, and Linux.
+  faqs:
+  - question: What do I need before running the steps?
+    answer: >-
+      You need a basic understanding of a RAG pipeline, access to an Arm-based server (for example,
+      an AWS Graviton3 C7g.2xlarge or any Arm-based instance from a cloud provider or on-prem),
+      and a Zilliz Cloud account. The environment is Linux.
+  - question: Which Zilliz Cloud cluster should I create for this path?
+    answer: >-
+      Create a Dedicated cluster deployed in AWS using Arm-based machines. You can alternatively
+      use self-hosted Milvus, but this is more complicated to set up.
+  - question: Do I need to request access to the Llama 3.1 model before launching llama.cpp?
+    answer: >-
+      Yes. Before using the Llama 3.1-8B model, visit the Llama website and fill in the form to
+      request access.
+  - question: Do I need an OpenAI API key when using the OpenAI SDK with the local llama.cpp server?
+    answer: >-
+      No. Because the LLM service is running locally via llama.cpp, you do not need to provide
+      an API key.
+  - question: What output should I see when I test the embedding model in the Python script?
+    answer: >-
+      The script prints the embedding dimension and the first few elements. The example output
+      shows 384 followed by several floating-point values.
+# END generated_summary_faq
 
 author: Chen Zhang
 

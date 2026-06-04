@@ -22,6 +22,54 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-02T23:22:02Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: f25597c6c9e69e09e9a86fa7c02d0ace9c347f293a21a11c00a6d3498300052c
+  summary_generated_at: '2026-06-01T22:13:59Z'
+  summary_source_hash: f25597c6c9e69e09e9a86fa7c02d0ace9c347f293a21a11c00a6d3498300052c
+  faq_generated_at: '2026-06-02T23:22:02Z'
+  faq_source_hash: f25597c6c9e69e09e9a86fa7c02d0ace9c347f293a21a11c00a6d3498300052c
+  summary: >-
+    This Learning Path guides you through configuring AWS IoT Core to parse MQTT messages and
+    store IoT data in Amazon DynamoDB from a Windows on Arm environment. Building on the previously
+    completed weather-station emulator and AWS IoT setup, you will run the IoT application that
+    streams data to AWS IoT Core and create an IoT Core rule (send_message_to_dynamodb) that writes
+    parsed messages to DynamoDB. The path targets Windows on Arm devices and uses a code editor
+    such as Visual Studio Code; .NET is listed in the metadata. Prerequisites include a Windows
+    on Arm PC or VM, any code editor, and completion of the prior “Create IoT applications with
+    Windows on Arm and AWS IoT Core” Learning Path.
+  faqs:
+  - question: What do I need before running these steps?
+    answer: >-
+      You need a Windows on Arm computer such as the Lenovo ThinkPad X13s running Windows 11,
+      or a Windows on Arm virtual machine, and any code editor; Visual Studio Code for Arm64 is
+      suitable. Complete the "Create IoT applications with Windows on Arm and AWS IoT Core" Learning
+      Path to prepare the weather station emulator and connect it to AWS IoT Core.
+  - question: Where do I create the AWS IoT Core rule?
+    answer: >-
+      In AWS IoT Core, go to Message routing and select Rules. Click Create rule to open the Create
+      rule view.
+  - question: What should I name the rule?
+    answer: >-
+      Use send_message_to_dynamodb as the rule name when prompted. Then proceed through the configuration
+      views as described in the steps.
+  - question: Do I need to modify or rebuild the IoT application for this path?
+    answer: >-
+      The path expects you to run the existing IoT application from the prerequisite to stream
+      data to AWS IoT Core. The focus here is on configuring the AWS IoT Core rule that writes
+      to DynamoDB.
+  - question: What result should I expect after completing the configuration?
+    answer: >-
+      The rule parses incoming MQTT messages from AWS IoT Core and writes the data to Amazon DynamoDB.
+      This connects your Arm64-based Windows workload to persistent storage in DynamoDB.
+# END generated_summary_faq
 
 author: Dawid Borycki
 

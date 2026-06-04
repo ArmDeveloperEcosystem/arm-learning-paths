@@ -21,6 +21,56 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-02T22:04:34Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: bd39d50c93219201ead5de5da627447a91a82ea9c65e232350facd0c3516bedc
+  summary_generated_at: '2026-06-01T21:27:33Z'
+  summary_source_hash: bd39d50c93219201ead5de5da627447a91a82ea9c65e232350facd0c3516bedc
+  faq_generated_at: '2026-06-02T22:04:34Z'
+  faq_source_hash: bd39d50c93219201ead5de5da627447a91a82ea9c65e232350facd0c3516bedc
+  summary: >-
+    This introductory Learning Path guides embedded developers through building and running Matter
+    reference examples on Arm Virtual Hardware, demonstrating communication between two Raspberry
+    Pi 4 virtual targets, and automating development with GitHub Actions on Linux. You will instantiate
+    AVH instances, fork and clone the connectedhomeip repository, run an example application,
+    and configure a self-hosted runner with a simplified workflow. You will also integrate the
+    AVH API—using JavaScript in this path—and add a GitHub secret to drive chip-tool commands
+    automatically. Prerequisites include an Arm Virtual Hardware 3rd Party Hardware account, a
+    GitHub account, and a Personal Access Token enabled to update GitHub Action workflows. Some
+    familiarity with embedded programming is assumed.
+  faqs:
+  - question: What do I need before running the steps?
+    answer: >-
+      You need an Arm Virtual Hardware 3rd Party Hardware user account and a GitHub account. Generate
+      a GitHub Personal Access Token with permission to Update GitHub Action workflows and save
+      it locally. Some familiarity with embedded programming is assumed.
+  - question: Which Arm Virtual Hardware targets should I create, and how many?
+    answer: >-
+      Prepare Raspberry Pi 4 instances of Arm Virtual Hardware. You will use multiple instances
+      to demonstrate communication between two virtual hardware targets.
+  - question: How do I get the Matter sources into my AVH instances?
+    answer: >-
+      Fork the public connectedhomeip repository to your personal GitHub account. From the console
+      of each AVH instance, clone your fork so you can build and run the examples there.
+  - question: What should I do before configuring GitHub Actions in the repository?
+    answer: >-
+      If the lighting-app is still running, stop it with Ctrl+C. Then in .github/workflows, remove
+      the existing workflow files so you can add the new workflow used by this path with a self-hosted
+      runner.
+  - question: How do I enable API-based control of AVH in the workflow, and what result should
+      I expect?
+    answer: >-
+      Generate an AVH API Token from Profile > API and add it as a GitHub secret. The workflow
+      is extended (using JavaScript) to transmit chip-tool commands to your virtual devices via
+      the AVH API.
+# END generated_summary_faq
 
 author: Ronan Synnott
 

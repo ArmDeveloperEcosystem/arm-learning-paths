@@ -23,6 +23,56 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T01:01:51Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 642b67e7ca3717f499ab73efedd924eeab29a0055fad81c2d60fda993dcea195
+  summary_generated_at: '2026-06-02T04:00:17Z'
+  summary_source_hash: 642b67e7ca3717f499ab73efedd924eeab29a0055fad81c2d60fda993dcea195
+  faq_generated_at: '2026-06-03T01:01:51Z'
+  faq_source_hash: 642b67e7ca3717f499ab73efedd924eeab29a0055fad81c2d60fda993dcea195
+  summary: >-
+    This Learning Path shows how to automate an end-to-end MLOps workflow on Linux using Arm-hosted
+    GitHub runners and GitHub Actions. You will fork an example repository, set up workflows to
+    train and test a PyTorch model on the German Traffic Sign Recognition Benchmark (GTSRB) dataset,
+    and save the trained model as a workflow artifact. You will compare inference performance
+    by switching from a PyTorch 2.3.0 Docker image compiled with OpenBLAS to a oneDNN backend
+    with the Arm Compute Library (ACL). Finally, you will containerize the model using the provided
+    Dockerfile, push the image to Docker Hub, and deploy the container for API-based access. Prerequisites
+    include GitHub access to Arm-hosted runners, a Docker Hub account, and familiarity with ML
+    and CI/CD.
+  faqs:
+  - question: What do I need before running the workflows?
+    answer: >-
+      You need a GitHub account with access to Arm-hosted GitHub runners and a Docker Hub account.
+      Familiarity with ML and CI/CD is expected, and the path targets Linux.
+  - question: Where should I fork the example repository, and what if the name conflicts?
+    answer: >-
+      Fork https://github.com/Arm-Labs/gh_armrunner_mlops_gtsrb into a GitHub Organization or
+      Team where you have access to Arm-hosted GitHub runners. If a repository with the same name
+      already exists there, rename it during the fork.
+  - question: Which workflow trains the model and what should I expect as output?
+    answer: >-
+      The training is automated by .github/workflows/train-model.yml, which runs scripts/train_model.py
+      inside a PyTorch 2.3.0 Docker image compiled with OpenBLAS. When it completes, the trained
+      model is saved as a workflow artifact.
+  - question: How do I compare inference performance across PyTorch backends?
+    answer: >-
+      Use the comparison step to change the backend used for testing to oneDNN with Arm Compute
+      Library (ACL) and run the workflow to measure inference time. Compare those results with
+      the OpenBLAS-based run.
+  - question: How do I containerize and publish the trained model, and how is deployment validated?
+    answer: >-
+      Build an image using the Dockerfile in the repository and push it to Docker Hub; the Dockerfile
+      uses armswdev/pytorch-arm-neoverse:r24.07-torch-2.3.0-onednn-acl as the base. After deployment,
+      access the model using API calls as described in the steps.
+# END generated_summary_faq
 
 author:
     - Pareena Verma

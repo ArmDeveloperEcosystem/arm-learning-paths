@@ -19,6 +19,53 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T01:29:10Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: a67d36fb650b77c170c15f193049490286a3f097801d0c79d701d3f5610fe1dc
+  summary_generated_at: '2026-06-02T04:23:38Z'
+  summary_source_hash: a67d36fb650b77c170c15f193049490286a3f097801d0c79d701d3f5610fe1dc
+  faq_generated_at: '2026-06-03T01:29:10Z'
+  faq_source_hash: a67d36fb650b77c170c15f193049490286a3f097801d0c79d701d3f5610fe1dc
+  summary: >-
+    Learn to microbenchmark and tune network performance on Arm-based Linux systems using iPerf3
+    and Linux traffic control (tc). You will provision two Arm-based instances—such as AWS EC2
+    with Graviton within a VPC or equivalent Arm-based VMs from other cloud providers—and run
+    TCP/UDP tests in cloud-to-cloud and local-to-cloud scenarios. The steps show how to start
+    iPerf3, simulate latency and packet loss with tc, and adjust basic Linux kernel parameters,
+    then compare results across environments. This introductory path assumes a basic understanding
+    of TCP/IP and UDP and access to two Arm-based cloud instances. By the end, you can run accurate
+    iPerf3 tests, model adverse network conditions, and apply simple tunables to evaluate behavior.
+  faqs:
+  - question: What do I need before running the tests?
+    answer: >-
+      You need two Arm-based Linux cloud instances and a basic understanding of TCP/IP and UDP.
+      Ensure the systems can reach each other over the network, and if you use AWS, the setup
+      follows EC2 instances within a VPC.
+  - question: How do I start the iPerf3 server and confirm it’s ready?
+    answer: >-
+      Run iperf3 -s on the server node. You should see “Server listening on 5201” by default;
+      if that port is in use, start the server with -p to select another port.
+  - question: Can I use a cloud provider other than AWS for this Learning Path?
+    answer: >-
+      Yes. While the setup examples use AWS EC2 with Graviton, you can use Linux virtual machines
+      from other cloud service providers.
+  - question: How do I simulate latency or packet loss with tc and which interface should I modify?
+    answer: >-
+      First, identify the network interface on the client system using ip addr show. Apply tc
+      rules (such as delay or loss) to that interface to simulate different network conditions.
+  - question: What should I check if a local-to-cloud test cannot connect?
+    answer: >-
+      Update the cloud server’s security group to allow incoming TCP connections from your local
+      machine. Also ensure iPerf3 is installed on the local system as described in the iPerf3
+      installation guide.
+# END generated_summary_faq
 
 author: Kieran Hejmadi
 

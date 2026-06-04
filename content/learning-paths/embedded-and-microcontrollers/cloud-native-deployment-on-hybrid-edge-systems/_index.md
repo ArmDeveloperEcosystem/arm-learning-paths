@@ -22,6 +22,54 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-02T22:09:54Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 3394bf994039e441d57dced2abb64d725077d4672e0e68dc71f1de50e58f0408
+  summary_generated_at: '2026-06-01T21:29:58Z'
+  summary_source_hash: 3394bf994039e441d57dced2abb64d725077d4672e0e68dc71f1de50e58f0408
+  faq_generated_at: '2026-06-02T22:09:54Z'
+  faq_source_hash: 3394bf994039e441d57dced2abb64d725077d4672e0e68dc71f1de50e58f0408
+  summary: >-
+    This introductory path shows how to deploy containerized embedded applications and firmware
+    to a Cortex-M core from a Linux-based Cortex-A application core using the OCI-compatible hybrid-runtime
+    with containerd and K3s on Arm Virtual Hardware. You provision an i.MX 8M Plus model in AVH,
+    review the hybrid-runtime components, run a Hello World firmware container via containerd’s
+    io.containerd.hybrid runtime, and verify creation with ctr commands. You also set up a single-node
+    K3s cluster configured to use containerd with selected components disabled for embedded use.
+    Objectives include building the hybrid-runtime components and a firmware container image.
+    Prerequisites are an AVH account and, if you will build locally, an Arm Linux host machine.
+  faqs:
+  - question: What do I need before running this Learning Path?
+    answer: >-
+      You need a valid Arm Virtual Hardware account. If you plan to build your own runtime and
+      container image, you also need access to an Arm Linux host machine.
+  - question: Which Arm Virtual Hardware device should I create?
+    answer: >-
+      Create a device in the Default Project and select the i.MX 8M Plus platform. This model
+      runs four Cortex-A53 processors and is used for the hybrid edge setup.
+  - question: Which runtime should I specify when starting a container with containerd?
+    answer: >-
+      Use the hybrid runtime by passing --runtime io.containerd.hybrid to ctr run. The example
+      image is ghcr.io/smarter-project/hybrid-runtime/hello_world_imx8mp:latest with a container
+      name such as test.
+  - question: How do I verify that the container started correctly with containerd?
+    answer: >-
+      Run ctr c ls to list containers. You should see your container (for example, test) with
+      the hello_world_imx8mp:latest image and the io.containerd.hybrid runtime.
+  - question: How should I install and configure K3s for this demo?
+    answer: >-
+      Set INSTALL_K3S_EXEC for a single-node server and include the provided flags to disable
+      traefik, metrics-server, coredns, and local-storage, set flannel-backend=none, cluster-dns
+      to 169.254.0.2, and point to containerd via --container-runtime-endpoint. Then run: curl
+      -sfL https://get.k3s.io | INSTALL_K3S_EXEC=$INSTALL_K3S_EXEC sh -s -
+# END generated_summary_faq
 
 author: Basma El Gaabouri
 

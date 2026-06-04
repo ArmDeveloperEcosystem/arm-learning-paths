@@ -19,7 +19,7 @@ cascade:
 generate_summary_faq: true
 
 rerun_summary: false
-rerun_faqs: false
+rerun_faqs: true
 author: Jason Andrews
 
 ### Tags

@@ -8,6 +8,55 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T01:34:28Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: a10683fdd14359e93056dc4ba24581856833765c64915979d0466a06887e0755
+  summary_generated_at: '2026-06-02T04:29:42Z'
+  summary_source_hash: a10683fdd14359e93056dc4ba24581856833765c64915979d0466a06887e0755
+  faq_generated_at: '2026-06-03T01:34:28Z'
+  faq_source_hash: a10683fdd14359e93056dc4ba24581856833765c64915979d0466a06887e0755
+  summary: >-
+    Learn how to control floating-point accuracy for vectorized math functions in Libamath, a
+    component of Arm Performance Libraries, on Linux. This path introduces IEEE-754 representation,
+    Units in the Last Place (ULP), and the ULP error metric used to assess function accuracy.
+    You will see how Libamath offers multiple accuracy modes, how to recognize them by function-name
+    suffixes (for example, _u10 for results within 1 ULP), and how to select a mode that balances
+    precision and speed for your workload. A concise C example invokes the Neon single-precision
+    exp function across modes and computes ULP error using a provided helper header. Prerequisite:
+    an Arm computer running Linux with Arm Performance Libraries 25.04 or newer installed.
+  faqs:
+  - question: What do I need before running the example code?
+    answer: >-
+      You need an Arm computer running Linux with Arm Performance Libraries version 25.04 or newer
+      installed. The path uses C code and Libamath, and assumes a typical GCC-based environment.
+  - question: How do I select a specific Libamath accuracy mode in my code?
+    answer: >-
+      Accuracy modes are encoded in the function symbol suffix. For example, a suffix of _u10
+      indicates a high-accuracy variant (≤ 1 ULP); other modes are exposed via their documented
+      suffixes when available.
+  - question: How is ULP error computed when checking results?
+    answer: >-
+      ULP error is defined as |want − got| divided by ULP(want). Because it scales with floating-point
+      spacing, it provides a more meaningful accuracy measure than absolute error across different
+      magnitudes.
+  - question: What files should I have to build the example?
+    answer: >-
+      Create example.c using the provided code and ensure ulp_error.h from the previous section
+      is available. The example includes amath.h and calls Libamath Neon single-precision exp
+      variants to compare accuracy.
+  - question: What should I check if the build fails with missing headers or vector types?
+    answer: >-
+      Verify Arm Performance Libraries 25.04+ is installed and accessible, and that you included
+      both amath.h and ulp_error.h. Build on an Arm Linux system; the example uses AArch64 vector
+      calling conventions and Neon vector types.
+# END generated_summary_faq
 
 author: Joana Cruz
 

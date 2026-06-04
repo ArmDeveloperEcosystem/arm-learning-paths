@@ -20,6 +20,51 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T00:45:33Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: ef5f9e7c8844b20b9044b43f4758bc1d74374521093d7738a7f8832d21f1dcac
+  summary_generated_at: '2026-06-02T03:40:50Z'
+  summary_source_hash: ef5f9e7c8844b20b9044b43f4758bc1d74374521093d7738a7f8832d21f1dcac
+  faq_generated_at: '2026-06-03T00:45:33Z'
+  faq_source_hash: ef5f9e7c8844b20b9044b43f4758bc1d74374521093d7738a7f8832d21f1dcac
+  summary: >-
+    Learn to deploy containerized applications on Amazon Elastic Container Service (ECS) using
+    Fargate with AWS Graviton processors. You will create an ECS cluster, configure required identity
+    settings, and run a container task on Arm-based infrastructure. The path also shows how to
+    automate the same workflow with Terraform by incrementally building a main.tf file, including
+    creating an Amazon ECR repository and deploying an example Nginx service. This introductory,
+    Linux-focused path targets developers new to ECS on Graviton. Prerequisites are an AWS account
+    and a computer with Docker, AWS CLI, and Terraform installed. By the end, you will have a
+    running ECS task on Fargate and a Terraform configuration that reproduces the deployment.
+  faqs:
+  - question: What do I need before running the steps?
+    answer: >-
+      You need an AWS account and a computer with Docker, AWS CLI, and Terraform installed. The
+      path targets Linux.
+  - question: Do I need to manage EC2 instances for this deployment?
+    answer: >-
+      No. The path uses the Fargate launch type, which is serverless, so you do not provision
+      or maintain EC2 instances.
+  - question: Which architecture should my container image target to run on AWS Graviton?
+    answer: >-
+      Build your container image for the Arm architecture. Fargate supports AWS Graviton processors
+      so your containers can run on Arm.
+  - question: Where will I store and pull my container images in this workflow?
+    answer: >-
+      The path creates a repository in Amazon Elastic Container Registry (ECR). The Terraform
+      section builds a main.tf that sets up ECR and uses it for the ECS deployment.
+  - question: What result should I expect after completing the Terraform section?
+    answer: >-
+      You will have a main.tf that automates the same steps for deploying Nginx on ECS. This includes
+      provisioning the required ECS resources and using an ECR repository for the container image.
+# END generated_summary_faq
 
 author: Jason Andrews
 

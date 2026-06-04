@@ -24,6 +24,55 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-02T23:38:39Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 03d816ff419e6e5b1533f95e9d4ffa087b9c0c9aefeee112f67b70223c8aedc3
+  summary_generated_at: '2026-06-02T02:38:49Z'
+  summary_source_hash: 03d816ff419e6e5b1533f95e9d4ffa087b9c0c9aefeee112f67b70223c8aedc3
+  faq_generated_at: '2026-06-02T23:38:39Z'
+  faq_source_hash: 03d816ff419e6e5b1533f95e9d4ffa087b9c0c9aefeee112f67b70223c8aedc3
+  summary: >-
+    This Learning Path shows how to configure and run Windows Subsystem for Linux (WSL) on Windows
+    on Arm computers to support Linux and cloud-native development. You will set up WSL with various
+    Linux distributions, run graphical Linux applications on Windows 11, enable systemd so services
+    start automatically, and use SSH when remote access is required. You will also configure remote
+    desktop access with RDP and VNC, learn multiple options for running Visual Studio Code, and
+    import or export WSL file systems for backup. The intended audience is developers using Windows
+    on Arm systems; no additional prerequisites are explicitly listed beyond a Windows 11 device
+    such as a Lenovo ThinkPad X13s. Estimated time to complete is about 90 minutes.
+  faqs:
+  - question: What do I need before running this Learning Path?
+    answer: >-
+      You need a Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11.
+      No other explicit prerequisites are listed.
+  - question: How do I know systemd is enabled and running in my WSL distribution?
+    answer: >-
+      Add systemd=true to /etc/wsl.conf, terminate the distribution, and restart it. Then run
+      systemctl list-unit-files --type=service to confirm systemd-managed services are available;
+      services such as SSH and docker will start automatically when systemd is enabled.
+  - question: How can I run and verify a graphical Linux application on Windows 11?
+    answer: >-
+      Install the application from the Linux command line in WSL (for example, terminator on Ubuntu
+      22.04) and launch it. A new window should appear on your Windows desktop, and the app will
+      show on the Windows taskbar with a penguin icon.
+  - question: Do I need SSH to move files between Windows and WSL on the same machine?
+    answer: >-
+      No. WSL mounts the Windows C: drive at /mnt/c, so you can copy files directly (for example,
+      cp /mnt/c/Users/<username>/Downloads/<filename> .). Use SSH only if you need to access WSL
+      from a different machine.
+  - question: What should I check if RDP does not display the Linux desktop?
+    answer: >-
+      Verify xfce4 and xrdp are installed, set XFCE4 as the default session (echo xfce4-session
+      > ~/.xsession), and restart the xrdp service. Check systemctl status xrdp and start it if
+      it is not running.
+# END generated_summary_faq
 
 author: Jason Andrews
 

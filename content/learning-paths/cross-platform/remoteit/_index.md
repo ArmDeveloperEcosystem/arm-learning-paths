@@ -22,6 +22,62 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-02T21:49:07Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 927cfebb8ebf9595922dad115c9a8d10900e43c4f80e73e6102a71e3e4ca2da1
+  summary_generated_at: '2026-06-01T21:15:32Z'
+  summary_source_hash: 927cfebb8ebf9595922dad115c9a8d10900e43c4f80e73e6102a71e3e4ca2da1
+  faq_generated_at: '2026-06-02T21:49:07Z'
+  faq_source_hash: 927cfebb8ebf9595922dad115c9a8d10900e43c4f80e73e6102a71e3e4ca2da1
+  summary: >-
+    This introductory Learning Path shows how to install and configure Remote.It to access remote
+    devices using SSH and other services, and how to choose between proxy and peer-to-peer connection
+    options. You will install the Remote.It device package on a target device, connect from an
+    initiator computer, and use the Web Dashboard or CLI to create connections. The path applies
+    to Windows, macOS, and Linux environments and supports devices ranging from laptops and Raspberry
+    Pi to cloud-hosted targets such as Arm Virtual Hardware or within AWS. Prerequisites include
+    a Windows, macOS, or Linux computer for setup, control access to the target before deploying
+    Remote.It, and a decision on whether the target must also connect to other Remote.It devices.
+  faqs:
+  - question: What do I need before running the setup?
+    answer: >-
+      Have a Windows, macOS, or Linux computer to configure and connect, plus a target device
+      (Windows, Mac, or Linux) you can control locally or through another remote solution before
+      deploying Remote.It. Targets can include development kits like Raspberry Pi or cloud-hosted
+      systems such as Arm Virtual Hardware or AWS. Also determine whether your target will need
+      to make connections to other Remote.It devices.
+  - question: How do I install the Remote.It device package when I already have access to the
+      target?
+    answer: >-
+      Use a local console or SSH to access the target and follow the steps to install the Remote.It
+      device package. If you need SSH on the target, refer to the SSH guidance referenced in the
+      path.
+  - question: Do I need to install anything on the initiator computer to connect?
+    answer: >-
+      If you use the Remote.It Web Dashboard, proxy connections require only standard tools like
+      SSH on the initiator and no additional Remote.It software. For headless use or automation,
+      install the Remote.It CLI; if you already installed the Desktop software, the CLI binary
+      is included. On Linux, ensure the CLI binary has execute permission.
+  - question: Which connection type should I use, proxy or peer-to-peer?
+    answer: >-
+      The Web Dashboard creates proxy connections and is the easiest to set up because only the
+      target needs Remote.It installed; all traffic is routed through a Remote.It server. Peer-to-peer
+      connections are direct between initiator and target. Choose proxy for the simplest setup,
+      or peer-to-peer when you want a direct connection.
+  - question: What result should I expect after completing the steps, and how do I know it worked?
+    answer: >-
+      You should be able to initiate an SSH session to your Remote.It-enabled target from another
+      location using the connection type you configured. For proxy connections, traffic will route
+      through a Remote.It server; for peer-to-peer, the link is direct. A successful SSH login
+      indicates the setup is working.
+# END generated_summary_faq
 
 author: Brenda Strech
 

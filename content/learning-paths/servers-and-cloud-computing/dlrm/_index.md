@@ -19,6 +19,54 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T00:42:37Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 82716c2de19d18a154c85d03b7f2ec01839284262914f7bb3ad04b18a105379d
+  summary_generated_at: '2026-06-02T03:35:11Z'
+  summary_source_hash: 82716c2de19d18a154c85d03b7f2ec01839284262914f7bb3ad04b18a105379d
+  faq_generated_at: '2026-06-03T00:42:37Z'
+  faq_source_hash: 82716c2de19d18a154c85d03b7f2ec01839284262914f7bb3ad04b18a105379d
+  summary: >-
+    This Learning Path shows how to build and benchmark the Deep Learning Recommendation Model
+    (DLRM) on Arm Neoverse V2 processors using PyTorch and MLPerf. You will prepare a Linux Arm-based
+    cloud instance or on‑prem server, obtain data and model weights with rclone, and use provided
+    scripts to run a modified DLRMv2 benchmark. The path uses PyTorch 2.9.0+cpu with Arm-focused
+    optimizations and Docker-based tooling where applicable. By the end, you will have built DLRM,
+    executed the MLPerf benchmark tailored for Arm systems, and inspected the resulting performance
+    outputs. Prerequisites include an Arm-based instance (AWS or Google Cloud) or on‑prem Arm
+    server with at least 400GB RAM and 800GB of disk space.
+  faqs:
+  - question: What do I need before running this Learning Path?
+    answer: >-
+      Use any Arm-based instance from a cloud service provider such as AWS or Google Cloud, or
+      an on-premise Arm server. The prerequisites are at least 400GB of RAM and 800GB of disk
+      space on a Linux system.
+  - question: Which operating system and processors does this target?
+    answer: >-
+      The steps assume Linux and target Arm Neoverse V2 CPUs. The procedures and benchmarks are
+      written for Arm-based systems.
+  - question: How do I download the DLRM data and model weights?
+    answer: >-
+      Create data and model directories in your home folder, then install rclone using the provided
+      installation script. Run rclone config and use it to download the required datasets and
+      weights as shown in the steps.
+  - question: Which frameworks and versions are used to run the benchmark?
+    answer: >-
+      You will run a modified MLPerf benchmark for DLRM using PyTorch 2.9.0+cpu. The steps use
+      a repository of scripts tailored for Arm-based systems.
+  - question: How do I run the benchmark and confirm it completed successfully?
+    answer: >-
+      Clone the provided repository and run the included scripts to execute the DLRM benchmark.
+      After the run, inspect the generated results as directed in the Learning Path to validate
+      completion.
+# END generated_summary_faq
 
 author: 
     - Phalani Paladugu

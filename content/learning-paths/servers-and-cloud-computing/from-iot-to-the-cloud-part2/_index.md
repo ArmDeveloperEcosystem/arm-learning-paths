@@ -20,6 +20,54 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T00:55:15Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 3823ad3df8ae868acfd59b5b5b541240624572fe739aaf2275185d5cd3578032
+  summary_generated_at: '2026-06-02T03:54:18Z'
+  summary_source_hash: 3823ad3df8ae868acfd59b5b5b541240624572fe739aaf2275185d5cd3578032
+  faq_generated_at: '2026-06-03T00:55:15Z'
+  faq_source_hash: 3823ad3df8ae868acfd59b5b5b541240624572fe739aaf2275185d5cd3578032
+  summary: >-
+    This introductory Learning Path shows how to create an Azure Container Instance (ACI) and
+    run a Docker container on Microsoft Azure. You will provision ACI through the Azure Portal
+    and Cloud Shell, enable the Admin account in Azure Container Registry (ACR) when deploying
+    from ACR, and verify the containerized ASP.NET sample application by browsing to the instance’s
+    public IP on port 8080. At the time of writing, ACI was not yet compatible with Arm64 Docker
+    containers, so the steps use a sample image from the Microsoft Container Registry. Prerequisites
+    are an active Azure subscription and completion of the first part of this series. The path
+    can be followed from Linux or Windows.
+  faqs:
+  - question: What do I need before running this Learning Path?
+    answer: >-
+      You need an active Azure subscription and you must complete the first learning path in this
+      series. No other explicit prerequisites are listed.
+  - question: Which container image should I use for Azure Container Instances in this path?
+    answer: >-
+      Use the sample ASP.NET application image from the Microsoft Container Registry: mcr.microsoft.com/dotnet/samples:aspnetapp.
+      At the time of writing, Azure Container Instances was not yet compatible with arm64 Docker
+      containers.
+  - question: Where do I run the Azure CLI commands shown in the steps?
+    answer: >-
+      Open the Azure Portal and launch Cloud Shell using the icon in the top-right corner. Run
+      the provided commands directly in Cloud Shell.
+  - question: How do I enable and verify the Azure Container Registry Admin account?
+    answer: >-
+      Enable the Admin account in your Azure Container Registry because it is required by Azure
+      Container Instances when deploying from ACR. In Cloud Shell, run az acr list -o table and
+      check the ADMIN ENABLED column to confirm.
+  - question: How do I access the running application and what port should I use?
+    answer: >-
+      In the Container Instance Overview tab, copy the public IP address and open it in a browser
+      using port 8080 (for example, http://IP_ADDRESS:8080). If the deployment succeeded, the
+      application should load in the browser.
+# END generated_summary_faq
 
 author: Dawid Borycki
 

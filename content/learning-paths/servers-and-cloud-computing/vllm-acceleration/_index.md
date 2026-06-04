@@ -22,6 +22,58 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T02:16:14Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 487e9829c6e08798ad01be7a01f192e10e99cb06b71108575f1919c134eece02
+  summary_generated_at: '2026-06-02T05:25:49Z'
+  summary_source_hash: 487e9829c6e08798ad01be7a01f192e10e99cb06b71108575f1919c134eece02
+  faq_generated_at: '2026-06-03T02:16:14Z'
+  faq_source_hash: 487e9829c6e08798ad01be7a01f192e10e99cb06b71108575f1919c134eece02
+  summary: >-
+    This Learning Path shows how to build an aarch64-optimized vLLM with oneDNN and the Arm Compute
+    Library on an Arm-based Linux server, set up runtime dependencies (including PyTorch and llmcompressor),
+    quantize the DeepSeek‑V2‑Lite model to INT4, and serve both INT4 and BF16 variants through
+    OpenAI‑compatible endpoints. You will configure key vLLM batching parameters (max_model_len
+    and max_num_batched_tokens) and evaluate accuracy using the LM Evaluation Harness to compare
+    BF16 and INT4 deployments. Prerequisites include an Arm-based Ubuntu 22.04+ server with at
+    least 32 vCPUs, 64 GB RAM, 64 GB free disk space, and Python 3.12 with basic Hugging Face
+    and quantization familiarity. Estimated time to complete is about 60 minutes.
+  faqs:
+  - question: What do I need before running the steps?
+    answer: >-
+      Use an Arm-based Linux server (Ubuntu 22.04+ recommended) with at least 32 vCPUs, 64 GB
+      RAM, and 64 GB free disk space. Install Python 3.12 and be comfortable with Hugging Face
+      Transformers and basic quantization concepts.
+  - question: How do I build and verify vLLM is optimized for aarch64 with oneDNN and ACL?
+    answer: >-
+      Follow the build step to target aarch64 and include oneDNN and the Arm Compute Library.
+      You validate the build by running inference as described in the path to confirm the binary
+      loads and serves a model.
+  - question: Which packages do I install to quantize the model, and why are they needed?
+    answer: >-
+      Install compressed-tensors and llmcompressor as shown in the quantization step. compressed-tensors
+      provides tensor storage and compression utilities for quantized formats, and llmcompressor
+      supplies quantization utilities compatible with Hugging Face Transformers and vLLM to quantize
+      deepseek-ai/DeepSeek‑V2‑Lite to INT4.
+  - question: How should I set vLLM batch sizing parameters when serving the model?
+    answer: >-
+      Use max_model_len to cap tokens per request and max_num_batched_tokens to bound total tokens
+      across concurrent requests. These parameters determine memory usage and how effectively
+      CPU threads are saturated; choose values based on expected prompt/generation lengths and
+      concurrency on your server.
+  - question: How do I evaluate accuracy for BF16 vs INT4 with LM Evaluation Harness?
+    answer: >-
+      Install the LM Evaluation Harness with vLLM support, then run benchmarks against your BF16
+      and INT4 models served by vLLM. Compare the reported metrics across precisions; results
+      vary based on your CPU, datasets, and runtime settings.
+# END generated_summary_faq
 
 author:
    - Nikhil Gupta

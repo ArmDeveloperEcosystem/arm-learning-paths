@@ -21,6 +21,54 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-02T21:54:01Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 26450ae17f7ed4242c52456c2780ffce5fad36b56dfc4a8482e8f236f855e134
+  summary_generated_at: '2026-06-01T21:21:21Z'
+  summary_source_hash: 26450ae17f7ed4242c52456c2780ffce5fad36b56dfc4a8482e8f236f855e134
+  faq_generated_at: '2026-06-02T21:54:01Z'
+  faq_source_hash: 26450ae17f7ed4242c52456c2780ffce5fad36b56dfc4a8482e8f236f855e134
+  summary: >-
+    This advanced Learning Path shows how to migrate x86-64 SIMD code to Arm64 by mapping Intel
+    SSE/AVX/AMX to Arm Neon, SVE, and SME. You review migration strategies using autovectorization,
+    intrinsics, or library substitution, then work through a SAXPY kernel implemented in plain
+    C and with vector extensions on both Arm (Neon, SVE) and x86 (AVX2, AVX-512). On a Linux system
+    with Neon and SVE support, you build and run each version using GCC or Clang and observe how
+    vector width influences throughput. The expected outcome is an understanding of how Arm vector
+    extensions relate to x86 equivalents and a practical plan for porting existing SIMD code.
+    No additional prerequisites are listed beyond those stated; estimated duration is about 30
+    minutes.
+  faqs:
+  - question: What do I need before running the examples?
+    answer: >-
+      You should be comfortable with SIMD programming and compiler intrinsics, and have access
+      to Linux systems with Neon and SVE support. GCC or Clang are used to build the examples.
+  - question: Which compiler should I use to build the code?
+    answer: >-
+      Use GCC or Clang as listed in the Learning Path tools. The steps show how to build and run
+      the Arm and x86 variants of the SAXPY example.
+  - question: How do I map x86 SIMD intrinsics to Arm equivalents?
+    answer: >-
+      The overview explains how SSE, AVX, and AMX map to Arm Neon, SVE, and SME. Use this mapping
+      to guide intrinsics substitution or decide when autovectorization or libraries are more
+      appropriate.
+  - question: What result should I expect when I run the SAXPY variants?
+    answer: >-
+      You will build and run C, Neon, SVE, AVX2, and AVX-512 versions of a SAXPY kernel that computes
+      y[i] = a * x[i] + y[i]. The run results let you compare SIMD behavior and see how vector
+      width affects throughput.
+  - question: When should I use a library instead of writing intrinsics?
+    answer: >-
+      If a tuned library provides the operation (for example, BLAS for SAXPY), prefer the library.
+      The intrinsics-based examples are provided for learning and comparison.
+# END generated_summary_faq
 
 author:
     - Jason Andrews

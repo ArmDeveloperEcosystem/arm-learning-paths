@@ -22,6 +22,56 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T01:34:00Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 300794f4010658d945212c74c5257635d620cbb6230cac0de92bf23e4e9e29fe
+  summary_generated_at: '2026-06-02T04:29:07Z'
+  summary_source_hash: 300794f4010658d945212c74c5257635d620cbb6230cac0de92bf23e4e9e29fe
+  faq_generated_at: '2026-06-03T01:34:00Z'
+  faq_source_hash: 300794f4010658d945212c74c5257635d620cbb6230cac0de92bf23e4e9e29fe
+  summary: >-
+    This advanced Learning Path is for HPC developers building MPI applications on Arm-based Linux
+    servers or cloud instances. You will install and validate Linaro Forge, then build, debug,
+    and profile a parallel matrix multiplication example implemented in C, Fortran, and Python.
+    The steps show how to compile with -O0 -g -fsanitize=address to expose bugs and memory issues,
+    use gdb and Forge for debugging, and compare profiling results across compiler options and
+    alternative libraries, including Arm Performance Libraries for common math routines. The path
+    was tested on Ubuntu 20.04 and assumes general MPI knowledge plus some familiarity with C,
+    Python, and Linux commands. Cloud instances from AWS, Microsoft Azure, Google Cloud, or Oracle
+    may be used.
+  faqs:
+  - question: What do I need before running the steps?
+    answer: >-
+      You need an Arm computer running Linux; cloud instances from AWS, Microsoft Azure, Google
+      Cloud, or Oracle can be used. General MPI knowledge and some familiarity with C, Python,
+      and Linux commands are expected. The instructions are tested on Ubuntu 20.04; other distributions
+      may require adjustments.
+  - question: How do I verify that Linaro Forge installed correctly?
+    answer: >-
+      Run ddt --version. If the command is not found or does not report a version, revisit the
+      Linaro Forge install guide and confirm your PATH and environment are set.
+  - question: Where is the example application and which languages are available?
+    answer: >-
+      The parallel matrix multiplication application is in the src directory. Implementations
+      are provided in C, Fortran, and Python, and each contains a bug that must be fixed.
+  - question: Which build flags should I use for debugging and where do I set them?
+    answer: >-
+      Edit make.def in the src directory and set CFLAGS = -O0 -g -fsanitize=address. This disables
+      compiler optimizations, adds debug symbols, and enables AddressSanitizer to help find memory
+      issues.
+  - question: How should I approach profiling and comparing alternatives?
+    answer: >-
+      Profile a baseline build with -O0, then enable compiler optimizations and compare results.
+      You can also try alternative coding approaches and libraries implementing equivalent functions,
+      including Arm Performance Libraries for common math routines.
+# END generated_summary_faq
 
 author: Florent Lebeau
 

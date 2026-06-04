@@ -19,6 +19,54 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T00:33:54Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: e742eb44fa108bfcc4ee5a241414e6aa05e1fc0e1cceb589fb78a080f59b0d38
+  summary_generated_at: '2026-06-02T03:23:30Z'
+  summary_source_hash: e742eb44fa108bfcc4ee5a241414e6aa05e1fc0e1cceb589fb78a080f59b0d38
+  faq_generated_at: '2026-06-03T00:33:54Z'
+  faq_source_hash: e742eb44fa108bfcc4ee5a241414e6aa05e1fc0e1cceb589fb78a080f59b0d38
+  summary: >-
+    This Learning Path shows how to install and run Clair on Arm-based Linux servers to scan container
+    images and generate vulnerability reports. You will deploy Clair using both combined (single-process)
+    and distributed (separate indexer, matcher, notifier) models, then use the clairctl CLI to
+    submit image manifests for static analysis. The path targets advanced developers working with
+    containers on Arm infrastructure, including Arm instances from major cloud providers. Prerequisites
+    are an Arm server or cloud instance running Linux with recent versions of Docker and Go installed;
+    the instructions are tested on Ubuntu. By the end, you will have a running Clair deployment
+    and can produce vulnerability reports from your images.
+  faqs:
+  - question: What do I need before running the steps?
+    answer: >-
+      Use an Arm-based instance from a cloud provider or an Arm server running Linux, with recent
+      versions of Docker and Go installed. The instructions are tested on Ubuntu; other Linux
+      distributions may require adjustments.
+  - question: Which Clair deployment model should I use?
+    answer: >-
+      Use the combined deployment if you want the simplest setup, as all Clair components run
+      in a single process. Choose the distributed deployment if you want to run the indexer, matcher,
+      and notifier as separate services.
+  - question: How do I know when Clair is ready to scan images?
+    answer: >-
+      Wait 5–10 minutes after starting Clair before submitting manifests so vulnerabilities can
+      populate in the PostgreSQL database. Submitting too early can produce a clean (empty) report.
+  - question: How do I submit a container image for scanning?
+    answer: >-
+      With Clair running (combined or distributed), use clairctl to submit a manifest to your
+      deployment. The Learning Path steps guide you to generate a vulnerability report from this
+      submission.
+  - question: What result should I expect after submitting a manifest?
+    answer: >-
+      Clair performs static analysis of the image layers and returns a vulnerability report. It
+      does not run the container image as part of the analysis.
+# END generated_summary_faq
 
 author: Jason Andrews
 

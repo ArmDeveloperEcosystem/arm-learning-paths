@@ -20,6 +20,52 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-03T01:39:16Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: c5e077458808373c8ce9660235716b5bb55e4e7eb8b6300c162c041ef1c96cb0
+  summary_generated_at: '2026-06-02T04:36:50Z'
+  summary_source_hash: c5e077458808373c8ce9660235716b5bb55e4e7eb8b6300c162c041ef1c96cb0
+  faq_generated_at: '2026-06-03T01:39:16Z'
+  faq_source_hash: c5e077458808373c8ce9660235716b5bb55e4e7eb8b6300c162c041ef1c96cb0
+  summary: >-
+    Deploy the open source Nginx on Arm-based Linux servers and configure it as a minimal HTTPS
+    static file server and as a reverse proxy and API gateway. You will first install Nginx using
+    a package manager and review its build configuration, then optionally build Nginx from source
+    with the features you need. Next, you will create a key and certificate, add a basic Nginx
+    configuration, and start the server. Finally, you will set up a third node to act as a reverse
+    proxy and API gateway that load balances across two upstream file servers. Prerequisites include
+    Arm-based instances (AWS, Microsoft Azure, Google Cloud, or Oracle) or on-prem Arm servers,
+    and network access on ports 22 and 443. No other explicit prerequisites are listed.
+  faqs:
+  - question: Which Nginx edition does this path use?
+    answer: >-
+      The path uses the open source version of Nginx. Nginx Plus is mentioned for context but
+      is not used here.
+  - question: How many Arm-based instances do I need to complete the exercises?
+    answer: >-
+      You need at least one instance to create a static file server. For the reverse proxy and
+      API gateway, you need at least three instances: two file servers and one reverse proxy/API
+      gateway node.
+  - question: Should I install Nginx from a package manager or build from source?
+    answer: >-
+      The path covers both approaches. It recommends inspecting the build configuration of a prebuilt
+      package first to inform which features you enable when compiling from source.
+  - question: What network settings should I configure before starting?
+    answer: >-
+      Ensure your firewalls and security groups allow communication on port 22 (SSH) and port
+      443 (HTTPS). These are required for access and for serving HTTPS.
+  - question: What should be ready before configuring the reverse proxy and API gateway?
+    answer: >-
+      Set up two static file servers using the earlier section. The third node will run the reverse
+      proxy/API gateway and load balance across the two upstream file servers.
+# END generated_summary_faq
 
 author: Julio Suarez
 

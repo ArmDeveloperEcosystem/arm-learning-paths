@@ -21,6 +21,58 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-02T21:27:35Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 92a6dac2b1674a44cd623a0c8c3189b38438124a6067ed7ca776999ff1d8b5bf
+  summary_generated_at: '2026-06-01T20:57:59Z'
+  summary_source_hash: 92a6dac2b1674a44cd623a0c8c3189b38438124a6067ed7ca776999ff1d8b5bf
+  faq_generated_at: '2026-06-02T21:27:35Z'
+  faq_source_hash: 92a6dac2b1674a44cd623a0c8c3189b38438124a6067ed7ca776999ff1d8b5bf
+  summary: >-
+    This advanced Learning Path shows automotive engineers how to prototype safety-critical isolation
+    for autonomous driving workloads on Arm Neoverse running Linux. You apply ISO 26262 concepts
+    (including ASIL and the V-model), use a safety island architectural approach, and separate
+    a simulation platform into independent, safety-isolated components. Communication between
+    components uses DDS in a publish-subscribe pattern, with containerized deployment and tooling
+    that includes Docker, ROS 2, and Python. Prerequisites include two Arm-based Neoverse cloud
+    instances or a local Arm Neoverse Linux system with at least 16 CPUs and 32 GB RAM, completion
+    of the “Deploy Open AD Kit containerized autonomous driving simulation on Arm Neoverse” Learning
+    Path, and basic Docker familiarity. Estimated time to complete is about 60 minutes.
+  faqs:
+  - question: What do I need before running this path?
+    answer: >-
+      You need either two Arm-based Neoverse cloud instances or a local Arm Neoverse Linux system
+      with at least 16 CPUs and 32 GB of RAM. You must also have completed the “Deploy Open AD
+      Kit containerized autonomous driving simulation on Arm Neoverse” Learning Path and be familiar
+      with Docker.
+  - question: Can I use a single local system instead of two cloud instances?
+    answer: >-
+      Yes. A local Arm Neoverse Linux system with at least 16 CPUs and 32 GB of RAM is listed
+      as an alternative to two Arm-based Neoverse cloud instances.
+  - question: Which technologies are used for communication and isolation?
+    answer: >-
+      The path uses DDS with a publish–subscribe architecture and containerized deployment to
+      separate components and communicate between them. Tools referenced include Docker, ROS 2,
+      DDS, and Python on Linux.
+  - question: How are ISO 26262 and ASIL levels applied here?
+    answer: >-
+      The path introduces the ISO 26262 safety lifecycle aligned with the V-model and explains
+      how ASIL levels guide design and testing. You apply prevention and detection principles
+      and plan safe-state behavior as part of the workflow.
+  - question: What result should I expect and how do I know I’m on track?
+    answer: >-
+      Expect to separate the simulation platform into independent, safety-isolated components
+      that communicate via DDS. You should be able to describe a safety island architecture versus
+      a non-safety ECU and relate requirements to verification activities consistent with ISO
+      26262.
+# END generated_summary_faq
 
 author: 
     - Odin Shen

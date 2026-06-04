@@ -4,7 +4,6 @@
 Generate summary and FAQ content for Learning Path _index.md files.
 
 This script uses an OpenAI-compatible endpoint to generate AI-assisted content.
-It keeps a deterministic template fallback for local smoke tests. It:
 
 - selects eligible Learning Paths using a front-matter flag or explicit paths
 - manages a `generated_summary_faq` front-matter block
@@ -20,7 +19,7 @@ Managed front-matter contract:
 
     # START generated_summary_faq
     generated_summary_faq:
-      template_version: summary-faq-v2
+      template_version: summary-faq-v3
       generated_at: "2026-05-06T19:40:00Z"
       generator: ai
       ai_assisted: true
@@ -51,12 +50,13 @@ import os
 import re
 import ssl
 import sys
+import time
 import urllib.error
 import urllib.request
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Sequence
+from typing import Any, Dict, List, Sequence
 
 import yaml
 
@@ -67,6 +67,10 @@ DEFAULT_REPORT_PATH = REPO_ROOT / "reports" / "generated-summary-faq" / "latest-
 DEFAULT_PROMPT_DIR = REPO_ROOT / "tools" / "prompts"
 DEFAULT_OPENAI_BASE_URL = "https://openai-api-proxy.geo.arm.com/api/providers/openai/v1/responses/"
 DEFAULT_OPENAI_MODEL = "gpt-4.1-mini"
+DEFAULT_OPENAI_TIMEOUT = 120
+DEFAULT_OPENAI_RETRIES = 2
+DEFAULT_PROMPT_STEP_LIMIT = 8
+DEFAULT_PROMPT_EXCERPT_CHARS = 900
 
 ENABLE_FLAG = "generate_summary_faq"
 RERUN_SUMMARY_FLAG = "rerun_summary"
@@ -173,12 +177,6 @@ def parse_args() -> argparse.Namespace:
         help=f"Process explicit or discovered Learning Paths even when `{ENABLE_FLAG}` is not true.",
     )
     parser.add_argument(
-        "--generation-mode",
-        choices=("ai", "template"),
-        default=os.getenv("SUMMARY_FAQ_GENERATION_MODE", "ai"),
-        help="Use the Arm OpenAI-compatible endpoint, or the deterministic local template fallback.",
-    )
-    parser.add_argument(
         "--openai-base-url",
         default=os.getenv("OPENAI_BASE_URL", DEFAULT_OPENAI_BASE_URL),
         help="OpenAI-compatible Responses endpoint URL. Defaults to Arm's OpenAI proxy.",
@@ -187,6 +185,18 @@ def parse_args() -> argparse.Namespace:
         "--openai-model",
         default=os.getenv("OPENAI_MODEL", DEFAULT_OPENAI_MODEL),
         help="Model or deployment name exposed by the configured OpenAI-compatible endpoint.",
+    )
+    parser.add_argument(
+        "--openai-timeout",
+        type=int,
+        default=int(os.getenv("OPENAI_TIMEOUT", DEFAULT_OPENAI_TIMEOUT)),
+        help="Seconds to wait for each AI endpoint response before retrying.",
+    )
+    parser.add_argument(
+        "--openai-retries",
+        type=int,
+        default=int(os.getenv("OPENAI_RETRIES", DEFAULT_OPENAI_RETRIES)),
+        help="Number of retries for transient AI endpoint timeout/network errors.",
     )
     parser.add_argument(
         "--openai-ca-bundle",
@@ -205,6 +215,18 @@ def parse_args() -> argparse.Namespace:
         help="Directory containing summary/FAQ system and user prompt templates.",
     )
     parser.add_argument(
+        "--prompt-step-limit",
+        type=int,
+        default=int(os.getenv("SUMMARY_FAQ_PROMPT_STEP_LIMIT", DEFAULT_PROMPT_STEP_LIMIT)),
+        help="Maximum number of Learning Path step excerpts included in each AI prompt.",
+    )
+    parser.add_argument(
+        "--prompt-excerpt-chars",
+        type=int,
+        default=int(os.getenv("SUMMARY_FAQ_PROMPT_EXCERPT_CHARS", DEFAULT_PROMPT_EXCERPT_CHARS)),
+        help="Maximum characters included from each step excerpt in each AI prompt.",
+    )
+    parser.add_argument(
         "--write",
         action="store_true",
         help="Persist generated front-matter updates back to each _index.md file.",
@@ -218,6 +240,11 @@ def parse_args() -> argparse.Namespace:
         "--report-file",
         default=str(DEFAULT_REPORT_PATH),
         help="Path to the central run report YAML file.",
+    )
+    parser.add_argument(
+        "--markdown-report-file",
+        default="",
+        help="Optional Markdown report file with tables for local review.",
     )
     parser.add_argument(
         "--log-file",
@@ -284,9 +311,8 @@ def initialize_log(args: argparse.Namespace) -> None:
                 "Generate summary/FAQ local run",
                 f"timestamp: {current_timestamp()}",
                 f"mode: {'write' if args.write else 'dry-run'}",
-                f"generation_mode: {args.generation_mode}",
-                f"openai_base_url: {args.openai_base_url if args.generation_mode == 'ai' else ''}",
-                f"openai_model: {args.openai_model if args.generation_mode == 'ai' else ''}",
+                f"openai_base_url: {args.openai_base_url}",
+                f"openai_model: {args.openai_model}",
                 f"category: {args.category or ''}",
                 f"path_filter: {args.path_filter or ''}",
                 "",
@@ -424,15 +450,6 @@ def compact_whitespace(value: str) -> str:
     return re.sub(r"\s+", " ", value).strip()
 
 
-def ensure_sentence(value: str) -> str:
-    cleaned = compact_whitespace(value)
-    if not cleaned:
-        return ""
-    if cleaned[-1] not in ".!?":
-        cleaned += "."
-    return cleaned
-
-
 def strip_markdown_links(text: str) -> str:
     text = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", text)
     text = re.sub(r"`([^`]+)`", r"\1", text)
@@ -444,207 +461,6 @@ def preview_text(value: str, limit: int = 200) -> str:
     if len(preview) > limit:
         preview = preview[:limit] + "..."
     return preview
-
-
-def normalize_audience(value: str) -> str:
-    cleaned = compact_whitespace(value)
-    patterns = [
-        r"^This Learning Path is for\s+",
-        r"^This learning path is for\s+",
-        r"^This topic is for\s+",
-        r"^This is an? [^.]*? topic for\s+",
-        r"^This is for\s+",
-    ]
-    for pattern in patterns:
-        cleaned = re.sub(pattern, "", cleaned, flags=re.IGNORECASE)
-    return cleaned.rstrip(". ")
-
-
-def normalize_objective_for_sentence(objective: str) -> str:
-    cleaned = compact_whitespace(objective).rstrip(". ")
-    if not cleaned:
-        return ""
-    return cleaned[0].lower() + cleaned[1:] if len(cleaned) > 1 else cleaned.lower()
-
-
-def natural_join(items: Sequence[str], conjunction: str = "and") -> str:
-    cleaned = [compact_whitespace(str(item)) for item in items if compact_whitespace(str(item))]
-    if not cleaned:
-        return ""
-    if len(cleaned) == 1:
-        return cleaned[0]
-    if len(cleaned) == 2:
-        return f"{cleaned[0]} {conjunction} {cleaned[1]}"
-    return f"{', '.join(cleaned[:-1])}, {conjunction} {cleaned[-1]}"
-
-
-def semicolon_join(items: Sequence[str]) -> str:
-    cleaned = [compact_whitespace(str(item)) for item in items if compact_whitespace(str(item))]
-    return "; ".join(cleaned)
-
-
-def unique_strings(items: Iterable[Any]) -> List[str]:
-    seen = set()
-    ordered: List[str] = []
-    for item in items:
-        text = compact_whitespace(str(item))
-        if text and text not in seen:
-            ordered.append(text)
-            seen.add(text)
-    return ordered
-
-
-def as_list(value: Any) -> List[Any]:
-    if value is None:
-        return []
-    if isinstance(value, list):
-        return value
-    return [value]
-
-
-def build_platform_sentence(metadata: Dict[str, Any]) -> str:
-    tools = unique_strings(as_list(metadata.get("tools_software_languages")))
-    operating_systems = unique_strings(as_list(metadata.get("operatingsystems")))
-    arm_ips = [item for item in unique_strings(as_list(metadata.get("armips"))) if item.lower() != "all"]
-    cloud_providers = unique_strings(as_list(metadata.get("cloud_service_providers")))
-
-    parts: List[str] = []
-
-    if tools:
-        parts.append(f"tools and technologies such as {natural_join(tools[:5])}")
-    if operating_systems:
-        parts.append(f"{natural_join(operating_systems[:4])} environments")
-    if arm_ips:
-        parts.append(f"Arm platforms including {natural_join(arm_ips[:4])}")
-    if cloud_providers:
-        parts.append(f"cloud platforms such as {natural_join(cloud_providers[:4])}")
-
-    if not parts:
-        return ""
-
-    return ensure_sentence(f"It focuses on {natural_join(parts, conjunction='and')}")
-
-
-def build_step_sentence(steps: Sequence[StepPage]) -> str:
-    visible_titles = [
-        step.title
-        for step in steps
-        if step.path.name not in {"_index.md", "_next-steps.md", "_review.md", "_demo.md"}
-        and not as_bool(step.metadata.get("hide_from_navpane", False))
-        and step.title
-    ]
-    if not visible_titles:
-        return ""
-    selected = visible_titles[:5]
-    return ensure_sentence(f"The main steps cover {natural_join(selected)}")
-
-
-def build_summary(metadata: Dict[str, Any], steps: Sequence[StepPage]) -> str:
-    title = compact_whitespace(str(metadata.get("title", "This Learning Path")))
-    description = ensure_sentence(str(metadata.get("description", "")).strip())
-    audience = normalize_audience(str(metadata.get("who_is_this_for", "")).strip())
-    objectives = [normalize_objective_for_sentence(item) for item in as_list(metadata.get("learning_objectives"))]
-    objectives = [objective for objective in objectives if objective]
-
-    sentences: List[str] = []
-
-    if description:
-        sentences.append(description)
-    else:
-        sentences.append(ensure_sentence(f"{title} walks you through an end-to-end Arm software workflow"))
-
-    if audience:
-        sentences.append(ensure_sentence(f"It is designed for {audience}"))
-
-    if objectives:
-        sentences.append(ensure_sentence(f"By the end, you will be able to {natural_join(objectives[:3])}"))
-
-    platform_sentence = build_platform_sentence(metadata)
-    if platform_sentence:
-        sentences.append(platform_sentence)
-
-    step_sentence = build_step_sentence(steps)
-    if step_sentence:
-        sentences.append(step_sentence)
-
-    return " ".join(sentence for sentence in sentences if sentence)
-
-
-def build_faqs(metadata: Dict[str, Any], steps: Sequence[StepPage]) -> List[Dict[str, str]]:
-    description = ensure_sentence(str(metadata.get("description", "")).strip())
-    audience_raw = ensure_sentence(str(metadata.get("who_is_this_for", "")).strip())
-    prerequisites = [str(item).strip() for item in as_list(metadata.get("prerequisites")) if str(item).strip()]
-    objectives = [normalize_objective_for_sentence(item) for item in as_list(metadata.get("learning_objectives"))]
-    objectives = [objective for objective in objectives if objective]
-
-    tools = unique_strings(as_list(metadata.get("tools_software_languages")))
-    operating_systems = unique_strings(as_list(metadata.get("operatingsystems")))
-    arm_ips = [item for item in unique_strings(as_list(metadata.get("armips"))) if item.lower() != "all"]
-    cloud_providers = unique_strings(as_list(metadata.get("cloud_service_providers")))
-
-    visible_titles = [
-        step.title
-        for step in steps
-        if step.path.name not in {"_index.md", "_next-steps.md", "_review.md", "_demo.md"}
-        and not as_bool(step.metadata.get("hide_from_navpane", False))
-        and step.title
-    ]
-
-    accomplishment_parts: List[str] = []
-    if objectives:
-        accomplishment_parts.append(ensure_sentence(f"You will {natural_join(objectives[:3])}"))
-    if description:
-        accomplishment_parts.append(description)
-
-    prerequisites_answer = (
-        ensure_sentence(f"Before you start, make sure you have the following: {semicolon_join(prerequisites)}")
-        if prerequisites
-        else "There are no explicit prerequisites listed for this Learning Path."
-    )
-
-    coverage_parts: List[str] = []
-    if tools:
-        coverage_parts.append(f"tools and languages including {natural_join(tools[:5])}")
-    if operating_systems:
-        coverage_parts.append(f"{natural_join(operating_systems[:4])} environments")
-    if arm_ips:
-        coverage_parts.append(f"Arm platforms such as {natural_join(arm_ips[:4])}")
-    if cloud_providers:
-        coverage_parts.append(f"cloud platforms such as {natural_join(cloud_providers[:4])}")
-
-    structure_answer = (
-        ensure_sentence(f"The Learning Path is organized around {natural_join(visible_titles[:5])}")
-        if visible_titles
-        else "The Learning Path follows the standard introduction, guided steps, and next steps structure."
-    )
-
-    faqs = [
-        {
-            "question": "What will you accomplish in this Learning Path?",
-            "answer": " ".join(part for part in accomplishment_parts if part)
-            or "You will work through an Arm-focused workflow and finish with a concrete outcome.",
-        },
-        {
-            "question": "Who is this Learning Path for?",
-            "answer": audience_raw or "This Learning Path is written for Arm software developers.",
-        },
-        {
-            "question": "What do you need before you start?",
-            "answer": prerequisites_answer,
-        },
-        {
-            "question": "Which tools, languages, or platforms does it cover?",
-            "answer": ensure_sentence(f"It covers {natural_join(coverage_parts, conjunction='and')}")
-            if coverage_parts
-            else "It focuses on the tools, platforms, and steps listed in the Learning Path itself.",
-        },
-        {
-            "question": "How is the Learning Path structured?",
-            "answer": structure_answer,
-        },
-    ]
-
-    return faqs
 
 
 def prompt_metadata(metadata: Dict[str, Any]) -> Dict[str, Any]:
@@ -665,8 +481,15 @@ def prompt_metadata(metadata: Dict[str, Any]) -> Dict[str, Any]:
     return {key: metadata.get(key) for key in keys if metadata.get(key) not in (None, "", [])}
 
 
-def prompt_steps(steps: Sequence[StepPage]) -> List[Dict[str, Any]]:
+def prompt_steps(
+    steps: Sequence[StepPage],
+    step_limit: int = DEFAULT_PROMPT_STEP_LIMIT,
+    excerpt_chars: int = DEFAULT_PROMPT_EXCERPT_CHARS,
+) -> List[Dict[str, Any]]:
     prompt_pages: List[Dict[str, Any]] = []
+    safe_step_limit = max(1, step_limit)
+    safe_excerpt_chars = max(200, excerpt_chars)
+
     for step in steps:
         if step.path.name in {"_index.md", "_next-steps.md", "_review.md", "_demo.md"}:
             continue
@@ -679,17 +502,25 @@ def prompt_steps(steps: Sequence[StepPage]) -> List[Dict[str, Any]]:
                 "file": step.path.name,
                 "title": step.title,
                 "weight": step.weight,
-                "excerpt": excerpt[:1600],
+                "excerpt": excerpt[:safe_excerpt_chars],
             }
         )
 
-    return prompt_pages[:12]
+    return prompt_pages[:safe_step_limit]
 
 
-def build_learning_path_prompt_context(metadata: Dict[str, Any], steps: Sequence[StepPage]) -> Dict[str, Any]:
+def build_learning_path_prompt_context(
+    metadata: Dict[str, Any],
+    steps: Sequence[StepPage],
+    args: argparse.Namespace,
+) -> Dict[str, Any]:
     return {
         "metadata": prompt_metadata(metadata),
-        "steps": prompt_steps(steps),
+        "steps": prompt_steps(
+            steps,
+            step_limit=args.prompt_step_limit,
+            excerpt_chars=args.prompt_excerpt_chars,
+        ),
         "output_requirements": {
             "summary": "One concise paragraph, approximately 70-120 words.",
             "faqs": "Exactly 5 FAQs. Each answer should be 1-3 sentences.",
@@ -804,6 +635,8 @@ def post_responses_request(
     payload: Dict[str, Any],
     ca_bundle: str = "",
     insecure_skip_verify: bool = False,
+    timeout: int = DEFAULT_OPENAI_TIMEOUT,
+    retries: int = DEFAULT_OPENAI_RETRIES,
 ) -> Dict[str, Any]:
     request = urllib.request.Request(
         endpoint,
@@ -816,23 +649,40 @@ def post_responses_request(
     )
 
     ssl_context = build_ssl_context(ca_bundle=ca_bundle, insecure_skip_verify=insecure_skip_verify)
+    max_attempts = max(1, retries + 1)
+    last_error: Exception | None = None
 
-    try:
-        with urllib.request.urlopen(request, timeout=60, context=ssl_context) as response:
-            body = response.read().decode("utf-8")
-    except urllib.error.HTTPError as exc:
-        error_body = exc.read().decode("utf-8", errors="replace")
-        raise RuntimeError(f"AI endpoint returned HTTP {exc.code}: {error_body}") from exc
-    except urllib.error.URLError as exc:
-        reason = str(exc.reason)
-        if "CERTIFICATE_VERIFY_FAILED" in reason:
-            raise RuntimeError(
-                "Could not verify the AI endpoint TLS certificate. "
-                "Set OPENAI_CA_BUNDLE to your Arm corporate CA bundle, or use "
-                "OPENAI_INSECURE_SKIP_VERIFY=true for local testing only. "
-                f"Original error: {reason}"
-            ) from exc
-        raise RuntimeError(f"Could not reach AI endpoint: {exc.reason}") from exc
+    for attempt in range(1, max_attempts + 1):
+        try:
+            with urllib.request.urlopen(request, timeout=timeout, context=ssl_context) as response:
+                body = response.read().decode("utf-8")
+            break
+        except urllib.error.HTTPError as exc:
+            error_body = exc.read().decode("utf-8", errors="replace")
+            if exc.code not in {408, 429, 500, 502, 503, 504} or attempt == max_attempts:
+                raise RuntimeError(f"AI endpoint returned HTTP {exc.code}: {error_body}") from exc
+            last_error = RuntimeError(f"AI endpoint returned HTTP {exc.code}: {error_body}")
+        except TimeoutError as exc:
+            if attempt == max_attempts:
+                raise RuntimeError(f"AI endpoint timed out after {timeout} seconds.") from exc
+            last_error = exc
+        except urllib.error.URLError as exc:
+            reason = str(exc.reason)
+            if "CERTIFICATE_VERIFY_FAILED" in reason:
+                raise RuntimeError(
+                    "Could not verify the AI endpoint TLS certificate. "
+                    "Set OPENAI_CA_BUNDLE to your Arm corporate CA bundle, or use "
+                    "OPENAI_INSECURE_SKIP_VERIFY=true for local testing only. "
+                    f"Original error: {reason}"
+                ) from exc
+            if attempt == max_attempts:
+                raise RuntimeError(f"Could not reach AI endpoint: {exc.reason}") from exc
+            last_error = exc
+
+        sleep_seconds = min(20, 2 ** (attempt - 1))
+        time.sleep(sleep_seconds)
+    else:
+        raise RuntimeError(f"AI endpoint failed after {max_attempts} attempts: {last_error}")
 
     try:
         parsed = json.loads(body)
@@ -848,14 +698,14 @@ def post_responses_request(
 def generate_ai_summary_faq(metadata: Dict[str, Any], steps: Sequence[StepPage], args: argparse.Namespace) -> Dict[str, Any]:
     api_key = os.getenv("OPENAI_API_KEY", "").strip()
     if not api_key:
-        raise RuntimeError("OPENAI_API_KEY is required when --generation-mode ai is used.")
+        raise RuntimeError("OPENAI_API_KEY is required for AI-assisted summary/FAQ generation.")
 
     prompt_dir = Path(args.prompt_dir)
     system_prompt = read_prompt_template(prompt_dir, "summary_faq_system.md")
     user_template = read_prompt_template(prompt_dir, "summary_faq_user.md")
     user_prompt = render_user_prompt(
         user_template,
-        build_learning_path_prompt_context(metadata, steps),
+        build_learning_path_prompt_context(metadata, steps, args),
     )
 
     prompt_input = (
@@ -873,6 +723,8 @@ def generate_ai_summary_faq(metadata: Dict[str, Any], steps: Sequence[StepPage],
         },
         ca_bundle=args.openai_ca_bundle,
         insecure_skip_verify=args.openai_insecure_skip_verify,
+        timeout=args.openai_timeout,
+        retries=args.openai_retries,
     )
 
     content = extract_response_text(response_payload)
@@ -884,16 +736,7 @@ def build_desired_summary_faq(
     steps: Sequence[StepPage],
     args: argparse.Namespace,
 ) -> Dict[str, Any]:
-    if args.generation_mode == "template":
-        return {
-            "summary": build_summary(metadata, steps),
-            "faqs": build_faqs(metadata, steps),
-            "generator": "template",
-        }
-
-    generated = generate_ai_summary_faq(metadata, steps, args)
-    generated["generator"] = "ai"
-    return generated
+    return generate_ai_summary_faq(metadata, steps, args)
 
 
 def build_source_hash(metadata: Dict[str, Any], steps: Sequence[StepPage]) -> str:
@@ -1139,7 +982,6 @@ def build_updated_generated_block(
     generated_at: str,
     summary_action: str,
     faq_action: str,
-    generator: str,
     model: str,
 ) -> Dict[str, Any]:
     summary_matches_current = not summaries_differ(summary_after, desired_summary)
@@ -1170,11 +1012,11 @@ def build_updated_generated_block(
     return {
         "template_version": TEMPLATE_VERSION,
         "generated_at": generated_at,
-        "generator": generator,
-        "ai_assisted": generator == "ai",
-        "ai_review_required": generator == "ai",
-        "model": model if generator == "ai" else "",
-        "prompt_template": PROMPT_TEMPLATE_VERSION if generator == "ai" else "",
+        "generator": "ai",
+        "ai_assisted": True,
+        "ai_review_required": True,
+        "model": model,
+        "prompt_template": PROMPT_TEMPLATE_VERSION,
         "source_hash": top_level_source_hash,
         SUMMARY_GENERATED_AT_KEY: summary_meta["generated_at"],
         SUMMARY_SOURCE_HASH_KEY: summary_meta["source_hash"],
@@ -1219,6 +1061,7 @@ def build_run_report(
         "skipped": 0,
         "errors": 0,
         "removed": 0,
+        "ai_requests": 0,
         "summary_changed": 0,
         "faq_changed": 0,
         "rerun_flags_reset": 0,
@@ -1252,6 +1095,9 @@ def build_run_report(
         if summary_result.get("drift_detected") or faq_result.get("drift_detected"):
             totals["paths_with_drift"] += 1
 
+        if result.get("ai_requested"):
+            totals["ai_requests"] += 1
+
         rerun_flags_reset = result.get("rerun_flags_reset", [])
         if rerun_flags_reset:
             totals["rerun_flags_reset"] += 1
@@ -1266,16 +1112,17 @@ def build_run_report(
         "mode": "write" if args.write else "dry-run",
         "require_enable_flag": not args.allow_unflagged,
         "path_filter": args.path_filter or "",
+        "category": args.category or "",
         "limit": args.limit,
         "run_url": args.run_url or "",
         "git_ref": args.git_ref or "",
         "git_sha": args.git_sha or "",
         "actor": args.actor or "",
         "template_version": TEMPLATE_VERSION,
-        "generation_mode": args.generation_mode,
-        "openai_base_url": args.openai_base_url if args.generation_mode == "ai" else "",
-        "openai_model": args.openai_model if args.generation_mode == "ai" else "",
-        "prompt_template": PROMPT_TEMPLATE_VERSION if args.generation_mode == "ai" else "",
+        "openai_base_url": args.openai_base_url,
+        "openai_model": args.openai_model,
+        "prompt_template": PROMPT_TEMPLATE_VERSION,
+        "markdown_report_file": args.markdown_report_file or "",
         "totals": totals,
         "section_totals": section_totals,
         "reason_totals": reason_totals,
@@ -1313,6 +1160,159 @@ def write_report(report_file: Path, run_report: Dict[str, Any], history_limit: i
     report_file.write_text(report_text, encoding="utf-8")
 
 
+def markdown_escape(value: Any) -> str:
+    text = str(value if value is not None else "")
+    return text.replace("|", "\\|").replace("\n", "<br>")
+
+
+def markdown_metric_row(label: str, value: Any) -> str:
+    return f"| {markdown_escape(label)} | {markdown_escape(value)} |"
+
+
+def render_markdown_report(run_report: Dict[str, Any]) -> str:
+    totals = run_report.get("totals", {})
+    section_totals = run_report.get("section_totals", {})
+    reason_totals = run_report.get("reason_totals", {})
+    paths = run_report.get("paths", [])
+
+    lines: List[str] = [
+        "# Generate Summary/FAQ Report",
+        "",
+        f"Generated at: `{markdown_escape(run_report.get('timestamp', ''))}`",
+        "",
+        "| Field | Value |",
+        "| --- | --- |",
+        markdown_metric_row("Mode", run_report.get("mode", "")),
+        markdown_metric_row("Require enable flag", run_report.get("require_enable_flag", "")),
+        markdown_metric_row("Category", run_report.get("category", "") or "all"),
+        markdown_metric_row("Path filter", run_report.get("path_filter", "") or "none"),
+        markdown_metric_row("Limit", run_report.get("limit", 0)),
+        markdown_metric_row("Model", run_report.get("openai_model", "")),
+        markdown_metric_row("Prompt template", run_report.get("prompt_template", "")),
+        "",
+        "## Run Overview",
+        "",
+        "| Metric | Count |",
+        "| --- | ---: |",
+        markdown_metric_row("Processed", totals.get("processed", 0)),
+        markdown_metric_row("Added", totals.get("added", 0)),
+        markdown_metric_row("Updated", totals.get("updated", 0)),
+        markdown_metric_row("Drift detected", totals.get("drift_detected", 0)),
+        markdown_metric_row("Paths with drift", totals.get("paths_with_drift", 0)),
+        markdown_metric_row("Skipped", totals.get("skipped", 0)),
+        markdown_metric_row("Unchanged", totals.get("unchanged", 0)),
+        markdown_metric_row("Errors", totals.get("errors", 0)),
+        markdown_metric_row("AI requests", totals.get("ai_requests", 0)),
+        markdown_metric_row("Summary changed", totals.get("summary_changed", 0)),
+        markdown_metric_row("FAQs changed", totals.get("faq_changed", 0)),
+        markdown_metric_row("Rerun flags reset", totals.get("rerun_flags_reset", 0)),
+        "",
+    ]
+
+    for section_name, title in (("summary", "Summary Actions"), ("faqs", "FAQ Actions")):
+        actions = section_totals.get(section_name, {})
+        lines.extend(
+            [
+                f"## {title}",
+                "",
+                "| Action | Count |",
+                "| --- | ---: |",
+            ]
+        )
+        for action in SUMMARY_ACTIONS:
+            lines.append(markdown_metric_row(action, actions.get(action, 0)))
+        lines.append("")
+
+    nonzero_reasons = [(reason, count) for reason, count in reason_totals.items() if count]
+    if nonzero_reasons:
+        lines.extend(["## Change Reasons", "", "| Reason | Count |", "| --- | ---: |"])
+        for reason, count in nonzero_reasons:
+            lines.append(markdown_metric_row(reason, count))
+        lines.append("")
+
+    interesting_paths = [
+        entry
+        for entry in paths
+        if entry.get("status") != "unchanged" or entry.get("change_reasons") or entry.get("status") == "error"
+    ]
+
+    if interesting_paths:
+        lines.extend(
+            [
+                "## Path Details",
+                "",
+                "| Path | Status | Summary | FAQs | Reasons | Notes |",
+                "| --- | --- | --- | --- | --- | --- |",
+            ]
+        )
+        for entry in interesting_paths:
+            summary = entry.get("summary", {})
+            faqs = entry.get("faqs", {})
+            reasons = ", ".join(entry.get("change_reasons", [])) or "none"
+            notes = ""
+            if entry.get("status") == "error":
+                notes = entry.get("error", "")
+            elif entry.get("status") == "skipped":
+                notes = entry.get("skip_reason", "")
+            elif faqs:
+                notes = f"FAQs {faqs.get('before_count', 0)} -> {faqs.get('after_count', 0)}"
+
+            lines.append(
+                "| `{path}` | {status} | {summary_action} | {faq_action} | {reasons} | {notes} |".format(
+                    path=markdown_escape(entry.get("path", "")),
+                    status=markdown_escape(entry.get("status", "")),
+                    summary_action=markdown_escape(summary.get("action", "")),
+                    faq_action=markdown_escape(faqs.get("action", "")),
+                    reasons=markdown_escape(reasons),
+                    notes=markdown_escape(notes),
+                )
+            )
+        lines.append("")
+    else:
+        lines.extend(["## Path Details", "", "All processed Learning Paths were unchanged.", ""])
+
+    changed_previews = [
+        entry
+        for entry in interesting_paths
+        if entry.get("summary", {}).get("changed") or entry.get("faqs", {}).get("changed")
+    ]
+    if changed_previews:
+        lines.extend(
+            [
+                "## Changed Content Preview",
+                "",
+                "| Path | Summary Preview | FAQ Change Details |",
+                "| --- | --- | --- |",
+            ]
+        )
+        for entry in changed_previews:
+            summary = entry.get("summary", {})
+            faqs = entry.get("faqs", {})
+            details = faqs.get("change_details", {})
+            faq_details = (
+                f"before={details.get('before_count', 0)}, "
+                f"after={details.get('after_count', 0)}, "
+                f"added={len(details.get('added_questions', []))}, "
+                f"removed={len(details.get('removed_questions', []))}, "
+                f"updated={len(details.get('updated_questions', []))}"
+            )
+            lines.append(
+                "| `{path}` | {summary_preview} | {faq_details} |".format(
+                    path=markdown_escape(entry.get("path", "")),
+                    summary_preview=markdown_escape(summary.get("preview_after", "")),
+                    faq_details=markdown_escape(faq_details),
+                )
+            )
+        lines.append("")
+
+    return "\n".join(lines).rstrip() + "\n"
+
+
+def write_markdown_report(markdown_report_file: Path, run_report: Dict[str, Any]) -> None:
+    markdown_report_file.parent.mkdir(parents=True, exist_ok=True)
+    markdown_report_file.write_text(render_markdown_report(run_report), encoding="utf-8")
+
+
 def print_result_summary(args: argparse.Namespace, run_report: Dict[str, Any]) -> None:
     totals = run_report["totals"]
     emit(
@@ -1320,7 +1320,7 @@ def print_result_summary(args: argparse.Namespace, run_report: Dict[str, Any]) -
         "Processed {processed} Learning Paths: "
         "{added} added, {updated} updated, {drift_detected} drift detected, "
         "{paths_with_drift} paths with drift, "
-        "{unchanged} unchanged, {errors} errors.".format(**totals)
+        "{skipped} skipped, {unchanged} unchanged, {errors} errors, {ai_requests} AI requests.".format(**totals)
     )
 
     summary_actions = run_report["section_totals"]["summary"]
@@ -1352,34 +1352,63 @@ def print_result_summary(args: argparse.Namespace, run_report: Dict[str, Any]) -
         line = f"- {status.upper():14s} {result['path']} | summary={summary_action} | faqs={faq_action} | reasons={reasons}"
         if status == "error":
             line += f" | error={result.get('error', 'Unknown error')}"
+        if status == "skipped":
+            line += f" | skip_reason={result.get('skip_reason', 'unknown')}"
         emit(args, line)
 
 
-def select_learning_paths(args: argparse.Namespace) -> List[Path]:
+def candidate_learning_paths(args: argparse.Namespace) -> tuple[List[Path], bool]:
     explicit_paths = normalize_path_filter(args.path_filter) if args.path_filter else []
     if explicit_paths:
-        selected = explicit_paths
+        return explicit_paths, True
     elif args.category:
-        selected = discover_category_indexes(args.category)
-    else:
-        selected = discover_learning_path_indexes()
-    filtered: List[Path] = []
+        return discover_category_indexes(args.category), False
+    return discover_learning_path_indexes(), False
 
-    for index_path in selected:
+
+def skipped_result(index_path: Path, reason: str) -> Dict[str, Any]:
+    return {
+        "path": report_path_for_output(index_path),
+        "status": "skipped",
+        "skip_reason": reason,
+        "change_reasons": [reason],
+        "ai_requested": False,
+        "summary": {"action": "skipped"},
+        "faqs": {"action": "skipped"},
+    }
+
+
+def selection_plan(args: argparse.Namespace) -> tuple[List[Path], List[Path], Dict[Path, Dict[str, Any]]]:
+    candidates, explicit = candidate_learning_paths(args)
+    selected: List[Path] = []
+    skipped: Dict[Path, Dict[str, Any]] = {}
+
+    for index_path in candidates:
         doc = read_markdown_document(index_path)
         if is_draft(doc):
+            skipped[index_path] = skipped_result(index_path, "draft")
             continue
         if not args.allow_unflagged and not has_enable_flag(doc):
+            skipped[index_path] = skipped_result(index_path, f"{ENABLE_FLAG}_false")
             continue
-        filtered.append(index_path)
+        selected.append(index_path)
 
-    if not explicit_paths and args.limit > 0:
-        filtered = filtered[: args.limit]
+    if not explicit and args.limit > 0 and len(selected) > args.limit:
+        limited = set(selected[: args.limit])
+        for index_path in selected[args.limit :]:
+            skipped[index_path] = skipped_result(index_path, "limit")
+        selected = [path for path in selected if path in limited]
 
-    return filtered
+    return candidates, selected, skipped
+
+
+def select_learning_paths(args: argparse.Namespace) -> List[Path]:
+    _, selected, _ = selection_plan(args)
+    return selected
 
 
 def process_learning_path(index_path: Path, args: argparse.Namespace) -> Dict[str, Any]:
+    ai_requested = False
     try:
         doc = read_markdown_document(index_path)
         steps = load_steps(index_path)
@@ -1393,18 +1422,35 @@ def process_learning_path(index_path: Path, args: argparse.Namespace) -> Dict[st
 
         generated_at = current_timestamp()
         current_source_hash = build_source_hash(doc.metadata, steps)
-        desired_content = build_desired_summary_faq(doc.metadata, steps, args)
-        desired_summary = desired_content["summary"]
-        desired_faqs = desired_content["faqs"]
-        generator = desired_content["generator"]
 
         existing_summary = extract_existing_summary(existing_generated)
         existing_faqs = extract_existing_faqs(existing_generated)
         existing_generator = compact_whitespace(str((existing_generated or {}).get("generator", "")))
-        generator_changed = bool(existing_generated is not None and existing_generator != generator)
+        generator_changed = bool(existing_generated is not None and existing_generator != "ai")
 
         summary_missing_before = existing_generated is not None and not compact_whitespace(existing_summary)
         faqs_missing_before = existing_generated is not None and not existing_faqs
+        summary_needs_generation = bool(
+            existing_generated is None
+            or generator_changed
+            or summary_missing_before
+            or rerun_summary_requested
+        )
+        faqs_needs_generation = bool(
+            existing_generated is None
+            or generator_changed
+            or faqs_missing_before
+            or rerun_faqs_requested
+        )
+        ai_requested = summary_needs_generation or faqs_needs_generation
+
+        if ai_requested:
+            desired_content = build_desired_summary_faq(doc.metadata, steps, args)
+            desired_summary = desired_content["summary"]
+            desired_faqs = desired_content["faqs"]
+        else:
+            desired_summary = existing_summary
+            desired_faqs = existing_faqs
 
         change_reasons: List[str] = []
         if existing_generated is None:
@@ -1435,12 +1481,8 @@ def process_learning_path(index_path: Path, args: argparse.Namespace) -> Dict[st
             summary_action = "rerun_requested"
             summary_after = desired_summary
         else:
+            summary_action = "unchanged"
             summary_after = existing_summary
-            if summaries_differ(existing_summary, desired_summary):
-                summary_action = "drift_detected_preserved"
-                change_reasons.append("summary_drift_detected")
-            else:
-                summary_action = "unchanged"
 
         if existing_generated is None:
             faq_action = "created"
@@ -1455,19 +1497,15 @@ def process_learning_path(index_path: Path, args: argparse.Namespace) -> Dict[st
             faq_action = "rerun_requested"
             faqs_after = desired_faqs
         else:
+            faq_action = "unchanged"
             faqs_after = existing_faqs
-            if faq_differences_exist(classify_faq_changes(existing_faqs, desired_faqs)):
-                faq_action = "drift_detected_preserved"
-                change_reasons.append("faq_drift_detected")
-            else:
-                faq_action = "unchanged"
 
         summary_changed = summaries_differ(existing_summary, summary_after)
         faq_change_details = classify_faq_changes(existing_faqs, faqs_after)
         faq_changed = faq_differences_exist(faq_change_details)
 
         summary_drift_detected = summary_action == "drift_detected_preserved"
-        faq_generated_diff = classify_faq_changes(existing_faqs, desired_faqs)
+        faq_generated_diff = classify_faq_changes(existing_faqs, desired_faqs) if ai_requested else {}
         faq_drift_detected = faq_action == "drift_detected_preserved"
 
         managed_block_updated = existing_generated is None or summary_action in CHANGE_ACTIONS or faq_action in CHANGE_ACTIONS
@@ -1497,7 +1535,6 @@ def process_learning_path(index_path: Path, args: argparse.Namespace) -> Dict[st
                 generated_at=generated_at,
                 summary_action=summary_action,
                 faq_action=faq_action,
-                generator=generator,
                 model=args.openai_model,
             )
             updated_front_matter = insert_or_replace_managed_block(updated_front_matter, updated_generated)
@@ -1530,6 +1567,7 @@ def process_learning_path(index_path: Path, args: argparse.Namespace) -> Dict[st
             "status": result_status,
             "changed_on_disk": changed_on_disk,
             "managed_block_updated": managed_block_updated,
+            "ai_requested": ai_requested,
             "rerun_flags_reset": rerun_flags_reset,
             "change_reasons": change_reasons,
             "template_version_before": compact_whitespace(str((existing_generated or {}).get("template_version", ""))),
@@ -1571,6 +1609,7 @@ def process_learning_path(index_path: Path, args: argparse.Namespace) -> Dict[st
         return {
             "path": report_path_for_output(index_path),
             "status": "error",
+            "ai_requested": ai_requested,
             "error": str(exc),
         }
 
@@ -1578,19 +1617,47 @@ def process_learning_path(index_path: Path, args: argparse.Namespace) -> Dict[st
 def main() -> int:
     args = parse_args()
     initialize_log(args)
-    selected_paths = select_learning_paths(args)
+    candidate_paths, selected_paths, skipped_results = selection_plan(args)
+
+    if not args.quiet_progress:
+        emit(
+            args,
+            "Selection summary: "
+            f"{len(selected_paths)} selected, {len(skipped_results)} skipped, "
+            f"{len(candidate_paths)} candidates.",
+            flush=True,
+        )
 
     if not selected_paths:
         emit(args, "No Learning Paths matched the current selection rules.")
-        run_report = build_run_report(args, [], [])
+        run_report = build_run_report(args, [], list(skipped_results.values()))
         if not args.no_write_report:
             write_report(Path(args.report_file), run_report, args.history_limit)
             emit(args, f"Wrote report to {report_path_for_output(Path(args.report_file))}")
+        if args.markdown_report_file:
+            write_markdown_report(Path(args.markdown_report_file), run_report)
+            emit(args, f"Wrote Markdown report to {report_path_for_output(Path(args.markdown_report_file))}")
         return 0
 
     results = []
-    total_paths = len(selected_paths)
-    for index, path in enumerate(selected_paths, start=1):
+    selected_set = set(selected_paths)
+    total_paths = len(candidate_paths)
+    for index, path in enumerate(candidate_paths, start=1):
+        if path in skipped_results:
+            result = skipped_results[path]
+            results.append(result)
+            if not args.quiet_progress:
+                emit(
+                    args,
+                    f"[{index}/{total_paths}] Skipping {report_path_for_output(path)} "
+                    f"({result.get('skip_reason', 'unknown')})",
+                    flush=True,
+                )
+            continue
+
+        if path not in selected_set:
+            continue
+
         if not args.quiet_progress:
             emit(args, f"[{index}/{total_paths}] Processing {report_path_for_output(path)}", flush=True)
         result = process_learning_path(path, args)
@@ -1603,6 +1670,10 @@ def main() -> int:
     if not args.no_write_report:
         write_report(Path(args.report_file), run_report, args.history_limit)
         emit(args, f"Wrote report to {report_path_for_output(Path(args.report_file))}")
+
+    if args.markdown_report_file:
+        write_markdown_report(Path(args.markdown_report_file), run_report)
+        emit(args, f"Wrote Markdown report to {report_path_for_output(Path(args.markdown_report_file))}")
 
     print_result_summary(args, run_report)
 

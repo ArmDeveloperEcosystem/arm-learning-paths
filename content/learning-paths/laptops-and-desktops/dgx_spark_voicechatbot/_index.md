@@ -23,6 +23,55 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-02T23:03:30Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 4ccde526ec4dd9fc18672e162e067108c7251161c1da0375a0bb0374a2f3a4ea
+  summary_generated_at: '2026-06-01T22:04:24Z'
+  summary_source_hash: 4ccde526ec4dd9fc18672e162e067108c7251161c1da0375a0bb0374a2f3a4ea
+  faq_generated_at: '2026-06-02T23:03:30Z'
+  faq_source_hash: 4ccde526ec4dd9fc18672e162e067108c7251161c1da0375a0bb0374a2f3a4ea
+  summary: >-
+    This advanced Learning Path guides you through building a private, offline voice chatbot on
+    Arm-based DGX Spark running Linux. You will capture real-time audio from a USB microphone
+    using PyAudio with Voice Activity Detection, transcribe speech locally using faster-whisper
+    on CPU, and generate responses with vLLM for on-device inference. The steps cover installing
+    and validating faster-whisper, constructing a real-time STT pipeline, fine-tuning segmentation
+    parameters, and integrating vLLM to complete the end-to-end system. By the end, you will deploy
+    and run the full pipeline on DGX Spark, with a focus on adjusting segmentation and prompt
+    strategies to balance latency and response quality. Prerequisites include a DGX Spark system
+    with at least 15 GB free disk space and a USB microphone, using Docker and Python.
+  faqs:
+  - question: What do I need before running the steps?
+    answer: >-
+      You need an NVIDIA DGX Spark system with at least 15 GB of available disk space, a USB microphone,
+      and a Linux environment. The path uses Python and Docker.
+  - question: Which components run on CPU versus GPU in this workflow?
+    answer: >-
+      The path builds a real-time speech-to-text pipeline on the CPU using faster-whisper. It
+      then adds vLLM for local language generation, which runs on GPU.
+  - question: How do I verify that faster-whisper is installed correctly?
+    answer: >-
+      The setup step focuses on confirming that faster-whisper can reliably transcribe audio.
+      Run a short recording or sample through the tool and check that you get accurate text output
+      before proceeding.
+  - question: How is audio captured and segmented for transcription?
+    answer: >-
+      You capture real-time audio with PyAudio and apply VAD-based segmentation and smart turn
+      detection. The path evolves from a simple 10-second recorder to a multithreaded, VAD-enhanced
+      STT engine.
+  - question: What result should I expect when the full pipeline is running?
+    answer: >-
+      Speaking into the microphone yields transcribed text from faster-whisper, and vLLM generates
+      a local response. You can fine-tune segmentation and prompt strategies to improve latency
+      and response quality.
+# END generated_summary_faq
 
 author: Odin Shen
 
