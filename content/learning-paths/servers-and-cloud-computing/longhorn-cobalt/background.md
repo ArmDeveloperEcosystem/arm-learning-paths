@@ -1,6 +1,6 @@
 ---
 title: Understand Longhorn on Azure Cobalt 100
-description: Understand how Longhorn provides Kubernetes persistent storage on Azure Cobalt 100 Arm64 virtual machines.
+description: Understand how Longhorn provides Kubernetes persistent storage on Arm64 virtual machines powered by Azure Cobalt 100.
 
 weight: 2
 
