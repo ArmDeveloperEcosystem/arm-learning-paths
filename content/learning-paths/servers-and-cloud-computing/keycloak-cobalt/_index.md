@@ -1,6 +1,5 @@
 ---
 title: Deploy Keycloak on Azure Cobalt 100 Arm64 virtual machines for identity and access management
-weight: 1
 
 draft: true
 cascade:
