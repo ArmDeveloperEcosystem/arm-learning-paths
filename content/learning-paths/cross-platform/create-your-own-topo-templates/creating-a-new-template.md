@@ -22,8 +22,8 @@ The Template you create serves a small web page with configurable text and color
 Create a new directory for the Template:
 
 ```bash
-mkdir -p ~/topo-template-work/topo-message-card/src
-cd ~/topo-template-work/topo-message-card
+mkdir opo-message-card
+cd topo-message-card
 ```
 
 A Topo Template is a normal project directory. At minimum, it must contain a `compose.yaml` file. Most Templates also include a `Dockerfile` and application source code.
@@ -34,7 +34,6 @@ The directory you create in this section will have the following structure:
 topo-message-card/
 ├── compose.yaml
 ├── Dockerfile
-├── README.md
 └── src/
     └── index.html
 ```
@@ -43,8 +42,7 @@ topo-message-card/
 
 Create the application HTML file:
 
-```bash
-cat > src/index.html <<'EOF'
+```html
 <!doctype html>
 <html lang="en">
   <head>
@@ -89,7 +87,6 @@ cat > src/index.html <<'EOF'
     </main>
   </body>
 </html>
-EOF
 ```
 
 The values wrapped in double braces are placeholders. The `Dockerfile` replaces them with values supplied by Topo.
@@ -98,8 +95,7 @@ The values wrapped in double braces are placeholders. The `Dockerfile` replaces 
 
 Create a `Dockerfile`:
 
-```bash
-cat > Dockerfile <<'EOF'
+```Dockerfile
 FROM nginx:alpine
 
 COPY src/index.html /usr/share/nginx/html/index.html
@@ -111,7 +107,6 @@ ARG ACCENT_COLOR="#0091bd"
 RUN sed -i "s|{{CARD_TITLE}}|${CARD_TITLE}|g" /usr/share/nginx/html/index.html
 RUN sed -i "s|{{CARD_MESSAGE}}|${CARD_MESSAGE}|g" /usr/share/nginx/html/index.html
 RUN sed -i "s|{{ACCENT_COLOR}}|${ACCENT_COLOR}|g" /usr/share/nginx/html/index.html
-EOF
 ```
 
 Topo passes configuration values to templates through Docker build arguments. The `ARG` lines define the values consumed during the image build.
@@ -120,8 +115,7 @@ Topo passes configuration values to templates through Docker build arguments. Th
 
 Create `compose.yaml`:
 
-```bash
-cat > compose.yaml <<'EOF'
+```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/arm/topo-template-format/refs/heads/main/schema/topo-template-format.json
 services:
   message-card:
@@ -158,7 +152,6 @@ x-topo:
       required: false
       default: "#0091bd"
       example: "#00a3a3"
-EOF
 ```
 
 This file is both a Compose file and a Topo Template definition.
@@ -174,31 +167,6 @@ The `x-topo` section is the Topo metadata block:
 - `args` defines the values Topo prompts for when someone clones the Template.
 
 The argument names in `x-topo.args` match the keys under `services.message-card.build.args`. When Topo resolves the arguments, it writes the selected values into the build arguments.
-
-### Add a README
-
-Create a short `README.md`:
-
-````bash
-cat > README.md <<'EOF'
-# Message Card
-
-This project is a Topo Template. It builds a small Nginx web application for
-Arm Linux targets.
-
-## Usage
-
-```bash
-topo clone dir:/path/to/topo-message-card
-cd topo-message-card
-topo deploy --target localhost
-```
-
-Open `http://localhost:8088/` in your browser after deployment.
-EOF
-````
-
-The README is not required by the Template format, but it is useful when you share the Template with other users.
 
 ### Clone the local Template
 
@@ -217,8 +185,6 @@ You can also omit the argument values and answer the interactive prompts:
 ```bash
 topo clone dir:./topo-message-card ./message-card-demo
 ```
-
-If `./message-card-demo` already exists, remove it or choose a different output directory before cloning again.
 
 After cloning, inspect the generated project:
 
