@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Modify the Hello World Template
 
-In the previous section, you cloned and deployed the Hello World Template. In this section, you will modify the template so the greeting emoji can be configured when someone clones the template.
+In the previous section, you cloned and deployed the Hello World Template. In this section, you will modify the Template so the greeting emoji can be configured when someone clones the Template.
 
-### Add a new template argument
+### Add a new Template argument
 
 Open the Hello World Template `compose.yaml` file:
 
@@ -82,7 +82,7 @@ Open the HTML file used by the web application. Find the line with the hard-code
 <span class="emoji floating">🐳</span>
 ```
 
-Replace it with the `GREETING_EMOJI` template variable:
+Replace it with the `GREETING_EMOJI` Template variable:
 
 ```html
 <span class="emoji floating">{{GREETING_EMOJI}}</span>
@@ -114,21 +114,21 @@ RUN sed -i "s|{{GREETING_NAME}}|${GREETING_NAME}|" /usr/share/nginx/html/index.h
 RUN sed -i "s|{{GREETING_EMOJI}}|${GREETING_EMOJI}|" /usr/share/nginx/html/index.html
 ```
 
-### Clone the modified template
+### Clone the modified Template
 
-Create a new directory for a fresh clone of your modified local template:
+Create a new directory for a fresh clone of your modified local Template:
 
 ```bash
 mkdir ../newdir/
 ```
 
-Clone the local template into the new directory:
+Clone the local Template into the new directory:
 
 ```bash
 topo clone dir:/home/tomgon01/eco/topo/playground/topo-welcome ../newdir/topo-welcome
 ```
 
-Topo prompts for the configured template arguments. You should now see prompts for both `GREETING_NAME` and `GREETING_EMOJI`. Use the example values, do not accept the defaults. When cloning completes, Topo creates the new project in `../newdir/topo-welcome`:
+Topo prompts for the configured Template arguments. You should now see prompts for both `GREETING_NAME` and `GREETING_EMOJI`. Use the example values, do not accept the defaults. When cloning completes, Topo creates the new project in `../newdir/topo-welcome`:
 
 ```output
 ┌─ Copy files ──────────────────────────────────────────

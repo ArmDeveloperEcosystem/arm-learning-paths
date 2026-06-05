@@ -109,7 +109,7 @@ RUN sed -i "s|{{CARD_MESSAGE}}|${CARD_MESSAGE}|g" /usr/share/nginx/html/index.ht
 RUN sed -i "s|{{ACCENT_COLOR}}|${ACCENT_COLOR}|g" /usr/share/nginx/html/index.html
 ```
 
-Topo passes configuration values to templates through Docker build arguments. The `ARG` lines define the values consumed during the image build.
+Topo passes configuration values to Templates through Docker build arguments. The `ARG` lines define the values consumed during the image build.
 
 ### Create the compose file
 

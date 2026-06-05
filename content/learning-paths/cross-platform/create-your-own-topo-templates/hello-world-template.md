@@ -16,7 +16,7 @@ List the available Topo Templates from the curated list in Topo:
 topo templates
 ```
 
-The output should be similar to the following, the Hello World template should be present:
+The output should be similar to the following, the Hello World Template should be present:
 
 ```output
 Hello World | https://github.com/Arm-Examples/topo-welcome.git | main
@@ -34,7 +34,7 @@ Lightbulb Moment | https://github.com/Arm-Examples/topo-lightbulb-moment.git | m
 (...)
 ```
 
-### Clone the Hello World template
+### Clone the Hello World Template
 
 ```bash
 topo clone https://github.com/Arm-Examples/topo-welcome.git

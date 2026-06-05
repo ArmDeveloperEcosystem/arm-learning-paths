@@ -1,5 +1,5 @@
 ---
-title: Create your own Topo templates
+title: Create your own Topo Templates
 
 draft: true
 cascade:
@@ -13,8 +13,8 @@ who_is_this_for: This is an introductory topic for embedded, edge, and cloud sof
 
 learning_objectives:
     - Install Topo and verify that the host and target environments are ready for deployment
-    - Run health checks and generate a target description to identify compatible Arm processor features and templates
-    - Clone a Topo template and deploy a containerized workload to an Arm-based Linux target
+    - Run health checks and generate a target description to identify compatible Arm processor features and Templates
+    - Clone a Topo Template and deploy a containerized workload to an Arm-based Linux target
     - (Optional) Deploy firmware and applications to heterogeneous Cortex-A + Cortex-M devices using remoteproc-runtime
 
 prerequisites:
@@ -52,7 +52,7 @@ shared_between:
 
 further_reading:
     - resource:
-        title: Topo template format
+        title: Topo Template format
         link: https://github.com/arm/topo-template-format
         type: documentation
     - resource:
