@@ -12,17 +12,17 @@ minutes_to_complete: 30
 who_is_this_for: This is an introductory topic for embedded, edge, and cloud software developers who want to create their own Topo Templates projects to be natively deployed with Topo.
 
 learning_objectives:
-    - Install Topo and verify that the host and target environments are ready for deployment
-    - Run health checks and generate a target description to identify compatible Arm processor features and Templates
-    - Clone a Topo Template and deploy a containerized workload to an Arm-based Linux target
-    - (Optional) Deploy firmware and applications to heterogeneous Cortex-A + Cortex-M devices using remoteproc-runtime
+    - Explain the purpose and structure of a Topo Template
+    - Clone and deploy an existing Topo Template to validate the Template workflow
+    - Add clone-time arguments to customize a Topo Template
+    - Create a new Topo Template from a Docker Compose project
+    - Add x-topo metadata for configurable arguments, deployment guidance, and hardware requirements
 
 prerequisites:
     - This learning path builds on [Deploy containerized workloads to Arm-based Linux targets with Topo](/learning-paths/cross-platform/deploy-containerized-workloads-with-topo/).
     - A host machine (x86 or Arm) with Linux, macOS, or Windows
-    - An Arm-based Linux target accessible over SSH, for example an Arm-based Linux VM, Raspberry Pi, DGX Spark, or NXP i.MX 93
+    - (Optional) An Arm-based Linux target accessible over SSH, for example an Arm-based Linux VM, Raspberry Pi, DGX Spark, or NXP i.MX 93
     - Docker installed on the host and target. For installation steps, see [Install Docker](/install-guides/docker/).
-    - lscpu installed on the target (pre-installed on most Linux distributions)
     - Basic familiarity with containers and CLI tools
 
 author: Tomas Agustin Gonzalez Orlando
