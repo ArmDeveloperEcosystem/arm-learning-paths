@@ -1,23 +1,23 @@
 ---
-title: Deploy and access XGBoost inference API
-weight: 8
+title: Deploy and access an XGBoost inference API
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Deploy XGBoost inference API on SUSE Linux
+## Run the XGBoost inference API on SUSE Linux
 
-In this section, you deploy the trained XGBoost model as a Flask-based inference API on the GCP Axion Arm64 VM and test it with a sample prediction request.
+In this section, you'll deploy the trained XGBoost model as a Flask-based inference API on the Google Axion Arm64 VM and test it with a sample prediction request.
 
-Navigate to the XGBoost project directory and activate the virtual environment:
+If you're continuing in the same SSH session from the previous section, the `xgb-env` virtual environment is already active and your working directory is `~/xgboost-learning-path`. If you've opened a new session, re-activate the environment and navigate to the project directory:
 
 ```bash
 cd ~/xgboost-learning-path
 source xgb-env/bin/activate
 ```
 
-## Install Flask
+### Install Flask
 
 Flask is a lightweight Python web framework used to serve the XGBoost model over HTTP. Add it to the requirements file and install it:
 
@@ -51,7 +51,7 @@ The output is similar to:
 Flask            3.1.3
 ```
 
-## Create the inference API
+### Create the inference API
 
 Create a Flask application that loads the trained XGBoost model and exposes two endpoints: a `GET /` route for browser health checks, and a `POST /predict` route that accepts a JSON array of features and returns a prediction. The model is loaded once at startup using `joblib` so it doesn't need to be reloaded on every request:
 
@@ -95,7 +95,7 @@ if __name__ == "__main__":
 EOF
 ```
 
-## Start the inference API
+### Start the inference API
 
 Start the Flask server in the background so you can continue using the same terminal for testing:
 
@@ -113,7 +113,7 @@ The output is similar to:
 
 The server is now listening on all network interfaces, including the VM's external IP on port 8080.
 
-## Access the API from a browser
+### Access the API from a browser
 
 Open your browser and navigate to the VM public IP on port 8080:
 
@@ -131,9 +131,9 @@ The page displays the HTML response from the `/` route, confirming the API is ru
 
 ![Browser window showing the XGBoost Inference API homepage running on a Google Cloud Axion Arm64 virtual machine. The page confirms that the inference API is active and accessible externally through port 8080 using the VM public IP address.#center](images/xgboost-api.png "XGBoost inference API running on Google Cloud Axion Arm64")
 
-## Test inference
+### Test inference
 
-Send a prediction request to the `/predict` endpoint using `curl`. The input data is a 30-feature vector from the breast cancer dataset — the same format used during training. The `features` array must contain exactly 30 values to match the model's expected input shape:
+Send a prediction request to the `/predict` endpoint using `curl`. The input data is a 30-feature vector from the breast cancer dataset — the same format used during training. The `features` array must contain exactly 30 values to match the model's expected input shape. For example:
 
 ```bash
 curl -X POST http://127.0.0.1:8080/predict \
@@ -147,8 +147,8 @@ The output is similar to:
 {"prediction":0}
 ```
 
-A prediction of `0` corresponds to a malignant classification in the breast cancer dataset (where `0` = malignant, `1` = benign). The model received the feature array, ran inference, and returned the result through the REST API.
+A prediction of `0` corresponds to a malignant classification in the breast cancer dataset, and a prediction of `1` corresponds to a benign classification. The model received the feature array, ran inference, and returned the result through the REST API.
 
-## What you've accomplished and what's next
+## What you've accomplished 
 
-You've successfully deployed a trained XGBoost model as a Flask REST API on a GCP Axion Arm64 VM, confirmed browser access through the external IP, and validated inference with a live prediction request. 
+You've successfully deployed a trained XGBoost model as a Flask REST API on a Google Axion Arm64 VM, confirmed browser access through the external IP, and validated inference with a live prediction request. 

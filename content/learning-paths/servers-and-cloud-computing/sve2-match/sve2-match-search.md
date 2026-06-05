@@ -100,6 +100,7 @@ int search_sve2_match_u8(const uint8_t *hay, size_t n, const uint8_t *keys,
                          size_t nkeys) {
   if (nkeys == 0) return 0;
   const size_t VL = svcntb();
+  if (nkeys > VL) return search_generic_u8(hay, n, keys, nkeys);
   svbool_t pg = svptrue_b8();
   uint8_t tmp[256];
   for (size_t i = 0; i < VL; ++i) tmp[i] = keys[i % nkeys];
@@ -121,6 +122,7 @@ int search_sve2_match_u16(const uint16_t *hay, size_t n, const uint16_t *keys,
                           size_t nkeys) {
   if (nkeys == 0) return 0;
   const size_t VL = svcnth();
+  if (nkeys > VL) return search_generic_u16(hay, n, keys, nkeys);
   svbool_t pg = svptrue_b16();
   uint16_t tmp[128];
   for (size_t i = 0; i < VL; ++i) tmp[i] = keys[i % nkeys];
@@ -142,6 +144,7 @@ int search_sve2_match_u16(const uint16_t *hay, size_t n, const uint16_t *keys,
 The SVE MATCH implementation with the `search_sve2_match_u8()` and `search_sve2_match_u16()` functions provide an efficient vectorized search approach with these key technical aspects:
    - Uses SVE2's specialized MATCH instruction to compare multiple elements against multiple keys in parallel
    - Leverages hardware-specific vector length through `svcntb()` for scalability
+   - In the case where the number of keys, `nkeys`, exceeds the hardware-specific vector length, the implementation falls back to the generic scalar version.
    - Prepares a vector of search keys that's compared against blocks of data
    - Processes data in vector-sized chunks with early termination when matches are found. Stops immediately when any element in the vector matches.
    - Falls back to scalar code for remainder elements
@@ -157,6 +160,8 @@ int search_sve2_match_u8_unrolled(const uint8_t *hay, size_t n, const uint8_t *k
                                  size_t nkeys) {
   if (nkeys == 0) return 0;
   const size_t VL = svcntb();
+  if (nkeys > VL) return search_generic_u8(hay, n, keys, nkeys);
+
   svbool_t pg = svptrue_b8();
   
   // Prepare key vector
@@ -205,6 +210,7 @@ int search_sve2_match_u16_unrolled(const uint16_t *hay, size_t n, const uint16_t
                                   size_t nkeys) {
   if (nkeys == 0) return 0; 
   const size_t VL = svcnth();
+  if (nkeys > VL) return search_generic_u16(hay, n, keys, nkeys);
   svbool_t pg = svptrue_b16();
     
   // Prepare key vector

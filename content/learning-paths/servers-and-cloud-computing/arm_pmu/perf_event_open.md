@@ -212,7 +212,8 @@ int main() {
   for(int i = 0; i < counter_results.nr; i++) {
     for(int j = 0; j < TOTAL_EVENTS ;j++){
       if(counter_results.values[i].id == id[j]){
-        pe_val[i] = counter_results.values[i].value;
+        pe_val[j] = counter_results.values[i].value;
+        break;
       }
     }
   }
