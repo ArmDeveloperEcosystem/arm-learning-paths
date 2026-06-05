@@ -1,22 +1,23 @@
 ---
 title: Build the DGX Spark AI runtime foundation
+description: Build the DGX Spark AI runtime foundation by installing Docker, enabling GPU containers, creating a shared workspace, and starting Ollama, Qdrant, and Open WebUI.
 weight: 3
 layout: "learningpathall"
 ---
 
-## Build the DGX Spark AI runtime foundation
+## Set up the base DGX Spark AI runtime 
 
-In this section, you will prepare the base runtime used by the rest of the Learning Path.
+In this section, you'll prepare the base runtime that you'll use in the rest of the Learning Path.
 
-You will install Docker, configure GPU-enabled containers, create a persistent workspace, and start the initial runtime service stack:
+You'll install Docker, configure GPU-enabled containers, create a persistent workspace, and start the initial runtime service stack:
 
 - Ollama for local inference
 - Qdrant for vector memory
 - Open WebUI for browser-based model access
 
-Hermes Agent is added in the next section. This section builds the local infrastructure it depends on.
+You'll add the Hermes Agent in the next section. In this section, you'll build the local infrastructure it depends on.
 
-## Verify the DGX Spark environment
+### Verify the DGX Spark environment
 
 Start by verifying that your DGX Spark system exposes the expected Arm CPU and NVIDIA GPU environment.
 
@@ -28,7 +29,7 @@ uname -m
 
 The expected output is:
 
-```text
+```output
 aarch64
 ```
 
@@ -44,11 +45,9 @@ Check that the NVIDIA GPU and CUDA driver stack are visible:
 nvidia-smi
 ```
 
-Confirm that the command shows the GPU name (NVIDIA GB10), driver version, and CUDA version. Make a note of the CUDA version, as you will use a matching container image when verifying GPU passthrough in the next step.
+The output is similar to:
 
-Example output:
-
-```text
+```output
 nvidia-smi
 Wed May 20 18:12:05 2026       
 +-----------------------------------------------------------------------------------------+
@@ -74,12 +73,13 @@ Wed May 20 18:12:05 2026
 |    0   N/A  N/A           85940      G   ...m Performix/arm-performix-gui         54MiB |
 +-----------------------------------------------------------------------------------------+
 ```
+Confirm that the command shows the GPU name (NVIDIA GB10), driver version, and CUDA version. Make a note of the CUDA version, as you'll use a matching container image when verifying GPU passthrough in the next step.
 
-## Install Docker
+### Install Docker
 
-If Docker is not already installed, the [Docker Engine install guide](/install-guides/docker/docker-engine/) covers installation in detail.
+If you've not previously installed Docker, for detailed install steps, see the [Docker Engine install guide](/install-guides/docker/docker-engine/).
 
-To install quickly, run:
+To install Docker with one command, run:
 
 ```bash
 curl -fsSL get.docker.com -o get-docker.sh && sh get-docker.sh
@@ -98,11 +98,11 @@ Verify Docker is working:
 docker run hello-world
 ```
 
-You should see a message confirming that Docker is installed and working.
+You'll see a message confirming that Docker is installed and working.
 
-## Install NVIDIA Container Toolkit
+### Install NVIDIA Container Toolkit
 
-The NVIDIA Container Toolkit enables Docker to expose the GPU to containers using the `--gpus` flag. Without it, containers cannot access the GPU regardless of the driver version installed on the host.
+The NVIDIA Container Toolkit allows Docker to expose the GPU to containers using the `--gpus` flag. Without it, containers can't access the GPU regardless of the driver version installed on the host.
 
 Add the NVIDIA Container Toolkit GPG key:
 
@@ -138,7 +138,7 @@ Restart Docker to apply the configuration change:
 sudo systemctl restart docker
 ```
 
-## Verify GPU-enabled containers
+### Verify GPU-enabled containers
 
 Run a CUDA validation container:
 
@@ -148,9 +148,11 @@ nvcr.io/nvidia/cuda:13.0.1-devel-ubuntu24.04 \
 nvidia-smi
 ```
 
-If you have not pulled this image before, Docker downloads it before running `nvidia-smi`. This can take a few minutes depending on your network connection.
+If you have not pulled this image before, Docker downloads it before running `nvidia-smi`. The download can take a few minutes depending on your network connection.
 
-```text
+The output is similar to:
+
+```output
 Unable to find image 'nvcr.io/nvidia/cuda:13.0.1-devel-ubuntu24.04' locally
 13.0.1-devel-ubuntu24.04: Pulling from nvidia/cuda
 03f66a4525ea: Pull complete 
@@ -207,7 +209,7 @@ If the command prints GPU information from inside the container, Docker GPU pass
 
 Docker can now run GPU-accelerated containers on DGX Spark.
 
-## Create the persistent workspace
+### Create the persistent workspace
 
 Create the project directory:
 
@@ -230,7 +232,7 @@ compose \
 qdrant
 ```
 
-The workspace should now look like this:
+The workspace now looks like this:
 
 ```text
 dgx-hermes-agent/
@@ -247,7 +249,7 @@ dgx-hermes-agent/
 
 The `workspace/` directory is shared across runtime services. Hermes will later monitor `workspace/inbox/`, write generated artifacts to `workspace/memory/`, and read runtime policies from `workspace/config/`.
 
-## Build the runtime service stack
+### Create the runtime service stack
 
 Create and edit the file `~/dgx-hermes-agent/compose/docker-compose.yml`.
 
@@ -319,9 +321,9 @@ volumes:
   open-webui:
 ```
 
-This Compose stack creates the first three runtime services. Hermes will be added as a fourth service later. The explicit DNS settings in the Ollama service help the container reach the model registry reliably. You will verify this in the networking step.
+This Compose stack creates the first three runtime services. You'll add Hermes as a fourth service later. The explicit DNS settings in the Ollama service help the container reach the model registry reliably. You'll verify this in the networking step.
 
-## Runtime service roles
+#### Understand the role of each runtime service
 
 The initial stack separates model execution, memory storage, and user interaction.
 
@@ -333,7 +335,7 @@ The initial stack separates model execution, memory storage, and user interactio
 
 The `models/` directory persists Ollama models on the host. The `qdrant/` directory persists vector database storage. The `workspace/` directory is mounted into Ollama now and will also be mounted into Hermes later.
 
-Ollama does not orchestrate workspace files by itself. The workspace mount verification step confirms shared storage access. Hermes will become the service that reads workspace files and decides when to call Ollama.
+Ollama doesn't orchestrate workspace files by itself. The workspace mount verification step confirms shared storage access. Hermes will become the service that reads workspace files and decides when to call Ollama.
 
 ## Start the runtime stack
 
@@ -352,7 +354,7 @@ docker compose up -d
 ```
 
 {{% notice Note %}}
-The first `docker compose up -d` run can take several minutes because Docker needs to pull the service images. The time depends on your network speed.
+The first `docker compose up -d` run can take several minutes, depending on your network speed, because Docker needs to pull the service images.
 {{% /notice %}}
 
 Verify that the containers are running:
@@ -361,16 +363,19 @@ Verify that the containers are running:
 docker ps
 ```
 
-You should see containers similar to:
+The output is similar to:
 
-```text
+```output
 NAME         IMAGE                                COMMAND               SERVICE      CREATED         STATUS                            PORTS
 ollama       ollama/ollama:latest                 "/bin/ollama serve"   ollama       5 seconds ago   Up 4 seconds                      0.0.0.0:11434->11434/tcp, [::]:11434->11434/tcp
 open-webui   ghcr.io/open-webui/open-webui:main   "bash start.sh"       open-webui   4 seconds ago   Up 4 seconds (health: starting)   0.0.0.0:3000->8080/tcp, [::]:3000->8080/tcp
 qdrant       qdrant/qdrant:latest                 "./entrypoint.sh"     qdrant       5 seconds ago   Up 4 seconds                      0.0.0.0:6333-6334->6333-6334/tcp, [::]:6333-6334->6333-6334/tcp
 ```
+## Validate the base DGX Spark AI runtime
 
-## Verify container networking
+After starting the runtime, verify that it works as expected.
+
+### Verify container networking
 
 Open a shell in the Ollama container:
 
@@ -378,7 +383,7 @@ Open a shell in the Ollama container:
 docker exec -it ollama bash
 ```
 
-You may see a warning such as `groups: cannot find name for group ID 992`. It appears when the container's `/etc/group` file has no entry for your host user's GID and is harmless. The shell opens normally and all commands work as expected.
+You might see a warning such as `groups: cannot find name for group ID 992`. It's a harmless warning that appears when the container's `/etc/group` file has no entry for your host user's GID. The shell opens normally and all commands work as expected.
 
 Verify DNS resolution:
 
@@ -386,9 +391,9 @@ Verify DNS resolution:
 getent hosts registry.ollama.ai
 ```
 
-Example output:
+The output is similar to:
 
-```text
+```output
 root@367b013fd34c:/# getent hosts registry.ollama.ai
 2606:4700:3036::6815:4be3 registry.ollama.ai
 2606:4700:3034::ac43:b6e5 registry.ollama.ai
@@ -402,7 +407,7 @@ exit
 
 The DNS settings in the Compose file help the container reach the Ollama model registry reliably.
 
-## Pull local models
+### Pull local models
 
 Open a shell in the Ollama container:
 
@@ -428,16 +433,16 @@ Exit the container:
 exit
 ```
 
-These model names are used throughout the examples, so keep them when following along. The architecture supports other suitable models.
-
-Because the `models/` directory is mounted into the container as a volume, downloaded models are stored on the host at `~/dgx-hermes-agent/models/` and persist even if the container is removed or recreated.
+These model names are used throughout the examples, so make note of them. The architecture supports other suitable models.
 
 | Model | Purpose |
 |---|---|
 | `qwen2.5:7b` | Local chat, summarization, reasoning |
 | `nomic-embed-text` | Embedding generation for semantic memory |
 
-## Verify local inference
+Because the `models/` directory is mounted into the container as a volume, downloaded models are stored on the host at `~/dgx-hermes-agent/models/`. The models persist even if the container is removed or recreated.
+
+### Verify local inference
 
 Open a shell in the Ollama container:
 
@@ -459,17 +464,17 @@ Summarize the role of CPU orchestration for an AI agent in one sentence.
 
 After the model responds, type `/bye` to exit the interactive model session, then type `exit` to leave the container shell.
 
-You can also monitor GPU activity from another terminal while the model is running:
+You can also monitor GPU activity from another terminal when the model is running:
 
 ```bash
 nvtop
 ```
 
-During inference, you should see GPU utilization rise on the Blackwell GPU as the model processes the prompt and generates tokens. This confirms the model is running on the GPU rather than falling back to the CPU.
+During inference, you'll see GPU utilization rise on the Blackwell GPU as the model processes the prompt and generates tokens. The change in GPU utilization shows that the model is running on the GPU rather than falling back to the CPU.
 
-This step validates that local inference is available before Hermes begins calling Ollama programmatically.
+This step shows that local inference is available before Hermes begins calling Ollama programmatically.
 
-## Verify Open WebUI
+### Verify Open WebUI
 
 Open a browser and navigate to:
 
@@ -477,7 +482,7 @@ Open a browser and navigate to:
 http://localhost:3000
 ```
 
-On first launch, Open WebUI presents a setup screen asking for a name and email address. This creates a local admin account. The email does not need to be real and no data leaves your system. Enter any values and continue to the main interface.
+On first launch, Open WebUI presents a setup screen asking for a name and email address to create a local admin account. The email can be a placeholder and no data leaves your system. Enter any values and continue to the main interface.
 
 To verify that Ollama is reachable from the host, navigate to:
 
@@ -485,11 +490,11 @@ To verify that Ollama is reachable from the host, navigate to:
 http://localhost:11434
 ```
 
-If Ollama is running, the browser displays the message `Ollama is running`. This confirms that the Ollama container is accessible on the expected port. Open WebUI connects to Ollama using the internal Docker network address `http://ollama:11434`, but from the host you use `localhost:11434`.
+If Ollama is running, the browser displays the message `Ollama is running`. The message confirms that the Ollama container is accessible on the expected port. Open WebUI connects to Ollama using the internal Docker network address `http://ollama:11434`, but from the host you use `localhost:11434`.
 
 Use Open WebUI to confirm that the local model is listed and available for chat. Open WebUI is not used in the agent workflow in the sections that follow. Hermes calls Ollama directly through its API, so Open WebUI serves only as a convenient way to validate the inference stack before the agent takes over.
 
-## Verify Qdrant
+### Verify Qdrant
 
 Open the Qdrant dashboard:
 
@@ -499,11 +504,11 @@ http://localhost:6333/dashboard
 
 ![Qdrant dashboard running locally before the workspace_memory collection is created#center](qdrant_dashboard.png "Qdrant Dashboard")
 
-Qdrant is running, but it does not contain the `workspace_memory` collection yet. Hermes creates that collection later when you add persistent memory.
+Qdrant is running, but it doesn't contain the `workspace_memory` collection yet. Hermes creates that collection later when you add persistent memory.
 
-## Verify the shared workspace mount
+### Verify the shared workspace mount
 
-Open another terminal on your DGX Spark system and create a test file on the host. Do not run this command inside a container.
+Open another terminal on your DGX Spark system and create a test file on the host. Don't run this command inside a container.
 
 ```bash
 echo "Arm CPUs orchestrate persistent AI workflows." \
@@ -523,9 +528,9 @@ ls -l /workspace
 cat /workspace/inbox/test.txt
 ```
 
-You should see:
+The output is similar to:
 
-```text
+```output
 drwxrwxr-x 2 1001 1001 4096 May 20 18:16 config
 drwxrwxr-x 2 1001 1001 4096 May 20 18:37 inbox
 drwxrwxr-x 2 1001 1001 4096 May 20 18:16 logs
@@ -533,9 +538,9 @@ drwxrwxr-x 2 1001 1001 4096 May 20 18:16 memory
 drwxrwxr-x 2 1001 1001 4096 May 20 18:16 processed
 ```
 
-And the file content:
+The file contains the following:
 
-```text
+```output
 Arm CPUs orchestrate persistent AI workflows.
 ```
 
@@ -545,10 +550,10 @@ Exit the container:
 exit
 ```
 
-## Summary
+## What you've accomplished and what's next
 
-You have built the runtime foundation for the persistent local AI system. The DGX Spark environment now has Docker, Docker Compose, NVIDIA Container Toolkit, GPU-enabled containers, persistent workspace storage, and the initial Ollama, Qdrant, and Open WebUI services.
+You've built the runtime foundation for the persistent local AI system. The DGX Spark environment now has Docker, Docker Compose, NVIDIA Container Toolkit, GPU-enabled containers, persistent workspace storage, and the initial Ollama, Qdrant, and Open WebUI services.
 
-You also verified shared workspace access, local inference, and the fixed model setup used by the later sections.
+You've also verified shared workspace access, local inference, and the fixed model setup used by the later sections.
 
-Next, you will add Hermes Agent as the persistent orchestration runtime.
+Next, you'll add Hermes Agent as the persistent orchestration runtime.

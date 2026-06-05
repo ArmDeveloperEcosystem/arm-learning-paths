@@ -1,20 +1,21 @@
 ---
-title: Build persistent semantic memory
+title: Build persistent semantic memory for Hermes Agent
+description: Store Hermes Agent summaries and embeddings in Qdrant to create persistent semantic memory for workspace documents.
 weight: 6
 layout: "learningpathall"
 ---
 
-## Build persistent semantic memory
+## Update Hermes to add persistent memory
 
-In this section, you will add persistent semantic memory to Hermes Agent.
+In this section, you'll add persistent semantic memory to Hermes Agent.
 
-In the previous section, Hermes became an inference orchestrator: it watched the workspace, sent document content to Ollama, and printed an AI summary. This section extends that workflow so the summary and source content are no longer just log output. Hermes will encode the document as an embedding and store it in Qdrant as reusable memory.
+In the previous section, Hermes became an inference orchestrator: it watched the workspace, sent document content to Ollama, and printed an AI summary. You'll now extend this workflow so the summary and source content are no longer just log output. Hermes will encode the document as an embedding and store it in Qdrant as reusable memory.
 
-The runtime can already monitor files and generate summaries with a local language model. You will now generate embeddings for workspace content and store them in Qdrant.
+The runtime can already monitor files and generate summaries with a local language model. You'll now generate embeddings for workspace content and store them in Qdrant.
 
 The workflow becomes:
 
-```output
+```text
 workspace/inbox document
     -> Hermes summarizes with Ollama
     -> Hermes generates embedding
@@ -22,9 +23,9 @@ workspace/inbox document
     -> persistent semantic memory
 ```
 
-This turns Hermes from an event-driven summarizer into a local AI runtime with long-term memory.
+Adding persistent memory turns Hermes from an event-driven summarizer into a local AI runtime with long-term memory.
 
-## Persistent memory architecture
+### Understand persistent memory architecture
 
 Semantic memory uses vector embeddings to represent document meaning. The memory pipeline spans three services:
 
@@ -45,9 +46,9 @@ The fixed embedding configuration is:
 
 The vector dimension must match the output size of the embedding model. For `nomic-embed-text`, the collection is created with a vector size of `768`.
 
-For example, a document about CPU orchestration is first summarized by `qwen2.5:7b`. Hermes then sends the same document text to `nomic-embed-text`, receives a 768-dimensional embedding, and stores that vector in Qdrant with metadata such as the file path, generated summary, and source content excerpt. Later, a query about "runtime scheduling" can retrieve this memory even if the document does not contain the exact same words.
+For example, a document about CPU orchestration is first summarized by `qwen2.5:7b`. Hermes then sends the same document text to `nomic-embed-text`, receives a 768-dimensional embedding, and stores that vector in Qdrant with metadata. Metadata includes the file path, generated summary, and source content excerpt. Later, a query about "runtime scheduling" can retrieve this memory even if the document does not contain the exact same words.
 
-## Pull the embedding model
+### Pull the embedding model
 
 Open a shell in the Ollama container:
 
@@ -69,7 +70,7 @@ exit
 
 The embedding model converts text into vectors. Qdrant stores those vectors and uses them later for semantic retrieval.
 
-## Add persistent memory to Hermes
+### Update the Hermes agent
 
 Open and edit the file `~/dgx-hermes-agent/hermes/agent.py`.
 
@@ -234,17 +235,50 @@ if __name__ == "__main__":
     observer.join()
 ```
 
-## Code trace
+#### Understand the code trace
 
-Hermes connects to Qdrant using the Docker service name `qdrant`, read from the `QDRANT_HOST` environment variable with a default fallback. On startup, `ensure_collection()` creates the `workspace_memory` collection if it does not already exist, configured with a vector size of 768 and cosine distance to match the `nomic-embed-text` model output.
+Hermes connects to Qdrant using the Docker service name `qdrant`, read from the `QDRANT_HOST` environment variable with a default fallback. On startup, `ensure_collection()` creates the `workspace_memory` collection if it doesn't already exist, configured with a vector size of 768 and cosine distance to match the `nomic-embed-text` model output.
 
 When a file is detected, `process_file()` calls `generate_summary()` and then `generate_embedding()` in sequence. The embedding uses `client.embed()` from the current Ollama Python SDK, and the result is read from `response["embeddings"][0]`. Hermes stores each document as a Qdrant `PointStruct` with the vector and a payload containing the file path, generated summary, and source content excerpt. The payload makes sure that future retrieval results include the document context needed to answer workspace queries.
 
-## Runtime filtering
+#### Understand runtime filtering
 
 The agent filters incoming files before processing. Only `.txt`, `.md`, and `.log` files are handled. Files whose names start with `.` are skipped, which avoids processing hidden files and temporary files created by editors or the operating system.
 
-## Rebuild Hermes
+#### Understand runtime compatibility considerations
+
+Use the Ollama embedding API inside the `generate_embedding()` function:
+
+```python
+client.embed(...)
+```
+
+Read the embedding from the `embeddings` list returned by Ollama:
+
+```python
+response["embeddings"][0]
+```
+
+Don't use older examples that call:
+
+```python
+client.embeddings(...)
+```
+
+The Qdrant vector dimension must match the embedding model output size. For this Learning Path, use `768` with `nomic-embed-text`.
+
+This dimension is configured in `ensure_collection()`:
+
+```python
+vectors_config=VectorParams(
+    size=768,
+    distance=Distance.COSINE
+)
+```
+
+If you change the embedding model later, update the Qdrant collection dimension to match the new model output. If the dimensions don't match, Qdrant will reject the inserted vectors.
+
+### Rebuild Hermes
 
 Rebuild the Hermes container:
 
@@ -267,17 +301,20 @@ docker logs -f hermes
 
 Leave this terminal open with the log stream running and open a second terminal for the next step.
 
-On first startup, you should see:
+On first startup, the output is similar to:
 
 ```output
 [Memory] Created collection: workspace_memory
 [Hermes Agent] Starting workspace watcher...
 [Hermes Agent] Monitoring: /workspace/inbox
 ```
+## Validate persistent semantic memory
 
-## Validate memory ingestion
+After updating the Hermes Agent and rebuilding it to add persistent semantic memory, verify that the memory has been added as expected.
 
-In terminal 2, create a new document. Write it outside the inbox first, then move the completed file into `workspace/inbox/` so Hermes processes a fully written document.
+### Validate memory ingestion
+
+In the second terminal, create a new document. Write it outside the inbox first, then move the completed file into `workspace/inbox/` so Hermes processes a fully written document.
 
 ```bash
 cat > /tmp/memory-test.txt <<'EOF'
@@ -290,7 +327,9 @@ mv /tmp/memory-test.txt \
 ~/dgx-hermes-agent/workspace/inbox/memory-test.txt
 ```
 
-Watch terminal 1 for the Hermes log output. You should see output similar to:
+Watch the first terminal running Hermes logs for the Hermes log output. 
+
+The memory ingestion output is similar to:
 
 ```output
 [Agent] New file detected:
@@ -303,17 +342,16 @@ Watch terminal 1 for the Hermes log output. You should see output similar to:
 - Semantic memory in AI systems retains embeddings and metadata to store relevant context.
 - This stored information allows for retrieval of pertinent context, enhancing the runtime's ability to reason effectively.
 ```
+The summary text will vary because it is generated by the local model.
 
-Then:
+The log stream output is similar to:
 
 ```output
 [Agent] Generating embeddings...
 [Memory] Stored document: /workspace/inbox/memory-test.txt
 ```
 
-The summary text will vary because it is generated by the local model.
-
-## Verify Qdrant memory
+### Verify Qdrant memory
 
 Open the Qdrant dashboard:
 
@@ -323,26 +361,26 @@ http://localhost:6333/dashboard
 
 Confirm that the `workspace_memory` collection exists:
 
-![Qdrant dashboard showing the workspace_memory collection#center](qdrant_dashboard_2.png "Qdrant Dashboard")
+![Qdrant dashboard showing the workspace_memory collection, confirming that Hermes created the collection#center](qdrant_dashboard_2.png "Qdrant Dashboard")
 
-The dashboard should show the `workspace_memory` collection after Hermes starts and runs `ensure_collection()`. If the collection does not appear, check the Hermes logs for Qdrant connection errors and confirm that the `qdrant` container is running.
+The dashboard shows the `workspace_memory` collection after Hermes starts and runs `ensure_collection()`. If the collection doesn't appear, check the Hermes logs for Qdrant connection errors and confirm that the `qdrant` container is running.
 
-Open the collection and verify that points are being stored. Each point represents one ingested workspace document and should contain:
+Open the collection and verify that points are being stored. Each point represents one ingested workspace document and contains:
 
 - A 768-dimensional vector
 - A `path` payload field
 - A `summary` payload field
 - A `content` payload field
 
-![Qdrant workspace_memory collection showing stored vectors and payload fields#center](qdrant_dashboard_3.png "Qdrant workspace_memory")
+![Qdrant workspace_memory collection showing stored vectors and payload fields#center](qdrant_dashboard_3.png "Qdrant workspace_memory vector and payload view")
 
 Use this view to confirm that Qdrant has stored both the vector and payload metadata. The payload fields are important because later retrieval steps need the path and summary to assemble useful context for the LLM.
 
 You can also inspect collection storage and memory usage:
 
-![Qdrant collection storage view showing persistent memory usage#center](qdrant_dashboard_4.png "Qdrant workspace_memory")
+![Qdrant collection storage view showing persistent memory usage#center](qdrant_dashboard_4.png "Qdrant workspace_memory memory usage view")
 
-The memory usage view confirms that Qdrant is maintaining persistent collection state on disk. This matters because the vector memory should survive container restarts as long as the `../qdrant:/qdrant/storage` volume remains mounted.
+The memory usage view confirms that Qdrant is maintaining persistent collection state on disk. This matters because the vector memory survives container restarts as long as the `../qdrant:/qdrant/storage` volume remains mounted.
 
 You can also inspect collections from the host:
 
@@ -350,59 +388,24 @@ You can also inspect collections from the host:
 curl http://localhost:6333/collections
 ```
 
-The response is similar to:
+The output is similar to:
 
 ```output
 {"result":{"collections":[{"name":"workspace_memory"}]},"status":"ok","time":0.0001}
 ```
 
-## CPU and GPU responsibilities
+## Understand CPU and GPU responsibilities
 
 The Arm Grace CPU coordinates the full memory pipeline: detecting new files, filtering by extension, reading content, calling Ollama for summaries and embeddings, creating and upserting Qdrant collections, and keeping the long-running runtime active.
 
 The Blackwell GPU accelerates the model workloads, running summary generation with `qwen2.5:7b` and embedding generation with `nomic-embed-text`. Qdrant stores the results as persistent memory.
 
-## Runtime compatibility notes
+## What you've accomplished and what's next
 
-The following compatibility notes apply to the code you added in `~/dgx-hermes-agent/hermes/agent.py`.
-
-Use the current Ollama embedding API inside the `generate_embedding()` function:
-
-```python
-client.embed(...)
-```
-
-Read the embedding from the `embeddings` list returned by Ollama:
-
-```python
-response["embeddings"][0]
-```
-
-Do not use older examples that call:
-
-```python
-client.embeddings(...)
-```
-
-The Qdrant vector dimension must match the embedding model output size. For this Learning Path, use `768` with `nomic-embed-text`
-
-This dimension is configured in `ensure_collection()`:
-
-```python
-vectors_config=VectorParams(
-    size=768,
-    distance=Distance.COSINE
-)
-```
-
-If you change the embedding model later, update the Qdrant collection dimension to match the new model output. If the dimensions do not match, Qdrant will reject the inserted vectors.
-
-## Summary
-
-Before moving to the next section, press `Ctrl+C` in terminal 1 to stop the Hermes log stream. The next section rebuilds the Hermes container and runs `docker logs -f hermes` again.
-
-You added persistent semantic memory to Hermes Agent by connecting it to Qdrant, creating the `workspace_memory` collection, generating local embeddings with Ollama, and storing vectors with document metadata.
+You've now added persistent semantic memory to Hermes Agent by connecting it to Qdrant, creating the `workspace_memory` collection, generating local embeddings with Ollama, and storing vectors with document metadata.
 
 The runtime can now ingest documents, summarize them, generate embeddings, and preserve that context as persistent vector memory.
 
-Next, you will add semantic retrieval and contextual question answering.
+Next, you'll add semantic retrieval and contextual question answering.
+
+Before moving to the next section, press `Ctrl+C` in the first terminal running Hermes logs to stop the Hermes log stream. In the next section, you'll rebuild the Hermes container and run `docker logs -f hermes` again.
