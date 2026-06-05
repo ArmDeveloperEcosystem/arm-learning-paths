@@ -1,5 +1,5 @@
 ---
-title: Deploy OpenEBS on an Arm64 virtual machine 
+title: Deploy OpenEBS on an Arm-based virtual machine 
 description: Install K3s, deploy OpenEBS LocalPV with Helm, and configure OpenEBS as the default storage class on an Arm64 virtual machine.
 weight: 4
 

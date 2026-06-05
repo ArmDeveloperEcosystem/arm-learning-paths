@@ -11,7 +11,7 @@ layout: learningpathall
 
 In this section, you'll use the Azure portal to create a virtual machine (VM) powered by the Arm-based Azure Cobalt 100 processor.
 
-In this Learning Path, you'll create a general-purpose virtual machine in the Dpsv6 series. For more information, see the [Microsoft Azure guide for the Dpsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series).
+You'll create a general-purpose virtual machine in the Dpsv6 series. For more information, see the [Microsoft Azure guide for the Dpsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series).
 
 While the steps to create this instance are included here for convenience, for more detailed steps, you can also see [Deploy a Cobalt 100 virtual machine on Azure Learning Path](/learning-paths/servers-and-cloud-computing/cobalt/).
 
