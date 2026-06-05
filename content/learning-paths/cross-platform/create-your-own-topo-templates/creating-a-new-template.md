@@ -22,7 +22,7 @@ The Template you create serves a small web page with configurable text and color
 Create a new directory for the Template:
 
 ```bash
-mkdir opo-message-card
+mkdir topo-message-card
 cd topo-message-card
 ```
 
