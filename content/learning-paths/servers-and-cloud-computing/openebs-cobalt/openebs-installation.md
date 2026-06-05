@@ -129,11 +129,13 @@ helm repo add openebs https://openebs.github.io/openebs
 
 ### Update Helm repositories
 
+After adding the OpenEBS repository, update Helm repositories:
+
 ```bash
 helm repo update
 ```
 
-The output will look similar to:
+The output is similar to:
 
 ```output
 ...Successfully got an update from the "openebs" chart repository
@@ -165,13 +167,13 @@ helm install openebs openebs/openebs \
 
 ## Verify OpenEBS installation
 
-OpenEBS components take a moment to start. Wait for the pods to become ready before continuing.
+OpenEBS components take a moment to start. Wait for the pods to become ready before continuing:
 
 ```bash
 kubectl wait --for=condition=Ready pod -l app=openebs-localpv-provisioner -n openebs --timeout=120s
 ```
 
-Then check all OpenEBS pods are running.
+Then check whether all OpenEBS pods are running:
 
 ```bash
 kubectl get pods -n openebs

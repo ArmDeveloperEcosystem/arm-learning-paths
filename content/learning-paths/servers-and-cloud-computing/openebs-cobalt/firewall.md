@@ -15,7 +15,7 @@ To allow external traffic to the Kubernetes application, open the Kubernetes Nod
 
 ### Identify the Kubernetes NodePort
 
-In the previous section, you exposed the NGINX deployment as a NodePort service. Run the following command on your VM to find the port that Kubernetes assigned.
+In the previous section, you exposed the NGINX deployment as a NodePort service. Run the following command on your VM to find the port that Kubernetes assigned:
 
 ```bash
 kubectl get svc
@@ -34,7 +34,7 @@ In this example, the NodePort is `31635`. Kubernetes assigns this port dynamical
 
 To expose the Kubernetes NodePort externally, create a firewall rule:
 
-1. Navigate to the [Azure portal](https://portal.azure.com), go to **Virtual Machines**, and select your virtual machine.
+1. Navigate to the [Azure portal](https://portal.azure.com), then go to **Virtual Machines**, and select your VM.
 
 ![Azure Portal Virtual Machines page with the target VM selected. Check that you are opening the correct virtual machine before configuring its network access.#center](images/virtual_machine.png "Virtual machines")
 
@@ -63,7 +63,7 @@ To expose the Kubernetes NodePort externally, create a firewall rule:
 
 ## Access the application
 
-Open the following URL in your browser. Replace `<VM_PUBLIC_IP>` with the public IP address of your Azure virtual machine, and replace `31635` with your actual NodePort if it differs.
+Open the following URL in your browser. Replace `<VM_PUBLIC_IP>` with the public IP address of your Azure VM, and replace `31635` with your NodePort if it differs.
 
 ```text
 http://<VM_PUBLIC_IP>:31635
@@ -95,6 +95,6 @@ kubectl delete -f pvc.yaml
 
 You've configured the Azure Network Security Group to allow external access to the Kubernetes application running with OpenEBS LocalPV persistent storage, and confirmed that the application is reachable from your browser.
 
-The persistent data written earlier survived pod recreation. The data is now served by a stateful NGINX workload backed by OpenEBS on an Arm64 virtual machine powered by Azure Cobalt 100.
+The persistent data that you wrote earlier survived pod recreation and is now served by a stateful NGINX workload backed by OpenEBS.
 
-You can use this workflow to add persistent storage to your own Kubernetes applications with OpenEBS on Arm. 
+You can use the workflow described in this Learning Path to add persistent storage backed by OpenEBS to your own Kubernetes applications running on Arm-based cloud infrastructure. 
