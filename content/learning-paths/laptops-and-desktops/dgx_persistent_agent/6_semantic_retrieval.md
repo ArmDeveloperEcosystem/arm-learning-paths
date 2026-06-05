@@ -276,7 +276,7 @@ The main runtime loop checks for `/workspace/query.txt` on each iteration. When 
 
 #### Understand runtime compatibility considerations
 
-Use `qdrant.query_points()` with `query=embedding` when calling the vector search API. Older examples use `query_vector=embedding`, which is not compatible with current versions of the Qdrant Python client. Read each result's payload with `result.payload` before assembling the retrieval context.
+Use `qdrant.query_points()` with `query=embedding` when calling the vector search API. Older examples use `query_vector=embedding`, which isn't compatible with current versions of the Qdrant Python client. Read each result's payload with `result.payload` before assembling the retrieval context.
 
 The `limit=3` value in `search_memory()` is hardcoded to keep the retrieval behavior easy to inspect. You can make it configurable later.
 
@@ -358,7 +358,7 @@ mv /tmp/semantic-memory-note.txt \
 ~/dgx-hermes-agent/workspace/inbox/semantic-memory-note.txt
 ```
 
-Watch the terminal running Hermes logs until each document is summarized, embedded, and stored.
+Watch the first terminal running Hermes logs until each document is summarized, embedded, and stored.
 
 The output is similar to:
 
@@ -405,7 +405,7 @@ The output is similar to:
 
 ### Test semantic retrieval
 
-In terminal 2, create a query file:
+In the second terminal, create a query file:
 
 ```bash
 echo "How do CPUs help persistent AI systems?" \
@@ -414,13 +414,17 @@ echo "How do CPUs help persistent AI systems?" \
 
 Hermes checks for `/workspace/query.txt` in the runtime loop. When it sees the file, it reads the question and removes the file. It then embeds the question, searches Qdrant, and sends the retrieved context to Ollama.
 
-In terminal 1, confirm that semantic search started:
+In the first terminal running Hermes logs, confirm that semantic search started.
+
+The output is similar to:
 
 ```output
 [Memory] Searching semantic memory...
 ```
 
-Then confirm that Hermes printed the question and the retrieved memory context:
+Then confirm that Hermes printed the question and the retrieved memory context.
+
+The output is similar to:
 
 ```output
 [Workspace Query]
@@ -469,7 +473,7 @@ The exact answer will vary, but it should refer to retrieved memory about CPU or
 
 ### Verify contextual reasoning
 
-In terminal 2, ask a second question:
+In the second terminal, ask another question:
 
 ```bash
 echo "Why does the runtime need semantic memory?" \
@@ -511,27 +515,13 @@ Summary:
 The runtime needs semantic memory because it retains embeddings and metadata that store relevant context from past workspace activities. This allows the system to effectively reason by retrieving pertinent information, enhancing its ability to understand and respond to new inputs more intelligently. Unlike simple keyword matching, semantic memory uses a vector database which captures the meaning of words or concepts, enabling more accurate and contextualized recall of past events or knowledge.
 ```
 
-## Understand the retrieval workflow
-
-The full retrieval workflow is:
-
-```output
-query.txt question
-    -> Ollama query embedding
-    -> Qdrant workspace_memory search
-    -> retrieved summaries
-    -> Hermes context prompt
-    -> Ollama contextual response
-    -> Hermes log output
-```
-
-This creates a local contextual reasoning loop using persistent memory.
-
 ## Understand CPU and GPU responsibilities
 
 The Arm Grace CPU coordinates the retrieval workflow: watching for `query.txt`, reading and deleting the query file, calling Ollama for the query embedding, searching Qdrant for relevant memories, parsing result payloads, assembling the retrieved context, and calling Ollama again for contextual reasoning.
 
 The Blackwell GPU accelerates query embedding generation, contextual LLM inference, and response generation. Qdrant performs the vector similarity search and returns the most relevant memory payloads.
+
+This retrieval workflow creates a local contextual reasoning loop using persistent memory.
 
 ## What you've accomplished and what's next
 
@@ -541,4 +531,4 @@ The runtime can now store memory and reason over it through the local `/workspac
 
 Next, you'll add autonomous workspace cognition.
 
-Before moving to the next section, press `Ctrl+C` in terminal 1 to stop the Hermes log stream. In the next section, you'll rebuild the Hermes container and run `docker logs -f hermes` again.
+Before moving to the next section, press `Ctrl+C` in the first terminal running Hermes logs to stop the Hermes log stream. In the next section, you'll rebuild the Hermes container and run `docker logs -f hermes` again.

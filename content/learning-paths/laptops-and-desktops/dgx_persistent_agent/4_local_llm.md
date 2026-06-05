@@ -22,7 +22,7 @@ workspace/inbox document
     -> Local LLM summary
 ```
 
-This introduces the first GPU-accelerated step in the persistent runtime.
+Connecting Hermes Agent to Ollama introduces the first GPU-accelerated step in the persistent runtime.
 
 ### Configure Ollama runtime access
 
@@ -215,9 +215,9 @@ mv /tmp/ai-runtime-note.txt \
 ~/dgx-hermes-agent/workspace/inbox/ai-runtime-note.txt
 ```
 
-Return to terminal 1 to see the Hermes log output. 
+Return to the first terminal running Hermes logs to see the Hermes log output. 
 
-The output similar to:
+The output is similar to:
 
 ```output
 [Agent] New file detected:
@@ -252,13 +252,15 @@ mv /tmp/gpu-inference-test.txt \
 nvtop
 ```
 
-The background command creates the file after five seconds, giving `nvtop` time to start before Ollama begins inference. During summarization, `nvtop` shows GPU activity from the Ollama model runtime. Watch the terminal running Hermes logs to see the Hermes log output as inference runs.
+The background command creates the file after five seconds, giving `nvtop` time to start before Ollama begins inference. During summarization, `nvtop` shows GPU activity from the Ollama model runtime. Watch the first terminal running Hermes logs to see the Hermes log output as inference runs.
 
 Press `q` to quit `nvtop` after reviewing the GPU activity.
 
 ## Understand CPU and GPU responsibilities
 
-The Arm Grace CPU coordinates the full workflow: watching the workspace, handling filesystem events, reading files, preparing model requests, and sending API calls to Ollama. The Blackwell GPU accelerates the model workload, running LLM inference, generating tokens, and producing the summary. This pattern repeats throughout the Learning Path. Hermes orchestrates and Ollama executes.
+The Arm Grace CPU coordinates the full workflow: watching the workspace, handling filesystem events, reading files, preparing model requests, and sending API calls to Ollama. 
+
+The Blackwell GPU accelerates the model workload, running LLM inference, generating tokens, and producing the summary. This pattern repeats throughout the Learning Path. Hermes orchestrates and Ollama executes.
 
 ## What you've accomplished and what's next
 
@@ -268,4 +270,4 @@ The runtime has moved from file detection to event-driven AI summarization.
 
 Next, you'll add persistent semantic memory with embeddings and Qdrant.
 
-Before moving to the next section, press `Ctrl+C` in the terminal running Hermes logs to stop the Hermes log stream. In the next section, you'll rebuild the Hermes container and run `docker logs -f hermes` again.
+Before moving to the next section, press `Ctrl+C` in the first terminal running Hermes logs to stop the Hermes log stream. In the next section, you'll rebuild the Hermes container and run `docker logs -f hermes` again.

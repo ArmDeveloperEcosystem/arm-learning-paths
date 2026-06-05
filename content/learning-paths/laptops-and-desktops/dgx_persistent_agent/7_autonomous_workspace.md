@@ -378,7 +378,7 @@ Workspace cognition uses `qdrant.scroll()` to collect stored summaries for works
 
 On startup, the cognition cycle runs immediately because `last_summary_time` is initialized to `0`. This is expected and confirms that the pipeline can read memory, call Ollama, and write the summary output before any interval has elapsed.
 
-The current implementation handles file creation through the `on_created()` event handler. Existing files and file modifications do not trigger ingestion. Handling file modification events is a natural extension for a more robust runtime.
+The current implementation handles file creation through the `on_created()` event handler. Existing files and file modifications don't trigger ingestion. Handling file modification events is a natural extension for a more robust runtime.
 
 The `retrieval_limit` value in `runtime.json` is a visible configuration placeholder. The retrieval code still uses `limit=3` in `search_memory()`. Treat it as a forward-looking entry for later hardening.
 
@@ -407,7 +407,7 @@ Leave this terminal open with the log stream running and open a second terminal 
 
 On startup, the first cognition cycle runs immediately because `last_summary_time` starts at `0`.
 
-Expected output:
+The output is similar to:
 
 ```output
 [Hermes Agent] Starting workspace watcher...
@@ -480,7 +480,7 @@ mv /tmp/autonomous-runtime-note.txt \
 ~/dgx-hermes-agent/workspace/inbox/autonomous-runtime-note.txt
 ```
 
-Watch the terminal running Hermes logs for the Hermes log output. 
+Watch the first terminal running Hermes logs for the Hermes log output. 
 
 The output is similar to:
 
@@ -512,7 +512,7 @@ echo "What is autonomous workspace cognition?" \
 > ~/dgx-hermes-agent/workspace/query.txt
 ```
 
-Watch the terminal running Hermes logs.
+Watch the first terminal running Hermes logs.
 
 The output is similar to:
 
@@ -594,7 +594,7 @@ mv /tmp/accepted-policy-test.md \
 ~/dgx-hermes-agent/workspace/inbox/accepted-policy-test.md
 ```
 
-Watch the terminal running Hermes logs for the Hermes log output. 
+Watch the first terminal running Hermes logs for the Hermes log output. 
 
 The output is similar to:
 
@@ -652,7 +652,7 @@ This interval is approximately 3.6 seconds. With this setting, Hermes repeatedly
 
 This fast interval is useful for validation, but it is intentionally aggressive. Leave it enabled only long enough to confirm that scheduling works, then restore the interval to a larger value.
 
-In the terminal running Hermes logs, follow the logs:
+In the first terminal running Hermes logs, follow the logs:
 
 ```bash
 docker logs -f hermes
@@ -699,7 +699,7 @@ docker logs -f hermes
 
 Press `Ctrl+C` after the startup messages appear.
 
-Expected output:
+The output is similar to:
 
 ```output
 [Hermes Agent] Starting workspace watcher...

@@ -102,7 +102,7 @@ You'll see a message confirming that Docker is installed and working.
 
 ### Install NVIDIA Container Toolkit
 
-The NVIDIA Container Toolkit enables Docker to expose the GPU to containers using the `--gpus` flag. Without it, containers can't access the GPU regardless of the driver version installed on the host.
+The NVIDIA Container Toolkit allows Docker to expose the GPU to containers using the `--gpus` flag. Without it, containers can't access the GPU regardless of the driver version installed on the host.
 
 Add the NVIDIA Container Toolkit GPG key:
 
@@ -148,7 +148,7 @@ nvcr.io/nvidia/cuda:13.0.1-devel-ubuntu24.04 \
 nvidia-smi
 ```
 
-If you have not pulled this image before, Docker downloads it before running `nvidia-smi`. This can take a few minutes depending on your network connection.
+If you have not pulled this image before, Docker downloads it before running `nvidia-smi`. The download can take a few minutes depending on your network connection.
 
 The output is similar to:
 
@@ -354,7 +354,7 @@ docker compose up -d
 ```
 
 {{% notice Note %}}
-The first `docker compose up -d` run can take several minutes because Docker needs to pull the service images. The time depends on your network speed.
+The first `docker compose up -d` run can take several minutes, depending on your network speed, because Docker needs to pull the service images.
 {{% /notice %}}
 
 Verify that the containers are running:
@@ -435,12 +435,12 @@ exit
 
 These model names are used throughout the examples, so make note of them. The architecture supports other suitable models.
 
-Because the `models/` directory is mounted into the container as a volume, downloaded models are stored on the host at `~/dgx-hermes-agent/models/` and persist even if the container is removed or recreated.
-
 | Model | Purpose |
 |---|---|
 | `qwen2.5:7b` | Local chat, summarization, reasoning |
 | `nomic-embed-text` | Embedding generation for semantic memory |
+
+Because the `models/` directory is mounted into the container as a volume, downloaded models are stored on the host at `~/dgx-hermes-agent/models/`. The models persist even if the container is removed or recreated.
 
 ### Verify local inference
 

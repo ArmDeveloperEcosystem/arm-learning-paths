@@ -1,5 +1,5 @@
 ---
-title: Expplore persistent AI runtime architecture on NVIDIA DGX Spark
+title: Explore persistent AI runtime architecture on NVIDIA DGX Spark
 description: Explore the persistent AI runtime architecture for NVIDIA DGX Spark, including Hermes Agent orchestration, Ollama inference, Qdrant memory, and CPU/GPU responsibilities.
 weight: 2
 

@@ -9,9 +9,7 @@ layout: "learningpathall"
 
 In this section, you'll add Hermes Agent to the runtime stack.
 
-Hermes Agent acts as the orchestration layer for the local AI runtime. It watches the workspace, detects runtime events, and coordinates the next action without requiring a user to manually run each step.
-
-Hermes is the CPU-side orchestration runtime. It runs continuously, watches the shared workspace, and reacts when new files are created. This is the first step toward a persistent local AI agent.
+Hermes Agent acts as the CPU-side orchestration layer for the local AI runtime. It watches the workspace, detects runtime events, and coordinates the next action without requiring a user to manually run each step. This is the first step toward a persistent local AI agent.
 
 In this section, Hermes doesn't call a language model yet. You'll first build the event-driven runtime foundation, where a new file in `workspace/inbox/` triggers a filesystem event, Hermes handles it, and prints a content preview to the logs.
 
@@ -252,7 +250,7 @@ mv /tmp/runtime-test.txt \
 ```
 Doing this avoids triggering the filesystem event before the file content has finished writing.
 
-Return to the terminal that is following Hermes logs. 
+Return to the terminal that's following Hermes logs. 
 
 The output is similar to:
 
@@ -278,7 +276,9 @@ This shared mount is what allows the host, Hermes, Ollama, and later memory work
 
 ## Understand CPU orchestration responsibilities
 
-This section demonstrates the CPU-side work required by persistent AI systems. The Arm CPU runs the long-lived service process, monitors filesystem events, schedules runtime activity, processes files, and manages the containerized service lifecycle. The GPU becomes important when model inference is added, but the persistent runtime is coordinated entirely by the CPU.
+This section shows the CPU-side work required by persistent AI systems. The Arm CPU runs the long-lived service process and monitors filesystem events. It schedules runtime activity, processes files, and manages the containerized service lifecycle. 
+
+The GPU becomes important when model inference is added, but the persistent runtime is coordinated entirely by the CPU.
 
 ## What you've accomplished and what's next
 
@@ -288,4 +288,4 @@ You also verified that creating a new file in `workspace/inbox/` triggers Hermes
 
 Next, you'll connect Hermes to Ollama for local LLM summarization.
 
-Before moving to the next section, press `Ctrl+C` in terminal 1 to stop the Hermes log stream. In the next section, you'll rebuild the Hermes container and run `docker logs -f hermes` again.
+Before moving to the next section, press `Ctrl+C` in the first terminal running Hermes logs to stop the Hermes log stream. In the next section, you'll rebuild the Hermes container and run `docker logs -f hermes` again.
