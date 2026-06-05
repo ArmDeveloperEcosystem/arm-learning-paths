@@ -10,13 +10,13 @@ layout: learningpathall
 
 To allow external traffic to the Kubernetes application running with OpenEBS persistent storage on an Azure virtual machine, open the Kubernetes NodePort in the Network Security Group (NSG).
 
-The NSG can be attached to the virtual machine's network interface or subnet.
+The NSG can be attached to the network interface or subnet of the virtual machine (VM).
 
 {{% notice Note %}}For more information about Azure setup, see [Getting started with Microsoft Azure Platform](/learning-paths/servers-and-cloud-computing/csp/azure/).{{% /notice %}}
 
-## Identify the Kubernetes NodePort
+### Identify the Kubernetes NodePort
 
-In the previous step you exposed the NGINX deployment as a NodePort service. Run the following command on your VM to find the port that Kubernetes assigned.
+In the previous section, you exposed the NGINX deployment as a NodePort service. Run the following command on your VM to find the port that Kubernetes assigned.
 
 ```bash
 kubectl get svc
@@ -29,7 +29,7 @@ NAME            TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)
 nginx-openebs   NodePort    10.x.x.x        <none>        80:31635/TCP
 ```
 
-In this example, the NodePort exposed externally is `31635`. Kubernetes assigns this port dynamically, so your value may differ. Use the port shown in your own output in the firewall rule below.
+In this example, the NodePort exposed externally is `31635`. Kubernetes assigns this port dynamically, so your value may differ. Use the port shown in your own output in the firewall rule.
 
 ### Add an inbound firewall rule in Azure
 
@@ -78,10 +78,10 @@ OpenEBS on Azure Cobalt D4ps Arm64
 
 ![NGINX application running on Kubernetes with persistent storage provisioned by OpenEBS LocalPV on Azure Cobalt 100 Arm64.#center](images/openebs-browser.png "NGINX application using OpenEBS persistent storage")
 
-## What you've learned
+## What you've accomplished
 
 You've configured the Azure Network Security Group to allow external access to the Kubernetes application running with OpenEBS LocalPV persistent storage, and confirmed that the application is reachable from your browser.
 
-The persistent data written earlier survived pod recreation and is now served by a stateful NGINX workload backed by OpenEBS on an Azure Cobalt 100 Arm64 virtual machine.
+The persistent data written earlier survived pod recreation and is now served by a stateful NGINX workload backed by OpenEBS on an Arm64 virtual machine powered by Azure Cobalt 100.
 
-In this Learning Path, you provisioned an Azure Cobalt 100 Arm64 virtual machine, installed a single-node K3s Kubernetes cluster, deployed OpenEBS LocalPV as the default storage class, created persistent volumes for a stateful application, and validated that data survived pod restarts on Arm64 infrastructure.
+You can use this workflow to add persistent storage to your own Kubernetes applications with OpenEBS on Arm. 

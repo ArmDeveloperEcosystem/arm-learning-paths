@@ -1,5 +1,5 @@
 ---
-title: Validate Persistent Storage with OpenEBS on Azure Cobalt 100
+title: Validate persistent storage with OpenEBS on an Arm64 virtual machine 
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -8,13 +8,13 @@ layout: learningpathall
 
 ## Create and validate persistent storage
 
-In this section, you'll create a Persistent Volume Claim (PVC), deploy a stateful NGINX application, and validate persistent storage behavior using OpenEBS LocalPV.
+In this section, you'll create a PersistentVolumeClaim (PVC), deploy a stateful NGINX application, and validate persistent storage behavior using OpenEBS LocalPV.
 
 You'll verify that data persists even after the application pod is deleted and recreated.
 
-## Create a Persistent Volume Claim
+### Create a PersistentVolumeClaim
 
-Create a Persistent Volume Claim (PVC) manifest:
+Create a PersistentVolumeClaim (PVC) manifest:
 
 ```bash
 cat > pvc.yaml <<EOF
@@ -44,7 +44,7 @@ The output is similar to:
 persistentvolumeclaim/openebs-pvc created
 ```
 
-Verify:
+Verify that the PVC was created successfully:
 
 ```bash
 kubectl get pvc
@@ -59,7 +59,7 @@ openebs-pvc   Bound    pvc-4784909a-837e-457d-90aa-0aa6867f26de   5Gi        RWO
 
 The PVC is dynamically provisioned by OpenEBS LocalPV.
 
-## Deploy a stateful NGINX application
+### Deploy a stateful NGINX application
 
 Create the deployment manifest:
 
@@ -105,7 +105,7 @@ The output is similar to:
 deployment.apps/nginx-openebs created
 ```
 
-## Verify Kubernetes resources
+### Verify Kubernetes resources
 
 Check the pod status:
 
@@ -133,7 +133,7 @@ NAME          STATUS   VOLUME                                     CAPACITY   ACC
 openebs-pvc   Bound    pvc-4784909a-837e-457d-90aa-0aa6867f26de   5Gi        RWO            openebs-hostpath   <unset>                 136m
 ```
 
-Check the Persistent Volume (PV):
+Check the persistent volume:
 
 ```bash
 kubectl get pv
@@ -148,7 +148,7 @@ pvc-4784909a-837e-457d-90aa-0aa6867f26de   5Gi        RWO            Delete     
 
 The output confirms that the Persistent Volume has been dynamically created and attached.
 
-## Write persistent data
+### Write persistent data
 
 Get the pod name:
 
@@ -174,7 +174,7 @@ The output is similar to:
 OpenEBS on Azure Cobalt D4ps Arm64
 ```
 
-## Validate persistence after pod recreation
+### Validate persistence after pod recreation
 
 Delete the NGINX pod:
 
@@ -210,7 +210,7 @@ OpenEBS on Azure Cobalt D4ps Arm64
 
 This confirms that the Persistent Volume retains data even after the pod is deleted and recreated.
 
-## Expose the application
+## Expose the NGINX application
 
 Create a NodePort service to expose the NGINX application externally. Kubernetes assigns the external port dynamically — you'll use the assigned port to open the corresponding firewall rule in the next step.
 
@@ -236,7 +236,7 @@ nginx-openebs   NodePort    10.x.x.x       <none>        80:31635/TCP   7s
 
 Note the NodePort value (in this example `31635`). You'll need it to create the Azure firewall rule in the next step. Your value may differ because Kubernetes assigns NodePorts dynamically.
 
-## Cleanup resources
+## Clean up resources
 
 Delete the deployment:
 
@@ -250,9 +250,9 @@ Delete the PVC:
 kubectl delete -f pvc.yaml
 ```
 
-## What you've learned
+## What you've accomplished and what's next
 
-You successfully created dynamically provisioned Persistent Volumes using OpenEBS LocalPV on a single-node Kubernetes cluster running on Azure Cobalt 100 Arm64.
+You've now successfully created dynamically provisioned persistent volumes using OpenEBS LocalPV on a single-node Kubernetes cluster running on Azure Cobalt 100 Arm64.
 
 You validated persistent storage functionality by recreating application pods while preserving data across restarts, and exposed the application as a Kubernetes NodePort service.
 
