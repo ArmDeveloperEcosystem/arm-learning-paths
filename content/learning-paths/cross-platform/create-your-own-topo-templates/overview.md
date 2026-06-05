@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Get started
 
-Before getting started, you should complete the Learning Path [Deploy containerized workloads to Arm-based Linux targets with Topo](/learning-paths/cross-platform/deploy-containerized-workloads-with-topo/) to learn about Topo, why to use it, how to install it and how to use it for target inspection, listing templates and deployment.
+Before getting started, you should complete the Learning Path [Deploy containerized workloads to Arm-based Linux targets with Topo](/learning-paths/cross-platform/deploy-containerized-workloads-with-topo/) to learn about Topo, why to use it, how to install it and how to use it for target inspection, listing Templates and deployment.
 
 ## What is Topo?
 
@@ -28,8 +28,8 @@ Because the Topo Templates specification is an open one, anyone can publish thei
 
 A curated list of example Templates can be found either via:
 
-1. the [topo templates](https://github.com/arm/topo?tab=readme-ov-file#3-find-a-template) command or
-2. the [topo catalog](https://github.com/arm/topo/blob/main/internal/catalog/data/templates.json).
+1. the [Topo Templates](https://github.com/arm/topo?tab=readme-ov-file#3-find-a-template) command or
+2. the [Topo catalog](https://github.com/arm/topo/blob/main/internal/catalog/data/templates.json).
 
 If you create your own Template, you can [Propose Your Template to Topo](https://github.com/arm/topo-template-format#propose-your-template-to-topo)
 
@@ -47,4 +47,4 @@ You can then share your Topo Template with the community, who will be able to de
 
 You have now installed Topo on your host and confirmed it is available.
 You have got an understanding of what a Topo Template is and what its purpose is.
-Next, you'll clone your first template and modify it.
+Next, you'll clone your first Template and modify it.
