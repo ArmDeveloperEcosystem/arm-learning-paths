@@ -20,7 +20,7 @@ To create an Azure virtual machine using the Azure portal:
 
 1. Launch the Azure portal and navigate to **Virtual Machines**.
 2. Select **Create**, and select **Virtual Machine** from the drop-down list.
-3. In the **Basic** tab, provide instance details such as **Virtual machine name** and **Region**.
+3. In the **Basic** tab, provide instance details such as **Virtual machine name** and **Region**. 
 4. Select **Ubuntu Pro 24.04 LTS** as the image for your virtual machine, and select **Arm64** as the VM architecture.
 5. In the **Size** field, select **See all sizes** and select the D-Series v6 family of virtual machines.
 6. Select **D4ps_v6** from the list as shown in the following screenshot:
@@ -57,7 +57,7 @@ Your VM should be ready and running in a few minutes. You can SSH into the VM us
 
 ![Azure Portal deployment result showing that the virtual machine was created successfully. Look for the successful deployment status and the connection details you will use to access the virtual machine in the next step.#center](images/final-vm.png "Successful VM deployment confirmation")
 
-{{% notice Note %}}To learn more about Arm-based virtual machines in Azure, see "Getting Started with Microsoft Azure" in the [Get started with Arm-based cloud instances Learning Path](/learning-paths/servers-and-cloud-computing/csp/azure/).{{% /notice %}}
+{{% notice Note %}}To learn more about Arm-based virtual machines in Azure, see the "Getting Started with Microsoft Azure" section in the [Get started with Arm-based cloud instances Learning Path](/learning-paths/servers-and-cloud-computing/csp/azure/).{{% /notice %}}
 
 ## What you've accomplished and what's next
 

@@ -101,6 +101,7 @@ kubectl apply -f nginx-openebs.yaml
 ```
 
 The output is similar to:
+
 ```output
 deployment.apps/nginx-openebs created
 ```
@@ -208,7 +209,7 @@ The output is similar to:
 OpenEBS on Azure Cobalt D4ps Arm64
 ```
 
-This confirms that the Persistent Volume retains data even after the pod is deleted and recreated.
+This confirms that the persistent volume retains data on the single-node cluster even after the pod is deleted and recreated.
 
 ## Expose the NGINX application
 
@@ -236,19 +237,6 @@ nginx-openebs   NodePort    10.x.x.x       <none>        80:31635/TCP   7s
 
 Note the NodePort value (in this example `31635`). You'll need it to create the Azure firewall rule in the next step. Your value may differ because Kubernetes assigns NodePorts dynamically.
 
-## Clean up resources
-
-Delete the deployment:
-
-```bash
-kubectl delete -f nginx-openebs.yaml
-```
-
-Delete the PVC:
-
-```bash
-kubectl delete -f pvc.yaml
-```
 
 ## What you've accomplished and what's next
 

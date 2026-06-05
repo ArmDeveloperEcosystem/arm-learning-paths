@@ -10,9 +10,7 @@ layout: learningpathall
 
 In this section, you'll install OpenEBS LocalPV using a lightweight single-node Kubernetes cluster on the virtual machine (VM) that you created in the previous section.
 
-You'll configure Kubernetes storage provisioning and prepare the environment for persistent workloads.
-
-For 
+You'll configure Kubernetes storage provisioning and prepare the environment for persistent workloads. 
 
 ### Update your system
 
@@ -149,7 +147,7 @@ Create the `openebs` namespace that will hold all OpenEBS components.
 kubectl create namespace openebs
 ```
 
-Installs OpenEBS LocalPV components and disable Mayastor, Loki, Alloy, and observability services, which are unnecessary for a single-node setup:
+Install OpenEBS LocalPV components and disable Mayastor, Loki, Alloy, and observability services, which are unnecessary for a single-node setup:
 
 {{% notice Note %}}
 The following command installs the latest available OpenEBS chart. To pin to a specific version, add `--version <version>` to the command. To find available versions, run `helm search repo openebs/openebs --versions`.
@@ -207,18 +205,18 @@ openebs-hostpath       openebs.io/local        Delete          WaitForFirstConsu
 
 ## Configure OpenEBS as the default storage class
 
-Set OpenEBS HostPath as the default storage class:
-
-```bash
-kubectl patch storageclass openebs-hostpath \
-  -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
-```
-
 Remove the default flag from the K3s local-path storage class:
 
 ```bash
 kubectl patch storageclass local-path \
   -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
+```
+
+Set OpenEBS HostPath as the default storage class:
+
+```bash
+kubectl patch storageclass openebs-hostpath \
+  -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 ```
 
 Verify that the configuration commands worked:

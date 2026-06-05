@@ -13,7 +13,9 @@ OpenEBS integrates directly with Kubernetes and dynamically provisions persisten
 
 ## Azure Cobalt 100 Arm-based processor
 
-Azure’s Cobalt 100 is Microsoft’s first-generation, in-house Arm-based processor. Built on Arm Neoverse N2, Cobalt 100 is a 64-bit CPU that delivers strong performance and energy efficiency for cloud-native, scale-out Linux workloads. These workloads include web and application servers, data analytics, open-source databases, and caching systems. Running at 3.4 GHz, Cobalt 100 allocates a dedicated physical core for each vCPU, ensuring consistent and predictable performance.
+Azure’s Cobalt 100 is Microsoft’s first-generation, in-house Arm-based processor. Built on Arm Neoverse N2, Cobalt 100 is a 64-bit CPU that delivers strong performance and energy efficiency for cloud-native, scale-out Linux workloads. 
+
+Running at 3.4 GHz, Cobalt 100 allocates a dedicated physical core for each vCPU, ensuring consistent and predictable performance.
 
 To learn more, see the Microsoft blog [Announcing the preview of new Azure VMs based on the Azure Cobalt 100 processor](https://techcommunity.microsoft.com/blog/azurecompute/announcing-the-preview-of-new-azure-vms-based-on-the-azure-cobalt-100-processor/4146353).
 
@@ -21,7 +23,7 @@ To learn more, see the Microsoft blog [Announcing the preview of new Azure VMs b
 
 OpenEBS is an open-source, Kubernetes-native storage platform designed for stateful workloads running inside Kubernetes clusters. Unlike traditional external storage systems, OpenEBS runs completely inside Kubernetes and dynamically provisions storage volumes directly through Kubernetes APIs.
 
-OpenEBS allows applications to retain persistent data even after pods restart, reschedule, or recreate. This makes OpenEBS ideal for databases, analytics platforms, message queues, and other stateful cloud-native applications.
+OpenEBS allows applications to retain persistent data on a node even after pods restart, reschedule, or recreate. This makes OpenEBS ideal for databases, analytics platforms, message queues, and other stateful cloud-native applications.
 
 OpenEBS provides key capabilities for Kubernetes-native storage management:
 
@@ -35,7 +37,7 @@ To learn more, see the official [OpenEBS documentation](https://openebs.io/docs)
 
 ## Why use OpenEBS LocalPV 
 
-You'll use OpenEBS LocalPV in this Learning Path because it is optimized for:
+You'll use OpenEBS LocalPV in this Learning Path because it's optimized for:
 
 - Single-node Kubernetes clusters
 - Arm64 environments
