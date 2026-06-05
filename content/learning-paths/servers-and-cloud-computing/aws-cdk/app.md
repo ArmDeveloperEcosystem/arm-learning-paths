@@ -54,7 +54,7 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app. The build ste
 
 ### Use the AWS CDK with JavaScript to define a sample application
 
-In the project, you'll find a file called `arm-cdk-app-stack.js` in the `lib ` directory. This stack definition is what AWS CDK uses to deploy resources.
+In the project, you'll find a file called `arm-cdk-app-stack.js` in the `lib ` directory. This stack definition is what the AWS CDK uses to deploy resources.
 
 Update `lib/arm-cdk-app-stack.js` with the following:
 
@@ -87,7 +87,7 @@ class ArmCdkAppStack extends cdk.Stack {
 module.exports = { ArmCdkAppStack };
 ```
 
-The application defines a load balanced Fargate service that runs an nginx web server on an Arm-based platform. 
+The application defines a load balanced Fargate service that runs an NGINX web server on an Arm-based platform. 
 
 ## What you've accomplished and what's next
 

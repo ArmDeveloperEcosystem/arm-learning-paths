@@ -36,7 +36,13 @@ The output is similar to:
 
 Paste the URL from the deployment output into a web browser of your choice. 
 
+```text
+<url>
+```
+
 The output is similar to:
+
+<screenshot of nginx web server>
 
 ## Clean up resources
 

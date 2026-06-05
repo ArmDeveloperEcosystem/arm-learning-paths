@@ -1,5 +1,5 @@
 ---
-title: Deploy applications on Arm servers using the AWS CDK
+title: Deploy containers on Arm-based compute using Amazon ECS and the AWS CDK
 description: Learn how to define and deploy AWS infrastructure for Arm-based applications using the AWS Cloud Development Kit.
 
 draft: true
