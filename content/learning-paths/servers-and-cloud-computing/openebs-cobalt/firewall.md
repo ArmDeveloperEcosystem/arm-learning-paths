@@ -1,5 +1,6 @@
 ---
 title: Allow access to the OpenEBS application on Azure
+description: Open an Azure Network Security Group rule for a Kubernetes NodePort service and verify browser access to an OpenEBS-backed application.
 weight: 6
 
 ### FIXED, DO NOT MODIFY

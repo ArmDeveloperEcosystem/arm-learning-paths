@@ -1,5 +1,6 @@
 ---
 title: Validate persistent storage with OpenEBS on an Arm64 virtual machine 
+description: Create a PersistentVolumeClaim, deploy NGINX with OpenEBS LocalPV storage, and validate data persistence after pod recreation.
 weight: 5
 
 ### FIXED, DO NOT MODIFY

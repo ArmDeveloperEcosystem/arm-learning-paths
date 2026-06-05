@@ -1,5 +1,6 @@
 ---
 title: Create an Arm64 virtual machine powered by Azure Cobalt 100
+description: Create an Azure Cobalt 100-based Arm64 virtual machine in the Azure portal and prepare it for a Kubernetes storage deployment.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
