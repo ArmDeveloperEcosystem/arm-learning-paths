@@ -55,4 +55,4 @@ The output is similar to:
 
 You've now installed the AWS CDK CLI and verified that the installation was successful.
 
-Next, you can use the AWS CDK to create and deploy applications on Arm-based AWS infrastructure. To learn how you can use the CDK and Amazon ECS to run containers on Arm-based compute, see [Deploy containers on Arm-based compute using Amazon ECS and the AWS CDK](earning-paths/servers-and-cloud-computing/aws-cdk/)
+Next, you can use the AWS CDK to create and deploy applications on Arm-based AWS infrastructure. To learn how you can use the CDK and Amazon ECS to run containers on Arm-based compute, see [Deploy containers on Arm-based compute using Amazon ECS and the AWS CDK](earning-paths/servers-and-cloud-computing/aws-cdk/).
