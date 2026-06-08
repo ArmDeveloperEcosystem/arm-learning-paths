@@ -17,7 +17,8 @@ Use this file as a lightweight router for Codex, Copilot, and other coding agent
 - Learning Paths: `.github/instructions/learning-paths.instructions.md`
 - Install guides: `.github/instructions/install-guides.instructions.md`
 - Shared content quality: `.github/instructions/content-quality.instructions.md`
-- Images, alt text, captions, and `#center` syntax: `.github/instructions/images.instructions.md`
+- Images, alt text, captions, and `#center` syntax: `.github/skills/audit-images/SKILL.md`
+- Code samples, commands, outputs, and code fence integrity: `.github/skills/code-sample-review/SKILL.md`
 
 Prefer the narrowest applicable file. Avoid loading every instruction file by default.
 
@@ -29,6 +30,7 @@ Current shared skills:
 
 - `.github/skills/arm-content-editor/SKILL.md` for reviewing and editing Arm Learning Paths and install guides.
 - `.github/skills/audit-images/SKILL.md` for auditing Markdown image references, deficient alt text, captions, alignment syntax, and before/after image quality counts.
+- `.github/skills/code-sample-review/SKILL.md` for reviewing code samples, commands, command output, language tags, and code fence integrity.
 
 Keep deterministic scans in scripts when possible, and keep long reference material out of always-loaded instructions.
 

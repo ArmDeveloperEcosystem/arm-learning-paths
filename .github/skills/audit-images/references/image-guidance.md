@@ -1,9 +1,6 @@
----
-name: Image guidance
-description: Use when the task involves adding, editing, reviewing, or fixing Markdown images in Arm Learning Paths or install guides, including image syntax, `#center` alignment, alt text, captions, screenshots, diagrams, terminal-output images, hardware photos, or placeholder alt text.
----
+# Image guidance
 
-### Image formatting, alt text, and captions
+## Image formatting, alt text, and captions
 
 In this repository, the text before `#center` in an image tag is the alt text.
 
@@ -38,7 +35,7 @@ Incorrect:
 ![alt-txt#center](images/webgpu-draw-high-level.svg "Figure 8: Triangle using WebGPU")
 ```
 
-### Alt text requirements for tutorials
+## Alt text requirements for tutorials
 
 Learning Paths and install guides are instructional content. Images are usually not decorative. Alt text must help the learner understand what they would otherwise miss.
 
@@ -67,7 +64,7 @@ For hardware images:
 - Describe the device or setup only if it helps the learner complete the task
 - Avoid purely decorative descriptions
 
-### Alt text quality rules
+## Alt text quality rules
 
 - Write meaningful alt text, not placeholders
 - Keep it concise but complete. One to three sentences is usually enough
@@ -76,7 +73,7 @@ For hardware images:
 - Do not use captions as a substitute for alt text
 - Do not encode alignment instructions inside the caption
 
-### Caption guidance
+## Caption guidance
 
 - Use short, descriptive captions when needed
 - Captions should add context for all readers
@@ -88,7 +85,7 @@ Preferred example:
 ![Screenshot of the Arm Performance Studio timeline showing CPU activity spikes during Mandelbrot rendering. The Timeline tab is selected and the spike region is highlighted so the learner can identify where CPU activity increases during the run.#center](images/timeline-spike.png "Arm Performance Studio timeline showing CPU activity during Mandelbrot rendering")
 ```
 
-### Image cleanup workflow
+## Image cleanup workflow
 
 - Replace all placeholder alt text such as `alt-txt` with meaningful descriptions
 - Keep the repository-specific `#center` syntax when fixing alt text

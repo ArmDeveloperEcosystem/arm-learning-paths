@@ -19,7 +19,8 @@ Read only the guidance needed for the task:
 - Shared content quality: `.github/instructions/content-quality.instructions.md`
 - Learning Paths: `.github/instructions/learning-paths.instructions.md`
 - Install guides: `.github/instructions/install-guides.instructions.md`
-- Images, alt text, captions, and `#center` syntax: `.github/instructions/images.instructions.md`
+- Images, alt text, captions, and `#center` syntax: `.github/skills/audit-images/SKILL.md`
+- Code samples, commands, outputs, and code fence integrity: `.github/skills/code-sample-review/SKILL.md`
 
 ## Review workflow
 
@@ -29,7 +30,7 @@ Read only the guidance needed for the task:
 4. Review by exception. Do not comment on content that is already clear, correct, and fit for purpose.
 5. Prioritize learner-blocking issues, incorrect technical guidance, scope drift, missing metadata, broken links, weak Arm framing, image issues, and unclear validation steps.
 6. Classify substantial files as prose-heavy, mixed, or code-heavy before judging length or density.
-7. Flag token-heavy content only when it adds cost without improving learning value, such as oversized terminal output, repeated setup, duplicated examples, unexplained code blocks, or repeated boilerplate.
+7. Use the code sample review skill for command accuracy, output formatting, code fence integrity, and token-heavy code or output blocks.
 
 Do not recommend splitting content only because a file is long. Prefer semantic boundaries based on headings, task transitions, or conceptual changes.
 

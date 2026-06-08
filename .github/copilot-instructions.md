@@ -78,14 +78,12 @@ Read the files in the directory `content/learning-paths/cross-platform/_example-
 - Use plain English and avoid jargon overload
 - Use US spellings (`organize`, `optimize`, `realize`)
 - Use `Arm` capitalization in prose (`Arm processors`, `Arm servers`, `Neoverse`)
-- `arm64` and `aarch64` are permitted in code, commands, and outputs
 - Define acronyms on first use
 - Use parallel structure in all lists
 
 ### Readability and section flow
 
 - Flag any section over 700 words and suggest natural split points
-- Warn if more than 300 words appear between code examples
 - Identify paragraphs with sentences averaging over 20 words
 - Note sections introducing more than two new concepts
 - Flag pages over 3500 words total
@@ -93,10 +91,8 @@ Read the files in the directory `content/learning-paths/cross-platform/_example-
 - Identify missing celebration of progress or milestones
 - Recap what learners have accomplished at section ends
 - Provide check-your-understanding moments that are not intimidating
-- Use visual breaks to prevent walls of text. Code blocks count as visual breaks
+- Use visual breaks to prevent walls of text
 - If you explain three or more things in one section, split it into separate sections
-- Each code block should be preceded by one to three sentences explaining what it does
-- If a section is long because of code or output rather than explanation, do not treat length alone as a readability problem
 
 ### Word choice and style
 
@@ -160,12 +156,11 @@ Use these preferred terms and phrases for consistency:
 
 - Keep terminology, capitalization, abbreviations, voice, tone, formatting, and technical depth consistent across related files.
 - Match content complexity to the stated audience, prerequisites, and skill level.
-- Use consistent heading hierarchy, section flow, code block formatting, lists, and callouts.
+- Use consistent heading hierarchy, section flow, lists, and callouts.
 - Flag inconsistent terminology, missing troubleshooting, unclear prerequisites, overly complex sections, and places where visuals would improve understanding.
-- Verify code examples follow established repository patterns.
 - Add or improve metadata descriptions when editing related content.
 
-## Formatting and code samples
+## Formatting
 
 ### Heading guidelines
 
@@ -203,27 +198,9 @@ Avoid:
 - `## RUN THE BENCHMARK`
 - starting a file with plain paragraph text and no heading
 
-### Code samples and formatting
+### Code sample guidance
 
-- Always provide explanation before code blocks
-- Format: `[What it does] → [Code] → [Expected outcome] → [Key parameters]`
-- Use markdown tags for languages like `bash`, `python`, `yaml`, `json`
-- Use `console` or `bash` for general commands. Try to use the same one throughout a Learning Path or Install Guide
-- Use the `output` tag to show expected command output
-- Output descriptions:
-  - Use `The output is similar to:` or `The expected output is:`
-  - Use present tense descriptions such as `builds` and `gives`
-- Formatting standards:
-  - **Bold** for UI elements
-  - *Italics* for emphasis and new terms
-  - `Code formatting` for file names, commands, and code elements
-- Use shortcodes for common pitfalls, warnings, and important notes
-
-### Code fence integrity
-
-- Every fenced code block opened with triple backticks must be explicitly closed with matching triple backticks before any non-code content resumes
-- Never generate unterminated or partial code fences
-- Do not rely on implicit closure, indentation, or surrounding formatting to end a code block
+For code samples, commands, command output, fenced code block integrity, and technical code review, use `.github/skills/code-sample-review/SKILL.md`.
 
 ## Arm naming and architecture terms
 
@@ -231,7 +208,6 @@ Avoid:
 - Use `arm64` or `aarch64` for the CPU architecture. Prefer whichever term a tool, package, or OS uses natively
 - Always use `Arm` rather than `ARM` in prose unless a technical term requires the original casing
 - `ARM64` is acceptable when specifically referring to Windows on Arm or Microsoft documentation
-- In code blocks, CLI flags, package names, file paths, and outputs, keep the exact casing used by the tool
 
 ## Product name emphasis
 

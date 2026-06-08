@@ -15,7 +15,7 @@ Use the script for repeatable inventory and counting. Use assistant judgment for
 
 - Work from the repository root.
 - Read `AGENTS.md` to locate shared guidance.
-- Read `.github/instructions/images.instructions.md` before editing image alt text.
+- Read `references/image-guidance.md` before editing image alt text.
 - When auditing a Learning Path or install guide, also read the matching scoped content guidance.
 
 ## Trigger
@@ -62,7 +62,7 @@ Use path/guide-level review to:
 3. Record the baseline summary: total images, faulty images, content units affected, and issue counts.
 4. For project-level requests, summarize the results and suggest prioritized cleanup batches unless the user asked for edits.
 5. For path/guide-level edit requests, inspect the relevant Markdown context and image files.
-6. Rewrite deficient alt text using `.github/instructions/images.instructions.md`.
+6. Rewrite deficient alt text using `references/image-guidance.md`.
 7. Preserve the repository image syntax, especially `![Descriptive alt text#center](image.png "Optional caption")`.
 8. Re-run the audit on the same scope.
 9. Report before/after counts, files changed, and any remaining issues.
