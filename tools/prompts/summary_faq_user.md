@@ -1,10 +1,10 @@
 Generate an AI-assisted summary paragraph and FAQ section for this Arm Learning Path.
 
-Use the Learning Path title, description, audience, objectives, prerequisites, tags, platform metadata, and step excerpts to produce a useful overview for a developer deciding whether to follow the path.
+Use the Learning Path title, description, audience, objectives, prerequisites, tags, platform metadata, step excerpts, and supplied authoring guidance to produce useful draft content for a developer following the path.
 
 Assume these rules while writing:
 - Use only the Learning Path context below. Do not add facts, tools, commands, prerequisites, performance claims, compatibility claims, or outcomes that are not present.
-- Write as an Arm Learning Path author: clear, procedural, technically careful, and helpful to developers who are deciding whether to start the path.
+- Write as an Arm Learning Path author by following the supplied guidance from `.github/copilot-instructions.md` and `content/learning-paths/cross-platform/_example-learning-path/`.
 - Keep the content useful for human review. The draft should be specific enough to evaluate, but not so detailed that it replaces the Learning Path steps.
 - If the context is thin, be honest and stay high-level rather than filling gaps.
 - Match the complexity of the Learning Path. Introductory paths should stay approachable; advanced paths can use more precise technical language from the context.

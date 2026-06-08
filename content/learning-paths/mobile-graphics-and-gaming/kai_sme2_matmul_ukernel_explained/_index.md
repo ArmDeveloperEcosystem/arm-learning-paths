@@ -16,10 +16,10 @@ prerequisites:
     - Basic understanding of quantization concepts for neural networks
     - (Optional) Access to an Arm CPU with SME2 support (Linux or Android) for hands-on verification steps
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
-rerun_faqs: false
+rerun_summary: true
+rerun_faqs: true
 
 # START generated_summary_faq
 generated_summary_faq:

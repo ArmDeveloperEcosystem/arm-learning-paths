@@ -20,10 +20,10 @@ prerequisites:
     - Arm Performance Studio installed. Follow the [Arm Performance Studio install guide](/install-guides/ams) for instructions.
     - Android SDK Platform tools installed. Required for the Android Debug bridge (adb).
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
-rerun_faqs: false
+rerun_summary: true
+rerun_faqs: true
 
 # START generated_summary_faq
 generated_summary_faq:

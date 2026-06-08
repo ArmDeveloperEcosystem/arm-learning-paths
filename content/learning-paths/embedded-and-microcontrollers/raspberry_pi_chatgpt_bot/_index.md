@@ -20,10 +20,10 @@ prerequisites:
     - A microSD card with at least 16GB of storage
     - A Linux compatible USB microphone and USB speakers or a USB audio device with a microphone and speakers
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
-rerun_faqs: false
+rerun_summary: true
+rerun_faqs: true
 
 # START generated_summary_faq
 generated_summary_faq:

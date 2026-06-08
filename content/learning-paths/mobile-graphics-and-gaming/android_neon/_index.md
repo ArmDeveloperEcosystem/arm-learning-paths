@@ -20,9 +20,9 @@ prerequisites:
     - A x86_64 or Apple M1 development machine with Android Studio installed.
     - A 64-bit Arm powered smartphone running Android.
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
+rerun_summary: true
 rerun_faqs: true
 author: Dawid Borycki
 

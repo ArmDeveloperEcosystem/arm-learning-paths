@@ -11,10 +11,10 @@ learning_objectives:
   - Verify Puppet by applying a test manifest and confirming successful resource creation on Arm64  
   - Benchmark Puppet by measuring catalog compile time, apply speed, and resource usage on Arm64
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
-rerun_faqs: false
+rerun_summary: true
+rerun_faqs: true
 
 # START generated_summary_faq
 generated_summary_faq:

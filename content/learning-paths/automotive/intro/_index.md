@@ -16,9 +16,9 @@ draft: true
 cascade:
     draft: true
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
+rerun_summary: true
 rerun_faqs: true
 author: Jason Andrews
 

@@ -17,10 +17,10 @@ prerequisites:
     - A development machine running Ubuntu 22.04, with a CUDA-capable NVIDIA® GPU
     - CUDA Toolkit version 11.8 or later
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
-rerun_faqs: false
+rerun_summary: true
+rerun_faqs: true
 
 # START generated_summary_faq
 generated_summary_faq:

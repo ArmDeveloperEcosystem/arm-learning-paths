@@ -18,10 +18,10 @@ prerequisites:
     - Familiarity with the Linux command line, Git, and building C++ projects with CMake
     - Internet access to download source code, model assets, and sample data
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
-rerun_faqs: false
+rerun_summary: true
+rerun_faqs: true
 
 # START generated_summary_faq
 generated_summary_faq:

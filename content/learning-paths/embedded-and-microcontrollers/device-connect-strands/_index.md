@@ -17,10 +17,10 @@ prerequisites:
     - Basic familiarity with command-line tools
     - (Optional) A Raspberry Pi for testing a full device-to-device (D2D) setup
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
-rerun_faqs: false
+rerun_summary: true
+rerun_faqs: true
 
 # START generated_summary_faq
 generated_summary_faq:

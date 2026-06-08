@@ -21,10 +21,10 @@ prerequisites:
     - Familiarity with Arm assembly.
     - A LLVM 20 compiler with runtime library support or GCC 16.
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
-rerun_faqs: false
+rerun_summary: true
+rerun_faqs: true
 
 # START generated_summary_faq
 generated_summary_faq:

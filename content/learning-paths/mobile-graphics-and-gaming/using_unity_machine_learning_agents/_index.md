@@ -15,10 +15,10 @@ prerequisites:
 - An Android mobile device that has a 64-bit processor and supports at least Android 8.
 - A USB cable to connect the mobile device to your computer.
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
-rerun_faqs: false
+rerun_summary: true
+rerun_faqs: true
 
 # START generated_summary_faq
 generated_summary_faq:

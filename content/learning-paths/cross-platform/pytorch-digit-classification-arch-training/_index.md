@@ -22,10 +22,10 @@ prerequisites:
     - For the OS, you can use Windows, Linux, or macOS.
   
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
-rerun_faqs: false
+rerun_summary: true
+rerun_faqs: true
 
 # START generated_summary_faq
 generated_summary_faq:

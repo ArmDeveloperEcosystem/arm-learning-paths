@@ -14,10 +14,10 @@ prerequisites:
     - Basic understanding of networking principles such as Transmission Control Protocol/Internet Protocol (TCP/IP) and User Datagram Protocol (UDP).
     - Access to two [Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/).
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
-rerun_faqs: false
+rerun_summary: true
+rerun_faqs: true
 
 # START generated_summary_faq
 generated_summary_faq:

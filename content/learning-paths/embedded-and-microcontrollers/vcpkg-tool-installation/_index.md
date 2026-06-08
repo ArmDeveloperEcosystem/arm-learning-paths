@@ -19,10 +19,10 @@ prerequisites:
     - A basic understanding of the [development tools for Arm Cortex-M](https://developer.arm.com/Tools%20and%20Software/)
     - Command line access to your machine
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
-rerun_faqs: false
+rerun_summary: true
+rerun_faqs: true
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -54,7 +54,7 @@ generated_summary_faq:
       access to your machine. No other explicit prerequisites are listed.
   - question: Which initialization command should I use on my OS, and when should I run it?
     answer: >-
-      Run the vcpkg init command in every new Terminal window: Windows (cmd): %USERPROFILE%\.vcpkgcpkg-init.cmd,
+      Run the vcpkg init command in every new Terminal window: Windows (cmd): %USERPROFILE%\.vcpkg\vcpkg-init.cmd,
       Windows (PowerShell): . ~/.vcpkg/vcpkg-init.ps1, Linux/macOS: . ~/.vcpkg/vcpkg-init. This
       ensures your shell session is set up to use vcpkg.
   - question: What is the purpose of vcpkg-configuration.json?

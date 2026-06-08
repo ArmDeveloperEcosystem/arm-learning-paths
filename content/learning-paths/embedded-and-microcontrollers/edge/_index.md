@@ -19,10 +19,10 @@ prerequisites:
   - The [Arduino IDE](/install-guides/arduino-pico/) with the RP2040 board support package installed on your computer.
   - An [Arduino Nano RP2040 Connect board](https://store.arduino.cc/products/arduino-nano-rp2040-connect-with-headers).
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
-rerun_faqs: false
+rerun_summary: true
+rerun_faqs: true
 
 # START generated_summary_faq
 generated_summary_faq:

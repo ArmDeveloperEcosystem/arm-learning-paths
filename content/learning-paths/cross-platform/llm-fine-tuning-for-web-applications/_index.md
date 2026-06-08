@@ -27,9 +27,9 @@ prerequisites:
     - Basic understanding of machine learning and deep learning. 
     - Familiarity with deep learning frameworks such as PyTorch and Hugging Face Transformers. 
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
+rerun_summary: true
 rerun_faqs: true
 author: Parichay Das
 

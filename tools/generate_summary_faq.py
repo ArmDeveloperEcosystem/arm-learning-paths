@@ -65,12 +65,20 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 LEARNING_PATH_ROOT = REPO_ROOT / "content" / "learning-paths"
 DEFAULT_REPORT_PATH = REPO_ROOT / "reports" / "generated-summary-faq" / "latest-run.yml"
 DEFAULT_PROMPT_DIR = REPO_ROOT / "tools" / "prompts"
+COPILOT_INSTRUCTIONS_PATH = REPO_ROOT / ".github" / "copilot-instructions.md"
+LEARNING_PATH_AUTHORING_GUIDE_DIR = LEARNING_PATH_ROOT / "cross-platform" / "_example-learning-path"
 DEFAULT_OPENAI_BASE_URL = "https://openai-api-proxy.geo.arm.com/api/providers/openai/v1/responses/"
 DEFAULT_OPENAI_MODEL = "gpt-4.1-mini"
 DEFAULT_OPENAI_TIMEOUT = 120
 DEFAULT_OPENAI_RETRIES = 2
 DEFAULT_PROMPT_STEP_LIMIT = 8
 DEFAULT_PROMPT_EXCERPT_CHARS = 900
+AUTHORING_GUIDANCE_FILES = (
+    (COPILOT_INSTRUCTIONS_PATH, 3200),
+    (LEARNING_PATH_AUTHORING_GUIDE_DIR / "overview.md", 1800),
+    (LEARNING_PATH_AUTHORING_GUIDE_DIR / "write-2-metadata.md", 2200),
+    (LEARNING_PATH_AUTHORING_GUIDE_DIR / "appendix-2-writing-style.md", 2600),
+)
 
 ENABLE_FLAG = "generate_summary_faq"
 RERUN_SUMMARY_FLAG = "rerun_summary"
@@ -107,6 +115,7 @@ REASON_ORDER = (
     "generator_changed",
     "summary_drift_detected",
     "faq_drift_detected",
+    "generation_flags_reset",
     "rerun_flags_reset",
 )
 CHANGE_ACTIONS = {"created", "repaired_missing", "rerun_requested", "generator_changed"}
@@ -262,10 +271,10 @@ def parse_args() -> argparse.Namespace:
         default=DEFAULT_HISTORY_LIMIT,
         help="Maximum number of historical run entries to retain in the central report file.",
     )
-    parser.add_argument("--run-url", default="", help="Optional GitHub Actions run URL to store in the report.")
+    parser.add_argument("--run-url", default="", help="Optional run URL to store in the report.")
     parser.add_argument("--git-ref", default="", help="Optional Git ref or branch name to store in the report.")
     parser.add_argument("--git-sha", default="", help="Optional commit SHA to store in the report.")
-    parser.add_argument("--actor", default="", help="Optional workflow actor to store in the report.")
+    parser.add_argument("--actor", default="", help="Optional run actor to store in the report.")
     parser.add_argument(
         "--quiet-progress",
         action="store_true",
@@ -509,12 +518,44 @@ def prompt_steps(
     return prompt_pages[:safe_step_limit]
 
 
+def strip_front_matter_for_guidance(text: str) -> str:
+    match = re.match(r"\A---\s*\n.*?\n---\s*\n?(.*)\Z", text, re.DOTALL)
+    return match.group(1) if match else text
+
+
+def guidance_excerpt(path: Path, char_limit: int) -> Dict[str, str]:
+    if not path.exists():
+        return {
+            "path": report_path_for_output(path),
+            "excerpt": "",
+        }
+
+    text = strip_front_matter_for_guidance(path.read_text(encoding="utf-8"))
+    text = re.sub(r"{{%[^%]*%}}", "", text)
+    excerpt = compact_whitespace(strip_markdown_links(text))
+    if len(excerpt) > char_limit:
+        excerpt = excerpt[:char_limit].rstrip() + "..."
+
+    return {
+        "path": report_path_for_output(path),
+        "excerpt": excerpt,
+    }
+
+
+def build_authoring_guidance_context() -> List[Dict[str, str]]:
+    return [
+        guidance_excerpt(path, char_limit)
+        for path, char_limit in AUTHORING_GUIDANCE_FILES
+    ]
+
+
 def build_learning_path_prompt_context(
     metadata: Dict[str, Any],
     steps: Sequence[StepPage],
     args: argparse.Namespace,
 ) -> Dict[str, Any]:
     return {
+        "authoring_guidance": build_authoring_guidance_context(),
         "metadata": prompt_metadata(metadata),
         "steps": prompt_steps(
             steps,
@@ -1064,6 +1105,7 @@ def build_run_report(
         "ai_requests": 0,
         "summary_changed": 0,
         "faq_changed": 0,
+        "generation_flags_reset": 0,
         "rerun_flags_reset": 0,
     }
     section_totals = {
@@ -1097,6 +1139,10 @@ def build_run_report(
 
         if result.get("ai_requested"):
             totals["ai_requests"] += 1
+
+        generation_flags_reset = result.get("generation_flags_reset", [])
+        if generation_flags_reset:
+            totals["generation_flags_reset"] += 1
 
         rerun_flags_reset = result.get("rerun_flags_reset", [])
         if rerun_flags_reset:
@@ -1205,6 +1251,7 @@ def render_markdown_report(run_report: Dict[str, Any]) -> str:
         markdown_metric_row("AI requests", totals.get("ai_requests", 0)),
         markdown_metric_row("Summary changed", totals.get("summary_changed", 0)),
         markdown_metric_row("FAQs changed", totals.get("faq_changed", 0)),
+        markdown_metric_row("Generation flags reset", totals.get("generation_flags_reset", 0)),
         markdown_metric_row("Rerun flags reset", totals.get("rerun_flags_reset", 0)),
         "",
     ]
@@ -1342,6 +1389,12 @@ def print_result_summary(args: argparse.Namespace, run_report: Dict[str, Any]) -
         f"{faq_actions['rerun_requested']} rerun_requested, "
         f"{faq_actions['generator_changed']} generator_changed, "
         f"{faq_actions['drift_detected_preserved']} drift_detected_preserved."
+    )
+    emit(
+        args,
+        "Flag resets: "
+        f"{totals.get('generation_flags_reset', 0)} generation flag sets reset, "
+        f"{totals.get('rerun_flags_reset', 0)} rerun flag sets reset."
     )
 
     for result in run_report["paths"]:
@@ -1509,11 +1562,18 @@ def process_learning_path(index_path: Path, args: argparse.Namespace) -> Dict[st
         faq_drift_detected = faq_action == "drift_detected_preserved"
 
         managed_block_updated = existing_generated is None or summary_action in CHANGE_ACTIONS or faq_action in CHANGE_ACTIONS
-        rerun_flags_reset = []
+        generation_flags_reset = []
+        if as_bool(doc.metadata.get(ENABLE_FLAG)):
+            generation_flags_reset.append(ENABLE_FLAG)
         if rerun_summary_requested:
-            rerun_flags_reset.append(RERUN_SUMMARY_FLAG)
+            generation_flags_reset.append(RERUN_SUMMARY_FLAG)
         if rerun_faqs_requested:
-            rerun_flags_reset.append(RERUN_FAQS_FLAG)
+            generation_flags_reset.append(RERUN_FAQS_FLAG)
+        rerun_flags_reset = [
+            flag for flag in generation_flags_reset if flag in {RERUN_SUMMARY_FLAG, RERUN_FAQS_FLAG}
+        ]
+        if generation_flags_reset:
+            change_reasons.append("generation_flags_reset")
         if rerun_flags_reset:
             change_reasons.append("rerun_flags_reset")
 
@@ -1544,10 +1604,8 @@ def process_learning_path(index_path: Path, args: argparse.Namespace) -> Dict[st
             faq_generated_at_after = compact_whitespace(str(updated_generated.get(FAQ_GENERATED_AT_KEY, "")))
             template_version_after = compact_whitespace(str(updated_generated.get("template_version", "")))
 
-        if rerun_summary_requested:
-            updated_front_matter = replace_top_level_scalar_line(updated_front_matter, RERUN_SUMMARY_FLAG, "false")
-        if rerun_faqs_requested:
-            updated_front_matter = replace_top_level_scalar_line(updated_front_matter, RERUN_FAQS_FLAG, "false")
+        for flag in generation_flags_reset:
+            updated_front_matter = replace_top_level_scalar_line(updated_front_matter, flag, "false")
 
         updated_markdown = rebuild_markdown(doc, updated_front_matter)
         changed_on_disk = updated_markdown != doc.raw_text
@@ -1568,6 +1626,7 @@ def process_learning_path(index_path: Path, args: argparse.Namespace) -> Dict[st
             "changed_on_disk": changed_on_disk,
             "managed_block_updated": managed_block_updated,
             "ai_requested": ai_requested,
+            "generation_flags_reset": generation_flags_reset,
             "rerun_flags_reset": rerun_flags_reset,
             "change_reasons": change_reasons,
             "template_version_before": compact_whitespace(str((existing_generated or {}).get("template_version", ""))),

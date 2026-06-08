@@ -7,10 +7,10 @@ description: Learn how to debug microcontrollers using µVision with basic run/s
 minutes_to_complete: 90
 # Always measured in minutes. Should be an integer, to complete the learning path (not read it).
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
-rerun_faqs: false
+rerun_summary: true
+rerun_faqs: true
 
 # START generated_summary_faq
 generated_summary_faq:

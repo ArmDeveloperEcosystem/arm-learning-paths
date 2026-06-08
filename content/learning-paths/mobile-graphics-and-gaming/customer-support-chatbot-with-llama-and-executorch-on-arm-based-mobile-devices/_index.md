@@ -22,10 +22,10 @@ prerequisites:
     - Python 3.10 or later
     - A [Hugging Face](https://huggingface.co/) account with access to Meta Llama models
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
-rerun_faqs: false
+rerun_summary: true
+rerun_faqs: true
 
 # START generated_summary_faq
 generated_summary_faq:

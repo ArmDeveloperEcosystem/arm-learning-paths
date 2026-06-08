@@ -100,18 +100,35 @@ Set it to `false` to leave a Learning Path out of generated summary/FAQ runs:
 generate_summary_faq: false
 ```
 
+After a successful write run, the tool resets `generate_summary_faq` to `false`
+for every processed Learning Path. This keeps future runs from reprocessing
+content unless a contributor intentionally opts the path in again.
+
 The `rerun_summary` and `rerun_faqs` fields are separate controls. For a
 Learning Path that already has generated summary/FAQ content, both fields can
 stay `false`; the tool will report the path as unchanged and will not send that
 Learning Path to the LLM again.
 
 Set one or both rerun flags to force regeneration for an existing generated
-section, then the tool resets the flag to `false` after a write run:
+section. After a successful write run, the tool resets both rerun flags to
+`false`:
 
 ```yaml
 rerun_summary: true
 rerun_faqs: true
 ```
+
+New Learning Paths scaffolded from `archetypes/learning-path/_index.md` start
+with:
+
+```yaml
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+```
+
+If you create a Learning Path by copying an existing folder, confirm these
+three fields manually in the copied `_index.md`.
 
 The LLM is called only when at least one section needs work:
 
@@ -202,7 +219,7 @@ reports/generated-summary-faq/all-learning-paths-test/run.yml
 reports/generated-summary-faq/all-learning-paths-test/run.md
 ```
 
-Open the `.md` file locally to review the same table-style overview used by the GitHub Action summary:
+Open the `.md` file locally to review the table-style run overview:
 
 ```bash
 open reports/generated-summary-faq/servers-and-cloud-computing.md

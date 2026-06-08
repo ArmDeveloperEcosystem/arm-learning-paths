@@ -15,10 +15,10 @@ prerequisites:
     - 'Azure subscription. Use this link to sign up for a free account: https://azure.microsoft.com/en-us/free/.'
     - 'Complete the [first learning path](/learning-paths/servers-and-cloud-computing/from-iot-to-the-cloud-part1) of this series.'  
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
-rerun_faqs: false
+rerun_summary: true
+rerun_faqs: true
 
 # START generated_summary_faq
 generated_summary_faq:

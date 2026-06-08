@@ -19,9 +19,9 @@ prerequisites:
     - A SME2 device (macOS M4 on Apple Silicon)
     - Git, Homebrew, and Xcode Command Line Tools
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
+rerun_summary: true
 rerun_faqs: true
 author: Annie Tallund
 

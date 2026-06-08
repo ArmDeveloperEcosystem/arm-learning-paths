@@ -13,13 +13,13 @@ prerequisites:
     - PLACEHOLDER PREREQ 1
     - PLACEHOLDER PREREQ 2
 
-# Optional: set to true to include this Learning Path in the manual
-# generated summary/FAQ GitHub Action.
-generate_summary_faq: false
+# New Learning Paths are opted in for the next manual generated summary/FAQ run.
+# The generator resets this to false after a successful write.
+generate_summary_faq: true
 
 # Optional one-shot controls: set either field to true to regenerate just that
-# generated section the next time the summary/FAQ workflow runs. The workflow
-# resets them to false after a successful write.
+# generated section the next time the summary/FAQ tool runs. The tool resets
+# them to false after a successful write.
 rerun_summary: false
 rerun_faqs: false
 

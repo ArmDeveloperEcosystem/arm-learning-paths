@@ -15,10 +15,10 @@ prerequisites:
   - An AArch64 or x86_64 computer running Linux or macOS. Cloud-based instances can also be used; see the [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/)
   - Completion of the [Run an end-to-end Attestation with Arm CCA and Trustee](/learning-paths/servers-and-cloud-computing/cca-trustee) Learning Path
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
-rerun_faqs: false
+rerun_summary: true
+rerun_faqs: true
 
 # START generated_summary_faq
 generated_summary_faq:

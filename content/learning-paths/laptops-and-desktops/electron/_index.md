@@ -16,10 +16,10 @@ prerequisites:
     - Node.js for Arm64. You can find the [Node.js installer](https://nodejs.org/dist/v20.10.0/node-v20.10.0-arm64.msi).
     - Any code editor; we recommend using [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user).
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
-rerun_faqs: false
+rerun_summary: true
+rerun_faqs: true
 
 # START generated_summary_faq
 generated_summary_faq:

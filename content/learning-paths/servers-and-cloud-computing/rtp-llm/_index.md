@@ -14,10 +14,10 @@ prerequisites:
     - Any Arm Neoverse N2-based or Arm Neoverse V2-based instance running Ubuntu 22.04 LTS from a cloud service provider or an on-premise Arm server. 
     - For the server, at least four cores and 16GB of RAM, with disk storage configured up to at least 32 GB. 
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
-rerun_faqs: false
+rerun_summary: true
+rerun_faqs: true
 
 # START generated_summary_faq
 generated_summary_faq:

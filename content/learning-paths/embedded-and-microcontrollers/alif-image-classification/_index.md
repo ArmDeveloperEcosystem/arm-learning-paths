@@ -20,10 +20,10 @@ prerequisites:
     - A development machine running macOS on Apple Silicon with Visual Studio Code installed
     - An AWS account or access to an Arm-based cloud instance for native Arm compilation
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
-rerun_faqs: false
+rerun_summary: true
+rerun_faqs: true
 
 # START generated_summary_faq
 generated_summary_faq:

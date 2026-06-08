@@ -17,9 +17,9 @@ prerequisites:
     - Be comfortable with SSH/Linux terminal and basic system administration tasks.
     - To install both [Nginx](/learning-paths/servers-and-cloud-computing/nginx/) and [PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql/)
 
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
+generate_summary_faq: false
+rerun_summary: true
+rerun_faqs: true
 
 # START generated_summary_faq
 generated_summary_faq:

@@ -16,10 +16,10 @@ prerequisites:
 - Basic knowledge of how MTE works. Refer to the [Learn about Memory Tagging Extension Learning Path](/learning-paths/mobile-graphics-and-gaming/mte/)
 - Knowledge of how a dynamic memory allocator can be implemented. Refer to [Write a Dynamic Memory Allocator Learning Path](/learning-paths/cross-platform/dynamic-memory-allocator/).
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
-rerun_faqs: false
+rerun_summary: true
+rerun_faqs: true
 
 # START generated_summary_faq
 generated_summary_faq:

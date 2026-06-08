@@ -19,10 +19,10 @@ prerequisites:
     - An Arm-based or x86 computer running Ubuntu. You can use a server instance from a cloud service provider of your choice.
 
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
-rerun_faqs: false
+rerun_summary: true
+rerun_faqs: true
 
 # START generated_summary_faq
 generated_summary_faq:

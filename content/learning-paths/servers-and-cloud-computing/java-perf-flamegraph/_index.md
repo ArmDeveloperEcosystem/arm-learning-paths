@@ -15,10 +15,10 @@ prerequisites:
   - Access to both Arm-based and x86-based computers running Ubuntu (you can use cloud-based server instances)
   - Basic familiarity with Java applications and performance profiling using flame graphs
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
-rerun_faqs: false
+rerun_summary: true
+rerun_faqs: true
 
 # START generated_summary_faq
 generated_summary_faq:

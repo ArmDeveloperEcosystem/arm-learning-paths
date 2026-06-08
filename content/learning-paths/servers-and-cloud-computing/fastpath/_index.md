@@ -16,10 +16,10 @@ prerequisites:
     - An AWS account with permissions to create EC2 instances
     - Familiarity with basic Linux administration and SSH
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
-rerun_faqs: false
+rerun_summary: true
+rerun_faqs: true
 
 # START generated_summary_faq
 generated_summary_faq:

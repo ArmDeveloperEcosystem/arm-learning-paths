@@ -19,10 +19,10 @@ prerequisites:
     - A working microphone for voice input.
     - Basic Python and command-line knowledge.
 
-generate_summary_faq: true
+generate_summary_faq: false
 
-rerun_summary: false
-rerun_faqs: false
+rerun_summary: true
+rerun_faqs: true
 
 # START generated_summary_faq
 generated_summary_faq:
