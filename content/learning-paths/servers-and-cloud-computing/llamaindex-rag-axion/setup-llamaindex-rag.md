@@ -6,7 +6,7 @@ weight: 5
 layout: learningpathall
 ---
 
-## Install and Configure LlamaIndex on Google Cloud Axion
+## Prepare the environment
 
 In this section, you will prepare a Google Cloud Axion Arm64 VM for running a browser-based RAG application using LlamaIndex.
 
@@ -14,10 +14,8 @@ You will:
 
 - Verify the VM architecture
 - Install required system packages
-- Install Docker
 - Install Python 3.11
-- Install Ollama
-- Pull a lightweight LLM model
+- Install Ollama and pull a lightweight LLM model
 - Install LlamaIndex and required Python packages
 
 
@@ -26,15 +24,10 @@ You will:
 ```text
 Cloud: Google Cloud Platform
 VM Type: C4A Axion ARM64
-OS: SUSE Linux Enterprise Server 15 SP6
+OS: SUSE Linux Enterprise Server 15 SP5
 Architecture: aarch64
 RAM: 16 GB or higher recommended
 ```
-
-## Terminal usage You'll use
-
-- **Terminal A** → setup, package installation, FastAPI, and testing
-- **Terminal B** → Ollama server Open both terminals connected to the VM before starting.
 
 ## Verify VM architecture
 
@@ -70,8 +63,9 @@ sudo zypper update -y
 
 This ensures your system is up to date before installing anything.
 
-## Install required packages:
-Now install Python 3.11 and other tools:
+## Install required packages
+
+Install Python 3.11 and the build tools needed to compile Python packages with native extensions:
 
 ```bash
 sudo zypper install -y \
@@ -92,7 +86,7 @@ python311-setuptools \
 python311-wheel
 ```
 
-**Verify Python:**
+Verify Python is installed correctly:
 
 ```bash
 python3.11 --version
@@ -105,7 +99,9 @@ Python 3.11.10
 pip 22.3.1 from /usr/lib/python3.11/site-packages/pip (python 3.11)
 ```
 
-## Install Docker and Add current user to Docker group
+## Install Docker
+
+Docker is installed here so that you can run containerized workloads alongside the RAG pipeline if needed. For this Learning Path, ChromaDB and Ollama run natively, but Docker is available for extended use.
 
 ```bash
 sudo zypper install -y docker
@@ -113,7 +109,7 @@ sudo systemctl enable docker
 sudo systemctl start docker
 ```
 
-**Check Docker Add current user to Docker group:**
+Verify Docker is running and add your user to the `docker` group so you don't need `sudo` for Docker commands:
 
 ```bash
 sudo systemctl status docker
@@ -136,19 +132,21 @@ This message shows that your installation appears to be working correctly.
 
 ## Create project directory
 
+Create a project directory and a Python virtual environment. The virtual environment isolates the Python packages for this project from your system packages:
+
 ```bash
 mkdir -p ~/llamaindex-rag/data
 cd ~/llamaindex-rag
 ```
 
-**Create and Activate Python virtual environment:**
+Create and activate the Python virtual environment:
 
 ```bash
 python3.11 -m venv rag-env
 source rag-env/bin/activate
 ```
 
-**Upgrade pip:**
+Upgrade pip to the latest version:
 
 ```bash
 pip install --upgrade pip setuptools wheel
@@ -160,7 +158,7 @@ pip install --upgrade pip setuptools wheel
 curl -fsSL https://ollama.com/install.sh | sh
 ```
 
-**Verify:**
+Verify the Ollama version:
 
 ```bash
 ollama -v
@@ -172,32 +170,29 @@ The output is similar to:
 ollama version is 0.24.0
 ```
 
-## Start Ollama
+## Check Ollama is running
 
-When Ollama is installed via the official script, it sets up a systemd background service and automatically starts the service. Use the following command to check the status of ollama service.
+When installed using the official script, Ollama registers itself as a systemd service and starts automatically. Verify it is running:
 
 ```bash
 sudo systemctl status ollama
 ```
 
-Leave Terminal B open and don't run any other commands in it. Ollama must stay running throughout the rest of this Learning Path.
-
-## Open a new terminal
-
-Open a second SSH terminal and run:
+If the service is not running, start it:
 
 ```bash
-cd ~/llamaindex-rag
-source rag-env/bin/activate
+sudo systemctl start ollama
 ```
 
 ## Pull an LLM model
+
+With Ollama running, pull the `llama3.2:1b` model. This is a lightweight 1-billion parameter model suitable for local inference on a 16 GB VM:
 
 ```bash
 ollama pull llama3.2:1b
 ```
 
-**Test the model:**
+Test that the model responds correctly:
 
 ```bash
 ollama run llama3.2:1b "Explain RAG in one sentence."
@@ -206,11 +201,12 @@ ollama run llama3.2:1b "Explain RAG in one sentence."
 The output is similar to:
 
 ```output
-RAG (Resource Allocation Group) is a method of allocating resources, such as people or equipment, to tasks based on their criticality and urgency,
-prioritizing high-priority tasks that have significant consequences if not completed on time.
+Retrieval-Augmented Generation (RAG) is a technique that combines a retrieval step, which fetches relevant documents from a knowledge base, with a generation step, where a large language model uses those documents to produce a grounded, context-aware response.
 ```
 
 ## Install LlamaIndex packages
+
+Install the LlamaIndex core library along with the integrations needed for Ollama, HuggingFace embeddings, and ChromaDB. FastAPI and Uvicorn are also installed here because the browser-based application you'll build in the next section uses them as the web server:
 
 ```bash
 pip install llama-index

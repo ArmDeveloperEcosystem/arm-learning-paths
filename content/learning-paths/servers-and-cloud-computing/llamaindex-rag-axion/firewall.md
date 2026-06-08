@@ -28,22 +28,20 @@ To configure a firewall rule for the LlamaIndex browser-based RAG application:
 
 5. Under **Protocols and ports**, select **Specified protocols and ports**.
 
-6. Select the **TCP** checkbox and enter:
+6. Select the **TCP** checkbox. Port **8000** is used by the FastAPI server that backs the browser-based LlamaIndex RAG application. Enter:
 
 ```text
 8000
-````
-
-Use port mapping **8000** for the browser-based LlamaIndex RAG application running with FastAPI.
+```
 
 ![Google Cloud Console Protocols and ports section with TCP selected and port 8000 entered#center](images/network-port.png "Setting the LlamaIndex browser application port in the firewall rule")
 
-7. Also add port 22 in **TCP** checkbox for ssh access.
+7. In the same **TCP** field, also add port `22` to allow SSH access to the VM.
 
 8. Select **Create**.
 
 ## What you've accomplished and what's next
 
-You've created a firewall rule to expose the browser-based LlamaIndex RAG application. You also enabled external access to query documents and interact with the application directly from a web browser.
+You've created a firewall rule that exposes port 8000 for the browser-based LlamaIndex RAG application and port 22 for SSH. The firewall rule uses the network tag `allow-llamaindex-port`, which you'll attach to your virtual machine in the next step.
 
-Next, you'll access the browser-based RAG application using the external IP address of your Google Cloud Axion virtual machine.
+Next, you'll create a Google Cloud Axion C4A virtual machine and connect to it using SSH.

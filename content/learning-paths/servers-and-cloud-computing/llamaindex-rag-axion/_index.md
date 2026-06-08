@@ -44,17 +44,17 @@ operatingsystems:
 
 further_reading:
     - resource:
-      title: LlamaIndex official documentation
-      link: https://docs.llamaindex.ai/en/stable/
-      type: documentation
+        title: LlamaIndex official documentation
+        link: https://docs.llamaindex.ai/en/stable/
+        type: documentation
     - resource:
-      title: LlamaIndex GitHub repository
-      link: https://github.com/run-llama/llama_index
-      type: documentation
+        title: LlamaIndex GitHub repository
+        link: https://github.com/run-llama/llama_index
+        type: documentation
     - resource:
-      title: Ollama documentation
-      link: https://ollama.com/library
-      type: documentation
+        title: Ollama documentation
+        link: https://ollama.com/library
+        type: documentation
     - resource:
         title: Introducing Google Axion Processors, our new Arm-based CPUs
         link: https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu

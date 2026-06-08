@@ -19,16 +19,9 @@ You'll:
 - Create a FastAPI backend
 - Query documents directly from a web browser
 
-## Terminal usage
-
-You'll use:
-
-- **Terminal A** → FastAPI, file creation, and testing
-- **Terminal B** → Ollama server
-
-Leave Terminal B running throughout the rest of this Learning Path.
-
 ## Architecture
+
+The following diagram shows how the components interact. A request from the browser reaches FastAPI, which calls LlamaIndex to retrieve relevant chunks from ChromaDB and passes them to the Ollama local LLM for answer generation:
 
 ```text
 Browser UI
@@ -42,11 +35,11 @@ ChromaDB Vector Store
 Ollama Local LLM
     ↓
 Documents
-````
+```
 
 ## Activate the Python environment
 
-Open Terminal A and activate the Python virtual environment:
+Activate the Python virtual environment:
 
 ```bash
 cd ~/llamaindex-rag
@@ -320,9 +313,13 @@ EOF
 
 ## Start the browser-based RAG application
 
-Make sure Ollama is still running in Terminal B.
+Verify that Ollama is still running before starting the application:
 
-In Terminal A run:
+```bash
+sudo systemctl status ollama
+```
+
+Activate the virtual environment and navigate to the project directory:
 
 ```bash
 cd ~/llamaindex-rag
@@ -389,13 +386,13 @@ Copy your own files into the data directory:
 cp yourfile.txt ~/llamaindex-rag/data/
 ```
 
-First stop the server and then restart FastAPI:
+Stop the running FastAPI server by pressing `Ctrl+C` in the terminal where Uvicorn is running. Then restart it:
 
 ```bash
 uvicorn api:app --host 0.0.0.0 --port 8000
 ```
 
-The application automatically indexes the new documents and makes them searchable through the browser UI.
+The `build_query_engine()` function runs on startup and reads all documents from the `data/` directory each time the server starts. Restarting the server causes LlamaIndex to ingest the new file, generate its embeddings, and store them in ChromaDB, making the new document searchable through the browser UI.
 
 ## What you've accomplished
 

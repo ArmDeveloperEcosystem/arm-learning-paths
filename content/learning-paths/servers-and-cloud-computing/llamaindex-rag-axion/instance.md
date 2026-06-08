@@ -24,7 +24,7 @@ To create a virtual machine based on the C4A instance type in the console:
 5. Under **OS and storage**, select **Change** and then choose an Arm64-based operating system image. For this Learning Path, select **SUSE Linux Enterprise Server**.
 6. For the license type, choose **Pay as you go**.
 7. Increase **Size (GB)** from **10** to **100** to allocate sufficient disk space, and then click **Select**.
-8. Select **Networking** from column on the left
+8. Select **Networking** from the column on the left.
 9. Under **Network tags**, enter `allow-llamaindex-port` to link the VM to the firewall rule from the previous step and allow inbound access to port 8000 for the browser-based LlamaIndex RAG application and port 22 for ssh access.
 10. Select **Create** to launch the virtual machine.
 
