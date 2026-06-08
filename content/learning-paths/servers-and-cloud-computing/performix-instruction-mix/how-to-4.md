@@ -64,7 +64,7 @@ args = [
 
 Restart your coding assistant, then prompt it to run Performix Instruction Mix and Code Hotspots on your `gpt2_user` binary and suggest Arm intrinsics improvements.
 
-![Screenshot of a coding assistant prompt configured to use Arm MCP Server tools for running Performix recipes and analyzing matmul_user optimization opportunities in the GPT-2 workload.#center](./mcp-performix-prompt.png "Coding assistant prompt for Performix analysis through Arm MCP Server")
+![Screenshot of a coding assistant prompt configured to use Arm MCP Server tools for running Performix recipes and analyzing matmul_user optimization opportunities in the GPT-2 workload.#center](./mcp-performix-prompt.webp "Coding assistant prompt for Performix analysis through Arm MCP Server")
 
 ## What you've learned and what's next
 
