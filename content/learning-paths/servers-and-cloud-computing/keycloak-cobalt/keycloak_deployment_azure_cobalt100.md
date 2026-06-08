@@ -1,12 +1,13 @@
 ---
-title: Deploy Keycloak on an Arm-based virtual machine 
+title: Deploy Keycloak on an Azure Cobalt 100-based Arm64 virtual machine
+description: Learn how to install Keycloak, configure PostgreSQL, run Keycloak as a systemd service, and verify the admin console on an Arm64 Azure VM.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Set up Keycloak on the virtual machine
+## Set up Keycloak and dependencies on the virtual machine
 
 In this section, you'll install Keycloak on the virtual machine (VM) that you created earlier. You'll configure PostgreSQL as the backend database.
 
@@ -185,9 +186,9 @@ Enter password:
 Enter password again:
 ```
 
-When prompted for the username, press Enter.
+For the username, press Enter.
 
-When prompted for the password, enter the following password twice:
+For the password, enter the following password twice:
 
 ```text
 AdminPassword123!
@@ -275,7 +276,7 @@ View live Keycloak logs to confirm it started without errors, then press Ctrl+C 
 sudo journalctl -u keycloak -f
 ```
 
-You can also optionally check whether Keycloak is listening to the expected ports:
+You can also optionally check whether Keycloak is listening on the expected ports:
 
 ```bash
 sudo ss -tulpn | grep -E '8080|9000'
@@ -327,16 +328,16 @@ sudo systemctl restart keycloak
 
 After restarting, open the admin console again and log in:
 
-![Keycloak login page running on the Azure Cobalt 100 Arm64 virtual machine after fixing the HTTPS required issue and successfully loading the authentication screen.#center](images/keycloak-ui.png "Keycloak login page on Azure Cobalt 100 Arm64")
+![Keycloak login page running on the Azure Cobalt 100-based Arm64 virtual machine after fixing the HTTPS required issue and successfully loading the authentication screen.#center](images/keycloak-ui.png "Keycloak login page")
 
-Log in with the admin credentials that you created earlier:
+Enter the admin credentials that you created earlier:
 
 ```text
 Username: admin
 Password: AdminPassword123!
 ```
 
-![Keycloak Admin Console welcome page showing the master realm dashboard after successful login on the Azure Cobalt 100 Arm64 virtual machine.#center](images/keycloak-welcome-page.png "Keycloak Admin Console welcome dashboard")
+![Keycloak Admin Console welcome page showing the master realm dashboard after successful login on the Azure Cobalt 100-based Arm64 virtual machine.#center](images/keycloak-welcome-page.png "Keycloak Admin Console welcome dashboard")
 
 ### Verify health endpoint
 
@@ -362,6 +363,6 @@ The output is similar to:
 
 ## What you've accomplished and what's next
 
-You now have Keycloak running successfully on an Arm-based VM with PostgreSQL integration, a systemd service, and a working admin console.
+You now have Keycloak running on an Azure Cobalt 100-based Arm64 VM with PostgreSQL integration, a systemd service, and a working admin console.
 
 Next, you'll configure a Flask application and integrate it with Keycloak using OAuth2/OpenID Connect authentication.

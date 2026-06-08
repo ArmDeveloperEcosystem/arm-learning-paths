@@ -1,5 +1,6 @@
 ---
-title: Integrate a Flask OAuth2 application with Keycloak on an Arm-based virtual machine
+title: Integrate a Flask OAuth2 application with Keycloak on an Azure Cobalt 100-based Arm64 virtual machine
+description: Learn how to configure a Keycloak realm, create an OpenID Connect client, build a Flask OAuth2 demo application, and validate user login.
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -21,7 +22,7 @@ In the admin console:
 3. Enter `demo-realm` as the realm name.
 4. Select **Create**.
 
-![Keycloak Create Realm page showing the configuration of the demo-realm on the Azure Cobalt 100 Arm64 virtual machine before creating the new authentication realm.#center](images/create-realm.png "Keycloak Create Realm configuration page")
+![Keycloak Create Realm page showing the configuration of the demo-realm on the Azure Cobalt 100-based Arm64 virtual machine before creating the new authentication realm.#center](images/create-realm.png "Keycloak Create Realm configuration page")
 
 ### Create a user
 
@@ -32,7 +33,7 @@ Create a user in the `demo-realm` for testing OAuth2 authentication:
 3. After the user is created, navigate to **Credentials** and select **Set password**.
 4. Enter a password of your choice and disable the temporary password setting.
 
-![Keycloak Create User page showing the configuration of the testuser account inside the demo-realm on the Azure Cobalt 100 Arm64 virtual machine.#center](images/create-user.png "Keycloak user creation page for demo-realm")
+![Keycloak Create User page showing the configuration of the testuser account inside the demo-realm on the Azure Cobalt 100-based Arm64 virtual machine.#center](images/create-user.png "Keycloak user creation page for demo-realm")
 
 ## Configure OAuth2 login for the Flask application
 
@@ -43,29 +44,29 @@ You'll now configure Keycloak as an OAuth2/OpenID Connect provider and build a F
 Create a Keycloak client for the Flask application:
 
 1. Navigate to **Clients** and select **Create client**.
-2. In ****General Settings**, enter:
+2. In **General Settings**, enter:
 
 ```text
 Client type: OpenID Connect
 Client ID: flask-demo
 ```
 
-Under Capability config:
+3. Under **Capability config**, enter:
 
 ```text
 Client authentication: Off
 Authorization: Off
 ```
 
-Under Login settings, set the Valid redirect URI:
+4. Under **Login settings**, set the **Valid redirect URI**:
 
 ```text
 http://YOUR_PUBLIC_IP:5000/*
 ```
 
-3. Save the client.
+5. Save the client.
 
-![Keycloak Create Client page showing the OpenID Connect client configuration for the Flask OAuth2 demo application running on the Azure Cobalt 100 Arm64 virtual machine.#center](images/create-client.png "Keycloak OpenID Connect client configuration for Flask demo application")
+![Keycloak Create Client page showing the OpenID Connect client configuration for the Flask OAuth2 demo application running on the Azure Cobalt 100-based Arm64 virtual machine.#center](images/create-client.png "Keycloak OpenID Connect client configuration for Flask demo application")
 
 ## Create the Flask demo application
 
@@ -102,7 +103,7 @@ pip install flask authlib requests
 
 Create a Flask application that implements the OAuth2 authorization code flow with PKCE using authlib. The application connects to Keycloak using the OpenID Connect discovery endpoint.
 
-Replace `YOUR_PUBLIC_IP` with the public IP address of your Azure VM:
+Replace `YOUR_PUBLIC_IP` in the app with the public IP address of your Azure VM:
 
 ```bash
 cat > app.py <<'EOF'
@@ -265,7 +266,9 @@ sudo systemctl restart keycloak
 
 ## What you've accomplished
 
-You've now completed a full OAuth2/OpenID Connect integration on an Arm-based VM powered by Azure Cobalt 100. The Flask application authenticates users through Keycloak using the authorization code flow with PKCE, exchanging authorization codes for access tokens and retrieving user identity from the OpenID Connect userinfo endpoint.
+You've now completed a full OAuth2/OpenID Connect integration on an Azure Cobalt 100-based Arm64 VM. 
+
+The Flask application authenticates users through Keycloak using the authorization code flow with PKCE, exchanging authorization codes for access tokens and retrieving user identity from the OpenID Connect userinfo endpoint.
 
 You can build on this foundation by adding role-based access control in Keycloak, integrating additional applications into the same realm, or replacing the database SSL fix with a proper TLS certificate for production deployments.
 
