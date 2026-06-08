@@ -15,6 +15,7 @@ prerequisites:
     - An [AWS account](https://aws.amazon.com/). Create an account if needed.
     - A computer with [Amazon eksctl CLI](/install-guides/eksctl) and [kubectl](/install-guides/kubectl/)installed.
     - Docker installed on local computer [Docker](/install-guides/docker)
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false

@@ -18,7 +18,7 @@ Each of the three modes represent the different levels of optimizations that are
 
 Our aim here is to measure and see the difference between these different modes.
 
-The next Learning Path [Using Neon intrinsics to optimize Unity on Android](/learning-paths/mobile-graphics-and-gaming/using-neon-intrinsics-to-optimize-unity-on-android) in this series will go through how these optimizations were implemented and why.
+The next Learning Path [Using Neon intrinsics to optimize Unity on Android](/learning-paths/mobile-graphics-and-gaming/using-neon-intrinsics-to-optimize-unity-on-android/) in this series will go through how these optimizations were implemented and why.
 
 ## Overview of the scene and the code
 The environment is split into four separate areas. Each set of walls is parented to a single object. The areas are called walls, walls (1), walls (2) and walls (3). This keeps the hierarchy of the scene simple to manage. Each wall is an instance of a prefab called Wall in *Assets/BurstNeonCollisions/Scenes*.

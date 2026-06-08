@@ -11,7 +11,7 @@ layout: learningpathall
 In this section, you create a Python environment with PyTorch, TorchAO, and ExecuTorch components needed for quantization and `.vgf` export.
 
 {{% notice Note %}}
-If you already use [Neural Graphics Model Gym](/learning-paths/mobile-graphics-and-gaming/model-training-gym), keep that environment and reuse it here.
+If you already use [Neural Graphics Model Gym](/learning-paths/mobile-graphics-and-gaming/model-training-gym/), keep that environment and reuse it here.
 {{% /notice %}}
 
 ## Create a virtual environment

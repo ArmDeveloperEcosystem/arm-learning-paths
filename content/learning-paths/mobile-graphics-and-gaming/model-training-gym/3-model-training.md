@@ -20,7 +20,7 @@ The NSS model is available in two formats, as shown in the table below:
 
 Both formats are available in the [NSS repository on Hugging Face](https://huggingface.co/Arm/neural-super-sampling). You'll also be able to explore config files, model metadata, usage details and detailed documentation on the use-case.
 
-Aside from the model in HuggingFace, the Neural Graphics Development Kit features [an NSS plugin for game engines such as Unreal](/learning-paths/mobile-graphics-and-gaming/nss-unreal).
+Aside from the model in HuggingFace, the Neural Graphics Development Kit features [an NSS plugin for game engines such as Unreal](/learning-paths/mobile-graphics-and-gaming/nss-unreal/).
 
 ## Run the training notebook
 

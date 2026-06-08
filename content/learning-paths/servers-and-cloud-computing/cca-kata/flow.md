@@ -98,7 +98,7 @@ Generate a 32-byte image encryption key:
 ``` bash
 head -c 32 /dev/urandom | openssl enc >image.key
 ```
-Learn more about how the attestation result is used to evaluate the trustworthiness of a CCA realm and how attestation policy gates secrets release in the ["Run an end-to-end Attestation with Arm CCA and Trustee"](/learning-paths/servers-and-cloud-computing/cca-trustee) Learning Path.
+Learn more about how the attestation result is used to evaluate the trustworthiness of a CCA realm and how attestation policy gates secrets release in the ["Run an end-to-end Attestation with Arm CCA and Trustee"](/learning-paths/servers-and-cloud-computing/cca-trustee/) Learning Path.
 
 Publish the encryption key as a KBS secret resource. This resource is only released when the requester presents an attestation token with affirming status.
 ``` bash

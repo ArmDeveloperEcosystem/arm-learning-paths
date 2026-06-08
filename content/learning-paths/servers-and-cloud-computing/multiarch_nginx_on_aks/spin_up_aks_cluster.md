@@ -83,7 +83,7 @@ Client Version: v1.34.1
 Kustomize Version: v5.7.1
 ```
 
-If `kubectl` is installed the version information is printed. If you don't see the version information printed, refer to the [Azure CLI Install Guide](/install-guides/azure-cli) and [kubectl Install Guide](/install-guides/kubectl/).
+If `kubectl` is installed the version information is printed. If you don't see the version information printed, refer to the [Azure CLI Install Guide](/install-guides/azure-cli/) and [kubectl Install Guide](/install-guides/kubectl/).
 
 Next, set up your newly-created K8s cluster credentials using the Azure CLI:
 

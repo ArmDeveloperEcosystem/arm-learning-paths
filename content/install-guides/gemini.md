@@ -20,15 +20,15 @@ Gemini CLI is Google's command-line interface for interacting with the Gemini AI
 
 It supports multiple operating systems, including Arm Linux distributions and macOS, and provides powerful AI assistance for developers working on Arm platforms.
 
-This guide explains how to install Gemini CLI on macOS and Arm Linux.
+In this guide, you'll learn how to install Gemini CLI on macOS and Arm Linux.
 
-## What should I do before installing Gemini CLI?
+## Before you begin
 
-You need a Google account to use Gemini CLI. If you don't have one, visit [Google Account Creation](https://accounts.google.com/signup) to create your account.
+You need a Google account to use Gemini CLI. If you don't have one, visit [Google Account Creation](https://accounts.google.com/signup) to create an account.
 
 You'll also need to set up authentication for the Gemini API. Gemini CLI supports multiple authentication methods, with Google OAuth login being the recommended approach for most users.
 
-## How do I set up authentication for Gemini CLI?
+## Set up authentication for Gemini CLI
 
 Gemini CLI offers three authentication methods. Choose the one that best fits your needs.
 
@@ -78,27 +78,27 @@ Benefits of using Vertex AI:
 - Integration with Google Cloud billing and management
 - Higher rate limits and advanced features
 
-## How do I install Gemini CLI on macOS?
+## Install Gemini CLI on macOS
 
-The easiest way to install Gemini CLI on macOS is using Homebrew, which handles all dependencies.
+You can install Gemini CLI on macOS using Homebrew, which handles all dependencies.
 
 ### Install Gemini CLI on macOS using Homebrew
 
-You can install [Homebrew](https://brew.sh/) if it isn't already available on your computer.
+First, install [Homebrew](https://brew.sh/) if it isn't already available on your computer.
 
-Install Gemini CLI using Homebrew:
+After confirming that Homebrew is available on your computer, install Gemini CLI:
 
 ```console
 brew install gemini-cli
 ```
 
-This installs Gemini CLI and automatically handles the Node.js dependency. The Homebrew version is currently at 0.19.4 (stable) and receives regular updates.
+This installs Gemini CLI and automatically handles the Node.js dependency. The Homebrew version is currently at 0.38.2 (stable) and receives regular updates. For more information, including the latest stable version, see [gemini-cli](https://formulae.brew.sh/formula/gemini-cli) on the Homebrew website.
 
 ### Install Gemini CLI on macOS using npm
 
 If you prefer to use npm or need the latest version, you can install Gemini CLI globally using npm.
 
-First, make sure you have Node.js version 20 or higher installed. Install Node.js using Homebrew:
+First, make sure you have Node.js version 20 or higher installed. You can install Node.js using Homebrew:
 
 ```console
 brew install node
@@ -122,9 +122,9 @@ Install Gemini CLI globally using npm:
 npm install -g @google/gemini-cli
 ```
 
-This installs the latest version, such as 0.23.0, directly from npm. Homebrew can lag behind npm, so versions might differ.
+This installs the latest version, such as 0.39.1, directly from npm. Homebrew can lag behind npm, so versions might differ. For more information, including the latest supported version, see [Gemini CLI](https://www.npmjs.com/package/@google/gemini-cli) on the npm website.
 
-### How do I confirm Gemini CLI is working on macOS?
+### Confirm Gemini CLI is working on macOS
 
 You now have Gemini CLI installed on your macOS system.
 
@@ -137,7 +137,7 @@ gemini --version
 The output is similar to:
 
 ```output
-0.23.0
+0.39.1
 ```
 
 Start an interactive session to test basic functionality:
@@ -148,13 +148,13 @@ gemini
 
 This opens the Gemini CLI interface where you can authenticate and start asking questions. On first run, you'll be prompted to choose your authentication method.
 
-## How do I install Gemini CLI on Arm Linux?
+## Install Gemini CLI on Arm Linux
 
-You can install Gemini CLI on Arm Linux distributions using npm. This method works on all major Arm Linux distributions including Ubuntu, Debian, CentOS, and others.
+You can install Gemini CLI on Arm Linux distributions using npm. This method works on all major Arm Linux distributions including Ubuntu, Debian, and CentOS.
 
-### What packages do I need before installing Gemini CLI on Arm Linux?
+### Prerequisite packages 
 
-Before installing Gemini CLI, install prerequisite packages and Node.js.
+Before installing Gemini CLI, install prerequisite packages.
 
 Install the required packages on Ubuntu/Debian systems:
 
@@ -164,14 +164,15 @@ sudo apt update && sudo apt install -y curl
 
 If you're not using Ubuntu/Debian, use your package manager to install curl.
 
-### How do I install Node.js on Arm Linux?
+### Install Node.js on Arm Linux
 
-Gemini CLI requires Node.js version 20 or higher. The easiest way to install Node.js on Arm Linux is using the NodeSource repository.
+Gemini CLI requires Node.js version 20 or higher. To install Node.js on Arm Linux, use the NodeSource repository.
 
 Download and run the Node.js 20.x setup script:
 
 ```bash
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt-get install -y nodejs
 ```
 
 Verify Node.js is installed correctly:
@@ -198,7 +199,7 @@ The output is similar to:
 10.2.4
 ```
 
-### How do I install Gemini CLI using npm on Arm Linux?
+### Install Gemini CLI using npm on Arm Linux
 
 With Node.js installed, install Gemini CLI globally using npm.
 
@@ -210,7 +211,7 @@ sudo npm install -g @google/gemini-cli
 
 This downloads and installs the latest version of Gemini CLI. The installation may take a few minutes as it downloads dependencies.
 
-### How do I confirm Gemini CLI is working on Arm Linux?
+### Confirm Gemini CLI is working on Arm Linux
 
 You now have Gemini CLI installed on your Arm Linux system.
 
@@ -223,10 +224,10 @@ gemini --version
 The output shows the version:
 
 ```output
-0.23.0
+0.39.1
 ```
 
-### How do I view the available command-line options?
+### View the available command-line options
 
 To print the available commands and options, use the `--help` flag:
 
@@ -279,11 +280,11 @@ Options:
 
 Your Gemini CLI installation on Arm Linux is now complete and ready to use.
 
-## How do I configure context for Arm development?
+## Configure context for Arm development
 
 Context configuration allows you to provide Gemini with persistent information about your development environment, preferences, and project details. This helps Gemini give more relevant and tailored responses for Arm architecture development.
 
-### How do I create a context file for Gemini CLI?
+### Create a context file for Gemini CLI
 
 Gemini CLI looks for context files in your home directory's `.gemini` configuration folder. Create this directory and add your context file.
 
@@ -303,7 +304,7 @@ EOF
 
 This creates a context file that tells Gemini about your Arm development focus and preferences.
 
-### How do I verify that context is being loaded?
+### Verify that context is being loaded
 
 Verify that Gemini is loading your context file by starting a chat session and asking a development question.
 
@@ -321,11 +322,11 @@ How do I install gcloud?
 
 If context is loaded correctly, Gemini should provide Arm-specific recommendations.
 
-## How do I integrate the Arm MCP server with Gemini CLI?
+## Integrate the Arm MCP server with Gemini CLI
 
-The Arm MCP (Model Context Protocol) server provides Gemini CLI with specialized tools and knowledge for Arm architecture development, migration, and optimization. By integrating the Arm MCP server, you gain access to Arm-specific documentation, code analysis tools, and optimization recommendations directly through your Gemini conversations.
+The Arm Model Context Protocol (MCP) server provides Gemini CLI with specialized tools and knowledge for Arm architecture development, migration, and optimization. By integrating the Arm MCP server, you gain access to Arm-specific documentation, code analysis tools, and optimization recommendations directly through your Gemini conversations.
 
-### How do I set up the Arm MCP server with Docker?
+### Set up the Arm MCP server with Docker
 
 The Arm MCP server runs as a Docker container that Gemini CLI connects to via the Model Context Protocol. You need Docker installed on your system to use the MCP server.
 
@@ -337,13 +338,13 @@ Pull the Arm MCP server Docker image:
 docker pull armlimited/arm-mcp:latest
 ```
 
-### How do I configure Gemini CLI to use the Arm MCP server?
+### Configure Gemini CLI to use the Arm MCP server
 
 Gemini CLI uses a configuration file to connect to MCP servers. Create or update this configuration to include the Arm MCP server.
 
 Use an editor to modify the file `~/.gemini/settings.json` to add an MCP object. 
 
-You may have other objects already in the file so make sure to use a `,` at the end of each object that is not the last one. For example, the code below shows both the `security` and the `mcpServers` objects.
+Make sure to use a `,` at the end of each object that is not the last one. For example, the following code shows both the `security` and the `mcpServers` objects:
 
 ```json
 {
@@ -359,8 +360,13 @@ You may have other objects already in the file so make sure to use a `,` at the 
         "run",
         "--rm",
         "-i",
-        "-v", "$HOME/workspace:/workspace",
-        "--name", "arm-mcp",
+        "--pull=always",
+        "-v",
+        "/path/to/your/workspace:/workspace",
+        "-v",
+        "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v",
+        "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ],
       "env": {},
@@ -372,7 +378,164 @@ You may have other objects already in the file so make sure to use a `,` at the 
 
 This configuration tells Gemini CLI to connect to the Arm MCP server running in the Docker container.
 
-### How do I verify the Arm MCP server is working?
+To enable Arm Performix features through the Arm MCP Server, replace `/path/to/your/ssh/private_key` and `/path/to/your/ssh/known_hosts` with the SSH private key and `known_hosts` file used for your target device.
+
+### Optional: Use a Docker replacement containerization tool
+
+You can use other containerization tools besides Docker that are free and do not require licenses, such as Podman, Finch, Colima, and Rancher Desktop. Choose one of the options below and use its CLI in place of `docker`.
+
+{{< tabpane-normal >}}
+  {{< tab header="Podman" >}}
+Install: [Podman](https://podman.io/docs/installation)
+
+Pull the Arm MCP Server image:
+```console
+podman pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `~/.gemini/settings.json` file:
+```json
+{
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "mcpServers": {
+    "arm_mcp_server": {
+      "command": "podman",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--pull=always",
+        "-v", "/path/to/your/workspace:/workspace",
+        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+        "armlimited/arm-mcp:latest"
+      ],
+      "env": {},
+      "timeout": 60000
+    }
+  }
+}
+```
+  {{< /tab >}}
+  {{< tab header="Finch" >}}
+Install: [Finch](https://runfinch.com/docs/getting-started/installation/)
+
+Pull the Arm MCP Server image:
+```console
+finch pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `~/.gemini/settings.json` file:
+```json
+{
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "mcpServers": {
+    "arm_mcp_server": {
+      "command": "finch",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--pull=always",
+        "-v", "/path/to/your/workspace:/workspace",
+        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+        "armlimited/arm-mcp:latest"
+      ],
+      "env": {},
+      "timeout": 60000
+    }
+  }
+}
+```
+  {{< /tab >}}
+  {{< tab header="Colima" >}}
+Install: [Colima](https://github.com/abiosoft/colima#installation)
+
+Colima provides a Docker-compatible CLI via Docker contexts.
+
+Pull the Arm MCP Server image:
+```console
+docker pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `~/.gemini/settings.json` file:
+```json
+{
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "mcpServers": {
+    "arm_mcp_server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--pull=always",
+        "-v", "/path/to/your/workspace:/workspace",
+        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+        "armlimited/arm-mcp:latest"
+      ],
+      "env": {},
+      "timeout": 60000
+    }
+  }
+}
+```
+  {{< /tab >}}
+  {{< tab header="Rancher Desktop" >}}
+Install: [Rancher Desktop](https://docs.rancherdesktop.io/getting-started/installation/)
+
+Rancher Desktop uses the Docker container engine via Morby.
+
+Pull the Arm MCP Server image:
+```console
+docker pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `~/.gemini/settings.json` file:
+```json
+{
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "mcpServers": {
+    "arm_mcp_server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--pull=always",
+        "-v", "/path/to/your/workspace:/workspace",
+        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+        "armlimited/arm-mcp:latest"
+      ],
+      "env": {},
+      "timeout": 60000
+    }
+  }
+}
+```
+  {{< /tab >}}
+{{< /tabpane-normal >}}
+
+### Verify the Arm MCP server is working
 
 Start the Gemini CLI and list the tools from the MCP server to verify it's working:
 
@@ -380,7 +543,7 @@ Start the Gemini CLI and list the tools from the MCP server to verify it's worki
 gemini
 ```
 
-The output shows the MCP server.
+The output shows the MCP server:
 
 ```output
  Using: 1 GEMINI.md file | 1 MCP server
@@ -392,7 +555,7 @@ Use the `/mcp` command to list the available tools:
 /mcp
 ```
 
-The Arm MCP server tools are listed in the output. 
+The Arm MCP server tools are listed in the output:
 
 ```output
 Configured MCP servers:

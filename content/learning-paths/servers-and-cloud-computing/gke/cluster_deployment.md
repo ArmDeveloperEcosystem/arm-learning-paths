@@ -18,9 +18,9 @@ You will need a [Google Cloud account](https://console.cloud.google.com/). Creat
 
 Three tools are required on the computer you are using. Follow the links to install the required tools.
 
-* [Terraform](/install-guides/terraform)
+* [Terraform](/install-guides/terraform/)
 * [Kubectl](/install-guides/kubectl/)
-* [Google Cloud CLI](/install-guides/gcloud)
+* [Google Cloud CLI](/install-guides/gcloud/)
 
 ## Create a GKE cluster using Terraform
 
@@ -50,7 +50,7 @@ Three tools are required on the computer you are using. Follow the links to inst
 
 The installation of Terraform on your Desktop/Laptop needs to communicate with GCP. Thus, Terraform needs to be authenticated.
 
-To obtain GCP user credentials, follow this [guide](/install-guides/gcloud#acquire-user-credentials).
+To obtain GCP user credentials, follow this [guide](/install-guides/gcloud/#acquire-user-credentials).
 
 ### Enable APIs
 

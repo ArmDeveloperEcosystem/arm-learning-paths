@@ -22,11 +22,13 @@ multitool_install_part: false
 weight: 1
 ---
 
-[Finch](https://runfinch.com) is an open-source container development tool from AWS. It offers a simple, Docker-compatible CLI powered by containerd and nerdctl. Designed for Linux, macOS, and Windows, Finch is especially useful on Arm-based systems for efficient container workflows.
+[Finch](https://runfinch.com) is an open-source container development tool from Amazon Web Services (AWS). It offers a simple, Docker-compatible CLI powered by containerd and nerdctl. Designed for Linux, macOS, and Windows, Finch is especially useful on Arm-based systems for efficient container workflows.
 
-This guide explains how to install Finch on Arm Linux distributions, specifically Amazon Linux 2023 and Ubuntu 24.04.
+In this guide, you'll learn how to install Finch on Arm Linux distributions, specifically Amazon Linux 2023 and Ubuntu 24.04.
 
-To get started, make sure you're using a system running Arm Linux. You can use a physical Arm device, a cloud instance from AWS, Azure, GCP, or OCI, or an Arm-based virtual machine. 
+## Before you begin
+
+Make sure you're using a system running Arm Linux. You can use a physical Arm device, a cloud instance from AWS, Azure, Google Cloud Platform (GCP), Oracle Cloud Infrastructure (OCI), or an Arm-based virtual machine. 
 
 To confirm the architecture, run:
 
@@ -36,7 +38,7 @@ uname -m
 
 The output should be `aarch64` for 64-bit Arm systems.
 
-## How do I install Finch on Amazon Linux 2023 for Arm?
+## Install Finch on Amazon Linux 2023 for Arm
 
 Finch is available as an RPM package in the standard Amazon Linux 2023 repositories, making installation simple.
 
@@ -58,7 +60,7 @@ Check that the containerd service is running:
 sudo systemctl status containerd
 ```
 
-You should see something like:
+The output is similar to:
 
 ```output
 ● containerd.service - containerd container runtime
@@ -74,16 +76,16 @@ You should see something like:
              └─25841 /usr/bin/containerd
 ```
 
-The `finch` command is now available in your PATH. You can now skip to the section on [verifying the Finch installation](#how-do-i-verify-the-finch-installation).
+The `finch` command is now available in your PATH. You can now skip to the section on [verifying the Finch installation](#verify-the-finch-installation).
 
 
-## How do I install Finch on Ubuntu 24.04 for Arm?
+## Install Finch on Ubuntu 24.04 for Arm
 
-Finch doesn't currently provide a Debian package for Ubuntu, but you can install it manually, using the three steps outlined below.
+Finch doesn't currently provide a Debian package for Ubuntu, but you can install it manually using the following three steps.
 
-### Step 1: Install Finch dependencies
+### Install Finch dependencies
 
-Install Nerdctl by following the instructions in the [Nerdctl install guide](/install-guides/nerdctl/). Then install the required tools:
+Install Nerdctl by following the instructions in the [Nerdctl install guide](/install-guides/nerdctl/). Then, install the required tools:
 
 ```console
 sudo apt install -y \
@@ -92,7 +94,7 @@ sudo apt install -y \
   build-essential
 ```
 
-### Step 2: Build and install Finch
+### Build and install Finch
 
 Clone the Finch repository and build the binary:
 
@@ -104,7 +106,7 @@ make
 sudo make install
 ```
 
-### Step 3: Configure Finch
+### Configure Finch
 
 Create the Finch configuration directories:
 
@@ -140,7 +142,7 @@ sudo ln -sf $(which nerdctl) /usr/libexec/finch/nerdctl
 
 After these steps, the `finch` command is available in your PATH.
 
-## How do I verify the Finch installation?
+## Verify the Finch installation
 
 You can check the Finch version:
 
@@ -148,7 +150,7 @@ You can check the Finch version:
 sudo finch --version
 ```
 
-The version is printed:
+The output is similar to:
 
 ```output
 finch version v1.8.2
@@ -160,9 +162,9 @@ Run a container to confirm functionality:
 sudo finch run --rm armswdev/uname
 ```
 
-If you see the architecture printed, then Finch is working correctly. 
+If you see the architecture printed, Finch is working correctly. 
 
-The expected output is:
+The output should be:
 
 ```output
 Architecture is aarch64
@@ -183,4 +185,4 @@ armswdev/uname    latest    82762f30a4a3    43 seconds ago    linux/arm64    110
 
 Use `sudo finch help` to explore available commands.
 
-You are ready to use Finch to run containers on your Arm Linux system.
+You are now ready to use Finch to run containers on your Arm Linux system.

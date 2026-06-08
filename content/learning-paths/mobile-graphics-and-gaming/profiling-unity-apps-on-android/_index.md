@@ -16,6 +16,7 @@ prerequisites:
     - Desktop computer capable of running Unity
     - Basic knowledge of Unity and programming concepts
     - The setup described in the Learning Path [Get started with Unity on Android](/learning-paths/mobile-graphics-and-gaming/get-started-with-unity-on-android)
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false

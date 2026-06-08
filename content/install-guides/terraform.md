@@ -22,15 +22,13 @@ tool_install: true
 weight: 1
 ---
 
-[Terraform](https://www.terraform.io/) automates cloud infrastructure. It is an infrastructure as code tool.
+[Terraform](https://www.terraform.io/) automates cloud infrastructure. It is an infrastructure as code (IaC) tool.
 
-Terraform is available for Windows, macOS, Linux and supports the Arm architecture.
+Terraform is available for Windows, macOS, Linux and supports the Arm architecture. For general installation information that covers all supported operating systems, see the [Terraform documentation](https://developer.hashicorp.com/terraform/downloads).
 
-## What do I need before installing Terraform?
+In this guide, you'll learn how to install Terraform for Ubuntu on Arm and macOS on Apple Silicon. 
 
-[General installation information](https://developer.hashicorp.com/terraform/downloads) is available which covers all supported operating systems.
-
-This guide provides a quick solution to install Terraform for Ubuntu on Arm and macOS on Apple Silicon.
+## Before you begin
 
 Confirm you are using an Arm machine by running:
 
@@ -50,11 +48,11 @@ For macOS, the output should be:
 arm64
 ```
 
-## How do I download and install Terraform for Ubuntu?
+## Download and install Terraform for Ubuntu
 
-The easiest way to install Terraform for Ubuntu on Arm is to use the zip file and copy the executable.
+To install Terraform for Ubuntu on Arm, use a zip file and copy the executable.
 
-The installation options with the Ubuntu package manager at time of writing do not work well, but please try them as they may improve.
+<!-- The installation options with the Ubuntu package manager at time of writing don't work well, but please try them as they may improve. -->
 
 Make sure `unzip`, `curl`, and `wget` are available.
 
@@ -71,9 +69,9 @@ unzip terraform_${TER_VER}_linux_arm64.zip
 sudo cp terraform /usr/local/bin/
 ```
 
-## How do I download and install Terraform for macOS?
+## Download and install Terraform for macOS
 
-If you have [brew](https://brew.sh/) installed, installing Terraform for macOS is simple as:
+If you have [brew](https://brew.sh/) installed, you can use it to install Terraform for macOS with the following commands:
 
 ```console
 brew tap hashicorp/tap
@@ -82,7 +80,7 @@ brew install hashicorp/tap/terraform
 
 If you don't have brew installed or prefer to directly install via binary, you can download [Terraform for ARM64](https://developer.hashicorp.com/terraform/install#darwin) directly from the Terraform website.
 
-## How do I verify Terraform installation?
+## Verify Terraform installation
 
 After installing, you can enter the following command to verify the installation:
 
@@ -90,20 +88,19 @@ After installing, you can enter the following command to verify the installation
 terraform version
 ```
 
-The output will be similar to the output shown below.
-
-For Linux:
+The output for Linux is similar to:
 
 ```output
-Terraform v1.10.5
+Terraform v1.14.9
 on linux_arm64
 ```
 
-For macOS:
+The output for macOS is similar to:
 
 ```output
-Terraform v1.10.5
+Terraform v1.14.9
 on darwin_arm64
 ```
+## Next steps
 
-You are now ready to use Terraform.
+You are now ready to use Terraform. You can explore Learning Paths to work with Terraform on Arm, such as [Deploy Arm virtual machines on Google Cloud Platform (GCP) using Terraform](/learning-paths/servers-and-cloud-computing/gcp/) and [Deploy Arm instances on AWS using Terraform](/learning-paths/servers-and-cloud-computing/aws-terraform/).

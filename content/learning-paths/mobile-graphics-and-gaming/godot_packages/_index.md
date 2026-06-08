@@ -16,7 +16,9 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
-author: Albin Bernhardsson, Julie Gaskin
+author:
+    - Albin Bernhardsson
+    - Julie Gaskin
 
 ### Tags
 skilllevels: Introductory

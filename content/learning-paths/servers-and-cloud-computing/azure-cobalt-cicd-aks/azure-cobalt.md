@@ -24,7 +24,7 @@ In the `Size` field, click on `See all sizes` and select the `D-Series v6` famil
 ![azure-cobalt-vm #center](_images/azure-cobalt-vm.webp)
 
 {{% notice Note %}}
-To learn more about Arm-based VMs in Azure, refer to "Getting Started with Microsoft Azure" in  [*Get started with Arm-based cloud instances*](/learning-paths/servers-and-cloud-computing/csp/azure).
+To learn more about Arm-based VMs in Azure, refer to "Getting Started with Microsoft Azure" in  [*Get started with Arm-based cloud instances*](/learning-paths/servers-and-cloud-computing/csp/azure/).
 {{% /notice %}}
 
 ## How do I configure the GitHub repository?

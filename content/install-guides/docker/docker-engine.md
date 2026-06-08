@@ -24,39 +24,38 @@ multitool_install_part: true    # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-## How do I install Docker Engine on Linux?
+## Install Docker Engine on Linux
 
-For any Linux machine, the commands below will install Docker.
-
-These commands are the (almost) universal install instructions for Docker on Linux.
-
-The commands work on any architecture, and on any system running Linux, from a cloud server to a Raspberry Pi.
+You can run the following commands to install Docker on any Linux machine and on any architecture, from a cloud server to a Raspberry.
 
 The commands can also be used in the Windows Subsystem for Linux 2 (WSL 2) and on a Chromebook.
 
-### How do I run the installer?
+### Run the installer
+
+Run the installer for Docker on Linux:
 
 ```console
 curl -fsSL get.docker.com -o get-docker.sh && sh get-docker.sh
 ```
 
-### How do I add my username to the Docker group?
+### Add your user to the Docker group
 
-Add the user to the docker group. The `newgrp` command avoids the need to logout and back in.
+Add your user to the docker group:
 
 ```console
 sudo usermod -aG docker $USER ; newgrp docker
 ```
+The `newgrp` command avoids the need to log out and back in.
 
-### How do I confirm the installation?
+### Confirm the installation
 
-To confirm the installation is successful run:
+To confirm the installation is successful, run:
 
 ```console
 docker run hello-world
 ```
 
-The output should be a welcome message such as:
+The output should be similar to:
 
 ```output
 Hello from Docker!
@@ -82,37 +81,37 @@ For more examples and ideas, visit:
 
 ```
 
-Use the `uname` command to identify the architecture:
+To identify the architecture, run: 
 
 ```console
 uname -m
 ```
 
-Output values can be `aarch64` (Arm 64-bit), `armv7l` (Arm 32-bit) or `x86_64`.
+The output values can be `aarch64` (Arm 64-bit), `armv7l` (Arm 32-bit) or `x86_64`.
 
-### Which Docker Engine versions are available?
+### Available Docker Engine versions
 
 The Stable channel (`get.docker.com`) provides the latest releases for general availability.
 
 The Test channel (`test.docker.com`) installs pre-releases that are for testing before general availability. 
 
-Replace `get.docker.com` with `test.docker.com` above to use the test version.
+Replace `get.docker.com` with `test.docker.com` in the installation command to use the test version.
 
-### What about Linux distributions where get.docker.com isn't supported?
+### Handle Linux distributions that don't support get.docker.com 
 
-Some Linux distributions are not supported by [get.docker.com](https://get.docker.com)
+Some Linux distributions are not supported by [get.docker.com](https://get.docker.com).
 
-Generally, the supported list is:
-* Ubuntu
-* Debian
-* SUSE Linux Enterprise Server
-* Red Hat Enterprise Linux
-* Fedora
-* CentOS
+Generally, the supported list is as follows:
+- Ubuntu
+- Debian
+- SUSE Linux Enterprise Server
+- Red Hat Enterprise Linux
+- Fedora
+- CentOS
 
-An example of a distribution which is not supported and popular on Arm is [Manjaro](https://manjaro.org).
+An example of a distribution which is not supported and is popular on Arm is [Manjaro](https://manjaro.org).
 
-On Manjaro, install docker using `pacman`.
+On Manjaro, install docker using `pacman`:
 
 ```console
 sudo pacman -Syu 
@@ -122,40 +121,40 @@ sudo systemctl start docker
 sudo usermod -aG docker $USER ; newgrp docker
 ```
 
-To confirm the installation is successful run the same hello-world as above.
+To confirm the installation is successful, run the same hello-world example:
 
 ```console
 docker run hello-world
 ```
 
-### How do I start and stop the Docker daemon on Linux distributions with systemd?
+### Start and stop the Docker daemon on Linux distributions with systemd
 
-To start the docker daemon.
+To start the docker daemon:
 
 ```console
 sudo systemctl start docker
 ```
 
-To stop the docker daemon.
+To stop the docker daemon:
 
 ```console
 sudo systemctl stop docker
 ```
 
-If a message is displayed:
+If the following message is displayed:
 
 ```output
 Warning: Stopping docker.service, but it can still be activated by:
   docker.socket
 ```
 
-Then stop docker.socket:
+Stop docker.socket:
 
 ```console
 sudo systemctl stop docker.socket
 ```
 
-Docker Engine is now ready to use. You can explore [Docker related Learning Paths](/tag/docker/).
+You can now use Docker Engine and explore [Docker related Learning Paths](/tag/docker/).
 
-You may want to create an account on [Docker Hub](https://hub.docker.com) to share images and automate workflows.
+You can also create an account on [Docker Hub](https://hub.docker.com) to share images and automate workflows.
 

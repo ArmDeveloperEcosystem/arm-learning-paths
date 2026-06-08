@@ -1,6 +1,5 @@
 User-agent: *
 Disallow:
-Disallow: /stats/content-inventory/
 
 # Explicitly welcome AI crawlers
 User-agent: GPTBot

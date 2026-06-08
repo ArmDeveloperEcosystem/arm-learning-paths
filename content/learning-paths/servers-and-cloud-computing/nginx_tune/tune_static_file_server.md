@@ -10,7 +10,7 @@ The profile of requests made by clients will vary based on the use case. This me
 
 ##  Nginx File Server Configuration
 
-In the [Setup a static file server](/learning-paths/servers-and-cloud-computing/nginx/basic_static_file_server) section of the [Learn how to deploy Nginx](/learning-paths/servers-and-cloud-computing/nginx/) learning path, a bare minimum file server configuration was discussed. In this section, a tuned file server configuration is discussed.
+In the [Setup a static file server](/learning-paths/servers-and-cloud-computing/nginx/basic_static_file_server/) section of the [Learn how to deploy Nginx](/learning-paths/servers-and-cloud-computing/nginx/) learning path, a bare minimum file server configuration was discussed. In this section, a tuned file server configuration is discussed.
 
 ### Top Level nginx.conf
 

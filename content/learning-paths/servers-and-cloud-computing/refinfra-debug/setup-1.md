@@ -6,7 +6,7 @@ weight: 2
 layout: learningpathall
 ---
 
-To debug the Neoverse N2 reference firmware, you need Arm Development Studio installed, and an appropriate license. See the [Arm Development Studio Install Guide](/install-guides/armds) for instructions. Screenshots are from Arm Development Studio 2023.0.
+To debug the Neoverse N2 reference firmware, you need Arm Development Studio installed, and an appropriate license. See the [Arm Development Studio Install Guide](/install-guides/armds/) for instructions. Screenshots are from Arm Development Studio 2023.0.
 
 You also need the Neoverse RD-N2 Reference Design Software Stack set up, and an associated FVP (Fixed Virtual Platform). You should be familiar with [Get started with the Neoverse Reference Design Software Stack](/learning-paths/servers-and-cloud-computing/refinfra-quick-start/) before you start debugging.
 

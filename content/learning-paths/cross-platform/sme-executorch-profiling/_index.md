@@ -23,6 +23,11 @@ rerun_summary: false
 rerun_faqs: false
 
 author: Jason Zhu, Tyler Mullenbach, Damien Dooley 
+    
+author:
+    - Jason Zhu
+    - Tyler Mullenbach
+    - Damien Dooley
 
 ### Tags
 skilllevels: Advanced

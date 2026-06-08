@@ -19,7 +19,10 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
-author: Éliás Bálint, Dawid Borycki, Steve Suzuki
+author:
+    - Éliás Bálint
+    - Dawid Borycki
+    - Steve Suzuki
 
 ### Tags
 skilllevels: Introductory

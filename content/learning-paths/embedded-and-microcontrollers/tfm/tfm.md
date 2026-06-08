@@ -23,7 +23,7 @@ sudo apt update
 
 ### Corstone-300 FVP {#fvp}
 
-The Corstone-300 FVP is available from the [Arm Ecosystem FVP](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) page and can be installed following the instructions from the [install guide](/install-guides/fm_fvp).
+The Corstone-300 FVP is available from the [Arm Ecosystem FVP](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) page and can be installed following the instructions from the [install guide](/install-guides/fm_fvp/).
 
 ### Compiler
 

@@ -15,6 +15,7 @@ prerequisites:
     - A Microsoft Azure account. 
     - A GitHub account.
     - A machine with [Terraform](/install-guides/terraform/),[Azure CLI](/install-guides/azure-cli), and [Kubectl](/install-guides/kubectl/) installed.
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false

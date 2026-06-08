@@ -1,6 +1,6 @@
 # This workflow will be triggered on a push to the 'main' branch automatically or when called manually.
-# Upon running this workflow, the website will be built and deployed to the internal instance.
-name: Build and Deploy Internal Website
+# Upon running this workflow, the website will be built and deployed to the dev instance.
+name: Build and Deploy Dev Website
 
 on:
   # Runs on pushes to the 'main' branch
@@ -11,16 +11,18 @@ on:
   workflow_dispatch:
 
 jobs:
-  build_and_deploy_internal:
-    name: Build and Deploy Internal
+  build_and_deploy_dev:
+    if: github.repository == 'ArmDeveloperEcosystem/arm-learning-paths'
+    name: Build and Deploy Dev
     uses: ./.github/workflows/deploy.yml
     permissions:
       id-token: write
       contents: read
     with:
-      target: internal
+      target: dev
+      aws-region: us-east-1
+      deploy-role-arn: arn:aws:iam::688080325088:role/Proj-GHA-arm-learning-paths-dev
     secrets:
-      AWS_OIDC_ROLE: ${{ secrets.AWS_OIDC_ROLE_INTERNAL }}
       HUGO_LLM_API: ${{ secrets.HUGO_LLM_API }}
       HUGO_RAG_API: ${{ secrets.HUGO_RAG_API }}
       HUGO_AUDIO_API: ${{ secrets.HUGO_AUDIO_API }}

@@ -3,6 +3,7 @@ title: Codex CLI
 
 author: Joe Stech
 minutes_to_complete: 10
+description: Install Codex CLI on Arm Linux (aarch64) and macOS to use OpenAI's terminal-based coding agent for natural language code generation and codebase exploration.
 official_docs: https://developers.openai.com/codex/cli/
 
 test_maintenance: true
@@ -20,29 +21,29 @@ Codex CLI is a local, terminal-based coding agent from OpenAI that helps develop
 
 Codex CLI supports multiple operating systems, including Arm-based Linux distributions and macOS. By integrating AI assistance directly into command-line workflows, it reduces context switching during development.
 
-This guide explains how to install Codex CLI on macOS and Arm Linux.
+In this guide, you'll learn how to install Codex CLI on macOS and Arm Linux.
 
-## What should I do before installing Codex CLI?
+## Before you begin
 
 You need an OpenAI account to use Codex CLI. You can either sign in with your [ChatGPT](https://chatgpt.com/) account (Plus, Pro, Team, Edu, or Enterprise plan) or use an OpenAI API key.
 
 Codex CLI requires Node.js 18 or later.
 
-## How do I download and install Codex CLI?
+## Download and install Codex CLI
 
-On most systems, install Codex CLI using npm. On macOS, there is also the option for you to use Homebrew.
+On most systems, install Codex CLI using `npm`. On macOS, there is also the option for you to use Homebrew.
 
-### How do I use npm to install Codex CLI?
+### Use npm to install Codex CLI
 
-The easiest way to install Codex CLI is with npm:
+To install Codex CLI with `npm`, run:
 
 ```console
 npm install -g @openai/codex
 ```
 
-### Can I use Homebrew to install Codex CLI on macOS?
+### Use Homebrew to install Codex CLI on macOS
 
-Yes. Install [Homebrew](https://brew.sh/) if it's not already available on your computer.
+Install [Homebrew](https://brew.sh/) if it's not already available on your computer.
 
 Install Codex CLI using Homebrew:
 
@@ -50,11 +51,11 @@ Install Codex CLI using Homebrew:
 brew install --cask codex
 ```
 
-## How do I install Codex CLI on Arm Linux?
+## Install Codex CLI on Arm Linux
 
-You can install Codex CLI on Arm Linux distributions using npm. This method works on all major Arm Linux distributions including Ubuntu, Debian, CentOS, and others.
+You can install Codex CLI on Arm Linux distributions using `npm`. This method works on all major Arm Linux distributions including Ubuntu, Debian, CentOS, and others.
 
-### What packages do I need before installing Codex CLI on Arm Linux?
+### Prerequisites
 
 Before installing Codex CLI, install prerequisite packages and Node.js.
 
@@ -64,13 +65,13 @@ Install the required packages on Ubuntu/Debian systems:
 sudo apt update && sudo apt install -y curl
 ```
 
-If you're not using Ubuntu/Debian, use your package manager to install curl.
+If you're not using Ubuntu/Debian, use your package manager to install `curl`.
 
-### How do I install Node.js on Arm Linux?
+#### Install Node.js on Arm Linux
 
 {{% notice Note %}}If you already have Node.js 18 or later installed, you can skip this section.{{% /notice %}}
 
-Codex CLI requires Node.js version 18 or higher. The easiest way to install Node.js on Arm Linux is using the NodeSource repository.
+Codex CLI requires Node.js version 18 or higher. One way to install Node.js on Arm Linux is by using the NodeSource repository.
 
 Download and run the Node.js setup script. For example, for Node.js 22.x:
 
@@ -108,9 +109,9 @@ The output shows the npm version:
 10.9.4
 ```
 
-### How do I install Codex CLI using npm on Arm Linux?
+### Install Codex CLI using npm on Arm Linux
 
-With Node.js installed, install Codex CLI globally using npm.
+With Node.js installed, install Codex CLI globally using`npm`.
 
 Install Codex CLI globally:
 
@@ -118,9 +119,9 @@ Install Codex CLI globally:
 sudo npm install -g @openai/codex
 ```
 
-This downloads and installs the latest version of Codex CLI.
+The command downloads and installs the latest version of Codex CLI.
 
-## How do I confirm Codex CLI is working?
+## Confirm Codex CLI is working
 
 You now have the latest version of Codex CLI installed.
 
@@ -133,10 +134,10 @@ codex --version
 The output shows the version:
 
 ```output
-@openai/codex, 0.79.0
+@openai/codex, 0.122.0
 ```
 
-## How do I authenticate with OpenAI?
+## Authenticate with OpenAI
 
 There are two ways to authenticate with Codex CLI.
 
@@ -167,35 +168,35 @@ You can generate an API key from the [OpenAI Platform](https://platform.openai.c
 When using an API key, usage is billed to your OpenAI API account rather than being included in your ChatGPT subscription.
 {{% /notice %}}
 
-## How do I configure Codex CLI?
+## Configure Codex CLI
 
 Codex CLI stores preferences in `~/.codex/config.toml`.
 
 You can configure various options including the default model, approval mode, and MCP servers.
 
-To see all configuration options, refer to the [Configuration documentation](https://developers.openai.com/codex/cli/reference/).
+To see all configuration options, see the [Configuration documentation](https://developers.openai.com/codex/cli/reference/).
 
 
 ## Install the Arm MCP server
 
-The Arm MCP Server is an MCP server providing AI assistants with tools and knowledge for Arm architecture development, migration, and optimization. This section shows how to configure the Arm MCP server locally using Docker.
+The Arm MCP Server is an MCP server providing AI assistants with tools and knowledge for Arm architecture development, migration, and optimization. In this section, you'll learn how to configure the Arm MCP server locally using Docker.
 
 First, pull the MCP server image to your local machine:
 
 ```console
 docker pull armlimited/arm-mcp:latest
 ```
-Ensure Docker is installed and running. See the [Docker install guide](/install-guides/docker/) for instructions.
+Ensure Docker is installed and running. For instructions, see the [Docker install guide](/install-guides/docker/).
 
-### How do I configure the Arm MCP server?
+### Configure the Arm MCP server
 
 Codex CLI uses a TOML configuration file for MCP servers. Modify the file `~/.codex/config.toml` to add the Arm MCP server using Docker.
 
-To analyze a local codebase, use a `-v` argument to mount a volume to the Arm MCP server `/workspace` folder so it can access code you want to analyze with migrate-ease and other tools.
+To analyze a local codebase, use a `-v` argument to mount a volume to the Arm MCP server `/workspace` folder so it can access code you want to analyze with `migrate-ease` and other tools.
 
-Replace the path `/Users/yourname01/yourlocalcodebase` with the path to your local codebase.
+Replace the path `/path/to/your/workspace` with the path to your local codebase.
 
-##### **Option 1: edit the Codex configuration file**
+##### **Option 1: Edit the Codex configuration file**
 
 Add the following to your `~/.codex/config.toml` file:
 
@@ -206,8 +207,13 @@ args = [
     "run",
     "--rm",
     "-i",
-    "-v", "/Users/yourname01/yourlocalcodebase:/workspace",
-    "--name", "arm-mcp",
+    "--pull=always",
+    "-v",
+    "/path/to/your/workspace:/workspace",
+    "-v",
+    "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+    "-v",
+    "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
     "armlimited/arm-mcp:latest"
 ]
 startup_timeout_sec = 60
@@ -217,15 +223,128 @@ startup_timeout_sec = 60
 The section must be named `mcp_servers` with an underscore. Using `mcp-servers` or `mcpservers` will cause Codex to ignore the configuration.
 {{% /notice %}}
 
-##### **Option 2: add from the Codex CLI**
+##### **Option 2: Add from the Codex CLI**
 
 You can also add the Arm MCP server from the Codex CLI, after starting `codex` run:
 
 ```bash
-codex mcp add arm-mcp -- sh -lc 'docker run --rm -i -v "$PWD:/workspace" --name arm-mcp armlimited/arm-mcp:latest'
+codex mcp add arm-mcp -- sh -lc 'docker run --rm -i --pull=always -v "$PWD:/workspace" -v "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro" -v "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro" armlimited/arm-mcp:latest'
 ```
 
-### How do I verify the Arm MCP server is working?
+To enable Arm Performix features through the Arm MCP Server, replace `/path/to/your/ssh/private_key` and `/path/to/your/ssh/known_hosts` with the SSH private key and `known_hosts` file used for your target device.
+
+### Optional: Use a Docker replacement containerization tool
+
+You can use other containerization tools besides Docker that are free and don't require licenses, such as Podman, Finch, Colima, and Rancher Desktop. Choose one of the following options and use its CLI in place of `docker`.
+
+{{< tabpane-normal >}}
+  {{< tab header="Podman" >}}
+Install: [Podman](https://podman.io/docs/installation)
+
+Pull the Arm MCP Server image:
+```console
+podman pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `~/.codex/config.toml` file:
+```toml
+[mcp_servers.arm-mcp]
+command = "podman"
+args = [
+    "run",
+    "--rm",
+    "-i",
+  "--pull=always",
+  "-v", "/path/to/your/workspace:/workspace",
+  "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+  "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+    "armlimited/arm-mcp:latest"
+]
+startup_timeout_sec = 60
+```
+  {{< /tab >}}
+  {{< tab header="Finch" >}}
+Install: [Finch](https://runfinch.com/docs/getting-started/installation/)
+
+Pull the Arm MCP Server image:
+```console
+finch pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `~/.codex/config.toml` file:
+```toml
+[mcp_servers.arm-mcp]
+command = "finch"
+args = [
+    "run",
+    "--rm",
+    "-i",
+  "--pull=always",
+  "-v", "/path/to/your/workspace:/workspace",
+  "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+  "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+    "armlimited/arm-mcp:latest"
+]
+startup_timeout_sec = 60
+```
+  {{< /tab >}}
+  {{< tab header="Colima" >}}
+Install: [Colima](https://github.com/abiosoft/colima#installation)
+
+Colima provides a Docker-compatible CLI via Docker contexts.
+
+Pull the Arm MCP Server image:
+```console
+docker pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `~/.codex/config.toml` file:
+```toml
+[mcp_servers.arm-mcp]
+command = "docker"
+args = [
+    "run",
+    "--rm",
+    "-i",
+  "--pull=always",
+  "-v", "/path/to/your/workspace:/workspace",
+  "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+  "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+    "armlimited/arm-mcp:latest"
+]
+startup_timeout_sec = 60
+```
+  {{< /tab >}}
+  {{< tab header="Rancher Desktop" >}}
+Install: [Rancher Desktop](https://docs.rancherdesktop.io/getting-started/installation/)
+
+Rancher Desktop uses the Docker container engine via Morby.
+
+Pull the Arm MCP Server image:
+```console
+docker pull armlimited/arm-mcp:latest
+```
+
+Add the following configuration to the user-level `~/.codex/config.toml` file:
+```toml
+[mcp_servers.arm-mcp]
+command = "docker"
+args = [
+    "run",
+    "--rm",
+    "-i",
+  "--pull=always",
+  "-v", "/path/to/your/workspace:/workspace",
+  "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
+  "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
+    "armlimited/arm-mcp:latest"
+]
+startup_timeout_sec = 60
+```
+  {{< /tab >}}
+{{< /tabpane-normal >}}
+
+### Verify the Arm MCP server is working
 
 Start Codex CLI and list the tools from the MCP server to verify it is working:
 

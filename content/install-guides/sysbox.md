@@ -33,21 +33,19 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-[Sysbox](https://github.com/nestybox/sysbox/blob/master/README.md) enables you to use Docker containers for workloads that typically require virtual machines. Containers run with Sysbox are able to run software that relies on the [systemd System and Service Manager](https://systemd.io/) that is not usually present in containers, and it does this without the need for a full virtual machine and hardware emulation.
+[Sysbox](https://github.com/nestybox/sysbox/blob/master/README.md) allows you to use Docker containers for workloads that typically require virtual machines (VMs). Containers run with Sysbox are able to run software that relies on the [systemd System and Service Manager](https://systemd.io/) that is not usually present in containers, and it does this without the need for a full virtual machine and hardware emulation.
 
 Running Docker inside Docker, and Kubernetes inside Docker, are also Sysbox use cases. Without Sysbox, these are difficult because the Docker daemon requires systemd.
 
 In summary, Sysbox is a powerful container runtime that provides many of the benefits of virtual machines without the overhead of running a full VM. It is good for workloads that require the ability to run system-level software.
 
-## What do I need to run Sysbox?
-
 Sysbox runs on Linux and supports Arm.
 
-Sysbox has limited support for older versions of Linux, but recent Linux versions are easily compatible.
+## Before you begin
 
-If you are unsure about your Linux distribution and Linux kernel version, you can check [Sysbox Distro Compatibility](https://github.com/nestybox/sysbox/blob/master/docs/distro-compat.md)
+Sysbox has limited support for older versions of Linux, but recent Linux versions are easily compatible. To check whether your Linux distribution and Linux kernel version are supported, see [Sysbox Distro Compatibility](https://github.com/nestybox/sysbox/blob/master/docs/distro-compat.md).
 
-Sysbox is a container runtime, and so Docker is required before installing Sysbox.
+Sysbox is a container runtime, so Docker is required before installing Sysbox.
 
 In most cases, you can install Docker on Arm Linux with the commands:
 
@@ -56,27 +54,31 @@ curl -fsSL get.docker.com -o get-docker.sh && sh get-docker.sh
 sudo usermod -aG docker $USER ; newgrp docker
 ```
 
-Refer to the [Docker install guide](/install-guides/docker/docker-engine/) for more information.
+For more information, see the [Docker install guide](/install-guides/docker/docker-engine/).
 
 You can use Sysbox on a virtual machine from a [cloud service provider](/learning-paths/servers-and-cloud-computing/intro/find-hardware/), a Raspberry Pi 5, or any other Arm Linux-based computer.
 
-## How do I install Sysbox?
+## Install Sysbox
 
-Download the Sysbox official package from [Sysbox Releases](https://github.com/nestybox/sysbox/releases/)
+Download the Sysbox official package from [Sysbox Releases](https://github.com/nestybox/sysbox/releases/).
 
 You can download the Debian package for Arm from the command line:
 
+{{% notice Note %}}
+The following commands use Sysbox version 0.6.7. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Sysbox releases](https://github.com/nestybox/sysbox/releases/).
+{{% /notice %}}
+
 ```bash
-wget https://downloads.nestybox.com/sysbox/releases/v0.6.5/sysbox-ce_0.6.5-0.linux_arm64.deb
+wget https://github.com/nestybox/sysbox/releases/download/v0.6.7/sysbox-ce_0.6.7.linux_arm64.deb
 ```
 
 Install the package using the `apt` command:
 
 ```bash
-sudo apt-get install ./sysbox-ce_0.6.5-0.linux_arm64.deb -y
+sudo apt-get install ./sysbox-ce_0.6.7.linux_arm64.deb -y
 ```
 
-If you are not using a Debian-based Linux distribution, you can use instructions to build Sysbox from the source code. Refer to [Sysbox Developer's Guide: Building & Installing](https://github.com/nestybox/sysbox/blob/master/docs/developers-guide/build.md) for further information.
+If you are not using a Debian-based Linux distribution, you can use instructions to build Sysbox from the source code. For more information, see [Sysbox Developer's Guide: Building & Installing](https://github.com/nestybox/sysbox/blob/master/docs/developers-guide/build.md).
 
 Run `systemctl` to confirm if Sysbox is running:
 
@@ -92,11 +94,11 @@ If Sysbox is running, you see the output:
   sysbox.service                                 loaded    active   running Sysbox container runtime
 ```
 
-## How can I get set up with Sysbox quickly?
+## Verify Sysbox installation
 
-You can try Sysbox by creating a container image that includes systemd and Docker.
+You can test Sysbox by creating a container image that includes systemd and Docker.
 
-Use a text editor to copy the text below to a file named `Dockerfile`:
+Use a text editor to copy the following text to a file named `Dockerfile`:
 
 ```console {file_name="Dockerfile"}
 FROM ubuntu:24.04
@@ -131,20 +133,20 @@ docker build -t sysbox-test -f Dockerfile .
 Use Sysbox as the container runtime to create a new container:
 
 ```console
-docker run --runtime=sysbox-runc -P --hostname=sbox sysbox-test
+docker run --runtime=sysbox-runc -P --hostname=sbox -it sysbox-test
 ```
 
-The animated output below shows the Linux init process running. You can log in with the password `ubuntu`, or change it in the Dockerfile above.
+The following animated output shows the Linux init process running. You can log in with the password `ubuntu`, or change it in the Dockerfile.
 
-You can use Docker inside the container and the SSH server operates as expected. Both are possible because systemd is running in the container.
+You can use Docker inside the container. The SSH server operates as expected. Both are possible because systemd is running in the container.
 
-![Connect #center](/install-guides/_images/sysbox.gif)
+![Animated terminal showing systemd init process starting in the Sysbox container, followed by a login prompt where you can enter the ubuntu user credentials to verify the container is running with full system services.#center](/install-guides/_images/sysbox.gif)
 
-## How can I use SSH to connect to a Sysbox container?
+## Use SSH to connect to a Sysbox container
 
-To connect using SSH, you can identify the IP address of your Sysbox container in two alternative ways, from inside the container, or from outside the container.
+To connect using SSH, you can identify the IP address of your Sysbox container in two ways: from inside the container, or from outside the container.
 
-To find the IP address from inside the container use the `ifconfig` command:
+To find the IP address from inside the container, use the `ifconfig` command:
 
 ```console
 ifconfig
@@ -164,7 +166,7 @@ eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 
 The `inet` IP address for `eth0` is the one you can use to SSH from outside the Sysbox container.
 
-For this example, the SSH command is below. Modify the IP address for your container.
+For this example, the SSH command is the following. Replace the IP address with that of your container.
 
 ```console
 ssh ubuntu@172.20.0.2
@@ -174,7 +176,7 @@ Log in using the same `ubuntu` username and password.
 
 You can also use the `docker` command to identify the IP address and port from outside the container.
 
-Run the command below from another shell outside of the Sysbox container:
+Run the following command from another shell outside of the Sysbox container:
 
 ```bash
 docker ps
@@ -187,7 +189,7 @@ CONTAINER ID   IMAGE         COMMAND                  CREATED          STATUS   
 3a42487cddc0   sysbox-test   "/sbin/init --log-le…"   10 minutes ago   Up 10 minutes   0.0.0.0:32768->22/tcp, [::]:32768->22/tcp   determined_hopper
 ```
 
-Look in the `PORTS` column for the port number that is connected to port 22 of the container, in this example it is 32768. You can use `localhost`, `0.0.0.0` or the actual IP of your machine with the identified port.
+Look in the `PORTS` column for the port number that is connected to port 22 of the container. In this example, it is 32768. You can use `localhost`, `0.0.0.0` or the actual IP of your machine with the identified port.
 
 SSH to the container using the connected port:
 
@@ -203,4 +205,6 @@ You can exit the Sysbox container using:
 sudo halt
 ```
 
-Sysbox behaves like a virtual machine and you can use it to run applications that require system services normally not available in containers. It is useful for testing and development tasks because the container changes are not saved, meaning that you can create a clean testing environment simply by restarting the Sysbox container.
+Sysbox behaves like a virtual machine that you can use to run applications that require system services normally not available in containers. It is useful for testing and development tasks because the container changes are not saved, meaning that you can create a clean testing environment simply by restarting the Sysbox container.
+
+You're now ready to use Sysbox.

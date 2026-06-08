@@ -15,6 +15,7 @@ prerequisites:
     - A [Google Cloud account](https://console.cloud.google.com/). Create an account if needed.
     - A computer with [Terraform](/install-guides/terraform) installed.
     - A computer with [Google Cloud CLI](/install-guides/gcloud) installed.
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false

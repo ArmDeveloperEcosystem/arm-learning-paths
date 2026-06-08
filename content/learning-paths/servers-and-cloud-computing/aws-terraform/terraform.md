@@ -26,7 +26,7 @@ The instructions to create these keys are below.
 
 ### Generate the SSH key-pair
 
-Generate the SSH key-pair (public key, private key) using `ssh-keygen` to use for AWS EC2 access. To generate the key-pair, follow this [guide](/install-guides/ssh#ssh-keys).
+Generate the SSH key-pair (public key, private key) using `ssh-keygen` to use for AWS EC2 access. To generate the key-pair, follow this [guide](/install-guides/ssh/#ssh-keys).
 
 {{% notice Note %}}
 If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
@@ -38,7 +38,7 @@ The installation of Terraform on your desktop or laptop needs to communicate wit
 
 For authentication, generate access keys (access key ID and secret access key). These access keys are used by Terraform for making programmatic calls to AWS via the AWS CLI.
 
-To generate and configure the Access key ID and Secret access key, follow this [guide](/install-guides/aws_access_keys).
+To generate and configure the Access key ID and Secret access key, follow this [guide](/install-guides/aws_access_keys/).
 
 ## Create your first Terraform infrastructure
 
@@ -281,7 +281,7 @@ Click on the **Instance ID** to display the **Instance Summary** view which incl
 
 ### SSH into EC2 instance
 
-Connect to your EC2 Instance with your preferred SSH client. You will be using the private key created through [ssh-keygen](/install-guides/ssh#ssh-keys), located at `~/.ssh/id_rsa`.
+Connect to your EC2 Instance with your preferred SSH client. You will be using the private key created through [ssh-keygen](/install-guides/ssh/#ssh-keys), located at `~/.ssh/id_rsa`.
 
 In the `Instance summary` view, click `Connect`, and select the `SSH client` tab to see the commands used to launch the native SSH client.
 
@@ -334,7 +334,7 @@ will identify the host machine as `aarch64`.
 
 ### Run hello world
 
-Install the `gcc` compiler. If you are using `Ubuntu`, use the following commands. If not, refer to the [GNU compiler install guide](/install-guides/gcc):
+Install the `gcc` compiler. If you are using `Ubuntu`, use the following commands. If not, refer to the [GNU compiler install guide](/install-guides/gcc/):
 
 ```console
 sudo apt-get update

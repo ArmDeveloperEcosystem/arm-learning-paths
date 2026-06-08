@@ -76,6 +76,6 @@ Because the two approaches have different infrastructure requirements, you'll be
 
 ## What you've learned and what's next
 
-In this section, you learned about Azure Cobalt 100 and OpenStack. You were introduced to two approaches for deploying OpenStack on Cobalt 100, and the infrastructure requuirements for each approach.
+In this section, you learned about Azure Cobalt 100 and OpenStack. You were introduced to two approaches for deploying OpenStack on Cobalt 100, and the infrastructure requirements for each approach.
 
 In the next section, you'll create the VM for the DevStack approach for deploying OpenStack on Cobalt 100.

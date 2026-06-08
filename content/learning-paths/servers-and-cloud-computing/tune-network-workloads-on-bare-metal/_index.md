@@ -20,7 +20,10 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
-author: Ying Yu, Ker Liu, Rui Chang
+author:
+    - Ying Yu
+    - Ker Liu
+    - Rui Chang
 
 ### Tags
 skilllevels: Advanced
