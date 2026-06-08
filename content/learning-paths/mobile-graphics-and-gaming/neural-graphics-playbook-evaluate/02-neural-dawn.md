@@ -1,5 +1,5 @@
 ---
-title: "About Neural Dawn"
+title: About Neural Dawn
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -18,14 +18,14 @@ First, it had to look good, like _really_ good. The lighting fidelity and scene 
 
 Second, it had to run efficiently. We targeted 60 FPS to meet modern expectations for smooth, responsive mobile gameplay.
 
-And third, it had to show what becomes possible when neural graphics and Arm NX are used together with approaches like MegaLights, on mobile.
+And third, it had to show what becomes possible when neural graphics and Arm NX are used together with approaches such as MegaLights, on mobile.
 
 Instead of optimizing a traditional graphics pipeline, we built one that depends on neural reconstruction. Neural Dawn is built around MegaLights. We render at low resolution tracing a low amount of rays per pixel, then rely on:
 
 - Neural Super Sampling Denoising (NSSD) to denoise and upscale the image
 - Neural Frame Rate Upscaling (NFRU) to generate intermediate frames
 
-So, the final result looks like a clean, high-resolution, smooth experience, even though we only rendered about 1/8 of the pixels directly.
+So, the final result looks like a clean, high-resolution, smooth experience, even though we rendered only about one-eighth of the pixels directly.
 
 Ultimately, Neural Dawn shows that neural graphics on mobile are production ready.
 
@@ -47,17 +47,17 @@ It also stacks well with other techniques. Overall, NFRU is a fairly predictable
 
 ### NSSD
 
-NSSD is about making noisy, low-cost rendering usable. If you’ve worked with ray tracing, you’ve seen the issue. At real-time budgets, you can only afford a few rays per pixel. That gives you a very noisy image. Traditional shader- based denoisers help, but can struggle in challenging scenarios (for example, translucent particles like fire or mist).
+NSSD is about making noisy, low-cost rendering usable. If you’ve worked with ray tracing, you’ve seen the issue. At real-time budgets, you can only afford a few rays per pixel. That gives you a very noisy image. Traditional shader- based denoisers help, but can struggle in challenging scenarios (for example, translucent particles such as fire or mist).
 
-Unlike shader-based approaches, which often process diffuse, specular, shadows, and other signals separately, NSSD uses a neural network to reconstruct the final lighting result directly. This allows NSSD to perform denoising and upscaling together in a single pass, reducing the need for multiple specialized denoising stages.
+Unlike shader-based approaches, which often process diffuse, specular, shadows, and other signals separately, NSSD uses a neural network to reconstruct the final lighting result directly. Doing so allows NSSD to perform denoising and upscaling together in a single pass, reducing the need for multiple specialized denoising stages.
 
-In practical terms, NSSD lets you achieve high-quality rendering with Raytracing. We validated NSSD with Project Dawn with the following setup:
+In practical terms, with NSSD, you can achieve high-quality rendering with Raytracing. We validated NSSD with Project Dawn with the following setup:
 
 Rendering at 540p and upscaling to 1080p, tracing 1 ray per pixel with MegaLights.
 
 Normally, lighting cost scales with scene complexity. More lights = more cost. With stochastic techniques, you can keep the cost roughly constant, but the image gets noisy. NSSD cleans up that noise after the fact and makes the content usable.
 
-That’s what enables things like:
+That’s what enables things such as:
 
 - lots of dynamic lights in a scene
 - soft shadows from all lights
@@ -76,6 +76,6 @@ NFRU and NSSD don’t compete—they sit at different levels:
 
 You can use NFRU without touching your content.
 
-You can’t really use NSSD that way—it depends on how your game looks and how much you’re willing to invest in getting good results.
+You can’t really use NSSD that way — it depends on how your game looks and how much you’re willing to invest in getting good results.
 
-That’s why most teams will start with NSS and NFRU, and treat NSSD as something to explore once they’re ready to go deeper. In the next section, you will learn what is really behind these technologies, and how we enable them through tooling.
+That’s why most teams will start with NSS and NFRU, and treat NSSD as something to explore when they’re ready to go deeper. In the next section, you'll learn what is really behind these technologies, and how we enable them through tooling.
