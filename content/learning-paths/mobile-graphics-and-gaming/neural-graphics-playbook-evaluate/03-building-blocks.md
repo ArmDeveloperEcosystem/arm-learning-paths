@@ -18,7 +18,7 @@ The important takeaway is that neural graphics is not a feature you simply enabl
 
 ## Technical overview
 
-## NFRU
+### NFRU
 
 Neural Frame Rate Upscaling (NFRU) is the part of the system that makes motion feel smooth. The way it works is by looking at two consecutive frames and estimating how every pixel moves between them. This is done using optical flow, which operates in image space and captures not just object motion, but also changes in lighting, shading, and other effects that show up in the final image.
 
@@ -30,7 +30,7 @@ Those guesses don’t line up perfectly. Some areas are missing, some disagree, 
 
 So rather than interpolating, NFRU is really doing a reconstruction of motion. It also deliberately sits at the very end of the pipeline. By that point, the image has already been denoised and upscaled, so the model is working with relatively clean inputs, which makes the problem much easier to solve.
 
-## NSSD
+### NSSD
 
 Neural Super Sampling and Denoising (NSSD) is where most of the image quality is actually recovered. It takes a low-resolution, noisy render and turns it into something that looks like a clean, high-resolution frame.
 
@@ -51,7 +51,7 @@ On top of that, there’s a temporal component. Previous frames are reprojected 
 By the end of the pipeline, you have a frame that is denoised, temporally consistent, and upscaled — for example from 540p to 1080p — even though it was never rendered that way directly.
 
 
-## Putting them together
+## Putting NFRU and NSSD together
 
 After you put NSSD and NFRU together, the pipeline starts to look very different from a traditional renderer. If you look at the full system, you end up rendering on the order of one eighth of the total pixels across space and time.
 

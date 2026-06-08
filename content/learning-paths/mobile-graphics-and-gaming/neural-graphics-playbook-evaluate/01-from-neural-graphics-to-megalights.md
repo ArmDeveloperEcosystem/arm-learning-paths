@@ -20,7 +20,7 @@ On mobile, bandwidth is expensive. Moving less data around the system can have a
 
 NSS was really a first step in exploring a bigger question: what happens if machine learning becomes a normal part of the rendering pipeline?
 
-## From a single technique to something you can actually build on
+## From a single technique to something you can build on
 
 Exploring this question has resulted in the Neural Graphics Development Kit - a set of Vulkan based tools to support early experimentation of different neural graphics use cases that are production ready and efficient for mobile.
 
