@@ -26,9 +26,7 @@ Keycloak is an open-source identity and access management (IAM) platform that si
 
 Keycloak supports modern authentication standards such as OAuth2, OIDC, and Security Asserion Markup Language (SAML). It integrates with web applications, APIs, Kubernetes platforms, microservices, and enterprise identity systems, making it ideal for securing cloud-native workloads.
 
-Keycloak provides several important capabilities for authentication and security management. With single sign-on (SSO) support, you can authenticate once and access multiple applications without logging in again. 
-
-With centralized identity management, you can manage users, roles, groups, and authentication policies from a single platform. With OAuth2 and OpenID Connect support, you get simplified secure API and application authentication workflows.
+Keycloak provides several important capabilities for authentication and security management. With single sign-on (SSO) support, you can authenticate once and access multiple applications without logging in again. With centralized identity management, you can manage users, roles, groups, and authentication policies from a single platform. With OAuth2 and OpenID Connect support, you get simplified secure API and application authentication workflows.
 
 Keycloak also supports multi-factor authentication (MFA) for stronger account security, user federation for integrating with enterprise identity systems such as LDAP and Active Directory, and role-based access control (RBAC) to control user permissions and application access.
 
