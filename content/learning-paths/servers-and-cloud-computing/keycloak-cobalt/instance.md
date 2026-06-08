@@ -60,7 +60,7 @@ Your VM should be ready and running in a few minutes. You can SSH into the virtu
 
 {{% notice Note %}}To learn more about Arm-based virtual machines in Azure, see the Azure section in the [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure/) Learning Path.{{% /notice %}}
 
-### Connect to your virtual machine
+## Connect to your virtual machine
 
 Use the private key file you downloaded and the public IP address shown in the Azure portal to connect to your virtual machine.
 
