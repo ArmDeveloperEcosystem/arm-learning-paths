@@ -15,62 +15,9 @@ learning_objectives:
 prerequisites:
     - Basic PyTorch model training and evaluation experience
     - A development machine with Python 3.10+ and PyTorch installed that runs ExecuTorch
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
-
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v3
-  generated_at: '2026-06-03T00:05:22Z'
-  generator: ai
-  ai_assisted: true
-  ai_review_required: true
-  model: gpt-5
-  prompt_template: summary-faq-v3
-  source_hash: 56d9d0fe9606e42281a2d2be52992c7a4b6846b208376c92e7fe3094647d1c70
-  summary_generated_at: '2026-06-02T02:56:51Z'
-  summary_source_hash: 56d9d0fe9606e42281a2d2be52992c7a4b6846b208376c92e7fe3094647d1c70
-  faq_generated_at: '2026-06-03T00:05:22Z'
-  faq_source_hash: 56d9d0fe9606e42281a2d2be52992c7a4b6846b208376c92e7fe3094647d1c70
-  summary: >-
-    This advanced Learning Path guides ML developers through applying post-training quantization
-    (PTQ) and quantization-aware training (QAT) to PyTorch models using TorchAO PT2E APIs, then
-    exporting INT8 models to the .vgf format via the ExecuTorch Arm backend. You start with a
-    complete, runnable CIFAR-10-based example to generate a VGF artifact intended for Arm hardware
-    with dedicated neural accelerators (NX), export to TOSA, and validate the graph using Google’s
-    Model Explorer. The steps cover environment setup, PTQ and QAT workflows, and graph inspection
-    to spot issues such as unexpected layout conversions. Prerequisites include basic PyTorch
-    training/evaluation experience and a machine with Python 3.10+ and PyTorch that runs ExecuTorch
-    on Linux, macOS, or Windows.
-  faqs:
-  - question: What do I need before running the steps?
-    answer: >-
-      You need basic PyTorch model training and evaluation experience and a development machine
-      with Python 3.10+ and PyTorch installed that runs ExecuTorch. The path supports Linux, macOS,
-      and Windows.
-  - question: Should I start with PTQ or QAT in this workflow?
-    answer: >-
-      Start with PTQ using the end-to-end CIFAR-10 example to quickly generate a .vgf artifact
-      and validate the export path. Then extend the same example with QAT to compare PTQ and QAT
-      outputs using the same model and data.
-  - question: Where will the .vgf files be generated, and what result should I expect?
-    answer: >-
-      Running the provided example produces a .vgf artifact as part of the ExecuTorch Arm backend
-      export. The path uses default output directories such as ./output/ for PTQ and ./output_qat/
-      for QAT.
-  - question: How do I inspect the exported graph and what should I look for?
-    answer: >-
-      Install and launch Model Explorer with the VGF adapter, then open the .vgf files from the
-      output directories. Check for unexpected layout conversions (for example, extra transpose
-      operations) and operators you did not intend to run on your GPU.
-  - question: Can I apply this quantization and export flow to my own model?
-    answer: >-
-      Yes. After running the CIFAR-10 example end to end, reuse the same PTQ (and optionally QAT)
-      logic with your model and calibration data to export your own .vgf artifact.
-# END generated_summary_faq
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author:
 - Richard Burton

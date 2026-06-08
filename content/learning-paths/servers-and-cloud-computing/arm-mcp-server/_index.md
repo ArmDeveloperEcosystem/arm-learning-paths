@@ -17,62 +17,9 @@ prerequisites:
     - An AI-powered IDE such as VS Code, Copilot in VS Code, Kiro (IDE or CLI) or Codex
     - Basic familiarity with Docker and C/C++ development
     - Access to an Arm-based cloud instance or local Arm computer running Linux or macOS
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
-
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v3
-  generated_at: '2026-06-03T00:18:38Z'
-  generator: ai
-  ai_assisted: true
-  ai_review_required: true
-  model: gpt-5
-  prompt_template: summary-faq-v3
-  source_hash: b870ac5160d35ddb51955ca8379493e172787ced8125cde8ae79f7700e653a87
-  summary_generated_at: '2026-06-02T03:06:30Z'
-  summary_source_hash: b870ac5160d35ddb51955ca8379493e172787ced8125cde8ae79f7700e653a87
-  faq_generated_at: '2026-06-03T00:18:38Z'
-  faq_source_hash: b870ac5160d35ddb51955ca8379493e172787ced8125cde8ae79f7700e653a87
-  summary: >-
-    This Learning Path guides you through automating x86-to-Arm application migration using the
-    Arm MCP Server. You will connect an AI-powered IDE or agent to the MCP Server to run AI-assisted
-    checks on Docker images for arm64 support, refactor C++ (including SIMD intrinsics cases)
-    with the Arm Cloud Migration Agent in GitHub Copilot, and validate the migrated application
-    in Docker on Arm-based systems. You also configure the same migration workflow in other agentic
-    tools. Prerequisites include an AI-enabled IDE (for example VS Code with Copilot, Kiro, or
-    Codex), basic Docker and C/C++ knowledge, and access to an Arm-based Linux or macOS system.
-    Estimated time to complete is about 20 minutes.
-  faqs:
-  - question: What do I need before running this Learning Path?
-    answer: >-
-      Have an AI-powered IDE (for example, VS Code with GitHub Copilot, Kiro, or Codex), basic
-      familiarity with Docker and C/C++ development, and access to an Arm-based cloud instance
-      or a local Arm machine running Linux or macOS.
-  - question: How do I check if a Docker base image supports arm64 during migration?
-    answer: >-
-      Use natural language prompts with the Arm MCP Server to ask about arm64 compatibility. This
-      avoids manual manifest inspection and returns an AI-assisted compatibility assessment you
-      can act on.
-  - question: I’m not using GitHub Copilot—how do I follow the migration workflow?
-    answer: >-
-      Skip to the section on configuring other agentic systems and set up persistent instructions
-      (such as steering documents or prompt files) for your tool. The goal is to let your AI assistant
-      use the Arm MCP Server to execute the same multi-step migration workflow.
-  - question: What should I do if my C++ code uses x86 SIMD intrinsics?
-    answer: >-
-      Use the Arm Cloud Migration Agent in GitHub Copilot to guide refactoring from SSE/AVX/AVX2
-      intrinsics to Arm Neon or SVE equivalents. Follow the agent’s structured steps to address
-      architecture-specific vector code.
-  - question: How do I validate the migrated C++ application on Arm?
-    answer: >-
-      Run and validate the application in Docker on an Arm-based system as outlined in the path.
-      You should be able to execute the container on Arm Linux or macOS and confirm the application
-      runs as expected.
-# END generated_summary_faq
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Joe Stech
 

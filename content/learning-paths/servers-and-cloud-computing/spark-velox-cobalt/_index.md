@@ -21,11 +21,9 @@ prerequisites:
   - Basic knowledge of Linux command-line operations
   - Familiarity with SSH and remote server access
   - Basic understanding of distributed systems and Apache Spark
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 author: Pareena Verma
 
 ### Tags

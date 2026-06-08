@@ -19,12 +19,9 @@ learning_objectives:
 prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
     - Basic familiarity with SSH and MySQL command-line tools
-
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 author: Doug Anson
 
 ### Tags

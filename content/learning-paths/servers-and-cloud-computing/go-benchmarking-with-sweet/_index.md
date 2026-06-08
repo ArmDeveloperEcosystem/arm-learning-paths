@@ -14,56 +14,9 @@ learning_objectives:
 prerequisites:
     - A [Google Cloud account](https://console.cloud.google.com/). This Learning Path can be run on any cloud provider or on-premises, but it focuses on Google Cloud’s Axion Arm64-based instances.
     - A local machine with [Google Cloud CLI](/install-guides/gcloud/) installed
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
-
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v3
-  generated_at: '2026-06-03T01:07:15Z'
-  generator: ai
-  ai_assisted: true
-  ai_review_required: true
-  model: gpt-5
-  prompt_template: summary-faq-v3
-  source_hash: aa78434138f08b424352302e92a1cd40d8297459bc65202715dcb41c40de6057
-  summary_generated_at: '2026-06-02T04:05:11Z'
-  summary_source_hash: aa78434138f08b424352302e92a1cd40d8297459bc65202715dcb41c40de6057
-  faq_generated_at: '2026-06-03T01:07:15Z'
-  faq_source_hash: aa78434138f08b424352302e92a1cd40d8297459bc65202715dcb41c40de6057
-  summary: >-
-    Provision Arm64 and x86_64 Linux VM instances on Google Cloud and use Go benchmarking tools
-    to compare performance across architectures. You will create an Arm-based c4a-standard-4 and
-    an Intel Emerald Rapids c4-standard-8 instance, install Go, Sweet, and Benchstat on both,
-    then run Go Benchmarks with Sweet and analyze results with Benchstat (text or CSV). Prerequisites
-    are a Google Cloud account and the Google Cloud CLI on your local machine. The path focuses
-    on Google Cloud’s Axion Arm64-based instances but can also be run on other clouds or on-premises.
-    Estimated time to complete is about 60 minutes.
-  faqs:
-  - question: What do I need before running the steps?
-    answer: >-
-      You need a Google Cloud account and the Google Cloud CLI installed on your local machine.
-      No other explicit prerequisites are listed.
-  - question: Which VM types should I create for the comparison?
-    answer: >-
-      Create an Arm-based c4a-standard-4 VM named "c4a" and an Intel-based Emerald Rapids c4-standard-8
-      VM named "c4". The steps show how to launch each in the Google Cloud console.
-  - question: Do I install Go, Sweet, and Benchstat on both VMs, and where should I run the install?
-    answer: >-
-      Yes, install on both VMs. The steps assume you run the installation from your home directory
-      ($HOME), which results in a $HOME/benchmarks/sweet directory.
-  - question: How do I execute and compare the benchmarks?
-    answer: >-
-      Run sweet on each VM to generate raw performance data. Then use benchstat to compare results
-      from the different VMs.
-  - question: What output should I expect from Benchstat?
-    answer: >-
-      Benchstat compares results to highlight performance differences and outputs text by default.
-      It can also produce CSV output.
-# END generated_summary_faq
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Geremy Cohen
 

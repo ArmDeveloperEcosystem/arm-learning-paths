@@ -13,62 +13,9 @@ learning_objectives:
 
 prerequisites:
     - Some familiarity with embedded debug
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
-
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v3
-  generated_at: '2026-06-02T22:35:33Z'
-  generator: ai
-  ai_assisted: true
-  ai_review_required: true
-  model: gpt-5
-  prompt_template: summary-faq-v3
-  source_hash: d2c403c7fd1001dbd985697c9eb018951a955358c2be39c727183a87a3dfdf51
-  summary_generated_at: '2026-06-01T21:47:16Z'
-  summary_source_hash: d2c403c7fd1001dbd985697c9eb018951a955358c2be39c727183a87a3dfdf51
-  faq_generated_at: '2026-06-02T22:35:33Z'
-  faq_source_hash: d2c403c7fd1001dbd985697c9eb018951a955358c2be39c727183a87a3dfdf51
-  summary: >-
-    This introductory Learning Path shows how to add new debug targets in Arm Development Studio
-    for both virtual platforms and physical development boards. You will create debugger connections
-    to Arm Fast Models for bare-metal software bring-up and to boards via the Arm DSTREAM family
-    of probes. The steps outline when to use each DSTREAM variant and how to connect over USB
-    or Ethernet, so you can attach the debugger to Cortex-A, Cortex-R, Cortex-M, or Neoverse based
-    systems. It assumes Arm Development Studio and Arm Fast Models are installed and that you
-    have some familiarity with embedded debug. After completing the path, you will have working
-    debug configurations for your chosen target.
-  faqs:
-  - question: What do I need installed before creating a Fast Models debug connection in Arm Development
-      Studio?
-    answer: >-
-      It is assumed that Arm Development Studio and Arm Fast Models are installed, and that you
-      have some familiarity with embedded debug. Installation steps are not covered in this path.
-  - question: Do I need a physical development board to follow this path?
-    answer: >-
-      Not for the virtual platform step; Fast Models let you connect the debugger to a model as
-      if it were real hardware. For the hardware step, you will use an Arm DSTREAM probe with
-      a development board.
-  - question: Which DSTREAM probe should I choose for my board?
-    answer: >-
-      DSTREAM-ST provides full debug over JTAG and SWD, plus on-chip and low-bandwidth (4-bit)
-      external trace. If you require higher-bandwidth trace and your SoC and platform support
-      it, select DSTREAM-PT, DSTREAM-HT, or DSTREAM-XT.
-  - question: Should I connect DSTREAM to my host over USB or Ethernet?
-    answer: >-
-      The DSTREAM family supports both high-speed USB and Ethernet connections to the host. Use
-      whichever is available and appropriate for your setup.
-  - question: What result should I expect after creating each debug configuration?
-    answer: >-
-      For Fast Models, the Arm Development Studio debugger should attach to the virtual platform
-      and let you interact with it like real hardware. For a development board, the debugger should
-      connect through DSTREAM and provide debug (and trace, where supported) according to the
-      probe and target capabilities.
-# END generated_summary_faq
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Ronan Synnott
 

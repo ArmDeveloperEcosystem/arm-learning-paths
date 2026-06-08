@@ -23,11 +23,9 @@ prerequisites:
     - A supported Arm-based edge device (Raspberry Pi 5, Nvidia Jetson, Qualcomm Dragonwing QC6490) or an AWS EC2 Arm instance
     - An SSH client and familiarity with the Linux command line
     - Basic understanding of ML concepts
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 author: Doug Anson
 
 ### Tags

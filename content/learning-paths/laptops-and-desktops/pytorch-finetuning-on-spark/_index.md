@@ -16,57 +16,9 @@ learning_objectives:
 prerequisites:
     - Hugging Face account and access token
     - NVIDIA DGX Spark workstation
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
-
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v3
-  generated_at: '2026-06-02T23:11:51Z'
-  generator: ai
-  ai_assisted: true
-  ai_review_required: true
-  model: gpt-5
-  prompt_template: summary-faq-v3
-  source_hash: aa2a78baf3e52172e37506c3f75254968d775b4eb516f9696a0a6998aba50e97
-  summary_generated_at: '2026-06-01T22:09:20Z'
-  summary_source_hash: aa2a78baf3e52172e37506c3f75254968d775b4eb516f9696a0a6998aba50e97
-  faq_generated_at: '2026-06-02T23:11:51Z'
-  faq_source_hash: aa2a78baf3e52172e37506c3f75254968d775b4eb516f9696a0a6998aba50e97
-  summary: >-
-    Learn how to fine-tune the Llama 3.2 3B language model on domain data using PyTorch and Hugging
-    Face on an NVIDIA DGX Spark with an Arm-based Grace CPU and a Blackwell GPU. You will configure
-    Docker on Linux, pull a pre-built PyTorch container, prepare a JSONL dataset from Raspberry
-    Pi datasheet content for supervised fine-tuning, and run a provided PyTorch script to train
-    the model. Finally, you will serve the base and fine-tuned models using a vLLM container to
-    compare responses and confirm factual accuracy improvements. Prerequisites are a Hugging Face
-    account with access token and access to a DGX Spark workstation.
-  faqs:
-  - question: What do I need before running the steps?
-    answer: >-
-      You need a Hugging Face account with an access token and an NVIDIA DGX Spark workstation.
-      The Learning Path targets a Linux environment.
-  - question: Do I need to install Docker on DGX Spark?
-    answer: >-
-      No. Docker is pre-installed on the DGX Spark, and you only need to configure permissions
-      as described in the setup step.
-  - question: Which model and dataset format are used for fine-tuning?
-    answer: >-
-      You will fine-tune Llama 3.2 3B. The workflow expects a custom JSONL dataset prepared for
-      supervised fine-tuning.
-  - question: Which containers are used for training and serving?
-    answer: >-
-      You pull a pre-built PyTorch container to run fine-tuning. For inference and comparison,
-      you use an NVIDIA-provided vLLM container.
-  - question: How do I know the fine-tuned model improved factual accuracy?
-    answer: >-
-      Serve both the base and fine-tuned models with vLLM and compare answers to domain questions.
-      For example, after fine-tuning on Raspberry Pi datasheets, the model should answer that
-      the RP2350 supports up to 150 MHz instead of the incorrect 1.8 GHz.
-# END generated_summary_faq
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Michael Hall
 

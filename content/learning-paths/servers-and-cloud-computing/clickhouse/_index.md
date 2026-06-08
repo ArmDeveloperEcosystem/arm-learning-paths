@@ -12,59 +12,9 @@ learning_objectives:
 
 prerequisites:
     - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server.
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
-
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v3
-  generated_at: '2026-06-03T00:34:16Z'
-  generator: ai
-  ai_assisted: true
-  ai_review_required: true
-  model: gpt-5
-  prompt_template: summary-faq-v3
-  source_hash: 0d1390198cf2f0e87f509c5269fc2405cffcb2e57311024150d47e60a3273178
-  summary_generated_at: '2026-06-02T03:24:05Z'
-  summary_source_hash: 0d1390198cf2f0e87f509c5269fc2405cffcb2e57311024150d47e60a3273178
-  faq_generated_at: '2026-06-03T00:34:16Z'
-  faq_source_hash: 0d1390198cf2f0e87f509c5269fc2405cffcb2e57311024150d47e60a3273178
-  summary: >-
-    This Learning Path shows how to install ClickHouse on an Arm-based cloud instance or Arm server
-    running Ubuntu for Arm, then measure query latency with ClickBench using a web‑analytics dataset.
-    It is an introductory, hands-on path for developers evaluating ClickHouse on Arm to choose
-    appropriate instance configurations across cloud providers or on‑premises. You will set up
-    ClickHouse, run ClickBench to capture processing times, and use the results to inform instance
-    selection for your workloads. Prerequisites include access to an Arm-based instance and sufficient
-    storage for the dataset; no additional tools beyond ClickHouse and ClickBench are listed.
-    Expected duration is about 45 minutes.
-  faqs:
-  - question: What do I need before running the steps?
-    answer: >-
-      You need an Arm-based instance from a cloud service provider or an on-premise Arm server.
-      Ensure it runs a recent version of Ubuntu for Arm and has enough storage for the web-analytics
-      dataset used in the benchmark.
-  - question: Which cloud platforms can I use for the Arm instance?
-    answer: >-
-      You can use Arm-based instances from AWS, Microsoft Azure, Google Cloud, or Oracle. An on-premise
-      Arm server is also suitable.
-  - question: Which operating system should I run on the instance?
-    answer: >-
-      Use a recent version of Ubuntu for Arm. The path assumes a Linux environment.
-  - question: What result should I expect after running ClickBench?
-    answer: >-
-      ClickBench reports processing time (query latency) for ClickHouse on the web-analytics workload.
-      You can use these measurements to evaluate performance and inform your instance configuration
-      choices.
-  - question: What should I check if the benchmark fails or seems unusually slow?
-    answer: >-
-      Confirm you are using an Arm-based instance with a recent Ubuntu for Arm and that sufficient
-      storage is available for the dataset. Also ensure the dataset required by the steps is present
-      before running ClickBench.
-# END generated_summary_faq
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Pareena Verma
 

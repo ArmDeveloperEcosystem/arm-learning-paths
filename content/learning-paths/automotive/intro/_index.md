@@ -15,11 +15,9 @@ prerequisites:
 draft: true
 cascade:
     draft: true
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 author: Jason Andrews
 
 ### Tags

@@ -16,59 +16,9 @@ prerequisites:
     - A microSD card (16GB or greater; class 10 or faster)
     - An ethernet connection
     - A mouse and keyboard connected to the Orange Pi
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
-
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v3
-  generated_at: '2026-06-03T00:08:53Z'
-  generator: ai
-  ai_assisted: true
-  ai_review_required: true
-  model: gpt-5
-  prompt_template: summary-faq-v3
-  source_hash: dea8c3e15cca703f075c8fa9ba3daf873a90e3eb2ee9975dd05b973dad744b54
-  summary_generated_at: '2026-06-02T02:59:30Z'
-  summary_source_hash: dea8c3e15cca703f075c8fa9ba3daf873a90e3eb2ee9975dd05b973dad744b54
-  faq_generated_at: '2026-06-03T00:08:53Z'
-  faq_source_hash: dea8c3e15cca703f075c8fa9ba3daf873a90e3eb2ee9975dd05b973dad744b54
-  summary: >-
-    This introductory Learning Path shows how to install Droid OS on an Arm-based Orange Pi 5,
-    build a Unity game for Android, and deploy the resulting APK to the board. You will use a
-    Windows PC to obtain the Orange Pi OS (Droid) TF Card image from the Orange Pi 5 support page
-    and write it to a microSD card with SDDiskTool, using 7‑Zip as needed for archives. Then you
-    will configure Unity Build Settings for Android, add Android Build Support in Unity Hub if
-    required, and produce an APK. Finally, you will transfer the APK to the Orange Pi 5 (for example
-    via USB, microSD, or a cloud drive over Ethernet) and install it. Prerequisites are explicitly
-    listed.
-  faqs:
-  - question: Do I need a Windows PC to flash Droid OS to the microSD card?
-    answer: >-
-      Yes. The Orange Pi imaging software used in this path is only available for Windows, so
-      the flashing step must be done on a Windows PC.
-  - question: Where do I download the correct Droid OS image for Orange Pi 5?
-    answer: >-
-      Go to the Orange Pi 5 support page, select Orange Pi OS (Droid) > TF Card Image, and download
-      the latest release. An example filename provided is OrangePI-OS_Droid_orangepi5_en_v0.0.6_beta.tar.gz.
-  - question: Which Unity components are required to build for the Orange Pi 5?
-    answer: >-
-      In Unity Hub, add the Android Build Support module for the Unity version used by your project.
-      In Build Settings, select Android (Unity may prompt a restart), and ensure all needed Android
-      subcomponents are included.
-  - question: What microSD card should I use for Droid OS on the Orange Pi 5?
-    answer: >-
-      Use a microSD card that is 16GB or larger and Class 10 or faster. This capacity and speed
-      are listed as prerequisites for the path.
-  - question: How can I move my Unity APK onto the Orange Pi 5?
-    answer: >-
-      You can copy the APK via a USB thumb drive if the file systems are compatible, place it
-      directly on the microSD card if formats allow, or upload it to a cloud drive and download
-      it from Droid OS on the board.
-# END generated_summary_faq
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Gabriel Peterson
 

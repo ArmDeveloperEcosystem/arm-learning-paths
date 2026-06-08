@@ -27,7 +27,3 @@ tags
 
 # Generated spell check config
 .spellcheck-non-draft.yml
-reports/generated-summary-faq/local-test.yml
-reports/generated-summary-faq/*.txt
-reports/generated-summary-faq/*.md
-reports/generated-summary-faq/*/

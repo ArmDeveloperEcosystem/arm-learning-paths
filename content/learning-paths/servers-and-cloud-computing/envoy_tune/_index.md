@@ -15,57 +15,9 @@ learning_objectives:
 prerequisites:
     - Cloud or bare-metal installation of an Envoy service
     - Review [Learn how to deploy Envoy](/learning-paths/servers-and-cloud-computing/envoy/) if you do not already have an Envoy setup
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
-
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v3
-  generated_at: '2026-06-03T00:48:49Z'
-  generator: ai
-  ai_assisted: true
-  ai_review_required: true
-  model: gpt-5
-  prompt_template: summary-faq-v3
-  source_hash: cbbcc8fa33f864e422f8db7d58fba32c26f6070be2846b246837c63ccf37e1c7
-  summary_generated_at: '2026-06-02T03:45:17Z'
-  summary_source_hash: cbbcc8fa33f864e422f8db7d58fba32c26f6070be2846b246837c63ccf37e1c7
-  faq_generated_at: '2026-06-03T00:48:49Z'
-  faq_source_hash: cbbcc8fa33f864e422f8db7d58fba32c26f6070be2846b246837c63ccf37e1c7
-  summary: >-
-    Learn how to tune Envoy on Arm servers running Linux—on bare metal or Arm instances from AWS,
-    Microsoft Azure, Google Cloud, or Oracle—using Transparent Huge Pages (THP) and Profile-Guided
-    Optimization (PGO). You will review kernel parameters that affect Envoy, check THP configuration
-    (with an Ubuntu example), and rebuild Envoy with Bazel and LLVM/Clang to apply PGO, using
-    the latest compiler and a recent Bazel as recommended. This advanced path expects an existing
-    Envoy service; if you do not have one, follow the Deploy Envoy Learning Path first. By the
-    end, you will have applied THP settings and produced a PGO-built Envoy binary.
-  faqs:
-  - question: What do I need before running these tuning steps?
-    answer: >-
-      You need a cloud or bare-metal installation of an Envoy service. If you do not already have
-      Envoy set up, review Learn how to deploy Envoy.
-  - question: Which environments does this Learning Path target?
-    answer: >-
-      Linux on Arm servers, including Arm Neoverse in the cloud (AWS, Microsoft Azure, Google
-      Cloud, Oracle) or on bare metal. The guidance is for developers running Envoy on Arm.
-  - question: How do I check my Linux kernel configuration for THP on Ubuntu?
-    answer: >-
-      Run: cat /boot/config-$(uname -r) to inspect your kernel configuration. Use this to verify
-      settings relevant to Transparent Huge Pages.
-  - question: Which toolchain should I use to build Envoy with PGO?
-    answer: >-
-      Build Envoy using Bazel and LLVM/Clang, and use the latest compiler version. It is advisable
-      to build Bazel from the most recent source; refer to the LLVM and Clang documentation for
-      details.
-  - question: What performance improvement should I expect from THP or PGO?
-    answer: >-
-      The Learning Path notes that applying THP can result in an 18% enhancement in performance,
-      and PGO can result in a 10% enhancement. These figures are presented as general guidance.
-# END generated_summary_faq
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Zhengjun Xing
 

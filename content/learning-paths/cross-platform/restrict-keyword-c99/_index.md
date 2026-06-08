@@ -12,60 +12,9 @@ learning_objectives:
 
 prerequisites:
     - An Arm computer running Linux OS and a recent version of compiler (Clang or GCC) installed
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
-
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v3
-  generated_at: '2026-06-02T21:49:44Z'
-  generator: ai
-  ai_assisted: true
-  ai_review_required: true
-  model: gpt-5
-  prompt_template: summary-faq-v3
-  source_hash: 9825df99004e981fadce5884b40b2152f4e43064cbba2cd2129fd90006090678
-  summary_generated_at: '2026-06-01T21:16:11Z'
-  summary_source_hash: 9825df99004e981fadce5884b40b2152f4e43064cbba2cd2129fd90006090678
-  faq_generated_at: '2026-06-02T21:49:44Z'
-  faq_source_hash: 9825df99004e981fadce5884b40b2152f4e43064cbba2cd2129fd90006090678
-  summary: >-
-    This Learning Path shows C developers on Arm Linux how to use the C99 restrict keyword to
-    indicate non-overlapping memory regions so compilers can apply stronger optimizations, including
-    vectorization on AArch64. You will examine a case where overlapping pointers limit optimization,
-    learn the rule-of-thumb for when restrict is valid, and study an SVE2 example with generated
-    code. The steps reference GCC 13 with -O3 -march=armv9-a and compare results with Clang. After
-    completing the path, you will know when and how to apply restrict safely in your own functions.
-    Prerequisites: an Arm computer running Linux with a recent GCC or Clang installed. Estimated
-    time: 30 minutes.
-  faqs:
-  - question: What do I need before running the examples?
-    answer: >-
-      Use an Arm computer running Linux with a recent version of GCC or Clang installed. No additional
-      prerequisites are explicitly listed.
-  - question: Which compiler and options are used in the SVE2 example?
-    answer: >-
-      The example shows output from gcc-13 built with -O3 -march=armv9-a. In this case, GCC 13
-      produced a better result than Clang for the demonstrated function.
-  - question: How do I decide if I can add restrict to a function’s pointer parameters?
-    answer: >-
-      Add restrict when you are certain the pointer arguments refer to non-overlapping memory
-      and those objects are not accessed by any other means inside the function. The path provides
-      a rule of thumb and a counterexample to guide this decision.
-  - question: How do I know that restrict enabled vectorization on Arm?
-    answer: >-
-      Inspect the compiler’s generated output and compare versions with and without restrict.
-      In the SVE2 example, vectorization appears as SVE2 instructions operating on z registers
-      (for example, ld1b and add on z registers).
-  - question: What should I avoid when considering restrict?
-    answer: >-
-      Do not use restrict if the memory regions referenced by pointer arguments may overlap or
-      if the objects can be accessed through other pointers within the function. The path includes
-      a counterexample illustrating when restrict is not appropriate.
-# END generated_summary_faq
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Konstantinos Margaritis
 

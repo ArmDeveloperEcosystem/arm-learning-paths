@@ -13,57 +13,9 @@ learning_objectives:
 prerequisites:
     - A game project that uses advanced rendering features (such as hardware ray tracing) that stretch the performance capabilities of everyday smartphones.
     - A development machine with Git installed.
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
-
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v3
-  generated_at: '2026-06-02T23:51:46Z'
-  generator: ai
-  ai_assisted: true
-  ai_review_required: true
-  model: gpt-5
-  prompt_template: summary-faq-v3
-  source_hash: b194edd6ff4ffc5e39e7daa995271d2ed81ec31c8e88ddf1b23a54eb06dd1d06
-  summary_generated_at: '2026-06-02T02:48:29Z'
-  summary_source_hash: b194edd6ff4ffc5e39e7daa995271d2ed81ec31c8e88ddf1b23a54eb06dd1d06
-  faq_generated_at: '2026-06-02T23:51:46Z'
-  faq_source_hash: b194edd6ff4ffc5e39e7daa995271d2ed81ec31c8e88ddf1b23a54eb06dd1d06
-  summary: >-
-    Learn how to install and integrate Arm Accuracy Super Resolution (Arm ASR)—a mobile-optimized
-    temporal upscaling technique derived from AMD Fidelity Super Resolution 2 v2.2.2—into Android
-    game projects. You will add the ASR plugin to an Unreal Engine project (UE 5.3–5.5 recommended)
-    and complete common setup tasks, or integrate the generic ASR library into a custom engine
-    using either a quick standalone backend or a tight renderer backend. You will manage how ASR
-    upscales content by configuring quality presets, shader variants, and input resources. Prerequisites
-    are a game project that pushes smartphone performance (for example, with hardware ray tracing)
-    and a development machine with Git installed. Estimated completion time is about 40 minutes.
-  faqs:
-  - question: Which Unreal Engine versions should I use for this Learning Path?
-    answer: >-
-      Unreal Engine 5.3–5.5 is recommended. The Arm ASR plugin is available for UE 5.3, 5.4, and
-      5.5.
-  - question: What do I need before running the steps?
-    answer: >-
-      Have a game project that uses advanced rendering features that push everyday smartphones,
-      and a development machine with Git installed. The path targets Android.
-  - question: I’m not using Unreal Engine—how can I integrate Arm ASR?
-    answer: >-
-      Use the generic library. You can choose Quick Integration with the standalone backend or
-      Tight Integration using your engine’s backend/renderer.
-  - question: What configuration areas will I manage when integrating ASR?
-    answer: >-
-      You will work with quality presets, shader variants and extensions, and input resources.
-      These areas control how ASR upscales your content.
-  - question: How is Arm ASR related to AMD FSR2?
-    answer: >-
-      Arm ASR is a mobile-optimized temporal upscaling technique derived from AMD Fidelity Super
-      Resolution 2 v2.2.2, with optimizations for resource-constrained mobile gaming.
-# END generated_summary_faq
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Julie Gaskin
 

@@ -16,60 +16,9 @@ learning_objectives:
 prerequisites:
   - A desktop or laptop running Windows on Arm.
   - Visual Studio 2022 Community Edition, WindowsPerf, WindowsPerf Visual Studio extension, and Windows Performance Analyzer (WPA) installed. 
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
-
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v3
-  generated_at: '2026-06-02T23:36:56Z'
-  generator: ai
-  ai_assisted: true
-  ai_review_required: true
-  model: gpt-5
-  prompt_template: summary-faq-v3
-  source_hash: 1dd709b14537e06c80b9cdee58729cfa7066f44f0de4ceabe5450b33288731aa
-  summary_generated_at: '2026-06-02T02:37:03Z'
-  summary_source_hash: 1dd709b14537e06c80b9cdee58729cfa7066f44f0de4ceabe5450b33288731aa
-  faq_generated_at: '2026-06-02T23:36:56Z'
-  faq_source_hash: 1dd709b14537e06c80b9cdee58729cfa7066f44f0de4ceabe5450b33288731aa
-  summary: >-
-    This introductory Learning Path shows how to install and use the WindowsPerf Visual Studio
-    extension on Windows on Arm to generate counting and sampling reports and analyze performance
-    data in Windows Performance Analyzer (WPA). You configure Visual Studio 2022 Community Edition
-    with WindowsPerf, the WindowsPerf extension, and the WPA tooling, then run counting and sampling
-    sessions from within Visual Studio. You review results in Visual Studio and in WPA, and, if
-    your hardware supports it, explore the SPE subset of the sampling feature. By the end, you
-    can produce and examine WindowsPerf reports as part of a Windows on Arm development workflow.
-    No additional prerequisites are listed beyond the required tools.
-  faqs:
-  - question: What do I need installed before I start?
-    answer: >-
-      You need a Windows on Arm desktop or laptop with Visual Studio 2022 Community Edition, WindowsPerf,
-      the WindowsPerf Visual Studio extension, and Windows Performance Analyzer (WPA). The Learning
-      Path provides install guides for each tool.
-  - question: How do I open and configure the counting settings in Visual Studio?
-    answer: >-
-      In Visual Studio 2022, open the View menu and select Counting Settings to open the dialog.
-      From there, configure the counting parameters as shown in the Learning Path.
-  - question: How do I generate a counting report and review it in WPA?
-    answer: >-
-      After configuring counting, generate a report in Visual Studio and explore the data in the
-      IDE. You can then review the report in Windows Performance Analyzer (WPA) using the WindowsPerf
-      WPA plugin described in the Learning Path.
-  - question: Where do I find the sampling tools and set sampling preferences?
-    answer: >-
-      Open the View menu in Visual Studio 2022 and select Sampling Explorer. In the Sampling Explorer
-      window, use the Configure the sampling command icon to set your preferences.
-  - question: What should I check if the SPE feature does not work on my system?
-    answer: >-
-      The SPE section requires hardware that supports the Arm Statistical Profiling Extension.
-      If your CPU does not support SPE, this feature will not function and you should proceed
-      with the general Sampling feature instead.
-# END generated_summary_faq
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: 
   - Nader Zouaoui

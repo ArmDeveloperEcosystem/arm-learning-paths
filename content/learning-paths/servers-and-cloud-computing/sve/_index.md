@@ -13,60 +13,9 @@ learning_objectives:
 prerequisites:
     - General knowledge about SIMD processing, vectorization or Arm Neon.
     - An Arm computer running Linux. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
-
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v3
-  generated_at: '2026-06-03T02:08:37Z'
-  generator: ai
-  ai_assisted: true
-  ai_review_required: true
-  model: gpt-5
-  prompt_template: summary-faq-v3
-  source_hash: 7b2074e39243a5cd0ccb6a01317c700a4797d8c66353f39aa4197237b6672027
-  summary_generated_at: '2026-06-02T05:14:53Z'
-  summary_source_hash: 7b2074e39243a5cd0ccb6a01317c700a4797d8c66353f39aa4197237b6672027
-  faq_generated_at: '2026-06-03T02:08:37Z'
-  faq_source_hash: 7b2074e39243a5cd0ccb6a01317c700a4797d8c66353f39aa4197237b6672027
-  summary: >-
-    This introductory Learning Path shows how to port SIMD code to Arm Scalable Vector Extension
-    (SVE) on Linux. You will compare Neon and SVE to understand how SVE reduces fixed-length vector
-    constraints, compile C and Fortran code for SVE-capable Arm processors using the GNU toolchain,
-    and run SVE instructions on any Armv8-A system using QEMU or the Arm Instruction Emulator
-    (ArmIE) when dedicated SVE hardware is unavailable. You will build and run a small example
-    and inspect compiler vectorization via disassembly. Prerequisites are general SIMD or Arm
-    Neon knowledge and access to an Arm Linux machine; cloud instances from AWS, Microsoft Azure,
-    Google Cloud, or Oracle can be used. Estimated time to complete is about 30 minutes.
-  faqs:
-  - question: What do I need before running the steps?
-    answer: >-
-      You need general knowledge of SIMD processing and Arm Neon, and access to an Arm computer
-      running Linux. Arm-based cloud instances can be used; see the listed cloud service providers.
-  - question: Which GCC options enable SVE for my build?
-    answer: >-
-      Use -march=armv8-a+sve when compiling (for example, gcc -march=armv8-a+sve myapp.c -o myapp_c.out
-      or gfortran -march=armv8-a+sve myapp.f90 -o myapp_f90.out). Autovectorization with GCC is
-      enabled with -O3 and can be disabled with -fno-tree-vectorize.
-  - question: How can I run SVE instructions if my system lacks SVE hardware?
-    answer: >-
-      Use QEMU or the Arm Instruction Emulator (ArmIE). The path demonstrates both approaches
-      on an Armv8-A system running Ubuntu 22.04 without SVE support.
-  - question: How do I know if the compiler vectorized my code?
-    answer: >-
-      The steps have you compare the disassembly of a simple program with and without autovectorization
-      enabled. You should observe differences in the generated code when building with -O3 versus
-      disabling vectorization.
-  - question: What should I consider when moving from Neon to SVE?
-    answer: >-
-      Neon uses 32 fixed 128-bit vector registers (V0–V31) for integer and floating-point types,
-      while SVE reduces restrictions related to fixed-length vector sizes. The path introduces
-      these differences to guide porting decisions.
-# END generated_summary_faq
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Florent Lebeau
 

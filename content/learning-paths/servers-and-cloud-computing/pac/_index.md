@@ -13,60 +13,9 @@ learning_objectives:
 prerequisites:
     - An Arm based instance from a cloud service provider, or an on-premise Arm server.
     - If needed, review [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) to learn how to deploy Arm in the cloud. These learning paths also point to more advanced learning paths that show how to automate the deployment of Arm instances at different cloud providers.
-    
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
-
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v3
-  generated_at: '2026-06-03T01:45:44Z'
-  generator: ai
-  ai_assisted: true
-  ai_review_required: true
-  model: gpt-5
-  prompt_template: summary-faq-v3
-  source_hash: fa699cafa5c0d998a63de306371bfbe47680c7453b28fc4b35d4fe2671902b23
-  summary_generated_at: '2026-06-02T04:45:16Z'
-  summary_source_hash: fa699cafa5c0d998a63de306371bfbe47680c7453b28fc4b35d4fe2671902b23
-  faq_generated_at: '2026-06-03T01:45:44Z'
-  faq_source_hash: fa699cafa5c0d998a63de306371bfbe47680c7453b28fc4b35d4fe2671902b23
-  summary: >-
-    Use a Linux Arm server to explore Arm Pointer Authentication (PAC) by building and analyzing
-    a small, vulnerable C program. You will compile the application with and without PAC, inspect
-    the generated instructions, and use pwntools to exploit the non-PAC binary (main_nopac) to
-    redirect control flow to an unintended function that launches a shell, then compare behavior
-    with PAC enabled to see how the protection changes the outcome. This advanced path targets
-    Arm-based instances in the cloud or on-premise and takes about 30 minutes. Prerequisite: access
-    to an Arm-based instance; if needed, consult the referenced Get started with Arm-based cloud
-    instances learning paths.
-  faqs:
-  - question: What do I need before running the steps?
-    answer: >-
-      You need access to a Linux Arm-based instance from a cloud provider or an on‑prem Arm server.
-      No other prerequisites are explicitly listed.
-  - question: Can I use any cloud provider for the Arm instance?
-    answer: >-
-      Yes. You can use an Arm-based instance from AWS, Microsoft Azure, Google Cloud, or Oracle,
-      or use an on‑prem Arm server.
-  - question: Which tools do I install to run the exploit code?
-    answer: >-
-      Install pwntools and its dependencies as shown in the steps. The path uses Python 3 and
-      pip to set up pwntools.
-  - question: Which binary should I target when running the exploit?
-    answer: >-
-      Target the application built without Pointer Authentication, referred to as main_nopac in
-      the steps.
-  - question: What result should I expect when the exploit works, and how do I compare with Pointer
-      Authentication enabled?
-    answer: >-
-      A successful exploit will execute func2(), print "Hello from func2!", and spawn a shell.
-      Then build the Pointer Authentication version and follow the steps to inspect the generated
-      instructions and compare behavior.
-# END generated_summary_faq
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Pareena Verma
 

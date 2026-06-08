@@ -13,57 +13,9 @@ learning_objectives:
 
 prerequisites:
     - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud provider or an on-premise Arm server. This Learning Path was tested on an AWS Graviton4 r8g.24xlarge instance.
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
-
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v3
-  generated_at: '2026-06-03T00:39:18Z'
-  generator: ai
-  ai_assisted: true
-  ai_review_required: true
-  model: gpt-5
-  prompt_template: summary-faq-v3
-  source_hash: f600fcba0adea12ff1b8b092e75de553577d940dc3bf632e9a247cec22d364a4
-  summary_generated_at: '2026-06-02T03:31:44Z'
-  summary_source_hash: f600fcba0adea12ff1b8b092e75de553577d940dc3bf632e9a247cec22d364a4
-  faq_generated_at: '2026-06-03T00:39:18Z'
-  faq_source_hash: f600fcba0adea12ff1b8b092e75de553577d940dc3bf632e9a247cec22d364a4
-  summary: >-
-    This Learning Path shows how to deploy and run the DeepSeek-R1 671B language model on Arm-based
-    servers using llama.cpp with quantization for CPU inference. You will clone and build llama.cpp,
-    download a pre-quantized DeepSeek-R1 model from Hugging Face, start the llama.cpp server,
-    and access it via an OpenAI-compatible API. The instructions target Ubuntu 24.04 LTS on an
-    Arm server with at least 64 cores, 512 GB RAM, and 400 GB of disk space; they were tested
-    on an AWS Graviton4 r8g.24xlarge instance. By the end, you will have a running chatbot on
-    your Arm CPU and benchmark its performance. Prerequisite: an Arm-based instance from a cloud
-    provider or an on-prem Arm server.
-  faqs:
-  - question: What do I need before running the steps?
-    answer: >-
-      Use an Arm-based server running Ubuntu 24.04 LTS with at least 64 CPU cores, 512 GB RAM,
-      and 400 GB of disk space. An Arm-based instance from a cloud provider or an on-prem Arm
-      server is suitable; the instructions were tested on an AWS Graviton4 r8g.24xlarge instance.
-  - question: Where do I get the DeepSeek-R1 model and what format is expected?
-    answer: >-
-      Download a pre-quantized DeepSeek-R1 model from Hugging Face as directed in the Learning
-      Path. The steps assume a pre-quantized artifact appropriate for llama.cpp.
-  - question: How do I start and access the model server during this Learning Path?
-    answer: >-
-      After building llama.cpp, start its server mode as shown in the steps. The server provides
-      an OpenAI-compatible API and can be accessed locally or over the network from another machine.
-  - question: Do I need any extra tools to query or work with the API responses?
-    answer: >-
-      Yes. The steps require jq for this section; install it with: sudo apt install jq -y.
-  - question: What should I check if the llama.cpp server binary is missing?
-    answer: >-
-      The server executable is built when you run make in the previous section. Ensure you completed
-      the llama.cpp build step before attempting to start the server.
-# END generated_summary_faq
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author:
     - Tianyu Li

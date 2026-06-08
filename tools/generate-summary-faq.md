@@ -1,18 +1,37 @@
 # Generate Summary/FAQ Tool
 
-Use `tools/generate-summary-faq` to generate AI-assisted summary and FAQ content for Learning Path `_index.md` files.
+Use this tool to generate AI-assisted summary and FAQ content for Arm Learning
+Path `_index.md` files. The generated content is stored in each Learning Path
+front matter under `generated_summary_faq` and is intended as a reviewed draft,
+not as automatically approved content.
 
-The tool always uses the configured LLM endpoint. There is no template or offline generation mode.
+The generator always uses the configured LLM endpoint. There is no offline or
+template-only generation mode.
 
-## Prerequisites
+## What This Tool Does
 
-Set your Arm OpenAI proxy key before running:
+The tool can:
+
+- Generate a summary paragraph and five FAQ entries for selected Learning Paths.
+- Store generated content in the matching Learning Path `_index.md`.
+- Reset control flags after a successful write run so paths are not regenerated accidentally.
+- Produce local `.txt`, `.yml`, and `.md` reports for each run.
+- Process all Learning Paths, one category, one path, newly added paths, or edited paths.
+
+The generated block is labeled AI-assisted in the rendered Learning Path page.
+Generated text should still be reviewed by a human contributor before it is
+treated as final site content.
+
+## One-Time Setup
+
+Set the Arm OpenAI proxy key in your shell before running the generator:
 
 ```bash
 export OPENAI_API_KEY="..."
 ```
 
-Optional endpoint configuration:
+The wrapper defaults to the Arm proxy endpoint and `gpt-5`, but you can override
+them if needed:
 
 ```bash
 export OPENAI_BASE_URL="https://openai-api-proxy.geo.arm.com/api/providers/openai/v1/responses/"
@@ -27,56 +46,43 @@ export OPENAI_CA_BUNDLE="/path/to/arm-ca-bundle.pem"
 
 For local convenience, `tools/generate-summary-faq` automatically bypasses TLS
 verification when no CA bundle is configured. This is intended only for local
-testing against the Arm proxy. If you want to force certificate verification,
-use:
+testing against the Arm proxy. To force certificate verification, use:
 
 ```bash
 tools/generate-summary-faq --all --dry-run --verify-tls
 ```
 
-You can also make the bypass explicit:
+## Quick Start
 
-```bash
-export OPENAI_INSECURE_SKIP_VERIFY="true"
-```
-
-## Common Runs
-
-Default full generation for all opted-in Learning Paths:
+Run all currently opted-in Learning Paths and write the generated content:
 
 ```bash
 ./generate-summary-faq
 ```
 
-The shortcut above is equivalent to:
+That shortcut is equivalent to:
 
 ```bash
 tools/generate-summary-faq --all --write
 ```
 
-Dry-run one category:
+Run a dry run first if you only want reports and no file edits:
 
 ```bash
-tools/generate-summary-faq --category automotive
+tools/generate-summary-faq --all --dry-run
 ```
 
-Write generated content for one category:
+Run one category:
 
 ```bash
-tools/generate-summary-faq --category servers-and-cloud-computing --write
+tools/generate-summary-faq --category laptops-and-desktops --write
 ```
 
-Write generated content for all eligible Learning Paths:
-
-```bash
-tools/generate-summary-faq --all --write
-```
-
-Process a single Learning Path:
+Run one Learning Path:
 
 ```bash
 tools/generate-summary-faq \
-  --path content/learning-paths/servers-and-cloud-computing/nginx_tune \
+  --path content/learning-paths/laptops-and-desktops/wsl2 \
   --write
 ```
 
@@ -86,40 +92,29 @@ List available categories:
 tools/generate-summary-faq --list-categories
 ```
 
-## Including or Excluding Learning Paths
+## Control Flags
 
-By default, the generator only processes Learning Paths with this front-matter flag:
+Each Learning Path uses three front-matter fields:
 
 ```yaml
 generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 ```
 
-Set it to `false` to leave a Learning Path out of generated summary/FAQ runs:
+Use the fields this way:
 
-```yaml
-generate_summary_faq: false
-```
+- `generate_summary_faq: true` opts the Learning Path into the next generator run.
+- `generate_summary_faq: false` leaves the Learning Path out of normal generator runs.
+- `rerun_summary: true` forces the summary to be regenerated.
+- `rerun_faqs: true` forces the FAQs to be regenerated.
 
-After a successful write run, the tool resets `generate_summary_faq` to `false`
-for every processed Learning Path. This keeps future runs from reprocessing
-content unless a contributor intentionally opts the path in again.
+After a successful write run, the generator resets all three fields to `false`
+for processed Learning Paths. This prevents repeated LLM calls unless a
+contributor intentionally opts the path in again.
 
-The `rerun_summary` and `rerun_faqs` fields are separate controls. For a
-Learning Path that already has generated summary/FAQ content, both fields can
-stay `false`; the tool will report the path as unchanged and will not send that
-Learning Path to the LLM again.
-
-Set one or both rerun flags to force regeneration for an existing generated
-section. After a successful write run, the tool resets both rerun flags to
-`false`:
-
-```yaml
-rerun_summary: true
-rerun_faqs: true
-```
-
-New Learning Paths scaffolded from `archetypes/learning-path/_index.md` start
-with:
+New Learning Paths scaffolded from `archetypes/learning-path/_index.md` should
+start with:
 
 ```yaml
 generate_summary_faq: true
@@ -128,7 +123,85 @@ rerun_faqs: false
 ```
 
 If you create a Learning Path by copying an existing folder, confirm these
-three fields manually in the copied `_index.md`.
+fields manually in the copied `_index.md`.
+
+## Set Flags
+
+Use `set-summary-faq-flags` to prepare paths for generation without editing
+front matter by hand.
+
+Set all Learning Paths to regenerate both sections:
+
+```bash
+./set-summary-faq-flags --all --all-true
+```
+
+Reset all Learning Paths back to inactive:
+
+```bash
+./set-summary-faq-flags --all --all-false
+```
+
+Set one category to regenerate both sections:
+
+```bash
+./set-summary-faq-flags --category laptops-and-desktops --all-true
+```
+
+Set one Learning Path to regenerate both sections:
+
+```bash
+./set-summary-faq-flags \
+  --path content/learning-paths/laptops-and-desktops/wsl2 \
+  --all-true
+```
+
+Regenerate only FAQs for a category:
+
+```bash
+tools/set-summary-faq-flags \
+  --category servers-and-cloud-computing \
+  --generate-summary-faq true \
+  --rerun-summary false \
+  --rerun-faqs true
+```
+
+Regenerate only the summary for a category:
+
+```bash
+tools/set-summary-faq-flags \
+  --category laptops-and-desktops \
+  --generate-summary-faq true \
+  --rerun-summary true \
+  --rerun-faqs false
+```
+
+## New Or Edited Learning Paths
+
+Most day-to-day use should be branch based. If your feature branch adds new
+Learning Paths, compare it against the latest `origin/main`:
+
+```bash
+git fetch origin main
+git checkout your-feature-branch
+./set-summary-faq-flags --new-since origin/main --all-true
+./generate-summary-faq
+```
+
+If your feature branch edits existing Learning Paths, use `--changed-since`:
+
+```bash
+git fetch origin main
+git checkout your-feature-branch
+./set-summary-faq-flags --changed-since origin/main --all-true
+./generate-summary-faq
+```
+
+`--new-since` finds Learning Paths that exist on your branch but not on
+`origin/main`. `--changed-since` finds Learning Paths changed on your branch
+since `origin/main`, including newly added paths.
+
+## When The LLM Is Called
 
 The LLM is called only when at least one section needs work:
 
@@ -141,51 +214,60 @@ rerun_faqs is true
 existing generated content used a non-AI generator
 ```
 
-## Output
+If a Learning Path already has generated content and both rerun flags are
+`false`, the tool preserves the existing content and does not send that path to
+the LLM.
 
-Each run writes three local artifacts under:
+Draft Learning Paths are skipped.
+
+## Reports And Logs
+
+Each run writes local artifacts under:
 
 ```text
 reports/generated-summary-faq/
 ```
 
-The files are:
+For a category or path run, the files are:
 
 ```text
 <run-name>.txt  progress log and terminal-style output
-<run-name>.yml  structured report with latest run and retained history
-<run-name>.md   local Markdown report with tables for review
+<run-name>.yml  structured report with run details
+<run-name>.md   Markdown report with review tables
 ```
 
-When you run all Learning Paths, the tool still treats that as one parent run,
-but it splits the actual work by top-level category to reduce timeout/context
-risk. In that case, the artifacts are grouped in one run directory:
+For an all-path run, the tool creates one run directory:
 
 ```text
 reports/generated-summary-faq/<run-name>/
-run.txt          aggregate progress log for the whole run
-run.yml          aggregate structured report for the whole run
-run.md           aggregate Markdown report for the whole run
+run.txt          aggregate progress log for the whole command
+run.yml          aggregate structured report for the whole command
+run.md           aggregate Markdown report for the whole command
 automotive.yml   per-category structured report
 automotive.md    per-category Markdown report
 ...
 ```
 
-Use the aggregate `run.md` first. It links to the per-category Markdown reports
-when you need the deeper breakdown.
+Start with the aggregate `run.md`. It links to the per-category Markdown reports
+when you need a deeper breakdown.
 
-Each run also refreshes these stable report snapshots:
+Each run also refreshes:
 
 ```text
 reports/generated-summary-faq/latest-run.yml
 reports/generated-summary-faq/latest-run.md
 ```
 
-Those snapshots point at the most recent local run data, so you do not have to
-guess which timestamped folder was produced last. The per-command terminal log
-remains in the run folder as `run.txt`.
+These files point to the most recent local run, so you do not have to guess
+which timestamped folder was produced last.
 
-Use `--run-name` to make output filenames predictable:
+Open a Markdown report locally:
+
+```bash
+open reports/generated-summary-faq/latest-run.md
+```
+
+Use `--run-name` to make report filenames predictable:
 
 ```bash
 tools/generate-summary-faq \
@@ -194,50 +276,10 @@ tools/generate-summary-faq \
   --write
 ```
 
-That creates:
-
-```text
-reports/generated-summary-faq/servers-and-cloud-computing.txt
-reports/generated-summary-faq/servers-and-cloud-computing.yml
-reports/generated-summary-faq/servers-and-cloud-computing.md
-```
-
-For all Learning Paths:
-
-```bash
-tools/generate-summary-faq \
-  --all \
-  --run-name all-learning-paths-test \
-  --write
-```
-
-That creates:
-
-```text
-reports/generated-summary-faq/all-learning-paths-test/run.txt
-reports/generated-summary-faq/all-learning-paths-test/run.yml
-reports/generated-summary-faq/all-learning-paths-test/run.md
-```
-
-Open the `.md` file locally to review the table-style run overview:
-
-```bash
-open reports/generated-summary-faq/servers-and-cloud-computing.md
-```
-
-The Markdown report is intentionally plain Markdown, so it can also be copied into a page or wired into a local Hugo-only report page later.
-
-For example, to write the Markdown report somewhere else:
-
-```bash
-tools/generate-summary-faq \
-  --category automotive \
-  --markdown-report /tmp/automotive-summary-faq-report.md
-```
-
 ## Timeout Tuning
 
-For larger categories or occasional read timeouts, use smaller prompts and more retries:
+For larger categories or occasional read timeouts, use smaller prompts and more
+retries:
 
 ```bash
 tools/generate-summary-faq \
@@ -248,3 +290,18 @@ tools/generate-summary-faq \
   --excerpt-chars 600 \
   --write
 ```
+
+## Recommended PR Flow
+
+For a normal PR that adds or edits Learning Paths:
+
+1. Update your branch from main.
+2. Set flags for new or changed Learning Paths with `set-summary-faq-flags`.
+3. Run `./generate-summary-faq`.
+4. Review the generated `_index.md` changes and the Markdown report.
+5. Edit or remove generated content if human review finds issues.
+6. Run the site locally and confirm the generated block renders correctly.
+
+For the initial bulk rollout, keep generated summary/FAQ content out of the PR.
+The PR should include the tool, prompts, rendering, and default flags. The first
+fresh generation can happen after the PR lands on main.

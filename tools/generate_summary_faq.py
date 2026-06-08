@@ -87,6 +87,8 @@ RERUN_FAQS_FLAG = "rerun_faqs"
 GENERATED_KEY = "generated_summary_faq"
 MANAGED_START = "# START generated_summary_faq"
 MANAGED_END = "# END generated_summary_faq"
+CONTROL_CHARACTER_PATTERN = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f]")
+SUMMARY_FIRST_PERSON_PATTERN = re.compile(r"(?:\bI\b(?!/)|(?i:\b(?:we|my|our|ours|let's)\b))")
 
 TEMPLATE_VERSION = "summary-faq-v3"
 PROMPT_TEMPLATE_VERSION = "summary-faq-v3"
@@ -459,6 +461,15 @@ def compact_whitespace(value: str) -> str:
     return re.sub(r"\s+", " ", value).strip()
 
 
+def sanitize_generated_text(value: str) -> str:
+    def replacement(match: re.Match[str]) -> str:
+        if match.group(0) == "\x0b":
+            return r"\v"
+        return " "
+
+    return CONTROL_CHARACTER_PATTERN.sub(replacement, value)
+
+
 def strip_markdown_links(text: str) -> str:
     text = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", text)
     text = re.sub(r"`([^`]+)`", r"\1", text)
@@ -604,11 +615,17 @@ def extract_json_object(text: str) -> Dict[str, Any]:
 
 
 def validate_ai_summary_faq(payload: Dict[str, Any]) -> Dict[str, Any]:
-    summary = compact_whitespace(str(payload.get("summary", "")))
+    summary = compact_whitespace(sanitize_generated_text(str(payload.get("summary", ""))))
     raw_faqs = payload.get("faqs")
 
     if not summary:
         raise ValueError("AI response did not include a non-empty summary.")
+    first_person_match = SUMMARY_FIRST_PERSON_PATTERN.search(summary)
+    if first_person_match:
+        raise ValueError(
+            f"AI summary used first-person wording ({first_person_match.group(0)!r}); "
+            "summaries must use an editorial Learning Path voice."
+        )
     if not isinstance(raw_faqs, list) or not raw_faqs:
         raise ValueError("AI response did not include a non-empty faqs list.")
 
@@ -616,8 +633,8 @@ def validate_ai_summary_faq(payload: Dict[str, Any]) -> Dict[str, Any]:
     for raw_faq in raw_faqs:
         if not isinstance(raw_faq, dict):
             continue
-        question = compact_whitespace(str(raw_faq.get("question", "")))
-        answer = compact_whitespace(str(raw_faq.get("answer", "")))
+        question = compact_whitespace(sanitize_generated_text(str(raw_faq.get("question", ""))))
+        answer = compact_whitespace(sanitize_generated_text(str(raw_faq.get("answer", ""))))
         if question and answer:
             faqs.append({"question": question, "answer": answer})
 

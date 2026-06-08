@@ -1,59 +1,9 @@
 ---
 title: Run the AV1 and VP9 codecs on Arm Linux
 description: Learn how to build and run the AV1 and VP9 video codecs on Arm Linux systems with performance benchmarking across various resolutions and encoding configurations.
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
-
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v3
-  generated_at: '2026-06-03T00:36:28Z'
-  generator: ai
-  ai_assisted: true
-  ai_review_required: true
-  model: gpt-5
-  prompt_template: summary-faq-v3
-  source_hash: c0643a788cdb0b3e33fe645fbb61d99a1899806e3ee197541c1eb8134b2876c1
-  summary_generated_at: '2026-06-02T03:27:16Z'
-  summary_source_hash: c0643a788cdb0b3e33fe645fbb61d99a1899806e3ee197541c1eb8134b2876c1
-  faq_generated_at: '2026-06-03T00:36:28Z'
-  faq_source_hash: c0643a788cdb0b3e33fe645fbb61d99a1899806e3ee197541c1eb8134b2876c1
-  summary: >-
-    Learn how to build and run the AV1 (libaom) and VP9 (libvpx) video codecs on Arm Linux, then
-    benchmark them on example videos using multiple resolutions and encoding configurations. You
-    will install build dependencies such as CMake and the GNU compiler, obtain the codec sources,
-    compile on an Arm server or Arm-based cloud instance, and execute encoding and decoding workloads.
-    The reference implementations include Arm-focused optimizations, including use of Neon and
-    SVE2 on Arm Neoverse platforms. By the end, you will be able to run these codecs on your Arm
-    system and record performance results. No further prerequisites are listed beyond access to
-    an Arm Linux environment.
-  faqs:
-  - question: What do I need before running the steps?
-    answer: >-
-      You need access to an Arm Linux system or an Arm-based instance from a cloud service provider.
-      No other explicit prerequisites are listed.
-  - question: Which codecs and libraries are used in this path?
-    answer: >-
-      AV1 is built and run using the libxaom reference implementation, and VP9 is built and run
-      using libvpx. Both libraries support encoding and decoding.
-  - question: Which development tools do I need to install to build the codecs?
-    answer: >-
-      You need various development tools including CMake and the GNU compiler. The steps provide
-      installation instructions for the required packages.
-  - question: Where do I obtain the source code for the codecs?
-    answer: >-
-      For VP9, the path clones libvpx from https://chromium.googlesource.com/webm/libvpx. For
-      AV1, the reference implementation and Arm-optimized code for libxaom are available on Google
-      Git.
-  - question: What results should I expect after completing the path?
-    answer: >-
-      You will have built the AV1 and VP9 codecs on Arm Linux and run them on example videos at
-      various resolutions and encodings. You will also collect performance measurements to compare
-      configurations, with notes on Arm Neoverse optimizations using Neon and SVE2.
-# END generated_summary_faq
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Odin Shen
 

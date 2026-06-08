@@ -19,60 +19,9 @@ prerequisites:
     - A computer running Linux or macOS.
     - A USB-C cable for the board's **DBG** serial connection.
     - A USB-C power supply/cable for the board's **POWER** port.
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
-
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v3
-  generated_at: '2026-06-02T22:28:35Z'
-  generator: ai
-  ai_assisted: true
-  ai_review_required: true
-  model: gpt-5
-  prompt_template: summary-faq-v3
-  source_hash: 567387e8e513458a360f74c14d3f4d02c4af392bc573620e605c93976e4d8b4f
-  summary_generated_at: '2026-06-01T21:43:12Z'
-  summary_source_hash: 567387e8e513458a360f74c14d3f4d02c4af392bc573620e605c93976e4d8b4f
-  faq_generated_at: '2026-06-02T22:28:35Z'
-  faq_source_hash: 567387e8e513458a360f74c14d3f4d02c4af392bc573620e605c93976e4d8b4f
-  summary: >-
-    This Learning Path shows how to bring up Linux on the NXP FRDM i.MX 93 board and prepare it
-    for on-device development. You will boot and log in over the DBG serial console, create a
-    non-root user with sudo access, connect to WiFi using ConnMan, and transfer files to the board
-    with OpenSSH scp or a USB drive. An optional step configures the WiFi driver to load at boot
-    so ConnMan can reconnect automatically after a reboot. It targets embedded developers and
-    ML engineers working with Arm Cortex-A55–based hardware. Prerequisites include the FRDM i.MX
-    93 board, a Linux or macOS host, and USB-C cables for power and serial. Estimated time: 120
-    minutes.
-  faqs:
-  - question: What do I need before powering the board?
-    answer: >-
-      You need an NXP FRDM i.MX 93 board, a Linux or macOS host computer, a USB-C cable for the
-      DBG serial connection, and a USB-C power supply for the POWER port. These are the explicit
-      prerequisites.
-  - question: How do I access the Linux console on the board?
-    answer: >-
-      Connect your host to the board’s DBG serial port over USB-C and use a serial console tool
-      such as picocom. You will boot the board and log in over the serial console as described
-      in the steps.
-  - question: Which tool should I use to connect to WiFi, and how do I verify it worked?
-    answer: >-
-      Use ConnMan (via connmanctl) to join your WiFi network. To verify connectivity, run ifconfig
-      and look for the WiFi interface (often mlan0) and its inet address.
-  - question: How do I transfer files to the board during development?
-    answer: >-
-      Use scp over WiFi by targeting the board’s IP address and destination path. If WiFi is unavailable,
-      you can move files with a USB drive.
-  - question: What should I check if WiFi does not reconnect after a reboot?
-    answer: >-
-      Load the WiFi driver module after boot using the provided modprobe command so ConnMan can
-      reconnect to the saved network. Give it up to a minute to establish a link, then confirm
-      with ifconfig.
-# END generated_summary_faq
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Waheed Brown
 

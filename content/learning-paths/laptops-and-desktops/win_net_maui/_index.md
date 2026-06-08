@@ -14,60 +14,9 @@ learning_objectives:
 prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
     - Visual Studio 2022 with .NET Multi-platform App UI development and Universal Windows Platform development installed.
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
-
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v3
-  generated_at: '2026-06-02T23:28:34Z'
-  generator: ai
-  ai_assisted: true
-  ai_review_required: true
-  model: gpt-5
-  prompt_template: summary-faq-v3
-  source_hash: 037509ebca3a7c5a58bef247532919cd8196c7993e946ce519585cdc82073daa
-  summary_generated_at: '2026-06-01T22:17:25Z'
-  summary_source_hash: 037509ebca3a7c5a58bef247532919cd8196c7993e946ce519585cdc82073daa
-  faq_generated_at: '2026-06-02T23:28:34Z'
-  faq_source_hash: 037509ebca3a7c5a58bef247532919cd8196c7993e946ce519585cdc82073daa
-  summary: >-
-    This path shows how to create and build a cross-platform .NET MAUI application on Windows
-    on Arm and measure code execution performance uplift on Arm64. Using Visual Studio 2022, you
-    will start a new MAUI project, add C# helper classes to generate pseudo-random double-precision
-    vectors and compute a*b+c, measure execution time with a PerformanceHelper, and present results
-    in a list view. Prerequisites are a Windows on Arm computer such as a Lenovo Thinkpad X13s
-    running Windows 11, or a Windows on Arm virtual machine, plus Visual Studio 2022 with .NET
-    Multi-platform App UI development and Universal Windows Platform development installed. The
-    path is introductory and takes about 30 minutes.
-  faqs:
-  - question: What do I need before running the steps?
-    answer: >-
-      Use a Windows on Arm computer such as a Lenovo ThinkPad X13s running Windows 11, or a Windows
-      on Arm virtual machine. Install Visual Studio 2022 with the .NET Multi-platform App UI development
-      and Universal Windows Platform development workloads.
-  - question: Which Visual Studio components should I install?
-    answer: >-
-      Install Visual Studio 2022 with the .NET Multi-platform App UI development workload and
-      the Universal Windows Platform development workload. These are explicitly listed prerequisites.
-  - question: Which project type should I create in Visual Studio?
-    answer: >-
-      Create a .NET MAUI project. The Learning Path focuses on building and running it on Windows
-      on Arm.
-  - question: What code will I add to measure performance and what does it compute?
-    answer: >-
-      You will add a PerformanceHelper class to measure code execution time and a VectorHelper
-      class that implements AdditionOfProduct, computing a*b+c over pseudo-random double-precision
-      vectors. A list view displays the processing results.
-  - question: How do I know the performance measurement part worked?
-    answer: >-
-      Build and run the app on Windows on Arm and check that the UI displays processing results
-      and execution times. The Learning Path does not specify expected numbers; you use the reported
-      timings to observe Arm64 performance.
-# END generated_summary_faq
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Dawid Borycki
 

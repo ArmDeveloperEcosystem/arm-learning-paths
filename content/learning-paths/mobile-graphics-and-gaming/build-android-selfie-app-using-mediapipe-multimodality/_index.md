@@ -19,63 +19,9 @@ prerequisites:
     - Familiarity with Android development concepts.
     - Basic knowledge of Modern Android Architecture. See [Modern Android App Architecture](https://developer.android.com/courses/pathways/android-architecture).
     - Basic knowledge of Kotlin programming language, including [Coroutines](https://kotlinlang.org/docs/coroutines-overview.html) and [Kotlin Flows](https://kotlinlang.org/docs/flow.html).
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
-
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v3
-  generated_at: '2026-06-02T23:49:17Z'
-  generator: ai
-  ai_assisted: true
-  ai_review_required: true
-  model: gpt-5
-  prompt_template: summary-faq-v3
-  source_hash: 13ff69755e51c6d7c355616f95703b3f2cefaedcf1f8dbeab31fe2e3db9aec74
-  summary_generated_at: '2026-06-02T02:46:24Z'
-  summary_source_hash: 13ff69755e51c6d7c355616f95703b3f2cefaedcf1f8dbeab31fe2e3db9aec74
-  faq_generated_at: '2026-06-02T23:49:17Z'
-  faq_source_hash: 13ff69755e51c6d7c355616f95703b3f2cefaedcf1f8dbeab31fe2e3db9aec74
-  summary: >-
-    Build a hands-free selfie Android app that runs on a recent Arm-powered Android phone using
-    MediaPipe multimodal AI, Kotlin Flows, CameraX, and an MVVM architecture. You will set up
-    Android Studio, connect a device with USB debugging, manage camera permissions, add MediaPipe
-    dependencies, and incorporate Jetpack Lifecycle components. The path shows how to combine
-    MediaPipe face landmark detection and gesture recognition, access camera features with CameraX,
-    and handle multiple asynchronous data streams with SharedFlow and StateFlow. Prerequisites
-    include Android Studio, a front-facing camera device, familiarity with Android development
-    and Modern Android Architecture, and basic Kotlin knowledge (Coroutines and Flows). Estimated
-    time to complete is about 120 minutes.
-  faqs:
-  - question: What do I need before running the app on a device?
-    answer: >-
-      Install Android Studio on your development machine and have a recent Arm-powered Android
-      phone with a front-facing camera and a USB data cable. You should be familiar with Android
-      development, Modern Android Architecture, Kotlin Coroutines, and Kotlin Flows.
-  - question: How do I know my Android Studio setup is complete before coding?
-    answer: >-
-      Open Android Studio, accept license agreements, download all required assets, and choose
-      the default or recommended settings. These steps prepare the environment used throughout
-      the Learning Path.
-  - question: How do I set up and verify device debugging over USB?
-    answer: >-
-      Enable USB debugging on your device, then connect it by USB and tap OK on the Allow USB
-      debugging dialog. Check Always allow from this computer so Android Studio can deploy and
-      debug the app without repeated prompts.
-  - question: Which option should I use to access the camera in this app?
-    answer: >-
-      Use JetPack CameraX to access camera features. Camera permissions are handled in a dedicated
-      step before running the app on your device.
-  - question: How do I add MediaPipe and handle UI state and events?
-    answer: >-
-      Add MediaPipe dependencies by updating libs.versions.toml and project settings as shown
-      in the steps that introduce MediaPipe Solutions and Tasks. Manage UI state with ViewModel
-      and Jetpack Lifecycle, and use SharedFlow and StateFlow to emit and observe UI events and
-      state across multiple subscribers.
-# END generated_summary_faq
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Han Yin
 

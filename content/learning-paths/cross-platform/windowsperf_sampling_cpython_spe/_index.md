@@ -18,61 +18,9 @@ prerequisites:
     - An installation of [WindowsPerf](/install-guides/wperf).
     - An installation of [Visual Studio](/install-guides/vs-woa/).
     - An installation of [Git](/install-guides/git-woa/).
-  
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
-
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v3
-  generated_at: '2026-06-02T21:55:45Z'
-  generator: ai
-  ai_assisted: true
-  ai_review_required: true
-  model: gpt-5
-  prompt_template: summary-faq-v3
-  source_hash: bf887ef2481b51cf6c32e49e3eb1d5577346b7b9b1e4d6a604c559597b5306f0
-  summary_generated_at: '2026-06-01T21:22:34Z'
-  summary_source_hash: bf887ef2481b51cf6c32e49e3eb1d5577346b7b9b1e4d6a604c559597b5306f0
-  faq_generated_at: '2026-06-02T21:55:45Z'
-  faq_source_hash: bf887ef2481b51cf6c32e49e3eb1d5577346b7b9b1e4d6a604c559597b5306f0
-  summary: >-
-    This introductory path shows how to sample and profile CPU instructions on Windows on Arm
-    using WindowsPerf with the Arm Statistical Profiling Extension (SPE), demonstrated on a CPython
-    workload. You will install and use the SPE-enabled WindowsPerf build, verify that your Windows
-    on Arm machine supports SPE, and build CPython from source for AArch64 with Visual Studio
-    and Git. The steps pin the CPython debug binary to a specific core, run a large integer computation,
-    and use WindowsPerf sampling and record commands to collect and explore SPE events (such as
-    load events) from the workload. By the end, you will understand the basics of SPE sampling
-    and have hands-on experience collecting instruction-level samples for a native Windows on
-    Arm application.
-  faqs:
-  - question: What do I need before running the examples?
-    answer: >-
-      You need a Windows on Arm machine with CPU support for Arm SPE, WindowsPerf (driver and
-      wperf CLI) installed, Visual Studio, and Git. These are explicitly listed in the Setup step.
-  - question: How do I check if my Arm CPU supports SPE?
-    answer: >-
-      The Setup step includes guidance on verifying CPU support for Arm SPE. Follow that section
-      before proceeding with sampling or recording.
-  - question: Which WindowsPerf build should I use for SPE?
-    answer: >-
-      WindowsPerf release 3.8.0 includes a separate build with Arm SPE support located in the
-      SPE/ subdirectory of the release assets. Use that build when following the SPE steps.
-  - question: What workload is used to exercise CPython during sampling?
-    answer: >-
-      The path uses a debug-built CPython (python_d.exe) to compute 10**10**100, and pins the
-      process to CPU core 1. The Windows start command is used to launch and pin the process as
-      shown in the steps.
-  - question: In the wperf record example, what does the “--” mean and what data is captured?
-    answer: >-
-      The double dash separates wperf options from the arguments passed to the profiled program
-      (python_d.exe). The example records Arm SPE load events using arm_spe_0/ld=1/ on core 1
-      for 5 seconds, producing a recording you can inspect.
-# END generated_summary_faq
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Przemyslaw Wirkus
 

@@ -13,59 +13,9 @@ learning_objectives:
 
 prerequisites:
     - A [Google Cloud](https://cloud.google.com/) account with access to Axion based instances (C4A).
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
-
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v3
-  generated_at: '2026-06-03T01:12:09Z'
-  generator: ai
-  ai_assisted: true
-  ai_review_required: true
-  model: gpt-5
-  prompt_template: summary-faq-v3
-  source_hash: e6f73fbca45a1be1644f79bbcfbaaec964e31f1aab236e9a872c72a6fd5e4b66
-  summary_generated_at: '2026-06-02T04:09:25Z'
-  summary_source_hash: e6f73fbca45a1be1644f79bbcfbaaec964e31f1aab236e9a872c72a6fd5e4b66
-  faq_generated_at: '2026-06-03T01:12:09Z'
-  faq_source_hash: e6f73fbca45a1be1644f79bbcfbaaec964e31f1aab236e9a872c72a6fd5e4b66
-  summary: >-
-    Learn how to deploy and evaluate a Java workload on Google Cloud Axion instances built on
-    Armv9 Neoverse V2. You will create an Arm-based VM using the gcloud CLI, install Java on Ubuntu
-    24.04, and build and deploy the Spring Petclinic application. The path then uses jmeter (with
-    a provided JMX file) to exercise the application, compare JDK versions, and test common JVM
-    performance optimization flags. You can also compare Axion results with previous-generation
-    Google Cloud Arm instances. This introductory path targets developers running Java on Arm
-    in Google Cloud. Prerequisite: a Google Cloud account with access to Axion-based (C4A) instances.
-  faqs:
-  - question: What do I need before creating the VM?
-    answer: >-
-      You need a Google Cloud account with access to Axion-based instances (C4A). No other explicit
-      prerequisites are listed.
-  - question: Which method should I use to create the Axion VM?
-    answer: >-
-      There are multiple options: Google Cloud console, the gcloud CLI, or Infrastructure as Code.
-      This guide uses the gcloud CLI.
-  - question: How do I connect to the instance, and which OS is used?
-    answer: >-
-      Use the Google Cloud console’s SSH button to open a shell to the VM. The guide uses an Ubuntu
-      24.04 image on the Axion instance.
-  - question: Which Java package should I install and how do I verify it?
-    answer: >-
-      Install the default JRE using apt and verify with java -version. The example output shows
-      an OpenJDK 21.x release.
-  - question: What application and tool are used for performance testing, and how should I run
-      the tests?
-    answer: >-
-      You deploy the Spring Petclinic application and test it with jmeter using the JMX file in
-      the spring-petclinic repo. Open a new SSH terminal so the running application is not interrupted,
-      then compare results across JDK versions and common JVM flags; comparing Axion to previous-generation
-      Arm instances is optional.
-# END generated_summary_faq
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Joe Stech
 

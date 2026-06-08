@@ -15,58 +15,9 @@ learning_objectives:
 
 prerequisites:
     - An Arm computer running Linux. You can also use a virtual machine from a [cloud service provider](/learning-paths/servers-and-cloud-computing/csp/).
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
-
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v3
-  generated_at: '2026-06-02T21:33:42Z'
-  generator: ai
-  ai_assisted: true
-  ai_review_required: true
-  model: gpt-5
-  prompt_template: summary-faq-v3
-  source_hash: a639e60da034fd04e891c9236e9fe5dab47cca87f6174828275ef5a76c43c32e
-  summary_generated_at: '2026-06-01T21:02:47Z'
-  summary_source_hash: a639e60da034fd04e891c9236e9fe5dab47cca87f6174828275ef5a76c43c32e
-  faq_generated_at: '2026-06-02T21:33:42Z'
-  faq_source_hash: a639e60da034fd04e891c9236e9fe5dab47cca87f6174828275ef5a76c43c32e
-  summary: >-
-    Learn how to improve the runtime of C++ loops on Arm by conveying loop-size boundaries to
-    the compiler. You will start from a baseline program where the loop size is only known at
-    runtime, then modify the code to enforce a multiple-of-4 loop size using integer-division
-    truncation. This developer knowledge enables the compiler to generate better code, potentially
-    including SIMD vectorization, and lets you compare the performance impact on Arm systems.
-    The path runs on Linux and targets Arm CPUs such as Neoverse and Cortex-A. Prerequisite: an
-    Arm computer running Linux, or a Linux VM from a cloud service provider.
-  faqs:
-  - question: What do I need before running the code examples?
-    answer: >-
-      You need an Arm computer running Linux, or you can use a Linux virtual machine from a cloud
-      service provider. No other explicit prerequisites are listed.
-  - question: How is the loop size provided in the baseline program, and why does that matter?
-    answer: >-
-      The baseline program reads max_loop_size from user input at runtime. Because the compiler
-      does not know this bound at compile time, it must generate conservative code.
-  - question: Why does rewriting the loop bound as ((max_loop_size/4)*4) help the compiler?
-    answer: >-
-      Integer division truncates, so (max_loop_size/4)*4 is always divisible by 4. Communicating
-      this constraint can enable SIMD vectorization and better code generation for that specific
-      case.
-  - question: What result should I expect after applying the boundary information?
-    answer: >-
-      The loop will iterate up to the largest multiple of 4 that does not exceed the original
-      input size. You can then compare and analyze runtime behavior and performance impact against
-      the baseline.
-  - question: Do I need any specific tools or compiler options to follow this path?
-    answer: >-
-      The steps focus on C++ source changes using the provided examples. Specific compiler options
-      or additional tools are not explicitly listed.
-# END generated_summary_faq
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Kieran Hejmadi
 

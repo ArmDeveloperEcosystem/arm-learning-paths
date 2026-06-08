@@ -14,57 +14,9 @@ learning_objectives:
 prerequisites:
     - Familiarity with Arm assembly.
     - LLVM version 16 or newer, which includes support for Neoverse V2.
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
-
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v3
-  generated_at: '2026-06-02T21:45:53Z'
-  generator: ai
-  ai_assisted: true
-  ai_review_required: true
-  model: gpt-5
-  prompt_template: summary-faq-v3
-  source_hash: c86322d497541344f92907315793ab990669aa08bef994b0ce9ff1e32a5ba055
-  summary_generated_at: '2026-06-01T21:11:17Z'
-  summary_source_hash: c86322d497541344f92907315793ab990669aa08bef994b0ce9ff1e32a5ba055
-  faq_generated_at: '2026-06-02T21:45:53Z'
-  faq_source_hash: c86322d497541344f92907315793ab990669aa08bef994b0ce9ff1e32a5ba055
-  summary: >-
-    This introductory Learning Path shows how to analyze Arm assembly performance with LLVM Machine
-    Code Analyzer (llvm-mca) and Compiler Explorer. You will run llvm-mca on a small Arm assembly
-    example that sums six values, interpret estimated cycles and hardware resource pressure, and
-    use those metrics to diagnose a possible performance issue and improve the snippet. A brief
-    background section introduces instruction scheduling and pipelines. The path is relevant to
-    Arm cores such as Cortex-A and Neoverse, and notes that LLVM 16 or newer includes support
-    for Neoverse V2. It can be followed on Linux, Windows, or macOS, and also via a browser using
-    Compiler Explorer. Familiarity with Arm assembly is expected; no other explicit prerequisites
-    are listed. Estimated time to complete is about 60 minutes.
-  faqs:
-  - question: Can I use llvm-mca without installing LLVM locally?
-    answer: >-
-      Yes. The path shows how to run llvm-mca in Compiler Explorer at godbolt.org, which provides
-      llvm-mca as an online tool.
-  - question: What do I need to run llvm-mca on my machine?
-    answer: >-
-      You need familiarity with Arm assembly and LLVM version 16 or newer. The path can be followed
-      on Linux, Windows, or macOS.
-  - question: What source code does the path analyze?
-    answer: >-
-      An Arm assembly snippet saved as sum_test1.s that computes the sum of six numbers using
-      add instructions.
-  - question: What output should I expect from llvm-mca, and how is it used?
-    answer: >-
-      Expect estimates of cycles and hardware resource pressure. The path explains the expected
-      output and how to use these metrics to identify a potential performance issue in the example.
-  - question: Which LLVM version includes support for Neoverse V2?
-    answer: >-
-      LLVM 16 or newer includes support for Neoverse V2, as noted in the prerequisites.
-# END generated_summary_faq
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Asher Dobrescu
 

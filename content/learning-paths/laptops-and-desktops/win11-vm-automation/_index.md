@@ -15,58 +15,9 @@ learning_objectives:
 
 prerequisites:
     - An Arm Linux system with KVM support and a minimum of 8GB RAM and 50GB free disk space
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
-
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v3
-  generated_at: '2026-06-02T23:15:47Z'
-  generator: ai
-  ai_assisted: true
-  ai_review_required: true
-  model: gpt-5
-  prompt_template: summary-faq-v3
-  source_hash: 915f6eb5e95bd42ed09b727b4599855d965125e67a8761fbd48a124e9e74b1bc
-  summary_generated_at: '2026-06-01T22:11:02Z'
-  summary_source_hash: 915f6eb5e95bd42ed09b727b4599855d965125e67a8761fbd48a124e9e74b1bc
-  faq_generated_at: '2026-06-02T23:15:47Z'
-  faq_source_hash: 915f6eb5e95bd42ed09b727b4599855d965125e67a8761fbd48a124e9e74b1bc
-  summary: >-
-    This introductory path shows how to install and run Windows 11 on Arm virtual machines on
-    an Arm Linux system using QEMU, KVM, and two Bash automation scripts. You will clone a GitHub
-    project, understand the script structure to customize options, and create a complete VM with
-    a single command that stores its data in a directory you choose. You will then launch the
-    VM with a run script that checks status, starts headless when needed, and connects over RDP
-    using Remmina. The path is intended for developers and system administrators building or testing
-    on Windows on Arm. Prerequisite: an Arm Linux host with KVM support, at least 8 GB RAM and
-    50 GB free disk space.
-  faqs:
-  - question: What do I need before running the VM automation scripts?
-    answer: >-
-      An Arm Linux system with KVM support and at least 8GB RAM and 50GB free disk space. This
-      path assumes you will run QEMU/KVM on that host.
-  - question: How do I get the automation scripts onto my Arm Linux system?
-    answer: >-
-      Clone the GitHub repository and change into the project directory: git clone https://github.com/jasonrandrews/win11arm.git;
-      cd win11arm.
-  - question: Which command should I use to create a new Windows on Arm VM quickly?
-    answer: >-
-      Run: ./create-win11-vm.sh all $HOME/win11-vm. This uses default values for all configurable
-      parameters and stores the VM data in $HOME/win11-vm while Windows installs automatically.
-  - question: How do I start and connect to the VM after it is created?
-    answer: >-
-      Run: ./run-win11-vm.sh $HOME/win11-vm. The script checks if the VM is already running, starts
-      it in headless mode if needed, and connects via RDP using Remmina.
-  - question: What should I check if VM creation or startup fails?
-    answer: >-
-      Confirm your system meets the prerequisites and that KVM is available on your Arm Linux
-      host. Verify the VM directory path you pass to the scripts is correct, then re-run the command;
-      the Learning Path includes guidance for troubleshooting common setup and runtime issues.
-# END generated_summary_faq
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Jason Andrews
 

@@ -19,62 +19,9 @@ prerequisites:
     - A debuggable build of your application. 
     - Arm Performance Studio installed. Follow the [Arm Performance Studio install guide](/install-guides/ams) for instructions.
     - Android SDK Platform tools installed. Required for the Android Debug bridge (adb).
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
-
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v3
-  generated_at: '2026-06-02T23:41:00Z'
-  generator: ai
-  ai_assisted: true
-  ai_review_required: true
-  model: gpt-5
-  prompt_template: summary-faq-v3
-  source_hash: 3d1a743c1b3ee617f52191fc9c9fd33a9d44454ac079f00b6f532e2865103377
-  summary_generated_at: '2026-06-02T02:40:50Z'
-  summary_source_hash: 3d1a743c1b3ee617f52191fc9c9fd33a9d44454ac079f00b6f532e2865103377
-  faq_generated_at: '2026-06-02T23:41:00Z'
-  faq_source_hash: 3d1a743c1b3ee617f52191fc9c9fd33a9d44454ac079f00b6f532e2865103377
-  summary: >-
-    This introductory path shows Android developers how to start profiling apps on devices with
-    Mali-based GPUs using Arm Performance Studio. You will install the tools, connect an Android
-    device over adb, explore a provided Streamline example capture, then profile your own debuggable
-    build and generate a Performance Advisor HTML report using streamline-cli. The walkthrough
-    focuses on Streamline and Performance Advisor basics. Prerequisites include an Android device,
-    a debuggable app using OpenGL ES 2.0–3.2 or Vulkan 1.0–1.2 (Android 10+ for OpenGL ES, Android
-    9+ for Vulkan), Arm Performance Studio installed, Android SDK Platform Tools (adb), and Python
-    3.8 or later for the Performance Advisor script.
-  faqs:
-  - question: What do I need before running the steps?
-    answer: >-
-      You need an Android device, a debuggable build of your application, Arm Performance Studio
-      installed, and the Android SDK Platform Tools (adb). For Performance Advisor’s connection
-      script, install Python 3.8 or later.
-  - question: Which graphics APIs and Android versions are supported?
-    answer: >-
-      Arm Performance Studio supports OpenGL ES versions 2.0 to 3.2 and Vulkan versions 1.0 to
-      1.2. For OpenGL ES applications your device must run Android 10 or later; for Vulkan applications
-      your device must run Android 9 or later.
-  - question: How do I connect my Android device in Streamline?
-    answer: >-
-      Launch the Performance Studio Hub and open Streamline, then in the Start view select Android
-      (adb) and choose your device. Streamline installs the gatord daemon and connects to the
-      device; if your device is not listed, check that adb from the Android SDK Platform Tools
-      is installed.
-  - question: How do I open the example Streamline capture?
-    answer: >-
-      In Streamline, select File > Import, then choose Import Streamline Sample Captures and select
-      the Android example. After import, double-click the report in Streamline Data to view it.
-  - question: How do I generate a Performance Advisor report from a Streamline capture?
-    answer: >-
-      From a terminal, navigate to the capture and run the streamline-cli command with the -pa
-      option on the .apc file. The capture is processed and an HTML report is generated, with
-      warnings shown where applicable.
-# END generated_summary_faq
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Ronan Synnott
 

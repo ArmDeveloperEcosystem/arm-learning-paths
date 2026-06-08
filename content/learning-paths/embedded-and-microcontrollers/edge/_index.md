@@ -18,62 +18,9 @@ prerequisites:
   - An [Edge Impulse Studio](https://studio.edgeimpulse.com/signup) account.
   - The [Arduino IDE](/install-guides/arduino-pico/) with the RP2040 board support package installed on your computer.
   - An [Arduino Nano RP2040 Connect board](https://store.arduino.cc/products/arduino-nano-rp2040-connect-with-headers).
-
-generate_summary_faq: false
-
-rerun_summary: true
-rerun_faqs: true
-
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v3
-  generated_at: '2026-06-02T22:20:08Z'
-  generator: ai
-  ai_assisted: true
-  ai_review_required: true
-  model: gpt-5
-  prompt_template: summary-faq-v3
-  source_hash: 8a7ec29d10a89649662ebb0fa4f14712984786902b6e7343a195abb1f3cbc00b
-  summary_generated_at: '2026-06-01T21:39:32Z'
-  summary_source_hash: 8a7ec29d10a89649662ebb0fa4f14712984786902b6e7343a195abb1f3cbc00b
-  faq_generated_at: '2026-06-02T22:20:08Z'
-  faq_source_hash: 8a7ec29d10a89649662ebb0fa4f14712984786902b6e7343a195abb1f3cbc00b
-  summary: >-
-    This introductory Learning Path guides you through building a TinyML audio command demo on
-    the Arduino Nano RP2040 Connect. You will use Edge Impulse to collect and preprocess audio
-    data, train a simple voice-command classifier, and export a library for deployment. After
-    setting up the Arduino IDE with RP2040 board support, you will integrate the generated library
-    into a new sketch, build, and upload to the board to run real-time inference on a bare-metal
-    Cortex-M class microcontroller. Prerequisites include an Edge Impulse Studio account, the
-    Arduino IDE with RP2040 support, and an Arduino Nano RP2040 Connect. By the end, you will
-    have an LED that turns on and off when it recognizes the words “on” and “off,” in about 90
-    minutes.
-  faqs:
-  - question: What do I need before running the steps?
-    answer: >-
-      You need an Arduino Nano RP2040 Connect, the Arduino IDE with the RP2040 board support package
-      installed, and an Edge Impulse Studio account. If you are an absolute beginner, complete
-      the Arduino on Raspberry Pi Pico path first.
-  - question: Which platform and tools does this project use?
-    answer: >-
-      It targets the Arduino Nano RP2040 Connect (RP2040 on Arm Cortex-M) running bare-metal.
-      You will use Edge Impulse for data collection and model training, and the Arduino IDE to
-      build and upload the sketch.
-  - question: How do I get the Edge Impulse model into my Arduino sketch?
-    answer: >-
-      Train a voice-command classification model in Edge Impulse, then use the library generated
-      by Edge Impulse. Add that library to your Arduino sketch before building and uploading to
-      the board.
-  - question: What result should I expect after deployment?
-    answer: >-
-      Your board will run real-time audio inference and control an LED based on predictions. Saying
-      "on" or "off" should toggle the LED accordingly.
-  - question: What should I check if the LED does not react to voice commands?
-    answer: >-
-      Verify the RP2040 board support is installed and the correct board is selected in the Arduino
-      IDE. Ensure the Edge Impulse–generated library is included in your sketch, rebuild the model
-      in Edge Impulse if needed, and re-upload the program.
-# END generated_summary_faq
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Bright Edudzi Gershon Kordorwu
 ### Tags
