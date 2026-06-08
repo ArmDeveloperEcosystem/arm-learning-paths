@@ -350,7 +350,7 @@ INFO:     Uvicorn running on http://0.0.0.0:8000
 Open a browser and navigate to:
 
 ```text
-http://<VM-IP>:8000
+http://<VM-EXTERNAL-IP>:8000
 ```
 
 This opens the browser-based RAG application UI.
@@ -389,7 +389,7 @@ Copy your own files into the data directory:
 cp yourfile.txt ~/llamaindex-rag/data/
 ```
 
-Restart FastAPI:
+First stop the server and then restart FastAPI:
 
 ```bash
 uvicorn api:app --host 0.0.0.0 --port 8000
