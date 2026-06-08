@@ -51,11 +51,9 @@ OpenJDK 64-Bit Server VM (build 21.0.11+10-1-24.04.2-Ubuntu, mixed mode, sharing
 ```
 
 
-### Configure PostgreSQL database
+### Configure PostgreSQL database and user
 
 Keycloak needs a persistent database to store realms, users, clients, roles, and authentication configuration.
-
-#### Create the Keycloak database and user
 
 Log in to PostgreSQL as the default `postgres` user:
 
@@ -107,7 +105,7 @@ Exit PostgreSQL:
 Download the Keycloak release archive, extract it, and move it to `/opt/keycloak`:
 
 {{% notice Note %}}
-The following commands use Keycloak version 26.2.5. The same commands work with other versions. Replace the file names in these steps with the file for your version of choice. To find the latest version, see [Keycloak releases on GitHub](https://github.com/keycloak/keycloak/releases).
+The following command uses Keycloak version 26.2.5. The same command works with other versions. Replace the file names in these steps with the file for your version of choice. To find the latest version, see [Keycloak releases on GitHub](https://github.com/keycloak/keycloak/releases).
 {{% /notice %}}
 
 ```bash

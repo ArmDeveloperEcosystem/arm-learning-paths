@@ -225,45 +225,6 @@ Restart Keycloak:
 sudo systemctl restart keycloak
 ```
 
-### PostgreSQL schema permission denied
-
-View Keycloak logs:
-
-```bash
-sudo journalctl -u keycloak -f
-```
-
-If logs show:
-
-```text
-permission denied for schema public
-```
-
-Connect to the Keycloak database and grant the required permissions:
-
-```bash
-sudo -u postgres psql -d keycloak
-```
-
-```sql
-GRANT ALL ON SCHEMA public TO keycloakuser;
-ALTER SCHEMA public OWNER TO keycloakuser;
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO keycloakuser;
-GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO keycloakuser;
-```
-
-Exit PostgreSQL:
-
-```sql
-\q
-```
-
-Restart Keycloak:
-
-```bash
-sudo systemctl restart keycloak
-```
-
 ## What you've accomplished
 
 You've now completed a full OAuth2/OpenID Connect integration on an Azure Cobalt 100-based Arm64 VM. 
