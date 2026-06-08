@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Configure external traffic for Keycloak and Flask application
 
-To allow external traffic for Keycloak and the Flask OAuth2 demo application on an Azure virtual machine, open the required ports in the Network Security Group (NSG). The NSG can be attached to the virtual machine's network interface or subnet.
+To allow external traffic for Keycloak and the Flask OAuth2 demo application on the Azure virtual machine, open the required ports in the network security group (NSG). 
 
 {{% notice Note %}}
 For more information about Azure setup, see [Getting started with Microsoft Azure Platform](/learning-paths/servers-and-cloud-computing/csp/azure/).
@@ -16,7 +16,7 @@ For more information about Azure setup, see [Getting started with Microsoft Azur
 
 ### Add inbound firewall rules in Azure
 
-To expose the required ports for Keycloak and the Flask application, create firewall rules.
+To expose the required ports for Keycloak and the Flask application, create firewall rules:
 
 1. Navigate to the [Azure portal](https://portal.azure.com), go to **Virtual Machines**, and select your virtual machine.
 
@@ -69,6 +69,7 @@ You can now access:
 
 ## What you've learned and what's next
 
-You've now configured the Azure Network Security Group to allow incoming traffic for Keycloak and the Flask OAuth2 demo application.
+You've now configured the Azure network security group to allow incoming traffic for Keycloak and the Flask OAuth2 demo application.
 
-Next, you'll deploy Keycloak, configure PostgreSQL integration, and validate OAuth2/OpenID Connect authentication workflows using the Flask application.
+Next, you'll install Keycloak on the VM, configure PostgreSQL as the backend database, and validate OAuth2/OpenID Connect authentication workflows using a demo Flask application.
+
