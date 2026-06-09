@@ -258,3 +258,36 @@ If the Template is intended to be reusable by the wider Topo community, include:
 - Clear `x-topo` metadata and argument descriptions
 
 You now have a complete Topo Template created from scratch.
+
+## Skills for authoring Templates
+
+In case you already have a Docker Compose project and want to convert it to a Topo Template, or you want to create your
+own Topo Template from scratch, you can install AI Agent Skills that will help you in the process.
+
+### Available skills
+
+Visit [this link](https://github.com/arm/topo-template-format#authoring-skills) for the most up-to-date list of the
+available Topo Template skills and instructions on how to install them.
+
+At the time of writing, the [Topo Template Format Specification](https://github.com/arm/Topo-Template-Format) provides
+the following skills:
+
+1. `topo-template-context`: provides Topo and Topo Template reference context for questions about x-topo metadata, schema, docs, and CLI Template behavior.
+2. `topo-template-bootstrap`: converts a repository into a Topo Template by adding or improving compose.yaml and x-topo metadata.
+3. `topo-template-lint`: reviews an existing Topo Template for correctness, consistency, and authoring best practices.
+
+### Installing skills
+
+You can install the skills with [npx skills](https://github.com/vercel-labs/skills):
+
+`npx skills add arm/topo-template-format`
+
+Restart your agent after installing or updating skills.
+
+### Use the skills
+
+You can then prompt your agent to use the skill to, for example, create a Topo Template from an existing project:
+
+```text
+Use the topo-template-bootstrap skill to convert this repository into a Topo Template.
+```
