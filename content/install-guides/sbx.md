@@ -140,7 +140,9 @@ UBUNTU_CODENAME=resolute
 LOGO=ubuntu-logo
 ```
 
-This confirms that the shell sandbox is running Arm Linux (Ubuntu on aarch64) inside the microVM.
+This confirms that the shell sandbox is running Arm Linux (Ubuntu on aarch64) inside the microVM. 
+
+Keep the shell running to test management commands in another terminal.
 
 ### Verify sandbox management commands
 
@@ -177,7 +179,7 @@ Stop the running shell sandbox using its name:
 sbx stop <SANDBOX>
 ```
 
-The sandbox in the first terminal window stops.
+The running shell sandbox in the first terminal window stops.
 
 Remove the sandbox permanently:
 
