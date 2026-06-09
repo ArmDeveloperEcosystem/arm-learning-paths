@@ -159,13 +159,13 @@ SANDBOX                    AGENT   STATUS    PORTS    WORKSPACE
 shell-arm-learning-paths   shell   stopped           /Users/arm-learning-paths
 ```
 
-Copy a file from your Mac into the sandbox:
+Copy a file from your Mac into the sandbox. For example:
 
 ```bash
 sbx cp ./myfile.txt <SANDBOX>:/home/user/myfile.txt
 ```
 
-Copy a file from a sandbox back to your Mac:
+Copy a file from a sandbox back to your Mac. For example:
 
 ```bash
 sbx cp <SANDBOX>:/home/user/output.txt ./output.txt
