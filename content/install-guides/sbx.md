@@ -142,11 +142,9 @@ LOGO=ubuntu-logo
 
 This confirms that the shell sandbox is running Arm Linux (Ubuntu on aarch64) inside the microVM.
 
-To exit the sandbox, enter `exit`.
-
 ### Verify sandbox management commands
 
-After exiting the sandbox, list all sandboxes, including their names and current status:
+In another terminal window, list all sandboxes, including their names and current status:
 
 ```bash
 sbx ls
@@ -179,17 +177,21 @@ Stop the running shell sandbox using its name:
 sbx stop <SANDBOX>
 ```
 
+The sandbox in the first terminal window stops.
+
 Remove the sandbox permanently:
 
 ```bash
 sbx rm <SANDBOX>
 ```
 
+You'll be prompted to confirm whether you want to remove the sandbox. Answer `y` and press Enter to delete the sandbox.
+
 ## Next steps
 
 You're now ready to use Docker Sandboxes to run AI agents in isolated microVMs on macOS. 
 
-To launch an agent sandbox, provide the name of the agent sandbox in the run command. For example, `claude`:
+To launch an agent sandbox, provide the name of the agent sandbox in the run command. For example, to launch a Claude sandbox:
 
 ```bash
 sbx run claude
