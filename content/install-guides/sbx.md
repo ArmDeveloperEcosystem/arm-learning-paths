@@ -146,7 +146,7 @@ Keep the shell running to test management commands in another terminal.
 
 ### Verify sandbox management commands
 
-In another terminal window, list all sandboxes, including their names and current status:
+In another terminal window, list all sandboxes with their agent and current status:
 
 ```bash
 sbx ls
