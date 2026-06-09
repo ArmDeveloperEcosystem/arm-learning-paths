@@ -1,9 +1,7 @@
 ---
 title: Docker Sandboxes (sbx)
 
-draft: true
-
-description: Install Docker Sandboxes (sbx) on macOS with Apple Silicon to run AI coding agents in isolated Arm Linux microVMs using Apple Virtualization.framework.
+description: Install Docker Sandboxes (sbx) on macOS with Apple Silicon to run AI coding agents in isolated Arm Linux microVMs using Apple's virtualization framework.
 
 minutes_to_complete: 10
 
@@ -35,7 +33,7 @@ Docker Sandboxes (`sbx`) is a standalone CLI from Docker for running AI coding a
 `sbx` is not available on Arm Linux. 
 {{% /notice %}}
 
-On macOS with Apple Silicon, `sbx` uses Apple's Virtualization.framework to launch Arm Linux (Ubuntu) microVMs. Docker Desktop isn't required.
+On macOS with Apple Silicon, `sbx` uses Apple's virtualization framework to launch Arm Linux (Ubuntu) microVMs. You don't need Docker Desktop.
 
 ## Before you begin
 
@@ -57,14 +55,18 @@ Homebrew installs the `sbx` binary at `/opt/homebrew/bin/sbx`.
 
 ## Verify the installation
 
-Confirm that `sbx` is installed:
+After installing the CLI, verify that the installation was successful.
+
+### Check the sbx CLI version
+
+Start by checking what version of `sbx` is installed:
 
 ```bash
 sbx version
 ```
 
 {{% notice Note %}}
-The output below shows the version at the time this guide was written. Homebrew installs the latest available version. To find the latest release, see the [sbx releases page](https://github.com/docker/sbx-releases/releases).
+The following output shows the version at the time this guide was written. Homebrew installs the latest available version. To find the latest release, see the [sbx releases page](https://github.com/docker/sbx-releases/releases).
 {{% /notice %}}
 
 The output is similar to:
@@ -73,7 +75,7 @@ The output is similar to:
 sbx version: v0.32.0 55580366449bcfebfc1787b9944284cf64c856d7
 ```
 
-## Authenticate with Docker Hub
+### Authenticate with Docker Hub
 
 Sign in to your Docker account:
 
@@ -83,7 +85,16 @@ sbx login
 
 This outputs a one-time code and a URL. Open the link in a browser, sign in with your Docker Hub credentials, and approve the activation.
 
-On your first login, the CLI asks you to select a network policy:
+### Run a sandbox
+
+Navigate to your project directory and start an agentless sandbox for manual exploration.
+
+```bash
+sbx run shell
+```
+
+This launches a bare Arm Linux microVM with a shell prompt. No AI agent runs inside it.
+On your first run, the CLI will ask you to select a network policy:
 
 - Open: allows all network access from within the sandbox.
 - Balanced: allows common development services while blocking everything else.
@@ -91,29 +102,17 @@ On your first login, the CLI asks you to select a network policy:
 
 Balanced is a good starting point for most development workflows.
 
-## Run a sandbox
-
-Navigate to your project directory and launch an agent sandbox:
+To launch an agent sandbox instead, replace `shell` with the name of the sandbox. For example, `claude `:
 
 ```bash
 sbx run claude
 ```
 
-Other supported agents include `copilot`, `codex`, and `kiro`. For the full list, see the [Docker Sandboxes agents documentation](https://docs.docker.com/ai/sandboxes/agents/).
+Other supported agent sandboxes include `copilot`, `codex`, and `kiro`. For the full list, see the [Docker Sandboxes agents documentation](https://docs.docker.com/ai/sandboxes/agents/).
 
-## Start a shell sandbox
+### Confirm the sandbox runs Arm Linux
 
-To start an agentless sandbox for manual exploration, use the `shell` agent:
-
-```bash
-sbx run shell
-```
-
-This launches a bare Arm Linux microVM with a shell prompt. No AI agent runs inside it.
-
-## Confirm the sandbox runs Arm Linux
-
-From within a shell sandbox, verify the operating system and architecture:
+To ensure the shell sandbox runs as expected, from within the sandbox, verify the operating system and architecture:
 
 ```bash
 uname -a
@@ -149,9 +148,9 @@ UBUNTU_CODENAME=resolute
 LOGO=ubuntu-logo
 ```
 
-This confirms the sandbox is running Arm Linux (Ubuntu on aarch64) inside the microVM.
+This confirms that the shell sandbox is running Arm Linux (Ubuntu on aarch64) inside the microVM.
 
-## Basic sbx commands
+## Manage sandboxes
 
 Use these commands to manage your sandboxes after installation.
 
@@ -159,12 +158,6 @@ List all sandboxes, including their IDs and current status:
 
 ```bash
 sbx ls
-```
-
-Start a stopped sandbox by its ID:
-
-```bash
-sbx start <id>
 ```
 
 Stop a running sandbox:
@@ -191,4 +184,6 @@ Copy a file from a sandbox back to your Mac:
 sbx cp <id>:/home/user/output.txt ./output.txt
 ```
 
-You're now ready to use Docker Sandboxes to run AI agents in isolated microVMs on macOS.
+## Next steps
+
+You're now ready to use Docker Sandboxes to run AI agents in isolated microVMs on macOS. 
