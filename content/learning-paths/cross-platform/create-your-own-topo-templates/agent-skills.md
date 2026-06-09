@@ -10,6 +10,8 @@ layout: learningpathall
 
 If you already have a Docker Compose project and want to convert it to a Topo Template, or you want to create your own Topo Template from scratch, you can do so with an Agent Skill.
 
+These skills are optional authoring aids. The Template you created in this Learning Path works with Topo without them.
+
 Visit [Topo Skills](https://github.com/arm/topo-template-format#authoring-skills) for the most up-to-date list of the available Topo Template skills and instructions on how to install them.
 
 At the time of writing, the [Topo Template Format Specification](https://github.com/arm/topo-template-format) provides the following skills:

@@ -6,7 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-This section quickly runs through the deployment of the `Hello World` Template, similar to the LLM on CPU Template in the [Deploy containerized workloads to Arm-based Linux targets with Topo](/learning-paths/cross-platform/deploy-containerized-workloads-with-topo/) Learning Path.
+This section quickly runs through the deployment of the `Hello World` Template, similar to the `CPU LLM Chat` Template in the [Deploy containerized workloads to Arm-based Linux targets with Topo](/learning-paths/cross-platform/deploy-containerized-workloads-with-topo/) Learning Path.
 
 ## Clone the 'Hello World' Topo Template
 

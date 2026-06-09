@@ -111,6 +111,8 @@ RUN sed -i "s|__ACCENT_COLOR__|${ACCENT_COLOR}|g" /usr/share/nginx/html/index.ht
 
 Topo passes configuration values to Templates through Docker build arguments. The `ARG` lines define the values consumed during the image build.
 
+`sed` is a command-line text replacement tool. The `sed` commands replace placeholder text in `index.html` during the image build, so each cloned project can customize the web page without manually editing the source file.
+
 ### Create the compose file
 
 Create `compose.yaml`:
@@ -168,6 +170,8 @@ The `x-topo` section is the Topo metadata block:
 
 The argument names in `x-topo.args` match the keys under `services.message-card.build.args`. When Topo resolves the arguments, it writes the selected values into the build arguments.
 
+The same argument name appears in three places: `x-topo.args` defines what Topo asks for, `build.args` passes the value to Docker, and the Dockerfile `ARG` consumes it.
+
 ### Clone the local Template
 
 Clone your local Template into a new project directory. You can choose to answer interactive prompts for the arguments (using the first command below), or you can opt to include the arguments in the command (using the second command).
@@ -207,6 +211,12 @@ services:
 ```
 
 ### Deploy the new project
+
+Check that your target is ready:
+
+```bash
+topo health --target user@my-target
+```
 
 Deploy the cloned project to your target:
 

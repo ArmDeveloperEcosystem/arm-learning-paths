@@ -56,8 +56,6 @@ To create a Topo Template, start with a Docker Compose project and add `x-topo` 
 2. Hardware requirements (features like SVE or Neon, or required RAM).
 3. Project configuration at Topo clone time.
 
-We will achieve this by the end of this Learning Path.
-
 ## What you've accomplished and what's next
 
 You should now understand what a Topo Template is, and why you might create one. Next we will take an existing Template and customize it, before moving onto creating a Template from scratch.
