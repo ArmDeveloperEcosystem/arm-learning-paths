@@ -1,5 +1,6 @@
 ---
-title: Install and configure LlamaIndex on Google Cloud Axion
+title: Install and configure LlamaIndex on a Google Cloud C4A virtual machine
+description: Learn how to install Python, Ollama, LlamaIndex, ChromaDB, and FastAPI on an Arm-based Google Cloud C4A virtual machine for a browser-based RAG application.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -10,12 +11,7 @@ layout: learningpathall
 
 In this section, you'll prepare a Google Cloud Axion Arm64 VM for running a browser-based RAG application using LlamaIndex.
 
-You'll install:
-
-- required system packages
-- Python 3.11
-- Ollama 
-- LlamaIndex and required Python packages
+You'll install required system packages, including Python 3.11, as well as Ollama and LLamaIndex.
 
 ### Update the virtual machine
 
@@ -64,7 +60,7 @@ Python 3.11.10
 pip 22.3.1 from /usr/lib/python3.11/site-packages/pip (python 3.11)
 ```
 
-### (Optional) Install Docker
+<!-- ### (Optional) Install Docker
 
 For this Learning Path, ChromaDB and Ollama run natively. For extended use, you can install Docker so that you can run containerized workloads alongside the RAG pipeline if needed:
 
@@ -93,7 +89,7 @@ The output is similar to:
 ```output
 Hello from Docker!
 This message shows that your installation appears to be working correctly.
-```
+``` -->
 
 ### Create project directory
 
@@ -119,7 +115,7 @@ pip install --upgrade pip setuptools wheel
 
 ### Install Ollama
 
-Run the following command:
+Use the official Linux installer to install Ollama:
 
 ```bash
 curl -fsSL https://ollama.com/install.sh | sh
@@ -153,7 +149,7 @@ sudo systemctl start ollama
 
 ### Pull an LLM model
 
-With Ollama running, pull the `llama3.2:1b` model. This is a lightweight 1-billion parameter model suitable for local inference on a 16 GB VM:
+With Ollama running, pull the `llama3.2:1b` model. This is a lightweight 1-billion-parameter model suitable for local inference on a 16 GB VM:
 
 ```bash
 ollama pull llama3.2:1b
@@ -173,7 +169,7 @@ Retrieval-Augmented Generation (RAG) is a technique that combines a retrieval st
 
 ### Install LlamaIndex packages
 
-Install the LlamaIndex core library along with the integrations needed for Ollama, HuggingFace embeddings, and ChromaDB. You'll also install FastAPI and Uvicorn here because the browser-based application you'll build in the next section uses them as the web server:
+Install the LlamaIndex core library along with the integrations needed for Ollama, Hugging Face embeddings, and ChromaDB. You'll also install FastAPI and Uvicorn here because the browser-based application you'll build in the next section uses them as the web server:
 
 ```bash
 pip install llama-index
@@ -188,6 +184,6 @@ pip install uvicorn
 
 ## What you've accomplished and what's next
 
-You've now successfully installed and configured LlamaIndex on a Google Cloud Axion Arm64 VM running SUSE Linux with Python 3.11. You optionally installed Docker, configured Ollama for local LLM inference, and prepared the environment for building browser-based RAG applications using LlamaIndex and ChromaDB.
+You've now installed and configured LlamaIndex on a Google Cloud C4A Arm64 VM running SUSE Linux with Python 3.11. You configured Ollama for local LLM inference and prepared the environment for building browser-based RAG applications using LlamaIndex and ChromaDB.
 
 Next, you'll build the RAG engine, create the browser UI, and query custom documents using a local large language model.
