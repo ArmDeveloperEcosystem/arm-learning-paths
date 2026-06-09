@@ -13,7 +13,7 @@ The C4A series provides a cost-effective alternative to x86 virtual machines whi
 
 ## LlamaIndex for RAG and context-aware AI applications on Arm
 
-LlamaIndex is an open-source framework designed to build context-aware AI applications using Large Language Models (LLMs). It's widely used for Retrieval-Augmented Generation (RAG), document indexing, vector search, semantic retrieval, and integrating custom data sources with LLMs.
+LlamaIndex is an open-source framework designed to build context-aware AI applications using Large Language Models (LLMs). It's widely used for RAG, document indexing, vector search, semantic retrieval, and integrating custom data sources with LLMs.
 
 LlamaIndex provides a unified framework with components such as:
 
@@ -31,4 +31,4 @@ Common use cases include browser-based AI assistants, document search applicatio
 
 You've now learned about Google Axion C4A Arm-based virtual machines and their performance advantages for AI and RAG workloads. You were also introduced to core LlamaIndex components including document ingestion, indexing pipelines, query engines, vector stores, and LLM integrations.
 
-Next, you'll create a firewall rule in Google Cloud Console to enable remote access to the browser-based LlamaIndex RAG application used in this Learning Path.
+Next, you'll create a firewall rule in Google Cloud Console to enable remote access to the browser-based LlamaIndex RAG application that you'll create in this Learning Path.

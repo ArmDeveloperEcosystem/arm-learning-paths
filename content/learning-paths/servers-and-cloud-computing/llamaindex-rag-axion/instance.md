@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Set up the virtual machine
 
-In this section, you'll create a Google Axion C4A Arm-based virtual machine (VM) on Google Cloud Platform (GCP). You'll use the `c4a-standard-4` machine type, which provides 4 vCPUs and 16 GB of memory. This VM will host your browser-based LlamaIndex RAG application.
+In this section, you'll create a Google Axion C4A Arm-based virtual machine (VM). You'll use the `c4a-standard-4` machine type, which provides 4 vCPUs and 16 GB of memory. This VM will host your browser-based LlamaIndex RAG application.
 
-## Configure the C4A virtual machine in Google Cloud Console
+### Configure the C4A virtual machine in Google Cloud Console
 
 To create a virtual machine based on the C4A instance type in the console:
 
@@ -25,7 +25,7 @@ To create a virtual machine based on the C4A instance type in the console:
 6. For the license type, choose **Pay as you go**.
 7. Increase **Size (GB)** from **10** to **100** to allocate sufficient disk space, and then click **Select**.
 8. Select **Networking** from the column on the left.
-9. Under **Network tags**, enter `allow-llamaindex-port` to link the VM to the firewall rule from the previous step and allow inbound access to port 8000 for the browser-based LlamaIndex RAG application and port 22 for ssh access.
+9. Under **Network tags**, enter `allow-llamaindex-port` to link the VM to the firewall rule from the previous section and allow inbound access to port `8000` for the browser-based LlamaIndex RAG application and port `22` for ssh access.
 10. Select **Create** to launch the virtual machine.
 
 After the instance starts, select **SSH** next to the VM in the instance list to open a browser-based terminal session.
