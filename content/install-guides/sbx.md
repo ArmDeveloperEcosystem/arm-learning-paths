@@ -144,17 +144,22 @@ This confirms that the shell sandbox is running Arm Linux (Ubuntu on aarch64) in
 
 To exit the sandbox, enter `exit`.
 
-### Test sandbox management commands
+### Verify sandbox management commands
 
-After exiting the sandbox, test the following commands that you can use to manage your sandboxes after installation.
-
-List all sandboxes, including their IDs (listed under `SANDBOX`) and current status:
+After exiting the sandbox, list all sandboxes, including their names and current status:
 
 ```bash
 sbx ls
 ```
 
-Copy a file from your Mac into a sandbox:
+The output is similar to:
+
+```output
+SANDBOX                    AGENT   STATUS    PORTS    WORKSPACE
+shell-arm-learning-paths   shell   stopped           /Users/arm-learning-paths
+```
+
+Copy a file from your Mac into the sandbox:
 
 ```bash
 sbx cp ./myfile.txt <SANDBOX>:/home/user/myfile.txt
@@ -163,15 +168,18 @@ sbx cp ./myfile.txt <SANDBOX>:/home/user/myfile.txt
 Copy a file from a sandbox back to your Mac:
 
 ```bash
-sbx cp <id>:/home/user/output.txt ./output.txt
+sbx cp <SANDBOX>:/home/user/output.txt ./output.txt
 ```
-Stop a running sandbox:
+
+## Clean up 
+
+Stop the running shell sandbox using its name:
 
 ```bash
 sbx stop <SANDBOX>
 ```
 
-Remove a sandbox permanently:
+Remove the sandbox permanently:
 
 ```bash
 sbx rm <SANDBOX>
