@@ -85,7 +85,7 @@ sbx login
 
 This outputs a one-time code and a URL. Open the link in a browser, sign in with your Docker Hub credentials, and approve the activation.
 
-### Run a sandbox
+### Start a shell sandbox
 
 Navigate to your project directory and start an agentless sandbox for manual exploration:
 
