@@ -181,7 +181,7 @@ sbx rm <SANDBOX>
 
 You're now ready to use Docker Sandboxes to run AI agents in isolated microVMs on macOS. 
 
-To launch an agent sandbox, replace `shell` with the name of the sandbox. For example, `claude`:
+To launch an agent sandbox, provide the name of the agent sandbox in the run command. For example, `claude`:
 
 ```bash
 sbx run claude
