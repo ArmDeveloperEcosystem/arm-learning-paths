@@ -221,6 +221,14 @@ table tbody td {
     background-color: #010101;  
 }
 
+arm-top-navigation.lp-top-navigation {
+    --arm-green: var(--lp-accent-secondary);
+    --arm-web-safe-green: var(--lp-accent-secondary);
+    --ads-ui-green-65: var(--lp-accent-secondary);
+    --ads-ui-green-70: var(--lp-accent-secondary);
+    --ads-ui-green-80: var(--lp-accent-secondary);
+}
+
 
 /* Fix Masthead Height */
 #expanded-masthead  {

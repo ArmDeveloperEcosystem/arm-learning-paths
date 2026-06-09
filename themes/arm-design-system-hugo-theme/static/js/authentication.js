@@ -243,6 +243,105 @@ function renderAuthInTopNav() {
 
 }
 
+function applyTopNavHighlightColor() {
+  const topnav = document.querySelector("arm-top-navigation");
+  const shadowRoot = topnav?.shadowRoot;
+  if (!shadowRoot) return;
+
+  const highlightColor = "#D1BAFC";
+  const isArmGreen = (color) => {
+    const normalizedColor = (color || "").trim().toLowerCase();
+    if (["#95d600", "#a4da00", "#b8e600"].includes(normalizedColor)) return true;
+
+    const rgbMatch = normalizedColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+    if (!rgbMatch) return false;
+
+    const red = Number(rgbMatch[1]);
+    const green = Number(rgbMatch[2]);
+    const blue = Number(rgbMatch[3]);
+    return green >= 180 && red >= 90 && red <= 190 && blue <= 90 && green > red;
+  };
+
+  const styleId = "learning-paths-top-nav-highlight-color";
+  if (!shadowRoot.getElementById(styleId)) {
+    const style = document.createElement("style");
+    style.id = styleId;
+    style.textContent = `
+      :host {
+        --arm-green: ${highlightColor};
+        --arm-web-safe-green: ${highlightColor};
+        --ads-ui-green-65: ${highlightColor};
+        --ads-ui-green-70: ${highlightColor};
+        --ads-ui-green-80: ${highlightColor};
+      }
+
+      a:hover,
+      button:hover,
+      [role="button"]:hover,
+      [role="link"]:hover,
+      [role="menuitem"]:hover,
+      a:hover *,
+      button:hover *,
+      [role="button"]:hover *,
+      [role="link"]:hover *,
+      [role="menuitem"]:hover *,
+      a:focus-visible,
+      button:focus-visible,
+      [role="button"]:focus-visible,
+      [role="link"]:focus-visible,
+      [role="menuitem"]:focus-visible,
+      a:focus-visible *,
+      button:focus-visible *,
+      [role="button"]:focus-visible *,
+      [role="link"]:focus-visible *,
+      [role="menuitem"]:focus-visible * {
+        color: ${highlightColor} !important;
+        -webkit-text-fill-color: ${highlightColor} !important;
+        -webkit-text-stroke-color: ${highlightColor} !important;
+        fill: ${highlightColor} !important;
+        stroke: ${highlightColor} !important;
+      }
+
+      a:hover::before,
+      a:hover::after,
+      button:hover::before,
+      button:hover::after,
+      [role="button"]:hover::before,
+      [role="button"]:hover::after,
+      [role="link"]:hover::before,
+      [role="link"]:hover::after,
+      [role="menuitem"]:hover::before,
+      [role="menuitem"]:hover::after {
+        background-color: ${highlightColor} !important;
+        border-color: ${highlightColor} !important;
+      }
+    `;
+    shadowRoot.appendChild(style);
+  }
+
+  shadowRoot.querySelectorAll("*").forEach((element) => {
+    const styles = window.getComputedStyle(element);
+    if (
+      isArmGreen(styles.color) ||
+      isArmGreen(styles.webkitTextFillColor) ||
+      isArmGreen(styles.fill) ||
+      isArmGreen(styles.stroke)
+    ) {
+      element.style.setProperty("color", highlightColor, "important");
+      element.style.setProperty("-webkit-text-fill-color", highlightColor, "important");
+      element.style.setProperty("-webkit-text-stroke-color", highlightColor, "important");
+      element.style.setProperty("fill", highlightColor, "important");
+      element.style.setProperty("stroke", highlightColor, "important");
+    }
+  });
+
+  if (!topnav.learningPathsHighlightListenersAttached) {
+    topnav.addEventListener("mouseover", () => window.requestAnimationFrame(applyTopNavHighlightColor));
+    topnav.addEventListener("focusin", () => window.requestAnimationFrame(applyTopNavHighlightColor));
+    topnav.learningPathsHighlightListenersAttached = true;
+  }
+}
+
 
 
 
@@ -298,8 +397,22 @@ document.addEventListener("arm-top-navigation-ready", function (e) {
   const htmlElement = document.documentElement; 
   htmlElement.setAttribute("theme", "dark"); 
 
+  window.requestAnimationFrame(applyTopNavHighlightColor);
+  window.setTimeout(applyTopNavHighlightColor, 250);
   renderAuthInTopNav();
 });
+
+function scheduleTopNavHighlightColor() {
+  [0, 250, 1000].forEach((delay) => {
+    window.setTimeout(applyTopNavHighlightColor, delay);
+  });
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", scheduleTopNavHighlightColor);
+} else {
+  scheduleTopNavHighlightColor();
+}
 
 
 
