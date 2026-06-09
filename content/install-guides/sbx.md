@@ -40,7 +40,7 @@ On macOS with Apple Silicon, `sbx` uses Apple's virtualization framework to laun
 You need:
 
 - A Mac with Apple Silicon (M1 or later) running macOS Sonoma (version 14) or later.
-- A Docker Hub account to authenticate `sbx`.
+- A [Docker Hub](https://hub.docker.com/) account to authenticate `sbx`.
 - [Homebrew](https://brew.sh/) installed.
 
 ## Install the sbx CLI
