@@ -7,7 +7,7 @@ weight: 5
 layout: learningpathall
 ---
 
-## Prepare the environment
+## Prepare the environment for a LLamaIndex RAG application
 
 In this section, you'll prepare a Google Cloud Axion Arm64 VM for running a browser-based RAG application using LlamaIndex.
 
@@ -59,37 +59,6 @@ The output is similar to:
 Python 3.11.10
 pip 22.3.1 from /usr/lib/python3.11/site-packages/pip (python 3.11)
 ```
-
-<!-- ### (Optional) Install Docker
-
-For this Learning Path, ChromaDB and Ollama run natively. For extended use, you can install Docker so that you can run containerized workloads alongside the RAG pipeline if needed:
-
-```bash
-sudo zypper install -y docker
-sudo systemctl enable docker
-sudo systemctl start docker
-```
-
-Verify Docker is running and add your user to the `docker` group so you don't need `sudo` for Docker commands:
-
-```bash
-sudo systemctl status docker
-sudo usermod -aG docker $USER
-newgrp docker
-```
-
-Test Docker:
-
-```bash
-docker run hello-world
-```
-
-The output is similar to:
-
-```output
-Hello from Docker!
-This message shows that your installation appears to be working correctly.
-``` -->
 
 ### Create project directory
 

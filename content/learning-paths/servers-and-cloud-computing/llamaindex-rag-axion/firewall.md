@@ -9,9 +9,9 @@ layout: learningpathall
 
 ## Allow inbound access to the LlamaIndex browser application
 
-Create a firewall rule in Google Cloud Console to expose port 8000 for the browser-based LlamaIndex RAG application.
+Create a firewall rule in Google Cloud console to expose port 8000 for the browser-based LlamaIndex RAG application.
 
-### Configure the firewall rule in Google Cloud Console
+### Configure the firewall rule in the Google Cloud console
 
 To configure a firewall rule:
 
@@ -26,11 +26,7 @@ To configure a firewall rule:
 ![Google Cloud console Create firewall rule form with Name set to allow-llamaindex-port and Direction of traffic set to Ingress#center](images/network-rule.png "Configuring the allow-llamaindex-port firewall rule")
 
 5. Under **Protocols and ports**, select **Specified protocols and ports**.
-6. Select the **TCP** checkbox. Port `8000` is used by the FastAPI server that backs the browser-based LlamaIndex RAG application. Enter:
-
-```text
-8000
-```
+6. Select the **TCP** checkbox. For **Ports**, enter `8000`. Port `8000` is used by the FastAPI server that backs the browser-based LlamaIndex RAG application.
 
 ![Google Cloud console Protocols and ports section with TCP selected and port 8000 entered#center](images/network-port.png "Setting the LlamaIndex browser application port in the firewall rule")
 
@@ -39,6 +35,6 @@ To configure a firewall rule:
 
 ## What you've accomplished and what's next
 
-You've now created a firewall rule that exposes port 8000 for the browser-based LlamaIndex RAG application and port 22 for SSH. The firewall rule uses the network tag `allow-llamaindex-port`, which you'll attach to your virtual machine in the next section.
+You've now created a firewall rule that exposes port 8000 for the browser-based LlamaIndex RAG application and port 22 for SSH. You'll attach this firewall rule to your virtual machine in the next section.
 
 Next, you'll create a Google Cloud C4A virtual machine and connect to it using SSH.

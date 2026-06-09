@@ -31,9 +31,9 @@ FastAPI
     ↓
 LlamaIndex
     ↓
-ChromaDB Vector Store
+ChromaDB vector store
     ↓
-Ollama Local LLM
+Ollama local LLM
     ↓
 Documents
 ```
@@ -383,7 +383,7 @@ What is Google Cloud Axion?
 
 The answers will appear directly in the browser interface.
 
-## Add your own documents
+## (Optional) Add your own documents
 
 After confirming that the application works, you can try adding your own documents.
 
