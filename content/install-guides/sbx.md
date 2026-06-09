@@ -187,3 +187,5 @@ sbx cp <id>:/home/user/output.txt ./output.txt
 ## Next steps
 
 You're now ready to use Docker Sandboxes to run AI agents in isolated microVMs on macOS. 
+
+You can use AI agents with the Arm MCP server to build on or migrate to Arm. For more information, see the [Arm MCP server](/learning-paths/servers-and-cloud-computing/arm-mcp-server/) Learning Path.
