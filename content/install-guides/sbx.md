@@ -87,7 +87,7 @@ This outputs a one-time code and a URL. Open the link in a browser, sign in with
 
 ### Run a sandbox
 
-Navigate to your project directory and start an agentless sandbox for manual exploration.
+Navigate to your project directory and start an agentless sandbox for manual exploration:
 
 ```bash
 sbx run shell
