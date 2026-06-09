@@ -96,19 +96,11 @@ sbx run shell
 This launches a bare Arm Linux microVM with a shell prompt. No AI agent runs inside it.
 On your first run, the CLI will ask you to select a network policy:
 
-- Open: allows all network access from within the sandbox.
-- Balanced: allows common development services while blocking everything else.
-- Locked Down: blocks all outbound network traffic.
+- `Open`: allows all network access from within the sandbox.
+- `Balanced`: allows common development services while blocking everything else.
+- `Locked Down`: blocks all outbound network traffic.
 
-Balanced is a good starting point for most development workflows.
-
-To launch an agent sandbox instead, replace `shell` with the name of the sandbox. For example, `claude `:
-
-```bash
-sbx run claude
-```
-
-Other supported agent sandboxes include `copilot`, `codex`, and `kiro`. For the full list, see the [Docker Sandboxes agents documentation](https://docs.docker.com/ai/sandboxes/agents/).
+`Balanced` is a good starting point for most development workflows.
 
 ### Confirm the sandbox runs Arm Linux
 
@@ -150,32 +142,22 @@ LOGO=ubuntu-logo
 
 This confirms that the shell sandbox is running Arm Linux (Ubuntu on aarch64) inside the microVM.
 
-## Manage sandboxes
+To exit the sandbox, enter `exit`.
 
-Use these commands to manage your sandboxes after installation.
+### Test sandbox management commands
 
-List all sandboxes, including their IDs and current status:
+After exiting the sandbox, test the following commands that you can use to manage your sandboxes after installation.
+
+List all sandboxes, including their IDs (listed under `SANDBOX`) and current status:
 
 ```bash
 sbx ls
 ```
 
-Stop a running sandbox:
-
-```bash
-sbx stop <id>
-```
-
-Remove a sandbox permanently:
-
-```bash
-sbx rm <id>
-```
-
 Copy a file from your Mac into a sandbox:
 
 ```bash
-sbx cp ./myfile.txt <id>:/home/user/myfile.txt
+sbx cp ./myfile.txt <SANDBOX>:/home/user/myfile.txt
 ```
 
 Copy a file from a sandbox back to your Mac:
@@ -183,9 +165,28 @@ Copy a file from a sandbox back to your Mac:
 ```bash
 sbx cp <id>:/home/user/output.txt ./output.txt
 ```
+Stop a running sandbox:
+
+```bash
+sbx stop <SANDBOX>
+```
+
+Remove a sandbox permanently:
+
+```bash
+sbx rm <SANDBOX>
+```
 
 ## Next steps
 
 You're now ready to use Docker Sandboxes to run AI agents in isolated microVMs on macOS. 
 
-You can use AI agents with the Arm MCP server to build on or migrate to Arm. For more information, see the [Arm MCP server](/learning-paths/servers-and-cloud-computing/arm-mcp-server/) Learning Path.
+To launch an agent sandbox, replace `shell` with the name of the sandbox. For example, `claude`:
+
+```bash
+sbx run claude
+```
+
+Other supported agent sandboxes include `copilot`, `codex`, and `kiro`. For the full list, see the [Docker Sandboxes agents documentation](https://docs.docker.com/ai/sandboxes/agents/).
+
+You can use AI agents with the Arm MCP Server to build on or migrate to Arm. For more information, see the [Arm MCP Server](/learning-paths/servers-and-cloud-computing/arm-mcp-server/) Learning Path.
