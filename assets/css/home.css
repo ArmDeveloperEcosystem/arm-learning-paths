@@ -88,7 +88,7 @@
 
 .main-topic-card:hover  .main-topic-title {
     transition: color 0.3s ease-in-out;
-    color: var(--arm-green);
+    color: var(--lp-hover-text);
 }
 
 

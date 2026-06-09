@@ -75,6 +75,7 @@
 :root {
     --lp-accent-primary: #6023DE;   /* ADS UI Violet 65 */
     --lp-accent-secondary: #D1BAFC; /* ADS UI Violet 04 */
+    --lp-hover-text: #D9D9D9;       /* ADS UI Gray 35 */
 
     /* Keep existing site styles working while testing the v5 palette. */
     --arm-green: var(--lp-accent-primary);
@@ -124,47 +125,50 @@ ads-button {
     /* primary */
     --ads-button-background-color-primary-hover: var(--arm-green);
     --ads-button-border-color-primary-hover: var(--arm-green);
+    --ads-button-color-primary-hover: var(--lp-hover-text);
 
     /* secondary */
     --ads-button-border-color-secondary-hover: var(--arm-green);
-    --ads-button-color-secondary-hover: var(--arm-green);
+    --ads-button-color-secondary-hover: var(--lp-hover-text);
 
     /* tertiary */
     --ads-button-border-color-tertiary-hover: var(--arm-green);
-    --ads-button-color-tertiary-hover: var(--arm-green);
+    --ads-button-color-tertiary-hover: var(--lp-hover-text);
 }
 ads-cta-button {
       /* primary */
       --ads-cta-button-background-color-primary-hover: var(--arm-green);
       --ads-cta-button-border-color-primary-hover: var(--arm-green);
+      --ads-cta-button-color-primary-hover: var(--lp-hover-text);
   
       /* secondary */
       --ads-cta-button-border-color-secondary-hover: var(--arm-green);
-      --ads-cta-button-color-secondary-hover: var(--arm-green);
+      --ads-cta-button-color-secondary-hover: var(--lp-hover-text);
   
       /* tertiary */
       --ads-cta-button-border-color-tertiary-hover: var(--arm-green);
-      --ads-cta-button-color-tertiary-hover: var(--arm-green);  
+      --ads-cta-button-color-tertiary-hover: var(--lp-hover-text);
 }
 
 /* button, form submit syntax */
 input[type="submit"]:hover {
     background-color: var(--arm-green);
     border-color: var(--arm-green);
+    color: var(--lp-hover-text);
     box-shadow: none;
 }
 ads-tag {
     --ads-tag-border-color-hover: var(--arm-green);
-    --ads-tag-color-hover: var(--arm-green);
+    --ads-tag-color-hover: var(--lp-hover-text);
 }
 
 /* Remove text decorations on all a links when highlighted */
 a:hover {
     text-decoration: none;
-    color: var(--arm-green);
+    color: var(--lp-hover-text);
 }
 ads-cta-link {
-    --ads-cta-link-color-hover: var(--arm-green);
+    --ads-cta-link-color-hover: var(--lp-hover-text);
 }
 ads-search {
     --ads-search-border-color-hover: var(--arm-green);
@@ -241,9 +245,9 @@ ads-masthead {
 
 
 ads-breadcrumbs {
-    --ads-breadcrumb-color: var(--arm-green);
-    --ads-breadcrumbs-link-color: var(--arm-green);
-    --ads-breadcrumbs-link-color-visited: var(--arm-green);
+    --ads-breadcrumb-color: var(--lp-accent-secondary);
+    --ads-breadcrumbs-link-color: var(--lp-accent-secondary);
+    --ads-breadcrumbs-link-color-visited: var(--lp-accent-secondary);
 }
 
 

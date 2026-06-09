@@ -87,7 +87,7 @@ a:hover {
     border-color: var(--arm-green);
 }
 .tab-row.inactive:hover h6 {
-    color: var(--arm-green); }
+    color: var(--lp-hover-text); }
 
 
 
@@ -110,7 +110,7 @@ html[theme='dark'] p.github-link        {
     color: var(--arm-light-blue);
 }
 html[theme='dark'] p.github-link:hover {
-    color: var(--arm-green);
+    color: var(--lp-hover-text);
 }
 
 div.github-div {
@@ -170,11 +170,11 @@ html[theme='dark'] .multi-tool-selection-title {
 }
 ads-card.multi-install-card:hover .multi-tool-selection-title{
     transition: color 0.3s ease-in-out;
-    color: var(--arm-green);
+    color: var(--lp-hover-text);
 }
 html[theme='dark'] ads-card.multi-install-card:hover .multi-tool-selection-title {
     transition: color 0.3s ease-in-out;
-    color: var(--arm-green);
+    color: var(--lp-hover-text);
 }
 
 
@@ -258,7 +258,7 @@ html[theme='dark'] .incorrect-explain {color: #e86868} /* 27% lighter than arm's
     text-decoration: none;
 }
 .social-icons a:hover {
-    color: var(--arm-green);
+    color: var(--lp-hover-text);
 }
 
 .share-icon {
@@ -268,11 +268,11 @@ html[theme='dark'] .incorrect-explain {color: #e86868} /* 27% lighter than arm's
     text-decoration: none;
 }
 .share-icon:hover {
-    fill: var(--arm-green);
+    fill: var(--lp-hover-text);
     cursor: pointer;
   }
 #link-copied-success {
-    color: var(--arm-green);
+    color: var(--lp-hover-text);
     background-color: var(--arm-black);
     border-radius: 10px;
     padding-left:8px;
