@@ -243,6 +243,83 @@ function renderAuthInTopNav() {
 
 }
 
+function setArmAccountLoginButtonLevel() {
+  const shadowRoot = document.querySelector("arm-top-navigation")?.shadowRoot;
+  if (!shadowRoot) return;
+
+  const loginButton = shadowRoot.querySelector(".c-utility-navigation-login__sign-in-button") ||
+    Array.from(shadowRoot.querySelectorAll("ads-button, button, a, [role='button']")).find((element) => {
+    return (element.textContent || "").trim() === "Login";
+  });
+  if (!loginButton) return;
+
+  if (loginButton.tagName.toLowerCase() === "ads-button") {
+    loginButton.classList.add("learning-paths-account-login-button");
+    loginButton.setAttribute("level", "primary");
+    loginButton.setAttribute("sr-label", "Login");
+    return;
+  }
+
+  if (loginButton.dataset.learningPathsAdsButtonProxy === "true") return;
+
+  const adsButton = document.createElement("ads-button");
+  adsButton.classList.add("learning-paths-account-login-button");
+  adsButton.setAttribute("level", "primary");
+  adsButton.setAttribute("sr-label", "Login");
+  adsButton.textContent = "Login";
+  adsButton.addEventListener("click", () => {
+    document.dispatchEvent(new CustomEvent("arm-account-signin"));
+  });
+
+  loginButton.dataset.learningPathsAdsButtonProxy = "true";
+  loginButton.replaceWith(adsButton);
+}
+
+function setArmAccountLinkColors() {
+  const shadowRoot = document.querySelector("arm-top-navigation")?.shadowRoot;
+  if (!shadowRoot) return;
+
+  shadowRoot.querySelectorAll(".learning-paths-account-link").forEach((element) => {
+    element.classList.remove("learning-paths-account-link");
+  });
+
+  const accountHeading = Array.from(shadowRoot.querySelectorAll("*")).find((element) => {
+    return (element.textContent || "").trim() === "ARM ACCOUNT";
+  });
+  if (!accountHeading) return;
+
+  let panel = null;
+  let candidate = accountHeading.parentElement;
+  while (candidate && candidate !== shadowRoot) {
+    const text = candidate.textContent || "";
+    const isAccountPanel = text.includes("ARM ACCOUNT") &&
+      text.includes("Quick Links") &&
+      text.includes("Manage Your Account");
+    const isWholeNavigation = text.includes("Blogs") &&
+      text.includes("CPU & Hardware") &&
+      text.includes("Documentation");
+
+    if (isAccountPanel && !isWholeNavigation) {
+      panel = candidate;
+      break;
+    }
+
+    candidate = candidate.parentElement;
+  }
+  if (!panel) return;
+
+  panel.querySelectorAll("a, [role='link']").forEach((element) => {
+    element.classList.add("learning-paths-account-link");
+  });
+}
+
+function scheduleArmAccountPanelUpdates() {
+  [0, 100, 250, 500, 1000].forEach((delay) => {
+    window.setTimeout(setArmAccountLoginButtonLevel, delay);
+    window.setTimeout(setArmAccountLinkColors, delay);
+  });
+}
+
 function applyTopNavHighlightColor() {
   const topnav = document.querySelector("arm-top-navigation");
   const shadowRoot = topnav?.shadowRoot;
@@ -314,6 +391,27 @@ function applyTopNavHighlightColor() {
       [role="menuitem"]:hover::after {
         background-color: ${highlightColor} !important;
         border-color: ${highlightColor} !important;
+      }
+
+      ads-button.learning-paths-account-login-button {
+        display: block;
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
+        width: 100%;
+      }
+
+      .learning-paths-account-link,
+      .learning-paths-account-link * {
+        color: ${highlightColor} !important;
+        -webkit-text-fill-color: ${highlightColor} !important;
+      }
+
+      .learning-paths-account-link:hover,
+      .learning-paths-account-link:hover *,
+      .learning-paths-account-link:focus-visible,
+      .learning-paths-account-link:focus-visible * {
+        color: #00C1DE !important;
+        -webkit-text-fill-color: #00C1DE !important;
       }
     `;
     shadowRoot.appendChild(style);
@@ -399,7 +497,15 @@ document.addEventListener("arm-top-navigation-ready", function (e) {
 
   window.requestAnimationFrame(applyTopNavHighlightColor);
   window.setTimeout(applyTopNavHighlightColor, 250);
+  window.requestAnimationFrame(setArmAccountLoginButtonLevel);
+  window.requestAnimationFrame(setArmAccountLinkColors);
+  scheduleArmAccountPanelUpdates();
   renderAuthInTopNav();
+});
+
+document.addEventListener("click", function (event) {
+  if (!event.target.closest("arm-top-navigation")) return;
+  scheduleArmAccountPanelUpdates();
 });
 
 function scheduleTopNavHighlightColor() {
