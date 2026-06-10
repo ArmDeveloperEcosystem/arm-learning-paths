@@ -15,7 +15,8 @@ Start with `AGENTS.md` at the repository root to identify the right source files
 
 Read only the guidance needed for the task:
 
-- Repository-wide guidance: `.github/copilot-instructions.md`
+- Repository structure and content model: `references/repository-guidance.md`
+- Writing style, headings, links, terminology, and prose cleanup: `references/writing-style.md`
 - Shared content quality: `.github/instructions/content-quality.instructions.md`
 - Learning Paths: `.github/instructions/learning-paths.instructions.md`
 - Install guides: `.github/instructions/install-guides.instructions.md`
