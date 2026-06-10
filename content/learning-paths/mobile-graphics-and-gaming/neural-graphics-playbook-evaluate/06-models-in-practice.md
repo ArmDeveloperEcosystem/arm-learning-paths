@@ -6,7 +6,7 @@ weight: 7
 layout: learningpathall
 ---
 
-Up to this point, we’ve focused on evaluating neural graphics from a rendering and integration perspective. But if you’ve decided to give this a go, there’s another layer you might need to think about: models.
+Up to this point, the focus has been on evaluating neural graphics from a rendering and integration perspective. But if you've decided to give this a go, there's another layer you might need to think about: models.
 
 If you’re working with technologies such as NSS or NFRU, model support is already handled for you. The models are provided, integrated, and ready to use through the Unreal Engine plugins. In practice, this means you can approach them much like any other engine feature: enable them, test them in your project, and decide if they fit.
 
@@ -20,7 +20,7 @@ For most game teams, this is new ground. It raises questions such as:
 
 Instead, a good way to think about it is in stages.
 
-Start with what’s readily available — NSS or NFRU — and use that to build intuition. Validate the results in your game. Use our tools for fine-tuning and data collection for NSS. Get a feel for how these techniques behave in your pipeline.
+Start with what's readily available — NSSD or NFRU — and use that to build intuition. Validate the results in your game. Use the available tools for fine-tuning and data collection for NSSD. Get a feel for how these techniques behave in your pipeline.
 
 From there, if you’re interested in pushing further, this is where model work starts to become relevant. This section focuses on that path — how to take what’s available and make it work for your game.
 
@@ -42,7 +42,7 @@ A strong baseline flow is:
 
 After the baseline is stable, the next step is to look at your own content. Before touching the model, capture data that reflects how your game actually behaves — camera motion, lighting changes, particles, UI, scene cuts. This is where a lot of issues show up, and you need something repeatable to work from.
 
-We created the Unreal data capture plugin to enable that loop for NSS. You run the game, capture specific sequences, and export them into a dataset that can be reused for testing and training with NSS.
+The Unreal data capture plugin enables this workflow for NSSD. You run the game, capture specific sequences, and export them into a dataset that can be reused for testing and training with NSSD.
 
 [Use the dedicated Neural Graphics Data Capture app workflow in Unreal](/learning-paths/mobile-graphics-and-gaming/neural-graphics-data-capture-unreal/)
 

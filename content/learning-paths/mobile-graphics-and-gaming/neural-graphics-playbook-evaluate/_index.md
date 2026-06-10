@@ -1,12 +1,12 @@
 ---
-title: Neural Technology Playbook - Evaluate
+title: Arm Neural Technology Playbook - Evaluate
 description: Evaluate whether Arm Neural Technology techniques such as NFRU and NSSD are a fit for your game.
 minutes_to_complete: 45
 
 who_is_this_for: This Learning Path is for game developers and graphics engineers evaluating Arm Neural Technology for mobile games.
 
 learning_objectives:
-    - Understand why Neural Technology matters for mobile games
+    - Understand why Arm Neural Technology matters for mobile games
     - Learn what Arm built with Neural Dawn
     - Evaluate whether NFRU and NSSD are a fit for your game
 
@@ -30,7 +30,7 @@ operatingsystems:
 
 further_reading:
     - resource:
-        title: Neural Technology for Mobile Games
+        title: Arm Neural Technology for Mobile Games
         link: https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics
         type: website
     - resource:
