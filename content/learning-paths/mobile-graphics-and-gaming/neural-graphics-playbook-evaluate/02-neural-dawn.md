@@ -1,5 +1,6 @@
 ---
 title: Discover Neural Dawn
+description: Explore Neural Dawn, a mobile game built to demonstrate Arm Neural Technology, and understand how NFRU and NSSD work together to deliver high-fidelity visuals at 60 FPS.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

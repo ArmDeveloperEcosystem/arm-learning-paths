@@ -1,5 +1,6 @@
 ---
 title: Evaluate Arm Neural Technology for your mobile game
+description: Learn why Arm Neural Technology matters for mobile games, how Neural Super Sampling provides the foundation, and how Neural Dawn validates these techniques in production.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

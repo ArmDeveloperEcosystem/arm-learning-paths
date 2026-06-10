@@ -1,5 +1,6 @@
 ---
 title: Evaluate fit for your game
+description: Determine whether NFRU and NSSD are right for your mobile game by understanding content requirements, performance tradeoffs, and which game types benefit most from neural graphics.
 weight: 5
 
 ### FIXED, DO NOT MODIFY

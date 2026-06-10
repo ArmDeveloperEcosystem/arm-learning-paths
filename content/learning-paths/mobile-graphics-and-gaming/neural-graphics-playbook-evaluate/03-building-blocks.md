@@ -1,5 +1,6 @@
 ---
 title: Learn how NFRU and NSSD work
+description: Understand the technical architecture of NFRU and NSSD, including how optical flow reconstruction and neural denoising combine to render one-eighth of total pixels.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
