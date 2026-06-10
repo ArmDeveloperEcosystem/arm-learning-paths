@@ -1,16 +1,16 @@
 ---
-title: Creating a new Topo Template
+title: Create a new Topo Template
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Create a Topo Template from scratch
+## Create a web page with configurable text and color
 
-You have already cloned and modified an existing Topo Template. In this section, you will create a new Template from an empty directory.
+You've already cloned and modified an existing Topo Template. In this section, you'll create a new Template from an empty directory.
 
-The Template you create serves a small web page with configurable text and color. It demonstrates the core parts of a Topo Template:
+The new Template will serve a small web page with configurable text and color and demonstrate the core parts of a Topo Template:
 
 - A `compose.yaml` file with standard Compose services
 - An `x-topo` metadata block
@@ -26,9 +26,9 @@ mkdir -p ~/topo-message-card
 cd ~/topo-message-card
 ```
 
-A Topo Template is a normal project directory. At minimum, it must contain a `compose.yaml` file. Most Templates also include a `Dockerfile` and application source code.
+A Topo Template is a normal project directory. At minimum, it needs to contain a `compose.yaml` file. Most Templates also include a `Dockerfile` and application source code.
 
-The directory you create in this section will have the following structure:
+By the end of this section, the directory you created will have the following structure:
 
 ```output
 topo-message-card/
@@ -38,7 +38,7 @@ topo-message-card/
     └── index.html
 ```
 
-### Create the web page
+### Create the source file for the web page
 
 Create the `src/` subdirectory and `src/index.html`:
 
@@ -119,7 +119,7 @@ Topo passes configuration values to Templates through Docker build arguments. Th
 
 `sed` is a command-line text replacement tool. The `sed` commands replace placeholder text in `index.html` during the image build, so each cloned project can customize the web page without manually editing the source file.
 
-### Create the compose file
+### Create the Compose file
 
 Create `compose.yaml` in the `topo-message-card` directory with the following content:
 
@@ -248,7 +248,7 @@ topo ps --target user@my-target
 
 The output should include the `message-card` service and port `8088`.
 
-### Adding hardware requirements
+## (Optional) Add hardware requirements
 
 Only add `features` when your Template needs specific Arm hardware features. For example, a SIMD benchmark that requires SVE can declare that it needs SVE:
 
@@ -264,7 +264,7 @@ x-topo:
 
 Topo can use these feature requirements when listing Templates against a target.
 
-### Share the Template
+## Share the Template
 
 To share your Template, publish the Template directory as a Git repository. Other users can then clone it with Topo:
 

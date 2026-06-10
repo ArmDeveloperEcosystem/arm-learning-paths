@@ -1,22 +1,24 @@
 ---
-title: Deploy the Topo 'Hello World' Template
+title: Clone and deploy the Topo 'Hello World' Template
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-Deploy the `Hello World` Template to confirm your setup before modifying it in the next section. This Template follows the same deployment pattern as the `CPU LLM Chat` Template covered in [Deploy containerized workloads to Arm-based Linux targets with Topo](/learning-paths/cross-platform/deploy-containerized-workloads-with-topo/).
+
+
+Clone the `Hello World` Template to confirm your setup before modifying it in the next section. .
 
 ## Clone the 'Hello World' Topo Template
 
-On your host machine, use the terminal to clone the template into your home directory.
+On your host machine, use the terminal to clone the `Hello World` Template into your home directory. This Template follows the same deployment pattern as the `CPU LLM Chat` Template covered in [Deploy containerized workloads to Arm-based Linux targets with Topo](/learning-paths/cross-platform/deploy-containerized-workloads-with-topo/):
 
 ```bash
 topo clone https://github.com/Arm-Examples/topo-welcome.git ~/topo-welcome
 ```
 
-The output should be similar to the following. You will be prompted for configuration arguments:
+The output is similar to:
 
 ```output
 ┌─ Copy files ──────────────────────────────────────────
@@ -36,7 +38,9 @@ GREETING_NAME (required)>
 
 Provide a name for the `GREETING_NAME` argument, for example, 'Tomas'.
 
-Press Enter to submit your entry. You will then see a similar output to below:
+Press Enter to submit your entry.
+
+The output is similar to:
 
 ```output
 ┌─ Project ready ───────────────────────────────────────
@@ -49,7 +53,7 @@ Now run:
 
 ## Prepare your target
 
-Topo Templates are meant to be deployed to Arm-based Linux targets. In this Learning Path, use the Arm-based Linux target you prepared in the previous Learning Path, for example a Raspberry Pi, AWS Arm instance, or other Linux target accessible over SSH.
+Topo Templates are meant to be deployed to Arm-based Linux targets. In this Learning Path, use the Arm-based Linux target you prepared in the previous Learning Path. The target can be a Raspberry Pi, an Arm-based Amazon EC2 instance, or other Linux target accessible over SSH.
 
 Confirm that Topo can inspect your target, and that there are no compatibility issues:
 
@@ -68,7 +72,9 @@ cd ~/topo-welcome
 topo deploy --target user@my-target
 ```
 
-Wait for the build and deploy to complete. The expected output is similar to:
+Wait for the build and deploy to complete. 
+
+The output is similar to:
 
 ```output
 ┌─ Build images ────────────────────────────────────────
@@ -102,7 +108,9 @@ Confirm that the container is running correctly:
 topo ps --target user@my-target
 ```
 
-The `topo ps` command lists the services that Topo deployed to the target. The output should be similar to:
+The `topo ps` command lists the services that Topo deployed to the target. 
+
+The output is similar to:
 
 ```output
 Image              Status                  Processing Domain   Address
@@ -135,6 +143,6 @@ The Hello World application appears as follows:
 
 ## What you've accomplished and what's next
 
-You deployed the Hello World Template to an Arm-based Linux target and confirmed the application is accessible in your browser.
+You've now deployed the Hello World Topo Template to an Arm-based Linux target and confirmed the application is accessible in your browser.
 
-Next, you will modify the Template to add a new configurable clone-time argument.
+Next, you'll modify the Template to add a new configurable clone-time argument.

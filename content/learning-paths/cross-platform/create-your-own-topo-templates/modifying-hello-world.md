@@ -1,16 +1,16 @@
 ---
-title: Modifying the 'Hello World' Template
+title: Modify the 'Hello World' Topo Template
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Modify the 'Hello World' Template
+## Make the greeting eemoji in the 'Hello World' Template configurable
 
-In the previous section, you cloned and deployed the Hello World Template. In this section, you will modify the Template so the greeting emoji can be configured when someone clones the Template.
+In the previous section, you cloned and deployed the Hello World Template. In this section, you'll modify the Template so the greeting emoji can be configured when someone clones the Template.
 
-## Add a new Template argument
+### Add a new Template argument
 
 On your host machine:
 
@@ -30,7 +30,7 @@ args:
     example: "Markus"
 ```
 
-Add a new `GREETING_EMOJI` argument below `GREETING_NAME`:
+Add a new `GREETING_EMOJI` argument as a second clone-time argument after `GREETING_NAME`:
 
 ```yaml
 args:
@@ -46,9 +46,11 @@ args:
     example: "🚀"
 ```
 
-This adds a second clone-time parameter. The argument is optional, so users can press Enter to accept the default whale emoji.
+The argument is optional, so users can press Enter to accept the default whale emoji.
 
-Make sure that `GREETING_NAME` and `GREETING_EMOJI` are indented under `args`. If they are aligned with `args`, Topo will not detect them as clone-time arguments and will not prompt for values.
+{{% notice Note %}}
+Make sure that `GREETING_NAME` and `GREETING_EMOJI` are indented under `args`. If they're aligned with `args`, Topo won't detect them as clone-time arguments and won't prompt for values.
+{{% /notice %}}
 
 ### Pass the emoji to the build
 
@@ -63,7 +65,7 @@ services:
         GREETING_NAME: World
 ```
 
-Add `GREETING_EMOJI` to the build arguments:
+Add `GREETING_EMOJI` to the build arguments to make the emoji available to the `Dockerfile` when Topo builds the application image:
 
 ```yaml
 services:
@@ -75,9 +77,7 @@ services:
         GREETING_EMOJI: "🐳"
 ```
 
-This makes the emoji available to the `Dockerfile` when Topo builds the application image.
-
-### Replace the hard-coded emoji
+## Replace the hard-coded emoji in the web application
 
 Open `src/index.html`, the HTML file used by the web application, in a text editor of your choice. 
 
@@ -95,7 +95,7 @@ Replace it with the `GREETING_EMOJI` Template variable:
 
 Topo replaces `{{GREETING_EMOJI}}` with the value provided during `topo clone`.
 
-### Update the Dockerfile
+## Update the Dockerfile
 
 Open the `Dockerfile`, which is inside the `topo-welcome` directory. It currently defines `GREETING_NAME` as a build argument and uses `sed` to replace the `{{GREETING_NAME}}` placeholder:
 
@@ -119,7 +119,7 @@ RUN sed -i "s|{{GREETING_NAME}}|${GREETING_NAME}|" /usr/share/nginx/html/index.h
 RUN sed -i "s|{{GREETING_EMOJI}}|${GREETING_EMOJI}|" /usr/share/nginx/html/index.html
 ```
 
-### Clone the modified Template
+## Clone the modified Template
 
 Create a new directory for a fresh clone of your modified local Template:
 
@@ -150,7 +150,7 @@ Default: 🐳
 GREETING_EMOJI (optional)> 🚀
 ```
 
-### Deploy the modified Template
+## Deploy the modified Template
 
 ```bash
 cd ~/topo-new-welcome/topo-welcome
@@ -173,6 +173,6 @@ The Hello World application appears as follows:
 
 ## What you've accomplished and what's next
 
-You modified the Hello World Template to add a new optional clone-time argument, updated the Dockerfile to consume it, and deployed the result to your Arm-based Linux target.
+You've now modified the "Hello World" Template to add a new optional clone-time argument, updated the Dockerfile to consume the argument, and deployed the result to your Arm-based Linux target.
 
-Next, you will create a new Topo Template from scratch.
+Next, you'll create a new Topo Template from scratch.
