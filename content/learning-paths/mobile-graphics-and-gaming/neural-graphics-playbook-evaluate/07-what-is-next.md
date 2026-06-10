@@ -1,5 +1,6 @@
 ---
 title: What's next?
+
 description: Review key takeaways about Arm Neural Technology evaluation and learn how to get started with the Neural Graphics Development Kit and Early Access Program.
 weight: 8
 

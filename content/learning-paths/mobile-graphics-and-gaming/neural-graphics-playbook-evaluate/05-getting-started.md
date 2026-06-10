@@ -1,7 +1,7 @@
 ---
 title: Get started with NFRU and NSSD
-description: Begin evaluating NFRU through the Unreal Engine plugin and explore NSSD integration with MegaLights for deeper rendering pipeline customization.
 weight: 6
+description: Begin evaluating NFRU through the Unreal Engine plugin and explore NSSD integration with MegaLights for deeper rendering pipeline customization.
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

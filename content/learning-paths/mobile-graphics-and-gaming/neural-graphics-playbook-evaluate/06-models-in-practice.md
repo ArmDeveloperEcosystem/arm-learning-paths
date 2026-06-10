@@ -1,7 +1,8 @@
 ---
 title: Work with neural graphics models
-description: Learn when to use prebuilt models versus custom training, how to capture game data for fine-tuning, and optimize neural graphics models for runtime performance.
 weight: 7
+description: Learn when to use prebuilt models versus custom training, how to capture game data for fine-tuning, and optimize neural graphics models for runtime performance.
+
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
