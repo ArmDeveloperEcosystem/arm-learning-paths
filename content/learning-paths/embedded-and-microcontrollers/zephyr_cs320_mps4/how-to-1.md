@@ -1,16 +1,17 @@
 ---
 title: Set up the Zephyr build environment
+description: Install Zephyr host dependencies, initialize a Zephyr workspace with west, and configure the Arm GNU Toolchain for Corstone-320 MPS4 builds.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Set up the development environment
+## Prepare the development environment
 
-Before you build Zephyr for the Corstone-320 MPS4 platform, you need to install the required host packages, initialize a Zephyr workspace, and install the Arm GNU Toolchain.
+Before you can build Zephyr for the Arm Corstone-320 MPS4 platform, you'll need to install the required host packages, initialize a Zephyr workspace, and configure the Arm GNU Toolchain.
 
-## Install host dependencies
+### Install host dependencies
 
 Update your package list and install the packages that Zephyr requires. Select the tab for your host architecture:
 
@@ -42,7 +43,7 @@ python3 --version
 dtc --version
 ```
 
-## Set up the Zephyr workspace
+### Set up the Zephyr workspace
 
 Create a Python virtual environment and use `west` to initialize the Zephyr workspace. The following commands place the workspace in `~/zephyrproject`, but you can choose a different location.
 
@@ -76,9 +77,9 @@ Install the Python packages that Zephyr requires:
 west packages pip --install
 ```
 
-## Install the Arm GNU Toolchain
+### Install the Arm GNU Toolchain
 
-The Corstone-320 target uses the Cortex-M85 processor, so you need the `arm-none-eabi` bare-metal toolchain from the Arm GNU Toolchain. For a detailed installation guide covering all platforms, refer to the [Arm GNU Toolchain](/install-guides/gcc/arm-gnu/) install guide.
+The Corstone-320 target uses the Cortex-M85 processor, so you need the `arm-none-eabi` bare-metal toolchain from the Arm GNU Toolchain. For a detailed installation guide covering all platforms, see the [Arm GNU Toolchain](/install-guides/gcc/arm-gnu/) install guide.
 
 {{% notice Note %}}
 The following commands use Arm GNU Toolchain version 15.2.Rel1. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Arm GNU Toolchain downloads](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads).
@@ -122,7 +123,7 @@ This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
 
-## Configure the toolchain for Zephyr
+### Configure the Arm GNU Toolchain for Zephyr
 
 Zephyr uses two environment variables to locate the Arm GNU Toolchain. Set these each time you open a new terminal, or add them to your shell configuration file:
 
@@ -143,4 +144,8 @@ export GNUARMEMB_TOOLCHAIN_PATH=$HOME/arm-gnu-toolchain-15.2.rel1-x86_64-arm-non
   {{< /tab >}}
 {{< /tabpane-normal >}}
 
-Your build environment is now ready. The next section covers adding Zephyr board support files for the Corstone-320 MPS4 platform.
+## What you've accomplished and what's next
+
+You've now set up a development environment to build Zephyr. 
+
+Next, you'll add board support files to port Zephyr to the Corstone-320 MPS4 platform.

@@ -6,15 +6,15 @@ weight: 4
 layout: learningpathall
 ---
 
-## Configure the QuantLib build
+## Configure the build
 
-From the QuantLib source directory:
+Return to the QuantLib source directory. The command uses the `QL_VER` variable that you exported when downloading the source archive:
 
 ```bash
 cd ~/QuantLib-$QL_VER
 ```
 
-Run the configure script:
+Run the configure script with benchmark support enabled:
 ```bash
 ./configure \
 --prefix=/usr/local \
@@ -24,43 +24,38 @@ CFLAGS="-g -O2 -mcpu=native" \
 CXXFLAGS="-g -O2 -mcpu=native"
 ```
 
-This configuration:
+This configuration installs QuantLib to `/usr/local`. It enables the benchmark executable and parallel test execution, and it applies CPU-specific optimization flags. 
 
-- installs QuantLib to `/usr/local`
-- enables the benchmark executable
-- enables parallel test execution
-- applies CPU-specific optimization flags
+## Install QuantLib
 
-
-## Build QuantLib
-
-Compile using all available cores:
+Compile using all available cores. The `nproc` command returns the number of processing units visible to the VM, so `make -j$(nproc)` keeps the build command portable across VM sizes:
 
 ```bash
 make -j$(nproc)
 ```
 
 {{% notice Note %}}
-The build may take 30–45 minutes on smaller instances. Use tmux to avoid losing progress if your SSH session disconnects.
+The build may take 30–45 minutes on the Standard_D4ps_v5. If your SSH session might disconnect, set up tmux before running `make` — see [(Optional) Use tmux for remote builds](/learning-paths/servers-and-cloud-computing/quantlib/2-setup-environment/#optional-use-tmux-for-remote-builds) in the previous section.
 {{% /notice %}}
 
-## Install QuantLib
-
-After the build completes:
+After the build completes, install QuantLib into `/usr/local` and refresh the dynamic linker cache:
 
 ```bash
 sudo make install
 sudo ldconfig
 ```
 
-## Verify the build
+Move to the test suite and check that the benchmark executable was created:
 
-Move to the test suite:
 ```bash
 cd ~/QuantLib-$QL_VER/test-suite
-```
-
-Check that the benchmark executable exists:
-```bash
 ls quantlib-benchmark
 ```
+
+You should see `quantlib-benchmark` in the output. You'll use this executable in the next section.
+
+## What you've accomplished and what's next
+
+You've now completed the installation of QuantLib after building it with support for benchmarking. 
+
+Next, you'll run benchmarks on QuantLib with different sizes and thread counts.

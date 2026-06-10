@@ -6,9 +6,9 @@ weight: 4
 layout: learningpathall
 ---
 
-## Run inference on LLama3.1-8B
+## Run inference on Llama3.1-8B
 
-vLLM serves an OpenAI-compatible API that you use to run inference on Llama3.1-8B. This confirms that the local environment is set up correctly.
+vLLM serves an OpenAI-compatible API that you'll use to run inference on Llama3.1-8B and confirm that the local environment is set up correctly.
 
 Start vLLM’s OpenAI-compatible API server using Llama3.1-8B:
 ```bash
@@ -27,9 +27,9 @@ The server prints its available routes and then confirms it's ready:
 (APIServer pid=27612) INFO:     Application startup complete.
 ```
 
-Wait until you see `Application startup complete` before continuing. The server is now listening on port 8000. Open a new terminal to run the client script while the server continues running in the first terminal.
+Wait until you see `Application startup complete` before continuing. The server is now listening on port `8000`. Open a new terminal to run the client script while the server continues running in the first terminal.
 
-Then create a test script that sends a request to the server using the OpenAI library. Copy the Python script below to a file named `llama_test.py`:
+Then create a test script that sends a request to the server using the OpenAI library. Copy the following Python script to a file named `llama_test.py`:
 
 ```python
 import time
@@ -87,7 +87,7 @@ In computer science, big O notation is used to classify algorithms according to 
 Batch completed in : 16.50s
 ```
 
-The response is truncated at 128 tokens, which is why the explanation cuts off mid-sentence — this is controlled by the `max_tokens=128` parameter in the script. In the server terminal you can also see throughput metrics logged in tokens per second.
+The response is truncated at 128 tokens, which is why the explanation cuts off mid-sentence. The response length is controlled by the `max_tokens=128` parameter in the script. In the server terminal, you can also see throughput metrics logged in tokens per second.
 
 You can do the same for the pre-quantized model loaded directly from Hugging Face. Stop the running server first with Ctrl+C, then start the quantized model server:
 ```bash
@@ -166,7 +166,9 @@ Wait for the server to confirm it's ready. You'll notice the Whisper server expo
 (APIServer pid=29957) INFO:     Application startup complete.
 ```
 
-Open a new terminal once you see `Application startup complete`. Then create a test script that sends a request with an audio file to the server using the OpenAI library. Copy the Python script below to a file named `whisper_test.py`.
+Open a new terminal after you see `Application startup complete`. Then create a test script that sends a request with an audio file to the server using the OpenAI library. 
+
+Copy the following Python script to a file named `whisper_test.py`:
 
 ```python
 import time
@@ -202,7 +204,7 @@ if __name__ == "__main__":
     main()
 ```
 
-Now run the script with:
+Now run the script:
 ```bash
 python whisper_test.py
 ```
@@ -216,7 +218,7 @@ The output is similar to:
 Batch completed in : 31.85s
 ```
 
-The script uses `AudioAsset("winning_call")`, a sample audio clip bundled with vLLM. The transcription confirms Whisper is processing audio correctly on Arm64.
+The script uses `AudioAsset("winning_call")`, a sample audio clip bundled with vLLM. The transcription confirms Whisper is processing audio correctly on Arm-based Linux.
 
 You can do the same for the pre-quantized Whisper model loaded directly from Hugging Face. Start the server:
 ```bash
@@ -254,4 +256,10 @@ The output is similar to:
 Batch completed in : 8.14s
 ```
 
-The quantized Whisper model completes the same transcription in roughly a quarter of the time — approximately a 4x speedup — while producing an identical transcription. You have installed vLLM and demonstrated you can run inference on your models. Now you can move on to benchmarking the Llama models and compare their performance.
+The quantized Whisper model completes the same transcription in roughly a quarter of the time — approximately a 4x speedup — while producing an identical transcription. 
+
+## What you've accomplished and what's next
+
+You've now installed vLLM and run inference on your Llama and Whisper models. You've seen speedups in task completion between quantized and non-quantized models.
+
+Next, you'll benchmark the Llama models and compare their performance.
