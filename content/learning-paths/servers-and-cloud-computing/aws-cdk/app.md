@@ -7,17 +7,15 @@ layout: "learningpathall"
 
 ## Set up a sample AWS CDK application
 
-The AWS Cloud Development Kit (CDK) is an open-source Infrastructure as Code (IaC)software development framework that you can use to define and deploy applications on Arm-based cloud infrastructure on AWS. 
+The AWS Cloud Development Kit (CDK) is an open-source Infrastructure as Code (IaC)software development framework. You can use the AWS CDK to define and deploy applications on Arm-based cloud infrastructure powered by AWS Graviton. 
 
-To deploy an application using the CDK, you'll create the application in a supported programming language. You'll then use the CDK CLI to synthesize the application to an AWS CloudFormation template that's deploys resources on AWS. 
+In this section, you'll initialize a CDK project and create a web server application in JavaScript to be deployed on AWS using Amazon Elastic Container Service (Amazon ECS). 
 
 ### Before you begin
 
 Make sure that you've completed all prerequisite steps and installed the AWS CDK CLI. For more information, see the [AWS CDK install guide](/install-guides/aws-cdk).
 
 ### Initialize a CDK project
-
-In this Learning Path, you'll use Amazon Elastic Container Service (ECS) to deploy containers on AWS Graviton-based compute. 
 
 Create a directory for your CDK project and navigate to it:
 
@@ -54,9 +52,9 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app. The build ste
 
 ### Use the AWS CDK with JavaScript to define a sample application
 
-In the project, you'll find a file called `arm-cdk-app-stack.js` in the `lib ` directory. This stack definition is what the AWS CDK uses to deploy resources.
+In the project, you'll find a file called `arm-cdk-app-stack.js` in the `lib ` directory. AWS CDK uses this stack definition to deploy all necessary AWS resources.
 
-Update `lib/arm-cdk-app-stack.js` with the following:
+Update `lib/arm-cdk-app-stack.js` to define a load balanced Amazon ECS service that runs an NGINX web server on an Arm-based AWS Fargate runtime platform:
 
 ```javascript
 const cdk = require('aws-cdk-lib');
@@ -71,14 +69,12 @@ class ArmCdkAppStack extends cdk.Stack {
     new ecsPatterns.ApplicationLoadBalancedFargateService(this, 'Service', {
       taskImageOptions: {
        image: ecs.ContainerImage.fromRegistry("nginx:latest"),
-        containerPort: 8080,
+       containerPort: 80,
       },
       runtimePlatform: {
         cpuArchitecture: ecs.CpuArchitecture.ARM64,
         operatingSystemFamily: ecs.OperatingSystemFamily.LINUX,
       },
-      cpu: 256,
-      memoryLimitMiB: 512,
       publicLoadBalancer: true,
     });
   }
@@ -86,8 +82,6 @@ class ArmCdkAppStack extends cdk.Stack {
 
 module.exports = { ArmCdkAppStack };
 ```
-
-The application defines a load balanced Fargate service that runs an NGINX web server on an Arm-based platform. 
 
 ## What you've accomplished and what's next
 

@@ -18,7 +18,7 @@ tool_install: true
 weight: 1
 ---
 
-The AWS Cloud Development Kit (CDK) is an open-source Infrastructure as Code (IaC)software development framework that you can use to define and deploy applications on Arm-based cloud infrastructure on AWS. 
+The AWS Cloud Development Kit (CDK) is an open-source Infrastructure as Code (IaC)software development framework. You can use the AWS CDK to define and deploy applications on Arm-based cloud infrastructure powered by AWS Graviton. 
 
 With the CDK, you can write applications in a supported programming language of your choice. You can then use the AWS CDK CLI to translate the code into an AWS CloudFormation template and deploy to the cloud. 
 
@@ -28,7 +28,7 @@ The CDK CLI supports different operating systems and the Arm architecture. In th
 
 Before you can use the AWS CDK, you need to set up AWS credentials and install the AWS CLI. For more information about setting up AWS credentials and installing the AWS CLI, see the [AWS Credentials](/install-guides/aws_access_keys) and [AWS CLI](/install-guides/aws-cli) install guides. 
 
-To install AWS CDK CLI, you'll need Node.js 22 or later. You'll also need to install prerequisites specific to the programming languages you want to use. For more information about Node.js and language-specific prerequisites, see [Install Node.js and programming language prerequisites](https://docs.aws.amazon.com/cdk/v2/guide/prerequisites.html#prerequisites-node) in the AWS CDK documentation.
+To install the AWS CDK CLI, you'll need Node.js 22 or later. You'll also need to install prerequisites specific to the programming languages that you want to use. For more information about Node.js and language-specific prerequisites, see [Install Node.js and programming language prerequisites](https://docs.aws.amazon.com/cdk/v2/guide/prerequisites.html#prerequisites-node) in the AWS CDK documentation.
 
 ## Install the AWS CDK CLI
 
@@ -55,4 +55,4 @@ The output is similar to:
 
 You've now installed the AWS CDK CLI and verified that the installation was successful.
 
-Next, you can use the AWS CDK to create and deploy applications on Arm-based AWS infrastructure. To learn how you can use the CDK and Amazon ECS to run containers on Arm-based compute, see [Deploy containers on Arm-based compute using Amazon ECS and the AWS CDK](earning-paths/servers-and-cloud-computing/aws-cdk/).
+Next, you can use the AWS CDK to create and deploy applications on Arm-based compute powered by AWS Graviton. To learn how you can use the CDK and Amazon Elastic Container Service (ECS) to run containers on Arm-based compute, see [Deploy containers on Arm-based compute using Amazon ECS and the AWS CDK](earning-paths/servers-and-cloud-computing/aws-cdk/).
