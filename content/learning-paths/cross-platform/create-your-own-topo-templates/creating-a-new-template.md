@@ -40,7 +40,13 @@ topo-message-card/
 
 ### Create the web page
 
-Create the application HTML file:
+Create the `src/` subdirectory and `src/index.html`:
+
+```bash
+mkdir -p src
+```
+
+Open `src/index.html` in a text editor and add the following content:
 
 ```html
 <!doctype html>
@@ -93,7 +99,7 @@ The values wrapped in double underscores are placeholders. The `Dockerfile` repl
 
 ### Create the Dockerfile
 
-Create a `Dockerfile`:
+Create a file named `Dockerfile` in the `topo-message-card` directory with the following content:
 
 ```Dockerfile
 FROM nginx:alpine
@@ -115,7 +121,7 @@ Topo passes configuration values to Templates through Docker build arguments. Th
 
 ### Create the compose file
 
-Create `compose.yaml`:
+Create `compose.yaml` in the `topo-message-card` directory with the following content:
 
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/arm/topo-template-format/refs/heads/main/schema/topo-template-format.json
@@ -193,7 +199,7 @@ After cloning, inspect the generated project:
 
 ```bash
 cd ~/message-card-demo
-sed -n '1,80p' compose.yaml
+cat compose.yaml
 ```
 
 The `build.args` should contain the values you provided:

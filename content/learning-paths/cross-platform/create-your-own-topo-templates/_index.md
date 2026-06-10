@@ -16,10 +16,10 @@ learning_objectives:
     - Clone and deploy an existing Topo Template and modify it by adding new clone-time arguments
     - Create a new Topo Template from a Docker Compose project
     - Add x-topo metadata for configurable arguments, deployment guidance, and hardware requirements
-    - Understand where to find Agent Skills, for use when creating or modifying Topo Templates
+    - Locate and install Agent Skills to assist with creating and reviewing Topo Templates
 
 prerequisites:
-    - This learning path builds on [Deploy containerized workloads to Arm-based Linux targets with Topo](/learning-paths/cross-platform/deploy-containerized-workloads-with-topo/).
+    - This Learning Path builds on [Deploy containerized workloads to Arm-based Linux targets with Topo](/learning-paths/cross-platform/deploy-containerized-workloads-with-topo/).
     - A host machine (x86 or Arm) with Linux, macOS, or Windows
     - An Arm-based Linux target accessible over SSH, for example an Arm-based Linux VM, Raspberry Pi, DGX Spark, or NXP i.MX 93
     - Docker installed on the host and target. For installation steps, see [Install Docker](/install-guides/docker/).
