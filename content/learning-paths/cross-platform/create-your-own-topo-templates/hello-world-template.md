@@ -6,7 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-This section quickly runs through the deployment of the `Hello World` Template, similar to the `CPU LLM Chat` Template in the [Deploy containerized workloads to Arm-based Linux targets with Topo](/learning-paths/cross-platform/deploy-containerized-workloads-with-topo/) Learning Path.
+Deploy the `Hello World` Template to confirm your setup before modifying it in the next section. This Template follows the same deployment pattern as the `CPU LLM Chat` Template covered in [Deploy containerized workloads to Arm-based Linux targets with Topo](/learning-paths/cross-platform/deploy-containerized-workloads-with-topo/).
 
 ## Clone the 'Hello World' Topo Template
 
@@ -34,7 +34,7 @@ Default: World
 GREETING_NAME (required)>
 ```
 
-Provide a name for the `GREETING_NAME` argument, e.g., 'Tomas'. 
+Provide a name for the `GREETING_NAME` argument, for example, 'Tomas'.
 
 Press Enter to submit your entry. You will then see a similar output to below:
 
@@ -131,5 +131,10 @@ Then open `http://localhost:8000/` in your browser.
 
 The Hello World application appears as follows:
 
-
 ![Screenshot of the Hello World web interface. This confirms successful deployment and provides a visual reference for the expected result.#center](hello_tomas.png "Hello World web interface")
+
+## What you've accomplished and what's next
+
+You deployed the Hello World Template to an Arm-based Linux target and confirmed the application is accessible in your browser.
+
+Next, you will modify the Template to add a new configurable clone-time argument.

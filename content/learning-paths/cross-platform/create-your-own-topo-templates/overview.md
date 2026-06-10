@@ -12,7 +12,7 @@ layout: learningpathall
 
 Before getting started, you should complete the Learning Path [Deploy containerized workloads to Arm-based Linux targets with Topo](/learning-paths/cross-platform/deploy-containerized-workloads-with-topo/) to learn about Topo, why to use it, how to install it and how to use it for target inspection, listing Templates and deployment.
 
-We now assume that you have Topo installed on your host machine and that you have an Arm-based Linux target available over SSH. Use the same target pattern from the previous Learning Path, for example a Raspberry Pi, an AWS Arm instance, or another Arm-based Linux system:
+At this point, you should have Topo installed on your host machine and an Arm-based Linux target available over SSH. Use the same target pattern from the previous Learning Path, for example a Raspberry Pi, an AWS Arm instance, or another Arm-based Linux system:
 
 ```bash
 --target user@my-target

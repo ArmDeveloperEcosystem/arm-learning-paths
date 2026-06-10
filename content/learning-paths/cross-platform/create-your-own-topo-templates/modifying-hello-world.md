@@ -144,10 +144,10 @@ Example: Markus
 Default: World
 GREETING_NAME (required)> 
 
-Provide: The emoji to use in the greeting message
+Provide: The emoji to show next to the greeting
 Example: 🚀
 Default: 🐳
-GREETING_EMOJI (required)> 🚀
+GREETING_EMOJI (optional)> 🚀
 ```
 
 ### Deploy the modified Template
@@ -169,5 +169,10 @@ Then open `http://localhost:8000/` in your browser.
 
 The Hello World application appears as follows:
 
-
 ![Screenshot of the modified Hello World web interface. This confirms successful modification and deployment and provides a visual reference for the expected result.#center](modified_template.png "Hello World web interface - with new emoji argument")
+
+## What you've accomplished and what's next
+
+You modified the Hello World Template to add a new optional clone-time argument, updated the Dockerfile to consume it, and deployed the result to your Arm-based Linux target.
+
+Next, you will create a new Topo Template from scratch.
