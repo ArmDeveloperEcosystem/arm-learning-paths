@@ -15,9 +15,9 @@ Use this file as a lightweight router for Codex, Copilot, and other coding agent
 
 - Repository router: `AGENTS.md`
 - General Arm content editing: `.github/skills/arm-content-editor/SKILL.md`
-- Learning Paths: `.github/instructions/learning-paths.instructions.md`
-- Install guides: `.github/instructions/install-guides.instructions.md`
-- Shared content quality: `.github/instructions/content-quality.instructions.md`
+- Learning Paths: `.github/skills/arm-content-editor/references/learning-path-guidance.md`
+- Install guides: `.github/skills/arm-content-editor/references/install-guide-guidance.md`
+- Shared content quality: `.github/skills/arm-content-editor/references/content-quality.md`
 - Images, alt text, captions, and `#center` syntax: `.github/skills/audit-images/SKILL.md`
 - Code samples, commands, outputs, and code fence integrity: `.github/skills/code-sample-review/SKILL.md`
 
@@ -26,6 +26,7 @@ Prefer the narrowest applicable file. Avoid loading every instruction file by de
 ## Compatibility
 
 - `.github/copilot-instructions.md` is a short compatibility pointer for Github Copilot. It is not the source of truth.
+- `.github/instructions/*.instructions.md` files are compatibility pointers. Skill references are the source of truth.
 
 ## Reviewer workflows
 

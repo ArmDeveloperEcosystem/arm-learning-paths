@@ -17,9 +17,9 @@ Read only the guidance needed for the task:
 
 - Repository structure and content model: `references/repository-guidance.md`
 - Writing style, headings, links, terminology, and prose cleanup: `references/writing-style.md`
-- Shared content quality: `.github/instructions/content-quality.instructions.md`
-- Learning Paths: `.github/instructions/learning-paths.instructions.md`
-- Install guides: `.github/instructions/install-guides.instructions.md`
+- Shared content quality and discoverability: `references/content-quality.md`
+- Learning Paths: `references/learning-path-guidance.md`
+- Install guides: `references/install-guide-guidance.md`
 - Images, alt text, captions, and `#center` syntax: `.github/skills/audit-images/SKILL.md`
 - Code samples, commands, outputs, and code fence integrity: `.github/skills/code-sample-review/SKILL.md`
 
