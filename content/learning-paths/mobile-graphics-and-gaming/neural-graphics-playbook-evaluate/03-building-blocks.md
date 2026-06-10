@@ -16,7 +16,7 @@ What you own is everything that makes this work in your game. That includes inte
 
 In some cases, you might also choose to customize or retrain models. More on that later.
 
-The important takeaway is that Neural Technology is not a feature you simply enable. It's a system you integrate, evaluate, and tune. Understanding that upfront will make the rest of the playbook (and your evaluation process) much more effective.
+The important takeaway is that Arm Neural Technology is not a feature you simply enable. It's a system you integrate, evaluate, and tune. Understanding that upfront will make the rest of the playbook (and your evaluation process) much more effective.
 
 ## Technical overview
 
