@@ -5,13 +5,16 @@ weight: 8
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+
+## Key takeaways
+
 This playbook is a snapshot of where things are right now. It walks through what has been built, what has been tested, and what has been learned along the way. Some of this is ready to pick up and try today, other parts are a bit further out. They give a clearer picture of where things are heading, but they also come with more complexity and more open questions.
 
 This isn't presented as a finished solution. It's shared as it is — early, evolving, and grounded in real experiments. Some things worked exactly as expected. Others didn't, or needed more iteration than anticipated. That's part of the process.
 
 If there are a few takeaways to highlight, they would be these:
 
-* Neural graphics isn’t a one-size-fits-all upgrade. It’s something you apply where it makes sense.
+* Neural Technology isn’t a one-size-fits-all upgrade. It’s something you apply where it makes sense.
 * NFRU is a good entry point. It’s relatively easy to evaluate and can give you immediate value.
 * NSSD is a bigger shift. It opens up new possibilities — especially around lighting — but it requires investment and a willingness to explore new workflows.
 

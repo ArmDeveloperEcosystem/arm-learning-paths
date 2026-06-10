@@ -27,7 +27,7 @@ Instead of optimizing a traditional graphics pipeline, Neural Dawn uses one that
 
 The final result is a clean, high-resolution, smooth experience, even though only about one-eighth of the pixels are rendered directly.
 
-Neural Dawn demonstrates that neural graphics on mobile are production ready.
+Neural Dawn demonstrates that Arm Neural Technology techniques on mobile are production ready.
 
 Watch the Neural Dawn trailer to see Arm Neural Technology in action:
 

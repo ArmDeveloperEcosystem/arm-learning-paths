@@ -6,7 +6,9 @@ weight: 4
 layout: learningpathall
 ---
 
-The previous sections focused on the results and capabilities of neural graphics techniques. This section explains the core building blocks and what's involved in using them, making the technology easier to evaluate in the context of your own game.
+## Integration approach
+
+The previous sections focused on the results and capabilities of Arm Neural Technology techniques. This section explains the core building blocks and what's involved in using them, making the technology easier to evaluate in the context of your own game.
 
 Arm provides the foundation: the Unreal Engine plugins, the SDK, prebuilt models, and tooling to run and evaluate them with today’s runtime path centered on Vulkan on Arm platforms. You also get reference implementations and sample content to help you get started quickly, all packaged in the Neural Graphics Development Kit mentioned in the introduction.
 
@@ -14,7 +16,7 @@ What you own is everything that makes this work in your game. That includes inte
 
 In some cases, you might also choose to customize or retrain models. More on that later.
 
-The important takeaway is that neural graphics is not a feature you simply enable. It's a system you integrate, evaluate, and tune. Understanding that upfront will make the rest of the playbook (and your evaluation process) much more effective.
+The important takeaway is that Neural Technology is not a feature you simply enable. It's a system you integrate, evaluate, and tune. Understanding that upfront will make the rest of the playbook (and your evaluation process) much more effective.
 
 ## Technical overview
 

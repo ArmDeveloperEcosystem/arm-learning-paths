@@ -8,13 +8,17 @@ layout: learningpathall
 
 ## The opportunity: why Arm Neural Technology, why now
 
-Arm Neural Technology takes advantage of a key benefit of machine learning: handling certain rendering tasks more efficiently than traditional approaches, which frees up budget for other aspects of your game. At SIGGRAPH 2025, Arm announced that [Arm GPUs will have dedicated neural accelerators (NX) in 2026](https://newsroom.arm.com/news/arm-announces-arm-neural-technology). Arm Neural Technology provides the tools you need to evaluate and integrate these techniques into your projects.
+Arm Neural Technology takes advantage of a key benefit of machine learning. When you handle certain rendering tasks more efficiently than traditional approaches, you can free up budget for other aspects of your game. 
 
-On mobile, every rendering decision is a tradeoff. Resolution, lighting, effects, frame rate, thermals, battery life all compete for the same limited resources. Ultimately, those technical tradeoffs affect something even more important: the player experience. Visual quality matters, but so does responsiveness, stable performance, and how long a player can stay immersed in the game without their device heating up or throttling.
+At SIGGRAPH 2025, Arm announced that [Arm GPUs will have dedicated neural accelerators (NX) in 2026](https://newsroom.arm.com/news/arm-announces-arm-neural-technology). Arm Neural Technology provides the tools you need to evaluate and integrate these techniques into your projects.
+
+## Neural Super Sampling: the foundation
+
+On mobile, every rendering decision is a tradeoff. Resolution, lighting, effects, frame rate, thermals, battery life all compete for the same limited resources. These technical tradeoffs ultimately impact player experience. Visual quality matters, but so does responsiveness, stable performance, and how long a player can stay immersed in the game without their device heating up or throttling.
 
 [Neural Super Sampling (NSS)](https://developer.arm.com/community/arm-community-blogs/b/mobile-graphics-and-gaming-blog/posts/how-to-access-arm-neural-super-sampling) was the first step in shifting that balance. Upscaling isn't new. Shader-based upscalers are already widely used across game engines and mobile games because rendering at lower resolution is one of the most effective ways to save performance. The question was whether machine learning could push that idea further.
 
-NSS enables more aggressive upscale ratios, such as rendering at 540p and reconstructing to 1080p, while maintaining image quality that's difficult to achieve with traditional approaches. It improves NX utilization in Arm GPUs while reducing pressure on bandwidth and energy consumption — often just as important to mobile developers as raw frame rate.
+NSS enables more aggressive upscale ratios, such as rendering at 540p and reconstructing to 1080p, while maintaining image quality that's difficult to achieve with traditional approaches. It improves NX utilization in Arm GPUs while reducing pressure on bandwidth and energy consumption - often just as important to mobile developers as raw frame rate.
 
 On mobile, bandwidth is expensive. Moving less data around the system can have a major impact on power efficiency and sustained performance. This often becomes just as valuable as the rendering speedup itself.
 
@@ -22,11 +26,11 @@ NSS opened a bigger question: what happens when machine learning becomes a norma
 
 ## From a single technique to something you can build on
 
-Arm Neural Technology answers that question. It's a set of Vulkan-based tools you can use to experiment with different neural graphics techniques that are production ready and efficient for mobile.
+Arm Neural Technology answers that question. It includes a set of Vulkan-based tools you can use to experiment with different neural graphics techniques that are production ready and efficient for mobile.
 
 | Resource |
 |----------|
-| [Neural Graphics landing page](https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics) |
+| [Neural Technology landing page](https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics) |
 | [Enable Neural Super Sampling in Unreal Engine with ML Extensions](/learning-paths/mobile-graphics-and-gaming/nss-unreal/) |
 | [ML SDK for Vulkan](https://github.com/arm/ai-ml-sdk-for-vulkan) |
 | [Neural Super Sampling (NSS) model](https://huggingface.co/Arm/neural-super-sampling) |
@@ -35,7 +39,7 @@ Arm Neural Technology answers that question. It's a set of Vulkan-based tools yo
 
 The development kit, Unreal plugin, and sample content let you get started with minimal effort and validate how these techniques behave with your own content. Seeing a clean before-and-after in a controlled scene is one thing. Testing with dynamic lighting, fast camera movement, complex materials, and all the edge cases that come with real production conditions is another. That's where you learn whether a technique is actually useful.
 
-Neural graphics use cases now extend beyond NSS into frame generation and ray denoising. This playbook focuses on those newer techniques, but NSS remains the most straightforward entry point for evaluating neural graphics in your project.
+Arm Neural Technology use cases now extend beyond NSS into frame generation and ray denoising. This playbook focuses on those newer techniques, but NSS remains the most straightforward entry point for evaluating neural graphics in your project.
 
 ## Why this matters now
 
@@ -45,7 +49,7 @@ Traditional denoisers and shader-based upscalers already help solve part of that
 
 ## Enter Neural Dawn
 
-Neural Dawn validates that neural graphics techniques are production ready for real games.
+Neural Dawn validates that Arm Neural Technology techniques are production ready for real games.
 
 Built as a mobile game with Unreal Engine and MegaLights, Neural Dawn tests these techniques in a complete, real-world project. Building an actual game reveals what works in practice — where neural graphics integrates naturally, where it creates friction, what performance gains emerge, and what tradeoffs you face. This hands-on approach provides credible insights that isolated demos can't.
 

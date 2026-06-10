@@ -6,6 +6,8 @@ weight: 5
 layout: learningpathall
 ---
 
+## Understanding fit
+
 At this point, you know a little bit about the building blocks. Now the question is whether this is worth applying to your project. That depends more on your game than on the technology itself. Things such as content type, camera behavior, and performance targets all play a role. This section focuses on helping you make that call.
 
 Neural techniques aren't designed to be equally useful everywhere. Anyone who develops a game knows how complicated it is to build a one-size-fits-all solution that both looks good and is practical to integrate.
@@ -64,7 +66,7 @@ As with most new technologies, there are cases where tradeoffs become more visib
 
 ### Evaluating quality
 
-You might be asking: "How do I know my game looks just as good running neural graphics?"
+You might be asking: "How do I know my game looks just as good running Arm Neural Technology?"
 
 Before target hardware was available, the Neural Dawn work focused on image quality. Frames were captured, reconstruction ran offline, and results were compared against a high-quality reference.
 
@@ -74,17 +76,17 @@ The question is whether it looks as good as it can, and whether it enables somet
 
 ### Setting expectations
 
-Neural graphics is still evolving, and different techniques are at different stages.
+Neural Technology is still evolving, and different techniques are at different stages.
 
 NFRU is something you can pick up today and evaluate quickly. It's low risk and easy to reason about.
 
-NSSD is earlier and more involved. It requires time, iteration, and a willingness to work with a different kind of pipeline. It also points to where things are heading—especially for teams interested in pushing visual quality on mobile.
+NSSD is earlier and more involved. It requires time, iteration, and a willingness to work with a different kind of pipeline. It also points to where things are heading - especially for teams interested in pushing visual quality on mobile.
 
-Neural graphics creates the most value when used intentionally—either to save performance where it matters, or to unlock things that weren't previously feasible.
+Neural Technology creates the most value when used intentionally - either to save performance where it matters, or to unlock things that weren't previously feasible.
 
 ### Fallbacks and scalability
 
-Unlike many traditional rendering features, the runtime cost of neural graphics techniques is generally more stable across content. The cost of running NFRU or NSSD itself doesn't scale heavily with scene complexity, number of lights, or material count in the way traditional rendering passes often do.
+Unlike many traditional rendering features, the runtime cost of Neural Technology techniques is generally more stable across content. The cost of running NFRU or NSSD itself doesn't scale heavily with scene complexity, number of lights, or material count in the way traditional rendering passes often do.
 
 With that said, one important thing to think about early is what happens on devices that don't support Arm Neural Technology.
 
@@ -96,9 +98,9 @@ This is also one of the reasons to evaluate these techniques early in developmen
 
 ## Is my game a good candidate?
 
-Your game type determines whether neural graphics is a good fit.
+Your game type determines whether Neural Technology is a good fit.
 
-Neural graphics works best with specific scene types. When paired with MegaLights, success depends on how your scenes are structured and how much you rely on lighting to carry the visual experience. The guidance generally aligns with what works for ray tracing.
+Neural Technology works best with specific scene types. When paired with MegaLights, success depends on how your scenes are structured and how much you rely on lighting to carry the visual experience. The guidance generally aligns with what works for ray tracing.
 
 The setups that worked best were fairly contained, interior environments. Small to mid-sized spaces where you can control what's on screen and how light behaves. That's a big reason why much of Neural Dawn takes place in enclosed environments. An enclosed environment gives you more control and makes it easier to lean into dynamic lighting without things breaking down.
 

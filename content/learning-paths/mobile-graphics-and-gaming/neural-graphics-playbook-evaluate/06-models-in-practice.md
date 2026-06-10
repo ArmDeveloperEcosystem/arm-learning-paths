@@ -6,7 +6,9 @@ weight: 7
 layout: learningpathall
 ---
 
-Up to this point, the focus has been on evaluating neural graphics from a rendering and integration perspective. But if you've decided to give this a go, there's another layer you might need to think about: models.
+## Understanding model workflows
+
+Up to this point, the focus has been on evaluating Neural Technology from a rendering and integration perspective. But if you've decided to give this a go, there's another layer you might need to think about: models.
 
 If you’re working with technologies such as NSS or NFRU, model support is already handled for you. The models are provided, integrated, and ready to use through the Unreal Engine plugins. In practice, this means you can approach them much like any other engine feature: enable them, test them in your project, and decide if they fit.
 
