@@ -1,5 +1,5 @@
 ---
-title: "From Neural Graphics to MegaLights, and beyond: could it be for me?"
+title: Evaluate Arm Neural Technology for your mobile game
 weight: 2
 
 ### FIXED, DO NOT MODIFY

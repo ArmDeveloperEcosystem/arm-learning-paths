@@ -1,14 +1,14 @@
 ---
-title: Neural Graphics Playbook - Evaluate
+title: Neural Technology Playbook - Evaluate
 description: Evaluate whether neural graphics techniques such as NFRU and NSSD are a fit for your game.
 minutes_to_complete: 45
 
 who_is_this_for: This Learning Path is for game developers and graphics engineers evaluating neural graphics techniques for mobile games.
 
 learning_objectives:
-    - Understand why neural graphics matters for mobile games.
-    - Learn what Arm built with Neural Dawn.
-    - Evaluate whether NFRU and NSSD are a fit for your game.
+    - Understand why Neural Technology matters for mobile games
+    - Learn what Arm built with Neural Dawn
+    - Evaluate whether NFRU and NSSD are a fit for your game
 
 prerequisites:
     - Familiarity with game development in Unreal Engine
@@ -30,7 +30,7 @@ operatingsystems:
 
 further_reading:
     - resource:
-        title: Neural Graphics Development Kit
+        title: Neural Technology for Mobile Games
         link: https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics
         type: website
     - resource:
@@ -38,11 +38,11 @@ further_reading:
         link: /learning-paths/mobile-graphics-and-gaming/nss-unreal/
         type: documentation
     - resource:
-        title: The motivation behind neural graphics
+        title: Arm Neural Technology Delivers Smarter, Sharper, More Efficient Mobile Graphics for Developers 
         link: https://newsroom.arm.com/news/arm-announces-arm-neural-technology
         type: blog
     - resource:
-        title: The foundation of neural graphics with NSS
+        title: Start experimenting with Neural Super Sampling for mobile graphics today
         link: https://developer.arm.com/community/arm-community-blogs/b/mobile-graphics-and-gaming-blog/posts/how-to-access-arm-neural-super-sampling
         type: blog
     - resource:
@@ -50,7 +50,7 @@ further_reading:
         link: https://developer.arm.com/community/arm-community-blogs/b/mobile-graphics-and-gaming-blog/posts/new-neural-technologies-set-to-join-the-neural-graphics-development-kit
         type: blog
     - resource:
-        title: Sumo Digital announces collaboration with Arm
+        title: How Neural Graphics, AI, and Arm Tools Are Shaping Mobile Game Development
         link: https://newsroom.arm.com/blog/takeaways-from-gdc-festival-of-gaming-2026
         type: blog
 

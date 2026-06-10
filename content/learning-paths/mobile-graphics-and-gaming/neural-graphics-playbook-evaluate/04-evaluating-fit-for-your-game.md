@@ -16,11 +16,11 @@ Neural graphics is a set of tools that work best when applied to the right probl
 
 ## Is NFRU right for me?
 
-For most teams, NFRU is the easiest place to start. It’s available as an Unreal Engine plugin with more developer tools coming soon.
+For most teams, NFRU is the easiest place to start. It's available as an Unreal Engine plugin, with more developer tools coming soon.
 
-It behaves in a way that feels familiar. You enable the plugin, and evaluate what it looks like in your own project. There’s no need to train or customize anything, and no major changes to your content pipeline. In that sense, it feels much closer to a traditional engine feature than something experimental.
+It behaves in a familiar way. You enable the plugin and evaluate how it looks in your own project. There's no need to train or customize anything, and no major changes to your content pipeline. It feels closer to a traditional engine feature than something experimental.
 
-What it gives you is straightforward: more frames for less work. Because it works across a wide range of content, it’s also a good way to get a feel for how neural techniques behave in your game.
+NFRU delivers more frames for less work. Because it works across a wide range of content, it's also a good way to understand how neural techniques behave in your game.
 
 ## Is NSSD right for me?
 
@@ -64,25 +64,23 @@ As with most new technologies, there are cases where tradeoffs become more visib
 
 ### Evaluating quality
 
-Reading this, you might be asking yourself: "How do I know that my game looks just as good running neural technologies?"
+You might be asking: "How do I know my game looks just as good running neural graphics?"
 
-Before having access to target hardware, the work with Neural Dawn work focused on image quality. We captured frames, ran reconstruction offline, and compared the results against a high-quality reference.
+Before target hardware was available, the Neural Dawn work focused on image quality. Frames were captured, reconstruction ran offline, and results were compared against a high-quality reference.
 
-Metrics such as PSNR and FLIP were useful for getting a baseline, but they don’t tell the full story. What matters in practice is how the image behaves over time—whether it stays stable, how artifacts show up in motion, and whether players will actually notice.
+Metrics such as PSNR and FLIP are useful for getting a baseline, but they don't tell the full story. What matters in practice is how the image behaves over time—whether it stays stable, how artifacts show up in motion, and whether players actually notice.
 
-In the end, the question is really if it looks as good as it can, and whether it enables something you couldn’t do before.
+The question is whether it looks as good as it can, and whether it enables something you couldn't do before.
 
 ### Setting expectations
 
-Neural graphics is still evolving, and different techniques are at very different stages.
+Neural graphics is still evolving, and different techniques are at different stages.
 
-NFRU is something you can pick up today and evaluate quickly. It’s low risk and easy to reason about.
+NFRU is something you can pick up today and evaluate quickly. It's low risk and easy to reason about.
 
-NSSD is earlier and more involved. It requires time, iteration, and a willingness to work with a different kind of pipeline. But it also points to where things are heading—especially for teams interested in pushing visual quality on mobile.
+NSSD is earlier and more involved. It requires time, iteration, and a willingness to work with a different kind of pipeline. It also points to where things are heading—especially for teams interested in pushing visual quality on mobile.
 
-If there’s one takeaway, it’s this:
-
-Neural graphics creates the most value when it’s used intentionally—either to save performance where it matters, or to unlock things that weren’t previously feasible.
+Neural graphics creates the most value when used intentionally—either to save performance where it matters, or to unlock things that weren't previously feasible.
 
 ### Fallbacks and scalability
 
@@ -98,9 +96,9 @@ This is also one of the reasons we recommend evaluating these techniques early i
 
 ## Is my game a good candidate?
 
-One of the biggest takeaways from working on Neural Dawn and light-focused environments is that it comes down to the kind of game you’re building.
+Your game type determines whether neural graphics is a good fit.
 
-A good fit for neural graphics, especially when paired with MegaLights, tends to be about how your scenes are structured and how much you rely on lighting to carry the visual experience. The guidance is also generally aligned with what works for ray-tracing.
+Neural graphics works best with specific scene types. When paired with MegaLights, success depends on how your scenes are structured and how much you rely on lighting to carry the visual experience. The guidance generally aligns with what works for ray tracing.
 
 The setups that worked best for us were fairly contained, interior environments. Small to mid-sized spaces where you can control what’s on screen and how light behaves. That’s a big reason why much of Neural Dawn takes place in enclosed environments. An enclosed environment gives you more control and makes it easier to lean into dynamic lighting without things breaking down.
 
