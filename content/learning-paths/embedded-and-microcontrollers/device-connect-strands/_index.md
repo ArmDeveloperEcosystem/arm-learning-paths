@@ -19,6 +19,9 @@ prerequisites:
     - A development machine with git installed
     - Basic familiarity with command-line tools
     - (Optional) A Raspberry Pi for testing a full device-to-device (D2D) setup
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: 
     - Annie Tallund
@@ -64,3 +67,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

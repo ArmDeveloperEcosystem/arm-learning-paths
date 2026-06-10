@@ -14,6 +14,9 @@ learning_objectives:
 prerequisites:
   - Access to both Arm-based and x86-based computers running Ubuntu (you can use cloud-based server instances)
   - Basic familiarity with Java applications and performance profiling using flame graphs
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: 
   - Ying Yu
@@ -49,3 +52,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

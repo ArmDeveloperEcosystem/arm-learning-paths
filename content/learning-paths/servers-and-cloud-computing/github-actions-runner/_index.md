@@ -13,6 +13,9 @@ learning_objectives:
 prerequisites:
     - An [Amazon Web Services account](/learning-paths/servers-and-cloud-computing/csp/aws/).
     - A GitHub account (personal or organizational).
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Cyril Rohr
 

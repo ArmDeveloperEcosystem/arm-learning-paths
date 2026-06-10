@@ -16,6 +16,9 @@ prerequisites:
     - An Azure subscription with permissions to create resource groups, virtual machines, and networking resources
     - Azure CLI installed on your local machine - see the [Azure CLI install guide](/install-guides/azure-cli/)
     - An SSH key pair for authentication
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Pareena Verma
 
@@ -53,3 +56,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

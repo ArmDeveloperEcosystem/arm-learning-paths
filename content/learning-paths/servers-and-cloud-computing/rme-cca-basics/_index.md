@@ -13,6 +13,9 @@ learning_objectives:
 prerequisites:
     - An aarch64 or x86_64 computer running Ubuntu 22.04. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
     - If you use a client application to access your computer running Ubuntu, make sure that X11 forwarding is enabled.
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Pareena Verma
 
@@ -52,3 +55,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

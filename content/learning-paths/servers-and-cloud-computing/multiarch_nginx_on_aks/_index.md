@@ -16,7 +16,10 @@ learning_objectives:
 prerequisites:
     - An [Azure account](https://azure.microsoft.com/en-us/free/)
     - A local machine with [`jq`](https://jqlang.org/download/), [`curl`](https://curl.se/download.html), [`wrk`](https://github.com/wg/wrk), [Azure CLI](/install-guides/azure-cli/), and [`kubectl`](/install-guides/kubectl/) installed
-   
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 author:
     - Geremy Cohen
 
@@ -67,3 +70,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -19,6 +19,9 @@ prerequisites:
     - A Flexible Printed Circuit (FPC) cable.
     - A USB-C cable.
     - An x86 Linux machine, or a Mac running macOS.
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author:
     - Chaodong Gong
@@ -60,3 +63,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -18,6 +18,9 @@ prerequisites:
     - Working knowledge of C programming
     - Familiarity with Linux development environments and basic embedded or cloud deployment concepts
     - Experience building applications with GCC and CMake
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Daniel Schleicher
 
@@ -68,3 +71,4 @@ weight: 1
 layout: learningpathall
 learning_path_main_page: "yes"
 ---
+

@@ -16,6 +16,9 @@ learning_objectives:
 prerequisites:
     - An [AWS account](https://aws.amazon.com/) with permission to launch Graviton4 (`c8g.4xlarge` or larger) instances
     - Basic familiarity with Linux and SSH
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Julien Simon
 
@@ -64,3 +67,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

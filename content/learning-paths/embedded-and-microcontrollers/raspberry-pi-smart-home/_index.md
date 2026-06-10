@@ -18,6 +18,9 @@ prerequisites:
   - An Arm-based single board computer (for example, Raspberry Pi 5 running Raspberry Pi OS)
   - Electronic components (breadboard, LEDs, resistors, jumper wires) for GPIO testing
   - Familiarity with Python programming, Raspberry Pi GPIO pinout, and basic electronics
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Fidel Makatia Omusilibwa
 
@@ -65,3 +68,4 @@ weight: 1 # _index.md always has weight of 1 to order correctly
 layout: "learningpathall" # All files under learning paths have this same wrapper
 learning_path_main_page: "yes" # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

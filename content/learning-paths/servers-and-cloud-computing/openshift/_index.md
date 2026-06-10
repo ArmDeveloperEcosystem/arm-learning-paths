@@ -13,6 +13,9 @@ prerequisites:
   - Red Hat OpenShift Pipelines (Tekton) Operator installed in your cluster
   - Familiarity with the `oc` CLI, container fundamentals, and basic Tekton concepts (Task, Pipeline, PipelineRun)
   - Cluster access with cluster-admin or equivalent permissions to configure nodes and pipelines
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Jeff Young
 
@@ -57,3 +60,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

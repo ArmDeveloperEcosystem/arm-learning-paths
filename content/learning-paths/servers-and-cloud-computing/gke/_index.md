@@ -12,6 +12,9 @@ learning_objectives:
 prerequisites:
     - A Google Cloud account
     - A computer with the following tools installed`:` Terraform, Google Cloud CLI (gcloud), Kubernetes CLI (kubectl)
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Jason Andrews
 

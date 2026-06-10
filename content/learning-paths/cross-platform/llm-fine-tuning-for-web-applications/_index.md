@@ -26,7 +26,9 @@ prerequisites:
     - An Android smartphone with the i8mm feature and 16GB of RAM.
     - Basic understanding of machine learning and deep learning. 
     - Familiarity with deep learning frameworks such as PyTorch and Hugging Face Transformers. 
-
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 author: Parichay Das
 
 ### Tags

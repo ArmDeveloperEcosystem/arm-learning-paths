@@ -13,7 +13,9 @@ learning_objectives:
 prerequisites:
     - An Arm-based instance from a cloud provider, or an Arm server running Ubuntu 20.04 or 22.04.
     - A basic understanding of Snort's operation and configuration.
-    
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Preema Merlin Dsouza
 
@@ -52,3 +54,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

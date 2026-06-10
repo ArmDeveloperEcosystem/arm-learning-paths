@@ -13,6 +13,9 @@ learning_objectives:
 prerequisites:
     - An [AWS account](/learning-paths/servers-and-cloud-computing/csp/aws/) with access to AWS services.
     - An x86 computer running Ubuntu or Arch Linux, authorized for AWS access. If you're using another build environment, you'll need to configure the toolchains for cross-compilation.
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Paul Howard
 
@@ -51,3 +54,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

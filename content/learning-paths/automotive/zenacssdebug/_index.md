@@ -17,6 +17,9 @@ prerequisites:
   - Ubuntu 22.04 host machine
   - Arm Development Studio 2024.1 or later with a valid license - for support see the [Install Guide for Arm DS](/install-guides/armds/) 
   - Basic understanding of the Arm Zena CSS software stack, Armv8-A/Armv9-A cores, and Linux
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Ronan Synnott
 
@@ -50,3 +53,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

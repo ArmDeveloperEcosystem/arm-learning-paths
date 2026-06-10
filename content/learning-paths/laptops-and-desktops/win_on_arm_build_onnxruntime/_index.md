@@ -12,6 +12,9 @@ learning_objectives:
     - Run inference with a Phi-3 model using ONNX Runtime with KleidiAI acceleration.
 prerequisites:
     - A Windows on Arm computer such as a Lenovo Thinkpad X13 running Windows 11, or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Barbara Corriero
 
@@ -50,3 +53,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

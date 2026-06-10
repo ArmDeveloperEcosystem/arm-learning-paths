@@ -15,6 +15,9 @@ learning_objectives:
 prerequisites:
 - Some familiarity with embedded C programming
 - A Linux machine running Ubuntu, or an AWS account to use [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware)
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Pareena Verma
 
@@ -55,5 +58,5 @@ further_reading:
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
-
 ---
+

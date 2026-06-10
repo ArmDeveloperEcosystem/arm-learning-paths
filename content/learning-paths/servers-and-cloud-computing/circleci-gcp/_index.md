@@ -21,7 +21,9 @@ prerequisites:
     [jobs](https://circleci.com/docs/guides/orchestrate/jobs-steps/),
     [resource classes](https://circleci.com/docs/guides/execution-managed/resource-class-overview/), and 
     [runners](https://circleci.com/docs/guides/execution-runner/runner-overview/)
-
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Pareena Verma
 
@@ -71,3 +73,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

@@ -21,7 +21,9 @@ prerequisites:
     - An Arm-based server or cloud instance running with at least 32 CPU cores, 64 GB RAM, and 32 GB of available disk space.
     - Familiarity with Python and basic understanding of transformer models and quantization techniques.
     - An active Hugging Face account with access to the target model.
-
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 author: 
    - Rani Chowdary Mandepudi
    - Phalani Paladugu

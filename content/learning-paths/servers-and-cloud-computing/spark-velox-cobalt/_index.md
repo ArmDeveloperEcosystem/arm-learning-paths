@@ -17,7 +17,9 @@ learning_objectives:
 prerequisites:
   - A [Microsoft Azure account](https://azure.microsoft.com/) with access to Cobalt 100 based instances (Dpsv6)
   - Basic understanding of distributed systems and Apache Spark
-
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 author: Pareena Verma
 
 ### Tags

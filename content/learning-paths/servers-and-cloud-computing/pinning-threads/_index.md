@@ -16,6 +16,9 @@ prerequisites:
     - Experience with multi-threaded programming in C++ and Python
     - Understanding of build systems and computer architecture concepts
     - Familiarity with Linux command-line tools
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Kieran Hejmadi
 
@@ -68,3 +71,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

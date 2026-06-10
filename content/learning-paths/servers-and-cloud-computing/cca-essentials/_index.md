@@ -15,6 +15,9 @@ prerequisites:
     - An AArch64 or x86_64 computer running Linux. You can use cloud instances, see this list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
     - Completion of [Get Started with CCA Attestation and Veraison](/learning-paths/servers-and-cloud-computing/cca-veraison/) Learning Path.
     - Completion of the [Run an application in a Realm using the Arm Confidential Computing Architecture (CCA)](/learning-paths/servers-and-cloud-computing/cca-container/) Learning Path.
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: 
     - Arnaud de Grandmaison
@@ -63,3 +66,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

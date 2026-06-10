@@ -2,6 +2,10 @@
 title: Control floating-point accuracy modes in Arm Performance Libraries
 
 minutes_to_complete: 20
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 author: Joana Cruz
 
 who_is_this_for: This is an introductory topic for developers who want to use the different accuracy modes for vectorized math functions in Libamath, a component of Arm Performance Libraries.
@@ -54,3 +58,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

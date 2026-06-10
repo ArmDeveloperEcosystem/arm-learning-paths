@@ -12,6 +12,9 @@ learning_objectives:
 prerequisites:
     - Basic knowledge of [MySQL databases](https://www.mysql.com/)
     - Two Arm servers running Ubuntu 22.04, one for the MySQL server and the other for the Sysbench client
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Bolt Liu
 
@@ -56,3 +59,4 @@ weight: 1
 layout: learningpathall
 learning_path_main_page: 'yes'
 ---
+

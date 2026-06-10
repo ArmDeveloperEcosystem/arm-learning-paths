@@ -16,6 +16,9 @@ prerequisites:
     - A computer with [Docker](/install-guides/docker/) and Python 3.11 or later installed
     - Basic familiarity with Python, PyTest, and container concepts
     - Familiarity with the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) specification
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Neethu Elizabeth Simon
 
@@ -67,3 +70,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

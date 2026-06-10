@@ -11,6 +11,9 @@ learning_objectives:
 
 prerequisites:
     - An Arm Neoverse-based (N1, N2 or V1) computer running Linux. For your host OS, you can use Amazon Linux 2023 or newer, Debian 10 or newer, RHEL 8 or newer, or Ubuntu 20.04 or newer.
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Julie Gaskin
 
@@ -49,3 +52,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

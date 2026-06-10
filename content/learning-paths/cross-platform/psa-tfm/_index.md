@@ -18,7 +18,9 @@ learning_objectives:
 prerequisites:
     - Ubuntu host or access to AWS
     - Optional MPS3 FPGA prototyping board
-
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 author: Ronan Synnott
 
 ### Tags

@@ -14,6 +14,9 @@ learning_objectives:
 
 prerequisites:
     - Basic familiarity with Python and the command line
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author:
     - Kavya Sri Chennoju
@@ -51,3 +54,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

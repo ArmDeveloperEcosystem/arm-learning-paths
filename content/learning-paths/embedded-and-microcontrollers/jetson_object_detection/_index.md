@@ -15,6 +15,9 @@ prerequisites:
     - A [Jetson Orin Nano](https://developer.nvidia.com/embedded/learn/jetson-orin-nano-devkit-user-guide/index.html)
     - A microSD card (64GB UHS-1 or larger is recommended)
     - A MIPI CSI-2 camera, with a 22 pin connector on at least one end
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Gabriel Peterson
 
@@ -57,3 +60,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

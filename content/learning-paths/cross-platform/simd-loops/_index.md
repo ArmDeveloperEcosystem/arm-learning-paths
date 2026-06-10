@@ -17,6 +17,9 @@ prerequisites:
     - An AArch64 computer running Linux or macOS. You can use cloud instances, refer to [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) for a list of cloud service providers
     - Some familiarity with SIMD programming and Neon intrinsics
     - Recent toolchains that support SVE/SME (GCC 13+ or Clang 16+ recommended)
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author:
     - Alejandro Martinez Vicente
@@ -105,3 +108,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

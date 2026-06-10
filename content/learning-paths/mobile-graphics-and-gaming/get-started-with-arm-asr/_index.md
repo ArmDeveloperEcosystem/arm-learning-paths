@@ -13,6 +13,9 @@ learning_objectives:
 prerequisites:
     - A game project that uses advanced rendering features (such as hardware ray tracing) that stretch the performance capabilities of everyday smartphones.
     - A development machine with Git installed.
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Julie Gaskin
 
@@ -59,3 +62,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

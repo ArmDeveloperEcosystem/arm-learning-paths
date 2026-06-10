@@ -18,6 +18,9 @@ prerequisites:
   - Basic familiarity with PyTorch or TensorFlow
   - An Arm64 device such as a Raspberry Pi or Android smartphone
   - Android Studio (required only for the final deployment section)
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Dawid Borycki
 
@@ -65,3 +68,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

@@ -15,6 +15,9 @@ learning_objectives:
 prerequisites:
     - An AWS account with permissions to create EC2 instances
     - Familiarity with basic Linux administration and SSH
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Geremy Cohen
 
@@ -52,3 +55,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

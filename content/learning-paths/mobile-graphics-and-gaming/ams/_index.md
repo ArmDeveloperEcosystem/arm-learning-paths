@@ -19,6 +19,9 @@ prerequisites:
     - A debuggable build of your application. 
     - Arm Performance Studio installed. Follow the [Arm Performance Studio install guide](/install-guides/ams/) for instructions.
     - Android SDK Platform tools installed. Required for the Android Debug bridge (adb).
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Ronan Synnott
 
@@ -84,3 +87,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

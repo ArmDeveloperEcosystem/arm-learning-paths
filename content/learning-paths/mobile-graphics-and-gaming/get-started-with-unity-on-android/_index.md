@@ -14,6 +14,9 @@ prerequisites:
     - Basic knowledge of game engines and programming concepts
     - Recent Android device, such as a mobile phone or tablet
     - Desktop computer capable of running Unity
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Joshua Marshall-Law
 
@@ -43,3 +46,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

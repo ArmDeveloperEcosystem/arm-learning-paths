@@ -16,6 +16,9 @@ prerequisites:
    - A development machine with [Android Studio](https://developer.android.com/studio) installed. 
    - An Android smartphone.
    - Familiarity with OpenCV, review [Create Computer Vision Applications with OpenCV on Android Devices](/learning-paths/mobile-graphics-and-gaming/android_opencv_camera/) before starting.
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Dawid Borycki
 
@@ -53,3 +56,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

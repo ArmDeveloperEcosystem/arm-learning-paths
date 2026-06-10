@@ -21,6 +21,9 @@ prerequisites:
     - Java 17 JDK. Follow the steps in [Java SE 17 Archive Downloads](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) to download and install JDK for your host
     - Python 3.10 or later
     - A [Hugging Face](https://huggingface.co/) account with access to Meta Llama models
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Parichay Das
 
@@ -66,3 +69,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -23,7 +23,9 @@ prerequisites:
     - 18-8 stainless steel socket head screw. 4 per card. [Example part](https://www.mcmaster.com/91292A016/)
     - 18-8 stainless steel hex nut. 4 per card. [Example part](https://www.mcmaster.com/91828A113/)
     - PETG filament. Others can work, but PETG allows some flex without the risk of snapping
-    
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Gabriel Peterson
 
@@ -59,3 +61,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

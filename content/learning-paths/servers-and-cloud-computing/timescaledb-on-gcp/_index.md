@@ -14,6 +14,9 @@ learning_objectives:
 prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
   - Basic familiarity with SQL, Python, and Grafana
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Pareena Verma
 
@@ -65,5 +68,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: yes
 ---
-
 

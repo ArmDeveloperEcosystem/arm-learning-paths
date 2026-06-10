@@ -18,6 +18,9 @@ prerequisites:
     - Two or more Arm Linux systems with root or sudo access. The examples use AWS Graviton2 and Graviton4 instances, but other systems are possible
     - Arm System Characterization Tool (ASCT) installed on each system
     - A good understanding of CPU memory subsystems, including cache hierarchies, cache lines, and DRAM in the memory hierarchy
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Jason Andrews
 
@@ -55,3 +58,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

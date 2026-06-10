@@ -16,6 +16,9 @@ prerequisites:
 - A Mac with Apple Silicon (M4 generation or newer)
 - Xcode command line tools installed
 - Basic familiarity with using the Terminal and command-line tools
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Jett Zhou
 
@@ -52,3 +55,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -19,6 +19,9 @@ prerequisites:
     - Basic understanding of Linux kernel development and module programming
     - Arm-based Linux target device (such as a Raspberry Pi, BeagleBone, or similar board) with Secure Shell (SSH) access
     - A host machine that meets [Buildroot system requirements](https://buildroot.org/downloads/manual/manual.html#requirement)
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Yahya Abouelseoud
 
@@ -59,3 +62,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

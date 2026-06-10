@@ -15,6 +15,9 @@ prerequisites:
 - A Linux computer.
 - Basic knowledge of how MTE works. Refer to the [Learn about Memory Tagging Extension Learning Path](/learning-paths/mobile-graphics-and-gaming/mte/)
 - Knowledge of how a dynamic memory allocator can be implemented. Refer to [Write a Dynamic Memory Allocator Learning Path](/learning-paths/cross-platform/dynamic-memory-allocator/).
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: David Spickett
 

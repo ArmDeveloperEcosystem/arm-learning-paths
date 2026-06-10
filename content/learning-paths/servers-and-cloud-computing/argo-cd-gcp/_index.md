@@ -20,6 +20,9 @@ prerequisites:
   - Basic familiarity with [Kubernetes concepts](https://kubernetes.io/docs/concepts/)
   - Basic understanding of Git and GitHub workflows
   - Familiarity with basic Linux command-line usage
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Pareena Verma
 
@@ -67,3 +70,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

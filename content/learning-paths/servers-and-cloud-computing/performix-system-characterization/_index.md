@@ -13,7 +13,11 @@ learning_objectives:
     - Locate and interpret the generated plots and raw benchmark data in the output directory
 
 prerequisites:
-    - An Arm Linux target machine accessible via SSH to characterize.
+    - A Arm Linux target machine accessible via SSH to characterize.
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author:
 - Brendan Long

@@ -16,6 +16,9 @@ prerequisites:
     - Introductory understanding of software containers
     - Knowledge about building workflows
     - Access to an aarch64 or x86_64 machine running Linux
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Kasper Mecklenburg
 
@@ -61,3 +64,4 @@ learning_path_main_page: "yes"  # Indicates this should be surfaced when looking
 
 # Prereqs
 ---
+

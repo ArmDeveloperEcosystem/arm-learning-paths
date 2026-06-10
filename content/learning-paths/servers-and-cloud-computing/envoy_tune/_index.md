@@ -15,6 +15,9 @@ learning_objectives:
 prerequisites:
     - Cloud or bare-metal installation of an Envoy service
     - Review [Learn how to deploy Envoy](/learning-paths/servers-and-cloud-computing/envoy/) if you do not already have an Envoy setup
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Zhengjun Xing
 
@@ -49,3 +52,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

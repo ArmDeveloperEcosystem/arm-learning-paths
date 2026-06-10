@@ -16,6 +16,9 @@ prerequisites:
     - Familiarity with performance analysis on Linux systems using Perf and PMU counters
     - Access to Arm Neoverse V2 and Intel x86 Linux systems to run the code example
     - Basic understanding of CPU pipeline concepts and performance bottlenecks
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author:
     - Jason Andrews
@@ -63,3 +66,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

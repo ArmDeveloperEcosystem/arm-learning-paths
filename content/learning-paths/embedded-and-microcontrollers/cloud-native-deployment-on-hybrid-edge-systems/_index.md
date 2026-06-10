@@ -16,6 +16,9 @@ learning_objectives:
 prerequisites:
     - A valid account with [Arm Virtual Hardware](https://app.avh.arm.com/login)
     - An Arm Linux host machine (if you want to build your own runtime and container image)
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Basma El Gaabouri
 
@@ -56,3 +59,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

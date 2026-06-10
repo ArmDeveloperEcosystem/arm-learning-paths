@@ -15,6 +15,9 @@ prerequisites:
     - An Android development environment with Android Studio installed
     - An Android phone for testing, in Developer Mode, with USB cable for connection
     - Basic familiarity with Kotlin and Android app development
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Ben Clark
 
@@ -67,3 +70,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

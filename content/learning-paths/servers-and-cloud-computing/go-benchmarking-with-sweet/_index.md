@@ -14,6 +14,9 @@ learning_objectives:
 prerequisites:
     - A [Google Cloud account](https://console.cloud.google.com/). This Learning Path can be run on any cloud provider or on-premises, but it focuses on Google Cloud’s Axion Arm64-based instances.
     - A local machine with [Google Cloud CLI](/install-guides/gcloud/) installed
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Geremy Cohen
 
@@ -45,3 +48,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

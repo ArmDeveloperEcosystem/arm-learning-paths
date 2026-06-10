@@ -17,6 +17,9 @@ prerequisites:
     - An Armv9 Linux device with at least 32 GB of available disk space, for example a Radxa Orion O6
     - Familiarity with the Linux command line, Git, and building C++ projects with CMake
     - Internet access to download source code, model assets, and sample data
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Odin Shen
 
@@ -67,3 +70,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

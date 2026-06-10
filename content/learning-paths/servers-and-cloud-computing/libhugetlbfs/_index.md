@@ -14,6 +14,9 @@ learning_objectives:
 prerequisites:
     - An Arm server or virtual machine instance from a cloud service provider with Ubuntu installed
     - Knowledge of how to build a MySQL server and run the sysbench benchmark test
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Bolt Liu
 
@@ -54,3 +57,4 @@ weight: 1
 layout: learningpathall
 learning_path_main_page: 'yes'
 ---
+

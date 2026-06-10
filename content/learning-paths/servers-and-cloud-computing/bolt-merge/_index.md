@@ -15,6 +15,9 @@ learning_objectives:
 
 prerequisites:
   - An Arm-based Linux system with [BOLT](/install-guides/bolt/) and [Linux Perf](/install-guides/perf/) installed
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Gayathri Narayana Yegna Narayanan
 

@@ -18,6 +18,9 @@ prerequisites:
     - A C++ compiler with C++17 support.
     - A build system [GNU Make](https://www.gnu.org/software/make/) or [Ninja](https://ninja-build.org/).
     - A documentation generator [Doxygen](https://www.doxygen.nl/).
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Arnaud de Grandmaison
 
@@ -64,3 +67,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

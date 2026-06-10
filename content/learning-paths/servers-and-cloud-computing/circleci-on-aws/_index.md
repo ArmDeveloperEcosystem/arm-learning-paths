@@ -15,6 +15,9 @@ prerequisites:
   - An [AWS account](https://aws.amazon.com/free/) with billing enabled
   - A CircleCI account
   - Basic understanding of CircleCI workflows, jobs and resource classes
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Annie Tallund
 
@@ -60,3 +63,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

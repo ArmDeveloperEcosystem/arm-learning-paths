@@ -16,7 +16,11 @@ prerequisites:
 - An Amazon Web Services (AWS) [account](https://aws.amazon.com/)
 - An Azure portal [account](https://azure.microsoft.com/en-in/get-started/azure-portal)
 - A Google Cloud [account](https://console.cloud.google.com/)
-- A machine with [Terraform](/install-guides/terraform/), [AWS CLI](/install-guides/aws-cli/), [Google Cloud CLI](/install-guides/gcloud/), [Azure CLI](/install-guides/azure-cli/), [AWS IAM authenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html), and [Ansible](/install-guides/ansible/) installed
+- A machine with [Terraform](/install-guides/terraform/), [AWS CLI](/install-guides/aws-cli), [Google Cloud CLI](/install-guides/gcloud), [Azure CLI](/install-guides/azure-cli), [AWS IAM authenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html), and [Ansible](/install-guides/ansible/) installed
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Pareena Verma
 
@@ -56,3 +60,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

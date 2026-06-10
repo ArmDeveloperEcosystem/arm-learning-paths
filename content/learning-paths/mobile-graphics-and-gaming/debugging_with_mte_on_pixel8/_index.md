@@ -18,6 +18,9 @@ prerequisites:
     - Android Studio installed on your development computer.
     - A USB cable to connect your computer to your Google Pixel 8.
     - Android Debug Bridge (adb) installed on your device. If needed, follow the steps in the [Android Debug Bridge](https://developer.android.com/tools/adb) documentation.
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Roberto Lopez Mendez
 
@@ -59,3 +62,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

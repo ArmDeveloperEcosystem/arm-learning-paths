@@ -17,6 +17,9 @@ prerequisites:
   - At least 80 GB free disk space and 48 GB RAM
   - Working knowledge of Docker, Git, and common Linux terminal tools
   - Basic understanding of the server firmware stack (such as UEFI, BMC, and TF-A)
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author:
   - Odin Shen
@@ -65,3 +68,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

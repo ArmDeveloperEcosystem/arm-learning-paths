@@ -18,6 +18,9 @@ prerequisites:
   - An [Edge Impulse Studio](https://studio.edgeimpulse.com/signup) account.
   - The [Arduino IDE](/install-guides/arduino-pico/) with the RP2040 board support package installed on your computer.
   - An [Arduino Nano RP2040 Connect board](https://store.arduino.cc/products/arduino-nano-rp2040-connect-with-headers).
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Bright Edudzi Gershon Kordorwu
 ### Tags
@@ -56,3 +59,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

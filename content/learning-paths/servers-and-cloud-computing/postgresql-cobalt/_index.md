@@ -17,6 +17,9 @@ prerequisites:
   - Basic knowledge of Linux command-line operations
   - Familiarity with SSH and remote server access
   - Basic understanding of databases and SQL
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Pareena Verma
 
@@ -62,3 +65,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

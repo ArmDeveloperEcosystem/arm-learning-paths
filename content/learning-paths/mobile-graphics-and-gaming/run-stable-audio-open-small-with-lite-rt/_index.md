@@ -17,6 +17,9 @@ prerequisites:
     - A Linux-based x86 or macOS development machine with at least 8 GB of RAM and 50 GB of disk space (tested on Ubuntu 22.04 with x86_64).
     - A [HuggingFace](https://huggingface.co/) account.
     - An Android phone in [developer mode](https://developer.android.com/studio/debug/dev-options) and a cable to connect it to your development machine.
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author:
     - Nina Drozd
@@ -64,3 +67,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

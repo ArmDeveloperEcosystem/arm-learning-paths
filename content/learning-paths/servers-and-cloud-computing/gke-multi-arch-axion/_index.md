@@ -16,6 +16,9 @@ prerequisites:
     - A [Google Cloud account](https://console.cloud.google.com/) with billing enabled
     - A local Linux or macOS computer with Docker, Kubernetes CLI (kubectl), Google Cloud CLI (gcloud), and Git installed, or access to Google Cloud Shell
     - Basic familiarity with Docker, Kubernetes, and gcloud
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: 
    - Rani Chowdary Mandepudi
@@ -56,3 +59,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -18,6 +18,9 @@ prerequisites:
     - Python 3.9 or later for programming.
     - A working microphone for voice input.
     - Basic Python and command-line knowledge.
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Bhanu Arya
 
@@ -61,3 +64,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

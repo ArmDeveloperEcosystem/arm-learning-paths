@@ -16,6 +16,9 @@ learning_objectives:
 prerequisites:
     - An Arm-based Linux server (Ubuntu 22.04+ recommended) with a minimum of 32 vCPUs, 64 GB RAM, and 64 GB free disk space
     - Python 3.12 and basic familiarity with Hugging Face Transformers and quantization
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author:
    - Nikhil Gupta
@@ -71,3 +74,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

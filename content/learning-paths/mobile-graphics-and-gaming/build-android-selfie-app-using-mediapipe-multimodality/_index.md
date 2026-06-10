@@ -19,6 +19,9 @@ prerequisites:
     - Familiarity with Android development concepts.
     - Basic knowledge of Modern Android Architecture. See [Modern Android App Architecture](https://developer.android.com/courses/pathways/android-architecture).
     - Basic knowledge of Kotlin programming language, including [Coroutines](https://kotlinlang.org/docs/coroutines-overview.html) and [Kotlin Flows](https://kotlinlang.org/docs/flow.html).
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Han Yin
 

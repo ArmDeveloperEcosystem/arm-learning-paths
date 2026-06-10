@@ -15,6 +15,9 @@ prerequisites:
     - Knowledge of Single instruction Multi Data (SIMD)
     - Knowledge of [Neon](https://developer.arm.com/documentation/102474/latest)
     - Knowledge of [Scalable Vector Extension (SVE)](https://developer.arm.com/documentation/101726/4-0)
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Dawid Borycki
 
@@ -55,3 +58,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

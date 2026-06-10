@@ -15,6 +15,9 @@ learning_objectives:
 prerequisites:
   - An x86_64 Linux host machine running Ubuntu, with at least 15 GB of free disk space
   - An Arm64 target system with support for SME or SME2 - see the Learning Path [Devices with native SME2 support](/learning-paths/cross-platform/multiplying-matrices-with-sme2/1-get-started/#devices)
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Qixiang Xu
 
@@ -48,3 +51,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

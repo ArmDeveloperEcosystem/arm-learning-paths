@@ -15,6 +15,9 @@ prerequisites:
     - Docker Desktop (version 4.40 or later) installed on a system with at least 16GB of RAM (recommended).
     - Basic understanding of Docker CLI and concepts.
     - Familiarity with LLM concepts.
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Jason Andrews
 

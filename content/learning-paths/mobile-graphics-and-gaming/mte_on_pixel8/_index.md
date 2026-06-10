@@ -17,6 +17,9 @@ prerequisites:
     - A Google Pixel 8 smartphone
     - A USB cable to connect your Google Pixel 8 to your desktop machine
     - Android Debug Bridge (adb) installed on your device. Follow the steps in https://developer.android.com/tools/adb to install Android SDK Platform Tools. The adb tool is included in this package.
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Roberto Lopez Mendez
 
@@ -59,3 +62,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

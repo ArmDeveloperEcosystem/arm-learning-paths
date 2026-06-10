@@ -16,6 +16,9 @@ prerequisites:
     - An appropriate Android device (e.g., Google Pixel 8) supporting the required Vulkan extensions.
     - Knowledge of the Vulkan API.
     - A Vulkan application that creates and uses images. This Learning Path shows how to use an API Sample in the [Khronos Vulkan Samples repository](https://github.com/KhronosGroup/Vulkan-Samples/blob/main/scripts/README.adoc#generate-api-sample) as an example.
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Jose-Emilio Munoz-Lopez
 
@@ -54,3 +57,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

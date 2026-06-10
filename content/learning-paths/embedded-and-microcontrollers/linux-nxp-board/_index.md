@@ -19,6 +19,9 @@ prerequisites:
     - A computer running Linux or macOS.
     - A USB-C cable for the board's **DBG** serial connection.
     - A USB-C power supply/cable for the board's **POWER** port.
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Waheed Brown
 
@@ -66,3 +69,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

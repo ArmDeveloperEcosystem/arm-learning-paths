@@ -13,6 +13,9 @@ learning_objectives:
 prerequisites:
     - An Arm-based Linux machine that implements the Int8 Matrix Multiplication (*i8mm*) architecture feature. The example in this Learning Path is run on an AWS Graviton 3 instance. Instructions on setting up an Arm-based server are [found here](/learning-paths/servers-and-cloud-computing/csp/aws/).
     - A basic understanding of linear algebra terminology, such as dot product and matrix multiplication.
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Zach Lasiuk
 ### Tags
@@ -57,3 +60,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

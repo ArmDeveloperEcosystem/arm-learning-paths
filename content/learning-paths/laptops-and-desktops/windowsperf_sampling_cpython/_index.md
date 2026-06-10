@@ -16,6 +16,9 @@ learning_objectives:
 prerequisites:
     - Windows on Arm desktop or development machine with [WindowsPerf installed](/install-guides/wperf/)
     - Windows x86_64 desktop machine with [Visual Studio 2022 Community Edition](https://visualstudio.microsoft.com/vs/) installed.
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Przemyslaw Wirkus
 
@@ -91,3 +94,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

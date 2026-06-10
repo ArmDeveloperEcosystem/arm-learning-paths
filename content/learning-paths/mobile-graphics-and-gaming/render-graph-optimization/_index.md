@@ -14,6 +14,9 @@ prerequisites:
     - Frame Advisor, part of Arm Performance Studio, installed. Refer to the [Arm Performance Studio](/install-guides/ams/) install guide. 
     - If you wish to analyze your own applications you will need a supported Android device.
     - Some basic familiarity with Frame Advisor. Review the [Frame Advisor](/learning-paths/mobile-graphics-and-gaming/ams/fa/) section in [Get started with Arm Performance Studio for mobile](/learning-paths/mobile-graphics-and-gaming/ams/).
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Mark Thurman
 
@@ -61,3 +64,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

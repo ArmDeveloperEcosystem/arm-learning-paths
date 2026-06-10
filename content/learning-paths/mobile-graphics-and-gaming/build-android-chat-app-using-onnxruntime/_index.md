@@ -14,6 +14,9 @@ learning_objectives:
 prerequisites:
     - A Windows x86_64 development machine with at least 16GB of RAM.
     - An Android phone with at least 8GB of RAM. This learning path was tested on Samsung Galaxy S24.
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Koki Mitsunami
 
@@ -56,3 +59,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

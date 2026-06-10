@@ -16,6 +16,9 @@ prerequisites:
     - Access to Meta's gated repository for the Llama 3.1 model family and a Hugging Face token to download models
     - Familiarity with the Learning Path [Deploy a Large Language Model (LLM) chatbot with llama.cpp using KleidiAI on Arm servers](/learning-paths/servers-and-cloud-computing/llama-cpu/)
     - Familiarity with AWS
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: 
     - Aryan Bhusari
@@ -51,3 +54,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

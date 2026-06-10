@@ -18,7 +18,9 @@ learning_objectives:
 prerequisites:
     - A SME2 device (macOS M4 on Apple Silicon)
     - Git, Homebrew, and Xcode Command Line Tools
-
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 author: Annie Tallund
 
 ### Tags

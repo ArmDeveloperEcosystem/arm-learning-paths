@@ -16,6 +16,9 @@ prerequisites:
   - Familiarity with CI/CD concepts
   - Basic knowledge of Linux command-line operations
   - Familiarity with GitHub Actions runners
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Pareena Verma
 
@@ -65,3 +68,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

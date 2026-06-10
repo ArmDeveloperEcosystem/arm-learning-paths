@@ -18,6 +18,9 @@ prerequisites:
   - Basic familiarity with Python
   - Basic understanding of data formats such as Parquet or ORC
   - Familiarity with Linux command-line operations
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Pareena Verma
 
@@ -73,3 +76,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: yes
 ---
+

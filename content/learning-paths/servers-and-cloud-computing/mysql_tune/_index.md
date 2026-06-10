@@ -10,6 +10,9 @@ learning_objectives:
 
 prerequisites:
     - Bare-metal or cloud [installation of MySQL](/learning-paths/servers-and-cloud-computing/mysql/)
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Julio Suarez
 
@@ -52,3 +55,4 @@ weight: 1
 layout: learningpathall
 learning_path_main_page: 'yes'
 ---
+

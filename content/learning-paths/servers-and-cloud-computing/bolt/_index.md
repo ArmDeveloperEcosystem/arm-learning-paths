@@ -14,6 +14,9 @@ learning_objectives:
 prerequisites:
     - An Arm based system running Linux with [BOLT](/install-guides/bolt/) and [Linux Perf](/install-guides/perf/) installed. The Linux kernel should be version 5.15 or later. Earlier kernel versions can be used, but some Linux Perf features may be limited or not available. For [SPE](./bolt-spe) the version should be 6.14 or later.
     - (Optional) A second, more powerful Linux system to build the software executable and run BOLT.
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Jonathan Davies
 
@@ -49,3 +52,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

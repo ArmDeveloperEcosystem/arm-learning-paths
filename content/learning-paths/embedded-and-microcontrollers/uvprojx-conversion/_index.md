@@ -17,6 +17,9 @@ prerequisites:
     - Install [µVision](/install-guides/mdk/) on your machine.
     - Install [uv2csolution](https://arm-software.github.io/MDK-Toolbox/01_installation/) for the command line flow.
     - The &micro;Vision project must use Arm Compiler 6 as the default toolchain. Arm Compiler 5 is not supported.
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 author: Christopher Seidl
 
@@ -57,3 +60,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

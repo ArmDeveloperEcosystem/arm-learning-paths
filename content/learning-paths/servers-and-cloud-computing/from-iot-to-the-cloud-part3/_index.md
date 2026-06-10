@@ -12,8 +12,12 @@ learning_objectives:
 
 prerequisites:
     - 'Azure subscription. Use this link to sign up for a free account: https://azure.microsoft.com/en-us/free/.'
-    - 'Complete the [first](/learning-paths/servers-and-cloud-computing/from-iot-to-the-cloud-part1/) and [second](/learning-paths/servers-and-cloud-computing/from-iot-to-the-cloud-part2/) learning paths of this series.'
-  
+    - 'Complete the [first](/learning-paths/servers-and-cloud-computing/from-iot-to-the-cloud-part1) and [second](/learning-paths/servers-and-cloud-computing/from-iot-to-the-cloud-part2) learning paths of this series.'
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 author: Dawid Borycki
 
 ### Tags
@@ -55,3 +59,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+
