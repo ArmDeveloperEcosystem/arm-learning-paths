@@ -1,5 +1,5 @@
 ---
-title: Evaluating fit for your game
+title: Evaluate fit for your game
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -8,11 +8,11 @@ layout: learningpathall
 
 At this point, you know a little bit about the building blocks. Now the question is whether this is worth applying to your project. That depends more on your game than on the technology itself. Things such as content type, camera behavior, and performance targets all play a role. This section focuses on helping you make that call.
 
-Let’s start with an unexpected confession: We didn’t create neural techniques to be equally useful everywhere. Anyone who develops a game knows how complicated it is to build a one-size-fits-all that both looks good but is also practical to integrate.
+Neural techniques aren't designed to be equally useful everywhere. Anyone who develops a game knows how complicated it is to build a one-size-fits-all solution that both looks good and is practical to integrate.
 
-In some scenarios, our techniques deliver immediate and meaningful value—freeing up performance or letting you push visual quality further without a big rewrite. In others, the gains are smaller, or come with tradeoffs that make them harder to justify.
+In some scenarios, these techniques deliver immediate and meaningful value—freeing up performance or letting you push visual quality further without a big rewrite. In others, the gains are smaller, or come with tradeoffs that make them harder to justify.
 
-Neural graphics is a set of tools that work best when applied to the right problems. In this section, you will learn more about what we’ve learned in that area so far.
+Arm Neural Technology is a set of tools that work best when applied to the right problems. This section shares what has been learned about that so far.
 
 ## Is NFRU right for me?
 
@@ -38,9 +38,9 @@ For a long time, mobile rendering has been shaped by constraint. Lighting in par
 
 NSSD starts to change that.
 
-In developing Neural Dawn with Sumo Digital, this led to a shift in how scenes were approached. Instead of working around limitations, we started exploring what would happen if those limitations were relaxed.
+In developing Neural Dawn with Sumo Digital, this led to a shift in how scenes were approached. Instead of working around limitations, the team started exploring what would happen if those limitations were relaxed.
 
-We deliberately pushed into cases that are usually avoided—scenes with heavy noise, strong contrast, and more complex light interactions than we’d normally attempt on mobile.
+The project deliberately pushed into cases that are usually avoided—scenes with heavy noise, strong contrast, and more complex light interactions than are normally attempted on mobile.
 
 That’s where NSSD creates its real value: making new kinds of content feel viable.
 
@@ -86,13 +86,13 @@ Neural graphics creates the most value when used intentionally—either to save 
 
 Unlike many traditional rendering features, the runtime cost of neural graphics techniques is generally more stable across content. The cost of running NFRU or NSSD itself doesn't scale heavily with scene complexity, number of lights, or material count in the way traditional rendering passes often do.
 
-With that said, one important thing to think about early is what happens on devices that don’t support neural technology.
+With that said, one important thing to think about early is what happens on devices that don't support Arm Neural Technology.
 
 NFRU doesn't currently have a direct shader-based fallback equivalent. If a device can’t support NFRU, the recommendation is generally to scale the game in more traditional ways, for example by lowering the resolution. NFRU then becomes a way to enhance that baseline, rather than a hard dependency
 
-NSSD is different. At the moment, there isn’t really a direct fallback path for what it enables. In practice, this means that if you build content around NSSD, you should expect to support a separate rendering path for devices that can’t run it. That’s one of the reasons we position NSSD differently throughout this playbook. It’s a deeper rendering investment intended for teams want to get ahead by experimenting with new features.
+NSSD is different. At the moment, there isn't really a direct fallback path for what it enables. In practice, this means that if you build content around NSSD, you should expect to support a separate rendering path for devices that can't run it. That's one of the reasons NSSD is positioned differently throughout this playbook. It's a deeper rendering investment intended for teams that want to get ahead by experimenting with new features.
 
-This is also one of the reasons we recommend evaluating these techniques early in development. Understanding the fallback story helps avoid building content that becomes difficult to scale across different device tiers later on.
+This is also one of the reasons to evaluate these techniques early in development. Understanding the fallback story helps avoid building content that becomes difficult to scale across different device tiers later on.
 
 ## Is my game a good candidate?
 
@@ -100,19 +100,19 @@ Your game type determines whether neural graphics is a good fit.
 
 Neural graphics works best with specific scene types. When paired with MegaLights, success depends on how your scenes are structured and how much you rely on lighting to carry the visual experience. The guidance generally aligns with what works for ray tracing.
 
-The setups that worked best for us were fairly contained, interior environments. Small to mid-sized spaces where you can control what’s on screen and how light behaves. That’s a big reason why much of Neural Dawn takes place in enclosed environments. An enclosed environment gives you more control and makes it easier to lean into dynamic lighting without things breaking down.
+The setups that worked best were fairly contained, interior environments. Small to mid-sized spaces where you can control what's on screen and how light behaves. That's a big reason why much of Neural Dawn takes place in enclosed environments. An enclosed environment gives you more control and makes it easier to lean into dynamic lighting without things breaking down.
 
-Those kinds of scenes are also where MegaLights really shines. You can place a lot of smaller dynamic lights, play with contrast, and build atmosphere in a way that would normally be too expensive. Moving from darkness into light, scene by scene, became a core part of how we structured the experience. Instead of relying on baked lighting, which can take a long time to generate and doesn’t adapt at runtime, we could keep things dynamic and iterate much faster.
+Those kinds of scenes are also where MegaLights really shines. You can place a lot of smaller dynamic lights, play with contrast, and build atmosphere in a way that would normally be too expensive. Moving from darkness into light, scene by scene, became a core part of how the experience was structured. Instead of relying on baked lighting, which can take a long time to generate and doesn't adapt at runtime, the team could keep things dynamic and iterate much faster.
 
 ### Where things get harder
 
-Where things got harder was when we moved outside of those controlled environments. Large outdoor scenes were more challenging. You lose that tight control over lighting, and things such as sunlight become harder to handle. Directional lights in particular require a lot of tuning to look right, and that quickly becomes a time sink. It’s not that these scenes are impossible, but they’re not where you get the most value today.
+Where things get harder is when moving outside of those controlled environments. Large outdoor scenes are more challenging. You lose that tight control over lighting, and things such as sunlight become harder to handle. Directional lights in particular require a lot of tuning to look right, and that quickly becomes a time sink. It's not that these scenes are impossible, but they're not where you get the most value today.
 
-We also ran into issues with certain types of content that are already tricky for ray tracing. Foliage is a good example. Lots of small, thin, semi-transparent elements — such as grass or leaves — are difficult to handle cleanly. In our case, we ended up being quite intentional about what we included. Similarly, heavy use of world position offset, especially with lots of instances, needs to be kept in check.
+Certain types of content that are already tricky for ray tracing also present challenges. Foliage is a good example. Lots of small, thin, semi-transparent elements — such as grass or leaves — are difficult to handle cleanly. In the Neural Dawn project, the team was quite intentional about what was included. Similarly, heavy use of world position offset, especially with lots of instances, needs to be kept in check.
 
-There are also some visual edge cases that are worth calling out. We saw ghosting in certain situations, such as decals (for example, moss), although that’s not unique to this approach — it’s something you see with most temporal denoisers and upscalers. With NSSD specifically, we’ve seen issues such as flickering (sometimes showing up as black dots), instability when the character is moving quickly over detailed surfaces, and subtle changes in fine detail that can make surfaces or silhouettes look like they’re shifting across frames.
+There are also some visual edge cases worth calling out. Ghosting can appear in certain situations, such as decals (for example, moss), although that's not unique to this approach — it's something you see with most temporal denoisers and upscalers. With NSSD specifically, issues such as flickering (sometimes showing up as black dots), instability when the character is moving quickly over detailed surfaces, and subtle changes in fine detail that can make surfaces or silhouettes look like they're shifting across frames have been observed.
 
-VFX can also be tricky. Bright, fast-moving effects — especially sprite-based ones — can end up looking blurrier than expected. This is an area we’ve been actively working on improving, but it’s something to be aware of when evaluating your own content.
+VFX can also be tricky. Bright, fast-moving effects — especially sprite-based ones — can end up looking blurrier than expected. This is an area of active improvement, but it's something to be aware of when evaluating your own content.
 
 On the NFRU side, the main thing to keep in mind is that you’re still rendering at your base frame rate. If your game is running at 30 FPS and you’re generating intermediate frames, there’s still an inherent delay in the system. For most content that’s fine, but for something such as a fast-paced racing game, that tradeoff might be more noticeable.
 
@@ -124,6 +124,6 @@ If you had to boil it down, a good candidate today looks something like this:
 
 _A game with controlled environments, where lighting plays a big role in the look and feel, and where you’re willing to trade some predictability for flexibility. If your game depends heavily on large open worlds, dense foliage, or very fast, high-precision visuals, you’ll likely run into more friction. That doesn’t mean those cases won’t be supported—it just means they’re not where this approach is the strongest today._
 
-It’s also worth saying that none of this is static. These are the first real attempts at bringing ray-traced lighting and fully dynamic scenes to mobile in a practical way. There isn’t a long history of best practices yet, and part of the work right now is figuring out what those should be. That’s also what makes it interesting.
+It's also worth noting that none of this is static. These are the first real attempts at bringing ray-traced lighting and fully dynamic scenes to mobile in a practical way. There isn't a long history of best practices yet, and part of the work right now is figuring out what those should be. That's also what makes it interesting.
 
-We’re learning as we go, alongside the teams building with this tech. What works well today will keep improving, and some of the rough edges we see now are already being addressed. It really does feel like the start of something new for mobile graphics — and we’re excited to keep pushing it forward.
+The technology continues to evolve alongside the teams building with it. What works well today will keep improving, and some of the rough edges visible now are already being addressed. This really is the start of something new for mobile graphics.

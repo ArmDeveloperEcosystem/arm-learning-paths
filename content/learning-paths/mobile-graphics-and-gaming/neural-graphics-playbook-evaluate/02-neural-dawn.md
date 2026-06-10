@@ -6,7 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-## A game designed around Neural Technology 
+## A game designed around Arm Neural Technology
 
 Neural Dawn is a mobile game built in collaboration with Sumo Digital. Sumo Digital focused on the game design, gameplay, and art, while Arm focused on the rendering pipeline and neural graphics systems.
 
@@ -29,7 +29,9 @@ The final result is a clean, high-resolution, smooth experience, even though onl
 
 Neural Dawn demonstrates that neural graphics on mobile are production ready.
 
-https://youtu.be/e4cnNm805YI
+Watch the Neural Dawn trailer to see Arm Neural Technology in action:
+
+{{< youtube-nocookie id="e4cnNm805YI" title="Neural Dawn trailer" >}}
 
 ## How NFRU and NSSD work
 

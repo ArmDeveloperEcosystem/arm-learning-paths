@@ -1,9 +1,9 @@
 ---
 title: Neural Technology Playbook - Evaluate
-description: Evaluate whether neural graphics techniques such as NFRU and NSSD are a fit for your game.
+description: Evaluate whether Arm Neural Technology techniques such as NFRU and NSSD are a fit for your game.
 minutes_to_complete: 45
 
-who_is_this_for: This Learning Path is for game developers and graphics engineers evaluating neural graphics techniques for mobile games.
+who_is_this_for: This Learning Path is for game developers and graphics engineers evaluating Arm Neural Technology for mobile games.
 
 learning_objectives:
     - Understand why Neural Technology matters for mobile games

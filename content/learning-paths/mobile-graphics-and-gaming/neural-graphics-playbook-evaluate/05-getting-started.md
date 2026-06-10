@@ -6,7 +6,7 @@ weight: 6
 layout: learningpathall
 ---
 
-If you've determined neural graphics is worth exploring for your game, you can start with NSS and the Neural Graphics Development Kit today. This section covers the first steps into the latest developments.
+If you've determined Neural Technology is worth exploring for your game, you can start with NSSD and the Neural Graphics Development Kit today. This section covers the first steps into the latest developments.
 
 ## NFRU
 

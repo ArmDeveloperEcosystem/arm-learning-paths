@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-Up to this point, we’ve focused on the results of what we’ve built. The next step is understanding what’s actually involved in using these techniques. Starting with the core building blocks, the aim with this section is to make the technology easier to reason about in the context of your own game.
+The previous sections focused on the results and capabilities of neural graphics techniques. This section explains the core building blocks and what's involved in using them, making the technology easier to evaluate in the context of your own game.
 
 Arm provides the foundation: the Unreal Engine plugins, the SDK, prebuilt models, and tooling to run and evaluate them with today’s runtime path centered on Vulkan on Arm platforms. You also get reference implementations and sample content to help you get started quickly, all packaged in the Neural Graphics Development Kit mentioned in the introduction.
 
@@ -34,7 +34,7 @@ Rather than interpolating, NFRU reconstructs motion. It sits at the very end of 
 
 Neural Super Sampling and Denoising (NSSD) is where most of the image quality is actually recovered. It takes a low-resolution, noisy render and turns it into something that looks like a clean, high-resolution frame.
 
-The important thing to understand is that the input here is intentionally very rough. We’re rendering at 540p, and we’re taking only a few lighting samples per pixel. With stochastic rendering techniques such as ReSTIR and MegaLights, that means the image is dominated by noise.
+The important thing to understand is that the input here is intentionally very rough. The technique renders at 540p and takes only a few lighting samples per pixel. With stochastic rendering techniques such as ReSTIR and MegaLights, this means the image is dominated by noise.
 
 The pipeline is often described as a “compute, neural, compute” sandwich, which is actually a useful way to think about it. It starts with a preprocessing pass that gathers all the information the network needs. This includes not just the noisy radiance buffer, but also depth, normals, motion vectors, and material properties such as albedo and specular.
 
@@ -48,7 +48,7 @@ In practice, that means flat regions can be aggressively smoothed by pulling fro
 
 On top of that, there’s a temporal component. Previous frames are reprojected using motion vectors and combined with the current frame, and a feedback tensor is fed back into the network on the next frame. That feedback loop gives the model a kind of memory. It allows the model to learn when to trust historical data and when to rely on the current frame, which is what keeps the result stable instead of flickering.
 
-By the end of the pipeline, you have a frame that is denoised, temporally consistent, and upscaled — for example from 540p to 1080p — even though it was never rendered that way directly.
+By the end of the pipeline, you have a frame that is denoised, temporally consistent, and upscaled — for example, from 540p to 1080p — even though it was never rendered that way directly.
 
 
 ## Putting NFRU and NSSD together
