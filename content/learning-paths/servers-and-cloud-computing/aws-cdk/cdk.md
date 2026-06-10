@@ -40,9 +40,9 @@ Paste the URL from the deployment output into a web browser of your choice.
 <url>
 ```
 
-The output is similar to:
+You'll see the following welcome message:
 
-<screenshot of nginx web server>
+![Screenshot of the NGINX welcome page confirming the AWS CDK deployment is serving traffic from the Arm-based EC2 instance#center](nginx-output.png "NGINX welcome page")
 
 ## Clean up resources
 
