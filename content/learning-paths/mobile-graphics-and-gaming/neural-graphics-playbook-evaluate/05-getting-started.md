@@ -8,11 +8,11 @@ layout: learningpathall
 
 ## Overview 
 
-If you've determined Neural Technology is worth exploring for your game, you can start with NSSD and the Neural Graphics Development Kit today. This section covers the first steps into the latest developments.
+If you've determined Arm Neural Technology is worth exploring for your game, you can start with NSSD and the Neural Graphics Development Kit today. This section covers the first steps into the latest developments.
 
 ## NFRU
 
-NFRU is a good entry point for evaluating Neural Technology. The setup is designed to feel familiar. You integrate the plugin, enable it in your project, and evaluate it the way you would any other rendering feature.
+NFRU is a good entry point for evaluating Arm Neural Technology. The setup is designed to feel familiar. You integrate the plugin, enable it in your project, and evaluate it the way you would any other rendering feature.
 
 The NFRU plugin will be available publicly in the coming weeks. For early access, sign up for the Early Access Program to start experimenting.
 

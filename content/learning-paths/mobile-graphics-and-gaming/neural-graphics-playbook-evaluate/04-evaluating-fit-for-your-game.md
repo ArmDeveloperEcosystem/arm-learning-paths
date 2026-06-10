@@ -76,17 +76,17 @@ The question is whether it looks as good as it can, and whether it enables somet
 
 ### Setting expectations
 
-Neural Technology is still evolving, and different techniques are at different stages.
+Arm Neural Technology continues to evolve, and different techniques are at different stages.
 
 NFRU is something you can pick up today and evaluate quickly. It's low risk and easy to reason about.
 
 NSSD is earlier and more involved. It requires time, iteration, and a willingness to work with a different kind of pipeline. It also points to where things are heading - especially for teams interested in pushing visual quality on mobile.
 
-Neural Technology creates the most value when used intentionally - either to save performance where it matters, or to unlock things that weren't previously feasible.
+Arm Neural Technology creates the most value when used intentionally - either to save performance where it matters, or to unlock things that weren't previously feasible.
 
 ### Fallbacks and scalability
 
-Unlike many traditional rendering features, the runtime cost of Neural Technology techniques is generally more stable across content. The cost of running NFRU or NSSD itself doesn't scale heavily with scene complexity, number of lights, or material count in the way traditional rendering passes often do.
+Unlike many traditional rendering features, the runtime cost of Arm Neural Technology techniques is generally more stable across content. The cost of running NFRU or NSSD itself doesn't scale heavily with scene complexity, number of lights, or material count in the way traditional rendering passes often do.
 
 With that said, one important thing to think about early is what happens on devices that don't support Arm Neural Technology.
 
@@ -98,9 +98,9 @@ This is also one of the reasons to evaluate these techniques early in developmen
 
 ## Is my game a good candidate?
 
-Your game type determines whether Neural Technology is a good fit.
+Your game type determines whether Arm Neural Technology is a good fit.
 
-Neural Technology works best with specific scene types. When paired with MegaLights, success depends on how your scenes are structured and how much you rely on lighting to carry the visual experience. The guidance generally aligns with what works for ray tracing.
+Arm Neural Technology works best with specific scene types. When paired with MegaLights, success depends on how your scenes are structured and how much you rely on lighting to carry the visual experience. The guidance generally aligns with what works for ray tracing.
 
 The setups that worked best were fairly contained, interior environments. Small to mid-sized spaces where you can control what's on screen and how light behaves. That's a big reason why much of Neural Dawn takes place in enclosed environments. An enclosed environment gives you more control and makes it easier to lean into dynamic lighting without things breaking down.
 
@@ -110,15 +110,15 @@ Those kinds of scenes are also where MegaLights really shines. You can place a l
 
 Where things get harder is when moving outside of those controlled environments. Large outdoor scenes are more challenging. You lose that tight control over lighting, and things such as sunlight become harder to handle. Directional lights in particular require a lot of tuning to look right, and that quickly becomes a time sink. It's not that these scenes are impossible, but they're not where you get the most value today.
 
-Certain types of content that are already tricky for ray tracing also present challenges. Foliage is a good example. Lots of small, thin, semi-transparent elements — such as grass or leaves — are difficult to handle cleanly. In the Neural Dawn project, the team was quite intentional about what was included. Similarly, heavy use of world position offset, especially with lots of instances, needs to be kept in check.
+Certain types of content that are already tricky for ray tracing also present challenges. Foliage is a good example. Lots of small, thin, semi-transparent elements - such as grass or leaves - are difficult to handle cleanly. In the Neural Dawn project, the team was quite intentional about what was included. Similarly, heavy use of world position offset, especially with lots of instances, needs to be kept in check.
 
-There are also some visual edge cases worth calling out. Ghosting can appear in certain situations, such as decals (for example, moss), although that's not unique to this approach — it's something you see with most temporal denoisers and upscalers. With NSSD specifically, issues such as flickering (sometimes showing up as black dots), instability when the character is moving quickly over detailed surfaces, and subtle changes in fine detail that can make surfaces or silhouettes look like they're shifting across frames have been observed.
+There are also some visual edge cases worth calling out. Ghosting can appear in certain situations, such as decals (for example, moss), although that's not unique to this approach - it's something you see with most temporal denoisers and upscalers. With NSSD specifically, issues such as flickering (sometimes showing up as black dots), instability when the character is moving quickly over detailed surfaces, and subtle changes in fine detail that can make surfaces or silhouettes look like they're shifting across frames have been observed.
 
-VFX can also be tricky. Bright, fast-moving effects — especially sprite-based ones — can end up looking blurrier than expected. This is an area of active improvement, but it's something to be aware of when evaluating your own content.
+VFX can also be tricky. Bright, fast-moving effects - especially sprite-based ones - can end up looking blurrier than expected. This is an area of active improvement, but it's something to be aware of when evaluating your own content.
 
 On the NFRU side, the main thing to keep in mind is that you’re still rendering at your base frame rate. If your game is running at 30 FPS and you’re generating intermediate frames, there’s still an inherent delay in the system. For most content that’s fine, but for something such as a fast-paced racing game, that tradeoff might be more noticeable.
 
-What stood out most from an art direction point of view was how much freedom this approach gives you when it works. Being able to rely on dynamic lighting — really dynamic lighting — and see it respond in real time was a big shift. It changes how you think about building scenes.
+What stood out most from an art direction point of view was how much freedom this approach gives you when it works. Being able to rely on dynamic lighting - really dynamic lighting - and see it respond in real time was a big shift. It changes how you think about building scenes.
 
 ### Conclusion
 

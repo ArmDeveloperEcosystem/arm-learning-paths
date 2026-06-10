@@ -30,7 +30,7 @@ Arm Neural Technology answers that question. It includes a set of Vulkan-based t
 
 | Resource |
 |----------|
-| [Neural Technology landing page](https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics) |
+| [Arm Neural Technology landing page](https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics) |
 | [Enable Neural Super Sampling in Unreal Engine with ML Extensions](/learning-paths/mobile-graphics-and-gaming/nss-unreal/) |
 | [ML SDK for Vulkan](https://github.com/arm/ai-ml-sdk-for-vulkan) |
 | [Neural Super Sampling (NSS) model](https://huggingface.co/Arm/neural-super-sampling) |
@@ -51,11 +51,11 @@ Traditional denoisers and shader-based upscalers already help solve part of that
 
 Neural Dawn validates that Arm Neural Technology techniques are production ready for real games.
 
-Built as a mobile game with Unreal Engine and MegaLights, Neural Dawn tests these techniques in a complete, real-world project. Building an actual game reveals what works in practice — where neural graphics integrates naturally, where it creates friction, what performance gains emerge, and what tradeoffs you face. This hands-on approach provides credible insights that isolated demos can't.
+Built as a mobile game with Unreal Engine and MegaLights, Neural Dawn tests these techniques in a complete, real-world project. Building an actual game reveals what works in practice - where neural graphics integrates naturally, where it creates friction, what performance gains emerge, and what tradeoffs you face. This hands-on approach provides credible insights that isolated demos can't.
 
 ## Why this playbook exists
 
-This playbook reflects that process. It shares the journey behind Neural Dawn — what worked, what didn't, what was surprising, and what would be approached differently next time.
+This playbook reflects that process. It shares the journey behind Neural Dawn - what worked, what didn't, what was surprising, and what would be approached differently next time.
 
 A gap exists between seeing a technique and knowing whether it fits your game. This playbook aims to close that gap.
 
