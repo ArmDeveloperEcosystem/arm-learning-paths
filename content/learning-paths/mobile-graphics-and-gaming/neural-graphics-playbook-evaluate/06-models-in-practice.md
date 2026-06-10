@@ -1,5 +1,5 @@
 ---
-title: Models in practice
+title: Work with neural graphics models
 weight: 7
 
 ### FIXED, DO NOT MODIFY

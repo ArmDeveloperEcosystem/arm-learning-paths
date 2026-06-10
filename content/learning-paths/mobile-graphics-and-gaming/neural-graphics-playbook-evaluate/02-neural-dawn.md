@@ -1,5 +1,5 @@
 ---
-title: About Neural Dawn
+title: Discover Neural Dawn
 weight: 3
 
 ### FIXED, DO NOT MODIFY

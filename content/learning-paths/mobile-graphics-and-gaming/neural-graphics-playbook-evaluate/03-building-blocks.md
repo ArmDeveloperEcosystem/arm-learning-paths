@@ -1,5 +1,5 @@
 ---
-title: The building blocks
+title: Learn how NFRU and NSSD work
 weight: 4
 
 ### FIXED, DO NOT MODIFY

@@ -12,6 +12,8 @@ learning_objectives:
 
 prerequisites:
     - Familiarity with game development in Unreal Engine
+    - Basic understanding of real-time rendering concepts (motion vectors, temporal techniques, denoising, upscaling)
+    - Awareness of mobile rendering constraints (bandwidth, power efficiency, thermal management)
 
 author: Annie Tallund
 
