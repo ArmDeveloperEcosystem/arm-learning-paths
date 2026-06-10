@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## The opportunity: why Neural Technology, why now
 
-Neural Technology addresses a straightforward problem: if you can handle some rendering tasks more efficiently with machine learning, you free up budget for everything else. At SIGGRAPH 2025, Arm announced that [Arm GPUs will have dedicated neural accelerators (NX) in 2026](https://newsroom.arm.com/news/arm-announces-arm-neural-technology). Arm Neural Technology provides the tools you need to evaluate and integrate these techniques into your projects.
+Neural graphics takes advantage of a key benefit of machine learning: handling certain rendering tasks more efficiently than traditional approaches, which frees up budget for other aspects of your game. At SIGGRAPH 2025, Arm announced that [Arm GPUs will have dedicated neural accelerators (NX) in 2026](https://newsroom.arm.com/news/arm-announces-arm-neural-technology). Arm Neural Technology provides the tools you need to evaluate and integrate these techniques into your projects.
 
 On mobile, every rendering decision is a tradeoff. Resolution, lighting, effects, frame rate, thermals, battery life all compete for the same limited resources. Ultimately, those technical tradeoffs affect something even more important: the player experience. Visual quality matters, but so does responsiveness, stable performance, and how long a player can stay immersed in the game without their device heating up or throttling.
 
