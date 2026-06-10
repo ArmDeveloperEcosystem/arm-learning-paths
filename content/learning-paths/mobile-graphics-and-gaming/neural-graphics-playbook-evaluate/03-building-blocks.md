@@ -20,15 +20,15 @@ The important takeaway is that neural graphics is not a feature you simply enabl
 
 ### NFRU
 
-Neural Frame Rate Upscaling (NFRU) is the part of the system that makes motion feel smooth. The way it works is by looking at two consecutive frames and estimating how every pixel moves between them. This is done using optical flow, which operates in image space and captures not just object motion, but also changes in lighting, shading, and other effects that show up in the final image.
+Neural Frame Rate Upscaling (NFRU) makes motion feel smooth. It works by looking at two consecutive frames and estimating how every pixel moves between them. This uses optical flow, which operates in image space and captures not just object motion, but also changes in lighting, shading, and other effects that show up in the final image.
 
-After you have that motion, both frames are warped toward the intermediate timestep. That gives you two different guesses for what the in-between frame should look like — one coming forward from the previous frame, and one coming backward from the next.
+With that motion data, both frames are warped toward the intermediate timestep. This gives you two different estimates for what the in-between frame should look like: one coming forward from the previous frame, and one coming backward from the next.
 
 ![Animation showing two consecutive frames being warped toward an intermediate timestep using optical flow, then combined by the NFRU neural network into a single coherent in-between frame#center](assets/nfru.gif "NFRU warping two frames toward an intermediate timestep")
 
-Those guesses don’t line up perfectly. Some areas are missing, some disagree, and some are just wrong due to motion estimation errors. The neural network’s role is to resolve that. It looks at the warped inputs and the motion field, and learns how to combine them into a single, coherent frame. That includes deciding which input to trust, reconstructing newly visible regions, and smoothing out artifacts so the result is stable over time.
+Those estimates don't line up perfectly. Some areas are missing, some disagree, and some are wrong due to motion estimation errors. The neural network resolves this. It looks at the warped inputs and the motion field, and learns how to combine them into a single, coherent frame. This includes deciding which input to trust, reconstructing newly visible regions, and smoothing out artifacts so the result is stable over time.
 
-So rather than interpolating, NFRU is really doing a reconstruction of motion. It also deliberately sits at the very end of the pipeline. By that point, the image has already been denoised and upscaled, so the model is working with relatively clean inputs, which makes the problem much easier to solve.
+Rather than interpolating, NFRU reconstructs motion. It sits at the very end of the pipeline. By that point, the image has already been denoised and upscaled, so the model works with relatively clean inputs, which makes the problem easier to solve.
 
 ### NSSD
 
@@ -53,8 +53,8 @@ By the end of the pipeline, you have a frame that is denoised, temporally consis
 
 ## Putting NFRU and NSSD together
 
-After you put NSSD and NFRU together, the pipeline starts to look very different from a traditional renderer. If you look at the full system, you end up rendering on the order of one eighth of the total pixels across space and time.
+When you combine NSSD and NFRU, the pipeline looks very different from a traditional renderer. The full system renders roughly one-eighth of the total pixels across space and time.
 
-That’s really the key takeaway. The renderer is no longer responsible for producing the final image. Its job is to produce just enough signal for the neural system to reconstruct everything else.
+The renderer is no longer responsible for producing the final image. Its job is to produce just enough signal for the neural system to reconstruct everything else.
 
 ![Diagram of the full neural graphics rendering pipeline showing how NSSD denoises and upscales low-resolution frames while NFRU generates intermediate frames, resulting in roughly one eighth of pixels rendered directly#center](assets/pipeline.png "Full neural graphics rendering pipeline combining NSSD and NFRU")
