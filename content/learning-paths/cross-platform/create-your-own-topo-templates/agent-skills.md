@@ -47,4 +47,4 @@ Use the topo-template-bootstrap skill to convert this repository into a Topo Tem
 
 You've now learned how you can install and use Agent Skills to help author Topo Templates.
 
-Explore the [Topo Catalog](https://github.com/arm/topo/blob/main/internal/catalog/data/catalog.json) to find more templates to clone and modify, or share your own template with the community.
+You can now create, modify, and deploy Topo Templates to Arm-based Linux targets. To find more templates to clone and modify, explore the [Topo Catalog](https://github.com/arm/topo/blob/main/internal/catalog/data/catalog.json).
