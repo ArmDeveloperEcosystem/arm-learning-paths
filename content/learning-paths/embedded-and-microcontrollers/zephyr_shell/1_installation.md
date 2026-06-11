@@ -1,12 +1,12 @@
 ---
-title: Set up your environment
+title: Set up the Zephyr shell development environment
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Set up your environment
+## Set up the Zephyr shell development environment
 
 In this section, you will prepare your host computer and identify the hardware needed for two Zephyr shell examples. You will use the shell over two transports:
 
@@ -23,24 +23,22 @@ Make sure you have a working Zephyr development environment set up in Visual Stu
 - A Zephyr SDK toolchain imported in Workbench
 - A West workspace initialized
 
-If you have not done this yet, complete [Build Zephyr projects with Workbench for Zephyr in VS Code learnin path](/learning-paths/embedded-and-microcontrollers/zephyr_vsworkbench/) first.
+If you have not done this yet, complete [Build Zephyr projects with Workbench for Zephyr in VS Code](/learning-paths/embedded-and-microcontrollers/zephyr_vsworkbench/) first.
 
-You also need:
+The two examples in this Learning Path have different additional requirements:
 
-- Docker Desktop, Docker Engine, or another Docker-compatible runtime
-- A USB cable for each development board
+- **MQTT shell example**: Docker Desktop, Docker Engine, or another Docker-compatible runtime on your host computer. The board communicates with a Mosquitto broker running in a container.
+- **UART shell example**: A USB cable to connect the development board to your host computer. The board exposes a shell prompt over the USB serial interface.
 
 ## Hardware requirements
 
-For the MQTT shell example, use a Zephyr-supported development board with Ethernet. The instructions use the [FRDM-MCXN947](https://www.nxp.com/design/design-center/development-boards-and-designs/FRDM-MCXN947), with the Zephyr board identifier `frdm_mcxn947/mcxn947/cpu0`.
+Both examples use the [FRDM-MCXN947](https://www.nxp.com/design/design-center/development-boards-and-designs/FRDM-MCXN947) as the development board (Zephyr identifier `frdm_mcxn947/mcxn947/cpu0`). The FRDM-MCXN947 includes an Ethernet port for the MQTT shell example and a USB UART interface for the UART shell example, so both examples run on the same board.
 
-For the UART shell example, use a Zephyr-supported development board with a USB UART interface. The instructions use the [FRDM-MCXN947](https://www.nxp.com/design/design-center/development-boards-and-designs/FRDM-MCXN947), with the Zephyr board identifier `frdm_mcxn947/mcxn947/cpu0`.
-
-To check whether another board is supported by Zephyr, refer to the [Zephyr Supported Boards list](https://docs.zephyrproject.org/latest/boards/index.html).
+To check whether another board is supported by Zephyr, see the [Zephyr Supported Boards list](https://docs.zephyrproject.org/latest/boards/index.html).
 
 ## Install UART terminal tools
 
-For the UART shell example, install a serial terminal application on your host computer. You will use the terminal application to connect to the Zephyr shell over the board's UART interface.
+For the UART shell example, install a serial terminal application on your host computer. You will use the terminal application to connect to the Zephyr shell over the board's UART interface. This Learning Path supports Windows, macOS, and Linux host computers.
 
 ### Windows
 
@@ -55,21 +53,12 @@ After installation:
 3. Open PuTTY and configure:
 
    - **Connection type**: `Serial`
-
    - **Serial line**: your board's COM port (for example `COM5`)
-
    - **Speed**: `115200`
 
 Select **Open** to connect to the Zephyr UART shell.
 
-<p style="text-align:center;">
-  <img src="/learning-paths/embedded-and-microcontrollers/zephyr_shell/images/putty_installation.png"
-       alt="PuTTY Installation"
-       width="640"
-       style="max-width:100%;height:auto;" />
-  <br/>
-  <em>PuTTY Serial Terminal Configuration</em>
-</p>
+![PuTTY configuration window with Connection type set to Serial, Serial line set to COM5, and Speed set to 115200, ready to connect to the Zephyr UART shell#center](images/putty_installation.webp "PuTTY Serial Terminal Configuration")
 
 ### macOS
 
@@ -82,38 +71,59 @@ After connecting the development board over USB:
 2. List available serial devices:
 
 ```bash
-
 ls /dev/tty.*
-
 ```
 
-3. Identify the board's serial device.
-
-4. Connect to the UART shell with:
+3. Connect to the UART shell with:
 
 ```bash
-
 screen /dev/tty.usbmodemXXXX 115200
-
 ```
 
 Replace `/dev/tty.usbmodemXXXX` with the serial device shown on your system.
 
-To exit `screen`:
+To exit `screen`, press `Ctrl + A`, then `K`, then `Y` to confirm.
 
-1. Press `Ctrl + A`
+### Linux
 
-2. Press `K`
+Linux includes `screen` in most distributions, so no additional software is required. If `screen` is not installed, use your package manager to install it:
 
-3. Press `Y` to confirm
+```bash
+sudo apt install screen
+```
+
+After connecting the development board over USB:
+
+1. Open a terminal window.
+
+2. List available serial devices:
+
+```bash
+ls /dev/ttyACM* /dev/ttyUSB*
+```
+
+3. If you see a permission error when connecting, add your user to the `dialout` group and log out and back in:
+
+```bash
+sudo usermod -aG dialout $USER
+```
+
+4. Connect to the UART shell with:
+
+```bash
+screen /dev/ttyACM0 115200
+```
+
+Replace `/dev/ttyACM0` with the device shown on your system. Boards using a CP210x or FTDI USB-UART chip typically appear as `/dev/ttyUSB0`.
+
+To exit `screen`, press `Ctrl + A`, then `K`, then `Y` to confirm.
 
 {{% notice Note %}}
-
 Workbench for Zephyr supports multiple debug runners depending on the connected board. The FRDM-MCXN947 board uses the onboard CMSIS-DAP / LinkServer interface for flashing and debugging, while shell access in this Learning Path uses UART over USB.
 
 {{% /notice %}}
 
-## Network requirements
+## Network requirements for the MQTT shell example
 
 For the MQTT shell example, the board needs access to an MQTT broker over Ethernet. You will run Mosquitto locally with Docker Compose and use the Mosquitto command-line tools to send and receive shell messages.
 
@@ -129,4 +139,4 @@ The example configuration uses IPv4. If your network does not provide DHCP, use 
 
 ## What's next?
 
-In the next section, you will read a short overview of the Zephyr shell subsystem and the two transports used in this Learning Path. After that, you will build the MQTT shell and the UART shell on the FRDM-MCXN947 using a USB serial connection and a UART terminal application such as PuTTY or the built-in macOS `screen` utility.
+In the next section, you will read a short overview of the Zephyr shell subsystem and the two transports used in this Learning Path. After that, you will build the MQTT shell and the UART shell on the FRDM-MCXN947 using a USB serial connection and a UART terminal application such as PuTTY on Windows or `screen` on macOS and Linux.
