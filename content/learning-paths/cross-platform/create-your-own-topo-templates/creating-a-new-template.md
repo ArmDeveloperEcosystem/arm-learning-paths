@@ -196,7 +196,7 @@ topo clone dir:$HOME/topo-message-card $HOME/message-card-demo \
   ACCENT_COLOR="#00a3a3"
 ```
 
-After using one of the commands, inspect the generated project:
+After using one of the commands to clone the template, inspect the generated project:
 
 ```bash
 cd ~/message-card-demo
