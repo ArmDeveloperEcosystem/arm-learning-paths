@@ -1,9 +1,5 @@
 ---
 title: Create and deploy a custom Topo Template
-
-draft: true
-cascade:
-    draft: true
     
 description: Understand how to create and modify Topo Templates, allowing you to deploy your projects as containerized workloads to Arm-based Linux targets over SSH.
 
@@ -19,7 +15,7 @@ learning_objectives:
     - Locate and install Agent Skills to assist with creating and reviewing Topo Templates
 
 prerequisites:
-    - This Learning Path builds on [Deploy containerized workloads to Arm-based Linux targets with Topo](/learning-paths/cross-platform/deploy-containerized-workloads-with-topo/).
+    - Completion of the [Deploy containerized workloads to Arm-based Linux targets with Topo](/learning-paths/cross-platform/deploy-containerized-workloads-with-topo/) Learning Path.
     - A host machine (x86 or Arm) with Linux, macOS, or Windows
     - An Arm-based Linux target accessible over SSH, for example an Arm-based Linux VM, Raspberry Pi, DGX Spark, or NXP i.MX 93
     - Docker installed on the host and target. For installation steps, see [Install Docker](/install-guides/docker/).
