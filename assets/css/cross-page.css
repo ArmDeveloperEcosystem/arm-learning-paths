@@ -254,8 +254,25 @@ ads-masthead {
 
 ads-breadcrumbs {
     --ads-breadcrumb-color: var(--lp-accent-secondary);
+    --ads-breadcrumb-current-color: white;
+    --ads-breadcrumb-hover-color: var(--lp-hover-text);
     --ads-breadcrumbs-link-color: var(--lp-accent-secondary);
+    --ads-breadcrumbs-link-color-hover: var(--lp-hover-text);
     --ads-breadcrumbs-link-color-visited: var(--lp-accent-secondary);
+    --ads-breadcrumbs-current-color: white;
+}
+
+#breadcrumb-element ads-breadcrumb[current] {
+    --ads-breadcrumb-color: white;
+    --ads-breadcrumb-current-color: white;
+    --ads-breadcrumbs-current-color: white;
+    color: white;
+}
+
+#breadcrumb-element ads-breadcrumb:not([current]):hover {
+    --ads-breadcrumb-color: var(--lp-hover-text);
+    --ads-breadcrumbs-link-color: var(--lp-hover-text);
+    color: var(--lp-hover-text);
 }
 
 
