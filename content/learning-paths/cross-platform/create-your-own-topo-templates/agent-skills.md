@@ -35,9 +35,9 @@ Restart your AI coding agent after installing or updating skills to make sure ne
 
 ## Use the skills
 
-After installing skills, you can prompt your agent to use a skill to create a Topo Template from an existing project.
+After installing skills, you can prompt your agent to use a skill.
 
-For example, to convert a repository into a template:
+For example, to create a Topo Template from an existing project:
 
 ```text
 Use the topo-template-bootstrap skill to convert this repository into a Topo Template.
