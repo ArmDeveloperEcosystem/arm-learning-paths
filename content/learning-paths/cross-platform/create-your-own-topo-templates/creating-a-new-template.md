@@ -11,7 +11,7 @@ layout: learningpathall
 
 You've already cloned and modified an existing Topo Template. In this section, you'll create a new template from an empty directory.
 
-The new template serves a small web page with configurable text and color, and demonstrates the core parts of a Topo Template:
+The template serves a small web page with configurable text and color, and demonstrates the core parts of a Topo Template:
 
 - A `compose.yaml` file with standard Compose services
 - An `x-topo` metadata block
