@@ -180,14 +180,14 @@ The same argument name appears in three places: `x-topo.args` defines what Topo 
 
 ### Clone the local Template
 
-Clone your local Template into a new project directory. You can choose to answer interactive prompts for the arguments (using the first command below), or you can opt to include the arguments in the command (using the second command).
+Clone your local Template into a new project directory. 
 
-Interactive argument prompts:
+You can choose to answer interactive prompts for the arguments:
 ```bash
 topo clone dir:$HOME/topo-message-card $HOME/message-card-demo
 ```
 
-Arguments included in command:
+Alternatively, you can opt to include the arguments in the command:
 ```bash
 topo clone dir:$HOME/topo-message-card $HOME/message-card-demo \
   CARD_TITLE="Hello from Arm" \
@@ -202,7 +202,7 @@ cd ~/message-card-demo
 cat compose.yaml
 ```
 
-The `build.args` should contain the values you provided:
+The `build.args` contains the values you provided:
 
 ```yaml
 services:
@@ -246,7 +246,7 @@ Confirm that the container is running:
 topo ps --target user@my-target
 ```
 
-The output should include the `message-card` service and port `8088`.
+The output includes the `message-card` service and port `8088`.
 
 ## (Optional) Add hardware requirements
 
@@ -272,7 +272,7 @@ To share your Template, publish the Template directory as a Git repository. Othe
 topo clone https://github.com/<user-or-org>/topo-message-card.git
 ```
 
-If the Template is intended to be reusable by the wider Topo community, include:
+If you want the Template to be reused by the wider Topo community, include:
 
 - `compose.yaml`
 - Any Dockerfiles and source files required by the services
@@ -282,6 +282,6 @@ If the Template is intended to be reusable by the wider Topo community, include:
 
 ## What you've accomplished and what's next
 
-You have now created a complete Topo Template from scratch. You created the web page HTML, added a Compose file, described the Template with `x-topo` metadata, supplied clone-time arguments, and deployed the generated project to an Arm-based Linux target.
+You've now created a complete Topo Template from scratch. You created the web page HTML, added a Compose file, described the Template with `x-topo` metadata, supplied clone-time arguments, and deployed the generated project to an Arm-based Linux target.
 
-Next, you will learn where to find Agent Skills that can help you create, modify, and review Topo Templates.
+Next, you'll learn where to find Agent Skills that can help you create, modify, and review Topo Templates.

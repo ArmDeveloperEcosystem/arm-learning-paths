@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## Make the greeting eemoji in the 'Hello World' Template configurable
+## Make the greeting emoji in the 'Hello World' Template configurable
 
 In the previous section, you cloned and deployed the Hello World Template. In this section, you'll modify the Template so the greeting emoji can be configured when someone clones the Template.
 
@@ -151,6 +151,8 @@ GREETING_EMOJI (optional)> 🚀
 ```
 
 ## Deploy the modified Template
+
+Deploy the updated template to the target:
 
 ```bash
 cd ~/topo-new-welcome/topo-welcome

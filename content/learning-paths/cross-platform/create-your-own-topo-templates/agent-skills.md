@@ -25,7 +25,7 @@ The [Topo Template Format Specification](https://github.com/arm/topo-template-fo
 Install the Topo Template skills with [npx skills](https://github.com/vercel-labs/skills):
 
 {{% notice Note %}}
-`npx` requires Node.js. If Node.js is not installed on your machine, install it before running the command below.
+`npx` requires Node.js. If you don't have Node.js installed on your machine, install it before running the following command.
 {{% /notice %}}
 
 ```bash
@@ -36,14 +36,14 @@ Restart your agent after installing or updating skills.
 
 ## Use the skills
 
-You can then prompt your agent to use the skill to create a Topo Template from an existing project:
+You can then prompt your agent to use a skill to create a Topo Template from an existing project:
 
 ```text
 Use the topo-template-bootstrap skill to convert this repository into a Topo Template.
 ```
 
-## What you've accomplished and what's next
+## What you've accomplished 
 
-You have now completed this Learning Path. You can create, modify, and deploy Topo Templates to Arm-based Linux targets, and use Agent Skills to assist with the authoring process.
+You've now learned how you can use Agent Skills to assist with the process of authoring Topo Templates.
 
 Explore the [Topo Catalog](https://github.com/arm/topo/blob/main/internal/catalog/data/catalog.json) to find more Templates to clone and modify, or share your own Template with the community.

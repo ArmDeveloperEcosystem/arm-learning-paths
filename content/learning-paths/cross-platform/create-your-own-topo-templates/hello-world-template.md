@@ -1,18 +1,13 @@
 ---
-title: Clone and deploy the Topo 'Hello World' Template
+title: Clone and deploy the 'Hello World' Topo Template
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-
-
-
-Clone the `Hello World` Template to confirm your setup before modifying it in the next section. .
-
 ## Clone the 'Hello World' Topo Template
 
-On your host machine, use the terminal to clone the `Hello World` Template into your home directory. This Template follows the same deployment pattern as the `CPU LLM Chat` Template covered in [Deploy containerized workloads to Arm-based Linux targets with Topo](/learning-paths/cross-platform/deploy-containerized-workloads-with-topo/):
+On your host machine, use the terminal to clone the `Hello World` Template into your home directory to confirm your setup. This Template follows the same deployment pattern as the `CPU LLM Chat` Template covered in [Deploy containerized workloads to Arm-based Linux targets with Topo](/learning-paths/cross-platform/deploy-containerized-workloads-with-topo/):
 
 ```bash
 topo clone https://github.com/Arm-Examples/topo-welcome.git ~/topo-welcome
