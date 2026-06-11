@@ -48,7 +48,7 @@ After you've validated the deployment, clean up the AWS resources that you creat
 ```bash
 cdk destroy
 ```
-You'll be prompted to confirm whether you want to delete the resources. Enter `y`. 
+When AWS CDK asks whether to delete `ArmCDKAppStack`, enter `y`. 
 
 ## What you've accomplished
 
