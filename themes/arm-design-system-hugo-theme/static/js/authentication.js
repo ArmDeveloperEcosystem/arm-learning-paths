@@ -2,20 +2,9 @@
 //                 Azure AD B2C Configuration
 // ----------------------------------------------------------------------
 const POLICY          = "b2c_1a_arm_accounts.susi";
-const ENV             = "prod"; // Change to "test" for testing environment
-
-const CLIENT_ID_TEST       = "20ede7b2-aeb1-43d4-81f9-fc1b7fbfca5e";
-const CLIENT_ID_PROD       = "8234ed8a-6728-4a0b-bb7d-b2e5933e581d";
-const CLIENT_ID            = ENV === "prod" ? CLIENT_ID_PROD : CLIENT_ID_TEST;
-
-const TENANT_DOMAIN_TEST   = "armb2ctest.onmicrosoft.com";
-const TENANT_DOMAIN_PROD   = "armb2c.onmicrosoft.com";
-const TENANT_DOMAIN        = ENV === "prod" ? TENANT_DOMAIN_PROD : TENANT_DOMAIN_TEST;
-
-const TENANT_ID_TEST       = "f15a8617-9b4e-41dd-8614-adea42784599";
-const TENANT_ID_PROD       = "1eb62d43-db15-492b-beab-8a32f6d90351";
-const TENANT_ID            = ENV === "prod" ? TENANT_ID_PROD : TENANT_ID_TEST;
-
+const CLIENT_ID       = "8234ed8a-6728-4a0b-bb7d-b2e5933e581d";
+const TENANT_DOMAIN   = "armb2c.onmicrosoft.com";
+const TENANT_ID       = "1eb62d43-db15-492b-beab-8a32f6d90351";
 const B2C_DOMAIN      = "account.arm.com";
 
 const REDIRECT_URI    = window.location.origin + "/";
@@ -23,7 +12,16 @@ const REDIRECT_URI    = window.location.origin + "/";
 // const REDIRECT_URI = "https://internal.learn.arm.com/"
 // const REDIRECT_URI = "https://learn.arm.com/";
 
-const AUTHORITY = `https://${B2C_DOMAIN}/tfp/${TENANT_DOMAIN}/${POLICY}/`;
+const AUTHORITY = `https://${B2C_DOMAIN}/tfp/${TENANT_ID}/${POLICY}/`;
+const EXPECTED_ISSUER = `${AUTHORITY}v2.0/`;
+const LEGACY_TENANT_ISSUER = `https://${B2C_DOMAIN}/${TENANT_ID}/v2.0/`;
+const LEGACY_POLICY_ISSUER = `https://${B2C_DOMAIN}/${TENANT_ID}/${POLICY}/v2.0/`;
+const OPENID_CONFIGURATION = `${EXPECTED_ISSUER}.well-known/openid-configuration`;
+const ALLOWED_ISSUERS = [
+  EXPECTED_ISSUER,
+  LEGACY_TENANT_ISSUER,
+  LEGACY_POLICY_ISSUER
+];
 
 window.msalConfig = {
   auth: {
@@ -89,6 +87,55 @@ function getEmailClaimValue(claims) {
   return undefined;
 }
 
+function getPolicyClaimValue(claims) {
+  if (!claims) return undefined;
+  return claims.tfp || claims.acr;
+}
+
+function isExpectedPolicy(claims) {
+  const policy = getPolicyClaimValue(claims);
+  return typeof policy === "string" &&
+    policy.toLowerCase() === POLICY.toLowerCase();
+}
+
+function isExpectedIssuer(claims) {
+  return ALLOWED_ISSUERS.includes(claims?.iss);
+}
+
+function hasTfpIssuer(claims) {
+  return claims?.iss === EXPECTED_ISSUER;
+}
+
+function isExpectedB2cClaims(claims) {
+  return isExpectedPolicy(claims) && isExpectedIssuer(claims);
+}
+
+function logIssuerGap(claims) {
+  if (hasTfpIssuer(claims)) return;
+
+  const issuer = claims?.iss || "missing";
+  console.warn(
+    `B2C token issuer is not TFP-scoped. Expected "${EXPECTED_ISSUER}", received "${issuer}".`
+  );
+}
+
+function clearUnexpectedPolicyAccount(account, claims) {
+  const policy = getPolicyClaimValue(claims) || "missing";
+  const issuer = claims?.iss || "missing";
+  console.log(`Ignoring B2C account with policy "${policy}" and issuer "${issuer}".`);
+
+  const activeAccount = msalInstance.getActiveAccount();
+  if (
+    activeAccount &&
+    account &&
+    activeAccount.homeAccountId === account.homeAccountId
+  ) {
+    msalInstance.setActiveAccount(null);
+  }
+
+  clearDigitalDataUser();
+}
+
 async function getIdTokenClaimsForAccount(account) {
   if (!account) return null;
 
@@ -108,10 +155,26 @@ async function getIdTokenClaimsForAccount(account) {
   }
 }
 
-async function updateDigitalDataForCurrentUser() {
+async function getValidatedAccount() {
   const account =
     msalInstance.getActiveAccount() ||
     msalInstance.getAllAccounts()[0];
+
+  if (!account) return null;
+
+  const claims = await getIdTokenClaimsForAccount(account);
+  if (!claims || !isExpectedB2cClaims(claims)) {
+    clearUnexpectedPolicyAccount(account, claims);
+    return null;
+  }
+
+  logIssuerGap(claims);
+  msalInstance.setActiveAccount(account);
+  return account;
+}
+
+async function updateDigitalDataForCurrentUser() {
+  const account = await getValidatedAccount();
 
   if (!account) {
     clearDigitalDataUser();
@@ -166,9 +229,13 @@ async function initAuth() {
 function getAccount() {
     const accounts = msalInstance.getAllAccounts();
     if (accounts.length) {
-      // Optional: pick a deterministic account if multiple
-      msalInstance.setActiveAccount(accounts[0]);
-      return accounts[0];
+      const account = accounts.find((cachedAccount) =>
+        isExpectedB2cClaims(cachedAccount.idTokenClaims)
+      );
+      if (account) {
+        msalInstance.setActiveAccount(account);
+        return account;
+      }
     }
     return null;
 }
@@ -179,9 +246,7 @@ function getAccount() {
 function getSignedInNavData() {
   if (!msalInstance) return null;
 
-  const account =
-    msalInstance.getActiveAccount() ||
-    msalInstance.getAllAccounts()[0];
+  const account = getAccount();
 
   if (!account) return null;
 
