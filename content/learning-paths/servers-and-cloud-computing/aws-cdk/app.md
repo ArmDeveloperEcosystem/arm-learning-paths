@@ -1,5 +1,5 @@
 ---
-title: "Create an example AWS CDK application"
+title: "Create a sample AWS CDK application"
 weight: 2
 
 layout: "learningpathall"
@@ -7,9 +7,9 @@ layout: "learningpathall"
 
 ## Set up a sample AWS CDK application
 
-The AWS Cloud Development Kit (CDK) is an open-source Infrastructure as Code (IaC)software development framework. You can use the AWS CDK to define and deploy applications on Arm-based cloud infrastructure powered by AWS Graviton. 
+The AWS Cloud Development Kit (CDK) is an open-source infrastructure as code (IaC)software development framework. 
 
-In this section, you'll initialize a CDK project and create a web server application in JavaScript to be deployed on AWS using Amazon Elastic Container Service (Amazon ECS). 
+In this section, you'll create a JavaScript CDK application that defines an Amazon Elastic Container Service (ECS) service running on Arm-based AWS Fargate compute.
 
 ### Before you begin
 
@@ -52,15 +52,14 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app. The build ste
 
 ### Use the AWS CDK with JavaScript to define a sample application
 
-In the project, you'll find a file called `arm-cdk-app-stack.js` in the `lib ` directory. AWS CDK uses this stack definition to deploy all necessary AWS resources.
+In the project, you'll find a file called `arm-cdk-app-stack.js` in the `lib` directory. AWS CDK uses this stack definition to deploy all necessary AWS resources.
 
-Update `lib/arm-cdk-app-stack.js` to define a load balanced Amazon ECS service that runs an NGINX web server on an Arm-based AWS Fargate runtime platform:
+Update `lib/arm-cdk-app-stack.js` to define a load-balanced Amazon ECS service that runs an NGINX web server on an Arm-based AWS Fargate runtime platform:
 
 ```javascript
 const cdk = require('aws-cdk-lib');
 const ecs = require('aws-cdk-lib/aws-ecs');
 const ecsPatterns = require('aws-cdk-lib/aws-ecs-patterns');
-const ecrAssets = require('aws-cdk-lib/aws-ecr-assets');
 
 class ArmCdkAppStack extends cdk.Stack {
   constructor(scope, id, props) {
@@ -68,8 +67,8 @@ class ArmCdkAppStack extends cdk.Stack {
 
     new ecsPatterns.ApplicationLoadBalancedFargateService(this, 'Service', {
       taskImageOptions: {
-       image: ecs.ContainerImage.fromRegistry("nginx:latest"),
-       containerPort: 80,
+        image: ecs.ContainerImage.fromRegistry("nginx:latest"),
+        containerPort: 80,
       },
       runtimePlatform: {
         cpuArchitecture: ecs.CpuArchitecture.ARM64,
