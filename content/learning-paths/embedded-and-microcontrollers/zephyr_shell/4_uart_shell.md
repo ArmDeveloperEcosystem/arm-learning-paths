@@ -34,7 +34,7 @@ Select **Create** to generate the project.
 
 The `hello_world` sample provides a working `CMakeLists.txt`, `prj.conf`, and `src/main.c`. Leave `CMakeLists.txt` unchanged, and replace `prj.conf` and `src/main.c` with the contents below.
 
-### prj.conf
+Edit the `prj.conf` file and replace the contents with the text below:
 
 ```bash
 CONFIG_SHELL=y
@@ -50,7 +50,9 @@ CONFIG_MAIN_STACK_SIZE=2048
 
 The UART shell backend routes shell input and output through the board's USB serial interface.
 
-### src/main.c
+### Main
+
+Edit the `main.c` file and replace the contents with the code below:
 
 ```c
 #include <zephyr/logging/log.h>

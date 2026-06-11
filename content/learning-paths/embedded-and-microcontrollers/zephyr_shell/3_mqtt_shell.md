@@ -49,7 +49,7 @@ Select **Create** to generate the project.
 
 The `hello_world` sample provides a working `CMakeLists.txt`, `prj.conf`, and `src/main.c`. Leave `CMakeLists.txt` unchanged, and replace `prj.conf` and `src/main.c` with the contents below.
 
-### prj.conf
+Replace the contents of `prj.conf` with the text below:
 
 ```text
 # Shell and MQTT backend
@@ -99,9 +99,11 @@ CONFIG_NET_CONFIG_MY_IPV4_GW="192.168.1.1"
 
 Keep `CONFIG_NET_CONFIG_SETTINGS=y` enabled so Zephyr applies the network configuration at boot.
 
-### src/main.c
+### Main function
 
-The shell and MQTT backend start from Zephyr initialization hooks, so `main.c` can stay minimal:
+The shell and MQTT backend start from Zephyr initialization hooks.
+
+Replace the contents of `main.c` with the code below:
 
 ```c
 int main(void)
@@ -128,7 +130,7 @@ mosquitto_shell/
         `-- mosquitto.conf
 ```
 
-### docker-compose.yml
+Edit the `docker-compose.yml` file and add the text below:
 
 ```yaml
 services:
@@ -144,7 +146,7 @@ services:
     restart: unless-stopped
 ```
 
-### mosquitto/config/mosquitto.conf
+Edit the `mosquitto.conf file and add the text below:
 
 ```text
 listener 1883 0.0.0.0
