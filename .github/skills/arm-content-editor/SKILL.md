@@ -20,6 +20,7 @@ Read only the guidance needed for the task:
 - Shared content quality and discoverability: `references/content-quality.md`
 - Learning Paths: `references/learning-path-guidance.md`
 - Install guides: `references/install-guide-guidance.md`
+- Metadata descriptions: `.github/skills/metadata-description-update/SKILL.md`
 - Images, alt text, captions, and `#center` syntax: `.github/skills/audit-images/SKILL.md`
 - Code samples, commands, outputs, and code fence integrity: `.github/skills/code-sample-review/SKILL.md`
 
@@ -31,7 +32,8 @@ Read only the guidance needed for the task:
 4. Review by exception. Do not comment on content that is already clear, correct, and fit for purpose.
 5. Prioritize learner-blocking issues, incorrect technical guidance, scope drift, missing metadata, broken links, weak Arm framing, image issues, and unclear validation steps.
 6. Classify substantial files as prose-heavy, mixed, or code-heavy before judging length or density.
-7. Use the code sample review skill for command accuracy, output formatting, code fence integrity, and token-heavy code or output blocks.
+7. Use the metadata description skill for focused `description` field updates.
+8. Use the code sample review skill for command accuracy, output formatting, code fence integrity, and token-heavy code or output blocks.
 
 Do not recommend splitting content only because a file is long. Prefer semantic boundaries based on headings, task transitions, or conceptual changes.
 

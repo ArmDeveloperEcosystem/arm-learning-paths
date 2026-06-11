@@ -18,6 +18,7 @@ Use this file as a lightweight router for Codex, Copilot, and other coding agent
 - Learning Paths: `.github/skills/arm-content-editor/references/learning-path-guidance.md`
 - Install guides: `.github/skills/arm-content-editor/references/install-guide-guidance.md`
 - Shared content quality: `.github/skills/arm-content-editor/references/content-quality.md`
+- Metadata descriptions: `.github/skills/metadata-description-update/SKILL.md`
 - Images, alt text, captions, and `#center` syntax: `.github/skills/audit-images/SKILL.md`
 - Code samples, commands, outputs, and code fence integrity: `.github/skills/code-sample-review/SKILL.md`
 
@@ -35,6 +36,7 @@ Use skills for repeatable workflows such as image audits, metadata description u
 Current shared skills:
 
 - `.github/skills/arm-content-editor/SKILL.md` for reviewing and editing Arm Learning Paths and install guides.
+- `.github/skills/metadata-description-update/SKILL.md` for adding or improving front matter `description` fields for Learning Paths and install guides.
 - `.github/skills/audit-images/SKILL.md` for auditing Markdown image references, deficient alt text, captions, alignment syntax, and before/after image quality counts.
 - `.github/skills/code-sample-review/SKILL.md` for reviewing code samples, commands, command output, language tags, and code fence integrity.
 
