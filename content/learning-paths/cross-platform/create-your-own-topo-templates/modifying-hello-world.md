@@ -9,11 +9,11 @@ layout: learningpathall
 
 ## Make the greeting emoji configurable
 
-In the previous section, you cloned and deployed the Hello World Topo Template. In this section, you'll modify the template so the greeting emoji can be configured when someone clones it.
+In the previous section, you cloned and deployed the "Hello World" Topo Template. In this section, you'll modify the template so the greeting emoji can be configured when someone clones it.
 
 ### Add a new template argument
 
-On your host machine, navigate to the Hello World Topo Template directory:
+On your host machine, navigate to the "Hello World" Topo Template directory:
 
 ```bash
 cd ~/topo-welcome
@@ -172,12 +172,12 @@ ssh -L 8000:localhost:8000 user@my-target
 
 Then open `http://localhost:8000/` in your browser.
 
-The Hello World application appears as follows:
+The "Hello World" application appears as follows:
 
 ![Screenshot of the modified Hello World web interface with a different emoji than the default. This confirms successful modification and deployment and provides a visual reference for the expected result.#center](modified_template.png "Hello World web interface - with new emoji argument")
 
 ## What you've accomplished and what's next
 
-You've now modified the `Hello World` Topo Template to add a new optional clone-time argument, updated the Dockerfile to consume the argument, and deployed the result to your Arm-based Linux target.
+You've now modified the "Hello World" Topo Template to add a new optional clone-time argument, updated the Dockerfile to consume the argument, and deployed the result to your Arm-based Linux target.
 
 Next, you'll create a new Topo Template from scratch.

@@ -8,12 +8,12 @@ layout: learningpathall
 ---
 ## Clone the Hello World Topo Template
 
-On your host machine, use the terminal to clone the Hello World Topo Template into your home directory to confirm your setup:
+On your host machine, use the terminal to clone the "Hello World" Topo Template into your home directory to confirm your setup:
 
 ```bash
 topo clone https://github.com/Arm-Examples/topo-welcome.git ~/topo-welcome
 ```
-The Hello World Topo Template follows the same deployment pattern as the `CPU LLM Chat` Topo Template covered in [Deploy containerized workloads to Arm-based Linux targets with Topo](/learning-paths/cross-platform/deploy-containerized-workloads-with-topo/).
+The "Hello World" Topo Template follows the same deployment pattern as the "CPU LLM Chat" Topo Template covered in [Deploy containerized workloads to Arm-based Linux targets with Topo](/learning-paths/cross-platform/deploy-containerized-workloads-with-topo/).
 
 The output is similar to:
 
@@ -132,12 +132,12 @@ ssh -L 8000:localhost:8000 user@my-target
 Then open `http://localhost:8000/` in your browser.
 
 
-The `Hello World` application appears as follows:
+The "Hello World" application appears as follows:
 
 ![Screenshot of the Hello World web interface. This confirms successful deployment and provides a visual reference for the expected result.#center](hello_tomas.png "Hello World web interface")
 
 ## What you've accomplished and what's next
 
-You've now deployed the `Hello World` Topo Template to an Arm-based Linux target and confirmed the application is accessible in your browser.
+You've now deployed the "Hello World" Topo Template to an Arm-based Linux target and confirmed the application is accessible in your browser.
 
 Next, you'll modify the template to add a new configurable clone-time argument.
