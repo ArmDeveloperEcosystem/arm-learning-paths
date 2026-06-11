@@ -7,13 +7,13 @@ weight: 6
 layout: learningpathall
 ---
 
-## Skills for authoring Templates
+## Skills for authoring Topo Templates
 
 If you already have a Docker Compose project and want to convert it to a Topo Template, you can do so with an Agent Skill. You can also use a skill to create your own Topo Template from scratch. These skills are optional authoring aids. 
 
 The [Topo Template Format Specification](https://github.com/arm/topo-template-format) currently provides the following skills:
 
-- `topo-template-context`: provides Topo and Topo Template reference context for questions about x-topo metadata, schema, docs, and CLI Template behavior.
+- `topo-template-context`: provides Topo and Topo Template reference context for questions about x-topo metadata, schema, docs, and CLI template behavior.
 - `topo-template-bootstrap`: converts a repository into a Topo Template by adding or improving `compose.yaml` and `x-topo` metadata.
 - `topo-template-lint`: reviews an existing Topo Template for correctness, consistency, and authoring best practices.
 
@@ -47,4 +47,4 @@ Use the topo-template-bootstrap skill to convert this repository into a Topo Tem
 
 You've now learned how you can install and use Agent Skills to help author Topo Templates.
 
-Explore the [Topo Catalog](https://github.com/arm/topo/blob/main/internal/catalog/data/catalog.json) to find more Templates to clone and modify, or share your own Template with the community.
+Explore the [Topo Catalog](https://github.com/arm/topo/blob/main/internal/catalog/data/catalog.json) to find more templates to clone and modify, or share your own template with the community.

@@ -9,9 +9,9 @@ layout: learningpathall
 
 ## Create a web page with configurable text and color
 
-You've already cloned and modified an existing Topo Template. In this section, you'll create a new Template from an empty directory.
+You've already cloned and modified an existing Topo Template. In this section, you'll create a new template from an empty directory.
 
-The new Template will serve a small web page with configurable text and color and demonstrate the core parts of a Topo Template:
+The new template serves a small web page with configurable text and color and demonstrates the core parts of a Topo Template:
 
 - A `compose.yaml` file with standard Compose services
 - An `x-topo` metadata block
@@ -20,7 +20,7 @@ The new Template will serve a small web page with configurable text and color an
 
 ### Create the project directory
 
-Create a new directory for the Template:
+Create a new directory for the template:
 
 ```bash
 mkdir -p ~/topo-message-card
@@ -141,7 +141,7 @@ services:
 x-topo:
   name: "Message Card"
   description: |
-    A minimal web application Template that shows a configurable title,
+    A minimal web application template that shows a configurable title,
     message, and accent color.
   type: "application"
   deploy_success_message: |
@@ -169,11 +169,11 @@ The `services` section is standard Compose. The service builds the local `Docker
 
 The `x-topo` section is the Topo metadata block:
 
-- `name` gives the Template a human-readable name.
-- `description` explains what the Template does.
-- `type` identifies this as an application Template.
+- `name` gives the template a human-readable name.
+- `description` explains what the template does.
+- `type` identifies this as an application template.
 - `deploy_success_message` prints a useful hint after deployment.
-- `args` defines the values Topo prompts for when someone clones the Template.
+- `args` defines the values Topo prompts for when someone clones the template.
 
 The argument names in `x-topo.args` match the keys under `services.message-card.build.args`. When Topo resolves the arguments, it writes the selected values into the build arguments.
 
@@ -263,17 +263,17 @@ x-topo:
     - "SVE"
 ```
 
-Topo can use these feature requirements when listing Templates against a target.
+Topo can use these feature requirements when listing templates against a target.
 
 ## Share the Topo Template
 
-To share your Topo Template, publish the Template directory as a Git repository. Other users can then clone it with Topo:
+To share your Topo Template, publish the template directory as a Git repository. Other users can then clone it with Topo:
 
 ```bash
 topo clone https://github.com/<user-or-org>/topo-message-card.git
 ```
 
-If you want the Template to be reused by the wider Topo community, include:
+If you want the template to be reused by the wider Topo community, include:
 
 - `compose.yaml`
 - Any Dockerfiles and source files required by the services
@@ -283,6 +283,6 @@ If you want the Template to be reused by the wider Topo community, include:
 
 ## What you've accomplished and what's next
 
-You've now created a complete Topo Template from scratch. You created the web page HTML, added a Compose file, described the Template with `x-topo` metadata, supplied clone-time arguments, and deployed the generated project to an Arm-based Linux target.
+You've now created a complete Topo Template from scratch. You created the web page HTML, added a Compose file, described the template with `x-topo` metadata, supplied clone-time arguments, and deployed the generated project to an Arm-based Linux target.
 
 Next, you'll learn where to find Agent Skills that can help you create, modify, and review Topo Templates.

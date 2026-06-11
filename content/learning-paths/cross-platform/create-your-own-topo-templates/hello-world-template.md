@@ -6,14 +6,14 @@ weight: 3
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## Clone the 'Hello World' Topo Template
+## Clone the Hello World Topo Template
 
-On your host machine, use the terminal to clone the `Hello World` Topo Template into your home directory to confirm your setup:
+On your host machine, use the terminal to clone the Hello World Topo Template into your home directory to confirm your setup:
 
 ```bash
 topo clone https://github.com/Arm-Examples/topo-welcome.git ~/topo-welcome
 ```
-The `Hello World` Template follows the same deployment pattern as the `CPU LLM Chat` Template covered in [Deploy containerized workloads to Arm-based Linux targets with Topo](/learning-paths/cross-platform/deploy-containerized-workloads-with-topo/).
+The Hello World Topo Template follows the same deployment pattern as the `CPU LLM Chat` Topo Template covered in [Deploy containerized workloads to Arm-based Linux targets with Topo](/learning-paths/cross-platform/deploy-containerized-workloads-with-topo/).
 
 The output is similar to:
 
@@ -116,7 +116,7 @@ The columns show:
 
 - `Image`: the container image or service that Topo started
 - `Status`: whether the service is running, and how long it has been running
-- `Processing Domain`: where the workload is running, such as the Linux Host on the target
+- `Processing Domain`: where the workload is running, such as the Linux host on the target
 - `Address`: the exposed address and port for the service
 
 ### View the application
@@ -140,4 +140,4 @@ The `Hello World` application appears as follows:
 
 You've now deployed the `Hello World` Topo Template to an Arm-based Linux target and confirmed the application is accessible in your browser.
 
-Next, you'll modify the Topo Template to add a new configurable clone-time argument.
+Next, you'll modify the template to add a new configurable clone-time argument.

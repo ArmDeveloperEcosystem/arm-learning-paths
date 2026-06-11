@@ -9,11 +9,11 @@ layout: learningpathall
 
 ## Make the greeting emoji configurable
 
-In the previous section, you cloned and deployed the `Hello World` Topo Template. In this section, you'll modify the Template so the greeting emoji can be configured when someone clones the Template.
+In the previous section, you cloned and deployed the Hello World Topo Template. In this section, you'll modify the template so the greeting emoji can be configured when someone clones it.
 
-### Add a new Template argument
+### Add a new template argument
 
-On your host machine, navigate to the `Hello World` Template directory:
+On your host machine, navigate to the Hello World Topo Template directory:
 
 ```bash
 cd ~/topo-welcome
@@ -128,13 +128,13 @@ Create a new directory for a fresh clone of your modified local Topo Template:
 mkdir -p ~/topo-new-welcome/
 ```
 
-Clone the local Template into the new directory:
+Clone the local template into the new directory:
 
 ```bash
 topo clone dir:$(pwd) ~/topo-new-welcome/topo-welcome
 ```
 
-Topo prompts for the configured Template arguments. You'll now see prompts for both `GREETING_NAME` and `GREETING_EMOJI`. Use the default value for `GREETING_NAME` and the example value for `GREETING_EMOJI`:
+Topo prompts for the configured template arguments. You'll now see prompts for both `GREETING_NAME` and `GREETING_EMOJI`. Use the default value for `GREETING_NAME` and the example value for `GREETING_EMOJI`:
 
 ```output
 ┌─ Copy files ──────────────────────────────────────────
