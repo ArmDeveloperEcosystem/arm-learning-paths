@@ -1,5 +1,6 @@
 ---
 title: Modify the Hello World Topo Template
+description: Add a clone-time emoji argument to the Hello World Topo Template and redeploy the customized application to an Arm-based Linux target.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

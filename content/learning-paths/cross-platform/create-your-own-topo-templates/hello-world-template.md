@@ -1,5 +1,6 @@
 ---
 title: Clone and deploy the Hello World Topo Template
+description: Clone and deploy the Hello World Topo Template to an Arm-based Linux target and verify the running web application.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

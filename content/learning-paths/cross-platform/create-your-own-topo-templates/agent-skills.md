@@ -1,5 +1,6 @@
 ---
 title: Use Agent Skills to author Topo Templates
+description: Install and use Topo Template Agent Skills to help create, review, and refine Topo Templates.
 weight: 6
 
 ### FIXED, DO NOT MODIFY

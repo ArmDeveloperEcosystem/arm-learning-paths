@@ -1,5 +1,6 @@
 ---
 title: Learn about Topo Templates
+description: Learn what Topo Templates contain and how they enable Topo deployments to Arm-based Linux targets.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

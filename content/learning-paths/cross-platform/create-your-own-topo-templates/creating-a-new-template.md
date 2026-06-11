@@ -1,5 +1,6 @@
 ---
-title: Create a new Topo Template 
+title: Create a new Topo Template
+description: Create a Topo Template from a Docker Compose project with x-topo metadata, clone-time arguments, and an Arm Linux container image.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
