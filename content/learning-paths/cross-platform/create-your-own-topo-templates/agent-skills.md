@@ -1,5 +1,5 @@
 ---
-title: Use agent skills for Topo Templates
+title: Use Agent Skills to author Topo Templates
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -8,17 +8,15 @@ layout: learningpathall
 
 ## Skills for authoring Templates
 
-If you already have a Docker Compose project and want to convert it to a Topo Template, or you want to create your own Topo Template from scratch, you can do so with an Agent Skill.
-
-These skills are optional authoring aids. The Template you created in this Learning Path works with Topo without them.
-
-Visit [Topo Skills](https://github.com/arm/topo-template-format#authoring-skills) for the most up-to-date list of the available Topo Template skills and instructions on how to install them.
+If you already have a Docker Compose project and want to convert it to a Topo Template, you can do so with an Agent Skill. You can also use a skill to create your own Topo Template from scratch. These skills are optional authoring aids. 
 
 The [Topo Template Format Specification](https://github.com/arm/topo-template-format) currently provides the following skills:
 
-1. `topo-template-context`: provides Topo and Topo Template reference context for questions about x-topo metadata, schema, docs, and CLI Template behavior.
-2. `topo-template-bootstrap`: converts a repository into a Topo Template by adding or improving `compose.yaml` and `x-topo` metadata.
-3. `topo-template-lint`: reviews an existing Topo Template for correctness, consistency, and authoring best practices.
+- `topo-template-context`: provides Topo and Topo Template reference context for questions about x-topo metadata, schema, docs, and CLI Template behavior.
+- `topo-template-bootstrap`: converts a repository into a Topo Template by adding or improving `compose.yaml` and `x-topo` metadata.
+- `topo-template-lint`: reviews an existing Topo Template for correctness, consistency, and authoring best practices.
+
+For the most up-to-date list of the available Topo Template skills, see [Topo Skills](https://github.com/arm/topo-template-format#authoring-skills) . 
 
 ## Install the skills
 
@@ -32,11 +30,13 @@ Install the Topo Template skills with [npx skills](https://github.com/vercel-lab
 npx skills add arm/topo-template-format --all --yes
 ```
 
-Restart your agent after installing or updating skills.
+Restart your AI coding agent after installing or updating skills to make sure new skills are loaded for use.
 
 ## Use the skills
 
-You can then prompt your agent to use a skill to create a Topo Template from an existing project:
+After installing skills, you can prompt your agent to use a skill to create a Topo Template from an existing project.
+
+For example, to convert a repository into a template:
 
 ```text
 Use the topo-template-bootstrap skill to convert this repository into a Topo Template.
@@ -44,6 +44,6 @@ Use the topo-template-bootstrap skill to convert this repository into a Topo Tem
 
 ## What you've accomplished 
 
-You've now learned how you can use Agent Skills to assist with the process of authoring Topo Templates.
+You've now learned how you can install and use Agent Skills to help author Topo Templates.
 
 Explore the [Topo Catalog](https://github.com/arm/topo/blob/main/internal/catalog/data/catalog.json) to find more Templates to clone and modify, or share your own Template with the community.

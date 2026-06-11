@@ -1,25 +1,25 @@
 ---
-title: Modify the 'Hello World' Topo Template
+title: Modify the Hello World Topo Template
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Make the greeting emoji in the 'Hello World' Template configurable
+## Make the greeting emoji configurable
 
-In the previous section, you cloned and deployed the Hello World Template. In this section, you'll modify the Template so the greeting emoji can be configured when someone clones the Template.
+In the previous section, you cloned and deployed the `Hello World` Topo Template. In this section, you'll modify the Template so the greeting emoji can be configured when someone clones the Template.
 
 ### Add a new Template argument
 
-On your host machine:
+On your host machine, navigate to the `Hello World` Template directory:
 
 ```bash
 cd ~/topo-welcome
 ```
 Open the `compose.yaml` file in the text editor of your choice.
 
-Find the `x-topo.args` section. It currently contains the `GREETING_NAME` argument:
+Find the `args` section under `x-topo`. It currently contains the `GREETING_NAME` argument:
 
 ```yaml
 args:
@@ -30,7 +30,7 @@ args:
     example: "Markus"
 ```
 
-Add a new `GREETING_EMOJI` argument as a second clone-time argument after `GREETING_NAME`:
+Add a new `GREETING_EMOJI` argument as a second clone-time argument after `GREETING_NAME` under `args`:
 
 ```yaml
 args:
@@ -87,7 +87,7 @@ Find the line with the hard-coded emoji:
 <span class="emoji floating">🐳</span>
 ```
 
-Replace it with the `GREETING_EMOJI` Template variable:
+Replace it with the `GREETING_EMOJI` variable from the Topo Template:
 
 ```html
 <span class="emoji floating">{{GREETING_EMOJI}}</span>
@@ -119,9 +119,9 @@ RUN sed -i "s|{{GREETING_NAME}}|${GREETING_NAME}|" /usr/share/nginx/html/index.h
 RUN sed -i "s|{{GREETING_EMOJI}}|${GREETING_EMOJI}|" /usr/share/nginx/html/index.html
 ```
 
-## Clone the modified Template
+## Clone the modified Topo Template
 
-Create a new directory for a fresh clone of your modified local Template:
+Create a new directory for a fresh clone of your modified local Topo Template:
 
 ```bash
 mkdir -p ~/topo-new-welcome/
@@ -133,7 +133,7 @@ Clone the local Template into the new directory:
 topo clone dir:$(pwd) ~/topo-new-welcome/topo-welcome
 ```
 
-Topo prompts for the configured Template arguments. You should now see prompts for both `GREETING_NAME` and `GREETING_EMOJI`. Use the example values, do not accept the defaults. When cloning completes, Topo creates the new project in `~/topo-new-welcome/topo-welcome`:
+Topo prompts for the configured Template arguments. You'll now see prompts for both `GREETING_NAME` and `GREETING_EMOJI`. Use the default value for `GREETING_NAME` and the example value for `GREETING_EMOJI`:
 
 ```output
 ┌─ Copy files ──────────────────────────────────────────
@@ -150,9 +150,11 @@ Default: 🐳
 GREETING_EMOJI (optional)> 🚀
 ```
 
-## Deploy the modified Template
+When cloning completes, Topo creates the new project in `~/topo-new-welcome/topo-welcome`.
 
-Deploy the updated template to the target:
+## Deploy the modified Topo Template
+
+Deploy the updated Topo Template to the target:
 
 ```bash
 cd ~/topo-new-welcome/topo-welcome
@@ -171,10 +173,10 @@ Then open `http://localhost:8000/` in your browser.
 
 The Hello World application appears as follows:
 
-![Screenshot of the modified Hello World web interface. This confirms successful modification and deployment and provides a visual reference for the expected result.#center](modified_template.png "Hello World web interface - with new emoji argument")
+![Screenshot of the modified Hello World web interface with a different emoji than the default. This confirms successful modification and deployment and provides a visual reference for the expected result.#center](modified_template.png "Hello World web interface - with new emoji argument")
 
 ## What you've accomplished and what's next
 
-You've now modified the "Hello World" Template to add a new optional clone-time argument, updated the Dockerfile to consume the argument, and deployed the result to your Arm-based Linux target.
+You've now modified the `Hello World` Topo Template to add a new optional clone-time argument, updated the Dockerfile to consume the argument, and deployed the result to your Arm-based Linux target.
 
 Next, you'll create a new Topo Template from scratch.

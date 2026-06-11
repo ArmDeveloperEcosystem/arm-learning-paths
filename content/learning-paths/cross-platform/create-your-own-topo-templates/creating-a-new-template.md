@@ -1,5 +1,5 @@
 ---
-title: Create a new Topo Template
+title: Create a new Topo Template 
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -26,7 +26,7 @@ mkdir -p ~/topo-message-card
 cd ~/topo-message-card
 ```
 
-A Topo Template is a normal project directory. At minimum, it needs to contain a `compose.yaml` file. Most Templates also include a `Dockerfile` and application source code.
+A Topo Template is a normal project directory. At minimum, it needs to contain a `compose.yaml` file. Most Topo Templates also include a `Dockerfile` and application source code.
 
 By the end of this section, the directory you created will have the following structure:
 
@@ -101,7 +101,7 @@ The values wrapped in double underscores are placeholders. The `Dockerfile` repl
 
 Create a file named `Dockerfile` in the `topo-message-card` directory with the following content:
 
-```Dockerfile
+```dockerfile
 FROM nginx:alpine
 
 COPY src/index.html /usr/share/nginx/html/index.html
@@ -115,9 +115,9 @@ RUN sed -i "s|__CARD_MESSAGE__|${CARD_MESSAGE}|g" /usr/share/nginx/html/index.ht
 RUN sed -i "s|__ACCENT_COLOR__|${ACCENT_COLOR}|g" /usr/share/nginx/html/index.html
 ```
 
-Topo passes configuration values to Templates through Docker build arguments. The `ARG` lines define the values consumed during the image build.
+Topo passes configuration values to Topo Templates through Docker build arguments. The `ARG` lines define the values consumed during the image build.
 
-`sed` is a command-line text replacement tool. The `sed` commands replace placeholder text in `index.html` during the image build, so each cloned project can customize the web page without manually editing the source file.
+`sed` is a command-line text replacement tool. The `sed` commands replace placeholder text in `index.html` during the image build. This way, each cloned project can customize the web page without manually editing the source file.
 
 ### Create the Compose file
 
@@ -178,16 +178,16 @@ The argument names in `x-topo.args` match the keys under `services.message-card.
 
 The same argument name appears in three places: `x-topo.args` defines what Topo asks for, `build.args` passes the value to Docker, and the Dockerfile `ARG` consumes it.
 
-### Clone the local Template
+### Clone the local Topo Template
 
-Clone your local Template into a new project directory. 
+Clone your local Topo Template into a new project directory. 
 
 You can choose to answer interactive prompts for the arguments:
 ```bash
 topo clone dir:$HOME/topo-message-card $HOME/message-card-demo
 ```
 
-Alternatively, you can opt to include the arguments in the command:
+Alternatively, you can include the arguments in the command:
 ```bash
 topo clone dir:$HOME/topo-message-card $HOME/message-card-demo \
   CARD_TITLE="Hello from Arm" \
@@ -195,14 +195,14 @@ topo clone dir:$HOME/topo-message-card $HOME/message-card-demo \
   ACCENT_COLOR="#00a3a3"
 ```
 
-After cloning, inspect the generated project:
+After using one of the commands, inspect the generated project:
 
 ```bash
 cd ~/message-card-demo
 cat compose.yaml
 ```
 
-The `build.args` contains the values you provided:
+The `args` parameter under `build` contains the values you provided:
 
 ```yaml
 services:
@@ -238,7 +238,7 @@ ssh -L 8088:localhost:8088 user@my-target
 
 Then open `http://localhost:8088/` in your browser.
 
-![Screenshot of the new Topo Template - a simple web page. This confirms successful deployment and provides a visual reference for the expected result.#center](new_template.png "Hello from Arm web page")
+![Screenshot of the new Topo Template - a web page with the text "Hello from Arm" as the title. This confirms successful deployment and provides a visual reference for the expected result.#center](new_template.png "Hello from Arm web page")
 
 Confirm that the container is running:
 
@@ -250,7 +250,7 @@ The output includes the `message-card` service and port `8088`.
 
 ## (Optional) Add hardware requirements
 
-Only add `features` when your Template needs specific Arm hardware features. For example, a SIMD benchmark that requires SVE can declare that it needs SVE:
+Add `features` only when your Topo Template needs specific Arm hardware features. For example, a SIMD benchmark that requires SVE can declare that it needs SVE:
 
 ```yaml
 x-topo:
@@ -264,9 +264,9 @@ x-topo:
 
 Topo can use these feature requirements when listing Templates against a target.
 
-## Share the Template
+## Share the Topo Template
 
-To share your Template, publish the Template directory as a Git repository. Other users can then clone it with Topo:
+To share your Topo Template, publish the Template directory as a Git repository. Other users can then clone it with Topo:
 
 ```bash
 topo clone https://github.com/<user-or-org>/topo-message-card.git
