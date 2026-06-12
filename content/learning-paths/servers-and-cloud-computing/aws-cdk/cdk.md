@@ -9,23 +9,34 @@ layout: "learningpathall"
 
 Before you can deploy an application using the AWS CDK, you need to synthesize it. During synthesis, the AWS CDK checks for errors in the application code and then translates the code into an AWS CloudFormation template. 
 
-Synthesize the application:
+Within the project directory, synthesize the application:
 
 ```bash
 cdk synth
 ```
 You can find the generated JSON template at `cdk.out/ArmCdkAppStack.template.json`. 
 
+## Bootstrap the AWS CDK application environment 
+
+After synthesizing your application, you need to bootstrap the environment. In this step, the AWS CDK creates resources such as AWS Identity and Access Management (IAM) roles. 
+
+Within the project directory, bootstrap the environment:
+
+```bash
+cdk bootstrap
+```
+
 ## Deploy the AWS CDK application 
 
-After completing synthesis, you're ready to deploy the application. AWS CDK deploys the application through the generated AWS CloudFormation stack. 
+After bootstrapping the environment, you're ready to deploy the application. AWS CDK deploys the application using the AWS CloudFormation stack generated during synthesis and IAM roles created during bootstrap. 
 
 Deploy the application:
 
 ```bash
 cdk deploy
 ```
-The last couple lines of the output include a URL to the web server and the load balancer's DNS name:
+
+The deployment can take a couple minutes to complete. When the deployment completes, the last couple lines of the output will include a URL to the web server and the load balancer's DNS name:
 
 ```output
 Outputs:
@@ -49,6 +60,8 @@ After you've validated the deployment, clean up the AWS resources that you creat
 cdk destroy
 ```
 When AWS CDK asks whether to delete `ArmCDKAppStack`, enter `y`. 
+
+The cleanup process can take a couple minutes to complete.
 
 ## What you've accomplished
 

@@ -7,7 +7,7 @@ layout: "learningpathall"
 
 ## Set up a sample AWS CDK application
 
-The AWS Cloud Development Kit (CDK) is an open-source infrastructure as code (IaC)software development framework. 
+The AWS Cloud Development Kit (CDK) is an open-source infrastructure as code (IaC) software development framework. 
 
 In this section, you'll create a JavaScript CDK application that defines an Amazon Elastic Container Service (ECS) service running on Arm-based AWS Fargate compute.
 
