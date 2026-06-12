@@ -120,7 +120,7 @@ To exit `screen`, press `Ctrl` and `A`, then `K`, then `Y` to confirm.
 ls /dev/ttyACM* /dev/ttyUSB*
 ```
 
-If you see a permission error, add your user to the `dialout` group and log out and back in:
+If you see a permission error, add your user to the `dialout` group, then log out and back in:
 
 ```bash
 sudo usermod -aG dialout $USER
@@ -134,11 +134,11 @@ screen /dev/ttyACM0 115200
 
 Replace `/dev/ttyACM0` with the device shown on your system.
 
-To exit `screen`, press `Ctrl + A`, then `K`, then `Y` to confirm.
+To exit `screen`, press `Ctrl` and `A`, then `K`, then `Y` to confirm.
 
 ### Check the shell prompt
 
-In your UART terminal application, you should see the boot log followed by the shell prompt:
+In your UART terminal application, you'll see the boot log followed by the shell prompt:
 
 ```output
 uart:~$ *** Booting Zephyr OS build v4.4.0 ***
@@ -149,7 +149,7 @@ uart:~$
 
 The `uart:~$` prompt confirms that the UART shell backend is active.
 
-The boot banner and the `<inf>` log lines are prefixed with `uart:~$` because `SHELL_LOG_BACKEND` is enabled by default when `CONFIG_SHELL=y` and `CONFIG_LOG=y` are both set. Log output is, therefore, routed through the active shell backend.
+The boot banner and the `<inf>` log lines are prefixed with `uart:~$` because `SHELL_LOG_BACKEND` is enabled by default when `CONFIG_SHELL=y` and `CONFIG_LOG=y` are both set. Log output is routed through the active shell backend.
 
 ## Run shell commands
 

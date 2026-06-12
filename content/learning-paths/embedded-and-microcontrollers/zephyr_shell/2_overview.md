@@ -35,7 +35,7 @@ In this Learning Path, you'll work with two transports:
 
 ### MQTT backend
 
-Enable the MQTT backend with `CONFIG_SHELL_BACKEND_MQTT=y`. The MQTT backend routes shell commands and responses over MQTT topics. The board subscribes to `<device_id>/sh/rx` for inbound commands and publishes responses to `<device_id>/sh/tx`. The backend connects automatically once the board has an IPv4 address. This backend is IPv4-only.
+Enable the MQTT backend with `CONFIG_SHELL_BACKEND_MQTT=y`. The MQTT backend routes shell commands and responses over MQTT topics. The board subscribes to `<device_id>/sh/rx` for inbound commands and publishes responses to `<device_id>/sh/tx`. The backend connects automatically once the board has an IPv4 address, and is IPv4-only.
 
 ### UART backend 
 

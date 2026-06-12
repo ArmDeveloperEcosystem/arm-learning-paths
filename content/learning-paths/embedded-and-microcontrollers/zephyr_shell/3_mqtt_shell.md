@@ -15,7 +15,7 @@ The application doesn't need networking code in `main.c`. Zephyr starts the shel
 
 ### How the MQTT shell backend works
 
-When `CONFIG_SHELL_BACKEND_MQTT=y` is enabled, Zephyr’s MQTT shell backend connects to a broker and uses MQTT topics to carry shell traffic (commands and responses).
+When `CONFIG_SHELL_BACKEND_MQTT=y` is enabled, Zephyr’s MQTT shell backend connects to a broker and uses MQTT topics to carry shell traffic.
 
 The default topic pattern is:
 
@@ -24,7 +24,7 @@ The default topic pattern is:
 | Commands sent to the board | `<device_id>/sh/rx` |
 | Responses sent from the board | `<device_id>/sh/tx` |
 
-The backend derives `<device_id>` from the hardware device ID, so each board uses a unique topic prefix. You will read this ID from the broker after the board connects for the first time.
+The backend derives `<device_id>` from the hardware device ID, so each board uses a unique topic prefix. You'll read this ID from the broker after the board connects for the first time.
 
 ### Create a Zephyr application project
 
@@ -80,7 +80,7 @@ CONFIG_NET_BUF_RX_COUNT=32
 
 Replace `192.168.1.233` with the IP address of the host running Mosquitto, as seen from the board's Ethernet network.
 
-The values in the Resource tuning section are the main knobs you will adjust to keep the shell footprint small on Cortex-M while still allowing the network stack and MQTT client to operate reliably.
+The values under "Resource tuning" keep the shell footprint small on Cortex-M and allow the network stack and MQTT client to operate reliably.
 
 #### Use a static IPv4 address
 
@@ -188,7 +188,7 @@ The `eclipse-mosquitto` image includes `mosquitto_pub` and `mosquitto_sub`, so y
 
 If you prefer not to use Docker, you can install Mosquitto directly on your host computer. This gives you the `mosquitto` broker, `mosquitto_pub`, and `mosquitto_sub` commands locally.
 
-Install Mosquitto with your operating system package manager:
+Install Mosquitto with your operating system package manager.
 
 On Linux (Debian or Ubuntu):
 
@@ -228,11 +228,15 @@ The same substitution applies to every `mosquitto_pub` command later in this sec
 
 ## Find the device ID
 
-The MQTT shell backend derives its client ID from the board's hardware UID, so each board connects with topics under `<device_id>/sh/rx` and `<device_id>/sh/tx`. There are two ways to read this ID:
+The MQTT shell backend derives its client ID from the board's hardware UID, so each board connects with topics under `<device_id>/sh/rx` and `<device_id>/sh/tx`. 
+
+There are two ways to read this ID:
 
 ### Read from the board's serial console
 
-If you have a serial terminal open on the board's UART, the MQTT backend logs the topics it subscribes to and publishes from at boot. A typical FRDM-MCXN947 boot log looks like this:
+If you have a serial terminal open on the board's UART, the MQTT backend logs the topics it subscribes to and publishes from at boot. 
+
+A typical FRDM-MCXN947 boot log looks like this:
 
 ```output
 *** Booting Zephyr OS build v4.4.0 ***
@@ -255,7 +259,7 @@ If you have a serial terminal open on the board's UART, the MQTT backend logs th
 [00:00:07.823,000] <inf> shell_mqtt: Subscribing shell cmds from: 1a2b3c/sh/rx
 ```
 
-The two `<inf> shell_mqtt:` lines in the last two lines of the log give you the device ID directly. In this example, it is `1a2b3c`.
+The two `<inf> shell_mqtt:` lines in the last two lines of the log give you the device ID directly. In this example, it's `1a2b3c`.
 
 {{% notice Note %}}
 The `mqtt_connect error: -22` lines you see during the first few seconds are expected. The Zephyr MQTT client retries the connect handshake until the broker accepts it, usually within a few attempts. The connection completes when you see `MQTT client connected!`, followed by `MQTT subscribe: ok`.
@@ -307,7 +311,9 @@ Open a second terminal to publish commands to the board:
 printf 'kernel version\n' | docker exec -i mosquitto-mqtt mosquitto_pub -h localhost -t "1a2b3c/sh/rx" -s
 ```
 
-The command is published to Mosquitto, the board executes it, and the response appears in the first terminal:
+The command is published to Mosquitto and the board executes it. 
+
+The response appears in the first terminal:
 
 ```output
 1a2b3c/sh/tx Zephyr version 4.4.0
@@ -325,7 +331,7 @@ Try the following commands:
 | `device list` | Print registered Zephyr devices. |
 | `help` | Print available shell modules and commands. |
 
-The `net` commands are available because `CONFIG_NET_SHELL=y` was set in `prj.conf`. Without that option, only the `kernel`, `device`, and `shell` modules are exposed.
+The `net` commands are available because you set `CONFIG_NET_SHELL=y` in `prj.conf`. Without that option, only the `kernel`, `device`, and `shell` modules are exposed.
 
 Example output for `kernel uptime`:
 
@@ -333,7 +339,7 @@ Example output for `kernel uptime`:
 1a2b3c/sh/tx Uptime: 55310 ms
 ```
 
-Example output for `kernel thread list` on the FRDM-MCXN947 (truncated; the full list shows the network and Ethernet driver threads):
+Truncated example output for `kernel thread list` on the FRDM-MCXN947 (the full list shows the network and Ethernet driver threads):
 
 ```output
 1a2b3c/sh/tx Scheduler: 1046 since last call
@@ -366,7 +372,7 @@ Threads:
 
 The `*` next to `shell_mqtt` marks the running thread, which is the shell that just executed the command. Note that responses larger than the MQTT buffer are split across multiple publishes. `mosquitto_sub -v` reassembles them sequentially under the `1a2b3c/sh/tx` topic prefix.
 
-Example output for `net iface` on the FRDM-MCXN947 (truncated to the IPv4 section):
+Example output for `net iface` on the FRDM-MCXN947, truncated to the IPv4 section:
 
 ```output
 1a2b3c/sh/tx Default interface: 1
@@ -402,7 +408,7 @@ The MQTT shell backend executes a command after it receives a newline character.
 
 ## (Optional) Switch to a different board
 
-The application is portable across any Zephyr-supported board with Ethernet, because the MQTT backend is selected through Kconfig and there is no board-specific code in `main.c`. You don't need to recreate the project to test it on another board.
+The application is portable across any Zephyr-supported board with Ethernet, because the MQTT backend is selected through Kconfig and there's no board-specific code in `main.c`. You don't need to recreate the project to test it on another board.
 
 To change the target board on an existing project:
 
@@ -422,4 +428,4 @@ You need a pristine build when you change the board because Workbench for Zephyr
 
 You now have a working Zephyr shell over MQTT on the FRDM-MCXN947. 
 
-In the next section, you'll enable the UART shell backend on the FRDM-MCXN947 and interact with the shell through a USB serial connection using PuTTY on Windows, the built-in `screen` utility on macOS, or `screen` on Linux.
+In the next section, you'll enable the UART shell backend on the FRDM-MCXN947. You'll interact with the shell through a USB serial connection using PuTTY on Windows, the built-in `screen` utility on macOS, or `screen` on Linux.

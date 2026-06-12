@@ -31,7 +31,7 @@ The two examples in this Learning Path have additional requirements:
 
 Both examples use the [FRDM-MCXN947](https://www.nxp.com/design/design-center/development-boards-and-designs/FRDM-MCXN947) as the development board (Zephyr identifier `frdm_mcxn947/mcxn947/cpu0`). The FRDM-MCXN947 includes an Ethernet port for the MQTT shell example and a USB UART interface for the UART shell example, so both examples run on the same board.
 
-To check whether another board is supported by Zephyr, see the [Zephyr Supported Boards list](https://docs.zephyrproject.org/latest/boards/index.html).
+To check whether another board is supported by Zephyr, see the [Zephyr supported boards list](https://docs.zephyrproject.org/latest/boards/index.html).
 
 ## Set up UART terminal tools
 
@@ -111,7 +111,7 @@ Replace `/dev/ttyACM0` with the device shown on your system. Boards using a CP21
 To exit `screen`, press the `Ctrl` key and `A`, then `K`, then `Y` to confirm.
 
 {{% notice Note %}}
-Workbench for Zephyr supports multiple debug runners depending on the connected board. The FRDM-MCXN947 board uses the onboard CMSIS-DAP/LinkServer interface for flashing and debugging, while shell access in this Learning Path uses UART over USB.
+Workbench for Zephyr supports multiple debug runners depending on the connected board. The FRDM-MCXN947 board uses the onboard CMSIS-DAP/LinkServer interface for flashing and debugging, and UART over USB for shell access.
 {{% /notice %}}
 
 ## Network requirements for the MQTT shell example
