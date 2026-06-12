@@ -29,7 +29,7 @@ The two examples in this Learning Path have additional requirements:
 
 ## Hardware requirements
 
-Both examples use the [FRDM-MCXN947](https://www.nxp.com/design/design-center/development-boards-and-designs/FRDM-MCXN947) as the development board (Zephyr identifier `frdm_mcxn947/mcxn947/cpu0`). The FRDM-MCXN947 includes an Ethernet port for the MQTT shell example and a USB UART interface for the UART shell example, so both examples run on the same board.
+Both examples use the [FRDM-MCXN947](https://www.nxp.com/design/design-center/development-boards-and-designs/FRDM-MCXN947) as the development board (Zephyr identifier `frdm_mcxn947/mcxn947/cpu0`). The FRDM-MCXN947 includes an Ethernet port for the MQTT shell example and a USB UART interface for the UART shell example. This allows both examples to run on the same board.
 
 To check whether another board is supported by Zephyr, see the [Zephyr supported boards list](https://docs.zephyrproject.org/latest/boards/index.html).
 
