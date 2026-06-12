@@ -6,31 +6,33 @@ weight: 5
 layout: learningpathall
 ---
 
-## Build and run the Zephyr UART shell on Cortex-M
+## Build a Zephyr application to enable the UART shell backend
 
-In this section, you will build a Zephyr application that enables the UART shell backend, flash it with Workbench for Zephyr, connect with a UART terminal application, and run shell commands over the USB serial connection.
+Start by building a Zephyr application that enables the UART shell backend.
 
-The example uses the FRDM-MCXN947 because it provides an onboard CMSIS-DAP / LinkServer debug interface together with a USB UART connection that can be accessed from a serial terminal application such as PuTTY on Windows or `screen` on macOS and Linux.
+The example uses the FRDM-MCXN947 because it provides an onboard CMSIS-DAP/LinkServer debug interface together with a USB UART connection that can be accessed from a serial terminal application such as PuTTY on Windows, or `screen` on macOS and Linux.
 
-UART shell access uses the board's USB serial interface and does not require additional debug hardware or network connectivity — the Zephyr UART shell backend maps shell input and output to the active UART console. The "Switch to a different board" section near the end of this page shows how to change boards on an existing project without recreating it.
+UART shell access uses the board's USB serial interface and doesn't require additional debug hardware or network connectivity. The Zephyr UART shell backend maps shell input and output to the active UART console. 
 
-## Create the project
+### Create a Zephyr Application Project
 
-In the **Workbench for Zephyr** panel, select **New Application** to open the **Create a new Zephyr Application Project** wizard. Fill in the following fields:
+To create a Zephyr Application Project:
 
-1. **Select West Workspace**: select your initialized West workspace for Zephyr v4.4.0.
-2. **Select Toolchain**: select `zephyr-sdk-1.0.1`.
-3. **Select Board**: select **FRDM-MCXN947** (Zephyr identifier `frdm_mcxn947/mcxn947/cpu0`).
-4. **Application type**: select **Create new application**.
-5. **Select Sample project**: select `hello_world`.
-6. **Project Name**: enter `frdm_uart_shell`.
-7. **Project Location**: select the directory where you want to create the project.
-8. **Debug preset**: leave checked.
-9. **Advanced options**: leave at the defaults.
+1. Open the **Workbench for Zephyr** panel.
+2. In the panel, select **New Application** to open the **Create a new Zephyr Application Project** wizard. 
+3. After opening the wizard, fill in the following fields:
+    - For **Select West Workspace**, select your initialized West workspace for Zephyr v4.4.0.
+    - For **Select Toolchain**, select `zephyr-sdk-1.0.1`.
+    - For **Select Board**, select **FRDM-MCXN947** (Zephyr identifier `frdm_mcxn947/mcxn947/cpu0`).
+    - For **Application type**, select **Create new application**.
+    - For **Select Sample project**, select `hello_world`.
+    - For **Project Name**, enter `frdm_uart_shell`.
+    - For **Project Location**, select the directory where you want to create the project.
+    - Leave **Debug preset** checked.
+    - Leave **Advanced options** as the defaults.
+4. Select **Create** to generate the project.
 
-Select **Create** to generate the project.
-
-## Configure the application
+### Configure the application
 
 The `hello_world` sample provides a working `CMakeLists.txt`, `prj.conf`, and `src/main.c`. Leave `CMakeLists.txt` unchanged, and replace `prj.conf` and `src/main.c` with the contents below.
 
@@ -50,7 +52,7 @@ CONFIG_MAIN_STACK_SIZE=2048
 
 The UART shell backend routes shell input and output through the board's USB serial interface.
 
-### Main
+#### Update the main function
 
 Edit the `main.c` file and replace the contents with the code below:
 
@@ -69,7 +71,7 @@ int main(void)
 
 No shell initialization code is required in `main.c`. Zephyr registers and starts the UART shell backend from the Kconfig options in `prj.conf`.
 
-## Build and flash
+### Build and flash the application
 
 Connect the FRDM-MCXN947 board to your host computer over USB.
 
@@ -133,7 +135,7 @@ Replace `/dev/ttyACM0` with the device shown on your system.
 
 To exit `screen`, press `Ctrl + A`, then `K`, then `Y` to confirm.
 
-## Check the shell prompt
+### Check the shell prompt
 
 In your UART terminal application, you should see the boot log followed by the shell prompt:
 
@@ -146,7 +148,7 @@ uart:~$
 
 The `uart:~$` prompt confirms that the UART shell backend is active.
 
-The boot banner and the `<inf>` log lines are prefixed with `uart:~$` because `SHELL_LOG_BACKEND` is enabled by default when `CONFIG_SHELL=y` and `CONFIG_LOG=y` are both set, so log output is routed through the active shell backend.
+The boot banner and the `<inf>` log lines are prefixed with `uart:~$` because `SHELL_LOG_BACKEND` is enabled by default when `CONFIG_SHELL=y` and `CONFIG_LOG=y` are both set. Log output is, therefore, routed through the active shell backend.
 
 ## Run shell commands
 
@@ -160,7 +162,7 @@ kernel thread list
 
 ![Zephyr UART shell terminal output showing the kernel version, kernel uptime, and kernel thread list commands and their responses at the uart:~$ prompt#center](images/uart_shell_output.webp "Zephyr UART shell command output")
 
-The `*` next to `shell_uart` in the thread list marks the currently running thread, which is the shell that just executed the command.
+The `*` next to `shell_uart` in the thread list marks the currently running thread, which is the shell that executed the command.
 
 {{% notice Note %}}
 Application log messages such as `LOG_INF` and `LOG_WRN` appear in the terminal together with the shell prompt. This is expected when both `CONFIG_SHELL=y` and `CONFIG_LOG=y` are enabled.
@@ -174,7 +176,7 @@ To start debugging, select your build configuration in the **Workbench for Zephy
 
 When execution stops at a breakpoint, shell output pauses with the target. After you continue execution, the UART shell becomes responsive again.
 
-## Switch to a different board
+## (Optional) Switch to a different board
 
 The application is portable across many Zephyr-supported boards because the UART shell backend is selected through Kconfig and there is no board-specific code in `main.c`.
 
@@ -195,3 +197,5 @@ After the pristine build completes, flash the board as before. The same `prj.con
 ## What you've accomplished
 
 You built and flashed a Zephyr application that enables the UART shell backend on the FRDM-MCXN947. You connected with a UART terminal application, opened the Zephyr shell over USB serial, and ran Zephyr shell commands from the host computer.
+
+You can use the workflows described in this Learning Path to add a command-line shell to your own Zephyr RTOS applications for debugging and testing.

@@ -6,15 +6,17 @@ weight: 4
 layout: learningpathall
 ---
 
-## Build and run the Zephyr MQTT shell on Cortex-M
+## Build a Zephyr application to enable Zephyr Shell MQTT backend
 
-In this section, you will build a minimal Zephyr application that enables the Zephyr Shell MQTT backend, run an Eclipse Mosquitto broker in Docker, and send shell commands to the board using the Mosquitto command-line tools.
+Start by building a minimal Zephyr application that enables the Zephyr Shell MQTT backend
 
-This example uses the NXP FRDM-MCXN947 as the development board. Any other Zephyr-supported board with Ethernet works as well, because the MQTT shell backend is selected entirely through Kconfig and the application contains no board-specific code. To run the example on a different board, follow the same steps and substitute your board's Zephyr identifier in the wizard. The "Switch to a different board" section near the end of this page shows how to change boards on an existing project without recreating it.
+This example uses the NXP FRDM-MCXN947 as the development board. Any other Zephyr-supported board with Ethernet works as well, because the MQTT shell backend is selected entirely through Kconfig and the application contains no board-specific code. 
 
-The application does not need networking code in `main.c`. Zephyr starts the shell, network stack, DHCP client, and MQTT shell backend from configuration options in `prj.conf`.
+To run the example on a different board, follow the same steps and substitute your board's Zephyr identifier in the wizard. The "Switch to a different board" section near the end of this page shows how to change boards on an existing project without recreating it.
 
-## How the MQTT shell backend works
+The application doesn't need networking code in `main.c`. Zephyr starts the shell, network stack, DHCP client, and MQTT shell backend from configuration options in `prj.conf`.
+
+### How the MQTT shell backend works
 
 When `CONFIG_SHELL_BACKEND_MQTT=y` is enabled, Zephyr’s MQTT shell backend connects to a broker and uses MQTT topics to carry shell traffic (commands and responses).
 
@@ -27,25 +29,27 @@ The default topic pattern is:
 
 The backend derives `<device_id>` from the hardware device ID, so each board uses a unique topic prefix. You will read this ID from the broker after the board connects for the first time.
 
-## Create the project
+### Create a Zephyr Application Project
 
-In the **Workbench for Zephyr** panel, select **New Application** to open the **Create a new Zephyr Application Project** wizard. Fill in the following fields:
+To create a Zephyr Application Project:
 
-1. **Select West Workspace**: select your initialized West workspace for Zephyr v4.4.0 (for example, `zephyr`).
-2. **Select Toolchain**: select `zephyr-sdk-1.0.1`.
-3. **Select Board**: select **NXP FRDM-MCXN947 (CPU0)** (Zephyr identifier `frdm_mcxn947/mcxn947/cpu0`).
-4. **Application type**: select **Create new application**.
-5. **Select Sample project**: select `hello_world`.
-6. **Project Name**: enter `mqtt_shell_backend`.
-7. **Project Location**: select the directory where you want to create the project (for example, `zephyr/apps`).
-8. **Debug preset**: leave checked.
-9. **Advanced options**: leave at the defaults.
-
-Select **Create** to generate the project.
+1. Open the **Workbench for Zephyr** panel.
+2. In the panel, select **New Application** to open the **Create a new Zephyr Application Project** wizard. 
+3. After opening the wizard, fill in the following fields:
+    - For **Select West Workspace**, select your initialized West workspace for Zephyr v4.4.0 (for example, `zephyr`).
+    - For **Select Toolchain**, select `zephyr-sdk-1.0.1`.
+    - For **Select Board**, select **NXP FRDM-MCXN947 (CPU0)** (Zephyr identifier `frdm_mcxn947/mcxn947/cpu0`).
+    - For **Application type**, select **Create new application**.
+    - For **Select Sample project**, select `hello_world`.
+    - For **Project Name**,  enter `mqtt_shell_backend`.
+    - For **Project Location**, select the directory where you want to create the project (for example, `zephyr/apps`).
+    - Leave **Debug preset** checked.
+    - Leave **Advanced options** as the defaults.
+4. Select **Create** to generate the project.
 
 ![Workbench for Zephyr Create a new Zephyr Application Project wizard showing West Workspace set to zephyr, Toolchain set to zephyr-sdk-1.0.1, Board set to NXP FRDM-MCXN947 CPU0, Application type set to Create new application, Sample project set to hello_world, Project Name set to mqtt_shell_backend, and Project Location set to zephyr/apps#center](images/wz_new_project.webp "Create a new Zephyr Application Project wizard")
 
-## Configure the application
+### Configure the application
 
 The `hello_world` sample provides a working `CMakeLists.txt`, `prj.conf`, and `src/main.c`. Leave `CMakeLists.txt` unchanged, and replace `prj.conf` and `src/main.c` with the contents below.
 
@@ -81,7 +85,7 @@ Replace `192.168.1.233` with the IP address of the host running Mosquitto, as se
 
 The values in the Resource tuning section are the main knobs you will adjust to keep the shell footprint small on Cortex-M while still allowing the network stack and MQTT client to operate reliably.
 
-### Use a static IPv4 address
+#### Use a static IPv4 address
 
 DHCP is convenient, but it is not required. To use a static address, remove:
 
@@ -99,7 +103,7 @@ CONFIG_NET_CONFIG_MY_IPV4_GW="192.168.1.1"
 
 Keep `CONFIG_NET_CONFIG_SETTINGS=y` enabled so Zephyr applies the network configuration at boot.
 
-### Main function
+#### Update the main function
 
 The shell and MQTT backend start from Zephyr initialization hooks.
 
@@ -112,13 +116,15 @@ int main(void)
 }
 ```
 
-## Build and flash
+### Build and flash
 
 In the **Workbench for Zephyr** panel, select your project and build configuration. Select **Build**, then select **Flash**.
 
 The FRDM-MCXN947 uses NXP LinkServer as the debug runner. If LinkServer is not installed, follow the Workbench for Zephyr prompt to install or configure it.
 
 ## Create the Mosquitto Docker Compose project
+
+After building the Zephyr application, you'll run an Eclipse Mosquitto broker in Docker.
 
 Create a directory named `mosquitto_shell` on your host computer with the following structure:
 
@@ -130,7 +136,7 @@ mosquitto_shell/
         `-- mosquitto.conf
 ```
 
-Edit the `docker-compose.yml` file and add the text below:
+Edit the `docker-compose.yml` file and add the following text:
 
 ```yaml
 services:
@@ -146,7 +152,7 @@ services:
     restart: unless-stopped
 ```
 
-Edit the `mosquitto.conf file and add the text below:
+Edit the `mosquitto.conf file and add the following text:
 
 ```text
 listener 1883 0.0.0.0
@@ -172,7 +178,7 @@ Check that the container is running:
 docker compose ps
 ```
 
-You should see output similar to:
+The output is similar to:
 
 ```output
 NAME                  IMAGE                        STATUS
@@ -181,7 +187,7 @@ mosquitto-mqtt        eclipse-mosquitto:latest     Up
 
 The `eclipse-mosquitto` image includes `mosquitto_pub` and `mosquitto_sub`, so you can run both tools from inside the container with `docker exec`.
 
-### Install Mosquitto directly
+### (Optional) Install Mosquitto directly
 
 If you prefer not to use Docker, you can install Mosquitto directly on your host computer. This gives you the `mosquitto` broker, `mosquitto_pub`, and `mosquitto_sub` commands locally.
 
@@ -225,9 +231,9 @@ The same substitution applies to every `mosquitto_pub` command later in this sec
 
 ## Find the device ID
 
-The MQTT shell backend derives its client ID from the board's hardware UID, so each board connects with topics under `<device_id>/sh/rx` and `<device_id>/sh/tx`. There are two ways to read this ID.
+The MQTT shell backend derives its client ID from the board's hardware UID, so each board connects with topics under `<device_id>/sh/rx` and `<device_id>/sh/tx`. There are two ways to read this ID:
 
-### Option 1: from the board's serial console
+### Read from the board's serial console
 
 If you have a serial terminal open on the board's UART, the MQTT backend logs the topics it subscribes to and publishes from at boot. A typical FRDM-MCXN947 boot log looks like this:
 
@@ -252,15 +258,15 @@ If you have a serial terminal open on the board's UART, the MQTT backend logs th
 [00:00:07.823,000] <inf> shell_mqtt: Subscribing shell cmds from: 1a2b3c/sh/rx
 ```
 
-The two `<inf> shell_mqtt:` lines in the last two lines of the log give you the device ID directly. In this example it is `1a2b3c`.
+The two `<inf> shell_mqtt:` lines in the last two lines of the log give you the device ID directly. In this example, it is `1a2b3c`.
 
 {{% notice Note %}}
 The `mqtt_connect error: -22` lines you see during the first few seconds are expected. The Zephyr MQTT client retries the connect handshake until the broker accepts it, usually within a few attempts. The connection completes when you see `MQTT client connected!`, followed by `MQTT subscribe: ok`.
 {{% /notice %}}
 
-### Option 2: from the broker side
+### Read from the broker side
 
-If you do not have a serial terminal open, watch every shell-output topic with a wildcard:
+If you don't have a serial terminal open, watch every shell-output topic with a wildcard:
 
 ```bash
 docker exec -it mosquitto-mqtt mosquitto_sub -h localhost -t "+/sh/tx" -v
@@ -286,7 +292,7 @@ New client connected from 192.168.65.1:65496 as 1a2b3c (p4, c0, k60).
 
 ## Subscribe to shell output
 
-Narrow the subscription to your board's response topic only (replace `1a2b3c` with your device ID):
+Narrow the subscription to your board's response topic only. Replace `1a2b3c` with your device ID:
 
 ```bash
 docker exec -it mosquitto-mqtt mosquitto_sub -h localhost -t "1a2b3c/sh/tx" -v
@@ -294,7 +300,9 @@ docker exec -it mosquitto-mqtt mosquitto_sub -h localhost -t "1a2b3c/sh/tx" -v
 
 Keep this terminal open. Every shell response from the board will print here.
 
-## Send shell commands
+## Send shell commands using Mosquitto
+
+You'll now send shell commands to the board using the Mosquitto command-line tools.
 
 Open a second terminal to publish commands to the board:
 
@@ -395,9 +403,9 @@ Replace `192.168.1.1` with the gateway address shown by `net iface`. The board s
 The MQTT shell backend executes a command after it receives a newline character. The `printf 'kernel version\n' | ... mosquitto_pub -s` form sends the command with the required newline.
 {{% /notice %}}
 
-## Switch to a different board
+## (Optional) Switch to a different board
 
-The application is portable across any Zephyr-supported board with Ethernet, because the MQTT backend is selected through Kconfig and there is no board-specific code in `main.c`. You do not need to recreate the project to test it on another board.
+The application is portable across any Zephyr-supported board with Ethernet, because the MQTT backend is selected through Kconfig and there is no board-specific code in `main.c`. You don't need to recreate the project to test it on another board.
 
 To change the target board on an existing project:
 
@@ -413,6 +421,8 @@ After the pristine build completes, flash the board as before. The same `prj.con
 A pristine build is required when you change the board because Workbench for Zephyr caches board-specific generated files (device tree, Kconfig, linker script) in the build directory. Without a clean rebuild, the previous board's configuration leaks into the new build and produces incorrect binaries.
 {{% /notice %}}
 
-## What's next?
+## What you've accomplished and what's next
 
-You now have a working Zephyr shell over MQTT on the FRDM-MCXN947. In the next section, you will enable the UART shell backend on the FRDM-MCXN947 and interact with the shell through a USB serial connection using PuTTY on Windows, the built-in `screen` utility on macOS, or `screen` on Linux.
+You now have a working Zephyr shell over MQTT on the FRDM-MCXN947. 
+
+In the next section, you'll enable the UART shell backend on the FRDM-MCXN947 and interact with the shell through a USB serial connection using PuTTY on Windows, the built-in `screen` utility on macOS, or `screen` on Linux.
