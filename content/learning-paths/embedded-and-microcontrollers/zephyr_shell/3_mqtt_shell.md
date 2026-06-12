@@ -48,7 +48,7 @@ To create an application project in Workbench for Zephyr:
 
 ### Configure the application
 
-The `hello_world` sample provides a working `CMakeLists.txt`, `prj.conf`, and `src/main.c`. Leave `CMakeLists.txt` unchanged, and replace `prj.conf` and `src/main.c` with the following contents.
+The `hello_world` sample provides a working `CMakeLists.txt`, `prj.conf`, and `src/main.c`. Leave `CMakeLists.txt` unchanged, and replace `prj.conf` and `src/main.c`.
 
 Replace the contents of `prj.conf` with the following text:
 
@@ -80,7 +80,7 @@ CONFIG_NET_BUF_RX_COUNT=32
 
 Replace `192.168.1.233` with the IP address of the host running Mosquitto, as seen from the board's Ethernet network.
 
-The values under "Resource tuning" keep the shell footprint small on Cortex-M and allow the network stack and MQTT client to operate reliably.
+The values under `# Resource tuning` keep the shell footprint small on Cortex-M and allow the network stack and MQTT client to operate reliably.
 
 #### Use a static IPv4 address
 
@@ -90,7 +90,7 @@ DHCP is convenient, but it's not required. To use a static address, remove:
 CONFIG_NET_DHCPV4=y
 ```
 
-Then add values that match your network:
+Then, add values that match your network:
 
 ```text
 CONFIG_NET_CONFIG_MY_IPV4_ADDR="192.168.1.50"
@@ -117,7 +117,7 @@ int main(void)
 
 In the **Workbench for Zephyr** panel, select your project and build configuration. Select **Build**, then select **Flash**.
 
-The FRDM-MCXN947 uses NXP LinkServer as the debug runner. If LinkServer isn't installed, follow the Workbench for Zephyr prompt to install or configure it.
+The FRDM-MCXN947 uses NXP LinkServer as the debug runner. If LinkServer isn't installed, follow the `Workbench for Zephyr` prompt to install or configure it.
 
 ## Create the Mosquitto Docker Compose project
 
@@ -372,7 +372,7 @@ Threads:
 	stack size 320, unused 256, usage 64 / 320 (20 %)
 ```
 
-The `*` next to `shell_mqtt` marks the running thread, which is the shell that just executed the command. Note that responses larger than the MQTT buffer are split across multiple publishes. `mosquitto_sub -v` reassembles them sequentially under the `1a2b3c/sh/tx` topic prefix.
+The `*` next to `shell_mqtt` marks the running thread, which is the shell that executed the command. Note that responses larger than the MQTT buffer are split across multiple publishes. `mosquitto_sub -v` reassembles them sequentially under the `1a2b3c/sh/tx` topic prefix.
 
 Example output for `net iface` on the FRDM-MCXN947, truncated to the IPv4 section:
 
@@ -392,7 +392,6 @@ IPv4 gateway : 192.168.1.1
 DHCPv4 state      : bound
 DHCPv4 server     : 192.168.1.1
 ```
-
 Example output for `net ping 192.168.1.1` (board pinging its gateway):
 
 ```output
@@ -402,7 +401,7 @@ Example output for `net ping 192.168.1.1` (board pinging its gateway):
 28 bytes from 192.168.1.1 to 192.168.1.41: icmp_seq=3 ttl=64 time=0 ms
 ```
 
-Replace `192.168.1.1` with the gateway address shown by `net iface`. The board sends three ICMP echo requests by default.
+To run `net ping`, replace `192.168.1.1` with the gateway address shown by `net iface`. The board sends three ICMP echo requests by default.
 
 {{% notice Note %}}
 The MQTT shell backend executes a command after it receives a newline character. The `printf 'kernel version\n' | ... mosquitto_pub -s` form sends the command with the required newline.

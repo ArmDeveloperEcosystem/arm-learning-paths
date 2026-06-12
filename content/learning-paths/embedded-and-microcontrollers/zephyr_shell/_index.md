@@ -15,7 +15,7 @@ learning_objectives:
 prerequisites:
     - Basic familiarity with embedded C programming
     - Visual Studio Code with the Workbench for Zephyr extension installed and configured
-    - Docker Desktop, Docker Engine, or another Docker-compatible runtime installed on your host computer (for the MQTT shell example only)
+    - Docker Desktop, Docker Engine, or another Docker-compatible runtime installed on your host computer (for the MQTT shell example, if you're not installing Mosquitto on host)
     - A Zephyr-supported Arm Cortex-M board (for example, NXP FRDM-MCXN947)
 
 author: 

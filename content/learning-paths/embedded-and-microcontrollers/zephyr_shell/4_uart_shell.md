@@ -157,6 +157,8 @@ kernel uptime
 kernel thread list
 ```
 
+The output is similar to:
+
 ![Zephyr UART shell terminal output showing the kernel version, kernel uptime, and kernel thread list commands and their responses at the uart:~$ prompt#center](images/uart_shell_output.webp "Zephyr UART shell command output")
 
 The `*` next to `shell_uart` in the thread list marks the currently running thread, which is the shell that executed the command.

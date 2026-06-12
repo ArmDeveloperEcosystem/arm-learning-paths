@@ -24,7 +24,7 @@ Before working through this Learning Path, complete [Build Zephyr projects with 
 
 The two examples in this Learning Path have additional requirements:
 
-- MQTT shell example: Docker Desktop, Docker Engine, or another Docker-compatible runtime on your host computer. The board communicates with a Mosquitto broker running in a container.
+- MQTT shell example: Docker Desktop, Docker Engine, or another Docker-compatible runtime on your host computer, if you're not installing Mosquitto on host. The board communicates with a Mosquitto broker running in a container.
 - UART shell example: A USB cable to connect the development board to your host computer. The board exposes a shell prompt over the USB serial interface.
 
 ## Hardware requirements
