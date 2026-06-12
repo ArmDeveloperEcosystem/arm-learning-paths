@@ -15,9 +15,9 @@ The example uses the FRDM-MCXN947 because it provides an onboard CMSIS-DAP/LinkS
 
 UART shell access uses the board's USB serial interface and doesn't require additional debug hardware or network connectivity. The Zephyr UART shell backend maps shell input and output to the active UART console. 
 
-### Create a Zephyr Application Project
+### Create an application project in Workbench for Zephyr
 
-To create a Zephyr Application Project:
+To create an application project in Workbench for Zephyr:
 
 1. Open the **Workbench for Zephyr** panel.
 2. In the panel, select **New Application** to open the **Create a new Zephyr Application Project** wizard. 

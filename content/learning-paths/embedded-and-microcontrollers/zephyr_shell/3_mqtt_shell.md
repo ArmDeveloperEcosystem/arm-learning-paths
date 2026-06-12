@@ -26,9 +26,9 @@ The default topic pattern is:
 
 The backend derives `<device_id>` from the hardware device ID, so each board uses a unique topic prefix. You'll read this ID from the broker after the board connects for the first time.
 
-### Create a Zephyr application project
+### Create an application project in Workbench for Zephyr
 
-To create a Zephyr application project:
+To create an application project in Workbench for Zephyr:
 
 1. Open the **Workbench for Zephyr** panel.
 2. In the panel, select **New Application** to open the **Create a new Zephyr Application Project** wizard. 
