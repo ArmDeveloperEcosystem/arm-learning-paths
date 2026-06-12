@@ -112,7 +112,7 @@ screen /dev/tty.usbmodemXXXX 115200
 
 Replace `/dev/tty.usbmodemXXXX` with the serial device shown on your system.
 
-To exit `screen`, press `Ctrl` and `A`, then `K`, then `Y` to confirm.
+To exit `screen`, press the `Ctrl` key and `A`, then `K`, then `Y` to confirm.
 
 ### Linux with screen
 
@@ -134,7 +134,7 @@ screen /dev/ttyACM0 115200
 
 Replace `/dev/ttyACM0` with the device shown on your system.
 
-To exit `screen`, press `Ctrl` and `A`, then `K`, then `Y` to confirm.
+To exit `screen`, press the `Ctrl` key and `A`, then `K`, then `Y` to confirm.
 
 ### Check the shell prompt
 
