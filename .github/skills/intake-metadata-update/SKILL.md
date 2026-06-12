@@ -7,24 +7,25 @@ description: Add or verify draft metadata for new Arm Learning Paths and install
 
 Use this skill when new Learning Path or install guide content needs to remain unpublished until technical and editorial review is complete.
 
+Work from the repository root and preserve existing front matter values. Preserve existing front matter order where possible. 
+
 ## Workflow
 
-1. Work from the repository root.
-2. Identify the target content:
+1. Identify the target content:
    - Learning Path directory: edit its `_index.md`.
    - Single-file install guide: edit metadata in that Markdown file.
    - Multi-page install guide or content bundle: edit the `_index.md` or main entry file.
-3. Preserve existing front matter order and values where possible.
-4. Add or update this metadata in front matter for Learning Paths:
+2. Add or update this metadata:
+  - For Learning Paths:
 
-```yaml
-draft: true
-cascade:
+    ```yaml
     draft: true
-```
+    cascade:
+        draft: true
+    ```
 
-5. Add or update this metadata in front matter for single-page install guides:
+  - For single-page install guides:
 
-```yaml
-draft: true
-```
+    ```yaml
+    draft: true
+    ```
