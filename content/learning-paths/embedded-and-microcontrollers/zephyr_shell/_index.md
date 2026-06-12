@@ -1,5 +1,5 @@
 ---
-title: Create an interactive shell for Zephyr RTOS on Cortex-M
+title: Create an interactive shell for Zephyr RTOS on Arm Cortex-M
 
 description: Learn how to enable and configure the Zephyr shell subsystem on Arm Cortex-M, then build and run MQTT and UART shell backend examples using Workbench for Zephyr in Visual Studio Code.
 
