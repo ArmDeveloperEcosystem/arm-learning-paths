@@ -1,5 +1,9 @@
 ---
 title: Measure Go GC behavior on AWS Graviton
+draft: true
+cascade:
+    draft: true
+
 description: Learn how to measure and observe Go garbage collection metrics on AWS Graviton instances.
 
 minutes_to_complete: 75
