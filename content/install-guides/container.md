@@ -18,7 +18,7 @@ Container CLI is an open-source command-line tool from Apple for building and ru
 
 The CLI supports the full Open Container Initiative (OCI) workflow: building, running, tagging, and pushing container images.
 
-In this guide, you'll learn how to install and use the Container CLI to run Arm Linux containers natively on Apple silicon Macs.
+In this guide, you'll learn how to install and verify the Container CLI to run Arm Linux containers natively on Apple silicon Macs.
 
 ## Before you begin
 
@@ -28,7 +28,7 @@ First, confirm you are using an Apple silicon Mac by running:
 uname -m
 ```
 
-The output should be:
+The expected output is:
 
 ```output
 arm64
@@ -44,7 +44,7 @@ Check your macOS version:
 sw_vers -productVersion
 ```
 
-Example output:
+The output is similar to:
 
 ```output
 26.5.1
@@ -54,9 +54,11 @@ You must run macOS 15.0 or later to use the Container CLI.
 
 ## Install Container CLI
 
-To install Container CLI, go to the [GitHub Releases page](https://github.com/apple/container/releases) and download the latest signed `.pkg` installer.  
+To install Container CLI, go to the [GitHub Releases page](https://github.com/apple/container/releases) and download the latest signed `.pkg` installer.
 
-For example, the following commands use version `1.0.0`. Replace `1.0.0` with the latest version:
+{{% notice Note %}}
+The following commands use Container CLI version 1.0.0. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [GitHub Releases](https://github.com/apple/container/releases).
+{{% /notice %}}
 
 ```bash
 wget https://github.com/apple/container/releases/download/1.0.0/container-1.0.0-installer-signed.pkg
@@ -112,7 +114,7 @@ Run the following to build and tag the container image as `uname`:
 container build -t uname .
 ```
 
-Example output:
+The output is similar to:
 
 ```output
 [+] Building 2.7s (5/5) FINISHED
@@ -127,7 +129,7 @@ Run the container to verify it prints the system architecture.
 container run --rm uname
 ```
 
-Expected output:
+The expected output is:
 
 ```output
 Architecture is aarch64
@@ -183,7 +185,7 @@ container ls
 
 The CLI includes an uninstall script. You can choose whether to keep or delete your container data.
 
- To uninstall and retain user data (images and containers):
+To uninstall and retain user data (images and containers):
 
 ```bash
 uninstall-container.sh -k
@@ -196,6 +198,6 @@ Otherwise, to uninstall and delete all user data:
 uninstall-container.sh -d
 ```
 
-This will remove the CLI and all related images, logs, and metadata.
+This removes the CLI and all related images, logs, and metadata.
 
 You’ve now ready to use Container CLI.  
