@@ -33,6 +33,7 @@ The output should be:
 ```output
 arm64
 ```
+
 {{% notice Note %}}
 Container CLI supports only Apple silicon Macs (M1, M2, M3, and M4).
 {{% /notice %}}
@@ -46,7 +47,7 @@ sw_vers -productVersion
 Example output:
 
 ```output
-15.6.1
+26.5.1
 ```
 
 You must run macOS 15.0 or later to use the Container CLI.
@@ -55,16 +56,16 @@ You must run macOS 15.0 or later to use the Container CLI.
 
 To install Container CLI, go to the [GitHub Releases page](https://github.com/apple/container/releases) and download the latest signed `.pkg` installer.  
 
-For example, the following commands use version `0.11.0`. Replace `0.11.0` with the latest version:
+For example, the following commands use version `1.0.0`. Replace `1.0.0` with the latest version:
 
 ```bash
-wget https://github.com/apple/container/releases/download/0.11.0/container-0.11.0-installer-signed.pkg
+wget https://github.com/apple/container/releases/download/1.0.0/container-1.0.0-installer-signed.pkg
 ```
 
 Install the package:
 
 ```bash
-sudo installer -pkg container-0.11.0-installer-signed.pkg -target /
+sudo installer -pkg container-1.0.0-installer-signed.pkg -target /
 ```
 
 This installs the Container binary at `/usr/local/bin/container`.
@@ -88,7 +89,7 @@ container --version
 The output is similar to:
 
 ```output
-container CLI version 0.11.0 (build: release, commit: d9b8a8d)
+container CLI version 1.0.0 (build: release, commit: ee848e3)
 ```
 
 ## Verify installation by building and running a container
@@ -114,7 +115,8 @@ container build -t uname .
 Example output:
 
 ```output
-Successfully built uname:latest
+[+] Building 2.7s (5/5) FINISHED
+uname:latest
 ```
 
 ### Run the container
