@@ -12,7 +12,11 @@ Before you optimize, identify where the application spends most of its time. Use
 
 Open Arm Performix and select the **Code Hotspots** recipe. If this is your first run on the target, complete tool deployment as prompted.
 
-Set the launch command to your baseline binary with the number of tokens (`-n`) set to 150. This value keeps startup overhead small compared to inference time, so the profile minimizes the time taken to load the model weights:
+Set the launch command to your baseline binary with the number of tokens (`-n`) set to 150 as per the command below. This value keeps startup overhead small compared to inference time, so the profile minimizes the time taken to load the model weights:
+
+```out
+<path to repository>/build/gpt2 --model gpt2-medium "Once upon a time" -n  150
+```
 
 ![Arm Performix Code Hotspots recipe configuration showing launch arguments for the GPT-2 baseline run with -n 150 to emphasize inference runtime.#center](./code_hotspot.webp "Code Hotspots recipe configuration for GPT-2 baseline")
 
@@ -24,8 +28,7 @@ This confirms that matrix multiplication is the highest-impact optimization targ
 
 ## Assess compiler output
 
-We can use online tools such as [Compiler Explorer](https://godbolt.org/) to conveniently see how this function is being compiled with the `-O2 -g` flags.
-
+We can use online tools such as [Compiler Explorer](https://godbolt.org/) to conveniently see how this function is being compiled with the `-O2 -g` flags. The example below uses `GCC 12.1.0`. You can check your installed compiler version with the `g++ --version` command and select the corresponding version from the Compiler Explorer drop-down menu. The generated assembly may differ slightly across compiler versions.
 
 {{< godbolt width="100%" height="400px" mode="assembly" opt="-O2 -g" src="void matmul_ref(float *out, const float *x, const float *W, const float *b, int n_in, int n_out)\n{\n  for (int i = 0; i < n_out; i++) {\n    float acc = b ? b[i] : 0.f;\n    const float *row = W + (unsigned long long)i * (unsigned long long)n_in;\n    for (int j = 0; j < n_in; j++) {\n      acc += row[j] * x[j];\n    }\n    out[i] = acc;\n  }\n}" >}}
 

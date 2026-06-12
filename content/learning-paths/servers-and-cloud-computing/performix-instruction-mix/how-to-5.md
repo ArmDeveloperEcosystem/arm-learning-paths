@@ -8,7 +8,15 @@ layout: learningpathall
 
 ## Confirm instruction-mix changes after vectorization
 
-In the earlier build step, you created `gpt2_neon` and `gpt2_sve`. These binaries use the reference solutions in `matmul_neon.cpp` and `matmul_sve.cpp`, respectively.
+In the earlier build step, you created `gpt2_neon` and `gpt2_sve`. These binaries use the reference solutions in `matmul_neon.cpp` and `matmul_sve.cpp`, respectively. Run the `gpt2_neon` binary with the following command to observe the speedup. 
+
+```bash
+./build/gpt2_neon --model gpt2-medium "Once upon a time" -n 20
+```
+
+![Animated terminal output showing GPT-2 baseline inference running on Arm Linux, including generated text and the final tokens-per-second summary used for baseline comparison.#center](./gpt_neon.gif "GPT-2 Neon runtime output on Arm Linux")
+
+The Neon implementation delivers a noticeable increase in token generation throughput. To evaluate the SVE implementation, run the same workload using the `gpt2_sve` binary instead of `gpt2_neon`. Performance gains will vary across systems, largely depending on the Scalable Vector Length (SVL) supported by the Arm Linux platform.
 
 Rerun the Instruction Mix recipe with the `gpt2_neon` binary using the same recipe settings and workload arguments as baseline. After the run completes, select both runs and click **Compare** to open a comparison view.
 
@@ -30,12 +38,12 @@ You can also compare SVE variants in the same way. The increase in SVE operation
 
 #### Neon kernel
 
-You can also inspect the Neon intrinsic implementation using Compiler Explorer, where the hot accumulation step (`vacc`) runs in aSIMD (Neon) registers such as `v0`:
+You can also inspect the Neon intrinsic implementation using Compiler Explorer, where the hot accumulation step (`vacc`) runs in ASIMD (Neon) registers such as `v0`:
 
 {{< godbolt width="100%" height="400px" mode="assembly" opt="-O2 -g -march=armv8.2-a+simd" src="#include <arm_neon.h>\n\nvoid matmul_neon(float *out, const float *x, const float *W, const float *b,\n                 int n_in, int n_out) {\n    for (int i = 0; i < n_out; i++) {\n        float acc = b ? b[i] : 0.f;\n        const float *row = W + (unsigned long long)i * (unsigned long long)n_in;\n        int j = 0;\n        float32x4_t vacc = vdupq_n_f32(0.f);\n        for (; j + 4 <= n_in; j += 4) {\n            const float32x4_t vw = vld1q_f32(row + j);\n            const float32x4_t vx = vld1q_f32(x + j);\n            vacc = vfmaq_f32(vacc, vw, vx);\n        }\n        acc += vaddvq_f32(vacc);\n        for (; j < n_in; j++) acc += row[j] * x[j];\n        out[i] = acc;\n    }\n}" >}}
 
 
-### SVE kernel
+#### SVE kernel
 
 For variable-length vectorization, compare with an explicit SVE implementation that assumes SVE support, where the hot accumulation step (`vacc`) runs in SVE z registers with predicate-controlled loads and multiply-accumulate:
 
