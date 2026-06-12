@@ -92,7 +92,7 @@ Configure PuTTY with:
 - **Serial line**: your board's COM port
 - **Speed**: `115200`
 
-Select **Open** to connect.
+After configuring, select **Open** to connect.
 
 ![PuTTY configuration window with Connection type set to Serial, Serial line set to the board's COM port, and Speed set to 115200, ready to connect to the Zephyr UART shell#center](images/putty_installation.webp "PuTTY Serial terminal configuration")
 
@@ -104,17 +104,16 @@ Open a terminal window and identify the serial device:
 ls /dev/tty.*
 ```
 
-Connect with:
+Connect to the UART shell, replacing `/dev/tty.usbmodemXXXX` with the serial device shown on your system:
 
 ```bash
 screen /dev/tty.usbmodemXXXX 115200
 ```
-
-Replace `/dev/tty.usbmodemXXXX` with the serial device shown on your system.
-
 To exit `screen`, press the `Ctrl` key and `A`, then `K`, then `Y` to confirm.
 
 ### Linux with screen
+
+List available serial devices:
 
 ```bash
 ls /dev/ttyACM* /dev/ttyUSB*
@@ -126,14 +125,11 @@ If you see a permission error, add your user to the `dialout` group, then log ou
 sudo usermod -aG dialout $USER
 ```
 
-Connect with:
+Connect to the UART shell, replacing `/dev/ttyACM0` with the device shown on your system:
 
 ```bash
 screen /dev/ttyACM0 115200
 ```
-
-Replace `/dev/ttyACM0` with the device shown on your system.
-
 To exit `screen`, press the `Ctrl` key and `A`, then `K`, then `Y` to confirm.
 
 ### Check the shell prompt

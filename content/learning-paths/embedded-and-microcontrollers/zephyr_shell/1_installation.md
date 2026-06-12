@@ -35,81 +35,25 @@ To check whether another board is supported by Zephyr, see the [Zephyr supported
 
 ## Set up UART terminal tools
 
-For the UART shell example, install a serial terminal application on your host computer. You'll use the terminal application to connect to the Zephyr shell over the board's UART interface.
+For the UART shell example, you'll need a serial terminal application on your host computer. You'll use the terminal application to connect to the Zephyr shell over the board's UART interface.
 
 You can complete this Learning Path on Windows, macOS, and Linux host computers.
 
 ### Windows
 
-Install [PuTTY](https://www.putty.org/index.html), which provides a lightweight serial terminal for UART communication.
-
-After installation:
-
-1. Connect the development board over USB.
-2. Open **Device Manager** and locate the board's COM port under **Ports (COM & LPT)**.
-3. Open PuTTY and configure:
-
-   - **Connection type**: `Serial`
-   - **Serial line**: your board's COM port (for example `COM5`)
-   - **Speed**: `115200`
-
-4. Select **Open** to connect to the Zephyr UART shell.
-
-![PuTTY configuration window with Connection type set to Serial, Serial line set to COM5, and Speed set to 115200, ready to connect to the Zephyr UART shell#center](images/putty_installation.webp "PuTTY serial terminal configuration")
+Install [PuTTY](https://www.putty.org/index.html), which provides a lightweight serial terminal for UART communication on Windows.
 
 ### macOS
 
-macOS includes a built-in UART terminal utility through the `screen` command, so no additional software is required.
-
-After connecting the development board over USB:
-
-1. Open a terminal window.
-2. List available serial devices:
-
-   ```bash
-   ls /dev/tty.*
-   ```
-3. Connect to the UART shell with:
-
-   ```bash
-   screen /dev/tty.usbmodemXXXX 115200
-   ```
-
-Replace `/dev/tty.usbmodemXXXX` with the serial device shown on your system.
-
-To exit `screen`, press the `Ctrl` key and `A`, then `K`, then `Y` to confirm.
+macOS includes a built-in UART terminal utility through the `screen` command, so you don't need additional software to connect to the shell.
 
 ### Linux
 
-Linux includes `screen` in most distributions, so no additional software is required. If `screen` is not installed, use your package manager to install it:
+Linux includes `screen` in most distributions, so you don't need additional software to connect to the shell. If `screen` isn't installed, use your package manager to install it:
 
 ```bash
 sudo apt install screen
 ```
-
-After connecting the development board over USB:
-
-1. Open a terminal window.
-2. List available serial devices:
-
-   ```bash
-   ls /dev/ttyACM* /dev/ttyUSB*
-   ```
-3. If you see a permission error when connecting, add your user to the `dialout` group and log out and back in:
-
-   ```bash
-   sudo usermod -aG dialout $USER
-   ```
-4. Connect to the UART shell with:
-
-   ```bash
-   screen /dev/ttyACM0 115200
-   ```
-
-Replace `/dev/ttyACM0` with the device shown on your system. Boards using a CP210x or FTDI USB-UART chip typically appear as `/dev/ttyUSB0`.
-
-To exit `screen`, press the `Ctrl` key and `A`, then `K`, then `Y` to confirm.
-
 {{% notice Note %}}
 Workbench for Zephyr supports multiple debug runners depending on the connected board. The FRDM-MCXN947 board uses the onboard CMSIS-DAP/LinkServer interface for flashing and debugging, and UART over USB for shell access.
 {{% /notice %}}

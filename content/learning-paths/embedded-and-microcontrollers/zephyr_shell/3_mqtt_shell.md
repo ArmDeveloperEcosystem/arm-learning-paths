@@ -430,4 +430,4 @@ You need a pristine build when you change the board because Workbench for Zephyr
 
 You now have a working Zephyr shell over MQTT on the FRDM-MCXN947. 
 
-In the next section, you'll enable the UART shell backend on the FRDM-MCXN947. You'll interact with the shell through a USB serial connection using PuTTY on Windows, the built-in `screen` utility on macOS, or `screen` on Linux.
+In the next section, you'll enable the UART shell backend on the FRDM-MCXN947. You'll interact with the shell through a USB serial connection.
