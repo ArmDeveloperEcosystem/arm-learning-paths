@@ -15,7 +15,7 @@ prerequisites:
 - An Android mobile device that has a 64-bit processor and supports at least Android 8.
 - A USB cable to connect the mobile device to your computer.
 
-author: Arm
+author: Annie Tallund
 
 ### Tags
 skilllevels: Advanced
