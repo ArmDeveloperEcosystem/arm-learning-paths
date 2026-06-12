@@ -16,9 +16,9 @@ In this section, you'll prepare your host computer and identify the hardware nee
 
 Make sure that you have a working Zephyr development environment set up in Visual Studio Code with:
 
-- Workbench for Zephyr extension installed 
-- Zephyr SDK toolchain imported in Workbench
-- West workspace initialized
+- The Workbench for Zephyr extension installed 
+- A Zephyr SDK toolchain imported in Workbench
+- A West workspace initialized
 
 Before working through this Learning Path, complete [Build Zephyr projects with Workbench for Zephyr in VS Code](/learning-paths/embedded-and-microcontrollers/zephyr_vsworkbench/).
 
