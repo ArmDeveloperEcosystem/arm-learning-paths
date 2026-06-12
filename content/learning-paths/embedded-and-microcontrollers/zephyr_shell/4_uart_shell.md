@@ -89,10 +89,10 @@ After flashing, the board resets and starts running. Open a UART terminal applic
 Configure PuTTY with:
 
 - **Connection type**: `Serial`
-- **Serial line**: your board's COM port
+- **Serial line**: your board's COM port (for example, `COM5`)
 - **Speed**: `115200`
 
-After configuring, select **Open** to connect.
+After configuring, select **Open** to connect to the UART shell.
 
 ![PuTTY configuration window with Connection type set to Serial, Serial line set to the board's COM port, and Speed set to 115200, ready to connect to the Zephyr UART shell#center](images/putty_installation.webp "PuTTY Serial terminal configuration")
 
