@@ -105,7 +105,7 @@ Run the scalar baseline binary:
 ./build/gpt2 --model gpt2-medium "Once upon a time" -n 20
 ```
 
-![Animated terminal output showing GPT-2 neon inference running on Arm Linux, including generated text and the final tokens-per-second summary.#center](./gpt2-baseline.gif "GPT-2 Neon runtime output on Arm Linux")
+![Animated terminal output showing GPT-2 baseline inference running on Arm Linux, including generated text and the final tokens-per-second summary.#center](./gpt2-baseline.gif "GPT-2 baseline runtime output on Arm Linux")
 
 ## What you've learned and what's next
 
