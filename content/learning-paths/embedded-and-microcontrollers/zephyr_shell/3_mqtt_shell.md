@@ -1,5 +1,6 @@
 ---
 title: Build and run the Zephyr MQTT shell on Arm Cortex-M
+description: Build and flash a Zephyr MQTT shell application on Arm Cortex-M, then send commands through a Mosquitto broker.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

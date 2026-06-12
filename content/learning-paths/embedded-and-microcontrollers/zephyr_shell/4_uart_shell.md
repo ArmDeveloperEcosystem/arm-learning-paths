@@ -1,5 +1,6 @@
 ---
-title: Build and run the Zephyr UART shell on Cortex-M
+title: Build and run the Zephyr UART shell on Arm Cortex-M
+description: Build and flash a Zephyr UART shell application on Arm Cortex-M, then connect over USB serial to run shell commands.
 weight: 5
 
 ### FIXED, DO NOT MODIFY

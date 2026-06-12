@@ -1,5 +1,6 @@
 ---
 title: Set up the Zephyr shell development environment
+description: Prepare the host tools, hardware, UART terminal, and network requirements needed to build Zephyr shell examples on Arm Cortex-M.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

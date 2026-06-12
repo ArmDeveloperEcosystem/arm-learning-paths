@@ -1,5 +1,6 @@
 ---
 title: Understand the Zephyr shell subsystem and backends
+description: Learn how the Zephyr shell subsystem and MQTT and UART backends route interactive commands on Arm Cortex-M firmware.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
