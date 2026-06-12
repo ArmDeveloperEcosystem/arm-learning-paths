@@ -117,7 +117,7 @@ int main(void)
 
 In the **Workbench for Zephyr** panel, select your project and build configuration. Select **Build**, then select **Flash**.
 
-The FRDM-MCXN947 uses NXP LinkServer as the debug runner. If LinkServer is not installed, follow the Workbench for Zephyr prompt to install or configure it.
+The FRDM-MCXN947 uses NXP LinkServer as the debug runner. If LinkServer isn't installed, follow the Workbench for Zephyr prompt to install or configure it.
 
 ## Create the Mosquitto Docker Compose project
 
@@ -184,7 +184,7 @@ mosquitto-mqtt        eclipse-mosquitto:latest     Up
 
 The `eclipse-mosquitto` image includes `mosquitto_pub` and `mosquitto_sub`, so you can run both tools from inside the container with `docker exec`.
 
-### (Optional) Install Mosquitto directly
+### (Optional) Install Mosquitto directly on host machine
 
 If you prefer not to use Docker, you can install Mosquitto directly on your host computer. This gives you the `mosquitto` broker, `mosquitto_pub`, and `mosquitto_sub` commands locally.
 
@@ -212,7 +212,9 @@ After installation on Windows, add the Mosquitto install directory (typically `C
 
 After installing Mosquitto directly, start the broker using your operating system's service manager, or run it manually with a local configuration file.
 
-The remaining commands in this section use `docker exec` to run `mosquitto_sub` and `mosquitto_pub` inside the container. If you installed Mosquitto directly, drop the `docker exec -it mosquitto-mqtt` prefix and run the tools directly instead. For example, this container command:
+The remaining commands in this section use `docker exec` to run `mosquitto_sub` and `mosquitto_pub` inside the container. If you installed Mosquitto directly, drop the `docker exec -it mosquitto-mqtt` prefix and run the tools directly instead. 
+
+For example, this container command:
 
 ```bash
 docker exec -it mosquitto-mqtt mosquitto_sub -h localhost -t "1a2b3c/sh/tx" -v
