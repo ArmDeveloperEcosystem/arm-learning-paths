@@ -1,6 +1,6 @@
 ---
 title: Understand the toolchains
-weight: 4
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -33,7 +33,7 @@ The firmware runner is built as:
 executorch_runner_cm33.elf
 ```
 
-This firmware runs on the Cortex-M33 core. It waits for commands coming from the Linux web application over `RPMsg`, reads the input imae (tensors) from reserved memory, executes inference through ExecuTorch, and writes classification output back over `RPMsg`.
+This firmware runs on the Cortex-M33 core. It waits for commands coming from the Linux web application over `RPMsg`, reads the input image tensors from reserved memory, executes inference through ExecuTorch, and writes classification output back over `RPMsg`.
 
 The Template packages the firmware as the entrypoint of the `cm33-runner` image:
 

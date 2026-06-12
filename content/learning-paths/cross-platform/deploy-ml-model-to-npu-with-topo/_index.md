@@ -11,6 +11,7 @@ learning_objectives:
     - Explain how Topo deploys an application that spans Cortex-A, Cortex-M, and Ethos-U
     - Prepare an NXP FRDM i.MX 93 board for remoteproc-runtime and shared-memory inference
     - Clone and deploy the topo-imx93-npu-deployment template
+    - Describe how the Template is bootstrapped from Compose services, Remoteproc Runtime metadata, and Topo arguments
     - Run image classification from a browser and verify that inference is executed by the Cortex-M33 firmware
 
 prerequisites:

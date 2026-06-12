@@ -52,7 +52,7 @@ topo health --target <user>@<target-ip>
 
 ## Reserve memory in the device tree
 
-The web application and Cortex-M33 firmware exchange data through reserved physical memory. The target device tree must reserve memory for the model/input buffer and for Ethos-U65. We are now goint to modify the device tree and reboot the target so that this modifications take place. 
+The web application and Cortex-M33 firmware exchange data through reserved physical memory. The target device tree must reserve memory for the model/input buffer and for Ethos-U65. You are now going to modify the device tree and reboot the target so that these modifications take effect.
 
 {{% notice Warning %}}
 Back up the board's original device tree before modifying it. The exact boot partition can differ between Linux images, so check the paths on your board before copying files.
@@ -209,4 +209,4 @@ You should see something similar to:
 ## What you've accomplished
 
 You have prepared an FRDM i.MX 93 board for shared-memory NPU inference, deployed the `topo-imx93-npu-deployment` Template with Topo, started Cortex-M33 firmware through `remoteproc-runtime`, and used a browser-based application to run MobileNetV2 classification with Ethos-U65 acceleration.
-Next, you will review the toolchains used to build the model artifact, firmware runner, and web application. 
+Next, you will review how this project is structured as a Topo Template.
