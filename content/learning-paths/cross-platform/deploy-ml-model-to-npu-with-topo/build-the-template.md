@@ -18,6 +18,47 @@ The project has three implementation areas:
 
 When bootstrapping this Template from scratch, first make the project work as a normal Compose build. Then add the `x-topo` metadata that lets Topo deploy it consistently to an Arm64 target.
 
+## Install the Topo Template authoring skills
+
+The [Topo Template Format](https://github.com/arm/Topo-Template-Format) repository includes public authoring skills for agents that support skill installation:
+
+- `topo-template-context`: provides Topo and Topo Template reference context for `x-topo` metadata, schema, docs, and CLI Template behavior.
+- `topo-template-bootstrap`: converts a Compose repository into a Topo Template by adding or improving `compose.yaml` and `x-topo` metadata.
+- `topo-template-lint`: reviews a Topo Template for schema correctness, metadata consistency, deployment success messages, and build argument wiring.
+
+Install the skills with `npx skills`:
+
+```bash
+npx skills add arm/topo-template-format
+```
+
+If your agent does not use `npx skills`, clone the Template Format repository and manually copy or symlink the directories under `skills/` into your agent's skills directory:
+
+```bash
+git clone https://github.com/arm/Topo-Template-Format.git
+```
+
+Restart your agent after installing or updating the skills.
+
+You can then use the skills as part of the Template authoring flow. From the root of any Compose project, ask your agent to use `topo-template-bootstrap`:
+
+```output
+Use topo-template-bootstrap on this repository.
+Treat the root compose.yaml as the Template root.
+Preserve plain docker compose behavior.
+Add x-topo metadata only where it reflects the actual services, hardware requirements, and build arguments.
+```
+
+After bootstrap, ask the agent to use `topo-template-lint`:
+
+```output
+Use topo-template-lint on topo-imx93-npu-deployment.
+Validate compose.yaml against the Topo Template Format schema.
+Check README alignment, deployment_success_message, Remoteproc Runtime metadata, and x-topo.args wiring.
+```
+
+The lint pass should confirm that the Template has a root-level `x-topo.name`, that non-remoteproc services use `platform: linux/arm64`, that `cm33-runner` uses the Remoteproc Runtime annotation, and that every `x-topo.args` entry is carried into Compose or Docker build arguments where appropriate.
+
 ## Create the runner build pipeline
 
 The `executorch-runner/Dockerfile` is a multi-stage Dockerfile. It builds two artifacts from one build context:
