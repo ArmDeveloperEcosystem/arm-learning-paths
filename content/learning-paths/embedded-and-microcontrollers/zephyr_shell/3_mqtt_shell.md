@@ -1,18 +1,14 @@
 ---
-title: Build and run the Zephyr MQTT shell on Cortex-M
+title: Build and run the Zephyr MQTT shell on Arm Cortex-M
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Build a Zephyr application to enable Zephyr Shell MQTT backend
+## Build a Zephyr application to enable the MQTT shell backend
 
-Start by building a minimal Zephyr application that enables the Zephyr Shell MQTT backend
-
-This example uses the NXP FRDM-MCXN947 as the development board. Any other Zephyr-supported board with Ethernet works as well, because the MQTT shell backend is selected entirely through Kconfig and the application contains no board-specific code. 
-
-To run the example on a different board, follow the same steps and substitute your board's Zephyr identifier in the wizard. The "Switch to a different board" section near the end of this page shows how to change boards on an existing project without recreating it.
+Start by building a minimal Zephyr application that enables the MQTT shell backend.
 
 The application doesn't need networking code in `main.c`. Zephyr starts the shell, network stack, DHCP client, and MQTT shell backend from configuration options in `prj.conf`.
 
@@ -29,9 +25,9 @@ The default topic pattern is:
 
 The backend derives `<device_id>` from the hardware device ID, so each board uses a unique topic prefix. You will read this ID from the broker after the board connects for the first time.
 
-### Create a Zephyr Application Project
+### Create a Zephyr application project
 
-To create a Zephyr Application Project:
+To create a Zephyr application project:
 
 1. Open the **Workbench for Zephyr** panel.
 2. In the panel, select **New Application** to open the **Create a new Zephyr Application Project** wizard. 
@@ -41,19 +37,19 @@ To create a Zephyr Application Project:
     - For **Select Board**, select **NXP FRDM-MCXN947 (CPU0)** (Zephyr identifier `frdm_mcxn947/mcxn947/cpu0`).
     - For **Application type**, select **Create new application**.
     - For **Select Sample project**, select `hello_world`.
-    - For **Project Name**,  enter `mqtt_shell_backend`.
+    - For **Project Name**, enter `mqtt_shell_backend`.
     - For **Project Location**, select the directory where you want to create the project (for example, `zephyr/apps`).
     - Leave **Debug preset** checked.
     - Leave **Advanced options** as the defaults.
 4. Select **Create** to generate the project.
 
-![Workbench for Zephyr Create a new Zephyr Application Project wizard showing West Workspace set to zephyr, Toolchain set to zephyr-sdk-1.0.1, Board set to NXP FRDM-MCXN947 CPU0, Application type set to Create new application, Sample project set to hello_world, Project Name set to mqtt_shell_backend, and Project Location set to zephyr/apps#center](images/wz_new_project.webp "Create a new Zephyr Application Project wizard")
+![Workbench for Zephyr "Create a new Zephyr Application Project" wizard showing "West Workspace" set to "zephyr", "Toolchain" set to "zephyr-sdk-1.0.1", "Board" set to "NXP FRDM-MCXN947 CPU0", "Application type" set to "Create new application", "Sample project" set to "hello_world", "Project Name" set to "mqtt_shell_backend", and "Project Location" set to "zephyr/apps"#center](images/wz_new_project.webp "Workbench for Zephyr application project wizard")
 
 ### Configure the application
 
-The `hello_world` sample provides a working `CMakeLists.txt`, `prj.conf`, and `src/main.c`. Leave `CMakeLists.txt` unchanged, and replace `prj.conf` and `src/main.c` with the contents below.
+The `hello_world` sample provides a working `CMakeLists.txt`, `prj.conf`, and `src/main.c`. Leave `CMakeLists.txt` unchanged, and replace `prj.conf` and `src/main.c` with the following contents.
 
-Replace the contents of `prj.conf` with the text below:
+Replace the contents of `prj.conf` with the following text:
 
 ```text
 # Shell and MQTT backend
@@ -87,7 +83,7 @@ The values in the Resource tuning section are the main knobs you will adjust to 
 
 #### Use a static IPv4 address
 
-DHCP is convenient, but it is not required. To use a static address, remove:
+DHCP is convenient, but it's not required. To use a static address, remove:
 
 ```text
 CONFIG_NET_DHCPV4=y
@@ -107,7 +103,7 @@ Keep `CONFIG_NET_CONFIG_SETTINGS=y` enabled so Zephyr applies the network config
 
 The shell and MQTT backend start from Zephyr initialization hooks.
 
-Replace the contents of `main.c` with the code below:
+Replace the contents of `main.c` with the following code:
 
 ```c
 int main(void)
@@ -152,7 +148,7 @@ services:
     restart: unless-stopped
 ```
 
-Edit the `mosquitto.conf file and add the following text:
+Edit the `mosquitto.conf` file and add the following text:
 
 ```text
 listener 1883 0.0.0.0
@@ -367,7 +363,7 @@ Threads:
 	stack size 320, unused 256, usage 64 / 320 (20 %)
 ```
 
-The `*` next to `shell_mqtt` marks the running thread, which is the shell that just executed the command. Note that responses larger than the MQTT buffer are split across multiple publishes; `mosquitto_sub -v` reassembles them sequentially under the `1a2b3c/sh/tx` topic prefix.
+The `*` next to `shell_mqtt` marks the running thread, which is the shell that just executed the command. Note that responses larger than the MQTT buffer are split across multiple publishes. `mosquitto_sub -v` reassembles them sequentially under the `1a2b3c/sh/tx` topic prefix.
 
 Example output for `net iface` on the FRDM-MCXN947 (truncated to the IPv4 section):
 
@@ -418,7 +414,7 @@ To change the target board on an existing project:
 After the pristine build completes, flash the board as before. The same `prj.conf` and `main.c` work without changes, and the MQTT backend connects as soon as the new board acquires an IPv4 address.
 
 {{% notice Note %}}
-A pristine build is required when you change the board because Workbench for Zephyr caches board-specific generated files (device tree, Kconfig, linker script) in the build directory. Without a clean rebuild, the previous board's configuration leaks into the new build and produces incorrect binaries.
+You need a pristine build when you change the board because Workbench for Zephyr caches board-specific generated files (device tree, Kconfig, linker script) in the build directory. Without a clean rebuild, the previous board's configuration leaks into the new build and produces incorrect binaries.
 {{% /notice %}}
 
 ## What you've accomplished and what's next

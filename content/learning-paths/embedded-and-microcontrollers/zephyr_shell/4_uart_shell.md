@@ -10,7 +10,7 @@ layout: learningpathall
 
 Start by building a Zephyr application that enables the UART shell backend.
 
-The example uses the FRDM-MCXN947 because it provides an onboard CMSIS-DAP/LinkServer debug interface together with a USB UART connection that can be accessed from a serial terminal application such as PuTTY on Windows, or `screen` on macOS and Linux.
+The example uses the FRDM-MCXN947 because it provides an onboard CMSIS-DAP/LinkServer debug interface together with a USB UART connection. These can be accessed from a serial terminal application such as PuTTY on Windows, or `screen` on macOS and Linux.
 
 UART shell access uses the board's USB serial interface and doesn't require additional debug hardware or network connectivity. The Zephyr UART shell backend maps shell input and output to the active UART console. 
 
@@ -34,11 +34,11 @@ To create a Zephyr Application Project:
 
 ### Configure the application
 
-The `hello_world` sample provides a working `CMakeLists.txt`, `prj.conf`, and `src/main.c`. Leave `CMakeLists.txt` unchanged, and replace `prj.conf` and `src/main.c` with the contents below.
+The `hello_world` sample provides a working `CMakeLists.txt`, `prj.conf`, and `src/main.c`. Leave `CMakeLists.txt` unchanged, and replace `prj.conf` and `src/main.c` with the following contents.
 
-Edit the `prj.conf` file and replace the contents with the text below:
+Edit the `prj.conf` file and replace the contents with the following text:
 
-```bash
+```text
 CONFIG_SHELL=y
 CONFIG_LOG=y
 
@@ -54,7 +54,7 @@ The UART shell backend routes shell input and output through the board's USB ser
 
 #### Update the main function
 
-Edit the `main.c` file and replace the contents with the code below:
+Edit the `main.c` file and replace the contents with the following code:
 
 ```c
 #include <zephyr/logging/log.h>
@@ -77,7 +77,7 @@ Connect the FRDM-MCXN947 board to your host computer over USB.
 
 In the **Workbench for Zephyr** panel, select your project and build configuration. Select **Build**, then select **Flash**.
 
-The FRDM-MCXN947 uses the onboard CMSIS-DAP / LinkServer interface for flashing and debugging.
+The FRDM-MCXN947 uses the onboard CMSIS-DAP/LinkServer interface for flashing and debugging.
 
 ## Connect with a UART terminal
 
@@ -93,7 +93,7 @@ Configure PuTTY with:
 
 Select **Open** to connect.
 
-![PuTTY configuration window with Connection type set to Serial, Serial line set to the board's COM port, and Speed set to 115200, ready to connect to the Zephyr UART shell#center](images/putty_installation.webp "PuTTY Serial Terminal Configuration")
+![PuTTY configuration window with Connection type set to Serial, Serial line set to the board's COM port, and Speed set to 115200, ready to connect to the Zephyr UART shell#center](images/putty_installation.webp "PuTTY Serial terminal configuration")
 
 ### macOS with screen
 
@@ -111,7 +111,7 @@ screen /dev/tty.usbmodemXXXX 115200
 
 Replace `/dev/tty.usbmodemXXXX` with the serial device shown on your system.
 
-To exit `screen`, press `Ctrl + A`, then `K`, then `Y` to confirm.
+To exit `screen`, press `Ctrl` and `A`, then `K`, then `Y` to confirm.
 
 ### Linux with screen
 
@@ -189,13 +189,13 @@ To change the target board on an existing project:
 5. Right-click the application and select **Build (pristine)**.
 
 {{% notice Note %}}
-A pristine build is required when you change the board because Workbench for Zephyr caches board-specific generated files in the build directory.
+You need a pristine build when you change the board because Workbench for Zephyr caches board-specific generated files in the build directory.
 {{% /notice %}}
 
 After the pristine build completes, flash the board as before. The same `prj.conf` and `main.c` work without changes on any Zephyr-supported board with a USB UART interface.
 
 ## What you've accomplished
 
-You built and flashed a Zephyr application that enables the UART shell backend on the FRDM-MCXN947. You connected with a UART terminal application, opened the Zephyr shell over USB serial, and ran Zephyr shell commands from the host computer.
+You've now built and flashed a Zephyr application that enables the UART shell backend on the FRDM-MCXN947. You connected with a UART terminal application, opened the Zephyr shell over USB serial, and ran Zephyr shell commands from the host computer.
 
 You can use the workflows described in this Learning Path to add a command-line shell to your own Zephyr RTOS applications for debugging and testing.

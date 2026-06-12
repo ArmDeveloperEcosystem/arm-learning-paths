@@ -8,9 +8,9 @@ minutes_to_complete: 30
 who_is_this_for: This is an introductory topic for embedded developers who want to add an interactive command-line shell to a Zephyr RTOS application on Arm Cortex-M.
 
 learning_objectives:
-    - Enable and tailor Zephyr Shell (Kconfig/prj.conf) to produce a minimal CLI footprint
+    - Enable and tailor Zephyr shell (Kconfig/prj.conf) to produce a minimal CLI footprint
     - Build and flash shell-enabled Zephyr apps using MQTT and UART shell backends on an Arm Cortex-M board
-    - Use the Zephyr Shell for board bring-up, diagnostics, and interactive testing
+    - Use the Zephyr shell for board bring-up, diagnostics, and interactive testing
 
 prerequisites:
     - Basic familiarity with embedded C programming

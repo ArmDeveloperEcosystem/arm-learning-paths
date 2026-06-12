@@ -13,14 +13,18 @@ In this section, you'll prepare your host computer and identify the hardware nee
 - MQTT over Ethernet
 - UART over a USB serial connection
 
-Make sure that you have a working Zephyr development environment set up in Visual Studio Code with the Workbench for Zephyr extension installed. The environment needs to also include a Zephyr SDK toolchain imported in Workbench, and an initialized West workspace.
+Make sure that you have a working Zephyr development environment set up in Visual Studio Code with:
+
+- Workbench for Zephyr extension installed 
+- Zephyr SDK toolchain imported in Workbench
+- West workspace initialized
 
 Before working through this Learning Path, complete [Build Zephyr projects with Workbench for Zephyr in VS Code](/learning-paths/embedded-and-microcontrollers/zephyr_vsworkbench/).
 
 The two examples in this Learning Path have additional requirements:
 
-- MQTT shell example: Requires Docker Desktop, Docker Engine, or another Docker-compatible runtime on your host computer. The board communicates with a Mosquitto broker running in a container.
-- UART shell example: Requires a USB cable to connect the development board to your host computer. The board exposes a shell prompt over the USB serial interface.
+- MQTT shell example: Docker Desktop, Docker Engine, or another Docker-compatible runtime on your host computer. The board communicates with a Mosquitto broker running in a container.
+- UART shell example: A USB cable to connect the development board to your host computer. The board exposes a shell prompt over the USB serial interface.
 
 ## Hardware requirements
 
@@ -28,9 +32,11 @@ Both examples use the [FRDM-MCXN947](https://www.nxp.com/design/design-center/de
 
 To check whether another board is supported by Zephyr, see the [Zephyr Supported Boards list](https://docs.zephyrproject.org/latest/boards/index.html).
 
-## Install UART terminal tools
+## Set up UART terminal tools
 
-For the UART shell example, install a serial terminal application on your host computer. You'll use the terminal application to connect to the Zephyr shell over the board's UART interface. You can complete this Learning Path on Windows, macOS, and Linux host computers.
+For the UART shell example, install a serial terminal application on your host computer. You'll use the terminal application to connect to the Zephyr shell over the board's UART interface.
+
+You can complete this Learning Path on Windows, macOS, and Linux host computers.
 
 ### Windows
 
@@ -48,7 +54,7 @@ After installation:
 
 4. Select **Open** to connect to the Zephyr UART shell.
 
-![PuTTY configuration window with Connection type set to Serial, Serial line set to COM5, and Speed set to 115200, ready to connect to the Zephyr UART shell#center](images/putty_installation.webp "PuTTY Serial Terminal Configuration")
+![PuTTY configuration window with Connection type set to Serial, Serial line set to COM5, and Speed set to 115200, ready to connect to the Zephyr UART shell#center](images/putty_installation.webp "PuTTY serial terminal configuration")
 
 ### macOS
 
@@ -59,18 +65,18 @@ After connecting the development board over USB:
 1. Open a terminal window.
 2. List available serial devices:
 
-```bash
-ls /dev/tty.*
-```
+   ```bash
+   ls /dev/tty.*
+   ```
 3. Connect to the UART shell with:
 
-```bash
-screen /dev/tty.usbmodemXXXX 115200
-```
+   ```bash
+   screen /dev/tty.usbmodemXXXX 115200
+   ```
 
 Replace `/dev/tty.usbmodemXXXX` with the serial device shown on your system.
 
-To exit `screen`, press `Ctrl + A`, then `K`, then `Y` to confirm.
+To exit `screen`, press the `Ctrl` key and `A`, then `K`, then `Y` to confirm.
 
 ### Linux
 
@@ -85,27 +91,26 @@ After connecting the development board over USB:
 1. Open a terminal window.
 2. List available serial devices:
 
-```bash
-ls /dev/ttyACM* /dev/ttyUSB*
-```
+   ```bash
+   ls /dev/ttyACM* /dev/ttyUSB*
+   ```
 3. If you see a permission error when connecting, add your user to the `dialout` group and log out and back in:
 
-```bash
-sudo usermod -aG dialout $USER
-```
+   ```bash
+   sudo usermod -aG dialout $USER
+   ```
 4. Connect to the UART shell with:
 
-```bash
-screen /dev/ttyACM0 115200
-```
+   ```bash
+   screen /dev/ttyACM0 115200
+   ```
 
 Replace `/dev/ttyACM0` with the device shown on your system. Boards using a CP210x or FTDI USB-UART chip typically appear as `/dev/ttyUSB0`.
 
-To exit `screen`, press `Ctrl + A`, then `K`, then `Y` to confirm.
+To exit `screen`, press the `Ctrl` key and `A`, then `K`, then `Y` to confirm.
 
 {{% notice Note %}}
 Workbench for Zephyr supports multiple debug runners depending on the connected board. The FRDM-MCXN947 board uses the onboard CMSIS-DAP/LinkServer interface for flashing and debugging, while shell access in this Learning Path uses UART over USB.
-
 {{% /notice %}}
 
 ## Network requirements for the MQTT shell example
