@@ -82,7 +82,7 @@ The FRDM-MCXN947 uses the onboard CMSIS-DAP/LinkServer interface for flashing an
 
 ## Connect with a UART terminal
 
-After flashing, the board resets and starts running. Open a UART terminal application and connect to the board's serial port.
+After flashing, the board resets and starts running. Open a UART terminal application and connect to the board's serial port over USB.
 
 ### Windows with PuTTY
 
