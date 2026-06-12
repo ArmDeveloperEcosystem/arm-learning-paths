@@ -1,6 +1,10 @@
 ---
 title: Deploy a machine learning model to an NPU-capable system with Topo
 
+draft: true
+cascade:
+    draft: true
+
 description: Use Topo to deploy a web application on Cortex-A that triggers a MobileNetV2 image classifier running as Cortex-M firmware with Ethos-U65 NPU acceleration.
 
 minutes_to_complete: 60
