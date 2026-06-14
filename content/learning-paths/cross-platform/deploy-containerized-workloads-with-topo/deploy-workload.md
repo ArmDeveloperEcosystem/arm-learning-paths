@@ -181,3 +181,5 @@ The agent reads the Topo `README.md`, runs health checks, selects a template, an
 ## What you've accomplished
 
 You have now deployed a containerized workload to your Arm-based Linux target using Topo. You validated the deployment by accessing the application in a web browser. You also learned how to stop the deployment and forward ports if needed.
+
+Next you should explore modification and creation of Topo Templates in the follow-up Learning Path: [Create and deploy a custom Topo Template](/learning-paths/cross-platform/create-your-own-topo-templates/)

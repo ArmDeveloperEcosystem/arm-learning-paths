@@ -7,11 +7,11 @@ weight: 5
 layout: learningpathall
 ---
 
-## Prepare the environment for a LLamaIndex RAG application
+## Prepare the environment for a LlamaIndex RAG application
 
 In this section, you'll prepare a Google Cloud Axion Arm64 VM for running a browser-based RAG application using LlamaIndex.
 
-You'll install required system packages, including Python 3.11, as well as Ollama and LLamaIndex.
+You'll install required system packages, including Python 3.11, as well as Ollama and LlamaIndex.
 
 ### Update the virtual machine
 

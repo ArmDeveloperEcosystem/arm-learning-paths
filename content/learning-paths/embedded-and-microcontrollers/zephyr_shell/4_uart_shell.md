@@ -1,22 +1,18 @@
 ---
-title: UART shell
+title: Build and run the Zephyr UART shell on Cortex-M
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Set up the UART shell example
+## Build and run the Zephyr UART shell on Cortex-M
 
 In this section, you will build a Zephyr application that enables the UART shell backend, flash it with Workbench for Zephyr, connect with a UART terminal application, and run shell commands over the USB serial connection.
 
-The example uses the **FRDM-MCXN947** because it provides an onboard CMSIS-DAP / LinkServer debug interface together with a USB UART connection that can be accessed from a serial terminal application such as PuTTY on Windows or the built-in `screen` utility on macOS.
+The example uses the FRDM-MCXN947 because it provides an onboard CMSIS-DAP / LinkServer debug interface together with a USB UART connection that can be accessed from a serial terminal application such as PuTTY on Windows or `screen` on macOS and Linux.
 
-The "Switch to a different board" section near the end of this page shows how to change boards on an existing project without recreating it.
-
-UART shell access uses the board's USB serial interface and does not require additional debug hardware or network connectivity.
-
-The Zephyr UART shell backend maps shell input and output to the active UART console.
+UART shell access uses the board's USB serial interface and does not require additional debug hardware or network connectivity — the Zephyr UART shell backend maps shell input and output to the active UART console. The "Switch to a different board" section near the end of this page shows how to change boards on an existing project without recreating it.
 
 ## Create the project
 
@@ -38,7 +34,7 @@ Select **Create** to generate the project.
 
 The `hello_world` sample provides a working `CMakeLists.txt`, `prj.conf`, and `src/main.c`. Leave `CMakeLists.txt` unchanged, and replace `prj.conf` and `src/main.c` with the contents below.
 
-### prj.conf
+Edit the `prj.conf` file and replace the contents with the text below:
 
 ```bash
 CONFIG_SHELL=y
@@ -54,7 +50,9 @@ CONFIG_MAIN_STACK_SIZE=2048
 
 The UART shell backend routes shell input and output through the board's USB serial interface.
 
-### src/main.c
+### Main
+
+Edit the `main.c` file and replace the contents with the code below:
 
 ```c
 #include <zephyr/logging/log.h>
@@ -64,7 +62,7 @@ LOG_MODULE_REGISTER(app_main, LOG_LEVEL_INF);
 int main(void)
 {
     LOG_INF("UART shell backend demo on %s", CONFIG_BOARD);
-    LOG_INF("Open PuTTY at 115200 baud and use the uart:~$ prompt");
+    LOG_INF("Connect a serial terminal at 115200 baud and use the uart:~$ prompt");
     return 0;
 }
 ```
@@ -93,14 +91,7 @@ Configure PuTTY with:
 
 Select **Open** to connect.
 
-<p style="text-align:center;">
-  <img src="/learning-paths/embedded-and-microcontrollers/zephyr_shell/images/putty_installation.png"
-       alt="PuTTY Installation"
-       width="640"
-       style="max-width:100%;height:auto;" />
-  <br/>
-  <em>PuTTY Serial Terminal Configuration</em>
-</p>
+![PuTTY configuration window with Connection type set to Serial, Serial line set to the board's COM port, and Speed set to 115200, ready to connect to the Zephyr UART shell#center](images/putty_installation.webp "PuTTY Serial Terminal Configuration")
 
 ### macOS with screen
 
@@ -118,6 +109,29 @@ screen /dev/tty.usbmodemXXXX 115200
 
 Replace `/dev/tty.usbmodemXXXX` with the serial device shown on your system.
 
+To exit `screen`, press `Ctrl + A`, then `K`, then `Y` to confirm.
+
+### Linux with screen
+
+```bash
+ls /dev/ttyACM* /dev/ttyUSB*
+```
+
+If you see a permission error, add your user to the `dialout` group and log out and back in:
+
+```bash
+sudo usermod -aG dialout $USER
+```
+
+Connect with:
+
+```bash
+screen /dev/ttyACM0 115200
+```
+
+Replace `/dev/ttyACM0` with the device shown on your system.
+
+To exit `screen`, press `Ctrl + A`, then `K`, then `Y` to confirm.
 
 ## Check the shell prompt
 
@@ -126,7 +140,7 @@ In your UART terminal application, you should see the boot log followed by the s
 ```output
 uart:~$ *** Booting Zephyr OS build v4.4.0 ***
 uart:~$ [00:00:00.001,037] <inf> app_main: UART shell backend demo on frdm_mcxn947
-uart:~$ [00:00:00.001,037] <inf> app_main: Open PuTTY at 115200 baud and use the uart:~$ prompt
+uart:~$ [00:00:00.001,037] <inf> app_main: Connect a serial terminal at 115200 baud and use the uart:~$ prompt
 uart:~$
 ```
 
@@ -144,14 +158,7 @@ kernel uptime
 kernel thread list
 ```
 
-<p style="text-align:center;">
-  <img src="/learning-paths/embedded-and-microcontrollers/zephyr_shell/images/uart_shell_output.png"
-       alt="Uart Shell Output"
-       width="640"
-       style="max-width:100%;height:auto;" />
-  <br/>
-  <em>Uart Shell Output </em>
-</p>
+![Zephyr UART shell terminal output showing the kernel version, kernel uptime, and kernel thread list commands and their responses at the uart:~$ prompt#center](images/uart_shell_output.webp "Zephyr UART shell command output")
 
 The `*` next to `shell_uart` in the thread list marks the currently running thread, which is the shell that just executed the command.
 
@@ -183,6 +190,8 @@ To change the target board on an existing project:
 A pristine build is required when you change the board because Workbench for Zephyr caches board-specific generated files in the build directory.
 {{% /notice %}}
 
-## What you accomplished
+After the pristine build completes, flash the board as before. The same `prj.conf` and `main.c` work without changes on any Zephyr-supported board with a USB UART interface.
+
+## What you've accomplished
 
 You built and flashed a Zephyr application that enables the UART shell backend on the FRDM-MCXN947. You connected with a UART terminal application, opened the Zephyr shell over USB serial, and ran Zephyr shell commands from the host computer.
