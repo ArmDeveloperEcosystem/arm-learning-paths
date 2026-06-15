@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Before you begin
 
-In this section, you'll prepare your host computer and identify the hardware needed for two Zephyr shell examples. You'll use the shell over two transports:
+In this section, you'll prepare your host computer and identify the hardware you need for two Zephyr shell examples. You'll use the shell over two transports:
 
 - MQTT over Ethernet
 - UART over a USB serial connection
@@ -60,7 +60,7 @@ Workbench for Zephyr supports multiple debug runners depending on the connected 
 
 ## Network requirements for the MQTT shell example
 
-For the MQTT shell example, the board needs access to an MQTT broker over Ethernet. You'll run Mosquitto locally with Docker Compose and use the Mosquitto command-line tools to send and receive shell messages.
+For the MQTT shell example, the board needs access to an MQTT broker over Ethernet. You'll run Mosquitto locally and use the Mosquitto command-line tools to send and receive shell messages.
 
 Make sure that:
 
@@ -72,7 +72,7 @@ Make sure that:
 The example configuration uses IPv4. If your network doesn't provide DHCP, use the static IPv4 settings shown in the next section.
 {{% /notice %}}
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 You've now learned which boards to use, which host tools to install, and how the Zephyr shell fits into an embedded application.
 

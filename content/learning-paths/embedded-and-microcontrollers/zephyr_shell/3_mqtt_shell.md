@@ -392,6 +392,8 @@ IPv4 gateway : 192.168.1.1
 DHCPv4 state      : bound
 DHCPv4 server     : 192.168.1.1
 ```
+Next, run `net ping` with the gateway address shown by `net iface`. The board sends three ICMP echo requests by default. 
+
 Example output for `net ping 192.168.1.1` (board pinging its gateway):
 
 ```output
@@ -400,8 +402,6 @@ Example output for `net ping 192.168.1.1` (board pinging its gateway):
 28 bytes from 192.168.1.1 to 192.168.1.41: icmp_seq=2 ttl=64 time=0 ms
 28 bytes from 192.168.1.1 to 192.168.1.41: icmp_seq=3 ttl=64 time=0 ms
 ```
-
-To run `net ping`, replace `192.168.1.1` with the gateway address shown by `net iface`. The board sends three ICMP echo requests by default.
 
 {{% notice Note %}}
 The MQTT shell backend executes a command after it receives a newline character. The `printf 'kernel version\n' | ... mosquitto_pub -s` form sends the command with the required newline.

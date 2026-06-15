@@ -35,11 +35,11 @@ In this Learning Path, you'll work with two transports:
 
 ### MQTT backend
 
-Enable the MQTT backend with `CONFIG_SHELL_BACKEND_MQTT=y`. The MQTT backend routes shell commands and responses over MQTT topics. The board subscribes to `<device_id>/sh/rx` for inbound commands and publishes responses to `<device_id>/sh/tx`. The backend connects automatically when the board has an IPv4 address. The backend is IPv4-only.
+Enable the MQTT backend with `CONFIG_SHELL_BACKEND_MQTT=y`. The MQTT backend routes shell commands and responses over MQTT topics. The board subscribes to `<device_id>/sh/rx` for inbound commands and publishes responses to `<device_id>/sh/tx`. The backend is IPv4-only and connects automatically when the board has an IPv4 address.
 
 ### UART backend 
 
-Enable the UART backend with `CONFIG_SHELL_BACKEND_SERIAL=y`. The UART backend routes shell commands and responses over the board's UART interface, accessible through a USB serial connection. Use PuTTY on Windows, or `screen` on macOS and Linux. This backend works on a wide range of Zephyr-supported development boards with no additional debug hardware required.
+Enable the UART backend with `CONFIG_SHELL_BACKEND_SERIAL=y`. The UART backend routes shell commands and responses over the board's UART interface, accessible through a USB serial connection. Use PuTTY on Windows, or `screen` on macOS and Linux. This backend works on a wide range of Zephyr-supported development boards without the need for additional debug hardware.
 
 ## What you've accomplished and what's next
 
