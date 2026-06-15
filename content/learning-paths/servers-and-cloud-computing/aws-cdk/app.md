@@ -12,6 +12,8 @@ The AWS Cloud Development Kit (CDK) is an open-source infrastructure as code (Ia
 
 In this section, you'll create a JavaScript CDK application that defines an Amazon Elastic Container Service (ECS) service running on Arm-based AWS Fargate compute.
 
+Arm-based AWS compute is powered by AWS Graviton processors. For more information about AWS Graviton, see [AWS Graviton processors](https://aws.amazon.com/ec2/graviton/).
+
 ### Before you begin
 
 Make sure that you've installed the AWS CDK CLI:
