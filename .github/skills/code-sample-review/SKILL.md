@@ -7,14 +7,13 @@ description: Review and improve code samples, commands, command output, and fenc
 
 Use this skill to review or edit code samples, commands, command output, and fenced code blocks in Arm Learning Paths and install guides.
 
-This skill can support either editorial review or technical review. Match the depth of review to the user's request and do not invent commands, outputs, workflows, package names, benchmark numbers, or validation results.
+This skill can support either editorial review or technical review. Match the depth of review to the user's request and don't invent commands, outputs, workflows, package names, benchmark numbers, or validation results.
 
 ## Prerequisites
 
 - Work from the repository root.
 - Read `AGENTS.md` to locate shared guidance.
 - Read `references/code-sample-guidance.md` before reviewing or editing code samples.
-- When the review depends on content type, also read the matching Learning Path or install guide guidance.
 
 ## Modes
 
@@ -47,18 +46,18 @@ Check for:
 ## Workflow
 
 1. Identify the review scope and whether the request is editorial, technical, or mixed.
-2. Load only the content-type guidance needed for the target files.
-3. Inspect surrounding prose before judging a code block; code samples should be evaluated in context.
-4. For review requests, report issues by file and line when possible, ordered by learner impact.
-5. For edit requests, report issues and suggest focused changes that preserve technical intent and existing repository patterns.
-6. Do not modify commands or output unless the correction is supported by context, documentation, or an executable check.
-7. After the reviewer accepts suggestions, re-scan edited areas for code fence integrity, language tags, and output lead-ins.
-8. Report what changed and note any technical assumptions or checks not performed.
+2. Inspect surrounding prose before judging a code block; code samples should be evaluated in context.
+3. For review requests, report issues by file and line when possible, ordered by learner impact.
+4. For edit requests, report issues and suggest focused changes that preserve technical intent and existing repository patterns.
+5. After the reviewer accepts suggestions, make changes, then re-scan edited areas for code fence integrity, language tags, and output lead-ins.
+6. Report what changed and note any technical assumptions or checks not performed.
 
 ## Validation rules
 
 - Preserve front matter, Hugo shortcodes, Markdown structure, command syntax, and expected output unless they are the target of the edit.
-- Do not rewrite meaningful code solely for style.
-- Do not replace tool-native terms, casing, flags, package names, or architecture strings with prose preferences.
-- Do not treat long code or output as a problem by itself; flag it only when it reduces learning value or obscures the task.
+- Don't rewrite meaningful code solely for style.
+- Don't replace tool-native terms, casing, flags, package names, or architecture strings with prose preferences.
+- Don't treat long code or output as a problem by itself; flag it only when it reduces learning value or obscures the task.
 - Keep edits scoped to code sample quality unless the user asks for broader content review.
+- Don't modify commands or output unless the reviewer accepts the suggestions.
+- Don't hallucinate corrections that aren't supported by context, documentation, or an executable check.

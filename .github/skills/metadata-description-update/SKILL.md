@@ -13,7 +13,7 @@ This skill is for search and discovery metadata. For draft visibility metadata, 
 
 - Work from the repository root.
 - Read `AGENTS.md` to locate shared guidance.
-- Read `.github/skills/arm-content-editor/references/content-quality.md`.
+- Read `.github/skills/arm-content-editor/references/content-quality.md` for general project content quality guidance.
 - For Learning Paths, read `.github/skills/arm-content-editor/references/learning-path-guidance.md`.
 - For install guides, read `.github/skills/arm-content-editor/references/install-guide-guidance.md`.
 
@@ -33,7 +33,7 @@ This skill is for search and discovery metadata. For draft visibility metadata, 
 2. Find target Markdown files from the scope rules.
 3. Skip `_next-steps.md` and any file without front matter unless the user explicitly asks how to handle it.
 4. Read the title, existing description, headings, introduction, task flow, code or command context, and validation or conclusion.
-5. Add or revise the `description` field in front matter.
+5. Add or revise the `description` field in front matter based on quality rules.
 6. Re-open or search the edited files to verify each changed target has one `description` field.
 7. Report files changed and note any skipped files.
 
@@ -43,10 +43,10 @@ This skill is for search and discovery metadata. For draft visibility metadata, 
 - Keep it concise, developer-focused, and suitable for a search snippet.
 - Use natural Arm-specific terms when relevant.
 - State what the reader will do, the main tool or platform, and the useful outcome.
-- Do not repeat the title verbatim.
-- Do not use vague summaries such as `Learn about...` unless the page is genuinely conceptual.
-- Do not use marketing language, hype, or keyword stuffing.
-- Do not invent capabilities, performance claims, supported platforms, or tools not supported by the page.
+- Don't repeat the title verbatim.
+- Don't use vague summaries such as `Learn about...` unless the page is genuinely conceptual.
+- Don't use marketing language, hype, or keyword stuffing.
+- Don't invent capabilities, performance claims, supported platforms, or tools not supported by the page.
 - Use valid YAML. Quote the description only when needed for YAML syntax.
 
 ## Examples

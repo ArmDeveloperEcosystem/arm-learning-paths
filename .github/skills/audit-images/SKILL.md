@@ -41,7 +41,7 @@ Use project-level review to:
 - Identify high-priority directories or files for cleanup.
 - Produce a before/after baseline for tracking progress.
 
-Do not mass-edit the whole project unless the user explicitly asks. Prefer reporting the project-level inventory and then fixing one Path, guide, category, or batch.
+Don't mass-edit the whole project unless the user explicitly asks. Prefer reporting the project-level inventory and then fixing one Path, guide, category, or batch.
 
 ### Path/guide-level review
 
@@ -60,22 +60,23 @@ Use path/guide-level review to:
 1. Identify whether the requested scope is project-level or path/guide-level.
 2. Run `.github/skills/audit-images/scripts/audit_images.py` on that scope.
 3. Record the baseline summary: total images, faulty images, content units affected, and issue counts.
-4. For project-level requests, summarize the results and suggest prioritized cleanup batches unless the user asked for edits.
-5. For path/guide-level edit requests, inspect the relevant Markdown context and image files.
-6. Rewrite deficient alt text using `references/image-guidance.md`.
-7. Preserve the repository image syntax, especially `![Descriptive alt text#center](image.png "Optional caption")`.
-8. Re-run the audit on the same scope.
-9. Report before/after counts, files changed, and any remaining issues.
+4. Depending on the request level, do the following:
+  - For project-level requests, summarize the results and suggest prioritized cleanup batches unless the user asked for edits.
+  - For path/guide-level edit requests, inspect the relevant Markdown context and image files.
+5. Suggest rewrites for deficient alt text using `references/image-guidance.md`.
+6. After the reviewer accepts suggestions, rewrite text, then re-run the audit on the same scope.
+7. Report before/after counts, files changed, and any remaining issues.
 
 ## Validation rules
 
 - Treat the script as a detector, not the final authority. It flags likely problems for review.
-- Do not replace meaningful alt text only because it is long or short; judge whether it helps the learner complete the task.
-- Do not use placeholders such as `alt-txt`, `alt-text`, `image`, `img1`, `screenshot`, `graph`, or `output`.
-- Do not use captions as a substitute for alt text.
+- Don't replace meaningful alt text only because it is long or short; judge whether it helps the learner complete the task.
+- Don't use placeholders such as `alt-txt`, `alt-text`, `image`, `img1`, `screenshot`, `graph`, or `output`.
+- Don't use captions as a substitute for alt text.
 - Keep `#center` attached directly to the alt text with no space before it.
 - Preserve valid local image paths and existing captions unless they are wrong, vague, or outdated.
 - Avoid `Figure 1:` style captions unless the content uses explicit numbered cross-references.
+- Preserve the repository image syntax, especially `![Descriptive alt text#center](image.png "Optional caption")`
 
 ## Error handling
 
