@@ -36,13 +36,19 @@ Deploy the application:
 ```bash
 cdk deploy
 ```
-By default, the AWS CDK CLI will prompt you to approve IAM-related changes during deployment. To deploy the application without the need for approval, run:
+By default, the AWS CDK CLI will prompt you to approve IAM-related changes during deployment. 
+
+For the AWS CDK CLI to deploy the application without the need for approval, set the `--require-approval` flag to `never` during deployment:
 
 ```bash
 cdk deploy --require-approval never
 ```
 
-The deployment can take a couple minutes to complete. When the deployment completes, the last couple lines of the output will include a URL to the web server and the load balancer's DNS name:
+{{% notice Note %}}
+The deployment can take a couple minutes to complete.
+{{% /notice %}}
+
+When the deployment completes, the last couple lines of the output will include a URL to the web server and the load balancer's DNS name:
 
 ```output
 Outputs:
@@ -65,9 +71,17 @@ After you've validated the deployment, clean up the AWS resources that you creat
 ```bash
 cdk destroy
 ```
-When AWS CDK asks whether to delete `ArmCDKAppStack`, enter `y`. 
+By default, the AWS CDK CLI will prompt you to approve the deletion of `ArmCDKAppStack`.
 
+For the AWS CDK CLI to clean up resources without the need for approval, use the `--force` or `-f` flag:
+
+```bash
+cdk destroy -f
+```
+
+{{% notice Note %}}
 The cleanup process can take a couple minutes to complete.
+{{% /notice %}}
 
 ## What you've accomplished
 
