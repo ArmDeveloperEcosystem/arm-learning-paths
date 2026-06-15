@@ -18,13 +18,13 @@ To install the tool, open your favorite Terminal application and run one of the 
 
 {{< tabpane code=true >}}
   {{< tab header="Windows (cmd)" language="shell">}}
-curl -LO https://aka.ms/vcpkg-init.cmd && .\vcpkg-init.cmd
+curl -LO https://github.com/microsoft/vcpkg-tool/releases/download/2026-04-08/vcpkg-init.cmd && .\vcpkg-init.cmd
   {{< /tab >}}
   {{< tab header="Windows (PowerShell)" language="shell">}}
-iex (iwr -useb https://aka.ms/vcpkg-init.ps1)
+iex (iwr -useb https://github.com/microsoft/vcpkg-tool/releases/download/2026-04-08/vcpkg-init.ps1)
   {{< /tab >}}
   {{< tab header="Linux/macOS" language="shell">}}
-. <(curl https://aka.ms/vcpkg-init.sh -L)
+. <(curl https://github.com/microsoft/vcpkg-tool/releases/download/2026-04-08/vcpkg-init.sh -L)
   {{< /tab >}}
 {{< /tabpane >}}
 

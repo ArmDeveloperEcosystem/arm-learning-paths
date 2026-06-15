@@ -12,7 +12,7 @@ The [`device-connect-edge`](https://pypi.org/project/device-connect-edge/) packa
 
 You describe a device by subclassing `DeviceDriver` from `device_connect_edge.drivers`, then annotating methods and properties with primitives. The runtime wires them into discovery, pub/sub, and RPC for you.
 
-In this Learning Path you'll use these primitives to write two cooperating drivers: a **sensor** runtime that publishes temperature and humidity readings on a schedule, and a **threshold monitor** runtime that reacts to those readings and raises alerts when a threshold is crossed. The subsections below walk through the identity, decorators, and runtime you'll use to build them, and the agent tools package you'll use to invoke them from a separate client.
+In this Learning Path you'll use these primitives to write two cooperating drivers: a **sensor** runtime that publishes temperature and humidity readings from an example device on a schedule, and a **threshold monitor** runtime that reacts to those readings and raises alerts when a threshold is crossed. The instructions use a Raspberry Pi 5 for the sensor runtime, but the same code can run on another device or on your development machine. The subsections below walk through the identity, decorators, and runtime you'll use to build them, and the agent tools package you'll use to invoke them from a separate client.
 
 ### Identity and status
 
@@ -44,12 +44,12 @@ Any Python process that imports this package can find and drive devices without 
 
 ## What you'll build
 
-In the next section you will create two cooperating simulated devices on the same local network:
+In the next section you will create two cooperating devices on the same local network:
 
-- a **sensor** driver that publishes temperature and humidity readings on a schedule using `@rpc`, `@emit`, and `@periodic`
-- a **threshold monitor** driver that uses `@on` to subscribe to the sensor's readings, emits its own `alert_raised` event when a reading crosses a threshold, and exposes the alert history through an `@rpc` method
+- a **sensor** driver that runs on a Raspberry Pi 5, another device, or your development machine and publishes temperature and humidity readings on a schedule using `@rpc`, `@emit`, and `@periodic`
+- a **threshold monitor** driver that runs on your development machine, uses `@on` to subscribe to the sensor's readings, emits its own `alert_raised` event when a reading crosses a threshold, and exposes the alert history through an `@rpc` method
 
-You will run both devices as independent runtimes on one machine and watch the monitor react to the sensor in real time. Finally, you will use the agent tools package to discover both devices and query their RPCs from a separate terminal.
+You can run the devices as independent runtimes on separate machines and watch the monitor react to the Raspberry Pi 5 sensor in real time. If you do not have a Raspberry Pi 5 available, run the sensor runtime in another terminal on your development machine. Finally, you will use the agent tools package to discover both devices and query their RPCs from a separate terminal.
 
 By the end, you will have a working D2D deployment where two devices find each other automatically and communicate through typed events and RPCs. This is the same pattern you would use to model a real sensor and a real supervisor on an edge network.
 
