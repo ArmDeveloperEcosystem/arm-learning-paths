@@ -21,6 +21,9 @@ Read only the guidance needed for the task:
 - Learning Paths: `references/learning-path-guidance.md`
 - Install guides: `references/install-guide-guidance.md`
 - Metadata descriptions: `.github/skills/metadata-description-update/SKILL.md`
+- Markdown components: `.github/skills/markdown-component-edit/SKILL.md`
+- Accessible link text: `.github/skills/link-text-review/SKILL.md`
+- Stale content risk scans: `.github/skills/stale-content-review/SKILL.md`
 - Images, alt text, captions, and `#center` syntax: `.github/skills/audit-images/SKILL.md`
 - Code samples, commands, outputs, and code fence integrity: `.github/skills/code-sample-review/SKILL.md`
 
@@ -33,7 +36,10 @@ Read only the guidance needed for the task:
 5. Prioritize learner-blocking issues, incorrect technical guidance, scope drift, missing metadata, broken links, weak Arm framing, image issues, and unclear validation steps.
 6. Classify substantial files as prose-heavy, mixed, or code-heavy before judging length or density.
 7. Use the metadata description skill for focused `description` field updates.
-8. Use the code sample review skill for command accuracy, output formatting, code fence integrity, and token-heavy code or output blocks.
+8. Use the Markdown component skill for focused links, tables, notices, tab panes, and component syntax edits.
+9. Use the link text review skill for focused accessible anchor text cleanup.
+10. Use the stale content review skill for periodic maintenance scans and freshness triage.
+11. Use the code sample review skill for command accuracy, output formatting, code fence integrity, and token-heavy code or output blocks.
 
 Do not recommend splitting content only because a file is long. Prefer semantic boundaries based on headings, task transitions, or conceptual changes.
 
