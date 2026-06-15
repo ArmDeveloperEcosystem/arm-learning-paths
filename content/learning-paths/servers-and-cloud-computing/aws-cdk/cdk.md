@@ -35,6 +35,11 @@ Deploy the application:
 ```bash
 cdk deploy
 ```
+By default, the AWS CDK CLI will prompt you to approve IAM-related changes during deployment. To deploy the application without the need for approval, run:
+
+```bash
+cdk deploy --require-approval never
+```
 
 The deployment can take a couple minutes to complete. When the deployment completes, the last couple lines of the output will include a URL to the web server and the load balancer's DNS name:
 

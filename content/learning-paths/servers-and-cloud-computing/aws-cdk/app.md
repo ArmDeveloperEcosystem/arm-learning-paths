@@ -13,7 +13,19 @@ In this section, you'll create a JavaScript CDK application that defines an Amaz
 
 ### Before you begin
 
-Make sure that you've completed all prerequisite steps and installed the AWS CDK CLI. For more information, see the [AWS CDK install guide](/install-guides/aws-cdk).
+Make sure that you've installed the AWS CDK CLI:
+
+```bash
+cdk --version
+```
+
+The output is similar to:
+
+```output
+2.1125.0 (build 71fd29e)
+```
+
+For instructions to set up and install the AWS CDK CLI, see the [AWS CDK install guide](/install-guides/aws-cdk).
 
 ### Initialize a CDK project
 

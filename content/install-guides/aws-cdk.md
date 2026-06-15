@@ -26,9 +26,33 @@ In this guide, you'll learn how to install the CDK CLI and verify that the CLI i
 
 ## Before you begin
 
-Before you can use the AWS CDK, you need to set up AWS credentials and install the AWS CLI. For more information about setting up AWS credentials and installing the AWS CLI, see the [AWS Credentials](/install-guides/aws_access_keys/) and [AWS CLI](/install-guides/aws-cli/) install guides. 
+Make sure that you have the AWS CLI installed:
 
-To install the AWS CDK CLI, you'll need Node.js 22 or later. You'll also need to install prerequisites specific to the programming languages that you want to use. For more information about Node.js and language-specific prerequisites, see [Install Node.js and programming language prerequisites](https://docs.aws.amazon.com/cdk/v2/guide/prerequisites.html#prerequisites-node) in the AWS CDK documentation.
+```bash
+aws --version
+```
+
+The output is similar to:
+
+```output
+aws-cli/2.34.56 Python/3.14.5 Darwin/25.5.0 exe/arm64
+```
+For more information about setting up AWS credentials and installing the AWS CLI, see the [AWS Credentials](/install-guides/aws_access_keys/) and [AWS CLI](/install-guides/aws-cli/) install guides. 
+
+Make sure you have Node.js 22 or later installed:
+
+```bash
+node --version
+```
+
+The output is similar to:
+
+```output
+v26.2.0
+```
+If you don't have Node.js installed, or if the installed version is earlier than Node.js 22, download a suitable version from the [Node.js website](https://nodejs.org/en/download).
+
+You'll also need to install prerequisites specific to the programming languages that you want to use. For more information about language-specific prerequisites, see [Install Node.js and programming language prerequisites](https://docs.aws.amazon.com/cdk/v2/guide/prerequisites.html#prerequisites-node) in the AWS CDK documentation.
 
 ## Install the AWS CDK CLI
 
