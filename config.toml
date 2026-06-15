@@ -17,6 +17,7 @@ cloudFrontDistributionID = "EAMKPMDBM18II"
 name = "prod"
 URL = "s3://arm-learning-paths-prod?region=us-east-1"
 cloudFrontDistributionID = "E2IA2AC83UE2VJ"
+exclude = "md/**"
 
 [markup]
   [markup.goldmark]
