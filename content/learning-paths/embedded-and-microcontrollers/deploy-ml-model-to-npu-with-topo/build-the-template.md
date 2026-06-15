@@ -42,7 +42,7 @@ Restart your agent after installing or updating the skills.
 
 You can then use the skills as part of the Template authoring flow. From the root of any Compose project, ask your agent to use `topo-template-bootstrap`:
 
-```output
+```
 Use topo-template-bootstrap on this repository.
 Treat the root compose.yaml as the Template root.
 Preserve plain docker compose behavior.
@@ -51,7 +51,7 @@ Add x-topo metadata only where it reflects the actual services, hardware require
 
 After bootstrap, ask the agent to use `topo-template-lint`:
 
-```output
+```
 Use topo-template-lint on topo-imx93-npu-deployment.
 Validate compose.yaml against the Topo Template Format schema.
 Check README alignment, deployment_success_message, Remoteproc Runtime metadata, and x-topo.args wiring.

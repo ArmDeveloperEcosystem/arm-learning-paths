@@ -1,30 +1,28 @@
 ---
-title: Deploy a machine learning model to an NPU-capable system with Topo
+title: Deploy an ML application to the Ethos-U65 NPU on NXP FRDM i.MX 93 with Topo
 
-draft: true
-cascade:
-    draft: true
-
-description: Use Topo to deploy a web application on Cortex-A that triggers a MobileNetV2 image classifier running as Cortex-M firmware with Ethos-U65 NPU acceleration.
+description: Use Topo to deploy a Cortex-A web application that sends MobileNetV2 image classification requests to Cortex-M33 firmware accelerated by the Ethos-U65 NPU.
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic for embedded, edge, and cloud software developers who want to deploy machine learning workloads to heterogeneous Arm-based Linux targets using Topo.
+who_is_this_for: This is an introductory topic for embedded/edge software developers who want to deploy machine learning workloads to heterogeneous Arm-based Linux targets using Topo, including leveraging Arm Ethos-U NPUs.
 
 learning_objectives:
     - Explain how Topo deploys an application that spans Cortex-A, Cortex-M, and Ethos-U
-    - Prepare an NXP FRDM i.MX 93 board for remoteproc-runtime and shared-memory inference
-    - Clone and deploy the topo-imx93-npu-deployment template
+    - Deploy the topo-imx93-npu-deployment Template, which operates across Cortex-A, Cortex-M, and Ethos-U, to perform image classification using an ExecuTorch MobileNetV2 model
     - Describe how the Template is bootstrapped from Compose services, Remoteproc Runtime metadata, and Topo arguments
-    - Run image classification from a browser and verify that inference is executed by the Cortex-M33 firmware
+    - Understand how to take similar projects and create Topo Templates, including using Agent Skills
 
 prerequisites:
     - A host machine (x86 or Arm) with Linux, macOS, or Windows
-    - An NXP FRDM i.MX 93 target board accessible over SSH with root access
-    - Docker installed on the host and target. For installation steps, see [Install Docker](/install-guides/docker/).
+    - An NXP FRDM i.MX 93 target board with Linux setup, accessible over SSH with root access. To do this, see [Use Linux on the NXP FRDM i.MX 93 board](https://learn.arm.com/learning-paths/embedded-and-microcontrollers/linux-nxp-board/).
+    - Docker installed on the host and target. For installation steps, see [Install Docker](https://learn.arm.com/install-guides/docker/).
+    - At least 25 GB of free disk space on the host if you are building without cache images.
+    - The Device Tree Compiler (`dtc`) installed on the host.
     - lscpu installed on the target (pre-installed on most Linux distributions)
-    - Topo installed on the host. For installation steps, see [Deploy containerized workloads to Arm-based Linux targets with Topo](/learning-paths/cross-platform/deploy-containerized-workloads-with-topo/).
+    - Topo installed on the host. For installation steps, see [Deploy containerized workloads to Arm-based Linux targets with Topo](https://learn.arm.com/learning-paths/cross-platform/deploy-containerized-workloads-with-topo/).
     - Basic familiarity with containers, SSH, and CLI tools
+    - (Optional) Access to an Agent, such as Codex, or Claude Code
 
 author: Tomas Agustin Gonzalez Orlando
 
@@ -45,13 +43,6 @@ operatingsystems:
     - Linux
     - macOS
     - Windows
-
-### Cross-platform metadata only
-shared_path: true
-shared_between:
-    - servers-and-cloud-computing
-    - laptops-and-desktops
-    - embedded-and-microcontrollers
 
 further_reading:
     - resource:
