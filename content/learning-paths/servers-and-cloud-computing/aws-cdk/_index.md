@@ -13,7 +13,7 @@ who_is_this_for: This is an introductory topic for software developers who want 
 learning_objectives:
     - Create an example AWS CDK application in JavaScript
     - Define AWS infrastructure using the AWS CDK
-    - Deploy application resources on Arm-based AWS compute
+    - Deploy application resources on Arm-based AWS compute using Amazon ECS and the AWS CDK
 
 prerequisites:
     - An Amazon Web Services (AWS) account

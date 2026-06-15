@@ -1,5 +1,6 @@
 ---
 title: "Create a sample AWS CDK application"
+description: Create a JavaScript AWS CDK application that defines an Amazon ECS service running on Arm-based AWS Fargate compute.
 weight: 2
 
 layout: "learningpathall"

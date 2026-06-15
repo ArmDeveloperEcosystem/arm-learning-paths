@@ -1,5 +1,6 @@
 ---
 title: "Synthesize and deploy the sample AWS CDK application"
+description: Synthesize, deploy, verify, and clean up a sample AWS CDK application running on Arm-based AWS Fargate compute.
 weight: 3
 
 layout: "learningpathall"
