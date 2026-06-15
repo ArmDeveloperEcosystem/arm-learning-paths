@@ -32,9 +32,11 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
-    - AWS CDK
+    - AWS CDK CLI
+    - Amazon Elastic Container Service (Amazon ECS)
     - AWS CLI
     - Node.js
+    - JavaScript
 
 further_reading:
     - resource:
