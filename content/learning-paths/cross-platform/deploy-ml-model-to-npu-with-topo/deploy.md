@@ -204,7 +204,7 @@ http://<target-ip>:3002
 You should see something similar to:
 
 
-![Screenshot of the web interface running on an Arm-based target, showing an image and the model response. This confirms successful deployment and provides a visual reference for the expected result.#center](topo_npu_classifier.png "Image classification as seen in the web app")
+![Screenshot of the web interface running on an Arm-based target, showing an image and the model response. This confirms successful deployment and provides a visual reference for the expected result.#center](topo_npu_classifier.webp "Image classification as seen in the web app")
 
 ## What you've accomplished
 
