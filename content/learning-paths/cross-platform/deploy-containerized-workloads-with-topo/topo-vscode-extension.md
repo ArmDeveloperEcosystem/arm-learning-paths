@@ -48,7 +48,11 @@ After cloning or selecting a Topo Template, you can deploy it. Open or clone the
 
 ![Screenshot of deploying a Topo workload from Visual Studio Code.#center](deploy_vscode.png "Deploy a Topo workload from Visual Studio Code")
 
-When deployment completes, open the application in your browser just as you did with the CLI workflow. For the LLM chatbot example, open:
+When deployment completes, you will see the processes running on the target in the Topo sidebar:
+
+![Screenshot of a deployed LLM chatbot processes shown in the Topo VS Code extension.#center](deployed_llm.png "Deployed LLM chatbot processes in the Topo VS Code extension")
+
+Open the application in your browser just as you did with the CLI workflow:
 
 ```output
 http://<target-ip>:3000
