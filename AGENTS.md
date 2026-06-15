@@ -19,6 +19,7 @@ Use this file as a lightweight router for Codex, Copilot, and other coding agent
 - Install guides: `.github/skills/arm-content-editor/references/install-guide-guidance.md`
 - Shared content quality: `.github/skills/arm-content-editor/references/content-quality.md`
 - Metadata descriptions: `.github/skills/metadata-description-update/SKILL.md`
+- SEO, GEO, AEO, and AI-agent discoverability: `.github/skills/seo-geo-aeo-review/SKILL.md`
 - Markdown components: `.github/skills/markdown-component-edit/SKILL.md`
 - Accessible link text: `.github/skills/link-text-review/SKILL.md`
 - Stale content risk scans: `.github/skills/stale-content-review/SKILL.md`
@@ -40,6 +41,7 @@ Current shared skills:
 
 - `.github/skills/arm-content-editor/SKILL.md` for reviewing and editing Arm Learning Paths and install guides.
 - `.github/skills/metadata-description-update/SKILL.md` for adding or improving front matter `description` fields for Learning Paths and install guides.
+- `.github/skills/seo-geo-aeo-review/SKILL.md` for reviewing and improving search intent, AI-agent selection signals, answer-engine readiness, titles, headings, and broader discoverability.
 - `.github/skills/markdown-component-edit/SKILL.md` for adding or updating links, tables, notices, tab panes, code panes, and other structured Markdown components.
 - `.github/skills/link-text-review/SKILL.md` for reviewing and improving accessible, descriptive Markdown link text.
 - `.github/skills/stale-content-review/SKILL.md` for periodic maintenance scans that flag stale-content risk, screenshots, mutable dependencies, temporal wording, old dates, and version-sensitive content.

@@ -2,6 +2,8 @@
 
 Use this guidance when creating, editing, or reviewing Arm Learning Paths or install guides for clarity, Arm-specific framing, accessibility, link quality, search discoverability, and AI-readable structure.
 
+For focused SEO, GEO, AEO, search intent, or AI-agent selection review, use `.github/skills/seo-geo-aeo-review/SKILL.md`.
+
 ## Quality rules
 
 - Default to Arm-native solutions, Arm terminology, and Arm platform assumptions.

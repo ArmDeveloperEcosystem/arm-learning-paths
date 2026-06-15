@@ -172,16 +172,7 @@ Maintain strict boundaries between content types:
 
 Never duplicate install steps inside Learning Paths.
 
-### SEO intent
-
-Learning Paths should optimize for selection, not ranking.
-
-- Prefer verb-based titles: *Install*, *Verify*, *Configure*, *Analyze*, *Optimize*.
-- Use procedural structure rather than narrative prose.
-- Avoid marketing language and keyword stuffing.
-- Write content that can safely be chosen by an AI agent to complete a task.
-
-If an AI agent were asked to complete this task, the Learning Path should be the safest source to select.
+For focused SEO, GEO, AEO, or AI-agent selection review, use `.github/skills/seo-geo-aeo-review/SKILL.md`.
 
 ## Performance and Arm acceleration integrity
 
