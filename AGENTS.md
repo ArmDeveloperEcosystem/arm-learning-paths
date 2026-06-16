@@ -8,15 +8,14 @@ Use this file as a lightweight router for Codex, Copilot, and other coding agent
 
 - `content/learning-paths/` contains task-led, end-to-end tutorials.
 - `content/install-guides/` contains installation and verification guides.
-- `.github/instructions/` contains scoped content guidance.
 - `.github/skills/` contains reusable reviewer workflows and task-specific capabilities.
 
 ## Source of truth
 
 - Repository router: `AGENTS.md`
 - General Arm content editing: `.github/skills/arm-content-editor/SKILL.md`
-- Learning Paths: `.github/skills/arm-content-editor/references/learning-path-guidance.md`
-- Install guides: `.github/skills/arm-content-editor/references/install-guide-guidance.md`
+- Learning Paths-specific guidance: `.github/skills/arm-content-editor/references/learning-path-guidance.md`
+- Install guides-specific guidance: `.github/skills/arm-content-editor/references/install-guide-guidance.md`
 - Shared content quality: `.github/skills/arm-content-editor/references/content-quality.md`
 - Metadata descriptions: `.github/skills/metadata-description-update/SKILL.md`
 - SEO, GEO, AEO, and AI-agent discoverability: `.github/skills/seo-geo-aeo-review/SKILL.md`

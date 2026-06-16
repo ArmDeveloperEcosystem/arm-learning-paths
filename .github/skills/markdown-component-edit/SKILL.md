@@ -21,7 +21,7 @@ This skill is best when the user highlights text, names a section, or asks for a
 1. Use the user's highlighted, selected, or explicitly named text as the edit target. If the target is ambiguous, ask for the exact text, file, or section before editing. 
 2. Inspect nearby Markdown so the new component fits the surrounding flow.
 3. Verify internal links before adding or changing them when practical.
-4. Do one of the following:
+4. Use `component rules` and the `component-patterns` reference and do one of the following:
   - If the target isn't a good fit for the provided component, push back with justification. Rely on component rules. 
   - If it's a good fit, or if the reviewer voluntarily requests an unusual update, make the update.
 4. After making an update, re-open or search the edited area to verify shortcode pairs, table rows, links, and code fences are well formed.
