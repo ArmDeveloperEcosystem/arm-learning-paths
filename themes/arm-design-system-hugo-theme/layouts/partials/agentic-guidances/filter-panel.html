@@ -1,0 +1,12 @@
+{{/*
+Filter panel for Agentic Guidance list pages.
+
+Called from:
+    - agentic-guidances/list.html
+*/}}
+
+{{ partial "filter-search-sort/closed-expansion.html" (dict "context" .context "displayname" "Type of Guidance" "routing" "guidance_type" "tagnames" .guidance_types)}}
+{{ partial "filter-search-sort/closed-expansion.html" (dict "context" .context "displayname" "Category" "routing" "category" "tagnames" .categories)}}
+{{ partial "filter-search-sort/closed-expansion.html" (dict "context" .context "displayname" "Job to do" "routing" "job_to_do" "tagnames" .jobs_to_do)}}
+{{ partial "filter-search-sort/closed-expansion.html" (dict "context" .context "displayname" "Requirements" "routing" "requirements" "tagnames" .requirements)}}
+{{ partial "filter-search-sort/closed-expansion.html" (dict "context" .context "displayname" "Tools, Software, and Languages" "routing" "tools_software_languages" "tagnames" .tools_software_languages)}}

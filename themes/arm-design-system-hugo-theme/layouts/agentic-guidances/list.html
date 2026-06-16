@@ -1,0 +1,90 @@
+{{/*
+Agentic Guidance list page.
+
+Where it is used:
+    - /agentic-guidances/
+
+Called from:
+    - baseof
+*/}}
+
+{{ define "main" }}
+
+{{ $guidances_to_list := where .Site.RegularPages "Section" "agentic-guidances" }}
+{{ $guidance_types := slice }}
+{{ $categories := slice }}
+{{ $jobs_to_do := slice }}
+{{ $requirements := slice }}
+{{ $tools_software_languages := slice }}
+
+{{ range $guidances_to_list }}
+    {{ with .Params.guidance_type }}
+        {{ if not (in $guidance_types .) }}{{ $guidance_types = $guidance_types | append . }}{{ end }}
+    {{ end }}
+    {{ with .Params.category }}
+        {{ if not (in $categories .) }}{{ $categories = $categories | append . }}{{ end }}
+    {{ end }}
+    {{ with .Params.job_to_do }}
+        {{ if not (in $jobs_to_do .) }}{{ $jobs_to_do = $jobs_to_do | append . }}{{ end }}
+    {{ end }}
+    {{ range .Params.requirements }}
+        {{ if not (in $requirements .) }}{{ $requirements = $requirements | append . }}{{ end }}
+    {{ end }}
+    {{ range .Params.tools_software_languages }}
+        {{ if not (in $tools_software_languages .) }}{{ $tools_software_languages = $tools_software_languages | append . }}{{ end }}
+    {{ end }}
+{{ end }}
+
+{{ $guidance_types = sort $guidance_types }}
+{{ $categories = sort $categories }}
+{{ $jobs_to_do = sort $jobs_to_do }}
+{{ $requirements = sort $requirements }}
+{{ $tools_software_languages = sort $tools_software_languages }}
+
+<div class="c-row md:is-collapsed u-gap-1-1/2 u-flex-nowrap u-padding-top-2 u-padding-bottom-2-1/2">
+    <div class="c-col u-hide lg:u-display-block u-flex-shrink-0 filter-column-div">
+        {{ partial "agentic-guidances/filter-panel.html" (dict
+            "context" .
+            "guidance_types" $guidance_types
+            "categories" $categories
+            "jobs_to_do" $jobs_to_do
+            "requirements" $requirements
+            "tools_software_languages" $tools_software_languages
+        )}}
+    </div>
+
+    <div class="c-col">
+        <div class="agentic-guidance-featured u-display-grid u-gap-1 sm:u-grid-columns-1 lg:u-grid-columns-3 u-margin-bottom-1">
+            <a class="agentic-feature-link" href="/agentic-guidances/prompts/agent-101-setting-up-your-agent/">Agent 101: Setting up your agent</a>
+            <a class="agentic-feature-link" href="/agentic-guidances/blueprints/cloud-service-migration-to-arm64/">Agent 201: Applying agentic blueprints</a>
+            <a class="agentic-feature-link" href="/agentic-guidances/skills/sve2-loop-optimization/">Agent 301: Cutting-edge tips and tricks</a>
+        </div>
+
+        <ads-search class="u-margin-top-0" has-search-button id="search-box" placeholder="Search for agentic guidance"></ads-search>
+
+        {{ partial "filter-search-sort/active-filter-and-sort-bar.html" (dict "content_to_list" $guidances_to_list "page_type" "agentic guidance")}}
+
+        <div class="c-row">
+            <div class="c-col c-col-12">
+                <hr id="divider-line">
+            </div>
+            <div class="c-col c-col-12">
+                <div id="path-container" class="u-display-grid u-gap-1 sm:u-grid-columns-1 md:u-grid-columns-2 xl:u-grid-columns-2 u-margin-top-1">
+                    {{ range sort $guidances_to_list "Date" "desc" }}
+                        <div class='path-div search-div gradient-box
+                            {{ with .Params.guidance_type }} tag-{{ . | urlize }} {{ end }}
+                            {{ with .Params.category }} tag-{{ . | urlize }} {{ end }}
+                            {{ with .Params.job_to_do }} tag-{{ . | urlize }} {{ end }}
+                            {{ range .Params.requirements }} tag-{{ . | urlize }} {{ end }}
+                            {{ range .Params.tools_software_languages }} tag-{{ replace (. | urlize) "+" "plus" }} {{ end }}
+                            '>
+                            {{ partial "agentic-guidances/card.html" (dict "guidance" .) }}
+                        </div>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ end }}

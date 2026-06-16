@@ -398,13 +398,71 @@ ads-card-content.tool-card-content::before {
     color: var(--arm-light-blue);
   }
 
-  ads-card.tool-card:hover p {
+ads-card.tool-card:hover p {
     color:var(--arm-green);
     margin-left: 12px;
   }
   html[theme="dark"]       ads-card.tool-card:hover p {
     color:var(--arm-green);
   }
+
+
+/* Agentic Guidance list styling
+*******************************************************************/
+.agentic-guidance-featured {
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.agentic-feature-link {
+    display: block;
+    min-height: 76px;
+    padding: 14px 16px;
+    border: 1px solid rgba(163, 168, 174, 0.25);
+    border-radius: 4px;
+    background-color: var(--arm-light-grey-alt);
+    color: var(--arm-web-safe-blue);
+    font-size: 1.15rem;
+    font-weight: 500;
+    line-height: 1.25;
+    transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+html[theme='dark'] .agentic-feature-link {
+    background-color: var(--arm-color-base);
+    color: var(--arm-light-blue);
+}
+
+.agentic-feature-link:hover {
+    border-color: var(--arm-green);
+    color: var(--arm-green);
+}
+
+ads-card.agentic-guidance-card {
+    --ads-card-border-radius: 8px;
+}
+
+.agentic-guidance-title-div {
+    min-height: 52px;
+}
+
+.agentic-guidance-summary {
+    color: var(--arm-dark-grey);
+    font-size: 0.95rem;
+    line-height: 1.4;
+    margin-top: 0;
+    min-height: 76px;
+}
+
+html[theme='dark'] .agentic-guidance-summary {
+    color: var(--arm-light-grey);
+}
+
+.agentic-guidance-tag-details {
+    min-height: 24px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+}
 
 
 

@@ -178,6 +178,161 @@ html[theme='dark'] ads-card.multi-install-card:hover .multi-tool-selection-title
 }
 
 
+/* Agentic Guidance content pages
+*******************************************************************/
+.agentic-guidance-kind-label {
+    color: var(--arm-light-grey);
+    font-size: 0.9rem;
+    margin-top: 0;
+}
+
+.agentic-detail-layout {
+    display: grid;
+    gap: 32px;
+    grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.85fr);
+    align-items: start;
+}
+
+.agentic-about-card h2 {
+    margin-top: 0;
+}
+
+.agentic-about-card h3 {
+    font-weight: 300;
+    margin-top: 32px;
+}
+
+.agentic-about-card p,
+.agentic-about-card li {
+    font-size: 1.05rem;
+    line-height: 1.45;
+}
+
+.agentic-tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 24px;
+}
+
+.agentic-metadata-grid {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    margin-bottom: 18px;
+}
+
+.agentic-metadata-grid div {
+    border: 1px solid rgba(163, 168, 174, 0.25);
+    border-radius: 4px;
+    padding: 10px 12px;
+}
+
+.agentic-metadata-grid span,
+.agentic-metadata-grid strong {
+    display: block;
+}
+
+.agentic-metadata-grid span {
+    color: #a3a8ae;
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+.agentic-metadata-grid strong {
+    color: white;
+    font-weight: 500;
+}
+
+.agentic-prompt-panel,
+.agentic-blueprint-panel {
+    position: relative;
+    border: 1px solid #7d30ff;
+    border-radius: 8px;
+    background: #3b0799;
+    color: white;
+    min-height: 320px;
+    padding: 20px;
+}
+
+.agentic-prompt-panel pre {
+    background: transparent;
+    border: 0;
+    color: white;
+    font-family: "Lato", sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.42;
+    margin: 0;
+    padding: 0;
+    white-space: pre-wrap;
+}
+
+.agentic-copy-button {
+    float: right;
+    margin-left: 16px;
+    border: 0;
+    border-radius: 5px;
+    background: #00c1de;
+    color: var(--arm-black);
+    cursor: pointer;
+    font-weight: 700;
+    padding: 10px 18px;
+}
+
+.agentic-copy-button:hover {
+    background: var(--arm-green);
+}
+
+.agentic-blueprint-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    justify-content: center;
+    background: var(--arm-black);
+}
+
+.agentic-blueprint-stage,
+.agentic-blueprint-node {
+    border: 2px solid #7d30ff;
+    background: #3b0799;
+    color: white;
+    padding: 14px;
+    text-align: center;
+}
+
+.agentic-blueprint-orchestrator {
+    padding: 18px;
+}
+
+.agentic-blueprint-node-row {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    align-items: stretch;
+}
+
+.agentic-blueprint-node {
+    background: #732cf1;
+}
+
+.agentic-blueprint-node span,
+.agentic-blueprint-node a {
+    display: block;
+}
+
+.agentic-blueprint-node a {
+    color: #00c1de;
+    font-weight: 700;
+}
+
+@media (max-width: 992px) {
+    .agentic-detail-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+
 
 
 /* Review page styling

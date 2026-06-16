@@ -1,0 +1,130 @@
+{{/*
+Agentic Guidance content page.
+
+Where it is used:
+    - /agentic-guidances/prompts/:guidance/
+    - /agentic-guidances/skills/:guidance/
+    - /agentic-guidances/blueprints/:guidance/
+
+Called from:
+    - baseof
+*/}}
+
+{{ define "main" }}
+
+{{ $kind := default "guidance" .Params.agentic_guidance_kind }}
+{{ $kind_title := cond (eq $kind "prompt") "Prompt" (cond (eq $kind "skill") "Skill" (cond (eq $kind "blueprint") "Blueprint" "Guidance")) }}
+{{ $tags := slice }}
+{{ with .Params.guidance_type }}{{ $tags = $tags | append . }}{{ end }}
+{{ with .Params.category }}{{ $tags = $tags | append . }}{{ end }}
+{{ with .Params.job_to_do }}{{ $tags = $tags | append . }}{{ end }}
+{{ range .Params.tools_software_languages }}{{ $tags = $tags | append . }}{{ end }}
+{{ range .Params.requirements }}{{ $tags = $tags | append . }}{{ end }}
+
+<div class="c-row md:is-collapsed u-gap-1-1/2 u-flex-nowrap u-padding-top-1">
+    <div class="c-col lg:c-col-3 xl:c-col-2 u-hide lg:u-display-block u-flex-shrink-0">
+        <div class="left-nav-pane">
+            <h6 class="u-margin-top-1/2" style="font-size:1em; font-weight: normal;">Agentic Guidance</h6>
+            <p class="agentic-guidance-kind-label">{{ .Params.guidance_type }}</p>
+            {{ partial "general-formatting/github-links.html" . }}
+        </div>
+    </div>
+
+    <div class="c-col lg:c-col-9 xl:c-col-10">
+        <div class="agentic-detail-layout">
+            <div class="content-box agentic-about-card">
+                <h2 id="about-marker">About this {{ $kind_title }}</h2>
+                <div class="agentic-metadata-grid">
+                    {{ with .Params.guidance_type }}
+                        <div>
+                            <span>Type</span>
+                            <strong>{{ . }}</strong>
+                        </div>
+                    {{ end }}
+                    {{ with .Params.category }}
+                        <div>
+                            <span>Category</span>
+                            <strong>{{ . }}</strong>
+                        </div>
+                    {{ end }}
+                    {{ with .Params.job_to_do }}
+                        <div>
+                            <span>Job to do</span>
+                            <strong>{{ . }}</strong>
+                        </div>
+                    {{ end }}
+                    {{ with .Params.minutes_to_complete }}
+                        <div>
+                            <span>Estimated time</span>
+                            <strong>{{ partial "server-side-processing/time-beautifier.html" . }}</strong>
+                        </div>
+                    {{ end }}
+                </div>
+                <div class="agentic-tag-row">
+                    {{ range $tags }}
+                        <ads-tag>{{ . }}</ads-tag>
+                    {{ end }}
+                </div>
+
+                <h3>When to use this?</h3>
+                <p>{{ .Params.when_to_use }}</p>
+
+                <h3>How to use this?</h3>
+                <p>{{ .Params.how_to_use }}</p>
+
+                {{ if eq $kind "blueprint" }}
+                    <h3>What is used here?</h3>
+                {{ else }}
+                    <h3>What are Blueprints to use this {{ lower $kind_title }}?</h3>
+                {{ end }}
+                {{ with .Params.blueprints }}
+                    <ul>
+                        {{ range . }}
+                            <li>{{ . }}</li>
+                        {{ end }}
+                    </ul>
+                {{ else }}
+                    <p>Placeholder blueprint relationships will be added when this guidance is populated.</p>
+                {{ end }}
+            </div>
+
+            {{ if eq $kind "blueprint" }}
+                <div class="agentic-blueprint-panel">
+                    <div class="agentic-blueprint-stage">CI/CD Pipeline</div>
+                    <div class="agentic-blueprint-stage agentic-blueprint-orchestrator">
+                        <strong>Orchestrator Agent</strong>
+                        <div class="agentic-blueprint-node-row">
+                            {{ range .Params.blueprint_nodes }}
+                                <div class="agentic-blueprint-node">
+                                    <span>{{ .label }}</span>
+                                    <a href="{{ .link }}">{{ .title }}</a>
+                                </div>
+                            {{ end }}
+                        </div>
+                    </div>
+                    <div class="agentic-blueprint-node-row">
+                        {{ range .Params.blueprint_subagents }}
+                            <div class="agentic-blueprint-node">
+                                <span>Subagent:</span>
+                                <a href="{{ .link }}">{{ .title }}</a>
+                            </div>
+                        {{ end }}
+                    </div>
+                </div>
+            {{ else }}
+                <div class="agentic-prompt-panel">
+                    <button class="agentic-copy-button" onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText)">Copy</button>
+                    <pre><code>{{ .Params.prompt }}</code></pre>
+                </div>
+            {{ end }}
+        </div>
+
+        {{ with .Content }}
+            <div class="content-box markdown-content-div">
+                {{ partial "general-formatting/markdown-content-formatting.html" . }}
+            </div>
+        {{ end }}
+    </div>
+</div>
+
+{{ end }}
