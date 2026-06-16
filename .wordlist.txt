@@ -6305,3 +6305,12 @@ unbuffered
 upserting
 userinfo
 voicechatbot
+ChromaDB
+Sonoma
+cnNm
+llamaindex
+microVM
+microVMs
+microvm
+npx
+sbx

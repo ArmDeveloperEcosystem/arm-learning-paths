@@ -1,6 +1,8 @@
 ---
 title: Create an interactive shell for Zephyr RTOS on Cortex-M
 
+description: Learn how to enable and configure the Zephyr shell subsystem on Arm Cortex-M, then build and run MQTT and UART shell backend examples using Workbench for Zephyr in VS Code.
+
 draft: true
 cascade:
     draft: true
@@ -17,9 +19,8 @@ learning_objectives:
 prerequisites:
     - Basic familiarity with embedded C programming
     - Visual Studio Code with the Workbench for Zephyr extension installed and configured
-    - Docker Desktop, Docker Engine, or another Docker-compatible runtime installed on your host computer
+    - Docker Desktop, Docker Engine, or another Docker-compatible runtime installed on your host computer (MQTT shell example only)
     - A Zephyr-supported Arm Cortex-M board (for example, NXP FRDM-MCXN947)
-    - Windows 10+ (64-bit), macOS with Homebrew, or Linux (preferably Ubuntu 20.04+)
 
 author: 
     - Ayoub Bourjilat
