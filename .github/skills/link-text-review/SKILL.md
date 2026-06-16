@@ -19,24 +19,20 @@ This skill focuses on anchor text and link clarity. For tables, notices, tab pan
 ## Workflow
 
 1. Identify the target file, directory, section, or selected text.
-2. Read surrounding context before changing link text.
-3. Find vague anchors such as `here`, `click here`, `this page`, `read more`, `link`, bare URLs, or repeated generic text.
-4. Verify internal links before editing when practical.
-5. Rewrite anchor text to describe the destination, action, or resource.
-6. Preserve the URL unless it is broken or the user asks to change it.
-7. Keep anchor text concise and natural in the sentence.
-8. Re-open or search changed lines to verify the Markdown link syntax is valid.
-9. Report changed links and any links not verified.
+2. Read surrounding context before suggesting any changes.
+3. After understanding the context of the URL, suggest concise and natural rewrites to the anchor text based on `Quality rules`. 
+4. After the user accepts suggestions, make changes, then re-open or search changed lines to verify the Markdown link syntax is valid.
+5. After you make changes, report changed links and any links not verified.
 
 ## Quality rules
 
 - Link text should make sense without nearby words when possible.
 - Prefer destination-specific anchors such as `Docker install guide`, `Arm Developer resources`, or `Google Cloud firewall rules`.
-- Avoid anchors that only describe the mechanic, such as `click here`, `this link`, or `website`.
+- Avoid anchors that only describe the mechanic, such as `here`, `click here`, `this page`, `read more`, `link`, or `website`, as well as bare URLs or repeated generic text.
 - Avoid overlong anchors that wrap a whole sentence.
 - Follow `.github/skills/arm-content-editor/references/writing-style.md` for URL path format.
 - Don't change product names, tool names, URLs, or technical meaning to satisfy prose preferences.
-- Don't add speculative links. Verify internal targets or state when verification was not possible.
+- Don't add speculative links. Verify internal targets or state when verification was not possible. Preserve the URL unless it's broken or the user asks for a change.
 
 ## Examples
 
