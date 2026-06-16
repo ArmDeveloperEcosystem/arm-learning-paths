@@ -29,8 +29,6 @@
 - Use *italics* for emphasis and new terms.
 - Use `code formatting` for file names, commands, code elements, package names, flags, paths, and environment variables.
 - In code blocks, CLI flags, package names, file paths, outputs, and tool messages, keep the exact casing used by the tool.
-- Use `arm64` or `aarch64` for CPU architecture. Prefer whichever term a tool, package, or operating system uses natively.
-- `ARM64` is acceptable when specifically referring to Windows on Arm or Microsoft documentation.
 
 ## Code fence integrity
 
