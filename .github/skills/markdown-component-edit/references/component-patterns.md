@@ -1,4 +1,4 @@
-# Component patterns
+# Structured component patterns
 
 Use these patterns when adding or editing structured Markdown and Hugo components.
 
@@ -86,16 +86,4 @@ Rules:
 - Keep each tab roughly comparable in length and detail.
 - Avoid hiding critical sequential instructions inside tabs unless the user chooses one path.
 
-## Links
 
-Use inline Markdown links for a single destination-specific reference. For broader anchor-text cleanup, use `.github/skills/link-text-review/SKILL.md`.
-
-```md
-See the [Docker install guide](/install-guides/docker/) to set up a container runtime.
-```
-
-Rules:
-
-- Keep link text descriptive and natural in the sentence.
-- Verify internal links when practical.
-- Follow `.github/skills/arm-content-editor/references/writing-style.md` for URL path format.
