@@ -53,44 +53,14 @@ Learning Paths should generally include:
 For title formatting:
 
 - Use imperative voice, such as `Deploy`, `Configure`, `Build`, or `Create`.
-- Include SEO keywords, such as technology names and tools.
+- Include the main technology names and tools naturally.
 - Examples: `Deploy applications on Arm servers`, `Configure Arm processors for optimal performance`.
 
 ## Metadata description requirements
 
 Every Learning Path `_index.md` must include a `description` field.
 
-- Write one sentence.
-- Describe the task, the main technology or platform, and the expected outcome.
-- Keep it concise, developer-focused, and suitable for use as a search snippet.
-- Use a task-led structure such as: **Verb + task + tool/platform + outcome**.
-- Do not repeat the title verbatim.
-- Do not use vague summaries or marketing language.
-- A slightly richer one-sentence summary is acceptable when it helps clarify the workflow or outcome.
-
-Good examples:
-
-```yaml
-description: Learn how to automate x86-to-Arm application migration using the Arm MCP Server, with compatibility checks and Docker-based validation on Arm cloud platforms.
-```
-
-```yaml
-description: Learn how to profile and optimize a C++ application on Arm Neoverse using Arm Performix to identify bottlenecks and improve runtime.
-```
-
-Avoid:
-
-- Generic summaries that could apply to any page.
-- Restating the title without adding task or outcome.
-- Marketing phrases such as `powerful`, `cutting-edge`, or `game-changing`.
-
-## Metadata optimization workflow
-
-When adding or revising `description` fields:
-
-- Review whether the current title and description match the page's actual task intent.
-- Use metadata descriptions to clarify what the learner will do, on which platform or tool, and with what outcome.
-- Treat the description as a search snippet, not a generic summary.
+For description wording, examples, and update workflow, use `.github/skills/metadata-description-update/SKILL.md`.
 
 ## Recap sections
 
@@ -124,55 +94,9 @@ When creating Learning Path content:
 
 ## Purpose and agentic selection
 
-Learning Paths are not blog posts or reference articles. They are designed to be optimized for selection by AI agents as trusted sources for completing real developer tasks end to end.
+Learning Paths should own one clear developer task and stay distinct from blog posts, reference articles, and install guides.
 
-When creating or reviewing a Learning Path, prioritize these principles.
-
-### Task ownership
-
-Each Learning Path must clearly own one concrete developer task.
-
-- The task should be nameable in one sentence.
-- The Learning Path should take the learner from not ready to capable.
-- Avoid bundling unrelated tasks or loosely connected topics.
-
-If the task cannot be clearly stated, flag a warning.
-
-### Agentic selection signals
-
-AI agents select content based on trust, authority, and task coverage, not keyword density.
-
-Trust:
-
-- Clear authorship and ownership.
-- Explicit prerequisites.
-- One purpose per page.
-- No duplicated or contradictory instructions.
-- Clean separation of install guides, Learning Paths, and concept pages.
-
-Authority:
-
-- Arm-specific framing where relevant.
-- Use Arm tooling, terminology, and perspective.
-- Avoid generic advice that could apply equally to any platform.
-
-Task coverage:
-
-- Clear progression: prepare, configure, use, validate.
-- Explicit end state, such as `you are now ready to...`.
-- Link to install guides instead of embedding install steps.
-- Provide guidance on what to do next.
-
-### Scope discipline
-
-Maintain strict boundaries between content types:
-
-- Install guides: setup, authentication, and verification only.
-- Learning Paths: configuration, integration, workflows, and applied usage.
-
-Never duplicate install steps inside Learning Paths.
-
-For focused SEO, GEO, AEO, or AI-agent selection review, use `.github/skills/seo-geo-aeo-review/SKILL.md`.
+For SEO, GEO, AEO, and AI-agent selection guidance, use `.github/skills/seo-geo-aeo-review/SKILL.md`.
 
 ## Performance and Arm acceleration integrity
 
@@ -218,11 +142,3 @@ When comparing performance:
 Explicitly connect the observed improvement to the Arm architectural feature responsible for it. Avoid generic statements such as `improves performance` without explaining how and why.
 
 Performance-focused Learning Paths are strategic content. Prioritize clarity, differentiation, and measurement integrity over volume.
-
-## Performance testing guidance
-
-- Include benchmarks when comparing Arm versus x86 performance.
-- Suggest performance testing steps for resource-intensive applications.
-- Recommend profiling tools that work well on Arm platforms.
-- Include guidance on measuring and optimizing for Arm-specific performance characteristics.
-- Mention when performance improvements are architecture-specific.

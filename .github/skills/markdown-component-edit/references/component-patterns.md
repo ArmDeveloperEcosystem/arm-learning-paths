@@ -88,7 +88,7 @@ Rules:
 
 ## Links
 
-Use descriptive link text.
+Use inline Markdown links for a single destination-specific reference. For broader anchor-text cleanup, use `.github/skills/link-text-review/SKILL.md`.
 
 ```md
 See the [Docker install guide](/install-guides/docker/) to set up a container runtime.
@@ -96,7 +96,6 @@ See the [Docker install guide](/install-guides/docker/) to set up a container ru
 
 Rules:
 
+- Keep link text descriptive and natural in the sentence.
 - Verify internal links when practical.
-- Use full internal paths, such as `/learning-paths/category/path-name/`.
-- Use full URLs for external sites that are not on `learn.arm.com`.
-- Avoid vague anchors such as `here`, `click here`, `this page`, `read more`, or `link`.
+- Follow `.github/skills/arm-content-editor/references/writing-style.md` for URL path format.

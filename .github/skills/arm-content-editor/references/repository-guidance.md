@@ -6,15 +6,16 @@ This project is a collection of Learning Paths and install guides for learn.arm.
 
 Assume the audience is made up of Arm software developers. Bias information toward Arm platforms. For Linux, assume systems are `aarch64` unless context says otherwise. Readers also use macOS and Windows on Arm systems.
 
-## Highest priority rules
+## Guidance boundaries
 
-- Each Learning Path must own one clear developer task.
-- Install guides are for installation and verification only.
-- Every Learning Path `_index.md` must include a `description` field.
-- Use task-led titles, introductions, and metadata.
-- Do not use placeholder alt text such as `alt-txt`.
-- Prefer Arm-native solutions and Arm-specific framing.
-- Avoid hype, duplication, and vague summaries.
+Use this file for repository-wide orientation only. For task-specific rules, load the narrowest relevant guidance:
+
+- Learning Path structure and scope: `learning-path-guidance.md`
+- Install guide structure and scope: `install-guide-guidance.md`
+- Shared content quality: `content-quality.md`
+- Metadata descriptions: `.github/skills/metadata-description-update/SKILL.md`
+- SEO, GEO, AEO, and AI-agent discoverability: `.github/skills/seo-geo-aeo-review/SKILL.md`
+- Images and alt text: `.github/skills/audit-images/SKILL.md`
 
 ## Project structure
 
@@ -38,8 +39,8 @@ Special content directories:
 
 ## Content type boundaries
 
-- Learning Paths are end-to-end tasks with prepare, configure, use, and validate stages. They must include `_index.md` and `_next-steps.md`.
-- Install guides are for installation and verification only. They should not include applied workflows, benchmarks, or deep architectural explanation.
+- Learning Paths are end-to-end tasks with prepare, configure, use, and validate stages.
+- Install guides are for installation and verification only.
 - Learning Paths can link to install guides for setup. Do not duplicate install-guide content inside Learning Paths.
 
 ## Reference examples

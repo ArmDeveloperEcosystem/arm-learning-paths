@@ -117,6 +117,12 @@ Avoid:
 - `ARM64` is acceptable when specifically referring to Windows on Arm or Microsoft documentation.
 - The term `Learning Path` should always be capitalized.
 
+## Non-Arm naming terms
+
+- `Azure Cobalt` is the processor, not the VM.
+- `Google Axion` is the processor, not the VM. 
+- `AWS Graviton` is the processor, not the VM.
+
 ## Product name emphasis
 
 - Product names and technologies such as LiteRT, XNNPACK, KleidiAI, and SME2 should appear in regular text.

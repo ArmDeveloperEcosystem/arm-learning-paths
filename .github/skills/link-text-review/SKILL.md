@@ -13,7 +13,7 @@ This skill focuses on anchor text and link clarity. For tables, notices, tab pan
 
 - Work from the repository root.
 - Read `AGENTS.md` only if you need repository routing context.
-- Read `.github/skills/arm-content-editor/references/writing-style.md` only when changing prose around links beyond the anchor text.
+- Read `.github/skills/arm-content-editor/references/writing-style.md` only when changing prose around links.
 - For Learning Paths, read `.github/skills/arm-content-editor/references/learning-path-guidance.md` when link placement or `further_reading` is involved.
 
 ## Workflow
@@ -34,8 +34,7 @@ This skill focuses on anchor text and link clarity. For tables, notices, tab pan
 - Prefer destination-specific anchors such as `Docker install guide`, `Arm Developer resources`, or `Google Cloud firewall rules`.
 - Avoid anchors that only describe the mechanic, such as `click here`, `this link`, or `website`.
 - Avoid overlong anchors that wrap a whole sentence.
-- Use full internal paths, such as `/learning-paths/category/path-name/`.
-- Use full URLs for external sites that are not on `learn.arm.com`.
+- Follow `.github/skills/arm-content-editor/references/writing-style.md` for URL path format.
 - Don't change product names, tool names, URLs, or technical meaning to satisfy prose preferences.
 - Don't add speculative links. Verify internal targets or state when verification was not possible.
 

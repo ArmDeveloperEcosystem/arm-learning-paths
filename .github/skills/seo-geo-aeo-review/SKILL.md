@@ -9,9 +9,9 @@ Use this skill when Arm Learning Paths or install guides need a focused discover
 
 This skill covers:
 
-- **SEO**: search snippets, titles, headings, metadata, and natural keyword usage.
-- **GEO**: generative-engine selection signals, including authority, task coverage, and citation-ready structure.
-- **AEO**: direct answer readiness for developer questions and AI-generated summaries.
+- SEO: search snippets, titles, headings, metadata, and natural keyword usage.
+- GEO: generative-engine selection signals, including authority, task coverage, and citation-ready structure.
+- AEO: direct answer readiness for developer questions and AI-generated summaries.
 
 For focused front matter `description` edits only, use `.github/skills/metadata-description-update/SKILL.md`.
 
@@ -22,6 +22,7 @@ For focused front matter `description` edits only, use `.github/skills/metadata-
 - For Learning Paths, read `.github/skills/arm-content-editor/references/learning-path-guidance.md`.
 - For install guides, read `.github/skills/arm-content-editor/references/install-guide-guidance.md`.
 - Read `.github/skills/arm-content-editor/references/content-quality.md` only when broader clarity, accessibility, or Arm framing is in scope.
+- For Learning Paths discovery guidance, review `.github/skills/seo-geo-aeo-review/references/learning-paths-discoverability.md`.
 
 ## Workflow
 
@@ -43,8 +44,9 @@ For focused front matter `description` edits only, use `.github/skills/metadata-
    - Sections are scannable and can be safely summarized out of context.
    - Validation steps prove the learner reached the promised outcome.
    - Troubleshooting, next steps, or further reading answer likely follow-up questions.
-7. Make focused edits only when requested or clearly implied by the task. Preserve technical meaning, front matter structure, Hugo shortcodes, links, commands, and code blocks.
-8. Re-open changed sections and verify front matter, Markdown syntax, and internal links when practical.
+7. Provide suggestions based on findings in the format specified under `Response format`.
+8. Make focused edits only when a reviewer requests you to implement changes that you suggested. When making edits, preserve technical meaning, front matter structure, Hugo shortcodes, links, commands, and code blocks.
+9. After making updates, re-open changed sections and verify front matter, Markdown syntax, and internal links when practical.
 
 ## Review rules
 
@@ -52,8 +54,8 @@ For focused front matter `description` edits only, use `.github/skills/metadata-
 - Prefer verb-led titles such as `Install`, `Deploy`, `Configure`, `Analyze`, `Optimize`, or `Verify`.
 - Preserve content-type boundaries: install guides cover installation and verification; Learning Paths cover applied end-to-end tasks.
 - Use Arm-specific terminology naturally when it is supported by the content.
-- Do not add speculative keywords, unsupported performance claims, or marketing language.
-- Do not overfit content to AI agents at the expense of human readability.
+- Don't add speculative keywords, unsupported performance claims, or marketing language.
+- Don't overfit content to AI agents at the expense of human readability.
 
 ## Response format
 

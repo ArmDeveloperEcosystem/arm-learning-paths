@@ -33,30 +33,24 @@ Read only the guidance needed for the task. Don't load files that aren't necessa
 1. Identify whether the target is a Learning Path, install guide, or mixed content.
 2. Load the matching scoped guidance.
 3. Use repository search when cross-file consistency, links, terminology, or metadata depends on surrounding content.
-4. Suggest updates by exception in an ordered list with line numbers included. Don't comment on content that is already clear, correct, and fit for purpose.
-5. Make updates based on the suggestions accepted by the reviewer. This might be all suggested updates or a subset of updates ("make fixes for 1, 2, and 4," for example).
-6. Classify substantial files as prose-heavy, mixed, or code-heavy before judging length or density.
-7. Use the metadata description skill for focused `description` field updates.
-8. Use the SEO/GEO/AEO review skill for whole-page discoverability, AI-agent selection, answer-engine readiness, titles, headings, and search intent.
-9. Use the Markdown component skill for focused links, tables, notices, tab panes, and component syntax edits.
-10. Use the link text review skill for focused accessible anchor text cleanup.
-11. Use the stale content review skill for periodic maintenance scans and freshness triage.
-12. Use the code sample review skill for command accuracy, output formatting, code fence integrity, and token-heavy code or output blocks.
+4. Suggest updates in the format specified under `Response format`. Don't comment on content that is already clear, correct, and fit for purpose.
+5. When the reviewer accepts all or part of your submissions and asks you to proceed, go ahead and make updates.
 
-Do not recommend splitting content only because a file is long. Prefer semantic boundaries based on headings, task transitions, or conceptual changes.
+Don't recommend splitting content only because a file is long. Prefer semantic boundaries based on headings, task transitions, or conceptual changes.
 
 ## Editing workflow
 
-- Make focused edits that preserve the author's intent.
+- Make focused edits that preserve the author's intent. 
 - Preserve front matter, Hugo shortcodes, code fences, command syntax, file structure, and existing technical flow.
 - Prefer Arm-native framing and flag x86 assumptions.
 - Preserve content-type boundaries: install guides stay limited to installation and verification, while Learning Paths own one concrete developer task.
 - Keep tone natural and developer-focused. Avoid hype, generic praise, and unnecessary rewrites.
 - Verify internal links before changing them, or state when link verification was not possible.
 - Prioritize learner-blocking issues, incorrect technical guidance, scope drift, missing metadata, broken links, weak Arm framing, image issues, and unclear validation steps.
+- Classify substantial files as prose-heavy, mixed, or code-heavy before judging length or density.
 
 ## Response format
 
-For review requests, lead with findings in an ordered list by severity and include file and line references when available. Then add open questions, followed by a brief summary.
+For review requests, lead with findings in an ordered list by severity and type. Include file and line references when available. Then add open questions, followed by a brief summary.
 
 After the reviewer asks to implement suggested fixes, summarize the key changes and note any checks or verification performed.

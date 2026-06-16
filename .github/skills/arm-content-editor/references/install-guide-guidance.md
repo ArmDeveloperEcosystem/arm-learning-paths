@@ -1,4 +1,4 @@
-# Install guide guidance
+# Install guide-specific guidance
 
 Use this guidance when creating, editing, or reviewing content in `content/install-guides/**/*.md`.
 
@@ -49,7 +49,7 @@ Install guides should include:
    - Common failure cases.
    - Clear fixes.
 
-Uninstall instructions are optional.
+Uninstall and troubleshooting instructions are optional.
 
 ## Scope boundaries
 
@@ -80,29 +80,7 @@ The following commands use <tool> version <version>. The same commands work with
 
 Every install guide front matter must include a `description` field.
 
-- Write one sentence.
-- Describe the tool being installed and what it can be used for.
-- Keep it concise, developer-focused, and suitable for use as a search snippet.
-- Do not use vague summaries or marketing language.
-- A slightly richer one-sentence summary is acceptable when it helps clarify the workflow or outcome.
-
-Good example:
-
-```yaml
-description: Learn how to install Arm Compiler for Linux (ACfL) on Arm Linux (aarch64) to access the armclang C/C++ compiler, armflang Fortran compiler, and Arm Performance Libraries for HPC development.
-```
-
-Avoid:
-
-- Generic summaries that could apply to any page.
-- Marketing phrases such as `powerful`, `cutting-edge`, or `game-changing`.
-
-## Metadata optimization workflow
-
-When adding or revising `description` fields:
-
-- Use metadata descriptions to clarify which platform or tool, and what outcome.
-- Treat the description as a search snippet, not a generic summary.
+For description wording, examples, and update workflow, use `.github/skills/metadata-description-update/SKILL.md`.
 
 ## Recap section
 
@@ -113,9 +91,7 @@ Use this pattern:
 ```md
 ## Next steps
 
-In this section:
-- Briefly summarize what the user has learned or completed.
-- Suggest and link to a couple relevant Learning Paths if they exist.
+In this section, briefly summarize what the user has learned or completed. Suggest and link to a couple relevant Learning Paths if they exist.
 
 Keep this concise and encouraging. Do not repeat earlier content verbatim.
 ```

@@ -15,7 +15,7 @@ Use the script for repeatable inventory and counting. Use assistant judgment for
 
 - Work from the repository root.
 - Read `AGENTS.md` to locate shared guidance.
-- Read `references/image-guidance.md` before editing image alt text.
+- Read `references/image-guidance.md` before editing image alt text, captions, or image syntax.
 - When auditing a Learning Path or install guide, also read the matching scoped content guidance.
 
 ## Trigger
@@ -70,13 +70,10 @@ Use path/guide-level review to:
 ## Validation rules
 
 - Treat the script as a detector, not the final authority. It flags likely problems for review.
+- Use `references/image-guidance.md` as the source of truth for alt text, captions, placeholder text, `#center` syntax, and figure numbering.
 - Don't replace meaningful alt text only because it is long or short; judge whether it helps the learner complete the task.
-- Don't use placeholders such as `alt-txt`, `alt-text`, `image`, `img1`, `screenshot`, `graph`, or `output`.
-- Don't use captions as a substitute for alt text.
-- Keep `#center` attached directly to the alt text with no space before it.
 - Preserve valid local image paths and existing captions unless they are wrong, vague, or outdated.
-- Avoid `Figure 1:` style captions unless the content uses explicit numbered cross-references.
-- Preserve the repository image syntax, especially `![Descriptive alt text#center](image.png "Optional caption")`
+- Preserve repository image syntax unless syntax cleanup is the target of the edit.
 
 ## Error handling
 
