@@ -30,6 +30,17 @@ The output is similar to:
 
 For instructions to set up and install the AWS CDK CLI, see the [AWS CDK install guide](/install-guides/aws-cdk).
 
+Make sure you've installed Node.js:
+
+```bash
+node --version
+```
+
+The output is similar to:
+```output
+v26.2.0
+```
+
 ### Initialize a CDK project
 
 Create a directory for your CDK project and navigate to it:
