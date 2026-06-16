@@ -45,7 +45,7 @@ See [here](/install-guides/docker/) for setup.
 Better:
 
 ```md
-See the [Docker install guide](/install-guides/docker/) for setup.
+For setup instructions, see the [Docker install guide](/install-guides/docker/).
 ```
 
 Poor:
@@ -57,5 +57,5 @@ A list of all AWS instance types can be [viewed here](https://aws.amazon.com/ec2
 Better:
 
 ```md
-See the [Amazon EC2 instance types](https://aws.amazon.com/ec2/instance-types/) for a complete list.
+For a complete list, see [Amazon EC2 instance types](https://aws.amazon.com/ec2/instance-types/).
 ```
