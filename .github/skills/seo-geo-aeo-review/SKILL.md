@@ -22,7 +22,7 @@ For focused front matter `description` edits only, use `.github/skills/metadata-
 - For Learning Paths, read `.github/skills/arm-content-editor/references/learning-path-guidance.md`.
 - For install guides, read `.github/skills/arm-content-editor/references/install-guide-guidance.md`.
 - Read `.github/skills/arm-content-editor/references/content-quality.md` only when broader clarity, accessibility, or Arm framing is in scope.
-- For Learning Paths discovery guidance, review `.github/skills/seo-geo-aeo-review/references/learning-paths-discoverability.md`.
+- For additional Learning Paths discovery guidance, review `.github/skills/seo-geo-aeo-review/references/learning-paths-discoverability.md`.
 
 ## Workflow
 

@@ -26,16 +26,15 @@ This skill is for search and discovery metadata. For draft visibility metadata, 
 - Multi-page install guide directory: update the main entry page and public sub-pages that need descriptions.
 - Preserve existing front matter order when practical. If adding a missing description, place it near `title`.
 - Preserve body content, shortcodes, links, commands, code blocks, and expected output. Don't edit anything that isn't metadata.
+- Skip `_next-steps.md` and any file without front matter unless the user explicitly asks how to handle it.
 
 ## Workflow
 
 1. Identify whether the target is an install guide content page, a Learning Path `_index.md`, or a Learning Path content page.
-2. Find target Markdown files from the scope rules.
-3. Skip `_next-steps.md` and any file without front matter unless the user explicitly asks how to handle it.
-4. Read the title, existing description, headings, introduction, task flow, code or command context, and validation or conclusion.
-5. Add or revise the `description` field in front matter based on quality rules.
-6. Re-open or search the edited files to verify each changed target has one `description` field.
-7. Report files changed and note any skipped files.
+2. Read the title, existing description, headings, introduction, task flow, code or command context, and validation or conclusion.
+3. Add or revise the `description` field in front matter based on quality rules.
+4. After editing, re-open or search the files to verify each changed target has one `description` field.
+5. Report files changed and note any skipped files.
 
 ## Description quality rules
 
