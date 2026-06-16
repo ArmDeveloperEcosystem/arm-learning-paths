@@ -47,10 +47,11 @@ Check for:
 
 1. Identify the review scope and whether the request is editorial, technical, or mixed.
 2. Inspect surrounding prose before judging a code block; code samples should be evaluated in context.
-3. For review requests, report issues by file and line when possible, ordered by learner impact.
-4. For edit requests, report issues and suggest focused changes that preserve technical intent and existing repository patterns.
-5. After the reviewer accepts suggestions, make changes, then re-scan edited areas for code fence integrity, language tags, and output lead-ins.
-6. Report what changed and note any technical assumptions or checks not performed.
+3. Depending on the type of review, suggest fixes as follows:
+  - For review requests, report issues by file and line when possible, ordered by learner impact.
+  - For edit requests, report issues and suggest focused changes that preserve technical intent and existing repository patterns.
+4. After the reviewer accepts suggestions, make changes, then re-scan edited areas for code fence integrity, language tags, and output lead-ins.
+5. Report what changed and note any technical assumptions or checks not performed.
 
 ## Validation rules
 
