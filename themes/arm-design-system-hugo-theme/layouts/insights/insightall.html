@@ -1,0 +1,63 @@
+{{/*
+Insight content page.
+
+Where it is used:
+    - /insights/:insight/
+
+Called from:
+    - baseof
+*/}}
+
+{{ define "main" }}
+
+{{ $tags := slice }}
+{{ with .Params.insight_type }}{{ $tags = $tags | append . }}{{ end }}
+{{ with .Params.platform }}{{ $tags = $tags | append . }}{{ end }}
+{{ range .Params.operatingsystems }}{{ $tags = $tags | append . }}{{ end }}
+{{ with .Params.goal }}{{ $tags = $tags | append . }}{{ end }}
+{{ range .Params.tags_general }}{{ $tags = $tags | append . }}{{ end }}
+
+<div class="c-row md:is-collapsed u-gap-1-1/2 u-flex-nowrap u-padding-top-1">
+    <div class="c-col lg:c-col-3 xl:c-col-2 u-hide lg:u-display-block u-flex-shrink-0">
+        <div class="left-nav-pane">
+            <h6 class="u-margin-top-1/2" style="font-size:1em; font-weight: normal;">Insights</h6>
+            <p class="insight-kind-label">{{ .Params.insight_type }}</p>
+            {{ partial "general-formatting/github-links.html" . }}
+        </div>
+    </div>
+
+    <div class="c-col lg:c-col-9 xl:c-col-10">
+        <div class="content-box insight-question-card">
+            <p class="card-subject u-margin-top-0 u-margin-bottom-1/2">{{ upper .Params.insight_type }}</p>
+            <h2>{{ default .Title .Params.question }}</h2>
+            <p>{{ .Params.summary }}</p>
+
+            <div class="insight-metadata-grid">
+                {{ with .Params.platform }}
+                    <div><span>Platform</span><strong>{{ . }}</strong></div>
+                {{ end }}
+                {{ with .Params.operatingsystems }}
+                    <div><span>OS</span><strong>{{ delimit . ", " }}</strong></div>
+                {{ end }}
+                {{ with .Params.goal }}
+                    <div><span>Goal</span><strong>{{ . }}</strong></div>
+                {{ end }}
+                {{ with .Params.minutes_to_complete }}
+                    <div><span>Read time</span><strong>{{ partial "server-side-processing/time-beautifier.html" . }}</strong></div>
+                {{ end }}
+            </div>
+
+            <div class="insight-tag-row">
+                {{ range $tags }}
+                    <ads-tag>{{ . }}</ads-tag>
+                {{ end }}
+            </div>
+        </div>
+
+        <div class="content-box markdown-content-div insight-answer-card">
+            {{ partial "general-formatting/markdown-content-formatting.html" .Content }}
+        </div>
+    </div>
+</div>
+
+{{ end }}

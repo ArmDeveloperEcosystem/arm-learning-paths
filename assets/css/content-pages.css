@@ -436,3 +436,63 @@ html[theme='dark'] .incorrect-explain {color: #e86868} /* 27% lighter than arm's
     padding-right: 16px;
     font-size: 16px;
 }
+
+
+/* Insight content pages
+*******************************************************************/
+.insight-kind-label {
+    color: var(--arm-light-grey);
+    font-size: 0.9rem;
+    margin-top: 0;
+}
+
+.insight-question-card h2 {
+    margin-top: 0;
+}
+
+.insight-question-card > p:not(.card-subject) {
+    color: var(--arm-light-grey);
+    font-size: 1.1rem;
+    line-height: 1.45;
+}
+
+.insight-metadata-grid {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    margin-top: 20px;
+    margin-bottom: 18px;
+}
+
+.insight-metadata-grid div {
+    border: 1px solid rgba(163, 168, 174, 0.25);
+    border-radius: 4px;
+    padding: 10px 12px;
+}
+
+.insight-metadata-grid span,
+.insight-metadata-grid strong {
+    display: block;
+}
+
+.insight-metadata-grid span {
+    color: #a3a8ae;
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+.insight-metadata-grid strong {
+    color: white;
+    font-weight: 500;
+}
+
+.insight-tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.insight-answer-card {
+    margin-top: 20px;
+}

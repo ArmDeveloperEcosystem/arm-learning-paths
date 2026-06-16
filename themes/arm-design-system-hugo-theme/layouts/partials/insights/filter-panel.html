@@ -1,0 +1,12 @@
+{{/*
+Filter panel for Insights list pages.
+
+Called from:
+    - insights/list.html
+*/}}
+
+{{ partial "filter-search-sort/closed-expansion.html" (dict "context" .context "displayname" "Insight type" "routing" "insight_type" "tagnames" .insight_types)}}
+{{ partial "filter-search-sort/closed-expansion.html" (dict "context" .context "displayname" "Platform" "routing" "platform" "tagnames" .platforms)}}
+{{ partial "filter-search-sort/closed-expansion.html" (dict "context" .context "displayname" "OS" "routing" "operatingsystems" "tagnames" .operatingsystems)}}
+{{ partial "filter-search-sort/closed-expansion.html" (dict "context" .context "displayname" "Goal" "routing" "goal" "tagnames" .goals)}}
+{{ partial "filter-search-sort/closed-expansion.html" (dict "context" .context "displayname" "Tags" "routing" "tags_general" "tagnames" .tags_general)}}

@@ -465,6 +465,78 @@ html[theme='dark'] .agentic-guidance-summary {
 }
 
 
+/* Insights list styling
+*******************************************************************/
+.insights-search-band {
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-bottom: 16px;
+}
+
+.insights-search-band ads-search {
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.insights-quick-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.insights-quick-tags button {
+    min-width: 104px;
+    border: 1px solid rgba(163, 168, 174, 0.35);
+    border-radius: 18px;
+    background-color: var(--arm-light-grey-alt);
+    color: var(--arm-dark-grey);
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+    padding: 6px 18px;
+    transition: border-color 0.2s ease-in-out, color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+html[theme='dark'] .insights-quick-tags button {
+    background-color: var(--arm-color-base);
+    color: var(--arm-light-grey);
+}
+
+.insights-quick-tags button:hover {
+    border-color: var(--arm-green);
+    color: var(--arm-green);
+}
+
+ads-card.insight-card {
+    --ads-card-border-radius: 6px;
+}
+
+.insight-title-div {
+    min-height: 58px;
+}
+
+.insight-summary {
+    color: var(--arm-dark-grey);
+    font-size: 0.95rem;
+    line-height: 1.4;
+    margin-top: 0;
+    min-height: 56px;
+}
+
+html[theme='dark'] .insight-summary {
+    color: var(--arm-light-grey);
+}
+
+.insight-tag-details {
+    min-height: 24px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+}
+
+
 
 
 

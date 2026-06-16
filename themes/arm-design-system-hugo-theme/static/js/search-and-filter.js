@@ -561,6 +561,9 @@ document.addEventListener("DOMContentLoaded", function () {
     else if (document.title.includes('Agentic Guidance')) {
         search_box.inputChangeHandler = searchHandler_LearningPaths;
     }
+    else if (document.title.includes('Insights')) {
+        search_box.inputChangeHandler = searchHandler_LearningPaths;
+    }
 
     // Handle search term from URL
     let url_str = window.location.search;

@@ -1,0 +1,91 @@
+{{/*
+Insights list page.
+
+Where it is used:
+    - /insights/
+
+Called from:
+    - baseof
+*/}}
+
+{{ define "main" }}
+
+{{ $insights_to_list := where .Site.RegularPages "Section" "insights" }}
+{{ $insight_types := slice }}
+{{ $platforms := slice }}
+{{ $operatingsystems := slice }}
+{{ $goals := slice }}
+{{ $tags_general := slice }}
+
+{{ range $insights_to_list }}
+    {{ with .Params.insight_type }}
+        {{ if not (in $insight_types .) }}{{ $insight_types = $insight_types | append . }}{{ end }}
+    {{ end }}
+    {{ with .Params.platform }}
+        {{ if not (in $platforms .) }}{{ $platforms = $platforms | append . }}{{ end }}
+    {{ end }}
+    {{ range .Params.operatingsystems }}
+        {{ if not (in $operatingsystems .) }}{{ $operatingsystems = $operatingsystems | append . }}{{ end }}
+    {{ end }}
+    {{ with .Params.goal }}
+        {{ if not (in $goals .) }}{{ $goals = $goals | append . }}{{ end }}
+    {{ end }}
+    {{ range .Params.tags_general }}
+        {{ if not (in $tags_general .) }}{{ $tags_general = $tags_general | append . }}{{ end }}
+    {{ end }}
+{{ end }}
+
+{{ $insight_types = sort $insight_types }}
+{{ $platforms = sort $platforms }}
+{{ $operatingsystems = sort $operatingsystems }}
+{{ $goals = sort $goals }}
+{{ $tags_general = sort $tags_general }}
+
+<div class="c-row md:is-collapsed u-gap-1-1/2 u-flex-nowrap u-padding-top-2 u-padding-bottom-2-1/2">
+    <div class="c-col u-hide lg:u-display-block u-flex-shrink-0 filter-column-div">
+        {{ partial "insights/filter-panel.html" (dict
+            "context" .
+            "insight_types" $insight_types
+            "platforms" $platforms
+            "operatingsystems" $operatingsystems
+            "goals" $goals
+            "tags_general" $tags_general
+        )}}
+    </div>
+
+    <div class="c-col">
+        <div class="insights-search-band">
+            <ads-search class="u-margin-top-0" has-search-button id="search-box" placeholder="What would you like to know?"></ads-search>
+            <div class="insights-quick-tags">
+                {{ range first 10 $tags_general }}
+                    <button type="button" onclick="document.querySelector('ads-checkbox.tag-{{ . | urlize }}')?.click()">{{ . }}</button>
+                {{ end }}
+            </div>
+        </div>
+
+        {{ partial "filter-search-sort/active-filter-and-sort-bar.html" (dict "content_to_list" $insights_to_list "page_type" "insights")}}
+
+        <div class="c-row">
+            <div class="c-col c-col-12">
+                <hr id="divider-line">
+            </div>
+            <div class="c-col c-col-12">
+                <div id="path-container" class="u-display-grid u-gap-1 sm:u-grid-columns-1 md:u-grid-columns-2 xl:u-grid-columns-2 u-margin-top-1">
+                    {{ range sort $insights_to_list "Date" "desc" }}
+                        <div class='path-div search-div gradient-box
+                            {{ with .Params.insight_type }} tag-{{ . | urlize }} {{ end }}
+                            {{ with .Params.platform }} tag-{{ . | urlize }} {{ end }}
+                            {{ range .Params.operatingsystems }} tag-{{ . | urlize }} {{ end }}
+                            {{ with .Params.goal }} tag-{{ . | urlize }} {{ end }}
+                            {{ range .Params.tags_general }} tag-{{ . | urlize }} {{ end }}
+                            '>
+                            {{ partial "insights/card.html" (dict "insight" .) }}
+                        </div>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ end }}
