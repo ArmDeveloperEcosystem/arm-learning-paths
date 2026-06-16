@@ -350,6 +350,12 @@ function applyTopNavHighlightColor() {
         --ads-ui-green-65: ${highlightColor};
         --ads-ui-green-70: ${highlightColor};
         --ads-ui-green-80: ${highlightColor};
+        --ads-search-border-color: ${highlightColor};
+        --ads-search-border-color-focus: ${highlightColor};
+        --ads-search-border-color-hover: ${highlightColor};
+        --ads-search-button-color: ${highlightColor};
+        --ads-search-button-color-hover: ${highlightColor};
+        --ads-search-input-color-focus: ${highlightColor};
       }
 
       a:hover,
@@ -379,6 +385,29 @@ function applyTopNavHighlightColor() {
         stroke: ${highlightColor} !important;
       }
 
+      button[aria-expanded="true"],
+      button[aria-pressed="true"],
+      [role="button"][aria-expanded="true"],
+      [role="button"][aria-pressed="true"],
+      button[aria-expanded="true"] > svg,
+      button[aria-expanded="true"] > svg *,
+      button[aria-pressed="true"] > svg,
+      button[aria-pressed="true"] > svg *,
+      [role="button"][aria-expanded="true"] > svg,
+      [role="button"][aria-expanded="true"] > svg *,
+      [role="button"][aria-pressed="true"] > svg,
+      [role="button"][aria-pressed="true"] > svg *,
+      button[aria-expanded="true"] > i,
+      button[aria-pressed="true"] > i,
+      [role="button"][aria-expanded="true"] > i,
+      [role="button"][aria-pressed="true"] > i {
+        color: ${highlightColor} !important;
+        -webkit-text-fill-color: ${highlightColor} !important;
+        -webkit-text-stroke-color: ${highlightColor} !important;
+        fill: ${highlightColor} !important;
+        stroke: ${highlightColor} !important;
+      }
+
       a:hover::before,
       a:hover::after,
       button:hover::before,
@@ -388,7 +417,15 @@ function applyTopNavHighlightColor() {
       [role="link"]:hover::before,
       [role="link"]:hover::after,
       [role="menuitem"]:hover::before,
-      [role="menuitem"]:hover::after {
+      [role="menuitem"]:hover::after,
+      button[aria-expanded="true"]::before,
+      button[aria-expanded="true"]::after,
+      button[aria-pressed="true"]::before,
+      button[aria-pressed="true"]::after,
+      [role="button"][aria-expanded="true"]::before,
+      [role="button"][aria-expanded="true"]::after,
+      [role="button"][aria-pressed="true"]::before,
+      [role="button"][aria-pressed="true"]::after {
         background-color: ${highlightColor} !important;
         border-color: ${highlightColor} !important;
       }
@@ -413,6 +450,28 @@ function applyTopNavHighlightColor() {
         color: #00C1DE !important;
         -webkit-text-fill-color: #00C1DE !important;
       }
+
+      [class*="search"] input,
+      [class*="search"] input:focus,
+      [class*="search"] [role="searchbox"],
+      [class*="search"] [role="searchbox"]:focus {
+        border-bottom-color: ${highlightColor} !important;
+        caret-color: ${highlightColor} !important;
+        outline-color: ${highlightColor} !important;
+      }
+
+      [class*="search"] svg,
+      [class*="search"] svg *,
+      [class*="search"] i,
+      [class*="search"] button,
+      [class*="search"] button *,
+      [class*="search"] [role="button"],
+      [class*="search"] [role="button"] * {
+        color: ${highlightColor} !important;
+        -webkit-text-fill-color: ${highlightColor} !important;
+        fill: ${highlightColor} !important;
+        stroke: ${highlightColor} !important;
+      }
     `;
     shadowRoot.appendChild(style);
   }
@@ -422,20 +481,25 @@ function applyTopNavHighlightColor() {
     if (
       isArmGreen(styles.color) ||
       isArmGreen(styles.webkitTextFillColor) ||
+      isArmGreen(styles.webkitTextStrokeColor) ||
       isArmGreen(styles.fill) ||
-      isArmGreen(styles.stroke)
+      isArmGreen(styles.stroke) ||
+      isArmGreen(styles.borderColor) ||
+      isArmGreen(styles.backgroundColor)
     ) {
       element.style.setProperty("color", highlightColor, "important");
       element.style.setProperty("-webkit-text-fill-color", highlightColor, "important");
       element.style.setProperty("-webkit-text-stroke-color", highlightColor, "important");
       element.style.setProperty("fill", highlightColor, "important");
       element.style.setProperty("stroke", highlightColor, "important");
+      element.style.setProperty("border-color", highlightColor, "important");
     }
   });
 
   if (!topnav.learningPathsHighlightListenersAttached) {
     topnav.addEventListener("mouseover", () => window.requestAnimationFrame(applyTopNavHighlightColor));
     topnav.addEventListener("focusin", () => window.requestAnimationFrame(applyTopNavHighlightColor));
+    topnav.addEventListener("click", () => scheduleTopNavHighlightColor());
     topnav.learningPathsHighlightListenersAttached = true;
   }
 }

@@ -229,7 +229,6 @@ arm-top-navigation.lp-top-navigation {
     --ads-ui-green-80: var(--lp-accent-secondary);
 }
 
-
 /* Fix Masthead Height */
 #expanded-masthead  {
         background-color: transparent;
