@@ -7,7 +7,7 @@ description: Add or verify draft metadata for new Arm Learning Paths and install
 
 Use this skill when new Learning Path or install guide content needs to remain unpublished until technical and editorial review is complete.
 
-Work from the repository root and preserve existing front matter values. Preserve existing front matter order where possible. 
+Work from the repository root and preserve existing front matter values and order where possible. Don't edit anything else in the file. 
 
 ## Workflow
 
@@ -29,3 +29,7 @@ Work from the repository root and preserve existing front matter values. Preserv
     ```yaml
     draft: true
     ```
+
+## Response format
+
+List the file(s) that were updated. 
