@@ -4,7 +4,7 @@ draft: true
 cascade:
     draft: true
 
-description: Learn how to measure and observe Go garbage collection metrics on AWS Graviton instances.
+description: Learn how to run Go benchmarks on AWS Graviton, capture GC metrics and pprof profiles, and establish a reproducible default-GC baseline for memory-intensive workloads on Arm.
 
 minutes_to_complete: 75
 
@@ -32,7 +32,6 @@ cloud_service_providers:
 armips:
     - Neoverse
 tools_software_languages:
-    - AWS
     - Go
 operatingsystems:
     - Linux

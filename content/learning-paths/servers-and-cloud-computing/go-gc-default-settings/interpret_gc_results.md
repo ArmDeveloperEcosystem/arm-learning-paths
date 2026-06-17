@@ -8,13 +8,13 @@ layout: learningpathall
 
 ## Understanding the benchmark metrics
 
-To understand better what these benchmarks results are showing, firt open the Benchstat summary:
+To understand what the benchmark results are showing, first open the Benchstat summary:
 
 ```bash
 cat default_gc_benchstat.txt
 ```
 
-The the metrics you see explain the following:
+The metrics you see explain the following:
 
 | Metric | Read |
 | --- | --- |
@@ -37,6 +37,8 @@ cat cpu_default_top.txt
 
 Look for functions that dominate CPU time. In an allocation-heavy benchmark, you can expect to see time in string handling, allocation paths, and some runtime or GC support functions.
 
+The `flat` column shows CPU time spent directly in that function. The `cum` (cumulative) column includes time spent in the function and all functions it called. A function with low `flat` but high `cum` is spending most of its time in callees, which can point to allocation chains or deep call stacks.
+
 On the validated `m8g.xlarge` instance, the top CPU profile entries included string scanning, string concatenation, split handling, and allocation paths:
 
 ```output
@@ -48,11 +50,9 @@ On the validated `m8g.xlarge` instance, the top CPU profile entries included str
      0.72s  4.56% 53.36%      5.17s 32.76%  runtime.mallocgc
 ```
 
-Open the heap allocation profile summary:
+`IndexByteString` and `concatstrings` dominate because the benchmark splits the payload with `strings.Split` (which scans for `;` byte-by-byte) and builds `key:length` strings with `+` concatenation on every iteration. These operations create a large volume of short-lived strings, giving the GC constant work to do. On Graviton, `pprof` makes these allocation chains directly visible because the Arm64 stack unwinder captures the full call path without frame pointer ambiguity.
 
-```bash
-cat mem_default_alloc_top.txt
-```
+Open the heap allocation profile summary:
 
 Look for application functions that allocate the most heap memory. Reducing allocation volume in those functions usually gives the Go GC less work to do.
 
@@ -68,7 +68,7 @@ On the validated `m8g.xlarge` instance, the allocation profile showed that `stri
 
 ## Keeping a baseline to compare to future changes
 
-These results show your default Go GC baseline stats for this benchmarking app on AWS Graviton. By keeping the following files together (eg, each stored in their own zip file, folder, etc) you can easily see how making code changes affects your apps overall performance:
+These results show your default Go GC baseline for this benchmarking app on AWS Graviton. By keeping the following files together — for example, in a versioned folder or archive — you can see how code changes affect overall performance:
 
 ```output
 default_runtime_baseline.txt
@@ -81,133 +81,8 @@ mem_default.out
 mem_default_alloc_top.txt
 ```
 
-## Experiment with Code Changes that influence GC Behavior
-Now that you have a baseline, you can experiment with code changes that influence GC behavior. For example, you could try:
+## What you've accomplished and what's next
 
-## Challenge 1
+In this section, you ran Benchstat to summarize ten benchmark samples and inspected CPU and heap profiles to identify the hottest code paths. You now have a documented default-GC baseline showing operation time, allocation rate, GC frequency, and stop-the-world pause costs on AWS Graviton.
 
-You just found out that the payload size this benchmark is intended to represent is actually only 128 records instead of 2048. What changes can we make from the baseline to test whether optimizing for this smaller workload affects GC frequency, pause times, and overall application performance?
-
-### Idea: Reduce the payload size
-
-### How
-
-```go
-payload := strings.Repeat(
-    "name=arm&runtime=go&gc=default&value=12345;",
-    512,
-)
-```
-
-### Why
-
-A smaller payload creates fewer temporary objects and less garbage each iteration.
-
----
-
-## Challenge 2
-
-After profiling the application, you discover that the input payload rarely changes between requests. What modifications can we make to reuse preprocessing work and determine whether reducing repeated allocations improves GC behavior and throughput?
-
-### Idea: Move `strings.Split(payload, ";")` outside the benchmark loop
-
-### How
-
-```go
-parts := strings.Split(payload, ";")
-
-b.ResetTimer()
-
-for i := 0; i < b.N; i++ {
-    ...
-}
-```
-
-### Why
-
-This avoids repeatedly allocating the same slice of records on every iteration.
-
----
-
-## Challenge 3
-
-The benchmark currently creates a new output buffer for every operation, but production code processes millions of requests using the same worker. How can we modify the benchmark to reuse memory and evaluate the impact on GC activity and memory consumption?
-
-### Idea: Reuse the output slice
-
-### How
-
-```go
-out := make([]string, 0, len(parts))
-
-for i := 0; i < b.N; i++ {
-    out = out[:0]
-    ...
-}
-```
-
-### Why
-
-Reusing the backing array reduces allocations and GC pressure.
-
----
-
-## Challenge 4
-
-A CPU profile shows that string parsing is one of the hottest code paths in the application. What changes can we make to reduce temporary allocations during parsing and measure whether this reduces GC overhead?
-
-### Idea: Replace `strings.SplitN()` with `strings.IndexByte()`
-
-### How
-
-```go
-idx := strings.IndexByte(part, '=')
-if idx >= 0 {
-    key := part[:idx]
-    value := part[idx+1:]
-    ...
-}
-```
-
-### Why
-
-This avoids allocating a temporary `[]string` for every record processed.
-
----
-
-## Challenge 5
-
-Product requirements change and the application no longer needs to generate derived `"key:length"` strings. What modifications can we make to avoid unnecessary string allocations and test their effect on garbage collection performance?
-
-### Idea: Avoid creating new strings in the hot loop
-
-### How
-
-```go
-out = append(out, fields[0])
-```
-
-### Why
-
-Instead of building `"key:length"` strings, store existing strings or simpler values to reduce allocations.
-
----
-
-## Challenge 6
-
-Usage analytics show that most customers send payloads that are half the size represented by the current benchmark. How can we adjust the workload to better reflect real-world traffic and evaluate whether the resulting reduction in allocations improves GC efficiency?
-
-### Idea: Reduce the number of records processed
-
-### How
-
-```go
-payload := strings.Repeat(
-    "name=arm&runtime=go&gc=default&value=12345;",
-    1024,
-)
-```
-
-### Why
-
-Fewer records means less allocation work and fewer GC cycles.
+In the next section, you'll apply code changes to the benchmark and measure how each change affects these metrics.

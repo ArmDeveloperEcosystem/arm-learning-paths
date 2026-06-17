@@ -64,9 +64,23 @@ go test ./parsebench \
     -benchtime=5s | tee default_gc_benchmark.txt
 ```
 
-The output is tee'd to a file which includes the benchmark's outputs of operation time, allocation rate, allocation count, GC cycles per operation, pause time per operation, and pause time per GC cycle.
+You should see ten lines of benchmark output similar to this:
 
-With this information saved, we can now aggregate the repeated samples with Benchstat:
+```output
+goos: linux
+goarch: arm64
+pkg: example.com/go-gc-default/parsebench
+BenchmarkParseAndAllocate-4    29803    169823 ns/op    0.04553 gc/op    99843 stw-ns/GC    4544 stw-ns/op    163840 B/op    4098 allocs/op
+BenchmarkParseAndAllocate-4    29912    170104 ns/op    0.04601 gc/op    98762 stw-ns/GC    4541 stw-ns/op    163840 B/op    4098 allocs/op
+BenchmarkParseAndAllocate-4    29887    170211 ns/op    0.04578 gc/op    99102 stw-ns/GC    4538 stw-ns/op    163840 B/op    4098 allocs/op
+...
+PASS
+ok      example.com/go-gc-default/parsebench    58.243s
+```
+
+The output is saved to a file that includes the benchmark's measurements of operation time, allocation rate, allocation count, GC cycles per operation, pause time per operation, and pause time per GC cycle.
+
+With this saved, you can now aggregate the repeated samples with Benchstat:
 
 ```bash
 benchstat default_gc_benchmark.txt | tee default_gc_benchstat.txt
@@ -122,10 +136,38 @@ go test -c -o parsebench.test ./parsebench
     -test.memprofile mem_default.out | tee default_gc_profile_run.txt
 ```
 
+You should see output similar to this:
+
+```output
+goos: linux
+goarch: arm64
+pkg: example.com/go-gc-default/parsebench
+BenchmarkParseAndAllocate-4        66757            179173 ns/op                 0.06936 gc/op       75968 stw-ns/GC          5269 stw-ns/op      163840 B/op           4098 allocs/op
+PASS
+```
+
 Inspect the CPU profile to display the functions that consumed the most CPU time during benchmark execution, ranked from highest to lowest:
 
 ```bash
 go tool pprof -top ./parsebench.test cpu_default.out | tee cpu_default_top.txt
+```
+
+You should see output similar to this:
+
+```output
+File: parsebench.test
+Build ID: dda39872c1dff6ff2f22c39246cb2d89979b90e0
+Type: cpu
+Time: 2026-06-17 20:09:37 UTC
+Duration: 13.78s, Total samples = 15.74s (114.21%)
+Showing nodes accounting for 14.49s, 92.06% of 15.74s total
+Dropped 162 nodes (cum <= 0.08s)
+      flat  flat%   sum%        cum   cum%
+     2.42s 15.37% 15.37%         5s 31.77%  runtime.concatstrings
+     2.40s 15.25% 30.62%      2.40s 15.25%  internal/bytealg.IndexByteString
+     1.05s  6.67% 37.29%      7.72s 49.05%  strings.genSplit
+     0.86s  5.46% 42.76%      1.46s  9.28%  runtime.mallocgcTiny
+     0.80s  5.08% 47.84%      2.71s 17.22%  runtime.mallocgcSmallScanNoHeader
 ```
 
 Inspect the heap allocation profile to display the functions responsible for allocating the most total memory over the lifetime of the benchmark, ranked from highest to lowest.
@@ -134,7 +176,25 @@ Inspect the heap allocation profile to display the functions responsible for all
 go tool pprof -top -alloc_space ./parsebench.test mem_default.out | tee mem_default_alloc_top.txt
 ```
 
-You now have a default-GC benchmark result, a Benchstat summary, and CPU and heap profiles from the same workload.  From here, we can dive deeper into analyzing all of these results.
+You should see output similar to this:
+
+```output
+File: parsebench.test
+Build ID: dda39872c1dff6ff2f22c39246cb2d89979b90e0
+Type: alloc_space
+Time: 2026-06-17 20:09:50 UTC
+Showing nodes accounting for 11.69GB, 99.94% of 11.69GB total
+Dropped 37 nodes (cum <= 0.06GB)
+      flat  flat%   sum%        cum   cum%
+    7.60GB 65.03% 65.03%     7.60GB 65.03%  strings.genSplit
+    4.08GB 34.91% 99.94%    11.69GB 99.94%  example.com/go-gc-default/parsebench.BenchmarkParseAndAllocate
+         0     0% 99.94%     2.90GB 24.80%  strings.Split (inline)
+         0     0% 99.94%     4.70GB 40.22%  strings.SplitN (inline)
+         0     0% 99.94%    11.69GB 99.94%  testing.(*B).launch
+         0     0% 99.94%    11.69GB 99.95%  testing.(*B).runN
+```
+
+You now have a default-GC benchmark result, a Benchstat summary, and CPU and heap profiles from the same workload. From here, you can dive deeper into analyzing all of these results.
 
 
 
