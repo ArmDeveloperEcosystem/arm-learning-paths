@@ -15,11 +15,12 @@ learning_objectives:
 prerequisites:
     - Familiarity with C++ development and compiling programs from the command line
     - A Windows on Arm machine with [Visual Studio](/install-guides/vs-woa/) and the C++ desktop development tools installed
+
+author: Tom Dunkle
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Tom Dunkle
 
 ### Tags
 skilllevels: Introductory
@@ -51,8 +52,6 @@ further_reading:
         title: Arm performance optimization resources
         link: https://learn.arm.com/learning-paths/laptops-and-desktops/
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

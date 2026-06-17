@@ -14,12 +14,12 @@ learning_objectives:
 prerequisites:
     - An installation of Arm Development Studio.
     - A basic understanding of Rust programming.
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author: Ronan Synnott
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory

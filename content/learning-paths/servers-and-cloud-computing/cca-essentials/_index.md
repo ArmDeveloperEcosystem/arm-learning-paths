@@ -15,14 +15,15 @@ prerequisites:
     - An AArch64 or x86_64 computer running Linux. You can use cloud instances, see this list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
     - Completion of [Get Started with CCA Attestation and Veraison](/learning-paths/servers-and-cloud-computing/cca-veraison/) Learning Path.
     - Completion of the [Run an application in a Realm using the Arm Confidential Computing Architecture (CCA)](/learning-paths/servers-and-cloud-computing/cca-container/) Learning Path.
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author: 
     - Arnaud de Grandmaison
     - Paul Howard
     - Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -40,7 +41,6 @@ tools_software_languages:
     - Veraison
     - Runbook
 
-    
 further_reading:
     - resource:
         title: Arm Confidential Compute Architecture
@@ -58,7 +58,6 @@ further_reading:
         title: Realm Management Monitor specification
         link: https://developer.arm.com/documentation/den0137/latest/
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

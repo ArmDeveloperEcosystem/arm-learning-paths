@@ -13,11 +13,12 @@ learning_objectives:
 
 prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11.
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -35,7 +36,6 @@ further_reading:
         title: Get started with Arm64EC
         link: https://learn.microsoft.com/en-us/windows/arm/arm64ec-build
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

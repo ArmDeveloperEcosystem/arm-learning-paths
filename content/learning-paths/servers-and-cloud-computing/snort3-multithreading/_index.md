@@ -13,11 +13,12 @@ learning_objectives:
 prerequisites:
     - An Arm-based instance from a cloud provider, or an Arm server running Ubuntu 20.04 or 22.04.
     - A basic understanding of Snort's operation and configuration.
+
+author: Preema Merlin Dsouza
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Preema Merlin Dsouza
 
 ### Tags
 skilllevels: Introductory
@@ -46,7 +47,6 @@ further_reading:
         title: Performance Optimization for NGFW Whitepaper 
         link: https://files.techmahindra.com/static/img/pdf/next-generation-firewall.pdf
         type: blog
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

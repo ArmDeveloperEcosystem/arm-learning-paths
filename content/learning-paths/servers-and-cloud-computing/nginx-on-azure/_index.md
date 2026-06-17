@@ -11,14 +11,14 @@ learning_objectives:
     - Configure and test a static website with NGINX on the virtual machine
     - Run baseline NGINX performance tests with ApacheBench (ab) on Ubuntu Pro 24.04 LTS Arm64
 
-
 prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -49,7 +49,6 @@ further_reading:
       title: NGINX on Azure virtual machines
       link: https://docs.nginx.com/nginx/deployment-guides/microsoft-azure/virtual-machines-for-nginx/
       type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

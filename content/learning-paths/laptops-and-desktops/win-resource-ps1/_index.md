@@ -15,11 +15,12 @@ learning_objectives:
 prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11
     - A code editor such as [Visual Studio Code for Windows on Arm](https://code.visualstudio.com/docs/?dv=win32arm64user) 
+
+author: Ruifeng Wang
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Ruifeng Wang
 
 ### Tags
 skilllevels: Introductory
@@ -31,8 +32,6 @@ tools_software_languages:
     - PowerShell
 operatingsystems:
     - Windows
-
-
 
 further_reading:
     - resource:
@@ -47,8 +46,6 @@ further_reading:
         title: Arm64EC - Build and port apps for native performance on Arm
         link: https://learn.microsoft.com/en-us/windows/arm/arm64ec
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

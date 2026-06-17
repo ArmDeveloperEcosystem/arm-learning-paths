@@ -15,11 +15,12 @@ prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
     - A machine with [Docker](/install-guides/docker/) installed
     - Familiarity with distributed computing concepts and the [Apache Spark architecture](https://spark.apache.org/docs/latest/)
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ### Tags
 skilllevels: Advanced
@@ -34,7 +35,7 @@ tools_software_languages:
     - Apache Spark
     - Python
     - Docker
- 
+
 operatingsystems:
     - Linux
 

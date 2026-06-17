@@ -1,7 +1,7 @@
 ---
 title: Fine-tune neural graphics models using Model Gym
 description: Learn how to fine-tune and evaluate Neural Super Sampling (NSS) models using PyTorch and Arm's Model Gym API with hardware-aware optimization.
-   
+
 minutes_to_complete: 45
 
 who_is_this_for: This is an advanced topic for developers exploring neural graphics and interested in training and deploying upscaling models like Neural Super Sampling (NSS) using PyTorch and Arm’s hardware-aware backend.
@@ -16,11 +16,12 @@ prerequisites:
     - Basic understanding of PyTorch and machine learning concepts
     - A development machine running Ubuntu 22.04, with a CUDA-capable NVIDIA® GPU
     - CUDA Toolkit version 11.8 or later
+
+author: Annie Tallund
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Annie Tallund
 
 ### Tags
 skilllevels: Advanced
@@ -55,7 +56,6 @@ further_reading:
         title: Vulkan Samples Learning Path
         link: /learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/
         type: learningpath
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

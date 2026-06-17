@@ -14,21 +14,21 @@ prerequisites:
     - 'Azure subscription. Use this link to sign up for a free account: https://azure.microsoft.com/en-us/free/.'
     - 'Complete the [first](/learning-paths/servers-and-cloud-computing/from-iot-to-the-cloud-part1) and [second](/learning-paths/servers-and-cloud-computing/from-iot-to-the-cloud-part2) learning paths of this series.'
 
+author: Dawid Borycki
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
 subjects: Containers and Virtualization
 cloud_service_providers:
   - Microsoft Azure
-    
+
 armips:
     - Neoverse
-    
+
 tools_software_languages:
     - ASP.NET Core    
     - Docker
@@ -50,8 +50,6 @@ further_reading:
         title: kubectl Cheat Sheet
         link: https://kubernetes.io/docs/reference/kubectl/cheatsheet/
         type: Documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

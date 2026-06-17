@@ -1,11 +1,12 @@
 ---
 title: Run the AV1 and VP9 codecs on Arm Linux
 description: Learn how to build and run the AV1 and VP9 video codecs on Arm Linux systems with performance benchmarking across various resolutions and encoding configurations.
+
+author: Odin Shen
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Odin Shen
 
 minutes_to_complete: 30
 
@@ -50,7 +51,6 @@ further_reading:
         title: OCI Ampere A1 Compute instances can significantly reduce video encoding costs versus modern CPUs
         link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/oracle-cloud-infrastructure-arm-based-a1
         type: blog
-
 
 weight: 1
 layout: learningpathall

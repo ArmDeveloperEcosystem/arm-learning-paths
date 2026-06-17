@@ -14,11 +14,12 @@ learning_objectives:
 
 prerequisites:
     - An Armv9 device with at least 32 GB of available disk space, for example, Radxa Orion O6
+
+author: Odin Shen
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Odin Shen
 
 ### Tags
 skilllevels: Advanced
@@ -53,7 +54,6 @@ further_reading:
         title: Build and run llama.cpp with Arm CPU optimizations
         link: /learning-paths/servers-and-cloud-computing/llama_cpp_streamline/
         type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

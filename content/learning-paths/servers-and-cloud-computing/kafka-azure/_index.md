@@ -16,11 +16,12 @@ prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
     - Basic understanding of Linux command line
     - Familiarity with the [Apache Kafka architecture](https://kafka.apache.org/) and deployment practices on Arm64 platforms
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ### Tags
 skilllevels: Advanced
@@ -50,7 +51,6 @@ further_reading:
         title: Kafka on Azure
         link: https://learn.microsoft.com/en-us/samples/azure/azure-quickstart-templates/kafka-ubuntu-multidisks/
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

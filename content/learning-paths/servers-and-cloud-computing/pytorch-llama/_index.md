@@ -14,14 +14,15 @@ learning_objectives:
 
 prerequisites:
     - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) with at least 16 CPUs from a cloud service provider or an on-premise Arm server.
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author:
     - Nikhil Gupta
     - Pareena Verma
     - Nobel Chowdary Mandepudi
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -59,8 +60,6 @@ further_reading:
         title: PyTorch Documentation
         link: https://pytorch.org/docs/stable/index.html
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

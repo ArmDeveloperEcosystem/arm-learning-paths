@@ -15,11 +15,12 @@ learning_objectives:
 prerequisites:
     - A Pinebook Pro laptop
     - A microSD card (8GB or greater; class 10 or faster)
+
+author: Gabriel Peterson
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Gabriel Peterson
 
 ### Tags
 skilllevels: Advanced
@@ -47,7 +48,6 @@ further_reading:
         title: Pinebook Pro Wiki
         link: https://wiki.pine64.org/wiki/Pinebook_Pro
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

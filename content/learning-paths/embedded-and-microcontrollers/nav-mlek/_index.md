@@ -7,11 +7,12 @@ armips:
 - Cortex-M
 - Ethos-U
 - Corstone
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 learning_objectives:
 - Understand and select physical and virtual hardware targets for ML application development with Cortex-M and Ethos-U
@@ -54,7 +55,6 @@ further_reading:
         title: Machine Learning on Arm Cortex-M Microcontrollers
         link: https://armkeil.blob.core.windows.net/developer/Files/pdf/ethos/Arm_ML_on_Cortex-M_Microcontrollers_v2.pdf
         type: documentation
-
 
 weight: 1
 

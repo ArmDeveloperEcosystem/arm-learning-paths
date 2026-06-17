@@ -12,11 +12,12 @@ learning_objectives:
 prerequisites:
     - Basic knowledge of [MySQL databases](https://www.mysql.com/)
     - Two Arm servers running Ubuntu 22.04, one for the MySQL server and the other for the Sysbench client
+
+author: Bolt Liu
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Bolt Liu
 
 skilllevels: Introductory
 subjects: Databases
@@ -51,7 +52,6 @@ further_reading:
         title: Learn how to deploy MySQL
         link: /learning-paths/servers-and-cloud-computing/mysql/
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -12,11 +12,12 @@ learning_objectives:
 
 prerequisites:
     - An Arm-based system (bare metal server, cloud instance, developer board) running Linux 
+
+author: James Whitaker
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: James Whitaker
 
 ### Tags
 skilllevels: Introductory
@@ -36,7 +37,6 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
-
 further_reading:
     - resource:
         title: Perf for Linux on Arm (LinuxPerf)
@@ -50,7 +50,6 @@ further_reading:
         title: Arm Performance Studio
         link: /install-guides/ams/
         type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

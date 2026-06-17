@@ -18,11 +18,13 @@ prerequisites:
   - An [Edge Impulse Studio](https://studio.edgeimpulse.com/signup) account.
   - The [Arduino IDE](/install-guides/arduino-pico/) with the RP2040 board support package installed on your computer.
   - An [Arduino Nano RP2040 Connect board](https://store.arduino.cc/products/arduino-nano-rp2040-connect-with-headers).
+
+author: Bright Edudzi Gershon Kordorwu
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
-author: Bright Edudzi Gershon Kordorwu
 ### Tags
 skilllevels: Introductory
 subjects: ML
@@ -35,7 +37,6 @@ tools_software_languages:
     - Arduino
 operatingsystems:
     - Baremetal
-
 
 further_reading:
     - resource:
@@ -50,8 +51,6 @@ further_reading:
         title: Edge Impulse for beginners
         link: https://docs.edgeimpulse.com/docs/readme/for-beginners
         type: doc
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

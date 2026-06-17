@@ -12,11 +12,12 @@ learning_objectives:
 
 prerequisites:
     - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server.
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -52,7 +53,6 @@ further_reading:
         title: Improve ClickHouse performance on Arm-based AWS Graviton3 servers
         link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/improve-clickhouse-performance-up-to-26-by-using-aws-graviton3
         type: blog
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

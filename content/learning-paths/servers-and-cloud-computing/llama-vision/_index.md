@@ -18,11 +18,12 @@ prerequisites:
     - A basic understanding of Python and ML concepts.
     - A basic understanding of Streamlit.
     - A basic understanding of LLM fundamentals.
+
+author: Nobel Chowdary Mandepudi
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Nobel Chowdary Mandepudi
 
 ### Tags
 skilllevels: Advanced
@@ -38,7 +39,7 @@ tools_software_languages:
     - PyTorch
     - Streamlit
     - Google Axion
-   
+
 further_reading:
     - resource:
         title: Getting started with Llama
@@ -52,8 +53,6 @@ further_reading:
         title: Democratizing Generative AI with CPU-based inference
         link: https://blogs.oracle.com/ai-and-datascience/post/democratizing-generative-ai-with-cpu-based-inference
         type: blog
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

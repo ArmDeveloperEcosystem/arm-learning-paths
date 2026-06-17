@@ -18,10 +18,11 @@ learning_objectives:
 prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/). 
     - Any code editor like [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user).    
+author: Dawid Borycki
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -43,7 +44,6 @@ further_reading:
         title: ONNX Repository
         link: https://github.com/onnx/onnx
         type: blog    
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

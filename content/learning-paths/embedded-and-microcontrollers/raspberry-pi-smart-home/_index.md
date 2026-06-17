@@ -18,11 +18,12 @@ prerequisites:
   - An Arm-based single board computer (for example, Raspberry Pi 5 running Raspberry Pi OS)
   - Electronic components (breadboard, LEDs, resistors, jumper wires) for GPIO testing
   - Familiarity with Python programming, Raspberry Pi GPIO pinout, and basic electronics
+
+author: Fidel Makatia Omusilibwa
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Fidel Makatia Omusilibwa
 
 skilllevels: Introductory
 subjects: ML

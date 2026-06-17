@@ -15,11 +15,11 @@ prerequisites:
     - An Azure account
     - A machine with [Terraform](/install-guides/terraform/), [Azure CLI](/install-guides/azure-cli), and [Kubectl](/install-guides/kubectl/) installed
 
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ### Tags
 skilllevels: Advanced
@@ -60,8 +60,6 @@ further_reading:
         title: Terraform Azure Providers documentation
         link: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

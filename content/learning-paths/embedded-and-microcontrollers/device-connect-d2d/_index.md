@@ -3,7 +3,6 @@ title: Device-to-Device communication with Device Connect
 
 minutes_to_complete: 25
 
-
 who_is_this_for: This is an introductory topic for developers wiring up heterogeneous edge fleets, where devices need a shared way to find each other and a shared way to be controlled by agents. Device Connect provides this communication protocol between agents and devices, and standardizes how devices from different vendors advertise themselves and exchange structured messages, so both peer devices and AI agents can discover and invoke them through the same driver model. You'll use a Raspberry Pi 5 as the example primary edge device, but the same flow works with another device or with your development machine acting as a simulated device.
 
 learning_objectives:
@@ -16,15 +15,14 @@ prerequisites:
     - Basic familiarity with Python and the command line
     - A Raspberry Pi 5, another Linux device, or your development machine to use as the example primary device
     - A development machine on the same local network if you run the example across two machines
-    
-    
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author:
     - Kavya Sri Chennoju
     - Annie Tallund
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory

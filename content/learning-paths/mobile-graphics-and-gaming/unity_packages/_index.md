@@ -14,11 +14,12 @@ learning_objectives:
 prerequisites:
     - Familiarity with Unity and the Unity Profiler
     - Familiarity with Arm Performance Studio tools
+
+author: Julie Gaskin
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Julie Gaskin
 
 ### Tags
 skilllevels: Introductory
@@ -33,7 +34,6 @@ operatingsystems:
     - Windows
     - macOS
     - Linux
-
 
 further_reading:
     - resource:
@@ -56,8 +56,6 @@ further_reading:
         title: Arm Performance Studio 
         link: https://developer.arm.com/Tools%20and%20Software/Arm%20Mobile%20Studio
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

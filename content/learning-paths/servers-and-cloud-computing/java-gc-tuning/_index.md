@@ -16,11 +16,12 @@ prerequisites:
     - An Arm-based instance from a cloud service provider, or an on-premise Arm server.
     - Basic understanding of Java.
     - An [installation of Java](/install-guides/java/) on your machine.
+
+author: Kieran Hejmadi
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Kieran Hejmadi
 
 ### Tags
 skilllevels: Introductory
@@ -39,7 +40,6 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
-
 further_reading:
     - resource:
         title: OpenJDK Wiki 
@@ -49,8 +49,6 @@ further_reading:
         title: G1GC Tuning 
         link: https://www.oracle.com/technical-resources/articles/java/g1gc.html
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

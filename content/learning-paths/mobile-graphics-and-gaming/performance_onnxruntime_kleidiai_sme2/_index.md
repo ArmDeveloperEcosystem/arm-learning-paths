@@ -16,11 +16,12 @@ prerequisites:
     - An Android device with Arm SME2 support
     - Basic understanding of machine learning model inference
     - Familiarity with Android NDK and cross-compilation
+
+author: Zenon Zhilong Xiu
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Zenon Zhilong Xiu
 
 ### Tags
 skilllevels: Advanced
@@ -36,8 +37,6 @@ operatingsystems:
     - Android
     - Linux
 
-
-
 further_reading:
     - resource:
         title: Arm Scalable Matrix Extension Introduction (Part 1)
@@ -51,8 +50,6 @@ further_reading:
         title: Arm SME2 Introduction (Part 4)
         link: https://developer.arm.com/community/arm-community-blogs/b/architectures-and-processors-blog/posts/part4-arm-sme2-introduction
         type: blog
-        
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

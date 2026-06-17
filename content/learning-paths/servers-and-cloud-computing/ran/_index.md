@@ -6,7 +6,6 @@ minutes_to_complete: 15
 who_is_this_for: This is an introductory topic for software developers new to the
   Arm RAN Acceleration Library (ArmRAL).
 
-
 learning_objectives:
 - Build and install the Arm RAN Acceleration Library
 - Test the capabilities of your platform
@@ -14,11 +13,12 @@ learning_objectives:
 prerequisites:
 - An Arm computer running Linux. Cloud instances can be used, refer to the list of
   [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
+
+author: Ronan Synnott
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Ronan Synnott
 
 test_images:
 - ubuntu:latest
@@ -55,7 +55,6 @@ further_reading:
         title: The next chapter for Arm RAN Acceleration Library Open-sourcing the code base & accelerating adoption
         link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/arm-ral-is-now-open-source
         type: blog
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

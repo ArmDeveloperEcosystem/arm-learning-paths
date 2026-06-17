@@ -13,12 +13,12 @@ learning_objectives:
 
 prerequisites:
     - Nothing
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author: Jason Andrews
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -30,13 +30,11 @@ operatingsystems:
     - ChromeOS
 tools_software_languages:
 
-
 further_reading:
     - resource:
         title: All Chromebooks with Arm Processors 
         link: https://www.linuxmadesimple.info/2019/08/all-chromebooks-with-arm-processors-in.html
         type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

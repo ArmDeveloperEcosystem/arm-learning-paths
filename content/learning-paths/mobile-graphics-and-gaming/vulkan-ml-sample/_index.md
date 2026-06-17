@@ -16,11 +16,12 @@ prerequisites:
     - Visual Studio 2022
     - Visual Studio workload - Desktop development with C++
     - Visual Studio workload - .NET desktop build tools
+
+author: Annie Tallund
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Annie Tallund
 
 ### Tags
 skilllevels: Advanced
@@ -33,7 +34,6 @@ tools_software_languages:
     - NX
 operatingsystems:
     - Windows
-
 
 further_reading:
     - resource:
@@ -56,8 +56,6 @@ further_reading:
         title: How Arm Neural Super Sampling works
         link: https://community.arm.com/arm-community-blogs/b/mobile-graphics-and-gaming-blog/posts/how-arm-neural-super-sampling-works
         type: blog
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -1,7 +1,7 @@
 ---
 title: Measure LLM inference performance with KleidiAI and SME2 on Android
 description: Learn how to build llama.cpp with KleidiAI and SME2 support to profile and accelerate LLM inference performance on Android devices.
-    
+
 minutes_to_complete: 40
 
 who_is_this_for: This is an advanced topic for software developers, performance engineers, and AI practitioners 
@@ -16,11 +16,12 @@ prerequisites:
     - A Linux host machine (x86_64 or aarch64) for building llama.cpp with the Arm GNU Toolchain
     - Git, CMake, and Android Debug Bridge (ADB) installed on your host machine
     - An Android device with Arm SME2 support for running and profiling the executable
+
+author: Zenon Zhilong Xiu
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Zenon Zhilong Xiu
 
 ### Tags
 skilllevels: Advanced
@@ -34,8 +35,6 @@ tools_software_languages:
 operatingsystems:
     - Android
     - Linux
-
-
 
 further_reading:
     - resource:
@@ -54,8 +53,6 @@ further_reading:
         title: Profile llama.cpp performance with Arm Streamline and KleidiAI LLM kernels
         link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/llama_cpp_streamline/
         type: website
-        
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

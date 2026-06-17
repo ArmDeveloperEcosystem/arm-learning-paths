@@ -13,11 +13,12 @@ prerequisites:
     - An Arm Linux computer running Docker
     - An AWS account
     - A Remote.It account
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -33,7 +34,7 @@ tools_software_languages:
     - Docker
     - Remote.It
     - Supervisor
-    
+
 further_reading:
     - resource:
         title: Run multiple processes in a container
@@ -47,8 +48,6 @@ further_reading:
         title: Multiple services in a Docker container with supervisord
         link: https://dev.to/pratapkute/multiple-services-in-a-docker-container-with-supervisord-2g13
         type: blog
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

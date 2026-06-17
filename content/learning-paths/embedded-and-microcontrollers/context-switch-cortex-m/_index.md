@@ -15,11 +15,12 @@ learning_objectives:
 
 prerequisites:
     - Basic knowledge and familiarity with Cortex-M processors.
+
+author: Uma Ramalingam
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Uma Ramalingam
 
 ### Tags
 skilllevels: Introductory

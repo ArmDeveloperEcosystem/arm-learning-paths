@@ -18,11 +18,12 @@ prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
   - Basic understanding of message queues and messaging concepts (publishers, consumers)
   - Familiarity with Linux command-line operations
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ##### Tags
 skilllevels: Introductory

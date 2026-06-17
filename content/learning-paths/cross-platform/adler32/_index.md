@@ -13,11 +13,12 @@ learning_objectives:
 prerequisites:
     - An Arm computer running Linux with the GNU compiler (gcc) installed.
     - Visual Studio Code with the GitHub Copilot extension installed. 
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -37,7 +38,6 @@ shared_between:
     - laptops-and-desktops
     - mobile-graphics-and-gaming
 
-
 further_reading:
     - resource:
         title: Arm C Language Extensions
@@ -51,7 +51,6 @@ further_reading:
         title: Neon Programming Quick Reference
         link: https://developer.arm.com/documentation/den0018/a
         type: Documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

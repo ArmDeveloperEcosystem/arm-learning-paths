@@ -20,11 +20,12 @@ prerequisites:
     - A [Google Cloud Platform](https://cloud.google.com/) account with access to Arm-based virtual machine instances
     - Basic understanding of Linux command line
     - Familiarity with CI/CD concepts and [Jenkins fundamentals](https://www.jenkins.io/doc/book/pipeline/)
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ##### Tags
 skilllevels: Advanced

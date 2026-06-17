@@ -15,11 +15,12 @@ prerequisites:
 - A computer capable of running [Unreal Engine 5.3 or later version](https://www.unrealengine.com/en-US/download).
 - An Android mobile device that has a Mali GPU with hardware ray tracing support.
 - A USB cable to connect the mobile device to your computer.
+
+author: Owen Wu
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Owen Wu
 
 ### Tags
 skilllevels: Introductory
@@ -31,7 +32,6 @@ operatingsystems:
     - Android
 tools_software_languages:
     - Unreal Engine
-
 
 further_reading:
     - resource:
@@ -46,8 +46,6 @@ further_reading:
         title: Arm Performance Studio 
         link: https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

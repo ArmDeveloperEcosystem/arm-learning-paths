@@ -20,11 +20,12 @@ learning_objectives:
 prerequisites:
     - A machine that can run Python3, Visual Studio Code, and Android Studio. 
     - For the OS, you can use Windows, Linux, or macOS.
+
+author: Dawid Borycki
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Dawid Borycki
 
 ### Tags
 skilllevels: Advanced
@@ -58,8 +59,6 @@ further_reading:
         title: Visual Studio Code
         link: https://code.visualstudio.com
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

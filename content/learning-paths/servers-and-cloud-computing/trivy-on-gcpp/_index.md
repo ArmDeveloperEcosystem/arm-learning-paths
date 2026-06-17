@@ -16,11 +16,12 @@ prerequisites:
   - Familiarity with CI/CD concepts
   - Basic knowledge of Linux command-line operations
   - Familiarity with GitHub Actions runners
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory

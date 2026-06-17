@@ -23,11 +23,12 @@ prerequisites:
     - Installation of Docker for SME2 emulation (if you don't have SME2 available)
     - Installation of Android Development Studio and adb (if you're targeting an Android phone with SME2 support)
     - Compiler support for SME2 instructions (for example, LLVM 18 or later with SME2 backend support)
+
+author: Arnaud de Grandmaison
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Arnaud de Grandmaison
 
 ### Tags
 skilllevels: Advanced
@@ -98,7 +99,6 @@ further_reading:
         title: Application Binary Interface for the Arm Architecture
         link: https://github.com/ARM-software/abi-aa
         type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

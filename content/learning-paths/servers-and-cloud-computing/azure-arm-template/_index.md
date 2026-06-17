@@ -16,11 +16,12 @@ prerequisites:
     - An Azure subscription with permissions to create resource groups, virtual machines, and networking resources
     - Azure CLI installed on your local machine - see the [Azure CLI install guide](/install-guides/azure-cli/)
     - An SSH key pair for authentication
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -48,7 +49,6 @@ further_reading:
         title: Deploy a Cobalt 100 virtual machine on Azure
         link: /learning-paths/servers-and-cloud-computing/cobalt/
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

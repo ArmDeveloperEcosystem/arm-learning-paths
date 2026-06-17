@@ -16,11 +16,12 @@ learning_objectives:
 prerequisites:
     - Familiarity with basic machine learning concepts
     - A Linux or macOS computer with Python 3 installed
+
+author: Waheed Brown
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Waheed Brown
 
 ### Tags
 skilllevels: Introductory
@@ -57,9 +58,6 @@ further_reading:
         title: Arm Developers Guide for Cortex-M Processors and Ethos-U NPU
         link: https://developer.arm.com/documentation/109267/0101
         type: documentation
-
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

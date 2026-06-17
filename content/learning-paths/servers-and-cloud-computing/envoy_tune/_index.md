@@ -15,11 +15,12 @@ learning_objectives:
 prerequisites:
     - Cloud or bare-metal installation of an Envoy service
     - Review [Learn how to deploy Envoy](/learning-paths/servers-and-cloud-computing/envoy/) if you do not already have an Envoy setup
+
+author: Zhengjun Xing
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Zhengjun Xing
 
 ### Tags
 skilllevels: Advanced
@@ -34,7 +35,7 @@ armips:
 tools_software_languages:
     - Envoy  
     - Runbook
-  
+
 operatingsystems:
     - Linux
 
@@ -43,8 +44,6 @@ further_reading:
         title: Envoy Documentation
         link: https://www.envoyproxy.io/docs/envoy/latest
         type: documentation
-    
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -6,11 +6,12 @@ minutes_to_complete: 30
 prerequisites:
     - An OCI account
     - An Arm compute instance deployed on OCI with Oracle Linux
+
+author: Frédéric -lefred- Descamps
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Frédéric -lefred- Descamps
 
 who_is_this_for: This is an introductory topic for developers who want to install WordPress on Oracle Cloud Infrastructure (OCI) using always free tier.
 
@@ -33,7 +34,6 @@ tools_software_languages:
     - MySQL
     - WordPress
 
-
 further_reading:
     - resource:
         title: Learn Faster to Grow Faster
@@ -43,8 +43,6 @@ further_reading:
         title: Deploy Wordpress on OCI with Terraform
         link: https://blogs.oracle.com/mysql/post/wordpress-with-mysql-on-oci-always-free
         type: blog
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

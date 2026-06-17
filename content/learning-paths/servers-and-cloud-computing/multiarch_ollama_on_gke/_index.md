@@ -5,7 +5,6 @@ minutes_to_complete: 30
 
 who_is_this_for: This Learning Path is for developers who want to compare the performance of amd64 and arm64 deployments by running inferences on a hybrid GKE cluster using an Ollama multi-architecture container image.
 
-
 learning_objectives:
   - Create a hybrid GKE cluster with amd64 and arm64 nodes.
   - Deploy Ollama services for amd64 and arm64 architectures using a single multi-architecture container image.
@@ -15,12 +14,13 @@ prerequisites:
     - A [Google Cloud account](https://console.cloud.google.com/).
     - A local machine with [Google Cloud CLI](/install-guides/gcloud/) and [kubectl](/install-guides/kubectl/) installed.
     - The [GKE Cloud Plugin](https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl#gcloud) installed.
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author:
     - Geremy Cohen
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -28,7 +28,7 @@ skilllevels: Introductory
 subjects: Containers and Virtualization
 cloud_service_providers:
   - Google Cloud
-    
+
 armips:
     - Neoverse
 
@@ -74,11 +74,6 @@ further_reading:
       title: Install kubectl and configure cluster access on GKE
       link: https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl
       type: documentation
-
-    
-
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

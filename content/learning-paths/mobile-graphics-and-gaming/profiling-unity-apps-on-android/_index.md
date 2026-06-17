@@ -17,11 +17,11 @@ prerequisites:
     - Basic knowledge of Unity and programming concepts
     - The setup described in the Learning Path [Get started with Unity on Android](/learning-paths/mobile-graphics-and-gaming/get-started-with-unity-on-android)
 
+author: Joshua Marshall-Law
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Joshua Marshall-Law
 
 ### Tags
 skilllevels: Introductory
@@ -38,7 +38,6 @@ tools_software_languages:
 operatingsystems:
     - Android
 
-
 further_reading:
     - resource:
         title: Unity Profiler documentation
@@ -48,8 +47,6 @@ further_reading:
         title: Unity Analyzer documentation
         link: https://docs.unity3d.com/Packages/com.unity.performance.profile-analyzer@0.4/manual/profiler-analyzer-window.html
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

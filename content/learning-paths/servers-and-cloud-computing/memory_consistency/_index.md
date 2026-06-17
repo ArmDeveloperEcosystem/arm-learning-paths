@@ -18,11 +18,12 @@ prerequisites:
     - Familiarity with Arm assembly language, and the ability to find relevant information on Arm assembly instructions.
     - Familiarity with general-purpose registers.
     - Familiarity with memory barriers, including Acquire-Release Semantics.
+
+author: Julio Suarez
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Julio Suarez
 
 skilllevels: Advanced
 subjects: Performance and Architecture

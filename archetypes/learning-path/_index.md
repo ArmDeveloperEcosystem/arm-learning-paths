@@ -13,6 +13,8 @@ prerequisites:
     - PLACEHOLDER PREREQ 1
     - PLACEHOLDER PREREQ 2
 
+author: PLACEHOLDER NAME
+
 # New Learning Paths are opted in for the next manual generated summary/FAQ run.
 # The generator resets this to false after a successful write.
 generate_summary_faq: true
@@ -22,8 +24,6 @@ generate_summary_faq: true
 # them to false after a successful write.
 rerun_summary: false
 rerun_faqs: false
-
-author: PLACEHOLDER NAME
 
 ### Tags
 skilllevels: PLACEHOLDER SKILLLEVEL
@@ -36,8 +36,6 @@ tools_software_languages:
     - PLACEHOLDER TOOL OR SOFTWARE D
 operatingsystems:
     - PLACEHOLDER OS G
-
-
 
 further_reading:
     - resource:
@@ -52,8 +50,6 @@ further_reading:
         title: PLACEHOLDER GENERAL WEBSITE 
         link: PLACEHOLDER GENERAL WEBSITE LINK
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

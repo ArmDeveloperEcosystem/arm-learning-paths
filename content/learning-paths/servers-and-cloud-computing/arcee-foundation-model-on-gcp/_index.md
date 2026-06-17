@@ -16,11 +16,12 @@ learning_objectives:
 prerequisites:
     - A [Google Cloud account](https://console.cloud.google.com/) with permission to launch Axion (`c4a-standard-16` or larger) instances
     - Basic familiarity with Linux and SSH
+
+author: Julien Simon
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Julien Simon
 
 # Tags
 # Tagging metadata, see the Learning Path guide for the allowed values
@@ -37,7 +38,6 @@ tools_software_languages:
     - Llama.cpp
 operatingsystems:
     - Linux
-
 
 further_reading:
   - resource:

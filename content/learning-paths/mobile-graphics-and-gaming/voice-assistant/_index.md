@@ -17,13 +17,14 @@ prerequisites:
     - An Android phone with support for SME (Scalable Matrix Extension) instructions, required for SME performance checking
     - This Learning Path was tested on a Vivo X300 Pro.
     - A development machine with [Android Studio](https://developer.android.com/studio) installed.
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author:
     - Arnaud de Grandmaison
     - Nina Drozd
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 skilllevels: Introductory
 subjects: Performance and Architecture

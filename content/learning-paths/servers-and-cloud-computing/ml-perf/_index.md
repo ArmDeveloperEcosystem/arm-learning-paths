@@ -14,11 +14,12 @@ learning_objectives:
 prerequisites:
 - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from an appropriate
   cloud service provider or an on-premise Arm server.
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 test_images:
 - ubuntu:latest
@@ -52,7 +53,6 @@ further_reading:
         title: Machine Learning Inference on AWS Graviton3
         link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/machine-learning-inference-on-aws-graviton3
         type: blog
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

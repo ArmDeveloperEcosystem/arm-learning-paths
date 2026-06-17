@@ -1,7 +1,7 @@
 ---
 title: Managed, self-hosted Arm runners for GitHub Actions
 description: Learn how to install RunsOn self-hosted runner manager in your AWS account to execute GitHub Actions workflows on Arm runners.
- 
+
 minutes_to_complete: 15
 
 who_is_this_for: This Learning Path is for developers who want to use Arm runners offered by AWS to execute GitHub Actions workflows.
@@ -13,11 +13,12 @@ learning_objectives:
 prerequisites:
     - An [Amazon Web Services account](/learning-paths/servers-and-cloud-computing/csp/aws/).
     - A GitHub account (personal or organizational).
+
+author: Cyril Rohr
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Cyril Rohr
 
 ##### Tags
 skilllevels: Introductory
@@ -54,7 +55,6 @@ further_reading:
         title: GitHub Actions runners benchmark for Arm
         link: https://runs-on.com/benchmarks/github-actions-runners/#arm64-runners
         type: website
-
 
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper

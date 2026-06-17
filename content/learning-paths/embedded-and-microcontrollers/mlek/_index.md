@@ -14,17 +14,17 @@ learning_objectives:
 prerequisites:
     - Some familiarity with embedded programming
     - A Linux host machine running Ubuntu
+
+author: Ronan Synnott
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Ronan Synnott
 
 ### RS: Learning Path hidden until AWS instance updated
 draft: false
 cascade:
     draft: false
-
 
 ### Tags
 skilllevels: Introductory
@@ -50,7 +50,6 @@ further_reading:
         title: Creating ML applications for embedded devices on Arm Virtual Hardware
         link: https://devsummit.arm.com/flow/arm/devsummit22/sessions-catalog/page/sessions/session/1656589322296001Tbrk
         type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -14,11 +14,12 @@ learning_objectives:
 prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
     - Visual Studio 2022.
+
+author: Dawid Borycki
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -43,7 +44,6 @@ further_reading:
         title: Chromium Embedded Framework
         link: https://en.wikipedia.org/wiki/Chromium_Embedded_Framework
         type: website   
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

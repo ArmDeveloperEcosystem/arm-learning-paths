@@ -13,11 +13,12 @@ learning_objectives:
 prerequisites:
     - A valid [AWS](https://aws.amazon.com/) account
     - Some familiarity with Python
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -30,15 +31,11 @@ operatingsystems:
 tools_software_languages:
     - Arm Virtual Hardware
 
-
 further_reading:
     - resource:
         title: AVH Virtual Interfaces
         link: https://arm-software.github.io/AVH/main/simulation/html/group__arm__cmvp.html
         type: documentation
-
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

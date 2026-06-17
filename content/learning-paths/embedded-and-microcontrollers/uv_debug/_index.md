@@ -6,11 +6,12 @@ description: Learn how to debug microcontrollers using µVision with basic run/s
 
 minutes_to_complete: 90
 # Always measured in minutes. Should be an integer, to complete the learning path (not read it).
+
+author: Christopher Seidl
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Christopher Seidl
 
 who_is_this_for: >
     This is an advanced topic for software developers who want to debug microcontrollers using µVision.
@@ -35,7 +36,6 @@ prerequisites:
     # Previous learning paths                                   (The Learning Path: Getting Started with Arm Virtual Hardware)
     # Particular tools/environments already being initialized   (An EC2 instance with AVH installed)
 
-
 ##### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
@@ -47,8 +47,6 @@ operatingsystems:
 tools_software_languages:
     - Keil MDK
     - FVP
-
-
 
 further_reading:
     - resource:
@@ -71,7 +69,6 @@ further_reading:
         title: List of supported boards
         link: https://keil.arm.com/boards
         type: website
-
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

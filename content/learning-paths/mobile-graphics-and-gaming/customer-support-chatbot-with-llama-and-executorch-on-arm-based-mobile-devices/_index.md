@@ -21,11 +21,12 @@ prerequisites:
     - Java 17 JDK. Follow the steps in [Java SE 17 Archive Downloads](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) to download and install JDK for your host
     - Python 3.10 or later
     - A [Hugging Face](https://huggingface.co/) account with access to Meta Llama models
+
+author: Parichay Das
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Parichay Das
 
 ### Tags
 skilllevels: Introductory
@@ -42,7 +43,6 @@ operatingsystems:
     - macOS
     - Linux
     - Android
-
 
 further_reading:
     - resource:
@@ -61,7 +61,6 @@ further_reading:
         title: Build an Android chat app with Llama, KleidiAI, ExecuTorch, and XNNPACK
         link: /learning-paths/mobile-graphics-and-gaming/build-llama3-chat-android-app-using-executorch-and-xnnpack/
         type: learning-path
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

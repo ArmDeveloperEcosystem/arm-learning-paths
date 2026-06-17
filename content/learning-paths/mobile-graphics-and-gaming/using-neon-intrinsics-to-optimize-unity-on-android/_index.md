@@ -17,13 +17,14 @@ prerequisites:
     - Recent Android device, such as a mobile phone or tablet
     - Desktop computer capable of running Unity
     - Unity version compatible with Unity Burst compiler 1.5 or later
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author:
     - Ben Clark
     - Joshua Marshall-Law
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -40,7 +41,6 @@ tools_software_languages:
 operatingsystems:
     - Android
 
-
 further_reading:
     - resource:
         title: Arm Neon documentation
@@ -50,8 +50,6 @@ further_reading:
         title: Unity Burst compiler documentation
         link: https://docs.unity3d.com/Manual/com.unity.burst.html
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

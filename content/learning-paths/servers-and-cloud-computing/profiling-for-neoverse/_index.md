@@ -11,11 +11,12 @@ learning_objectives:
 
 prerequisites:
     - An Arm Neoverse-based (N1, N2 or V1) computer running Linux. For your host OS, you can use Amazon Linux 2023 or newer, Debian 10 or newer, RHEL 8 or newer, or Ubuntu 20.04 or newer.
+
+author: Julie Gaskin
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Julie Gaskin
 
 ### Tags
 skilllevels: Introductory
@@ -28,7 +29,6 @@ tools_software_languages:
 
 operatingsystems:
     - Linux
-
 
 further_reading:
     - resource:
@@ -43,8 +43,6 @@ further_reading:
         title: About Streamline CLI Tools
         link: https://www.arm.com/products/development-tools/performance/streamline-cli
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

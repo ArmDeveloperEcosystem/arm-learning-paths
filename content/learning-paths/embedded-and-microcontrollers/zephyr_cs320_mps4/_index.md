@@ -20,6 +20,10 @@ prerequisites:
 
 author: Sue Wu
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 skilllevels: Introductory
 subjects: RTOS Fundamentals
 armips:

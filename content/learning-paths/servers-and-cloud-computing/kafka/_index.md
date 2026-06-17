@@ -16,11 +16,12 @@ learning_objectives:
 
 prerequisites:
     - Seven physical Arm machines or cloud instances with either Ubuntu or Debian installed. 
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ### Tags
 skilllevels: Advanced
@@ -35,7 +36,6 @@ operatingsystems:
 tools_software_languages:
     - Kafka
     - ZooKeeper
-
 
 further_reading:
     - resource:
@@ -54,7 +54,6 @@ further_reading:
         title: Apache Kafka Benchmarks on AWS Graviton2
         link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/apache-kafka-benchmarks-on-aws-graviton2
         type: blog
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

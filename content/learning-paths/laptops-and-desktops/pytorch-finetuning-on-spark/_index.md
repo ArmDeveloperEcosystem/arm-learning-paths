@@ -16,11 +16,12 @@ learning_objectives:
 prerequisites:
     - Hugging Face account and access token
     - NVIDIA DGX Spark workstation
+
+author: Michael Hall
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Michael Hall
 
 ### Tags
 skilllevels: Advanced

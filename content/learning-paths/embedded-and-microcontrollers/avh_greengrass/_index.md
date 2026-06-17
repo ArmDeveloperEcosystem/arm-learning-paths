@@ -15,11 +15,12 @@ prerequisites:
     - An Amazon AWS account
     - An Arm Virtual Hardware account
     - Some familiarity with embedded Linux
+
+author: Michael Hall
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Michael Hall
 
 ### Tags
 skilllevels: Introductory
@@ -37,7 +38,6 @@ tools_software_languages:
     - AWS IoT Greengrass
     - Raspberry Pi
 
-
 further_reading:
     - resource:
         title: AWS IoT Greengrass CLI documentation 
@@ -51,8 +51,6 @@ further_reading:
         title: AWS IoT Greengrass v2 Developer Guide 
         link: https://docs.aws.amazon.com/greengrass/v2/developerguide/what-is-iot-greengrass.html
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

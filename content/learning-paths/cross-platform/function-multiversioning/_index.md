@@ -20,11 +20,12 @@ prerequisites:
     - Basic knowledge of loop vectorization.
     - Familiarity with Arm assembly.
     - A LLVM 20 compiler with runtime library support or GCC 16.
+
+author: Alexandros Lamprineas
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Alexandros Lamprineas
 
 ### Tags
 skilllevels: Advanced
@@ -57,7 +58,6 @@ further_reading:
         title: Arm C Language Extensions
         link: https://arm-software.github.io/acle/main/acle.html
         type: documentation
-
 
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper

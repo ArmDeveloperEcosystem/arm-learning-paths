@@ -13,11 +13,12 @@ learning_objectives:
 
 prerequisites:
     - An Amazon Web Services (AWS) [account](https://aws.amazon.com/)
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -46,7 +47,6 @@ further_reading:
         title: Wordpress deployment documentation
         link: https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/
         type: Blog
-
 
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper

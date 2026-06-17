@@ -17,11 +17,12 @@ prerequisites:
     - An Arm Virtual Hardware account
     - A Linux machine with root access
     - Some familiarity with embedded Linux
+
+author: Michael Hall
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Michael Hall
 
 ### Tags
 skilllevels: Introductory
@@ -53,8 +54,6 @@ further_reading:
         title: Balena Hub 
         link: https://hub.balena.io/
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

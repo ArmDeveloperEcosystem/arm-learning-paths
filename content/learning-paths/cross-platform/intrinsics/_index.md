@@ -17,11 +17,12 @@ prerequisites:
 - Some understanding of SIMD concepts.
 - An Arm based machine or [cloud instance](/learning-paths/servers-and-cloud-computing/csp/) running Ubuntu Linux.
 - Optionally, an `x86_64` machine also running Ubuntu.
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 test_images:
 - amd64/ubuntu:latest

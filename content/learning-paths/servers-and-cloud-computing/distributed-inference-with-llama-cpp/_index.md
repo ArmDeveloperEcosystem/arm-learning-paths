@@ -16,13 +16,14 @@ prerequisites:
     - Access to Meta's gated repository for the Llama 3.1 model family and a Hugging Face token to download models
     - Familiarity with the Learning Path [Deploy a Large Language Model (LLM) chatbot with llama.cpp using KleidiAI on Arm servers](/learning-paths/servers-and-cloud-computing/llama-cpu/)
     - Familiarity with AWS
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author: 
     - Aryan Bhusari
     - Joe Stech
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -38,15 +39,11 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
-
-
 further_reading:
     - resource:
         title: llama.cpp RPC server code
         link: https://github.com/ggml-org/llama.cpp/tree/master/tools/rpc
         type: Code
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

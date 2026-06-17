@@ -15,11 +15,12 @@ learning_objectives:
 prerequisites:
     - An Azure account
     - A computer with Terraform installed
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ### Tags
 skilllevels: Advanced
@@ -48,8 +49,6 @@ further_reading:
         title: About Azure bastion
         link: https://learn.microsoft.com/en-us/azure/bastion/bastion-overview
         type: Documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

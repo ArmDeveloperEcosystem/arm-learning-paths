@@ -12,11 +12,12 @@ learning_objectives:
 
 prerequisites:
     - None
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -28,13 +29,11 @@ operatingsystems:
 tools_software_languages:
     - Runbook
 
-
 further_reading:
     - resource:
         title: Ampere Computing
         link: https://amperecomputing.com/developers/
         type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -13,11 +13,12 @@ learning_objectives:
 prerequisites:
     - A Linux-based x86-64 host computer with Arm Development Studio installed.
     - Basic understanding of Assembly and C programming.
+
+author: Qixiang Xu
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Qixiang Xu
 
 ### Tags
 skilllevels: Introductory
@@ -44,8 +45,6 @@ further_reading:
         title: Fast Models Reference Guide
         link: https://developer.arm.com/documentation/100964/1128/?lang=en
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

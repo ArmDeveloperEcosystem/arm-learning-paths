@@ -16,14 +16,15 @@ prerequisites:
     - An Arm Neoverse-based bare-metal server running Ubuntu 24.04 to run Apache Tomcat
     - Access to an x86_64 bare-metal server running Ubuntu 24.04 to run `wrk2`
     - Basic familiarity with Java applications
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author:
     - Ying Yu
     - Ker Liu
     - Rui Chang
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced

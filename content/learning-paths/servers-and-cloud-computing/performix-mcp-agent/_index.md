@@ -18,11 +18,12 @@ prerequisites:
     - Access to an Arm-based cloud instance running Linux, such as an AWS Graviton3 instance
     - Access to Arm Performix configured with the remote Arm target. See the [Arm Performix install guide](/install-guides/performix/) for setup instructions
     - Basic understanding of C++
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ### Tags
 skilllevels: Advanced
@@ -36,8 +37,6 @@ tools_software_languages:
     - GitHub Copilot
 operatingsystems:
     - Linux
-
-
 
 further_reading:
     - resource:
@@ -60,8 +59,6 @@ further_reading:
         title: Optimize application performance using Arm Performix CPU microarchitecture analysis
         link: /learning-paths/servers-and-cloud-computing/performix-microarchitecture/
         type: learning-path
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

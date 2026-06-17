@@ -13,11 +13,12 @@ learning_objectives:
 prerequisites:
     - Any Arm Neoverse N2-based or Arm Neoverse V2-based instance running Ubuntu 22.04 LTS from a cloud service provider or an on-premise Arm server. 
     - For the server, at least four cores and 16GB of RAM, with disk storage configured up to at least 32 GB. 
+
+author: Tianyu Li
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Tianyu Li
 
 ### Tags
 skilllevels: Introductory
@@ -58,9 +59,6 @@ further_reading:
         title: Get started with Arm-based cloud instances
         link: /learning-paths/servers-and-cloud-computing/csp/
         type: website
-     
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

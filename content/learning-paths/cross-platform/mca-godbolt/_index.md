@@ -14,11 +14,12 @@ learning_objectives:
 prerequisites:
     - Familiarity with Arm assembly.
     - LLVM version 16 or newer, which includes support for Neoverse V2.
+
+author: Asher Dobrescu
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Asher Dobrescu
 
 ### Tags
 skilllevels: Introductory
@@ -48,8 +49,6 @@ further_reading:
         title: Arm Neoverse V2 Software Optimization Guide
         link: https://developer.arm.com/documentation/109898/0300/?lang=en
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

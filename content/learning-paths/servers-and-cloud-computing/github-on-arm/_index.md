@@ -14,11 +14,12 @@ learning_objectives:
 prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free?utm_source=google&hl=en) account with billing enabled
   - A GitHub account; you can [sign up for GitHub](https://github.com/signup)
+
+author: Annie Tallund
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Annie Tallund
 
 ##### Tags
 skilllevels: Introductory
@@ -59,7 +60,6 @@ further_reading:
         title: GCP Quickstart Guide to Create a virtual machine
         link: https://cloud.google.com/compute/docs/instances/create-start-instance
         type: website
-
 
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper

@@ -1,7 +1,6 @@
 ---
 title: Migrate applications to Arm servers using migrate-ease
 
-
 minutes_to_complete: 45
 
 who_is_this_for: This is an introductory topic for developers looking to migrate applications to Arm-based servers using migrate-ease, a code analysis tool that scans source code repositories to identify architecture-specific porting issues before migration.
@@ -15,13 +14,14 @@ learning_objectives:
 
 prerequisites:
     - Access to an [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) for testing and validation.
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author: 
     - Odin Shen
     - Jun He
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -49,7 +49,6 @@ further_reading:
         title: Migrating Applications to Arm Servers
         link: /learning-paths/servers-and-cloud-computing/migration/
         type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

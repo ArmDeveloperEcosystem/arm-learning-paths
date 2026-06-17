@@ -1,10 +1,11 @@
 ---
 title: Run the vvenc H.266 encoder on Arm servers
+
+author: Willen Yang
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Willen Yang
 
 minutes_to_complete: 20
 
@@ -51,7 +52,6 @@ further_reading:
         title: OCI Ampere A1 Compute instances can significantly reduce video encoding costs versus modern CPUs
         link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/oracle-cloud-infrastructure-arm-based-a1
         type: blog
-
 
 weight: 1
 layout: learningpathall

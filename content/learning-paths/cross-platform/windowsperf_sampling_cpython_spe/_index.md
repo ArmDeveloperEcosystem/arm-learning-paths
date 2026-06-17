@@ -18,11 +18,12 @@ prerequisites:
     - An installation of [WindowsPerf](/install-guides/wperf/).
     - An installation of [Visual Studio](/install-guides/vs-woa/).
     - An installation of [Git](/install-guides/git-woa/).
+
+author: Przemyslaw Wirkus
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Przemyslaw Wirkus
 
 ### Tags
 skilllevels: Introductory

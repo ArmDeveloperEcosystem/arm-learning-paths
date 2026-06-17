@@ -12,11 +12,12 @@ learning_objectives:
 
 prerequisites:
     - An Arm computer running Linux and a recent version of a C++ compiler (Clang or GCC) installed
+
+author: Konstantinos Margaritis
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Konstantinos Margaritis
 
 ### Tags
 skilllevels: Advanced
@@ -37,7 +38,6 @@ shared_between:
     - laptops-and-desktops
     - servers-and-cloud-computing
     - mobile-graphics-and-gaming
-
 
 further_reading:
     - resource:
@@ -60,8 +60,6 @@ further_reading:
         title: bfloat16 floating-point format
         link: https://en.wikipedia.org/wiki/Bfloat16_floating-point_format
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

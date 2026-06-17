@@ -17,11 +17,12 @@ prerequisites:
     - An Arm cloud instance with at least 24 vCPUs and 200 GB of free storage running Ubuntu 24.04 LTS
     - Understanding of kernel images and modules
     - Familiarity with GRUB bootloader and initramfs
+
+author: Geremy Cohen
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Geremy Cohen
 
 ### Tags
 skilllevels: Advanced

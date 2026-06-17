@@ -1,7 +1,6 @@
 ---
 title: Build a Multimodal Retail Restocking Assistant on Armv9 With MNN
 
-    
 minutes_to_complete: 90
 
 who_is_this_for: This Learning Path is for developers and engineers who want to run multimodal image, audio, and text models on Armv9 Linux systems using MNN as a portable, CPU-first inference runtime. It is aimed at readers who are comfortable building software from source and want a reproducible on-device workflow without quantization or heterogeneous scheduling.
@@ -17,11 +16,12 @@ prerequisites:
     - An Armv9 Linux device with at least 32 GB of available disk space, for example a Radxa Orion O6
     - Familiarity with the Linux command line, Git, and building C++ projects with CMake
     - Internet access to download source code, model assets, and sample data
+
+author: Odin Shen
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Odin Shen
 
 ### Tags
 skilllevels: Advanced

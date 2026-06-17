@@ -16,11 +16,12 @@ learning_objectives:
 prerequisites:
     - An Arm Linux (aarch64) server, such as an AWS Graviton3 instance
     - Basic understanding of C++ and CMake
+
+author: Kieran Hejmadi
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Kieran Hejmadi
 
 ### Tags
 skilllevels: Introductory

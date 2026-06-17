@@ -19,15 +19,14 @@ prerequisites:
     - Visual Studio Code
     - A Cortex-M development board
     - Windows 10+ (64-bit), macOS with Homebrew, or Linux (preferably Ubuntu 20.04+)
-    
-    
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author: 
     - Ayoub Bourjilat
     - Odin Shen
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 skilllevels: Introductory
 subjects: RTOS Fundamentals

@@ -16,11 +16,12 @@ learning_objectives:
 
 prerequisites:
     - Some familiarity with embedded programming is assumed
+
+author: Ronan Synnott
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
@@ -43,7 +44,6 @@ further_reading:
         title: Arm Compiler for Embedded User Guide
         link: https://developer.arm.com/documentation/100748
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

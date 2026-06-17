@@ -14,11 +14,12 @@ learning_objectives:
 prerequisites:
     - A Raspberry Pi 4 board
     - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider.
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -42,7 +43,6 @@ further_reading:
         title: Image Classification with MobilenetV2, Arm NN, and TensorFlow Lite Delegate pre-built binaries Tutorial
         link: https://developer.arm.com/documentation/102561
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

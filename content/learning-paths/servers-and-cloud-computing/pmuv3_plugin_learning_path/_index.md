@@ -14,11 +14,12 @@ learning_objectives:
 prerequisites:
     - An Arm-based computer running Linux.
     - Some familiarity with Linux application performance analysis.
+
+author: Gayathri Narayana Yegna Narayanan
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Gayathri Narayana Yegna Narayanan
 
 ### Tags
 skilllevels: Advanced
@@ -34,7 +35,6 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
-
 further_reading:
     - resource:
         title: Arm Neoverse N2 PMU Guide
@@ -48,7 +48,6 @@ further_reading:
         title: Arm Neoverse N2 Core Telemetry Specification
         link: https://developer.arm.com/documentation/109215/0200/?lang=en
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

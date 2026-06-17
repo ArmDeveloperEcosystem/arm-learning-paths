@@ -16,11 +16,12 @@ prerequisites:
     - Introductory understanding of software containers
     - Knowledge about building workflows
     - Access to an aarch64 or x86_64 machine running Linux
+
+author: Kasper Mecklenburg
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Kasper Mecklenburg
 
 ### Tags
 skilllevels: Advanced

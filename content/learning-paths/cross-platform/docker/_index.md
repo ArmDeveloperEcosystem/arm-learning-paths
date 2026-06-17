@@ -16,11 +16,12 @@ learning_objectives:
 prerequisites:
     - A Windows, macOS, or Linux computer with Docker installed, any architecture can be used
     - An Arm Linux server with Docker installed 
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -57,7 +58,6 @@ further_reading:
         title: Blog by Docker on buildx
         link: https://www.docker.com/blog/how-to-rapidly-build-multi-architecture-images-with-buildx
         type: blog
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

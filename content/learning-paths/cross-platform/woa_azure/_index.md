@@ -14,11 +14,12 @@ learning_objectives:
 prerequisites:
     - An Azure Cloud account.
     - An RDP client to connect to your Windows on Arm instance.  For more info on RDP clients, see [Remote Desktop clients for Remote Desktop Services and remote PCs](https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-clients) to get started.
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -43,7 +44,6 @@ further_reading:
         title: Azure Virtual Machines with Ampere Altra Arm–based processors
         link: https://azure.microsoft.com/en-us/blog/azure-virtual-machines-with-ampere-altra-arm-based-processors-generally-available/
         type: blog
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

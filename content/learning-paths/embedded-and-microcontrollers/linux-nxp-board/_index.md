@@ -2,7 +2,7 @@
 title: Use Linux on the NXP FRDM i.MX 93 board
 
 description: Learn how to boot and configure the NXP FRDM i.MX 93 Arm board with Linux, create a user with sudo access, connect to WiFi using ConnMan, and transfer files over the network.
-    
+
 minutes_to_complete: 120
 
 who_is_this_for: This is an introductory topic for embedded developers and ML engineers who want to boot an NXP FRDM i.MX 93 board, connect over serial, enable WiFi, and transfer files for on-device development on Arm.
@@ -19,11 +19,12 @@ prerequisites:
     - A computer running Linux or macOS.
     - A USB-C cable for the board's **DBG** serial connection.
     - A USB-C power supply/cable for the board's **POWER** port.
+
+author: Waheed Brown
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Waheed Brown
 
 ### Tags
 skilllevels: Introductory
@@ -59,9 +60,6 @@ further_reading:
         title: Arm Developers Guide for Cortex-M Processors and Ethos-U NPU
         link: https://developer.arm.com/documentation/109267/0101
         type: documentation
-
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -13,11 +13,12 @@ learning_objectives:
 prerequisites:
     - General knowledge about SIMD processing, vectorization or Arm Neon.
     - An Arm computer running Linux. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
+
+author: Florent Lebeau
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Florent Lebeau
 
 ### Tags
 skilllevels: Introductory
@@ -65,8 +66,6 @@ further_reading:
         title: Optimizing HPCG for Arm SVE
         link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/optimizing-hpcg-for-arm-sve
         type: blog
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

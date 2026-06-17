@@ -11,11 +11,12 @@ learning_objectives:
 prerequisites:
     - An OCI account
     - A computer with Terraform installed
+
+author: Frédéric -lefred- Descamps
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Frédéric -lefred- Descamps
 
 ### Tags
 skilllevels: Advanced
@@ -32,7 +33,6 @@ operatingsystems:
 tools_software_languages:
     - Terraform
 
-
 further_reading:
     - resource:
         title: Terraform docs for OCI 
@@ -42,8 +42,6 @@ further_reading:
         title: Arm-based cloud computing is the next big thing Introducing Arm on Oracle Cloud Infrastructure
         link: https://blogs.oracle.com/cloud-infrastructure/post/arm-based-cloud-computing-is-the-next-big-thing-introducing-arm-on-oracle-cloud-infrastructure
         type: blog
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

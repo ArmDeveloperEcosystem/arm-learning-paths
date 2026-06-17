@@ -13,11 +13,12 @@ learning_objectives:
 prerequisites:
     - An [AWS account](/learning-paths/servers-and-cloud-computing/csp/aws/) with access to AWS services.
     - An x86 computer running Ubuntu or Arch Linux, authorized for AWS access. If you're using another build environment, you'll need to configure the toolchains for cross-compilation.
+
+author: Paul Howard
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Paul Howard
 
 ### Tags
 skilllevels: Advanced

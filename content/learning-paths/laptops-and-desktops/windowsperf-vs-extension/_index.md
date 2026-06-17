@@ -16,12 +16,13 @@ learning_objectives:
 prerequisites:
   - A desktop or laptop running Windows on Arm.
   - Visual Studio 2022 Community Edition, WindowsPerf, WindowsPerf Visual Studio extension, and Windows Performance Analyzer (WPA) installed. 
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author: 
   - Nader Zouaoui
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory

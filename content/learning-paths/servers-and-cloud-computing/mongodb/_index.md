@@ -1,10 +1,11 @@
 ---
 title: Analyze the performance of MongoDB on Arm servers
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 minutes_to_complete: 30
 
@@ -41,7 +42,6 @@ tools_software_languages:
 - GCC
 - Runbook
 
-
 further_reading:
     - resource:
         title: MongoDB Manual
@@ -59,7 +59,6 @@ further_reading:
         title: Compare performance of MongoDB on Arm vs Intel
         link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/mongodb-performance-on-aws-with-the-arm-graviton2
         type: blog
-
 
 weight: 1
 ---

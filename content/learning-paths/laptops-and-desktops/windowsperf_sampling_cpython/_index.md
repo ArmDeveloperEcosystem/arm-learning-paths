@@ -16,11 +16,12 @@ learning_objectives:
 prerequisites:
     - Windows on Arm desktop or development machine with [WindowsPerf installed](/install-guides/wperf/)
     - Windows x86_64 desktop machine with [Visual Studio 2022 Community Edition](https://visualstudio.microsoft.com/vs/) installed.
+
+author: Przemyslaw Wirkus
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Przemyslaw Wirkus
 
 ### Tags
 skilllevels: Introductory

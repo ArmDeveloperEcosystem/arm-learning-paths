@@ -13,11 +13,12 @@ learning_objectives:
 
 prerequisites:
     - A computer running Arm Linux or macOS with Docker installed
+
+author: Arnaud de Grandmaison
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Arnaud de Grandmaison
 
 test_images:
     - ubuntu:latest

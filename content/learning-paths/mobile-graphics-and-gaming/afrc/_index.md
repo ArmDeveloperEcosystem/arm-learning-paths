@@ -16,11 +16,12 @@ prerequisites:
     - An appropriate Android device (e.g., Google Pixel 8) supporting the required Vulkan extensions.
     - Knowledge of the Vulkan API.
     - A Vulkan application that creates and uses images. This Learning Path shows how to use an API Sample in the [Khronos Vulkan Samples repository](https://github.com/KhronosGroup/Vulkan-Samples/blob/main/scripts/README.adoc#generate-api-sample) as an example.
+
+author: Jose-Emilio Munoz-Lopez
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jose-Emilio Munoz-Lopez
 
 ### Tags
 skilllevels: Advanced
@@ -32,7 +33,6 @@ operatingsystems:
     - Android
 tools_software_languages:
     - Vulkan
-
 
 further_reading:
     - resource:
@@ -47,9 +47,6 @@ further_reading:
         title: AFRC in Arm Immortalis-G715
         link: https://developer.arm.com/community/arm-community-blogs/b/mobile-graphics-and-gaming-blog/posts/arm-immortalis-g715-developer-overview
         type: blog
-
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -13,11 +13,12 @@ learning_objectives:
 
 prerequisites:
     - Some familiarity with CI/CD concepts is assumed
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -44,7 +45,6 @@ further_reading:
         title: Arm Virtual Hardware
         link: https://arm-software.github.io/AVH/main/examples/html/GetStarted.html
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

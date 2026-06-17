@@ -9,15 +9,17 @@ learning_objectives:
     - Describe how basic math operations power Large Language Models.
     - Describe how the KleidiAI micro-kernels speed up Generative AI inference performance.
     - Run a basic C++ matrix multiplication example to showcase the speedup that KleidiAI micro-kernels can deliver.
-    
+
 prerequisites:
     - An Arm-based Linux machine that implements the Int8 Matrix Multiplication (*i8mm*) architecture feature. The example in this Learning Path is run on an AWS Graviton 3 instance. Instructions on setting up an Arm-based server are [found here](/learning-paths/servers-and-cloud-computing/csp/aws/).
     - A basic understanding of linear algebra terminology, such as dot product and matrix multiplication.
+
+author: Zach Lasiuk
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
-author: Zach Lasiuk
 ### Tags
 skilllevels: Introductory 
 subjects: ML
@@ -39,8 +41,6 @@ shared_between:
     - servers-and-cloud-computing
     - mobile-graphics-and-gaming
 
-
-
 further_reading:
     - resource:
         title: KleidiAI documentation
@@ -50,9 +50,6 @@ further_reading:
         title: KleidiAI visualized
         link: https://community.arm.com/arm-community-blogs/b/ai-and-ml-blog/posts/kleidiai
         type: blog
-
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

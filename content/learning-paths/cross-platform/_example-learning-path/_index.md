@@ -15,11 +15,12 @@ learning_objectives:
 
 prerequisites:
     - A [GitHub](https://github.com/) account
+
+author: Zach Lasiuk
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Zach Lasiuk
 
 ### Tags
 skilllevels: Introductory
@@ -30,13 +31,11 @@ operatingsystems:
 tools_software_languages:
     - Hugo
 
-
 further_reading:
     - resource:
         title: GitHub Project Repository
         link: https://github.com/ArmDeveloperEcosystem/arm-learning-paths
         type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

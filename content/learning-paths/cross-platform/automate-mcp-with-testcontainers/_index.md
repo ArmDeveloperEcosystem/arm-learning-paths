@@ -16,11 +16,12 @@ prerequisites:
     - A computer with [Docker](/install-guides/docker/) and Python 3.11 or later installed
     - Basic familiarity with Python, PyTest, and container concepts
     - Familiarity with the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) specification
+
+author: Neethu Elizabeth Simon
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Neethu Elizabeth Simon
 
 ### Tags
 skilllevels: Introductory
@@ -62,7 +63,6 @@ further_reading:
         title: PyTest Documentation
         link: https://docs.pytest.org/
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

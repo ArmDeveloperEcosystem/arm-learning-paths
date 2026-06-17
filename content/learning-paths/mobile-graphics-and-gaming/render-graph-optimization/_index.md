@@ -14,11 +14,12 @@ prerequisites:
     - Frame Advisor, part of Arm Performance Studio, installed. Refer to the [Arm Performance Studio](/install-guides/ams/) install guide. 
     - If you wish to analyze your own applications you will need a supported Android device.
     - Some basic familiarity with Frame Advisor. Review the [Frame Advisor](/learning-paths/mobile-graphics-and-gaming/ams/fa/) section in [Get started with Arm Performance Studio for mobile](/learning-paths/mobile-graphics-and-gaming/ams/).
+
+author: Mark Thurman
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Mark Thurman
 
 further_reading:
     - resource:
@@ -56,7 +57,6 @@ operatingsystems:
     - Windows
     - macOS
     - Android
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

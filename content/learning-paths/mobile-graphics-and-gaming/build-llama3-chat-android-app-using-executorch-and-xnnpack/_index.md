@@ -12,7 +12,6 @@ learning_objectives:
     - Describe how 4-bit groupwise PTQ quantization reduces model size without significantly sacrificing model accuracy.
     - Build and run Llama models using ExecuTorch on your development machine.
     - Build and run an Android Chat app with different Llama models using ExecuTorch on an Arm-based smartphone.
-    
 
 prerequisites:
     - An Apple M1/M2 development machine with Android Studio installed or a Linux machine with at least 16GB of RAM.
@@ -21,13 +20,14 @@ prerequisites:
     - Android Debug Bridge (adb) installed on your device. Follow the steps in [adb](https://developer.android.com/tools/adb)  to install Android SDK Platform Tools. The adb tool is included in this package.
     - Java 17 JDK. Follow the steps in [Java 17 JDK](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) to download and install JDK for host.
     - Python 3.10.
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author: 
     - Varun Chari
     - Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -45,7 +45,6 @@ operatingsystems:
     - macOS
     - Android
 
-
 further_reading:
     - resource:
         title: ExecuTorch Overview
@@ -59,8 +58,6 @@ further_reading:
         title: ExecuTorch Examples
         link: https://github.com/pytorch/executorch/blob/main/examples/README.md
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

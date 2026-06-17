@@ -16,11 +16,11 @@ prerequisites:
     - A GitHub account.
     - A machine with [Terraform](/install-guides/terraform/),[Azure CLI](/install-guides/azure-cli), and [Kubectl](/install-guides/kubectl/) installed.
 
+author: Pranay Bakre
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pranay Bakre
 
 ### Tags
 skilllevels: Advanced
@@ -56,8 +56,6 @@ further_reading:
         title: Kubernetes documentation
         link:  https://kubernetes.io/docs/home/
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

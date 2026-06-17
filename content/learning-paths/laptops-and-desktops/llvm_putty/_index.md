@@ -13,11 +13,12 @@ learning_objectives:
 
 prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -39,7 +40,6 @@ further_reading:
         title: LLVM - Windows on Arm
         link: https://linaro.atlassian.net/wiki/spaces/LLVM/overview/
         type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

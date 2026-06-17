@@ -12,11 +12,12 @@ learning_objectives:
     - Run inference with a Phi-3 model using ONNX Runtime with KleidiAI acceleration.
 prerequisites:
     - A Windows on Arm computer such as a Lenovo Thinkpad X13 running Windows 11, or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
+
+author: Barbara Corriero
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Barbara Corriero
 
 ### Tags
 skilllevels: Advanced

@@ -17,11 +17,12 @@ prerequisites:
     - 'A free Pulumi account and Pulumi CLI (details provided in this learning path)'
     - 'Node.js (details provided in this learning path)'
     - 'Azure CLI (details provided in this learning path)'
+
+author: Dawid Borycki
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -31,7 +32,7 @@ cloud_service_providers:
 
 armips:
     - Neoverse
-    
+
 tools_software_languages:
     - TypeScript  
     - Docker    
@@ -52,8 +53,6 @@ further_reading:
         title: Terraform
         link: https://www.terraform.io
         type: Documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

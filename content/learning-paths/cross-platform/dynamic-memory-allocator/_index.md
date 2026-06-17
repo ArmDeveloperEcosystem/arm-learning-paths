@@ -15,11 +15,12 @@ learning_objectives:
 prerequisites:
 - Familiarity with C programming, with a good understanding of pointers.
 - A Linux machine to run the example code.
+
+author: David Spickett
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: David Spickett
 
 test_images:
 - ubuntu:latest
@@ -53,7 +54,6 @@ shared_path: true
 shared_between:
     - laptops-and-desktops
     - embedded-and-microcontrollers
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

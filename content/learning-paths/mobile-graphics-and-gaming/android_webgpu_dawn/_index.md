@@ -16,7 +16,7 @@ learning_objectives:
     - Build and run a WebGPU Android Application.
     - Profile the application using Streamline.
     - Analyze the profiling data.
-       
+
 prerequisites:
     - Basic knowledge of graphics APIs and experience in developing Android graphics applications.
     - A development machine with Android Studio, Blender, and Arm Streamline installed.
@@ -24,13 +24,14 @@ prerequisites:
     - Android Studio.
     - Arm Performance Studio.
     - Python 3.10 or later.
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author:
     - Varun Chari
     - Albin Bernhardsson
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -47,7 +48,6 @@ operatingsystems:
     - Linux
     - Windows
     - Android
-
 
 further_reading:
     - resource:
@@ -78,8 +78,6 @@ further_reading:
         title: WebGPU examples 2
         link: https://github.com/samdauwe/webgpu-native-examples
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

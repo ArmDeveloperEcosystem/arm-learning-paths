@@ -12,11 +12,12 @@ learning_objectives:
 
 prerequisites:
     - An Arm computer running Linux with recent versions of Clang or GCC installed.
+
+author: Konstantinos Margaritis
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Konstantinos Margaritis
 
 ### Tags
 skilllevels: Advanced
@@ -56,7 +57,6 @@ further_reading:
         title: Colin Scott's Interactive latencies page
         link: https://colin-scott.github.io/personal_website/research/interactive_latency.html
         type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

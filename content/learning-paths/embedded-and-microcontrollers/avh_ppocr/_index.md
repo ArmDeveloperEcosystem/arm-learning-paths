@@ -16,11 +16,12 @@ prerequisites:
     - Some familiarity with embedded programming 
     - Some familiarity with AI/ML software development 
     - An Amazon Web Services(AWS) [account](https://aws.amazon.com/) to subscribe [Arm Virtual Hardware](https://aws.amazon.com/marketplace/pp/prodview-urbpq7yo5va7g) Amazon Machine Image(AMI)
+
+author: Liliya Wu
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Liliya Wu
 
 ### Tags
 skilllevels: Introductory
@@ -53,8 +54,6 @@ further_reading:
         title: Arm and Baidu PaddlePaddle blog
         link: https://www.arm.com/blogs/blueprint/baidu-paddlepaddle
         type: blog
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

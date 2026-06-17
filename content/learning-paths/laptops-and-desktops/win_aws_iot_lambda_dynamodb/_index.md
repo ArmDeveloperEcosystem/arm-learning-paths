@@ -15,11 +15,12 @@ prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).   
     - Any code editor. [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user) is suitable.
     - Completion of the [Create IoT applications with Windows on Arm and AWS IoT Core](/learning-paths/laptops-and-desktops/win_aws_iot/) Learning Path.
+
+author: Dawid Borycki
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Dawid Borycki
 
 ### Tags
 skilllevels: Advanced
@@ -45,7 +46,6 @@ further_reading:
         title: Overview of Amazon Web Services
         link: https://docs.aws.amazon.com/whitepapers/latest/aws-overview/introduction.html
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

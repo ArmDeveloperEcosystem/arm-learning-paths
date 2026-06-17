@@ -18,11 +18,12 @@ prerequisites:
     - Two or more Arm Linux systems with root or sudo access. The examples use AWS Graviton2 and Graviton4 instances, but other systems are possible
     - Arm System Characterization Tool (ASCT) installed on each system
     - A good understanding of CPU memory subsystems, including cache hierarchies, cache lines, and DRAM in the memory hierarchy
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 skilllevels: Advanced
 subjects: Performance and Architecture

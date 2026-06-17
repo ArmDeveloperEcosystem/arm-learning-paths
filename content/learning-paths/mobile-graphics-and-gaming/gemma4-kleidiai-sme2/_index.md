@@ -18,10 +18,11 @@ learning_objectives:
 prerequisites:
     - A SME2 device (macOS M4 on Apple Silicon)
     - Git, Homebrew, and Xcode Command Line Tools
+author: Annie Tallund
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-author: Annie Tallund
 
 ### Tags
 skilllevels: Advanced
@@ -36,8 +37,6 @@ tools_software_languages:
     - XNNPACK
 operatingsystems:
     - macOS
-
-
 
 further_reading:
     - resource:
@@ -76,8 +75,6 @@ further_reading:
         title: litert-community/Gemma3-4B-IT on Hugging Face
         link: https://huggingface.co/litert-community/Gemma3-4B-IT
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

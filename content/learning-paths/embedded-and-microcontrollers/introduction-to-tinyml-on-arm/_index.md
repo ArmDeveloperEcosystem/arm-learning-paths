@@ -16,11 +16,12 @@ learning_objectives:
 prerequisites:
     - Basic knowledge of Machine Learning concepts
     - A Linux computer
+
+author: Dominica Abena O. Amanfo
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Dominica Abena O. Amanfo
 
 ### Tags
 skilllevels: Introductory
@@ -55,9 +56,6 @@ further_reading:
         title: Arm Developers Guide for Cortex-M Processors and Ethos-U NPU
         link: https://developer.arm.com/documentation/109267/0101
         type: documentation
-
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

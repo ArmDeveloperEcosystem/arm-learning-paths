@@ -15,11 +15,12 @@ learning_objectives:
 prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
     - Visual Studio 2022 with .NET desktop development and Universal Windows Platform development installed.
+
+author: Dawid Borycki
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -33,7 +34,7 @@ tools_software_languages:
     - C#
     - .NET
     - Visual Studio
-    
+
 further_reading:
     - resource:
         title: Xamarin Forms
@@ -43,7 +44,6 @@ further_reading:
         title: The Model-View-ViewModel Pattern
         link: https://learn.microsoft.com/en-us/xamarin/xamarin-forms/enterprise-application-patterns/mvvm
         type: documentation   
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

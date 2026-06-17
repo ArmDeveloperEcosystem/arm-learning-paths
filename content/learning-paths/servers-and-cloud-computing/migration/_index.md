@@ -15,11 +15,12 @@ learning_objectives:
 
 prerequisites:
     - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider.
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -60,7 +61,6 @@ further_reading:
         title: Making your Go workloads up to 20% faster with Go 1.18 and AWS Graviton
         link: https://aws.amazon.com/blogs/compute/making-your-go-workloads-up-to-20-faster-with-go-1-18-and-aws-graviton/
         type: blog
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

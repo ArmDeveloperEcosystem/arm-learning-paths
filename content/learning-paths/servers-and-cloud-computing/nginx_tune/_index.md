@@ -15,11 +15,12 @@ learning_objectives:
 prerequisites:
     - A cloud or bare-metal installation of a Nginx file server or load balancer.
     - If you do not already have a Nginx setup, a review of [Learn how to deploy Nginx](/learning-paths/servers-and-cloud-computing/nginx/).
+
+author: Julio Suarez
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Julio Suarez
 
 ### Tags
 skilllevels: Advanced
@@ -47,8 +48,6 @@ further_reading:
         title: Nginx Admin Guide
         link: https://docs.nginx.com/nginx/admin-guide/
         type: documentation
-    
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -16,11 +16,12 @@ prerequisites:
     - Experience with multi-threaded programming in C++ and Python
     - Understanding of build systems and computer architecture concepts
     - Familiarity with Linux command-line tools
+
+author: Kieran Hejmadi
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Kieran Hejmadi
 
 ### Tags
 skilllevels: Advanced
@@ -62,8 +63,6 @@ further_reading:
         title: Get started with Arm-based cloud instances
         link: /learning-paths/servers-and-cloud-computing/csp/
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

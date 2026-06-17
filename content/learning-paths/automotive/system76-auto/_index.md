@@ -13,11 +13,12 @@ learning_objectives:
 
 prerequisites:
     - A System76 Thelio Astra desktop computer running Ubuntu 24.04. 
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -41,7 +42,6 @@ further_reading:
         title: Parsec 
         link: https://parsec.community/
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

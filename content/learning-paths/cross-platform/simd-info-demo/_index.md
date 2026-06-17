@@ -13,13 +13,14 @@ learning_objectives:
 prerequisites:
     - A basic understanding of SIMD.
     - Access to an Arm platform with a SIMD-supported engine, installed with recent versions of a C compiler such as Clang or GCC.
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author: 
     - Georgios Mermigkis
     - Konstantinos Margaritis
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -47,8 +48,6 @@ further_reading:
         title: SIMD.info
         link: https://simd.info
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

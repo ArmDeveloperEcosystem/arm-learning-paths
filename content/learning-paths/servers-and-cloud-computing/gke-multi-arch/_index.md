@@ -16,11 +16,12 @@ prerequisites:
     - A [Google Cloud account](https://console.cloud.google.com/). Create an account if needed.
     - A computer with [Google Cloud CLI](/install-guides/gcloud/) and [kubectl](/install-guides/kubectl/)installed.
     - An existing Google Kubernetes Engine (GKE) cluster with x86-based nodes
+
+author: Pranay Bakre
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pranay Bakre
 
 ### Tags
 skilllevels: Advanced
@@ -38,7 +39,6 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
-
 further_reading:
     - resource:
         title: Create Arm based clusters and node pools 
@@ -52,8 +52,6 @@ further_reading:
         title: GKE documentation
         link: https://cloud.google.com/kubernetes-engine/docs
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

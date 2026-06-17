@@ -14,11 +14,12 @@ learning_objectives:
 prerequisites:
     - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an Arm Linux server.
     - Familiarity with Linux.
+
+author: Kieran Hejmadi
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Kieran Hejmadi
 
 ### Tags
 skilllevels: Introductory

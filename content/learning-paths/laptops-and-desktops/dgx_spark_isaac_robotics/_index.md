@@ -18,15 +18,16 @@ prerequisites:
     - Familiarity with Linux command-line tools
     - Experience with Python scripting and virtual environments
     - Basic understanding of reinforcement learning concepts (rewards, policies, episodes)
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author:
     - Johnny Nunez
     - Odin Shen
     - Asier Arranz
     - Raymond Lo
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced

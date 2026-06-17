@@ -17,13 +17,14 @@ prerequisites:
     - Completion of [Use Linux on an NXP FRDM i.MX 93 board](/learning-paths/embedded-and-microcontrollers/linux-nxp-board/) (Linux setup, login access, and file transfer)
     - Basic knowledge of Machine Learning concepts
     - A host computer to compile ExecuTorch libraries
+
+author:
+    - Waheed Brown
+    - Fidel Makatia Omusilibwa
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: 
-- Waheed Brown
-- Fidel Makatia Omusilibwa
 
 ### Tags
 skilllevels: Introductory
@@ -59,13 +60,9 @@ further_reading:
         link: https://developer.arm.com/documentation/109267/0101
         type: documentation
 
-
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

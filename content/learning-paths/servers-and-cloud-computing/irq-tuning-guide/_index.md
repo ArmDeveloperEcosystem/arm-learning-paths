@@ -2,7 +2,6 @@
 title: Optimize network interrupt handling on Arm servers
 description: Analyze and optimize interrupt request (IRQ) patterns on Arm Linux servers to improve network workload performance through IRQ distribution strategies.
 
-   
 minutes_to_complete: 20
 
 who_is_this_for: This is an introductory topic for developers and performance engineers who are interested in understanding how network interrupt patterns can impact performance on cloud servers.
@@ -16,11 +15,12 @@ learning_objectives:
 prerequisites:
     - An Arm computer running Linux
     - Some familiarity with the Linux command line
+
+author: Kiel Friedt
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Kiel Friedt
 
 ### Tags
 skilllevels: Introductory
@@ -32,7 +32,6 @@ tools_software_languages:
 
 operatingsystems:
     - Linux
-
 
 further_reading:
     - resource:

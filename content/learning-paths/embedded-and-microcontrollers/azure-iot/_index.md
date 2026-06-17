@@ -19,11 +19,12 @@ learning_objectives:
 prerequisites:
     - A machine with Python 3 and Visual Studio Code installed
     - An active Azure account with sufficient permissions to create resources (such as IoT Hub, Functions, and Cosmos DB)
+
+author: Dawid Borycki
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Dawid Borycki
 
 ### Tags
 skilllevels: Advanced
@@ -52,8 +53,6 @@ further_reading:
         title: End-to-End IoT Solution Tutorial with Python and Azure
         link: https://github.com/Azure-Samples/azure-iot-samples-python
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

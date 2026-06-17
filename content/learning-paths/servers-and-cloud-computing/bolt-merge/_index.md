@@ -15,11 +15,12 @@ learning_objectives:
 
 prerequisites:
   - An Arm-based Linux system with [BOLT](/install-guides/bolt/) and [Linux Perf](/install-guides/perf/) installed
+
+author: Gayathri Narayana Yegna Narayanan
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Gayathri Narayana Yegna Narayanan
 
 ### Tags
 skilllevels: Advanced
@@ -43,7 +44,6 @@ further_reading:
         title: BOLT - A Practical Binary Optimizer for Data Centers and Beyond
         link: https://research.facebook.com/publications/bolt-a-practical-binary-optimizer-for-data-centers-and-beyond/
         type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

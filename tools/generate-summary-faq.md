@@ -97,9 +97,13 @@ tools/generate-summary-faq --list-categories
 Each Learning Path uses three front-matter fields:
 
 ```yaml
+author: Example Author
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
+
+### Tags
 ```
 
 Use the fields this way:
@@ -114,12 +118,16 @@ for processed Learning Paths. This prevents repeated LLM calls unless a
 contributor intentionally opts the path in again.
 
 New Learning Paths scaffolded from `archetypes/learning-path/_index.md` should
-start with:
+place the fields after `author` and before `### Tags`:
 
 ```yaml
+author: PLACEHOLDER NAME
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
+
+### Tags
 ```
 
 If you create a Learning Path by copying an existing folder, confirm these

@@ -14,11 +14,12 @@ learning_objectives:
 prerequisites:
     - A GitHub account (a Team or Enterprise Cloud plan is required for private repositories).
     - A Docker Hub account.
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -51,7 +52,6 @@ further_reading:
         title: Arm64 on GitHub Actions Powering faster, more efficient build systems
         link: https://github.blog/2024-06-03-arm64-on-github-actions-powering-faster-more-efficient-build-systems/
         type: blog
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

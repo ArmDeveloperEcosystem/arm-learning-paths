@@ -15,11 +15,12 @@ prerequisites:
     - Familiarity with ML concepts
     - Familiarity with C programming on microcontrollers
     - STM32 B-L475E-IOT01A2 board
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ### Tags
 skilllevels: Advanced
@@ -41,7 +42,6 @@ further_reading:
         title: Getting started with STM32 MCU Discovery Kits software development tools
         link: https://www.st.com/resource/en/user_manual/um2052-getting-started-with-stm32-mcu-discovery-kits-software-development-tools-stmicroelectronics.pdf
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

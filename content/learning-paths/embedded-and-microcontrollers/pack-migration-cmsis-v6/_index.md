@@ -14,11 +14,12 @@ learning_objectives:
 prerequisites:
     - A good understanding of [CMSIS-Packs](https://open-cmsis-pack.github.io/Open-CMSIS-Pack-Spec/main/html/index.html).
     - A CMSIS-Pack that contains device support and was created for CMSIS v5.
+
+author: Christopher Seidl
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Christopher Seidl
 
 ### Tags
 skilllevels: Advanced
@@ -32,7 +33,6 @@ operatingsystems:
     - Baremetal
     - RTOS
 
-
 further_reading:
     - resource:
         title: Create a Device Family Pack - Hands-On Example
@@ -42,8 +42,6 @@ further_reading:
         title: Arm Compiler for Embedded Migration and Compatibility Guide
         link: https://developer.arm.com/documentation/100068/latest/Migrating-from-Arm-Compiler-5-to-Arm-Compiler-for-Embedded-6
         type: Documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

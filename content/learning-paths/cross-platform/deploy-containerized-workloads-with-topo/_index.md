@@ -24,6 +24,10 @@ prerequisites:
 
 author: Matt Cossins
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: Containers and Virtualization
@@ -69,8 +73,6 @@ further_reading:
         title: Topo VS Code extension
         link: https://marketplace.visualstudio.com/items?itemName=Arm.topo
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

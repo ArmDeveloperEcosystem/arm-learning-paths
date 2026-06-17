@@ -13,11 +13,12 @@ learning_objectives:
 prerequisites:
     - Access to Arm Performix
     - Basic understanding of C++
+
+author: Kieran Hejmadi
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Kieran Hejmadi
 
 ### Tags
 skilllevels: Introductory
@@ -30,7 +31,6 @@ tools_software_languages:
     - Runbook
 operatingsystems:
     - Linux
-
 
 further_reading:
     - resource:
@@ -45,9 +45,6 @@ further_reading:
         title: Flame Graphs 
         link: https://www.brendangregg.com/flamegraphs.html
         type: blog
-
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

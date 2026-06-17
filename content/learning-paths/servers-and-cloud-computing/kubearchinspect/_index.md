@@ -15,11 +15,12 @@ learning_objectives:
 
 prerequisites:
     - A running Kubernetes cluster accessible with `kubectl`.
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -38,7 +39,6 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
-
 further_reading:
     - resource:
         title: Kubernetes documentation
@@ -56,7 +56,6 @@ further_reading:
         title: Arm workloads on GKE
         link: https://cloud.google.com/kubernetes-engine/docs/concepts/arm-on-gke
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

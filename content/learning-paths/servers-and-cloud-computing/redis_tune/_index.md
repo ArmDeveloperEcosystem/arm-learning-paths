@@ -13,13 +13,14 @@ learning_objectives:
 prerequisites:
     - Cloud or bare-metal installation of a Redis server
     - Review [Learn how to deploy Redis](/learning-paths/servers-and-cloud-computing/redis/) if you do not already have Redis setup
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author:
     - Elham Harirpoush
     - Kelsey Steele
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -43,8 +44,6 @@ further_reading:
         title: Redis Documentation
         link: https://redis.io/docs/
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

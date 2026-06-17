@@ -15,11 +15,12 @@ learning_objectives:
 prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 (Dpsv6) instances
     - Familiarity with the [MongoDB architecture](https://www.mongodb.com/) and deployment practices on Arm64 platforms
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -51,7 +52,6 @@ further_reading:
         title: MongoDB on Azure
         link: https://azure.microsoft.com/en-us/solutions/mongodb
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

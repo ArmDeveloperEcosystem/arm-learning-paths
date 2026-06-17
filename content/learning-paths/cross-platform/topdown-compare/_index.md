@@ -16,12 +16,13 @@ prerequisites:
     - Familiarity with performance analysis on Linux systems using Perf and PMU counters
     - Access to Arm Neoverse V2 and Intel x86 Linux systems to run the code example
     - Basic understanding of CPU pipeline concepts and performance bottlenecks
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author:
     - Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -58,7 +59,6 @@ further_reading:
         title: How to use the Arm Performance Monitoring Unit and System Counter
         link: /learning-paths/servers-and-cloud-computing/arm_pmu/
         type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

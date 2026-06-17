@@ -14,11 +14,12 @@ learning_objectives:
 prerequisites:
     - Some familiarity with embedded Linux.
     - A linux machine running Ubuntu 22.04 with at least 60 GB of disk space.
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -46,8 +47,6 @@ further_reading:
         title: QEMU documentation
         link: https://www.qemu.org/docs/master/
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

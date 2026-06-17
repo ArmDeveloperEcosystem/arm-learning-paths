@@ -14,11 +14,12 @@ learning_objectives:
 prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 Version 22H2 which has [Windows Sandbox enabled](/install-guides/windows-sandbox-woa/).
     - A valid [GitHub account](https://github.com/) to complete this Learning Path.
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -41,7 +42,6 @@ further_reading:
         title: GitHub Actions support Windows Arm Hardware
         link: https://github.blog/changelog/2022-09-28-github-actions-self-hosted-runners-now-support-windows-arm-hardware/
         type: blog
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

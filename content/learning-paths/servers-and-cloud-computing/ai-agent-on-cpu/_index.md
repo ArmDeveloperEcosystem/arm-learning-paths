@@ -16,11 +16,12 @@ prerequisites:
     - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server.
     - Basic understanding of Python and prompt engineering.
     - Understanding of LLM fundamentals.
+
+author: Andrew Choi
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Andrew Choi
 
 ### Tags
 skilllevels: Introductory
@@ -39,8 +40,6 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
-
-
 further_reading:
     - resource:
         title: llama.cpp
@@ -50,8 +49,6 @@ further_reading:
         title: llama-cpp-agent
         link: https://llama-cpp-agent.readthedocs.io/en/latest/
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

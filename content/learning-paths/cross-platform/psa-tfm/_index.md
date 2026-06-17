@@ -18,10 +18,11 @@ learning_objectives:
 prerequisites:
     - Ubuntu host or access to AWS
     - Optional MPS3 FPGA prototyping board
+author: Ronan Synnott
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-author: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
@@ -36,7 +37,6 @@ tools_software_languages:
     - Trusted Firmware
     - FVP
     - GCC
-
 
 ### Cross-platform metadata only
 shared_path: true

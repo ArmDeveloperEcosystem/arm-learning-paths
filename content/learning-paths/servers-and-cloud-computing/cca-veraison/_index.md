@@ -4,7 +4,6 @@ description: Learn how to inspect and verify Arm CCA attestation tokens using co
 
 minutes_to_complete: 30
 
-
 who_is_this_for: This Learning Path is for developers who would like to learn about attestation in confidential computing, using Arm's Confidential Computing Architecture (CCA). 
 
 learning_objectives:
@@ -14,14 +13,14 @@ learning_objectives:
     - Use an attestation verification service to evaluate a CCA attestation token.
     - Understand the purpose of the Open-Source Veraison project.
 
-
 prerequisites:
     - An Arm-based or x86 computer running Ubuntu. You can use a server instance from a cloud service provider of your choice.
+
+author: Paul Howard
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Paul Howard
 
 ### Tags
 skilllevels: Introductory
@@ -34,9 +33,6 @@ tools_software_languages:
     - CCA
     - RME
     - Runbook
-
-
-
 
 further_reading:
     - resource:
@@ -51,8 +47,6 @@ further_reading:
         title: The Attestation Results for Secure Interactions (AR4SI) 
         link: https://datatracker.ietf.org/doc/draft-ietf-rats-ar4si/
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

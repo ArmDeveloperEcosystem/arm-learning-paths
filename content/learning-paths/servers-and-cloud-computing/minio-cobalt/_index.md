@@ -17,11 +17,12 @@ prerequisites:
   - A [Microsoft Azure account](https://azure.microsoft.com/) with access to Cobalt 100-based instances (Dpsv6)
   - Familiarity with SSH and remote server access
   - Basic understanding of cloud storage concepts
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory

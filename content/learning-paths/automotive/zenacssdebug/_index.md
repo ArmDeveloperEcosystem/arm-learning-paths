@@ -17,11 +17,12 @@ prerequisites:
   - Ubuntu 22.04 host machine
   - Arm Development Studio 2024.1 or later with a valid license - for support see the [Install Guide for Arm DS](/install-guides/armds/) 
   - Basic understanding of the Arm Zena CSS software stack, Armv8-A/Armv9-A cores, and Linux
+
+author: Ronan Synnott
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
@@ -45,7 +46,6 @@ further_reading:
       title: Arm Development Studio
       link: https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio
       type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

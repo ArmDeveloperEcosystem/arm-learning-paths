@@ -14,11 +14,12 @@ learning_objectives:
 prerequisites:
     - Some understanding of the Arm architecture
     - Arm Development Studio, 2023.0 or later
+
+author: Ronan Synnott
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
@@ -27,7 +28,7 @@ armips:
     - Neoverse
     - Cortex-A
     - Armv9-A
-    
+
 operatingsystems:
     - Linux
     - Android
@@ -38,7 +39,6 @@ tools_software_languages:
     - RME
     - CCA
     - Runbook
-
 
 ### Cross-platform metadata only
 shared_path: true
@@ -60,7 +60,6 @@ further_reading:
         title: Learn the architecture - Realm Management Extension
         link: https://developer.arm.com/documentation/den0126
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -16,11 +16,12 @@ prerequisites:
     - Sudo access to install dependencies and to modify system configuration files.
     - Be comfortable with SSH/Linux terminal and basic system administration tasks.
     - To install both [Nginx](/learning-paths/servers-and-cloud-computing/nginx/) and [PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql/)
+
+author: Diego Russo
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Diego Russo
 
 ### Tags
 skilllevels: Introductory
@@ -40,7 +41,6 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
-
 further_reading:
     - resource:
         title: PostgreSQL Documentation
@@ -54,8 +54,6 @@ further_reading:
         title: Django Documentation
         link: https://docs.djangoproject.com/
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -15,11 +15,12 @@ learning_objectives:
 prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).    
     - Refer to [Visual Studio 2022 with Arm build tools](/install-guides/vs-woa).
+
+author: Dawid Borycki
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -45,7 +46,6 @@ further_reading:
         title: Load x64 Plug-ins (like VSTs) from your Arm Code using Arm64EC
         link: https://devblogs.microsoft.com/windows-music-dev/load-x64-plug-ins-like-vsts-from-your-arm-code-using-arm64ec/
         type: blog    
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

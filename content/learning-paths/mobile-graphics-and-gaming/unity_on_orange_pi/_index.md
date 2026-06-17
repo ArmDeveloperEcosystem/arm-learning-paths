@@ -16,11 +16,12 @@ prerequisites:
     - A microSD card (16GB or greater; class 10 or faster)
     - An ethernet connection
     - A mouse and keyboard connected to the Orange Pi
+
+author: Gabriel Peterson
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Gabriel Peterson
 
 ### Tags
 skilllevels: Introductory
@@ -48,9 +49,6 @@ further_reading:
         title: Unity Learn
         link: https://learn.unity.com/
         type: website
-
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

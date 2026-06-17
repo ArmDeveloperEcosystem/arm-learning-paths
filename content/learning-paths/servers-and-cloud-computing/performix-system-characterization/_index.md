@@ -15,13 +15,13 @@ learning_objectives:
 prerequisites:
     - A Arm Linux target machine accessible via SSH to characterize.
 
+author:
+    - Brendan Long
+    - David Wong
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author:
-- Brendan Long
-- David Wong
 
 ### Tags
 skilllevels: Introductory

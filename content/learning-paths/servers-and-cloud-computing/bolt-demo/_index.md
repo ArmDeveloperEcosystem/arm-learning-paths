@@ -6,14 +6,12 @@ minutes_to_complete: 20
 
 who_is_this_for: This is an introductory topic for developers who have compiled an AArch64 Linux application and want to evaluate whether LLVM BOLT can improve its runtime performance.
 
-
 learning_objectives:
     - Identify whether a program is a good candidate for code layout optimization
     - Install LLVM BOLT on Linux
     - Use LLVM BOLT to perform profile-guided post-link optimization of an AArch64 binary with poor spatial locality
     - Collect profile data using multiple techniques, including BRBE, instrumentation, SPE, and PMU event sampling
     - Evaluate the impact of BOLT optimizations using performance metrics and profiling data
-
 
 prerequisites:
     - An AArch64 system running Linux with [perf](/install-guides/perf/) installed
@@ -22,11 +20,11 @@ prerequisites:
     - GCC version 13.3 or later to compile the example program ([GCC](/install-guides/gcc/) )
     - A system with with sufficient hardware performance counters to use the [TopDown](/install-guides/topdown-tool) methodology. This typically requires running on bare metal rather than a virtualized environment.
 
+author: Paschalis Mpeis
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Paschalis Mpeis
 
 ### Tags
 skilllevels: Introductory
@@ -66,8 +64,6 @@ further_reading:
         title: Arm® Architecture Reference Manual, for A-profile architecture
         link: https://developer.arm.com/documentation/ddi0487/latest
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

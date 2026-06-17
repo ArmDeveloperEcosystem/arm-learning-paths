@@ -13,13 +13,14 @@ learning_objectives:
 prerequisites:
     - Understanding of vertex attributes.
     - Familiarity with Arm Frame Advisor (part of Arm Performance Studio).
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author:
     - Andrew Kilroy
     - Peter Harris
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -54,8 +55,6 @@ further_reading:
         title: Attribute Layouts
         link: https://developer.arm.com/documentation/101897/0304/Vertex-shading/Attribute-layout
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

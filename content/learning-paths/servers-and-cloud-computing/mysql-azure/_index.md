@@ -1,7 +1,6 @@
 ---
 title: Deploy MySQL on Microsoft Azure Cobalt 100 processors
 
-   
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for developers migrating MySQL applications from x86_64 to Arm.
@@ -14,11 +13,12 @@ learning_objectives:
 prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
     - Familiarity with relational databases and the basics of [MySQL](https://dev.mysql.com/doc/refman/8.0/en/introduction.html)
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -33,7 +33,7 @@ tools_software_languages:
     - MySQL
     - SQL
     - Docker
- 
+
 operatingsystems:
     - Linux
 

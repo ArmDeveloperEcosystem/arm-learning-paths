@@ -15,11 +15,12 @@ prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).   
     - Any code editor. [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user) is suitable.    
     - Completion of the [Use AWS Lambda for IoT applications](/learning-paths/laptops-and-desktops/win_aws_iot_lambda/) Learning Path.
+
+author: Dawid Borycki
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Dawid Borycki
 
 ### Tags
 skilllevels: Advanced
@@ -45,7 +46,6 @@ further_reading:
         title: Developing with Amazon S3
         link: https://docs.aws.amazon.com/AmazonS3/latest/userguide/developing-s3.html
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

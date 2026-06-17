@@ -13,11 +13,12 @@ learning_objectives:
 
 prerequisites:
     - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an Arm server with recent versions of Docker and Go installed.
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ### Tags
 skilllevels: Advanced
@@ -45,8 +46,6 @@ further_reading:
         title: Amazon EC2 C7g Instances powered by AWS Graviton3 processors
         link: https://aws.amazon.com/blogs/aws/new-amazon-ec2-c7g-instances-powered-by-aws-graviton3-processors/
         type: Blog
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

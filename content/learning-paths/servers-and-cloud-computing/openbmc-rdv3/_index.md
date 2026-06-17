@@ -17,13 +17,14 @@ prerequisites:
   - At least 80 GB free disk space and 48 GB RAM
   - Working knowledge of Docker, Git, and common Linux terminal tools
   - Basic understanding of the server firmware stack (such as UEFI, BMC, and TF-A)
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author:
   - Odin Shen
   - Ken Zhang
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced

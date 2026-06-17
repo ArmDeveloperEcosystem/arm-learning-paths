@@ -136,10 +136,19 @@ def set_front_matter_flag(front_matter: str, flag: str, value: bool) -> tuple[st
         return updated, updated != front_matter
 
     lines = front_matter.splitlines()
-    insert_at = 0
+    insert_at = len(lines)
     for index, line in enumerate(lines):
-        if re.match(r"^(title|description|minutes_to_complete|who_is_this_for|learning_objectives|prerequisites|author|reviewers|test_maintenance|test_images|weight|layout|draft|hidden|tags|skilllevels|subjects|armips|tools_software_languages|operatingsystems|cloud_service_providers|ci_cd|learning_path_main_image|main_image|additional_search_terms|ignore_connection_issues|generate_summary_faq|rerun_summary|rerun_faqs)\s*:", line):
+        if re.match(r"^author\s*:", line):
             insert_at = index + 1
+            while insert_at < len(lines):
+                next_line = lines[insert_at]
+                if re.match(r"^(generate_summary_faq|rerun_summary|rerun_faqs)\s*:", next_line):
+                    insert_at += 1
+                    continue
+                if not next_line.strip() or not next_line.startswith((" ", "\t")):
+                    break
+                insert_at += 1
+            break
     lines.insert(insert_at, replacement)
     return "\n".join(lines), True
 

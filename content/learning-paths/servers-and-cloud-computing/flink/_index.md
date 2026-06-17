@@ -13,11 +13,12 @@ learning_objectives:
 
 prerequisites:
 - An Arm based instance server from a cloud service provider.
+
+author: Ying Yu
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Ying Yu
 
 ### Tags
 skilllevels: Introductory
@@ -31,8 +32,6 @@ cloud_service_providers:
 armips:
 - Neoverse
 
-
-
 operatingsystems:
 - Linux
 
@@ -41,8 +40,6 @@ tools_software_languages:
 - Java
 - Nexmark
 - Runbook
-
-
 
 further_reading:
     - resource:
@@ -53,7 +50,6 @@ further_reading:
         title: Flink Performance Tool
         link: https://github.com/nexmark/nexmark#readme
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -18,11 +18,12 @@ prerequisites:
     - Android Studio installed on your development computer.
     - A USB cable to connect your computer to your Google Pixel 8.
     - Android Debug Bridge (adb) installed on your device. If needed, follow the steps in the [Android Debug Bridge](https://developer.android.com/tools/adb) documentation.
+
+author: Roberto Lopez Mendez
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Roberto Lopez Mendez
 
 ### Tags
 skilllevels: Advanced
@@ -34,7 +35,6 @@ tools_software_languages:
     - MTE
 operatingsystems:
     - Android
-
 
 further_reading:
     - resource:
@@ -53,8 +53,6 @@ further_reading:
         title: Enhanced Security Through MTE
         link: https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/enhanced-security-through-mte
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

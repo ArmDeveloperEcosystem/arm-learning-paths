@@ -15,11 +15,12 @@ learning_objectives:
 prerequisites:
     - Installation of [Arm Keil Studio for VS Code](/install-guides/keilstudio_vs/)
     - Some familiarity with CMSIS is assumed
+
+author: Ronan Synnott
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
@@ -42,7 +43,6 @@ further_reading:
         title: Event Recorder and Component Viewer
         link: https://www.keil.com/pack/doc/compiler/EventRecorder/html/index.html
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

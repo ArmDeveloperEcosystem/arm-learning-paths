@@ -14,11 +14,12 @@ learning_objectives:
 prerequisites:
     - Access to an x86 and an Arm cloud instance (virtual machine).
     - Proficiency in C++ programming.
+
+author: Kieran Hejmadi
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Kieran Hejmadi
 
 ### Tags
 skilllevels: Advanced
@@ -31,7 +32,7 @@ tools_software_languages:
     - Runbook
 operatingsystems:
     - Linux
-   
+
 further_reading:
     - resource:
         title: C++ Memory Order Reference Manual 
@@ -41,7 +42,6 @@ further_reading:
         title: Thread Sanitizer Manual 
         link: https://github.com/google/sanitizers/wiki/threadsanitizercppmanual
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

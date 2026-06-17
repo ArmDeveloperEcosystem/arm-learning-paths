@@ -13,11 +13,12 @@ learning_objectives:
 prerequisites:
     - An [AWS account](/learning-paths/servers-and-cloud-computing/csp/aws/) for accessing AWS cloud services.
     - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or any Arm server, laptop, or single-board computer running [Docker](/install-guides/docker/) used to run the created images
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ### Tags
 skilllevels: Advanced
@@ -42,8 +43,6 @@ further_reading:
         title: AWS CodeBuild curated Docker images
         link: https://github.com/aws/aws-codebuild-docker-images 
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

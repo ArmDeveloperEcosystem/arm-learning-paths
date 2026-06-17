@@ -13,11 +13,12 @@ learning_objectives:
 
 prerequisites:
     - A Windows on Arm machine such as the Lenovo Thinkpad X13s, or an [Azure virtual machine](/learning-paths/cross-platform/woa_azure/).
+
+author: Koki Mitsunami
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Koki Mitsunami
 
 ### Tags
 skilllevels: Introductory
@@ -32,7 +33,6 @@ tools_software_languages:
 operatingsystems:
     - Windows
 
-
 further_reading:
     - resource:
         title: OpenCV website
@@ -46,8 +46,6 @@ further_reading:
         title: Evolution of SIMD architecture with SVE2 
         link: https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/sve2
         type: blog
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

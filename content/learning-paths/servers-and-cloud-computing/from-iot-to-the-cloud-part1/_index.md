@@ -20,11 +20,12 @@ prerequisites:
     - 'Docker Extension for Visual Studio Code: https://code.visualstudio.com/docs/containers/overview'
     - 'C# Extension for Visual Studio Code: https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp'
     - '[Install Docker on Arm64](/install-guides/docker/docker-desktop/)'
+
+author: Dawid Borycki
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -34,14 +35,13 @@ cloud_service_providers:
 
 armips:
     - Neoverse
-    
+
 tools_software_languages:
     - .NET SDK
     - C#
 
 operatingsystems:
     - Linux
-
 
 further_reading:
     - resource:
@@ -56,8 +56,6 @@ further_reading:
         title: About Azure bastion
         link: https://learn.microsoft.com/en-us/azure/bastion/bastion-overview
         type: Documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

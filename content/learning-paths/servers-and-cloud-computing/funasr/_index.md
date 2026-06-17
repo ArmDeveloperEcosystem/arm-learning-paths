@@ -13,11 +13,12 @@ learning_objectives:
 
 prerequisites:
     - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider, or a local Arm Linux computer with at least 8 CPUs and 16GB of RAM.
+
+author: Odin Shen
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Odin Shen
 
 ### Tags
 skilllevels: Introductory
@@ -38,7 +39,6 @@ tools_software_languages:
     - Generative AI
     - Python
 
-
 further_reading:
     - resource:
         title: ModelScope GitHub Repository
@@ -56,8 +56,6 @@ further_reading:
         title: Kleidi improves ASR on Arm Neoverse N2
         link: https://community.arm.com/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/neoverse-n2-delivers-leading-price-performance-on-asr
         type: blog
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -16,11 +16,11 @@ prerequisites:
     - A computer with [Terraform](/install-guides/terraform) installed.
     - A computer with [Google Cloud CLI](/install-guides/gcloud) installed.
 
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ##### Tags
 skilllevels: Introductory
@@ -52,7 +52,6 @@ further_reading:
         title: About bastion hosts
         link: https://cloud.google.com/solutions/connecting-securely#bastion
         type: documentation
-
 
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper

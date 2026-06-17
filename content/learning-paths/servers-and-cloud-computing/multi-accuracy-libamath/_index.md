@@ -2,11 +2,12 @@
 title: Control floating-point accuracy modes in Arm Performance Libraries
 
 minutes_to_complete: 20
+
+author: Joana Cruz
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Joana Cruz
 
 who_is_this_for: This is an introductory topic for developers who want to use the different accuracy modes for vectorized math functions in Libamath, a component of Arm Performance Libraries.
 
@@ -49,8 +50,6 @@ further_reading:
         title: Arm Optimized Routines
         link: https://github.com/ARM-software/optimized-routines
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

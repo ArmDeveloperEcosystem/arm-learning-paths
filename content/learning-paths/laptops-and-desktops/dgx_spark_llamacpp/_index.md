@@ -19,11 +19,12 @@ prerequisites:
     - Understanding of CUDA programming basics and GPU/CPU compute concepts
     - Basic knowledge of quantized large language models (LLMs) and machine learning inference
     - Experience building software from source using CMake and make
+
+author: Odin Shen
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Odin Shen
 
 ### Tags
 skilllevels: Introductory

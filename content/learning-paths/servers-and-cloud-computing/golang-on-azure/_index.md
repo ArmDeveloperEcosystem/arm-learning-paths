@@ -15,11 +15,12 @@ prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Azure Cobalt 100 Arm-based instances (Dpsv6-series)
     - Basic familiarity with the [Go programming language](https://go.dev/) and cloud deployment practices
     - Understanding of Linux command line and virtual machine management
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -49,7 +50,6 @@ further_reading:
         title: Using go test -bench for Benchmarking
         link: https://pkg.go.dev/cmd/go#hdr-Testing_flags
         type: Reference
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

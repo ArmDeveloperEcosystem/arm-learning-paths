@@ -15,11 +15,12 @@ learning_objectives:
 
 prerequisites:
     - An Arm-based computer with recent versions of a C compiler (Clang or GCC) and a Rust compiler installed
+
+author: Konstantinos Margaritis
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Konstantinos Margaritis
 
 ### Tags
 skilllevels: Advanced
@@ -41,7 +42,6 @@ shared_between:
     - servers-and-cloud-computing
     - mobile-graphics-and-gaming
 
-
 further_reading:
     - resource:
         title: Rust std::arch documentation
@@ -59,7 +59,6 @@ further_reading:
         title: Testing SIMD instructions on ARM with Rust on Android
         link: https://gendignoux.com/blog/2023/01/05/rust-arm-simd-android.html#implicit-feature-detection-beware-of-target-feature
         type: blog
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

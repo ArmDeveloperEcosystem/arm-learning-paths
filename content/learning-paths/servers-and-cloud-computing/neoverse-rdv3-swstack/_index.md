@@ -12,19 +12,20 @@ learning_objectives:
     - Interpret boot logs to verify bring-up and diagnose boot-stage issues
     - Modify platform control firmware (for example, SCP/MCP) and validate changes via pre-silicon simulation
     - Launch a dual-chip RD-V3-R1 simulation and verify AP/MCP coordination
-   
+
 prerequisites:
     - Access to an Arm Neoverse-based Linux machine (cloud or local) with at least 80 GB of free storage
     - Familiarity with Linux command-line tools and basic scripting
     - Understanding of firmware boot stages and SoC-level architecture
     - Docker installed, or a GitHub Codespaces-compatible development environment
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author:
     - Odin Shen
     - Ann Cheng
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -56,7 +57,6 @@ further_reading:
         title: GitLab infra-refdesign-manifests
         link: https://git.gitlab.arm.com/infra-solutions/reference-design/infra-refdesign-manifests
         type: gitlab    
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

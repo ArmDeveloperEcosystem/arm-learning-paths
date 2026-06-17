@@ -14,11 +14,12 @@ prerequisites:
     - Basic understanding of Python and machine learning concepts.
     - Familiarity with ONNX Runtime and Azure cloud services.
     - Knowledge of Large Language Model (LLM) fundamentals.
+
+author: Nobel Chowdary Mandepudi
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Nobel Chowdary Mandepudi
 
 ### Tags
 skilllevels: Advanced
@@ -32,7 +33,6 @@ operatingsystems:
 tools_software_languages:
     - Python
     - ONNX Runtime
-
 
 further_reading:
     - resource:

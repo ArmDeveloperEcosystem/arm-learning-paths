@@ -15,11 +15,12 @@ learning_objectives:
 
 prerequisites:
     - A Raspberry Pi 5 running Raspberry Pi OS.
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -48,8 +49,6 @@ further_reading:
         title: Python Bindings for llama.cpp
         link: https://github.com/abetlen/llama-cpp-python
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

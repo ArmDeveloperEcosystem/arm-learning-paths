@@ -13,11 +13,12 @@ learning_objectives:
 
 prerequisites:
     - Windows on Arm desktop or development machine
+
+author: Ronan Synnott
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory

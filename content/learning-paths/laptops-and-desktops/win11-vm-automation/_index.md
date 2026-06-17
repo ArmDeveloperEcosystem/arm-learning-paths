@@ -15,11 +15,12 @@ learning_objectives:
 
 prerequisites:
     - An Arm Linux system with KVM support and a minimum of 8GB RAM and 50GB free disk space
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory

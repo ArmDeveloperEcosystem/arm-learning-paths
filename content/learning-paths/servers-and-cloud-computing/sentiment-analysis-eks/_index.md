@@ -13,15 +13,16 @@ learning_objectives:
 prerequisites:
     - An AWS account.
     - A computer with Docker, Terraform, the Amazon eksctl command-line interface, and kubectl installed.
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author: 
     - Pranay Bakre
     - Masoud Koleini
     - Nobel Chowdary Mandepudi
     - Na Li
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -36,7 +37,6 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
-
 further_reading:
     - resource:
         title: EKS documentation
@@ -46,9 +46,6 @@ further_reading:
         title: How to Enable Real-Time Sentiment Analysis on Arm Neoverse-Based Kubernetes Clusters
         link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/-arm-neoverse-based-kubernetes-clusters
         type: documentation
-
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

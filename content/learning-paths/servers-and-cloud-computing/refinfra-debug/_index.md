@@ -15,11 +15,12 @@ prerequisites:
     - An Arm Neoverse Reference Design (RD) Software Stack.
     - A Fixed Virtual Platform (FVP).
     - A basic understanding of Neoverse Reference Design (RD) platform boot.
+
+author: Daniel Nguyen
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Daniel Nguyen
 
 ### Tags
 skilllevels: Advanced

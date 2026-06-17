@@ -13,11 +13,12 @@ learning_objectives:
 
 prerequisites:
     - Basic familiarity with Keil MDK
+
+author: Ronan Synnott
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
@@ -44,7 +45,6 @@ further_reading:
         title: Trace tutorial for Arm Cortex-M
         link: https://www.youtube.com/watch?v=XGmSCVgb6EM
         type: video
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

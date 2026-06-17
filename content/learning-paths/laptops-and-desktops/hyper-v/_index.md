@@ -12,11 +12,12 @@ learning_objectives:
 
 prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 with [Hyper-V](/install-guides/hyper-v/) installed.
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -34,7 +35,6 @@ further_reading:
         title: Virtualization Documentation
         link: https://learn.microsoft.com/en-us/virtualization/ 
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

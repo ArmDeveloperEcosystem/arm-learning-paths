@@ -12,11 +12,12 @@ learning_objectives:
 
 prerequisites:
     - A computer with [Terraform](/install-guides/terraform/) and the [AWS CLI](/install-guides/aws-cli/) installed. 
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -46,8 +47,6 @@ further_reading:
         title: AWS Lambda performance with Java 21
         link: https://community.aws/content/2juXXgrDDaUdmi902LHwilBhvNU/aws-lambda-performance-with-java-21-x86-vs-arm64-part-1-initial-measurements-and-comparisons?lang=en
         type: blog
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -14,11 +14,12 @@ prerequisites:
     - Basic knowledge of game engines and programming concepts
     - Recent Android device, such as a mobile phone or tablet
     - Desktop computer capable of running Unity
+
+author: Joshua Marshall-Law
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Joshua Marshall-Law
 
 ### Tags
 skilllevels: Introductory
@@ -31,14 +32,11 @@ tools_software_languages:
 operatingsystems:
     - Android
 
-
 further_reading:
     - resource:
         title: Profiler overview 
         link: https://docs.unity3d.com/Manual/Profiler.html
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

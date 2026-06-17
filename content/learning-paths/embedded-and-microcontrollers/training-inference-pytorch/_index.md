@@ -18,11 +18,12 @@ prerequisites:
   - Familiarity with Python and the PyTorch library
   - Completion of the Learning Path [Introduction to TinyML on Arm using PyTorch and ExecuTorch](/learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm/)
   - An x86 Linux host machine or VM running Ubuntu 22.04 or later
+
+author: Dominica Abena O. Amanfo
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Dominica Abena O. Amanfo
 
 ### Tags
 skilllevels: Introductory

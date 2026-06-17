@@ -6,7 +6,6 @@ minutes_to_complete: 30
 
 who_is_this_for: This introductory topic for software developers migrating Envoy Proxy workloads from x86_64 to Arm-based servers, specifically on Google Cloud C4A virtual machines built on Axion processors.
 
-
 learning_objectives:
   - Provision an Arm-based C4A VM on Google Cloud Platform (GCP) 
   - Install and configure Envoy Proxy on a C4A instance
@@ -16,11 +15,12 @@ learning_objectives:
 prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free?utm_source=google&hl=en) account with billing enabled
   - Familiarity with networking concepts and the [Envoy architecture](https://www.envoyproxy.io/docs/envoy/latest/)
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ##### Tags
 skilllevels: Introductory

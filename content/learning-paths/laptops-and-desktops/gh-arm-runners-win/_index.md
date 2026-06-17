@@ -15,12 +15,13 @@ learning_objectives:
 prerequisites: 
     - A GitHub account. 
     - Familiarity with GitHub Actions.
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author: 
     - Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory

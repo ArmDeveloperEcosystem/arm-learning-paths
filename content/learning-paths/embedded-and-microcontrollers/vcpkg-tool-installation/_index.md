@@ -18,11 +18,12 @@ learning_objectives:
 prerequisites:
     - A basic understanding of the [development tools for Arm Cortex-M](https://developer.arm.com/Tools%20and%20Software/)
     - Command line access to your machine
+
+author: Christopher Seidl
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Christopher Seidl
 
 ### Tags
 skilllevels: Advanced
@@ -39,7 +40,6 @@ operatingsystems:
     - Windows
     - macOS
 
-
 further_reading:
     - resource:
         title: vcpkg documentation
@@ -53,8 +53,6 @@ further_reading:
         title: Example projects for CMSIS-Toolbox 2.0.0
         link: https://github.com/Arm-Examples#cmsis-toolbox-2.0.0-examples
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -13,11 +13,12 @@ learning_objectives:
     - Use the Linux perf_event_open system call to instrument event counters in code
 prerequisites:
     - An Arm computer running Linux. A bare metal or cloud metal instance is best because they expose more counters. You can use a virtual machine (VM), but fewer counters may be available. These instructions have been tested on the `a1.metal` instance type.
+
+author: Julio Suarez
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Julio Suarez
 
 ### Tags
 skilllevels: Advanced
@@ -47,7 +48,6 @@ further_reading:
         title: Perf
         link: https://en.wikipedia.org/wiki/Perf_%28Linux%29
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

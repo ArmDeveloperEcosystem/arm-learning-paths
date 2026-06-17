@@ -15,11 +15,12 @@ prerequisites:
     - Knowledge of Single instruction Multi Data (SIMD)
     - Knowledge of [Neon](https://developer.arm.com/documentation/102474/latest)
     - Knowledge of [Scalable Vector Extension (SVE)](https://developer.arm.com/documentation/101726/4-0)
+
+author: Dawid Borycki
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -48,9 +49,6 @@ further_reading:
         title: Android Studio
         link: https://developer.android.com/studio
         type: website
-
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

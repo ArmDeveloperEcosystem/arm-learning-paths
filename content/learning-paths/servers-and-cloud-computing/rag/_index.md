@@ -18,11 +18,12 @@ prerequisites:
     - Familiarity with REST APIs and web services.
     - Basic knowledge of vector databases.
     - Understanding of LLM fundamentals.
+
+author: Nobel Chowdary Mandepudi
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Nobel Chowdary Mandepudi
 
 ### Tags
 skilllevels: Advanced
@@ -53,8 +54,6 @@ further_reading:
         title: Democratizing Generative AI with CPU-based inference 
         link: https://blogs.oracle.com/ai-and-datascience/post/democratizing-generative-ai-with-cpu-based-inference
         type: blog
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

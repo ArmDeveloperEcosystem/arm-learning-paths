@@ -16,11 +16,12 @@ learning_objectives:
 prerequisites:
     - An Arm computer running Linux. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
     - A Raspberry Pi 3 or 4 board
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ### Tags
 skilllevels: Advanced
@@ -39,7 +40,6 @@ further_reading:
         title: MXNet tutorials
         link: https://mxnet.apache.org/versions/1.2.1/tutorials/index.html 
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

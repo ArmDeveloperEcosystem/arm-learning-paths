@@ -13,11 +13,12 @@ learning_objectives:
 
 prerequisites:
     - Some familiarity with embedded debug
+
+author: Ronan Synnott
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
@@ -47,8 +48,6 @@ further_reading:
         title: DSTREAM-PT
         link: https://developer.arm.com/Tools%20and%20Software/DSTREAM-PT
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

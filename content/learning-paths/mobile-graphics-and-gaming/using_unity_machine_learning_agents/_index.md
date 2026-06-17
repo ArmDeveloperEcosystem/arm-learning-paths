@@ -14,11 +14,12 @@ prerequisites:
 - A computer capable of running Unity. (Instructions are for Windows, but could be adapted to other platforms.)
 - An Android mobile device that has a 64-bit processor and supports at least Android 8.
 - A USB cable to connect the mobile device to your computer.
+
+author: Annie Tallund
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Annie Tallund
 
 ### Tags
 skilllevels: Advanced
@@ -29,7 +30,6 @@ operatingsystems:
     - Android
 tools_software_languages:
     - Unity
-
 
 further_reading:
     - resource:
@@ -44,8 +44,6 @@ further_reading:
         title: Arm Mobile Studio 
         link: https://developer.arm.com/Tools%20and%20Software/Arm%20Mobile%20Studio
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

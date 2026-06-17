@@ -15,11 +15,12 @@ prerequisites:
     - A computer with Docker installed. This can be Windows, macOS, or Linux. Any architecture can be used. 
     - A GitHub account
     - A Docker Hub account
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -47,7 +48,6 @@ further_reading:
         title: Introducing Docker Build Cloud - A New Solution to Speed Up Build Times and Improve Developer Productivity
         link: https://www.docker.com/blog/introducing-docker-build-cloud/
         type: blog
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

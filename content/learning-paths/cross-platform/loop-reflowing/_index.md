@@ -11,11 +11,12 @@ learning_objectives:
 
 prerequisites:
     - An Arm computer running Linux and a recent version of Clang or the GNU compiler (gcc) installed.
+
+author: Konstantinos Margaritis
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Konstantinos Margaritis
 
 ### Tags
 skilllevels: Advanced
@@ -36,7 +37,6 @@ shared_between:
     - laptops-and-desktops
     - mobile-graphics-and-gaming
 
-
 further_reading:
     - resource:
         title: An update on GNU performance
@@ -54,8 +54,6 @@ further_reading:
         title: Auto-vectorization in GCC
         link: https://gcc.gnu.org/projects/tree-ssa/vectorization.html
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

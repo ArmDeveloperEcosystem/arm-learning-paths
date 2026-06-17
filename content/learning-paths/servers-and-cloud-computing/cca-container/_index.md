@@ -15,13 +15,14 @@ learning_objectives:
 
 prerequisites:
     - An AArch64 or x86_64 computer running Linux or macOS. You can use cloud instances, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author:
     - Pareena Verma
     - Arnaud de Grandmaison
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -37,7 +38,6 @@ tools_software_languages:
     - CCA
     - Docker
     - Runbook
-
 
 further_reading:
     - resource:
@@ -60,7 +60,6 @@ further_reading:
         title: Realm Management Monitor specification
         link: https://developer.arm.com/documentation/den0137/latest/
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

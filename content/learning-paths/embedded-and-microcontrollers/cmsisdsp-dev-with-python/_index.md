@@ -7,7 +7,6 @@ minutes_to_complete: 45
 
 who_is_this_for: This is an advanced topic for developers looking to integrate the CMSIS-DSP library into their applications using Python.
 
-
 learning_objectives:
     - Use the CMSIS-DSP Python package to prototype DSP algorithms.
     - Understand how the Python API maps to the C implementation.
@@ -18,11 +17,12 @@ prerequisites:
     - Working knowledge of C.
     - Prior exposure to CMSIS-DSP.
     - Python installed on your machine.
+
+author: Christophe Favergeon
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Christophe Favergeon
 
 ### Tags
 skilllevels: Advanced
@@ -62,7 +62,6 @@ further_reading:
         title: CMSIS-Stream
         link: https://github.com/ARM-software/CMSIS-Stream
         type: Open-source project
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

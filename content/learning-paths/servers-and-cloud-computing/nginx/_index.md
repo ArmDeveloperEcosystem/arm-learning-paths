@@ -14,11 +14,12 @@ prerequisites:
     - To create a file server you will need at least one [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or one on-premises Arm server.
     - To create a reverse proxy or API gateway you will need at least three Arm based instances from a cloud service provider or at least three on-premises Arm servers.
     - Network settings (firewalls and security groups) which allow communication on port 22 (SSH) and port 443 (HTTPS).
+
+author: Julio Suarez
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Julio Suarez
 
 ### Tags
 skilllevels: Introductory
@@ -53,7 +54,6 @@ further_reading:
         title: Deploying NGINX as an API Gateway
         link: https://www.nginx.com/blog/deploying-nginx-plus-as-an-api-gateway-part-1/
         type: blog
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -14,11 +14,12 @@ learning_objectives:
 prerequisites:
     - A development machine with [Android Studio](https://developer.android.com/studio) installed. 
     - An Android smartphone.
+
+author: Dawid Borycki
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -46,7 +47,6 @@ further_reading:
         title: Enhanced OpenCV For Android Support & ARM Performance Gains
         link: https://opencv.org/blog/enhanced-opencv-for-android-support-arm-performance-gains/
         type: blog
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -19,15 +19,14 @@ prerequisites:
     - A development machine with git installed
     - Basic familiarity with command-line tools
     - (Optional) A Raspberry Pi for testing a full device-to-device (D2D) setup
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author: 
     - Annie Tallund
     - Kavya Sri Chennoju
 
-
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory

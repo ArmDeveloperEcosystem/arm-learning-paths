@@ -19,11 +19,12 @@ prerequisites:
     - A SEGGER J-Link debug probe (included in the DevKit)
     - A development machine running macOS on Apple Silicon with Visual Studio Code installed
     - An AWS account or access to an Arm-based cloud instance for native Arm compilation
+
+author: Gabriel Peterson
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Gabriel Peterson
 
 skilllevels: Advanced
 subjects: ML

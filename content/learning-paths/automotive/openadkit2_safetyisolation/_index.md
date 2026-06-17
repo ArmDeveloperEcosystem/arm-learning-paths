@@ -15,13 +15,14 @@ prerequisites:
     - Access to two Arm-based Neoverse cloud instances, or a local Arm Neoverse Linux system with at least 16 CPUs and 32 GB of RAM
     - Completion of the [Deploy Open AD Kit containerized autonomous driving simulation on Arm Neoverse](/learning-paths/automotive/openadkit1_container/) Learning Path
     - Basic familiarity with Docker
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author: 
     - Odin Shen
     - Julien Jayat
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -69,8 +70,6 @@ further_reading:
         title: Eclipse Cyclone DDS 
         link: https://github.com/eclipse-cyclonedds/cyclonedds
         type: documentation
-    
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

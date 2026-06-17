@@ -12,17 +12,17 @@ learning_objectives:
     - Install an Android demo application using the model to run an inference.
     - Compare inference performance with and without KleidiAI Arm-optimized micro-kernels.
 
-
 prerequisites:
     - A development machine with [Android Studio](https://developer.android.com/studio) installed.
     - A smartphone running Android with support for `i8mm` and `dotprod` instructions.
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author:
     - Shuheng Deng
     - Yiyang Fan
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -34,8 +34,6 @@ tools_software_languages:
     - KleidiAI
 operatingsystems:
     - Android
-
-
 
 further_reading:
     - resource:
@@ -54,8 +52,6 @@ further_reading:
         title: KleidiAI repository
         link: https://github.com/ARM-software/kleidiai
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -16,11 +16,12 @@ prerequisites:
    - A development machine with [Android Studio](https://developer.android.com/studio) installed. 
    - An Android smartphone.
    - Familiarity with OpenCV, review [Create Computer Vision Applications with OpenCV on Android Devices](/learning-paths/mobile-graphics-and-gaming/android_opencv_camera/) before starting.
+
+author: Dawid Borycki
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -48,7 +49,6 @@ further_reading:
         title: Enhanced OpenCV For Android Support & ARM Performance Gains
         link: https://opencv.org/blog/enhanced-opencv-for-android-support-arm-performance-gains/
         type: blog
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

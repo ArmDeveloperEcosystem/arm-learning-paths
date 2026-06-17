@@ -15,11 +15,12 @@ prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
   - Basic familiarity with Python and Flask
   - Basic understanding of containers and Kubernetes concepts
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ##### Tags
 skilllevels: Introductory
@@ -58,12 +59,12 @@ further_reading:
       title: Prometheus documentation
       link: https://prometheus.io/docs/introduction/overview/
       type: documentation
-  
+
   - resource:
       title: Jaeger documentation
       link: https://www.jaegertracing.io/docs/
       type: documentation
-  
+
   - resource:
       title: Docker documentation
       link: https://docs.docker.com/

@@ -2,7 +2,6 @@
 title: Optimize performance using Link-Time Optimization with GCC
 description: Learn how to apply link-time optimization with the GCC toolchain to improve application performance by optimizing across compilation units.
 
-    
 minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for developers who want to improve application performance using link-time optimization (LTO) with the GCC toolchain.
@@ -15,11 +14,12 @@ learning_objectives:
 prerequisites:
     - An Arm Linux system (cloud instance, on-premises hardware, or a virtual machine)
     - A recent version of the [GCC toolchain](/install-guides/gcc/)
+
+author: Victor Do Nascimento
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Victor Do Nascimento
 
 ### Tags
 skilllevels: Introductory

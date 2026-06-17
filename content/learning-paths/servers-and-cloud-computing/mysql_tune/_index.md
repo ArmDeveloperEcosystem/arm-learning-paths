@@ -10,11 +10,12 @@ learning_objectives:
 
 prerequisites:
     - Bare-metal or cloud [installation of MySQL](/learning-paths/servers-and-cloud-computing/mysql/)
+
+author: Julio Suarez
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Julio Suarez
 
 skilllevels: Advanced
 subjects: Databases
@@ -32,7 +33,6 @@ tools_software_languages:
     - MySQL
     - InnoDB
     - Runbook
-
 
 test_images:
     - ubuntu:latest

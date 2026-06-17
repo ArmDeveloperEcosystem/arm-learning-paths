@@ -17,9 +17,6 @@ prerequisites:
     - A Linux-based x86 or macOS development machine with at least 8 GB of RAM and 50 GB of disk space (tested on Ubuntu 22.04 with x86_64).
     - A [HuggingFace](https://huggingface.co/) account.
     - An Android phone in [developer mode](https://developer.android.com/studio/debug/dev-options) and a cable to connect it to your development machine.
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author:
     - Nina Drozd
@@ -27,6 +24,10 @@ author:
     - Adnan AlSinan
     - Aude Vuilliomenet
     - Annie Tallund
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -57,9 +58,6 @@ further_reading:
         title: Fast Text-to-Audio Generation with Adversarial Post-Training
         link: https://arxiv.org/abs/2505.08175
         type: website
-
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

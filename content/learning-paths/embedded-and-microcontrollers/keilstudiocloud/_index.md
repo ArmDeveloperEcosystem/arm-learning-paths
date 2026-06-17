@@ -14,12 +14,12 @@ learning_objectives:
 prerequisites:
     - Some familiarity with embedded programming is assumed
     - An [Arm Account](https://developer.arm.com/register) is required
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author: Christopher Seidl 
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ##### Tags
 skilllevels: Introductory
@@ -51,8 +51,6 @@ further_reading:
         title: Which Keil tool should I care about?
         link: https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/which-keil-tool-should-i-care-about
         type: blog
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

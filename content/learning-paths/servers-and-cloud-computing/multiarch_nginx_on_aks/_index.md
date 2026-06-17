@@ -11,17 +11,17 @@ learning_objectives:
     - Verify nginx deployment and functionality on each architecture
     - Compare performance between x86 and Arm64 nginx instances
     - Learn techniques for deploying multi-architecture Kubernetes workloads
-  
 
 prerequisites:
     - An [Azure account](https://azure.microsoft.com/en-us/free/)
     - A local machine with [`jq`](https://jqlang.org/download/), [`curl`](https://curl.se/download.html), [`wrk`](https://github.com/wg/wrk), [Azure CLI](/install-guides/azure-cli/), and [`kubectl`](/install-guides/kubectl/) installed
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author:
     - Geremy Cohen
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -29,7 +29,7 @@ skilllevels: Introductory
 subjects: Containers and Virtualization
 cloud_service_providers:
   - Microsoft Azure
-    
+
 armips:
     - Neoverse
 

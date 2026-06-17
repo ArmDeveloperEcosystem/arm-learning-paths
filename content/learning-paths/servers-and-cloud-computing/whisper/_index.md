@@ -11,17 +11,17 @@ learning_objectives:
     - Enable performance-enhancing features for running the model on Arm CPUs.
     - Evaluate transcript generation times using Whisper.
 
-
 prerequisites:
     - An [Arm-based compute instance](/learning-paths/servers-and-cloud-computing/intro/) running Ubuntu with 32 cores, 8GB of RAM, and 32GB of disk space.
     - Basic knowledge of Python.
     - Familiarity with machine learning concepts.
     - Familiarity with the fundamentals of the Whisper ASR Model.
+
+author: Nobel Chowdary Mandepudi
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Nobel Chowdary Mandepudi
 
 ### Tags
 skilllevels: Introductory
@@ -41,14 +41,11 @@ tools_software_languages:
     - Demo
     - Hugging Face
 
-    
-
 further_reading:
     - resource:
         title: Hugging Face Transformers documentation
         link: https://huggingface.co/transformers/v4.11.3/index.html
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -16,11 +16,12 @@ learning_objectives:
 prerequisites:
     - Raspberry Pi Pico board.
     - Raspberry Pi 3, 4, 400, or 5 as a development computer.
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -41,7 +42,6 @@ further_reading:
         title: Raspberry Pi Pico documentation
         link: https://www.raspberrypi.com/documentation/microcontrollers/raspberry-pi-pico.html
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

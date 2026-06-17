@@ -1,6 +1,6 @@
 ---
 title: Understand KleidiAI SME2 matmul microkernels
-    
+
 minutes_to_complete: 40
 
 who_is_this_for: This is an advanced topic for software developers, performance engineers, and AI practitioners.
@@ -15,11 +15,12 @@ prerequisites:
     - Basic understanding of general matrix multiplication (GEMM) and matmul operations
     - Basic understanding of quantization concepts for neural networks
     - (Optional) Access to an Arm CPU with SME2 support (Linux or Android) for hands-on verification steps
+
+author: Zenon Zhilong Xiu
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Zenon Zhilong Xiu
 
 ### Tags
 skilllevels: Advanced
@@ -34,8 +35,6 @@ tools_software_languages:
 operatingsystems:
     - Android
     - Linux
-
-
 
 further_reading:
     - resource:
@@ -54,8 +53,6 @@ further_reading:
         title: Profile llama.cpp performance with Arm Streamline and KleidiAI LLM kernels
         link: /learning-paths/servers-and-cloud-computing/llama_cpp_streamline/
         type: blog
-        
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

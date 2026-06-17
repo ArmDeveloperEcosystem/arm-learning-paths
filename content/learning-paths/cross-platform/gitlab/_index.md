@@ -17,11 +17,12 @@ prerequisites:
     - A [Google Cloud account](https://console.cloud.google.com/). Create an account if needed.
     - A computer with [Google Cloud CLI](/install-guides/gcloud/) and [kubectl](/install-guides/kubectl/)installed.
     - A valid GitLab account
+
+author: Pranay Bakre
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pranay Bakre
 
 ### Tags
 skilllevels: Advanced
@@ -60,8 +61,6 @@ further_reading:
         title: GKE documentation
         link: https://cloud.google.com/kubernetes-engine/docs
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

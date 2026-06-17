@@ -14,14 +14,15 @@ learning_objectives:
 prerequisites:
     - An x86_64 Linux machine running Ubuntu with approximately 500 MB of free space, or a docker daemon that can build and run a provided x86_64 Dockerfile.
     - An Android phone with support for i8mm (tested on Google Pixel 8 Pro).
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author: 
     - Pareena Verma
     - Joe Stech
     - Adnan AlSinan
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -40,7 +41,6 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
-
 further_reading:
     - resource:
         title: MediaPipe Solutions Guide 
@@ -54,8 +54,6 @@ further_reading:
         title: Faster Dynamically Quantized Inference with XNNPack 
         link: https://blog.tensorflow.org/2024/04/faster-dynamically-quantized-inference-with-xnnpack.html
         type: blog
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

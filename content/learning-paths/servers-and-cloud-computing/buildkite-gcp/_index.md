@@ -18,11 +18,12 @@ prerequisites:
   - Basic Linux system administration skills, including how to create users, install packages, and manage services
   - Familiarity with [Docker](https://docs.docker.com/get-started/) and container concepts
   - A [GitHub account](https://github.com/join) to host your application repository
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ##### Tags
 skilllevels: Introductory

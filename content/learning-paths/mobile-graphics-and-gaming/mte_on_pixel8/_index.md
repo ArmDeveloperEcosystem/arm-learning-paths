@@ -17,11 +17,12 @@ prerequisites:
     - A Google Pixel 8 smartphone
     - A USB cable to connect your Google Pixel 8 to your desktop machine
     - Android Debug Bridge (adb) installed on your device. Follow the steps in https://developer.android.com/tools/adb to install Android SDK Platform Tools. The adb tool is included in this package.
+
+author: Roberto Lopez Mendez
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Roberto Lopez Mendez
 
 ### Tags
 skilllevels: Introductory
@@ -34,7 +35,6 @@ tools_software_languages:
     - Google Pixel 8
 operatingsystems:
     - Android
-
 
 further_reading:
     - resource:
@@ -53,8 +53,6 @@ further_reading:
         title: Enhanced Security Through MTE
         link: https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/enhanced-security-through-mte
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

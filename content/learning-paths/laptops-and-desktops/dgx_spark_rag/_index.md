@@ -15,11 +15,12 @@ learning_objectives:
 
 prerequisites:
     - An NVIDIA DGX Spark system with at least 15 GB of available disk space
+
+author: Odin Shen
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Odin Shen
 
 ### Tags
 skilllevels: Advanced
@@ -50,7 +51,6 @@ further_reading:
         title: Unlock quantized LLM performance on Arm-based NVIDIA DGX Spark
         link: /learning-paths/laptops-and-desktops/dgx_spark_llamacpp/
         type: Learning Path
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

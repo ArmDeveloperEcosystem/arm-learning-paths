@@ -17,11 +17,12 @@ prerequisites:
     - An AI-powered IDE such as VS Code, Copilot in VS Code, Kiro (IDE or CLI) or Codex
     - Basic familiarity with Docker and C/C++ development
     - Access to an Arm-based cloud instance or local Arm computer running Linux or macOS
+
+author: Joe Stech
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Joe Stech
 
 ### Tags
 skilllevels: Advanced
@@ -35,8 +36,6 @@ tools_software_languages:
     - GitHub Copilot
 operatingsystems:
     - Linux
-
-
 
 further_reading:
     - resource:
@@ -59,8 +58,6 @@ further_reading:
         title: Learn about Arm Neoverse processors
         link: /learning-paths/servers-and-cloud-computing/intro/
         type: learning-path
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

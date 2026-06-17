@@ -15,11 +15,12 @@ learning_objectives:
 
 prerequisites:
     - An Arm computer running Linux. You can also use a virtual machine from a [cloud service provider](/learning-paths/servers-and-cloud-computing/csp/).
+
+author: Kieran Hejmadi
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Kieran Hejmadi
 
 ### Tags
 skilllevels: Introductory
@@ -48,7 +49,6 @@ further_reading:
         title: LLVM Loop Vectorization Guide
         link: https://llvm.org/docs/Vectorizers.html
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

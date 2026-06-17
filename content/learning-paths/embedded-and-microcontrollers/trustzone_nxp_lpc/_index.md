@@ -17,11 +17,12 @@ prerequisites:
     - Familiar with C programming on microcontrollers
     - Comfortable with Windows 
     - NXP LPCXpresso55S69 board
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -44,7 +45,6 @@ further_reading:
         title: Using LPC55S69 SDK TrustZone examples with MCUXpresso IDE
         link: https://community.nxp.com/t5/Blogs/Using-LPC55S69-SDK-TrustZone-examples-with-MCUXpresso-IDE-v11-0/ba-p/1131075
         type: blog
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

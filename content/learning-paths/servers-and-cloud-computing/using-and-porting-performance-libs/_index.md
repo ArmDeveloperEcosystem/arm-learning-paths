@@ -12,11 +12,12 @@ learning_objectives:
 prerequisites:
     - Access to both an Arm and an x86-based cloud instance.
     - Intermediate understanding of C++, compilers, and Linux. 
+
+author: Kieran Hejmadi
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Kieran Hejmadi
 
 ### Tags
 skilllevels: Introductory

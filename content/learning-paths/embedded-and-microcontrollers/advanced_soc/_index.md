@@ -16,11 +16,12 @@ prerequisites:
     - Some familiarity with Verilog
     - Basic understanding of System on Chip design
     - A 'Zybo Z7-10' development board 
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory

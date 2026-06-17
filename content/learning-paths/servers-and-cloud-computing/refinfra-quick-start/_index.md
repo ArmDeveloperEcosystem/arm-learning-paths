@@ -14,13 +14,14 @@ prerequisites:
     - Some understanding of the [Reference Design software stack architecture](https://neoverse-reference-design.docs.arm.com/en/latest/about/software_stack.html).
     - Some understanding of the Linux command line.
     - Optionally a basic understanding of Docker and containers.
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author: 
     - Tom Pilar
     - Daniel Nguyen
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -36,13 +37,11 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
-
 further_reading:
     - resource:
         title: Neoverse Reference Design Platform Software Documentation
         link: https://neoverse-reference-design.docs.arm.com/en/latest/index.html
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

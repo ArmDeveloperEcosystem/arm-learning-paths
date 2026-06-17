@@ -20,11 +20,12 @@ prerequisites:
   - Basic familiarity with [Kubernetes concepts](https://kubernetes.io/docs/concepts/)
   - Basic understanding of Git and GitHub workflows
   - Familiarity with basic Linux command-line usage
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ##### Tags
 skilllevels: Introductory
@@ -42,7 +43,7 @@ tools_software_languages:
   - GKE
   - Git
   - NGINX
-    
+
 operatingsystems:
   - Linux
 

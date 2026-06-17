@@ -15,11 +15,12 @@ learning_objectives:
 prerequisites:
     - A CMSIS v5 based project.
     - A basic understanding of the CMSIS-Pack system.
+
+author: Christopher Seidl
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Christopher Seidl
 
 ### Tags
 skilllevels: Advanced
@@ -32,7 +33,6 @@ tools_software_languages:
 operatingsystems:
     - Baremetal
     - RTOS
-
 
 further_reading:
     - resource:

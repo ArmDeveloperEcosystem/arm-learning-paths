@@ -15,11 +15,12 @@ learning_objectives:
 prerequisites:
   - An x86_64 Linux host machine running Ubuntu, with at least 15 GB of free disk space
   - An Arm64 target system with support for SME or SME2 - see the Learning Path [Devices with native SME2 support](/learning-paths/cross-platform/multiplying-matrices-with-sme2/1-get-started/#devices)
+
+author: Qixiang Xu
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Qixiang Xu
 
 ### Tags
 skilllevels: Advanced
@@ -36,14 +37,11 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
-
 further_reading:
     - resource:
         title: Executorch User Guide 
         link: https://docs.pytorch.org/executorch/stable/intro-section.html
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

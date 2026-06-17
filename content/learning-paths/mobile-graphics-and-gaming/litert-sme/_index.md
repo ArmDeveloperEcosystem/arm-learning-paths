@@ -15,11 +15,12 @@ learning_objectives:
 prerequisites:
 - An Arm64 Linux development machine 
 - An Android device that supports Arm SME2 architecture features - see this [list of devices with SME2 support](/learning-paths/cross-platform/multiplying-matrices-with-sme2/1-get-started/#devices)
+
+author: Jiaming Guo
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jiaming Guo
 
 ### Tags
 skilllevels: Advanced
@@ -35,8 +36,6 @@ tools_software_languages:
 operatingsystems:
     - Android
 
-
-
 further_reading:
     - resource:
         title: LiteRT model optimization
@@ -50,8 +49,6 @@ further_reading:
         title: LiteRT repository
         link: https://github.com/google-ai-edge/LiteRT?tab=readme-ov-file#1--i-have-a-pytorch-model
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -13,11 +13,12 @@ learning_objectives:
 prerequisites:
     - Basic C++ understanding.
     - Access to an Arm-based Linux machine.
+
+author: Kieran Hejmadi
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Kieran Hejmadi
 
 ### Tags
 skilllevels: Introductory
@@ -44,8 +45,6 @@ further_reading:
         title: Google Benchmark Library 
         link: https://github.com/google/benchmark
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

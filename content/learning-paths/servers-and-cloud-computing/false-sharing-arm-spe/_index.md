@@ -15,11 +15,12 @@ prerequisites:
     - Access to an Arm-based cloud instance with support for the Arm Statistical Profiling Extension (SPE).
     - A basic understanding of cache coherency and its impact on performance.
     - Familiarity with Linux Perf tools.
+
+author: Kieran Hejmadi
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Kieran Hejmadi
 
 ### Tags
 skilllevels: Introductory
@@ -36,7 +37,6 @@ tools_software_languages:
     - Runbook
 operatingsystems:
     - Linux
-
 
 further_reading:
     - resource:

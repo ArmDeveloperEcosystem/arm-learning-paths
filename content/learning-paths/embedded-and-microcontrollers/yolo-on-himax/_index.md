@@ -19,14 +19,15 @@ prerequisites:
     - A Flexible Printed Circuit (FPC) cable.
     - A USB-C cable.
     - An x86 Linux machine, or a Mac running macOS.
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author:
     - Chaodong Gong
     - Alex Su
     - Kieran Hejmadi
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -43,9 +44,6 @@ operatingsystems:
     - Linux
     - macOS
 
-
-
-
 further_reading:
     - resource:
         title: Grove Vision AI Module V2 User Documentation
@@ -55,7 +53,6 @@ further_reading:
         title: WiseEye2 HX6538 processor blog (SoC powering Grove Vision AI Module V2) 
         link: https://www.himax.com.tw/products/wiseeye-ai-sensing/wiseeye2-ai-processor/
         type: blog
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -13,11 +13,12 @@ learning_objectives:
 prerequisites:
     - An Arm based instance from a cloud service provider, or an on-premise Arm server.
     - If needed, review [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) to learn how to deploy Arm in the cloud. These learning paths also point to more advanced learning paths that show how to automate the deployment of Arm instances at different cloud providers.
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ### Tags
 skilllevels: Advanced
@@ -33,7 +34,6 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - Runbook
-
 
 further_reading:
     - resource:

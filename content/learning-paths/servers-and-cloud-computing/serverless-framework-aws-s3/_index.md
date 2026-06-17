@@ -13,11 +13,12 @@ prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).   
     - Any code editor. [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user) is suitable.
     - Completion of the Learning Path that shows you how to [Deploy AWS services using the Serverless Framework](/learning-paths/servers-and-cloud-computing/serverless-framework-aws-intro/).
+
+author: Dawid Borycki
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -27,7 +28,7 @@ cloud_service_providers:
 
 armips:
     - Neoverse
-    
+
 tools_software_languages:
     - Node.js
     - Visual Studio Code
@@ -36,7 +37,6 @@ operatingsystems:
     - Linux
     - Windows
     - macOS
-
 
 further_reading:
     - resource:
@@ -51,7 +51,6 @@ further_reading:
         title: AWS Lambda
         link: https://aws.amazon.com/lambda/
         type: Documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

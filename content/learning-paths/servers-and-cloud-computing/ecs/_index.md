@@ -14,11 +14,12 @@ learning_objectives:
 prerequisites:
     - An AWS account
     - A computer with Docker, AWS CLI, and Terraform installed
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ##### Tags
 skilllevels: Introductory
@@ -45,8 +46,6 @@ further_reading:
         title: What is IAM?
         link: https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html
         type: documentation
-
-
 
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper

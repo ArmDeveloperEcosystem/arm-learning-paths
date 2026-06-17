@@ -13,11 +13,12 @@ learning_objectives:
 
 prerequisites:
     - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider, or a local Arm Linux computer with at least 8 CPUs and 16 GB RAM.
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -51,8 +52,6 @@ further_reading:
         title: Hugging Face Model Hub
         link: https://huggingface.co/models
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

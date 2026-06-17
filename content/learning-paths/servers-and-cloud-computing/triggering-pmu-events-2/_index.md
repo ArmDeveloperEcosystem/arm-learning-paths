@@ -8,15 +8,16 @@ who_is_this_for: This is an advanced topic for software and hardware engineers t
 learning_objectives: 
     - Describe common non-cache PMU events.
     - Understand why specific code triggers specific PMU events on the Neoverse N2 Core.
-   
+
 prerequisites:
     - Some familiarity with performance analysis.
     - The ability to read Arm assembly code.
+
+author: Johanna Skinnider
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Johanna Skinnider
 
 ### Tags
 skilllevels: Advanced
@@ -29,8 +30,6 @@ tools_software_languages:
     - C
     - Assembly
     - Runbook
-
-
 
 further_reading:
     - resource:
@@ -45,9 +44,6 @@ further_reading:
         title: Arm Neoverse N2 Core Telemetry Specification 
         link: https://developer.arm.com/documentation/109215/0200/?lang=en
         type: documentation
-
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -15,11 +15,12 @@ learning_objectives:
 prerequisites:
     - A Windows-on-Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows-on-Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
     - Any code editor. Visual Studio Code is suitable.
+
+author: Dawid Borycki
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Dawid Borycki
 
 ### Tags
 skilllevels: Advanced
@@ -31,7 +32,7 @@ operatingsystems:
 tools_software_languages:
     - Node.js    
     - Visual Studio
-    
+
 further_reading:
     - resource:
         title: AWS IoT Core Developer Guide
@@ -41,7 +42,6 @@ further_reading:
         title: Connecting a device to AWS IoT Core by using the AWS IoT Device SDK
         link: https://docs.aws.amazon.com/iot/latest/developerguide/sdk-tutorials.html
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

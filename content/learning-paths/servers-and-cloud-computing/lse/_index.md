@@ -13,11 +13,12 @@ learning_objectives:
 
 prerequisites:
     - An [AWS account](/learning-paths/servers-and-cloud-computing/csp/aws/) to access instance types with different AWS Graviton processors. If you don't have an AWS account, you can substitute other Arm Linux computers.
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -35,7 +36,6 @@ tools_software_languages:
     - GCC
     - Runbook
 
-    
 further_reading:
     - resource:
         title: Improving Java performance on Neoverse N1 systems
@@ -49,8 +49,6 @@ further_reading:
         title: Learn about glibc with Large System Extensions (LSE) for performance improvement
         link: /learning-paths/servers-and-cloud-computing/glibc-with-lse/
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

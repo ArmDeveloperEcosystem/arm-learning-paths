@@ -1,11 +1,9 @@
 ---
 title: Accelerate search performance with SVE2 MATCH on Arm servers
 
-    
 minutes_to_complete: 20
 
 who_is_this_for: This is an introductory topic for database developers, performance engineers, and anyone optimizing data processing workloads on Arm-based cloud instances.
-
 
 learning_objectives:
   - Understand the purpose and function of SVE2 MATCH instructions.
@@ -15,12 +13,12 @@ learning_objectives:
 
 prerequisites:
 - Access to an [AWS Graviton4, Google Axion, or Azure Cobalt 100 virtual machine](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider.
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author: Pareena Verma
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory

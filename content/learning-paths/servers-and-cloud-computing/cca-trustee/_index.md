@@ -1,7 +1,7 @@
 ---
 title: Run an end-to-end attestation flow with Arm CCA and Trustee
 description: Learn how to deploy a CCA realm workload on an FVP and connect it with Trustee services to enable attestation-based confidential data processing.
-   
+
 minutes_to_complete: 60
 
 who_is_this_for: This Learning Path is for software developers who want to run an end-to-end attestation flow using Arm Confidential Compute Architecture (CCA) and Trustee services.
@@ -15,12 +15,13 @@ prerequisites:
   - An AArch64 or x86_64 computer running Linux or macOS; you can use cloud instances - see the [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/)
   - Completion of the [Get started with CCA attestation and Veraison](/learning-paths/servers-and-cloud-computing/cca-veraison/) Learning Path
   - Completion of the [Run an end-to-end attestation flow with Arm CCA](/learning-paths/servers-and-cloud-computing/cca-essentials/) Learning Path
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author:
   - Anton Antonov
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced

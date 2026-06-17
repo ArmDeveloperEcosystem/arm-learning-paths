@@ -2,7 +2,6 @@
 title: Accelerate an OpenCV-based Android Application with KleidiCV
 description: Learn how to accelerate OpenCV-based Android applications using KleidiCV for enhanced computer vision performance.
 
-
 minutes_to_complete: 45
 
 who_is_this_for: This is an introductory topic for developers who are interested in creating Computer Vision applications with OpenCV and KleidiCV on Android Devices.
@@ -16,11 +15,12 @@ prerequisites:
     - A development machine with [Android Studio](https://developer.android.com/studio) installed. 
     - Familiarity with Android development concepts.
     - An Android smartphone.
+
+author: Dawid Borycki
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory

@@ -10,11 +10,12 @@ learning_objectives:
 
 prerequisites:
     - None
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -27,13 +28,11 @@ operatingsystems:
     - Android
 tools_software_languages:
 
-
 further_reading:
     - resource:
         title: Android for Developers
         link: https://developer.android.com/ 
         type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

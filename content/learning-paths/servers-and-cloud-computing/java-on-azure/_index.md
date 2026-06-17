@@ -13,11 +13,12 @@ learning_objectives:
 
 prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -52,7 +53,6 @@ further_reading:
       title: JMH (Java Microbenchmark Harness) documentation
       link: https://openjdk.org/projects/code-tools/jmh/
       type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

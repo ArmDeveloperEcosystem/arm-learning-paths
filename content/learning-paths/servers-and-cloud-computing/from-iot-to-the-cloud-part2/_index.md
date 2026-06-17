@@ -15,11 +15,11 @@ prerequisites:
     - 'Azure subscription. Use this link to sign up for a free account: https://azure.microsoft.com/en-us/free/.'
     - 'Complete the [first learning path](/learning-paths/servers-and-cloud-computing/from-iot-to-the-cloud-part1) of this series.'  
 
+author: Dawid Borycki
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -29,7 +29,7 @@ cloud_service_providers:
 
 armips:
     - Neoverse
-    
+
 tools_software_languages:
     - ASP.NET Core    
     - Docker
@@ -50,8 +50,6 @@ further_reading:
         title: Azure Container Instances
         link: https://learn.microsoft.com/en-us/azure/container-instances/
         type: Documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

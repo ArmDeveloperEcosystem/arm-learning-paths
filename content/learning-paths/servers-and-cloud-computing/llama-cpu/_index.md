@@ -13,14 +13,15 @@ learning_objectives:
 
 prerequisites:
     - An AWS Graviton4 r8g.16xlarge instance to test Arm performance optimizations, or any [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server.
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author:
     - Pareena Verma
     - Jason Andrews
     - Zach Lasiuk
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -55,8 +56,6 @@ further_reading:
         title: Llama-2-7B-Chat-GGUF
         link: https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

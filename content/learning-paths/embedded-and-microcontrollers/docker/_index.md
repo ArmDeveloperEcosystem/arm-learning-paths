@@ -13,11 +13,12 @@ learning_objectives:
     - Test the image
 
 prerequisites:
+
+author: Ronan Synnott
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
@@ -35,7 +36,6 @@ tools_software_languages:
     - Arm Compiler for Embedded
     - Arm Fast Models
 
-
 further_reading:
     - resource:
         title: Docker documentation
@@ -45,7 +45,6 @@ further_reading:
         title: Learn how to use Docker
         link: /learning-paths/cross-platform/docker/
         type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

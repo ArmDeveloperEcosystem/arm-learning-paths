@@ -17,11 +17,12 @@ learning_objectives:
 prerequisites:
     - An NVIDIA DGX Spark system with at least 15 GB of available disk space
     - A USB microphone for audio input
+
+author: Odin Shen
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Odin Shen
 
 ### Tags
 skilllevels: Advanced

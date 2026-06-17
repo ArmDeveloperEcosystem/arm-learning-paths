@@ -15,13 +15,14 @@ learning_objectives:
 prerequisites:
     - Access to an x86 and an Arm Linux machine.
     - Familiarity with floating-point numbers.
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author: 
     - Kieran Hejmadi
     - Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced

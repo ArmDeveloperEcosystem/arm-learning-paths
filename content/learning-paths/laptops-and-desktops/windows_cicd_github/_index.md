@@ -15,11 +15,12 @@ prerequisites:
     - Some familiarity with CI/CD concepts is assumed
     - Valid GitHub account
     - Microsoft Azure account (if using virtual machine)
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -44,7 +45,6 @@ further_reading:
         title: Continuous Integration for Windows on Arm
         link: https://azure.microsoft.com/en-us/blog/azure-virtual-machines-with-ampere-altra-arm-based-processors-generally-available/
         type: blog
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

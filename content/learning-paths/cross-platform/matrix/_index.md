@@ -18,12 +18,12 @@ prerequisites:
     - A C++ compiler with C++17 support.
     - A build system [GNU Make](https://www.gnu.org/software/make/) or [Ninja](https://ninja-build.org/).
     - A documentation generator [Doxygen](https://www.doxygen.nl/).
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author: Arnaud de Grandmaison
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -58,8 +58,6 @@ further_reading:
         title: Quickstart Building with CMake
         link: https://google.github.io/googletest/quickstart-cmake.html
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

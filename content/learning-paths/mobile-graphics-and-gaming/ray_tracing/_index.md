@@ -15,11 +15,12 @@ prerequisites:
     - An appropriate Android device that supports the required Vulkan extensions (for example, Vivo X100).
     - Knowledge of the Vulkan API.
     - A Vulkan renderer. Most code is generic and should be easy to incorporate into any deferred PBR renderer.
+
+author: Iago Calvo Lista
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Iago Calvo Lista
 
 ### Tags
 skilllevels: Advanced
@@ -31,7 +32,6 @@ operatingsystems:
     - Android
 tools_software_languages:
     - Vulkan
-
 
 further_reading:
     - resource:
@@ -52,7 +52,6 @@ further_reading:
         title: "Realistic Mobile Graphics with Optimized Ray Tracing (GDC 2024)"
         link: https://www.youtube.com/watch?v=OPLTK7RB7co
         type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -13,11 +13,12 @@ learning_objectives:
 prerequisites:
     - An Arm account that can access IP Explorer
     - (Optional) A Linux machine with the desired compilers installed
+
+author: Ronan Synnott
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
@@ -45,7 +46,6 @@ further_reading:
         title: Login to Arm IP Explorer
         link: https://ipexplorer.arm.com/
         type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

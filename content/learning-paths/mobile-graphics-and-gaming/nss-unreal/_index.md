@@ -6,23 +6,22 @@ minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for developers experimenting with neural graphics using Unreal Engine® and ML Extensions for Vulkan®.
 
-
 learning_objectives:
     - Understand how Arm enables neural graphics for game development
     - Configure ML extensions for Vulkan emulation
     - Enable Neural Super Sampling (NSS) in Unreal Engine
     - Run and visualize real-time upscaling with NSS
 
-
 prerequisites:
     - Windows 11
     - Unreal Engine 4.27 or 5.4 or 5.6 (with the Templates and Feature Pack enabled)
     - Visual Studio (with Desktop Development with C++ and .NET desktop build tools)
+
+author: Annie Tallund
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Annie Tallund
 
 ### Tags
 skilllevels: Introductory
@@ -37,8 +36,6 @@ tools_software_languages:
     - NX
 operatingsystems:
     - Windows
-
-
 
 further_reading:
     - resource:
@@ -57,8 +54,6 @@ further_reading:
         title: How Arm Neural Super Sampling works
         link: https://community.arm.com/arm-community-blogs/b/mobile-graphics-and-gaming-blog/posts/how-arm-neural-super-sampling-works
         type: blog
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

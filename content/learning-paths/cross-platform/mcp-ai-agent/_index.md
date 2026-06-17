@@ -17,11 +17,12 @@ prerequisites:
     - Familiarity with Python programming and prompt engineering techniques.
     - Basic understanding of Large Language Models (LLMs) and how they are used in local inference.
     - Understanding of AI agents and the OpenAI Agent SDK (or similar frameworks).
+
+author: Andrew Choi
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Andrew Choi
 
 skilllevels: Introductory
 subjects: ML
@@ -49,7 +50,6 @@ further_reading:
         title: OpenAI Agents SDK
         link: https://openai.github.io/openai-agents-python/
         type: blog
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

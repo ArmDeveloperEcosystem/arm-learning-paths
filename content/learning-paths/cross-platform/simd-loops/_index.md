@@ -17,13 +17,14 @@ prerequisites:
     - An AArch64 computer running Linux or macOS. You can use cloud instances, refer to [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) for a list of cloud service providers
     - Some familiarity with SIMD programming and Neon intrinsics
     - Recent toolchains that support SVE/SME (GCC 13+ or Clang 16+ recommended)
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author:
     - Alejandro Martinez Vicente
     - Mohamad Najem
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -100,7 +101,6 @@ further_reading:
         title: Application Binary Interface for the Arm Architecture
         link: https://github.com/ARM-software/abi-aa
         type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

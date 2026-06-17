@@ -15,11 +15,12 @@ learning_objectives:
 prerequisites:
     - A Microsoft Azure subscription with permissions to create virtual machines and networking resources
     - Basic familiarity with SSH
+
+author: Joe Stech
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Joe Stech
 
 ### Tags
 # Tagging metadata, see the Learning Path guide for the allowed values
@@ -35,7 +36,6 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
-
 further_reading:
     - resource:
         title: Azure Cobalt 100 VM documentation
@@ -49,8 +49,6 @@ further_reading:
         title: Configure Azure network security group rules
         link: https://learn.microsoft.com/azure/virtual-network/security-overview
         type: Documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

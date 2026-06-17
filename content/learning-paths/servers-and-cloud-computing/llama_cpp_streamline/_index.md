@@ -19,13 +19,14 @@ prerequisites:
     - Understanding of transformer models
     - Knowledge of Arm Streamline usage
     - An Arm Neoverse or Cortex-A hardware platform running Linux or Android
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author: 
     - Zenon Zhilong Xiu
     - Odin Shen
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced

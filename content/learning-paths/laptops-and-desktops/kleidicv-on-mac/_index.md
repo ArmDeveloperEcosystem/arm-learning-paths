@@ -16,11 +16,12 @@ prerequisites:
 - A Mac with Apple Silicon (M4 generation or newer)
 - Xcode command line tools installed
 - Basic familiarity with using the Terminal and command-line tools
+
+author: Jett Zhou
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jett Zhou
 
 ### Tags
 skilllevels: Introductory
@@ -46,8 +47,6 @@ further_reading:
         title: Learn about function multiversioning
         link: /learning-paths/cross-platform/function-multiversioning/
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

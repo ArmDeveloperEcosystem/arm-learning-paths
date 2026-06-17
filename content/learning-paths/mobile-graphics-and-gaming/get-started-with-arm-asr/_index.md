@@ -13,11 +13,12 @@ learning_objectives:
 prerequisites:
     - A game project that uses advanced rendering features (such as hardware ray tracing) that stretch the performance capabilities of everyday smartphones.
     - A development machine with Git installed.
+
+author: Julie Gaskin
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Julie Gaskin
 
 ### Tags
 skilllevels: Advanced
@@ -29,8 +30,6 @@ tools_software_languages:
     - Unreal Engine
 operatingsystems:
     - Android
-
-
 
 further_reading:
     - resource:
@@ -53,8 +52,6 @@ further_reading:
         title: Arm Accuracy Super Resolution for the Generic Library Tutorial
         link: https://developer.arm.com/documentation/110404/latest/
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -6,7 +6,6 @@ minutes_to_complete: 10
 who_is_this_for: This is an introductory topic for software developers using compression
   libraries on Arm servers.
 
-
 learning_objectives:
 - Install and run lzbench with snappy and zstd
 - Measure compression library performance running on 64-bit Arm AWS EC2 instance
@@ -14,11 +13,12 @@ learning_objectives:
 prerequisites:
 - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from an appropriate
   cloud service provider.
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 test_images:
 - ubuntu:latest

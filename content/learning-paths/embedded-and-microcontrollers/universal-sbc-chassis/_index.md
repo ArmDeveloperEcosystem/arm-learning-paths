@@ -23,11 +23,12 @@ prerequisites:
     - 18-8 stainless steel socket head screw. 4 per card. [Example part](https://www.mcmaster.com/91292A016/)
     - 18-8 stainless steel hex nut. 4 per card. [Example part](https://www.mcmaster.com/91828A113/)
     - PETG filament. Others can work, but PETG allows some flex without the risk of snapping
+
+author: Gabriel Peterson
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Gabriel Peterson
 
 ### Tags
 skilllevels: Introductory
@@ -52,8 +53,6 @@ further_reading:
         title: 3D Printing for Beginners - How to Get Started with FDM 
         link: https://all3dp.com/2/3d-printing-for-beginners-all-you-need-to-know-to-get-started/
         type: blog
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

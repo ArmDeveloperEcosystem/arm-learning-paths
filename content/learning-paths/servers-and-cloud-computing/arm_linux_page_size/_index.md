@@ -16,16 +16,17 @@ learning_objectives:
 
 prerequisites:
   - Access to an Arm-based Linux system running Ubuntu, Debian, or CentOS.
+
+author: Geremy Cohen
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
-author: Geremy Cohen
-
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
-    
+
 armips:
     - Neoverse
 

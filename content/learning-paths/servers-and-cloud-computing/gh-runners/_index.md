@@ -17,13 +17,14 @@ prerequisites:
     - A GitHub account with access to Arm-hosted GitHub runners.
     - A Docker Hub account for storing container images.
     - Familiarity with the concepts of ML and continuous integration and deployment (CI/CD).
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author:
     - Pareena Verma
     - Annie Tallund
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -38,7 +39,6 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
-
 further_reading:
     - resource:
         title: Arm64 on GitHub Actions - Powering faster, more efficient build systems
@@ -52,8 +52,6 @@ further_reading:
         title: Streamlining your MLOps pipeline with GitHub Actions and Arm64 runners
         link: https://github.blog/enterprise-software/ci-cd/streamlining-your-mlops-pipeline-with-github-actions-and-arm64-runners/
         type: blog
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

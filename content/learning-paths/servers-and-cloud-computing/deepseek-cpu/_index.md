@@ -13,12 +13,13 @@ learning_objectives:
 
 prerequisites:
     - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud provider or an on-premise Arm server. This Learning Path was tested on an AWS Graviton4 r8g.24xlarge instance.
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author:
     - Tianyu Li
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -37,7 +38,6 @@ tools_software_languages:
     - Generative AI
     - Python
 
-
 further_reading:
     - resource:
         title: Getting started with DeepSeek-R1
@@ -55,8 +55,6 @@ further_reading:
         title: DeepSeek-R1-GGUF
         link: https://huggingface.co/bartowski/DeepSeek-R1-GGUF 
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

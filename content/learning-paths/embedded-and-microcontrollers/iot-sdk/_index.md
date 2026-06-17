@@ -14,11 +14,12 @@ learning_objectives:
 prerequisites:
     - Some familiarity with embedded programming
     - An AWS account (required for Arm Virtual Hardware)
+
+author: Ronan Synnott
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
@@ -35,7 +36,6 @@ tools_software_languages:
     - FVP
     - Arm Compiler for Embedded
 
-
 further_reading:
     - resource:
         title: Open-IoT-SDK
@@ -49,7 +49,6 @@ further_reading:
         title: Learn more about the Corstone reference systems
         link: https://www.arm.com/products/silicon-ip-subsystems/
         type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

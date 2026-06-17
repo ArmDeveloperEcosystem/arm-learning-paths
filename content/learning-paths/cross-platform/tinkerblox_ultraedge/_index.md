@@ -12,17 +12,17 @@ learning_objectives:
   - Deploy the MicroPacs on Linux-based compute systems and scale to cloud or data-center environments
   - Optimize performance for edge-cloud scenarios, enabling near real-time data flows
 
-
 prerequisites:
   - Experience using Linux on embedded or SBC platforms
   - Understanding of container runtimes (containerd) and CNI networking
   - Basic knowledge of communication protocols (MQTT, HTTP, and others)
   - Familiarity with edge-cloud architectures and data-flow orchestration
+
+author: Tinkerblox
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Tinkerblox
 
 ### Tags
 skilllevels: Advanced
@@ -35,7 +35,7 @@ cloud_service_providers:
 
 armips:
   - Neoverse
-  
+
 operatingsystems:
   - Linux
   - other
@@ -50,7 +50,6 @@ further_reading:
       title: Tinkerblox
       link: https://tinkerblox.io 
       type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

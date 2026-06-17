@@ -1,11 +1,12 @@
 ---
 title: Get started with Arm-based cloud instances
 description: Learn how to start an Arm-based virtual machine instance from major cloud service providers and verify the Arm architecture is being used.
+
+author: Ronan Synnott
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Ronan Synnott
 
 minutes_to_complete: 15
 
@@ -32,8 +33,6 @@ operatingsystems:
     - Linux
 tools_software_languages:
 
-
-
 further_reading:
     - resource:
         title: Cloud computing (arm.com)
@@ -59,7 +58,6 @@ further_reading:
         title: Oracle Developer Resource Center
         link: https://developer.oracle.com/arm/
         type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

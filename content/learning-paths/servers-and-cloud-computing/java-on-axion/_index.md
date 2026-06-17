@@ -13,11 +13,12 @@ learning_objectives:
 
 prerequisites:
     - A [Google Cloud](https://cloud.google.com/) account with access to Axion based instances (C4A).
+
+author: Joe Stech
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Joe Stech
 
 ### Tags
 skilllevels: Introductory
@@ -34,7 +35,6 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
-
 further_reading:
     - resource:
         title: Exploring JVM Tuning Flags
@@ -44,8 +44,6 @@ further_reading:
         title: The java Command 
         link: https://docs.oracle.com/en/java/javase/21/docs/specs/man/java.html
         type: blog
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

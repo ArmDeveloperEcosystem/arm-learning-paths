@@ -12,11 +12,12 @@ learning_objectives:
 
 prerequisites:
     - An Arm computer running Linux and a recent version of Clang or the GNU compiler (gcc) installed.
+
+author: Konstantinos Margaritis
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Konstantinos Margaritis
 
 ### Tags
 skilllevels: Advanced
@@ -37,7 +38,6 @@ shared_between:
     - laptops-and-desktops
     - mobile-graphics-and-gaming
 
-
 further_reading:
     - resource:
         title: Array of Structures (AoS), Structure of Arrays (SoA)
@@ -51,8 +51,6 @@ further_reading:
         title: Arm Neon Intrinsics Reference
         link: https://arm-software.github.io/acle/neon_intrinsics/advsimd.html 
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

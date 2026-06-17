@@ -14,11 +14,12 @@ learning_objectives:
 prerequisites:
     - An Amazon Web Services (AWS) account
     - A local computer with Docker, AWS CLI, and AWS Copilot CLI installed
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
@@ -31,7 +32,6 @@ operatingsystems:
     - Linux 
 tools_software_languages:
     - Docker
-
 
 further_reading:
     - resource:
@@ -46,8 +46,6 @@ further_reading:
         title: AWS Copilot Getting started with containers on AWS
         link: https://youtu.be/hBHf241-D2Y?si=ySm0e4VwbgFSoy3s
         type: video
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

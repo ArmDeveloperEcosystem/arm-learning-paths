@@ -18,11 +18,12 @@ learning_objectives:
 
 prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11. 
+
+author: Jason Andrews
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Jason Andrews
 
 ### Tags
 skilllevels: Advanced
@@ -45,7 +46,6 @@ further_reading:
         title: Arm64 Visual Studio
         link: https://devblogs.microsoft.com/visualstudio/arm64-visual-studio/
         type: blog
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

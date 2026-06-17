@@ -14,11 +14,12 @@ learning_objectives:
 
 prerequisites:
      - A [Google Cloud Platform (GCP)](https://cloud.google.com/free?utm_source=google&hl=en) account with billing enabled
+
+author: Annie Tallund
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Annie Tallund
 
 ##### Tags
 skilllevels: Introductory
@@ -52,7 +53,6 @@ further_reading:
         title: YCSB
         link: https://github.com/brianfrankcooper/YCSB/wiki/
         type: documentation
-
 
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper

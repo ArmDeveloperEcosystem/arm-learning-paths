@@ -14,11 +14,12 @@ prerequisites:
     - A Windows on Arm machine, for example the Lenovo Thinkpad X13s running Windows 11 to build the .NET Aspire project.    
     - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from AWS or GCP.
     - Any code editor. [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user) is an example of a suitable editor.    
+
+author: Dawid Borycki
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -29,7 +30,7 @@ cloud_service_providers:
 
 armips:
     - Neoverse
-    
+
 tools_software_languages:
     - .NET
     - C# 
@@ -38,7 +39,6 @@ tools_software_languages:
 operatingsystems:
     - Windows
     - Linux
-
 
 further_reading:
     - resource:
@@ -53,8 +53,6 @@ further_reading:
         title: Compute Service - Google GCP
         link: https://cloud.google.com/products/compute/
         type: Documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

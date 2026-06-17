@@ -19,11 +19,12 @@ prerequisites:
     - A debuggable build of your application. 
     - Arm Performance Studio installed. Follow the [Arm Performance Studio install guide](/install-guides/ams/) for instructions.
     - Android SDK Platform tools installed. Required for the Android Debug bridge (adb).
+
+author: Ronan Synnott
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
@@ -79,7 +80,6 @@ further_reading:
         title: RenderDoc Reference Guide
         link: https://renderdoc.org/docs/index.html
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

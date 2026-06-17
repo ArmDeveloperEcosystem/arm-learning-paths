@@ -13,11 +13,12 @@ learning_objectives:
 prerequisites:
     - Basic understanding of C++.
     - Basic understanding of compilers.
+
+author: Kieran Hejmadi
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Kieran Hejmadi
 
 ### Tags
 skilllevels: Introductory
@@ -40,7 +41,6 @@ further_reading:
         title: Runtime Detection of CPU features 
         link: https://community.arm.com/arm-community-blogs/b/operating-systems-blog/posts/runtime-detection-of-cpu-features-on-an-armv8-a-cpu
         type: blog
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

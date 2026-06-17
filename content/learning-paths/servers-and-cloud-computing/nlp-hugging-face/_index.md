@@ -11,11 +11,12 @@ learning_objectives:
 
 prerequisites:
     - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server.
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
@@ -33,7 +34,7 @@ tools_software_languages:
     - Python
     - PyTorch
     - Hugging Face
-    
+
 further_reading:
     - resource:
         title: Hugging Face Documentation
@@ -51,8 +52,6 @@ further_reading:
         title: PyTorch Documentation
         link: https://pytorch.org/docs/stable/index.html
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

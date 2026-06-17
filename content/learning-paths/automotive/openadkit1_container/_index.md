@@ -14,11 +14,12 @@ learning_objectives:
 prerequisites:
     - An Arm Neoverse cloud instance, or a local Arm Neoverse Linux computer with at least 16 CPUs and 32GB of RAM
     - Familiarity with Docker and Docker Compose
+
+author: Odin Shen
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Odin Shen
 
 ### Tags
 skilllevels: Introductory
@@ -31,7 +32,6 @@ tools_software_languages:
     - ROS 2
 operatingsystems:
     - Linux
-
 
 further_reading:
     - resource:
@@ -50,8 +50,6 @@ further_reading:
         title: ROS 2 Documentation
         link: https://docs.ros.org/en/humble/
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

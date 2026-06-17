@@ -3,7 +3,6 @@ title: Profile the Linux kernel with Arm Streamline
 
 description: Learn how to profile Linux kernel modules using Arm Streamline to identify performance bottlenecks, analyze both out-of-tree and in-tree modules, and use Statistical Profiling Extension (SPE) for deeper insights.
 
-
 minutes_to_complete: 60
 
 who_is_this_for: This is an advanced topic for developers and performance engineers interested in profiling Linux kernel performance.
@@ -19,11 +18,12 @@ prerequisites:
     - Basic understanding of Linux kernel development and module programming
     - Arm-based Linux target device (such as a Raspberry Pi, BeagleBone, or similar board) with Secure Shell (SSH) access
     - A host machine that meets [Buildroot system requirements](https://buildroot.org/downloads/manual/manual.html#requirement)
+
+author: Yahya Abouelseoud
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Yahya Abouelseoud
 
 ### Tags
 skilllevels: Advanced
@@ -38,8 +38,6 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
-
-
 further_reading:
     - resource:
         title: Streamline user guide 
@@ -53,8 +51,6 @@ further_reading:
         title: Streamline video tutorial
         link: https://developer.arm.com/Additional%20Resources/Video%20Tutorials/Arm%20Mali%20GPU%20Training%20-%20EP3-3
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -1,6 +1,6 @@
 ---
 title: Run vLLM inference with INT4 quantization on Arm servers
-    
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for developers interested in building and optimizing vLLM for Arm-based servers. This Learning Path shows you how to quantize large language models (LLMs) to INT4, serve them using an OpenAI-compatible API, and benchmark model accuracy with the LM Evaluation Harness.
@@ -16,12 +16,13 @@ learning_objectives:
 prerequisites:
     - An Arm-based Linux server (Ubuntu 22.04+ recommended) with a minimum of 32 vCPUs, 64 GB RAM, and 64 GB free disk space
     - Python 3.12 and basic familiarity with Hugging Face Transformers and quantization
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author:
    - Nikhil Gupta
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -43,7 +44,7 @@ tools_software_languages:
     - Python
     - PyTorch
     - Hugging Face
-    
+
 further_reading:
     - resource:
         title: vLLM Documentation
@@ -65,8 +66,6 @@ further_reading:
         title: LM Evaluation Harness (GitHub)
         link: https://github.com/EleutherAI/lm-evaluation-harness
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -15,14 +15,15 @@ learning_objectives:
 prerequisites:
     - Basic C++ knowledge
     - Android Studio with Android Emulator
-generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
 
 author:
     - Éliás Bálint
     - Dawid Borycki
     - Steve Suzuki
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -40,7 +41,6 @@ tools_software_languages:
     - Android Studio
     - CMake
 
-
 further_reading:
     - resource:
         title: Halide documentation
@@ -54,7 +54,6 @@ further_reading:
         title: Halide Tutorials
         link: https://halide-lang.org/tutorials/
         type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

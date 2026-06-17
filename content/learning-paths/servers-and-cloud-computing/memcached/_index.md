@@ -13,11 +13,12 @@ learning_objectives:
 
 prerequisites:
 - An Arm based instance from an appropriate cloud service provider.
+
+author: Pareena Verma
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Pareena Verma
 
 test_images:
 - ubuntu:latest
@@ -47,7 +48,6 @@ further_reading:
         title: Benchmarking memcached performance on AWS Graviton2 servers
         link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/accelerating-deep-packet-inspection-with-neon-on-arm-neoverse
         type: blog
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

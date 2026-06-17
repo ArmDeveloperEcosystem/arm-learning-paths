@@ -14,11 +14,12 @@ learning_objectives:
 prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
     - Visual Studio 2022 with .NET Desktop Development workload
+
+author: Dawid Borycki
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -31,7 +32,7 @@ tools_software_languages:
     - Windows Forms
     - C#
     - .NET
-    
+
 further_reading:
     - resource:
         title: Windows Forms on .NET 8
@@ -41,7 +42,6 @@ further_reading:
         title: Arm64 Performance Improvements in .NET 8
         link: https://devblogs.microsoft.com/dotnet/this-arm64-performance-in-dotnet-8/
         type: blog
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

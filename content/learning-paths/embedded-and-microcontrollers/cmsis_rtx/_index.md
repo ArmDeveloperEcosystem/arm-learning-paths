@@ -13,11 +13,12 @@ learning_objectives:
 prerequisites:
     - An installation of [Arm Keil MDK](/install-guides/mdk/) or [Arm Development Studio](/install-guides/armds/) (MDK recommended)
     - Some familiarity with CMSIS is assumed
+
+author: Ronan Synnott
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
@@ -40,7 +41,6 @@ further_reading:
         title: Event Recorder and Component Viewer
         link: https://www.keil.com/pack/doc/compiler/EventRecorder/html/index.html
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

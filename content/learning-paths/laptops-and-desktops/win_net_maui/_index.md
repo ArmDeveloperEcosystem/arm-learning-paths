@@ -14,11 +14,12 @@ learning_objectives:
 prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
     - Visual Studio 2022 with .NET Multi-platform App UI development and Universal Windows Platform development installed.
+
+author: Dawid Borycki
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
-
-author: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
@@ -45,7 +46,6 @@ further_reading:
         title: .NET MAUI Source Code
         link: https://github.com/dotnet/maui
         type: GitHub repository
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
