@@ -17,18 +17,17 @@ You'll first create a small Go benchmark module.  The high-level flow is:
 5. Measure how much GC activity occurred during the benchmark.
 6. Report both performance metrics and GC-related metrics.
 
-Pasting the code below will create the module and benchmark file:
+Create the module directory and initialize it:
 
 ```bash
-
-# Create the module directory and initialize it.
-
 mkdir -p $HOME/go-gc-default/parsebench
 cd $HOME/go-gc-default
 go mod init example.com/go-gc-default
+```
 
-# Create the benchmark file:
+Create the benchmark file:
 
+```bash
 cat > parsebench/parsebench_test.go <<'EOF'
 package parsebench
 
@@ -159,7 +158,7 @@ func BenchmarkParseAndAllocate(b *testing.B) {
 EOF
 ```
 
-The benchmark code is now ready to run!  Give it a try by running the following command:
+The benchmark code is now ready. Run the following command to verify it executes without errors:
 
 ```bash
 cd $HOME/go-gc-default

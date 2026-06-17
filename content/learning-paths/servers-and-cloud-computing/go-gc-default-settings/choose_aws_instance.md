@@ -6,7 +6,7 @@ weight: 2
 layout: learningpathall
 ---
 ## What is Garbage Collection? (GC)
-Memory management is a critical aspects of application performance, and Garbage Collection (GC) plays a central role in automating that process. GC continuously identifies and removes objects that are no longer needed, freeing memory for re-use for other purposes..
+Memory management is a critical aspect of application performance, and Garbage Collection (GC) plays a central role in automating that process. GC continuously identifies and removes objects that are no longer needed, freeing memory for reuse.
 
 While this automation improves productivity and application safety, inefficient garbage collection can lead to increased CPU usage, longer response times, and unexpected application pauses. 
 
@@ -14,7 +14,7 @@ Tracking GC metrics provides a window into an application's memory health, helpi
 
 ## Measuring default Go GC behavior on Arm servers
 
-Go is one such language which implements GC.  As Go applications can spend meaningful time allocating memory and running garbage collection, it is important to understand how the Go runtime behaves under default settings. 
+Go is one such language that implements GC.  As Go applications can spend meaningful time allocating memory and running garbage collection, it is important to understand how the Go runtime behaves under default settings. 
 
 In this Learning Path, you'll run Go benchmarks on an AWS Graviton instance. The goal is to build a clean baseline, measuring operation time, allocation rate, GC frequency, and GC pause cost.
 
@@ -44,7 +44,7 @@ aws ec2 describe-instance-type-offerings \
     --output table
 ```
 
-If the command returns one or more Availability Zones, you can use `m8g.xlarge` in that Region.  If you are unable to find `m8g.xlarge` in your Region, you can try a different Region, or fallback to an 'm7g.xlarge' instance, which is based on the previous generation AWS Graviton3:
+If the command returns one or more Availability Zones, you can use `m8g.xlarge` in that Region. If `m8g.xlarge` is not available in your Region, try a different Region, or fall back to an `m7g.xlarge` instance, which is based on the previous generation AWS Graviton3:
 
 ```console
 aws ec2 describe-instance-type-offerings \
@@ -55,4 +55,17 @@ aws ec2 describe-instance-type-offerings \
     --output table
 ```
 
-Once you have chosen an instance type, provision it to run Ubuntu 24.04 LTS Arm64.  Once the instance is running, and you are ssh'd into it, you can proceed to the next step.
+After selecting an instance type, launch it with the Ubuntu 24.04 LTS (arm64) AMI. You can do this through the [AWS EC2 console](https://console.aws.amazon.com/ec2/) or the AWS CLI. When configuring the instance:
+
+- Select your chosen instance type (`m8g.xlarge` or `m7g.xlarge`)
+- Choose the Ubuntu 24.04 LTS arm64 AMI for your Region
+- Configure a security group that allows inbound SSH (port 22) from your IP address
+- Associate an existing key pair or create a new one for SSH access
+
+After the instance reaches the running state, connect to it over SSH:
+
+```bash
+ssh -i /path/to/your-key.pem ubuntu@<instance-public-ip>
+```
+
+You now have a running Arm Linux instance on AWS Graviton. In the next section you'll install Go and Benchstat so the instance is ready to run benchmarks.

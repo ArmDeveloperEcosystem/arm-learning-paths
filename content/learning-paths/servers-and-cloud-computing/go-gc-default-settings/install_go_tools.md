@@ -15,27 +15,36 @@ The following commands use Go 1.26.3. The same commands work with other Go versi
 {{% /notice %}}
 
 
-```bash
-# Download the Go archive and verify the checksum:
+Download the Go archive and verify the checksum:
 
+```bash
 cd $HOME
 curl -LO https://go.dev/dl/go1.26.3.linux-arm64.tar.gz
 echo "9d89a3ea57d141c2b22d70083f2c8459ba3890f2d9e818e7e933b75614936565  go1.26.3.linux-arm64.tar.gz" | sha256sum -c -
+```
 
-# Install Go under `/usr/local`:
+Install Go under `/usr/local`:
 
+```bash
 sudo rm -rf /usr/local/go
 sudo tar -C /usr/local -xzf go1.26.3.linux-arm64.tar.gz
+```
 
-# Add Go to your shell path:
+Add Go to your shell path:
+
+```bash
 export PATH=/usr/local/go/bin:$HOME/go/bin:$PATH
+```
 
-# To make the path update persistent, add it to your shell profile:
+To make the path update persistent, add it to your shell profile:
 
+```bash
 echo 'export PATH=/usr/local/go/bin:$HOME/go/bin:$PATH' >> $HOME/.profile
+```
 
-# Verify that Go is installed for Arm64 Linux:
-echo 
+Verify that Go is installed for Arm64 Linux:
+
+```bash
 go version
 go env GOOS GOARCH
 ```
@@ -50,7 +59,7 @@ arm64
 
 ## Installing Benchstat
 
-`benchstat` is a Go performance analysis tool that compares benchmark results and provides statistical analysis of performance differences between runs. It helps developers determine whether observed changes in benchmark metrics are statistically significant rather than simply the result of normal measurement variability.  We'll use `benchstat` for that purpose in this learning path.
+`benchstat` is a Go performance analysis tool that compares benchmark results and provides statistical analysis of performance differences between runs. It helps developers determine whether observed changes in benchmark metrics are statistically significant rather than simply the result of normal measurement variability. You'll use `benchstat` for that purpose in this Learning Path.
 
 To install `benchstat`:
 
@@ -66,7 +75,8 @@ go: downloading github.com/aclements/go-moremath v0.0.0-20210112150236-f10218a38
 ```
 
 Finally, do a quick check to make sure `benchstat` is installed:
-```console
+
+```bash
 benchstat -h
 ```
 
