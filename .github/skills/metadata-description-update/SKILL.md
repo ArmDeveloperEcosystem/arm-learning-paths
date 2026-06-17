@@ -13,9 +13,9 @@ This skill is for search and discovery metadata. For draft visibility metadata, 
 
 - Work from the repository root.
 - Read `AGENTS.md` to locate shared guidance.
-- Read `.github/skills/arm-content-editor/references/content-quality.md` for general project content quality guidance.
-- For Learning Paths, read `.github/skills/arm-content-editor/references/learning-path-guidance.md`.
-- For install guides, read `.github/skills/arm-content-editor/references/install-guide-guidance.md`.
+- For Learning Paths, read `.github/skills/learning-path-structure-review/SKILL.md` if the page task or outcome is unclear.
+- For install guides, read `.github/skills/install-guide-structure-review/SKILL.md` if the tool, platform, or verification outcome is unclear.
+- Use `.github/skills/frontmatter-audit/SKILL.md` when the request is broader than description edits.
 
 ## Scope rules
 

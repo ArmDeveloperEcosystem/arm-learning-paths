@@ -29,10 +29,11 @@ Use this skill to find Learning Paths and install guides that might need human m
 - Be explicit when a flag is uncertain or only a heuristic signal.
 - Keep periodic scan output lightweight enough for a reviewer to act on.
 - Prefer questions and maintenance prompts over direct edits.
-- Use related skills for focused follow-up:
+- Propose using related skills for focused follow-up:
    - `audit-images` for screenshot, image, alt text, and caption review.
    - `code-sample-review` for commands, package installs, outputs, and code fence integrity.
-   - `arm-content-editor` for Arm terminology, product naming, and broader content judgment.
+   - `writing-style-review` for Arm terminology, product naming, and prose quality.
+   - `learning-path-structure-review` or `install-guide-structure-review` for broader content judgment.
    - `link-text-review` for stale or vague external links that also need accessible anchor text.
 
 ## Script usage

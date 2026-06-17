@@ -13,10 +13,10 @@ Use this file as a lightweight router for Codex, Copilot, and other coding agent
 ## Source of truth
 
 - Repository router: `AGENTS.md`
-- General Arm content editing: `.github/skills/arm-content-editor/SKILL.md`
-- Learning Paths-specific guidance: `.github/skills/arm-content-editor/references/learning-path-guidance.md`
-- Install guides-specific guidance: `.github/skills/arm-content-editor/references/install-guide-guidance.md`
-- Shared content quality: `.github/skills/arm-content-editor/references/content-quality.md`
+- Learning Path structure review: `.github/skills/learning-path-structure-review/SKILL.md`
+- Install guide structure review: `.github/skills/install-guide-structure-review/SKILL.md`
+- Writing style and voice review: `.github/skills/writing-style-review/SKILL.md`
+- Front matter and metadata audits: `.github/skills/frontmatter-audit/SKILL.md`
 - Metadata descriptions: `.github/skills/metadata-description-update/SKILL.md`
 - SEO, GEO, AEO, and AI-agent discoverability: `.github/skills/seo-geo-aeo-review/SKILL.md`
 - Markdown components: `.github/skills/markdown-component-edit/SKILL.md`
@@ -38,7 +38,10 @@ Use skills for repeatable workflows such as image audits, metadata description u
 
 Current shared skills:
 
-- `.github/skills/arm-content-editor/SKILL.md` for reviewing and editing Arm Learning Paths and install guides.
+- `.github/skills/learning-path-structure-review/SKILL.md` for reviewing Learning Path task ownership, structure, scope, validation, further reading, recap sections, and performance-learning integrity.
+- `.github/skills/install-guide-structure-review/SKILL.md` for reviewing install guide structure, install-only scope, version notes, verification, troubleshooting, and multi-page guide behavior.
+- `.github/skills/writing-style-review/SKILL.md` for reviewing prose style, voice, tone, readability, inclusive language, Arm terminology, headings, and AI-sounding text.
+- `.github/skills/frontmatter-audit/SKILL.md` for auditing YAML front matter, required fields, fixed fields, duplicate weights, closed-list metadata, draft metadata, and description quality.
 - `.github/skills/metadata-description-update/SKILL.md` for adding or improving front matter `description` fields for Learning Paths and install guides.
 - `.github/skills/seo-geo-aeo-review/SKILL.md` for reviewing and improving search intent, AI-agent selection signals, answer-engine readiness, titles, headings, and broader discoverability.
 - `.github/skills/markdown-component-edit/SKILL.md` for adding or updating links, tables, notices, tab panes, code panes, and other structured Markdown components.

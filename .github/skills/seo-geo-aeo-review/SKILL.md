@@ -18,10 +18,7 @@ For focused front matter `description` edits only, use `.github/skills/metadata-
 ## Prerequisites
 
 - Work from the repository root.
-- Read `AGENTS.md` to locate the narrowest applicable guidance.
-- For Learning Paths, read `.github/skills/arm-content-editor/references/learning-path-guidance.md`.
-- For install guides, read `.github/skills/arm-content-editor/references/install-guide-guidance.md`.
-- Read `.github/skills/arm-content-editor/references/content-quality.md` only when broader clarity, accessibility, or Arm framing is in scope.
+- Read `AGENTS.md` only if you need repository routing context.
 - For additional Learning Paths discovery guidance, review `.github/skills/seo-geo-aeo-review/references/learning-paths-discoverability.md`.
 
 ## Workflow
