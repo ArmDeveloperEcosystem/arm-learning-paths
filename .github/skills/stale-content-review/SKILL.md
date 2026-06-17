@@ -5,7 +5,7 @@ description: Scan Arm Learning Paths and install guides for stale-content risk. 
 
 # Stale content review
 
-Use this skill to find Learning Paths and install guides that may need human maintenance review. This skill is report-only by default: flag risk, provide evidence, and leave fixes to the relevant owner unless the user explicitly asks for edits.
+Use this skill to find Learning Paths and install guides that might need human maintenance review. This skill is report-only by default: flag risk, provide evidence, and leave fixes to the relevant owner unless the user explicitly asks for edits.
 
 ## Prerequisites
 
@@ -19,11 +19,6 @@ Use this skill to find Learning Paths and install guides that may need human mai
 2. Run `scripts/stale_content_scan.py` for a deterministic first pass.
 3. Review the highest-scoring files and sample lines before drawing conclusions.
 4. Summarize what each selected guide or page does, the dependencies or moving parts it relies on, and the review flags a human should consider.
-5. Use related skills for focused follow-up:
-   - `audit-images` for screenshot, image, alt text, and caption review.
-   - `code-sample-review` for commands, package installs, outputs, and code fence integrity.
-   - `arm-content-editor` for Arm terminology, product naming, and broader content judgment.
-   - `link-text-review` for stale or vague external links that also need accessible anchor text.
 
 ## Validation rules
 
@@ -34,6 +29,11 @@ Use this skill to find Learning Paths and install guides that may need human mai
 - Be explicit when a flag is uncertain or only a heuristic signal.
 - Keep periodic scan output lightweight enough for a reviewer to act on.
 - Prefer questions and maintenance prompts over direct edits.
+- Use related skills for focused follow-up:
+   - `audit-images` for screenshot, image, alt text, and caption review.
+   - `code-sample-review` for commands, package installs, outputs, and code fence integrity.
+   - `arm-content-editor` for Arm terminology, product naming, and broader content judgment.
+   - `link-text-review` for stale or vague external links that also need accessible anchor text.
 
 ## Script usage
 

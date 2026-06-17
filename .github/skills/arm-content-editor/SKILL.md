@@ -5,34 +5,39 @@ description: Review and edit Arm Learning Paths and install guides. Use when aud
 
 # Arm content editor
 
-Use this skill to review or edit Arm Learning Paths and install guides with focused, high-signal feedback and minimal necessary changes. You'll be performing a second pass after an initial human editorial review.
+Use this skill as a second-pass reviewer for Arm Learning Paths and install guides. Focus on high-impact issues a human reviewer might miss.
 
 Targets are usually selected or referenced Learning Path or install guide files. If the request names a directory, review the files in that content unit together so metadata, terminology, headings, links, and task flow stay consistent.
 
 ## Load guidance
 
-Start with `AGENTS.md` at the repository root to identify the right source files.
+Use `AGENTS.md` as the router. Load only the narrowest guidance needed.
 
-Read only the guidance needed for the task. Don't load files that aren't necessary for the task:
+For routine second-pass review, start with only the target's content-type guidance:
+- Learning Path: `references/learning-path-guidance.md`
+- Install guide: `references/install-guide-guidance.md`
+- Mixed or unclear scope: `references/repository-guidance.md`
 
-- Repository structure and content model: `references/repository-guidance.md`
-- Writing style, headings, links, terminology, and prose cleanup: `references/writing-style.md`
-- Shared content quality and discoverability: `references/content-quality.md`
-- Learning Paths: `references/learning-path-guidance.md`
-- Install guides: `references/install-guide-guidance.md`
+Add general guidance only when the review scope calls for it:
+- Prose/style/accessibility: `references/writing-style.md`
+- Shared quality/discoverability: `references/content-quality.md`
+
+Add focused guidance only when the task or content requires it:
 - Metadata descriptions: `.github/skills/metadata-description-update/SKILL.md`
-- SEO, GEO, AEO, and AI-agent discoverability: `.github/skills/seo-geo-aeo-review/SKILL.md`
+- SEO/GEO/AEO: `.github/skills/seo-geo-aeo-review/SKILL.md`
+- Links: `.github/skills/link-text-review/SKILL.md`
+- Images: `.github/skills/audit-images/SKILL.md`
+- Code samples: `.github/skills/code-sample-review/SKILL.md`
+- Staleness: `.github/skills/stale-content-review/SKILL.md`
 - Markdown components: `.github/skills/markdown-component-edit/SKILL.md`
-- Accessible link text: `.github/skills/link-text-review/SKILL.md`
-- Stale content risk scans: `.github/skills/stale-content-review/SKILL.md`
-- Images, alt text, captions, and `#center` syntax: `.github/skills/audit-images/SKILL.md`
-- Code samples, commands, outputs, and code fence integrity: `.github/skills/code-sample-review/SKILL.md`
+
+Do not load all guidance files for routine review.
 
 ## Review workflow
 
-1. Identify whether the target is a Learning Path, install guide, or mixed content.
-2. Load the matching scoped guidance.
-3. Use repository search when cross-file consistency, links, terminology, or metadata depends on surrounding content.
+1. Identify whether the target is a Learning Path or an install guide.
+2. Depending on what type of content it is, load the minimum guidance and review against those guidelines.
+3. If the initial review finds a likely issue covered by a focused skill, load only that skill before making the finding.
 4. Suggest updates in the format specified under `Response format`. Don't comment on content that is already clear, correct, and fit for purpose.
 5. When the reviewer accepts all or part of your submissions and asks you to proceed, go ahead and make updates.
 
@@ -48,6 +53,7 @@ Don't recommend splitting content only because a file is long. Prefer semantic b
 - Verify internal links before changing them, or state when link verification was not possible.
 - Prioritize learner-blocking issues, incorrect technical guidance, scope drift, missing metadata, broken links, weak Arm framing, image issues, and unclear validation steps.
 - Classify substantial files as prose-heavy, mixed, or code-heavy before judging length or density.
+- Use repository search when cross-file consistency, links, terminology, or metadata depends on surrounding content.
 
 ## Response format
 
