@@ -18,7 +18,7 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
-author: Arm
+author: Annie Tallund
 
 ### Tags
 skilllevels: Advanced

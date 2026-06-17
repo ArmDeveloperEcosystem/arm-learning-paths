@@ -26,6 +26,8 @@ There are many versions of the [Arm GNU Toolchain](https://developer.arm.com/Too
 
 However there are reasons you may wish to use earlier compiler versions, so older versions are also available.
 
+See also [Where can I get older versions of the Arm GNU Toolchain and GCC for Arm Platforms?](https://developer.arm.com/documentation/ka005611/latest)
+
 ## Download the Arm GNU Toolchain {#download}
 
 Arm GNU Toolchain releases consist of cross toolchains for the following host operating systems:
