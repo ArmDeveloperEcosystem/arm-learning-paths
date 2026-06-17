@@ -178,8 +178,8 @@ Use Topo to deploy a containerized workload to my Arm target at user@my-target. 
 
 The agent reads the Topo `README.md`, runs health checks, selects a template, and deploys it end-to-end with minimal manual input.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
 You have now deployed a containerized workload to your Arm-based Linux target using Topo. You validated the deployment by accessing the application in a web browser. You also learned how to stop the deployment and forward ports if needed.
 
-Next you should explore modification and creation of Topo Templates in the follow-up Learning Path: [Create and deploy a custom Topo Template](/learning-paths/cross-platform/create-your-own-topo-templates/)
+Next, you can try the same workflow in Visual Studio Code using the Topo extension, or explore modification and creation of Topo Templates in the follow-up Learning Path: [Create and deploy a custom Topo Template](/learning-paths/cross-platform/create-your-own-topo-templates/).
