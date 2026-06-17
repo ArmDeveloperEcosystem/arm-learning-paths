@@ -7,8 +7,6 @@ description: Audit YAML front matter and metadata for Arm Learning Paths and ins
 
 Use this skill to audit front matter and metadata without rewriting body content. It can report issues or make metadata-only edits when requested.
 
-For description rewriting, use `.github/skills/metadata-description-update/SKILL.md`. For draft intake metadata, use `.github/skills/intake-metadata-update/SKILL.md`.
-
 ## Workflow
 
 1. Identify whether the target is a Learning Path, single-page install guide, multi-page install guide, or mixed content directory.
@@ -25,6 +23,7 @@ For a Learning Path directory:
 
 - `_index.md` should use `weight: 1`.
 - Public pages should have unique `weight` values within the directory.
+- Every page except for `_next-steps.md` must include a description.
 - `_index.md` must include `description`.
 - Required `_index.md` fields include `title`, `description`, `weight`, `layout`, `minutes_to_complete`, `prerequisites`, `author`, `subjects`, `armips`, `tools_software_languages`, `skilllevels`, and `operatingsystems`.
 - `layout` is usually `learningpathall`.

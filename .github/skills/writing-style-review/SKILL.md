@@ -7,13 +7,11 @@ description: Review and improve writing style, voice, tone, readability, inclusi
 
 Use this skill for granular prose, voice, readability, terminology, and style reviews. Keep edits focused and preserve technical meaning.
 
-For structural readiness, use `.github/skills/learning-path-structure-review/SKILL.md` or `.github/skills/install-guide-structure-review/SKILL.md`. For metadata-only checks, use `.github/skills/frontmatter-audit/SKILL.md`.
-
 ## Workflow
 
 1. Identify the target file, section, or selected text.
 2. Read surrounding context so style edits preserve the author's intent and the technical flow.
-3. Review only the style dimensions that match the request against the guidelines defined in this skill.
+3. Review the target against the guidelines defined in this skill.
 4. Depending on request type, do the following:
   - For review requests, report high-impact style issues by file and line when possible. 
   - For edit requests, make focused rewrites, then re-open changed sections to check Markdown, shortcodes, links, and code fences.

@@ -48,7 +48,7 @@ For focused front matter `description` edits only, use `.github/skills/metadata-
 ## Review rules
 
 - Optimize for selection and usefulness, not ranking alone.
-- Prefer verb-led titles such as `Install`, `Deploy`, `Configure`, `Analyze`, `Optimize`, or `Verify`.
+- For Learning Paths, prefer verb-led titles such as `Install`, `Deploy`, `Configure`, `Analyze`, `Optimize`, or `Verify`. Install guides are named after the tool being installed and don't feature a verb because install is implied.
 - Preserve content-type boundaries: install guides cover installation and verification; Learning Paths cover applied end-to-end tasks.
 - Use Arm-specific terminology naturally when it is supported by the content.
 - Don't add speculative keywords, unsupported performance claims, or marketing language.
