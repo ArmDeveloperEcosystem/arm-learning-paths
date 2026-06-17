@@ -19,7 +19,7 @@ For focused front matter `description` edits only, use `.github/skills/metadata-
 
 - Work from the repository root.
 - Read `AGENTS.md` only if you need repository routing context.
-- For additional Learning Paths discovery guidance, review `.github/skills/seo-geo-aeo-review/references/learning-paths-discoverability.md`.
+- Review `.github/skills/seo-geo-aeo-review/references/learning-paths-discoverability.md` only if you're reviewing a Learning Path.
 
 ## Workflow
 

@@ -12,10 +12,10 @@ This skill is for search and discovery metadata. For draft visibility metadata, 
 ## Prerequisites
 
 - Work from the repository root.
-- Read `AGENTS.md` to locate shared guidance.
-- For Learning Paths, read `.github/skills/learning-path-structure-review/SKILL.md` if the page task or outcome is unclear.
-- For install guides, read `.github/skills/install-guide-structure-review/SKILL.md` if the tool, platform, or verification outcome is unclear.
-- Use `.github/skills/frontmatter-audit/SKILL.md` when the request is broader than description edits.
+- Read `AGENTS.md` only if you need to locate shared guidance.
+- For Learning Paths, read `.github/skills/learning-path-structure-review/SKILL.md` only if the page task or outcome is unclear.
+- For install guides, read `.github/skills/install-guide-structure-review/SKILL.md` only if the tool, platform, or verification outcome is unclear.
+- Use `.github/skills/frontmatter-audit/SKILL.md` only when the request is broader than description edits.
 
 ## Scope rules
 

@@ -7,8 +7,6 @@ description: Review Arm install guides for structural soundness, installation-on
 
 Use this skill when an install guide needs a structural review. Focus on whether the guide installs and verifies one tool on Arm platforms without drifting into applied workflows.
 
-For metadata-only checks, use `.github/skills/frontmatter-audit/SKILL.md`. For command and output accuracy, use `.github/skills/code-sample-review/SKILL.md`.
-
 ## Workflow
 
 1. Identify whether the target is a single-page guide, multi-page guide, or install guide directory.

@@ -7,8 +7,6 @@ description: Review Arm Learning Paths for structural soundness, task ownership,
 
 Use this skill when a Learning Path needs a structural review. Focus on whether the content is organized to help a developer complete one clear task from preparation through validation.
 
-For metadata-only checks, use `.github/skills/frontmatter-audit/SKILL.md`. For prose style, use `.github/skills/writing-style-review/SKILL.md`.
-
 ## Workflow
 
 1. Identify the Learning Path directory and read the relevant Markdown files together.

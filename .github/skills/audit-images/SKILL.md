@@ -16,7 +16,6 @@ Use the script for repeatable inventory and counting. Use assistant judgment for
 - Work from the repository root.
 - Read `AGENTS.md` to locate shared guidance.
 - Read `references/image-guidance.md` before editing image alt text, captions, or image syntax.
-- When auditing a Learning Path or install guide, also read the matching scoped content guidance.
 
 ## Trigger
 
