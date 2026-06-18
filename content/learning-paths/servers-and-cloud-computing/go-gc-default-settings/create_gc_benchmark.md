@@ -1,14 +1,14 @@
 ---
-title: Create a Go GC benchmark
+title: Create a Go garbage collection benchmark
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Creating a benchmark module
+## Create a benchmark module
 
-You'll first create a small Go benchmark module.  The high-level flow is:
+Create a small Go benchmark module. The high-level flow is:
 
 1. Generate a large input string.
 2. Repeatedly parse it and create new objects/strings.
@@ -165,7 +165,7 @@ cd $HOME/go-gc-default
 go test ./parsebench -run '^$' -bench BenchmarkParseAndAllocate -benchmem -count 1 -benchtime=2s
 ```
 
-You should see output similar to below:
+The output is similar to:
 
 ```output
 goos: linux
@@ -178,5 +178,9 @@ ok      example.com/go-gc-default/parsebench    4.127s
 
 Your exact numbers will differ by instance type, Go version, operating system, and system load.  If this test run yields results with no errors, you're ready to move on to the next step.
 
+## What you've accomplished and what's next
 
+You've now created a Go garbage collection benchmark module.
+
+Next, you'll run the benchmark with default garbage collection settings. 
 
