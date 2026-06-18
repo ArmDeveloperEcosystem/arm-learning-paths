@@ -1,7 +1,7 @@
 ---
-title: Measure Go garbage collection behavior on AWS Graviton-based compute
+title: Measure and modify Go garbage collection behavior on AWS Graviton-based compute
 
-description: Learn how to run Go benchmarks on AWS Graviton-based compute, capture GC metrics and pprof profiles, and establish a reproducible default garbage collection baseline for memory-intensive workloads on Arm.
+description: Learn how to run Go benchmarks on AWS Graviton-based compute, capture GC metrics and pprof profiles with Benchstat, establish a reproducible default garbage collection baseline for memory-intensive workloads on Arm, and experiment with modifying garbage collection behavior.
 
 minutes_to_complete: 75
 
@@ -12,11 +12,11 @@ learning_objectives:
     - Install Go and Benchstat on an Arm Linux server
     - Run a Go benchmark that reports allocation, GC, and pause-time metrics
     - Capture CPU and heap profiles without changing GC behavior
+    - Interpret benchmarking results and experiment with changing GC behavior
 
 prerequisites:
-    - An [AWS account](https://aws.amazon.com/) with permission to launch AWS Graviton-based Amazon EC2 instances
+    - An [AWS account](https://aws.amazon.com/) with permission to launch an AWS Graviton-based Amazon EC2 instance running Ubuntu 24.04 LTS or another Arm Linux distribution
     - The [AWS CLI](/install-guides/aws-cli/) installed and configured on your local machine
-    - An AWS Graviton-based instance running Ubuntu 24.04 LTS or another Arm Linux distribution
     - Basic familiarity with Go benchmarks and Linux shell commands
 
 author: Geremy Cohen
@@ -30,6 +30,7 @@ armips:
     - Neoverse
 tools_software_languages:
     - Go
+    - Benchstat
 operatingsystems:
     - Linux
 

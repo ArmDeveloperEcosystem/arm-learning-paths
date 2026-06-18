@@ -1,5 +1,5 @@
 ---
-title: Experiment with garbage collection optimization ideas
+title: Experiment with garbage collection optimization 
 description: Apply controlled Go code changes to the benchmark and compare results with benchstat to evaluate effects on GC behavior.
 weight: 7
 
@@ -38,7 +38,7 @@ ParseAndAllocate-4               160.0Ki ± 0%   80.0Ki ± 0%  -50.00% (p=0.000)
 
 ### Reduce the payload size
 
-Assume that the payload size this benchmark is intended to represent is only 128 records instead of 2048. 
+Assume that the payload size this benchmark is intended to represent is only 512 records instead of 2048. 
 
 To test whether a smaller workload affects GC frequency, pause times, and overall application performance, you can reduce the payload size from the following:
 
