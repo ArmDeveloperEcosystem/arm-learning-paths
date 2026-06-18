@@ -1,5 +1,6 @@
 ---
 title: Install Go and Benchstat on an AWS Graviton-based Amazon EC2 instance
+description: Install Go and benchstat on an AWS Graviton-based Amazon EC2 instance and verify the tools for running Go GC benchmarks.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

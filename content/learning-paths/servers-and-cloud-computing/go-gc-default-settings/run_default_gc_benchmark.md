@@ -1,5 +1,6 @@
 ---
 title: Run the benchmark with default Go garbage collection settings
+description: Run repeated Go benchmark samples with default GC settings, save runtime baselines, and capture CPU and heap profiles for analysis.
 weight: 5
 
 ### FIXED, DO NOT MODIFY

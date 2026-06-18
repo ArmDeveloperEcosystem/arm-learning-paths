@@ -1,5 +1,6 @@
 ---
 title: Create a Go garbage collection benchmark
+description: Create and verify a Go benchmark that generates allocation pressure and reports garbage collection metrics on Arm Linux.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

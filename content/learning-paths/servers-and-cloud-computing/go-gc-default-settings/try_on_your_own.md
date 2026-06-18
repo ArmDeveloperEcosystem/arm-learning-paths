@@ -1,5 +1,6 @@
 ---
 title: Experiment with garbage collection optimization ideas
+description: Apply controlled Go code changes to the benchmark and compare results with benchstat to evaluate effects on GC behavior.
 weight: 7
 
 ### FIXED, DO NOT MODIFY
@@ -181,4 +182,4 @@ By storing existing strings or simple values instead of building `"key:length"` 
 
 You've now experimented with updating code to change payload size, split logic, slice reuse, and string parsing.
 
-You can continue experimenting with code changes to optimize GC behavior for your Go applications on Arm-based compute. 
+You can continue experimenting with code changes to optimize GC behavior for your Go applications on Arm-based compute.

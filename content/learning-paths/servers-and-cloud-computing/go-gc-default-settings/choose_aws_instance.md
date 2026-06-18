@@ -1,5 +1,6 @@
 ---
 title: Choose an AWS Graviton-based instance for Go garbage collection benchmarking
+description: Choose and launch an AWS Graviton-based Amazon EC2 instance for repeatable Go garbage collection benchmark measurements.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

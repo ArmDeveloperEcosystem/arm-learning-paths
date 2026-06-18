@@ -1,5 +1,6 @@
 ---
 title: Interpret the default garbage collection benchmark results
+description: Interpret benchstat output and pprof profiles to identify allocation costs, GC frequency, and pause-time behavior in the default baseline.
 weight: 6
 
 ### FIXED, DO NOT MODIFY
