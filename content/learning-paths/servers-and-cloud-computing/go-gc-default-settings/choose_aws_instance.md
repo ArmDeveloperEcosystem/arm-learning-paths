@@ -1,34 +1,36 @@
 ---
-title: Choose an AWS Graviton-based instance to measure Go garbage collection metrics
+title: Choose an AWS Graviton-based instance for Go garbage collection benchmarking
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## Measure default Go garbage collection behavior on Arm servers
+## Understand Go garbage collection
 
-Memory management is a critical aspect of application performance, and garbage collection (GC) plays a central role in automating that process. GC continuously identifies and removes objects that are no longer needed, freeing memory for reuse.
+Memory management is a critical aspect of application performance. Garbage collection (GC) plays a important role in automating memory management. GC continuously identifies and removes objects that are no longer needed, freeing memory for reuse.
 
-While this automation improves productivity and application safety, inefficient garbage collection can lead to increased CPU usage, longer response times, and unexpected application pauses. 
+This automation improves productivity and application safety. However, inefficient GC can lead to increased CPU usage, longer response times, and unexpected application pauses. 
 
 Tracking GC metrics provides a window into an application's memory health that you can use to optimize performance and ensure the system can scale efficiently under load.
 
-As Go applications can spend meaningful time allocating memory and running garbage collection, it's important to understand how the Go runtime behaves under default settings. 
+Go applications can spend meaningful time allocating memory and running GC. This makes it important to understand how the Go runtime behaves under default settings. 
 
 In this Learning Path, you'll run Go benchmarks on an Amazon EC2 instance powered by AWS Graviton. The goal is to build a clean baseline measuring operation time, allocation rate, GC frequency, and GC pause cost.
 
-### Select an instance for Go garbage collection measurements
+## Select an instance for Go garbage collection measurements
 
-An `m8g.xlarge` instance powered by AWS Graviton has enough CPU and memory to make Go runtime behavior visible, while keeping costs minimal. It's a good starting point as it provides four vCPUs and 16 GiB of memory on AWS Graviton4. If you choose to run this Learning Path on a different instance, make sure it has at least 4 vCPUs and 16 GiB of memory to ensure the benchmark runs smoothly and provides meaningful GC metrics.
-
-Avoid burstable `t4g` instances as CPU credits can affect benchmark repeatability and make GC measurements harder to explain.
+An `m8g.xlarge` instance powered by AWS Graviton has enough CPU and memory to make Go runtime behavior visible, while keeping costs minimal. It's a good starting point because it provides four vCPUs and 16 GiB of memory on AWS Graviton4. 
 
 {{% notice Note %}}
-You can use larger instances, such as `m8g.2xlarge`, when you want more CPU width or more memory headroom. Start with `m8g.xlarge` so the first benchmark run is easy to reproduce and inexpensive.
+You can use larger instances, such as `m8g.2xlarge`, when you want more CPU capacity or memory. Start with `m8g.xlarge` so the first benchmark run is easy to reproduce and inexpensive.
+
+If you choose to run this Learning Path on a different instance, make sure it has at least four vCPUs and 16 GiB of memory to ensure the benchmark runs smoothly and provides meaningful GC metrics. 
+
+Avoid burstable `t4g` instances as CPU credits can affect benchmark repeatability and make GC measurements harder to explain.
 {{% /notice %}}
 
 
-#### Check instance availability
+### Check instance availability
 
 Use the AWS CLI to check whether `m8g.xlarge` is available in your selected AWS Region, replacing `us-east-1` with the Region you want to use:
 
@@ -54,7 +56,7 @@ aws ec2 describe-instance-type-offerings \
     --output table
 ```
 
-#### Launch an instance
+### Launch an instance
 
 After selecting an instance type, launch it with the Ubuntu 24.04 LTS (arm64) AMI. You can do this using the [Amazon EC2 console](https://console.aws.amazon.com/ec2/) or the AWS CLI. When configuring the instance:
 
@@ -70,6 +72,6 @@ ssh -i /path/to/your-key.pem ubuntu@<instance-public-ip>
 ```
 ## What you've accomplished and what's next
 
-You've now deployed an Arm-based Linux Amazon EC2 instance powered by AWS Graviton. 
+You now know why measuring Go GC behavior is useful, and you've deployed an Arm-based Amazon EC2 instance powered by AWS Graviton. 
 
-In the next section, you'll install Go and Benchstat on the instance so that you can run garbage collection benchmarks.
+Next, you'll install Go and Benchstat on the instance so that you can run GC benchmarks.

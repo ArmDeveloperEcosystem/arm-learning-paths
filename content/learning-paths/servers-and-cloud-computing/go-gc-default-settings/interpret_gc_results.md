@@ -16,7 +16,7 @@ cat default_gc_benchstat.txt
 
 The metrics you see explain the following:
 
-| Metric | Read |
+| Metric | What it tells you |
 | --- | --- |
 | `ns/op` | Time per completed operation. Lower is better for throughput. |
 | `B/op` | Heap bytes allocated per operation. Lower usually reduces garbage collection (GC) pressure. |
@@ -29,7 +29,7 @@ These metrics answer different questions. For example, `stw-ns/GC` can increase 
 
 ## Read the profiles
 
- Next, open the CPU profile summary:
+Next, open the CPU profile summary:
 
 ```bash
 cat cpu_default_top.txt
@@ -41,7 +41,7 @@ The `flat` column shows CPU time spent directly in that function. The `cum` (cum
 
 On the validated `m8g.xlarge` instance, the top CPU profile entries included string scanning, string concatenation, split handling, and allocation paths:
 
-```output
+```text
       flat  flat%   sum%        cum   cum%
      2.45s 15.53% 15.53%      2.45s 15.53%  internal/bytealg.IndexByteString
      2.37s 15.02% 30.54%      4.65s 29.47%  runtime.concatstrings
@@ -50,13 +50,19 @@ On the validated `m8g.xlarge` instance, the top CPU profile entries included str
      0.72s  4.56% 53.36%      5.17s 32.76%  runtime.mallocgc
 ```
 
-`IndexByteString` and `concatstrings` dominate because the benchmark splits the payload with `strings.Split`, which scans for `;` byte-by-byte, and builds `key:length` strings with `+` concatenation on every iteration. These operations create a large volume of short-lived strings, giving the GC constant work to do. On Graviton, `pprof` makes these allocation chains directly visible because the Arm64 stack unwinder captures the full call path without frame pointer ambiguity.
+`IndexByteString` and `concatstrings` dominate because the benchmark splits the payload with `strings.Split`, which scans for `;` byte-by-byte, and builds `key:length` strings with `+` concatenation on every iteration. These operations create a large volume of short-lived strings, giving the GC constant work to do. On Graviton, `pprof` makes these allocation chains directly visible because the `arm64` stack unwinder captures the full call path without frame pointer ambiguity.
 
-Open the heap allocation profile summary and look for application functions that allocate the most heap memory. Reducing allocation volume in those functions usually gives the Go garbage collector less work to do.
+Open the heap allocation profile summary and look for application functions that allocate the most heap memory:
+
+```bash
+cat mem_default_alloc_top.txt
+```
+
+Reducing allocation volume in those functions usually gives the Go garbage collector less work to do.
 
 On the validated `m8g.xlarge` instance, the allocation profile showed that `strings.genSplit` and the benchmark function accounted for nearly all allocated bytes:
 
-```output
+```text
       flat  flat%   sum%        cum   cum%
     7.57GB 64.49% 64.49%     7.57GB 64.49%  strings.genSplit
     4.16GB 35.45% 99.94%    11.74GB 99.94%  example.com/go-gc-default/parsebench.BenchmarkParseAndAllocate

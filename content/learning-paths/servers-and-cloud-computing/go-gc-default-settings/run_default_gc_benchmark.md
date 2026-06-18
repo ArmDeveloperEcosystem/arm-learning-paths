@@ -53,7 +53,7 @@ Swap:             0B          0B          0B
 
 ## Run repeated benchmark samples
 
-Run the benchmark with repeated samples and save the output.  In this example, the benchmark runs for 5 seconds and repeats 10 times:
+Run the benchmark with repeated samples and save the output.  In this example, the benchmark runs for five seconds and repeats 10 times:
 
 ```bash
 go test ./parsebench \
@@ -64,7 +64,7 @@ go test ./parsebench \
     -benchtime=5s | tee default_gc_benchmark.txt
 ```
 
-The output includes ten lines of benchmark output, and is similar to:
+The output includes 10 lines of benchmark output, and is similar to:
 
 ```output
 goos: linux
@@ -78,7 +78,13 @@ PASS
 ok      example.com/go-gc-default/parsebench    58.243s
 ```
 
-The output is saved to a file that includes the benchmark's measurements of operation time, allocation rate, allocation count, GC cycles per operation, pause time per operation, and pause time per GC cycle.
+The output is saved to a file that includes the following benchmark measurements: 
+- operation time
+- allocation rate
+- allocation count
+- GC cycles per operation
+- pause time per operation
+- pause time per GC cycle.
 
 With the output saved, you can now aggregate the repeated samples with Benchstat:
 
