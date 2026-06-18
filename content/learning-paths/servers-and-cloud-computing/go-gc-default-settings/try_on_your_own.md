@@ -179,6 +179,6 @@ By storing existing strings or simple values instead of building `"key:length"` 
 
 ## What you've accomplished
 
-You've now experimented with updating code to change payload size, split logic, slice reuse, and string parsing.
+You've now experimented with changing payload size, split logic, slice reuse, and string parsing to influence GC behavior.
 
 You can continue experimenting with code changes to optimize GC behavior for your Go applications on Arm-based compute.
