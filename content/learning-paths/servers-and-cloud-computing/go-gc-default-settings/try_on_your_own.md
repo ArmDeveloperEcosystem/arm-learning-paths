@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Make code changes to influence garbage collection
 
-Now that you have a baseline, you can experiment with code changes that influence garbage collection behavior. Apply the suggested change to `parsebench/parsebench_test.go`, then re-run the benchmark and compare the results with Benchstat:
+Now that you have a baseline, you can experiment with code changes that influence garbage collection (GC) behavior. Apply the suggested change to `parsebench/parsebench_test.go`, then re-run the benchmark and compare the results with Benchstat:
 
 ```bash
 go test ./parsebench \
@@ -39,7 +39,7 @@ ParseAndAllocate-4               160.0Ki ± 0%   80.0Ki ± 0%  -50.00% (p=0.000)
 
 Assume that the payload size this benchmark is intended to represent is only 128 records instead of 2048. 
 
-To test whether a smaller workload affects garbage collection frequency, pause times, and overall application performance, you can reduce the payload size from the following:
+To test whether a smaller workload affects GC frequency, pause times, and overall application performance, you can reduce the payload size from the following:
 
 ```go
 payload := strings.Repeat(
@@ -63,7 +63,7 @@ Reducing the smaller payload creates fewer temporary objects and less garbage ea
 
 Assume that after profiling the application, you discover that the input payload rarely changes between requests. 
 
-To reuse preprocessing work and determine whether reducing repeated allocations improves garbage collection behavior and throughput, you can update split logic from the following:
+To reuse preprocessing work and determine whether reducing repeated allocations improves GC behavior and throughput, you can update split logic from the following:
 
 ```go
 for i := 0; i < b.N; i++ {
@@ -87,13 +87,13 @@ for i := 0; i < b.N; i++ {
 }
 ```
 
-By making this change, you can avoid repeatedly allocating the same slice of records on every iteration. Reducing repeated allocations improves garbage collection behavior and throughput.
+By making this change, you can avoid repeatedly allocating the same slice of records on every iteration. Reducing repeated allocations improves GC behavior and throughput.
 
 ### Reuse the output slice
 
 The benchmark currently creates a new output buffer for every operation, but production code processes millions of requests using the same worker. 
 
-To modify the benchmark to reuse memory, and to evaluate the impact on garbage collection activity and memory consumption, update the code from the following:
+To modify the benchmark to reuse memory, and to evaluate the impact on GC activity and memory consumption, update the code from the following:
 
 ```go
 for i := 0; i < b.N; i++ {
@@ -115,14 +115,14 @@ for i := 0; i < b.N; i++ {
 }
 ```
 
-By reusing the backing array, you can reduce allocations and garbage collection pressure.
+By reusing the backing array, you can reduce allocations and GC pressure.
 
 
 ### Replace SplitN() with IndexByte()
 
 Assume a CPU profile shows that string parsing is one of the hottest code paths in the application. 
 
-To reduce temporary allocations during parsing and measure whether this reduces garbage collection overhead, update the code from the following:
+To reduce temporary allocations during parsing and measure whether this reduces GC overhead, update the code from the following:
 
 ```go
 fields := strings.SplitN(part, "=", 2)
@@ -157,7 +157,7 @@ By making this update, you can avoid allocating a temporary `[]string` for every
 
 Assume product requirements change and the application no longer needs to generate derived `"key:length"` strings. 
 
-To avoid unnecessary string allocations and test their effect on garbage collection performance, update the code from the following:
+To avoid unnecessary string allocations and test their effect on GC performance, update the code from the following:
 
 
 ```go
@@ -180,6 +180,6 @@ By storing existing strings or simple values instead of building `"key:length"` 
 
 ## What you've accomplished
 
-You've now experimented with updating code to alter garbage collection behavior in certain scenarios.
+You've now experimented with updating code to alter GC behavior in certain scenarios.
 
-You can continue experimenting with code changes to optimize garbage collection behavior for your Go applications on Arm-based compute. 
+You can continue experimenting with code changes to optimize GC behavior for your Go applications on Arm-based compute. 

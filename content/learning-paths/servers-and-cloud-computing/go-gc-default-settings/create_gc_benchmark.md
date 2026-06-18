@@ -14,7 +14,7 @@ Create a small Go benchmark module. The high-level flow is:
 2. Repeatedly parse it and create new objects/strings.
 3. Force memory allocations so the garbage collector has work to do.
 4. Measure how long the workload takes.
-5. Measure how much GC activity occurred during the benchmark.
+5. Measure how much garbage collection (GC) activity occurred during the benchmark.
 6. Report both performance metrics and GC-related metrics.
 
 Create the module directory and initialize it:
@@ -180,7 +180,7 @@ Your exact numbers will differ by instance type, Go version, operating system, a
 
 ## What you've accomplished and what's next
 
-You've now created a Go garbage collection benchmark module.
+You've now created a Go GC benchmark module.
 
 Next, you'll run the benchmark with default garbage collection settings. 
 

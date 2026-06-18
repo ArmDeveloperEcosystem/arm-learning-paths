@@ -19,13 +19,13 @@ The metrics you see explain the following:
 | Metric | Read |
 | --- | --- |
 | `ns/op` | Time per completed operation. Lower is better for throughput. |
-| `B/op` | Heap bytes allocated per operation. Lower usually reduces garbage collection pressure. |
-| `allocs/op` | Heap allocation count per operation. Lower usually reduces garbage collection pressure. |
-| `gc/op` | GC cycles per operation. Lower means garbage collection runs less often per completed operation. |
-| `stw-ns/op` or `stw-sec/op` | Garbage collection pause cost per operation. Lower means less stop-the-world pause time is paid per completed operation. |
-| `stw-ns/GC` or `stw-sec/GC` | Pause cost per garbage collection cycle. Lower means each garbage collection cycle pauses for less time. |
+| `B/op` | Heap bytes allocated per operation. Lower usually reduces garbage collection (GC) pressure. |
+| `allocs/op` | Heap allocation count per operation. Lower usually reduces GC pressure. |
+| `gc/op` | GC cycles per operation. Lower means GC runs less often per completed operation. |
+| `stw-ns/op` or `stw-sec/op` | GC pause cost per operation. Lower means less stop-the-world pause time is paid per completed operation. |
+| `stw-ns/GC` or `stw-sec/GC` | Pause cost per GC cycle. Lower means each GC cycle pauses for less time. |
 
-These metrics answer different questions. For example, `stw-ns/GC` can increase while `stw-ns/op` stays flat or decreases if garbage collection runs less often per completed operation.
+These metrics answer different questions. For example, `stw-ns/GC` can increase while `stw-ns/op` stays flat or decreases if GC runs less often per completed operation.
 
 ## Read the profiles
 
@@ -66,7 +66,7 @@ On the validated `m8g.xlarge` instance, the allocation profile showed that `stri
 
 ## Keep a baseline to compare to future changes
 
-These results show your default Go garbage collection baseline for this benchmarking app on AWS Graviton. By keeping the following files together — for example, in a versioned folder or archive — you can see how code changes affect overall performance:
+These results show your default Go GC baseline for this benchmarking app on AWS Graviton. By keeping the following files together — for example, in a versioned folder or archive — you can see how code changes affect overall performance:
 
 ```output
 default_runtime_baseline.txt
@@ -81,6 +81,6 @@ mem_default_alloc_top.txt
 
 ## What you've accomplished and what's next
 
-You've now interpreted a documented default garbage collection baseline showing operation time, allocation rate, GC frequency, and stop-the-world pause costs on AWS Graviton.
+You've now interpreted a documented default GC baseline showing operation time, allocation rate, GC frequency, and stop-the-world pause costs on AWS Graviton.
 
 Next, you'll apply code changes to the benchmark and measure how each change affects these metrics.
