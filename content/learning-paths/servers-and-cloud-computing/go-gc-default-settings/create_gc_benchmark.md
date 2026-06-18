@@ -64,7 +64,7 @@ func BenchmarkParseAndAllocate(b *testing.B) {
 	b.ReportAllocs()
 	
 	/*
-	Captures runtime memory statistics before the benchmark starts.  You'll later compare these values to see:
+	Captures runtime memory statistics before the benchmark starts. You'll later compare these values to see:
 	- how many GCs occurred
 	- how much pause time was spent in GC
 	*/
@@ -77,8 +77,8 @@ func BenchmarkParseAndAllocate(b *testing.B) {
 	b.ResetTimer()
 	
 	/*
-	Benchmark loop where the actual work is done.  The number of times this loop is
-	executed is controlled by the b.N variable.  The value of b.N is automatically chosen by the Go benchmark framework to obtain stable and statistically useful measurements.
+	Benchmark loop where the actual work is done. The number of times this loop is
+	executed is controlled by the b.N variable. The value of b.N is automatically chosen by the Go benchmark framework to obtain stable and statistically useful measurements.
 
 	The reason for this design is that timing a single operation is often unreliable. Running it many times reduces noise from:
 	- OS scheduling
@@ -90,7 +90,7 @@ func BenchmarkParseAndAllocate(b *testing.B) {
 		// splits the large payload into individual records.
 		// Example: "a=1;b=2;c=3;" becomes: ["a=1", "b=2", "c=3", ""]
 		parts := strings.Split(payload, ";")
-		// Creates a new slice to store parsed output.  This allocation is intentional for the benchmark to generate memory pressure and trigger GC activity.
+		// Creates a new slice to store parsed output. This allocation is intentional for the benchmark to generate memory pressure and trigger GC activity.
 		
 		out := make([]string, 0, len(parts))
 		

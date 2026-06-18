@@ -153,7 +153,7 @@ BenchmarkParseAndAllocate-4        66757            179173 ns/op                
 PASS
 ```
 
-Inspect the CPU profile to display the functions that consumed the most CPU time during benchmark execution, ranked from highest to lowest:
+Inspect the CPU profile to list the functions that consumed the most CPU time during benchmark execution, ranked from highest to lowest:
 
 ```bash
 go tool pprof -top ./parsebench.test cpu_default.out | tee cpu_default_top.txt
@@ -177,7 +177,7 @@ Dropped 162 nodes (cum <= 0.08s)
      0.80s  5.08% 47.84%      2.71s 17.22%  runtime.mallocgcSmallScanNoHeader
 ```
 
-Inspect the heap allocation profile to display the functions responsible for allocating the most total memory over the lifetime of the benchmark, ranked from highest to lowest:
+Inspect the heap allocation profile to list the functions responsible for allocating the most total memory over the lifetime of the benchmark, ranked from highest to lowest:
 
 ```bash
 go tool pprof -top -alloc_space ./parsebench.test mem_default.out | tee mem_default_alloc_top.txt
@@ -205,7 +205,7 @@ Dropped 37 nodes (cum <= 0.06GB)
 
 You've now captured a default-GC benchmark result, a Benchstat summary, and CPU and heap profiles from the same workload. 
 
-Next, you'll analyze all of these results.
+Next, you'll analyze the benchmark results.
 
 
 

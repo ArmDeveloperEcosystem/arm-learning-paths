@@ -40,7 +40,7 @@ Look for functions that dominate CPU time. In an allocation-heavy benchmark, you
 
 The `flat` column shows CPU time spent directly in that function. The `cum` (cumulative) column includes time spent in the function and all functions it called. A function with low `flat` but high `cum` is spending most of its time in callees, which can point to allocation chains or deep call stacks.
 
-On the validated `m8g.xlarge` instance, the top CPU profile entries included string scanning, string concatenation, split handling, and allocation paths:
+On the validated `m8g.xlarge` instance, the top CPU profile entries include string scanning, string concatenation, split handling, and allocation paths:
 
 ```text
       flat  flat%   sum%        cum   cum%
@@ -61,7 +61,7 @@ cat mem_default_alloc_top.txt
 
 Reducing allocation volume in those functions usually gives the Go garbage collector less work to do.
 
-On the validated `m8g.xlarge` instance, the allocation profile showed that `strings.genSplit` and the benchmark function accounted for nearly all allocated bytes:
+On the validated `m8g.xlarge` instance, the allocation profile shows that `strings.genSplit` and the benchmark function account for nearly all allocated bytes:
 
 ```text
       flat  flat%   sum%        cum   cum%

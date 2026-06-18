@@ -40,7 +40,7 @@ ParseAndAllocate-4               160.0Ki ± 0%   80.0Ki ± 0%  -50.00% (p=0.000)
 
 Assume that the payload size this benchmark is intended to represent is only 512 records instead of 2048. 
 
-To test whether a smaller workload affects GC frequency, pause times, and overall application performance, you can reduce the payload size from the following:
+To test whether a smaller workload affects GC frequency, pause times, and overall application performance, reduce the payload size from the following:
 
 ```go
 payload := strings.Repeat(
@@ -64,7 +64,7 @@ Reducing the payload size creates fewer temporary objects and less garbage each 
 
 Assume that after profiling the application, you discover that the input payload rarely changes between requests. 
 
-To reuse preprocessing work and determine whether reducing repeated allocations improves GC behavior and throughput, you can update split logic from the following:
+To reuse preprocessing work, update split logic from the following:
 
 ```go
 for i := 0; i < b.N; i++ {
@@ -88,7 +88,7 @@ for i := 0; i < b.N; i++ {
 }
 ```
 
-By making this change, you can avoid repeatedly allocating the same slice of records on every iteration. Reducing repeated allocations improves GC behavior and throughput.
+By making this change, you can avoid repeatedly allocating the same slice of records on every iteration. Reducing repeated allocations improves GC behavior and throughput. 
 
 ### Reuse the output slice
 
@@ -117,7 +117,6 @@ for i := 0; i < b.N; i++ {
 ```
 
 By modifying the benchmark to reuse the backing array, you can reduce allocations and GC pressure.
-
 
 ### Replace SplitN() with IndexByte()
 
