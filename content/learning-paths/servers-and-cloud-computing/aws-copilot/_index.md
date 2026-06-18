@@ -17,6 +17,10 @@ prerequisites:
 
 author: Jason Andrews
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: Containers and Virtualization
@@ -28,7 +32,6 @@ operatingsystems:
     - Linux 
 tools_software_languages:
     - Docker
-
 
 further_reading:
     - resource:
@@ -44,11 +47,10 @@ further_reading:
         link: https://youtu.be/hBHf241-D2Y?si=ySm0e4VwbgFSoy3s
         type: video
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

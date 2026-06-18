@@ -17,6 +17,10 @@ prerequisites:
 
 author: Bolt Liu
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 skilllevels: Advanced
 subjects: Databases
 cloud_service_providers:
@@ -33,7 +37,6 @@ tools_software_languages:
     - GCC
     - Runbook
 
-
 test_images:
     - ubuntu:latest
 test_link: null
@@ -49,8 +52,8 @@ further_reading:
         link: https://github.com/libhugetlbfs/libhugetlbfs/blob/master/HOWTO
         type: documentation
 
-
 weight: 1
 layout: learningpathall
 learning_path_main_page: 'yes'
 ---
+

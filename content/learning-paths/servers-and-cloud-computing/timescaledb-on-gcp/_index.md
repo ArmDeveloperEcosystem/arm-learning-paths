@@ -1,6 +1,6 @@
 ---
 title: Deploy a live sensor dashboard with TimescaleDB and Grafana on Google Cloud C4A
-    
+
 minutes_to_complete: 45
 
 who_is_this_for: This is an introductory topic for DevOps engineers, database engineers, and software developers who want to deploy and operate TimescaleDB on SUSE Linux Enterprise Server (SLES) Arm64, ingest live time-series sensor data, and visualize it in Grafana.
@@ -16,6 +16,10 @@ prerequisites:
   - Basic familiarity with SQL, Python, and Grafana
 
 author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ##### Tags
 skilllevels: Introductory
@@ -65,5 +69,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: yes
 ---
-
 

@@ -19,6 +19,10 @@ prerequisites:
 
 author: Zbynek Roubalik
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: Containers and Virtualization
@@ -50,10 +54,10 @@ further_reading:
       link: https://keda.sh/
       type: documentation
 
-
 ### FIXED, DO NOT MODIFY
 # =============================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

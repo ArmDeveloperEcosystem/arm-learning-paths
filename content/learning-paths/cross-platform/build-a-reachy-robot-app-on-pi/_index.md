@@ -1,6 +1,6 @@
 ---
 title: Build an edge AI Reachy Mini app with Raspberry Pi, MediaPipe, and MuJoCo
-    
+
 description: Run MediaPipe gesture inference on a Raspberry Pi 5, connect to a Reachy Mini MuJoCo simulation on a development machine, and use a browser dashboard to decide Reachy's fate with a thumbs-up or thumbs-down.
 
 minutes_to_complete: 60
@@ -23,6 +23,10 @@ prerequisites:
     - (Optional) [Reachy Mini](https://huggingface.co/reachy-mini)
 
 author: Matt Cossins
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -64,8 +68,6 @@ further_reading:
         title: MediaPipe Gesture Recognizer guide
         link: https://ai.google.dev/edge/mediapipe/solutions/vision/gesture_recognizer
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

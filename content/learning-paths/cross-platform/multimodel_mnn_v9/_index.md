@@ -1,7 +1,6 @@
 ---
 title: Build a Multimodal Retail Restocking Assistant on Armv9 With MNN
 
-    
 minutes_to_complete: 90
 
 who_is_this_for: This Learning Path is for developers and engineers who want to run multimodal image, audio, and text models on Armv9 Linux systems using MNN as a portable, CPU-first inference runtime. It is aimed at readers who are comfortable building software from source and want a reproducible on-device workflow without quantization or heterogeneous scheduling.
@@ -19,6 +18,10 @@ prerequisites:
     - Internet access to download source code, model assets, and sample data
 
 author: Odin Shen
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -67,3 +70,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

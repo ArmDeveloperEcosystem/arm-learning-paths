@@ -13,10 +13,14 @@ learning_objectives:
 
 prerequisites:
     - An [AWS account](https://aws.amazon.com/). Create an account if needed.
-    - A computer with [Amazon eksctl CLI](/install-guides/eksctl/) and [kubectl](/install-guides/kubectl/)installed.
-    - Docker installed on local computer [Docker](/install-guides/docker/)
+    - A computer with [Amazon eksctl CLI](/install-guides/eksctl) and [kubectl](/install-guides/kubectl/)installed.
+    - Docker installed on local computer [Docker](/install-guides/docker)
 
 author: Pranay Bakre
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -31,7 +35,6 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
-
 further_reading:
     - resource:
         title: EKS documentation
@@ -42,12 +45,10 @@ further_reading:
         link: https://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html?pg=ln&sec=hs
         type: documentation
 
-
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

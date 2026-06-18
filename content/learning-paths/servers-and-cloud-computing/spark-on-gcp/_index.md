@@ -1,6 +1,6 @@
 ---
 title: Deploy Apache Spark on Google Axion processors
-   
+
 minutes_to_complete: 60
 
 who_is_this_for: This introductory topic is for software developers interested in migrating their Apache Spark workloads from x86_64 platforms to Arm-based platforms, specifically on Google Axion–based C4A virtual machines.  
@@ -16,6 +16,10 @@ prerequisites:
   - Familiarity with distributed computing concepts and the [Apache Spark architecture](https://spark.apache.org/docs/latest/)
 
 author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ##### Tags
 skilllevels: Advanced
@@ -56,5 +60,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # Indicates this should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-
 

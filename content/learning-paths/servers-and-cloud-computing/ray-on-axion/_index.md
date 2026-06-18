@@ -1,7 +1,7 @@
 ---
 title: Scale AI workloads with Ray on Google Cloud C4A Axion VM
 description: Deploy and run distributed AI workloads using Ray on Google Cloud Axion C4A Arm-based VMs, covering parallel tasks, hyperparameter tuning, and model serving with Ray Core, Train, Tune, and Serve.
-    
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for DevOps engineers, ML engineers, and software developers who want to deploy and run distributed workloads using Ray on SUSE Linux Enterprise Server (SLES) Arm64, execute parallel tasks, perform hyperparameter tuning, and serve models at scale.
@@ -17,6 +17,10 @@ prerequisites:
   - Basic familiarity with Python and distributed systems concepts
 
 author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ##### Tags
 skilllevels: Introductory
@@ -59,3 +63,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: yes
 ---
+
