@@ -9,10 +9,10 @@ layout: learningpathall
 
 ## Install Go on Arm Linux
 
-After the instance starts running, install Go from the Linux `arm64` `go.dev` archive by following the steps in the [Go install guide](/install-guides/go/).
+After the instance starts running, install Go from the Linux arm64 `go.dev` archive by following the steps in the [Go install guide](/install-guides/go/).
 
 
-After installing, verify that Go is installed for Arm64 Linux:
+Verify that Go is installed for arm64 Linux:
 
 ```bash
 go version

@@ -47,12 +47,13 @@ var sink []string
 
 func BenchmarkParseAndAllocate(b *testing.B) {
 
-	// Simulates a large payload by creating a large test string by
-	// repeating the same key=value data many times.
-	//
-	// Example:
-	// name=arm&runtime=go&gc=default&value=12345;
-	//
+	/*
+	Simulates a large payload by creating a large test string by
+	repeating the same key=value data many times.
+
+	Example:
+	name=arm&runtime=go&gc=default&value=12345;
+	*/
 	
 	payload := strings.Repeat("name=arm&runtime=go&gc=default&value=12345;",2048)
 	
@@ -62,9 +63,11 @@ func BenchmarkParseAndAllocate(b *testing.B) {
 	
 	b.ReportAllocs()
 	
-	// Captures runtime memory statistics before the benchmark starts.  You'll later compare these values to see:
-	// - how many GCs occurred
-	// - how much pause time was spent in GC
+	/*
+	Captures runtime memory statistics before the benchmark starts.  You'll later compare these values to see:
+	- how many GCs occurred
+	- how much pause time was spent in GC
+	*/
 	
 	var before runtime.MemStats
 	runtime.ReadMemStats(&before)
@@ -73,13 +76,15 @@ func BenchmarkParseAndAllocate(b *testing.B) {
 	
 	b.ResetTimer()
 	
-	// Benchmark loop where the actual work is done.  The number of times this loop is
-	// executed is controlled by the b.N variable.  The value of b.N is automatically chosen by the Go benchmark framework to obtain stable and statistically useful measurements.
-	
-	// The reason for this design is that timing a single operation is often unreliable. Running it many times reduces noise from:
-	// - OS scheduling
-	// - CPU frequency changes
-	// - background processes
+	/*
+	Benchmark loop where the actual work is done.  The number of times this loop is
+	executed is controlled by the b.N variable.  The value of b.N is automatically chosen by the Go benchmark framework to obtain stable and statistically useful measurements.
+
+	The reason for this design is that timing a single operation is often unreliable. Running it many times reduces noise from:
+	- OS scheduling
+	- CPU frequency changes
+	- background processes
+	*/
 
 	for i := 0; i < b.N; i++ {
 		// splits the large payload into individual records.
@@ -125,7 +130,9 @@ func BenchmarkParseAndAllocate(b *testing.B) {
 	
 	gcCycles := after.NumGC - before.NumGC
 	
-	// Total "stop-the-world" pause time spent in GC. During these pauses, application execution is temporarily halted while the runtime performs parts of GC.
+	/*
+	Total "stop-the-world" pause time spent in GC. During these pauses, application execution is temporarily halted while the runtime performs parts of GC.
+	*/
 	
 	pauseNs := after.PauseTotalNs - before.PauseTotalNs
 	
@@ -176,4 +183,3 @@ Your exact numbers will differ by instance type, Go version, operating system, a
 You've now created a Go GC benchmark module.
 
 Next, you'll run the benchmark with default GC settings. 
-
