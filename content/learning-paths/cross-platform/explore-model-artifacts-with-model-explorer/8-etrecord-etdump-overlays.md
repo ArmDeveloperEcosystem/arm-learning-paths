@@ -9,11 +9,11 @@ layout: "learningpathall"
 
 ## View ExecuTorch runtime profiling data
 
-PTE, TOSA, and VGF inspection are static artifact workflows. They help you answer what was exported, lowered, compiled, or packaged.
+In the previous sections, you inspected static artifacts. PTE, TOSA, and VGF views help you answer what was exported, lowered, compiled, converted, or packaged.
 
 Runtime profiling answers a different set of questions. It tells you what happened when the artifact ran on a specific runtime, runner, target hardware, and tracing configuration.
 
-Using the new ExecuTorch extension for Model Explorer, we will view profiling data overlaid onto the model graph. To do this the extension reads ETRecord and ETDump files.
+In this final section, you use the ExecuTorch extension for Model Explorer to view profiling data overlaid onto the model graph. To do this, the extension reads ETRecord and ETDump files. This closes the loop: you start from graph inspection and end by connecting that graph structure to measured runtime behavior.
 
 ## ETRecord and ETDump
 
@@ -39,7 +39,7 @@ ETRecord and ETDump are created at different points in the ExecuTorch workflow:
 - Generate the ETDump when you run the exported `.pte` program with event tracing enabled.
 - Analyze them together with the ExecuTorch Inspector, or load them together in Model Explorer when using the ETRecord and ETDump extensions.
 
-This learning path provides ``etrecord` and `.etdp` files for you to use, but if you are interested in learning how to generate your own, a brief overview is covered here, including links to the relevant documentation. The [Profile ExecuTorch models with SME2 on Arm](https://learn.arm.com/learning-paths/cross-platform/sme-executorch-profiling/) learning path may also be of interest.
+This learning path provides `.etrecord` and `.etdp` files for you to use, but if you are interested in learning how to generate your own, a brief overview is covered here, including links to the relevant documentation. The [Profile ExecuTorch models with SME2 on Arm](https://learn.arm.com/learning-paths/cross-platform/sme-executorch-profiling/) learning path may also be of interest.
 
 The [ExecuTorch ETRecord documentation](https://docs.pytorch.org/executorch/stable/etrecord.html) describes ETRecord as an ahead-of-time debug artifact. It contains the Edge dialect graph, debug handles, and delegate debug maps that allow runtime data to be linked back to graph nodes and, when available, Python source information.
 
@@ -156,8 +156,6 @@ If you pass only an ETDump to the Inspector, you still get runtime events. If yo
 
 The ExecuTorch extension for Model Explorer contains an ETRecord adapter and an ETDump data provider. The ETRecord adapter opens the exported graph. The ETDump data provider overlays runtime profiling data on top of that graph.
 
-TODO: correct final install method
-
 Open the `.etrecord` first, then add the matching `.etdp` profiling data. Keep the pairs together: an ETDump from one export can be misleading if it is overlaid on a different ETRecord.
 
 The workflow is:
@@ -220,7 +218,7 @@ This shows a clean CPU delegate acceleration pattern. The model still has some n
 
 ## Inspect the FP32 Ethos-U example
 
-Next, inspect the MobileNetV2 FP32 example. We tried to delegate this to an Ethos-U, but ultimately it will entirely fallback to Cortex-M since Ethos-U requires INT8 quantization:
+Next, inspect the MobileNetV2 FP32 example. We tried to delegate this to an Ethos-U, but ultimately it falls back to CPU execution on Cortex-M because Ethos-U requires INT8 quantization:
 
 ```output
 model-explorer-artifacts/etrecord/mobilenetv2_fp32_ethosu.etrecord
@@ -289,3 +287,5 @@ This is the runtime version of the fragmentation pattern you saw in the `.pte` a
 ETRecord and ETDump add runtime context to static graphs. ETRecord gives you the graph and debug metadata. ETDump gives you the runtime events, timings, delegate calls, and cycle counts. Used together, with the adapter and data provider in the new Model Explorer ExecuTorch extension, they show which parts of the graph actually cost time on the target.
 
 The OPT-125M profiles made the CPU case clear: the portable run stayed on native operators, while the XNNPACK run moved most of the work into delegate calls. The MobileNetV2 profiles showed the same pattern for Ethos-U. CPU fallback, clean Ethos-U delegation, and fragmented delegation are much easier to tell apart once the runtime data is overlaid on the exported graph.
+
+You have now completed the full artifact-inspection flow in this learning path. You started with `.pte` files to understand deployed ExecuTorch programs, moved through TOSA and VGF to inspect backend and Vulkan ML artifacts, and finished with ETRecord and ETDump overlays to connect the graph to runtime cost. The next steps page points to deeper workflows for generating, running, profiling, and optimizing your own models.

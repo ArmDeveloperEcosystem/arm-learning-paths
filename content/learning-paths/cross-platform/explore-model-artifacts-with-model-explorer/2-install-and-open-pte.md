@@ -69,7 +69,7 @@ pip install torch ai-edge-model-explorer
 
 ## Install the Arm adapters
 
-Install the PTE, TOSA, and VGF adapters:
+Install the PTE, TOSA, and VGF adapters used for the static artifact sections:
 
 ```bash
 pip install pte-adapter-model-explorer
@@ -77,9 +77,11 @@ pip install tosa-adapter-model-explorer
 pip install vgf-adapter-model-explorer
 ```
 
+The final section uses the ExecuTorch ETRecord and ETDump extension for Model Explorer. If that extension is packaged separately in your environment, install it alongside these adapters and include it when you launch Model Explorer for the runtime overlay section.
+
 ## Launch Model Explorer
 
-Launch Model Explorer with all three Arm adapters. This is the recommended route for the rest of the Learning Path because you will open `.pte`, `.tosa`, and `.vgf` artifacts. Also shown are examples of running the base model explorer without adapters, and running with a single adapter.
+Launch Model Explorer with the Arm adapters. This is the recommended route for the static artifact sections because you will open `.pte`, `.tosa`, and `.vgf` artifacts. Also shown are examples of running the base model explorer without adapters, and running with a single adapter.
 
 This will launch a webpage in your browser.
 

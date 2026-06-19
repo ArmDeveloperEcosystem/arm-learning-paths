@@ -97,3 +97,7 @@ You can use Model Explorer to inspect these graphs in the same way.
 ## What you have learned
 
 You have inspected the same VGF workflow from two angles. The `.pte` view shows the ExecuTorch program and where it calls the VGF backend. The standalone `.vgf` view shows the Vulkan ML backend graph: tensor descriptors, graph connectivity, operator structure, quantization-related rescale operations, and the input/output contract used by a neural graphics application.
+
+At this point, you have used Model Explorer to inspect the main static artifacts in this learning path: `.pte` files for the deployed ExecuTorch program, `.tosa` files for backend-ready intermediate graphs, and `.vgf` files for Vulkan ML integration. These views answer what was exported, lowered, converted, and packaged.
+
+The final section adds runtime profiling context. You will load ETRecord and ETDump data to see how exported graph structure connects to measured operator and delegate events during execution.

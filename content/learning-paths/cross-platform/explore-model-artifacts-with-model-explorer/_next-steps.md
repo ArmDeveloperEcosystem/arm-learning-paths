@@ -9,7 +9,7 @@ layout: "learningpathall"
 
 ## PTE next steps
 
-Run the inspected models with ExecuTorch to connect graph structure to runtime behavior.
+Generate `.pte` files from your own models and inspect the exported graph before you start measuring performance.
 
 Use the XNNPACK delegate documentation to generate your own XNNPACK `.pte` from a model you care about. Then inspect both the portable and XNNPACK artifacts in Model Explorer.
 
@@ -41,7 +41,6 @@ Continue with the related neural graphics Learning Paths:
 
 ## Runtime profiling next steps
 
-Use ExecuTorch Inspector APIs with ETDump and ETRecord to connect runtime events to graph structure.
+Use ExecuTorch Inspector APIs with ETDump and ETRecord to connect runtime events to graph structure outside Model Explorer.
 
-When Model Explorer runtime overlays are available, use ETRecord and ETDump together to move from "what did I compile?" to "what actually cost time?"
-
+Use ETRecord and ETDump together when you want to move from "what did I compile?" to "what actually cost time?" If the runtime overlay points to unexpected CPU fallback, graph fragmentation, or delegate-boundary overhead, return to the `.pte`, `.tosa`, or `.vgf` views to inspect why.

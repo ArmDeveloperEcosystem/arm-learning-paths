@@ -1,19 +1,20 @@
 ---
-title: Visualize and understand ExecuTorch PTE, TOSA Flatbuffers, and Neural Graphics VGF Models with Google's Model Explorer
+title: Visualize ExecuTorch PTE, TOSA, VGF, ETRecord, and ETDump artifacts with Google's Model Explorer
 
-description: Learn how to inspect ExecuTorch PTE, TOSA, and VGF model artifacts with Google Model Explorer and Arm adapters.
+description: Learn how to inspect ExecuTorch PTE, TOSA, VGF, ETRecord, and ETDump model artifacts with Google Model Explorer and Arm adapters.
 
-minutes_to_complete: 75
+minutes_to_complete: 90
 
 who_is_this_for: This learning path is for Edge AI developers who need to inspect model artifacts after backend delegation, understand graph structure and delegate coverage, and use those insights to reason about performance and behavior.
 
 learning_objectives:
   - Explain what Google Model Explorer is and how adapters add support for Arm model artifacts
-  - Install Model Explorer and launch it with the PTE, TOSA, and VGF adapters
+  - Install Model Explorer, launch it with the PTE, TOSA, and VGF adapters, and use the runtime overlay extension for ETRecord and ETDump
   - Open ExecuTorch .pte files and compare portable CPU, XNNPACK CPU, and Ethos-U artifacts
   - Use PTE visualization to reason about delegate regions, CPU fallback, graph fragmentation, and backend-specific changes
   - Inspect TOSA flatbuffers as an intermediate representation used by Arm compiler and backend workflows
   - Inspect VGF artifacts for Vulkan ML and neural graphics workloads
+  - Use ETRecord and ETDump overlays to connect exported graph structure with runtime profiling data
 
 prerequisites:
   - Python 3.10 or later
@@ -37,6 +38,8 @@ tools_software_languages:
   - Python
   - TOSA
   - VGF
+  - ETRecord
+  - ETDump
   
 operatingsystems:
   - Linux
@@ -69,6 +72,14 @@ further_reading:
   - resource:
       title: ExecuTorch documentation
       link: https://docs.pytorch.org/executorch/stable/index.html
+      type: documentation
+  - resource:
+      title: ExecuTorch ETRecord
+      link: https://docs.pytorch.org/executorch/stable/etrecord.html
+      type: documentation
+  - resource:
+      title: ExecuTorch ETDump
+      link: https://docs.pytorch.org/executorch/stable/etdump.html
       type: documentation
 
 ### FIXED, DO NOT MODIFY
