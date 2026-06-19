@@ -26,10 +26,10 @@ The two artifacts are most useful together:
 | Artifact | Layer inspected | What it adds |
 | --- | --- | --- |
 | `.etrecord` | Export-time graph context | Graph structure, debug handles, operator names, and delegate partitions |
-| `.etdp` | Runtime event trace | Operator calls, delegate calls, backend events, durations, and cycle counts |
+| `.etdp` | Runtime event trace | Timing data from a specific execution |
 | `.pte` | ExecuTorch program | The packaged program and backend/delegate structure |
 
-Without a matching ETRecord, an ETDump can still contain useful timing data. With the ETRecord loaded as graph context, the timing data becomes much easier to interpret because runtime events can be overlaid on the exported graph.
+Without a matching ETRecord, an ETDump can still contain useful timing data. With the ETRecord loaded as graph context, the timing data becomes much easier to interpret because runtime measurements can be overlaid on the exported graph.
 
 ## Generate ETRecord and ETDump
 
@@ -154,7 +154,7 @@ If you pass only an ETDump to the Inspector, you still get runtime events. If yo
 
 ## Load profiling overlays
 
-The ExecuTorch extension for Model Explorer contains an ETRecord adapter and an ETDump data provider. The ETRecord adapter opens the exported graph. The ETDump data provider overlays runtime profiling data on top of that graph.
+The ExecuTorch extension for Model Explorer contains an ETRecord adapter and an ETDump data provider. The ETRecord adapter opens the exported graph. The first version of the ETDump data provider overlays runtime timing data on top of that graph.
 
 Open the `.etrecord` first, then add the matching `.etdp` profiling data. Keep the pairs together: an ETDump from one export can be misleading if it is overlaid on a different ETRecord.
 
@@ -167,7 +167,7 @@ Inspect export-time graph context
     |
 Load the matching ETDump profiling data
     |
-Overlay runtime events, durations, cycles, or delegate timing
+Overlay runtime timing data
     |
 Connect graph structure to runtime cost
 ```
@@ -284,7 +284,7 @@ This is the runtime version of the fragmentation pattern you saw in the `.pte` a
 
 ## What you have learned
 
-ETRecord and ETDump add runtime context to static graphs. ETRecord gives you the graph and debug metadata. ETDump gives you the runtime events, timings, delegate calls, and cycle counts. Used together, with the adapter and data provider in the new Model Explorer ExecuTorch extension, they show which parts of the graph actually cost time on the target.
+ETRecord and ETDump add runtime context to static graphs. ETRecord gives you the graph and debug metadata. In the first Model Explorer overlay used in this Learning Path, ETDump contributes runtime timing data. Used together, with the adapter and data provider in the new Model Explorer ExecuTorch extension, they show which parts of the graph actually cost time on the target.
 
 The OPT-125M profiles made the CPU case clear: the portable run stayed on native operators, while the XNNPACK run moved most of the work into delegate calls. The MobileNetV2 profiles showed the same pattern for Ethos-U. CPU fallback, clean Ethos-U delegation, and fragmented delegation are much easier to tell apart once the runtime data is overlaid on the exported graph.
 

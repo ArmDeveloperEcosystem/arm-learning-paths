@@ -69,6 +69,12 @@ pip install torch ai-edge-model-explorer
 
 ## Install the Arm adapters
 
+{{% notice TODO before release %}}
+Update this installation section after the ExecuTorch Model Explorer extension is released.
+
+The intended install flow is to install the PTE, ETRecord, and ETDump adapters/data provider as one ExecuTorch extension, then launch Model Explorer with that ExecuTorch extension alongside the TOSA and VGF adapters. Until that package is available, keep the ETRecord and ETDump install and launch instructions under review.
+{{% /notice %}}
+
 Install the PTE, TOSA, and VGF adapters used for the static artifact sections:
 
 ```bash
@@ -76,8 +82,6 @@ pip install pte-adapter-model-explorer
 pip install tosa-adapter-model-explorer
 pip install vgf-adapter-model-explorer
 ```
-
-The final section uses the ExecuTorch ETRecord and ETDump extension for Model Explorer. If that extension is packaged separately in your environment, install it alongside these adapters and include it when you launch Model Explorer for the runtime overlay section.
 
 ## Launch Model Explorer
 

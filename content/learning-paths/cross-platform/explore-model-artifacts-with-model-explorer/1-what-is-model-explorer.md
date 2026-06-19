@@ -25,7 +25,7 @@ The artifacts covered in this learning path are:
 | `.tosa` | `tosa-adapter-model-explorer` | Compiler/backend intermediate representation | Lowered operators, tensor shapes, quantized types, graph splits, and missed optimization opportunities |
 | `.vgf` | `vgf-adapter-model-explorer` | Vulkan ML graph artifact | Inputs, outputs, constants, tensor metadata, graph connectivity, and SPIR-V graph modules |
 | `.etrecord` | ExecuTorch ETRecord adapter | Export-time profiling context | Graph structure, debug handles, operator names, and delegate metadata used to map runtime events back to graph nodes |
-| `.etdp` | ExecuTorch ETDump data provider | Runtime trace overlay | Operator calls, delegate calls, backend events, timings, and cycle counts from a specific execution |
+| `.etdp` | ExecuTorch ETDump data provider | Runtime trace overlay | Timing data from a specific execution |
 
 {{% notice Note %}}
 Model Explorer visualizes the specific artifact you generated or received. Small differences in the target the model has been delegated to, could result in a very different model graph. For example, delegating the same model to an Ethos-U55, may produce a very different model graph from delegating to an Ethos-U85.
@@ -102,7 +102,7 @@ A helpful glossary of different terms is provided below:
 | Flatbuffer | A compact binary serialization format. TOSA flatbuffers store TOSA graphs; `.pte` files use a FlatBuffer-based ExecuTorch program format. |
 | SPIR-V | Standard Portable Intermediate Representation - Vulkan. SPIR-V modules inside VGF files describe the Vulkan ML data graph used by the runtime. |
 | ETRecord | An ExecuTorch export-time debug artifact that preserves graph and delegate metadata for profiling attribution. |
-| ETDump | An ExecuTorch runtime trace artifact that records operator, delegate, backend, timing, and cycle-count events from execution. |
+| ETDump | An ExecuTorch runtime trace artifact that can record operator, delegate, backend, timing, and cycle-count events from execution. The first Model Explorer overlay used in this Learning Path focuses on timing data. |
 
 ## What models will I use?
 
