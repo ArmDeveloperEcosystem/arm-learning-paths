@@ -19,6 +19,10 @@ prerequisites:
 
 author: Pareena Verma
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ##### Tags
 skilllevels: Introductory
 subjects: ML
@@ -59,8 +63,6 @@ further_reading:
         title: Getting started with Google Cloud Platform
         link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/google/
         type: documentation
-
-
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

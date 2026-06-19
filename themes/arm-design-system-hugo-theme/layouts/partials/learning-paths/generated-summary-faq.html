@@ -1,0 +1,93 @@
+{{/*
+Render a generated summary paragraph and FAQ block for Learning Path introduction pages.
+
+	Expected front-matter shape:
+	  generated_summary_faq:
+	    ai_assisted: true
+	    summary: ...
+	    faqs:
+	      - question: ...
+	        answer: ...
+*/}}
+
+{{ $generated := .Params.generated_summary_faq }}
+{{ if $generated }}
+	{{ $summary := $generated.summary }}
+	{{ $faqs := $generated.faqs }}
+	{{ $ai_assisted := $generated.ai_assisted }}
+
+	{{ if or $summary $faqs }}
+		<div id="generated-summary-faq" class="u-margin-top-2">
+			{{ with $summary }}
+				<div class="generated-summary-faq__heading">
+					<h3>Summary</h3>
+					{{ if $ai_assisted }}
+						<span class="generated-summary-faq__assist">
+							<ads-tag class="generated-summary-faq__ai-tag">AI-assisted</ads-tag>
+							<ads-modal id="ai-assisted-summary-modal" modal-title="What AI-assisted means">
+								<div slot="body">
+									<p>
+										This summary was drafted with an approved AI-assisted workflow and reviewed by Arm contributors before publication.
+										Human technical review remains part of the process so the final page reflects engineering rigor, accuracy, and Arm editorial standards.
+									</p>
+								</div>
+								<div slot="actions">
+									<ads-cta-button class="ai-assisted-summary-faq-close" level="primary" type="button" sr-label="close">Close</ads-cta-button>
+								</div>
+								<div slot="trigger">
+									<ads-button class="generated-summary-faq__info" level="tertiary" size="small" is-circular="" type="button" sr-label="Learn what AI-assisted means">?</ads-button>
+								</div>
+							</ads-modal>
+						</span>
+					{{ end }}
+				</div>
+				<div class="u-margin-left-1">
+					{{ . | markdownify }}
+				</div>
+			{{ end }}
+
+			{{ with $faqs }}
+				<div class="generated-summary-faq__heading u-margin-top-2">
+					<h3>Frequently asked questions</h3>
+					{{ if $ai_assisted }}
+						<span class="generated-summary-faq__assist">
+							<ads-tag class="generated-summary-faq__ai-tag">AI-assisted</ads-tag>
+							<ads-modal id="ai-assisted-faq-modal" modal-title="What AI-assisted means">
+								<div slot="body">
+									<p>
+										These FAQs were drafted with an approved AI-assisted workflow and reviewed by Arm contributors before publication.
+										Human technical review remains part of the process so the final page reflects engineering rigor, accuracy, and Arm editorial standards.
+									</p>
+								</div>
+								<div slot="actions">
+									<ads-cta-button class="ai-assisted-summary-faq-close" level="primary" type="button" sr-label="close">Close</ads-cta-button>
+								</div>
+								<div slot="trigger">
+									<ads-button class="generated-summary-faq__info" level="tertiary" size="small" is-circular="" type="button" sr-label="Learn what AI-assisted means">?</ads-button>
+								</div>
+							</ads-modal>
+						</span>
+					{{ end }}
+				</div>
+				{{ range . }}
+					<ads-expansion-panel class="generated-summary-faq__panel u-margin-left-1 u-margin-bottom-1">
+						<span slot="toggle">{{ .question }}</span>
+						<div slot="content" class="u-margin-top-1">
+							{{ .answer | markdownify }}
+						</div>
+					</ads-expansion-panel>
+				{{ end }}
+			{{ end }}
+
+			{{ if $ai_assisted }}
+				<script>
+					(() => {
+						document.querySelectorAll('.ai-assisted-summary-faq-close').forEach((button) => {
+							button.addEventListener('click', () => button.closest('ads-modal')?.close());
+						});
+					})();
+				</script>
+			{{ end }}
+		</div>
+	{{ end }}
+{{ end }}

@@ -12,7 +12,6 @@ learning_objectives:
     - Describe how 4-bit groupwise PTQ quantization reduces model size without significantly sacrificing model accuracy.
     - Build and run Llama models using ExecuTorch on your development machine.
     - Build and run an Android Chat app with different Llama models using ExecuTorch on an Arm-based smartphone.
-    
 
 prerequisites:
     - An Apple M1/M2 development machine with Android Studio installed or a Linux machine with at least 16GB of RAM.
@@ -25,6 +24,10 @@ prerequisites:
 author: 
     - Varun Chari
     - Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -42,7 +45,6 @@ operatingsystems:
     - macOS
     - Android
 
-
 further_reading:
     - resource:
         title: ExecuTorch Overview
@@ -57,11 +59,10 @@ further_reading:
         link: https://github.com/pytorch/executorch/blob/main/examples/README.md
         type: website
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

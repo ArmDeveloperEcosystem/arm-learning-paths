@@ -18,6 +18,10 @@ prerequisites:
 
 author: Michael Hall
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 
@@ -34,7 +38,6 @@ tools_software_languages:
     - AWS IoT Greengrass
     - Raspberry Pi
 
-
 further_reading:
     - resource:
         title: AWS IoT Greengrass CLI documentation 
@@ -49,11 +52,10 @@ further_reading:
         link: https://docs.aws.amazon.com/greengrass/v2/developerguide/what-is-iot-greengrass.html
         type: website
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -15,9 +15,12 @@ prerequisites:
     - For profiling the ML inference, [Arm NN ExecuteNetwork](https://github.com/ARM-software/armnn/releases) or [ExecuTorch](https://github.com/pytorch/executorch).
     - For profiling the application, [Arm Performance Studio with Streamline](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio).
     - Android Studio Profiler.
-  
 
 author: Ben Clark
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -35,15 +38,11 @@ operatingsystems:
     - Android
     - Linux
 
-
 further_reading:
     - resource:
         title: Arm Streamline User Guide  
         link: https://developer.arm.com/documentation/101816/latest/
         type: documentation
-
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
@@ -51,3 +50,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

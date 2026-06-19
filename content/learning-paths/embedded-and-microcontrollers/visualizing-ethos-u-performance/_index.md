@@ -17,8 +17,11 @@ prerequisites:
     - Familiarity with basic machine learning concepts
     - A Linux or macOS computer with Python 3 installed
 
-
 author: Waheed Brown
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -56,12 +59,10 @@ further_reading:
         link: https://developer.arm.com/documentation/109267/0101
         type: documentation
 
-
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

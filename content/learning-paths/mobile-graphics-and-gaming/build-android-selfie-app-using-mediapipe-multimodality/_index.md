@@ -22,6 +22,10 @@ prerequisites:
 
 author: Han Yin
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Advanced
 subjects: ML
@@ -34,7 +38,6 @@ tools_software_languages:
     - MediaPipe
 operatingsystems:
     - Android
-
 
 further_reading:
     - resource:
@@ -53,8 +56,6 @@ further_reading:
         title: How to bring your AI Model to Android devices
         link: https://android-developers.googleblog.com/2024/10/bring-your-ai-model-to-android-devices.html
         type: blog
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

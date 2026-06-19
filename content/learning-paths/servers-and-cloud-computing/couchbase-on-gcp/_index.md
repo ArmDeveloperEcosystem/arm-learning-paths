@@ -2,7 +2,6 @@
 title: Deploy Couchbase on Google Cloud C4A
 description: Learn how to install and configure Couchbase on Google Cloud Axion C4A Arm64 instances and benchmark read/write performance using YCSB workloads.
 
-    
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for developers deploying Couchbase workloads on Arm Linux environments, specifically using Google Cloud C4A virtual machines (VM) powered by Axion processors. 
@@ -18,6 +17,10 @@ prerequisites:
   - Basic familiarity with [Couchbase](https://www.couchbase.com/)
 
 author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ##### Tags
 skilllevels: Introductory
@@ -52,3 +55,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

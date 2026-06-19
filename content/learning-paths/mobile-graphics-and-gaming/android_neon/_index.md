@@ -6,7 +6,7 @@ description: Learn how to enable and implement Neon intrinsics in Android NDK ap
 draft: true
 cascade:
     draft: true
-    
+
 minutes_to_complete: 40
 
 who_is_this_for: This is an introductory topic for software developers interested in learning how to use Neon Intrinsics on Arm powered mobile devices running Android. 
@@ -19,8 +19,11 @@ learning_objectives:
 prerequisites:
     - A x86_64 or Apple M1 development machine with Android Studio installed.
     - A 64-bit Arm powered smartphone running Android.
-
 author: Dawid Borycki
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -45,9 +48,6 @@ further_reading:
         title: Intrinsics
         link: https://developer.arm.com/architectures/instruction-sets/intrinsics/
         type: website
-
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

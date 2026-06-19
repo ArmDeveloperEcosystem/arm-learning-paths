@@ -1,7 +1,7 @@
 ---
 title: Quantize neural upscaling models with ExecuTorch
 description: Learn how to apply post-training quantization to PyTorch models using TorchAO and export INT8 models to .vgf format with the ExecuTorch Arm backend.
-    
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an advanced topic for ML developers who want to reduce latency and memory bandwidth by exporting INT8 models to the `.vgf` file format using the ExecuTorch Arm backend.
@@ -17,8 +17,12 @@ prerequisites:
     - A development machine with Python 3.10+ and PyTorch installed that runs ExecuTorch
 
 author:
-- Richard Burton
-- Annie Tallund
+    - Richard Burton
+    - Annie Tallund
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -60,3 +64,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

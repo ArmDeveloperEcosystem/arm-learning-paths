@@ -1,11 +1,9 @@
 ---
 title: Accelerate search performance with SVE2 MATCH on Arm servers
 
-    
 minutes_to_complete: 20
 
 who_is_this_for: This is an introductory topic for database developers, performance engineers, and anyone optimizing data processing workloads on Arm-based cloud instances.
-
 
 learning_objectives:
   - Understand the purpose and function of SVE2 MATCH instructions.
@@ -18,6 +16,9 @@ prerequisites:
 
 author: Pareena Verma
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -51,3 +52,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+
