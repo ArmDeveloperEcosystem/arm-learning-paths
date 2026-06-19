@@ -20,10 +20,10 @@ prerequisites:
 
 author:
     - Nina Drozd
+    - Annie Tallund
     - Gian Marco Iodice
     - Adnan AlSinan
     - Aude Vuilliomenet
-    - Annie Tallund
 
 generate_summary_faq: true
 rerun_summary: false
