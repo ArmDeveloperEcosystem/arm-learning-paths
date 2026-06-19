@@ -43,6 +43,6 @@ Enable the UART backend with `CONFIG_SHELL_BACKEND_SERIAL=y`. The UART backend r
 
 ## What you've accomplished and what's next
 
-You've now learned how the Zephyr shell subsytem and shell backends work.
+You've now learned how the Zephyr shell subsystem and shell backends work.
 
 Next, you'll build a small Zephyr application that enables the MQTT shell on the NXP FRDM-MCXN947, with a local Mosquitto broker running in Docker. You'll send commands and read responses with the `mosquitto_pub` and `mosquitto_sub` command-line tools.
