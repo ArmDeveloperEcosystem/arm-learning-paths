@@ -8,58 +8,19 @@ layout: learningpathall
 
 ## What you will build
 
-In this section, you will build the `topo-imx93-npu-deployment` Template starting from two baremetal
-projects:
+In this section, you will build the `topo-imx93-npu-deployment` Template starting from two non-Topo, non-Compose projects:
 
 - a Cortex-A web application that prepares images, writes model and tensor data into shared memory, and sends inference commands over `RPMsg`
 - a Cortex-M33 ExecuTorch runner firmware project for the FRDM i.MX 93
 
-You will first combine those sources into one repository, then make the repository a normal Compose project, and only then add the Topo metadata and Remoteproc Runtime services.
+You will combine those sources into one repository, then make the repository a normal Compose project, and only then add the Topo metadata and Remoteproc Runtime services.
 
-## Install the Topo Template authoring skills
+## Create the repository from the base projects
 
-The [Topo Template Format](https://github.com/arm/Topo-Template-Format) repository includes public authoring skills for agents that support skill installation:
-
-- `topo-template-context`: provides Topo and Topo Template reference context for `x-topo` metadata, schema, docs, and CLI Template behavior.
-- `topo-template-bootstrap`: converts a Compose repository into a Topo Template by adding or improving `compose.yaml` and `x-topo` metadata.
-- `topo-template-lint`: reviews a Topo Template for schema correctness, metadata consistency, deployment success messages, and build argument wiring.
-
-Install the skills with `npx skills`:
+We will copy the original base projects from the Topo Template. Clone the Topo Template Format repository for the validation schema, clone the original Topo Template for the source files, and start a new empty repository:
 
 ```bash
-npx skills add arm/topo-template-format
-```
-
-If your agent does not use `npx skills`, clone the Template Format repository and manually copy or symlink the directories under `skills/` into your agent's skills directory:
-
-```bash
-git clone https://github.com/arm/Topo-Template-Format.git
-```
-
-Restart your agent after installing or updating the skills.
-
-You can use the skills when you reach the Compose-to-Topo step in this walkthrough. From the root of the Compose project, ask your agent to use `topo-template-bootstrap`:
-
-```
-Use topo-template-bootstrap on this repository.
-Treat the root compose.yaml as the Template root.
-Preserve plain docker compose behavior.
-Add x-topo metadata only where it reflects the actual services, hardware requirements, and build arguments.
-```
-
-After bootstrap, ask the agent to use `topo-template-lint`:
-
-```
-Use topo-template-lint on this repository.
-Validate compose.yaml against the Topo Template Format schema.
-Check README alignment, Remoteproc Runtime metadata, and x-topo.args wiring.
-```
-
-## Create the repository from the baremetal projects
-
-Clone the original Topo Template and start a new empty repository:
-
-```bash
+git clone https://github.com/arm/topo-template-format.git
 git clone https://github.com/Arm-Examples/topo-imx93-npu-deployment.git
 mkdir new-topo-npu-template
 cd new-topo-npu-template
@@ -82,6 +43,7 @@ Copy the Cortex-M33 runner build inputs from the firmware project:
 ```bash
 cp ../topo-imx93-npu-deployment/executorch-runner/build-runner.sh executorch-runner/build-runner.sh
 cp ../topo-imx93-npu-deployment/executorch-runner/export_mv2_imx93.py executorch-runner/export_mv2_imx93.py
+cp ../topo-imx93-npu-deployment/executorch-runner/docker-entrypoint.sh executorch-runner/docker-entrypoint.sh
 cp -R ../topo-imx93-npu-deployment/executorch-runner/patches executorch-runner
 ```
 
@@ -93,13 +55,24 @@ cp -R ../topo-imx93-npu-deployment/licenses .
 cp ../topo-imx93-npu-deployment/.gitignore .
 ```
 
-At this point, the repository is only source code. It is not a Compose project and it is not a Topo Template.
+We have now obtained a typical starting point. We have two sets of source code, combined into one repository. It is not a Compose project and it is not a Topo Template. We will now create a Compose project and Topo Template around the source code.
+
+The Compose project provides the container build and runtime structure. A Dockerfile describes how to build one image. A Compose file describes the services that use those images, their build contexts, ports, volumes, dependencies, and runtime settings. In this Template:
+
+- `webapp/Dockerfile` builds the Flask image.
+- `webapp/compose.yaml` keeps the web app's build context and Linux runtime settings close to the web app source.
+- `executorch-runner/Dockerfile` builds the ExecuTorch `.pte` model and Cortex-M33 runner ELF through multi-stage Docker builds.
+- the root `compose.yaml` is the Template entry point. It combines the web app, artifact build services, the Remoteproc Runtime service, and the root-level `x-topo` metadata.
+
+For a general introduction to Compose projects, services, and the `compose.yaml` file, see Docker's [How Compose works](https://docs.docker.com/compose/intro/compose-application-model/) documentation.
+
+When a step below says to create a file, paste the complete file contents shown. When a step says to add or update part of an existing Compose file, merge the YAML into the existing top-level key shown by the snippet. For example, if a snippet starts with `services:`, add the named service under the existing top-level `services:` map. Do not create a second `services:` block in the same file.
 
 ## Turn the sources into a Compose project
 
 Before adding Topo metadata, make the project work as ordinary Compose. Start by containerizing the Cortex-A web application.
 
-Create `webapp/Dockerfile`:
+Create `webapp/Dockerfile` with the following complete contents:
 
 ```Dockerfile
 FROM python:3.12-slim
@@ -120,7 +93,7 @@ EXPOSE 3000
 CMD ["python", "app.py"]
 ```
 
-Create `webapp/compose.yaml`:
+Create `webapp/compose.yaml` with the following complete contents:
 
 ```yaml
 services:
@@ -138,7 +111,7 @@ services:
     restart: unless-stopped
 ```
 
-Create the root `compose.yaml`:
+Create the root `compose.yaml` with the following complete contents:
 
 ```yaml
 services:
@@ -155,9 +128,27 @@ Check that Compose can read the project:
 docker compose config
 ```
 
+You should see output that includes the resolved `webapp` service:
+
+```output
+services:
+  webapp:
+    build:
+      context: /path/to/new-topo-npu-template/webapp
+      dockerfile: Dockerfile
+    ports:
+      - mode: ingress
+        target: 3000
+        published: "3001"
+```
+
+At this point, Compose can build and run the Cortex-A web application as a normal Linux container. The image runs `webapp/src/app.py`, packages the Jinja templates from `webapp/src/templates/`, the static assets from `webapp/src/static/`, and the ImageNet labels from `webapp/src/data/imagenet_classes.txt`. The container listens on port `3000`, and Compose publishes it on host port `3001` unless you set `WEBAPP_PORT` to another value.
+
 ## Add the ExecuTorch artifact pipeline
 
-The web application needs an ExecuTorch `.pte` model, and the target needs a Cortex-M33 ELF image. Both artifacts are built by `executorch-runner/Dockerfile`:
+The web application needs an ExecuTorch `.pte` model, and the target needs a Cortex-M33 ELF image. Both artifacts are built by `executorch-runner/Dockerfile`.
+
+Copy the Dockerfile into the runner build context:
 
 ```bash
 cp ../topo-imx93-npu-deployment/executorch-runner/Dockerfile executorch-runner/
@@ -166,7 +157,7 @@ cp ../topo-imx93-npu-deployment/executorch-runner/Dockerfile executorch-runner/
 For this multi-stage Dockerfile:
 
 - `build-base`: installs the common Ubuntu build tools.
-- `executorch-base`: clones ExecuTorch, installs the Arm backend dependencies, and copies `export_mv2_imx93.py`.
+- `executorch-base`: clones ExecuTorch, installs the Arm backend dependencies, and copies `export_mv2_imx93.py` and `docker-entrypoint.sh`.
 - `pte-builder`: exports `mv2_ethosu65_256.pte`.
 - `pte-artifacts`: packages the `.pte` file as a BuildKit artifact context.
 - `runner-base`: installs the Arm GNU toolchain, MCUX SDK, RPMsg-Lite dependencies, runner sources, and local patches.
@@ -190,7 +181,7 @@ ENTRYPOINT ["/executorch_runner_cm33.elf"]
 
 ## Connect the artifact services
 
-Add artifact-only services to the root `compose.yaml`:
+Add `pte-artifacts` and `runner-artifacts` as siblings of the existing `webapp` service in the root `compose.yaml`:
 
 ```yaml
 services:
@@ -215,9 +206,11 @@ services:
         - ${IMX93_RUNNER_BUILD_CACHE_IMAGE:-ghcr.io/arm-examples/topo-imx93-npu-deployment/imx93-runner-build:mcux-v25.09.00-armgcc14.2-ubuntu24.04}
 ```
 
-These services are build targets, not runtime containers. `scale: 0` keeps them out of the running deployment while still making their artifacts available to other builds.
+Do not replace the existing root `webapp` service with the snippet above. The root file should now have three service names under the same top-level `services:` map: `webapp`, `pte-artifacts`, and `runner-artifacts`.
 
-Update `webapp/compose.yaml` so the Flask image imports the `.pte` artifact:
+These services are used only to build artifacts. They do not run as part of the deployed application. `scale: 0` tells Compose not to start containers for them, while still allowing other services to copy files from their build outputs.
+
+Replace `webapp/compose.yaml` with the following version so the Flask image imports the `.pte` artifact:
 
 ```yaml
 services:
@@ -237,15 +230,17 @@ services:
     restart: unless-stopped
 ```
 
-Then update `webapp/Dockerfile` to copy the model from that BuildKit context:
+Then add the `.pte` copy line to `webapp/Dockerfile` with the other `COPY` commands:
 
 ```Dockerfile
 COPY --from=pte_artifacts /artifacts/mv2_ethosu65_256.pte /opt/mv2-imx93/mv2_ethosu65_256.pte
 ```
 
+The `/opt/mv2-imx93/` path is the location the Flask application expects for its MobileNetV2 support files. At run time, the app reads the `.pte` file from this path before copying it into reserved memory for the Cortex-M33 runner.
+
 ## Add the Remoteproc Runtime service
 
-Add the Cortex-M33 runner as a Compose service:
+Add the Cortex-M33 runner as another sibling under the top-level `services:` map in the root `compose.yaml`:
 
 ```yaml
 services:
@@ -262,10 +257,11 @@ services:
       remoteproc.name: imx-rproc
 ```
 
-This is the heterogeneous deployment hook. Docker still builds an image, but the service is not started as a Linux userspace process. The runtime `io.containerd.remoteproc.v1` selects Remoteproc Runtime, and the `remoteproc.name` annotation tells the shim to use the i.MX remote processor
-driver.
+Keep the existing `webapp`, `pte-artifacts`, and `runner-artifacts` services in the same file. This step adds one more service; it does not replace any of the previous services.
 
-Make the web application depend on the CM33 runner:
+This is the heterogeneous deployment hook. Docker still builds an image, but the service is not started as a Linux userspace process. The runtime `io.containerd.remoteproc.v1` selects Remoteproc Runtime, and the `remoteproc.name` annotation tells the shim to use the i.MX remote processor driver.
+
+Update the existing root `webapp` service so it depends on the CM33 runner and passes the cache image values into the build. Keep the existing `extends` block, then add `depends_on` and `build.args` as shown:
 
 ```yaml
 services:
@@ -276,14 +272,22 @@ services:
       service: webapp
     depends_on:
       - cm33-runner
+    build:
+      args:
+        EXECUTORCH_BASE_CACHE_IMAGE: ghcr.io/arm-examples/topo-imx93-npu-deployment/executorch-base:et-v1.2.0-ubuntu24.04
+        IMX93_RUNNER_BUILD_CACHE_IMAGE: ghcr.io/arm-examples/topo-imx93-npu-deployment/imx93-runner-build:mcux-v25.09.00-armgcc14.2-ubuntu24.04
 ```
 
 The web app is privileged and mounts `/sys` and `/dev` because it checks the device tree, reads remoteproc state through `/sys/class/remoteproc`, talks to `/dev/ttyRPMSG*`, writes shared memory through `/dev/mem`, and checks for `/dev/ethosu0`.
 
+Keep the web app build context in `webapp/compose.yaml`. The root `webapp.build.args` block above only supplies Topo-collected build arguments; it should not replace the extended build context and Dockerfile from `webapp/compose.yaml`.
+
 ## Add Topo metadata and arguments
 
 After the Compose services are complete, add the root-level `x-topo` block.
-Keep it at the root of `compose.yaml`, not under `services`.
+Keep it at the root of `compose.yaml`, as a sibling of `services`, not under `services`.
+
+If you want to use an agent skill to perform this step, skip to the optional step below.
 
 ```yaml
 x-topo:
@@ -306,12 +310,49 @@ The `features` value tells Topo that this Template requires `remoteproc-runtime`
 
 The `args` entries describe configurable build inputs. Compose consumes those values through the `cache_from` interpolation you added earlier:
 
-```yaml
+```output
 cache_from:
   - ${EXECUTORCH_BASE_CACHE_IMAGE:-ghcr.io/arm-examples/topo-imx93-npu-deployment/executorch-base:et-v1.2.0-ubuntu24.04}
 ```
 
+The root `webapp.build.args` block also makes the Topo-provided values visible in the Compose build model while preserving the `webapp/` build context inherited through `extends`.
+
 Keep runtime settings such as `WEBAPP_PORT` as normal Compose interpolation unless you intentionally want Topo to collect them as Template setup arguments.
+
+## (Optional) Use an Agent Skill to add the Topo metadata
+
+The [Topo Template Format](https://github.com/arm/topo-template-format) repository includes public authoring skills for agents that support skill installation:
+
+- `topo-template-context`: provides Topo and Topo Template reference context for `x-topo` metadata, schema, docs, and CLI Template behavior.
+- `topo-template-bootstrap`: converts a Compose repository into a Topo Template by adding or improving `compose.yaml` and `x-topo` metadata.
+- `topo-template-lint`: reviews a Topo Template for schema correctness, metadata consistency, deployment success messages, and build argument wiring.
+
+Install the skills with `npx skills`:
+
+```bash
+npx skills add arm/topo-template-format
+```
+
+If your agent does not use `npx skills`, manually copy or symlink the directories under `../topo-template-format/skills/` into your agent's skills directory.
+
+Restart your agent after installing or updating the skills.
+
+From the root of the Compose project, ask your agent to use `topo-template-bootstrap`:
+
+```
+Use topo-template-bootstrap on this repository.
+Treat the root compose.yaml as the Template root.
+Preserve plain docker compose behavior.
+Add x-topo metadata only where it reflects the actual services, hardware requirements, and build arguments.
+```
+
+After bootstrap, ask the agent to use `topo-template-lint`:
+
+```
+Use topo-template-lint on this repository.
+Validate compose.yaml against the Topo Template Format schema.
+Check README alignment, Remoteproc Runtime metadata, and x-topo.args wiring.
+```
 
 ## Validate the final Template
 
@@ -321,7 +362,28 @@ Check the Compose model and check that the Topo metadata is present:
 docker compose config
 ```
 
-If you have the Topo Template Format schema locally, validate the root Compose file:
+In the `docker compose config` output, check that the resolved `webapp` service has:
+
+- `build.context` ending in `/webapp`
+- `build.dockerfile` set to `Dockerfile`
+- `build.additional_contexts.pte_artifacts` set to `service:pte-artifacts`
+
+Install `check-jsonschema` if it is not already available:
+
+{{< tabpane code=true >}}
+  {{< tab header="macOS" language="shell" >}}
+brew install check-jsonschema
+  {{< /tab >}}
+  {{< tab header="Linux / WSL" language="shell" >}}
+sudo apt update
+sudo apt install -y pipx
+pipx ensurepath
+pipx install check-jsonschema
+export PATH="$HOME/.local/bin:$PATH"
+  {{< /tab >}}
+{{< /tabpane >}}
+
+Validate the root Compose file with the schema in the Topo Template Format:
 
 ```bash
 check-jsonschema \
@@ -341,8 +403,8 @@ Review these points:
 - `webapp` imports the `.pte` file through `additional_contexts`.
 - every `x-topo.args` entry is consumed by Compose interpolation.
 
-## What you have built
+## What you've accomplished and what's next
 
-You started with two baremetal projects, made them a standard Compose project, and then converted that Compose project into a Topo Template.
-The final Template builds the ExecuTorch model, packages the Cortex-M33 firmware as a Remoteproc Runtime service, runs the Cortex-A Flask web app, and
-exposes the build cache inputs as Topo arguments.
+You started with two non-Topo, non-Compose projects, made them a standard Compose project, and then converted that Compose project into a Topo Template. You created the web app image, added artifact builds for the ExecuTorch `.pte` model and Cortex-M33 ELF, packaged the firmware as a Remoteproc Runtime service, and exposed the build cache inputs as Topo arguments.
+
+Next, you will prepare the FRDM i.MX 93 target, deploy the Template with Topo, and run the image classification application.

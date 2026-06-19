@@ -1,10 +1,6 @@
 ---
 title: Deploy an ML application to the Ethos-U65 NPU on NXP FRDM i.MX 93 with Topo
 
-draft: true
-cascade:
-    draft: true
-
 description: Use Topo to deploy a Cortex-A web application that sends MobileNetV2 image classification requests to Cortex-M33 firmware accelerated by the Ethos-U65 NPU.
 
 minutes_to_complete: 60
@@ -14,7 +10,7 @@ who_is_this_for: This is an introductory topic for embedded/edge software develo
 learning_objectives:
     - Explain how Topo deploys an application that spans Cortex-A, Cortex-M, and Ethos-U
     - Deploy the topo-imx93-npu-deployment Template, which operates across Cortex-A, Cortex-M, and Ethos-U, to perform image classification using an ExecuTorch MobileNetV2 model
-    - Describe how the Template is bootstrapped from Compose services, Remoteproc Runtime metadata, and Topo arguments
+    - Describe how the Template is bootstrapped from Compose services, Remoteproc Runtime metadata, and Topo arguments and follow this process yourself
     - Understand how to take similar projects and create Topo Templates, including using Agent Skills
 
 prerequisites:

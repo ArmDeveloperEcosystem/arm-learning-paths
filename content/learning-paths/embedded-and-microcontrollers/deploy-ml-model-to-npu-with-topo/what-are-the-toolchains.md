@@ -81,10 +81,10 @@ The web application checks these ranges at startup through `/proc/device-tree`. 
 
 The `webapp` service is a Python Flask application. It serves the browser UI, preprocesses selected images, stages the .pte program and input tensor in reserved memory, sends inference commands over `RPMsg`, and renders the ImageNet top-1 and top-5 results.
 
-By default, the service maps target port `3001` to container port `3000`.
+By default, the service publishes port `3001` on the target and forwards it to container port `3000`.
 
 ## What you've accomplished and what's next
 
 You now understand the major toolchains and runtime interfaces used by the Template: ExecuTorch, the Cortex-M33 firmware runner, remoteproc-runtime, RPMsg, reserved memory, and the Flask web application. You have also seen how the web application stages the `.pte` program and input data in reserved memory before sending inference commands to the Cortex-M33 firmware.
 
-Next, you will review how the project is structured as a Topo Template, including the Compose services, build artifacts, Remoteproc Runtime metadata, and Topo arguments.
+Next, you will build the Template from the base projects by adding the Compose services, build artifacts, Remoteproc Runtime metadata, and Topo arguments.

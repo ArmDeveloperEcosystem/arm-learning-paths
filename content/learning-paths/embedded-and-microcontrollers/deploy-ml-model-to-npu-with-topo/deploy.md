@@ -58,7 +58,7 @@ The web application and Cortex-M33 firmware exchange data through reserved physi
 
 {{% notice Warning %}}
 Back up the board's original device tree before modifying it. The exact boot partition can differ between Linux images, so check the paths on your board before copying files.
-{{< /notice >}}
+{{% /notice %}}
 
 On your host, create a working directory and dump the live device tree from the target:
 
@@ -132,33 +132,33 @@ After the board reboots, run the Topo health check again from the host and verif
 topo health --target <user>@<target-ip>
 ```
 
-## Clone the Template
+## Deploy to the board
 
-Clone the Template onto your host:
+You can choose to deploy from the original Template, or from the Template you built from scratch. If you have not already cloned the original Template, clone it now:
 
 ```bash
-topo clone https://github.com/Arm-Examples/topo-imx93-npu-deployment.git
+git clone https://github.com/Arm-Examples/topo-imx93-npu-deployment.git
 ```
 
-Topo prompts for optional build cache image arguments:
+Then `cd` into the correct directory:
 
-```output
-EXECUTORCH_BASE_CACHE_IMAGE
-IMX93_RUNNER_BUILD_CACHE_IMAGE
+```bash
+cd topo-imx93-npu-deployment
 ```
 
-Accept the defaults unless you have your own cache images.
+Or:
 
-## Deploy to the board
+```bash
+cd new-topo-npu-template
+```
 
 {{% notice Note %}}
 If not pulling from the cache, the first build can take a long time and requires about 25 GB of free disk space. It downloads and builds ExecuTorch, the Arm GNU toolchain, MCUX SDK components, RPMsg-Lite, and the Cortex-M33 runner sources. Later builds are faster when Docker can reuse local cache layers or import the configured GHCR cache layers.
-{{< /notice >}}
+{{% /notice %}}
 
 Deploy the project to your target:
 
 ```bash
-cd topo-imx93-npu-deployment
 topo deploy --target <user>@<target-ip>
 ```
 
@@ -198,7 +198,7 @@ Then open:
 ```output
 http://<target-ip>:3002
 ```
-{{< /notice >}}
+{{% /notice %}}
 
 The application shows:
 
