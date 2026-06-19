@@ -137,8 +137,10 @@ topo health --target <user>@<target-ip>
 You can choose to deploy from the original Template, or from the Template you built from scratch. If you have not already cloned the original Template, clone it now:
 
 ```bash
-git clone https://github.com/Arm-Examples/topo-imx93-npu-deployment.git
+topo clone https://github.com/Arm-Examples/topo-imx93-npu-deployment.git
 ```
+
+Topo prompts for optional build cache image arguments. Accept the defaults unless you have your own cache images.
 
 Then `cd` into the correct directory:
 
