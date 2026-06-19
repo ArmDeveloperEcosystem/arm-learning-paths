@@ -6,17 +6,15 @@ weight: 4
 layout: learningpathall
 ---
 
-## Start from the application pieces
+## What you will build
 
-The `topo-imx93-npu-deployment` repository is a Compose project with Topo metadata at the root. The Topo-specific part is not a replacement for Compose. The services still describe container builds, dependencies, ports, volumes, and runtime settings. The `x-topo` block adds the metadata Topo uses to identify the Template, check target requirements, and prompt for configuration.
+In this section, you will build the `topo-imx93-npu-deployment` Template starting from two baremetal
+projects:
 
-The project has three implementation areas:
+- a Cortex-A web application that prepares images, writes model and tensor data into shared memory, and sends inference commands over `RPMsg`
+- a Cortex-M33 ExecuTorch runner firmware project for the FRDM i.MX 93
 
-- `executorch-runner/`: builds the ExecuTorch `.pte` program and the Cortex-M33 firmware ELF.
-- `webapp/`: builds the Flask application that stages memory and sends `RUN` commands over `RPMsg`.
-- `compose.yaml`: connects the build artifacts, runtime services, Remoteproc Runtime settings, and Topo metadata.
-
-When bootstrapping this Template from scratch, first make the project work as a normal Compose build. Then add the `x-topo` metadata that lets Topo deploy it consistently to an Arm64 target.
+You will first combine those sources into one repository, then make the repository a normal Compose project, and only then add the Topo metadata and Remoteproc Runtime services.
 
 ## Install the Topo Template authoring skills
 
@@ -40,7 +38,7 @@ git clone https://github.com/arm/Topo-Template-Format.git
 
 Restart your agent after installing or updating the skills.
 
-You can then use the skills as part of the Template authoring flow. From the root of any Compose project, ask your agent to use `topo-template-bootstrap`:
+You can use the skills when you reach the Compose-to-Topo step in this walkthrough. From the root of the Compose project, ask your agent to use `topo-template-bootstrap`:
 
 ```
 Use topo-template-bootstrap on this repository.
@@ -52,56 +50,147 @@ Add x-topo metadata only where it reflects the actual services, hardware require
 After bootstrap, ask the agent to use `topo-template-lint`:
 
 ```
-Use topo-template-lint on topo-imx93-npu-deployment.
+Use topo-template-lint on this repository.
 Validate compose.yaml against the Topo Template Format schema.
-Check README alignment, deployment_success_message, Remoteproc Runtime metadata, and x-topo.args wiring.
+Check README alignment, Remoteproc Runtime metadata, and x-topo.args wiring.
 ```
 
-The lint pass should confirm that the Template has a root-level `x-topo.name`, that non-remoteproc services use `platform: linux/arm64`, that `cm33-runner` uses the Remoteproc Runtime annotation, and that every `x-topo.args` entry is carried into Compose or Docker build arguments where appropriate.
+## Create the repository from the baremetal projects
 
-## Create the runner build pipeline
+Clone the original Topo Template and start a new empty repository:
 
-The `executorch-runner/Dockerfile` is a multi-stage Dockerfile. It builds two artifacts from one build context:
+```bash
+git clone https://github.com/Arm-Examples/topo-imx93-npu-deployment.git
+mkdir new-topo-npu-template
+cd new-topo-npu-template
+```
 
-- `mv2_ethosu65_256.pte`: the MobileNetV2 ExecuTorch program lowered for `ethos-u65-256`.
-- `executorch_runner_cm33.elf`: the Cortex-M33 firmware image loaded by Linux `remoteproc`.
+Create the project layout:
 
-The first half of the Dockerfile builds the model artifact:
+```bash
+mkdir -p webapp executorch-runner licenses
+```
+
+Copy over the relevant `webapp` files:
+
+```bash
+cp -R ../topo-imx93-npu-deployment/webapp/src webapp
+```
+
+Copy the Cortex-M33 runner build inputs from the firmware project:
+
+```bash
+cp ../topo-imx93-npu-deployment/executorch-runner/build-runner.sh executorch-runner/build-runner.sh
+cp ../topo-imx93-npu-deployment/executorch-runner/export_mv2_imx93.py executorch-runner/export_mv2_imx93.py
+cp -R ../topo-imx93-npu-deployment/executorch-runner/patches executorch-runner
+```
+
+Add the licenses and ignore rules used by the source projects:
+
+```bash
+cp ../topo-imx93-npu-deployment/LICENSE.md .
+cp -R ../topo-imx93-npu-deployment/licenses .
+cp ../topo-imx93-npu-deployment/.gitignore .
+```
+
+At this point, the repository is only source code. It is not a Compose project and it is not a Topo Template.
+
+## Turn the sources into a Compose project
+
+Before adding Topo metadata, make the project work as ordinary Compose. Start by containerizing the Cortex-A web application.
+
+Create `webapp/Dockerfile`:
 
 ```Dockerfile
-FROM build-base AS executorch-base
-...
-FROM executorch-base AS pte-builder
-...
-RUN source /workspace/executorch/examples/arm/arm-scratch/setup_path.sh && \
-    python /usr/local/bin/export_mv2_imx93.py
+FROM python:3.12-slim
 
+WORKDIR /app
+
+ENV PYTHONUNBUFFERED=1
+
+RUN python -m pip install --no-cache-dir flask==3.0.3
+
+COPY src/data/imagenet_classes.txt /opt/mv2-imx93/imagenet_classes.txt
+COPY src/app.py .
+COPY src/templates/ templates/
+COPY src/static/ static/
+
+EXPOSE 3000
+
+CMD ["python", "app.py"]
+```
+
+Create `webapp/compose.yaml`:
+
+```yaml
+services:
+  webapp:
+    platform: linux/arm64
+    build:
+      context: .
+      dockerfile: Dockerfile
+    privileged: true
+    ports:
+      - "${WEBAPP_PORT:-3001}:3000"
+    volumes:
+      - /sys:/sys
+      - /dev:/dev
+    restart: unless-stopped
+```
+
+Create the root `compose.yaml`:
+
+```yaml
+services:
+  webapp:
+    platform: linux/arm64
+    extends:
+      file: webapp/compose.yaml
+      service: webapp
+```
+
+Check that Compose can read the project:
+
+```bash
+docker compose config
+```
+
+## Add the ExecuTorch artifact pipeline
+
+The web application needs an ExecuTorch `.pte` model, and the target needs a Cortex-M33 ELF image. Both artifacts are built by `executorch-runner/Dockerfile`:
+
+```bash
+cp ../topo-imx93-npu-deployment/executorch-runner/Dockerfile executorch-runner/
+```
+
+For this multi-stage Dockerfile:
+
+- `build-base`: installs the common Ubuntu build tools.
+- `executorch-base`: clones ExecuTorch, installs the Arm backend dependencies, and copies `export_mv2_imx93.py`.
+- `pte-builder`: exports `mv2_ethosu65_256.pte`.
+- `pte-artifacts`: packages the `.pte` file as a BuildKit artifact context.
+- `runner-base`: installs the Arm GNU toolchain, MCUX SDK, RPMsg-Lite dependencies, runner sources, and local patches.
+- `runner-builder`: builds `executorch_runner_cm33.elf`.
+- `runner-artifacts`: packages the ELF for inspection or reuse.
+- `runner-runtime`: produces a `scratch` image whose entrypoint is the ELF file.
+
+The important artifact stages look like this:
+
+```Dockerfile
 FROM busybox:1.36 AS pte-artifacts
 COPY --from=pte-builder /workspace/build/mv2-imx93/mv2_ethosu65_256.pte /artifacts/mv2_ethosu65_256.pte
-```
 
-The second half builds and packages the firmware:
-
-```Dockerfile
-FROM build-base AS runner-base
-ARG MCUXSDK_MANIFEST_URL=https://github.com/nxp-mcuxpresso/mcuxsdk-manifests.git
-ARG MCUXSDK_MANIFEST_REV=v25.09.00
-...
-FROM runner-base AS runner-builder
-RUN /usr/local/bin/build-runner.sh /artifacts
+FROM busybox:1.36 AS runner-artifacts
+COPY --from=runner-builder /artifacts/executorch_runner_cm33.elf /artifacts/executorch_runner_cm33.elf
 
 FROM scratch AS runner-runtime
 COPY --from=runner-builder /artifacts/executorch_runner_cm33.elf /executorch_runner_cm33.elf
 ENTRYPOINT ["/executorch_runner_cm33.elf"]
 ```
 
-The `runner-runtime` stage is intentionally a `scratch` image. The only payload is the ELF file. When the service starts with `runtime: io.containerd.remoteproc.v1`, containerd uses Remoteproc Runtime instead of a normal Linux process runtime. Remoteproc Runtime passes the ELF entrypoint to the Linux `remoteproc` driver, and the `imx-rproc` driver loads and releases the Cortex-M33.
+## Connect the artifact services
 
-The project also applies patches before building the runner. One patch changes the MCUX SDK RAM linker and startup behavior so initialized data is loaded in-place by `remoteproc` rather than copied from a flash-style load address. The runner patches add RPMsg stability fixes and trace output used by the web application.
-
-## Add artifact-only Compose services
-
-At the root of the Template, create normal Compose services for the build outputs:
+Add artifact-only services to the root `compose.yaml`:
 
 ```yaml
 services:
@@ -112,6 +201,8 @@ services:
       context: executorch-runner
       dockerfile: Dockerfile
       target: pte-artifacts
+      cache_from:
+        - ${EXECUTORCH_BASE_CACHE_IMAGE:-ghcr.io/arm-examples/topo-imx93-npu-deployment/executorch-base:et-v1.2.0-ubuntu24.04}
 
   runner-artifacts:
     platform: linux/arm64
@@ -120,11 +211,13 @@ services:
       context: executorch-runner
       dockerfile: Dockerfile
       target: runner-artifacts
+      cache_from:
+        - ${IMX93_RUNNER_BUILD_CACHE_IMAGE:-ghcr.io/arm-examples/topo-imx93-npu-deployment/imx93-runner-build:mcux-v25.09.00-armgcc14.2-ubuntu24.04}
 ```
 
-These services are not runtime application containers. `scale: 0` keeps them out of the running deployment while still making their build targets available to the rest of the Compose project.
+These services are build targets, not runtime containers. `scale: 0` keeps them out of the running deployment while still making their artifacts available to other builds.
 
-The web application imports the PTE artifact as a BuildKit additional context:
+Update `webapp/compose.yaml` so the Flask image imports the `.pte` artifact:
 
 ```yaml
 services:
@@ -135,19 +228,24 @@ services:
       dockerfile: Dockerfile
       additional_contexts:
         pte_artifacts: service:pte-artifacts
+    privileged: true
+    ports:
+      - "${WEBAPP_PORT:-3001}:3000"
+    volumes:
+      - /sys:/sys
+      - /dev:/dev
+    restart: unless-stopped
 ```
 
-The webapp Dockerfile then copies from that context:
+Then update `webapp/Dockerfile` to copy the model from that BuildKit context:
 
 ```Dockerfile
 COPY --from=pte_artifacts /artifacts/mv2_ethosu65_256.pte /opt/mv2-imx93/mv2_ethosu65_256.pte
 ```
 
-This keeps the model export pipeline separate from the Flask app while still producing one deployable webapp image.
+## Add the Remoteproc Runtime service
 
-## Add the remote processor service
-
-The Cortex-M33 firmware is represented as another Compose service:
+Add the Cortex-M33 runner as a Compose service:
 
 ```yaml
 services:
@@ -157,18 +255,17 @@ services:
       context: executorch-runner
       dockerfile: Dockerfile
       target: runner-runtime
+      cache_from:
+        - ${IMX93_RUNNER_BUILD_CACHE_IMAGE:-ghcr.io/arm-examples/topo-imx93-npu-deployment/imx93-runner-build:mcux-v25.09.00-armgcc14.2-ubuntu24.04}
     runtime: io.containerd.remoteproc.v1
     annotations:
       remoteproc.name: imx-rproc
 ```
 
-This is the key heterogeneous deployment hook. The service is still built by Docker, but it is not launched as a Linux userspace process. The `runtime` selects the containerd Remoteproc Runtime shim, and `remoteproc.name: imx-rproc` selects the i.MX 93 remote processor driver.
+This is the heterogeneous deployment hook. Docker still builds an image, but the service is not started as a Linux userspace process. The runtime `io.containerd.remoteproc.v1` selects Remoteproc Runtime, and the `remoteproc.name` annotation tells the shim to use the i.MX remote processor
+driver.
 
-After this service starts, Linux exposes the RPMsg device used by the Cortex-A web app. The Flask code waits for `/dev/ttyRPMSG*`, writes the `.pte` file to `0xC0000000`, writes the input tensor to `0xC036D000`, sends `RUN\n` over RPMsg, and parses the `CM33:` response lines into top-1 and top-5 ImageNet results.
-
-## Add the web application service
-
-The web application service extends `webapp/compose.yaml` from the root Compose file:
+Make the web application depend on the CM33 runner:
 
 ```yaml
 services:
@@ -181,24 +278,12 @@ services:
       - cm33-runner
 ```
 
-The extended service is privileged and mounts `/sys` and `/dev`:
+The web app is privileged and mounts `/sys` and `/dev` because it checks the device tree, reads remoteproc state through `/sys/class/remoteproc`, talks to `/dev/ttyRPMSG*`, writes shared memory through `/dev/mem`, and checks for `/dev/ethosu0`.
 
-```yaml
-services:
-  webapp:
-    privileged: true
-    ports:
-      - "${WEBAPP_PORT:-3001}:3000"
-    volumes:
-      - /sys:/sys
-      - /dev:/dev
-```
+## Add Topo metadata and arguments
 
-Those mounts are required because the app checks `/proc/device-tree`, reads remoteproc state through `/sys/class/remoteproc`, talks to `/dev/ttyRPMSG*`, writes model and tensor data through `/dev/mem`, and checks for `/dev/ethosu0`.
-
-## Add Topo metadata
-
-After the Compose services are in place, add the root-level `x-topo` block:
+After the Compose services are complete, add the root-level `x-topo` block.
+Keep it at the root of `compose.yaml`, not under `services`.
 
 ```yaml
 x-topo:
@@ -206,33 +291,6 @@ x-topo:
   description: "Runs a Cortex-A web application that sends image inference commands to a resident CM33 ExecuTorch runner over RPMsg."
   features:
     - "remoteproc-runtime"
-```
-
-Keep `x-topo` at the root of `compose.yaml`, not under `services`. The `features` entry is what tells Topo this Template needs a target with Remoteproc Runtime support. That is why `topo health` checks for:
-
-```output
-Remoteproc Runtime: ✅ (remoteproc-runtime)
-Remoteproc Shim: ✅ (containerd-shim-remoteproc-v1)
-Subsystem Driver (remoteproc): ✅ (imx-rproc)
-```
-
-You can also add a deployment success message so users know exactly what to do after deployment:
-
-```yaml
-x-topo:
-  deployment_success_message: |
-    The i.MX93 ExecuTorch runner is deployed.
-    Open http://<target-ip>:3001 and classify an ImageNet image.
-```
-
-## Expose project configuration
-
-Topo arguments are metadata for project parameters. Compose still carries the values into the build.
-
-The current Template exposes optional cache image parameters:
-
-```yaml
-x-topo:
   args:
     EXECUTORCH_BASE_CACHE_IMAGE:
       description: Optional GHCR image used as a BuildKit cache source for the ExecuTorch PTE build.
@@ -244,49 +302,26 @@ x-topo:
       default: ghcr.io/arm-examples/topo-imx93-npu-deployment/imx93-runner-build:mcux-v25.09.00-armgcc14.2-ubuntu24.04
 ```
 
-Those values are used by Compose interpolation in `build.cache_from`:
+The `features` value tells Topo that this Template requires `remoteproc-runtime` support on the target. This is useful when checking for project compatibility with the `topo templates --target <target>` command.
+
+The `args` entries describe configurable build inputs. Compose consumes those values through the `cache_from` interpolation you added earlier:
 
 ```yaml
 cache_from:
   - ${EXECUTORCH_BASE_CACHE_IMAGE:-ghcr.io/arm-examples/topo-imx93-npu-deployment/executorch-base:et-v1.2.0-ubuntu24.04}
 ```
 
-For build-time configuration, wire Topo arguments into standard Compose `build.args`. The runner Dockerfile already declares project-specific arguments for the MCUX SDK manifest:
+Keep runtime settings such as `WEBAPP_PORT` as normal Compose interpolation unless you intentionally want Topo to collect them as Template setup arguments.
 
-```Dockerfile
-ARG MCUXSDK_MANIFEST_URL=https://github.com/nxp-mcuxpresso/mcuxsdk-manifests.git
-ARG MCUXSDK_MANIFEST_REV=v25.09.00
+## Validate the final Template
+
+Check the Compose model and check that the Topo metadata is present:
+
+```bash
+docker compose config
 ```
 
-To expose the SDK revision through Topo, add matching Compose build args to the services that build `runner-base` descendants:
-
-```yaml
-services:
-  runner-artifacts:
-    build:
-      args:
-        MCUXSDK_MANIFEST_REV: ${MCUXSDK_MANIFEST_REV:-v25.09.00}
-
-  cm33-runner:
-    build:
-      args:
-        MCUXSDK_MANIFEST_REV: ${MCUXSDK_MANIFEST_REV:-v25.09.00}
-
-x-topo:
-  args:
-    MCUXSDK_MANIFEST_REV:
-      description: MCUX SDK manifest revision used to build the Cortex-M33 runner.
-      required: false
-      default: v25.09.00
-```
-
-With that wiring, Topo can prompt for the value when the Template is cloned or extended, Compose passes the value into Docker BuildKit, and the Dockerfile consumes it through `ARG MCUXSDK_MANIFEST_REV`.
-
-Use this only for configuration that should be chosen at Template setup time. Runtime-only settings, such as `WEBAPP_PORT`, should remain normal Compose environment interpolation unless you intentionally want Topo to collect them as build-time parameters.
-
-## Lint the Template
-
-Before publishing the Template, validate the root Compose file:
+If you have the Topo Template Format schema locally, validate the root Compose file:
 
 ```bash
 check-jsonschema \
@@ -294,17 +329,20 @@ check-jsonschema \
   compose.yaml
 ```
 
-Then review the Template the same way Topo Template linting does:
+Review these points:
 
-- The Template root contains `compose.yaml`.
-- `compose.yaml` contains a root-level `x-topo.name`.
-- Non-remoteproc services set `platform: linux/arm64`.
-- The `cm33-runner` service uses `runtime: io.containerd.remoteproc.v1` and `remoteproc.name: imx-rproc`.
-- `x-topo.description` matches the README and the actual Cortex-A to Cortex-M33 RPMsg flow.
+- `compose.yaml` contains root-level `x-topo` metadata.
 - `x-topo.features` includes `remoteproc-runtime`.
-- `x-topo.args` entries are either consumed through Compose interpolation, such as the cache image values, or wired into `services.<service>.build.args` and declared as Dockerfile `ARG` instructions.
-- `deployment_success_message` tells the user to open the web app on the configured target port.
+- non-remoteproc services set `platform: linux/arm64`.
+- `pte-artifacts` and `runner-artifacts` use `scale: 0`.
+- `cm33-runner` uses `runtime: io.containerd.remoteproc.v1`.
+- `cm33-runner` has `remoteproc.name: imx-rproc`.
+- `webapp` depends on `cm33-runner`.
+- `webapp` imports the `.pte` file through `additional_contexts`.
+- every `x-topo.args` entry is consumed by Compose interpolation.
 
-## What you've accomplished
+## What you have built
 
-You now understand how the `topo-imx93-npu-deployment` Template is built from ordinary Compose services plus Topo metadata: artifact-only build stages produce the model and firmware, Remoteproc Runtime starts the Cortex-M33 ELF, RPMsg connects the processors at runtime, and `x-topo.args` provides a path for setup-time configuration without replacing Docker or Compose.
+You started with two baremetal projects, made them a standard Compose project, and then converted that Compose project into a Topo Template.
+The final Template builds the ExecuTorch model, packages the Cortex-M33 firmware as a Remoteproc Runtime service, runs the Cortex-A Flask web app, and
+exposes the build cache inputs as Topo arguments.
