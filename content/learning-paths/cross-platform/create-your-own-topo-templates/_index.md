@@ -1,6 +1,6 @@
 ---
 title: Create and deploy a custom Topo Template
-    
+
 description: Understand how to create and modify Topo Templates, allowing you to deploy your projects as containerized workloads to Arm-based Linux targets over SSH.
 
 minutes_to_complete: 30
@@ -22,6 +22,10 @@ prerequisites:
     - Basic familiarity with containers and CLI tools
 
 author: Tomas Agustin Gonzalez Orlando
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -63,7 +67,6 @@ further_reading:
         title: remoteproc-runtime
         link: https://github.com/arm/remoteproc-runtime
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

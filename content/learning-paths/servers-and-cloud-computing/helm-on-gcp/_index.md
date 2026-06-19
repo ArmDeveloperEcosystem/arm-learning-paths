@@ -6,7 +6,6 @@ minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic intended for developers who want to get hands-on experience using Helm on Linux Arm64 systems, specifically Google Cloud C4A virtual machines powered by Axion processors.
 
-
 learning_objectives:
   - Provision an Arm-based SUSE Linux Enterprise Server (SLES) virtual machine on Google Cloud (C4A with Axion processors)
   - Install and configure Helm and kubectl on a SUSE Arm64 (C4A) instance
@@ -21,8 +20,12 @@ prerequisites:
   - Basic familiarity with [Kubernetes concepts](https://kubernetes.io/docs/concepts/)
   - Basic understanding of [Helm](https://helm.sh/docs/topics/architecture/) and Kubernetes manifests
   - Familiarity with basic Linux command-line usage
-    
+
 author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ##### Tags
 skilllevels: Introductory
@@ -41,7 +44,7 @@ tools_software_languages:
   - PostgreSQL
   - Redis
   - NGINX
-    
+
 operatingsystems:
   - Linux
 

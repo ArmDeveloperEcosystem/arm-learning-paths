@@ -1,28 +1,29 @@
 ---
-title: Measure Go GC behavior on AWS Graviton
-draft: true
-cascade:
-    draft: true
+title: Measure and modify Go garbage collection behavior on AWS Graviton-based compute
 
-description: Learn how to measure and observe Go garbage collection metrics on AWS Graviton instances.
+description: Learn how to run Go benchmarks on AWS Graviton-based compute, capture GC metrics and pprof profiles with Benchstat, establish a reproducible default garbage collection baseline for memory-intensive workloads on Arm, and experiment with modifying garbage collection behavior.
 
 minutes_to_complete: 75
 
 who_is_this_for: This Learning Path is for engineers interested in learning more about Go garbage collection (GC) behavior on Arm.
 
 learning_objectives:
-    - Select an AWS Graviton instance for repeatable Go GC measurements
+    - Select an AWS Graviton-based instance for repeatable Go GC measurements
     - Install Go and Benchstat on an Arm Linux server
     - Run a Go benchmark that reports allocation, GC, and pause-time metrics
     - Capture CPU and heap profiles without changing GC behavior
+    - Interpret benchmarking results and experiment with changing GC behavior
 
 prerequisites:
-    - An [AWS account](https://aws.amazon.com/) with permission to launch AWS Graviton EC2 instances
+    - An [AWS account](https://aws.amazon.com/) with permission to launch an AWS Graviton-based Amazon EC2 instance running Ubuntu 24.04 LTS or another Arm Linux distribution
     - The [AWS CLI](/install-guides/aws-cli/) installed and configured on your local machine
-    - An AWS Graviton instance running Ubuntu 24.04 LTS or another Arm Linux distribution
     - Basic familiarity with Go benchmarks and Linux shell commands
 
 author: Geremy Cohen
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -32,8 +33,8 @@ cloud_service_providers:
 armips:
     - Neoverse
 tools_software_languages:
-    - AWS
     - Go
+    - Benchstat
 operatingsystems:
     - Linux
 

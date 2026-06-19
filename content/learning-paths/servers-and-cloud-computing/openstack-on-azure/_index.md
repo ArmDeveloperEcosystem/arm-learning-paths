@@ -2,7 +2,6 @@
 title: Deploy OpenStack on Azure Cobalt 100 Arm64 Virtual Machine
 description: Deploy OpenStack on Azure Cobalt 100 Arm64 virtual machines using DevStack for development and Kolla-Ansible for containerized production deployments.
 
-    
 minutes_to_complete: 90
 
 who_is_this_for: This learning path is designed for developers, DevOps engineers, and platform engineers who want to deploy and manage OpenStack on Arm-based cloud environments using Kolla-Ansible and DevStack.
@@ -22,6 +21,10 @@ prerequisites:
   - Basic understanding of cloud computing and virtualization concepts
 
 author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -66,3 +69,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

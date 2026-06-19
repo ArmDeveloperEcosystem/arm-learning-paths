@@ -1,6 +1,6 @@
 ---
 title: Implement post-quantum cryptography on Arm Cortex-M4
-    
+
 description: Learn how to implement and test post-quantum cryptographic algorithms on Arm Cortex-M4 microcontrollers using the pqm4 library.
 
 minutes_to_complete: 120
@@ -22,6 +22,10 @@ prerequisites:
 author: 
     - Akash Malik
     - Odin Shen
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced

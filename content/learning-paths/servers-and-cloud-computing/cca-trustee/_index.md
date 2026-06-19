@@ -1,7 +1,7 @@
 ---
 title: Run an end-to-end attestation flow with Arm CCA and Trustee
 description: Learn how to deploy a CCA realm workload on an FVP and connect it with Trustee services to enable attestation-based confidential data processing.
-   
+
 minutes_to_complete: 60
 
 who_is_this_for: This Learning Path is for software developers who want to run an end-to-end attestation flow using Arm Confidential Compute Architecture (CCA) and Trustee services.
@@ -18,6 +18,10 @@ prerequisites:
 
 author:
   - Anton Antonov
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -60,3 +64,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

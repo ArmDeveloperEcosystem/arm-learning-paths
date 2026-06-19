@@ -13,6 +13,10 @@ prerequisites:
 
 author: Julio Suarez
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 skilllevels: Advanced
 subjects: Databases
 cloud_service_providers:
@@ -29,7 +33,6 @@ tools_software_languages:
     - MySQL
     - InnoDB
     - Runbook
-
 
 test_images:
     - ubuntu:latest
@@ -52,3 +55,4 @@ weight: 1
 layout: learningpathall
 learning_path_main_page: 'yes'
 ---
+

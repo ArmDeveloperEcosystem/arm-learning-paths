@@ -17,8 +17,11 @@ prerequisites:
     - Basic familiarity with SSH
     - Familiarity with Elasticsearch and ESRally
 
-
 author: Doug Anson
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory

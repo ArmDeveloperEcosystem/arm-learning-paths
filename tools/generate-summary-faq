@@ -1,0 +1,644 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+DEFAULT_BASE_URL="https://openai-api-proxy.geo.arm.com/api/providers/openai/v1/responses/"
+DEFAULT_MODEL="gpt-5"
+DEFAULT_TIMEOUT="180"
+DEFAULT_RETRIES="3"
+DEFAULT_STEP_LIMIT="5"
+DEFAULT_EXCERPT_CHARS="600"
+DEFAULT_REPORTS_DIR="reports/generated-summary-faq"
+
+usage() {
+  cat <<'EOF'
+Generate AI-assisted summary and FAQ content for Arm Learning Paths.
+
+This is the team-facing wrapper around tools/generate_summary_faq.py. It always
+uses the configured LLM endpoint. There is no template/offline generation mode.
+
+Usage:
+  tools/generate-summary-faq --category CATEGORY [options]
+  tools/generate-summary-faq --path PATH [options]
+  tools/generate-summary-faq --all [options]
+  tools/generate-summary-faq --list-categories
+
+Target selection:
+  --category SLUG      Process one top-level Learning Path category.
+                       Example: servers-and-cloud-computing
+  --path PATH          Process one Learning Path directory, _index.md file, or
+                       a comma-separated list of paths.
+  --all                Process all eligible Learning Paths as one parent run,
+                       split internally by category.
+  --list-categories    Print available category slugs and exit.
+
+Run mode:
+  --dry-run            Generate report/log only. This is the default.
+  --write              Write generated content into matching _index.md files.
+  --allow-unflagged    Include paths even when generate_summary_faq is not true.
+
+LLM endpoint:
+  --model MODEL        Model exposed by the configured endpoint.
+                       Default: gpt-5, or $OPENAI_MODEL
+  --base-url URL       OpenAI-compatible Responses endpoint.
+                       Default: Arm OpenAI proxy, or $OPENAI_BASE_URL
+  --timeout SECONDS    Seconds to wait for each AI response before retrying.
+                       Default: 180, or $OPENAI_TIMEOUT
+  --retries COUNT      Retries for transient timeout/network errors.
+                       Default: 3, or $OPENAI_RETRIES
+  --ca-bundle FILE     Optional CA bundle for Python TLS verification.
+                       Default: $OPENAI_CA_BUNDLE or $SSL_CERT_FILE
+  --insecure           Skip TLS verification for local testing only.
+                       This wrapper also does this automatically when no
+                       CA bundle is configured.
+  --verify-tls         Require TLS verification even when no CA bundle is set.
+
+Prompt size:
+  --step-limit COUNT   Maximum step excerpts included in each prompt.
+                       Default: 5, or $SUMMARY_FAQ_PROMPT_STEP_LIMIT
+  --excerpt-chars N    Maximum characters per step excerpt.
+                       Default: 600, or $SUMMARY_FAQ_PROMPT_EXCERPT_CHARS
+
+Output:
+  --reports-dir DIR    Directory for logs/reports.
+                       Default: reports/generated-summary-faq
+  --run-name NAME      Base filename for category/path runs, or directory name
+                       for --all parent runs.
+                       Default: target slug + timestamp
+  --log-file FILE      Explicit text log path.
+  --report-file FILE   Explicit YAML report path.
+  --markdown-report FILE
+                       Explicit Markdown table report path.
+  --quiet-progress     Hide per-Learning Path progress output.
+
+Preflight:
+  --skip-preflight     Skip local checks before running generation.
+
+Required environment:
+  OPENAI_API_KEY       Arm proxy/OpenAI key. The script never prints it.
+
+Examples:
+  tools/generate-summary-faq --category automotive --dry-run
+  tools/generate-summary-faq --category servers-and-cloud-computing --write
+  tools/generate-summary-faq --all --write
+  tools/generate-summary-faq --path content/learning-paths/servers-and-cloud-computing/nginx_tune --write
+EOF
+}
+
+die() {
+  echo "ERROR: $*" >&2
+  exit 2
+}
+
+slugify() {
+  printf '%s' "$1" | tr '/,[:space:]' '---' | tr -cs 'A-Za-z0-9._-' '-' | sed 's/^-//; s/-$//'
+}
+
+timestamp() {
+  date -u +"%Y%m%d-%H%M%S"
+}
+
+list_categories() {
+  find content/learning-paths -mindepth 1 -maxdepth 1 -type d -exec basename {} \; | sort
+}
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+cd "$REPO_ROOT"
+
+TARGET_KIND=""
+PATH_FILTER=""
+CATEGORY_FILTER=""
+MODE="--dry-run"
+ALLOW_UNFLAGGED="false"
+MODEL_VALUE="${OPENAI_MODEL:-$DEFAULT_MODEL}"
+BASE_URL_VALUE="${OPENAI_BASE_URL:-$DEFAULT_BASE_URL}"
+TIMEOUT_VALUE="${OPENAI_TIMEOUT:-$DEFAULT_TIMEOUT}"
+RETRIES_VALUE="${OPENAI_RETRIES:-$DEFAULT_RETRIES}"
+STEP_LIMIT_VALUE="${SUMMARY_FAQ_PROMPT_STEP_LIMIT:-$DEFAULT_STEP_LIMIT}"
+EXCERPT_CHARS_VALUE="${SUMMARY_FAQ_PROMPT_EXCERPT_CHARS:-$DEFAULT_EXCERPT_CHARS}"
+CA_BUNDLE_VALUE="${OPENAI_CA_BUNDLE:-${SSL_CERT_FILE:-}}"
+TLS_VERIFY_MODE="auto"
+REPORTS_DIR="$DEFAULT_REPORTS_DIR"
+RUN_NAME=""
+LOG_FILE=""
+REPORT_FILE=""
+MARKDOWN_REPORT_FILE=""
+PREFLIGHT="true"
+QUIET_PROGRESS="false"
+TLS_ARGS=()
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --all)
+      [[ -z "$TARGET_KIND" ]] || die "Choose only one target: --all, --category, or --path."
+      TARGET_KIND="all"
+      shift
+      ;;
+    --category)
+      [[ -z "$TARGET_KIND" ]] || die "Choose only one target: --all, --category, or --path."
+      TARGET_KIND="category"
+      CATEGORY_FILTER="${2:-}"
+      [[ -n "$CATEGORY_FILTER" ]] || die "--category requires a value."
+      shift 2
+      ;;
+    --path)
+      [[ -z "$TARGET_KIND" ]] || die "Choose only one target: --all, --category, or --path."
+      TARGET_KIND="path"
+      PATH_FILTER="${2:-}"
+      [[ -n "$PATH_FILTER" ]] || die "--path requires a value."
+      shift 2
+      ;;
+    --list-categories)
+      list_categories
+      exit 0
+      ;;
+    --dry-run)
+      MODE="--dry-run"
+      shift
+      ;;
+    --write)
+      MODE="--write"
+      shift
+      ;;
+    --allow-unflagged)
+      ALLOW_UNFLAGGED="true"
+      shift
+      ;;
+    --model)
+      MODEL_VALUE="${2:-}"
+      [[ -n "$MODEL_VALUE" ]] || die "--model requires a value."
+      shift 2
+      ;;
+    --base-url)
+      BASE_URL_VALUE="${2:-}"
+      [[ -n "$BASE_URL_VALUE" ]] || die "--base-url requires a value."
+      shift 2
+      ;;
+    --timeout)
+      TIMEOUT_VALUE="${2:-}"
+      [[ -n "$TIMEOUT_VALUE" ]] || die "--timeout requires a value."
+      shift 2
+      ;;
+    --retries)
+      RETRIES_VALUE="${2:-}"
+      [[ -n "$RETRIES_VALUE" ]] || die "--retries requires a value."
+      shift 2
+      ;;
+    --step-limit)
+      STEP_LIMIT_VALUE="${2:-}"
+      [[ -n "$STEP_LIMIT_VALUE" ]] || die "--step-limit requires a value."
+      shift 2
+      ;;
+    --excerpt-chars)
+      EXCERPT_CHARS_VALUE="${2:-}"
+      [[ -n "$EXCERPT_CHARS_VALUE" ]] || die "--excerpt-chars requires a value."
+      shift 2
+      ;;
+    --ca-bundle)
+      CA_BUNDLE_VALUE="${2:-}"
+      [[ -n "$CA_BUNDLE_VALUE" ]] || die "--ca-bundle requires a value."
+      shift 2
+      ;;
+    --insecure)
+      TLS_VERIFY_MODE="insecure"
+      TLS_ARGS+=(--openai-insecure-skip-verify)
+      shift
+      ;;
+    --verify-tls)
+      TLS_VERIFY_MODE="verify"
+      shift
+      ;;
+    --reports-dir)
+      REPORTS_DIR="${2:-}"
+      [[ -n "$REPORTS_DIR" ]] || die "--reports-dir requires a value."
+      shift 2
+      ;;
+    --run-name)
+      RUN_NAME="${2:-}"
+      [[ -n "$RUN_NAME" ]] || die "--run-name requires a value."
+      shift 2
+      ;;
+    --log-file)
+      LOG_FILE="${2:-}"
+      [[ -n "$LOG_FILE" ]] || die "--log-file requires a value."
+      shift 2
+      ;;
+    --report-file)
+      REPORT_FILE="${2:-}"
+      [[ -n "$REPORT_FILE" ]] || die "--report-file requires a value."
+      shift 2
+      ;;
+    --markdown-report)
+      MARKDOWN_REPORT_FILE="${2:-}"
+      [[ -n "$MARKDOWN_REPORT_FILE" ]] || die "--markdown-report requires a value."
+      shift 2
+      ;;
+    --quiet-progress)
+      QUIET_PROGRESS="true"
+      shift
+      ;;
+    --skip-preflight)
+      PREFLIGHT="false"
+      shift
+      ;;
+    --help|-h)
+      usage
+      exit 0
+      ;;
+    *)
+      die "Unknown option: $1"
+      ;;
+  esac
+done
+
+[[ -n "$TARGET_KIND" ]] || die "Choose a target with --all, --category, or --path. Use --help for examples."
+[[ -n "${OPENAI_API_KEY:-}" ]] || die "OPENAI_API_KEY is required. Run: export OPENAI_API_KEY=\"...\""
+
+if [[ "$TARGET_KIND" == "category" && ! -d "content/learning-paths/$CATEGORY_FILTER" ]]; then
+  die "Unknown category: $CATEGORY_FILTER. Run: tools/generate-summary-faq --list-categories"
+fi
+
+if [[ -z "$RUN_NAME" ]]; then
+  case "$TARGET_KIND" in
+    all) RUN_NAME="all-learning-paths-$(timestamp)" ;;
+    category) RUN_NAME="$(slugify "$CATEGORY_FILTER")-$(timestamp)" ;;
+    path) RUN_NAME="$(slugify "$PATH_FILTER")-$(timestamp)" ;;
+  esac
+fi
+
+mkdir -p "$REPORTS_DIR"
+if [[ "$TARGET_KIND" == "all" ]]; then
+  RUN_DIR="$REPORTS_DIR/$RUN_NAME"
+  mkdir -p "$RUN_DIR"
+  [[ -n "$LOG_FILE" ]] || LOG_FILE="$RUN_DIR/run.txt"
+  [[ -n "$REPORT_FILE" ]] || REPORT_FILE="$RUN_DIR/run.yml"
+  [[ -n "$MARKDOWN_REPORT_FILE" ]] || MARKDOWN_REPORT_FILE="$RUN_DIR/run.md"
+else
+  RUN_DIR=""
+  [[ -n "$LOG_FILE" ]] || LOG_FILE="$REPORTS_DIR/$RUN_NAME.txt"
+  [[ -n "$REPORT_FILE" ]] || REPORT_FILE="$REPORTS_DIR/$RUN_NAME.yml"
+  [[ -n "$MARKDOWN_REPORT_FILE" ]] || MARKDOWN_REPORT_FILE="$REPORTS_DIR/$RUN_NAME.md"
+fi
+
+if [[ "$PREFLIGHT" == "true" ]]; then
+  command -v python3 >/dev/null 2>&1 || die "python3 was not found."
+  if ! python3 - <<'PY' >/dev/null
+import yaml
+PY
+  then
+    die "Python package PyYAML is required. Install it with: python3 -m pip install --user pyyaml"
+  fi
+  [[ -f "tools/generate_summary_faq.py" ]] || die "tools/generate_summary_faq.py was not found."
+  [[ -f "tools/prompts/summary_faq_system.md" ]] || die "tools/prompts/summary_faq_system.md was not found."
+  [[ -f "tools/prompts/summary_faq_user.md" ]] || die "tools/prompts/summary_faq_user.md was not found."
+  if [[ -n "$CA_BUNDLE_VALUE" && ! -f "$CA_BUNDLE_VALUE" ]]; then
+    die "CA bundle file not found: $CA_BUNDLE_VALUE"
+  fi
+fi
+
+if [[ "$TLS_VERIFY_MODE" == "auto" && -z "$CA_BUNDLE_VALUE" && "${OPENAI_INSECURE_SKIP_VERIFY:-}" != "true" ]]; then
+  TLS_ARGS+=(--openai-insecure-skip-verify)
+fi
+
+echo "Learning Path summary/FAQ generation"
+echo "  target: $TARGET_KIND"
+[[ -n "$CATEGORY_FILTER" ]] && echo "  category: $CATEGORY_FILTER"
+[[ -n "$PATH_FILTER" ]] && echo "  path: $PATH_FILTER"
+echo "  mode: ${MODE#--}"
+echo "  log_file: $LOG_FILE"
+echo "  report_file: $REPORT_FILE"
+echo "  markdown_report: $MARKDOWN_REPORT_FILE"
+[[ -n "$RUN_DIR" ]] && echo "  run_dir: $RUN_DIR"
+echo "  openai_base_url: $BASE_URL_VALUE"
+echo "  openai_model: $MODEL_VALUE"
+echo "  openai_timeout: $TIMEOUT_VALUE"
+echo "  openai_retries: $RETRIES_VALUE"
+echo "  prompt_step_limit: $STEP_LIMIT_VALUE"
+echo "  prompt_excerpt_chars: $EXCERPT_CHARS_VALUE"
+[[ -n "$CA_BUNDLE_VALUE" ]] && echo "  openai_ca_bundle: $CA_BUNDLE_VALUE"
+if [[ ${#TLS_ARGS[@]} -gt 0 || "${OPENAI_INSECURE_SKIP_VERIFY:-}" == "true" ]]; then
+  echo "  openai_tls_verify: disabled"
+  if [[ "$TLS_VERIFY_MODE" == "auto" ]]; then
+    echo "  openai_tls_note: no CA bundle configured; local wrapper defaulted to --insecure"
+  fi
+fi
+echo
+
+run_generator() {
+  local category="$1"
+  local path_filter="$2"
+  local log_file="$3"
+  local report_file="$4"
+  local markdown_report_file="$5"
+  local aggregate_log="${6:-}"
+
+  local cmd=(
+    python3 tools/generate_summary_faq.py
+    --path-filter "$path_filter"
+    --category "$category"
+    --openai-base-url "$BASE_URL_VALUE"
+    --openai-model "$MODEL_VALUE"
+    --openai-timeout "$TIMEOUT_VALUE"
+    --openai-retries "$RETRIES_VALUE"
+    --openai-ca-bundle "$CA_BUNDLE_VALUE"
+    --prompt-step-limit "$STEP_LIMIT_VALUE"
+    --prompt-excerpt-chars "$EXCERPT_CHARS_VALUE"
+    --report-file "$report_file"
+    --markdown-report-file "$markdown_report_file"
+    "$MODE"
+  )
+
+  if [[ -n "$log_file" ]]; then
+    cmd+=(--log-file "$log_file")
+  fi
+
+  if [[ "$ALLOW_UNFLAGGED" == "true" ]]; then
+    cmd+=(--allow-unflagged)
+  fi
+
+  if [[ "$QUIET_PROGRESS" == "true" ]]; then
+    cmd+=(--quiet-progress)
+  fi
+
+  if [[ ${#TLS_ARGS[@]} -gt 0 ]]; then
+    cmd+=("${TLS_ARGS[@]}")
+  fi
+
+  if [[ -n "$aggregate_log" ]]; then
+    set +e
+    "${cmd[@]}" 2>&1 | tee -a "$aggregate_log"
+    local status=${PIPESTATUS[0]}
+    set -e
+    return "$status"
+  fi
+
+  "${cmd[@]}"
+}
+
+refresh_latest_reports() {
+  local report_file="$1"
+  local markdown_report_file="$2"
+  local latest_yml="$REPORTS_DIR/latest-run.yml"
+  local latest_md="$REPORTS_DIR/latest-run.md"
+
+  if [[ -f "$report_file" && "$report_file" != "$latest_yml" ]]; then
+    cp "$report_file" "$latest_yml"
+  fi
+
+  if [[ -f "$markdown_report_file" && "$markdown_report_file" != "$latest_md" ]]; then
+    cp "$markdown_report_file" "$latest_md"
+  fi
+}
+
+write_aggregate_reports() {
+  local run_dir="$1"
+  local aggregate_yml="$2"
+  local aggregate_md="$3"
+  local aggregate_log="$4"
+  local run_name="$5"
+  local mode="$6"
+
+  python3 - "$run_dir" "$aggregate_yml" "$aggregate_md" "$aggregate_log" "$run_name" "$mode" <<'PY'
+from __future__ import annotations
+
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
+
+import yaml
+
+run_dir = Path(sys.argv[1])
+aggregate_yml = Path(sys.argv[2])
+aggregate_md = Path(sys.argv[3])
+aggregate_log = Path(sys.argv[4])
+run_name = sys.argv[5]
+mode = sys.argv[6].lstrip("-")
+
+category_reports = []
+for report_path in sorted(run_dir.glob("*.yml")):
+    if report_path.resolve() == aggregate_yml.resolve():
+        continue
+    payload = yaml.safe_load(report_path.read_text(encoding="utf-8")) or {}
+    latest = payload.get("latest_run", {})
+    if latest:
+        category_reports.append((report_path.stem, report_path, latest))
+
+totals = {
+    "processed": 0,
+    "added": 0,
+    "updated": 0,
+    "unchanged": 0,
+    "drift_detected": 0,
+    "paths_with_drift": 0,
+    "skipped": 0,
+    "errors": 0,
+    "removed": 0,
+    "ai_requests": 0,
+    "summary_changed": 0,
+    "faq_changed": 0,
+    "rerun_flags_reset": 0,
+}
+section_totals = {"summary": {}, "faqs": {}}
+reason_totals = {}
+paths = []
+
+for category, report_path, latest in category_reports:
+    for key, value in latest.get("totals", {}).items():
+        totals[key] = totals.get(key, 0) + (value or 0)
+
+    for section in ("summary", "faqs"):
+        for action, count in latest.get("section_totals", {}).get(section, {}).items():
+            section_totals[section][action] = section_totals[section].get(action, 0) + (count or 0)
+
+    for reason, count in latest.get("reason_totals", {}).items():
+        reason_totals[reason] = reason_totals.get(reason, 0) + (count or 0)
+
+    for path_entry in latest.get("paths", []):
+        copied = dict(path_entry)
+        copied["category"] = category
+        paths.append(copied)
+
+timestamp = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+aggregate = {
+    "timestamp": timestamp,
+    "run_name": run_name,
+    "mode": mode,
+    "split_by_category": True,
+    "category_reports": [
+        {
+            "category": category,
+            "report_file": str(report_path),
+            "markdown_report_file": str(report_path.with_suffix(".md")),
+            "totals": latest.get("totals", {}),
+        }
+        for category, report_path, latest in category_reports
+    ],
+    "totals": totals,
+    "section_totals": section_totals,
+    "reason_totals": reason_totals,
+    "paths": paths,
+}
+
+aggregate_yml.write_text(yaml.safe_dump({"latest_run": aggregate}, sort_keys=False), encoding="utf-8")
+
+def esc(value):
+    return str(value if value is not None else "").replace("|", "\\|").replace("\n", "<br>")
+
+def row(label, value):
+    return f"| {esc(label)} | {esc(value)} |"
+
+metric_labels = {
+    "processed": "Processed",
+    "added": "Added",
+    "updated": "Updated",
+    "drift_detected": "Drift detected",
+    "paths_with_drift": "Paths with drift",
+    "skipped": "Skipped",
+    "unchanged": "Unchanged",
+    "errors": "Errors",
+    "ai_requests": "AI requests",
+    "summary_changed": "Summary changed",
+    "faq_changed": "FAQs changed",
+    "rerun_flags_reset": "Rerun flags reset",
+}
+
+lines = [
+    "# Generate Summary/FAQ Aggregate Run",
+    "",
+    f"Generated at: `{timestamp}`",
+    "",
+    "| Field | Value |",
+    "| --- | --- |",
+    row("Run name", run_name),
+    row("Mode", mode),
+    row("Split by category", True),
+    row("Category count", len(category_reports)),
+    "",
+    "## Run Overview",
+    "",
+    "| Metric | Count |",
+    "| --- | ---: |",
+]
+
+for key in (
+    "processed",
+    "added",
+    "updated",
+    "drift_detected",
+    "paths_with_drift",
+    "skipped",
+    "unchanged",
+    "errors",
+    "ai_requests",
+    "summary_changed",
+    "faq_changed",
+    "rerun_flags_reset",
+):
+    lines.append(row(metric_labels.get(key, key.replace("_", " ")), totals.get(key, 0)))
+
+lines.extend(["", "## Category Runs", "", "| Category | Processed | Added | Updated | Drift | Skipped | Unchanged | Errors | AI requests | Report |", "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |"])
+for category, report_path, latest in category_reports:
+    category_totals = latest.get("totals", {})
+    md_name = report_path.with_suffix(".md").name
+    lines.append(
+        "| {category} | {processed} | {added} | {updated} | {drift} | {skipped} | {unchanged} | {errors} | {ai_requests} | [{md}]({md}) |".format(
+            category=esc(category),
+            processed=category_totals.get("processed", 0),
+            added=category_totals.get("added", 0),
+            updated=category_totals.get("updated", 0),
+            drift=category_totals.get("drift_detected", 0),
+            skipped=category_totals.get("skipped", 0),
+            unchanged=category_totals.get("unchanged", 0),
+            errors=category_totals.get("errors", 0),
+            ai_requests=category_totals.get("ai_requests", 0),
+            md=esc(md_name),
+        )
+    )
+
+for section in ("summary", "faqs"):
+    title = "Summary Actions" if section == "summary" else "FAQ Actions"
+    lines.extend(["", f"## {title}", "", "| Action | Count |", "| --- | ---: |"])
+    for action, count in sorted(section_totals.get(section, {}).items()):
+        lines.append(row(action, count))
+
+nonzero_reasons = [(reason, count) for reason, count in reason_totals.items() if count]
+if nonzero_reasons:
+    lines.extend(["", "## Change Reasons", "", "| Reason | Count |", "| --- | ---: |"])
+    for reason, count in sorted(nonzero_reasons):
+        lines.append(row(reason, count))
+
+interesting = [entry for entry in paths if entry.get("status") != "unchanged" or entry.get("change_reasons") or entry.get("status") == "error"]
+if interesting:
+    lines.extend(["", "## Path Details", "", "| Category | Path | Status | Summary | FAQs | Reasons | Notes |", "| --- | --- | --- | --- | --- | --- | --- |"])
+    for entry in interesting:
+        summary = entry.get("summary", {})
+        faqs = entry.get("faqs", {})
+        reasons = ", ".join(entry.get("change_reasons", [])) or "none"
+        notes = entry.get("error", "") if entry.get("status") == "error" else ""
+        lines.append(
+            "| {category} | `{path}` | {status} | {summary} | {faqs} | {reasons} | {notes} |".format(
+                category=esc(entry.get("category", "")),
+                path=esc(entry.get("path", "")),
+                status=esc(entry.get("status", "")),
+                summary=esc(summary.get("action", "")),
+                faqs=esc(faqs.get("action", "")),
+                reasons=esc(reasons),
+                notes=esc(notes),
+            )
+        )
+
+aggregate_md.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+with aggregate_log.open("a", encoding="utf-8") as log:
+    log.write(f"\nAggregate report: {aggregate_yml}\n")
+    log.write(f"Aggregate Markdown report: {aggregate_md}\n")
+PY
+}
+
+if [[ "$TARGET_KIND" == "all" ]]; then
+  : > "$LOG_FILE"
+  {
+    echo "Learning Path summary/FAQ aggregate run"
+    echo "run_name: $RUN_NAME"
+    echo "mode: ${MODE#--}"
+    echo "run_dir: $RUN_DIR"
+    echo
+  } | tee -a "$LOG_FILE"
+
+  failures=0
+  while IFS= read -r category; do
+    category_report="$RUN_DIR/$category.yml"
+    category_markdown="$RUN_DIR/$category.md"
+
+    {
+      echo
+      echo "=== Category: $category ==="
+      echo "report_file: $category_report"
+      echo "markdown_report: $category_markdown"
+      echo
+    } | tee -a "$LOG_FILE"
+
+    if ! run_generator "$category" "" "" "$category_report" "$category_markdown" "$LOG_FILE"; then
+      failures=$((failures + 1))
+      echo "Category failed: $category" | tee -a "$LOG_FILE"
+    fi
+  done < <(list_categories)
+
+  write_aggregate_reports "$RUN_DIR" "$REPORT_FILE" "$MARKDOWN_REPORT_FILE" "$LOG_FILE" "$RUN_NAME" "$MODE"
+  refresh_latest_reports "$REPORT_FILE" "$MARKDOWN_REPORT_FILE"
+  echo "Aggregate report written to $REPORT_FILE"
+  echo "Aggregate Markdown report written to $MARKDOWN_REPORT_FILE"
+  echo "Latest report snapshot written to $REPORTS_DIR/latest-run.yml"
+  echo "Latest Markdown snapshot written to $REPORTS_DIR/latest-run.md"
+
+  if [[ "$failures" -gt 0 ]]; then
+    exit 1
+  fi
+  exit 0
+fi
+
+set +e
+run_generator "$CATEGORY_FILTER" "$PATH_FILTER" "$LOG_FILE" "$REPORT_FILE" "$MARKDOWN_REPORT_FILE"
+status=$?
+set -e
+refresh_latest_reports "$REPORT_FILE" "$MARKDOWN_REPORT_FILE"
+exit "$status"
