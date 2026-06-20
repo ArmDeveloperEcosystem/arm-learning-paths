@@ -14,6 +14,8 @@ learning_objectives:
 prerequisites:
     - Complete the [Get started with Oracle Cloud Infrastructure](../csp/oci/) learning path
     - Install software that allows you to connect to a running instance over SSH
+    - Install the Minecraft client on your local laptop, and ensure that you have a Microsoft
+      or Mojang account to log in (it will help if you know the basics of playing Minecraft too)
 
 author: Craig Hardy <chardy@amperecomputing.com>
 
