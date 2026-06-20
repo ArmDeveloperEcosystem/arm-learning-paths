@@ -1,18 +1,18 @@
 ---
-title: Running a Minecraft server on OCI Always Free
+title: Running a Minecraft server on OCI A1 Arm64 instances
 
 minutes_to_complete: 10
 
 who_is_this_for: Learners who are new to OCI and want a guided path from “provisioning an instance” to “running a persistent Minecraft server”.
 
 learning_objectives: 
-    - Provision an OCI Always Free Arm64 virtual machine instance suitable for running a Minecraft server
+    - Provision an OCI A1 Arm64 virtual machine instance suitable for running a Minecraft server
     - Deploy and configure Minecraft server software
     - Expose the Minecraft service from OCI by editing the network policy for the instance 
     - Connect to the running Minecraft server from the Minecraft client application
 
 prerequisites:
-    - Register an [OCI Always Free](https://www.oracle.com/cloud/free/) account
+    - Complete the [Get started with Oracle Cloud Infrastructure](../csp/oci/) learning path
     - Install software that allows you to connect to a running instance over SSH
 
 author: Craig Hardy <chardy@amperecomputing.com>
@@ -27,7 +27,6 @@ tools_software_languages:
     - Minecraft
 operatingsystems:
     - Linux
-
 
 
 further_reading:
