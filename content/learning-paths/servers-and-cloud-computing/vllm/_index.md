@@ -1,5 +1,5 @@
 ---
-title: Build and Run vLLM on Arm Servers
+title: Build and run vLLM on Arm servers
 description: Build vLLM from source on an Arm Linux server, run batch inference with a Hugging Face model, and expose the model through an OpenAI-compatible API.
 
 minutes_to_complete: 45

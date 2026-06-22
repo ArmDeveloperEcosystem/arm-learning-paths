@@ -1,5 +1,5 @@
 ---
-title: Build a vLLM from source code
+title: Build a vLLM from source code on Arm Linux
 description: Prepare an Arm Ubuntu server for vLLM by checking BFloat16 support, installing dependencies, and building the CPU backend from source.
 weight: 2
 
@@ -117,6 +117,6 @@ cd ..
 
 ## What you've accomplished and what's next
 
-You have verified BFloat16 support, installed the build dependencies, configured the required environment variables, and built vLLM from source for the CPU backend.
+You've now verified BFloat16 support, installed the build dependencies, configured the required environment variables, and built vLLM from source for the CPU backend.
 
 Next, you'll use vLLM with a Hugging Face model to run batch inference on your Arm server.
