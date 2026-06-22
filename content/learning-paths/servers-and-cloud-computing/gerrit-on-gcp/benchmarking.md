@@ -123,27 +123,27 @@ The benchmark gives a high-quality performance view: client latency, stepwise co
 CPU/memory/disk, and Gerrit-side JVM, GC, Jetty, cache, queue, Git, REST, NoteDB, and receive-commits metrics
 are all present:
 
-![Gerrit Benchmark Summary alt-text #center](images/analysis.png "Gerrit Benchmark Summary")
+![Charts and graphs showing the Gerrit benchmark performance summary including operation counts, success rates, and latency metrics across the four 120-second test steps.#center](images/analysis.png "Gerrit Benchmark Summary")
 
 Client-visible correctness is excellent: all 47,863 measured operations succeeded. REST query latency remains low
 with p99 69 ms. Clone is the dominant pressure point at p99 521 ms, and push remains sub-second at p99 288 ms:
 
-![Client-side Operation Summary alt-text #center](images/client-summary.png "Client-side Operation Summary")
+![Performance metrics showing client-side operation summary with statistics for git_clone, git_push_refs_for, and rest_change_query operations, including latency percentiles and success rates.#center](images/client-summary.png "Client-side Operation Summary")
 
 The useful capacity signal is the flattening throughput curve after step 2. CPU is already near saturation in step 2, then
 stays around 99% in steps 3 and 4. Latency continues rising: clone p99 increases from 221 ms in step 2 to 550 ms in
 step 4, while aggregate throughput only rises from 103.3 to 108.4 ops/sec:
 
-![Stepwise Concurrency Behavior Summary alt-text #center](images/stepwise-summary.png "Stepwise Concurrency Behavior Summary")
+![Graph showing throughput and latency trends across four concurrency steps, demonstrating how performance degrades as concurrency increases and CPU approaches saturation.#center](images/stepwise-summary.png "Stepwise Concurrency Behavior Summary")
 
 Host CPU pressure:
 
-![CPU Pressure Summary alt-text #center](images/cpu-pressure.png "CPU Pressure Summary")
+![Chart displaying CPU usage metrics across the benchmark steps, showing how CPU pressure increases and stabilizes near saturation levels as concurrency increases.#center](images/cpu-pressure.png "CPU Pressure Summary")
 
 Gerrit server-side correlation observations:
 
-![Gerrit Server-side Correlation Findings alt-text #center](images/gerrit-correlation.png "Gerrit Server-side Correlation Findings")
+![Graph showing correlations between various Gerrit server-side metrics such as GC pressure, cache performance, and queue depths in relation to client request latency.#center](images/gerrit-correlation.png "Gerrit Server-side Correlation Findings")
 
 Basic Server Metrics:
 
-![Basic Additional Server Metrics alt-text #center](images/server-metrics.png "Basic Additional Server Metrics")
+![Server metrics dashboard showing host resource utilization metrics including memory, disk I/O, and other system-level performance indicators during the benchmark run.#center](images/server-metrics.png "Basic Additional Server Metrics")

@@ -23,7 +23,7 @@ To expose TCP port 8080 for Gerrit, start by creating a new firewall rule in Goo
 
 You'll use this rule to allow incoming traffic on TCP port 8080, which is required for Gerrit access on your Arm-based VM.
 
-![Google Cloud Console showing the Create firewall rule page with fields for Name set to allow-tcp-8080, Network dropdown, Direction set to Ingress, Action set to Allow, Targets set to Specified target tags with allow-tcp-8080 entered, and Source IPv4 ranges set to 0.0.0.0/0. The interface is clean and organized, focusing on configuring firewall settings for a virtual machine. The overall tone is neutral and instructional. alt-text#center](images/firewall-rule.png "Create a firewall rule")
+![Google Cloud Console showing the Create firewall rule page with Name set to allow-tcp-8080, Direction set to Ingress, Action set to Allow, Targets set to Specified target tags with allow-tcp-8080, and Source IPv4 ranges set to 0.0.0.0/0. These settings configure the firewall to allow incoming TCP traffic on port 8080 from any IPv4 address.#center](images/firewall-rule.png "Create a firewall rule")
 
 - Set **Name** to `allow-tcp-8080`.
 - Select the network you want to use for your VM. The default is `autoscaling-net`, but your organization might use a different network.
@@ -34,7 +34,7 @@ You'll use this rule to allow incoming traffic on TCP port 8080, which is requir
 
 This configuration allows incoming TCP traffic on port 8080 from any IPv4 address.
 
-![Google Cloud Console interface displaying the Create firewall rule page. The main section shows fields for Name set to allow-tcp-8080, Network dropdown, Direction set to Ingress, Action set to Allow, Targets set to Specified target tags with allow-tcp-8080 entered, and Source IPv4 ranges set to 0.0.0.0/0. The environment is a clean, organized web dashboard focused on configuring firewall settings for a virtual machine. The tone is neutral and instructional. All visible text is transcribed in the description. alt-text #center](images/network-rule.png "Creating the TCP/8080 firewall rule")
+![Google Cloud Console showing the firewall rule configuration form with allow-tcp-8080 in the Name field, Ingress direction, Allow action, Specified target tags field with allow-tcp-8080, and Source IPv4 ranges set to 0.0.0.0/0. This configuration enables TCP port 8080 traffic for Gerrit access.#center](images/network-rule.png "Creating the TCP/8080 firewall rule")
 
 ## Specify protocols and ports
 
@@ -47,6 +47,6 @@ Next, configure the protocols and ports for your firewall rule:
 
 This step ensures that only TCP traffic on port 8080 is allowed through the firewall.
 
-![Google Cloud Console showing the Protocols and ports section of the Create firewall rule page. The TCP checkbox is selected and the Ports field contains 8080. The interface is part of a clean, organized web dashboard for configuring firewall settings. Visible text includes Protocols and ports, Specified protocols and ports, TCP, and Ports 8080. The tone is neutral and instructional. alt-text#center](images/network-port.png "Specifying the TCP port to expose")
+![Google Cloud Console showing the Protocols and ports section with TCP checkbox selected and Ports field containing 8080. This ensures only TCP traffic on port 8080 is allowed through the firewall for Gerrit.#center](images/network-port.png "Specifying the TCP port to expose")
 
 Your network firewall rule has now been created. You're ready to continue with VM creation.

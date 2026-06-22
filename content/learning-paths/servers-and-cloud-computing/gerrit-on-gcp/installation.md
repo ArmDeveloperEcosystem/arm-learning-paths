@@ -72,6 +72,6 @@ http://my_vm_public_ip_address:8080
 
 You should see output similar to this:
 
-![Gerrit Dashboard alt-text#center](images/gerrit-dashboard.png "Gerrit Dashboard")
+![Gerrit web console dashboard showing the main interface with navigation menu and project/change options available.#center](images/gerrit-dashboard.png "Gerrit Dashboard")
 
 In the next section, basic performance testing of Gerrit will be performed. 
