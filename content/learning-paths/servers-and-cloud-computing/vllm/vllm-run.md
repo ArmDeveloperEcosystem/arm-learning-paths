@@ -8,11 +8,11 @@ layout: learningpathall
 
 ## Use a model from Hugging Face
 
-vLLM is designed to work seamlessly with models from the Hugging Face Hub.
+vLLM is designed to work with models from the Hugging Face Hub.
 
-The first time you run vLLM, it downloads the required model. This means that you do not have to explicitly download any models. 
+The first time you run vLLM, it downloads the required model. You don't have to explicitly download any models. 
 
-If you want to use a model that requires you to request access or accept the terms, you need to log in to Hugging Face using a token.
+To use a model that requires you to request access or accept terms and conditions, log in to Hugging Face using a token:
 
 ```bash
 huggingface-cli login
@@ -20,15 +20,15 @@ huggingface-cli login
 
 Enter your Hugging Face token. You can generate a token from [Hugging Face Hub](https://huggingface.co/) by clicking your profile on the top right corner and selecting **Access Tokens**. 
 
-You also need to visit the Hugging Face link printed in the login output and accept the terms by clicking the **Agree and access repository** button or filling out the request-for-access form, depending on the model.
+Visit the Hugging Face link printed in the login output and accept the terms and conditions. Click the **Agree and access repository** button or fill out the request-for-access form, depending on the model.
 
-To run batched inference without the need for a login, you can use the `Qwen/Qwen2.5-0.5B-Instruct` model.
+To run batched inference without logging in, use the `Qwen/Qwen2.5-0.5B-Instruct` model.
 
 ## Create a batch script
 
-To run inference with multiple prompts, you can create a simple Python script to load a model and run the prompts. 
+To run inference with multiple prompts, create a Python script to load a model and run the prompts. 
 
-Use a text editor to save the Python script below in a file called `batch.py`:
+Use a text editor to save the following Python script in a file called `batch.py`:
 
 ```python
 import json
@@ -137,4 +137,10 @@ Processed prompts: 100%|██████████████████�
 }
 ```
 
-You can try with other prompts and models such as `meta-llama/Llama-3.2-1B`. Continue to learn how to set up an OpenAI-compatible server.
+## What you've accomplished and what's next
+
+You've now created a Python batch inference script that loads the `Qwen/Qwen2.5-0.5B-Instruct` model from Hugging Face, configures `bfloat16` precision, and sends multiple prompts to vLLM.
+
+You ran the script and confirmed that vLLM starts on the CPU backend, loads the model, processes the prompts, and returns generated text.
+
+Next, you'll set up an OpenAI-compatible server so client applications can send requests to vLLM.

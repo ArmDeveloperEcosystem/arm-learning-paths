@@ -7,12 +7,13 @@ who_is_this_for: This is an introductory topic for software developers and AI en
 
 learning_objectives:
     - Build vLLM from source on an Arm server.
-    - Download a Qwen LLM from Hugging Face.
+    - Use a Qwen LLM from Hugging Face.
     - Run local batch inference using vLLM.
     - Create and interact with an OpenAI-compatible server provided by vLLM on your Arm server.
 
 prerequisites:
-    - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider, or a local Arm Linux computer with at least 8 CPUs and 16 GB RAM.
+    - An [Arm-based Linux instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider, or a local Arm Linux computer running Ubuntu 24.04 with at least 8 CPUs, 16 GB RAM, and 50 GB of disk storage.
+    - A system that includes support for BFloat16.
 
 author: Jason Andrews
 
