@@ -1,7 +1,7 @@
 ---
 # User change
 title: "Store data in Azure Cosmos DB with Azure Stream Analytics"
-description: Store processed telemetry in Azure Cosmos DB by configuring an Azure Stream Analytics output for the IoT pipeline.
+description: Store processed telemetry in Azure Cosmos DB by configuring an Azure Stream Analytics job for the IoT pipeline.
 
 weight: 6
 
