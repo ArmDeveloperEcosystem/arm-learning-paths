@@ -15,6 +15,7 @@ test_images:
 test_link: null
 test_maintenance: false
 title: NoMachine
+description: Install NoMachine and an xfce desktop on remote Arm Linux so you can connect to a graphical development environment.
 tool_install: true
 weight: 1
 ---

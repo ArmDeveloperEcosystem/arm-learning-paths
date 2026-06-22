@@ -1,5 +1,6 @@
 ---
 title: OpenShift CLI (oc)
+description: Install the OpenShift CLI on Ubuntu for Arm or Apple Silicon macOS so you can manage OpenShift and Kubernetes resources from a terminal.
 
 author: Jason Andrews
 

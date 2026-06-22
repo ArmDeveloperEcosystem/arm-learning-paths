@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Sysbox
+description: Install Sysbox on Arm Linux and verify Docker workloads that need system-level container behavior without running a full virtual machine.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:

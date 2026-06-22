@@ -1,5 +1,6 @@
 ---
 title: PowerShell
+description: Install PowerShell on Arm Linux and verify the shell so you can run cross-platform automation commands and scripts.
 minutes_to_complete: 10
 official_docs: https://learn.microsoft.com/en-us/powershell/
 ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=powershell

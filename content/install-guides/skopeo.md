@@ -1,5 +1,6 @@
 ---
 title: Skopeo
+description: Install Skopeo on Ubuntu for Arm and inspect container images so you can work with registries without a local container daemon.
 author: Jason Andrews
 minutes_to_complete: 10
 official_docs: https://github.com/containers/skopeo

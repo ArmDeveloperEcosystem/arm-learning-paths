@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: AVH FVPs on macOS
+description: Run Arm Virtual Hardware Fixed Virtual Platforms on macOS with Docker containers so you can use FVP models from an Apple development machine.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:

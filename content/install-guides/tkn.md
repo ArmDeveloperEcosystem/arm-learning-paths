@@ -1,5 +1,6 @@
 ---
 title: Tekton CLI (tkn)
+description: Install Tekton CLI on Ubuntu for Arm or Apple Silicon macOS so you can create and manage Tekton Pipelines resources from a terminal.
 
 author: Jason Andrews
 official_docs: https://tekton.dev/docs/cli/

@@ -1,5 +1,6 @@
 ---
 title: GitHub Copilot
+description: Install GitHub Copilot in Visual Studio Code on Arm systems and connect it with the Arm MCP Server for Arm-focused development assistance.
 
 author: Pareena Verma
 minutes_to_complete: 10

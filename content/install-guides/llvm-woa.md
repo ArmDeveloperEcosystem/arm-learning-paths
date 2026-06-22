@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: LLVM toolchain for Windows on Arm
+description: Install the native LLVM toolchain for Windows on Arm and verify clang so you can build software directly on Windows Arm devices.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:

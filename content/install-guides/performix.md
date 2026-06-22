@@ -1,5 +1,6 @@
 ---
 title: Arm Performix
+description: Install Arm Performix on a desktop host and connect to remote Arm Linux targets for graphical performance profiling with hardware counters.
 
 additional_search_terms:
   - performix

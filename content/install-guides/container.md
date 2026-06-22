@@ -1,5 +1,6 @@
 ---
 title: Container CLI for macOS
+description: Install Apple Container CLI on Apple Silicon macOS and verify it by building and running Arm Linux containers in lightweight virtual machines.
 author: Rani Chowdary Mandepudi
 minutes_to_complete: 10
 official_docs: https://github.com/apple/container

@@ -1,5 +1,6 @@
 ---
 title: Arm Keil Studio for VS Code
+description: Install Arm Keil Studio extensions for Visual Studio Code and verify the setup for Cortex-M embedded development on desktop hosts.
 
 additional_search_terms:
 - cortex-m

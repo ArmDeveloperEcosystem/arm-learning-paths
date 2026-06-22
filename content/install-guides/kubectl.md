@@ -18,6 +18,7 @@ test_images:
 test_link: null
 test_maintenance: true
 title: Kubectl
+description: Install kubectl on Ubuntu for Arm and verify the Kubernetes CLI so you can run commands against Kubernetes clusters.
 tool_install: true
 weight: 1
 ---

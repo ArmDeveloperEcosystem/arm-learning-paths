@@ -1,5 +1,6 @@
 ---
 title: Claude Code
+description: Install Claude Code on Arm Linux, Apple Silicon macOS, or Windows on Arm so you can use terminal-based AI coding assistance.
 
 author: Pareena Verma
 minutes_to_complete: 10
