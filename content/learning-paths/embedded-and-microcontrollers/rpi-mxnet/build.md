@@ -1,5 +1,4 @@
- ---
-# User change
+---
 title: "Build MXNet"
 
 weight: 3
