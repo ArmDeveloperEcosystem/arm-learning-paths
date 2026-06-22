@@ -1,5 +1,6 @@
 ---
 title: "Install Balena OS on AVH"
+description: Provision a Raspberry Pi 4 instance in Arm Virtual Hardware and install the custom Balena OS image on the virtual device.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

@@ -1,6 +1,7 @@
 ---
 # User change
 title: "About Embedded Programming"
+description: Review embedded programming fundamentals and the hardware and software constraints that shape microcontroller applications.
 
 weight: 2 # 1 is first, 2 is second, etc.
 

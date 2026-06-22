@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Advanced debug with ETM trace"
+description: Use ETM trace in Keil uVision to capture instruction flow and analyze advanced debug behavior.
 
 weight: 5 # 1 is first, 2 is second, etc.
 

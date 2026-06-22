@@ -1,5 +1,6 @@
 ---
 title: Set up the board
+description: Boot and inspect the NXP FRDM i.MX 93 board so it is ready for Linux-based ML development on Arm.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

@@ -1,6 +1,7 @@
 ---
 # User change
 title: Prepare development environment
+description: Install Anaconda and prepare the Python environment for training and deploying the STM32 TensorFlow model.
 
 weight: 2 # 1 is first, 2 is second, etc.
 

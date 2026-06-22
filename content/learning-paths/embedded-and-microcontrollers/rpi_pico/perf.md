@@ -1,6 +1,7 @@
 ---
 # User change
 title: "How do I measure RPi Pico Application Performance?"
+description: Build a Raspberry Pi Pico application and measure its execution performance on the microcontroller.
 
 weight: 4 # 1 is first, 2 is second, etc.
 

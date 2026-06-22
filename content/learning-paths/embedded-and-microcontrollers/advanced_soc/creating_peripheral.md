@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Create a custom AXI4 Peripheral" 
+description: Create an AXI4-Lite peripheral in Vivado and define the registers and IP package used by the custom Zynq design.
 
 weight: 3 # 1 is first, 2 is second, etc.
 

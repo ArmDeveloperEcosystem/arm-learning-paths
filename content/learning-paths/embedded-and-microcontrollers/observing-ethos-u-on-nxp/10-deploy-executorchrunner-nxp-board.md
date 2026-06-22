@@ -1,5 +1,6 @@
 ---
 title: Deploy and test on FRDM-IMX93
+description: Deploy the ExecuTorch runner to the NXP FRDM i.MX 93 board and test inference on the Cortex-M33 with Ethos-U acceleration.
 weight: 11
 
 ### FIXED, DO NOT MODIFY

@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Build a simple PyTorch model"
+description: Build a small PyTorch model and prepare it for ExecuTorch deployment on the Corstone-320 FVP.
 
 weight: 7 # 1 is first, 2 is second, etc.
 

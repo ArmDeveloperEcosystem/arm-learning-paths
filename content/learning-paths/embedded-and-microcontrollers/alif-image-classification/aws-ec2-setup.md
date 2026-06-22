@@ -1,5 +1,6 @@
 ---
 title: Compile the model on an Arm cloud instance
+description: Set up an Arm-based AWS EC2 instance to compile the neural network model used by the Alif Ensemble image classification firmware.
 weight: 3
 
 layout: "learningpathall"

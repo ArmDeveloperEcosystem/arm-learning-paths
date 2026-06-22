@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Build and install ExecuTorch"
+description: Build and install ExecuTorch components needed to generate and run models for the NXP FRDM i.MX 93 target.
 
 weight: 7 # 1 is first, 2 is second, etc.
 

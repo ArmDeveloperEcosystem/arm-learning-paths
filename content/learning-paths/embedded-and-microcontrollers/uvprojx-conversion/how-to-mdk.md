@@ -1,5 +1,6 @@
 ---
 title: Using µVision
+description: Convert a uVision project inside Keil MDK and prepare it for CMSIS-Toolbox based workflows.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

@@ -1,5 +1,6 @@
 ---
 title: Write the CMSIS-DSP Q15 implementation
+description: Implement the voice activity detector with CMSIS-DSP Q15 functions and compare it with the Python prototype.
 weight: 7
 
 ### FIXED, DO NOT MODIFY
