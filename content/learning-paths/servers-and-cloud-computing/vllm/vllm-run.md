@@ -1,5 +1,6 @@
 ---
 title: Run batch inference using vLLM
+description: Use vLLM to load a Qwen model from Hugging Face and run batch inference prompts on an Arm server.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

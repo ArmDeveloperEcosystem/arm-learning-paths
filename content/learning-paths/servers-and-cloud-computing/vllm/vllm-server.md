@@ -1,5 +1,6 @@
 ---
 title: Run an OpenAI-compatible server
+description: Start a local vLLM OpenAI-compatible server on Arm Linux and send a chat completion request with curl.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

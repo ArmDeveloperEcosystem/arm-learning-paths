@@ -1,5 +1,6 @@
 ---
 title: Build a vLLM from source code
+description: Prepare an Arm Ubuntu server for vLLM by checking BFloat16 support, installing dependencies, and building the CPU backend from source.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
