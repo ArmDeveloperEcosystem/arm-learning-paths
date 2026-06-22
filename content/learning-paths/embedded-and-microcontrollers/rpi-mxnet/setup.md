@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Install a Raspberry Pi OS file system"
+description: Prepare a Raspberry Pi OS image on an Arm Linux server by resizing, mounting, and entering the file system with chroot for an MXNet build.
 
 weight: 2
 
@@ -160,4 +161,3 @@ sudo chroot /mnt /bin/bash
 The bash shell is now inside the Raspberry Pi file system. It runs as if this is a Raspberry Pi and the file system is the same as if it was being done on a Raspberry Pi board. 
 
 Continue to the next section to build MXNet, an example C++ application. 
-
