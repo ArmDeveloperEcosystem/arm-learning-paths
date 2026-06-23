@@ -1,5 +1,5 @@
 ---
-title: Understand the architecture of the ML image classification application 
+title: Understand the architecture of the machine learning application 
 description: Review how the Topo Template deploys a Cortex-A web application, Cortex-M33 firmware, and Ethos-U65 NPU acceleration for image classification on NXP FRDM i.MX 93.
 weight: 2
 
@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## What you'll deploy
 
-[Topo](https://github.com/arm/topo) is an open-source command-line tool developed by Arm that you can use to deploy projects to an Arm-based Linux target over SSH. Topo builds container images on the host, transfers them to the target, and starts the services on the target. Topo Templates are the standardized format by which projects are deployed with Topo.
+[Topo](https://github.com/arm/topo) is an open-source command-line tool developed by Arm that you can use to deploy projects to an Arm-based Linux target over SSH. Topo builds container images on the host, transfers them to the target, and starts the services on the target. Topo Templates are the standardized format for deploying projects with Topo.
 
 In this Learning Path, you'll deploy the [topo-imx93-npu-deployment](https://github.com/Arm-Examples/topo-imx93-npu-deployment) Topo Template to an NXP FRDM i.MX 93 board, and understand how this Topo Template was created.
 

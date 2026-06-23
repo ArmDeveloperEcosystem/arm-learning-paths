@@ -14,11 +14,11 @@ In this section, you'll build the `topo-imx93-npu-deployment` Topo Template star
 - a Cortex-A web application that prepares images, writes model and tensor data into shared memory, and sends inference commands over `RPMsg`
 - a Cortex-M33 ExecuTorch runner firmware project for the FRDM i.MX 93
 
-You will combine those sources into one repository, then make the repository a normal Compose project, and only then add the Topo metadata and Remoteproc Runtime services.
+You'll combine those sources into one repository, then make the repository a normal Compose project. Then, you'll add the Topo metadata and Remoteproc Runtime services.
 
 ## Create the repository from the base projects
 
-You'll copy the original base projects from the Topo Template. 
+Start by copying the original base projects from the Topo Template. 
 
 Clone the Topo Template Format repository for the validation schema, clone the original Topo Template for the source files, and start a new empty repository:
 
@@ -58,7 +58,7 @@ cp -R ../topo-imx93-npu-deployment/licenses .
 cp ../topo-imx93-npu-deployment/.gitignore .
 ```
 
-You now have two sets of source code, combined into one repository. It's not a Compose project and it's not a Topo Template. 
+You have two sets of source code combined into one repository. It's not a Compose project and it's not a Topo Template. 
 
 You'll now create a Compose project and Topo Template around the source code.
 
@@ -67,7 +67,7 @@ The Compose project provides the container build and runtime structure. A Docker
 - `webapp/Dockerfile` builds the Flask image.
 - `webapp/compose.yaml` keeps the web app's build context and Linux runtime settings close to the web app source.
 - `executorch-runner/Dockerfile` builds the ExecuTorch `.pte` model and Cortex-M33 runner ELF through multi-stage Docker builds.
-- the root `compose.yaml` is the Template entry point. It combines the web app, artifact build services, the Remoteproc Runtime service, and the root-level `x-topo` metadata.
+- the root `compose.yaml` is the Topo Template entry point. It combines the web app, artifact build services, the Remoteproc Runtime service, and the root-level `x-topo` metadata.
 
 For a general introduction to Compose projects, services, and the `compose.yaml` file, see Docker's [How Compose works](https://docs.docker.com/compose/intro/compose-application-model/) documentation.
 
@@ -151,7 +151,7 @@ services:
         published: "3001"
 ```
 
-At this point, Compose can build and run the Cortex-A web application as a normal Linux container. The image runs `webapp/src/app.py`, packages the Jinja templates from `webapp/src/templates/`, the static assets from `webapp/src/static/`, and the ImageNet labels from `webapp/src/data/imagenet_classes.txt`. The container listens on port `3000`, and Compose publishes it on host port `3001` unless you set `WEBAPP_PORT` to another value.
+At this point, Compose can build and run the Cortex-A web application as a normal Linux container. The image runs `webapp/src/app.py`. It packages the Jinja templates from `webapp/src/templates/`, the static assets from `webapp/src/static/`, and the ImageNet labels from `webapp/src/data/imagenet_classes.txt`. The container listens on port `3000`, and Compose publishes it on host port `3001` unless you set `WEBAPP_PORT` to another value.
 
 ## Add the ExecuTorch artifact pipeline
 
@@ -317,7 +317,7 @@ x-topo:
 
 The `features` value tells Topo that this template requires `remoteproc-runtime` support on the target. This is useful when checking for project compatibility with the `topo templates --target <target>` command.
 
-The `args` entries describe configurable build inputs. Compose consumes those values through the `cache_from` interpolation you added earlier:
+The `args` entries describe configurable build inputs. Compose consumes those values through the `cache_from` interpolation that you added earlier:
 
 ```output
 cache_from:
@@ -326,7 +326,7 @@ cache_from:
 
 The root `webapp.build.args` block also makes the Topo-provided values visible in the Compose build model while preserving the `webapp/` build context inherited through `extends`.
 
-Keep runtime settings such as `WEBAPP_PORT` as normal Compose interpolation unless you intentionally want Topo to collect them as Template setup arguments.
+Keep runtime settings such as `WEBAPP_PORT` as normal Compose interpolation unless you intentionally want Topo to collect them as Topo Template setup arguments.
 
 ## (Optional) Use an Agent Skill to add the Topo metadata
 

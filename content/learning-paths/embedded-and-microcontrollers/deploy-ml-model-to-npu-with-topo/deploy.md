@@ -55,9 +55,9 @@ topo health --target <user>@<target-ip>
 
 ## Reserve memory in the device tree
 
-The web application and Cortex-M33 firmware exchange data through reserved physical memory. The target device tree must reserve memory for the model/input buffer and for the Ethos-U65. This prevents Linux from allocating memory that the firmware and Ethos-U65 access by physical address. 
+The web application and Cortex-M33 firmware exchange data through reserved physical memory. The target device tree must reserve memory for the model/input buffer and for the Ethos-U65. This prevents Linux from allocating memory that the firmware and Ethos-U65 need to access by physical address. 
 
-You're now going to modify the device tree and reboot the target so that these modifications take effect.
+You'll now modify the device tree and reboot the target so that these modifications take effect. 
 
 {{% notice Warning %}}
 Back up the board's original device tree before modifying it. The exact boot partition can differ between Linux images, so check the paths on your board before copying files.
@@ -73,7 +73,7 @@ dtc -I dtb -O dts -o devicetree/live.dts devicetree/live.dtb
 
 2. Open `devicetree/live.dts` in a text editor of your choice.
 
-3. Under `remoteproc-cm33`, add the CM33 power domain if it is not already present:
+3. Under `remoteproc-cm33`, add the CM33 power domain if it's not already present:
 
 ```dts
 power-domains = <0x61>;
@@ -88,7 +88,7 @@ model@c0000000 {
 };
 ```
 
-5. Update the Ethos-U reserved-memory node so it is reserved and not reusable:
+5. Update the Ethos-U reserved-memory node so it's reserved and not reusable:
 
 ```dts
 ethosu_region@A8000000 {
@@ -145,6 +145,10 @@ topo clone https://github.com/Arm-Examples/topo-imx93-npu-deployment.git
 
 Topo prompts for optional build cache image arguments. Accept the defaults unless you have your own cache images.
 
+{{% notice Note %}}
+If you build without cache images, the first build can take a long time and requires about 25 GB of free disk space. The first build involves downloading and building ExecuTorch, the Arm GNU toolchain, MCUX SDK components, RPMsg-Lite, and the Cortex-M33 runner sources. Later builds are faster when Docker can reuse local cache layers or import the configured GHCR cache layers.
+{{% /notice %}}
+
 Then `cd` into the correct directory:
 
 ```bash
@@ -156,10 +160,6 @@ Or:
 ```bash
 cd new-topo-npu-template
 ```
-
-{{% notice Note %}}
-If Docker doesn't pull from the cache, the first build can take a long time and requires about 25 GB of free disk space. It downloads and builds ExecuTorch, the Arm GNU toolchain, MCUX SDK components, RPMsg-Lite, and the Cortex-M33 runner sources. Later builds are faster when Docker can reuse local cache layers or import the configured GHCR cache layers.
-{{% /notice %}}
 
 Deploy the project to your target:
 
@@ -212,8 +212,6 @@ The application shows:
 - board prerequisite checks
 - classification results
 - an expandable analysis section with runtime details
-
-The following screenshot shows the expected application user interface:
 
 ![Screenshot of the web interface running on an Arm-based target, showing an image and the model response. This confirms successful deployment and provides a visual reference for the expected result.#center](topo_npu_classifier.png "Image classification web app showing correctly classified German Shepherd")
 

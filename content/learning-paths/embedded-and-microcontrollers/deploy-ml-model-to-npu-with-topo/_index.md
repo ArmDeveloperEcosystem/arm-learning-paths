@@ -1,5 +1,5 @@
 ---
-title: Build and deploy an ML application to the Ethos-U65 NPU on NXP FRDM i.MX 93 with Topo
+title: Deploy a machine learning application to the Arm Ethos-U65 NPU on NXP FRDM i.MX 93 with Topo
 
 draft: true
 cascade:
@@ -12,16 +12,16 @@ minutes_to_complete: 60
 who_is_this_for: This is an introductory topic for embedded/edge software developers who want to deploy machine learning workloads to heterogeneous Arm-based Linux targets using Topo, including leveraging Arm Ethos-U NPUs.
 
 learning_objectives:
-    - Understand how Topo deploys an application that spans Cortex-A, Cortex-M, and Ethos-U
+    - Explain how Topo deploys an application that spans Cortex-A, Cortex-M, and Ethos-U
     - Deploy the topo-imx93-npu-deployment Template, which operates across Cortex-A, Cortex-M, and Ethos-U, to perform image classification using an ExecuTorch MobileNetV2 model
-    - Understand how the Template is bootstrapped from Compose services, Remoteproc Runtime metadata, and Topo arguments and follow this process yourself
+    - Describe how the Template is bootstrapped from Compose services, Remoteproc Runtime metadata, and Topo arguments and follow this process yourself
     - Understand how to take similar projects and create Topo Templates, including using Agent Skills
 
 prerequisites:
     - A host machine (x86 or Arm) with Linux, macOS, or Windows
     - An NXP FRDM i.MX 93 target board with Linux setup, accessible over SSH with root access. To do this, see [Use Linux on the NXP FRDM i.MX 93 board](https://learn.arm.com/learning-paths/embedded-and-microcontrollers/linux-nxp-board/).
     - Docker installed on the host and target. For installation steps, see [Install Docker](https://learn.arm.com/install-guides/docker/).
-    - At least 25 GB of free disk space on the host if you are building without cache images.
+    - At least 25 GB of free disk space on the host if you're building without cache images.
     - The Device Tree Compiler (`dtc`) installed on the host.
     - lscpu installed on the target (pre-installed on most Linux distributions)
     - Topo installed on the host. For installation steps, see [Deploy containerized workloads to Arm-based Linux targets with Topo](https://learn.arm.com/learning-paths/cross-platform/deploy-containerized-workloads-with-topo/).
