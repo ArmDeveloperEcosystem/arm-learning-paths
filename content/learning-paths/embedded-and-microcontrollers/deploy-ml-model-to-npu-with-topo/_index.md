@@ -26,7 +26,7 @@ prerequisites:
     - lscpu installed on the target (pre-installed on most Linux distributions)
     - Topo installed on the host. For installation steps, see [Deploy containerized workloads to Arm-based Linux targets with Topo](https://learn.arm.com/learning-paths/cross-platform/deploy-containerized-workloads-with-topo/).
     - Basic familiarity with containers, SSH, and CLI tools
-    - (Optional) Access to an agent, such as Codex, or Claude Code
+    - (Optional) Access to an agent, such as Codex or Claude Code
 
 author: Tomas Agustin Gonzalez Orlando
 
