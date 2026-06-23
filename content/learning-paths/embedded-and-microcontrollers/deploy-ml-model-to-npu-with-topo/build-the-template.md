@@ -332,7 +332,7 @@ Keep runtime settings such as `WEBAPP_PORT` as normal Compose interpolation unle
 
 The [Topo Template Format](https://github.com/arm/topo-template-format) repository includes public authoring skills for agents that support skill installation:
 
-- `topo-template-context`: provides Topo and Topo Template reference context for `x-topo` metadata, schema, docs, and CLI Template behavior.
+- `topo-template-context`: provides Topo and Topo Template reference context for `x-topo` metadata, schema, docs, and CLI template behavior.
 - `topo-template-bootstrap`: converts a Compose repository into a Topo Template by adding or improving `compose.yaml` and `x-topo` metadata.
 - `topo-template-lint`: reviews a Topo Template for schema correctness, metadata consistency, deployment success messages, and build argument wiring.
 
