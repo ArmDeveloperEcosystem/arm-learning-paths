@@ -1,5 +1,10 @@
 ---
 title: Deploy Gerrit on Google Cloud C4A
+
+draft: true
+cascade:
+    draft: true
+
 description: Learn how to install and configure Gerrit on Google Cloud Axion C4A Arm64 instances and benchmark its performance
 minutes_to_complete: 30
 
@@ -19,7 +24,7 @@ author: Doug Anson
 
 ##### Tags
 skilllevels: Introductory
-subjects: Databases
+subjects: CI-CD
 cloud_service_providers:
   - Google Cloud
 
@@ -43,7 +48,7 @@ further_reading:
 
   - resource:
       title: Gerrit documentation
-      link: https://gerrit-review.googlesource.com/Documentation/intro-gerrit-walkthrough-github.html
+      link: https://gerrit-review.googlesource.com/Documentation/
       type: documentation
 
 weight: 1
