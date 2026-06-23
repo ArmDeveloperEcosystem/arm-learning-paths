@@ -29,7 +29,7 @@ Use this skill when a Learning Path needs a structural review. Focus on whether 
    - Prefer direct relevance, Arm Learning Paths, required tools, foundation knowledge, and logical next steps.
    - Avoid link piles that pull readers away from the task.
 6. Review recap and transition sections:
-   - Include concise recap and forward-looking transition at major instructional boundaries.
+   - Include concise recap and forward-looking transition at major instructional boundaries. Do not treat a transition sentence alone as a recap. Note the absence of a transition as a finding. 
    - Use `what you've learned` for conceptual sections and `what you've accomplished` for task sections.
    - Avoid repeating earlier content verbatim.
 7. If the Learning Path demonstrates Arm-specific performance features, apply the performance integrity checks.
