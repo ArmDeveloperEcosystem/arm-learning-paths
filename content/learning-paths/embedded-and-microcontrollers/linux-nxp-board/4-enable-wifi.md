@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Transfer files to the board"
+description: Transfer files to the NXP FRDM i.MX 93 board over the network using WiFi and secure copy.
 
 weight: 4 # 1 is first, 2 is second, etc.
 

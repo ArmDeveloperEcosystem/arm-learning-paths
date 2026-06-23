@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Control Arm Virtual Hardware with API"
+description: Use the Arm Virtual Hardware API from GitHub Actions to create, control, and clean up virtual devices during Matter CI workflows.
 
 weight: 5 # 1 is first, 2 is second, etc.
 

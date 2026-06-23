@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Create Azure IoT Hub"
+description: Create an Azure IoT Hub and configure the device connection details needed for streaming telemetry from Arm devices.
 
 weight: 3
 

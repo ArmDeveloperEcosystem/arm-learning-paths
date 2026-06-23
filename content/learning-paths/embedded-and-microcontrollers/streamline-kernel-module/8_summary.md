@@ -1,5 +1,6 @@
 ---
 title: Summary
+description: Summarize the kernel module profiling workflow and the Streamline techniques used to analyze Linux drivers.
 weight: 9
 
 ### FIXED, DO NOT MODIFY

@@ -1,7 +1,6 @@
 ---
 title: Optimize an Adler-32 checksum function with SVE intrinsics using the Arm MCP server
 
-
 description: Use the Arm MCP server with an AI coding assistant to incrementally optimize a scalar C Adler-32 checksum function using SVE intrinsics on Arm Neoverse servers.
 
 minutes_to_complete: 45
@@ -21,6 +20,10 @@ prerequisites:
   - Basic familiarity with C programming
 
 author: Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 skilllevels: Introductory
 subjects: Performance and Architecture
@@ -62,7 +65,6 @@ further_reading:
         title: Arm C Language Extensions for SVE
         link: https://developer.arm.com/documentation/100987/latest/
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

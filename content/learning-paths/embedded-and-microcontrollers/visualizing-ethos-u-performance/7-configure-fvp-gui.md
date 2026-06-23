@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Enable GUI and deploy a model on Corstone-320 FVP"
+description: Enable the Corstone-320 FVP graphical interface so you can visualize model execution while inference runs.
 
 weight: 7 # 1 is first, 2 is second, etc.
 

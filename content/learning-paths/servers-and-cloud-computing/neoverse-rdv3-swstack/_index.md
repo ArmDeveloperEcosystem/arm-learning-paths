@@ -12,7 +12,7 @@ learning_objectives:
     - Interpret boot logs to verify bring-up and diagnose boot-stage issues
     - Modify platform control firmware (for example, SCP/MCP) and validate changes via pre-silicon simulation
     - Launch a dual-chip RD-V3-R1 simulation and verify AP/MCP coordination
-   
+
 prerequisites:
     - Access to an Arm Neoverse-based Linux machine (cloud or local) with at least 80 GB of free storage
     - Familiarity with Linux command-line tools and basic scripting
@@ -22,6 +22,10 @@ prerequisites:
 author:
     - Odin Shen
     - Ann Cheng
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -54,10 +58,10 @@ further_reading:
         link: https://git.gitlab.arm.com/infra-solutions/reference-design/infra-refdesign-manifests
         type: gitlab    
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

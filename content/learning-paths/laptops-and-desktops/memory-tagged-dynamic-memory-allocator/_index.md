@@ -18,6 +18,10 @@ prerequisites:
 
 author: David Spickett
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
@@ -30,13 +34,11 @@ tools_software_languages:
 operatingsystems:
 - Linux
 
-
 further_reading:
     - resource:
         title: LLSoftSecBook Chapter on Stack Buffer Overflows
         link: https://llsoftsec.github.io/llsoftsecbook/#stack-buffer-overflows
         type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

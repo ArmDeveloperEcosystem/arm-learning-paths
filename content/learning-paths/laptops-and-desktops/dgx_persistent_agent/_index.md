@@ -19,6 +19,10 @@ prerequisites:
 
 author: Odin Shen
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Advanced
 subjects: ML
@@ -48,7 +52,6 @@ further_reading:
         title: Unlock quantized LLM performance on Arm-based NVIDIA DGX Spark
         link: /learning-paths/laptops-and-desktops/dgx_spark_llamacpp/
         type: Learning Path
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

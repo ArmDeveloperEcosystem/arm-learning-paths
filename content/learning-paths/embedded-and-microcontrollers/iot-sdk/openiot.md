@@ -1,6 +1,7 @@
 ---
 # User change
 title: Build and run Open-IoT-SDK examples
+description: Build Open-IoT-SDK examples and run them on Arm Virtual Hardware to validate the IoT software stack.
 
 weight: 2 # 1 is first, 2 is second, etc.
 

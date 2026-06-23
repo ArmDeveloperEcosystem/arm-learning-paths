@@ -7,7 +7,6 @@ minutes_to_complete: 90
 
 who_is_this_for: This Learning Path is for developers, ML practitioners, and game developers interested in building on-device AI applications, including voice interfaces, real-time interactions with non-player characters (NPCs), and edge AI systems powered by LLMs on Arm platforms.
 
-
 learning_objectives:
     - Build a voice-to-LLM pipeline using Whisper and llama.cpp.
     - Train a voice sentiment classification model using HuBERT on the RAVDESS dataset.
@@ -20,6 +19,10 @@ prerequisites:
     - Basic Python and command-line knowledge.
 
 author: Bhanu Arya
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -61,3 +64,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

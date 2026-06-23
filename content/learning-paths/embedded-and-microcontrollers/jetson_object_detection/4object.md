@@ -1,5 +1,6 @@
 ---
 title: Detect objects in video and images
+description: Run object detection on images and live video with Jetson Orin Nano and verify DetectNet output.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

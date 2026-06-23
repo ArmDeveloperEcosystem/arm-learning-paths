@@ -1,5 +1,6 @@
 ---
 title: Understand pqm4 and post-quantum cryptography
+description: Understand pqm4, post-quantum cryptography, and how the library benchmarks algorithms on Arm Cortex-M4.
 weight: 2
 layout: learningpathall
 ---

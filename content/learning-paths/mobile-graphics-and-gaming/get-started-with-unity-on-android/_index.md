@@ -17,6 +17,10 @@ prerequisites:
 
 author: Joshua Marshall-Law
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: Gaming
@@ -28,14 +32,11 @@ tools_software_languages:
 operatingsystems:
     - Android
 
-
 further_reading:
     - resource:
         title: Profiler overview 
         link: https://docs.unity3d.com/Manual/Profiler.html
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
@@ -43,3 +44,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -8,11 +8,15 @@ who_is_this_for: This is an introductory topic for developers who want to gain s
 
 learning_objectives: 
     - Run an example C program to gain an introductory understanding of MTE
-    
+
 prerequisites:
     - An AArch64 Linux development machine. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
 
 author: Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ##### Tags
 
@@ -43,12 +47,10 @@ further_reading:
         link: https://youtu.be/Ja9pmZ2NqKE
         type: video
 
-
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

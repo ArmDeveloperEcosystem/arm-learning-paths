@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Porting analysis" 
+description: Analyze source code, dependencies, and build settings to identify issues before porting an application to Arm.
 
 weight: 3 # 1 is first, 2 is second, etc.
 

@@ -1,5 +1,6 @@
 ---
 title: Understand ExecuTorch deployment on NXP with Ethos-U
+description: Understand the ExecuTorch and Ethos-U deployment flow used to run accelerated inference on the NXP FRDM i.MX 93 board.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

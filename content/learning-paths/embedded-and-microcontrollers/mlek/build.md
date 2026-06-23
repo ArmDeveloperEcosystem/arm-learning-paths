@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Build the ML Evaluation Kit examples"
+description: Build ML Evaluation Kit examples for the selected target so they are ready to run on Arm virtual hardware.
 
 weight: 2 # 1 is first, 2 is second, etc.
 

@@ -13,10 +13,14 @@ learning_objectives:
 
 prerequisites:
     - A [Google Cloud account](https://console.cloud.google.com/). Create an account if needed.
-    - A computer with [Terraform](/install-guides/terraform/) installed.
-    - A computer with [Google Cloud CLI](/install-guides/gcloud/) installed.
+    - A computer with [Terraform](/install-guides/terraform) installed.
+    - A computer with [Google Cloud CLI](/install-guides/gcloud) installed.
 
 author: Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ##### Tags
 skilllevels: Introductory
@@ -49,8 +53,8 @@ further_reading:
         link: https://cloud.google.com/solutions/connecting-securely#bastion
         type: documentation
 
-
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # Indicates this should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+
