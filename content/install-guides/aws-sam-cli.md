@@ -1,5 +1,6 @@
 ---
 title: AWS SAM CLI
+description: Install AWS SAM CLI on Ubuntu for Arm and test the setup so you can build, test, and deploy serverless applications locally.
 
 author: Jason Andrews
 minutes_to_complete: 15
@@ -174,4 +175,3 @@ REPORT RequestId: 513dbd6f-7fc0-4212-ae13-a9a4ce2f21f4	Init Duration: 0.26 ms	Du
 ```
 
 You are ready to use the AWS SAM CLI to build more complex functions and deploy them into AWS. Make sure to select `arm64` as the architecture for your Lambda functions.
-

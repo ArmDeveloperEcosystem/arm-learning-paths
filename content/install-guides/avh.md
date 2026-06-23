@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Arm Virtual Hardware
+description: Access Arm Virtual Hardware Corstone and third-party platforms so you can develop and test embedded software without physical hardware.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:

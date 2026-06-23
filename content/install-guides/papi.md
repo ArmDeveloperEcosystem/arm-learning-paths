@@ -1,5 +1,6 @@
 ---
 title: Performance API (PAPI)
+description: Build and install PAPI on Arm Linux so applications can access hardware performance counters for profiling specific code sections.
 minutes_to_complete: 15
 official_docs: https://github.com/icl-utk-edu/papi/wiki/Downloading-and-Installing-PAPI
 author: Jason Andrews

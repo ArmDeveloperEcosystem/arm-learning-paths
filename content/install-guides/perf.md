@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Perf for Linux on Arm (LinuxPerf)
+description: Install Linux Perf on Arm Linux with a package manager or from source so you can collect hardware and software performance data.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:

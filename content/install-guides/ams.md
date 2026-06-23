@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Arm Performance Studio
+description: Install Arm Performance Studio on Windows, macOS, or Linux to profile Android and Linux applications with Arm performance analysis tools.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
