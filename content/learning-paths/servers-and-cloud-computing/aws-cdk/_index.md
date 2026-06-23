@@ -4,7 +4,7 @@ description: Learn how to define and deploy a containerized application on Arm-b
 
 minutes_to_complete: 45
 
-who_is_this_for: This is an introductory topic for software developers who want to use the AWS Cloud Development Kit (AWS CDK) to deploy applications on Arm-based AWS infrastructure.
+who_is_this_for: This is an introductory topic for software developers who want to use the AWS Cloud Development Kit (AWS CDK) to deploy containerized applications on Arm-based AWS infrastructure.
 
 learning_objectives:
     - Create an example AWS CDK application in JavaScript
