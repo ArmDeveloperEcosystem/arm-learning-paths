@@ -54,7 +54,7 @@ topo health --target <user>@<target-ip>
 
 ## Reserve memory in the device tree
 
-The web application and Cortex-M33 firmware exchange data through reserved physical memory. The target device tree must reserve memory for the model/input buffer and for the Ethos-U65. This prevents Linux from allocating memory that the Cortex-M33 firmware and Ethos-U65 need to access by physical address. 
+The web application and Cortex-M33 firmware exchange data through reserved physical memory. The target device tree must reserve memory for the model/input buffer and for the Ethos-U65. This prevents Linux from allocating memory that the firmware and Ethos-U65 access by physical address. 
 
 You're now going to modify the device tree and reboot the target so that these modifications take effect.
 
@@ -136,7 +136,7 @@ topo health --target <user>@<target-ip>
 
 ## Deploy to the board
 
-You can choose to deploy from the original Topo Template, or from the template you built from scratch. If you've not already cloned the original template, clone it now:
+You can choose to deploy from the original Topo Template, or from the template you built from scratch. If you haven't already cloned the original template, clone it now:
 
 ```bash
 topo clone https://github.com/Arm-Examples/topo-imx93-npu-deployment.git
@@ -157,7 +157,7 @@ cd new-topo-npu-template
 ```
 
 {{% notice Note %}}
-If not pulling from the cache, the first build can take a long time and requires about 25 GB of free disk space. It downloads and builds ExecuTorch, the Arm GNU toolchain, MCUX SDK components, RPMsg-Lite, and the Cortex-M33 runner sources. Later builds are faster when Docker can reuse local cache layers or import the configured GHCR cache layers.
+If Docker doesn't pull from the cache, the first build can take a long time and requires about 25 GB of free disk space. It downloads and builds ExecuTorch, the Arm GNU toolchain, MCUX SDK components, RPMsg-Lite, and the Cortex-M33 runner sources. Later builds are faster when Docker can reuse local cache layers or import the configured GHCR cache layers.
 {{% /notice %}}
 
 Deploy the project to your target:
@@ -212,11 +212,11 @@ The application shows:
 - classification results
 - an expandable analysis section with runtime details
 
-The following is a screenshot of the application user interface:
+The following screenshot shows the expected application user interface:
 
 ![Screenshot of the web interface running on an Arm-based target, showing an image and the model response. This confirms successful deployment and provides a visual reference for the expected result.#center](topo_npu_classifier.png "Image classification web app showing correctly classified German Shepherd")
 
-When you select an image in the browser and click **Classify**, the web application:
+When you choose an image in the browser and select **Classify**, the web application:
 
 1. Resizes and normalizes the image to classify into an input tensor compatible with the [MobileNetV2](https://arxiv.org/abs/1801.04381) model.
 2. Writes the ExecuTorch `.pte` program and input tensor into reserved physical memory.
@@ -228,6 +228,6 @@ Try this out with an image from an ImageNet-supported class.
 
 ## What you've accomplished
 
-You've prepared an FRDM i.MX 93 board for shared-memory NPU inference, deployed the `topo-imx93-npu-deployment` template with Topo, started Cortex-M33 firmware through `remoteproc-runtime`, and used a browser-based application to stage the ExecuTorch `.pte` program and input tensor for MobileNetV2 classification with Ethos-U65 acceleration.
+You've prepared an FRDM i.MX 93 board for shared-memory NPU inference, deployed the `topo-imx93-npu-deployment` template with Topo, and started Cortex-M33 firmware through `remoteproc-runtime`. You used a browser-based application to stage the ExecuTorch `.pte` program and input tensor for MobileNetV2 classification with Ethos-U65 acceleration.
 
 You can now use the deployed application as a reference for your own heterogeneous Arm applications, or adapt the model, firmware runner, web interface, or Topo metadata for another target.

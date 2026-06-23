@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## What you will build
 
-In this section, you'll build the `topo-imx93-npu-deployment` Template starting from two non-Topo, non-Compose projects:
+In this section, you'll build the `topo-imx93-npu-deployment` Topo Template starting from two non-Topo, non-Compose projects:
 
 - a Cortex-A web application that prepares images, writes model and tensor data into shared memory, and sends inference commands over `RPMsg`
 - a Cortex-M33 ExecuTorch runner firmware project for the FRDM i.MX 93
@@ -70,7 +70,11 @@ The Compose project provides the container build and runtime structure. A Docker
 
 For a general introduction to Compose projects, services, and the `compose.yaml` file, see Docker's [How Compose works](https://docs.docker.com/compose/intro/compose-application-model/) documentation.
 
-When you're creating a file for any of the following steps, paste the complete file contents shown. When you're adding or updating part of an existing Compose file for a step, merge the YAML into the existing top-level key shown by the snippet. For example, if a snippet starts with `services:`, add the named service under the existing top-level `services:` map. Don't create a second `services:` block in the same file.
+{{% notice Note %}}
+When you creating a file for any of the following steps, paste the complete file contents as shown.
+
+When you update part of an existing Compose file for a step, merge the YAML into the existing top-level key shown by the snippet. For example, if a snippet starts with `services:`, add the named service under the existing top-level `services:` map. Don't create a second `services:` block in the same file.
+{{% /notice %}}
 
 ## Turn the sources into a Compose project
 
@@ -132,7 +136,7 @@ Check that Compose can read the project:
 docker compose config
 ```
 
-You should see output that includes the resolved `webapp` service:
+The output includes the resolved `webapp` service, and is similar to:
 
 ```output
 services:
@@ -263,7 +267,7 @@ services:
 
 Keep the existing `webapp`, `pte-artifacts`, and `runner-artifacts` services in the same file. This step adds one more service and doesn't replace any of the previous services.
 
-This is the heterogeneous deployment hook. Docker still builds an image, but the service is not started as a Linux userspace process. The runtime `io.containerd.remoteproc.v1` selects Remoteproc Runtime, and the `remoteproc.name` annotation tells the shim to use the i.MX remote processor driver.
+This is the heterogeneous deployment hook. Docker still builds an image, but the service doesn't start as a Linux userspace process. The runtime `io.containerd.remoteproc.v1` selects Remoteproc Runtime, and the `remoteproc.name` annotation tells the shim to use the i.MX remote processor driver.
 
 Update the existing root `webapp` service so it depends on the CM33 runner and passes the cache image values into the build. Keep the existing `extends` block, then add `depends_on` and `build.args` as shown:
 
@@ -284,7 +288,7 @@ services:
 
 The web app is privileged and mounts `/sys` and `/dev` because it checks the device tree, reads remoteproc state through `/sys/class/remoteproc`, talks to `/dev/ttyRPMSG*`, writes shared memory through `/dev/mem`, and checks for `/dev/ethosu0`.
 
-Keep the web app build context in `webapp/compose.yaml`. The root `webapp.build.args` block above supplies only Topo-collected build arguments. It shouldn't replace the extended build context and Dockerfile from `webapp/compose.yaml`.
+Keep the web app build context in `webapp/compose.yaml`. The root `webapp.build.args` block supplies only Topo-collected build arguments. It shouldn't replace the extended build context and Dockerfile from `webapp/compose.yaml`.
 
 ## Add Topo metadata and arguments
 
@@ -310,7 +314,7 @@ x-topo:
       default: ghcr.io/arm-examples/topo-imx93-npu-deployment/imx93-runner-build:mcux-v25.09.00-armgcc14.2-ubuntu24.04
 ```
 
-The `features` value tells Topo that this Template requires `remoteproc-runtime` support on the target. This is useful when checking for project compatibility with the `topo templates --target <target>` command.
+The `features` value tells Topo that this template requires `remoteproc-runtime` support on the target. This is useful when checking for project compatibility with the `topo templates --target <target>` command.
 
 The `args` entries describe configurable build inputs. Compose consumes those values through the `cache_from` interpolation you added earlier:
 
@@ -411,4 +415,4 @@ Review these points:
 
 You started with two non-Topo, non-Compose projects, made them a standard Compose project, and then converted that Compose project into a Topo Template. You created the web app image, added artifact builds for the ExecuTorch `.pte` model and Cortex-M33 ELF, packaged the firmware as a Remoteproc Runtime service, and exposed the build cache inputs as Topo arguments.
 
-Next, you'll prepare the FRDM i.MX 93 target, deploy the Template with Topo, and run the image classification application.
+Next, you'll prepare the FRDM i.MX 93 target, deploy the template with Topo, and run the image classification application.

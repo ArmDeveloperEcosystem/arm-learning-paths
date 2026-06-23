@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## What you'll deploy
 
-[Topo](https://github.com/arm/topo) is an open-source command-line tool developed by Arm used to deploy projects to an Arm-based Linux target over SSH. Topo builds container images on the host, transfers them to the target, and starts the services on the target. Topo Templates are the standardized format by which projects are deployed with Topo.
+[Topo](https://github.com/arm/topo) is an open-source command-line tool developed by Arm that you can use to deploy projects to an Arm-based Linux target over SSH. Topo builds container images on the host, transfers them to the target, and starts the services on the target. Topo Templates are the standardized format by which projects are deployed with Topo.
 
 In this Learning Path, you'll deploy the [topo-imx93-npu-deployment](https://github.com/Arm-Examples/topo-imx93-npu-deployment) Topo Template to an NXP FRDM i.MX 93 board, and understand how this Topo Template was created.
 
@@ -22,9 +22,9 @@ Complete the Learning Path [Deploy containerized workloads to Arm-based Linux ta
 
 ## (Optional) Background reading
 
-To learn more about Topo Templates, and how to create a basic Topo Template for a web application, you can optionally complete the introductory [Create and deploy a custom Topo Template](https://learn.arm.com/learning-paths/cross-platform/create-your-own-topo-templates/) Learning Path. 
+To learn more about Topo Templates, and how to create a basic Topo Template for a web application, complete the introductory [Create and deploy a custom Topo Template](https://learn.arm.com/learning-paths/cross-platform/create-your-own-topo-templates/) Learning Path. 
 
-To learn more about the model, firmware, and [Ethos-U65](https://www.arm.com/products/silicon-ip-cpu/ethos/ethos-u65) execution flow foe the underlying NPU example, see the [Deploy ExecuTorch firmware on NXP FRDM i.MX 93 for Ethos-U65 acceleration](https://learn.arm.com/learning-paths/embedded-and-microcontrollers/observing-ethos-u-on-nxp/) Learning Path. 
+To learn more about the model, firmware, and [Ethos-U65](https://www.arm.com/products/silicon-ip-cpu/ethos/ethos-u65) execution flow behind this NPU example, see the [Deploy ExecuTorch firmware on NXP FRDM i.MX 93 for Ethos-U65 acceleration](https://learn.arm.com/learning-paths/embedded-and-microcontrollers/observing-ethos-u-on-nxp/) Learning Path. 
 
 ## What the template does
 
@@ -70,4 +70,4 @@ Browser displays ImageNet top-1 and top-5 results
 
 You now understand that the Topo Template deploys a Cortex-A web application, a Cortex-M33 ExecuTorch runner, and Ethos-U65 NPU acceleration as one heterogeneous application. You've also seen how inference uses reserved memory for the `.pte` program and input tensor, with `RPMsg` carrying commands and results between Cortex-A and Cortex-M33.
 
-Next, you'll review the toolchains and runtime interfaces used by the Template.
+Next, you'll review the toolchains and runtime interfaces used by the Topo Template.

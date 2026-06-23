@@ -12,7 +12,9 @@ The `topo-imx93-npu-deployment` Topo Template combines several toolchains. Topo 
 
 ### ExecuTorch
 
-[ExecuTorch](https://docs.pytorch.org/executorch/stable/index.html) is PyTorch's runtime for deploying PyTorch models to edge devices. By using different backends within ExecuTorch, you can target specific hardware. For example, you can target Ethos-U65 by using the Ethos-U backend. To learn more about how the MobileNetV2 model was exported from PyTorch to ExecuTorch and delegated to the Ethos-U, see [Build ExecuTorch models for Ethos-U65](https://learn.arm.com/learning-paths/embedded-and-microcontrollers/observing-ethos-u-on-nxp/7-build-executorch-pte/).
+[ExecuTorch](https://docs.pytorch.org/executorch/stable/index.html) is PyTorch's runtime for deploying PyTorch models to edge devices. By using different backends within ExecuTorch, you can target specific hardware. For example, you can target Ethos-U65 by using the Ethos-U backend. 
+
+To learn more about how the MobileNetV2 model was exported from PyTorch to ExecuTorch and delegated to the Ethos-U, see [Build ExecuTorch models for Ethos-U65](https://learn.arm.com/learning-paths/embedded-and-microcontrollers/observing-ethos-u-on-nxp/7-build-executorch-pte/).
 
 In this Topo Template, ExecuTorch is used in two places:
 
@@ -29,7 +31,7 @@ The web application includes this `.pte` file in its container image. During inf
 
 The firmware runner is built as `executorch_runner_cm33.elf`.
 
-This firmware runs on the Cortex-M33 core. It waits for commands coming from the Linux web application over `RPMsg`, reads the input image tensors from reserved memory, executes inference through ExecuTorch, and writes classification output back over `RPMsg`.
+This firmware runs on the Cortex-M33 core. It waits for commands coming from the Linux web application over `RPMsg`, reads input image tensors from reserved memory, runs inference through ExecuTorch, and writes classification output back over `RPMsg`.
 
 The Topo Template packages the firmware as the entrypoint of the `cm33-runner` image:
 
@@ -54,7 +56,7 @@ Topo uses `remoteproc-runtime` when deploying the `cm33-runner` service. The dep
 4. `remoteproc-runtime` passes the ELF file to the Linux `remoteproc` driver.
 5. The kernel loads the ELF segments and releases the Cortex-M33.
 
-This is why the target must pass the `Remoteproc Runtime`, `Remoteproc Shim`, and `Subsystem Driver (remoteproc)` checks in `topo health`.
+The target must pass the `Remoteproc Runtime`, `Remoteproc Shim`, and `Subsystem Driver (remoteproc)` checks in `topo health`.
 
 ### RPMsg
 
@@ -73,7 +75,7 @@ The web application checks these ranges at startup through `/proc/device-tree`. 
 
 ### Web application
 
-The `webapp` service is a Python Flask application. It serves the browser UI, preprocesses selected images, stages the .pte program and input tensor in reserved memory, sends inference commands over `RPMsg`, and renders the ImageNet top-1 and top-5 results.
+The `webapp` service is a Python Flask application. The application serves the browser UI and preprocesses selected images. It stages the `.pte` program and input tensor in reserved memory, sends inference commands over `RPMsg`, and renders the ImageNet top-1 and top-5 results.
 
 By default, the service publishes port `3001` on the target and forwards it to container port `3000`.
 
