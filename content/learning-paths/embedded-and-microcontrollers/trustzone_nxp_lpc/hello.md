@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Run TrustZone Hello World example"
+description: Build and run the TrustZone Hello World example on the NXP LPCXpresso55S69 board with Keil MDK.
 
 weight: 2 # 1 is first, 2 is second, etc.
 

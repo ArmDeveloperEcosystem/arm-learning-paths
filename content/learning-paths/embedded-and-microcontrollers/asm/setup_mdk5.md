@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Setting up a Project in Keil MDK (μVision)"
+description: Create and configure a Keil MDK uVision project for the Cortex-M assembly examples.
 
 weight: 5 # 1 is first, 2 is second, etc.
 

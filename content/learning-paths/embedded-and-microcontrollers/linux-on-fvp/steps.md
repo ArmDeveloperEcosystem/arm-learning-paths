@@ -1,5 +1,6 @@
 ---
 title: Configure Trusted Firmware-A build flags to include cpu_ops support
+description: Configure Trusted Firmware-A build flags for cpu_ops support and rebuild the Linux software stack for the FVP.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

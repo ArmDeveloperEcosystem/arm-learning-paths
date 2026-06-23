@@ -1,5 +1,6 @@
 ---
 title: Build a Zephyr application with Workbench for Zephyr
+description: Create and build a Zephyr application with Workbench for Zephyr and prepare it for a supported development board.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

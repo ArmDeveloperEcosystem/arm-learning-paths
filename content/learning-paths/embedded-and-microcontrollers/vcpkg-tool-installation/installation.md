@@ -1,5 +1,6 @@
 ---
 title: Install vcpkg
+description: Install vcpkg and verify the command-line setup used for managing Arm development tools.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

@@ -1,5 +1,6 @@
 ---
 title: Flash firmware onto the microcontroller
+description: Flash YOLO firmware to the Himax WiseEye2 module and verify object detection on the microcontroller.
 weight: 5
 
 ### FIXED, DO NOT MODIFY

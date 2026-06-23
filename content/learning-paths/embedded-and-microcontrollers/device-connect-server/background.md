@@ -1,5 +1,6 @@
 ---
 title: Learn when to use Device Connect server for multi-network deployments
+description: Understand when Device Connect server is useful for multi-network edge deployments and how it extends device-to-device workflows.
 weight: 2
 
 # FIXED, DO NOT MODIFY

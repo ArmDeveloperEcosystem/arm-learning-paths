@@ -1,5 +1,6 @@
 ---
 title: Overview
+description: Review ML Evaluation Kit concepts and the Arm hardware options available for embedded machine learning development.
 
 weight: 2
 

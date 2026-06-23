@@ -1,5 +1,6 @@
 ---
 hide_from_navpane: true
+description: Prepare an Nvidia Jetson device with JetPack and the dependencies required for Edge Impulse and AWS IoT Greengrass.
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

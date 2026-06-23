@@ -1,5 +1,6 @@
 ---
 title: Using Keil Studio
+description: Convert a uVision project to csolution format in Keil Studio and build it with CMSIS-Toolbox.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
