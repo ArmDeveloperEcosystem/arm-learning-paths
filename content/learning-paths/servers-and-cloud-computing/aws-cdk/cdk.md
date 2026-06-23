@@ -38,7 +38,7 @@ cdk deploy
 ```
 By default, the AWS CDK CLI will prompt you to approve IAM-related changes during deployment. 
 
-For the AWS CDK CLI to deploy the application without the need for approval, set the `--require-approval` flag to `never` during deployment:
+If you want the AWS CDK CLI to deploy the application without the need for approval, set the `--require-approval` flag to `never` during deployment:
 
 ```bash
 cdk deploy --require-approval never
@@ -73,7 +73,7 @@ cdk destroy
 ```
 By default, the AWS CDK CLI will prompt you to approve the deletion of `ArmCDKAppStack`.
 
-For the AWS CDK CLI to clean up resources without the need for approval, use the `--force` or `-f` flag:
+If you want the AWS CDK CLI to clean up resources without the need for approval, use the `--force` or `-f` flag:
 
 ```bash
 cdk destroy -f
