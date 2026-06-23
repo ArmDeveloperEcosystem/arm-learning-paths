@@ -45,10 +45,10 @@ cdk deploy --require-approval never
 ```
 
 {{% notice Note %}}
-The deployment can take a couple minutes to complete.
+The deployment can take a few minutes to complete.
 {{% /notice %}}
 
-When the deployment completes, the last couple lines of the output will include a URL to the web server and the load balancer's DNS name:
+When the deployment completes, the final lines of the output will include a URL to the web server and the load balancer's DNS name:
 
 ```output
 Outputs:
