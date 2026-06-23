@@ -63,7 +63,7 @@ You'll now modify the device tree and reboot the target so that these modificati
 Back up the board's original device tree before modifying it. The exact boot partition can differ between Linux images, so check the paths on your board before copying files.
 {{% /notice %}}
 
-1. On your host, create a working directory and dump the live device tree from the target:
+On your host, create a working directory and dump the live device tree from the target:
 
 ```bash
 mkdir -p devicetree
@@ -71,15 +71,13 @@ ssh <user>@<target-ip> 'cat /sys/firmware/fdt' > devicetree/live.dtb
 dtc -I dtb -O dts -o devicetree/live.dts devicetree/live.dtb
 ```
 
-2. Open `devicetree/live.dts` in a text editor of your choice.
-
-3. Under `remoteproc-cm33`, add the CM33 power domain if it's not already present:
+Open `devicetree/live.dts` in a text editor of your choice. Then, under `remoteproc-cm33`, add the CM33 power domain if it's not already present:
 
 ```dts
 power-domains = <0x61>;
 ```
 
-4. Under `reserved-memory`, add the model memory range:
+Under `reserved-memory`, add the model memory range:
 
 ```dts
 model@c0000000 {
@@ -88,7 +86,7 @@ model@c0000000 {
 };
 ```
 
-5. Update the Ethos-U reserved-memory node so it's reserved and not reusable:
+Update the Ethos-U reserved-memory node so it's reserved and not reusable:
 
 ```dts
 ethosu_region@A8000000 {
@@ -99,25 +97,25 @@ ethosu_region@A8000000 {
 };
 ```
 
-6. Add `iomem=relaxed` to `chosen.bootargs`. For example:
+Add `iomem=relaxed` to `chosen.bootargs`. For example:
 
 ```dts
 bootargs = "clk-imx93.mcore_booted console=ttyLP0,115200 earlycon root=/dev/mmcblk1p2 rootwait rw iomem=relaxed";
 ```
 
-7. Return to your host machine terminal and build the patched device tree:
+Return to your host machine terminal and build the patched device tree:
 
 ```bash
 dtc -I dts -O dtb -o devicetree/patched.dtb devicetree/live.dts
 ```
 
-8. Copy it to the board:
+Copy it to the board:
 
 ```bash
 scp devicetree/patched.dtb <user>@<target-ip>:/tmp/patched.dtb
 ```
 
-9. Install it on the board. Adjust the boot partition path if your image uses a different location:
+Install it on the board. Adjust the boot partition path if your image uses a different location:
 
 ```bash
 ssh <user>@<target-ip>
@@ -129,7 +127,7 @@ sync
 reboot
 ```
 
-10. After the board reboots, run the Topo health check again from the host and verify everything is still correct:
+After the board reboots, run the Topo health check again from the host and verify everything is still correct:
 
 ```bash
 topo health --target <user>@<target-ip>
