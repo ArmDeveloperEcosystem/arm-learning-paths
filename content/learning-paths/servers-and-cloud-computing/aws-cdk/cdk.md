@@ -58,7 +58,7 @@ ArmCdkAppStack.MyWebServerServiceURLYYYYYYYY = http://Hello-MyWeb-ZZZZZZZZZZZZZ-
 
 ## Verify application deployment
 
-Open the URL from the deployment output in a web browser of your choice. 
+Open the service URL (`ArmCdkAppStack.MyWebServerServiceURL...`) from the deployment output in a web browser of your choice.
 
 You'll see the following welcome message:
 
