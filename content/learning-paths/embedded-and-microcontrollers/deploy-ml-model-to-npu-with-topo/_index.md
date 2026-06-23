@@ -1,10 +1,6 @@
 ---
 title: Deploy an ML application to the Ethos-U65 NPU on NXP FRDM i.MX 93 with Topo
 
-draft: true
-cascade:
-    draft: true
-
 description: Use Topo to deploy a Cortex-A web application that sends MobileNetV2 image classification requests to Cortex-M33 firmware accelerated by the Ethos-U65 NPU.
 
 minutes_to_complete: 60
