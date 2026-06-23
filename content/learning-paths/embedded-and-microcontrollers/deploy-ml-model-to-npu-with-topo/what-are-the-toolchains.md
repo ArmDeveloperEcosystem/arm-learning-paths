@@ -1,5 +1,6 @@
 ---
 title: Understand the toolchains used in the Topo Template
+description: Identify the build and runtime components that connect ExecuTorch, remoteproc-runtime, RPMsg, reserved memory, and the Flask web application in the Topo Template.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

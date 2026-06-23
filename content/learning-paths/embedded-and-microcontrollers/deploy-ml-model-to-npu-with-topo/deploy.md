@@ -1,5 +1,6 @@
 ---
 title: Clone and deploy the application with Topo
+description: Prepare the NXP FRDM i.MX 93 target, deploy the image classification Topo Template, and validate MobileNetV2 inference through the browser application.
 weight: 5
 
 ### FIXED, DO NOT MODIFY

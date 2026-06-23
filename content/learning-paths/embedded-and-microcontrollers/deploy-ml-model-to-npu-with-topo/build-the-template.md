@@ -1,5 +1,6 @@
 ---
 title: Build the Topo Template from scratch
+description: Create a Topo Template from the web application and Cortex-M33 firmware sources by adding Compose services, build artifacts, remoteproc-runtime metadata, and Topo arguments.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

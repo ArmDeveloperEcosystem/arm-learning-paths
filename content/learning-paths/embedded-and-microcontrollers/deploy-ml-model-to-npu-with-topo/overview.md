@@ -1,5 +1,6 @@
 ---
 title: Understand the architecture of the ML image classification application 
+description: Review how the Topo Template deploys a Cortex-A web application, Cortex-M33 firmware, and Ethos-U65 NPU acceleration for image classification on NXP FRDM i.MX 93.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
