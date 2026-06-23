@@ -2,10 +2,6 @@
 title: Deploy containers on Arm-based compute using Amazon ECS and the AWS CDK
 description: Learn how to define and deploy a containerized application on Arm-based compute using the AWS Cloud Development Kit.
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 45
 
 who_is_this_for: This is an introductory topic for software developers who want to use the AWS Cloud Development Kit (AWS CDK) to deploy applications on Arm-based AWS infrastructure.
