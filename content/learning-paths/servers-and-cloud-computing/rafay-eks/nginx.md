@@ -1,5 +1,6 @@
 ---
 title: Deploy NGINX to the Amazon EKS cluster and clean up
+description: Deploy NGINX to an Amazon EKS cluster on AWS Graviton-based nodes, test in-cluster connectivity, and clean up the Kubernetes and cloud resources.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

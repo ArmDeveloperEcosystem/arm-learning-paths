@@ -1,5 +1,6 @@
 ---
 title: Set up Rafay and AWS access
+description: Install kubectl and rctl, configure Rafay CLI access, and register an AWS cloud credential so Rafay can provision a Graviton-based Amazon EKS cluster.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

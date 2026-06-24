@@ -1,5 +1,6 @@
 ---
 title: Create an Amazon EKS cluster
+description: Create and apply a Rafay cluster manifest to provision an Amazon EKS cluster with an AWS Graviton-based node group, then download kubeconfig and verify the nodes report arm64.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
