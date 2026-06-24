@@ -181,7 +181,7 @@ NAME                            STATUS   ROLES    AGE   VERSION               AR
 ip-192-168-13-74.ec2.internal   Ready    <none>   26m   v1.36.2-eks-93b80c6   arm64
 ```
 
-The `arm64` value in the `ARCH` column confirms that the node is running on an AWS Graviton instance. Your EKS cluster is ready to accept workloads. 
+The `arm64` value in the `ARCH` column confirms that the node is running on an AWS Graviton-based instance. Your EKS cluster is ready to accept workloads. 
 
 ## What you've accomplished and what's next
 
