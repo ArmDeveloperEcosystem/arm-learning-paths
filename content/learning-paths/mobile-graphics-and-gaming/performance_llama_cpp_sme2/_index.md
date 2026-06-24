@@ -1,6 +1,7 @@
 ---
 title: Measure LLM inference performance with KleidiAI and SME2 on Android
-    
+description: Learn how to build llama.cpp with KleidiAI and SME2 support to profile and accelerate LLM inference performance on Android devices.
+
 minutes_to_complete: 40
 
 who_is_this_for: This is an advanced topic for software developers, performance engineers, and AI practitioners 
@@ -18,6 +19,10 @@ prerequisites:
 
 author: Zenon Zhilong Xiu
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Advanced
 subjects: ML
@@ -30,8 +35,6 @@ tools_software_languages:
 operatingsystems:
     - Android
     - Linux
-
-
 
 further_reading:
     - resource:
@@ -50,8 +53,6 @@ further_reading:
         title: Profile llama.cpp performance with Arm Streamline and KleidiAI LLM kernels
         link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/llama_cpp_streamline/
         type: website
-        
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
@@ -59,3 +60,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -1,6 +1,8 @@
 ---
 title: Build Robot Simulation and Reinforcement Learning Workflows with Isaac Sim and Isaac Lab on DGX Spark
 
+description: Learn how to build and deploy high-fidelity robotic simulations and reinforcement learning pipelines using Isaac Sim and Isaac Lab on Arm-based NVIDIA DGX Spark with Grace-Blackwell architecture.
+
 minutes_to_complete: 90
 
 who_is_this_for: This is an advanced topic for robotics developers, simulation engineers, and AI researchers who want to run high-fidelity robotic simulations and reinforcement learning (RL) pipelines using NVIDIA Isaac Sim and Isaac Lab on Arm-based NVIDIA DGX Spark system powered by the Grace–Blackwell (GB10) architecture.
@@ -22,6 +24,10 @@ author:
     - Odin Shen
     - Asier Arranz
     - Raymond Lo
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -65,3 +71,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

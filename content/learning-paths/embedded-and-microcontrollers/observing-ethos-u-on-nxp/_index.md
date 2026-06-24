@@ -1,6 +1,8 @@
 ---
 title: Deploy ExecuTorch firmware on NXP FRDM i.MX 93 for Ethos-U65 acceleration
 
+description: Learn how to bring up ExecuTorch executor_runner firmware on the NXP FRDM i.MX 93 Cortex-M33 using Linux RemoteProc, compile .pte models for Ethos-U65, and run inference with NPU acceleration.
+
 minutes_to_complete: 120
 
 who_is_this_for: This is an introductory topic for developers and data scientists new to TinyML who want to observe ExecuTorch performance on a physical device.
@@ -16,9 +18,13 @@ prerequisites:
     - Basic knowledge of Machine Learning concepts
     - A host computer to compile ExecuTorch libraries
 
-author: 
-- Waheed Brown
-- Fidel Makatia Omusilibwa
+author:
+    - Waheed Brown
+    - Fidel Makatia Omusilibwa
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -53,9 +59,6 @@ further_reading:
         title: Arm Developers Guide for Cortex-M Processors and Ethos-U NPU
         link: https://developer.arm.com/documentation/109267/0101
         type: documentation
-
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

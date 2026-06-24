@@ -17,18 +17,18 @@ In this section you will learn about different options to install, configure and
 There are numerous ways to deploy PostgreSQL on Arm. Bare metal, cloud VMs, or the various SQL services that cloud providers offer. If you already have an Arm system, you can skip over this subsection and continue reading.
 
 * Arm Cloud VMs
-  * [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp) learning path
+  * [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) learning path
   * [AWS EC2](https://aws.amazon.com/ec2/)
-    * [Deploy Arm Instances on AWS using Terraform](/learning-paths/servers-and-cloud-computing/aws-terraform) learning path
+    * [Deploy Arm Instances on AWS using Terraform](/learning-paths/servers-and-cloud-computing/aws-terraform/) learning path
   * [Azure VMs](https://azure.microsoft.com/en-us/products/virtual-machines/)
-    * [Deploy Arm virtual machines on Azure with Terraform](/learning-paths/servers-and-cloud-computing/azure-terraform) learning path
+    * [Deploy Arm virtual machines on Azure with Terraform](/learning-paths/servers-and-cloud-computing/azure-terraform/) learning path
   * [GCP Compute Engine](https://cloud.google.com/compute)
-    * [Deploy Arm virtual machines on Google Cloud Platform (GCP) using Terraform](/learning-paths/servers-and-cloud-computing/gcp) learning path
+    * [Deploy Arm virtual machines on Google Cloud Platform (GCP) using Terraform](/learning-paths/servers-and-cloud-computing/gcp/) learning path
   * [Oracle Cloud Infrastructure](https://www.oracle.com/cloud/)
 * MySQL services
   * [AWS RDS](https://aws.amazon.com/rds)
     * Simply select an Arm based instance for deployment
-* Additional options are listed in the [Get started with Servers and Cloud Computing](/learning-paths/servers-and-cloud-computing/intro) learning path
+* Additional options are listed in the [Get started with Servers and Cloud Computing](/learning-paths/servers-and-cloud-computing/intro/) learning path
 
 ##  How do I learn about PostgreSQL?
 
@@ -40,7 +40,7 @@ If you are using a cloud service like AWS RDS, then the installation of PostgreS
 
 ## What is the best way of configuring the PostgreSQL Server?
 
-Getting PostgreSQL up and running is easy. This is because the default out of box configuration will work. However, this default configuration is most likely under optimized. A graph of the performance difference between an out of box PostgreSQL database and a tuned database is shown in the [Learn how to Tune PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql_tune/tuning) learning path. For the purpose of learning, it's ok to start with the default configuration. Once you have that working, you should read the [PostgreSQL server configuration documentation](https://www.postgresql.org/docs/current/index.html) , and follow the [Learn how to Tune PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql_tune/) learning path.
+Getting PostgreSQL up and running is easy. This is because the default out of box configuration will work. However, this default configuration is most likely under optimized. A graph of the performance difference between an out of box PostgreSQL database and a tuned database is shown in the [Learn how to Tune PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql_tune/tuning/) learning path. For the purpose of learning, it's ok to start with the default configuration. Once you have that working, you should read the [PostgreSQL server configuration documentation](https://www.postgresql.org/docs/current/index.html) , and follow the [Learn how to Tune PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql_tune/) learning path.
 
 ## How do I get the PostgreSQL Build Configuration?
 
@@ -72,7 +72,7 @@ LIBS = -lpgcommon -lpgport -lselinux -llz4 -lxslt -lxml2 -lpam -lssl -lcrypto -l
 VERSION = PostgreSQL 14.8
 ```
 
-The switches CFLAGS, CXXFLAGS, and LDFLAGS listed in the `CONFIGURE` line can be very helpful if you plan to build PostgreSQL from source. Tuning compilation options is discussed in the [Learn how to Tune PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql_tune/tuning) learning path.
+The switches CFLAGS, CXXFLAGS, and LDFLAGS listed in the `CONFIGURE` line can be very helpful if you plan to build PostgreSQL from source. Tuning compilation options is discussed in the [Learn how to Tune PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql_tune/tuning/) learning path.
 
 ## How do I connect to the PostgreSQL database? 
 

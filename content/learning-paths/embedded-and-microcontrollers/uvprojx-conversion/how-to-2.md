@@ -1,5 +1,6 @@
 ---
 title: Using the command line
+description: Convert a uVision project to csolution format from the command line and verify the CMSIS-Toolbox build.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

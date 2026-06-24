@@ -1,6 +1,8 @@
 ---
 title: Fine-tune PyTorch models on DGX Spark
 
+description: Learn how to fine-tune large language models using PyTorch and Hugging Face on NVIDIA DGX Spark to improve domain-specific accuracy.
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an advanced topic for AI developers and ML engineers who want to fine-tune large language models using PyTorch and Hugging Face on the NVIDIA DGX Spark platform.
@@ -16,6 +18,10 @@ prerequisites:
     - NVIDIA DGX Spark workstation
 
 author: Michael Hall
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -63,3 +69,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

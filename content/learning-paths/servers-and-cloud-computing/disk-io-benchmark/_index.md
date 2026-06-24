@@ -1,5 +1,6 @@
 ---
 title: Microbenchmark storage performance with fio on Arm
+description: Learn how to use fio to microbenchmark storage performance on Arm systems and monitor storage using iostat, iotop, and pidstat to identify bottlenecks.
 
 minutes_to_complete: 30
 
@@ -15,6 +16,10 @@ prerequisites:
     - Familiarity with Linux.
 
 author: Kieran Hejmadi
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -44,3 +49,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

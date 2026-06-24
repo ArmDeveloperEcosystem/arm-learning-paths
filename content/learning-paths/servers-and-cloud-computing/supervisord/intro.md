@@ -32,7 +32,7 @@ You can try it first on your local machine and then try it in a cloud service, A
 
 You will need an Arm Linux computer with Docker installed and a free Remote.It account. You will also need an AWS account to try the solution in AWS Fargate. If you need an AWS account, you can sign up at https://aws.amazon.com.
 
-To install Docker, refer to the [Docker install guide](/install-guides/docker/). [Learn how to use Docker](/learning-paths/cross-platform/docker) may also be useful if you would like more background on Docker. 
+To install Docker, refer to the [Docker install guide](/install-guides/docker/). [Learn how to use Docker](/learning-paths/cross-platform/docker/) may also be useful if you would like more background on Docker. 
 
 You will also use Remote.It for container access. For more background information, refer to [Access remote devices with Remote.It](/learning-paths/cross-platform/remoteit/).
 

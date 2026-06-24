@@ -1,6 +1,8 @@
 ---
 title: Build and run Arm Total Solutions for IoT
 
+description: Learn how to build examples from the Open-IoT-SDK and run them on Corstone-300 virtual hardware to understand complete IoT software stack construction.
+
 minutes_to_complete: 30   
 
 who_is_this_for: This is an introductory topic for embedded software developers interested in learning how a complete IoT software stack is constructed.
@@ -14,6 +16,10 @@ prerequisites:
     - An AWS account (required for Arm Virtual Hardware)
 
 author: Ronan Synnott
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -30,7 +36,6 @@ tools_software_languages:
     - FVP
     - Arm Compiler for Embedded
 
-
 further_reading:
     - resource:
         title: Open-IoT-SDK
@@ -45,10 +50,10 @@ further_reading:
         link: https://www.arm.com/products/silicon-ip-subsystems/
         type: website
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

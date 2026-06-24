@@ -1,5 +1,6 @@
 ---
-title: "Build, optimize, and deploy ML models with ONNX on Arm64 and mobile devices"
+title: Deploy optimized ML models with ONNX Runtime on Arm platforms
+description: Learn how to build, optimize, and deploy machine learning models using ONNX Runtime on Arm64 platforms, including Raspberry Pi, cloud instances, and Android devices.
 
 minutes_to_complete: 240
 
@@ -19,6 +20,10 @@ prerequisites:
   - Android Studio (required only for the final deployment section)
 
 author: Dawid Borycki
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -64,3 +69,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

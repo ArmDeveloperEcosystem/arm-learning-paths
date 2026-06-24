@@ -1,5 +1,6 @@
 ---
 title: Deploy DeepSeek-R1 on Arm Servers with llama.cpp
+description: Learn how to deploy and run the DeepSeek-R1 language model on Arm servers using llama.cpp with quantization for efficient CPU inference.
 
 minutes_to_complete: 30
 
@@ -15,6 +16,10 @@ prerequisites:
 
 author:
     - Tianyu Li
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -32,7 +37,6 @@ tools_software_languages:
     - LLM
     - Generative AI
     - Python
-
 
 further_reading:
     - resource:
@@ -52,11 +56,10 @@ further_reading:
         link: https://huggingface.co/bartowski/DeepSeek-R1-GGUF 
         type: website
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

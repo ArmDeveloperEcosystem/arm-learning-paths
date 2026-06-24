@@ -1,5 +1,6 @@
 ---
 title: Deploy High-Performance Analytics with Apache Arrow and Arrow Flight on Google Cloud C4A Axion processors
+description: Learn how to deploy Apache Arrow and Arrow Flight on Google Cloud Axion C4A processors for high-throughput columnar data processing and low-latency data transport with MinIO integration.
 
 minutes_to_complete: 30
 
@@ -19,6 +20,10 @@ prerequisites:
   - Familiarity with Linux command-line operations
 
 author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ##### Tags
 skilllevels: Introductory
@@ -57,12 +62,12 @@ further_reading:
       title: Arrow Flight documentation
       link: https://arrow.apache.org/docs/format/Flight.html
       type: documentation
-  
+
   - resource:
       title: Apache Parquet documentation
       link: https://parquet.apache.org/documentation/latest/
       type: documentation
-  
+
   - resource:
       title: MinIO documentation
       link: https://min.io/docs
@@ -72,3 +77,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: yes
 ---
+

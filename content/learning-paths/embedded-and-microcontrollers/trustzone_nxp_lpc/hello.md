@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Run TrustZone Hello World example"
+description: Build and run the TrustZone Hello World example on the NXP LPCXpresso55S69 board with Keil MDK.
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -10,7 +11,7 @@ layout: "learningpathall"
 
 ## Before you begin
 
-Install [Keil MDK](/install-guides/mdk) and [Arm Compiler for Embedded](/install-guides/armclang) on a Windows machine and connect the NXP LPCXpresso55S69 board to it.
+Install [Keil MDK](/install-guides/mdk/) and [Arm Compiler for Embedded](/install-guides/armclang/) on a Windows machine and connect the NXP LPCXpresso55S69 board to it.
 
 ## Build and Run the Hello World TrustZone example
 

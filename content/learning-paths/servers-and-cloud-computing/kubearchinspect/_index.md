@@ -5,16 +5,22 @@ minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for software developers who want to ensure containers running in a Kubernetes cluster support the Arm architecture.
 
+description: Identify and migrate container images in a Kubernetes cluster to Arm-compatible versions using KubeArchInspect reports.
+
 learning_objectives: 
-    - Run KubeArchInspect to generate a report on the containers running in a Kubernetes cluster.
-    - Discover which images support the Arm architecture.
-    - Understand common reasons for an image not supporting Arm.
-    - Make configuration changes to upgrade images with Arm support.
+    - Run KubeArchInspect to generate a report on the containers running in a Kubernetes cluster
+    - Discover which images support the Arm architecture
+    - Understand common reasons for an image not supporting Arm
+    - Make configuration changes to upgrade images with Arm support
 
 prerequisites:
     - A running Kubernetes cluster accessible with `kubectl`.
 
 author: Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -32,7 +38,6 @@ tools_software_languages:
 
 operatingsystems:
     - Linux
-
 
 further_reading:
     - resource:
@@ -52,10 +57,10 @@ further_reading:
         link: https://cloud.google.com/kubernetes-engine/docs/concepts/arm-on-gke
         type: documentation
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

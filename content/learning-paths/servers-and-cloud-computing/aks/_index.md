@@ -1,5 +1,7 @@
 ---
-title: Create an Arm-based Kubernetes cluster on Microsoft Azure Kubernetes Service 
+title: Create an Arm-based Kubernetes cluster on Microsoft Azure Kubernetes Service
+
+description: Learn how to automate the deployment of an Arm-based Kubernetes cluster on Azure AKS using Terraform and deploy a sample WordPress application as a workload.
 
 minutes_to_complete: 60   
 
@@ -14,6 +16,10 @@ prerequisites:
     - A machine with [Terraform](/install-guides/terraform/), [Azure CLI](/install-guides/azure-cli), and [Kubectl](/install-guides/kubectl/) installed
 
 author: Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -55,11 +61,10 @@ further_reading:
         link: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/
         type: documentation
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

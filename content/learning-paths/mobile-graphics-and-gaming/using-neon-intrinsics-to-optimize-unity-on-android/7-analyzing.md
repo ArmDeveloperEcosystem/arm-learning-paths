@@ -5,7 +5,7 @@ weight: 8
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-If you need a refresh on the Unity Analyzer, read [Profiling Unity apps on Android](/learning-paths/mobile-graphics-and-gaming/profiling-unity-apps-on-android) before you continue.
+If you need a refresh on the Unity Analyzer, read [Profiling Unity apps on Android](/learning-paths/mobile-graphics-and-gaming/profiling-unity-apps-on-android/) before you continue.
 
 ## Pull data into the Analyzer
 

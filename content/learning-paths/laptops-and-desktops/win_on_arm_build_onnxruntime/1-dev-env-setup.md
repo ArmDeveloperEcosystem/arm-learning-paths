@@ -52,7 +52,7 @@ Refer to [Visual Studio for Windows on Arm](/install-guides/vs-woa/) for more de
 
 ## Install Python
 
-Download and install [Python for Windows on Arm](/install-guides/py-woa).
+Download and install [Python for Windows on Arm](/install-guides/py-woa/).
 
 {{% notice Note %}}
 You'll need Python version 3.10 or higher. This Learning Path was tested with version 3.11.9.
@@ -62,7 +62,7 @@ You'll need Python version 3.10 or higher. This Learning Path was tested with ve
 
 CMake is an open-source tool that automates the build process and generates platform-specific build configurations.
 
-Download and install [CMake for Windows on Arm](/install-guides/cmake).
+Download and install [CMake for Windows on Arm](/install-guides/cmake/).
 
 {{% notice Note %}}
 The instructions were tested with version 3.30.5.

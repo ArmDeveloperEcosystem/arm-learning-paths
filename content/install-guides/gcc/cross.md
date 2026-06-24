@@ -13,6 +13,7 @@ test_images:
 test_link: null
 test_maintenance: true
 title: Cross-compiler
+description: Install GCC cross-compilers on Linux so you can build 32-bit or 64-bit Arm Linux applications from a non-target host.
 tool_install: false
 weight: 3
 ---

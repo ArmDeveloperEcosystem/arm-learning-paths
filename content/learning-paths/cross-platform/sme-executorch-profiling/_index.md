@@ -18,8 +18,15 @@ prerequisites:
   - An Apple Silicon macOS host with Python 3.9 or later and CMake 3.29 or later
   - Basic familiarity with ExecuTorch or PyTorch
   - Optionally, an Android device with Armv9 and SME2 support for on-device testing (if used, configure power management settings to ensure consistent performance measurements)
-    
-author: Jason Zhu, Tyler Mullenbach, Damien Dooley 
+
+author:
+    - Jason Zhu
+    - Tyler Mullenbach
+    - Damien Dooley
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -61,3 +68,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

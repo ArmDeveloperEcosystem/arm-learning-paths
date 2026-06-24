@@ -1,5 +1,6 @@
 ---
 title: Verify inference and view results
+description: Verify that the deployed Edge Impulse model runs on the edge device and view live inference results in the browser.
 weight: 9
 
 ### FIXED, DO NOT MODIFY

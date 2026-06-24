@@ -8,13 +8,13 @@ layout: learningpathall
 
 ## How to run the code examples
 
-This Learning Path assumes you are already familiar with the Vulkan API and have an application that uses it to create and render images on Android. If that is the case, you may skip this step.
+This Learning Path assumes you're already familiar with the Vulkan API and have an application that uses it to create and render images on Android. If that's the case, you can skip this step.
 
-Otherwise, you may use a test application like those provided by the [Khronos Vulkan Samples repository](https://github.com/KhronosGroup/Vulkan-Samples).
+Otherwise, you can use a test application like those provided by the [Khronos Vulkan Samples repository](https://github.com/KhronosGroup/Vulkan-Samples).
 
 {{% notice Note %}}
-You do not need to create a new Vulkan Sample to complete this Learning Path but you can familiarize yourself with the code examples and save them as a reference.
-The Vulkan Sample provided in the previous step allows you to experiment with AFRC without any coding required.
+You don't need to create a new Vulkan Sample to complete this Learning Path but you can familiarize yourself with the code examples and save them as a reference.
+The Vulkan Sample provided in further reading allows you to experiment with AFRC without any coding required.
 {{% /notice %}}
 
 ### Build Khronos' Vulkan Samples
@@ -27,7 +27,7 @@ cd vulkan-samples
 python ./scripts/generate.py android
 ```
 
-And follow the build instructions to run the example applications on an Android device.
+Follow the build instructions to run the example applications on an Android device.
 
 {{% notice  %}}
 You can use [Android Studio](https://github.com/KhronosGroup/Vulkan-Samples/blob/main/docs/build.adoc#build-with-android-studio) to build and run the samples (the build instructions explain how to do this).
@@ -35,8 +35,8 @@ You can use [Android Studio](https://github.com/KhronosGroup/Vulkan-Samples/blob
 
 ### Create a test sample
 
-If you are coding an example, rather than following along with the existing [Image Compression Control](https://github.com/KhronosGroup/Vulkan-Samples/blob/main/samples/performance/image_compression_control/README.adoc) sample, we need to first create a test sample.
-We can use the default [API sample template](https://github.com/KhronosGroup/Vulkan-Samples/blob/main/scripts/README.adoc#generate-api-sample) to write and run the code snippets presented in this Learning Path.
+If you're coding an example, rather than following along with the existing [Image Compression Control](https://github.com/KhronosGroup/Vulkan-Samples/blob/main/samples/performance/image_compression_control/README.adoc) sample, you'll need to first create a test sample.
+You can use the default [API sample template](https://github.com/KhronosGroup/Vulkan-Samples/blob/main/scripts/README.adoc#generate-api-sample) to write and run the code snippets presented in this Learning Path.
 
 To create a new sample:
 

@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Arm Development Studio
+description: Install Arm Development Studio on Windows or Linux and configure licensing for embedded C and C++ development, debug, and SoC validation.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:

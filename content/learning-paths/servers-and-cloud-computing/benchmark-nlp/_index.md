@@ -1,5 +1,6 @@
 ---
 title: Accelerate Natural Language Processing (NLP) models from Hugging Face on Arm servers
+description: Learn how to deploy and accelerate PyTorch NLP sentiment analysis models from Hugging Face on Arm servers with BFloat16 fast math kernel optimization on Graviton3 processors.
 
 minutes_to_complete: 20
 
@@ -14,6 +15,10 @@ prerequisites:
     - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server.
 
 author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -31,7 +36,7 @@ tools_software_languages:
     - Python
     - PyTorch
     - Hugging Face
-    
+
 further_reading:
     - resource:
         title: Hugging Face Documentation
@@ -50,11 +55,10 @@ further_reading:
         link: https://pytorch.org/docs/stable/index.html
         type: documentation
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Build the ML Evaluation Kit examples"
+description: Build ML Evaluation Kit examples for the selected target so they are ready to run on Arm virtual hardware.
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -44,7 +45,7 @@ export PATH=~/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/:$PATH
 You can review the installation guides for further details.
 
 - [Arm Compiler for Embedded](/install-guides/armclang/)
-- [Arm GNU Toolchain](/install-guides/gcc/arm-gnu)
+- [Arm GNU Toolchain](/install-guides/gcc/arm-gnu/)
 
 {{% /notice %}}
 

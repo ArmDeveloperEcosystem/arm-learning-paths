@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Setup a Workspace in Xilinx Vivado" 
+description: Create a Vivado workspace for the Zybo Z7-10 board and configure the base Zynq processing system for a custom peripheral design.
 
 weight: 2 # 1 is first, 2 is second, etc.
 

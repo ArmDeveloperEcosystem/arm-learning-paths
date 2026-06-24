@@ -16,6 +16,7 @@ test_maintenance: false
 
 # No official documentation 
 official_docs: https://developer.arm.com/documentation/111147/latest
+description: Install the Arm System Characterization Tool (ASCT) on Linux AArch64 to run low-level benchmarks and analyze memory, storage, and cache performance on Arm-based platforms.
 
 author:
 - Jason Andrews
@@ -38,11 +39,11 @@ ASCT provides capabilities for:
 - Core-to-core latency measurements
 - Cache hierarchy mapping through sweep operations
 
-ASCT is available for Linux on Arm (AArch64) systems and requires Python 3.10 or later.
+ASCT is available for Linux on Arm (AArch64) systems.
 
-## What should I do before installing ASCT?
+## Before you begin
 
-ASCT requires a Linux system running on Arm hardware. Confirm you are using an Arm computer with 64-bit Linux by running:
+ASCT requires a Linux system running on Arm hardware. To confirm you are using an Arm computer with 64-bit Linux, run:
 
 ```bash
 uname -m
@@ -58,37 +59,39 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 ### Install prerequisites
 
-Before installing ASCT, ensure you have the required system packages:
+Before installing ASCT, ensure that you have the required system packages:
 
 ```bash
 sudo apt update
 sudo apt install python3 python3-pip python-is-python3 gcc make numactl fio linux-tools-generic linux-tools-$(uname -r) -y
 ```
 
-These packages are required for:
-- `python3` - Python 3.10 or later for running ASCT
-- `gcc` and `make` - For compiling benchmark components
-- `numactl` - For NUMA-aware memory benchmarks
-- `fio` - Version 3.36 or later for storage benchmarks
-- `linux-tools-generic` and `linux-tools-$(uname -r)` - Linux Perf for performance analysis
+These packages are needed for:
+- `python3` — Python 3.10 or later for running ASCT
+- `gcc` and `make` — for compiling benchmark components
+- `numactl` — for NUMA-aware memory benchmarks
+- `fio` — version 3.36 or later for storage benchmarks
+- `linux-tools-generic` and `linux-tools-$(uname -r)` — Linux Perf for performance analysis
 
 For more information about installing Perf on different Linux distributions, see the [Perf install guide](/install-guides/perf/).
 
-## How do I download and install ASCT?
+## Download and install ASCT
 
-ASCT is distributed as a Python package and requires Python 3.10 or later.
+ASCT is distributed as a Python package and requires Python 3.10 or later. 
+
+{{% notice Note %}}
+The following commands use ASCT version 0.5.1. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [ASCT downloads](https://artifacts.tools.arm.com/asct/dist/).
+{{% /notice %}}
 
 ### Download ASCT
 
-Download the latest ASCT release from the [artifacts.tools.arm.com](https://artifacts.tools.arm.com/asct/dist/) page.
-
-For example, to download version 0.5.1:
+Download ASCT version `0.5.1`:
 
 ```bash
 wget https://artifacts.tools.arm.com/asct/dist/0.5.1/asct-0.5.1+11d418d-release.tar.gz
 ```
 
-### How do I install ASCT using uv?
+### Install ASCT using uv
 
 The recommended method uses [uv](https://github.com/astral-sh/uv), a fast Python package installer. Install `uv`:
 
@@ -96,13 +99,13 @@ The recommended method uses [uv](https://github.com/astral-sh/uv), a fast Python
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-Extract the release archive
+Extract the release archive:
 
 ```bash
 tar xzf asct-0.5.1+11d418d-release.tar.gz
 ```
 
-Create the required directories
+Create the required directories:
 
 ```bash
 sudo mkdir -p /opt/uv/tools /usr/local/bin
@@ -117,7 +120,7 @@ sudo UV_TOOL_DIR=/opt/uv/tools UV_TOOL_BIN_DIR=/usr/local/bin $(which uv) tool i
 
 This installs ASCT to `/usr/local/bin` making it available system-wide. Installing to `/usr/local/bin` instead of the default `~/.local/bin` allows you to run ASCT with `sudo`, which is required for some benchmarks to access system resources and configure huge pages.
 
-### How do I verify that ASCT is installed?
+### Verify that ASCT is installed
 
 Verify the installation by checking the version:
 
@@ -139,21 +142,23 @@ asct --help
 
 This displays available commands and benchmarks.
 
-## How do I use ASCT?
+## How to use ASCT
 
 ASCT provides several commands for benchmarking and system analysis, including `run`, `system-info`, `list`, `diff`, and `sysreg`. 
 
+{{% notice Note %}}
 Some benchmarks require `sudo` or root privileges to configure huge pages and access certain system information. You can run ASCT without `sudo`, but some benchmarks can be unavailable or limited in functionality.
+{{% /notice %}}
 
 ### Get system information
 
-To generate a system information report:
+To generate a system information report, run:
 
 ```bash
 sudo asct system-info
 ```
 
-To save the system information in JSON format:
+To save the system information in JSON format, run:
 
 ```bash
 sudo asct system-info --format json --output-dir my_output
@@ -161,7 +166,7 @@ sudo asct system-info --format json --output-dir my_output
 
 ### List available benchmarks
 
-To see all available benchmarks and their associated keywords:
+To list all available benchmarks and their associated keywords, run:
 
 ```bash
 asct list
@@ -169,19 +174,19 @@ asct list
 
 ### Run benchmarks
 
-To run the default set of benchmarks:
+To run the default set of benchmarks, run:
 
 ```bash
 sudo asct run
 ```
 
-To run all available benchmarks (including optional ones):
+To run all available benchmarks (including optional ones), run:
 
 ```bash
 sudo asct run all
 ```
 
-To run specific benchmarks by name:
+To run specific benchmarks by name, run:
 
 ```bash
 sudo asct run latency-sweep idle-latency
@@ -189,13 +194,13 @@ sudo asct run latency-sweep idle-latency
 
 Each benchmark has associated keywords that describe its characteristics. You can use these keywords to run groups of related benchmarks without specifying each one individually.
 
-To run all benchmarks tagged with the `memory` keyword:
+To run all benchmarks tagged with the `memory` keyword, run:
 
 ```bash
 sudo asct run memory
 ```
 
-To run all benchmarks tagged with both `latency` and `bandwidth` keywords:
+To run all benchmarks tagged with both `latency` and `bandwidth` keywords, run:
 
 ```bash
 sudo asct run latency bandwidth
@@ -203,15 +208,15 @@ sudo asct run latency bandwidth
 
 Common keywords include `memory`, `storage`, `latency`, `bandwidth`, `sweep`, and `long-runtime`. Use `asct list` to see which keywords are associated with each benchmark.
 
-To exclude benchmarks by keyword, prepend the keyword with the `^` character:
+To exclude benchmarks by keyword, prepend the keyword with the `^` character, run:
 
 ```bash
 sudo asct run all ^bandwidth
 ```
 
-This runs all benchmarks except those tagged with the `bandwidth` keyword.
+This command runs all benchmarks except those tagged with the `bandwidth` keyword.
 
-To save benchmark results in CSV format:
+To save benchmark results in CSV format, run:
 
 ```bash
 sudo asct run --format csv --output-dir results
@@ -221,13 +226,13 @@ By default, ASCT saves output in a directory named `data.<YYYYMMDD_HHMMSS_micros
 
 ### Compare results
 
-To compare results from multiple ASCT runs:
+To compare results from multiple ASCT runs, run:
 
 ```bash
 asct diff --output-dir results1 --output-dir results2
 ```
 
-## What are the available benchmarks?
+## Available benchmarks on ASCT
 
 ASCT includes several categories of benchmarks:
 
@@ -246,9 +251,9 @@ Storage benchmarks:
 - `storage-process-count-sweep` (`spcs`) - Sweeps process counts to measure scaling
 - `storage-access-pattern-sweep` (`saps`) - Evaluates different workload profiles including sequential and random access (not run by default)
 
-You can filter benchmarks using keywords like `latency`, `bandwidth`, `memory`, `storage`, `sweep`, or `long-runtime`.
+You can filter benchmarks using keywords such as `latency`, `bandwidth`, `memory`, `storage`, `sweep`, or `long-runtime`.
 
-## What output formats are supported?
+## Output formats supported by ASCT
 
 ASCT supports three output formats:
 - `stdout` - Human-readable console output (default)
@@ -261,7 +266,7 @@ Specify the format using the `--format` or `-f` option:
 sudo asct run --format json
 ```
 
-## What other options are available?
+## Other available options on ASCT
 
 ASCT provides several additional options:
 
@@ -278,11 +283,11 @@ Setting `--log-level` to `debug` is useful if the tests are not running due to p
 
 Some of the tests also generate graphs. 
 
-An example of a bandwidth graph is shown below:
+The following is an example of a bandwidth graph:
 
 ![Graph showing memory bandwidth sweep benchmark results with data size in MB on x-axis ranging from 0.001 to 1000, and bandwidth in GB/s on y-axis ranging from 0 to 300, displaying multiple colored lines representing different CPU configurations with performance peaks at smaller data sizes and declining bandwidth as data size increases beyond cache levels alt-txt#center](/install-guides/_images/asct-bw.webp "Bandwidth sweep benchmark results")
 
-## How do I uninstall ASCT?
+## Uninstall ASCT
 
 If you installed ASCT using `uv`, remove it with:
 
@@ -290,9 +295,9 @@ If you installed ASCT using `uv`, remove it with:
 sudo -E $(which uv) tool uninstall asct
 ```
 
-## Where can I find more information?
+## More information about ASCT
 
-Use the built-in help command to get detailed information about any ASCT command:
+To get detailed information about any ASCT command, run the built-in help command:
 
 ```bash
 asct help <command>
@@ -303,3 +308,4 @@ For example:
 ```bash
 asct help run
 ```
+You are now ready to use ASCT for analyzing performance on Arm-based platforms.

@@ -1,6 +1,8 @@
 ---
 title: Adding Memory Tagging to a Dynamic Memory Allocator
 
+description: Learn how to apply Arm Memory Tagging Extension (MTE) to protect dynamic memory allocations and prevent common memory use errors.
+
 minutes_to_complete: 120
 
 who_is_this_for: This is an advanced topic for software developers who want to learn how to use the Memory Tagging Extension (MTE) to protect dynamic memory allocations.
@@ -16,6 +18,10 @@ prerequisites:
 
 author: David Spickett
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
@@ -28,13 +34,11 @@ tools_software_languages:
 operatingsystems:
 - Linux
 
-
 further_reading:
     - resource:
         title: LLSoftSecBook Chapter on Stack Buffer Overflows
         link: https://llsoftsec.github.io/llsoftsecbook/#stack-buffer-overflows
         type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

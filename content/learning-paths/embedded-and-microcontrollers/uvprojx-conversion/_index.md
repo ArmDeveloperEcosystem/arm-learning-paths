@@ -1,6 +1,8 @@
 ---
 title: Convert uvprojx-based projects to csolution
 
+description: Learn how to import, convert, and build uvprojx-based projects to csolution format using Keil Studio, µVision, and command-line tools for CMSIS-Toolbox compatibility.
+
 minutes_to_complete: 10
 
 who_is_this_for: This is a topic for users of µVision who want to migrate to the new project format (csolution) required by CMSIS-Toolbox.
@@ -18,6 +20,10 @@ prerequisites:
 
 author: Christopher Seidl
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
@@ -30,8 +36,6 @@ operatingsystems:
     - Windows
     - Linux
     - macOS
-
-
 
 further_reading:
     - resource:
@@ -47,11 +51,10 @@ further_reading:
         link: https://keil.arm.com
         type: website
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

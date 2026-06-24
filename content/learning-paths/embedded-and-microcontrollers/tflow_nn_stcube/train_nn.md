@@ -1,6 +1,7 @@
 ---
 # User change
 title: Collect training data
+description: Collect training data for the letter recognition model and prepare it for TensorFlow feature extraction.
 
 weight: 3 # 1 is first, 2 is second, etc.
 

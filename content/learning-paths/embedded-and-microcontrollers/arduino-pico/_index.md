@@ -13,7 +13,6 @@ learning_objectives:
     - Understand how hardware interrupts are used in embedded systems to respond to external changes
     - Add interrupt handlers to an embedded application
 
-
 prerequisites:
     - The [Arduino IDE with the RP2040 board support package](/install-guides/arduino-pico/) installed on your computer
     - A [Raspberry Pi Pico](https://www.raspberrypi.com/products/raspberry-pi-pico/) board
@@ -21,6 +20,10 @@ prerequisites:
     - A [peizo-electric buzzer](https://www.amazon.com/mxuteuk-Electronic-Computers-Printers-Components/dp/B07VK1GJ9X/ref=sr_1_4?crid=2FAXYI17HZKDB&keywords=piezo+buzzer&qid=1698432968&sprefix=peizo%2Caps%2C148&sr=8-4) for signaling motion
 
 author: Michael Hall
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -42,10 +45,10 @@ further_reading:
         link: https://www.raspberrypi.com/documentation/microcontrollers/raspberry-pi-pico.html
         type: documentation
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

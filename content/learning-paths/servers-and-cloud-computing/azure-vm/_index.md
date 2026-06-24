@@ -1,10 +1,10 @@
 ---
 title: Create an Azure Linux 3.0 virtual machine with Cobalt 100 processors
+description: Learn how to create a custom Azure Linux 3.0 VM image using QEMU, upload it to Azure Shared Image Gallery, and deploy it on Arm-based Cobalt 100 processors.
 
 minutes_to_complete: 120
 
 who_is_this_for: This is an advanced topic for developers who want to run Azure Linux 3.0 on Arm-based Cobalt 100 processors in a custom virtual machine.
-
 
 learning_objectives:
   - Use QEMU to create a raw disk image
@@ -17,8 +17,12 @@ learning_objectives:
 prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with permission to create resources, including instances using Cobalt 100 processors
     - A Linux machine with [QEMU](https://www.qemu.org/download/) and the [Azure CLI](/install-guides/azure-cli/) installed and authenticated
-    
+
 author: Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -53,7 +57,6 @@ further_reading:
       title: Upload a VHD to Azure or copy a managed disk to another region - Azure CLI
       link: https://learn.microsoft.com/en-us/azure/virtual-machines/linux/upload-vhd
       type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -1,5 +1,6 @@
 ---
 title: Accelerate an OpenCV-based Android Application with KleidiCV
+description: Learn how to accelerate OpenCV-based Android applications using KleidiCV for enhanced computer vision performance.
 
 minutes_to_complete: 45
 
@@ -16,6 +17,10 @@ prerequisites:
     - An Android smartphone.
 
 author: Dawid Borycki
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -50,3 +55,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

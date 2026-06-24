@@ -1,11 +1,11 @@
 ---
 title: Run x265 (H.265 codec) on Arm servers
+description: Learn how to build and run the x265 H.265 codec on Arm servers with performance benchmarking across various video resolutions and encoding presets.
 
 minutes_to_complete: 10
 
 who_is_this_for: This is an introductory topic for software developers who want to
   build and run an x265 codec on Arm servers and measure performance.
-
 
 learning_objectives:
 - Build x265 codec on Arm server
@@ -17,6 +17,10 @@ prerequisites:
   cloud service provider. This Learning Path has been verified on AWS EC2 and Oracle cloud services, running `Ubuntu Linux 20.04.`
 
 author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 test_images:
 - ubuntu:latest
@@ -60,3 +64,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

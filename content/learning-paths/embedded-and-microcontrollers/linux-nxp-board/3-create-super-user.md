@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Set up a Linux user and connect to WiFi"
+description: Create a non-root Linux user with sudo access and configure WiFi connectivity on the NXP FRDM i.MX 93 board.
 
 weight: 3
 

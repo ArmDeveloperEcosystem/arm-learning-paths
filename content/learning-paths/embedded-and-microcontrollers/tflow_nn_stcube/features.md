@@ -1,6 +1,7 @@
 ---
 # User change
 title: Feature extraction
+description: Extract features from captured training data so the TensorFlow model can learn the letter recognition task.
 
 weight: 5 # 1 is first, 2 is second, etc.
 

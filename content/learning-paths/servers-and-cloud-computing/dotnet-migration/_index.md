@@ -1,7 +1,7 @@
 ---
 title: Migrate a .NET application to Azure Cobalt 100
+description: Learn how to build and run an OrchardCore CMS .NET application on Azure Cobalt 100 processors, covering AnyCPU configuration and shared C library integration.
 
-  
 minutes_to_complete: 25
 
 who_is_this_for: This is an advanced topic for .NET developers who want to take advantage of the performance and cost benefits of Azure Cobalt processors.
@@ -21,6 +21,10 @@ prerequisites:
 
 author: Joe Stech
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
@@ -34,7 +38,6 @@ tools_software_languages:
     - C
 operatingsystems:
     - Linux
-
 
 further_reading:
     - resource:
@@ -50,11 +53,10 @@ further_reading:
         link: https://learn.microsoft.com/en-us/dotnet/
         type: documentation
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

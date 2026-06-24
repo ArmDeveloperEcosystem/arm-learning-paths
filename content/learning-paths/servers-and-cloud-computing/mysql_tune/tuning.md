@@ -51,7 +51,7 @@ large_pages=ON    # default is OFF
 
 Turning on `large_pages` can result in significant performance gains. 
 
-Using larger pages helps to reduce how often physical memory has to get mapped to virtual memory. Note that huge pages needs to be [turned on at the kernel level](/learning-paths/servers-and-cloud-computing/mysql_tune/kernel_comp_lib) for this to work.
+Using larger pages helps to reduce how often physical memory has to get mapped to virtual memory. Note that huge pages needs to be [turned on at the kernel level](/learning-paths/servers-and-cloud-computing/mysql_tune/kernel_comp_lib/) for this to work.
 
 If `innodb_dedicated_server` is set to `ON`, then `innodb_buffer_pool_size` will automatically be set. The value of `innodb_buffer_pool_size` is needed to calculate how many huge pages will need to be allocated. The value of `innodb_buffer_pool_size` can be confirmed by checking the variable in the `mysql` cli.
 
@@ -63,7 +63,7 @@ SHOW VARIABLES LIKE 'innodb_buffer_pool_size';
 > There is no need to confirm the value of `innodb_buffer_pool_size` if it is set manually (i.e. you are not using `innodb_dedicated_server=ON`).
 > Alternatively, you can estimate the value of `innodb_buffer_pool_size` since the calculation when `innodb_dedicated_server=ON` is in the documentation. Use the command "`free --bytes`" to get the total system memory in bytes.
 
-Divide this number by the huge page size (convert to bytes first) to get the number of huge pages that should be allocated. Instructions on how to get the huge page size and to set the number of pages is in the [System, Kernel, Compiler, and Libraries](/learning-paths/servers-and-cloud-computing/mysql_tune/kernel_comp_lib) section.
+Divide this number by the huge page size (convert to bytes first) to get the number of huge pages that should be allocated. Instructions on how to get the huge page size and to set the number of pages is in the [System, Kernel, Compiler, and Libraries](/learning-paths/servers-and-cloud-computing/mysql_tune/kernel_comp_lib/) section.
 
 In general, there's no need to adjust other memory parameters unless an issue is suspected/found. That said, other memory related configurations that could be worth exploring are the [Buffer Pool Prefetching](https://dev.mysql.com/doc/refman/en/innodb-performance-read_ahead.html) configurations (take this as an FYI). You may see modest performance gains by decreasing the `innodb_read_ahead_threshold` from the default. The default is very conservative and will result in very little to no prefetching. Some workloads may benefit from being less conservative with prefetching. Turning on random prefetch (`innodb_random_read_ahead`) seems to hurt performance but could benefit some user cases. The affects of these settings will be use case dependent.
 

@@ -1,9 +1,11 @@
 ---
-title: Using Neon intrinsics to optimize Unity on Android
+title: Optimize Unity applications on Android using Neon intrinsics
 
 minutes_to_complete: 90
 
-who_is_this_for: Developers who want to optimize their Unity apps on Android
+description: Learn how to use Arm Neon intrinsics in Unity C# scripts to optimize code on Android and collect performance data using Unity Profiler.
+
+who_is_this_for: Developers interested in leveraging the Unity Machine Learning Agents toolkit on Arm devices.
 
 learning_objectives:
     - Use Arm Neon intrinsics in your Unity C# scripts
@@ -16,7 +18,13 @@ prerequisites:
     - Desktop computer capable of running Unity
     - Unity version compatible with Unity Burst compiler 1.5 or later
 
-author: Ben Clark, Joshua Marshall-Law
+author:
+    - Ben Clark
+    - Joshua Marshall-Law
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -33,7 +41,6 @@ tools_software_languages:
 operatingsystems:
     - Android
 
-
 further_reading:
     - resource:
         title: Arm Neon documentation
@@ -44,11 +51,10 @@ further_reading:
         link: https://docs.unity3d.com/Manual/com.unity.burst.html
         type: documentation
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

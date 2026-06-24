@@ -1,18 +1,25 @@
 ---
 title: Add an LLM to your Android app with Arm's AI Chat library
+description: Learn how to build an Android chatbot app using Arm's AI Chat library to run GGUF models on-device with optimized performance on Arm CPUs.
 
 minutes_to_complete: 15
 
-who_is_this_for: Android App Developers who wish to add LLM capabilities to an app.
+who_is_this_for: This is an introductory topic for developers who want to add a local, on-device LLM chat experience using Arm's AI Chat library, Kotlin, and Android Studio.
 
 learning_objectives: 
-    - Easily add an on-device LLM to any Android app
+    - Create a simple Android chatbot app scaffold in Android Studio
+    - Load a mobile-friendly GGUF model on-device and run streamed chat inference
 
 prerequisites:
-    - Android Studio
-    - Android phone for testing (in Developer Mode, with USB cable to connect)
+    - An Android development environment with Android Studio installed
+    - An Android phone for testing, in Developer Mode, with USB cable for connection
+    - Basic familiarity with Kotlin and Android app development
 
 author: Ben Clark
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -27,8 +34,6 @@ tools_software_languages:
     - LLM
 operatingsystems:
     - Android
-
-
 
 further_reading:
     - resource:
@@ -56,10 +61,10 @@ further_reading:
         link: https://www.arm.com/technologies/sme2
         type: website
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

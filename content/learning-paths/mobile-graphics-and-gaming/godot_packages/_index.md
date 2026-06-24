@@ -1,6 +1,6 @@
 ---
 title: Profile Android game performance in Godot with Arm Performance Studio
-   
+
 minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for Godot developers targeting Android devices who want to optimize game performance on Arm CPUs and Mali GPUs using Arm Performance Studio tools.
@@ -13,7 +13,13 @@ prerequisites:
     - Familiarity with Godot
     - Familiarity with Arm Performance Studio tools
 
-author: Albin Bernhardsson, Julie Gaskin
+author:
+    - Albin Bernhardsson
+    - Julie Gaskin
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -28,7 +34,6 @@ operatingsystems:
     - Windows
     - macOS
     - Linux
-
 
 further_reading:
     - resource:
@@ -48,11 +53,10 @@ further_reading:
         link: https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio
         type: website
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

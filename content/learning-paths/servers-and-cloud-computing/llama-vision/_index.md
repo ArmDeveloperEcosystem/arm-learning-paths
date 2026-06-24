@@ -5,10 +5,12 @@ minutes_to_complete: 45
 
 who_is_this_for: This Learning Path is for software developers and ML engineers who are interested in deploying a production-ready vision chatbot for their application with optimized performance on the Arm Architecture.
 
+description: Build a production-ready vision chatbot on Google Axion using Streamlit, PyTorch, and Hugging Face Transformers with a quantized Llama 3.2-Vision model.
+
 learning_objectives:
-    - Build a frontend with Streamlit to input images and prompts.
-    - Build the backend to download a Llama 3.2-Vision model, quantize it, and run it using PyTorch and Hugging Face Transformers.
-    - Monitor and analyze inference on Arm CPUs.
+    - Build a frontend with Streamlit to input images and prompts
+    - Build the backend to download a Llama 3.2-Vision model, quantize it, and run it using PyTorch and Hugging Face Transformers
+    - Monitor and analyze inference on Arm CPUs
 
 prerequisites:
     - A Google Cloud Axion compute instance or [any Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider with at least 32 cores.
@@ -18,6 +20,10 @@ prerequisites:
     - A basic understanding of LLM fundamentals.
 
 author: Nobel Chowdary Mandepudi
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -33,7 +39,7 @@ tools_software_languages:
     - PyTorch
     - Streamlit
     - Google Axion
-   
+
 further_reading:
     - resource:
         title: Getting started with Llama
@@ -48,11 +54,10 @@ further_reading:
         link: https://blogs.oracle.com/ai-and-datascience/post/democratizing-generative-ai-with-cpu-based-inference
         type: blog
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

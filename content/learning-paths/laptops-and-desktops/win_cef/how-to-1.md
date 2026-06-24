@@ -225,7 +225,7 @@ Re-run the application and you will see the following:
 
 This example demonstrates the versatility and power of CEF applications. One of their key strengths is the ability to modify the rendered content dynamically. This means you can change what's displayed in the application, like updating the HTML or CSS, without having to rebuild the entire application each time. This feature significantly streamlines the development process, making it quicker and more efficient.
 
-Let's leverage this capability to enhance our application. You will focus on styling the application by updating the HTML and CSS, providing a more engaging and visually appealing user interface. This step will show how easily you can improve the look and feel of your CEF application with just a few modifications to the web content.
+Let's leverage this capability to enhance our application. You will focus on styling the application by updating the HTML and CSS, providing a more engaging and visually appealing user interface. This step will show how easily you can improve the look and feel of your CEF application with a few modifications to the web content.
 
 ### Style the application
 Add `styles.css` file to modify the appearance of the application:

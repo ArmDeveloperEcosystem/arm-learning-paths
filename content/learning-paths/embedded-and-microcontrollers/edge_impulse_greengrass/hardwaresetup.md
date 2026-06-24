@@ -1,5 +1,6 @@
 ---
 title: Select and set up your edge device
+description: Choose an Arm edge platform and complete the hardware setup required for the Edge Impulse Greengrass workflow.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

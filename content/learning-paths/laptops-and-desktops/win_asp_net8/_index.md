@@ -1,6 +1,8 @@
 ---
 title: Run ASP.NET Core Web Server on Arm64
 
+description: Learn how to build and run an ASP.NET Core 8 web server application with Web API and dependency injection services on Windows on Arm.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for developers who are interested in building a web server for a headless IoT applications.
@@ -16,6 +18,10 @@ prerequisites:
     - Any code editor, we recommend using [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user).
 
 author: Dawid Borycki
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -42,10 +48,10 @@ further_reading:
         link: https://dotnet.microsoft.com/en-us/apps/aspnet
         type: website
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

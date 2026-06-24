@@ -1,5 +1,6 @@
 ---
 title: Deploy Arm-based Cobalt 100 VMs using Azure Resource Manager templates
+description: Learn how to create and deploy Azure Resource Manager templates to provision Arm64-based Cobalt 100 virtual machines on Azure using the Azure CLI.
 
 minutes_to_complete: 45
 
@@ -17,6 +18,10 @@ prerequisites:
     - An SSH key pair for authentication
 
 author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -45,10 +50,10 @@ further_reading:
         link: /learning-paths/servers-and-cloud-computing/cobalt/
         type: documentation
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

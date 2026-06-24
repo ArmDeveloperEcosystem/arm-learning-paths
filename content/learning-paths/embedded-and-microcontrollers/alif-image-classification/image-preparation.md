@@ -1,5 +1,6 @@
 ---
 title: Prepare a test image
+description: Prepare a test image with the expected size and format so the Alif Ensemble firmware can run image classification inference.
 weight: 7
 
 layout: "learningpathall"

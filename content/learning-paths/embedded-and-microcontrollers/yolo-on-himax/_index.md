@@ -1,6 +1,8 @@
 ---
 title: Run a Computer Vision Model on a Himax Microcontroller
 
+description: Learn how to run a YOLO object detection model on the Himax WiseEye2 module, build the Himax SDK, update firmware, and connect to the Grove Vision AI module for computer vision applications.
+
 minutes_to_complete: 90
 
 who_is_this_for: This is an introductory topic for developers who would like to learn about how to run a computer vision application on an embedded device from Himax.
@@ -23,6 +25,10 @@ author:
     - Alex Su
     - Kieran Hejmadi
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: ML
@@ -38,9 +44,6 @@ operatingsystems:
     - Linux
     - macOS
 
-
-
-
 further_reading:
     - resource:
         title: Grove Vision AI Module V2 User Documentation
@@ -51,10 +54,10 @@ further_reading:
         link: https://www.himax.com.tw/products/wiseeye-ai-sensing/wiseeye2-ai-processor/
         type: blog
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

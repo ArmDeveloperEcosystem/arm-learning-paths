@@ -1,6 +1,7 @@
 ---
 title: Deploy CircleCI Arm Native Workflows on AWS EC2 Graviton
-    
+description: Learn how to install and configure CircleCI self-hosted machine runners on AWS Graviton Arm64 instances to execute CI/CD workflows natively on Arm.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for developers and DevOps engineers who want to set up and run CircleCI Arm native workflows on Linux Arm64 virtual machines. You'll use AWS EC2 Graviton instances (Neoverse N1) and self-hosted runners. 
@@ -17,6 +18,10 @@ prerequisites:
 
 author: Annie Tallund
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ##### Tags
 skilllevels: Introductory
 subjects: CI-CD
@@ -30,7 +35,6 @@ tools_software_languages:
   - CircleCI
   - Bash
   - Git
-
 
 operatingsystems:
   - Linux
@@ -54,8 +58,8 @@ further_reading:
       link: https://circleci.com/docs/guides/toolkit/local-cli/
       type: documentation
 
-
 weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

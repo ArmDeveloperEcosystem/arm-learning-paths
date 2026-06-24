@@ -1,5 +1,6 @@
 ---
 title: Learn about interrupts
+description: Learn why interrupt-driven programming improves responsiveness compared with polling in the Raspberry Pi Pico prototype.
 weight: 8
 
 ### FIXED, DO NOT MODIFY

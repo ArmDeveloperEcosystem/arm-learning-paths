@@ -34,11 +34,11 @@ The instructions to login to the Google Cloud CLI and create the keys are below.
 
 The installation of Terraform on your Desktop/Laptop needs to communicate with GCP. Thus, Terraform needs to be authenticated.
 
-To obtain GCP user credentials, follow this [guide](/install-guides/gcloud#acquire-user-credentials).
+To obtain GCP user credentials, follow this [guide](/install-guides/gcloud/#acquire-user-credentials).
 
 ### Generate an SSH key-pair
 
-Generate an SSH key-pair (public key, private key) using `ssh-keygen` to use for GCP instance access. To generate the key-pair, follow this [guide](/install-guides/ssh#ssh-keys).
+Generate an SSH key-pair (public key, private key) using `ssh-keygen` to use for GCP instance access. To generate the key-pair, follow this [guide](/install-guides/ssh/#ssh-keys).
 
 {{% notice Note %}} 
 If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
@@ -188,7 +188,7 @@ Apply complete! Resources: 5 added, 0 changed, 0 destroyed.
 
 Install MySQL and the required dependencies on both the instances. 
 
-You can use the same `playbook.yaml` file used in the section, [Deploy Redis as a cache for MySQL on an AWS Arm based Instance](/learning-paths/servers-and-cloud-computing/redis_cache/redis_mysql_aws#configure-mysql-through-ansible).
+You can use the same `playbook.yaml` file used in the section, [Deploy Redis as a cache for MySQL on an AWS Arm based Instance](/learning-paths/servers-and-cloud-computing/redis_cache/redis_mysql_aws/#configure-mysql-through-ansible).
 
 ### Ansible Commands
 
@@ -262,11 +262,11 @@ PLAY RECAP *********************************************************************
 
 ## Connect to Database from local machine
 
-Follow the instructions in this [section](/learning-paths/servers-and-cloud-computing/redis_cache/redis_mysql_aws#connect-to-database-from-local-machine) to connect to the database from a local machine.
+Follow the instructions in this [section](/learning-paths/servers-and-cloud-computing/redis_cache/redis_mysql_aws/#connect-to-database-from-local-machine) to connect to the database from a local machine.
 
 ## Deploy Redis as a cache for MySQL using Python
 
-Follow the instructions in this [section](/learning-paths/servers-and-cloud-computing/redis_cache/redis_mysql_aws#deploy-redis-as-a-cache-for-mysql-using-python) to deploy Redis as a cache for MySQL using Python.
+Follow the instructions in this [section](/learning-paths/servers-and-cloud-computing/redis_cache/redis_mysql_aws/#deploy-redis-as-a-cache-for-mysql-using-python) to deploy Redis as a cache for MySQL using Python.
 
 You have successfully deployed Redis as a cache for MySQL on a Google Cloud Arm based Instance.
 

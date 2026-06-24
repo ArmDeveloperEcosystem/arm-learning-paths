@@ -1,5 +1,6 @@
 ---
 title: Build and share Docker images using AWS CodeBuild
+description: Learn how to automate Docker image creation for Arm using AWS CodeBuild with GitHub integration and run the images on any Arm system with Docker installed.
 
 minutes_to_complete: 30
 
@@ -14,6 +15,10 @@ prerequisites:
     - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or any Arm server, laptop, or single-board computer running [Docker](/install-guides/docker/) used to run the created images
 
 author: Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -39,11 +44,10 @@ further_reading:
         link: https://github.com/aws/aws-codebuild-docker-images 
         type: website
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

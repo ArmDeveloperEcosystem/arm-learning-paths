@@ -1,7 +1,6 @@
 ---
 title: Generate audio with Stable Audio Open Small using ExecuTorch
-
-    
+description: Learn how to convert the Stable Audio Open Small model to ExecuTorch format and build an audio generation application for Android or macOS.
 minutes_to_complete: 45
 
 who_is_this_for: This is an introductory topic for developers who want to deploy the Stable Audio Open Small text-to-audio model using ExecuTorch on an Android device or macOS.
@@ -20,6 +19,10 @@ prerequisites:
 author:
     - Adnan AlSinan
     - Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -57,12 +60,10 @@ further_reading:
         link: https://gitlab.arm.com/kleidi/kleidiai
         type: website
 
-
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

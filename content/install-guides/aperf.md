@@ -5,6 +5,7 @@ author: Jason Andrews
 multi_install: false
 multitool_install_part: false
 official_docs: https://github.com/aws/aperf
+description: Install APerf on Arm Linux (aarch64) to collect system performance metrics and generate HTML reports for analysis on AWS Graviton and other Arm servers.
 test_images:
 - ubuntu:latest
 test_maintenance: true
@@ -17,9 +18,7 @@ APerf is an open source command line tool maintained by AWS. It helps you monito
 
 APerf collects system data and saves it in an archive. It then generates a static HTML report from one or more archives to visualize the data. When you generate the report, APerf analyzes the data to automatically detect potential performance issues. You can open the report in a browser to view all collected data and analytical findings.
 
-## Install APerf
-
-This guide provides a quick solution to install APerf on Arm Linux and get started.
+In this guide, you'll learn how to install APerf on Arm Linux and get started with reports.
 
 ## Before you begin
 
@@ -35,17 +34,17 @@ The output should be:
 aarch64
 ```
 
-{{% notice Note %}} If you see a different result, you are not using an Arm computer running 64-bit Linux. APerf can only run on Linux.{{% /notice %}}
+{{% notice Note %}} If you see a different result, you are not using an Arm computer running 64-bit Linux. APerf can run only on Linux.{{% /notice %}}
 
-To allow APerf to collect PMU (Processor Monitoring Unit) metrics without sudo or root permissions, set `/proc/sys/kernel/perf_event_paranoid` to -1:
+To allow APerf to collect Processor Monitoring Unit (PMU) metrics without `sudo` or `root` permissions, set `/proc/sys/kernel/perf_event_paranoid` to `-1`:
 
 ```bash
 sudo sysctl -w kernel.perf_event_paranoid=-1
 ```
 
-To use APerf's CPU profiling option (`--profile`), install the `perf` binary. See the [Perf for Linux on Arm](/install-guides/perf) install guide for instructions. 
+To use APerf's CPU profiling option (`--profile`), install the `perf` binary. For more information, see the [Perf for Linux on Arm](/install-guides/perf/) install guide. 
 
-For kernel address visibility, set `/proc/sys/kernel/kptr_restrict` to 0:
+For kernel address visibility, set `/proc/sys/kernel/kptr_restrict` to `0`:
 
 ```bash
 sudo sysctl -w kernel.kptr_restrict=0
@@ -54,33 +53,36 @@ sudo sysctl -w kernel.kptr_restrict=0
 To use APerf's Java profiling option (`--profile-java`), install the [async-profiler](https://github.com/async-profiler/async-profiler) tool.
 
 ## Download and install APerf
-The easiest way to install APerf is to download a release from GitHub and extract it.
 
-Visit the [releases page](https://github.com/aws/aperf/releases/) to see available releases.
+You can install APerf by downloading a release from GitHub and extracting it.
+
+{{% notice Note %}}
+The following commands use APerf version 1.2.2. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [APerf releases](https://github.com/aws/aperf/releases/).
+{{% /notice %}}
 
 You can download a release from the command line:
 
 ```bash { target="ubuntu:latest" }
-wget https://github.com/aws/aperf/releases/download/v1.0.0/aperf-v1.0.0-aarch64.tar.gz
+wget https://github.com/aws/aperf/releases/download/v1.2.2/aperf-v1.2.2-aarch64.tar.gz
 ```
 
 Extract the release:
 
 ```bash { target="ubuntu:latest" }
-tar xvfz aperf-v1.0.0-aarch64.tar.gz
+tar xvfz aperf-v1.2.2-aarch64.tar.gz
 ```
 
 Add the path to `aperf` in your `.bashrc` file.
 
 ```console
-echo 'export PATH="$PATH:$HOME/aperf-v1.0.0-aarch64"' >> ~/.bashrc
+echo 'export PATH="$PATH:$HOME/aperf-v1.2.2-aarch64"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
 Alternatively, you can copy the `aperf` executable to a directory already in your search path.
 
 ```bash { target="ubuntu:latest" }
-sudo cp aperf-v1.0.0-aarch64/aperf /usr/local/bin
+sudo cp aperf-v1.2.2-aarch64/aperf /usr/local/bin
 ```
 
 Confirm `aperf` is installed by printing the version:
@@ -89,17 +91,17 @@ Confirm `aperf` is installed by printing the version:
 aperf --version
 ```
 
-The output should print the version:
+The output should be:
 
 ```output
-aperf 1.0.0 (4cf8d28)
+aperf 1.2.2 (4cf8d28)
 ```
 
 ## Verify APerf is working
 
 To confirm APerf is working, start a collection run with the default settings. The default interval is 1 second, and the default period is 10 seconds.
 
-Run the following command to start data collection:
+To start data collection, run:
 
 ```console
 aperf record -r test_1
@@ -109,7 +111,7 @@ After 10 seconds, the collection completes. APerf creates a directory named `tes
 
 If you need CPU profiling, add the `--profile` flag. For Java profiling, add the `--profile-java` flag.
 
-### How do I create and view a report?
+### Create and view a report
 
 Generate a report from the recorded data:
 
@@ -131,7 +133,7 @@ To learn more about a specific metric, select the info button next to it to open
 
 ![APerf report help panel showing detailed metric information alt-txt#center](/install-guides/_images/aperf_report_help_panel.webp "APerf report help panel")
 
-### How do I compare multiple runs?
+### Compare multiple runs
 
 To demonstrate comparing multiple runs, create a second run with `aperf record`:
 
@@ -139,7 +141,7 @@ To demonstrate comparing multiple runs, create a second run with `aperf record`:
 aperf record -r test_2
 ```
 
-Similarly, after 10 seconds the collection completes, and APerf produces a directory named `test_2` and a tar file named `test_2.tar.gz`.
+Similarly, after 10 seconds, the collection completes. APerf produces a directory named `test_2` and a tar file named `test_2.tar.gz`.
 
 Generate a report that includes both runs. The first run in the `-r` arguments becomes the base run for automatic comparisons:
 
@@ -159,7 +161,7 @@ When you view metric graphs, APerf aligns graphs of the same metric from differe
 
 ![APerf report showing aligned metric graphs from multiple runs for comparison alt-text#center](/install-guides/_images/aperf_report_aligned_graphs.png "APerf report aligned graphs")
 
-### How do I view reports from a remote system?
+### View reports from a remote system
 
 If you're working on a remote system or cloud instance without a desktop environment, you can view APerf reports in your local browser by running a web server on the remote machine.
 

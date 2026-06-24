@@ -1,13 +1,13 @@
 ---
 title: Connect AI agents to edge devices using Device Connect and Strands
+description: Learn how to connect AI agents to Arm-based edge devices using Device Connect for structured device access and Strands for agent orchestration, with examples for both simulated and physical robots.
+minutes_to_complete: 30
+
+who_is_this_for: This is an introductory topic for software developers who want to connect AI agents to edge devices. You'll use Device Connect, Arm's platform for structured device access, and Strands, AWS's open-source agent SDK. The examples cover both physical and simulated devices.
 
 draft: true
 cascade:
     draft: true
-
-minutes_to_complete: 30
-
-who_is_this_for: This is an introductory topic for software developers who want to connect AI agents to edge devices. You'll use Device Connect, Arm's platform for structured device access, and Strands, AWS's open-source agent SDK. The examples cover both physical and simulated devices.
 
 learning_objectives:
     - Understand how Device Connect and Strands work together to give AI agents structured access to Arm-based edge devices
@@ -24,7 +24,9 @@ author:
     - Annie Tallund
     - Kavya Sri Chennoju
 
-
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -64,3 +66,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

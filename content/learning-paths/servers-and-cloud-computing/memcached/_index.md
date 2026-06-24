@@ -5,6 +5,7 @@ minutes_to_complete: 10
 
 who_is_this_for: This is an introductory topic for developers who want to use memcached as their in-memory key-value store.
 
+description: Install memcached on Arm cloud servers and benchmark in-memory key-value store performance using open-source tools.
 
 learning_objectives:
 - Install and run memcached on your Arm-based cloud server
@@ -14,6 +15,10 @@ prerequisites:
 - An Arm based instance from an appropriate cloud service provider.
 
 author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 test_images:
 - ubuntu:latest
@@ -44,10 +49,10 @@ further_reading:
         link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/accelerating-deep-packet-inspection-with-neon-on-arm-neoverse
         type: blog
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

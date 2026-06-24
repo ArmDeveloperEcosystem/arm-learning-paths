@@ -17,7 +17,12 @@ prerequisites:
     - An AI-powered IDE such as VS Code, Copilot in VS Code, Kiro (IDE or CLI) or Codex
     - Basic familiarity with Docker and C/C++ development
     - Access to an Arm-based cloud instance or local Arm computer running Linux or macOS
+
 author: Joe Stech
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -31,8 +36,6 @@ tools_software_languages:
     - GitHub Copilot
 operatingsystems:
     - Linux
-
-
 
 further_reading:
     - resource:
@@ -56,11 +59,10 @@ further_reading:
         link: /learning-paths/servers-and-cloud-computing/intro/
         type: learning-path
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

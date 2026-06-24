@@ -13,10 +13,14 @@ learning_objectives:
     - Create and manage multiple threads within an RTX5 RTOS application
 
 prerequisites:
-    - Installation of [Arm Keil Studio for VS Code](/install-guides/keilstudio_vs)
+    - Installation of [Arm Keil Studio for VS Code](/install-guides/keilstudio_vs/)
     - Some familiarity with CMSIS is assumed
 
 author: Ronan Synnott
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -40,10 +44,10 @@ further_reading:
         link: https://www.keil.com/pack/doc/compiler/EventRecorder/html/index.html
         type: documentation
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

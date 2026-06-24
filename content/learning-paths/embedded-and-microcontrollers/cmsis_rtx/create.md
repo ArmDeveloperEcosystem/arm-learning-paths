@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Create and setup Keil MDK project"
+description: Create a Keil MDK project, install CMSIS packs, and configure the components needed for an RTX5 application.
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -11,7 +12,7 @@ This learning path will introduce the steps to create a basic RTX based RTOS app
 
 For more information on the latest update, see the [CMSIS v6 is here](https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/cmsis-v6-is-here) blog.
 
-You'll use [Keil MDK](/install-guides/mdk) through this Learning Path. If you're using [Arm Development Studio](/install-guides/armds) refer to the appropriate comments.
+You'll use [Keil MDK](/install-guides/mdk/) through this Learning Path. If you're using [Arm Development Studio](/install-guides/armds/) refer to the appropriate comments.
 
 {{% notice  Note%}}
 If using `Arm Keil Studio for Visual Studio Code` please go to [Build an RTX5 RTOS application with Keil Studio (VS Code)](/learning-paths/embedded-and-microcontrollers/cmsis_rtx_vs/).

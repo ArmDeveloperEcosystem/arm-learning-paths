@@ -1,5 +1,6 @@
 ---
 title: Optimize MLOps with Arm-hosted GitHub Runners
+description: Learn how to set up Arm-hosted GitHub runners and train PyTorch ML models using the German Traffic Sign Recognition Benchmark dataset with automated workflows.
 
 minutes_to_complete: 60
 
@@ -21,6 +22,10 @@ author:
     - Pareena Verma
     - Annie Tallund
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: CI-CD
@@ -33,7 +38,6 @@ tools_software_languages:
     - GitHub
 operatingsystems:
     - Linux
-
 
 further_reading:
     - resource:
@@ -49,11 +53,10 @@ further_reading:
         link: https://github.blog/enterprise-software/ci-cd/streamlining-your-mlops-pipeline-with-github-actions-and-arm64-runners/
         type: blog
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

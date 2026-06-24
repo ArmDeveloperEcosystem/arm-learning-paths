@@ -1,5 +1,6 @@
 ---
 title: Deploy applications on Arm-based GKE using GitOps with Argo CD
+description: Learn how to deploy and manage applications on Google Cloud GKE Arm64 clusters using Argo CD GitOps workflows with automated sync and self-healing on Axion processors.
 
 minutes_to_complete: 40
 
@@ -22,6 +23,10 @@ prerequisites:
 
 author: Pareena Verma
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ##### Tags
 skilllevels: Introductory
 subjects: Containers and Virtualization
@@ -38,7 +43,7 @@ tools_software_languages:
   - GKE
   - Git
   - NGINX
-    
+
 operatingsystems:
   - Linux
 
@@ -66,3 +71,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

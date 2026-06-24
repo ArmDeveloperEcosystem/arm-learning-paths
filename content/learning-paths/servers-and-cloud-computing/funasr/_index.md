@@ -1,5 +1,6 @@
 ---
 title: Deploy ModelScope FunASR Model on Arm Servers
+description: Learn how to deploy the ModelScope FunASR Chinese automatic speech recognition model on Arm-based servers with real-time transcription and sentiment analysis.
 
 minutes_to_complete: 60
 
@@ -14,6 +15,10 @@ prerequisites:
     - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider, or a local Arm Linux computer with at least 8 CPUs and 16GB of RAM.
 
 author: Odin Shen
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -34,7 +39,6 @@ tools_software_languages:
     - Generative AI
     - Python
 
-
 further_reading:
     - resource:
         title: ModelScope GitHub Repository
@@ -53,11 +57,10 @@ further_reading:
         link: https://community.arm.com/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/neoverse-n2-delivers-leading-price-performance-on-asr
         type: blog
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

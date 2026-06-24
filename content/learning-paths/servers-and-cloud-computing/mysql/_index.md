@@ -14,6 +14,11 @@ prerequisites:
     - If you do not have an Arm node, the next section discusses some options.
 
 author: Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: Databases
@@ -43,7 +48,6 @@ further_reading:
         title: Ansible
         link: https://docs.ansible.com/
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

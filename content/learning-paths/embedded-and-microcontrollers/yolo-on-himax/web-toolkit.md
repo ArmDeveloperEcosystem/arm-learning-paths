@@ -1,5 +1,6 @@
 ---
 title: Run additional models in the web toolkit
+description: Modify the Himax web toolkit build settings and run additional models on the Grove Vision AI module.
 weight: 6
 
 ### FIXED, DO NOT MODIFY

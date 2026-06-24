@@ -28,7 +28,7 @@ The instructions to login to the Azure CLI and create these keys are below.
 
 ### Generate an SSH key-pair
 
-Generate an SSH key-pair (public key, private key) using `ssh-keygen` to use for Arm VMs access. To generate the key-pair, follow this [guide](/install-guides/ssh#ssh-keys).
+Generate an SSH key-pair (public key, private key) using `ssh-keygen` to use for Arm VMs access. To generate the key-pair, follow this [guide](/install-guides/ssh/#ssh-keys).
 
 {{% notice Note %}}
 If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
@@ -38,7 +38,7 @@ If you already have an SSH key-pair present in the `~/.ssh` directory, you can s
 
 The installation of Terraform on your desktop or laptop needs to communicate with Azure. Thus, Terraform needs to be authenticated.
 
-For Azure authentication, follow this [guide](/install-guides/azure_login).
+For Azure authentication, follow this [guide](/install-guides/azure_login/).
 
 ## Image References
 
@@ -384,7 +384,7 @@ The **Resource group** name and **Public IP address** of this virtual machine sh
 ![terraform2 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/40816837/6b03fb92-fd64-4397-a7c4-b7d7fa3ad663)
 
 ### Use private key to SSH into Azure VM
-Connect to your Azure VM with your preferred SSH client. You will be using the private key created through [ssh-keygen](/install-guides/ssh#ssh-keys), located at `~/.ssh/id_rsa`.
+Connect to your Azure VM with your preferred SSH client. You will be using the private key created through [ssh-keygen](/install-guides/ssh/#ssh-keys), located at `~/.ssh/id_rsa`.
 
 Follow the connect instructions and commands mentioned in the Azure VM **Connect** section:
 
@@ -444,7 +444,7 @@ will identify the host machine as `aarch64`.
 
 ### Run hello world
 
-Install the `gcc` compiler. If you are using `Ubuntu`, use the following commands. If not, refer to the [GNU compiler install guide](/install-guides/gcc):
+Install the `gcc` compiler. If you are using `Ubuntu`, use the following commands. If not, refer to the [GNU compiler install guide](/install-guides/gcc/):
 
 ```console
 sudo apt-get update

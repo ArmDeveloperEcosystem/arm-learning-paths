@@ -17,10 +17,14 @@ prerequisites:
     - For OpenGL ES applications, your device must be running Android 10 or later.
     - For Vulkan applications, your device must be running Android 9 or later.
     - A debuggable build of your application. 
-    - Arm Performance Studio installed. Follow the [Arm Performance Studio install guide](/install-guides/ams) for instructions.
+    - Arm Performance Studio installed. Follow the [Arm Performance Studio install guide](/install-guides/ams/) for instructions.
     - Android SDK Platform tools installed. Required for the Android Debug bridge (adb).
 
 author: Ronan Synnott
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -77,10 +81,10 @@ further_reading:
         link: https://renderdoc.org/docs/index.html
         type: documentation
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

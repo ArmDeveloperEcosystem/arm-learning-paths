@@ -9,6 +9,8 @@ additional_search_terms:
 
 minutes_to_complete: 10
 
+description: Install CMake on Arm Linux (aarch64) and Windows on Arm to build and manage C and C++ projects using a cross-platform build system.
+
 author: Jason Andrews
 
 official_docs: https://cmake.org/documentation/
@@ -27,25 +29,19 @@ weight: 1
 
 [CMake](https://cmake.org/) is an open-source, cross-platform build tool for software development projects, especially C and C++. 
 
-It is available for a variety of operating systems and there are multiple ways to install it. 
+CMake is available on a variety of operating systems and can be installed in different ways. In this guide, you'll learn how to install CMake for Arm Linux distributions and for Windows on Arm. 
 
-## What should I do before installing CMake for Arm Linux distributions or CMake for Windows on Arm?
+## Before you begin
 
-This article provides quick instructions to install CMake for Arm Linux distributions and for Windows on Arm.
+If you're installing CMake for Windows on Arm, ensure you are using a Windows on Arm device such as the Lenovo ThinkPad X13s or Surface Pro 9 with 5G.
 
-### How do I prepare to install CMake for Windows on Arm?
-
-Confirm you are using a Windows on Arm device such as the Lenovo ThinkPad X13s or Surface Pro 9 with 5G.
-
-### How do I prepare to install CMake on Arm Linux distributions?
-
-Confirm you are using an Arm computer with 64-bit Linux by running:
+If you're installing CMake for Arm Linux, confirm you are using an Arm computer with 64-bit Linux by running:
 
 ```bash { target="ubuntu:latest" }
 uname -m
 ```
 
-The output should be:
+The output is similar to:
 
 ```output
 aarch64
@@ -53,83 +49,84 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
-## How do I download and install CMake on Windows on Arm?
+## Download and install CMake on Windows on Arm
 
-Native CMake support for Windows on Arm is available starting with version 3.24. Installers are available now from the [CMake download](https://cmake.org/download/) page. Emulated CMake can be used but is no longer needed unless an older version of CMake must be used.
+Native CMake support for Windows on Arm is available starting with version 3.24. Emulated CMake can be used but is no longer needed unless you need to use an older version of CMake.
 
-Download the [Windows ARM64 Installer](https://github.com/Kitware/CMake/releases/download/v3.28.1/cmake-3.28.1-windows-arm64.msi) and run it. 
+The following steps install CMake version 4.3.1. To find the latest Windows on Arm installer, see [CMake download](https://cmake.org/download/).
 
-The welcome screen will appear:
+To download and install CMake on Windows on Arm, follow these steps: 
 
-![Install #center](/install-guides/_images/cmake-welcome.png)
+1. Download the [Windows ARM64 Installer](https://github.com/Kitware/CMake/releases/download/v4.3.1/cmake-4.3.1-windows-arm64.msi) and run it. The welcome screen will appear.
 
-Accept the End-User License Agreement. 
+ ![A screenshot of the Windows CMake Setup Wizard welcome page that asks the user to click the Next button to contunue with installation. #center](/install-guides/_images/cmake-welcome.png)
 
-Check `Add CMake to the system PATH for the current user` if you want to easily invoke cmake from any directory.
+2. Click **Next** and then accept the End-User License Agreement.
 
-![Install #center](/install-guides/_images/cmake-path.png)
+3. Under **Install Options**, to invoke CMake from any directory, select **Add CMake to the system PATH for the current user** and then click **Next**.
 
-Follow the prompts to complete the installation. 
+4. Follow the prompts to complete the installation. Wait for the installer to complete and then click **Finish**.
+![A screenshot of the CMake Windows Setup Wizard that shows that the installation is complete and asks the user to click the Finish button to exit the Wizard. #center](/install-guides/_images/cmake-finish.png) 
 
-Wait for the installer to complete and click `Finish`:
+<!-- ![Install #center](/install-guides/_images/cmake-path.png) -->
 
-![Install #center](/install-guides/_images/cmake-finish.png)
-
-## How do I download and install CMake on Linux?
+## Download and install CMake on Linux
 
 There are multiple ways to install CMake on Linux. 
 
-### How do I install CMake using the package manager?
+### Install CMake using the package manager
 
-Use `apt` on Ubuntu and Debian to install:
+On Ubuntu and Debian, use `apt`:
 
 ```bash { target="ubuntu:latest" }
 sudo apt update
 sudo apt install cmake -y
 ```
 
-Use `dnf` to install on Fedora and Amazon Linux 2023:
+On Fedora and Amazon Linux 2023, use `dnf`:
 
 ```console
 sudo dnf install cmake -y
 ```
 
-Depending on your Linux distribution you may have a version of `cmake` which is too old or too new for your project. 
+{{% notice Note %}}
+Depending on your Linux distribution, you may have a version of `cmake` which is too old or too new for your project. 
+{{% /notice %}}
 
-### How do I install the CMake Snap?
+### Install CMake with Snap
 
-Installing with `snap` provides the latest version of `cmake`:
+By installing with `snap`, you get the latest version of `cmake`:
 
 ```console
 sudo snap install cmake --classic
 ```
 
-With `snap` the `cmake` executable is installed in `/snap/bin` which should already be in your search path.
+With `snap`, the `cmake` executable is installed in `/snap/bin` which should already be in your search path.
 
-### How do I use a specific CMake release from GitHub?
+### Use a specific CMake release from GitHub
 
-If you need a specific version look for it in the [GitHub releases area](https://github.com/Kitware/CMake/releases)
+To install a specific version of CMake from GitHub, follow these steps:
 
-Substitute the release number you want to install in the commands below.. 
+{{% notice Note %}}
+The following commands use CMake version 4.3.1. The same commands work with other versions. Replace the script used in these steps with the script for your version of choice. To find the latest version, see [CMake releases](https://github.com/Kitware/CMake/releases).
+{{% /notice %}} 
 
 1. Download a release from GitHub:
 
 ```console
 cd $HOME
-wget -N https://github.com/Kitware/CMake/releases/download/v3.28.1/cmake-3.28.1-Linux-aarch64.sh
+wget -N https://github.com/Kitware/CMake/releases/download/v4.3.1/cmake-4.3.1-linux-aarch64.sh
 ```
 
-2. Run the install script and set the search path using:
+2. Run the install script and set the search path:
 
 ```console
 mkdir cmake
-bash /home/$USER/cmake-3.28.1-Linux-aarch64.sh --skip-license --exclude-subdir --prefix=$HOME/cmake
+bash /home/$USER/cmake-4.3.1-Linux-aarch64.sh --skip-license --exclude-subdir --prefix=$HOME/cmake
 export PATH=$PATH:$HOME/cmake/bin
 ```
 
-### How do I verify that CMake is installed?
-
-1. Confirm CMake is installed on Linux or Windows. 
+### Verify that CMake is installed
 
 After installing CMake, run it to confirm it is installed and can be found: 
 
@@ -152,10 +149,7 @@ re-generate its build system.
 
 Run 'cmake --help' for more information.
 ```
-
-2. Print the CMake version
-
-To print the version run:
+After confirming CMake can be found, print the version:
 
 ```console
 cmake --version
@@ -164,9 +158,9 @@ cmake --version
 The output is similar to:
 
 ```output
-cmake version 3.28.1
+cmake version 4.3.1
 
 CMake suite maintained and supported by Kitware (kitware.com/cmake).
 ```
 
-You are ready to use CMake.
+You are now ready to use CMake.

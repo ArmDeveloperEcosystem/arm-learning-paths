@@ -27,7 +27,7 @@ Before you begin you will also need:
 
 Terraform requires AWS authentication to create AWS resources. You can generate access keys (access key ID and secret access key) to perform authentication. Terraform uses the access keys to make calls to AWS using the AWS CLI. 
 
-To generate and configure the Access key ID and Secret access key, follow the [AWS Credentials install guide](/install-guides/aws_access_keys).
+To generate and configure the Access key ID and Secret access key, follow the [AWS Credentials install guide](/install-guides/aws_access_keys/).
 
 ## Deploy MariaDB RDS instances
 
@@ -162,7 +162,7 @@ For more information about accessing RDS refer to [Connecting to an Amazon RDS D
 
 ### Create Database and Table
 
-You can use the instructions from the previous topic to [access the Database and create a table](/learning-paths/servers-and-cloud-computing/mariadb/ec2_deployment#access-database-and-create-table).
+You can use the instructions from the previous topic to [access the Database and create a table](/learning-paths/servers-and-cloud-computing/mariadb/ec2_deployment/#access-database-and-create-table).
 
 ### Clean up resources
 

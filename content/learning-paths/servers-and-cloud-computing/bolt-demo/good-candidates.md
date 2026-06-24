@@ -1,6 +1,6 @@
 ---
 title: Identify programs for BOLT optimization
-weight: 4
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -27,7 +27,7 @@ Higher branch mispredictions or I-TLB misses can also indicate that code layout 
 
 ## Collecting the metrics
 
-You can collect these metrics using the Topdown Methodology (see [installation guide](/install-guides/topdown-tool)) which builds on the Linux [perf](/install-guides/perf/) profiling tool.
+You can collect these metrics using the Topdown Methodology (see [installation guide](/install-guides/topdown-tool/)) which builds on the Linux [perf](/install-guides/perf/) profiling tool.
 
 Alternatively, you can compute only the L1 I-cache MPKI metric manually using a basic Linux `perf stat` command.
 

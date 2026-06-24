@@ -1,5 +1,6 @@
 ---
-title: Using Unity's Machine Learning Agents on Arm
+title: Deploy Unity Machine Learning Agents on Arm Android devices
+description: Learn how to integrate Unity's Machine Learning Agents toolkit into games deployable to Arm-powered Android devices.
 
 minutes_to_complete: 60
 
@@ -14,7 +15,11 @@ prerequisites:
 - An Android mobile device that has a 64-bit processor and supports at least Android 8.
 - A USB cable to connect the mobile device to your computer.
 
-author: Arm
+author: Annie Tallund
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -25,7 +30,6 @@ operatingsystems:
     - Android
 tools_software_languages:
     - Unity
-
 
 further_reading:
     - resource:
@@ -41,11 +45,10 @@ further_reading:
         link: https://developer.arm.com/Tools%20and%20Software/Arm%20Mobile%20Studio
         type: website
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

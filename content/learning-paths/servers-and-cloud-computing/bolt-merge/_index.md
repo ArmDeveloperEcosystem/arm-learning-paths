@@ -1,5 +1,6 @@
 ---
 title: Optimize Arm applications and shared libraries with BOLT
+description: Learn how to optimize Arm application binaries and shared libraries using BOLT profile instrumentation, merge multiple profiles for improved coverage, and integrate optimized libraries.
 
 minutes_to_complete: 30
 
@@ -16,6 +17,10 @@ prerequisites:
   - An Arm-based Linux system with [BOLT](/install-guides/bolt/) and [Linux Perf](/install-guides/perf/) installed
 
 author: Gayathri Narayana Yegna Narayanan
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -39,7 +44,6 @@ further_reading:
         title: BOLT - A Practical Binary Optimizer for Data Centers and Beyond
         link: https://research.facebook.com/publications/bolt-a-practical-binary-optimizer-for-data-centers-and-beyond/
         type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

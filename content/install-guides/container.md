@@ -1,5 +1,6 @@
 ---
 title: Container CLI for macOS
+description: Install Apple Container CLI on Apple Silicon macOS and verify it by building and running Arm Linux containers in lightweight virtual machines.
 author: Rani Chowdary Mandepudi
 minutes_to_complete: 10
 official_docs: https://github.com/apple/container
@@ -14,13 +15,13 @@ tool_install: true
 weight: 1
 ---
 
-Container CLI is an open-source command-line tool from Apple for building and running Arm Linux containers directly on macOS using lightweight virtual machines without Docker Desktop or full Linux VMs.
+Container CLI is an open-source command-line tool from Apple for building and running Arm Linux containers directly on macOS. With Container CLI, you can run containers using lightweight virtual machines without Docker Desktop or full Linux VMs.
 
-It supports the full OCI (Open Container Initiative) workflow: building, running, tagging, and pushing container images.
+The CLI supports the full Open Container Initiative (OCI) workflow: building, running, tagging, and pushing container images.
 
-## What should I do before installing the Container CLI?
+In this guide, you'll learn how to install and verify the Container CLI to run Arm Linux containers natively on Apple silicon Macs.
 
-This guide shows how to install and use the `container` CLI to run Arm Linux containers natively on Apple silicon Macs.
+## Before you begin
 
 First, confirm you are using an Apple silicon Mac by running:
 
@@ -28,11 +29,12 @@ First, confirm you are using an Apple silicon Mac by running:
 uname -m
 ```
 
-Expected output:
+The expected output is:
 
 ```output
 arm64
 ```
+
 {{% notice Note %}}
 Container CLI supports only Apple silicon Macs (M1, M2, M3, and M4).
 {{% /notice %}}
@@ -43,30 +45,30 @@ Check your macOS version:
 sw_vers -productVersion
 ```
 
-Example output:
+The output is similar to:
 
 ```output
-15.6.1
+26.5.1
 ```
 
-You must be running macOS 15.0 or later to use the Container CLI.
+You must run macOS 15.0 or later to use the Container CLI.
 
-## How do I install Container CLI?
+## Install Container CLI
 
-To install Container CLI:
+To install Container CLI, go to the [GitHub Releases page](https://github.com/apple/container/releases) and download the latest signed `.pkg` installer.
 
-Go to the [GitHub Releases page](https://github.com/apple/container/releases) and download the latest signed `.pkg` installer.
-
-For example:
+{{% notice Note %}}
+The following commands use Container CLI version 1.0.0. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [GitHub Releases](https://github.com/apple/container/releases).
+{{% /notice %}}
 
 ```bash
-wget https://github.com/apple/container/releases/download/0.11.0/container-0.11.0-installer-signed.pkg
+wget https://github.com/apple/container/releases/download/1.0.0/container-1.0.0-installer-signed.pkg
 ```
 
 Install the package:
 
 ```bash
-sudo installer -pkg container-0.11.0-installer-signed.pkg -target /
+sudo installer -pkg container-1.0.0-installer-signed.pkg -target /
 ```
 
 This installs the Container binary at `/usr/local/bin/container`.
@@ -87,13 +89,13 @@ Verify the CLI version:
 container --version
 ```
 
-Example output:
+The output is similar to:
 
 ```output
-container CLI version 0.11.0 (build: release, commit: d9b8a8d)
+container CLI version 1.0.0 (build: release, commit: ee848e3)
 ```
 
-## Build and run a container
+## Verify installation by building and running a container
 
 
 In a working directory, create a file named `Dockerfile`:
@@ -113,10 +115,11 @@ Run the following to build and tag the container image as `uname`:
 container build -t uname .
 ```
 
-Example output:
+The output is similar to:
 
 ```output
-Successfully built uname:latest
+[+] Building 2.7s (5/5) FINISHED
+uname:latest
 ```
 
 ### Run the container
@@ -127,7 +130,7 @@ Run the container to verify it prints the system architecture.
 container run --rm uname
 ```
 
-Expected output:
+The expected output is:
 
 ```output
 Architecture is aarch64
@@ -137,7 +140,11 @@ The `--rm` flag cleans up the container after it exits.
 
 ## Tag and push the image
 
-Once the image is built and tested locally, it can be pushed to a container registry such as Docker Hub. This allows the image to be reused across machines or shared with others.
+After the image is built and tested locally, you can push it to a container registry such as Docker Hub. This allows the image to be reused across machines or shared with others.
+
+{{% notice Note %}}
+The following commands are for Docker Hub. The same commands work with any other OCI-compliant registry such as GitHub Container Registry (ghcr.io) or any OCI-compliant registry. Replace `docker.io` with the appropriate registry hostname.
+{{% /notice %}}
 
 Tag the image with a registry-compatible name:
 
@@ -154,8 +161,6 @@ container registry login docker.io
 ```
 
 Enter your Docker Hub username and password.
-
-The same command works with other registries such as GitHub Container Registry (ghcr.io) or any OCI-compliant registry. Replace `docker.io` with the appropriate registry hostname.
 
 Next, upload the tagged image to Docker Hub:
 
@@ -177,15 +182,16 @@ To view running or stopped containers:
 container ls
 ```
 
-## How do I uninstall the Container CLI?
+## Uninstall the Container CLI
 
 The CLI includes an uninstall script. You can choose whether to keep or delete your container data.
 
-If you plan to reinstall later and want to keep your local container data. To uninstall and keep user data (images and containers):
+To uninstall and retain user data (images and containers):
 
 ```bash
 uninstall-container.sh -k
 ```
+The command is useful if you plan to reinstall Container CLI later and want to keep your local container data.
 
 Otherwise, to uninstall and delete all user data:
 
@@ -193,6 +199,6 @@ Otherwise, to uninstall and delete all user data:
 uninstall-container.sh -d
 ```
 
-This will remove the CLI and all related images, logs, and metadata.
+This removes the CLI and all related images, logs, and metadata.
 
-You’ve now installed Container CLI and built your first Arm Linux container on macOS.
+You’ve now ready to use Container CLI.  

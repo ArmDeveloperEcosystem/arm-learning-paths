@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Create a peripheral using Virtual Input/Output (VIO)"
+description: Create a virtual LED peripheral with Arm Virtual Hardware VIO and connect it to firmware running on the simulated platform.
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -11,7 +12,7 @@ Arm Virtual Hardware (AVH) supports [Virtual Interfaces](https://arm-software.gi
 
 ## Before you begin
 
-Launch the Arm Virtual Hardware AMI in your AWS account. For full instructions refer to the [Arm Virtual Hardware install guide](/install-guides/avh#corstone).
+Launch the Arm Virtual Hardware AMI in your AWS account. For full instructions refer to the [Arm Virtual Hardware install guide](/install-guides/avh/#corstone).
 
 The example used here makes use of the [Tkinter](https://docs.python.org/3/library/tkinter.html) Python interface to Tcl/Tk, and can be installed in the AVH terminal with:
 ```console
@@ -34,7 +35,7 @@ You can now run the executable on the AVH FVP by executing the following script:
 ```console
 ./run.sh
 ```
-You can interact with the Virtual LEDs. If they're not displayed you may need to implement a [VNC connection](/install-guides/avh#vnc) to the AVH instance.
+You can interact with the Virtual LEDs. If they're not displayed you may need to implement a [VNC connection](/install-guides/avh/#vnc) to the AVH instance.
 
 ## Understand the example
 

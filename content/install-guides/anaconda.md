@@ -11,6 +11,7 @@ author: Jason Andrews
 multi_install: false
 multitool_install_part: false
 official_docs: https://docs.anaconda.com/
+description: Install Anaconda Distribution on Arm Linux (aarch64) and verify the setup by creating conda environments with TensorFlow and PyTorch.
 ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=anaconda
 test_images:
 - ubuntu:latest
@@ -21,15 +22,13 @@ tool_install: true
 weight: 1
 ---
 
-[Anaconda Distribution](https://www.anaconda.com/products/distribution) is a popular open-source Python distribution.
+[Anaconda Distribution](https://www.anaconda.com/products/distribution) is a popular open-source Python distribution. It includes access to a repository with over 8,000 open-source data science and machine learning packages.
 
-It includes access to a repository with over 8,000 open-source data science and machine learning packages.
+You can use the `conda` command to quickly install and use Python packages.
 
-The `conda` command can be used to quickly install and use Python packages.
+In this guide, you'll learn how to install and use Anaconda Distribution on an Arm server.
 
-Follow the instructions below to install and use Anaconda Distribution on an Arm server.
-
-## What should I do before installing Anaconda?
+## Before you begin
 
 Confirm you are using an Arm machine by running:
 
@@ -37,7 +36,7 @@ Confirm you are using an Arm machine by running:
 uname -m
 ```
 
-The output should be:
+The output is similar to:
 
 ```output
 aarch64
@@ -45,66 +44,65 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
-The installer requires some desktop related libraries. The dependencies can be met by installing a desktop environment.
+The installer requires some desktop related libraries. You can meet the dependencies by installing a desktop environment by running the commands for your Linux distribution.
 
-For Ubuntu/Debian, run the command:
-
-```console
+{{< tabpane code=true >}}
+  {{< tab header="Ubuntu/Debian" language="bash">}}
 sudo apt update
 sudo apt install xfce4 -y
-```
-
-For Amazon Linux, run the command:
-
-```console
+  {{< /tab >}}
+  {{< tab header="Amazon Linux" language="bash">}}
 sudo amazon-linux-extras install mate-desktop1.x
-```
+  {{< /tab >}}
+{{< /tabpane >}}
 
-## How do I download the latest Anaconda distribution?
+## Download the latest Anaconda Distribution
 
-To download the latest Anaconda distribution, run:
+To download Anaconda Distribution, run:
+
+{{% notice Note %}}
+The following commands use Anaconda version 2025.12.2. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Anaconda Distribution release notes](https://www.anaconda.com/docs/getting-started/anaconda/release-notes).
+{{% /notice %}}
 
 ```bash
-curl -O https://repo.anaconda.com/archive/Anaconda3-2024.10-1-Linux-aarch64.sh
+curl -O https://repo.anaconda.com/archive/Anaconda3-2025.12-2-Linux-aarch64.sh
 ```
 
-Depending on the version, the downloaded filename will be of the form `Anaconda3-20XX.YY-Linux-aarch64.sh` where the `XX` and `YY` values represent the year and month of the latest release.
+Depending on the version, the downloaded filename will be of the form `Anaconda3-20XX.YY-Linux-aarch64.sh` where the `XX` and `YY` values represent the year and month of the latest release. 
 
-## What are the steps to install the downloaded Anaconda distribution?
+## Install the Anaconda Distribution
 
 Run the downloaded install script.
 
 The default installation directory is `$HOME/anaconda3`. Change the installation directory as needed using the `-p` option to the install script.
 
-If you wish to review the license terms before accepting, remove `-b`.
+To review the license terms before accepting, remove `-b`.
 
 ```bash
-sh ./Anaconda3-2024.10-1-Linux-aarch64.sh -b
+sh ./Anaconda3-2025.12-2-Linux-aarch64.sh -b
 ```
 
 The install takes a couple of minutes to complete.
 
-The batch installation will not set up the shell.
-
-To set up the shell, run:
+The batch installation won't set up the shell. To set up the shell, run:
 
 ```bash
 eval "$($HOME/anaconda3/bin/conda shell.bash hook)"
 ```
 
-## How do I get started with Anaconda after installation?
+## Get started with Anaconda 
 
-Test Anaconda Distribution by running simple TensorFlow and PyTorch examples.
+Test Anaconda Distribution by running the following TensorFlow and PyTorch examples.
 
-### How do I use TensorFlow with Anaconda?
+### Use TensorFlow with Anaconda
 
-Create a new conda environment named tf, install TensorFlow, and activate the new environment.
+Create a new conda environment named `tf` and install TensorFlow:
 
 ```console
 conda create -n tf tensorflow -y
 ```
 
-Activate the environment.
+Activate the new environment:
 
 ```console
 conda activate tf
@@ -118,7 +116,7 @@ The shell prompt will now show the tf environment.
 
 Run a simple check to make sure TensorFlow is working.
 
-Using a text editor copy and paste the code below into a text file named `tf.py`
+Using a text editor, copy and paste the code below into a text file named `tf.py`:
 
 ```console
 import tensorflow as tf
@@ -133,26 +131,27 @@ Run the example code:
 python ./tf.py
 ```
 
-The expected output format is below. Your version may be slightly different.
+The output is similar to:
 
 ```output
 2.12.0
 tf.Tensor(342.34387, shape=(), dtype=float32)
 ```
 
-### How do I use PyTorch with Anaconda?
+### Use PyTorch with Anaconda
 
-Create a new conda environment named torch, install PyTorch, and activate the new environment.
+Create a new conda environment named `torch` and install PyTorch:
 
 ```console
 conda create -n torch pytorch -y
 ```
+Activate the new environment:
 
 ```console
 conda activate torch
 ```
 
-Using a text editor copy and paste the code below into a text file named `pytorch.py`
+Using a text editor, copy and paste the following code into a text file named `pytorch.py`:
 
 ```console
 import torch
@@ -168,7 +167,7 @@ Run the example code:
 python ./pytorch.py
 ```
 
-The expected output is similar to:
+The output is similar to:
 
 ```output
 2.1.0
@@ -181,5 +180,3 @@ tensor([[0.9287, 0.5931, 0.0239],
 
 
 You are ready to use Anaconda Distribution.
-
-Explore the many machine learning articles and examples using TensorFlow and PyTorch.

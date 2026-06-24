@@ -1,10 +1,11 @@
 ---
 title: Deploy Arm Instances on AWS using Terraform
+description: Learn how to automate the creation and deployment of AWS Graviton instances using Terraform with jump server access for secure infrastructure management.
 
 minutes_to_complete: 60   
 
 who_is_this_for: This is an introductory topic for software developers who are new to deploying Arm instances on AWS using Terraform.
- 
+
 learning_objectives: 
     - Automate AWS EC2 instance creation using Terraform
     - Deploy Arm instances on AWS and provide access via Jump Server
@@ -15,6 +16,10 @@ prerequisites:
     - A computer with [Terraform](/install-guides/terraform) installed
 
 author: Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -39,11 +44,10 @@ further_reading:
         link: https://aws.amazon.com/blogs/aws/new-amazon-ec2-c7g-instances-powered-by-aws-graviton3-processors/
         type: Blog
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

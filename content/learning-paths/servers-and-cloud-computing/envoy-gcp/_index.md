@@ -1,10 +1,10 @@
 ---
 title:  Deploy Envoy Proxy on Google Cloud C4A (Arm-based Axion VMs)
+description: Learn how to install and configure Envoy proxy on Google Cloud Axion C4A Arm64 instances and benchmark HTTP proxy performance with load testing.
 
 minutes_to_complete: 30
 
 who_is_this_for: This introductory topic for software developers migrating Envoy Proxy workloads from x86_64 to Arm-based servers, specifically on Google Cloud C4A virtual machines built on Axion processors.
-
 
 learning_objectives:
   - Provision an Arm-based C4A VM on Google Cloud Platform (GCP) 
@@ -17,6 +17,10 @@ prerequisites:
   - Familiarity with networking concepts and the [Envoy architecture](https://www.envoyproxy.io/docs/envoy/latest/)
 
 author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ##### Tags
 skilllevels: Introductory
@@ -59,3 +63,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

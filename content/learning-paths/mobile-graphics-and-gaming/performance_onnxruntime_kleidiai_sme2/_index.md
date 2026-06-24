@@ -1,7 +1,6 @@
 ---
 title: Profile ONNX model performance with SME2 using KleidiAI and ONNX Runtime
-
-
+description: Learn how to build ONNX Runtime with KleidiAI and SME2 support for Android and profile ONNX model performance to compare acceleration improvements.
 
 minutes_to_complete: 40
 
@@ -20,6 +19,10 @@ prerequisites:
 
 author: Zenon Zhilong Xiu
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Advanced
 subjects: ML
@@ -34,8 +37,6 @@ operatingsystems:
     - Android
     - Linux
 
-
-
 further_reading:
     - resource:
         title: Arm Scalable Matrix Extension Introduction (Part 1)
@@ -49,8 +50,6 @@ further_reading:
         title: Arm SME2 Introduction (Part 4)
         link: https://developer.arm.com/community/arm-community-blogs/b/architectures-and-processors-blog/posts/part4-arm-sme2-introduction
         type: blog
-        
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
@@ -58,3 +57,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -1,5 +1,6 @@
 ---
 title: Learn how to deploy a Django application
+description: Learn how to create a simple Django web application and deploy it on Arm machines using Nginx and PostgreSQL.
 
 minutes_to_complete: 30
 
@@ -17,6 +18,10 @@ prerequisites:
     - To install both [Nginx](/learning-paths/servers-and-cloud-computing/nginx/) and [PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql/)
 
 author: Diego Russo
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -36,7 +41,6 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
-
 further_reading:
     - resource:
         title: PostgreSQL Documentation
@@ -51,11 +55,10 @@ further_reading:
         link: https://docs.djangoproject.com/
         type: documentation
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

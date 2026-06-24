@@ -5,6 +5,8 @@ minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for software developers who want to learn about Large System Extensions and use them in an application.
 
+description: Understand Large System Extensions (LSE) for Arm processors and verify whether applications use LSE for improved atomic operation performance.
+
 learning_objectives:
     - Learn about Large System Extensions
     - Find out if an application uses Large System Extensions
@@ -13,6 +15,10 @@ prerequisites:
     - An [AWS account](/learning-paths/servers-and-cloud-computing/csp/aws/) to access instance types with different AWS Graviton processors. If you don't have an AWS account, you can substitute other Arm Linux computers.
 
 author: Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -30,7 +36,6 @@ tools_software_languages:
     - GCC
     - Runbook
 
-    
 further_reading:
     - resource:
         title: Improving Java performance on Neoverse N1 systems
@@ -45,11 +50,10 @@ further_reading:
         link: /learning-paths/servers-and-cloud-computing/glibc-with-lse/
         type: website
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

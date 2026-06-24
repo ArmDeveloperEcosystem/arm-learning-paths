@@ -1,5 +1,6 @@
 ---
 title: Create the Edge Impulse Greengrass component
+description: Create the AWS IoT Greengrass custom component that installs and runs the Edge Impulse model on the edge device.
 weight: 7
 
 ### FIXED, DO NOT MODIFY

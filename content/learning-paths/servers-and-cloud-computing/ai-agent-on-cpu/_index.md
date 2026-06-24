@@ -1,5 +1,6 @@
 ---
 title: Deploy an AI Agent on Arm with llama.cpp and llama-cpp-agent using KleidiAI
+description: Learn how to build and deploy an AI agent application on Arm servers using llama.cpp and llama-cpp-agent with KleidiAI optimization for efficient LLM inference and function calling.
 
 minutes_to_complete: 45
 
@@ -18,6 +19,10 @@ prerequisites:
 
 author: Andrew Choi
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: ML
@@ -35,8 +40,6 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
-
-
 further_reading:
     - resource:
         title: llama.cpp
@@ -47,11 +50,10 @@ further_reading:
         link: https://llama-cpp-agent.readthedocs.io/en/latest/
         type: documentation
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

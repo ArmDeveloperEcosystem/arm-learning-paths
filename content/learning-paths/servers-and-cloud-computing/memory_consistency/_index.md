@@ -5,10 +5,12 @@ minutes_to_complete: 150
 
 who_is_this_for: This is an advanced topic for developers seeking practical ways to test thread synchronization approaches in the Arm memory model.
 
+description: Test and validate thread synchronization approaches in the Arm memory model using Herd7, Litmus7, and Arm hardware with assembly snippets.
+
 learning_objectives:
-    - Test thread synchronization assembly snippets against the formal definition of the Arm memory model.
-    - Test thread synchronization assembly snippets on Arm hardware.
-    - Compare the results of different thread synchronization approaches. 
+    - Test thread synchronization assembly snippets against the formal definition of the Arm memory model
+    - Test thread synchronization assembly snippets on Arm hardware
+    - Compare the results of different thread synchronization approaches 
 
 prerequisites:
     - An understanding of memory consistency models (such as Sequential Consistency, Weak Ordering, Relaxed Consistency, and Processor Consistency).
@@ -18,6 +20,10 @@ prerequisites:
     - Familiarity with memory barriers, including Acquire-Release Semantics.
 
 author: Julio Suarez
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 skilllevels: Advanced
 subjects: Performance and Architecture
@@ -53,3 +59,4 @@ weight: 1
 layout: learningpathall
 learning_path_main_page: 'yes'
 ---
+

@@ -1,5 +1,6 @@
 ---
 title: Measure performance of ClickHouse on Arm servers
+description: Learn how to install ClickHouse on Arm-based cloud instances and measure database performance using ClickBench to determine appropriate instance configurations.
 
 minutes_to_complete: 45
 
@@ -13,6 +14,10 @@ prerequisites:
     - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server.
 
 author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -49,10 +54,10 @@ further_reading:
         link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/improve-clickhouse-performance-up-to-26-by-using-aws-graviton3
         type: blog
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

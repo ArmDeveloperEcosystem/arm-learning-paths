@@ -1,5 +1,6 @@
 ---
 title: Add the application code
+description: Add firmware code for camera input, image preprocessing, and Ethos-U85 inference in the Alif Ensemble image classification project.
 weight: 5
 
 layout: "learningpathall"
@@ -18,7 +19,7 @@ Download the working `main.cpp` from the workshop repository and place it in you
 ```bash
 cd ~/alif/alif_vscode-template/mv2_runner
 curl -L -o main.cpp \
-  https://raw.githubusercontent.com/ArmDeveloperEcosystem/workshop-ethos-u/main/main.cpp
+  https://raw.githubusercontent.com/ArmDeveloperEcosystem/workshop-ethos-u/refs/heads/main/mv2_runner/main.cpp
 ```
 
 {{% notice Note %}}

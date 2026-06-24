@@ -1,6 +1,6 @@
 ---
 title: Optimize with instrumentation profiling
-weight: 6
+weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
