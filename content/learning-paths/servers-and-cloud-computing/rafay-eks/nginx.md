@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Deploy NGINX
 
-With the Amazon EKS cluster running on Graviton nodes, deploy NGINX to confirm that `arm64` workloads schedule and run correctly.
+With the Amazon EKS cluster running on Graviton-based nodes, deploy NGINX to confirm that `arm64` workloads schedule and run correctly.
 
 Create a file named `nginx-graviton.yaml` with the following content:
 
@@ -102,7 +102,7 @@ nginx-arm-svc   ClusterIP   10.100.42.137   <none>        80/TCP    30s
 
 ## Test NGINX connectivity
 
-The NGINX service is type `ClusterIP`, which means it has no external IP and is reachable only from within the cluster network. The cluster also has `publicAccess: false`, so there's no public Kubernetes API endpoint. Both constraints mean you can't test connectivity from your laptop directly. 
+The NGINX service is type `ClusterIP`, which means it has no external IP and is reachable only from within the cluster network. The cluster also has `publicAccess: false`, so there's no public Kubernetes API endpoint. Both constraints mean you can't test connectivity from your local machine directly.
 
 Instead, run a one-off pod inside the cluster that sends a request to the service and then deletes itself:
 
@@ -159,7 +159,7 @@ rctl delete cluster demo-eks-graviton
 
 ## What you've accomplished
 
-You've now deployed NGINX using a manifest that pins pods to `arm64` nodes, verify the pod reaches a `Running` state, and test connectivity from inside the cluster. You then cleaned up all provisioned resources.
+You've now deployed NGINX using a manifest that pins pods to `arm64` nodes, verified the pod reaches a `Running` state, and tested connectivity from inside the cluster. You then cleaned up all provisioned resources.
 
 Rafay's control plane handles cluster access without requiring a public Kubernetes API endpoint, making it straightforward to run private, Graviton-based EKS clusters at scale.
 

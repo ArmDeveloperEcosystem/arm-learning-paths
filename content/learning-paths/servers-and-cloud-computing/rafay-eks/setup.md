@@ -1,5 +1,5 @@
 ---
-title: Set up your environment
+title: Set up Rafay and AWS access
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,9 @@ layout: learningpathall
 
 ## Before you begin
 
-[Rafay](https://rafay.co) is a Kubernetes operations platform that provisions, secures, and manages the full cluster lifecycle across public cloud, private, and hybrid environments. It provides a single control plane for fleet-wide operations including automated provisioning, upgrades, and governance. In this Learning Path, you'll use Rafay to provision an Amazon EKS cluster with an AWS Graviton-based node group and deploy a workload to verify the setup.
+[Rafay](https://rafay.co) is a Kubernetes operations platform that provisions, secures, and manages the full cluster lifecycle across public cloud, private, and hybrid environments. It provides a single control plane for fleet-wide operations including automated provisioning, upgrades, and governance. 
+
+In this Learning Path, you'll use Rafay to provision an Amazon EKS cluster with an AWS Graviton-based node group and deploy a workload to verify the setup.
 
 You need the following accounts and tools before starting this Learning Path:
 
@@ -114,7 +116,7 @@ Rafay provisions EKS resources in your AWS account using a cross-account IAM rol
 1. Log in to the Rafay console
 2. Select **defaultproject** (or another project) from the project selector in the top navigation bar
 3. Navigate to **Infrastructure** > **Cloud Credentials** > **New Credential**.
-4. Select **AWS** as the provider select **ROLE**. Copy the **Rafay Account ID** and **External ID** displayed on the screen. You will pass these values to the script that follows.
+4. Select **AWS** as the provider, then select **ROLE**. Copy the **Rafay Account ID** and **External ID** displayed on the screen. You'll pass these values to the script that follows.
 
 Save the following script as `create-rafay-role.sh`:
 
@@ -411,7 +413,7 @@ chmod +x create-rafay-role.sh
 ./create-rafay-role.sh
 ```
 
-You'll be prompted for the Account ID nad External ID. Enter these values from the previous step.
+You'll be prompted for the Account ID and External ID. Enter these values from the previous step.
 
 The output is similar to: 
 
@@ -434,8 +436,8 @@ With the `Role ARN` copied, complete the credential registration in the Rafay co
 
 1. Return to **Infrastructure** > **Cloud Credentials** > **New Credential** in the Rafay console
 2. Paste the `Role ARN` into the **Role ARN** field.
-4. Enter `aws-cloud-credential` as the credential name.
-5. Select **Save**.
+3. Enter `aws-cloud-credential` as the credential name.
+4. Select **Save**.
 
 ![Screenshot of the Rafay console showing the cloud credential registration form with the AWS Role ARN field filled in #center](images/rafay-cloud-credential.webp "Registered AWS cloud credential in the Rafay console")
 

@@ -84,7 +84,7 @@ Key fields to note:
 
 - `cloudCredentials` — must exactly match the credential name you entered in the Rafay console
 - `project` - must be the project you attached the credential to
-- `instanceType: m7g.large` — a Graviton3 instance with Arm Neoverse processors
+- `instanceType: m7g.large` — a Graviton3-based instance with Arm Neoverse processors
 - `publicAccess: false` — the Kubernetes API server has no public endpoint. You reach the cluster exclusively through RCTL, which routes traffic through the Rafay control plane.
 
 ## Apply the cluster manifest
@@ -143,7 +143,7 @@ The output is similar to:
 +-------------------+-----------------------------+---------+-----------+-----------+---------------------------+---------------------+
 ```
 
-While waiting, you can run the command again every few minutes. You'll see various status values before the status changes to `READY`. You can also check the AWS CloudFormation console to see project and look for any stack errors.
+While waiting, you can run the command again every few minutes. You'll see various status values before the status changes to `READY`. You can also check the AWS CloudFormation console to look for any stack errors.
 
 ## Download the kubeconfig
 
