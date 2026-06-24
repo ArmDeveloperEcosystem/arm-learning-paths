@@ -1,11 +1,11 @@
 ---
-title: Deploy an ML application to the Ethos-U65 NPU on NXP FRDM i.MX 93 with Topo
+title: Deploy a machine learning application to the Arm Ethos-U65 NPU on NXP FRDM i.MX 93 with Topo
 
 draft: true
 cascade:
     draft: true
 
-description: Use Topo to deploy a Cortex-A web application that sends MobileNetV2 image classification requests to Cortex-M33 firmware accelerated by the Ethos-U65 NPU.
+description: Use Topo to build and deploy a Cortex-A web application that sends MobileNetV2 image classification requests to Cortex-M33 firmware accelerated by the Ethos-U65 NPU.
 
 minutes_to_complete: 60
 
@@ -21,12 +21,12 @@ prerequisites:
     - A host machine (x86 or Arm) with Linux, macOS, or Windows
     - An NXP FRDM i.MX 93 target board with Linux setup, accessible over SSH with root access. To do this, see [Use Linux on the NXP FRDM i.MX 93 board](https://learn.arm.com/learning-paths/embedded-and-microcontrollers/linux-nxp-board/).
     - Docker installed on the host and target. For installation steps, see [Install Docker](https://learn.arm.com/install-guides/docker/).
-    - At least 25 GB of free disk space on the host if you are building without cache images.
+    - At least 25 GB of free disk space on the host if you're building without cache images.
     - The Device Tree Compiler (`dtc`) installed on the host.
     - lscpu installed on the target (pre-installed on most Linux distributions)
     - Topo installed on the host. For installation steps, see [Deploy containerized workloads to Arm-based Linux targets with Topo](https://learn.arm.com/learning-paths/cross-platform/deploy-containerized-workloads-with-topo/).
     - Basic familiarity with containers, SSH, and CLI tools
-    - (Optional) Access to an Agent, such as Codex, or Claude Code
+    - (Optional) Access to an agent, such as Codex or Claude Code
 
 author: Tomas Agustin Gonzalez Orlando
 

@@ -1,5 +1,6 @@
 ---
 title: Clone and deploy the application with Topo
+description: Prepare the NXP FRDM i.MX 93 target, deploy the image classification Topo Template, and validate MobileNetV2 inference through the browser application.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +9,7 @@ layout: learningpathall
 
 ## Prepare the target
 
-Before deploying the Template, confirm that the FRDM i.MX 93 board is reachable from your host and that it's ready for deployment:
+Before deploying the Topo Template, confirm that the FRDM i.MX 93 board is reachable from your host and that it's ready for deployment:
 
 ```bash
 topo health --target <user>@<target-ip>
@@ -17,7 +18,7 @@ Replace `<target-ip>` with the IP address or hostname of your board.
 
 Resolve any errors before continuing.
 
-The target section should include successful checks similar to:
+The target section includes successful checks similar to:
 
 ```output
 Host
@@ -54,7 +55,9 @@ topo health --target <user>@<target-ip>
 
 ## Reserve memory in the device tree
 
-The web application and Cortex-M33 firmware exchange data through reserved physical memory. The target device tree must reserve memory for the model/input buffer and for the Ethos-U65. This prevents Linux from allocating memory that the Cortex-M33 firmware and Ethos-U65 need to access by physical address. You are now going to modify the device tree and reboot the target so that these modifications take effect.
+The web application and Cortex-M33 firmware exchange data through reserved physical memory. The target device tree must reserve memory for the model/input buffer and for the Ethos-U65. This prevents Linux from allocating memory that the firmware and Ethos-U65 need to access by physical address. 
+
+You'll now modify the device tree and reboot the target so that these modifications take effect. 
 
 {{% notice Warning %}}
 Back up the board's original device tree before modifying it. The exact boot partition can differ between Linux images, so check the paths on your board before copying files.
@@ -68,9 +71,7 @@ ssh <user>@<target-ip> 'cat /sys/firmware/fdt' > devicetree/live.dtb
 dtc -I dtb -O dts -o devicetree/live.dts devicetree/live.dtb
 ```
 
-Open `devicetree/live.dts` in a text editor of your choice.
-
-Under `remoteproc-cm33`, add the CM33 power domain if it is not already present:
+Open `devicetree/live.dts` in a text editor of your choice. Then, under `remoteproc-cm33`, add the CM33 power domain if it's not already present:
 
 ```dts
 power-domains = <0x61>;
@@ -85,7 +86,7 @@ model@c0000000 {
 };
 ```
 
-Update the Ethos-U reserved-memory node so it is reserved and not reusable:
+Update the Ethos-U reserved-memory node so it's reserved and not reusable:
 
 ```dts
 ethosu_region@A8000000 {
@@ -134,13 +135,17 @@ topo health --target <user>@<target-ip>
 
 ## Deploy to the board
 
-You can choose to deploy from the original Template, or from the Template you built from scratch. If you have not already cloned the original Template, clone it now:
+You can choose to deploy from the original Topo Template, or from the template you built from scratch. If you haven't already cloned the original template, clone it now:
 
 ```bash
 topo clone https://github.com/Arm-Examples/topo-imx93-npu-deployment.git
 ```
 
 Topo prompts for optional build cache image arguments. Accept the defaults unless you have your own cache images.
+
+{{% notice Note %}}
+If you build without cache images, the first build can take a long time and requires about 25 GB of free disk space. The first build involves downloading and building ExecuTorch, the Arm GNU toolchain, MCUX SDK components, RPMsg-Lite, and the Cortex-M33 runner sources. Later builds are faster when Docker can reuse local cache layers or import the configured GHCR cache layers.
+{{% /notice %}}
 
 Then `cd` into the correct directory:
 
@@ -153,10 +158,6 @@ Or:
 ```bash
 cd new-topo-npu-template
 ```
-
-{{% notice Note %}}
-If not pulling from the cache, the first build can take a long time and requires about 25 GB of free disk space. It downloads and builds ExecuTorch, the Arm GNU toolchain, MCUX SDK components, RPMsg-Lite, and the Cortex-M33 runner sources. Later builds are faster when Docker can reuse local cache layers or import the configured GHCR cache layers.
-{{% /notice %}}
 
 Deploy the project to your target:
 
@@ -172,7 +173,7 @@ When deployment succeeds, the output includes a successful service startup. You 
 topo ps --target <user>@<target-ip>
 ```
 
-Your output should show a process on both the Cortex-M33, and the Linux Host, similar to below:
+The output shows a process on both the Cortex-M33 and the Linux Host, and is similar to:
 
 ```output
 Image                                   Status          Processing Domain   Address
@@ -189,7 +190,7 @@ http://<target-ip>:3001
 ```
 
 {{% notice Note %}}
-If you need to use a different target port, set `WEBAPP_PORT` when deploying:
+If you need to use a different target port, set `WEBAPP_PORT` when deploying. For example:
 
 ```bash
 WEBAPP_PORT=3002 topo deploy --target <user>@<target-ip>
@@ -210,11 +211,9 @@ The application shows:
 - classification results
 - an expandable analysis section with runtime details
 
-You should see something similar to:
+![Screenshot of the web interface running on an Arm-based target, showing an image and the model response. This confirms successful deployment and provides a visual reference for the expected result.#center](topo_npu_classifier.png "Image classification web app showing correctly classified German Shepherd")
 
-![Screenshot of the web interface running on an Arm-based target, showing an image and the model response. This confirms successful deployment and provides a visual reference for the expected result.#center](topo_npu_classifier.png "Image Classification Web App showing correctly classified German Shepherd")
-
-When you select an image in the browser and click **Classify**, the web application:
+When you choose an image in the browser and select **Classify**, the web application:
 
 1. Resizes and normalizes the image to classify into an input tensor compatible with the [MobileNetV2](https://arxiv.org/abs/1801.04381) model.
 2. Writes the ExecuTorch `.pte` program and input tensor into reserved physical memory.
@@ -226,6 +225,6 @@ Try this out with an image from an ImageNet-supported class.
 
 ## What you've accomplished
 
-You have prepared an FRDM i.MX 93 board for shared-memory NPU inference, deployed the `topo-imx93-npu-deployment` Template with Topo, started Cortex-M33 firmware through `remoteproc-runtime`, and used a browser-based application to stage the ExecuTorch `.pte` program and input tensor for MobileNetV2 classification with Ethos-U65 acceleration.
+You've prepared an FRDM i.MX 93 board for shared-memory NPU inference, deployed the `topo-imx93-npu-deployment` template with Topo, and started Cortex-M33 firmware through `remoteproc-runtime`. You used a browser-based application to stage the ExecuTorch `.pte` program and input tensor for MobileNetV2 classification with Ethos-U65 acceleration.
 
 You can now use the deployed application as a reference for your own heterogeneous Arm applications, or adapt the model, firmware runner, web interface, or Topo metadata for another target.
