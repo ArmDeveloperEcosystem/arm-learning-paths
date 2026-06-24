@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Modify the example to use the UART for printf output"
+description: Retarget printf output to the UART so the bare-metal Armv8-A application can print messages from the FVP.
 
 weight: 4 # 1 is first, 2 is second, etc.
 

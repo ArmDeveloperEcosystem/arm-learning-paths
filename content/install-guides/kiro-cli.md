@@ -1,5 +1,6 @@
 ---
 title: Kiro CLI
+description: Install Kiro CLI on macOS or Arm Linux and verify authentication so you can use AWS-focused AI assistance from the command line.
 
 author: Jason Andrews
 minutes_to_complete: 10

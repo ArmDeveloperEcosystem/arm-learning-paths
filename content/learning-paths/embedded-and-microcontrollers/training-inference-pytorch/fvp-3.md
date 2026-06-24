@@ -1,5 +1,6 @@
 ---
 title: Run the model on Corstone-320 FVP
+description: Compile the rock-paper-scissors model for ExecuTorch and run it on the Corstone-320 Fixed Virtual Platform.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

@@ -1,5 +1,6 @@
 ---
-title: Run the benchmark with default Go GC settings
+title: Run the benchmark with default Go garbage collection settings
+description: Run repeated Go benchmark samples with default GC settings, save runtime baselines, and capture CPU and heap profiles for analysis.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -8,13 +9,13 @@ layout: learningpathall
 
 ## Confirm runtime tuning variables are unset
 
-Before you run the benchmark, confirm that the shell is not setting Go runtime tuning variables.  This could happen especially if you have experimented with Go GC tuning variables in the past on the same machine.
+Before you run the benchmark, confirm that the shell isn't setting Go runtime tuning variables:
 
 ```bash
 env | grep -E '^(GOGC|GOMEMLIMIT|GODEBUG|GOMAXPROCS)=' || true
 ```
 
-The command should not print any matching variables.
+The command shouldn't print any matching variables.
 
 If it prints one or more variables, unset them:
 
@@ -27,7 +28,7 @@ unset GOMAXPROCS
 
 ## Record the runtime baseline
 
-Before running the benchmark, record the Go version, architecture, CPU count, and memory size before the benchmark:
+Before running the benchmark, record the Go version, architecture, CPU count, and memory size:
 
 ```bash
 cd $HOME/go-gc-default
@@ -39,7 +40,7 @@ cd $HOME/go-gc-default
 } | tee default_runtime_baseline.txt
 ```
 
-Your output should look similar to this:
+The output is similar to:
 
 ```output
 go version go1.26.3 linux/arm64
@@ -53,7 +54,7 @@ Swap:             0B          0B          0B
 
 ## Run repeated benchmark samples
 
-Run the benchmark with repeated samples and save the output.  In this example, the benchmark runs for 5 seconds and repeats 10 times:
+Run the benchmark with repeated samples and save the output.  In this example, the benchmark runs for five seconds and repeats 10 times:
 
 ```bash
 go test ./parsebench \
@@ -64,7 +65,7 @@ go test ./parsebench \
     -benchtime=5s | tee default_gc_benchmark.txt
 ```
 
-You should see ten lines of benchmark output similar to this:
+The output includes 10 lines of benchmark output, and is similar to:
 
 ```output
 goos: linux
@@ -78,17 +79,23 @@ PASS
 ok      example.com/go-gc-default/parsebench    58.243s
 ```
 
-The output is saved to a file that includes the benchmark's measurements of operation time, allocation rate, allocation count, GC cycles per operation, pause time per operation, and pause time per GC cycle.
+The output is saved to a file that includes the following benchmark measurements: 
+- operation time
+- allocation rate
+- allocation count
+- GC cycles per operation
+- pause time per operation
+- pause time per GC cycle.
 
-With this saved, you can now aggregate the repeated samples with Benchstat:
+With the output saved, you can now aggregate the repeated samples with Benchstat:
 
 ```bash
 benchstat default_gc_benchmark.txt | tee default_gc_benchstat.txt
 ```
 
-Benchstat may scale nanosecond metrics to seconds in the summary. For example, raw `stw-ns/op` benchmark output can appear as `stw-sec/op` in the Benchstat table.
+Benchstat might scale nanosecond metrics to seconds in the summary. For example, raw `stw-ns/op` benchmark output can appear as `stw-sec/op` in the Benchstat table.
 
-You should see output similar to this:
+The output is similar to:
 
 ```output
 goos: linux
@@ -136,7 +143,7 @@ go test -c -o parsebench.test ./parsebench
     -test.memprofile mem_default.out | tee default_gc_profile_run.txt
 ```
 
-You should see output similar to this:
+The output is similar to:
 
 ```output
 goos: linux
@@ -146,13 +153,13 @@ BenchmarkParseAndAllocate-4        66757            179173 ns/op                
 PASS
 ```
 
-Inspect the CPU profile to display the functions that consumed the most CPU time during benchmark execution, ranked from highest to lowest:
+Inspect the CPU profile to list the functions that consumed the most CPU time during benchmark execution, ranked from highest to lowest:
 
 ```bash
 go tool pprof -top ./parsebench.test cpu_default.out | tee cpu_default_top.txt
 ```
 
-You should see output similar to this:
+The output is similar to:
 
 ```output
 File: parsebench.test
@@ -170,13 +177,13 @@ Dropped 162 nodes (cum <= 0.08s)
      0.80s  5.08% 47.84%      2.71s 17.22%  runtime.mallocgcSmallScanNoHeader
 ```
 
-Inspect the heap allocation profile to display the functions responsible for allocating the most total memory over the lifetime of the benchmark, ranked from highest to lowest.
+Inspect the heap allocation profile to list the functions responsible for allocating the most total memory over the lifetime of the benchmark, ranked from highest to lowest:
 
 ```bash
 go tool pprof -top -alloc_space ./parsebench.test mem_default.out | tee mem_default_alloc_top.txt
 ```
 
-You should see output similar to this:
+The output is similar to:
 
 ```output
 File: parsebench.test
@@ -194,7 +201,11 @@ Dropped 37 nodes (cum <= 0.06GB)
          0     0% 99.94%    11.69GB 99.95%  testing.(*B).runN
 ```
 
-You now have a default-GC benchmark result, a Benchstat summary, and CPU and heap profiles from the same workload. From here, you can dive deeper into analyzing all of these results.
+## What you've accomplished and what's next
+
+You've now captured a default-GC benchmark result, a Benchstat summary, and CPU and heap profiles from the same workload. 
+
+Next, you'll analyze the benchmark results.
 
 
 

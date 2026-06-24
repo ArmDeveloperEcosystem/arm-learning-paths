@@ -1,5 +1,6 @@
 ---
 title: Analyze and debug a Zephyr application
+description: Debug a Zephyr application with Workbench for Zephyr and inspect firmware behavior using integrated analysis tools.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

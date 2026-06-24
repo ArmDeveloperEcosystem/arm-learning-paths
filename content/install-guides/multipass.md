@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Multipass
+description: Install Multipass on Apple Silicon macOS or Arm Linux and create Ubuntu virtual machine instances for local Arm cloud-style development.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:

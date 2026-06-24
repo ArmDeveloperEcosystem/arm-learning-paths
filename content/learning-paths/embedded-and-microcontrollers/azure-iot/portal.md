@@ -1,6 +1,7 @@
 ---
 # User change
 title: "IoT Portal"
+description: Create an IoT portal that visualizes telemetry from Azure services and gives users a dashboard for device data.
 
 weight: 9
 

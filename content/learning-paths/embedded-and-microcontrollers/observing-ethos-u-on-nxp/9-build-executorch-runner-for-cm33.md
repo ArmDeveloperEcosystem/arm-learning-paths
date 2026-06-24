@@ -1,5 +1,6 @@
 ---
 title: Build Cortex-M33 firmware for ExecuTorch
+description: Build Cortex-M33 firmware that runs the ExecuTorch executor runner on the NXP FRDM i.MX 93 board.
 weight: 10
 # FIXED, DO NOT MODIFY
 layout: learningpathall

@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Brave
+description: Install Brave on Arm Linux or Windows on Arm and use a native browser for development and web testing on Arm platforms.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
@@ -78,7 +79,6 @@ To install Brave on Windows on Arm:
 {{% notice Note %}}
 If you want the smaller, online installer download the file `BraveBrowserSetupArm64.exe`
 {{% /notice %}}
-
 
 
 

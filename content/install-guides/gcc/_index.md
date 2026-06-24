@@ -1,5 +1,6 @@
 ---
 title: GNU Compiler
+description: Choose and install the right GCC toolchain for native Arm Linux development, Arm Linux cross-compilation, or bare-metal Arm targets.
 author: Jason Andrews
 additional_search_terms:
 - compiler

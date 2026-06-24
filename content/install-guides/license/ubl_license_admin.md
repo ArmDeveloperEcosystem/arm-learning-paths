@@ -1,5 +1,6 @@
 ---
 title: UBL Local License Server (LLS) setup
+description: Install and configure an Arm user-based Local License Server so administrators can host and manage commercial Arm tool licenses.
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/107573
 author: Ronan Synnott

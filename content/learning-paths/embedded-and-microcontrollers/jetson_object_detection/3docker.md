@@ -1,5 +1,6 @@
 ---
 title: Launch the image classification Docker container
+description: Download and run the image classification Docker container on Jetson Orin Nano to test the accelerated inference setup.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

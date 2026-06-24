@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Build and run the application"
+description: Build and run the CMSIS-RTOS2 RTX application from Keil Studio for VS Code and verify the generated firmware.
 
 weight: 5 # 1 is first, 2 is second, etc.
 

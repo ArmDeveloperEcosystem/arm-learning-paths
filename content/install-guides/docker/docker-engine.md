@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Docker Engine
+description: Install Docker Engine on Linux, WSL 2, or ChromeOS and verify the setup so you can run containers from the command line.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
@@ -157,4 +158,3 @@ sudo systemctl stop docker.socket
 You can now use Docker Engine and explore [Docker related Learning Paths](/tag/docker/).
 
 You can also create an account on [Docker Hub](https://hub.docker.com) to share images and automate workflows.
-

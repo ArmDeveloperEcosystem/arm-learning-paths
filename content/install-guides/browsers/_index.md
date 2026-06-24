@@ -1,5 +1,6 @@
 ---
 title: Browsers on Arm
+description: Review browser availability on Arm Linux and Windows on Arm so you can choose and install a browser for development workflows.
 author: Jason Andrews
 additional_search_terms:
 - browser
@@ -52,5 +53,4 @@ The primary functional issue for browsers on Arm is DRM (digital rights manageme
 Edge and Firefox are good native browsers with DRM support for Windows on Arm. There are no easy DRM solutions for Arm Linux.
 
 Please share your experiences with browsers on Arm by submitting a [GitHub issue](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/issues/new) or a GitHub Pull Request to add additional browsers. 
-
 
