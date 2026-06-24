@@ -30,20 +30,13 @@ generated_summary_faq:
   faq_generated_at: '2026-06-24T15:35:34Z'
   faq_source_hash: 37913b2c4aed914d32dbdad054ebdd2b1d4587da3ede1a33ba81e3e68bf504a3
   summary: >-
-    This Learning Path guides learners through deploying and running a containerized Autoware
-    Open AD Kit simulation on Arm Neoverse using Docker and Docker Compose, within a SOAFEE-aligned
-    Shift-Left workflow. It introduces Software-Defined Vehicles and SOAFEE, then outlines ROS
-    2 and Open AD Kit concepts used in the demo. Learners prepare an Arm Neoverse Linux system
-    and use Docker Compose to start the Visualizer first, followed by continuously executing Planning
-    and Simulation services defined in docker/docker-compose.yml. The workflow has been exercised
-    on both cloud (AWS EC2) and on-premise Arm Neoverse platforms, enabling evaluation on available
-    infrastructure. By the end, learners can launch the containers, inspect the compose file,
-    and recognize a running simulation on Arm Neoverse.
+    In this Learning Path, you'll deploy a containerized Autoware
+    Open AD Kit simulation on Arm Neoverse using Docker and Docker Compose, within a SOAFEE-aligned Shift-Left workflow. You'll first learn about software-defined vehicles (SDVs), SOAFEE, ROS 2, and the Open AD Kit components used in the demo. You'll then prepare an Arm Neoverse Linux system and use Docker Compose to start the Open AD Kit visualizer, planning, and simulation services. By the end, you'll review a running simulation. The workflow has been tested on both cloud (Amazon EC2) and on-premise Arm Neoverse platforms.
   faqs:
   - question: What result should I expect after launching the Docker Compose stack?
     answer: >-
-      The Visualizer service starts in detached mode, followed by continuously running Planning
-      and Simulation services. Active containers for these components indicate the demo is operating
+      The visualizer service starts in detached mode, followed by continuously running planning
+      and simulation services. Active containers for these components indicate the demo is operating
       as intended.
   - question: Where are the ROS 2 commands and service configurations defined?
     answer: >-
@@ -51,7 +44,7 @@ generated_summary_faq:
       order, container settings, and ROS 2 commands used by the demo.
   - question: Can I run the same workflow on cloud and on-prem Arm Neoverse systems?
     answer: >-
-      Yes. The example has been tested on AWS EC2 and an Ampere Altra workstation, so you can
+      Yes. The worklow has been tested on Amazon EC2 and an Ampere Altra workstation, so you can
       choose either a cloud instance or an on-premise Arm Neoverse system.
   - question: What should I check before starting the demo to avoid resource-related failures?
     answer: >-
@@ -59,7 +52,7 @@ generated_summary_faq:
       and Docker Compose are installed and available.
   - question: If I stop and restart the demo, do I need to reconfigure anything?
     answer: >-
-      No. Docker Compose enables you to start with the previous session’s settings without modifications,
+      No. Docker Compose allows you to start with the previous session’s settings without modifications,
       so the configuration persists between runs.
 # END generated_summary_faq
 

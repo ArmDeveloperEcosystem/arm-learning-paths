@@ -33,23 +33,20 @@ generated_summary_faq:
   faq_generated_at: '2026-06-24T15:37:11Z'
   faq_source_hash: 74740788edbfe7ea09bf955455b4aeaed00e667fa8c9d68467353c1f64528b08
   summary: >-
-    This Learning Path guides developers through debugging the Arm Zena Compute Subsystem Reference
-    Software Stack on a Fixed Virtual Platform using Arm Development Studio. Learners launch the
-    FVP with the Iris debug server enabled, then create and save a custom Arm DS configuration
-    because no out-of-the-box target is provided. The workflow covers establishing connections
-    to each heterogeneous component—Cortex-M55–based Runtime Security Engine from reset with Trusted
-    Firmware-M symbols, Cortex-R82AE Safety Island firmware, and the Cortex-A720AE primary compute
-    cores—to debug the Linux kernel and user processes. By the end, learners create reusable .launch
+    In this Learning Path, you'll debug the Arm Zena Compute Subsystem (CSS) reference
+    software stack on a Fixed Virtual Platform using Arm Development Studio. You'll launch the
+    FVP with the Iris debug server enabled, then create and save a custom Arm DS configuration. You'll establish connections
+    to each heterogeneous component within Zena CSS to debug the Linux kernel and user processes. By the end, you'll create reusable `.launch`
     files, step through early RSE boot, and attach to Safety Island and Linux targets to inspect
     execution across the system.
   faqs:
-  - question: Which FVP launch method should be used for debugging?
+  - question: Which FVP launch method should I use for debugging?
     answer: >-
       Use the launch invocation that enables the Iris debug server. The default build-environment
       command runs the stack but does not enable Iris, so Arm Development Studio cannot connect.
   - question: How should I organize and save my debug connections in Arm Development Studio?
     answer: >-
-      Create a General Project to store the connection files and save each connection as a .launch
+      Create a General Project to store the connection files and save each connection as a `.launch`
       file. This makes it easy to reuse and enhance configurations for each subsystem.
   - question: What is the expected workflow to debug the RSE from reset?
     answer: >-
@@ -63,7 +60,7 @@ generated_summary_faq:
   - question: Why isn’t there a predefined Zena CSS target in Arm Development Studio?
     answer: >-
       As of Arm Development Studio 2025.0, there is no out-of-the-box configuration for the Zena
-      CSS FVP. Create one using the Iris interface as shown in the steps.
+      CSS FVP. Create one using the Iris interface as shown in the Learning Path.
 # END generated_summary_faq
 
 author: Ronan Synnott

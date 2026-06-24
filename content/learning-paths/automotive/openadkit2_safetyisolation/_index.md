@@ -31,15 +31,15 @@ generated_summary_faq:
   faq_generated_at: '2026-06-24T15:35:59Z'
   faq_source_hash: 92a6dac2b1674a44cd623a0c8c3189b38438124a6067ed7ca776999ff1d8b5bf
   summary: >-
-    This Learning Path guides learners through prototyping safety‑critical isolation for autonomous
+    In this Learning Path, you'll learn about prototyping safety‑critical isolation for autonomous
     driving workloads on Arm Neoverse by applying functional safety concepts, ISO 26262 and ASIL
-    guidance, and a safety‑island architecture. It frames how to separate safety‑critical control
+    guidance, and a safety‑island architecture. You'll understand how to separate safety‑critical control
     logic from non‑safety functions, then connect components using a publish‑subscribe model (DDS/ROS
-    2) within containerized deployments or across Arm‑based instances. The path emphasizes lifecycle
+    2) within containerized deployments or across Arm‑based instances. You'll explore lifecycle
     practices aligned with the V‑model, including clear requirements, version control, impact
-    analysis, and regression testing. By the end, learners organize simulation components into
+    analysis, and regression testing. By the end, you'll organize simulation components into
     isolated units with defined interfaces and documentation suitable for advancing ISO 26262‑oriented
-    development on Neoverse.
+    development on Arm Neoverse.
   faqs:
   - question: How do I decide which components belong on the safety island versus the general
       ECU?

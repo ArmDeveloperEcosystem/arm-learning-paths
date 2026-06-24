@@ -29,23 +29,19 @@ generated_summary_faq:
   faq_generated_at: '2026-06-24T15:36:29Z'
   faq_source_hash: 2b758d2dcf28a683ab164e28578a736d6d730b81dfbc01a6765619052fcdebd0
   summary: >-
-    This Learning Path shows how to use a System76 Thelio Astra Arm desktop to build and run the
-    Arm Automotive Solutions Software Reference Stack in a local Multipass virtual machine. Learners
-    create an Ubuntu 20.04 guest, isolate builds, and clone the stack sources to compile Yocto-based
-    components targeting a Fixed Virtual Platform that models the Arm Reference Design‑1 AE. The
-    path introduces the Thelio Astra platform and the software stack context, then guides running
-    example applications. A highlighted example is the Parsec‑enabled TLS demo, which establishes
-    an HTTPS session to transfer a simple web page using Parsec services. Arm-based cloud instances
-    are noted as an alternative environment if a local build host is not preferred.
+    In this Learning Path, you'll use a System76 Thelio Astra Arm desktop to build and run the
+    Arm Automotive Solutions Software Reference Stack in a local Multipass virtual machine. You'll
+    create an Ubuntu 20.04 guest, isolate builds, and compile Yocto-based
+    components targeting a Fixed Virtual Platform that models the Arm Reference Design-1 AE. You'll review the Thelio Astra platform and the software stack context, then run a Parsec-enabled TLS demo that establishes an HTTPS session to transfer a web page.
   faqs:
-  - question: Which Multipass install guide should I follow before creating the VM?
+  - question: Which Multipass install guide should I follow before creating the virtual machine?
     answer: >-
       Use the Multipass install guide for Arm Linux before starting the steps. This ensures Multipass
       is set up correctly on the Thelio Astra running Ubuntu.
   - question: Which Ubuntu release runs inside the Multipass virtual machine for this build?
     answer: >-
       The build is performed from the command line of an Ubuntu 20.04 Multipass virtual machine.
-  - question: Why use a Multipass VM on the Thelio Astra instead of building directly on the host?
+  - question: Why use a Multipass virtual machine on the Thelio Astra instead of building directly on the host?
     answer: >-
       A Multipass VM creates an isolated automotive development environment and lets you split
       the resources of the Thelio Astra between development tasks. It keeps the build and test
