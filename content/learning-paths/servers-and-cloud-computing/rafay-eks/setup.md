@@ -1,5 +1,5 @@
 ---
-title: "Set up your environment"
+title: Set up your environment
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -8,13 +8,13 @@ layout: learningpathall
 
 ## Before you begin
 
-[Rafay](https://rafay.co) is a Kubernetes operations platform that provisions, secures, and manages the full cluster lifecycle across public cloud, private, and hybrid environments. It provides a single control plane for fleet-wide operations including automated provisioning, upgrades, and governance. You can use Rafay to provision an Amazon EKS cluster with an Arm Graviton node group and deploy a workload to verify the setup.
+[Rafay](https://rafay.co) is a Kubernetes operations platform that provisions, secures, and manages the full cluster lifecycle across public cloud, private, and hybrid environments. It provides a single control plane for fleet-wide operations including automated provisioning, upgrades, and governance. In this Learning Path, you'll use Rafay to provision an Amazon EKS cluster with an AWS Graviton-based node group and deploy a workload to verify the setup.
 
 You need the following accounts and tools before starting this Learning Path:
 
 - An [AWS account](https://aws.amazon.com/) with sufficient IAM permissions to create roles, EKS clusters, EC2 instances, CloudFormation stacks, and related resources.
 - A [Rafay account](https://console.rafay.dev). You can [sign up](https://console.rafay.dev/#/signup) if you do not have an account.
-- The AWS CLI installed and configured with credentials that have the required permissions. 
+- The AWS CLI installed and configured with credentials that have the required permissions. For setup instructions, see the [AWS CLI](/install-guides/aws-cli/) and the [AWS Credentials](/install-guides/aws_access_keys/) install guides.
 
 Confirm your AWS CLI is working by running the following command, which prints your account and user information:
 
@@ -41,13 +41,13 @@ Kustomize Version: v5.5.0
 
 ## Install RCTL
 
-RCTL is the Rafay CLI. You use it to submit cluster manifests, check cluster status, download kubeconfig files, and delete clusters.
+RCTL is the Rafay CLI. You'll use it to submit cluster manifests, check cluster status, download kubeconfig files, and delete clusters.
 
 To download RCTL, log in to the Rafay console, navigate to **My Tools** > **Download CLI**, and download the binary for your operating system.
 
 The downloads are `.tar.bz2` files.
 
-On macOS with Apple Silicon extract the file with:
+On macOS with Apple Silicon, extract the file with:
 
 ```console
 tar xvf rctl-darwin-arm64.tar.bz2
@@ -114,7 +114,7 @@ Rafay provisions EKS resources in your AWS account using a cross-account IAM rol
 1. Log in to the Rafay console
 2. Select **defaultproject** (or another project) from the project selector in the top navigation bar
 3. Navigate to **Infrastructure** > **Cloud Credentials** > **New Credential**.
-4. Select **AWS** as the provider select **ROLE**. Copy the **Rafay Account ID** and **External ID** displayed on the screen. You will pass these values to the script below.
+4. Select **AWS** as the provider select **ROLE**. Copy the **Rafay Account ID** and **External ID** displayed on the screen. You will pass these values to the script that follows.
 
 Save the following script as `create-rafay-role.sh`:
 
@@ -411,9 +411,9 @@ chmod +x create-rafay-role.sh
 ./create-rafay-role.sh
 ```
 
-You are prompted for the Account ID nad External ID. Enter these values from the previous step.
+You'll be prompted for the Account ID nad External ID. Enter these values from the previous step.
 
-The output is shown below. The Account ID and External ID are sample values.
+The output is similar to: 
 
 ```output
 Enter Rafay Account ID: 123456789012
@@ -424,18 +424,23 @@ Attaching inline policy to role
 Role ARN (copy this value into the Rafay console):
 arn:aws:iam::111122223333:role/Proj-RafayEKSProvisioner
 ```
+The `Account ID`, `External ID`, and `Role ARN` are sample values.
 
-Copy the Role ARN from the output.
+Copy the `Role ARN` from the output.
 
 ## Register the cloud credential in Rafay
 
-With the Role ARN copied, complete the credential registration in the Rafay console:
+With the `Role ARN` copied, complete the credential registration in the Rafay console:
 
 1. Return to **Infrastructure** > **Cloud Credentials** > **New Credential** in the Rafay console
-2. Paste the Role ARN into the **Role ARN** field.
+2. Paste the `Role ARN` into the **Role ARN** field.
 4. Enter `aws-cloud-credential` as the credential name.
-5. Click **Save**.
+5. Select **Save**.
 
 ![Screenshot of the Rafay console showing the cloud credential registration form with the AWS Role ARN field filled in #center](images/rafay-cloud-credential.webp "Registered AWS cloud credential in the Rafay console")
 
-You now have `kubectl` and `rctl` installed, `rctl` authenticated to Rafay, and an AWS cloud credential registered. You are ready to create the EKS cluster.
+## What you've accomplished and what's next
+
+You've now installed `kubectl` and `rctl`, authenticated `rctl` to Rafay, and registered an AWS cloud credential. 
+
+Next, you'll create the EKS cluster.

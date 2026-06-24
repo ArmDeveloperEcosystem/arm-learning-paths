@@ -1,16 +1,16 @@
 ---
-title: "Create the EKS cluster"
+title: Create an Amazon EKS cluster
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-In this section, you define and provision an EKS cluster with a Graviton-based node group using Rafay's declarative manifest format. You then apply the manifest with RCTL, wait for the cluster to reach a ready state, and download the kubeconfig so you can interact with the cluster.
-
 ## Create the cluster manifest
 
-The Rafay platform uses a declarative YAML manifest to define your EKS cluster. Create a file named `demo-eks-graviton.yaml` with the following content:
+The Rafay platform uses a declarative YAML manifest to define your EKS cluster. 
+
+Create a file named `demo-eks-graviton.yaml` with the following content:
 
 ```yaml
 apiVersion: infra.k8smgmt.io/v3
@@ -48,7 +48,7 @@ spec:
           autoScaler: true
           # Allows for full ECR (Elastic Container Registry) access. This is useful for building, for example, a CI server that needs to push images to ECR
           imageBuilder: true
-      # The AWS EC2 instance type that will be used for the nodes
+      # The Amazon EC2 instance type that will be used for the nodes
       instanceType: m7g.large
       # The maximum number of nodes that can run in the node group
       maxSize: 1
@@ -126,11 +126,12 @@ The output is similar to:
 
 ## Monitor cluster provisioning
 
-Poll the cluster status until it reports `READY`. Provisioning typically takes 15–20 minutes as Rafay creates the VPC, EKS control plane, and managed node group.
+Poll the cluster status until it reports `READY`: 
 
 ```console
 rctl get cluster demo-eks-graviton 
 ```
+Provisioning typically takes 15–20 minutes as Rafay creates the VPC, EKS control plane, and managed node group.
 
 The output is similar to:
 
@@ -142,11 +143,11 @@ The output is similar to:
 +-------------------+-----------------------------+---------+-----------+-----------+---------------------------+---------------------+
 ```
 
-While waiting, you can run the command again every few minutes. You will see various status values before the status changes to `READY`. You can also check the AWS CloudFormation console to see project and look for any stack errors.
+While waiting, you can run the command again every few minutes. You'll see various status values before the status changes to `READY`. You can also check the AWS CloudFormation console to see project and look for any stack errors.
 
 ## Download the kubeconfig
 
-Once the cluster is `READY`, download the kubeconfig file:
+After the cluster is `READY`, download the kubeconfig file:
 
 ```console
 rctl kubeconfig download --cluster demo-eks-graviton -f ~/.kube/demo-eks-graviton.kubeconfig
@@ -179,4 +180,10 @@ NAME                            STATUS   ROLES    AGE   VERSION               AR
 ip-192-168-13-74.ec2.internal   Ready    <none>   26m   v1.36.2-eks-93b80c6   arm64
 ```
 
-The `arm64` value in the `ARCH` column confirms that the node is running on an AWS Graviton instance. Your EKS cluster is ready to accept workloads. In the next section, you will deploy NGINX to this cluster and verify it runs on the Graviton node.
+The `arm64` value in the `ARCH` column confirms that the node is running on an AWS Graviton instance. Your EKS cluster is ready to accept workloads. 
+
+## What you've accomplished and what's next
+
+You've now defined and provisioned an Amazon EKS cluster with a Graviton-based node group using Rafay's declarative manifest format. You then applied the manifest with RCTL, waited for the cluster to reach a ready state, and downloaded the kubeconfig so you can interact with the cluster.
+
+In the next section, you'll deploy NGINX to this cluster and verify it runs on the Graviton-based node.
