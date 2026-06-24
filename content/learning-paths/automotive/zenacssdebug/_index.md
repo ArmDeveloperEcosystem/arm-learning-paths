@@ -55,7 +55,7 @@ generated_summary_faq:
   - question: Can I connect to all Zena CSS processors at the same time?
     answer: >-
       Yes. Arm Development Studio supports heterogeneous systems, so you can connect to the RSE,
-      Safety Island, and primary compute cores simultaneously, though you may prefer to set up
+      Safety Island, and primary compute cores simultaneously, though you might prefer to set up
       one connection fully before adding others.
   - question: Why isn’t there a predefined Zena CSS target in Arm Development Studio?
     answer: >-
