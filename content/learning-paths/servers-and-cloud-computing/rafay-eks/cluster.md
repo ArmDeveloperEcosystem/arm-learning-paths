@@ -1,5 +1,5 @@
 ---
-title: Create an Amazon EKS cluster
+title: Create an Amazon EKS cluster using a Rafay cluster manifest
 description: Create and apply a Rafay cluster manifest to provision an Amazon EKS cluster with an AWS Graviton-based node group, then download kubeconfig and verify the nodes report arm64.
 weight: 3
 
@@ -83,10 +83,10 @@ spec:
 
 Key fields to note:
 
-- `cloudCredentials` — must exactly match the credential name you entered in the Rafay console
-- `project` - must be the project you attached the credential to
-- `instanceType: m7g.large` — a Graviton3-based instance with Arm Neoverse processors
-- `publicAccess: false` — the Kubernetes API server has no public endpoint. You reach the cluster exclusively through RCTL, which routes traffic through the Rafay control plane.
+- `cloudCredentials` must exactly match the credential name you entered in the Rafay console.
+- `project` must be the project you attached the credential to.
+- `instanceType` must be a Graviton-based EC2 instance type with Arm Neoverse processors. In this manifest, it's Graviton3-based `m7g.large`.
+- `publicAccess` must be `false`. The Kubernetes API server has no public endpoint. You reach the cluster exclusively through RCTL, which routes traffic through the Rafay control plane.
 
 ## Apply the cluster manifest
 

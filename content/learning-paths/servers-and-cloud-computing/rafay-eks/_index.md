@@ -12,12 +12,12 @@ who_is_this_for: >
 learning_objectives:
     - Connect your AWS account to the Rafay platform using a cross-account IAM role
     - Provision an Amazon EKS cluster with an AWS Graviton-based node group using Rafay
-    - Deploy and verify NGINX on arm64 nodes and clean up all cloud resources
+    - Deploy and verify workloads on arm64 nodes and clean up all cloud resources
 
 prerequisites:
-    - An Amazon Web Services (AWS) [account](https://aws.amazon.com/)
-    - A [Rafay account](https://rafay.co)
-    - The [AWS CLI](/install-guides/aws-cli/) installed and configured
+    - An Amazon Web Services (AWS) [account](https://aws.amazon.com/) with sufficient IAM permissions to create roles, EKS clusters, EC2 instances, CloudFormation stacks, and related resources.
+    - A [Rafay account](https://rafay.co).
+    - The [AWS CLI](/install-guides/aws-cli/) installed and configured.
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -49,7 +49,7 @@ generated_summary_faq:
   - question: Which fields in the Rafay cluster manifest must match existing configuration?
     answer: >-
       The project, blueprint name and version, and the cloud credential must already exist in
-      Rafay. If any of these do not match, the cluster won't be created.
+      Rafay. If any of these don't match, the cluster won't be created.
   - question: What result should I expect when the EKS cluster is ready to use?
     answer: >-
       A running cluster with a Graviton-based (`arm64`) node group will be available for workloads.
@@ -60,7 +60,7 @@ generated_summary_faq:
       The provided manifest pins the pods using `nodeSelector: kubernetes.io/arch: arm64`. After
       deployment, the pod should schedule and run on nodes labeled `arm64`. If it remains `Pending`,
       verify the node group is active and the selector matches node labels.
-  - question: What should I cleanup to avoid ongoing AWS charges?
+  - question: What should I clean up to avoid ongoing AWS charges?
     answer: >-
       Delete the NGINX workload and namespace created for the test, then deprovision the EKS cluster
       from Rafay. This releases the associated AWS resources.

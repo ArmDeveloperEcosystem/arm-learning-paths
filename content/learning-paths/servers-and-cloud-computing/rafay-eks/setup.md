@@ -16,7 +16,7 @@ In this Learning Path, you'll use Rafay to provision an Amazon EKS cluster with 
 You need the following accounts and tools before starting this Learning Path:
 
 - An [AWS account](https://aws.amazon.com/) with sufficient IAM permissions to create roles, EKS clusters, EC2 instances, CloudFormation stacks, and related resources.
-- A [Rafay account](https://console.rafay.dev). You can [sign up](https://console.rafay.dev/#/signup) if you do not have an account.
+- A [Rafay account](https://console.rafay.dev). You can [sign up](https://console.rafay.dev/#/signup) if you don't have an account.
 - The AWS CLI installed and configured with credentials that have the required permissions. For setup instructions, see the [AWS CLI](/install-guides/aws-cli/) and the [AWS Credentials](/install-guides/aws_access_keys/) install guides.
 
 Confirm your AWS CLI is working by running the following command, which prints your account and user information:
@@ -27,7 +27,7 @@ aws sts get-caller-identity
 
 ## Install kubectl
 
-Install the Kubernetes command-line tool, by following the [kubectl install guide](/install-guides/kubectl/).
+Install the Kubernetes command-line tool by following the [kubectl install guide](/install-guides/kubectl/).
 
 Confirm the installation:
 
@@ -114,8 +114,8 @@ The output lists your account information, including the endpoints, keys, projec
 
 Rafay provisions EKS resources in your AWS account using a cross-account IAM role. You need two values from the Rafay console before running the script:
 
-1. Log in to the Rafay console
-2. Select **defaultproject** (or another project) from the project selector in the top navigation bar
+1. Log in to the Rafay console.
+2. Select **defaultproject** (or another project) from the project selector in the navigation bar.
 3. Navigate to **Infrastructure** > **Cloud Credentials** > **New Credential**.
 4. Select **AWS** as the provider, then select **ROLE**. Copy the **Rafay Account ID** and **External ID** displayed on the screen. You'll pass these values to the script that follows.
 
@@ -427,7 +427,7 @@ Attaching inline policy to role
 Role ARN (copy this value into the Rafay console):
 arn:aws:iam::111122223333:role/Proj-RafayEKSProvisioner
 ```
-The `Account ID`, `External ID`, and `Role ARN` are sample values.
+The `Account ID`, `External ID`, and `Role ARN` in this output are sample values.
 
 Copy the `Role ARN` from the output.
 
@@ -435,12 +435,12 @@ Copy the `Role ARN` from the output.
 
 With the `Role ARN` copied, complete the credential registration in the Rafay console:
 
-1. Return to **Infrastructure** > **Cloud Credentials** > **New Credential** in the Rafay console
+1. Return to **Infrastructure** > **Cloud Credentials** > **New Credential** in the Rafay console.
 2. Paste the `Role ARN` into the **Role ARN** field.
 3. Enter `aws-cloud-credential` as the credential name.
 4. Select **Save**.
 
-![Screenshot of the Rafay console showing the cloud credential registration form with the AWS Role ARN field filled in #center](images/rafay-cloud-credential.webp "Registered AWS cloud credential in the Rafay console")
+![Screenshot of the Rafay Cloud Credentials page showing the aws-cloud-credential entry with provider AWS, credential type ROLE, and a masked RafayEKSProvisioner role detail#center](images/rafay-cloud-credential.webp "Registered AWS cloud credential in the Rafay console")
 
 ## What you've accomplished and what's next
 

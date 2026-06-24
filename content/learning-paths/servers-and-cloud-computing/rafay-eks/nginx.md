@@ -162,5 +162,5 @@ rctl delete cluster demo-eks-graviton
 
 You've now deployed NGINX using a manifest that pins pods to `arm64` nodes, verified the pod reaches a `Running` state, and tested connectivity from inside the cluster. You then cleaned up all provisioned resources.
 
-Rafay's control plane handles cluster access without requiring a public Kubernetes API endpoint, making it straightforward to run private, Graviton-based EKS clusters at scale.
+Rafay's control plane handles cluster access without requiring a public Kubernetes API endpoint, so you can use Rafay to run private, Graviton-based EKS clusters at scale.
 
