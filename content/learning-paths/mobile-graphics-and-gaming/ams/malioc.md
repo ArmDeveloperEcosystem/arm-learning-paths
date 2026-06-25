@@ -2,6 +2,8 @@
 # User change
 title: Analyze shader program performance with Mali Offline Compiler
 
+description: Use Mali Offline Compiler to compile shader code, compare cycle estimates, and understand when shader cost affects the profiled application.
+
 weight: 10 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements

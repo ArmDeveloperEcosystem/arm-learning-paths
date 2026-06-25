@@ -2,6 +2,8 @@
 # User change
 title: View an example Performance Advisor report
 
+description: Generate an example Performance Advisor report from the sample Streamline capture and review the capture summary.
+
 weight: 6 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements

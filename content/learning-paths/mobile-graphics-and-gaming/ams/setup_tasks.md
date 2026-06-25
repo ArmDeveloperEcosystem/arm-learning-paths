@@ -2,6 +2,8 @@
 # User change
 title: Set up an Android application
 
+description: Prepare a debuggable Android application and device connection so Arm Performance Studio can capture profiling data.
+
 weight: 3 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements

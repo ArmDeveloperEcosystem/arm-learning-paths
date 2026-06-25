@@ -1,7 +1,7 @@
 ---
 title: Profile an Android application with Arm Performance Studio
 
-description: Learn how to profile an Android application using Arm Performance Studio (formerly known as Arm Mobile Studio).
+description: Profile a debuggable Android graphics application with Arm Performance Studio and analyze performance with Streamline, Performance Advisor, Frame Advisor, RenderDoc for Arm GPUs, and Mali Offline Compiler.
 
 minutes_to_complete: 60
 
@@ -88,4 +88,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

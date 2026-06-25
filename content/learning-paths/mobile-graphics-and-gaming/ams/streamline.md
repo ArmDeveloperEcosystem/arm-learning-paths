@@ -2,6 +2,8 @@
 # User change
 title: Use Arm Streamline to capture data for your application
 
+description: Capture a Streamline profile from your Android application and inspect timeline counters to start performance analysis.
+
 weight: 5 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements

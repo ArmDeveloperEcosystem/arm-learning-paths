@@ -2,6 +2,8 @@
 # User change
 title: Analyze your application with Frame Advisor
 
+description: Capture a frame burst with Frame Advisor and inspect render graph, framebuffer, content metrics, and detailed metrics views for bottlenecks.
+
 weight: 8 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements

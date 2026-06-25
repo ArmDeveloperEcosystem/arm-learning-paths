@@ -2,6 +2,8 @@
 # User change
 title: Interpret an example Arm Streamline report
 
+description: Import and inspect the sample Streamline capture included with Arm Performance Studio so you can recognize key timeline views before profiling your app.
+
 weight: 4 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements

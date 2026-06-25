@@ -2,6 +2,8 @@
 # User change
 title: Create a Performance Advisor report for your application
 
+description: Run streamline_me.py, capture extra frame data with Streamline, and generate HTML and JSON Performance Advisor reports for your application.
+
 weight: 7 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements

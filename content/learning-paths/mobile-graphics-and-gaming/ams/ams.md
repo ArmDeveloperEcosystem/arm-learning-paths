@@ -2,6 +2,8 @@
 # User change
 title: Set up Arm Performance Studio 
 
+description: Install and launch Arm Performance Studio, update your PATH, and confirm the profiling tools are available for the Android application workflow.
+
 weight: 2 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements

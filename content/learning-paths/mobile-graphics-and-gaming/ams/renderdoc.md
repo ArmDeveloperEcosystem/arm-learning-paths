@@ -2,6 +2,8 @@
 # User change
 title: Debug your application with RenderDoc for Arm GPUs
 
+description: Connect RenderDoc for Arm GPUs to an Android target, capture frames, and inspect events and GPU output for debugging.
+
 weight: 9 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
