@@ -13,9 +13,9 @@ The `concierge_agent.py` script you downloaded earlier is organized into four pa
 | Part | Responsibility | Runs on |
 |---|---|---|
 | Part 1: Tools | Web search, page scraping, optional email | CPU |
-| Part 1.5: Orchestration pipeline | Query expansion, parallelism, ranking, deduplication, extraction | CPU |
 | Part 2: The brain | Calls the local Gemma model through Ollama | GPU |
-| Part 3: The agentic chain | Ties everything together into one query workflow | CPU + GPU |
+| Part 3: Orchestration pipeline | Query expansion, parallelism, ranking, deduplication, extraction | CPU |
+| Part 4: The agentic chain | Ties everything together into one query workflow | CPU + GPU |
 
 ## Part 1: The tools
 
@@ -58,67 +58,23 @@ Two details are worth highlighting:
 - `keep_alive: -1` tells Ollama to keep the model resident in memory between calls. The agent calls the model several times per query, so this avoids reloading the weights each time.
 - The function records timing as it streams. The time until the *first* token arrives is the model's input-token processing (prefill); the time spent streaming the rest is token generation. Separating these two values is what lets the agent show you the GPU breakdown later.
 
-Because every model call goes through this one function, the agent only ever uses the GPU in clearly marked places. Everything else is CPU work.
+Because every model call goes through this one function, the agent only ever uses the GPU in clearly marked places.
 
-## Part 1.5: The CPU orchestration pipeline
+## Part 3: The CPU orchestration pipeline
 
-This is the heart of the Learning Path. Between the model calls, the CPU transforms a single user request into rich, structured context. Each function below is a distinct CPU stage.
+Between the model calls, the CPU prepares the context. Each stage below runs entirely on the CPU:
 
-### Expand one query into several
+| Stage | Function | What it does |
+|---|---|---|
+| Expand queries | `generate_search_queries()` | Turns one query into several variants |
+| Search in parallel | `parallel_search()` | Runs all searches concurrently |
+| Browse in parallel | `parallel_browse()` | Fetches up to ten websites at once |
+| Rank by relevance | `rank_and_filter_content()` | Scores pages with TF-IDF |
+| Deduplicate | `deduplicate_sentences()`, `find_near_duplicates()` | Removes repeated sentences and near-duplicate pages |
+| Extract data | `extract_entities()` | Pulls out phone numbers, hours, and prices |
+| Build index | `build_keyword_index()` | Indexes the most frequent terms |
 
-A single search query rarely covers a topic well, so the CPU expands it into variants before searching:
-
-```python
-def generate_search_queries(base_query: str, goal: str) -> list:
-    variants = [base_query, f"best {base_query}", f"{base_query} 2026"]
-    ...
-```
-
-### Search and browse in parallel
-
-Network requests are slow, so the CPU runs them concurrently with a thread pool instead of one at a time. The same pattern is used for searching and for browsing:
-
-```python
-def parallel_browse(urls: list) -> list:
-    log_cpu(f"Dispatching {len(urls)} parallel browse threads...")
-    with concurrent.futures.ThreadPoolExecutor(max_workers=min(len(urls), 10)) as executor:
-        future_to_url = {executor.submit(browse_website, url): url for url in urls}
-        ...
-```
-
-This is a good example of orchestration: the CPU coordinates up to ten simultaneous downloads, then collects the results as each thread finishes.
-
-### Rank pages by relevance
-
-Not every page the agent opens is useful. The CPU scores each page against the user's goal using TF-IDF (term frequency–inverse document frequency) and sorts them so the most relevant content reaches the model first:
-
-```python
-def rank_and_filter_content(scraped_pairs: list, goal: str) -> list:
-    log_cpu("Running TF-IDF ranking on scraped content...")
-    ...
-    ranked.sort(key=lambda x: x[2], reverse=True)
-    return ranked
-```
-
-### Deduplicate and extract structured data
-
-Web pages repeat each other and bury the useful facts in boilerplate. Several CPU stages clean this up:
-
-- `deduplicate_sentences()` removes near-duplicate sentences across sources using sequence matching.
-- `compute_content_fingerprints()` and `find_near_duplicates()` use 5-word shingles and Jaccard similarity to detect near-duplicate pages.
-- `extract_entities()` pulls structured data, such as phone numbers, opening hours, and prices, out of the text with regular expressions.
-- `build_keyword_index()` builds an inverted index of the most frequent terms.
-
-The extracted entities are handed to the model as a clearly labeled block, so the model starts from facts the CPU already verified:
-
-```python
-aggregated_text = (
-    f"[CPU-Extracted Entities]\n{entity_summary}\n\n"
-    f"[Aggregated Web Content]\n{aggregated_text}"
-)
-```
-
-## Part 3: The agentic chain
+## Part 4: The agentic chain
 
 `run_concierge_agent()` ties the pipeline together. Reading it top to bottom shows how CPU and GPU steps alternate:
 
@@ -127,24 +83,5 @@ aggregated_text = (
 3. **GPU** – the model selects which URLs to open.
 4. **CPU** – `parallel_browse()`, `rank_and_filter_content()`, `deduplicate_sentences()`, `extract_entities()`, and the indexing stages prepare the context.
 5. **GPU** – the model writes the final, fact-checked summary.
-
-A small helper, `time_cpu()`, wraps each CPU stage to measure how long it takes and record it on the timeline:
-
-```python
-def time_cpu(label: str, fn, *args, **kwargs):
-    start_ts = time.perf_counter()
-    result = fn(*args, **kwargs)
-    elapsed = time.perf_counter() - start_ts
-    timing["cpu_s"] += elapsed
-    timeline_events.append((start_ts, start_ts + elapsed, "cpu"))
-    log_cpu(f"Timing[{label}]: {elapsed:.3f}s")
-    return result
-```
-
-The matching GPU timing is captured inside `call_gemma_ollama()`. Together they produce the timeline and the timing breakdown you'll see when you run the agent in the next section.
-
-{{% notice Note %}}
-The script also contains an `send_email()` tool and commented-out email steps. They're disabled by default so the workflow stays focused on research. You can re-enable them later by configuring the `SMTP_*` environment variables and uncommenting the email steps.
-{{% /notice %}}
 
 Now that you understand the structure, you'll run the agent and watch the CPU and GPU work in real time.

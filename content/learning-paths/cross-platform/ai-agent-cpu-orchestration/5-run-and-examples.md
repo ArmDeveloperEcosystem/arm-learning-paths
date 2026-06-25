@@ -92,7 +92,7 @@ C=CPU (orchestration + web I/O) P=GPU input token processing G=GPU token generat
 Total: 9.803s
 ```
 
-Reading left to right, you can see the pattern of an agentic query: long stretches of CPU work (`C`) for searching, browsing, and processing, punctuated by short GPU bursts where the model reads a prompt (`P`) and generates text (`G`).
+Reading left to right, you can see the pattern of an agentic query: long stretches of CPU work (<code style="color:#00aa00"><strong>C</strong></code>) for searching, browsing, and processing, punctuated by GPU bursts where the model reads a prompt (<code style="color:#aa00aa"><strong>P</strong></code>) and generates text (<code style="color:#cc0000"><strong>G</strong></code>).
 
 <!-- TODO: replace with a real screenshot of the colored timeline output -->
 ![Color-coded timeline showing long CPU stretches between short GPU bursts alt-text#center](agent_timeline.png "The timeline shows the CPU active for most of the query, with the GPU running in short bursts.")
@@ -108,6 +108,10 @@ Compare the battery life of the three most recommended noise-cancelling headphon
 ```text
 Summarize the key differences between the latest Raspberry Pi models
 ```
+
+The screenshot below shows example queries and the answers the agent returns:
+
+![Example of search queries to the agent and the answers it returns #center](queries-and-results.png "Example queries sent to the local concierge agent and the responses it generates.")
 
 Type `quit` or `exit` to end the session.
 
