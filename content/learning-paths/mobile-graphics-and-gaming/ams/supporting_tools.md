@@ -1,4 +1,4 @@
----
+<!-- ---
 # User change
 title: "Supporting tools"
 
@@ -22,4 +22,4 @@ Arm provides the following projects to further assist application developers:
 
 [libGPUCounters library](https://github.com/ARM-software/libGPUCounters) is an open-source utility that allows applications to select and sample a set of Arm GPU performance counters. This library provides access to the same counter data that can be visualized in the Streamline tool, allowing integration of Arm GPU data into custom tooling.
 
-[libGPULayers library](https://github.com/ARM-software/libGPULayers) is an open-source project that provides tooling to quickly create new Vulkan layers for Android, as well as some off-the-shelf layers that can be used during development.
+[libGPULayers library](https://github.com/ARM-software/libGPULayers) is an open-source project that provides tooling to quickly create new Vulkan layers for Android, as well as some off-the-shelf layers that can be used during development. -->

@@ -12,7 +12,7 @@ learning_objectives:
     - Generate and inspect a Performance Advisor report
     - Capture and analyze a frame with Frame Advisor and RenderDoc for Arm GPUs
     - Use Mali Offline Compiler to estimate shader cost
-    - Get started profiling and optimizing your application.
+    - Get started profiling and optimizing your application
 
 prerequisites:
     - An Android device.
