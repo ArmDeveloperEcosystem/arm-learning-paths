@@ -47,7 +47,7 @@ A performance report will be generated.
 
 If your frame analysis points to shader cost, compile one of your shaders. You can also use this sample to understand the report. 
 
-An example (`OpenGL ES`) shader is provided in the [documentation](https://developer.arm.com/documentation/102468/latest/Compile-your-shader):
+An example (`OpenGL ES`) shader is provided in [Compile your shader](https://developer.arm.com/documentation/102468/latest/Compile-your-shader) in the Arm documentation:
 ```C
 #version 310 es
 #define WINDOW_SIZE 5
@@ -99,7 +99,8 @@ Longest path cycles:         4.53    0.00    0.25    2.50        A
 A = Arithmetic, LS = Load/Store, V = Varying, T = Texture
 ```
 
-An example optimization is explained in the [documentation](https://developer.arm.com/documentation/102468/latest/Optimize-your-shader).
+An example optimization is described in [Optimize your shader](https://developer.arm.com/documentation/102468/latest/Optimize-your-shader) in the Arm documentation:
+
 ```C
 #version 310 es
 #define WINDOW_SIZE 5
@@ -138,7 +139,7 @@ A = Arithmetic, LS = Load/Store, V = Varying, T = Texture
 ```
 Observe that the number of `Arithmetic` cycles has been significantly reduced.
 
-Understanding the output of the report is key to the usefulness of the Mali Offline Compiler. This brief [video tutorial](https://developer.arm.com/Additional%20Resources/Video%20Tutorials/Arm%20Mali%20GPU%20Training%20-%20EP3-5) is an excellent starter.
+Understanding the output of the report is key to the usefulness of the Mali Offline Compiler. For more information, see the [Arm GPU Training - Episode 3.5: Mali Offline Compiler](https://developer.arm.com/Additional%20Resources/Video%20Tutorials/Arm%20Mali%20GPU%20Training%20-%20EP3-5) video tutorial.
 
 ## What you've accomplished
 

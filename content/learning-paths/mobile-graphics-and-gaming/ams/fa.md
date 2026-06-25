@@ -64,19 +64,19 @@ Explore each frame to evaluate how efficiently they were rendered on the device.
 
     Evaluate the render graph to look for render passes or input or output attachments that aren’t used in the final output, and could be removed, saving processing power and bandwidth.
 
-1. Expand a frame in the `Frame Hierarchy` view, to see the render passes and draw calls within it. Step through the draw calls and watch the scene being built up in the `Framebuffers` view with each draw. Look for draw calls that could be eliminated, such as those that do not contribute anything to the final output. Look for identical draw calls that could be batched together into one draw.
+2. Expand a frame in the `Frame Hierarchy` view, to see the render passes and draw calls within it. Step through the draw calls and watch the scene being built up in the `Framebuffers` view with each draw. Look for draw calls that could be eliminated, such as those that do not contribute anything to the final output. Look for identical draw calls that could be batched together into one draw.
 
     ![Framebuffers view in Frame Advisor showing the selected draw call output so you can step through how the frame is built#center](images/fa_frame_buffer_view.png)
 
-1. In the `Content Metrics` view, sort draw calls by the number of primitives to find the most expensive objects. See whether these objects could be simplified.
+3. In the `Content Metrics` view, sort draw calls by the number of primitives to find the most expensive objects. See whether these objects could be simplified.
 
     ![Content Metrics view in Frame Advisor sorted by primitive count with the Prims column highlighted to identify expensive draw calls#center](images/fa_content_metrics.png)
 
-1. For an expensive object, check the `Detailed Metrics` view to see how efficiently the object's mesh is being rendered to the screen. Look for objects with duplicated vertices, or those that do not efficiently reuse indices.
+4. For an expensive object, check the `Detailed Metrics` view to see how efficiently the object's mesh is being rendered to the screen. Look for objects with duplicated vertices, or those that do not efficiently reuse indices.
 
     ![Detailed Metrics view in Frame Advisor showing mesh complexity, locality, redundancy, and memory layout for the selected draw call#center](images/fa_detailed_metrics_view.png)
 
-Watch this [video tutorial](https://developer.arm.com/Additional%20Resources/Video%20Tutorials/Capture%20and%20analyze%20a%20problem%20frame%20with%20Frame%20Advisor) to see how to capture and analyze a problem frame with Frame Advisor.
+To see how to capture and analyze a problem frame with Frame Advisor, see the [Capture and analyze a problem frame with Frame Advisor video tutorial](https://developer.arm.com/Additional%20Resources/Video%20Tutorials/Capture%20and%20analyze%20a%20problem%20frame%20with%20Frame%20Advisor).
 
 ## What you've accomplished and what's next
 

@@ -89,7 +89,7 @@ See the [Get started with Performance Advisor Tutorial](https://developer.arm.co
     streamline-cli -pa <options> my_capture.apc
     ```
 
-    The available options are documented in the [Performance Advisor User Guide](https://developer.arm.com/documentation/102009/latest/Command-line-options/The-pa-command), else can be seen with:
+    For a list of available options, see [The Streamline-cli -pa command](https://developer.arm.com/documentation/102009/9-7/Command-line-options/The-Streamline-cli--pa-command) in the Arm documentation, or run the following command:
 
     ```console
     streamline-cli -pa -h
@@ -114,7 +114,7 @@ This feature is particularly useful when used within a [CI workflow](https://dev
 
 ## Specify performance budgets
 
-You can specify a performance budget which will be reflected in the Performance Advisor report. For more information, refer to the [Performance Advisor User Guide](https://developer.arm.com/documentation/102009/latest/Quick-start-guide/Setting-performance-budgets) section on performance budgets.
+You can specify a performance budget which will be reflected in the Performance Advisor report. For more information, see [Setting performance budgets](https://developer.arm.com/documentation/102009/latest/Quick-start-guide/Setting-performance-budgets) in the Arm documentation.
 
 ## What you've accomplished and what's next
 
