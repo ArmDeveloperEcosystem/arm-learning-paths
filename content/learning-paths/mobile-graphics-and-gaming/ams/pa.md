@@ -1,12 +1,15 @@
 ---
 # User change
-title: "Performance Advisor with your application"
+title: Create a Performance Advisor report for your application
 
 weight: 7 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
+
+## Connect to Android device and collect frame data
+
 Now that you have seen a [Performance Advisor example report](/learning-paths/mobile-graphics-and-gaming/ams/pa_example/), you can use it to capture data from your own application.
 
 Performance Advisor runs on a Streamline capture file, so the first step is to take a capture with Streamline. Streamline must capture extra frame data from the device, which Performance Advisor needs to generate a report. To capture the extra frame data, you must first run the provided Python script, `streamline_me.py`.
@@ -17,13 +20,7 @@ This script does the following:
 * Temporarily installs the OpenGL ES or Vulkan layer library file on your device, which is needed to collect frame data.
 * Enables you to specify options for the capture, such as whether to collect screenshots when the FPS drops below a certain threshold.
 
-## Before you begin
-
-Performance Advisor uses a Python script to connect to your device. You will need `Python 3.8` or later installed on your host machine.
-
-Build your application, and setup the Android device as described in [Setup tasks](/learning-paths/mobile-graphics-and-gaming/ams/setup_tasks/).
-
-## Connect to the device
+To connect to the Android device and capture frame data, follow these steps:
 
 1. Open a terminal or command prompt, navigate to the `Arm Performance Studio` install directory and locate the `streamline_me.py` script:
 
@@ -31,7 +28,7 @@ Build your application, and setup the Android device as described in [Setup task
     cd <installation_directory>/streamline/bin/android
     ```
 
-1. Run the script, enabling frame boundaries, with:
+2. Run the script, enabling frame boundaries, with:
 
     ```console
     python3 streamline_me.py --lwi-mode=counters 
@@ -41,7 +38,7 @@ Build your application, and setup the Android device as described in [Setup task
 To see all available options, use `python3 streamline_me.py --help`
 {{% /notice %}}
 
-1. The script returns a numbered list of the Android package names for the debuggable applications that are installed on your device. Enter the number of the application you want to profile.
+3. The script returns a numbered list of the Android package names for the debuggable applications that are installed on your device. Enter the number of the application you want to profile.
 
     ```python
     Searching for devices:
@@ -64,7 +61,9 @@ To see all available options, use `python3 streamline_me.py --help`
 
     The script identifies the GPU in the device, installs the daemon application and layer library, then waits for you to complete the capture in Streamline.
 
-1. Leave the terminal window open, as you need to come back to it after the capture is complete, to stop the script. When the script ends, any captured screenshots are saved to the directory you specified, and the daemon application and layer library are uninstalled from the device. Do not unplug the device until the script has ended.
+{{% notice Note %}}
+Leave the terminal window open, as you need to come back to it after the capture is complete, to stop the script. When the script ends, any captured screenshots are saved to the directory you specified, and the daemon application and layer library are uninstalled from the device. Do not unplug the device until the script has ended.
+{{% /notice %}}
 
 See the [Get started with Performance Advisor Tutorial](https://developer.arm.com/documentation/102478/latest/Run-the-streamline-me-py-script) for full instructions.
 
@@ -113,6 +112,12 @@ This feature is particularly useful when used within a [CI workflow](https://dev
     streamline-cli -pa --type=json:report.json <other_options> my_capture.apc
     ```
 
-## Performance budgets
+## Specify performance budgets
 
 You can specify a performance budget which will be reflected in the Performance Advisor report. For more information, refer to the [Performance Advisor User Guide](https://developer.arm.com/documentation/102009/latest/Quick-start-guide/Setting-performance-budgets) section on performance budgets.
+
+## What you've accomplished and what's next
+
+You've now generated JSON and HTML performance Performance Advisor reports for your application.
+
+Next, you'll perform frame-based analysis on your application using Frame Advisor.

@@ -1,19 +1,18 @@
 ---
 # User change
-title: "Frame Advisor"
+title: "Analyze your application with Frame Advisor"
 
 weight: 8 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
+
+## Connect to your Android device
+
 [Frame Advisor](https://developer.arm.com/Tools%20and%20Software/Frame%20Advisor) offers in-depth frame-based analysis for mobile graphics in Android applications. By capturing the API calls and rendering processes of a specific frame, you can identify potential performance bottlenecks that may be causing slowdowns in your application.
 
-## Prerequisites
-
-Build your application, and setup the Android device as described in [Setup tasks](/learning-paths/mobile-graphics-and-gaming/ams/setup_tasks/).
-
-## Connect to the device
+Start by connecting to your device.
 
 1. Launch the Performance Studio Hub and open Frame Advisor.
     - On Windows, search for Performance Studio.
@@ -21,21 +20,23 @@ Build your application, and setup the Android device as described in [Setup task
 
     ![Performance Studio Hub](images/ps_hub.png)
 
-1. Select `New trace` to start a new trace.
+2. Select `New trace` to start a new trace.
 
    ![Frame Advisor launch screen](images/fa_launch_screen.png)
 
-1. Select your device, and the application that you want to capture frames from.
+3. Select your device, and the application that you want to capture frames from.
 
    ![Device connection screen](images/fa_connect.png)
 
-1. If your application uses the Vulkan API, change the selection in the API settings to `Vulkan`.
+4. If your application uses the Vulkan API, change the selection in the API settings to `Vulkan`.
 
-1. Click `Next` to continue.
+5. Click `Next` to continue.
 
    Unless you chose the `Pause on connect` option in the `Device connection` screen, the application starts automatically on the device.
 
 ## Capture a frame burst
+
+After connecting to your device, you can capture a frame burst.
 
 1. The `Capture` screen provides options for your capture session.
 
@@ -43,11 +44,11 @@ Build your application, and setup the Android device as described in [Setup task
 
    When you approach the part of your game where the problem occurs, click `Pause` and use the `Step` button to focus in just before it.
 
-1. You can capture one frame burst of up to 3 consecutive frames. Adjust the `Frame count` as required.
+2. You can capture one frame burst of up to 3 consecutive frames. Adjust the `Frame count` as required.
 
-1. Click the `Capture` button to start capturing the frame burst. Wait for the capture to complete. This may take several seconds.
+3. Click the `Capture` button to start capturing the frame burst. Wait for the capture to complete. This may take several seconds.
 
-1. Click `Analyze` to see the results. It may take a few minutes to analyze the data.
+4. Click `Analyze` to see the results. It may take a few minutes to analyze the data.
 
 ## Analyze the capture
 
@@ -76,3 +77,9 @@ Explore each frame to evaluate how efficiently they were rendered on the device.
     ![Detailed Metrics view](images/fa_detailed_metrics_view.png)
 
 Watch this [video tutorial](https://developer.arm.com/Additional%20Resources/Video%20Tutorials/Capture%20and%20analyze%20a%20problem%20frame%20with%20Frame%20Advisor) to see how to capture and analyze a problem frame with Frame Advisor.
+
+## What you've accomplished and what's next
+
+You've now analyzed your application with Frame Advisor. 
+
+Next, you'll use RenderDoc for Arm GPUs to capture frames and select application events for debugging.

@@ -1,17 +1,18 @@
 ---
 # User change
-title: "Performance Advisor example report "
+title: View an example Performance Advisor report
 
 weight: 6 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
-Performance Advisor creates an easy-to-read report from a Streamline capture. This helps you quickly understand how your Android application performed on a mobile device.
 
 ## Generate a performance report
 
-The supplied [Arm Streamline example capture](/learning-paths/mobile-graphics-and-gaming/ams/streamline_example/) can be used to generate a `Performance Advisor` report.
+Performance Advisor creates an easy-to-read report from a Streamline capture that you can use to understand how your Android application performs on a mobile device.
+
+You can use the [Arm Streamline example capture](/learning-paths/mobile-graphics-and-gaming/ams/streamline_example/) that comes with Arm Performance Studio to generate an example `Performance Advisor` report.
 
 1. Open a terminal, and navigate to the location of the imported capture.
 
@@ -33,4 +34,10 @@ The supplied [Arm Streamline example capture](/learning-paths/mobile-graphics-an
 
 ## Evaluate the report
 
-Refer to the [Performance Advisor tutorial](https://developer.arm.com/documentation/102478/latest/Example-Performance-Advisor-report) for a detailed explanation about the charts in the report.
+For a detailed explanation on how to interpret the report, see the [Example Performance Advisor report tutorial](https://developer.arm.com/documentation/102478/latest/Example-Performance-Advisor-report) in Arm documentation.
+
+## What you've accomplished and what's next
+
+You've now created a performance report from the example Streamline capture that's packaged with Arm Performance Studio to understand the workflow for report creation. 
+
+Next, you'll create a report for your application.

@@ -1,12 +1,15 @@
 ---
 # User change
-title: "Mali Offline Compiler"
+title: Generate a performance report with Mali Offline Compiler
 
 weight: 10 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
+
+## Before you begin 
+
 Mali Offline Compiler is a command-line tool that you can use to compile all shaders and kernels from OpenGL ES and Vulkan, and generate a performance report for the GPU of interest.
 
 In a terminal, test that Mali Offline Compiler is installed correctly, by typing:
@@ -134,3 +137,10 @@ A = Arithmetic, LS = Load/Store, V = Varying, T = Texture
 Observe that the number of `Arithmetic` cycles has been significantly reduced.
 
 Understanding the output of the report is key to the usefulness of the Mali Offline Compiler. This brief [video tutorial](https://developer.arm.com/Additional%20Resources/Video%20Tutorials/Arm%20Mali%20GPU%20Training%20-%20EP3-5) is an excellent starter.
+
+## What you've accomplished
+
+You've used Mali Offline Compiler to analyze shader performance on a Mali-based GPU of interest. 
+
+You can use the components and workflows described in this Learning Path to profile your applications and analyze performance using Arm Performance Studio.
+

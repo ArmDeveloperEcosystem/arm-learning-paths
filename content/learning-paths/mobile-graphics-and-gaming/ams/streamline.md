@@ -1,15 +1,16 @@
 ---
 # User change
-title: "Streamline with your application"
+title: Use Arm Streamline to capture data for your application
 
 weight: 5 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
-Now that you have seen an [Arm Streamline example capture](/learning-paths/mobile-graphics-and-gaming/ams/streamline_example/), you can use it to capture data from your own application.
 
 ## Select the device and application in Streamline
+
+Now that you have seen an [Arm Streamline example capture](/learning-paths/mobile-graphics-and-gaming/ams/streamline_example/), you can use it to capture data from your own application.
 
 1. Launch the Performance Studio Hub and open Streamline.
 
@@ -45,3 +46,9 @@ Streamline will stop capturing data, remove the daemon, and process the captured
 The charts in the `Timeline` view show the performance counter activity captured from the device. Hover over the charts to see the values at that point in time. Use the Calipers to focus on particular windows of activity. Refer to the [Streamline User Guide](https://developer.arm.com/documentation/101816/latest/Analyze-your-capture) for full instructions on how to use the features in the `Timeline` view.
 
 Understanding the output of Streamline is key to the usefulness of Streamline. The documentation for [Android performance triage with Streamline](https://developer.arm.com/documentation/102540/latest/) on Arm Developer describes how to understand the capture from a number of points of view, depending on what information you are trying to extract from it.
+
+## What you've accomplished and what's next
+
+You've now generated and analyzed an Arm Streamline report for your application. 
+
+Next, you'll view an example Performance Advisor report. 

@@ -1,14 +1,17 @@
 ---
-title: Get started with Arm Performance Studio
+title: Profile an Android application with Arm Performance Studio
 
 description: Learn how to use each of the tools supplied with Arm Performance Studio (formerly known as Arm Mobile Studio).
 
 minutes_to_complete: 60
 
-who_is_this_for: Android application and games developers new to Arm Performance Studio.
+who_is_this_for: This is an introductory topic for Android application and games developers new to Arm Performance Studio.
 
 learning_objectives:
-    - Learn the basic features of each component of Arm Performance Studio. 
+    - Capture a Streamline profile from a debuggable Android application
+    - Generate and inspect a Performance Advisor report
+    - Capture and analyze a frame with Frame Advisor and RenderDoc for Arm GPUs
+    - Use Mali Offline Compiler to estimate shader cost
     - Get started profiling and optimizing your application.
 
 prerequisites:

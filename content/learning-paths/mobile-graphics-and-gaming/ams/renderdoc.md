@@ -1,19 +1,18 @@
 ---
 # User change
-title: "RenderDoc for Arm GPUs"
+title: Debug your application with RenderDoc for Arm GPUs
 
 weight: 9 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
-[RenderDoc for Arm GPUs](https://developer.arm.com/Tools%20and%20Software/RenderDoc%20for%20Arm%20GPUs) is an Arm fork of the [RenderDoc](https://renderdoc.org/) open-source debugger. The Arm release includes support for API features and extensions that are available on the latest Arm GPUs, but not yet supported in upstream RenderDoc. Arm intends to contribute changes to the upstream project, but some Arm-specific or Android-specific features may only be available in the Arm fork.
 
-## Prerequisites
+## Run RenderDoc for Arm GPUs
 
-Build your application, and setup the Android device as described in [Setup tasks](/learning-paths/mobile-graphics-and-gaming/ams/setup_tasks/).
+[RenderDoc for Arm GPUs](https://developer.arm.com/Tools%20and%20Software/RenderDoc%20for%20Arm%20GPUs) is an Arm fork of the [RenderDoc](https://renderdoc.org/) open-source debugger. The Arm release includes support for API features and extensions that are available on the latest Arm GPUs, but not yet supported in upstream RenderDoc. Arm intends to contribute changes to the upstream project, but some Arm-specific or Android-specific features might be available only in the Arm fork.
 
-## Connect to the device
+To run RenderDoc for Arm GPUs, follow these steps:
 
 1. Open RenderDoc for Arm GPUs and select your connected device from the **Replay Context** dropdown list at the bottom left of the RenderDoc UI.
 
@@ -50,3 +49,9 @@ Build your application, and setup the Android device as described in [Setup task
     Selected events are highlighted with a green flag. All the other windows in the UI update to display information that is specific to the selected event. You can use this to view the render state and data resources that are used by the current event, and view the GPU output that resulted from it.
 
 See the [RenderDoc documentation](https://renderdoc.org/docs/index.html#) to explore the full list of features.
+
+## What you've accomplished and what's next
+
+You've now run RenderDoc for Arm GPUs on your application and learned how to capture frames and select events for debugging. 
+
+Next, you'll run Mali Offline Compiler to compile shaders and generate performance reports.
