@@ -13,12 +13,14 @@ instance, we will create an AmpereOne powered A4 instance and connect to it with
 install the Minecraft Java server.
 
 1. Log on to [Oracle Cloud](https://cloud.oracle.com)
-2. On the OCI dashboard, navigate to Compute -> Instances to start a new instance
-3.  "Create instance", then: 
+2. On the$ OCI dashboard, navigate to Compute -> Instances to start a new instance: 
+   ![Instances on OCI Compute](OCI_compute_dashboard.png)
+3. Click "Create instance", then: 
     * Choose one of the availability domains offered to you with A4 instances available
     * Select "Change shape", and set the instance type to Ampere VM.Standard.A4.Flex - if the
       A4.Flex instance type is not available in your preferred 
-      AD, try another, or choose VM.Standard.A1.Flex
+      AD, try another, or choose VM.Standard.A1.Flex:
+      ![Change shape](OCI_change_shape.png)
     * Beside the instance type, click the small black arrow to open options. Allocate 2 OCPUs
       and 12 GB of memory to your instance
     * Choose "Oracle Linux 9" or one of the other available images of your choice under "Change
@@ -33,14 +35,18 @@ install the Minecraft Java server.
       or upload the public key for an existing key pair so that you can connect to your instance
       over SSH once it is created
 5. Use default Storage options
-6. After verifying that the instance is correctly configured, choose "Create" to provision a new instance
+6. After verifying that the instance is correctly configured, choose "Create" to provision a new 
+   instance
+7. It can take up to 2 minutes for your instance to be created. Once created, we need to ensure
+   that there is a public IP address to connect to by going to the "Networking" tab for the instance:
+   ![Instance networking]{OCI_instance_networking.png)
+8. Scroll down and click on the VNIC name - `instance-yyyymmdd-HHmm` by default - then on the IP
+   administration tab, and click on the three dots on the primary IP row to edit the IP address type
+   associated with the instance to set its type to "Ephemeral public IP":
+   ![IP administration for instances](OCI_network_IP_management.png)
 
-It can take up to 2 minutes for your instance to be created. Once created, we can ensure that there is a
-public IP address to connect to by going to the "Networking" tab for the instance, clicking on the VNIC
-name - instance-yyyymmdd-HHmm by default - then IP administration, and editing the IP address associated
-with the instance and activating "Ephemeral public IP".
-
-You should now be able to SSH into your instance with the command
+Take note of the IP address under "Public IP address". You should now be able to SSH into your
+instance with the command
 ```
 ssh -i <path to private key> opc@<public IP address>
 ```
