@@ -15,12 +15,11 @@ learning_objectives:
 
 prerequisites:
     - An Android device.
-    - Arm Performance Studio supports applications built with OpenGL ES versions 2.0 to 3.2, or Vulkan versions 1.0 to 1.2.
+    - An debuggable build of your application built with OpenGL ES versions 2.0 to 3.2, or Vulkan versions 1.0 to 1.2.
     - For OpenGL ES applications, your device must be running Android 10 or later.
     - For Vulkan applications, your device must be running Android 9 or later.
-    - A debuggable build of your application. 
     - Arm Performance Studio installed. Follow the [Arm Performance Studio install guide](/install-guides/ams/) for instructions.
-    - Android SDK Platform tools installed. Required for the Android Debug bridge (adb).
+    - Android SDK Platform tools installed for the Android Debug bridge (adb).
 
 author: Ronan Synnott
 

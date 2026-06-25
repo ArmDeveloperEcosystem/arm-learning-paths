@@ -10,9 +10,11 @@ layout: "learningpathall"
 
 ## Run RenderDoc for Arm GPUs
 
-[RenderDoc for Arm GPUs](https://developer.arm.com/Tools%20and%20Software/RenderDoc%20for%20Arm%20GPUs) is an Arm fork of the [RenderDoc](https://renderdoc.org/) open-source debugger. The Arm release includes support for API features and extensions that are available on the latest Arm GPUs, but not yet supported in upstream RenderDoc. Arm intends to contribute changes to the upstream project, but some Arm-specific or Android-specific features might be available only in the Arm fork.
+[RenderDoc for Arm GPUs](https://developer.arm.com/Tools%20and%20Software/RenderDoc%20for%20Arm%20GPUs) is an Arm fork of the [RenderDoc](https://renderdoc.org/) open-source debugger. 
 
-To run RenderDoc for Arm GPUs, follow these steps:
+The Arm release includes support for API features and extensions that are available on the latest Arm GPUs, but not yet supported in upstream RenderDoc. Arm intends to contribute changes to the upstream project, but some Arm-specific or Android-specific features might be available only in the Arm fork.
+
+To run RenderDoc for Arm GPUs:
 
 1. Open RenderDoc for Arm GPUs and select your connected device from the **Replay Context** dropdown list at the bottom left of the RenderDoc UI.
 
@@ -22,23 +24,23 @@ To run RenderDoc for Arm GPUs, follow these steps:
 
    If you don't see your device, check that your device is setup correctly as described in [Setup tasks](/learning-paths/mobile-graphics-and-gaming/ams/setup_tasks/).
 
-1. Navigate to the **Launch Application** tab, and set the Executable Path to the application that you want to debug. Click the **Browse** button to view all of the installed application packages on the target and find the `.exe` file.
+2. Navigate to the **Launch Application** tab, and set the **Executable Path** to the application that you want to debug. Select the **Browse** button to view all of the installed application packages on the target and find the `.exe` file.
 
-1. Click **Launch**, to start the application running on your target. After a successful launch, a new target-specific tab opens in the UI where you can select the frames that you want to capture.
+3. Select **Launch**, to start the application running on your target. After a successful launch, a new target-specific tab opens in the UI where you can select the frames that you want to capture.
 
     ![Screenshot of RenderDoc for Arm GPUs showing an established Android target connection, capture frame controls, and collected frame thumbnails#center](images/rd_capture_controls.png)
 
     As your application runs, you can choose to:
 
-    * Capture one or more frames immediately
-    * Capture one or more frames after a delay
-    * Capture one or more frames after a specific frame
+    - Capture one or more frames immediately
+    - Capture one or more frames after a delay
+    - Capture one or more frames after a specific frame
 
     Use these controls to take captures of your application as it runs on the target device. Captured frames are stored temporarily on the device.
 
-1. When you have finished capturing the frames of interest, stop the application that you are debugging. Keep RenderDoc running though, as this is needed so that you can analyze and debug your captures.
+4. When you have finished capturing the frames of interest, stop the application that you are debugging. Keep RenderDoc running so that you can analyze and debug your captures.
 
-1. Select a capture from the **Captures collected** window and click **Open**. When the frame has loaded, it is displayed on the target and in the **Texture Viewer** tab, and the **Event Browser** is populated.
+5. Select a capture from the **Captures collected** window and select **Open**. When the frame has loaded, it is displayed on the target and in the **Texture Viewer** tab, and the **Event Browser** is populated.
 
     ![Screenshot of a captured frame opened in RenderDoc showing the Event Browser, Texture Viewer, API Inspector, and output preview for the selected event#center](images/rd_full_ui.png)
 
@@ -46,7 +48,7 @@ To run RenderDoc for Arm GPUs, follow these steps:
 
     ![Screenshot of the RenderDoc Event Browser filtered for draw events with a selected draw call highlighted for debugging frame state#center](images/rd_event_browser.png)
 
-    Selected events are highlighted with a green flag. All the other windows in the UI update to display information that is specific to the selected event. You can use this to view the render state and data resources that are used by the current event, and view the GPU output that resulted from it.
+    Selected events are highlighted with a green flag. The other windows in the UI update to display information for the selected event, including the render state, data resources, and GPU output.
 
 See the [RenderDoc documentation](https://renderdoc.org/docs/index.html#) to explore the full list of features.
 

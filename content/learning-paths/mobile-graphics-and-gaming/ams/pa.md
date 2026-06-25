@@ -18,11 +18,11 @@ This script does the following:
 
 * Temporarily installs a daemon application on your device, called `gatord`, which Streamline uses to collect counter data.
 * Temporarily installs the OpenGL ES or Vulkan layer library file on your device, which is needed to collect frame data.
-* Enables you to specify options for the capture, such as whether to collect screenshots when the FPS drops below a certain threshold.
+* Allows you to specify options for the capture, such as whether to collect screenshots when the FPS drops below a certain threshold.
 
-To connect to the Android device and capture frame data, follow these steps:
+To connect to the Android device and capture frame data:
 
-1. Open a terminal or command prompt, navigate to the `Arm Performance Studio` install directory and locate the `streamline_me.py` script:
+1. Open a terminal or command prompt, navigate to the Arm Performance Studio install directory and locate the `streamline_me.py` script:
 
     ```console
     cd <installation_directory>/streamline/bin/android
@@ -35,7 +35,7 @@ To connect to the Android device and capture frame data, follow these steps:
     ```
 
 {{% notice Tip %}}
-To see all available options, use `python3 streamline_me.py --help`
+To see all available options, use `python3 streamline_me.py --help`.
 {{% /notice %}}
 
 3. The script returns a numbered list of the Android package names for the debuggable applications that are installed on your device. Enter the number of the application you want to profile.
@@ -62,28 +62,30 @@ To see all available options, use `python3 streamline_me.py --help`
     The script identifies the GPU in the device, installs the daemon application and layer library, then waits for you to complete the capture in Streamline.
 
 {{% notice Note %}}
-Leave the terminal window open, as you need to come back to it after the capture is complete, to stop the script. When the script ends, any captured screenshots are saved to the directory you specified, and the daemon application and layer library are uninstalled from the device. Do not unplug the device until the script has ended.
+Leave the terminal window open, as you need to come back to it after the capture is complete, to stop the script. 
+
+When the script ends, any captured screenshots are saved to the directory you specified, and the daemon application and layer library are uninstalled from the device. Don't unplug the device until the script has ended.
 {{% /notice %}}
 
-See the [Get started with Performance Advisor Tutorial](https://developer.arm.com/documentation/102478/latest/Run-the-streamline-me-py-script) for full instructions.
+For full instructions, see the [Get started with Performance Advisor Tutorial](https://developer.arm.com/documentation/102478/latest/Run-the-streamline-me-py-script).
 
 ## Capture data with Streamline
 
-1. Open Streamline and select the device and application on the `Start` tab.
+1. Open Streamline and select the device and application on the **Start** tab.
 
-1. Click `Start capture` to start capturing profile data from the target. Enter a name and location for the capture file that Streamline creates.
+2. Select **Start capture** to start capturing profile data from the target. Enter a name and location for the capture file that Streamline creates.
 
-1. The application starts automatically on the device. Interact with the application as required.
+3. The application starts automatically on the device. Interact with the application as required.
 
-1. When you have collected enough data, click the `Stop capture` button.
+4. When you have collected enough data, select **Stop capture**.
 
-1. Return to your terminal, and press `ENTER` to terminate the `streamline_me.py` script.
+5. Return to your terminal, and press `ENTER` to terminate the `streamline_me.py` script.
 
 ## Generate an HTML performance report
 
 1. In the terminal window, navigate to the location where you stored the Streamline capture file (`.apc`).
 
-1. Run Streamline's  `streamline-cli` command with the `-pa` option on the Streamline capture file to generate the report. The default name is `report.html`.
+2. Run Streamline's  `streamline-cli` command with the `-pa` option on the Streamline capture file to generate the report. The default name is `report.html`.
 
     ```console
     streamline-cli -pa <options> my_capture.apc
@@ -95,10 +97,10 @@ See the [Get started with Performance Advisor Tutorial](https://developer.arm.co
     streamline-cli -pa -h
     ```
 
-    To pass a list of options in a separate file to `Streamline-cli -pa`, use:
+    To pass a list of options in a separate file to `streamline-cli -pa`, use:
 
     ```
-    Streamline-cli -pa <capture.apc> "@<options-file>"
+    streamline-cli -pa <capture.apc> "@<options-file>"
     ```
 
 ## Generate a JSON performance report
@@ -107,7 +109,7 @@ This feature is particularly useful when used within a [CI workflow](https://dev
 
 1. In the terminal window, navigate to the location where you stored the Streamline capture file (`.apc`).
 
-1. Run Streamline's  `streamline-cli` command with the `-pa` and `--type=json` options on the Streamline capture file to generate the report (named `report.json` in below):
+2. Run Streamline's `streamline-cli` command with the `-pa` and `--type=json` options on the Streamline capture file to generate the report named `report.json`:
     ```console
     streamline-cli -pa --type=json:report.json <other_options> my_capture.apc
     ```
@@ -118,6 +120,6 @@ You can specify a performance budget which will be reflected in the Performance 
 
 ## What you've accomplished and what's next
 
-You've now generated JSON and HTML performance Performance Advisor reports for your application.
+You've now generated JSON and HTML Performance Advisor reports for your application.
 
 Next, you'll perform frame-based analysis on your application using Frame Advisor.

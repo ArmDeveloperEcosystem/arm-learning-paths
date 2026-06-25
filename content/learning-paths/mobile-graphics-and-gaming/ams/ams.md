@@ -9,11 +9,13 @@ layout: "learningpathall"
 ---
 ## What is Arm Performance Studio?
 
-[Arm Performance Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio) is a performance analysis tool suite for developers to performance test their applications on devices with Mali-based GPUs. It consists of four easy-to-use tools that show you how well your application performs either on off-the-shelf Android devices, or Linux targets. The tools help you to identify problems that might slow down performance, overheat the device, or drain the battery.
+[Arm Performance Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio) is a performance analysis tool suite that you can use to performance test applications on devices with Mali-based GPUs. 
+
+Performance Studio consists of four tools that show you how well your application performs either on off-the-shelf Android devices, or Linux targets. You can use the tools to identify problems that might slow down performance, overheat the device, or drain the battery.
 
 | Component | Functionality |
 |----------|-------------|
-| [Streamline](https://developer.arm.com/Tools%20and%20Software/Streamline%20Performance%20Analyzer) with [Performance Advisor](https://developer.arm.com/Tools%20and%20Software/Performance%20Advisor) | Capture a performance profile that shows all the performance counter activity from the device. Generate an easy-to-read performance summary from an annotated Streamline capture, and get actionable advice about where you should optimize. |
+| [Streamline](https://developer.arm.com/Tools%20and%20Software/Streamline%20Performance%20Analyzer) with [Performance Advisor](https://developer.arm.com/Tools%20and%20Software/Performance%20Advisor) | Capture a performance profile that shows all the performance counter activity from the device. Generate a performance summary from an annotated Streamline capture, and get actionable advice about where you should optimize. |
 | [Frame Advisor](https://developer.arm.com/Tools%20and%20Software/Frame%20Advisor) | Capture the API calls and rendering from a problem frame and get comprehensive geometry metrics to discover what might be slowing down your application. |
 | [Mali Offline Compiler](https://developer.arm.com/Tools%20and%20Software/Mali%20Offline%20Compiler) | Analyze how efficiently your shader programs perform on a range of Mali GPUs. |
 | [RenderDoc for Arm GPUs](https://developer.arm.com/Tools%20and%20Software/RenderDoc%20for%20Arm%20GPUs) | The industry-standard tool for debugging Vulkan graphics applications, including early support for Arm GPU extensions and Android features. |
@@ -26,7 +28,7 @@ For installation instructions, see the [Arm Performance Studio install guide](/i
 
 ## Update your PATH environment variable (Linux and macOS)
 
-Edit your `PATH` environment variable to add the paths to the Streamline and Mali Offline Compiler executables. This is so that you can run Streamline's `Streamline-cli -pa` command and Mali Offline Compiler's `malioc` command from any directory. This step is not necessary on Windows, as this is done automatically when Arm Performance Studio is installed.
+Edit your `PATH` environment variable to add the paths to the Streamline and Mali Offline Compiler executables. By adding the paths, you can run Streamline's `Streamline-cli -pa` command and Mali Offline Compiler's `malioc` command from any directory. This step is not necessary on Windows, as this is done automatically when Arm Performance Studio is installed.
 
 On macOS, edit your `/etc/paths` file to add the following paths:
 
@@ -53,6 +55,6 @@ To open the tools, launch the Performance Studio Hub:
 
 ## What you've accomplished and what's next
 
-You've now set up Arm Performance Studio and updated your PATH environment variable so you can use suite of available tools to profile applications. 
+You've set up Arm Performance Studio and updated your `PATH` so you can use the profiling tools from a terminal.
 
 Next, you'll set up the application that you'll profile in this Learning Path.

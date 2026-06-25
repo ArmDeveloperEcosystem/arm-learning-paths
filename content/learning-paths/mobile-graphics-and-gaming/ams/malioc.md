@@ -1,6 +1,6 @@
 ---
 # User change
-title: Generate a performance report with Mali Offline Compiler
+title: Analyze shader program performance with Mali Offline Compiler
 
 weight: 10 # 1 is first, 2 is second, etc.
 
@@ -10,16 +10,15 @@ layout: "learningpathall"
 
 ## Before you begin 
 
-Mali Offline Compiler is a command-line tool that you can use to compile all shaders and kernels from OpenGL ES and Vulkan, and generate a performance report for the GPU of interest.
+Mali Offline Compiler is a command-line tool that you can use to compile shaders and kernels from OpenGL ES and Vulkan. The tool generates a performance report for the GPU of interest.
 
-In a terminal, test that Mali Offline Compiler is installed correctly, by typing:
+To test that Mali Offline Compiler is installed correctly, run:
 
 ```
 malioc --help
 ```
 
 The `--help` option returns usage instructions and the full list of available options for the malioc command.
-
 
 {{% notice Note %}}
 On macOS, Mali Offline Compiler might not be recognized as an application from an identified developer. To enable Mali Offline Compiler, open **System Preferences > Security & Privacy**, and select **Allow Anyway** for the `malioc` item.
@@ -41,11 +40,11 @@ malioc --info --core <GPU_name>
 
 ## Compile your shader
 
-You can compile OpenGL ES (`--opengles`) and Vulkan (`--vulkan`) shader programs, as well as Open GL (`--opengl <version>`) C kernels (Linux host only).
+You can compile OpenGL ES (`--opengles`) and Vulkan (`--vulkan`) shader programs. On Linux hosts, you can also compile OpenGL (`--opengl <version>`) C kernels.
 
 A performance report will be generated.
 
-If your frame analysis points to shader cost, compile one of your shaders. You can also use this sample to understand the report. 
+If your frame analysis points to shader cost, compile one of your shaders. You can also use this sample shader to learn how to read the report. 
 
 An example (`OpenGL ES`) shader is provided in [Compile your shader](https://developer.arm.com/documentation/102468/latest/Compile-your-shader) in the Arm documentation:
 ```C
@@ -80,13 +79,15 @@ Compile the shader for [Mali-G76](https://developer.arm.com/Processors/Mali-G76)
  malioc --core Mali-G76 shader.frag
 ```
 
-The full list of available options can be seen with:
+To view the full list of available options, run:
+
 ```console
 malioc --help
 ```
-For more information, refer to [Compiling OpenGL ES shaders](https://developer.arm.com/documentation/101863/latest/Using-Mali-Offline-Compiler/Compiling-OpenGL-ES-shaders) and [Compiling Vulkan shaders](https://developer.arm.com/documentation/101863/latest/Using-Mali-Offline-Compiler/Compiling-Vulkan-shaders) in the Mali Offline Compiler User Guide.
 
-## Analyze the report
+For more information, see [Compiling OpenGL ES shaders](https://developer.arm.com/documentation/101863/latest/Using-Mali-Offline-Compiler/Compiling-OpenGL-ES-shaders) and [Compiling Vulkan shaders](https://developer.arm.com/documentation/101863/latest/Using-Mali-Offline-Compiler/Compiling-Vulkan-shaders) in the Mali Offline Compiler User Guide.
+
+## Interpret the report
 
 The report will provide an approximate cycle cost breakdown for the major functional units in the design. Use this information to optimize your shader.
 
@@ -130,6 +131,7 @@ void main() {
 }
 ```
 Compiling the optimized implementation reports:
+
 ```output
                                 A      LS       V       T    Bound
 Total instruction cycles:    0.96    0.00    0.25    2.50        T
@@ -137,9 +139,9 @@ Shortest path cycles:        0.54    0.00    0.25    2.50        T
 Longest path cycles:         0.96    0.00    0.25    2.50        T
 A = Arithmetic, LS = Load/Store, V = Varying, T = Texture
 ```
-Observe that the number of `Arithmetic` cycles has been significantly reduced.
+Observe that the number of total `Arithmetic` cycles has been significantly reduced from 4.53 to 0.96.
 
-Understanding the output of the report is key to the usefulness of the Mali Offline Compiler. For more information, see the [Arm GPU Training - Episode 3.5: Mali Offline Compiler](https://developer.arm.com/Additional%20Resources/Video%20Tutorials/Arm%20Mali%20GPU%20Training%20-%20EP3-5) video tutorial.
+To learn more about interpreting Mali Offline Compiler reports, see the [Arm GPU Training - Episode 3.5: Mali Offline Compiler](https://developer.arm.com/Additional%20Resources/Video%20Tutorials/Arm%20Mali%20GPU%20Training%20-%20EP3-5) video tutorial.
 
 ## What you've accomplished
 
