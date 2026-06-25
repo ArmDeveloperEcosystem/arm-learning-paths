@@ -17,7 +17,7 @@ prerequisites:
     - Install the Minecraft client on your local laptop, and ensure that you have a Microsoft
       or Mojang account to log in (it will help if you know the basics of playing Minecraft too)
 
-author: Craig Hardy <chardy@amperecomputing.com>
+author: Dave Neary <dneary@amperecomputing.com>
 
 ### Tags
 skilllevels: Beginner
