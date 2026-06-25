@@ -49,7 +49,7 @@ To open the tools, launch the Performance Studio Hub:
 - On Windows, search for Performance Studio.
 - On macOS and Linux, open the Performance Studio application file from the install directory.
 
-![Performance Studio Hub](images/ps_hub.png)
+![Screenshot of the Arm Performance Studio Hub showing launch cards for Frame Advisor, RenderDoc for Arm GPUs, Streamline, Mali Offline Compiler, and Streamline CLI#center](images/ps_hub.png)
 
 ## What you've accomplished and what's next
 

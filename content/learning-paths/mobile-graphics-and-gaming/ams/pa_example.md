@@ -30,7 +30,7 @@ You can use the [Arm Streamline example capture](/learning-paths/mobile-graphics
     Report performance_advisor-<timestamp>.html" successfully generated
     ```
     Open the report in a browser and explore the report.
-    ![Performance Advisor #center](images/pa.png "Performance Advisor report")
+    ![Screenshot of a Performance Advisor report showing device information, capture summary, average frame rate, boundedness distribution, and resource utilization#center](images/pa.png "Performance Advisor report")
 
 ## Evaluate the report
 

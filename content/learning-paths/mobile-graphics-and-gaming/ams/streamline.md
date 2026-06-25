@@ -17,14 +17,14 @@ Now that you have seen an [Arm Streamline example capture](/learning-paths/mobil
     - On Windows, search for Performance Studio.
     - On macOS and Linux, open the Performance Studio application file from the install directory.
 
-    ![Performance Studio Hub](images/ps_hub.png)
+    ![Screenshot of the Arm Performance Studio Hub showing the Streamline launch card used to open Streamline#center](images/ps_hub.png)
 
 1. In the Streamline `Start` view, select `Android (adb)` as your device type, then select your device from the list of detected devices. This installs the `gatord` daemon and connects to the device.
 
 1. Wait for the list of available packages to populate, then select the one you wish to profile.
 1. With `Capture Arm GPU profile` selected, Streamline will detect the Arm GPU in the device, and select an appropriate counter template for it. Alternatively, to choose a different template or to build your own configuration, select `Use advanced mode` and click `Configure counters`.
 
-    ![Connect to device #center](images/start.png "Connect to the device")
+    ![Screenshot of the Streamline Start view with Android adb selected, a connected Samsung device selected, a debuggable application selected, and Capture Arm GPU profile enabled#center](images/start.png "Connect to the device")
 
 {{% notice Tip %}}
 Optionally, you can set a preferred location to store your captures using `Window` > `Preferences` > `Data Locations`. New reports will be created in the topmost folder specified.
@@ -37,7 +37,7 @@ Optionally, you can set a preferred location to store your captures using `Windo
 1. The application starts automatically on the device. Interact with the application as desired for the profiling run you wish to do.
 
 1. When you have collected enough data, click `Stop capture`.
-![Stop capture #center](images/stop_capture.webp "Stop Capture")
+![Screenshot of Streamline during a capture with the Stop capture button highlighted and performance charts updating in the Timeline view#center](images/stop_capture.webp "Stop Capture")
 
 Streamline will stop capturing data, remove the daemon, and process the captured data.
 

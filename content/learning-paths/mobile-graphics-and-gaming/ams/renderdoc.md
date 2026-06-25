@@ -16,7 +16,7 @@ To run RenderDoc for Arm GPUs, follow these steps:
 
 1. Open RenderDoc for Arm GPUs and select your connected device from the **Replay Context** dropdown list at the bottom left of the RenderDoc UI.
 
-   ![Replay Context dropdown location in RenderDoc](images/rd_replay_context.png)
+   ![Screenshot of the RenderDoc Replay Context selector at the bottom left, where you choose the connected Android target before launching the app#center](images/rd_replay_context.png)
 
    The RenderDoc APK starts running on your target.
 
@@ -26,7 +26,7 @@ To run RenderDoc for Arm GPUs, follow these steps:
 
 1. Click **Launch**, to start the application running on your target. After a successful launch, a new target-specific tab opens in the UI where you can select the frames that you want to capture.
 
-    ![Capture frame controls in RenderDoc](images/rd_capture_controls.png)
+    ![Screenshot of RenderDoc for Arm GPUs showing an established Android target connection, capture frame controls, and collected frame thumbnails#center](images/rd_capture_controls.png)
 
     As your application runs, you can choose to:
 
@@ -40,11 +40,11 @@ To run RenderDoc for Arm GPUs, follow these steps:
 
 1. Select a capture from the **Captures collected** window and click **Open**. When the frame has loaded, it is displayed on the target and in the **Texture Viewer** tab, and the **Event Browser** is populated.
 
-    ![A captured frame loaded into RenderDoc](images/rd_full_ui.png)
+    ![Screenshot of a captured frame opened in RenderDoc showing the Event Browser, Texture Viewer, API Inspector, and output preview for the selected event#center](images/rd_full_ui.png)
 
     By default, the **Event Browser** shows all `action()` events, which include draws, copies, and clears. Enter a search term in the **Filter** dropdown to filter these events.
 
-    ![Event Browser in RenderDoc](images/rd_event_browser.png)
+    ![Screenshot of the RenderDoc Event Browser filtered for draw events with a selected draw call highlighted for debugging frame state#center](images/rd_event_browser.png)
 
     Selected events are highlighted with a green flag. All the other windows in the UI update to display information that is specific to the selected event. You can use this to view the render state and data resources that are used by the current event, and view the GPU output that resulted from it.
 

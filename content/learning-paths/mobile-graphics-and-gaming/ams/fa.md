@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Analyze your application with Frame Advisor"
+title: Analyze your application with Frame Advisor
 
 weight: 8 # 1 is first, 2 is second, etc.
 
@@ -18,15 +18,15 @@ Start by connecting to your device.
     - On Windows, search for Performance Studio.
     - On macOS and Linux, open the Performance Studio application file from the install directory.
 
-    ![Performance Studio Hub](images/ps_hub.png)
+    ![Screenshot of the Arm Performance Studio Hub showing the Frame Advisor launch card used to open Frame Advisor#center](images/ps_hub.png)
 
 2. Select `New trace` to start a new trace.
 
-   ![Frame Advisor launch screen](images/fa_launch_screen.png)
+   ![Screenshot of the Frame Advisor welcome screen showing the New trace button used to start a frame capture session#center](images/fa_launch_screen.png)
 
 3. Select your device, and the application that you want to capture frames from.
 
-   ![Device connection screen](images/fa_connect.png)
+   ![Screenshot of Frame Advisor showing a connected Android device, a selected debuggable application, OpenGL ES selected, and the Next button for starting the session#center](images/fa_connect.png)
 
 4. If your application uses the Vulkan API, change the selection in the API settings to `Vulkan`.
 
@@ -40,7 +40,7 @@ After connecting to your device, you can capture a frame burst.
 
 1. The `Capture` screen provides options for your capture session.
 
-   ![Frame Advisor capture screen](images/fa_capture.png)
+   ![Screenshot of the Frame Advisor Capture frames for analysis screen showing the live application preview, frame count control, and Capture button#center](images/fa_capture.png)
 
    When you approach the part of your game where the problem occurs, click `Pause` and use the `Step` button to focus in just before it.
 
@@ -54,27 +54,27 @@ After connecting to your device, you can capture a frame burst.
 
 Frame Advisor presents the captured data in the `Analysis` screen. See your captured frames in the `Frame Hierarchy` view.
 
-![Example Analysis screen](images/fa_example_analysis_screen_1-1.png)
+![Screenshot of the Frame Advisor Analysis screen showing Frame Hierarchy, Render Graph, API Calls, Framebuffers, Content Metrics, and Detailed Metrics panels for a captured frame#center](images/fa_example_analysis_screen_1-1.png)
 
 Explore each frame to evaluate how efficiently they were rendered on the device.
 
 1. Look at the Render Graph to see how the frame was constructed.
 
-    ![Render Graph](images/fa_render_graph_1.1.gif)
+    ![Render Graph view in Frame Advisor showing render passes connected by texture and render-buffer dependencies so unused attachments can be identified#center](images/fa_render_graph_1.1.gif)
 
     Evaluate the render graph to look for render passes or input or output attachments that aren’t used in the final output, and could be removed, saving processing power and bandwidth.
 
 1. Expand a frame in the `Frame Hierarchy` view, to see the render passes and draw calls within it. Step through the draw calls and watch the scene being built up in the `Framebuffers` view with each draw. Look for draw calls that could be eliminated, such as those that do not contribute anything to the final output. Look for identical draw calls that could be batched together into one draw.
 
-    ![Framebuffers view](images/fa_frame_buffer_view.png)
+    ![Framebuffers view in Frame Advisor showing the selected draw call output so you can step through how the frame is built#center](images/fa_frame_buffer_view.png)
 
 1. In the `Content Metrics` view, sort draw calls by the number of primitives to find the most expensive objects. See whether these objects could be simplified.
 
-    ![Content Metrics view](images/fa_content_metrics.png)
+    ![Content Metrics view in Frame Advisor sorted by primitive count with the Prims column highlighted to identify expensive draw calls#center](images/fa_content_metrics.png)
 
 1. For an expensive object, check the `Detailed Metrics` view to see how efficiently the object's mesh is being rendered to the screen. Look for objects with duplicated vertices, or those that do not efficiently reuse indices.
 
-    ![Detailed Metrics view](images/fa_detailed_metrics_view.png)
+    ![Detailed Metrics view in Frame Advisor showing mesh complexity, locality, redundancy, and memory layout for the selected draw call#center](images/fa_detailed_metrics_view.png)
 
 Watch this [video tutorial](https://developer.arm.com/Additional%20Resources/Video%20Tutorials/Capture%20and%20analyze%20a%20problem%20frame%20with%20Frame%20Advisor) to see how to capture and analyze a problem frame with Frame Advisor.
 

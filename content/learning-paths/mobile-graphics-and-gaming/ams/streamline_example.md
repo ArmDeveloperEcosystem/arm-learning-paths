@@ -14,13 +14,13 @@ To help you understand the capabilities of Streamline, an example Streamline pro
 
 1. To open the example profile, in Streamline, select `File` > `Import`.
 2. Select `Import Streamline Sample Captures` and click `Next`.
-    ![Import #center](images/import.png "Import Streamline Sample Captures")
+    ![Screenshot of the Streamline Import dialog with Import Streamline Sample Captures selected before clicking Next#center](images/import.png "Import Streamline Sample Captures")
 
 3. Select the Android example and click `Finish`.
-    ![Samples #center](images/samples.png "Select sample captures")
+    ![Screenshot of the Import Sample Captures dialog with the Android GPU Bound Example selected before clicking Finish#center](images/samples.png "Select sample captures")
 
 4. Double-click on the report in `Streamline Data`, then click `Analyze` when prompted. After the report is processed, you'll see an interactive timeline.
-![Timeline #center](images/timeline.png "Streamline Timeline")
+![Screenshot of the Streamline Timeline tab for the Android GPU Bound Example showing CPU cycles, draw calls, frame rate, Mali core cycles, and process activity#center](images/timeline.png "Streamline Timeline")
 
 ## Analyze the results
 
@@ -33,5 +33,4 @@ Understanding the output of Streamline is key to the usefulness of Streamline. [
 You've now viewed an example Arm Streamline report and interpreted the results using Arm documentation. 
 
 Next, you'll use Arm Streamline to capture data for your application. 
-
 
