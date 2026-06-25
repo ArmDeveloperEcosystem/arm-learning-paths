@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Run AI models locally with Ollama
 
-The agent's reasoning steps, such as choosing search terms, selecting URLs, and writing the final summary, are handled by a large language model. Instead of calling a cloud API, this Learning Path serves the model locally with [Ollama](https://ollama.com/).
+The agent's reasoning steps, such as choosing search terms, selecting URLs, and writing the final summary, are handled by an LLM. Instead of calling a cloud API, this Learning Path serves the model locally with [Ollama](https://ollama.com/).
 
-Ollama is a lightweight runtime that downloads open models, loads them into memory, and exposes a local HTTP API at `http://localhost:11434`. When the agent calls that endpoint, the model runs directly on your machine: the CPU and GPU on your MacBook, Arm Linux laptop, or NVIDIA DGX Spark. Nothing is sent to an external service.
+Ollama is a lightweight runtime that downloads open models, loads them into memory, and exposes a local HTTP API at `http://localhost:11434`. When the agent calls that endpoint, the model runs directly on your machine: the CPU and GPU on your MacBook, Arm Linux laptop, or NVIDIA DGX Spark. Nothing is sent to an external service or cloud.
 
 Running locally has three benefits that matter for an agent:
 
@@ -18,36 +18,28 @@ Running locally has three benefits that matter for an agent:
 - **Cost**: there are no per-token API charges, so you can run many queries freely.
 - **Control**: you choose the exact model and keep it resident in memory for fast repeated calls.
 
-## Install Ollama
+## Install and start Ollama
 
-Install Ollama for your operating system.
+Install [Ollama](https://ollama.com/) and start its server using one of the following options. The server exposes a local API at `http://localhost:11434` that the agent connects to.
 
 {{< tabpane code=true >}}
-{{< tab header="macOS" language="bash">}}
+{{< tab header="Homebrew (Recommended)" language="bash">}}
+# Install Ollama
 brew install ollama
+
+# Start the server as a background service (no terminal to keep open)
+brew services start ollama
 {{< /tab >}}
-{{< tab header="Linux" language="bash">}}
+{{< tab header="Install script" language="bash">}}
+# Install Ollama
 curl -fsSL https://ollama.com/install.sh | sh
+
+# Start the server (leave this running, and open a second terminal)
+ollama serve
 {{< /tab >}}
 {{< /tabpane >}}
 
-{{% notice Note %}}
-On macOS you can also download the Ollama desktop app from [ollama.com/download](https://ollama.com/download). On an NVIDIA DGX Spark, follow the Linux instructions; Ollama uses the Blackwell GPU for inference automatically.
-{{% /notice %}}
-
-## Start the Ollama server
-
-Start the Ollama background service, which hosts the local API the agent connects to:
-
-```bash
-ollama serve
-```
-
-Leave this running in its own terminal. Open a second terminal for the remaining commands.
-
-{{% notice Tip %}}
-On macOS, starting the Ollama desktop app already runs the server in the background, so you can skip `ollama serve`.
-{{% /notice %}}
+With [Homebrew](https://brew.sh/), `brew services` runs Ollama in the background, so you can use the same terminal throughout. With the install script, `ollama serve` runs in the foreground, so keep that terminal open and use a second terminal for the remaining commands.
 
 ## Pull the Gemma model
 

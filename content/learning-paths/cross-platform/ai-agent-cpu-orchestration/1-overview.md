@@ -10,7 +10,8 @@ layout: learningpathall
 
 In this Learning Path, you'll build and run a *local concierge agent*: a terminal application that answers research-style questions, such as finding restaurants, comparing products, or summarizing a topic, by searching the web, reading multiple pages, and writing a fact-checked summary.
 
-Everything runs on your own Arm machine. The agent uses a large language model (LLM) served locally by [Ollama](https://ollama.com/), so your prompts and the pages you browse never leave the device. The same code runs on an Apple silicon MacBook, an Arm Linux laptop, or an NVIDIA DGX Spark.
+Everything runs on your own Arm machine. The agent uses an LLM served locally by [Ollama](https://ollama.com/), so your prompts and the pages you browse never leave the device. The same code runs on an Apple silicon MacBook, an Arm Linux laptop, or an NVIDIA DGX Spark.
+
 
 The agent is interesting not just because it runs locally, but because of *how the work is divided*. A common assumption is that an AI agent is "just the model." In practice, the model is only one stage in a longer pipeline, and most of the surrounding work runs on the CPU.
 
@@ -29,7 +30,7 @@ Your question
     -> Write a fact-checked summary         (GPU: model reasoning)
 ```
 
-The model is called several times, but between every model call the CPU does a large amount of orchestration: generating query variants, dispatching parallel network requests, merging and deduplicating results, scoring pages for relevance, and extracting structured data such as phone numbers and opening hours.
+The model is called several times, but between every model call the CPU does a large amount of orchestration: generating query variants, dispatching parallel network requests, merging and deduplicating results, scoring pages for relevance, and extracting structured data.
 
 ## Why the CPU matters in an agentic workflow
 
@@ -48,8 +49,8 @@ This division is a natural fit for Arm platforms. On an Apple silicon MacBook or
 
 The program is instrumented so you can see this division directly. As it runs, it prints:
 
-- `[CPU]` log lines (in cyan) for every orchestration and processing step
-- `[GPU]` log lines (in yellow) for every model call
+- <code style="color:#00aaaa"><strong>[CPU]</strong></code> log lines for every orchestration and processing step
+- <code style="color:#aaaa00"><strong>[GPU]</strong></code> log lines for every model call
 - A timing breakdown of CPU time versus GPU input-token processing and token generation
 - A text-based timeline that visualizes when the CPU and GPU are each active
 

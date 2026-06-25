@@ -21,10 +21,6 @@ The agent searches the web through [Serper](https://serper.dev/), a Google Searc
 
 You'll set this key as an environment variable later in this section, so the agent can read it without the key being written into the code.
 
-{{% notice Note %}}
-Never paste your API key directly into source code that you share or commit. Always read it from an environment variable, as shown below.
-{{% /notice %}}
-
 ## Create a project directory and virtual environment
 
 A virtual environment keeps the agent's dependencies isolated from your system Python, so you always run against the right package versions.
@@ -47,7 +43,7 @@ Your shell prompt now shows `(.venv)`, which confirms the environment is active.
 
 ## Install the required packages
 
-The agent uses `requests` for HTTP calls and `beautifulsoup4` to parse web pages. The remaining libraries it uses, such as `smtplib`, `json`, and `concurrent.futures`, are part of the Python standard library.
+The agent uses `requests` for HTTP calls and `beautifulsoup4` to parse web pages.
 
 Install the two packages:
 
@@ -69,12 +65,12 @@ This variable only lasts for the current terminal session. To keep it across ses
 
 ## Download the agent script
 
-Download the complete agent script, [concierge_agent.py](concierge_agent.py), into your project directory. You'll run it at the end of this Learning Path, and the next sections walk through how the important parts work.
+Download the complete agent script, <a href="/learning-paths/cross-platform/ai-agent-cpu-orchestration/concierge_agent.py" download>concierge_agent.py</a>, and move it into your `concierge-agent` directory. You'll run it at the end of this Learning Path, and the next sections walk through how the important parts work.
 
-Download it directly from the command line:
+Alternatively, download it directly from the command line:
 
 ```bash
-curl -O https://learn.arm.com/learning-paths/cross-platform/ai-agent-cpu-orchestration/concierge_agent.py
+curl -O https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-learning-paths/main/content/learning-paths/cross-platform/ai-agent-cpu-orchestration/concierge_agent.py
 ```
 
 Confirm the file is in your project directory:
@@ -82,9 +78,5 @@ Confirm the file is in your project directory:
 ```bash
 ls concierge_agent.py
 ```
-
-{{% notice Tip %}}
-You can also save the file using the [concierge_agent.py](concierge_agent.py) link above, then move it into your `concierge-agent` directory.
-{{% /notice %}}
 
 With the environment ready and the script in place, the next step is to serve a model locally with Ollama.

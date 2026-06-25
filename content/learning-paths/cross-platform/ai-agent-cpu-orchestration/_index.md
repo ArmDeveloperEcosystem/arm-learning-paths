@@ -1,5 +1,5 @@
 ---
-title: Build a CPU-orchestrated local AI agent with Ollama and Gemma
+title: Build and run a local AI agent with Ollama
 
 description: Learn how to build a local AI concierge agent that runs entirely on your Arm machine, using the CPU to orchestrate web search, scraping, and text processing while a local Gemma model handles reasoning on the GPU.
 
@@ -9,18 +9,17 @@ cascade:
 
 minutes_to_complete: 45
 
-who_is_this_for: This is an introductory topic for developers who want to build a local, privacy-friendly AI agent on Arm hardware and understand how the CPU orchestrates an agentic workflow around a locally served large language model.
+who_is_this_for: This is an introductory topic for developers who want to build a local, privacy-friendly AI agent on Arm hardware and visualize how the CPU orchestrates an agentic workflow around a locally served LLM.
 
 learning_objectives:
-    - Set up a Python environment and obtain the API access needed to run a local AI agent
-    - Serve a large language model locally with Ollama and select a model that fits your hardware
+    - Set up a Python environment and obtain a Serper web search API key for the agent
+    - Serve an LLM locally with Ollama and select a model that fits your hardware
     - Explain how the CPU orchestrates an agentic workflow while the GPU handles model inference
     - Run the agent and interpret the CPU and GPU timeline it produces for each query
 
 prerequisites:
     - An Arm-based computer running Linux or macOS, such as an Apple silicon MacBook or an NVIDIA DGX Spark
     - Familiarity with running Python scripts from the terminal
-    - A free Serper API key for web search
 
 author: Jaidev Singh Chadha
 
@@ -37,7 +36,6 @@ armips:
 tools_software_languages:
     - Python
     - Ollama
-    - Gemma
     - Generative AI
     - LLM
 operatingsystems:
