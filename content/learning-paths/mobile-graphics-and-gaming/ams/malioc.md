@@ -19,9 +19,9 @@ malioc --help
 ```
 
 The `--help` option returns usage instructions and the full list of available options for the malioc command.
-Note
 
-{{% notice %}}
+
+{{% notice Note %}}
 On macOS, Mali Offline Compiler might not be recognized as an application from an identified developer. To enable Mali Offline Compiler, open **System Preferences > Security & Privacy**, and select **Allow Anyway** for the `malioc` item.
 {{% /notice %}}
 
@@ -44,6 +44,8 @@ malioc --info --core <GPU_name>
 You can compile OpenGL ES (`--opengles`) and Vulkan (`--vulkan`) shader programs, as well as Open GL (`--opengl <version>`) C kernels (Linux host only).
 
 A performance report will be generated.
+
+If your frame analysis points to shader cost, compile one of your shaders. You can also use this sample to understand the report. 
 
 An example (`OpenGL ES`) shader is provided in the [documentation](https://developer.arm.com/documentation/102468/latest/Compile-your-shader):
 ```C
@@ -146,16 +148,16 @@ You can use the components and workflows described in this Learning Path to prof
 
 You can also explore the following supporting tools:
 
-- [Unity Integration package](https://github.com/ARM-software/mobile-studio-integration-for-unity/). Integrate this package in to your Unity application during development and gain the ability to add more application awareness to Performance Advisor and Streamline profiling reports. This package exports key software counters from the Unity profiler to Streamline, and also exports a C# API to allow developers to export custom annotations and software counters that can be visualized in performance reports.
+- [Unity Integration package](https://github.com/ARM-software/mobile-studio-integration-for-unity/) to add more application awareness — in the form of custom annotations and software counters — to Performance Advisor and Streamline profiling reports.
 
-- [Unity System Metrics for Mali package](https://forum.unity.com/threads/introducing-system-metrics-mali-package.1126178/). Integrate this package in to your Unity application during development and visualize frame-based Arm GPU performance metrics using the Unity profiler. This allows efficient early triage of performance problems in-editor, allowing developers to switching to Streamline only when they need to investigate rendering performance issues in more detail.
+- [Unity System Metrics for Mali package](https://forum.unity.com/threads/introducing-system-metrics-mali-package.1126178/) to visualize frame-based Arm GPU performance metrics using the Unity profiler for efficient early triage of performance problems.
 
-- [Godot integration package](https://github.com/ARM-software/arm-performance-studio-integration-for-godot). This package provides an open-source Godot game engine integration for Streamline and Performance Advisor. It contains GDScript bindings for the Streamline annotation API, allowing users to export custom software counters, and event annotations.
+- [Godot integration package](https://github.com/ARM-software/arm-performance-studio-integration-for-godot) to export custom software counters and event annotations.
 
-- [Arm ASTC Encoder texture compressor](https://github.com/ARM-software/astc-encoder) is an open-source texture compressor for the Adaptive Scalable Texture Compression (ASTC) texture format. It supports all block sizes, all color profiles, as well as both 2D and volumetric 3D textures. The astcenc compressor can be built as either a standalone command-line application or a library that can be integrated into an existing asset creation pipeline.
+- [Arm ASTC Encoder texture compressor](https://github.com/ARM-software/astc-encoder) to compress and decompress textures using the Adaptive Scalable Texture Compression (ASTC) texture format.
 
-- [libGPUInfo library](https://github.com/ARM-software/libGPUInfo) is an open-source utility that can be integrated into an application to query the configuration of the Arm GPU present in the system, including the GPU model, shader core count, shader core performance characteristics, and cache size. This information can be used to adjust the application workload at runtime to match the capabilities of the device being used.
+- [libGPUInfo library](https://github.com/ARM-software/libGPUInfo) to query the configuration of the Arm GPU present in the system to adjust the application workload at runtime.
 
-- [libGPUCounters library](https://github.com/ARM-software/libGPUCounters) is an open-source utility that allows applications to select and sample a set of Arm GPU performance counters. This library provides access to the same counter data that can be visualized in the Streamline tool, allowing integration of Arm GPU data into custom tooling.
+- [libGPUCounters library](https://github.com/ARM-software/libGPUCounters) to select and sample a set of Arm GPU performance counters for integration of Arm GPU data into custom tooling.
 
-- [libGPULayers library](https://github.com/ARM-software/libGPULayers) is an open-source project that provides tooling to quickly create new Vulkan layers for Android, as well as some off-the-shelf layers that can be used during development.
+- [libGPULayers library](https://github.com/ARM-software/libGPULayers) to create new Vulkan layers for Android development.
