@@ -14,10 +14,7 @@ The app watches a learner hold a plank, compares their body position with a stor
 
 This project is based on the [AI Yoga Tutor](https://developer.arm.com/community/arm-community-blogs/b/ai-blog/posts/ai-yoga-tutor) prototype. The Learning Path keeps the same core pipeline, but narrows the app to one static pose so you can focus on how a pipeline that includes Android camera, pose detector, local LLM, and speech output fits together.
 
-<!-- TODO: Add final app screenshot here.
-Suggested image path: images/final-ui.png
-Suggested caption: Figure 1: AI Plank Tutor showing the instructor plank image, live camera view, score, and spoken correction caption.
--->
+![AI Plank Tutor final UI alt-text#center](screenshot.jpg "Figure 1: AI Plank Tutor showing the instructor plank image, live camera view, score, and spoken correction caption.")
 
 The finished app has two main visual areas:
 
@@ -44,15 +41,19 @@ Each stage passes structured data to a subsequent stage. The LLM does not receiv
 
 This keeps the LLM prompt small, reduces latency, and makes the behavior easier to tune.
 
-## Get the starter project
+## Clone the starter project
 
-Download the starter project from:
+Clone the Learning Path code examples repository:
 
-```text
-TODO: <starter app download URL>
+```console
+git clone https://gitlab.arm.com/learning-code-examples/code-examples.git
 ```
 
-Unzip the starter project and open the Android project in Android Studio.
+The starter app for this Learning Path is in:
+
+```text
+code-examples/learning-paths/mobile-graphics-and-gaming/ai-plank-tutor/android
+```
 
 {{% notice Note %}}
 The starter project contains the app structure, layout, image asset, MediaPipe pose model, and several Kotlin shell files. You will fill in the missing code over the next pages.
@@ -62,7 +63,7 @@ The starter project contains the app structure, layout, image asset, MediaPipe p
 
 1. Start Android Studio.
 2. Select **Open**.
-3. Open the starter project's `android` folder.
+3. Open `code-examples/learning-paths/mobile-graphics-and-gaming/ai-plank-tutor/android`.
 4. Wait for Gradle sync to finish.
 
 If Android Studio prompts you to trust the project, accept the prompt.
@@ -89,6 +90,8 @@ Open `app/src/main/res/layout/activity_main.xml` and review the main UI. The lay
 - A score label.
 - A caption label for spoken feedback.
 
-Open `app/src/main/assets/videos/plank.jpg` and review the instructor reference image.
+Open `app/src/main/res/drawable/plank.jpg` and review the instructor reference image.
 
-Open `PlankPoseData.kt` and note the hard-coded plank reference data. This file contains the reference landmarks and angle weights used by the scoring step. This was generated from the image in an offline step so it doesn't need any runtime compute.
+Code is under the long path `app/src/main/java/com/arm/demo/AIPlankTutor`. Under that, open `data/PlankPoseData.kt` and note the hard-coded plank reference data. This file contains the instructor's reference landmarks and angle weights used by the scoring step. This was generated from the reference plank image in an offline step so it doesn't need any runtime compute.
+
+Android code starts from the `MainActivity.kt` file, and we will look at that in the next step.
