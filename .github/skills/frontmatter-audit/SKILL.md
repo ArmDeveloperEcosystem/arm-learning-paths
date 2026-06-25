@@ -25,13 +25,14 @@ For a Learning Path directory:
 - Public pages should have unique `weight` values within the directory.
 - Every page except for `_next-steps.md` must include a description.
 - `_index.md` must include `description`.
-- Required `_index.md` fields include `title`, `description`, `weight`, `layout`, `minutes_to_complete`, `prerequisites`, `author`, `subjects`, `armips`, `tools_software_languages`, `skilllevels`, and `operatingsystems`.
+- Required `_index.md` fields include `title`, `description`, `weight`, `layout`, `minutes_to_complete`, `prerequisites`, `author`, `generate_summary_faq`, `rerun_summary`, `rerun_faqs`, `subjects`, `armips`, `tools_software_languages`, `skilllevels`, and `operatingsystems`.
 - `layout` is usually `learningpathall`.
 - `title` should be task-led and use an imperative structure: verb + technology/tool + outcome.
 - `skilllevels` values are only `Introductory` or `Advanced`.
 - `subjects` and `operatingsystems` must match the closed lists in `content/learning-paths/cross-platform/_example-learning-path/write-2-metadata/`.
 - `armips` should use Arm IP families such as Neoverse, Cortex-A, or Cortex-M, not specific CPU models or Arm architecture versions.
 - `author` can list multiple authors with YAML list syntax.
+- `generate_summary_faq`, `rerun_summary`, and `rerun_faqs` values are only `true` and `false`.
 - Skip `_next-steps.md` for description updates unless the user explicitly asks how to handle it.
 
 ## Install guide checks

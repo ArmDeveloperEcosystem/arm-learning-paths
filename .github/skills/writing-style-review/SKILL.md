@@ -74,7 +74,7 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 - Use `set up` as a verb and `setup` as a noun.
 - Use `avoid` instead of `try not to`.
 - Use `such as` instead of `like`.
-- Use `after` instead of `once`.
+- Use `after` or `when` instead of `once`.
 
 ## Tone cleanup
 
@@ -111,7 +111,7 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 - Use `arm64` or `aarch64` for CPU architecture based on tool, package, or OS convention.
 - Use `ARM64` only when referring to Windows on Arm or Microsoft documentation.
 - Capitalize `Learning Path`.
-- Use `Azure Cobalt`, `Google Axion`, and `AWS Graviton` as processor names, not VM names.
+- Use `Azure Cobalt`, `Google Axion`, and `AWS Graviton` as processor names, not VM names. `Graviton-based instances`, not `Graviton instances`, for example.
 - Do not use bold or italics for product names such as LiteRT, XNNPACK, KleidiAI, and SME2 unless they are headings or UI labels.
 
 ## Avoid AI-sounding prose
