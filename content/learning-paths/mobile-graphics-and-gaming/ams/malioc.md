@@ -149,15 +149,9 @@ You can use the components and workflows described in this Learning Path to prof
 You can also explore the following supporting tools:
 
 - [Unity Integration package](https://github.com/ARM-software/mobile-studio-integration-for-unity/) to add more application awareness — in the form of custom annotations and software counters — to Performance Advisor and Streamline profiling reports.
-
 - [Unity System Metrics for Mali package](https://forum.unity.com/threads/introducing-system-metrics-mali-package.1126178/) to visualize frame-based Arm GPU performance metrics using the Unity profiler for efficient early triage of performance problems.
-
 - [Godot integration package](https://github.com/ARM-software/arm-performance-studio-integration-for-godot) to export custom software counters and event annotations.
-
 - [Arm ASTC Encoder texture compressor](https://github.com/ARM-software/astc-encoder) to compress and decompress textures using the Adaptive Scalable Texture Compression (ASTC) texture format.
-
 - [libGPUInfo library](https://github.com/ARM-software/libGPUInfo) to query the configuration of the Arm GPU present in the system to adjust the application workload at runtime.
-
 - [libGPUCounters library](https://github.com/ARM-software/libGPUCounters) to select and sample a set of Arm GPU performance counters for integration of Arm GPU data into custom tooling.
-
 - [libGPULayers library](https://github.com/ARM-software/libGPULayers) to create new Vulkan layers for Android development.
