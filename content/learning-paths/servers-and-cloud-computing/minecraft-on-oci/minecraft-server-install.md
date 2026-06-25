@@ -10,8 +10,11 @@ layout: learningpathall
 
 ### Installing the Java Runtime Environment
 
-Before we install the Minecraft server, we need to make sure that there are some prerequisites installed.
-For the Minecraft 26 server or earlier, we will need Java 25. We can install this on Oracle Linux with:
+Before we install the Minecraft server, we need to make sure that there are some prerequisites
+installed. For the Minecraft 26 server or earlier, we will need Java 25.
+
+Connect to your instance using SSH as described in the previous step. We can install Java 25 on
+Oracle Linux with:
 ```
 sudo dnf install java-25-openjdk
 ```
@@ -21,6 +24,11 @@ sudo apt install openjdk-25-jre
 ```
 Since the Minecraft server starts on the command line, you may also want to install the `screen` or
 `tmux` utilities which allows commands to keep running after you disconnect from the server.
+These commands are not strictly necessary, but you will need them to be running if you want to keep
+the server running when you disconnect from your SSH session. 
+
+Running the Minecraft server at start-up, or keeping it running when you are not connected, will
+not be covered in this learning path.
 
 ### Downloading and installing the Minecraft server
 
@@ -71,5 +79,6 @@ that the process has completed successfully (timestamps will be different at the
 [00:41:04] [Server thread/INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
 ```
 
-Your Minecraft server is now running - you can connect to it with the Minecraft client.
+Your Minecraft server is now running - you can connect to it with the Minecraft client. Congratulations!
+
 
