@@ -34,7 +34,7 @@ generated_summary_faq:
   faq_generated_at: '2026-06-24T20:45:31Z'
   faq_source_hash: 76cbd5e4b3a61e9604e0df9b3ba2a5e5af4aa9a0c295ece3c4ee5a98ec365630
   summary: >-
-    In this Learning Path, you'll provision an Amazon EKS cluster on Arm using
+    You'll provision an Amazon EKS cluster on Arm using
     the Rafay Kubernetes Operations Platform and validate workloads on AWS Graviton-based nodes.
     You'll define a declarative cluster manifest in Rafay referencing an existing project,
     blueprint, and cloud credential. Then, you'll create the EKS cluster and deploy NGINX pinned to arm64 
