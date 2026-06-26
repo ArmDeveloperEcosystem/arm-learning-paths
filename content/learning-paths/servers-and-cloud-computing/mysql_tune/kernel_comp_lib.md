@@ -19,17 +19,19 @@ Storage technology and file system choices can affect performance. In general, l
 
 The file system used with MySQL can also affect performance. The `xfs` file system is a good starting point, and `ext4` is another good option. For production systems, use storage volumes dedicated to the database instead of sharing them with the operating system or other applications.
 
-When running in the cloud, the disk scheduling algorithm is typically set to `noop` or a similar minimal scheduler. This is usually a good setting for MySQL in cloud environments, so no adjustment is needed. If you run MySQL on an on-premises server, double-check the disk scheduling algorithm and test alternatives. According to the [Optimizing InnoDB Disk I/O documentation](https://dev.mysql.com/doc/refman/en/optimizing-innodb-diskio.html), `noop` or `deadline` might be better options for some systems.
+When running in the cloud, the disk scheduling algorithm is typically set to `noop` or a similar minimal scheduler. This is usually a good setting for MySQL in cloud environments, so no adjustment is needed. 
+
+If you run MySQL on an on-premises server, double-check the disk scheduling algorithm and test alternatives. According to the [Optimizing InnoDB Disk I/O documentation](https://dev.mysql.com/doc/refman/en/optimizing-innodb-diskio.html), `noop` or `deadline` might be better options for some systems.
 
 ### MySQL storage engines
 
 MySQL supports different storage engines. The default storage engine is `InnoDB`, which performs best across the broadest set of use cases.
 
-Information on alternative storage engines can be found in the [MySQL documentation](https://dev.mysql.com/doc/refman/en/storage-engines.html).
+For more information on alternative storage engines, see the [MySQL storage engine documentation](https://dev.mysql.com/doc/refman/en/storage-engines.html).
 
 ### Kernel configuration
 
-MySQL can benefit from adjustments to kernel parameters. The following kernel-related settings can have a positive impact on performance.
+MySQL can benefit from adjustments to kernel parameters. The following kernel-related settings can improve performance.
 
 #### Linux virtual memory subsystem
 
@@ -55,7 +57,7 @@ A `64 KB` base page can improve some memory-intensive workloads because each bas
 
 The tradeoff is memory efficiency. Larger base pages can increase internal fragmentation for workloads with many small or sparsely touched mappings, which can reduce the effective amount of memory available to the application and operating system.
 
-The benefit is workload dependent, so compare a `4 KB` kernel and a `64 KB` kernel with the same MySQL & storage configuration.
+The benefit is workload dependent, so compare a `4 KB` kernel and a `64 KB` kernel with the same MySQL and storage configuration.
 
 Base page size also affects the huge page sizes available on Arm. The common PMD-level huge page sizes are:
 
@@ -93,11 +95,7 @@ Huge pages are not being used if `HugePages_Total` is `0` (this is typically the
 
 The `Hugepagesize` value depends on the kernel base page size and platform configuration. Use the value reported by `/proc/meminfo` when calculating `vm.nr_hugepages`.
 
-The sysctl parameter that enables huge pages is shown below:
-
-```output
-vm.nr_hugepages
-```
+The sysctl parameter that enables huge pages is `vm.nr_hugepages`.
 
 This parameter sets the number of huge pages you want the kernel to make available to applications.
 
@@ -140,6 +138,6 @@ If you build MySQL from source, you can also build and install a newer version o
 
 ## What you've learned and what's next
 
-You've now explored enhancements you can make at the system-level related to storage, memory pages, compiler flags, and OpenSSL to improve MySQL performance on Arm. 
+You've now explored changes you can make at the system-level related to storage, memory pages, compiler flags, and OpenSSL to improve MySQL performance on Arm. 
 
 Next, you'll learn about specific MySQL parameters that you can tune for performance. 
