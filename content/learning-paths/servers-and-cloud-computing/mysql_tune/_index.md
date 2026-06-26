@@ -30,9 +30,9 @@ generated_summary_faq:
   faq_generated_at: '2026-06-26T21:28:59Z'
   faq_source_hash: 19acf30951401ec15201ee8e387eb59f9248f627664bc693cf05928233bf2b6f
   summary: >-
-    You'll learn how to use a measurement-driven approach to tune MySQL on Arm-based platforms.
+    You'll learn how to use a measurement-driven approach to tune MySQL performance on Arm-based platforms.
     You'll explore system factors — storage technology and file systems,
-    disk scheduling, kernel memory management, compiler, and library versions — that you can adjust. In addition, you'll focus on MySQL parameters related to connection
+    disk scheduling, kernel memory management, compiler, and library versions — that you can adjust. In addition, you'll learn about optimizable MySQL parameters related to connection
     handling, memory usage, disk flush behavior, and concurrency, and learn how to enable and
     size huge pages based on the InnoDB buffer pool. By the end, you'll know what parameters to update for running controlled experiments,
     and be able to make persistent configuration choices aligned with your workload.
@@ -45,7 +45,7 @@ generated_summary_faq:
   - question: Should I set MySQL parameters in an option file or on the mysqld command line?
     answer: >-
       Use an option file for persistent tuning so changes are reviewable, version controlled,
-      and applied on restart. The examples target the [mysqld] group; command-line flags are suitable
+      and applied on restart. The examples in the Learning Path target the [mysqld] group. Command-line flags are suitable
       for temporary tests.
   - question: Which storage option should I use when testing performance?
     answer: >-
