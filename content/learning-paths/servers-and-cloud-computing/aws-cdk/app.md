@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 ## Set up a sample AWS CDK application
 
-The AWS Cloud Development Kit (CDK) is an open-source infrastructure as code (IaC) software development framework. 
+The AWS Cloud Development Kit (AWS CDK) is an open-source infrastructure as code (IaC) software development framework. 
 
 In this section, you'll create a JavaScript CDK application that defines an Amazon Elastic Container Service (ECS) service running on Arm-based AWS Fargate compute.
 
@@ -82,7 +82,7 @@ In the project, you'll find a file called `arm-cdk-app-stack.js` in the `lib` di
 
 Update `lib/arm-cdk-app-stack.js` to define a load-balanced Amazon ECS service that runs an NGINX web server on an Arm-based AWS Fargate runtime platform.
 
-Replace the contents of the file with the code below:
+Replace the contents of the file with the following code:
 
 ```javascript
 const cdk = require('aws-cdk-lib');
@@ -112,6 +112,6 @@ module.exports = { ArmCdkAppStack };
 
 ## What you've accomplished and what's next
 
-You've now set up a sample application using AWS CDK.
+You've now set up a sample JavaScript application using AWS CDK and defined an Amazon ECS service that runs on Arm-based AWS Fargate compute.
 
 Next, you'll use AWS CDK to synthesize and deploy the application.
