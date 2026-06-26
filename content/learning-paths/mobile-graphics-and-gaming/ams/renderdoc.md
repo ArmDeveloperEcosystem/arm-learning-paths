@@ -12,7 +12,7 @@ layout: "learningpathall"
 
 ## Run RenderDoc for Arm GPUs
 
-[RenderDoc for Arm GPUs](https://developer.arm.com/Tools%20and%20Software/RenderDoc%20for%20Arm%20GPUs) is an Arm fork of the [RenderDoc](https://renderdoc.org/) open-source debugger. 
+[RenderDoc for Arm GPUs](https://developer.arm.com/Tools%20and%20Software/RenderDoc%20for%20Arm%20GPUs) is an Arm fork of the [RenderDoc](https://renderdoc.org/) open-source debugger.
 
 The Arm release includes support for API features and extensions that are available on the latest Arm GPUs, but not yet supported in upstream RenderDoc. Arm intends to contribute changes to the upstream project, but some Arm-specific or Android-specific features might be available only in the Arm fork.
 
@@ -52,7 +52,7 @@ To run RenderDoc for Arm GPUs:
 
     Selected events are highlighted with a green flag. The other windows in the UI update to display information for the selected event, including the render state, data resources, and GPU output.
 
-See the [RenderDoc documentation](https://renderdoc.org/docs/index.html#) to explore the full list of features.
+For a full list of features, see the [RenderDoc documentation](https://renderdoc.org/docs/index.html#).
 
 ## What you've accomplished and what's next
 

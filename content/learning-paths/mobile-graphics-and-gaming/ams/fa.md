@@ -50,9 +50,9 @@ After connecting to your device, you can capture a frame burst.
 
 2. You can capture one frame burst of up to three consecutive frames. Adjust the **Frame count** as required.
 
-3. Select the **Capture** button to start capturing the frame burst. Wait for the capture to complete. This may take several seconds.
+3. Select the **Capture** button to start capturing the frame burst. Wait for the capture to complete. This might take several seconds.
 
-4. Select **Analyze** to see the results. It may take a few minutes to analyze the data.
+4. Select **Analyze** to see the results. It might take a few minutes to analyze the data.
 
 ## Analyze the capture
 
@@ -72,7 +72,7 @@ Explore each frame to evaluate how efficiently they were rendered on the device.
 
     ![Framebuffers view in Frame Advisor showing the selected draw call output so you can step through how the frame is built#center](images/fa_frame_buffer_view.png)
 
-3. In the **Content Metrics** view, sort draw calls by the number of primitives to find the most expensive objects. See whether these objects could be simplified.
+3. In the **Content Metrics** view, sort draw calls by the number of primitives to find the most expensive objects. See whether these objects can be simplified.
 
     ![Content Metrics view in Frame Advisor sorted by primitive count with the Prims column highlighted to identify expensive draw calls#center](images/fa_content_metrics.png)
 

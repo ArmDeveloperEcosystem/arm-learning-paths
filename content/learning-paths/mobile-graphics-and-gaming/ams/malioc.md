@@ -46,7 +46,7 @@ Mali Offline Compiler generates a performance report.
 
 If your frame analysis points to shader cost, compile one of your shaders. You can also use this sample shader to learn how to read the report. 
 
-An example (`OpenGL ES`) shader is provided in [Compile your shader](https://developer.arm.com/documentation/102468/latest/Compile-your-shader) in the Arm documentation:
+The following example (`OpenGL ES`) shader is provided in [Compile your shader](https://developer.arm.com/documentation/102468/latest/Compile-your-shader) in Arm documentation:
 ```C
 #version 310 es
 #define WINDOW_SIZE 5
@@ -100,7 +100,7 @@ Longest path cycles:         4.53    0.00    0.25    2.50        A
 A = Arithmetic, LS = Load/Store, V = Varying, T = Texture
 ```
 
-An example optimization is described in [Optimize your shader](https://developer.arm.com/documentation/102468/latest/Optimize-your-shader) in the Arm documentation:
+An example optimization is described in [Optimize your shader](https://developer.arm.com/documentation/102468/latest/Optimize-your-shader) in Arm documentation:
 
 ```C
 #version 310 es

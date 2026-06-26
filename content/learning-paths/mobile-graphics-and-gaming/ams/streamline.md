@@ -49,7 +49,7 @@ The charts in the **Timeline** view show the performance counter activity captur
 
 For instructions to use the features in the **Timeline** view, see the [Streamline User Guide](https://developer.arm.com/documentation/101816/latest/Analyze-your-capture).
 
-Understanding the output of Streamline is key to the usefulness of the tool. To understand how to interpret the capture from different points of view, see [Android performance triage with Streamline](https://developer.arm.com/documentation/102540/latest/).
+To understand how to interpret the capture from different points of view, see [Android performance triage with Streamline](https://developer.arm.com/documentation/102540/latest/).
 
 ## What you've accomplished and what's next
 
