@@ -7,7 +7,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## Deploy NGINX
+## Deploy NGINX 
 
 With the Amazon EKS cluster running on Graviton-based nodes, deploy NGINX to confirm that `arm64` workloads schedule and run correctly.
 
