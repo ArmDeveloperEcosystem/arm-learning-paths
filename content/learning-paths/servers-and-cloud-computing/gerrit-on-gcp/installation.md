@@ -7,23 +7,22 @@ layout: learningpathall
 ---
 
 ## Install Gerrit on GCP VM
+
 This section walks you through how to install and configure Gerrit Server on a GCP Linux VM (Ubuntu 24.04 LTS based VM). 
 
 To ensure a successful setup, follow each step in order and check the output after each command. This helps you catch issues early and confirms that Gerrit is installed and running correctly.
 
 ## Set up your environment
+
 Before installing Gerrit, update the system and install the required tools:
 
 ```console
-sudo apt update
-sudo apt -y dist-upgrade
-sudo apt install -y wget curl default-jdk git net-tools
-sudo apt install -y python3-pip python3-venv python3-dev pipenv
 sudo apt update && sudo apt upgrade -y
-sudo apt install ca-certificates curl gnupg wget -y
+sudo apt install -y wget default-jdk git net-tools
 ```
 
 ## Download and Setup/Install Gerrit server
+
 Download the Gerrit server package for ARM64 architecture.
 
 ```console
@@ -33,11 +32,13 @@ java -jar gerrit.war init -d ${HOME}/gerrit --dev --batch --install-all-plugins
 ```
 
 ## Verify service status:
+
 ```console
 ps -ef | grep Gerrit
 ```
 
 You should see similar output:
+
 ```output
 doug_an+   11807       1 18 21:01 ?        00:00:14 GerritCodeReview -Dflogger.backend_factory=com.google.common.flogger.backend.log4j.Log4jBackendFactory#getInstance -Dflogger.logging_context=com.google.gerrit.server.logging.LoggingContext#getInstance -jar /home/doug_anson_arm_com/gerrit/bin/gerrit.war daemon -d /home/doug_anson_arm_com/gerrit --run-id=1781730091.11737
 ```
@@ -74,4 +75,4 @@ You should see output similar to this:
 
 ![Gerrit web console dashboard showing the main interface with navigation menu and project/change options available.#center](images/gerrit-dashboard.png "Gerrit Dashboard")
 
-In the next section, basic performance testing of Gerrit will be performed. 
+In the next section, you will benchmark Gerrit performance on your Arm VM. 

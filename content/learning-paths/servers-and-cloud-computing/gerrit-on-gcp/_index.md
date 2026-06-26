@@ -51,6 +51,16 @@ further_reading:
       link: https://gerrit-review.googlesource.com/Documentation/
       type: documentation
 
+  - resource:
+      title: Getting started with Google Cloud Platform
+      link: /learning-paths/servers-and-cloud-computing/csp/google/
+      type: website
+
+  - resource:
+      title: Gerrit 3.14 release notes
+      link: https://www.gerritcodereview.com/3.14.html
+      type: documentation
+
 weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"

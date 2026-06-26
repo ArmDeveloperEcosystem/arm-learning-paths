@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Overview
 
-In this section, you will learn how to provision a Google Axion C4A Arm virtual machine on Google Cloud Platform (GCP) using the `c4a-standard-4` (4 vCPUs, 16 GB memory) machine type in the Google Cloud Console.  
+Provision a Google Axion C4A Arm virtual machine on Google Cloud Platform (GCP) using the `c4a-standard-4` machine type (4 vCPUs, 16 GB memory) in the Google Cloud Console.  
 
 {{% notice Note %}}
 For support on GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
@@ -46,4 +46,4 @@ A window from your browser should come up and you should now see a shell into yo
 
 ![Browser-based terminal window showing an active shell session on the Ubuntu VM instance. The command prompt is ready for input. This demonstrates successful connection to your C4A Arm virtual machine on Google Cloud.#center](images/gcp-shell.png "Terminal shell in your VM instance")
 
-Next, let's install Gerrit!
+You are now ready to install Gerrit. 
