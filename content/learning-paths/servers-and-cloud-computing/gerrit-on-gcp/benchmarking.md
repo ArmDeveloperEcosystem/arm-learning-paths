@@ -6,9 +6,9 @@ weight: 6
 layout: learningpathall
 ---
 
+## Overview
 
-##  Overview 
-This section guides you through benchmarking basic Gerrit performance on our Axiom VM. The benchmark consists of a custom script that will exercise and time key Gerrit features/functions. 
+This section guides you through benchmarking basic Gerrit performance on your Axion VM. The benchmark consists of a custom script that will exercise and time key Gerrit features/functions. 
 
 ## Download and Install the benchmarking script
 
@@ -126,7 +126,7 @@ are all present:
 ![Charts and graphs showing the Gerrit benchmark performance summary including operation counts, success rates, and latency metrics across the four 120-second test steps.#center](images/analysis.png "Gerrit Benchmark Summary")
 
 Client-visible correctness is excellent: all 47,863 measured operations succeeded. REST query latency remains low
-with p99 69 ms. Clone is the dominant pressure point at p99 521 ms, and push remains sub-second at p99 288 ms:
+with a p99 of 69 ms. Clone is the dominant pressure point at a p99 of 521 ms, and push remains sub-second at a p99 of 288 ms:
 
 ![Performance metrics showing client-side operation summary with statistics for git_clone, git_push_refs_for, and rest_change_query operations, including latency percentiles and success rates.#center](images/client-summary.png "Client-side Operation Summary")
 
@@ -147,3 +147,9 @@ Gerrit server-side correlation observations:
 Basic Server Metrics:
 
 ![Server metrics dashboard showing host resource utilization metrics including memory, disk I/O, and other system-level performance indicators during the benchmark run.#center](images/server-metrics.png "Basic Additional Server Metrics")
+
+## What you've accomplished
+
+You have successfully deployed Gerrit on a Google Cloud C4A Axion Arm64 VM running Ubuntu 24.04 LTS, verified the web console, and measured its performance using a production-like benchmark profile. All operations completed with zero failures, and the results establish a practical capacity baseline for a single-node Gerrit deployment on Arm-based infrastructure.
+
+To build on this foundation, you can explore multi-node Gerrit deployments, tune JVM flags for the Neoverse-V2 core, or compare performance across different C4A instance sizes to find the right balance of cost and throughput for your team's workload.
