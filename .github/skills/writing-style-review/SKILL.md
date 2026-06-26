@@ -40,6 +40,7 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 - Use plain English and avoid jargon overload.
 - Define acronyms on first use.
 - Use parallel structure in lists.
+- Avoid starting sentences with "In this Learning Path"/ "In this section"/"On this page" / "In this step".
 - Flag sections over 700 words and suggest natural split points.
 - Identify paragraphs with sentences averaging over 20 words.
 - Note sections that introduce more than two new concepts.
