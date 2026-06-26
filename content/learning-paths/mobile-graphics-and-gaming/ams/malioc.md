@@ -26,8 +26,6 @@ The `--help` option returns usage instructions and the full list of available op
 On macOS, Mali Offline Compiler might not be recognized as an application from an identified developer. To enable Mali Offline Compiler, open **System Preferences > Security & Privacy**, and select **Allow Anyway** for the `malioc` item.
 {{% /notice %}}
 
-## Supported GPUs
-
 To see the full list of [supported GPUs](https://developer.arm.com/documentation/101863/latest/Platform-support/GPU-support) use:
 
 ```console
