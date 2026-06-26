@@ -17,6 +17,9 @@ prerequisites:
     - Familiarity with the Linux command line and JavaScript
 
 author: Anupras Mohapatra
+generate_summary_faq: true
+rerun_summary: true
+rerun_faqs: true
 
 ### Tags
 skilllevels: Introductory
