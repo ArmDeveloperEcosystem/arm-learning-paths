@@ -12,7 +12,7 @@ layout: "learningpathall"
 
 ## Connect to Android device and collect frame data
 
-Now that you have seen a [Performance Advisor example report](/learning-paths/mobile-graphics-and-gaming/ams/pa_example/), you can use it to capture data from your own application.
+Now that you've seen a [Performance Advisor example report](/learning-paths/mobile-graphics-and-gaming/ams/pa_example/), you can use it to capture data from your own application.
 
 Performance Advisor runs on a Streamline capture file, so the first step is to take a capture with Streamline. Streamline must capture extra frame data from the device, which Performance Advisor needs to generate a report. To capture the extra frame data, you must first run the provided Python script, `streamline_me.py`.
 
@@ -79,7 +79,7 @@ For full instructions, see the [Get started with Performance Advisor Tutorial](h
 
 3. The application starts automatically on the device. Interact with the application as required.
 
-4. When you have collected enough data, select **Stop capture**.
+4. When you've collected enough data, select **Stop capture**.
 
 5. Return to your terminal, and press `ENTER` to terminate the `streamline_me.py` script.
 
@@ -118,7 +118,7 @@ This feature is particularly useful when used within a [CI workflow](https://dev
 
 ## Specify performance budgets
 
-You can specify a performance budget which will be reflected in the Performance Advisor report. For more information, see [Setting performance budgets](https://developer.arm.com/documentation/102009/latest/Quick-start-guide/Setting-performance-budgets) in the Arm documentation.
+You can specify a performance budget that is reflected in the Performance Advisor report. For more information, see [Setting performance budgets](https://developer.arm.com/documentation/102009/latest/Quick-start-guide/Setting-performance-budgets) in the Arm documentation.
 
 ## What you've accomplished and what's next
 

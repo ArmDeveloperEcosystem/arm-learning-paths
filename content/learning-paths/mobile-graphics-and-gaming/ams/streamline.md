@@ -12,7 +12,7 @@ layout: "learningpathall"
 
 ## Select the device and application in Streamline
 
-Now that you have seen an [Arm Streamline example capture](/learning-paths/mobile-graphics-and-gaming/ams/streamline_example/), you can use it to capture data from your own application.
+Now that you've seen an [Arm Streamline example capture](/learning-paths/mobile-graphics-and-gaming/ams/streamline_example/), you can use it to capture data from your own application.
 
 1. Launch the Performance Studio Hub and open Streamline.
 
@@ -29,19 +29,19 @@ Now that you have seen an [Arm Streamline example capture](/learning-paths/mobil
     ![Screenshot of the Streamline Start view with Android adb selected, a connected Samsung device selected, a debuggable application selected, and Capture Arm GPU profile enabled#center](images/start.png "Connect to the device")
 
 {{% notice Tip %}}
-Optionally, you can set a preferred location to store your captures using **Window** > **Preferences** > **Data Locations**. New reports will be created in the topmost folder specified.
+Optionally, you can set a preferred location to store your captures using **Window** > **Preferences** > **Data Locations**. New reports are created in the topmost folder specified.
 {{% /notice %}}
 
 ## Capture data
 
 1. Select **Start capture** to start capturing profile data from the device. Enter a name and location for the capture file.
 
-2. The application starts automatically on the device. Interact with the application as desired for the profiling run you wish to do.
+2. The application starts automatically on the device. Interact with the application as desired for the profiling run you want to do.
 
-3. When you have collected enough data, select **Stop capture**.
+3. When you've collected enough data, select **Stop capture**.
 ![Screenshot of Streamline during a capture with the Stop capture button highlighted and performance charts updating in the Timeline view#center](images/stop_capture.webp "Stop Capture")
 
-Streamline will stop capturing data, remove the daemon, and process the captured data.
+Streamline stops capturing data, removes the daemon, and processes the captured data.
 
 ## Analyze the results
 

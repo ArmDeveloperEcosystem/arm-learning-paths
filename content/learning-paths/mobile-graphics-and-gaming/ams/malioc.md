@@ -42,7 +42,7 @@ malioc --info --core <GPU_name>
 
 You can compile OpenGL ES (`--opengles`) and Vulkan (`--vulkan`) shader programs. On Linux hosts, you can also compile OpenGL (`--opengl <version>`) C kernels.
 
-A performance report will be generated.
+Mali Offline Compiler generates a performance report.
 
 If your frame analysis points to shader cost, compile one of your shaders. You can also use this sample shader to learn how to read the report. 
 
@@ -89,7 +89,7 @@ For more information, see [Compiling OpenGL ES shaders](https://developer.arm.co
 
 ## Interpret the report
 
-The report will provide an approximate cycle cost breakdown for the major functional units in the design. Use this information to optimize your shader.
+The report provides an approximate cycle cost breakdown for the major functional units in the design. Use this information to optimize your shader.
 
 For example, compiling the unoptimized implementation for `Mali-G76` reports the following cycle information:
 ```output

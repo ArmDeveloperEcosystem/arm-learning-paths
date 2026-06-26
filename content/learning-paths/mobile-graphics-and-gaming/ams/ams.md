@@ -30,7 +30,7 @@ For installation instructions, see the [Arm Performance Studio install guide](/i
 
 ## Update your PATH environment variable (Linux and macOS)
 
-Edit your `PATH` environment variable to add the paths to the Streamline and Mali Offline Compiler executables. By adding the paths, you can run Streamline's `Streamline-cli -pa` command and Mali Offline Compiler's `malioc` command from any directory. This step is not necessary on Windows, as this is done automatically when Arm Performance Studio is installed.
+Edit your `PATH` environment variable to add the paths to the Streamline and Mali Offline Compiler executables. By adding the paths, you can run Streamline's `Streamline-cli -pa` command and Mali Offline Compiler's `malioc` command from any directory. This step isn't necessary on Windows, as this is done automatically when Arm Performance Studio is installed.
 
 On macOS, edit your `/etc/paths` file to add the following paths:
 

@@ -1,6 +1,6 @@
 ---
 # User change
-title: Set up an Android application
+title: Set up an Android application for profiling
 
 description: Prepare a debuggable Android application and device connection so Arm Performance Studio can capture profiling data.
 
@@ -22,7 +22,7 @@ Compile the application with debug enabled, as well as additional options to fac
 
 - To set [Unity](https://unity.com/) applications to be debuggable, enable **[Development Build](https://docs.unity3d.com/6000.0/Documentation/Manual/android-BuildProcess.html)** in **Build settings**.
 - In Android Studio, use a build variant that includes `debuggable true` (`isDebuggable = true` in Kotlin scripts) in the build configuration.
-- In Unreal Engine, open **Project Settings > Project > Packaging > Project**, and ensure that the **For Distribution** checkbox is not set.
+- In Unreal Engine, open **Project Settings > Project > Packaging > Project**, and ensure that the **For Distribution** checkbox isn't set.
 - For instructions to compile your C++ or Java applications with the right options, see the [Target setup guide for Android](https://developer.arm.com/documentation/101813/latest/Target-Setup/Compile-your-application).
 
 {{% notice Tip %}}

@@ -76,7 +76,7 @@ Explore each frame to evaluate how efficiently they were rendered on the device.
 
     ![Content Metrics view in Frame Advisor sorted by primitive count with the Prims column highlighted to identify expensive draw calls#center](images/fa_content_metrics.png)
 
-4. For an expensive object, check the **Detailed Metrics** view to see how efficiently the object's mesh is being rendered to the screen. Look for objects with duplicated vertices, or those that do not efficiently reuse indices.
+4. For an expensive object, check the **Detailed Metrics** view to see how efficiently the object's mesh is being rendered to the screen. Look for objects with duplicated vertices, or those that don't efficiently reuse indices.
 
     ![Detailed Metrics view in Frame Advisor showing mesh complexity, locality, redundancy, and memory layout for the selected draw call#center](images/fa_detailed_metrics_view.png)
 

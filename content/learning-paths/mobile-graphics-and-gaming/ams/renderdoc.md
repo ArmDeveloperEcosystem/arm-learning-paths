@@ -24,7 +24,7 @@ To run RenderDoc for Arm GPUs:
 
    The RenderDoc APK starts running on your target.
 
-   If you don't see your device, check that your device is setup correctly as described in [Setup tasks](/learning-paths/mobile-graphics-and-gaming/ams/setup_tasks/).
+   If you don't see your device, check that your device is set up correctly as described in [Setup tasks](/learning-paths/mobile-graphics-and-gaming/ams/setup_tasks/).
 
 2. Navigate to the **Launch Application** tab, and set the **Executable Path** to the application that you want to debug. Select the **Browse** button to view all of the installed application packages on the target and find the `.exe` file.
 
@@ -40,9 +40,9 @@ To run RenderDoc for Arm GPUs:
 
     Use these controls to take captures of your application as it runs on the target device. Captured frames are stored temporarily on the device.
 
-4. When you have finished capturing the frames of interest, stop the application that you are debugging. Keep RenderDoc running so that you can analyze and debug your captures.
+4. When you've finished capturing the frames of interest, stop the application that you are debugging. Keep RenderDoc running so that you can analyze and debug your captures.
 
-5. Select a capture from the **Captures collected** window and select **Open**. When the frame has loaded, it is displayed on the target and in the **Texture Viewer** tab, and the **Event Browser** is populated.
+5. Select a capture from the **Captures collected** window and select **Open**. When the frame has loaded, it's displayed on the target and in the **Texture Viewer** tab, and the **Event Browser** is populated.
 
     ![Screenshot of a captured frame opened in RenderDoc showing the Event Browser, Texture Viewer, API Inspector, and output preview for the selected event#center](images/rd_full_ui.png)
 
