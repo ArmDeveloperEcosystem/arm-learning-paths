@@ -39,7 +39,7 @@ generated_summary_faq:
     You'll profile an Android graphics application on Arm
     Mali-based GPUs using Arm Performance Studio. After preparing a debuggable build, you'll
     connect an Android device over adb, explore a provided Streamline sample to understand the
-    available views, then capture a profile from their own application and generate a Performance
+    available views, then capture a profile from your own application and generate a Performance
     Advisor report with the CLI. You'll also perform frame-level inspection with Frame Advisor
     and RenderDoc for Arm GPUs, and use Mali Offline Compiler to estimate shader
     cost. By the end, you'll understand how to progress from example data to capturing on-device
