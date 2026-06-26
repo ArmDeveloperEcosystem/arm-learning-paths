@@ -1,15 +1,19 @@
 ---
-title: Learn how to Tune MySQL
+title: Tune MySQL performance on Arm-based platforms
+description: Learn how to tune MySQL configuration, Linux memory settings, and storage options to improve database performance on Arm-based platforms.
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an advanced topic for software developers and DevOps professionals interested in optimizing MySQL performance on Arm-based VMs in the cloud.
+who_is_this_for: This Learning Path is for database administrators (DBAs) and software developers who want to optimize MySQL performance on Arm-based platforms.
 
 learning_objectives:
-    - Tune MySQL to increase performance
+    - Configure MySQL settings that affect connection handling, memory usage, disk flush behavior, and concurrency.
+    - Enable huge pages for MySQL and size them based on the InnoDB buffer pool.
+    - Evaluate storage, kernel, compiler, and library choices that can affect MySQL performance.
 
 prerequisites:
-    - Bare-metal or cloud [installation of MySQL](/learning-paths/servers-and-cloud-computing/mysql/)
+    - On-prem or cloud [installation of MySQL](https://dev.mysql.com/doc/refman/en/)
+    - A repeatable MySQL workload or benchmark that you can run before and after tuning
 
 author: Julio Suarez
 
@@ -41,13 +45,25 @@ test_maintenance: true
 
 further_reading:
     - resource:
-        title: MySQL documentation
-        link: https://www.mysql.com/
+        title: MySQL Reference Manual
+        link: https://dev.mysql.com/doc/refman/en/
         type: documentation
     - resource:
-        title: Running MySQL on ARM
-        link: https://mysqlonarm.github.io/Running-MySQL-on-ARM/
+        title: InnoDB configuration parameters
+        link: https://dev.mysql.com/doc/refman/en/innodb-parameters.html
         type: documentation
+    - resource:
+        title: Optimizing InnoDB disk I/O
+        link: https://dev.mysql.com/doc/refman/en/optimizing-innodb-diskio.html
+        type: documentation
+    - resource:
+        title: Linux HugeTLBpage documentation
+        link: https://docs.kernel.org/admin-guide/mm/hugetlbpage.html
+        type: documentation
+    - resource:
+        title: Migrating applications to Arm servers
+        link: /learning-paths/servers-and-cloud-computing/migration/
+        type: learning-path
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
@@ -55,4 +71,3 @@ weight: 1
 layout: learningpathall
 learning_path_main_page: 'yes'
 ---
-
