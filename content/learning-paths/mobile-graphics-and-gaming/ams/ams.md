@@ -46,15 +46,6 @@ On Linux, edit your `PATH` environment variable to add the paths to the Performa
  PATH=$PATH:/<installation_directory>/mali_offline_compiler
 ```
 
-## Launch the tools
-
-To open the tools, launch the Performance Studio Hub:
-
-- On Windows, search for Performance Studio.
-- On macOS and Linux, open the Performance Studio application file from the install directory.
-
-![Screenshot of the Arm Performance Studio Hub showing launch cards for Frame Advisor, RenderDoc for Arm GPUs, Streamline, Mali Offline Compiler, and Streamline CLI#center](images/ps_hub.png)
-
 ## What you've accomplished and what's next
 
 You've set up Arm Performance Studio and updated your `PATH` so you can use the profiling tools from a terminal.

@@ -13,7 +13,7 @@ layout: "learningpathall"
 
 Complete the following prerequisites:
 
-1. Install [Android Debug Bridge (adb)](https://developer.android.com/studio/command-line/adb). `adb` is available with the Android SDK platform tools, which are installed as part of Android Studio. Alternatively, you can download them separately as part of the Android SDK platform tools.
+1. Install [Android Debug Bridge (adb)](https://developer.android.com/studio/command-line/adb). `adb` is available with the Android SDK platform tools, which are installed as part of Android Studio. 
 2. Performance Advisor uses a Python script to connect to your device. To run this script, you'll need [Python](https://www.python.org/downloads/) 3.8 or later installed.
 
 ## Build your application
