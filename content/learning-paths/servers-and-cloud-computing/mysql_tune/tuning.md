@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Tune MySQL configuration"
+title: Tune MySQL configuration for performance
 description: Learn how to tune MySQL server parameters for connections, memory, disk flushing, transaction durability, I/O capacity, and lock polling.
 
 weight: 4 # 1 is first, 2 is second, etc.
@@ -9,15 +9,17 @@ weight: 4 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## MySQL configuration
+## Update MySQL parameters
 
 You can set MySQL server configuration parameters in an option file or on the `mysqld` command line.
 
-For persistent tuning, use an option file so the configuration can be reviewed, version controlled, and applied consistently when MySQL restarts. For more information, see the MySQL [Specifying Program Options documentation](https://dev.mysql.com/doc/refman/en/program-options.html).
+For persistent tuning, use an option file so the configuration can be reviewed, version controlled, and applied consistently when MySQL restarts. For more information, see  [Specifying Program Options](https://dev.mysql.com/doc/refman/en/program-options.html) in MySQL documentation.
 
 The examples in this section are intended for the `[mysqld]` group in a MySQL option file.
 
+{{% notice Note %}}
 In general, leave most MySQL settings at their defaults and change them only when you have a workload requirement, test result, profile, or observed bottleneck that supports the change.
+{{% /notice %}}
 
 ### Connections and prepared statements
 
@@ -35,7 +37,7 @@ The [`max_prepared_stmt_count`](https://dev.mysql.com/doc/refman/en/server-syste
 
 ### Dedicated server configuration
 
-If the system only runs MySQL, enable the dedicated server setting:
+If the system runs only MySQL, enable the dedicated server setting:
 
 ```ini
 innodb_dedicated_server=ON
@@ -91,7 +93,7 @@ innodb_dedicated_server=ON
 innodb_redo_log_capacity=32G
 ```
 
-The [`innodb_redo_log_capacity`](https://dev.mysql.com/doc/refman/en/innodb-parameters.html#sysvar_innodb_redo_log_capacity) parameter controls the amount of disk space used for redo log files. It was introduced in MySQL 8.0.30. In earlier MySQL versions, [`innodb_log_file_size`](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_log_file_size) and [`innodb_log_files_in_group`](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_log_files_in_group) control redo log size and behavior.
+The [`innodb_redo_log_capacity`](https://dev.mysql.com/doc/refman/en/innodb-parameters.html#sysvar_innodb_redo_log_capacity) parameter controls the amount of disk space used for redo log files. It was introduced in MySQL `8.0.30`. In earlier MySQL versions, [`innodb_log_file_size`](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_log_file_size) and [`innodb_log_files_in_group`](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_log_files_in_group) control redo log size and behavior.
 
 The auto-sized `innodb_redo_log_capacity` value is a starting point. Increasing it can improve write-heavy workloads by giving InnoDB more redo log space before checkpoints limit write throughput. An explicit `innodb_redo_log_capacity` value overrides the value calculated by `innodb_dedicated_server` for that variable, while still allowing `innodb_dedicated_server` to size other settings such as `innodb_buffer_pool_size`. When you override one of the automatically configured variables, MySQL prints a startup warning such as `Option innodb_dedicated_server is ignored for innodb_redo_log_capacity`. That warning is expected for the overridden variable.
 
@@ -107,12 +109,12 @@ large-pages=ON
 
 Turning on [`large-pages`](https://dev.mysql.com/doc/refman/en/server-system-variables.html#sysvar_large_pages) can improve performance when MySQL uses a large InnoDB buffer pool. Larger pages map more memory per translation entry, which can reduce page-table walks and TLB pressure.
 
-Huge pages must also be configured at the Linux kernel level. See the [system, kernel, compiler, and library settings](/learning-paths/servers-and-cloud-computing/mysql_tune/kernel_comp_lib/) section for huge page setup instructions.
+Huge pages must also be configured at the Linux kernel level. For huge page setup instructions, see the [system, kernel, compiler, and library settings](/learning-paths/servers-and-cloud-computing/mysql_tune/kernel_comp_lib/) section of this Learning Path.
 
 Divide the buffer pool size by the huge page size to estimate the number of huge pages needed. Use the `Hugepagesize` value from `/proc/meminfo`, and allocate enough huge pages for a total huge page space equal to or slightly larger than the buffer pool.
 
 {{% notice Important %}}
-After restarting MySQL with `large-pages=ON`, check `/proc/meminfo` and the MySQL error log. If the huge page pool is too small, or MySQL cannot allocate huge pages for another reason, InnoDB can fall back to traditional memory and print `Warning: Using conventional memory pool.` to the MySQL error log. You might also see an allocation warning similar to `large_page_aligned_alloc mmap(... bytes) failed; errno 12`.
+After restarting MySQL with `large-pages=ON`, check `/proc/meminfo` and the MySQL error log. If the huge page pool is too small, or MySQL can't allocate huge pages for another reason, InnoDB can fall back to traditional memory and print `Warning: Using conventional memory pool.` to the MySQL error log. You might also see an allocation warning similar to `large_page_aligned_alloc mmap(... bytes) failed; errno 12`.
 {{% /notice %}}
 
 You don't usually need to change other memory parameters unless you observe a specific issue. One optional area to test is [InnoDB buffer pool prefetching](https://dev.mysql.com/doc/refman/en/innodb-performance-read_ahead.html). Lowering [`innodb_read_ahead_threshold`](https://dev.mysql.com/doc/refman/en/innodb-parameters.html#sysvar_innodb_read_ahead_threshold) from the default can help workloads with predictable sequential access patterns, while [`innodb_random_read_ahead`](https://dev.mysql.com/doc/refman/en/innodb-parameters.html#sysvar_innodb_random_read_ahead) can help some workloads and hurt others. Treat these settings as workload-specific experiments.
@@ -168,3 +170,9 @@ innodb_sync_spin_loops=30
 The [`innodb_sync_spin_loops`](https://dev.mysql.com/doc/refman/en/innodb-parameters.html#sysvar_innodb_sync_spin_loops) parameter controls how many times a thread checks whether an InnoDB mutex is free before yielding execution to another thread.
 
 Profiling MySQL under heavy load on Arm with Linux `perf` can show time spent waiting for locks. Increasing `innodb_sync_spin_loops` can reduce context switching when locks are released quickly, but setting it too high can waste power and delay other useful work. Keep the default value, `30`, unless profiling and measured performance show that a different value helps. For more information, see the MySQL [Configuring Spin Lock Polling documentation](https://dev.mysql.com/doc/refman/en/innodb-performance-spin_lock_polling.html).
+
+## What you've learned
+
+You've now explored various MySQL parameters you can tune for improved performance on Arm. 
+
+You can use the guidance in this Learning Path to optimize the performance of your MySQL databases. 

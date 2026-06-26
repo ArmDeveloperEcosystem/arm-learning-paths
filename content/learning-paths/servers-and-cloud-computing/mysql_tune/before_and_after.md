@@ -1,5 +1,5 @@
 ---
-title: "Measure MySQL tuning impact"
+title: Measure the impact of tuning MySQL
 description: Learn how to approach MySQL performance tuning as a measurement-driven process and compare baseline results with tuned results.
 weight: 2
 layout: "learningpathall"
@@ -15,7 +15,7 @@ Whatever method you use, keep the measurements repeatable. Record the system con
 
 ## Why tune MySQL
 
-MySQL performance can be limited by memory usage, disk I/O, connection handling, concurrency, or synchronization overhead. Tuning helps you use the available compute, memory, and storage resources more efficiently.
+MySQL performance can be limited by memory usage, disk I/O, connection handling, concurrency, or synchronization overhead. By tuning MySQL, you can use the available compute, memory, and storage resources more efficiently.
 
 Improved performance can give you higher throughput, lower latency, or better cost efficiency. A tuned configuration can increase capacity on the same system, or help you meet the same performance target with fewer compute resources.
 
@@ -30,3 +30,9 @@ This benchmark result is an example, not a guaranteed improvement for every work
 {{% notice Note %}}
 Links to MySQL documentation in this Learning Path point to the latest version of the documentation. If you use an older version of MySQL, select the matching documentation version after opening the links.
 {{% /notice %}}
+
+## What you've learned and what's next
+
+You've now learned why tuning MySQL is beneficial, and reviewed an example benchmark result demonstrating improvement in throughput after tuning. 
+
+Next, you'll learn about different system parameters that you can tune for performance. 
