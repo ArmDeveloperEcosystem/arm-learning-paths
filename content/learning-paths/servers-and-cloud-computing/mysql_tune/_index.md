@@ -42,10 +42,10 @@ generated_summary_faq:
       Run the same repeatable workload before and after the change and compare throughput, latency,
       and profiles. Change one parameter at a time or use a designed experiment so results are
       attributable to specific settings.
-  - question: Should I set MySQL parameters in an option file or on the mysqld command line?
+  - question: Should I set MySQL parameters in an option file or on the `mysqld` command line?
     answer: >-
       Use an option file for persistent tuning so changes are reviewable, version controlled,
-      and applied on restart. The examples in the Learning Path target the [mysqld] group. Command-line flags are suitable
+      and applied on restart. The examples in the Learning Path target the `[mysqld]` group. Command-line flags are suitable
       for temporary tests.
   - question: Which storage option should I use when testing performance?
     answer: >-
