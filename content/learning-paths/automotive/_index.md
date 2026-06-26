@@ -30,9 +30,11 @@ tools_software_languages_filter:
 - Clang: 3
 - CPP: 1
 - DDS: 1
-- Docker: 2
+- Docker: 3
 - FVP: 1
 - GCC: 3
+- Git: 1
+- Multipass: 1
 - Perf: 1
 - Python: 2
 - Raspberry Pi: 1
@@ -41,10 +43,8 @@ tools_software_languages_filter:
 - SME2: 1
 - Tinkerblox: 1
 - topdown-tool: 1
+- Yocto: 1
 - Zenoh: 1
-# auto-generated padding to avoid Hugo YAML alias limit
-# auto-generated padding to avoid Hugo YAML alias limit
-# auto-generated padding to avoid Hugo YAML alias limit
 # auto-generated padding to avoid Hugo YAML alias limit
 # auto-generated padding to avoid Hugo YAML alias limit
 # auto-generated padding to avoid Hugo YAML alias limit

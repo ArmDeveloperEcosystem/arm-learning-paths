@@ -44,7 +44,7 @@ generated_summary_faq:
       order, container settings, and ROS 2 commands used by the demo.
   - question: Can I run the same workflow on cloud and on-prem Arm Neoverse systems?
     answer: >-
-      Yes. The worklow has been tested on Amazon EC2 and an Ampere Altra workstation, so you can
+      Yes. The workflow has been tested on Amazon EC2 and an Ampere Altra workstation, so you can
       choose either a cloud instance or an on-premise Arm Neoverse system.
   - question: What should I check before starting the demo to avoid resource-related failures?
     answer: >-
