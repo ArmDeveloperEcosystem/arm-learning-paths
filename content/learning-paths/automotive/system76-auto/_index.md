@@ -30,8 +30,8 @@ generated_summary_faq:
   faq_source_hash: 2b758d2dcf28a683ab164e28578a736d6d730b81dfbc01a6765619052fcdebd0
   summary: >-
     You'll use a System76 Thelio Astra Arm desktop to build and run the
-    Arm Automotive Solutions Software Reference Stack in a local Multipass virtual machine. You'll
-    create an Ubuntu 20.04 guest, isolate builds, and compile Yocto-based
+    Arm Automotive Solutions Software Reference Stack in a local Multipass virtual machine. You'll start by 
+    creating an Ubuntu 20.04 guest, isolating builds, and compiling Yocto-based
     components targeting a Fixed Virtual Platform that models the Arm Reference Design-1 AE. You'll review the Thelio Astra platform and the software stack context, then run a Parsec-enabled TLS demo that establishes an HTTPS session to transfer a web page.
   faqs:
   - question: Which Multipass install guide should I follow before creating the virtual machine?

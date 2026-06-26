@@ -31,7 +31,7 @@ generated_summary_faq:
   faq_source_hash: 37913b2c4aed914d32dbdad054ebdd2b1d4587da3ede1a33ba81e3e68bf504a3
   summary: >-
     You'll deploy a containerized Autoware
-    Open AD Kit simulation on Arm Neoverse using Docker and Docker Compose, within a SOAFEE-aligned Shift-Left workflow. You'll first learn about software-defined vehicles (SDVs), SOAFEE, ROS 2, and the Open AD Kit components used in the demo. You'll then prepare an Arm Neoverse Linux system and use Docker Compose to start the Open AD Kit visualizer, planning, and simulation services. By the end, you'll review a running simulation. The workflow has been tested on both cloud (Amazon EC2) and on-premise Arm Neoverse platforms.
+    Open AD Kit simulation on Arm Neoverse using Docker and Docker Compose, within a SOAFEE-aligned Shift-Left workflow. First, you'll learn about software-defined vehicles (SDVs), SOAFEE, ROS 2, and the Open AD Kit components used in the demo. Then, you'll prepare an Arm Neoverse Linux system and use Docker Compose to start the Open AD Kit visualizer, planning, and simulation services. By the end, you'll review a running simulation. The workflow has been tested on both cloud (Amazon EC2) and on-premise Arm Neoverse platforms.
   faqs:
   - question: What result should I expect after launching the Docker Compose stack?
     answer: >-

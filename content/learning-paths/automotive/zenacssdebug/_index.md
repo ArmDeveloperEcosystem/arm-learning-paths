@@ -34,7 +34,7 @@ generated_summary_faq:
   faq_source_hash: 74740788edbfe7ea09bf955455b4aeaed00e667fa8c9d68467353c1f64528b08
   summary: >-
     You'll debug the Arm Zena Compute Subsystem (CSS) reference
-    software stack on a Fixed Virtual Platform using Arm Development Studio. You'll launch the
+    software stack on a Fixed Virtual Platform using Arm Development Studio. First, you'll launch the
     FVP with the Iris debug server enabled, then create and save a custom Arm DS configuration. You'll establish connections
     to each heterogeneous component within Zena CSS to debug the Linux kernel and user processes. By the end, you'll create reusable `.launch`
     files, step through early RSE boot, and attach to Safety Island and Linux targets to inspect

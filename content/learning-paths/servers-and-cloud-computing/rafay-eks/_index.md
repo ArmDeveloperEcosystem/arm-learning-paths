@@ -36,7 +36,7 @@ generated_summary_faq:
   summary: >-
     You'll provision an Amazon EKS cluster on Arm using
     the Rafay Kubernetes Operations Platform and validate workloads on AWS Graviton-based nodes.
-    You'll define a declarative cluster manifest in Rafay referencing an existing project,
+    First, you'll define a declarative cluster manifest in Rafay referencing an existing project,
     blueprint, and cloud credential. Then, you'll create the EKS cluster and deploy NGINX pinned to arm64 
     to confirm scheduling on Graviton-based instances. Finally, you'll remove the NGINX workload and deprovision the EKS resources to avoid ongoing cloud costs.
   faqs:

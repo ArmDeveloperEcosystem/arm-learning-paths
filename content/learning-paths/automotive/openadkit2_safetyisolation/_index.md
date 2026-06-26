@@ -33,8 +33,8 @@ generated_summary_faq:
   summary: >-
     You'll learn about prototyping safety‑critical isolation for autonomous
     driving workloads on Arm Neoverse by applying functional safety concepts, ISO 26262 and ASIL
-    guidance, and a safety‑island architecture. You'll understand how to separate safety‑critical control
-    logic from non‑safety functions, then connect components using a publish‑subscribe model (DDS/ROS
+    guidance, and a safety‑island architecture. First, you'll understand how to separate safety‑critical control
+    logic from non‑safety functions. Then, you'll connect components using a publish‑subscribe model (DDS/ROS
     2) within containerized deployments or across Arm‑based instances. You'll explore lifecycle
     practices aligned with the V‑model, including clear requirements, version control, impact
     analysis, and regression testing. By the end, you'll organize simulation components into
