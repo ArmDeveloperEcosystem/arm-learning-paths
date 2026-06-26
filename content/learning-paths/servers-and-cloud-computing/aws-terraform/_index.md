@@ -15,9 +15,57 @@ prerequisites:
     - An Amazon Web Services (AWS) [account](https://aws.amazon.com/)
     - A computer with [Terraform](/install-guides/terraform) installed
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-26T17:39:51Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 087a4d56914e5b53cec5ad17e8d682e72d04ba6b394237c081efe4a3f939e04e
+  summary_generated_at: '2026-06-26T17:39:51Z'
+  summary_source_hash: 087a4d56914e5b53cec5ad17e8d682e72d04ba6b394237c081efe4a3f939e04e
+  faq_generated_at: '2026-06-26T17:39:51Z'
+  faq_source_hash: 087a4d56914e5b53cec5ad17e8d682e72d04ba6b394237c081efe4a3f939e04e
+  summary: >-
+    In this Learning Path, you define and apply Terraform automation to provision AWS Graviton
+    instances and expose secure access through a jump server, also known as a bastion host. You
+    review the provided Terraform files, run the workflow using Terraform Cloud, and adapt the
+    configuration as needed to fit related projects. The workflow emphasizes a practical pattern:
+    create Arm-based EC2 instances, place a supervised access point in front, and validate that
+    the deployed nodes are reachable only through the jump server. The resulting configuration
+    provides a reusable baseline for future Arm-focused work on AWS that requires one or more
+    server nodes.
+  faqs:
+  - question: Can I run the steps from any machine?
+    answer: >-
+      Yes. Any computer with the required tools installed can be used, including a desktop, laptop,
+      or virtual machine.
+  - question: Should I use Terraform Cloud or the local CLI for this workflow?
+    answer: >-
+      This Learning Path uses Terraform Cloud to automate the creation of Arm instances. Follow
+      the steps that reference Terraform Cloud to run the provisioning.
+  - question: How do I know the provisioned instances are Arm-based (Graviton)?
+    answer: >-
+      The configuration in this Learning Path provisions Arm instances. After `apply`, check the
+      instance details in AWS or the resource attributes shown by Terraform to confirm the architecture.
+  - question: What result should I expect after applying the Terraform configuration?
+    answer: >-
+      You should see one or more AWS instances created and a jump server configured to broker
+      access. Verify that the resources are present in AWS and that the jump server is the access
+      point.
+  - question: What should I modify to reuse this setup for other Learning Paths?
+    answer: >-
+      Use the provided Terraform files as a starting point and adjust them to match the needs
+      of the other activity. Keep the jump server pattern and update the configuration where needed
+      to align with your target environment.
+# END generated_summary_faq
+
 author: Jason Andrews
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -50,4 +98,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

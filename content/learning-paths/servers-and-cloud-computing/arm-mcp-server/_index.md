@@ -18,9 +18,59 @@ prerequisites:
     - Basic familiarity with Docker and C/C++ development
     - Access to an Arm-based cloud instance or local Arm computer running Linux or macOS
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-26T17:27:42Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: b870ac5160d35ddb51955ca8379493e172787ced8125cde8ae79f7700e653a87
+  summary_generated_at: '2026-06-26T17:27:42Z'
+  summary_source_hash: b870ac5160d35ddb51955ca8379493e172787ced8125cde8ae79f7700e653a87
+  faq_generated_at: '2026-06-26T17:27:42Z'
+  faq_source_hash: b870ac5160d35ddb51955ca8379493e172787ced8125cde8ae79f7700e653a87
+  summary: >-
+    In this Learning Path, you connect an AI coding assistant to the Arm MCP Server and use its
+    Model Context Protocol capabilities to drive an x86-to-Arm migration workflow. You query Docker
+    base images with natural language to confirm `arm64` support, then configure the Arm Cloud
+    Migration Agent in GitHub Copilot to identify and refactor SIMD intrinsics from SSE/AVX to
+    Arm Neon or SVE. You review AI-generated changes and validate outcomes by building and running
+    the migrated C++ application in Docker on Arm-based systems. You also learn how to replicate
+    the same multi-step workflow in other agentic tools using persistent, structured instructions.
+  faqs:
+  - question: How do I know if a Docker base image is compatible with Arm?
+    answer: >-
+      Ask the Arm MCP Server in natural language to check the image’s supported architectures.
+      Expect a response indicating whether `arm64` is included; if it is missing, select an Arm-compatible
+      image before proceeding.
+  - question: What confirms that my AI assistant is connected to the Arm MCP Server?
+    answer: >-
+      Prompts about Arm migration tasks return structured, tool-backed results instead of generic
+      text. For example, image compatibility queries or code analysis requests yield specific
+      findings sourced through MCP.
+  - question: How should I handle x86 SIMD intrinsics during migration?
+    answer: >-
+      Use the Arm Cloud Migration Agent to locate SSE/AVX usage and propose Neon or SVE equivalents.
+      Review the suggested refactoring, update the code, and compile to verify that the changes
+      build cleanly.
+  - question: What should I check before running the migrated app on an Arm system?
+    answer: >-
+      Confirm the container base image supports `arm64` and that dependencies are available for
+      Arm. Rebuild the container and ensure the application starts without x86-specific instruction
+      errors.
+  - question: How can I reuse this workflow in other AI tools?
+    answer: >-
+      Create persistent instructions (such as steering documents or prompt files) that direct
+      the agent to use the Arm MCP Server and follow the same migration steps. Mirror the Copilot
+      setup so the agent can perform checks, refactoring, and validation consistently.
+# END generated_summary_faq
+
 author: Joe Stech
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -65,4 +115,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-
