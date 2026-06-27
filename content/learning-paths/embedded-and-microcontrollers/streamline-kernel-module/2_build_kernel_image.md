@@ -1,5 +1,6 @@
 ---
 title: Set up your environment 
+description: Build a Linux image with Buildroot so the target environment can run kernel module profiling examples.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

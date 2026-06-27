@@ -1,5 +1,6 @@
 ---
 title: Troubleshooting
+description: Resolve common CMSIS v6 migration issues related to packs, devices, project format, and toolchain settings.
 weight: 6
 
 ### FIXED, DO NOT MODIFY

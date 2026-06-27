@@ -1,5 +1,6 @@
 ---
 title: Run devices and an orchestrating agent on a Device Connect server
+description: Provision Device Connect server credentials, run example devices, and connect an orchestrating agent across networks.
 weight: 3
 
 # FIXED, DO NOT MODIFY

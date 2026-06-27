@@ -1,5 +1,6 @@
 ---
 title: Deploy an AWS IoT Greengrass component to your device
+description: Create an AWS IoT Greengrass deployment and run a Greengrass component on the virtual Raspberry Pi 4 device.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

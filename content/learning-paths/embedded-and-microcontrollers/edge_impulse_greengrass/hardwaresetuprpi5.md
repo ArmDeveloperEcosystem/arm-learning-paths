@@ -1,5 +1,6 @@
 ---
 hide_from_navpane: true
+description: Configure a Raspberry Pi 5 with Raspberry Pi OS and install the dependencies needed for Edge Impulse Greengrass deployment.
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

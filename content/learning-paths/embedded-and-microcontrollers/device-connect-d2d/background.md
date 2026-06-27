@@ -1,5 +1,6 @@
 ---
 title: Why device-to-device at the edge
+description: Understand when device-to-device communication is useful at the edge and how Device Connect supports local device workflows.
 weight: 2
 
 # FIXED, DO NOT MODIFY

@@ -1,5 +1,6 @@
 ---
 title: Device-to-Device communication with Device Connect
+description: Learn how to connect simulated edge devices directly with Device Connect and build a sensor-to-monitor workflow without cloud infrastructure.
 
 minutes_to_complete: 25
 

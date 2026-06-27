@@ -1,5 +1,6 @@
 ---
 title: Clean up AWS resources
+description: Remove AWS IoT Greengrass and related cloud resources created for the Edge Impulse deployment when the project is complete.
 weight: 11
 
 ### FIXED, DO NOT MODIFY

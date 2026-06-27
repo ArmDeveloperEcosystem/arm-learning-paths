@@ -1,5 +1,6 @@
 ---
 title: Bedrust - invoke models on Amazon Bedrock
+description: Build and install Bedrust on Arm Linux so you can invoke Amazon Bedrock foundation models from the command line.
 minutes_to_complete: 10
 author: Jason Andrews
 
@@ -202,6 +203,5 @@ Options:
 The output shows the model strings you can use. Make sure to enable the models you want to use in the Bedrock console. 
 
 You are now ready to use Bedrust as a quick way to explore many Bedrock models and compare them.
-
 
 

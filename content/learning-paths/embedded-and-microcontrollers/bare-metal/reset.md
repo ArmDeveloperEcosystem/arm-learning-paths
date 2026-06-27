@@ -1,6 +1,7 @@
 ---
 # User change
 title: Write a reset handler
+description: Write the reset handler for the bare-metal Armv8-A example so execution reaches the application entry point correctly.
 
 weight: 3 # 1 is first, 2 is second, etc.
 

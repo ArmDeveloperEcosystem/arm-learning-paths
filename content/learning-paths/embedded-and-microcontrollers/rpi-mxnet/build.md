@@ -1,6 +1,6 @@
- ---
-# User change
+---
 title: "Build MXNet"
+description: Build and install MXNet inside the Raspberry Pi OS file system on an Arm server, then verify the Python package before deployment.
 
 weight: 3
 
@@ -106,4 +106,3 @@ Building MXNet takes about 20 minutes on an AWS c6g.2xlarge EC2 instance.
 A native build on a Raspberry Pi 4 can be done using the steps above. Setting the number of jobs too high will result in out of memory failures. With `-j4` and the build fails, even on a Raspberry Pi with Gb RAM. With `-j1` the build completes, but takes over 6 hours.
 
 Continue to the next section to download the new image and install it on a Raspberry Pi for testing. 
-

@@ -1,6 +1,7 @@
 ---
 # User change
 title: Prepare environment
+description: Install Anaconda and the required Python packages for building and deploying the STM32 image classification model.
 
 weight: 2 # 1 is first, 2 is second, etc.
 

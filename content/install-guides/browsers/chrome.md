@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Chrome
+description: Install Chrome on Windows on Arm and understand its Arm Linux availability so you can choose a supported browser for Arm devices.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:

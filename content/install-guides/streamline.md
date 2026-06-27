@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Arm Streamline
+description: Install Arm Streamline from Arm Performance Studio or Arm Development Studio to profile Android, Linux, or bare-metal applications.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:

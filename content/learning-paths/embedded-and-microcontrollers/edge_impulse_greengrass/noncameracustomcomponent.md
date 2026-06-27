@@ -1,5 +1,6 @@
 ---
 hide_from_navpane: true
+description: Create a non-camera Greengrass component that provides sample images to the Edge Impulse runner on devices without cameras.
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

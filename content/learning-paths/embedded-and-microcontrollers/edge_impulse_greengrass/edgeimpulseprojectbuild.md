@@ -1,5 +1,6 @@
 ---
 title: Set up your Edge Impulse project
+description: Create an Edge Impulse project, train the model, and prepare the deployment artifacts for AWS IoT Greengrass.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

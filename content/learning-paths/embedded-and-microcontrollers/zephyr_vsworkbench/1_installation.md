@@ -1,5 +1,6 @@
 ---
 title: Set up the Workbench for Zephyr development environment
+description: Install Workbench for Zephyr in VS Code and configure the tools needed for Arm Cortex-M Zephyr development.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

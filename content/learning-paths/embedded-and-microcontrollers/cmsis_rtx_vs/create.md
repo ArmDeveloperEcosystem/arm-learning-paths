@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Create csolution project"
+description: Create a csolution project in Keil Studio for VS Code and configure CMSIS components for an RTX5 application.
 
 weight: 2 # 1 is first, 2 is second, etc.
 
