@@ -42,24 +42,24 @@ generated_summary_faq:
   faqs:
   - question: Which Google Cloud port must be open to access the Gerrit web console?
     answer: >-
-      Open TCP port 8080. Create a firewall rule in the Google Cloud console to allow incoming
-      traffic on port 8080 so the Gerrit web interface is reachable.
+      Open TCP port `8080`. Create a firewall rule in the Google Cloud console to allow incoming
+      traffic on port `8080` so the Gerrit web interface is reachable.
   - question: What virtual machine configuration should I use for this deployment?
     answer: >-
-      Use a Google Axion C4A instance with the c4a-standard-4 machine type (4 vCPUs, 16 GB memory).
+      Use a Google Axion C4A instance with the `c4a-standard-4` machine type (4 vCPUs, 16 GB memory).
       The VM runs Ubuntu 24.04 LTS on arm64.
   - question: What packages should I install before setting up Gerrit?
     answer: >-
-      Update the system and install wget, default-jdk, git, and net-tools. The steps show running
+      Update the system and install `wget`, `default-jdk`, `git`, and `net-tools`. The steps show running
       apt update and apt upgrade before installing these tools.
   - question: How do I verify that Gerrit is running after installation?
     answer: >-
-      Confirm that the Gerrit web console loads on port 8080 after completing the install steps.
+      Confirm that the Gerrit web console loads on port `8080` after completing the install steps.
       If it doesn't load, review the command outputs from the installation for errors.
   - question: How do I run the benchmark and what should I expect?
     answer: >-
-      Clone the gerrit_test repository into your VM and run the provided script with SYNTH_PROFILE=production_like
-      and REQUIRE_GERRIT_METRICS=true. The script exercises Gerrit functions and captures timing
+      Clone the `gerrit_test` repository into your VM and run the provided script with `SYNTH_PROFILE=production_like`
+      and `REQUIRE_GERRIT_METRICS=true`. The script exercises Gerrit functions and captures timing
       and performance data for baseline measurement.
 # END generated_summary_faq
 
