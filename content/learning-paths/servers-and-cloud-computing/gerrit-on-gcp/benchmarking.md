@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Download and install the benchmarking script
 
-You'll use a script to benchmark Gerrit performance on your Axion virtual machine (VM). The script will exercise and time key Gerrit features and functions. 
+You'll use a script to benchmark Gerrit performance on your Axion virtual machine (VM). The script exercises and times key Gerrit features and functions. 
 
-Clone the following repo into your VM:
+Clone the following repository into your VM:
 
 ```bash
 cd $HOME
@@ -27,9 +27,9 @@ chmod 755 *.sh
 sudo SYNTH_PROFILE=production_like REQUIRE_GERRIT_METRICS=true ./gerrit_perf_test.sh
 ```
 
-The benchmark script will run through some sample exercises that Gerrit supports and will capture performance data from those exercises.
+The benchmark script runs through sample exercises that Gerrit supports and captures performance data from those exercises.
 
-The script will then place the data into a specified JSON file similar to (partially omitted for brevity):
+The script then places the data into a specified JSON file similar to (partially omitted for brevity):
 
 ```json
 {
@@ -119,11 +119,11 @@ You can process this JSON file to create a summary of the performance of Gerrit 
 
 The benchmark run completed successfully on the production-like profile with Gerrit metrics enabled. It recorded 47,863 measured client operations over four 120-second steps, with 47,863 successes and zero failures.
 
-The benchmark gives a high-quality performance view: client latency, stepwise concurrency behavior, node CPU/memory/disk, and Gerrit-side JVM, GC, Jetty, cache, queue, Git, REST, NoteDB, and receive-commits metrics are all present:
+The benchmark gives a high-quality performance view: client latency, stepwise concurrency behavior, node CPU/memory/disk. Gerrit-side JVM, GC, Jetty, cache, queue, Git, REST, NoteDB, and receive-commits metrics are all present:
 
 ![Charts and graphs showing the Gerrit benchmark performance summary including operation counts, success rates, and latency metrics across the four 120-second test steps.#center](images/analysis.png "Gerrit benchmark summary")
 
-Client-visible correctness is excellent: all 47,863 measured operations succeeded. REST query latency remains low with a p99 of 69 ms. Clone is the dominant pressure point at a p99 of 521 ms, and push remains sub-second at a p99 of 288 ms:
+All 47,863 measured client-side operations succeeded. REST query latency remains low with a p99 of 69 ms. Clone is the dominant pressure point at a p99 of 521 ms, and push remains sub-second at a p99 of 288 ms:
 
 ![Performance metrics showing client-side operation summary with statistics for git_clone, git_push_refs_for, and rest_change_query operations, including latency percentiles and success rates.#center](images/client-summary.png "Client-side operation summary")
 
@@ -131,15 +131,15 @@ The useful capacity signal is the flattening throughput curve after step 2. CPU 
 
 ![Graph showing throughput and latency trends across four concurrency steps, demonstrating how performance degrades as concurrency increases and CPU approaches saturation.#center](images/stepwise-summary.png "Stepwise concurrency behavior summary")
 
-Host CPU pressure:
+The following chart shows host CPU pressure:
 
 ![Chart displaying CPU usage metrics across the benchmark steps, showing how CPU pressure increases and stabilizes near saturation levels as concurrency increases.#center](images/cpu-pressure.png "CPU pressure summary")
 
-Gerrit server-side correlation observations:
+The following table lists Gerrit server-side correlation observations:
 
 ![Table showing correlations between various Gerrit server-side metrics such as GC pressure, cache performance, and queue depths in relation to client request latency.#center](images/gerrit-correlation.png "Gerrit server-side correlation findings")
 
-Basic server metrics:
+The following table lists server metrics:
 
 ![Server metrics dashboard showing host resource utilization metrics including memory, disk I/O, and other system-level performance indicators during the benchmark run.#center](images/server-metrics.png "Basic additional server metrics")
 

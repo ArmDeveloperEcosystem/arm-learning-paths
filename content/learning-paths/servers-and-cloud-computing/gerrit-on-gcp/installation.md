@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Install Gerrit 
 
-Install and configure Gerrit Server on your Google Cloud Platform (GCP) Linux VM (Ubuntu 24.04 LTS-based VM). 
+Install and configure Gerrit Server on your Ubuntu 24.04 LTS virtual machine (VM) on Google Cloud Platform (GCP). 
 
 To ensure a successful setup, follow each step in order and check the output after each command. By doing this, you catch issues early and confirm that Gerrit is installed and running correctly.
 
@@ -23,7 +23,7 @@ sudo apt install -y wget default-jdk git net-tools
 
 ### Download the Gerrit server package
 
-Download the Gerrit server package for ARM64 architecture.
+Download the Gerrit server package for `arm64`:
 
 ```console
 mkdir -p ${HOME}/gerrit
@@ -45,9 +45,9 @@ The output is similar to:
 doug_an+   11807       1 18 21:01 ?        00:00:14 GerritCodeReview -Dflogger.backend_factory=com.google.common.flogger.backend.log4j.Log4jBackendFactory#getInstance -Dflogger.logging_context=com.google.gerrit.server.logging.LoggingContext#getInstance -jar /home/doug_anson_arm_com/gerrit/bin/gerrit.war daemon -d /home/doug_anson_arm_com/gerrit --run-id=1781730091.11737
 ```
 
-## Check whether required ports are open
+## Check whether necessary ports are open
 
-To confirm Gerrit is ready to accept connections, check that the required ports are open and listening. If you see `LISTEN` next to these ports, Gerrit is running and network services are available.
+To confirm Gerrit is ready to accept connections, check that the necessary ports are open and listening. If you see `LISTEN` next to these ports, Gerrit is running and network services are available.
 
 Gerrit uses port `8080` for its web console function.
 
@@ -67,13 +67,13 @@ If you see `LISTEN` for the `http-alt` port, Gerrit is ready for baseline testin
 
 ## Confirm that the Gerrit dashboard is accessible
 
-Using a browser and the "Public IP Address" saved off when the VM instance was created, go to the following URL in the browser: 
+Navigate to the following URL in a browser of your choice, replacing `my_vm_public_ip` with the public IP address of your VM instance:
 
 ```output
 http://my_vm_public_ip_address:8080
 ```
 
-The output is similar to:
+You'll see the following dashboard:
 
 ![Gerrit web console dashboard showing the main interface with navigation menu and project/change options available.#center](images/gerrit-dashboard.png "Gerrit dashboard")
 

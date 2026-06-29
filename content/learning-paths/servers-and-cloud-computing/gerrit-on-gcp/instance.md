@@ -21,9 +21,9 @@ To create a VM based on the C4A instance type:
 1. Navigate to the [Google Cloud Console](https://console.cloud.google.com/).
 2. Go to **Compute Engine > VM Instances** and select **Create Instance**. 
 3. Under **Machine configuration**:
-   1. Populate fields such as **Instance name**, **Region**, and **Zone**.
-   2. Set **Series** to `C4A`.
-   3. Select `c4a-standard-4` for machine type.
+   - Populate fields such as **Instance name**, **Region**, and **Zone**.
+   - Set **Series** to `C4A`.
+   - Select `c4a-standard-4` for machine type.
 
 ![Google Cloud Console interface showing the Create Instance page with Machine configuration section. Series is set to C4A and machine type shows c4a-standard-4 selected. The dialog displays configuration options for CPU, memory, and other VM settings.#center](images/gcp-vm.png "Creating a Google Axion C4A Arm virtual machine in Google Cloud Console")
 
@@ -34,7 +34,7 @@ To create a VM based on the C4A instance type:
 7. Under **Networking**, enable **Allow HTTP traffic** and **Allow HTTPS traffic**.
 8. In the **Network tags** field, add `allow-tcp-8080` to allow Gerrit dashboard traffic.
 
-![Google Cloud Console interface showing the Networking tab for VM instance configuration. The Network tags field displays allow-tcp-8080 to enable firewall rule for Gerrit dashboard traffic on port 8080. Other networking options and VM configuration controls are visible.#center](images/network-config.png "Adding the TCP/8080 firewall rule to our VM")
+![Google Cloud console interface showing the Networking tab for VM instance configuration. The Network tags field displays allow-tcp-8080 to enable firewall rule for Gerrit dashboard traffic on port 8080. Other networking options and VM configuration controls are visible.#center](images/network-config.png "Adding the TCP/8080 firewall rule to our VM")
 
 9. Select **Create** to launch your VM instance.
 
@@ -42,7 +42,7 @@ After the VM is ready, you'll see an **SSH** button next to your instance in the
 
 Select **SSH** to open a shell session directly in your browser.
 
-![Google Cloud Console showing the VM Instances list with a running VM instance. The SSH button is highlighted next to the instance entry, with the public IP address visible in the same row. This shows how to access the SSH terminal to connect to your Arm-based VM.#center](images/gcp-pubip-ssh.png "Invoke a SSH session into your running VM instance")
+![Google Cloud console showing the VM Instances list with a running VM instance. The SSH button is highlighted next to the instance entry, with the public IP address visible in the same row. This shows how to access the SSH terminal to connect to your Arm-based VM.#center](images/gcp-pubip-ssh.png "Invoke a SSH session into your running VM instance")
 
 A window from your browser will come up and you'll now see a shell into your VM instance:
 
