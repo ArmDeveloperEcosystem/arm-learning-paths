@@ -13,7 +13,7 @@ layout: "learningpathall"
 This Learning Path is a draft. Complete the following tasks before publication:
 
 - Publish `https://github.com/EllieRoe/CCA-dev-platform.git` with unauthenticated HTTPS clone access, or replace the source-build steps with a public prebuilt Docker image.
-- Upstream `cca-planes-lp.yaml` and `planes.yaml` into the `planes` branch, or keep the Learning Path steps that generate those files locally.
+- Push CCA-dev-platform commit `401dfd13882e994df38fa741266b14ccda2d407c` or an equivalent commit that provides `config/cca-planes-lp.yaml` and `config/planes.yaml` on the `planes` branch.
 - Run `shrinkwrap build ... --dry-run` with the published overlay and fix any Shrinkwrap macro escaping issues.
 - Run a real Shrinkwrap build through the `kvmtool` phase and confirm that `config/lkvm.patch` is not applied to the planes-enabled branch.
 - Publish or identify the public OpenHCL Linux branch used for the plane 0 kernel. The current prototype uses the internal `openhcl-linux` `planes` branch.
@@ -34,16 +34,16 @@ The HTTPS clone command prompted for GitHub credentials:
 git clone --branch planes https://github.com/EllieRoe/CCA-dev-platform.git CCA-dev-platform
 ```
 
-SSH access to the same repository reached commit `a7c5ec548bbf148ace0bea889cba92ef33c33f76` on the `planes` branch.
+SSH access to the same repository initially reached commit `a7c5ec548bbf148ace0bea889cba92ef33c33f76` on the `planes` branch.
 
-The required planes overlays were absent at that commit, so the Learning Path now creates them locally from the prototype configuration:
+The required planes overlays were absent at that commit. CCA-dev-platform commit `401dfd13882e994df38fa741266b14ccda2d407c` adds the overlays:
 
 ```console
 test -f config/cca-planes-lp.yaml
 test -f config/planes.yaml
 ```
 
-After creating those overlays, the documented Shrinkwrap dry run generated a build script:
+With those overlays available, the documented Shrinkwrap dry run generated a build script:
 
 ```console
 shrinkwrap build cca-3world.yaml --overlay cca-planes-lp.yaml --overlay planes.yaml \

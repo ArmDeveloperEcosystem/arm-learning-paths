@@ -59,175 +59,26 @@ source setup.source_me
 This command creates a Python virtual environment, installs the Python packages needed by Shrinkwrap, and sets the `SHRINKWRAP_*` environment variables. The package installation step needs network
 access to Python package indexes unless the host already has a populated virtual environment.
 
-## Create the planes Shrinkwrap overlays
+## Verify the planes Shrinkwrap overlays
 
-The CCA development platform README describes the base Learning Path build with `cca-lp.yaml`. The OpenHCL prototype also needs a planes overlay. Create a Learning Path overlay that keeps the base
-filesystem and tooling changes from `cca-lp.yaml`, while omitting the `kvmtool.yaml` layer that applies `config/lkvm.patch`:
+The `planes` branch provides the two overlays used by this Learning Path:
 
-```console
-cat > config/cca-planes-lp.yaml <<'EOF'
-# Copyright (c) 2026, Arm Limited.
-# SPDX-License-Identifier: MIT
+- `config/cca-planes-lp.yaml` keeps the base CCA Learning Path filesystem and
+  tooling changes, while excluding the `kvmtool.yaml` layer that applies
+  `config/lkvm.patch`.
+- `config/planes.yaml` selects the prototype RMM, host Linux, and `kvmtool`
+  branches, and enables Permission Indirection and Permission Overlay in the FVP
+  parameters.
 
-%YAML 1.2
----
-description: >-
-  Generates all blobs for the CCA planes Learning Path while avoiding the
-  kvmtool patch layer used by the base CCA Learning Path overlay.
-
-concrete: true
-
-layers:
-  - buildroot-cca.yaml
-  - bootsync.yaml
-  - cca-kata.yaml
-  - edk2.yaml
-
-build:
-
-  linux:
-    prebuild:
-      - ./scripts/config --file ${param:builddir}/.config --enable CONFIG_VIRT_DRIVERS
-      - ./scripts/config --file ${param:builddir}/.config --enable CONFIG_ARM_FFA_TRANSPORT
-      - ./scripts/config --file ${param:builddir}/.config --enable CONFIG_ARM_CCA_GUEST
-      - ./scripts/config --file ${param:builddir}/.config --enable CONFIG_TSM_REPORTS
-      - ./scripts/config --file ${param:builddir}/.config --enable CONFIG_TRACEPOINTS
-      - ./scripts/config --file ${param:builddir}/.config --enable CONFIG_TRACING
-      - ./scripts/config --file ${param:builddir}/.config --enable CONFIG_FTRACE
-      - ./scripts/config --file ${param:builddir}/.config --enable CONFIG_FUNCTION_TRACER
-      - ./scripts/config --file ${param:builddir}/.config --enable CONFIG_FUNCTION_GRAPH_TRACER
-      - ./scripts/config --file ${param:builddir}/.config --enable CONFIG_DYNAMIC_FTRACE
-      - ./scripts/config --file ${param:builddir}/.config --enable CONFIG_TRACE_EVENTS
-      - ./scripts/config --file ${param:builddir}/.config --enable CONFIG_BLOCK
-      - ./scripts/config --file ${param:builddir}/.config --enable CONFIG_BLK_DEV_IO_TRACE
-      - ./scripts/config --file ${param:builddir}/.config --enable CONFIG_EVENT_TRACING
-      - ./scripts/config --file ${param:builddir}/.config --enable CONFIG_BLOCK_HOLDER_TRACKING
-      - ./scripts/config --file ${param:builddir}/.config --enable CONFIG_BLK_DEV_BOUNCE
-      - ./scripts/config --file ${param:builddir}/.config --enable CONFIG_PERF_EVENTS
-      - ./scripts/config --file ${param:builddir}/.config --enable CONFIG_PERF_USE_VMALLOC
-      - ./scripts/config --file ${param:builddir}/.config --enable CONFIG_PRINTK
-      - ./scripts/config --file ${param:builddir}/.config --enable CONFIG_DEBUG_KERNEL
-      - ./scripts/config --file ${param:builddir}/.config --enable CONFIG_DEBUG_FS
-      - ./scripts/config --file ${param:builddir}/.config --enable CONFIG_DEBUG_INFO
-
-  buildroot:
-    repo:
-      revision: 2026.02
-
-    prebuild:
-      - ./utils/config --file ${param:builddir}/.config --set-str BR2_ROOTFS_POST_BUILD_SCRIPT ${param:configdir}/../realm-post-build-lp.sh
-      - ./utils/config --file ${param:builddir}/.config --set-str TARGET_GENERIC_HOSTNAME "realm"
-      - ./utils/config --file ${param:builddir}/.config --set-str TARGET_GENERIC_ISSUE "Welcome to the CCA realm"
-      - ./utils/config --file ${param:builddir}/.config --disable BR2_PACKAGE_OPTEE_EXAMPLES
-      - ./utils/config --file ${param:builddir}/.config --disable BR2_PACKAGE_OPTEE_TEST
-      - ./utils/config --file ${param:builddir}/.config --disable BR2_PACKAGE_OPTEE_CLIENT
-      - ./utils/config --file ${param:builddir}/.config --disable BR2_PACKAGE_TRACE_CMD
-      - ./utils/config --file ${param:builddir}/.config --enable BR2_PACKAGE_LIBOPENSSL_BIN
-      - ./utils/config --file ${param:builddir}/.config --enable BR2_PACKAGE_LIBOPENSSL_ENGINES
-
-  rmm:
-    params:
-      -DRMM_V1_1: 1
-      -DRMM_MEM_SCRUB_METHOD: 2
-
-  tfa:
-    params:
-      ENABLE_FEAT_MEC: 1
-
-run:
-
-  terminals:
-    bp.terminal_0:
-      type: telnet
-
-    bp.terminal_1:
-      type: telnet
-
-    bp.terminal_2:
-      type: telnet
-
-    bp.terminal_3:
-      type: telnet
-EOF
-```
-
-Create the planes feature overlay. This overlay selects the prototype RMM, host Linux, and `kvmtool` branches, and enables Permission Indirection and Permission Overlay in the FVP parameters:
+Check that both overlays are present:
 
 ```console
-cat > config/planes.yaml <<'EOF'
-# Copyright (c) 2026, Arm Limited.
-# SPDX-License-Identifier: MIT
-
-%YAML 1.2
----
-description: >-
-  Overlay for the CCA planes OpenHCL prototype.
-
-buildex:
-  btvars:
-    RMM_LOG_LEVEL:
-      type: string
-      value: '10'
-
-    RMM_CONFIG:
-      type: string
-      value: 'fvp_defcfg'
-
-    TFA_REVISION:
-      type: string
-      value: master
-
-build:
-
-  rmm:
-    repo:
-      remote: https://github.com/TF-RMM/tf-rmm.git
-      revision: 9a98e8fcb1645b9917b2abd79212e6e3062e09fd
-
-    params:
-      -DLOG_LEVEL: ${btvar:RMM_LOG_LEVEL}
-      -DRMM_CONFIG: ${btvar:RMM_CONFIG}
-      -DRMM_V1_1: 1
-      -DPLAT_CMN_CTX_MAX_XLAT_TABLES: 13
-
-  tfa:
-    repo:
-      revision: ${btvar:TFA_REVISION}
-
-    params:
-      GIC_ENABLE_V4_EXTN: 1
-
-  linux:
-    repo:
-      remote: https://gitlab.arm.com/linux-arm/linux-cca.git
-      revision: cca/planes/rfc-v1
-
-    prebuild:
-      - export KBUILD_BUILD_TIMESTAMP="@$$(stat -c '%Y' ${param:sourcedir})"
-      - ./scripts/config --file ${param:builddir}/.config --enable CONFIG_VIRT_DRIVERS
-      - ./scripts/config --file ${param:builddir}/.config --disable CONFIG_HZ_250 --enable CONFIG_HZ_100
-      - ./scripts/config --file ${param:builddir}/.config --disable CONFIG_RANDOMIZE_BASE
-
-  kvmtool:
-    repo:
-      kvmtool:
-        remote: https://gitlab.arm.com/linux-arm/kvmtool-cca.git
-        revision: cca/planes/rfc-v1
-
-run:
-  params:
-    -C cluster0.has_permission_indirection_s1: 2
-    -C cluster1.has_permission_indirection_s1: 2
-    -C cluster0.has_permission_indirection_s2: 2
-    -C cluster1.has_permission_indirection_s2: 2
-    -C cluster0.has_permission_overlay_s1: 2
-    -C cluster1.has_permission_overlay_s1: 2
-    -C cluster0.has_permission_overlay_s2: 2
-    -C cluster1.has_permission_overlay_s2: 2
-EOF
+test -f config/cca-planes-lp.yaml
+test -f config/planes.yaml
 ```
 
-The `$$` in `$$(stat -c '%Y' ${param:sourcedir})` passes command substitution through Shrinkwrap so that the generated build script evaluates it.
+If either command fails, update the CCA development platform checkout to a
+`planes` branch commit that includes both overlay files.
 
 {{% notice Warning %}}
 Testing on Ubuntu 24.04 showed that `--overlay cca-lp.yaml --overlay planes.yaml` fails while applying `config/lkvm.patch` to `net/uip/tcp.c` in the planes-enabled `kvmtool` branch. Shrinkwrap appends
