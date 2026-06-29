@@ -148,4 +148,4 @@ The following table lists server metrics:
 
 You've successfully deployed Gerrit on a Google Cloud C4A Axion Arm64 VM running Ubuntu 24.04 LTS, verified the web console, and measured its performance using a production-like benchmark profile. All operations completed with zero failures, and the results establish a practical capacity baseline for a single-node Gerrit deployment on Arm-based infrastructure.
 
-To build on this foundation, you can explore multi-node Gerrit deployments, tune JVM flags for the Neoverse-V2 core, or compare performance across different C4A instance sizes to find the right balance of cost and throughput for your team's workload.
+To build on this foundation, you can explore multi-node Gerrit deployments, tune JVM flags for the Neoverse-V2 core, or compare performance across different C4A instance sizes to find the right balance of cost and throughput for your workload.

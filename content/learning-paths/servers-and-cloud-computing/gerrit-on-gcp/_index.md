@@ -55,7 +55,7 @@ generated_summary_faq:
   - question: How do I verify that Gerrit is running after installation?
     answer: >-
       Confirm that the Gerrit web console loads on port 8080 after completing the install steps.
-      If it does not load, review the command outputs from the installation for errors.
+      If it doesn't load, review the command outputs from the installation for errors.
   - question: How do I run the benchmark and what should I expect?
     answer: >-
       Clone the gerrit_test repository into your VM and run the provided script with SYNTH_PROFILE=production_like

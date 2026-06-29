@@ -51,4 +51,4 @@ This step ensures that only TCP traffic on port 8080 is allowed through the fire
 
 You've now created a network firewall rule to allow access to your Gerrit deployment. 
 
-Next, you'll create a Google Axion C4A virtual machine that you'll use to deploy Gerrit.
+Next, you'll create a Google Axion C4A virtual machine for deploying Gerrit.

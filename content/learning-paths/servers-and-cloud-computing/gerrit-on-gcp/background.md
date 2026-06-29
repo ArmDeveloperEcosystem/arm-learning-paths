@@ -18,7 +18,7 @@ To learn more about Google Axion, see [Introducing Google Axion Processors, our 
 
 ## Gerrit
 
-Gerrit is an open-source, web-based code review system for Git repositories that lets teams review proposed commits before they are merged into a codebase. It is especially useful for projects that want patchset-based reviews, inline comments, approval labels, fine-grained permissions, and integration with CI/CD systems before changes land. 
+Gerrit is an open-source, web-based code review system for Git repositories that lets teams review proposed commits before they are merged into a codebase. It's especially useful for projects that want patchset-based reviews, inline comments, approval labels, fine-grained permissions, and integration with CI/CD systems before changes land. 
 
 To learn more about how Gerrit fits into a development workflow and how to review, upload, and manage changes, start with the official Gerrit product overview and user guide.
 
