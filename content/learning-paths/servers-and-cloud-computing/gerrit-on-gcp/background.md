@@ -1,5 +1,5 @@
 ---
-title: Get started with Gerrit on Google Axion C4A
+title: About Gerrit and Google Axion C4A
 
 weight: 2
 
@@ -20,4 +20,4 @@ Gerrit is an open-source, web-based code review system for Git repositories that
 
 To learn more, start with the official Gerrit site and documentation, especially the product overview and user guide, which explain how Gerrit fits into a development workflow and how to review, upload, and manage changes. 
 
-For more information on [Gerrit](https://gerrit-review.googlesource.com/Documentation/intro-gerrit-walkthrough-github.html)
+There is also a [Basic Gerrit Walkthrough — For GitHub Users](https://gerrit-review.googlesource.com/Documentation/intro-gerrit-walkthrough-github.html) which explains the core principles of code review in Gerrit compared to pull requests. 

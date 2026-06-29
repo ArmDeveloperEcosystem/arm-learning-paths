@@ -15,19 +15,19 @@ pinned_learning_paths:
 operatingsystems_filter:
 - Android: 1
 - Baremetal: 30
-- Linux: 39
-- macOS: 11
-- RTOS: 11
-- Windows: 5
+- Linux: 48
+- macOS: 18
+- RTOS: 12
+- Windows: 10
 subjects_filter:
 - CI-CD: 7
-- Containers and Virtualization: 6
+- Containers and Virtualization: 9
 - Embedded Linux: 6
-- Libraries: 3
-- ML: 22
-- Performance and Architecture: 20
-- RTOS Fundamentals: 5
-- Security: 2
+- Libraries: 5
+- ML: 23
+- Performance and Architecture: 21
+- RTOS Fundamentals: 7
+- Security: 3
 - Virtual Hardware: 2
 subtitle: Learn best practices for IoT, embedded, and microcontroller development.
 title: Embedded and Microcontrollers
@@ -43,13 +43,13 @@ tools_software_languages_filter:
 - Arm Streamline: 1
 - Arm Virtual Hardware: 16
 - Assembly: 1
-- AWS IoT Greengrass: 2
+- AWS IoT Greengrass: 3
 - Azure: 1
 - balenaCloud: 1
 - BalenaOS: 1
 - Baremetal: 1
 - Bash: 1
-- C: 7
+- C: 10
 - ChatGPT: 1
 - Clang: 1
 - CMSIS: 4
@@ -61,15 +61,15 @@ tools_software_languages_filter:
 - Containerd: 1
 - CPP: 1
 - DetectNet: 1
-- Docker: 12
+- Docker: 16
 - DSTREAM: 2
 - Edge AI: 2
 - Edge Impulse: 2
-- ExecuTorch: 6
-- FastAPI: 1
+- ExecuTorch: 7
+- FastAPI: 2
 - Fusion 360: 1
 - FVP: 10
-- GCC: 10
+- GCC: 12
 - Generative AI: 2
 - GitHub: 4
 - GitLab: 2
@@ -77,6 +77,7 @@ tools_software_languages_filter:
 - Himax SDK: 1
 - Hugging Face: 3
 - IP Explorer: 2
+- Java: 1
 - Jupyter Notebook: 1
 - K3s: 1
 - Keil MDK: 7
@@ -86,7 +87,10 @@ tools_software_languages_filter:
 - LLM: 2
 - Matter: 1
 - MCP: 1
+- MediaPipe: 1
 - MPS3: 1
+- MQTT: 1
+- MuJoCo: 1
 - MXNet: 1
 - Neon: 1
 - NumPy: 1
@@ -96,28 +100,30 @@ tools_software_languages_filter:
 - Performance analysis: 1
 - picocom: 1
 - Porcupine: 1
-- Python: 12
+- Python: 17
 - PyTorch: 5
-- QEMU: 1
-- Raspberry Pi: 9
+- QEMU: 2
+- Raspberry Pi: 10
+- Reachy Mini: 1
 - Remote.It: 1
+- remoteproc-runtime: 1
 - Runbook: 4
+- SSH: 3
+- stlink: 1
 - STM32: 2
 - strands-agents: 1
 - systemd: 1
 - TensorFlow: 3
 - TensorRT: 1
 - tinyML: 2
+- Topo: 3
 - Trusted Firmware: 2
 - TrustZone: 2
 - TVMC: 1
 - vcpkg: 1
-- Visual Studio Code: 1
+- Visual Studio Code: 2
+- YAML: 1
 - Yocto Project: 1
-- Zephyr: 2
+- Zephyr: 4
 weight: 5
-# auto-generated padding to avoid Hugo YAML alias limit
-# auto-generated padding to avoid Hugo YAML alias limit
-# auto-generated padding to avoid Hugo YAML alias limit
-# auto-generated padding to avoid Hugo YAML alias limit
 ---

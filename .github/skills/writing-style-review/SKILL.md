@@ -18,8 +18,8 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 
 ## Voice and tone
 
-- Use second person: `you` and `your`.
-- Avoid first person: `I` and `we`.
+- Use second person: `you` and `your` for Learning Path summaries, Learning Path content, install guide content, answers to FAQs, and metadata descriptions. Avoid first person for these content types.
+- Use first person: `I` and `we` for FAQs.
 - Use active voice.
 - Use present tense for descriptions.
 - Use imperative mood for commands.
@@ -40,6 +40,7 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 - Use plain English and avoid jargon overload.
 - Define acronyms on first use.
 - Use parallel structure in lists.
+- Avoid starting sentences with "In this Learning Path"/ "In this section"/"On this page" / "In this step".
 - Flag sections over 700 words and suggest natural split points.
 - Identify paragraphs with sentences averaging over 20 words.
 - Note sections that introduce more than two new concepts.
@@ -74,7 +75,7 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 - Use `set up` as a verb and `setup` as a noun.
 - Use `avoid` instead of `try not to`.
 - Use `such as` instead of `like`.
-- Use `after` instead of `once`.
+- Use `after` or `when` instead of `once`.
 
 ## Tone cleanup
 
@@ -111,7 +112,7 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 - Use `arm64` or `aarch64` for CPU architecture based on tool, package, or OS convention.
 - Use `ARM64` only when referring to Windows on Arm or Microsoft documentation.
 - Capitalize `Learning Path`.
-- Use `Azure Cobalt`, `Google Axion`, and `AWS Graviton` as processor names, not VM names.
+- Use `Azure Cobalt`, `Google Axion`, and `AWS Graviton` as processor names, not VM names. `Graviton-based instances`, not `Graviton instances`, for example.
 - Do not use bold or italics for product names such as LiteRT, XNNPACK, KleidiAI, and SME2 unless they are headings or UI labels.
 
 ## Avoid AI-sounding prose
