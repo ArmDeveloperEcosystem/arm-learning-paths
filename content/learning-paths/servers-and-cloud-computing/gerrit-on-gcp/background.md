@@ -1,6 +1,8 @@
 ---
 title: About Gerrit and Google Axion C4A
 
+description: Review how Gerrit and Google Cloud C4A virtual machines powered by Google Axion processors support the Arm-based deployment and benchmarking workflow.
+
 weight: 2
 
 layout: "learningpathall"

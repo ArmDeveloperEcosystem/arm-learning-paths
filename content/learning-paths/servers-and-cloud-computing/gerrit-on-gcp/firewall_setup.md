@@ -1,5 +1,6 @@
 ---
 title: Make your Gerrit deployment accessible on Google Cloud Platform
+description: Configure a Google Cloud firewall rule so TCP port 8080 traffic can reach the Gerrit web console on your C4A Arm virtual machine.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +9,7 @@ layout: learningpathall
 
 ## Create a firewall rule on Google Cloud Platform
 
-Create a firewall rule in Google Cloud console to allow incoming TCP traffic on port 8080 and make your Gerrit deployment accessible.
+Create a firewall rule in Google Cloud console to allow incoming TCP traffic on port `8080` and make your Gerrit deployment accessible.
 
 {{% notice Note %}}
 If you need help setting up Google Cloud Platform (GCP), see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
@@ -16,7 +17,7 @@ If you need help setting up Google Cloud Platform (GCP), see the Learning Path [
 
 ### Use the Google Cloud console to create a firewall rule
 
-To expose TCP port 8080 for Gerrit, start by creating a new firewall rule in Google Cloud console:
+To expose TCP port `8080` for Gerrit, start by creating a new firewall rule in Google Cloud console:
 
 1. Open the [Google Cloud console](https://console.cloud.google.com/).
 2. In the navigation menu, select **VPC network** > **Firewall**.
@@ -29,7 +30,7 @@ To expose TCP port 8080 for Gerrit, start by creating a new firewall rule in Goo
 6. Set **Direction of traffic** to **Ingress**.
 7. Set **Action on match** to **Allow**.
 8. For **Targets**, select **Specified target tags** and enter `allow-tcp-8080` in the **Target tags** field.
-9. In **Source IPv4 ranges**, enter `0.0.0.0/0`.
+9. In **Source IPv4 ranges**, enter `0.0.0.0/0`. 
 
 This configuration allows incoming TCP traffic on port 8080 from any IPv4 address.
 

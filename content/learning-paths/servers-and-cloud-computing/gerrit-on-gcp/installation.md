@@ -1,5 +1,6 @@
 ---
 title: Install and configure Gerrit on a Google Axion C4A virtual machine
+description: Install Gerrit on an Ubuntu 24.04 LTS C4A Arm virtual machine and verify that the service and web console are accessible.
 weight: 5
 
 ### FIXED, DO NOT MODIFY

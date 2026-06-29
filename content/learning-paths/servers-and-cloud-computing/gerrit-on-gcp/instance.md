@@ -1,5 +1,6 @@
 ---
 title: Provision a virtual machine on Google Cloud Platform to deploy Gerrit
+description: Provision an Ubuntu 24.04 LTS C4A Arm virtual machine on Google Cloud and open an SSH session for the Gerrit installation.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

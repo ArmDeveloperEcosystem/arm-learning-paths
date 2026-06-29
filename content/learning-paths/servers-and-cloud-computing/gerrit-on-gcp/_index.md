@@ -1,7 +1,7 @@
 ---
 title: Deploy Gerrit on a Google Cloud C4A instance 
 
-description: Deploy Gerrit on an Ubuntu 24.04 arm64 Google Cloud C4A virtual machine powered by Google Axion processors, and benchmark its performance.
+description: Deploy Gerrit on an Ubuntu 24.04 arm64 Google Cloud C4A virtual machine powered by Google Axion processors, verify web access, and benchmark baseline performance.
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for developers deploying Gerrit in Arm Linux environments, specifically using Google Cloud C4A virtual machines (VM) powered by Axion processors. 

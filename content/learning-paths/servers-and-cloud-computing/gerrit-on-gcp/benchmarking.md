@@ -1,5 +1,6 @@
 ---
 title: Benchmark Gerrit on your Google Cloud Axion C4A virtual machine
+description: Run a benchmark script on your Google Cloud C4A Arm virtual machine to measure Gerrit throughput, latency, and resource usage.
 weight: 6
 
 ### FIXED, DO NOT MODIFY
