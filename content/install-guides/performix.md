@@ -176,7 +176,7 @@ When the installation finishes, select **Close** to exit the installer.
 
 ## How do I use Arm Performix
 
-For on using Arm Performix, including connecting to your target, please refer to the [Arm Performix User Guide](https://developer.arm.com/documentation/110163/latest/).
+For guidance on using Arm Performix, including connecting to your target, please refer to the [Arm Performix User Guide](https://developer.arm.com/documentation/110163/latest/).
 
 ## How do I uninstall Arm Performix?
 
