@@ -15,9 +15,50 @@ prerequisites:
     - An Arm Neoverse cloud instance, or a local Arm Neoverse Linux computer with at least 16 CPUs and 32GB of RAM
     - Familiarity with Docker and Docker Compose
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-24T15:35:34Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 37913b2c4aed914d32dbdad054ebdd2b1d4587da3ede1a33ba81e3e68bf504a3
+  summary_generated_at: '2026-06-24T15:35:34Z'
+  summary_source_hash: 37913b2c4aed914d32dbdad054ebdd2b1d4587da3ede1a33ba81e3e68bf504a3
+  faq_generated_at: '2026-06-24T15:35:34Z'
+  faq_source_hash: 37913b2c4aed914d32dbdad054ebdd2b1d4587da3ede1a33ba81e3e68bf504a3
+  summary: >-
+    You'll deploy a containerized Autoware
+    Open AD Kit simulation on Arm Neoverse using Docker and Docker Compose, within a SOAFEE-aligned Shift-Left workflow. First, you'll learn about software-defined vehicles (SDVs), SOAFEE, ROS 2, and the Open AD Kit components used in the demo. Then, you'll prepare an Arm Neoverse Linux system and use Docker Compose to start the Open AD Kit visualizer, planning, and simulation services. By the end, you'll review a running simulation. The workflow has been tested on both cloud (Amazon EC2) and on-premise Arm Neoverse platforms.
+  faqs:
+  - question: What result should I expect after launching the Docker Compose stack?
+    answer: >-
+      The visualizer service starts in detached mode, followed by continuously running planning
+      and simulation services. Active containers for these components indicate the demo is operating
+      as intended.
+  - question: Where are the ROS 2 commands and service configurations defined?
+    answer: >-
+      They are defined in the docker/docker-compose.yml file. Reviewing that file shows the launch
+      order, container settings, and ROS 2 commands used by the demo.
+  - question: Can I run the same workflow on cloud and on-prem Arm Neoverse systems?
+    answer: >-
+      Yes. The workflow has been tested on Amazon EC2 and an Ampere Altra workstation, so you can
+      choose either a cloud instance or an on-premise Arm Neoverse system.
+  - question: What should I check before starting the demo to avoid resource-related failures?
+    answer: >-
+      Verify the Arm Neoverse system provides at least 16 CPUs and 32 GB of RAM. Ensure Docker
+      and Docker Compose are installed and available.
+  - question: If I stop and restart the demo, do I need to reconfigure anything?
+    answer: >-
+      No. Docker Compose allows you to start with the previous session’s settings without modifications,
+      so the configuration persists between runs.
+# END generated_summary_faq
+
 author: Odin Shen
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

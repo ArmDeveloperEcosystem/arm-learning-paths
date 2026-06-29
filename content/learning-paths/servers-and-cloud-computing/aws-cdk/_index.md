@@ -2,13 +2,9 @@
 title: Deploy containers on Arm-based compute using Amazon ECS and the AWS CDK
 description: Learn how to define and deploy a containerized application on Arm-based compute using the AWS Cloud Development Kit.
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 45
 
-who_is_this_for: This is an introductory topic for software developers who want to use the AWS Cloud Development Kit (AWS CDK) to deploy applications on Arm-based AWS infrastructure.
+who_is_this_for: This is an introductory topic for software developers who want to use the AWS Cloud Development Kit (AWS CDK) to deploy containerized applications on Arm-based AWS infrastructure.
 
 learning_objectives:
     - Create an example AWS CDK application in JavaScript
@@ -16,8 +12,8 @@ learning_objectives:
     - Deploy application resources on Arm-based AWS compute using Amazon ECS and the AWS CDK
 
 prerequisites:
-    - An Amazon Web Services (AWS) account
-    - A local computer with the AWS CLI, AWS CDK CLI, and Node.js installed
+    - An Amazon Web Services (AWS) account 
+    - A local computer with the AWS CLI, AWS CDK CLI, and Node.js installed, with AWS credentials configured.
     - Familiarity with the Linux command line and JavaScript
 
 author: Anupras Mohapatra
@@ -51,6 +47,10 @@ further_reading:
         title: AWS CLI install guide
         link: /install-guides/aws-cli/
         type: install-guide
+    - resource:
+        title: Amazon ECS task definitions for 64-bit Arm workloads
+        link: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-arm64.html
+        type: documentation
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Overview
 
-In this section you'll learn how to create a firewall rule in Google Cloud Console to allow traffic on TCP port 8080. This step is required for the Learning Path to ensure your Gerrit deployment is accessible.
+This step creates a firewall rule in Google Cloud Console to allow incoming TCP traffic on port 8080, which is required for your Gerrit deployment to be accessible.
 
 {{% notice Note %}}
 If you need help setting up Google Cloud Platform (GCP), see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
@@ -47,6 +47,6 @@ Next, configure the protocols and ports for your firewall rule:
 
 This step ensures that only TCP traffic on port 8080 is allowed through the firewall.
 
-![Google Cloud Console showing the Protocols and ports section with TCP checkbox selected and Ports field containing 8080. This ensures only TCP traffic on port 8080 is allowed through the firewall for Gerrit.#center](images/network-port.png "Specifying the TCP port to expose")
+![Google Cloud Console showing the Protocols and ports section with TCP checkbox selected and Ports field containing 8080. This ensures only TCP traffic on port 8080 is allowed through the firewall for Gerrit.#center](images/network-port.webp "Specifying the TCP port to expose")
 
 Your network firewall rule has now been created. You're ready to continue with VM creation.

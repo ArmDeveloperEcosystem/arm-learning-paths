@@ -12,60 +12,35 @@
 
 /* UNIVERSAL FONTS */
 /****************************************************/
-/* Ignored for now, adding in head.html via google fonts. Can use this locally to optimize if needed */
-
-
-/* Lato font get from local fonts folder, not fonts.google.com as it loads facebook/youtube tracking data */
-    /* Normal, Italic, Bold 
-        300, 400, 500 */
-
-/*
+/* Lato font self-hosted from /fonts/ to avoid external requests and reduce CLS */
 @font-face {
     font-family: 'Lato';
     font-style: normal;
     font-weight: 300;
-    src: url('../fonts/LatoLatin-Light.woff2') format('woff2'),
-         url('../fonts/LatoLatin-Light.ttf') format('ttf');
-  }
-  
-  @font-face {
+    font-display: swap;
+    src: url('/fonts/LatoLatin-Light.woff2') format('woff2');
+}
+@font-face {
     font-family: 'Lato';
     font-style: normal;
     font-weight: 400;
-    src: url('../fonts/LatoLatin-Regular.woff2') format('woff2'),
-         url('../fonts/LatoLatin-Regular.ttf') format('ttf');
-  }
-  
-  @font-face {
-    font-family: 'Lato';
-    font-style: normal;
-    font-weight: 500;
-    src: url('../fonts/LatoLatin-Medium.woff2') format('woff2'),
-         url('../fonts/LatoLatin-Medium.ttf') format('ttf');
-  }
-  
+    font-display: swap;
+    src: url('/fonts/LatoLatin-Regular.woff2') format('woff2');
+}
 @font-face {
     font-family: 'Lato';
     font-style: italic;
     font-weight: 300;
-    src: url('../fonts/LatoLatin-LightItalic.woff2') format('woff2'),
-         url('../fonts/LatoLatin-LightItalic.ttf') format('ttf');
-  }  
-  @font-face {
+    font-display: swap;
+    src: url('/fonts/LatoLatin-LightItalic.woff2') format('woff2');
+}
+@font-face {
     font-family: 'Lato';
     font-style: italic;
     font-weight: 400;
-    src: url('../fonts/LatoLatin-Italic.woff2') format('woff2'),
-         url('../fonts/LatoLatin-Italic.ttf') format('ttf');
-  }  
-  @font-face {
-    font-family: 'Lato';
-    font-style: italic;
-    font-weight: 500;
-    src: url('../fonts/LatoLatin-MediumItalic.woff2') format('woff2'),
-         url('../fonts/LatoLatin-MediumItalic.ttf') format('ttf');
-  }
-*/
+    font-display: swap;
+    src: url('/fonts/LatoLatin-Italic.woff2') format('woff2');
+}
 
 
 /* UNIVERSAL */
@@ -183,17 +158,31 @@ table tbody td {
 
 
 
+/* CLS fix: reserve space for nav before hydration */
+arm-top-navigation:not(:defined) {
+    display: block;
+    min-height: 80px;
+}
+@media (max-width: 1024px) {
+    arm-top-navigation:not(:defined) {
+        min-height: 60px;
+    }
+}
+
 /* Fix global nav height */
+/* The arm-global-web-components script renders a position:fixed nav (0 flow space)
+   and may inject a 50px sub-navigation bar in flow */
 /*************************************/
 #global-nav-height-fixer {
     max-width: 100vw;
-    min-height: 80px;
+    height: 80px;
+    overflow: hidden;
     position: relative;
     top: 0;
 }
 @media (max-width: 1024px) { /* smaller screens than LG */
         #global-nav-height-fixer {
-            min-height: 60px;
+            height: 60px;
         }
 }
 .nav-transparent {
@@ -453,3 +442,11 @@ html[theme='light'] body {
         ads-masthead { --ads-masthead-horizontal-padding: 5px; }
 }
 
+/* CLS fix: reserve space for arm-footer before hydration */
+arm-footer-navigation:not(:defined) {
+    display: block;
+    min-height: 300px;
+}
+#arm-footer {
+    contain: layout;
+}
