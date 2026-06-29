@@ -33,7 +33,7 @@ To create a virtual machine based on the C4A instance type:
 - Under **Networking**, enable **Allow HTTP traffic** and **Allow HTTPS traffic**.
 - In the **Network tags** field, add `allow-tcp-8080` to allow Gerrit dashboard traffic.
 
-![Google Cloud Console interface showing the Networking tab for VM instance configuration. The Network tags field displays allow-tcp-8080 to enable firewall rule for Gerrit dashboard traffic on port 8080. Other networking options and VM configuration controls are visible.#center](images/network-config.png "Adding the TCP/8080 firewall rule to our VM")
+![Google Cloud Console interface showing the Networking tab for VM instance configuration. The Network tags field displays allow-tcp-8080 to enable firewall rule for Gerrit dashboard traffic on port 8080. Other networking options and VM configuration controls are visible.#center](images/network-config.webp "Adding the TCP/8080 firewall rule to our VM")
 
 - Select **Create** to launch your VM instance.
 - After the VM is ready, you'll see an **SSH** button next to your instance in the VM list. The public IP address for your VM also appears here.

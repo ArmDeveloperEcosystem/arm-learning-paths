@@ -47,6 +47,6 @@ Next, configure the protocols and ports for your firewall rule:
 
 This step ensures that only TCP traffic on port 8080 is allowed through the firewall.
 
-![Google Cloud Console showing the Protocols and ports section with TCP checkbox selected and Ports field containing 8080. This ensures only TCP traffic on port 8080 is allowed through the firewall for Gerrit.#center](images/network-port.png "Specifying the TCP port to expose")
+![Google Cloud Console showing the Protocols and ports section with TCP checkbox selected and Ports field containing 8080. This ensures only TCP traffic on port 8080 is allowed through the firewall for Gerrit.#center](images/network-port.webp "Specifying the TCP port to expose")
 
 Your network firewall rule has now been created. You're ready to continue with VM creation.
