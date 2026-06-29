@@ -14,7 +14,9 @@ additional_search_terms:
 
 minutes_to_complete: 30
 
-author: Pareena Verma
+author:
+  - Pareena Verma
+  - Jai Adam Schrem
 
 ### Link to official documentation
 official_docs: https://developer.arm.com/documentation/110163/latest
