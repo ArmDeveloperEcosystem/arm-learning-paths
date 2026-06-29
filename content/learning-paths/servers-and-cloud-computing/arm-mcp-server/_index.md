@@ -33,12 +33,11 @@ generated_summary_faq:
   faq_generated_at: '2026-06-26T17:27:42Z'
   faq_source_hash: b870ac5160d35ddb51955ca8379493e172787ced8125cde8ae79f7700e653a87
   summary: >-
-    In this Learning Path, you connect an AI coding assistant to the Arm MCP Server and use its
-    Model Context Protocol capabilities to drive an x86-to-Arm migration workflow. You query Docker
-    base images with natural language to confirm `arm64` support, then configure the Arm Cloud
+    You'll connect an AI coding assistant to the Arm MCP Server and use its
+    Model Context Protocol capabilities to drive an x86-to-Arm migration workflow. First, you'll configure the Arm Cloud
     Migration Agent in GitHub Copilot to identify and refactor SIMD intrinsics from SSE/AVX to
-    Arm Neon or SVE. You review AI-generated changes and validate outcomes by building and running
-    the migrated C++ application in Docker on Arm-based systems. You also learn how to replicate
+    Arm Neon or SVE. Then, you'll review AI-generated changes and validate outcomes by building and running
+    the migrated C++ application in Docker on Arm-based systems. You'll also learn how to replicate
     the same multi-step workflow in other agentic tools using persistent, structured instructions.
   faqs:
   - question: How do I know if a Docker base image is compatible with Arm?

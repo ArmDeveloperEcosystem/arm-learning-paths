@@ -30,12 +30,11 @@ generated_summary_faq:
   faq_generated_at: '2026-06-26T17:26:18Z'
   faq_source_hash: 3a4bc8b2ab548be507b6d528844b0593b27f2dab3ab3c9649e807abdf4887ce0
   summary: >-
-    In this Learning Path, you explore the C++ memory model, see how compiler and hardware reordering
-    interact with multithreaded code, and compare Arm and x86 memory ordering. You examine atomics
+    You'll explore the C++ memory model, see how compiler and hardware reordering
+    interact with multithreaded code, and compare Arm and x86 memory ordering. First, you'll examine atomics
     and memory ordering concepts before running a small concurrent C++ example on both x86 and
-    Arm cloud instances to expose a race that can appear differently across architectures. You
-    then detect data races with ThreadSanitizer (TSan) and use its diagnostic output to guide fixes.
-    By the end, you can recognize code that relies on implicit x86 ordering and apply C++ best
+    Arm cloud instances to expose a race that can appear differently across architectures. Then, you'll detect data races with ThreadSanitizer (TSan) and use its diagnostic output to guide fixes.
+    By the end, you'll be able to recognize code that relies on implicit x86 ordering and apply C++ best
     practices to write correct, portable concurrency for Arm.
   faqs:
   - question: Do I have to use the exact instance type shown in the example?
@@ -57,7 +56,7 @@ generated_summary_faq:
       TSan builds for debugging data races, not for measuring performance.
   - question: What should I check if code that seemed correct on x86 behaves differently on Arm?
     answer: >-
-      Do not assume x86 memory ordering semantics on Arm. Revisit the code with the C++ memory
+      Don't assume x86 memory ordering semantics on Arm. Revisit the code with the C++ memory
       model in mind and use atomics and proper synchronization instead of relying on implicit
       ordering.
 # END generated_summary_faq

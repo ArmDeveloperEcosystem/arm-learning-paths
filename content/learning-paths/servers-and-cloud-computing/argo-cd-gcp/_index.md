@@ -37,7 +37,7 @@ generated_summary_faq:
   faq_source_hash: c6106f21859f5a8e04bbd579db47c7177bb5371d4c7f306054e56e81ed9e89a1
   summary: >-
     You'll deploy applications on Arm-based Google Kubernetes Engine using
-    GitOps with Argo CD on Google Cloud Axion C4A instances built on Arm Neoverse V2 cores. Starting
+    GitOps with Argo CD on Google Cloud C4A instances built on Arm Neoverse V2 cores. Starting
     from a SUSE Linux `arm64` VM, you'll provision an `arm64` GKE environment and install Argo CD
     using official upstream manifests. You'll configure browser and CLI access, retrieve admin credentials,
     and define a Git-backed workflow that continuously reconciles Kubernetes resources. Then, you'll deploy
@@ -53,7 +53,7 @@ generated_summary_faq:
       CD?
     answer: >-
       Confirm the current Kubernetes context points to your intended GKE cluster and namespace.
-      In the Google Cloud Console, verify the node pool uses C4A machine types to ensure you are
+      In the Google Cloud console, verify the node pool uses C4A machine types to ensure you are
       operating on Arm64 nodes.
   - question: What indicates that Argo CD installed and is accessible correctly?
     answer: >-

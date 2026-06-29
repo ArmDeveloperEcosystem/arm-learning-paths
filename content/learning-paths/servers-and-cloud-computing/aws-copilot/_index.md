@@ -30,13 +30,12 @@ generated_summary_faq:
   faq_generated_at: '2026-06-26T17:37:56Z'
   faq_source_hash: ced3882cf8be11a55304d2697f450a2c862a81d87317ab42298148755e9f272c
   summary: >-
-    In this Learning Path, you package a containerized application and deploy it to AWS Fargate
-    using the AWS Copilot CLI, with a focus on targeting AWS Graviton2 processors. You containerize
-    an example app, run Copilot to initialize a Load Balanced Web Service, and see that Copilot
-    defaults to an `amd64` build. You configure Copilot for the Arm architecture so the service
-    runs on Graviton. You also use a Dockerfile to build locally or reference an
-    existing multi-architecture image and push it to Amazon ECR. By the end, you deploy the
-    service on Fargate with the architecture selection you intend to use.
+    You'll package a containerized application and deploy it to AWS Fargate
+    using the AWS Copilot CLI, with a focus on targeting AWS Graviton2 processors. First, you'll containerize
+    an example app. Then, you'll run Copilot to initialize a Load Balanced Web Service and configure Copilot for the Arm architecture so the service
+    runs on Graviton. You'll also use a Dockerfile to build locally or reference an
+    existing multi-architecture image and push it to Amazon ECR. By the end, you'll deploy the
+    service on Fargate on Arm.
   faqs:
   - question: What happens when I run the `copilot init` command shown in the steps?
     answer: >-

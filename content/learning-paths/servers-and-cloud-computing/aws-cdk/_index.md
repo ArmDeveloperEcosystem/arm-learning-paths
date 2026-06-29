@@ -31,15 +31,13 @@ generated_summary_faq:
   faq_generated_at: '2026-06-26T17:36:00Z'
   faq_source_hash: 99f9659f6db887c7389e8cd69e67a5872d738fa72f21b9697a1abe1865808ee1
   summary: >-
-    In this Learning Path, you define and deploy a containerized application to Arm-based AWS
-    compute using the AWS Cloud Development Kit (CDK). You create a JavaScript CDK application
-    that provisions an Amazon ECS service running on Arm-based AWS Fargate. The workflow covers
-    synthesizing the application to a CloudFormation template, reviewing the generated output
-    in `cdk.out/ArmCdkAppStack.template.json`, bootstrapping the environment, and deploying the
+    You'll define and deploy a containerized application to Arm-based AWS
+    compute using the AWS Cloud Development Kit (CDK). First, you'll create a JavaScript CDK application
+    that provisions an Amazon ECS service running on Arm-based AWS Fargate. You'll then
+    synthesize the application to a CloudFormation template, review the generated output
+    in `cdk.out/ArmCdkAppStack.template.json`, bootstrap the environment, and deploy the
     stack. By following the steps, your infrastructure and service definition target Arm-based
     compute powered by AWS Graviton, using the CDK to manage application resources end-to-end.
-    The hands-on flow emphasizes building the app, translating it to infrastructure as code, and
-    deploying it with CDK conventions.
   faqs:
   - question: How do I confirm the AWS CDK CLI is installed before starting?
     answer: >-

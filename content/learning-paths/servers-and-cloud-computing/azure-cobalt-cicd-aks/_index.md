@@ -31,18 +31,18 @@ generated_summary_faq:
   faq_generated_at: '2026-06-26T18:33:18Z'
   faq_source_hash: b5bd3abde8d9dd3146e0f11f4819ac510417ad7f707b4d0970c02fd63801b358
   summary: >-
-    In this Learning Path, you set up a self-hosted GitHub Actions runner on an Azure Cobalt 100
-    VM and use it to build a .NET 8 web application for `arm64`. With Terraform, you create an
+    You'll set up a self-hosted GitHub Actions runner on an Azure Cobalt 100
+    VM and use it to build a .NET 8 web application for `arm64`. With Terraform, you'll create an
     Azure Kubernetes Service (AKS) cluster backed by Cobalt 100-based nodes, then use a GitHub
-    Actions workflow to deploy the application to the cluster. Along the way, you select an appropriate
-    Cobalt 100 VM series for the runner, confirm the runner is available to execute jobs, and
+    Actions workflow to deploy the application to the cluster. Along the way, you'll select an appropriate
+    Cobalt 100-based VM series for the runner, confirm the runner is available to execute jobs, and
     validate that the workload targets the Arm-based AKS nodes. The result is a working CI/CD
     path from source to a running application on Azure Cobalt 100 infrastructure.
   faqs:
   - question: Which Azure Cobalt 100 VM series should I use for the self-hosted runner?
     answer: >-
       Azure Cobalt 100 offers general-purpose Dpsv6/Dplsv6 and memory-optimized Epsv6 series.
-      Choose based on your build and deployment needs; this Learning Path does not prescribe a specific
+      Choose based on your build and deployment needs. The Learning Path doesn't prescribe a specific
       size.
   - question: Do I have to use a self-hosted runner, or can I use GitHub-hosted `arm64` runners?
     answer: >-
@@ -52,7 +52,7 @@ generated_summary_faq:
       workflow?
     answer: >-
       Confirm the runner is installed on the Azure Cobalt 100 VM and appears online in GitHub.
-      Do not start the workflow until the runner reports an available status.
+      Don't start the workflow until the runner reports an available status.
   - question: What result should I expect after applying the Terraform configuration?
     answer: >-
       Terraform creates an AKS cluster with node pools based on Azure Cobalt 100. This cluster

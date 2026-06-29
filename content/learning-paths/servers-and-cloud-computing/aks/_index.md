@@ -31,7 +31,7 @@ generated_summary_faq:
   faq_source_hash: 01c5cc8930650a8d81d67d4c48b62e0f9d7b1ebfc2d09a552e11046fb982fc52
   summary: >-
     You'll automate an Arm-based Azure Kubernetes Service (AKS) cluster deployment
-    with Terraform and then deploy a WordPress example workload. You'll start by configuring AKS to use Azure
+    with Terraform and then deploy a WordPress example workload. First, you'll configure AKS to use Azure
     Dpsv5 virtual machines based on Ampere Altra Arm processors by following Terraform-driven
     provisioning steps. After the cluster is available, you'll use a concise Kubernetes setup to run
     WordPress backed by MySQL by creating three manifests: `kustomization.yaml`, `mysql-deployment.yaml`,

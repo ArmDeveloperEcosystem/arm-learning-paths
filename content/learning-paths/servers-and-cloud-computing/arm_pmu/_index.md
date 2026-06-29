@@ -29,13 +29,13 @@ generated_summary_faq:
   faq_generated_at: '2026-06-26T17:33:13Z'
   faq_source_hash: 70ed68f472841d24321968188948c5c661a48445c0b07e54535d538233e048e3
   summary: >-
-    In this Learning Path, you access Arm hardware event counters and the system counter from
-    user space on Linux using the PMU. You start by distinguishing software and hardware events,
+    You'll access Arm hardware event counters and the system counter from
+    user space on Linux using the PMU. First, you'll distinguish software and hardware events,
     then use a minimal assembly approach with `MRS` and `MSR` to read the system counter and measure
-    time around a function. You then instrument event counters with PAPI, including environment
-    configuration and user-space counter access. You finish with two C examples that use
+    time around a function. You'll then instrument event counters with PAPI, including environment
+    configuration and user-space counter access. You'll finish with two C examples that use
     `perf_event_open` to read either a single counter or a group of counters without multiplexing.
-    By the end, you build and run working code that returns measurable counter values suitable
+    By the end, you'll build and run working code that returns measurable counter values suitable
     for basic performance instrumentation on Arm systems.
   faqs:
   - question: How do I know the system counter example produced a valid measurement?

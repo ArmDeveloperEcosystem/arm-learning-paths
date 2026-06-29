@@ -34,13 +34,13 @@ generated_summary_faq:
   faq_generated_at: '2026-06-26T17:15:35Z'
   faq_source_hash: 707a88ccf315ebefda3768211ac8a0ae0d142e6e28aca5597f6730b9e091d249
   summary: >-
-    In this Learning Path, you transform a scalar Adler-32 checksum in C into a vector-length-agnostic
+    You'll transform a scalar Adler-32 checksum in C into a vector-length-agnostic
     SVE implementation on Arm Neoverse servers with help from an AI coding assistant connected to
-    the Arm MCP server. You start by setting up a small project and capturing a reproducible scalar
+    the Arm MCP server. First, you'll set up a small project and capture a reproducible scalar
     baseline, then apply the `NMAX` technique to defer modulo operations and expose vectorization
-    opportunities. You learn core SVE concepts in context, including predication with `svwhilelt`,
+    opportunities. You'll learn core SVE concepts in context, including predication with `svwhilelt`,
     reductions with `svaddv` for the `a` accumulator, and building the `b` accumulator with `svdot`
-    and weighted contributions. After each stage, you validate correctness against the scalar version
+    and weighted contributions. After each stage, you'll validate correctness against the scalar version
     and measure performance changes.
   faqs:
   - question: How do I know my environment is ready to use SVE intrinsics?

@@ -6,7 +6,7 @@ Authoring rules:
 - Use only the supplied context. Do not invent products, prerequisites, tools, claims, performance numbers, compatibility details, or outcomes.
 - Treat the supplied Learning Path as the source of truth. If a detail is not present, either omit it or state that it is not explicitly listed.
 - Preserve the intent of the Learning Path author. Do not rewrite the path into a different task, audience, platform, toolchain, or level of difficulty.
-- Follow the supplied authoring guidance from `.github/copilot-instructions.md` and `content/learning-paths/cross-platform/_example-learning-path/`.
+- Follow the supplied authoring guidance from `.github/skills/writing-style-review` and `content/learning-paths/cross-platform/_example-learning-path/`.
 - Treat existing page fields and sections as already visible to the learner. Do not repeat information that is already covered by the title, description, objectives, "What will you learn?", prerequisites, tool/install lists, or setup sections.
 - Use prerequisites, objectives, tags, and metadata only to understand the path and avoid contradictions. Do not restate prerequisites in the summary or FAQ unless the question addresses a specific action or blocker that occurs while following the steps.
 - Prefer concrete verbs such as install, configure, build, deploy, benchmark, profile, debug, validate, or compare when those actions are supported by the context.

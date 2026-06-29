@@ -32,13 +32,13 @@ generated_summary_faq:
   faq_generated_at: '2026-06-26T17:41:45Z'
   faq_source_hash: 1682c0527bb49c417263286e2aba7c82fb9a27fa315ecc6b9ca10978b69cc236
   summary: >-
-    In this Learning Path, you build an Azure Resource Manager (ARM) template to provision a Linux
-    virtual machine on Azure Cobalt 100 Arm-based infrastructure. You define template sections
+    You'll build an Azure Resource Manager template to provision a Linux
+    virtual machine on Azure Cobalt 100 Arm-based infrastructure. First, you'll define template sections
     for parameters, variables, resources, and outputs, select an `arm64`-capable VM size from
     the Dpsv6 series in a supported region, and deploy the template with the Azure CLI into a
-    new resource group. After deployment, you retrieve the VM’s public IP, connect with SSH using
+    new resource group. After deployment, you'll retrieve the VM’s public IP, connect with SSH using
     the configured key, and validate the architecture on the instance using standard commands.
-    By the end, you have a repeatable ARM template that creates a Cobalt 100 VM and associated
+    By the end, you'll have a repeatable template that creates a Cobalt 100-based VM and associated
     networking ready for `arm64` development.
   faqs:
   - question: How do I confirm the Azure region I selected supports Cobalt 100 VM sizes?

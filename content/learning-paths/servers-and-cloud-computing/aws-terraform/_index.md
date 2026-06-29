@@ -7,7 +7,7 @@ minutes_to_complete: 60
 who_is_this_for: This is an introductory topic for software developers who are new to deploying Arm instances on AWS using Terraform.
 
 learning_objectives: 
-    - Automate AWS EC2 instance creation using Terraform
+    - Automate Amazon EC2 instance creation using Terraform
     - Deploy Arm instances on AWS and provide access via Jump Server
     - Provide infrastructure basics, code knowledge and files that could help with future learning paths
 
@@ -30,10 +30,10 @@ generated_summary_faq:
   faq_generated_at: '2026-06-26T17:39:51Z'
   faq_source_hash: 087a4d56914e5b53cec5ad17e8d682e72d04ba6b394237c081efe4a3f939e04e
   summary: >-
-    In this Learning Path, you define and apply Terraform automation to provision AWS Graviton
-    instances and expose secure access through a jump server, also known as a bastion host. You
+    You'll define and apply Terraform automation to provision AWS Graviton-based EC2
+    instances and expose secure access through a jump server, also known as a bastion host. First, you'll
     review the provided Terraform files, run the workflow using Terraform Cloud, and adapt the
-    configuration as needed to fit related projects. The workflow emphasizes a practical pattern:
+    configuration as needed to fit related projects. You'll learn a practical pattern:
     create Arm-based EC2 instances, place a supervised access point in front, and validate that
     the deployed nodes are reachable only through the jump server. The resulting configuration
     provides a reusable baseline for future Arm-focused work on AWS that requires one or more

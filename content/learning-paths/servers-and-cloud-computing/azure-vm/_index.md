@@ -33,13 +33,13 @@ generated_summary_faq:
   faq_generated_at: '2026-06-26T18:40:27Z'
   faq_source_hash: 413467e581e3561425229d0f6118975dbb596d6a9494544a54f0b9ab22c1b89d
   summary: >-
-    In this Learning Path, you build a custom Azure Linux 3.0 image for Arm and deploy it on Cobalt
-    100-based virtual machines. Starting from the Azure Linux `aarch64` ISO, you use QEMU to create
-    a raw disk, boot the installer, and produce a working system image. You convert the disk to
+    You'll build a custom Azure Linux 3.0 image for Arm and deploy it on Cobalt
+    100-based virtual machines. Starting from the Azure Linux `aarch64` ISO, you'll use QEMU to create
+    a raw disk, boot the installer, and produce a working system image. You'll convert the disk to
     a fixed-size VHD, upload it to Azure, and register it in Azure Shared Image Gallery using
-    the Azure CLI. With the image ID, you create a new VM on Arm-based Cobalt 100 processors.
-    The flow emphasizes the key decisions around image format, resource naming, and region/size
-    selection, and finishes with a VM launched from the custom image.
+    the Azure CLI. With the image ID, you'll create a new VM on Arm-based Cobalt 100 processors.
+    You'll explore key decisions around image format, resource naming, and region/size
+    selection, and finish with a VM launched from the custom image.
   faqs:
   - question: Which ISO architecture should I download for the QEMU installation?
     answer: >-

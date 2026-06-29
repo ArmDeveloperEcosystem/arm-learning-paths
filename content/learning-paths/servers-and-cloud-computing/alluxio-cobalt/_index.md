@@ -39,7 +39,7 @@ generated_summary_faq:
     VM, you'll enable the Alluxio Web UI by adding an inbound rule for TCP port 19999 in the Azure
     Network Security Group. You'll install and configure Alluxio with local storage and memory-backed
     caching, then install Apache Spark under `/opt` and configure Spark to read through Alluxio.
-    The hands-on work concludes with read workloads comparing uncached and cached access that you can use to interpret the impact of in-memory caching on analytics tasks.
+    The result is a set of read workloads comparing uncached and cached access that you can use to interpret the impact of in-memory caching on analytics tasks.
   faqs:
   - question: Which Azure VM size should I select for this setup?
     answer: >-

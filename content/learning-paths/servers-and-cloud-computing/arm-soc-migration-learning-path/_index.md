@@ -34,12 +34,12 @@ generated_summary_faq:
   faq_generated_at: '2026-06-26T17:29:03Z'
   faq_source_hash: 49b3f2b1464efb20f0c8fbcff46e9f30910d856567ca01c01dc348aa1c5740d1
   summary: >-
-    In this Learning Path, you migrate a C application between Arm platforms using Kiro's Arm
-    SoC Migration Power. You install Kiro, enable the Migration Power, and run the Arm MCP server
-    as a containerized backend, then build and validate the `sensor-monitor` application on an
+    You'll migrate a C application between Arm platforms using Kiro's Arm
+    SoC Migration Power. First, you'll install Kiro, enable the Migration Power, and run the Arm MCP server
+    as a containerized backend. Then, you'll build and validate the `sensor-monitor` application on an
     AWS Graviton3 source instance. The workflow proceeds through discovery, architecture analysis,
     abstraction design, and platform-specific implementation to separate hardware-dependent code
-    behind a clear interface. You then build the migrated code for the target, such as Raspberry
+    behind a clear interface. You'll then build the migrated code for the target, such as Raspberry
     Pi 5, and validate it using the Power's testing recommendations to check functional behavior,
     platform compatibility, hardware interactions, and performance characteristics against the
     baseline.
