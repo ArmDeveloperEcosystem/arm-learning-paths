@@ -1,5 +1,5 @@
 ---
-title: Provision a virtual machine on Google Cloud Platform to deploy Gerritt
+title: Provision a virtual machine on Google Cloud Platform to deploy Gerrit
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -50,6 +50,6 @@ A window from your browser will come up and you'll now see a shell into your VM 
 
 ## What you've accomplished and what's next
 
-You've now created an Arm-based Google Axion C4A VM instance that you'll use to deploy Gerritt. You've also opened a shell session into the instance.
+You've now created an Arm-based Google Axion C4A VM instance that you'll use to deploy Gerrit. You've also opened a shell session into the instance.
 
 Next, you'll install Gerrit on the VM instance. 
