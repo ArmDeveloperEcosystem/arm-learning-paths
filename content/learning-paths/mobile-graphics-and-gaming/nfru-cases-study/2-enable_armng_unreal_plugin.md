@@ -1,5 +1,5 @@
 ---
-title: Enable ArmNG Unreal plugin
+title: Enable Arm Neural Graphics Plugin
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -7,10 +7,10 @@ layout: learningpathall
 ---
 ## Install the required tools and dependencies
 
-Before enabling the Arm neural-graphics-for-unreal plugin, make sure that all required tools and dependencies are installed and configured. For complete setup instructions, see [Set up the development environment](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/2-set_up_the_development_environment/).
+Before enabling the Arm Neural Graphics Plugin, make sure that all required tools and dependencies are installed and configured. For complete setup instructions, see [Set up the development environment](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/2-set_up_the_development_environment/).
 
 
-## Set up Arm neural-graphics-for-unreal
+## Set up the Arm Neural Graphics Plugin
 
 If you cloned `armng-unreal` outside your Unreal project directory, create a symbolic link in the project's `Plugins` folder. The symbolic link allows Unreal Engine to detect the plugin as part of your project.
 
@@ -34,7 +34,7 @@ After regenerating the Visual Studio solution, follow [Set up the Unreal project
 
 ## What you've learned and what's next
 
-You created a symbolic link to the plugin source and regenerated the Visual Studio solution. This configuration enables Unreal Engine to detect and load the Arm neural-graphics-for-unreal plugin.
+You created a symbolic link to the plugin source and regenerated the Visual Studio solution. This configuration enables Unreal Engine to detect and load the Arm Neural Graphics Plugin.
 
-Next, follow [Analyze NFRU enablement artifacts](/learning-paths/mobile-graphics-and-gaming/nfru-cases-study/3-analyze_nfru_enablement_artifacts/) to validate NFRU functionality and analyze its visual quality and performance impact.
+Next, use [Validate NFRU with Streamline and RenderDoc](/learning-paths/mobile-graphics-and-gaming/nfru-cases-study/3-analyze_nfru_enablement_artifacts/) to confirm that NFRU is active, inspect generated frames, and start comparing visual quality and performance.
 

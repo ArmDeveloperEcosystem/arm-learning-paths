@@ -1,6 +1,6 @@
 ---
 title: Fast Object Movement
-weight: 5
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -9,17 +9,11 @@ layout: learningpathall
 ## Fast object movement
 Fast-moving or teleported objects can exhibit trailing artifacts or duplicated shapes during frame interpolation.
 
-<figure>
-  <img src="./images/fast_move_object/previous_current_to_InterpolatedRT_issue.gif" alt="Previous Current to Interpolated RT Issue"/>
-  <figcaption>Previous Current to Interpolated RT Issue</figcaption>
-</figure>
+![Previous Current to Interpolated RT Issue#center](./images/fast_move_object/previous_current_to_InterpolatedRT_issue.gif "Previous Current to Interpolated RT Issue")
 
 NFRU attempts to synthesize intermediate frames between two rendered frames using motion vectors, optical flow, depth, and disocclusion masks. However, when a fast-moving object changes position significantly between frames, these signals can become ambiguous or incomplete. The algorithm may struggle to accurately determine where pixels should originate when motion is too large or when objects become newly visible or hidden.
 
-<figure>
-  <img src="./images/fast_move_object/fast_move_object_issue_1.png" alt="Fast Move Object Issue"/>
-  <figcaption>Fast Move Object Issue</figcaption>
-</figure>
+![Fast Move Object Issue#center](./images/fast_move_object/fast_move_object_issue_1.png "Fast Move Object Issue")
 
 Visually, this can appear as a distorted object, trailing artifact, duplicated shape, missing object parts, or incorrect blending
 with the background. It is most common around fast-moving objects, thin geometry, sharp edges, particles, or objects
@@ -32,10 +26,7 @@ Use the console command:
 r.NFRU.ShowDebugView 1
 ```
 
-<figure>
-  <img src="./images/fast_move_object/show_debug_view.png" alt="NFRU Debug View"/>
-  <figcaption>NFRU Debug View</figcaption>
-</figure>
+![NFRU Debug View#center](./images/fast_move_object/show_debug_view.png "NFRU Debug View")
 
 ## What you've learned and what's next
 

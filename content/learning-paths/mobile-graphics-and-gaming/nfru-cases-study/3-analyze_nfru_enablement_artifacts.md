@@ -55,13 +55,13 @@ In NFRU debug resource names, `tm1` means time minus one (`t-1`) and `tp1` means
 
 ## Profile NFRU with Streamline
 
-Use Streamline to compare the same scene with NFRU disabled and enabled. In the NFRU-enabled capture, confirm that the neural processing counters are active, and check that the additional GPU work, such as compute activity and memory bandwidth, remains within the available headroom.
+Use Streamline to compare the same scene with NFRU disabled and enabled. In the NFRU-enabled capture, confirm that the neural processing counters are active, and check that the additional GPU work, such as compute activity and memory bandwidth, fits within the frame budget.
 
-As shown in the capture, counters such as Neural queue active and Neural Accelerator Unit Usage are active. This indicates neural accelerator activity during the NFRU workload. You can use the measured active time from these counters to evaluate the performance cost of NFRU. Moku also integrates the Streamline API, so Streamline captures can record both the actual FPS and present FPS at the same time.
+As shown in the capture, counters such as Neural queue active and Neural Accelerator Unit Usage are active. This indicates neural accelerator activity during the NFRU workload. You can use the measured active time from these counters to evaluate the performance cost of NFRU. Moku also integrates the Streamline API, so Streamline captures can record both render FPS and present FPS at the same time.
 
 ![Moku Streamline FPS](./images/streamline/moku_streamline_fps.png)
 
-On the timeline, the NFRU workload should complete cleanly between real rendered frames. If GPU or neural processing blocks become long, the cost of NFRU may limit the expected uplift. If the workload is light but idle gaps still appear, the limiting factor is more likely frame pacing or presentation behavior rather than NFRU execution cost.
+On the timeline, the NFRU workload should complete cleanly between real rendered frames. If GPU or neural processing blocks become long, the cost of NFRU may limit the expected uplift. If the workload is light but idle gaps still appear, the limiting factor is more likely frame pacing or presentation behavior rather than NFRU execution cost. For a deeper explanation, see [NFRU performance](/learning-paths/mobile-graphics-and-gaming/nfru-cases-study/8-nfru_performance/).
 
 ![Moku Streamline neural usage](./images/streamline/moku_streamline_neural_usage.png)
 
@@ -69,18 +69,17 @@ For more information on performance profiling strategies, refer to the [Streamli
 
 ## Inspect NFRU frames with RenderDoc
 
-Use RenderDoc when NFRU is active but the generated frames show visual artifacts. Capture a frame with NFRU enabled and inspect the frame generation area of the event list. Compare the real frame copies with the generated output, then check whether motion data is coherent around moving objects and whether the depth history looks valid around occlusion boundaries. If the real frame inputs look correct but the generated output has artifacts, the issue is likely in frame generation, masking, disocclusion handling, or content such as fast alpha-blended effects.
+Use RenderDoc when NFRU is active but the generated frames show visual artifacts. Capture a frame with NFRU enabled and inspect the frame generation area of the event list. Compare the real frame copies with the generated output, then review the bound frame-generation resources and debug-view tiles that expose motion, depth, disocclusion, and warped-color behavior. If the real frame inputs look correct but the generated output has artifacts, the issue is likely in frame generation, masking, disocclusion handling, or content such as fast alpha-blended effects.
 
-For disocclusion and optical-flow diagnostics, enable `r.NFRU.ShowDebugView 1`. The debug view splits the output into tiles for previous and current depth, disocclusion masks, motion-warped color, and optical-flow-warped color. Use those tiles to find whether an artifact starts in depth history, motion vectors, disocclusion handling, optical flow, or the final generated frame.
+For detailed guidance on using RenderDoc with NFRU in Unreal Engine, refer to the [RenderDoc integration guide](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/7-renderdoc/).
 
 ![Moku RenderDoc NFRU inspection](./images/moku_renderdoc.png)
 
-For detailed guidance on using RenderDoc with NFRU in Unreal Engine, refer to the [RenderDoc integration guide](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/7-renderdoc.md).
 
 This workflow is useful for the artifact scenarios in the following sections. Fast camera movement tends to expose disocclusion and edge reconstruction problems. Fast object motion stresses motion vectors and object boundaries. Occlusion changes stress depth history. Alpha-blended particles and VFX stress content that does not always have reliable depth or motion vector data.
 
 ## What you've learned and what's next
 
-In this section, you learned how to validate NFRU using Streamline and RenderDoc. Streamline confirms whether NFRU is active, how much GPU and neural workload it adds, and whether pacing or processing cost limits the expected FPS uplift. RenderDoc lets you inspect the key NFRU resources, real frame copies, motion vectors, depth history, debug view, and final generated output when visual artifacts need deeper analysis.
+In this section, you learned how to validate NFRU using Streamline and RenderDoc. Streamline confirms whether NFRU is active, how much GPU and neural workload it adds, and whether pacing or processing cost limits the expected FPS uplift. RenderDoc lets you inspect the frame-generation event list, visible NFRU resources, real frame copies, debug-view output, and final generated output when visual artifacts need deeper analysis.
 
 You are now prepared to evaluate NFRU performance and visual quality in representative gameplay scenarios.

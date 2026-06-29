@@ -8,12 +8,12 @@ layout: learningpathall
 
 ## What you've accomplished
 
-You completed a case study workflow for Neural Frame Rate Upscaling (NFRU) with Project Moku. You learned how NFRU generates intermediate frames to improve presented smoothness, and how to evaluate both the visual quality and performance behavior of those generated frames.
+You completed a case study workflow for Neural Frame Rate Upsampling (NFRU) with Project Moku. You learned how NFRU generates intermediate frames to improve presented smoothness, and how to evaluate both the visual quality and performance behavior of those generated frames.
 
 In this Learning Path, you:
 
 - Used Project Moku for NFRU performance and visual quality analysis.
-- Enabled the Arm neural-graphics-for-unreal plugin in an Unreal Engine project.
+- Enabled the Arm Neural Graphics Plugin in an Unreal Engine project.
 - Validated NFRU with Streamline and RenderDoc.
 - Compared real frame inputs, generated frame output, motion data, and debug views.
 - Investigated visual artifacts caused by fast camera movement, fast object movement, occlusion changes, and particle effects.
@@ -36,5 +36,8 @@ Apply the same workflow to your own Unreal Engine content. Start with a repeatab
 For deeper investigation, continue with the related NFRU Unreal Engine setup, RenderDoc, and Arm Performance Studio guidance:
 
 - [Set up the Unreal project](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/3-set_up_the_unreal_project/)
-- [RenderDoc integration guide](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/7-renderdoc.md)
+- [RenderDoc integration guide](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/7-renderdoc/)
 - [Streamline](/learning-paths/mobile-graphics-and-gaming/ams/streamline/)
+- [Neural Graphics Playbook - Evaluate](/learning-paths/mobile-graphics-and-gaming/neural-graphics-playbook-evaluate/)
+- [Fine-tune neural graphics models using Model Gym](/learning-paths/mobile-graphics-and-gaming/model-training-gym/)
+- [Generate neural graphics datasets with Neural Graphics Data Capture in Unreal Engine](/learning-paths/mobile-graphics-and-gaming/neural-graphics-data-capture-unreal/)

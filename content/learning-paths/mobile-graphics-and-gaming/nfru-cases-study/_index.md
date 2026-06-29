@@ -1,15 +1,15 @@
 ---
-title: NFRU Case Study: Project Moku
+title: NFRU Case Study - Project Moku
 
-description: Learn how to enable, inspect, and tune Neural Frame Rate Upscaling in an Unreal Engine project using Arm ML Extensions for Vulkan.
+description: Learn how to enable, inspect, and tune Neural Frame Rate Upsampling in an Unreal Engine project using Arm ML Extensions for Vulkan.
 
 minutes_to_complete: 30
 
-who_is_this_for: This Learning Path is for game and graphics developers who want to evaluate Neural Frame Rate Upscaling (NFRU) in Unreal Engine using Arm ML Extensions for Vulkan.
+who_is_this_for: This Learning Path is for game and graphics developers who want to evaluate Neural Frame Rate Upsampling (NFRU) in Unreal Engine using Arm ML Extensions for Vulkan.
 
 learning_objectives:
     - Explain how NFRU generates intermediate frames for smoother motion.
-    - Enable the Arm neural graphics plugin in an Unreal Engine project.
+    - Enable the Arm Neural Graphics Plugin in an Unreal Engine project.
     - Inspect NFRU artifacts in fast camera, object, occlusion, and particle scenarios.
     - Tune NFRU quality and frame pacing with Unreal Engine console variables.
     - Analyze generated frames with RenderDoc for Arm GPUs.
