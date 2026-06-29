@@ -31,7 +31,7 @@ To create a VM based on the C4A instance type:
 
 4. Under **OS and Storage**, select **Change**. Choose an Arm64-based OS image. For this Learning Path, select **Ubuntu 24.04 LTS**.
 5. Change the size of the primary disk from 10 GB to 100 GB
-6. Click **Select** to confirm your OS choice.
+6. Choose **Select** to confirm your OS choice.
 7. Under **Networking**, enable **Allow HTTP traffic** and **Allow HTTPS traffic**.
 8. In the **Network tags** field, add `allow-tcp-8080` to allow Gerrit dashboard traffic.
 
