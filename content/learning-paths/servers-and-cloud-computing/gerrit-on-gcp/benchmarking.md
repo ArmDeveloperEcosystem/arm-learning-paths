@@ -27,7 +27,9 @@ chmod 755 *.sh
 sudo SYNTH_PROFILE=production_like REQUIRE_GERRIT_METRICS=true ./gerrit_perf_test.sh
 ```
 
-The benchmark script will run through some sample exercises that Gerrit supports and will capture performance data from those exercises and place them into a specified JSON file similar to the following (partially omitted for brevity):
+The benchmark script will run through some sample exercises that Gerrit supports and will capture performance data from those exercises.
+
+The script will then place the data into a specified JSON file similar to (partially omitted for brevity):
 
 ```json
 {
@@ -135,7 +137,7 @@ Host CPU pressure:
 
 Gerrit server-side correlation observations:
 
-![Graph showing correlations between various Gerrit server-side metrics such as GC pressure, cache performance, and queue depths in relation to client request latency.#center](images/gerrit-correlation.png "Gerrit server-side correlation findings")
+![Table showing correlations between various Gerrit server-side metrics such as GC pressure, cache performance, and queue depths in relation to client request latency.#center](images/gerrit-correlation.png "Gerrit server-side correlation findings")
 
 Basic server metrics:
 

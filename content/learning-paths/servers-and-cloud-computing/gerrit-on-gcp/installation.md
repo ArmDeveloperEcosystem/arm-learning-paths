@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Install Gerrit 
 
-Install and configure Gerrit Server on a Google Cloud Platform (GCP) Linux VM (Ubuntu 24.04 LTS-based VM). 
+Install and configure Gerrit Server on your Google Cloud Platform (GCP) Linux VM (Ubuntu 24.04 LTS-based VM). 
 
 To ensure a successful setup, follow each step in order and check the output after each command. By doing this, you catch issues early and confirm that Gerrit is installed and running correctly.
 
@@ -79,6 +79,6 @@ The output is similar to:
 
 ## What you've accomplished and what's next
 
-You've now installed and configured Gerrit on your Arm-based GCP C4A VM. 
+You've now installed and configured Gerrit on your Arm-based GCP C4A VM, and verified that Gerrit can accept connections.
 
 Next, you'll benchmark Gerrit performance on the VM. 

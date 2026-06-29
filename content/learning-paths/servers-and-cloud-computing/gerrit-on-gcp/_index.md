@@ -1,5 +1,5 @@
 ---
-title: Deploy Gerrit on Google Cloud Axion C4A instances
+title: Deploy Gerrit on a Google Cloud Axion C4A instance
 
 description: Learn how to install and configure Gerrit on Google Cloud Axion C4A Arm64 instances and benchmark its performance
 minutes_to_complete: 30
