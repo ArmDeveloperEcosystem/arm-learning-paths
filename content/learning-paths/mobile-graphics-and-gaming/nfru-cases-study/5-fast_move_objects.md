@@ -9,7 +9,7 @@ layout: learningpathall
 ## Fast object movement
 Fast-moving or teleported objects can exhibit trailing artifacts or duplicated shapes during frame interpolation.
 
-![Previous Current to Interpolated RT Issue#center](./images/fast_move_object/previous_current_to_InterpolatedRT_issue.gif "Previous Current to Interpolated RT Issue")
+![Previous Current to Interpolated RT Issue#center](./images/fast_move_object/previous_current_to_interpolated_rt_issue.gif "Previous Current to Interpolated RT Issue")
 
 NFRU attempts to synthesize intermediate frames between two rendered frames using motion vectors, optical flow, depth, and disocclusion masks. However, when a fast-moving object changes position significantly between frames, these signals can become ambiguous or incomplete. The algorithm may struggle to accurately determine where pixels should originate when motion is too large or when objects become newly visible or hidden.
 

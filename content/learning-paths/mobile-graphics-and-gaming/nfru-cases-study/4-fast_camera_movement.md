@@ -18,15 +18,15 @@ NFRU generates `InterpolatedRT` from two consecutive rendered frames: the previo
 
 The interpolated frame shows the generated scene produced between the two source frames. Use the comparison to confirm whether artifacts are visible during normal gameplay motion.
 
-![Interpolated NFRU frame from a fast camera movement scene, showing a corridor with visible edge artifacts near the screen boundaries#center](./images/fast_camera_movement/InterpolatedRT.png "Interpolated frame during fast camera movement")
+![Interpolated NFRU frame from a fast camera movement scene, showing a corridor with visible edge artifacts near the screen boundaries#center](./images/fast_camera_movement/interpolated_rt.png "Interpolated frame during fast camera movement")
 
 The first callout highlights a corner region where color separation and smearing appear along the outer edge of the frame. These artifacts can occur when newly exposed screen-space regions don't have enough reliable information from the previous frame.
 
-![Close-up of the upper-left screen corner in the interpolated frame, with an arrow highlighting color separation and edge smearing#center](./images/fast_camera_movement/InterpolatedRT_corner_artifact_1.png "Corner artifact during fast camera movement")
+![Close-up of the upper-left screen corner in the interpolated frame, with an arrow highlighting color separation and edge smearing#center](./images/fast_camera_movement/interpolated_rt_corner_artifact_1.png "Corner artifact during fast camera movement")
 
 The second callout highlights artifacts along the lower edge of the interpolated frame. Watch for this type of artifact when the camera pans or turns quickly across high-contrast geometry.
 
-![Close-up of the lower screen edge in the interpolated frame, with an arrow highlighting smearing and color mismatch near high-contrast geometry#center](./images/fast_camera_movement/InterpolatedRT_corner_artifact_2.png "Lower-edge artifact during fast camera movement")
+![Close-up of the lower screen edge in the interpolated frame, with an arrow highlighting smearing and color mismatch near high-contrast geometry#center](./images/fast_camera_movement/interpolated_rt_corner_artifact_2.png "Lower-edge artifact during fast camera movement")
 
 Use RenderDoc to inspect the `r_mv_holes_tm1` and `r_mv_holes_tp1` buffers. Here, `tm1` means time minus one (`t-1`), and `tp1` means time plus one (`t+1`). These buffers show where motion-vector reprojection has holes or invalid regions in the previous (`t-1`) and next (`t+1`) temporal sources. The hole masks reveal areas where motion history is unreliable, particularly around object silhouettes and screen edges. When the interpolation pass samples from these unreliable areas, it picks up mismatched foreground and background pixels, creating noticeable edge-line artifacts in the final image.
 
