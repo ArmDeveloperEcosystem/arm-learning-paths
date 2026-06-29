@@ -37,7 +37,7 @@ generated_summary_faq:
     You'll set up a single-node analytics stack on Google Cloud C4A virtual machines powered by Google Axion processors. First, you'll provision an `arm64` C4A instance, configure
     Google Cloud firewall rules for MinIO and Arrow Flight, and prepare a SUSE Linux Enterprise
     Server environment with Apache Arrow. Then, you'll integrate MinIO object storage and use Apache Arrow
-    to read and write Parquet and ORC datasets, highlighting predicate pushdown and column pruning
+    to read and write Parquet and ORC datasets, and explore predicate pushdown and column pruning
     in a practical workflow. By the end, you'll have a working setup that serves and moves columnar
     data with Arrow Flight and validates end-to-end data access using Arrow with MinIO on Arm-based
     infrastructure.
