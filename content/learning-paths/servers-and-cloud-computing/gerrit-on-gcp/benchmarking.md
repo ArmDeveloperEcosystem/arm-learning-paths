@@ -1,25 +1,24 @@
 ---
-title: Benchmark Gerrit
+title: Benchmark Gerrit on your Google Cloud Axion C4A virtual machine
+description: Run a benchmark script on your Google Cloud C4A Arm virtual machine to measure Gerrit throughput, latency, and resource usage.
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Overview
+## Download and install the benchmarking script
 
-This section guides you through benchmarking basic Gerrit performance on your Axion VM. The benchmark consists of a custom script that will exercise and time key Gerrit features/functions. 
+You'll use a script to benchmark Gerrit performance on your C4A virtual machine (VM). The script exercises and times key Gerrit features and functions. 
 
-## Download and Install the benchmarking script
-
-Clone the following repo into your VM:
+Clone the following repository into your VM:
 
 ```bash
 cd $HOME
 git clone https://github.com/DougAnsonAustinTx/gerrit_test
 ```
 
-## Run Benchmark
+## Run the benchmark script
 
 Run the benchmark:
 
@@ -29,7 +28,9 @@ chmod 755 *.sh
 sudo SYNTH_PROFILE=production_like REQUIRE_GERRIT_METRICS=true ./gerrit_perf_test.sh
 ```
 
-The benchmark script will run through some sample exercises that Gerrit supports and will capture performance data from those exercises and place them into a specified JSON file similar to this (partial omitted for brevity):
+The benchmark script runs through sample exercises that Gerrit supports and captures performance data from those exercises.
+
+The script then places the data into a specified JSON file similar to (partially omitted for brevity):
 
 ```json
 {
@@ -113,43 +114,38 @@ The benchmark script will run through some sample exercises that Gerrit supports
 }
 ```
 
-This JSON file can be processed to create a summary of the performance of Gerrit on our Axion C4A VM. 
+You can process this JSON file to create a summary of the performance of Gerrit on the Axion C4A VM. 
 
 ## Performance summary
 
-The benchmark run completed successfully on the production-like profile with Gerrit metrics enabled. It
-recorded 47,863 measured client operations over four 120-second steps, with 47,863 successes and zero failures.
-The benchmark gives a high-quality performance view: client latency, stepwise concurrency behavior, node
-CPU/memory/disk, and Gerrit-side JVM, GC, Jetty, cache, queue, Git, REST, NoteDB, and receive-commits metrics
-are all present:
+The benchmark run completed successfully on the production-like profile with Gerrit metrics enabled. It recorded 47,863 measured client operations over four 120-second steps, with 47,863 successes and zero failures.
 
-![Charts and graphs showing the Gerrit benchmark performance summary including operation counts, success rates, and latency metrics across the four 120-second test steps.#center](images/analysis.png "Gerrit Benchmark Summary")
+The benchmark gives a high-quality performance view: client latency, stepwise concurrency behavior, node CPU/memory/disk. Gerrit-side JVM, GC, Jetty, cache, queue, Git, REST, NoteDB, and receive-commits metrics are all present:
 
-Client-visible correctness is excellent: all 47,863 measured operations succeeded. REST query latency remains low
-with a p99 of 69 ms. Clone is the dominant pressure point at a p99 of 521 ms, and push remains sub-second at a p99 of 288 ms:
+![Charts and graphs showing the Gerrit benchmark performance summary including operation counts, success rates, and latency metrics across the four 120-second test steps.#center](images/analysis.png "Gerrit benchmark summary")
 
-![Performance metrics showing client-side operation summary with statistics for git_clone, git_push_refs_for, and rest_change_query operations, including latency percentiles and success rates.#center](images/client-summary.png "Client-side Operation Summary")
+All 47,863 measured client-side operations succeeded. REST query latency remains low with a p99 of 69 ms. Clone is the dominant pressure point at a p99 of 521 ms, and push remains sub-second at a p99 of 288 ms:
 
-The useful capacity signal is the flattening throughput curve after step 2. CPU is already near saturation in step 2, then
-stays around 99% in steps 3 and 4. Latency continues rising: clone p99 increases from 221 ms in step 2 to 550 ms in
-step 4, while aggregate throughput only rises from 103.3 to 108.4 ops/sec:
+![Performance metrics showing client-side operation summary with statistics for git_clone, git_push_refs_for, and rest_change_query operations, including latency percentiles and success rates.#center](images/client-summary.png "Client-side operation summary")
 
-![Graph showing throughput and latency trends across four concurrency steps, demonstrating how performance degrades as concurrency increases and CPU approaches saturation.#center](images/stepwise-summary.png "Stepwise Concurrency Behavior Summary")
+The useful capacity signal is the flattening throughput curve after step 2. CPU is already near saturation in step 2, then stays around 99% in steps 3 and 4. Latency continues rising: clone p99 increases from 221 ms in step 2 to 550 ms in step 4, while aggregate throughput only rises from 103.3 to 108.4 ops/sec:
 
-Host CPU pressure:
+![Graph showing throughput and latency trends across four concurrency steps, demonstrating how performance degrades as concurrency increases and CPU approaches saturation.#center](images/stepwise-summary.png "Stepwise concurrency behavior summary")
 
-![Chart displaying CPU usage metrics across the benchmark steps, showing how CPU pressure increases and stabilizes near saturation levels as concurrency increases.#center](images/cpu-pressure.png "CPU Pressure Summary")
+The following chart shows host CPU pressure:
 
-Gerrit server-side correlation observations:
+![Chart displaying CPU usage metrics across the benchmark steps, showing how CPU pressure increases and stabilizes near saturation levels as concurrency increases.#center](images/cpu-pressure.png "CPU pressure summary")
 
-![Graph showing correlations between various Gerrit server-side metrics such as GC pressure, cache performance, and queue depths in relation to client request latency.#center](images/gerrit-correlation.png "Gerrit Server-side Correlation Findings")
+The following table lists Gerrit server-side correlation observations:
 
-Basic Server Metrics:
+![Table showing correlations between various Gerrit server-side metrics such as GC pressure, cache performance, and queue depths in relation to client request latency.#center](images/gerrit-correlation.png "Gerrit server-side correlation findings")
 
-![Server metrics dashboard showing host resource utilization metrics including memory, disk I/O, and other system-level performance indicators during the benchmark run.#center](images/server-metrics.png "Basic Additional Server Metrics")
+The following table lists server metrics:
+
+![Server metrics dashboard showing host resource utilization metrics including memory, disk I/O, and other system-level performance indicators during the benchmark run.#center](images/server-metrics.png "Basic additional server metrics")
 
 ## What you've accomplished
 
-You have successfully deployed Gerrit on a Google Cloud C4A Axion Arm64 VM running Ubuntu 24.04 LTS, verified the web console, and measured its performance using a production-like benchmark profile. All operations completed with zero failures, and the results establish a practical capacity baseline for a single-node Gerrit deployment on Arm-based infrastructure.
+You've successfully deployed Gerrit on a Google Cloud C4A Axion Arm64 VM running Ubuntu 24.04 LTS, verified the web console, and measured its performance using a production-like benchmark profile. All operations completed with zero failures, and the results establish a practical capacity baseline for a single-node Gerrit deployment on Arm-based infrastructure.
 
-To build on this foundation, you can explore multi-node Gerrit deployments, tune JVM flags for the Neoverse-V2 core, or compare performance across different C4A instance sizes to find the right balance of cost and throughput for your team's workload.
+To build on this foundation, you can explore multi-node Gerrit deployments, tune JVM flags for the Neoverse-V2 core, or compare performance across different C4A instance sizes to find the right balance of cost and throughput for your workload.
