@@ -45,9 +45,9 @@ The Arm Performix desktop application supports the following host platforms:
 
 You also need a target system on which to profile your application or workload. The following target platforms are supported:
 
-* **Linux with Arm64 architecture**: Arm Linux target systems running Amazon Linux 2023, Ubuntu 22.04, or Ubuntu 24.04. TODO finalise this
-* **Windows with Arm64 architecture**: TODO???
-* **Linux with x64 architecture**: TODO???
+* **Linux with Arm64 architecture**: Full support for Amazon Linux 2023, Ubuntu 22.04, or Ubuntu 24.04
+* **Windows with Arm64 architecture**: Partial support - Code Hotspots recipe only
+* **Linux with x64 architecture**: Partial support - Code Hotspots recipe only
 
 ## How do I download and install Arm Performix?
 
