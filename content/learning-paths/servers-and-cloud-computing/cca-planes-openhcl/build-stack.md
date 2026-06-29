@@ -54,13 +54,16 @@ source setup.source_me
 
 This command creates a Python virtual environment, installs the Python packages needed by Shrinkwrap, and sets the `SHRINKWRAP_*` environment variables. The package installation step needs network access to Python package indexes unless the host already has a populated virtual environment.
 
-## Add the planes Shrinkwrap overlay
+## Add the planes Shrinkwrap overlays
 
-Before you build the stack, make sure that the planes overlay is available. The rest of this Learning Path depends on a published `planes.yaml` file:
+Before you build the stack, make sure that the planes overlays are available. The rest of this Learning Path depends on the published `cca-planes-lp.yaml` and `planes.yaml` files:
 
 ```console
+test -f config/cca-planes-lp.yaml
 test -f config/planes.yaml
 ```
+
+The `cca-planes-lp.yaml` overlay must contain the base CCA Learning Path filesystem and tooling changes from `cca-lp.yaml`, without the `kvmtool.yaml` layer. The `kvmtool.yaml` layer applies `config/lkvm.patch` before building `kvmtool`. That patch is incompatible with the planes-enabled `kvmtool` branch that this prototype uses.
 
 The planes overlay must configure the stack to:
 
@@ -70,24 +73,28 @@ The planes overlay must configure the stack to:
 - Enable Permission Indirection and Permission Overlay support in the FVP run parameters.
 
 {{% notice Note %}}
-This draft assumes that `planes.yaml` is published with the demo repository before the Learning Path is published. If `test -f config/planes.yaml` fails, stop here and see the publication readiness page.
+This draft assumes that `cca-planes-lp.yaml` and `planes.yaml` are published with the demo repository before the Learning Path is published. If either `test` command fails, stop here and see the publication readiness page.
 {{% /notice %}}
 
 If the overlay uses shell command substitution in a Shrinkwrap command, escape the dollar sign as `$$`. For example, use `$$(stat -c '%Y' ${param:sourcedir})` instead of `$(stat -c '%Y' ${param:sourcedir})`.
 
+{{% notice Warning %}}
+Testing on Ubuntu 24.04 showed that `--overlay cca-lp.yaml --overlay planes.yaml` fails while applying `config/lkvm.patch` to `net/uip/tcp.c` in the planes-enabled `kvmtool` branch. Shrinkwrap appends list values from later overlays, so adding another `kvmtool.prebuild` list in `planes.yaml` does not remove the inherited patch command. Use a planes-specific Learning Path overlay that excludes the `kvmtool.yaml` layer, or update the CCA development platform so the patch is skipped for the planes branch.
+{{% /notice %}}
+
 Validate the merged Shrinkwrap configuration before starting the full build:
 
 ```console
-shrinkwrap build cca-3world.yaml --overlay cca-lp.yaml --overlay planes.yaml \
+shrinkwrap build cca-3world.yaml --overlay cca-planes-lp.yaml --overlay planes.yaml \
     --btvar GUEST_ROOTFS='${artifact:BUILDROOT}' --dry-run
 ```
 
 The dry run prints the generated build script. If it reports a missing overlay, a malformed macro, or an unresolved repository setting, fix the overlay before you continue.
 
-Build the CCA stack with the base Learning Path overlay and the planes overlay:
+Build the CCA stack with the planes Learning Path overlay and the planes feature overlay:
 
 ```console
-shrinkwrap build cca-3world.yaml --overlay cca-lp.yaml --overlay planes.yaml \
+shrinkwrap build cca-3world.yaml --overlay cca-planes-lp.yaml --overlay planes.yaml \
     --btvar GUEST_ROOTFS='${artifact:BUILDROOT}'
 ```
 

@@ -13,8 +13,10 @@ layout: "learningpathall"
 This Learning Path is a draft. Complete the following tasks before publication:
 
 - Publish a planes-enabled `CCA-dev-platform` workflow or replace the source-build steps with a public prebuilt Docker image.
+- Publish `cca-planes-lp.yaml` or update the CCA development platform so the `config/lkvm.patch` prebuild step from `kvmtool.yaml` is skipped for the planes-enabled `kvmtool` branch.
 - Publish the `planes.yaml` Shrinkwrap overlay used by the demo.
 - Run `shrinkwrap build ... --dry-run` with the published overlay and fix any Shrinkwrap macro escaping issues.
+- Run a real Shrinkwrap build through the `kvmtool` phase and confirm that `config/lkvm.patch` is not applied to the planes-enabled branch.
 - Publish or identify the public OpenHCL Linux branch used for the plane 0 kernel.
 - Publish or identify the public OpenVMM/OpenHCL branch used for `simple_tmk` and `tmk_vmm`.
 - Confirm that the OpenVMM/OpenHCL branch is reachable from a clean host. The public upstream OpenVMM repository does not currently expose an obvious CCA planes branch for this draft.
