@@ -174,7 +174,7 @@ Wait while the installer copies the files.
 
 When the installation finishes, select **Close** to exit the installer.
 
-## How do I use Arm Performix
+## How do I use Arm Performix?
 
 For guidance on using Arm Performix, including connecting to your target, please refer to the [Arm Performix User Guide](https://developer.arm.com/documentation/110163/latest/).
 
@@ -183,9 +183,7 @@ For guidance on using Arm Performix, including connecting to your target, please
 To remove Arm Performix from your system, use the appropriate method for your platform:
 
 * For Windows, open **Settings** > **Apps**, find **Arm Performix**, and select **Uninstall**.
-
 * For macOS, drag the Arm Performix application from **Applications** to the **Trash**.
-
 * For Linux, remove the package:
 
 ```bash
