@@ -1,5 +1,5 @@
 ---
-title: Introduction
+title: AI Plank Tutor
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -22,6 +22,8 @@ The finished app has two main visual areas:
 - A live front-camera preview on the right.
 
 The app overlays a pose score and a short caption that matches the spoken coaching feedback.
+
+This Learning Path starts with a "shell" project with MediaPipe and camera integration mostly setup. If you wish to learn about that setup from an empty project, you could try another learning path, like [Build a Hands-Free Selfie Android Application with MediaPipe](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/build-android-selfie-app-using-mediapipe-multimodality/)
 
 ## App pipeline
 

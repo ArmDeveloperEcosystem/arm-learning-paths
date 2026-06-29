@@ -124,7 +124,7 @@ This is a callback from `PoseLandmarkerHelper` and sends the live landmarks onto
 
 ## Configure MediaPipe Pose Landmarker
 
-What happens between `detectPose()` and `onResults()`? Open `landmarker/PoseLandmarkerHelper.kt`.
+What happens between `detectPose()` and `onResults()`? Open `ui/landmarker/PoseLandmarkerHelper.kt`.
 
 The starter file already contains the MediaPipe imports, model path, confidence values, and the `LandmarkerListener` interface for the callbacks to `MainActivity`.
 
