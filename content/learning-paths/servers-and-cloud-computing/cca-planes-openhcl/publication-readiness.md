@@ -95,6 +95,11 @@ while running `/virt/init`. With the disk argument present, plane 0 Linux
 detected `vda1` and `vda2`, mounted `/dev/vda2` as ext4, ran `/sbin/init`, and
 reached the login prompt.
 
+Plane 0 login as `root` was tested. The documented 9P mount command mounted
+`cca_mount` on `/root/mount`, the hugetlbfs command mounted `none` on
+`/root/huge` with `pagesize=32M`, and `simple_tmk` and `tmk_vmm` were visible
+through the 9P mount.
+
 ## Optional Docker flow
 
 If the final demo is packaged as a Docker image, replace the build page with a shorter setup flow:
