@@ -17,7 +17,7 @@ sudo apt update
 sudo apt upgrade
 sudo apt install build-essential cmake ninja-build python3-venv ccache git \
     parted e2fsprogs docker.io netcat-openbsd telnet net-tools docker-buildx \
-    flex libssl-dev gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
+    curl flex libssl-dev gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
 ```
 
 These commands require `sudo` access. If you are using a shared host where you do not have passwordless `sudo`, ask the administrator to install the packages or use a host where they are already
@@ -145,11 +145,22 @@ git clone --branch cca-support \
 cd openvmm
 ```
 
-Install the Rust targets used by the test microkernel and the VMM:
+Install Rust 1.85.0 with `rustup`. The OpenVMM prototype branch is validated
+with this Rust toolchain:
 
 ```console
-rustup target add aarch64-unknown-linux-gnu
-rustup target add aarch64-unknown-none
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | \
+    sh -s -- --default-toolchain=1.85.0 -y
+source "$HOME/.cargo/env"
+```
+
+Install the Rust source component and the targets used by the test microkernel
+and the VMM:
+
+```console
+rustup component add rust-src --toolchain 1.85.0
+rustup target add aarch64-unknown-linux-gnu --toolchain 1.85.0
+rustup target add aarch64-unknown-none --toolchain 1.85.0
 ```
 
 Build the binaries:
@@ -157,8 +168,10 @@ Build the binaries:
 ```console
 unset ARCH
 unset CROSS_COMPILE
-RUSTC_BOOTSTRAP=1 cargo build -p simple_tmk --config openhcl/minimal_rt/aarch64-config.toml
-RUSTC_BOOTSTRAP=1 cargo build -p tmk_vmm --target aarch64-unknown-linux-gnu
+RUSTC_BOOTSTRAP=1 cargo +1.85.0 build -p simple_tmk \
+    --config openhcl/minimal_rt/aarch64-config.toml
+RUSTC_BOOTSTRAP=1 cargo +1.85.0 build -p tmk_vmm \
+    --target aarch64-unknown-linux-gnu
 ```
 
 ## Add the plane 0 kernel and test binaries to the root filesystem
@@ -178,22 +191,29 @@ $TOOLS_PATH/e2fsck -fp rootfs.ext2
 $TOOLS_PATH/resize2fs rootfs.ext2 1G
 ```
 
-Mount the root filesystem:
+Create `/cca` in the root filesystem image:
 
 ```console
-sudo mkdir -p mnt
-sudo mount rootfs.ext2 mnt
-sudo mkdir -p mnt/cca
+$TOOLS_PATH/debugfs -w -R "mkdir /cca" rootfs.ext2
 ```
 
 Copy the files needed by plane 0:
 
 ```console
-sudo cp guest-disk.img KVMTOOL_EFI.fd Image lkvm mnt/cca/
-sudo cp "$PLANE0_IMAGE" mnt/cca/Image_ohcl
-sudo cp "$SIMPLE_TMK" mnt/cca/
-sudo cp "$TMK_VMM" mnt/cca/
-sudo umount mnt
+$TOOLS_PATH/debugfs -w -R "write guest-disk.img /cca/guest-disk.img" rootfs.ext2
+$TOOLS_PATH/debugfs -w -R "write KVMTOOL_EFI.fd /cca/KVMTOOL_EFI.fd" rootfs.ext2
+$TOOLS_PATH/debugfs -w -R "write Image /cca/Image" rootfs.ext2
+$TOOLS_PATH/debugfs -w -R "write lkvm /cca/lkvm" rootfs.ext2
+$TOOLS_PATH/debugfs -w -R "write $PLANE0_IMAGE /cca/Image_ohcl" rootfs.ext2
+$TOOLS_PATH/debugfs -w -R "write $SIMPLE_TMK /cca/simple_tmk" rootfs.ext2
+$TOOLS_PATH/debugfs -w -R "write $TMK_VMM /cca/tmk_vmm" rootfs.ext2
+```
+
+Check that the files were copied and that the root filesystem is consistent:
+
+```console
+$TOOLS_PATH/debugfs -R "ls -l /cca" rootfs.ext2
+$TOOLS_PATH/e2fsck -fn rootfs.ext2
 ```
 
 ## What you've accomplished

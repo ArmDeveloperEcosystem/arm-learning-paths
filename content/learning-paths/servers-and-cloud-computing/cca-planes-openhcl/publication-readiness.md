@@ -62,8 +62,14 @@ shrinkwrap build cca-3world.yaml --overlay cca-planes-lp.yaml --overlay planes.y
 
 The build completed the `buildroot` and `guest-disk` artifact stages.
 
-The internal OpenHCL Linux source resolved branch `planes` to commit `b407f1ab33b2092f054cf3d5087ee6933a80d5f4`. The internal OpenVMM/OpenHCL source resolved branch `cca-support` to
-commit `e09ae82bb0b9ea55ec52c490e000539088dad8ab`.
+The internal OpenHCL Linux source resolved branch `planes` to commit `b407f1ab33b2092f054cf3d5087ee6933a80d5f4`. The plane 0 kernel build completed and produced
+`arch/arm64/boot/Image`.
+
+The internal OpenVMM/OpenHCL source resolved branch `cca-support` to commit `e09ae82bb0b9ea55ec52c490e000539088dad8ab`. The `simple_tmk` and `tmk_vmm` builds completed with Rust 1.85.0,
+`rust-src`, `aarch64-unknown-linux-gnu`, and `aarch64-unknown-none`.
+
+The root filesystem resize completed from 256 MiB to 1 GiB. The copy step completed with `debugfs`, and `e2fsck -fn rootfs.ext2` passed after copying the plane 0 files into `/cca`. The `tp-desktop`
+test host did not have passwordless `sudo`, so the Learning Path uses `debugfs` instead of mounting the root filesystem image.
 
 ## Optional Docker flow
 
