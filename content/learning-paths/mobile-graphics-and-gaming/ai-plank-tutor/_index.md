@@ -1,7 +1,7 @@
 ---
-title: Build an on-device AI plank tutor on Android
+title: Build an on-device AI Plank Tutor on Android
 
-minutes_to_complete: 60
+minutes_to_complete: 90
 
 who_is_this_for: This Learning Path is for Android developers who want to explore creating an ML/GenAI pipeline, including camera input, local LLM inference, and speech.
 

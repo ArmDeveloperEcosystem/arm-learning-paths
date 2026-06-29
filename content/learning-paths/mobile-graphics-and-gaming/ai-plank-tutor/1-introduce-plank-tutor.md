@@ -12,7 +12,7 @@ In this Learning Path, you will build a simple on-device AI fitness tutor for An
 
 The app watches a learner hold a plank, compares their body position with a stored instructor reference, asks a local LLM for one short correction, and speaks the correction using Android text-to-speech.
 
-This project is based on the [AI Yoga Tutor](https://developer.arm.com/community/arm-community-blogs/b/ai-blog/posts/ai-yoga-tutor) prototype. The Learning Path keeps the same core pipeline, but narrows the app to one static pose so you can focus on how a pipeline that includes Android camera, pose detector, local LLM, and speech output fits together.
+This project is based on the [AI Yoga Tutor](https://developer.arm.com/community/arm-community-blogs/b/ai-blog/posts/ai-yoga-tutor) demo. The Learning Path keeps the same core pipeline, but narrows the app to one static pose so you can focus on how a pipeline that includes Android camera, pose detector, local LLM, and speech output fits together.
 
 ![AI Plank Tutor final UI alt-text#center](screenshot.jpg "Figure 1: AI Plank Tutor showing the instructor plank image, live camera view, score, and spoken correction caption.")
 
@@ -23,16 +23,16 @@ The finished app has two main visual areas:
 
 The app overlays a pose score and a short caption that matches the spoken coaching feedback.
 
-This Learning Path starts with a "shell" project with MediaPipe and camera integration mostly setup. If you wish to learn about that setup from an empty project, you could try another learning path, like [Build a Hands-Free Selfie Android Application with MediaPipe](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/build-android-selfie-app-using-mediapipe-multimodality/)
+This Learning Path starts with a "shell" project with MediaPipe and camera integration mostly setup. If you wish to learn about that setup from an empty project, you could try another Learning Path - [Build a Hands-Free Selfie Android Application with MediaPipe](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/build-android-selfie-app-using-mediapipe-multimodality/) is a good example.
 
 ## App pipeline
 
 The app uses a small pipeline of on-device components:
 
 ```text
-reference image and landmarks
+reference image and camera view
         -> CameraX live frames
-        -> Pose Landmarker
+        -> Pose landmarks
         -> joint-angle scoring
         -> compact text prompt
         -> Arm AI Chat + LLM
