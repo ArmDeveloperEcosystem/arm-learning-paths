@@ -34,7 +34,7 @@ generated_summary_faq:
     You'll deploy Gerrit on an Ubuntu 24.04 LTS `arm64` virtual
     machine (VM) in Google Cloud using the C4A instance family powered by Google Axion processors (Arm
     Neoverse-V2). First, you'll enable external access by creating a Google Cloud firewall
-    rule for TCP port 8080. Then, you'll provision a `c4a-standard-4` VM, and install. Gerrit with the required
+    rule for TCP port 8080. Then, you'll provision a `c4a-standard-4` VM, and install Gerrit with the required
     packages. You'll confirm a successful setup by loading the Gerrit web console, then establish
     a baseline by running a benchmarking script that exercises common Gerrit operations.
     The result is a functional Arm-based Gerrit deployment on Google Cloud with initial performance
