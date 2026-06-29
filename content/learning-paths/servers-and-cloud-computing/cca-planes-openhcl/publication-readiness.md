@@ -12,18 +12,58 @@ layout: "learningpathall"
 
 This Learning Path is a draft. Complete the following tasks before publication:
 
-- Publish a planes-enabled `CCA-dev-platform` workflow or replace the source-build steps with a public prebuilt Docker image.
-- Publish `cca-planes-lp.yaml` or update the CCA development platform so the `config/lkvm.patch` prebuild step from `kvmtool.yaml` is skipped for the planes-enabled `kvmtool` branch.
-- Publish the `planes.yaml` Shrinkwrap overlay used by the demo.
+- Publish `https://github.com/EllieRoe/CCA-dev-platform.git` with unauthenticated HTTPS clone access, or replace the source-build steps with a public prebuilt Docker image.
+- Upstream `cca-planes-lp.yaml` and `planes.yaml` into the `planes` branch, or keep the Learning Path steps that generate those files locally.
 - Run `shrinkwrap build ... --dry-run` with the published overlay and fix any Shrinkwrap macro escaping issues.
 - Run a real Shrinkwrap build through the `kvmtool` phase and confirm that `config/lkvm.patch` is not applied to the planes-enabled branch.
-- Publish or identify the public OpenHCL Linux branch used for the plane 0 kernel.
-- Publish or identify the public OpenVMM/OpenHCL branch used for `simple_tmk` and `tmk_vmm`.
+- Publish or identify the public OpenHCL Linux branch used for the plane 0 kernel. The current prototype uses the internal `openhcl-linux` `planes` branch.
+- Publish or identify the public OpenVMM/OpenHCL branch used for `simple_tmk` and `tmk_vmm`. The current prototype uses the internal `openhcl` `cca-support` branch.
 - Confirm that the OpenVMM/OpenHCL branch is reachable from a clean host. The public upstream OpenVMM repository does not currently expose an obvious CCA planes branch for this draft.
-- Replace placeholder repository URLs and branch names with public URLs.
+- Replace internal prototype repository URLs and branch names with public URLs.
 - Capture and add the exact successful `tmk_vmm` output.
 - Test the full flow on a clean Ubuntu 24.04 LTS host.
 - Remove `draft: true` from `_index.md` after the content is runnable from public inputs.
+
+## Tested state
+
+Testing on 29 June 2026 used Ubuntu 24.04.4 LTS and the `planes` branch of `CCA-dev-platform`.
+
+The HTTPS clone command prompted for GitHub credentials:
+
+```console
+git clone --branch planes https://github.com/EllieRoe/CCA-dev-platform.git CCA-dev-platform
+```
+
+SSH access to the same repository reached commit `a7c5ec548bbf148ace0bea889cba92ef33c33f76` on the `planes` branch.
+
+The required planes overlays were absent at that commit, so the Learning Path now creates them locally from the prototype configuration:
+
+```console
+test -f config/cca-planes-lp.yaml
+test -f config/planes.yaml
+```
+
+After creating those overlays, the documented Shrinkwrap dry run generated a build script:
+
+```console
+shrinkwrap build cca-3world.yaml --overlay cca-planes-lp.yaml --overlay planes.yaml \
+    --btvar GUEST_ROOTFS='${artifact:BUILDROOT}' --dry-run
+```
+
+The generated script selected `linux-cca` branch `cca/planes/rfc-v1`, `kvmtool-cca` branch `cca/planes/rfc-v1`, TF-RMM commit `9a98e8fcb1645b9917b2abd79212e6e3062e09fd`, and TF-A
+parameter `GIC_ENABLE_V4_EXTN=1`. The generated script did not contain `config/lkvm.patch`.
+
+The full Shrinkwrap build completed successfully with the generated overlays:
+
+```console
+shrinkwrap build cca-3world.yaml --overlay cca-planes-lp.yaml --overlay planes.yaml \
+    --btvar GUEST_ROOTFS='${artifact:BUILDROOT}'
+```
+
+The build completed the `buildroot` and `guest-disk` artifact stages.
+
+The internal OpenHCL Linux source resolved branch `planes` to commit `b407f1ab33b2092f054cf3d5087ee6933a80d5f4`. The internal OpenVMM/OpenHCL source resolved branch `cca-support` to
+commit `e09ae82bb0b9ea55ec52c490e000539088dad8ab`.
 
 ## Optional Docker flow
 
