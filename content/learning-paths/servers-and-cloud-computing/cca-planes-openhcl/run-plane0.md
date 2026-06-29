@@ -10,10 +10,13 @@ layout: "learningpathall"
 
 ## Run the FVP
 
+Make sure that `FVP_Base_RevC-2xAEMvA` is available in your `PATH`.
+
 Start the CCA stack on the FVP:
 
 ```console
-shrinkwrap run cca-3world.yaml --rtvar ROOTFS=$(realpath "$SHRINKWRAP_PACKAGE/cca-3world/rootfs.ext2")
+shrinkwrap run cca-3world.yaml --overlay cca-planes-lp.yaml --overlay planes.yaml \
+    --rtvar ROOTFS=$(realpath "$SHRINKWRAP_PACKAGE/cca-3world/rootfs.ext2")
 ```
 
 Log in to the CCA host as `root`. No password is required.
@@ -70,4 +73,3 @@ The output should show both files:
 ## What you've accomplished
 
 You have booted plane 0 Linux inside a CCA Realm and prepared the shared filesystem and huge page needed by the auxiliary plane test.
-

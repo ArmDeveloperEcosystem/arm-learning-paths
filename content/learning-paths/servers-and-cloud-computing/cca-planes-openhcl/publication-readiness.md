@@ -13,7 +13,8 @@ layout: "learningpathall"
 This Learning Path is a draft. Complete the following tasks before publication:
 
 - Publish `https://github.com/EllieRoe/CCA-dev-platform.git` with unauthenticated HTTPS clone access, or replace the source-build steps with a public prebuilt Docker image.
-- Push CCA-dev-platform commit `401dfd13882e994df38fa741266b14ccda2d407c` or an equivalent commit that provides `config/cca-planes-lp.yaml` and `config/planes.yaml` on the `planes` branch.
+- Push CCA-dev-platform commit `70c5e946294e81da8fbe4d9a4bc079526e31925e` or an equivalent commit that provides `config/cca-planes-lp.yaml` and `config/planes.yaml` on the `planes` branch, including the MEC FVP run
+  parameters required by `ENABLE_FEAT_MEC=1`.
 - Run `shrinkwrap build ... --dry-run` with the published overlay and fix any Shrinkwrap macro escaping issues.
 - Run a real Shrinkwrap build through the `kvmtool` phase and confirm that `config/lkvm.patch` is not applied to the planes-enabled branch.
 - Publish or identify the public OpenHCL Linux branch used for the plane 0 kernel. The current prototype uses the internal `openhcl-linux` `planes` branch.
@@ -36,7 +37,9 @@ git clone --branch planes https://github.com/EllieRoe/CCA-dev-platform.git CCA-d
 
 SSH access to the same repository initially reached commit `a7c5ec548bbf148ace0bea889cba92ef33c33f76` on the `planes` branch.
 
-The required planes overlays were absent at that commit. CCA-dev-platform commit `401dfd13882e994df38fa741266b14ccda2d407c` adds the overlays:
+The required planes overlays were absent at that commit. CCA-dev-platform commit `401dfd13882e994df38fa741266b14ccda2d407c` adds the overlays, and commit
+`70c5e946294e81da8fbe4d9a4bc079526e31925e` adds the MEC FVP run
+parameters required to boot the TF-A build:
 
 ```console
 test -f config/cca-planes-lp.yaml
@@ -70,6 +73,10 @@ The internal OpenVMM/OpenHCL source resolved branch `cca-support` to commit `e09
 
 The root filesystem resize completed from 256 MiB to 1 GiB. The copy step completed with `debugfs`, and `e2fsck -fn rootfs.ext2` passed after copying the plane 0 files into `/cca`. The `tp-desktop`
 test host did not have passwordless `sudo`, so the Learning Path uses `debugfs` instead of mounting the root filesystem image.
+
+The FVP boot test used FVP `FVP_Base_RevC_AEMvA_11.31_28` from the existing `armlimited/cca-learning-path:cca-simulation-kitten-1-x86_64` Docker image because the model was not installed in the
+`tp-desktop` host `PATH`. The first boot attempt failed in BL31 with `feat_mec not supported by the PE`. After adding the MEC FVP run parameters to `cca-planes-lp.yaml` and running
+`shrinkwrap run` with both overlays, the FVP reached the Linux login prompt.
 
 ## Optional Docker flow
 
