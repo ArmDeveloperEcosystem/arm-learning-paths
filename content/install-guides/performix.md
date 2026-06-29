@@ -174,9 +174,11 @@ Wait while the installer copies the files.
 
 When the installation finishes, select **Close** to exit the installer.
 
-## How do I use Arm Performix?
+## What comes next after installing Arm Performix?
 
-For guidance on using Arm Performix, including connecting to your target, please refer to the [Arm Performix User Guide](https://developer.arm.com/documentation/110163/latest/).
+After completing these installation steps, you can simply launch the GUI or CLI to get started.
+
+For further guidance on using Arm Performix, including connecting to your target for the first time or setting up the MCP server to use Arm Performix with an AI agent, please refer to the [Arm Performix User Guide](https://developer.arm.com/documentation/110163/latest/).
 
 ## How do I uninstall Arm Performix?
 
