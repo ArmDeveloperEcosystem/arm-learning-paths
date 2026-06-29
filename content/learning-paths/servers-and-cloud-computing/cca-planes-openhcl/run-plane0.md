@@ -29,12 +29,13 @@ Change to the directory that contains the CCA demo files:
 cd /cca
 ```
 
-Start the Realm with the plane 0 kernel, 9P sharing, and a 32 MB huge page for the auxiliary plane payload:
+Start the Realm with the plane 0 kernel, guest root disk, 9P sharing, and a
+32 MB huge page for the auxiliary plane payload:
 
 ```console
 ./lkvm run --realm --disable-sve --irqchip=gicv3-its \
     -c 1 -m 512 --no-pvtime --force-pci --console virtio \
-    --kernel /cca/Image_ohcl --9p /cca/,cca_mount \
+    --kernel /cca/Image_ohcl --disk /cca/guest-disk.img --9p /cca/,cca_mount \
     -p "console=hvc0 root=/dev/vda2 hugepagesz=32M hugepages=1" \
     --measurement-algo=sha256 --restricted_mem
 ```

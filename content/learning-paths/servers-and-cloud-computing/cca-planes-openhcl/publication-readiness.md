@@ -13,8 +13,11 @@ layout: "learningpathall"
 This Learning Path is a draft. Complete the following tasks before publication:
 
 - Publish `https://github.com/EllieRoe/CCA-dev-platform.git` with unauthenticated HTTPS clone access, or replace the source-build steps with a public prebuilt Docker image.
-- Push CCA-dev-platform commit `70c5e946294e81da8fbe4d9a4bc079526e31925e` or an equivalent commit that provides `config/cca-planes-lp.yaml` and `config/planes.yaml` on the `planes` branch, including the MEC FVP run
-  parameters required by `ENABLE_FEAT_MEC=1`.
+- Push the CCA-dev-platform `planes` branch through commit
+  `edfca45414f8ea0a90f08ff9d9cee99b85c8e3e0`, or an equivalent commit that
+  provides `config/cca-planes-lp.yaml` and `config/planes.yaml`, including the
+  MEC FVP run parameters required by `ENABLE_FEAT_MEC=1` and
+  `RMM_V1_COMPAT=1` for the pinned TF-RMM revision.
 - Run `shrinkwrap build ... --dry-run` with the published overlay and fix any Shrinkwrap macro escaping issues.
 - Run a real Shrinkwrap build through the `kvmtool` phase and confirm that `config/lkvm.patch` is not applied to the planes-enabled branch.
 - Publish or identify the public OpenHCL Linux branch used for the plane 0 kernel. The current prototype uses the internal `openhcl-linux` `planes` branch.
@@ -37,9 +40,12 @@ git clone --branch planes https://github.com/EllieRoe/CCA-dev-platform.git CCA-d
 
 SSH access to the same repository initially reached commit `a7c5ec548bbf148ace0bea889cba92ef33c33f76` on the `planes` branch.
 
-The required planes overlays were absent at that commit. CCA-dev-platform commit `401dfd13882e994df38fa741266b14ccda2d407c` adds the overlays, and commit
-`70c5e946294e81da8fbe4d9a4bc079526e31925e` adds the MEC FVP run
-parameters required to boot the TF-A build:
+The required planes overlays were absent at that commit. CCA-dev-platform commit
+`401dfd13882e994df38fa741266b14ccda2d407c` adds the overlays, commit
+`70c5e946294e81da8fbe4d9a4bc079526e31925e` adds the MEC FVP run parameters
+required to boot the TF-A build, and commit
+`edfca45414f8ea0a90f08ff9d9cee99b85c8e3e0` enables `RMM_V1_COMPAT=1` for the
+pinned TF-RMM revision:
 
 ```console
 test -f config/cca-planes-lp.yaml
@@ -77,6 +83,17 @@ test host did not have passwordless `sudo`, so the Learning Path uses `debugfs` 
 The FVP boot test used FVP `FVP_Base_RevC_AEMvA_11.31_28` from the existing `armlimited/cca-learning-path:cca-simulation-kitten-1-x86_64` Docker image because the model was not installed in the
 `tp-desktop` host `PATH`. The first boot attempt failed in BL31 with `feat_mec not supported by the PE`. After adding the MEC FVP run parameters to `cca-planes-lp.yaml` and running
 `shrinkwrap run` with both overlays, the FVP reached the Linux login prompt.
+
+The first Realm start attempt failed before the Realm launched because BL31
+logged `RMM init failed: -2`, and the host kernel did not report an RMI ABI.
+After enabling `RMM_V1_COMPAT=1`, the host kernel reported
+`RMI ABI version 1.1` and kvmtool started the Realm.
+
+The Realm command was tested with `--disk /cca/guest-disk.img`. Without the
+disk, plane 0 Linux mounted the 9P share as the root filesystem and panicked
+while running `/virt/init`. With the disk argument present, plane 0 Linux
+detected `vda1` and `vda2`, mounted `/dev/vda2` as ext4, ran `/sbin/init`, and
+reached the login prompt.
 
 ## Optional Docker flow
 
