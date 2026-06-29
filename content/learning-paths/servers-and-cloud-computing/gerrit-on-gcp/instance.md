@@ -7,9 +7,9 @@ weight: 4
 layout: learningpathall
 ---
 
-## Create a Google Axion C4A Arm virtual machine 
+## Create a Google Cloud C4A Arm-based virtual machine 
 
-Provision a Google Axion C4A Arm virtual machine (VM) on Google Cloud Platform (GCP) using the `c4a-standard-4` machine type (4 vCPUs, 16 GB memory) in the Google Cloud console.  
+Provision a C4A Arm-based virtual machine (VM) on Google Cloud Platform (GCP) using the `c4a-standard-4` machine type (4 vCPUs, 16 GB memory) in the Google Cloud console.  
 
 {{% notice Note %}}
 For support on GCP setup, see the Learning Path [Getting started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
@@ -19,14 +19,14 @@ For support on GCP setup, see the Learning Path [Getting started with Google Clo
 
 To create a VM based on the C4A instance type:
 
-1. Navigate to the [Google Cloud Console](https://console.cloud.google.com/).
+1. Navigate to the [Google Cloud console](https://console.cloud.google.com/).
 2. Go to **Compute Engine > VM Instances** and select **Create Instance**. 
 3. Under **Machine configuration**:
    - Populate fields such as **Instance name**, **Region**, and **Zone**.
    - Set **Series** to `C4A`.
    - Select `c4a-standard-4` for machine type.
 
-![Google Cloud Console interface showing the Create Instance page with Machine configuration section. Series is set to C4A and machine type shows c4a-standard-4 selected. The dialog displays configuration options for CPU, memory, and other VM settings.#center](images/gcp-vm.png "Creating a Google Axion C4A Arm virtual machine in Google Cloud Console")
+![Google Cloud console interface showing the Create Instance page with Machine configuration section. Series is set to C4A and machine type shows c4a-standard-4 selected. The dialog displays configuration options for CPU, memory, and other VM settings.#center](images/gcp-vm.png "Creating a C4A Arm-based virtual machine in Google Cloud console")
 
 
 4. Under **OS and Storage**, select **Change**. Choose an Arm64-based OS image. For this Learning Path, select **Ubuntu 24.04 LTS**.

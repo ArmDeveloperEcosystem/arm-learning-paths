@@ -22,10 +22,10 @@ Gerrit is an open-source, web-based code review system for Git repositories that
 
 To learn more about how Gerrit fits into a development workflow and how to review, upload, and manage changes, start with the official Gerrit product overview and user guide.
 
-There is also a [Basic Gerrit Walkthrough — For GitHub Users](https://gerrit-review.googlesource.com/Documentation/intro-gerrit-walkthrough-github.html) which explains the core principles of code review in Gerrit compared to pull requests. 
+There's also a [Basic Gerrit Walkthrough — For GitHub Users](https://gerrit-review.googlesource.com/Documentation/intro-gerrit-walkthrough-github.html) which explains the core principles of code review in Gerrit compared to pull requests. 
 
 ## What you've learned and what's next
 
 You've now learned about Gerrit and the Google Axion C4A instance family that you'll use for benchmarking. 
 
-Next, you'll create a firewall rule on Google Cloud Platform that you'll use to make your Gerrit deployment accessible. 
+Next, you'll create a firewall rule on Google Cloud Platform to make your Gerrit deployment accessible. 

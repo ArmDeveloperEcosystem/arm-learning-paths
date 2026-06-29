@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Download and install the benchmarking script
 
-You'll use a script to benchmark Gerrit performance on your Axion virtual machine (VM). The script exercises and times key Gerrit features and functions. 
+You'll use a script to benchmark Gerrit performance on your C4A virtual machine (VM). The script exercises and times key Gerrit features and functions. 
 
 Clone the following repository into your VM:
 
