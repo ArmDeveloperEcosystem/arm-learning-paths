@@ -24,7 +24,8 @@ This Learning Path is a draft. Complete the following tasks before publication:
 - Publish or identify the public OpenVMM/OpenHCL branch used for `simple_tmk` and `tmk_vmm`. The current prototype uses the internal `openhcl` `cca-support` branch.
 - Confirm that the OpenVMM/OpenHCL branch is reachable from a clean host. The public upstream OpenVMM repository does not currently expose an obvious CCA planes branch for this draft.
 - Replace internal prototype repository URLs and branch names with public URLs.
-- Capture and add the exact successful `tmk_vmm` output.
+- Replace the captured internal `tmk_vmm` output with the final public demo
+  output, or remove the post-test CCA register-read panic from the prototype.
 - Test the full flow on a clean Ubuntu 24.04 LTS host.
 - Remove `draft: true` from `_index.md` after the content is runnable from public inputs.
 
@@ -99,6 +100,14 @@ Plane 0 login as `root` was tested. The documented 9P mount command mounted
 `cca_mount` on `/root/mount`, the hugetlbfs command mounted `none` on
 `/root/huge` with `pagesize=32M`, and `simple_tmk` and `tmk_vmm` were visible
 through the 9P mount.
+
+The `tmk_vmm` command was tested from `/root/mount` with the CCA backend and
+`simple_tmk`. The log showed the plane 1 memory permission setup, multiple
+`rsi_plane_enter` calls, `tmk: hello world`, and `tmk_vmm::run: test complete`.
+The shell reported exit code 0. The internal `cca-support` branch also emitted
+a post-test Rust panic from `openhcl/virt_mshv_vtl/src/processor/cca/mod.rs`
+line 386, where the CCA `registers()` accessor is still implemented as
+`todo!()`.
 
 ## Optional Docker flow
 

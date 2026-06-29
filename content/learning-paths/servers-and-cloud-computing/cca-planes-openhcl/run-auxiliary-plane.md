@@ -20,18 +20,31 @@ export RUST_BACKTRACE=1
 
 The VMM prepares memory for the auxiliary plane, asks the plane 0 kernel to set the required permissions, and enters the test microkernel.
 
-{{% notice Note %}}
-The exact success output must be captured from the final public demo build. Replace this draft note with the final expected output before publication.
-{{% /notice %}}
+The output is similar to:
+
+```output
+mshv_rsi_set_mem_perm: plane=1, base_addr=0x9a000000, top_addr=0x9c000000
+rsi_plane_enter: plane=1
+INFO tmk: hello world
+rsi_plane_enter: plane=1
+INFO tmk_vmm::run: test complete
+```
 
 ## Validate the result
 
 Confirm these conditions before treating the run as successful:
 
-- `tmk_vmm` starts without a Rust panic.
 - The OpenHCL CCA backend selects the `cca` hypervisor path.
 - The test microkernel reaches its success path.
+- `tmk_vmm` prints `test complete`.
 - Control returns to plane 0 after the auxiliary plane exits.
+
+{{% notice Note %}}
+The internal WIP branch tested for this draft printed `test complete` and
+returned exit code 0, then an unnamed thread emitted a Rust panic from an
+unimplemented CCA register-read path. Replace this note with the final expected
+output before publication.
+{{% /notice %}}
 
 If the command fails before entering the auxiliary plane, check that `/root/huge` is mounted with 32 MB pages and that the `hugepagesz=32M hugepages=1` kernel parameters were passed to plane 0 Linux.
 
@@ -54,4 +67,3 @@ poweroff
 ## What you've accomplished
 
 You have run the test VMM in plane 0 and used it to start a test microkernel in an auxiliary plane.
-
