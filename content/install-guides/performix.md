@@ -116,9 +116,14 @@ sudo apt update
 
 Install the package:
 
-```bash
-sudo dpkg -i ArmPerformix-linux-arm64.deb 
-```
+{{< tabpane code=true >}}
+{{< tab header="Arm64" >}}
+sudo dpkg -i ArmPerformix-linux-arm64.deb
+{{< /tab >}}
+{{< tab header="x64" >}}
+sudo dpkg -i ArmPerformix-linux-amd64.deb
+{{< /tab >}}
+{{< /tabpane >}}
 
 The `dpkg` command may report missing dependency errors. Run the following command to automatically fetch and install any missing dependencies:
 
