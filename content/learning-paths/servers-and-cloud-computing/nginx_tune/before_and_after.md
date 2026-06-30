@@ -1,5 +1,5 @@
 ---
-title: Measure the impact of NGINX tuning
+title: Measure the impact of NGINX tuning on Arm
 description: Learn how to approach NGINX performance tuning as a measurement-driven process and compare baseline results with tuned results.
 weight: 2
 layout: "learningpathall"

@@ -1,5 +1,5 @@
 ---
-title: Test NGINX optimizations
+title: Test NGINX optimizations on Arm
 description: Build wrk and run repeatable load tests against NGINX workloads on Arm-based platforms to compare tuning results.
 weight: 6
 layout: "learningpathall"

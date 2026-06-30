@@ -1,5 +1,5 @@
 ---
-title: Tune an NGINX static file server
+title: Tune an NGINX static file server for performance on Arm
 description: Tune top-level NGINX and static file server directives for Arm-based platforms so you can improve connection handling, file serving, and TLS performance.
 weight: 4
 layout: "learningpathall"
