@@ -1,5 +1,5 @@
 ---
-title: "Measure NGINX tuning impact"
+title: Measure the impact of NGINX tuning
 description: Learn how to approach NGINX performance tuning as a measurement-driven process and compare baseline results with tuned results.
 weight: 2
 layout: "learningpathall"
@@ -15,7 +15,7 @@ Whatever method you use, keep the measurements repeatable. Record the system con
 
 ## Why tune NGINX
 
-NGINX performance can be limited by connection handling, kernel network settings, TLS processing, file I/O, upstream connection reuse, cache behavior, logging, or regular expression processing. Tuning helps you use the available compute, memory, storage, and network resources more efficiently.
+NGINX performance can be limited by connection handling, kernel network settings, TLS processing, file I/O, upstream connection reuse, cache behavior, logging, or regular expression processing. By tuning, you can use the available compute, memory, storage, and network resources more efficiently.
 
 Improved performance can give you higher throughput, lower latency, or better cost efficiency. A tuned configuration can increase capacity on the same system, or help you meet the same performance target with fewer compute resources.
 
@@ -26,3 +26,9 @@ The following example shows `wrk` throughput before and after tuning for an NGIN
 ![Bar chart comparing normalized NGINX API gateway wrk throughput before and after tuning. The out-of-box configuration is normalized to 1.00, and the tuned configuration reaches 1.13, showing about 13% higher RPS after tuning.#center](nginxoobvstuned.png "NGINX API gateway throughput before and after tuning")
 
 This result is an example, not a guaranteed improvement for every workload. Your results depend on the NGINX version, request rate, response size, TLS settings, client concurrency, upstream services, network configuration, and system resources.
+
+## What you've learned and what's next
+
+You've now learned why tuning NGINX is useful and reviewed an example benchmark demonstrating improvement in `wrk` throughput after tuning. 
+
+Next, you'll learn about kernel, compiler, and library optimizations. 

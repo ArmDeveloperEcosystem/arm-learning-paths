@@ -15,7 +15,7 @@ learning_objectives:
 prerequisites:
     - A cloud or bare-metal installation of an NGINX file server, reverse proxy, or API gateway.
     - A repeatable HTTP workload or load test that you can run before and after tuning.
-    - If you do not already have an NGINX setup, review [Learn how to deploy NGINX](/learning-paths/servers-and-cloud-computing/nginx/).
+    - If you don't already have an NGINX setup, see [Learn how to deploy NGINX](/learning-paths/servers-and-cloud-computing/nginx/).
 
 author: Julio Suarez
 
