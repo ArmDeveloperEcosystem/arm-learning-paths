@@ -19,7 +19,7 @@ weight: 1
 
 Kiro CLI is a command-line tool powered by a generative AI assistant. You can use it to ask questions about AWS architecture, resources, and general development tasks. 
 
-It supports multiple operating systems, including Arm-based Linux distributions and macOS, and you can install it in several ways.
+You can install Kiro CLI in several ways on multiple operating systems, including Arm-based Linux distributions and macOS.
 
 ## Before you begin
 
