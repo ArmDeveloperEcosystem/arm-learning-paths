@@ -1,6 +1,8 @@
 ---
 title: Run a Minecraft server on OCI A1 Arm64 instances
 
+description: Provision an Arm64 instance on Oracle Cloud Infrastructure, install the Java runtime, and deploy a persistent Minecraft server for multiplayer gameplay.
+
 draft: true
 cascade:
     draft: true

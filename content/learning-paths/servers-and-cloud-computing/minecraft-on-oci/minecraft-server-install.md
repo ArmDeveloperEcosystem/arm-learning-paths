@@ -1,5 +1,6 @@
 ---
-title: Installing the Minecraft server
+title: Install the Minecraft server
+description: Install the Java Runtime Environment, download the Minecraft server files, and launch the server application.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -10,19 +11,23 @@ layout: learningpathall
 
 ### Installing the Java Runtime Environment
 
-Before we install the Minecraft server, we need to make sure that there are some prerequisites
-installed. For the Minecraft 26 server or earlier, we will need Java 25.
+Before you install the Minecraft server, you need to make sure that there are some prerequisites
+installed. For the Minecraft 26 server or earlier, you will need Java 25.
 
-Connect to your instance using SSH as described in the previous step. We can install Java 25 on
+Connect to your instance using SSH as described in the previous step. You can install Java 25 on
 Oracle Linux with:
+
+```console
+sudo dnf install java-25-openjdk -y
 ```
-sudo dnf install java-25-openjdk
-```
+
 and on Ubuntu or similar distributions, with
+
+```console
+sudo apt install openjdk-25-jre -y
 ```
-sudo apt install openjdk-25-jre
-```
-Since the Minecraft server starts on the command line, you may also want to install the `screen` or
+
+Since the Minecraft server starts on the command line, you might also want to install the `screen` or
 `tmux` utilities which allows commands to keep running after you disconnect from the server.
 These commands are not strictly necessary, but you will need them to be running if you want to keep
 the server running when you disconnect from your SSH session. 
@@ -35,16 +40,22 @@ not be covered in this learning path.
 You can find the link for the latest version of the Minecraft server
 [on the Minecraft website](https://www.minecraft.net/en-us/download/server). Copy the link to
 `server.jar` from this page, and run the following command on your OCI instance to download it:
-```
+
+```console
 wget <paste URL to server.jar here>
 ```
 
-This will download server.jar from the Mojang website, and we will have a server.jar file on our OCI
-instance. To make it easier to keep track of different server versions, rename the server.jar file
-with a more meaningful name: `mv server.jar minecraft_server.26.2.jar`
+This will download `server.jar` from the Mojang website, and you will have a `server.jar` file on your OCI
+instance. To make it easier to keep track of different server versions, rename the `server.jar` file
+with a more meaningful name: 
+
+```console
+mv server.jar minecraft_server.26.2.jar
+```
 
 To start the Minecraft server, run the command:
-```
+
+```console
 java -Xmx8G -Xms8G -jar minecraft_server.26.2.jar nogui
 ```
 
@@ -79,6 +90,12 @@ that the process has completed successfully (timestamps will be different at the
 [00:41:04] [Server thread/INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
 ```
 
-Your Minecraft server is now running - you can connect to it with the Minecraft client. Congratulations!
+### What you've accomplished
+
+You installed the open-source Java Runtime Environment on your instance, downloaded the Minecraft server files, accepted the End User License Agreement, and started the game server.
+
+### Next step
+
+With the server successfully running in the cloud, you will now open the necessary network ports to allow the Minecraft client to connect to your instance.
 
 
