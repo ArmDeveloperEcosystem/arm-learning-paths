@@ -1,9 +1,13 @@
 ---
-title: Running a Minecraft server on OCI A1 Arm64 instances
+title: Run a Minecraft server on OCI A1 Arm64 instances
+
+draft: true
+cascade:
+    draft: true
 
 minutes_to_complete: 10
 
-who_is_this_for: Learners who are new to OCI and want a guided path from “provisioning an instance” to “running a persistent Minecraft server”.
+who_is_this_for: This is an introductory topic for developers who are new to OCI and want to provision an Arm64 instance and run a persistent Minecraft server on it.
 
 learning_objectives: 
     - Provision an OCI A1 Arm64 virtual machine instance suitable for running a Minecraft server
@@ -12,12 +16,12 @@ learning_objectives:
     - Connect to the running Minecraft server from the Minecraft client application
 
 prerequisites:
-    - Complete the [Get started with Oracle Cloud Infrastructure](../csp/oci/) learning path
+    - Review [Get started with Oracle Cloud Infrastructure](/learning-paths/servers-and-cloud-computing/csp/oci/) 
     - Install software that allows you to connect to a running instance over SSH
     - Install the Minecraft client on your local laptop, and ensure that you have a Microsoft
       or Mojang account to log in (it will help if you know the basics of playing Minecraft too)
 
-author: Dave Neary <dneary@amperecomputing.com>
+author: Dave Neary
 
 ### Tags
 skilllevels: Introductory
@@ -30,7 +34,6 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
-
 further_reading:
     - resource:
         title: How To Setup And Run A Free Minecraft Server In The Cloud
@@ -40,7 +43,10 @@ further_reading:
         title: How to create a powerful Minecraft Server for free using Oracle Cloud
         link: https://www.youtube.com/watch?v=0kFjEUDJexI
         type: video
-
+    - resource:
+        title: Deploy Arm instances on Oracle Cloud Infrastructure (OCI) using Terraform
+        link: /learning-paths/servers-and-cloud-computing/oci-terraform/
+        type: learning-path
 
 
 ### FIXED, DO NOT MODIFY
