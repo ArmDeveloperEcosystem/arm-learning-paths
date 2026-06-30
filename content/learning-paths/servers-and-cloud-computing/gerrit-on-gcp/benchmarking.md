@@ -35,13 +35,13 @@ The script then places the data into a specified JSON file similar to (partially
 ```json
 {
   "run": {
-    "run_id": "20260622T152549Z",
-    "timestamp_utc": "2026-06-22T15:35:19Z",
-    "host": "douans01-gerrit-arm-6.c.arm-deveco-stedvsl-prd.internal",
-    "os": "Debian GNU/Linux 13 (trixie)"
+    "run_id": "20260630T032002Z",
+    "timestamp_utc": "2026-06-30T03:29:40Z",
+    "host": "douans01-gerrit-arm-a.c.arm-deveco-stedvsl-prd.internal",
+    "os": "Ubuntu 24.04.4 LTS"
   },
   "software": {
-    "java_version": "openjdk version \"21.0.11\" 2026-04-21 OpenJDK Runtime Environment (build 21.0.11+10-1-deb13u2-Debian) OpenJDK 64-Bit Server VM (build 21.0.11+10-1-deb13u2-Debian, mixed mode, sharing) ",
+    "java_version": "openjdk version \"21.0.11\" 2026-04-21 OpenJDK Runtime Environment (build 21.0.11+10-1-24.04.2-Ubuntu) OpenJDK 64-Bit Server VM (build 21.0.11+10-1-24.04.2-Ubuntu, mixed mode, sharing) ",
     "gerrit_version": "gerrit version 3.11.2",
     "gerrit_base_url": "http://127.0.0.1:8080",
     "gerrit_test_http_user": "admin",
@@ -72,44 +72,44 @@ The script then places the data into a specified JSON file similar to (partially
   "operation_summary": [
     {
       "type": "git_clone",
-      "count": 4301,
-      "ok_count": 4301,
+      "count": 4371,
+      "ok_count": 4371,
       "fail_count": 0,
-      "min_ms": 105,
-      "avg_ms": 244.42269239711695,
-      "p50_ms": 220,
-      "p90_ms": 418,
-      "p95_ms": 456,
-      "p99_ms": 521,
-      "max_ms": 611
+      "min_ms": 102,
+      "avg_ms": 239.0315717227179,
+      "p50_ms": 207,
+      "p90_ms": 408,
+      "p95_ms": 448,
+      "p99_ms": 519,
+      "max_ms": 673
     },
     {
       "type": "git_push_refs_for",
-      "count": 570,
-      "ok_count": 570,
+      "count": 582,
+      "ok_count": 582,
       "fail_count": 0,
-      "min_ms": 75,
-      "avg_ms": 157.13333333333333,
-      "p50_ms": 155,
-      "p90_ms": 222,
-      "p95_ms": 239,
-      "p99_ms": 288,
-      "max_ms": 344
+      "min_ms": 61,
+      "avg_ms": 135.446735395189,
+      "p50_ms": 133,
+      "p90_ms": 192,
+      "p95_ms": 209,
+      "p99_ms": 246,
+      "max_ms": 323
     },
     {
       "type": "rest_change_query",
-      "count": 42992,
-      "ok_count": 42992,
+      "count": 44625,
+      "ok_count": 44625,
       "fail_count": 0,
-      "min_ms": 12,
-      "avg_ms": 31.553265723855603,
-      "p50_ms": 30,
-      "p90_ms": 50,
-      "p95_ms": 56,
-      "p99_ms": 69,
-      "max_ms": 105
+      "min_ms": 11,
+      "avg_ms": 28.711753501400562,
+      "p50_ms": 26,
+      "p90_ms": 47,
+      "p95_ms": 55,
+      "p99_ms": 70,
+      "max_ms": 205
     }
-  ]
+  ],
   // rest of file omitted for brevity...
 }
 ```
@@ -118,17 +118,19 @@ You can process this JSON file to create a summary of the performance of Gerrit 
 
 ## Performance summary
 
-The benchmark run completed successfully on the production-like profile with Gerrit metrics enabled. It recorded 47,863 measured client operations over four 120-second steps, with 47,863 successes and zero failures.
+The benchmark run completed successfully on the production-like profile with Gerrit metrics enabled. It recorded 49,578 measured client operations over four 120-second steps, with 49,578 successes and zero failures.
 
 The benchmark gives a high-quality performance view: client latency, stepwise concurrency behavior, node CPU/memory/disk. Gerrit-side JVM, GC, Jetty, cache, queue, Git, REST, NoteDB, and receive-commits metrics are all present:
 
 ![Charts and graphs showing the Gerrit benchmark performance summary including operation counts, success rates, and latency metrics across the four 120-second test steps.#center](images/analysis.png "Gerrit benchmark summary")
 
-All 47,863 measured client-side operations succeeded. REST query latency remains low with a p99 of 69 ms. Clone is the dominant pressure point at a p99 of 521 ms, and push remains sub-second at a p99 of 288 ms:
+All 49,578 measured client-side operations succeeded. REST query latency remains low with a p99 of 70 ms. Clone is the dominant pressure point at a p99 of 519 ms, and push remains sub-second at a p99 of 246 ms:
 
 ![Performance metrics showing client-side operation summary with statistics for git_clone, git_push_refs_for, and rest_change_query operations, including latency percentiles and success rates.#center](images/client-summary.png "Client-side operation summary")
 
-The useful capacity signal is the flattening throughput curve after step 2. CPU is already near saturation in step 2, then stays around 99% in steps 3 and 4. Latency continues rising: clone p99 increases from 221 ms in step 2 to 550 ms in step 4, while aggregate throughput only rises from 103.3 to 108.4 ops/sec:
+The useful capacity signal is the flattening throughput curve after step 2. CPU is already near saturation in step 2 at 96.7%, then
+rises to 99.5% in step 4. Latency continues rising: clone p99 increases from 221 ms in step 2 to 559 ms in step 4, while
+aggregate throughput only rises from 107.3 to 111.5 ops/sec:
 
 ![Graph showing throughput and latency trends across four concurrency steps, demonstrating how performance degrades as concurrency increases and CPU approaches saturation.#center](images/stepwise-summary.png "Stepwise concurrency behavior summary")
 
