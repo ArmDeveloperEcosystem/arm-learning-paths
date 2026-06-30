@@ -114,15 +114,11 @@ kiro-cli 1.28.1
 
 ## Configure your AWS account to get the most from Kiro CLI
 
-Kiro CLI can answer questions and solve problems related to your AWS resources and help you develop faster on AWS. To get the maximum benefit, you can configure the AWS CLI to use your account.
+Kiro CLI can answer questions and solve problems related to your AWS resources. For example, you can ask for the IP address of an EC2 instance instead of going to the AWS console or looking up the AWS CLI command to get it. Kiro CLI accesses your AWS resources and returns the information you ask for.
+
+To get account-specific answers, configure AWS CLI credentials.
 
 To set up the AWS CLI and generate and configure access keys, follow the [AWS CLI Install Guide](/install-guides/aws-cli/) and the [AWS Credentials Install Guide](/install-guides/aws_access_keys/).
-
-By setting up credentials, you can use the Kiro CLI to ask questions and solve issues specific to your AWS account.
-
-For example, you can ask for the IP address of an EC2 instance instead of going to the AWS console or looking up the AWS CLI command to get it.
-
-Kiro accesses your AWS resources and returns the information you ask for.
 
 ## Set the Kiro CLI context to tailor responses
 
@@ -209,9 +205,11 @@ Use the arrow keys to select the model you want to use.
 
 You can ask Kiro to set the default model for future sessions.
 
-## Install a local MCP server
+## Configure the Arm MCP Server for Kiro CLI 
 
-The Arm MCP Server is an MCP server providing AI assistants with tools and knowledge for Arm architecture development, migration, and optimization. You can configure the Arm MCP server locally using Docker.
+You can use a Model Context Protocol (MCP) such as the Arm MCP Server with Kiro CLI.
+
+The Arm MCP Server provides AI assistants with tools and knowledge for Arm architecture development, migration, and optimization. You can configure the Arm MCP Server locally using Docker.
 
 First, pull the MCP server image to your local machine:
 
@@ -221,11 +219,9 @@ docker pull armlimited/arm-mcp:latest
 
 You also need Docker running on the system. For instructions, see the [Docker install guide](/install-guides/docker/).
 
-### Configure the Arm MCP server for Kiro CLI
+Modify the file `~/.kiro/settings/mcp.json` to add the Arm MCP Server via a Docker container.
 
-Modify the file `~/.kiro/settings/mcp.json` to add the Arm MCP server via a Docker container.
-
-To analyze a local codebase, use a `-v` command to mount a volume to the Arm MCP server `/workspace` folder so it can access code you want to analyze with `migrate-ease` and other tools.
+To analyze a local codebase, use a `-v` command to mount a volume to the Arm MCP Server `/workspace` folder so it can access code you want to analyze with `migrate-ease` and other tools.
 
 Replace the path `/path/to/your/workspace` with the path to your local codebase:
 
@@ -256,9 +252,9 @@ Replace the path `/path/to/your/workspace` with the path to your local codebase:
 
 To enable Arm Performix features through the Arm MCP Server, replace `/path/to/your/ssh/private_key` and `/path/to/your/ssh/known_hosts` with the SSH private key and `known_hosts` file used for your target device.
 
-### Optional: Use a Docker replacement containerization tool
+### (Optional) Use an alternative containerization tool
 
-You can use other containerization tools besides Docker that are free and don't require licenses, such as Podman, Finch, Colima, and Rancher Desktop. Choose one of the following options and use its CLI in place of `docker`.
+You can use other containerization tools besides Docker that are free and don't require licenses, such as Podman, Finch, Colima, and Rancher Desktop. Choose one of the following options and use its CLI in place of `docker` to configure the Arm MCP Server.
 
 {{< tabpane-normal >}}
   {{< tab header="Podman" >}}
@@ -359,7 +355,7 @@ Add the following configuration to the user-level `~/.kiro/settings/mcp.json` fi
   {{< tab header="Rancher Desktop" >}}
 Install: [Rancher Desktop](https://docs.rancherdesktop.io/getting-started/installation/)
 
-Rancher Desktop uses the Docker container engine via Morby.
+Rancher Desktop uses the Docker container engine via Moby.
 
 Pull the Arm MCP Server image:
 ```console
@@ -391,7 +387,7 @@ Add the following configuration to the user-level `~/.kiro/settings/mcp.json` fi
   {{< /tab >}}
 {{< /tabpane-normal >}}
 
-### Verify that the Arm MCP server is working
+### Verify that the Arm MCP Server is working
 
 Start Kiro CLI chat from your local shell and list the tools from the MCP server to verify it's working:
 
@@ -405,7 +401,7 @@ Use the `/tools` command to list the available tools:
 /tools
 ```
 
-You'll see the Arm MCP server tools listed in the output. If the arm-mcp server says it's still loading, wait a moment and run `/tools` again.
+You'll see the Arm MCP Server tools listed in the output. If the `arm-mcp` server says it's still loading, wait a moment and run `/tools` again.
 
 ### Use Arm prompt files with the Arm MCP Server
 
@@ -423,6 +419,6 @@ If you're facing issues or have questions, reach out to mcpserver@arm.com.
 
 ## Next steps
 
-You're now ready to use Kiro CLI with the Arm MCP server for Arm-specific development assistance.
+You're now ready to use Kiro CLI with the Arm MCP Server for Arm-specific development assistance.
 
 For an AI-assisted x86-to-Arm migration walkthrough, see [Automate x86-to-Arm application migration using the Arm MCP Server](/learning-paths/servers-and-cloud-computing/arm-mcp-server/).
