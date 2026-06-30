@@ -31,4 +31,4 @@ This result is an example, not a guaranteed improvement for every workload. Your
 
 You've now learned why tuning NGINX is useful and reviewed an example benchmark demonstrating improvement in `wrk` throughput after tuning. 
 
-Next, you'll learn about kernel, compiler, and library optimizations. 
+Next, you'll learn about Linux network settings, compiler options, and supporting libraries that can affect NGINX performance.

@@ -44,7 +44,7 @@ The following diagram shows a typical multi-node test setup. The load generator 
 
 You can also run `wrk` directly against NGINX file servers, or run `wrk` on the same node as NGINX. Choose a setup that reflects your deployment and avoids making the load generator the bottleneck.
 
-![Diagram showing a load generator running wrk against an NGINX reverse proxy with upstream NGINX file servers.#center](exampletestsetup.png "Example NGINX load test setup")
+![Diagram showing a load generator client sending HTTPS requests to an NGINX reverse proxy instance under test, which forwards HTTP traffic to upstream NGINX file servers.#center](exampletestsetup.png "Example NGINX load test setup")
 
 ### Run a wrk test
 
@@ -88,6 +88,6 @@ The API gateway shown in [Tune a reverse proxy or API gateway](/learning-paths/s
 
 ## What you've accomplished 
 
-You've now used `wrk` to run an NGINX performance test.
+You've now built `wrk`, created sample files, and run repeatable load tests against an NGINX workload.
 
-You can use the guidance in this Learning Path to optimize the performance of your NGINX workloads on Arm-based platforms.  
+You can use the guidance in this Learning Path to optimize and compare the performance of your NGINX workloads on Arm-based platforms.  

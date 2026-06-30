@@ -87,6 +87,6 @@ NGINX relies on [zlib](https://zlib.net/) for HTTP response compression when the
 
 ## What you've learned and what's next
 
-You've now learned about different kernel, compiler, and library optimizations that you can make to tune NGINX performance.
+You've now learned how Linux network settings, compiler options, and supporting libraries can affect NGINX throughput and latency.
 
 Next, you'll review the configuration for a static file server and learn about optimizations that you can make.

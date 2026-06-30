@@ -114,6 +114,6 @@ The following are performance-relevant directives:
 
 ## What you've learned and what's next
 
-You've now seen example top-level and file server configurations and learned about performance-relevant directives that you can optimize to tune NGINX performance. 
+You've now reviewed optimizable top-level and static file server directives that affect worker limits, keepalive behavior, file serving, logging, and TLS choices.
 
-Next, you'll learn about tuning a reverse proxy and API gateway configuration.
+Next, you'll apply the same top-level NGINX settings to a reverse proxy and API gateway configuration, and review directives specific to such workloads.

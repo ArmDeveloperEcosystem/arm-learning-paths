@@ -83,6 +83,7 @@ The following are performance-relevant directives that weren't discussed in the 
 
 ## What you've learned and what's next
 
-You've seen an example reverse proxy and API gateway configuration and learned about performance-relevant directives that you can optimize to tune NGINX performance. 
+You've now reviewed reverse proxy and API gateway directives that affect upstream connection reuse, request rewriting, access control, and caching decisions.
 
-Next, you'll learn how to test NGINX optimizations using `wrk`.
+Next, you'll test NGINX optimizations with a repeatable `wrk` workload.
+
