@@ -20,8 +20,8 @@ prerequisites:
 author: Dave Neary <dneary@amperecomputing.com>
 
 ### Tags
-skilllevels: Beginner
-subjects: Cloud Computing
+skilllevels: Introductory
+subjects: Web
 armips:
     - Neoverse
 tools_software_languages:
