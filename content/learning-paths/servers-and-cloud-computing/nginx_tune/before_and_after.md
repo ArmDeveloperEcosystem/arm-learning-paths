@@ -7,9 +7,9 @@ layout: "learningpathall"
 
 ## About performance tuning
 
-Performance tuning is most useful when you treat it as a measurement process, not a fixed checklist. You can tune by changing one parameter at a time, running a designed experiment, comparing profiles, or using automation and AI-assisted tools to explore a larger configuration space.
+Performance tuning is most useful when you treat it as a measurement process, not a fixed checklist. You can tune by changing one parameter at a time, or by running a designed experiment. You can compare profiles, or use automation and AI-assisted tools to explore a larger configuration space.
 
-There isn't a universal set of tuning parameters that works best for every application. The right settings depend on the request profile, response size, TLS configuration, cache behavior, upstream service behavior, network path, software version, system architecture, operating system, and other application-specific factors.
+There isn't a universal set of tuning parameters that works best for every application. The right settings depend on the request profile, response size, TLS configuration, and cache behavior. Upstream service behavior, network path, software version, system architecture, operating system, and other application-specific factors can also affect performance.
 
 Whatever method you use, keep the measurements repeatable. Record the system configuration, workload, software versions, and tuning parameters so you can identify which changes improved performance and which changes had little effect.
 
