@@ -64,7 +64,7 @@ server {
 }
 ```
 
-The following are performance-relevant directives that weren't discussed in the [static file server section](/learning-paths/servers-and-cloud-computing/nginx_tune/tune_static_file_server/):
+The following are performance-relevant directives that weren't described in the [static file server section](/learning-paths/servers-and-cloud-computing/nginx_tune/tune_static_file_server/):
 
 - [`keepalive`](https://nginx.org/en/docs/http/ngx_http_upstream_module.html#keepalive): Controls the cache of idle connections to upstream servers. For NGINX 1.29.7 and later, upstream keepalive is enabled by default with a small cache. Set `keepalive` explicitly when you want to tune the upstream idle connection cache for your workload.
 
