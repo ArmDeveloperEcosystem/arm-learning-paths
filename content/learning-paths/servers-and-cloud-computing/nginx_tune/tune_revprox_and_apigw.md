@@ -7,7 +7,7 @@ layout: "learningpathall"
 
 ## NGINX reverse proxy and API gateway configuration
 
-You'll now review a tuned configuration based on the [set up a reverse proxy and API gateway](/learning-paths/servers-and-cloud-computing/nginx/reverse_proxy_and_api_gateway/) section of the [Learn how to deploy NGINX](/learning-paths/servers-and-cloud-computing/nginx/) Learning Path. 
+You'll now review a tuned configuration based on the configuration in the [set up a reverse proxy and API gateway](/learning-paths/servers-and-cloud-computing/nginx/reverse_proxy_and_api_gateway/) section of the [Learn how to deploy NGINX](/learning-paths/servers-and-cloud-computing/nginx/) Learning Path. 
 
 Use this example configuration as a starting point, then size each directive for your workload and validate the result with repeatable measurements.
 
