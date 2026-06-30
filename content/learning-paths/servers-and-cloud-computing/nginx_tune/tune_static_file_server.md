@@ -7,7 +7,7 @@ layout: "learningpathall"
 
 ## NGINX file server configuration
 
-You'll now review a tuned file server configuration from the [set up a static file server](/learning-paths/servers-and-cloud-computing/nginx/basic_static_file_server/) section of the [Learn how to deploy NGINX](/learning-paths/servers-and-cloud-computing/nginx/) Learning Path. 
+You'll now review a tuned file server configuration based on the [set up a static file server](/learning-paths/servers-and-cloud-computing/nginx/basic_static_file_server/) section of the [Learn how to deploy NGINX](/learning-paths/servers-and-cloud-computing/nginx/) Learning Path. 
 
 Use this example configuration as a starting point, then size each directive for your workload and validate the result with repeatable measurements.
 
