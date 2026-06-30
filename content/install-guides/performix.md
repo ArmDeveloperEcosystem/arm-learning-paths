@@ -180,7 +180,7 @@ When the installation finishes, select **Close** to exit the installer.
 
 The CLI is useful when you prefer command-line workflows, rather than GUI or MCP-driven workflows.
 
-The `apx` command-line tool is installed automatically, and you can find the binary at the following locations:
+The `apx` command-line tool is installed automatically, and you can find the binary at the following locations on your host:
 
 {{< tabpane-normal >}}
   {{< tab header="Linux" >}}
