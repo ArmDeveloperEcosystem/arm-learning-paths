@@ -33,10 +33,10 @@ generated_summary_faq:
   faq_source_hash: 39f9323dac9bd7f5480e501ad8fd93d2d9999c420ed1c2eb45eba2ccb3be63ad
   summary: >-
     You'll learn how to tune NGINX on Arm-based platforms using a measurement-first
-    workflow. First, you'll establish a baseline, then iteratively adjust Linux network stack parameters and
+    workflow. Using a baseline, you'll iteratively adjust Linux network stack parameters and
     evaluate compiler and library choices such as OpenSSL, PCRE, and zlib. You'll review tuned configuration examples and guidance for sizing directives to refine configurations
-    for static file serving, reverse proxy, and API gateway scenarios. You're also introduced to `wrk`
-    as an option for generating traffic and reporting throughput and latency on NGINX. By the end, you'll use `wrk` to compare before-and-after results and verify the impact of each change.
+    for static file serving, reverse proxy, and API gateway scenarios. You'll also learn about `wrk`
+    as an option for generating traffic and reporting throughput and latency on NGINX. By the end, you'll use `wrk` to compare before-and-after results and verify the impact of each tuning change.
   faqs:
   - question: How do I know whether a tuning change improved performance?
     answer: >-
@@ -51,7 +51,7 @@ generated_summary_faq:
   - question: Do I need to use wrk if I already have a load test?
     answer: >-
       No. If you already have a repeatable HTTP workload, use that. wrk is provided as a starting point
-      only when you do not already have an established test method.
+      only when you don't already have an established test method.
   - question: When tuning the reverse proxy or API gateway, what should I reuse from the static
       file server configuration?
     answer: >-
