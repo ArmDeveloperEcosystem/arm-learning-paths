@@ -85,4 +85,4 @@ The following are performance-relevant directives that weren't discussed in the 
 
 You've seen an example reverse proxy and API gateway configuration and learned about performance-relevant directives that you can optimize to tune NGINX performance. 
 
-Next, you'll test NGINX optimizations. 
+Next, you'll learn how to test NGINX optimizations using `wrk`.
