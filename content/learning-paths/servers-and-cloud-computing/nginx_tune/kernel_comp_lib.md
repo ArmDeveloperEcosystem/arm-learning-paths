@@ -1,10 +1,11 @@
 ---
 title: Tune kernel, compiler, and library settings for performance
+description: Tune Linux network settings and evaluate compiler, OpenSSL, PCRE, and zlib choices that can affect NGINX performance on Arm-based platforms.
 weight: 3
 layout: "learningpathall"
 ---
 
-## Kernel configuration
+## Optimize kernel network stack settings
 
 NGINX tuning doesn't stop at `nginx.conf`. Foundational settings such as kernel network queues, socket buffers, compiler choices, and TLS libraries can affect throughput and latency. Treat these settings as part of the same measurement process you use for NGINX directives.
 
@@ -34,32 +35,25 @@ sudo sysctl -w net.ipv4.tcp_wmem="4096 8388608 8388608"
 
 These values are intentionally large. Size them for your expected connection rate, request pattern, and available memory.
 
-- `net.core.somaxconn`:
-  - Selects the maximum number of queued connections the kernel allows.
-  - If the NGINX server needs to support a large number of clients, it can be helpful to increase this parameter.
-  - A value of 65535 is likely excessive for many deployments. In practice, this value needs to be large enough to support the peak number of queued connections.
-- `net.core.rmem_max`:
-  -  Selects the maximum read socket buffer size.
-  - `8 MiB` is likely more than enough for most use cases.
-  - Use a tool such as `ss` to check socket buffer utilization and set a value for this parameter.
-- `net.core.wmem_max`:
-  - Selects the maximum write socket buffer size.
-  - `8 MiB` is likely more than enough for most use cases.
-  - Use a tool such as `ss` to check socket buffer utilization and set a value for this parameter.
-- `net.ipv4.tcp_max_syn_backlog`:
-  - Selects the maximum number of connection requests that are pending but not established yet.
-  - A value of 65535 is likely excessive for many deployments. In practice, this value needs to be large enough to support the peak number of pending connection requests.
-- `net.ipv4.ip_local_port_range`:
-  - Selects the range of local ports the kernel can use.
-  - The example expands the port range. The default range is sufficient for many deployments.
-- `net.ipv4.tcp_rmem`:
-  - Selects the TCP read socket buffer size.
-  - `8 MiB` is likely more than enough for most use cases.
-  - Use a tool such as `ss` to check TCP buffer utilization and set a value for this parameter.
-- `net.ipv4.tcp_wmem`:
-  - Selects the TCP write socket buffer size.
-  - `8 MiB` is likely more than enough for most use cases.
-  - Use a tool such as `ss` to check TCP buffer utilization and set a value for this parameter.
+- `net.core.somaxconn`: Selects the maximum number of queued connections the kernel allows. If the NGINX server needs to support a large number of clients, it can be helpful to increase this parameter.
+
+  A value of 65535 is likely excessive for many deployments. In practice, this value needs to be large enough to support the peak number of queued connections.
+- `net.core.rmem_max`:  Selects the maximum read socket buffer size. `8 MiB` is likely more than enough for most use cases.
+
+  Use a tool such as `ss` to check socket buffer utilization and set a value for this parameter.
+- `net.core.wmem_max`: Selects the maximum write socket buffer size. `8 MiB` is likely more than enough for most use cases.
+  
+  Use a tool such as `ss` to check socket buffer utilization and set a value for this parameter.
+- `net.ipv4.tcp_max_syn_backlog`: Selects the maximum number of connection requests that are pending but not established yet.
+  
+  A value of 65535 is likely excessive for many deployments. In practice, this value needs to be large enough to support the peak number of pending connection requests.
+- `net.ipv4.ip_local_port_range`: Selects the range of local ports the kernel can use. The example expands the port range. The default range is sufficient for many deployments.
+- `net.ipv4.tcp_rmem`: Selects the TCP read socket buffer size. `8 MiB` is likely more than enough for most use cases.
+  
+  Use a tool such as `ss` to check TCP buffer utilization and set a value for this parameter.
+- `net.ipv4.tcp_wmem`: Selects the TCP write socket buffer size. `8 MiB` is likely more than enough for most use cases.
+  
+  Use a tool such as `ss` to check TCP buffer utilization and set a value for this parameter.
 
 ## Compiler considerations
 

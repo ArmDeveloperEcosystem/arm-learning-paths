@@ -1,5 +1,6 @@
 ---
 title: Test NGINX optimizations
+description: Build wrk and run repeatable load tests against NGINX workloads on Arm-based platforms to compare tuning results.
 weight: 6
 layout: "learningpathall"
 ---
@@ -47,7 +48,8 @@ You can also run `wrk` directly against NGINX file servers, or run `wrk` on the 
 
 ### Run a wrk test
 
-The NGINX file servers need files to serve. If you are using the configuration files discussed in [Tune a static file server](/learning-paths/servers-and-cloud-computing/nginx_tune/tune_static_file_server/) or [Tune a reverse proxy or API gateway](/learning-paths/servers-and-cloud-computing/nginx_tune/tune_revprox_and_apigw/), run the following commands on each file server to create sample files. You do not need to create these files on reverse proxy or API gateway nodes because they do not serve files directly.
+The NGINX file servers need files to serve. If you're using the configuration files discussed in [Tune a static file server](/learning-paths/servers-and-cloud-computing/nginx_tune/tune_static_file_server/) or [Tune a reverse proxy or API gateway](/learning-paths/servers-and-cloud-computing/nginx_tune/tune_revprox_and_apigw/), run the following commands on each file server to create sample files:
+
 
 ```bash
 # Create 1 KB file in the reverse proxy use case directory
@@ -65,6 +67,8 @@ sudo cp /usr/share/nginx/html/1kb /usr/share/nginx/html/api_new
 sudo cp /usr/share/nginx/html/5kb /usr/share/nginx/html/api_new
 sudo cp /usr/share/nginx/html/10kb /usr/share/nginx/html/api_new
 ```
+
+You don't need to create these files on reverse proxy or API gateway nodes because they don't serve files directly.
 
 Run the sample commands from the `wrk` build directory, or use the full path to the `wrk` binary.
 
