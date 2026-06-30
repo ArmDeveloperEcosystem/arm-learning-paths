@@ -57,9 +57,6 @@ As the agent works, watch the log lines. Cyan `[CPU]` lines show orchestration a
 
 The agent then prints a fact-checked summary that answers your question.
 
-<!-- TODO: replace with a real screenshot of the CPU/GPU log lines for a query -->
-![Terminal showing interleaved CPU and GPU log lines as the agent answers a query alt-text#center](agent_run_logs.png "The agent logs every CPU orchestration step in cyan and every GPU model call in yellow.")
-
 ## Read the timing breakdown
 
 After each answer, the agent prints how the time was spent:
@@ -98,7 +95,7 @@ Reading left to right, you can see the pattern of an agentic query: long stretch
 
 ## Try more queries
 
-The agent keeps conversation history, so you can ask follow-up questions in the same session. Try a few different kinds of research tasks and compare their timelines:
+Ask a few different kinds of research questions and compare their timelines:
 
 ```text
 Compare the battery life of the three most recommended noise-cancelling headphones
@@ -108,9 +105,9 @@ Compare the battery life of the three most recommended noise-cancelling headphon
 Summarize the key differences between the latest Raspberry Pi models
 ```
 
-The screenshot below shows example queries and the answers the agent returns:
+The screenshot shows example queries and the answers the agent returns:
 
-![Example of search queries to the agent and the answers it returns #center](queries-and-results.png "Example queries sent to the local concierge agent and the responses it generates.")
+![Example of search queries to the agent and the answers it returns#center](queries-and-results.png "Example queries sent to the local concierge agent and the responses it generates.")
 
 Type `quit` or `exit` to end the session.
 
