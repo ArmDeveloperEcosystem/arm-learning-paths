@@ -94,8 +94,7 @@ Total: 9.803s
 
 Reading left to right, you can see the pattern of an agentic query: long stretches of CPU work (<code style="color:#00aa00"><strong>C</strong></code>) for searching, browsing, and processing, punctuated by GPU bursts where the model reads a prompt (<code style="color:#aa00aa"><strong>P</strong></code>) and generates text (<code style="color:#cc0000"><strong>G</strong></code>).
 
-<!-- TODO: replace with a real screenshot of the colored timeline output -->
-![Color-coded timeline showing long CPU stretches between short GPU bursts alt-text#center](agent_timeline.png "The timeline shows the CPU active for most of the query, with the GPU running in short bursts.")
+![Terminal output showing CPU timing totals and a colored character timeline. The legend maps green C to CPU orchestration, purple P to GPU input token processing, and red G to GPU token generation.#center](agent_timeline.png "Processing timeline showing CPU and GPU activity for an agent query.")
 
 ## Try more queries
 
