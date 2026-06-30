@@ -176,6 +176,65 @@ Wait while the installer copies the files.
 
 When the installation finishes, select **Close** to exit the installer.
 
+## How do I use the Arm Performix CLI?
+
+The CLI is useful when you prefer command-line workflows, rather than GUI or MCP-driven workflow.
+
+The `apx` command-line tool is installed automatically, and you can find the binary at the following locations:
+
+{{< tabpane-normal >}}
+  {{< tab header="Linux" >}}
+On Linux, you can find it at:
+
+```bash
+/opt/Arm\ Performix/assets/apx/apx
+```
+
+For convenience, add it to your PATH or create an alias:
+
+```bash
+export PATH="/opt/Arm Performix/assets/apx:$PATH"
+```
+  {{< /tab >}}
+  {{< tab header="Windows" >}}
+On Windows, the default install location depends on the installation scope you chose during setup:
+
+- For a single-user install: `C:\Users\<username>\AppData\Local\Programs\Arm Performix`
+- For an all-users install: `C:\Program Files\Arm Performix`
+
+Relative to the install location, the `apx` binary is at `\assets\apx\apx.exe`. For example, an all-users install places it at:
+
+```text
+C:\Program Files\Arm Performix\assets\apx\apx.exe
+```
+
+For convenience, add it to your PATH. In PowerShell, run:
+
+```powershell
+$env:Path += ";C:\Program Files\Arm Performix\assets\apx"
+```
+  {{< /tab >}}
+  {{< tab header="macOS" >}}
+On macOS, you can find it at:
+
+```bash
+/Applications/Arm\ Performix.app/Contents/assets/apx/apx
+```
+
+For convenience, add it to your PATH or create an alias:
+
+```bash
+export PATH="/Applications/Arm Performix.app/Contents/assets/apx:$PATH"
+```
+  {{< /tab >}}
+{{< /tabpane-normal >}}
+
+Use the CLI help for command-line usage, or for more detailed information see the [Arm Performix User Guide](https://developer.arm.com/documentation/110163/latest/):
+
+```bash
+apx --help
+```
+
 ## What comes next after installing Arm Performix?
 
 After completing these installation steps, you can simply launch the GUI or CLI to get started.
