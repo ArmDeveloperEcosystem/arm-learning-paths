@@ -20,8 +20,13 @@ learning_objectives:
 prerequisites:
     - Review [Get started with Oracle Cloud Infrastructure](/learning-paths/servers-and-cloud-computing/csp/oci/) 
     - Install software that allows you to connect to a running instance over SSH
-    - Install the Minecraft client on your local laptop, and ensure that you have a Microsoft
-      or Mojang account to log in (it will help if you know the basics of playing Minecraft too)
+    - You will need a copy of the [Minecraft Java edition 
+      client](https://www.minecraft.net/en-us/download) installed, and 
+      [a license](https://www.minecraft.net/en-us/store/minecraft-java-bedrock-edition-pc)
+      for the game.
+    - After installing the client, you will need to [register for a Microsoft
+      account](https://www.minecraft.net/en-us/download) - when you start the Minecraft client, you
+      will be asked to log in to your Microsoft account
 
 author: Dave Neary
 
