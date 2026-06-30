@@ -56,7 +56,7 @@ You also need a target system on which to profile your application or workload. 
 Arm Performix is distributed as platform-specific installer packages.
 The installation includes the GUI, the CLI tool (`apx`) and an MCP server.
 
-### How do I install Arm Performix on Windows?
+### How do I install Arm Performix on a Windows host?
 
 Download the Windows installer package for your architecture from the [Arm Performix download page](https://developer.arm.com/servers-and-cloud-computing/arm-performix).
 
@@ -85,7 +85,7 @@ Select **Install**.
 
 When the installation finishes, select **Finish** to close the wizard.
 
-### How do I install Arm Performix on Linux?
+### How do I install Arm Performix on a Linux host?
 
 Download the Linux installer package for your architecture from the [Arm Performix download page](https://developer.arm.com/servers-and-cloud-computing/arm-performix).
 
@@ -149,7 +149,7 @@ Arm Performix CLI version: 1.0.0
 Arm Performix daemon version: 1.0.0
 ```
 
-### How do I install Arm Performix on macOS?
+### How do I install Arm Performix on a macOS host?
 
 Download the macOS installer package for your architecture from the [Arm Performix download page](https://developer.arm.com/servers-and-cloud-computing/arm-performix).
 
