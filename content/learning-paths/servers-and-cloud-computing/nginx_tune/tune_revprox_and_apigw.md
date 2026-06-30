@@ -1,5 +1,5 @@
 ---
-title: Tune an NGINX reverse proxy or API gateway for performance on Arm 
+title: Tune an NGINX reverse proxy or API gateway for performance 
 description: Tune NGINX reverse proxy and API gateway directives for Arm-based platforms so upstream keepalive, rewrites, and caching decisions match your workload.
 weight: 5
 layout: "learningpathall"

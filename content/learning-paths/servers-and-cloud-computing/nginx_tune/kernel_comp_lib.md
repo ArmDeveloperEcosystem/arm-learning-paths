@@ -1,5 +1,5 @@
 ---
-title: Tune kernel, compiler, and library settings for performance on Arm
+title: Tune kernel, compiler, and library settings for performance
 description: Tune Linux network settings and evaluate compiler, OpenSSL, PCRE, and zlib choices that can affect NGINX performance on Arm-based platforms.
 weight: 3
 layout: "learningpathall"

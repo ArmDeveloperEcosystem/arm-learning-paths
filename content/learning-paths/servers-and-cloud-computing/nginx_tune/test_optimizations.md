@@ -1,5 +1,5 @@
 ---
-title: Test NGINX optimizations on Arm
+title: Load test your NGINX optimizations 
 description: Build wrk and run repeatable load tests against NGINX workloads on Arm-based platforms to compare tuning results.
 weight: 6
 layout: "learningpathall"
@@ -72,11 +72,13 @@ You don't need to create these files on reverse proxy or API gateway nodes becau
 
 Run the sample commands from the `wrk` build directory, or use the full path to the `wrk` binary.
 
-The following sample command tests a file server or reverse proxy. Select thread and connection values that load the NGINX server without causing connection, read, or write errors in `wrk` or NGINX. Because `wrk` does not use a fixed request-rate option, adjust `-t`, `-c`, and `-d` to scale load and keep the same values when comparing configurations.
+The following sample command tests a file server or reverse proxy:
 
 ```bash
 ./wrk -t64 -c200 -d60s --latency https://<nginx_ip_or_dns>/1kb
 ```
+
+Choose thread and connection values that load the NGINX server without causing connection, read, or write errors in `wrk` or NGINX. Because `wrk` does not use a fixed request-rate option, adjust `-t`, `-c`, and `-d` to scale load and keep the same values when comparing configurations.
 
 The following sample command tests an API gateway path:
 
