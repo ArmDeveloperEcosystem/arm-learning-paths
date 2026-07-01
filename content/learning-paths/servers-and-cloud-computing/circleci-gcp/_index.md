@@ -49,7 +49,7 @@ generated_summary_faq:
     answer: >-
       During creation, select the `c4a-standard-4` machine type in the Google Cloud Console. After
       launch, open the VM details in Compute Engine and verify the machine type shows `c4a-standard-4`.
-  - question: What should I verify after installing the CircleCI CLI on SUSE Arm64?
+  - question: What should I verify after installing the CircleCI CLI on SUSE?
     answer: >-
       The CLI should be available to validate configuration files, run jobs locally, and manage
       runners. If it can't be installed or used, recheck that the required repositories were

@@ -50,7 +50,7 @@ generated_summary_faq:
       prebuilt LLVM release instead (for example, LLVM 22.1.5) to match the required features.
   - question: Where do the example’s build and profiling outputs go?
     answer: >-
-      You'll find outputs into three directories: out for binaries, prof for profile data,
+      You'll find outputs in three directories: out for binaries, prof for profile data,
       and heatmap for visualization artifacts. Keeping these separate makes it easier to rerun
       steps and compare results.
   - question: How do I know if my program is a good candidate for BOLT?
@@ -58,7 +58,7 @@ generated_summary_faq:
       Check a small set of Arm TopDown indicators related to instruction delivery and code locality.
       Programs that appear front-end bound, with inefficient instruction fetch and poor locality,
       are strong candidates for code layout optimization with BOLT.
-  - question: What should I use if my kernel does not meet the BRBE or SPE requirements?
+  - question: What should I use if my kernel doesn't meet the BRBE or SPE requirements?
     answer: >-
       If your kernel is older than the BRBE requirement, use SPE if the kernel meets the SPE version
       requirement. If neither is available, you can use instrumentation or PMU

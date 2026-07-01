@@ -31,9 +31,9 @@ generated_summary_faq:
   faq_source_hash: 649957b07b2bde05bc11047bd12bfc4f697c1a55eef1c3a25b5fafc95cda893d
   summary: >-
     You'll deploy a confidential container from an encrypted
-    image inside an Arm CCA Realm on an Armv9-A AEM Base Fixed Virtual Platform with RME support.
+    image inside an Arm CCA Realm on an Armv9-A AEM Base Fixed Virtual Platform (FVP) with Realm Management Extension (RME) support.
     First, you'll learn about the Confidential Containers design, understand which components run inside the
-    Trusted Execution Environment, and see how Trustee services (AS, KBS, RVPS) use Arm CCA
+    Trusted Execution Environment, and see how Trustee services use Arm CCA
     attestation to authorize decryption. Then, you'll start the Trustee services and a local Docker
     registry, publish an encrypted image, and launch the container on the FVP. By the end, you'll complete an end-to-end confidential execution workflow and confirm attestation, key release, and that the workload runs in a Realm only
     after authorization.

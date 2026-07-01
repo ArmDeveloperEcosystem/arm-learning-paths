@@ -40,13 +40,13 @@ generated_summary_faq:
   faqs:
   - question: Where should I place the code as I follow the steps?
     answer: >-
-      Use a single source file named bitvector_scan_benchmark.c. Add the bit vector type, helper
+      Use a single source file named `bitvector_scan_benchmark.c`. Add the bit vector type, helper
       functions, scalar scan routines, Neon and SVE implementations, and the benchmarking code
       into this file as directed.
-  - question: What must the bitmap data structure contain before I add the scan functions?
+  - question: What must the bitmap data structure contain before I can add the scan functions?
     answer: >-
-      It includes a byte array that holds the bits, the physical size in bytes, and the logical
-      size in bits. The same file also adds helpers to generate and analyze test bitmaps.
+      The data structure must include a byte array that holds the bits, the physical size in bytes, and the logical
+      size in bits. The same file must also add helpers to generate and analyze test bitmaps.
   - question: In what order should I implement and test the scanning approaches?
     answer: >-
       Start with the per-bit scalar baseline, then the optimized scalar version, followed by the

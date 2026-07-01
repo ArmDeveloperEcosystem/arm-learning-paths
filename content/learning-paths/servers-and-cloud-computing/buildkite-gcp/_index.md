@@ -38,7 +38,7 @@ generated_summary_faq:
     Axion, install Docker, Docker Buildx, and the Buildkite agent, and connect the agent to a
     Buildkite queue. First, you'll create a small Flask application and Dockerfile in a GitHub repository,
     then configure a Buildkite pipeline that uses Buildx to build a multi-architecture container
-    image,and push it to Docker Hub. You'll use Ubuntu or SUSE on the VM
+    image, and push it to Docker Hub. You'll use Ubuntu or SUSE on the VM
     and validate that the agent is online. By the end, you'll have a published
     image and a running Flask service to confirm the build.
   faqs:

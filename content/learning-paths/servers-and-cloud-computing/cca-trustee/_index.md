@@ -33,8 +33,8 @@ generated_summary_faq:
   summary: >-
     You'll complete an end-to-end confidential computing attestation
     flow on an Arm Fixed Virtual Platform using Arm Confidential Compute Architecture and Trustee
-    services. First, you'll start the Trustee components (AS, KBS, RVPS), launch a Linux realm on an
-    Armv9-A FVP with RME, and generate attestation evidence from the realm. After intentionally
+    services. First, you'll start the Trustee components, launch a Linux realm on an
+    Armv9-A FVP with Realm Management Extension (RME), and generate attestation evidence from the realm. After intentionally
     denying the first secret request to see how policy-based gating works, you'll endorse the
     realm initial measurement (RIM), repeat attestation, and retrieve the secret after the environment
     proves its isolation properties. By the end, you'll exercise and validate the complete path from evidence generation to

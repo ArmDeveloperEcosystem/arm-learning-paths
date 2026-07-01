@@ -31,12 +31,11 @@ generated_summary_faq:
   faq_generated_at: '2026-06-30T21:48:05Z'
   faq_source_hash: e4eb84292a669a8d73bff4b63d2fe3f70382dd873d023fc8ff24db5ad6178ab8
   summary: >-
-    You'll deploy an Arm-based Cobalt 100 virtual machine (VM) in Microsoft
-    Azure using the Azure Portal, select an appropriate VM series, and prepare it for remote access
+    You'll deploy an Arm-based virtual machine (VM) in Microsoft
+    Azure using the Azure portal, select an appropriate VM series, and prepare it for remote access
     and basic testing. First, you'll create the VM, then configure the associated Network Security
-    Group to allow inbound SSH (port 22) and an application test port (8080). Then, you'll connect over SSH using the VM’s public IP address and validate external connectivity
-    by running a service on the chosen port. By the end, you'll reach the VM via SSH and
-    confirm that traffic to the opened port is permitted from the configured source IP range.
+    Group to allow inbound SSH (port 22) and an application test port (8080). By the end, you'll connect over SSH using the VM’s public IP address and validate external connectivity over the configured source IP range
+    by running a service on the chosen port.
   faqs:
   - question: How do I choose between Dpsv6/Dplsv6 and Epsv6 when creating the VM?
     answer: >-
@@ -45,7 +44,7 @@ generated_summary_faq:
   - question: Where do I find the VM’s public IP address for SSH?
     answer: >-
       Open the VM resource in the Azure Portal and copy the Public IP address from the Overview
-      page. Use the admin username you set during creation (for example, azureuser) and the path
+      page. Use the admin username you set during creation (for example, `azureuser`) and the path
       to your SSH private key.
   - question: What should I check if SSH times out or is refused?
     answer: >-
@@ -58,8 +57,8 @@ generated_summary_faq:
       choose a different port if your workload requires broader access or a non-default port.
   - question: What result should I expect when verifying port 8080 connectivity?
     answer: >-
-      With an application or temporary HTTP server listening on port 8080, connecting to http://[public
-      IP]:8080 should return a response. If it doesn’t, re-check the NSG rule and ensure the service
+      With an application or temporary HTTP server listening on port 8080, connecting to `http://[public
+      IP]:8080` should return a response. If it doesn’t, re-check the NSG rule and ensure the service
       is running on the VM.
 # END generated_summary_faq
 

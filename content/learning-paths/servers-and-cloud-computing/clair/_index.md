@@ -32,7 +32,7 @@ generated_summary_faq:
     You'll install and run Clair on Arm-based Linux servers using both
     combined and distributed deployment models. First, you'll set up the combined deployment to run
     all services in a single process, then explore the distributed option where the indexer, matcher,
-    and notifier operate as separate services. With Clair running, you'll submit a container image manifest using clairctl to perform static analysis and generate a vulnerability report.
+    and notifier operate as separate services. With Clair running, you'll submit a container image manifest using `clairctl` to perform static analysis and generate a vulnerability report.
     You'll learn about timing considerations — allowing initial vulnerability data to populate
     the PostgreSQL database — so reports reflect current findings. By the end, you'll launch Clair,
     select a deployment model, and produce a report for a chosen image.

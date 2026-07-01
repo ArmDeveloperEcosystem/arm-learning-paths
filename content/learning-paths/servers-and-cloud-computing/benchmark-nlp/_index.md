@@ -32,7 +32,7 @@ generated_summary_faq:
     You'll deploy Hugging Face Sentiment Analysis models
     with PyTorch on Arm servers and measure how they perform. Starting from a working Ubuntu
     22.04 Arm environment, you'll run three NLP models with the Sentiment Analysis
-    pipeline, record baseline results, and then enable BFloat16 fast math kernels to assess the
+    pipeline, record baseline results, and enable BFloat16 fast math kernels to assess the
     impact on inference performance. By
     the end, you'll compare before-and-after measurements to confirm the effect of BFloat16
     on this workload.
@@ -43,20 +43,19 @@ generated_summary_faq:
       AWS Graviton3 (c7g) instances.
   - question: What system resources should I provision before running the steps?
     answer: >-
-      Use an Arm server instance with at least four CPU cores and 8GB of RAM. This capacity supports
+      Use an Arm server instance with at least four CPU cores and 8 GB of RAM. This capacity supports
       running the three sentiment analysis models and collecting measurements.
-  - question: Which framework and model source are used in this path?
+  - question: Which framework and model source will I use in this Learning Path?
     answer: >-
-      The path uses PyTorch to run Natural Language Processing models sourced from Hugging Face.
-      The examples use the Sentiment Analysis pipeline.
+      You'll uses PyTorch to run NLP Sentiment Analysis models sourced from Hugging Face.
   - question: How should I measure the performance uplift from BFloat16 fast math kernels?
     answer: >-
       First, run the models to collect a baseline using the same Sentiment Analysis pipeline.
       Then enable BFloat16 fast math kernels on supported Arm Neoverse-based AWS Graviton3 processors,
       rerun the same workload, and compare measurements.
-  - question: Which models are evaluated and what should I have at the end?
+  - question: Which models will I evaluate and what should I have at the end?
     answer: >-
-      The path evaluates three NLP models with the Sentiment Analysis pipeline. By the end, you
+      You'll evaluate three NLP models with the Sentiment Analysis pipeline. By the end, you
       should have deployed the models on your Arm server and recorded baseline and BFloat16-enabled
       performance results for comparison.
 # END generated_summary_faq

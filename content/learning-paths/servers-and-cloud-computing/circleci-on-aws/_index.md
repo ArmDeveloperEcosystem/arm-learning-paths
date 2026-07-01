@@ -32,7 +32,7 @@ generated_summary_faq:
   faq_source_hash: e04982fd668765fa2ab25f943f020b8d2b4a5e9b5ff3a51b7431cc4d93730180
   summary: >-
     You'll deploy CircleCI Arm-native workflows on Amazon
-    EC2 instances powered by AWS Graviton. Using the AWS Management Console, you'll provision an Arm64 instance (for
+    EC2 instances powered by AWS Graviton. Using the AWS Management Console, you'll provision an Arm-based instance (for
     example, `m6g.large`) on Linux and install the CircleCI CLI to work with configurations and
     pipelines from the terminal. In the CircleCI dashboard, you'll create a resource class to link
     a self-hosted machine runner to the correct namespace. Then, you'll install the CircleCI

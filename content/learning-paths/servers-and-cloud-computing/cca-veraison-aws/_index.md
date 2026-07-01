@@ -33,7 +33,7 @@ generated_summary_faq:
     in the RATS (RFC9334) model for Arm CCA attestation. After preparing an AWS account and authenticating,
     you'll create a Route53 domain and an HTTPS certificate so the Veraison REST APIs can be
     published on the internet. You'll deploy from the Veraison GitHub repository and
-    uses a bootstrap process to clone sources and set up the build environment. With the services running, you'll provision CCA
+    use a bootstrap process to clone sources and set up the build environment. With the services running, you'll provision CCA
     platform endorsements using the Linaro endorsement tool so Veraison can verify CCA attestation
     tokens.
   faqs:

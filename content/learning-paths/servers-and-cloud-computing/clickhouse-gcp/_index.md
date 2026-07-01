@@ -55,9 +55,9 @@ generated_summary_faq:
     answer: >-
       Confirm that the logs-topic exists under **Pub/Sub → Topics** and keep encryption and retention
       at their defaults. Complete the IAM setup so Dataflow and the VM can access Pub/Sub.
-  - question: Where should I install and use the Google Cloud CLI (gcloud) during this workflow?
+  - question: Where should I install and use the Google Cloud CLI (`gcloud`) during this workflow?
     answer: >-
-      Install the Arm64 Google Cloud CLI on the VM. Use it to authenticate
+      Install the Google Cloud CLI on the VM. Use it to authenticate
       to GCP, publish Pub/Sub messages, and submit Dataflow jobs.
   - question: What results should I record when validating and benchmarking ClickHouse?
     answer: >-

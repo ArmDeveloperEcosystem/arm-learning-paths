@@ -1,5 +1,5 @@
 ---
-title: Get Started with CCA Attestation and Veraison
+title: Get started with CCA Attestation and Veraison
 description: Learn how to inspect and verify Arm CCA attestation tokens using command-line tools and the open-source Veraison attestation verification service.
 
 minutes_to_complete: 30
@@ -42,7 +42,7 @@ generated_summary_faq:
   - question: Should I remove an existing Go installation before setting up the tools?
     answer: >-
       Yes. The steps direct you to remove any existing Go installation before downloading and
-      extracting the specified Go release and updating your PATH.
+      extracting the specified Go release and updating your `PATH`.
   - question: What can I verify locally before using the online verification service?
     answer: >-
       You can inspect the example CCA attestation token with command-line workflows to review
