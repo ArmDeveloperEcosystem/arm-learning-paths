@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Vivaldi
+description: Install Vivaldi on Arm Linux or Windows on Arm and use a native browser for development and web workflows.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:

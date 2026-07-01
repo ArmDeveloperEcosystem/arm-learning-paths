@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Create RTOS Threads"
+description: Add RTX5 threads to the Keil Studio project using CMSIS-RTOS2 APIs and verify the multitasking flow.
 
 weight: 4 # 1 is first, 2 is second, etc.
 

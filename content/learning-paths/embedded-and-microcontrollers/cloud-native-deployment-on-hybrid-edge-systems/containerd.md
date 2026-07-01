@@ -1,5 +1,6 @@
 ---
 title: Deploy firmware container using `containerd`
+description: Deploy a firmware container with containerd and verify a Hello World workload on the hybrid edge runtime.
 weight: 5
 
 ### FIXED, DO NOT MODIFY

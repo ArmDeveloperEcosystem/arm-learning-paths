@@ -1,14 +1,15 @@
 ---
-title: Build a Browser-Based RAG Application with LlamaIndex
+title: Build and test a browser-based RAG application with LlamaIndex
+description: Learn how to build a browser-based RAG application with LlamaIndex, ChromaDB, Ollama, and FastAPI on an Arm-based Google Cloud C4A VM.
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Build a Browser-Based RAG Application with LlamaIndex
+## Build a browser-based RAG application 
 
-In this section, you'll build and test a browser-based Retrieval-Augmented Generation (RAG) application using LlamaIndex on Google Cloud Axion Arm64.
+In this section, you'll build and test a browser-based Retrieval-Augmented Generation (RAG) application using LlamaIndex.
 
 You'll:
 
@@ -19,9 +20,9 @@ You'll:
 - Create a FastAPI backend
 - Query documents directly from a web browser
 
-## Architecture
+### Application architecture
 
-The following diagram shows how the components interact. A request from the browser reaches FastAPI, which calls LlamaIndex to retrieve relevant chunks from ChromaDB and passes them to the Ollama local LLM for answer generation:
+The following flow shows how the application components interact. A request from the browser reaches FastAPI, which calls LlamaIndex to retrieve relevant chunks from ChromaDB and passes them to the Ollama local LLM for answer generation:
 
 ```text
 Browser UI
@@ -30,14 +31,14 @@ FastAPI
     ↓
 LlamaIndex
     ↓
-ChromaDB Vector Store
+ChromaDB vector store
     ↓
-Ollama Local LLM
+Ollama local LLM
     ↓
 Documents
 ```
 
-## Activate the Python environment
+### Activate the Python environment
 
 Activate the Python virtual environment:
 
@@ -46,7 +47,7 @@ cd ~/llamaindex-rag
 source rag-env/bin/activate
 ```
 
-## Create sample documents
+### Create sample documents
 
 Create the first document:
 
@@ -72,7 +73,7 @@ LlamaIndex is a framework for building context-aware LLM applications using inde
 EOF
 ```
 
-## Create the RAG engine
+### Create the RAG engine
 
 Create the main LlamaIndex application:
 
@@ -151,7 +152,7 @@ def build_query_engine():
 EOF
 ```
 
-## Create browser UI
+### Create browser UI
 
 Create a browser-based interface for asking questions:
 
@@ -268,7 +269,7 @@ async function askQuestion() {
 EOF
 ```
 
-## Create FastAPI backend
+### Create FastAPI backend
 
 Create the FastAPI backend application:
 
@@ -340,9 +341,13 @@ INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:8000
 ```
+Keep the terminal open for testing the application. 
 
+## Test the browser-based RAG application
 
-## Open browser application
+After starting the application, test it by opening the UI and asking a few questions. 
+
+### Open browser application UI
 
 Open a browser and navigate to:
 
@@ -354,7 +359,7 @@ This opens the browser-based RAG application UI.
 
 ![Browser-based RAG application showing a question input box and generated response using LlamaIndex and Ollama#center](images/rag-browser.png "Browser-based LlamaIndex RAG application")
 
-## Test browser-based Q&A
+### Test browser-based Q&A
 
 Ask the following questions in the browser UI:
 
@@ -378,15 +383,17 @@ What is Google Cloud Axion?
 
 The answers will appear directly in the browser interface.
 
-## Add your own documents
+## (Optional) Add your own documents
 
-Copy your own files into the data directory:
+After confirming that the application works, you can try adding your own documents.
+
+Copy your own files into the data directory. For example:
 
 ```bash
 cp yourfile.txt ~/llamaindex-rag/data/
 ```
 
-Stop the running FastAPI server by pressing `Ctrl+C` in the terminal where Uvicorn is running. Then restart it:
+Stop the running FastAPI server by pressing `Ctrl + C` in the terminal where Uvicorn is running. Then restart it:
 
 ```bash
 uvicorn api:app --host 0.0.0.0 --port 8000
@@ -396,4 +403,6 @@ The `build_query_engine()` function runs on startup and reads all documents from
 
 ## What you've accomplished
 
-You've successfully built a browser-based RAG application using LlamaIndex on a Google Cloud Axion Arm64 VM. You created sample documents, generated embeddings using HuggingFace models, stored vectors in ChromaDB, exposed the backend using FastAPI, and queried custom documents directly from a browser using Ollama.
+You've now built a browser-based RAG application using LlamaIndex on an Arm-based Google Cloud C4A VM. You created sample documents, generated embeddings using Hugging Face models, stored vectors in ChromaDB, exposed the backend using FastAPI, and queried custom documents directly from a browser using Ollama.
+
+You can extend this workflow for your own LlamaIndex RAG applications on Arm-based cloud infrastructure. 

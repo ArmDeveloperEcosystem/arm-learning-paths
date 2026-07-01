@@ -1,5 +1,6 @@
 ---
 title: Set up your environment 
+description: Install the tools and Python dependencies needed to train and deploy the tiny rock-paper-scissors model on Arm.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

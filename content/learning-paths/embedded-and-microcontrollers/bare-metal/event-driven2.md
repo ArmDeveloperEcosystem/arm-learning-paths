@@ -1,6 +1,7 @@
 ---
 # User change
 title: Create event-driven application (2)
+description: Set up the Generic Interrupt Controller and complete the event-driven Armv8-A application on the FVP.
 
 weight: 6 # 1 is first, 2 is second, etc.
 

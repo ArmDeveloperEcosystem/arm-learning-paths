@@ -2,7 +2,6 @@
 title: Build an Android chat application with ONNX Runtime API
 description: Learn how to build ONNX Runtime and the generate() API for Android to run a Phi-3 model on Arm-based smartphones.
 
-
 minutes_to_complete: 60
 
 who_is_this_for: This is an advanced topic for software developers interested in learning how to build an Android chat app with ONNX Runtime and ONNX Runtime Generate() API.
@@ -16,6 +15,10 @@ prerequisites:
     - An Android phone with at least 8GB of RAM. This learning path was tested on Samsung Galaxy S24.
 
 author: Koki Mitsunami
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -33,7 +36,6 @@ operatingsystems:
     - Windows
     - Android
 
-
 further_reading:
     - resource:
         title: ONNX Runtime
@@ -48,11 +50,10 @@ further_reading:
         link: https://newsroom.arm.com/blog/arm-kleidi
         type: blog
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

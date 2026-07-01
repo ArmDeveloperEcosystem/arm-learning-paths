@@ -1,5 +1,6 @@
 ---
 title: FlexNet Publisher Floating license setup
+description: Set up a FlexNet Publisher floating license server and configure end-user machines for older Arm products that do not support user-based licensing.
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/dui0209
 author: Ronan Synnott

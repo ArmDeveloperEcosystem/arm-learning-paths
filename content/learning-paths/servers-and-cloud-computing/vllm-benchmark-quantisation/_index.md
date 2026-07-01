@@ -1,6 +1,6 @@
 ---
 title: Run vLLM inference with quantized models and benchmark on Arm servers
-    
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for developers interested in running inference on quantized models. In this Learning Path, you'll learn how to run inference on Llama 3.1-8B and Whisper with and without quantization. You'll then benchmark Llama performance and accuracy with vLLM's bench CLI and the LM Evaluation Harness.
@@ -21,6 +21,10 @@ author:
   - Nikhil Gupta
   - Marek Michałowski
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: ML
@@ -33,8 +37,6 @@ tools_software_languages:
     - Hugging Face
 operatingsystems:
     - Linux
-
-
 
 further_reading:
     - resource:
@@ -57,8 +59,6 @@ further_reading:
         title: LM Evaluation Harness (GitHub)
         link: https://github.com/EleutherAI/lm-evaluation-harness
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

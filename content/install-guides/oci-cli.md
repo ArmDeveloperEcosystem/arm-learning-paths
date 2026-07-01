@@ -15,6 +15,7 @@ test_images:
 - ubuntu:latest
 test_maintenance: true
 title: Oracle Cloud Infrastructure (OCI) CLI
+description: Install OCI CLI on Ubuntu for Arm, verify the installation, and configure access so you can manage Oracle Cloud Infrastructure resources.
 tool_install: true
 weight: 1
 ---

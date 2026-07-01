@@ -1,5 +1,6 @@
 ---
 title: UBL Cloud server setup
+description: Generate and activate Arm user-based licenses with the Cloud License Server so end users can check out commercial Arm tool licenses.
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/107573
 author: Ronan Synnott

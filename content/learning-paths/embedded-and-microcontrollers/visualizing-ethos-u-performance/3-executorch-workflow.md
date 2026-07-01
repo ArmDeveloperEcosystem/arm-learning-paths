@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Understand the ExecuTorch workflow"
+description: Understand the ExecuTorch conversion and runtime flow used to deploy neural network models to Arm targets.
 
 weight: 3
 

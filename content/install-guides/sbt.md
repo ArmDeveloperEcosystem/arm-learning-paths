@@ -1,5 +1,6 @@
 ---
 title: sbt
+description: Install sbt on Ubuntu for Arm so you can build Scala and Java projects with the standard sbt command-line tool.
 
 author: Jason Andrews
 minutes_to_complete: 10

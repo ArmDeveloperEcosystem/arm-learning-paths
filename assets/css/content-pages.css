@@ -297,6 +297,80 @@ html[theme='dark'] .incorrect-explain {color: #e86868} /* 27% lighter than arm's
     color: var(--lp-hover-text);
 }
 
+
+
+/* Generated AI-assisted summary/FAQ block
+*******************************************************************/
+.generated-summary-faq__heading {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 12px;
+    margin-bottom: 16px;
+    row-gap: 8px;
+}
+
+.generated-summary-faq__heading h3 {
+    line-height: 1.1;
+    margin: 0;
+}
+
+.generated-summary-faq__assist {
+    align-items: center;
+    display: inline-flex;
+    gap: 6px;
+}
+
+.generated-summary-faq__assist ads-modal {
+    display: inline-flex;
+}
+
+ads-tag.generated-summary-faq__ai-tag {
+    --ads-tag-background-color: transparent;
+    --ads-tag-background-color-hover: transparent;
+    --ads-tag-border-color: 1px solid var(--arm-web-safe-blue);
+    --ads-tag-border-color-hover: 1px solid var(--arm-green);
+    --ads-tag-color: var(--arm-web-safe-blue);
+    --ads-tag-color-hover: var(--arm-green);
+}
+
+html[theme='dark'] ads-tag.generated-summary-faq__ai-tag {
+    --ads-tag-border-color: 1px solid var(--arm-light-blue);
+    --ads-tag-border-color-hover: 1px solid var(--arm-green);
+    --ads-tag-color: var(--arm-light-blue);
+    --ads-tag-color-hover: var(--arm-green);
+}
+
+ads-button.generated-summary-faq__info {
+    --ads-button-color: var(--arm-web-safe-blue);
+    --ads-button-color-hover: var(--arm-green);
+    --ads-button-border-color: var(--arm-web-safe-blue);
+    --ads-button-border-color-hover: var(--arm-green);
+}
+
+html[theme='dark'] ads-button.generated-summary-faq__info {
+    --ads-button-color: var(--arm-light-blue);
+    --ads-button-color-hover: var(--arm-green);
+    --ads-button-border-color: var(--arm-light-blue);
+    --ads-button-border-color-hover: var(--arm-green);
+}
+
+ads-expansion-panel.generated-summary-faq__panel {
+    --ads-expansion-panel-border-color: var(--arm-light-grey);
+    --ads-expansion-panel-content-background-color: transparent;
+    --ads-expansion-panel-toggle-background-color: transparent;
+    --ads-expansion-panel-toggle-background-color-hover: transparent;
+    --ads-expansion-panel-toggle-icon-color-hover: var(--arm-green);
+}
+
+html[theme='dark'] ads-expansion-panel.generated-summary-faq__panel {
+    --ads-expansion-panel-border-color: rgba(163, 168, 174, 0.25);
+    --ads-expansion-panel-content-background-color: transparent;
+    --ads-expansion-panel-toggle-background-color: transparent;
+    --ads-expansion-panel-toggle-background-color-hover: transparent;
+    --ads-expansion-panel-toggle-icon-color-hover: var(--arm-green);
+}
+
 .share-icon {
     width: 36px;
     height: 36px;

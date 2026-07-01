@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Create Dockerfile and build docker image"
+description: Create a Dockerfile for Arm Compiler for Embedded and FVP tools, build the image, and test the containerized workflow.
 
 weight: 2 # 1 is first, 2 is second, etc.
 

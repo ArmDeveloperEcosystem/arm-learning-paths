@@ -1,5 +1,6 @@
 ---
 title: Set up Llama 3
+description: Download and prepare the Llama 3 model assets needed for the ExecuTorch deployment workflow.
 weight: 5
 
 ### FIXED, DO NOT MODIFY

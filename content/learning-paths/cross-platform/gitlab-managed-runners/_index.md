@@ -1,7 +1,6 @@
 ---
 title: Build a CI/CD pipeline using GitLab-hosted Arm runners
 
-
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for DevOps engineers who want to build CI/CD pipelines on Arm-based infrastructure using GitLab-hosted runners.
@@ -13,12 +12,15 @@ learning_objectives:
     - Configure pipeline stages to use Arm64 runners
     - Build and containerize applications for Arm64 architecture
     - Store container images in GitLab Container Registry
-    
 
 prerequisites:
     - A GitLab account (free tier includes Arm64 runner access)
 
 author: Mohamed Ismail
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -58,11 +60,10 @@ further_reading:
         link: https://learn.arm.com/install-guides/docker/
         type: documentation
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

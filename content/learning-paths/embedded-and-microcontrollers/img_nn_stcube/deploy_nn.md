@@ -1,6 +1,7 @@
 ---
 # User change
 title: Deploy the image classification NN model on STM32
+description: Import the trained image classification model into STM32CubeMX and generate code for the STM32 board.
 
 weight: 4 # 1 is first, 2 is second, etc.
 

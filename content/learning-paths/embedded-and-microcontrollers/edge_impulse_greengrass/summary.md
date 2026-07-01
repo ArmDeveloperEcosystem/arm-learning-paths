@@ -1,5 +1,6 @@
 ---
 title: Command and metrics reference
+description: Review the commands, metrics, and configuration values used throughout the Edge Impulse Greengrass deployment.
 weight: 10
 
 ### FIXED, DO NOT MODIFY

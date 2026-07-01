@@ -1,5 +1,6 @@
 ---
 title: Building the hybrid-runtime and container image (optional)
+description: Build the hybrid-runtime and firmware container image used to run Cortex-M workloads from a Cortex-A Linux environment.
 weight: 7
 
 ### FIXED, DO NOT MODIFY

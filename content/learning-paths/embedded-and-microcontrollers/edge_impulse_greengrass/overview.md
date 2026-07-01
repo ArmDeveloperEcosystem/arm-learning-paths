@@ -1,5 +1,6 @@
 ---
 title: Overview of Edge Impulse and AWS IoT Greengrass
+description: Understand how Edge Impulse models are packaged as AWS IoT Greengrass components for deployment to Arm-based edge devices.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

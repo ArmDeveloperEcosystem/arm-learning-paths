@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Connect AXI4 Peripheral to ZYNQ Processing System" 
+description: Connect the custom AXI4 peripheral to the Zynq processing system in Vivado so switch inputs can drive LED outputs on the Zybo Z7-10 board.
 
 weight: 4 # 1 is first, 2 is second, etc.
 

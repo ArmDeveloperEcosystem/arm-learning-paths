@@ -1,5 +1,6 @@
 ---
 title: Learn Device Connect and Strands architecture for edge devices
+description: Review the Device Connect and Strands architecture that lets AI agents discover and control edge devices.
 weight: 2
 
 # FIXED, DO NOT MODIFY

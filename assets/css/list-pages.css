@@ -7,6 +7,25 @@ Covers the following pages:
 
 
 
+/* CLS fix: reserve space for web components before hydration
+*******************************************************************/
+ads-card:not(:defined) {
+    display: block;
+    min-height: 180px;
+}
+ads-search:not(:defined) {
+    display: block;
+    min-height: 45px;
+}
+ads-expansion-panel:not(:defined) {
+    display: block;
+    min-height: 48px;
+}
+ads-masthead:not(:defined) {
+    display: block;
+    min-height: 100px;
+}
+
 /* Search / Status bar for active filters, # displayed, and sorting 
 *******************************************************************/ 
 #result-sort-div {
@@ -321,7 +340,7 @@ html[theme="light"] .learning-path-title, html[theme="light"] .basics-title {
     /*font-weight: bold;
     font-size:1.25rem;
     */
-    font-weight: 500;
+    font-weight: 400;
 
     margin-top: 0px;
     margin-bottom: 4px;
