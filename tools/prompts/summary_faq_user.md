@@ -15,7 +15,7 @@ Assume these rules while writing:
 Summary guidance:
 - Write the summary as an Arm Learning Path overview, not from the learner's first-person point of view.
 - Never use first-person wording in the summary, including "I", "we", "my", "our", or "let's".
-- Use "you" sparingly in the summary. Prefer neutral phrasing such as "This Learning Path shows...", "The path guides learners through...", or "Learners configure..." unless second person is clearly more direct.
+- Use direct, second person phrasing.
 - Say what learners build, configure, measure, deploy, debug, validate, or compare as they work through the steps.
 - Mention Arm technologies, tools, operating systems, and cloud platforms only when they appear in the context.
 - Avoid restating prerequisites, audience, objectives, or title text. The summary should add orientation around the workflow, not duplicate the surrounding page content.

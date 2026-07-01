@@ -22,9 +22,59 @@ prerequisites:
     [resource classes](https://circleci.com/docs/guides/execution-managed/resource-class-overview/), and 
     [runners](https://circleci.com/docs/guides/execution-runner/runner-overview/)
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-30T21:44:47Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: ec9cdca7aa9a5670f54ea3646f965149460d8e66d9d5d904e1b6dcf09867df39
+  summary_generated_at: '2026-06-30T21:44:47Z'
+  summary_source_hash: ec9cdca7aa9a5670f54ea3646f965149460d8e66d9d5d904e1b6dcf09867df39
+  faq_generated_at: '2026-06-30T21:44:47Z'
+  faq_source_hash: ec9cdca7aa9a5670f54ea3646f965149460d8e66d9d5d904e1b6dcf09867df39
+  summary: >-
+    You'll provision a SUSE Linux Google Cloud C4A virtual machine (VM) powered by Google Axion,
+    install the CircleCI CLI, create a custom resource class, and deploy the CircleCI Machine
+    Runner so CI/CD jobs execute natively on Arm. After configuring e a self-hosted runner linked
+    to a CircleCI namespace, you'll author a workflow that targets the resource class and runs a
+    small Node.js demo app on the Arm VM. By the end, you'll dispatch a CircleCI job
+    to the Arm runner and verify its execution in the CircleCI dashboard
+    and on the VM.
+  faqs:
+  - question: How do I know I created the correct C4A Arm VM in Google Cloud?
+    answer: >-
+      During creation, select the `c4a-standard-4` machine type in the Google Cloud Console. After
+      launch, open the VM details in Compute Engine and verify the machine type shows `c4a-standard-4`.
+  - question: What should I verify after installing the CircleCI CLI on SUSE Arm64?
+    answer: >-
+      The CLI should be available to validate configuration files, run jobs locally, and manage
+      runners. If it can't be installed or used, recheck that the required repositories were
+      added to the SUSE environment as shown in the steps.
+  - question: Which namespace should I use when creating the CircleCI resource class?
+    answer: >-
+      Use the CircleCI organization (namespace) where your project workflows run. The resource
+      class links your self-hosted runner to that namespace so only authorized jobs can target
+      the VM.
+  - question: How can I confirm the machine runner is registered and ready to accept jobs?
+    answer: >-
+      Check the CircleCI web dashboard for the resource class and runner status. On the VM, the
+      runner setup completes with a connection to CircleCI and then waits for jobs that reference
+      its resource class.
+  - question: How do I target the self-hosted Arm runner from my workflow, and what result should
+      I expect?
+    answer: >-
+      Configure the job to use the custom resource class created for the Arm runner. When triggered,
+      the job runs on the SUSE Arm64 VM and the CircleCI UI shows the job associated with that
+      resource class.
+# END generated_summary_faq
+
 author: Pareena Verma
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
