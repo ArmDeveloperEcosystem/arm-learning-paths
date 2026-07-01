@@ -1,5 +1,5 @@
 ---
-title: Learn how to optimize an application with BOLT
+title: Optimize an application with BOLT
 description: Learn how to build, profile, and optimize Arm executables using BOLT post-link binary optimization to improve application performance through code layout improvements.
 
 minutes_to_complete: 30
@@ -33,8 +33,7 @@ generated_summary_faq:
     You'll use BOLT to post-link optimize an Arm Linux executable
     based on real execution profiles. First, you'll prepare a target system for profiling and optionally
     a separate build/BOLT system, then choose a profiling method — Perf samples, ETM, or SPE — to
-    collect runtime behavior into a `perf.data` file. You'll convert the profile for BOLT, and run BOLT to reorder code layout and emit a new optimized executable. By the end, you'll make an informed choice about how to collect profiles, produce the expected artifacts,
-    and run the optimization steps in sequence to compare the resulting binary against
+    collect runtime behavior into a `perf.data` file. You'll convert the profile for BOLT, and run BOLT to reorder code layout and emit a new optimized executable. Finally, you'll compare the resulting binary against
     the original to observe improvements.
   faqs:
   - question: How should I choose between Perf samples, ETM, and SPE for profiling?
