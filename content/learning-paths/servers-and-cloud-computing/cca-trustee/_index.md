@@ -46,7 +46,7 @@ generated_summary_faq:
       the realm initial measurement (RIM) is endorsed.
   - question: How do I know the Trustee services are running correctly before launching the realm?
     answer: >-
-      Check the Docker container status and logs for the AS, KBS, and RVPS services. They should
+      Check the Docker container status and logs for the Trustee services. They should
       start without errors and be ready to accept requests.
   - question: When should I endorse the RIM, and how do I confirm it worked?
     answer: >-
@@ -56,7 +56,7 @@ generated_summary_faq:
     answer: >-
       The realm run produces evidence that the Attestation Service (AS) processes. Check the output
       and logs for evidence generation and a corresponding response from the AS.
-  - question: What indicates the FVP realm is ready before requesting a secret?
+  - question: How do I know the FVP realm is ready before requesting a secret?
     answer: >-
       The Linux realm should complete boot on the FVP and be able to produce attestation evidence.
       If evidence generation fails, resolve that before proceeding to secret requests.

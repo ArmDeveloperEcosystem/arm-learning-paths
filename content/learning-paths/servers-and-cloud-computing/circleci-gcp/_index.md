@@ -67,7 +67,7 @@ generated_summary_faq:
       I expect?
     answer: >-
       Configure the job to use the custom resource class created for the Arm runner. When triggered,
-      the job runs on the SUSE Arm64 VM and the CircleCI UI shows the job associated with that
+      the job runs on the SUSE arm64 VM and the CircleCI UI shows the job associated with that
       resource class.
 # END generated_summary_faq
 
