@@ -33,8 +33,7 @@ generated_summary_faq:
     with PyTorch on Arm servers and measure how they perform. Starting from a working Ubuntu
     22.04 Arm environment, you'll run three NLP models with the Sentiment Analysis
     pipeline, record baseline results, and then enable BFloat16 fast math kernels to assess the
-    impact on inference performance. The workflow is validated on Arm Neoverse-based AWS Graviton3
-    (c7g) instances and remains applicable to Arm servers meeting the stated requirements. By
+    impact on inference performance. By
     the end, you'll compare before-and-after measurements to confirm the effect of BFloat16
     on this workload.
   faqs:

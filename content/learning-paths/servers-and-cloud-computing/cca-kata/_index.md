@@ -35,8 +35,8 @@ generated_summary_faq:
     First, you'll learn about the Confidential Containers design, understand which components run inside the
     Trusted Execution Environment, and see how Trustee services (AS, KBS, RVPS) use Arm CCA
     attestation to authorize decryption. Then, you'll start the Trustee services and a local Docker
-    registry, publish an encrypted image, and launch the container on the FVP. By the end, you'll confirm attestation, key release, and that the workload runs in a Realm only
-    after authorization, completing an end-to-end confidential execution workflow.
+    registry, publish an encrypted image, and launch the container on the FVP. By the end, you'll complete an end-to-end confidential execution workflow and confirm attestation, key release, and that the workload runs in a Realm only
+    after authorization.
   faqs:
   - question: How do I know the Trustee services are ready before pushing the image?
     answer: >-

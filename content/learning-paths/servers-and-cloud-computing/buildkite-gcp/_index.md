@@ -38,15 +38,14 @@ generated_summary_faq:
     Axion, install Docker, Docker Buildx, and the Buildkite agent, and connect the agent to a
     Buildkite queue. First, you'll create a small Flask application and Dockerfile in a GitHub repository,
     then configure a Buildkite pipeline that uses Buildx to build a multi-architecture container
-    image for Arm and x86 and push it to Docker Hub. You'll use Ubuntu or SUSE on the VM
+    image,and push it to Docker Hub. You'll use Ubuntu or SUSE on the VM
     and validate that the agent is online. By the end, you'll have a published
     image and a running Flask service to confirm the build.
   faqs:
   - question: Which Google Cloud instance type and OS should I use for the VM?
     answer: >-
-      The steps use a Google Axion C4A Arm VM, specifically `c4a-standard-4` with 4 vCPUs and 16
-      GB memory. You can select either Ubuntu or SUSE Linux Enterprise Server as shown in the
-      installation instructions.
+      Use a Google Axion C4A Arm VM, specifically `c4a-standard-4` with 4 vCPUs and 16
+      GB memory. You can select either Ubuntu or SUSE Linux Enterprise Server as the OS.
   - question: Where do I create the Buildkite agent token, and when do I use it?
     answer: >-
       Create an agent token in your Buildkite organization after signing in (GitHub sign-in is
@@ -55,11 +54,11 @@ generated_summary_faq:
   - question: How do I confirm the Buildkite agent is connected and assigned to the right queue?
     answer: >-
       After configuring the agent and queue, check the Agents page in Buildkite; the agent should
-      appear online with the expected queue. If it does not, check the agent configuration and
+      appear online with the expected queue. If it doesn't, check the agent configuration and
       queue name, then repeat the verification step.
   - question: What files should my GitHub repository contain for the example application?
     answer: >-
-      Add a Dockerfile and a Python file named app.py. The provided Dockerfile uses `python:3.12-slim`,
+      Add a Dockerfile and a Python file named `app.py`. The provided Dockerfile uses `python:3.12-slim`,
       installs Flask, exposes port 5000, and runs the app.
   - question: What result should I expect after the pipeline runs successfully?
     answer: >-

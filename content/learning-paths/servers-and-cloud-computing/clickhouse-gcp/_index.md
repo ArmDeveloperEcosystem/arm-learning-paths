@@ -37,7 +37,7 @@ generated_summary_faq:
   faq_source_hash: e77cd1373236f39f360afe6844d642fde290960ccdad26544ff1e3342f2a980c
   summary: >-
     You'll deploy ClickHouse on an Arm-based Google Cloud C4A virtual machine and assemble a streaming analytics pipeline. After exploring C4A (Neoverse-V2) instances, you'll provision a `c4a-standard-4` SUSE Linux VM, create
-    a firewall rule to open TCP port `8123`, and install ClickHouse alongside the Google Cloud CLI.
+    a firewall rule to open TCP port 8123, and install ClickHouse alongside the Google Cloud CLI.
     Then, you'll set up Pub/Sub and required IAM so Apache Beam on Dataflow can stream events
     into ClickHouse. By the end, you'll validate end-to-end ingestion from Pub/Sub to ClickHouse and run
     baseline and analytical queries, capturing latency metrics (including p95) to evaluate ClickHouse
@@ -49,7 +49,7 @@ generated_summary_faq:
       creating the instance. This matches the configuration used in the steps.
   - question: Which firewall port needs to be opened for ClickHouse access?
     answer: >-
-      Open inbound TCP port `8123` by creating a firewall rule in your VPC. This exposes the ClickHouse
+      Open inbound TCP port 8123 by creating a firewall rule in your VPC. This exposes the ClickHouse
       endpoint required by the path.
   - question: How do I verify Pub/Sub is ready before launching the pipeline?
     answer: >-

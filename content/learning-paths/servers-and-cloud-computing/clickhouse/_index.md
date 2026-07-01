@@ -33,7 +33,7 @@ generated_summary_faq:
     the benchmark on an Arm server, observe per‑query timings, and repeat runs across candidate
     instance sizes to compare results. By collecting consistent measurements
     and interpreting the output, you can make instance sizing decisions for analytical workloads
-    on Arm. By the end, you'll operate a working ClickHouse deployment on Arm and have a set
+    on Arm. By the end, you'll have a set
     of ClickBench results that indicate how configuration choices influence query latency for
     the provided dataset.
   faqs:

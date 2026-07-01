@@ -35,7 +35,7 @@ generated_summary_faq:
     and Arm’s Realm Management Extension to practical token handling. First, you'll start with an overview
     of attestation and Veraison, then obtain an example CCA attestation token
     and set up the required tools by installing Go. You'll inspect the token’s structure using
-    command-line workflows and then submit it to a Linaro-hosted verification service implemented
+    command-line workflows, then submit it to a Linaro-hosted verification service implemented
     with Veraison components. By the end, you'll recognize a successful verification response and be able to relate it back to the token
     contents that you inspected.
   faqs:
@@ -58,7 +58,7 @@ generated_summary_faq:
       environment.
   - question: Do I need access to CCA hardware to follow this Learning Path?
     answer: >-
-      No. The path uses an example token and a publicly available verifier for emulated pre-silicon
+      No. You'll use an example token and a publicly available verifier for emulated pre-silicon
       CCA platforms hosted by Linaro.
 # END generated_summary_faq
 

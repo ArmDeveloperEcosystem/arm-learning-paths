@@ -35,7 +35,7 @@ generated_summary_faq:
     EC2 instances powered by AWS Graviton. Using the AWS Management Console, you'll provision an Arm64 instance (for
     example, `m6g.large`) on Linux and install the CircleCI CLI to work with configurations and
     pipelines from the terminal. In the CircleCI dashboard, you'll create a resource class to link
-    a self-hosted machine runner to the correct namespace. Then, you'll installs the CircleCI
+    a self-hosted machine runner to the correct namespace. Then, you'll install the CircleCI
     machine runner on the Arm64 instance using the CircleCI package repository for Debian/Ubuntu
     systems. By the end, you'll execute a workflow and test computation to verify that jobs
     run on the self-hosted Graviton runner as configured.

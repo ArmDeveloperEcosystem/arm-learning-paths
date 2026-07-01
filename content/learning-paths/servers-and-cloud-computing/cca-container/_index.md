@@ -43,7 +43,7 @@ generated_summary_faq:
     answer: >-
       Pull `armswdev/cca-learning-path:cca-simulation-v3`. Run `docker image list` and check that
       this repository and tag appear in the output.
-  - question: What result should I expect when the Realm guest VM starts?
+  - question: What result should I expect when the Realm guest virtual machine starts?
     answer: >-
       The guest virtual machine (VM) should boot as a Realm and run guest Linux. Continue when the
       VM is up and ready for the application injection step.

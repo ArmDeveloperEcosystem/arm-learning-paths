@@ -40,7 +40,7 @@ generated_summary_faq:
     when devices can't DMA directly to Realm memory. You'll also explore how PCIe‑TDISP and PCIe‑IDE
     provide secure device attach with attestation. Then, you'll run a pre-built Key Broker
     demo inside a Realm and use kernel tracing to observe SWIOTLB activity during VirtIO network
-    I/O. By the end, you can recognize when data paths rely on bounce buffers and how this relates
+    I/O. By the end, you'll recognize when data paths rely on bounce buffers and how this relates
     to the chosen device attach method.
   faqs:
   - question: How do I know that bounce buffers are being used in the Realm?

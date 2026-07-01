@@ -41,7 +41,7 @@ generated_summary_faq:
     release, set up a working directory, and gather profiles with BRBE, SPE, instrumentation,
     or PMU sampling. Using a small set of Arm TopDown indicators, you'll judge
     whether a program is front-end bound and a good candidate for BOLT. You'll then run BOLT with
-    collected profiles to reorganize code layout and then evaluate the impact using performance
+    collected profiles to reorganize code layout and evaluate the impact using performance
     metrics and profiling data to confirm improvements in instruction delivery and locality.
   faqs:
   - question: Which BOLT version should I use if my package manager installs an older release?
@@ -50,7 +50,7 @@ generated_summary_faq:
       prebuilt LLVM release instead (for example, LLVM 22.1.5) to match the required features.
   - question: Where do the example’s build and profiling outputs go?
     answer: >-
-      The path organizes outputs into three directories: out for binaries, prof for profile data,
+      You'll find outputs into three directories: out for binaries, prof for profile data,
       and heatmap for visualization artifacts. Keeping these separate makes it easier to rerun
       steps and compare results.
   - question: How do I know if my program is a good candidate for BOLT?
@@ -61,7 +61,7 @@ generated_summary_faq:
   - question: What should I use if my kernel does not meet the BRBE or SPE requirements?
     answer: >-
       If your kernel is older than the BRBE requirement, use SPE if the kernel meets the SPE version
-      requirement. If neither is available, the path also covers using instrumentation or PMU
+      requirement. If neither is available, you can use instrumentation or PMU
       event sampling to collect profiles.
   - question: What result should I expect after running BOLT with profiles?
     answer: >-

@@ -31,7 +31,7 @@ generated_summary_faq:
   faq_generated_at: '2026-06-30T21:42:00Z'
   faq_source_hash: ba896cb418c6ae4f96029081ac9ef1f9193e8983425ad7a316c184b5b6017fbf
   summary: >-
-    You'll deploy a simple workload in a Linux realm on
+    You'll deploy a sample workload in a Linux realm on
     an Armv9-A AEM Base Fixed Virtual Platform (FVP) with Realm Management Extension (RME) support
     and connect it to attestation services to control access to secrets. First, you'll start a minimal
     Key Broker Server (KBS) from the Veraison project in a container, then integrate it with the

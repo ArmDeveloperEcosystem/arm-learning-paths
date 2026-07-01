@@ -32,7 +32,7 @@ generated_summary_faq:
   summary: >-
     You'll use BOLT to post-link optimize an Arm Linux executable
     based on real execution profiles. First, you'll prepare a target system for profiling and optionally
-    a separate build/BOLT system, then choose a profiling method—Perf samples, ETM, or SPE—to
+    a separate build/BOLT system, then choose a profiling method — Perf samples, ETM, or SPE — to
     collect runtime behavior into a perf.data file. You'll convert the profile for BOLT, and run BOLT to reorder code layout and emit a new optimized executable. By the end, you'll make an informed choice about how to collect profiles, produce the expected artifacts,
     and run the optimization steps in sequence so the resulting binary can be compared against
     the original to observe improvements.

@@ -39,7 +39,7 @@ generated_summary_faq:
   summary: >-
     You'll provision a SUSE Linux Google Cloud C4A virtual machine (VM) powered by Google Axion,
     install the CircleCI CLI, create a custom resource class, and deploy the CircleCI Machine
-    Runner so CI/CD jobs execute natively on Arm. After configuring e a self-hosted runner linked
+    Runner so CI/CD jobs execute natively on Arm. After configuring a self-hosted runner linked
     to a CircleCI namespace, you'll author a workflow that targets the resource class and runs a
     small Node.js demo app on the Arm VM. By the end, you'll dispatch a CircleCI job
     to the Arm runner and verify its execution in the CircleCI dashboard

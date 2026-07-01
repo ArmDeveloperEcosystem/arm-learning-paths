@@ -32,13 +32,13 @@ generated_summary_faq:
   faq_source_hash: b8268d4df3b62aeb9943b750b436a936134d47745fa71db6cc08db8c84eb37be
   summary: >-
     You'll deploy Apache Cassandra on Arm-based Google
-    Cloud Axion C4A virtual machines and validating a working baseline before running simple workload
-    tests. First, you'll create a `c4a-standard-4` instance in the Google Cloud console, install Cassandra
-    on Ubuntu or SUSE, and satisfy the Java requirement. Then, you'll start Cassandra as a background
+    Cloud Axion C4A virtual machines and validate a working baseline before running simple workload
+    tests. First, you'll create a `c4a-standard-4` instance in the Google Cloud console and install Cassandra
+    on Ubuntu or SUSE. Then, you'll start Cassandra as a background
     service, with logs tailed to confirm “Startup complete,” followed by nodetool status to verify
     the node state. By the end, you'll benchmark using the built-in `cassandra-stress` utility
     to exercise write, read, and mixed operations on Arm64 to
-    confirm Cassandra is operating correctly on Axion-based instances.
+    confirm Cassandra is operating correctly.
   faqs:
   - question: Which Google Cloud machine type should I choose for this setup?
     answer: >-
