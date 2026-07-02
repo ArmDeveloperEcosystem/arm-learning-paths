@@ -217,4 +217,4 @@ To check whether the Learning Path is structurally sound, you can prompt somethi
 Review this Learning Path for structure. 
 ```
 
-By using words such as "Learning Path" and "structure", the prompt invokes the `learning-path-structure-review` skill. The AI assistant returns with suggestions focused on whether each page is task oriented and the Learning Path has necessary files and sections. 
+By using words such as "Learning Path" and "structure", the prompt invokes the `learning-path-structure-review` skill. The AI assistant returns with suggestions focused on whether each page is task oriented and whether the Learning Path has necessary files and sections. 
