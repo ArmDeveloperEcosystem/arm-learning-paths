@@ -65,7 +65,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 LEARNING_PATH_ROOT = REPO_ROOT / "content" / "learning-paths"
 DEFAULT_REPORT_PATH = REPO_ROOT / "reports" / "generated-summary-faq" / "latest-run.yml"
 DEFAULT_PROMPT_DIR = REPO_ROOT / "tools" / "prompts"
-COPILOT_INSTRUCTIONS_PATH = REPO_ROOT / ".github" / "copilot-instructions.md"
+WRITING_STYLE_SKILL = REPO_ROOT / ".github" / "skills" / "writing-style-review" / "SKILL.md"
 LEARNING_PATH_AUTHORING_GUIDE_DIR = LEARNING_PATH_ROOT / "cross-platform" / "_example-learning-path"
 DEFAULT_OPENAI_BASE_URL = "https://openai-api-proxy.geo.arm.com/api/providers/openai/v1/responses/"
 DEFAULT_OPENAI_MODEL = "gpt-4.1-mini"
@@ -74,7 +74,7 @@ DEFAULT_OPENAI_RETRIES = 2
 DEFAULT_PROMPT_STEP_LIMIT = 8
 DEFAULT_PROMPT_EXCERPT_CHARS = 900
 AUTHORING_GUIDANCE_FILES = (
-    (COPILOT_INSTRUCTIONS_PATH, 3200),
+    (WRITING_STYLE_SKILL, 3200),
     (LEARNING_PATH_AUTHORING_GUIDE_DIR / "overview.md", 1800),
     (LEARNING_PATH_AUTHORING_GUIDE_DIR / "write-2-metadata.md", 2200),
     (LEARNING_PATH_AUTHORING_GUIDE_DIR / "appendix-2-writing-style.md", 2600),
