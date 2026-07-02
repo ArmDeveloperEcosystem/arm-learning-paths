@@ -9,18 +9,16 @@ layout: learningpathall
 
 ## Starting an OCI A4 or A1 instance
 
-Once you have [created an OCI account](../csp/oci) and verified that you can start an
-instance, you will create an AmpereOne powered A4 instance and connect to it with SSH to
-install the Minecraft Java server.
+Once you have [created an OCI account](/learning-paths/servers-and-cloud-computing/csp/oci/)
+and verified that you can start an instance, you will create an Ampere powered A1 instance
+and connect to it with SSH to install the Minecraft Java server.
 
 1. Log on to [Oracle Cloud](https://cloud.oracle.com)
 2. On the OCI dashboard, navigate to Compute -> Instances to start a new instance: 
    ![OCI Console Compute dashboard showing the Instances section#center](oci_compute_dashboard.png "Navigate to Compute -> Instances in the OCI dashboard")
 3. Click "Create instance", then: 
-    * Choose one of the availability domains offered to you with A4 instances available
-    * Select "Change shape", and set the instance type to Ampere VM.Standard.A4.Flex - if the
-      A4.Flex instance type is not available in your preferred 
-      AD, try another, or choose VM.Standard.A1.Flex:
+    * Choose one of the availability domains offered to you with A1 instances available
+    * Select "Change shape", and set the instance type to Ampere VM.Standard.A1.Flex:
       ![OCI instance creation shape settings panel with VM.Standard.A4.Flex selected#center](oci_change_shape.png "Configure the VM instance shape to VM.Standard.A4.Flex")
     * Beside the instance type, click the small black arrow to open options. Allocate 2 OCPUs
       and 12 GB of memory to your instance
@@ -30,7 +28,7 @@ install the Minecraft Java server.
 5. Configure networking as follows:
     * When prompted, create a new Virtual Cloud Network (VCN) and public subnet if you do not
       have one already, or choose an existing VCN configuration
-    * Select "Automatically assign public IPv4 address" to to allow you to access the instance
+    * Select "Automatically assign public IPv4 address" to allow you to access the instance
       remotely from your Minecraft server
     * Create an SSH key pair if you do not have one (and download both private and public keys),
       or upload the public key for an existing key pair so that you can connect to your instance
@@ -54,7 +52,7 @@ ssh -i <path to private key> opc@<public IP address>
 
 ### What you've accomplished
 
-You successfully provisioned an Ampere A1 or A4 virtual machine instance on Oracle Cloud Infrastructure, configured its virtual network to assign a public IP address, and connected to the server securely over SSH.
+You successfully provisioned an Ampere A1 virtual machine instance on Oracle Cloud Infrastructure, configured its virtual network to assign a public IP address, and connected to the server securely over SSH.
 
 ### Next step
 

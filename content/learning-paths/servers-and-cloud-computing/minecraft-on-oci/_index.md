@@ -3,9 +3,9 @@ title: Run a Minecraft server on OCI A1 Arm64 instances
 
 description: Provision an Arm64 instance on Oracle Cloud Infrastructure, install the Java runtime, and deploy a persistent Minecraft server for multiplayer gameplay.
 
-draft: true
-cascade:
-    draft: true
+# draft: true
+# cascade:
+#    draft: true
 
 minutes_to_complete: 10
 
@@ -20,8 +20,10 @@ learning_objectives:
 prerequisites:
     - Review [Get started with Oracle Cloud Infrastructure](/learning-paths/servers-and-cloud-computing/csp/oci/) 
     - Install software that allows you to connect to a running instance over SSH
-    - Install the Minecraft client on your local laptop, and ensure that you have a Microsoft
-      or Mojang account to log in (it will help if you know the basics of playing Minecraft too)
+    - You will need a copy of the [Minecraft Java edition 
+      client](https://www.minecraft.net/en-us/download) installed, and 
+      [a license](https://www.minecraft.net/en-us/store/minecraft-java-bedrock-edition-pc)
+      for the game.
 
 author: Dave Neary
 
