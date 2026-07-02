@@ -19,49 +19,51 @@ prerequisites:
 # START generated_summary_faq
 generated_summary_faq:
   template_version: summary-faq-v3
-  generated_at: '2026-07-02T17:17:19Z'
+  generated_at: '2026-07-02T19:09:31Z'
   generator: ai
   ai_assisted: true
   ai_review_required: true
   model: gpt-5
   prompt_template: summary-faq-v3
   source_hash: a639e60da034fd04e891c9236e9fe5dab47cca87f6174828275ef5a76c43c32e
-  summary_generated_at: '2026-07-02T17:17:19Z'
+  summary_generated_at: '2026-07-02T19:09:31Z'
   summary_source_hash: a639e60da034fd04e891c9236e9fe5dab47cca87f6174828275ef5a76c43c32e
-  faq_generated_at: '2026-07-02T17:17:19Z'
+  faq_generated_at: '2026-07-02T19:09:31Z'
   faq_source_hash: a639e60da034fd04e891c9236e9fe5dab47cca87f6174828275ef5a76c43c32e
   summary: >-
-    This Learning Path shows how to communicate known loop-size constraints to a C++ compiler
-    so it can generate faster code on Arm systems. You start with a baseline loop whose size is
-    provided at runtime, initialize data, and compute a sum to establish a reference result and
-    timing. You then encode developer knowledge by rewriting the loop bound as (n/4)*4 to guarantee
-    a multiple-of-four iteration count, a property that can unlock simpler code paths and SIMD
-    vectorization on Arm. Learners build and run both versions, validate that the results match
-    the intended data range, and compare runtimes to observe the impact of providing clear boundary
-    information.
+    You'll translate developer knowledge about loop sizes into concrete
+    C++ code so the compiler can generate more efficient code on Arm. Starting with a baseline
+    loop whose trip count is only known at runtime, you'll rewrite the bound using integer truncation
+    to guarantee a multiple of four. Supplying this boundary information allows the compiler to
+    assume a regular iteration count and apply optimizations such as SIMD vectorization. You'll
+    implement both variants and compare behavior to understand how compile-time context influences
+    generated code and can affect runtime.
   faqs:
+  - question: Which compiler options should I use to build the examples?
+    answer: >-
+      You don't need to use a particular compiler or flags. Use your standard C++
+      build workflow on an Arm Linux system and keep options identical across variants to make
+      comparisons meaningful.
   - question: What result should I expect when I run the baseline program?
     answer: >-
-      You should see the computed sum for the chosen loop size. If the sample prints timing, record
-      it as the baseline to compare with the boundary-aware version.
-  - question: Which inputs help me see the effect of aligning the loop size to a multiple of four?
+      The program initializes an array and computes the sum, so you should see a numeric sum printed.
+      If the provided code prints timing information, note the duration for the loop size you
+      entered.
+  - question: Is rounding down to a multiple of four safe for every loop?
     answer: >-
-      Try values that are multiples of four and values that are not, for example 1024 and 1027.
-      This helps you observe how rounding down to a multiple of four affects behavior and timing.
-  - question: How do I verify that the optimized loop still computes the intended result?
+      Use the multiple-of-four constraint only when you know it preserves the required work for
+      your algorithm. If all elements must be processed, this path does not list a remainder-handling
+      step, so do not drop iterations unless that is acceptable.
+  - question: How do I know whether the compiler used the boundary information?
     answer: >-
-      Use the same effective size for allocation, initialization, and iteration after applying
-      (n/4)*4. Compare the printed sums across versions using that effective length to confirm
-      correctness.
-  - question: Why does using (n/4)*4 help the compiler optimize the loop?
+      Run both versions with the same input and compare observed behavior, such as timing if the
+      code reports it. A difference indicates the compiler recognized the constraint and produced
+      different code, though exact changes are not enumerated here.
+  - question: What happens if the input size is less than four or not divisible by four?
     answer: >-
-      It guarantees that the iteration count is divisible by four at runtime, which communicates
-      a clear boundary condition. Compilers can use this property to generate tighter code and
-      enable SIMD vectorization.
-  - question: What should I check if I do not observe a runtime improvement?
-    answer: >-
-      Increase the loop size and run multiple times to reduce timing noise. Also ensure both builds
-      use the same settings and that you are measuring the same work in both versions.
+      The expression (max_loop_size/4)*4 truncates, so inputs less than four yield zero iterations
+      and non-multiples drop up to three iterations. Choose test sizes accordingly and confirm
+      this constraint matches your intent.
 # END generated_summary_faq
 
 author: Kieran Hejmadi
@@ -104,4 +106,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

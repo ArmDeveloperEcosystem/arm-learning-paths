@@ -25,49 +25,48 @@ prerequisites:
 # START generated_summary_faq
 generated_summary_faq:
   template_version: summary-faq-v3
-  generated_at: '2026-07-02T17:15:58Z'
+  generated_at: '2026-07-02T19:04:59Z'
   generator: ai
   ai_assisted: true
   ai_review_required: true
   model: gpt-5
   prompt_template: summary-faq-v3
   source_hash: d021122b9217e2326e98d45aeffccb742357e77a7774f9c469d2c73285ca91a9
-  summary_generated_at: '2026-07-02T17:15:58Z'
+  summary_generated_at: '2026-07-02T19:04:59Z'
   summary_source_hash: d021122b9217e2326e98d45aeffccb742357e77a7774f9c469d2c73285ca91a9
-  faq_generated_at: '2026-07-02T17:15:58Z'
+  faq_generated_at: '2026-07-02T19:04:59Z'
   faq_source_hash: d021122b9217e2326e98d45aeffccb742357e77a7774f9c469d2c73285ca91a9
   summary: >-
-    This Learning Path guides you to build a distributed edge AI application where a Raspberry
-    Pi 5 performs on-device gesture recognition with MediaPipe and TensorFlow Lite and sends commands
-    to a Reachy Mini robot running in a MuJoCo simulation on a development machine. You set up
-    the Pi, enable Git LFS to retrieve the gesture model, run the app, and open a browser dashboard
-    on port 8042 to deliver thumbs-up or thumbs-down verdicts that trigger Reachy’s reactions.
-    The steps explain how the Pi connects to the robot daemon over the network and how to operate
-    the dashboard, then walk through the code structure that separates perception, logic, robot
-    motion, and static assets so you can extend or adapt the project.
+    You'll build a distributed edge AI application that runs MediaPipe
+    gesture inference on a Raspberry Pi 5 and drives a Reachy Mini robot in a MuJoCo simulation.
+    First, you'll start the simulator on a development machine, prepare the Pi with Raspberry Pi OS and
+    Git LFS so the gesture model downloads correctly, then run the app and open a browser dashboard
+    to monitor the camera feed and verdicts. A thumbs-up or thumbs-down from the webcam triggers
+    victory or defeat motions in the simulated robot. You'll also learn about the project layout
+    so you can locate perception, app logic, motion, and dashboard components in the codebase to iterate on.
   faqs:
-  - question: I cloned the project but the gesture model file is tiny—did Git LFS work?
+  - question: Which address should I open to view the dashboard?
     answer: >-
-      Verify that you installed and enabled Git LFS before cloning. Re-clone with LFS enabled
-      and check that assets/gesture_recognizer.task is a large binary file, not a small text pointer.
-  - question: The dashboard doesn’t open at http://localhost:8042—what should I try?
+      If you use VS Code Remote SSH port forwarding, open `http://localhost:8042` on your laptop.
+      Otherwise, browse to `http://<pi-ip-address>:8042` from any machine on the same network.
+  - question: How do I find the Raspberry Pi IP address for the dashboard?
     answer: >-
-      If you use VS Code Remote SSH, confirm that port forwarding is active. Otherwise, open http://<pi-ip-address>:8042
-      from a browser on the same network and make sure the app is running on the Raspberry Pi.
-  - question: How do I know the Raspberry Pi is connected to the MuJoCo simulation?
+      Run `hostname -I` on the Raspberry Pi to print its IP address. Then use that address with
+      port `8042` in your browser.
+  - question: How do I confirm the gesture model downloaded correctly with Git LFS?
     answer: >-
-      When you show a thumbs-up or thumbs-down, the simulated Reachy Mini should perform the corresponding
-      victory or defeat reaction. If nothing happens, check that both machines are on the same
-      network and that the connection settings in main.py point to the correct host.
-  - question: Can I run the Raspberry Pi headless for this app?
+      Check that `assets/gesture_recognizer.task` exists as a real model file, not a tiny pointer
+      file. If you cloned before enabling Git LFS, enable LFS and re-clone the repository.
+  - question: The dashboard loads but the MuJoCo simulation does not move—what should I check?
     answer: >-
-      Yes. Open the dashboard from another machine using the Raspberry Pi’s IP address and port
-      8042; the Pi does not need a local display.
-  - question: Where do I change gesture handling or robot moves in the code?
+      Verify the MuJoCo simulation is running on your development machine and that the Pi can
+      reach it over the network. Also review `main.py` because it contains the settings used for
+      the distributed simulation route.
+  - question: What result should I expect when a thumbs-up or thumbs-down is detected?
     answer: >-
-      Edit gesture.py to adjust recognition or mapping and moves.py to change motion routines.
-      Use main.py to wire the app and update the settings used for the distributed simulation
-      route.
+      You should see the simulated Reachy Mini play a victory or defeat motion, and the web dashboard
+      should reflect the verdict. This indicates the camera, inference, network, and simulator
+      are connected end to end.
 # END generated_summary_faq
 
 author: Matt Cossins
@@ -123,4 +122,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

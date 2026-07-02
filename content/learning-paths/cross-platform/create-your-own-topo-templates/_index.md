@@ -24,50 +24,51 @@ prerequisites:
 # START generated_summary_faq
 generated_summary_faq:
   template_version: summary-faq-v3
-  generated_at: '2026-07-02T17:18:10Z'
+  generated_at: '2026-07-02T19:10:34Z'
   generator: ai
   ai_assisted: true
   ai_review_required: true
   model: gpt-5
   prompt_template: summary-faq-v3
   source_hash: 280ddbaed118073072407c7e43c743f4d090e153201401deeec4648f9fb0c4ba
-  summary_generated_at: '2026-07-02T17:18:10Z'
+  summary_generated_at: '2026-07-02T19:10:34Z'
   summary_source_hash: 280ddbaed118073072407c7e43c743f4d090e153201401deeec4648f9fb0c4ba
-  faq_generated_at: '2026-07-02T17:18:10Z'
+  faq_generated_at: '2026-07-02T19:10:34Z'
   faq_source_hash: 280ddbaed118073072407c7e43c743f4d090e153201401deeec4648f9fb0c4ba
   summary: >-
-    This Learning Path guides you through authoring and deploying Topo Templates for Arm-based
-    Linux targets over SSH. You start by cloning and running a Hello World template to validate
-    your setup, then modify it by adding a new clone-time argument under the x-topo args block
-    in compose.yaml. Next, you create a template from an empty directory that serves a simple
-    web page with configurable text and color, define standard Compose services, and add x-topo
-    metadata for arguments, deployment guidance, and hardware requirements. Optional Agent Skills
-    help bootstrap or review your template. By the end, learners have a working template that
-    Topo can build on the host and run on an Arm target.
+    You'll author and deploy Topo Templates to Arm-based
+    Linux targets over SSH. First, you'll clone and run a starter template to confirm your setup, then edit
+    its `compose.yaml` to add `x-topo` arguments that make the greeting emoji configurable at clone
+    time. Next, you'll create a new template from an empty directory that serves a simple web page
+    with configurable text and color while learning the core pieces of a template: standard Compose
+    services, `x-topo` metadata, and build arguments for Arm Linux targets. You'll also see
+    where to find optional Agent Skills to assist with creating or converting projects, and how
+    to recognize a successful deployment by observing the configured behavior on the target.
   faqs:
-  - question: What result should I expect after running topo clone for the Hello World template?
+  - question: What should I see after running `topo clone` on the Hello World template?
     answer: >-
-      I should see a new directory at ~/topo-welcome with the template files and clone output
-      indicating the repository was copied. That confirms Topo can fetch and prepare the template
-      locally.
-  - question: Where do I add a new clone-time argument like a greeting emoji?
+      You should see a new directory at the path you provided (for example, `~/topo-welcome`) and
+      clone output that includes lines like `Copy files` and `Cloning into ...`. After cloning,
+      the template’s services can be deployed to the Arm-based Linux target as shown in the steps.
+  - question: Where do I add a new clone-time argument such as a greeting emoji?
     answer: >-
-      I edit compose.yaml and add a new key under the x-topo args section. The template already
-      includes GREETING_NAME there, so I add my new argument alongside it.
-  - question: How do I document hardware requirements or deployment guidance in a template?
+      Add it under the `x-topo` args section in `compose.yaml`, alongside the existing `GREETING_NAME`
+      argument. Define the argument name and metadata there so Topo can surface it during cloning.
+  - question: How do I confirm that my new argument is being used?
     answer: >-
-      I place that information in the x-topo metadata block in compose.yaml. This keeps guidance
-      and requirements with the template so users see it during cloning and deployment.
-  - question: What components should a new Topo Template include before I test it?
+      Clone and deploy the updated template, then check the running service’s behavior for your
+      change. For example, the Hello World greeting should include the emoji you configured, or
+      the sample webpage should reflect your chosen text and color.
+  - question: What are the essential parts of a minimal Topo Template I create from scratch?
     answer: >-
-      It needs a compose.yaml with standard Compose services, an x-topo metadata block, build
-      arguments exposed as Topo clone-time parameters, and a container image built for Arm Linux
-      targets.
-  - question: Which Agent Skill helps convert a Docker Compose project into a Topo Template?
+      Include a `compose.yaml` with standard Compose services, an `x-topo` metadata block, and build
+      arguments exposed as Topo clone-time parameters. The container image should be built for
+      Arm Linux targets.
+  - question: When should I use Agent Skills, and which ones are available for templates?
     answer: >-
-      I use topo-template-bootstrap to add or improve the template structure in an existing repository.
-      The topo-template-context skill provides reference context for x-topo metadata, schema,
-      docs, and CLI template behavior.
+      Use Agent Skills as optional aids when you want help creating or converting a project into
+      a Topo Template. The specification provides `topo-template-context` for reference about `x-topo`
+      and CLI behavior and `topo-template-bootstrap` to help convert a repository into a Topo Template.
 # END generated_summary_faq
 
 author: Tomas Agustin Gonzalez Orlando
@@ -123,4 +124,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

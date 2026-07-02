@@ -33,7 +33,7 @@ generated_summary_faq:
     checksum project on an Arm Linux system, establish a C baseline, and measure results. First, you'll
     generate the C implementation, create a test program that validates correctness and records
     timing for multiple input sizes, and ask Copilot to produce a GCC-based Makefile tuned for
-    a Neoverse N1 target. Then, you'll to build and run the project, verify outputs, and
+    a Neoverse N1 target. Then, you'll build and run the project, verify outputs, and
     collect timing data. With a working harness and repeatable measurements, you're positioned
     to introduce Arm Neon intrinsics for the Adler32 hot path and compare behavior against the
     baseline C version.
@@ -57,8 +57,8 @@ generated_summary_faq:
       If a flag is not recognized for your CPU, adjust or remove it and rebuild.
   - question: What output should I expect when measuring performance?
     answer: >-
-      The test program measures timing around Adler32 calls on random inputs of 1 kb, 10 kb, 100
-      kb, 1 mb, and 10 mb. You should see per-size timings that you can reuse when evaluating
+      The test program measures timing around Adler32 calls on random inputs of 1 KB, 10 KB, 100
+      KB, 1 MB, and 10 MB. You should see per-size timings that you can reuse when evaluating
       a Neon-based implementation.
 # END generated_summary_faq
 
@@ -106,4 +106,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

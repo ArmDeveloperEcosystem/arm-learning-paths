@@ -17,48 +17,48 @@ prerequisites:
 # START generated_summary_faq
 generated_summary_faq:
   template_version: summary-faq-v3
-  generated_at: '2026-07-02T17:21:03Z'
+  generated_at: '2026-07-02T19:26:16Z'
   generator: ai
   ai_assisted: true
   ai_review_required: true
   model: gpt-5
   prompt_template: summary-faq-v3
   source_hash: 39c5e146afbfc74c3076d2cf3f1a67ddc0e4715f39b2cff1ccf76b288415bdc0
-  summary_generated_at: '2026-07-02T17:21:03Z'
+  summary_generated_at: '2026-07-02T19:26:16Z'
   summary_source_hash: 39c5e146afbfc74c3076d2cf3f1a67ddc0e4715f39b2cff1ccf76b288415bdc0
-  faq_generated_at: '2026-07-02T17:21:03Z'
+  faq_generated_at: '2026-07-02T19:26:16Z'
   faq_source_hash: 39c5e146afbfc74c3076d2cf3f1a67ddc0e4715f39b2cff1ccf76b288415bdc0
   summary: >-
-    This Learning Path shows how to apply Eigen’s vectorized operations on Arm systems with ASIMD
-    (Neon) and Scalable Vector Extension (SVE), then build TensorFlow with SVE enabled. Learners
-    create and run two C++ programs that construct random matrices, iterate computations, and
-    report numeric results, illustrating how Eigen maps common linear algebra expressions onto
-    Arm SIMD. The first example works with a 100 x 100 matrix and accumulates a scalar result,
-    while the second performs repeated 512 x 512 matrix multiplications and prints the matrix
-    norm. The path then guides the build of TensorFlow with SVE support so that Eigen’s SVE vectorization
-    is available during execution.
+    You'll apply Eigen’s vectorized math on Arm by writing and running
+    small C++ programs that exercise Neon/ASIMD and Scalable Vector Extension (SVE) code paths.
+    You'll implement two concrete examples: summing elements in a 100×100 matrix over multiple
+    iterations, and performing repeated 512×512 matrix multiplications that use fused multiply-add
+    operations. After validating the Eigen examples on an Arm Linux system, you'll build TensorFlow
+    with SVE enabled by following the documented build flow and required
+    dependencies. You'll compile and run Eigen-based workloads and complete an SVE-capable
+    TensorFlow build on Arm.
   faqs:
-  - question: What result should I expect when running the matrix multiplication example?
+  - question: What result should I expect when I run the Eigen examples?
     answer: >-
-      The program prints a line like: C.norm(): <number>. The exact value varies because the matrices
-      are initialized randomly, but seeing that output without errors confirms the loop completed.
-  - question: Can I change the matrix sizes or iteration count in the examples?
+      Example 1 prints a single numeric value representing the sum of all elements. Example 2
+      prints one number from `C.norm()`. The exact values can vary because the matrices are randomized.
+  - question: Can I change `N` or the matrix dimensions to adjust runtime?
     answer: >-
-      Yes. Update the matrix dimensions in the constructors and adjust the N definition to change
-      the iteration count. Larger sizes and higher N increase runtime and memory usage.
-  - question: Do I need SVE hardware to complete the Eigen examples?
+      Yes. Edit the `N` constant or the matrix sizes in the sample code, then rebuild. Larger matrices
+      or a higher `N` increase runtime.
+  - question: Why does the matrix multiplication example mention fused multiply-add (FMA)?
     answer: >-
-      No. Eigen supports Neon/ASIMD in addition to SVE. On Arm systems without SVE, Eigen’s ASIMD
-      paths are used.
-  - question: Which Eigen headers and data types are used in these examples?
+      The example is structured so Eigen can use FMA on CPUs that support it. You do not need
+      to verify FMA usage to continue; a correct run still prints a single numeric norm.
+  - question: Which compiler should I use to build the examples?
     answer: >-
-      The examples include the Eigen/Dense module. One example operates on a 100 x 100 float matrix,
-      and the matrix-multiplication example uses MatrixXd, which is double-precision.
-  - question: What should I check if the TensorFlow with SVE build fails?
+      Use a recent version of GCC or Clang on Linux as listed in the prerequisites. A successful
+      build runs and prints the expected single-number outputs without errors.
+  - question: How do I approach the TensorFlow with SVE step, and how do I know it worked?
     answer: >-
-      Verify that all required build dependencies from the TensorFlow instructions are installed
-      and that you applied the SVE-specific steps from this path. Use a recent GCC or Clang on
-      an Arm Linux system and re-run the build.
+      Follow the TensorFlow build-from-source flow in this path, including the SVE-related steps
+      and required dependencies. A successful outcome completes the build and allows TensorFlow
+      to run on your Arm system.
 # END generated_summary_faq
 
 author: Konstantinos Margaritis
@@ -106,4 +106,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

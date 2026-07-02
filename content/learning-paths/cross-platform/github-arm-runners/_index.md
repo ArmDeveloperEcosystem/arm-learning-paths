@@ -18,51 +18,52 @@ prerequisites:
 # START generated_summary_faq
 generated_summary_faq:
   template_version: summary-faq-v3
-  generated_at: '2026-07-02T17:56:18Z'
+  generated_at: '2026-07-02T19:35:34Z'
   generator: ai
   ai_assisted: true
   ai_review_required: true
   model: gpt-5
   prompt_template: summary-faq-v3
   source_hash: 3557d534c51f81839cc353ebbd600ec588a60197d2c27c9a58e97c25017d07e4
-  summary_generated_at: '2026-07-02T17:56:18Z'
+  summary_generated_at: '2026-07-02T19:35:34Z'
   summary_source_hash: 3557d534c51f81839cc353ebbd600ec588a60197d2c27c9a58e97c25017d07e4
-  faq_generated_at: '2026-07-02T17:56:18Z'
+  faq_generated_at: '2026-07-02T19:35:34Z'
   faq_source_hash: 3557d534c51f81839cc353ebbd600ec588a60197d2c27c9a58e97c25017d07e4
   summary: >-
-    This Learning Path shows how to build and publish multi-architecture container images targeting
-    arm64 and amd64 using GitHub Actions with Arm-hosted runners. It starts by comparing build
-    options—emulation with Docker buildx versus native builds coordinated through an image manifest—so
-    you can select an approach that fits project complexity. Learners configure Arm-hosted runners
-    for public or private repositories, choose between standard and larger runner types, and create
-    a workflow that runs on Arm hardware. The path then covers creating a repository, adding secrets
-    for Docker Hub, and triggering the workflow to produce and push images. On completion, learners
-    can run a build and see the resulting multi-architecture image published to Docker Hub.
+    You'll build and publish multi-architecture container images with
+    GitHub Actions using Arm-hosted runners. You'll compare common build options, including emulation
+    and native builds assembled with a manifest, then run workflows on Arm-managed arm64 runners
+    for public or private repositories. You'll create a repository, configure secrets for Docker
+    Hub, and define a workflow that builds images for arm64 alongside amd64, then pushes a multi-architecture
+    image. You'll also review available runner types for private repositories. After triggering
+    a workflow and verifying that Docker Hub lists a manifest with arm64 and amd64 platforms, you'll confirm
+    that the build and publication steps completed as intended.
   faqs:
-  - question: Which build option should I use for multi-architecture images?
+  - question: How do I know the job ran on an Arm-hosted runner?
     answer: >-
-      Use emulation with Docker buildx for simplicity, but expect slower performance for complex
-      builds. For faster native builds, create images per architecture and publish a manifest
-      that references them.
-  - question: Can I use Arm-hosted runners in public and private repositories?
+      Check the Actions run details for the runner name or labels that indicate an Arm architecture
+      and confirm the workflow selects the Arm-hosted runner. If the run shows a different runner,
+      review the `runs-on` setting in the workflow.
+  - question: I’m using a private repository and can’t select an Arm-hosted runner—what should
+      I check?
     answer: >-
-      Yes. Arm-hosted runners are available for public repositories on the free plan, subject
-      to standard usage limits. For private repositories, a Team or Enterprise Cloud plan is required.
-  - question: 'Which GitHub-hosted runner type should I choose: standard or larger?'
+      Confirm the account uses a Team or Enterprise Cloud plan because private repositories
+      require it for Arm-hosted runners. If it still doesn’t appear, review the repository or
+      organization runner settings.
+  - question: Which build approach does this path use for multiple architectures?
     answer: >-
-      Use standard runners for general workloads. Choose larger runners if you need to control
-      RAM, CPU, and disk space, or if you require options such as a static IP address or runner
-      groups.
-  - question: What secrets do I need to push images to Docker Hub?
+      The path explains emulation and manifest-based builds, then uses Arm-hosted runners to perform
+      native arm64 builds and assemble a multi-architecture image. The workflow relies on native Arm execution
+      rather than instruction emulation for the arm64 build.
+  - question: Where do I store credentials so the workflow can push images to Docker Hub?
     answer: >-
-      Add repository secrets that provide Docker Hub credentials as referenced by the workflow
-      file. Make sure the secret names match the workflow and that the job logs show successful
-      authentication before the push steps.
-  - question: How do I verify the result is a multi-architecture image on Docker Hub?
+      Add the required registry credentials as repository secrets and reference them in the
+      workflow. Without these secrets, the push step fails to authenticate.
+  - question: What result should I expect after the workflow completes?
     answer: >-
-      After the workflow completes, check the image in Docker Hub and inspect the manifest to
-      confirm entries for arm64 and amd64. If only one architecture is listed, review the workflow
-      steps that build and publish each architecture.
+      Expect a successful Actions run and a new image tag on Docker Hub with a multi-architecture
+      manifest listing arm64 and amd64. If the platforms are missing, review the build logs
+      to see which architecture jobs ran and which images were pushed.
 # END generated_summary_faq
 
 author: Jason Andrews
@@ -109,4 +110,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

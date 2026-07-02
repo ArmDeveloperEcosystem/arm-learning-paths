@@ -38,12 +38,12 @@ generated_summary_faq:
     and execute commands inside it. Then, you'll build a minimal integration test suite for
     the Arm MCP server, focusing on JSON-RPC 2.0 communication over standard input and output.
     Finally, you'll add a GitHub Actions workflow to run the tests on every push and pull request
-    using native Arm64 runners with Docker. By the end, you'll have containerized tests that validate
+    using native arm64 runners with Docker. By the end, you'll have containerized tests that validate
     MCP server behavior locally and in continuous integration.
   faqs:
   - question: How do I know Docker is ready before running the examples?
     answer: >-
-      Run docker info and confirm it returns configuration details without errors. If it fails,
+      Run `docker info` and confirm it returns configuration details without errors. If it fails,
       start the Docker daemon and retry.
   - question: What should I expect when I run the basic Testcontainers example?
     answer: >-
@@ -56,11 +56,11 @@ generated_summary_faq:
       each test run.
   - question: Where can I find a complete reference implementation of the tests?
     answer: >-
-      A full test implementation is available in the Arm MCP repository under mcp-local/tests/.
+      A full test implementation is available in the Arm MCP repository under `mcp-local/tests/`.
       You can consult those files while building your own suite.
   - question: Which events should trigger the GitHub Actions workflow, and where is it defined?
     answer: >-
-      The workflow runs on push and pull_request and is defined at `.github/workflows/integration-tests.yml`.
+      The workflow runs on `push` and `pull_request` and is defined at `.github/workflows/integration-tests.yml`.
       GitHub’s native Arm64 runners include Docker.
 # END generated_summary_faq
 
@@ -117,4 +117,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

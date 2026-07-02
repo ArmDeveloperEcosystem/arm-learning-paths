@@ -20,47 +20,48 @@ prerequisites:
 # START generated_summary_faq
 generated_summary_faq:
   template_version: summary-faq-v3
-  generated_at: '2026-07-02T17:19:59Z'
+  generated_at: '2026-07-02T19:19:58Z'
   generator: ai
   ai_assisted: true
   ai_review_required: true
   model: gpt-5
   prompt_template: summary-faq-v3
   source_hash: 058f779bc7dd9faef294a57f4524bf525046d757e21a287744825fb9b290935e
-  summary_generated_at: '2026-07-02T17:19:59Z'
+  summary_generated_at: '2026-07-02T19:19:58Z'
   summary_source_hash: 058f779bc7dd9faef294a57f4524bf525046d757e21a287744825fb9b290935e
-  faq_generated_at: '2026-07-02T17:19:59Z'
+  faq_generated_at: '2026-07-02T19:19:58Z'
   faq_source_hash: 058f779bc7dd9faef294a57f4524bf525046d757e21a287744825fb9b290935e
   summary: >-
-    This Learning Path guides learners through building, running, and sharing Docker images with
-    a focus on Arm support and multi-architecture workflows. You validate a local Docker installation,
-    then create and run a simple image. Next, use Docker buildx to produce images for multiple
-    architectures from one build definition. When emulation is slow, configure a remote builder
-    and direct builds to an Arm Linux server over SSH. The path also demonstrates assembling architecture-specific
-    images into a single multi-architecture image using Docker manifest, and shows practical ways
-    to verify Arm support by inspecting image metadata in common registries.
+    You'll build, run, and share Docker images that
+    target Arm and x86. First, you'll confirm Docker is installed, then use `docker buildx` to
+    create multi-architecture images. When emulation on a non-Arm machine is slow, you'll switch
+    to a remote Arm builder over SSH using `docker context`. You'll also publish
+    multi-architecture artifacts by assembling per-architecture images with the experimental
+    `docker manifest` workflow. Finally, you'll verify results by inspecting architecture metadata in container
+    registries. You'll understand when to choose `docker buildx` versus `docker manifest` and how
+    to offload Arm builds to a remote server.
   faqs:
-  - question: How do I confirm Docker is ready before building images?
+  - question: How do I know Docker is installed correctly before I start?
     answer: >-
-      Run the command docker run hello-world. You should see a confirmation message from the hello-world
-      container; if not, install or start Docker and try again.
-  - question: How do I check that Docker buildx is available?
+      Run `docker run hello-world`. If Docker is installed, the command completes and confirms
+      that the engine can run containers.
+  - question: What should I see to confirm `docker buildx` is available?
     answer: >-
-      Run docker buildx --help. The correct result is a usage message that begins with “Usage:
-      docker buildx [OPTIONS] COMMAND”.
-  - question: I did not get the expected buildx usage message. What should I do?
+      Run `docker buildx --help`. You should see a usage message that begins with `Usage: docker
+      buildx [OPTIONS] COMMAND`.
+  - question: 'Which option should I use to create a multi-architecture image: `docker buildx` or `docker manifest`?'
     answer: >-
-      Install the most recent version of Docker and recheck docker buildx --help. Older versions
-      may not include buildx or may not enable it by default.
-  - question: Builds for Arm on my non-Arm machine are slow. What should I use instead?
+      Use `docker buildx` to build multi-architecture images directly. Use `docker manifest` when you prefer
+      to build and test separate images per architecture first and combine them later; note that
+      `docker manifest` is experimental and not recommended for production.
+  - question: What should I do if building Arm images on my non-Arm machine is slow?
     answer: >-
-      Use docker context to target a remote Arm Linux server and run the build there. Ensure Docker
-      is installed on the remote machine and that it is reachable over SSH without a password
-      prompt.
-  - question: How can I verify that an image includes Arm support after pushing it?
+      Use a remote Arm server via `docker context` and SSH. Ensure Docker is installed on the remote
+      Arm machine and that SSH access does not require a password.
+  - question: How do I check that an image supports Arm after I push it?
     answer: >-
-      Inspect the image in the container registry. On Docker Hub, check the OS/ARCH list, and
-      on AWS ECR Public the supported architectures are printed in the image details.
+      Inspect the image in your container registry’s web interface. Registries such as Docker
+      Hub and Amazon ECR Public list supported OS/ARCH values so you can verify arm64 is present.
 # END generated_summary_faq
 
 author: Jason Andrews
@@ -111,4 +112,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

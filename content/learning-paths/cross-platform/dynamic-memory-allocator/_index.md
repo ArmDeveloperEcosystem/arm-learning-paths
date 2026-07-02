@@ -19,48 +19,49 @@ prerequisites:
 # START generated_summary_faq
 generated_summary_faq:
   template_version: summary-faq-v3
-  generated_at: '2026-07-02T17:20:24Z'
+  generated_at: '2026-07-02T19:24:07Z'
   generator: ai
   ai_assisted: true
   ai_review_required: true
   model: gpt-5
   prompt_template: summary-faq-v3
   source_hash: c59308676849aea9b7cfce8c48c7d6e1ca072ef6fb38fb193a34aa5b2597b9b9
-  summary_generated_at: '2026-07-02T17:20:24Z'
+  summary_generated_at: '2026-07-02T19:24:07Z'
   summary_source_hash: c59308676849aea9b7cfce8c48c7d6e1ca072ef6fb38fb193a34aa5b2597b9b9
-  faq_generated_at: '2026-07-02T17:20:24Z'
+  faq_generated_at: '2026-07-02T19:24:07Z'
   faq_source_hash: c59308676849aea9b7cfce8c48c7d6e1ca072ef6fb38fb193a34aa5b2597b9b9
   summary: >-
-    This Learning Path walks through designing and implementing a minimal dynamic memory allocator
-    in C on Linux. You compare static and dynamic allocation, then define a small API surface
-    with simple_malloc and simple_free and outline their expected behavior. A provided project
-    layout (CMakeLists.txt, heap.c, heap.h, and a test program) lets learners focus on the allocator
-    logic rather than build scaffolding. You implement the allocator, build the example, and run
-    allocations and frees to observe success cases and NULL returns. The path closes by highlighting
-    trade-offs and limitations in simple allocators, preparing learners to reason about heap management
-    and the choices behind standard malloc and free implementations.
+    You'll design and implement a minimal dynamic memory
+    allocator in C on Linux, showing how heap-style allocation works behind familiar interfaces.
+    First, you'll define the behavior of `simple_malloc` and `simple_free`, implement them in a small project
+    with `heap.c` and `heap.h`, and exercise them from a provided test program. Then, you'll contrast
+    dynamic and static allocation, describe failure behavior, and explore practical trade-offs
+    of a simple allocator. You'll build and run the code, observe allocations
+    and frees in action, and reason about basic risks and limitations of heap usage when integrating
+    allocation into real programs.
   faqs:
-  - question: Which functions do I need to implement for the allocator?
+  - question: Which files do I edit to implement the allocator?
     answer: >-
-      Implement simple_malloc and simple_free. Their declarations are in heap.h, and their behavior
-      is described in the design step.
-  - question: What files should I edit to change the allocator’s behavior?
+      Put the implementation in `heap.c` and the declarations in `heap.h`. The test program that calls
+      your functions is in `main.c`, and `CMakeLists.txt` configures the build.
+  - question: How do I confirm the test program calls my `simple_malloc` and `simple_free`?
     answer: >-
-      Edit heap.c to change the allocator implementation and heap.h if you need to adjust the
-      interface. The test program in main.c exercises your changes, and CMakeLists.txt configures
-      the build.
-  - question: What result should I expect when I run the example program?
+      Check that `main.c` includes `heap.h` and uses `simple_malloc` and `simple_free`. You can also add
+      temporary logging or assertions in `heap.c` to verify the call flow during a test run.
+  - question: What should I check if `simple_malloc` returns `NULL` for a small request?
     answer: >-
-      The program should allocate memory with simple_malloc, use it, and call simple_free without
-      errors. If a request cannot be satisfied, simple_malloc returns NULL as specified.
-  - question: Do I need to replace standard malloc and free in my system?
+      Verify the requested size and confirm your allocator is initialized before the first request.
+      Ensure your implementation handles allocation failure paths correctly and that the test
+      code checks for `NULL` before using the returned pointer.
+  - question: Do I need to replace the C library `malloc` and `free`?
     answer: >-
-      No. This path introduces separate functions named simple_malloc and simple_free to avoid
-      interfering with the system allocator. Use the provided test program to call your versions.
-  - question: Do I need to implement calloc or realloc for this path?
+      No. You'll use separate functions named `simple_malloc` and `simple_free` and won't replace
+      the C library allocator.
+  - question: How can I sanity-check that `simple_free` works before moving on?
     answer: >-
-      No. The scope is limited to simple_malloc and simple_free. Additional functions are not
-      listed and are outside this Learning Path.
+      Run sequences that allocate, free, and then allocate again to see if subsequent requests
+      succeed without errors. Add basic checks or prints in `main.c` and `heap.c` to confirm that
+      block metadata and returned pointers behave as expected.
 # END generated_summary_faq
 
 author: David Spickett
@@ -108,4 +109,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

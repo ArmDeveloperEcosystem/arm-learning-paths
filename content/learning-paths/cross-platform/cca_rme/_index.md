@@ -18,51 +18,50 @@ prerequisites:
 # START generated_summary_faq
 generated_summary_faq:
   template_version: summary-faq-v3
-  generated_at: '2026-07-02T17:16:42Z'
+  generated_at: '2026-07-02T19:06:31Z'
   generator: ai
   ai_assisted: true
   ai_review_required: true
   model: gpt-5
   prompt_template: summary-faq-v3
   source_hash: a1685fb43efecb9690d03c7f8ee64ab20ae8aece91190e2223705106568b1038
-  summary_generated_at: '2026-07-02T17:16:42Z'
+  summary_generated_at: '2026-07-02T19:06:31Z'
   summary_source_hash: a1685fb43efecb9690d03c7f8ee64ab20ae8aece91190e2223705106568b1038
-  faq_generated_at: '2026-07-02T17:16:42Z'
+  faq_generated_at: '2026-07-02T19:06:31Z'
   faq_source_hash: a1685fb43efecb9690d03c7f8ee64ab20ae8aece91190e2223705106568b1038
   summary: >-
-    This Learning Path introduces Arm Confidential Compute Architecture (CCA) and shows how to
-    explore Realm Management Extension (RME) using a bare‑metal example included with Arm Development
-    Studio. You import the example into the IDE and run it on the Arm Architecture Envelope Model
-    (AEM) Fixed Virtual Platform supplied with Development Studio. With Arm Debugger features,
-    you step through execution that demonstrates the Realm world alongside Normal, Secure, and
-    Root worlds, and see how a secure monitor in Root world manages transitions. The path focuses
-    on building an intuition for CCA’s separation of resource management from access by examining
-    concrete code paths and runtime behavior on the model.
+    You'll learn the key ideas of Arm Confidential Compute Architecture
+    (CCA) and see how Realm Management Extension (RME) supports a CCA system. First, you'll review how
+    CCA extends TrustZone with Normal, Secure, Realm, and Root worlds, with a secure monitor orchestrating
+    transitions. Then, you'll import a bare-metal RME example included with Arm Development
+    Studio and run it on the Arm Architecture Envelope Model (AEM) Fixed Virtual Platform supplied
+    with the tools. Using the Arm Debugger, you'll explore and debug the example to examine
+    system behavior in a controlled model environment and connect the architectural concepts to
+    a working RME setup.
   faqs:
-  - question: Which example should I import in Arm Development Studio to explore RME?
+  - question: Where do I import the RME bare-metal example in Arm Development Studio?
     answer: >-
-      Import the bare‑metal example that illustrates the Realm Management Extension included with
-      Arm Development Studio (2023.0 or later). In the IDE, go to File > Import > Arm Development
-      Studio > Examples & Programming Libraries and select the RME bare‑metal example.
-  - question: What target model should I use to run the example?
+      Open the IDE and choose **File > Import... > Arm Development Studio > Examples & Programming
+      Libraries**. Then, select the RME bare-metal example that targets the AEM Fixed Virtual Platform.
+  - question: Which target should I use to run the example?
     answer: >-
-      Use the Arm Architecture Envelope Model (AEM) Fixed Virtual Platform supplied with Arm Development
-      Studio. Select the supplied AEM FVP configuration when launching the example.
-  - question: What should I check if the example does not appear or fails to import?
+      Run the project on the Arm Architecture Envelope Model (AEM) Fixed Virtual Platform supplied
+      with Development Studio. Make sure the launch targets the AEM FVP before starting the
+      debugger.
+  - question: Do I need an operating system or a physical board to follow the steps?
     answer: >-
-      Verify that you are using Arm Development Studio 2023.0 or later. If the list is empty,
-      check that the installation is complete and includes the example content and the AEM FVP
-      supplied with Development Studio.
-  - question: What behavior should I look for when stepping through the example with the debugger?
+      No. The example is bare-metal and runs on the supplied AEM FVP, so you don’t need an OS or
+      hardware board.
+  - question: How does this example connect to CCA concepts?
     answer: >-
-      Expect to step through code paths that exercise the RME architectural feature and transitions
-      between security states. The goal is to correlate CCA concepts with the points where execution
-      enters and exits those states.
-  - question: How does CCA organize security states that this example demonstrates?
+      It demonstrates Realm Management Extension (RME), a processor feature needed to implement
+      a CCA system. CCA adds Normal, Secure, Realm, and Root worlds, with a secure monitor in
+      Root managing transitions.
+  - question: What should I check if the example is missing or fails to import?
     answer: >-
-      CCA extends TrustZone by adding a Realm world and an underlying Root world to the existing
-      Normal and Secure worlds. A secure monitor runs in Root world and manages transitions between
-      these security states.
+      Confirm you're using Arm Development Studio 2023.0 or later because the example is provided
+      with that version or newer. If it still doesn’t appear, verify that the examples and the
+      AEM FVP components are installed with your setup.
 # END generated_summary_faq
 
 author: Ronan Synnott
@@ -117,4 +116,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

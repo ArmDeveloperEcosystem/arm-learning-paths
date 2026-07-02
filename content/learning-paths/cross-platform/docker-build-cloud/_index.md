@@ -19,51 +19,47 @@ prerequisites:
 # START generated_summary_faq
 generated_summary_faq:
   template_version: summary-faq-v3
-  generated_at: '2026-07-02T17:19:21Z'
+  generated_at: '2026-07-02T19:21:37Z'
   generator: ai
   ai_assisted: true
   ai_review_required: true
   model: gpt-5
   prompt_template: summary-faq-v3
   source_hash: 9a94219b689b8e22a175c6067c6bb6d139d6ad22f3aac77c78b6b38970d5a5eb
-  summary_generated_at: '2026-07-02T17:19:21Z'
+  summary_generated_at: '2026-07-02T19:21:37Z'
   summary_source_hash: 9a94219b689b8e22a175c6067c6bb6d139d6ad22f3aac77c78b6b38970d5a5eb
-  faq_generated_at: '2026-07-02T17:19:21Z'
+  faq_generated_at: '2026-07-02T19:21:37Z'
   faq_source_hash: 9a94219b689b8e22a175c6067c6bb6d139d6ad22f3aac77c78b6b38970d5a5eb
   summary: >-
-    This Learning Path shows how to build Arm and x86 container images as a single multi-architecture
-    image using Docker Build Cloud. It contrasts emulation with native builds on separate machines
-    and guides you to use a cloud builder to avoid local emulation for complex workloads. Learners
-    configure Docker Build Cloud, target multiple platforms, and produce an image manifest that
-    references architecture-specific variants. The path then adds continuous integration with
-    GitHub Actions, using repository secrets and a workflow that invokes Docker Build Cloud as
-    the builder. After completing the steps, you can trigger a cloud build and verify that the
-    published image advertises both Arm and x86.
+    You'll build multi-architecture container images for Arm and x86
+    using Docker Build Cloud and then automate those builds with GitHub Actions. You'll compare
+    common approaches for multi-architecture builds and configure Docker Build Cloud as the builder
+    to avoid relying on instruction emulation. Then, you'll create a GitHub repository,
+    add a workflow that targets multiple architectures, and set required secrets so the workflow
+    can run unattended. You'll trigger a cloud-backed build and see logs that confirm
+    Arm and x86 variants were produced through the configured pipeline.
   faqs:
-  - question: Can I run the build from a non-Arm machine?
+  - question: Which option should I use to build multi-architecture images without relying on
+      emulation?
     answer: >-
-      Yes. You can drive the process from any architecture because the builds run on Docker Build
-      Cloud rather than through local emulation.
-  - question: What result should I expect after a successful Docker Build Cloud build?
+      Use Docker Build Cloud as the builder. Emulation can be slow, so
+      you'll configure cloud-backed builds instead.
+  - question: How do I know the image actually targets both Arm and x86?
     answer: >-
-      Expect a pushed image that includes a manifest referencing separate Arm and x86 variants.
-      Your container registry entry should list a multi-architecture image that can be pulled
-      on either architecture.
-  - question: How do I verify the image is multi-architecture?
+      Check the build or workflow logs for the listed target platforms and verify the image manifest
+      with Docker tooling. You should see entries for both Arm and x86.
+  - question: What should I check if the GitHub Actions workflow fails due to missing credentials?
     answer: >-
-      Inspect the image manifest and confirm entries for both Arm and x86. You can also pull the
-      same tag on an Arm system and an x86 system to confirm the correct variant is selected on
-      each.
-  - question: What should I configure in GitHub before running the workflow?
+      Confirm that all required secrets are added in the repository settings and that the workflow
+      references them by the correct names. Update the secret names or values to match the workflow.
+  - question: Do I need to create a new GitHub repository for this workflow?
     answer: >-
-      Create a repository and add the required repository secrets described in the steps so the
-      workflow can authenticate and push images. Then commit the workflow file that uses Docker
-      Build Cloud as the builder.
-  - question: How do I confirm the workflow used Docker Build Cloud instead of emulation?
+      The steps use a new repository to get started, but you can use an existing one. Ensure the
+      workflow file and required secrets are added to whichever repository you choose.
+  - question: How can I confirm the workflow used Docker Build Cloud instead of local emulation?
     answer: >-
-      Check the GitHub Actions logs for the selected builder and the platforms built. If the logs
-      show Docker Build Cloud as the builder and native builds per architecture, emulation was
-      not used.
+      Review the workflow configuration and logs to see that the selected builder is Docker Build
+      Cloud. Ensure the builder is set before the build step runs.
 # END generated_summary_faq
 
 author: Jason Andrews
@@ -105,4 +101,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-
