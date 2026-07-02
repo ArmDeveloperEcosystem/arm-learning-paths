@@ -18,7 +18,7 @@ prerequisites:
 
 author: Zach Lasiuk
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

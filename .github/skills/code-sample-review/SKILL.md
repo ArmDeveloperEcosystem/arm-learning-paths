@@ -46,7 +46,7 @@ Check for:
 ## Workflow
 
 1. Identify the review scope and whether the request is editorial, technical, or mixed.
-2. Inspect surrounding prose before judging a code block; code samples should be evaluated in context.
+2. Inspect surrounding prose before judging a code block; code samples should be evaluated in context. If you've previously read the page, use context and don't re-read it unless there's a change since the last read. 
 3. Depending on the type of review, suggest fixes as follows:
   - For review requests, report issues by file and line when possible, ordered by learner impact.
   - For edit requests, report issues and suggest focused changes that preserve technical intent and existing repository patterns.

@@ -18,7 +18,7 @@ This skill focuses on anchor text and link clarity. For tables, notices, tab pan
 
 ## Workflow
 
-1. Identify the target file, directory, section, or selected text.
+1. Identify the target file, directory, section, or selected text. If you've previously read the page, use context and don't re-read it unless there's a change since the last read. 
 2. Read surrounding context before suggesting any changes.
 3. After understanding the context of the URL, suggest concise and natural rewrites to the anchor text based on `Quality rules`. 
 4. After the user accepts suggestions, make changes, then re-open or search changed lines to verify the Markdown link syntax is valid.

@@ -31,7 +31,7 @@ This skill is for search and discovery metadata. For draft visibility metadata, 
 ## Workflow
 
 1. Identify whether the target is an install guide content page, a Learning Path `_index.md`, or a Learning Path content page.
-2. Read the title, existing description, headings, introduction, task flow, code or command context, and validation or conclusion.
+2. Read the title, existing description, headings, introduction, task flow, code or command context, and validation or conclusion. If you've previously read the page, use context and don't re-read it unless there's a change since the last read. 
 3. Add or revise the `description` field in front matter based on quality rules.
 4. After editing, re-open or search the files to verify each changed target has one `description` field.
 5. Report files changed and note any skipped files.
