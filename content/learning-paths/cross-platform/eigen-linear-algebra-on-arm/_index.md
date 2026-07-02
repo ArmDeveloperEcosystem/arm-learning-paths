@@ -14,9 +14,56 @@ learning_objectives:
 prerequisites:
     - An Arm-based computer running Linux and a recent version of a C++ compiler (Clang or GCC).
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-07-02T17:21:03Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 39c5e146afbfc74c3076d2cf3f1a67ddc0e4715f39b2cff1ccf76b288415bdc0
+  summary_generated_at: '2026-07-02T17:21:03Z'
+  summary_source_hash: 39c5e146afbfc74c3076d2cf3f1a67ddc0e4715f39b2cff1ccf76b288415bdc0
+  faq_generated_at: '2026-07-02T17:21:03Z'
+  faq_source_hash: 39c5e146afbfc74c3076d2cf3f1a67ddc0e4715f39b2cff1ccf76b288415bdc0
+  summary: >-
+    This Learning Path shows how to apply Eigen’s vectorized operations on Arm systems with ASIMD
+    (Neon) and Scalable Vector Extension (SVE), then build TensorFlow with SVE enabled. Learners
+    create and run two C++ programs that construct random matrices, iterate computations, and
+    report numeric results, illustrating how Eigen maps common linear algebra expressions onto
+    Arm SIMD. The first example works with a 100 x 100 matrix and accumulates a scalar result,
+    while the second performs repeated 512 x 512 matrix multiplications and prints the matrix
+    norm. The path then guides the build of TensorFlow with SVE support so that Eigen’s SVE vectorization
+    is available during execution.
+  faqs:
+  - question: What result should I expect when running the matrix multiplication example?
+    answer: >-
+      The program prints a line like: C.norm(): <number>. The exact value varies because the matrices
+      are initialized randomly, but seeing that output without errors confirms the loop completed.
+  - question: Can I change the matrix sizes or iteration count in the examples?
+    answer: >-
+      Yes. Update the matrix dimensions in the constructors and adjust the N definition to change
+      the iteration count. Larger sizes and higher N increase runtime and memory usage.
+  - question: Do I need SVE hardware to complete the Eigen examples?
+    answer: >-
+      No. Eigen supports Neon/ASIMD in addition to SVE. On Arm systems without SVE, Eigen’s ASIMD
+      paths are used.
+  - question: Which Eigen headers and data types are used in these examples?
+    answer: >-
+      The examples include the Eigen/Dense module. One example operates on a 100 x 100 float matrix,
+      and the matrix-multiplication example uses MatrixXd, which is double-precision.
+  - question: What should I check if the TensorFlow with SVE build fails?
+    answer: >-
+      Verify that all required build dependencies from the TensorFlow instructions are installed
+      and that you applied the SVE-specific steps from this path. Use a recent GCC or Clang on
+      an Arm Linux system and re-run the build.
+# END generated_summary_faq
+
 author: Konstantinos Margaritis
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

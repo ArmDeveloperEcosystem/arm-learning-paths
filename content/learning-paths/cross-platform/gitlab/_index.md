@@ -18,9 +18,55 @@ prerequisites:
     - A computer with [Google Cloud CLI](/install-guides/gcloud/) and [kubectl](/install-guides/kubectl/)installed.
     - A valid GitLab account
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-07-02T18:07:57Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 7a84bfc0dd8ed40a760526ab220113200aa01d3e745b7dc7b77767c6258e8874
+  summary_generated_at: '2026-07-02T18:07:57Z'
+  summary_source_hash: 7a84bfc0dd8ed40a760526ab220113200aa01d3e745b7dc7b77767c6258e8874
+  faq_generated_at: '2026-07-02T18:07:57Z'
+  faq_source_hash: 7a84bfc0dd8ed40a760526ab220113200aa01d3e745b7dc7b77767c6258e8874
+  summary: >-
+    This Learning Path guides you through building a GitLab CI/CD pipeline that uses a Google
+    Axion-based self-hosted runner to produce a multi-architecture container image. You configure
+    a runner on Google Cloud to execute arm64 jobs natively, pair it with an amd64 runner, and
+    define pipeline stages that build per-architecture images. The workflow then uses the docker
+    manifest approach to assemble those images under a single tag and publish them to a container
+    registry. By the end, learners integrate native Arm and x86 builds in one pipeline and produce
+    a manifest-listed image that pulls the correct variant on each platform.
+  faqs:
+  - question: Which runner should I use for the arm64 build stage?
+    answer: >-
+      Use the self-hosted GitLab Runner on Google Axion to run arm64 jobs natively. Other architecture
+      builds can run on an x86 or GitLab-hosted runner.
+  - question: Should I use Docker Buildx or docker manifest for the multi-arch image here?
+    answer: >-
+      Use docker manifest as specified in the path. You build separate images per architecture
+      and then create a manifest to publish a single multi-architecture tag.
+  - question: What result should I expect after the manifest step completes?
+    answer: >-
+      You should have one image reference that represents both arm64 and amd64 variants. Pulling
+      that tag on each platform selects the matching architecture image.
+  - question: Where are the images published during the pipeline?
+    answer: >-
+      They are pushed to a Docker repository you create on Google Cloud. The manifest-listed tag
+      points to the architecture-specific images stored there.
+  - question: Can I proceed if I only have one architecture runner available?
+    answer: >-
+      You can build and push a single-architecture image, but the multi-architecture tag requires
+      images for each target architecture. Add the missing runner to complete the manifest-listed
+      image.
+# END generated_summary_faq
+
 author: Pranay Bakre
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

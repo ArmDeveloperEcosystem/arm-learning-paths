@@ -16,9 +16,56 @@ prerequisites:
 - Familiarity with C programming, with a good understanding of pointers.
 - A Linux machine to run the example code.
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-07-02T17:20:24Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: c59308676849aea9b7cfce8c48c7d6e1ca072ef6fb38fb193a34aa5b2597b9b9
+  summary_generated_at: '2026-07-02T17:20:24Z'
+  summary_source_hash: c59308676849aea9b7cfce8c48c7d6e1ca072ef6fb38fb193a34aa5b2597b9b9
+  faq_generated_at: '2026-07-02T17:20:24Z'
+  faq_source_hash: c59308676849aea9b7cfce8c48c7d6e1ca072ef6fb38fb193a34aa5b2597b9b9
+  summary: >-
+    This Learning Path walks through designing and implementing a minimal dynamic memory allocator
+    in C on Linux. You compare static and dynamic allocation, then define a small API surface
+    with simple_malloc and simple_free and outline their expected behavior. A provided project
+    layout (CMakeLists.txt, heap.c, heap.h, and a test program) lets learners focus on the allocator
+    logic rather than build scaffolding. You implement the allocator, build the example, and run
+    allocations and frees to observe success cases and NULL returns. The path closes by highlighting
+    trade-offs and limitations in simple allocators, preparing learners to reason about heap management
+    and the choices behind standard malloc and free implementations.
+  faqs:
+  - question: Which functions do I need to implement for the allocator?
+    answer: >-
+      Implement simple_malloc and simple_free. Their declarations are in heap.h, and their behavior
+      is described in the design step.
+  - question: What files should I edit to change the allocator’s behavior?
+    answer: >-
+      Edit heap.c to change the allocator implementation and heap.h if you need to adjust the
+      interface. The test program in main.c exercises your changes, and CMakeLists.txt configures
+      the build.
+  - question: What result should I expect when I run the example program?
+    answer: >-
+      The program should allocate memory with simple_malloc, use it, and call simple_free without
+      errors. If a request cannot be satisfied, simple_malloc returns NULL as specified.
+  - question: Do I need to replace standard malloc and free in my system?
+    answer: >-
+      No. This path introduces separate functions named simple_malloc and simple_free to avoid
+      interfering with the system allocator. Use the provided test program to call your versions.
+  - question: Do I need to implement calloc or realloc for this path?
+    answer: >-
+      No. The scope is limited to simple_malloc and simple_free. Additional functions are not
+      listed and are outside this Learning Path.
+# END generated_summary_faq
+
 author: David Spickett
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

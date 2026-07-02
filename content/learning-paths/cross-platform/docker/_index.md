@@ -15,11 +15,57 @@ learning_objectives:
 
 prerequisites:
     - A Windows, macOS, or Linux computer with Docker installed, any architecture can be used
-    - An Arm Linux server with Docker installed 
+    - An Arm Linux server with Docker installed
+
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-07-02T17:19:59Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 058f779bc7dd9faef294a57f4524bf525046d757e21a287744825fb9b290935e
+  summary_generated_at: '2026-07-02T17:19:59Z'
+  summary_source_hash: 058f779bc7dd9faef294a57f4524bf525046d757e21a287744825fb9b290935e
+  faq_generated_at: '2026-07-02T17:19:59Z'
+  faq_source_hash: 058f779bc7dd9faef294a57f4524bf525046d757e21a287744825fb9b290935e
+  summary: >-
+    This Learning Path guides learners through building, running, and sharing Docker images with
+    a focus on Arm support and multi-architecture workflows. You validate a local Docker installation,
+    then create and run a simple image. Next, use Docker buildx to produce images for multiple
+    architectures from one build definition. When emulation is slow, configure a remote builder
+    and direct builds to an Arm Linux server over SSH. The path also demonstrates assembling architecture-specific
+    images into a single multi-architecture image using Docker manifest, and shows practical ways
+    to verify Arm support by inspecting image metadata in common registries.
+  faqs:
+  - question: How do I confirm Docker is ready before building images?
+    answer: >-
+      Run the command docker run hello-world. You should see a confirmation message from the hello-world
+      container; if not, install or start Docker and try again.
+  - question: How do I check that Docker buildx is available?
+    answer: >-
+      Run docker buildx --help. The correct result is a usage message that begins with “Usage:
+      docker buildx [OPTIONS] COMMAND”.
+  - question: I did not get the expected buildx usage message. What should I do?
+    answer: >-
+      Install the most recent version of Docker and recheck docker buildx --help. Older versions
+      may not include buildx or may not enable it by default.
+  - question: Builds for Arm on my non-Arm machine are slow. What should I use instead?
+    answer: >-
+      Use docker context to target a remote Arm Linux server and run the build there. Ensure Docker
+      is installed on the remote machine and that it is reachable over SSH without a password
+      prompt.
+  - question: How can I verify that an image includes Arm support after pushing it?
+    answer: >-
+      Inspect the image in the container registry. On Docker Hub, check the OS/ARCH list, and
+      on AWS ECR Public the supported architectures are printed in the image details.
+# END generated_summary_faq
 
 author: Jason Andrews
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

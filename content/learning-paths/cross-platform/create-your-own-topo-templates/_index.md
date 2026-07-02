@@ -21,9 +21,58 @@ prerequisites:
     - Docker installed on the host and target. For installation steps, see [Install Docker](/install-guides/docker/).
     - Basic familiarity with containers and CLI tools
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-07-02T17:18:10Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 280ddbaed118073072407c7e43c743f4d090e153201401deeec4648f9fb0c4ba
+  summary_generated_at: '2026-07-02T17:18:10Z'
+  summary_source_hash: 280ddbaed118073072407c7e43c743f4d090e153201401deeec4648f9fb0c4ba
+  faq_generated_at: '2026-07-02T17:18:10Z'
+  faq_source_hash: 280ddbaed118073072407c7e43c743f4d090e153201401deeec4648f9fb0c4ba
+  summary: >-
+    This Learning Path guides you through authoring and deploying Topo Templates for Arm-based
+    Linux targets over SSH. You start by cloning and running a Hello World template to validate
+    your setup, then modify it by adding a new clone-time argument under the x-topo args block
+    in compose.yaml. Next, you create a template from an empty directory that serves a simple
+    web page with configurable text and color, define standard Compose services, and add x-topo
+    metadata for arguments, deployment guidance, and hardware requirements. Optional Agent Skills
+    help bootstrap or review your template. By the end, learners have a working template that
+    Topo can build on the host and run on an Arm target.
+  faqs:
+  - question: What result should I expect after running topo clone for the Hello World template?
+    answer: >-
+      I should see a new directory at ~/topo-welcome with the template files and clone output
+      indicating the repository was copied. That confirms Topo can fetch and prepare the template
+      locally.
+  - question: Where do I add a new clone-time argument like a greeting emoji?
+    answer: >-
+      I edit compose.yaml and add a new key under the x-topo args section. The template already
+      includes GREETING_NAME there, so I add my new argument alongside it.
+  - question: How do I document hardware requirements or deployment guidance in a template?
+    answer: >-
+      I place that information in the x-topo metadata block in compose.yaml. This keeps guidance
+      and requirements with the template so users see it during cloning and deployment.
+  - question: What components should a new Topo Template include before I test it?
+    answer: >-
+      It needs a compose.yaml with standard Compose services, an x-topo metadata block, build
+      arguments exposed as Topo clone-time parameters, and a container image built for Arm Linux
+      targets.
+  - question: Which Agent Skill helps convert a Docker Compose project into a Topo Template?
+    answer: >-
+      I use topo-template-bootstrap to add or improve the template structure in an existing repository.
+      The topo-template-context skill provides reference context for x-topo metadata, schema,
+      docs, and CLI template behavior.
+# END generated_summary_faq
+
 author: Tomas Agustin Gonzalez Orlando
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -74,3 +123,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

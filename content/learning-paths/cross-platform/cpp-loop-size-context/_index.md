@@ -16,9 +16,57 @@ learning_objectives:
 prerequisites:
     - An Arm computer running Linux. You can also use a virtual machine from a [cloud service provider](/learning-paths/servers-and-cloud-computing/csp/).
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-07-02T17:17:19Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: a639e60da034fd04e891c9236e9fe5dab47cca87f6174828275ef5a76c43c32e
+  summary_generated_at: '2026-07-02T17:17:19Z'
+  summary_source_hash: a639e60da034fd04e891c9236e9fe5dab47cca87f6174828275ef5a76c43c32e
+  faq_generated_at: '2026-07-02T17:17:19Z'
+  faq_source_hash: a639e60da034fd04e891c9236e9fe5dab47cca87f6174828275ef5a76c43c32e
+  summary: >-
+    This Learning Path shows how to communicate known loop-size constraints to a C++ compiler
+    so it can generate faster code on Arm systems. You start with a baseline loop whose size is
+    provided at runtime, initialize data, and compute a sum to establish a reference result and
+    timing. You then encode developer knowledge by rewriting the loop bound as (n/4)*4 to guarantee
+    a multiple-of-four iteration count, a property that can unlock simpler code paths and SIMD
+    vectorization on Arm. Learners build and run both versions, validate that the results match
+    the intended data range, and compare runtimes to observe the impact of providing clear boundary
+    information.
+  faqs:
+  - question: What result should I expect when I run the baseline program?
+    answer: >-
+      You should see the computed sum for the chosen loop size. If the sample prints timing, record
+      it as the baseline to compare with the boundary-aware version.
+  - question: Which inputs help me see the effect of aligning the loop size to a multiple of four?
+    answer: >-
+      Try values that are multiples of four and values that are not, for example 1024 and 1027.
+      This helps you observe how rounding down to a multiple of four affects behavior and timing.
+  - question: How do I verify that the optimized loop still computes the intended result?
+    answer: >-
+      Use the same effective size for allocation, initialization, and iteration after applying
+      (n/4)*4. Compare the printed sums across versions using that effective length to confirm
+      correctness.
+  - question: Why does using (n/4)*4 help the compiler optimize the loop?
+    answer: >-
+      It guarantees that the iteration count is divisible by four at runtime, which communicates
+      a clear boundary condition. Compilers can use this property to generate tighter code and
+      enable SIMD vectorization.
+  - question: What should I check if I do not observe a runtime improvement?
+    answer: >-
+      Increase the loop size and run multiple times to reduce timing noise. Also ensure both builds
+      use the same settings and that you are measuring the same work in both versions.
+# END generated_summary_faq
+
 author: Kieran Hejmadi
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
