@@ -200,15 +200,16 @@ Learning Paths are intended for software developers with differing experience le
  
 ## Use Agent Skills for AI-assisted style compliance
 
-If you're creating a Learning Path with the help of an AI assistant, you can use Agent Skills to check whether your content meets these guidelines. 
+If you're creating a Learning Path with the help of an AI assistant, you can use Agent Skills to check whether your content meets project guidelines. 
 
 Agent Skills are located in the project reporsitory at `.github/skills`. Skills cover Learning Path structure, writing style guidelines, as well as accessibility-related considerations such as alt-text for images. 
 
-Skills are invoked automatically depending on your prompts. For example, to check for style violations on a given page, you can prompt something similar to:
+A skill is invoked automatically depending on whether your prompt maps to the skill's `description` metadata. For example, to check for style violations on a given page, you can prompt something similar to:
 
 ```text
-Review this page for style violations. 
+Review this page in the Learning Path for style. 
 ```
+By using words such as "Learning Path" and "style", the prompt invokes the `writing-style-review` skill. The AI assistant returns with a set of style-related suggestions.
 
 To check whether the Learning Path is structurally sound, you can prompt something similar to:
 
@@ -216,4 +217,4 @@ To check whether the Learning Path is structurally sound, you can prompt somethi
 Review this Learning Path for structure. 
 ```
 
-You can explore other skills in the skills directory and tailor prompts based on the `description` metadata for AI-assisted authoring that's consistent with other Learning Paths.
+By using words such as "Learning Path" and "structure", the prompt invokes the `learning-path-structure-review` skill. The AI assistant returns with suggestions focused on whether each page is task oriented and the Learning Path has necessary files and sections. 
