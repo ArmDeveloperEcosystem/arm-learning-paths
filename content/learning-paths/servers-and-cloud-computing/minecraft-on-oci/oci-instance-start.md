@@ -9,9 +9,9 @@ layout: learningpathall
 
 ## Starting an OCI A4 or A1 instance
 
-Once you have [created an OCI account](../csp/oci) and verified that you can start an
-instance, you will create an Ampere powered A1 instance and connect to it with SSH to
-install the Minecraft Java server.
+Once you have [created an OCI account](/learning-paths/servers-and-cloud-computing/csp/oci/)
+and verified that you can start an instance, you will create an Ampere powered A1 instance
+and connect to it with SSH to install the Minecraft Java server.
 
 1. Log on to [Oracle Cloud](https://cloud.oracle.com)
 2. On the OCI dashboard, navigate to Compute -> Instances to start a new instance: 
