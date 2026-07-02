@@ -115,7 +115,7 @@ You will start to see the capture being populated once the benchmarking applicat
 
 Once the benchmarking application finishes, `Cancel` image download in streamline, it will take some time for capture to be analysed.
 
-You can now look at the `Timeline` tab to see SME kernels utilization throughout the exeucution of your benchmarking application:
+You can now look at the `Timeline` tab to see SME kernels utilization throughout the execution of your benchmarking application:
 
 ![Streamline timeline alt-text#center](streamline_timeline.png "Streamline timeline")
 

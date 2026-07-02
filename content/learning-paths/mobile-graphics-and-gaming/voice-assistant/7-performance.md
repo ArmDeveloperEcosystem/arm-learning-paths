@@ -147,4 +147,5 @@ To summarize, KleidiAI simplifies development by abstracting away low-level opti
 
 As newer versions of the architecture become available, KleidiAI becomes even more powerful: simply updating the library allows applications like the multimodal Voice Assistant to take advantage of the latest architectural improvements such as SME2, without requiring any code changes. This means better performance on newer devices with no additional effort from developers.
 
+You can now benchmark the LLM functionality successfully. Next, you can use Arm Streamline to gain deeper insight into performance and identify optimization opportunities.
 
