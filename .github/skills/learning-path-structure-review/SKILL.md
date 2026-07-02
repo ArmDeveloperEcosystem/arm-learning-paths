@@ -17,11 +17,11 @@ Use this skill when a Learning Path needs a structural review. Focus on whether 
    - Additional resources and next steps live in `_index.md` `further_reading`, not in `_next-steps.md`.
    - `_next-steps.md` remains minimal and respects `FIXED, DO NOT MODIFY` template comments.
 4. Review the instructional shape:
-   - The title and opening frame one developer task/job-to-be-done. 
+   - The title and opening of the Learning Path frame one developer task/job-to-be-done. 
    - The introduction gives context, user goal, and practical value.
    - Prerequisites are explicit and linked when useful.
    - Learning objectives are measurable, action-oriented, and limited to three or four bullets.
-   - Sections progress logically through prepare, configure, use, and validate phases, with each section ideally focusing on one job-to-be-done.
+   - Sections progress logically through prepare, configure, use, and validate phases, with each section ideally focusing on one job-to-be-done. Flag nebulous sections with titles such as "working with x" or "managing y" that include multiple tasks that shouldn't be grouped together (e.g. creating and deleting a VM, or creating a VM and security group rules in the same section). 
    - Validation steps prove the learner reached the promised outcome.
    - The conclusion or next-step guidance names what the learner can do next.
 5. Review `further_reading`:
