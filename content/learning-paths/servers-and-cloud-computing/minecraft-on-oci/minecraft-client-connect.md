@@ -39,11 +39,13 @@ Use the credentials you created for your Microsoft account.
 
 ### Connecting to the server from the Minecraft client
 
-1. Start your Minecraft client and log in with your Microsoft account credentials.
-2. Start the "Minecraft Java edition" client from the launcher.
+1. Before connecting to the server with the client for the first time, you will need to
+[register for a Microsoft account](https://www.minecraft.net/en-us/download).
+2. Start your Minecraft client and log in with your Microsoft account credentials.
+3. Start the "Minecraft Java edition" client from the launcher.
    ![Minecraft launcher screen](minecraft_launcher.png)
-3. Choose **Multiplayer** mode - read and click through the warning that third party servers are not operated by Mojang.
-3. To add your server to the menu of available servers, choose **Add server**, name your server
+4. Choose **Multiplayer** mode - read and click through the warning that third party servers are not operated by Mojang.
+5. To add your server to the menu of available servers, choose **Add server**, name your server
 something meaningful ("My OCI server" for example) and put the IP address of your instance into the
 **Server Address** field:
    ![Minecraft multiplayer server dialog showing Server Name and Server Address fields filled in#center](configuring_new_minecraft_server.png "Add your OCI instance public IP address to the Server Address field")
