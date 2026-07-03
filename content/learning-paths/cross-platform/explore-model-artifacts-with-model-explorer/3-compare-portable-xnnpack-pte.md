@@ -40,8 +40,8 @@ The FP32 artifacts used here come from the [ExecuTorch on Arm Practical Labs](ht
 Open these files in Model Explorer:
 
 ```output
-model-explorer-artifacts/pte/opt125m_cortex_a_portable.pte
-model-explorer-artifacts/pte/opt125m_cortex_a_xnnpack.pte
+ml-model-artifacts/pte/opt125m_cortex_a_portable.pte
+ml-model-artifacts/pte/opt125m_cortex_a_xnnpack.pte
 ```
 
 ## Open the portable kernel PTE

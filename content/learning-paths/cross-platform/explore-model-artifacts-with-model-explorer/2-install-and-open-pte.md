@@ -16,8 +16,8 @@ Use a machine capable of displaying a browser e.g, a laptop.
 This repository uses Git LFS for model artifacts. After cloning, run `git lfs pull` to download the files.
 
 ```bash
-git clone https://github.com/arm-education/model-explorer-artifacts.git
-cd model-explorer-artifacts
+git clone https://github.com/arm-education/ml-model-artifacts.git
+cd ml-model-artifacts
 git lfs pull
 ```
 
@@ -122,7 +122,7 @@ The Cortex-M backend is a work-in-progress proof of concept. It is not intended 
 In the Model Explorer UI, open:
 
 ```output
-model-explorer-artifacts/pte/mv2_cortex_m.pte
+ml-model-artifacts/pte/mv2_cortex_m.pte
 ```
 
 Your view in browser should appear as follows:

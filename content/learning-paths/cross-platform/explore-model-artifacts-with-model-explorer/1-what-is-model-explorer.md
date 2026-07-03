@@ -111,7 +111,7 @@ A helpful glossary of different terms is provided below:
 The hands-on sections will use a variety of pre-provided model artifacts. These are provided purely for educational purposes.
 
 ```output
-model-explorer-artifacts/
+ml-model-artifacts/
 ├── README.md
 ├── LICENSE.md
 ├── pte/

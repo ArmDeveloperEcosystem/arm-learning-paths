@@ -177,8 +177,8 @@ Connect graph structure to runtime cost
 Start with a portable CPU run of OPT-125M:
 
 ```output
-model-explorer-artifacts/etrecord/opt125m_portable.etrecord
-model-explorer-artifacts/etdump/opt125m_portable.etdp
+ml-model-artifacts/etrecord/opt125m_portable.etrecord
+ml-model-artifacts/etdump/opt125m_portable.etdp
 ```
 
 Inspect the graph and profiling overlay, then answer:
@@ -199,8 +199,8 @@ Use this profile as the baseline. The graph has no accelerated delegate region t
 Now open the XNNPACK version of the same model:
 
 ```output
-model-explorer-artifacts/etrecord/opt125m_xnnpack.etrecord
-model-explorer-artifacts/etdump/opt125m_xnnpack.etdp
+ml-model-artifacts/etrecord/opt125m_xnnpack.etrecord
+ml-model-artifacts/etdump/opt125m_xnnpack.etdp
 ```
 
 Compare it with the portable profile:
@@ -221,8 +221,8 @@ This shows a clean CPU delegate acceleration pattern. The model still has some n
 Next, inspect the MobileNetV2 FP32 example. We tried to delegate this to an Ethos-U, but ultimately it falls back to CPU execution on Cortex-M because Ethos-U requires INT8 quantization:
 
 ```output
-model-explorer-artifacts/etrecord/mobilenetv2_fp32_ethosu.etrecord
-model-explorer-artifacts/etdump/mobilenetv2_fp32_ethosu.etdp
+ml-model-artifacts/etrecord/mobilenetv2_fp32_ethosu.etrecord
+ml-model-artifacts/etdump/mobilenetv2_fp32_ethosu.etdp
 ```
 
 Look for:
@@ -241,8 +241,8 @@ The ETDump contains about 309 events, with `Method::execute` around 395 million 
 Now open the regular INT8 MobileNetV2 Ethos-U profile:
 
 ```output
-model-explorer-artifacts/etrecord/mobilenetv2_int8_ethosu.etrecord
-model-explorer-artifacts/etdump/mobilenetv2_int8_ethosu.etdp
+ml-model-artifacts/etrecord/mobilenetv2_int8_ethosu.etrecord
+ml-model-artifacts/etdump/mobilenetv2_int8_ethosu.etdp
 ```
 
 Inspect the overlay and answer:
@@ -263,8 +263,8 @@ The important observation is that successful delegation does not mean every runt
 Finally, inspect the fragmented INT8 MobileNetV2 profile:
 
 ```output
-model-explorer-artifacts/etrecord/mobilenetv2_lrn_int8_ethosu.etrecord
-model-explorer-artifacts/etdump/mobilenetv2_lrn_int8_ethosu.etdp
+ml-model-artifacts/etrecord/mobilenetv2_lrn_int8_ethosu.etrecord
+ml-model-artifacts/etdump/mobilenetv2_lrn_int8_ethosu.etdp
 ```
 
 Compare it with the clean INT8 profile:

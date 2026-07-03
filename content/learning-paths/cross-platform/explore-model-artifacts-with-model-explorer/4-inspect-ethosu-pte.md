@@ -24,7 +24,7 @@ First we will use a MobileNetV2 model, in FP32 form.
 Open:
 
 ```output
-model-explorer-artifacts/pte/mv2_fp32_ethos_u85.pte
+ml-model-artifacts/pte/mv2_fp32_ethos_u85.pte
 ```
 
 Inspect the graph and answer:
@@ -51,7 +51,7 @@ Now we will use the same MobileNetV2 model, but quantized with the `EthosUQuanti
 Open:
 
 ```output
-model-explorer-artifacts/pte/mv2_int8_ethos_u85.pte
+ml-model-artifacts/pte/mv2_int8_ethos_u85.pte
 ```
 
 Inspect the graph and answer:
@@ -81,7 +81,7 @@ To create this example, the original MobileNetV2 graph was modified by inserting
 Open:
 
 ```output
-model-explorer-artifacts/pte/mv2_lrn_int8_ethos_u85.pte
+ml-model-artifacts/pte/mv2_lrn_int8_ethos_u85.pte
 ```
 
 Look for:
@@ -120,10 +120,10 @@ For example, an Ethos-U85 artifact does not provide full insight into Ethos-U55 
 The artifacts repository also includes MobileNetV2 `.pt2` and `.tflite` files. Model Explorer supports PyTorch exported programs and TensorFlow Lite files directly, so visualizing these files does not require an adapter.
 
 ```output
-model-explorer-artifacts/pt2/mv2_fp32.pt2
-model-explorer-artifacts/tflite/mv2_fp32.tflite
-model-explorer-artifacts/tflite/mv2_int8.tflite
-model-explorer-artifacts/tflite/mv2_lrn_int8.tflite
+ml-model-artifacts/pt2/mv2_fp32.pt2
+ml-model-artifacts/tflite/mv2_fp32.tflite
+ml-model-artifacts/tflite/mv2_int8.tflite
+ml-model-artifacts/tflite/mv2_lrn_int8.tflite
 ```
 
 Try them out, and compare differences in the model graphs between TensorFlow Lite and ExecuTorch, and also the `.pte` stage and the `.pt2` stage.

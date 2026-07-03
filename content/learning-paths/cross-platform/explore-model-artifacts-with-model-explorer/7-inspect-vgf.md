@@ -31,7 +31,7 @@ Use the `.pte` file when you want to understand how ExecuTorch wraps and calls t
 Start with the PTQ small upscaler packaged as an ExecuTorch program:
 
 ```output
-model-explorer-artifacts/pte/small_upscaler_ptq_vgf.pte
+ml-model-artifacts/pte/small_upscaler_ptq_vgf.pte
 ```
 
 Inspect the graph and answer:
@@ -54,7 +54,7 @@ Click to expand the `VgfBackend` delegate graph:
 Now open the matched standalone VGF artifact:
 
 ```output
-model-explorer-artifacts/vgf/small_upscaler_ptq.vgf
+ml-model-artifacts/vgf/small_upscaler_ptq.vgf
 ```
 
 You will see they show the same view.
@@ -87,10 +87,10 @@ This is the view to use when you care about the Vulkan ML integration contract: 
 Also provided in the repo are the quantization-aware-training version, and a toy `add_sigmoid` model (`.pte` and `.vgf`) from the [Prepare models for neural graphics](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/preparing-models-for-nt/) learning path.
 
 ```output
-model-explorer-artifacts/pte/small_upscaler_qat_vgf.pte
-model-explorer-artifacts/vgf/small_upscaler_qat.vgf
-model-explorer-artifacts/pte/add_sigmoid_vgf.pte
-model-explorer-artifacts/vgf/add_sigmoid.vgf
+ml-model-artifacts/pte/small_upscaler_qat_vgf.pte
+ml-model-artifacts/vgf/small_upscaler_qat.vgf
+ml-model-artifacts/pte/add_sigmoid_vgf.pte
+ml-model-artifacts/vgf/add_sigmoid.vgf
 ```
 You can use Model Explorer to inspect these graphs in the same way.
 

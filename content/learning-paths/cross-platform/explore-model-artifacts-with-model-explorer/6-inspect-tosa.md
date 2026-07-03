@@ -32,7 +32,7 @@ Start with the same MobileNetV2 cases you inspected as `.pte` files.
 Open the FP32 TOSA artifact:
 
 ```output
-model-explorer-artifacts/tosa/mv2_fp32.tosa
+ml-model-artifacts/tosa/mv2_fp32.tosa
 ```
 
 Inspect the graph and answer:
@@ -51,7 +51,7 @@ That does not mean the graph can run on Ethos-U. Ethos-U expects supported quant
 Now open the INT8 TOSA artifact:
 
 ```output
-model-explorer-artifacts/tosa/mv2_int8.tosa
+ml-model-artifacts/tosa/mv2_int8.tosa
 ```
 
 Compare it with the FP32 TOSA graph:
@@ -72,8 +72,8 @@ This is the kind of TOSA graph that can be compiled by the Ethos-U Vela compiler
 Next, inspect the TOSA artifacts from the LRN example:
 
 ```output
-model-explorer-artifacts/tosa/mv2_lrn_int8_1.tosa
-model-explorer-artifacts/tosa/mv2_lrn_int8_2.tosa
+ml-model-artifacts/tosa/mv2_lrn_int8_1.tosa
+ml-model-artifacts/tosa/mv2_lrn_int8_2.tosa
 ```
 
 You saw earlier that the LRN `.pte` contained two `EthosUBackend` delegate nodes with CPU-side work between them. These two TOSA files help explain why.
@@ -135,8 +135,8 @@ These artifacts were generated in the [Quantize neural upscaling models with Exe
 Open the TOSA artifacts used by the VGF examples:
 
 ```output
-model-explorer-artifacts/tosa/small_upscaler_ptq.tosa
-model-explorer-artifacts/tosa/small_upscaler_qat.tosa
+ml-model-artifacts/tosa/small_upscaler_ptq.tosa
+ml-model-artifacts/tosa/small_upscaler_qat.tosa
 ```
 
 These small upscaler graphs are INT8 TOSA artifacts. In Model Explorer, look for:
