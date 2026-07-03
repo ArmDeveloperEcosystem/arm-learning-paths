@@ -88,10 +88,10 @@ With the Trustee Services running in one terminal, open up a new terminal in whi
 Pull the Docker image with the pre-built FVP, and then run the container connected to the same Docker network:
 
 ```bash
-docker pull armswdev/cca-learning-path:cca-simulation-v2
+docker pull armlimited/cca-learning-path:cca-simulation-v4
 ```
 ```bash
-docker run --rm -it --network cca-trustee armswdev/cca-learning-path:cca-simulation-v2
+docker run --rm -it --network cca-trustee armlimited/cca-learning-path:cca-simulation-v4
 ```
 
 Within your running container, launch the `run-cca-fvp.sh` script to run the Arm CCA pre-built binaries on the FVP:
@@ -285,7 +285,7 @@ Configuration [none]: no claim being made
 Executables [affirming]: recognized and approved boot-time
 File System [none]: no claim being made
 Hardware [affirming]: genuine
-Runtime Opaque [none]: no claim being made
+Runtime Opaque [affirming]: memory encryption
 Storage Opaque [none]: no claim being made
 Sourced Data [none]: no claim being made
 ```
