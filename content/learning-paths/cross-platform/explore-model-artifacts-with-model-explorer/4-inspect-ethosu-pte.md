@@ -112,6 +112,24 @@ Remember, an artifact generated for one Ethos-U target does not fully explain an
 
 For example, an Ethos-U85 artifact does not provide full insight into Ethos-U55 behavior. Generate and inspect separate `.pte` files when comparing targets because operator support constraints, Vela behavior, memory configuration, MAC configuration, and fragmentation can differ.
 
+## Optional extension: TFLite and PT2
+
+<details>
+<summary>Click to reveal</summary>
+
+The artifacts repository also includes MobileNetV2 `.pt2` and `.tflite` files. Model Explorer supports PyTorch exported programs and TensorFlow Lite files directly, so visualizing these files does not require an adapter.
+
+```output
+model-explorer-artifacts/pt2/mv2_fp32.pt2
+model-explorer-artifacts/tflite/mv2_fp32.tflite
+model-explorer-artifacts/tflite/mv2_int8.tflite
+model-explorer-artifacts/tflite/mv2_lrn_int8.tflite
+```
+
+Try them out, and compare differences in the model graphs between TensorFlow Lite and ExecuTorch, and also the `.pte` stage and the `.pt2` stage.
+
+</details>
+
 ## What you have learned
 
 You have inspected three Ethos-U `.pte` artifacts and seen how quantization and operator support affect NPU delegation. The FP32 MobileNetV2 artifact stays on the CPU path because Ethos-U expects supported quantized integer workloads. The INT8 MobileNetV2 artifact shows the clean delegated pattern: quantize, run a compact `EthosUBackend` region, then dequantize. The LRN example shows fragmentation, where unsupported work splits one clean NPU region into multiple delegate regions with CPU work between them.

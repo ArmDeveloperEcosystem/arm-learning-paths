@@ -27,6 +27,8 @@ The artifacts covered in this learning path are:
 | `.etrecord` | ExecuTorch ETRecord adapter | Export-time profiling context | Graph structure, debug handles, operator names, and delegate metadata used to map runtime events back to graph nodes |
 | `.etdp` | ExecuTorch ETDump data provider | Runtime trace overlay | Timing data from a specific execution |
 
+This learning path focusses on Arm adapters and extensions for Modle Explorer, but the repository of artifacts we use also includes some `.tflite` and `.pt2` files. You can optionally try these out as well, and they are natively supported by Model Explorer.
+
 {{% notice Note %}}
 Model Explorer visualizes the specific artifact you generated or received. Small differences in the target the model has been delegated to, could result in a very different model graph. For example, delegating the same model to an Ethos-U55, may produce a very different model graph from delegating to an Ethos-U85.
 {{% /notice %}}
@@ -106,7 +108,7 @@ A helpful glossary of different terms is provided below:
 
 ## What models will I use?
 
-The hands-on sections will use a variety of pre-provided models.
+The hands-on sections will use a variety of pre-provided model artifacts. These are provided purely for educational purposes.
 
 ```output
 model-explorer-artifacts/
@@ -122,6 +124,12 @@ model-explorer-artifacts/
 │   ├── small_upscaler_ptq_vgf.pte
 │   ├── small_upscaler_qat_vgf.pte
 │   └── add_sigmoid_vgf.pte
+├── pt2/
+│   └── mv2_fp32.pt2
+├── tflite/
+│   ├── mv2_fp32.tflite
+│   ├── mv2_int8.tflite
+│   └── mv2_lrn_int8.tflite
 ├── tosa/
 │   ├── mv2_fp32.tosa
 │   ├── mv2_int8.tosa
@@ -149,6 +157,6 @@ model-explorer-artifacts/
 
 ## What you have learned
 
-You have learned how Model Explorer uses adapters and data providers to load artifact formats beyond its built-in model types. You have also seen how `.pte`, `.tosa`, `.vgf`, `.etrecord`, and `.etdp` files fit into Cortex-A, Cortex-M, Ethos-U, Vulkan ML, and ExecuTorch profiling workflows.
+You have learned how Model Explorer uses adapters and data providers to load artifact formats beyond its built-in model types. You have also seen how `.pte`, `.tosa`, `.vgf`, `.etrecord`, and `.etdp` files fit into Cortex-A, Cortex-M, Ethos-U, Vulkan ML, and ExecuTorch profiling workflows. The artifacts repository also includes `.pt2` and `.tflite` files that you can inspect directly as optional extensions.
 
 Next, you will install Model Explorer, launch it with the Arm adapters, and open the first `.pte` artifact.

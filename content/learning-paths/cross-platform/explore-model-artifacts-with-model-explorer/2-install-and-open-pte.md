@@ -13,7 +13,7 @@ In this section, you install Model Explorer in a clean Python virtual environmen
 
 Use a machine capable of displaying a browser e.g, a laptop.
 
-This repository uses Git LFS for model artifacts. After cloning, run `git lfs pull` to download the actual `.pte`, `.tosa`, and `.vgf` files.
+This repository uses Git LFS for model artifacts. After cloning, run `git lfs pull` to download the files.
 
 ```bash
 git clone https://github.com/arm-education/model-explorer-artifacts.git
@@ -106,7 +106,7 @@ Use `CTRL + C` to stop Model Explorer.
 {{% /notice %}}
 
 {{% notice Note %}}
-If you have a specific interest in one model format, `.pte`, `.tosa`, or `.vgf`, or in a particular target (e.g., Cortex-M, Cortex-A, Ethos-U, Neural Graphics) you can skip to the appropriate section.
+If you have a specific interest in one model format, such as `.pte`, `.tosa`, or `.vgf`, or in a particular target (e.g., Cortex-M, Cortex-A, Ethos-U, Neural Graphics) you can skip to the appropriate section.
 {{% /notice %}}
 
 ## Open the Cortex-M PTE
