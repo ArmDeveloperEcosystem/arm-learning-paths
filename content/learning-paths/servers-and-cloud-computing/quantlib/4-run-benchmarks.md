@@ -7,14 +7,14 @@ layout: learningpathall
 ---
 ## Run a baseline benchmark
 
-After building QuantLib, move to the test suite directory and run the benchmark with its default settings:
+After building QuantLib, move to the test suite directory and run the benchmark with its default settings. The command uses the `QL_VER` variable that you exported when downloading the source archive:
 
 ```bash
 cd ~/QuantLib-$QL_VER/test-suite
 ./quantlib-benchmark
 ```
 
-This confirms that the benchmark is working correctly on your system.
+Successfully running the benchmark with default settings confirms that the benchmark is working correctly on your system.
 
 To understand how performance scales across the Arm cores in the VM, keep the workload size constant and change only the number of worker processes:
 
@@ -24,11 +24,11 @@ To understand how performance scales across the Arm cores in the VM, keep the wo
 ./quantlib-benchmark --size=80 --nProc=4
 ```
 
-The Standard_D4ps_v5 virtual machine has a limited number of cores. Start with 1, 2, and 4 workers. Larger values such as 12, 24, or 48 are better suited to larger machines and can oversubscribe this VM, which makes the results harder to interpret.
+The `Standard_D4ps_v5` virtual machine has a limited number of cores. Start with 1, 2, and 4 workers. Larger values such as 12, 24, or 48 are better suited to larger machines and can oversubscribe this VM, which makes the results harder to interpret.
 
 ## Vary workload size
 
-Next, keep the thread count fixed and vary the problem size. This shows how runtime changes as the benchmark does more work:
+Next, keep the thread count fixed and vary the problem size. By using varied problem sizes, you can see how runtime changes as the benchmark does more work:
 
 ```bash
 ./quantlib-benchmark --size=1 --nProc=1
@@ -36,11 +36,11 @@ Next, keep the thread count fixed and vary the problem size. This shows how runt
 ./quantlib-benchmark --size=8 --nProc=1
 ```
 
-## Interpreting the output
+## Interpret the output
 
-The `--size=1 --nProc=1` run is the quickest of the three, completing in roughly 2 minutes 25 seconds on this configuration. It's a good first check before committing to longer runs. Adding `--verbose=2` prints a per-test runtime breakdown alongside the summary. Without it, only the summary block is printed. Verbosity levels run from 0 (summary only) to 2 (per-test detail); level 3 adds internal debug output.
+The `--size=1 --nProc=1` run is the quickest of the three, completing in roughly 2 minutes 25 seconds on this configuration. It's a good first check before committing to longer runs. Adding `--verbose=2` prints a per-test runtime breakdown alongside the summary. Without it, only the summary block is printed. Verbosity levels run from 0 (summary only) to 2 (per-test detail). Level 3 adds internal debug output.
 
-The first run with `--size=1 --nProc=1 --verbose=2` produces output similar to the following. The benchmark first confirms that all tests passed, then lists the runtime for each individual test, and finishes with a summary:
+The first run with `--size=1 --nProc=1 --verbose=2` produces output similar to the following:
 
 ```output
 *** No errors detected
@@ -64,14 +64,22 @@ Num. Worker Processes = 1
 Tail Effect Ratio     = 1
 ```
 
-The **System Throughput** and **Benchmark Runtime** values are what you'll compare across runs. The individual test lines show which computations dominate total runtime — longer-running tests such as `testMultiStepCmSwapsAndSwaptions` and `testGauss` reflect the most numerically intensive parts of the workload.
+The benchmark first confirms that all tests passed, then lists the runtime for each individual test, and finishes with a summary. 
+
+The `System Throughput` and `Benchmark Runtime` values are what you'll compare across runs. The individual test lines show which computations dominate total runtime. Longer-running tests such as `testMultiStepCmSwapsAndSwaptions` and `testGauss` reflect the most numerically intensive parts of the workload.
 
 ## Keep benchmark runs controlled
 
 For meaningful comparisons:
 
-* change one parameter at a time
-* keep the environment consistent
-* repeat runs if results vary
+- Change one parameter at a time
+- Keep the environment consistent
+- Repeat runs if results vary
 
-This helps ensure that differences in runtime reflect real performance changes.
+Doing so ensures that differences in runtime reflect real performance changes.
+
+## What you've accomplished and what's next
+
+You've now benchmarked QuantLib with default settings and with varied workloads. You've also reviewed the output of the benchmark.
+
+Next, you'll further analyze and compare benchmark results. 

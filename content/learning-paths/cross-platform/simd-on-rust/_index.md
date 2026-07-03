@@ -18,6 +18,10 @@ prerequisites:
 
 author: Konstantinos Margaritis
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
@@ -38,7 +42,6 @@ shared_between:
     - servers-and-cloud-computing
     - mobile-graphics-and-gaming
 
-
 further_reading:
     - resource:
         title: Rust std::arch documentation
@@ -57,10 +60,10 @@ further_reading:
         link: https://gendignoux.com/blog/2023/01/05/rust-arm-simd-android.html#implicit-feature-detection-beware-of-target-feature
         type: blog
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

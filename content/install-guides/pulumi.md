@@ -1,5 +1,6 @@
 ---
 title: Pulumi
+description: Install Pulumi on Linux and verify the setup with a container registry example so you can deploy infrastructure as code from Arm systems.
 minutes_to_complete: 5
 official_docs: https://www.pulumi.com/docs/
 ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=pulumi

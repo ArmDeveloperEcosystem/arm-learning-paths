@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Arm AMBA Viz
+description: Install Arm AMBA Viz from Arm Product Download Hub and set up the environment to visualize AMBA events for SoC verification workflows.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:

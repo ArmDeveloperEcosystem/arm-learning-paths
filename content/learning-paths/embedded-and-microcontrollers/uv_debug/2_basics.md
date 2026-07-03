@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Use basic run/stop debug"
+description: Use basic run and stop debugging in Keil uVision to inspect an embedded application on the target.
 
 weight: 2 # 1 is first, 2 is second, etc.
 

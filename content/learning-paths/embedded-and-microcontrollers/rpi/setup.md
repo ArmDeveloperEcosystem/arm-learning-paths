@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Setup a Raspberry Pi 4 and an Arm cloud instance" 
+description: Set up Raspberry Pi 4 and an Arm cloud instance so you can compare local and remote Arm development workflows.
 
 weight: 3 # 1 is first, 2 is second, etc.
 

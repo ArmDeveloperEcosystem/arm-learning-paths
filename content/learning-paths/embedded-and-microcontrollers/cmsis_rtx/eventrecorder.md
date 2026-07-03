@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Using Event Recorder"
+description: Enable Event Recorder for the RTX5 application so thread scheduling and runtime behavior can be inspected during debug.
 
 weight: 6 # 1 is first, 2 is second, etc.
 

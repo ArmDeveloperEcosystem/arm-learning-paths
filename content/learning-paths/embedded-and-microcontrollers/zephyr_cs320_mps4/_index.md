@@ -1,12 +1,8 @@
 ---
-title: Port Zephyr RTOS and run applications on the Corstone-320 MPS4 platform
-description: Port Zephyr RTOS to the Arm Corstone-320 MPS4 FPGA platform by creating board support files and device tree configuration, then build and run the hello_world sample on the physical board.
+title: Port Zephyr RTOS and run applications on the Arm Corstone-320 MPS4 platform
+description: Port Zephyr RTOS to the Arm Corstone-320 MPS4 FPGA platform by creating board support files and device tree configuration, then build and run a hello_world sample on the physical board.
 
 minutes_to_complete: 45
-
-draft: true
-cascade:
-    draft: true
 
 who_is_this_for: This is an introductory topic for embedded developers who want to port Zephyr RTOS to the Arm Corstone-320 MPS4 FPGA platform.
 
@@ -23,6 +19,10 @@ prerequisites:
   - Git and Python
 
 author: Sue Wu
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 skilllevels: Introductory
 subjects: RTOS Fundamentals

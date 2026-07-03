@@ -18,6 +18,10 @@ prerequisites:
 
 author: Jiaming Guo
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Advanced
 subjects: ML
@@ -31,8 +35,6 @@ tools_software_languages:
     - SME2
 operatingsystems:
     - Android
-
-
 
 further_reading:
     - resource:
@@ -48,11 +50,10 @@ further_reading:
         link: https://github.com/google-ai-edge/LiteRT?tab=readme-ov-file#1--i-have-a-pytorch-model
         type: website
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

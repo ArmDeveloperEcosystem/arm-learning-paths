@@ -24,6 +24,10 @@ prerequisites:
 
 author: Parichay Das
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: ML
@@ -39,7 +43,6 @@ operatingsystems:
     - macOS
     - Linux
     - Android
-
 
 further_reading:
     - resource:
@@ -59,10 +62,10 @@ further_reading:
         link: /learning-paths/mobile-graphics-and-gaming/build-llama3-chat-android-app-using-executorch-and-xnnpack/
         type: learning-path
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -16,6 +16,10 @@ prerequisites:
 
 author: Pareena Verma
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: Virtual Hardware
@@ -27,15 +31,11 @@ operatingsystems:
 tools_software_languages:
     - Arm Virtual Hardware
 
-
 further_reading:
     - resource:
         title: AVH Virtual Interfaces
         link: https://arm-software.github.io/AVH/main/simulation/html/group__arm__cmvp.html
         type: documentation
-
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
@@ -43,3 +43,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

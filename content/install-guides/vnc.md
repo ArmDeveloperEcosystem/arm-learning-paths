@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: VNC on Arm Linux
+description: Install and configure VNC with an xfce desktop on Arm Linux so you can connect to a remote graphical development environment.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:

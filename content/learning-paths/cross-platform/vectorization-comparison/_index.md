@@ -10,7 +10,6 @@ who_is_this_for: This is an advanced topic for developers migrating vectorized (
 learning_objectives:
      - Identify how Arm vector extensions including Neon, Scalable Vector Extension (SVE), and Scalable Matrix Extension (SME) map to vector extensions from other architectures
      - Plan a migration strategy using autovectorization, intrinsics, or library substitution
-   
 
 prerequisites:
     - Familiarity with vector extensions, SIMD programming, and compiler intrinsics
@@ -18,6 +17,10 @@ prerequisites:
 
 author:
     - Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -81,6 +84,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-
-   
 

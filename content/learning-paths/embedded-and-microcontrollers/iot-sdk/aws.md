@@ -1,6 +1,7 @@
 ---
 # User change
 title: Enable AWS connectivity
+description: Enable AWS connectivity in the Open-IoT-SDK example so the application can communicate with AWS IoT services.
 
 weight: 3 # 1 is first, 2 is second, etc.
 

@@ -17,6 +17,10 @@ prerequisites:
 
 author: Christopher Seidl
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Advanced
 subjects: Libraries
@@ -29,7 +33,6 @@ operatingsystems:
     - Baremetal
     - RTOS
 
-
 further_reading:
     - resource:
         title: Create a Device Family Pack - Hands-On Example
@@ -40,11 +43,10 @@ further_reading:
         link: https://developer.arm.com/documentation/100068/latest/Migrating-from-Arm-Compiler-5-to-Arm-Compiler-for-Embedded-6
         type: Documentation
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

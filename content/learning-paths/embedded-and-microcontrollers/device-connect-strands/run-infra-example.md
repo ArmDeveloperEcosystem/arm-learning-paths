@@ -1,5 +1,6 @@
 ---
 title: Run with full Device Connect infrastructure (optional)
+description: Run the optional Device Connect infrastructure example to connect agents and devices through shared services.
 weight: 5
 
 # FIXED, DO NOT MODIFY

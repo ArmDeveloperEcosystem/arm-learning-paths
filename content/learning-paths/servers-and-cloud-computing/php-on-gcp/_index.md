@@ -1,7 +1,6 @@
 ---
 title:  Deploy PHP on Google Cloud C4A Arm-based Axion VMs
 
-  
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for developers migrating Hypertext Preprocessor (PHP) workloads from x86_64 to Arm-based servers, specifically on Google Cloud C4A virtual machines (VM) built on Axion processors.
@@ -12,11 +11,15 @@ learning_objectives:
   - Validate PHP functionality by running baseline HTTP server tests  
   - Benchmark PHP performance using PHPBench on Arm64 architecture 
 
-
 prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
   - Basic familiarity with web servers and PHP scripting
+
 author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ##### Tags
 skilllevels: Introductory
@@ -58,3 +61,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

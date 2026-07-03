@@ -9,12 +9,16 @@ who_is_this_for: This is an introductory topic for Android developers who want t
 learning_objectives: 
     - Build the libGPUInfo library using the Android NDK
     - Run an example application to query the configuration details of an Arm Mali or Arm Immortalis GPU
-    
+
 prerequisites:
     - A development machine running Ubuntu or Debian Linux with `x86_64` architecture
     - An Android device with an Arm GPU
 
 author: Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ##### Tags
 
@@ -44,12 +48,10 @@ further_reading:
         link: https://gitlab.arm.com/arm-reference-solutions/arm-reference-solutions-docs/-/tree/master/docs/totalcompute
         type: documentation
 
-
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

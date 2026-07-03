@@ -1,5 +1,6 @@
 ---
 title: Set up the pqm4 development environment
+description: Install the dependencies and toolchains needed to build and test pqm4 post-quantum cryptography examples.
 
 weight: 3
 

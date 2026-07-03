@@ -13,6 +13,7 @@ test_images:
 test_link: null
 test_maintenance: true
 title: .NET SDK
+description: Install the .NET SDK on Arm Linux and choose an SDK version so you can build and run .NET applications on Arm-based systems.
 tool_install: true
 weight: 1
 ---

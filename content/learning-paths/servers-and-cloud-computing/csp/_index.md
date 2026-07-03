@@ -4,6 +4,10 @@ description: Learn how to start an Arm-based virtual machine instance from major
 
 author: Ronan Synnott
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for software developers who are new to Arm-based cloud instances.
@@ -28,8 +32,6 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
-
-
 
 further_reading:
     - resource:
@@ -57,10 +59,10 @@ further_reading:
         link: https://developer.oracle.com/arm/
         type: website
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

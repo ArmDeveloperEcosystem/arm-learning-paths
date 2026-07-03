@@ -12,7 +12,6 @@ learning_objectives:
     - Install an Android demo application using the model to run an inference.
     - Compare inference performance with and without KleidiAI Arm-optimized micro-kernels.
 
-
 prerequisites:
     - A development machine with [Android Studio](https://developer.android.com/studio) installed.
     - A smartphone running Android with support for `i8mm` and `dotprod` instructions.
@@ -20,6 +19,10 @@ prerequisites:
 author:
     - Shuheng Deng
     - Yiyang Fan
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -31,8 +34,6 @@ tools_software_languages:
     - KleidiAI
 operatingsystems:
     - Android
-
-
 
 further_reading:
     - resource:
@@ -52,11 +53,10 @@ further_reading:
         link: https://github.com/ARM-software/kleidiai
         type: documentation
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

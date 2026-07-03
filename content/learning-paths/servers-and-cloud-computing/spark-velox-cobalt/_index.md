@@ -17,8 +17,11 @@ learning_objectives:
 prerequisites:
   - A [Microsoft Azure account](https://azure.microsoft.com/) with access to Cobalt 100 based instances (Dpsv6)
   - Basic understanding of distributed systems and Apache Spark
-
 author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -35,7 +38,6 @@ tools_software_languages:
   - Hive
   - Gluten
   - Velox
-
 
 operatingsystems:
     - Linux

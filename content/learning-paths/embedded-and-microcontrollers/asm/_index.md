@@ -6,6 +6,10 @@ description: Learn how to write mixed C and assembly programs for Cortex-M micro
 
 author: Ronan Synnott
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 who_is_this_for: This is an introductory topic for software developers who are interested in programming microcontrollers with C/Assembly.
 
 learning_objectives: 
@@ -41,5 +45,5 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # Indicates this should be surfaced when looking for related content. Only set for _index.md of learning path content.
 # ================================================================================
-
 ---
+

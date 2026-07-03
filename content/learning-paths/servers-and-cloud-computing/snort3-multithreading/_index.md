@@ -13,9 +13,12 @@ learning_objectives:
 prerequisites:
     - An Arm-based instance from a cloud provider, or an Arm server running Ubuntu 20.04 or 22.04.
     - A basic understanding of Snort's operation and configuration.
-    
 
 author: Preema Merlin Dsouza
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -45,10 +48,10 @@ further_reading:
         link: https://files.techmahindra.com/static/img/pdf/next-generation-firewall.pdf
         type: blog
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

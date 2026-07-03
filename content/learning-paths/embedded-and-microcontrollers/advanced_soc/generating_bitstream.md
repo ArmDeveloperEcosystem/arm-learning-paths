@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Generate the bitstream and write your application using Vitis IDE" 
+description: Generate the Vivado bitstream, export the hardware design, and write a Vitis application to test the custom AXI4 peripheral.
 
 weight: 5 # 1 is first, 2 is second, etc.
 

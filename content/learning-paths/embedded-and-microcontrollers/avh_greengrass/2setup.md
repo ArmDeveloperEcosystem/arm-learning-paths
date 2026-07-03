@@ -1,5 +1,6 @@
 ---
 title: Set  up your accounts and create a virtual device
+description: Configure AWS and Arm Virtual Hardware accounts and create the virtual Raspberry Pi 4 device used as a Greengrass core.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

@@ -39,11 +39,7 @@ Where it is used:
 
 {{ partial "head/jsonld.html" . }}
 
-<!-- Include the Arm standard Lato font for machines that don't have by default (Mac) -->
-<!-- Can be done automatically now in cross-page.css locally to speed up process -->
-<link rel="preconnect" href="https://fonts.gstatic.com" />
-<link rel="preload" href="https://fonts.googleapis.com/css?family=Lato:300,400&display=swap" as="style" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400&display=swap" crossorigin="anonymous" />
+<!-- Lato font now self-hosted via @font-face in cross-page.css for faster loading and reduced CLS -->
 
 
     <!-- ADS Imports -->
