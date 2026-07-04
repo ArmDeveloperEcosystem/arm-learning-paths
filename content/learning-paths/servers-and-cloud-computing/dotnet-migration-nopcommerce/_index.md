@@ -44,6 +44,10 @@ further_reading:
         link: https://learn.microsoft.com/dotnet/core/containers/overview
         type: documentation
     - resource:
+        title: GitHub Copilot modernization for .NET
+        link: https://learn.microsoft.com/dotnet/core/porting/github-copilot-app-modernization/overview
+        type: documentation
+    - resource:
         title: .NET on Arm
         link: https://learn.microsoft.com/dotnet/core/install/linux-arm64
         type: documentation

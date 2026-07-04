@@ -35,10 +35,11 @@ dotnet publish src/Presentation/Nop.Web/Nop.Web.csproj \
 
 ### 3. .NET SDK multi-arch path
 
-Define multi-arch runtime identifiers in the project file, then publish once.
+Define runtime identifiers and multi-arch container runtime identifiers in the project file, then publish once.
 
 ```xml
 <PropertyGroup>
+  <RuntimeIdentifiers>linux-x64;linux-arm64</RuntimeIdentifiers>
   <ContainerRuntimeIdentifiers>linux-x64;linux-arm64</ContainerRuntimeIdentifiers>
 </PropertyGroup>
 ```
@@ -49,6 +50,16 @@ dotnet publish src/Presentation/Nop.Web/Nop.Web.csproj -c Release /t:PublishCont
 ```
 
 This is the scalable path for one image definition across both architectures.
+
+## SDK version guardrail
+
+Before choosing the SDK publish path for multi-architecture images, check the SDK version used by CI and by developer workstations:
+
+```bash
+dotnet --version
+```
+
+If you cannot use a .NET SDK version that supports multi-RID container publishing, or if SDK publish does not produce the multi-architecture image index you need, use the `docker buildx build --platform linux/amd64,linux/arm64` workflow instead. Multi-RID container publishing starts with .NET SDK versions 8.0.405, 9.0.102, and 9.0.2xx.
 
 ## Recommendation
 

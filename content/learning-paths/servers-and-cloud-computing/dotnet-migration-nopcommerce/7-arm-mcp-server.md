@@ -65,7 +65,7 @@ On this Ubuntu Neoverse (Azure Cobalt) instance:
 
 Typical optimization actions include:
 
-- Runtime settings (`DOTNET_TieredPGO`, `DOTNET_ReadyToRun`, thread pool tuning)
+- Runtime settings (`DOTNET_TieredPGO`, `DOTNET_ReadyToRun`, thread pool tuning, and spin-wait experiments)
 - Container/runtime configuration cleanup
 - Architecture-conditional deployment settings
 - Repeated measurement loops with fixed workload parameters and fixed endpoint order

@@ -40,6 +40,8 @@ docker --version
 
 Expected output: `Arm` (kernel strings may still show architecture-specific values). Ensure the .NET SDK version is 9.0.x.
 
+If you are upgrading from an older .NET version before migrating to Cobalt, you can use [GitHub Copilot modernization for .NET](https://learn.microsoft.com/dotnet/core/porting/github-copilot-app-modernization/overview) to assess the project and guide the upgrade. In Visual Studio Code, open Copilot Chat and use `@modernize-dotnet`; in Visual Studio, use the Modernize action from Solution Explorer.
+
 ## PostgreSQL prerequisite for nopCommerce install
 
 nopCommerce defaults to SQL Server, but this learning path uses PostgreSQL for Arm validation. For PostgreSQL installs, `citext` is required before migration/installation. Without it, installer migrations fail with `type "citext" does not exist` (captured in local test artifacts).
