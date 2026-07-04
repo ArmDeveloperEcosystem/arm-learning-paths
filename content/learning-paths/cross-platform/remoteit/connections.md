@@ -18,16 +18,16 @@ The advantages are:
 
 Peer to Peer connections are created by installing a software package with initiator support on the initiator device. Install the Remote.It Desktop application or Remote.It CLI on your initiator device to support Peer to Peer connection.
 
-![example image alt-text#center](remote.it-connections.png "Proxy and Peer to Peer Connection Illustration")
+![Diagram illustrating the difference between proxy connections, where traffic is routed through a Remote.It server between initiator and target devices, and peer-to-peer connections, where a direct connection is established between initiator and target without an intermediary server#center](remote.it-connections.png "Proxy and peer-to-peer connection architecture")
 
-## Peer to Peer Connections
+## Peer to peer connections
 
 Peer to Peer connections to the target computer appear as a local port on the initiator computer.
 
 {{% notice Examples %}}
 Examples here are for the Remote.It Desktop Application.
 
-Refer to [Install CLI](/learning-paths/cross-platform/remoteit/cli) to create connections by command line.
+Refer to [Install CLI](/learning-paths/cross-platform/remoteit/cli/) to create connections by command line.
 {{% /notice %}}
 
 Connections made with the Desktop or CLI will default to connect using Peer to Peer and if that fails will try a Proxy connection. You can change this setting by updating the Routing in your connection configuration.

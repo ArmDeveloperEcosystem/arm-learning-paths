@@ -1,7 +1,7 @@
 ---
 title: Learn how to use Docker
 
-description: Build, share, and run for multi-architecture use cases.
+description: Learn how to build, run, and share multi-architecture Docker images for Arm and x86 platforms using buildx, manifest, and remote builders.
 
 minutes_to_complete: 30
 
@@ -18,6 +18,10 @@ prerequisites:
     - An Arm Linux server with Docker installed 
 
 author: Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -55,10 +59,10 @@ further_reading:
         link: https://www.docker.com/blog/how-to-rapidly-build-multi-architecture-images-with-buildx
         type: blog
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -1,6 +1,8 @@
 ---
 title: Automate Windows on Arm virtual machine deployment with QEMU and KVM on Arm Linux
 
+description: Learn how to automate Windows on Arm VM creation on Arm Linux systems using QEMU, KVM, and Bash scripts for development and testing.
+
 minutes_to_complete: 90
 
 who_is_this_for: This is an introductory topic for developers and system administrators who want to automate Windows on Arm virtual machine (VM) creation on Arm Linux systems using QEMU and KVM.
@@ -15,6 +17,10 @@ prerequisites:
     - An Arm Linux system with KVM support and a minimum of 8GB RAM and 50GB free disk space
 
 author: Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -47,3 +53,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

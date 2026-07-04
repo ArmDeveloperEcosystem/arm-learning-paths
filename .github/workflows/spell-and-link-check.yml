@@ -10,6 +10,7 @@ on:
 
 jobs:
   spell_and_link_check:
+    if: github.repository == 'ArmDeveloperEcosystem/arm-learning-paths' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
 
     steps:
@@ -26,9 +27,7 @@ jobs:
           extended: true
 
       - name: Build
-        run: |
-          hugo --minify
-          bin/pagefind --site "public"
+        run: hugo --minify
 
       - name: Check HTML links
         id: htmltest

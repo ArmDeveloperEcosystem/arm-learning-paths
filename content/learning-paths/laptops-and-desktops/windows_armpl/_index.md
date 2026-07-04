@@ -1,6 +1,8 @@
 ---
 title: Optimize Windows applications using Arm Performance Libraries
 
+description: Learn how to develop Windows on Arm applications using Visual Studio and optimize performance with Arm Performance Libraries.
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for software developers who want to improve the performance of Windows on Arm applications using Arm Performance Libraries.
@@ -13,6 +15,10 @@ prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11.
 
 author: Odin Shen
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -27,15 +33,11 @@ tools_software_languages:
 operatingsystems:
     - Windows
 
-
 further_reading:
     - resource:
         title: Arm Performance Libraries Reference Guide  
         link: https://developer.arm.com/documentation/101004/latest/
         type: documentation
-
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
@@ -43,3 +45,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -1,5 +1,6 @@
 ---
 title: Benchmark Linux kernel performance on Arm servers with Fastpath
+description: Learn how to build custom Linux kernels using tuxmake and Fastpath, then benchmark and compare kernel versions on Arm-based EC2 instances.
 
 minutes_to_complete: 90
 
@@ -16,6 +17,10 @@ prerequisites:
     - Familiarity with basic Linux administration and SSH
 
 author: Geremy Cohen
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -51,3 +56,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

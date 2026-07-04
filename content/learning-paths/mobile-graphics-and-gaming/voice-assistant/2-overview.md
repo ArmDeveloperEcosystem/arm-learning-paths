@@ -36,7 +36,7 @@ This process includes the following stages:
 The voice assistant pipeline imports and builds a separate module to provide this STT functionality. You can access this at:
 
 ```
-https://gitlab.arm.com/kleidi/kleidi-examples/speech-to-text
+https://github.com/Arm-Examples/STT-Runner
 ```
 
 You can build the pipeline for various platforms and independently benchmark the STT functionality:
@@ -50,7 +50,7 @@ You can build the pipeline for various platforms and independently benchmark the
 Currently, this module uses [whisper.cpp](https://github.com/ggml-org/whisper.cpp) and wraps the backend library with a thin C++ layer. The module also provides JNI bindings for developers targeting Android based applications.
 
 {{% notice %}}
-You can get more information on how to build and use this module in the [speech-to-text README](https://gitlab.arm.com/kleidi/kleidi-examples/speech-to-text/-/blob/main/README.md?ref_type=heads)
+You can get more information on how to build and use this module in the [speech-to-text README](http://github.com/Arm-Examples/STT-Runner/blob/main/README.md)
 {{% /notice %}}
 
 ## Large Language Model  
@@ -64,7 +64,7 @@ By default, the LLM runs asynchronously, streaming tokens as they are generated.
 The voice assistant pipeline imports and builds a separate module to provide this LLM functionality. You can access this at:
 
 ```
-https://gitlab.arm.com/kleidi/kleidi-examples/large-language-models
+https://github.com/Arm-Examples/LLM-Runner
 ```
 
 You can build this pipeline for various platforms and independently benchmark the LLM functionality:
@@ -86,7 +86,7 @@ Currently, this module provides a thin C++ layer as well as JNI bindings for dev
 
 
 {{% notice %}}
-You can get more information on how to build and use this module in the [large-language-models README](https://gitlab.arm.com/kleidi/kleidi-examples/large-language-models/-/blob/main/README.md?ref_type=heads)
+You can get more information on how to build and use this module in the [large-language-models README](https://github.com/Arm-Examples/LLM-Runner/blob/main/README.md)
 {{% /notice %}}
 
 ## Text-to-Speech 

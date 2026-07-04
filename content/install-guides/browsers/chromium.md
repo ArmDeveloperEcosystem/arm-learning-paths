@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Chromium
+description: Install Chromium on Arm Linux or Windows on Arm and use a native open-source browser for development and testing.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
@@ -74,4 +75,3 @@ Chromium on Windows on Arm does not update itself so you need to update manually
 {{% notice Note3%}}
 Certain types of videos don't play with Chromium. Video support is less than other browsers without DRM. 
 {{% /notice %}}
-

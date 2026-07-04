@@ -1,6 +1,8 @@
 ---
 title: Get started with Realm Management Extension (RME)
 
+description: Learn how to use Arm Development Studio to explore Realm Management Extension (RME) and Arm Confidential Compute Architecture (CCA) through a bare-metal example running on the Arm Architecture Envelope Model.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for developers interested in learning the concepts of Realm Management Extension and the Arm Confidential Compute Architecture (CCA).
@@ -15,6 +17,10 @@ prerequisites:
 
 author: Ronan Synnott
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
@@ -22,7 +28,7 @@ armips:
     - Neoverse
     - Cortex-A
     - Armv9-A
-    
+
 operatingsystems:
     - Linux
     - Android
@@ -33,7 +39,6 @@ tools_software_languages:
     - RME
     - CCA
     - Runbook
-
 
 ### Cross-platform metadata only
 shared_path: true
@@ -56,10 +61,10 @@ further_reading:
         link: https://developer.arm.com/documentation/den0126
         type: documentation
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

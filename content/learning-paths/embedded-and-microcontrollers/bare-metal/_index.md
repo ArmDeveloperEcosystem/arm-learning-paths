@@ -1,6 +1,8 @@
 ---
 title: Create an Armv8-A embedded application
 
+description: Learn how to create, build, and run a bare-metal embedded application for Armv8-A processors using Arm Compiler for Embedded and Fixed Virtual Platforms, including basic exception handling.
+
 minutes_to_complete: 60   
 
 who_is_this_for: This is an introductory topic for embedded software developers new to Armv8-A processors and/or the Arm Compiler for Embedded.
@@ -16,6 +18,10 @@ prerequisites:
     - Some familiarity with embedded programming is assumed
 
 author: Ronan Synnott
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -39,10 +45,10 @@ further_reading:
         link: https://developer.arm.com/documentation/100748
         type: documentation
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

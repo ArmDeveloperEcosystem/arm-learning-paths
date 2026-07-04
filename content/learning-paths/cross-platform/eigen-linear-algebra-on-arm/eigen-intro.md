@@ -104,7 +104,7 @@ There are more specialized classes for both storage types, like the `Tensor` cla
 
 In this Learning Path, you will test Eigen using a few examples with emphasis on Arm CPUs. For full documentation and a list of all supported types and operations on them, see the [Eigen documentation](https://libeigen.gitlab.io/docs/).
 
-## Numerical Solvers
+## Numerical solvers
 
 Besides basic vector and matrix types, Eigen also provides built-in methods for numerical solving on the matrices.
 

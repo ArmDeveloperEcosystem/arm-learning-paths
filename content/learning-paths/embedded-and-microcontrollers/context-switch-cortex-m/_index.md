@@ -1,6 +1,8 @@
 ---
 title: Learn about context switching on Arm Cortex-M processors
 
+description: Learn how to implement context switching operations on Arm Cortex-M processors using the Memory Protection Unit and SysTick exception in a bare-metal environment.
+
 minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for software developers who would like to learn about context switching operations on Cortex-M processors in a bare-metal environment.
@@ -15,6 +17,10 @@ prerequisites:
     - Basic knowledge and familiarity with Cortex-M processors.
 
 author: Uma Ramalingam
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -43,3 +49,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

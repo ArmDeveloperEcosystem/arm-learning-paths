@@ -1,7 +1,9 @@
 ---
 title: Rust for Linux Applications
+description: Install Rust on Arm Linux and compile a sample project so you can build Linux applications with the Rust toolchain.
 minutes_to_complete: 10
 official_docs: https://www.rust-lang.org/tools/install
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=rust
 author: Mathias Brossard
 additional_search_terms:
 - compiler

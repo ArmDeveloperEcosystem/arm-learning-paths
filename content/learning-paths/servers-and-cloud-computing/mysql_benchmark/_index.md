@@ -15,8 +15,17 @@ prerequisites:
 
 author: Bolt Liu
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 skilllevels: Introductory
 subjects: Databases
+cloud_service_providers:
+  - AWS
+  - Microsoft Azure
+  - Google Cloud
+  - Oracle
 armips:
     - Neoverse
 operatingsystems:
@@ -44,10 +53,10 @@ further_reading:
         link: /learning-paths/servers-and-cloud-computing/mysql/
         type: documentation
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1
 layout: learningpathall
 learning_path_main_page: 'yes'
 ---
+

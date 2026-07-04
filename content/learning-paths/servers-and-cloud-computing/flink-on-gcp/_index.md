@@ -1,6 +1,7 @@
 ---
 title: Deploy Apache Flink on Google Cloud C4A (Arm-based Axion VMs)
-    
+description: Learn how to install and configure Apache Flink on Google Cloud Axion C4A Arm64 instances and benchmark stream processing performance with Nexmark.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for developers deploying and optimizing Apache Flink workloads on Linux/Arm64 environments, specifically using Google Cloud C4A virtual machines powered by Axion processors.
@@ -16,6 +17,10 @@ prerequisites:
   - Basic familiarity with [Apache Flink](https://flink.apache.org/) and its runtime environment
 
 author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ##### Tags
 skilllevels: Introductory
@@ -57,3 +62,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

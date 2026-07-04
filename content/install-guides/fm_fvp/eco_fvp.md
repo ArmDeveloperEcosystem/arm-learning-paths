@@ -1,5 +1,6 @@
 ---
 title: Arm Ecosystem FVPs and Architecture Envelope Models
+description: Download and install Arm Ecosystem FVPs or Architecture Envelope Models on supported hosts to explore Arm systems before hardware is available.
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/100966
 author: Ronan Synnott
@@ -71,6 +72,6 @@ Terminate the FVP with `Ctrl+C`.
 
 ## Integration with Arm Toolchains
 
-These FVPs can be used in conjunction with [Arm Development Studio](/install-guides/armds) or [Keil MDK](/install-guides/mdk) (Cortex-M FVPs only) to provide a debug target without the need for real hardware.
+These FVPs can be used in conjunction with [Arm Development Studio](/install-guides/armds/) or [Keil MDK](/install-guides/mdk/) (Cortex-M FVPs only) to provide a debug target without the need for real hardware.
 
 Some of these FVPs are also directly supplied with these toolchains.

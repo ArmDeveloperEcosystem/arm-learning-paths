@@ -3,6 +3,8 @@ title: Profile ExecuTorch models with SME2 on Arm
 
 minutes_to_complete: 90
 
+description: Learn how to profile and optimize ExecuTorch models using SME2 acceleration on Arm platforms, including operator-level analysis and performance bottleneck identification.
+
 who_is_this_for: This is an advanced topic for developers and performance engineers who deploy ExecuTorch models on Arm devices and want to understand and reduce inference latency.
 
 learning_objectives:
@@ -16,18 +18,27 @@ prerequisites:
   - An Apple Silicon macOS host with Python 3.9 or later and CMake 3.29 or later
   - Basic familiarity with ExecuTorch or PyTorch
   - Optionally, an Android device with Armv9 and SME2 support for on-device testing (if used, configure power management settings to ensure consistent performance measurements)
-    
-author: Jason Zhu, Tyler Mullenbach, Damien Dooley 
+
+author:
+    - Jason Zhu
+    - Tyler Mullenbach
+    - Damien Dooley
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
 subjects: ML
 armips:
   - Cortex-A
+  - Arm C1
 tools_software_languages:
   - ExecuTorch
   - Python
   - CMake
+  - SME2
 operatingsystems:
   - macOS
   - Android
@@ -57,3 +68,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

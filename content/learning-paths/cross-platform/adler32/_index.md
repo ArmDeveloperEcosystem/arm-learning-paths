@@ -1,18 +1,24 @@
 ---
-title: Write NEON intrinsics using GitHub Copilot to improve Adler32 performance
+title: Write Neon intrinsics using GitHub Copilot to improve Adler32 performance
+
+description: Learn how to use GitHub Copilot to write Neon intrinsics that accelerate the Adler32 checksum algorithm on Arm platforms, achieving significant performance improvements over standard C implementations.
 
 minutes_to_complete: 45
 
-who_is_this_for: This is an introductory topic for C/C++ developers who are interested in using GitHub Copilot to improve performance using NEON intrinsics.
+who_is_this_for: This is an introductory topic for C/C++ developers who are interested in using GitHub Copilot to improve performance using Neon intrinsics.
 
 learning_objectives: 
-    - Use GitHub Copilot to write NEON intrinsics that accelerate the Adler32 checksum algorithm.
+    - Use GitHub Copilot to write Neon intrinsics that accelerate the Adler32 checksum algorithm.
 
 prerequisites:
     - An Arm computer running Linux with the GNU compiler (gcc) installed.
     - Visual Studio Code with the GitHub Copilot extension installed. 
 
 author: Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -32,7 +38,6 @@ shared_between:
     - laptops-and-desktops
     - mobile-graphics-and-gaming
 
-
 further_reading:
     - resource:
         title: Arm C Language Extensions
@@ -43,10 +48,9 @@ further_reading:
         link: https://en.wikipedia.org/wiki/Adler-32
         type: Article
     - resource:
-        title: NEON Programming Quick Reference
+        title: Neon Programming Quick Reference
         link: https://developer.arm.com/documentation/den0018/a
         type: Documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
@@ -54,3 +58,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

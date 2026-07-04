@@ -2,10 +2,16 @@
 title: "Start Debugging with µVision"
 # Should start with a verb, have no adjectives (amazing, cool, etc.), and be as concise as possible.
 
+description: Learn how to debug microcontrollers using µVision with basic run/stop debug, advanced techniques using Event Recorder and Serial Wire Viewer, ETM Trace for performance analysis, and power measurement with ULINKplus.
+
 minutes_to_complete: 90
-# Always measured in minutes. Should be an integer, to complete the learning path (not just read it).
+# Always measured in minutes. Should be an integer, to complete the learning path (not read it).
 
 author: Christopher Seidl
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 who_is_this_for: >
     This is an advanced topic for software developers who want to debug microcontrollers using µVision.
@@ -30,7 +36,6 @@ prerequisites:
     # Previous learning paths                                   (The Learning Path: Getting Started with Arm Virtual Hardware)
     # Particular tools/environments already being initialized   (An EC2 instance with AVH installed)
 
-
 ##### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
@@ -42,8 +47,6 @@ operatingsystems:
 tools_software_languages:
     - Keil MDK
     - FVP
-
-
 
 further_reading:
     - resource:
@@ -66,7 +69,6 @@ further_reading:
         title: List of supported boards
         link: https://keil.arm.com/boards
         type: website
-
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

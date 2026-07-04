@@ -5,6 +5,8 @@ minutes_to_complete: 30
 
 who_is_this_for: This is a topic for developers who are porting applications from x86 to Arm and want to understand floating-point behavior across these architectures. Both architectures provide reliable and consistent floating-point computation following the IEEE 754 standard.
 
+description: Learn how Arm and x86 floating-point implementations follow IEEE 754 standards, identify rare undefined behavior differences, and write portable code across architectures.
+
 learning_objectives: 
     - Understand that Arm and x86 produce identical results for all well-defined floating-point operations.
     - Recognize that differences only occur in special undefined cases permitted by IEEE 754.
@@ -17,6 +19,10 @@ prerequisites:
 author: 
     - Kieran Hejmadi
     - Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -50,3 +56,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

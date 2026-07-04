@@ -3,7 +3,9 @@ title: Profile llama.cpp performance with Arm Streamline and KleidiAI LLM kernel
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an advanced topic for software developers, performance engineers, and AI practitioners who want to optimize llama.cpp performance on Arm-based CPUs. 
+who_is_this_for: This is an advanced topic for software developers, performance engineers, and AI practitioners who want to optimize llama.cpp performance on Arm-based CPUs.
+
+description: Optimize llama.cpp on Arm CPUs by integrating Streamline Annotations to profile Prefill and Decode stages, analyze operators, and evaluate multi-core execution.
 
 learning_objectives:
     - Profile llama.cpp architecture and identify the role of the Prefill and Decode stages
@@ -21,6 +23,10 @@ prerequisites:
 author: 
     - Zenon Zhilong Xiu
     - Odin Shen
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -65,3 +71,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

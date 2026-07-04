@@ -1,6 +1,8 @@
 ---
 title: Get started with Windows Subsystem for Linux (WSL) on Arm
 
+description: Learn how to configure and run WSL with Linux distributions, graphical applications, remote desktop, and development tools on Windows on Arm computers.
+
 minutes_to_complete: 90 
 
 who_is_this_for: Software developers with Windows on Arm computers doing Linux or cloud native development.
@@ -18,6 +20,10 @@ prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11. 
 
 author: Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -41,10 +47,10 @@ further_reading:
         link: https://devblogs.microsoft.com/visualstudio/arm64-visual-studio/
         type: blog
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

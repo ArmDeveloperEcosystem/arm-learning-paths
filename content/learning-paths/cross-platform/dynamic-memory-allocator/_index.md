@@ -1,6 +1,8 @@
 ---
 title: Write a Dynamic Memory Allocator
 
+description: Learn how to implement a dynamic memory allocator in C, understanding heap management and how malloc and free work under the hood with practical examples.
+
 minutes_to_complete: 120
 
 who_is_this_for: This is an introductory topic for software developers learning about dynamic memory allocation for the first time, and who may have used malloc and free in C programming. It also provides a starting point to explore more advanced memory allocation topics.
@@ -15,6 +17,10 @@ prerequisites:
 - A Linux machine to run the example code.
 
 author: David Spickett
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 test_images:
 - ubuntu:latest
@@ -49,10 +55,10 @@ shared_between:
     - laptops-and-desktops
     - embedded-and-microcontrollers
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

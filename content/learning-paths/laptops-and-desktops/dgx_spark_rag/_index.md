@@ -1,5 +1,8 @@
 ---
 title: Build a RAG pipeline on Arm-based NVIDIA DGX Spark
+
+description: Learn how to build a Retrieval-Augmented Generation (RAG) pipeline on NVIDIA DGX Spark combining Arm Grace CPU orchestration with Blackwell GPU-accelerated inference using llama.cpp.
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an advanced topic for developers who want to build a Retrieval-Augmented Generation (RAG) pipeline on the NVIDIA DGX Spark platform. You'll learn how Arm-based Grace CPUs handle document retrieval and orchestration, while Blackwell GPUs speed up large language model inference using the open-source llama.cpp REST server. This is a great fit if you're interested in combining Arm CPU management with GPU-accelerated AI workloads.
@@ -14,6 +17,10 @@ prerequisites:
     - An NVIDIA DGX Spark system with at least 15 GB of available disk space
 
 author: Odin Shen
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -45,10 +52,10 @@ further_reading:
         link: /learning-paths/laptops-and-desktops/dgx_spark_llamacpp/
         type: Learning Path
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

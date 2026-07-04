@@ -20,7 +20,7 @@ This reference code is functionally-identical to KleidiAI's micro-kernels, and i
 2. To explain how KleidiAI micro-kernels work. The implementation within KleidiAI's micro-kernels use hand-optimized C and Arm Assembly code, which can be difficult to interpret.
 
 
-## Build and Run the KleidiAI C++ example (i8mm micro-kernel)
+## Build and run the KleidiAI C++ example (i8mm micro-kernel)
 
 Follow these steps to build and run the KleidiAI library and example script:
 

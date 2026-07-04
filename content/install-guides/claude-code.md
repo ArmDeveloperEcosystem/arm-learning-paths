@@ -1,5 +1,6 @@
 ---
 title: Claude Code
+description: Install Claude Code on Arm Linux, Apple Silicon macOS, or Windows on Arm so you can use terminal-based AI coding assistance.
 
 author: Pareena Verma
 minutes_to_complete: 10
@@ -182,7 +183,7 @@ Navigate to your project directory and add the Arm MCP Server:
 
 ```console
 cd your-project
-claude mcp add --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "$(pwd):/workspace" armlimited/arm-mcp:latest
+claude mcp add --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "$(pwd):/workspace" -v "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro" -v "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro" armlimited/arm-mcp:latest
 ```
 
 This configuration is stored in `~/.claude.json` under your project's path and is only accessible when working in this directory.
@@ -192,7 +193,7 @@ This configuration is stored in `~/.claude.json` under your project's path and i
 To make the Arm MCP Server available across all your projects:
 
 ```console
-claude mcp add --scope user --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "$(pwd):/workspace" armlimited/arm-mcp:latest
+claude mcp add --scope user --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "$(pwd):/workspace" -v "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro" -v "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro" armlimited/arm-mcp:latest
 ```
 
 This configuration is stored in `~/.claude.json` and is accessible from any project directory.
@@ -203,7 +204,7 @@ To share the MCP server configuration with your team via version control:
 
 ```console
 cd your-project
-claude mcp add --scope project --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "$(pwd):/workspace" armlimited/arm-mcp:latest
+claude mcp add --scope project --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "$(pwd):/workspace" -v "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro" -v "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro" armlimited/arm-mcp:latest
 ```
 
 This creates a `.mcp.json` file in your project root that can be committed to version control.
@@ -215,8 +216,86 @@ The Arm MCP Server automatically mounts your current working directory to the `/
 To analyze a different directory, modify the volume mount in the `docker run` command. For example, to analyze `/Users/username/myproject`:
 
 ```console
-claude mcp add --transport stdio arm-mcp -- docker run --rm -i -v "/Users/username/myproject:/workspace" armlimited/arm-mcp:latest
+claude mcp add --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "/Users/username/myproject:/workspace" -v "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro" -v "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro" armlimited/arm-mcp:latest
 ```
+
+To enable Arm Performix features through the Arm MCP Server, replace `/path/to/your/ssh/private_key` and `/path/to/your/ssh/known_hosts` with the SSH private key and `known_hosts` file used for your target device.
+
+### Optional: Use a Docker replacement containerization tool
+
+You can use other containerization tools besides Docker that are free and do not require licenses, such as Podman, Finch, Colima, and Rancher Desktop. Choose one of the options below and use its CLI in place of `docker`.
+
+{{< tabpane-normal >}}
+  {{< tab header="Podman" >}}
+Install: [Podman](https://podman.io/docs/installation)
+
+Pull the Arm MCP Server image:
+```console
+podman pull armlimited/arm-mcp:latest
+```
+
+To make the Arm MCP Server available across all your projects (user scope):
+
+```console
+claude mcp add --scope user --transport stdio arm-mcp -- podman run --rm -i --pull=always -v "$(pwd):/workspace" -v "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro" -v "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro" armlimited/arm-mcp:latest
+```
+This configuration is stored in `~/.claude.json` and is accessible from any project directory.
+You can choose other scopes (local or project) as described in the Docker section above.
+  {{< /tab >}}
+  {{< tab header="Finch" >}}
+Install: [Finch](https://runfinch.com/docs/getting-started/installation/)
+
+Pull the Arm MCP Server image:
+```console
+finch pull armlimited/arm-mcp:latest
+```
+
+To make the Arm MCP Server available across all your projects (user scope):
+
+```console
+claude mcp add --scope user --transport stdio arm-mcp -- finch run --rm -i --pull=always -v "$(pwd):/workspace" -v "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro" -v "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro" armlimited/arm-mcp:latest
+```
+This configuration is stored in `~/.claude.json` and is accessible from any project directory.
+You can choose other scopes (local or project) as described in the Docker section above.
+  {{< /tab >}}
+  {{< tab header="Colima" >}}
+Install: [Colima](https://github.com/abiosoft/colima#installation)
+
+Colima provides a Docker-compatible CLI via Docker contexts.
+
+Pull the Arm MCP Server image:
+```console
+docker pull armlimited/arm-mcp:latest
+```
+
+To make the Arm MCP Server available across all your projects (user scope):
+
+```console
+claude mcp add --scope user --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "$(pwd):/workspace" -v "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro" -v "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro" armlimited/arm-mcp:latest
+```
+This configuration is stored in `~/.claude.json` and is accessible from any project directory.
+You can choose other scopes (local or project) as described in the Docker section above.
+  {{< /tab >}}
+  {{< tab header="Rancher Desktop" >}}
+Install: [Rancher Desktop](https://docs.rancherdesktop.io/getting-started/installation/)
+
+Rancher Desktop uses the Docker container engine via Morby.
+
+Pull the Arm MCP Server image:
+```console
+docker pull armlimited/arm-mcp:latest
+```
+
+To make the Arm MCP Server available across all your projects (user scope):
+
+```console
+claude mcp add --scope user --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "$(pwd):/workspace" -v "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro" -v "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro" armlimited/arm-mcp:latest
+```
+This configuration is stored in `~/.claude.json` and is accessible from any project directory.
+You can choose other scopes (local or project) as described in the Docker section above.
+  {{< /tab >}}
+{{< /tabpane-normal >}}
+
 
 ## Verify the Arm MCP Server is working
 
@@ -260,7 +339,7 @@ Here are some example prompts that use the Arm MCP Server tools:
 
 - `Scan my workspace for code that needs updating for Arm compatibility`
 - `Check if the postgres:latest container image supports Arm64 architecture`
-- `Search the Arm knowledge base for NEON intrinsics examples`
+- `Search the Arm knowledge base for Neon intrinsics examples`
 - `Find learning resources about migrating from x86 to Arm`
 - `Analyze this assembly code for performance on Arm processors`
 
@@ -297,4 +376,3 @@ If you encounter issues or have questions, reach out to mcpserver@arm.com.
 ## Custom prompts and workflows
 
 Create custom prompts for common tasks in your workflow. Refer to the [Claude Code documentation](https://code.claude.com/docs) for advanced configuration options.
-

@@ -1,5 +1,6 @@
 ---
 title: ROS - Robot Operating System
+description: Install ROS 2 on Ubuntu for Arm and configure dependencies so you can build and run robotics applications on Arm Linux.
 author: Odin Shen
 minutes_to_complete: 30
 official_docs: https://www.ros.org/blog/getting-started/

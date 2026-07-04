@@ -5,7 +5,7 @@ weight: 8
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-If you need a refresh on the Unity Analyzer, read [Profiling Unity apps on Android](/learning-paths/mobile-graphics-and-gaming/profiling-unity-apps-on-android) before you continue.
+If you need a refresh on the Unity Analyzer, read [Profiling Unity apps on Android](/learning-paths/mobile-graphics-and-gaming/profiling-unity-apps-on-android/) before you continue.
 
 ## Pull data into the Analyzer
 
@@ -31,7 +31,7 @@ To compare the results you will use the Analyzer to import all three datasets bu
 
 1. Click back to the Analyzer and select the second _Pull Data_.
 
-You now have two datasets loaded, one from the unoptimized mode and one from the Burst mode. This is what the data looks like collected from a Samsung S8.
+You now have two datasets loaded, one from the unoptimized mode and one from the Burst mode. This is what the data looks like collected from our sample device.
 
 ![Plain vs Burst#center](images/analyzer-plain-vs-burst.PNG)
 

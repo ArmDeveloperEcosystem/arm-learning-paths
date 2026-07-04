@@ -1,5 +1,6 @@
 ---
 title: Accelerate multimodal Voice Assistant performance with KleidiAI and SME2
+description: Learn how to build and optimize a multimodal Voice Assistant application on Android using KleidiAI and SME2 for accelerated performance.
 
 minutes_to_complete: 30
 
@@ -21,14 +22,20 @@ author:
     - Arnaud de Grandmaison
     - Nina Drozd
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
     - Cortex-A
+    - Arm C1
 tools_software_languages:
     - Java
     - Kotlin
     - CPP
+    - SME2
 operatingsystems:
     - Android
     - Linux
@@ -57,3 +64,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

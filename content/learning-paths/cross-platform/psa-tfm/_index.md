@@ -7,6 +7,8 @@ cascade:
 
 minutes_to_complete: 120
 
+description: Learn how to build and run the Arm Trusted Firmware Platform Security Architecture (PSA) software stack on Corstone-1000 using FVP simulation or MPS3 FPGA hardware.
+
 who_is_this_for: This an introductory topic is for software developers new to Platform Security Architecture (PSA) and Arm Trusted Firmware components
 
 learning_objectives: 
@@ -16,8 +18,11 @@ learning_objectives:
 prerequisites:
     - Ubuntu host or access to AWS
     - Optional MPS3 FPGA prototyping board
-
 author: Ronan Synnott
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -32,7 +37,6 @@ tools_software_languages:
     - Trusted Firmware
     - FVP
     - GCC
-
 
 ### Cross-platform metadata only
 shared_path: true

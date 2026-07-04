@@ -1,6 +1,8 @@
 ---
 title: Get started with object detection using a Jetson Orin Nano
 
+description: Learn how to set up a Jetson Orin Nano with a MIPI CSI-2 camera and perform real-time object detection from live video and image files using DetectNet and TensorRT.
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for developers interested in integrating object detection into their applications.
@@ -15,6 +17,10 @@ prerequisites:
     - A MIPI CSI-2 camera, with a 22 pin connector on at least one end
 
 author: Gabriel Peterson
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -32,7 +38,6 @@ tools_software_languages:
     - TensorRT
     - Docker
 
-
 further_reading:
     - resource:
         title: Jetson Inference
@@ -47,11 +52,10 @@ further_reading:
         link: https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/
         type: website
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

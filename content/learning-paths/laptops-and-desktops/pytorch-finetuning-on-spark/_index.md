@@ -1,9 +1,7 @@
 ---
 title: Fine-tune PyTorch models on DGX Spark
 
-draft: true
-cascade:
-    draft: true
+description: Learn how to fine-tune large language models using PyTorch and Hugging Face on NVIDIA DGX Spark to improve domain-specific accuracy.
 
 minutes_to_complete: 60
 
@@ -12,7 +10,7 @@ who_is_this_for: This is an advanced topic for AI developers and ML engineers wh
 learning_objectives: 
     - Understand how fine-tuning teaches a model domain-specific knowledge
     - Prepare a custom JSONL dataset for supervised fine-tuning
-    - Fine-tune Llama 3.1 8B on Raspberry Pi datasheet content using PyTorch and Hugging Face
+    - Fine-tune Llama 3.2 3B on Raspberry Pi datasheet content using PyTorch and Hugging Face
     - Compare base and fine-tuned model responses to verify factual accuracy improvements
 
 prerequisites:
@@ -20,6 +18,10 @@ prerequisites:
     - NVIDIA DGX Spark workstation
 
 author: Michael Hall
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -31,6 +33,7 @@ tools_software_languages:
     - Python
     - PyTorch
     - Docker
+    - Hugging Face
 operatingsystems:
     - Linux
 
@@ -55,6 +58,10 @@ further_reading:
         title: PyTorch Training Documentation
         link: https://pytorch.org/tutorials/beginner/introyt/trainingyt.html
         type: documentation
+    - resource:
+        title: Build a serverless LLM inference application with AWS Lambda and Arm processors
+        link: /learning-paths/servers-and-cloud-computing/llama-cpu/
+        type: website
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
@@ -62,3 +69,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

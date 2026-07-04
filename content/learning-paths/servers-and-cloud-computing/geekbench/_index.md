@@ -15,6 +15,10 @@ prerequisites:
 
 author: Jason Andrews
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 skilllevels: Introductory
 
 subjects: Performance and Architecture
@@ -29,7 +33,6 @@ test_images:
 tools_software_languages:
     - Geekbench
     - Runbook
-
 
 further_reading:
     - resource:
@@ -51,3 +54,4 @@ weight: 1
 layout: learningpathall
 learning_path_main_page: 'yes'
 ---
+

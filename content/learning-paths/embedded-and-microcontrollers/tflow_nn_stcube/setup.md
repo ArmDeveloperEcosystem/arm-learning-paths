@@ -1,6 +1,7 @@
 ---
 # User change
 title: Prepare development environment
+description: Install Anaconda and prepare the Python environment for training and deploying the STM32 TensorFlow model.
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -44,7 +45,7 @@ conda install jupyter pandas pyserial scikit-learn tensorflow matplotlib
 
 Next, you need to program the STM32 `B-L475E-IOT01A2` board to acquire accelerometer data for your neural network model.
 
-The data collection code for this Learning Path is provided, so you can just import the project and program the board using [STM32CubeIDE](https://www.st.com/en/development-tools/stm32cubeide.html).
+The data collection code for this Learning Path is provided, so you can import the project and program the board using [STM32CubeIDE](https://www.st.com/en/development-tools/stm32cubeide.html).
 
 Download the [zip file](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/tflow_nn_stcube/project_files/tf_stm32.zip) and extract it into a `tf_stm32` folder.
 

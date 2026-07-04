@@ -10,8 +10,16 @@ Called from:
     - _default/term.html
 */}}
 
-<ads-card link="{{.learning_path.Permalink}}" class='path-card'>
+<ads-card link="{{.learning_path.Permalink}}" class='path-card{{ if .is_pinned }} featured-path-card{{ end }}'>
     <ads-card-content slot="content">
+        {{ if .is_pinned }}
+            <div class="pinned-header-row">
+                <span class="pinned-inline-icon" aria-label="Pinned learning path" title="Pinned learning path">
+                    <i class="fa-solid fa-thumbtack" aria-hidden="true"></i>
+                </span>
+                <span class="pinned-featured-label">| FEATURED</span>
+            </div>
+        {{ end }}
         <!-- SUBJECT -->
         <p class="card-subject u-margin-top-0 u-margin-bottom-1/2">
             {{ upper .learning_path.Params.subjects }}

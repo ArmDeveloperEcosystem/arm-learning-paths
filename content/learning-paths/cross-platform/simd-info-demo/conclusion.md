@@ -14,7 +14,7 @@ The primary focus of this Learning Path is to optimize the existing algorithm di
 
 If you are interested in data layout strategies to further enhance performance on Arm, see the Learning Path *Optimize SIMD code with vectorization-friendly data layout* linked to in the **Next Steps** section at the of this Learning Path. 
 
-Using SIMD.info can be instrumental in reducing the amount of time spent in this process, providing a centralized and user-friendly resource for finding NEON equivalents to intrinsics of other architectures. It saves considerable time and effort by offering detailed descriptions, prototypes, and comparisons directly, eliminating the need for extensive web searches and manual lookups.
+Using SIMD.info can be instrumental in reducing the amount of time spent in this process, providing a centralized and user-friendly resource for finding Neon equivalents to intrinsics of other architectures. It saves considerable time and effort by offering detailed descriptions, prototypes, and comparisons directly, eliminating the need for extensive web searches and manual lookups.
 
 While porting between vectors of different sizes is more complex, work is underway to complete the integration of SVE and SVE2 Arm extensions and allow matching them with AVX512 intrinsics, as they both use predicate masks.
 

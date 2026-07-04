@@ -3,6 +3,8 @@ title: Sample Instructions with WindowsPerf and Arm SPE
 
 minutes_to_complete: 30
 
+description: Learn how to sample and profile CPU instructions using WindowsPerf with Arm Statistical Profiling Extension (SPE) on Windows on Arm, demonstrated with CPython workload analysis.
+
 who_is_this_for: This is an introductory topic for developers who would like to learn about sampling CPU instructions with WindowsPerf and the Arm Statistical Profiling Extension (SPE).
 
 learning_objectives:
@@ -13,11 +15,15 @@ learning_objectives:
 
 prerequisites:
     - A Windows on Arm desktop or development machine, with CPU support for SPE.
-    - An installation of [WindowsPerf](/install-guides/wperf).
+    - An installation of [WindowsPerf](/install-guides/wperf/).
     - An installation of [Visual Studio](/install-guides/vs-woa/).
     - An installation of [Git](/install-guides/git-woa/).
-  
+
 author: Przemyslaw Wirkus
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -98,3 +104,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

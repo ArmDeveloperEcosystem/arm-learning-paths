@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 ## SAXPY example code
 
-This page walks you through a SAXPY (Single-Precision A·X Plus Y) kernel implemented in plain C and with vector extensions on both Arm (NEON, SVE) and x86 (AVX2, AVX-512). You will see how to build and run each version and how the vector width affects throughput.
+This page walks you through a SAXPY (Single-Precision A·X Plus Y) kernel implemented in plain C and with vector extensions on both Arm (Neon, SVE) and x86 (AVX2, AVX-512). You will see how to build and run each version and how the vector width affects throughput.
 
 SAXPY computes `y[i] = a * x[i] + y[i]` across arrays `x` and `y`. It is widely used in numerical computing and is an accessible way to compare SIMD behavior across ISAs.
 
@@ -66,11 +66,11 @@ gcc -O3 -o saxpy_plain saxpy_plain.c
 
 You can use Clang for any of the examples by replacing `gcc` with `clang` on the command line.
 
-## Arm NEON version (128-bit SIMD, 4 floats per operation)
+## Arm Neon version (128-bit SIMD, 4 floats per operation)
 
-NEON uses fixed 128-bit registers, processing four `float` values per instruction. It is available on most Armv8-A devices and is excellent for accelerating loops and signal processing tasks in mobile and embedded workloads.
+Neon uses fixed 128-bit registers, processing four `float` values per instruction. It is available on most Armv8-A devices and is excellent for accelerating loops and signal processing tasks in mobile and embedded workloads.
 
-The example below processes 16 floats per iteration using four separate NEON operations to improve instruction-level parallelism and reduce loop overhead:
+The example below processes 16 floats per iteration using four separate Neon operations to improve instruction-level parallelism and reduce loop overhead:
 
 ```c
 #include <arm_neon.h>
@@ -123,13 +123,13 @@ int main() {
 
 Use a text editor to copy the code to a file `saxpy_neon.c`. 
 
-First, verify your system supports NEON:
+First, verify your system supports Neon:
 
 ```bash
 grep -m1 -ow asimd /proc/cpuinfo
 ```
 
-If NEON is supported, you should see `asimd` in the output. If no output appears, NEON is not available.
+If Neon is supported, you should see `asimd` in the output. If no output appears, Neon is not available.
 
 Then build and run the code using:
 
@@ -139,14 +139,14 @@ gcc -O3 -march=armv8-a+simd -o saxpy_neon saxpy_neon.c
 ```
 
 {{% notice Note %}}
-On AArch64, NEON is mandatory; the flag is shown for clarity.
+On AArch64, Neon is mandatory; the flag is shown for clarity.
 {{% /notice %}}
 
 
 
 ## x86 AVX2 version (256-bit SIMD, 8 floats per operation)
 
-AVX2 doubles the SIMD width compared to NEON, processing 8 single-precision floats at a time in 256-bit registers. 
+AVX2 doubles the SIMD width compared to Neon, processing 8 single-precision floats at a time in 256-bit registers. 
 
 This wider SIMD capability enables higher data throughput for numerical and HPC workloads on Intel and AMD CPUs.
 

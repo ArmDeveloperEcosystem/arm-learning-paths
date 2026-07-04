@@ -55,8 +55,8 @@ Compile the applications using the commands shown:
   {{< tab header="GNU" >}}
   gcc -march=armv8-a+sve -O3 -fopt-info-vec sve_add.c -o sve_add.exe
   {{< /tab >}}
-  {{< tab header="Arm Compiler for Linux" >}}
-  armclang --march=armv8-a+sve -O3 -Rpass=vector sve_add.c -o sve_add.exe
+  {{< tab header="Arm Toolchain for Linux" >}}
+  armclang -march=armv8-a+sve -O3 -Rpass=vector sve_add.c -o sve_add.exe
   {{< /tab >}}
 {{% /tabpane %}}
 
@@ -94,10 +94,10 @@ The application now runs and prints the expected message.
 
 You can also run the application containing SVE instructions using the the Arm Instruction Emulator.
 
-Download and install the [Arm Instruction Emulator](https://developer.arm.com/downloads/-/arm-instruction-emulator) (see [installation instructions](/install-guides/armie) ) on any Arm v8-A system. The Arm Instruction Emulator intercepts and emulates unsupported SVE instructions. It also support plugins for application analysis.
+Download and install the [Arm Instruction Emulator](https://developer.arm.com/downloads/-/arm-instruction-emulator) (see [installation instructions](/install-guides/armie/) ) on any Arm v8-A system. The Arm Instruction Emulator intercepts and emulates unsupported SVE instructions. It also support plugins for application analysis.
 
 {{% notice Note %}}
-The Arm Instruction Emulator has been deprecated. It is still available for download, but there is no active development. 
+As of May 2026 the latest release is 25.0.  
 {{% /notice %}}
 
 ## Arm Instruction Emulator Usage

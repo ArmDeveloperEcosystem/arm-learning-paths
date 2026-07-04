@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Arm Keil Studio Cloud
+description: Open Arm Keil Studio Cloud in a Chromium-based browser and start browser-based Cortex-M, IoT, and embedded development without local installation.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:

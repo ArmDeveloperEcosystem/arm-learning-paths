@@ -1,6 +1,8 @@
 ---
 title: Get started with Keil MDK Code Coverage
 
+description: Learn how to set up and use code coverage in Keil MDK with FVPs to verify that your embedded application tests execute all code paths.
+
 minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for embedded software developers new to the code-coverage feature in Keil MDK.
@@ -13,6 +15,10 @@ prerequisites:
     - Basic familiarity with Keil MDK
 
 author: Ronan Synnott
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -40,10 +46,10 @@ further_reading:
         link: https://www.youtube.com/watch?v=XGmSCVgb6EM
         type: video
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

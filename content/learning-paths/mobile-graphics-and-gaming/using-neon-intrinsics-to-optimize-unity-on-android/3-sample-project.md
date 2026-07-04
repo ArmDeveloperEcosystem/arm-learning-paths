@@ -5,7 +5,7 @@ weight: 4
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-Assuming you went through the process of building and profiling the sample project on Android (as explained in [Profiling Unity Apps on Android](/learning-paths/mobile-graphics-and-gaming/profiling-unity-apps-on-android)), open Unity and the project you created.
+Assuming you went through the process of building and profiling the sample project on Android (as explained in [Profiling Unity Apps on Android](/learning-paths/mobile-graphics-and-gaming/profiling-unity-apps-on-android/)), open Unity and the project you created.
 
 ## Quick preparation
 First we need to set the project to unoptimized mode. Please edit Assets/BurstNeonCollisions/Scripts/CollisionCalculationScript.cs. Change line 66 to the following:
@@ -19,7 +19,7 @@ This will set the project to unoptimized mode which we will explain first.
 Note that the Neon version will not function correctly on computers without Neon support.
 
 ## The sample project
-To recap from [Profiling Unity apps on Android](/learning-paths/mobile-graphics-and-gaming/profiling-unity-apps-on-android), the sample project [Optimizing Collisions with Burst and Neon Intrinsics](https://assetstore.unity.com/packages/essentials/tutorial-projects/optimizing-collisions-with-burst-and-neon-intrinsics-196303) creates a simple environment with 4 areas. Each area comprises an enclosed set of walls. Characters (modeled as capsules) walk around the arena in which they are spawned. Characters can collide with each other or with the walls. When a character collides with something, it changes direction.
+To recap from [Profiling Unity apps on Android](/learning-paths/mobile-graphics-and-gaming/profiling-unity-apps-on-android/), the sample project [Optimizing Collisions with Burst and Neon Intrinsics](https://assetstore.unity.com/packages/essentials/tutorial-projects/optimizing-collisions-with-burst-and-neon-intrinsics-196303) creates a simple environment with 4 areas. Each area comprises an enclosed set of walls. Characters (modeled as capsules) walk around the arena in which they are spawned. Characters can collide with each other or with the walls. When a character collides with something, it changes direction.
 
 ### Collision detection
 Walls are modeled as axis-aligned bounding boxes and simple box meshes. Collisions between characters (capsules) and walls are calculated using Axis-Aligned Bounding Box (AABB) collision detection functions (both the characters and the walls are treated as AABBs). Collisions between characters are calculated using radius-radius functions.

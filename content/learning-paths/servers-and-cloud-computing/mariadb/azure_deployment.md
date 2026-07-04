@@ -32,12 +32,12 @@ The instructions to login to Azure CLI and to create the keys are below.
 
 Terraform on your local machine needs to communicate with Azure.
 
-For Azure authentication, follow the [Azure Authentication](/install-guides/azure_login) install guide.
+For Azure authentication, follow the [Azure Authentication](/install-guides/azure_login/) install guide.
 
 ### Generate an SSH key-pair
 
 Generate an SSH key-pair (public key, private key) using `ssh-keygen` to use for Arm VMs access. To generate the key-pair, follow this [
-guide](/install-guides/ssh#ssh-keys).
+guide](/install-guides/ssh/#ssh-keys).
 
 {{% notice Note %}} 
 If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
@@ -332,7 +332,7 @@ resource_group_name = "rg-tight-dove"
 
 You can install the MariaDB and the required dependencies using Ansible.
 
-Use the same `playbook.yaml` file used in the topic, [Install MariaDB on a single AWS Arm based instance](/learning-paths/servers-and-cloud-computing/mariadb/ec2_deployment#configure-mariadb-through-ansible).
+Use the same `playbook.yaml` file used in the topic, [Install MariaDB on a single AWS Arm based instance](/learning-paths/servers-and-cloud-computing/mariadb/ec2_deployment/#configure-mariadb-through-ansible).
 
 Use a text editor to save the `playbook.yaml` file if you don't already have it. 
 
@@ -387,7 +387,7 @@ ansible-target1            : ok=8    changed=6    unreachable=0    failed=0    s
 
 ## Connect to Database from local machine
 
-Follow the instructions from the previous section to [connect to the database](/learning-paths/servers-and-cloud-computing/mariadb/ec2_deployment#connect-to-database-from-local-machine).
+Follow the instructions from the previous section to [connect to the database](/learning-paths/servers-and-cloud-computing/mariadb/ec2_deployment/#connect-to-database-from-local-machine).
 
 You have successfully deployed MariaDB on an Azure instance.
 

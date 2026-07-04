@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Program your smart device prototype"
+description: Write and upload the Arduino sketch for the Raspberry Pi Pico so the smart device prototype can react to motion events.
 
 weight: 7 # 1 is first, 2 is second, etc.
 
@@ -240,13 +241,13 @@ Finally, write a message to the USB output indicating that the device is once ag
 
 ## Run your code
 
-Now that you have a good understanding of the code, you should run it on your device. With your Raspberry Pi Pico board plugged in to your computer, and the [correct board and port selected in the Arduino IDE](/install-guides/arduino-pico), click the `Upload` button on the IDE to build and install it on your device.
+Now that you have a good understanding of the code, you should run it on your device. With your Raspberry Pi Pico board plugged in to your computer, and the [correct board and port selected in the Arduino IDE](/install-guides/arduino-pico/), click the `Upload` button on the IDE to build and install it on your device.
 
 If successful, you should see the LED on your board light up. If you wave your hand in front of the sensor, you should also hear a double beep and see the LED turn off for a few seconds.
 
 You can further check that your code is running properly by opening the `Serial Monitor` from the `Tools` menu of the Arduino IDE. There you should see all of the output messages, including count of detected motion events, coming from your sketch.
 
-![Debug output](_images/output.webp)
+![Screenshot of the Arduino IDE Serial Monitor window displaying debug messages from the motion detection sketch. The output shows repeated "Motion detected" messages followed by motion event counts, confirming that the PIR sensor is triggering correctly and the sketch is processing the interrupts.#center](_images/output.webp)
 
 Congratulations! You have successfully programmed your microcontroller and built a working, if simple, smart device. 
 

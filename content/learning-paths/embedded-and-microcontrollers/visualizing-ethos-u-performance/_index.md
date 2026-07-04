@@ -1,6 +1,8 @@
 ---
 title: Visualize Ethos-U NPU performance with ExecuTorch on Arm FVPs
 
+description: Learn how to identify Arm-based targets for TinyML, install Fixed Virtual Platforms, deploy ExecuTorch models on Corstone-320 FVP, and visualize model execution using the FVP graphical interface.
+
 minutes_to_complete: 120
 
 who_is_this_for: This is an introductory topic for developers and data scientists who are new to TinyML and want to visualize ExecuTorch model performance on virtual Arm hardware.
@@ -15,8 +17,11 @@ prerequisites:
     - Familiarity with basic machine learning concepts
     - A Linux or macOS computer with Python 3 installed
 
-
 author: Waheed Brown
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -54,12 +59,10 @@ further_reading:
         link: https://developer.arm.com/documentation/109267/0101
         type: documentation
 
-
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

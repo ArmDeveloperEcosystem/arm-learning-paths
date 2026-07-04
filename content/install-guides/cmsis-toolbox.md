@@ -17,6 +17,8 @@ additional_search_terms:
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 15
 
+description: Install CMSIS-Toolbox on Arm Linux, Windows, and macOS to create, build, and manage embedded projects based on CMSIS Software Packs.
+
 author: Ronan Synnott
 
 ### Link to official documentation
@@ -30,94 +32,101 @@ multi_install: false            # Set to true if first page of multi-page articl
 multitool_install_part: false   # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
-The [CMSIS-Toolbox](https://github.com/Open-CMSIS-Pack/cmsis-toolbox) is a suite of utilities for creating, building, and managing projects based on CMSIS Software Packs.
+The [CMSIS-Toolbox](https://github.com/Open-CMSIS-Pack/cmsis-toolbox) is a suite of utilities for creating, building, and managing projects based on CMSIS Software Packs. It is also used for creating and maintaining Software Packs.
 
-It is also used for the creation and maintenance of such packs.
-
-`CMSIS-Toolbox` is part of the [Open-CMSIS-Pack project](https://open-cmsis-pack.github.io/Open-CMSIS-Pack-Spec/main/html/index.html).
-
-Windows, Linux, and macOS host platforms are supported.
+`CMSIS-Toolbox` is part of the [Open-CMSIS-Pack project](https://open-cmsis-pack.github.io/Open-CMSIS-Pack-Spec/main/html/index.html). It is supported on Windows, Linux, and macOS host platforms. 
 
 {{% notice Note %}}
-This install guide is for manual installation of `CMSIS-Toolbox`.
+The following install guide is for manual installation of `CMSIS-Toolbox`.
 
-For automation instructions using `vcpkg` see [Install tools on the command line using vcpkg](/learning-paths/embedded-and-microcontrollers/vcpkg-tool-installation/).
+For automation instructions using `vcpkg`, see [Install tools on the command line using vcpkg](/learning-paths/embedded-and-microcontrollers/vcpkg-tool-installation/).
 
-`CMSIS-Toolbox` is also installed as part of a Keil MDK installation (Windows only).
+`CMSIS-Toolbox` is also installed as part of a Keil MDK installation on Windows only.
 {{% /notice %}}
 
-## What dependencies do I need before installing CMSIS-Toolbox?
+## Before you begin
 
-You will need to install `CMake` and `Ninja`:
+You'll need to install `CMake` and `Ninja`. For steps to install `CMake`, see the [CMake install guide](/install-guides/cmake/).
+
+To install `Ninja`, run:
+
 ```command
 sudo apt update
-sudo apt install cmake ninja-build -y
+sudo apt install ninja-build -y
 ```
 Check the versions of each tool:
 ```command
 cmake --version
 ninja --version
 ```
-Ensure version of `CMake` is at least `3.25.2`, and `Ninja` is at least `1.10.2`.
+Ensure that the version of `CMake` is at least `3.25.2`, and `Ninja` is at least `1.10.2`.
 
-You can also download installers for all supported hosts from the below:
+You can also download installers for all supported hosts:
 * [CMake](https://cmake.org/download/)
 * [Ninja](https://github.com/ninja-build/ninja/releases)
 
-## How do I download CMSIS-Toolbox?
+## Download CMSIS-Toolbox
 
 Download and unpack the latest version of `CMSIS-Toolbox` from the [Arm Tools Artifactory](https://artifacts.tools.arm.com/cmsis-toolbox/).
 
-Full details of the contents is given in the [Releases area](https://github.com/Open-CMSIS-Pack/cmsis-toolbox/releases) of the GitHub repository.
+For more information about the contents of the installation, see [Releases](https://github.com/Open-CMSIS-Pack/cmsis-toolbox/releases).
 
-### How do I download for Arm64 hosts?
+### Download for Arm64 hosts
+
+The commands depend on the host operating system. Replace `2.13.0` with the latest version.
 
 {{< tabpane code=true >}}
   {{< tab header="Windows" language="shell">}}
-wget https://artifacts.tools.arm.com/cmsis-toolbox/2.5.0/cmsis-toolbox-windows-arm64.zip
+wget https://artifacts.tools.arm.com/cmsis-toolbox/2.13.0/cmsis-toolbox-windows-arm64.zip
 tar -xf cmsis-toolbox-windows-arm64.zip
   {{< /tab >}}
   {{< tab header="Linux" language="shell">}}
-wget https://artifacts.tools.arm.com/cmsis-toolbox/2.5.0/cmsis-toolbox-linux-arm64.tar.gz
+wget https://artifacts.tools.arm.com/cmsis-toolbox/2.13.0/cmsis-toolbox-linux-arm64.tar.gz
 tar -xf cmsis-toolbox-linux-arm64.tar.gz
   {{< /tab >}}
   {{< tab header="macOS" language="shell">}}
-curl -L -o cmsis-toolbox-darwin-arm64.tar.gz https://artifacts.tools.arm.com/cmsis-toolbox/2.5.0/cmsis-toolbox-darwin-arm64.tar.gz
+curl -L -o cmsis-toolbox-darwin-arm64.tar.gz https://artifacts.tools.arm.com/cmsis-toolbox/2.13.0/cmsis-toolbox-darwin-arm64.tar.gz
 tar -xf cmsis-toolbox-darwin-arm64.tar.gz
   {{< /tab >}}
 {{< /tabpane >}}
 
-### How do I download for x86_64 hosts?
+### Download for x86_64 hosts
+
+The commands depend on the host operating system. Replace `2.13.0` with the latest version.
 
 {{< tabpane code=true >}}
   {{< tab header="Windows" language="shell">}}
-wget https://artifacts.tools.arm.com/cmsis-toolbox/2.5.0/cmsis-toolbox-windows-amd64.zip
+wget https://artifacts.tools.arm.com/cmsis-toolbox/2.13.0/cmsis-toolbox-windows-amd64.zip
 tar -xf cmsis-toolbox-windows-amd64.zip
   {{< /tab >}}
   {{< tab header="Linux" language="shell">}}
-wget https://artifacts.tools.arm.com/cmsis-toolbox/2.5.0/cmsis-toolbox-linux-amd64.tar.gz
+wget https://artifacts.tools.arm.com/cmsis-toolbox/2.13.0/cmsis-toolbox-linux-amd64.tar.gz
 tar -xf cmsis-toolbox-linux-amd64.tar.gz
   {{< /tab >}}
   {{< tab header="macOS" language="shell">}}
-curl -L -o cmsis-toolbox-darwin-amd64.tar.gz https://artifacts.tools.arm.com/cmsis-toolbox/2.5.0/cmsis-toolbox-darwin-amd64.tar.gz
+curl -L -o cmsis-toolbox-darwin-amd64.tar.gz https://artifacts.tools.arm.com/cmsis-toolbox/2.13.0/cmsis-toolbox-darwin-amd64.tar.gz
 tar -xf cmsis-toolbox-darwin-amd64.tar.gz
   {{< /tab >}}
 {{< /tabpane >}}
 
-## Which compiler toolchain should I install?
+## Available compiler toolchains 
 
 Projects can be built with Arm Compiler for Embedded 6, Arm GNU Toolchain, LLVM Embedded Toolchain, or IAR tools.
 
-For further setup instructions see these Install Guides:
-* [Arm Compiler for Embedded](/install-guides/armclang)
-* [Arm GNU Toolchain](/install-guides/gcc/arm-gnu)
+For further setup instructions, see the following Install Guides:
+* [Arm Compiler for Embedded](/install-guides/armclang/)
+* [Arm GNU Toolchain](/install-guides/gcc/arm-gnu/)
 * [LLVM Embedded Toolchain for Arm](/install-guides/llvm-embedded/)
 
-`Arm Compiler for Embedded` is used in the example below.
+This Install Guide uses `Arm Compiler for Embedded`, which is supported on Windows and Linux.
 
-## How do I set up environment variables?
+## Set up environment variables
 
-Set environment variables as below. Note the exact name of the `TOOLCHAIN` variables will be based on the tool and version installed. In this way, multiple build tools can be registered.
+Set environment variables as follows. 
+
+{{% notice Note %}}
+The exact name of the `TOOLCHAIN` variables will be based on the tool and version installed. In this way, you can register multiple build tools.
+{{% /notice %}}
 
 | Variable                                   | Description                           | Notes                                         |
 | ------------------------------------------ | ------------------------------------- | --------------------------------------------- |
@@ -130,35 +139,35 @@ Set environment variables as below. Note the exact name of the `TOOLCHAIN` varia
 For example:
 {{< tabpane code=true >}}
   {{< tab header="Windows" language="shell">}}
-set AC6_TOOLCHAIN_6_22_0=%ProgramFiles%/ArmCompilerforEmbedded6.22/bin
+set AC6_TOOLCHAIN_6_24_0=%ProgramFiles%/ArmCompilerforEmbedded6.24/bin
 set CMSIS_PACK_ROOT=%LocalAppData%/Arm/Packs
 set PATH=%PATH%;%UserProfile%/cmsis-toolbox-windows-amd64/bin
 set CMSIS_COMPILER_ROOT=%UserProfile%/cmsis-toolbox-windows-amd64/etc
   {{< /tab >}}
-  {{< tab header="Linux/macOS" language="shell">}}
-export AC6_TOOLCHAIN_6_22_0=$HOME/ArmCompilerforEmbedded6.22/bin
+  {{< tab header="Linux" language="shell">}}
+export AC6_TOOLCHAIN_6_24_0=$HOME/ArmCompilerforEmbedded6.24/bin
 export CMSIS_PACK_ROOT=$HOME/packs
 export PATH=$HOME/cmsis-toolbox-linux-arm64/bin:$PATH
 export CMSIS_COMPILER_ROOT=$HOME/cmsis-toolbox-linux-arm64/etc
   {{< /tab >}}
 {{< /tabpane >}}
 
-Exact paths will depend on tools versions installed and their install locations.
+Exact paths will depend on the versions and locations of installed tools.
 
-## How do I initialize the CMSIS-Pack directory?
+## Initialize the CMSIS-Pack directory
 
-Run the following command to initialize the directory specified by `CMSIS_PACK_ROOT` above.
+Run the following command to initialize the directory specified by `CMSIS_PACK_ROOT`:
 ```command
 cpackget init https://www.keil.com/pack/index.pidx
 ```
 
 `CMSIS-Toolbox` should now be ready for use.
 
-## How can I test my CMSIS-Toolbox setup? {#test}
+## Test the CMSIS-Toolbox setup {#test}
 
-Example projects are provided on the [GitHub repository](https://github.com/Open-CMSIS-Pack/csolution-examples).
+You can find example projects on [GitHub](https://github.com/Open-CMSIS-Pack/csolution-examples).
 
-Clone the following repository to your build machine:
+Clone the repository to your build machine:
 ```command
 git clone https://github.com/Open-CMSIS-Pack/csolution-examples
 ```
@@ -168,7 +177,7 @@ Navigate to the `Hello` example:
 cd csolution-examples/Hello
 ```
 
-### How do I build the solution?
+### Build the solution
 
 Use the [cbuild](https://github.com/Open-CMSIS-Pack/cbuild) utility (a component of `CMSIS-Toolbox`) to build.
 
@@ -178,7 +187,7 @@ Add `--packs` to the command line to download and install any necessary software
 cbuild Hello.csolution.yml --packs
 ```
 
-The build will proceed and generate an executable image(s). You will see output similar to:
+The build will proceed and generate an executable image(s). The output is similar to:
 
 ```output
 ARM::CMSIS@6.0.0
@@ -207,3 +216,4 @@ Program Size: Code=17664 RO-data=988 RW-data=196 ZI-data=37112
 Build summary: 2 succeeded, 0 failed - Time Elapsed: 00:00:03
 +============================================================
 ```
+You are now ready to use CMSIS-Toolbox.

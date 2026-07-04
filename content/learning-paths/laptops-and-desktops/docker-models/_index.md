@@ -1,6 +1,7 @@
 ---
 title: Run AI models with Docker Model Runner
 
+description: Learn how to run pre-trained AI models locally using Docker Model Runner and build containerized applications integrating large language models.
 
 minutes_to_complete: 45
 
@@ -16,6 +17,10 @@ prerequisites:
     - Familiarity with LLM concepts.
 
 author: Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory

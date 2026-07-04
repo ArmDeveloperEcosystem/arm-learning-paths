@@ -52,7 +52,7 @@ Before running the pipeline, it helps to understand how the execution stack is c
 
 ### PyTorch to ExecuTorch export
 
-Models are defined using standard PyTorch APIs and exported to a `.pte` (Portable ExecuTorch Executable) format. During export, you specify backend delegation—in this case, XNNPACK—which determines which operators the backend executes at runtime.
+Models are defined using standard PyTorch APIs and exported to a `.pte` (Portable ExecuTorch Executable) format. During export, you specify backend delegation (in this case, XNNPACK) which determines which operators the backend executes at runtime.
 
 ### ExecuTorch runtime and delegation
 

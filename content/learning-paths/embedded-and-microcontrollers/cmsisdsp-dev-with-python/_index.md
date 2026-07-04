@@ -1,10 +1,11 @@
 ---
 title: Getting started with CMSIS-DSP using Python
 
+description: Learn how to prototype and port DSP algorithms using the CMSIS-DSP Python package, mapping Python code to efficient C implementations for embedded Cortex-M and Cortex-A platforms.
+
 minutes_to_complete: 45
 
 who_is_this_for: This is an advanced topic for developers looking to integrate the CMSIS-DSP library into their applications using Python.
-
 
 learning_objectives:
     - Use the CMSIS-DSP Python package to prototype DSP algorithms.
@@ -18,6 +19,10 @@ prerequisites:
     - Python installed on your machine.
 
 author: Christophe Favergeon
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -58,10 +63,10 @@ further_reading:
         link: https://github.com/ARM-software/CMSIS-Stream
         type: Open-source project
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

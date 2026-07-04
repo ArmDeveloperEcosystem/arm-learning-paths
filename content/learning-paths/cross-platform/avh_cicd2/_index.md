@@ -1,6 +1,8 @@
 ---
 title: Integrate Arm Virtual Hardware into CI/CD workflow 2
 
+description: Learn how to integrate Arm Virtual Hardware with AWS and GitHub Actions for automated CI/CD workflows, including CloudFormation setup and test automation.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for DevOps integrating AVH into their CI/CD flows
@@ -14,6 +16,10 @@ prerequisites:
     - Valid AWS and GitHub accounts are required
 
 author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ##### Tags
 skilllevels: Advanced
@@ -41,11 +47,10 @@ further_reading:
         link: https://arm-software.github.io/AVH/main/examples/html/GetStarted.html
         type: documentation
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

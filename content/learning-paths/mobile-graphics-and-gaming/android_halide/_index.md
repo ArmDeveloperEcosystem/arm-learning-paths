@@ -1,5 +1,6 @@
 ---
-title: Build high-performance image processing with Halide on Android
+title: Optimize image processing on Android using Halide
+description: Learn how to build real-time image processing pipelines using Halide on Android, combining operations for improved performance in Kotlin applications.
 
 minutes_to_complete: 180
 
@@ -15,7 +16,14 @@ prerequisites:
     - Basic C++ knowledge
     - Android Studio with Android Emulator
 
-author: Éliás Bálint, Dawid Borycki, Steve Suzuki
+author:
+    - Éliás Bálint
+    - Dawid Borycki
+    - Steve Suzuki
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -33,7 +41,6 @@ tools_software_languages:
     - Android Studio
     - CMake
 
-
 further_reading:
     - resource:
         title: Halide documentation
@@ -48,10 +55,10 @@ further_reading:
         link: https://halide-lang.org/tutorials/
         type: website
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

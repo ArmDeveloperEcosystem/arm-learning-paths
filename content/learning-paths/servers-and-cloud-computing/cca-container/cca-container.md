@@ -13,7 +13,7 @@ Start by downloading the docker container image.
 
 This docker image contains the pre-built binaries for the Arm CCA reference software stack and the Armv-A Base Architecture Envelope Model (AEM) FVP with support for RME extensions.
 
-Install [docker engine](/install-guides/docker/docker-engine) on your machine.
+Install [docker engine](/install-guides/docker/docker-engine/) on your machine.
 
 Pull the docker image from DockerHub:
 

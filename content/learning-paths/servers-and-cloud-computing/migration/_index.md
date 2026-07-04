@@ -5,6 +5,8 @@ minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for software developers looking to migrate applications to Arm servers.
 
+description: Set up an Arm development environment, analyze dependencies, and understand common challenges and scenarios for migrating applications to Arm servers.
+
 learning_objectives:
     - Set up an Arm development machine
     - Analyze application dependencies
@@ -16,15 +18,24 @@ prerequisites:
 
 author: Jason Andrews
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: Libraries
+cloud_service_providers:
+  - AWS
+  - Microsoft Azure
+  - Google Cloud
+  - Oracle
 armips:
     - Neoverse
 operatingsystems:
     - Linux
 tools_software_languages:
-    - NEON
+    - Neon
     - SVE
     - Go
     - Runbook
@@ -51,10 +62,10 @@ further_reading:
         link: https://aws.amazon.com/blogs/compute/making-your-go-workloads-up-to-20-faster-with-go-1-18-and-aws-graviton/
         type: blog
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -25,7 +25,7 @@ The advantages of fine-tuning include:
 - Enhanced efficiency in real-world applications
 - Alignment with ethical, regulatory, and organizational guidelines
 
-## Fine-Tuning Methods
+## Fine-tuning methods
 
 Fine-tuning LLMs uses different techniques based on the various use cases, computational constraints, and efficiency requirements. 
 
@@ -66,7 +66,7 @@ Some approaches are:
     - Trains the model on multiple tasks simultaneously, enabling generalization across different applications.
 
 
-## Fine-Tuning Implementation  
+## Fine-tuning implementation  
 
 The following steps need to be performed to implement fine-tuning:
 
@@ -78,6 +78,6 @@ The following steps need to be performed to implement fine-tuning:
 
 The steps are depicted in Figure 1 below:
 
-![example image alt-text#center](1.png "Figure 1. Fine-Tuning Implementation")
+![Flowchart diagram showing the five-step fine-tuning implementation process: base model selection from Hugging Face, fine-tuning method finalization (supervised, instruction-based, PEFT), dataset preparation and formatting, model training with TensorFlow/PyTorch, and evaluation with iterative refinement. Each step points to the next in sequence.#center](1.png "Figure 1. Fine-Tuning Implementation")
 
 With this background you are ready to get started with fine-tuning.

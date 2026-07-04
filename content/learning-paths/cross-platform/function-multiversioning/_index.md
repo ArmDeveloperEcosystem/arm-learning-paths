@@ -5,6 +5,8 @@ minutes_to_complete: 60
 
 who_is_this_for: This is an advanced topic for developers interested in optimizing their C/C++ applications across Arm64 targets.
 
+description: Learn how to optimize C/C++ applications using function multiversioning on Arm64 targets with GCC or LLVM, enabling automatic runtime selection of hardware-optimized function versions.
+
 learning_objectives:
     - Use hardware features to tune your applications at function level.
     - Create multiple versions of C/C++ functions for the targets that you intend to run applications on.
@@ -20,6 +22,10 @@ prerequisites:
     - A LLVM 20 compiler with runtime library support or GCC 16.
 
 author: Alexandros Lamprineas
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -53,8 +59,8 @@ further_reading:
         link: https://arm-software.github.io/acle/main/acle.html
         type: documentation
 
-
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

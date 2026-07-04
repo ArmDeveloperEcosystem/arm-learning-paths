@@ -1,5 +1,6 @@
 ---
 title: 'Use Infrastructure as Code and Pulumi to provision Azure resources'
+description: Learn how to automate Azure resource deployment using Infrastructure as Code with Pulumi to provision Azure Container Instances for containerized applications.
 
 minutes_to_complete: 30
 
@@ -19,6 +20,10 @@ prerequisites:
 
 author: Dawid Borycki
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: Containers and Virtualization
@@ -27,7 +32,7 @@ cloud_service_providers:
 
 armips:
     - Neoverse
-    
+
 tools_software_languages:
     - TypeScript  
     - Docker    
@@ -49,11 +54,10 @@ further_reading:
         link: https://www.terraform.io
         type: Documentation
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

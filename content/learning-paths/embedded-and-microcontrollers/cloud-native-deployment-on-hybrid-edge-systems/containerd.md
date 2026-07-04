@@ -1,5 +1,6 @@
 ---
 title: Deploy firmware container using `containerd`
+description: Deploy a firmware container with containerd and verify a Hello World workload on the hybrid edge runtime.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -36,7 +37,7 @@ test    808    RUNNING
 ```
 The output from the hello-world application running on the Cortex-M can be seen in the AVH GUI by selecting “Cortex-M Console”:
 
-![Cortex-M output alt-text#center](containerd1.png "Figure 1. Cortex-M output")
+![Screenshot of the AVH Cortex-M Console displaying timestamp outputs from the hello-world firmware, confirming successful execution on the Cortex-M7 core#center](containerd1.png "Cortex-M Console showing hello-world output")
 
 Check the container info using the following command:
 ```bash
@@ -126,7 +127,7 @@ ctr run --runtime io.containerd.hybrid ghcr.io/smarter-project/smart-camera-hybr
 ```
 The Cortex-M Console output will now appear as per below:
 
-![Cortex-M output alt-text#center](containerd2.png "Figure 2. Cortex-M output")
+![Screenshot of the Cortex-M Console showing timestamp outputs from the smart-camera hybrid application running on the M7 core#center](containerd2.png "Cortex-M Console with smart-camera application output")
 
 The output from the Cortex-M is also available under `/var/lib/hybrid-runtime/<container_name>/<container_name>.log`:
 ```output

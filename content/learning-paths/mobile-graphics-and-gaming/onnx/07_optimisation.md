@@ -1,22 +1,26 @@
 ---
-title: "Model Enhancements and Optimizations"
+title: "Optimize the model for Arm64 deployment"
+
 weight: 8
+
 layout: "learningpathall"
 ---
 
 ## Objective
-In this section, we improve the Sudoku system from a working prototype into something that is faster, smaller, and more robust on Arm64-class hardware. We start by measuring a baseline, then apply ONNX Runtime optimizations and quantization, and finally address the most common real bottleneck: image preprocessing. At each step we re-check accuracy and solve rate so performance gains don’t come at the cost of correctness.
+
+In this section, you'll transform the Sudoku system from a working prototype into one that is faster, smaller, and more robust on Arm64 hardware. Start by measuring a baseline, then apply ONNX Runtime optimizations and quantization, and finally address the most common bottleneck: image preprocessing. At each step, re-check accuracy and solve rate so performance gains don't come at the cost of correctness.
 
 ## Establish a baseline
 Before applying any optimizations, it is essential to understand where time is actually being spent in the Sudoku pipeline. Without this baseline, it is impossible to tell whether an optimization is effective or whether it simply shifts the bottleneck elsewhere.
 
-In the current system, the total latency of processing a single Sudoku image is composed of four main stages:
-* Grid detection and warping – locating the outer Sudoku grid and rectifying it using a perspective transform. This step relies entirely on OpenCV and depends on image resolution, lighting, and grid clarity.
-* Cell preprocessing – converting each of the 81 cells into a normalized 28×28 grayscale input for the neural network. This includes cropping margins, thresholding, and morphological operations. In practice, this stage is often the dominant cost.
-* ONNX inference – running the digit recognizer on all 81 cells as a single batch. Thanks to dynamic batch support, this step is typically fast compared to preprocessing.
-* Solving – applying a backtracking Sudoku solver to the recognized board. This step is usually negligible in runtime, unless recognition errors lead to difficult or contradictory boards.
+The total latency of processing a single Sudoku image is composed of four main stages:
 
-To quantify these contributions, we will add simple timing measurements around each stage of the pipeline using a high-resolution clock (time.perf_counter()). For each processed image, we will print a breakdown:
+* **Grid detection and warping:** locating the outer Sudoku grid and rectifying it using a perspective transform. Depends on image resolution, lighting, and grid clarity. Uses OpenCV only.
+* **Cell preprocessing:** converting each of the 81 cells into a normalized 28×28 grayscale input for the neural network. Includes cropping margins, thresholding, and morphological operations. Often the dominant cost.
+* **ONNX inference:** running the digit recognizer on all 81 cells as a single batch. Typically fast thanks to dynamic batch support.
+* **Solving:** applying a backtracking Sudoku solver to the recognized board. Usually negligible in runtime, unless recognition errors lead to difficult or contradictory boards.
+
+To quantify these contributions, you will add simple timing measurements around each stage of the pipeline using a high-resolution clock (time.perf_counter()). For each processed image, you will print a breakdown:
 * warp_ms – time spent on grid detection and perspective rectification
 * preprocess_ms – total time spent preprocessing all 81 cells
 * onnx_ms – time spent running batched ONNX inference
@@ -25,13 +29,13 @@ To quantify these contributions, we will add simple timing measurements around e
 * total_ms – end-to-end processing time
 
 ## Performance measurements
-Open the sudoku_processor.py and add the following import
+In `sudoku_processor.py`, add the following import
 
 ```python
 import time
 ```
 
-Then, modify the process_image as follows
+Then, modify the `process_image` function as follows
 ```python
 def process_image(self, bgr: np.ndarray, overlay: bool = True):
         """
@@ -113,7 +117,7 @@ def process_image(self, bgr: np.ndarray, overlay: bool = True):
         return board, (solved if ok else None), debug, overlay_img
 ```
 
-Finally, print the timings in the 05_RunSudokuProcessor.py:
+Finally, print the timings in the `05_RunSudokuProcessor.py` as shown:
 ```python
 def main():
     # Use any image path you like:
@@ -156,10 +160,12 @@ if __name__ == "__main__":
     main()
 ```
 
-The sample output will look as follows:
-```output
+Run the script:
+```console
 python3 05_RunSudokuProcessor.py
-
+```
+The output will look like:
+```output
 Recognized board
 . . . | 7 . . | 6 . .
 . . 4 | . . . | 1 . 9
@@ -194,9 +200,9 @@ warp=11.9 ms | preprocess=3.3 ms | onnx=1.9 ms | solve=3.1 ms | total=48.2 ms
 ## Folder benchmark
 The single-image measurements introduced earlier are useful for understanding the rough structure of the pipeline and for verifying that ONNX inference is not the main computational bottleneck. In our case, batched ONNX inference typically takes less than 2 ms, while grid detection, warping, and preprocessing dominate the runtime. However, individual measurements can be noisy due to caching effects, operating system scheduling, and Python overhead.
 
-To obtain more reliable performance numbers, we extend the evaluation to multiple images and compute aggregated statistics. This allows us to track not only average performance, but also variability and tail latency, which are particularly important for interactive applications.
+To obtain more reliable performance numbers, you can extend the evaluation to multiple images and compute aggregated statistics. This allows us to track not only average performance, but also variability and tail latency, which are particularly important for interactive applications.
 
-To do this, we add two helper functions to 05_RunSudokuProcessor.py, and make sure you have import glob and import numpy as np at the top of the runner script.
+To do this, add two helper functions to `05_RunSudokuProcessor.py`, and make sure you have `import glob` and `import numpy as np` at the top of the runner script.
 
 The first function, summarize, computes basic statistics from a list of timing measurements:
 * mean – average runtime
@@ -258,7 +264,7 @@ def benchmark_folder(proc, folder_glob, limit=100, warmup=10, overlay=False):
         print(f"{k:14s}  mean={s['mean']:.2f}  median={s['median']:.2f}  p90={s['p90']:.2f}  p95={s['p95']:.2f}")
 ```
 
-Finally, we invoke the benchmark in the main() function:
+Finally, invoke the benchmark in the main() function:
 
 ```python
 def main():
@@ -276,10 +282,12 @@ This evaluates the processor on a representative subset of camera-like validatio
 
 Aggregated benchmarks provide a much more accurate picture than single measurements, especially when individual stages take only a few milliseconds. By reporting median and tail latencies, you can see whether occasional slow cases exist and whether an optimization truly improves user-perceived performance. Percentiles are particularly useful when a few slow cases exist (e.g., harder solves), because they reveal tail latency. These results form a solid quantitative baseline that you can reuse to evaluate every optimization that follows.
 
+Run the updated script:
+```console
+python3 05_RunSudokuProcessor.py
+```
 Here is the sample output of the updated script:
 ```output
-python3 05_RunSudokuProcessor.py
-
 Solved 30/30 (100.0%)
 
 Timing summary (ms):
@@ -290,12 +298,14 @@ solve_ms        mean=74.76  median=2.02  p90=48.51  p95=74.82
 total_ms        mean=89.41  median=16.97  p90=62.95  p95=89.43
 ```
 
-Notice that solve_ms (and therefore total_ms) has a much larger mean than median. This indicates a small number of outliers where the solver takes significantly longer. In practice, this occurs when one or more digits are misrecognized, forcing the backtracking solver to explore many branches before finding a solution (or failing). For interactive applications, median and p95 latency are more informative than the mean, as they better reflect typical user experience.
+{{% notice Note %}} These measurements were obtained on a MacBook Pro with Apple M3 Pro running macOS 14.5. Performance on other Arm64 platforms (Raspberry Pi 5, AWS Graviton, etc.) will vary based on CPU performance and memory bandwidth. The relative distribution of time across pipeline stages should remain similar.{{% /notice %}}
+
+Notice that `solve_ms` (and therefore `total_ms`) has a much larger mean than median. This indicates a small number of outliers where the solver takes significantly longer. In practice, this occurs when one or more digits are misrecognized, forcing the backtracking solver to explore many branches before finding a solution (or failing). For interactive applications, median and p95 latency are more informative than the mean, as they better reflect typical user experience.
 
 ## ONNX Runtime session optimizations
 Now that you can measure onnx_ms and total_ms, the first low-effort improvement is to enable ONNX Runtime’s built-in graph optimizations and tune CPU threading. These changes do not modify the model, but can reduce inference overhead and improve throughput.
 
-In sudoku_processor.py, update the ONNX Runtime session initialization in __init__ to use SessionOptions:
+In `sudoku_processor.py`, update the ONNX Runtime session initialization in __init__ to use SessionOptions:
 ```python
 so = ort.SessionOptions()
 so.graph_optimization_level = ort.GraphOptimizationLevel.ORT_ENABLE_ALL
@@ -303,11 +313,9 @@ so.graph_optimization_level = ort.GraphOptimizationLevel.ORT_ENABLE_ALL
 self.sess = ort.InferenceSession(onnx_path, sess_options=so, providers=list(providers))
 ```
 
-Re-run 05_RunSudokuProcessor.py and compare onnx_ms and total_ms to the baseline. 
+Re-run `05_RunSudokuProcessor.py` and compare onnx_ms and total_ms to the baseline. 
 
 ```output
-python3 05_RunSudokuProcessor.py
-
 Solved 30/30 (100.0%)
 
 Timing summary (ms):
@@ -323,7 +331,7 @@ This result is expected for such a small model: ONNX inference is already effici
 ## Quantize the model (FP32 -> INT8)
 Quantization is one of the most impactful optimizations for Arm64 and mobile deployments because it reduces both model size and compute cost. For CNNs, the most compatible approach is static INT8 quantization in QDQ format. This uses a small calibration set to estimate activation ranges and typically works well across runtimes.
 
-Create a small script 06_QuantizeModel.py:
+Create a small script `06_QuantizeModel.py` with the code below:
 
 ```python
 import os, glob
@@ -380,7 +388,10 @@ quantize_static(
 print("Saved:", INT8_PATH)
 ```
 
-Run python 06_QuantizeModel.py
+Run the script:
+```console
+python3 06_QuantizeModel.py
+```
 
 Then update the runner script to point to the quantized model:
 
@@ -397,7 +408,8 @@ Also compare file sizes:
 ```console
 ls -lh artifacts/sudoku_digitnet.onnx artifacts/sudoku_digitnet.int8.onnx
 ```
-Even when inference time changes only modestly, size reduction is typically significant and matters for Android packaging. 
+
+Expected file size reduction is approximately 4x (for example, from 52KB to 14KB). Even when inference time changes only modestly, size reduction is significant and matters for Android packaging.
 
 In this pipeline, quantization primarily reduces model size and improves deployability, while runtime speedups may be modest because inference is already a small fraction of the total latency.
 
@@ -405,20 +417,15 @@ In this pipeline, quantization primarily reduces model size and improves deploya
 The measurements above show that ONNX inference accounts for only a small fraction of the total runtime. In practice, the largest performance gains come from optimizing image preprocessing.
 
 The most effective improvements include:
-- Converting the rectified board to grayscale **once**, instead of converting each cell independently.
+- Converting the rectified board to grayscale once, instead of converting each cell independently.
 - Adding an early “blank cell” check to skip expensive thresholding and morphology for empty cells.
 - Using simpler thresholding (e.g., Otsu) on clean images, and reserving adaptive thresholding for difficult lighting conditions.
 - Reducing or conditionally disabling morphological operations when cells already appear clean.
 
 These changes typically reduce `preprocess_ms` more than any model-level optimization, and therefore have the greatest impact on end-to-end latency.
 
-## Summary
-In this section, we transformed the Sudoku solver from a functional prototype into a system with measurable, well-understood performance characteristics. By instrumenting the pipeline with fine-grained timing, we identified where computation is actually spent and established a quantitative baseline.
+## What you've learned and what's next
 
-We showed that:
-- Batched ONNX inference is already efficient (≈1–2 ms per board).
-- Image preprocessing dominates runtime and offers the largest optimization potential.
-- Solver backtracking introduces rare but significant tail-latency outliers.
-- ONNX Runtime optimizations and INT8 quantization improve deployability, even when raw inference speed gains are modest.
+You transformed the Sudoku solver from a functional prototype into a system with measurable, well-understood performance characteristics. You established quantitative baselines showing that ONNX inference takes approximately 1–2 ms per board, identified image preprocessing as the dominant cost (~3 ms) and the largest optimization opportunity, applied INT8 quantization achieving approximately 4x model size reduction, and demonstrated a systematic optimization workflow where you measure first, optimize second, and always re-validate correctness.
 
-Most importantly, we demonstrated a systematic optimization workflow: **measure first, optimize second, and always re-validate correctness**. With performance, robustness, and accuracy validated, the Sudoku pipeline is now ready for its final step—deployment as a fully on-device Android application.
+Next, you'll deploy the optimized Sudoku pipeline as a fully on-device Android application, integrating the ONNX model with camera capture and real-time processing.

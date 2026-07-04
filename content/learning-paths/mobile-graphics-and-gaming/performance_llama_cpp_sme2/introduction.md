@@ -1,20 +1,28 @@
 ---
-title: Overview
+title: Understand how SME2 and KleidiAI accelerate LLM inference in llama.cpp
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## How SME2 and KleidiAI accelerate LLM inference in llama.cpp
 
-## Introduction 
-In this section, you get a quick mental model of SME2, KleidiAI, and what llama.cpp is doing when it runs LLM inference on an Arm CPU.
-Arm’s latest Client CPU processors such as Arm C1 include Scalable Matrix Extension 2 (SME2). SME2 accelerates the matrix-heavy AI operations behind large language models (LLMs), media processing, speech recognition, computer vision, real-time apps and multimodal apps.
+In this Learning Path, you'll optimize llama.cpp inference on an Arm CPU by enabling SME2 acceleration through Arm KleidiAI microkernels.
 
-llama.cpp provides extensive support for many LLMs, including Phi, Llama, DeepSeek, Gemma and Qwen. Llama.cpp is designed for efficient CPU-based inference. It enables on-device LLM execution, reducing latency and enhancing privacy.
+You will measure the performance difference between the default CPU path and the SME2-optimized path using a 3 billion parameter LLM. By the end, you will understand:
 
-By default llama.cpp integrates with Arm KleidiAI, a suite of optimized microkernels for Arm CPUs. KleidiAI includes SME2 optimized microkernels to get more performance benefits. 
+- What SME2 changes in the matrix execution path
+- How KleidiAI integrates into llama.cpp’s CPU backend
+- How to verify that SME2 microkernels are active
+- What measurable improvement you should expect
 
-In this learning path, llama.cpp and Llama-3.2-3B-Instruct-Q4_0.gguf model with 3 Billion parameters is used for the tutorial. 
+Scalable Matrix Extension 2 (SME2) is an Arm architectural feature designed to accelerate matrix-heavy workloads. Large language model (LLM) inference relies heavily on matrix multiplication, especially in transformer layers. When SME2 is available on the CPU, KleidiAI provides optimized microkernels that replace generic implementations inside llama.cpp.
+
+llama.cpp is a CPU-focused LLM inference engine. On Arm systems, it integrates with KleidiAI by default. If SME2 is supported and enabled at runtime, llama.cpp dispatches SME2-optimized matrix kernels for supported operations.
+
+This Learning Path uses the `Llama-3.2-3B-Instruct-Q4_0.gguf` model (3 billion parameters) as a reproducible test case.
+
+In the next section, you'll examine how KleidiAI microkernels integrate into the llama.cpp backend and where SME2 is activated in the execution path.
 
 
 

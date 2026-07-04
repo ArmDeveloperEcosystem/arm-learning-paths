@@ -1,6 +1,8 @@
 ---
 title: Boost C++ performance by optimizing loops with boundary information
 
+description: Learn how to optimize C++ loop performance on Arm by providing boundary information to the compiler, enabling SIMD vectorization and reducing runtime through compile-time context.
+
 minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for C++ developers who want to improve the runtime of loops using existing knowledge of the loop size.
@@ -15,6 +17,10 @@ prerequisites:
     - An Arm computer running Linux. You can also use a virtual machine from a [cloud service provider](/learning-paths/servers-and-cloud-computing/csp/).
 
 author: Kieran Hejmadi
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -44,10 +50,10 @@ further_reading:
         link: https://llvm.org/docs/Vectorizers.html
         type: documentation
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

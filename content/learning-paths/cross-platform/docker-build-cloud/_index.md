@@ -1,6 +1,8 @@
 ---
 title: Build multi-architecture container images with Docker Build Cloud
 
+description: Learn how to build multi-architecture Docker images for Arm and x86 using Docker Build Cloud, with GitHub Actions automation for faster builds without emulation.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for software developers who want to learn how to use Docker Build Cloud.
@@ -15,6 +17,10 @@ prerequisites:
     - A Docker Hub account
 
 author: Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -43,10 +49,10 @@ further_reading:
         link: https://www.docker.com/blog/introducing-docker-build-cloud/
         type: blog
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -1,6 +1,8 @@
 ---
 title: Get started with the Raspberry Pi 4
 
+description: Learn how to build and run multiple software examples on the Raspberry Pi 4, including TensorFlow and Docker applications, and compare its performance to Arm cloud servers.
+
 minutes_to_complete: 90
 
 who_is_this_for: This is an introductory topic for software developers interested in the Raspberry Pi 4.
@@ -14,6 +16,10 @@ prerequisites:
     - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider.
 
 author: Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -38,10 +44,10 @@ further_reading:
         link: https://developer.arm.com/documentation/102561
         type: documentation
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

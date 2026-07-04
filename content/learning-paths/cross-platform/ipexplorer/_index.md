@@ -1,5 +1,6 @@
 ---
 title: Custom software for simulation with IP Explorer
+description: Learn how to run custom software benchmarks on IP Explorer simulation platforms and compare performance across Arm Cortex-M processors using cycle count analysis.
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for IP Explorer users using the software simulation platforms available.
@@ -14,6 +15,10 @@ prerequisites:
     - (Optional) A Linux machine with the desired compilers installed
 
 author: Ronan Synnott
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -42,10 +47,10 @@ further_reading:
         link: https://ipexplorer.arm.com/
         type: website
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

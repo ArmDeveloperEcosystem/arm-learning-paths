@@ -3,6 +3,8 @@ title: Deploy a Windows on Arm virtual machine on Microsoft Azure
 
 minutes_to_complete: 15
 
+description: Learn how to create and connect to a Windows on Arm virtual machine in Microsoft Azure using the Azure Marketplace and RDP.
+
 who_is_this_for: This is an introductory topic for software developers interested using Windows on Arm in the Azure cloud.
 
 learning_objectives: 
@@ -14,6 +16,10 @@ prerequisites:
     - An RDP client to connect to your Windows on Arm instance.  For more info on RDP clients, see [Remote Desktop clients for Remote Desktop Services and remote PCs](https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-clients) to get started.
 
 author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -39,10 +45,10 @@ further_reading:
         link: https://azure.microsoft.com/en-us/blog/azure-virtual-machines-with-ampere-altra-arm-based-processors-generally-available/
         type: blog
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

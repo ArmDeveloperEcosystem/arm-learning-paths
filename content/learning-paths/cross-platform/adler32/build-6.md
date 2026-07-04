@@ -59,4 +59,4 @@ The results confirm that your Adler-32 checksum implementation is correct for al
 
 The results from GitHub Copilot confirm that the Adler32 checksum calculations are correct and provide initial performance benchmarks. These results offer a solid baseline, but a meaningful comparison requires an optimized implementation.
 
-In the next section, you’ll implement Adler32 using NEON intrinsics and compare its performance against this baseline.
+In the next section, you’ll implement Adler32 using Neon intrinsics and compare its performance against this baseline.

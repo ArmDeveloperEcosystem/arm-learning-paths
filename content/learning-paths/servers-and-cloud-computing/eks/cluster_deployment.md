@@ -6,7 +6,7 @@ layout: learningpathall
 
 ## Before you begin
 
-You will need a computer with the following tools installed: [EKS CLI](/install-guides/eksctl/), [AWS CLI](/install-guides/aws-cli), and [Kubernetes CLI](/install-guides/kubectl). 
+You will need a computer with the following tools installed: [EKS CLI](/install-guides/eksctl/), [AWS CLI](/install-guides/aws-cli/), and [Kubernetes CLI](/install-guides/kubectl/). 
 
 Install each of these tools and confirm you can run the `aws`, `ekscli`, and `kubectl` commands. 
 

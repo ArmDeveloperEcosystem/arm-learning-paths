@@ -15,22 +15,24 @@ prerequisites:
     - Familiarity with ONNX Runtime and Azure cloud services.
     - Knowledge of Large Language Model (LLM) fundamentals.
 
-
 author: Nobel Chowdary Mandepudi
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
-cloud_service_providers:
-  - Microsoft Azure
 armips:
     - Neoverse
 subjects: ML
+cloud_service_providers:
+  - Microsoft Azure
 operatingsystems:
     - Linux
 tools_software_languages:
     - Python
     - ONNX Runtime
-
 
 further_reading:
     - resource:
@@ -52,3 +54,4 @@ weight: 1                       # _index.md always has a weight of 1 to order co
 layout: "learningpathall"       # All files under learning paths use this wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

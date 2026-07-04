@@ -5,6 +5,8 @@ minutes_to_complete: 60
 
 who_is_this_for: This is an advanced topic for software developers building custom Linux kernels on Arm servers and cloud instances.
 
+description: Compile and install custom Linux kernels on Arm cloud instances using TuxMake with configurations for 64 KB page sizes and Fastpath testing.
+
 learning_objectives:
     - Set up a build environment for compiling Linux kernels on Arm cloud instances
     - Build custom Linux kernels with various configurations using TuxMake
@@ -18,9 +20,18 @@ prerequisites:
 
 author: Geremy Cohen
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
+cloud_service_providers:
+  - AWS
+  - Microsoft Azure
+  - Google Cloud
+  - Oracle
 armips:
     - Neoverse
 operatingsystems:
@@ -48,3 +59,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

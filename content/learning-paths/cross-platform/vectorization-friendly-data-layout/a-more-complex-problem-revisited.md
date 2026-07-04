@@ -220,4 +220,4 @@ Here are some rules for optimal performance with SIMD/vectorized code:
 
 So far you have been using Neon/ASIMD instructions, but newer Arm processors also offer the Scalable Vector Extension (SVE). 
 
-Proceed to the next section to find out how to use SVE and compare the performance with NEON.
+Proceed to the next section to find out how to use SVE and compare the performance with Neon.

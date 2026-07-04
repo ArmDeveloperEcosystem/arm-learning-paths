@@ -1,6 +1,8 @@
 ---
 title: Build and run the Arm Machine Learning Evaluation Kit examples
 
+description: Learn how to build examples from the Machine Learning Evaluation Kit (MLEK) and run them on the Arm Ecosystem FVP for machine learning application development on microcontrollers.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for embedded software developers interested in machine learning applications.
@@ -15,11 +17,14 @@ prerequisites:
 
 author: Ronan Synnott
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### RS: Learning Path hidden until AWS instance updated
 draft: false
 cascade:
     draft: false
-
 
 ### Tags
 skilllevels: Introductory
@@ -46,10 +51,10 @@ further_reading:
         link: https://devsummit.arm.com/flow/arm/devsummit22/sessions-catalog/page/sessions/session/1656589322296001Tbrk
         type: website
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

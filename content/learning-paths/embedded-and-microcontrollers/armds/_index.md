@@ -2,6 +2,7 @@
 title: Get started with Arm Development Studio
 
 minutes_to_complete: 30   
+description: Learn how to import and build example projects in Arm Development Studio and debug embedded applications using Fixed Virtual Platforms (FVPs) or hardware with DSTREAM debug probes.
 
 who_is_this_for: This is an introductory topic for embedded software developers new to Arm Development Studio.
 
@@ -14,6 +15,10 @@ prerequisites:
     - Some familiarity with embedded programming is assumed
 
 author: Ronan Synnott
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -45,11 +50,10 @@ further_reading:
         link: https://developer.arm.com/Tools%20and%20Software/DSTREAM-PT
         type: website
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

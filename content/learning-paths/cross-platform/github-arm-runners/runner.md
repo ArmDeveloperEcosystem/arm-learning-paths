@@ -22,28 +22,28 @@ Navigate to your organization and select the `Settings` tab. On the left pane, s
 
 On the `Runners` page, select the `New runner` drop-down on the top right, and then select `New GitHub-hosted runner`.
 
-![new-runner #center](_images/new-runner.png)
+![Screenshot of GitHub organization Settings showing the Runners page with a New runner dropdown menu expanded, highlighting the New GitHub-hosted runner option which initiates the Arm-hosted runner creation workflow#center](_images/new-runner.png "GitHub runner creation dropdown menu")
 
 
 Specify a name for the runner, this is the `runs-on` field in your workflows so make the name clear for others who use it.
 
 Choose Linux ARM64 for the platform and click `Save`.
 
-![platform #center](_images/platform.png)
+![Screenshot showing GitHub-hosted runner platform selection with Linux ARM64 option selected, which configures the runner to use Arm architecture instead of x86 for workflow jobs#center](_images/platform.png "Platform selection for Arm-hosted runner")
 
 Specify the operating system image for the runner, select `Ubuntu 22.04 by Arm Limited`, and click `Save`.
 
-![image #center](_images/image.png)
+![Screenshot of runner image selection showing Ubuntu 22.04 by Arm Limited option, which determines the base operating system and software environment available to GitHub Actions workflows on the Arm-hosted runner#center](_images/image.png "Operating system image selection for runner")
 
 Select the size of the runner, choose the 2-core option for this Learning Path, and click `Save`.
 
-![specifications #center](_images/specifications.png)
+![Screenshot showing runner specifications with size options including 2-core, 4-core, and larger configurations, allowing selection of CPU and memory resources allocated to the Arm-hosted runner for workflow execution#center](_images/specifications.png "Runner size and resource specifications")
 
 The `Capacity` section includes the maximum concurrency, which is the number of jobs to run at the same time. Specify at least two for this Learning Path.
 
 You can also set the runner group for this runner. The runner group controls the settings for this runner. Pay attention to the runner group as you may need to return to the runner group settings if any configuration changes are needed.
 
-![capacity #center](_images/capacity.png)
+![Screenshot of runner capacity configuration showing maximum concurrency settings, which determines how many workflow jobs can execute simultaneously on this Arm-hosted runner, and runner group assignment options#center](_images/capacity.png "Runner capacity and concurrency settings")
 
 Finally, click `Create runner`.
 

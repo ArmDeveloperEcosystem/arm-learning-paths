@@ -2,6 +2,8 @@
 title: Build an Embedded Application with Rust and Debug with Arm Development Studio
 minutes_to_complete: 60
 
+description: Learn how to build an embedded Rust application for Arm processors, run it on a Fixed Virtual Platform, and debug it using Arm Development Studio.
+
 who_is_this_for: This is an introductory topic for embedded application developers to get started with Rust.
 
 learning_objectives: 
@@ -15,6 +17,9 @@ prerequisites:
 
 author: Ronan Synnott
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -53,3 +58,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

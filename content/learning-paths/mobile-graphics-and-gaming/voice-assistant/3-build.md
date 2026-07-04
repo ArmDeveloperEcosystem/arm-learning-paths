@@ -11,7 +11,7 @@ layout: learningpathall
 Start by cloning the repository with the complete example application code:
 
 ```bash
-git clone https://git.gitlab.arm.com/kleidi/kleidi-examples/real-time-voice-assistant.git voice-assistant.git
+git clone https://github.com/Arm-Examples/Real-Time-Voice-Assistant.git voice-assistant.git
 ```
 
 ## Build the Voice Assistant

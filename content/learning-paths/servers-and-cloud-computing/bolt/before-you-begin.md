@@ -45,7 +45,7 @@ BOLT should be installed for the native architecture of the build system. BOLT c
 
 Once you have a profile, it can be copied to the build system with BOLT and you can run the BOLT conversion and optimization steps.
 
-See the [BOLT install guide](/install-guides/bolt) for information about installing BOLT.
+See the [BOLT install guide](/install-guides/bolt/) for information about installing BOLT.
 
 ### Verify Perf record
 

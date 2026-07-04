@@ -150,7 +150,7 @@ Once the script starts successfully, you will see a similar output to the image 
 
 You can use your browser to monitor the simulation data in real-time.
 
-![img1 alt-text#center](vnc_address.webp "Figure 1: Execute run.sh")
+![Terminal output showing the run.sh script execution with the VNC access URL displayed at the bottom, indicating the visualizer is ready for browser connection#center](vnc_address.webp "Terminal output showing run.sh execution with VNC URL")
 
 Now you can use the browser to access visualization.
 In this example the URL is http://34.244.98.151:6080/vnc.html
@@ -162,9 +162,9 @@ Ensure that the server allows your IP address and port 6080 to connect. You may 
 To access the visualizer:
 1. Open a web browser and go to: `http://<server-ip>:6080/vnc.html`
 2. Click **Connect** on the VNC login screen.
-![img2 alt-text#center](openadkit_connect.jpg "Figure 2: Connect VNC")
+![VNC connection screen showing the Connect button that users click to establish the remote desktop connection to the Open AD Kit visualizer#center](openadkit_connect.jpg "VNC connection screen with Connect button")
 3. Enter the default VNC password: **"openadkit"**.
-![img3 alt-text#center](openadkit_passwd.jpg "Figure 3: Input VNC password")
+![VNC password prompt dialog requesting authentication, with an input field where users enter the default password 'openadkit' to access the visualization interface#center](openadkit_passwd.jpg "VNC password authentication dialog")
 
 You are now in the Open AD Kit simulation environment.
 
@@ -176,6 +176,6 @@ The vehicle starts from a stationary position, moves along the road, and stops w
 
 After each simulation run, it automatically restarts after 90 seconds. You can use the mouse to adjust different viewing angles for observation.
 
-![img4 alt-text#center](openadkit_1.gif "Figure 4: Simulation")
+![Animated simulation showing the autonomous vehicle navigating the road, stopping behind an obstacle, and in the second scenario changing lanes to pass around the obstruction, demonstrating Open AD Kit's planning and control capabilities#center](openadkit_1.gif "Open AD Kit simulation showing obstacle avoidance scenarios")
 
 Congratulations! You have successfully executed the Open AD Kit demo.

@@ -1,16 +1,16 @@
 ---
-title: TimescaleDB Environment Setup on Arm64
+title: Set up TimescaleDB on Arm64
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## TimescaleDB Environment Setup
+## Set up the TimescaleDB environment
 
-In this section, you prepare an Arm64-based SUSE Linux Enterprise Server (SLES) virtual machine and install TimescaleDB by building it from source. Building from source ensures the database extension is fully optimized for the Arm64 architecture, which is especially important for high-ingest and time-series workloads.
+In this section, you prepare an Arm64-based SUSE Linux Enterprise Server (SLES) virtual machine and install TimescaleDB by building it from source. Building from source ensures the database extension is fully optimized for Arm64, which is especially important for high-ingest and time-series workloads.
 
-## Architecture Overview
+## Architecture overview
 
 ```text
 Linux Arm64 VM (SUSE)
@@ -24,7 +24,7 @@ TimescaleDB 2.25.0 Extension
 
 TimescaleDB provides time-series optimizations on top of PostgreSQL, making it ideal for high-ingest sensor workloads.
 
-## Install Build Dependencies (SUSE)
+## Install build dependencies
 
 TimescaleDB must be compiled against PostgreSQL, so development headers and build tools are required.
 
@@ -44,30 +44,17 @@ sudo zypper install \
   postgresql15-devel
 ```
 
-### Important (SUSE note)
-
-If you are prompted about `readline-devel`, choose **Solution 1 (vendor change/downgrade)**.
-
-**Why this matters:**
-
-- This avoids dependency conflicts on SUSE.
-- It ensures compatibility with PostgreSQL development libraries.
+{{% notice Note %}}If you are prompted about `readline-devel`, choose **Solution 1 (vendor change/downgrade)**. This avoids dependency conflicts on SUSE and ensures compatibility with PostgreSQL development libraries.{{% /notice %}}
 
 ## Initialize PostgreSQL
 
-Before using PostgreSQL, its data directory must be initialized.
+Before using PostgreSQL, its data directory must be initialized. The following command runs as the `postgres` system user to create the data directory, initialize system tables, and set default configurations:
 
 ```bash
 sudo -u postgres initdb -D /var/lib/pgsql/data
 ```
 
-**What this does:**
-
-- Creates the PostgreSQL data directory.
-- Initializes system tables and default configurations.
-- Runs as the postgres system user for security.
-
-**Enable and start PostgreSQL:**
+Enable and start PostgreSQL:
 
 ```bash
 sudo systemctl enable postgresql
@@ -75,7 +62,7 @@ sudo systemctl start postgresql
 ```
 
 
-**Verify PostgreSQL:**
+Verify PostgreSQL is running:
 
 ```bash
 psql --version
@@ -87,20 +74,19 @@ The output is similar to:
 psql (PostgreSQL) 15.10
 ```
 
-## Build TimescaleDB from Source (Arm64)
+## Build TimescaleDB from source
 
 Building TimescaleDB from source ensures native Arm64 compilation and optimal performance.
 
 ### Clone the repository
+
+Download the official TimescaleDB source code and check out version 2.25.0 to ensure version consistency throughout this Learning Path:
 
 ```bash
 git clone https://github.com/timescale/timescaledb.git
 cd timescaledb
 git checkout 2.25.0
 ```
-
-- Download the official TimescaleDB source code.
-- Check out version 2.25.0 to ensure version consistency throughout the learning path
 
 {{% notice Note %}}
 According to the [release notes](https://github.com/timescale/timescaledb/releases/tag/2.16.0), TimescaleDB 2.16.0 introduces performance optimizations for DML on compressed chunks, improving upsert operations by **100×** and update/delete operations by **1000×** in some cases.  
@@ -130,7 +116,7 @@ TimescaleDB must be preloaded when PostgreSQL starts.
 
 ### Edit PostgreSQL configuration and add the timescaledb library
 
-Using a suitable editor and "sudo", edit **/var/lib/pgsql/data/postgresql.conf** and add the following line:
+Using a suitable editor and `sudo`, edit `/var/lib/pgsql/data/postgresql.conf` and add the following line:
 
 ```text
 shared_preload_libraries = 'timescaledb'
@@ -147,9 +133,9 @@ This update:
 sudo systemctl restart postgresql
 ```
 
-## Create Database and Enable Extension
+## Create a database and enable the extension
 
-Now you enable TimescaleDB at the database level.
+Enable TimescaleDB at the database level by creating the `sensors` database and loading the extension:
 
 ```bash
 sudo -u postgres psql
@@ -161,13 +147,7 @@ CREATE DATABASE sensors;
 CREATE EXTENSION IF NOT EXISTS timescaledb;
 ```
 
-What this does:
-
-- Creates a database named sensors.
-- Switches to the sensors database.
-- Enables TimescaleDB features within that database.
-
-**Verify version:**
+Verify the installed version:
 
 ```psql
 SELECT extversion FROM pg_extension WHERE extname='timescaledb';
@@ -183,12 +163,9 @@ sensors=# SELECT extversion FROM pg_extension WHERE extname='timescaledb';
 (1 row)
 ```
 
-Press "CTRL-D" to exit.
+Press Ctrl+D to exit.
 
-**What this confirms:**
-
-- TimescaleDB is installed correctly.
-- The expected version is active in the database.
+This confirms that TimescaleDB is installed correctly and the expected version is active.
 
 ## What you've accomplished and what's next
 

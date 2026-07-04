@@ -5,6 +5,8 @@ minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for DevOps professionals who are looking to build a CI/CD pipeline with GitLab on Google Axion based self-hosted GitLab runners. 
 
+description: Learn how to build a GitLab CI/CD pipeline using Google Axion-based self-hosted runners.
+
 learning_objectives: 
     - Create a Google Axion based GitLab self-hosted runner
     - Build a CI/CD pipeline with multi-architecture support
@@ -13,10 +15,14 @@ learning_objectives:
 
 prerequisites:
     - A [Google Cloud account](https://console.cloud.google.com/). Create an account if needed.
-    - A computer with [Google Cloud CLI](/install-guides/gcloud) and [kubectl](/install-guides/kubectl/)installed.
+    - A computer with [Google Cloud CLI](/install-guides/gcloud/) and [kubectl](/install-guides/kubectl/)installed.
     - A valid GitLab account
 
 author: Pranay Bakre
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -56,11 +62,10 @@ further_reading:
         link: https://cloud.google.com/kubernetes-engine/docs
         type: documentation
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -13,20 +13,27 @@ learning_objectives:
 prerequisites:
     - An Arm based instance from a cloud service provider, or an on-premise Arm server.
     - If needed, review [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) to learn how to deploy Arm in the cloud. These learning paths also point to more advanced learning paths that show how to automate the deployment of Arm instances at different cloud providers.
-    
 
 author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
+cloud_service_providers:
+  - AWS
+  - Microsoft Azure
+  - Google Cloud
+  - Oracle
 armips:
     - Neoverse
 operatingsystems:
     - Linux
 tools_software_languages:
     - Runbook
-
 
 further_reading:
     - resource:
@@ -56,3 +63,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

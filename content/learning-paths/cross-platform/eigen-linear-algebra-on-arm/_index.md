@@ -1,5 +1,8 @@
 ---
 title: Use the Eigen Linear Algebra Library on Arm
+
+description: Learn how to use the Eigen linear algebra library on Arm systems with ASIMD and SVE vectorization, including building TensorFlow with SVE support for optimized performance.
+
 minutes_to_complete: 45
 
 who_is_this_for: This is an advanced topic for C/C++ developers who want to create high performance applications using the Eigen linear algebra library.
@@ -12,6 +15,10 @@ prerequisites:
     - An Arm-based computer running Linux and a recent version of a C++ compiler (Clang or GCC).
 
 author: Konstantinos Margaritis
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -32,7 +39,6 @@ shared_between:
     - servers-and-cloud-computing
     - mobile-graphics-and-gaming
 
-
 further_reading:
     - resource:
         title: Eigen official Tutorial on Matrix class
@@ -47,10 +53,10 @@ further_reading:
         link: https://www.tensorflow.org/install/source
         type: documentation
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

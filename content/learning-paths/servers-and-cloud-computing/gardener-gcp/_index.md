@@ -1,5 +1,6 @@
 ---
 title: Deploy Gardener on Google Cloud C4A (Arm-based Axion VMs)
+description: Learn how to install and configure Gardener Kubernetes management platform on Google Cloud Axion C4A SUSE Arm64 instances and deploy workload clusters.
 
 minutes_to_complete: 50
 
@@ -18,6 +19,10 @@ prerequisites:
   - Familiarity with container concepts ([Docker](https://www.docker.com/))
 
 author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ##### Tags
 skilllevels: Introductory
@@ -62,8 +67,9 @@ further_reading:
       title: kube-bench security benchmarking tool
       link: https://github.com/aquasecurity/kube-bench
       type: documentation
-    
+
 weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

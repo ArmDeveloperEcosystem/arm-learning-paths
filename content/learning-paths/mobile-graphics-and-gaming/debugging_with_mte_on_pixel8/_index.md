@@ -1,5 +1,6 @@
 ---
 title: Debug with MTE on Google Pixel 8
+description: Learn how to detect and debug memory safety bugs in Android applications using Arm Memory Tagging Extension (MTE) on a Google Pixel 8 smartphone.
 
 minutes_to_complete: 20
 
@@ -20,6 +21,10 @@ prerequisites:
 
 author: Roberto Lopez Mendez
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
@@ -30,7 +35,6 @@ tools_software_languages:
     - MTE
 operatingsystems:
     - Android
-
 
 further_reading:
     - resource:
@@ -50,11 +54,10 @@ further_reading:
         link: https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/enhanced-security-through-mte
         type: documentation
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

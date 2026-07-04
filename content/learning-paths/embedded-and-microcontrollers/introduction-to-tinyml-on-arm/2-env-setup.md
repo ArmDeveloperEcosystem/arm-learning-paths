@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Install ExecuTorch"
+description: Install ExecuTorch and its dependencies so you can convert and run PyTorch models for TinyML on Arm targets.
 
 weight: 3
 

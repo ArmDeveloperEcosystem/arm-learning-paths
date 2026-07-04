@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Differences with programming with intrinsics in C and Rust
 
-As per the Arm Community blog post about [Neon Intrinsics in Rust](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/rust-neon-intrinsics), there are some differences between C and Rust when programming with intrinsics which are listed in the blog and which will be expanded on in this Learning Path with code examples.
+As per the Arm Community blog post about [Neon Intrinsics in Rust](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/rust-neon-intrinsics), there are some differences between C and Rust when programming with intrinsics which are listed in the blog and which you'll expand on in this Learning Path with code examples.
 
-We start with an example that uses Arm Advanced SIMD (Neon) intrinsics in C. Create a file named `average_neon.c` with the contents shown below. This program computes the average value of every pair of elements in 2 arrays:
+You'll start with an example that uses Arm Advanced SIMD (Neon) intrinsics in C. Create a file named `average_neon.c` with the contents shown below. This program computes the average value of every pair of elements in 2 arrays:
 
 ```C
 #include <stdio.h>
@@ -58,12 +58,12 @@ Compile the code as follows:
 ```bash
 gcc -O3 -fno-inline average_neon.c -o average_neon
 ```
-Now run the program as follows:
+Run the program:
 
 ```bash
 ./average_neon
 ```
-The output should look like the following:
+The output should look similar to:
 
 ```output
 A[0] = 2.00, B[0] = -9.00 -> C[0] = -3.50
@@ -77,7 +77,7 @@ A[7] = 16.00, B[7] = -30.00 -> C[7] = -7.00
 ...
 ```
 
-Note that the `-fno-inline` option was passed to the compiler. Use this option to prevent the C compiler from inlining the `average_vec` function. This is needed to compare the disassembly output of the `average_vec` function from the C version against the disassembly output from the Rust version. 
+Note that the `-fno-inline` option was passed to the compiler. Use this option to prevent the C compiler from inlining the `average_vec` function. You'll need this to compare the disassembly output of the `average_vec` function from the C version against the disassembly output from the Rust version. 
 
 Generate the disassembly output from the C version as shown below:
 
@@ -153,8 +153,7 @@ Run the program as follows:
 ```bash
 ./average1
 ```
-
-The output should look like the following:
+The output should look similar to:
 
 ```output
 A[0] = 2, B[0] = -9 -> C[0] = -3.5
@@ -170,15 +169,15 @@ A[7] = 16, B[7] = -30 -> C[7] = -7
 
 The outputs shown from these 2 versions are the same apart from the formatting.
 
-This particular example is not very complicated but you will notice some key differences between C and Rust already:
+This particular example isn't very complicated but you'll notice some key differences between C and Rust already:
 
-* Uninitialized variables - mutable/immutable arguments passed to the functions are not a concern for a C developer creating a proof of concept program. This is not the case with Rust programming, which forces the developer to think about these things right from the start. This usually means that it takes longer to write a simple program in Rust but you can be certain that this program will not suffer from trivial bugs such as buffer overflows, out of bounds, illegal conversions etc.
-* Conversions/Castings need to be explicit, e.g., `2.0_f32 * ((i+1) as f32)`.
-* There is no need to pass size as a parameter as Rust includes size information in its arrays.
+* Uninitialized variables - mutable/immutable arguments passed to the functions aren't a concern for a C developer creating a proof of concept program. This isn't the case with Rust programming, which forces the developer to think about these things right from the start. This usually means that it takes longer to write a program in Rust but you can be certain that this program won't suffer from trivial bugs such as buffer overflows, out of bounds, illegal conversions etc.
+* Conversions/Castings need to be explicit, for example `2.0_f32 * ((i+1) as f32)`
+* There's no need to pass size as a parameter as Rust includes size information in its arrays
 
-Note that this program is not written in the most optimal way for Rust. It is just a 'port' of the C program into Rust with the minimal changes needed to compile and run.
+Note that this program isn't written in the most optimal way for Rust. It's a 'port' of the C program into Rust with the minimal changes needed to compile and run.
 
-The next step is to use SIMD intrinsics in your Rust program for the averaging loop. Replace the previous `average_vec` function with the function shown below and save the updated contents in a file named `average2.rs` as shown below:
+The next step is to use SIMD intrinsics in your Rust program for the averaging loop. Replace the previous `average_vec` function with the function shown below and save the updated contents in a file named `average2.rs`:
 
 ```Rust
 #[inline(never)]
@@ -234,12 +233,11 @@ A[6] = 14, B[6] = -27 -> C[6] = -6.5
 A[7] = 16, B[7] = -30 -> C[7] = -7
 ...
 ```
-
 The results are the same but let's look at some of the differences:
 
-* You need to use `target_arch` and `target_feature` to use specific hardware extensions. This is Rust's feature detection which is explained in more detail in the next section.
-* All definitions and functions need to be enabled with `use`, either selectively, for example `use std::arch::aarch64::float32x4_t` or with a wildcard `use std::arch::aarch64::*`. If in doubt, use the latter.
-* You will notice `#[inline(never)]` in the definition of `average_vec`. This is to let the compiler know that it should not inline this function because you will compare the disassembly against the C version.
+* You need to use `target_arch` and `target_feature` to use specific hardware extensions. This is Rust's feature detection which is explained in more detail in the next section
+* All definitions and functions need to be enabled with `use`, either selectively, for example `use std::arch::aarch64::float32x4_t` or with a wildcard `use std::arch::aarch64::*`. If in doubt, use the latter
+* You'll notice `#[inline(never)]` in the definition of `average_vec`. This is to let the compiler know that it shouldn't inline this function because you'll compare the disassembly against the C version
 
 Now generate the disassembly output for `average2`as follows:
 

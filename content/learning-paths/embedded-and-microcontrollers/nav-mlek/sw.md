@@ -1,5 +1,6 @@
 ---
 title: Software development considerations
+description: Review software development tools, model formats, and example applications used with the ML Evaluation Kit.
 
 weight: 4
 
@@ -47,7 +48,7 @@ A number of other tools are common in ML applications.
 
 ## Using Docker
 
-You may want to use [Docker](/install-guides/docker) to simplify ML development environment creation. 
+You may want to use [Docker](/install-guides/docker/) to simplify ML development environment creation. 
 
 As an example, clone the MLEK repository and look at the `Dockerfile` at the top of the repository to see one way to use Docker in ML application development:
 
@@ -106,7 +107,7 @@ The [Micro speech example for TensorFlow Lite](https://github.com/ARM-software/A
  
 Refer to the information included in the [AVH documentation](https://arm-software.github.io/AVH/main/examples/html/MicroSpeech.html) for more details. 
 
-You can run micro speech is just a few steps on the AVH AMI:
+You can run micro speech in a few steps on the AVH AMI:
 
 ```console
 git clone https://github.com/ARM-software/AVH-TFLmicrospeech.git

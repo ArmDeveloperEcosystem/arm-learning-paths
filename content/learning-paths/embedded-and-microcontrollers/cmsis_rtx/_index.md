@@ -1,6 +1,7 @@
 ---
 title: Build an RTX5 RTOS application with Keil μVision
 
+description: Learn how to create, build, and debug an RTX5 RTOS-based application using Keil μVision with CMSIS-RTOS2 API and Event Recorder for embedded Cortex-M development.
 
 minutes_to_complete: 30
 
@@ -10,10 +11,14 @@ learning_objectives:
     - Implement a basic RTOS-based application
 
 prerequisites:
-    - An installation of [Arm Keil MDK](/install-guides/mdk) or [Arm Development Studio](/install-guides/armds) (MDK recommended)
+    - An installation of [Arm Keil MDK](/install-guides/mdk/) or [Arm Development Studio](/install-guides/armds/) (MDK recommended)
     - Some familiarity with CMSIS is assumed
 
 author: Ronan Synnott
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -37,10 +42,10 @@ further_reading:
         link: https://www.keil.com/pack/doc/compiler/EventRecorder/html/index.html
         type: documentation
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

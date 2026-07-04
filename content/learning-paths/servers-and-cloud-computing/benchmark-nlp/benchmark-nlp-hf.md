@@ -9,7 +9,7 @@ layout: learningpathall
 ## Before you begin
 The instructions in this Learning Path are for any Arm server running Ubuntu 22.04 LTS. For this example, you need an Arm server instance with at least four cores and 8GB of RAM. The instructions have been tested on AWS Graviton3 (c7g) instances.
 
-To start, you need to install [PyTorch](/install-guides/pytorch) on your Arm machine. 
+To start, you need to install [PyTorch](/install-guides/pytorch/) on your Arm machine. 
 PyTorch is a widely-used Machine Learning framework for Python. You use PyTorch to deploy Natural Language Processing (NLP) models on your Arm machine.
 
 ## Overview
@@ -132,7 +132,7 @@ distilbert-base-uncased long sentence batched: ('655.2', '667.7')
 ```
 You should see the mean and 99th percentile execution time printed for the four cases of execution. All times are in milliseconds.  
 
-You can now run the same model and script but this time enable the use of [BFloat16 floating-point fast math kernels](/install-guides/pytorch#bfloat16-floating-point-number-format) with PyTorch and check how it impacts the performance of your model. Recent Arm CPUs like Arm Neoverse V1 and Arm Neoverse N2 include support for BFloat16 instructions. This setting enables General Matrix Multiplication (GEMM) kernels - a type of algorithm widely-used in Machine Learning models, to use BFloat16 Matrix Multiply Accumulate (MMLA) instructions when available on the CPU.
+You can now run the same model and script but this time enable the use of [BFloat16 floating-point fast math kernels](/install-guides/pytorch/#bfloat16-floating-point-number-format) with PyTorch and check how it impacts the performance of your model. Recent Arm CPUs like Arm Neoverse V1 and Arm Neoverse N2 include support for BFloat16 instructions. This setting enables General Matrix Multiplication (GEMM) kernels - a type of algorithm widely-used in Machine Learning models, to use BFloat16 Matrix Multiply Accumulate (MMLA) instructions when available on the CPU.
 
 Set the environment variable:
 

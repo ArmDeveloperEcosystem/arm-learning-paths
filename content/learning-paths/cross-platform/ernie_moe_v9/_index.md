@@ -5,6 +5,8 @@ minutes_to_complete: 60
 
 who_is_this_for: This is an advanced topic for developers and engineers who want to deploy Mixture of Experts (MoE) models, such as ERNIE 4.5, on edge devices. MoE architectures allow large LLMs with 21 billion or more parameters to run with only a fraction of their weights active per inference, making them ideal for resource constrained environments.
 
+description: Learn how to deploy ERNIE-4.5 Mixture of Experts models on Armv9 devices using llama.cpp, compare PT and Thinking variants, and measure Armv9-specific hardware optimization impact.
+
 learning_objectives:
     - Deploy MoE models like ERNIE-4.5 on edge devices using llama.cpp
     - Compare inference behavior between ERNIE-4.5 PT and Thinking versions
@@ -14,6 +16,10 @@ prerequisites:
     - An Armv9 device with at least 32 GB of available disk space, for example, Radxa Orion O6
 
 author: Odin Shen
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -49,10 +55,10 @@ further_reading:
         link: /learning-paths/servers-and-cloud-computing/llama_cpp_streamline/
         type: website
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

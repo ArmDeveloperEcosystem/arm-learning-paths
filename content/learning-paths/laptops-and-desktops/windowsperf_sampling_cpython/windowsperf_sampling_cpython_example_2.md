@@ -6,12 +6,12 @@ weight: 4
 
 ## Example 2: Simplify the steps using the record command 
 
-The `record` command spawns the process and pins it to the core specified by the `-c` option. You can either use `--pe_file` to let WindowsPerf know which process to spawn or simply add the process to spawn at the very end of the `wperf` command. 
+The `record` command spawns the process and pins it to the core specified by the `-c` option. You can either use `--pe_file` to let WindowsPerf know which process to spawn or add the process to spawn at the very end of the `wperf` command. 
 
 This simplifies the steps presented in the previous example.
 
 If you want to pass command line arguments to your application, you can call them after all of the WindowsPerf options. All command line arguments are going to be passed
-verbatim to the program that is being spawned. If you want to execute the CPython example above using this approach, you could just type:
+verbatim to the program that is being spawned. If you want to execute the CPython example above using this approach, you could type:
 
 ```command
 wperf record -e ld_spec:100000 -c 1 --timeout 30 -- python_d.exe -c 10**10**100

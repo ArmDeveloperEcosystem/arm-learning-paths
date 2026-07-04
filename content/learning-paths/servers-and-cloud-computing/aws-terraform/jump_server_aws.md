@@ -493,7 +493,7 @@ will identify the host machine as `aarch64`.
 
 ### Run hello world
 
-Install the `gcc` compiler. If you are using `Ubuntu`, use the following commands. If not, refer to the [GNU compiler install guide](/install-guides/gcc):
+Install the `gcc` compiler. If you are using `Ubuntu`, use the following commands. If not, refer to the [GNU compiler install guide](/install-guides/gcc/):
 
 ```console
 sudo apt-get update

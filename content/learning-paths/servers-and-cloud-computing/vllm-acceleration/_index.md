@@ -1,6 +1,6 @@
 ---
 title: Run vLLM inference with INT4 quantization on Arm servers
-    
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for developers interested in building and optimizing vLLM for Arm-based servers. This Learning Path shows you how to quantize large language models (LLMs) to INT4, serve them using an OpenAI-compatible API, and benchmark model accuracy with the LM Evaluation Harness.
@@ -20,11 +20,18 @@ prerequisites:
 author:
    - Nikhil Gupta
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: ML
 cloud_service_providers:
   - AWS
+  - Microsoft Azure
+  - Google Cloud
+  - Oracle
 armips:
     - Neoverse
 operatingsystems:
@@ -37,7 +44,7 @@ tools_software_languages:
     - Python
     - PyTorch
     - Hugging Face
-    
+
 further_reading:
     - resource:
         title: vLLM Documentation
@@ -60,11 +67,10 @@ further_reading:
         link: https://github.com/EleutherAI/lm-evaluation-harness
         type: website
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

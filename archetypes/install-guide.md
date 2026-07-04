@@ -2,7 +2,7 @@
 title: PLACEHOLDER TITLE
 minutes_to_complete: 10
 official_docs: PLACEHOLDER LINK
-author_primary: PLACEHOLDER NAME
+author: PLACEHOLDER NAME
 
 ### FIXED, DO NOT MODIFY
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.

@@ -56,7 +56,7 @@ ULP(x) = 2^(e-p+1)
 
 Where:
 * `e` is the unbiased exponent (in the IEEE-754 definition of single precision this is `E-127`)
-* `p` is the precision  (23 for IEEE-754 single-precision)
+* `p` is the precision  (24 for IEEE-754 single-precision)
 
 When computing the ULP of IEEE-754 floats, this expression becomes:
 ```

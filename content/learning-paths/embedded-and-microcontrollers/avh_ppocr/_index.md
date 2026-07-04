@@ -1,6 +1,8 @@
 ---
 title: Deploy PaddlePaddle on Arm Cortex-M with Arm Virtual Hardware
 
+description: Learn how to export and compile a PaddleOCR text recognition model using TVMC and deploy it on the Arm Corstone-300 FVP with Cortex-M55 processors.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for software developers interested in using PaddlePaddle for Arm Cortex-M processors.
@@ -13,9 +15,13 @@ learning_objectives:
 prerequisites:
     - Some familiarity with embedded programming 
     - Some familiarity with AI/ML software development 
-    - An Amazon Web Services(AWS) [account](https://aws.amazon.com/) to subscribe [Arm Virtual Hardware](https://aws.amazon.com/marketplace/pp/prodview-urbpq7yo5va7g) Amazon Machine Image(AMI). 
+    - An Amazon Web Services(AWS) [account](https://aws.amazon.com/) to subscribe [Arm Virtual Hardware](https://aws.amazon.com/marketplace/pp/prodview-urbpq7yo5va7g) Amazon Machine Image(AMI)
 
 author: Liliya Wu
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -49,11 +55,10 @@ further_reading:
         link: https://www.arm.com/blogs/blueprint/baidu-paddlepaddle
         type: blog
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

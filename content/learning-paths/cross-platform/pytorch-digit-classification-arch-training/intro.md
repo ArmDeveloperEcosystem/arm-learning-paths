@@ -117,7 +117,7 @@ To ensure everything is set up correctly, follow these next steps:
 
 4. Select the Python kernel you created earlier, `pytorch-env`. To do so, click **Kernels** in the top right-hand corner. Then, click **Jupyter Kernel...**, and you will see the Python kernel as shown below:
 
-![img1 alt-text#center](figures/1.webp "Figure 1: Python kernel.")
+![Screenshot of Visual Studio Code showing the Jupyter Kernel selection dialog with the pytorch-env Python kernel listed and highlighted for selection#center](figures/1.webp "Python kernel selection in VS Code")
 
 5. In your Jupyter notebook, run the following code to verify PyTorch is working correctly:
 
@@ -127,6 +127,6 @@ print(torch.__version__)
 ```
 
 It will look as follows:
-![img2 alt-text#center](figures/2.webp "Figure 2: Jupyter Notebook.")
+![Screenshot of Jupyter Notebook in Visual Studio Code showing the executed cell with the torch import statement and version output, confirming PyTorch is installed and working correctly#center](figures/2.webp "Jupyter Notebook with PyTorch version output")
 
 Now you have set up your development environment, you can move on to creating a PyTorch model.

@@ -1,6 +1,7 @@
 ---
 # User change
-title: Example Arm DS project for demonstrate context switching operations
+title: Example Arm DS project to demonstrate context switching operations
+description: Explore the Arm Development Studio example project that demonstrates Cortex-M context switching with the MPU and SysTick exception.
 
 weight: 2 # 1 is first, 2 is second, etc.
 

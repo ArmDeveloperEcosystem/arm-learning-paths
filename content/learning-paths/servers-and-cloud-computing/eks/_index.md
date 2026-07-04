@@ -1,5 +1,7 @@
 ---
 title: "Deploy WordPress with MySQL on Elastic Kubernetes Service (EKS)"
+description: Learn how to provision an Amazon EKS cluster on Arm-based Graviton instances and deploy a WordPress application with MySQL database.
+
 minutes_to_complete: 60
 
 who_is_this_for: >
@@ -13,6 +15,10 @@ prerequisites:
     - An Amazon Web Services (AWS) [account](https://aws.amazon.com/)
 
 author: Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -42,8 +48,8 @@ further_reading:
         link: https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/
         type: Blog
 
-
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # Indicates this should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

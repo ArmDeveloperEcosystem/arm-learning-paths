@@ -46,6 +46,6 @@ Your virtual machine is ready and running in a few minutes. Press **Go to Resour
 
 {{% notice Note %}}
 
-For more information about Arm-based virtual machines in Azure, see [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure).
+For more information about Arm-based virtual machines in Azure, see [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure/).
 
 {{% /notice %}}

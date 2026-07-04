@@ -35,9 +35,9 @@
         <contenttype>Learning Path</contenttype>
         <title>
             {{- if and (.File) (in .File.Path "install-guides") -}}
-                {{ .Params.title}} - Install Guide
+                {{ .Params.title | htmlEscape }} - Install Guide
             {{- else -}}
-                {{-  .Params.title -}}
+                {{-  .Params.title | htmlEscape -}}
             {{- end -}}
         </title>
         <description>
@@ -47,12 +47,12 @@
                 {{- $description = .Parent.Params.who_is_this_for -}}
             {{- end -}}
             {{- if $description -}}
-                {{- $description -}}
+                {{- $description | htmlEscape -}}
             {{- else -}}
                 No Learning Path Description
             {{- end -}}
         {{- else if and (.File) (in .File.Path "install-guides") -}}            
-            A guide to quickly install {{.Params.title}} on Arm.
+            A guide to quickly install {{ .Params.title | htmlEscape }} on Arm.
         {{- else -}}
             Unknown Description
         {{- end -}}
@@ -64,9 +64,9 @@
             {{- end -}}
             {{- if $authors -}}
                 {{- if (reflect.IsSlice $authors) -}}
-                    {{- delimit $authors ";" -}}
+                    {{- delimit $authors ";" | htmlEscape -}}
                 {{- else -}}
-                    {{- $authors -}}
+                    {{- $authors | htmlEscape -}}
                 {{- end -}}
             {{- else -}}
                 Arm 
@@ -91,7 +91,7 @@
                     {{- $titles = $titles | append .Title -}}
                 {{- end -}}
                 {{- end -}}
-                {{- delimit $titles ";" -}}
+                {{- delimit $titles ";" | htmlEscape -}}
             {{- else -}}
                 Unknown Shared Path
             {{ end }}
@@ -103,7 +103,7 @@
                     {{- $lpSection = .Parent -}}
                 {{- end -}}
                 {{- with $lpSection.Parent.Title -}}
-                    {{ . }}
+                    {{ . | htmlEscape }}
                 {{- else -}}
                     Unknown Category Title
                 {{- end -}}
@@ -192,8 +192,8 @@
 
 
             <foldingcollection>
-                {{- if .IsSection -}}{{ .Title }}
-                {{- else -}}{{ .Parent.Title }}
+                {{- if .IsSection -}}{{ .Title | htmlEscape }}
+                {{- else -}}{{ .Parent.Title | htmlEscape }}
                 {{- end -}}
             </foldingcollection>
             <itemid>{{ md5 .RelPermalink }}</itemid>

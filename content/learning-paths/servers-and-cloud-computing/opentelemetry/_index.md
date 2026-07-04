@@ -18,11 +18,15 @@ prerequisites:
 
 author: Pareena Verma
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ##### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
-cloud_service_providers: 
-- Google Cloud
+cloud_service_providers:
+  - Google Cloud
 
 armips:
 - Neoverse
@@ -55,12 +59,12 @@ further_reading:
       title: Prometheus documentation
       link: https://prometheus.io/docs/introduction/overview/
       type: documentation
-  
+
   - resource:
       title: Jaeger documentation
       link: https://www.jaegertracing.io/docs/
       type: documentation
-  
+
   - resource:
       title: Docker documentation
       link: https://docs.docker.com/
