@@ -11,7 +11,7 @@ layout: learningpathall
 
 Use the Arm MCP Server after the manual baseline is complete. The agent should accelerate analysis and execution, but your benchmark artifacts remain the source of truth for what actually improved.
 
-If you are new to this toolchain, see the [Arm MCP Server Learning Path](https://learn.arm.com/learning-paths/servers-and-cloud-computing/arm-mcp-server/) for setup and core usage patterns.
+If you're new to this toolchain, see the [Arm MCP Server Learning Path](https://learn.arm.com/learning-paths/servers-and-cloud-computing/arm-mcp-server/) for setup and core usage patterns.
 
 ### Identify endpoints likely to benefit most
 

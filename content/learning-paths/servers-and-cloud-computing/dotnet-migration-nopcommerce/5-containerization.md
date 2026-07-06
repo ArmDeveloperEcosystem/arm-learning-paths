@@ -37,7 +37,7 @@ docker buildx imagetools inspect "$IMAGE"
 
 ### Single architecture .NET SDK publish path
 
-Use SDK publish when you want tighter integration with .NET build settings and fewer custom Docker steps. For nopCommerce, treat this as a validation path until you have confirmed that the generated image includes the Linux native packages your store needs. SDK publish creates the container image, but it doesn't run `apk add` or `apt-get install` steps the way a Dockerfile does.
+Use SDK publish when you want tighter integration with .NET build settings and fewer custom Docker steps. For nopCommerce, treat this as a validation path until you've confirmed that the generated image includes the Linux native packages your store needs. SDK publish creates the container image, but it doesn't run `apk add` or `apt-get install` steps the way a Dockerfile does.
 
 This command publishes an arm64 image into the local Docker daemon with an explicit repository, tag, and container runtime identifier:
 
@@ -60,7 +60,7 @@ The expected output is `arm64`.
 
 ### Multi-arch .NET SDK publish path
 
-Define runtime identifiers and multi-arch container runtime identifiers in the project file, then publish once. Add this metadata only after you have decided where nopCommerce's Linux runtime dependencies will live. If you use SDK publish for production, move those dependencies into a custom base image or another repeatable image-build step before replacing the Dockerfile workflow.
+Define runtime identifiers and multi-arch container runtime identifiers in the project file, then publish once. Add this metadata only after you've decided where nopCommerce's Linux runtime dependencies will live. If you use SDK publish for production, move those dependencies into a custom base image or another repeatable image-build step before replacing the Dockerfile workflow.
 
 ```xml
 <PropertyGroup>

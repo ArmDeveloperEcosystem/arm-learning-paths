@@ -13,7 +13,7 @@ Treat tuning as an experiment pipeline, not a one-shot tweak. On Arm, apply chan
 
 ### Configure a tuned run
 
-Start with a conservative runtime profile that is commonly effective for server workloads. Keep these settings outside the application code at first so you can switch profiles without rebuilding.
+Start with a conservative runtime profile that's commonly effective for server workloads. Keep these settings outside the application code at first so you can switch profiles without rebuilding.
 
 Runtime environment variables are read when the .NET process starts. Stop the baseline `dotnet run` process, set the variables in the same terminal, and then restart nopCommerce. 
 
@@ -50,9 +50,9 @@ Treat this as an experiment, not a default. Turning off spin waiting can reduce 
 
 ### Optimize tiered PGO and ReadyToRun 
 
-`DOTNET_TieredPGO=1` and `DOTNET_ReadyToRun=1` are not the same optimization:
+`DOTNET_TieredPGO=1` and `DOTNET_ReadyToRun=1` aren't the same optimization:
 
-- `ReadyToRun` favors startup and early request latency by using precompiled code when it is available.
+- `ReadyToRun` favors startup and early request latency by using precompiled code when it's available.
 - `TieredPGO` favors steady-state throughput by letting the JIT recompile hot methods with runtime profile data.
 - Test them together and separately if startup latency and warmed throughput both matter.
 

@@ -39,7 +39,7 @@ export PATH="$PATH:$HOME/.dotnet/tools"
 dotnet-CycloneDX src/Presentation/Nop.Web/Nop.Web.csproj -o sbom/ -rs -F Json
 ```
 
-The `-rs` option includes project references, and `-F Json` writes JSON output that is easier to diff in CI. If tool installation is blocked, treat `dotnet list --include-transitive` plus `*.deps.json` evidence as a temporary fallback, not the final state.
+The `-rs` option includes project references, and `-F Json` writes JSON output that's easier to diff in CI. If tool installation is blocked, treat `dotnet list --include-transitive` plus `*.deps.json` evidence as a temporary fallback, not the final state.
 
 ### Inspect package internals for native payloads
 
@@ -56,7 +56,7 @@ cd /tmp/nupkg-audit
 unzip -l "$(basename "$NUPKG")" | rg "runtimes/|native/"
 ```
 
-If the command prints `runtimes/linux-arm64`, the package already carries an Arm Linux asset. If it prints only `linux-x64`, `win-x64`, or another non-Arm runtime, trace whether that asset is used by nopCommerce before you treat the dependency as portable. If there is no output, the package does not advertise runtime or native payload directories in the `.nupkg`.
+If the command prints `runtimes/linux-arm64`, the package already carries an Arm Linux asset. If it prints only `linux-x64`, `win-x64`, or another non-Arm runtime, trace whether that asset is used by nopCommerce before you treat the dependency as portable. If there's no output, the package doesn't advertise runtime or native payload directories in the `.nupkg`.
 
 ### Dependency cascade rule
 
