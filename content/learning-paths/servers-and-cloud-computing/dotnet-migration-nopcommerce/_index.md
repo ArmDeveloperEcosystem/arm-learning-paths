@@ -1,5 +1,6 @@
 ---
 title: Migrate and optimize a .NET nopCommerce application on Microsoft Azure
+description: Migrate, containerize, benchmark, and tune a .NET nopCommerce application on Azure Cobalt so you can validate Arm-based performance before rollout.
     
 minutes_to_complete: 75
 

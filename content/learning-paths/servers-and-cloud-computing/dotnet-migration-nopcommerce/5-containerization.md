@@ -1,5 +1,6 @@
 ---
 title: Choose a containerization path for the nopCommerce application
+description: Compare Dockerfile and .NET SDK container publish workflows so you can choose a reproducible arm64 container path for nopCommerce.
 weight: 5
 
 ### FIXED, DO NOT MODIFY

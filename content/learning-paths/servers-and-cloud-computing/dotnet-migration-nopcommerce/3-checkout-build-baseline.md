@@ -1,5 +1,6 @@
 ---
 title: Create a nopCommerce endpoint benchmark baseline on Arm
+description: Build a pinned nopCommerce release on Arm and run a repeatable endpoint benchmark to create a baseline for later tuning.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -236,5 +237,4 @@ This baseline process becomes the control for every later tuning or code-change 
 You've now created a baseline before migrating the application. 
 
 Next, you'll audit dependencies before migration. 
-
 

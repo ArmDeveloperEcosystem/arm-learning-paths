@@ -1,5 +1,6 @@
 ---
 title: Generate an SBOM and run .NET dependency discovery before migration
+description: Audit .NET dependencies, generate a CycloneDX SBOM, and inspect native package payloads before migrating nopCommerce to Arm.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -71,4 +72,4 @@ You must resolve B first, then validate A, then validate the app.
 
 You've reviewed application dependencies to understand what can change when you migrate to Arm.
 
-Next, you'll explore options to containerize the application. 
+Next, you'll explore options to containerize the application.
