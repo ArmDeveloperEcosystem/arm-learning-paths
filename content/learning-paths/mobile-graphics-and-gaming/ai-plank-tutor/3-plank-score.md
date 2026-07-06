@@ -68,6 +68,8 @@ private fun midpoint(pointA: NormalizedLandmark, pointB: NormalizedLandmark) =
 
 MediaPipe landmarks are normalized coordinates. The `x` and `y` values are relative to the input image, and `z` gives relative depth.
 
+Because this demo compares normalized landmarks from a fixed instructor reference, the score is view-dependent. It works best when the learner is side-on to the camera, fully visible, and at a similar orientation to the reference image.
+
 ## Calculate a 3D angle
 
 For each angle in `extractAnglesFrom()` it uses `calculateAngleFor()` - replace its TODO with this code:
@@ -135,7 +137,7 @@ This score is a simple pose-matching signal for the demo app. It is not a clinic
 
 ## Emit score data from the ViewModel
 
-Open `ui\viewmodels\MainViewModel.kt`.
+Open `ui/viewmodels/MainViewModel.kt`.
 
 Replace the TODO inside the `userPoseResults` mapping block with this code:
 
@@ -164,7 +166,7 @@ The UI wants a rounded string score. The underlying `UserPoseResult` keeps the f
 
 ## Display the score
 
-Open `ui\MainActivity.kt`.
+Open `ui/MainActivity.kt`.
 
 The starter project keeps `collectAppState()` as a safe no-op so the app can run before scoring and speech are implemented. Replace that function with this version:
 
@@ -193,5 +195,7 @@ Later sections will add more `launch { ... }` collectors inside this same `corou
 Build and run the app on your Android device.
 
 When you move in front of the camera, the score should update as MediaPipe detects your landmarks. The score will vary with camera angle and distance from the device, but mainly with how closely your body position matches the reference plank pose.
+
+If the score stays blank, verify that `onResults()` is receiving landmarks and that your body remains inside the camera frame. If the score jumps sharply, try a steadier side-on camera angle.
 
 At this point, the app can detect and score the plank pose. The next section converts the largest angle differences into a short text prompt for the local LLM.

@@ -17,8 +17,9 @@ learning_objectives:
 
 prerequisites:
     - A development machine with Android Studio installed.
-    - A recent Arm-powered Android phone in Developer Mode, with a USB data cable.
-    - Basic familiarity with Kotlin and Android app development
+    - A recent Arm-powered Android phone in Developer Mode, with USB debugging enabled, a USB data cable, and at least 5 GB of free storage for the GGUF model import.
+    - Android Debug Bridge (`adb`), included with the Android SDK platform tools.
+    - Basic familiarity with Kotlin and Android app development.
 
 author: Ben Clark
 
