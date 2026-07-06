@@ -1,13 +1,9 @@
 ---
 title: Migrate a .NET application (nopCommerce) to Azure Cobalt 100
-
-draft: true
-cascade:
-    draft: true
     
 minutes_to_complete: 75
 
-who_is_this_for: This learning path is for .NET and platform engineers migrating a production .NET application to Arm on Azure.
+who_is_this_for: This Learning Path is for .NET and platform engineers migrating a production .NET application to Arm on Azure.
 
 learning_objectives:
     - Build a pinned nopCommerce release and baseline on Arm with the same .NET toolchain
@@ -24,11 +20,17 @@ prerequisites:
 
 author: Joe Stech
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
 armips:
     - Neoverse
+cloud_service_providers:
+  - Microsoft Azure
 tools_software_languages:
     - .NET
     - C#
