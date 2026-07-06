@@ -17,6 +17,7 @@ prerequisites:
     - An Android phone with support for SME (Scalable Matrix Extension) instructions, required for SME performance checking
     - This Learning Path was tested on a Vivo X300 Pro.
     - A development machine with [Android Studio](https://developer.android.com/studio) installed.
+    - Arm Performance Studio installed. Follow the [Arm Performance Studio install guide](/install-guides/ams/) for instructions.
 
 author:
     - Arnaud de Grandmaison
@@ -36,6 +37,7 @@ tools_software_languages:
     - Kotlin
     - CPP
     - SME2
+    - Arm Performance Studio
 operatingsystems:
     - Android
     - Linux

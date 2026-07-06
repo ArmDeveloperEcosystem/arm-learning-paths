@@ -5,10 +5,31 @@
     top:5px;
 }
 
+.left-nav-pane a.a-tab {
+    display: block;
+    line-height: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.left-nav-pane a.a-tab + a.a-tab {
+    margin-top: -1px !important;
+}
+
 
  /* Tab color on left */
- .tab-row {
+.left-nav-pane .tab-row {
     background-color: var(--arm-dark-grey);
+    display: flex;
+    gap: 0 !important;
+    line-height: normal;
+    margin: 0 !important;
+    padding: 0 !important;
+    row-gap: 0 !important;
+}
+
+.left-nav-pane a.a-tab + a.a-tab .tab-row {
+    margin-top: -1px !important;
 }
 html[theme='dark'] .tab-row {
     background-color: var(--arm-black); /* rgba(163, 168, 174,1); #2A2B2D; */
@@ -26,8 +47,11 @@ html[theme='dark'] .tab-row.active {
 .tab-right-card {
     border-style: solid;
     border-width: 1px;
+    box-sizing: border-box;
     width: 100%;
     margin-left: 10px;
+    margin-top: 0;
+    margin-bottom: 0;
 
     border-color: var(--arm-dark-grey);
     background-color: var(--arm-black);
@@ -61,6 +85,7 @@ html[theme='dark'] .tab-right-card > h6 {
 .tab-right-card-header {
     margin: 10px;
     font-size:1em;
+    line-height: 1.2;
 }
 
 /* Force a 2-line clamp for masthead title */
@@ -87,7 +112,7 @@ a:hover {
     border-color: var(--arm-green);
 }
 .tab-row.inactive:hover h6 {
-    color: var(--arm-green); }
+    color: var(--lp-hover-text); }
 
 
 
@@ -103,6 +128,7 @@ p.github-link        {
     margin-bottom: 0px;
 
     color: var(--arm-web-safe-blue);
+    line-height: 1.25;
     text-decoration: none;
 }
 
@@ -110,7 +136,7 @@ html[theme='dark'] p.github-link        {
     color: var(--arm-light-blue);
 }
 html[theme='dark'] p.github-link:hover {
-    color: var(--arm-green);
+    color: var(--lp-hover-text);
 }
 
 div.github-div {
@@ -131,6 +157,16 @@ html[theme='dark'] div.github-div {
     border-color: rgba(163, 168, 174,0.25); /* #A3A8AE at 25% transparency */
     background-color: rgb(23,25,27);;  /* CLOSE to this, but not due to close to gradient background. var(--arm-color-base) at 75% transparency */
 
+}
+
+div.github-div > a {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+div.github-div > a + a {
+    margin-top: 8px;
 }
 
 
@@ -170,11 +206,11 @@ html[theme='dark'] .multi-tool-selection-title {
 }
 ads-card.multi-install-card:hover .multi-tool-selection-title{
     transition: color 0.3s ease-in-out;
-    color: var(--arm-green);
+    color: var(--lp-hover-text);
 }
 html[theme='dark'] ads-card.multi-install-card:hover .multi-tool-selection-title {
     transition: color 0.3s ease-in-out;
-    color: var(--arm-green);
+    color: var(--lp-hover-text);
 }
 
 
@@ -258,7 +294,7 @@ html[theme='dark'] .incorrect-explain {color: #e86868} /* 27% lighter than arm's
     text-decoration: none;
 }
 .social-icons a:hover {
-    color: var(--arm-green);
+    color: var(--lp-hover-text);
 }
 
 
@@ -342,11 +378,11 @@ html[theme='dark'] ads-expansion-panel.generated-summary-faq__panel {
     text-decoration: none;
 }
 .share-icon:hover {
-    fill: var(--arm-green);
+    fill: var(--lp-hover-text);
     cursor: pointer;
   }
 #link-copied-success {
-    color: var(--arm-green);
+    color: var(--lp-hover-text);
     background-color: var(--arm-black);
     border-radius: 10px;
     padding-left:8px;
