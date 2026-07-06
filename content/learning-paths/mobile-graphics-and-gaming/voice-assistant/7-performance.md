@@ -40,7 +40,7 @@ adb push build/lib/* /data/local/tmp/benchmark_test/
 ```output
 build/lib/archive/: 9 files pushed. 140.0 MB/s (36970298 bytes in 0.252s)
 build/lib/libMNN.so: 1 file pushed. 139.5 MB/s (4973176 bytes in 0.034s)
-build/lib/libarm-llm-jni.so: 1 file pushed. 153.8 MB/s (3832152 bytes in 0.024s)
+build/lib/libllm-jni.so: 1 file pushed. 153.8 MB/s (3832152 bytes in 0.024s)
 11 files pushed. 137.0 MB/s (45775626 bytes in 0.319s)
 ```
 
@@ -49,7 +49,7 @@ This will copy the executables you can run:
 adb push build/bin/* /data/local/tmp/benchmark_test/
 ```
 ```output
-build/bin/arm-llm-bench-cli: 1 file pushed. 134.3 MB/s (3415344 bytes in 0.024s)
+build/bin/llm-bench-cli: 1 file pushed. 134.3 MB/s (3415344 bytes in 0.024s)
 build/bin/llm-cpp-tests: 1 file pushed. 157.7 MB/s (17783848 bytes in 0.108s)
 build/bin/llm_bench: 1 file pushed. 22.6 MB/s (85688 bytes in 0.004s)
 build/bin/llm_demo: 1 file pushed. 12.6 MB/s (34656 bytes in 0.003s)
@@ -74,7 +74,7 @@ You can now run the executable in ADB shell, providing the path to libraries and
 ```sh
 adb shell
 cd /data/local/tmp/benchmark_test/
-LD_LIBRARY_PATH=./ ./arm-llm-bench-cli -m mnn/llama-3.2-1b/ -i 128 -o 128 -t 1 -n 5 -w 1
+LD_LIBRARY_PATH=./ ./llm-bench-cli -m mnn/llama-3.2-1b/ -i 128 -o 128 -t 1 -n 5 -w 1
 ```
 
 As you see in the output, the flags used by executable are listed below:
@@ -147,4 +147,5 @@ To summarize, KleidiAI simplifies development by abstracting away low-level opti
 
 As newer versions of the architecture become available, KleidiAI becomes even more powerful: simply updating the library allows applications like the multimodal Voice Assistant to take advantage of the latest architectural improvements such as SME2, without requiring any code changes. This means better performance on newer devices with no additional effort from developers.
 
+You can now benchmark the LLM functionality successfully. Next, you can use Arm Streamline to gain deeper insight into performance and identify optimization opportunities.
 
