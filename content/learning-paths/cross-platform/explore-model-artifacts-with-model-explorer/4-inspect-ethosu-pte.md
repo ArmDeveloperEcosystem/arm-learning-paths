@@ -11,9 +11,9 @@ layout: "learningpathall"
 
 Ethos-U is Arm's microNPU family for embedded and edge AI acceleration. In ExecuTorch Arm Ethos-U flows, suitable quantized subgraphs are lowered for the Ethos-U backend and compiled through the Arm toolchain.
 
-Model Explorer is useful because the final `.pte` shows whether the ExecuTorch program contains a clean NPU delegate region, fragmented delegate regions, or CPU fallback.
+Model Explorer is useful because the final `.pte` shows whether the ExecuTorch program contains a clean NPU delegate region, fragmented delegate regions, or work outside the NPU delegate.
 
-Ethos-U execution is heterogeneous: supported subgraphs are delegated to the NPU, while unsupported operators fall back to the CPU. The PyTorch blog [Efficient Edge AI on Arm CPUs and NPUs](https://pytorch.org/blog/efficient-edge-ai-on-arm-cpus-and-npus/) describes this flow as quantizing the model, lowering supported regions to TOSA, running Vela to produce an optimized Ethos-U command stream, and packaging the result into the final `.pte`. In this section, you inspect three MobileNetV2 artifacts in order: FP32 with no NPU delegation, INT8 with clean delegation, and INT8 with fragmented delegation.
+Ethos-U execution is heterogeneous: supported subgraphs are delegated to the NPU, while unsupported operators remain outside the NPU delegate. Whether that remaining work can execute on the CPU depends on the kernels included in the deployed ExecuTorch runtime. The PyTorch blog [Efficient Edge AI on Arm CPUs and NPUs](https://pytorch.org/blog/efficient-edge-ai-on-arm-cpus-and-npus/) describes this flow as quantizing the model, lowering supported regions to TOSA, running Vela to produce an optimized Ethos-U command stream, and packaging the result into the final `.pte`. In this section, you inspect three MobileNetV2 artifacts in order: FP32 with no NPU delegation, INT8 with clean delegation, and INT8 with fragmented delegation.
 
 To run through how the artifacts used in this section are obtained, used the [ExecuTorch on Arm Practical Labs](https://github.com/arm-education/executorch_on_arm_labs).
 
@@ -36,13 +36,13 @@ Inspect the graph and answer:
 
 ![Screenshot of examining an FP32 Ethos-U PTE in Model Explorer.#center](ethos_fp32.png "Inspecting FP32 Ethos-U PTE with Model Explorer")
 
-Ethos-U execution expects quantized integer workloads. This artifact was generated from an FP32 MobileNetV2 model, so the graph is not in the form Ethos-U needs for NPU execution. As a result, the work falls back on to the CPU instead of being packaged as an Ethos-U delegate region.
+Ethos-U execution expects quantized integer workloads. This artifact was generated from an FP32 MobileNetV2 model, so the graph is not in the form Ethos-U needs for NPU execution. As a result, the work remains outside an Ethos-U delegate region.
 
 - The graph is much larger at the top level, with many visible `aten::convolution`, `aten::_native_batch_norm_legit_no_training`, and `aten::hardtanh` nodes.
 - You should not see an `EthosUBackend` delegate node.
 - The input and output shapes still match the image classification model: `[1, 3, 224, 224]` to `[1, 1000]`.
 
-This shows why quantization matters for Ethos-U. A model can be structurally valid and still fall back to CPU execution if it is not in a supported quantized form.
+This shows why quantization matters for Ethos-U. A model can be structurally valid and still fail to produce an NPU delegate region if it is not in a supported quantized form.
 
 ## Open a delegated INT8 Ethos-U artifact
 
@@ -88,23 +88,23 @@ Look for:
 
 - Multiple delegate regions
 - Operators between delegate regions
-- Unsupported operations that force CPU fallback
+- Unsupported operations or graph patterns outside the NPU delegate
 - Extra tensor movement around backend boundaries
 
 ![Screenshot of examining a fragmented INT8 Ethos-U PTE in Model Explorer.#center](ethos-u-int8-fragmented.png "Inspecting fragmented INT8 Ethos-U PTE with Model Explorer")
 
 Fragmentation often means that the model was only partly suitable for the target backend. Common causes include unsupported operators, unsupported tensor shapes, quantization issues, or target-specific compiler constraints.
 
-LRN is not natively supported by the Ethos-U flow used here, so it is decomposed into lower-level operations during lowering. Not all of those operations can be delegated to the NPU. Model Explorer should therefore show supported regions delegated to Ethos-U and unsupported work left on the CPU path. In summary: a single unsupported operation can break an otherwise clean NPU region into multiple segments, increasing transitions between CPU and NPU.
+LRN is not natively supported by the Ethos-U flow used here, so it is decomposed into lower-level operations during lowering. Not all of those operations can be delegated to the NPU. Model Explorer should therefore show supported regions delegated to Ethos-U and unsupported work left outside the NPU delegate. In summary: a single unsupported operation can break an otherwise clean NPU region into multiple segments, increasing the number of delegate boundaries.
 
 In Model Explorer, compare it with the clean delegated artifact:
 
 - The graph still has one input with shape `[1, 3, 224, 224]` and one output with shape `[1, 1000]`.
 - You should see two `EthosUBackend` delegate nodes instead of one.
 - You should see quantize and dequantize nodes around the delegated regions.
-- You should see an `aten::avg_pool3d` node between the delegate regions. This is the visible CPU-side work that breaks the otherwise contiguous NPU path.
+- You should see an `aten::avg_pool3d` node between the delegate regions. This is visible non-delegated work that breaks the otherwise contiguous NPU path.
 
-This is what fragmentation looks like in a `.pte`: the NPU still accelerates supported regions, but unsupported work splits the graph and creates extra boundaries between CPU execution and Ethos-U execution. These extra boundaries can cause extra overhead that leads to reduced performance.
+This is what fragmentation looks like in a `.pte`: the NPU still accelerates supported regions, but unsupported work splits the graph and creates extra delegate boundaries. In a deployed runtime, non-delegated work can run on the CPU only if the runtime includes compatible kernels for those operators, dtypes, layouts, and shapes. Cortex-M bare-metal runtimes often include a narrower kernel set than Cortex-A runtimes, and both can use selective builds that include only the kernels required by the product.
 
 ## Compare targets only with target-specific artifacts
 
@@ -132,6 +132,6 @@ Try them out, and compare differences in the model graphs between TensorFlow Lit
 
 ## What you have learned
 
-You have inspected three Ethos-U `.pte` artifacts and seen how quantization and operator support affect NPU delegation. The FP32 MobileNetV2 artifact stays on the CPU path because Ethos-U expects supported quantized integer workloads. The INT8 MobileNetV2 artifact shows the clean delegated pattern: quantize, run a compact `EthosUBackend` region, then dequantize. The LRN example shows fragmentation, where unsupported work splits one clean NPU region into multiple delegate regions with CPU work between them.
+You have inspected three Ethos-U `.pte` artifacts and seen how quantization and operator support affect NPU delegation. The FP32 MobileNetV2 artifact does not produce an Ethos-U delegate region because Ethos-U expects supported quantized integer workloads. The INT8 MobileNetV2 artifact shows the clean delegated pattern: quantize, run a compact `EthosUBackend` region, then dequantize. The LRN example shows fragmentation, where unsupported work splits one clean NPU region into multiple delegate regions with non-delegated work between them.
 
 Next, you will inspect TOSA artifacts directly to see the intermediate representation that sits between model lowering and backend compilation.

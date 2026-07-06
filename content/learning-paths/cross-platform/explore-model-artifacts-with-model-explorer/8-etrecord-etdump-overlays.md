@@ -218,7 +218,7 @@ This shows a clean CPU delegate acceleration pattern. The model still has some n
 
 ## Inspect the FP32 Ethos-U example
 
-Next, inspect the MobileNetV2 FP32 example. We tried to delegate this to an Ethos-U, but ultimately it falls back to CPU execution on Cortex-M because Ethos-U requires INT8 quantization:
+Next, inspect the MobileNetV2 FP32 example. We tried to delegate this to an Ethos-U, but it does not produce an Ethos-U delegate region because Ethos-U requires supported quantized integer workloads:
 
 ```output
 ml-model-artifacts/etrecord/mobilenetv2_fp32_ethosu.etrecord
@@ -230,7 +230,7 @@ Look for:
 - No `EthosUBackend` delegate calls
 - Native `aten.convolution.default` events
 - A large `Method::execute` total
-- Runtime behavior that matches the FP32 `.pte` fallback view from the Ethos-U section
+- Runtime behavior that matches the FP32 `.pte` view from the Ethos-U section
 
 ![Screenshot of examining an FP32 MobileNetV2 ETRecord and ETDump overlay in Model Explorer.#center](fp32_profile.png "Inspecting FP32 MobileNetV2 runtime overlays")
 
@@ -270,8 +270,8 @@ ml-model-artifacts/etdump/mobilenetv2_lrn_int8_ethosu.etdp
 Compare it with the clean INT8 profile:
 
 - Are there two `EthosUBackend` delegate calls instead of one?
-- Which CPU operators appear between or around the delegate regions?
-- How large is the CPU fallback cost compared with the NPU cost?
+- Which native operators appear between or around the delegate regions?
+- How large is the non-delegated native cost compared with the NPU cost?
 - Do quantize and dequantize events appear around delegate boundaries?
 
 ![Screenshot of examining fragmented INT8 Ethos-U ETRecord and ETDump overlays in Model Explorer.#center](ethos_lrn_profile.png "Inspecting fragmented INT8 Ethos-U runtime overlays")
@@ -280,12 +280,12 @@ This profile shows why "delegated" is not always enough. The ETDump contains abo
 
 The overall `Method::execute` total is about 1.70 billion cycles because a large CPU `aten.convolution.default` island accounts for about 1.67 billion cycles. The profile also shows quantize and dequantize work around the delegate boundaries, including `dequantize_per_channel` at about 21.6 million cycles and `quantize_per_tensor` at about 6.47 million cycles.
 
-This is the runtime version of the fragmentation pattern you saw in the `.pte` and TOSA sections. The graph contains Ethos-U delegate regions, but unsupported or poorly placed CPU work dominates execution.
+This is the runtime version of the fragmentation pattern you saw in the `.pte` and TOSA sections. The graph contains Ethos-U delegate regions, but unsupported or poorly placed native work dominates execution in this provided trace.
 
 ## What you have learned
 
 ETRecord and ETDump add runtime context to static graphs. ETRecord gives you the graph and debug metadata. In the first Model Explorer overlay used in this Learning Path, ETDump contributes runtime timing data. Used together, with the adapter and data provider in the new Model Explorer ExecuTorch extension, they show which parts of the graph actually cost time on the target.
 
-The OPT-125M profiles made the CPU case clear: the portable run stayed on native operators, while the XNNPACK run moved most of the work into delegate calls. The MobileNetV2 profiles showed the same pattern for Ethos-U. CPU fallback, clean Ethos-U delegation, and fragmented delegation are much easier to tell apart once the runtime data is overlaid on the exported graph.
+The OPT-125M profiles made the CPU case clear: the portable run stayed on native operators, while the XNNPACK run moved most of the work into delegate calls. The MobileNetV2 profiles showed the same pattern for Ethos-U. Native CPU execution, clean Ethos-U delegation, and fragmented delegation are much easier to tell apart once the runtime data is overlaid on the exported graph.
 
 You have now completed the full artifact-inspection flow in this learning path. You started with `.pte` files to understand deployed ExecuTorch programs, moved through TOSA and VGF to inspect backend and Vulkan ML artifacts, and finished with ETRecord and ETDump overlays to connect the graph to runtime cost. The next steps page points to deeper workflows for generating, running, profiling, and optimizing your own models.

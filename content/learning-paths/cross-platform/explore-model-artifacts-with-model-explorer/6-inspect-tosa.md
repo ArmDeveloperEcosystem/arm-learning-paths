@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 TOSA is the Tensor Operator Set Architecture. It is a stable operator-level intermediate representation (IR) used between model export and backend-specific compilation or conversion.
 
-You have already seen Ethos-U `.pte` files. Those `.pte` files show the final ExecuTorch program after supported regions have been delegated or left on the CPU path. TOSA lets you inspect an earlier stage: the graph representation that backend tools such as Vela or the Arm ML SDK Model Converter can consume.
+You have already seen Ethos-U `.pte` files. Those `.pte` files show the final ExecuTorch program after supported regions have been delegated or left outside the NPU delegate. TOSA lets you inspect an earlier stage: the graph representation that backend tools such as Vela or the Arm ML SDK Model Converter can consume.
 
 This is why this section does not include separate TOSA artifacts for the Cortex-A portable, Cortex-A XNNPACK, or Cortex-M examples. In the flow introduced at the start of this learning path, those routes do not need a TOSA intermediate representation: portable kernels stay in the ExecuTorch operator path, XNNPACK uses an ExecuTorch delegate for Cortex-A CPU acceleration, and Cortex-M uses its own Cortex-M/CMSIS-NN-oriented lowering path. TOSA becomes relevant for the backend routes that consume TOSA, such as Ethos-U and VGF.
 
@@ -76,7 +76,7 @@ ml-model-artifacts/tosa/mv2_lrn_int8_1.tosa
 ml-model-artifacts/tosa/mv2_lrn_int8_2.tosa
 ```
 
-You saw earlier that the LRN `.pte` contained two `EthosUBackend` delegate nodes with CPU-side work between them. These two TOSA files help explain why.
+You saw earlier that the LRN `.pte` contained two `EthosUBackend` delegate nodes with non-delegated work between them. These two TOSA files help explain why.
 
 Inspect both TOSA files and answer:
 
@@ -94,7 +94,7 @@ The first LRN TOSA file is the smaller fragment. It has two inputs, with shapes 
 
 The second LRN TOSA file is the larger fragment. It starts from the original image input shape `[1, 3, 224, 224]` and contains most of the quantized MobileNetV2 CNN structure. It has many `RESCALE`, `CONV2D`, and `DEPTHWISE_CONV2D` operations, and produces intermediate outputs with shapes `[1, 1280, 7, 7]` and `[1, 1, 1284, 7, 7]` that cross the break in the graph.
 
-The graph fragmentation has become visible as multiple backend-ready TOSA artifacts. That matches the fragmented `.pte` view, where two `EthosUBackend` delegate regions were separated by CPU-side work.
+The graph fragmentation has become visible as multiple backend-ready TOSA artifacts. That matches the fragmented `.pte` view, where two `EthosUBackend` delegate regions were separated by non-delegated work.
 
 ## Use TOSA outside ExecuTorch
 

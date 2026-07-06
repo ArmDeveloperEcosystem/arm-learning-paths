@@ -21,7 +21,7 @@ The artifacts covered in this learning path are:
 
 | Artifact | Model Explorer support | Workflow layer | Use it to inspect |
 | --- | --- | --- | --- |
-| `.pte` | `pte-adapter-model-explorer` | ExecuTorch program | Delegate regions, backend partitioning, CPU fallback, and the deployed ExecuTorch graph |
+| `.pte` | `pte-adapter-model-explorer` | ExecuTorch program | Delegate regions, backend partitioning, work outside delegates, and the deployed ExecuTorch graph |
 | `.tosa` | `tosa-adapter-model-explorer` | Compiler/backend intermediate representation | Lowered operators, tensor shapes, quantized types, graph splits, and missed optimization opportunities |
 | `.vgf` | `vgf-adapter-model-explorer` | Vulkan ML graph artifact | Inputs, outputs, constants, tensor metadata, graph connectivity, and SPIR-V graph modules |
 | `.etrecord` | ExecuTorch ETRecord adapter | Export-time profiling context | Graph structure, debug handles, operator names, and delegate metadata used to map runtime events back to graph nodes |
@@ -99,7 +99,7 @@ A helpful glossary of different terms is provided below:
 | Lower | To transform a model or graph from a higher-level representation into a lower-level representation closer to a target backend. |
 | Convert | To change one artifact format into another, such as TOSA to VGF. |
 | Intermediate representation | A representation between the original model and the final target artifact. TOSA is the main intermediate representation in this learning path. |
-| Delegate | A backend-specific execution path that handles supported parts of a graph. Unsupported parts can remain on a fallback path. |
+| Delegate | A backend-specific execution path that handles supported parts of a graph. Unsupported parts can remain outside the delegate, and can run on a CPU path only when the deployed runtime includes compatible kernels. |
 | Kernel | The code that executes a model operator for a specific runtime or backend, such as a portable ExecuTorch kernel or a CMSIS-NN kernel. |
 | Flatbuffer | A compact binary serialization format. TOSA flatbuffers store TOSA graphs; `.pte` files use a FlatBuffer-based ExecuTorch program format. |
 | SPIR-V | Standard Portable Intermediate Representation - Vulkan. SPIR-V modules inside VGF files describe the Vulkan ML data graph used by the runtime. |

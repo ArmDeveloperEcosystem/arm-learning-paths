@@ -1,9 +1,7 @@
 ---
 title: Visualize ExecuTorch PTE, TOSA, VGF, ETRecord, and ETDump artifacts with Google's Model Explorer
 
-draft: true
-cascade:
-    draft: true
+
 
 description: Learn how to inspect ExecuTorch PTE, TOSA, VGF, ETRecord, and ETDump model artifacts with Google Model Explorer and Arm adapters.
 
@@ -15,7 +13,7 @@ learning_objectives:
   - Explain what Google Model Explorer is and how adapters add support for Arm model artifacts
   - Install Model Explorer, launch it with the PTE, TOSA, and VGF adapters, and use the runtime overlay extension for ETRecord and ETDump
   - Open ExecuTorch .pte files and compare portable CPU, XNNPACK CPU, and Ethos-U artifacts
-  - Use PTE visualization to reason about delegate regions, CPU fallback, graph fragmentation, and backend-specific changes
+  - Use PTE visualization to reason about delegate regions, work outside delegates, graph fragmentation, and backend-specific changes
   - Inspect TOSA flatbuffers as an intermediate representation used by Arm compiler and backend workflows
   - Inspect VGF artifacts for Vulkan ML and neural graphics workloads
   - Use ETRecord and ETDump overlays to connect exported graph structure with runtime profiling data
