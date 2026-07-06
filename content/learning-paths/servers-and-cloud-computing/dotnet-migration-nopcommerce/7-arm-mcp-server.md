@@ -32,7 +32,7 @@ Expected output:
 
 ## 2. Generate and run a targeted endpoint test suite
 
-Ask the agent to build a repeatable suite that exercises the ranked endpoints and emits machine-readable output.
+Ask the agent to extend the manual endpoint tester or build a repeatable suite that exercises the ranked endpoints and emits machine-readable output. Keep the same command-line controls used earlier: base URL, concurrency, iterations, and JSON output path.
 
 Prompt template:
 
@@ -48,6 +48,7 @@ The suite should produce:
 - Throughput summary
 - Error counts
 - Before/after comparison artifacts
+- The exact route list and request method for each endpoint
 
 ## 3. Plan and implement Arm optimizations on Azure Cobalt
 
