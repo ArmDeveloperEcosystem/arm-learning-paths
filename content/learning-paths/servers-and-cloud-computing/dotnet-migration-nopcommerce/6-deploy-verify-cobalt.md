@@ -14,6 +14,8 @@ Treat tuning as an experiment pipeline, not a one-shot tweak. On Arm, apply chan
 
 Start with a conservative runtime profile that is commonly effective for server workloads. Keep these settings outside the application code at first so you can switch profiles without rebuilding.
 
+Runtime environment variables are read when the .NET process starts. Stop the baseline `dotnet run` process, set the variables in the same terminal, and then restart nopCommerce. The thread-pool minimum below matches the 2-vCPU validation VM; treat it as a starting point, not a universal value for every Cobalt size.
+
 ```bash
 export DOTNET_TieredCompilation=1
 export DOTNET_TieredPGO=1
@@ -24,7 +26,14 @@ export DOTNET_EnableDiagnostics=0
 export DOTNET_ThreadPool_ForceMinWorkerThreads=2
 ```
 
-Increase `DOTNET_ThreadPool_ForceMinWorkerThreads` only when traces or load-test data show thread-pool starvation.
+Restart the application from the same shell so it inherits the tuning profile:
+
+```bash
+cd ~/nopCommerce/src/Presentation/Nop.Web  # replace with your clone path if different
+dotnet run -c Release --no-build --urls http://0.0.0.0:5000
+```
+
+Increase `DOTNET_ThreadPool_ForceMinWorkerThreads` only when traces or load-test data show thread-pool starvation. Keep `DOTNET_EnableDiagnostics=0` for final measurement runs only; remove it when you need `dotnet-trace`, `dotnet-counters`, or profiler-based evidence.
 
 ### Optional spin-wait experiment for .NET 8, 9, and 10
 
@@ -34,7 +43,7 @@ If the workload burns CPU while waiting for short-lived thread-pool work, test d
 export DOTNET_ThreadPool_UnfairSemaphoreSpinLimit=0
 ```
 
-Treat this as an experiment, not a default. Turning off spin waiting can reduce wasted CPU on small instances or oversubscribed containers, but it can also increase wake-up latency and reduce peak throughput. Validate it separately from the base tuned profile.
+Treat this as an experiment, not a default. Turning off spin waiting can reduce wasted CPU on small instances or oversubscribed containers, but it can also increase wake-up latency and reduce peak throughput. Validate it separately from the base tuned profile by changing only this variable between trials.
 
 ### Tiered PGO and ReadyToRun optimize different phases
 
@@ -44,15 +53,24 @@ Treat this as an experiment, not a default. Turning off spin waiting can reduce 
 - `TieredPGO` favors steady-state throughput by letting the JIT recompile hot methods with runtime profile data.
 - Test them together and separately if startup latency and warmed throughput both matter.
 
-Run the same endpoint suite used in the baseline:
+Run the same endpoint suite used in the baseline from a second terminal. Keep the app running with the tuning profile in the first terminal, and run the tester from the repository root so the before and after JSON files sit next to each other.
 
 ```bash
+cd ~/nopCommerce  # replace with your clone path if different
+
 # Keep benchmark parameters identical to baseline for valid comparison.
 python3 test_nopcommerce_endpoints.py \
   --base-url http://127.0.0.1:5000 \
   --concurrency 8 \
   --iterations 20 \
   --json-out arm_after.json
+```
+
+Inspect the summaries before comparing results:
+
+```bash
+jq '.summary' arm_before.json
+jq '.summary' arm_after.json
 ```
 
 ## Validation rules for credible tuning gains
