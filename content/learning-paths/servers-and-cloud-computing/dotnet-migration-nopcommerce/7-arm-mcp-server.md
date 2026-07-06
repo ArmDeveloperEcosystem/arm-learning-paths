@@ -25,11 +25,7 @@ Identify endpoints most likely to benefit from Arm tuning.
 Rank them by expected impact and explain why.
 ```
 
-The output should include the following:
-
-- Ranked endpoint list
-- Bottleneck hypotheses per endpoint
-- Instrumentation plan to validate hypotheses
+The output should include a ranked endpoint list, bottleneck hypotheses per endpoint, and an instrumentation plan to validate the hypotheses.
 
 ### Generate and run a targeted endpoint test suite
 
@@ -43,13 +39,7 @@ Use concurrency, iterations, and JSON output.
 Include pass/fail checks for HTTP behavior and error rate.
 ```
 
-The suite should produce the following:
-
-- Per-endpoint latency percentiles
-- Throughput summary
-- Error counts
-- Before/after comparison artifacts
-- The exact route list and request method for each endpoint
+The suite should produce per-endpoint latency percentiles, a throughput summary, and error counts. It should also produce before and after comparison artifacts, and the exact route list and request method for each endpoint.
 
 ### Plan and implement Arm optimizations on Azure Cobalt
 

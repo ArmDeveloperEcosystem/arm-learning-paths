@@ -65,13 +65,9 @@ If the command prints `runtimes/linux-arm64`, the package already carries an Arm
 
 ### Dependency cascade rule
 
-Treat dependencies as a chain, not isolated items:
+Treat dependencies as a chain, not isolated items.
 
-- App depends on library A
-- Library A depends on library B
-- Library B is architecture-sensitive
-
-You must resolve B first, then validate A, then validate the app.
+Assume the app depends on library A, library A depends on library B, library B is architecture-sensitive. In this scenario, you must resolve B first, then validate A, then validate the app.
 
 ## What you've accomplished and what's next
 
