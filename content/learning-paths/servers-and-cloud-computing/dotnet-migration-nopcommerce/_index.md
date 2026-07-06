@@ -1,6 +1,10 @@
 ---
 title: Migrate a .NET application (nopCommerce) to Azure Cobalt 100
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 75
 
 who_is_this_for: This learning path is for .NET and platform engineers migrating a production .NET application to Arm on Azure.
