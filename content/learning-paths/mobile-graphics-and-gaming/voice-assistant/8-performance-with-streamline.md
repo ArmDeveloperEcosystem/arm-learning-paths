@@ -10,9 +10,28 @@ layout: learningpathall
 
 ---
 
-## Benchmarking LLM on Android phone
+## Arm Performance Studio
 
-You can also benchmark the LLM functionality on Android phone outside of RTVA application. For this, you can use the Large Language Models repository:
+[Arm Performance Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio) is a performance analysis tool suite for developers to performance test their applications on devices with Arm CPUs. You can use
+[Streamline](https://developer.arm.com/Tools%20and%20Software/Streamline%20Performance%20Analyzer) to capture a performance profile that shows all the performance counter activity from the device. Generate an easy-to-read performance summary from an annotated Streamline capture, and get actionable advice about where you should optimize.
+## Download and Install Arm Performance Studio
+
+Arm Performance Studio is supported on Windows, Linux, and macOS hosts. Get the [Arm Performance Studio installation package](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio#Downloads).
+
+Refer to the [Arm Performance Studio install guide](/install-guides/ams/) for installation instructions.
+
+## Launch the tools
+
+To open the tools, launch the Performance Studio Hub:
+
+- On Windows, search for Performance Studio.
+- On macOS and Linux, open the Performance Studio application file from the install directory.
+
+![Performance Studio Hub alt-text#center](ps_hub.png "Performance Studio Hub")
+
+## Profiling LLM with Arm Streamline
+
+You are now all set to profile the LLM functionality on Android phone with Arm Streamline. For this, you can use the Large Language Models repository again:
 
 ```
 https://github.com/Arm-Examples/LLM-Runner
