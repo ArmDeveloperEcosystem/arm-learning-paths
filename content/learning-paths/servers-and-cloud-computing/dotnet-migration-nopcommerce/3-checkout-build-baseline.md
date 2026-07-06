@@ -8,11 +8,15 @@ layout: learningpathall
 
 ## Build and baseline
 
-Create a reproducible Arm baseline before optimization work. This page pins source, verifies a clean build, and captures a representative endpoint baseline so later changes can be measured against a known control.
+Create a reproducible Arm baseline before optimization work. 
+
+You'll pin the source, verify a clean build, and capture a representative endpoint baseline so you can measure later changes against a known control.
 
 ### Clone and pin the source
 
-Pinning the exact tag and commit avoids silent drift in dependencies and behavior. Run the following commands on the Cobalt virtual machine (VM):
+Pinning the exact tag and commit avoids silent drift in dependencies and behavior. 
+
+Run the following commands on the Arm-based virtual machine (VM):
 
 ```bash
 git clone https://github.com/nopSolutions/nopCommerce.git
@@ -31,7 +35,7 @@ cd ~/nopCommerce  # replace with your clone path if different
 
 ### Restore and build on Arm
 
-Run restore and build on the Arm-based VM to establish a native Arm baseline. Restoring first separates package resolution problems from compilation problems, and `--no-restore` makes the build validate the already restored dependency graph.
+Run restore and build on the Arm-based VM to establish a native Arm baseline:
 
 ```bash
 # Restore dependencies first so build failures are easier to triage.
@@ -40,15 +44,17 @@ dotnet restore src/Presentation/Nop.Web/Nop.Web.csproj
 # Build release binaries without re-restoring packages.
 dotnet build src/Presentation/Nop.Web/Nop.Web.csproj -c Release --no-restore
 ```
+Restoring first separates package resolution problems from compilation problems, and `--no-restore` makes the build validate the already restored dependency graph.
 
 ### Start and install nopCommerce
 
-Start the app locally and complete installer setup with PostgreSQL. Run this command in one terminal and leave it running; `dotnet run` hosts the web application and keeps the terminal attached to the server logs.
+Start the app locally and complete installer setup with PostgreSQL. Run the following command in one terminal and leave it running: 
 
 ```bash
 cd src/Presentation/Nop.Web
 dotnet run -c Release --no-build --urls http://0.0.0.0:5000
 ```
+`dotnet run` hosts the web application and keeps the terminal attached to the server logs.
 
 In a browser, open `http://<cobalt-public-ip>:5000` or use an SSH tunnel to reach `http://127.0.0.1:5000`. On the nopCommerce install page, select PostgreSQL and use the database settings from the previous section:
 
@@ -72,7 +78,7 @@ curl -s -o /dev/null -w 'root=%{http_code}\n' http://127.0.0.1:5000/
 curl -s -o /dev/null -w 'install=%{http_code}\n' http://127.0.0.1:5000/install
 ```
 
-Expected after successful install: `root=200`, `install=302`.
+The outputs after a successful install should be: `root=200`, `install=302`.
 
 ### Run the baseline
 
@@ -85,7 +91,7 @@ Don't benchmark `/install`. Baseline stable storefront paths first, then add car
 - Product and category pages from your sample data
 - Cart or checkout endpoints from a recorded production-like workflow
 
-Create the endpoint tester in the repository root. The script uses only the Python standard library, submits requests with fixed concurrency, treats non-2xx and non-3xx responses as errors, and writes raw samples plus per-route summaries to JSON.
+Create the endpoint tester in the repository root:
 
 ```python {file_name="test_nopcommerce_endpoints.py"}
 #!/usr/bin/env python3
@@ -199,6 +205,8 @@ if __name__ == "__main__":
     main()
 ```
 
+The script uses only the Python standard library, submits requests with fixed concurrency, treats non-2xx and non-3xx responses as errors, and writes raw samples plus per-route summaries to JSON.
+
 Run the endpoint tester from the repository root while the app is still running in the first terminal:
 
 ```bash
@@ -210,14 +218,14 @@ python3 test_nopcommerce_endpoints.py \
   --json-out arm_before.json
 ```
 
-The command prints the per-route summary and writes the raw measurements to `arm_before.json`. Keep that JSON file unchanged; it is the baseline artifact used by the tuning step.
+The command prints the per-route summary and writes the raw measurements to `arm_before.json`. Keep that JSON file unchanged because it's the baseline artifact used in the tuning step.
 
 #### Baseline quality rules
 
 Use these rules before you compare any optimization result:
 
-- Run at least 3 baseline trials with identical parameters.
-- Keep endpoint order fixed per run (not randomized) when comparing before vs after.
+- Run at least three baseline trials with identical parameters.
+- Keep endpoint order fixed per run (not randomized) when comparing before and after.
 - Keep database state and seeded data identical across runs.
 - Capture raw JSON for every run and compare medians, not single outliers.
 

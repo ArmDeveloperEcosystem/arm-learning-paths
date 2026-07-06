@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## Audit application ependencies
+## Audit application dependencies
 
 Run dependency discovery before migration changes so you understand direct references, transitive risk, and hidden native payloads. By doing so, you'll avoid late surprises when deploying to Arm.
 

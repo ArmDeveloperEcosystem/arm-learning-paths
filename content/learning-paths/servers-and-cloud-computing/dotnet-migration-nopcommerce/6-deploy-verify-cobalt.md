@@ -82,16 +82,13 @@ Use these rules before adopting a tuning profile:
 - Reset warm-up policy consistently (always warm or always cold).
 - Require improvement in both throughput and p95 latency, not just one.
 - Set a minimum practical threshold (for example, >=5% median gain) before rollout.
-
-#### Instance-size tradeoffs
-
-Do not assume the same profile wins on every Azure Cobalt VM size. Smaller instances often benefit from lower CPU burn and predictable p95 latency. Larger instances often benefit from higher concurrency, but can expose GC, database, and shared-resource contention. Compare throughput, p95/p99 latency, CPU utilization, and error rate for each instance size before keeping a tuning profile.
+- Don't assume the same profile wins on every Azure VM size. Smaller instances often benefit from lower CPU burn and predictable p95 latency. Larger instances often benefit from higher concurrency, but can expose GC, database, and shared-resource contention. Compare throughput, p95/p99 latency, CPU utilization, and error rate for each instance size before keeping a tuning profile.
 
 ### Considerations for interpreting metric improvements
 
 When interpeting metric improvements, consider the following:
 
-- If only one metric improves while p95 or error rate regresses, do not treat the change as a win.
+- If only one metric improves while p95 or error rate regresses, don't treat the change as a win.
 - If run-to-run variation is near the observed delta, treat it as noise.
 - Keep architecture-specific profiles separate. Don't force one profile onto all architectures.
 
