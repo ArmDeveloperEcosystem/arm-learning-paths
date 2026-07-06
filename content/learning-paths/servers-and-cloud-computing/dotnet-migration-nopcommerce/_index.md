@@ -1,9 +1,9 @@
 ---
-title: Migrate a .NET nopCommerce application to Azure Cobalt 100
+title: Migrate and optimize a .NET nopCommerce application on Microsoft Azure
     
 minutes_to_complete: 75
 
-who_is_this_for: This Learning Path is for .NET and platform engineers migrating a production .NET application to Arm on Azure.
+who_is_this_for: This Learning Path is for .NET and platform engineers migrating a production .NET application to Arm-based infrastructure on Azure.
 
 learning_objectives:
     - Build a pinned nopCommerce release and baseline on Arm with the same .NET toolchain
@@ -13,7 +13,7 @@ learning_objectives:
     - Use the Arm MCP Server to automate endpoint selection, test generation, and optimization planning
 
 prerequisites:
-    - Azure account with permissions to create VMs
+    - Azure account with permissions to create virtual machines
     - Azure CLI (`az`) installed locally
     - Docker and .NET 9 SDK familiarity
     - Basic Linux command-line knowledge

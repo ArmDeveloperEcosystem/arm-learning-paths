@@ -80,8 +80,8 @@ Implement the following guardrails when using the Arm MCP Server for optimizatio
 - Ask the agent to separate observed facts from inferred explanations.
 - Re-run on production-like traffic before release.
 
-## What you've accomplished
+## What you've learned
 
-You've used the Arm MCP Server to optimize a .NET nopCommerce application migrated to Arm. 
+You've learned how to use the Arm MCP Server to optimize a .NET nopCommerce application migrated to Arm. 
 
 You can use the workflows in this Learning Path as a template for your own applications, then validate with your production-like traffic profile before rollout.

@@ -79,4 +79,4 @@ The `docker exec` command should print `CREATE EXTENSION`. If it prints `NOTICE:
 
 You've set up an Arm-based environment by creating a Microsoft Azure VM powered by Cobalt 100 and installing the toolchain necessary for migration. 
 
-Next, you'll create a reproducable baseline to use for benchmarking.
+Next, you'll create a reproducible baseline to use for benchmarking.

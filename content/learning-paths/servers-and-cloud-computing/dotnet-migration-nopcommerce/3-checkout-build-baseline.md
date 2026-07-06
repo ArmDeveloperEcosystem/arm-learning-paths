@@ -1,12 +1,12 @@
 ---
-title: Create an Arm baseline before optimization
+title: Create a nopCommerce endpoint benchmark baseline on Arm
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Build and baseline
+## Build nopCommerce and create an endpoint baseline
 
 Create a reproducible Arm baseline before optimization work. 
 
@@ -80,7 +80,7 @@ curl -s -o /dev/null -w 'install=%{http_code}\n' http://127.0.0.1:5000/install
 
 The outputs after a successful install should be: `root=200`, `install=302`.
 
-### Run the baseline
+### Run the endpoint baseline benchmark
 
 Don't benchmark `/install`. Baseline stable storefront paths first, then add cart and attribute-change routes only after you know the valid product IDs, attribute IDs, request method, and anti-forgery token behavior for your installed store.
 
@@ -235,6 +235,6 @@ This baseline process becomes the control for every later tuning or code-change 
 
 You've now created a baseline before migrating the application. 
 
-Next, you'll make note of dependencies before migration. 
+Next, you'll audit dependencies before migration. 
 
 

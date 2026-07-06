@@ -14,7 +14,9 @@ Treat tuning as an experiment pipeline, not a one-shot tweak. On Arm, apply chan
 
 Start with a conservative runtime profile that is commonly effective for server workloads. Keep these settings outside the application code at first so you can switch profiles without rebuilding.
 
-Runtime environment variables are read when the .NET process starts. Stop the baseline `dotnet run` process, set the variables in the same terminal, and then restart nopCommerce. The thread-pool minimum below matches the 2-vCPU validation VM; treat it as a starting point, not a universal value for every Cobalt size.
+Runtime environment variables are read when the .NET process starts. Stop the baseline `dotnet run` process, set the variables in the same terminal, and then restart nopCommerce. 
+
+The following thread-pool minimum matches the 2-vCPU validation VM. Treat it as a starting point, not a universal value for every Cobalt size:
 
 ```bash
 export DOTNET_TieredCompilation=1
@@ -86,7 +88,7 @@ Use these rules before adopting a tuning profile:
 
 ### Considerations for interpreting metric improvements
 
-When interpeting metric improvements, consider the following:
+When interpreting metric improvements, consider the following:
 
 - If only one metric improves while p95 or error rate regresses, don't treat the change as a win.
 - If run-to-run variation is near the observed delta, treat it as noise.

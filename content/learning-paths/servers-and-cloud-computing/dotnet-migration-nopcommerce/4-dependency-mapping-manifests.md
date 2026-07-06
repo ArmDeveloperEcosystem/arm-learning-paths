@@ -1,5 +1,5 @@
 ---
-title: Run dependency discovery before migration
+title: Generate an SBOM and run .NET dependency discovery before migration
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -28,7 +28,7 @@ dotnet list src/Presentation/Nop.Web/Nop.Web.csproj package --include-transitive
 
 ### Generate an SBOM
 
-Generate an SBOM so you can track all components, versions, and exposure surface as a first-class migration artifact. While not strictly necessary for migration purposes, this is a best practice that will save your team time down the road. You can also give this SBOM to an LLM to extract insights about your codebase for you.
+Generate an SBOM so you can track all components, versions, and exposure surface as a first-class migration artifact. While not strictly necessary for migration purposes, this is a best practice that'll save time. You can also give this SBOM to an LLM to extract insights about your codebase.
 
 The CycloneDX tool is installed as a .NET global tool. Add `~/.dotnet/tools` to `PATH` in the current shell so the `dotnet-CycloneDX` command is available immediately after installation.
 

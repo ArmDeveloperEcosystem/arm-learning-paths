@@ -1,12 +1,12 @@
 ---
-title: Choose between options to containerize the application
+title: Choose a containerization path for the nopCommerce application
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Containerize the application
+## Containerize and migrate the application
 
 Containerization should preserve reproducibility across architectures. The following are practical paths for Dockerfile-based builds and .NET SDK container publish, with guardrails for multi-architecture delivery.
 
@@ -16,7 +16,7 @@ Use the Dockerfile workflow as the default migration path for nopCommerce until 
 
 Run a Dockerfile build with `buildx` from the repository root when you want to preserve the upstream nopCommerce Dockerfile behavior. This is the safest first containerization path because the Dockerfile installs runtime packages used by nopCommerce on Linux, including globalization and image-processing dependencies.
 
-Before you push a multi-architecture image, make sure `buildx` is available, you are logged in to your registry, and your builder can build both requested platforms. If `docker buildx version` fails, install the Docker Buildx plugin for your Docker package before continuing. On an Arm-only VM, the `linux/amd64` build requires emulation or an additional x64 builder node.
+Before you push a multi-architecture image, make sure `buildx` is available, you're logged in to your registry, and your builder can build both requested platforms. If `docker buildx version` fails, install the Docker Buildx plugin for your Docker package before continuing. On an Arm-only VM, the `linux/amd64` build requires emulation or an additional x64 builder node.
 
 ```bash
 docker buildx version
@@ -36,9 +36,9 @@ docker buildx imagetools inspect "$IMAGE"
 
 ### Single architecture .NET SDK publish path
 
-Use SDK publish when you want tighter integration with .NET build settings and fewer custom Docker steps. For nopCommerce, treat this as a validation path until you have confirmed that the generated image includes the Linux native packages your store needs. SDK publish creates the container image, but it does not run `apk add` or `apt-get install` steps like a Dockerfile does.
+Use SDK publish when you want tighter integration with .NET build settings and fewer custom Docker steps. For nopCommerce, treat this as a validation path until you have confirmed that the generated image includes the Linux native packages your store needs. SDK publish creates the container image, but it doesn't run `apk add` or `apt-get install` steps the way a Dockerfile does.
 
-This command publishes an Arm64 image into the local Docker daemon with an explicit repository, tag, and container runtime identifier:
+This command publishes an arm64 image into the local Docker daemon with an explicit repository, tag, and container runtime identifier:
 
 ```bash
 dotnet publish src/Presentation/Nop.Web/Nop.Web.csproj \
@@ -88,13 +88,13 @@ Before choosing the SDK publish path for multi-architecture images, check the SD
 dotnet --version
 ```
 
-If you can't use a .NET SDK version that supports multi-RID container publishing, or if SDK publish does not produce the multi-architecture image index you need, use the `docker buildx build --platform linux/amd64,linux/arm64` workflow instead. 
+If you can't use a .NET SDK version that supports multi-RID container publishing, or if SDK publish doesn't produce the multi-architecture image index you need, use the `docker buildx build --platform linux/amd64,linux/arm64` workflow instead. 
 
 Multi-RID container publishing starts with .NET SDK versions `8.0.405`, `9.0.102`, and `9.0.2xx`. The nopCommerce `release-4.90.3` source pins SDK `9.0.100` in `global.json` with feature-band roll-forward, so confirm the actual SDK selected by CI is new enough before relying on SDK multi-arch publish.
 
 
 ## What you've accomplished and what's next
 
-You've learned about different containerization paths for the .NET application and containerized the app. 
+You've learned about different containerization paths for the .NET application. 
 
 Next, you'll tune application performance. 
