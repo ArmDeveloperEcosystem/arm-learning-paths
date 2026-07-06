@@ -2,6 +2,10 @@
 title: Arm CCA Boot Sync
 description: Learn how to use Arm CCA Boot Sync while launching Arm CCA Realms on an FVP with RME support.
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 60
 
 who_is_this_for: This Learning Path is for developers who want to understand how to use Arm CCA Bootsync.
