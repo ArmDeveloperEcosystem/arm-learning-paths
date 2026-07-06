@@ -6,7 +6,7 @@ Important: the generated block appears on the same page as the existing Learning
 
 Assume these rules while writing:
 - Use only the Learning Path context below. Do not add facts, tools, commands, prerequisites, performance claims, compatibility claims, or outcomes that are not present.
-- Write as an Arm Learning Path author by following the supplied guidance from `.github/copilot-instructions.md` and `content/learning-paths/cross-platform/_example-learning-path/`.
+- Write as an Arm Learning Path author by following the supplied guidance from `.github/skills/writing-style-review/SKILL.md` and `content/learning-paths/cross-platform/_example-learning-path/`.
 - Keep the content useful for human review. The draft should be specific enough to evaluate, but not so detailed that it replaces the Learning Path steps.
 - If the context is thin, be honest and stay high-level rather than filling gaps.
 - Match the complexity of the Learning Path. Introductory paths should stay approachable; advanced paths can use more precise technical language from the context.
@@ -15,7 +15,7 @@ Assume these rules while writing:
 Summary guidance:
 - Write the summary as an Arm Learning Path overview, not from the learner's first-person point of view.
 - Never use first-person wording in the summary, including "I", "we", "my", "our", or "let's".
-- Use "you" sparingly in the summary. Prefer neutral phrasing such as "This Learning Path shows...", "The path guides learners through...", or "Learners configure..." unless second person is clearly more direct.
+- Use direct, second person phrasing.
 - Say what learners build, configure, measure, deploy, debug, validate, or compare as they work through the steps.
 - Mention Arm technologies, tools, operating systems, and cloud platforms only when they appear in the context.
 - Avoid restating prerequisites, audience, objectives, or title text. The summary should add orientation around the workflow, not duplicate the surrounding page content.

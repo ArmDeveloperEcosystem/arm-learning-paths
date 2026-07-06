@@ -66,7 +66,9 @@ generated_summary_faq:
       from Rafay. This releases the associated AWS resources.
 # END generated_summary_faq
 
-author: Jason Andrews
+author:
+    - Jason Andrews
+    - Steve Jordahl
 
 generate_summary_faq: false
 rerun_summary: false

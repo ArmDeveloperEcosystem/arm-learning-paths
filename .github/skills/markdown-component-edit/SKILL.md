@@ -18,7 +18,7 @@ This skill is best when the user highlights text, names a section, or asks for a
 
 ## Workflow
 
-1. Use the user's highlighted, selected, or explicitly named text as the edit target. If the target is ambiguous, ask for the exact text, file, or section before editing. 
+1. Use the user's highlighted, selected, or explicitly named text as the edit target. If the target is ambiguous, ask for the exact text, file, or section before editing. If you've previously read the page, use context and don't re-read it unless there's a change since the last read. 
 2. Inspect nearby Markdown so the new component fits the surrounding flow.
 3. Verify internal links before adding or changing them when practical.
 4. Use `component rules` and the `component-patterns` reference and do one of the following:

@@ -1,7 +1,7 @@
 ---
 # User change
 title: Tune MySQL configuration for performance
-description: Learn how to tune MySQL server parameters for connections, memory, disk flushing, transaction durability, I/O capacity, and lock polling.
+description: Learn how to tune MySQL server parameters for connections, memory, disk flushing, transaction durability, redo logging, I/O capacity, and lock polling.
 
 weight: 4 # 1 is first, 2 is second, etc.
 
@@ -103,6 +103,26 @@ When you override one of the automatically configured variables, MySQL prints a 
 
 Larger redo logs use more disk space and can increase crash recovery time, so test values against both performance and operational requirements.
 
+### Redo log writer threads
+
+For write-heavy workloads, check whether dedicated redo log writer threads are enabled:
+
+```sql
+SHOW VARIABLES LIKE 'innodb_log_writer_threads';
+```
+
+The [`innodb_log_writer_threads`](https://dev.mysql.com/doc/refman/en/innodb-parameters.html#sysvar_innodb_log_writer_threads) parameter controls whether InnoDB uses dedicated log writer threads for redo log write and flush work.
+
+The default behavior changed after MySQL 8.4. In MySQL 8.4, `innodb_log_writer_threads` defaults to `ON`. In MySQL 9.1, the default changed to `ON` when the server has at least `32` available logical processors, and `OFF` otherwise. In current MySQL 9.x releases, the default also accounts for binary logging: it is `ON` when binary logging is enabled and the server has at least `32` available logical processors, `ON` when binary logging is disabled and the server has more than `4` available logical processors, and `OFF` otherwise.
+
+This means the same option file can use different redo log writer behavior depending on the MySQL version, logical processor count, and whether binary logging is enabled. For version-to-version comparisons, record the current value before testing and consider setting it explicitly:
+
+```ini
+innodb_log_writer_threads=ON
+```
+
+Dedicated log writer threads can help high-concurrency systems, especially write-heavy workloads where redo logging is active. For lower-concurrency systems, disabling dedicated log writer threads can perform better, so treat this as a measured tuning option rather than a universal setting.
+
 ### Huge pages
 
 Enable large page support in the MySQL configuration:
@@ -179,7 +199,9 @@ Use the following setting as a starting point for testing lock polling behavior:
 innodb_sync_spin_loops=30
 ```
 
-The [`innodb_sync_spin_loops`](https://dev.mysql.com/doc/refman/en/innodb-parameters.html#sysvar_innodb_sync_spin_loops) parameter controls how many times a thread checks whether an InnoDB mutex is free before yielding execution to another thread.
+The [`innodb_sync_spin_loops`](https://dev.mysql.com/doc/refman/en/innodb-parameters.html#sysvar_innodb_sync_spin_loops) parameter controls how many times a thread checks whether an InnoDB mutex or rw-lock is available before yielding execution to another thread.
+
+This setting applies to internal InnoDB synchronization objects, including the latches that protect storage engine structures such as indexes. It does not control transaction lock behavior, such as shared (`S`), exclusive (`X`), intention shared (`IS`), or intention exclusive (`IX`) locks. Transaction locks enforce SQL isolation semantics. When a transaction lock request conflicts with an existing lock, the transaction waits until the conflicting lock is released; transaction locks do not spin longer because of this parameter.
 
 Profiling MySQL under heavy load on Arm with Linux `perf` can show time spent waiting for locks. Increasing `innodb_sync_spin_loops` can reduce context switching when locks are released quickly, but setting it too high can waste power and delay other useful work. Keep the default value, `30`, unless profiling and measured performance show that a different value helps. For more information, see the MySQL [Configuring Spin Lock Polling documentation](https://dev.mysql.com/doc/refman/en/innodb-performance-spin_lock_polling.html).
 
