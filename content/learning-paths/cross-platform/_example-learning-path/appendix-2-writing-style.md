@@ -193,12 +193,28 @@ Learning Paths are intended for software developers with differing experience le
 
 | Software Development Areas                 | Skills |
 |-------------------------------------       |----------|
-| Embedded and Microcontroller               | Understanding of programming languages such as C, C++ and assembly.  Basic awareness of Linux OS, RTOSes.  Fundamental knowledge of hardware and software architecture (not necessarily Arm) |
+| Embedded and Microcontroller               | <ul><li>Understanding of programming languages such as C, C++ and assembly.</li>  <li>Basic awareness of Linux OS, RTOSes.</li>  <li>Fundamental knowledge of hardware and software architecture (not necessarily Arm)</li></ul> |
 | Server and Cloud                           | <ul><li> Understanding of web services and Linux.</li><li> Basic awareness of containerization and orchestration technologies such as Docker and Kubernetes.</li><li> Proficient in programming languages such as Python and Java.</li></ul> | 
 | Mobile				     | <ul> <li> Experience with software development on mobile platforms such as Android. </li> <li> Experience with mobile development and testing frameworks. </li> </ul> |
 | Desktop and Laptop                         | <ul> <li> Experience with operating systems such as Windows and macOS. </li> <li> Experience with common development frameworks such as .NET and Electron. </li> Proficient in programming languages such as C++, Java and Python. </li> </ul> |
  
+## Use Agent Skills for AI-assisted style compliance
 
+If you're creating a Learning Path with the help of an AI assistant, you can use Agent Skills to check whether your content meets project guidelines. 
 
+Agent Skills are located in the project reporsitory at `.github/skills`. Skills cover Learning Path structure, writing style guidelines, as well as accessibility-related considerations such as alt-text for images. 
 
+A skill is invoked automatically depending on whether your prompt maps to the skill's `description` metadata. For example, to check for style violations on a given page, you can prompt something similar to:
 
+```text
+Review this page in the Learning Path for style. 
+```
+By using words such as "Learning Path" and "style", the prompt invokes the `writing-style-review` skill. The AI assistant returns with a set of style-related suggestions.
+
+To check whether the Learning Path is structurally sound, you can prompt something similar to:
+
+```text
+Review this Learning Path for structure. 
+```
+
+By using words such as "Learning Path" and "structure", the prompt invokes the `learning-path-structure-review` skill. The AI assistant returns with suggestions such as whether the Learning Path is task-oriented and has necessary files and sections. 

@@ -20,6 +20,10 @@ prerequisites:
 
 author: Kieran Hejmadi
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
@@ -58,8 +62,6 @@ further_reading:
         title: Analyze cache behavior with Perf C2C on Arm
         link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/false-sharing-arm-spe/
         type: learning-path
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

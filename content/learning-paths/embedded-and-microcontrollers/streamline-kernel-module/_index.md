@@ -3,7 +3,6 @@ title: Profile the Linux kernel with Arm Streamline
 
 description: Learn how to profile Linux kernel modules using Arm Streamline to identify performance bottlenecks, analyze both out-of-tree and in-tree modules, and use Statistical Profiling Extension (SPE) for deeper insights.
 
-
 minutes_to_complete: 60
 
 who_is_this_for: This is an advanced topic for developers and performance engineers interested in profiling Linux kernel performance.
@@ -22,6 +21,10 @@ prerequisites:
 
 author: Yahya Abouelseoud
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
@@ -34,8 +37,6 @@ tools_software_languages:
     - Performance analysis
 operatingsystems:
     - Linux
-
-
 
 further_reading:
     - resource:
@@ -51,11 +52,10 @@ further_reading:
         link: https://developer.arm.com/Additional%20Resources/Video%20Tutorials/Arm%20Mali%20GPU%20Training%20-%20EP3-3
         type: website
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

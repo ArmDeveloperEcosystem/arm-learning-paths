@@ -10,7 +10,12 @@ learning_objectives:
   - Install Puppet on a SUSE Arm64 C4A instance
   - Verify Puppet by applying a test manifest and confirming successful resource creation on Arm64  
   - Benchmark Puppet by measuring catalog compile time, apply speed, and resource usage on Arm64
+
 author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled  
@@ -52,3 +57,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

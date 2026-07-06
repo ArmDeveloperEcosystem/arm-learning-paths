@@ -18,6 +18,7 @@ test_images:
 test_link: false
 test_maintenance: true
 title: Terraform
+description: Install Terraform on Ubuntu for Arm or Apple Silicon macOS and verify the CLI so you can manage cloud infrastructure as code.
 tool_install: true
 weight: 1
 ---

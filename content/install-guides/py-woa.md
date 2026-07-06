@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Python for Windows on Arm
+description: Install native Python on Windows on Arm, run a test program, and install packages for Python development on Arm devices.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:

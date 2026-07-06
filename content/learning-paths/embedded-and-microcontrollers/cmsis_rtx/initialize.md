@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Initialize the operating system"
+description: Initialize the CMSIS-RTOS2 kernel in the example application and start the main RTOS entry point.
 
 weight: 3 # 1 is first, 2 is second, etc.
 

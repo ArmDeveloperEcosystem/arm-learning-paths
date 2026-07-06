@@ -1,5 +1,6 @@
 ---
 title: Software development considerations
+description: Review software development tools, model formats, and example applications used with the ML Evaluation Kit.
 
 weight: 4
 

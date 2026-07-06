@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Evaluating performance on Arm hardware (Optional)" 
+description: Optionally evaluate the ported workload on Arm hardware and use the results to guide further optimization.
 
 weight: 7 # 1 is first, 2 is second, etc.
 

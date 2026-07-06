@@ -1,6 +1,7 @@
 ---
 # User change
 title: Switching Exception Levels
+description: Modify the bare-metal example to switch Armv8-A exception levels and observe how execution changes on the FVP.
 
 weight: 7 # 1 is first, 2 is second, etc.
 

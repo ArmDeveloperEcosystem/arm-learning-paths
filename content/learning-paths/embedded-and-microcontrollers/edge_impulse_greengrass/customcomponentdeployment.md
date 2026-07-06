@@ -1,5 +1,6 @@
 ---
 title: Deploy the component to your edge device
+description: Deploy the Edge Impulse Greengrass component to the selected Arm edge device and confirm the component is running.
 weight: 8
 
 ### FIXED, DO NOT MODIFY

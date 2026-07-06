@@ -1,5 +1,6 @@
 ---
 title: Device Connect developer model
+description: Review the Device Connect Edge SDK developer model and how capabilities, devices, and applications interact.
 weight: 3
 
 # FIXED, DO NOT MODIFY

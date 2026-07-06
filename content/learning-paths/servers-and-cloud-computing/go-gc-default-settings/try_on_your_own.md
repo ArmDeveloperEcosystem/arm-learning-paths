@@ -1,14 +1,15 @@
 ---
-title: Experiment with optimization ideas
+title: Experiment with garbage collection optimization 
+description: Apply controlled Go code changes to the benchmark and compare results with benchstat to evaluate effects on GC behavior.
 weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Experiment with GC optimizations
+## Make code changes to influence garbage collection
 
-Now that you have a baseline, you can experiment with code changes that influence GC behavior. For each challenge, apply the suggested change to `parsebench/parsebench_test.go`, then re-run the benchmark and compare the results with Benchstat:
+Now that you have a baseline, you can experiment with code changes that influence garbage collection (GC) behavior. Apply one suggested change at a time to `parsebench/parsebench_test.go`, then re-run the benchmark and compare the results with Benchstat:
 
 ```bash
 go test ./parsebench \
@@ -21,7 +22,9 @@ go test ./parsebench \
 benchstat default_gc_benchmark.txt modified_gc_benchmark.txt
 ```
 
-Benchstat produces a side-by-side comparison. A negative percentage in `sec/op`, `B/op`, `allocs/op`, or `stw-sec/op` means the change reduced cost. A `~` means the difference is not statistically significant. For example, a successful reduction in allocation rate looks similar to this:
+Benchstat produces a side-by-side comparison. A negative percentage in `sec/op`, `B/op`, `allocs/op`, or `stw-sec/op` means the change reduced cost. A `~` means the difference is not statistically significant. 
+
+For example, a successful reduction in allocation rate is similar to:
 
 ```output
                    │ default_gc_benchmark.txt │    modified_gc_benchmark.txt    │
@@ -33,15 +36,11 @@ ParseAndAllocate-4               169.5µ ± 0%   142.3µ ± 1%  -16.05% (p=0.000
 ParseAndAllocate-4               160.0Ki ± 0%   80.0Ki ± 0%  -50.00% (p=0.000)
 ```
 
-## Challenge 1
+### Reduce the payload size
 
-You just found out that the payload size this benchmark is intended to represent is actually only 128 records instead of 2048. What changes can you make to test whether a smaller workload affects GC frequency, pause times, and overall application performance?
+Assume that the payload size this benchmark is intended to represent is only 512 records instead of 2048. 
 
-### Idea: Reduce the payload size
-
-### How
-
-**Before**
+To test whether a smaller workload affects GC frequency, pause times, and overall application performance, reduce the payload size from the following:
 
 ```go
 payload := strings.Repeat(
@@ -50,7 +49,7 @@ payload := strings.Repeat(
 )
 ```
 
-**After**
+To the following:
 
 ```go
 payload := strings.Repeat(
@@ -59,21 +58,13 @@ payload := strings.Repeat(
 )
 ```
 
-### Why
+Reducing the payload size creates fewer temporary objects and less garbage each iteration, improving application performance.
 
-A smaller payload creates fewer temporary objects and less garbage each iteration.
+### Move payload split logic outside the benchmark loop
 
----
+Assume that after profiling the application, you discover that the input payload rarely changes between requests. 
 
-## Challenge 2
-
-After profiling the application, you discover that the input payload rarely changes between requests. What modifications can you make to reuse preprocessing work and determine whether reducing repeated allocations improves GC behavior and throughput?
-
-### Idea: Move payload split logic outside the benchmark loop
-
-### How
-
-**Before**
+To reuse preprocessing work, update split logic from the following:
 
 ```go
 for i := 0; i < b.N; i++ {
@@ -85,7 +76,7 @@ for i := 0; i < b.N; i++ {
 }
 ```
 
-**After**
+To the following:
 
 ```go
 parts := strings.Split(payload, ";")
@@ -97,21 +88,13 @@ for i := 0; i < b.N; i++ {
 }
 ```
 
-### Why
+By making this change, you can avoid repeatedly allocating the same slice of records on every iteration. Reducing repeated allocations improves GC behavior and throughput. 
 
-This avoids repeatedly allocating the same slice of records on every iteration.
+### Reuse the output slice
 
----
+The benchmark currently creates a new output buffer for every operation, but production code processes millions of requests using the same worker. 
 
-## Challenge 3
-
-The benchmark currently creates a new output buffer for every operation, but production code processes millions of requests using the same worker. How can you modify the benchmark to reuse memory and evaluate the impact on GC activity and memory consumption?
-
-### Idea: Reuse the output slice
-
-### How
-
-**Before**
+To evaluate the impact on GC activity and memory consumption, update the code from the following:
 
 ```go
 for i := 0; i < b.N; i++ {
@@ -121,7 +104,7 @@ for i := 0; i < b.N; i++ {
 }
 ```
 
-**After**
+To the following:
 
 ```go
 out := make([]string, 0, len(parts))
@@ -133,21 +116,13 @@ for i := 0; i < b.N; i++ {
 }
 ```
 
-### Why
+By modifying the benchmark to reuse the backing array, you can reduce allocations and GC pressure.
 
-Reusing the backing array reduces allocations and GC pressure.
+### Replace SplitN() with IndexByte()
 
----
+Assume a CPU profile shows that string parsing is one of the hottest code paths in the application. 
 
-## Challenge 4
-
-A CPU profile shows that string parsing is one of the hottest code paths in the application. What changes can you make to reduce temporary allocations during parsing and measure whether this reduces GC overhead?
-
-### Idea: Replace SplitN() with IndexByte()
-
-### How
-
-**Before**
+To reduce temporary allocations during parsing, update the code from the following:
 
 ```go
 fields := strings.SplitN(part, "=", 2)
@@ -160,7 +135,7 @@ if len(fields) == 2 {
 }
 ```
 
-**After**
+To the following:
 
 ```go
 idx := strings.IndexByte(part, '=')
@@ -176,21 +151,13 @@ if idx >= 0 {
 }
 ```
 
-### Why
+By making this update, you can avoid allocating a temporary `[]string` for every record processed.
 
-This avoids allocating a temporary `[]string` for every record processed.
+### Avoid creating new strings in the hot loop
 
----
+Assume product requirements change and the application no longer needs to generate derived `"key:length"` strings. 
 
-## Challenge 5
-
-Product requirements change and the application no longer needs to generate derived `"key:length"` strings. What modifications can you make to avoid unnecessary string allocations and test their effect on garbage collection performance?
-
-### Idea: Avoid creating new strings in the hot loop
-
-### How
-
-**Before**
+To avoid unnecessary string allocations in such a scenario, update the code from the following:
 
 ```go
 out = append(
@@ -199,7 +166,7 @@ out = append(
 )
 ```
 
-**After**
+To the following:
 
 ```go
 out = append(
@@ -208,7 +175,10 @@ out = append(
 )
 ```
 
-### Why
+By storing existing strings or simple values instead of building `"key:length"` strings, you can reduce allocations.
 
-Instead of building `"key:length"` strings, store existing strings or simpler values to reduce allocations.
+## What you've accomplished
 
+You've now experimented with changing payload size, split logic, slice reuse, and string parsing to influence GC behavior.
+
+You can continue experimenting with code changes to optimize GC behavior for your Go applications on Arm-based compute.

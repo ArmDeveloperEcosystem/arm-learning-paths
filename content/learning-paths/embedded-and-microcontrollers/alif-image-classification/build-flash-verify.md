@@ -1,5 +1,6 @@
 ---
 title: Build, flash, and verify inference
+description: Build the Alif Ensemble firmware, flash it to the E8 DevKit, and verify image classification output over the serial console.
 weight: 8
 
 layout: "learningpathall"

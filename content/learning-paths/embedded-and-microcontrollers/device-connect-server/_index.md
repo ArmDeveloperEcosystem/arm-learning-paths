@@ -24,6 +24,10 @@ author:
     - Kavya Sri Chennoju
     - Annie Tallund
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: Libraries

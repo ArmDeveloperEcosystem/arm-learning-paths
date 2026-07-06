@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Build a smart device prototype"
+description: Build the first Raspberry Pi Pico motion detection prototype by wiring the PIR sensor and LED and uploading the initial Arduino sketch.
 
 weight: 6 # 1 is first, 2 is second, etc.
 

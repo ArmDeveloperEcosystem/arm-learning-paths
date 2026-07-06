@@ -12,12 +12,15 @@ learning_objectives:
     - Build a firmware container image.
     - Build the hybrid-runtime components.
 
-
 prerequisites:
     - A valid account with [Arm Virtual Hardware](https://app.avh.arm.com/login)
     - An Arm Linux host machine (if you want to build your own runtime and container image)
 
 author: Basma El Gaabouri
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -33,7 +36,6 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
-
 further_reading:
     - resource:
         title: K3s Quick start Guide 
@@ -48,11 +50,10 @@ further_reading:
         link: https://github.com/smarter-project/hybrid-runtime/tree/main
         type: website
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

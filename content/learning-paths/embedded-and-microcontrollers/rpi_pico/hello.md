@@ -1,6 +1,7 @@
 ---
 # User change
 title: "How do I run Hello World for Raspberry Pi Pico?"
+description: Build and run the Hello World example for Raspberry Pi Pico to verify the SDK and board setup.
 
 weight: 3 # 1 is first, 2 is second, etc.
 

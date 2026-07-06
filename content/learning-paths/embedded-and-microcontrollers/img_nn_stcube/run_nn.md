@@ -1,6 +1,7 @@
 ---
 # User change
 title: Run the image classification NN model on STM32
+description: Run the image classification model on the STM32 development board and verify inference results from the deployed firmware.
 
 weight: 5 # 1 is first, 2 is second, etc.
 

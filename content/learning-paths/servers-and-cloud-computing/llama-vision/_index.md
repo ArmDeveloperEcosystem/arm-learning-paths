@@ -21,6 +21,10 @@ prerequisites:
 
 author: Nobel Chowdary Mandepudi
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Advanced
 armips:
@@ -35,7 +39,7 @@ tools_software_languages:
     - PyTorch
     - Streamlit
     - Google Axion
-   
+
 further_reading:
     - resource:
         title: Getting started with Llama
@@ -50,11 +54,10 @@ further_reading:
         link: https://blogs.oracle.com/ai-and-datascience/post/democratizing-generative-ai-with-cpu-based-inference
         type: blog
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

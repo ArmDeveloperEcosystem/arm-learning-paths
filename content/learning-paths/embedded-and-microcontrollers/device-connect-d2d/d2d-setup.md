@@ -1,5 +1,6 @@
 ---
 title: Set up D2D communication between a sensor and a monitor
+description: Set up Device Connect for a simulated sensor and monitor so the devices can discover each other and exchange data locally.
 weight: 4
 
 # FIXED, DO NOT MODIFY

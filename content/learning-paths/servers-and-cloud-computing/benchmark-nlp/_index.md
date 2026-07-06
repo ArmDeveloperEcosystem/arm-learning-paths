@@ -14,7 +14,57 @@ learning_objectives:
 prerequisites:
     - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server.
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-30T21:36:51Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: a4cf1d9161b3a32e29694415762eda419752e1c3144662d5e131b6553f0a58e3
+  summary_generated_at: '2026-06-30T21:36:51Z'
+  summary_source_hash: a4cf1d9161b3a32e29694415762eda419752e1c3144662d5e131b6553f0a58e3
+  faq_generated_at: '2026-06-30T21:36:51Z'
+  faq_source_hash: a4cf1d9161b3a32e29694415762eda419752e1c3144662d5e131b6553f0a58e3
+  summary: >-
+    You'll deploy Hugging Face Sentiment Analysis models
+    with PyTorch on Arm servers and measure how they perform. Starting from a working Ubuntu
+    22.04 Arm environment, you'll run three NLP models with the Sentiment Analysis
+    pipeline, record baseline results, and enable BFloat16 fast math kernels to assess the
+    impact on inference performance. By
+    the end, you'll compare before-and-after measurements to confirm the effect of BFloat16
+    on this workload.
+  faqs:
+  - question: Which environment do the instructions assume?
+    answer: >-
+      The instructions target an Arm server running Ubuntu 22.04 LTS. They've been tested on
+      AWS Graviton3 (c7g) instances.
+  - question: What system resources should I provision before running the steps?
+    answer: >-
+      Use an Arm server instance with at least four CPU cores and 8 GB of RAM. This capacity supports
+      running the three sentiment analysis models and collecting measurements.
+  - question: Which framework and model source will I use in this Learning Path?
+    answer: >-
+      You'll uses PyTorch to run NLP Sentiment Analysis models sourced from Hugging Face.
+  - question: How should I measure the performance uplift from BFloat16 fast math kernels?
+    answer: >-
+      First, run the models to collect a baseline using the same Sentiment Analysis pipeline.
+      Then enable BFloat16 fast math kernels on supported Arm Neoverse-based AWS Graviton3 processors,
+      rerun the same workload, and compare measurements.
+  - question: Which models will I evaluate and what should I have at the end?
+    answer: >-
+      You'll evaluate three NLP models with the Sentiment Analysis pipeline. By the end, you
+      should have deployed the models on your Arm server and recorded baseline and BFloat16-enabled
+      performance results for comparison.
+# END generated_summary_faq
+
 author: Pareena Verma
+
+generate_summary_faq: false
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -32,7 +82,7 @@ tools_software_languages:
     - Python
     - PyTorch
     - Hugging Face
-    
+
 further_reading:
     - resource:
         title: Hugging Face Documentation
@@ -51,11 +101,10 @@ further_reading:
         link: https://pytorch.org/docs/stable/index.html
         type: documentation
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+
