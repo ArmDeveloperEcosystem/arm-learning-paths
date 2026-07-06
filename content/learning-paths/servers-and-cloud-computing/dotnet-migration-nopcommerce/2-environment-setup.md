@@ -13,7 +13,7 @@ Set up an Arm Cobalt environment first, then keep your toolchain and runtime con
 
 Start with the [Azure Cobalt Learning Path](https://learn.arm.com/learning-paths/servers-and-cloud-computing/cobalt/) and complete VM provisioning.
 
-This path was validated with Ubuntu 24.04 LTS on Azure Cobalt in `westus2` (example VM size: `Standard_D2ps_v6`, 2 vCPUs).
+The Learning Path was validated with Ubuntu 24.04 LTS on Azure Cobalt in `westus2` (example VM size: `Standard_D2ps_v6`, 2 vCPUs).
 
 ### Install tools on the Azure virtual machine
 
