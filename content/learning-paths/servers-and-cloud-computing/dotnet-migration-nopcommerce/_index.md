@@ -46,7 +46,7 @@ generated_summary_faq:
   faqs:
   - question: How should I choose the Azure VM configuration for the baseline?
     answer: >-
-      Provision an Azure Cobalt environment as described in the Azure Cobalt Learning Path and
+      Provision an Azure Cobalt-based environment as described in the [Azure Cobalt Learning Path](https://learn.arm.com/learning-paths/servers-and-cloud-computing/cobalt/) and
       keep the toolchain and runtime configuration stable across runs. The flow was validated
       with Ubuntu 24.04 LTS in `westus2` on an example size of `Standard_D2ps_v6`.
   - question: What should I record when pinning the nopCommerce source?
