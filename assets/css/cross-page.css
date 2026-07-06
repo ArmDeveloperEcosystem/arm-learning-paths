@@ -46,6 +46,19 @@
 /* UNIVERSAL */
 /****************************************************/
 
+/* Local ADS v5 accent experiment */
+:root {
+    --lp-accent-primary: #6023DE;   /* ADS UI Violet 65 */
+    --lp-accent-secondary: #D1BAFC; /* ADS UI Violet 04 */
+    --lp-hover-text: #D9D9D9;       /* ADS UI Gray 35 */
+
+    /* Keep existing site styles working while testing the v5 palette. */
+    --arm-green: var(--lp-accent-primary);
+    --arm-light-blue: var(--lp-accent-secondary);
+    --arm-web-safe-blue: var(--lp-accent-secondary);
+    --arm-blue: var(--lp-accent-secondary);
+}
+
 /* ADS FIXES */
 /***************************************************/
 /* Font size hardcoding to fix ADS */
@@ -87,47 +100,50 @@ ads-button {
     /* primary */
     --ads-button-background-color-primary-hover: var(--arm-green);
     --ads-button-border-color-primary-hover: var(--arm-green);
+    --ads-button-color-primary-hover: var(--lp-hover-text);
 
     /* secondary */
     --ads-button-border-color-secondary-hover: var(--arm-green);
-    --ads-button-color-secondary-hover: var(--arm-green);
+    --ads-button-color-secondary-hover: var(--lp-hover-text);
 
     /* tertiary */
     --ads-button-border-color-tertiary-hover: var(--arm-green);
-    --ads-button-color-tertiary-hover: var(--arm-green);
+    --ads-button-color-tertiary-hover: var(--lp-hover-text);
 }
 ads-cta-button {
       /* primary */
       --ads-cta-button-background-color-primary-hover: var(--arm-green);
       --ads-cta-button-border-color-primary-hover: var(--arm-green);
+      --ads-cta-button-color-primary-hover: var(--lp-hover-text);
   
       /* secondary */
       --ads-cta-button-border-color-secondary-hover: var(--arm-green);
-      --ads-cta-button-color-secondary-hover: var(--arm-green);
+      --ads-cta-button-color-secondary-hover: var(--lp-hover-text);
   
       /* tertiary */
       --ads-cta-button-border-color-tertiary-hover: var(--arm-green);
-      --ads-cta-button-color-tertiary-hover: var(--arm-green);  
+      --ads-cta-button-color-tertiary-hover: var(--lp-hover-text);
 }
 
 /* button, form submit syntax */
 input[type="submit"]:hover {
     background-color: var(--arm-green);
     border-color: var(--arm-green);
+    color: var(--lp-hover-text);
     box-shadow: none;
 }
 ads-tag {
     --ads-tag-border-color-hover: var(--arm-green);
-    --ads-tag-color-hover: var(--arm-green);
+    --ads-tag-color-hover: var(--lp-hover-text);
 }
 
 /* Remove text decorations on all a links when highlighted */
 a:hover {
     text-decoration: none;
-    color: var(--arm-green);
+    color: var(--lp-hover-text);
 }
 ads-cta-link {
-    --ads-cta-link-color-hover: var(--arm-green);
+    --ads-cta-link-color-hover: var(--lp-hover-text);
 }
 ads-search {
     --ads-search-border-color-hover: var(--arm-green);
@@ -194,7 +210,6 @@ arm-top-navigation:not(:defined) {
     background-color: #010101;  
 }
 
-
 /* Fix Masthead Height */
 #expanded-masthead  {
         background-color: transparent;
@@ -218,9 +233,26 @@ ads-masthead {
 
 
 ads-breadcrumbs {
-    --ads-breadcrumb-color: var(--arm-green);
-    --ads-breadcrumbs-link-color: var(--arm-green);
-    --ads-breadcrumbs-link-color-visited: var(--arm-green);
+    --ads-breadcrumb-color: var(--lp-accent-secondary);
+    --ads-breadcrumb-current-color: white;
+    --ads-breadcrumb-hover-color: var(--lp-hover-text);
+    --ads-breadcrumbs-link-color: var(--lp-accent-secondary);
+    --ads-breadcrumbs-link-color-hover: var(--lp-hover-text);
+    --ads-breadcrumbs-link-color-visited: var(--lp-accent-secondary);
+    --ads-breadcrumbs-current-color: white;
+}
+
+#breadcrumb-element ads-breadcrumb[current] {
+    --ads-breadcrumb-color: white;
+    --ads-breadcrumb-current-color: white;
+    --ads-breadcrumbs-current-color: white;
+    color: white;
+}
+
+#breadcrumb-element ads-breadcrumb:not([current]):hover {
+    --ads-breadcrumb-color: var(--lp-hover-text);
+    --ads-breadcrumbs-link-color: var(--lp-hover-text);
+    color: var(--lp-hover-text);
 }
 
 
@@ -251,8 +283,8 @@ ads-breadcrumbs {
     border-style: solid;
     border-width: 1px;
     border-radius: 0px;
-    border-color: rgba(149, 214, 0, 0.25); /* var(--arm-green) with 25% transparency */
-    border-color: rgba(0, 193, 222, 0.25); /* var(--arm-light-blue) with 25% transparency */
+    border-color: rgba(96, 35, 222, 0.25); /* var(--lp-accent-primary) with 25% transparency */
+    border-color: rgba(209, 186, 252, 0.25); /* var(--lp-accent-secondary) with 25% transparency */
 
     padding-left: 4px;
     padding-right: 4px;
@@ -296,7 +328,7 @@ ads-breadcrumbs {
     margin: -1px;
     z-index: -1;
     border-radius: inherit;
-    background: linear-gradient(90deg, #95D629, #20C1DE);
+    background: linear-gradient(90deg, var(--lp-accent-primary), var(--lp-accent-secondary));
     opacity: 0;
     transition: opacity 0.3s ease; 
 }
@@ -323,7 +355,7 @@ ads-breadcrumbs {
     margin: -2px;
     z-index: -1;
     border-radius: inherit;
-    background: linear-gradient(90deg, #95D629, #20C1DE );
+    background: linear-gradient(90deg, var(--lp-accent-primary), var(--lp-accent-secondary));
     opacity: 0;
     transition: opacity 0.3s ease; 
 }
@@ -381,7 +413,7 @@ html[theme='light'] body {
 /* Mobile background */
 @media (max-width: 768px) {
     html[theme='dark'] body {
-        background-image: url("/img/bg-img-736x800.webp"); 
+        background-image: url("/img/bg-img-736x800-purple.webp");
         background-color: var(--arm-color-footing);      
         background-position: 0% 100%;
         background-attachment: fixed;
@@ -391,7 +423,7 @@ html[theme='light'] body {
 /* Laptop background */
 @media (min-width: 768px) {
     html[theme='dark'] body {
-        background-image: url("/img/bg-img-1920x1600.webp");
+        background-image: url("/img/bg-img-1920x1600-purple.webp");
         background-color: var(--arm-color-footing);      
         background-position: 0% 100%;
         background-attachment: fixed;
@@ -402,7 +434,7 @@ html[theme='light'] body {
 /* Large Monitor background */
 @media (min-width: 1400px) {
     html[theme='dark'] body {
-        background-image: url("/img/bg-img-2500x1700.webp");
+        background-image: url("/img/bg-img-2500x1700-purple.webp");
         background-color: var(--arm-color-footing);      
         background-position: 0% 100%;
         background-attachment: fixed;
