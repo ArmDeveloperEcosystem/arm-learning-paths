@@ -11,9 +11,9 @@ layout: learningpathall
 
 ### Opening the port for the Minecraft server
 
-Before you connect to the Minecraft server, you will change the network policy to allow clients to
-connect to the Minecraft server over TCP port number 25565. To do this, you need to modify the
-networking settings for your instance in the OCI dashboard.
+Before you connect to the Minecraft server, you will change the network policy to allow clients
+to connect to the Minecraft server over TCP port number 25565. To do this, you need to modify
+the networking settings for your instance in the OCI dashboard.
 
 1. On the OCI Instances page, choose your Minecraft server instance.
 2. In the **Networking** tab, click on the subnet name:
@@ -26,27 +26,26 @@ networking settings for your instance in the OCI dashboard.
    connect), and set the **Destination Port Range** field to 25565.
    ![OCI Ingress Rules dialog with source CIDR 0.0.0.0/0 and destination port 25565#center](open_minecraft_port.png "Configure an Ingress rule to open port 25565")
 
-You will also need to update the instance's local firewall to allow connections to port 25565 on your instance.
-Reconnect to your instance with SSH, and run the following commands on Oracle Linux:
+You will also need to update the instance's local firewall to allow connections to port 25565 on 
+your instance. Reconnect to your instance with SSH, and run the following commands:
 ```
 sudo firewall-cmd --permanent --add-port=25565/tcp
 sudo firewall-cmd --reload
 ```
-or the following commands on Ubuntu:
-```
-sudo ufw allow 25565/tcp
-sudo ufw reload
-```
 
-You should now be able to run your Minecraft server on the OCI instance, then start your client, log in as
-usual, and connect to your brand new server!
+You should now be able to run your Minecraft server on the OCI instance, then start your client
+on your laptop or desktop., You will first be asked to log in with your Microsoft or Mojang account.
+Use the credentials you created for your Microsoft account.
 
 ### Connecting to the server from the Minecraft client
 
-1. Start your Minecraft client and log in as usual.
-2. Choose **Multiplayer** mode - read and click through the warning that third party servers are not operated
-by Mojang.
-3. To add your server to the menu of available servers, choose **Add server**, name your server
+1. Before connecting to the server with the client for the first time, you will need to
+[register for a Microsoft account](https://www.minecraft.net/en-us/download).
+2. Start your Minecraft client and log in with your Microsoft account credentials.
+3. Start the "Minecraft Java edition" client from the launcher.
+   ![Minecraft launcher screen](minecraft_launcher.png)
+4. Choose **Multiplayer** mode - read and click through the warning that third party servers are not operated by Mojang.
+5. To add your server to the menu of available servers, choose **Add server**, name your server
 something meaningful ("My OCI server" for example) and put the IP address of your instance into the
 **Server Address** field:
    ![Minecraft multiplayer server dialog showing Server Name and Server Address fields filled in#center](configuring_new_minecraft_server.png "Add your OCI instance public IP address to the Server Address field")
