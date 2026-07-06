@@ -79,6 +79,6 @@ The `docker exec` command should print `CREATE EXTENSION`. If it prints `NOTICE:
 
 ## What you've accomplished and what's next
 
-You've set up an Arm-based environment by creating a Microsoft Azure VM powered by Cobalt 100 and installing the toolchain necessary for migration. 
+You've set up an Arm-based environment by creating a Microsoft Azure VM powered by Cobalt 100 with Docker, .NET 9, and PostgreSQL ready for nopCommerce validation. 
 
 Next, you'll create a reproducible baseline to use for benchmarking.

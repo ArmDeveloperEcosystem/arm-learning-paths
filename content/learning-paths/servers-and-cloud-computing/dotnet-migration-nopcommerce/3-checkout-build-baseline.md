@@ -236,7 +236,7 @@ This baseline process becomes the control for every later tuning or code-change 
 
 ## What you've accomplished and what's next
 
-You've now created a baseline before migrating the application. 
+You've now pinned the nopCommerce source, verified the build, installed the app, and captured `arm_before.json` as your endpoint baseline.
 
 Next, you'll audit dependencies before migration. 
 

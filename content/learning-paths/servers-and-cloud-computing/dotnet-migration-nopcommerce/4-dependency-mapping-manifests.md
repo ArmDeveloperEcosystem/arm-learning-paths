@@ -71,6 +71,6 @@ Assume the app depends on library A, library A depends on library B, library B i
 
 ## What you've accomplished and what's next
 
-You've reviewed application dependencies to understand what can change when you migrate to Arm.
+You've now mapped direct and transitive dependencies, generated an SBOM, and checked packages for native payloads that could affect Arm deployment.
 
 Next, you'll explore options to containerize and migrate the application.

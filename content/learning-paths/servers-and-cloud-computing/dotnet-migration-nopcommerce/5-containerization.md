@@ -96,6 +96,6 @@ Multi-RID container publishing starts with .NET SDK versions `8.0.405`, `9.0.102
 
 ## What you've accomplished and what's next
 
-You've learned about different containerization paths for the .NET application. 
+You've now compared the Dockerfile and .NET SDK publish paths and identified which container workflow to validate first for nopCommerce.
 
 Next, you'll tune application performance. 
