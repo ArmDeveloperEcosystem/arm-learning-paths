@@ -1,5 +1,5 @@
 ---
-title: Migrate a .NET application (nopCommerce) to Azure Cobalt 100
+title: Migrate a .NET nopCommerce application to Azure Cobalt 100
     
 minutes_to_complete: 75
 

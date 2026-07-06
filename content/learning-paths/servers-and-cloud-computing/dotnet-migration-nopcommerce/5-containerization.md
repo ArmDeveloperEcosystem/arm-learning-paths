@@ -1,16 +1,18 @@
 ---
-title: Containerize the application
+title: Choose between options to containerize the application
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-# Containerize the application
+## Containerize the application
 
-Containerization should preserve reproducibility across architectures. This page shows practical paths for Dockerfile-based builds and .NET SDK container publish, with guardrails for multi-architecture delivery.
+Containerization should preserve reproducibility across architectures. The following are practical paths for Dockerfile-based builds and .NET SDK container publish, with guardrails for multi-architecture delivery.
 
-### 1. Dockerfile path
+Use the Dockerfile workflow as the default migration path for nopCommerce until your SDK-published image has the same Linux runtime dependencies and smoke-test results. Use SDK publish when you want MSBuild-owned image metadata and have a repeatable plan for the native packages that the Dockerfile previously installed.
+
+### Dockerfile path
 
 Run a Dockerfile build with `buildx` from the repository root when you want to preserve the upstream nopCommerce Dockerfile behavior. This is the safest first containerization path because the Dockerfile installs runtime packages used by nopCommerce on Linux, including globalization and image-processing dependencies.
 
@@ -32,7 +34,7 @@ docker buildx build --platform linux/amd64,linux/arm64 -t "$IMAGE" --push .
 docker buildx imagetools inspect "$IMAGE"
 ```
 
-### 2. .NET SDK publish path (single architecture)
+### Single architecture .NET SDK publish path
 
 Use SDK publish when you want tighter integration with .NET build settings and fewer custom Docker steps. For nopCommerce, treat this as a validation path until you have confirmed that the generated image includes the Linux native packages your store needs. SDK publish creates the container image, but it does not run `apk add` or `apt-get install` steps like a Dockerfile does.
 
@@ -55,7 +57,7 @@ docker image inspect nopcommerce:arm64-test --format '{{.Architecture}}'
 
 The expected output is `arm64`.
 
-### 3. .NET SDK multi-arch path
+### Multi-arch .NET SDK publish path
 
 Define runtime identifiers and multi-arch container runtime identifiers in the project file, then publish once. Add this metadata only after you have decided where nopCommerce's Linux runtime dependencies will live. If you use SDK publish for production, move those dependencies into a custom base image or another repeatable image-build step before replacing the Dockerfile workflow.
 
@@ -78,7 +80,7 @@ dotnet publish src/Presentation/Nop.Web/Nop.Web.csproj -c Release /t:PublishCont
 
 This is the scalable path for one image definition across both architectures, but the generated image still needs the same smoke test as the Dockerfile image: start the container, connect it to PostgreSQL, and verify storefront routes before you promote it.
 
-## SDK version guardrail
+#### SDK version guardrail
 
 Before choosing the SDK publish path for multi-architecture images, check the SDK version used by CI and by developer workstations:
 
@@ -86,8 +88,13 @@ Before choosing the SDK publish path for multi-architecture images, check the SD
 dotnet --version
 ```
 
-If you cannot use a .NET SDK version that supports multi-RID container publishing, or if SDK publish does not produce the multi-architecture image index you need, use the `docker buildx build --platform linux/amd64,linux/arm64` workflow instead. Multi-RID container publishing starts with .NET SDK versions 8.0.405, 9.0.102, and 9.0.2xx. The nopCommerce `release-4.90.3` source pins SDK `9.0.100` in `global.json` with feature-band roll-forward, so confirm the actual SDK selected by CI is new enough before relying on SDK multi-arch publish.
+If you can't use a .NET SDK version that supports multi-RID container publishing, or if SDK publish does not produce the multi-architecture image index you need, use the `docker buildx build --platform linux/amd64,linux/arm64` workflow instead. 
 
-## Recommendation
+Multi-RID container publishing starts with .NET SDK versions `8.0.405`, `9.0.102`, and `9.0.2xx`. The nopCommerce `release-4.90.3` source pins SDK `9.0.100` in `global.json` with feature-band roll-forward, so confirm the actual SDK selected by CI is new enough before relying on SDK multi-arch publish.
 
-Use the Dockerfile workflow as the default migration path for nopCommerce until your SDK-published image has the same Linux runtime dependencies and smoke-test results. Use SDK publish when you want MSBuild-owned image metadata and have a repeatable plan for the native packages that the Dockerfile previously installed.
+
+## What you've accomplished and what's next
+
+You've learned about different containerization paths for the .NET application and containerized the app. 
+
+Next, you'll tune application performance. 

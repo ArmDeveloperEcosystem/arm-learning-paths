@@ -1,18 +1,18 @@
 ---
-title: Build and baseline
+title: Create an Arm baseline before optimization
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-# Build and baseline
+## Build and baseline
 
 Create a reproducible Arm baseline before optimization work. This page pins source, verifies a clean build, and captures a representative endpoint baseline so later changes can be measured against a known control.
 
-## Clone and pin the source
+### Clone and pin the source
 
-Pinning the exact tag and commit avoids silent drift in dependencies and behavior. Run these commands on the Cobalt VM. The later commands assume you are in the `nopCommerce` repository root unless a section says otherwise.
+Pinning the exact tag and commit avoids silent drift in dependencies and behavior. Run the following commands on the Cobalt virtual machine (VM):
 
 ```bash
 git clone https://github.com/nopSolutions/nopCommerce.git
@@ -21,6 +21,7 @@ git fetch --tags --prune
 git checkout release-4.90.3
 git rev-parse --short=10 HEAD   # expect 9beda11c42
 ```
+The later commands assume you're in the `nopCommerce` repository root unless stated otherwise.
 
 If you open a new terminal later, return to the same repository root before running commands:
 
@@ -28,9 +29,9 @@ If you open a new terminal later, return to the same repository root before runn
 cd ~/nopCommerce  # replace with your clone path if different
 ```
 
-## Restore and build on Arm
+### Restore and build on Arm
 
-Run the restore and build on the Arm-based VM to establish a native Arm baseline. Restoring first separates package resolution problems from compilation problems, and `--no-restore` makes the build validate the already restored dependency graph.
+Run restore and build on the Arm-based VM to establish a native Arm baseline. Restoring first separates package resolution problems from compilation problems, and `--no-restore` makes the build validate the already restored dependency graph.
 
 ```bash
 # Restore dependencies first so build failures are easier to triage.
@@ -40,7 +41,7 @@ dotnet restore src/Presentation/Nop.Web/Nop.Web.csproj
 dotnet build src/Presentation/Nop.Web/Nop.Web.csproj -c Release --no-restore
 ```
 
-## Start and install nopCommerce
+### Start and install nopCommerce
 
 Start the app locally and complete installer setup with PostgreSQL. Run this command in one terminal and leave it running; `dotnet run` hosts the web application and keeps the terminal attached to the server logs.
 
@@ -73,9 +74,9 @@ curl -s -o /dev/null -w 'install=%{http_code}\n' http://127.0.0.1:5000/install
 
 Expected after successful install: `root=200`, `install=302`.
 
-## Baseline methodology
+### Run the baseline
 
-Do not benchmark `/install`. Baseline stable storefront paths first, then add cart and attribute-change routes only after you know the valid product IDs, attribute IDs, request method, and anti-forgery token behavior for your installed store.
+Don't benchmark `/install`. Baseline stable storefront paths first, then add cart and attribute-change routes only after you know the valid product IDs, attribute IDs, request method, and anti-forgery token behavior for your installed store.
 
 - `/`
 - `/search/`
@@ -211,7 +212,7 @@ python3 test_nopcommerce_endpoints.py \
 
 The command prints the per-route summary and writes the raw measurements to `arm_before.json`. Keep that JSON file unchanged; it is the baseline artifact used by the tuning step.
 
-## Baseline quality rules
+#### Baseline quality rules
 
 Use these rules before you compare any optimization result:
 
@@ -221,3 +222,11 @@ Use these rules before you compare any optimization result:
 - Capture raw JSON for every run and compare medians, not single outliers.
 
 This baseline process becomes the control for every later tuning or code-change decision.
+
+## What you've accomplished and what's next
+
+You've now created a baseline before migrating the application. 
+
+Next, you'll make note of dependencies before migration. 
+
+

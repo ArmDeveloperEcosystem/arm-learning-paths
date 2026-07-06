@@ -1,16 +1,16 @@
 ---
-title: Performance tuning on Cobalt
+title: Tune the performance of the .NET application on Azure
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-# Performance tuning on Cobalt
+## Apply performance tuning changes
 
 Treat tuning as an experiment pipeline, not a one-shot tweak. On Arm, apply changes in a controlled sequence, measure with fixed workloads, and keep only optimizations that repeatedly improve your target metrics.
 
-## Tuned run configuration
+### Configure a tuned run
 
 Start with a conservative runtime profile that is commonly effective for server workloads. Keep these settings outside the application code at first so you can switch profiles without rebuilding.
 
@@ -35,7 +35,7 @@ dotnet run -c Release --no-build --urls http://0.0.0.0:5000
 
 Increase `DOTNET_ThreadPool_ForceMinWorkerThreads` only when traces or load-test data show thread-pool starvation. Keep `DOTNET_EnableDiagnostics=0` for final measurement runs only; remove it when you need `dotnet-trace`, `dotnet-counters`, or profiler-based evidence.
 
-### Optional spin-wait experiment for .NET 8, 9, and 10
+#### (Optional) Run spin-wait experiment for .NET 8, 9, and 10
 
 If the workload burns CPU while waiting for short-lived thread-pool work, test disabling the thread-pool unfair semaphore spin limit:
 
@@ -45,7 +45,7 @@ export DOTNET_ThreadPool_UnfairSemaphoreSpinLimit=0
 
 Treat this as an experiment, not a default. Turning off spin waiting can reduce wasted CPU on small instances or oversubscribed containers, but it can also increase wake-up latency and reduce peak throughput. Validate it separately from the base tuned profile by changing only this variable between trials.
 
-### Tiered PGO and ReadyToRun optimize different phases
+### Optimize tiered PGO and ReadyToRun 
 
 `DOTNET_TieredPGO=1` and `DOTNET_ReadyToRun=1` are not the same optimization:
 
@@ -73,7 +73,7 @@ jq '.summary' arm_before.json
 jq '.summary' arm_after.json
 ```
 
-## Validation rules for credible tuning gains
+### Validation rules for credible tuning gains
 
 Use these rules before adopting a tuning profile:
 
@@ -83,15 +83,21 @@ Use these rules before adopting a tuning profile:
 - Require improvement in both throughput and p95 latency, not just one.
 - Set a minimum practical threshold (for example, >=5% median gain) before rollout.
 
-## Instance-size tradeoffs
+#### Instance-size tradeoffs
 
 Do not assume the same profile wins on every Azure Cobalt VM size. Smaller instances often benefit from lower CPU burn and predictable p95 latency. Larger instances often benefit from higher concurrency, but can expose GC, database, and shared-resource contention. Compare throughput, p95/p99 latency, CPU utilization, and error rate for each instance size before keeping a tuning profile.
 
-## Interpretation
+### Considerations for interpreting metric improvements
+
+When interpeting metric improvements, consider the following:
 
 - If only one metric improves while p95 or error rate regresses, do not treat the change as a win.
 - If run-to-run variation is near the observed delta, treat it as noise.
-- Keep architecture-specific profiles separate; do not force one profile onto all architectures.
+- Keep architecture-specific profiles separate. Don't force one profile onto all architectures.
 
+## What you've accomplished and what's next
 
-Use this page as a tuning workflow template, then validate with your production-like traffic profile before rollout.
+You've applied performance tuning changes to the .NET application. 
+
+Next, you'll use the Arm MCP Server to optimize application performance.
+
