@@ -1,7 +1,9 @@
 ---
 title: Visualize ExecuTorch PTE, TOSA, VGF, ETRecord, and ETDump artifacts with Google's Model Explorer
 
-
+draft: true
+cascade:
+    draft: true
 
 description: Learn how to inspect ExecuTorch PTE, TOSA, VGF, ETRecord, and ETDump model artifacts with Google Model Explorer and Arm adapters.
 
