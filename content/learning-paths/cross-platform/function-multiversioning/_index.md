@@ -48,7 +48,7 @@ generated_summary_faq:
   - question: How do I know which function version executed at runtime?
     answer: >-
       In the dot product example, the SVE-specialized function prints a message when it runs.
-      If that message does not appear, the default version executed.
+      If that message doesn't appear, the default version executed.
   - question: Which option should I use in `target_version` or `target_clones`?
     answer: >-
       Use architectural feature names shown in the examples, such as `default`, `sve`, `sve2`, `simd`,
@@ -56,7 +56,7 @@ generated_summary_faq:
       string.
   - question: Does the order of entries in `target_clones` affect selection?
     answer: >-
-      No. The order of versions listed in `target_clones` does not affect which version is chosen
+      No. The order of versions listed in `target_clones` doesn't affect which version is chosen
       at runtime.
   - question: How should I organize code that uses ACLE intrinsics or inline assembly?
     answer: >-

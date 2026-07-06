@@ -35,7 +35,7 @@ generated_summary_faq:
     iterations, and performing repeated 512×512 matrix multiplications that use fused multiply-add
     operations. After validating the Eigen examples on an Arm Linux system, you'll build TensorFlow
     with SVE enabled by following the documented build flow and required
-    dependencies. You'll compile and run Eigen-based workloads and complete an SVE-capable
+    dependencies. You'll then compile and run Eigen-based workloads and complete an SVE-capable
     TensorFlow build on Arm.
   faqs:
   - question: What result should I expect when I run the Eigen examples?
@@ -48,8 +48,8 @@ generated_summary_faq:
       or a higher `N` increase runtime.
   - question: Why does the matrix multiplication example mention fused multiply-add (FMA)?
     answer: >-
-      The example is structured so Eigen can use FMA on CPUs that support it. You do not need
-      to verify FMA usage to continue; a correct run still prints a single numeric norm.
+      The example is structured so Eigen can use FMA on CPUs that support it. You don't need
+      to verify FMA usage to continue. A correct run still prints a single numeric norm.
   - question: Which compiler should I use to build the examples?
     answer: >-
       Use a recent version of GCC or Clang on Linux as listed in the prerequisites. A successful

@@ -36,7 +36,7 @@ generated_summary_faq:
     common approaches for multi-architecture builds and configure Docker Build Cloud as the builder
     to avoid relying on instruction emulation. Then, you'll create a GitHub repository,
     add a workflow that targets multiple architectures, and set required secrets so the workflow
-    can run unattended. You'll trigger a cloud-backed build and see logs that confirm
+    can run unattended. By triggering a cloud-backed build, you'll see logs that confirm
     Arm and x86 variants were produced through the configured pipeline.
   faqs:
   - question: Which option should I use to build multi-architecture images without relying on

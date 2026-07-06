@@ -52,7 +52,7 @@ generated_summary_faq:
   - question: 'Which option should I use to create a multi-architecture image: `docker buildx` or `docker manifest`?'
     answer: >-
       Use `docker buildx` to build multi-architecture images directly. Use `docker manifest` when you prefer
-      to build and test separate images per architecture first and combine them later; note that
+      to build and test separate images per architecture first and combine them later. Note that
       `docker manifest` is experimental and not recommended for production.
   - question: What should I do if building Arm images on my non-Arm machine is slow?
     answer: >-

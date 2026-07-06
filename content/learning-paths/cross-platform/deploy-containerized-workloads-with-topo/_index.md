@@ -57,7 +57,7 @@ generated_summary_faq:
       output prompts you when a target is not specified.
   - question: How does Topo determine if a template is compatible with my Arm target?
     answer: >-
-      Topo detects hardware capabilities on the target, including Arm CPU features like Neon and
+      Topo detects hardware capabilities on the target, including Arm CPU features such as Neon and
       SVE, and uses them to identify compatible templates. Generating a target description helps
       guide template selection.
   - question: What should I expect when cloning the example template and responding to prompts?

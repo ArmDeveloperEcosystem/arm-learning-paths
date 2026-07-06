@@ -46,7 +46,7 @@ generated_summary_faq:
   - question: How do I know each device is ready to receive a Greengrass deployment?
     answer: >-
       In AWS IoT Core, confirm the device is registered as a Greengrass core device and appears
-      in the thing group you plan to deploy to. If it is not in the group, add it before creating
+      in the thing group you plan to deploy to. If it isn't in the group, add it before creating
       the deployment.
   - question: What result should I expect from the PAC/BTI test on Raspberry Pi 5 versus Jetson
       Thor?

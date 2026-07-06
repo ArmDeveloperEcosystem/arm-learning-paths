@@ -34,7 +34,7 @@ generated_summary_faq:
     project, generate a Personal Access Token with permission to update workflow files, and set
     up an AVH instance using the Arm Virtual Hardware install guide. Then, you'll enable GitHub
     Actions on the fork and add a self-hosted runner on an AWS host, selecting a Linux image
-    and x64 architecture to match the instance. By the end, the repository is configured to use
+    and x64 architecture to match the instance. By the end, you'll configure the repository to use
     an AVH-backed self-hosted runner so workflows can drive automated testing and validation for
     bare‑metal targets.
   faqs:
@@ -52,7 +52,7 @@ generated_summary_faq:
       in the steps.
   - question: How do I enable GitHub Actions on my fork?
     answer: >-
-      Open the Actions tab in your fork. If workflows are disabled, click **I understand my workflows,
+      Open the **Actions** tab in your fork. If workflows are disabled, click **I understand my workflows,
       go ahead and enable them**.
   - question: How do I verify that the self-hosted runner is available to the repository?
     answer: >-

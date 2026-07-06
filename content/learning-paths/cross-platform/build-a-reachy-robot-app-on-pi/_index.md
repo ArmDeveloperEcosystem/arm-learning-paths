@@ -57,7 +57,7 @@ generated_summary_faq:
     answer: >-
       Check that `assets/gesture_recognizer.task` exists as a real model file, not a tiny pointer
       file. If you cloned before enabling Git LFS, enable LFS and re-clone the repository.
-  - question: The dashboard loads but the MuJoCo simulation does not move—what should I check?
+  - question: The dashboard loads but the MuJoCo simulation doesn't move—what should I check?
     answer: >-
       Verify the MuJoCo simulation is running on your development machine and that the Pi can
       reach it over the network. Also review `main.py` because it contains the settings used for

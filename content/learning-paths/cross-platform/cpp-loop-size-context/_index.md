@@ -52,13 +52,13 @@ generated_summary_faq:
   - question: Is rounding down to a multiple of four safe for every loop?
     answer: >-
       Use the multiple-of-four constraint only when you know it preserves the required work for
-      your algorithm. If all elements must be processed, this path does not list a remainder-handling
-      step, so do not drop iterations unless that is acceptable.
+      your algorithm. If all elements must be processed, this path doesn't list a remainder-handling
+      step, so don't drop iterations unless that's acceptable.
   - question: How do I know whether the compiler used the boundary information?
     answer: >-
       Run both versions with the same input and compare observed behavior, such as timing if the
       code reports it. A difference indicates the compiler recognized the constraint and produced
-      different code, though exact changes are not enumerated here.
+      different code, though exact changes aren't enumerated here.
   - question: What happens if the input size is less than four or not divisible by four?
     answer: >-
       The expression (max_loop_size/4)*4 truncates, so inputs less than four yield zero iterations

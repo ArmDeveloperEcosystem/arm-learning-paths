@@ -40,7 +40,7 @@ generated_summary_faq:
   - question: What result should I expect when verifying the setup on the Armv9 board?
     answer: >-
       You should see successful model inference and multilingual output from the ERNIE-4.5 Thinking
-      variant. This confirms the llama.cpp build and runtime environment are working end to end.
+      variant. This confirms the `llama.cpp` build and runtime environment are working end to end.
   - question: Which ERNIE-4.5 variant should I use for the comparison step?
     answer: >-
       Use both PT and Thinking on the same task and with the same settings. This makes the differences

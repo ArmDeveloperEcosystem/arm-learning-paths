@@ -58,7 +58,7 @@ generated_summary_faq:
   - question: How can I validate that my ported code behaves the same on both architectures?
     answer: >-
       Run the same source and inputs on both Linux machines and compare outputs. For well-defined
-      operations, the values should match; if they do not, look for undefined cases or differences
+      operations, the values should match. If the values don't match, look for undefined cases or differences
       caused by expression ordering or FMA use.
   - question: When should I change my code to improve portability across Arm and x86?
     answer: >-
