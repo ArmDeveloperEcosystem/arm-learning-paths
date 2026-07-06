@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Set up a Microsoft Azure virtual machine powered by Cobalt 100
 
-Set up an Arm Cobalt environment first, then keep your toolchain and runtime configuration stable across all test runs. This creates a reliable Arm baseline for migration and tuning work.
+Set up an Arm Azure environment first, then keep your toolchain and runtime configuration stable across all test runs. This creates a reliable Arm baseline for migration and tuning work.
 
 Start with the [Azure Cobalt Learning Path](https://learn.arm.com/learning-paths/servers-and-cloud-computing/cobalt/) and complete VM provisioning.
 
@@ -33,13 +33,14 @@ sudo apt-get install -y dotnet-sdk-9.0
 
 The Docker group change applies to new login sessions. Sign out and sign back in before running Docker without `sudo`, or run `newgrp docker` in the current terminal before continuing.
 
-Confirm architecture and tool versions before proceeding. On Azure Cobalt, the Linux machine architecture should be `aarch64`, and the .NET SDK should be a 9.0.x release.
+Confirm architecture and tool versions before proceeding: 
 
 ```bash
 uname -m
 dotnet --version
 docker --version
 ```
+On Azure Cobalt, the Linux machine architecture should be `aarch64`, and the .NET SDK should be a `9.0.x` release.
 
 The output is similar to:
 
@@ -55,7 +56,7 @@ If you're upgrading from an older .NET version before migrating to Cobalt, use [
 
 nopCommerce defaults to SQL Server, but you'll use PostgreSQL for Arm validation. For PostgreSQL installs, you need `citext` before migration and installation. Without it, installer migrations fail with `type "citext" does not exist` (captured in local test artifacts).
 
-Create PostgreSQL and enable `citext` before running the installer. The database runs in Docker on the Cobalt VM so the nopCommerce app can connect to `127.0.0.1:5432` during the local validation phase. 
+Create PostgreSQL and enable `citext` before running the installer. The database runs in Docker on the VM so the nopCommerce app can connect to `127.0.0.1:5432` during the local validation phase. 
 
 Replace the password value before running the following commands:
 

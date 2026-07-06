@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Containerize and migrate the application
 
-Containerization should preserve reproducibility across architectures. The following are practical paths for Dockerfile-based builds and .NET SDK container publish, with guardrails for multi-architecture delivery.
+Containerization should preserve reproducibility across architectures. The following are practical paths for Dockerfile-based builds, and .NET SDK container publish with multi-architecture delivery guardrails.
 
 Use the Dockerfile workflow as the default migration path for nopCommerce until your SDK-published image has the same Linux runtime dependencies and smoke-test results. Use SDK publish when you want MSBuild-owned image metadata and have a repeatable plan for the native packages that the Dockerfile previously installed.
 

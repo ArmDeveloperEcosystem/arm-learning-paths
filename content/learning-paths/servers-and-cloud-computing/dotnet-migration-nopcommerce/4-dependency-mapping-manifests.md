@@ -13,7 +13,9 @@ Run dependency discovery before migration changes so you understand direct refer
 
 ### Map direct references
 
-Start from the `nopCommerce` repository root. Project-level references show what the app explicitly depends on before NuGet expands the graph. The command searches project files under `src` and prints file names and line numbers so you can jump directly to the owning project.
+Start from the `nopCommerce` repository root. Project-level references show what the app explicitly depends on before NuGet expands the graph. 
+
+Run the following command to search project files under `src` and print file names and line numbers, so you can jump directly to the owning project:
 
 ```bash
 rg -n "<PackageReference|<ProjectReference" src
@@ -21,17 +23,20 @@ rg -n "<PackageReference|<ProjectReference" src
 
 ### List transitive dependencies
 
-Enumerate the full dependency graph for the web entry point. Transitive packages often carry architecture-sensitive constraints, so review the output for runtime-specific package names, native library packages, image processing libraries, database providers, and platform-specific assets.
+Enumerate the full dependency graph for the web entry point:
 
 ```bash
 dotnet list src/Presentation/Nop.Web/Nop.Web.csproj package --include-transitive
 ```
+Transitive packages often carry architecture-sensitive constraints. Review the output for runtime-specific package names, native library packages, image processing libraries, database providers, and platform-specific assets.
 
 ### Generate an SBOM
 
 Generate an SBOM so you can track all components, versions, and exposure surface as a first-class migration artifact. While not strictly necessary for migration purposes, this is a best practice that'll save time. You can also give this SBOM to an LLM to extract insights about your codebase.
 
 The CycloneDX tool is installed as a .NET global tool. Add `~/.dotnet/tools` to `PATH` in the current shell so the `dotnet-CycloneDX` command is available immediately after installation.
+
+To generate an SBOM, run the following command:
 
 ```bash
 dotnet tool install --global CycloneDX
@@ -43,7 +48,7 @@ The `-rs` option includes project references, and `-F Json` writes JSON output t
 
 ### Inspect package internals for native payloads
 
-Inspect package contents directly when a dependency looks architecture-sensitive. NuGet package folders are usually lower case on Linux, so set `PACKAGE_ID` to the folder name under `~/.nuget/packages` and `PACKAGE_VERSION` to the version you want to inspect.
+Inspect package contents directly when a dependency looks architecture-sensitive. NuGet package folders are usually lower case on Linux, so set `PACKAGE_ID` to the folder name under `~/.nuget/packages` and `PACKAGE_VERSION` to the version you want to inspect:
 
 ```bash
 PACKAGE_ID="replace-with-package-id"
@@ -72,4 +77,4 @@ You must resolve B first, then validate A, then validate the app.
 
 You've reviewed application dependencies to understand what can change when you migrate to Arm.
 
-Next, you'll explore options to containerize the application.
+Next, you'll explore options to containerize and migrate the application.

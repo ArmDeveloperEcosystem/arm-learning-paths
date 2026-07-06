@@ -26,7 +26,7 @@ git fetch --tags --prune
 git checkout release-4.90.3
 git rev-parse --short=10 HEAD   # expect 9beda11c42
 ```
-The later commands assume you're in the `nopCommerce` repository root unless stated otherwise.
+Later commands in the section assume you're in the `nopCommerce` repository root unless stated otherwise.
 
 If you open a new terminal later, return to the same repository root before running commands:
 
@@ -49,7 +49,9 @@ Restoring first separates package resolution problems from compilation problems,
 
 ### Start and install nopCommerce
 
-Start the app locally and complete installer setup with PostgreSQL. Run the following command in one terminal and leave it running: 
+Start the app locally and complete installer setup with PostgreSQL. 
+
+Run the following command in one terminal and leave it running: 
 
 ```bash
 cd src/Presentation/Nop.Web
@@ -221,7 +223,7 @@ python3 test_nopcommerce_endpoints.py \
 
 The command prints the per-route summary and writes the raw measurements to `arm_before.json`. Keep that JSON file unchanged because it's the baseline artifact used in the tuning step.
 
-#### Baseline quality rules
+### Baseline quality rules
 
 Use these rules before you compare any optimization result:
 

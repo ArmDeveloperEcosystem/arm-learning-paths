@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Optimize with the Arm MCP Server
 
-Use the Arm MCP Server after the manual baseline is complete. The agent should accelerate analysis and execution, but your benchmark artifacts remain the source of truth for what actually improved.
+Use the Arm MCP Server after the manual baseline is complete. The agent accelerates analysis and execution, but your benchmark artifacts remain the source of truth for what actually improved.
 
 If you're new to this toolchain, see the [Arm MCP Server Learning Path](https://learn.arm.com/learning-paths/servers-and-cloud-computing/arm-mcp-server/) for setup and core usage patterns.
 
@@ -25,7 +25,7 @@ Identify endpoints most likely to benefit from Arm tuning.
 Rank them by expected impact and explain why.
 ```
 
-The output includes the following:
+The output should include the following:
 
 - Ranked endpoint list
 - Bottleneck hypotheses per endpoint
