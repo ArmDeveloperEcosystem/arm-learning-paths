@@ -66,7 +66,7 @@ Next, enable the emulation layers using the Vulkan Configurator to simulate the 
 Under the **Vulkan Layers Available** tab, add the path to your `Emulation layer` folder that can be found in the site packages of your venv folder select the bin folder.
 
 Append image VL availble here
-![VL available](images/VL%20availble.png)
+![VL available](images/VL%20availble%20.png)
 
 Under the **Vulkan layers Configuration** tabgo through each setting in the top rigt except disable all Vulkan Layers and enable the Graph and Tensor Emulation
 
