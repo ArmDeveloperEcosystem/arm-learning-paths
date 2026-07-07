@@ -11,7 +11,7 @@ layout: learningpathall
 
 Set up an Arm Azure environment first, then keep your toolchain and runtime configuration stable across all test runs. This creates a reliable Arm baseline for migration and tuning work.
 
-Start with the [Azure Cobalt Learning Path](https://learn.arm.com/learning-paths/servers-and-cloud-computing/cobalt/) and complete VM provisioning.
+Start with the [Azure Cobalt Learning Path](/learning-paths/servers-and-cloud-computing/cobalt/) and complete VM provisioning.
 
 The Learning Path was validated with Ubuntu 24.04 LTS on Azure Cobalt in `westus2` (example VM size: `Standard_D2ps_v6`, 2 vCPUs).
 
