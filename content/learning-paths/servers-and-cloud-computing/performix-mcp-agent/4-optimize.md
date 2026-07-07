@@ -1,5 +1,6 @@
 ---
 title: Optimize code with AI-driven profiling feedback
+description: Apply AI-suggested C++ optimizations from Performix hotspot results and re-profile each change to validate the measured speedup on Arm Neoverse.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -17,10 +18,10 @@ In the previous section, the agent identified three optimization opportunities:
 Rather than making these changes manually, you can ask the agent to apply each one for you. Because the Arm MCP Server connects to your remote target over SSH, the agent can edit the source files directly on the server, rebuild, and re-profile — all in a single turn. You'll validate each change by asking the agent to compare the new profiling results against the previous run before moving on.
 
 {{% notice Note %}}
-The agent will typically surface these optimizations itself based on the profiling results, without you needing to prompt it explicitly. The prompts shown in each section below are for explicit reference — you can use them if the agent hasn't already proposed the change, or to direct it to a specific optimization.
+The agent will typically surface these optimizations itself based on the profiling results, without you needing to prompt it explicitly. The following prompts are for explicit reference — you can use them if the agent hasn't already proposed the change, or to direct it to a specific optimization.
 {{% /notice %}}
 
-## Optimization 1: Eliminate the sqrt in the escape check
+### Eliminate the sqrt in the escape check
 
 The inner loop in `Mandelbrot::getIterations` calls `std::abs(z)` on every iteration to check whether the point has escaped. `std::abs` for `std::complex<double>` computes $\sqrt{re^2 + im^2}$ via `hypotf64` — a full square root on every iteration. The escape condition `abs(z) > THRESHOLD` is mathematically equivalent to `re² + im² > THRESHOLD²`, so the square root is never needed.
 
@@ -38,7 +39,7 @@ __complex_abs and hypotf64 changed?
 
 The agent calls `arm-mcp/apx_recipe_run` again and returns the comparison. The `std::__complex_abs` and `hypotf64` symbols disappear from the hotspot list entirely. Both functions are gone because the squared-magnitude check never calls them. The hotspot distribution shifts: `getIterations` drops from 28.5% to 18.4% self-time, and the freed CPU budget is now visible in `std::complex` operator symbols. The overall sample count is slightly lower, but the profile structure reveals that `std::complex` operator overhead is now the next bottleneck to address.
 
-## Optimization 2: Replace `std::complex<double>` with raw double arithmetic
+### Replace `std::complex<double>` with raw double arithmetic
 
 With `hypotf64` and `__complex_abs` removed, the profile now shows `std::complex` operator symbols (`operator+`, `operator*=`, `operator*`, `operator+=`, `__muldc3`, `__rep`) collectively consuming the majority of CPU time. These are all function-call overhead: the debug build disables inlining, so every arithmetic operation on `std::complex<double>` dispatches through the C++ standard library machinery.
 
@@ -60,7 +61,7 @@ std::complex operator symbols disappeared from the hotspot list?
 
 The agent calls `arm-mcp/apx_recipe_run` and returns the comparison. Every `std::complex` function—`__muldc3`, `operator*=`, `operator+=`, `operator+`, `operator*`, `__rep`—is gone from the profile. Total profile sample count drops from approximately 48,750 (baseline) to approximately 11,457, a reduction of ~76% and a measured ~4x speedup.
 
-## Optimization 3: Enable compiler optimizations with `-O3`
+### Enable compiler optimizations with `-O3`
 
 Both previous changes were applied to the debug binary, compiled with `-O0` (no optimization). At `-O0`, the compiler doesn't inline any function calls, which is why `std::complex` operators appeared separately in the profile even after the algorithmic fix. Building with `-O3` lets the compiler inline `getIterations` into `draw`, unroll the inner loop, and auto-vectorize the scalar double arithmetic using the Arm NEON/ASIMD unit.
 
@@ -78,14 +79,9 @@ The agent calls `arm-mcp/apx_recipe_run` on the new binary path and returns the 
 
 The only remaining hotspot is `Mandelbrot::draw` itself at ~98.6% of samples, which now includes both the iteration and colorizing passes. The colorizing pass calls `pow(255, hue)` per pixel — visible as `powf64` at ~0.7% — but this is a small fraction of total time at this scale.
 
-## Summary
+## What you've accomplished
 
-In this Learning Path, you combined the Arm MCP Server's `apx_recipe_run` tool with an AI agent to drive the complete Code Hotspots workflow. Starting from a single-threaded C++ baseline, the agent:
-
-- Ran the Code Hotspots recipe through a GitHub Copilot prompt file and retrieved structured profiling results, identifying `getIterations` and the sqrt-based escape check as the dominant hotspots
-- Eliminated `__complex_abs` and `hypotf64` by replacing `abs(z) > THRESHOLD` with a squared-magnitude check, removing ~33% of CPU overhead
-- Replaced `std::complex<double>` with plain `double` arithmetic, removing all std::complex operator call overhead and delivering a ~4x speedup over the original baseline
-- Enabled `-O3` to let the compiler inline `getIterations`, unroll the loop, and auto-vectorize, delivering a further 3x improvement
+You've now applied AI-suggested optimizations to the Mandelbrot application.
 
 The cumulative result, measured by profile sample counts, was a reduction from approximately 48,750 baseline samples to approximately 3,997 — a ~12x speedup — through three rounds of code changes, each validated by a re-profile before moving to the next.
 
