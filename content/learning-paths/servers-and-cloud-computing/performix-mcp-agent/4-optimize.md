@@ -37,7 +37,9 @@ and compare with the previous run. Has the proportion of samples in
 __complex_abs and hypotf64 changed?
 ```
 
-The agent calls `arm-mcp/apx_recipe_run` again and returns the comparison. The `std::__complex_abs` and `hypotf64` symbols disappear from the hotspot list entirely. Both functions are gone because the squared-magnitude check never calls them. The hotspot distribution shifts: `getIterations` drops from 28.5% to 18.4% self-time, and the freed CPU budget is now visible in `std::complex` operator symbols. The overall sample count is slightly lower, but the profile structure reveals that `std::complex` operator overhead is now the next bottleneck to address.
+The agent calls `arm-mcp/apx_recipe_run` again and returns the comparison. The `std::__complex_abs` and `hypotf64` symbols disappear from the hotspot list entirely. Both functions are gone because the squared-magnitude check never calls them.
+
+The hotspot distribution shifts: `getIterations` drops from 28.5% to 18.4% self-time, and the freed CPU budget is now visible in `std::complex` operator symbols. The overall sample count is slightly lower, but the profile structure reveals that `std::complex` operator overhead is now the next bottleneck to address.
 
 ### Replace `std::complex<double>` with raw double arithmetic
 
@@ -59,11 +61,15 @@ Code Hotspots recipe and compare with the previous run. Have the
 std::complex operator symbols disappeared from the hotspot list?
 ```
 
-The agent calls `arm-mcp/apx_recipe_run` and returns the comparison. Every `std::complex` function—`__muldc3`, `operator*=`, `operator+=`, `operator+`, `operator*`, `__rep`—is gone from the profile. Total profile sample count drops from approximately 48,750 (baseline) to approximately 11,457, a reduction of ~76% and a measured ~4x speedup.
+The agent calls `arm-mcp/apx_recipe_run` and returns the comparison. Every `std::complex` function—`__muldc3`, `operator*=`, `operator+=`, `operator+`, `operator*`, `__rep`—is gone from the profile. 
+
+Total profile sample count drops from approximately 48,750 (baseline) to approximately 11,457, a reduction of ~76% and a measured ~4x speedup.
 
 ### Enable compiler optimizations with `-O3`
 
-Both previous changes were applied to the debug binary, compiled with `-O0` (no optimization). At `-O0`, the compiler doesn't inline any function calls, which is why `std::complex` operators appeared separately in the profile even after the algorithmic fix. Building with `-O3` lets the compiler inline `getIterations` into `draw`, unroll the inner loop, and auto-vectorize the scalar double arithmetic using the Arm NEON/ASIMD unit.
+Both previous changes were applied to the debug binary, compiled with `-O0` (no optimization). At `-O0`, the compiler doesn't inline any function calls, which is why `std::complex` operators appeared separately in the profile even after the algorithmic fix. 
+
+Building with `-O3` lets the compiler inline `getIterations` into `draw`, unroll the inner loop, and auto-vectorize the scalar double arithmetic using the Arm NEON/ASIMD unit.
 
 Ask the agent to rebuild with the release target and re-profile. If it hasn't already suggested this step, use the following prompt:
 
