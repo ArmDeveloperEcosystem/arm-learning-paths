@@ -17,6 +17,15 @@ PYTHONUNBUFFERED=1 ./isaaclab.sh -p \
     "$WORK/robots/examples/isaac_bed_making/demo.py" --loopback --render
 ```
 
+{{% notice Note %}}
+`--render` encodes the captured frames into an MP4 with **ffmpeg**. If ffmpeg is not installed, the
+run still completes and writes the individual frames, but no MP4 is produced. Install it first:
+
+```bash
+sudo apt-get update && sudo apt-get install -y ffmpeg
+```
+{{% /notice %}}
+
 The first launch takes a few minutes while Isaac Sim starts. You will then see the run progress through its stages in the log:
 
 ```output
