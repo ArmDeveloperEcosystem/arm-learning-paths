@@ -21,6 +21,29 @@ cd Vulkan-Samples
 
 This repository includes the framework and samples showcasing the ML extensions for Vulkan.
 
+## Setting up Visual studio build tools 
+
+o build the Vulkan Samples on Windows using the Visual Studio generator, you still need the Microsoft C++ compiler and build tools.
+
+Install the Visual Studio 2022 Build Tools with:
+
+```bash
+winget install -e --id Microsoft.VisualStudio.2022.BuildTools
+```
+
+When the installer opens, select:
+
+Desktop development with C++
+
+![image for the desktop tool required visual studio](images/vsmod.png)
+
+Make sure these components are included:
+
+MSVC v143 C++ build tools
+Windows 10/11 SDK
+C++ CMake tools for Windows
+
+
 ## Build the Vulkan Samples
 
 You're now ready to compile the project. From the root of the repository:
