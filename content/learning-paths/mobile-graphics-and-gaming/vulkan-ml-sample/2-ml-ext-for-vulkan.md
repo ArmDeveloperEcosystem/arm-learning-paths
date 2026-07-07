@@ -26,8 +26,10 @@ Before building and running the samples, ensure the following tools are installe
 In VSCode create a new folder for this project then make sure you have the following extensions: 
   * C/C++ From Microsoft 
   * CMake Tools From Microsoft
-!("images/c%20ext.png")
-!("images/cmake%20ext.png")
+
+!(images/c%20ext.png)
+
+!(images/cmake%20ext.png)
 
 
 Create a Venv in Python (3.13 was used in the creation of this Guide) and run the following commands 
