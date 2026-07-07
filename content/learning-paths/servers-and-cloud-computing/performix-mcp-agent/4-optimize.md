@@ -18,7 +18,7 @@ In the previous section, the agent identified three optimization opportunities:
 Rather than making these changes manually, you can ask the agent to apply each one for you. Because the Arm MCP Server connects to your remote target over SSH, the agent can edit the source files directly on the server, rebuild, and re-profile — all in a single turn. You'll validate each change by asking the agent to compare the new profiling results against the previous run before moving on.
 
 {{% notice Note %}}
-The agent will typically surface these optimizations itself based on the profiling results, without you needing to prompt it explicitly. The following prompts are for explicit reference — you can use them if the agent hasn't already proposed the change, or to direct it to a specific optimization.
+The agent will typically surface these optimizations itself based on the profiling results, without you needing to prompt it explicitly. The following prompts are for explicit reference. You can use them if the agent hasn't already proposed the change, or to direct it to a specific optimization.
 {{% /notice %}}
 
 ### Eliminate the sqrt in the escape check
