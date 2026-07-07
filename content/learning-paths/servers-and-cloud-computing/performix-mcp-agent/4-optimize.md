@@ -81,7 +81,7 @@ The only remaining hotspot is `Mandelbrot::draw` itself at ~98.6% of samples, wh
 
 ## What you've accomplished
 
-You've now applied AI-suggested optimizations to the Mandelbrot application.
+You've now applied AI-suggested optimizations — such as replacing `std::complex<double>` with plain `double` arithmetic, enabling `-03` for compiler optimizations, and eliminating sqrt in the escape check — to the Mandelbrot application.
 
 The cumulative result, measured by profile sample counts, was a reduction from approximately 48,750 baseline samples to approximately 3,997 — a ~12x speedup — through three rounds of code changes, each validated by a re-profile before moving to the next.
 
