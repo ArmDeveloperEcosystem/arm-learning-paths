@@ -13,7 +13,7 @@ learning_objectives:
 
 prerequisites:
     - Windows 11 development machine
-    - Visual Studio 2022
+    - Visual Studio 2022 and VSCode
     - Visual Studio workload - Desktop development with C++
     - Visual Studio workload - .NET desktop build tools
 
