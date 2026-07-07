@@ -40,6 +40,7 @@ To see how the policy is trained, run a **short** loop. This is for learning the
 
 ```bash
 cd "$WORK/IsaacLab"
+export LD_PRELOAD="${LD_PRELOAD:+$LD_PRELOAD:}/lib/aarch64-linux-gnu/libgomp.so.1"
 ./isaaclab.sh -p "$WORK/robots/examples/isaac_bed_making/rl/train.py" \
     --headless --num_envs 2048 --max_iterations 50 --run_name teaching_run
 ```
@@ -58,6 +59,6 @@ Training logs and checkpoints are written under `rl/logs/bed_reach_g1/<run>/`. Y
 
 ## Where to go deeper
 
-The full method — the reward and force terms, the four training iterations that reached the two-robot benchmark, the training configuration, and the sim-to-real design (no kinematic cheats, sensor-calibrated observations) — is documented in the demo's `RL_WHOLE_BODY_REACH.md`. The sensor calibration that shapes the observations comes from Arm's [robotics-connect](https://github.com/armwaheed/robotics-connect) G1 control stack.
+The full method — the reward and force terms, the four development rounds that produced the shipped policy, the training configuration, and the sim-to-real design (no kinematic cheats, sensor-calibrated observations) — is documented in the demo's `RL_WHOLE_BODY_REACH.md`. The sensor calibration that shapes the observations comes from Arm's [robotics-connect](https://github.com/armwaheed/robotics-connect) G1 control stack.
 
 You have now run the demo, seen how the robots coordinate over MHS, and played the policy that keeps them balanced. See the summary and next steps to continue.

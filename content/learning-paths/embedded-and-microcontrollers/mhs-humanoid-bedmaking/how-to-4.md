@@ -51,8 +51,8 @@ Both robots run this driver and join the same fabric. Neither is in charge. Each
 Coordination emerges from these calls: a robot claims a corner, emits an event, and — when a corner needs two hands — calls `askForHelp`; the other robot sees the event, calls `offerHelp`, and walks over. A peer finds the others and calls them through the SDK's fleet API — discover who is on the fabric, then invoke a procedure on a specific peer:
 
 ```python
-peers = await self.fleet.discover()                 # who else is on the fabric
-await self.fleet.invoke(other_id, "offerHelp", corner="head-left")
+peers = await self.fleet.discover()                 # the peer robots on the fabric
+await self.fleet.invoke(peers[0].device_id, "offerHelp", corner="head-left")
 ```
 
 ## Loopback versus a real fabric

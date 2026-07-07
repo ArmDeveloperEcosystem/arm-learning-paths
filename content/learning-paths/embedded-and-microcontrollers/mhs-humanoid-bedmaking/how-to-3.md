@@ -41,7 +41,7 @@ When the run finishes, the rendered video is written under:
 ls "$WORK/robots/examples/isaac_bed_making/artifacts/isaac_bed_making/"
 ```
 
-Open the MP4 and you should see both G1s walk in with their arms at their sides, lean over the bed while balancing on their own two feet, grip the draped sheet, and draw it toward the head of the bed. The two robots adopt *different* postures — one squats deeper, one leans — because each solves the reach within its own balance envelope. That is learned control, not scripted choreography.
+Open the MP4 and you should see both G1s walk in with their arms at their sides, then lean over the bed while balancing on their own two feet and reach for the draped sheet. The two robots adopt *different* postures — one squats deeper, one leans — because each solves the reach within its own balance envelope: learned control, not scripted choreography. Drawing the sheet fully up to the pillows is an open manipulation-quality problem; the walk-in, the balanced whole-body reach, and the MHS coordination are what this run reliably demonstrates.
 
 ## What the flags do
 

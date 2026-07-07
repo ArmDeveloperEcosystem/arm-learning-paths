@@ -8,11 +8,11 @@ layout: learningpathall
 
 ## What you will build
 
-In this Learning Path you run a demo in which **two Unitree G1 humanoid robots walk up to a bed and make it together** in NVIDIA Isaac Sim, entirely in simulation on an NVIDIA DGX Spark. Each robot:
+In this Learning Path you run a demo in which **two Unitree G1 humanoid robots work together at a bed** in NVIDIA Isaac Sim, entirely in simulation on an NVIDIA DGX Spark. Each robot:
 
 - **walks in** on its own two feet under a pretrained velocity-walk policy,
 - **leans over the bed** under a whole-body reinforcement-learning (RL) reach policy that keeps it balanced while it bends,
-- **grips the sheet and draws it toward the head of the bed**, and
+- **reaches for the draped sheet and works to draw it toward the head of the bed**, and
 - **coordinates with the other robot as an equal peer over the Model Hardware Standard (MHS)** — the two robots share the goal *"the bed is made,"* claim work, emit events, and ask each other for help.
 
 Everything is physically simulated. There are **no kinematic cheats**: no base pinning, no teleporting, and no joint freezing, so every motion is one a real G1 could reproduce on hardware.

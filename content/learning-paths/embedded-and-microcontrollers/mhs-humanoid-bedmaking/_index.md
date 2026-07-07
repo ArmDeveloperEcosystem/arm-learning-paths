@@ -1,7 +1,7 @@
 ---
 title: Make a bed with two humanoid robots in NVIDIA Isaac Sim, coordinated over the Model Hardware Standard
 
-minutes_to_complete: 90
+minutes_to_complete: 120
 
 who_is_this_for: This is an advanced topic for robotics and edge-AI developers who want to run a physically valid, multi-robot humanoid loco-manipulation demo in NVIDIA Isaac Sim on an Arm-based NVIDIA DGX Spark, and coordinate the robots as equal peers over the Model Hardware Standard (MHS) — the open device layer that absorbed Arm Device Connect.
 

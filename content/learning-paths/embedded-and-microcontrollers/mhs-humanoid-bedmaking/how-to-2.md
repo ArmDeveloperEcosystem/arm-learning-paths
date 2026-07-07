@@ -90,7 +90,7 @@ git clone https://github.com/armwaheed/robotics-connect.git
 - `robots/examples/isaac_bed_making` is the Isaac Sim demo you run in this Learning Path. The
   `mhs-coordination` branch is the one whose two-robot coordination runs over MHS (rather than the
   original Arm Device Connect edge package).
-- `robotics-connect` is Arm's humanoid MHS connector and skills; the demo reuses its sensor-calibration and the whole-body policy tooling.
+- `robotics-connect` is Arm's humanoid MHS connector and skills. The `--loopback` demo you run in this path does not import it — it is the reference for the connector pattern and for the on-hardware sensor calibration behind the RL policy.
 
 ## Verify the environment
 
