@@ -1,5 +1,5 @@
 ---
-title: Defining your own use cases
+title: Define your own use cases on Model Gym
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -10,8 +10,6 @@ layout: learningpathall
 
 While NFRU is a powerful demonstration of neural graphics, Model Gym is designed to support custom models for various use cases. You can add your own model architecture, register it with the toolkit, and run the same training, evaluation, and export workflows you used for NFRU.
 
-This section walks you through the process of integrating a custom model into Model Gym, using the Python API you used in previous sections.
-
 ### Create a custom model
 
 To add a custom model to the Model Gym, you need to:
@@ -21,7 +19,7 @@ To add a custom model to the Model Gym, you need to:
 3. Implement required methods
 4. Accept `params` as a constructor argument
 
-The resulting structure looks like this:
+The resulting structure is similar to:
 
 ```python
 from ng_model_gym.core.model.base_ng_model import BaseNGModel
@@ -39,11 +37,11 @@ class CustomModel(BaseNGModel):
         pass
 ```
 
-The `@register_model()` decorator makes your model discoverable by Model Gym. The `name` and `version` parameters will be used later in your configuration file.
+The `@register_model()` decorator makes your model discoverable by Model Gym. You'll use the `name` and `version` parameters in your configuration file.
 
 ### Register your model
 
-For your model to be available in Model Gym, the file defining it must be imported. This triggers the registration process.
+For your model to be available in Model Gym, you need to import the file defining it to trigger the registration process.
 
 Place your model file in the `src/ng_model_gym/usecases/` directory within the Model Gym installation. To find the installed location, make sure the virtual environment you used with the example notebooks is activated. Then, run the following:
 
@@ -51,7 +49,9 @@ Place your model file in the `src/ng_model_gym/usecases/` directory within the M
 whereis ng_model_gym
 ```
 
-This should point to your `nb-env` virtual environment. The Model Gym source code in this case will sit in the following directory:
+This returns the directory of your `nb-env` virtual environment. 
+
+In this case, the Model Gym source code sits in the following directory:
 
 ```output
 <path-to>/nb-env/lib/python3.12/site-packages/ng_model_gym/usecases
@@ -95,7 +95,7 @@ config.model.version = "1"
 
 ### Run training with your custom model
 
-Once your model is registered and your config is updated, you can use all the standard Model Gym workflows that were covered in previous sections. For example training:
+After registering your model and updating your config, you can use all the standard Model Gym workflows that you executed in previous sections. For example, training:
 
 ```bash
 trained_model_path = ngmg.do_training(config, training_mode=TrainEvalMode.FP32)
@@ -160,7 +160,7 @@ jupyter lab
 
 Navigate to `tutorials/nfru/custom_model_example.ipynb` and step through the cells.
 
-## Wrapping up
+## What you've accomplished
 
 You've now learned how to extend Model Gym beyond NFRU with your own models and datasets. This opens up possibilities for experimenting with different neural graphics techniques: denoising, frame interpolation, or custom upscaling approaches tailored to your content.
 

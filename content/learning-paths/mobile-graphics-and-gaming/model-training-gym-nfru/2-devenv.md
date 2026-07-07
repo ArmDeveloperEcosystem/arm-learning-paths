@@ -6,17 +6,23 @@ weight: 3
 layout: learningpathall
 ---
 
-## Overview
+## Install dependencies on Ubuntu
 
-In this section, you will install a few dependencies into your Ubuntu environment. You'll need a working Python 3.10+ environment with some ML and system dependencies.
+Install a few machine learning and system dependencies on your Ubuntu environment.
 
-Start by making sure Python is installed by verifying that the version is >3.10:
+Start by making sure Python is installed and the version is >3.10:
 
 ```bash
 python3 --version
 ```
 
-Next, install a few additional packages:
+The output is similar to:
+
+```output
+Python 3.10.11
+```
+
+Next, install dependency packages:
 
 ```bash
 sudo apt update
@@ -25,15 +31,17 @@ sudo apt install python3-venv python-is-python3 gcc make python3-dev -y
 
 ## Set up the examples repository
 
-The example notebooks are open-sourced in a GitHub repository. Start by cloning it:
+The example notebooks are open-sourced in a GitHub repository. 
+
+Start by cloning the repository:
 
 ```bash
 git clone https://github.com/arm/neural-graphics-model-gym-examples.git
 cd neural-graphics-model-gym-examples
 ```
 
-{{% notice NFRU examples tag %}}
-The NFRU notebooks will be provided from a dedicated examples repository tag. After that tag is available, check it out before running the setup script:
+{{% notice Note %}}
+The NFRU notebooks will be provided from a dedicated examples repository tag. After the NFRU examples tag is available, check it out before running the setup script:
 
 ```bash
 git checkout <nfru-examples-tag>
@@ -46,7 +54,7 @@ From inside the `neural-graphics-model-gym-examples/` folder, run the setup scri
 python3 create_env.py
 ```
 
-This will do the following:
+The script does the following:
 - Create a Python virtual environment called `nb-env`
 - Install the `ng-model-gym` package and required dependencies
 - Download the datasets and weights needed to run the notebooks
@@ -57,7 +65,7 @@ Activate the virtual environment:
 source nb-env/bin/activate
 ```
 
-Run the following in a python shell to confirm that the script was successful:
+Run the following in a Python shell to confirm that the script was successful:
 
 ```python
 import torch
@@ -66,5 +74,8 @@ import ng_model_gym
 print("Torch version:", torch.__version__)
 print("Model Gym version:", ng_model_gym.__version__)
 ```
+## What you've accomplished and what's next
 
-You’ve completed your environment setup - great work! You’re now ready to start walking through the training and evaluation steps.
+You’ve now completed your environment setup by installing dependencies and setting up the example NFRU notebooks repository.
+
+Next, you'll train the neural graphics model.

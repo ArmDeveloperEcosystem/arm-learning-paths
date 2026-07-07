@@ -20,8 +20,13 @@ prerequisites:
     - Basic understanding of PyTorch and machine learning concepts
     - A development machine running Ubuntu 22.04, with a CUDA-capable NVIDIA® GPU
     - CUDA Toolkit version 11.8 or later
+    - A working Python 3.10+ environment 
 
 author: Annie Tallund
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
