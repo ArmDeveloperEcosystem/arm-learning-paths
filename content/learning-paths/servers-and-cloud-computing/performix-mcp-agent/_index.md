@@ -1,5 +1,5 @@
 ---
-title: Identify code hotspots using Arm Performix through the Arm MCP Server
+title: Identify and optimize code hotspots using Arm Performix through the Arm MCP Server
 
 description: Learn how to use an AI agent and the Performix tool through the Arm MCP Server to run the Code Hotspots recipe on a C++ application, interpret flame graph results, and apply targeted optimizations on Arm Neoverse.
 
@@ -34,7 +34,7 @@ generated_summary_faq:
   faq_generated_at: '2026-07-07T16:22:08Z'
   faq_source_hash: a81d31a804debf71196a478bdf388c9e58b6dab67a9e881b916f3d0169d9555d
   summary: >-
-    You'll combine the Arm MCP Server's `apx_recipe_run` tool with an AI agent to drive the complete Code Hotspots workflow to profile on Arm Neoverse. First, you'll build an intentionally unoptimized Mandelbrot
+    You'll combine the Arm MCP Server's `apx_recipe_run` tool with an AI agent to run the complete Code Hotspots workflow on an Arm Neoverse target. First, you'll build an intentionally unoptimized Mandelbrot
     C++ application on a remote Arm Linux target, then use a GitHub Copilot prompt file to run
     the Performix Code Hotspots recipe. The agent confirms target details, executes collection,
     and returns a flame graph with structured hotspot data to pinpoint the hottest functions.
@@ -55,7 +55,7 @@ generated_summary_faq:
   - question: Should I compile the Mandelbrot example with optimizations before profiling?
     answer: >-
       No. The single-threaded, unoptimized build is intentional so the hotspot analysis produces
-      a clear signal. The agent later proposes enabling -O3 as part of the optimization pass.
+      a clear signal. The agent later proposes enabling `-O3` as part of the optimization pass.
   - question: How do I know the agent is targeting the correct machine?
     answer: >-
       The agent explicitly confirms your remote target details before running the Code Hotspots

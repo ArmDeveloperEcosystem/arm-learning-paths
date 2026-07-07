@@ -19,7 +19,7 @@ You don't need to understand the Mandelbrot algorithm to follow the Learning Pat
 
 ## Connect to your Arm target
 
-For profiling, you'll target an AWS Graviton3-based metal instance (`m7g.metal`) with 64 Neoverse V1 cores. Any Arm Linux server with multiple cores works for the parallelization step, but a metal instance gives you direct access to all hardware threads without the overhead of virtualization.
+For profiling, you'll target an AWS Graviton3-based metal instance (`m7g.metal`) with 64 Neoverse V1 cores. Any Arm Linux server with multiple cores works, but a metal instance gives you direct access to all hardware threads without the overhead of virtualization.
 
 Connect to the remote target via SSH through the Arm MCP Server. The `apx_recipe_run` tool accepts the target host IP address and SSH username directly as parameters, so there's no separate target configuration step required.
 
@@ -58,6 +58,7 @@ Note the absolute path to the binary on the remote server. You'll need this when
 ```text
 /home/ec2-user/Mandelbrot-Example/build/mandelbrot_single_thread_debug
 ```
+
 ## What you've accomplished and what's next
 
 You now have everything in place for profiling: a compiled, debug-enabled binary on an Arm Neoverse target that Performix can reach.

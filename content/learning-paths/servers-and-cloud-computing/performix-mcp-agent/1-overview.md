@@ -11,9 +11,11 @@ layout: learningpathall
 
 The Arm MCP Server exposes Arm Performix as a first-class tool that AI coding assistants can invoke directly. Rather than switching between your IDE and the Performix GUI to analyze results and then back again to apply code changes, an AI agent can orchestrate the entire profiling pipeline. Configuring the recipe, launching the collection run, retrieving hotspot data, and proposing optimizations can all be part of a single agentic workflow.
 
-## What the Arm Performix MCP server tool is
+## What the Arm Performix tool is
 
-Arm Performix is a performance profiling tool that simplifies the workflow of collecting CPU samples, building flame graphs, and identifying the functions that dominate application runtime. When integrated into the MCP server, it lets an AI agent orchestrate the entire profiling pipeline — configuring the recipe, launching the collection run, and retrieving the resulting hotspot data — without manual interaction with the Performix engine.
+Arm Performix is a performance profiling tool that simplifies the workflow of collecting CPU samples, building flame graphs, and identifying the functions that dominate application runtime. 
+
+When you integrate Arm Performix into the MCP server, the tool lets an AI agent orchestrate the entire profiling pipeline — configuring the recipe, launching the collection run, and retrieving the resulting hotspot data — without manual interaction with the Performix engine.
 
 You don't need to context switch between your IDE and the Performix GUI to analyze results and then back again to apply code changes. An AI agent can do all of this for you in a single agentic workflow.
 
@@ -53,7 +55,7 @@ Every decision in the loop is grounded in the hotspot data returned by the tool;
 
 To use the Arm MCP Server with an AI coding assistant, configure the assistant to connect to the MCP server. Connecting your assistant allows it to query Arm-specific tools, documentation, and capabilities exposed through the Model Context Protocol (MCP).
 
-The required configuration steps vary by AI coding assistant. Refer to the following install guides for step-by-step instructions on connecting AI coding assistants to the Arm MCP server:
+The required configuration steps vary by AI coding assistant. For step-by-step instructions on connecting AI coding assistants to the Arm MCP server, see the following install guides:
 
 - [GitHub Copilot](/install-guides/github-copilot/)
 - [Antigravity CLI](/install-guides/antigravity/)
