@@ -1,6 +1,6 @@
 ---
 title: Set up an Arm-based environment
-description: Set up an Ubuntu Azure Cobalt VM with Docker, .NET 9, and PostgreSQL so you can build and validate nopCommerce on Arm.
+description: Set up an Ubuntu Azure Cobalt-based virtual machine with Docker, .NET 9, and PostgreSQL so you can build and validate nopCommerce on Arm.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

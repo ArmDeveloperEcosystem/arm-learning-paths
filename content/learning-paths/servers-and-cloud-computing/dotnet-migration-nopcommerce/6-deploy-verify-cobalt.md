@@ -1,6 +1,6 @@
 ---
 title: Tune the performance of the .NET application on Azure
-description: Apply .NET runtime tuning on Azure Cobalt and compare endpoint benchmark results to decide whether a profile improves nopCommerce performance.
+description: Apply .NET runtime tuning on an Azure Cobalt-based virtual machine and compare endpoint benchmark results to decide whether a profile improves nopCommerce performance.
 weight: 6
 
 ### FIXED, DO NOT MODIFY

@@ -1,6 +1,6 @@
 ---
 title: Use the Arm MCP Server to optimize .NET performance
-description: Use the Arm MCP Server to rank endpoints, generate targeted tests, and plan evidence-based .NET performance optimizations on Azure Cobalt.
+description: Use the Arm MCP Server to rank endpoints, generate targeted tests, and plan evidence-based .NET performance optimizations on an Azure Cobalt-based virtual machine.
 weight: 7
 
 ### FIXED, DO NOT MODIFY
