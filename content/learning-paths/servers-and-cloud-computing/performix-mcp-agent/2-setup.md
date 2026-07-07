@@ -61,6 +61,6 @@ Note the absolute path to the binary on the remote server. You'll need this when
 
 ## What you've accomplished and what's next
 
-You now have everything in place for profiling: a compiled, debug-enabled binary on an Arm Neoverse target that Performix can reach.
+You've now got everything in place for profiling: a compiled, debug-enabled binary on an Arm Neoverse target that Performix can reach.
 
 Next, you'll create a GitHub Copilot prompt file to drive the Code Hotspots recipe through the Arm MCP Server.

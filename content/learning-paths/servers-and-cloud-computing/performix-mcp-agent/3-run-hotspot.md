@@ -154,7 +154,7 @@ codex /prompts:arm-hotspots-optimization
 
 ## What you've accomplished and what's next
 
-You've used the Arm MCP `arm-hotspots-optimization` prompt file — invoked with `/arm-hotspots-optimization` — to drive the Arm Performix Code Hotspots recipe end-to-end through the Arm MCP Server.
+You've now used the Arm MCP `arm-hotspots-optimization` prompt file — invoked with `/arm-hotspots-optimization` — to drive the Arm Performix Code Hotspots recipe end-to-end through the Arm MCP Server.
 
 The agent confirmed your target details, ran the recipe autonomously, and identified `getIterations` as the dominant hotspot. It found that ~33% of total CPU time is spent inside the sqrt-based escape condition check (`__complex_abs` and `hypotf64`), and noted significant `std::complex` operator overhead from the debug build. It proposed three targeted optimizations: eliminating the sqrt, replacing `std::complex` with raw double arithmetic, and enabling compiler optimizations.
 
