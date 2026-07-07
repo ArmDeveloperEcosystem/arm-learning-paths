@@ -88,17 +88,26 @@ Rules:
 
 ## Mathematical expressions
 
-To display a mathematical expression inline, encase the expression in `\(...\)`.
+Use `\(...\)` to display a mathematical expression inline.
 
 For example:
 
 ```md
 \(\sqrt{re^2 + im^2}\)
 ```
-To display a mathematical expression in a new line, encase the expression in `$$...$$`.
+
+Use `$$...$$` or `\[...\]` to display a mathematical expression in a block.
 
 For example:
 
 ```md
 $$re_{new} = re_z^2 - im_z^2 + re_c$$
+```
+
+or
+
+```md
+\[
+re_{new} = re_z^2 - im_z^2 + re_c
+\]
 ```

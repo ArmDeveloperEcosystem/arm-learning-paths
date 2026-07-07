@@ -23,7 +23,7 @@ The agent will typically surface these optimizations itself based on the profili
 
 ### Eliminate the sqrt in the escape check
 
-The inner loop in `Mandelbrot::getIterations` calls `std::abs(z)` on every iteration to check whether the point has escaped. `std::abs` for `std::complex<double>` computes \(\sqrt{re^2 + im^2}\) via `hypotf64` — a full square root on every iteration. The escape condition \(abs(z) > THRESHOLD\) is mathematically equivalent to \(re^2 + im^2 > THRESHOLD^2\), so the square root is never needed.
+The inner loop in `Mandelbrot::getIterations` calls `std::abs(z)` on every iteration to check whether the point has escaped. `std::abs` for `std::complex<double>` computes $\sqrt{re^2 + im^2}$ via `hypotf64` — a full square root on every iteration. The escape condition $abs(z) > THRESHOLD$ is mathematically equivalent to $re^2 + im^2 > THRESHOLD^2$, so the square root is never needed.
 
 Ask the agent to apply the fix, rebuild, and re-profile in one step. If the agent hasn't already proposed this change, use the following prompt:
 
@@ -45,7 +45,7 @@ The hotspot distribution shifts: `getIterations` drops from 28.5% to 18.4% self-
 
 With `hypotf64` and `__complex_abs` removed, the profile now shows `std::complex` operator symbols (`operator+`, `operator*=`, `operator*`, `operator+=`, `__muldc3`, `__rep`) collectively consuming the majority of CPU time. These are all function-call overhead: the debug build disables inlining, so every arithmetic operation on `std::complex<double>` dispatches through the C++ standard library machinery.
 
-The fix is to replace `std::complex<double>` in `getIterations` with plain `double` variables for the real and imaginary parts. The Mandelbrot iteration \(z_{n+1} = z_n^2 + c\) expands algebraically to:
+The fix is to replace `std::complex<double>` in `getIterations` with plain `double` variables for the real and imaginary parts. The Mandelbrot iteration $z_{n+1} = z_n^2 + c$ expands algebraically to:
 
 $$re_{new} = re_z^2 - im_z^2 + re_c$$
 $$im_{new} = 2 \cdot re_z \cdot im_z + im_c$$
