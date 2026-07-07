@@ -40,4 +40,4 @@ The highlighted thruster fire shows a generated particle result that still reads
 
 In this section, you inspected how particle effects can affect NFRU-generated frames. You learned that alpha blending, fast opacity changes, noisy shapes, and missing or unreliable motion data can lead to blur, distortion, flicker, or dropped particle detail in the interpolated frame.
 
-Next, continue with NFRU performance analysis to understand how frame generation affects render FPS, present FPS, and frame pacing during gameplay.
+Next, continue evaluating NFRU output in lighting-change scenarios, where emissive surfaces, translucent lighting, and screen-edge disocclusion can introduce additional frame-generation artifacts.

@@ -10,7 +10,7 @@ who_is_this_for: This Learning Path is for game and graphics developers who want
 learning_objectives:
     - Explain how NFRU generates intermediate frames for smoother motion.
     - Enable the Arm Neural Graphics Plugin in an Unreal Engine project.
-    - Inspect NFRU artifacts in fast camera, object, occlusion, and particle scenarios.
+    - Inspect NFRU artifacts in fast camera, object, occlusion, particle, and lighting-change scenarios.
     - Tune NFRU quality and frame pacing with Unreal Engine console variables.
     - Analyze generated frames with RenderDoc for Arm GPUs.
 

@@ -21,7 +21,7 @@ For repeatable testing, Project Moku provides reference cuts that replay the sam
 | ![Reference cut 02 showing a Moku lighting and corridor test view#center](./images/reference-cut-02.jpg "Reference cut 02") | ![Reference cut 03 showing a Moku scene variation for NFRU testing#center](./images/reference-cut-03.jpg "Reference cut 03") | ![Reference cut 04 showing a Moku particle VFX test view#center](./images/reference-cut-04.jpg "Reference cut 04") |
 | --- | --- | --- |
 
-The scene is optimized to run at over 60 FPS and can present at 120 FPS using generated intermediate frames for a smooth visual experience.
+In the tested Moku corridor captures, the scene can run above 60 FPS and present up to 120 FPS using generated intermediate frames. Treat these numbers as empirical results from the tested device, build, scene cut, and pacing setup, not as a fixed guarantee for every configuration.
 
 ## The result of Moku with and without NFRU
 The animated comparison below shows the same Moku scene with NFRU disabled and enabled. Use it to observe how NFRU inserts generated intermediate frames to increase the perceived frame rate, making motion appear smoother while preserving visual detail.

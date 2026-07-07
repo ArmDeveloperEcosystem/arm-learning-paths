@@ -1,6 +1,6 @@
 ---
 title: Wrapping up
-weight: 10
+weight: 11
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -16,14 +16,14 @@ In this Learning Path, you:
 - Enabled the Arm Neural Graphics Plugin in an Unreal Engine project.
 - Validated NFRU with Streamline and RenderDoc.
 - Compared real frame inputs, generated frame output, motion data, and debug views.
-- Investigated visual artifacts caused by fast camera movement, fast object movement, occlusion changes, and particle effects.
+- Investigated visual artifacts caused by fast camera movement, fast object movement, occlusion changes, particle effects, and lighting changes.
 - Reviewed how display refresh rate, VSync, platform frame pacing, Android Swappy, NFRU overhead, and the NFRU pace adjuster can affect the final FPS uplift.
 
 ## Key takeaways
 
 NFRU can improve perceived smoothness by presenting generated frames between real rendered frames. In representative Moku gameplay, the overall visual quality remains good and the FPS uplift is noticeable, especially when the generated frames are presented with stable pacing.
 
-NFRU is not perfect in every scenario. Artifacts are most likely in areas where the correct intermediate image is hard to infer. Fast camera movement can expose screen-edge regions with limited history. Fast-moving objects can create ambiguous motion. Occlusion-in and occlusion-out cases can mix foreground and background information. Alpha-blended particle effects can lack stable depth or motion data.
+NFRU is not perfect in every scenario. Artifacts are most likely in areas where the correct intermediate image is hard to infer. Fast camera movement can expose screen-edge regions with limited history. Fast-moving objects can create ambiguous motion. Occlusion-in and occlusion-out cases can mix foreground and background information. Alpha-blended particle effects can lack stable depth or motion data. Bright emissive and translucent lighting changes can also leave ghosting when final color changes faster than the available motion and depth signals can explain.
 
 These issues are usually localized to difficult content rather than affecting the whole frame. Use Streamline, RenderDoc, and the NFRU debug views to understand whether an artifact comes from motion vectors, optical flow, depth, disocclusion masks, or content that is difficult for interpolation.
 
