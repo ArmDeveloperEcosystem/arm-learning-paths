@@ -86,4 +86,19 @@ Rules:
 - Keep each tab roughly comparable in length and detail.
 - Avoid hiding critical sequential instructions inside tabs unless the user chooses one path.
 
+## Mathematical expressions
 
+To display a mathematical expression inline, encase the expression in `\(...\)`.
+
+For example:
+
+```md
+\(\sqrt{re^2 + im^2}\)
+```
+To display a mathematical expression in a new line, encase the expression in `$$...$$`.
+
+For example:
+
+```md
+$$re_{new} = re_z^2 - im_z^2 + re_c$$
+```
