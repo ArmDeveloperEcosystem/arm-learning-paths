@@ -18,9 +18,8 @@ learning_objectives:
     - Connect to the running Minecraft server from the Minecraft client application
 
 prerequisites:
-    - Review [Get started with Oracle Cloud Infrastructure](/learning-paths/servers-and-cloud-computing/csp/oci/) 
-    - Install software that allows you to connect to a running instance over SSH
-    - You will need a copy of the [Minecraft Java edition client](https://www.minecraft.net/en-us/download) installed, and [a license](https://www.minecraft.net/en-us/store/minecraft-java-bedrock-edition-pc) for the game
+    - An Oracle Cloud Infrastructure (OCI) account
+    - A copy of the [Minecraft Java edition client](https://www.minecraft.net/en-us/download) installed, and [a license](https://www.minecraft.net/en-us/store/minecraft-java-bedrock-edition-pc) for the game
 
 author: Dave Neary
 
