@@ -35,7 +35,7 @@ generated_summary_faq:
   summary: >-
     You'll prepare a BalenaOS image for Arm Virtual Hardware,
     provisioning a virtual Raspberry Pi 4, and deploy a pre-built application from Balena Hub.
-    First, you'll create a Balena Cloud account and fleet to organize deployments, then start an Arm Virtual
+    First, you'll create a Balena Cloud account and fleet to organize deployments. Then, you'll start an Arm Virtual
     Hardware device and upload the custom BalenaOS firmware. With the device running, you'll navigate
     from the Balena Cloud dashboard to Balena Hub and select a ready-made application to deploy.
     You'll then deploy an example app that uses the `balena-app` Grafana dashboard to visualize the device state, providing
