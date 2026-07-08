@@ -19,7 +19,7 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 ## Voice and tone
 
 - Use second person: `you` and `your` for Learning Path summaries, Learning Path content, install guide content, answers to FAQs, and metadata descriptions. Avoid first person for these content types.
-- Use first person: `I` and `we` for FAQs.
+- Use first person: `I` for FAQ questions only.
 - Use active voice.
 - Use present tense for descriptions.
 - Use imperative mood for commands.

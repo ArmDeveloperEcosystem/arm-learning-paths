@@ -22,9 +22,59 @@ prerequisites:
     - (Optional) Visual Studio Code installed if you want to use the Topo VS Code extension.
     - Basic familiarity with containers and CLI tools
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-07-02T19:14:35Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 49368c669c0d44931ed68ba65bcd88321025a685cfd23ed73d43de7b35cacd07
+  summary_generated_at: '2026-07-02T19:14:35Z'
+  summary_source_hash: 49368c669c0d44931ed68ba65bcd88321025a685cfd23ed73d43de7b35cacd07
+  faq_generated_at: '2026-07-02T19:14:35Z'
+  faq_source_hash: 49368c669c0d44931ed68ba65bcd88321025a685cfd23ed73d43de7b35cacd07
+  summary: >-
+    You'll use Topo to deploy containerized workloads to Arm-based Linux targets
+    over SSH. You'll install Topo on a host machine, run a health check to validate host and target
+    readiness, and generate a target description so Topo can detect Arm CPU features such as Neon
+    and SVE and match compatible templates. You'll then clone a starter template using an
+    LLM chatbot example, accept default build prompts, and deploy. Topo builds the container image
+    on the host, transfers it to the target, and starts the services on the target; it can also
+    build directly on the target. You'll also see how to run the same workflow using
+    the Topo Visual Studio Code extension.
+  faqs:
+  - question: How do I verify that my host and target are ready before deploying?
+    answer: >-
+      Run `topo health` on the host to confirm Topo, SSH, and the container engine are available.
+      To include the target in the check, provide `--target` or set the `TOPO_TARGET` environment
+      variable.
+  - question: How do I tell Topo which target to use for health checks and deployment?
+    answer: >-
+      Pass `--target` to the Topo command or set `TOPO_TARGET` in your environment. The health check
+      output prompts you when a target is not specified.
+  - question: How does Topo determine if a template is compatible with my Arm target?
+    answer: >-
+      Topo detects hardware capabilities on the target, including Arm CPU features such as Neon and
+      SVE, and uses them to identify compatible templates. Generating a target description helps
+      guide template selection.
+  - question: What should I expect when cloning the example template and responding to prompts?
+    answer: >-
+      Clone the LLM chatbot template with `topo clone` and press Enter to accept the default build
+      arguments. The default configuration uses the `bartowski/Qwen_Qwen3.5-0.8B-GGUF` model and
+      builds with Neon optimizations.
+  - question: Where are images built and what happens after deployment starts?
+    answer: >-
+      Topo builds container images on the host, transfers them to the target over SSH, and starts
+      the services on the target. It can also build and deploy directly on the target if you choose
+      that workflow.
+# END generated_summary_faq
+
 author: Matt Cossins
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
