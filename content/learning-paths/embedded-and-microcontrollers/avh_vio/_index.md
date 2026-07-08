@@ -43,7 +43,7 @@ generated_summary_faq:
       the example peripheral.
   - question: What do I need to install to run the example’s Python UI?
     answer: >-
-      We install the Tkinter package for Python in the AVH terminal with: `sudo apt install -y
+      Install the Tkinter package for Python in the AVH terminal with: `sudo apt install -y
       python3-tk`.
   - question: Where is the LED example located after I clone the repository?
     answer: >-

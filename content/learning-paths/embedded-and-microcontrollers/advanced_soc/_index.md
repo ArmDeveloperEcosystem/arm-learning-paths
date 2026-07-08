@@ -33,8 +33,7 @@ generated_summary_faq:
   faq_source_hash: d8c48c293b2d316d5e68e18ab9e81157ad114a64cf2efa6951374a55d25238d6
   summary: >-
     You'll design and integrate a custom AXI4-Lite peripheral
-    with the ZYNQ Processing System on a Zybo Z7-10 board. First, you'll create a clean Vivado workspace,
-    then you'll follow the **Create and Package New IP** flow to build the peripheral, and add external ports for LEDs and
+    with the ZYNQ Processing System on a Zybo Z7-10 board. First, you'll create a clean Vivado workspace. Then, you'll follow the **Create and Package New IP** flow to build the peripheral, and add external ports for LEDs and
     switches with the shown bit widths. You'll create a block design that connects the peripheral to
     the Cortex-A9–based processing system, followed by generating an HDL wrapper and a bitstream.
     Using Vitis IDE, you'll write a bare-metal C program that reads switch inputs over AXI-Lite and drives LED outputs.
@@ -48,9 +47,9 @@ generated_summary_faq:
     answer: >-
       Select **Create a new AXI4 peripheral**. This generates the template files for an AXI-compliant
       custom IP block.
-  - question: How do I know the led and sw ports are configured correctly?
+  - question: How do I know the `led` and `sw` ports are configured correctly?
     answer: >-
-      Confirm led is an output and sw is an input, each with the width shown in the steps (four
+      Confirm `led` is an output and `sw` is an input, each with the width shown in the steps (four
       bits). They should appear as external ports in the block design and connect to your custom
       peripheral.
   - question: What should I do before generating the bitstream?

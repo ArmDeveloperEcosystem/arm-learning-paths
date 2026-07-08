@@ -53,7 +53,7 @@ generated_summary_faq:
       pull the image before running it with containerd.
   - question: Which container runtime does K3s use in this setup?
     answer: >-
-      K3s is configured to use containerd via the container-runtime-endpoint flag set to `unix://var/run/containerd/containerd.sock`
+      K3s is configured to use `containerd` via the `container-runtime-endpoint ` flag set to `unix://var/run/containerd/containerd.sock`
       in the provided install command.
   - question: How long should the K3s installation take, and what should I do next?
     answer: >-

@@ -48,13 +48,13 @@ generated_summary_faq:
       threads.
   - question: How many threads does the example create and where are they started?
     answer: >-
-      The example starts three threads from app_main using osThreadNew(). The number and names
+      The example starts three threads from `app_main` using `osThreadNew()`. The number and names
       are arbitrary and serve to illustrate basic thread creation.
   - question: What steps build and run the project in Keil MDK, and what should I monitor during
       execution?
     answer: >-
-      Save all files, click Build (F7), then Debug (Ctrl+F5) to launch the FVP. Open the RTX RTOS
-      view and the **Serial Windows > Debug (printf)** window, click Run (F5), and observe thread
+      Save all files, click Build (`F7`), then Debug (`Ctrl+F5`) to launch the FVP. Open the RTX RTOS
+      view and the **Serial Windows > Debug (printf)** window, click Run (`F5`), and observe thread
       activity and output before stopping.
   - question: When should I use Event Recorder and how do I route STDOUT to it?
     answer: >-

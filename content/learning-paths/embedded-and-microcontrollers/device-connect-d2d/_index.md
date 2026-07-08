@@ -53,8 +53,8 @@ generated_summary_faq:
       a simulated device.
   - question: Which parts of the Device Connect Edge SDK do I implement to describe a device?
     answer: >-
-      Subclass DeviceDriver and annotate its methods and properties with the SDK’s decorators.
-      Start a DeviceRuntime to bring the driver online for discovery, pub/sub, and RPC.
+      Subclass `DeviceDriver` and annotate its methods and properties with the SDK’s decorators.
+      Start a `DeviceRuntime` to bring the driver online for discovery, pub/sub, and RPC.
   - question: What result should I expect from the threshold monitor when everything is working?
     answer: >-
       The monitor subscribes to the sensor’s temperature and humidity readings and raises an alert

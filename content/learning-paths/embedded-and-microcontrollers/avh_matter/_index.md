@@ -49,7 +49,7 @@ generated_summary_faq:
     answer: >-
       The path uses the `lighting-app` example from the repository. Run it on the Arm Virtual Hardware
       instances and stop it with `Ctrl+C` when moving on to the CI/CD setup.
-  - question: Why are the existing workflows removed from .github/workflows?
+  - question: Why are the existing workflows removed from `.github/workflows`?
     answer: >-
       The upstream repository includes many workflows for different configurations. For this path,
       you'll remove them and add a single workflow so the fork builds and tests the targeted configuration

@@ -46,8 +46,7 @@ generated_summary_faq:
       deploy the inference model without training.
   - question: What is exported from PaddlePaddle before compilation?
     answer: >-
-      You'll export a Paddle inference model that TVMC can compile. The exact file names or directory
-      layout aren't explicitly listed.
+      You'll export a Paddle inference model that TVMC can compile.
   - question: Which target should I choose when running TVMC?
     answer: >-
       Compile the model for the Arm Corstone-300 Fixed Virtual Platform with Cortex-M55 processors.

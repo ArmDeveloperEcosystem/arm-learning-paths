@@ -51,20 +51,20 @@ generated_summary_faq:
       The steps assume this core for building, flashing, and running the application.
   - question: What artifacts should I expect after compiling on the Arm cloud instance?
     answer: >-
-      You should have ExecuTorch static libraries and a compiled MobileNetV2 model targeted for
+      You'll have ExecuTorch static libraries and a compiled MobileNetV2 model targeted for
       the Ethos-U85. These outputs are linked into the `mv2_runner` firmware project.
   - question: After duplicating the Blinky example, which project files need to be updated?
     answer: >-
-      Rename blinky.cproject.yml to `mv2_runner.cproject.yml` and replace internal references from
+      Rename `blinky.cproject.yml` to `mv2_runner.cproject.yml` and replace internal references from
       `blinky` to `mv2_runner`. This establishes a new CMSIS project for the application.
-  - question: Where do I place the provided main.cpp and how do I verify it works?
+  - question: Where do I place the provided `main.cpp` and how do I verify it works?
     answer: >-
       Place `main.cpp` in the `mv2_runner` project directory as instructed. When you flash and run
       the firmware, check the SEGGER RTT console for the printed classification result.
   - question: What memory changes are required for the model and runtime to fit?
     answer: >-
       Increase MRAM allocation for the embedded model (about 3.7 MB) and code (around 800 KB),
-      and provision approximately 7.6 MB of SRAM for inference buffers. Update stack/heap sizes
+      and provision approximately 7.6 MB of SRAM for inference buffers. Update stack and heap sizes,
       and the linker script in the CMSIS project accordingly.
 # END generated_summary_faq
 

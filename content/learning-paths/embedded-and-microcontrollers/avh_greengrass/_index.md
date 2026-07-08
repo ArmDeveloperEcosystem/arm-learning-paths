@@ -34,7 +34,7 @@ generated_summary_faq:
     You'll use Arm Virtual Hardware (AVH) with AWS IoT Greengrass to
     deploy IoT software to a virtual Raspberry Pi 4. First, you'll start a Raspberry Pi instance in
     AVH, then use the AWS console to create and manage a Greengrass deployment that defines pre-built
-    components and their configurations. You'll walk through where to create a deployment in
+    components and their configurations. You'll learn where to create a deployment in
     AWS IoT Core and how to adjust it by adding, removing, or reconfiguring components. By the
     end, you'll create a Greengrass deployment and apply it to the virtual device so you can iterate
     on component selection and configuration using the standard Greengrass deployment workflow.
@@ -45,7 +45,7 @@ generated_summary_faq:
       Greengrass. You'll use it to apply or update components on your device.
   - question: Where do I create a Greengrass deployment in the AWS console?
     answer: >-
-      Go to **IoT Core**, then navigate to **Manage -> Greengrass devices -> Deployments** and click **Create**.
+      Go to **IoT Core**, then navigate to **Manage > Greengrass devices > Deployments** and select **Create**.
   - question: Can I change which components are in a deployment after I create it?
     answer: >-
       Yes. You can modify a deployment to change configurations, add components, or remove components.

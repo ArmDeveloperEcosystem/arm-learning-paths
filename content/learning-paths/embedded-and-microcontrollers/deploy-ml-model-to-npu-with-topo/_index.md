@@ -50,7 +50,7 @@ generated_summary_faq:
   faqs:
   - question: How do I confirm the FRDM i.MX 93 target is ready before deploying?
     answer: >-
-      Run topo health --target <user>@<target-ip>. The host and target sections should show successful
+      Run `topo health --target <user>@<target-ip>`. The host and target sections should show successful
       checks for SSH and the container engine, and the target should also report Remoteproc Runtime
       and Remoteproc as healthy.
   - question: Which components run on Cortex-A and Cortex-M33, and how do they communicate?
@@ -69,9 +69,9 @@ generated_summary_faq:
       repository, make it a normal Compose project, then add Topo metadata and Remoteproc Runtime
       services. The Template is bootstrapped from Compose services, Remoteproc Runtime metadata,
       and Topo arguments.
-  - question: What should I check if topo health reports a failure?
+  - question: What should I check if `topo health` reports a failure?
     answer: >-
-      Resolve the specific errors shown by topo health before continuing. Confirm SSH access to
+      Resolve the specific errors shown by `topo health` before continuing. Confirm SSH access to
       the target, verify the container engine is available on both host and target, and ensure
       Remoteproc Runtime is present on the target.
 # END generated_summary_faq
