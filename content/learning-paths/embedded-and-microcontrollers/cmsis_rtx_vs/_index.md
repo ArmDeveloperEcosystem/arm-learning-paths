@@ -16,9 +16,55 @@ prerequisites:
     - Installation of [Arm Keil Studio for VS Code](/install-guides/keilstudio_vs/)
     - Some familiarity with CMSIS is assumed
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-07-08T15:27:34Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 989064eaa54dfab7f135038e3c3f0bfa932ba95512ca1dcdc36c034edf731445
+  summary_generated_at: '2026-07-08T15:27:34Z'
+  summary_source_hash: 989064eaa54dfab7f135038e3c3f0bfa932ba95512ca1dcdc36c034edf731445
+  faq_generated_at: '2026-07-08T15:27:34Z'
+  faq_source_hash: 989064eaa54dfab7f135038e3c3f0bfa932ba95512ca1dcdc36c034edf731445
+  summary: >-
+    This Learning Path guides learners through creating, configuring, and debugging an RTX5-based
+    application in Keil Studio for VS Code using the CMSIS-RTOS2 API. You create a CMSIS Solution
+    project, select required components in the **Run-Time Environment**, and add system startup so
+    RTX5 can initialize the SysTick timer with `SystemCoreClockUpdate()` before starting the scheduler.
+    The path implements an `app_main` thread that launches multiple worker threads, then builds
+    the project using the CMSIS extension. Using the Cortex-M4 Fixed Virtual Platform as the target,
+    learners run and step through the program and verify execution by observing periodic thread
+    messages printed in the **Debug Console**.
+  faqs:
+  - question: Which target should I use if I don’t have hardware available?
+    answer: >-
+      Use the Cortex-M4 Fixed Virtual Platform (FVP) referenced in the steps. The procedure also
+      applies to other devices supported by CMSIS-Pack.
+  - question: How do I start a debug session in Keil Studio for VS Code?
+    answer: >-
+      Click the **Debug** icon or open the **Run and Debug** view, then choose the configured debug connection
+      to launch the FVP. Use the standard debugging controls to step through your code.
+  - question: How do I know the RTOS is running correctly?
+    answer: >-
+      After initialization, the Debug Console displays messages from your threads. Look for output
+      similar to: “[model] hello from thread 1/2/3”.
+  - question: Where do main.c and app_main.c come from?
+    answer: >-
+      `main.c` is created automatically in the Source Files group when you set up the CMSIS Solution
+      project. Add `app_main.c` by clicking the **+** icon in the Source Files group.
+  - question: Can I change the number or names of the threads?
+    answer: >-
+      Yes. The number and naming of threads created by `app_main` are flexible, so adjust them to
+      match your application structure.
+# END generated_summary_faq
+
 author: Ronan Synnott
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -50,4 +96,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-
