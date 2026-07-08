@@ -48,7 +48,7 @@ generated_summary_faq:
   - question: Where is the LED example located after I clone the repository?
     answer: >-
       After cloning, navigate into the `leds_example` directory to work with the sample.
-  - question: I haven’t launched Arm Virtual Hardware yet—what should I do first?
+  - question: I haven’t launched Arm Virtual Hardware yet — what should I do first?
     answer: >-
       Start the Arm Virtual Hardware AMI in an AWS account and follow the Arm Virtual Hardware
       install guide to reach the AVH terminal.

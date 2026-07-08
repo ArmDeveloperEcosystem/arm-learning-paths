@@ -36,7 +36,7 @@ generated_summary_faq:
     it with Arm Compiler for Embedded, and run it on the `FVP_Base_AEMvA` model. After bringing
     up a Hello World example that uses semihosting for `printf`, you'll replace that mechanism by retargeting
     output to the PL011 UART provided by the Fixed Virtual Platform. You'll add a minimal EL3 reset handler
-    to boot only one processor and place the remaining cores into sleep. You'll then
+    to boot only one processor and place the remaining cores into sleep. Then, you'll
     introduce basic exception handling by routing exceptions to EL3 and configuring the Generic
     Interrupt Controller (GICv3) with a timer as an interrupt source, enabling a simple event‑driven
     workflow that you can observe on the model.

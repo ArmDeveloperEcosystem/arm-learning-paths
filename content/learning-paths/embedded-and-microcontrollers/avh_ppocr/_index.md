@@ -34,9 +34,8 @@ generated_summary_faq:
   summary: >-
     You'll export a PaddlePaddle OCR text recognition inference
     model, compile it with TVMC, and deploy the result to the Arm Corstone-300 Fixed Virtual
-    Platform (FVP) with Cortex-M55 processors using Arm Virtual Hardware. You'll follow an end-to-end
-    flow that starts with a pre-trained PaddlePaddle model, produces a TVMC-compiled output for
-    the target, and runs the workload in a bare-metal environment on the FVP. Along the way, you'll
+    Platform (FVP) with Cortex-M55 processors using Arm Virtual Hardware. Starting with a pre-trained PaddlePaddle model, you'll produce a TVMC-compiled output for
+    the target, and run the workload in a bare-metal environment on the FVP. Along the way, you'll
     make the key export, compilation, and deployment choices required for Cortex-M, then validate
     the workflow by executing the model on the virtual platform.
   faqs:
