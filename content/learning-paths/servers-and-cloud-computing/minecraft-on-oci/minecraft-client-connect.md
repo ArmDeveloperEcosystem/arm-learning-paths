@@ -1,6 +1,6 @@
 ---
 title: Connect to the server from the Minecraft client
-description: Configure OS-level firewalls to open port 25565, and connect to the Minecraft server.
+description: Open TCP port 25565 in the Oracle Linux firewall and connect to the OCI Minecraft Java Edition server from the Minecraft client.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

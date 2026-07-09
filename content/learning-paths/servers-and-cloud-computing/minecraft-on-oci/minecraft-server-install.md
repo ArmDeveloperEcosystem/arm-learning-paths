@@ -58,7 +58,9 @@ Copy the `minecraft_server.x.x.x.jar` URL from that page. Then, run the followin
 wget <paste URL to server.jar here>
 ```
 
-You'll have a `server.jar` file on your OCI instance. To make it easier to keep track of different server versions, rename the `server.jar` file to something more meaningful as follows:
+You'll have a `server.jar` file on your OCI instance. To make it easier to keep track of different server versions, rename the `server.jar` file to something more meaningful 
+
+For example:
 
 ```bash
 mv server.jar minecraft_server.26.2.jar

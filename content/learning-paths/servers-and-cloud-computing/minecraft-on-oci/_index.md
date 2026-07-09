@@ -1,7 +1,7 @@
 ---
 title: Run a Minecraft server on an Arm-based Oracle Cloud Infrastructure instance
 
-description: Provision an arm64 instance on Oracle Cloud Infrastructure, install the Java runtime, and deploy a persistent Minecraft server for multiplayer gameplay.
+description: Deploy a Minecraft Java Edition server on an Arm-based OCI A1 instance, open port 25565, and connect from the Minecraft client.
 
 minutes_to_complete: 10
 
@@ -10,7 +10,7 @@ who_is_this_for: This is an introductory topic for developers who are new to OCI
 learning_objectives: 
     - Provision an OCI A1 arm64 virtual machine instance suitable for running a Minecraft server
     - Deploy and configure Minecraft server software
-    - Expose the Minecraft service from OCI by editing the network policy for the instance 
+    - Expose the Minecraft service from OCI by editing the network policy for the instance and the virtual machine instance firewall 
     - Connect to the running Minecraft server from the Minecraft client application
 
 prerequisites:

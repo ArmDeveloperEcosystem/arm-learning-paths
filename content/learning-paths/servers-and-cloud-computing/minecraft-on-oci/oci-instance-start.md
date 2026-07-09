@@ -1,6 +1,6 @@
 ---
 title: Create and configure an Arm-based virtual machine instance on Oracle Cloud Infrastructure
-description: Create and configure an Arm-based virtual machine instance on Oracle Cloud Infrastructure.
+description: Create an Arm-based OCI A1 virtual machine, assign a public IPv4 address, open TCP port 25565 in the security list, and connect over SSH.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
