@@ -5,7 +5,7 @@ description: Deploy a Minecraft Java Edition server on an Arm-based OCI A1 insta
 
 minutes_to_complete: 10
 
-who_is_this_for: This is an introductory topic for developers who are new to OCI and want to provision an arm64 instance and run a persistent Minecraft server on it.
+who_is_this_for: This is an introductory topic for developers who are new to Oracle Cloud Infrastructure (OCI) and want to provision an arm64 instance and run a persistent Minecraft server on it.
 
 learning_objectives: 
     - Provision an OCI A1 arm64 virtual machine instance suitable for running a Minecraft server
