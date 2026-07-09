@@ -1,11 +1,7 @@
 ---
-title: Run a Minecraft server on OCI A1 Arm64 instances
+title: Run a Minecraft server on an Arm-based Oracle Cloud Infrastructure instance
 
 description: Provision an Arm64 instance on Oracle Cloud Infrastructure, install the Java runtime, and deploy a persistent Minecraft server for multiplayer gameplay.
-
-draft: true
-cascade:
-   draft: true
 
 minutes_to_complete: 10
 
@@ -20,6 +16,7 @@ learning_objectives:
 prerequisites:
     - An Oracle Cloud Infrastructure (OCI) account
     - A copy of the [Minecraft Java edition client](https://www.minecraft.net/en-us/download) installed, and [a license](https://www.minecraft.net/en-us/store/minecraft-java-bedrock-edition-pc) for the game
+    - A Microsoft account for starting a Minecraft client application.
 
 author: Dave Neary
 
@@ -36,10 +33,6 @@ operatingsystems:
 
 further_reading:
     - resource:
-        title: How To Setup And Run A Free Minecraft Server In The Cloud
-        link: https://blogs.oracle.com/developers/how-to-setup-and-run-a-free-minecraft-server-in-the-cloud
-        type: blog
-    - resource:
         title: How to create a powerful Minecraft Server for free using Oracle Cloud
         link: https://www.youtube.com/watch?v=0kFjEUDJexI
         type: video
@@ -47,6 +40,10 @@ further_reading:
         title: Deploy Arm instances on Oracle Cloud Infrastructure (OCI) using Terraform
         link: /learning-paths/servers-and-cloud-computing/oci-terraform/
         type: learning-path
+    - resource:
+        title: Getting started with Oracle Cloud Infrastructure 
+        link: /learning-paths/servers-and-cloud-computing/csp/oci/
+        type: learning-path 
 
 
 ### FIXED, DO NOT MODIFY
