@@ -48,7 +48,7 @@ generated_summary_faq:
       java-25-openjdk.aarch64 -y`.
   - question: How do I keep the Minecraft server running after I close my SSH session?
     answer: >-
-      Use tmux to create a persistent terminal session and start the server inside that session.
+      Use `tmux` to create a persistent terminal session and start the server inside that session.
       You can disconnect and later reattach to the `tmux` session without stopping the server.
   - question: Which port do I need to open on the VM, and how?
     answer: >-
