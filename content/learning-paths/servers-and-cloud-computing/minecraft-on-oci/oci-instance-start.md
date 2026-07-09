@@ -72,7 +72,7 @@ SSH into your instance, replacing `<path to private key>` with the path to your 
 ssh -i <path to private key> opc@<public IP address>
 ```
 
-### What you've accomplished and what's next
+## What you've accomplished and what's next
 
 You've now successfully provisioned an Ampere A1 virtual machine instance on Oracle Cloud Infrastructure, configured its virtual network to assign a public IP address, opened port `25565`, and connected to the server securely over SSH.
 

@@ -109,7 +109,7 @@ The output shows that the process has completed successfully, and is similar to:
 [00:41:04] [Server thread/INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
 ```
 
-### What you've accomplished and what's next
+## What you've accomplished and what's next
 
 You've now installed the open-source Java Runtime Environment on your instance, downloaded the Minecraft server files, accepted the End User License Agreement, and started the game server.
 
