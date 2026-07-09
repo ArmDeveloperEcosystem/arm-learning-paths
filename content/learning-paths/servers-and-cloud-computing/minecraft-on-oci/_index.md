@@ -35,9 +35,9 @@ generated_summary_faq:
   summary: >-
     You'll provision an Arm-based Ampere A1 virtual machine (VM) on Oracle
     Cloud Infrastructure (OCI), install the required Java runtime, and deploy a Minecraft Java Edition
-    server. First, you'll set up the OCI VM instance and update access control by opening TCP port `25565`. Then, you'll configure a persistent terminal session so the server continues running after
-    SSH disconnects. With the server running, you'll start the Minecraft Java Edition
-    client and connect to the server to validate the deployment.
+    server. First, you'll set up the OCI VM instance and update security ingress rules. Then, you'll configure a persistent terminal session so the server continues running after
+    SSH disconnects. With the server running, you'll update the server-side local firewall, start the Minecraft Java Edition
+    client, and connect to the server to validate the deployment.
   faqs:
   - question: Which OCI shape and image should I choose for the server?
     answer: >-
