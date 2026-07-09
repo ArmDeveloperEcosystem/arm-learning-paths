@@ -1,18 +1,23 @@
 ---
-title: Build and baseline
+title: Create a nopCommerce endpoint benchmark baseline on Arm
+description: Build a pinned nopCommerce release on Arm and run a repeatable endpoint benchmark to create a baseline for later tuning.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-# Build and baseline
+## Build nopCommerce and create an endpoint baseline
 
-Create a reproducible Arm baseline before optimization work. This page pins source, verifies a clean build, and captures a representative endpoint baseline so later changes can be measured against a known control.
+Create a reproducible Arm baseline before optimization work. 
 
-## Clone and pin the source
+You'll pin the source, verify a clean build, and capture a representative endpoint baseline so you can measure later changes against a known control.
 
-Pinning the exact tag and commit avoids silent drift in dependencies and behavior. Run these commands on the Cobalt VM. The later commands assume you are in the `nopCommerce` repository root unless a section says otherwise.
+### Clone and pin the source
+
+Pinning the exact tag and commit avoids silent drift in dependencies and behavior. 
+
+Run the following commands on the Arm-based virtual machine (VM):
 
 ```bash
 git clone https://github.com/nopSolutions/nopCommerce.git
@@ -21,6 +26,7 @@ git fetch --tags --prune
 git checkout release-4.90.3
 git rev-parse --short=10 HEAD   # expect 9beda11c42
 ```
+Later commands in the section assume you're in the `nopCommerce` repository root unless stated otherwise.
 
 If you open a new terminal later, return to the same repository root before running commands:
 
@@ -28,9 +34,9 @@ If you open a new terminal later, return to the same repository root before runn
 cd ~/nopCommerce  # replace with your clone path if different
 ```
 
-## Restore and build on Arm
+### Restore and build on Arm
 
-Run the restore and build on the Arm-based VM to establish a native Arm baseline. Restoring first separates package resolution problems from compilation problems, and `--no-restore` makes the build validate the already restored dependency graph.
+Run restore and build on the Arm-based VM to establish a native Arm baseline:
 
 ```bash
 # Restore dependencies first so build failures are easier to triage.
@@ -39,15 +45,19 @@ dotnet restore src/Presentation/Nop.Web/Nop.Web.csproj
 # Build release binaries without re-restoring packages.
 dotnet build src/Presentation/Nop.Web/Nop.Web.csproj -c Release --no-restore
 ```
+Restoring first separates package resolution problems from compilation problems, and `--no-restore` makes the build validate the already restored dependency graph.
 
-## Start and install nopCommerce
+### Start and install nopCommerce
 
-Start the app locally and complete installer setup with PostgreSQL. Run this command in one terminal and leave it running; `dotnet run` hosts the web application and keeps the terminal attached to the server logs.
+Start the app locally and complete installer setup with PostgreSQL. 
+
+Run the following command in one terminal and leave it running: 
 
 ```bash
 cd src/Presentation/Nop.Web
 dotnet run -c Release --no-build --urls http://0.0.0.0:5000
 ```
+`dotnet run` hosts the web application and keeps the terminal attached to the server logs.
 
 In a browser, open `http://<cobalt-public-ip>:5000` or use an SSH tunnel to reach `http://127.0.0.1:5000`. On the nopCommerce install page, select PostgreSQL and use the database settings from the previous section:
 
@@ -71,11 +81,11 @@ curl -s -o /dev/null -w 'root=%{http_code}\n' http://127.0.0.1:5000/
 curl -s -o /dev/null -w 'install=%{http_code}\n' http://127.0.0.1:5000/install
 ```
 
-Expected after successful install: `root=200`, `install=302`.
+The outputs after a successful install should be: `root=200`, `install=302`.
 
-## Baseline methodology
+### Run the endpoint baseline benchmark
 
-Do not benchmark `/install`. Baseline stable storefront paths first, then add cart and attribute-change routes only after you know the valid product IDs, attribute IDs, request method, and anti-forgery token behavior for your installed store.
+Don't benchmark `/install`. Baseline stable storefront paths first, then add cart and attribute-change routes only after you know the valid product IDs, attribute IDs, request method, and anti-forgery token behavior for your installed store.
 
 - `/`
 - `/search/`
@@ -84,7 +94,7 @@ Do not benchmark `/install`. Baseline stable storefront paths first, then add ca
 - Product and category pages from your sample data
 - Cart or checkout endpoints from a recorded production-like workflow
 
-Create the endpoint tester in the repository root. The script uses only the Python standard library, submits requests with fixed concurrency, treats non-2xx and non-3xx responses as errors, and writes raw samples plus per-route summaries to JSON.
+Create the endpoint tester in the repository root:
 
 ```python {file_name="test_nopcommerce_endpoints.py"}
 #!/usr/bin/env python3
@@ -198,6 +208,8 @@ if __name__ == "__main__":
     main()
 ```
 
+The script uses only the Python standard library, submits requests with fixed concurrency, treats non-2xx and non-3xx responses as errors, and writes raw samples plus per-route summaries to JSON.
+
 Run the endpoint tester from the repository root while the app is still running in the first terminal:
 
 ```bash
@@ -209,15 +221,22 @@ python3 test_nopcommerce_endpoints.py \
   --json-out arm_before.json
 ```
 
-The command prints the per-route summary and writes the raw measurements to `arm_before.json`. Keep that JSON file unchanged; it is the baseline artifact used by the tuning step.
+The command prints the per-route summary and writes the raw measurements to `arm_before.json`. Keep that JSON file unchanged because it's the baseline artifact used in the tuning step.
 
-## Baseline quality rules
+### Baseline quality rules
 
 Use these rules before you compare any optimization result:
 
-- Run at least 3 baseline trials with identical parameters.
-- Keep endpoint order fixed per run (not randomized) when comparing before vs after.
+- Run at least three baseline trials with identical parameters.
+- Keep endpoint order fixed per run (not randomized) when comparing before and after.
 - Keep database state and seeded data identical across runs.
 - Capture raw JSON for every run and compare medians, not single outliers.
 
 This baseline process becomes the control for every later tuning or code-change decision.
+
+## What you've accomplished and what's next
+
+You've now pinned the nopCommerce source, verified the build, installed the app, and captured `arm_before.json` as your endpoint baseline.
+
+Next, you'll audit dependencies before migration. 
+
