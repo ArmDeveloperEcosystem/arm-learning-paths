@@ -10,7 +10,7 @@ who_is_this_for: This is an introductory topic for developers who are new to Ora
 learning_objectives: 
     - Provision an OCI A1 arm64 virtual machine instance suitable for running a Minecraft server
     - Deploy and configure Minecraft server software
-    - Expose the Minecraft service from OCI by editing the network policy for the instance and the virtual machine instance firewall 
+    - Expose the Minecraft service from OCI by editing the network policy for the instance and the local firewall 
     - Connect to the running Minecraft server from the Minecraft client application
 
 prerequisites:
