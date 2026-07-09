@@ -20,11 +20,11 @@ To create an Ampere powered A1 virtual machine (VM) instance that you'll use for
 6. To update the instance's image, select **Change image**.
 7. In the **Select an image** panel, search for and select **Oracle Linux 9**, then select **Select image**.
 8. To update the shape of the instance, select **Change shape** and update the following in the **Browse all shapes** panel:
-  - For **Instance type**, select **Virtual machine**.
-  - For **Shape series**, select **Ampere**.
-  - For **Image**, select **VM.Standard.A1.Flex**.
-  - Allocate two OCPUs and 12 GB of memory to your instance.
-    ![OCI instance creation shape settings panel with VM.Standard.A1.Flex selected#center](oci_change_shape.webp "Configure the VM instance shape to VM.Standard.A1.Flex")
+   - For **Instance type**, select **Virtual machine**.
+   - For **Shape series**, select **Ampere**.
+   - For **Image**, select **VM.Standard.A1.Flex**.
+   - Allocate two OCPUs and 12 GB of memory to your instance.
+      ![OCI instance creation shape settings panel with VM.Standard.A1.Flex selected#center](oci_change_shape.webp "Configure the VM instance shape to VM.Standard.A1.Flex")
 9. After updating the instance shape, select **Select shape**.
 10. Leave the security and storage options as defaults. Then, under **Networking**, update the following:
     - Create a new Virtual Cloud Network (VCN) and public subnet if you don't
