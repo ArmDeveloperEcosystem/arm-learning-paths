@@ -26,7 +26,7 @@ To start a client and connect to the server, follow these steps:
 
 1. Start your Minecraft client and log in with your Microsoft account credentials.
 2. Start the **Minecraft Java Edition** client from the launcher.
-   ![Minecraft Launcher with Minecraft: Java Edition selected and the Play button visible#center](minecraft_launcher.webp)
+   ![Minecraft Launcher with Minecraft: Java Edition selected and the Play button visible#center](minecraft_launcher.webp "Start Minecraft Java Edition from the launcher")
 3. Choose **Multiplayer** mode - read and click through the warning that third party servers aren't operated by Mojang.
 4. To add your server to the menu of available servers, choose **Add server**. Name your server something meaningful (for example, **My OCI server**) and put the IP address of your instance into the **Server Address** field:
    ![Minecraft Edit Server Info dialog with an OCI server name and the OCI instance public IP address entered in the Server Address field#center](configuring_new_minecraft_server.webp "Add your OCI instance public IP address to the Server Address field")
