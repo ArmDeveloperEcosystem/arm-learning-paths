@@ -72,11 +72,11 @@ To start the Minecraft server, run the command:
 java -Xmx8G -Xms8G -jar minecraft_server.26.2.jar nogui
 ```
 
-This runs the server without a graphical user interface, and allocates 8GB of memory to it.
+This runs the server without a graphical user interface, and allocates 8 GB of memory to it.
 
-The first time you do this, the start-up will fail and a file called `eula.txt` is created in the local folder. 
+The first time you do this, the startup will fail and a file called `eula.txt` is created in the local folder. 
 
-Before starting the server again, accept its terms of use. 
+Before starting the server again, accept the End User License Agreement. 
 
 Open `eula.txt` and change `eula=false` to `eula=true`, or run:
 
@@ -86,7 +86,7 @@ sed -i 's/eula=false/eula=true/' eula.txt
 
 After accepting terms of use, you'll be able to run the server successfully with the same command as earlier.
 
-The output shows that the process has completed successfully, and is similar to:
+The output is similar to:
 
 ```output
 [00:40:50] [Server thread/INFO]: Starting minecraft server version 26.2
