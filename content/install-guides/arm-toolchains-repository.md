@@ -1,11 +1,8 @@
 ---
-### Title the install tools article with the name of the tool to be installed
-### Include vendor name where appropriate
 title: Arm Toolchains Repository
 
 draft: true
 
-### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
 - Arm Toolchains
 - Arm Toolchain for Linux
@@ -13,27 +10,22 @@ additional_search_terms:
 - Linux
 - HPC
 
-### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 15
 
 test_maintenance: false
 test_images:
   - ubuntu:latest
 
-### Link to official documentation
 official_docs: https://developer.arm.com/tools-and-software
 description: Configure the Arm Toolchains Repository package archive on supported Linux AArch64 distributions to enable installing Arm Toolchains products using the system package manager.
 author: Gary Carroll
 
-### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
 tool_install: true              # Set to true to be listed in main selection page, else false
 multi_install: false            # Set to true if first page of multi-page article, else false
 multitool_install_part: false   # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
-
-# Arm Toolchains Repository
 
 The Arm Toolchains Linux repositories provide a native and convenient way to install selected Arm software products on supported Linux hosts using the host operating system package manager.
 
@@ -46,7 +38,7 @@ They are used to distribute Linux packages for Arm Toolchains products, includin
 
 Using the Arm Toolchains Linux repositories allows you to install, upgrade, and manage these products using standard Linux package-management tools such as `apt`, `dnf`, `yum`, and `zypper`.
 
-Note: root permissions are required to install system packages.
+Root or `sudo` permissions are required to install system packages.
 
 {{% notice Repository signing key update July 2026 %}}
 Arm has recently reviewed and strengthened the repository management and publication processes used for the Arm Toolchains Linux repositories.
@@ -60,9 +52,19 @@ Existing installed copies of Arm Toolchain for Linux and Arm Performance Librari
 
 ## Before you begin
 
-You need a supported Linux host with `aarch64` architecture.
+Confirm you are using an Arm Linux system by running:
 
-You also need the package manager for your Linux distribution:
+```bash
+uname -m
+```
+
+The output should be:
+
+```output
+aarch64
+```
+
+The commands in this guide use the native package manager for your distribution:
 
 - `apt` for Ubuntu LTS releases from 22.04
 - `dnf` or `yum` for RHEL 8 or later and Amazon Linux 2023
@@ -70,7 +72,7 @@ You also need the package manager for your Linux distribution:
 
 ## What is the Arm Toolchains repository package?
 
-Arm provides an `arm-toolchains-repository` package for each supported Linux distribution.
+Arm provides an `arm-toolchains-repository` for each supported Linux distribution.
 
 This package configures the Arm Toolchains Linux package repository on your host system.
 
@@ -84,27 +86,34 @@ Install this repository package before you install Arm Toolchain for Linux or Ar
 
 ## Why the signing key matters
 
-Linux package managers use signing keys to verify that repository metadata and packages come from the expected publisher.
+Linux package managers use cryptographic signing keys to verify that repository metadata and packages are authentic and come directly from Arm.
 
-For the Arm Toolchains Linux repositories, the signing key is part of the trust model for package installation and upgrades. If your package manager does not have the current Arm Toolchains repository signing key installed, it might refuse to refresh repository metadata or install packages from the repository.
+If you are setting up a new system, installing the `arm-toolchains-repository` package automatically configures the current repository signing key for you. No manual key installation or fingerprint verification is required.
 
-The previous Arm Toolchains repository signing key was replaced in July 2026.
+However, if you are upgrading a system that previously configured the Arm Toolchains Linux repository before July 2026, you must update the repository configuration to use the new key. Otherwise, your package manager may refuse to refresh repository metadata or install packages.
 
-The previous key fingerprint was:
+### Repository signing key fingerprints
+
+For reference or manual verification, the fingerprints of the previous and current Arm Toolchains signing keys are:
+
+Previous fingerprint:
 
 ```output
 EE37 7ACD D5AD 4AB6 BD79  9B8A B83D 741E 7A05 AF82
 ```
 
-The current key fingerprint is:
+Current fingerprint:
 
 ```output
 A406 5BCE 9386 DD1E 62FD  E03B 8144 CA16 11A0 BD71
 ```
 
-You can display the fingerprint from a downloaded key file with:
+### (Optional) Manually verifying the signing key
+
+If you want to manually verify the signing key, ensure the `gpg` utility (part of GnuPG) is installed on your system, then download the key file and display its fingerprint:
 
 ```bash
+curl -O https://developer.arm.com/packages/arm-toolchains/arm-toolchains.gpg
 gpg --show-keys --fingerprint arm-toolchains.gpg
 ```
 
@@ -149,49 +158,41 @@ The examples below install the repository package directly from [https://develop
 {{< tabpane code=true >}}
   {{< tab header="Ubuntu 24.04" language="bash" >}}
 curl -O https://developer.arm.com/packages/arm-toolchains/ubuntu/pool/arm-toolchains-repository_2-2~noble_all.deb
-
 sudo dpkg -i arm-toolchains-repository_2-2~noble_all.deb
 sudo apt update
   {{< /tab >}}
   {{< tab header="Ubuntu 22.04" language="bash" >}}
 curl -O https://developer.arm.com/packages/arm-toolchains/ubuntu/pool/arm-toolchains-repository_2-2~jammy_all.deb
-
 sudo dpkg -i arm-toolchains-repository_2-2~jammy_all.deb
 sudo apt update
   {{< /tab >}}
   {{< tab header="RHEL 10" language="bash" >}}
 sudo dnf install -y https://developer.arm.com/packages/arm-toolchains/rhel/el10/aarch64/arm-toolchains-repository-2-2.el10.noarch.rpm
-
 sudo dnf clean all
 sudo dnf makecache
   {{< /tab >}}
   {{< tab header="RHEL 9" language="bash" >}}
 sudo dnf install -y https://developer.arm.com/packages/arm-toolchains/rhel/el9/aarch64/arm-toolchains-repository-2-2.el9.noarch.rpm
-
 sudo dnf clean all
 sudo dnf makecache
   {{< /tab >}}
   {{< tab header="RHEL 8" language="bash" >}}
 sudo dnf install -y https://developer.arm.com/packages/arm-toolchains/rhel/el8/aarch64/arm-toolchains-repository-2-2.el8.noarch.rpm
-
 sudo dnf clean all
 sudo dnf makecache
   {{< /tab >}}
   {{< tab header="Amazon Linux 2023" language="bash" >}}
 sudo dnf install -y https://developer.arm.com/packages/arm-toolchains/amazonlinux/al2023/aarch64/arm-toolchains-repository-2-2.al2023.noarch.rpm
-
 sudo dnf clean all
 sudo dnf makecache
   {{< /tab >}}
   {{< tab header="SLES 15" language="bash" >}}
 sudo zypper install -y https://developer.arm.com/packages/arm-toolchains/sles/sles15/aarch64/arm-toolchains-repository-2-2.sles15.noarch.rpm
-
 sudo zypper clean
 sudo zypper refresh
   {{< /tab >}}
   {{< tab header="SLES 16" language="bash" >}}
 sudo zypper install -y https://developer.arm.com/packages/arm-toolchains/sles/sles16/aarch64/arm-toolchains-repository-2-2.sles16.noarch.rpm
-
 sudo zypper clean
 sudo zypper refresh
   {{< /tab >}}
@@ -245,7 +246,6 @@ Install the current Arm Toolchains repository signing key:
 
 ```bash
 curl -O https://developer.arm.com/packages/arm-toolchains/arm-toolchains.gpg
-
 sudo install -D -m 0644 arm-toolchains.gpg \
   /usr/share/keyrings/arm-toolchains-archive-keyring.gpg
 ```
@@ -294,7 +294,6 @@ Install the current Arm Toolchains repository signing key:
 
 ```bash
 curl -O https://developer.arm.com/packages/arm-toolchains/arm-toolchains.gpg
-
 sudo rpm --import arm-toolchains.gpg
 ```
 
