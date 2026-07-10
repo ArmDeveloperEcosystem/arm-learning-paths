@@ -30,13 +30,23 @@ Use human walking reference data to train a humanoid robot to produce stable and
 
 Use the **skrl** library together with `--algorithm AMP` to launch training:
 
-```bash
+{{< tabpane code=true >}}
+{{< tab header="IsaacLab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/skrl/train.py \
   --task=Isaac-Humanoid-AMP-Walk-Direct-v0 \
   --headless \
   --algorithm AMP \
   --max_iterations=1000
-```
+{{< /tab >}}
+{{< tab header="IsaacLab 3.0 API" >}}
+./isaaclab.sh train \
+  --rl_library skrl \
+  --task=Isaac-Humanoid-AMP-Walk-Direct-v0 \
+  --viz none \
+  --algorithm AMP \
+  --max_iterations=1000
+{{< /tab >}}
+{{< /tabpane >}}
 
 ### Verify
 
@@ -46,14 +56,25 @@ After training, look for the following behaviors:
 * The gait shows smoother center-of-mass transfer instead of stiff hopping-like motion.
 * The left and right leg timing resembles a more natural walking pattern.
 
-```bash
+{{< tabpane code=true >}}
+{{< tab header="IsaacLab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/skrl/play.py \
   --task=Isaac-Humanoid-AMP-Walk-Direct-v0 \
   --algorithm=AMP \
   --num_envs=16 \
-  --checkpoint=./logs/skrl/humanoid_amp_walk/<time of training>/checkpoints/best_agent.pt \
+  --checkpoint=logs/skrl/humanoid_amp_walk/<run_timestamp>/checkpoints/best_agent.pt \
   --real-time
-```
+{{< /tab >}}
+{{< tab header="IsaacLab 3.0 API" >}}
+./isaaclab.sh play \
+  --rl_library skrl \
+  --task=Isaac-Humanoid-AMP-Walk-Direct-v0 \
+  --algorithm=AMP \
+  --num_envs=16 \
+  --checkpoint=logs/skrl/humanoid_amp_walk/<run_timestamp>/checkpoints/best_agent.pt \
+  --real-time
+{{< /tab >}}
+{{< /tabpane >}}
 
 ![Humanoid AMP walk training comparison. The left panel at iteration 3200 shows less stable gait timing and more rigid motion. The right panel at iteration 11600 shows smoother center-of-mass transfer, better leg coordination, and more natural walking behavior.#center](./walking_humanoid.gif "Humanoid AMP walk progression. Left: iteration 3200. Right: iteration 11600.")
 
@@ -68,13 +89,23 @@ Use human running reference data to train a humanoid robot to maintain a natural
 
 ### Run
 
-```bash
+{{< tabpane code=true >}}
+{{< tab header="IsaacLab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/skrl/train.py \
     --task=Isaac-Humanoid-AMP-Run-Direct-v0 \
     --headless \
     --algorithm AMP \
     --max_iterations=1000 
-```
+{{< /tab >}}
+{{< tab header="IsaacLab 3.0 API" >}}
+./isaaclab.sh train \
+    --rl_library skrl \
+    --task=Isaac-Humanoid-AMP-Run-Direct-v0 \
+    --viz none \
+    --algorithm AMP \
+    --max_iterations=1000
+{{< /tab >}}
+{{< /tabpane >}}
 
 ### What changes in the workflow
 
@@ -88,27 +119,49 @@ After training, confirm the following:
 * Arm swing, leg lift, and landing timing become more coordinated.
 * The motion looks like a recognizable running pattern rather than just aggressive forward movement.
 
-```bash
+{{< tabpane code=true >}}
+{{< tab header="IsaacLab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/skrl/play.py \
   --task=Isaac-Humanoid-AMP-Run-Direct-v0 \
   --algorithm=AMP \
   --num_envs=16 \
-  --checkpoint=logs/skrl/humanoid_amp_run/2026-05-12_09-09-58_amp_torch/checkpoints/best_agent.pt \
+  --checkpoint=logs/skrl/humanoid_amp_run/<run_timestamp>/checkpoints/best_agent.pt \
   --real-time
-```
+{{< /tab >}}
+{{< tab header="IsaacLab 3.0 API" >}}
+./isaaclab.sh play \
+  --rl_library skrl \
+  --task=Isaac-Humanoid-AMP-Run-Direct-v0 \
+  --algorithm=AMP \
+  --num_envs=16 \
+  --checkpoint=logs/skrl/humanoid_amp_run/<run_timestamp>/checkpoints/best_agent.pt \
+  --real-time
+{{< /tab >}}
+{{< /tabpane >}}
 
 {{% notice Tip %}}
 
 If the performance is not enough, run the following command to to resume from a specific checkpoint.
 
-```bash
+{{< tabpane code=true >}}
+{{< tab header="IsaacLab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/skrl/train.py \
     --task=Isaac-Humanoid-AMP-Run-Direct-v0 \
     --headless \
     --algorithm AMP \
     --max_iterations=<number of additional iterations (Epochs)> \
-    --checkpoint=<path to checkpoint model to resume training from>
-```
+    --checkpoint=<path_to_checkpoint>
+{{< /tab >}}
+{{< tab header="IsaacLab 3.0 API" >}}
+./isaaclab.sh train \
+    --rl_library skrl \
+    --task=Isaac-Humanoid-AMP-Run-Direct-v0 \
+    --viz none \
+    --algorithm AMP \
+    --max_iterations=<number of additional iterations (Epochs)> \
+    --checkpoint=<path_to_checkpoint>
+{{< /tab >}}
+{{< /tabpane >}}
 
 {{% /notice %}}
 
@@ -120,12 +173,21 @@ Try training the model further to see if the skipping-like motion evolves into a
 
 To optionally test style-heavy motion generation, run this AMP dance task:
 
-```bash
+{{< tabpane code=true >}}
+{{< tab header="IsaacLab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/skrl/train.py \
     --task=Isaac-Humanoid-AMP-Dance-Direct-v0 \
     --headless \
     --algorithm AMP
-```
+{{< /tab >}}
+{{< tab header="IsaacLab 3.0 API" >}}
+./isaaclab.sh train \
+    --rl_library skrl \
+    --task=Isaac-Humanoid-AMP-Dance-Direct-v0 \
+    --viz none \
+    --algorithm AMP
+{{< /tab >}}
+{{< /tabpane >}}
 
 {{% notice Please note %}}
 

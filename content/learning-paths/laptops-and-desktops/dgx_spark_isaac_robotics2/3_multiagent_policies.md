@@ -26,12 +26,21 @@ In this task, the policy must solve a classic cooperation scenario. One Shadow H
 
 You'll now use the **skrl** library for multi-agent training. Pass the `--algorithm` flag to select MAPPO for this task:
 
-```bash
+{{< tabpane code=true >}}
+{{< tab header="IsaacLab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/skrl/train.py \
     --task=Isaac-Shadow-Hand-Over-Direct-v0 \
     --headless \
     --algorithm MAPPO
-```
+{{< /tab >}}
+{{< tab header="IsaacLab 3.0 API" >}}
+./isaaclab.sh train \
+    --rl_library skrl \
+    --task=Isaac-Shadow-Hand-Over-Direct-v0 \
+    --viz none \
+    --algorithm MAPPO
+{{< /tab >}}
+{{< /tabpane >}}
 
 This command loads the task, selects the MAPPO training algorithm, and runs the simulation headless. Like earlier tasks, the Python entry point controls task and algorithm selection, letting you switch workflows without any recompilation.
 
@@ -42,7 +51,7 @@ Training this task can take up to **30 minutes** on a DGX Spark.
 If you want to run the model from a pre-trained checkpoint available from NVIDIA Omniverse. You can optionally skip this training part and move to the verify section. When running the `play.py` script you will need to replace the 
 
 ```bash
---checkpoint=<path_to_your_factory_model.pth>
+--checkpoint=<path_to_checkpoint>
 ```
 
 with
@@ -65,14 +74,25 @@ After training, look for the following behaviors:
 
 To view the trained policy, replace the checkpoint path with your trained model directory and run:
 
-```bash
+{{< tabpane code=true >}}
+{{< tab header="IsaacLab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/skrl/play.py \
     --task=Isaac-Shadow-Hand-Over-Direct-v0 \
     --num_envs=1 \
     --algorithm=MAPPO \
     --real-time \
-    --checkpoint=<path_to_your_best_agent.pt>
-```
+    --checkpoint=<path_to_checkpoint>
+{{< /tab >}}
+{{< tab header="IsaacLab 3.0 API" >}}
+./isaaclab.sh play \
+    --rl_library skrl \
+    --task=Isaac-Shadow-Hand-Over-Direct-v0 \
+    --num_envs=1 \
+    --algorithm=MAPPO \
+    --real-time \
+    --checkpoint=<path_to_checkpoint>
+{{< /tab >}}
+{{< /tabpane >}}
 
 ![Shadow Hand Over training progress showing two dexterous hands coordinating an object transfer. The left panel shows early training (iteration 3600) where motion is uncoordinated and the object is still held. The right panel shows the policy at convergence using the best_agent.pt checkpoint identified by skrl, where the hands smoothly coordinate the handover.#center](./multi_agent_hand.gif "Shadow Hand Over training progression. Left: iteration 3600. Right: best_agent.pt.")
 
@@ -80,12 +100,21 @@ To view the trained policy, replace the checkpoint path with your trained model 
 
 You can also try training an example using the IPPO (Independent Proximal Policy Optimization) algorithm. To do this, change the `--algorithm` flag to `IPPO` in your training command:
 
-```bash
+{{< tabpane code=true >}}
+{{< tab header="IsaacLab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/skrl/train.py \
     --task=Isaac-Shadow-Hand-Over-Direct-v0 \
     --headless \
     --algorithm IPPO
-```
+{{< /tab >}}
+{{< tab header="IsaacLab 3.0 API" >}}
+./isaaclab.sh train \
+    --rl_library skrl \
+    --task=Isaac-Shadow-Hand-Over-Direct-v0 \
+    --viz none \
+    --algorithm IPPO
+{{< /tab >}}
+{{< /tabpane >}}
 
 IPPO treats each agent as independent, which can be useful for tasks where agents have separate roles or limited interaction. For further exploration, try altering the model size or network architecture in your training configuration. Experimenting with different model sizes can help you understand the trade-offs between training speed, memory usage, and policy performance.
 

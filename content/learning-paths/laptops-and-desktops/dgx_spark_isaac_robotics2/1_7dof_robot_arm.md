@@ -8,15 +8,15 @@ layout: learningpathall
 
 ## From locomotion to interaction
 
-Use the installation instructions in the previous [Learning Path](https://learn.arm.com/learning-paths/laptops-and-desktops/dgx_spark_isaac_robotics/)to  installed and run [Isaac Sim](https://developer.nvidia.com/isaac/sim) and [Isaac Lab](https://developer.nvidia.com/isaac/lab) on an Arm-based [DGX Spark](https://www.nvidia.com/en-gb/products/workstations/dgx-spark/) system. This learning path has been validated on `IsaacLab 2.3.0` and `IsaacSim 5.1.0`. 
+Use the installation instructions in the previous [Learning Path](https://learn.arm.com/learning-paths/laptops-and-desktops/dgx_spark_isaac_robotics/)to  installed and run [Isaac Sim](https://developer.nvidia.com/isaac/sim) and [Isaac Lab](https://developer.nvidia.com/isaac/lab) on an Arm-based [DGX Spark](https://www.nvidia.com/en-gb/products/workstations/dgx-spark/) system. 
 
-{{% notice Running IsaacSim 6.0.0 or newer %}}
+{{% notice IsaacLab API versions %}}
 
-Before installing, verify that your chosen **IsaacLab** version is compatible with **IsaacSim** using the version compatibility table in the IsaacLab [README.md](https://github.com/isaac-sim/IsaacLab/blob/main/README.md). If your desired IsaacLab release is not compatible with the latest IsaacSim version, you may need to check out and build an earlier IsaacSim release.
+As of July 2026, support for **IsaacSim 6.0.0 and later** through IsaacLab is still in beta. For the most stable experience with this learning path, use **IsaacLab 2.3.2** with **IsaacSim 5.1.0**.
 
-**As of July 2026, Support for IsaacLab 3.0.0 running atop IsaacSim 6.0.0 or later is currently in beta.**
+Before installing, verify that your chosen **IsaacLab** version is compatible with **IsaacSim** using the version compatibility table in the IsaacLab [README.md](https://github.com/isaac-sim/IsaacLab/blob/main/README.md). If you choose different versions, follow the compatibility table rather than assuming that the latest IsaacLab and IsaacSim releases work together.
 
-The commands and APIs in this learning path are written for **IsaacLab 2.3.0**. If you choose to use **IsaacLab 3.0.0 or newer**, you may need to update the commands to match the latest API. See the [IsaacLab 3.0 Migration Guide](https://isaac-sim.github.io/IsaacLab/develop/source/migration/migrating_to_isaaclab_3-0.html) for details.
+The command examples provide tabs for both the **IsaacLab 2.3 API** and the **IsaacLab 3.0 API**. The IsaacLab 3.0 commands are included for future-proofing as support for IsaacSim 6.0.0 and later matures. They use the use the unified `train` and `play` entry points described in the [IsaacLab 3.0 Migration Guide](https://isaac-sim.github.io/IsaacLab/develop/source/migration/migrating_to_isaaclab_3-0.html).
 
 Additionally, IsaacLab 3.0.0 and newer require **Python 3.12 or later** to build and install all required Python packages. You may need to upgrade your system Python version before continuing.
 
@@ -39,7 +39,8 @@ The Reach task trains the Franka arm to move its end-effector to a randomly samp
 
 Use your existing Isaac Lab setup from the previous Learning Path, then run:
 
-```bash
+{{< tabpane code=true >}}
+{{< tab header="IsaacLab 2.3 API" >}}
 cd ~/IsaacLab
 
 # Improve runtime compatibility on aarch64 systems
@@ -49,7 +50,20 @@ export LD_PRELOAD="$LD_PRELOAD:/lib/aarch64-linux-gnu/libgomp.so.1"
     --task=Isaac-Reach-Franka-v0 \
     --headless \
     --num_envs=2048
-```
+{{< /tab >}}
+{{< tab header="IsaacLab 3.0 API" >}}
+cd ~/IsaacLab
+
+# Improve runtime compatibility on aarch64 systems
+export LD_PRELOAD="$LD_PRELOAD:/lib/aarch64-linux-gnu/libgomp.so.1"
+
+./isaaclab.sh train \
+    --rl_library rsl_rl \
+    --task=Isaac-Reach-Franka-v0 \
+    --viz none \
+    --num_envs=2048
+{{< /tab >}}
+{{< /tabpane >}}
 
 
 
@@ -89,12 +103,21 @@ In Isaac Lab, an **environment** is one simulated instance of the task. For exam
 
 After training, run the following command to observe the learned policy in simulation, replace the `--checkpoint` with the PyTorch model file for your desired iteration. We are limiting the number of environments to 2 simply to allow the simulation to load faster but you can increase to observe multiple instances:
 
-```bash
+{{< tabpane code=true >}}
+{{< tab header="IsaacLab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/play.py \
     --task=Isaac-Reach-Franka-Play-v0 \
     --num_envs=2 \
-    --checkpoint=logs/rsl_rl/franka_reach/<date_of_training>/model_<iteration_number>.pt
-```
+    --checkpoint=logs/rsl_rl/franka_reach/<run_timestamp>/model_<iteration>.pt
+{{< /tab >}}
+{{< tab header="IsaacLab 3.0 API" >}}
+./isaaclab.sh play \
+    --rl_library rsl_rl \
+    --task=Isaac-Reach-Franka-Play-v0 \
+    --num_envs=2 \
+    --checkpoint=logs/rsl_rl/franka_reach/<run_timestamp>/model_<iteration>.pt
+{{< /tab >}}
+{{< /tabpane >}}
 
 {{% notice Tip %}}
 
@@ -119,18 +142,28 @@ The coherent unified memory lets you quickly start and stop training with little
 
 Once the robot can reach reliably, the next step is physical interaction. In the Lift task, you train the arm to grasp a cube on the table and lift it to a target height. The policy must coordinate approach, alignment, gripper closure, and stable lifting under contact and gravity. Run the following command to train the `Isaac-Lift-Cube-Franka-v0` task with the PPO algorithm from the `rsl_rl` library.
 
-```bash
+{{< tabpane code=true >}}
+{{< tab header="IsaacLab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/train.py \
     --task=Isaac-Lift-Cube-Franka-v0 \
     --headless \
     --num_envs=2048
-```
+{{< /tab >}}
+{{< tab header="IsaacLab 3.0 API" >}}
+./isaaclab.sh train \
+    --rl_library rsl_rl \
+    --task=Isaac-Lift-Cube-Franka-v0 \
+    --viz none \
+    --num_envs=2048
+{{< /tab >}}
+{{< /tabpane >}}
 
 {{% notice Please Note %}}
 
 After an initial run, the end-effector might still fail to lift consistently. To continue training from a checkpoint rerun with the additional arguments shown below:
 
-```bash
+{{< tabpane code=true >}}
+{{< tab header="IsaacLab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/train.py \
   --task=Isaac-Lift-Cube-Franka-v0 \
   --headless \
@@ -140,7 +173,20 @@ After an initial run, the end-effector might still fail to lift consistently. To
   --load_run=<run_timestamp_folder> \
   --checkpoint=model_<iteration>.pt \
   --max_iterations=<additional_iterations>
-```
+{{< /tab >}}
+{{< tab header="IsaacLab 3.0 API" >}}
+./isaaclab.sh train \
+  --rl_library rsl_rl \
+  --task=Isaac-Lift-Cube-Franka-v0 \
+  --viz none \
+  --num_envs=2048 \
+  --resume \
+  --experiment_name=franka_lift \
+  --load_run=<run_timestamp_folder> \
+  --checkpoint=model_<iteration>.pt \
+  --max_iterations=<additional_iterations>
+{{< /tab >}}
+{{< /tabpane >}}
 
 Use the run folder format `YYYY-MM-DD_HH-MM-SS` for `--load_run` (note the underscore between date and time), for example `2026-05-15_09-24-13`.
 
@@ -196,12 +242,21 @@ After training, confirm the following:
 
 You can use the command below to verify the result.
 
-```bash
+{{< tabpane code=true >}}
+{{< tab header="IsaacLab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/play.py \
     --task=Isaac-Lift-Cube-Franka-v0 \
     --num_envs=2 \
-    --checkpoint=<path to model*.pt file>
-```
+    --checkpoint=<path_to_checkpoint>
+{{< /tab >}}
+{{< tab header="IsaacLab 3.0 API" >}}
+./isaaclab.sh play \
+    --rl_library rsl_rl \
+    --task=Isaac-Lift-Cube-Franka-v0 \
+    --num_envs=2 \
+    --checkpoint=<path_to_checkpoint>
+{{< /tab >}}
+{{< /tabpane >}}
 
 ![Franka 7-DOF arm progressing through Reach and Lift. The left panel shows iteration 150, where grasp stability is still developing. The right panel shows around iteration 900, where the policy keeps the end-effector inverted to reduce cube drops during lifting.#center](./reach_and_lift.gif "Franka 7-DOF arm progressing through Reach and Lift. The left panel shows iteration 150, where grasp stability is still developing. The right panel shows around iteration 900, where the policy keeps the end-effector inverted to reduce cube drops during lifting")
 
