@@ -35,24 +35,15 @@ If `kubectl top` is not available yet, make sure metrics collection is enabled i
 
 Use three terminals so telemetry, the dashboard, and benchmark commands can run at the same time.
 
-If a fresh terminal does not have the variables from earlier, run:
+In each terminal, restore the variables from setup and return to the source tree:
 
 ```bash
-cd "${HOME}/n4a-c4a/microservices-demo"
+source "${HOME}/.storefront-axion-env"
+cd "${REPO}"
 
-export PROJECT_ID="$(gcloud config get-value project)"
-export ARTIFACT_REGION="us-central1"
-export ARTIFACT_REPO="axion-workshop"
-export REPO_ROOT="${HOME}/n4a-c4a"
-export REPO="${REPO_ROOT}/microservices-demo"
 export FRONTEND_IP="$(kubectl get service frontend-external \
   -o jsonpath='{.status.loadBalancer.ingress[0].ip}')"
 export APP_URL="http://${FRONTEND_IP}"
-export N4A_NODE_POOL_NAME="arm64-pool-n4a2"
-export C4A_NODE_POOL_NAME="arm64-pool-c4a"
-export ASSISTANT_IMAGE_REPO="${ARTIFACT_REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REPO}/shoppingassistantservice"
-export ASSISTANT_IMAGE_TAG="lab-v1"
-export ASSISTANT_IMAGE="${ASSISTANT_IMAGE_REPO}:${ASSISTANT_IMAGE_TAG}"
 ```
 
 Use this terminal map:
