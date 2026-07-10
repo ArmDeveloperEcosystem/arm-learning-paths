@@ -8,15 +8,15 @@ layout: learningpathall
 
 ## Run AI models locally with Ollama
 
-The agent's reasoning steps, such as choosing search terms, selecting URLs, and writing the final summary, are handled by an LLM. Instead of calling a cloud API, this Learning Path serves the model locally with [Ollama](https://ollama.com/).
+The agent's reasoning steps, such as choosing search terms, selecting URLs, and writing the final summary, are handled by an LLM. Instead of calling a cloud API, you'll serve the model locally with [Ollama](https://ollama.com/).
 
 Ollama is a lightweight runtime that downloads open models, loads them into memory, and exposes a local HTTP API at `http://localhost:11434`. When the agent calls that endpoint, the model runs directly on your machine: the CPU and GPU on your MacBook, Arm Linux laptop, or NVIDIA DGX Spark. Nothing is sent to an external service or cloud.
 
 Running locally has three benefits that matter for an agent:
 
-- **Privacy**: your prompts and the web content the agent reads stay on the device.
-- **Cost**: there are no per-token API charges, so you can run many queries freely.
-- **Control**: you choose the exact model and keep it resident in memory for fast repeated calls.
+- Privacy: your prompts and the web content the agent reads stay on the device.
+- Cost: there are no per-token API charges, so you can run many queries freely.
+- Control: you choose the exact model and keep it resident in memory for fast repeated calls.
 
 ## Install and start Ollama
 
@@ -43,7 +43,7 @@ With [Homebrew](https://brew.sh/), `brew services` runs Ollama in the background
 
 ## Pull the Gemma model
 
-This Learning Path uses [Gemma 3](https://ai.google.dev/gemma), Google's family of open models, in its 4-billion-parameter size (`gemma3:4b`). This size is a good default: it's capable enough for the agent's reasoning steps and small enough to run on a laptop.
+You'll use [Gemma 3](https://ai.google.dev/gemma), Google's family of open models. The 4-billion-parameter size (`gemma3:4b`) is a good default: it's capable enough for the agent's reasoning steps and small enough to run on a laptop.
 
 Download the model:
 
@@ -59,7 +59,7 @@ ollama list
 
 You'll see `gemma3:4b` in the list of installed models.
 
-## Choose a different model (optional)
+## (Optional) Choose a different model
 
 The agent reads the model name from the `OLLAMA_MODEL` environment variable, so you can switch models without editing the code. The default in the script is `gemma3:4b`.
 
@@ -68,7 +68,9 @@ The agent reads the model name from the `OLLAMA_MODEL` environment variable, so 
 | `gemma3:4b` | 4B | Laptops and modest hardware; the default |
 | `gemma3:27b` | 27B | High-memory systems such as DGX Spark, for stronger reasoning |
 
-To use a larger model on a DGX Spark, pull it and set the environment variable before running the agent:
+To use a larger model on a DGX Spark, pull it and set the environment variable before running the agent. 
+
+For example, to use a model with 27 billion parameters:
 
 ```bash
 ollama pull gemma3:27b
@@ -95,4 +97,8 @@ Summarize what a local AI agent does in one sentence.
 
 Type `/bye` to exit the model session.
 
-With Ollama serving `gemma3:4b`, you're ready to look at how the agent code uses it.
+## What you've accomplished and what's next
+
+You've now set up Ollama and served a Google `gemma3:4b` model locally. 
+
+Next, you'll look at how the agent code uses the model.

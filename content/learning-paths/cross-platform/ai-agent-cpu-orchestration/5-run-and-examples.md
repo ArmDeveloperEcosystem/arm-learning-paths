@@ -6,9 +6,9 @@ weight: 6
 layout: learningpathall
 ---
 
-## Run the agent
+## Start the agent
 
-Make sure both pieces are in place before you start:
+Make sure the following are in place before you start:
 
 - Ollama is running and serving `gemma3:4b` (from the previous section).
 - Your virtual environment is active and `SERPER_API_KEY` is set in the current terminal.
@@ -71,9 +71,9 @@ GPU total:                  4.991s
 
 These numbers separate the three kinds of work:
 
-- **CPU operations** – every orchestration and text-processing stage combined.
-- **GPU input token processing** – the time the model spends reading each prompt before producing output (prefill).
-- **GPU token generation** – the time spent writing the answers.
+- `CPU operations` – every orchestration and text-processing stage combined.
+- `GPU input token processing` – the time the model spends reading each prompt before producing output (prefill).
+- `GPU token generation` – the time spent writing the answers.
 
 {{% notice Note %}}
 Your exact numbers depend on your hardware, the model size, and how many pages the agent reads. The point isn't the absolute values, but the fact that CPU work is a substantial share of every query.
@@ -81,7 +81,7 @@ Your exact numbers depend on your hardware, the model size, and how many pages t
 
 ## Read the timeline
 
-Below the breakdown, the agent prints a text-based timeline. Each character is a slice of wall-clock time, color-coded by what was active:
+The agent also prints a text-based timeline. Each character is a slice of wall-clock time, color-coded by what was active:
 
 ```output
 CCCCCCCPGGGGCCCCCCCCCCCCCCPGGGGGGGGCCCCCCCCCCCCCCCCCCCPGGGGGGGGGGGG
@@ -111,4 +111,8 @@ The screenshot shows example queries and the answers the agent returns:
 
 Type `quit` or `exit` to end the session.
 
-In the next section, you'll look more closely at why the CPU does so much of the work in an agentic workflow.
+## What you've accomplished and what's next
+
+You've now started the agent and asked questions to see how query response steps are split between the CPU and the GPU.
+
+Next, you'll learn why the CPU does so much of the work in an agentic workflow.

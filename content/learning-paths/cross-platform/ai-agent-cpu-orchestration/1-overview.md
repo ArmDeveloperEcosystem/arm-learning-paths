@@ -1,17 +1,16 @@
 ---
-title: Understand the agent and the CPU/GPU split
+title: Understand the agent and how work is split between CPU and GPU
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## What you'll build
+## What you will build
 
-In this Learning Path, you'll build and run a *local concierge agent*: a terminal application that answers research-style questions, such as finding restaurants, comparing products, or summarizing a topic, by searching the web, reading multiple pages, and writing a fact-checked summary.
+You'll build and run a local concierge agent: a terminal application that answers research-style questions, such as finding restaurants, comparing products, or summarizing a topic, by searching the web, reading multiple pages, and writing a fact-checked summary.
 
 Everything runs on your own Arm machine. The agent uses an LLM served locally by [Ollama](https://ollama.com/), so your prompts and the pages you browse never leave the device. The same code runs on an Apple silicon MacBook, an Arm Linux laptop, or an NVIDIA DGX Spark.
-
 
 The agent is interesting not just because it runs locally, but because of *how the work is divided*. A common assumption is that an AI agent is "just the model." In practice, the model is only one stage in a longer pipeline, and most of the surrounding work runs on the CPU.
 
@@ -56,6 +55,8 @@ The program is instrumented so you can see this division directly. As it runs, i
 
 By the end of this Learning Path, you'll be able to look at a single query and see exactly how much of the work happened on the CPU before and after the model produced its answer.
 
-## What's next
+## What you've learned and what's next
 
-In the next section, you'll set up your environment: create a Python virtual environment, install the required packages, and get a Serper API key for web search.
+You've now learned about the agent you'll build and how the steps it executes are split between the CPU and the GPU.
+
+Next, you'll set up your environment: create a Python virtual environment, install the required packages, and get a Serper API key for web search.

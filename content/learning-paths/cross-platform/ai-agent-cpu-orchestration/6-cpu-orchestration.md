@@ -8,18 +8,18 @@ layout: learningpathall
 
 ## How the CPU and GPU share the work
 
-When people picture an AI agent, they usually picture an AI model generating text using just the GPU. In practice, the model is only one stage of an agentic workflow. The CPU and GPU work in tandem, each handling the part of the workload it does best: the GPU runs the model's reasoning, while the CPU does the broad, continuous work of orchestration that turns a single request into a useful answer.
+When people picture an AI agent, they usually picture an AI model generating text using just the GPU. In practice, the model is only one stage of an agentic workflow. 
 
-This section looks at the CPU's role in agentic workflows, and why it matters on Arm platforms.
+The CPU and GPU work in tandem, each handling the part of the workload it does best: the GPU runs the model's reasoning, while the CPU does the broad, continuous work of orchestration that turns a single request into a useful answer.
 
 ## What the CPU does in an agentic workflow
 
 Most agentic systems share the same shape, regardless of the task. Between model calls, the CPU is responsible for the work that surrounds inference:
 
-- **Orchestration** – deciding what to do next, scheduling tasks, coordinating tools and services, and routing work between multiple AI agents and subagents.
-- **Tool calls and I/O** – calling APIs, querying databases, reading files, and fetching web pages, often many at once.
-- **Data preparation** – cleaning, filtering, ranking, deduplicating, and structuring raw data before it reaches the model.
-- **Memory and state** – tracking conversation history, caching results, and managing context across steps.
+- Orchestration – deciding what to do next, scheduling tasks, coordinating tools and services, and routing work between multiple AI agents and subagents.
+- Tool calls and I/O – calling APIs, querying databases, reading files, and fetching web pages, often many at once.
+- Data preparation – cleaning, filtering, ranking, deduplicating, and structuring raw data before it reaches the model.
+- Memory and state – tracking conversation history, caching results, and managing context across steps.
 
 These stages are mostly classical computing: concurrency, networking, parsing, and text processing. They run continuously throughout a query, while the GPU is used in focused bursts only when the model reasons. As agents call more tools and handle more data, this CPU-side work grows.
 
@@ -27,12 +27,12 @@ These stages are mostly classical computing: concurrency, networking, parsing, a
 
 This kind of broad, concurrent orchestration and I/O is exactly the workload Arm CPUs handle efficiently. The same pattern scales across Arm platforms:
 
-- On an **Apple silicon MacBook** or an **Arm Linux laptop**, the Arm CPU runs orchestration and I/O while the integrated GPU accelerates the model, so the whole agent runs on one device with no cloud dependency.
-- On an **NVIDIA DGX Spark**, the Arm Grace CPU coordinates the agentic workflow while the Blackwell GPU runs inference, mirroring how larger AI systems are built: CPUs orchestrate, GPUs accelerate.
+- On an Apple Silicon MacBook or an Arm Linux laptop, the Arm CPU runs orchestration and I/O while the integrated GPU accelerates the model, so the whole agent runs on one device with no cloud dependency.
+- On an NVIDIA DGX Spark, the Arm Grace CPU coordinates the agentic workflow while the Blackwell GPU runs inference, mirroring how larger AI systems are built: CPUs orchestrate, GPUs accelerate.
 
 The key takeaway is that an agent is an *orchestration system*, not just an inference system. The model is one important stage, but the CPU is what turns a single request into tool calls, data, and structured context, and that orchestration is a large part of the work.
 
-## Experiment
+## Update agent code to visualize the role of the CPU 
 
 To see the effect of the CPU pipeline for yourself, try these changes and compare the timelines:
 
@@ -44,9 +44,6 @@ Each experiment shifts the balance between CPU and GPU work and makes the orches
 
 ## What you've accomplished
 
-You've built and run a local AI concierge agent end to end on Arm hardware, and you've seen how the work divides between the CPU and the GPU. Specifically, you've:
+You've now understood the CPU's orchestration role and why Arm platforms suit agentic workloads. 
 
-- Set up a Python environment and served a Gemma model locally with Ollama
-- Run an agentic workflow that searches, browses, ranks, deduplicates, and extracts data before each model call
-- Read the timing breakdown and timeline to measure how much of each query runs on the CPU
-- Connected the CPU's orchestration role to why Arm platforms suit agentic workloads
+You can use the workflows in the Learning Path to create your own AI agents on Arm. 
