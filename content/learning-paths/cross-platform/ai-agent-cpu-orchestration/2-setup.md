@@ -12,15 +12,6 @@ In this section, you'll prepare everything the agent needs before running it: a 
 
 These steps are identical on an Apple silicon MacBook, an Arm Linux machine, and an NVIDIA DGX Spark.
 
-## Get a Serper API key
-
-The agent searches the web through [Serper](https://serper.dev/), a Google Search API. The free tier is enough to complete this Learning Path.
-
-1. Go to [serper.dev](https://serper.dev/) and create a free account.
-2. Open your dashboard and copy your API key.
-
-You'll set this key as an environment variable later in this section, so the agent can read it without the key being written into the code.
-
 ## Create a project directory and virtual environment
 
 A virtual environment keeps the agent's dependencies isolated from your system Python, so you always run against the right package versions.
@@ -53,7 +44,12 @@ pip install requests beautifulsoup4
 
 ## Set your Serper API key
 
-Export your API key as an environment variable in the same terminal session:
+The agent searches the web through [Serper](https://serper.dev/), a Google Search API. The free tier is enough to complete this Learning Path.
+
+1. Go to [serper.dev](https://serper.dev/) and create a free account.
+2. Once logged in, you will see the dashboard. On the left, click **API Keys**.
+3. Copy the Default key.
+4. Export your API key as an environment variable in the same terminal session as your virtual environment:
 
 ```bash
 export SERPER_API_KEY="your-serper-api-key"
