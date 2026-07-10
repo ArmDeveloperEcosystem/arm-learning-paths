@@ -1,5 +1,6 @@
 ---
 title: Run the agent and read the timeline
+description: Run the local concierge agent, ask research questions, and interpret the CPU and GPU timing breakdown produced for each query.
 weight: 6
 
 ### FIXED, DO NOT MODIFY

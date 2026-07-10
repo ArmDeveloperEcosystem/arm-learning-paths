@@ -1,5 +1,6 @@
 ---
 title: Serve a model locally with Ollama
+description: Install Ollama, pull Gemma 3, and verify the local model endpoint before connecting it to the Arm-based concierge agent.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -8,9 +9,9 @@ layout: learningpathall
 
 ## Run AI models locally with Ollama
 
-The agent's reasoning steps, such as choosing search terms, selecting URLs, and writing the final summary, are handled by an LLM. Instead of calling a cloud API, you'll serve the model locally with [Ollama](https://ollama.com/).
+The agent's reasoning steps, such as choosing search terms, selecting URLs, and writing the final summary, are handled by a Large Language Model (LLM). Instead of calling a cloud API, you'll serve the model locally with [Ollama](https://ollama.com/).
 
-Ollama is a lightweight runtime that downloads open models, loads them into memory, and exposes a local HTTP API at `http://localhost:11434`. When the agent calls that endpoint, the model runs directly on your machine: the CPU and GPU on your MacBook, Arm Linux laptop, or NVIDIA DGX Spark. Nothing is sent to an external service or cloud.
+Ollama is a lightweight runtime that downloads open models, loads them into memory, and exposes a local HTTP API at `http://localhost:11434`. When the agent calls that endpoint, the model runs directly on your machine: the CPU and GPU on your MacBook, Arm Linux laptop, or NVIDIA DGX Spark.
 
 Running locally has three benefits that matter for an agent:
 

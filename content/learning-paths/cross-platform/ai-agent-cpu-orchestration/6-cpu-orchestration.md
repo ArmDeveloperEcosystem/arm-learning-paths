@@ -1,5 +1,6 @@
 ---
 title: Understand the CPU's role in the agentic workflow
+description: Connect the agent timeline to CPU orchestration on Arm and experiment with query fan-out, browsing concurrency, and model size.
 weight: 7
 
 ### FIXED, DO NOT MODIFY
@@ -32,18 +33,18 @@ This kind of broad, concurrent orchestration and I/O is exactly the workload Arm
 
 The key takeaway is that an agent is an *orchestration system*, not just an inference system. The model is one important stage, but the CPU is what turns a single request into tool calls, data, and structured context, and that orchestration is a large part of the work.
 
-## Update agent code to visualize the role of the CPU 
+## Experiment with updating agent code
 
 To see the effect of the CPU pipeline for yourself, try these changes and compare the timelines:
 
 - Increase the number of query variants in `generate_search_queries()` and watch CPU search time grow.
-- Reduce `max_workers` in `parallel_browse()` to `1` to disable parallel browsing, and see how much longer the CPU I/O stretch becomes.
+- Reduce the `max_workers` parameter in `parallel_browse()` to `1` to disable parallel browsing, and see how much longer the CPU I/O stretch becomes.
 - Switch to a larger model with `OLLAMA_MODEL=gemma3:27b` and compare how the GPU share changes relative to the CPU share.
 
 Each experiment shifts the balance between CPU and GPU work and makes the orchestration pattern easier to see.
 
 ## What you've accomplished
 
-You've now understood the CPU's orchestration role and why Arm platforms suit agentic workloads. 
+You've now connected the agent's timeline to the CPU and GPU work behind each query. You've also seen how query fan-out, browsing concurrency, and model size change that balance.
 
-You can use the workflows in the Learning Path to create your own AI agents on Arm. 
+You can use this pattern to adapt the local agent for your own tasks on Arm. 

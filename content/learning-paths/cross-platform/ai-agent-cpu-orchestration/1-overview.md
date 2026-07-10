@@ -1,16 +1,17 @@
 ---
 title: Understand the agent and how work is split between CPU and GPU
+description: See how a local Ollama AI concierge agent on Arm splits search, web I/O, text processing, and model reasoning between the CPU and GPU.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## What you will build
+## What you will run
 
-You'll build and run a local concierge agent: a terminal application that answers research-style questions, such as finding restaurants, comparing products, or summarizing a topic, by searching the web, reading multiple pages, and writing a fact-checked summary.
+You'll run a local concierge agent: a terminal application that answers research-style questions, such as finding restaurants, comparing products, or summarizing a topic, by searching the web, reading multiple pages, and writing a fact-checked summary.
 
-Everything runs on your own Arm machine. The agent uses an LLM served locally by [Ollama](https://ollama.com/), so your prompts and the pages you browse never leave the device. The same code runs on an Apple silicon MacBook, an Arm Linux laptop, or an NVIDIA DGX Spark.
+You'll run everything on your local Arm machine. The agent uses a large language model (LLM) served locally by [Ollama](https://ollama.com/), so your prompts and the pages you browse never leave the device. The same code runs on an Apple silicon MacBook, an Arm Linux laptop, or an NVIDIA DGX Spark.
 
 The agent is interesting not just because it runs locally, but because of *how the work is divided*. A common assumption is that an AI agent is "just the model." In practice, the model is only one stage in a longer pipeline, and most of the surrounding work runs on the CPU.
 
@@ -42,7 +43,8 @@ It's easy to focus only on token generation, because that's the visible "thinkin
 | Web I/O | CPU | Calling the search API, downloading and parsing web pages |
 | Text processing | CPU | TF-IDF ranking, deduplication, entity extraction, indexing |
 
-This division is a natural fit for Arm platforms. On an Apple silicon MacBook or an Arm Linux machine, the CPU handles all orchestration and I/O while the GPU accelerates the model. On an NVIDIA DGX Spark, the Arm CPU coordinates the workflow while the GPU runs inference. In every case, the model is only as good as the context the CPU prepares for it.
+This division is a natural fit for Arm platforms. On an Apple silicon MacBook or an Arm Linux machine, the CPU handles all orchestration and I/O and the GPU accelerates the model.
+On an NVIDIA DGX Spark, the Arm CPU coordinates the workflow while the GPU runs inference. In every case, the model is only as good as the context the CPU prepares for it.
 
 ## How the agent shows you the split
 

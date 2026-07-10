@@ -1,7 +1,7 @@
 ---
-title: Build and run a local AI agent with Ollama
+title: Run a local AI agent with Ollama to visualize CPU orchestration on Arm
 
-description: Learn how to build a local AI concierge agent that runs entirely on your Arm machine, using the CPU to orchestrate web search, scraping, and text processing while a local Gemma model handles reasoning on the GPU.
+description: Run a local AI concierge agent with Ollama on Arm and visualize how the CPU orchestrates web search, scraping, and text processing while Gemma 3 handles model reasoning.
 
 minutes_to_complete: 45
 

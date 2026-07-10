@@ -1,5 +1,6 @@
 ---
 title: Set up your environment before running the agent
+description: Set up a Python virtual environment, Serper API key, required packages, and the concierge agent script before running the local AI agent on Arm.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -10,7 +11,7 @@ layout: learningpathall
 
 Prepare the following before running the agent: a Serper API key for web search, a Python virtual environment, the required packages, and the agent script.
 
-These steps are identical on an Apple Silicon MacBook, an Arm Linux machine, and an NVIDIA DGX Spark.
+These steps are identical on an Apple silicon MacBook, an Arm Linux machine, and an NVIDIA DGX Spark.
 
 ### Get a Serper API key
 
@@ -65,7 +66,7 @@ This variable lasts only for the current terminal session. To keep it across ses
 
 ### Download the agent script
 
-Download the complete agent script <a href="/learning-paths/cross-platform/ai-agent-cpu-orchestration/concierge_agent.py" download>concierge_agent.py</a>, and move it into your `concierge-agent` directory. You'll run it at the end of this Learning Path, and the next sections walk through how the important parts work.
+Download the complete agent script <a href="/learning-paths/cross-platform/ai-agent-cpu-orchestration/concierge_agent.py" download>concierge_agent.py</a>, and move it into your `concierge-agent` directory.
 
 Alternatively, download it directly from the command line:
 

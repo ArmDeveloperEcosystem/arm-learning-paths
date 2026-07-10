@@ -1,5 +1,6 @@
 ---
 title: Understand the agent code
+description: Review the concierge agent code to see where web search, page scraping, Ollama model calls, and CPU orchestration happen in the workflow.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
