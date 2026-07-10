@@ -1,5 +1,6 @@
 ---
 title: Install AWS IoT Greengrass
+description: Install AWS IoT Greengrass on the Arm edge device and configure the credentials needed for component deployment.
 weight: 5
 
 ### FIXED, DO NOT MODIFY

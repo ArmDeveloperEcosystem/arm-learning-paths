@@ -1,6 +1,32 @@
 
 
 
+/* CLS fix: reserve space for web components before hydration */
+ads-search:not(:defined) {
+    display: block;
+    min-height: 45px;
+}
+ads-cta-button:not(:defined) {
+    display: inline-block;
+    min-height: 40px;
+    min-width: 200px;
+}
+ads-breadcrumbs:not(:defined) {
+    display: block;
+    min-height: 32px;
+}
+
+/* CLS fix: lock the breadcrumb masthead height so hydration doesn't shift content below */
+#only-breadcrumb-masthead {
+    height: 40px;
+    overflow: hidden;
+}
+
+/* CLS fix: lock the description+button area height to prevent shift when ads-cta-button hydrates */
+.homepage-top-desc {
+    min-height: 110px;
+}
+
 /*********************************************************************            
 
         Main Topic Cards
@@ -14,6 +40,9 @@
 
 .main-topic-card {
     padding: 16px;
+    min-height: 152px;
+    height: 152px;
+    align-items: center;
     background-color: var(--arm-color-base);
     border: 1px solid transparent;
     border-color: #000000;
@@ -34,6 +63,7 @@
 
 .maintopic-content {
     text-align: left;
+    min-width: 0;
 }
 
 .maintopic-image {
@@ -42,17 +72,49 @@
     height: 50px;
 }
 
+.main-topic-card > .c-col-3 {
+    flex: 0 0 72px;
+    max-width: 72px;
+    min-width: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-topic-card img[src*="main-topic-icons"] {
+    width: 64px;
+    height: 50px;
+    object-fit: contain;
+    display: block;
+}
+
+.main-topic-card img[src$="mobile-graphics-and-gaming.svg"],
+.main-topic-card img[src$="ai.svg"] {
+    transform: scale(1.16);
+    transform-origin: center;
+}
+
+.main-topic-card img[src$="embedded-and-microcontrollers.svg"] {
+    transform: scale(1.34);
+    transform-origin: center;
+}
+
 /* Title styling */
 /**************************************/
 .main-topic-title {
     color: var(--arm-light-blue);
     font-weight: 700;
     font-size: 20px;
+    line-height: 1.2;
+}
+
+.main-topic-card p {
+    line-height: 1.45;
 }
 
 .main-topic-card:hover  .main-topic-title {
     transition: color 0.3s ease-in-out;
-    color: var(--arm-green);
+    color: var(--lp-hover-text);
 }
 
 

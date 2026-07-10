@@ -15,11 +15,11 @@
       }
     </style>
     <linearGradient id="New_Gradient_Swatch_12" data-name="New Gradient Swatch 12" x1="279.45" y1="40.01" x2="315.4" y2="40.01" gradientTransform="translate(-240.85)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#95d600"/>
-      <stop offset=".07" stop-color="#88d412"/>
-      <stop offset=".53" stop-color="#3fca7e"/>
-      <stop offset=".85" stop-color="#11c3c3"/>
-      <stop offset="1" stop-color="#00c1de"/>
+      <stop offset="0" stop-color="#6023DE"/>
+      <stop offset=".07" stop-color="#7C50E8"/>
+      <stop offset=".53" stop-color="#9A7EF0"/>
+      <stop offset=".85" stop-color="#B89FF7"/>
+      <stop offset="1" stop-color="#D1BAFC"/>
     </linearGradient>
   </defs>
   <g class="cls-4">

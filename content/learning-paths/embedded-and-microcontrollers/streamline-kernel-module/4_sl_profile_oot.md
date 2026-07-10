@@ -1,5 +1,6 @@
 ---
 title: Profile the out-of-tree kernel module
+description: Profile the out-of-tree kernel module with Arm Streamline and inspect the performance bottlenecks it exposes.
 weight: 5
 
 ### FIXED, DO NOT MODIFY

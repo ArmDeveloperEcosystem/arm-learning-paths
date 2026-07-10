@@ -1,59 +1,20 @@
 ---
-title: Install and Configure LlamaIndex on Google Cloud Axion
+title: Install and configure LlamaIndex on a Google Cloud C4A virtual machine
+description: Learn how to install Python, Ollama, LlamaIndex, ChromaDB, and FastAPI on an Arm-based Google Cloud C4A virtual machine for a browser-based RAG application.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Prepare the environment
+## Prepare the environment for a LlamaIndex RAG application
 
-In this section, you will prepare a Google Cloud Axion Arm64 VM for running a browser-based RAG application using LlamaIndex.
+In this section, you'll prepare a Google Cloud Axion Arm64 VM for running a browser-based RAG application using LlamaIndex.
 
-You will:
+You'll install required system packages, including Python 3.11, as well as Ollama and LlamaIndex.
 
-- Verify the VM architecture
-- Install required system packages
-- Install Python 3.11
-- Install Ollama and pull a lightweight LLM model
-- Install LlamaIndex and required Python packages
+### Update the virtual machine
 
-
-## Target environment
-
-```text
-Cloud: Google Cloud Platform
-VM Type: C4A Axion ARM64
-OS: SUSE Linux Enterprise Server 15 SP5
-Architecture: aarch64
-RAM: 16 GB or higher recommended
-```
-
-## Verify VM architecture
-
-```bash
-uname -m
-cat /etc/os-release
-```
-
-The output is similar to:
-
-```output
-aarch64
-NAME="SLES"
-VERSION="15-SP5"
-VERSION_ID="15.5"
-PRETTY_NAME="SUSE Linux Enterprise Server 15 SP5"
-ID="sles"
-ID_LIKE="suse"
-ANSI_COLOR="0;32"
-CPE_NAME="cpe:/o:suse:sles:15:sp5"
-DOCUMENTATION_URL="https://documentation.suse.com/"
-```
-
-This confirms you are on an Arm-based VM.
-
-## Update the VM
 Update all system packages:
 
 ```bash
@@ -63,7 +24,7 @@ sudo zypper update -y
 
 This ensures your system is up to date before installing anything.
 
-## Install required packages
+### Install required packages
 
 Install Python 3.11 and the build tools needed to compile Python packages with native extensions:
 
@@ -99,38 +60,7 @@ Python 3.11.10
 pip 22.3.1 from /usr/lib/python3.11/site-packages/pip (python 3.11)
 ```
 
-## Install Docker
-
-Docker is installed here so that you can run containerized workloads alongside the RAG pipeline if needed. For this Learning Path, ChromaDB and Ollama run natively, but Docker is available for extended use.
-
-```bash
-sudo zypper install -y docker
-sudo systemctl enable docker
-sudo systemctl start docker
-```
-
-Verify Docker is running and add your user to the `docker` group so you don't need `sudo` for Docker commands:
-
-```bash
-sudo systemctl status docker
-sudo usermod -aG docker $USER
-newgrp docker
-```
-
-**Test Docker:**
-
-```bash
-docker run hello-world
-```
-
-The output is similar to:
-
-```output
-Hello from Docker!
-This message shows that your installation appears to be working correctly.
-```
-
-## Create project directory
+### Create project directory
 
 Create a project directory and a Python virtual environment. The virtual environment isolates the Python packages for this project from your system packages:
 
@@ -152,7 +82,9 @@ Upgrade pip to the latest version:
 pip install --upgrade pip setuptools wheel
 ```
 
-## Install Ollama
+### Install Ollama
+
+Use the official Linux installer to install Ollama:
 
 ```bash
 curl -fsSL https://ollama.com/install.sh | sh
@@ -170,7 +102,7 @@ The output is similar to:
 ollama version is 0.24.0
 ```
 
-## Check Ollama is running
+### Check Ollama is running
 
 When installed using the official script, Ollama registers itself as a systemd service and starts automatically. Verify it is running:
 
@@ -184,9 +116,9 @@ If the service is not running, start it:
 sudo systemctl start ollama
 ```
 
-## Pull an LLM model
+### Pull an LLM model
 
-With Ollama running, pull the `llama3.2:1b` model. This is a lightweight 1-billion parameter model suitable for local inference on a 16 GB VM:
+With Ollama running, pull the `llama3.2:1b` model. This is a lightweight 1-billion-parameter model suitable for local inference on a 16 GB VM:
 
 ```bash
 ollama pull llama3.2:1b
@@ -204,9 +136,9 @@ The output is similar to:
 Retrieval-Augmented Generation (RAG) is a technique that combines a retrieval step, which fetches relevant documents from a knowledge base, with a generation step, where a large language model uses those documents to produce a grounded, context-aware response.
 ```
 
-## Install LlamaIndex packages
+### Install LlamaIndex packages
 
-Install the LlamaIndex core library along with the integrations needed for Ollama, HuggingFace embeddings, and ChromaDB. FastAPI and Uvicorn are also installed here because the browser-based application you'll build in the next section uses them as the web server:
+Install the LlamaIndex core library along with the integrations needed for Ollama, Hugging Face embeddings, and ChromaDB. You'll also install FastAPI and Uvicorn here because the browser-based application you'll build in the next section uses them as the web server:
 
 ```bash
 pip install llama-index
@@ -221,6 +153,6 @@ pip install uvicorn
 
 ## What you've accomplished and what's next
 
-You've successfully installed and configured LlamaIndex on a Google Cloud Axion Arm64 VM running SUSE Linux with Python 3.11. You installed Docker, configured Ollama for local LLM inference, and prepared the environment for building browser-based RAG applications using LlamaIndex and ChromaDB.
+You've now installed and configured LlamaIndex on a Google Cloud C4A Arm64 VM running SUSE Linux with Python 3.11. You configured Ollama for local LLM inference and prepared the environment for building browser-based RAG applications using LlamaIndex and ChromaDB.
 
 Next, you'll build the RAG engine, create the browser UI, and query custom documents using a local large language model.

@@ -14,6 +14,7 @@ test_images:
 - ubuntu:latest
 test_link: null
 title: Ansible
+description: Install Ansible command-line tools on Ubuntu for Arm or macOS so you can automate configuration and software deployment from Arm-based systems.
 tool_install: true
 weight: 1
 ---

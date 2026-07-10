@@ -1,5 +1,6 @@
 ---
 title: Arduino core for the Raspberry Pi Pico
+description: Install the Arduino IDE and Raspberry Pi Pico board support so you can build and upload Arduino sketches for RP2040-based boards.
 author: Michael Hall
 additional_search_terms:
 - arduino

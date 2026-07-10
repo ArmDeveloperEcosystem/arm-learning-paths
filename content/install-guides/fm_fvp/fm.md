@@ -1,5 +1,6 @@
 ---
 title: Arm Fast Models
+description: Install Arm Fast Models on Linux or Windows and prepare host toolchains so you can build executable virtual platforms for Arm software development.
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/107572
 author: Ronan Synnott

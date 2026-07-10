@@ -17,12 +17,62 @@ learning_objectives:
 prerequisites:
   - Access to an Arm-based Linux system running Ubuntu, Debian, or CentOS.
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-26T17:30:49Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 67004eb9a75926144eb6f75124104972b3cf20a57a22b698c9359d20db3eca02
+  summary_generated_at: '2026-06-26T17:30:49Z'
+  summary_source_hash: 67004eb9a75926144eb6f75124104972b3cf20a57a22b698c9359d20db3eca02
+  faq_generated_at: '2026-06-26T17:30:49Z'
+  faq_source_hash: 67004eb9a75926144eb6f75124104972b3cf20a57a22b698c9359d20db3eca02
+  summary: >-
+    You'll evaluate and change the Linux kernel base page size on Arm, focusing
+    on installing and booting a 64K configuration. First, you'll start with page size fundamentals and a
+    quick check of the current setting using `getconf` and `uname`. OS-specific steps include Ubuntu
+    and CentOS package-based flows, while Debian requires building a 64K kernel from source using
+    the Debian source package. After reboot, you'll validate the change by seeing `65536` from `getconf`
+    and the expected kernel string. You'll also review common Arm page size options and an optional
+    step to revert to the default 4K kernel after testing.
+  faqs:
+  - question: How do I check the current base page size and kernel in use?
+    answer: >-
+      Run `getconf PAGESIZE` and `uname -r`. On a 4K configuration, the first line shows `4096`,
+      followed by the running kernel version and flavor.
+  - question: What should I do if `getconf` does not show `4096` before I begin?
+    answer: >-
+      A value other than `4096` indicates the system is already using a non-4K page size, such
+      as `16384` or `65536`. Note the current value and proceed only if a change is needed.
+  - question: Which distribution-specific section should I follow?
+    answer: >-
+      Use the Ubuntu section for Ubuntu 22.04 LTS or later, the Debian section for Debian 11 or
+      later, and the CentOS section for CentOS 9 or later. Debian doesn't provide a 64K kernel
+      package, so follow the steps to build from the Debian source package.
+  - question: How do I confirm that the 64K page size is active after installation and reboot?
+    answer: >-
+      Re-run `getconf PAGESIZE` and expect `65536`. Also check `uname -r` to verify the kernel string
+      matches the newly installed kernel.
+  - question: How can I revert to a 4K page size after testing?
+    answer: >-
+      Use the optional revert step to return to the distribution’s default 4K kernel, then verify
+      with `getconf PAGESIZE` that it shows `4096`. This restores the original base page size.
+# END generated_summary_faq
+
 author: Geremy Cohen
+
+generate_summary_faq: false
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
-    
+
 armips:
     - Neoverse
 

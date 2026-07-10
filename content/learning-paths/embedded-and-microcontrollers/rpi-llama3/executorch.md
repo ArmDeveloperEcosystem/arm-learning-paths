@@ -1,5 +1,6 @@
 ---
 title: Set up ExecuTorch
+description: Install and configure ExecuTorch so the Llama 3 model can be compiled for Raspberry Pi 5.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

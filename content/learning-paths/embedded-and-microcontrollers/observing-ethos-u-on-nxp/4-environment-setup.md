@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Set up the ExecuTorch build environment"
+description: Set up the ExecuTorch build environment for the NXP workflow using Docker or a native Linux host.
 
 weight: 5 # 1 is first, 2 is second, etc.
 

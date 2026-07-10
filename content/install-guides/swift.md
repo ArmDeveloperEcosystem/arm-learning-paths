@@ -1,6 +1,7 @@
 ---
 
 title: Swift
+description: Install Swift on Ubuntu for Arm and verify the toolchain so you can build and run Swift applications on Arm Linux.
 author: Jason Andrews
 
 minutes_to_complete: 10
@@ -139,4 +140,3 @@ Hello from Swift on Arm Linux!
 ```
 
 You are now ready to use the Swift programming language on your Arm Linux computer.
-

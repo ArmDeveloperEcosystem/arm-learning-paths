@@ -19,6 +19,7 @@ test_images:
 test_link: null
 test_maintenance: true
 title: GFortran
+description: Install GNU Fortran on Arm Linux and compile a test program so you can build Fortran applications with GCC tooling.
 tool_install: true
 weight: 1
 ---

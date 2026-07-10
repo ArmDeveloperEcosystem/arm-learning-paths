@@ -1,5 +1,6 @@
 ---
 title: Overview
+description: Review TinyML concepts, Arm-based edge devices, and the ExecuTorch workflow used in the rest of the Learning Path.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

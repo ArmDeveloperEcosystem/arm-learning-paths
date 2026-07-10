@@ -11,13 +11,20 @@ layout: "learningpathall"
 Before using `migrate-ease`, install the following system dependencies:
 {{< tabpane code=true >}}
   {{< tab header="Ubuntu 22.04">}}
-sudo apt-get install -y python3 python3-pip python3-venv unzip libmagic1 git
+sudo apt-get install -y python3 python3-pip python3-venv libmagic1 git
   {{< /tab >}}
   {{< tab header="Debian 13">}}
-sudo apt-get install -y python3 python3-pip python3-venv unzip libmagic1 git
+sudo apt-get install -y python3 python3-pip python3-venv libmagic1 git
   {{< /tab >}}
   {{< tab header="Fedora 42">}}
-sudo dnf install -y python3 python3-pip unzip git
+sudo dnf install -y python3 python3-pip git
+  {{< /tab >}}
+  {{< tab header="macOS">}}
+brew install python3 libmagic git
+  {{< /tab >}}
+  {{< tab header="Windows">}}
+winget install --id Python.Python.3.11
+winget install --id Git.Git
   {{< /tab >}}
 {{< /tabpane >}}
 
@@ -28,20 +35,35 @@ cd migrate-ease
 ```
 
 Create and activate a Python virtual environment:
-```bash
+
+{{< tabpane code=true >}}
+  {{< tab header="Linux/macOS">}}
 python3 -m venv .venv
 source .venv/bin/activate
-```
+  {{< /tab >}}
+  {{< tab header="Windows (PowerShell)">}}
+python -m venv .venv
+Set-ExecutionPolicy RemoteSigned
+.\.venv\Scripts\Activate.ps1
+  {{< /tab >}}
+{{< /tabpane >}}
 
 Install the required packages and set the environment variable:
-```bash
+
+{{< tabpane code=true >}}
+  {{< tab header="Linux/macOS">}}
 pip3 install -r requirements.txt
 export PYTHONPATH=`pwd`
-```
+  {{< /tab >}}
+  {{< tab header="Windows (PowerShell)">}}
+pip install -r requirements.txt
+$env:PYTHONPATH = (Get-Location).Path
+  {{< /tab >}}
+{{< /tabpane >}}
 
 ## Usage
 
-You can use migrate-ease from the command-line or through a Web GUI. 
+You can use migrate-ease from the command-line or through a Web UI. 
  
 ### Command-line usage
  
@@ -61,11 +83,11 @@ Here's an explanation of each of the arguments passed to the scanner tool:
 
 **Parameters**
 
-`{scanner_name}`: The name of the scanner, which can be one of cpp, docker, go, java, Python or rust.
+`{scanner_name}`: The name of the scanner, which can be one of cpp, docker, go, java, python or rust.
 
 `{result_file_name}`: The name of the exported results file (without the extension).
 
-`{arch}`: The architecture type; `armv8-a` is the default.
+`{arch}`: Target processor architecture. It follows the same semantics as GCC's `-march`, specifying the target architecture and feature set. Supported: `armv8-a` (default) and `armv8.6-a+sve2`.
 
 `{scan_path}`: The path to the code you want to scan.
 
@@ -79,23 +101,83 @@ There are more parameters for user to control the scan functionality. To see thi
 ```bash
 python3 -m {scanner_name} -h
 ```
-Replace {scanner_name} with either cpp, docker, go, java, Python or rust.
+Replace {scanner_name} with either cpp, docker, go, java, python or rust.
 
-### GUI
-Migrate-ease also provides a Web UI that supports scanning a git repo with cpp, docker, go, java, Python and rust scanners in one time.
-To start the web server, simply run:
+### Target a cloud vendor and instance type
+
+Instead of setting `--march` manually, you can derive the target ISA from a cloud vendor and instance type. This is useful when you already know where the workload will run:
+
+```bash
+python3 -m {scanner_name} --vendor {VENDOR} --instance-type {INSTANCE} {scan_path}
 ```
+
+Here's an explanation of each of the arguments passed to the scanner tool:
+
+**Parameters**
+
+`{VENDOR}`: The cloud vendor. Supported values are `AWS`, `GCP`, and `AliCloud`. The match is case-sensitive.
+
+`{INSTANCE}`: The instance type under the selected vendor, for example, `c7g`, `c4a`, or `c8y`. The input is lowercased before matching, so it is case-insensitive. This option requires `--vendor`.
+
+`{scan_path}`: The path to the code you want to scan.
+
+To list the supported vendors and instance types per vendor, use the built-in help and check the **Supported Vendors** and **Supported Instance Types per Vendor** sections:
+
+```bash
+python3 -m {scanner_name} --help
+```
+
+For behavioral rules of `--vendor` and `--instance-type`, see the [vendor and instance-type usage guide](https://github.com/migrate-ease/migrate-ease/blob/main/docs/vendor-instance-type-usage.md).
+
+### Web UI
+
+Migrate-ease also provides a Web UI that supports scanning a git repo or a local source archive (`.zip`/`.tar`) with cpp, docker, go, java, python and rust scanners in one time. To start the web server, simply run:
+```bash
 python3 web/server.py
 ```
 
-Once the server is running, you can access a web server hosted at http://localhost:8080
+The server listens on port `8080` by default. To use a different port, pass `--port`:
+```bash
+python3 web/server.py --port <PORT>
+```
 
-The web UI looks like this:
-![example image alt-text#center](web_ui_index.jpg "Web UI to scan a git repo")
+Once the server is running, you can access a web server hosted at `http://<localhost>:8080`
 
-A git repo URL is required, and you can specify certain branch name to scan. Once the necessary information is filled, you can click the **START SCAN** button to proceed project scanning.
+The Web UI looks like this:
 
-Scanning progress is then shown in the console pane. Once all the jobs are done, you will see a web page like this:
-![example image alt-text#center](web_ui_result.jpg "Web UI of scan result")
+![Migrate-ease Web UI scan form.#center](web_ui_index.webp "Migrate-ease Web UI scan form")
 
-You can download the result by clicking the symbolic download icon button, or view the result by clicking the icon which looks like an eye.
+The Web UI walks you through three steps: choose what to scan, set options, and run.
+
+**1. Choose what to scan** on either tab:
+
+| Tab | Input |
+|---|---|
+| **Git Repo** | An HTTPS Git URL with an optional branch name. Leave the branch empty to use the repository's default branch. |
+| **Source archive** | A local `.zip` or `.tar` archive uploaded from your machine. |
+
+**2. Configure scan options** (optional) from the **Options** menu (gear icon):
+
+| Option | Description | Default |
+|---|---|---|
+| **CSP & Instance** | Cloud provider and instance type used to derive the target architecture. | `armv8-a` |
+| **Report format** | Format of the downloadable report (`JSON`, `HTML`, `Text`, or `CSV`). | `JSON` |
+| **Scanner** | Language scanners to run. Uncheck **All** to pick a subset from `C/C++`, `Go`, `Rust`, `Java`, `Python`, and `Docker`. | All |
+
+**3. Run and monitor** by clicking **SCAN**. The **Console Output** panel streams live logs from each scanner.
+
+{{% notice Tip %}}
+On your first visit, a step-by-step Quick Guide overlay highlights the key controls. A **Quick Guide** button stays in the top-right so you can rerun the walkthrough at any time.
+{{% /notice %}}
+
+When a scan finishes, a results banner appears with three actions:
+
+![Migrate-ease Web UI of scan result.#center](web_ui_result.webp "Migrate-ease Web UI of scan result")
+
+| Action | What it does |
+|---|---|
+| **View Report** | Opens the full compatibility report in a new browser tab. |
+| **Download** | Saves a `report.zip` package to your machine. |
+| **New Scan** | Returns to the scan form so you can run another scan. |
+
+For a detailed walkthrough of every Web UI control, including screenshots for each step, see the [Web UI quick start guide](https://github.com/migrate-ease/migrate-ease/blob/main/docs/webui-quick-start.md).

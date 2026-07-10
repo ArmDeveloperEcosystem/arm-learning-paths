@@ -1,5 +1,6 @@
 ---
 title: DCPerf
+description: Install and run DCPerf on Arm-based servers to benchmark data center workloads and collect performance data for analysis or regression testing.
 author: Kieran Hejmadi
 minutes_to_complete: 20
 official_docs: https://github.com/facebookresearch/DCPerf?tab=readme-ov-file#install-and-run-benchmarks

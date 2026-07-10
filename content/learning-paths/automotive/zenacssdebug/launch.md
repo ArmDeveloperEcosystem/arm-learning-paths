@@ -16,7 +16,7 @@ You can launch the FVP within the build environment with the software stack load
 kas shell -c "../layers/meta-arm/scripts/runfvp -t tmux --verbose"
 ```
 
-See the [Arm Zena CSS User Guide](https://arm-auto-solutions.docs.arm.com/en/v2.0/rd-aspen/user_guide/reproduce.html#run-the-fvp) for further information.
+See the [Arm Zena CSS User Guide](https://arm-zena-css.docs.arm.com/en/latest/user_guide/reproduce.html#run-the-fvp) for further information.
 
 While you can continue to use this method during debugging, it does not enable the Iris debug server in the model, so the system cannot be debugged from Arm Development Studio. Additional command-line options are required.
 

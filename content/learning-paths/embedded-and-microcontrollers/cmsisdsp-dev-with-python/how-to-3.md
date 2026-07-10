@@ -1,5 +1,6 @@
 ---
 title: Load an audio file
+description: Load and inspect an audio file in Python so it can be used as input for the CMSIS-DSP voice activity workflow.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

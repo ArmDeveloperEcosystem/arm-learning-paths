@@ -16,6 +16,9 @@ prerequisites:
 
 author: Jason Andrews
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -27,13 +30,11 @@ operatingsystems:
     - ChromeOS
 tools_software_languages:
 
-
 further_reading:
     - resource:
         title: All Chromebooks with Arm Processors 
         link: https://www.linuxmadesimple.info/2019/08/all-chromebooks-with-arm-processors-in.html
         type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
@@ -41,3 +42,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

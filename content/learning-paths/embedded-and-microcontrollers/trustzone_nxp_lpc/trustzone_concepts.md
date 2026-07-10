@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Breaking down the application"
+description: Understand the secure and non-secure application flow used by the TrustZone example on the NXP board.
 
 weight: 3 # 1 is first, 2 is second, etc.
 

@@ -1,5 +1,6 @@
 ---
 title: Store your API key in AWS Secrets Manager
+description: Store the Edge Impulse API key in AWS Secrets Manager so Greengrass components can access it securely.
 weight: 6
 
 ### FIXED, DO NOT MODIFY

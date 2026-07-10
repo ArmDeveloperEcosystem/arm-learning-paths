@@ -1,5 +1,6 @@
 ---
 title: Run pqm4 tests and benchmarks
+description: Build and run pqm4 tests and benchmarks to measure post-quantum cryptography implementations on Cortex-M4.
 
 weight: 4
 

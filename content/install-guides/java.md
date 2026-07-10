@@ -1,5 +1,6 @@
 ---
 title: Java
+description: Install Java runtimes and development kits on Arm Linux using package managers, Snap, or vendor distributions for Java application development.
 author: Jason Andrews
 minutes_to_complete: 15
 official_docs: https://docs.oracle.com/en/java/

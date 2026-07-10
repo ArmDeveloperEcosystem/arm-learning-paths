@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: PyTorch for Windows on Arm
+description: Install native PyTorch for Windows on Arm and run a Python example to verify machine learning workflows on Arm devices.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:

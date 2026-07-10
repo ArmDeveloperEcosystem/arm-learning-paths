@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Run the examples on the FVP"
+description: Run ML Evaluation Kit examples on the Arm Ecosystem FVP and inspect the model output.
 
 weight: 4 # 1 is first, 2 is second, etc.
 

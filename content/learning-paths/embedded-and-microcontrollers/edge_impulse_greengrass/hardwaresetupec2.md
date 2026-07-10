@@ -1,5 +1,6 @@
 ---
 hide_from_navpane: true
+description: Launch an Ubuntu AWS EC2 Arm instance and install the dependencies needed to simulate an Edge Impulse Greengrass device.
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
