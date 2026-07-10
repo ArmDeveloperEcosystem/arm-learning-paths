@@ -8,9 +8,22 @@ layout: learningpathall
 
 ## From locomotion to interaction
 
-In the previous [Learning Path](https://learn.arm.com/learning-paths/laptops-and-desktops/dgx_spark_isaac_robotics/), you installed and ran [Isaac Sim](https://developer.nvidia.com/isaac/sim) and [Isaac Lab](https://developer.nvidia.com/isaac/lab) on an Arm-based [DGX Spark](https://www.nvidia.com/en-gb/products/workstations/dgx-spark/) system. In this section, you move from locomotion to manipulation.
+Use the installation instructions in the previous [Learning Path](https://learn.arm.com/learning-paths/laptops-and-desktops/dgx_spark_isaac_robotics/)to  installed and run [Isaac Sim](https://developer.nvidia.com/isaac/sim) and [Isaac Lab](https://developer.nvidia.com/isaac/lab) on an Arm-based [DGX Spark](https://www.nvidia.com/en-gb/products/workstations/dgx-spark/) system. This learning path has been validated on `IsaacLab 2.3.0` and `IsaacSim 5.1.0`. 
 
-You will train a simulation model of the [Franka 3](https://franka.de/franka-research-3) robotic arm with 7 Degrees-of-freedom (DOF) on two tasks:
+{{% notice Running IsaacSim 6.0.0 or newer %}}
+
+Before installing, verify that your chosen **IsaacLab** version is compatible with **IsaacSim** using the version compatibility table in the IsaacLab [README.md](https://github.com/isaac-sim/IsaacLab/blob/main/README.md). If your desired IsaacLab release is not compatible with the latest IsaacSim version, you may need to check out and build an earlier IsaacSim release.
+
+**As of July 2026, Support for IsaacLab 3.0.0 running atop IsaacSim 6.0.0 or later is currently in beta.**
+
+The commands and APIs in this learning path are written for **IsaacLab 2.3.0**. If you choose to use **IsaacLab 3.0.0 or newer**, you may need to update the commands to match the latest API. See the [IsaacLab 3.0 Migration Guide](https://isaac-sim.github.io/IsaacLab/develop/source/migration/migrating_to_isaaclab_3-0.html) for details.
+
+Additionally, IsaacLab 3.0.0 and newer require **Python 3.12 or later** to build and install all required Python packages. You may need to upgrade your system Python version before continuing.
+
+{{% /notice %}}
+
+
+In this section, you move from locomotion to manipulation. You will train a simulation model of the [Franka 3](https://franka.de/franka-research-3) robotic arm with 7 Degrees-of-freedom (DOF) on two tasks:
 
 * **Reach** - to build spatial control of the arm's end effector, the part that interacts with the environment.
 * **Lift** - to further add contact, grasping, and stable object motion.

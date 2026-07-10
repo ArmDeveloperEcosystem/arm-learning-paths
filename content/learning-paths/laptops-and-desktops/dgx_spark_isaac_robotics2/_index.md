@@ -1,5 +1,5 @@
 ---
-title: Scale Robotics Reinforcement Learning Workflows to Manipulation and Multi-Agent Tasks with IsaacLab
+title: Advance Robotics Reinforcement Learning Workflows to Manipulation and Multi-Agent Tasks with IsaacLab
 
 minutes_to_complete: 120
 

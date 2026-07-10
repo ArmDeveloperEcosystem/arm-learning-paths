@@ -96,7 +96,20 @@ In this output:
 
 {{% notice Please Note %}}
 
-This task can take up to 1 hour on a DGX Spark. If you want to run the model from a pre-trained checkpoint available from NVIDIA Omniverse, you can trying replacing the `--checkpoint=<path_to_your_factory_model.pth>` argument with `--use_pretrained_checkpoint` to the `play.py` script in the verify section below. 
+Training this task can take up to **1 hour** on a DGX Spark. 
+
+If you want to run the model from a pre-trained checkpoint available from NVIDIA Omniverse. You can optionally skip this training part and move to the verify section. When running the `play.py` script you will need to replace the 
+
+```bash
+--checkpoint=<path_to_your_factory_model.pth>
+```
+
+with
+
+```bash
+--use_pretrained_checkpoint
+```
+
 
 Please note that there may not be a model available from NVIDIAs Omniverse for your specific task and `IsaacLab` version tag. 
 

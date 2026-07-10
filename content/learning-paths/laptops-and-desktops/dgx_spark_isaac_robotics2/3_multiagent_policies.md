@@ -37,10 +37,21 @@ This command loads the task, selects the MAPPO training algorithm, and runs the 
 
 {{% notice Please Note %}}
 
-Training this expected to take at least 30 minutes on the DGX Spark. If you want to skip training and run the model from a pre-trained checkpoint available from NVIDIA Omniverse, you can trying replacing the `--checkpoint=<path_to_your_factory_model.pth>` argument with `--use_pretrained_checkpoint` to the `play.py` script in the verify section below. 
+Training this task can take up to **30 minutes** on a DGX Spark. 
 
-Please note that there may not be a model available from NVIDIAs Omniverse for the specific task and `IsaacLab` version. Additionally, the pretrained checkpoint may not be as performant as one you train yourself. 
+If you want to run the model from a pre-trained checkpoint available from NVIDIA Omniverse. You can optionally skip this training part and move to the verify section. When running the `play.py` script you will need to replace the 
 
+```bash
+--checkpoint=<path_to_your_factory_model.pth>
+```
+
+with
+
+```bash
+--use_pretrained_checkpoint
+```
+
+Please note that there may not be a model available from NVIDIAs Omniverse for your specific task and `IsaacLab` version tag. 
 {{% /notice %}}
 
 
