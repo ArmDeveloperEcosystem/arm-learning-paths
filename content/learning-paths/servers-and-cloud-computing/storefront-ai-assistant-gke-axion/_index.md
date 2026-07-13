@@ -37,9 +37,9 @@ generated_summary_faq:
     Engine using Arm-based Axion nodes, validate a baseline on N4A, and add a gRPC-driven AI shopping
     assistant. You'll build and push a single `linux/arm64` container image to Artifact Registry, then
     use Kustomize overlays to run the assistant on N4A before moving only that tier to C4A. After
-    reviewing the assistant’s sources and runtime dependencies, you'll confirm scheduling on the intended
+    reviewing the assistant’s source code and runtime dependencies, you'll confirm scheduling on the intended
     node pool and capture benchmark summaries to compare the same assistant workload across N4A
-    and C4A. The end state is a mixed-placement deployment where the steady storefront remains
+    and C4A. You'll finish with a mixed-placement deployment where the steady storefront remains
     on N4A and the burstier assistant runs on the selected pool.
   faqs:
   - question: How do I verify the cluster has both N4A and C4A node pools before I start?
@@ -50,11 +50,10 @@ generated_summary_faq:
     answer: >-
       The storefront runs on N4A, and `shoppingassistantservice` isn't present. This is intentional
       because you'll build and deploy the assistant in later steps.
-  - question: I’ve run this path before. What should I remove before I recreate the baseline?
+  - question: I've run this path before. What should I remove before I recreate the baseline?
     answer: >-
-      Delete any existing assistant deployment and related service so the baseline reflects a
-      storefront without the assistant. The steps show removing old assistant resources before
-      creating the baseline.
+      Delete any existing assistant deployment, related service, and service account so the baseline reflects a
+      storefront without the assistant. 
   - question: Do I need different container images for N4A and C4A when I deploy the assistant?
     answer: >-
       No. You'll build one `linux/arm64` image targeted for Axion that'll run in either placement.
