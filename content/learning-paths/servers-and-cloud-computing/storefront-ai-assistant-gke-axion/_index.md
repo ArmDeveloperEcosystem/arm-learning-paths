@@ -18,10 +18,58 @@ prerequisites:
     - Cloud Shell or a Linux or macOS administrative workstation with Docker Buildx, `gcloud`, `kubectl`, `git`, `curl`, Python 3.10 or later, and `jq`
     - Basic familiarity with Docker, Kubernetes, Kustomize, and GKE
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-07-13T19:30:38Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: cdd45953e2784d3a6b0894fac600b6b03048b514493d6526709908f3049595cc
+  summary_generated_at: '2026-07-13T19:30:38Z'
+  summary_source_hash: cdd45953e2784d3a6b0894fac600b6b03048b514493d6526709908f3049595cc
+  faq_generated_at: '2026-07-13T19:30:38Z'
+  faq_source_hash: cdd45953e2784d3a6b0894fac600b6b03048b514493d6526709908f3049595cc
+  summary: >-
+    You'll deploy the Online Boutique storefront on Google Kubernetes
+    Engine using Arm-based Axion nodes, validate a baseline on N4A, and add a gRPC-driven AI shopping
+    assistant. You'll build and push a single `linux/arm64` container image to Artifact Registry, then
+    use Kustomize overlays to run the assistant on N4A before moving only that tier to C4A. After
+    reviewing the assistant’s sources and runtime dependencies, you'll confirm scheduling on the intended
+    node pool and capture benchmark summaries to compare the same assistant workload across N4A
+    and C4A. The end state is a mixed-placement deployment where the steady storefront remains
+    on N4A and the burstier assistant runs on the selected pool.
+  faqs:
+  - question: How do I verify the cluster has both N4A and C4A node pools before I start?
+    answer: >-
+      Use `kubectl` to list nodes and confirm that both pools are present. The workflow assumes
+      an `arm64` GKE Standard cluster with separate N4A and C4A pools.
+  - question: What result should I expect after I apply the baseline overlay?
+    answer: >-
+      The storefront runs on N4A, and `shoppingassistantservice` isn't present. This is intentional
+      because you'll build and deploy the assistant in later steps.
+  - question: I’ve run this path before. What should I remove before I recreate the baseline?
+    answer: >-
+      Delete any existing assistant deployment and related service so the baseline reflects a
+      storefront without the assistant. The steps show removing old assistant resources before
+      creating the baseline.
+  - question: Do I need different container images for N4A and C4A when I deploy the assistant?
+    answer: >-
+      No. You'll build one `linux/arm64` image targeted for Axion that'll run in either placement.
+  - question: How do I confirm the assistant is scheduled on the intended node pool when I switch
+      from N4A to C4A?
+    answer: >-
+      Check the node assigned to the assistant pod and verify it matches the target pool after
+      applying the appropriate Kustomize overlay. Inspect pod logs and service reachability to
+      confirm the tier is healthy before capturing benchmarks.
+# END generated_summary_faq
+
 author:
    - Rani Chowdary Mandepudi
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -76,3 +124,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+
