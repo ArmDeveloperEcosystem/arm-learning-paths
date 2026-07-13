@@ -1,5 +1,5 @@
 ---
-title: Observe and benchmark the assistant on N4A
+title: Observe and benchmark the assistant on the Google N4A node pool
 description: Start the telemetry dashboard, generate assistant traffic, and capture a fixed-batch N4A benchmark summary.
 weight: 8
 layout: "learningpathall"

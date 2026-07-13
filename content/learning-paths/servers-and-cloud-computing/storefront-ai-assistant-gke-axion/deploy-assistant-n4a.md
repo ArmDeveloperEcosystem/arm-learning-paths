@@ -1,5 +1,5 @@
 ---
-title: Deploy the assistant on N4A
+title: Deploy the assistant on the Google N4A node pool
 description: Add the assistant component to the storefront and keep the application on the N4A node pool.
 weight: 7
 layout: "learningpathall"

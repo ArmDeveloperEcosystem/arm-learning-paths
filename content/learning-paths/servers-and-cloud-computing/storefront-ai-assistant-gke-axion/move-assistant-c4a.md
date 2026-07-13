@@ -1,5 +1,5 @@
 ---
-title: Move the assistant to C4A and compare results
+title: Move the assistant to the Google C4A node pool and compare results
 description: Move only the assistant deployment to C4A, rerun the fixed benchmark, and compare it with the N4A baseline.
 weight: 9
 layout: "learningpathall"
