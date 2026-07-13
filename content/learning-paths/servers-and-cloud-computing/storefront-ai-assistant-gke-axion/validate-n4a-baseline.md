@@ -142,7 +142,7 @@ The output should include an HTTP response header. A `200 OK` or `302 Found` res
 
 Open the printed URL in your browser. The Online Boutique storefront should load.
 
-![Online Boutique storefront page showing product cards and the Google Cloud label, confirming that the baseline storefront is reachable before the assistant is deployed#center](images/storefront-running-on-google-axion.jpeg "Online Boutique storefront running on Google Axion")
+![Online Boutique storefront page showing product cards and the Google Cloud label, confirming that the baseline storefront is reachable before the assistant is deployed#center](images/storefront-running-on-google-axion.webp "Online Boutique storefront running on Google Axion")
 
 ## What you've accomplished
 
