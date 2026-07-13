@@ -5,30 +5,23 @@ weight: 7
 layout: "learningpathall"
 ---
 
-## Create the N4A overlay
+## Add the assistant to the N4A overlay
 
 If you opened a new terminal, return to the source tree and restore the required variables:
 
 ```bash
-cd "${HOME}/n4a-c4a/microservices-demo"
+source "${HOME}/.storefront-axion-env"
+cd "${REPO}"
 
-export PROJECT_ID="$(gcloud config get-value project)"
-export ARTIFACT_REGION="us-central1"
-export ARTIFACT_REPO="axion-workshop"
-export ASSISTANT_IMAGE_REPO="${ARTIFACT_REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REPO}/shoppingassistantservice"
-export ASSISTANT_IMAGE_TAG="lab-v1"
-export N4A_NODE_POOL_NAME="arm64-pool-n4a2"
 export FRONTEND_IP="$(kubectl get service frontend-external \
   -o jsonpath='{.status.loadBalancer.ingress[0].ip}')"
 export APP_URL="http://${FRONTEND_IP}"
 ```
 
-Create a Kustomize overlay that adds the assistant component and keeps the full storefront, including the assistant, on the N4A node pool:
+The `storefront-n4a` overlay already places every deployment on N4A. Extend it with the assistant component and the image you pushed. The existing `node-selector.yaml` patch then applies the same placement to the assistant deployment.
 
 ```bash
-mkdir -p kustomize/overlays/assistant-n4a
-
-cat <<EOF > kustomize/overlays/assistant-n4a/kustomization.yaml
+cat <<EOF > kustomize/overlays/storefront-n4a/kustomization.yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
@@ -44,20 +37,6 @@ patches:
   target:
     kind: Deployment
 EOF
-
-cat <<EOF > kustomize/overlays/assistant-n4a/node-selector.yaml
-- op: add
-  path: /spec/template/spec/nodeSelector
-  value:
-    cloud.google.com/gke-nodepool: ${N4A_NODE_POOL_NAME}
-- op: add
-  path: /spec/template/spec/tolerations
-  value:
-  - key: kubernetes.io/arch
-    operator: Equal
-    value: arm64
-    effect: NoSchedule
-EOF
 ```
 
 ## Render the overlay
@@ -65,9 +44,9 @@ EOF
 Review the overlay files and render the manifest:
 
 ```bash
-sed -n '1,120p' kustomize/overlays/assistant-n4a/kustomization.yaml
-sed -n '1,120p' kustomize/overlays/assistant-n4a/node-selector.yaml
-kubectl kustomize kustomize/overlays/assistant-n4a | sed -n '1,240p'
+sed -n '1,120p' kustomize/overlays/storefront-n4a/kustomization.yaml
+sed -n '1,120p' kustomize/overlays/storefront-n4a/node-selector.yaml
+kubectl kustomize kustomize/overlays/storefront-n4a | sed -n '1,240p'
 ```
 
 Do not apply the overlay if the rendered manifest has an empty image name, image tag, or node-pool value.
@@ -77,7 +56,7 @@ Do not apply the overlay if the rendered manifest has an empty image name, image
 Apply the overlay and wait for the frontend and assistant deployments:
 
 ```bash
-kubectl apply -k kustomize/overlays/assistant-n4a
+kubectl apply -k kustomize/overlays/storefront-n4a
 kubectl rollout status deployment/frontend --timeout=600s
 kubectl rollout status deployment/shoppingassistantservice --timeout=1200s
 ```
@@ -120,9 +99,11 @@ The `server` container serves the assistant API. The `ollama` container prepares
 The first rollout can take a few minutes because the Ollama sidecar pulls the model when the pod starts. Early `/readyz` checks can return `503` until the model is available.
 {{% /notice %}}
 
-## Validate the assistant through the storefront
+## Send a request in one assistant session
 
-Create a session with cookies and send one assistant request through the storefront:
+Open the assistant endpoint and save its HTTP session cookie in `/tmp/assistant.cookies`. The next request sends the same cookie back, just as a browser would. The assistant can then associate follow-up prompts and cart actions with the same short-lived session.
+
+Send one assistant request through the storefront:
 
 ```bash
 curl --max-time 30 -s -c /tmp/assistant.cookies "${APP_URL}/assistant" >/dev/null
