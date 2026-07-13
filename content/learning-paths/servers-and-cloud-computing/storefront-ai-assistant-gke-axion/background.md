@@ -15,17 +15,16 @@ The goal isn't to prove that one Axion-based machine series replaces the other. 
 
 ![Architecture diagram showing the existing multi-architecture storefront image workflow and the final GKE placement on Axion. Core storefront services run on N4A, while the shopping assistant, Ollama sidecar, and Gemma model run together on C4A and call the live cart and catalog services.#center](images/mixed-placement-agentic-storefront-on-axion.webp "Mixed-placement agentic storefront on Axion")
 
-The diagram shows the final mixed-placement pattern you'll build toward. Its left side summarizes the multi-architecture image publishing process used for the existing storefront images; you don't repeat that process here. The assistant image you'll build later targets only `linux/arm64` because both destination node pools are Arm-based. The right side shows the final placement: core services remain on N4A while the assistant, its Ollama sidecar, and the Gemma model move together to C4A.
+The diagram shows the final mixed-placement pattern you'll build toward. It summarizes the multi-architecture image publishing process used for the existing storefront images; you don't repeat that process here. The assistant image you'll build later targets only `linux/arm64` because both destination node pools are Arm-based. The diagram also shows the final placement: core services remain on N4A while the assistant, its Ollama sidecar, and the Gemma model move together to C4A.
 
 ## How the storefront already runs on Arm
 
 The storefront baseline uses container images that can run on Arm nodes. A common way to publish portable container images is to use a multi-architecture image, which is one image reference that contains variants for more than one CPU architecture, such as `linux/amd64` and `linux/arm64`.
 
-When Kubernetes schedules a pod that uses a multi-architecture image on an Arm node, the container runtime pulls the Arm-compatible variant from the same image reference. That's why the storefront can already run on Axion nodes before you build the assistant image.
+When Kubernetes schedules a pod that uses a multi-architecture image on an Arm node, the container runtime pulls the Arm-compatible variant from the same image reference. That's why the storefront can already run on Axion nodes before you build the assistant image. You'll confirm the storefront image reference from the source tree after you set up your tools and cluster access.
 
 You'll start with Arm-compatible storefront images already available. To learn the full build-and-publish workflow for multi-architecture images on GKE, see [Migrate x86 workloads to Arm on Google Kubernetes Engine with Axion processors](/learning-paths/servers-and-cloud-computing/gke-multi-arch-axion/).
 
-One image reference can therefore contain an Arm-compatible variant. You'll confirm the storefront image reference from the source tree after you set up your tools and cluster access.
 
 ## How assistant requests flow
 
@@ -47,6 +46,6 @@ This design keeps the placement comparison focused. You don't add a separate vec
 
 ## What you've learned and what's next
 
-You've now understood the architecture of the storefront application and its AI assistant.
+You've now learned about the architecture of the storefront application and its AI assistant.
 
 Next, you'll set up environment variables, connect to the GKE cluster, and clone the source tree that contains the assistant implementation.

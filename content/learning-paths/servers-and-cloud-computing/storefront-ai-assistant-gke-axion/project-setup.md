@@ -53,7 +53,7 @@ fi
 docker buildx inspect --bootstrap
 ```
 
-Confirm that the `Platforms` line includes `linux/arm64` before you continue. The later build command uses this capability to produce an image for the Arm-based N4A and C4A nodes. If `linux/arm64` is missing, configure Arm support for your Docker builder before continuing.
+Confirm that the `Platforms` line includes `linux/arm64` before you continue. The later build command uses this capability to produce an image for the Arm-based N4A and C4A nodes. If `linux/arm64` is missing, configure Arm support for your Docker builder before continuing. For more information, see [Build multi-architecture images with Docker buildx](/learning-paths/cross-platform/docker/buildx/).
 
 You'll also use Kustomize in the following sections. Kustomize combines a shared set of Kubernetes manifests with reusable components and placement-specific patches. The tool is built into `kubectl`, so the `kubectl kustomize` and `kubectl apply -k` commands don't need a separate Kustomize executable.
 
@@ -143,7 +143,7 @@ kubectl config current-context
 kubectl get nodes
 ```
 
-## Confirm the Artifact Registry repository
+## Create or confirm the Artifact Registry repository
 
 The assistant image is pushed to Artifact Registry. Create the Docker repository if it doesn't already exist:
 
@@ -195,7 +195,7 @@ The commit should be:
 b0a1be98cd47087638b2ea98c9c3de01bc4f533c
 ```
 
-## Confirm the Arm foundation
+## Confirm Arm node pools and storefront images
 
 Check that the cluster has Arm node pools for N4A and C4A:
 

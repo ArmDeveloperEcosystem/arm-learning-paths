@@ -171,7 +171,7 @@ python3 workshop/compare_summaries.py \
   sed '/^Interpretation$/,$d'
 ```
 
-This displays the measured comparison table without adding a predetermined placement conclusion. Lower batch duration and request latency indicate the faster run for those measurements.
+This displays the measured comparison table without forcing a predetermined placement conclusion. Lower batch duration and request latency indicate the faster run for those measurements.
 
 Focus on these signals:
 

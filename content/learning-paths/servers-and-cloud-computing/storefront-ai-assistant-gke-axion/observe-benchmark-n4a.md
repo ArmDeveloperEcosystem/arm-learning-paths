@@ -1,6 +1,6 @@
 ---
 title: Observe and benchmark the assistant on N4A
-description: Start the telemetry dashboard, generate assistant traffic, and capture a fixed N4A benchmark summary.
+description: Start the telemetry dashboard, generate assistant traffic, and capture a fixed-batch N4A benchmark summary.
 weight: 8
 layout: "learningpathall"
 ---
@@ -15,7 +15,7 @@ The source tree includes helper scripts that focus traffic and telemetry on the 
 - `workshop/fixed_batch_trial.py` runs a repeatable benchmark.
 - `workshop/compare_summaries.py` compares benchmark summaries.
 
-Compile the scripts before you run them:
+Check the assistant service and compile the scripts before you run them:
 
 ```bash
 kubectl get deployment shoppingassistantservice

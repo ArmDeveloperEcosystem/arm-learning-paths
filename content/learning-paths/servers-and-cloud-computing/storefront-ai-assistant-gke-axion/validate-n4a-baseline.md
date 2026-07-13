@@ -138,7 +138,7 @@ Send a header request to the storefront:
 curl --max-time 30 -I "${APP_URL}"
 ```
 
-The output should include an HTTP response header. A `200 OK` or `302 Found` response confirms that the baseline storefront is reachable.
+The output includes an HTTP response header. A `200 OK` or `302 Found` response confirms that the baseline storefront is reachable.
 
 Open the printed URL in your browser to load the Online Boutique storefront.
 

@@ -99,7 +99,7 @@ The `server` container serves the assistant API. The `ollama` container prepares
 The first rollout can take a few minutes because the Ollama sidecar pulls the model when the pod starts. Early `/readyz` checks can return `503` until the model is available.
 {{% /notice %}}
 
-## Send a request in one assistant session
+## Send a request through one assistant session
 
 Open the assistant endpoint and save its HTTP session cookie in `/tmp/assistant.cookies`. The next request sends the same cookie back, just as a browser would. The assistant can then associate follow-up prompts and cart actions with the same short-lived session.
 
@@ -136,7 +136,7 @@ yes
 What is in my cart now?
 ```
 
-The assistant recommends a catalog item, ask for confirmation before changing the cart, and then show the cart contents.
+The assistant recommends a catalog item and asks for confirmation before changing the cart. It then shows the cart's contents.
 
 ## What you've accomplished and what's next
 

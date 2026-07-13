@@ -1,19 +1,21 @@
 ---
-title: Build a mixed-placement AI shopping assistant on Google Kubernetes Engine with Axion-based compute
+title: Deploy a mixed-placement AI shopping assistant on Google Kubernetes Engine with Axion-based compute
 
 minutes_to_complete: 120
-description: Deploy and validate an Online Boutique storefront on GKE, add an AI shopping assistant, and compare N4A and C4A placement for the assistant tier.
+description: Deploy and validate an Online Boutique storefront on GKE on Arm, add an AI shopping assistant, and compare N4A and C4A placement for the assistant tier.
 who_is_this_for: This is an advanced topic for cloud developers, platform engineers, and site reliability engineers who run applications on Google Kubernetes Engine (GKE) and want to place application tiers on the Axion-based machine series that fits each workload.
 
 learning_objectives:
-    - Create and validate an Online Boutique storefront on an N4A node pool
+    - Deploy and validate an Online Boutique storefront on an N4A node pool
     - Build and push a `linux/arm64` container image, then add the AI shopping assistant to the storefront
     - Use Kustomize overlays to run the assistant on N4A first, then move it to C4A
     - Capture and compare benchmark summaries for the same assistant workload on N4A and C4A
 
 prerequisites:
     - A [Google Cloud account](https://console.cloud.google.com/) with billing enabled
-    - Access to a [GKE Standard cluster with Arm node pools](https://cloud.google.com/kubernetes-engine/docs/how-to/create-arm-clusters-nodes), including N4A and C4A node pools
+    - Access to a [GKE Standard cluster with Arm node pools](https://cloud.google.com/kubernetes-engine/docs/how-to/create-arm-clusters-nodes), including N4A and C4A node pools, with the Kubernetes Metrics API enabled
+    - Permissions to get cluster credentials, deploy Kubernetes workloads and services, read pod logs and metrics, and create or use an Artifact Registry Docker repository
+    - Cloud Shell or a Linux or macOS administrative workstation with Docker Buildx, `gcloud`, `kubectl`, `git`, `curl`, Python 3.10 or later, and `jq`
     - Basic familiarity with Docker, Kubernetes, Kustomize, and GKE
 
 author:
