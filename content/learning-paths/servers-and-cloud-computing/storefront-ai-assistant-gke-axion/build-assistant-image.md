@@ -16,61 +16,17 @@ This is an Arm-targeted build for Axion, not a full multi-architecture build. A 
 If you opened a new terminal, return to the source tree and restore the required variables:
 
 ```bash
-cd "${HOME}/n4a-c4a/microservices-demo"
-
-export PROJECT_ID="$(gcloud config get-value project)"
-export ARTIFACT_REGION="us-central1"
-export ARTIFACT_REPO="axion-workshop"
+source "${HOME}/.storefront-axion-env"
+cd "${REPO}"
 ```
 
-## Define the image name
+## Confirm the image name
 
-Create one reusable image path:
+Confirm the reusable image path you configured during setup:
 
 ```bash
-export ASSISTANT_IMAGE_REPO="${ARTIFACT_REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REPO}/shoppingassistantservice"
-export ASSISTANT_IMAGE_TAG="lab-v1"
-export ASSISTANT_IMAGE="${ASSISTANT_IMAGE_REPO}:${ASSISTANT_IMAGE_TAG}"
-
 echo "${ASSISTANT_IMAGE}"
 ```
-
-## Verify Docker and Buildx
-
-Confirm that Docker and Buildx are available:
-
-```bash
-docker version
-docker buildx version
-```
-
-If Docker is not running in your environment, start it before you continue.
-
-## Configure Artifact Registry authentication
-
-Configure Docker authentication for Artifact Registry:
-
-```bash
-gcloud auth configure-docker "${ARTIFACT_REGION}-docker.pkg.dev" --quiet
-```
-
-Cloud Shell might print a warning about existing credential helpers. You can continue if the command finishes successfully.
-
-## Create a Buildx builder
-
-Create or reuse a Buildx builder:
-
-```bash
-if docker buildx inspect axion-builder >/dev/null 2>&1; then
-  docker buildx use axion-builder
-else
-  docker buildx create --name axion-builder --use
-fi
-
-docker buildx inspect --bootstrap
-```
-
-The output should show a working builder. Confirm that the `Platforms` line includes `linux/arm64` before you continue.
 
 ## Build and push the assistant image
 
