@@ -21,26 +21,33 @@ Running locally has three benefits that matter for an agent:
 
 ## Install and start Ollama
 
-Install [Ollama](https://ollama.com/) and start its server using one of the following options. The server exposes a local API at `http://localhost:11434` that the agent connects to.
+Install [Ollama](https://ollama.com/) and start its server. The server exposes a local API at `http://localhost:11434` that the agent connects to.
+
+1. Install Ollama using one of the following options:
 
 {{< tabpane code=true >}}
-{{< tab header="Homebrew (Recommended)" language="bash">}}
-# Install Ollama
+{{< tab header="Homebrew" language="bash">}}
 brew install ollama
+{{< /tab >}}
+{{< tab header="Install script" language="bash">}}
+curl -fsSL https://ollama.com/install.sh | sh
+{{< /tab >}}
+{{< /tabpane >}}
 
-# Start the server as a background service (no terminal to keep open)
+2. Start the Ollama server using the same method you used to install it:
+
+{{< tabpane code=true >}}
+{{< tab header="Homebrew" language="bash">}}
 brew services start ollama
 {{< /tab >}}
 {{< tab header="Install script" language="bash">}}
-# Install Ollama
-curl -fsSL https://ollama.com/install.sh | sh
-
-# Start the server (leave this running, and open a second terminal)
 ollama serve
 {{< /tab >}}
 {{< /tabpane >}}
 
-With [Homebrew](https://brew.sh/), `brew services` runs Ollama in the background, so you can use the same terminal throughout. With the install script, `ollama serve` runs in the foreground, so keep that terminal open and use a second terminal for the remaining commands.
+With [Homebrew](https://brew.sh/), `brew services` runs Ollama in the background, so you can use the same terminal throughout. To stop it later, run `brew services stop ollama`.
+
+With the install script, `ollama serve` runs in the foreground. Keep that terminal open and use a second terminal for the remaining commands. To stop it later, press **Ctrl+C** in the terminal running `ollama serve`.
 
 ## Pull the Gemma model
 

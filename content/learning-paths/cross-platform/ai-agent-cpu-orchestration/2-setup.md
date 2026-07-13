@@ -13,17 +13,6 @@ Prepare the following before running the agent: a Serper API key for web search,
 
 These steps are identical on an Apple silicon MacBook, an Arm Linux machine, and an NVIDIA DGX Spark.
 
-### Get a Serper API key
-
-The agent searches the web through [Serper](https://serper.dev/), a Google Search API. The free tier is enough for you to complete the Learning Path.
-
-To get an API key:
-
-1. Go to [serper.dev](https://serper.dev/) and create a free account.
-2. Open your dashboard and copy your API key.
-
-You'll set this key as an environment variable later in this section, so the agent can read it without the key being written into the code.
-
 ### Create a project directory and virtual environment
 
 A virtual environment keeps the agent's dependencies isolated from your system Python, so you always run against the right package versions.
@@ -54,16 +43,21 @@ Install the two packages:
 pip install requests beautifulsoup4
 ```
 
-### Set your Serper API key
+## Set your Serper API key
 
-Export your API key as an environment variable in the same terminal session:
+The agent searches the web through [Serper](https://serper.dev/), a Google Search API. The free tier is enough to complete this Learning Path.
 
-```bash
-export SERPER_API_KEY="your-serper-api-key"
-```
+1. Go to [serper.dev](https://serper.dev/) and create a free account.
+2. After logging in, you'll see the dashboard. On the left, select **API Keys**.
+3. Copy the Default key.
+4. Export your API key as an environment variable in the same terminal session as your virtual environment:
+
+    ```bash
+    export SERPER_API_KEY="your-serper-api-key"
+    ```
 
 {{% notice Tip %}}
-This variable lasts only for the current terminal session. To keep the variable across sessions, add the same line to your shell profile, for example `~/.zshrc` on macOS or `~/.bashrc` on Linux.
+This variable only lasts for the current terminal session. To keep it across sessions, add the same line to your shell profile, for example `~/.zshrc` on macOS or `~/.bashrc` on Linux.
 {{% /notice %}}
 
 ### Download the agent script

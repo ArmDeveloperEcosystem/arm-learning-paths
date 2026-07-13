@@ -10,15 +10,9 @@ layout: "learningpathall"
 If you opened a new terminal, return to the source tree and restore the required variables:
 
 ```bash
-cd "${HOME}/n4a-c4a/microservices-demo"
+source "${HOME}/.storefront-axion-env"
+cd "${REPO}"
 
-export PROJECT_ID="$(gcloud config get-value project)"
-export ARTIFACT_REGION="us-central1"
-export ARTIFACT_REPO="axion-workshop"
-export ASSISTANT_IMAGE_REPO="${ARTIFACT_REGION}-docker.pkg.dev/${PROJECT_ID}/${ARTIFACT_REPO}/shoppingassistantservice"
-export ASSISTANT_IMAGE_TAG="lab-v1"
-export N4A_NODE_POOL_NAME="arm64-pool-n4a2"
-export C4A_NODE_POOL_NAME="arm64-pool-c4a"
 export FRONTEND_IP="$(kubectl get service frontend-external \
   -o jsonpath='{.status.loadBalancer.ingress[0].ip}')"
 export APP_URL="http://${FRONTEND_IP}"
@@ -117,7 +111,7 @@ The frontend should remain on N4A, and `shoppingassistantservice` should now run
 
 ## Warm the assistant on C4A
 
-Send one request through the storefront after the move:
+Open the assistant endpoint to refresh the HTTP session cookie, then send one request through the storefront after the move. The cookie file preserves the same browser-like session across both calls:
 
 ```bash
 curl --max-time 30 -s -c /tmp/assistant.cookies "${APP_URL}/assistant" >/dev/null
@@ -171,8 +165,13 @@ The summary should show successful requests and the assistant running on the C4A
 Compare the N4A and C4A summaries:
 
 ```bash
-python3 workshop/compare_summaries.py workshop/fixed-n4a-summary.log workshop/fixed-c4a-summary.log
+python3 workshop/compare_summaries.py \
+  workshop/fixed-n4a-summary.log \
+  workshop/fixed-c4a-summary.log | \
+  sed '/^Interpretation$/,$d'
 ```
+
+This displays the measured comparison table without adding a predetermined placement conclusion. Lower batch duration and request latency indicate the faster run for those measurements.
 
 Focus on these signals:
 
@@ -199,6 +198,8 @@ The application now has three states:
 - Storefront on N4A with only the assistant on C4A
 
 That sequence is the core architectural point. A modern application can contain a steady application tier and a bursty AI reasoning tier. N4A supports the steady storefront and core services, while C4A gives you a placement to evaluate for concentrated, latency-sensitive assistant work.
+
+Both Axion machine series run `arm64`, so the same assistant image moves between the Neoverse N3-based N4A pool and the Neoverse V2-based C4A pool. You can evaluate placement without maintaining a second image or build pipeline.
 
 For this application, the useful pattern is not replacing one machine series with another. It is placing each workload tier where its behavior fits best.
 
