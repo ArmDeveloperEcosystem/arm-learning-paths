@@ -7,7 +7,7 @@ layout: "learningpathall"
 
 ## Build one Arm image for both Axion placements
 
-Both the N4A and C4A node pools in this Learning Path use Arm-based Google Axion processors. You only need one `linux/arm64` assistant image, and that image can run in either placement.
+You need only one `linux/arm64` assistant image for both the N4A and C4A pools, and that image can run in either placement.
 
 {{% notice Note %}}
 This is an Arm-targeted build for Axion, not a full multi-architecture build. A multi-architecture image is useful when the same tag must support non-Arm environments such as `linux/amd64`.
@@ -46,10 +46,10 @@ List the tags for the assistant image:
 gcloud artifacts docker tags list "${ASSISTANT_IMAGE_REPO}"
 ```
 
-The output should include the `lab-v1` tag.
+The output includes the `lab-v1` tag.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You've built and published an Arm image for the shopping assistant. Kubernetes can now pull this image when you deploy the assistant on N4A.
+You've now built and published an Arm image for the shopping assistant. Kubernetes can now pull this image when you deploy the assistant on N4A.
 
 Next, you'll create the N4A overlay and add the assistant to the running storefront.

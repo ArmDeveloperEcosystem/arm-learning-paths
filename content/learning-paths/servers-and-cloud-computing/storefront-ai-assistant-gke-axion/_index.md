@@ -1,13 +1,9 @@
 ---
-title: Build a mixed-placement AI shopping assistant on GKE with Axion
-
-draft: true
-cascade:
-    draft: true
+title: Build a mixed-placement AI shopping assistant on Google Kubernetes Engine with Axion-based compute
 
 minutes_to_complete: 120
 description: Deploy and validate an Online Boutique storefront on GKE, add an AI shopping assistant, and compare N4A and C4A placement for the assistant tier.
-who_is_this_for: This is an advanced topic for cloud developers, platform engineers, and site reliability engineers who run applications on Google Kubernetes Engine and want to place application tiers on the Axion-based machine series that fits each workload.
+who_is_this_for: This is an advanced topic for cloud developers, platform engineers, and site reliability engineers who run applications on Google Kubernetes Engine (GKE) and want to place application tiers on the Axion-based machine series that fits each workload.
 
 learning_objectives:
     - Create and validate an Online Boutique storefront on an N4A node pool
@@ -18,7 +14,7 @@ learning_objectives:
 prerequisites:
     - A [Google Cloud account](https://console.cloud.google.com/) with billing enabled
     - Access to a [GKE Standard cluster with Arm node pools](https://cloud.google.com/kubernetes-engine/docs/how-to/create-arm-clusters-nodes), including N4A and C4A node pools
-    - Basic familiarity with Docker, Kubernetes, Kustomize, and Google Kubernetes Engine
+    - Basic familiarity with Docker, Kubernetes, Kustomize, and GKE
 
 author:
    - Rani Chowdary Mandepudi

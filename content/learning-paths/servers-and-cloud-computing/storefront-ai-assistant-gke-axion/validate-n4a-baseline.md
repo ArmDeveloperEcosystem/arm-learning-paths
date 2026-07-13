@@ -13,9 +13,9 @@ Before you add the assistant tier, create and confirm the starting state of the 
 - The storefront baseline runs on N4A after you apply the baseline overlay.
 - `shoppingassistantservice` is not running yet.
 
-The missing assistant is intentional. It is the service you build and deploy in the next steps.
+The missing assistant is intentional. It's the service you build and deploy in the next steps.
 
-If you are rerunning this Learning Path in a cluster that already has the assistant from an earlier run, remove the old assistant resources before you create the baseline:
+If you're running this Learning Path in a cluster that already has the assistant from an earlier run, remove the old assistant resources before you create the baseline:
 
 ```bash
 kubectl delete deployment shoppingassistantservice --ignore-not-found
@@ -64,7 +64,7 @@ sed -n '1,120p' kustomize/overlays/storefront-n4a/node-selector.yaml
 kubectl kustomize kustomize/overlays/storefront-n4a | sed -n '1,240p'
 ```
 
-Do not apply the overlay if the rendered node-pool value is blank.
+Don't apply the overlay if the rendered node-pool value is blank.
 
 Apply the baseline and wait for the storefront deployments:
 
@@ -91,7 +91,7 @@ kubectl get nodes \
   -L cloud.google.com/gke-nodepool,node.kubernetes.io/instance-type,kubernetes.io/arch
 ```
 
-The output should include the N4A node pool, the C4A node pool, and `arm64` nodes in both pools.
+The output includes the N4A node pool, the C4A node pool, and `arm64` nodes in both pools.
 
 ## List the running application pods
 
@@ -101,14 +101,14 @@ Check the running storefront pods:
 kubectl get pods -o wide
 ```
 
-Filter the output to the services you care about most:
+Filter the output to the most relevant services:
 
 ```bash
 kubectl get pods -o wide | \
   grep -E 'frontend|cartservice|checkoutservice|productcatalogservice|shoppingassistantservice'
 ```
 
-At this point, `frontend`, `cartservice`, `checkoutservice`, and `productcatalogservice` should be running. `shoppingassistantservice` should not appear yet.
+At this point, `frontend`, `cartservice`, `checkoutservice`, and `productcatalogservice` should be running. `shoppingassistantservice` shouldn't appear yet.
 
 ## Resolve the storefront endpoint
 
@@ -122,7 +122,7 @@ export APP_URL="http://${FRONTEND_IP}"
 echo "${APP_URL}"
 ```
 
-The output should be similar to:
+The output is similar to:
 
 ```output
 http://34.x.x.x
@@ -140,12 +140,12 @@ curl --max-time 30 -I "${APP_URL}"
 
 The output should include an HTTP response header. A `200 OK` or `302 Found` response confirms that the baseline storefront is reachable.
 
-Open the printed URL in your browser. The Online Boutique storefront should load.
+Open the printed URL in your browser to load the Online Boutique storefront.
 
 ![Online Boutique storefront page showing product cards and the Google Cloud label, confirming that the baseline storefront is reachable before the assistant is deployed#center](images/storefront-running-on-google-axion.webp "Online Boutique storefront running on Google Axion")
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You've confirmed that the storefront runs on N4A and that the assistant tier is still absent. This gives you a clean baseline before you add the AI service.
+You've now confirmed that the storefront runs on N4A and that the assistant tier is still absent. This gives you a clean baseline before you add the AI service.
 
 Next, you'll inspect the assistant implementation and confirm that its source files are ready to build.

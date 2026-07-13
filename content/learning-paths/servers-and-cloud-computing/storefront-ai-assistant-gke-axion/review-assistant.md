@@ -31,7 +31,7 @@ grep -nE 'class (CartServiceStub|ProductCatalogServiceStub)' \
   src/shoppingassistantservice/demo_pb2_grpc.py
 ```
 
-The generated protobuf files are dense because they are machine-generated. You only need to confirm that the cart and product catalog stubs exist.
+The generated protobuf files are dense because they're machine-generated. You only need to confirm that the cart and product catalog stubs exist.
 
 ## Review the assistant service
 
@@ -66,7 +66,7 @@ Compile the assistant source:
 python3 -m py_compile src/shoppingassistantservice/shoppingassistantservice.py
 ```
 
-The command should return no output. Do not continue if this command fails.
+The command returns no output. Don't continue if this command fails.
 
 ## Review the container and Kubernetes component
 
@@ -80,8 +80,8 @@ sed -n '1,220p' kustomize/components/shopping-assistant/shoppingassistantservice
 
 The Dockerfile packages the Python assistant service. The Kubernetes component creates `shoppingassistantservice`, adds the Ollama sidecar, and patches `frontend` so the assistant becomes part of the storefront experience. Because the assistant and Ollama run in the same pod, moving this deployment later moves the AI logic and local reasoning runtime together.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You've reviewed the source code, service contracts, container packaging, and Kubernetes component for the assistant tier.
+You've now reviewed the source code, service contracts, container packaging, and Kubernetes component for the assistant tier.
 
 Next, you'll build the assistant image for `linux/arm64` and push it to Artifact Registry.

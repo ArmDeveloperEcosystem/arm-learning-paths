@@ -7,14 +7,22 @@ layout: "learningpathall"
 
 ## Configure your environment 
 
-This Learning Path uses a prepared GKE Standard cluster with two Linux `arm64` node pools:
+You'll use a prepared GKE Standard cluster with two Linux `arm64` node pools:
 
 - An N4A node pool based on Google Axion and Arm Neoverse N3
 - A C4A node pool based on Google Axion and Arm Neoverse V2
 
-The cluster must expose the Kubernetes Metrics API so that `kubectl top` and the benchmark telemetry collector can read pod CPU usage. Your Google Cloud account also needs permission to get cluster credentials; deploy Kubernetes workloads and services; read nodes, pod logs, and pod metrics; and create or use an Artifact Registry Docker repository in the same project.
+The cluster must expose the Kubernetes Metrics API so that `kubectl top` and the benchmark telemetry collector can read pod CPU usage. 
 
-Use [Cloud Shell](https://cloud.google.com/shell/docs/using-cloud-shell) or a Linux or macOS administrative workstation to manage GKE. The application itself runs in Linux `arm64` containers on the cluster. Docker must be running on your administrative environment, and the Buildx plugin must be available.
+Your Google Cloud account also needs permission for the following: 
+- Getting cluster credentials
+- Deploying Kubernetes workloads and services
+- Reading nodes, pod logs, and pod metrics
+- Creating or using an Artifact Registry Docker repository in the same project
+
+Use [Cloud Shell](https://cloud.google.com/shell/docs/using-cloud-shell) or a Linux or macOS administrative workstation to manage GKE. The application runs in Linux `arm64` containers on the cluster. 
+
+You'll need Docker running on your administrative environment, and the Buildx plugin to be available.
 
 Buildx can create a `linux/arm64` image on an Arm development machine. It can also use an appropriately configured builder to cross-build the image on another architecture.
 
@@ -47,7 +55,7 @@ docker buildx inspect --bootstrap
 
 Confirm that the `Platforms` line includes `linux/arm64` before you continue. The later build command uses this capability to produce an image for the Arm-based N4A and C4A nodes. If `linux/arm64` is missing, configure Arm support for your Docker builder before continuing.
 
-You also use Kustomize throughout the Learning Path. Kustomize combines a shared set of Kubernetes manifests with reusable components and placement-specific patches. It is built into `kubectl`, so the `kubectl kustomize` and `kubectl apply -k` commands don't need a separate Kustomize executable.
+You'll also use Kustomize in the following sections. Kustomize combines a shared set of Kubernetes manifests with reusable components and placement-specific patches. The tool is built into `kubectl`, so the `kubectl kustomize` and `kubectl apply -k` commands don't need a separate Kustomize executable.
 
 ## Set environment variables
 
@@ -103,7 +111,7 @@ EOF
 
 ## Discover the cluster location
 
-Query Google Cloud for the actual cluster location. This avoids hard-coding a zone or region:
+Query Google Cloud for the cluster location to avoid hard-coding a zone or region:
 
 ```bash
 export CLUSTER_LOCATION="$(gcloud container clusters list \
@@ -114,9 +122,9 @@ export CLUSTER_LOCATION="$(gcloud container clusters list \
 echo "${CLUSTER_LOCATION}"
 ```
 
-The output should print the cluster location, such as `us-central1` or `us-central1-a`.
+The output prints the cluster location, such as `us-central1` or `us-central1-a`.
 
-Do not continue if the output is empty. Confirm `CLUSTER_NAME` and `PROJECT_ID`, and then run the command again.
+Don't continue if the output is empty. Confirm `CLUSTER_NAME` and `PROJECT_ID`, and then run the command again.
 
 ## Connect kubectl to the cluster
 
@@ -203,8 +211,8 @@ grep -n "image:" kustomize/base/frontend.yaml
 
 The cluster uses Arm-based Axion node pools, and the storefront manifest uses image references that can resolve to Arm-compatible image variants.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You've configured your Google Cloud project, connected `kubectl` to the prepared GKE cluster, confirmed Artifact Registry access, and cloned the source tree that contains the assistant implementation.
+You've now configured your Google Cloud project, connected `kubectl` to the prepared GKE cluster, confirmed Artifact Registry access, and cloned the source tree that contains the assistant implementation.
 
 Next, you'll validate the starting storefront baseline on N4A before you add the assistant.
