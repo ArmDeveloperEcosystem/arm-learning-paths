@@ -9,9 +9,9 @@ layout: learningpathall
 
 ## What you will run
 
-You'll run a local concierge agent: a terminal application that answers research-style questions, such as finding restaurants, comparing products, or summarizing a topic, by searching the web, reading multiple pages, and writing a fact-checked summary.
+You'll run a local concierge agent: a terminal application that answers research-style questions, such as finding restaurants, comparing products, or summarizing a topic. The agent answers these questions by searching the web, reading multiple pages, and writing a fact-checked summary.
 
-You'll run everything on your local Arm machine. The agent uses a large language model (LLM) served locally by [Ollama](https://ollama.com/), so your prompts and the pages you browse never leave the device. The same code runs on an Apple silicon MacBook, an Arm Linux laptop, or an NVIDIA DGX Spark.
+You'll run everything on your local Arm machine. The agent uses an LLM served locally by [Ollama](https://ollama.com/), so your prompts and the pages you browse never leave the device. The same code runs on an Apple silicon MacBook, an Arm Linux laptop, or an NVIDIA DGX Spark.
 
 The agent is interesting not just because it runs locally, but because of *how the work is divided*. A common assumption is that an AI agent is "just the model." In practice, the model is only one stage in a longer pipeline, and most of the surrounding work runs on the CPU.
 
@@ -30,7 +30,7 @@ Your question
     -> Write a fact-checked summary         (GPU: model reasoning)
 ```
 
-The model is called several times, but between every model call the CPU does a large amount of orchestration: generating query variants, dispatching parallel network requests, merging and deduplicating results, scoring pages for relevance, and extracting structured data.
+The model is called several times, but between every model call, the CPU does a large amount of orchestration. The CPU generates query variants, dispatches parallel network requests, merges and deduplicates results, scores pages for relevance, and extracts structured data.
 
 ## Why the CPU matters in an agentic workflow
 
@@ -59,6 +59,6 @@ By the end of this Learning Path, you'll be able to look at a single query and s
 
 ## What you've learned and what's next
 
-You've now learned about the agent you'll build and how the steps it executes are split between the CPU and the GPU.
+You've now learned about the agent you'll build and the role the CPU plays in orchestrating the agent's workflow.
 
 Next, you'll set up your environment: create a Python virtual environment, install the required packages, and get a Serper API key for web search.

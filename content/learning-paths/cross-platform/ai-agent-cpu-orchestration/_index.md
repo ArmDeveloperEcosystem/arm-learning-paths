@@ -5,12 +5,12 @@ description: Run a local AI concierge agent with Ollama on Arm and visualize how
 
 minutes_to_complete: 45
 
-who_is_this_for: This is an introductory topic for developers who want to build a local, privacy-friendly AI agent on Arm hardware and visualize how the CPU orchestrates an agentic workflow around a locally served LLM.
+who_is_this_for: This is an introductory topic for developers who want to build a local, privacy-friendly AI agent on Arm hardware and visualize how the CPU orchestrates an agentic workflow around a locally served Large Language Model (LLM).
 
 learning_objectives:
     - Set up a Python environment and obtain a Serper web search API key for the agent
     - Serve an LLM locally with Ollama and select a model that fits your hardware
-    - Explain how the CPU orchestrates an agentic workflow while the GPU handles model inference
+    - Understand how the CPU orchestrates an agentic workflow while the GPU handles model inference
     - Run the agent and interpret the CPU and GPU timeline it produces for each query
 
 prerequisites:

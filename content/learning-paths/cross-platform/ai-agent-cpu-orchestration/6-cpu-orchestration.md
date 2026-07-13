@@ -24,7 +24,7 @@ Most agentic systems share the same shape, regardless of the task. Between model
 
 These stages are mostly classical computing: concurrency, networking, parsing, and text processing. They run continuously throughout a query, while the GPU is used in focused bursts only when the model reasons. As agents call more tools and handle more data, this CPU-side work grows.
 
-## Why this is a good fit for Arm
+## Why orchestration is a good fit for Arm
 
 This kind of broad, concurrent orchestration and I/O is exactly the workload Arm CPUs handle efficiently. The same pattern scales across Arm platforms:
 
@@ -45,6 +45,6 @@ Each experiment shifts the balance between CPU and GPU work and makes the orches
 
 ## What you've accomplished
 
-You've now connected the agent's timeline to the CPU and GPU work behind each query. You've also seen how query fan-out, browsing concurrency, and model size change that balance.
+You've now connected the agent's timeline to the CPU and GPU work behind each query. You've also seen how the number of query variants, the size of the model, and browsing concurrency change that balance.
 
-You can use this pattern to adapt the local agent for your own tasks on Arm. 
+You can use what you've learned in this Learning Path to update your own agentic workflows so that CPU orchestration is more efficient. 

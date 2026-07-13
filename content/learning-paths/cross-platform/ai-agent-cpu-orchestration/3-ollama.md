@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Run AI models locally with Ollama
 
-The agent's reasoning steps, such as choosing search terms, selecting URLs, and writing the final summary, are handled by a Large Language Model (LLM). Instead of calling a cloud API, you'll serve the model locally with [Ollama](https://ollama.com/).
+The agent's reasoning steps, such as choosing search terms, selecting URLs, and writing the final summary, are handled by an LLM. Instead of calling a cloud API, you'll serve the model locally with [Ollama](https://ollama.com/).
 
 Ollama is a lightweight runtime that downloads open models, loads them into memory, and exposes a local HTTP API at `http://localhost:11434`. When the agent calls that endpoint, the model runs directly on your machine: the CPU and GPU on your MacBook, Arm Linux laptop, or NVIDIA DGX Spark.
 
@@ -100,6 +100,6 @@ Type `/bye` to exit the model session.
 
 ## What you've accomplished and what's next
 
-You've now set up Ollama and served a Google `gemma3:4b` model locally. 
+You've now set up Ollama, served a Google `gemma3:4b` model locally, and tested the model. 
 
 Next, you'll look at how the agent code uses the model.

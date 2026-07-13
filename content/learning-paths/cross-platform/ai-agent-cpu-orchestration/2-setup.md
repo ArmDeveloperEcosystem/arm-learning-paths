@@ -15,7 +15,9 @@ These steps are identical on an Apple silicon MacBook, an Arm Linux machine, and
 
 ### Get a Serper API key
 
-The agent searches the web through [Serper](https://serper.dev/), a Google Search API. The free tier is enough to complete this Learning Path.
+The agent searches the web through [Serper](https://serper.dev/), a Google Search API. The free tier is enough for you to complete the Learning Path.
+
+To get an API key:
 
 1. Go to [serper.dev](https://serper.dev/) and create a free account.
 2. Open your dashboard and copy your API key.
@@ -61,7 +63,7 @@ export SERPER_API_KEY="your-serper-api-key"
 ```
 
 {{% notice Tip %}}
-This variable lasts only for the current terminal session. To keep it across sessions, add the same line to your shell profile, for example `~/.zshrc` on macOS or `~/.bashrc` on Linux.
+This variable lasts only for the current terminal session. To keep the variable across sessions, add the same line to your shell profile, for example `~/.zshrc` on macOS or `~/.bashrc` on Linux.
 {{% /notice %}}
 
 ### Download the agent script

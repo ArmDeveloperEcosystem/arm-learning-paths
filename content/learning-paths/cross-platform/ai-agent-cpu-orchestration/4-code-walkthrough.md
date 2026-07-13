@@ -1,5 +1,5 @@
 ---
-title: Understand the agent code
+title: Understand the concierge agent code
 description: Review the concierge agent code to see where web search, page scraping, Ollama model calls, and CPU orchestration happen in the workflow.
 weight: 5
 
@@ -54,7 +54,7 @@ def call_gemma_ollama(prompt, output_format="json", timing=None,
     ...
 ```
 
-Two details are worth highlighting:
+Two details are worth noting:
 
 - `keep_alive: -1` tells Ollama to keep the model resident in memory between calls. The agent calls the model several times per query, so this avoids reloading the weights each time.
 - The function records timing as it streams. The time until the *first* token arrives is the model's input-token processing (prefill); the time spent streaming the rest is token generation. Separating these two values is what lets the agent show you the GPU breakdown later.
@@ -63,7 +63,7 @@ Because every model call goes through this one function, the agent only ever use
 
 ### The CPU orchestration pipeline
 
-Between the model calls, the CPU prepares the context. Each stage below runs entirely on the CPU:
+Between the model calls, the CPU prepares the context. Each of the following stages runs entirely on the CPU:
 
 | Stage | Function | What it does |
 |---|---|---|
@@ -77,7 +77,7 @@ Between the model calls, the CPU prepares the context. Each stage below runs ent
 
 ### The agentic chain
 
-`run_concierge_agent()` ties the pipeline together. Reading it top to bottom shows how CPU and GPU steps alternate:
+`run_concierge_agent()` ties the pipeline together. When you read the function from top to bottom, you can see how CPU and GPU steps alternate:
 
 1. GPU – `call_gemma_ollama()` turns your question into a search query.
 2. CPU – `generate_search_queries()` and `parallel_search()` expand and run the searches.

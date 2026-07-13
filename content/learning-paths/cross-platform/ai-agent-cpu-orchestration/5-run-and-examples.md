@@ -11,7 +11,7 @@ layout: learningpathall
 
 Make sure the following are in place before you start:
 
-- Ollama is running and serving `gemma3:4b` (from the previous section).
+- Ollama is running and serving `gemma3:4b`.
 - Your virtual environment is active and `SERPER_API_KEY` is set in the current terminal.
 
 From your project directory, start the agent:
@@ -40,7 +40,7 @@ Type a question that benefits from searching and reading several pages. For exam
 Find three highly rated ramen restaurants in San Francisco that are open late
 ```
 
-As the agent works, watch the log lines. Cyan `[CPU]` lines show orchestration and web I/O; yellow `[GPU]` lines show each model call:
+As the agent works, watch the log lines. Cyan <code style="color:#00aaaa"><strong>[CPU]</strong></code> lines show orchestration and web I/O; yellow <code style="color:#aaaa00"><strong>[GPU]</strong></code> lines show each model call:
 
 ```output
 [GPU] Thinking with local Gemma model...
