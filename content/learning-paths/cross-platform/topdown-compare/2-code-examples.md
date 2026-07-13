@@ -55,7 +55,7 @@ int main(int argc, char *argv[]) {
 }
 ```
 
-The example code performs one floating-point divide per iteration. The next divide depends on the previous result (result is reused). Divides are high-latency, low-throughput and generally take about 20–40 cycles on Intel x86 and Neoverse V2. Because each iteration depends on the last, the CPU can't overlap operations (no instruction-level parallelism). The backend's execution resources, specifically the FP divide unit, become the bottleneck. The frontend and speculation engines have no problem supplying work. 
+The example code performs one floating-point divide per iteration. The next divide depends on the previous result (result is reused). Divides are high-latency, low-throughput and generally take about 20–40 cycles on Intel x86 and Neoverse v3. Because each iteration depends on the last, the CPU can't overlap operations (no instruction-level parallelism). The backend's execution resources, specifically the FP divide unit, become the bottleneck. The frontend and speculation engines have no problem supplying work. 
 
 This example is not a realistic application, but creates a controlled environment where the CPU's backend execution become the bottleneck. While such tight loops of dependent divides rarely exist in production code, similar patterns occur in scientific, financial, and engineering applications that perform iterative numerical calculations. In those cases, limited instruction-level parallelism and high operation latency lead to the same core-bound behavior.
 
@@ -71,8 +71,12 @@ gcc -O3 -march=native -o core-bound-div-chain core-bound-div-chain.c
 
 You can also use Clang by substituting `clang` instead of `gcc` in the command above.
 
-{{% notice Note %}}
-If you use GCC 13 and newer for Arm compilation, using `-march=native` is recommended. For older versions you should use `-mcpu=neoverse-v2`.
+{{% notice Please Note %}}
+
+If you are targeting the 1st generation Arm AGI CPU, the `-mcpu=armagicpu` was added in [GCC 16.1.0](https://github.com/gcc-mirror/gcc/commit/0f5f728854d2ea93e6806a8632c04383502b0386). As of May 2026, it enables the same architectural features as `-march=neoverse-v3ae` from [GCC 15](https://gcc.gnu.org/gcc-15/changes.html). However in the future there may be differences. Likewise for `LLVM` and the `clang` front end, we expect Arm AGI CPU support to be introduced from `LLVM 23.0` onwards. 
+
+As such, we recommend installing the latest version of GCC/G++ or Clang if you are targeting the Arm AGI CPU. Use the `-mcpu=native` flag if compiling on the target machine or `-mcpu=armagicpu` if cross compiling. 
+
 {{% /notice %}}
 
 Run the application using `taskset` to pin it to one core to make the numbers more consistent:
@@ -88,11 +92,17 @@ Running 1000000000 dependent FP64 divisions...
 Done. Final result: 0.000055492
 ```
 
-You can now try top-down on Intel x86 and Arm Neoverse V2.
+You can now try top-down on Intel x86 and Arm Neoverse V3.
 
-## Collect Intel x86 top-down Level 1 metrics with Perf
+## Collect Arm64 or Intel x86 top-down Level 1 metrics with Perf
 
-Linux Perf collects level 1 top-down information using PMU counters like `UOPS_RETIRED.RETIRE_SLOTS`, `IDQ_UOPS_NOT_DELIVERED.CORE`, and `CPU_CLK_UNHALTED.THREAD` for the four categories: Retiring, Bad Speculation, Frontend Bound, and Backend Bound.
+{{% notice AArch64 support %}}
+
+Linux Perf added `--topdown` support for multiple platforms from the 6.1 kernel onwards, as long as the platform provides the required `TopdownL1` metric group ([see the Linux Arm kernel patch discussion](https://lists.infradead.org/pipermail/linux-arm-kernel/2023-February/812686.html?)). On Arm, this also requires a Neoverse architecture that supports top-down analysis, such as the 1st generation Arm AGI CPU.
+
+{{% /notice %}}
+
+Linux Perf collects level 1 top-down information using PMU counters, such as the x86 events `UOPS_RETIRED.RETIRE_SLOTS`, `IDQ_UOPS_NOT_DELIVERED.CORE`, and `CPU_CLK_UNHALTED.THREAD` for the four categories: Retiring, Bad Speculation, Frontend Bound, and Backend Bound.
 
 Use `perf stat` on the pinned core to collect Level 1 metrics: 
 
@@ -186,21 +196,22 @@ taskset -c 1 topdown-tool -m General ./core-bound-div-chain 1000000000
 The expected output is similar to:
 
 ```output
+Run 1
 Running 1000000000 dependent FP64 divisions...
 Done. Final result: 0.000055492
-CPU Neoverse V2 metrics
+CPU Neoverse V3 metrics
 └── Stage 2 (uarch metrics)
     └── General (General)
         └── ┏━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━┓
             ┃ Metric                 ┃ Value ┃ Unit      ┃
             ┡━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━┩
-            │ Instructions Per Cycle │ 0.485 │ per cycle │
+            │ Instructions Per Cycle │ 0.474 │ per cycle │
             └────────────────────────┴───────┴───────────┘
 ```
 
-The reported Instructions Per Cycle (IPC) of 0.485 means that, on average, the Neoverse V2 core retired about 0.5 instructions every clock cycle while running the workload.
+The reported Instructions Per Cycle (IPC) of 0.474 means that, on average, the Neoverse V3 core retired about 0.47 instructions every clock cycle while running the workload.
 
-Neoverse V2 can theoretically retire up to eight µops per cycle, so achieving only 0.485 IPC indicates that the core was mostly waiting rather than issuing useful work each cycle. This aligns with expectations for the dependent floating-point division chain, where every iteration must wait for the previous division to finish. The long divide latency prevents instruction-level parallelism, causing the pipeline to spend most of its time stalled in the backend.
+Neoverse V3 can theoretically retire up to ten µops per cycle, so achieving only 0.474 IPC indicates that the core was mostly waiting rather than issuing useful work each cycle. This aligns with expectations for the dependent floating-point division chain, where every iteration must wait for the previous division to finish. The long divide latency prevents instruction-level parallelism, causing the pipeline to spend most of its time stalled in the backend.
 
 Collect the Stage 1 top-down metrics using Arm's cycle accounting:
 
@@ -211,22 +222,23 @@ taskset -c 1 topdown-tool -m Cycle_Accounting ./core-bound-div-chain 1000000000
 The expected output is similar to:
 
 ```output
+Run 1
 Running 1000000000 dependent FP64 divisions...
 Done. Final result: 0.000055492
-CPU Neoverse V2 metrics
+CPU Neoverse V3 metrics
 └── Stage 2 (uarch metrics)
     └── Cycle Accounting (Cycle_Accounting)
         └── ┏━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━┓
             ┃ Metric                  ┃ Value ┃ Unit ┃
             ┡━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━┩
-            │ Backend Stalled Cycles  │ 89.22 │ %    │
-            │ Frontend Stalled Cycles │ 0.02  │ %    │
+            │ Backend Stalled Cycles  │ 91.85 │ %    │
+            │ Frontend Stalled Cycles │ 0.01  │ %    │
             └─────────────────────────┴───────┴──────┘
 ```
 
-The Cycle Accounting metrics show that during execution, 89.22% of all cycles were backend-stalled, while only 0.02% were frontend-stalled.
+The Cycle Accounting metrics show that during execution, 91.85% of all cycles were backend-stalled, while only 0.01% were frontend-stalled.
 
-This means the Neoverse V2 core spent nearly all of its time waiting for backend execution resources rather than for instructions to be fetched or decoded. 
+This means the Neoverse V3 core spent nearly all of its time waiting for backend execution resources rather than for instructions to be fetched or decoded. 
 
 The result confirms that the workload is backend/core-bound by arithmetic execution latency. The frontend and memory subsystems remained fully capable of feeding the pipeline.
 
@@ -239,23 +251,23 @@ taskset -c 1 topdown-tool -m Operation_Mix ./core-bound-div-chain 1000000000
 The expected output is similar to:
 
 ```output
+Run 1
 Running 1000000000 dependent FP64 divisions...
 Done. Final result: 0.000055492
-CPU Neoverse V2 metrics
+CPU Neoverse V3 metrics
 └── Stage 2 (uarch metrics)
     └── Speculative Operation Mix (Operation_Mix)
         ├── Follows
-        │   ├── Backend Bound (backend_bound)
         │   └── Retiring (retiring)
         └── ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━┓
             ┃ Metric                                           ┃ Value ┃ Unit ┃
             ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━┩
             │ Barrier Operations Percentage                    │ 0.00  │ %    │
-            │ Branch Operations Percentage                     │ 22.16 │ %    │
+            │ Branch Operations Percentage                     │ 22.21 │ %    │
             │ Crypto Operations Percentage                     │ 0.00  │ %    │
-            │ Integer Operations Percentage                    │ 33.52 │ %    │
-            │ Load Operations Percentage                       │ 22.19 │ %    │
-            │ Floating Point Operations Percentage             │ 11.03 │ %    │
+            │ Integer Operations Percentage                    │ 33.35 │ %    │
+            │ Load Operations Percentage                       │ 22.22 │ %    │
+            │ Floating Point Operations Percentage             │ 11.10 │ %    │
             │ Advanced SIMD Operations Percentage              │ 0.00  │ %    │
             │ Store Operations Percentage                      │ 11.11 │ %    │
             │ SVE Operations (Load/Store Inclusive) Percentage │ 0.00  │ %    │
@@ -263,7 +275,7 @@ CPU Neoverse V2 metrics
 ```
 
 
-The Operation Mix report shows the relative share of different instruction types that executed on the Neoverse V2 core.
+The Operation Mix report shows the relative share of different instruction types that executed on the Neoverse V3 core.
 Even though this benchmark performs only a single arithmetic operation in the loop, the compiler and runtime add supporting instructions for loop control, memory access, and branching.
 
 Key observations:
@@ -282,17 +294,16 @@ The small proportion of FP operations but their long latency explains why the ba
 
 ## Cross-architecture performance analysis summary
 
-Both Arm Neoverse V2 and Intel x86 cores expose rich hardware Performance Monitoring Unit (PMU) events that enable Top-Down analysis. Although the counter names, formulas, and tools differ, both methodologies can identify pipeline efficiency and identify where bottlenecks occur. 
+Both Arm Neoverse V3 and Intel x86 cores expose rich hardware Performance Monitoring Unit (PMU) events that enable Top-Down analysis. Although the counter names, formulas, and tools differ, both methodologies can identify pipeline efficiency and identify where bottlenecks occur. 
 
 Intel x86 processors implement a multi-level hierarchical model known as the Top-Down Microarchitecture Analysis Methodology (TMAM). This approach uses slot-based pipeline accounting and PMU events such as UOPS_RETIRED.RETIRE_SLOTS, IDQ_UOPS_NOT_DELIVERED.CORE, and CPU_CLK_UNHALTED.THREAD to divide execution time into four categories: Retiring, Bad Speculation, Frontend Bound, and Backend Bound.
 
 Linux Perf provides a standard interface for this analysis through commands like `perf stat --topdown` and metric groups such as `perf stat -M topdownl1`.
 
-Arm Neoverse V2 offers a two-stage methodology implemented through the Arm Telemetry Solution and its `topdown-tool`.
+Arm Neoverse V3 offers a two-stage methodology implemented through the Arm Telemetry Solution and its `topdown-tool`.
 Stage 1 measures the same four top-level categories using PMU events such as STALL_SLOT_BACKEND, STALL_SLOT_FRONTEND, OP_RETIRED, and OP_SPEC.
 
 Stage 2 expands the analysis into resource-effectiveness groups including Cycle Accounting, Cache Effectiveness, Branch Effectiveness, and Operation Mix. This modular structure enables flexible exploration of specific pipeline subsystems without requiring a strict hierarchy.
 
 When applied to the same floating-point division workload, both frameworks produced the same conclusion:
 the program was Backend/Core-Bound, limited by execution-unit latency rather than instruction fetch, speculation, or memory access.
-
