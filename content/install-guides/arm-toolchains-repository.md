@@ -1,5 +1,5 @@
 ---
-title: Arm Toolchains Repository
+title: Arm Linux Toolchains Repository
 
 draft: true
 
@@ -17,7 +17,7 @@ test_images:
   - ubuntu:latest
 
 official_docs: https://developer.arm.com/tools-and-software
-description: Configure the Arm Toolchains Repository package archive on supported Linux AArch64 distributions to enable installing Arm Toolchains products using the system package manager.
+description: Configure the Arm Linux Toolchains Repository package archive on supported Linux AArch64 distributions to enable installing Arm Toolchains products using the system package manager.
 author: Gary Carroll
 
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
@@ -27,25 +27,25 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-The Arm Toolchains Linux repositories provide a native and convenient way to install selected Arm software products on supported Linux hosts using the host operating system package manager.
+The Arm Linux Toolchains Repository provides a native and convenient way to install selected Arm software products on supported Linux hosts using the host operating system package manager.
 
-The repositories are published at [https://developer.arm.com/packages/arm-toolchains/](https://developer.arm.com/packages/arm-toolchains/).
+The repository files are published at [https://developer.arm.com/packages/arm-toolchains/](https://developer.arm.com/packages/arm-toolchains/).
 
-They are used to distribute Linux packages for Arm Toolchains products, including:
+They are used to distribute Linux packages for Arm Toolchains, including:
 
 - Arm Toolchain for Linux
 - Arm Performance Libraries for supported compilers on Linux
 
-Using the Arm Toolchains Linux repositories allows you to install, upgrade, and manage these products using standard Linux package-management tools such as `apt`, `dnf`, `yum`, and `zypper`.
+Using the Arm Toolchains Linux Repository allows you to install, upgrade, and manage these products using standard Linux package-management tools such as `apt`, `dnf`, `yum`, and `zypper`.
 
 Root or `sudo` permissions are required to install system packages.
 
 {{% notice Repository signing key update July 2026 %}}
-Arm has recently reviewed and strengthened the repository management and publication processes used for the Arm Toolchains Linux repositories.
+Arm has recently reviewed and strengthened the repository management and publication processes used for the Arm Linux Toolchains Repository.
 
-As part of the continuing evolution of this release channel, Arm has revoked and replaced the signing key used for the Arm Toolchains Linux repositories.
+As part of the continuing evolution of this release channel, Arm has revoked and replaced the signing key.
 
-If you previously configured the Arm Toolchains Linux repositories, install the `arm-toolchains-repository` package version `2-2` or later before installing or upgrading Arm Toolchain for Linux or Arm Performance Libraries.
+If you previously configured the Arm Linux Toolchains Repository, install the `arm-toolchains-repository` package version `2-2` or later before installing or upgrading Arm Toolchain for Linux or Arm Performance Libraries.
 
 Existing installed copies of Arm Toolchain for Linux and Arm Performance Libraries continue to work.
 {{% /notice %}}
@@ -70,11 +70,11 @@ The commands in this guide use the native package manager for your distribution:
 - `dnf` or `yum` for RHEL 8 or later and Amazon Linux 2023
 - `zypper` for SLES 15 or 16
 
-## What is the Arm Toolchains repository package?
+## What is the Arm Linux Toolchains Repository? 
 
 Arm provides an `arm-toolchains-repository` for each supported Linux distribution.
 
-This package configures the Arm Toolchains Linux package repository on your host system.
+This package configures the Arm Linux Toolchains Repository on your host system.
 
 The package installs:
 
@@ -84,7 +84,7 @@ The package installs:
 
 Install this repository package before you install Arm Toolchain for Linux or Arm Performance Libraries.
 
-## Why the signing key matters
+## About the signing key 
 
 Linux package managers use cryptographic signing keys to verify that repository metadata and packages are authentic and come directly from Arm.
 
@@ -125,7 +125,7 @@ A406 5BCE 9386 DD1E 62FD  E03B 8144 CA16 11A0 BD71
 
 ## Expected package manager errors
 
-If your system still trusts only the previous Arm Toolchains repository signing key, package manager operations might fail when you refresh metadata, install packages, or upgrade packages.
+If your system still trusts only the previous Arm Linux Toolchains Repository signing key, package manager operations might fail when you refresh metadata, install packages, or upgrade packages.
 
 Ubuntu hosts may experience errors running the `apt update` command, for example:
 
@@ -233,7 +233,7 @@ Use manual recovery only if you cannot install the repository package directly.
 
 ### Ubuntu manual recovery
 
-Remove previous Arm Toolchains repository key material if present:
+Remove previous Arm Linux Toolchains Repository key material if present:
 
 ```bash
 sudo rm -f /usr/share/keyrings/arm-toolchains-archive-keyring.gpg
@@ -262,18 +262,29 @@ The output should include:
 A406 5BCE 9386 DD1E 62FD  E03B 8144 CA16 11A0 BD71
 ```
 
-Ensure the Arm Toolchains repository entry references the installed keyring using `signed-by`.
+Find any existing Arm Toolchains repository entries:
 
-Example for Ubuntu 24.04:
-
-```output
-deb [signed-by=/usr/share/keyrings/arm-toolchains-archive-keyring.gpg] https://developer.arm.com/packages/arm-toolchains/ubuntu noble main
+```bash
+grep -Rns "developer.arm.com/packages/arm-toolchains/ubuntu" \
+  /etc/apt/sources.list /etc/apt/sources.list.d 
 ```
 
-Example for Ubuntu 22.04:
+If the command finds an existing entry, edit that entry so it references `/usr/share/keyrings/arm-toolchains-archive-keyring.gpg` using `signed-by`. Do not create a second entry for the same repository because `apt` may report conflicting `Signed-By` values.
 
-```output
-deb [signed-by=/usr/share/keyrings/arm-toolchains-archive-keyring.gpg] https://developer.arm.com/packages/arm-toolchains/ubuntu jammy main
+If the command does not find an entry, create `/etc/apt/sources.list.d/arm-toolchains.list` using the appropriate command below.
+
+For Ubuntu 24.04, run:
+
+```bash
+echo "deb [signed-by=/usr/share/keyrings/arm-toolchains-archive-keyring.gpg] https://developer.arm.com/packages/arm-toolchains/ubuntu noble main" | \
+  sudo tee /etc/apt/sources.list.d/arm-toolchains.list
+```
+
+For Ubuntu 22.04, run:
+
+```bash
+echo "deb [signed-by=/usr/share/keyrings/arm-toolchains-archive-keyring.gpg] https://developer.arm.com/packages/arm-toolchains/ubuntu jammy main" | \
+  sudo tee /etc/apt/sources.list.d/arm-toolchains.list
 ```
 
 Refresh package metadata:
@@ -287,7 +298,7 @@ sudo apt update
 Remove the previous Arm Toolchains public key if present:
 
 ```bash
-sudo rpm -e gpg-pubkey-7a05af82* 2>/dev/null || true
+sudo rpm -e gpg-pubkey-7a05af82* || true
 ```
 
 Install the current Arm Toolchains repository signing key:
@@ -321,7 +332,7 @@ sudo zypper refresh
 
 ## Previous repository locations
 
-The current Arm Toolchains Linux repositories at [https://developer.arm.com/packages/arm-toolchains/](https://developer.arm.com/packages/arm-toolchains/) replace the earlier repository structure that was based on repositories built using the SUSE Open Build Service.
+The current Arm Toolchains Linux Repository at [https://developer.arm.com/packages/arm-toolchains/](https://developer.arm.com/packages/arm-toolchains/) replaces the earlier repository structure that was based on repositories built using the SUSE Open Build Service.
 
 Earlier repositories were published under the top-level package URL [https://developer.arm.com/packages/](https://developer.arm.com/packages/) and used repository prefixes such as:
 
@@ -338,10 +349,10 @@ The deprecated repositories will be removed in a future update.
 
 ## Summary
 
-The Arm Toolchains Linux repositories provide a native package manager based installation channel for Arm Toolchain for Linux and Arm Performance Libraries on supported Linux hosts.
+The Arm Linux Toolchains Repository provide a native package manager based installation channel for Arm Toolchain for Linux and Arm Performance Libraries on supported Linux hosts.
 
 To use the repositories, install `arm-toolchains-repository` version `2-2` or later for your Linux distribution. This package configures the repository and installs the current repository signing key.
 
-Use only the current Arm Toolchains Linux repositories at [https://developer.arm.com/packages/arm-toolchains/](https://developer.arm.com/packages/arm-toolchains/).
+Use only the current Arm Linux Toolchains Repository at [https://developer.arm.com/packages/arm-toolchains/](https://developer.arm.com/packages/arm-toolchains/).
 
 Do not use the deprecated top-level `ACfL:` or `arm-toolchains:` repository paths for new installations.
