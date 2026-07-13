@@ -13,7 +13,7 @@ This Learning Path uses that split in a live Online Boutique storefront on Googl
 
 The goal isn't to prove that one Axion-based machine series replaces the other. You use N4A for the steady storefront tier and evaluate C4A for the AI reasoning tier so you can decide which machine series fits each workload.
 
-![Architecture diagram showing Cloud Shell and Kustomize deploying Online Boutique to GKE on Axion. Storefront microservices run on N4A, and the shopping assistant runs on C4A with access to cart, catalog, and a local Ollama Gemma model.#center](images/mixed-placement-agentic-storefront-on-axion.png "Mixed-placement agentic storefront on Axion")
+![Architecture diagram showing Cloud Shell and Kustomize deploying Online Boutique to GKE on Axion. Storefront microservices run on N4A, and the shopping assistant runs on C4A with access to cart, catalog, and a local Ollama Gemma model.#center](images/mixed-placement-agentic-storefront-on-axion.webp "Mixed-placement agentic storefront on Axion")
 
 The diagram shows the final mixed-placement pattern you build toward. The storefront images already run on Arm nodes, and the assistant image you build later is `linux/arm64` because both target node pools are Arm-based.
 
