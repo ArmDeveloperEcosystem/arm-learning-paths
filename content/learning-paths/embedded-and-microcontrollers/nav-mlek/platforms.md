@@ -1,5 +1,6 @@
 ---
 title: Development platforms
+description: Compare physical boards and virtual platforms for developing Cortex-M and Ethos-U machine learning applications.
 
 weight: 3
 

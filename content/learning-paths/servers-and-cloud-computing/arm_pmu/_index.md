@@ -14,7 +14,60 @@ learning_objectives:
 prerequisites:
     - An Arm computer running Linux. A bare metal or cloud metal instance is best because they expose more counters. You can use a virtual machine (VM), but fewer counters may be available. These instructions have been tested on the `a1.metal` instance type.
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-26T17:33:13Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 70ed68f472841d24321968188948c5c661a48445c0b07e54535d538233e048e3
+  summary_generated_at: '2026-06-26T17:33:13Z'
+  summary_source_hash: 70ed68f472841d24321968188948c5c661a48445c0b07e54535d538233e048e3
+  faq_generated_at: '2026-06-26T17:33:13Z'
+  faq_source_hash: 70ed68f472841d24321968188948c5c661a48445c0b07e54535d538233e048e3
+  summary: >-
+    You'll access Arm hardware event counters and the system counter from
+    user space on Linux using the PMU. First, you'll distinguish software and hardware events,
+    then use a minimal assembly approach with `MRS` and `MSR` to read the system counter and measure
+    time around a function. You'll then instrument event counters with PAPI, including environment
+    configuration and user-space counter access. You'll finish with two C examples that use
+    `perf_event_open` to read either a single counter or a group of counters without multiplexing.
+    By the end, you'll build and run working code that returns measurable counter values suitable
+    for basic performance instrumentation on Arm systems.
+  faqs:
+  - question: How do I know the system counter example produced a valid measurement?
+    answer: >-
+      The program should report a positive difference in system counter ticks between the two
+      reads that bracket the target function. A zero or negative value usually means the reads
+      are not placed correctly around the region being measured.
+  - question: Which Arm instructions are used to access system registers for counting?
+    answer: >-
+      Use `MRS` to read a system register and `MSR` to write a system register. These two instructions
+      are sufficient for the system counter example.
+  - question: PAPI cannot find its headers or libraries at build or runtime. What should I check?
+    answer: >-
+      Set `PAPI_DIR` to the location where PAPI is installed. Depending on your system, you might
+      also need `LD_LIBRARY_PATH` to include `$PAPI_DIR/lib`.
+  - question: What should I do before using PAPI or `perf_event_open` to access counters from user
+      space?
+    answer: >-
+      Run the `sudo` command in the steps that writes the recommended value to the file under `/proc/sys/kernel`.
+      This enables user-space access to the counters for the examples.
+  - question: When using `perf_event_open`, which example should I use to read multiple counters
+      at once?
+    answer: >-
+      Use the group example to read several counters together without multiplexing. The single-counter
+      example configures just one event, and `perf_event_open` in this Learning Path does not support multiplexing.
+# END generated_summary_faq
+
 author: Julio Suarez
+
+generate_summary_faq: false
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -44,7 +97,6 @@ further_reading:
         title: Perf
         link: https://en.wikipedia.org/wiki/Perf_%28Linux%29
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

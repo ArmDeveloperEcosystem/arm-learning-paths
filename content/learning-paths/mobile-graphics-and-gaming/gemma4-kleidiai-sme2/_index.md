@@ -22,6 +22,10 @@ prerequisites:
 
 author: Annie Tallund
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Advanced
 subjects: ML
@@ -35,8 +39,6 @@ tools_software_languages:
     - XNNPACK
 operatingsystems:
     - macOS
-
-
 
 further_reading:
     - resource:
@@ -67,8 +69,6 @@ further_reading:
         title: litert-community/gemma-4-E4B-it-litert-lm on Hugging Face
         link: https://huggingface.co/litert-community/gemma-4-E4B-it-litert-lm
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

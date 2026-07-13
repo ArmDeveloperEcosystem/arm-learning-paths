@@ -1,5 +1,6 @@
 ---
 title: Run and test the bot
+description: Run the Raspberry Pi ChatGPT bot and test the complete voice interaction workflow.
 weight: 5
 
 ### FIXED, DO NOT MODIFY

@@ -1,14 +1,15 @@
 ---
-title: Add Zephyr board support for the Corstone-320 MPS4 platform
+title: Add Zephyr board support for the Arm Corstone-320 MPS4 platform
+description: Add Corstone-320 MPS4 FPGA board metadata, device tree files, and Kconfig settings so Zephyr can build for the physical MPS4 board.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Corstone-320 MPS4 platform overview
+## Understand the Arm Corstone-320 MPS4 platform 
 
-The Arm Corstone SSE-320 FPGA Image for MPS4 (FI101) provides an FPGA implementation that runs on the MPS4 board. The image includes an Arm Cortex-M85 processor, an Arm Ethos-U85 NPU, and an Arm CoreLink DMA-350 direct memory access (DMA) controller. This setup provides a practical environment for developing and evaluating embedded applications, including machine learning workloads.
+The Arm Corstone SSE-320 FPGA Image for MPS4 (FI101) provides an FPGA implementation that runs on the MPS4 board. The image includes an Arm Cortex-M85 processor, an Arm Ethos-U85 NPU, and an Arm CoreLink DMA-350 direct memory access (DMA) controller. With this setup, you get a practical environment for developing and evaluating embedded applications, including machine learning workloads.
 
 Download the latest Corstone-320 FPGA image and review the platform documentation:
 
@@ -19,7 +20,7 @@ Download the latest Corstone-320 FPGA image and review the platform documentatio
 
 ## Understand Zephyr board support architecture
 
-Zephyr organizes hardware support in a hierarchy:
+Zephyr organizes hardware support in the following hierarchy:
 
 ```output
 Board → SoC → CPU Cluster → CPU Core → Architecture
@@ -35,9 +36,9 @@ For Corstone-320 MPS4, this hierarchy maps as follows:
 | CPU Core | — | Single Cortex-M85 core |
 | Architecture | — | ARMv8.1-M with Helium |
 
-## Add to the existing board directory
+## Add files to the existing board directory
 
-The `boards/arm/mps4/` directory already exists in the Zephyr tree with support for the Corstone-315 and Corstone-320 FVP variants. This section adds the Corstone-320 FPGA variant by modifying three existing files and creating three new ones.
+The `boards/arm/mps4/` directory already exists in the Zephyr tree with support for the Corstone-315 and Corstone-320 FVP variants. In this section, you'll add the Corstone-320 FPGA variant by modifying three existing files and creating three new ones.
 
 Navigate to the MPS4 board directory:
 
@@ -45,23 +46,21 @@ Navigate to the MPS4 board directory:
 cd ~/zephyrproject/zephyr/boards/arm/mps4
 ```
 
-The files you modify or create are:
+You'll modify or create the following files:
 
-```
+```text
 boards/arm/mps4/
-├── board.yml                              # Board metadata (modify)
-├── Kconfig                                # Board Kconfig entry (modify)
-├── Kconfig.defconfig                      # Default Kconfig settings (modify)
-├── mps4_corstone320_fpga_defconfig        # Board defconfig fragment (new)
-├── mps4_corstone320_fpga.dts              # Device tree source (new)
-└── mps4_common_soc_peripheral_fpga.dtsi  # SoC peripheral definitions (new)
+├── board.yml                            # Board metadata (modify)
+├── Kconfig.mps4                         # Board Kconfig entry (modify)
+├── Kconfig.defconfig                    # Default Kconfig settings (modify)
+├── mps4_corstone320_fpga_defconfig      # Board defconfig fragment (new)
+├── mps4_corstone320_fpga.dts            # Device tree source (new)
+└── mps4_common_soc_peripheral_fpga.dtsi # SoC peripheral definitions (new)
 ```
-
-## Add the board files
 
 ### board.yml
 
-`board.yml` describes the board name, vendor, SoC, and supported variants. Zephyr reads this file to recognize the board target you pass to `west build`.
+`board.yml` describes the board name, vendor, SoC, and supported variants. Zephyr reads this file to recognize the board target that you pass to `west build`.
 
 The existing `board.yml` already defines the FVP variants. Add the `fpga` variant under the `corstone320` SoC entry so the file looks like this:
 
@@ -190,66 +189,33 @@ Create `boards/arm/mps4/mps4_corstone320_fpga.dts` with the following content:
 ```
 ### mps4_common_soc_peripheral_fpga.dtsi
 
-This file defines the SoC peripherals for the MPS4 FPGA build and is included by `mps4_corstone320_fpga.dts`. It is not a standalone file — the `.dts` file pulls it in during compilation with `#include`.
+This file defines the SoC peripherals for the MPS4 FPGA build and is included by `mps4_corstone320_fpga.dts`. It's not a standalone file — the `.dts` file pulls it in during compilation with `#include`.
 
-Create `boards/arm/mps4/mps4_common_soc_peripheral_fpga.dtsi` with the following content. This configures the 25 MHz peripheral clock, GPIO controllers, and two UART instances using the MPS4 peripheral addresses from the [SSE-320 FPGA Image for MPS4 Application Note](https://developer.arm.com/documentation/109762/0100/?lang=en):
+The `boards/arm/mps4/mps4_common_soc_peripheral_fpga.dtsi` file is used to configure the 50 MHz peripheral clock and two UART instances using the MPS4 peripheral addresses from the [SSE-320 FPGA Image for MPS4 Application Note](https://developer.arm.com/documentation/109762/0100/?lang=en). Create the file with the following content:
 
 ```dts
 sysclk: system-clock {
 	compatible = "fixed-clock";
-	clock-frequency = <25000000>;
+	clock-frequency = <50000000>;
 	#clock-cells = <0>;
 };
 
-gpio0: gpio@100000 {
-	compatible = "arm,cmsdk-gpio";
-	reg = <0x100000 0x1000>;
-	interrupts = <69 3>;
-	gpio-controller;
-	#gpio-cells = <2>;
+uart0: uart@9303000 {
+        compatible = "arm,cmsdk-uart";
+        reg = <0x9303000 0x1000>;
+        interrupts = <34 3 49 3>;
+        interrupt-names = "tx", "rx";
+        clocks = <&sysclk>;
+        current-speed = <115200>;
 };
 
-gpio1: gpio@101000 {
-	compatible = "arm,cmsdk-gpio";
-	reg = <0x101000 0x1000>;
-	interrupts = <70 3>;
-	gpio-controller;
-	#gpio-cells = <2>;
-};
-
-uart0: uart@8203000 {
-	compatible = "arm,cmsdk-uart";
-	reg = <0x8203000 0x1000>;
-	interrupts = <34 3 33 3>;
-	interrupt-names = "tx", "rx";
-	clocks = <&sysclk>;
-	current-speed = <115200>;
-};
-
-uart1: uart@8204000 {
-	compatible = "arm,cmsdk-uart";
-	reg = <0x8204000 0x1000>;
-	interrupts = <36 3 35 3>;
-	interrupt-names = "tx", "rx";
-	clocks = <&sysclk>;
-	current-speed = <115200>;
-};
-
-gpio_led0: mps4_fpgaio@8202000 {
-	compatible = "arm,mmio32-gpio";
-	reg = <0x8202000 0x4>;
-	gpio-controller;
-	#gpio-cells = <1>;
-	ngpios = <8>;
-};
-
-gpio_button: mps4_fpgaio@8202008 {
-	compatible = "arm,mmio32-gpio";
-	reg = <0x8202008 0x4>;
-	gpio-controller;
-	#gpio-cells = <1>;
-	ngpios = <2>;
-	direction-input;
+uart1: uart@9304000 {
+        compatible = "arm,cmsdk-uart";
+        reg = <0x9304000 0x1000>;
+        interrupts = <36 3 35 3>;
+        interrupt-names = "tx", "rx";
+        clocks = <&sysclk>;
+        current-speed = <115200>;
 };
 
 pinctrl: pinctrl {
@@ -258,19 +224,6 @@ pinctrl: pinctrl {
 };
 ```
 
-### Kconfig
-
-`Kconfig` is the board-level Kconfig entry. It selects the SoC variant and configures board-level options based on the board target you pass to `west build`.
-
-The existing `boards/arm/mps4/Kconfig` already handles the FVP variants. Add the FPGA variant by appending the `select SOC_CORSTONE320` line so the file looks like this:
-
-```kconfig
-config BOARD_MPS4
-	select BUILD_WITH_TFM if BOARD_MPS4_CORSTONE315_FVP_NS || BOARD_MPS4_CORSTONE320_FVP_NS
-	select TRUSTED_EXECUTION_NONSECURE if BOARD_MPS4_CORSTONE315_FVP_NS || BOARD_MPS4_CORSTONE320_FVP_NS
-	select USE_DT_CODE_PARTITION if BOARD_MPS4_CORSTONE315_FVP_NS || BOARD_MPS4_CORSTONE320_FVP_NS
-	select SOC_CORSTONE320 if BOARD_MPS4_CORSTONE320_FPGA
-```
 
 ### Kconfig.defconfig
 
@@ -311,9 +264,21 @@ endif
 endif
 ```
 
+### Kconfig.mps4
+
+`Kconfig.mps4` is the base software configuration for selecting SoC and other board and SoC related settings. Add the FPGA support in the file:
+
+```kconfig
+config BOARD_MPS4
+        select SOC_SERIES_MPS4
+        select SOC_MPS4_CORSTONE315 if BOARD_MPS4_CORSTONE315_FVP || BOARD_MPS4_CORSTONE315_FVP_NS
+        select SOC_MPS4_CORSTONE320 if BOARD_MPS4_CORSTONE320_FVP || BOARD_MPS4_CORSTONE320_FVP_NS || BOARD_MPS4_CORSTONE320_FPGA
+```
+
+
 ### mps4_corstone320_fpga_defconfig
 
-`mps4_corstone320_fpga_defconfig` is a Kconfig fragment that Zephyr merges into the final `.config` when building for this board target. It enables TrustZone, MPU support, GPIO, and console over UART, and configures the build as a Secure image with ROM-region relocation.
+`mps4_corstone320_fpga_defconfig` is a Kconfig fragment that Zephyr merges into the final `.config` when building for this board target. The fragment enables TrustZone, MPU support, GPIO, and console over UART. It configures the build as a secure image with ROM-region relocation.
 
 Create `boards/arm/mps4/mps4_corstone320_fpga_defconfig` with the following content:
 
@@ -335,5 +300,8 @@ CONFIG_TRUSTED_EXECUTION_SECURE=y
 # ROMSTART_REGION address and size are defined in Kconfig.defconfig
 CONFIG_ROMSTART_RELOCATION_ROM=y
 ```
+## What you've accomplished and what's next
 
-After creating all these files, you're ready to build the `hello_world` sample for your new board target.
+You've now created and updated board support files, including device tree and Kconfig configuration, to port Zephyr RTOS to the Corstone-320 MPS4 platform.
+
+Next, you'll build the `hello_world` sample for your new board target.

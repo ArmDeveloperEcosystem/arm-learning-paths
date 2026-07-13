@@ -1,5 +1,6 @@
 ---
 title: Create a vcpkg-configuration.json file
+description: Create a vcpkg-configuration.json file that defines tool sources and versions for reproducible embedded development.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

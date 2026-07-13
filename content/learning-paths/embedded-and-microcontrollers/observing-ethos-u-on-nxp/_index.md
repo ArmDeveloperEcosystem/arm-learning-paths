@@ -18,9 +18,13 @@ prerequisites:
     - Basic knowledge of Machine Learning concepts
     - A host computer to compile ExecuTorch libraries
 
-author: 
-- Waheed Brown
-- Fidel Makatia Omusilibwa
+author:
+    - Waheed Brown
+    - Fidel Makatia Omusilibwa
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -55,9 +59,6 @@ further_reading:
         title: Arm Developers Guide for Cortex-M Processors and Ethos-U NPU
         link: https://developer.arm.com/documentation/109267/0101
         type: documentation
-
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

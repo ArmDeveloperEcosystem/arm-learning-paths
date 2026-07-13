@@ -1,5 +1,6 @@
 ---
 title: Set up the Device Connect and Strands developer environment
+description: Install the tools and dependencies needed to run Device Connect and Strands examples for edge device orchestration.
 weight: 3
 
 # FIXED, DO NOT MODIFY

@@ -1,12 +1,9 @@
 ---
 title:  Deploy Node.js on Google Cloud C4A Arm-based Axion VMs
 
-
-
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for software developers migrating Node.js workloads from x86_64 to Arm-based servers, specifically on Google Cloud C4A virtual machines built on Axion processors.
-
 
 learning_objectives:
   - Provision an Arm-based SUSE Linux Enterprise Server virtual machine on Google Cloud C4A instances with Axion processors
@@ -14,12 +11,15 @@ learning_objectives:
   - Validate Node.js functionality with baseline HTTP server tests
   - Benchmark Node.js performance using Autocannon on Arm64 (AArch64) architecture 
 
-
 prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
   - Familiarity with networking concepts and [Node.js event-driven architecture](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick)
 
 author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ##### Tags
 skilllevels: Introductory
@@ -61,3 +61,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

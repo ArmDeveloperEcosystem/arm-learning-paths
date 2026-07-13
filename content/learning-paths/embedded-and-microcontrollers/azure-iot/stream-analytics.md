@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Process IoT telemetry in real time with Azure Stream Analytics"
+description: Configure Azure Stream Analytics to process IoT Hub telemetry in real time and route results to downstream services.
 
 weight: 5
 

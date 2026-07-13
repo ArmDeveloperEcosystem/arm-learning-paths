@@ -18,9 +18,13 @@ prerequisites:
     - Visual Studio with C++ game development tools
     - A C++ Unreal project (such as the Third Person template)
 
-author: 
-- Annie Tallund
-- Richard Burton
+author:
+    - Annie Tallund
+    - Richard Burton
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -34,8 +38,6 @@ tools_software_languages:
     - NX
 operatingsystems:
     - Windows
-
-
 
 further_reading:
     - resource:
@@ -58,8 +60,6 @@ further_reading:
         title: Neural Graphics Model Gym - NSS Data Generation
         link: https://github.com/arm/neural-graphics-model-gym/blob/main/docs/nss/nss_data_generation.md
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

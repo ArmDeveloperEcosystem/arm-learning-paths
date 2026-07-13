@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: SSH
+description: Install and configure SSH on Arm Linux so you can securely connect to remote servers for cloud and server development.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:

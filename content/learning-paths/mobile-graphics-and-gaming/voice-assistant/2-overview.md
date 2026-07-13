@@ -79,9 +79,9 @@ Currently, this module provides a thin C++ layer as well as JNI bindings for dev
 |Framework|Dependency|Input modalities supported|Output modalities supported|Neural Network|
 |---|---|---|---|---|
 |llama.cpp|https://github.com/ggml-org/llama.cpp|`image`, `text`|`text`|phi-2, qwen-2-VL, llama-3.2-1B|
-|onnxruntime-genai|https://github.com/microsoft/onnxruntime-genai|`text`|`text`|phi-4-mini-instruct-onnx|
+|onnxruntime-genai|https://github.com/microsoft/onnxruntime-genai|`text`|`text`|phi-4-mini-instruct, llama-3.2-1B|
 |mnn|https://github.com/alibaba/MNN|`image`, `text`|`text`|qwen-2.5-VL, llama-3.2-1B|
-|mediapipe|https://github.com/google-ai-edge/mediapipe|`text`|`text`|gemma-2b-it-cpu-int4|
+|executorch|https://github.com/pytorch/executorch|`text`|`text`|llama-3.2-1B|
 
 
 

@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Arm Keil μVision
+description: Install Arm Keil MDK on Windows and configure licensing so you can develop and debug Cortex-M microcontroller applications with uVision.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:

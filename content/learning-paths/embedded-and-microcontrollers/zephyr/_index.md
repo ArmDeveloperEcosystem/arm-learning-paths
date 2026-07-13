@@ -8,7 +8,6 @@ minutes_to_complete: 30
 who_is_this_for: This is an introductory topic for software developers getting started
   with the Zephyr RTOS.
 
-
 learning_objectives:
 - Build and run Zephyr applications on the Corstone-300
 
@@ -17,6 +16,10 @@ prerequisites:
 - A Linux machine running Ubuntu, or an AWS account to use [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware)
 
 author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 test_images:
 - amd64/ubuntu:latest
@@ -49,11 +52,10 @@ further_reading:
         link: https://docs.zephyrproject.org/latest/boards/arm/index.html
         type: website
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
-
 ---
+

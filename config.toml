@@ -9,31 +9,15 @@ enableRobotsTXT = true
 
 [deployment]
 [[deployment.targets]]
-name = "internal-existing"
-URL = "s3://armswdev.tk?region=us-east-1"
-cloudFrontDistributionID = "E2VDQ2CYZATMO9"
-
-# Deprecated: kept temporarily while the dev deployment is validated.
-[[deployment.targets]]
-name = "internal"
-URL = "s3://arm-learning-paths-internal?region=us-west-2"
-cloudFrontDistributionID = "ENN4LK1IZUDIX"
-
-[[deployment.targets]]
 name = "dev"
 URL = "s3://arm-learning-paths-dev?region=us-east-1"
 cloudFrontDistributionID = "EAMKPMDBM18II"
-
-# Deprecated: kept temporarily while the prod deployment is validated.
-[[deployment.targets]]
-name = "production"
-URL = "s3://arm-learning-paths?region=us-west-2"
-cloudFrontDistributionID = "E2NEF61QWPFRIH"
 
 [[deployment.targets]]
 name = "prod"
 URL = "s3://arm-learning-paths-prod?region=us-east-1"
 cloudFrontDistributionID = "E2IA2AC83UE2VJ"
+exclude = "md/**"
 
 [markup]
   [markup.goldmark]

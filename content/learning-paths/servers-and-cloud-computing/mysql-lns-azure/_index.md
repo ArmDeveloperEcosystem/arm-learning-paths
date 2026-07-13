@@ -15,9 +15,11 @@ learning_objectives:
 prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
     - Basic familiarity with SSH and MySQL command-line tools
-
-
 author: Doug Anson
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -55,7 +57,6 @@ further_reading:
       title: sysbench benchmarking tools for MySQL
       link: https://github.com/akopytov/sysbench
       type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

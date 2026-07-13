@@ -1,5 +1,6 @@
 ---
 title: Rust for Embedded Applications
+description: Install Rust and Arm cross-compilation support on Ubuntu so you can build embedded applications for Arm targets.
 minutes_to_complete: 10
 official_docs: https://docs.rust-embedded.org/
 author: Ronan Synnott

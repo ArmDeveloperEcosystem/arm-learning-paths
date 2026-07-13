@@ -1,5 +1,6 @@
 ---
 title: Gemini CLI
+description: Install Gemini CLI on macOS or Arm Linux and configure authentication so you can use Google's command-line AI assistant for development tasks.
 
 author: Jason Andrews
 minutes_to_complete: 15

@@ -153,7 +153,7 @@ img.content-uploaded-image.centered {
     /* have to style the span like a paragraph, required for nesting caption in default markdown configruation */
     display: block; /* or block, depending on the desired layout */
     font-style: italic;
-    font-weight: 500;
+    font-weight: 400;
     margin-top: 0px;
     font-size: 1rem;
 }
@@ -196,7 +196,7 @@ div.answer label {
     --ads-horizontal-tabs-tab-color-active: var(--arm-orange);
     --ads-horizontal-tabs-underline-color: var(--arm-orange);
 
-    --ads-horizontal-tabs-tab-color-hover: var(--arm-green);
+    --ads-horizontal-tabs-tab-color-hover: var(--lp-hover-text);
     --ads-horizontal-tabs-tab-content-background-color: var(--arm-color-footing);
 }
 

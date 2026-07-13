@@ -1,13 +1,9 @@
 ---
 title: Run vLLM inference with quantized models and benchmark on Arm servers
 
-draft: true
-cascade:
-    draft: true
-    
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic for developers interested in running inference on quantized models. This Learning Path shows you how to run inference on Llama 3.1-8B and Whisper, with and without quantization, and benchmark Llama performance and accuracy with vLLM's bench CLI and the LM Evaluation Harness.
+who_is_this_for: This is an introductory topic for developers interested in running inference on quantized models. In this Learning Path, you'll learn how to run inference on Llama 3.1-8B and Whisper with and without quantization. You'll then benchmark Llama performance and accuracy with vLLM's bench CLI and the LM Evaluation Harness.
 
 learning_objectives: 
     - Install a recent release of vLLM
@@ -18,7 +14,16 @@ prerequisites:
     - An Arm-based Linux server (Ubuntu 22.04+ recommended) with a minimum of 32 vCPUs, 96 GB RAM, and 64 GB free disk space
     - Python 3.12 and basic familiarity with Hugging Face Transformers and quantization schemes
 
-author: Anna Mayne, Nikhil Gupta, Marek Michałowski
+description: Learn how to run Llama 3.1 8B and Whisper inference with BF16 and W8A8 quantized models on Arm servers, then compare throughput and accuracy with vLLM benchmark tools.
+
+author:
+  - Anna Mayne
+  - Nikhil Gupta
+  - Marek Michałowski
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -32,8 +37,6 @@ tools_software_languages:
     - Hugging Face
 operatingsystems:
     - Linux
-
-
 
 further_reading:
     - resource:
@@ -56,8 +59,6 @@ further_reading:
         title: LM Evaluation Harness (GitHub)
         link: https://github.com/EleutherAI/lm-evaluation-harness
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

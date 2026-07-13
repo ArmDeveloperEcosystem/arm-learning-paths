@@ -14,13 +14,15 @@ learning_objectives:
     - Describe how to run Llama 3 on a Raspberry Pi 5 using ExecuTorch.
     - Describe techniques for running large language models in an embedded environment.
 
-
-
 prerequisites:
     - An Arm Linux machine or an [Arm cloud instance](/learning-paths/servers-and-cloud-computing/csp/).
     - A Raspberry Pi 5.
 
 author: Annie Tallund
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -35,8 +37,6 @@ tools_software_languages:
     - Raspberry Pi
     - Hugging Face
     - ExecuTorch
-
-
 
 further_reading:
     - resource:
@@ -56,12 +56,10 @@ further_reading:
         link: https://dev-discuss.pytorch.org/t/run-llama3-8b-on-a-raspberry-pi-5-with-executorch/2048
         type: website
 
-
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

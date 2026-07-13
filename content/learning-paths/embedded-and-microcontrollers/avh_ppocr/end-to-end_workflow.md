@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Deploy the PaddleOCR model"
+description: Compile and deploy the PaddleOCR model to the Corstone-300 FVP and run the end-to-end optical character recognition workflow.
 
 weight: 3 # 1 is first, 2 is second, etc.
 

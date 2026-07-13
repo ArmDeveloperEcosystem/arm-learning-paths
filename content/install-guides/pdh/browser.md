@@ -1,5 +1,6 @@
 ---
 title: Access via Internet Browser
+description: Search and download Arm products from Arm Product Download Hub in a browser, including entitled packages, updates, and product-code lookups.
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/107572
 author: Ronan Synnott

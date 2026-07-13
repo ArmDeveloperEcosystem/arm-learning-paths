@@ -1,6 +1,7 @@
 ---
 # User change
 title: Create event-driven application (1)
+description: Configure exception routing and the first interrupt handling pieces for an event-driven bare-metal Armv8-A application.
 
 weight: 5 # 1 is first, 2 is second, etc.
 

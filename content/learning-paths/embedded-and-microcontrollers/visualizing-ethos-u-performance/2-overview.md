@@ -1,5 +1,6 @@
 ---
 title: Overview
+description: Review the TinyML performance visualization workflow for deploying ExecuTorch models on Corstone-320 virtual hardware.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

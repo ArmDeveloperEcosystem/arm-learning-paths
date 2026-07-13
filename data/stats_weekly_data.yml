@@ -1,51 +1,12 @@
-- a_date: '2023-05-15'
+- date: '2023-05-15'
   content:
+    total: 142
     cross-platform: 7
-    embedded-systems: 11
-    install-guides: 59
-    laptops-and-desktops: 7
-    microcontrollers: 18
-    servers-and-cloud-computing: 36
-    smartphones-and-mobile: 3
-    total: 141
-  contributions:
-    external: 1
-    internal: 140
-  github_engagement:
-    num_forks: 30
-    num_prs: 4
-  individual_authors:
-    brenda-strech: 1
-    christopher-seidl: 2
-    florent-lebeau: 5
-    gabriel-peterson: 1
-    jason-andrews: 66
-    julio-suarez: 2
-    kasper-mecklenburg: 1
-    liliya-wu: 1
-    michael-hall: 1
-    pareena-verma: 27
-    ronan-synnott: 34
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 4
-    percent_closed_vs_total: 0.0
-- a_date: '2023-05-15'
-  content:
-    cross-platform: 7
-    embedded-systems: 11
+    embedded-and-microcontrollers: 29
     install-guides: 59
     laptops-and-desktops: 8
-    microcontrollers: 18
     servers-and-cloud-computing: 36
-    smartphones-and-mobile: 3
-    total: 142
-  contributions:
-    external: 1
-    internal: 141
-  github_engagement:
-    num_forks: 30
-    num_prs: 2
+    mobile-graphics-and-gaming: 3
   individual_authors:
     brenda-strech: 1
     christopher-seidl: 2
@@ -58,26 +19,22 @@
     michael-hall: 1
     pareena-verma: 27
     ronan-synnott: 32
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 2
-    percent_closed_vs_total: 0.0
-- a_date: '2023-06-01'
-  content:
-    cross-platform: 7
-    embedded-systems: 11
-    install-guides: 60
-    laptops-and-desktops: 9
-    microcontrollers: 19
-    servers-and-cloud-computing: 36
-    smartphones-and-mobile: 3
-    total: 145
   contributions:
     external: 1
-    internal: 144
-  github_engagement:
-    num_forks: 30
-    num_prs: 3
+    internal: 141
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 2
+- date: '2023-06-01'
+  content:
+    total: 145
+    cross-platform: 7
+    embedded-and-microcontrollers: 30
+    install-guides: 60
+    laptops-and-desktops: 9
+    servers-and-cloud-computing: 36
+    mobile-graphics-and-gaming: 3
   individual_authors:
     brenda-strech: 1
     christopher-seidl: 2
@@ -90,26 +47,22 @@
     michael-hall: 1
     pareena-verma: 28
     ronan-synnott: 32
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 3
-    percent_closed_vs_total: 0.0
-- a_date: '2023-06-05'
-  content:
-    cross-platform: 7
-    embedded-systems: 11
-    install-guides: 60
-    laptops-and-desktops: 9
-    microcontrollers: 19
-    servers-and-cloud-computing: 36
-    smartphones-and-mobile: 3
-    total: 145
   contributions:
     external: 1
     internal: 144
-  github_engagement:
-    num_forks: 30
-    num_prs: 3
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 3
+- date: '2023-06-05'
+  content:
+    total: 145
+    cross-platform: 7
+    embedded-and-microcontrollers: 30
+    install-guides: 60
+    laptops-and-desktops: 9
+    servers-and-cloud-computing: 36
+    mobile-graphics-and-gaming: 3
   individual_authors:
     brenda-strech: 1
     christopher-seidl: 2
@@ -122,26 +75,22 @@
     michael-hall: 1
     pareena-verma: 28
     ronan-synnott: 32
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 3
-    percent_closed_vs_total: 0.0
-- a_date: '2023-06-12'
-  content:
-    cross-platform: 7
-    embedded-systems: 11
-    install-guides: 61
-    laptops-and-desktops: 9
-    microcontrollers: 19
-    servers-and-cloud-computing: 36
-    smartphones-and-mobile: 5
-    total: 148
   contributions:
     external: 1
-    internal: 147
-  github_engagement:
-    num_forks: 30
-    num_prs: 5
+    internal: 144
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 3
+- date: '2023-06-12'
+  content:
+    total: 148
+    cross-platform: 7
+    embedded-and-microcontrollers: 30
+    install-guides: 61
+    laptops-and-desktops: 9
+    servers-and-cloud-computing: 36
+    mobile-graphics-and-gaming: 5
   individual_authors:
     brenda-strech: 1
     christopher-seidl: 2
@@ -154,26 +103,22 @@
     michael-hall: 1
     pareena-verma: 29
     ronan-synnott: 32
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 5
-    percent_closed_vs_total: 0.0
-- a_date: '2023-06-19'
-  content:
-    cross-platform: 7
-    embedded-systems: 11
-    install-guides: 61
-    laptops-and-desktops: 9
-    microcontrollers: 19
-    servers-and-cloud-computing: 36
-    smartphones-and-mobile: 5
-    total: 148
   contributions:
     external: 1
     internal: 147
-  github_engagement:
-    num_forks: 30
-    num_prs: 2
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 5
+- date: '2023-06-19'
+  content:
+    total: 148
+    cross-platform: 7
+    embedded-and-microcontrollers: 30
+    install-guides: 61
+    laptops-and-desktops: 9
+    servers-and-cloud-computing: 36
+    mobile-graphics-and-gaming: 5
   individual_authors:
     brenda-strech: 1
     christopher-seidl: 2
@@ -186,26 +131,22 @@
     michael-hall: 1
     pareena-verma: 29
     ronan-synnott: 32
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 2
-    percent_closed_vs_total: 0.0
-- a_date: '2023-06-28'
+  contributions:
+    external: 1
+    internal: 147
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 2
+- date: '2023-06-28'
   content:
+    total: 150
     cross-platform: 7
-    embedded-systems: 11
+    embedded-and-microcontrollers: 30
     install-guides: 62
     laptops-and-desktops: 9
-    microcontrollers: 19
     servers-and-cloud-computing: 36
-    smartphones-and-mobile: 6
-    total: 150
-  contributions:
-    external: 1
-    internal: 149
-  github_engagement:
-    num_forks: 30
-    num_prs: 3
+    mobile-graphics-and-gaming: 6
   individual_authors:
     brenda-strech: 1
     christopher-seidl: 2
@@ -219,26 +160,22 @@
     michael-hall: 1
     pareena-verma: 29
     ronan-synnott: 34
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 3
-    percent_closed_vs_total: 0.0
-- a_date: '2023-07-03'
-  content:
-    cross-platform: 7
-    embedded-systems: 11
-    install-guides: 63
-    laptops-and-desktops: 9
-    microcontrollers: 19
-    servers-and-cloud-computing: 36
-    smartphones-and-mobile: 6
-    total: 151
   contributions:
     external: 1
     internal: 149
-  github_engagement:
-    num_forks: 30
-    num_prs: 4
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 3
+- date: '2023-07-03'
+  content:
+    total: 151
+    cross-platform: 7
+    embedded-and-microcontrollers: 30
+    install-guides: 63
+    laptops-and-desktops: 9
+    servers-and-cloud-computing: 36
+    mobile-graphics-and-gaming: 6
   individual_authors:
     brenda-strech: 1
     christopher-seidl: 2
@@ -253,26 +190,22 @@
     michael-hall: 1
     pareena-verma: 29
     ronan-synnott: 34
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 4
-    percent_closed_vs_total: 0.0
-- a_date: '2023-07-10'
-  content:
-    cross-platform: 7
-    embedded-systems: 14
-    install-guides: 63
-    laptops-and-desktops: 9
-    microcontrollers: 19
-    servers-and-cloud-computing: 36
-    smartphones-and-mobile: 6
-    total: 154
   contributions:
     external: 1
-    internal: 152
-  github_engagement:
-    num_forks: 30
-    num_prs: 3
+    internal: 149
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 4
+- date: '2023-07-10'
+  content:
+    total: 154
+    cross-platform: 7
+    embedded-and-microcontrollers: 33
+    install-guides: 63
+    laptops-and-desktops: 9
+    servers-and-cloud-computing: 36
+    mobile-graphics-and-gaming: 6
   individual_authors:
     brenda-strech: 1
     christopher-seidl: 2
@@ -287,26 +220,22 @@
     michael-hall: 3
     pareena-verma: 29
     ronan-synnott: 34
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 3
-    percent_closed_vs_total: 0.0
-- a_date: '2023-07-17'
-  content:
-    cross-platform: 7
-    embedded-systems: 14
-    install-guides: 63
-    laptops-and-desktops: 9
-    microcontrollers: 20
-    servers-and-cloud-computing: 37
-    smartphones-and-mobile: 6
-    total: 156
   contributions:
     external: 1
-    internal: 154
-  github_engagement:
-    num_forks: 30
-    num_prs: 3
+    internal: 152
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 3
+- date: '2023-07-17'
+  content:
+    total: 156
+    cross-platform: 7
+    embedded-and-microcontrollers: 34
+    install-guides: 63
+    laptops-and-desktops: 9
+    servers-and-cloud-computing: 37
+    mobile-graphics-and-gaming: 6
   individual_authors:
     brenda-strech: 1
     christopher-seidl: 3
@@ -321,26 +250,22 @@
     michael-hall: 3
     pareena-verma: 29
     ronan-synnott: 34
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 3
-    percent_closed_vs_total: 0.0
-- a_date: '2023-07-24'
-  content:
-    cross-platform: 7
-    embedded-systems: 14
-    install-guides: 63
-    laptops-and-desktops: 9
-    microcontrollers: 21
-    servers-and-cloud-computing: 38
-    smartphones-and-mobile: 6
-    total: 158
   contributions:
     external: 1
-    internal: 156
-  github_engagement:
-    num_forks: 30
-    num_prs: 3
+    internal: 154
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 3
+- date: '2023-07-24'
+  content:
+    total: 158
+    cross-platform: 7
+    embedded-and-microcontrollers: 35
+    install-guides: 63
+    laptops-and-desktops: 9
+    servers-and-cloud-computing: 38
+    mobile-graphics-and-gaming: 6
   individual_authors:
     brenda-strech: 1
     christopher-seidl: 4
@@ -355,26 +280,22 @@
     michael-hall: 3
     pareena-verma: 29
     ronan-synnott: 34
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 3
-    percent_closed_vs_total: 0.0
-- a_date: '2023-07-31'
-  content:
-    cross-platform: 7
-    embedded-systems: 14
-    install-guides: 64
-    laptops-and-desktops: 9
-    microcontrollers: 21
-    servers-and-cloud-computing: 38
-    smartphones-and-mobile: 6
-    total: 159
   contributions:
     external: 1
-    internal: 157
-  github_engagement:
-    num_forks: 30
-    num_prs: 2
+    internal: 156
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 3
+- date: '2023-07-31'
+  content:
+    total: 159
+    cross-platform: 7
+    embedded-and-microcontrollers: 35
+    install-guides: 64
+    laptops-and-desktops: 9
+    servers-and-cloud-computing: 38
+    mobile-graphics-and-gaming: 6
   individual_authors:
     brenda-strech: 1
     christopher-seidl: 4
@@ -389,26 +310,22 @@
     michael-hall: 3
     pareena-verma: 29
     ronan-synnott: 35
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 2
-    percent_closed_vs_total: 0.0
-- a_date: '2023-08-07'
-  content:
-    cross-platform: 7
-    embedded-systems: 14
-    install-guides: 64
-    laptops-and-desktops: 9
-    microcontrollers: 21
-    servers-and-cloud-computing: 38
-    smartphones-and-mobile: 7
-    total: 160
   contributions:
     external: 1
-    internal: 158
-  github_engagement:
-    num_forks: 30
-    num_prs: 4
+    internal: 157
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 2
+- date: '2023-08-07'
+  content:
+    total: 160
+    cross-platform: 7
+    embedded-and-microcontrollers: 35
+    install-guides: 64
+    laptops-and-desktops: 9
+    servers-and-cloud-computing: 38
+    mobile-graphics-and-gaming: 7
   individual_authors:
     brenda-strech: 1
     christopher-seidl: 4
@@ -424,26 +341,22 @@
     michael-hall: 3
     pareena-verma: 29
     ronan-synnott: 35
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 4
-    percent_closed_vs_total: 0.0
-- a_date: '2023-08-14'
-  content:
-    cross-platform: 7
-    embedded-systems: 14
-    install-guides: 67
-    laptops-and-desktops: 9
-    microcontrollers: 21
-    servers-and-cloud-computing: 39
-    smartphones-and-mobile: 7
-    total: 164
   contributions:
     external: 1
-    internal: 162
-  github_engagement:
-    num_forks: 30
-    num_prs: 4
+    internal: 158
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 4
+- date: '2023-08-14'
+  content:
+    total: 164
+    cross-platform: 7
+    embedded-and-microcontrollers: 35
+    install-guides: 67
+    laptops-and-desktops: 9
+    servers-and-cloud-computing: 39
+    mobile-graphics-and-gaming: 7
   individual_authors:
     brenda-strech: 1
     christopher-seidl: 4
@@ -459,26 +372,22 @@
     michael-hall: 3
     pareena-verma: 29
     ronan-synnott: 37
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 4
-    percent_closed_vs_total: 0.0
-- a_date: '2023-08-21'
-  content:
-    cross-platform: 7
-    embedded-systems: 14
-    install-guides: 67
-    laptops-and-desktops: 9
-    microcontrollers: 21
-    servers-and-cloud-computing: 39
-    smartphones-and-mobile: 7
-    total: 164
   contributions:
     external: 1
     internal: 162
-  github_engagement:
-    num_forks: 30
-    num_prs: 5
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 4
+- date: '2023-08-21'
+  content:
+    total: 164
+    cross-platform: 7
+    embedded-and-microcontrollers: 35
+    install-guides: 67
+    laptops-and-desktops: 9
+    servers-and-cloud-computing: 39
+    mobile-graphics-and-gaming: 7
   individual_authors:
     brenda-strech: 1
     christopher-seidl: 4
@@ -494,32 +403,62 @@
     michael-hall: 3
     pareena-verma: 28
     ronan-synnott: 38
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 5
-    percent_closed_vs_total: 0.0
-- a_date: '2023-08-28'
+  contributions:
+    external: 1
+    internal: 162
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 5
+- date: '2023-08-28'
   content:
+    total: 168
     cross-platform: 7
-    embedded-systems: 14
+    embedded-and-microcontrollers: 35
     install-guides: 69
     laptops-and-desktops: 9
-    microcontrollers: 21
     servers-and-cloud-computing: 41
-    smartphones-and-mobile: 7
-    total: 168
+    mobile-graphics-and-gaming: 7
+  individual_authors:
+    brenda-strech: 1
+    christopher-seidl: 4
+    daniel-gubay: 1
+    florent-lebeau: 5
+    frédéric--lefred--descamps: 1
+    gabriel-peterson: 3
+    jason-andrews: 73
+    julie-gaskin: 1
+    julio-suarez: 4
+    kasper-mecklenburg: 1
+    liliya-wu: 1
+    mathias-brossard: 1
+    michael-hall: 3
+    pareena-verma: 29
+    pranay-bakre: 1
+    ronan-synnott: 39
   contributions:
     external: 2
     internal: 165
-  github_engagement:
-    num_forks: 30
-    num_prs: 3
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 3
+- date: '2023-09-04'
+  content:
+    total: 170
+    cross-platform: 7
+    embedded-and-microcontrollers: 35
+    install-guides: 70
+    laptops-and-desktops: 9
+    servers-and-cloud-computing: 42
+    mobile-graphics-and-gaming: 7
   individual_authors:
     brenda-strech: 1
     christopher-seidl: 4
     daniel-gubay: 1
+    elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 1
+    frédéric--lefred--descamps: 1
     gabriel-peterson: 3
     jason-andrews: 73
     julie-gaskin: 1
@@ -531,33 +470,29 @@
     pareena-verma: 29
     pranay-bakre: 1
     ronan-synnott: 39
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 3
-    percent_closed_vs_total: 0.0
-- a_date: '2023-09-04'
-  content:
-    cross-platform: 7
-    embedded-systems: 14
-    install-guides: 70
-    laptops-and-desktops: 9
-    microcontrollers: 21
-    servers-and-cloud-computing: 42
-    smartphones-and-mobile: 7
-    total: 170
   contributions:
     external: 2
     internal: 167
-  github_engagement:
-    num_forks: 30
-    num_prs: 4
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 4
+- date: '2023-09-11'
+  content:
+    total: 171
+    cross-platform: 7
+    embedded-and-microcontrollers: 35
+    install-guides: 70
+    laptops-and-desktops: 9
+    servers-and-cloud-computing: 43
+    mobile-graphics-and-gaming: 7
   individual_authors:
     brenda-strech: 1
     christopher-seidl: 4
     daniel-gubay: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 1
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 3
     jason-andrews: 73
     julie-gaskin: 1
@@ -569,71 +504,29 @@
     pareena-verma: 29
     pranay-bakre: 1
     ronan-synnott: 39
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 4
-    percent_closed_vs_total: 0.0
-- a_date: '2023-09-11'
-  content:
-    cross-platform: 7
-    embedded-systems: 14
-    install-guides: 70
-    laptops-and-desktops: 9
-    microcontrollers: 21
-    servers-and-cloud-computing: 43
-    smartphones-and-mobile: 7
-    total: 171
   contributions:
     external: 3
     internal: 167
-  github_engagement:
-    num_forks: 30
-    num_prs: 6
-  individual_authors:
-    brenda-strech: 1
-    christopher-seidl: 4
-    daniel-gubay: 1
-    elham-harirpoush: 2
-    florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
-    gabriel-peterson: 3
-    jason-andrews: 73
-    julie-gaskin: 1
-    julio-suarez: 4
-    kasper-mecklenburg: 1
-    liliya-wu: 1
-    mathias-brossard: 1
-    michael-hall: 3
-    pareena-verma: 29
-    pranay-bakre: 1
-    ronan-synnott: 39
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 6
-    percent_closed_vs_total: 0.0
-- a_date: '2023-09-18'
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 6
+- date: '2023-09-18'
   content:
+    total: 172
     cross-platform: 7
-    embedded-systems: 14
+    embedded-and-microcontrollers: 35
     install-guides: 70
     laptops-and-desktops: 9
-    microcontrollers: 21
     servers-and-cloud-computing: 45
-    smartphones-and-mobile: 6
-    total: 172
-  contributions:
-    external: 3
-    internal: 168
-  github_engagement:
-    num_forks: 30
-    num_prs: 3
+    mobile-graphics-and-gaming: 6
   individual_authors:
     brenda-strech: 1
     christopher-seidl: 4
     daniel-gubay: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 3
     jason-andrews: 72
     julie-gaskin: 1
@@ -646,33 +539,29 @@
     pareena-verma: 29
     pranay-bakre: 1
     ronan-synnott: 39
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 3
-    percent_closed_vs_total: 0.0
-- a_date: '2023-09-25'
-  content:
-    cross-platform: 7
-    embedded-systems: 14
-    install-guides: 70
-    laptops-and-desktops: 9
-    microcontrollers: 21
-    servers-and-cloud-computing: 45
-    smartphones-and-mobile: 6
-    total: 172
   contributions:
     external: 3
     internal: 168
-  github_engagement:
-    num_forks: 30
-    num_prs: 6
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 3
+- date: '2023-09-25'
+  content:
+    total: 172
+    cross-platform: 7
+    embedded-and-microcontrollers: 35
+    install-guides: 70
+    laptops-and-desktops: 9
+    servers-and-cloud-computing: 45
+    mobile-graphics-and-gaming: 6
   individual_authors:
     brenda-strech: 1
     christopher-seidl: 4
     daniel-gubay: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 3
     jason-andrews: 72
     julie-gaskin: 1
@@ -685,26 +574,22 @@
     pareena-verma: 29
     pranay-bakre: 1
     ronan-synnott: 39
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 6
-    percent_closed_vs_total: 0.0
-- a_date: '2023-10-02'
+  contributions:
+    external: 3
+    internal: 168
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 6
+- date: '2023-10-02'
   content:
-    cross-platform: 7
-    embedded-systems: 14
-    install-guides: 70
-    laptops-and-desktops: 9
-    microcontrollers: 22
-    servers-and-cloud-computing: 45
-    smartphones-and-mobile: 8
     total: 175
-  contributions:
-    external: 3
-    internal: 170
-  github_engagement:
-    num_forks: 30
-    num_prs: 5
+    cross-platform: 7
+    embedded-and-microcontrollers: 36
+    install-guides: 70
+    laptops-and-desktops: 9
+    servers-and-cloud-computing: 45
+    mobile-graphics-and-gaming: 8
   individual_authors:
     ben-clark,-ported-to-learning-path-by-dominique-louis-of-visualsilicon: 1
     brenda-strech: 1
@@ -712,7 +597,7 @@
     daniel-gubay: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 3
     jason-andrews: 73
     julie-gaskin: 1
@@ -726,33 +611,29 @@
     pranay-bakre: 1
     ronan-synnott: 39
     uma-ramalingam: 1
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 5
-    percent_closed_vs_total: 0.0
-- a_date: '2023-10-09'
-  content:
-    cross-platform: 7
-    embedded-systems: 14
-    install-guides: 73
-    laptops-and-desktops: 9
-    microcontrollers: 22
-    servers-and-cloud-computing: 45
-    smartphones-and-mobile: 7
-    total: 177
   contributions:
     external: 3
-    internal: 173
-  github_engagement:
-    num_forks: 30
-    num_prs: 7
+    internal: 170
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 5
+- date: '2023-10-09'
+  content:
+    total: 177
+    cross-platform: 7
+    embedded-and-microcontrollers: 36
+    install-guides: 73
+    laptops-and-desktops: 9
+    servers-and-cloud-computing: 45
+    mobile-graphics-and-gaming: 7
   individual_authors:
     brenda-strech: 1
     christopher-seidl: 4
     daniel-gubay: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 3
     jason-andrews: 76
     julie-gaskin: 1
@@ -766,33 +647,29 @@
     pranay-bakre: 1
     ronan-synnott: 39
     uma-ramalingam: 1
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 8
-    percent_closed_vs_total: 0.0
-- a_date: '2023-10-16'
+  contributions:
+    external: 3
+    internal: 173
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 7
+- date: '2023-10-16'
   content:
-    cross-platform: 7
-    embedded-systems: 14
-    install-guides: 73
-    laptops-and-desktops: 9
-    microcontrollers: 22
-    servers-and-cloud-computing: 46
-    smartphones-and-mobile: 7
     total: 178
-  contributions:
-    external: 3
-    internal: 174
-  github_engagement:
-    num_forks: 30
-    num_prs: 8
+    cross-platform: 7
+    embedded-and-microcontrollers: 36
+    install-guides: 73
+    laptops-and-desktops: 9
+    servers-and-cloud-computing: 46
+    mobile-graphics-and-gaming: 7
   individual_authors:
     brenda-strech: 1
     christopher-seidl: 4
     daniel-gubay: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 3
     jason-andrews: 77
     julie-gaskin: 1
@@ -806,26 +683,22 @@
     pranay-bakre: 1
     ronan-synnott: 39
     uma-ramalingam: 1
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 8
-    percent_closed_vs_total: 0.0
-- a_date: '2023-10-23'
-  content:
-    cross-platform: 7
-    embedded-systems: 14
-    install-guides: 73
-    laptops-and-desktops: 9
-    microcontrollers: 22
-    servers-and-cloud-computing: 47
-    smartphones-and-mobile: 7
-    total: 179
   contributions:
     external: 3
     internal: 174
-  github_engagement:
-    num_forks: 30
-    num_prs: 6
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 8
+- date: '2023-10-23'
+  content:
+    total: 179
+    cross-platform: 7
+    embedded-and-microcontrollers: 36
+    install-guides: 73
+    laptops-and-desktops: 9
+    servers-and-cloud-computing: 47
+    mobile-graphics-and-gaming: 7
   individual_authors:
     brenda-strech: 1
     christopher-seidl: 4
@@ -833,7 +706,7 @@
     dawid-borycki: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 3
     jason-andrews: 77
     julie-gaskin: 1
@@ -847,26 +720,22 @@
     pranay-bakre: 1
     ronan-synnott: 39
     uma-ramalingam: 1
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 7
-    percent_closed_vs_total: 0.0
-- a_date: '2023-10-30'
-  content:
-    cross-platform: 7
-    embedded-systems: 14
-    install-guides: 73
-    laptops-and-desktops: 9
-    microcontrollers: 22
-    servers-and-cloud-computing: 47
-    smartphones-and-mobile: 7
-    total: 179
   contributions:
     external: 3
     internal: 174
-  github_engagement:
-    num_forks: 30
-    num_prs: 6
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 6
+- date: '2023-10-30'
+  content:
+    total: 179
+    cross-platform: 7
+    embedded-and-microcontrollers: 36
+    install-guides: 73
+    laptops-and-desktops: 9
+    servers-and-cloud-computing: 47
+    mobile-graphics-and-gaming: 7
   individual_authors:
     brenda-strech: 1
     christopher-seidl: 4
@@ -874,7 +743,7 @@
     dawid-borycki: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 3
     jason-andrews: 77
     julie-gaskin: 1
@@ -888,26 +757,22 @@
     pranay-bakre: 1
     ronan-synnott: 39
     uma-ramalingam: 1
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 7
-    percent_closed_vs_total: 0.0
-- a_date: '2023-11-06'
+  contributions:
+    external: 3
+    internal: 174
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 6
+- date: '2023-11-06'
   content:
+    total: 181
     cross-platform: 7
-    embedded-systems: 15
+    embedded-and-microcontrollers: 37
     install-guides: 73
     laptops-and-desktops: 10
-    microcontrollers: 22
     servers-and-cloud-computing: 47
-    smartphones-and-mobile: 7
-    total: 181
-  contributions:
-    external: 3
-    internal: 174
-  github_engagement:
-    num_forks: 30
-    num_prs: 8
+    mobile-graphics-and-gaming: 7
   individual_authors:
     brenda-strech: 1
     christopher-seidl: 4
@@ -916,7 +781,7 @@
     dawid-borycki: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 3
     jason-andrews: 77
     julie-gaskin: 1
@@ -931,26 +796,22 @@
     pranay-bakre: 1
     ronan-synnott: 39
     uma-ramalingam: 1
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 10
-    percent_closed_vs_total: 0.0
-- a_date: '2023-11-13'
-  content:
-    cross-platform: 9
-    embedded-systems: 14
-    install-guides: 73
-    laptops-and-desktops: 9
-    microcontrollers: 22
-    servers-and-cloud-computing: 48
-    smartphones-and-mobile: 7
-    total: 182
   contributions:
     external: 3
-    internal: 176
-  github_engagement:
-    num_forks: 30
-    num_prs: 9
+    internal: 174
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 8
+- date: '2023-11-13'
+  content:
+    total: 182
+    cross-platform: 9
+    embedded-and-microcontrollers: 36
+    install-guides: 73
+    laptops-and-desktops: 9
+    servers-and-cloud-computing: 48
+    mobile-graphics-and-gaming: 7
   individual_authors:
     brenda-strech: 1
     christopher-seidl: 4
@@ -959,7 +820,7 @@
     dawid-borycki: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 3
     jason-andrews: 77
     julie-gaskin: 1
@@ -974,26 +835,22 @@
     pranay-bakre: 2
     ronan-synnott: 39
     uma-ramalingam: 1
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 10
-    percent_closed_vs_total: 0.0
-- a_date: '2023-11-20'
+  contributions:
+    external: 3
+    internal: 176
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 9
+- date: '2023-11-20'
   content:
+    total: 186
     cross-platform: 11
-    embedded-systems: 14
+    embedded-and-microcontrollers: 36
     install-guides: 73
     laptops-and-desktops: 9
-    microcontrollers: 22
     servers-and-cloud-computing: 50
-    smartphones-and-mobile: 7
-    total: 186
-  contributions:
-    external: 5
-    internal: 179
-  github_engagement:
-    num_forks: 30
-    num_prs: 8
+    mobile-graphics-and-gaming: 7
   individual_authors:
     brenda-strech: 1
     christopher-seidl: 4
@@ -1003,7 +860,7 @@
     diego-russo: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 3
     jason-andrews: 77
     julie-gaskin: 1
@@ -1018,26 +875,22 @@
     pranay-bakre: 2
     ronan-synnott: 40
     uma-ramalingam: 1
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 9
-    percent_closed_vs_total: 0.0
-- a_date: '2023-11-27'
-  content:
-    cross-platform: 11
-    embedded-systems: 14
-    install-guides: 73
-    laptops-and-desktops: 10
-    microcontrollers: 22
-    servers-and-cloud-computing: 52
-    smartphones-and-mobile: 7
-    total: 189
   contributions:
     external: 5
-    internal: 181
-  github_engagement:
-    num_forks: 30
-    num_prs: 8
+    internal: 179
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 8
+- date: '2023-11-27'
+  content:
+    total: 189
+    cross-platform: 11
+    embedded-and-microcontrollers: 36
+    install-guides: 73
+    laptops-and-desktops: 10
+    servers-and-cloud-computing: 52
+    mobile-graphics-and-gaming: 7
   individual_authors:
     brenda-strech: 1
     christopher-seidl: 4
@@ -1047,7 +900,7 @@
     diego-russo: 2
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 3
     jason-andrews: 78
     julie-gaskin: 1
@@ -1063,26 +916,22 @@
     przemyslaw-wirkus: 1
     ronan-synnott: 40
     uma-ramalingam: 1
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 9
-    percent_closed_vs_total: 0.0
-- a_date: '2023-12-04'
-  content:
-    cross-platform: 11
-    embedded-systems: 14
-    install-guides: 73
-    laptops-and-desktops: 10
-    microcontrollers: 22
-    servers-and-cloud-computing: 52
-    smartphones-and-mobile: 7
-    total: 189
   contributions:
     external: 5
     internal: 181
-  github_engagement:
-    num_forks: 30
-    num_prs: 10
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 8
+- date: '2023-12-04'
+  content:
+    total: 189
+    cross-platform: 11
+    embedded-and-microcontrollers: 36
+    install-guides: 73
+    laptops-and-desktops: 10
+    servers-and-cloud-computing: 52
+    mobile-graphics-and-gaming: 7
   individual_authors:
     brenda-strech: 1
     christopher-seidl: 4
@@ -1093,7 +942,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 3
     jason-andrews: 77
     jonathan-davies: 1
@@ -1110,26 +959,22 @@
     przemyslaw-wirkus: 1
     ronan-synnott: 40
     uma-ramalingam: 1
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 12
-    percent_closed_vs_total: 0.0
-- a_date: '2023-12-11'
-  content:
-    cross-platform: 11
-    embedded-systems: 14
-    install-guides: 73
-    laptops-and-desktops: 11
-    microcontrollers: 24
-    servers-and-cloud-computing: 58
-    smartphones-and-mobile: 7
-    total: 198
   contributions:
     external: 5
-    internal: 184
-  github_engagement:
-    num_forks: 30
-    num_prs: 10
+    internal: 181
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 10
+- date: '2023-12-11'
+  content:
+    total: 198
+    cross-platform: 11
+    embedded-and-microcontrollers: 38
+    install-guides: 73
+    laptops-and-desktops: 11
+    servers-and-cloud-computing: 58
+    mobile-graphics-and-gaming: 7
   individual_authors:
     bolt-liu: 1
     brenda-strech: 1
@@ -1141,7 +986,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 3
     jason-andrews: 77
     jonathan-davies: 2
@@ -1159,26 +1004,67 @@
     ronan-synnott: 40
     uma-ramalingam: 1
     ying-yu: 1
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 12
-    percent_closed_vs_total: 0.0
-- a_date: '2023-12-18'
+  contributions:
+    external: 5
+    internal: 184
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 10
+- date: '2023-12-18'
   content:
+    total: 200
     cross-platform: 11
-    embedded-systems: 15
+    embedded-and-microcontrollers: 39
     install-guides: 74
     laptops-and-desktops: 11
-    microcontrollers: 24
     servers-and-cloud-computing: 58
-    smartphones-and-mobile: 7
-    total: 200
+    mobile-graphics-and-gaming: 7
+  individual_authors:
+    bolt-liu: 1
+    brenda-strech: 1
+    christopher-seidl: 6
+    daniel-gubay: 1
+    david-spickett: 1
+    dawid-borycki: 5
+    diego-russo: 1
+    diego-russo-and-leandro-nunes: 1
+    elham-harirpoush: 2
+    florent-lebeau: 5
+    frédéric--lefred--descamps: 2
+    gabriel-peterson: 4
+    jason-andrews: 78
+    jonathan-davies: 2
+    julie-gaskin: 1
+    julio-suarez: 5
+    kasper-mecklenburg: 1
+    konstantinos-margaritis: 2
+    kristof-beyls: 1
+    liliya-wu: 1
+    mathias-brossard: 1
+    michael-hall: 3
+    pareena-verma: 30
+    pranay-bakre: 2
+    przemyslaw-wirkus: 1
+    ronan-synnott: 40
+    uma-ramalingam: 1
+    ying-yu: 1
   contributions:
     external: 10
     internal: 186
-  github_engagement:
-    num_forks: 30
-    num_prs: 14
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 14
+- date: '2023-12-25'
+  content:
+    total: 200
+    cross-platform: 11
+    embedded-and-microcontrollers: 39
+    install-guides: 74
+    laptops-and-desktops: 11
+    servers-and-cloud-computing: 58
+    mobile-graphics-and-gaming: 7
   individual_authors:
     bolt-liu: 1
     brenda-strech: 1
@@ -1190,7 +1076,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 4
     jason-andrews: 78
     jonathan-davies: 2
@@ -1208,26 +1094,22 @@
     ronan-synnott: 40
     uma-ramalingam: 1
     ying-yu: 1
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 16
-    percent_closed_vs_total: 0.0
-- a_date: '2023-12-25'
-  content:
-    cross-platform: 11
-    embedded-systems: 15
-    install-guides: 74
-    laptops-and-desktops: 11
-    microcontrollers: 24
-    servers-and-cloud-computing: 58
-    smartphones-and-mobile: 7
-    total: 200
   contributions:
     external: 10
     internal: 188
-  github_engagement:
-    num_forks: 30
-    num_prs: 10
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 10
+- date: '2024-01-01'
+  content:
+    total: 200
+    cross-platform: 11
+    embedded-and-microcontrollers: 39
+    install-guides: 74
+    laptops-and-desktops: 11
+    servers-and-cloud-computing: 58
+    mobile-graphics-and-gaming: 7
   individual_authors:
     bolt-liu: 1
     brenda-strech: 1
@@ -1239,7 +1121,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 4
     jason-andrews: 78
     jonathan-davies: 2
@@ -1257,75 +1139,68 @@
     ronan-synnott: 40
     uma-ramalingam: 1
     ying-yu: 1
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 12
-    percent_closed_vs_total: 0.0
-- a_date: '2024-01-01'
-  content:
-    cross-platform: 11
-    embedded-systems: 15
-    install-guides: 74
-    laptops-and-desktops: 11
-    microcontrollers: 24
-    servers-and-cloud-computing: 58
-    smartphones-and-mobile: 7
-    total: 200
   contributions:
     external: 10
     internal: 188
-  github_engagement:
-    num_forks: 30
-    num_prs: 13
-  individual_authors:
-    bolt-liu: 1
-    brenda-strech: 1
-    christopher-seidl: 6
-    daniel-gubay: 1
-    david-spickett: 1
-    dawid-borycki: 5
-    diego-russo: 1
-    diego-russo-and-leandro-nunes: 1
-    elham-harirpoush: 2
-    florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
-    gabriel-peterson: 4
-    jason-andrews: 78
-    jonathan-davies: 2
-    julie-gaskin: 1
-    julio-suarez: 5
-    kasper-mecklenburg: 1
-    konstantinos-margaritis: 2
-    kristof-beyls: 1
-    liliya-wu: 1
-    mathias-brossard: 1
-    michael-hall: 3
-    pareena-verma: 30
-    pranay-bakre: 2
-    przemyslaw-wirkus: 1
-    ronan-synnott: 40
-    uma-ramalingam: 1
-    ying-yu: 1
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 15
-    percent_closed_vs_total: 0.0
-- a_date: '2024-01-08'
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 13
+- date: '2024-01-08'
   content:
+    total: 206
     cross-platform: 11
-    embedded-systems: 15
+    embedded-and-microcontrollers: 39
     install-guides: 74
     laptops-and-desktops: 15
-    microcontrollers: 24
     servers-and-cloud-computing: 59
-    smartphones-and-mobile: 8
-    total: 206
+    mobile-graphics-and-gaming: 8
+  individual_authors:
+    bolt-liu: 2
+    brenda-strech: 1
+    christopher-seidl: 6
+    daniel-gubay: 1
+    david-spickett: 1
+    dawid-borycki: 9
+    diego-russo: 1
+    diego-russo-and-leandro-nunes: 1
+    elham-harirpoush: 2
+    florent-lebeau: 5
+    frédéric--lefred--descamps: 2
+    gabriel-peterson: 4
+    jason-andrews: 78
+    jonathan-davies: 2
+    julie-gaskin: 1
+    julio-suarez: 5
+    kasper-mecklenburg: 1
+    konstantinos-margaritis: 2
+    kristof-beyls: 1
+    liliya-wu: 1
+    mathias-brossard: 1
+    michael-hall: 3
+    pareena-verma: 30
+    pranay-bakre: 2
+    przemyslaw-wirkus: 1
+    roberto-lopez-mendez: 1
+    ronan-synnott: 40
+    uma-ramalingam: 1
+    ying-yu: 1
   contributions:
     external: 14
     internal: 189
-  github_engagement:
-    num_forks: 30
-    num_prs: 11
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 11
+- date: '2024-01-15'
+  content:
+    total: 207
+    cross-platform: 12
+    embedded-and-microcontrollers: 39
+    install-guides: 74
+    laptops-and-desktops: 15
+    servers-and-cloud-computing: 59
+    mobile-graphics-and-gaming: 8
   individual_authors:
     bolt-liu: 2
     brenda-strech: 1
@@ -1337,14 +1212,14 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 4
     jason-andrews: 78
     jonathan-davies: 2
     julie-gaskin: 1
     julio-suarez: 5
     kasper-mecklenburg: 1
-    konstantinos-margaritis: 2
+    konstantinos-margaritis: 3
     kristof-beyls: 1
     liliya-wu: 1
     mathias-brossard: 1
@@ -1356,76 +1231,22 @@
     ronan-synnott: 40
     uma-ramalingam: 1
     ying-yu: 1
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 15
-    percent_closed_vs_total: 0.0
-- a_date: '2024-01-15'
-  content:
-    cross-platform: 12
-    embedded-systems: 15
-    install-guides: 74
-    laptops-and-desktops: 15
-    microcontrollers: 24
-    servers-and-cloud-computing: 59
-    smartphones-and-mobile: 8
-    total: 207
   contributions:
     external: 15
     internal: 189
-  github_engagement:
-    num_forks: 30
-    num_prs: 12
-  individual_authors:
-    bolt-liu: 2
-    brenda-strech: 1
-    christopher-seidl: 6
-    daniel-gubay: 1
-    david-spickett: 1
-    dawid-borycki: 9
-    diego-russo: 1
-    diego-russo-and-leandro-nunes: 1
-    elham-harirpoush: 2
-    florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
-    gabriel-peterson: 4
-    jason-andrews: 78
-    jonathan-davies: 2
-    julie-gaskin: 1
-    julio-suarez: 5
-    kasper-mecklenburg: 1
-    konstantinos-margaritis: 3
-    kristof-beyls: 1
-    liliya-wu: 1
-    mathias-brossard: 1
-    michael-hall: 3
-    pareena-verma: 30
-    pranay-bakre: 2
-    przemyslaw-wirkus: 1
-    roberto-lopez-mendez: 1
-    ronan-synnott: 40
-    uma-ramalingam: 1
-    ying-yu: 1
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 17
-    percent_closed_vs_total: 0.0
-- a_date: '2024-01-22'
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 12
+- date: '2024-01-22'
   content:
+    total: 208
     cross-platform: 12
-    embedded-systems: 15
+    embedded-and-microcontrollers: 39
     install-guides: 74
     laptops-and-desktops: 15
-    microcontrollers: 24
     servers-and-cloud-computing: 60
-    smartphones-and-mobile: 8
-    total: 208
-  contributions:
-    external: 15
-    internal: 190
-  github_engagement:
-    num_forks: 30
-    num_prs: 9
+    mobile-graphics-and-gaming: 8
   individual_authors:
     bolt-liu: 2
     brenda-strech: 1
@@ -1437,7 +1258,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 4
     jason-andrews: 78
     jonathan-davies: 2
@@ -1457,26 +1278,22 @@
     uma-ramalingam: 1
     ying-yu: 1
     ying-yu,-arm: 1
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 11
-    percent_closed_vs_total: 0.0
-- a_date: '2024-01-29'
-  content:
-    cross-platform: 12
-    embedded-systems: 15
-    install-guides: 74
-    laptops-and-desktops: 15
-    microcontrollers: 24
-    servers-and-cloud-computing: 60
-    smartphones-and-mobile: 8
-    total: 208
   contributions:
     external: 15
     internal: 190
-  github_engagement:
-    num_forks: 30
-    num_prs: 12
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 9
+- date: '2024-01-29'
+  content:
+    total: 208
+    cross-platform: 12
+    embedded-and-microcontrollers: 39
+    install-guides: 74
+    laptops-and-desktops: 15
+    servers-and-cloud-computing: 60
+    mobile-graphics-and-gaming: 8
   individual_authors:
     bolt-liu: 2
     brenda-strech: 1
@@ -1488,7 +1305,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 4
     jason-andrews: 78
     jonathan-davies: 2
@@ -1508,26 +1325,22 @@
     uma-ramalingam: 1
     ying-yu: 1
     ying-yu,-arm: 1
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 13
-    percent_closed_vs_total: 0.0
-- a_date: '2024-02-05'
+  contributions:
+    external: 15
+    internal: 190
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 12
+- date: '2024-02-05'
   content:
+    total: 220
     cross-platform: 14
-    embedded-systems: 15
+    embedded-and-microcontrollers: 39
     install-guides: 75
     laptops-and-desktops: 20
-    microcontrollers: 24
     servers-and-cloud-computing: 63
-    smartphones-and-mobile: 9
-    total: 220
-  contributions:
-    external: 21
-    internal: 218
-  github_engagement:
-    num_forks: 30
-    num_prs: 5
+    mobile-graphics-and-gaming: 9
   individual_authors:
     arm: 1
     bolt-liu: 2
@@ -1540,7 +1353,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 4
     jason-andrews: 80
     jonathan-davies: 2
@@ -1562,26 +1375,22 @@
     ying-yu: 1
     ying-yu,-arm: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 6
-    percent_closed_vs_total: 0.0
-- a_date: '2024-02-12'
-  content:
-    cross-platform: 14
-    embedded-systems: 15
-    install-guides: 76
-    laptops-and-desktops: 20
-    microcontrollers: 25
-    servers-and-cloud-computing: 64
-    smartphones-and-mobile: 9
-    total: 223
   contributions:
     external: 21
-    internal: 221
-  github_engagement:
-    num_forks: 30
-    num_prs: 11
+    internal: 218
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 5
+- date: '2024-02-12'
+  content:
+    total: 223
+    cross-platform: 14
+    embedded-and-microcontrollers: 40
+    install-guides: 76
+    laptops-and-desktops: 20
+    servers-and-cloud-computing: 64
+    mobile-graphics-and-gaming: 9
   individual_authors:
     arm: 1
     bolt-liu: 2
@@ -1594,7 +1403,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 4
     jason-andrews: 80
     jonathan-davies: 2
@@ -1616,26 +1425,22 @@
     ying-yu: 1
     ying-yu,-arm: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 12
-    percent_closed_vs_total: 0.0
-- a_date: '2024-02-19'
-  content:
-    cross-platform: 13
-    embedded-systems: 15
-    install-guides: 76
-    laptops-and-desktops: 20
-    microcontrollers: 24
-    servers-and-cloud-computing: 64
-    smartphones-and-mobile: 9
-    total: 221
   contributions:
     external: 21
-    internal: 220
-  github_engagement:
-    num_forks: 30
-    num_prs: 7
+    internal: 221
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 11
+- date: '2024-02-19'
+  content:
+    total: 221
+    cross-platform: 13
+    embedded-and-microcontrollers: 39
+    install-guides: 76
+    laptops-and-desktops: 20
+    servers-and-cloud-computing: 64
+    mobile-graphics-and-gaming: 9
   individual_authors:
     arm: 1
     bolt-liu: 2
@@ -1648,7 +1453,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 4
     jason-andrews: 80
     jonathan-davies: 2
@@ -1669,26 +1474,22 @@
     ying-yu: 1
     ying-yu,-arm: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 8
-    percent_closed_vs_total: 0.0
-- a_date: '2024-02-26'
+  contributions:
+    external: 21
+    internal: 220
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 7
+- date: '2024-02-26'
   content:
+    total: 221
     cross-platform: 14
-    embedded-systems: 15
+    embedded-and-microcontrollers: 38
     install-guides: 76
     laptops-and-desktops: 20
-    microcontrollers: 23
     servers-and-cloud-computing: 64
-    smartphones-and-mobile: 9
-    total: 221
-  contributions:
-    external: 22
-    internal: 219
-  github_engagement:
-    num_forks: 30
-    num_prs: 7
+    mobile-graphics-and-gaming: 9
   individual_authors:
     arm: 1
     bolt-liu: 2
@@ -1701,7 +1502,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 4
     jason-andrews: 77
     jonathan-davies: 2
@@ -1722,26 +1523,22 @@
     ying-yu: 1
     ying-yu,-arm: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 8
-    percent_closed_vs_total: 0.0
-- a_date: '2024-03-04'
-  content:
-    cross-platform: 14
-    embedded-systems: 15
-    install-guides: 77
-    laptops-and-desktops: 20
-    microcontrollers: 23
-    servers-and-cloud-computing: 64
-    smartphones-and-mobile: 9
-    total: 222
   contributions:
     external: 22
-    internal: 220
-  github_engagement:
-    num_forks: 30
-    num_prs: 12
+    internal: 219
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 7
+- date: '2024-03-04'
+  content:
+    total: 222
+    cross-platform: 14
+    embedded-and-microcontrollers: 38
+    install-guides: 77
+    laptops-and-desktops: 20
+    servers-and-cloud-computing: 64
+    mobile-graphics-and-gaming: 9
   individual_authors:
     arm: 1
     bolt-liu: 2
@@ -1754,7 +1551,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 4
     jason-andrews: 78
     jonathan-davies: 2
@@ -1775,26 +1572,22 @@
     ying-yu: 1
     ying-yu,-arm: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 13
-    percent_closed_vs_total: 0.0
-- a_date: '2024-03-11'
-  content:
-    cross-platform: 15
-    embedded-systems: 15
-    install-guides: 77
-    laptops-and-desktops: 20
-    microcontrollers: 23
-    servers-and-cloud-computing: 65
-    smartphones-and-mobile: 10
-    total: 225
   contributions:
     external: 22
-    internal: 223
-  github_engagement:
-    num_forks: 30
-    num_prs: 11
+    internal: 220
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 12
+- date: '2024-03-11'
+  content:
+    total: 225
+    cross-platform: 15
+    embedded-and-microcontrollers: 38
+    install-guides: 77
+    laptops-and-desktops: 20
+    servers-and-cloud-computing: 65
+    mobile-graphics-and-gaming: 10
   individual_authors:
     arm: 1
     bolt-liu: 2
@@ -1807,7 +1600,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 4
     jason-andrews: 79
     jonathan-davies: 2
@@ -1829,26 +1622,22 @@
     ying-yu: 1
     ying-yu,-arm: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 13
-    percent_closed_vs_total: 0.0
-- a_date: '2024-03-18'
+  contributions:
+    external: 22
+    internal: 223
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 11
+- date: '2024-03-18'
   content:
+    total: 228
     cross-platform: 15
-    embedded-systems: 16
+    embedded-and-microcontrollers: 40
     install-guides: 77
     laptops-and-desktops: 20
-    microcontrollers: 24
     servers-and-cloud-computing: 64
-    smartphones-and-mobile: 12
-    total: 228
-  contributions:
-    external: 23
-    internal: 225
-  github_engagement:
-    num_forks: 30
-    num_prs: 8
+    mobile-graphics-and-gaming: 12
   individual_authors:
     arm: 1
     bolt-liu: 2
@@ -1861,7 +1650,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     jason-andrews: 78
     jonathan-davies: 2
@@ -1883,26 +1672,22 @@
     ying-yu: 1
     ying-yu,-arm: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 10
-    percent_closed_vs_total: 0.0
-- a_date: '2024-03-25'
+  contributions:
+    external: 23
+    internal: 225
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 8
+- date: '2024-03-25'
   content:
+    total: 230
     cross-platform: 15
-    embedded-systems: 16
+    embedded-and-microcontrollers: 40
     install-guides: 77
     laptops-and-desktops: 22
-    microcontrollers: 24
     servers-and-cloud-computing: 64
-    smartphones-and-mobile: 12
-    total: 230
-  contributions:
-    external: 24
-    internal: 227
-  github_engagement:
-    num_forks: 30
-    num_prs: 8
+    mobile-graphics-and-gaming: 12
   individual_authors:
     arm: 1
     bolt-liu: 2
@@ -1915,7 +1700,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     jason-andrews: 78
     jonathan-davies: 2
@@ -1937,26 +1722,22 @@
     ying-yu: 1
     ying-yu,-arm: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 11
-    percent_closed_vs_total: 0.0
-- a_date: '2024-04-01'
-  content:
-    cross-platform: 15
-    embedded-systems: 16
-    install-guides: 77
-    laptops-and-desktops: 22
-    microcontrollers: 24
-    servers-and-cloud-computing: 65
-    smartphones-and-mobile: 15
-    total: 234
   contributions:
     external: 24
-    internal: 279
-  github_engagement:
-    num_forks: 30
-    num_prs: 10
+    internal: 227
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 8
+- date: '2024-04-01'
+  content:
+    total: 234
+    cross-platform: 15
+    embedded-and-microcontrollers: 40
+    install-guides: 77
+    laptops-and-desktops: 22
+    servers-and-cloud-computing: 65
+    mobile-graphics-and-gaming: 15
   individual_authors:
     arm: 3
     bolt-liu: 2
@@ -1969,7 +1750,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     james-whitaker,-arm: 1
     jason-andrews: 78
@@ -1993,26 +1774,22 @@
     ying-yu: 1
     ying-yu,-arm: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 14
-    percent_closed_vs_total: 0.0
-- a_date: '2024-04-08'
-  content:
-    cross-platform: 15
-    embedded-systems: 16
-    install-guides: 78
-    laptops-and-desktops: 22
-    microcontrollers: 24
-    servers-and-cloud-computing: 65
-    smartphones-and-mobile: 15
-    total: 235
   contributions:
     external: 24
-    internal: 280
-  github_engagement:
-    num_forks: 30
-    num_prs: 10
+    internal: 279
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 10
+- date: '2024-04-08'
+  content:
+    total: 235
+    cross-platform: 15
+    embedded-and-microcontrollers: 40
+    install-guides: 78
+    laptops-and-desktops: 22
+    servers-and-cloud-computing: 65
+    mobile-graphics-and-gaming: 15
   individual_authors:
     arm: 3
     bolt-liu: 2
@@ -2025,7 +1802,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     james-whitaker,-arm: 1
     jason-andrews: 78
@@ -2049,26 +1826,22 @@
     ying-yu: 1
     ying-yu,-arm: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 14
-    percent_closed_vs_total: 0.0
-- a_date: '2024-04-15'
+  contributions:
+    external: 24
+    internal: 280
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 10
+- date: '2024-04-15'
   content:
+    total: 238
     cross-platform: 15
-    embedded-systems: 16
+    embedded-and-microcontrollers: 40
     install-guides: 78
     laptops-and-desktops: 24
-    microcontrollers: 24
     servers-and-cloud-computing: 66
-    smartphones-and-mobile: 15
-    total: 238
-  contributions:
-    external: 26
-    internal: 284
-  github_engagement:
-    num_forks: 30
-    num_prs: 6
+    mobile-graphics-and-gaming: 15
   individual_authors:
     arm: 3
     bolt-liu: 2
@@ -2081,7 +1854,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     james-whitaker,-arm: 1
     jason-andrews: 80
@@ -2105,26 +1878,22 @@
     ying-yu: 1
     ying-yu,-arm: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 9
-    percent_closed_vs_total: 0.0
-- a_date: '2024-04-22'
-  content:
-    cross-platform: 15
-    embedded-systems: 16
-    install-guides: 78
-    laptops-and-desktops: 24
-    microcontrollers: 24
-    servers-and-cloud-computing: 67
-    smartphones-and-mobile: 15
-    total: 239
   contributions:
     external: 26
     internal: 284
-  github_engagement:
-    num_forks: 30
-    num_prs: 9
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 6
+- date: '2024-04-22'
+  content:
+    total: 239
+    cross-platform: 15
+    embedded-and-microcontrollers: 40
+    install-guides: 78
+    laptops-and-desktops: 24
+    servers-and-cloud-computing: 67
+    mobile-graphics-and-gaming: 15
   individual_authors:
     arm: 3
     bolt-liu: 2
@@ -2137,7 +1906,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     james-whitaker,-arm: 1
     jason-andrews: 80
@@ -2162,26 +1931,22 @@
     ying-yu: 1
     ying-yu,-arm: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 12
-    percent_closed_vs_total: 0.0
-- a_date: '2024-04-29'
-  content:
-    cross-platform: 15
-    embedded-systems: 16
-    install-guides: 80
-    laptops-and-desktops: 24
-    microcontrollers: 24
-    servers-and-cloud-computing: 67
-    smartphones-and-mobile: 15
-    total: 241
   contributions:
     external: 26
-    internal: 286
-  github_engagement:
-    num_forks: 30
-    num_prs: 9
+    internal: 284
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 9
+- date: '2024-04-29'
+  content:
+    total: 241
+    cross-platform: 15
+    embedded-and-microcontrollers: 40
+    install-guides: 80
+    laptops-and-desktops: 24
+    servers-and-cloud-computing: 67
+    mobile-graphics-and-gaming: 15
   individual_authors:
     arm: 3
     bolt-liu: 2
@@ -2194,7 +1959,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     james-whitaker,-arm: 1
     jason-andrews: 80
@@ -2219,26 +1984,22 @@
     ying-yu: 1
     ying-yu,-arm: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 13
-    percent_closed_vs_total: 0.0
-- a_date: '2024-05-06'
+  contributions:
+    external: 26
+    internal: 286
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 9
+- date: '2024-05-06'
   content:
+    total: 244
     cross-platform: 15
-    embedded-systems: 16
+    embedded-and-microcontrollers: 40
     install-guides: 80
     laptops-and-desktops: 25
-    microcontrollers: 24
     servers-and-cloud-computing: 69
-    smartphones-and-mobile: 15
-    total: 244
-  contributions:
-    external: 27
-    internal: 286
-  github_engagement:
-    num_forks: 30
-    num_prs: 10
+    mobile-graphics-and-gaming: 15
   individual_authors:
     arm: 3
     bolt-liu: 2
@@ -2252,7 +2013,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     james-whitaker,-arm: 1
     jason-andrews: 80
@@ -2278,26 +2039,22 @@
     ying-yu: 1
     ying-yu,-arm: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 14
-    percent_closed_vs_total: 0.0
-- a_date: '2024-05-13'
+  contributions:
+    external: 27
+    internal: 286
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 10
+- date: '2024-05-13'
   content:
+    total: 245
     cross-platform: 15
-    embedded-systems: 16
+    embedded-and-microcontrollers: 40
     install-guides: 80
     laptops-and-desktops: 26
-    microcontrollers: 24
     servers-and-cloud-computing: 69
-    smartphones-and-mobile: 15
-    total: 245
-  contributions:
-    external: 28
-    internal: 286
-  github_engagement:
-    num_forks: 30
-    num_prs: 11
+    mobile-graphics-and-gaming: 15
   individual_authors:
     arm: 3
     bolt-liu: 2
@@ -2311,7 +2068,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     james-whitaker,-arm: 1
     jason-andrews: 80
@@ -2337,26 +2094,22 @@
     ying-yu: 1
     ying-yu,-arm: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 15
-    percent_closed_vs_total: 0.0
-- a_date: '2024-05-20'
+  contributions:
+    external: 28
+    internal: 286
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 11
+- date: '2024-05-20'
   content:
+    total: 252
     cross-platform: 15
-    embedded-systems: 17
+    embedded-and-microcontrollers: 41
     install-guides: 81
     laptops-and-desktops: 28
-    microcontrollers: 24
     servers-and-cloud-computing: 72
-    smartphones-and-mobile: 15
-    total: 252
-  contributions:
-    external: 29
-    internal: 292
-  github_engagement:
-    num_forks: 30
-    num_prs: 11
+    mobile-graphics-and-gaming: 15
   individual_authors:
     arm: 3
     bolt-liu: 2
@@ -2370,7 +2123,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     james-whitaker,-arm: 1
     jason-andrews: 81
@@ -2397,26 +2150,22 @@
     ying-yu: 1
     ying-yu,-arm: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 15
-    percent_closed_vs_total: 0.0
-- a_date: '2024-05-27'
-  content:
-    cross-platform: 16
-    embedded-systems: 17
-    install-guides: 81
-    laptops-and-desktops: 28
-    microcontrollers: 24
-    servers-and-cloud-computing: 71
-    smartphones-and-mobile: 15
-    total: 252
   contributions:
     external: 29
-    internal: 295
-  github_engagement:
-    num_forks: 30
-    num_prs: 9
+    internal: 292
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 11
+- date: '2024-05-27'
+  content:
+    total: 252
+    cross-platform: 16
+    embedded-and-microcontrollers: 41
+    install-guides: 81
+    laptops-and-desktops: 28
+    servers-and-cloud-computing: 71
+    mobile-graphics-and-gaming: 15
   individual_authors:
     arm: 3
     bolt-liu: 2
@@ -2430,7 +2179,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     james-whitaker,-arm: 1
     jason-andrews: 81
@@ -2457,26 +2206,22 @@
     ying-yu: 1
     ying-yu,-arm: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 12
-    percent_closed_vs_total: 0.0
-- a_date: '2024-06-03'
-  content:
-    cross-platform: 17
-    embedded-systems: 17
-    install-guides: 82
-    laptops-and-desktops: 28
-    microcontrollers: 24
-    servers-and-cloud-computing: 72
-    smartphones-and-mobile: 15
-    total: 255
   contributions:
     external: 29
-    internal: 298
-  github_engagement:
-    num_forks: 30
-    num_prs: 8
+    internal: 295
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 9
+- date: '2024-06-03'
+  content:
+    total: 255
+    cross-platform: 17
+    embedded-and-microcontrollers: 41
+    install-guides: 82
+    laptops-and-desktops: 28
+    servers-and-cloud-computing: 72
+    mobile-graphics-and-gaming: 15
   individual_authors:
     arm: 3
     bolt-liu: 2
@@ -2490,7 +2235,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     james-whitaker,-arm: 1
     jason-andrews: 81
@@ -2517,26 +2262,22 @@
     ying-yu: 1
     ying-yu,-arm: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 12
-    percent_closed_vs_total: 0.0
-- a_date: '2024-06-10'
+  contributions:
+    external: 29
+    internal: 298
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 8
+- date: '2024-06-10'
   content:
+    total: 261
     cross-platform: 19
-    embedded-systems: 17
+    embedded-and-microcontrollers: 41
     install-guides: 83
     laptops-and-desktops: 29
-    microcontrollers: 24
     servers-and-cloud-computing: 73
-    smartphones-and-mobile: 16
-    total: 261
-  contributions:
-    external: 31
-    internal: 304
-  github_engagement:
-    num_forks: 30
-    num_prs: 9
+    mobile-graphics-and-gaming: 16
   individual_authors:
     arm: 3
     bolt-liu: 2
@@ -2550,7 +2291,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     james-whitaker,-arm: 1
     jason-andrews: 83
@@ -2579,26 +2320,22 @@
     ying-yu: 1
     ying-yu,-arm: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 13
-    percent_closed_vs_total: 0.0
-- a_date: '2024-06-17'
-  content:
-    cross-platform: 19
-    embedded-systems: 17
-    install-guides: 83
-    laptops-and-desktops: 29
-    microcontrollers: 24
-    servers-and-cloud-computing: 73
-    smartphones-and-mobile: 16
-    total: 261
   contributions:
     external: 31
     internal: 304
-  github_engagement:
-    num_forks: 30
-    num_prs: 13
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 9
+- date: '2024-06-17'
+  content:
+    total: 261
+    cross-platform: 19
+    embedded-and-microcontrollers: 41
+    install-guides: 83
+    laptops-and-desktops: 29
+    servers-and-cloud-computing: 73
+    mobile-graphics-and-gaming: 16
   individual_authors:
     arm: 3
     bolt-liu: 2
@@ -2612,7 +2349,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     james-whitaker,-arm: 1
     jason-andrews: 83
@@ -2641,26 +2378,22 @@
     ying-yu: 1
     ying-yu,-arm: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 15
-    percent_closed_vs_total: 0.0
-- a_date: '2024-06-24'
+  contributions:
+    external: 31
+    internal: 304
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 13
+- date: '2024-06-24'
   content:
+    total: 266
     cross-platform: 20
-    embedded-systems: 17
+    embedded-and-microcontrollers: 41
     install-guides: 84
     laptops-and-desktops: 29
-    microcontrollers: 24
     servers-and-cloud-computing: 74
-    smartphones-and-mobile: 18
-    total: 266
-  contributions:
-    external: 33
-    internal: 307
-  github_engagement:
-    num_forks: 30
-    num_prs: 4
+    mobile-graphics-and-gaming: 18
   individual_authors:
     arm: 3
     arnaud-de-grandmaison: 1
@@ -2675,7 +2408,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     james-whitaker,-arm: 1
     jason-andrews: 83
@@ -2704,26 +2437,22 @@
     ying-yu: 1
     ying-yu,-arm: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 6
-    percent_closed_vs_total: 0.0
-- a_date: '2024-07-01'
-  content:
-    cross-platform: 20
-    embedded-systems: 17
-    install-guides: 84
-    laptops-and-desktops: 29
-    microcontrollers: 24
-    servers-and-cloud-computing: 74
-    smartphones-and-mobile: 18
-    total: 266
   contributions:
     external: 33
     internal: 307
-  github_engagement:
-    num_forks: 30
-    num_prs: 6
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 4
+- date: '2024-07-01'
+  content:
+    total: 266
+    cross-platform: 20
+    embedded-and-microcontrollers: 41
+    install-guides: 84
+    laptops-and-desktops: 29
+    servers-and-cloud-computing: 74
+    mobile-graphics-and-gaming: 18
   individual_authors:
     arm: 3
     arnaud-de-grandmaison: 1
@@ -2738,7 +2467,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     james-whitaker,-arm: 1
     jason-andrews: 83
@@ -2767,26 +2496,22 @@
     ying-yu: 1
     ying-yu,-arm: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 8
-    percent_closed_vs_total: 0.0
-- a_date: '2024-07-08'
+  contributions:
+    external: 33
+    internal: 307
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 6
+- date: '2024-07-08'
   content:
-    cross-platform: 20
-    embedded-systems: 17
-    install-guides: 84
-    laptops-and-desktops: 29
-    microcontrollers: 24
-    servers-and-cloud-computing: 74
-    smartphones-and-mobile: 19
     total: 267
-  contributions:
-    external: 33
-    internal: 308
-  github_engagement:
-    num_forks: 30
-    num_prs: 10
+    cross-platform: 20
+    embedded-and-microcontrollers: 41
+    install-guides: 84
+    laptops-and-desktops: 29
+    servers-and-cloud-computing: 74
+    mobile-graphics-and-gaming: 19
   individual_authors:
     arm: 3
     arnaud-de-grandmaison: 1
@@ -2801,7 +2526,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     james-whitaker,-arm: 1
     jason-andrews: 83
@@ -2830,26 +2555,22 @@
     ying-yu: 1
     ying-yu,-arm: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 12
-    percent_closed_vs_total: 0.0
-- a_date: '2024-07-15'
-  content:
-    cross-platform: 21
-    embedded-systems: 17
-    install-guides: 84
-    laptops-and-desktops: 29
-    microcontrollers: 24
-    servers-and-cloud-computing: 74
-    smartphones-and-mobile: 20
-    total: 269
   contributions:
     external: 33
     internal: 308
-  github_engagement:
-    num_forks: 30
-    num_prs: 6
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 10
+- date: '2024-07-15'
+  content:
+    total: 269
+    cross-platform: 21
+    embedded-and-microcontrollers: 41
+    install-guides: 84
+    laptops-and-desktops: 29
+    servers-and-cloud-computing: 74
+    mobile-graphics-and-gaming: 20
   individual_authors:
     arm: 3
     arnaud-de-grandmaison: 1
@@ -2864,7 +2585,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     james-whitaker,-arm: 1
     jason-andrews: 83
@@ -2895,26 +2616,22 @@
     ying-yu,-arm: 1
     zach-lasiuk: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 8
-    percent_closed_vs_total: 0.0
-- a_date: '2024-07-22'
-  content:
-    cross-platform: 21
-    embedded-systems: 17
-    install-guides: 84
-    laptops-and-desktops: 29
-    microcontrollers: 24
-    servers-and-cloud-computing: 74
-    smartphones-and-mobile: 20
-    total: 269
   contributions:
     external: 33
-    internal: 311
-  github_engagement:
-    num_forks: 30
-    num_prs: 7
+    internal: 308
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 6
+- date: '2024-07-22'
+  content:
+    total: 269
+    cross-platform: 21
+    embedded-and-microcontrollers: 41
+    install-guides: 84
+    laptops-and-desktops: 29
+    servers-and-cloud-computing: 74
+    mobile-graphics-and-gaming: 20
   individual_authors:
     arm: 3
     arnaud-de-grandmaison: 1
@@ -2929,7 +2646,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     james-whitaker,-arm: 1
     jason-andrews: 83
@@ -2960,26 +2677,22 @@
     ying-yu,-arm: 1
     zach-lasiuk: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 9
-    percent_closed_vs_total: 0.0
-- a_date: '2024-07-29'
+  contributions:
+    external: 33
+    internal: 311
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 7
+- date: '2024-07-29'
   content:
+    total: 274
     cross-platform: 22
-    embedded-systems: 17
+    embedded-and-microcontrollers: 41
     install-guides: 84
     laptops-and-desktops: 30
-    microcontrollers: 24
     servers-and-cloud-computing: 75
-    smartphones-and-mobile: 22
-    total: 274
-  contributions:
-    external: 35
-    internal: 377
-  github_engagement:
-    num_forks: 30
-    num_prs: 9
+    mobile-graphics-and-gaming: 22
   individual_authors:
     arm: 5
     arnaud-de-grandmaison: 1
@@ -2994,7 +2707,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     graham-woodward: 1
     james-whitaker,-arm: 1
@@ -3026,26 +2739,22 @@
     ying-yu,-arm: 1
     zach-lasiuk: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 12
-    percent_closed_vs_total: 0.0
-- a_date: '2024-08-05'
-  content:
-    cross-platform: 22
-    embedded-systems: 17
-    install-guides: 84
-    laptops-and-desktops: 30
-    microcontrollers: 24
-    servers-and-cloud-computing: 76
-    smartphones-and-mobile: 20
-    total: 273
   contributions:
     external: 35
-    internal: 315
-  github_engagement:
-    num_forks: 30
-    num_prs: 8
+    internal: 377
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 9
+- date: '2024-08-05'
+  content:
+    total: 273
+    cross-platform: 22
+    embedded-and-microcontrollers: 41
+    install-guides: 84
+    laptops-and-desktops: 30
+    servers-and-cloud-computing: 76
+    mobile-graphics-and-gaming: 20
   individual_authors:
     arm: 3
     arnaud-de-grandmaison: 1
@@ -3060,7 +2769,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     graham-woodward: 1
@@ -3093,26 +2802,22 @@
     ying-yu,-arm: 1
     zach-lasiuk: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 11
-    percent_closed_vs_total: 0.0
-- a_date: '2024-08-12'
-  content:
-    cross-platform: 22
-    embedded-systems: 18
-    install-guides: 84
-    laptops-and-desktops: 30
-    microcontrollers: 24
-    servers-and-cloud-computing: 77
-    smartphones-and-mobile: 22
-    total: 277
   contributions:
     external: 35
-    internal: 319
-  github_engagement:
-    num_forks: 30
-    num_prs: 10
+    internal: 315
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 8
+- date: '2024-08-12'
+  content:
+    total: 277
+    cross-platform: 22
+    embedded-and-microcontrollers: 42
+    install-guides: 84
+    laptops-and-desktops: 30
+    servers-and-cloud-computing: 77
+    mobile-graphics-and-gaming: 22
   individual_authors:
     arm: 3
     arnaud-de-grandmaison: 1
@@ -3128,7 +2833,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     graham-woodward: 1
@@ -3163,26 +2868,22 @@
     ying-yu,-arm: 1
     zach-lasiuk: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 12
-    percent_closed_vs_total: 0.0
-- a_date: '2024-08-19'
+  contributions:
+    external: 35
+    internal: 319
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 10
+- date: '2024-08-19'
   content:
+    total: 277
     cross-platform: 21
-    embedded-systems: 18
+    embedded-and-microcontrollers: 42
     install-guides: 84
     laptops-and-desktops: 31
-    microcontrollers: 24
     servers-and-cloud-computing: 77
-    smartphones-and-mobile: 22
-    total: 277
-  contributions:
-    external: 38
-    internal: 318
-  github_engagement:
-    num_forks: 30
-    num_prs: 10
+    mobile-graphics-and-gaming: 22
   individual_authors:
     arm: 3
     arnaud-de-grandmaison: 1
@@ -3198,7 +2899,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     graham-woodward: 1
     james-whitaker,-arm: 1
@@ -3231,26 +2932,22 @@
     ying-yu,-arm: 1
     zach-lasiuk: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 12
-    percent_closed_vs_total: 0.0
-- a_date: '2024-08-26'
-  content:
-    cross-platform: 21
-    embedded-systems: 18
-    install-guides: 84
-    laptops-and-desktops: 31
-    microcontrollers: 24
-    servers-and-cloud-computing: 78
-    smartphones-and-mobile: 22
-    total: 278
   contributions:
     external: 38
-    internal: 322
-  github_engagement:
-    num_forks: 30
-    num_prs: 8
+    internal: 318
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 10
+- date: '2024-08-26'
+  content:
+    total: 278
+    cross-platform: 21
+    embedded-and-microcontrollers: 42
+    install-guides: 84
+    laptops-and-desktops: 31
+    servers-and-cloud-computing: 78
+    mobile-graphics-and-gaming: 22
   individual_authors:
     arm: 3
     arnaud-de-grandmaison: 1
@@ -3266,7 +2963,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     graham-woodward: 1
@@ -3300,26 +2997,22 @@
     ying-yu,-arm: 1
     zach-lasiuk: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 9
-    percent_closed_vs_total: 0.0
-- a_date: '2024-09-02'
-  content:
-    cross-platform: 21
-    embedded-systems: 18
-    install-guides: 85
-    laptops-and-desktops: 31
-    microcontrollers: 24
-    servers-and-cloud-computing: 78
-    smartphones-and-mobile: 22
-    total: 279
   contributions:
     external: 38
-    internal: 323
-  github_engagement:
-    num_forks: 30
-    num_prs: 8
+    internal: 322
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 8
+- date: '2024-09-02'
+  content:
+    total: 279
+    cross-platform: 21
+    embedded-and-microcontrollers: 42
+    install-guides: 85
+    laptops-and-desktops: 31
+    servers-and-cloud-computing: 78
+    mobile-graphics-and-gaming: 22
   individual_authors:
     arm: 3
     arnaud-de-grandmaison: 1
@@ -3335,7 +3028,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     graham-woodward: 1
@@ -3369,26 +3062,22 @@
     ying-yu,-arm: 1
     zach-lasiuk: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 10
-    percent_closed_vs_total: 0.0
-- a_date: '2024-09-09'
-  content:
-    cross-platform: 22
-    embedded-systems: 19
-    install-guides: 85
-    laptops-and-desktops: 31
-    microcontrollers: 24
-    servers-and-cloud-computing: 79
-    smartphones-and-mobile: 22
-    total: 282
   contributions:
     external: 38
-    internal: 331
-  github_engagement:
-    num_forks: 30
-    num_prs: 10
+    internal: 323
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 8
+- date: '2024-09-09'
+  content:
+    total: 282
+    cross-platform: 22
+    embedded-and-microcontrollers: 43
+    install-guides: 85
+    laptops-and-desktops: 31
+    servers-and-cloud-computing: 79
+    mobile-graphics-and-gaming: 22
   individual_authors:
     alexandros-lamprineas: 1
     annie-tallund: 1
@@ -3406,7 +3095,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     graham-woodward: 1
@@ -3441,26 +3130,22 @@
     ying-yu,-arm: 1
     zach-lasiuk: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 12
-    percent_closed_vs_total: 0.0
-- a_date: '2024-09-16'
+  contributions:
+    external: 38
+    internal: 331
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 10
+- date: '2024-09-16'
   content:
+    total: 285
     cross-platform: 22
-    embedded-systems: 19
+    embedded-and-microcontrollers: 43
     install-guides: 85
     laptops-and-desktops: 31
-    microcontrollers: 24
     servers-and-cloud-computing: 81
-    smartphones-and-mobile: 23
-    total: 285
-  contributions:
-    external: 39
-    internal: 331
-  github_engagement:
-    num_forks: 30
-    num_prs: 7
+    mobile-graphics-and-gaming: 23
   individual_authors:
     alexandros-lamprineas: 1
     annie-tallund: 1
@@ -3479,7 +3164,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     graham-woodward: 1
@@ -3516,26 +3201,22 @@
     ying-yu,-arm: 1
     zach-lasiuk: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 10
-    percent_closed_vs_total: 0.0
-- a_date: '2024-09-23'
+  contributions:
+    external: 39
+    internal: 331
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 7
+- date: '2024-09-23'
   content:
+    total: 286
     cross-platform: 22
-    embedded-systems: 19
+    embedded-and-microcontrollers: 43
     install-guides: 85
     laptops-and-desktops: 31
-    microcontrollers: 24
     servers-and-cloud-computing: 82
-    smartphones-and-mobile: 23
-    total: 286
-  contributions:
-    external: 40
-    internal: 331
-  github_engagement:
-    num_forks: 30
-    num_prs: 6
+    mobile-graphics-and-gaming: 23
   individual_authors:
     alexandros-lamprineas: 1
     annie-tallund: 1
@@ -3554,7 +3235,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     graham-woodward: 1
@@ -3591,26 +3272,22 @@
     ying-yu,-arm: 1
     zach-lasiuk: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 10
-    percent_closed_vs_total: 0.0
-- a_date: '2024-09-30'
+  contributions:
+    external: 40
+    internal: 331
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 6
+- date: '2024-09-30'
   content:
+    total: 289
     cross-platform: 25
-    embedded-systems: 19
+    embedded-and-microcontrollers: 43
     install-guides: 85
     laptops-and-desktops: 31
-    microcontrollers: 24
     servers-and-cloud-computing: 82
-    smartphones-and-mobile: 23
-    total: 289
-  contributions:
-    external: 42
-    internal: 335
-  github_engagement:
-    num_forks: 30
-    num_prs: 4
+    mobile-graphics-and-gaming: 23
   individual_authors:
     alexandros-lamprineas: 1
     annie-tallund: 1
@@ -3629,7 +3306,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     graham-woodward: 1
@@ -3667,26 +3344,22 @@
     ying-yu,-arm: 1
     zach-lasiuk: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 6
-    percent_closed_vs_total: 0.0
-- a_date: '2024-11-04'
+  contributions:
+    external: 42
+    internal: 335
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 4
+- date: '2024-11-04'
   content:
+    total: 299
     cross-platform: 25
-    embedded-systems: 19
+    embedded-and-microcontrollers: 43
     install-guides: 89
     laptops-and-desktops: 31
-    microcontrollers: 24
     servers-and-cloud-computing: 87
-    smartphones-and-mobile: 24
-    total: 299
-  contributions:
-    external: 43
-    internal: 348
-  github_engagement:
-    num_forks: 30
-    num_prs: 12
+    mobile-graphics-and-gaming: 24
   individual_authors:
     alaaeddine-chakroun: 1
     alexandros-lamprineas: 1
@@ -3707,7 +3380,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     graham-woodward: 1
@@ -3748,26 +3421,22 @@
     ying-yu,-arm: 1
     zach-lasiuk: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 16
-    percent_closed_vs_total: 0.0
-- a_date: '2024-11-11'
+  contributions:
+    external: 43
+    internal: 348
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 12
+- date: '2024-11-11'
   content:
-    cross-platform: 25
-    embedded-systems: 19
-    install-guides: 89
-    laptops-and-desktops: 32
-    microcontrollers: 24
-    servers-and-cloud-computing: 88
-    smartphones-and-mobile: 24
     total: 301
-  contributions:
-    external: 43
-    internal: 353
-  github_engagement:
-    num_forks: 30
-    num_prs: 13
+    cross-platform: 25
+    embedded-and-microcontrollers: 43
+    install-guides: 89
+    laptops-and-desktops: 32
+    servers-and-cloud-computing: 88
+    mobile-graphics-and-gaming: 24
   individual_authors:
     alaaeddine-chakroun: 1
     alexandros-lamprineas: 1
@@ -3788,7 +3457,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     graham-woodward: 1
@@ -3830,26 +3499,22 @@
     ying-yu,-arm: 1
     zach-lasiuk: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 17
-    percent_closed_vs_total: 0.0
-- a_date: '2024-11-18'
-  content:
-    cross-platform: 25
-    embedded-systems: 19
-    install-guides: 89
-    laptops-and-desktops: 32
-    microcontrollers: 25
-    servers-and-cloud-computing: 88
-    smartphones-and-mobile: 25
-    total: 303
   contributions:
     external: 43
     internal: 353
-  github_engagement:
-    num_forks: 30
-    num_prs: 8
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 13
+- date: '2024-11-18'
+  content:
+    total: 303
+    cross-platform: 25
+    embedded-and-microcontrollers: 44
+    install-guides: 89
+    laptops-and-desktops: 32
+    servers-and-cloud-computing: 88
+    mobile-graphics-and-gaming: 25
   individual_authors:
     alaaeddine-chakroun: 1
     alexandros-lamprineas: 1
@@ -3872,7 +3537,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     graham-woodward: 1
@@ -3914,26 +3579,22 @@
     ying-yu,-arm: 1
     zach-lasiuk: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 12
-    percent_closed_vs_total: 0.0
-- a_date: '2024-11-25'
-  content:
-    cross-platform: 25
-    embedded-systems: 19
-    install-guides: 89
-    laptops-and-desktops: 32
-    microcontrollers: 25
-    servers-and-cloud-computing: 88
-    smartphones-and-mobile: 25
-    total: 303
   contributions:
     external: 43
     internal: 353
-  github_engagement:
-    num_forks: 30
-    num_prs: 9
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 8
+- date: '2024-11-25'
+  content:
+    total: 303
+    cross-platform: 25
+    embedded-and-microcontrollers: 44
+    install-guides: 89
+    laptops-and-desktops: 32
+    servers-and-cloud-computing: 88
+    mobile-graphics-and-gaming: 25
   individual_authors:
     alaaeddine-chakroun: 1
     alexandros-lamprineas: 1
@@ -3956,7 +3617,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     graham-woodward: 1
@@ -3998,26 +3659,22 @@
     ying-yu,-arm: 1
     zach-lasiuk: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 13
-    percent_closed_vs_total: 0.0
-- a_date: '2024-12-02'
+  contributions:
+    external: 43
+    internal: 353
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 9
+- date: '2024-12-02'
   content:
+    total: 305
     cross-platform: 25
-    embedded-systems: 19
+    embedded-and-microcontrollers: 44
     install-guides: 90
     laptops-and-desktops: 33
-    microcontrollers: 25
     servers-and-cloud-computing: 88
-    smartphones-and-mobile: 25
-    total: 305
-  contributions:
-    external: 43
-    internal: 355
-  github_engagement:
-    num_forks: 30
-    num_prs: 14
+    mobile-graphics-and-gaming: 25
   individual_authors:
     alaaeddine-chakroun: 1
     alexandros-lamprineas: 1
@@ -4040,7 +3697,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     graham-woodward: 1
@@ -4082,26 +3739,22 @@
     ying-yu,-arm: 1
     zach-lasiuk: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 18
-    percent_closed_vs_total: 0.0
-- a_date: '2024-12-09'
+  contributions:
+    external: 43
+    internal: 355
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 14
+- date: '2024-12-09'
   content:
+    total: 306
     cross-platform: 26
-    embedded-systems: 19
+    embedded-and-microcontrollers: 43
     install-guides: 90
     laptops-and-desktops: 33
-    microcontrollers: 24
     servers-and-cloud-computing: 89
-    smartphones-and-mobile: 25
-    total: 306
-  contributions:
-    external: 44
-    internal: 354
-  github_engagement:
-    num_forks: 30
-    num_prs: 7
+    mobile-graphics-and-gaming: 25
   individual_authors:
     alaaeddine-chakroun: 2
     alexandros-lamprineas: 1
@@ -4122,7 +3775,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     georgios-mermigkis-and-konstantinos-margaritis,-vectorcamp: 1
@@ -4167,26 +3820,22 @@
     ying-yu,-arm: 1
     zach-lasiuk: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 10
-    percent_closed_vs_total: 0.0
-- a_date: '2024-12-16'
-  content:
-    cross-platform: 26
-    embedded-systems: 19
-    install-guides: 90
-    laptops-and-desktops: 33
-    microcontrollers: 25
-    servers-and-cloud-computing: 89
-    smartphones-and-mobile: 26
-    total: 308
   contributions:
     external: 44
-    internal: 358
-  github_engagement:
-    num_forks: 30
-    num_prs: 11
+    internal: 354
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 7
+- date: '2024-12-16'
+  content:
+    total: 308
+    cross-platform: 26
+    embedded-and-microcontrollers: 44
+    install-guides: 90
+    laptops-and-desktops: 33
+    servers-and-cloud-computing: 89
+    mobile-graphics-and-gaming: 26
   individual_authors:
     alaaeddine-chakroun: 2
     alexandros-lamprineas: 1
@@ -4209,7 +3858,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     georgios-mermigkis-and-konstantinos-margaritis,-vectorcamp: 1
@@ -4254,26 +3903,22 @@
     ying-yu,-arm: 1
     zach-lasiuk: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 14
-    percent_closed_vs_total: 0.0
-- a_date: '2024-12-23'
+  contributions:
+    external: 44
+    internal: 358
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 11
+- date: '2024-12-23'
   content:
+    total: 312
     cross-platform: 26
-    embedded-systems: 19
+    embedded-and-microcontrollers: 44
     install-guides: 90
     laptops-and-desktops: 34
-    microcontrollers: 25
     servers-and-cloud-computing: 93
-    smartphones-and-mobile: 25
-    total: 312
-  contributions:
-    external: 45
-    internal: 362
-  github_engagement:
-    num_forks: 30
-    num_prs: 8
+    mobile-graphics-and-gaming: 25
   individual_authors:
     alaaeddine-chakroun: 2
     alexandros-lamprineas: 1
@@ -4297,7 +3942,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     georgios-mermigkis-and-konstantinos-margaritis,-vectorcamp: 1
@@ -4343,26 +3988,22 @@
     ying-yu,-arm: 1
     zach-lasiuk: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 12
-    percent_closed_vs_total: 0.0
-- a_date: '2024-12-30'
-  content:
-    cross-platform: 26
-    embedded-systems: 19
-    install-guides: 90
-    laptops-and-desktops: 34
-    microcontrollers: 25
-    servers-and-cloud-computing: 94
-    smartphones-and-mobile: 25
-    total: 313
   contributions:
     external: 45
     internal: 362
-  github_engagement:
-    num_forks: 30
-    num_prs: 9
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 8
+- date: '2024-12-30'
+  content:
+    total: 313
+    cross-platform: 26
+    embedded-and-microcontrollers: 44
+    install-guides: 90
+    laptops-and-desktops: 34
+    servers-and-cloud-computing: 94
+    mobile-graphics-and-gaming: 25
   individual_authors:
     alaaeddine-chakroun: 2
     alexandros-lamprineas: 1
@@ -4386,7 +4027,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     georgios-mermigkis-and-konstantinos-margaritis,-vectorcamp: 1
@@ -4433,26 +4074,22 @@
     ying-yu,-arm: 1
     zach-lasiuk: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 13
-    percent_closed_vs_total: 0.0
-- a_date: '2025-01-06'
-  content:
-    cross-platform: 27
-    embedded-systems: 19
-    install-guides: 93
-    laptops-and-desktops: 34
-    microcontrollers: 25
-    servers-and-cloud-computing: 94
-    smartphones-and-mobile: 25
-    total: 317
   contributions:
     external: 45
-    internal: 366
-  github_engagement:
-    num_forks: 30
-    num_prs: 8
+    internal: 362
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 9
+- date: '2025-01-06'
+  content:
+    total: 317
+    cross-platform: 27
+    embedded-and-microcontrollers: 44
+    install-guides: 93
+    laptops-and-desktops: 34
+    servers-and-cloud-computing: 94
+    mobile-graphics-and-gaming: 25
   individual_authors:
     alaaeddine-chakroun: 2
     alexandros-lamprineas: 1
@@ -4476,7 +4113,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     georgios-mermigkis-and-konstantinos-margaritis,-vectorcamp: 1
@@ -4523,12 +4160,16 @@
     ying-yu,-arm: 1
     zach-lasiuk: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 12
-    percent_closed_vs_total: 0.0
-- a_date: '2025-01-13'
+  contributions:
+    external: 45
+    internal: 366
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 8
+- date: '2025-01-13'
   content:
+    total: 323
     automotive: 2
     cross-platform: 28
     embedded-and-microcontrollers: 39
@@ -4537,13 +4178,6 @@
     laptops-and-desktops: 33
     mobile-graphics-and-gaming: 26
     servers-and-cloud-computing: 97
-    total: 323
-  contributions:
-    external: 45
-    internal: 373
-  github_engagement:
-    num_forks: 30
-    num_prs: 6
   individual_authors:
     alaaeddine-chakroun: 2
     alexandros-lamprineas: 1
@@ -4567,7 +4201,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     georgios-mermigkis-and-konstantinos-margaritis,-vectorcamp: 1
@@ -4617,12 +4251,16 @@
     ying-yu,-arm: 1
     zach-lasiuk: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 10
-    percent_closed_vs_total: 0.0
-- a_date: '2025-01-20'
+  contributions:
+    external: 45
+    internal: 373
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 6
+- date: '2025-01-20'
   content:
+    total: 323
     automotive: 2
     cross-platform: 28
     embedded-and-microcontrollers: 39
@@ -4631,13 +4269,6 @@
     laptops-and-desktops: 33
     mobile-graphics-and-gaming: 26
     servers-and-cloud-computing: 97
-    total: 323
-  contributions:
-    external: 45
-    internal: 373
-  github_engagement:
-    num_forks: 30
-    num_prs: 13
   individual_authors:
     alaaeddine-chakroun: 2
     alexandros-lamprineas: 1
@@ -4661,7 +4292,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     georgios-mermigkis-and-konstantinos-margaritis,-vectorcamp: 1
@@ -4712,12 +4343,16 @@
     ying-yu,-arm: 1
     zach-lasiuk: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 16
-    percent_closed_vs_total: 0.0
-- a_date: '2025-01-27'
+  contributions:
+    external: 45
+    internal: 373
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 13
+- date: '2025-01-27'
   content:
+    total: 323
     automotive: 1
     cross-platform: 28
     embedded-and-microcontrollers: 40
@@ -4726,13 +4361,6 @@
     laptops-and-desktops: 33
     mobile-graphics-and-gaming: 26
     servers-and-cloud-computing: 97
-    total: 323
-  contributions:
-    external: 45
-    internal: 373
-  github_engagement:
-    num_forks: 30
-    num_prs: 12
   individual_authors:
     alaaeddine-chakroun: 2
     alexandros-lamprineas: 1
@@ -4756,7 +4384,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     georgios-mermigkis-and-konstantinos-margaritis,-vectorcamp: 1
@@ -4807,12 +4435,16 @@
     ying-yu,-arm: 1
     zach-lasiuk: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 15
-    percent_closed_vs_total: 0.0
-- a_date: '2025-02-03'
+  contributions:
+    external: 45
+    internal: 373
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 12
+- date: '2025-02-03'
   content:
+    total: 324
     automotive: 1
     cross-platform: 28
     embedded-and-microcontrollers: 40
@@ -4821,13 +4453,6 @@
     laptops-and-desktops: 34
     mobile-graphics-and-gaming: 26
     servers-and-cloud-computing: 97
-    total: 324
-  contributions:
-    external: 45
-    internal: 373
-  github_engagement:
-    num_forks: 30
-    num_prs: 9
   individual_authors:
     alaaeddine-chakroun: 2
     alexandros-lamprineas: 1
@@ -4851,7 +4476,7 @@
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     georgios-mermigkis-and-konstantinos-margaritis,-vectorcamp: 1
@@ -4902,12 +4527,16 @@
     ying-yu,-arm: 1
     zach-lasiuk: 1
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 12
-    percent_closed_vs_total: 0.0
-- a_date: '2025-02-24'
+  contributions:
+    external: 45
+    internal: 373
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 9
+- date: '2025-02-24'
   content:
+    total: 331
     automotive: 1
     cross-platform: 29
     embedded-and-microcontrollers: 41
@@ -4916,13 +4545,6 @@
     laptops-and-desktops: 34
     mobile-graphics-and-gaming: 27
     servers-and-cloud-computing: 100
-    total: 331
-  contributions:
-    external: 87
-    internal: 432
-  github_engagement:
-    num_forks: 30
-    num_prs: 8
   individual_authors:
     adnan-alsinan: 1
     alaaeddine-chakroun: 2
@@ -4948,7 +4570,7 @@
     dominica-abena-o.-amanfo: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     georgios-mermigkis: 1
@@ -4998,12 +4620,16 @@
     ying-yu: 2
     zach-lasiuk: 3
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 11
-    percent_closed_vs_total: 0.0
-- a_date: '2025-03-03'
+  contributions:
+    external: 87
+    internal: 432
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 8
+- date: '2025-03-03'
   content:
+    total: 334
     automotive: 1
     cross-platform: 29
     embedded-and-microcontrollers: 41
@@ -5012,13 +4638,6 @@
     laptops-and-desktops: 35
     mobile-graphics-and-gaming: 27
     servers-and-cloud-computing: 102
-    total: 334
-  contributions:
-    external: 89
-    internal: 433
-  github_engagement:
-    num_forks: 30
-    num_prs: 14
   individual_authors:
     adnan-alsinan: 1
     alaaeddine-chakroun: 2
@@ -5044,7 +4663,7 @@
     dominica-abena-o.-amanfo: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     georgios-mermigkis: 1
@@ -5094,12 +4713,16 @@
     ying-yu: 2
     zach-lasiuk: 2
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 18
-    percent_closed_vs_total: 0.0
-- a_date: '2025-03-10'
+  contributions:
+    external: 89
+    internal: 433
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 14
+- date: '2025-03-10'
   content:
+    total: 335
     automotive: 1
     cross-platform: 29
     embedded-and-microcontrollers: 41
@@ -5108,13 +4731,6 @@
     laptops-and-desktops: 35
     mobile-graphics-and-gaming: 27
     servers-and-cloud-computing: 103
-    total: 335
-  contributions:
-    external: 88
-    internal: 436
-  github_engagement:
-    num_forks: 30
-    num_prs: 16
   individual_authors:
     adnan-alsinan: 1
     alaaeddine-chakroun: 2
@@ -5141,7 +4757,7 @@
     dominica-abena-o.-amanfo: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     georgios-mermigkis: 1
@@ -5191,12 +4807,16 @@
     ying-yu: 2
     zach-lasiuk: 2
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 20
-    percent_closed_vs_total: 0.0
-- a_date: '2025-03-17'
+  contributions:
+    external: 88
+    internal: 436
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 16
+- date: '2025-03-17'
   content:
+    total: 336
     automotive: 1
     cross-platform: 29
     embedded-and-microcontrollers: 41
@@ -5205,13 +4825,6 @@
     laptops-and-desktops: 35
     mobile-graphics-and-gaming: 27
     servers-and-cloud-computing: 104
-    total: 336
-  contributions:
-    external: 88
-    internal: 437
-  github_engagement:
-    num_forks: 30
-    num_prs: 10
   individual_authors:
     adnan-alsinan: 1
     alaaeddine-chakroun: 2
@@ -5238,7 +4851,7 @@
     dominica-abena-o.-amanfo: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     georgios-mermigkis: 1
@@ -5288,12 +4901,16 @@
     ying-yu: 2
     zach-lasiuk: 2
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 14
-    percent_closed_vs_total: 0.0
-- a_date: '2025-03-24'
+  contributions:
+    external: 88
+    internal: 437
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 10
+- date: '2025-03-24'
   content:
+    total: 341
     automotive: 1
     cross-platform: 29
     embedded-and-microcontrollers: 42
@@ -5302,13 +4919,6 @@
     laptops-and-desktops: 35
     mobile-graphics-and-gaming: 29
     servers-and-cloud-computing: 106
-    total: 341
-  contributions:
-    external: 90
-    internal: 447
-  github_engagement:
-    num_forks: 30
-    num_prs: 13
   individual_authors:
     adnan-alsinan: 1
     alaaeddine-chakroun: 2
@@ -5335,7 +4945,7 @@
     dominica-abena-o.-amanfo: 2
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     georgios-mermigkis: 1
@@ -5387,12 +4997,16 @@
     yiyang-fan: 1
     zach-lasiuk: 2
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 18
-    percent_closed_vs_total: 0.0
-- a_date: '2025-03-31'
+  contributions:
+    external: 90
+    internal: 447
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 13
+- date: '2025-03-31'
   content:
+    total: 342
     automotive: 1
     cross-platform: 29
     embedded-and-microcontrollers: 41
@@ -5401,13 +5015,6 @@
     laptops-and-desktops: 35
     mobile-graphics-and-gaming: 29
     servers-and-cloud-computing: 108
-    total: 342
-  contributions:
-    external: 90
-    internal: 447
-  github_engagement:
-    num_forks: 30
-    num_prs: 10
   individual_authors:
     adnan-alsinan: 1
     alaaeddine-chakroun: 2
@@ -5435,7 +5042,7 @@
     dominica-abena-o.-amanfo: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     georgios-mermigkis: 1
@@ -5487,12 +5094,16 @@
     yiyang-fan: 1
     zach-lasiuk: 2
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 13
-    percent_closed_vs_total: 0.0
-- a_date: '2025-04-07'
+  contributions:
+    external: 90
+    internal: 447
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 10
+- date: '2025-04-07'
   content:
+    total: 347
     automotive: 1
     cross-platform: 30
     embedded-and-microcontrollers: 41
@@ -5501,13 +5112,6 @@
     laptops-and-desktops: 35
     mobile-graphics-and-gaming: 29
     servers-and-cloud-computing: 110
-    total: 347
-  contributions:
-    external: 91
-    internal: 458
-  github_engagement:
-    num_forks: 30
-    num_prs: 7
   individual_authors:
     adnan-alsinan: 1
     alaaeddine-chakroun: 2
@@ -5535,7 +5139,7 @@
     dominica-abena-o.-amanfo: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     georgios-mermigkis: 1
@@ -5588,12 +5192,16 @@
     yiyang-fan: 1
     zach-lasiuk: 2
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 10
-    percent_closed_vs_total: 0.0
-- a_date: '2025-04-14'
+  contributions:
+    external: 91
+    internal: 458
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 7
+- date: '2025-04-14'
   content:
+    total: 350
     automotive: 1
     cross-platform: 30
     embedded-and-microcontrollers: 41
@@ -5602,13 +5210,6 @@
     laptops-and-desktops: 35
     mobile-graphics-and-gaming: 30
     servers-and-cloud-computing: 110
-    total: 350
-  contributions:
-    external: 91
-    internal: 460
-  github_engagement:
-    num_forks: 30
-    num_prs: 12
   individual_authors:
     adnan-alsinan: 1
     alaaeddine-chakroun: 2
@@ -5636,7 +5237,7 @@
     dominica-abena-o.-amanfo: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     georgios-mermigkis: 1
@@ -5691,12 +5292,16 @@
     yiyang-fan: 1
     zach-lasiuk: 2
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 17
-    percent_closed_vs_total: 0.0
-- a_date: '2025-04-21'
+  contributions:
+    external: 91
+    internal: 460
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 12
+- date: '2025-04-21'
   content:
+    total: 350
     automotive: 1
     cross-platform: 30
     embedded-and-microcontrollers: 40
@@ -5705,13 +5310,6 @@
     laptops-and-desktops: 35
     mobile-graphics-and-gaming: 30
     servers-and-cloud-computing: 110
-    total: 350
-  contributions:
-    external: 92
-    internal: 459
-  github_engagement:
-    num_forks: 30
-    num_prs: 11
   individual_authors:
     adnan-alsinan: 1
     alaaeddine-chakroun: 2
@@ -5739,7 +5337,7 @@
     dominica-abena-o.-amanfo: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     georgios-mermigkis: 1
@@ -5793,12 +5391,16 @@
     yiyang-fan: 1
     zach-lasiuk: 2
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 16
-    percent_closed_vs_total: 0.0
-- a_date: '2025-05-19'
+  contributions:
+    external: 92
+    internal: 459
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 11
+- date: '2025-05-19'
   content:
+    total: 366
     automotive: 2
     cross-platform: 32
     embedded-and-microcontrollers: 41
@@ -5807,13 +5409,6 @@
     laptops-and-desktops: 37
     mobile-graphics-and-gaming: 33
     servers-and-cloud-computing: 116
-    total: 366
-  contributions:
-    external: 95
-    internal: 480
-  github_engagement:
-    num_forks: 30
-    num_prs: 6
   individual_authors:
     adnan-alsinan: 1
     alaaeddine-chakroun: 2
@@ -5844,7 +5439,7 @@
     dominica-abena-o.-amanfo: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     georgios-mermigkis: 1
@@ -5899,12 +5494,16 @@
     yiyang-fan: 1
     zach-lasiuk: 2
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 9
-    percent_closed_vs_total: 0.0
-- a_date: '2025-05-26'
+  contributions:
+    external: 95
+    internal: 480
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 6
+- date: '2025-05-26'
   content:
+    total: 369
     automotive: 2
     cross-platform: 32
     embedded-and-microcontrollers: 41
@@ -5913,13 +5512,6 @@
     laptops-and-desktops: 37
     mobile-graphics-and-gaming: 33
     servers-and-cloud-computing: 117
-    total: 369
-  contributions:
-    external: 94
-    internal: 482
-  github_engagement:
-    num_forks: 30
-    num_prs: 6
   individual_authors:
     adnan-alsinan: 1
     alaaeddine-chakroun: 2
@@ -5950,7 +5542,7 @@
     dominica-abena-o.-amanfo: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     georgios-mermigkis: 1
@@ -6005,12 +5597,16 @@
     yiyang-fan: 1
     zach-lasiuk: 2
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 9
-    percent_closed_vs_total: 0.0
-- a_date: '2025-06-02'
+  contributions:
+    external: 94
+    internal: 482
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 6
+- date: '2025-06-02'
   content:
+    total: 371
     automotive: 2
     cross-platform: 33
     embedded-and-microcontrollers: 41
@@ -6019,13 +5615,6 @@
     laptops-and-desktops: 37
     mobile-graphics-and-gaming: 33
     servers-and-cloud-computing: 118
-    total: 371
-  contributions:
-    external: 95
-    internal: 497
-  github_engagement:
-    num_forks: 30
-    num_prs: 7
   individual_authors:
     adnan-alsinan: 2
     alaaeddine-chakroun: 2
@@ -6057,7 +5646,7 @@
     dominica-abena-o.-amanfo: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     georgios-mermigkis: 1
@@ -6113,12 +5702,16 @@
     yiyang-fan: 1
     zach-lasiuk: 2
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 12
-    percent_closed_vs_total: 0.0
-- a_date: '2025-06-09'
+  contributions:
+    external: 95
+    internal: 497
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 7
+- date: '2025-06-09'
   content:
+    total: 373
     automotive: 2
     cross-platform: 33
     embedded-and-microcontrollers: 41
@@ -6127,13 +5720,6 @@
     laptops-and-desktops: 37
     mobile-graphics-and-gaming: 34
     servers-and-cloud-computing: 119
-    total: 373
-  contributions:
-    external: 95
-    internal: 500
-  github_engagement:
-    num_forks: 30
-    num_prs: 8
   individual_authors:
     adnan-alsinan: 2
     alaaeddine-chakroun: 2
@@ -6166,7 +5752,7 @@
     dominica-abena-o.-amanfo: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     georgios-mermigkis: 1
@@ -6223,12 +5809,16 @@
     yiyang-fan: 1
     zach-lasiuk: 2
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 14
-    percent_closed_vs_total: 0.0
-- a_date: '2025-06-16'
+  contributions:
+    external: 95
+    internal: 500
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 8
+- date: '2025-06-16'
   content:
+    total: 379
     automotive: 2
     cross-platform: 33
     embedded-and-microcontrollers: 41
@@ -6237,13 +5827,6 @@
     laptops-and-desktops: 38
     mobile-graphics-and-gaming: 34
     servers-and-cloud-computing: 124
-    total: 379
-  contributions:
-    external: 96
-    internal: 505
-  github_engagement:
-    num_forks: 30
-    num_prs: 9
   individual_authors:
     adnan-alsinan: 2
     alaaeddine-chakroun: 2
@@ -6276,7 +5859,7 @@
     dominica-abena-o.-amanfo: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     georgios-mermigkis: 1
@@ -6333,12 +5916,16 @@
     yiyang-fan: 1
     zach-lasiuk: 2
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 17
-    percent_closed_vs_total: 0.0
-- a_date: '2025-06-23'
+  contributions:
+    external: 96
+    internal: 505
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 9
+- date: '2025-06-23'
   content:
+    total: 380
     automotive: 2
     cross-platform: 33
     embedded-and-microcontrollers: 41
@@ -6347,13 +5934,6 @@
     laptops-and-desktops: 38
     mobile-graphics-and-gaming: 34
     servers-and-cloud-computing: 124
-    total: 380
-  contributions:
-    external: 97
-    internal: 505
-  github_engagement:
-    num_forks: 30
-    num_prs: 6
   individual_authors:
     adnan-alsinan: 2
     alaaeddine-chakroun: 2
@@ -6386,7 +5966,7 @@
     dominica-abena-o.-amanfo: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     georgios-mermigkis: 1
@@ -6443,12 +6023,16 @@
     yiyang-fan: 1
     zach-lasiuk: 2
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 14
-    percent_closed_vs_total: 0.0
-- a_date: '2025-06-30'
+  contributions:
+    external: 97
+    internal: 505
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 6
+- date: '2025-06-30'
   content:
+    total: 380
     automotive: 2
     cross-platform: 33
     embedded-and-microcontrollers: 41
@@ -6457,13 +6041,6 @@
     laptops-and-desktops: 38
     mobile-graphics-and-gaming: 34
     servers-and-cloud-computing: 124
-    total: 380
-  contributions:
-    external: 97
-    internal: 505
-  github_engagement:
-    num_forks: 30
-    num_prs: 8
   individual_authors:
     adnan-alsinan: 2
     alaaeddine-chakroun: 2
@@ -6496,7 +6073,7 @@
     dominica-abena-o.-amanfo: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     georgios-mermigkis: 1
@@ -6553,12 +6130,16 @@
     yiyang-fan: 1
     zach-lasiuk: 2
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 17
-    percent_closed_vs_total: 0.0
-- a_date: '2025-07-07'
+  contributions:
+    external: 97
+    internal: 505
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 8
+- date: '2025-07-07'
   content:
+    total: 382
     automotive: 2
     cross-platform: 32
     embedded-and-microcontrollers: 42
@@ -6567,13 +6148,6 @@
     laptops-and-desktops: 38
     mobile-graphics-and-gaming: 34
     servers-and-cloud-computing: 126
-    total: 382
-  contributions:
-    external: 97
-    internal: 509
-  github_engagement:
-    num_forks: 30
-    num_prs: 10
   individual_authors:
     adnan-alsinan: 2
     alaaeddine-chakroun: 2
@@ -6605,7 +6179,7 @@
     dominica-abena-o.-amanfo: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 1
     georgios-mermigkis: 1
@@ -6664,12 +6238,16 @@
     yiyang-fan: 1
     zach-lasiuk: 2
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 19
-    percent_closed_vs_total: 0.0
-- a_date: '2025-07-14'
+  contributions:
+    external: 97
+    internal: 509
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 10
+- date: '2025-07-14'
   content:
+    total: 386
     automotive: 2
     cross-platform: 33
     embedded-and-microcontrollers: 42
@@ -6678,13 +6256,6 @@
     laptops-and-desktops: 38
     mobile-graphics-and-gaming: 34
     servers-and-cloud-computing: 128
-    total: 386
-  contributions:
-    external: 97
-    internal: 511
-  github_engagement:
-    num_forks: 30
-    num_prs: 7
   individual_authors:
     adnan-alsinan: 2
     alaaeddine-chakroun: 2
@@ -6716,7 +6287,7 @@
     dominica-abena-o.-amanfo: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 2
     georgios-mermigkis: 1
@@ -6777,12 +6348,16 @@
     yiyang-fan: 1
     zach-lasiuk: 2
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 16
-    percent_closed_vs_total: 0.0
-- a_date: '2025-07-21'
+  contributions:
+    external: 97
+    internal: 511
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 7
+- date: '2025-07-21'
   content:
+    total: 387
     automotive: 2
     cross-platform: 33
     embedded-and-microcontrollers: 43
@@ -6791,13 +6366,6 @@
     laptops-and-desktops: 38
     mobile-graphics-and-gaming: 34
     servers-and-cloud-computing: 128
-    total: 387
-  contributions:
-    external: 97
-    internal: 511
-  github_engagement:
-    num_forks: 30
-    num_prs: 12
   individual_authors:
     adnan-alsinan: 2
     alaaeddine-chakroun: 2
@@ -6830,7 +6398,7 @@
     dominica-abena-o.-amanfo: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 2
     georgios-mermigkis: 1
@@ -6891,12 +6459,16 @@
     yiyang-fan: 1
     zach-lasiuk: 2
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 21
-    percent_closed_vs_total: 0.0
-- a_date: '2025-07-28'
+  contributions:
+    external: 97
+    internal: 511
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 12
+- date: '2025-07-28'
   content:
+    total: 391
     automotive: 3
     cross-platform: 34
     embedded-and-microcontrollers: 43
@@ -6905,13 +6477,6 @@
     laptops-and-desktops: 38
     mobile-graphics-and-gaming: 34
     servers-and-cloud-computing: 128
-    total: 391
-  contributions:
-    external: 98
-    internal: 516
-  github_engagement:
-    num_forks: 30
-    num_prs: 14
   individual_authors:
     adnan-alsinan: 2
     alaaeddine-chakroun: 2
@@ -6945,7 +6510,7 @@
     dominica-abena-o.-amanfo: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 2
     georgios-mermigkis: 1
@@ -7008,12 +6573,16 @@
     yiyang-fan: 1
     zach-lasiuk: 2
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 21
-    percent_closed_vs_total: 0.0
-- a_date: '2025-08-04'
+  contributions:
+    external: 98
+    internal: 516
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 14
+- date: '2025-08-04'
   content:
+    total: 393
     automotive: 3
     cross-platform: 34
     embedded-and-microcontrollers: 43
@@ -7022,13 +6591,6 @@
     laptops-and-desktops: 38
     mobile-graphics-and-gaming: 35
     servers-and-cloud-computing: 129
-    total: 393
-  contributions:
-    external: 98
-    internal: 519
-  github_engagement:
-    num_forks: 30
-    num_prs: 18
   individual_authors:
     adnan-alsinan: 2
     alaaeddine-chakroun: 2
@@ -7063,7 +6625,7 @@
     dominica-abena-o.-amanfo: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 2
     georgios-mermigkis: 1
@@ -7127,12 +6689,16 @@
     yiyang-fan: 1
     zach-lasiuk: 2
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 26
-    percent_closed_vs_total: 0.0
-- a_date: '2025-08-11'
+  contributions:
+    external: 98
+    internal: 519
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 18
+- date: '2025-08-11'
   content:
+    total: 396
     automotive: 3
     cross-platform: 34
     embedded-and-microcontrollers: 44
@@ -7141,13 +6707,6 @@
     laptops-and-desktops: 38
     mobile-graphics-and-gaming: 35
     servers-and-cloud-computing: 131
-    total: 396
-  contributions:
-    external: 98
-    internal: 522
-  github_engagement:
-    num_forks: 30
-    num_prs: 19
   individual_authors:
     adnan-alsinan: 2
     alaaeddine-chakroun: 2
@@ -7182,7 +6741,7 @@
     dominica-abena-o.-amanfo: 1
     elham-harirpoush: 2
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 2
     georgios-mermigkis: 1
@@ -7248,12 +6807,16 @@
     yiyang-fan: 1
     zach-lasiuk: 2
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 28
-    percent_closed_vs_total: 0.0
-- a_date: '2025-08-18'
+  contributions:
+    external: 98
+    internal: 522
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 19
+- date: '2025-08-18'
   content:
+    total: 401
     automotive: 3
     cross-platform: 34
     embedded-and-microcontrollers: 45
@@ -7262,13 +6825,6 @@
     laptops-and-desktops: 38
     mobile-graphics-and-gaming: 37
     servers-and-cloud-computing: 132
-    total: 401
-  contributions:
-    external: 98
-    internal: 525
-  github_engagement:
-    num_forks: 30
-    num_prs: 14
   individual_authors:
     adnan-alsinan: 2
     alaaeddine-chakroun: 2
@@ -7305,7 +6861,7 @@
     fidel-makatia: 1
     fidel-makatia-omusilibwa: 1
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 2
     georgios-mermigkis: 1
@@ -7371,12 +6927,16 @@
     yiyang-fan: 1
     zach-lasiuk: 2
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 23
-    percent_closed_vs_total: 0.0
-- a_date: '2025-08-25'
+  contributions:
+    external: 98
+    internal: 525
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 14
+- date: '2025-08-25'
   content:
+    total: 405
     automotive: 3
     cross-platform: 34
     embedded-and-microcontrollers: 45
@@ -7385,13 +6945,6 @@
     laptops-and-desktops: 39
     mobile-graphics-and-gaming: 37
     servers-and-cloud-computing: 136
-    total: 405
-  contributions:
-    external: 99
-    internal: 530
-  github_engagement:
-    num_forks: 30
-    num_prs: 15
   individual_authors:
     adnan-alsinan: 2
     alaaeddine-chakroun: 2
@@ -7428,7 +6981,7 @@
     elham-harirpoush: 2
     fidel-makatia-omusilibwa: 1
     florent-lebeau: 5
-    "fr\xE9d\xE9ric--lefred--descamps": 2
+    frédéric--lefred--descamps: 2
     gabriel-peterson: 5
     gayathri-narayana-yegna-narayanan: 2
     georgios-mermigkis: 1
@@ -7494,7 +7047,688 @@
     yiyang-fan: 1
     zach-lasiuk: 2
     zhengjun-xing: 2
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 25
-    percent_closed_vs_total: 0.0
+  contributions:
+    external: 99
+    internal: 530
+  github:
+    stars: 0
+    forks: 30
+    open_prs: 15
+- date: '2026-05-29'
+  content:
+    total: 525
+    install-guides: 100
+    automotive: 9
+    cross-platform: 45
+    embedded-and-microcontrollers: 75
+    laptops-and-desktops: 82
+    mobile-graphics-and-gaming: 74
+    servers-and-cloud-computing: 252
+  individual_authors:
+    adnan-alsinan: 3
+    ajeet-singh-raina: 1
+    akash-malik: 1
+    alaaeddine-chakroun: 2
+    albin-bernhardsson: 2
+    alejandro-martinez-vicente: 1
+    alex-su: 1
+    alexandre-romana: 1
+    alexandros-lamprineas: 1
+    andrew-choi: 2
+    andrew-kilroy: 1
+    ann-cheng: 1
+    anna-mayne: 1
+    annie-tallund: 14
+    anton-antonov: 2
+    arm: 1
+    arnaud-de-grandmaison: 7
+    arnaud-grasset: 1
+    aryan-bhusari: 1
+    asher-dobrescu: 1
+    asier-arranz: 1
+    aude-vuilliomenet: 1
+    ayoub-bourjilat: 1
+    barbara-corriero: 1
+    basma-el-gaabouri: 1
+    ben-clark: 3
+    bhanu-arya: 1
+    bolt-liu: 2
+    brenda-strech: 1
+    brendan-long: 2
+    bright-edudzi-gershon-kordorwu: 1
+    chaodong-gong: 1
+    chen-zhang: 1
+    chenying-kuo: 1
+    christophe-favergeon: 1
+    christopher-seidl: 7
+    claudio-martino: 1
+    cyril-rohr: 1
+    damien-dooley: 1
+    daniel-gubay: 1
+    daniel-nguyen: 2
+    daniel-schleicher: 1
+    david-spickett: 2
+    david-wong: 1
+    dawid-borycki: 35
+    diego-russo: 2
+    dominica-abena-o.-amanfo: 2
+    doug-anson: 4
+    elham-harirpoush: 2
+    fidel-makatia-omusilibwa: 2
+    florent-lebeau: 5
+    frédéric--lefred--descamps: 2
+    gabriel-peterson: 6
+    gayathri-narayana-yegna-narayanan: 2
+    georgios-mermigkis: 1
+    geremy-cohen: 6
+    gian-marco-iodice: 1
+    graham-woodward: 1
+    han-yin: 1
+    iago-calvo-lista: 1
+    james-whitaker: 1
+    jason-andrews: 118
+    jason-zhu: 1
+    jeff-young: 1
+    jett-zhou: 1
+    jiaming-guo: 1
+    joana-cruz: 2
+    joe-stech: 7
+    johanna-skinnider: 2
+    johnny-nunez: 1
+    jonathan-davies: 2
+    jose-emilio-munoz-lopez: 1
+    joshua-marshall-law: 4
+    julie-gaskin: 6
+    julien-jayat: 1
+    julien-simon: 2
+    julio-suarez: 6
+    jun-he: 1
+    kasper-mecklenburg: 1
+    kavya-sri-chennoju: 2
+    kelsey-steele: 1
+    ken-zhang: 1
+    ker-liu: 1
+    kiel-friedt: 1
+    kieran-hejmadi: 18
+    koki-mitsunami: 2
+    konstantinos-margaritis: 8
+    kristof-beyls: 1
+    leandro-nunes: 1
+    liliya-wu: 1
+    marek-michałowski: 1
+    mark-thurman: 1
+    martin-ma: 1
+    masoud-koleini: 1
+    mathias-brossard: 1
+    matt-cossins: 1
+    michael-hall: 6
+    mohamad-najem: 1
+    mohamed-ismail: 1
+    na-li: 1
+    nader-zouaoui: 2
+    neethu-elizabeth-simon: 1
+    nikhil-gupta: 3
+    nina-drozd: 2
+    nobel-chowdary-mandepudi: 6
+    odin-shen: 20
+    owen-wu: 2
+    pareena-verma: 99
+    parichay-das: 1
+    paschalis-mpeis: 1
+    paul-howard: 3
+    peter-harris: 1
+    phalani-paladugu: 1
+    pranay-bakre: 5
+    preema-merlin-dsouza: 1
+    prince-agyeman: 1
+    przemyslaw-wirkus: 2
+    qixiang-xu: 2
+    rani-chowdary-mandepudi: 2
+    raymond-lo: 1
+    richard-burton: 2
+    roberto-lopez-mendez: 2
+    ronan-synnott: 45
+    rui-chang: 1
+    ruifeng-wang: 1
+    shuheng-deng: 1
+    steve-suzuki: 1
+    thirdai: 1
+    tianyu-li: 2
+    tinkerblox: 1
+    tom-dunkle: 1
+    tom-pilar: 1
+    tyler-mullenbach: 1
+    uma-ramalingam: 1
+    varun-chari: 3
+    victor-do-nascimento: 1
+    waheed-brown: 3
+    willen-yang: 1
+    william-liang: 1
+    yahya-abouelseoud: 1
+    ying-yu: 4
+    yiyang-fan: 1
+    zach-lasiuk: 2
+    zbynek-roubalik: 1
+    zenon-zhilong-xiu: 4
+    zhengjun-xing: 2
+    éliás-bálint: 1
+  contributions:
+    internal: 475
+    external: 132
+  github:
+    stars: 142
+    forks: 287
+    open_prs: 8
+- date: '2026-06-29'
+  content:
+    total: 541
+    install-guides: 102
+    automotive: 9
+    cross-platform: 47
+    embedded-and-microcontrollers: 79
+    laptops-and-desktops: 85
+    mobile-graphics-and-gaming: 75
+    servers-and-cloud-computing: 261
+  individual_authors:
+    adnan-alsinan: 3
+    ajeet-singh-raina: 1
+    akash-malik: 2
+    alaaeddine-chakroun: 2
+    albin-bernhardsson: 2
+    alejandro-martinez-vicente: 1
+    alex-su: 1
+    alexandre-romana: 1
+    alexandros-lamprineas: 1
+    andrew-choi: 2
+    andrew-kilroy: 1
+    ann-cheng: 1
+    anna-mayne: 1
+    annie-tallund: 16
+    anton-antonov: 2
+    anupras-mohapatra: 2
+    arnaud-de-grandmaison: 7
+    arnaud-grasset: 1
+    aryan-bhusari: 1
+    asher-dobrescu: 1
+    asier-arranz: 1
+    aude-vuilliomenet: 1
+    ayoub-bourjilat: 2
+    barbara-corriero: 1
+    basma-el-gaabouri: 1
+    ben-clark: 3
+    bhanu-arya: 1
+    bolt-liu: 2
+    brenda-strech: 1
+    brendan-long: 2
+    bright-edudzi-gershon-kordorwu: 1
+    chaodong-gong: 1
+    chen-zhang: 1
+    chenying-kuo: 1
+    chris-moroney: 1
+    christophe-favergeon: 1
+    christopher-seidl: 7
+    claudio-martino: 1
+    cyril-rohr: 1
+    damien-dooley: 1
+    daniel-gubay: 1
+    daniel-nguyen: 2
+    daniel-schleicher: 1
+    david-spickett: 2
+    david-wong: 1
+    dawid-borycki: 35
+    diego-russo: 2
+    dominica-abena-o.-amanfo: 2
+    doug-anson: 4
+    elham-harirpoush: 2
+    fidel-makatia-omusilibwa: 2
+    florent-lebeau: 5
+    frédéric--lefred--descamps: 2
+    gabriel-peterson: 6
+    gayathri-narayana-yegna-narayanan: 2
+    georgios-mermigkis: 1
+    geremy-cohen: 7
+    gian-marco-iodice: 1
+    graham-woodward: 1
+    han-yin: 1
+    iago-calvo-lista: 1
+    james-whitaker: 1
+    jason-andrews: 120
+    jason-zhu: 1
+    jeff-young: 1
+    jett-zhou: 1
+    jiaming-guo: 1
+    joana-cruz: 2
+    joe-stech: 7
+    johanna-skinnider: 2
+    johnny-nunez: 1
+    jonathan-davies: 2
+    jose-emilio-munoz-lopez: 1
+    joshua-marshall-law: 4
+    julie-gaskin: 6
+    julien-jayat: 1
+    julien-simon: 2
+    julio-suarez: 6
+    jun-he: 1
+    kasper-mecklenburg: 1
+    kavya-sri-chennoju: 2
+    kelsey-steele: 1
+    ken-zhang: 1
+    ker-liu: 1
+    kiel-friedt: 1
+    kieran-hejmadi: 18
+    koki-mitsunami: 2
+    konstantinos-margaritis: 8
+    kristof-beyls: 1
+    leandro-nunes: 1
+    liliya-wu: 1
+    marek-michałowski: 1
+    mark-thurman: 1
+    martin-ma: 1
+    masoud-koleini: 1
+    mathias-brossard: 1
+    matt-cossins: 2
+    michael-hall: 6
+    mohamad-najem: 1
+    mohamed-ismail: 1
+    na-li: 1
+    nader-zouaoui: 2
+    neethu-elizabeth-simon: 1
+    nikhil-gupta: 3
+    nina-drozd: 2
+    nobel-chowdary-mandepudi: 6
+    odin-shen: 22
+    owen-wu: 2
+    pareena-verma: 103
+    parichay-das: 1
+    paschalis-mpeis: 1
+    paul-howard: 3
+    peter-harris: 1
+    phalani-paladugu: 1
+    pranay-bakre: 5
+    preema-merlin-dsouza: 1
+    prince-agyeman: 1
+    przemyslaw-wirkus: 2
+    qixiang-xu: 2
+    rani-chowdary-mandepudi: 2
+    raymond-lo: 1
+    richard-burton: 2
+    roberto-lopez-mendez: 2
+    ronan-synnott: 45
+    rui-chang: 1
+    ruifeng-wang: 1
+    sabika-tasneem: 1
+    shuheng-deng: 1
+    steve-jordahl: 1
+    steve-suzuki: 1
+    sue-wu: 1
+    thirdai: 1
+    tianyu-li: 2
+    tinkerblox: 1
+    tom-dunkle: 1
+    tom-pilar: 1
+    tomas-agustin-gonzalez-orlando: 1
+    tyler-mullenbach: 1
+    uma-ramalingam: 1
+    varun-chari: 3
+    victor-do-nascimento: 1
+    waheed-brown: 3
+    willen-yang: 1
+    william-liang: 1
+    yahya-abouelseoud: 1
+    ying-yu: 4
+    yiyang-fan: 1
+    zach-lasiuk: 2
+    zbynek-roubalik: 1
+    zenon-zhilong-xiu: 4
+    zhengjun-xing: 2
+    éliás-bálint: 1
+  contributions:
+    internal: 493
+    external: 134
+  github:
+    stars: 145
+    forks: 297
+    open_prs: 10
+- date: '2026-07-06'
+  content:
+    total: 541
+    install-guides: 102
+    automotive: 9
+    cross-platform: 47
+    embedded-and-microcontrollers: 79
+    laptops-and-desktops: 85
+    mobile-graphics-and-gaming: 75
+    servers-and-cloud-computing: 261
+  individual_authors:
+    adnan-alsinan: 3
+    ajeet-singh-raina: 1
+    akash-malik: 2
+    alaaeddine-chakroun: 2
+    albin-bernhardsson: 2
+    alejandro-martinez-vicente: 1
+    alex-su: 1
+    alexandre-romana: 1
+    alexandros-lamprineas: 1
+    andrew-choi: 2
+    andrew-kilroy: 1
+    ann-cheng: 1
+    anna-mayne: 1
+    annie-tallund: 16
+    anton-antonov: 2
+    anupras-mohapatra: 2
+    arnaud-de-grandmaison: 7
+    arnaud-grasset: 1
+    aryan-bhusari: 1
+    asher-dobrescu: 1
+    asier-arranz: 1
+    aude-vuilliomenet: 1
+    ayoub-bourjilat: 2
+    barbara-corriero: 1
+    basma-el-gaabouri: 1
+    ben-clark: 3
+    bhanu-arya: 1
+    bolt-liu: 2
+    brenda-strech: 1
+    brendan-long: 2
+    bright-edudzi-gershon-kordorwu: 1
+    chaodong-gong: 1
+    chen-zhang: 1
+    chenying-kuo: 1
+    chris-moroney: 1
+    christophe-favergeon: 1
+    christopher-seidl: 7
+    claudio-martino: 1
+    cyril-rohr: 1
+    damien-dooley: 1
+    daniel-gubay: 1
+    daniel-nguyen: 2
+    daniel-schleicher: 1
+    david-spickett: 2
+    david-wong: 1
+    dawid-borycki: 35
+    diego-russo: 2
+    dominica-abena-o.-amanfo: 2
+    doug-anson: 5
+    elham-harirpoush: 2
+    fidel-makatia-omusilibwa: 2
+    florent-lebeau: 5
+    frédéric--lefred--descamps: 2
+    gabriel-peterson: 6
+    gayathri-narayana-yegna-narayanan: 2
+    georgios-mermigkis: 1
+    geremy-cohen: 7
+    gian-marco-iodice: 1
+    graham-woodward: 1
+    han-yin: 1
+    iago-calvo-lista: 1
+    jai-adam-schrem: 1
+    james-whitaker: 1
+    jason-andrews: 120
+    jason-zhu: 1
+    jeff-young: 1
+    jett-zhou: 1
+    jiaming-guo: 1
+    joana-cruz: 2
+    joe-stech: 7
+    johanna-skinnider: 2
+    johnny-nunez: 1
+    jonathan-davies: 2
+    jose-emilio-munoz-lopez: 1
+    joshua-marshall-law: 4
+    julie-gaskin: 6
+    julien-jayat: 1
+    julien-simon: 2
+    julio-suarez: 6
+    jun-he: 1
+    kasper-mecklenburg: 1
+    kavya-sri-chennoju: 2
+    kelsey-steele: 1
+    ken-zhang: 1
+    ker-liu: 1
+    kiel-friedt: 1
+    kieran-hejmadi: 18
+    koki-mitsunami: 2
+    konstantinos-margaritis: 8
+    kristof-beyls: 1
+    leandro-nunes: 1
+    liliya-wu: 1
+    marek-michałowski: 1
+    mark-thurman: 1
+    martin-ma: 1
+    masoud-koleini: 1
+    mathias-brossard: 1
+    matt-cossins: 2
+    michael-hall: 6
+    mohamad-najem: 1
+    mohamed-ismail: 1
+    na-li: 1
+    nader-zouaoui: 2
+    neethu-elizabeth-simon: 1
+    nikhil-gupta: 3
+    nina-drozd: 2
+    nobel-chowdary-mandepudi: 6
+    odin-shen: 22
+    owen-wu: 2
+    pareena-verma: 103
+    parichay-das: 1
+    paschalis-mpeis: 1
+    paul-howard: 3
+    peter-harris: 1
+    phalani-paladugu: 1
+    pranay-bakre: 5
+    preema-merlin-dsouza: 1
+    prince-agyeman: 1
+    przemyslaw-wirkus: 2
+    qixiang-xu: 2
+    rani-chowdary-mandepudi: 2
+    raymond-lo: 1
+    richard-burton: 2
+    roberto-lopez-mendez: 2
+    ronan-synnott: 45
+    rui-chang: 1
+    ruifeng-wang: 1
+    sabika-tasneem: 1
+    shuheng-deng: 1
+    steve-jordahl: 1
+    steve-suzuki: 1
+    sue-wu: 1
+    thirdai: 1
+    tianyu-li: 2
+    tinkerblox: 1
+    tom-dunkle: 1
+    tom-pilar: 1
+    tomas-agustin-gonzalez-orlando: 2
+    tyler-mullenbach: 1
+    uma-ramalingam: 1
+    varun-chari: 3
+    victor-do-nascimento: 1
+    waheed-brown: 3
+    willen-yang: 1
+    william-liang: 1
+    yahya-abouelseoud: 1
+    ying-yu: 4
+    yiyang-fan: 1
+    zach-lasiuk: 2
+    zbynek-roubalik: 1
+    zenon-zhilong-xiu: 4
+    zhengjun-xing: 2
+    éliás-bálint: 1
+  contributions:
+    internal: 496
+    external: 134
+  github:
+    stars: 145
+    forks: 299
+    open_prs: 12
+- date: '2026-07-13'
+  content:
+    total: 541
+    install-guides: 102
+    automotive: 9
+    cross-platform: 47
+    embedded-and-microcontrollers: 79
+    laptops-and-desktops: 85
+    mobile-graphics-and-gaming: 75
+    servers-and-cloud-computing: 261
+  individual_authors:
+    adnan-alsinan: 3
+    ajeet-singh-raina: 1
+    akash-malik: 2
+    alaaeddine-chakroun: 2
+    albin-bernhardsson: 2
+    alejandro-martinez-vicente: 1
+    alex-su: 1
+    alexandre-romana: 1
+    alexandros-lamprineas: 1
+    andrew-choi: 2
+    andrew-kilroy: 1
+    ann-cheng: 1
+    anna-mayne: 1
+    annie-tallund: 16
+    anton-antonov: 2
+    anupras-mohapatra: 2
+    arnaud-de-grandmaison: 7
+    arnaud-grasset: 1
+    aryan-bhusari: 1
+    asher-dobrescu: 1
+    asier-arranz: 1
+    aude-vuilliomenet: 1
+    ayoub-bourjilat: 2
+    barbara-corriero: 1
+    basma-el-gaabouri: 1
+    ben-clark: 3
+    bhanu-arya: 1
+    bolt-liu: 2
+    brenda-strech: 1
+    brendan-long: 2
+    bright-edudzi-gershon-kordorwu: 1
+    chaodong-gong: 1
+    chen-zhang: 1
+    chenying-kuo: 1
+    chris-moroney: 1
+    christophe-favergeon: 1
+    christopher-seidl: 7
+    claudio-martino: 1
+    cyril-rohr: 1
+    damien-dooley: 1
+    daniel-gubay: 1
+    daniel-nguyen: 2
+    daniel-schleicher: 1
+    dave-neary: 1
+    david-spickett: 2
+    david-wong: 1
+    dawid-borycki: 35
+    diego-russo: 2
+    dominica-abena-o.-amanfo: 2
+    doug-anson: 5
+    elham-harirpoush: 2
+    fidel-makatia-omusilibwa: 2
+    florent-lebeau: 5
+    frédéric--lefred--descamps: 2
+    gabriel-peterson: 6
+    gayathri-narayana-yegna-narayanan: 2
+    georgios-mermigkis: 1
+    geremy-cohen: 7
+    gian-marco-iodice: 1
+    graham-woodward: 1
+    han-yin: 1
+    iago-calvo-lista: 1
+    jai-adam-schrem: 1
+    james-whitaker: 1
+    jason-andrews: 120
+    jason-zhu: 1
+    jeff-young: 1
+    jett-zhou: 1
+    jiaming-guo: 1
+    joana-cruz: 2
+    joe-stech: 8
+    johanna-skinnider: 2
+    johnny-nunez: 1
+    jonathan-davies: 2
+    jose-emilio-munoz-lopez: 1
+    joshua-marshall-law: 4
+    julie-gaskin: 6
+    julien-jayat: 1
+    julien-simon: 2
+    julio-suarez: 6
+    jun-he: 1
+    kasper-mecklenburg: 1
+    kavya-sri-chennoju: 2
+    kelsey-steele: 1
+    ken-zhang: 1
+    ker-liu: 1
+    kiel-friedt: 1
+    kieran-hejmadi: 18
+    koki-mitsunami: 2
+    konstantinos-margaritis: 8
+    kristof-beyls: 1
+    leandro-nunes: 1
+    liliya-wu: 1
+    marek-michałowski: 1
+    mark-thurman: 1
+    martin-ma: 1
+    masoud-koleini: 1
+    mathias-brossard: 1
+    matt-cossins: 2
+    michael-hall: 6
+    mohamad-najem: 1
+    mohamed-ismail: 1
+    na-li: 1
+    nader-zouaoui: 2
+    neethu-elizabeth-simon: 1
+    nikhil-gupta: 3
+    nina-drozd: 2
+    nobel-chowdary-mandepudi: 6
+    odin-shen: 22
+    owen-wu: 2
+    pareena-verma: 103
+    parichay-das: 1
+    paschalis-mpeis: 1
+    paul-howard: 3
+    peter-harris: 1
+    phalani-paladugu: 1
+    pranay-bakre: 5
+    preema-merlin-dsouza: 1
+    prince-agyeman: 1
+    przemyslaw-wirkus: 2
+    qixiang-xu: 2
+    rani-chowdary-mandepudi: 3
+    raymond-lo: 1
+    richard-burton: 2
+    roberto-lopez-mendez: 2
+    ronan-synnott: 45
+    rui-chang: 1
+    ruifeng-wang: 1
+    sabika-tasneem: 1
+    shuheng-deng: 1
+    steve-jordahl: 1
+    steve-suzuki: 1
+    sue-wu: 1
+    thirdai: 1
+    tianyu-li: 2
+    tinkerblox: 1
+    tom-dunkle: 1
+    tom-pilar: 1
+    tomas-agustin-gonzalez-orlando: 2
+    tyler-mullenbach: 1
+    uma-ramalingam: 1
+    varun-chari: 3
+    victor-do-nascimento: 1
+    waheed-brown: 3
+    willen-yang: 1
+    william-liang: 1
+    yahya-abouelseoud: 1
+    ying-yu: 4
+    yiyang-fan: 1
+    zach-lasiuk: 2
+    zbynek-roubalik: 1
+    zenon-zhilong-xiu: 4
+    zhengjun-xing: 2
+    éliás-bálint: 1
+  contributions:
+    internal: 498
+    external: 135
+  github:
+    stars: 146
+    forks: 303
+    open_prs: 10

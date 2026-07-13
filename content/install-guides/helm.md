@@ -1,5 +1,6 @@
 ---
 title: Helm
+description: Install Helm on Ubuntu for Arm and verify the setup so you can manage Kubernetes applications with charts.
 
 author: Jason Andrews
 minutes_to_complete: 10

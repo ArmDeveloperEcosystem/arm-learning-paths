@@ -1,5 +1,6 @@
 ---
 title: Cyclone DDS
+description: Build and install Eclipse Cyclone DDS on Arm Linux and test the setup for real-time publish-subscribe communication in robotics and IoT applications.
 author: Odin Shen
 minutes_to_complete: 20
 official_docs: https://cyclonedds.io/
@@ -119,4 +120,4 @@ If you observe the following output from each of the terminals, Cyclone DDS is r
   {{< /tab >}}
 {{< /tabpane >}}
 
-You are now ready to use Cyclone DDS. 
+You are now ready to use Cyclone DDS.

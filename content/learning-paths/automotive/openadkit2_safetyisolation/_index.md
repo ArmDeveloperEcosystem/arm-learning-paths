@@ -16,9 +16,68 @@ prerequisites:
     - Completion of the [Deploy Open AD Kit containerized autonomous driving simulation on Arm Neoverse](/learning-paths/automotive/openadkit1_container/) Learning Path
     - Basic familiarity with Docker
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-06-24T15:35:59Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 92a6dac2b1674a44cd623a0c8c3189b38438124a6067ed7ca776999ff1d8b5bf
+  summary_generated_at: '2026-06-24T15:35:59Z'
+  summary_source_hash: 92a6dac2b1674a44cd623a0c8c3189b38438124a6067ed7ca776999ff1d8b5bf
+  faq_generated_at: '2026-06-24T15:35:59Z'
+  faq_source_hash: 92a6dac2b1674a44cd623a0c8c3189b38438124a6067ed7ca776999ff1d8b5bf
+  summary: >-
+    You'll learn about prototyping safety‑critical isolation for autonomous
+    driving workloads on Arm Neoverse by applying functional safety concepts, ISO 26262 and ASIL
+    guidance, and a safety‑island architecture. First, you'll understand how to separate safety‑critical control
+    logic from non‑safety functions. Then, you'll connect components using a publish‑subscribe model (DDS/ROS
+    2) within containerized deployments or across Arm‑based instances. You'll explore lifecycle
+    practices aligned with the V‑model, including clear requirements, version control, impact
+    analysis, and regression testing. By the end, you'll organize simulation components into
+    isolated units with defined interfaces and documentation suitable for advancing ISO 26262‑oriented
+    development on Arm Neoverse.
+  faqs:
+  - question: How do I decide which components belong on the safety island versus the general
+      ECU?
+    answer: >-
+      Place time‑critical, safety‑relevant control logic (for example, braking or steering) on
+      the safety island, and keep non‑critical features (such as infotainment) on the general
+      ECU. The goal is strong isolation, determinism, and minimized coupling for safety‑critical
+      paths.
+  - question: What should I verify to confirm the isolation boundaries are defined correctly?
+    answer: >-
+      Check that safety‑critical components run independently from non‑critical services and communicate
+      only through defined publish‑subscribe interfaces. Ensure data exchanged is minimal and
+      purpose‑specific so that safety logic is not impacted by unrelated functions.
+  - question: How do ISO 26262 ASIL levels influence my development workflow in this prototype?
+    answer: >-
+      Higher ASIL targets require more rigorous processes and evidence across the V‑model. For
+      example, ASIL‑D changes go through full impact analysis and regression testing to prevent
+      introducing new risks.
+  - question: Should I separate components using containers on one host or across multiple Arm
+      Neoverse instances?
+    answer: >-
+      Both approaches support prototyping: containers model software isolation on one system,
+      while multiple instances model stronger physical separation. Choose the option that best
+      matches the isolation assumptions you want to evaluate.
+  - question: What artifacts should I capture to support ISO 26262 traceability in this prototype?
+    answer: >-
+      Maintain clear safety requirements, rationale for the safety‑island split, defined DDS/ROS
+      2 interfaces, and mapped tests to requirements. Record versioned changes, impact analyses,
+      and verification results aligned to the V‑model stages.
+# END generated_summary_faq
+
 author: 
     - Odin Shen
     - Julien Jayat
+
+generate_summary_faq: false
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -66,8 +125,6 @@ further_reading:
         title: Eclipse Cyclone DDS 
         link: https://github.com/eclipse-cyclonedds/cyclonedds
         type: documentation
-    
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
@@ -75,3 +132,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

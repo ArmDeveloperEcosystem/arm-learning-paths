@@ -14,6 +14,7 @@ test_images:
 test_link: null
 test_maintenance: true
 title: Native compiler
+description: Install native GCC and G++ packages on Arm Linux so you can compile C and C++ applications directly on an Arm machine.
 tool_install: false
 weight: 2
 ---

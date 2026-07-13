@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Deploy and run Mobilenet V2 on the Corstone-320 FVP"
+description: Deploy MobileNet V2 with ExecuTorch on the Corstone-320 FVP and verify model execution.
 
 weight: 6 # 1 is first, 2 is second, etc.
 

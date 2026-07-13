@@ -1,5 +1,6 @@
 ---
 title: AWS IoT Greengrass
+description: Install AWS IoT Greengrass on an Arm device and register it with AWS so you can build and manage IoT edge applications.
 author: Michael Hall
 additional_search_terms:
 - iot

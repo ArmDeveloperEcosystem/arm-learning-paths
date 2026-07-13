@@ -1,5 +1,6 @@
 ---
 title: Build and Run a Smart Home Assistant on Raspberry Pi 5 with LLMs
+description: Build and run the web-based Raspberry Pi 5 smart home assistant that uses a local LLM to control GPIO devices.
 weight: 5
 
 ### FIXED, DO NOT MODIFY

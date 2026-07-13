@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Docker Desktop for Arm Linux
+description: Install Docker Desktop on Arm Linux and verify the setup so you can run container workflows with the Docker Desktop environment.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:

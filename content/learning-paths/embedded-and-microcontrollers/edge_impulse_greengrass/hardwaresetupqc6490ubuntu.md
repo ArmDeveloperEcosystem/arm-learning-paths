@@ -1,5 +1,6 @@
 ---
 hide_from_navpane: true
+description: Set up a Qualcomm Dragonwing QC6490 board with Ubuntu and install the packages needed for Edge Impulse Greengrass.
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

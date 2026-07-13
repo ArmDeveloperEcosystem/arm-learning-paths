@@ -9,6 +9,10 @@ minutes_to_complete: 90
 
 author: Christopher Seidl
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 who_is_this_for: >
     This is an advanced topic for software developers who want to debug microcontrollers using µVision.
 # One sentence that should indicate exactly who the target audience is (developers in X industries using Y tools/software for Z use-case).
@@ -32,7 +36,6 @@ prerequisites:
     # Previous learning paths                                   (The Learning Path: Getting Started with Arm Virtual Hardware)
     # Particular tools/environments already being initialized   (An EC2 instance with AVH installed)
 
-
 ##### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
@@ -44,8 +47,6 @@ operatingsystems:
 tools_software_languages:
     - Keil MDK
     - FVP
-
-
 
 further_reading:
     - resource:
@@ -68,7 +69,6 @@ further_reading:
         title: List of supported boards
         link: https://keil.arm.com/boards
         type: website
-
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

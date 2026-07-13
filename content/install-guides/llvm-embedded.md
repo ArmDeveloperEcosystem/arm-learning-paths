@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: LLVM Embedded Toolchain for Arm
+description: Install the LLVM Embedded Toolchain for Arm on Windows, macOS, or Linux and verify clang for Cortex-M embedded development.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
