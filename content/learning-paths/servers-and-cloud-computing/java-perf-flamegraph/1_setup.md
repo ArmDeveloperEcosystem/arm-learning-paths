@@ -27,14 +27,27 @@ sudo apt install -y openjdk-21-jdk
 
 ## Install Tomcat 
 
+First check that latest version of `tomcat 11` available with the following command.
+
+```bash
+  TOMCAT_VERSION=$(
+    wget -qO- https://downloads.apache.org/tomcat/tomcat-11/ \
+      | grep -oE 'v11\.0\.[0-9]+/' \
+      | sed 's#[v/]##g' \
+      | sort -V \
+      | tail -n1
+  )
+echo $TOMCAT_VERSION
+```
+
 Download and extract Tomcat:
 
 ```bash
-wget -c https://dlcdn.apache.org/tomcat/tomcat-11/v11.0.22/bin/apache-tomcat-11.0.22.tar.gz
-tar xzf apache-tomcat-11.0.22.tar.gz
+wget -c "https://downloads.apache.org/tomcat/tomcat-11/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz"
+tar xzf "apache-tomcat-${TOMCAT_VERSION}.tar.gz"
 ```
 
-Alternatively, you can build Tomcat [from source](https://github.com/apache/tomcat).
+If the command above fails, you can manually find the latest version on the [Tomcat 11 downloads page](https://downloads.apache.org/tomcat/tomcat-11/). Alternatively, you can build Tomcat [from source](https://github.com/apache/tomcat). 
 
 ## Enable access to Tomcat examples
 
@@ -43,7 +56,7 @@ To access the built-in examples from your local network or external IP, use a te
 The file is at:
 
 ```bash
-apache-tomcat-11.0.22/webapps/examples/META-INF/context.xml
+apache-tomcat-${TOMCAT_VERSION}$/webapps/examples/META-INF/context.xml
 ```
 
 ```output
@@ -51,14 +64,15 @@ from ...
 <Valve className="org.apache.catalina.valves.RemoteCIDRValve"
          allow="127.0.0.0/8,::1/128" />
 to ...
-<Valve className="org.apache.catalina.valves.RemoteAddrValve" allow=".*" />
+<Valve className="org.apache.catalina.valves.RemoteAddrValve" 
+         allow=".*" />
 ```
 ## Start the Tomcat server
 
 Start the server:
 
 ```bash
-./apache-tomcat-11.0.22/bin/startup.sh```
+./apache-tomcat-${TOMCAT_VERSION}/bin/startup.sh```
 
 You should see output like:
 
@@ -74,7 +88,7 @@ Tomcat started.
 
 ## Confirm server access
 
-In your browser, open: `http://${tomcat_ip}:8080/examples`.
+In your browser, open: `http://${tomcat_ip}:8080`.
 
 You should see the Tomcat welcome page and examples, as shown below:
 
