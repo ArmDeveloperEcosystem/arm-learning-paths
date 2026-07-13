@@ -14,7 +14,7 @@ find src/shoppingassistantservice -maxdepth 2 -type f | sort
 find kustomize/components/shopping-assistant -maxdepth 2 -type f | sort
 ```
 
-You should see the assistant source folder and the `shopping-assistant` Kustomize component.
+You'll see the assistant source folder and the `shopping-assistant` Kustomize component.
 
 {{% notice Note %}}
 If you see a `__pycache__` directory, ignore it. Python creates that directory during local syntax checks.

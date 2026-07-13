@@ -1,6 +1,6 @@
 ---
 title: Deploy and validate the storefront baseline on the Google N4A node pool
-description: Deploy the Online Boutique storefront on N4A and confirm that the assistant service has not been deployed yet.
+description: Deploy the Online Boutique storefront on N4A and confirm that the assistant service hasn't been deployed yet.
 weight: 4
 layout: "learningpathall"
 ---
@@ -11,7 +11,7 @@ Before you add the assistant tier, create and confirm the starting state of the 
 
 - The cluster contains N4A and C4A node pools.
 - The storefront baseline runs on N4A after you apply the baseline overlay.
-- `shoppingassistantservice` is not running yet.
+- `shoppingassistantservice` isn't running yet.
 
 If you're running this Learning Path in a cluster that already has the assistant from an earlier run, remove the old assistant resources before you create the baseline:
 
