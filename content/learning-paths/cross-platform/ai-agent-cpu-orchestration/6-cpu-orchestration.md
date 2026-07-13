@@ -47,4 +47,4 @@ Each experiment shifts the balance between CPU and GPU work and makes the orches
 
 You've now connected the agent's timeline to the CPU and GPU work behind each query. You've also seen how the number of query variants, the size of the model, and browsing concurrency change that balance.
 
-You can use what you've learned in this Learning Path to update your own agentic workflows so that CPU orchestration is more efficient. 
+You can use what you've learned in this Learning Path to build your own agentic workflows on Arm for efficient orchestration. 
