@@ -13,7 +13,7 @@ Before you add the assistant tier, create and confirm the starting state of the 
 - The storefront baseline runs on N4A after you apply the baseline overlay.
 - `shoppingassistantservice` isn't running yet.
 
-If you're running this Learning Path in a cluster that already has the assistant from an earlier run, remove the old assistant resources before you create the baseline:
+If you're running these steps in a cluster that already has the assistant from an earlier run, remove the old assistant resources before you create the baseline:
 
 ```bash
 kubectl delete deployment shoppingassistantservice --ignore-not-found
