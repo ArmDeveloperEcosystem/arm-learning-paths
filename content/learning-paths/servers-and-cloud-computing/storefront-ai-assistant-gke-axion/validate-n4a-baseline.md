@@ -13,8 +13,6 @@ Before you add the assistant tier, create and confirm the starting state of the 
 - The storefront baseline runs on N4A after you apply the baseline overlay.
 - `shoppingassistantservice` is not running yet.
 
-The missing assistant is intentional. It's the service you build and deploy in the next steps.
-
 If you're running this Learning Path in a cluster that already has the assistant from an earlier run, remove the old assistant resources before you create the baseline:
 
 ```bash
