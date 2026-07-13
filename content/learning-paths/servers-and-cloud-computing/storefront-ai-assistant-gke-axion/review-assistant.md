@@ -17,7 +17,7 @@ find kustomize/components/shopping-assistant -maxdepth 2 -type f | sort
 You should see the assistant source folder and the `shopping-assistant` Kustomize component.
 
 {{% notice Note %}}
-If you see a `__pycache__` directory, you can ignore it. Python creates that directory during local syntax checks.
+If you see a `__pycache__` directory, ignore it. Python creates that directory during local syntax checks.
 {{% /notice %}}
 
 ## Review the runtime dependencies and gRPC stubs

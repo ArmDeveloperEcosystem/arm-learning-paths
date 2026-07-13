@@ -136,7 +136,7 @@ yes
 What is in my cart now?
 ```
 
-The assistant should recommend a catalog item, ask for confirmation before changing the cart, and then show the cart contents.
+The assistant recommends a catalog item, ask for confirmation before changing the cart, and then show the cart contents.
 
 ## What you've accomplished and what's next
 

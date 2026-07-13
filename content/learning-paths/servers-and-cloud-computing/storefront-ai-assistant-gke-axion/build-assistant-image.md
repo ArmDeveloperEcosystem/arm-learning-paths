@@ -1,5 +1,5 @@
 ---
-title: Build and push the assistant image
+title: Build and push the assistant image to Artifact Registry
 description: Build the shopping assistant container image for arm64 and push it to Artifact Registry for deployment on Axion.
 weight: 6
 layout: "learningpathall"
@@ -28,7 +28,7 @@ Confirm the reusable image path you configured during setup:
 echo "${ASSISTANT_IMAGE}"
 ```
 
-## Build and push the assistant image
+## Use buildx to build and push the assistant image
 
 Build the assistant image for `linux/arm64` and push it to Artifact Registry:
 
