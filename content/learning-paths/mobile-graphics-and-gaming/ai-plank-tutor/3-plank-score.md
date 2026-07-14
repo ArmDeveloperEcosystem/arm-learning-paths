@@ -68,7 +68,7 @@ private fun midpoint(pointA: NormalizedLandmark, pointB: NormalizedLandmark) =
 
 MediaPipe landmarks are normalized coordinates. The `x` and `y` values are relative to the input image, and `z` gives relative depth.
 
-Because this demo compares normalized landmarks from a fixed instructor reference, the score is view-dependent. It works best when the learner is side-on to the camera, fully visible, and at a similar orientation to the reference image.
+While this demo compares normalized landmarks from a fixed instructor reference, the score is still fairly view-dependent. It works best when the learner is side-on to the camera, fully visible, and at a similar orientation to the reference image.
 
 ## Calculate a 3D angle
 
