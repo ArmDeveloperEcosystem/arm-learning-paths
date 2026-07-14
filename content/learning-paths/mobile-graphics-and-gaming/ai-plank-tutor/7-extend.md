@@ -116,7 +116,7 @@ A high-level workflow is:
 
    Run the app with real camera input. Check whether the model gives short, useful corrections, whether latency is acceptable, and whether repeated prompts produce varied but consistent feedback.
 
-Fine-tuning is not included as a formal step in this Learning Path because it adds dataset design, training infrastructure, model conversion, quantization, and evaluation. However, it can make a significant quality difference to the app by making responses more consistent. Treat it as a follow-up project once the app pipeline is working.
+Fine-tuning is not included as a formal step in this Learning Path because it adds dataset design, training infrastructure, model conversion, quantization, and evaluation. However, it can make a significant quality difference to the app by making responses more accurate, natural, and stylistically consistent with the intended yoga instructor persona. Treat it as a follow-up project once the app pipeline is working.
 
 ## Extend beyond one pose
 
