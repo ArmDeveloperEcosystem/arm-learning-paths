@@ -12,10 +12,12 @@ Before you optimize, identify where the application spends most of its time. Use
 
 Open Arm Performix and select the **Code Hotspots** recipe. If this is your first run on the target, complete tool deployment as prompted.
 
-Set the launch command to your baseline binary with the number of tokens (`-n`) set to 150 as per the command below. This value keeps startup overhead small compared to inference time, so the profile minimizes the time taken to load the model weights:
+Set the launch command to your baseline binary with the number of tokens (`-n`) set to 150 as per the command below. This value keeps startup overhead small compared to inference time, so the profile minimizes the time taken to load the model weights.
 
-```out
-<path to repository>/build/gpt2 --model gpt2-medium "Once upon a time" -n  150
+Copy and paste the command below as the Performix Workload. If your path is different adjust it to point to `gpt2`. 
+
+```console
+/home/ubuntu/GPT-2-Example/build/gpt2 --model gpt2-medium "Once upon a time" -n  150
 ```
 
 ![Arm Performix Code Hotspots recipe configuration showing launch arguments for the GPT-2 baseline run with -n 150 to emphasize inference runtime.#center](./code_hotspot.webp "Code Hotspots recipe configuration for GPT-2 baseline")
@@ -38,12 +40,15 @@ The Instruction Mix recipe helps fill this gap.
 
 ## Configure the Instruction Mix recipe
 
-Open Arm Performix and select the **Instruction Mix** recipe. If this is your first run on the target, complete tool deployment as prompted.
+Open Arm Performix and select the **Instruction Mix** recipe. 
+
 Set the launch command to your baseline binary with the same runtime arguments used for baseline testing:
 
-```output
-</path/to/GPT-2-Example>/build/gpt2 --model gpt2-medium "Once upon a time" -n 150`
+```console
+/home/ubuntu/GPT-2-Example/build/gpt2 --model gpt2-medium "Once upon a time" -n  150
 ```
+
+Note about number of counters.
 
 Use the same model and prompt arguments as your baseline terminal run so the measurements are comparable.
 
@@ -63,6 +68,6 @@ Then inspect dynamic analysis bar chart to see where sampled runtime work is con
 
 Finally, in dynamic functions, you can break down operation types to individual functions. This is particularly useful when no single function dominates the profile, allowing you to inspect dynamic instruction patterns for specific functions.
 
-## What you've learned and what's next
+## Next steps
 
-You used Instruction Mix to confirm that baseline runtime is dominated by scalar-heavy `matmul` execution. Next, you will compare updated instruction mix and throughput across scalar, NEON, SVE, and KleidiAI variants.
+You used Instruction Mix to confirm that baseline runtime is dominated by scalar-heavy `matmul` execution. Next, you'll compare updated instruction mix and throughput across scalar, NEON, SVE, and KleidiAI variants.
