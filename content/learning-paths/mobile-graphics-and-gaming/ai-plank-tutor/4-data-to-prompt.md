@@ -154,7 +154,7 @@ Build and run the app on your Android device.
 
 Open Logcat and filter for `MainActivity`. As you move in front of the camera, expect short prompts that describe the largest differences from the reference plank pose.
 
-This Logcat check is the validation step for the prompt stage. Expect compact text prompts, not raw landmarks or image data.
+This Logcat check is the validation step for the prompt stage. 
 
 The app now has the complete input side of the tutor pipeline:
 
