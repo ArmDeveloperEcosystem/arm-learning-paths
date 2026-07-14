@@ -21,9 +21,9 @@ Improved performance can give you higher throughput, lower latency, or better co
 
 ## Example benchmark result
 
-The following example shows MySQL throughput with HammerDB TPROC-C before and after tuning on an Arm Neoverse V3 system.
+The following example shows MySQL throughput with HammerDB TPROC-C before and after tuning on an Arm Neoverse V3 system. The throughput metric, NOPM, stands for New Orders Per Minute.
 
-![Bar chart comparing MySQL HammerDB TPROC-C normalized NOPM throughput before and after tuning on an Arm Neoverse V3 system. At 128 clients, the out-of-box configuration is 1.00 and the tuned configuration is 15.37.#center](oobvstuned.webp "MySQL HammerDB TPROC-C throughput before and after tuning")
+![Bar chart comparing MySQL HammerDB TPROC-C normalized NOPM throughput before and after tuning on an Arm Neoverse V3 system. At 128 clients, the out-of-box configuration is 1.00 and the tuned configuration is 6.00.#center](oobvstuned.png "MySQL HammerDB TPROC-C throughput before and after tuning")
 
 This benchmark result is an example, not a guaranteed improvement for every workload. Your results depend on the MySQL version, database size, storage device, memory capacity, client thread count, and the queries used in the test.
 
@@ -35,4 +35,4 @@ Links to MySQL documentation in this Learning Path point to the latest version o
 
 You've now learned why tuning MySQL is beneficial, and reviewed an example benchmark result demonstrating improvement in throughput after tuning. 
 
-Next, you'll learn about different system parameters that you can tune for performance. 
+Next, you'll learn about different system parameters that you can tune for performance.
