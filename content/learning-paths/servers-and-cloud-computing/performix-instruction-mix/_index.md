@@ -1,6 +1,10 @@
 ---
 title: Profile GPT-2 instruction mix with Arm Performix
 
+draft: true
+cascade:
+    draft: true
+
 description: Learn how to profile GPT-2 inference on Arm Neoverse with the Arm Performix Instruction Mix recipe, identify scalar versus vector execution patterns, and improve throughput with NEON, SVE, and KleidiAI kernels.
 
 minutes_to_complete: 45
@@ -17,7 +21,7 @@ prerequisites:
     - Access to Arm Performix configured with a remote Arm Linux target. For setup, see the [Arm Performix install guide](/install-guides/performix/)
     - Basic understanding of C++ and compiler optimization
     - Basic understanding of matrix multiplication
-    - Basic understanding of writing SIMD code with Neon and/or SVE.
+    - Basic understanding of writing SIMD code with Neon or SVE
 
 author:
     - Kieran Hejmadi
@@ -30,7 +34,7 @@ armips:
     - Neoverse
 tools_software_languages:
     - Arm Performix
-    - C++
+    - C
     - LLM
     - NEON
     - SVE

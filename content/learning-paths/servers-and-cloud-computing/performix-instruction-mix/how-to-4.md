@@ -1,5 +1,5 @@
 ---
-title: Optimize
+title: Optimize matmul with vector intrinsics
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -66,6 +66,6 @@ Restart your coding assistant, then prompt it to run Performix Instruction Mix a
 
 ![Screenshot of a coding assistant prompt configured to use Arm MCP Server tools for running Performix recipes and analyzing matmul_user optimization opportunities in the GPT-2 workload.#center](./mcp-performix-prompt.webp "Coding assistant prompt for Performix analysis through Arm MCP Server")
 
-## What you've learned and what's next
+## Next steps
 
-In this optional section, you implemented and profiled a custom `matmul_user` kernel using the same workflow you used for baseline analysis. Next, you will compare instruction mix and throughput across scalar, NEON, SVE, and KleidiAI variants.
+In this optional section, you implemented and profiled a custom `matmul_user` kernel using the same workflow you used for baseline analysis. Next, you'll compare instruction mix and throughput across scalar, NEON, SVE, and KleidiAI variants.

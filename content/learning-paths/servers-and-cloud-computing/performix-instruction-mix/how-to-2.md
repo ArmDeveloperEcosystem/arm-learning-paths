@@ -24,7 +24,7 @@ git checkout tags/v0.0.2
 
 The C++ runtime expects exported model binaries. Create a Python virtual environment, install dependencies, and export GPT-2 Medium weights and vocabulary:
 
-This Learning Path uses [openai-community/gpt2-medium on Hugging Face](https://huggingface.co/openai-community/gpt2-medium), which corresponds to the GPT-2 Medium model from the original OpenAI GPT-2 release in 2019. The model has 355 million parameters, and in this workflow it runs with unquantized FP32 (32-bit floating-point) weights.
+The workload uses [openai-community/gpt2-medium on Hugging Face](https://huggingface.co/openai-community/gpt2-medium), which corresponds to the GPT-2 Medium model from the original OpenAI GPT-2 release in 2019. The model has 355 million parameters, and in this workflow it runs with unquantized FP32 (32-bit floating-point) weights.
 
 ```bash
 python3 -m venv venv
@@ -105,8 +105,10 @@ Run the scalar baseline binary:
 ./build/gpt2 --model gpt2-medium "Once upon a time" -n 20
 ```
 
+The output is:
+
 ![Animated terminal output showing GPT-2 baseline inference running on Arm Linux, including generated text and the final tokens-per-second summary.#center](./gpt2-baseline.gif "GPT-2 baseline runtime output on Arm Linux")
 
-## What you've learned and what's next
+## Next steps
 
-You now have a working baseline binary and model files. Next, you will use the Instruction Mix recipe in Arm Performix to inspect static disassembly and dynamic runtime behavior.
+You now have a working baseline binary and model files. Next, you'll use the Instruction Mix recipe in Arm Performix to inspect static disassembly and dynamic runtime behavior.

@@ -6,7 +6,7 @@ weight: 7
 layout: learningpathall
 ---
 
-## Confirm instruction-mix changes after vectorization
+## Verify vectorization with instruction mix
 
 In the earlier build step, you created `gpt2_neon` and `gpt2_sve`. These binaries use the reference solutions in `matmul_neon.cpp` and `matmul_sve.cpp`, respectively. Run the `gpt2_neon` binary with the following command to observe the speedup. 
 
@@ -56,7 +56,7 @@ For a full-page view, open [Godbolt session with all three matmul kernels](https
 
 Run the provided comparison script to measure tokens per second across all available binaries:
 
-```bash bash { command_line="user@host | 2-30"}
+```bash bash { command_line="ubuntu@ip | 2-30"}
 ./compare_gpt2_variants.sh
 Model: gpt2-medium
 Prompt: Once upon a time
