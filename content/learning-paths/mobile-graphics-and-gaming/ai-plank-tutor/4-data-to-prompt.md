@@ -63,7 +63,7 @@ This function pairs each reference angle with the corresponding learner angle, c
 The returned map uses the joint name as the key and a rounded string angle difference as the value. The string value is useful because the next function can insert it directly into the prompt.
 
 {{% notice Note %}}
-The sign of the difference is important. `difference = reference - learner`, so a positive value means the learner's angle is smaller than the reference and usually needs to straighten. A negative value means the learner's angle is larger than the reference and usually needs to bend more.
+The sign of the difference is important. `difference = reference - learner`, so a positive value means the learner's angle is smaller than the reference and needs to straighten. A negative value means the learner's angle is larger than the reference and needs to bend more.
 {{% /notice %}}
 
 ## Generate the LLM prompt
