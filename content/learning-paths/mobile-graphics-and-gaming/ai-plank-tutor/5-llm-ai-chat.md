@@ -122,7 +122,7 @@ private val llmViewModel: LlmViewModel by viewModels {
 }
 ```
 
-`AiChat.getInferenceEngine()` creates a native-backed inference engine used by the ViewModel. Reuse this engine for the app session instead of creating one for every prompt. `LlmModelStore` is the helper that finds or imports the GGUF model file. Now make the `LlmViewModel` accept those parameters.
+`AiChat.getInferenceEngine()` creates a native-backed inference engine used by the ViewModel.`LlmModelStore` is the helper that finds or imports the GGUF model file. Now make the `LlmViewModel` accept those parameters.
 
 ## Add AI Chat to LlmViewModel
 
