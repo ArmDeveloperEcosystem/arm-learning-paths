@@ -74,7 +74,7 @@ In July 2026, Arm reviewed and strengthened the repository management and public
 
 If you're setting up a new system after July 2026, installing the `arm-toolchains-repository` package automatically configures the current repository signing key for you. You don't need to install the key manually or verify fingerprints.
 
-However, if you're upgrading a system that configured the Arm Toolchains repository for Linux before July 2026, you must update the repository configuration to use the new key. 
+However, if you're upgrading a system that configured the Arm Toolchains repository for Linux before July 2026, you need to update the repository configuration to use the new key. 
 Otherwise, your package manager might refuse to refresh repository metadata or install packages.
 
 Existing installed copies of Arm Toolchain for Linux and Arm Performance Libraries continue to work.
@@ -323,7 +323,7 @@ To resolve these errors, install the updated repository package and accept the n
 
 After installing the repository package, you're ready to install the Arm Toolchain for Linux and the Arm Performance Libraries.
 
-For installation instructions, see the [Arm Toolchain for Linux installation instructions](https://developer.arm.com/documentation/110477/latest/Installation) and the [Arm Performance Libraries installation instructions](https://developer.arm.com/documentation/102620/latest/Installation) for your distribution.
+For installation instructions, see the [Arm Toolchain for Linux installation instructions](https://developer.arm.com/documentation/110477/latest/Installation) and the [Arm Performance Libraries installation instructions](/install-guides/armpl/) for your distribution.
 
 
 
