@@ -1,5 +1,5 @@
 ---
-title: Deploy the assistant on N4A
+title: Deploy the assistant on the Google N4A node pool
 description: Add the assistant component to the storefront and keep the application on the N4A node pool.
 weight: 7
 layout: "learningpathall"
@@ -18,7 +18,7 @@ export FRONTEND_IP="$(kubectl get service frontend-external \
 export APP_URL="http://${FRONTEND_IP}"
 ```
 
-The `storefront-n4a` overlay already places every deployment on N4A. Extend it with the assistant component and the image you pushed. The existing `node-selector.yaml` patch then applies the same placement to the assistant deployment.
+The `storefront-n4a` overlay already places every deployment on N4A. Extend it with the assistant component and the image you pushed. The existing `node-selector.yaml` patch then applies the same placement to the assistant deployment:
 
 ```bash
 cat <<EOF > kustomize/overlays/storefront-n4a/kustomization.yaml
@@ -49,7 +49,7 @@ sed -n '1,120p' kustomize/overlays/storefront-n4a/node-selector.yaml
 kubectl kustomize kustomize/overlays/storefront-n4a | sed -n '1,240p'
 ```
 
-Do not apply the overlay if the rendered manifest has an empty image name, image tag, or node-pool value.
+Don't apply the overlay if the rendered manifest has an empty image name, image tag, or node-pool value.
 
 ## Apply the overlay
 
@@ -62,7 +62,7 @@ kubectl rollout status deployment/shoppingassistantservice --timeout=1200s
 ```
 
 {{% notice Note %}}
-`kubectl apply -k` reapplies the full rendered application state. It is normal to see existing deployments reported as `configured`. The `shopping-assistant` component patches `frontend`, so a frontend rollout is expected.
+`kubectl apply -k` reapplies the full rendered application state. It's normal to see existing deployments reported as `configured`. The `shopping-assistant` component patches `frontend`, so a frontend rollout is expected.
 {{% /notice %}}
 
 ## Confirm pod placement
@@ -99,7 +99,7 @@ The `server` container serves the assistant API. The `ollama` container prepares
 The first rollout can take a few minutes because the Ollama sidecar pulls the model when the pod starts. Early `/readyz` checks can return `503` until the model is available.
 {{% /notice %}}
 
-## Send a request in one assistant session
+## Send a request through one assistant session
 
 Open the assistant endpoint and save its HTTP session cookie in `/tmp/assistant.cookies`. The next request sends the same cookie back, just as a browser would. The assistant can then associate follow-up prompts and cart actions with the same short-lived session.
 
@@ -121,7 +121,7 @@ for i in {1..12}; do
 done
 ```
 
-The JSON response should include a non-empty assistant message. The exact product names can vary, but the response should be grounded in the live product catalog.
+The JSON response includes a non-empty assistant message. The exact product names can vary, but the response is grounded in the live product catalog.
 
 ## Try the browser flow
 
@@ -136,10 +136,10 @@ yes
 What is in my cart now?
 ```
 
-The assistant should recommend a catalog item, ask for confirmation before changing the cart, and then show the cart contents.
+The assistant recommends a catalog item and asks for confirmation before changing the cart. It then shows the cart's contents.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You've deployed the assistant on N4A and validated it through the same storefront path that a shopper uses.
+You've now deployed the assistant on N4A and validated it through the same storefront path that a shopper uses.
 
 Next, you'll observe the assistant as a live workload and capture the N4A benchmark baseline.

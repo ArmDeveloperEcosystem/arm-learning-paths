@@ -1,6 +1,6 @@
 ---
-title: Observe and benchmark the assistant on N4A
-description: Start the telemetry dashboard, generate assistant traffic, and capture a fixed N4A benchmark summary.
+title: Observe and benchmark the assistant on the Google N4A node pool
+description: Start the telemetry dashboard, generate assistant traffic, and capture a fixed-batch N4A benchmark summary.
 weight: 8
 layout: "learningpathall"
 ---
@@ -15,7 +15,7 @@ The source tree includes helper scripts that focus traffic and telemetry on the 
 - `workshop/fixed_batch_trial.py` runs a repeatable benchmark.
 - `workshop/compare_summaries.py` compares benchmark summaries.
 
-Compile the scripts before you run them:
+Check the assistant service and compile the scripts before you run them:
 
 ```bash
 kubectl get deployment shoppingassistantservice
@@ -29,7 +29,7 @@ python3 -m py_compile workshop/fixed_batch_trial.py
 python3 -m py_compile workshop/compare_summaries.py
 ```
 
-If `kubectl top` is not available yet, make sure metrics collection is enabled in the cluster before you rely on CPU telemetry.
+If `kubectl top` isn't available yet, make sure metrics collection is enabled in the cluster before you rely on CPU telemetry.
 
 ## Open three terminals
 
@@ -45,18 +45,11 @@ export FRONTEND_IP="$(kubectl get service frontend-external \
   -o jsonpath='{.status.loadBalancer.ingress[0].ip}')"
 export APP_URL="http://${FRONTEND_IP}"
 ```
-
-Use this terminal map:
-
-| Terminal | Purpose |
-|----------|---------|
-| Terminal 1 | Telemetry collector |
-| Terminal 2 | Dashboard web server |
-| Terminal 3 | Live traffic and fixed benchmarks |
+Use the first terminal for collecting telemetry, the second terminal for the dashboard web server, and the third terminal for live traffic and fixed benchmarks. 
 
 ## Start telemetry collection
 
-Run this in Terminal 1. The `rm` command clears previous live telemetry samples for the dashboard:
+Run the following command in the first terminal. The `rm` command clears previous live telemetry samples for the dashboard:
 
 ```bash
 cd "${REPO}" || exit 1
@@ -71,7 +64,7 @@ Leave this command running.
 
 ## Start the dashboard
 
-Run this in Terminal 2. The `rm` command clears previous live request data for the dashboard:
+Run the following command in the second terminal. The `rm` command clears previous live request data for the dashboard:
 
 ```bash
 cd "${REPO}" || exit 1
@@ -87,7 +80,7 @@ If port `5000` is already in use, choose another available port, such as `5001`.
 
 ## Confirm assistant health
 
-Run this in Terminal 3:
+Run the following command in the third terminal to confirm the health of the assistant:
 
 ```bash
 cd "${REPO}" || exit 1
@@ -103,7 +96,7 @@ kubectl get pods -o wide | grep -E 'frontend|shoppingassistantservice'
 
 ## Generate a short live burst
 
-Start a short request burst so the dashboard shows activity:
+Start a short request burst in the third terminal so the dashboard shows activity:
 
 ```bash
 rm -f workshop/request-live.pid
@@ -142,7 +135,7 @@ Stopping the live burst keeps the N4A and C4A benchmark runs comparable.
 
 ## Run the fixed N4A benchmark
 
-Run the fixed batch while the assistant is still on N4A:
+Run the fixed batch in the third terminal while the assistant is still on N4A:
 
 ```bash
 python3 workshop/fixed_batch_trial.py \
@@ -161,7 +154,7 @@ python3 workshop/fixed_batch_trial.py \
   tee workshop/fixed-n4a-summary.log
 ```
 
-The command can keep running after the last request lines appear. It is still sampling telemetry and waiting for the assistant to settle back toward idle.
+The command can keep running after the last request lines appear. It's still sampling telemetry and waiting for the assistant to settle back toward idle.
 
 Print the summary line:
 
@@ -169,10 +162,10 @@ Print the summary line:
 grep 'SUMMARY_JSON' workshop/fixed-n4a-summary.log
 ```
 
-The summary should show successful requests and the assistant running on the N4A node pool. Do not continue if the summary line is missing or reports a different node pool.
+The summary shows successful requests and the assistant running on the N4A node pool. Don't continue if the summary line is missing or reports a different node pool.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You've observed the assistant as a live workload and captured the N4A benchmark baseline.
+You've now observed the assistant as a live workload and captured the N4A benchmark baseline.
 
 Next, you'll move only the assistant tier to C4A and run the same benchmark again.

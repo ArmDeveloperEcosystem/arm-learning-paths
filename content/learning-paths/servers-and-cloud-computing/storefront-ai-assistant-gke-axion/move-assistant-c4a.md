@@ -1,5 +1,5 @@
 ---
-title: Move the assistant to C4A and compare results
+title: Move the assistant to the Google C4A node pool and compare results
 description: Move only the assistant deployment to C4A, rerun the fixed benchmark, and compare it with the N4A baseline.
 weight: 9
 layout: "learningpathall"
@@ -84,7 +84,7 @@ sed -n '1,140p' kustomize/overlays/assistant-c4a/shoppingassistant-c4a.yaml
 kubectl kustomize kustomize/overlays/assistant-c4a | sed -n '1,240p'
 ```
 
-Do not continue if `newName`, `newTag`, or either node-pool value is blank.
+Don't continue if `newName`, `newTag`, or either node-pool value is blank.
 
 {{% notice Note %}}
 The first patch keeps the storefront on N4A by default. The second patch overrides only `shoppingassistantservice` and moves that deployment to C4A.
@@ -107,7 +107,7 @@ kubectl get pods -o wide | grep -E 'frontend|shoppingassistantservice'
 kubectl get nodes -L cloud.google.com/gke-nodepool,node.kubernetes.io/instance-type,kubernetes.io/arch
 ```
 
-The frontend should remain on N4A, and `shoppingassistantservice` should now run on C4A.
+The frontend remains on N4A, and `shoppingassistantservice` now runs on C4A.
 
 ## Warm the assistant on C4A
 
@@ -129,7 +129,7 @@ for i in {1..12}; do
 done
 ```
 
-The response should contain a non-empty message.
+The response contains a non-empty message.
 
 ## Run the fixed C4A benchmark
 
@@ -158,7 +158,7 @@ Print the C4A summary line:
 grep 'SUMMARY_JSON' workshop/fixed-c4a-summary.log
 ```
 
-The summary should show successful requests and the assistant running on the C4A node pool. Do not compare the runs if the summary line is missing or reports a different node pool.
+The summary shows successful requests and the assistant running on the C4A node pool. Don't compare the runs if the summary line is missing or reports a different node pool.
 
 ## Compare the two runs
 
@@ -171,7 +171,7 @@ python3 workshop/compare_summaries.py \
   sed '/^Interpretation$/,$d'
 ```
 
-This displays the measured comparison table without adding a predetermined placement conclusion. Lower batch duration and request latency indicate the faster run for those measurements.
+This displays the measured comparison table without forcing a predetermined placement conclusion. Lower batch duration and request latency indicate the faster run for those measurements.
 
 Focus on these signals:
 
@@ -187,7 +187,7 @@ Your numbers can vary by prompt mix, model warmup state, node pressure, and clus
 Assistant CPU values come from sampled Kubernetes telemetry. Short bursts can be underrepresented, especially on faster runs. Treat request success, benchmark duration, and latency as the primary comparison signals.
 {{% /notice %}}
 
-## Explain the result
+## Understand the result
 
 You changed one architectural variable: the placement of the assistant. The storefront tier, prompts, model, traffic shape, and benchmark script stayed the same.
 
@@ -201,12 +201,12 @@ That sequence is the core architectural point. A modern application can contain 
 
 Both Axion machine series run `arm64`, so the same assistant image moves between the Neoverse N3-based N4A pool and the Neoverse V2-based C4A pool. You can evaluate placement without maintaining a second image or build pipeline.
 
-For this application, the useful pattern is not replacing one machine series with another. It is placing each workload tier where its behavior fits best.
+For this application, the useful pattern isn't replacing one machine series with another. It's placing each workload tier where its behavior fits best.
 
-If your N4A and C4A results are close, or if N4A looks better for a particular run, that is still useful information. The decision should come from the workload behavior you observe, not from assuming one Axion-based machine series is always the right answer.
+If your N4A and C4A results are close, or if N4A looks better for a particular run, that's still useful information. The decision should come from the workload behavior you observe, not from assuming one Axion-based machine series is always the right answer.
 
 ## What you've accomplished
 
 You've built, observed, and compared a mixed-placement storefront application on Axion. You kept the storefront on N4A, moved only the assistant tier to C4A, and used the same benchmark to compare both placements.
 
-You are now ready to use the same overlay and benchmark pattern to evaluate which Axion-based machine series matches each tier's workload behavior.
+You're now ready to use the same overlay and benchmark pattern to evaluate which Axion-based machine series matches each tier's workload behavior.
