@@ -175,7 +175,7 @@ sudo zypper refresh
 {{< /tabpane >}}
 
 
-## Install the repository package using manual recovery
+## Use manual recovery
 
 The recommended method is to install `arm-toolchains-repository` version `2-2` or later directly.
 
