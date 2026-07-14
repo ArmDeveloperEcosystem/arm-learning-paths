@@ -26,7 +26,7 @@ I'm doing Plank pose. My joints have the following significant angle differences
 
 This keeps the prompt small and gives the model only the facts it needs to produce one coaching cue.
 
-This is the main design pattern in the app: the vision model turns camera frames into structured pose data, deterministic Kotlin code turns that data into a small set of facts, and the LLM only handles the language generation step.
+This is the main design pattern in the app: the vision model turns camera frames into structured pose data, deterministic Kotlin code turns that data into a small set of facts, and the LLM takes these facts and returns appropriate advice.
 
 ## Format the largest angle differences
 
