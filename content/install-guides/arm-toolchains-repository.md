@@ -17,7 +17,7 @@ test_images:
   - ubuntu:latest
 
 official_docs: https://developer.arm.com/tools-and-software
-description: Configure the Arm Toolchains repository for Linux package archive on supported Linux AArch64 distributions to enable installing Arm Toolchains products using the system package manager.
+description: Configure the Arm Toolchains repository on supported Linux aarch64 distributions to install Arm Toolchain for Linux and Arm Performance Libraries using the system package manager.
 author: Gary Carroll
 
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
@@ -66,11 +66,11 @@ Use the native package manager for your distribution:
 - `dnf` or `yum` for RHEL 8 or later and Amazon Linux 2023
 - `zypper` for SLES 15 or 16
 
-## About the signing key 
+## About the signing key
 
 Linux package managers use cryptographic signing keys to verify that repository metadata and packages are authentic and come directly from Arm.
 
-In July 2026, Arm reviewed and strengthened the repository management and publication processes used for the Arm Toolchains repository. As part of the continuing evolution of this release channel, Arm has revoked and replaced the signing key.
+In July 2026, Arm reviewed and strengthened the repository management and publication processes used for the Arm Toolchains repository. As part of the continuing evolution of this release channel, Arm revoked and replaced the signing key.
 
 If you're setting up a new system after July 2026, installing the `arm-toolchains-repository` package automatically configures the current repository signing key for you. You don't need to install the key manually or verify fingerprints.
 
@@ -95,7 +95,7 @@ Current fingerprint:
 A406 5BCE 9386 DD1E 62FD  E03B 8144 CA16 11A0 BD71
 ```
 
-### (Optional) Manually verifying the signing key
+### (Optional) Manually verify the signing key
 
 If you want to manually verify the signing key, ensure the `gpg` utility (part of GnuPG) is installed on your system, then download the key file and display its fingerprint:
 
@@ -112,7 +112,7 @@ A406 5BCE 9386 DD1E 62FD  E03B 8144 CA16 11A0 BD71
 
 ## Previous repository locations
 
-The current Arm Toolchains Linux Repository at [https://developer.arm.com/packages/arm-toolchains/](https://developer.arm.com/packages/arm-toolchains/) replaces the earlier repository structure that was based on repositories built using the SUSE Open Build Service.
+The current Arm Toolchains repository at [https://developer.arm.com/packages/arm-toolchains/](https://developer.arm.com/packages/arm-toolchains/) replaces the earlier repository structure that was based on repositories built using the SUSE Open Build Service.
 
 Earlier repositories were published under the top-level package URL [https://developer.arm.com/packages/](https://developer.arm.com/packages/) and used repository prefixes such as:
 
@@ -126,30 +126,6 @@ These earlier repositories are deprecated but will continue to work until furthe
 Don't configure new systems to use the deprecated `ACfL:` or `arm-toolchains:` repository paths. Migrate existing systems to the current Arm Toolchains Linux repositories and install the current `arm-toolchains-repository` package.
 
 The deprecated repositories will be removed in a future update.
-
-## Expected package manager errors
-
-If your system still trusts only the previous Arm Toolchains Repository signing key, package manager operations might fail when you refresh metadata, install packages, or upgrade packages.
-
-Ubuntu hosts might experience errors running the `apt update` command, for example:
-
-```output
-Err:1 https://developer.arm.com/packages/arm-toolchains/ubuntu noble InRelease
-  The following signatures couldn't be verified because the public key is not available: NO_PUBKEY <key-id>
-W: An error occurred during the signature verification. The repository is not updated and the previous index files will be used. GPG error: <error>
-W: Some index files failed to download. They have been ignored, or old ones used instead.
-```
-
-RPM based hosts might download the new signing key but refuse to use it:
-
-```output
-The GPG keys listed for the "Arm Toolchains" repository are already installed but they are not correct for this package.
-Check that the correct key URLs are configured for this repository..
- GPG Keys are configured as: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-arm-toolchains
-Error: GPG check FAILED
-```
-
-To resolve these errors, install the updated repository package and accept the new signing key.
 
 ## Install the repository package directly
 
@@ -318,6 +294,30 @@ rpm -q arm-toolchains-repository
 {{< /tabpane >}}
 
 The installed version should be `2-2` or later.
+
+## Troubleshoot package manager errors
+
+If your system still trusts only the previous Arm Toolchains Repository signing key, package manager operations might fail when you refresh metadata, install packages, or upgrade packages.
+
+Ubuntu hosts might experience errors running the `apt update` command, for example:
+
+```output
+Err:1 https://developer.arm.com/packages/arm-toolchains/ubuntu noble InRelease
+  The following signatures couldn't be verified because the public key is not available: NO_PUBKEY <key-id>
+W: An error occurred during the signature verification. The repository is not updated and the previous index files will be used. GPG error: <error>
+W: Some index files failed to download. They have been ignored, or old ones used instead.
+```
+
+RPM-based hosts might download the new signing key but refuse to use it:
+
+```output
+The GPG keys listed for the "Arm Toolchains" repository are already installed but they are not correct for this package.
+Check that the correct key URLs are configured for this repository..
+ GPG Keys are configured as: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-arm-toolchains
+Error: GPG check FAILED
+```
+
+To resolve these errors, install the updated repository package and accept the new signing key.
 
 ## Next steps
 
