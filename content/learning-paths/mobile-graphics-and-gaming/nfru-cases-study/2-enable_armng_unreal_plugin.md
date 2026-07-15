@@ -36,5 +36,5 @@ After regenerating the Visual Studio solution, follow [Set up the Unreal project
 
 You created a symbolic link to the plugin source and regenerated the Visual Studio solution. This configuration enables Unreal Engine to detect and load the Arm Neural Graphics Plugin.
 
-Next, use [Validate NFRU with Streamline and RenderDoc](/learning-paths/mobile-graphics-and-gaming/nfru-cases-study/3-analyze_nfru_enablement_artifacts/) to confirm that NFRU is active, inspect generated frames, and start comparing visual quality and performance.
+In the next section, you will confirm that NFRU is active, inspect generated frames, and start comparing visual quality and performance.
 
