@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Use Topo from VS Code
 
-You have used the Topo CLI to check your target, list compatible templates, clone a template, deploy the workload, and inspect the running application.
+You have used the Topo CLI to check your target, list compatible projects, clone a project, deploy the workload, and inspect the running application.
 
 You can also perform the same workflow from Visual Studio Code using the [Topo extension](https://marketplace.visualstudio.com/items?itemName=Arm.topo). The extension provides a graphical interface for Topo deployment.
 
@@ -30,21 +30,21 @@ The extension shows the host and target state, available Topo actions, and deplo
 
 ## Run Topo commands
 
-The command palette exposes the usual Topo commands such as listing compatible templates, cloning templates, and deploying projects.
+The command palette exposes the usual Topo commands such as listing compatible projects, cloning projects, and deploying projects.
 
 ![Screenshot of Topo commands in Visual Studio Code.#center](topo_commands.png "Topo commands in Visual Studio Code")
 
 These commands correspond to the CLI commands you used earlier, such as:
 
 ```bash
-topo templates --target user@my-target
-topo clone <template-url>
+topo projects --target user@my-target
+topo clone <project-url>
 topo deploy --target user@my-target
 ```
 
 ## Deploy from VS Code
 
-After cloning or selecting a Topo Template, you can deploy it. Open or clone the LLM Chatbot example, then deploy it using the VS Code extension.
+After cloning or selecting a Topo Project, you can deploy it. Open or clone the LLM chat example, then deploy it using the VS Code extension.
 
 ![Screenshot of deploying a Topo workload from Visual Studio Code.#center](deploy_vscode.png "Deploy a Topo workload from Visual Studio Code")
 
@@ -55,9 +55,9 @@ When deployment completes, you will see the processes running on the target in t
 Open the application in your browser just as you did with the CLI workflow:
 
 ```output
-http://<target-ip>:3000
+http://<target-ip>:8080
 ```
 
 ## What you've accomplished
 
-You have now seen two ways to deploy Topo workloads: directly from the command line and from Visual Studio Code. Both approaches use the same target checks, template metadata, and deployment flow, so you can choose the interface that best fits your workflow.
+You have now seen two ways to deploy Topo workloads: directly from the command line and from Visual Studio Code. Both approaches use the same target checks, project metadata, and deployment flow, so you can choose the interface that best fits your workflow.
