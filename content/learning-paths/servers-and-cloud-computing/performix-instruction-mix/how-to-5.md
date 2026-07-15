@@ -30,9 +30,9 @@ Rename each run with a descriptive name, such as baseline and Neon, so you can i
 
 The baseline profile is mostly scalar instructions. After you add Neon intrinsics, the instruction mix shifts toward Advanced SIMD (Neon) instructions, showing that the code is using Arm Neon hardware more effectively.
 
-![Instruction Mix comparison view showing scalar-dominant baseline versus Neon variant with increased ASIMD instruction share in the hot matmul path.#center](./neon_scalar_instruction_mix.webp "Neon versus scalar instruction mix")
+![Instruction Mix comparison view showing scalar-dominant baseline versus Neon variant with increased ASIMD instruction share in the hot `matmul` path.#center](./neon_scalar_instruction_mix.webp "Neon versus scalar instruction mix")
 
-You can also compare SVE variants in the same way. The increase in SVE operations shows that this path is now utilizing SVE hardware.
+You can also compare SVE variants in the same way. The increase in SVE operations shows that this path is now using SVE hardware.
 
 ![Instruction Mix comparison between baseline and SVE variant showing increased vector instruction usage and reduced scalar share in hot execution paths.#center](./sve_vs_baseline.webp "SVE versus baseline instruction mix")
 
@@ -54,7 +54,7 @@ For variable-length vectorization, compare with an explicit SVE implementation t
 {{< godbolt width="100%" height="400px" mode="assembly" opt="-O2 -g -march=armv8.2-a+sve" src="#include <arm_sve.h>\n#include <stddef.h>\n\nvoid matmul_sve(float *out, const float *x, const float *W, const float *b,\n                int n_in, int n_out) {\n    for (int i = 0; i < n_out; i++) {\n        float acc = b ? b[i] : 0.f;\n        const float *row = W + (size_t)i * n_in;\n        svfloat32_t vacc = svdup_f32(0.f);\n        int j = 0;\n        while (j < n_in) {\n            svbool_t pg = svwhilelt_b32((uint64_t)j, (uint64_t)n_in);\n            svfloat32_t vw = svld1(pg, row + j);\n            svfloat32_t vx = svld1(pg, x + j);\n            vacc = svmla_f32_m(pg, vacc, vw, vx);\n            j += svcntw();\n        }\n        acc += svaddv_f32(svptrue_b32(), vacc);\n        out[i] = acc;\n    }\n}" >}}
 
 
-For a full-page view, open a [Godbolt session with all three matmul kernels](https://godbolt.org/z/E4a7Wxh8K).
+For a full-page view, open a [Godbolt session with all three `matmul` kernels](https://godbolt.org/z/E4a7Wxh8K).
 
 ## Measure speedup
 

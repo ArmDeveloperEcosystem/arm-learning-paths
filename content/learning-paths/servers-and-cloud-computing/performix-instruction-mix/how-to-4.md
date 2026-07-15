@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Complete the challenge 
 
-In this project, `src/kernels/matmul_user.cpp` is your editable implementation file. The baseline behavior in this file is scalar, and the build uses `-O2 -g`, so compiler optimization is enabled but vector hardware is still underused in the hot loop.
+`src/kernels/matmul_user.cpp` is your editable implementation file. The baseline behavior in this file is scalar, and the build uses `-O2 -g`, so compiler optimization is enabled but vector hardware is still underused in the hot loop.
 
 Use the profiling evidence from Performix to implement your own Neon or SVE intrinsics in `src/kernels/matmul_user.cpp`, then rebuild and profile `gpt2_user`.
 
@@ -25,7 +25,7 @@ cmake -S . -B build -DBUILD_USER_MATMUL=ON
 cmake --build build --parallel
 ```
 
-Then profile the `build/gpt2_user` binary with the same runtime arguments and compare the Instruction Mix and throughput against baseline.
+Then, profile the `build/gpt2_user` binary with the same runtime arguments and compare the Instruction Mix and throughput against baseline.
 
 Example solutions are available in:
 
@@ -64,7 +64,7 @@ args = [
 
 Restart your coding assistant, then prompt it to run Performix Instruction Mix and Code Hotspots on your `gpt2_user` binary and suggest Arm intrinsics improvements.
 
-![Screenshot of a coding assistant prompt configured to use Arm MCP Server tools for running Performix recipes and analyzing matmul_user optimization opportunities in the GPT-2 workload.#center](./mcp-performix-prompt.webp "Coding assistant prompt for Performix analysis through Arm MCP Server")
+![Screenshot of a coding assistant prompt configured to use Arm MCP Server tools for running Performix recipes and analyzing `matmul_user` optimization opportunities in the GPT-2 workload.#center](./mcp-performix-prompt.webp "Coding assistant prompt for Performix analysis through Arm MCP Server")
 
 ## What you've accomplished and what's next
 

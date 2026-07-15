@@ -55,7 +55,7 @@ further_reading:
         type: website
     - resource:
         title: KleidiAI GitHub Repository
-        link: https://github.com/ARM-software/kleidiai
+        link: https://gitlab.arm.com/kleidi/kleidiai
         type: website
     - resource:
         title: GPT-2 Example repository

@@ -6,7 +6,7 @@ weight: 2
 layout: learningpathall
 ---
 
-## What the Arm Performix Instruction Mix recipe is
+## Why to use the Arm Performix Instruction Mix recipe
 
 The Arm Performix Instruction Mix recipe shows the types and proportions of machine instructions your workload executes at runtime and in static analysis, so you can see how efficiently your code uses Arm CPU hardware resources.
 
@@ -23,7 +23,7 @@ The Instruction Mix result gives you two complementary views:
 - static analysis, which inspects compiled machine code without running it
 - dynamic analysis, which measures instruction usage during real execution
 
-Together, these views help you verify whether architecture-specific features are actually active in hot code paths.
+Together, these views help you verify whether architecture-specific features are active in hot code paths.
 
 Instruction Mix is useful when you need to confirm that performance-critical code uses Arm CPU features effectively. This is especially helpful when you are, for example, validating the effectiveness of compiler autovectorization.
 
@@ -39,6 +39,6 @@ You'll also try implementing your own `matmul` kernels that target Neon and SVE,
 
 ## What you've learned and what's next
 
-You now know what instruction mix represents and why it matters for LLM inference optimization on Arm.
+You now know what the Arm Instruction Mix recipe represents and why it matters for LLM inference optimization on Arm.
 
 Next, you'll set up the GPT-2 example, build the binaries, and run a baseline test.
