@@ -10,9 +10,9 @@ layout: learningpathall
 
 In this project, `src/kernels/matmul_user.cpp` is your editable implementation file. The baseline behavior in this file is scalar, and the build uses `-O2 -g`, so compiler optimization is enabled but vector hardware is still underused in the hot loop.
 
-Use the profiling evidence from Performix to implement your own NEON or SVE intrinsics in `src/kernels/matmul_user.cpp`, then rebuild and profile `gpt2_user`.
+Use the profiling evidence from Performix to implement your own Neon or SVE intrinsics in `src/kernels/matmul_user.cpp`, then rebuild and profile `gpt2_user`.
 
-{{% notice Hint %}}
+{{% notice Note %}}
 
 Focus on the accumulation loop in `matmul_user` (`acc += row[j] * x[j];`). Think about lane utilization, loop unrolling, and handling the tail when the input width is not an exact multiple of the vector width.
 
@@ -70,4 +70,4 @@ Restart your coding assistant, then prompt it to run Performix Instruction Mix a
 
 You've now optionally implemented and profiled a custom `matmul_user` kernel using the same workflow you used for baseline analysis. 
 
-Next, you'll compare instruction mix and throughput across scalar, NEON, SVE, and KleidiAI variants.
+Next, you'll compare Instruction Mix and throughput across scalar, Neon, SVE, and KleidiAI variants.

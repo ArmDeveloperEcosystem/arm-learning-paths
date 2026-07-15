@@ -1,17 +1,17 @@
 ---
-title: Profile GPT-2 instruction mix with Arm Performix
+title: Profile GPT-2 inference with the Arm Performix Instruction Mix recipe
 
-description: Learn how to profile GPT-2 inference on Arm Neoverse with the Arm Performix Instruction Mix recipe, identify scalar versus vector execution patterns, and improve throughput with NEON, SVE, and KleidiAI kernels.
+description: Profile GPT-2 inference on Arm Neoverse with the Arm Performix Instruction Mix recipe, identify scalar versus vector execution patterns, and improve throughput with Neon, SVE, and KleidiAI kernels.
 
 minutes_to_complete: 45
 
 who_is_this_for: This is an introductory topic for developers who want to get started using the Arm Performix Instruction Mix recipe through a practical example.
 
 learning_objectives: 
-    - Understand how the Instruction Mix recipe combines static disassembly with runtime sampling to show execution behavior
+    - Use the Instruction Mix recipe to combine static disassembly with runtime sampling to show execution behavior
     - Build and run the GPT-2 inference example on an Arm Linux server
     - Identify why matrix multiplication dominates runtime and how vectorization changes the instruction mix
-    - Compare throughput and instruction mix across scalar, NEON, SVE, and KleidiAI implementations
+    - Compare throughput and instruction mix across scalar, Neon, SVE, and KleidiAI implementations
 
 prerequisites:
     - Access to Arm Performix configured with a remote Arm Linux target. For setup, see the [Arm Performix install guide](/install-guides/performix/).
@@ -32,7 +32,7 @@ tools_software_languages:
     - Arm Performix
     - C
     - LLM
-    - NEON
+    - Neon
     - SVE
 operatingsystems:
     - Linux
@@ -52,6 +52,10 @@ further_reading:
     - resource:
         title: Arm MCP Server GitHub Repository
         link: https://github.com/arm/mcp
+        type: website
+    - resource:
+        title: KleidiAI GitHub Repository
+        link: https://github.com/ARM-software/kleidiai
         type: website
     - resource:
         title: GPT-2 Example repository

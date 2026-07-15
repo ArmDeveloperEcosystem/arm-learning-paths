@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Prepare the environment
 
-Use an Arm Linux target, such as an Arm Neoverse cloud instance. The results in this Learning Path were collected on a Graviton 3-based instance based on Neoverse V1 running Ubuntu 24.04 LTS. 
+Use an Arm Linux target, such as an Arm Neoverse-based cloud instance. The results in this Learning Path were collected on a Graviton 3-based instance based on Neoverse V1 running Ubuntu 24.04 LTS. 
 
 If you've not configured Arm Performix yet, complete setup and target connection using the [Arm Performix install guide](/install-guides/performix/).
 
@@ -90,7 +90,7 @@ void matmul_ref(float *out, const float *x, const float *W, const float *b,
 }
 ```
 
-This scalar implementation can leave NEON and SVE vector units underused if the compiler cannot efficiently autovectorize it. Because `matmul` is called hundreds of times per token, explicitly optimizing this kernel guarantees SIMD execution where most of the available compute is spent.
+This scalar implementation can leave Neon and SVE vector units underused if the compiler cannot efficiently autovectorize it. Because `matmul` is called hundreds of times per token, explicitly optimizing this kernel guarantees SIMD execution where most of the available compute is spent.
 
 ## Build and run the baseline
 

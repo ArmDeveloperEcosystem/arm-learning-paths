@@ -14,7 +14,7 @@ Getting close to peak matmul performance is complex, especially in transformer i
 
 - *Tiling* breaks large matrices into smaller blocks that fit better in cache, so data is reused more often and memory bandwidth pressure is lower.
 
-Arm created [KleidiAI](https://github.com/ARM-software/kleidiai) to provide the fastest Arm CPU microkernels on packing and tiled matrix multiplication, so you can use these optimizations without writing and tuning every low-level kernel yourself.
+Arm created [KleidiAI](https://github.com/ARM-software/kleidiai) to provide accelerated Arm CPU microkernels on packing and tiled matrix multiplication, so you can use these optimizations without writing and tuning every low-level kernel yourself.
 
 ## KleidiAI integration in the GPT-2 example
 
@@ -24,7 +24,7 @@ The file `src/kernels/matmul_kai_sve.cpp` is the runtime bridge between your mod
 - `kai_get_rhs_packed_offset_matmul_clamp_f32_f32_f32p4vlx1b_6x4vl_sve_mla`
 - `kai_run_matmul_clamp_f32_f32_f32p4vlx1b_6x4vl_sve_mla`
 
-The `kai_run_matmul_clamp_f32_f32_f32p4vlx1b_6x4vl_sve_mla` is our entry. As per [the naming convention](https://github.com/ARM-software/kleidiai/blob/main/kai/ukernels/matmul/README.md), this kernel performs an FP32 matrix multiplication, computing output tiles of 6 × 4VL (six rows by four SVE vector lengths of columns) using SVE (multiply–accumulate) MLA instructions on prepacked RHS weights for efficient cache and SIMD utilization.
+`kai_run_matmul_clamp_f32_f32_f32p4vlx1b_6x4vl_sve_mla` is your entry. According to [the naming convention](https://github.com/ARM-software/kleidiai/blob/main/kai/ukernels/matmul/README.md), this kernel performs an FP32 matrix multiplication, computing output tiles of 6 × 4VL (six rows by four SVE vector lengths of columns) using SVE (multiply–accumulate) MLA instructions on prepacked RHS weights for efficient cache and SIMD utilization.
 
 For more details on KleidiAI, see the [official GitLab repository](https://gitlab.arm.com/kleidi/kleidiai).
 
@@ -105,7 +105,7 @@ Compared to the non-vectorized baseline (`gpt2`), this FP32 KleidiAI microkernel
 You can increase throughput by running the KleidiAI path with multiple matmul threads. For this 355M model, tune `--matmul-threads` heuristically on your target system to find the optimal value. For a Graviton 3-based instance, you'll observe a max token generation speed of 34.5 token/s with 4 threads.
 
 
-``` bash { command_line="ubuntu@ip | 3-50"}
+```bash { command_line="ubuntu@ip | 3-50"}
 cd build
 ./gpt2_kai_sve --model gpt2-medium "Once upon a time" -n 150 --matmul-threads 4
 Weights path: /home/ubuntu/GPT-2-DEMO/GPT-2-Example/models/gpt2-medium/weights.bin

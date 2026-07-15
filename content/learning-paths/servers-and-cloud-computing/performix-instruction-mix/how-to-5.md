@@ -30,7 +30,7 @@ Rename each run with a descriptive name, such as baseline and Neon, so you can i
 
 The baseline profile is mostly scalar instructions. After you add Neon intrinsics, the instruction mix shifts toward Advanced SIMD (Neon) instructions, showing that the code is using Arm Neon hardware more effectively.
 
-![Instruction Mix comparison view showing scalar-dominant baseline versus NEON variant with increased ASIMD instruction share in the hot matmul path.#center](./neon_scalar_instruction_mix.webp "NEON versus scalar instruction mix")
+![Instruction Mix comparison view showing scalar-dominant baseline versus Neon variant with increased ASIMD instruction share in the hot matmul path.#center](./neon_scalar_instruction_mix.webp "Neon versus scalar instruction mix")
 
 You can also compare SVE variants in the same way. The increase in SVE operations shows that this path is now utilizing SVE hardware.
 
@@ -56,11 +56,11 @@ For variable-length vectorization, compare with an explicit SVE implementation t
 
 For a full-page view, open a [Godbolt session with all three matmul kernels](https://godbolt.org/z/E4a7Wxh8K).
 
-## Measure speed up
+## Measure speedup
 
 Run the provided comparison script to measure tokens per second across all available binaries:
 
-```bash bash { command_line="ubuntu@ip | 2-30"}
+```bash { command_line="ubuntu@ip | 2-30"}
 ./compare_gpt2_variants.sh
 Model: gpt2-medium
 Prompt: Once upon a time
@@ -88,6 +88,6 @@ These results show that intrinsics increase throughput from about 3 tok/s in the
 
 ## What you've accomplished and what's next
 
-You've now verified vectorization using the Instruction Mix recipe, compared throughput across Neon and SVE, and measure tokens per second across the available binaries. 
+You've now verified vectorization using the Instruction Mix recipe, compared throughput across Neon and SVE, and measured tokens per second across the available binaries. 
 
 Next, you'll use optimized libraries to push performance further.

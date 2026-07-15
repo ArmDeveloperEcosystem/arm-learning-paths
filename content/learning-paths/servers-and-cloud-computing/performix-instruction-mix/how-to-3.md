@@ -1,5 +1,5 @@
 ---
-title: Profile with the Arm Performix Instruction Mix recipe
+title: Find GPT-2 hotspots and profile with the Arm Performix Instruction Mix recipe
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -74,4 +74,4 @@ Finally, in dynamic functions, you can break down operation types to individual 
 
 You've now used Instruction Mix to confirm that baseline runtime is dominated by scalar-heavy `matmul` execution. 
 
-Next, you'll compare updated Instruction Mix and throughput across scalar, NEON, SVE, and KleidiAI variants.
+Next, you can optionally learn to optimize matmul with vector intrinsics and use the Arm MCP Server with Performix. You can also skip to [Compare Neon and SVE with the Arm Performix Instruction Mix recipe](/learning-paths/servers-and-cloud-computing/performix-instruction-mix/how-to-5/) to compare updated Instruction Mix and throughput across scalar, Neon, SVE, and KleidiAI variants.
