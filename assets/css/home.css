@@ -16,6 +16,12 @@ ads-breadcrumbs:not(:defined) {
     min-height: 32px;
 }
 
+/* The homepage uses the ADS v5 Arm Ink background hierarchy. */
+html[theme='dark'] body {
+    background-color: var(--color-background-primary);
+    background-image: none;
+}
+
 /* CLS fix: lock the breadcrumb masthead height so hydration doesn't shift content below */
 #only-breadcrumb-masthead {
     height: 40px;
@@ -43,7 +49,7 @@ ads-breadcrumbs:not(:defined) {
     min-height: 152px;
     height: 152px;
     align-items: center;
-    background-color: var(--arm-color-base);
+    background-color: var(--color-background-tertiary);
     border: 1px solid transparent;
     border-color: #000000;
     transition: 
@@ -51,8 +57,8 @@ ads-breadcrumbs:not(:defined) {
         border-color 0.3s ease-in-out;
 }
 .main-topic-card:hover {
-    background-color: var(--arm-color-base);
-    border-color: var(--arm-green);
+    background-color: var(--color-background-tertiary);
+    border-color: #848192;
     cursor: pointer;
     transform: translateY(-3px); /* move up 3px */
 
@@ -86,6 +92,8 @@ ads-breadcrumbs:not(:defined) {
     height: 50px;
     object-fit: contain;
     display: block;
+    /* Figma specifies neutral white icons instead of the legacy purple gradients. */
+    filter: brightness(0) invert(1);
 }
 
 .main-topic-card img[src$="mobile-graphics-and-gaming.svg"],
@@ -102,7 +110,7 @@ ads-breadcrumbs:not(:defined) {
 /* Title styling */
 /**************************************/
 .main-topic-title {
-    color: var(--arm-light-blue);
+    color: #E6E6E9;
     font-weight: 700;
     font-size: 20px;
     line-height: 1.2;
@@ -209,7 +217,7 @@ table.contributor-table th {
     color: black;
 }
 table.contributor-table tbody { 
-    background-color: var(--arm-color-base); 
+    background-color: var(--color-background-secondary);
 }
 
 

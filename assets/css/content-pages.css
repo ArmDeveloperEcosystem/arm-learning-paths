@@ -155,7 +155,7 @@ div.github-div {
 
 html[theme='dark'] div.github-div {
     border-color: rgba(163, 168, 174,0.25); /* #A3A8AE at 25% transparency */
-    background-color: rgb(23,25,27);;  /* CLOSE to this, but not due to close to gradient background. var(--arm-color-base) at 75% transparency */
+    background-color: var(--color-background-primary);
 
 }
 
@@ -185,12 +185,12 @@ ads-card.multi-install-card {
     --ads-card-box-shadow-hover: 0 3px 6px 1px rgba(0,0,0,0.16);  /* 0 1px 3px 3px rgba(0,0,0,0.25); */
 } 
 html[theme='dark'] ads-card.multi-install-card {
-    --ads-card-background-color: var(--arm-color-base);
+    --ads-card-background-color: var(--color-background-tertiary);
     --ads-card-border-color: #000000;
     /*--ads-card-box-shadow:  0 3px 12px rgba(0, 0, 0, 0.5);*/
 
     /* hover state */
-    --ads-card-background-color-hover: var(--arm-color-base);
+    --ads-card-background-color-hover: var(--color-background-tertiary);
     --ads-card-border-color-hover: transparent;
     /*--ads-card-box-shadow-hover:  0 3px 12px rgba(0, 0, 0, 0.5);*/
 

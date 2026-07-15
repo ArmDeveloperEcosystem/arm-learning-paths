@@ -16,6 +16,10 @@
 
 
 /* Box around content (learning paths and tools) */
+html[theme="dark"] #main {
+    background-color: var(--color-background-secondary);
+}
+
 div.content-box {
     padding-left: 16px;
     padding-right: 16px;
@@ -28,7 +32,7 @@ div.content-box {
     border-radius: 5px;
 
     border-color: rgba(163, 168, 174,0.25); /* #A3A8AE at 25% transparency */
-    background-color: rgba(31,32,35,0.75);  /* var(--arm-color-base) at 75% transparency */
+    background-color: var(--color-background-primary);
 }
 html[theme="light"] div.content-box {
     background-color: white;

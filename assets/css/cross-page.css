@@ -52,6 +52,11 @@
     --lp-accent-secondary: #D1BAFC; /* ADS UI Violet 04 */
     --lp-hover-text: #D9D9D9;       /* ADS UI Gray 35 */
 
+    /* ADS v5 Arm Ink background tokens. */
+    --color-background-primary: #080225;
+    --color-background-secondary: #16122A;
+    --color-background-tertiary: #211B3B;
+
     /* Keep existing site styles working while testing the v5 palette. */
     --arm-green: var(--lp-accent-primary);
     --arm-light-blue: var(--lp-accent-secondary);
@@ -92,7 +97,7 @@ ads-search#search-box.install-guide{
     padding-right: 14px;
 }
 ads-search {
-    --ads-search-button-background-color: var(--arm-color-base);
+    --ads-search-button-background-color: #7233F7;
 }
 
 /* Colors of buttons & links to match DevHub styling */
@@ -232,30 +237,6 @@ ads-masthead {
     
 
 
-ads-breadcrumbs {
-    --ads-breadcrumb-color: var(--lp-accent-secondary);
-    --ads-breadcrumb-current-color: white;
-    --ads-breadcrumb-hover-color: var(--lp-hover-text);
-    --ads-breadcrumbs-link-color: var(--lp-accent-secondary);
-    --ads-breadcrumbs-link-color-hover: var(--lp-hover-text);
-    --ads-breadcrumbs-link-color-visited: var(--lp-accent-secondary);
-    --ads-breadcrumbs-current-color: white;
-}
-
-#breadcrumb-element ads-breadcrumb[current] {
-    --ads-breadcrumb-color: white;
-    --ads-breadcrumb-current-color: white;
-    --ads-breadcrumbs-current-color: white;
-    color: white;
-}
-
-#breadcrumb-element ads-breadcrumb:not([current]):hover {
-    --ads-breadcrumb-color: var(--lp-hover-text);
-    --ads-breadcrumbs-link-color: var(--lp-hover-text);
-    color: var(--lp-hover-text);
-}
-
-
 /* Hide breadcrumb when small screen. */
  @media (max-width: 576px) {
         #breadcrumb-element {
@@ -267,7 +248,7 @@ ads-breadcrumbs {
 /* Replicate style of breadcrumb in masthead when alone. */
 #only-breadcrumb-masthead {
     width: 100%;
-    background-color: var(--arm-color-footing);
+    background-color: var(--color-background-primary);
     padding-top: 8px;
     padding-left: 15px; /* u-padding-left-2-1/2 */
     padding-bottom: 8px; 
@@ -292,9 +273,7 @@ ads-breadcrumbs {
     width: fit-content;
     height: fit-content;
 
-    background: -webkit-linear-gradient(left,var(--arm-green), var(--arm-light-blue));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--lp-accent-secondary);
 }
 .beta-homepage {
     vertical-align: top;
@@ -328,7 +307,7 @@ ads-breadcrumbs {
     margin: -1px;
     z-index: -1;
     border-radius: inherit;
-    background: linear-gradient(90deg, var(--lp-accent-primary), var(--lp-accent-secondary));
+    background: #848192;
     opacity: 0;
     transition: opacity 0.3s ease; 
 }
@@ -338,48 +317,12 @@ ads-breadcrumbs {
 
 
 
-.gradient-box-tool {
-    /*display: inline-block;*/
-    position: relative;
-    border-radius: 0px;
-    z-index:1;
-  }
-
-.gradient-box-tool::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 1px;
-    left: 2px;
-    margin: -2px;
-    z-index: -1;
-    border-radius: inherit;
-    background: linear-gradient(90deg, var(--lp-accent-primary), var(--lp-accent-secondary));
-    opacity: 0;
-    transition: opacity 0.3s ease; 
-}
-.gradient-box-tool:hover::before {
-    opacity: 1;
-}
-
-
-
-
-html[theme="dark"] .orchard-breeze-text {
-    background: -webkit-linear-gradient(left,var(--arm-green), var(--arm-light-blue));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-html[theme="dark"] .fullbourn-sunrise-text {
-    background: -webkit-linear-gradient(left,var(--arm-yellow), var(--arm-orange));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
+html[theme="dark"] .orchard-breeze-text,
+html[theme="dark"] .fullbourn-sunrise-text,
 html[theme="dark"] .minhang-mist-text {
-    background: -webkit-linear-gradient(left,var(--arm-light-blue), var(--arm-light-grey));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    background: none;
+    color: #E6E6E9;
+    -webkit-text-fill-color: currentColor;
 }
 
 
@@ -410,36 +353,9 @@ html[theme='light'] body {
 
 /* Dark Theme */
 /****************************************************/
-/* Mobile background */
-@media (max-width: 768px) {
-    html[theme='dark'] body {
-        background-image: url("/img/bg-img-736x800-purple.webp");
-        background-color: var(--arm-color-footing);      
-        background-position: 0% 100%;
-        background-attachment: fixed;
-        background-size: 100% 100%;         /* Forces smaller width; best solution for mobile sizes */
-    } 
-}
-/* Laptop background */
-@media (min-width: 768px) {
-    html[theme='dark'] body {
-        background-image: url("/img/bg-img-1920x1600-purple.webp");
-        background-color: var(--arm-color-footing);      
-        background-position: 0% 100%;
-        background-attachment: fixed;
-        background-size: cover;             /* Stretches image to fit; best solution for desktop sizes */
-    } 
-}
-
-/* Large Monitor background */
-@media (min-width: 1400px) {
-    html[theme='dark'] body {
-        background-image: url("/img/bg-img-2500x1700-purple.webp");
-        background-color: var(--arm-color-footing);      
-        background-position: 0% 100%;
-        background-attachment: fixed;
-        background-size: cover;             /* Stretches image to fit; best solution for desktop sizes */
-    } 
+html[theme='dark'] body {
+    background-color: var(--color-background-primary);
+    background-image: none;
 }
 
 
