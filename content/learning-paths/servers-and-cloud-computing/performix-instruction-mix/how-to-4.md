@@ -1,12 +1,12 @@
 ---
-title: Optimize matmul with vector intrinsics
+title: (Optional) Optimize matmul with vector intrinsics
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Complete the challenge (optional)
+## Complete the challenge 
 
 In this project, `src/kernels/matmul_user.cpp` is your editable implementation file. The baseline behavior in this file is scalar, and the build uses `-O2 -g`, so compiler optimization is enabled but vector hardware is still underused in the hot loop.
 
@@ -34,7 +34,7 @@ Example solutions are available in:
 
 You can use `AGENTS.md` in the GPT-2 example repository for guided learning support.
 
-### Use the Arm MCP Server with Performix (optional)
+### Use the Arm MCP Server with Performix 
 
 You can also use an MCP-compatible coding assistant, such as GitHub Copilot or Codex, with the Arm MCP Server. This gives the assistant direct tool access to run Performix recipes on your remote Arm target and create a faster feedback loop while you iterate on `matmul_user`.
 
@@ -66,6 +66,8 @@ Restart your coding assistant, then prompt it to run Performix Instruction Mix a
 
 ![Screenshot of a coding assistant prompt configured to use Arm MCP Server tools for running Performix recipes and analyzing matmul_user optimization opportunities in the GPT-2 workload.#center](./mcp-performix-prompt.webp "Coding assistant prompt for Performix analysis through Arm MCP Server")
 
-## Next steps
+## What you've accomplished and what's next
 
-In this optional section, you implemented and profiled a custom `matmul_user` kernel using the same workflow you used for baseline analysis. Next, you'll compare instruction mix and throughput across scalar, NEON, SVE, and KleidiAI variants.
+You've now optionally implemented and profiled a custom `matmul_user` kernel using the same workflow you used for baseline analysis. 
+
+Next, you'll compare instruction mix and throughput across scalar, NEON, SVE, and KleidiAI variants.

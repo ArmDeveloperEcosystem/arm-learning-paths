@@ -1,5 +1,5 @@
 ---
-title: Set up and run GPT-2 baseline
+title: Set up and run a GPT-2 baseline
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,9 @@ layout: learningpathall
 
 ## Prepare the environment
 
-Use an Arm Linux target, such as an Arm Neoverse cloud instance. The results in this Learning Path were collected on a Graviton 3 instance based on Neoverse V1 running Ubuntu 24.04 LTS. If you have not configured Arm Performix yet, complete setup and target connection using the [Arm Performix install guide](/install-guides/performix/).
+Use an Arm Linux target, such as an Arm Neoverse cloud instance. The results in this Learning Path were collected on a Graviton 3-based instance based on Neoverse V1 running Ubuntu 24.04 LTS. 
+
+If you've not configured Arm Performix yet, complete setup and target connection using the [Arm Performix install guide](/install-guides/performix/).
 
 Install build prerequisites and clone the GPT-2 example repository:
 
@@ -109,6 +111,8 @@ The output is:
 
 ![Animated terminal output showing GPT-2 baseline inference running on Arm Linux, including generated text and the final tokens-per-second summary.#center](./gpt2-baseline.gif "GPT-2 baseline runtime output on Arm Linux")
 
-## Next steps
+## What you've accomplished and what's next
 
-You now have a working baseline binary and model files. Next, you'll use the Instruction Mix recipe in Arm Performix to inspect static disassembly and dynamic runtime behavior.
+You now have a working baseline binary and model files. 
+
+Next, you'll use the Instruction Mix recipe in Arm Performix to inspect static disassembly and dynamic runtime behavior.

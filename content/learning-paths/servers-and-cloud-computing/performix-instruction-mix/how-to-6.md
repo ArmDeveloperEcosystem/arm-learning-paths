@@ -1,5 +1,5 @@
 ---
-title: Accelerate with KleidiAI
+title: Accelerate execution with KleidiAI
 weight: 8
 
 ### FIXED, DO NOT MODIFY
@@ -13,25 +13,26 @@ Getting close to peak matmul performance is complex, especially in transformer i
 - *Packing* is a preprocessing step which rearranges matrix data into a layout that matches the compute kernel, which reduces cache misses and improves contiguous vector loads. 
 
 - *Tiling* breaks large matrices into smaller blocks that fit better in cache, so data is reused more often and memory bandwidth pressure is lower.
-Arm created [KleidiAI](https://github.com/ARM-software/kleidiai) to provide the fastest Arm CPU microkernels on packing and tiled matrix multiplication so you can use these optimizations without writing and tuning every low-level kernel yourself.
+
+Arm created [KleidiAI](https://github.com/ARM-software/kleidiai) to provide the fastest Arm CPU microkernels on packing and tiled matrix multiplication, so you can use these optimizations without writing and tuning every low-level kernel yourself.
 
 ## KleidiAI integration in the GPT-2 example
 
-The file `src/kernels/matmul_kai_sve.cpp` is the runtime bridge between your model code and a KleidiAI float32 SVE microkernel. Since packing is a preprocessing step, this workflow uses a slightly modified inference engine, `gpt2_kai_sve.cpp`. It builds a `kai_matmul_clamp_f32_f32_f32p_ukernel` function table and binds function pointers such as:
+The file `src/kernels/matmul_kai_sve.cpp` is the runtime bridge between your model code and a KleidiAI float32 SVE microkernel. Because packing is a preprocessing step, this workflow uses a slightly modified inference engine, `gpt2_kai_sve.cpp`. It builds a `kai_matmul_clamp_f32_f32_f32p_ukernel` function table and binds function pointers such as:
 
 - `kai_get_n_step_matmul_clamp_f32_f32_f32p4vlx1b_6x4vl_sve_mla`
 - `kai_get_rhs_packed_offset_matmul_clamp_f32_f32_f32p4vlx1b_6x4vl_sve_mla`
 - `kai_run_matmul_clamp_f32_f32_f32p4vlx1b_6x4vl_sve_mla`
 
-The `kai_run_matmul_clamp_f32_f32_f32p4vlx1b_6x4vl_sve_mla` is our entry. As per [the naming convention](https://github.com/ARM-software/kleidiai/blob/main/kai/ukernels/matmul/README.md), this kernel performs an FP32 matrix multiplication, computing output tiles of 6 × 4VL (6 rows by four SVE vector lengths of columns) using SVE (multiply–accumulate) MLA instructions on prepacked RHS weights for efficient cache and SIMD utilization.
+The `kai_run_matmul_clamp_f32_f32_f32p4vlx1b_6x4vl_sve_mla` is our entry. As per [the naming convention](https://github.com/ARM-software/kleidiai/blob/main/kai/ukernels/matmul/README.md), this kernel performs an FP32 matrix multiplication, computing output tiles of 6 × 4VL (six rows by four SVE vector lengths of columns) using SVE (multiply–accumulate) MLA instructions on prepacked RHS weights for efficient cache and SIMD utilization.
 
-For more details on KleidiAI, please refer to the [official GitLab repository](https://gitlab.arm.com/kleidi/kleidiai).
+For more details on KleidiAI, see the [official GitLab repository](https://gitlab.arm.com/kleidi/kleidiai).
 
 ## Key source code
 
 All matmul implementations in `src/kernels/` follow the same high-level pattern from `matmul.h`: they compute float32 output from float32 input vectors and weights. The KleidiAI variant keeps this behavior but changes the RHS argument to a packed buffer (`const uint8_t* rhs_packed`) so the compute path can consume prepacked tiles.
 
-The header interface in KleidiAI defines the core run method through the ukernel function table, and this path uses the float32-to-float32 kernel family (`f32_f32_f32p`).
+The header interface in KleidiAI defines the core run method through the ukernel function table, and this path uses the float32-to-float32 kernel family (`f32_f32_f32p`):
 
 ```cpp
 static const kai_matmul_clamp_f32_f32_f32p_ukernel ukernel = {
@@ -64,7 +65,7 @@ In `src/gpt2_kai_sve.cpp`, runtime code prepares packed weights once with `kai_r
 
 ## SVE intrinsics versus KleidiAI
 
-Run the comparison script from the repository root with the following command.
+Run the comparison script from the repository root with the following command:
 
 ```bash { command_line="ubuntu@ip | 2-30"}
 ./compare_gpt2_variants.sh kai
@@ -95,12 +96,13 @@ run 1: 3.04784 tok/s
 avg: 3.047840 tok/s
 ```
 
-`gpt2_sve` uses SVE intrinsics directly but does not use KleidiAI packing and microkernel dispatch. `gpt2_kai_sve` adds those optimized packing and ukernel paths, which is why throughput is higher in this workload. Compared to the non-vectorized baseline (`gpt2`), this FP32 KleidiAI microkernel path achieves about a 5.4x speedup in this example, without quantization.
+`gpt2_sve` uses SVE intrinsics directly but doesn't use KleidiAI packing and microkernel dispatch. `gpt2_kai_sve` adds those optimized packing and ukernel paths, which is why throughput is higher in this workload. 
 
+Compared to the non-vectorized baseline (`gpt2`), this FP32 KleidiAI microkernel path achieves about a 5.4x speedup in this example, without quantization.
 
 ### Run with multiple threads
 
-You can increase throughput by running the KleidiAI path with multiple matmul threads. For this 355M model, tune `--matmul-threads` heuristically on your target system to find the optimal value. For our Graviton 3 instance, we observe a max token generation speed of 34.5 token/s with 4 threads.
+You can increase throughput by running the KleidiAI path with multiple matmul threads. For this 355M model, tune `--matmul-threads` heuristically on your target system to find the optimal value. For a Graviton 3-based instance, you'll observe a max token generation speed of 34.5 token/s with 4 threads.
 
 
 ``` bash { command_line="ubuntu@ip | 3-50"}
@@ -137,8 +139,8 @@ They would be kicked out of the village, and they would suffer and die as punish
 
 ```
 
-## Summary
+## What you've accomplished
 
-You used Arm Performix Instruction Mix to detect scalar-heavy hot paths, validated vectorization changes with static and dynamic evidence, and compared baseline, Neon, SVE, and KleidiAI-backed matmul implementations. Starting from roughly 3 tok/s with scalar code, you reached about 15 tok/s with SVE intrinsics and 35 tok/s with KleidiAI packing, tiling, and multithreading.
+You've now accelerated the GPT-2 example with KleidiAI and compared the KleidiAI-backed matmul implementation with baseline, Neon, and SVE implementations. Starting from roughly 3 tok/s with scalar code, you reached about 15 tok/s with SVE intrinsics and 35 tok/s with KleidiAI packing, tiling, and multithreading.
 
-This workflow is transferable to your own codebase: use instruction mix to detect missed vectorization and other unexpected instruction-balance patterns, validate changes with static and runtime evidence, and then tune to meet your performance requirements.
+You can transfer this workload to your own codebase: use the Instruction Mix recipe to detect missed vectorization and other unexpected instruction-balance patterns, validate changes with static and runtime evidence, and then tune to meet your performance requirements.

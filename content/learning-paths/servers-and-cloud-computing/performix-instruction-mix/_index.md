@@ -1,24 +1,20 @@
 ---
 title: Profile GPT-2 instruction mix with Arm Performix
 
-draft: true
-cascade:
-    draft: true
-
 description: Learn how to profile GPT-2 inference on Arm Neoverse with the Arm Performix Instruction Mix recipe, identify scalar versus vector execution patterns, and improve throughput with NEON, SVE, and KleidiAI kernels.
 
 minutes_to_complete: 45
 
-who_is_this_for: This is an introductory topic for developers who want to get started using the instruction mix recipe in Arm Performix through a practical example.
+who_is_this_for: This is an introductory topic for developers who want to get started using the Arm Performix Instruction Mix recipe through a practical example.
 
 learning_objectives: 
-    - Explain how the Instruction Mix recipe combines static disassembly with runtime sampling to show execution behavior
+    - Understand how the Instruction Mix recipe combines static disassembly with runtime sampling to show execution behavior
     - Build and run the GPT-2 inference example on an Arm Linux server
     - Identify why matrix multiplication dominates runtime and how vectorization changes the instruction mix
     - Compare throughput and instruction mix across scalar, NEON, SVE, and KleidiAI implementations
 
 prerequisites:
-    - Access to Arm Performix configured with a remote Arm Linux target. For setup, see the [Arm Performix install guide](/install-guides/performix/)
+    - Access to Arm Performix configured with a remote Arm Linux target. For setup, see the [Arm Performix install guide](/install-guides/performix/).
     - Basic understanding of C++ and compiler optimization
     - Basic understanding of matrix multiplication
     - Basic understanding of writing SIMD code with Neon or SVE

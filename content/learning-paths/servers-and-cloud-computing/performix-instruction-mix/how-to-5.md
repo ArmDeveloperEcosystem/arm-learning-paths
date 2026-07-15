@@ -1,14 +1,16 @@
 ---
-title: Compare Neon and SVE
+title: Compare Neon and SVE with the Arm Performix Instruction Mix recipe
 weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Verify vectorization with instruction mix
+## Verify vectorization with the Instruction Mix recipe
 
-In the earlier build step, you created `gpt2_neon` and `gpt2_sve`. These binaries use the reference solutions in `matmul_neon.cpp` and `matmul_sve.cpp`, respectively. Run the `gpt2_neon` binary with the following command to observe the speedup. 
+In the earlier build step, you created `gpt2_neon` and `gpt2_sve`. These binaries use the reference solutions in `matmul_neon.cpp` and `matmul_sve.cpp`, respectively. 
+
+Run the `gpt2_neon` binary with the following command to observe the speedup. 
 
 ```bash
 ./build/gpt2_neon --model gpt2-medium "Once upon a time" -n 20
@@ -18,7 +20,7 @@ In the earlier build step, you created `gpt2_neon` and `gpt2_sve`. These binarie
 
 The Neon implementation delivers a noticeable increase in token generation throughput. To evaluate the SVE implementation, run the same workload using the `gpt2_sve` binary instead of `gpt2_neon`. Performance gains will vary across systems, largely depending on the Scalable Vector Length (SVL) supported by the Arm Linux platform.
 
-Rerun the Instruction Mix recipe with the `gpt2_neon` binary using the same recipe settings and workload arguments as baseline. After the run completes, select both runs and click **Compare** to open a comparison view.
+Rerun the Instruction Mix recipe with the `gpt2_neon` binary using the same recipe settings and workload arguments as baseline. After the run completes, select both runs and select **Compare** to open a comparison view.
 
 {{% notice Tip %}}
 
@@ -36,23 +38,25 @@ You can also compare SVE variants in the same way. The increase in SVE operation
 
 ## Compare throughput across kernels
 
-#### Neon kernel
+Compare throughput across Neon and SVE.
+
+### Neon kernel
 
 You can also inspect the Neon intrinsic implementation using Compiler Explorer, where the hot accumulation step (`vacc`) runs in ASIMD (Neon) registers such as `v0`:
 
 {{< godbolt width="100%" height="400px" mode="assembly" opt="-O2 -g -march=armv8.2-a+simd" src="#include <arm_neon.h>\n\nvoid matmul_neon(float *out, const float *x, const float *W, const float *b,\n                 int n_in, int n_out) {\n    for (int i = 0; i < n_out; i++) {\n        float acc = b ? b[i] : 0.f;\n        const float *row = W + (unsigned long long)i * (unsigned long long)n_in;\n        int j = 0;\n        float32x4_t vacc = vdupq_n_f32(0.f);\n        for (; j + 4 <= n_in; j += 4) {\n            const float32x4_t vw = vld1q_f32(row + j);\n            const float32x4_t vx = vld1q_f32(x + j);\n            vacc = vfmaq_f32(vacc, vw, vx);\n        }\n        acc += vaddvq_f32(vacc);\n        for (; j < n_in; j++) acc += row[j] * x[j];\n        out[i] = acc;\n    }\n}" >}}
 
 
-#### SVE kernel
+### SVE kernel
 
 For variable-length vectorization, compare with an explicit SVE implementation that assumes SVE support, where the hot accumulation step (`vacc`) runs in SVE z registers with predicate-controlled loads and multiply-accumulate:
 
 {{< godbolt width="100%" height="400px" mode="assembly" opt="-O2 -g -march=armv8.2-a+sve" src="#include <arm_sve.h>\n#include <stddef.h>\n\nvoid matmul_sve(float *out, const float *x, const float *W, const float *b,\n                int n_in, int n_out) {\n    for (int i = 0; i < n_out; i++) {\n        float acc = b ? b[i] : 0.f;\n        const float *row = W + (size_t)i * n_in;\n        svfloat32_t vacc = svdup_f32(0.f);\n        int j = 0;\n        while (j < n_in) {\n            svbool_t pg = svwhilelt_b32((uint64_t)j, (uint64_t)n_in);\n            svfloat32_t vw = svld1(pg, row + j);\n            svfloat32_t vx = svld1(pg, x + j);\n            vacc = svmla_f32_m(pg, vacc, vw, vx);\n            j += svcntw();\n        }\n        acc += svaddv_f32(svptrue_b32(), vacc);\n        out[i] = acc;\n    }\n}" >}}
 
 
-For a full-page view, open [Godbolt session with all three matmul kernels](https://godbolt.org/z/E4a7Wxh8K).
+For a full-page view, open a [Godbolt session with all three matmul kernels](https://godbolt.org/z/E4a7Wxh8K).
 
-## Speed up
+## Measure speed up
 
 Run the provided comparison script to measure tokens per second across all available binaries:
 
@@ -80,4 +84,10 @@ run 1: 3.04859 tok/s
 avg: 3.048590 tok/s
 ```
 
-These results show that intrinsics increase throughput from about 3 tok/s in the scalar baseline to about 13.9 tok/s with SVE. Next, you will use optimized libraries to push performance further.
+These results show that intrinsics increase throughput from about 3 tok/s in the scalar baseline to about 13.9 tok/s with SVE. 
+
+## What you've accomplished and what's next
+
+You've now verified vectorization using the Instruction Mix recipe, compared throughput across Neon and SVE, and measure tokens per second across the available binaries. 
+
+Next, you'll use optimized libraries to push performance further.
