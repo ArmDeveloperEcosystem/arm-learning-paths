@@ -1,5 +1,6 @@
 ---
 title: Set up and run a GPT-2 baseline
+description: Prepare an Arm Linux target, export GPT-2 Medium model assets, review the baseline matrix multiplication path, and run the scalar GPT-2 inference binary.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

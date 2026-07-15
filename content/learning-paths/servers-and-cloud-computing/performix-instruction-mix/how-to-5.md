@@ -1,5 +1,6 @@
 ---
 title: Compare Neon and SVE with the Arm Performix Instruction Mix recipe
+description: Compare Neon and SVE GPT-2 kernels with Arm Performix Instruction Mix data and throughput results to verify vectorized execution.
 weight: 7
 
 ### FIXED, DO NOT MODIFY

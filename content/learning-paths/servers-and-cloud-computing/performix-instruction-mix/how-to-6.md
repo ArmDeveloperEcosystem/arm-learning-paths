@@ -1,5 +1,6 @@
 ---
 title: Accelerate execution with KleidiAI
+description: Review the KleidiAI SVE matrix multiplication path, compare it with scalar and intrinsic kernels, and measure GPT-2 throughput gains.
 weight: 8
 
 ### FIXED, DO NOT MODIFY

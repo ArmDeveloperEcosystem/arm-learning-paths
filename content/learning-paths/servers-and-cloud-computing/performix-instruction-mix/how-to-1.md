@@ -1,5 +1,6 @@
 ---
 title: Understand profiling with Arm Performix Instruction Mix
+description: See how the Arm Performix Instruction Mix recipe combines static disassembly and runtime sampling to reveal scalar and vector execution patterns in GPT-2 inference.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

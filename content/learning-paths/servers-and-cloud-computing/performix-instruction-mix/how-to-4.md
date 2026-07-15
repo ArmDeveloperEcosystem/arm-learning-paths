@@ -1,5 +1,6 @@
 ---
 title: (Optional) Optimize matmul with vector intrinsics
+description: Optionally implement a custom Neon or SVE matrix multiplication kernel and profile it with Arm Performix or the Arm MCP Server.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
