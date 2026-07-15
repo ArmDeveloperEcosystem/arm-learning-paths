@@ -10,10 +10,10 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 ## Workflow
 
 1. Identify the target file, section, or selected text.
-2. Read surrounding context so style edits preserve the author's intent and the technical flow. If you've previously read the page, use context and don't re-read it unless there's a change since the last read. 
+2. Read surrounding context so style edits preserve the author's intent and the technical flow. If you've previously read the page, use context and don't re-read it unless asked to. 
 3. Review the target against the guidelines defined in this skill.
 4. Depending on request type, do the following:
-  - For review requests, report high-impact style issues by file and line when possible. 
+  - For review requests, report style issues by file and line when possible, ordered by severity. 
   - For edit requests, make focused rewrites, then re-open changed sections to check Markdown, shortcodes, links, and code fences.
 
 ## Voice and tone
