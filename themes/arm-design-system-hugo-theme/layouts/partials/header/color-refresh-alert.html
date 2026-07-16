@@ -1,12 +1,14 @@
 {{/* Site-wide launch notice. The homepage is excluded by baseof.html. */}}
 <div id="color-refresh-alert-container" hidden>
-    <ads-alert
-        id="color-refresh-alert"
-        theme="dark"
-        level="default"
-        has-close-button="true"
-        text="We’ve refreshed our colors. The site’s content and functionality remain the same."
-    ></ads-alert>
+    <div class="color-refresh-alert-inner is-responsive-width">
+        <ads-alert
+            id="color-refresh-alert"
+            theme="dark"
+            level="default"
+            has-close-button="true"
+            text="We’ve refreshed our colors. The site’s content and functionality remain the same."
+        ></ads-alert>
+    </div>
 </div>
 
 <script>

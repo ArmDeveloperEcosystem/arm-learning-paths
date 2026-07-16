@@ -227,6 +227,12 @@ ads-masthead {
     --ads-masthead-border-bottom-color: transparent;
 }
 
+/* Align the alert icon with the masthead title while its surface spans the page. */
+#color-refresh-alert-container {
+    background-color: #F0F0F0;
+    overflow: hidden;
+}
+
 /* Bypass ADS's fixed 70% heading wrapper while retaining its typography. */
 ads-masthead #ads-masthead-title {
     box-sizing: border-box;
