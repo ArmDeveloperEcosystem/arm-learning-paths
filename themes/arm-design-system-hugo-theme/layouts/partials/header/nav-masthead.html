@@ -23,16 +23,16 @@
             <arm-top-navigation observe="#breadcrumb-element"></arm-top-navigation>
         </div>
         <!-- Masthead -->
-        <div id="expanded-masthead">
+        <div id="expanded-masthead" class="u-bg-color-ads-ui-violet-90">
             <div class="is-responsive-width">
                 <ads-masthead style="background-color: rgba(0,0,0,0)" theme="dark">
                     {{partial "header/breadcrumbs.html" .}}
             
                     <!-- Change title slightly for Tag entries -->
                     {{ if eq .Kind "term" }}
-                        <h1 id="ads-masthead-title" slot="heading"><span>Tag: {{.Title}}</span></h1>
+                        <h1 id="ads-masthead-title"><span>Tag: {{.Title}}</span></h1>
                     {{else}}
-                        <h1 id="ads-masthead-title" slot="heading"><span>{{.Title}}</span></h1>
+                        <h1 id="ads-masthead-title"><span>{{.Title}}</span></h1>
                     {{end}}
                 </ads-masthead>
             </div>
