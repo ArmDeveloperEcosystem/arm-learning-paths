@@ -16,7 +16,7 @@ learning_objectives:
 
 
 prerequisites:
-    - "Recommended: complete [Enable Neural Frame Rate Upscaling in Unreal Engine](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/)
+    - "Recommended: complete [Enable Neural Frame Rate Upscaling in Unreal Engine](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/)"
     - Windows 11
     - Unreal Engine 5.4 or 5.6 with Templates and Feature Pack enabled
     - Visual Studio with Desktop Development with C++ and .NET desktop build tools
