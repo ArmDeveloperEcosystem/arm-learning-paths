@@ -1,5 +1,5 @@
 ---
-title: "Install Model Explorer and the adapters, and view a Cortex-M model graph"
+title: "Install Model Explorer extensions and view a Cortex-M model graph"
 
 weight: 3
 
@@ -9,11 +9,29 @@ layout: "learningpathall"
 
 ## Clone the repo of example models
 
-In this section, you install Model Explorer in a clean Python virtual environment, along with the Arm adapters, and confirm it is working using the PTE adapter. First you will clone the repo of example models to use across the course of this learning path.
+In this section, you install Model Explorer and the Arm extensions in a clean Python virtual environment. You then confirm the installation by opening a Cortex-M `.pte` file. First, clone the repository of example models used throughout this Learning Path.
 
 Use a machine capable of displaying a browser e.g, a laptop.
 
-This repository uses Git LFS for model artifacts. After cloning, run `git lfs pull` to download the files.
+This repository uses Git LFS for model artifacts. Install and configure Git LFS for your operating system. You only need to run `git lfs install` once for your user account.
+
+{{< tabpane code=true >}}
+  {{< tab header="Linux" language="bash">}}
+sudo apt update
+sudo apt install -y git-lfs
+git lfs install
+  {{< /tab >}}
+  {{< tab header="macOS" language="bash">}}
+brew install git-lfs
+git lfs install
+  {{< /tab >}}
+  {{< tab header="Windows PowerShell" language="powershell">}}
+winget install -e --id GitHub.GitLFS
+git lfs install
+  {{< /tab >}}
+{{< /tabpane >}}
+
+Clone the artifacts repository, then use `git lfs pull` to download the model files:
 
 ```bash
 git clone https://github.com/arm-education/ml-model-artifacts.git
@@ -24,6 +42,8 @@ git lfs pull
 ## Create a virtual environment
 
 Use a separate environment to avoid dependency conflicts with any ExecuTorch build, notebook, or application environment you already use:
+
+Use Python 3.10, 3.11, or 3.12 for this environment.
 
 If you use WSL on Windows, follow the Linux/macOS commands.
 
@@ -48,53 +68,32 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 {{% /notice %}}
 
-## Install Model Explorer
+## Install Model Explorer and the Arm extensions
 
-Install Model Explorer and PyTorch in the active virtual environment.
-
-The Linux command pins PyTorch to the CPU wheel index because this Learning Path does not need CUDA. On macOS and Windows, the standard PyPI install is usually sufficient.
-
-{{< tabpane code=true >}}
-  {{< tab header="Linux" language="bash">}}
-pip install torch --index-url https://download.pytorch.org/whl/cpu
-pip install ai-edge-model-explorer
-  {{< /tab >}}
-  {{< tab header="macOS" language="bash">}}
-pip install torch ai-edge-model-explorer
-  {{< /tab >}}
-  {{< tab header="Windows PowerShell" language="powershell">}}
-pip install torch ai-edge-model-explorer
-  {{< /tab >}}
-{{< /tabpane >}}
-
-## Install the Arm adapters
-
-{{% notice TODO before release %}}
-Update this installation section after the ExecuTorch Model Explorer extension is released.
-
-The intended install flow is to install the PTE, ETRecord, and ETDump adapters/data provider as one ExecuTorch extension, then launch Model Explorer with that ExecuTorch extension alongside the TOSA and VGF adapters. Until that package is available, keep the ETRecord and ETDump install and launch instructions under review.
-{{% /notice %}}
-
-Install the PTE, TOSA, and VGF adapters used for the static artifact sections:
+Install the combined ExecuTorch extension with the separate TOSA and VGF adapters:
 
 ```bash
-pip install pte-adapter-model-explorer
-pip install tosa-adapter-model-explorer
-pip install vgf-adapter-model-explorer
+python -m pip install executorch-extension-model-explorer tosa-adapter-model-explorer vgf-adapter-model-explorer
 ```
+
+The ExecuTorch extension provides the PTE adapter, ETRecord adapter, and ETDump profiling data provider. The separate TOSA and VGF adapters open standalone `.tosa` and `.vgf` files.
+
+{{% notice Note %}}
+For component development or focused debugging, you can install the ExecuTorch components separately as `pte-adapter-model-explorer`, `etrecord-adapter-model-explorer`, and `etdump-data-provider-model-explorer`. For this Learning Path, use the combined `executorch-extension-model-explorer` package.
+{{% /notice %}}
 
 ## Launch Model Explorer
 
-Launch Model Explorer with the Arm adapters. This is the recommended route for the static artifact sections because you will open `.pte`, `.tosa`, and `.vgf` artifacts. Also shown are examples of running the base model explorer without adapters, and running with a single adapter.
+Launch Model Explorer with all extensions used in this Learning Path. The combined ExecuTorch extension opens `.pte` and `.etrecord` files and adds `.etdp` profiling data. The separate TOSA and VGF extensions open `.tosa` and `.vgf` files.
 
 This will launch a webpage in your browser.
 
 {{< tabpane code=true >}}
-  {{< tab header="All adapters" language="bash">}}
-model-explorer --extensions=pte_adapter_model_explorer,tosa_adapter_model_explorer,vgf_adapter_model_explorer
+  {{< tab header="All Learning Path extensions" language="bash">}}
+model-explorer --extensions=executorch_extension_model_explorer,tosa_adapter_model_explorer,vgf_adapter_model_explorer
   {{< /tab >}}
-  {{< tab header="PTE adapter" language="bash">}}
-model-explorer --extensions=pte_adapter_model_explorer
+  {{< tab header="ExecuTorch extension" language="bash">}}
+model-explorer --extensions=executorch_extension_model_explorer
   {{< /tab >}}
   {{< tab header="No adapters" language="bash">}}
 model-explorer
@@ -162,6 +161,6 @@ Click the `eye symbol` in the top left bar to select data to view on nodes and e
 
 ## What you have learned
 
-You have installed Model Explorer, launched it with the Arm adapters, and opened your first `.pte` artifact. You have also learned how to inspect the graph overview, expand into the `forward` layer, read operator metadata, and interpret common low-level `.pte` fields such as `KernelCall`, `op_index`, and `args`.
+You have installed Model Explorer, launched it with the Arm extensions, and opened your first `.pte` artifact. You have also learned how to inspect the graph overview, expand into the `forward` layer, read operator metadata, and interpret common low-level `.pte` fields such as `KernelCall`, `op_index`, and `args`.
 
 Next, you will keep the same browser tab open and compare portable and XNNPACK `.pte` artifacts to see how backend delegation changes the graph.

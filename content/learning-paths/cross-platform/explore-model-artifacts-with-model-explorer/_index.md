@@ -1,11 +1,7 @@
 ---
-title: Visualize ExecuTorch PTE, TOSA, VGF, ETRecord, and ETDump artifacts with Google's Model Explorer
+title: Visualize ExecuTorch, TOSA, and VGF artifacts with Google's Model Explorer and Arm Extensions
 
-draft: true
-cascade:
-    draft: true
-
-description: Learn how to inspect ExecuTorch PTE, TOSA, VGF, ETRecord, and ETDump model artifacts with Google Model Explorer and Arm adapters.
+description: Learn how to inspect ExecuTorch PTE, TOSA, VGF, ETRecord, and ETDump model artifacts with Google Model Explorer and Arm extensions.
 
 minutes_to_complete: 90
 
@@ -13,7 +9,7 @@ who_is_this_for: This learning path is for Edge AI developers who need to inspec
 
 learning_objectives:
   - Explain what Google Model Explorer is and how adapters add support for Arm model artifacts
-  - Install Model Explorer, launch it with the PTE, TOSA, and VGF adapters, and use the runtime overlay extension for ETRecord and ETDump
+  - Install the combined ExecuTorch extension and the separate TOSA and VGF adapters for Model Explorer
   - Open ExecuTorch .pte files and compare portable CPU, XNNPACK CPU, and Ethos-U artifacts
   - Use PTE visualization to reason about delegate regions, work outside delegates, graph fragmentation, and backend-specific changes
   - Inspect TOSA flatbuffers as an intermediate representation used by Arm compiler and backend workflows
@@ -21,7 +17,7 @@ learning_objectives:
   - Use ETRecord and ETDump overlays to connect exported graph structure with runtime profiling data
 
 prerequisites:
-  - Python 3.10 or later
+  - Python 3.10, 3.11, or 3.12
   - Basic familiarity with PyTorch, ExecuTorch, or model deployment workflows
 
 author:
@@ -54,7 +50,6 @@ shared_path: true
 shared_between:
   - embedded-and-microcontrollers
   - mobile-graphics-and-gaming
-  - ai
 
 further_reading:
   - resource:
@@ -62,8 +57,20 @@ further_reading:
       link: https://github.com/google-ai-edge/model-explorer
       type: repository
   - resource:
+      title: ExecuTorch extension for Model Explorer
+      link: https://github.com/arm/executorch-extension-model-explorer
+      type: repository
+  - resource:
       title: PTE adapter for Model Explorer
       link: https://github.com/arm/pte-adapter-model-explorer
+      type: repository
+  - resource:
+      title: ETRecord adapter for Model Explorer
+      link: https://github.com/arm/etrecord-adapter-model-explorer
+      type: repository
+  - resource:
+      title: ETDump data provider for Model Explorer
+      link: https://github.com/arm/etdump-data-provider-model-explorer
       type: repository
   - resource:
       title: TOSA adapter for Model Explorer

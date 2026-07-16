@@ -96,6 +96,8 @@ The second LRN TOSA file is the larger fragment. It starts from the original ima
 
 The graph fragmentation has become visible as multiple backend-ready TOSA artifacts. That matches the fragmented `.pte` view, where two `EthosUBackend` delegate regions were separated by non-delegated work.
 
+The two TOSA files show where the backend-supported graph was split. They do not measure the cost of that split or confirm that the non-delegated operators can run in the deployed runtime. Runtime profiling is needed to identify whether boundary-related work or non-delegated operators dominate execution.
+
 ## Use TOSA outside ExecuTorch
 
 TOSA is not limited to ExecuTorch. ExecuTorch can lower supported graph partitions to TOSA, but a different framework, internal compiler, or proprietary model frontend could also produce TOSA directly.

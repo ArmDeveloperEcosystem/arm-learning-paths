@@ -89,7 +89,7 @@ Look for:
 - Multiple delegate regions
 - Operators between delegate regions
 - Unsupported operations or graph patterns outside the NPU delegate
-- Extra tensor movement around backend boundaries
+- Quantize, dequantize, or non-delegated operators between delegate regions
 
 ![Screenshot of examining a fragmented INT8 Ethos-U PTE in Model Explorer.#center](ethos-u-int8-fragmented.png "Inspecting fragmented INT8 Ethos-U PTE with Model Explorer")
 
@@ -104,7 +104,7 @@ In Model Explorer, compare it with the clean delegated artifact:
 - You should see quantize and dequantize nodes around the delegated regions.
 - You should see an `aten::avg_pool3d` node between the delegate regions. This is visible non-delegated work that breaks the otherwise contiguous NPU path.
 
-This is what fragmentation looks like in a `.pte`: the NPU still accelerates supported regions, but unsupported work splits the graph and creates extra delegate boundaries. In a deployed runtime, non-delegated work can run on the CPU only if the runtime includes compatible kernels for those operators, dtypes, layouts, and shapes. Cortex-M bare-metal runtimes often include a narrower kernel set than Cortex-A runtimes, and both can use selective builds that include only the kernels required by the product.
+This is what fragmentation looks like in a `.pte`: the NPU still accelerates supported regions, but unsupported work splits the graph and creates extra delegate boundaries. Additional boundaries can introduce data conversion, synchronization, or tensor movement. Non-delegated operators can also dominate runtime, or fail to run if the deployed runtime does not include compatible kernels for their operators, data types, layouts, and shapes. The static graph shows where delegation splits, but it does not show which cost dominates.
 
 ## Compare targets only with target-specific artifacts
 

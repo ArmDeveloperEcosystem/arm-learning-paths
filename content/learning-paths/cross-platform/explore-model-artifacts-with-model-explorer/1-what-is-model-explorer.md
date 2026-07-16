@@ -7,11 +7,11 @@ weight: 2
 layout: "learningpathall"
 ---
 
-## Model Explorer and Arm Adapters
+## Model Explorer and Arm extensions
 
 [Model Explorer](https://ai.google.dev/edge/model-explorer) is an open-source, web-based graph visualizer and debugger from Google AI Edge. It provides a hierarchical view of model graphs, lets you expand and collapse layers, search for nodes, inspect metadata, highlight inputs and outputs, compare models, and add overlays to graph nodes. The default version, [contained in this repository](https://github.com/google-ai-edge/model-explorer/) supports TFLite, TF, TFJS, MLIR, and PyTorch (Exported Program) formats.
 
-Model Explorer uses adapters and data providers to load formats beyond the built-in model types. The Arm adapters used in this Learning Path transform `.pte`, `.tosa`, `.vgf`, and `.etrecord` files into graph data that Model Explorer can display. In the final section, you also add `.etdp` runtime trace data as an overlay on top of the exported graph.
+Model Explorer uses adapters and data providers to load formats beyond the built-in model types. The [ExecuTorch extension for Model Explorer](https://github.com/arm/executorch-extension-model-explorer) combines support for `.pte`, `.etrecord`, and `.etdp` files. Standalone `.tosa` and `.vgf` files use separate TOSA and VGF adapters. You install all three packages together in the next section.
 
 ## What you will do
 
@@ -21,13 +21,13 @@ The artifacts covered in this learning path are:
 
 | Artifact | Model Explorer support | Workflow layer | Use it to inspect |
 | --- | --- | --- | --- |
-| `.pte` | `pte-adapter-model-explorer` | ExecuTorch program | Delegate regions, backend partitioning, work outside delegates, and the deployed ExecuTorch graph |
-| `.tosa` | `tosa-adapter-model-explorer` | Compiler/backend intermediate representation | Lowered operators, tensor shapes, quantized types, graph splits, and missed optimization opportunities |
-| `.vgf` | `vgf-adapter-model-explorer` | Vulkan ML graph artifact | Inputs, outputs, constants, tensor metadata, graph connectivity, and SPIR-V graph modules |
-| `.etrecord` | ExecuTorch ETRecord adapter | Export-time profiling context | Graph structure, debug handles, operator names, and delegate metadata used to map runtime events back to graph nodes |
-| `.etdp` | ExecuTorch ETDump data provider | Runtime trace overlay | Timing data from a specific execution |
+| `.pte` | PTE adapter in the ExecuTorch extension | ExecuTorch program | Delegate regions, backend partitioning, work outside delegates, and the deployed ExecuTorch graph |
+| `.tosa` | Separate TOSA adapter | Compiler/backend intermediate representation | Lowered operators, tensor shapes, quantized types, graph splits, and missed optimization opportunities |
+| `.vgf` | Separate VGF adapter | Vulkan ML graph artifact | Inputs, outputs, constants, tensor metadata, graph connectivity, and SPIR-V graph modules |
+| `.etrecord` | ETRecord adapter in the ExecuTorch extension | Export-time profiling context | Graph structure, debug handles, operator names, and delegate metadata used to map runtime events back to graph nodes |
+| `.etdp` | ETDump data provider in the ExecuTorch extension | Runtime trace overlay | Timing data from a specific execution |
 
-This learning path focusses on Arm adapters and extensions for Modle Explorer, but the repository of artifacts we use also includes some `.tflite` and `.pt2` files. You can optionally try these out as well, and they are natively supported by Model Explorer.
+This Learning Path focuses on Arm adapters and extensions for Model Explorer, but the artifacts repository also includes `.tflite` and `.pt2` files. You can optionally try these files because Model Explorer supports them without an additional adapter.
 
 {{% notice Note %}}
 Model Explorer visualizes the specific artifact you generated or received. Small differences in the target the model has been delegated to, could result in a very different model graph. For example, delegating the same model to an Ethos-U55, may produce a very different model graph from delegating to an Ethos-U85.
@@ -80,9 +80,9 @@ For VGF, the ExecuTorch Arm VGF backend uses the [Arm ML SDK Model Converter](ht
 
 When ExecuTorch is used for VGF, a `.pte` is emitted as well. Use that VGF-backend `.pte` when you want to run through ExecuTorch. Use the standalone `.vgf` when you want to inspect or integrate the Vulkan ML artifact directly, such as in a neural graphics workflow. 
 
-ETRecord and ETDump sit alongside these artifact views rather than replacing them. ETRecord is generated at export time and preserves the graph context needed for profiling attribution. ETDump is generated at runtime and records what actually happened when a `.pte` ran. Together, they let Model Explorer move from static inspection to runtime overlays: you can connect the graph structures you saw in the `.pte`, `.tosa`, and `.vgf` sections to operator and delegate events measured during execution.
-
 If you have used the [Arm Neural Graphics Model Gym](https://github.com/arm/neural-graphics-model-gym), then under the hood you have been using ExecuTorch to export your neural graphics model to VGF. If you are interested in learning more, try out the [Fine-tune neural graphics using Model Gym](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/model-training-gym/#:~:text=Upon%20completion%20of%20this%20Learning,and%20train%20neural%20graphics%20models) learning path, which briefly introduces Model Explorer.
+
+ETRecord and ETDump are additional, ExecuTorch-specific, artifacts. ETRecord is generated at export time and preserves the graph context needed for profiling attribution. ETDump is generated at runtime and records what actually happened when a `.pte` ran. Together, they let Model Explorer move from static inspection to runtime overlays: you can connect the graph structures you saw in the `.pte`, `.tosa`, and `.vgf` sections to operator and delegate events measured during execution.
 
 ## Terminology
 
@@ -112,8 +112,6 @@ The hands-on sections will use a variety of pre-provided model artifacts. These 
 
 ```output
 ml-model-artifacts/
-├── README.md
-├── LICENSE.md
 ├── pte/
 │   ├── mv2_cortex_m.pte
 │   ├── opt125m_cortex_a_portable.pte
@@ -121,15 +119,7 @@ ml-model-artifacts/
 │   ├── mv2_fp32_ethos_u85.pte
 │   ├── mv2_int8_ethos_u85.pte
 │   ├── mv2_lrn_int8_ethos_u85.pte
-│   ├── small_upscaler_ptq_vgf.pte
-│   ├── small_upscaler_qat_vgf.pte
-│   └── add_sigmoid_vgf.pte
-├── pt2/
-│   └── mv2_fp32.pt2
-├── tflite/
-│   ├── mv2_fp32.tflite
-│   ├── mv2_int8.tflite
-│   └── mv2_lrn_int8.tflite
+│   └── small_upscaler_ptq_vgf.pte
 ├── tosa/
 │   ├── mv2_fp32.tosa
 │   ├── mv2_int8.tosa
@@ -138,9 +128,7 @@ ml-model-artifacts/
 │   ├── small_upscaler_ptq.tosa
 │   └── small_upscaler_qat.tosa
 ├── vgf/
-│   ├── small_upscaler_ptq.vgf
-│   ├── small_upscaler_qat.vgf
-│   └── add_sigmoid.vgf
+│   └── small_upscaler_ptq.vgf
 ├── etrecord/
 │   ├── opt125m_portable.etrecord
 │   ├── opt125m_xnnpack.etrecord
@@ -157,6 +145,6 @@ ml-model-artifacts/
 
 ## What you have learned
 
-You have learned how Model Explorer uses adapters and data providers to load artifact formats beyond its built-in model types. You have also seen how `.pte`, `.tosa`, `.vgf`, `.etrecord`, and `.etdp` files fit into Cortex-A, Cortex-M, Ethos-U, Vulkan ML, and ExecuTorch profiling workflows. The artifacts repository also includes `.pt2` and `.tflite` files that you can inspect directly as optional extensions.
+You have learned how the combined ExecuTorch extension and the separate TOSA and VGF adapters add artifact formats to Model Explorer. You have also seen how `.pte`, `.tosa`, `.vgf`, `.etrecord`, and `.etdp` files fit into Cortex-A, Cortex-M, Ethos-U, Vulkan ML, and ExecuTorch profiling workflows.
 
-Next, you will install Model Explorer, launch it with the Arm adapters, and open the first `.pte` artifact.
+Next, you will install Model Explorer and the Arm extensions, then open the first `.pte` artifact.
