@@ -15,9 +15,9 @@
   
           <!-- Change title slightly for Tag entries -->
           {{ if eq .Kind "term" }}
-            <h1 id="ads-masthead-title" slot="heading"><span>Tag: {{.Title}}</span></h1>
+            <h1 id="ads-masthead-title"><span>Tag: {{.Title}}</span></h1>
           {{else}}
-            <h1 id="ads-masthead-title" slot="heading"><span>{{.Title}}</span></h1>
+            <h1 id="ads-masthead-title"><span>{{.Title}}</span></h1>
           {{end}}
       </ads-masthead>
       </div>

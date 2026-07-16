@@ -18,7 +18,7 @@ ads-breadcrumbs:not(:defined) {
 
 /* The homepage uses the ADS v5 Arm Ink background hierarchy. */
 html[theme='dark'] body {
-    background-color: var(--color-background-primary);
+    background-color: var(--ads-ui-ink-100);
     background-image: none;
 }
 
@@ -49,7 +49,7 @@ html[theme='dark'] body {
     min-height: 152px;
     height: 152px;
     align-items: center;
-    background-color: var(--color-background-tertiary);
+    background-color: var(--ads-ui-ink-80);
     border: 1px solid transparent;
     border-color: #000000;
     transition: 
@@ -57,7 +57,7 @@ html[theme='dark'] body {
         border-color 0.3s ease-in-out;
 }
 .main-topic-card:hover {
-    background-color: var(--color-background-tertiary);
+    background-color: var(--ads-ui-ink-80);
     border-color: #848192;
     cursor: pointer;
     transform: translateY(-3px); /* move up 3px */
@@ -96,14 +96,10 @@ html[theme='dark'] body {
     filter: brightness(0) invert(1);
 }
 
-.main-topic-card img[src$="mobile-graphics-and-gaming.svg"],
-.main-topic-card img[src$="ai.svg"] {
-    transform: scale(1.16);
-    transform-origin: center;
-}
-
-.main-topic-card img[src$="embedded-and-microcontrollers.svg"] {
-    transform: scale(1.34);
+/* The two legacy SVGs fill their view boxes more fully than the new 64px icon set. */
+.main-topic-card img[src$="automotive.svg"],
+.main-topic-card img[src$="laptops-and-desktops.svg"] {
+    transform: scale(0.82);
     transform-origin: center;
 }
 
@@ -217,7 +213,7 @@ table.contributor-table th {
     color: black;
 }
 table.contributor-table tbody { 
-    background-color: var(--color-background-secondary);
+    background-color: var(--ads-ui-ink-90);
 }
 
 

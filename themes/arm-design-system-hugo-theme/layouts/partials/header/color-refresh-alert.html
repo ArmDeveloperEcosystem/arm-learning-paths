@@ -1,0 +1,39 @@
+{{/* Site-wide launch notice. The homepage is excluded by baseof.html. */}}
+<div id="color-refresh-alert-container" hidden>
+    <ads-alert
+        id="color-refresh-alert"
+        theme="dark"
+        level="default"
+        has-close-button="true"
+        text="We’ve refreshed our colors. The site’s content and functionality remain the same."
+    ></ads-alert>
+</div>
+
+<script>
+    (function () {
+        var dismissalKey = 'arm-learning-paths-color-refresh-alert-dismissed-v1';
+        var container = document.getElementById('color-refresh-alert-container');
+        var alert = document.getElementById('color-refresh-alert');
+        var dismissed = false;
+
+        try {
+            dismissed = window.localStorage.getItem(dismissalKey) === 'true';
+        } catch (error) {
+            // Keep the notice available when storage is disabled.
+        }
+
+        if (!dismissed) {
+            container.hidden = false;
+        }
+
+        alert.addEventListener('visibleChange', function (event) {
+            if (event.detail && event.detail.visible === false) {
+                try {
+                    window.localStorage.setItem(dismissalKey, 'true');
+                } catch (error) {
+                    // The alert still closes for this page when storage is disabled.
+                }
+            }
+        });
+    })();
+</script>

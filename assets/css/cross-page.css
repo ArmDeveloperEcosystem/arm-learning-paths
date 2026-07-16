@@ -52,11 +52,6 @@
     --lp-accent-secondary: #D1BAFC; /* ADS UI Violet 04 */
     --lp-hover-text: #D9D9D9;       /* ADS UI Gray 35 */
 
-    /* ADS v5 Arm Ink background tokens. */
-    --color-background-primary: #080225;
-    --color-background-secondary: #16122A;
-    --color-background-tertiary: #211B3B;
-
     /* Keep existing site styles working while testing the v5 palette. */
     --arm-green: var(--lp-accent-primary);
     --arm-light-blue: var(--lp-accent-secondary);
@@ -171,9 +166,7 @@ table tbody td {
 /* Fix Nav Masthead Breadcrumb container */
 /*************************************/
 #nav-masthead-breadcrumbs {
-    background-image: url("/img/masthead-background.webp"); /* The image used */
-    background-color: var(--arm-color-footing);            /* Used if the image is unavailable */
-    background-size: cover;
+    background-color: var(--ads-ui-ink-80);
 }
 
 
@@ -234,6 +227,26 @@ arm-top-navigation:not(:defined) {
 ads-masthead {
     --ads-masthead-border-bottom-color: transparent;
 }
+
+/* Bypass ADS's fixed 70% heading wrapper while retaining its typography. */
+ads-masthead #ads-masthead-title {
+    box-sizing: border-box;
+    color: var(--ads-masthead-color, #E6E6E9);
+    font-size: 32px;
+    line-height: 35px;
+    max-height: none;
+    overflow: visible;
+    overflow-wrap: anywhere;
+    white-space: normal;
+    width: calc(100% - 32px);
+}
+
+@media (min-width: 768px) {
+    ads-masthead #ads-masthead-title {
+        font-size: 48px;
+        line-height: 53px;
+    }
+}
     
 
 
@@ -248,7 +261,7 @@ ads-masthead {
 /* Replicate style of breadcrumb in masthead when alone. */
 #only-breadcrumb-masthead {
     width: 100%;
-    background-color: var(--color-background-primary);
+    background-color: var(--ads-ui-ink-100);
     padding-top: 8px;
     padding-left: 15px; /* u-padding-left-2-1/2 */
     padding-bottom: 8px; 
@@ -354,7 +367,7 @@ html[theme='light'] body {
 /* Dark Theme */
 /****************************************************/
 html[theme='dark'] body {
-    background-color: var(--color-background-primary);
+    background-color: var(--ads-ui-ink-100);
     background-image: none;
 }
 

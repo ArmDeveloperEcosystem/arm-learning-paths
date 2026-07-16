@@ -160,20 +160,20 @@ ads-expansion-panel.learning-path-filters {
 }
 
 html[theme='dark'] ads-expansion-panel.learning-path-filters {
-    --ads-expansion-panel-border-color: var(--color-background-secondary);
-    --ads-expansion-panel-content-background-color: var(--color-background-primary);
-    --ads-expansion-panel-toggle-background-color: var(--color-background-primary);
-    --ads-expansion-panel-toggle-background-color-hover: var(--color-background-secondary);
+    --ads-expansion-panel-border-color: var(--ads-ui-ink-90);
+    --ads-expansion-panel-content-background-color: var(--ads-ui-ink-100);
+    --ads-expansion-panel-toggle-background-color: var(--ads-ui-ink-100);
+    --ads-expansion-panel-toggle-background-color-hover: var(--ads-ui-ink-90);
 
     --ads-expansion-panel-toggle-icon-color-hover: var(--arm-green);
 }
 
 /* mobile facets styling */
 div#facets-background > ads-expansion-panel.learning-path-filters {
-    --ads-expansion-panel-border-color: var(--color-background-secondary);
-    --ads-expansion-panel-content-background-color: var(--color-background-secondary);
-    --ads-expansion-panel-toggle-background-color: var(--color-background-secondary);
-    --ads-expansion-panel-toggle-background-color-hover: var(--color-background-tertiary);
+    --ads-expansion-panel-border-color: var(--ads-ui-ink-90);
+    --ads-expansion-panel-content-background-color: var(--ads-ui-ink-90);
+    --ads-expansion-panel-toggle-background-color: var(--ads-ui-ink-90);
+    --ads-expansion-panel-toggle-background-color-hover: var(--ads-ui-ink-80);
 }
 
 
@@ -212,12 +212,12 @@ ads-card.path-card.featured-path-card {
 }
 
 html[theme='dark'] ads-card.path-card {
-    --ads-card-background-color: var(--color-background-secondary);
-    --ads-card-border-color: var(--color-background-tertiary);
+    --ads-card-background-color: var(--ads-ui-ink-90);
+    --ads-card-border-color: var(--ads-ui-ink-80);
     --ads-card-box-shadow:  #000 @50%, X:0 Y: 3 B:12; /* probably not working */
     
     /* hover state */
-    --ads-card-background-color-hover: var(--color-background-secondary);
+    --ads-card-background-color-hover: var(--ads-ui-ink-90);
     --ads-card-border-color-hover: #848192;
     --ads-card-box-shadow-hover:  #000 @50%, X:0 Y: 3 B:12; /* probably not working */
 }
@@ -372,9 +372,9 @@ ads-card.tool-card {
 
 
 html[theme='dark'] ads-card.tool-card {
-    --ads-card-background-color: var(--color-background-tertiary);
+    --ads-card-background-color: var(--ads-ui-ink-80);
     --ads-card-border-color: transparent;
-    --ads-card-background-color-hover: var(--color-background-tertiary);
+    --ads-card-background-color-hover: var(--ads-ui-ink-80);
     --ads-card-border-color-hover: #848192;
     --ads-card-box-shadow-hover: none;
 }
