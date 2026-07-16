@@ -8,7 +8,7 @@
   <!-- No masthead on homepage, as that has a special gradient look/feel -->
   {{ if .IsHome }}
   {{else}}
-    <div id="expanded-masthead">
+    <div id="expanded-masthead" class="u-bg-color-ads-ui-violet-90">
       <div class="is-responsive-width">
       <ads-masthead style="background-color: rgba(0,0,0,0)" theme="dark">
           {{partial "header/breadcrumbs.html" .}}

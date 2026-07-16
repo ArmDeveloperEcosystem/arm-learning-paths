@@ -166,7 +166,7 @@ table tbody td {
 /* Fix Nav Masthead Breadcrumb container */
 /*************************************/
 #nav-masthead-breadcrumbs {
-    background-color: var(--ads-ui-ink-80);
+    background-color: var(--ads-ui-ink-100);
 }
 
 
@@ -210,7 +210,6 @@ arm-top-navigation:not(:defined) {
 
 /* Fix Masthead Height */
 #expanded-masthead  {
-        background-color: transparent;
         min-height: 100px;                  /* Keep baseline height for short titles */
         height: auto;                       /* Allow 2-line titles to expand */
         background-position: center; 
