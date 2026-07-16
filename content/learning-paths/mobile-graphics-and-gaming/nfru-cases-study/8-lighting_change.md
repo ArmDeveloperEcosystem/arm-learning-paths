@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Lighting change
 
-NFRU generates `InterpolatedRT` between `r_previous_interpolation_source` and `r_current_interpolation_source`. In a lighting-change environment, the generated frame has to infer the intermediate image from color, depth, motion vectors, and optical flow. Any type of lighting can affect this process, including direct light, indirect light, emissive surfaces or shadows.
+Lighting changes demonstrate how NFRU combines image-space and geometry information to preserve a coherent intermediate frame. NFRU generates `InterpolatedRT` between `r_previous_interpolation_source` and `r_current_interpolation_source`, using color, depth, motion vectors, and optical flow. In Moku, this process maintains natural-looking motion across bright emissive detail, translucent effects, and changing illumination, while difficult screen-edge combinations can still reveal localized differences.
 
 The sequence below shows the process. The previous source and current source are used as inputs for the interpolation calculation. The dynamic region is highlighted to show where generated content is most likely to differ from the source frames, and the result is visible in the final `InterpolatedRT`.
 
@@ -30,7 +30,7 @@ Not every lighting-heavy region produces a visible artifact. The moving characte
 
 This result is acceptable because the important visual structure remains stable. The generated frame does not need to reproduce a physically exact lighting state for every pixel; it needs to preserve perceived shape, brightness, and motion without drawing attention to ghosting or edge breakup.
 
-## Lower-right corner artifact
+## Inspect a lower-right corner artifact
 
 The lower-right corner is a more difficult case because it sits at the edge of the screen. When NFRU warps pixels from the previous and current frames, some samples in this area can point outside the valid image. The inputs also contain high-contrast light strips, dark foreground geometry, haze, and a large brightness change between source frames. The generated frame is mostly close to the current frame, but unstable edge samples can leave a semi-transparent remnant from the previous frame. This appears as ghosting or smearing in the highlighted area.
 
@@ -56,6 +56,6 @@ When this type of artifact appears, inspect both the image inputs and the motion
 
 ## What you've learned and what's next
 
-In this section, you inspected how lighting changes can affect NFRU-generated frames. You learned that optical flow can be influenced by scene color changes, while depth and motion vectors describe geometry. When those signals do not match, especially in dramatic dark-to-bright lighting changes, the interpolated frame can show ghosting, smearing, or stale bright and dark remnants. You also learned that unstable blend parameters, visible in `r_out_params_tensor`, can contribute to artifacts near screen edges and high-contrast lighting changes.
+In this section, you saw NFRU preserve a natural-looking moving character across bright emissive detail, translucent effects, and fine edges. The lower-right example showed how a dramatic lighting transition can produce localized ghosting when optical flow, depth, motion, and blend parameters do not fully agree. Together, the examples show that the overall generated frame can remain coherent while RenderDoc exposes the specific inputs behind a difficult edge case.
 
 Next, continue with NFRU performance analysis to understand how frame generation affects render FPS, present FPS, and frame pacing during gameplay.

@@ -28,12 +28,12 @@ The occlusion-out generation sequence shows how the interpolated frame handles b
 
 ![NFRU occlusion-out interpolation sequence showing the previous and current source frames generating an intermediate frame as background pixels are revealed#center](./images/occlusion_out/interpolated_rt_generation_steps_no_text.gif "Occlusion-out interpolation sequence")
 
-The marked close-up shows the boundary region where the generated frame is not perfectly sharp. The background reconstruction is generally clean, but the edge can show minor smearing where the foreground object uncovers the background.
+The marked close-up shows mild softness at the boundary. The background reconstruction is generally clean, with minor smearing limited to the edge where the foreground object uncovers the background.
 
 ![Close-up of the occlusion-out boundary artifact with the problem area marked, showing slight smearing where background is revealed#center](./images/occlusion_out/zoom_in_marked_issue_generated.png "Marked occlusion-out artifact")
 
 ## What you've learned and what's next
 
-In this section, you inspected how occlusion changes can affect NFRU-generated frames. You learned that NFRU can produce clean occlusion-in and occlusion-out results in representative content, and that remaining artifacts are usually small edge-localized blur, distortion, or color bleeding where visibility changes rapidly.
+In this section, you saw NFRU produce clean occlusion-in and occlusion-out results in representative content. The overall reconstruction remains stable as visibility changes, and the remaining differences are limited to small areas of edge-localized blur, distortion, or color bleeding.
 
-Next, continue evaluating NFRU output in transparency-heavy content, where alpha blending and particle effects can introduce a different set of frame-generation artifacts.
+Next, continue evaluating NFRU in transparency-heavy content, including particle effects that remain visually natural even when their exact shape changes between frames.

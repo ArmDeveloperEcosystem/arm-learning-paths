@@ -5,14 +5,12 @@ weight: 4
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-NFRU generates an intermediate frame between two rendered frames. In an ideal static scene, where the camera, objects, lighting, and post-processing remain unchanged, NFRU can produce an intermediate frame that closely matches the expected rendered result with little or no visible quality loss. Real game scenes are more complex. Camera movement, animated characters, particle effects, lighting changes, and fast object motion can affect the accuracy of the generated frame and introduce visible artifacts.
+NFRU reconstructs an intermediate frame between two rendered frames to make motion feel smoother without requiring the engine to render another full frame. In the Project Moku captures, the generated output remains coherent across representative gameplay, while the most visible differences are localized to challenging conditions such as fast motion, changing visibility, particles, and dramatic lighting changes. This workflow measures the performance benefit and gives you the tools to evaluate those edge cases against your own quality target.
 
 Use Streamline and RenderDoc to validate NFRU from two directions:
 
-TODO: does this make sense ahead of device availability?
-
 - Use Streamline to confirm that NFRU is active, measure the GPU and neural workload, and check whether frame generation fits within the frame budget.
-- When visual artifacts appear, use RenderDoc to inspect the frame generation inputs, visible intermediate resources, and final interpolated frame.
+- Use RenderDoc to confirm generated-frame quality and investigate any localized differences in the frame-generation inputs, visible intermediate resources, and final interpolated frame.
 
 ## Prepare a repeatable test
 
@@ -70,7 +68,7 @@ For more information on performance profiling strategies, refer to the [Streamli
 
 ## Inspect NFRU frames with RenderDoc
 
-Use RenderDoc when NFRU is active but the generated frames show visual artifacts. Capture a frame with NFRU enabled and inspect the frame generation area of the event list. Compare the real frame copies with the generated output, then review the bound frame-generation resources and debug-view tiles that expose motion, depth, disocclusion, and warped-color behavior. If the real frame inputs look correct but the generated output has artifacts, the issue is likely in frame generation, masking, disocclusion handling, or content such as fast alpha-blended effects.
+Use RenderDoc to confirm generated-frame quality and investigate any visible differences. Capture a frame with NFRU enabled and inspect the frame generation area of the event list. Compare the real frame copies with the generated output, then review the bound frame-generation resources and debug-view tiles that expose motion, depth, disocclusion, and warped-color behavior. If the real frame inputs look correct but the generated output has artifacts, the issue is likely in frame generation, masking, disocclusion handling, or content such as fast alpha-blended effects.
 
 For detailed guidance on using RenderDoc in Unreal Engine, refer to the [RenderDoc integration guide](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/7-renderdoc/).
 
@@ -114,8 +112,8 @@ This workflow is useful for the artifact scenarios in the following sections. Fa
 
 ## What you've learned and what's next
 
-In this section, you learned how to validate NFRU using Streamline and RenderDoc. Streamline confirms whether NFRU is active, how much GPU and neural workload it adds, and whether pacing or processing cost limits the expected FPS uplift. RenderDoc lets you inspect the frame-generation event list, visible NFRU resources, real frame copies, debug-view output, and final generated output when visual artifacts need deeper analysis.
+In this section, you learned how to validate NFRU using Streamline and RenderDoc. Streamline confirms whether NFRU is active, measures the GPU and neural workload, and shows how effectively available frame time becomes a higher presentation rate. RenderDoc lets you confirm generated-frame quality and trace localized differences through the frame-generation event list, visible NFRU resources, real frame copies, debug-view output, and final generated output.
 
-You are now prepared to evaluate NFRU performance and visual quality in representative gameplay scenarios.
+Together, these tools make NFRU's smoother presentation measurable and its edge cases actionable. You are now prepared to evaluate NFRU performance and visual quality in representative gameplay scenarios.
 
 TODO: ask RD/Streamline team to verify

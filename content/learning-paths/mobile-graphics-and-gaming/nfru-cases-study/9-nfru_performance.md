@@ -8,7 +8,7 @@ layout: learningpathall
 
 # NFRU frame pacing overview
 
-With NFRU enabled, the observed FPS uplift may be lower than expected because frame generation is not only an interpolation pass; it is also tied to presentation pacing. NFRU does not make the game render twice as many real frames. In the standard path, after valid consecutive rendered frames are available, it generates one intermediate frame between the real frames. Frame pacing then determines when those real and generated frames are submitted and shown.
+NFRU increases the presentation cadence by generating an intermediate frame between valid consecutive rendered frames. When the base render rate and presentation pacing are stable, the display can receive frames more often without requiring the engine to render each one. The sustainable uplift depends on both the interpolation workload and when the real and generated frames are submitted and shown, so frame pacing is an important part of realizing the smoothness benefit.
 
 ## Render FPS vs present FPS
 
@@ -67,9 +67,9 @@ Good pacing:
 
 P0 ---- P1 ---- P2 ---- P3 ---- P4
 
-### Frame pacing issues and GPU idle time
+### Frame pacing behavior and GPU idle time
 
-In Streamline captures, frame pacing issues often appear as gaps between GPU workloads. These gaps can happen when real rendered frames are produced unevenly, and the pacing system waits before submitting or presenting the next real or generated frame to keep the output aligned with the target cadence. During that wait, the GPU may be idle:
+In Streamline captures, frame-pacing waits often appear as gaps between GPU workloads. These gaps can happen when real rendered frames are produced unevenly, and the pacing system waits before submitting or presenting the next real or generated frame to keep the output aligned with the target cadence. During that wait, the GPU may be idle:
 
 ![Frame Pacing Issue](./images/frame_pacing/frame_pacing_issue_1.png)
 
@@ -116,17 +116,17 @@ These commands change the pacing behavior as follows:
 
 After applying these settings, observe render FPS and present FPS again. If present FPS increases, one of the pacing systems was limiting presentation. If present FPS remains unchanged, the limit is more likely caused by render cost, NFRU processing cost, display refresh behavior, or another platform constraint.
 
-## Why FPS uplift may be lower than expected
+## Understand the achievable FPS uplift
 
-A common expectation is:
+A common target is:
 
 60 render FPS + NFRU = 120 present FPS
 
-But the actual result may be lower:
+A workload with a lower base render rate can still increase its presentation rate:
 
 45 render FPS + NFRU = 90 present FPS
 
-Or it may be capped by the display:
+The displayed result can also be capped by the display:
 
 45 render FPS + NFRU = 90 possible present FPS
 60 Hz display cap     = 60 actual present FPS
@@ -140,7 +140,7 @@ This can happen because NFRU output is still constrained by:
 - NFRU processing cost
 - The selected custom frame pace target
 
-NFRU also has its own GPU cost, including optical flow, frame interpolation, resource copies, and presentation handling. Therefore, the theoretical 2x present-FPS uplift is not always reached in real workloads.
+NFRU also has its own GPU cost, including optical flow, frame interpolation, resource copies, and presentation handling. Therefore, the actual uplift reflects the complete workload rather than a fixed 2x guarantee. Even when the theoretical maximum is not reached, generated intermediate frames can still provide a noticeable improvement in presentation smoothness.
 
 ## How the NFRU pace adjuster works
 
@@ -181,6 +181,6 @@ Developers can tune these two values to fit their content and target device. Low
 
 ## Summary
 
-NFRU generates an intermediate frame between valid consecutive rendered frames to improve presented smoothness, but frame pacing determines when those real and generated frames are submitted and shown. As a result, present FPS may be limited by render cost, NFRU overhead, display refresh rate, VSync, platform frame pacing, Android Swappy, or the selected pace-adjuster target.
+NFRU turns each valid pair of rendered frames into a higher presentation cadence, improving perceived smoothness without requiring the engine to render every displayed frame. Render cost, NFRU overhead, display refresh rate, VSync, platform frame pacing, Android Swappy, and the selected pace-adjuster target determine the sustainable present FPS for a given workload.
 
-When profiling, observe render FPS and present FPS, and check whether idle gaps are caused by pacing waits or by actual GPU workload limits. The NFRU pace adjuster helps by moving between stable FPS targets instead of always aiming for the highest possible present rate.
+When profiling, observe render FPS and present FPS, and check whether idle gaps are caused by pacing waits or by actual GPU workload limits. The NFRU pace adjuster converts available headroom into a stable target by moving between sustainable FPS levels instead of chasing an unstable peak, helping NFRU deliver smoother and more consistent gameplay.

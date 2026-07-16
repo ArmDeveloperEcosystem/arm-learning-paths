@@ -1,21 +1,22 @@
 ---
 title: NFRU Case Study - Project Moku
 
-description: Learn how to enable, inspect, and tune Neural Frame Rate Upsampling in an Unreal Engine project using Arm ML Extensions for Vulkan.
+description: Learn how Project Moku uses Neural Frame Rate Upscaling to improve presented smoothness, then enable, evaluate, and tune NFRU in Unreal Engine using Arm ML Extensions for Vulkan.
 
 minutes_to_complete: 30
 
-who_is_this_for: This Learning Path is for game and graphics developers who want to evaluate Neural Frame Rate Upsampling (NFRU) in Unreal Engine using Arm ML Extensions for Vulkan.
+who_is_this_for: This Learning Path is for game and graphics developers who want to evaluate Neural Frame Rate Upscaling (NFRU) in Unreal Engine using Arm ML Extensions for Vulkan.
 
 learning_objectives:
     - Explain how NFRU generates intermediate frames for smoother motion.
     - Enable the Arm Neural Graphics Plugin in an Unreal Engine project.
-    - Inspect NFRU artifacts in fast camera, object, occlusion, particle, and lighting-change scenarios.
-    - Tune NFRU quality and frame pacing with Unreal Engine console variables.
+    - Evaluate NFRU visual quality across fast camera, object, occlusion, particle, and lighting-change scenarios.
+    - Measure NFRU performance and tune frame pacing with Unreal Engine console variables.
     - Analyze generated frames with RenderDoc for Arm GPUs.
 
 
 prerequisites:
+    - "Recommended: complete [Enable Neural Frame Rate Upscaling in Unreal Engine](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/)
     - Windows 11
     - Unreal Engine 5.4 or 5.6 with Templates and Feature Pack enabled
     - Visual Studio with Desktop Development with C++ and .NET desktop build tools
@@ -25,7 +26,7 @@ prerequisites:
 author: Powen Yang
 
 ### Tags
-skilllevels: Introductory
+skilllevels: Advanced
 subjects: ML
 armips:
     - Mali
@@ -35,6 +36,7 @@ tools_software_languages:
     - Vulkan SDK
     - Visual Studio
     - Arm Performance Studio
+    - NX
 operatingsystems:
     - Windows
 
