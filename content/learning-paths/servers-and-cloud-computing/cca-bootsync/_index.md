@@ -12,7 +12,7 @@ who_is_this_for: This Learning Path is for developers who want to understand how
 
 learning_objectives:
   - Explain why BootSync is needed before the Realm guest operating system has networking.
-  - Describe how the Boot Sync Blocks protocol uses key exchange, attestation, and Boot Information Blocks.
+  - Describe how the Boot Injection Protocol uses key exchange, attestation, and Boot Information Blocks to support the BootSync workflow.
   - Use BootSync to inject UEFI variables and secret data into an Arm CCA Realm.
   - Launch Arm CCA Realms with UEFI Secure Boot and an encrypted root file system on an Armv9-A AEM Base FVP with RME support.
 

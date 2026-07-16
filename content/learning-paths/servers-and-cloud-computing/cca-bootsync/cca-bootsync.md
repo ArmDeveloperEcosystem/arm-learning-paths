@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Overview of Arm CCA BootSync and Boot Sync Blocks protocol"
+title: "Overview of Arm CCA BootSync and the Boot Injection Protocol"
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -12,7 +12,7 @@ layout: "learningpathall"
 
 Arm CCA BootSync is a boot-time synchronization mechanism for Arm CCA Realms. It lets Realm guest firmware obtain configuration and secret data before the guest operating system is running. This matters because early firmware does not have a network stack, but workflows such as UEFI Secure Boot and encrypted disk boot still need trusted inputs during that early boot window.
 
-The reference implementation uses the *Boot Sync Blocks* (BSB) protocol described by the Realm Host Interface (RHI) specification. In this Learning Path, you use BootSync to provide two kinds of data to a Realm:
+The reference implementation uses the *Boot Injection Protocol*, named the BIB protocol in the Boot Injection appendix of the Realm Host Interface (RHI) specification. In this Learning Path, you use BootSync to provide two kinds of data to a Realm:
 
 - Variable data, such as UEFI variables used to configure Secure Boot.
 - Secret data, such as a disk unlock passphrase or other boot-time secret.
@@ -30,21 +30,19 @@ The BootSync flow spans both the Normal World host and the Realm World guest:
 
 The practical result is that the Realm firmware can get boot-time data without needing direct networking. The host can carry the request, but the release decision belongs to the User Context after the Realm has provided attestation evidence.
 
-## BootSync protocol stages
+## Boot Injection Protocol stages
 
-The BSB protocol has three logical stages:
+The Boot Injection Protocol has three logical stages:
 
 1. Key exchange establishes a secure session between the Realm guest firmware and the User Context service. The reference implementation uses ECDH over the P-384 curve, derives keys with HKDF-SHA512, and encrypts protocol data with AES-GCM.
 2. Attestation lets the Realm guest firmware request an attestation report from the RMM. The binding key from the secure session is used as challenge data, so the User Context can bind the attestation evidence to this BootSync exchange.
-3. Boot Information Blocks release the requested boot data after attestation succeeds. In this Learning Path, those blocks are represented by files whose names begin with the Realm Personalization Value (RPV), such as `ARMCCA01_VAR.dat` and `ARMCCA01_SEC.dat`.
-
-The RPV is important because one User Context service can support multiple Realms. A Realm launched with `--realm-pv ARMCCA01` requests files that start with `ARMCCA01`. If the matching files are missing, BootSync can establish a session and complete attestation, but it cannot provide the requested boot information.
+3. Boot Information Blocks carry the requested boot data after attestation succeeds.
 
 ## What you will validate
 
 The exercises intentionally show both failure and success cases:
 
-- First, you launch a Realm without the variable data file. This demonstrates that the firmware can ask for BootSync data and that the User Context reports a missing `ARMCCA01_VAR.dat` file.
+- First, you launch a Realm without injection of any boot data. This demonstrates that the firmware can run successful attestation and ask for BootSync data.
 - Next, you add the variable data file. BootSync completes, UEFI Secure Boot is enabled, and the unsigned kernel is rejected.
 - Then, you sign the Realm kernel. The Realm boots with UEFI Secure Boot enabled, and the Secure Boot UEFI variable reports `1`.
 - Finally, you encrypt the Realm root file system and use BootSync secret data to provide the unlock passphrase during boot.
