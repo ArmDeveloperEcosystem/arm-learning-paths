@@ -1,6 +1,6 @@
 ---
-title: Create a new Topo Template from an empty directory
-description: Create a Topo Template from a Docker Compose project with x-topo metadata, clone-time arguments, and an Arm Linux container image.
+title: Create a new Topo Project from an empty directory
+description: Create a Topo Project from a Docker Compose project with x-topo metadata, clone-time parameters, and an Arm Linux container image.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -9,9 +9,9 @@ layout: learningpathall
 
 ## Create a web page with configurable text and color
 
-You've already cloned and modified an existing Topo Template. In this section, you'll create a new template from an empty directory.
+You've already cloned and modified an existing Topo Project. In this section, you'll create a new project from an empty directory.
 
-The template serves a small web page with configurable text and color, and demonstrates the core parts of a Topo Template:
+The project serves a small web page with configurable text and color, and demonstrates the core parts of a Topo Project:
 
 - A `compose.yaml` file with standard Compose services
 - An `x-topo` metadata block
@@ -20,14 +20,14 @@ The template serves a small web page with configurable text and color, and demon
 
 ### Create the project directory
 
-Create a new directory for the template:
+Create a new directory for the project:
 
 ```bash
 mkdir -p ~/topo-message-card
 cd ~/topo-message-card
 ```
 
-A Topo Template is a normal project directory. At minimum, it needs to contain a `compose.yaml` file. Most Topo Templates also include a `Dockerfile` and application source code.
+A Topo Project is a normal project directory. At minimum, it needs to contain a `compose.yaml` file. Most Topo Projects also include a `Dockerfile` and application source code.
 
 By the end of this section, the directory you created will have the following structure:
 
@@ -108,7 +108,7 @@ FROM nginx:alpine
 COPY src/index.html /usr/share/nginx/html/index.html
 
 ARG CARD_TITLE="Hello from Topo"
-ARG CARD_MESSAGE="This page was created from a Topo Template."
+ARG CARD_MESSAGE="This page was created from a Topo Project."
 ARG ACCENT_COLOR="#0091bd"
 
 RUN sed -i "s|__CARD_TITLE__|${CARD_TITLE}|g" /usr/share/nginx/html/index.html
@@ -116,7 +116,7 @@ RUN sed -i "s|__CARD_MESSAGE__|${CARD_MESSAGE}|g" /usr/share/nginx/html/index.ht
 RUN sed -i "s|__ACCENT_COLOR__|${ACCENT_COLOR}|g" /usr/share/nginx/html/index.html
 ```
 
-Topo passes configuration values to Topo Templates through Docker build arguments. The `ARG` lines define the values consumed during the image build.
+Topo passes configuration values to Topo Projects through Docker build arguments. The `ARG` lines define the values consumed during the image build.
 
 `sed` is a command-line text replacement tool. The `sed` commands replace placeholder text in `index.html` during the image build. This way, each cloned project can customize the web page without manually editing the source file.
 
@@ -125,7 +125,7 @@ Topo passes configuration values to Topo Templates through Docker build argument
 Create `compose.yaml` in the `topo-message-card` directory with the following content:
 
 ```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/arm/topo-template-format/refs/heads/main/schema/topo-template-format.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/arm/topo/refs/heads/main/docs/project-specification/schema/topo-project-specification.json
 services:
   message-card:
     platform: linux/arm64
@@ -133,7 +133,7 @@ services:
       context: .
       args:
         CARD_TITLE: "Hello from Topo"
-        CARD_MESSAGE: "This page was created from a Topo Template."
+        CARD_MESSAGE: "This page was created from a Topo Project."
         ACCENT_COLOR: "#0091bd"
     ports:
       - "8088:80"
@@ -141,12 +141,11 @@ services:
 x-topo:
   name: "Message Card"
   description: |
-    A minimal web application template that shows a configurable title,
+    A minimal web application project that shows a configurable title,
     message, and accent color.
-  type: "application"
-  deploy_success_message: |
+  deployment_success_message: |
     Message Card is running on port 8088.
-  args:
+  parameters:
     CARD_TITLE:
       description: "The title to show on the message card"
       required: true
@@ -154,7 +153,7 @@ x-topo:
     CARD_MESSAGE:
       description: "The message to show below the title"
       required: false
-      default: "This page was created from a Topo Template."
+      default: "This page was created from a Topo Project."
       example: "Built once and deployed with Topo"
     ACCENT_COLOR:
       description: "The CSS color used for the card accent"
@@ -163,40 +162,39 @@ x-topo:
       example: "#00a3a3"
 ```
 
-This file is both a Compose file and a Topo Template definition.
+This file is both a Compose file and a Topo Project definition.
 
 The `services` section is standard Compose. The service builds the local `Dockerfile`, publishes the web server on port `8088`, and sets `platform: linux/arm64` so the service targets Arm-based Linux systems.
 
 The `x-topo` section is the Topo metadata block:
 
-- `name` gives the template a human-readable name.
-- `description` explains what the template does.
-- `type` identifies this as an application template.
-- `deploy_success_message` prints a useful hint after deployment.
-- `args` defines the values Topo prompts for when someone clones the template.
+- `name` gives the project a human-readable name.
+- `description` explains what the project does.
+- `deployment_success_message` prints a useful hint after deployment.
+- `parameters` defines the values Topo prompts for when someone clones the project.
 
-The argument names in `x-topo.args` match the keys under `services.message-card.build.args`. When Topo resolves the arguments, it writes the selected values into the build arguments.
+The argument names in `x-topo.parameters` match the keys under `services.message-card.build.args`. When Topo resolves the parameters, it writes the selected values into the build arguments.
 
-The same argument name appears in three places: `x-topo.args` defines what Topo asks for, `build.args` passes the value to Docker, and the Dockerfile `ARG` consumes it.
+The same name appears in three places: `x-topo.parameters` defines what Topo asks for, `build.args` passes the value to Docker, and the Dockerfile `ARG` consumes it.
 
-### Clone the local Topo Template
+### Clone the local Topo Project
 
-Clone your local Topo Template into a new project directory. 
+Clone your local Topo Project into a new project directory. 
 
-You can choose to answer interactive prompts for the arguments:
+You can choose to answer interactive prompts for the project parameters:
 ```bash
 topo clone dir:$HOME/topo-message-card $HOME/message-card-demo
 ```
 
-Alternatively, you can include the arguments in the command:
+Alternatively, you can include the project parameters in the command:
 ```bash
 topo clone dir:$HOME/topo-message-card $HOME/message-card-demo \
   CARD_TITLE="Hello from Arm" \
-  CARD_MESSAGE="Created from a new Topo Template" \
+  CARD_MESSAGE="Created from a new Topo Project" \
   ACCENT_COLOR="#00a3a3"
 ```
 
-After using one of the commands to clone the template, inspect the generated project:
+After using one of the commands to clone the project, inspect the generated project:
 
 ```bash
 cd ~/message-card-demo
@@ -213,7 +211,7 @@ services:
       context: .
       args:
         CARD_TITLE: "Hello from Arm"
-        CARD_MESSAGE: "Created from a new Topo Template"
+        CARD_MESSAGE: "Created from a new Topo Project"
         ACCENT_COLOR: "#00a3a3"
 ```
 
@@ -239,7 +237,7 @@ ssh -L 8088:localhost:8088 user@my-target
 
 Then open `http://localhost:8088/` in your browser.
 
-![Screenshot of the new Topo Template - a web page with the text "Hello from Arm" as the title. This confirms successful deployment and provides a visual reference for the expected result.#center](new_template.png "Hello from Arm web page")
+![Screenshot of the new Topo Project - a web page with the text "Hello from Arm" as the title. This confirms successful deployment and provides a visual reference for the expected result.#center](new_project.png "Hello from Arm web page")
 
 Confirm that the container is running:
 
@@ -251,38 +249,37 @@ The output includes the `message-card` service and port `8088`.
 
 ## (Optional) Add hardware requirements
 
-Add `features` only when your Topo Template needs specific Arm hardware features. For example, a SIMD benchmark that requires SVE can declare that it needs SVE:
+Add `features` only when your Topo Project needs specific Arm hardware features. For example, a SIMD benchmark that requires SVE can declare that it needs SVE:
 
 ```yaml
 x-topo:
   name: "SIMD Visual Benchmark"
   description: |
     Visual demonstration of SIMD performance benefits on Arm processors.
-  type: "application"
   features:
     - "SVE"
 ```
 
-Topo can use these feature requirements when listing templates against a target.
+Topo can use these feature requirements when listing projects against a target.
 
-## Share the Topo Template
+## Share the Topo Project
 
-To share your Topo Template, publish the template directory as a Git repository. Other users can then clone it with Topo:
+To share your Topo Project, publish the project directory as a Git repository. Other users can then clone it with Topo:
 
 ```bash
 topo clone https://github.com/<user-or-org>/topo-message-card.git
 ```
 
-If you want the template to be reused by the wider Topo community, include:
+If you want the project to be reused by the wider Topo community, include:
 
 - `compose.yaml`
 - Any Dockerfiles and source files required by the services
 - A `README.md` with usage instructions
 - A license file
-- Clear `x-topo` metadata and argument descriptions
+- Clear `x-topo` metadata and parameter descriptions
 
 ## What you've accomplished and what's next
 
-You've now created a complete Topo Template from scratch. You created the web page HTML, added a Compose file, described the template with `x-topo` metadata, supplied clone-time arguments, and deployed the generated project to an Arm-based Linux target.
+You've now created a complete Topo Project from scratch. You created the web page HTML, added a Compose file, described the project with `x-topo` metadata, supplied clone-time parameters, and deployed the generated project to an Arm-based Linux target.
 
-Next, you'll learn where to find Agent Skills that can help you create, modify, and review Topo Templates.
+Next, you'll learn where to find Agent Skills that can help you create, modify, and review Topo Projects.

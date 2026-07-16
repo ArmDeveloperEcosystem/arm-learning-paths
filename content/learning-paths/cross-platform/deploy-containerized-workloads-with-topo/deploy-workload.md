@@ -6,56 +6,37 @@ weight: 4
 layout: learningpathall
 ---
 
-## Choose a starter template and clone it
+## Choose a starter project and clone it
 
-In this Learning Path, you'll use the LLM chatbot template to explore the workflow. The same steps apply to all Topo templates.
+In this Learning Path, you'll use the LLM chat project to explore the workflow. The same steps apply to all Topo Projects.
 
-To clone the template onto your host device, run:
+To clone the project onto your host device, run:
 
 ```bash
-topo clone https://github.com/Arm-Examples/topo-cpu-ai-chat.git
+topo clone https://github.com/Arm-Examples/topo-llama-web-ui.git
 ```
 
-If a template asks for build arguments, Topo prompts you interactively.
-
-For this template, accept the defaults for each prompt by pressing Enter. The default configuration uses the `bartowski/Qwen_Qwen3.5-0.8B-GGUF` model and builds with Neon optimizations. SVE — Arm's Scalable Vector Extension, which provides wider vector operations than Neon's fixed 128-bit width — is disabled by default. If `topo describe` shows your target supports SVE, you can enable it by setting `ENABLE_SVE` to `ON`, or edit `compose.yaml` to change it later.
+Topo copies the project and configures any project parameters. This project provides defaults, so you can deploy it immediately after cloning.
 
 The output is similar to:
+
 ```output
 ┌─ Copy files ──────────────────────────────────────────
-Cloning into 'topo-cpu-ai-chat'...
-remote: Enumerating objects: 21, done.
-remote: Counting objects: 100% (21/21), done.
-remote: Compressing objects: 100% (17/17), done.
-remote: Total 21 (delta 0), reused 11 (delta 0), pack-reused 0 (from 0)
-Receiving objects: 100% (21/21), 17.43 KiB | 8.72 MiB/s, done.
+Cloning into 'topo-llama-web-ui'...
 
-┌─ Input args ──────────────────────────────────────────
-Provide: Hugging Face model repo ID containing a supported single-file GGUF model
-Example: unsloth/SmolLM2-135M-Instruct-GGUF
-Default: bartowski/Qwen_Qwen3.5-0.8B-GGUF
-HF_MODEL> 
-
-Provide: Exact supported GGUF filename to download; sharded and mmproj files are rejected
-Example: Qwen_Qwen3.5-0.8B-Q4_0.gguf
-HF_MODEL_FILE> 
-
-Provide: Enables building with SVE instructions (OFF/ON)
-Example: ON
-Default: OFF
-ENABLE_SVE> 
+┌─ Configure project ───────────────────────────────────
 
 ┌─ Project ready ───────────────────────────────────────
-Created in 'topo-cpu-ai-chat'
+Created in 'topo-llama-web-ui'
 
 Now run:
-  cd topo-cpu-ai-chat
+  cd topo-llama-web-ui
   topo deploy
 ```
 
-This creates a project directory using the template. The directory will contain template source files and `compose.yaml`.
+This creates a project directory from the Topo Project. The directory contains project source files and `compose.yaml`.
 
-The following is an example `compose.yaml` file for the LLM chatbot application:
+The following is an example `compose.yaml` file for the LLM chat application:
 
 ```yaml
 services:
@@ -64,9 +45,7 @@ services:
     build:
       context: ./llama-inference
       args:
-        ENABLE_SVE: OFF
-        HF_MODEL: bartowski/Qwen_Qwen3.5-0.8B-GGUF
-        HF_MODEL_FILE: ""
+        MODEL: unsloth/SmolLM2-135M-Instruct-GGUF
     ports:
       - "8080:8080"
     healthcheck:
@@ -74,47 +53,40 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
-      start_period: 60s
-  chat-ui:
-    platform: linux/arm64
-    build:
-      context: ./simple-chat
-      args:
-        ENABLE_SVE: OFF
-    depends_on:
-      llama-server:
-        condition: service_healthy
-    ports:
-      - "3000:3000"
+      start_period: 300s
 x-topo:
-  name: "Topo CPU AI Chat"
-  description: "Complete LLM chat application optimized for Arm CPU inference.\n\nThis project demonstrates running large language models on CPU\nusing llama.cpp compiled with Arm baseline optimizations and \naccelerated using NEON SIMD and SVE (when supported and enabled).\n\nThe stack includes:\n- llama.cpp server with Arm NEON optimizations (SVE optional)\n- Quantized Qwen3.5-0.8B model bundled in the image\n- Simple web-based chat interface\n- No GPU required - pure CPU inference\n\nPerfect for demos and testing! The bundled Qwen3.5-0.8B model allows the\nproject to run immediately without downloading additional models.\n\nIdeal for testing LLM workloads on Arm hardware without GPU dependencies,\nshowcasing how far you can push NEON acceleration. Rebuild with SVE enabled\nwhen wider vectors are available.\n"
-  features:
-    - "SVE"
-    - "NEON"
-  args:
-    HF_MODEL:
-      description: "Hugging Face model repo ID containing a supported single-file GGUF model"
-      default: "bartowski/Qwen_Qwen3.5-0.8B-GGUF"
-      example: "unsloth/SmolLM2-135M-Instruct-GGUF"
-    HF_MODEL_FILE:
-      description: "Exact supported GGUF filename to download; sharded and mmproj files are rejected"
-      default: ""
-      example: "Qwen_Qwen3.5-0.8B-Q4_0.gguf"
-    ENABLE_SVE:
-      description: "Enables building with SVE instructions (OFF/ON)"
-      default: "OFF"
-      example: "ON"
+  name: "Topo llama.cpp WebUI Chat"
+  description: |
+    LLM chat application with Arm CPU inference provided by llama.cpp.
+
+    This project demonstrates running large language models on CPU
+    with inference provided by the llama.cpp server.
+
+    The upstream Linux Arm64 image includes architecture-specific CPU
+    backend variants for Armv8.0 baseline, Armv8.2 dot product/FP16/SVE,
+    Armv8.6 int8 matrix multiply/SVE2, and Armv9.2 SME-capable CPUs.
+  deployment_success_message: |
+    Topo llama.cpp WebUI Chat is running.
+
+    Open http://<target-ip>:8080 in your browser to start chatting.
+  parameters:
+    MODEL:
+      description: "Model artifact reference. Use a Hugging Face GGUF repo ID, repo ID plus filename separated by ':', or a direct .gguf URL."
+      default: "unsloth/SmolLM2-135M-Instruct-GGUF"
+      example: "unsloth/SmolLM2-135M-Instruct-GGUF:SmolLM2-135M-Instruct-Q4_K_M.gguf"
+      hints:
+        huggingface.task: text-generation
+        file.format: gguf
 ```
 
-You can edit `compose.yaml` at any time to adjust build arguments such as enabling or disabling SVE, or switching to a different LLM model.
+You can edit `compose.yaml` at any time to adjust build arguments, such as switching to a different GGUF model.
 
 ## Deploy the app on the target
 
-On your host device, enter the project directory created by the `topo clone` command. In the case of the LLM chatbot, this directory is `topo-cpu-ai-chat`:
+On your host device, enter the project directory created by the `topo clone` command:
 
 ```bash
-cd topo-cpu-ai-chat/
+cd topo-llama-web-ui/
 ```
 
 Then, use `topo deploy` to build the container images on the host, transfer them to the target over SSH, and start the application on the target:
@@ -127,20 +99,18 @@ The output is similar to:
 
 ```output
 ┌─ Start services ──────────────────────────────────────
-[+] up 3/3
- ✔ Network topo-cpu-ai-chat_default          Created                                                                                               0.0ss
- ✔ Container topo-cpu-ai-chat-llama-server-1 Healthy                                                                                               10.6s
- ✔ Container topo-cpu-ai-chat-chat-ui-1      Started                                                                                               5.9ss
+[+] up 2/2
+ ✔ Network topo-llama-web-ui_default          Created
+ ✔ Container topo-llama-web-ui-llama-server-1 Healthy
 ```
 
-After deployment is complete, access the web application by opening a browser and navigating to `http://<ip_address_of_target>:<port_number>`, where `<port_number>` matches the port exposed by your template. For the LLM chatbot, this is `3000`. You can find the port in the `compose.yaml` file for your template.
+After deployment is complete, access the web application by opening a browser and navigating to `http://<ip_address_of_target>:<port_number>`, where `<port_number>` matches the port exposed by your project. For this LLM chat project, the port is `8080`. You can find the port in the `compose.yaml` file for your project.
 
 {{< notice Important >}}
-If your target is a Linux virtual machine (for example, on a cloud provider), ensure that the chosen port (such as 3000) is open as an inbound rule in your virtual machine's firewall or security group. Otherwise, you won't be able to access the application from your browser.
+If your target is a Linux virtual machine (for example, on a cloud provider), ensure that the chosen port, such as 8080, is open as an inbound rule in your virtual machine's firewall or security group. Otherwise, you won't be able to access the application from your browser.
 {{< /notice >}}
 
-The LLM chatbot application appears as follows:
-
+The LLM chat application appears as follows:
 
 ![Screenshot of the LLM Chatbot web interface running on an Arm-based target, showing a chat window and model response. This confirms successful deployment and provides a visual reference for the expected result.#center](llm_chatbot.png "LLM Chatbot web interface on Arm target")
 
@@ -173,13 +143,13 @@ If you don't already have a CLI agent installed, see one of these install guides
 With your agent ready, you can delegate the full workflow using a prompt. For example:
 
 ```text
-Use Topo to deploy a containerized workload to my Arm target at user@my-target. Run a health check first, list compatible templates, choose a suitable one, clone it, and deploy it.
+Use Topo to deploy a containerized workload to my Arm target at user@my-target. Run a health check first, list compatible projects, choose a suitable one, clone it, and deploy it.
 ```
 
-The agent reads the Topo `README.md`, runs health checks, selects a template, and deploys it end-to-end with minimal manual input.
+The agent reads the Topo `README.md`, runs health checks, selects a project, and deploys it end-to-end with minimal manual input.
 
 ## What you've accomplished and what's next
 
 You have now deployed a containerized workload to your Arm-based Linux target using Topo. You validated the deployment by accessing the application in a web browser. You also learned how to stop the deployment and forward ports if needed.
 
-Next, you can try the same workflow in Visual Studio Code using the Topo extension, or explore modification and creation of Topo Templates in the follow-up Learning Path: [Create and deploy a custom Topo Template](/learning-paths/cross-platform/create-your-own-topo-templates/).
+Next, you can try the same workflow in Visual Studio Code using the Topo extension, or explore modification and creation of Topo Projects in the follow-up Learning Path: [Create and deploy a custom Topo Project](/learning-paths/cross-platform/create-your-own-topo-project/).

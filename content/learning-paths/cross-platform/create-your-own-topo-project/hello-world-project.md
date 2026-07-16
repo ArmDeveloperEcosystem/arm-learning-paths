@@ -1,19 +1,19 @@
 ---
-title: Clone and deploy the Hello World Topo Template
-description: Clone and deploy the Hello World Topo Template to an Arm-based Linux target and verify the running web application.
+title: Clone and deploy the Hello World Topo Project
+description: Clone and deploy the Hello World Topo Project to an Arm-based Linux target and verify the running web application.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## Clone the Hello World Topo Template
+## Clone the Hello World Topo Project
 
-On your host machine, use the terminal to clone the "Hello World" Topo Template into your home directory to confirm your setup:
+On your host machine, use the terminal to clone the "Hello World" Topo Project into your home directory to confirm your setup:
 
 ```bash
 topo clone https://github.com/Arm-Examples/topo-welcome.git ~/topo-welcome
 ```
-The "Hello World" Topo Template follows the same deployment pattern as the "CPU LLM Chat" Topo Template covered in [Deploy containerized workloads to Arm-based Linux targets with Topo](/learning-paths/cross-platform/deploy-containerized-workloads-with-topo/).
+The "Hello World" Topo Project follows the same deployment pattern as the "CPU LLM Chat" Topo Project covered in [Deploy containerized workloads to Arm-based Linux targets with Topo](/learning-paths/cross-platform/deploy-containerized-workloads-with-topo/).
 
 The output is similar to:
 
@@ -26,14 +26,14 @@ remote: Compressing objects: 100% (9/9), done.
 remote: Total 12 (delta 0), reused 8 (delta 0), pack-reused 0 (from 0)
 Receiving objects: 100% (12/12), 62.64 KiB | 2.61 MiB/s, done.
 
-┌─ Input args ──────────────────────────────────────────
+┌─ Configure project ───────────────────────────────────
 Provide: The text to use in the greeting message
 Example: Markus
 Default: World
 GREETING_NAME (required)>
 ```
 
-Provide a name for the `GREETING_NAME` argument, for example, `Tomas`, and then Press Enter.
+Provide a name for the `GREETING_NAME` parameter, for example, `Tomas`, and then Press Enter.
 
 The output is similar to:
 
@@ -48,7 +48,7 @@ Now run:
 
 ## Prepare your target
 
-Topo Templates are meant to be deployed to Arm-based Linux targets. In this Learning Path, use the Arm-based Linux target you prepared in the previous Learning Path. The target can be a Raspberry Pi, an Arm-based Amazon EC2 instance, or another Arm-based Linux target accessible over SSH.
+Topo Projects are meant to be deployed to Arm-based Linux targets. In this Learning Path, use the Arm-based Linux target you prepared in the previous Learning Path. The target can be a Raspberry Pi, an Arm-based Amazon EC2 instance, or another Arm-based Linux target accessible over SSH.
 
 Confirm that Topo can inspect your target, and that there are no compatibility issues:
 
@@ -58,7 +58,7 @@ topo health --target user@my-target
 
 If your host machine is a Linux machine and you want to use it as the target, you can use `--target localhost`.
 
-## Deploy the template to your target
+## Deploy the project to your target
 
 You can now deploy the project to your target:
 
@@ -138,6 +138,6 @@ The "Hello World" application appears as follows:
 
 ## What you've accomplished and what's next
 
-You've now deployed the "Hello World" Topo Template to an Arm-based Linux target and confirmed the application is accessible in your browser.
+You've now deployed the "Hello World" Topo Project to an Arm-based Linux target and confirmed the application is accessible in your browser.
 
-Next, you'll modify the template to add a new configurable clone-time argument.
+Next, you'll modify the project to add a new configurable clone-time argument.
