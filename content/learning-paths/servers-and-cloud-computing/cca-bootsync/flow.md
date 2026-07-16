@@ -1,26 +1,26 @@
 ---
 # User change
-title: "Arm CCA BootSync"
+title: Launch an Arm CCA Realm with UEFI Secure Boot on Arm FVP
 
 weight: 3 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
-## Overview
+## What you'll build
 
-In this section, you will run the **User Context** service in a Docker container, launch a **CCA Realm** on **Arm FVP** in a separate Docker container, and use Arm CCA BootSync to provide Realm UEFI variables and secret data during early boot.
+You'll run the User Context service in a Docker container, launch a CCA Realm on Arm FVP in a separate Docker container, and use Arm CCA BootSync to provide Realm UEFI variables and secret data during early boot.
 
-The flow uses two terminals:
+You'll uses two terminals:
 
-- Terminal 1 runs the User Context service. This service represents the Realm initiator and decides whether to release BootSync data.
-- Terminal 2 runs the Arm CCA FVP and launches Realm VMs using `lkvm-bootsync`.
+- In the first terminal, you'll run the User Context service. This service represents the Realm initiator and decides whether to release BootSync data.
+- In the second terminal, you'll run the Arm CCA FVP and launches Realm VMs using `lkvm-bootsync`.
 
-You will first observe a BootSync failure when required data is missing, then fix the flow and validate UEFI Secure Boot. Finally, you will use BootSync secret data to unlock an encrypted root file system.
+You'll first observe a BootSync failure when required data is missing, then fix the flow and validate UEFI Secure Boot. Finally, you will use BootSync secret data to unlock an encrypted root file system.
 
 ## Install dependencies
 
-Start by installing Docker. On Ubuntu 24.04 LTS, set up Docker's APT repository so you can pull and run the pre-built Learning Path containers:
+Start by installing Docker. On Ubuntu 24.04 LTS, set up Docker's APT repository so you can pull and run the pre-built containers:
 
 ```bash
 # Add Docker's official GPG key:
@@ -38,7 +38,7 @@ echo \
 sudo apt-get update
 ```
 
-Install Git and Docker packages. `git` is useful for inspecting linked source files, and the Docker packages provide the runtime used by both the User Context and FVP containers:
+Install `git` for inspecting linked source files, and Docker packages for the runtime used by both the User Context and FVP containers:
 
 ```bash
 sudo apt-get install -y git docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
@@ -51,7 +51,7 @@ sudo usermod -aG docker $USER
 newgrp docker
 ```
 
-## Start User Context service
+## Start the User Context service
 
 First, pull the Docker image with the pre-built User Context service, and then run the container.
 

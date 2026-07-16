@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Overview of Arm CCA BootSync and the Boot Injection Protocol"
+title: Understand Arm CCA BootSync and the Boot Injection Protocol
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -8,18 +8,20 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Design overview
+## What Arm CCA Bootsync is
 
-Arm CCA BootSync is a boot-time synchronization mechanism for Arm CCA Realms. It lets Realm guest firmware obtain configuration and secret data before the guest operating system is running. This matters because early firmware does not have a network stack, but workflows such as UEFI Secure Boot and encrypted disk boot still need trusted inputs during that early boot window.
+Arm Confidential Compute Architecture (CCA) BootSync is a boot-time synchronization mechanism for Arm CCA Realms. The mechanism lets Realm guest firmware obtain configuration and secret data before the guest operating system is running. This matters because early firmware does not have a network stack, but workflows such as UEFI Secure Boot and encrypted disk boot still need trusted inputs during that early boot window.
 
-The reference implementation uses the *Boot Injection Protocol*, named the BIB protocol in the Boot Injection appendix of the Realm Host Interface (RHI) specification. In this Learning Path, you use BootSync to provide two kinds of data to a Realm:
+The reference implementation uses the *Boot Injection Protocol*, named the BIB protocol in the Boot Injection appendix of the Realm Host Interface (RHI) specification. 
+
+You'll use BootSync to provide two kinds of data to a Realm:
 
 - Variable data, such as UEFI variables used to configure Secure Boot.
 - Secret data, such as a disk unlock passphrase or other boot-time secret.
 
 The data is not just copied into the Realm. BootSync first establishes a protected exchange between the Realm guest firmware and a *User Context* service controlled by the Realm initiator. The User Context service runs outside the Realm, but it represents the party that decides whether the Realm should receive the requested boot information.
 
-## Component roles
+## Components of BootSync flow
 
 The BootSync flow spans both the Normal World host and the Realm World guest:
 
@@ -30,7 +32,7 @@ The BootSync flow spans both the Normal World host and the Realm World guest:
 
 The practical result is that the Realm firmware can get boot-time data without needing direct networking. The host can carry the request, but the release decision belongs to the User Context after the Realm has provided attestation evidence.
 
-## Boot Injection Protocol stages
+## Stages of Boot Injection Protocol
 
 The Boot Injection Protocol has three logical stages:
 
@@ -49,4 +51,8 @@ The exercises intentionally show both failure and success cases:
 
 For more detail, see the [ArmCcaBootSync README](https://gitlab.arm.com/linux-arm/edk2-cca/-/blob/cca/4441_measured_boot_v1/ArmVirtPkg/ArmCcaBootSync/Readme.md), the [Realm Management Monitor specification](https://developer.arm.com/documentation/den0137/latest/), and the [Realm Host Interface specification](https://developer.arm.com/documentation/den0148/latest/).
 
-In the next section, you will launch Realms and see how Arm CCA BootSync can inject UEFI variables and secret data during early boot.
+## What you've learned and what's next
+
+You've learned what Arm CCA BootSync is and what the stages of the Boot Injection Protocol are.
+
+Next, you'll launch Realms and see how Arm CCA BootSync can inject UEFI variables and secret data during early boot.
