@@ -1,6 +1,6 @@
 ---
 title: Launch Realms using Arm Confidential Compute Architecture (CCA) BootSync
-description: Learn how Arm CCA BootSync transfers boot-time configuration and secret data to a Realm while launching CCA Realms on an FVP with RME support.
+description: Learn how Arm CCA BootSync transfers boot-time configuration and secret data to a Realm while launching a Realm on an FVP with RME support.
 
 minutes_to_complete: 60
 

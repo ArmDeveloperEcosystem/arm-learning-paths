@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 ## What Arm CCA Bootsync is
 
-Arm Confidential Compute Architecture (CCA) BootSync is a boot-time synchronization mechanism for Arm CCA Realms. The mechanism lets Realm guest firmware obtain configuration and secret data before the guest operating system is running. This matters because early firmware does not have a network stack, but workflows such as UEFI Secure Boot and encrypted disk boot still need trusted inputs during that early boot window.
+Arm Confidential Compute Architecture (CCA) BootSync is a boot-time synchronization mechanism for Arm CCA Realms. The mechanism lets Realm guest firmware obtain configuration and secret data before the guest operating system is running. This matters because early firmware doesn't have a network stack, but workflows such as UEFI Secure Boot and encrypted disk boot still need trusted inputs during that early boot window.
 
 The reference implementation uses the *Boot Injection Protocol*, named the BIB protocol in the Boot Injection appendix of the Realm Host Interface (RHI) specification. 
 
@@ -27,7 +27,7 @@ The BootSync flow spans both the Normal World host and the Realm World guest:
 
 - The *Realm guest firmware* starts BootSync early in boot and requests boot information.
 - The *Realm Management Monitor* (RMM) exposes Realm services and creates attestation reports for the Realm.
-- The *Virtual Machine Manager* (VMM), `lkvm-bootsync` in this Learning Path, forwards Realm Host Interface calls between the Realm and host user space.
+- The *Virtual Machine Manager* (VMM), in this case `lkvm-bootsync`, forwards Realm Host Interface calls between the Realm and host user space.
 - The *User Context* service receives BootSync requests, verifies attestation evidence, and returns encrypted boot information when the Realm is allowed to receive it.
 
 The practical result is that the Realm firmware can get boot-time data without needing direct networking. The host can carry the request, but the release decision belongs to the User Context after the Realm has provided attestation evidence.
@@ -42,14 +42,14 @@ The Boot Injection Protocol has three logical stages:
 
 ## What you will validate
 
-The exercises intentionally show both failure and success cases:
+You'll validate both failure and success cases:
 
-- First, you launch a Realm without injection of any boot data. This demonstrates that the firmware can run successful attestation and ask for BootSync data.
-- Next, you add the variable data file. BootSync completes, UEFI Secure Boot is enabled, and the unsigned kernel is rejected.
-- Then, you sign the Realm kernel. The Realm boots with UEFI Secure Boot enabled, and the Secure Boot UEFI variable reports `1`.
-- Finally, you encrypt the Realm root file system and use BootSync secret data to provide the unlock passphrase during boot.
+- First, you'll launch a Realm without injection of any boot data to see that the firmware can run successful attestation and ask for BootSync data.
+- Next, you'll add the variable data file. BootSync completes, UEFI Secure Boot is enabled, and the unsigned kernel is rejected.
+- Then, you'll sign the Realm kernel. The Realm boots with UEFI Secure Boot enabled, and the Secure Boot UEFI variable reports `1`.
+- Finally, you'll encrypt the Realm root file system and use BootSync secret data to provide the unlock passphrase during boot.
 
-For more detail, see the [ArmCcaBootSync README](https://gitlab.arm.com/linux-arm/edk2-cca/-/blob/cca/4441_measured_boot_v1/ArmVirtPkg/ArmCcaBootSync/Readme.md), the [Realm Management Monitor specification](https://developer.arm.com/documentation/den0137/latest/), and the [Realm Host Interface specification](https://developer.arm.com/documentation/den0148/latest/).
+For more information, see the [ArmCcaBootSync README](https://gitlab.arm.com/linux-arm/edk2-cca/-/blob/cca/4441_measured_boot_v1/ArmVirtPkg/ArmCcaBootSync/Readme.md), the [Realm Management Monitor specification](https://developer.arm.com/documentation/den0137/latest/), and the [Realm Host Interface specification](https://developer.arm.com/documentation/den0148/latest/).
 
 ## What you've learned and what's next
 
