@@ -12,7 +12,7 @@ layout: "learningpathall"
 
 Arm Confidential Compute Architecture (CCA) BootSync is a boot-time synchronization mechanism for Arm CCA Realms. The mechanism lets Realm guest firmware obtain configuration and secret data before the guest operating system is running. This matters because early firmware doesn't have a network stack, but workflows such as UEFI Secure Boot and encrypted disk boot still need trusted inputs during that early boot window.
 
-The reference implementation uses the *Boot Injection protocol*. The Boot Injection appendix of the Realm Host Interface (RHI) specification refers to the protocol as the BIB protocol. 
+The reference implementation uses the *Boot Injection protocol*. The Boot Injection appendix of the [Realm Host Interface (RHI) specification](https://developer.arm.com/documentation/den0148/latest/) refers to the protocol as the BIB protocol. 
 
 You'll use BootSync to provide two kinds of data to a Realm:
 
@@ -48,8 +48,6 @@ You'll validate both failure and success cases:
 - Next, you'll add the variable data file. BootSync completes, UEFI Secure Boot is enabled, and the unsigned kernel is rejected.
 - Then, you'll sign the Realm kernel. The Realm boots with UEFI Secure Boot enabled, and the Secure Boot UEFI variable reports `1`.
 - Finally, you'll encrypt the Realm root file system and use BootSync secret data to provide the unlock passphrase during boot.
-
-For more information, see the [ArmCcaBootSync README](https://gitlab.arm.com/linux-arm/edk2-cca/-/blob/cca/4441_measured_boot_v1/ArmVirtPkg/ArmCcaBootSync/Readme.md), the [Realm Management Monitor specification](https://developer.arm.com/documentation/den0137/latest/), and the [Realm Host Interface specification](https://developer.arm.com/documentation/den0148/latest/).
 
 ## What you've learned and what's next
 

@@ -1,13 +1,13 @@
 ---
 # User change
-title: Secure an Arm CCA Realm with UEFI Secure Boot and disk encryption
+title: Configure UEFI Secure Boot and disk encryption in Arm CCA Realms
 
 weight: 3 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
-## What you will build
+## What you will configure and validate
 
 You'll run the User Context service in a Docker container and launch CCA Realms on an Arm Fixed Virtual Platform (FVP) in a separate Docker container. You'll use Arm CCA BootSync to provide Realm UEFI variables and secret data during early boot.
 
@@ -20,7 +20,7 @@ You'll first observe a BootSync failure when required data is missing, then fix 
 
 ## Install dependencies
 
-Start by installing Docker. On Ubuntu 24.04 LTS, set up Docker's APT repository so you can pull and run the pre-built containers:
+Set up Docker's `apt` repository so you can pull and run the pre-built containers:
 
 ```bash
 # Add Docker's official GPG key:
@@ -38,7 +38,7 @@ echo \
 sudo apt-get update
 ```
 
-Install `git` for inspecting linked source files, and Docker packages for the runtime used by both the User Context and FVP containers:
+Install Docker packages for the runtime used by both the User Context and FVP containers, and optionally install `git` for inspecting linked source files:
 
 ```bash
 sudo apt-get install -y git docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
@@ -78,7 +78,7 @@ You'll be asked for a passphrase for the Secure Boot signing certificates. Remem
 ./run-user-context-service.sh
 ```
 
-## Launch a CCA Realm without Secure Boot enabled
+## Verify BootSync without Secure Boot enabled
 
 With the User Context service running in one terminal, open up a new terminal in which you'll run CCA realms.
 
@@ -175,7 +175,7 @@ This is an intentional failure: BootSync completed enough of the protocol to req
 
 Next, you'll add the missing Boot Information Block data and repeat the launch.
 
-## Launch a CCA Realm with Secure Boot enabled
+## Enable Secure Boot and validate unsigned kernel rejection
 
 On the terminal with the User Context service, stop the service by pressing `Ctrl-C`.
 
@@ -242,7 +242,7 @@ reset
 
 Next, you'll launch a Realm with a signed kernel image.
 
-## Launch a CCA Realm with Secure Boot enabled and a signed Linux kernel
+## Sign the kernel and verify Secure Boot 
 
 On the terminal with FVP, use the `sign_guest_kernel.sh` script to sign the Realm Linux kernel with the Secure Boot certificate generated earlier by the User Context setup script. When prompted, enter the passphrase you used for the Secure Boot signing certificates:
 
@@ -315,13 +315,13 @@ Stop the Realm:
 poweroff
 ```
 
-You've successfully started a Realm with UEFI Secure Boot configured and enabled via Arm CCA BootSync.
+You've successfully started a Realm with UEFI Secure Boot configured and enabled using Arm CCA BootSync.
 
-## Launch a CCA Realm with an encrypted root file system
+## Encrypt the root file system and update the secret for disk unlock
 
 You can use the secret data shared with a Realm using Arm CCA BootSync to provide access to encrypted file systems. You'll now encrypt the root file system, observe a failed unlock when the wrong secret is available, and update the BootSync secret so the Realm can unlock the disk during boot.
 
-### Encrypt the root file system
+### Encrypt the root partition
 
 {{% notice Note %}}
 
@@ -504,4 +504,4 @@ poweroff
 
 You’ve now used Arm CCA BootSync to enable UEFI Secure Boot and unlock an encrypted root file system for a Realm.
 
-You can extend the workflows covered in this Learning Path to your own workloads. 
+You can extend the workflows covered in this Learning Path to your own Realm workloads. 
