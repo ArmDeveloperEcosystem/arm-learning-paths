@@ -25,16 +25,10 @@ Send this command to the Telegram bot:
 OpenClaw performs the following operations:
 
 ```text
-Telegram command
-      |
-      v
-Memory skill
-      |
-      v
-Ollama embedding
-      |
-      v
-personal_tracker_memory in Qdrant
+Telegram / Mem command
+    -> Memory skill
+    -> Ollama embedding
+    -> Qdrant collection: personal_tracker_memory
 ```
 
 Wait for the confirmation, then retrieve the memory:
@@ -67,22 +61,94 @@ Confirm that the personal memory collection exists:
 curl http://127.0.0.1:6333/collections/personal_tracker_memory
 ```
 
-Retrieve a small set of stored points:
+The output is similar to:
+
+```output
+{
+  "result": {
+    "status": "green",
+    "optimizer_status": "ok",
+    "indexed_vectors_count": 0,
+    "points_count": 102,
+    "segments_count": 8,
+    "config": {
+      "params": {
+        "vectors": {
+          "size": 768,
+          "distance": "Cosine"
+        },
+        "shard_number": 1,
+        "replication_factor": 1,
+        "write_consistency_factor": 1,
+        "on_disk_payload": true
+      },
+      "hnsw_config": {
+        "m": 16,
+        "ef_construct": 100,
+        "full_scan_threshold": 10000,
+        "max_indexing_threads": 0,
+        "on_disk": false
+      },
+      "optimizer_config": {
+        "deleted_threshold": 0.2,
+        "vacuum_min_vector_number": 1000,
+        "default_segment_number": 0,
+        "max_segment_size": null,
+        "memmap_threshold": null,
+        "indexing_threshold": 10000,
+        "flush_interval_sec": 5,
+        "max_optimization_threads": null,
+        "prevent_unoptimized": null
+      },
+      "wal_config": {
+        "wal_capacity_mb": 32,
+        "wal_segments_ahead": 0,
+        "wal_retain_closed": 1
+      },
+      "quantization_config": null
+    },
+    "payload_schema": {},
+    "update_queue": {
+      "length": 0
+    }
+  },
+  "status": "ok",
+  "time": 0.000305601
+}
+```
+
+The point count, segment count, and response time depend on the existing data and Qdrant state. A `green` collection with `optimizer_status` set to `ok` confirms that the collection is healthy. The vector size of `768` matches the `nomic-embed-text` embedding configuration.
+
+The collection metadata does not prove that the boiler reminder was stored. Query the point payload directly to verify the synthetic record:
 
 ```bash
 curl -sS -X POST \
   http://127.0.0.1:6333/collections/personal_tracker_memory/points/scroll \
   -H 'Content-Type: application/json' \
-  -d '{"limit":5,"with_payload":true,"with_vector":false}'
+  -d '{
+    "filter": {
+      "must": [
+        {
+          "key": "text",
+          "match": {
+            "value": "#home The boiler should be inspected every October."
+          }
+        }
+      ]
+    },
+    "limit": 5,
+    "with_payload": true,
+    "with_vector": false
+  }'
 ```
 
-Look for the synthetic boiler memory in the payload.
+Look for the synthetic boiler memory in the returned payload. This second check verifies the stored content rather than only the health and configuration of the collection. The filter is necessary because a personal collection can already contain other records, so scrolling only the first few points might not return the new reminder.
 
 This check is important. It verifies the storage location from the data layer instead of trusting the assistant to describe its own architecture.
 
 ## Inspect the active agents and task history
 
-Send:
+Send the following command to the Telegram bot:
 
 ```text
 /agents
@@ -90,13 +156,13 @@ Send:
 
 The response lists the thin agents registered by the v1.2 runtime, including memory, RAG, browser search, weather, and chat routes.
 
-Inspect recent tasks:
+To inspect recent tasks, send this command to the Telegram bot:
 
 ```text
 /tasks last 5
 ```
 
-Task history records which agent handled the request, its status, and runtime duration. The v1.2 dispatcher selects skills and agents; it does not dynamically choose between multiple LLMs. Multi-model routing is intentionally outside the scope of this Learning Path.
+Task history records which agent handled the request, its status, and runtime duration. In v1.2, the dispatcher selects skills and agents while using one configured LLM endpoint. Dynamic routing between multiple models is a possible direction for future development.
 
 ## Ask for external weather data
 
@@ -110,19 +176,15 @@ OpenClaw routes the request to the weather skill. Do not add `/search` to this q
 
 This request crosses the local data boundary because the skill contacts the public [wttr.in](https://wttr.in/) weather service. The local model API is still not replaced by a cloud LLM API.
 
-## Review the acceptance criteria
+## Check your work
 
-This stage is successful when:
+Your household assistant should now:
 
-1. `/help` returns the command card.
-2. `/mem` writes the synthetic household memory.
-3. `/rag memory:` retrieves the memory.
-4. Qdrant exposes the memory in `personal_tracker_memory`.
-5. `/agents` and `/tasks last 5` report the selected local runtime path.
-6. A plain-language weather question returns external weather data through the dedicated skill.
+1. Save and retrieve the synthetic boiler reminder from Telegram.
+2. Store the reminder in `personal_tracker_memory`.
+3. Show the selected agent in `/agents` and `/tasks last 5`.
+4. Return weather data through the external weather skill.
 
-## What you've learned and what's next
+## What you've accomplished and what's next
 
-You have validated the complete memory path from Telegram to Ollama embeddings, Qdrant retrieval, and a response from the local vLLM. You also identified an explicit external-data path through the weather skill.
-
-Next, you will add household documents, browser search, and a proactive cron reminder.
+You saved and retrieved a synthetic household memory, verified it in Qdrant, and inspected both local and external request paths. Next, you will add document RAG, browser search, and a proactive cron reminder.

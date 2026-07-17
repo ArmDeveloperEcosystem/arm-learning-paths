@@ -12,6 +12,8 @@ Running a local LLM gives you a private way to generate text, but it does not ye
 
 In this Learning Path, you will deploy [OpenClaw Arm Continuum](https://github.com/odincodeshen/openclaw-arm-continuum) and interact with it from Telegram. This learning path uses a private household AI assistant as an example: you will save a household note, retrieve it later, ask questions about a local document, run an explicit web search, and schedule a proactive notification. The inference, embeddings, documents, vector memory, and task state remain on hardware you control. You can apply the same project architecture to other use cases that require private, locally controlled AI processing.
 
+This reference implementation uses Telegram as its messaging interface, but the runtime architecture is not limited to Telegram. You can integrate another messaging platform by implementing a gateway that translates its messages and events into the OpenClaw request flow.
+
 OpenClaw brings the interaction channel, local AI services, persistent memory, tools, and scheduled tasks together in one assistant runtime. It provides:
 
 - **Mobile access through Telegram** for conversations, document uploads, and notifications
