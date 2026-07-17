@@ -189,10 +189,7 @@ arm-top-navigation:not(:defined) {
     position: relative;
     top: 0;
 }
-.nav-transparent {
-    background: var(--ads-ui-ink-100);
-    background-color: var(--ads-ui-ink-100);
-}
+.nav-transparent,
 .nav-black {
     background: var(--ads-ui-ink-100);
     background-color: var(--ads-ui-ink-100);
