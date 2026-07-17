@@ -22,7 +22,7 @@ Send this command to the Telegram bot:
 /mem #home The boiler should be inspected every October.
 ```
 
-OpenClaw performs the following operations:
+The reference runtime performs the following operations:
 
 ```text
 Telegram / Mem command
@@ -172,7 +172,7 @@ Send a weather question in plain language:
 Cambridge weather tomorrow
 ```
 
-OpenClaw routes the request to the weather skill. Do not add `/search` to this question. An explicit `/search` command selects the general browser worker instead of the dedicated weather route.
+The reference runtime routes the request to the weather skill. Do not add `/search` to this question. An explicit `/search` command selects the general browser worker instead of the dedicated weather route.
 
 This request crosses the local data boundary because the skill contacts the public [wttr.in](https://wttr.in/) weather service. The local model API is still not replaced by a cloud LLM API.
 

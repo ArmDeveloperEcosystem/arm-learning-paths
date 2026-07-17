@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Prepare the DGX Spark host
 
-This section assumes Docker Engine, the Docker Compose plugin, the NVIDIA driver, and NVIDIA Container Toolkit are installed on DGX Spark. Cloning the project later in this Learning Path downloads the OpenClaw source and configuration, but it does not install Ollama or Qdrant. Prepare these host services before you start the OpenClaw containers.
+This section assumes Docker Engine, the Docker Compose plugin, the NVIDIA driver, and NVIDIA Container Toolkit are installed on DGX Spark. Cloning the project later in this Learning Path downloads the reference runtime source and configuration, but it does not install Ollama or Qdrant. Prepare these host services before you start the project containers.
 
 Confirm that the Arm CPU and NVIDIA GPU are visible:
 
@@ -37,7 +37,7 @@ You do not need to install the vLLM Python package or start a vLLM server direct
 
 ## Install Ollama for local embeddings
 
-Unlike vLLM, Ollama is not included as a service in the project's `compose.yaml`. Install and run Ollama separately on the DGX Spark host before starting the OpenClaw stack.
+Unlike vLLM, Ollama is not included as a service in the project's `compose.yaml`. Install and run Ollama separately on the DGX Spark host before starting the reference runtime.
 
 Install Ollama using the [official Linux installer](https://docs.ollama.com/linux):
 
@@ -45,7 +45,7 @@ Install Ollama using the [official Linux installer](https://docs.ollama.com/linu
 curl -fsSL https://ollama.com/install.sh | sh
 ```
 
-The OpenClaw containers connect to Ollama through the Docker host gateway. Create a systemd override that configures Ollama to listen on the host interfaces:
+The project containers connect to Ollama through the Docker host gateway. Create a systemd override that configures Ollama to listen on the host interfaces:
 
 ```bash
 sudo install -d -m 0755 /etc/systemd/system/ollama.service.d
@@ -148,7 +148,7 @@ Confirm that the Qdrant API responds:
 curl http://127.0.0.1:6333/collections
 ```
 
-Before OpenClaw creates its collections, the response is similar to:
+Before the reference runtime creates its collections, the response is similar to:
 
 ```output
 {
@@ -160,10 +160,10 @@ Before OpenClaw creates its collections, the response is similar to:
 }
 ```
 
-The response time can differ. The empty collection list is expected at this stage; OpenClaw creates the tutorial collections when you save or ingest content.
+The response time can differ. The empty collection list is expected at this stage; the runtime creates the tutorial collections when you save or ingest content.
 
 {{% notice Warning %}}
-Ollama and Qdrant must be reachable from the OpenClaw containers, but they should not be exposed to an untrusted network. Use the DGX Spark firewall or another host-level access control to restrict ports `11434`, `6333`, and `6334` to the local host and its Docker networks.
+Ollama and Qdrant must be reachable from the project containers, but they should not be exposed to an untrusted network. Use the DGX Spark firewall or another host-level access control to restrict ports `11434`, `6333`, and `6334` to the local host and its Docker networks.
 {{% /notice %}}
 
 ## Clone the fixed tutorial version
@@ -219,7 +219,7 @@ personal_knowledge_base
 You do not need to add collection settings to `.env` for this default path. Use only the synthetic data provided in the exercises.
 
 {{% notice Note %}}
-If this host already contains personal OpenClaw data, or if you are preparing a public demonstration, add the following optional settings to `.env` to isolate the tutorial data:
+If this host already contains personal runtime data, or if you are preparing a public demonstration, add the following optional settings to `.env` to isolate the tutorial data:
 
 ```text
 OPENCLAW_TRACKER_COLLECTION=demo_tracker_memory
@@ -282,7 +282,7 @@ Confirm that the model API is ready:
 curl http://127.0.0.1:8000/v1/models
 ```
 
-Verify that an OpenClaw container can reach both host services through the Docker host gateway:
+Verify that a project container can reach both host services through the Docker host gateway:
 
 ```bash
 docker exec openclaw-telegram python -c "import urllib.request; print(urllib.request.urlopen('http://host.docker.internal:11434/api/tags').status)"
@@ -315,7 +315,7 @@ Explain one benefit of running an AI assistant locally in one sentence.
 
 Watch the Telegram and vLLM logs while the request is processed:
 
-![Telegram conversation showing the tutorial prompt and a response from the local reasoning model#center](openclaw_telegram_1.jpg "Telegram response from the local OpenClaw runtime")
+![Telegram conversation showing the tutorial prompt and a response from the local reasoning model#center](openclaw_telegram_1.jpg "Telegram response from the local reference runtime")
 
 ```bash
 docker logs --tail 10 openclaw-telegram
@@ -365,6 +365,6 @@ These tests validate command routing, task dispatch, cron parsing, ingestion hel
 
 ## What you've learned and what's next
 
-You have deployed the v1.2 OpenClaw personal runtime on NVIDIA DGX Spark, connected it to your Telegram bot, verified the local vLLM endpoint, and checked the runtime tests.
+You have deployed the v1.2 personal reference runtime on NVIDIA DGX Spark, connected it to your Telegram bot, verified the local vLLM endpoint, and checked the runtime tests.
 
 Next, you will use the deployment as a local-first household assistant and confirm that memory is stored in local Qdrant collections.

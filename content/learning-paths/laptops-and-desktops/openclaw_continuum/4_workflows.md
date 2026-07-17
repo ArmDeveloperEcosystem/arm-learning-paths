@@ -1,5 +1,5 @@
 ---
-title: Validate document RAG and proactive scheduling
+title: Validate document RAG, browser search, and proactive scheduling
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -34,7 +34,7 @@ File on the Telegram client device
     -> Qdrant collection: personal_knowledge_base
 ```
 
-Telegram transports the uploaded file to the bot. OpenClaw then downloads it to `openclaw-arm-continuum/workspace/inbox/knowledge/telegram/` on DGX Spark. The memory watcher indexes the local copy and writes its chunks to `personal_knowledge_base`.
+Telegram transports the uploaded file to the bot. The reference runtime then downloads it to `openclaw-arm-continuum/workspace/inbox/knowledge/telegram/` on DGX Spark. The memory watcher indexes the local copy and writes its chunks to `personal_knowledge_base`.
 
 {{% notice Note %}}
 In this Learning Path, supported Telegram uploads are indexed after they are saved. The review-first upload workflow is planned but is not part of this release.
@@ -54,9 +54,9 @@ In Telegram, ask a question using the returned filename. Replace `<returned-file
 /rag <returned-file-name> When should the heating filter be cleaned?
 ```
 
-The filename is optional for general RAG queries. Without a filename, the OpenClaw Arm Continuum runtime used in this Learning Path performs semantic search across its configured memory and knowledge collections. Including the returned filename adds document-specific chunks to the retrieved context and helps scope the answer to this upload. This Learning Path uses the filename so that existing records in the personal collections do not affect the validation result.
+The filename is optional for general RAG queries. Without a filename, the reference runtime performs semantic search across its configured memory and knowledge collections. Including the returned filename adds document-specific chunks to the retrieved context and helps scope the answer to this upload. This Learning Path uses the filename so that existing records in the personal collections do not affect the validation result.
 
-The following example shows a general RAG query without the filename:
+The following screenshot demonstrates the optional general RAG query without a filename. For the reproducible validation in this chapter, use the filename-specific command above.
 
 ![Telegram conversation showing household-maintenance.txt uploaded with the knowledge caption, saved to personal_knowledge_base, and retrieved with a general rag question#center](openclaw_telegram_3.jpg "Uploading and querying a household document in Telegram")
 
@@ -86,6 +86,43 @@ curl -sS -X POST \
 ```
 
 The returned payload should contain chunks from `household-maintenance.txt`. This confirms that the uploaded file is stored and indexed locally rather than relying only on the assistant's answer.
+
+## Run an explicit browser search
+
+Use the browser agent when you intentionally need current public information that is not stored in local memory. Send this command to the Telegram bot:
+
+```text
+/search Arm Learning Paths local AI development
+```
+
+The explicit `/search` prefix selects the browser-search route deterministically:
+
+```text
+Telegram /search command
+    -> Browser-search agent
+    -> Local Playwright worker
+    -> Public search engine and selected pages
+    -> Local vLLM summary
+    -> Telegram answer
+```
+
+The search query and page requests cross the local data boundary. The Playwright worker saves the retrieved public content as Markdown under `workspace/inbox/tracker/web/`, and the local vLLM produces the answer without using a cloud LLM API.
+
+Confirm that the browser worker handled the request:
+
+```bash
+docker logs --tail 20 openclaw-browser-scraper
+```
+
+Look for a successful `POST /scrape` request. The Telegram response should cite the retrieved sources and include the path to the saved web Markdown file.
+
+Finally, send this command in Telegram:
+
+```text
+/tasks last 5
+```
+
+Confirm that the search task reports `browser_search_agent`. This verifies the selected agent as well as the external request path.
 
 ## Create a proactive reminder
 
@@ -147,15 +184,16 @@ Keep the Gateway and its admin RPC endpoint behind localhost, an SSH tunnel, or 
 
 ## Check your work
 
-You have now validated two runtime paths:
+You have now validated three runtime paths:
 
-| User goal | OpenClaw path |
+| User goal | Reference runtime path |
 |---|---|
 | Answer from a household document | Telegram -> RAG skill -> Qdrant -> local LLM |
-| Send a proactive reminder | Cron -> OpenClaw skill -> Telegram push |
+| Retrieve current public information | Telegram -> browser-search agent -> Playwright -> local LLM |
+| Send a proactive reminder | Cron worker -> configured skill -> Telegram push |
 
 The LLM is one replaceable part of the application. The local memory, tools, schedules, and interaction paths remain available around it.
 
 ## What you've accomplished and what's next
 
-You validated document RAG and a proactive reminder for the household assistant. Next, you will move the same workflows to a CPU-only Armv9 system.
+You validated document RAG, explicit browser search, and a proactive reminder for the household assistant. Next, you will move the same workflows to a CPU-only Armv9 system.
