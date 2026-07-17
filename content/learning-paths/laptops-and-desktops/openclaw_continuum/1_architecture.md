@@ -1,5 +1,5 @@
 ---
-title: Explore the OpenClaw Runtime and local-first data boundaries
+title: Understand the local-first OpenClaw-based architecture and data boundaries
 weight: 2
 
 ### FIXED, DO NOT MODIFY

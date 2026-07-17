@@ -1,21 +1,22 @@
 ---
-title: Deploy local-first OpenClaw runtime on DGX Spark and CPU-only systems
+title: Extend OpenClaw into a local-first AI assistant across Arm platforms
 
-description: Learn how to deploy one local-first OpenClaw runtime on [NVIDIA DGX Spark](https://www.nvidia.com/en-gb/products/workstations/dgx-spark/) and a CPU-only [Armv9 developement platform](https://developer.arm.com/community/arm-community-blogs/b/ai-blog/posts/beyond-the-demo-deploying-and-evaluating-open-source-ai-workloads-on-an-armv9-platform) while keeping inference, memory, documents, and proactive workflows under your control.
+description: Extend OpenClaw with local memory, document RAG, deterministic routing, and proactive scheduling, then move the same local-first runtime from NVIDIA DGX Spark with vLLM to a CPU-only Armv9 system with llama.cpp.
 
 minutes_to_complete: 120
 
-who_is_this_for: This is an advanced topic for developers who want to turn local LLM inference into an operational OpenClaw assistant. You will first deploy the runtime on NVIDIA DGX Spark with vLLM, then move the same Telegram, memory, RAG, search, and cron workflows to a CPU-only Armv9 system using llama.cpp.
+who_is_this_for: This is an advanced topic for developers who want to extend OpenClaw into a customizable local-first assistant with persistent memory, document RAG, deterministic routing, and proactive scheduling. You will deploy the reference runtime on NVIDIA DGX Spark with vLLM, then move the same workflows to a CPU-only Armv9 system with llama.cpp.
 
 learning_objectives:
-    - Explain the data boundaries of a local-first OpenClaw deployment
-    - Deploy and validate OpenClaw with local vLLM inference on NVIDIA DGX Spark
-    - Use local memory, document RAG, browser search, and proactive cron workflows from Telegram
-    - Move the same OpenClaw workflow to a CPU-only Armv9 system through an OpenAI-compatible llama.cpp endpoint
+    - Explain the local and external data boundaries of an OpenClaw-based runtime
+    - Deploy and validate the reference runtime with local vLLM inference on NVIDIA DGX Spark
+    - Verify persistent memory, document RAG, deterministic routing, and proactive scheduling with Telegram and Qdrant
+    - Move the same application workflows to a CPU-only Armv9 system through an OpenAI-compatible llama.cpp endpoint
 
 prerequisites:
-    - An NVIDIA DGX Spark system with Docker, NVIDIA Container Toolkit, Ollama, and Qdrant
+    - An NVIDIA DGX Spark system with NVIDIA drivers, Docker, and NVIDIA Container Toolkit
     - A CPU-only Armv9 system such as Radxa Orion O6 with at least 30 GB of memory
+    - Administrative access to install Ollama and run Qdrant containers on both systems
     - A Telegram bot token and chat ID for the tutorial
     - Familiarity with Linux, Docker Compose, and command-line tools
 

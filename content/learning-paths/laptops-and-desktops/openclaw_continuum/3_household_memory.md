@@ -1,5 +1,5 @@
 ---
-title: Validate a local-first household assistant with Telegram and Qdrant
+title: Validate local memory and deterministic routing with Telegram and Qdrant
 weight: 4
 
 ### FIXED, DO NOT MODIFY

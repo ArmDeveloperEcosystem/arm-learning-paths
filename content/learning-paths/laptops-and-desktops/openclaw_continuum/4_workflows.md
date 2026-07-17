@@ -1,5 +1,5 @@
 ---
-title: Add document RAG, browser search, and proactive cron workflows
+title: Validate document RAG and proactive scheduling
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -37,7 +37,7 @@ File on the Telegram client device
 Telegram transports the uploaded file to the bot. OpenClaw then downloads it to `openclaw-arm-continuum/workspace/inbox/knowledge/telegram/` on DGX Spark. The memory watcher indexes the local copy and writes its chunks to `personal_knowledge_base`.
 
 {{% notice Note %}}
-In this learning path, supported Telegram uploads are indexed after they are saved. The review-first upload workflow is planned but is not part of this release.
+In this Learning Path, supported Telegram uploads are indexed after they are saved. The review-first upload workflow is planned but is not part of this release.
 {{% /notice %}}
 
 The bot reports the stored filename with a timestamp prefix, similar to `20260717-180500-household-maintenance.txt`. Copy the filename from the response.
@@ -87,27 +87,6 @@ curl -sS -X POST \
 
 The returned payload should contain chunks from `household-maintenance.txt`. This confirms that the uploaded file is stored and indexed locally rather than relying only on the assistant's answer.
 
-## Search the web with the local browser worker
-
-Send an explicit search command to the Telegram bot:
-
-```text
-/search Find current public guidance for reducing household heating energy use.
-```
-
-The request path is:
-
-```text
-Telegram
-  -> browser_search_agent
-  -> local Playwright worker
-  -> public search pages
-  -> local LLM summary
-  -> Telegram
-```
-
-The browser runs locally, but the query and page requests leave the host. The resulting page content is summarized by the local model rather than a public cloud LLM API.
-
 ## Create a proactive reminder
 
 Choose a time a few minutes in the future using the runtime timezone configured by `OPENCLAW_CRON_TIMEZONE`. Send this command to the Telegram bot to create a daily tutorial reminder:
@@ -125,7 +104,16 @@ Replace `21:15` with your test time. Then list the job in Telegram:
 The bot returns a job ID, and `/cron list` shows the schedule as `[on]`. At the configured time, the bot starts a new Heating check message for the scheduled task.
 
 ![Telegram conversation showing a daily Heating check cron job created, listed as enabled, and triggered at the configured time#center](openclaw_telegram_4.jpg "Creating and triggering a scheduled reminder in Telegram")
+
 The job runs only inside the configured due-time window. Creating the job must not execute it immediately.
+
+After the configured time, verify that the cron worker delivered the scheduled job:
+
+```bash
+docker logs --tail 30 openclaw-cron
+```
+
+Look for a line containing `[cron] dynamic job sent`, the job ID, and the path to the locally saved cron report.
 
 To test without waiting, copy the job ID from `/cron list` and send:
 
@@ -159,17 +147,15 @@ Keep the Gateway and its admin RPC endpoint behind localhost, an SSH tunnel, or 
 
 ## Check your work
 
-You have now exercised four different runtime paths:
+You have now validated two runtime paths:
 
 | User goal | OpenClaw path |
 |---|---|
-| Remember a household fact | Telegram -> memory skill -> Ollama -> Qdrant |
 | Answer from a household document | Telegram -> RAG skill -> Qdrant -> local LLM |
-| Find current public information | Telegram -> Playwright -> local LLM |
 | Send a proactive reminder | Cron -> OpenClaw skill -> Telegram push |
 
 The LLM is one replaceable part of the application. The local memory, tools, schedules, and interaction paths remain available around it.
 
 ## What you've accomplished and what's next
 
-You added document RAG, web search, and a proactive reminder to the household assistant. Next, you will move the same workflows to a CPU-only Armv9 system.
+You validated document RAG and a proactive reminder for the household assistant. Next, you will move the same workflows to a CPU-only Armv9 system.

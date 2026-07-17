@@ -1,5 +1,5 @@
 ---
-title: Deploy the OpenClaw personal runtime on NVIDIA DGX Spark
+title: Deploy an OpenClaw-based runtime with local vLLM on NVIDIA DGX Spark
 weight: 3
 
 ### FIXED, DO NOT MODIFY
