@@ -1,6 +1,6 @@
 ---
 # User change
-title: Launch Arm CCA Realms with UEFI Secure Boot on Arm FVP
+title: Secure an Arm CCA Realm with UEFI Secure Boot and disk encryption
 
 weight: 3 # 1 is first, 2 is second, etc.
 
@@ -9,12 +9,12 @@ layout: "learningpathall"
 ---
 ## What you will build
 
-You'll run the User Context service in a Docker container, launch a CCA Realm on Arm FVP in a separate Docker container, and use Arm CCA BootSync to provide Realm UEFI variables and secret data during early boot.
+You'll run the User Context service in a Docker container and launch CCA Realms on an Arm Fixed Virtual Platform (FVP) in a separate Docker container. You'll use Arm CCA BootSync to provide Realm UEFI variables and secret data during early boot.
 
-You'll uses two terminals:
+You'll use two terminals:
 
 - In the first terminal, you'll run the User Context service. This service represents the Realm initiator and decides whether to release BootSync data.
-- In the second terminal, you'll run the Arm CCA FVP and launches Realm VMs using `lkvm-bootsync`.
+- In the second terminal, you'll run the Arm CCA FVP and launch Realm VMs using `lkvm-bootsync`.
 
 You'll first observe a BootSync failure when required data is missing, then fix the flow and validate UEFI Secure Boot. Finally, you will use BootSync secret data to unlock an encrypted root file system.
 
@@ -266,8 +266,6 @@ cd /cca
   --realm-pv ARMCCA01
 ```
 
-You'll see the Realm boot.
-
 The output is similar to:
 
 ```output
@@ -321,15 +319,18 @@ You've successfully started a Realm with UEFI Secure Boot configured and enabled
 
 ## Launch a CCA Realm with an encrypted root file system
 
-You can use the secure data shared with a Realm using Arm CCA BootSync to provide access to encrypted file systems. You'll now encrypt the root file system, observe a failed unlock when the wrong secret is available, and update the BootSync secret so the Realm can unlock the disk during boot.
+You can use the secret data shared with a Realm using Arm CCA BootSync to provide access to encrypted file systems. You'll now encrypt the root file system, observe a failed unlock when the wrong secret is available, and update the BootSync secret so the Realm can unlock the disk during boot.
+
+### Encrypt the root file system
 
 {{% notice Note %}}
 
 There are different ways to provide a Realm with access to encrypted partitions using Arm CCA BootSync. For example:
 
 - Use an updated version of [Grub](https://gitlab.arm.com/linux-arm/grub-cca/-/tree/cca/4441_measured_boot_v1) as a boot loader.
-  This version of Grub uses the secret data to open an encrypted partition and load kernel and initrd images from it.
-  This is an example grub config file:
+  This version of Grub uses the secret data to open an encrypted partition and load kernel and `initrd` images from it.
+
+  The following is an example Grub config file:
   ```output
   echo 'Mounting encrypted disk...'
   cryptomount -s efisecret (hd0,gpt2)
@@ -353,7 +354,7 @@ On the terminal with the running FVP, use the `encrypt_rootfs.sh` script to encr
 
 You'll be asked for a passphrase to encrypt the root partition. Use a memorable test passphrase and keep it available, because you'll later write the same value into `ARMCCA01_SEC.dat` for BootSync to release.
 
-You can use maximum of 512 characters of upper/lowercase, numbers and symbols.
+You can use a maximum of 512 characters of uppercase or lowercase letters, numbers, and symbols.
 Ignore the warning message because you're using small partitions.
 
 ```bash { output_lines="2-11" }
@@ -370,6 +371,8 @@ WARNING: keyslots area (1015808 bytes) is very small, available LUKS2 keyslot co
 Enable Initrd image
 ```
 
+### Validate the failed unlock 
+
 Relaunch the Realm. At this point, `ARMCCA01_SEC.dat` still contains the test string from the previous Secure Boot step, not the disk encryption passphrase:
 
 ```bash
@@ -383,7 +386,7 @@ cd /cca
   --realm-pv ARMCCA01
 ```
 
-In the realm boot log, you can see that the Init script failed to unlock the encrypted partition:
+In the Realm boot log, you can see that the init script failed to unlock the encrypted partition:
 
 ```output
 [   32.761651] Run /init as init process
@@ -419,7 +422,11 @@ Stop the Realm:
 poweroff
 ```
 
-The init script failed to unlock the encrypted partition because the Secret Data file doesn't contain the encryption passphrase yet. Now, update the BootSync secret.
+The init script failed to unlock the encrypted partition because the Secret Data file doesn't contain the encryption passphrase yet. 
+
+### Update the BootSync secret and validate a successful unlock
+
+Now, update the BootSync secret.
 
 On the terminal with the User Context service, stop the service by pressing `Ctrl-C`.
 
@@ -495,6 +502,6 @@ poweroff
 
 ## What you've accomplished 
 
-You've now succesfully tested launching Realms with Arm CCA BootSync.
+You’ve now used Arm CCA BootSync to enable UEFI Secure Boot and unlock an encrypted root file system for a Realm.
 
 You can extend the workflows covered in this Learning Path to your own workloads. 

@@ -1,6 +1,6 @@
 ---
 title: Launch Realms using Arm Confidential Compute Architecture (CCA) BootSync
-description: Learn how Arm CCA BootSync transfers boot-time configuration and secret data to a Realm while launching a Realm on an FVP with RME support.
+description: Learn how Arm CCA BootSync transfers boot-time configuration and secret data when you launch a Realm on an FVP with RME support.
 
 minutes_to_complete: 60
 
@@ -10,7 +10,7 @@ learning_objectives:
   - Understand why BootSync is needed before the Realm guest operating system has networking.
   - Learn how the Boot Injection Protocol uses key exchange, attestation, and Boot Information Blocks to support the BootSync workflow.
   - Use BootSync to inject UEFI variables and secret data into an Arm CCA Realm.
-  - Launch Arm CCA Realms with UEFI Secure Boot and an encrypted root file system on an Armv9-A AEM Base FVP with RME support.
+  - Launch Arm CCA Realms with UEFI Secure Boot and an encrypted root file system on an Armv9-A AEM Base Fixed Virtual Platform (FVP) with Realm Management Extension (RME) support.
 
 prerequisites:
   - An AArch64 or x86_64 computer running Linux or macOS. Cloud-based instances can also be used; see the [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/)
