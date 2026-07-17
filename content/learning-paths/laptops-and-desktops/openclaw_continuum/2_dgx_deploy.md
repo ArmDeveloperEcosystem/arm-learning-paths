@@ -1,5 +1,5 @@
 ---
-title: Deploy the OpenClaw demo runtime on NVIDIA DGX Spark
+title: Deploy the OpenClaw personal runtime on NVIDIA DGX Spark
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -207,15 +207,28 @@ OPENCLAW_GATEWAY_TOKEN=<generated-random-token>
 Do not share your Telegram bot token or chat ID with anyone, and do not include them in screenshots, logs, or public repositories.
 {{% /notice %}}
 
-Use a dedicated tutorial bot when possible. Only allowlisted chat IDs can send commands to this runtime.
+Only allowlisted chat IDs can send commands to this runtime.
 
-Change the collection names so that the tutorial does not use personal collections:
+The main tutorial flow uses the default personal collections:
+
+```text
+personal_tracker_memory
+personal_knowledge_base
+```
+
+You do not need to add collection settings to `.env` for this default path. Use only the synthetic data provided in the exercises.
+
+{{% notice Note %}}
+If this host already contains personal OpenClaw data, or if you are preparing a public demonstration, add the following optional settings to `.env` to isolate the tutorial data:
 
 ```text
 OPENCLAW_TRACKER_COLLECTION=demo_tracker_memory
 OPENCLAW_KNOWLEDGE_COLLECTION=demo_knowledge_base
 OPENCLAW_RUNTIME_LABEL=DGX Spark Demo
 ```
+
+If you choose this option, replace the `personal_*` collection names in later verification commands with the corresponding `demo_*` names.
+{{% /notice %}}
 
 The v1.2 DGX model is text-first. Disable experimental vision routing for this Learning Path:
 
@@ -288,7 +301,7 @@ An HTTP `200` response confirms that the Gateway dashboard is reachable.
 
 ## Run the first Telegram test
 
-Open the demo bot in Telegram and send:
+Open your bot in Telegram and send:
 
 ```text
 /help
@@ -352,6 +365,6 @@ These tests validate command routing, task dispatch, cron parsing, ingestion hel
 
 ## What you've learned and what's next
 
-You have deployed the v1.2 OpenClaw runtime on NVIDIA DGX Spark, connected it to a demo Telegram bot, verified the local vLLM endpoint, and checked the runtime tests.
+You have deployed the v1.2 OpenClaw personal runtime on NVIDIA DGX Spark, connected it to your Telegram bot, verified the local vLLM endpoint, and checked the runtime tests.
 
 Next, you will use the deployment as a local-first household assistant and confirm that memory is stored in local Qdrant collections.

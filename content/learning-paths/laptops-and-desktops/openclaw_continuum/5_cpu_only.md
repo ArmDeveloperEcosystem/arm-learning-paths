@@ -13,7 +13,7 @@ This section uses a CIX-based Radxa Orion O6 running Debian 12. The goal is not 
 The layers that stay the same are:
 
 - Telegram commands
-- Memory and RAG collections
+- Memory and RAG collection roles
 - Ollama embeddings
 - Qdrant vector storage
 - Browser search
@@ -143,12 +143,12 @@ git checkout v1.2
 cp .env.arm-cpu-only.example .env
 ```
 
-Set a dedicated bot and private tokens in `.env`:
+Set your bot and private tokens in `.env`:
 
 ```text
-OPENCLAW_TELEGRAM_BOT_TOKEN=<cpu-only-demo-bot-token>
-OPENCLAW_TELEGRAM_ALLOWED_CHAT_IDS=<demo-chat-id>
-OPENCLAW_CRON_CHAT_IDS=<demo-chat-id>
+OPENCLAW_TELEGRAM_BOT_TOKEN=<your-telegram-bot-token>
+OPENCLAW_TELEGRAM_ALLOWED_CHAT_IDS=<your-telegram-chat-id>
+OPENCLAW_CRON_CHAT_IDS=<your-telegram-chat-id>
 OPENCLAW_GATEWAY_TOKEN=<generated-random-token>
 ```
 
@@ -158,11 +158,13 @@ Confirm the inference settings:
 OPENCLAW_VLLM_BASE_URL=http://127.0.0.1:8080/v1
 OPENCLAW_VLLM_MODEL=ernie-o6
 OPENCLAW_VISION_ENABLED=false
-OPENCLAW_TRACKER_COLLECTION=demo_tracker_memory
-OPENCLAW_KNOWLEDGE_COLLECTION=demo_knowledge_base
+OPENCLAW_TRACKER_COLLECTION=personal_tracker_memory
+OPENCLAW_KNOWLEDGE_COLLECTION=personal_knowledge_base
 ```
 
 Although the environment variable retains the `VLLM` name for compatibility, it represents the configured generation endpoint and can point to llama.cpp.
+
+Using the same collection names preserves the application contract, but it does not copy Qdrant data from DGX Spark to Orion O6. Each host keeps its own local collection data unless you migrate it separately.
 
 For a smaller CPU-only context budget, keep search and retrieval compact:
 
@@ -200,7 +202,7 @@ If you do not need voice for the LP1 tests, you can omit `--profile voice` and s
 
 ## Repeat the workflow
 
-Send the following commands to the CPU-only demo bot:
+Send the following commands to the CPU-only bot:
 
 ```text
 /help

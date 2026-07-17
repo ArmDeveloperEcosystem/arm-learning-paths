@@ -24,7 +24,7 @@ Save the file as `household-maintenance.txt` and upload it to the Telegram bot w
 /knowledge
 ```
 
-OpenClaw saves the file to the local workspace, indexes it with the memory watcher, and writes its chunks to `demo_knowledge_base`.
+OpenClaw saves the file to the local workspace, indexes it with the memory watcher, and writes its chunks to `personal_knowledge_base`.
 
 {{% notice Note %}}
 In v1.2, supported Telegram uploads are indexed after they are saved. The review-first upload workflow is planned but is not part of this release.
@@ -41,7 +41,7 @@ The answer should mention the first Saturday of every third month.
 Confirm the knowledge collection from the host:
 
 ```bash
-curl http://127.0.0.1:6333/collections/demo_knowledge_base
+curl http://127.0.0.1:6333/collections/personal_knowledge_base
 ```
 
 ## Search the web with the local browser worker

@@ -42,7 +42,7 @@ Local-first does not mean that every byte stays offline. Telegram and web search
 The runtime does not require a public cloud LLM API. However, content sent through Telegram is transported by Telegram, and explicit browser searches reveal the search request to external websites.
 
 {{% notice Note %}}
-Use synthetic or public data while following this Learning Path. The tutorial uses a demo bot and demo Qdrant collections so that you can reset and repeat the workflow without exposing personal household information.
+This Learning Path uses the default personal runtime configuration, but every exercise uses synthetic or public data. Do not enter real personal, household, or organizational information while following the tutorial. If the host already contains personal OpenClaw data, use the optional demo isolation settings introduced in the next chapter.
 {{% /notice %}}
 
 ## Follow the request path
