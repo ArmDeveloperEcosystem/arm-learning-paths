@@ -19,7 +19,10 @@ You'll configure and validate both failure and success cases:
 
 You'll run the User Context service in a Docker container and launch CCA Realms on an Arm Fixed Virtual Platform (FVP) in a separate Docker container.
 
-You'll use two terminals. In the first terminal, you'll run the User Context service. This service represents the Realm initiator and decides whether to release BootSync data. In the second terminal, you'll run the Arm CCA FVP and launch Realm virtual machines using `lkvm-bootsync`.
+You'll use two terminals:
+
+- In the User Context terminal, you'll run the User Context service. This service represents the Realm initiator and decides whether to release BootSync data.
+- In the FVP terminal, you'll run the Arm CCA FVP and launch Realm virtual machines using `lkvm-bootsync`.
 
 ## Install dependencies
 
@@ -53,11 +56,11 @@ Add your user name to the Docker group so you can run Docker without `sudo`:
 sudo usermod -aG docker $USER
 newgrp docker
 ```
-The group change applies to new shells; `newgrp docker` updates the current terminal.
+The group change applies to new shells; `newgrp docker` updates the current shell.
 
 ## Start the User Context service
 
-First, pull the Docker image with the pre-built User Context service. Then, run the container:
+In the User Context terminal, pull the Docker image with the pre-built User Context service. Then, run the container:
 
 ```bash
 docker pull armswdev/cca-learning-path:cca-key-broker-v4
@@ -67,7 +70,7 @@ docker run --rm -it --network cca-trustee --name user-context armswdev/cca-learn
 
 The `cca-trustee` Docker network is important. It lets the FVP container resolve the User Context service by container name, `user-context`, when `lkvm-bootsync` later uses `--service-ip user-context`.
 
-Now, within your running Docker container, start the User Context service using the `run-user-context-service.sh` script.
+In the User Context terminal, start the User Context service inside the running container using the `run-user-context-service.sh` script.
 The User Context service is part of the [EDK2](https://gitlab.arm.com/linux-arm/edk2-cca/-/tree/cca/4441_measured_boot_v1/ArmVirtPkg/ArmCcaBootSync/UserContext) project.
 Created specifically as a proof of concept, it's intentionally small and not designed for production use.
 
@@ -83,7 +86,7 @@ You'll be asked for a passphrase for the Secure Boot signing certificates. Remem
 
 ## Validate BootSync failure without boot data
 
-With the User Context service running in one terminal, open up a new terminal in which you'll run CCA Realms.
+With the User Context service running in the User Context terminal, open the FVP terminal.
 
 Pull the Docker image with the pre-built FVP and CCA reference software stack. Then, run the container connected to the same Docker network:
 
@@ -163,7 +166,7 @@ Stop the Realm:
 poweroff
 ```
 
-On the terminal with the User Context service, you can see that the Realm firmware requested a Variable Data file, but the file is missing:
+In the User Context terminal, you can see that the Realm firmware requested a Variable Data file, but the file is missing:
 
 ```output
 INFO: BIB Variable Data Requested
@@ -180,7 +183,7 @@ Next, you'll add the missing Boot Information Block data and repeat the launch.
 
 ## Pass UEFI variable data and validate unsigned kernel rejection
 
-On the terminal with the User Context service, stop the service by pressing `Ctrl-C`.
+In the User Context terminal, stop the service by pressing `Ctrl-C`.
 
 The RPV and file names used here are details of this Learning Path's reference implementation. One User Context service can support multiple Realms by using the RPV as a file-name prefix. A Realm launched with `--realm-pv ARMCCA01` requests files that start with `ARMCCA01`. If the matching files are missing, BootSync can establish a session and complete attestation, but the User Context can't provide the requested boot information.
 
@@ -197,13 +200,13 @@ Create a Secret Data file with a test string that'll be shared with a Realm usin
 echo "My Realm secret data" > SecureBoot/ARMCCA01_SEC.dat
 ```
 
-Relaunch the User Context service:
+In the User Context terminal, relaunch the User Context service:
 
 ```bash
 ./run-user-context-service.sh
 ```
 
-On the terminal with FVP, relaunch the Realm with the same RPV:
+In the FVP terminal, relaunch the Realm with the same RPV:
 
 ```bash
 cd /cca
@@ -218,7 +221,7 @@ cd /cca
 
 Keeping the same `--realm-pv ARMCCA01` is what links the Realm request to the files you created.
 
-On the terminal with the User Context service, you can see that attestation succeeded and BootSync completed:
+In the User Context terminal, you can see that attestation succeeded and BootSync completed:
 
 ```output
 Info: Received FIN. Disconnecting.
@@ -247,7 +250,7 @@ Next, you'll launch a Realm with a signed kernel image.
 
 ## Sign the kernel and verify Secure Boot 
 
-On the terminal with FVP, use the `sign_guest_kernel.sh` script to sign the Realm Linux kernel with the Secure Boot certificate generated earlier by the User Context setup script. When prompted, enter the passphrase you used for the Secure Boot signing certificates:
+In the FVP terminal, use the `sign_guest_kernel.sh` script to sign the Realm Linux kernel with the Secure Boot certificate generated earlier by the User Context setup script. When prompted, enter the passphrase you used for the Secure Boot signing certificates:
 
 ```bash { output_lines="2-3" }
 sign_guest_kernel.sh
@@ -256,7 +259,7 @@ Enter PEM pass phrase:
 Signing Unsigned original image
 ```
 
-Relaunch the Realm. Use the same User Context service, service port, and RPV so the Realm receives the same Secure Boot variable data:
+In the FVP terminal, relaunch the Realm. Use the same User Context service, service port, and RPV so the Realm receives the same Secure Boot variable data:
 
 ```bash
 cd /cca
@@ -353,7 +356,7 @@ There are different ways to provide a Realm with access to encrypted partitions 
 
 {{% /notice %}}
 
-On the terminal with the running FVP, use the `encrypt_rootfs.sh` script to encrypt the root partition in the Realm disk image and add an `initrd` image to the kernel parameters.
+In the FVP terminal, use the `encrypt_rootfs.sh` script to encrypt the root partition in the Realm disk image and add an `initrd` image to the kernel parameters.
 
 You'll be asked for a passphrase to encrypt the root partition. Use a memorable test passphrase and keep it available, because you'll later write the same value into `ARMCCA01_SEC.dat` for BootSync to release.
 
@@ -376,7 +379,7 @@ Enable Initrd image
 
 ### Validate failed disk unlock 
 
-Relaunch the Realm. At this point, `ARMCCA01_SEC.dat` still contains the test string from the previous Secure Boot step, not the disk encryption passphrase:
+In the FVP terminal, relaunch the Realm. At this point, `ARMCCA01_SEC.dat` still contains the test string from the previous Secure Boot step, not the disk encryption passphrase:
 
 ```bash
 cd /cca
@@ -431,7 +434,7 @@ The init script failed to unlock the encrypted partition because the Secret Data
 
 Now, update the BootSync secret.
 
-On the terminal with the User Context service, stop the service by pressing `Ctrl-C`.
+In the User Context terminal, stop the service by pressing `Ctrl-C`.
 
 Save the encryption passphrase into the Secret Data file. Use `echo -n` so the file contains only the passphrase and no trailing newline character:
 
@@ -440,13 +443,13 @@ ROOTFS_PASSPHRASE='replace-with-the-passphrase-you-used-for-encrypt_rootfs'
 echo -n "$ROOTFS_PASSPHRASE" > SecureBoot/ARMCCA01_SEC.dat
 ```
 
-Relaunch the User Context service:
+In the User Context terminal, relaunch the User Context service:
 
 ```bash
 ./run-user-context-service.sh
 ```
 
-On the terminal with FVP, relaunch the Realm with the same RPV:
+In the FVP terminal, relaunch the Realm with the same RPV:
 
 ```bash
 cd /cca
