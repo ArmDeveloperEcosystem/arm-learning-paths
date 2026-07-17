@@ -175,12 +175,7 @@ table tbody td {
 /* CLS fix: reserve space for nav before hydration */
 arm-top-navigation:not(:defined) {
     display: block;
-    min-height: 80px;
-}
-@media (max-width: 1024px) {
-    arm-top-navigation:not(:defined) {
-        min-height: 60px;
-    }
+    min-height: 60px;
 }
 
 /* Fix global nav height */
@@ -189,23 +184,18 @@ arm-top-navigation:not(:defined) {
 /*************************************/
 #global-nav-height-fixer {
     max-width: 100vw;
-    height: 80px;
+    height: 60px;
     overflow: hidden;
     position: relative;
     top: 0;
 }
-@media (max-width: 1024px) { /* smaller screens than LG */
-        #global-nav-height-fixer {
-            height: 60px;
-        }
-}
 .nav-transparent {
-    background: transparent;
-    background-color: transparent;
+    background: var(--ads-ui-ink-100);
+    background-color: var(--ads-ui-ink-100);
 }
 .nav-black {
-    background: #010101;
-    background-color: #010101;  
+    background: var(--ads-ui-ink-100);
+    background-color: var(--ads-ui-ink-100);
 }
 
 /* Fix Masthead Height */
