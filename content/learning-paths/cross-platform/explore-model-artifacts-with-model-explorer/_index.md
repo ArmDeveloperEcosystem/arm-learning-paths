@@ -13,7 +13,7 @@ learning_objectives:
   - Open ExecuTorch .pte files and compare portable CPU, XNNPACK CPU, and Ethos-U artifacts
   - Use PTE visualization to reason about delegate regions, work outside delegates, graph fragmentation, and backend-specific changes
   - Inspect TOSA flatbuffers as an intermediate representation used by Arm compiler and backend workflows
-  - Inspect VGF artifacts for Vulkan ML and neural graphics workloads
+  - Inspect VGF artifacts used with the ML extensions for Vulkan and neural graphics workloads
   - Use ETRecord and ETDump overlays to connect exported graph structure with runtime profiling data
 
 prerequisites:

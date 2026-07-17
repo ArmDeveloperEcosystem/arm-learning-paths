@@ -128,9 +128,9 @@ This matters because TOSA provides a contract between the model frontend and the
 
 ## Inspect TOSA for VGF conversion
 
-TOSA can also feed Vulkan ML workflows. The Arm ML SDK Model Converter takes TOSA as input, applies transforms and optimizations, lowers to SPIR-V graph IR, and packages the result into a VGF file.
+TOSA can also feed workflows that use the ML extensions for Vulkan. The Arm ML SDK Model Converter takes TOSA as input, applies transforms and optimizations, lowers to SPIR-V graph IR, and packages the result into a VGF file.
 
-The examples in this section use a small neural upscaling model. It takes a low-resolution image-like tensor and produces a higher-resolution output, which makes it a useful compact example for Vulkan ML and neural graphics workflows.
+The examples in this section use a small neural upscaling model. It takes a low-resolution image-like tensor and produces a higher-resolution output, which makes it a useful compact example for workflows using the ML extensions for Vulkan and for neural graphics.
 
 These artifacts were generated in the [Quantize neural upscaling models with ExecuTorch](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/quantize-neural-upscaling-models/) learning path. Go through that learning path if you want to learn how to generate the `.tosa` and `.vgf` files yourself, and how to apply post-training quantization (PTQ) and quantization-aware training (QAT) before export.
 
@@ -158,10 +158,10 @@ The important difference is how the quantized model parameters were produced. PT
 
 In Model Explorer, that difference is not likely to appear as a different graph shape. Look instead at tensor metadata, constants, scales, shifts, zero-points, and any downstream accuracy or runtime behavior.
 
-These files are useful because they connect the TOSA view to the VGF view. TOSA shows the backend-neutral graph representation. The next section shows the VGF artifact produced for Vulkan ML and neural graphics integration.
+These files are useful because they connect the TOSA view to the VGF view. TOSA shows the backend-neutral graph representation. The next section shows the VGF artifact produced for integration with the ML extensions for Vulkan and neural graphics.
 
 ## What you have learned
 
 You have inspected TOSA as the intermediate representation between model lowering and backend compilation or conversion. For Ethos-U, TOSA helps explain why FP32 does not delegate, why INT8 can produce a compact NPU region, and why an inserted unsupported operation can fragment the graph. You have also seen that TOSA is not ExecuTorch-specific and can be produced by other frontends.
 
-Next, you will inspect VGF artifacts and see what the TOSA-to-VGF conversion produces for Vulkan ML workflows.
+Next, you will inspect VGF artifacts and see what the TOSA-to-VGF conversion produces for workflows using the ML extensions for Vulkan.
