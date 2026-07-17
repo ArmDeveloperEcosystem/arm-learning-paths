@@ -10,14 +10,16 @@ layout: "learningpathall"
 ---
 ## What you will configure and validate
 
-You'll run the User Context service in a Docker container and launch CCA Realms on an Arm Fixed Virtual Platform (FVP) in a separate Docker container. You'll use Arm CCA BootSync to provide Realm UEFI variables and secret data during early boot.
+You'll configure and validate both failure and success cases:
 
-You'll use two terminals:
+- First, you'll launch a Realm without injecting any boot data to see that the firmware can run successful attestation and ask for BootSync data.
+- Next, you'll add the variable data file. BootSync completes, UEFI Secure Boot is enabled, and the unsigned kernel is rejected.
+- Then, you'll sign the Realm kernel and validate Secure Boot. The Realm boots with UEFI Secure Boot enabled, and the Secure Boot UEFI variable reports `1`.
+- Finally, you'll encrypt the Realm root file system and use BootSync secret data to provide UEFI variables and the unlock passphrase during early boot. You'll unlock the encrypted file system.
 
-- In the first terminal, you'll run the User Context service. This service represents the Realm initiator and decides whether to release BootSync data.
-- In the second terminal, you'll run the Arm CCA FVP and launch Realm virtual machines using `lkvm-bootsync`.
+You'll run the User Context service in a Docker container and launch CCA Realms on an Arm Fixed Virtual Platform (FVP) in a separate Docker container.
 
-You'll first observe a BootSync failure when required data is missing, then fix the flow and validate UEFI Secure Boot. Finally, you'll use BootSync secret data to unlock an encrypted root file system.
+You'll use two terminals. In the first terminal, you'll run the User Context service. This service represents the Realm initiator and decides whether to release BootSync data. In the second terminal, you'll run the Arm CCA FVP and launch Realm virtual machines using `lkvm-bootsync`.
 
 ## Install dependencies
 
@@ -79,9 +81,9 @@ You'll be asked for a passphrase for the Secure Boot signing certificates. Remem
 ./run-user-context-service.sh
 ```
 
-## Verify BootSync without Secure Boot enabled
+## Validate BootSync failure without boot data
 
-With the User Context service running in one terminal, open up a new terminal in which you'll run CCA realms.
+With the User Context service running in one terminal, open up a new terminal in which you'll run CCA Realms.
 
 Pull the Docker image with the pre-built FVP and CCA reference software stack. Then, run the container connected to the same Docker network:
 
@@ -176,7 +178,7 @@ This is an intentional failure: BootSync completed enough of the protocol to req
 
 Next, you'll add the missing Boot Information Block data and repeat the launch.
 
-## Enable Secure Boot and validate unsigned kernel rejection
+## Pass UEFI variable data and validate unsigned kernel rejection
 
 On the terminal with the User Context service, stop the service by pressing `Ctrl-C`.
 
@@ -318,7 +320,7 @@ poweroff
 
 You've successfully started a Realm with UEFI Secure Boot configured and enabled using Arm CCA BootSync.
 
-## Encrypt the root file system and update the secret for disk unlock
+## Encrypt the root file system and update secret data for disk unlock
 
 You can use the secret data shared with a Realm using Arm CCA BootSync to provide access to encrypted file systems. You'll now encrypt the root file system, observe a failed unlock when the wrong secret is available, and update the BootSync secret so the Realm can unlock the disk during boot.
 
@@ -345,9 +347,9 @@ There are different ways to provide a Realm with access to encrypted partitions 
   echo 'Booting Linux...'
   boot
   ```
-  With the current Grub implementation of Arm CCA BootSync support, the booted operating system has access to the initramfs only.
+  With the current Grub implementation of Arm CCA BootSync support, the booted operating system has access to the `initramfs` only.
 
-- Use an init script in an initrd image to unlock and mount the encrypted partition. You will use this approach in the next steps.
+- Use an init script in an `initrd` image to unlock and mount the encrypted partition. You'll use this approach in the next step.
 
 {{% /notice %}}
 
@@ -372,7 +374,7 @@ WARNING: keyslots area (1015808 bytes) is very small, available LUKS2 keyslot co
 Enable Initrd image
 ```
 
-### Validate the failed unlock 
+### Validate failed disk unlock 
 
 Relaunch the Realm. At this point, `ARMCCA01_SEC.dat` still contains the test string from the previous Secure Boot step, not the disk encryption passphrase:
 
@@ -425,7 +427,7 @@ poweroff
 
 The init script failed to unlock the encrypted partition because the Secret Data file doesn't contain the encryption passphrase yet. 
 
-### Update the BootSync secret and validate a successful unlock
+### Update the BootSync secret and validate successful disk unlock
 
 Now, update the BootSync secret.
 
@@ -505,4 +507,4 @@ poweroff
 
 You’ve now used Arm CCA BootSync to enable UEFI Secure Boot and unlock an encrypted root file system for a Realm.
 
-You can extend the workflows covered in this Learning Path to your own Realm workloads. 
+You can extend the workflows covered in this Learning Path to provide trusted early-boot data for your own Realm workloads. 

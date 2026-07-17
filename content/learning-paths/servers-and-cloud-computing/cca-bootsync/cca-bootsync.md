@@ -1,6 +1,6 @@
 ---
 # User change
-title: Understand Arm CCA BootSync and the Boot Injection Protocol
+title: Understand Arm CCA BootSync and the Boot Injection protocol
 description: Understand how Arm CCA BootSync uses key exchange, attestation, and Boot Information Blocks to deliver trusted configuration and secret data during Realm boot.
 
 weight: 2 # 1 is first, 2 is second, etc.
@@ -40,15 +40,6 @@ The Boot Injection protocol has three logical stages:
 1. Key exchange establishes a secure session between the Realm guest firmware and the User Context service. The reference implementation uses ECDH over the P-384 curve, derives keys with HKDF-SHA512, and encrypts protocol data with AES-GCM.
 2. Attestation lets the Realm guest firmware request an attestation report from the RMM. The binding key from the secure session is used as challenge data, so the User Context can bind the attestation evidence to this BootSync exchange.
 3. Boot Information Blocks carry the requested boot data after attestation succeeds.
-
-## What you will validate
-
-You'll validate both failure and success cases:
-
-- First, you'll launch a Realm without injecting any boot data to see that the firmware can run successful attestation and ask for BootSync data.
-- Next, you'll add the variable data file. BootSync completes, UEFI Secure Boot is enabled, and the unsigned kernel is rejected.
-- Then, you'll sign the Realm kernel. The Realm boots with UEFI Secure Boot enabled, and the Secure Boot UEFI variable reports `1`.
-- Finally, you'll encrypt the Realm root file system and use BootSync secret data to provide the unlock passphrase during boot.
 
 ## What you've learned and what's next
 
