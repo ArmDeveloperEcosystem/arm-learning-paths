@@ -1,0 +1,3 @@
+[params]
+# Validate the refreshed global navigation and footer on internal.learn.arm.com.
+global_web_components_url = "https://www.arm.com/arm-global-web-components/devhub/test.js"
