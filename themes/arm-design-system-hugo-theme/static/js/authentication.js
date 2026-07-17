@@ -277,7 +277,7 @@ document.addEventListener('arm-account-signin', (event) => {
 
       const signInButton = shadowRoot.querySelector('.c-utility-navigation-login__sign-in-button');
     if (signInButton) {
-        signInButton.innerHTML = "Redirecting to login...";
+        signInButton.innerHTML = "Redirecting...";
     }
     else {
         console.log("Sign-in button not found in DOM.");
