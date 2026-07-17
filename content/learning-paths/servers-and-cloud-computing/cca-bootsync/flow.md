@@ -15,7 +15,7 @@ You'll run the User Context service in a Docker container and launch CCA Realms 
 You'll use two terminals:
 
 - In the first terminal, you'll run the User Context service. This service represents the Realm initiator and decides whether to release BootSync data.
-- In the second terminal, you'll run the Arm CCA FVP and launch Realm VMs using `lkvm-bootsync`.
+- In the second terminal, you'll run the Arm CCA FVP and launch Realm virtual machines using `lkvm-bootsync`.
 
 You'll first observe a BootSync failure when required data is missing, then fix the flow and validate UEFI Secure Boot. Finally, you will use BootSync secret data to unlock an encrypted root file system.
 
