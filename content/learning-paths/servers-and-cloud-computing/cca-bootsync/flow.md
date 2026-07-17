@@ -1,6 +1,7 @@
 ---
 # User change
 title: Configure UEFI Secure Boot and disk encryption in Arm CCA Realms
+description: Configure Arm CCA BootSync on an FVP, verify UEFI Secure Boot with a signed kernel, and unlock an encrypted Realm root file system.
 
 weight: 3 # 1 is first, 2 is second, etc.
 

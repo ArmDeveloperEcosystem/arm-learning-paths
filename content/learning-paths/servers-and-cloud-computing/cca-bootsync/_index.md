@@ -1,6 +1,6 @@
 ---
 title: Secure Realms during boot using Arm Confidential Compute Architecture (CCA) BootSync
-description: Use Arm CCA BootSync to transfer boot-time configuration and secret data when you launch a Realm on an FVP with RME support.
+description: Use Arm CCA BootSync on an RME-enabled FVP to inject UEFI variables and secrets to unlock the disk during boot, then verify Secure Boot and encrypted root file system startup.
 
 minutes_to_complete: 60
 

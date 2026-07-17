@@ -1,6 +1,7 @@
 ---
 # User change
 title: Understand Arm CCA BootSync and the Boot Injection Protocol
+description: Understand how Arm CCA BootSync uses key exchange, attestation, and Boot Information Blocks to deliver trusted configuration and secret data during Realm boot.
 
 weight: 2 # 1 is first, 2 is second, etc.
 
