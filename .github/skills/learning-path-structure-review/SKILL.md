@@ -10,7 +10,7 @@ Use this skill when a Learning Path needs a structural review. Focus on whether 
 ## Workflow
 
 1. Identify the Learning Path directory and read the relevant Markdown files together.
-2. State the owned developer task in one sentence. If the task is unclear, too broad, or split across unrelated goals, flag it.
+2. Summarize the developer task owned by LP in one sentence. If the task is unclear, too broad, or split across unrelated goals, flag it.
 3. Check the required file shape:
    - The Learning Path has an `_index.md` file.
    - The Learning Path has an `_next-steps.md` file.

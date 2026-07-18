@@ -1,18 +1,19 @@
 ---
-title: Optimize matmul with vector intrinsics
+title: (Optional) Optimize matmul with vector intrinsics
+description: Optionally implement a custom Neon or SVE matrix multiplication kernel and profile it with Arm Performix or the Arm MCP Server.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Complete the challenge (optional)
+## Complete the challenge 
 
-In this project, `src/kernels/matmul_user.cpp` is your editable implementation file. The baseline behavior in this file is scalar, and the build uses `-O2 -g`, so compiler optimization is enabled but vector hardware is still underused in the hot loop.
+`src/kernels/matmul_user.cpp` is your editable implementation file. The baseline behavior in this file is scalar, and the build uses `-O2 -g`, so compiler optimization is enabled but vector hardware is still underused in the hot loop.
 
-Use the profiling evidence from Performix to implement your own NEON or SVE intrinsics in `src/kernels/matmul_user.cpp`, then rebuild and profile `gpt2_user`.
+Use the profiling evidence from Performix to implement your own Neon or SVE intrinsics in `src/kernels/matmul_user.cpp`, then rebuild and profile `gpt2_user`.
 
-{{% notice Hint %}}
+{{% notice Note %}}
 
 Focus on the accumulation loop in `matmul_user` (`acc += row[j] * x[j];`). Think about lane utilization, loop unrolling, and handling the tail when the input width is not an exact multiple of the vector width.
 
@@ -25,7 +26,7 @@ cmake -S . -B build -DBUILD_USER_MATMUL=ON
 cmake --build build --parallel
 ```
 
-Then profile the `build/gpt2_user` binary with the same runtime arguments and compare the Instruction Mix and throughput against baseline.
+Then, profile the `build/gpt2_user` binary with the same runtime arguments and compare the Instruction Mix and throughput against baseline.
 
 Example solutions are available in:
 
@@ -34,7 +35,7 @@ Example solutions are available in:
 
 You can use `AGENTS.md` in the GPT-2 example repository for guided learning support.
 
-### Use the Arm MCP Server with Performix (optional)
+### Use the Arm MCP Server with Performix 
 
 You can also use an MCP-compatible coding assistant, such as GitHub Copilot or Codex, with the Arm MCP Server. This gives the assistant direct tool access to run Performix recipes on your remote Arm target and create a faster feedback loop while you iterate on `matmul_user`.
 
@@ -64,8 +65,10 @@ args = [
 
 Restart your coding assistant, then prompt it to run Performix Instruction Mix and Code Hotspots on your `gpt2_user` binary and suggest Arm intrinsics improvements.
 
-![Screenshot of a coding assistant prompt configured to use Arm MCP Server tools for running Performix recipes and analyzing matmul_user optimization opportunities in the GPT-2 workload.#center](./mcp-performix-prompt.webp "Coding assistant prompt for Performix analysis through Arm MCP Server")
+![Screenshot of a coding assistant prompt configured to use Arm MCP Server tools for running Performix recipes and analyzing `matmul_user` optimization opportunities in the GPT-2 workload.#center](./mcp-performix-prompt.webp "Coding assistant prompt for Performix analysis through Arm MCP Server")
 
-## Next steps
+## What you've accomplished and what's next
 
-In this optional section, you implemented and profiled a custom `matmul_user` kernel using the same workflow you used for baseline analysis. Next, you'll compare instruction mix and throughput across scalar, NEON, SVE, and KleidiAI variants.
+You've now optionally implemented and profiled a custom `matmul_user` kernel using the same workflow you used for baseline analysis. 
+
+Next, you'll compare Instruction Mix and throughput across scalar, Neon, SVE, and KleidiAI variants.
