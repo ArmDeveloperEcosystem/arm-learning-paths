@@ -1,29 +1,31 @@
 ---
-title: Review the Arm Continuum deployment and next steps
+title: Review the local-first deployment across Arm platforms
 weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Review what stayed the same
+## Compare the two Arm deployments
 
-You deployed the same OpenClaw release on two Arm-based systems:
+In this Learning Path, you built a local-first household assistant and used Telegram to validate persistent memory, document RAG, browser search, and scheduled notifications. You first ran these workflows with local vLLM inference on NVIDIA DGX Spark, then moved the same application experience to llama.cpp on the Armv9 CPU of a Radxa Orion O6.
+
+The following comparison shows what stayed the same across the two Arm-based implementations and what changed with the local generation backend:
 
 | Layer | NVIDIA DGX Spark | Radxa Orion O6 |
 |---|---|---|
-| OpenClaw runtime | Same Python runtime | Same Python runtime |
+| Reference runtime services | Same services | Same services |
 | User interface | Telegram | Telegram |
 | Skills | Memory, RAG, search, weather, cron | Same skills |
 | Vector memory | Qdrant | Qdrant |
 | Embeddings | Ollama | Ollama |
 | Generation API | OpenAI-compatible | OpenAI-compatible |
 | Generation engine | vLLM | llama.cpp |
-| Compute shape | Arm CPU + GPU | Arm CPU-only |
+| Inference compute | Arm CPU + NVIDIA GPU | Arm CPU |
 
-The exercise demonstrates software continuity, not identical performance. Each platform can use model and context settings appropriate to its available compute while preserving the same application-level contract.
+The exercise demonstrates software portability across different compute configurations. Each platform can use model and context settings appropriate to its available compute while preserving the same application-level contract.
 
-## Review the local-first result
+## Review the local and external data boundaries
 
 The runtime keeps the following state under your control:
 
@@ -42,44 +44,17 @@ External boundaries remain visible:
 
 For sensitive deployments, you should review network exposure, Telegram suitability, host access, backups, model provenance, and the contents of every enabled tool.
 
-## Understand the v1.2 boundaries
+## Understand the implementation boundaries
 
-This Learning Path intentionally uses the stable text-first v1.2 architecture.
+This Learning Path uses a text-first architecture with deterministic skill routing and one configured local LLM endpoint.
 
 It does not implement:
 
-- Dynamic routing between multiple local LLMs
-- Rich multi-agent collaboration
-- A production VLM for images, diagrams, or video
-- Per-household-member data authorization
-- Automatic safety decisions from camera footage
-- Hardware performance comparisons
+- Dynamic routing across multiple local LLMs
+- Multi-agent collaboration or autonomous agent handoffs
+- Hardware performance benchmarking
 
-The thin AgentRegistry and TaskDispatcher route explicit skills and preserve predictable command behavior. A later release can evolve these contracts without changing the LP1 user workflow.
-
-## Extend the household assistant with local visual events
-
-A future multimodal specialist can extend the household scenario:
-
-```text
-Camera event
-      |
-      v
-Local frame extraction
-      |
-      v
-MultimodalAnalysisAgent
-      |
-      v
-Local event description
-      |
-      +-- event memory
-      `-- Telegram notification
-```
-
-The first implementation should analyze a small number of representative frames rather than process every video frame. Original footage can remain local while OpenClaw sends only a concise event description when notification is required.
-
-This is further work and is not enabled by the text-first model used in LP1.
+The thin AgentRegistry and TaskDispatcher route explicit skills and preserve predictable command behavior within this scope.
 
 ## Apply the architecture to other Arm deployments
 
@@ -95,11 +70,10 @@ Each deployment changes the compute and trust boundary. It should not silently c
 
 You can now:
 
-- Explain the local and external data boundaries of OpenClaw
-- Deploy an operational OpenClaw runtime with local vLLM inference on DGX Spark
+- Explain the local and external data boundaries of the reference runtime
+- Deploy an operational OpenClaw-based runtime with local vLLM inference on DGX Spark
 - Use Telegram memory, RAG, browser search, cron, and Gateway workflows
 - Verify local persistence through Qdrant and runtime logs
 - Move the same application workflow to llama.cpp on a CPU-only Armv9 platform
-- Identify where model routing and multimodal agents can extend the architecture
 
-You have moved beyond a local-model demo and built a self-managed OpenClaw runtime that can adapt to two different Arm compute configurations.
+You have moved beyond a local-model demo and built a self-managed OpenClaw-based runtime that can adapt to two different Arm compute configurations.

@@ -6,7 +6,7 @@ weight: 5
 layout: learningpathall
 ---
 
-## Create a synthetic household document
+## Upload and query a synthetic household document
 
 Create a small text file on the device where you use Telegram. The source file can be in any directory that your Telegram client can access. Use the following synthetic tutorial content:
 
@@ -194,6 +194,6 @@ You have now validated three runtime paths:
 
 The LLM is one replaceable part of the application. The local memory, tools, schedules, and interaction paths remain available around it.
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 You validated document RAG, explicit browser search, and a proactive reminder for the household assistant. Next, you will move the same workflows to a CPU-only Armv9 system.

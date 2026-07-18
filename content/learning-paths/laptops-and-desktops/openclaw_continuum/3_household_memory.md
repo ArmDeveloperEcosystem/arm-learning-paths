@@ -154,7 +154,7 @@ Send the following command to the Telegram bot:
 /agents
 ```
 
-The response lists the thin agents registered by the v1.2 runtime, including memory, RAG, browser search, weather, and chat routes.
+The response lists the thin agents registered by the reference runtime, including memory, RAG, browser search, weather, and chat routes.
 
 To inspect recent tasks, send this command to the Telegram bot:
 
@@ -162,7 +162,7 @@ To inspect recent tasks, send this command to the Telegram bot:
 /tasks last 5
 ```
 
-Task history records which agent handled the request, its status, and runtime duration. In v1.2, the dispatcher selects skills and agents while using one configured LLM endpoint. Dynamic routing between multiple models is a possible direction for future development.
+Task history records which agent handled the request, its status, and runtime duration. The dispatcher selects skills and agents while using one configured LLM endpoint. Dynamic routing between multiple models is a possible direction for future development.
 
 ## Ask for external weather data
 
@@ -185,6 +185,6 @@ Your household assistant should now:
 3. Show the selected agent in `/agents` and `/tasks last 5`.
 4. Return weather data through the external weather skill.
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
 You saved and retrieved a synthetic household memory, verified it in Qdrant, and inspected both local and external request paths. Next, you will add document RAG, browser search, and a proactive cron reminder.

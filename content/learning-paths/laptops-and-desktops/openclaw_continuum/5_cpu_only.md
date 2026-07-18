@@ -1,33 +1,25 @@
 ---
-title: Move the OpenClaw runtime to a CPU-only Armv9 system
+title: Move the OpenClaw-based runtime to a CPU-only Armv9 system
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Keep the workflow and replace the inference engine
+## Run the same workflow across different Arm systems
 
-This section uses a CIX-based Radxa Orion O6 running Debian 12. The goal is not to compare its performance with DGX Spark. The goal is to verify that the same OpenClaw workflow can use a different local inference backend.
+This runtime architecture is designed to work across Arm systems with different compute configurations. In the previous sections, you deployed it on NVIDIA DGX Spark, a heterogeneous CPU-GPU platform using vLLM for local generation. In this section, you will move the same application workflows to a CIX-based Radxa Orion O6 running Debian 12, with llama.cpp providing local generation on the Armv9 CPU.
 
-The layers that stay the same are:
+The Telegram interface, local memory and RAG, browser search, scheduled workflows, and deterministic routing remain unchanged. Only the local generation backend changes:
 
-- Telegram commands
-- Memory and RAG collection roles
-- Ollama embeddings
-- Qdrant vector storage
-- Browser search
-- Cron scheduling
-- Gateway dashboard
-- AgentRegistry and TaskDispatcher
+| Platform | Local generation backend | Runtime API contract |
+|---|---|---|
+| NVIDIA DGX Spark | vLLM | OpenAI-compatible API |
+| Radxa Orion O6 | llama.cpp | OpenAI-compatible API |
 
-The generation backend changes:
-
-```text
-DGX Spark       -> vLLM
-Radxa Orion O6  -> llama.cpp
-OpenClaw client -> OpenAI-compatible API for both
-```
+{{% notice Note %}}
+These backends were selected to build on the environments used in the earlier chapters and in [Run ERNIE-4.5 Mixture of Experts model on Armv9 with llama.cpp](/learning-paths/cross-platform/ernie_moe_v9/). They are not fixed architecture requirements. You can use another local inference backend that provides a compatible OpenAI chat-completions API.
+{{% /notice %}}
 
 ## Check the CPU-only host
 
@@ -43,35 +35,16 @@ df -h /
 
 Confirm that the host reports `aarch64` and has enough available memory and storage for the selected GGUF model and containers.
 
-## Build llama.cpp
+## Prepare llama.cpp and the ERNIE model
 
-Clone and build llama.cpp:
+Follow [Set up llama.cpp on an Armv9 development board](/learning-paths/cross-platform/ernie_moe_v9/2_llamacpp_installation/) to install the build dependencies, compile llama.cpp, download the ERNIE-4.5 Thinking Q4 GGUF model, and run the basic inference test on Orion O6.
 
-```bash
-cd $HOME
-git clone https://github.com/ggml-org/llama.cpp.git
-cd llama.cpp
-cmake -B build
-cmake --build build -j
+After you complete the setup in that Learning Path, continue with the steps below. They use the following installation paths:
+
+```text
+$HOME/llama.cpp/build/bin/llama-server
+$HOME/models/ernie-4.5/ERNIE-4.5-21B-A3B-Thinking-Q4_0.gguf
 ```
-
-This Learning Path uses an ERNIE 4.5 GGUF model as the CPU-oriented text backend. Place a complete, verified GGUF file under a local model directory. Before loading it, confirm the file size and GGUF header:
-
-```bash
-ls -lh $HOME/ernie_lp/model/*.gguf
-head -c 4 $HOME/ernie_lp/model/ERNIE-4.5-21B-A3B-Thinking-Q4_0.gguf
-echo
-```
-
-The header should be:
-
-```output
-GGUF
-```
-
-{{% notice Note %}}
-A tensor-out-of-bounds error normally indicates an incomplete or corrupted GGUF download. Verify the file before changing GPU-layer or context settings.
-{{% /notice %}}
 
 ## Start the OpenAI-compatible llama.cpp server
 
@@ -82,7 +55,7 @@ cd $HOME/llama.cpp
 
 ./build/bin/llama-server \
   --jinja \
-  -m $HOME/ernie_lp/model/ERNIE-4.5-21B-A3B-Thinking-Q4_0.gguf \
+  -m $HOME/models/ernie-4.5/ERNIE-4.5-21B-A3B-Thinking-Q4_0.gguf \
   -c 2048 \
   -t 12 \
   --host 127.0.0.1 \
@@ -110,25 +83,94 @@ curl -sS http://127.0.0.1:8080/v1/chat/completions \
 
 Do not continue until this local endpoint generates a valid response.
 
-## Prepare Ollama and Qdrant
+Press `Ctrl+C` in the server shell after the smoke test. Create a user systemd service so that llama.cpp starts automatically and restarts after a failure:
 
-Ollama should listen on `127.0.0.1:11434` and Qdrant on `127.0.0.1:6333`.
+```bash
+mkdir -p $HOME/.config/systemd/user
 
-Pull the embedding model:
+tee $HOME/.config/systemd/user/openclaw-llama.service > /dev/null <<'EOF'
+[Unit]
+Description=llama.cpp server for the OpenClaw-based runtime
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=%h/llama.cpp/build/bin/llama-server --jinja -m %h/models/ernie-4.5/ERNIE-4.5-21B-A3B-Thinking-Q4_0.gguf -c 2048 -t 12 --host 127.0.0.1 --port 8080
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
+EOF
+```
+
+Enable the service and allow it to remain active when you log out:
+
+```bash
+systemctl --user daemon-reload
+systemctl --user enable --now openclaw-llama.service
+sudo loginctl enable-linger $USER
+systemctl --user status openclaw-llama.service --no-pager
+```
+
+Confirm that the managed endpoint responds:
+
+```bash
+curl http://127.0.0.1:8080/v1/models
+```
+
+## Install Ollama and start Qdrant
+
+Install Ollama on the Orion O6 host:
+
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+sudo systemctl enable --now ollama
+```
+
+The CPU-only compose file uses host networking, so its containers can reach Ollama through `127.0.0.1:11434`. Pull the embedding model:
 
 ```bash
 ollama pull nomic-embed-text
 ```
 
-One way to start persistent Qdrant storage is:
+Confirm that Ollama responds and lists `nomic-embed-text`:
 
 ```bash
+curl http://127.0.0.1:11434/api/tags
+```
+
+Check whether the Qdrant container already exists:
+
+```bash
+docker ps -a --filter name=openclaw-qdrant
+```
+
+If it already exists, start it:
+
+```bash
+docker start openclaw-qdrant
+```
+
+Otherwise, create persistent storage and start Qdrant. Bind its ports to localhost and use the fixed image version shown here:
+
+```bash
+docker volume create openclaw-qdrant-data
+
 docker run -d \
-  --name qdrant \
+  --name openclaw-qdrant \
   --restart unless-stopped \
-  -p 6333:6333 \
-  -v $HOME/qdrant_storage:/qdrant/storage \
-  qdrant/qdrant:latest
+  -p 127.0.0.1:6333:6333 \
+  -p 127.0.0.1:6334:6334 \
+  -v openclaw-qdrant-data:/qdrant/storage \
+  qdrant/qdrant:v1.18.3
+```
+
+Confirm that the local API responds:
+
+```bash
+curl http://127.0.0.1:6333/collections
 ```
 
 ## Configure the CPU-only profile
@@ -143,14 +185,24 @@ git checkout v1.2
 cp .env.arm-cpu-only.example .env
 ```
 
-Set your bot and private tokens in `.env`:
+Create a separate Telegram bot for the CPU-only runtime by following the [Telegram Bot tutorial](https://core.telegram.org/bots/tutorial). Do not reuse the bot token from the running DGX Spark deployment because two polling runtimes using the same bot can compete for Telegram updates.
+
+Generate a new Gateway token:
+
+```bash
+openssl rand -hex 32
+```
+
+Set the new bot and private tokens in `.env`:
 
 ```text
 OPENCLAW_TELEGRAM_BOT_TOKEN=<your-telegram-bot-token>
-OPENCLAW_TELEGRAM_ALLOWED_CHAT_IDS=<your-telegram-chat-id>
-OPENCLAW_CRON_CHAT_IDS=<your-telegram-chat-id>
+OPENCLAW_TELEGRAM_ALLOWED_CHAT_IDS=<first-chat-id>,<second-chat-id>
+OPENCLAW_CRON_CHAT_IDS=<first-chat-id>,<second-chat-id>
 OPENCLAW_GATEWAY_TOKEN=<generated-random-token>
 ```
+
+Separate multiple allowlisted chat IDs with commas. Both household members can then use the same bot and shared local collections.
 
 Confirm the inference settings:
 
@@ -177,6 +229,12 @@ OPENCLAW_WEB_CONTEXT_CHARS=1800
 
 ## Start the CPU-only runtime
 
+Voice transcription is not used in this Learning Path. Keep it disabled in `.env`:
+
+```text
+OPENCLAW_WHISPER_ENABLED=false
+```
+
 Start the full tutorial stack:
 
 ```bash
@@ -185,7 +243,6 @@ docker compose \
   -f compose.arm-cpu-only.yaml \
   --profile web \
   --profile gateway \
-  --profile voice \
   up -d
 ```
 
@@ -198,25 +255,59 @@ docker logs --tail 80 openclaw-memory-watcher
 docker logs --tail 80 openclaw-cron
 ```
 
-If you do not need voice for the LP1 tests, you can omit `--profile voice` and set `OPENCLAW_WHISPER_ENABLED=false`.
+Confirm that the browser worker can resolve a public hostname:
 
-## Repeat the workflow
-
-Send the following commands to the CPU-only bot:
-
-```text
-/help
-/mem #home The CPU-only household assistant runs the same OpenClaw workflow.
-/rag memory: What workflow does the CPU-only household assistant run?
-/search Find current public guidance for reducing household heating energy use.
-/cron add daily 19:30 CPU-only check :: Remind the household to review the heating notes.
-/cron list
+```bash
+docker exec openclaw-browser-scraper python -c "import socket; print(socket.gethostbyname('duckduckgo.com'))"
 ```
 
-Success means the user workflow is unchanged even though generation moved from vLLM on DGX Spark to llama.cpp on an Armv9 CPU.
+{{% notice Note %}}
+If this command cannot resolve the hostname, inspect the Orion host DNS configuration with `cat /etc/resolv.conf`. Then update `OPENCLAW_DNS_SERVER_1` and `OPENCLAW_DNS_SERVER_2` in `.env` with DNS servers that are reachable from your network, restart the stack, and run the check again.
+{{% /notice %}}
+
+## Validate a shared household budget assistant
+
+The previous chapters used a household assistant to validate memory, document retrieval, browser search, and scheduled reminders. In this section, you continue the household scenario on the CPU-only deployment by creating a simple budget assistant that two household members can share.
+
+Create a file named `budget.txt` on the device where you use Telegram:
+
+```text
+Shared household weekly budget: £120.
+```
+
+Upload the file to the bot with `/knowledge` as the caption. Each allowlisted household member can then add a synthetic expense from their own Telegram chat:
+
+```text
+/mem #budget Groceries: £45.
+/mem #budget Household supplies: £20.
+```
+
+After both entries are saved, either member can ask:
+
+```text
+/rag <returned-file-name> Based on the shared budget and the saved budget entries, how much remains?
+```
+
+The response should report that £55 remains. This simple example demonstrates how allowlisted household members can contribute to and query the same local collection. The reference runtime treats this as shared household data and does not provide separate per-member access controls.
+
+The response alone does not prove which inference backend generated it. Inspect the Telegram runtime log:
+
+```bash
+docker logs --tail 20 openclaw-telegram
+```
+
+Look for the memory write handled by `memory_agent` and the completed retrieval request handled by `rag_agent`. Then inspect the llama.cpp service log:
+
+```bash
+journalctl --user -u openclaw-llama.service -n 30 --no-pager
+```
+
+Look for a successful request to `/v1/chat/completions`. The Telegram response and both log entries confirm that the OpenClaw-based workflow is now using llama.cpp for local generation on the Armv9 CPU.
+
+This simplified example does not reset the budget at the start of each week. You can extend the runtime with a dedicated budget agent and scheduled workflow to manage weekly periods and resets.
 
 ## What you've learned and what's next
 
-You have moved the OpenClaw runtime from a heterogeneous DGX Spark platform to a CPU-only Armv9 system by replacing the inference endpoint rather than rewriting the application.
+You have moved the OpenClaw-based runtime from DGX Spark to a CPU-only Armv9 system by replacing the inference endpoint rather than rewriting the application.
 
-Next, you will review the software portability result and identify the boundaries of the v1.2 implementation.
+Next, you will review the software portability result and identify the current implementation boundaries.

@@ -72,7 +72,7 @@ Cron schedule
 
 Explicit slash commands remain deterministic. For example, `/search` always selects the browser-search workflow, while a plain-language weather question selects the weather skill. The local model is not allowed to reinterpret an explicit command and silently change its route.
 
-## Use one API contract across Arm platforms
+## Understand the shared API contract across Arm platforms
 
 To demonstrate that the same project can run across systems with different hardware capabilities, this Learning Path uses an inference engine suited to each platform:
 

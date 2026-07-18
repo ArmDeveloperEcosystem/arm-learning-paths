@@ -166,7 +166,7 @@ The response time can differ. The empty collection list is expected at this stag
 Ollama and Qdrant must be reachable from the project containers, but they should not be exposed to an untrusted network. Use the DGX Spark firewall or another host-level access control to restrict ports `11434`, `6333`, and `6334` to the local host and its Docker networks.
 {{% /notice %}}
 
-## Clone the fixed tutorial version
+## Clone the tutorial release
 
 Clone the repository and check out the release used by this Learning Path:
 
@@ -176,7 +176,7 @@ cd openclaw-arm-continuum
 git checkout v1.2
 ```
 
-The `v1.2` tag fixes the project source used by this Learning Path even when development continues on `main`. Container images and model artifacts that do not have an explicit version are resolved when you download them and can change independently of the source tag.
+The checked-out tag fixes the source used by this Learning Path even when development continues on `main`. Container images and model artifacts that do not have an explicit version are resolved when you download them and can change independently of the source tag.
 
 ## Create a private environment file
 
@@ -230,7 +230,7 @@ OPENCLAW_RUNTIME_LABEL=DGX Spark Demo
 If you choose this option, replace the `personal_*` collection names in later verification commands with the corresponding `demo_*` names.
 {{% /notice %}}
 
-The v1.2 DGX model is text-first. Disable experimental vision routing for this Learning Path:
+The DGX model used in this Learning Path is text-first. Disable experimental vision routing:
 
 ```text
 OPENCLAW_VISION_ENABLED=false
@@ -365,6 +365,6 @@ These tests validate command routing, task dispatch, cron parsing, ingestion hel
 
 ## What you've learned and what's next
 
-You have deployed the v1.2 personal reference runtime on NVIDIA DGX Spark, connected it to your Telegram bot, verified the local vLLM endpoint, and checked the runtime tests.
+You have deployed the personal reference runtime on NVIDIA DGX Spark, connected it to your Telegram bot, verified the local vLLM endpoint, and checked the runtime tests.
 
 Next, you will use the deployment as a local-first household assistant and confirm that memory is stored in local Qdrant collections.
