@@ -56,6 +56,8 @@ html[theme='light'] ads-button {
     --ads-button-border-color-primary-hover: #4d1aae;
     --ads-button-color-primary: #ffffff;
     --ads-button-color-primary-hover: #ffffff;
+    --ads-button-color-secondary-hover: var(--learn-link-hover);
+    --ads-button-color-tertiary-hover: var(--learn-link-hover);
 }
 
 html[theme='light'] ads-cta-button {
@@ -65,6 +67,20 @@ html[theme='light'] ads-cta-button {
     --ads-cta-button-border-color-primary-hover: #4d1aae;
     --ads-cta-button-color-primary: #ffffff;
     --ads-cta-button-color-primary-hover: #ffffff;
+    --ads-cta-button-color-secondary-hover: var(--learn-link-hover);
+    --ads-cta-button-color-tertiary-hover: var(--learn-link-hover);
+}
+
+html[theme='light'] ads-cta-link {
+    --ads-cta-link-color-hover: var(--learn-link-hover);
+}
+
+html[theme='light'] ads-tag {
+    --ads-tag-color-hover: var(--learn-link-hover);
+}
+
+html[theme='light'] input[type='submit']:hover {
+    color: #ffffff;
 }
 
 html[theme='light'] #main {
@@ -129,6 +145,14 @@ html[theme='light'] .normal-horizontal-tabs table td {
 html[theme='light'] code:not([class*='language-']) {
     color: #7a2e00;
     background: #f2ede8;
+}
+
+html[theme='light'] pre[class*='language-'] a.token.url-link {
+    color: var(--learn-lilac);
+}
+
+html[theme='light'] pre[class*='language-'] a.token.url-link:hover {
+    color: #e5d8ff;
 }
 
 html[theme='light'] ads-card.notice-callout {
@@ -204,6 +228,23 @@ html[theme='light'] p.github-link {
     color: var(--learn-link);
 }
 
+html[theme='light'] p.github-link:hover {
+    color: var(--learn-link-hover);
+}
+
+html[theme='light'] .pagefind-ui__search-input:hover,
+html[theme='light'] .pagefind-ui__search-input:focus,
+html[theme='light'] .pagefind-ui__button:hover,
+html[theme='light'] .pagefind-ui__button:focus,
+html[theme='light'] .pagefind-ui__result-link:hover {
+    color: var(--learn-link-hover) !important;
+}
+
+html[theme='light'] .pagefind-ui__search-input:hover::placeholder,
+html[theme='light'] .pagefind-ui__search-input:focus::placeholder {
+    color: var(--learn-text-muted) !important;
+}
+
 html[theme='light'] div.content-head-mobile,
 html[theme='light'] .content-individual-mobile,
 html[theme='light'] div#facets-background {
@@ -225,6 +266,11 @@ html[theme='light'] ads-card.module-card {
     --ads-card-border-color-hover: var(--learn-accent);
     --ads-card-box-shadow: 0 3px 12px rgba(23, 36, 45, 0.06);
     --ads-card-box-shadow-hover: var(--learn-shadow-hover);
+}
+
+html[theme='light'] ads-card.path-card.featured-path-card ads-card-content::before {
+    background: var(--learn-brand-gradient);
+    opacity: 0.65;
 }
 
 html[theme='light'] ads-card.path-card:not(.featured-path-card) ads-card-content,
@@ -264,8 +310,25 @@ html[theme='light'] .pinned-featured-label {
     color: #42149d;
 }
 
-html[theme='light'] ads-card.path-card:hover .pinned-featured-label {
+html[theme='light'] .pinned-inline-icon {
+    color: var(--learn-accent);
+}
+
+html[theme='light'] .basics-title:hover,
+html[theme='light'] ads-card.path-card:hover .learning-path-title,
+html[theme='light'] ads-card.path-card:hover .pinned-inline-icon,
+html[theme='light'] ads-card.path-card:hover .pinned-featured-label,
+html[theme='light'] ads-card.tool-card:hover p,
+html[theme='light'] ads-card.multi-install-card:hover .multi-tool-selection-title,
+html[theme='light'] .module-card-a:hover,
+html[theme='light'] .social-icons a:hover,
+html[theme='light'] #tag-clear-btn:hover,
+html[theme='light'] #reset-demo-txt:hover {
     color: #35107f;
+}
+
+html[theme='light'] .share-icon:hover {
+    fill: #35107f;
 }
 
 html[theme='light'] .card-subject,
