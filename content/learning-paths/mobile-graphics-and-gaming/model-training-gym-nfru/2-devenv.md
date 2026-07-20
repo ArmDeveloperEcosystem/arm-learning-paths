@@ -1,5 +1,6 @@
 ---
 title: Set up your environment
+description: Set up an Ubuntu development environment, install Model Gym dependencies, and prepare the NFRU example notebooks for training and evaluation.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -70,6 +71,6 @@ print("Model Gym version:", ng_model_gym.__version__)
 ```
 ## What you've accomplished and what's next
 
-You’ve now completed your environment setup by installing dependencies and setting up the example NFRU notebooks repository.
+You've now completed your environment setup by installing dependencies and setting up the example NFRU notebooks repository.
 
 Next, you'll train the neural graphics model.

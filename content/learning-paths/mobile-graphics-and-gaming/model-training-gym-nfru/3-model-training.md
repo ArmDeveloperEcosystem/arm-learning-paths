@@ -1,5 +1,6 @@
 ---
 title: Launch the training notebook
+description: Train and evaluate an Arm Neural Frame Rate Upscaling model in Jupyter notebooks, compare generated frames, and prepare the model for export.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -30,7 +31,7 @@ With your environment set up, you're ready to launch the first step in the workf
 You'll run two Jupyter notebooks. Return to the Learning Path when you're done to explore further resources and next steps.
 {{% /notice %}}
 
-You'll get familiarized with the following steps:
+You'll run the following steps:
 
 - Loading a model configuration
 - Launching a full training pipeline
@@ -59,6 +60,6 @@ At the end, you'll see a visual comparison of the generated NFRU frame and the g
 
 ## What you've accomplished and what's next
 
-You’ve now learned about NFRU and run two Jupyter notebooks to complete model training and evaluation. 
+You've now learned about NFRU and run two Jupyter notebooks to complete model training and evaluation.
 
 Next, you'll view the model structure and explore further resources.

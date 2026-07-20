@@ -1,5 +1,6 @@
 ---
-title: Install Model Gym and explore NFRU examples
+title: Understand neural graphics and Model Gym
+description: Understand how Arm Neural Graphics Model Gym supports training, evaluating, quantizing, and exporting Neural Frame Rate Upscaling models for mobile graphics.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

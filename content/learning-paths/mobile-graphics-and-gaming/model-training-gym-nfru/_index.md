@@ -1,22 +1,22 @@
 ---
-title: Fine-tune Neural Frame Rate Upscaling (NFRU) models using Model Gym
-description: Learn how to fine-tune and evaluate Neural Frame Rate Upscaling (NFRU) models using PyTorch and Arm's Model Gym API with hardware-aware optimization.
+title: Train and evaluate Neural Frame Rate Upscaling (NFRU) models using Model Gym
+description: Learn how to train and evaluate Neural Frame Rate Upscaling (NFRU) models using PyTorch and Arm's Model Gym API with hardware-aware optimization.
 
 minutes_to_complete: 45
 
 who_is_this_for: This is an advanced topic for developers exploring neural graphics and interested in training and deploying frame generation models such as Neural Frame Rate Upscaling (NFRU) using PyTorch and Arm's hardware-aware backend.
 
 learning_objectives:
-    - Understand the principles of neural graphics and how it’s applied to game performance
-    - Learn how to fine-tune and evaluate a neural network for Neural Frame Rate Upscaling (NFRU)
+    - Understand the principles of neural graphics and how it's applied to game performance
+    - Fine-tune and evaluate a neural network for Neural Frame Rate Upscaling (NFRU)
     - Use the Model Gym Python API and CLI to configure and train neural graphics models
     - Visualize and inspect .vgf models using the Model Explorer tool
 
 prerequisites:
     - Basic understanding of PyTorch and machine learning concepts
-    - A development machine running Ubuntu 22.04, with a CUDA-capable NVIDIA® GPU
+    - A development machine running Ubuntu 22.04, with a CUDA-capable NVIDIA GPU
     - CUDA Toolkit version 11.8 or later
-    - A working Python 3.10+ environment
+    - A working environment with a Python version later than 3.10
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -33,8 +33,8 @@ generated_summary_faq:
   faq_generated_at: '2026-07-20T16:07:04Z'
   faq_source_hash: ded91359108315578a7fe3cf0a96efc6d3d55319849ddb8c636571d2e569e011
   summary: >-
-    You'll set up an Ubuntu development environment, explore Arm’s Neural
-    Graphics Model Gym, and fine-tune a Neural Frame Rate Upscaling (NFRU) model using PyTorch. First, you'll launch a training notebook to configure and run NFRU training. Then, you'll train and evaluate a model using PyTorch and Model Gym, and export that model into VGF (.vgf) for real-time deployment. You’ll also visualize and inspect the model’s structure using Model Explorer. Finally, you'll learn how to register a custom neural graphics model with Model Gym so the same training, evaluation, and export workflow can be reused for new use cases.
+    You'll set up an Ubuntu development environment, explore Arm's Neural
+    Graphics Model Gym, and fine-tune a Neural Frame Rate Upscaling (NFRU) model using PyTorch. First, you'll launch a training notebook to configure and run NFRU training. Then, you'll train and evaluate a model using PyTorch and Model Gym, and export that model into VGF (.vgf) for real-time deployment. You'll also visualize and inspect the model's structure using Model Explorer. Finally, you'll learn how to register a custom neural graphics model with Model Gym so the same training, evaluation, and export workflow can be reused for new use cases.
   faqs:
   - question: How do I confirm my Python setup is ready before opening the notebooks?
     answer: >-
@@ -94,6 +94,10 @@ further_reading:
         link: https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics/early-access-program
         type: website
     - resource:
+        title: Neural Frame Rate Upscaling in Unreal Engine
+        link: /learning-paths/mobile-graphics-and-gaming/nfru-unreal/
+        type: learningpath
+    - resource:
         title: Vulkan Samples Learning Path
         link: /learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/
         type: learningpath
@@ -105,4 +109,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

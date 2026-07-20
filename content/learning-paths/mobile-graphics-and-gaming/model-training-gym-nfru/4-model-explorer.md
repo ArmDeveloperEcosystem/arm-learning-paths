@@ -1,5 +1,6 @@
 ---
 title: Visualize your model with Model Explorer
+description: Install Model Explorer and the Arm VGF adapter, then inspect the architecture and tensor graph of an exported NFRU model.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -42,10 +43,9 @@ model-explorer --extensions=vgf_adapter_model_explorer
 
 Use the file browser to open the `.vgf` model exported earlier in your training workflow.
 
-## What you've accomplished and what's mext
+## What you've accomplished and what's next
 
 You've now learned about Model Explorer and installed the tool to visualize your model.
 
 Next, you'll learn about bringing your own use cases to the Model Gym.
-
 

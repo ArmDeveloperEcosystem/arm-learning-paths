@@ -1,5 +1,6 @@
 ---
 title: Define your own use cases on Model Gym
+description: Register custom models and datasets with Model Gym, update their configurations, and run the standard neural graphics training workflow.
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -97,7 +98,7 @@ config.model.version = "1"
 
 After registering your model and updating your config, you can use all the standard Model Gym workflows that you executed in previous sections. For example, training:
 
-```bash
+```python
 trained_model_path = ngmg.do_training(config, training_mode=TrainEvalMode.FP32)
 ```
 
