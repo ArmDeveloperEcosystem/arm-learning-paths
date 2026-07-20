@@ -116,7 +116,7 @@ The response should list `nomic-embed-text:latest` with the `embedding` capabili
 
 The modification time, size, and digest can differ with the installed model version.
 
-## Start Qdrant for persistent vector storage
+## Start Qdrant for Persistent Vector Storage
 
 Create a Docker volume so that vector data remains available when the Qdrant container is replaced:
 
@@ -299,7 +299,7 @@ curl -I http://127.0.0.1:18789/
 
 An HTTP `200` response confirms that the Gateway dashboard is reachable.
 
-## Run the first Telegram test
+## Run the First Telegram Test
 
 Open your bot in Telegram and send:
 
