@@ -8,13 +8,15 @@ layout: learningpathall
 
 ## Enable NFRU for Unreal Engine
 
+To enable NFRU for Unreal Engine, follow these steps:
+
 1. Open Unreal Engine and create a new **Third Person** template project using the **C++** option. You need a C++ project to build the Neural Graphics for Unreal plugin.
 
-    ![Unreal Engine project selection screen showing C++ Third Person template#center](./images/unreal_startup.png "Figure 1: Create a new C++ project in Unreal Engine.")
+    ![Unreal Engine project selection screen showing C++ Third Person template#center](./images/unreal_startup.png "Create a C++ project in Unreal Engine")
 
 2. Create a `Plugins` folder in your project's root directory if it doesn't already exist.
 
-    ![NFRU sample project folder structure#center](./images/plug_in_structure.png "Figure 2: NFRU sample project folder structure")
+    ![Windows File Explorer showing the Plugins folder in the NFRU sample project root#center](./images/plug_in_structure.png "Plugins folder in the NFRU sample project")
 
 3. Open Command Prompt in the `Plugins` directory and create a symbolic link to the plugin folder for your Unreal Engine version. You need administrator permissions to create the symbolic link.
 
@@ -22,7 +24,7 @@ layout: learningpathall
     mklink /D neural-graphics-for-unreal /path/to/neural-graphics-for-unreal/[UEVersion]
     ```
 
-    ![Command to create a symbolic link#center](./images/mklink_command.png "Figure 3: Command to create a symbolic link.")
+    ![Administrator Command Prompt running `mklink /D` to create the `neural-graphics-for-unreal` link inside the project’s Plugins directory#center](./images/mklink_command.png "Create the neural-graphics-for-unreal symbolic link")
 
 4. Regenerate the Visual Studio project files so Unreal Engine detects the plugin.
 
@@ -39,14 +41,14 @@ Unreal Engine uses DirectX by default. To use NFRU, you must set Vulkan as the r
 3. Select **Vulkan**.
 4. Restart Unreal Engine to apply the change.
 
-    ![Project Settings with Vulkan selected as Default RHI under Targeted RHIs#center](./images/targeted_rhis.png "Figure 4: Set Vulkan as the default RHI.")
+    ![Project Settings with Vulkan selected as Default RHI under Targeted RHIs#center](./images/targeted_rhis.png "Set Vulkan as the default RHI")
 
 ## Enable the plugin
 
 1. Open **Edit** in Unreal Engine and select **Plugins**.
 2. Search for **Neural Rendering** in the Plugins window.
 
-    ![Unreal Engine Plugins window with Neural Rendering plugin highlighted#center](./images/verify_plugin_enabled.png "Figure 5: Enable the Neural Rendering plugin.")
+    ![Unreal Engine Plugins window showing the Neural Rendering search result and a checkbox for enabling the plugin#center](./images/verify_plugin_enabled.png "Enable the Neural Rendering plugin")
 
 3. Enable the plugin and restart Unreal Engine.
 
@@ -63,7 +65,7 @@ To fix this:
 - Build the SDK for your platform using the `buildsdk.bat` script. See [Build the SDK](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/2-set_up_the_development_environment) for details.
 - Check that `ngsdk_windows_x64.dll` exists in the plugin's `Binaries` directory.
 
-    ![Verify that the SDK binaries are built successfully.#center](./images/sdk_built_check.png "Figure 6: Verify that the SDK binaries are built successfully.")
+    ![Developer Command Prompt showing that the SDK binaries built successfully.#center](./images/sdk_built_check.png "Successful SDK binary build")
 
 If the error continues, confirm the SDK built without errors and the binaries match your Unreal Engine version and platform. Rebuild the SDK and restart Unreal Engine.
 
@@ -71,7 +73,7 @@ If the error continues, confirm the SDK built without errors and the binaries ma
 
 If you see a "Plugin only supports Vulkan backend" error, return to the [Change Unreal's rendering hardware interface to Vulkan](#change-unreals-rendering-hardware-interface-to-vulkan) section and confirm Vulkan is set as the default RHI. Restart Unreal Engine after you make this change.
 
-![Vulkan backend error message in Unreal Engine#center](./images/rhi_vulkan_error.png "Figure 7: Example error message when Vulkan is not set as the default RHI.")
+![Vulkan backend error message in Unreal Engine#center](./images/rhi_vulkan_error.png "Error shown when Vulkan is not the default RHI")
 
 ## What you've accomplished and what's next
 

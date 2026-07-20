@@ -43,7 +43,7 @@ NFRU provides the `STATGROUP_FrameGen` statistics group to monitor frame generat
 stat FrameGen
 ```
 
-![Screenshot of the Unreal Engine console showing the output of the `stat FrameGen` command, highlighting NFRU performance metrics#center](./images/stat_framegen.png "Figure 1: NFRU performance metrics using stat FrameGen")
+![Screenshot of the Unreal Engine console showing the output of the `stat FrameGen` command, highlighting NFRU performance metrics#center](./images/stat_framegen.png "NFRU performance metrics from stat FrameGen")
 
 This command displays runtime metrics such as generated frame rate, generation time, and pacing information. These values help you assess both internal frame generation performance and final frame pacing.
 
@@ -67,4 +67,3 @@ Typically, `Generated FPS` matches the engine FPS, while `Paced FPS` may differ 
 You've learned about the main console variables that control NFRU features in Unreal Engine, including enablement, debugging, and performance tuning. You now know how to adjust these variables to optimize NFRU behavior and how to use the `STAT_FrameGen` statistics group to monitor frame generation performance.
 
 Next, you'll explore how to use the debug view to visualize frame interpolation and validate NFRU output during development and testing.
-

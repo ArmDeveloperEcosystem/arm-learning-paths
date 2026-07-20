@@ -47,7 +47,7 @@ To profile your build:
 5. Set the **Working Directory** to your packaged build folder if needed.
 6. Click **Launch**.
 
-![Windows Start menu with RenderDoc for Arm GPUs highlighted. This shows how to launch RenderDoc after installation#center](./images/renderdoc_launch.png "Figure 1: Launch RenderDoc for Arm GPUs after installation.")
+![RenderDoc for Arm GPUs Launch Application tab showing the NFRU_Sample executable and working directory, with the Launch button highlighted#center](./images/renderdoc_launch.png "Launch the packaged NFRU application from RenderDoc")
 
 Your application launches under RenderDoc. You can now capture frames and analyze GPU activity.
 
@@ -59,7 +59,7 @@ To capture a frame:
 2. Click the **Capture Frame Immediately** button (camera icon) or press `F12` while your game window is focused.
 3. The captured frame appears in RenderDoc.
 
-![RenderDoc for Arm GPUs interface showing the capture frame button and a running application. This demonstrates how to capture a frame during execution#center](./images/renderdoc_capture.png "Figure 2: Capture a frame in RenderDoc for Arm GPUs during application execution.")
+![RenderDoc for Arm GPUs interface showing the capture frame button and a running application. This demonstrates how to capture a frame during execution#center](./images/renderdoc_capture.png "Capture a frame from the running NFRU application")
 
 You can now analyze the rendering pipeline, inspect Vulkan API calls, and debug visual output at each stage.
 
@@ -67,7 +67,7 @@ You can now analyze the rendering pipeline, inspect Vulkan API calls, and debug 
 
 After capturing a frame, use the RenderDoc event browser to review the sequence of Vulkan API calls and draw events. Select individual events to inspect their details, view associated resources, and debug specific pipeline stages.
 
-![RenderDoc event browser displaying a list of Vulkan API calls and draw events. This helps you trace rendering operations and debug pipeline stages#center](./images/renderdoc_event.png "Figure 3: Inspect Vulkan API calls and draw events in the RenderDoc event browser.")
+![RenderDoc event browser displaying a list of Vulkan API calls and draw events. This helps you trace rendering operations and debug pipeline stages#center](./images/renderdoc_event.png "Inspect NFRU rendering events in RenderDoc")
 
 With RenderDoc, you can:
 
