@@ -35,7 +35,10 @@ In VSCode create a new folder for this project then make sure you have the follo
 Create a Venv in Python (3.13 was used in the creation of this Guide) and run the following commands 
 
 ```bash
-pip install ai-ml-emulation-layer-for-vulkan, cmake
+py -3.13 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install ai-ml-emulation-layer-for-vulkan cmake
 ```
 
 To verify your installation, run the following commands:
