@@ -1,5 +1,5 @@
 ---
-title: Extend OpenClaw into a local-first AI assistant across Arm platforms
+title: Extend OpenClaw for a Local-First AI Assistant Across Arm Platforms
 
 description: Extend OpenClaw with local memory, document RAG, browser search, deterministic routing, and proactive scheduling, then move the same local-first runtime from NVIDIA DGX Spark with vLLM to a CPU-only Armv9 system with llama.cpp.
 

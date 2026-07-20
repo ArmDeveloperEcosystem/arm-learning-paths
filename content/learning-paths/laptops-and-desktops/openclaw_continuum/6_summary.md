@@ -1,12 +1,12 @@
 ---
-title: Review the local-first deployment across Arm platforms
+title: Review the Deployment Across Arm Platforms
 weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Compare the two Arm deployments
+## Compare Arm Deployment Architectures
 
 In this Learning Path, you built a local-first household assistant and used Telegram to validate persistent memory, document RAG, browser search, and scheduled notifications. You first ran these workflows with local vLLM inference on NVIDIA DGX Spark, then moved the same application experience to llama.cpp on the Armv9 CPU of a Radxa Orion O6.
 
@@ -25,7 +25,7 @@ The following comparison shows what stayed the same across the two Arm-based imp
 
 The exercise demonstrates software portability across different compute configurations. Each platform can use model and context settings appropriate to its available compute while preserving the same application-level contract.
 
-## Review the local and external data boundaries
+## Review Data Privacy Boundaries
 
 The runtime keeps the following state under your control:
 
@@ -44,7 +44,7 @@ External boundaries remain visible:
 
 For sensitive deployments, you should review network exposure, Telegram suitability, host access, backups, model provenance, and the contents of every enabled tool.
 
-## Understand the implementation boundaries
+## Identify Current System Scope
 
 This Learning Path uses a text-first architecture with deterministic skill routing and one configured local LLM endpoint.
 
@@ -56,7 +56,7 @@ It does not implement:
 
 The thin AgentRegistry and TaskDispatcher route explicit skills and preserve predictable command behavior within this scope.
 
-## Apply the architecture to other Arm deployments
+## Explore Other Arm Deployment Topologies
 
 The same endpoint-driven design can support additional deployment shapes:
 
@@ -66,7 +66,7 @@ The same endpoint-driven design can support additional deployment shapes:
 
 Each deployment changes the compute and trust boundary. It should not silently change where personal data is stored or which external services are contacted.
 
-## What you've learned
+## Key Takeaways and Next Steps
 
 You can now:
 

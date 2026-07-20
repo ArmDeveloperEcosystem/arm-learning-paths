@@ -1,12 +1,12 @@
 ---
-title: Understand the local-first OpenClaw-based architecture and data boundaries
+title: Understand the Architecture and Local Data Boundaries
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## From local inference to an operational assistant
+## Transition from Inference to an Assistant
 
 Running a local LLM gives you a private way to generate text, but it does not yet give you an assistant you can use throughout the day. You still need a convenient way to ask questions, save information, search your documents, retrieve current information, and receive reminders without returning to a terminal each time.
 
@@ -47,7 +47,7 @@ The runtime does not require a public cloud LLM API. However, content sent throu
 This Learning Path uses the default personal runtime configuration, but every exercise uses synthetic or public data. Do not enter real personal, household, or organizational information while following the tutorial. If the host already contains personal runtime data, use the optional demo isolation settings introduced in the next chapter.
 {{% /notice %}}
 
-## Follow the request path
+## Trace the Application Request Path
 
 In this Learning Path, Telegram requests follow this path:
 

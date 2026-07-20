@@ -1,12 +1,12 @@
 ---
-title: Deploy an OpenClaw-based runtime with local vLLM on NVIDIA DGX Spark
+title: Deploy an OpenClaw-based Reference Runtime with vLLM on DGX Spark
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Prepare the DGX Spark host
+## Prepare the DGX Spark Host Environment
 
 This section assumes Docker Engine, the Docker Compose plugin, the NVIDIA driver, and NVIDIA Container Toolkit are installed on DGX Spark. Cloning the project later in this Learning Path downloads the reference runtime source and configuration, but it does not install Ollama or Qdrant. Prepare these host services before you start the project containers.
 
@@ -35,7 +35,7 @@ docker run --rm --gpus all ubuntu nvidia-smi
 
 You do not need to install the vLLM Python package or start a vLLM server directly on the DGX Spark host. The project's `compose.yaml` pulls a container image that already includes vLLM and starts the local inference server for you. The NVIDIA driver and NVIDIA Container Toolkit are still required so that this container can access the GPU.
 
-## Install Ollama for local embeddings
+## Configure Ollama for Local Embeddings
 
 Unlike vLLM, Ollama is not included as a service in the project's `compose.yaml`. Install and run Ollama separately on the DGX Spark host before starting the reference runtime.
 
@@ -166,7 +166,7 @@ The response time can differ. The empty collection list is expected at this stag
 Ollama and Qdrant must be reachable from the project containers, but they should not be exposed to an untrusted network. Use the DGX Spark firewall or another host-level access control to restrict ports `11434`, `6333`, and `6334` to the local host and its Docker networks.
 {{% /notice %}}
 
-## Clone the tutorial release
+## Clone the Reference Repository
 
 Clone the repository and check out the release used by this Learning Path:
 
@@ -178,7 +178,7 @@ git checkout v1.2
 
 The checked-out tag fixes the source used by this Learning Path even when development continues on `main`. Container images and model artifacts that do not have an explicit version are resolved when you download them and can change independently of the source tag.
 
-## Create a private environment file
+## Configure Private Environment Variables
 
 Copy the DGX Spark environment template:
 
@@ -240,7 +240,7 @@ OPENCLAW_VISION_ENABLED=false
 Never commit `.env`. It contains the Telegram bot token and Gateway authentication token. The repository ignores this file, but you should still verify `git status` before publishing changes.
 {{% /notice %}}
 
-## Start the runtime
+## Initialize and Start the Runtime Stack
 
 The Gateway runs as user ID `1000` inside its container and needs write access to its persistent state directory. Prepare the directory before starting the stack:
 
@@ -258,7 +258,7 @@ docker compose --env-file .env -f compose.yaml up -d
 
 The first start can take several minutes while Docker images and model weights are downloaded and vLLM loads and compiles the model. A running container does not yet mean that its API is ready.
 
-Inspect service state:
+Verify Service Status and API Readiness:
 
 ```bash
 docker compose --env-file .env -f compose.yaml ps -a
@@ -341,7 +341,7 @@ The recent log should include a successful local completion request similar to:
 
 The request appearing in the local logs confirms the runtime path. The model's text alone is not evidence that inference was local.
 
-## Run the automated checks
+## Execute Test Suites
 
 Run the repository tests from the host:
 

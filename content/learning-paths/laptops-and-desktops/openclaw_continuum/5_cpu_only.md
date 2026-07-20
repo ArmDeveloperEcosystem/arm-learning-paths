@@ -1,12 +1,12 @@
 ---
-title: Move the OpenClaw-based runtime to a CPU-only Armv9 system
+title: Port the Application Workflow to a CPU-Only Armv9 System
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Run the same workflow across different Arm systems
+## Overview of Cross-Platform Portability
 
 This runtime architecture is designed to work across Arm systems with different compute configurations. In the previous sections, you deployed it on NVIDIA DGX Spark, a heterogeneous CPU-GPU platform using vLLM for local generation. In this section, you will move the same application workflows to a CIX-based Radxa Orion O6 running Debian 12, with llama.cpp providing local generation on the Armv9 CPU.
 
@@ -21,7 +21,7 @@ The Telegram interface, local memory and RAG, browser search, scheduled workflow
 These backends were selected to build on the environments used in the earlier chapters and in [Run ERNIE-4.5 Mixture of Experts model on Armv9 with llama.cpp](/learning-paths/cross-platform/ernie_moe_v9/). They are not fixed architecture requirements. You can use another local inference backend that provides a compatible OpenAI chat-completions API.
 {{% /notice %}}
 
-## Check the CPU-only host
+## Verify System Requirements on Armv9 Host
 
 On Orion O6, confirm the operating system, architecture, CPU features, memory, and disk capacity:
 
@@ -46,7 +46,7 @@ $HOME/llama.cpp/build/bin/llama-server
 $HOME/models/ernie-4.5/ERNIE-4.5-21B-A3B-Thinking-Q4_0.gguf
 ```
 
-## Start the OpenAI-compatible llama.cpp server
+## Deploy llama.cpp OpenAI-Compatible Server
 
 Start the server on the host:
 
@@ -120,7 +120,7 @@ Confirm that the managed endpoint responds:
 curl http://127.0.0.1:8080/v1/models
 ```
 
-## Install Ollama and start Qdrant
+## Provision Supporting Local Services
 
 Install Ollama on the Orion O6 host:
 
@@ -173,7 +173,7 @@ Confirm that the local API responds:
 curl http://127.0.0.1:6333/collections
 ```
 
-## Configure the CPU-only profile
+## Configure the CPU-Only Runtime Environment
 
 Clone the same release on Orion O6:
 
@@ -227,7 +227,7 @@ OPENCLAW_SCRAPER_LIMIT=2
 OPENCLAW_WEB_CONTEXT_CHARS=1800
 ```
 
-## Start the CPU-only runtime
+## Launch the CPU-Only Application Stack
 
 Voice transcription is not used in this Learning Path. Keep it disabled in `.env`:
 
@@ -265,7 +265,7 @@ docker exec openclaw-browser-scraper python -c "import socket; print(socket.geth
 If this command cannot resolve the hostname, inspect the Orion host DNS configuration with `cat /etc/resolv.conf`. Then update `OPENCLAW_DNS_SERVER_1` and `OPENCLAW_DNS_SERVER_2` in `.env` with DNS servers that are reachable from your network, restart the stack, and run the check again.
 {{% /notice %}}
 
-## Validate a shared household budget assistant
+## Validate Shared Workflows on CPU
 
 The previous chapters used a household assistant to validate memory, document retrieval, browser search, and scheduled reminders. In this section, you continue the household scenario on the CPU-only deployment by creating a simple budget assistant that two household members can share.
 

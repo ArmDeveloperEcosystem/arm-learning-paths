@@ -1,12 +1,12 @@
 ---
-title: Validate local memory and deterministic routing with Telegram and Qdrant
+title: Validate Memory Persistence and Routing with Telegram and Qdrant
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Use a household assistant scenario
+## Define the Household Test Scenario
 
 The project provides a customizable runtime for use cases that need private, local-first AI processing. You can adapt its skills, data sources, workflows, and schedules to match your own requirements. To make these capabilities concrete, this chapter uses a shared household assistant as an example rather than prescribing a fixed application. You will save synthetic maintenance information and retrieve it later without sending the memory to a public cloud LLM. You can apply the same architecture to other scenarios that need locally controlled inference, memory, and retrieval.
 
@@ -14,7 +14,7 @@ Telegram transports the original messages between you and the runtime. After the
 
 This tutorial treats household data as shared. It does not implement separate access control for each family member.
 
-## Save a household memory
+## Store and Query Local Memory
 
 Send this command to the Telegram bot:
 
@@ -53,7 +53,7 @@ Telegram question
     -> Telegram answer
 ```
 
-## Verify the local collection
+## Verify Qdrant Vector Collections
 
 Confirm that the personal memory collection exists:
 
@@ -146,7 +146,7 @@ Look for the synthetic boiler memory in the returned payload. This second check 
 
 This check is important. It verifies the storage location from the data layer instead of trusting the assistant to describe its own architecture.
 
-## Inspect the active agents and task history
+## Inspect Active Agents and Task Execution
 
 Send the following command to the Telegram bot:
 
@@ -164,7 +164,7 @@ To inspect recent tasks, send this command to the Telegram bot:
 
 Task history records which agent handled the request, its status, and runtime duration. The dispatcher selects skills and agents while using one configured LLM endpoint. Dynamic routing between multiple models is a possible direction for future development.
 
-## Ask for external weather data
+## Test External Skill Integration
 
 Send a weather question in plain language:
 

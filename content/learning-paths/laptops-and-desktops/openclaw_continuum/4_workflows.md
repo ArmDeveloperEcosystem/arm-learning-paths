@@ -1,12 +1,12 @@
 ---
-title: Validate document RAG, browser search, and proactive scheduling
+title: Validate Document RAG, Web Search, and Proactive Tasks
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Upload and query a synthetic household document
+## Ingest and Query Document RAG
 
 Create a small text file on the device where you use Telegram. The source file can be in any directory that your Telegram client can access. Use the following synthetic tutorial content:
 
@@ -87,7 +87,7 @@ curl -sS -X POST \
 
 The returned payload should contain chunks from `household-maintenance.txt`. This confirms that the uploaded file is stored and indexed locally rather than relying only on the assistant's answer.
 
-## Run an explicit browser search
+## Execute Deterministic Web Search
 
 Use the browser agent when you intentionally need current public information that is not stored in local memory. Send this command to the Telegram bot:
 
@@ -124,7 +124,7 @@ Finally, send this command in Telegram:
 
 Confirm that the search task reports `browser_search_agent`. This verifies the selected agent as well as the external request path.
 
-## Create a proactive reminder
+## Schedule Proactive Cron Tasks
 
 Choose a time a few minutes in the future using the runtime timezone configured by `OPENCLAW_CRON_TIMEZONE`. Send this command to the Telegram bot to create a daily tutorial reminder:
 
@@ -160,7 +160,7 @@ To test without waiting, copy the job ID from `/cron list` and send:
 
 The result should be delivered as a Telegram push message.
 
-## Inspect cron from the Gateway dashboard
+## Inspect Cron From the Gateway Dashboard
 
 The Gateway dashboard listens on localhost. If you are working directly on the DGX Spark desktop, open:
 
