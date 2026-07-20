@@ -84,6 +84,8 @@ The analyzer uses `STRATEGY_KEEP_ONLY_LATEST` because pose detection should work
 
 The output image format is `RGBA_8888`, which makes the frame data easy to copy into a `Bitmap` before passing it to MediaPipe.
 
+The analyzer runs on a background executor with one worker. That keeps camera frame conversion off the UI thread and serializes calls into the landmarker helper, which is useful because live-stream inference is driven by timestamped frames.
+
 ## Send frames to the landmarker
 
 In `bindCameraUseCases()` we just set `ImageAnalysis` to call `detectPose()` for every analyzed frame. Now, replace the TODO in `detectPose()` with this code:
@@ -164,11 +166,13 @@ The app uses `RunningMode.LIVE_STREAM` because frames arrive continuously from t
 
 The app also requests one pose with `setNumPoses(1)`. This keeps the example focused on a single learner.
 
+The `Delegate.GPU` option asks MediaPipe to use the device GPU for the pose model. If initialization fails on a particular device, the error listener and Logcat message are the first places to check.
+
 ## Convert camera frames to MPImage
 
 When we call from `MainActivity`, it is with a CameraX `ImageProxy`, but the MediaPipe analyzer expects an `MPImage`.
 
-Replace the TODO in `detectLiveStream()` with this code to convert between the two and start `poseLandmaker`'s analysis:
+Replace the TODO in `detectLiveStream()` with this code to convert between the two and start the Pose Landmarker analysis:
 
 ```kotlin
 fun detectLiveStream(
@@ -216,6 +220,8 @@ The call to `imageProxy.use { ... }` closes the frame after its pixels are copie
 
 The matrix rotates the image using the camera frame metadata. For the front camera, it also mirrors the image so the detected pose matches the preview the learner sees.
 
+`SystemClock.uptimeMillis()` provides a monotonic timestamp for the frame. MediaPipe requires timestamps for video and live-stream inputs, and `detectAsync()` returns immediately; the result arrives later through the result listener configured above.
+
 ## Return the first detected pose
 
 Finally, replace the TODO in `returnLiveStreamResult()` with this code:
@@ -235,6 +241,8 @@ MediaPipe returns a list of detected poses. This app asks for one pose, so it fo
 
 Build and run the app on your Android device.
 
-When prompted, allow camera access. You should see the front camera preview in the right side of the app.
+When prompted, allow camera access. Expect to see the front camera preview in the right side of the app.
 
 The score will not update yet. At this point, the app is collecting pose landmarks and passing them to `MainViewModel`; the scoring logic is added in the next section.
+
+If the preview opens but no landmarks are produced later, make sure your full body is visible in the frame and check Logcat for `PoseLandmarkerHelper`.

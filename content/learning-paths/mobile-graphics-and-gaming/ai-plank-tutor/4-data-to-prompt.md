@@ -26,6 +26,8 @@ I'm doing Plank pose. My joints have the following significant angle differences
 
 This keeps the prompt small and gives the model only the facts it needs to produce one coaching cue.
 
+This is the main design pattern in the app: the vision model turns camera frames into structured pose data, deterministic Kotlin code turns that data into a small set of facts, and the LLM takes these facts and returns appropriate advice.
+
 ## Format the largest angle differences
 
 Open `ui/landmarker/PoseScoreHelper.kt`.
@@ -61,7 +63,7 @@ This function pairs each reference angle with the corresponding learner angle, c
 The returned map uses the joint name as the key and a rounded string angle difference as the value. The string value is useful because the next function can insert it directly into the prompt.
 
 {{% notice Note %}}
-The sign of the difference is important. A positive value means the learner needs to straighten that joint compared with the reference. A negative value means the learner needs to bend it more.
+The sign of the difference is important. `difference = reference - learner`, so a positive value means the learner's angle is smaller than the reference and needs to straighten. A negative value means the learner's angle is larger than the reference and needs to bend more.
 {{% /notice %}}
 
 ## Generate the LLM prompt
@@ -98,7 +100,7 @@ The fallback prompt handles the case where the learner is already close to the r
 
 ## Emit prompts from the ViewModel
 
-Open `ui\viewmodels\MainViewModel.kt`.
+Open `ui/viewmodels/MainViewModel.kt`.
 
 Replace the TODO in `userPosePrompt` with this code:
 
@@ -119,6 +121,8 @@ val userPosePrompt: Flow<Pair<String, Double>> =
 The prompt is paired with the score because fuller app versions might use both values when deciding what feedback is spoken. In this Learning Path, the LLM step uses the prompt text.
 
 The `_isSpeaking` filter prevents the app from generating more feedback while the previous correction is still being spoken. Speech is added later, but keeping the filter here makes the data flow ready for that final step.
+
+The `flowOn(Dispatchers.Default)` call keeps prompt formatting off the main thread. The work is small, but keeping camera, scoring, prompt generation, LLM inference, and speech on clear execution paths makes the pipeline easier to tune.
 
 ## Check the prompt in Logcat
 
@@ -148,7 +152,9 @@ This Logcat collector is only for checking this section. In the next section, yo
 
 Build and run the app on your Android device.
 
-Open Logcat and filter for `MainActivity`. As you move in front of the camera, you should see short prompts that describe the largest differences from the reference plank pose.
+Open Logcat and filter for `MainActivity`. As you move in front of the camera, expect short prompts that describe the largest differences from the reference plank pose.
+
+This Logcat check is the validation step for the prompt stage. 
 
 The app now has the complete input side of the tutor pipeline:
 

@@ -45,7 +45,7 @@ This keeps the LLM prompt small, reduces latency, and makes the behavior easier 
 
 ## Clone the starter project
 
-Clone the Learning Path code examples repository:
+Clone the `PlankTutor` Learning Path code example repository. 
 
 ```console
 git clone https://gitlab.arm.com/learning-code-examples/code-examples.git
@@ -70,7 +70,7 @@ The starter project contains the app structure, layout, image asset, MediaPipe p
 
 If Android Studio prompts you to trust the project, accept the prompt.
 
-The starter app is intentionally incomplete, but it should sync successfully before you add code.
+The starter app is intentionally incomplete, but it should sync successfully before you add code. If the `ai-plank-tutor/android` directory is missing, check that you cloned the `PlankTutor` branch.
 
 ## Inspect the provided files
 
@@ -79,11 +79,15 @@ Start by looking at the files that are already provided for you.
 Open `app/build.gradle` and confirm that the Android, CameraX, lifecycle, and MediaPipe dependencies are already present.
 Arm's AI Chat dependency is not included yet. You will add it later, when you implement local LLM inference.
 
+Also note the `packaging { jniLibs { useLegacyPackaging = true } }` setting. The AI Chat library you add later uses native libraries, and this packaging setting lets the app load those libraries correctly.
+
 Open `app/src/main/AndroidManifest.xml` and confirm that the app requests camera access:
 
 ```xml
 <uses-permission android:name="android.permission.CAMERA" />
 ```
+
+The app package is `com.arm.demo.AIPlankTutor`. You will use that package name later when copying the LLM model into the app-specific external files directory with `adb`.
 
 Open `app/src/main/res/layout/activity_main.xml` and review the main UI. The layout already contains:
 
@@ -94,6 +98,6 @@ Open `app/src/main/res/layout/activity_main.xml` and review the main UI. The lay
 
 Open `app/src/main/res/drawable/plank.jpg` and review the instructor reference image.
 
-Code is under the long path `app/src/main/java/com/arm/demo/AIPlankTutor`. Under that, open `data/PlankPoseData.kt` and note the hard-coded plank reference data. This file contains the instructor's reference landmarks and angle weights used by the scoring step. This was generated from the reference plank image in an offline step so it doesn't need any runtime compute.
+Code is under the long path `app/src/main/java/com/arm/demo/AIPlankTutor`. Copy this path exactly, including the capitalized `AIPlankTutor` package directory. Under that, open `data/PlankPoseData.kt` and note the hard-coded plank reference data. This file contains the instructor's reference landmarks and angle weights used by the scoring step. This was generated from the reference plank image in an offline step so it doesn't need any runtime compute.
 
-Android code starts from the `MainActivity.kt` file, and we will look at that in the next step.
+Android code starts from the `MainActivity.kt` file, and you will look at that in the next step.

@@ -18,6 +18,7 @@ You will:
 - Load the model and set the tutor system prompt.
 - Send the pose prompt from the previous section to the local LLM.
 - Convert streamed LLM tokens into complete `Sentence` objects.
+- Release the native inference engine when the ViewModel is cleared.
 
 At the end of this section, the app will produce short text coaching corrections and show them as captions. Speech output is added in the next section.
 
@@ -35,6 +36,8 @@ Sync the project with Gradle.
 
 The AI Chat library provides the Android inference API used by this project and by the [Arm AI Chat app](https://play.google.com/store/apps/details?id=com.arm.aichat&hl=en_GB). It uses `llama.cpp` for GGUF inference, and `llama.cpp` integrates Arm [KleidiAI](https://developer.arm.com/ai/kleidi-libraries) kernels. Q4_0 GGUF models work particularly well with these kernels and can get strong acceleration on phones with [SME2](https://www.arm.com/technologies/sme2), SVE2, and Neon support.
 
+The starter project already has `mavenCentral()` in `settings.gradle` and native library packaging configured in `app/build.gradle`, so adding the dependency is the only Gradle change needed here.
+
 ## Add the model file to the device
 
 The app expects a Q4_0 GGUF model file named:
@@ -43,7 +46,9 @@ The app expects a Q4_0 GGUF model file named:
 Phi-4-mini-instruct-Q4_0.gguf
 ```
 
-Download [microsoft_Phi-4-mini-instruct-Q4_0.gguf](https://huggingface.co/bartowski/microsoft_Phi-4-mini-instruct-GGUF/blob/main/microsoft_Phi-4-mini-instruct-Q4_0.gguf) from Hugging Face. The model is 3.8B parameters, and around 2.2GB. Remove the "microsoft_" off the front of the name.
+Download [microsoft_Phi-4-mini-instruct-Q4_0.gguf](https://huggingface.co/bartowski/microsoft_Phi-4-mini-instruct-GGUF/blob/main/microsoft_Phi-4-mini-instruct-Q4_0.gguf) from Hugging Face. The model is 3.8B parameters, and about 2.3 GB. Rename the downloaded file by removing the leading `microsoft_` prefix.
+
+Keep at least 5 GB free on the device. The app imports the model from external app storage and then copies it into internal app storage the first time it loads, so the device temporarily needs room for both copies.
 
 The provided `LlmModelStore.kt` helper looks for the model in a few import locations. The most useful location while developing is the app-specific external files directory:
 
@@ -51,19 +56,36 @@ The provided `LlmModelStore.kt` helper looks for the model in a few import locat
 /sdcard/Android/data/com.arm.demo.AIPlankTutor/files/llm/Phi-4-mini-instruct-Q4_0.gguf
 ```
 
-With your device connected over USB, create the directory:
+With your device connected over USB, first confirm that `adb` can see the phone:
+
+```console
+adb devices
+```
+
+Expect a device listed as `device`:
+
+```output
+List of devices attached
+<device-id>    device
+```
+
+If the device is listed as `unauthorized`, unlock the phone and accept the USB debugging prompt.
+
+Next, create the app-specific external directory. This is the import location that `LlmModelStore` checks before copying the model into internal app storage:
 
 ```console
 adb shell mkdir -p /sdcard/Android/data/com.arm.demo.AIPlankTutor/files/llm
 ```
 
-Then push the model file:
+Then push the model file from the directory where you downloaded and renamed it:
 
 ```console
 adb push Phi-4-mini-instruct-Q4_0.gguf /sdcard/Android/data/com.arm.demo.AIPlankTutor/files/llm/
 ```
 
-When the app first loads the model, `LlmModelStore` copies it into the app's internal files directory. Later runs use the internal copy.
+The push can take a few minutes because the GGUF file is large. Do not disconnect the device while the transfer is running.
+
+When the app first loads the model, `LlmModelStore` checks that the file is readable and at least 2 GB, then copies it into the app's internal files directory. Later runs use the internal copy.
 
 {{% notice Note %}}
 If the model cannot be found, check Logcat for `LlmModelStore`. The error message lists every model path that was checked.
@@ -100,7 +122,7 @@ private val llmViewModel: LlmViewModel by viewModels {
 }
 ```
 
-`AiChat.getInferenceEngine()` creates the inference engine used by the ViewModel. `LlmModelStore` is the helper that finds or imports the GGUF model file. Now we need to make the `LlmViewModel` accept those parameters.
+`AiChat.getInferenceEngine()` creates a native-backed inference engine used by the ViewModel.`LlmModelStore` is the helper that finds or imports the GGUF model file. Now make the `LlmViewModel` accept those parameters.
 
 ## Add AI Chat to LlmViewModel
 
@@ -154,6 +176,8 @@ private suspend fun loadModelAndSystemPrompt() {
 ```
 
 You can read `TUTOR_SYSTEM_PROMPT` at the bottom of the file. The system prompt tells the model to act as a concise yoga teacher, use the joint-angle facts, and return one short correction.
+
+`loadModel()` parses the GGUF file and allocates the model in memory, so it can take noticeable time on the first run. The system prompt is set once after the model loads so each later user prompt can stay focused on the live pose differences.
 
 ## Send a prompt to AI Chat
 
@@ -226,6 +250,19 @@ val sentences: Flow<Sentence> = _tokens
 
 The ViewModel now exposes a `Flow<Sentence>` instead of raw tokens. Page 6 will collect this Flow and send each sentence to Android text-to-speech.
 
+## Release the inference engine
+
+The AI Chat engine owns native resources. Add this cleanup function inside `LlmViewModel`:
+
+```kotlin
+override fun onCleared() {
+    inferenceEngine.destroy()
+    super.onCleared()
+}
+```
+
+Android calls `onCleared()` when the ViewModel is no longer used, which gives the app a clear place to release the native inference engine.
+
 ## Send pose prompts to the LLM
 
 Return to `MainActivity.kt`.
@@ -252,7 +289,7 @@ launch {
 }
 ```
 
-This prevents the app from generating a new prompt for every camera frame while the LLM is already responding.
+This prevents the app from generating a new prompt for every camera frame while the LLM is already responding. On-device LLM generation is much slower than camera frame delivery, so this backpressure step is what keeps the feedback loop understandable.
 
 Finally, add a temporary sentence collector so you can show the generated correction in the caption area and check it in Logcat:
 
@@ -270,10 +307,10 @@ The next section will replace this direct caption update with `SpeechManager`, s
 
 ## Run the app
 
-Build and run the app on your Android device. You should see the tutor's advice now at the bottom of the screen.
+Build and run the app on your Android device. Expect the tutor's advice at the bottom of the screen.
 
 To see what's happening behind the scenes, open Logcat and filter for `LlmViewModel` or `MainActivity`. The app should load the model, send pose prompts, and print short tutor corrections. 
 
-The first run can take longer because the model file may be copied into the app's internal storage and loaded into memory. Later runs should start faster.
+The first run can take longer because the model file may be copied into the app's internal storage and loaded into memory. Later runs should start faster. If model loading fails, also filter Logcat for `LlmModelStore`; it prints the exact import paths it checked.
 
 At this point, the app can generate local text feedback. The next section uses Android `TextToSpeech` to speak each completed sentence and show it as a caption.

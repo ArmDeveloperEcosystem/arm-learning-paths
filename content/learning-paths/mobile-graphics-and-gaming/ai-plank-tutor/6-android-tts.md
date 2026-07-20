@@ -20,6 +20,8 @@ You will:
 
 At the end of this section, the app will speak each complete correction and show the same text as a caption while it is being spoken.
 
+Android `TextToSpeech` uses the TTS engine and voices installed on the device. The exact voice, language support, and quality can vary by phone, but the app code is the same.
+
 ## Initialize TextToSpeech
 
 Open `ui/SpeechManager.kt`.
@@ -85,6 +87,8 @@ fun launchSpeechGenerationAndPlaybackJob(speech: String) {
 `TextToSpeech.QUEUE_ADD` is important here. The LLM output is streamed and split into complete sentences, so the app might receive another sentence while Android is still speaking the previous one. `QUEUE_ADD` makes Android speak the phrases in order instead of interrupting the current phrase.
 
 Each phrase is queued with an utterance ID. `SpeechManager` keeps a small map from utterance ID to caption text so the app can show the caption only when that phrase starts speaking.
+
+The `speak()` call is asynchronous. A successful return value means Android accepted the phrase into the TTS queue, not that speech has already finished. The progress listener is what tells the app when playback starts and ends.
 
 ## Finish each utterance
 
@@ -154,5 +158,7 @@ The caption is now controlled by Android TTS playback. It appears when Android s
 Build and run the app on your Android device.
 
 Move into a plank position in front of the camera. The score should update, the local LLM should generate a short correction, and Android TTS should speak it. The same correction should appear as a caption while it is being spoken.
+
+If captions appear but you do not hear speech, check the device media volume and confirm that a TTS voice is installed for the default language.
 
 At this point, the app has the full on-device pipeline: camera input, pose landmarks, joint-angle scoring, local LLM feedback, and spoken output.

@@ -12,7 +12,7 @@ You now have a complete on-device AI plank tutor. It detects pose landmarks from
 
 This section outlines practical ways to tune the experience and extend it beyond the simple single-pose demo.
 
-We will go through:
+You will go through:
 
 - Which app parameters are worth tuning.
 - How model, prompt, and feedback choices affect latency.
@@ -61,7 +61,7 @@ private const val TUTOR_SYSTEM_PROMPT = "You are a friendly..."
 
 You can use the system prompt to make the output more direct, more encouraging, or more safety-focused. Keep the prompt specific. This app works best when the model is told to give one short correction and avoid exposing the numeric joint-angle differences.
 
-The model choice also affects the experience. Smaller models usually load and respond faster, while larger models can give better language quality. Quantization affects both speed and quality. The Learning Path used a Q4_0 GGUF model because it is a practical balance for mobile inference, and gets good speed-up from Kleidi AI kernels.
+The model choice also affects the experience. Smaller models usually load and respond faster, while larger models can give better language quality. Quantization affects both speed and quality. The Learning Path used a Q4_0 GGUF model because it is a practical balance for mobile inference, and gets good speed-up from KleidiAI kernels.
 
 ## Improve feedback quality with fine-tuning
 
@@ -94,11 +94,11 @@ A high-level workflow is:
 
 4. Expand the dataset with a script.
 
-   Use a Python script to generate many input variations and call an LLM API to draft matching coaching phrases. For example, the script can choose one to three joint differences, vary the angle sizes, mirror left and right sides, and combine related issues such as hip sag with shoulder position. Send each generated input to the OpenAI API and ask for a structured JSON response containing one safe spoken correction. Structured outputs and batch-style requests are useful when creating larger generated datasets.
+   Use a Python script to generate many input variations and call an LLM API to draft matching coaching phrases. For example, the script can choose one to three joint differences, vary the angle sizes, mirror left and right sides, and combine related issues such as hip sag with shoulder position. Ask for a structured JSON response containing one safe spoken correction. Structured outputs and batch-style requests are useful when creating larger generated datasets.
 
 5. Review and clean the generated data.
 
-   This is the most important step. Remove responses that mention numbers, give multiple corrections, sound unnatural when spoken, or make unsafe assumptions. The dataset will often be too big to go through all of it, so generate a small dataset first to determine quality. Examine a signficant section of it and determine if it needs re-generating with adjusted rules.
+   This is the most important step. Remove responses that mention numbers, give multiple corrections, sound unnatural when spoken, or make unsafe assumptions. Generated fitness cues should be reviewed by someone who understands the movement being coached. The dataset will often be too big to go through all of it, so generate a small dataset first to determine quality. Examine a significant section of it and determine if it needs re-generating with adjusted rules.
 
 6. Split the dataset.
 
@@ -116,7 +116,7 @@ A high-level workflow is:
 
    Run the app with real camera input. Check whether the model gives short, useful corrections, whether latency is acceptable, and whether repeated prompts produce varied but consistent feedback.
 
-Fine-tuning is not included as a formal step in this Learning Path because it adds dataset design, training infrastructure, model conversion, quantization, and evaluation. However it will make a significant quality difference to the app, as you get much better responses. Treat it as a follow-up project once the app pipeline is working.
+Fine-tuning is not included as a formal step in this Learning Path because it adds dataset design, training infrastructure, model conversion, quantization, and evaluation. However, it can make a significant quality difference to the app by making responses more accurate, natural, and stylistically consistent with the intended yoga instructor persona. Treat it as a follow-up project once the app pipeline is working.
 
 ## Extend beyond one pose
 
@@ -132,7 +132,7 @@ To make the tutor feel more natural, add different message types. For example:
 
 - Correction when the score is low.
 - Praise when the score is high.
-- Encouragement or generaic yoga advice when correction or praise might feel repetitive.
+- Encouragement or generic yoga advice when correction or praise might feel repetitive.
 - A short rest or breathing cue between corrections.
 
 To make the app more robust, handle interruptions and edge cases. For example, decide what should happen when the learner leaves the camera view, when no pose is detected, when the LLM is still responding, or when TTS is still speaking.
