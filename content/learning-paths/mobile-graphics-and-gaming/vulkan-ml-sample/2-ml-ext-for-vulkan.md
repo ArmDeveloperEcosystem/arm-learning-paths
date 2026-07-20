@@ -19,9 +19,15 @@ This setup involves two main steps:
 
 Before building and running the samples, ensure the following tools are installed on your development machine:
 
-- CMake (version 3.12 or later)
+- CMake (version 3.25 or later)
 - Python 3
 - Git
+
+Git can be installed with the following command: 
+
+```bash
+winget install --id Git.Git -e
+```
 
 In VSCode create a new folder for this project then make sure you have the following extensions: 
   * C/C++ From Microsoft 
@@ -35,7 +41,7 @@ In VSCode create a new folder for this project then make sure you have the follo
 Create a Venv in Python (3.13 was used in the creation of this Guide) and run the following commands 
 
 ```bash
-py -3.13 -m venv .venv
+py -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 python -m pip install ai-ml-emulation-layer-for-vulkan cmake
@@ -45,8 +51,9 @@ To verify your installation, run the following commands:
 
 ```bash
 cmake --version
-python3 --version
+python --version
 git --version
+python -m pip show ai-ml-emulation-layer-for-vulkan
 ```
 
 Each command should print the installed version of the tool.
@@ -71,7 +78,7 @@ Under the **Vulkan Layers Available** tab, add the path to your `Emulation layer
 
 ![VL available](images/vl-availble.png)
 
-Under the **Vulkan layers Configuration** tabgo through each setting in the top rigt except disable all Vulkan Layers and enable the Graph and Tensor Emulation
+Under the **Vulkan layers Configuration** tab go through each setting in the top rigt except disable all Vulkan Layers and enable the Graph and Tensor Emulation
 
 Ensure that the **Graph** layer is listed above the **Tensor** layer.
 
