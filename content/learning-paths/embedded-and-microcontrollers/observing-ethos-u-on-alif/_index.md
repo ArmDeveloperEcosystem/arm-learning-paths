@@ -7,29 +7,30 @@ who_is_this_for: This is an introductory topic for embedded developers and ML en
 
 learning_objectives:
     - Set up the Alif Ensemble E8 development kit for ML applications
-    - Install and configure CMSIS Toolbox and build tools
-    - Build and flash firmware using JLink
+    - Train, compile and export an MNIST PyTorch model to ExecuTorch .pte format using a Docker container
+    - Configure CMSIS project files, memory layout, and linker scripts for an ML workload on the Alif Ensemble E8
+    - Build and flash firmware to the Alif Ensemble E8 DevKit
     - Run MNIST digit classification on Ethos-U85 NPU
-    - Monitor inference results via UART and LED indicators
+    - Monitor inference results via SEGGER Real-Time Transfer (RTT)
 
 prerequisites:
+    - Experience with C/C++ and embedded development concepts
     - Alif [Ensemble E8 Series Development Kit](https://alifsemi.com/ensemble-e8-series/) (contact [Alif Sales](https://alifsemi.com/support/sales-support/))
     - USB Type-C cable for programming
-    - USB-TTL converter (1.8V logic level) for UART debug (optional)
-    - Basic knowledge of embedded systems and C programming
-    - Computer running Windows, Linux, or macOS
+    - A SEGGER J-Link debug probe (included in the DevKit)
+    - A development machine running Windows, Linux, or macOS with Visual Studio Code installed
 
 author_primary: Waheed Brown
 
 author:
     - Waheed Brown
     - Fidel Makatia Omusilibwa
+    - Kwashie Andoh
 
 ### Tags
 skilllevels: Introductory
 subjects: ML
 armips:
-    - Cortex-A
     - Cortex-M
     - Ethos-U
 
@@ -64,7 +65,6 @@ further_reading:
         title: Arm Ethos-U85 NPU
         link: https://www.arm.com/products/silicon-ip-cpu/ethos/ethos-u85
         type: website
-        type: documentation
     - resource:
         title: Arm Developers Guide for Cortex-M Processors and Ethos-U NPU
         link: https://developer.arm.com/documentation/109267/0101
