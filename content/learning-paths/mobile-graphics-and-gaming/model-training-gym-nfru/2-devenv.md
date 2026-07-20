@@ -10,16 +10,10 @@ layout: learningpathall
 
 Install a few machine learning and system dependencies on your Ubuntu environment.
 
-Start by making sure Python is installed and the version is >3.10:
+Start by making sure Python is installed and the version is later than `3.10`:
 
 ```bash
 python3 --version
-```
-
-The output is similar to:
-
-```output
-Python 3.10.11
 ```
 
 Next, install dependency packages:
@@ -55,9 +49,9 @@ python3 create_env.py
 ```
 
 The script does the following:
-- Create a Python virtual environment called `nb-env`
-- Install the `ng-model-gym` package and required dependencies
-- Download the datasets and weights needed to run the notebooks
+- Creates a Python virtual environment called `nb-env`
+- Installs the `ng-model-gym` package and required dependencies
+- Downloads the datasets and weights needed to run the notebooks
 
 Activate the virtual environment:
 

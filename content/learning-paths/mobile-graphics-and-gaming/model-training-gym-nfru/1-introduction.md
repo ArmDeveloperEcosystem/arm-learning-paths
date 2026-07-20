@@ -10,11 +10,11 @@ layout: learningpathall
 
 Neural graphics is an intersection of graphics and machine learning. Rather than relying purely on traditional GPU pipelines, neural graphics integrates learned models directly into the rendering stack. 
 
-These techniques are particularly powerful on mobile devices, where battery life and performance constraints limit traditional compute-heavy rendering approaches. When developing for mobile devices, your goal is to deliver high visual fidelity without increasing GPU cost. You achieve this by training and deploying compact neural networks optimized for your device's hardware.
+These techniques are particularly powerful on mobile devices, where battery life and performance constraints limit traditional compute-heavy rendering approaches. When developing for mobile devices, your goal is to deliver high visual fidelity without increasing GPU cost. You can achieve this by training and deploying compact neural networks optimized for your device's hardware.
 
 ## How Arm supports neural graphics
 
-Arm enables neural graphics through the [Neural Graphics Development Kit](https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics): a set of open-source tools that you can use to train, evaluate, and deploy ML models for graphics workloads.
+Arm supports neural graphics through the [Neural Graphics Development Kit](https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics): a set of open-source tools that you can use to train, evaluate, and deploy ML models for graphics workloads.
 
 At its core are the ML Extensions for Vulkan, which bring native ML inference into the GPU pipeline using structured compute graphs. These extensions (`VK_ARM_tensors` and `VK_ARM_data_graph`) allow real-time upscaling and similar effects to run efficiently alongside rendering tasks.
 

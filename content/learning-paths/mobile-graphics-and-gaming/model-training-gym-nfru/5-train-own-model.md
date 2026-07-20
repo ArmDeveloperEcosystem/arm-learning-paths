@@ -158,7 +158,7 @@ source nb-env/bin/activate
 jupyter lab
 ```
 
-Navigate to `tutorials/nfru/custom_model_example.ipynb` and step through the cells.
+Navigate to `tutorials/nfru/custom_model_example.ipynb` and run the cells.
 
 ## What you've accomplished
 
@@ -166,4 +166,4 @@ You've now learned how to extend Model Gym beyond NFRU with your own models and 
 
 For more information on model registration, dataset integration, and use case development, see the [Model Gym GitHub repository](https://github.com/arm/neural-graphics-model-gym).
 
-Through this Learning Path, you’ve learned what neural graphics is and why it matters for game performance. You’ve stepped through the process of training and evaluating a model using PyTorch and the Model Gym, and seen how to export that model into VGF (.vgf) for real-time deployment. You’ve also explored how to visualize and inspect the model’s structure using Model Explorer. You can now explore the Model Training Gym repository for deeper integration and to keep building your skills.
+You can now explore the Model Training Gym repository for deeper integration and to keep building your skills.

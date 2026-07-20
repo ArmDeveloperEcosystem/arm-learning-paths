@@ -26,7 +26,7 @@ The VGF adapter model explorer source code is available on [GitHub](https://gith
 
 ## Install Model Explorer
 
-The next step is to make sure the Model Explorer itself is installed. Use pip to set it up:
+The next step is to make sure the Model Explorer itself is installed. Use `pip` to set it up:
 
 ```bash
 pip install torch ai-edge-model-explorer

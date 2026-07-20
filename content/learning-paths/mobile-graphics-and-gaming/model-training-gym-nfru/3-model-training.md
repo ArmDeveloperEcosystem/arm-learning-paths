@@ -45,21 +45,15 @@ Launch Jupyter Lab with the following command:
 jupyter lab
 ```
 
-You'll be prompted to open your browser to `http://localhost:8888` and enter the token that's printed in the terminal output. Navigate to:
+You'll be prompted to open your browser to `http://localhost:8888` and enter the token that's printed in the terminal output. 
 
-```output
-neural-graphics-model-gym-examples/tutorials/nfru/<nfru-training-notebook>.ipynb
-```
+Navigate to `neural-graphics-model-gym-examples/tutorials/nfru/<nfru-training-notebook>.ipynb`.
 
 Step through the notebook for training.
 
 After training your model, you'll evaluate it. You'll measure accuracy, compare checkpoints, and prepare the model for export. 
 
-Open the evaluation notebook located at the following location:
-
-```output
-neural-graphics-model-gym-examples/tutorials/nfru/<nfru-evaluation-notebook>.ipynb
-```
+Open the evaluation notebook located at `neural-graphics-model-gym-examples/tutorials/nfru/<nfru-evaluation-notebook>.ipynb`.
 
 At the end, you'll see a visual comparison of the generated NFRU frame and the ground truth frame.
 
