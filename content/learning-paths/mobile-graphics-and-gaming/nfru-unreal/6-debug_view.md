@@ -1,5 +1,6 @@
 ---
 title: Set up a debug view in Unreal Engine
+description: Enable the NFRU debug view in Unreal Engine and interpret depth, disocclusion, motion-warped, and optical-flow buffers to diagnose frame-generation issues.
 weight: 7
 
 ### FIXED, DO NOT MODIFY

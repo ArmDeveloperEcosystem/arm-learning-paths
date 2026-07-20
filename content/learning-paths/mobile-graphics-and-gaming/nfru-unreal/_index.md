@@ -1,5 +1,6 @@
 ---
 title: Enable and configure NFRU in Unreal Engine
+description: Configure Neural Frame Rate Upscaling (NFRU) in Unreal Engine with ML Extensions for Vulkan, then validate, tune, debug, and analyze frame generation.
 
 minutes_to_complete: 30
 

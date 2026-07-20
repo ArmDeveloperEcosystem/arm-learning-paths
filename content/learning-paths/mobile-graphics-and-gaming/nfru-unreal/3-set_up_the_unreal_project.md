@@ -1,5 +1,6 @@
 ---
 title: Set up the Unreal project with NFRU enabled
+description: Create an Unreal Engine C++ project, integrate the Neural Rendering plugin, and configure Vulkan as the rendering hardware interface for NFRU.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

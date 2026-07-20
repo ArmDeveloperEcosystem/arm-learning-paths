@@ -1,5 +1,6 @@
 ---
 title: Understand neural graphics and NFRU
+description: Understand how Arm's Neural Graphics Development Kit and Neural Frame Rate Upscaling use ML Extensions for Vulkan to generate intermediate frames in Unreal Engine.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

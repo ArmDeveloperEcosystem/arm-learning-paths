@@ -1,5 +1,6 @@
 ---
 title: Validate NFRU in unreal engine
+description: Run NFRU in Unreal Engine Standalone Game mode, confirm its debug output, and troubleshoot common Vulkan emulation and plugin issues.
 weight: 5
 
 ### FIXED, DO NOT MODIFY

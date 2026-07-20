@@ -1,5 +1,6 @@
 ---
 title: Use RenderDoc with NFRU for debugging and analysis
+description: Capture a packaged NFRU application with RenderDoc for Arm GPUs and inspect Vulkan events, resources, and pipeline stages for debugging.
 weight: 8
 
 ### FIXED, DO NOT MODIFY

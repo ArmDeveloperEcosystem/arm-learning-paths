@@ -1,5 +1,6 @@
 ---
 title: Understand console variables for NFRU
+description: Configure NFRU console variables in Unreal Engine and use stat FrameGen metrics to tune frame-generation behavior and performance.
 weight: 6
 
 ### FIXED, DO NOT MODIFY

@@ -1,5 +1,6 @@
 ---
 title: Set up the development environment
+description: Install the Vulkan SDK and CMake, build the Neural Graphics SDK, and configure Vulkan ML emulation layers for NFRU development.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
