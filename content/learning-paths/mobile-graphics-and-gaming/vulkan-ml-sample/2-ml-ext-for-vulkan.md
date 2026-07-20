@@ -55,7 +55,7 @@ git --version
 python -m pip show ai-ml-emulation-layer-for-vulkan
 ```
 
-Each command should print the installed version of the tool.
+Each command should print the installed version of the tool or show where the appropriate files are located.
 
 ### Install Vulkan Software Development Kit
 
