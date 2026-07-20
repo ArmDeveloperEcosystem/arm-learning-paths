@@ -1,5 +1,7 @@
 ---
-title: "Code kata: perfect your SVE and SME skills with SIMD Loops"
+title: Learn SVE and SME programming with SIMD Loops
+
+description: Learn how to write high-performance SIMD code using the SIMD Loops project, with hands-on examples demonstrating SVE, SVE2, and SME2 features on Arm processors.
 
 minutes_to_complete: 30
 
@@ -7,25 +9,29 @@ who_is_this_for: This is an advanced topic for software developers who want to l
 
 learning_objectives:
      - Improve SIMD code performance using Scalable Vector Extension (SVE) and Scalable Matrix Extension (SME)
-     - Describe what SIMD Loops contains and how kernels are organized across scalar, NEON, SVE,SVE2, and SME2 variants
+     - Describe what SIMD Loops contains and how kernels are organized across scalar, Neon, SVE, SVE2, and SME2 variants
      - Build and run a selected kernel with the provided runner and validate correctness against the C reference
-     - Choose the appropriate build target to compare NEON, SVE/SVE2, and SME2 implementations
-
+     - Choose the appropriate build target to compare Neon, SVE/SVE2, and SME2 implementations
 
 prerequisites:
-    - An AArch64 computer running Linux or macOS. You can use cloud instances, refer to [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) for a list of cloud service providers. 
-    - Some familiarity with SIMD programming and NEON intrinsics.
+    - An AArch64 computer running Linux or macOS. You can use cloud instances, refer to [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) for a list of cloud service providers
+    - Some familiarity with SIMD programming and Neon intrinsics
     - Recent toolchains that support SVE/SME (GCC 13+ or Clang 16+ recommended)
 
 author:
     - Alejandro Martinez Vicente
     - Mohamad Najem
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
 armips:
     - Neoverse
+    - Cortex-A
 operatingsystems:
     - Linux
     - macOS
@@ -34,7 +40,7 @@ tools_software_languages:
   - CPP
   - GCC
   - Clang
-
+  - SME2
 shared_path: true
 shared_between:
     - servers-and-cloud-computing
@@ -46,6 +52,14 @@ further_reading:
     - resource:
         title: SVE Programming Examples
         link: https://developer.arm.com/documentation/dai0548/latest
+        type: documentation
+    - resource:
+        title: SIMD Loops Repository
+        link: https://gitlab.arm.com/architecture/simd-loops
+        type: documentation
+    - resource:
+        title: Scalable Vector Extensions Resources
+        link: https://developer.arm.com/Architectures/Scalable%20Vector%20Extensions
         type: documentation
     - resource:
         title: Port Code to Arm Scalable Vector Extension (SVE)
@@ -88,10 +102,10 @@ further_reading:
         link: https://github.com/ARM-software/abi-aa
         type: website
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

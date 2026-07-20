@@ -1,6 +1,7 @@
 ---
 # User change
 title: Writing assembly functions
+description: Create C and Arm assembly source files that work together under the Arm Procedure Call Standard for a Cortex-M project.
 
 weight: 6 # 1 is first, 2 is second, etc.
 
@@ -15,7 +16,7 @@ If using μVision, Right-click `Source Group 1` and select `Add New Item`. Selec
 
 If using Keil Studio, open `main.c` within the `Source Files` group.
 
-## The main Function
+## The main function
 
 Create the `main` C function. This function creates two character arrays, `a` and `b`, and calls two functions, `my_strcpy` and `my_capitalize`, that shall be implemented later.
 

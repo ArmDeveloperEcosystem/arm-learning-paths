@@ -1,5 +1,6 @@
 ---
 title: Development platforms
+description: Compare physical boards and virtual platforms for developing Cortex-M and Ethos-U machine learning applications.
 
 weight: 3
 
@@ -99,8 +100,6 @@ If you are in the console and can see the FVPs, you are ready for ML application
 ## FVP configuration options
 
 These virtual platforms have some options to help you evaluate different configurations.
-
-The [AVH simulation model documentation](https://arm-software.github.io/AVH/main/simulation/html/Using.html) has many good tips.
 
 ### Number of MACs
 

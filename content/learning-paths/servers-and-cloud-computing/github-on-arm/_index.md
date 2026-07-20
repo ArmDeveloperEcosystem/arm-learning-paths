@@ -1,5 +1,6 @@
 ---
 title: Deploy GitHub Actions Self-Hosted Runner on Google Axion C4A virtual machine
+description: Learn how to provision a Google Axion C4A Arm virtual machine and set up a GitHub Actions self-hosted runner for CI/CD workflows.
 
 minutes_to_complete: 15
 
@@ -16,10 +17,15 @@ prerequisites:
 
 author: Annie Tallund
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ##### Tags
 skilllevels: Introductory
 subjects: CI-CD
-cloud_service_providers: Google Cloud
+cloud_service_providers:
+  - Google Cloud
 
 armips:
     - Neoverse
@@ -55,8 +61,8 @@ further_reading:
         link: https://cloud.google.com/compute/docs/instances/create-start-instance
         type: website
 
-
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # Indicates this should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

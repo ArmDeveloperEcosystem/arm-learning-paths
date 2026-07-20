@@ -1,20 +1,16 @@
 ---
-title: Fastpath Kernel Build and Install Guide
+title: Benchmark Linux kernel performance on Arm servers with Fastpath
+description: Learn how to build custom Linux kernels using tuxmake and Fastpath, then benchmark and compare kernel versions on Arm-based EC2 instances.
 
-draft: true
-cascade:
-    draft: true
+minutes_to_complete: 90
 
-minutes_to_complete: 45
-
-who_is_this_for: Software developers and performance engineers who want to explore benchmarking across different kernel versions with Fastpath on Arm.
+who_is_this_for: This is an advanced topic for software developers and performance engineers who want to benchmark and compare different Linux kernel versions on Arm servers.
 
 learning_objectives:
-    - Understand how Fastpath streamlines kernel experimentation workflows
-    - Provision an Arm-based build machine and compile Fastpath-enabled kernels on it
-    - Provision an Arm-based test system, also known as the System Under Test (SUT)
-    - Create a test plan consisting of kernel versions and benchmark suites 
-    - Launch an Arm-based Fastpath host to orchestrate the kernel benchmarking process on the SUT
+    - Build custom Linux kernels for Arm systems using tuxmake and Fastpath
+    - Configure and provision Arm-based EC2 instances for kernel testing
+    - Create and execute test plans that compare kernel performance across versions
+    - Analyze benchmark results to identify performance differences between kernels
 
 prerequisites:
     - An AWS account with permissions to create EC2 instances
@@ -22,9 +18,15 @@ prerequisites:
 
 author: Geremy Cohen
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
+cloud_service_providers:
+  - AWS
 armips:
     - Neoverse
 operatingsystems:
@@ -41,7 +43,7 @@ further_reading:
         type: documentation
     - resource:
         title: Kernel install guide
-        link: /install-guides/kernel-build/
+        link: /learning-paths/servers-and-cloud-computing/kernel-build/
         type: guide
     - resource:
         title: AWS Compute Service Provider learning path
@@ -54,3 +56,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

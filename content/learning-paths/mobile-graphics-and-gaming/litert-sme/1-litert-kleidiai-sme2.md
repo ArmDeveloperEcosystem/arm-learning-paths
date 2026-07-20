@@ -24,14 +24,14 @@ To understand how KleidiAI SME2 micro-kernels work in LiteRT, think about a Lite
 
 ### LiteRT → XNNPACK workflow
 
-![Diagram showing the workflow for a fully connected operator in LiteRT using XNNPACK. The diagram depicts the flow from LiteRT to XNNPACK, highlighting the use of NEON instructions for matrix multiplication and weight packing on Arm platforms. The technical environment emphasizes operator traversal, hardware detection, and parallel computation. alt-text #center](./litert-xnnpack-workflow.png "LiteRT, XNNPACK workflow")
+![Diagram showing the workflow for a fully connected operator in LiteRT using XNNPACK. The diagram depicts the flow from LiteRT to XNNPACK, highlighting the use of Neon instructions for matrix multiplication and weight packing on Arm platforms. The technical environment emphasizes operator traversal, hardware detection, and parallel computation. alt-text #center](./litert-xnnpack-workflow.png "LiteRT, XNNPACK workflow")
 For batch sizes greater than 1, a fully connected operator performs a matrix multiplication between the input activations (LHS) and the weights (RHS).
 
 When LiteRT loads a model, it reads the operators and builds a computation graph. If you select the CPU as the accelerator, LiteRT uses XNNPACK by default.
 
-XNNPACK scans the computation graph and looks for operators it can optimize. XNNPACK also checks the hardware compatibility and chooses the best available micro-kernel. Then, it packs the weight matrix to prepare for efficient computation. On Arm platforms, XNNPACK uses NEON instructions to speed up this packing.
+XNNPACK scans the computation graph and looks for operators it can optimize. XNNPACK also checks the hardware compatibility and chooses the best available micro-kernel. Then, it packs the weight matrix to prepare for efficient computation. On Arm platforms, XNNPACK uses Neon instructions to speed up this packing.
 
-During model inference, it splits the matrices into smaller tiles and runs the multiplications in parallel across multiple threads, using NEON instructions for faster processing.
+During model inference, it splits the matrices into smaller tiles and runs the multiplications in parallel across multiple threads, using Neon instructions for faster processing.
 
 ### LiteRT → XNNPACK → KleidiAI workflow
 
@@ -45,7 +45,7 @@ During model inference, the LHS packing micro-kernel is invoked. After the LHS i
 
 ## What you've accomplished and what's next
 
-In this section, you explored how LiteRT leverages XNNPACK and KleidiAI to accelerate fully connected operators on Arm platforms. You learned how XNNPACK uses NEON instructions for efficient matrix operations and how enabling KleidiAI with SME2 further optimizes performance by introducing specialized micro-kernels for packing and matrix multiplication.
+In this section, you explored how LiteRT leverages XNNPACK and KleidiAI to accelerate fully connected operators on Arm platforms. You learned how XNNPACK uses Neon instructions for efficient matrix operations and how enabling KleidiAI with SME2 further optimizes performance by introducing specialized micro-kernels for packing and matrix multiplication.
 
 You have completed the overview of LiteRT, XNNPACK, KleidiAI, and SME2 integration. Next, you’ll dive deeper into building and benchmarking models with these technologies.
 

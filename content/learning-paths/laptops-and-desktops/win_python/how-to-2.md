@@ -133,5 +133,4 @@ This graph illustrates the computation times and the corresponding performance b
 This learning path walked you through installing native Arm64 Python 3.12 on Windows 11.
 
 You wrote a simple module that applied a fast Fourier transformation (FFT) to a signal and saw the performance improvements that Arm64 Python unlocked. This performance improvement accelerates support for Windows on Arm (WoA). 
-One example is [Linaro's demonstration of porting TensorFlow to Arm64](https://old.linaro.org/blog/setting-up-tensorflow-for-windows-on-arm/) which displays impressive speed improvements and offers tremendous possibilities for AI, data scientists, and researchers reliant on the ease and power of Python
 

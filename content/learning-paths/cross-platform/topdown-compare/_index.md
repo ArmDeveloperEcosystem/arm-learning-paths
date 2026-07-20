@@ -3,6 +3,8 @@ title: Compare Arm Neoverse and Intel x86 top-down performance analysis with PMU
 
 minutes_to_complete: 30
 
+description: Learn how to compare Arm Neoverse and Intel x86 top-down performance analysis methodologies using PMU counters, Linux Perf, and topdown-tool to identify bottlenecks across architectures.
+
 who_is_this_for: This is an advanced topic for software developers and performance engineers who want to understand the similarities and differences between Arm Neoverse and Intel x86 top-down performance analysis using PMU counters, Linux Perf, and the topdown-tool. 
 
 learning_objectives:
@@ -17,6 +19,10 @@ prerequisites:
 
 author:
     - Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -54,10 +60,10 @@ further_reading:
         link: /learning-paths/servers-and-cloud-computing/arm_pmu/
         type: website
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -1,6 +1,8 @@
 ---
 title: Get started with the Windows Performance Analyzer (WPA) plugin for WindowsPerf
 
+description: Learn how to import WindowsPerf data in Windows Performance Analyzer (WPA) and visualize timeline and telemetry data using the WPA plugin.
+
 minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for software developers interested in using the Windows Performance Analyzer (WPA) plugin for performance analysis.
@@ -13,6 +15,10 @@ prerequisites:
     - A Windows on Arm laptop with WindowsPerf, Windows Performance Analyzer (WPA), and the WPA plugin installed.
 
 author: Alaaeddine Chakroun
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -30,7 +36,7 @@ tools_software_languages:
 further_reading:
     - resource:
         title: Announcing WindowsPerf Open-source performance analysis tool for Windows on Arm
-        link: https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/announcing-windowsperf
+        link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/announcing-windowsperf
         type: blog
     - resource:
         title: WindowsPerf Release 3.7.2
@@ -63,3 +69,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

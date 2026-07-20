@@ -1,6 +1,8 @@
 ---
 title: Create Linux virtual machines with Hyper-V
 
+description: Learn how to create and manage Arm-based Linux virtual machines using Hyper-V on Windows on Arm devices.
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for software developers who want to use Linux virtual machines with Windows on Arm devices. 
@@ -12,6 +14,10 @@ prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 with [Hyper-V](/install-guides/hyper-v/) installed.
 
 author: Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -30,10 +36,10 @@ further_reading:
         link: https://learn.microsoft.com/en-us/virtualization/ 
         type: documentation
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

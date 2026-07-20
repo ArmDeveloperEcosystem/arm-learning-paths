@@ -197,7 +197,7 @@ The KleidiCV library detects the platform hardware at runtime and selects the ba
 - SME2 backend implementation
 - SME backend implementation
 - SVE backend implementation
-- NEON backend implementation
+- Neon backend implementation
 
 The following code shows how the library resolves which implementation to use:
 
@@ -428,7 +428,7 @@ kleidicv API:: kleidicv_remap_f32_u8_resolver,NEON backend.
 kleidicv API:: kleidicv_remap_f32_u16_resolver,NEON backend.
 kleidicv API:: kleidicv_warp_perspective_stripe_u8_resolver,NEON backend.
 ```
-The output is truncated for brevity, but you will see detailed performance metrics for each operation at 1280x720 resolution. Look for lines showing the operation name, sample count, mean and median times, and standard deviation. These results help you compare the performance of different backends and confirm that SME or NEON acceleration is active.
+The output is truncated for brevity, but you will see detailed performance metrics for each operation at 1280x720 resolution. Look for lines showing the operation name, sample count, mean and median times, and standard deviation. These results help you compare the performance of different backends and confirm that SME or Neon acceleration is active.
 
 ## Use lldb to check the SME backend implementation
 
@@ -566,5 +566,5 @@ kleidicv-api-test`kleidicv::sme::saturating_add_abs_with_threshold<short>:
 
 ## Summary
 
-In this Learning Path, you tested the KleidiCV build and verified its functionality. You ran both the KleidiCV API tests and the OpenCV performance tests. You also explored how KleidiCV's multiversion support works, enabling it to select the optimal backend like SME, SVE, or NEON at runtime. Finally, you learned how to enable debug output and use the `lldb` debugger to confirm that the SME backend is being used and to inspect the assembly code.
+In this Learning Path, you tested the KleidiCV build and verified its functionality. You ran both the KleidiCV API tests and the OpenCV performance tests. You also explored how KleidiCV's multiversion support works, enabling it to select the optimal backend like SME, SVE, or Neon at runtime. Finally, you learned how to enable debug output and use the `lldb` debugger to confirm that the SME backend is being used and to inspect the assembly code.
 

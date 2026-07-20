@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Evaluating performance on Arm hardware (Optional)" 
+description: Optionally evaluate the ported workload on Arm hardware and use the results to guide further optimization.
 
 weight: 7 # 1 is first, 2 is second, etc.
 
@@ -10,7 +11,7 @@ layout: "learningpathall"
 
 In this section you will learn alternative ways to build the development environment and compile with a different compiler, on Arm hardware. 
 
-The changes you made in `main.cpp` and `CMakeLists.txt` in [Application porting](/learning-paths/embedded-and-microcontrollers/migration/5_application_porting) stay the same when running on actual Arm hardware.
+The changes you made in `main.cpp` and `CMakeLists.txt` in [Application porting](/learning-paths/embedded-and-microcontrollers/migration/5_application_porting/) stay the same when running on actual Arm hardware.
 
 ## Arm hardware
 
@@ -28,12 +29,12 @@ AWS EC2 instances with Graviton processors use the `aarch64` architecture. Gravi
   * Ubuntu 22.04.2 LTS,
   * 16GB storage (default is 8GB)
   * [Arm Neoverse N1](https://www.arm.com/products/silicon-ip-cpu/neoverse/neoverse-n1)
-    * 2 x NEON engine 128b vector width
+    * 2 x Neon engine 128b vector width
 * Graviton3 (c7g.medium)
   * Ubuntu 22.04.2 LTS
   * 16GB storage (default is 8GB)
   * [Arm Neoverse V1](https://www.arm.com/products/silicon-ip-cpu/neoverse/neoverse-v1)
-    * 2 x SVE engine 256b vector width (4 x NEON engine 128b vector width support)
+    * 2 x SVE engine 256b vector width (4 x Neon engine 128b vector width support)
 
 For more information on Graviton, refer to [Getting Started with AWS](/learning-paths/servers-and-cloud-computing/csp/aws/) and the [AWS Graviton Technical Guide](https://github.com/aws/aws-graviton-getting-started).
 
@@ -49,7 +50,7 @@ Install [Docker Engine](/install-guides/docker/docker-engine/) on the EC2 instan
 
 ### Raspberry Pi 4
 
-The Raspberry Pi is setup just like a normal desktop computer and the following is assumed:
+The Raspberry Pi is set up like a normal desktop computer and the following is assumed:
 * Running Raspberry Pi OS (64-bit)
 * Docker is installed
 * MicroSD card inserted
@@ -60,7 +61,7 @@ Refer to [Get started with the Raspberry Pi 4](/learning-paths/embedded-and-micr
 
 ## Development environment and application porting
 
-Use the same Dockerfile as before, see [Development environment](/learning-paths/embedded-and-microcontrollers/migration/4_development_environment#gcc-container).
+Use the same Dockerfile as before, see [Development environment](/learning-paths/embedded-and-microcontrollers/migration/4_development_environment/#gcc-container).
 
 You can build the development environment natively on Arm using `docker build` instead of `docker buildx`. 
 
@@ -103,7 +104,7 @@ Install OpenCV by running the command:
 sudo apt-get update && sudo apt-get install -y libopencv-dev
 ```
 
-Follow the same steps to port the application as described in [Application porting](/learning-paths/embedded-and-microcontrollers/migration/5_application_porting). 
+Follow the same steps to port the application as described in [Application porting](/learning-paths/embedded-and-microcontrollers/migration/5_application_porting/). 
 
 To use Arm Compiler for Linux you need to change the compiler in `CMakeLists.txt` as shown below:
 

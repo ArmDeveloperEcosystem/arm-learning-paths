@@ -43,8 +43,14 @@ Neoverse-N1 | `-mcpu=neoverse-n1` | GCC-9+ | Clang/LLVM 10+
 Neoverse-V1 | `-mcpu=neoverse-v1` | GCC-11+ | Clang/LLVM 12+
 Neoverse-N2 | `-mcpu=neoverse-n2` | GCC-11+ | Clang/LLVM 12+
 Neoverse-V2 | `-mcpu=neoverse-v2` | GCC-13+    | Clang/LLVM 16+
+Neoverse-N3 | `-mcpu=neoverse-n3` | GCC-15+ | Clang/LLVM 19+
+Neoverse-V3 | `-mcpu=neoverse-v3` | GCC-15+    | Clang/LLVM 19+
 
-The Neoverse-N1 option `-mcpu=neoverse-n1` is available in GCC-7 on Amazon Linux2.
+{{% notice Note %}}
+The Neoverse N1 option `-mcpu=neoverse-n1` is available in GCC-7 on Amazon Linux2.
+
+The `-mcpu=neoverse-n3` and `-mcpu=neoverse-v3` options are also available in GCC 14.3.0.
+{{% /notice %}}
 
 There are other options like `-march` (ISA version) and `-mtune` (specific processor implementation). These are discussed in the [GCC Arm options documentation](https://gcc.gnu.org/onlinedocs/gcc/ARM-Options.html). However, in general, only `-mcpu` should be used. `-mcpu` is basically a single option that combines `-march` and `-mtune` together. Last, keep in mind that if an application targets an older processor, it will likely be able to execute on a newer processor (less some optimizations for the newer processor). However, if the application targets a newer processor, it might not execute on an older processor. This is true for any processor architecture, not just Arm.
 
@@ -109,11 +115,11 @@ Using LSE can result in significant performance improvement for your application
 
 Refer to the Learning Path [Learn about Large System Extensions](/learning-paths/servers-and-cloud-computing/lse/) for more information. 
 
-### Porting code with SSE/AVX intrinsics to NEON
+### Porting code with SSE/AVX intrinsics to Neon
 
 You may have applications which include x86_64 intrinsics. These need special treatment when recompiling.
 
-Refer to the Learning Path [Porting Architecture Specific Intrinsics](/learning-paths/cross-platform/intrinsics/) for the available options to migrate x86_64 intrinsics to NEON.
+Refer to the Learning Path [Porting Architecture Specific Intrinsics](/learning-paths/cross-platform/intrinsics/) for the available options to migrate x86_64 intrinsics to Neon.
 
 ### Signed and unsigned char data types
 
@@ -133,5 +139,5 @@ Both a compiler and a Linux kernel that supports SVE is required.
 
 You will need GCC-11 or newer or LLVM-14 or newer and Linux kernel 4.15 or newer for SVE support.
 
-Refer to the Learning Path [From Arm NEON to SVE](/learning-paths/servers-and-cloud-computing/sve/sve_basics/) for more information and examples. 
+Refer to the Learning Path [From Arm Neon to SVE](/learning-paths/servers-and-cloud-computing/sve/sve_basics/) for more information and examples. 
 

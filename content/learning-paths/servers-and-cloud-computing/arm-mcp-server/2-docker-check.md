@@ -91,4 +91,4 @@ The AI assistant uses the `check_image` or `skopeo` tool to inspect the base ima
 
 In this section, you've used direct AI chat with the Arm MCP Server to check Docker base images for Arm compatibility. You've seen how a simple natural language prompt can quickly identify compatibility issues without manually inspecting image manifests.
 
-In the next section, you'll migrate x86 SIMD code to Arm using a fully agentic workflow with prompt files.
+In the next section, you'll set up the Arm Cloud Migration Agent in GitHub Copilot and use it to migrate x86 SIMD code to Arm.

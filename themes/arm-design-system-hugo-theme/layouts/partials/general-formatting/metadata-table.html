@@ -98,7 +98,7 @@ Called from:
 
 
  <!-- Markdown metadata table -->
- <div class="content-box">
+ <div class="content-box{{ if $is_learning_path }} learning-path-metadata{{ end }}">
     {{- $page_h2 := printf "About this %s" $table_name -}}
     {{- $p_title := .Title -}}
     {{- range $seo_pages -}}
@@ -145,6 +145,16 @@ Called from:
                             {{end}}
                         </td>
                     </tr>
+                    {{if and (not $is_learning_path) .Params.ecosystem_dashboard}}
+                    <tr>
+                        <td class="td-metadata-key nowrap">
+                            Ecosystem dashboard:
+                        </td>
+                        <td class="td-metadata-value">
+                            <a id="ecosystem-dashboard-link" href="{{.Params.ecosystem_dashboard}}" target="_blank">View {{ partial "general-formatting/external-link.html"}} </a>
+                        </td>
+                    </tr>
+                    {{end}}
                 </table>
             </div>
             <!-- RIGHT TABLE, mobile -->
@@ -189,6 +199,18 @@ Called from:
                             {{end}}
                         </td>
                     </tr>
+                    {{if and (not $is_learning_path) .Params.ecosystem_dashboard}}
+                    <tr>
+                        <td class="td-metadata-key width-max-content">
+                            Ecosystem dashboard:
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-metadata-value margin-l-24">
+                            <a id="ecosystem-dashboard-link" href="{{.Params.ecosystem_dashboard}}" target="_blank">View {{ partial "general-formatting/external-link.html"}} </a>
+                        </td>
+                    </tr>
+                    {{end}}
                 </table>
             </div>
         </div>
@@ -270,13 +292,13 @@ Called from:
                                         {{ .Params.subjects }}
                                     </ads-tag>
                                 {{end}}
-                                {{ if .Params.cloud_service_providers }}
-                                    <ads-tag    href='{{ "/" | relLangURL}}tag/{{.Params.cloud_service_providers | urlize}}' style="margin-bottom: 4px;">
+                                {{ range .Params.cloud_service_providers }}
+                                    <ads-tag    href='{{ "/" | relLangURL}}tag/{{. | urlize}}' style="margin-bottom: 4px;">
                                         <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
                                         <span class="fa-solid fa-tag"></span>
-                                        {{ .Params.cloud_service_providers }}
+                                        {{ . }}
                                     </ads-tag>
-                                {{end}}
+                                {{ end }}
                                 {{ range .Params.operatingsystems }}
                                     <ads-tag    href='{{ "/" | relLangURL}}tag/{{. | urlize}}' style="margin-bottom: 4px;">
                                         <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
@@ -399,13 +421,13 @@ Called from:
                                         {{ .Params.subjects }}
                                     </ads-tag>
                                 {{end}}
-                                {{ if .Params.cloud_service_providers }}
-                                    <ads-tag    href='{{ "/" | relLangURL}}tag/{{.Params.cloud_service_providers | urlize}}' style="margin-bottom: 4px;">
+                                {{ range .Params.cloud_service_providers }}
+                                    <ads-tag    href='{{ "/" | relLangURL}}tag/{{. | urlize}}' style="margin-bottom: 4px;">
                                         <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
                                         <span class="fa-solid fa-tag"></span>
-                                        {{ .Params.cloud_service_providers }}
+                                        {{ . }}
                                     </ads-tag>
-                                {{end}}
+                                {{ end }}
                                 {{ range .Params.operatingsystems }}
                                     <ads-tag    href='{{ "/" | relLangURL}}tag/{{. | urlize}}' style="margin-bottom: 4px;">
                                         <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">

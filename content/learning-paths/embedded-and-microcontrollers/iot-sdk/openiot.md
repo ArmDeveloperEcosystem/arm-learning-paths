@@ -1,6 +1,7 @@
 ---
 # User change
 title: Build and run Open-IoT-SDK examples
+description: Build Open-IoT-SDK examples and run them on Arm Virtual Hardware to validate the IoT software stack.
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -14,7 +15,7 @@ The [Open-IoT-SDK](https://github.com/ARM-software/open-iot-sdk) is designed to 
 
 ## Arm Virtual Hardware
 
-Setup your AVH instance, following the instructions in the [Arm Virtual Hardware install guide](/install-guides/avh#corstone).
+Setup your AVH instance, following the instructions in the [Arm Virtual Hardware install guide](/install-guides/avh/#corstone).
 
 ## Install the required software
 

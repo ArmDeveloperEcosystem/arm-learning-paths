@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Build and run Zephyr applications"
+description: Build and run Zephyr RTOS applications on the Corstone-300 FVP using Arm Virtual Hardware.
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -21,7 +22,7 @@ These instructions assume an Ubuntu Linux host machine.
 
 ## Corstone-300 FVP {#fvp}
 
-The Corstone-300 FVP is available for download from the [Arm Ecosystem FVP](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) page. Setup instructions are given in the [install guide](/install-guides/fm_fvp).
+The Corstone-300 FVP is available for download from the [Arm Ecosystem FVP](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) page. Setup instructions are given in the [install guide](/install-guides/fm_fvp/).
 
 Alternatively, you can access the FVP from [Arm Tools Artifactory](https://www.keil.arm.com/artifacts/#models/arm/avh-fvp). Setup instructions are given in the [AVH FVPs in Arm Tools Artifactory](https://arm-software.github.io/AVH/main/infrastructure/html/avh_fvp_artifactory.html).
 

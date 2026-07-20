@@ -1,6 +1,8 @@
 ---
 title: Port Applications to Arm64 using Arm64EC
 
+description: Learn how to port Qt-based Python desktop applications with C/C++ dependencies to Arm64 using Arm64EC on Windows on Arm.
+
 minutes_to_complete: 90
 
 who_is_this_for: This is an introductory topic for developers who want to learn how to port their applications to Arm64 using Arm64EC. 
@@ -14,8 +16,12 @@ prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
     - Any code editor. [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user) is suitable.
     - Visual Studio 2022 with Arm build tools. [Refer to this guide for the installation steps](https://developer.arm.com/documentation/102528/0100/Install-Visual-Studio).
-    
+
 author: Dawid Borycki
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -43,10 +49,10 @@ further_reading:
         link: https://devblogs.microsoft.com/windows-music-dev/load-x64-plug-ins-like-vsts-from-your-arm-code-using-arm64ec/
         type: blog    
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

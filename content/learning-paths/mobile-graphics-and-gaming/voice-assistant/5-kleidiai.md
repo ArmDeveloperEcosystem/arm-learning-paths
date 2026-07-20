@@ -27,9 +27,4 @@ To disable KleidiAI during build:
 * Add `-PkleidiAI=false` to your Gradle command:`./gradlew build -PkleidiAI=false`.
 * Or, add this to your top-level `gradle.properties` file: `kleidiAI=false`.  
 
-### Why use KleidiAI?
-
-KleidiAI simplifies development by abstracting away low-level optimization: developers can write high-level code while the KleidiAI library selects the most efficient implementation at runtime based on the target hardware. This is possible thanks to its deeply optimized micro-kernels tailored for Arm architectures.
-
-As newer versions of the architecture become available, KleidiAI becomes even more powerful: simply updating the library allows applications like the multimodal Voice Assistant to take advantage of the latest architectural improvements such as SME2, without requiring any code changes. This means better performance on newer devices with no additional effort from developers.
-
+Now that you can build the Voice Assistant with and without KleidiAI, you can test out the benchmarking functionality it provides.

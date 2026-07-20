@@ -1,6 +1,8 @@
 ---
 title: Add new debug targets to Arm Development Studio
 
+description: Learn how to create debug configurations for virtual platforms and development boards in Arm Development Studio, including setting up connections for Fast Models and DSTREAM debug probes.
+
 minutes_to_complete: 30   
 
 who_is_this_for: This is an introductory topic for embedded software developers new to Arm Development Studio.
@@ -13,6 +15,10 @@ prerequisites:
     - Some familiarity with embedded debug
 
 author: Ronan Synnott
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -43,11 +49,10 @@ further_reading:
         link: https://developer.arm.com/Tools%20and%20Software/DSTREAM-PT
         type: website
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

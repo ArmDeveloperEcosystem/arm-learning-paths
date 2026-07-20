@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Create and setup Keil MDK project"
+description: Create a Keil MDK project, install CMSIS packs, and configure the components needed for an RTX5 application.
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -11,7 +12,7 @@ This learning path will introduce the steps to create a basic RTX based RTOS app
 
 For more information on the latest update, see the [CMSIS v6 is here](https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/cmsis-v6-is-here) blog.
 
-You will use [Keil MDK](/install-guides/mdk) through this Learning Path. If you are using [Arm Development Studio](/install-guides/armds) refer to the appropriate comments.
+You'll use [Keil MDK](/install-guides/mdk/) through this Learning Path. If you're using [Arm Development Studio](/install-guides/armds/) refer to the appropriate comments.
 
 {{% notice  Note%}}
 If using `Arm Keil Studio for Visual Studio Code` please go to [Build an RTX5 RTOS application with Keil Studio (VS Code)](/learning-paths/embedded-and-microcontrollers/cmsis_rtx_vs/).
@@ -31,7 +32,7 @@ Add required `CMSIS-Packs` via the `CMSIS Pack Manager` perspective.
 
 ## Install appropriate device CMSIS-Pack
 
-This Learning Path is written for the supplied (Cortex-M4) Fixed Virtual Platform (FVP), however it could be run on any of the 10000+ devices supported by [CMSIS-Pack](https://www.open-cmsis-pack.org/).
+This Learning Path is written for the supplied (Cortex-M4) Fixed Virtual Platform (FVP), however it could be run on any of the 10000+ devices supported by [CMSIS-Pack](https://open-cmsis-pack.github.io/Open-CMSIS-Pack-Spec/main/html/index.html/).
 
 In `Pack Installer` browse for your device, and install any suggested `Device Specific` pack.
 
@@ -47,15 +48,15 @@ Then select `CMSIS C/C++ Project`, using `Arm Compiler for Embedded 6`.
 
 ### Select device
 
-You will then be prompted to `Select Device` for your project. A list of all devices with their CMSIS-Packs installed will be shown.
+You'll then be prompted to `Select Device` for your project. A list of all devices with their CMSIS-Packs installed will be shown.
 
 For this example, select `Arm` > `Arm Cortex-M4` > `ARMCM4`. Click `OK`.
 
 ## Manage Run-Time Environment
 
-You will first be presented with the `Manage Run-Time Environment` dialog, which allows you to specify the CMSIS software components that will be used in the project.
+You'll first be presented with the `Manage Run-Time Environment` dialog, which allows you to specify the CMSIS software components that will be used in the project.
 
-Under `CMSIS`, select `CORE`, as well as `RTOS2 (API)` > `Keil RTX5`, in `Source` form. You will also need to select `CMSIS` > `OS Tick (API)` > `SysTick`.
+Under `CMSIS`, select `CORE`, as well as `RTOS2 (API)` > `Keil RTX5`, in `Source` form. You'll also need to select `CMSIS` > `OS Tick (API)` > `SysTick`.
 
 Under `Device`, select `Startup` (`C Startup`).
 

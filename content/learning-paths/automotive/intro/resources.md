@@ -7,7 +7,6 @@ weight: 4
 
 There are a number of books written to discuss software development on Cortex-M. Examples include:
 
-* [The Definitive Guide to Arm Cortex-M0 and Cortex-M0+ Processors](https://www.oreilly.com/library/view/the-definitive-guide/9780128032787/)
 * [The Definitive Guide to Arm Cortex-M3 and Cortex-M4 Processors](https://www.oreilly.com/library/view/the-definitive-guide/9780124080829/)
 * [The Definitive Guide to Arm Cortex-M23 and Cortex-M33 Processors](https://www.oreilly.com/library/view/definitive-guide-to/9780128207369/)
 * [The Designer's Guide to the Cortex-M Processor Family](https://www.oreilly.com/library/view/the-designers-guide/9780081006344/)

@@ -62,7 +62,7 @@ Enter a name for the builder. For example, `cloud-builder1`.
 
 It will take a few minutes to create the new builder but it will appear on your dashboard with a green check mark next to `Enabled` as shown below:
 
-![Cloud Builder #center](_images/cloud-builder.png)
+![Screenshot of Docker Build Cloud dashboard showing the newly created cloud-builder1 with a green check mark next to Enabled status, indicating the builder is ready to use#center](_images/cloud-builder.png)
 
 ## Add the builder on your local machine
 

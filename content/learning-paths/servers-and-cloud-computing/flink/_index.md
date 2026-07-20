@@ -1,5 +1,6 @@
 ---
 title: Benchmark the performance of Flink on Arm servers
+description: Learn how to install and run Apache Flink on Arm servers and benchmark stream processing performance using the Nexmark benchmark suite.
 
 minutes_to_complete: 30
 
@@ -15,15 +16,21 @@ prerequisites:
 
 author: Ying Yu
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: Databases
-cloud_service_providers: AWS
+cloud_service_providers:
+  - AWS
+  - Microsoft Azure
+  - Google Cloud
+  - Oracle
 
 armips:
 - Neoverse
-
-
 
 operatingsystems:
 - Linux
@@ -33,8 +40,6 @@ tools_software_languages:
 - Java
 - Nexmark
 - Runbook
-
-
 
 further_reading:
     - resource:
@@ -46,10 +51,10 @@ further_reading:
         link: https://github.com/nexmark/nexmark#readme
         type: documentation
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

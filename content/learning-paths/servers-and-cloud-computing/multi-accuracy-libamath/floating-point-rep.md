@@ -23,7 +23,7 @@ Floating-point numbers are a finite, discrete approximation of real numbers. The
 A floating-point number is typically expressed as:
 
 ```output
-± d.dddd...d × B^e
+(−1)^s × d.dddd...d × B^e
 ```
 
 where:
@@ -31,16 +31,16 @@ where:
 * e is the exponent
 * d.dddd...d is the mantissa (or significand)
 * *p* is the number of bits used for precision
-* the +/- sign is stored separately
+* s is the sign bit
 
-The precision of a floating-point format refers to the number of binary digits used to represent the mantissa. This is denoted by *p*, and a system with *p* bits of precision can distinguish between \( 2^p \) different fractional values.
+The precision of a floating-point format refers to the number of binary digits used to represent the mantissa. This is denoted by *p*, and a system with *p* bits of precision can represent approximately 2^p distinct mantissa values.
 
 If the leading digit is non-zero, the number is said to be normalized (also called a *normal number*).
 
 {{% notice Example 1%}}
 Fixing `B = 2, p = 24`
 
-`0.1 = 1.10011001100110011001101 ×  2^4` is a normalized representation of 0.1
+`0.1 = 1.10011001100110011001101 ×  2^-4` is a normalized representation of 0.1
 
 `0.1 = 0.000110011001100110011001 × 2^0` is a non-normalized representation of 0.1
 
@@ -76,7 +76,7 @@ For any exponent, *n*, numbers are evenly spaced between 2ⁿ and 2ⁿ⁺¹. How
 
 ## Bitwise representation of floating-point numbers
 
-Since there are \( B^p \) possible mantissas and `emax-emin+1` possible exponents, then `log2(B^p) + log2(emax-emin+1) + 1` (sign) bits are needed to represent a given floating-point number in a system.
+Since there are \( B^p \) possible mantissas and `emax-emin+1` possible exponents, then `log2(B^p) + log2(emax-emin+1) + 1` digits are needed to represent a given floating-point number in a system.
 
 In Example 2, 3+2+1=6 bits are needed.
 
@@ -111,7 +111,7 @@ In this format:
 
 * The sign is represented using 1 bit
 * The exponent uses 8 bits 
-* The mantissa uses 23 bits
+* The mantissa uses 24 bits (including the implicit leading bit for normalized numbers)
 
 The value of a normalized floating-point number in IEEE-754 can be represented as:
 
@@ -119,7 +119,7 @@ The value of a normalized floating-point number in IEEE-754 can be represented a
 x = (−1)^S × (1.M) × 2^(E−127)
 ```
 
-The exponent bias of 127 allows storage of exponents from -126 to +127. The leading digit is implicit in normalized numbers, giving a total of 24 bits of precision. 
+The exponent bias of 127 allows storage of exponents from -126 to +127. The leading digit is implicit in normalized numbers, meaning the actual number of bits used to store the mantissa in this format is 23. 
 
 {{% notice Special cases in IEEE-754 single precision %}}
 Since the exponent field uses 8 bits, E ranges between 0 and 2^8-1=255. However not all these 256 values are used for normal numbers.

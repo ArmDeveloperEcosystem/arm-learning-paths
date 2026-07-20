@@ -1,6 +1,8 @@
 ---
 title: Introduction to TinyML on Arm using PyTorch and ExecuTorch
 
+description: Learn what differentiates TinyML from other AI domains, explore Arm-based edge devices for TinyML, and set up a development environment using ExecuTorch and Corstone-320 Fixed Virtual Platform.
+
 minutes_to_complete: 40
 
 who_is_this_for: This is an introductory topic for developers and data scientists new to Tiny Machine Learning (TinyML) who want to explore its potential using PyTorch and ExecuTorch.
@@ -15,8 +17,11 @@ prerequisites:
     - Basic knowledge of Machine Learning concepts
     - A Linux computer
 
-
 author: Dominica Abena O. Amanfo
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -52,12 +57,10 @@ further_reading:
         link: https://developer.arm.com/documentation/109267/0101
         type: documentation
 
-
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

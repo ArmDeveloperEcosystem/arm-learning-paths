@@ -1,7 +1,6 @@
 ---
 title: Deploy SqueezeNet 1.0 INT8 model with ONNX Runtime on Azure Cobalt 100
 
-   
 minutes_to_complete: 60   
 
 who_is_this_for: This Learning Path is for developers deploying ONNX-based applications on Arm-based machines.
@@ -15,12 +14,17 @@ prerequisites:
     - Basic understanding of Python and machine learning concepts
     - Familiarity with [ONNX Runtime](https://onnxruntime.ai/docs/) and Azure cloud services
 
-author: Pareena Verma    
+author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
 subjects: ML
-cloud_service_providers: Microsoft Azure
+cloud_service_providers:
+  - Microsoft Azure
 
 armips:
     - Neoverse
@@ -49,7 +53,6 @@ further_reading:
         title: onnxruntime_perf_test tool - ONNX Runtime performance benchmarking
         link: https://onnxruntime.ai/docs/performance/tune-performance/profiling-tools.html#in-code-performance-profiling
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

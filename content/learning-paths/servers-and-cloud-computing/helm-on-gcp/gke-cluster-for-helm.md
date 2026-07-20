@@ -154,15 +154,13 @@ gke-helm-arm64-cluster-default-pool-f4ab8a2d-5ldp   Ready    <none>   5h54m   v1
 
 All nodes should be in **Ready** state and the Kubernetes control plane should be accessible.
 
-### Taint the cluster nodes for arm64 support
+### Remove the taint on the cluster nodes for arm64 support
 
-Taint the nodes to ensure proper scheduling on arm64 VMs. For each node starting with **gke**, run the following taint command. 
+Remove the taint on the nodes to ensure proper scheduling on arm64 VMs. For each node starting with **gke**, run the following taint command. For example using the node IDs in the output above:
 
 {{% notice Note %}}
 Note the required "-" at the end... its needed!
 {{% /notice %}}
-
-For example using the node IDs in the output above: 
 
 ```console
 kubectl taint nodes gke-helm-arm64-cluster-default-pool-f4ab8a2d-5h6f kubernetes.io/arch=arm64:NoSchedule-
@@ -170,6 +168,13 @@ kubectl taint nodes gke-helm-arm64-cluster-default-pool-f4ab8a2d-5ldp kubernetes
 ```
 
 Replace the node names with your actual node names from the previous command output.
+
+The output should be similar to:
+
+```output
+node/gke-helm-arm64-cluster-default-pool-f4ab8a2d-5h6f untainted
+node/gke-helm-arm64-cluster-default-pool-f4ab8a2d-5ldp untainted
+```
 
 ### Create hyperdisk storage class for our cluster
 

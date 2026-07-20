@@ -1,5 +1,6 @@
 ---
 title: Analyze a frame with Frame Advisor
+description: Learn how to capture frame data from Android applications and analyze performance inefficiencies using Frame Advisor in Arm Performance Studio.
 
 minutes_to_complete: 10
 
@@ -18,6 +19,10 @@ prerequisites:
 
 author: Julie Gaskin
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
@@ -28,8 +33,6 @@ tools_software_languages:
     - Frame Advisor
 operatingsystems:
     - Android
-   
-
 
 further_reading:
     - resource:
@@ -38,14 +41,12 @@ further_reading:
         type: documentation
     - resource:
         title: Introducing Arm Frame Advisor 
-        link: https://community.arm.com/arm-community-blogs/b/graphics-gaming-and-vr-blog/posts/arm-mobile-studio-2023-5
+        link: https://developer.arm.com/community/arm-community-blogs/b/mobile-graphics-and-gaming-blog/posts/arm-mobile-studio-2023-5
         type: blog
     - resource:
         title: Arm Performance Studio for Mobile 
         link: https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio%20for%20Mobile
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
@@ -53,3 +54,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

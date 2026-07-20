@@ -1,6 +1,8 @@
 ---
 title: Detect faces with OpenCV on Android Devices
 
+description: Learn how to implement face detection on Android devices using OpenCV, camera frame retrieval, and Haar cascade classifiers.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for developers who are interested in creating Computer Vision applications with OpenCV on Android devices. 
@@ -16,6 +18,10 @@ prerequisites:
    - Familiarity with OpenCV, review [Create Computer Vision Applications with OpenCV on Android Devices](/learning-paths/mobile-graphics-and-gaming/android_opencv_camera/) before starting.
 
 author: Dawid Borycki
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -44,10 +50,10 @@ further_reading:
         link: https://opencv.org/blog/enhanced-opencv-for-android-support-arm-performance-gains/
         type: blog
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

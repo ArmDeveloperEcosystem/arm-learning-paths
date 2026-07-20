@@ -1,6 +1,7 @@
 ---
 # User change
 title: Switching Exception Levels
+description: Modify the bare-metal example to switch Armv8-A exception levels and observe how execution changes on the FVP.
 
 weight: 7 # 1 is first, 2 is second, etc.
 
@@ -39,7 +40,7 @@ el1_entry:
 
 ## Modify EL3 initialization
 
-You will also need to modify the `EL3` initialization from before:
+You'll also need to modify the `EL3` initialization from before:
 * Create an `EL3` stack (as `__main` will now be called in `EL1`)
 * Disable timer exceptions at `EL3`
 * Execute any privileged code (`gicInit`)

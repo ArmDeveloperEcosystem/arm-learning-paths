@@ -1,5 +1,6 @@
 ---
 title: Set up the development environment
+description: Set up an Arm Linux development machine with the tools required to build Llama 3 for ExecuTorch.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -30,7 +31,7 @@ Developing large, complex AI applications for running on edge hardware like the 
 
 This example uses Docker to run Raspberry Pi OS in a container, providing the same operating system on the development machine and the edge device. A container is also useful to try out workflows without hardware access. 
 
-Make sure Docker is installed on your Arm Linux development machine. Refer to the [Docker install guide](/install-guides/docker/docker-engine) for instructions.
+Make sure Docker is installed on your Arm Linux development machine. Refer to the [Docker install guide](/install-guides/docker/docker-engine/) for instructions.
 
 Raspberry Pi has Docker images available for download, but for this example, a [GitHub repository](https://github.com/jasonrandrews/rpi-os-docker-image) is provided with everything you need to get started. It uses an image of Raspberry Pi OS, which also comes with a number of useful tools such as Git, Python, and the Arm toolchain. 
 

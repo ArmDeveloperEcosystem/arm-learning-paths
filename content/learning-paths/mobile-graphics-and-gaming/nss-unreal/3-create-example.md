@@ -14,7 +14,7 @@ This repository's release package contains everything you need to set up NSS for
 Download the latest release `.zip` and extract it on your Windows machine. 
 
 {{% notice Unreal Engine 5.5 plugin %}}
-For this UE version, the steps will be slightly different. Refer to the repository documentation for more information.
+This version is deprecated. Refer to the repository documentation for more information.
 {{% /notice %}}
 
 
@@ -48,7 +48,7 @@ Open your project directory in Windows explorer, and create a new folder called 
 
 ## Enable the plugin
 
-The plugin is included in the release package you downloaded in the previous section. The package contains a separate folder for each supported Unreal Engine version. Make sure you use the folder that matches your engine version (for example, UE5.5 for Unreal Engine 5.5).
+The plugin is included in the release package you downloaded in the previous section. The package contains a separate folder for each supported Unreal Engine version. Make sure you use the folder that matches your engine version (for example, UE5.4 for Unreal Engine 5.4).
 
 1.	Copy the appropriate engine-version folder from the extracted .zip archive into your project's Plugins directory.
 2.	Reopen Unreal Engine. When prompted, confirm that you want to enable the plugin.

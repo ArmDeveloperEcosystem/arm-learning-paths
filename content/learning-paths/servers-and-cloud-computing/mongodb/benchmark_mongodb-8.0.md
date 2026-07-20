@@ -116,5 +116,5 @@ At the end of each test, statistics are printed to the console. Shown below is t
 ...
 ```
 
-[Continue to the next section to run YCSB on a 3 node cluster.](/learning-paths/servers-and-cloud-computing/mongodb/replica_set_testing)
+[Continue to the next section to run YCSB on a 3 node cluster.](/learning-paths/servers-and-cloud-computing/mongodb/replica_set_testing/)
 

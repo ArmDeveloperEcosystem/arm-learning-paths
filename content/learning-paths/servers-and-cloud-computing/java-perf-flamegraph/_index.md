@@ -4,6 +4,8 @@ minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for developers who want to analyze the performance of Java applications on Arm Neoverse-based servers using flame graphs.
 
+description: Profile Java applications on Arm Neoverse servers using flame graphs generated with async-profiler and Java agents to identify performance bottlenecks.
+
 learning_objectives: 
   - Set up a benchmarking environment using Tomcat and wrk2
   - Generate flame graphs using async-profiler
@@ -16,6 +18,10 @@ prerequisites:
 author: 
   - Ying Yu
   - Martin Ma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 # Tags
 skilllevels: Introductory
@@ -47,3 +53,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

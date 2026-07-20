@@ -1,5 +1,6 @@
 ---
 title: CMSIS-DSP Python package
+description: Install and explore the CMSIS-DSP Python package so you can prototype signal processing algorithms before porting to C.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

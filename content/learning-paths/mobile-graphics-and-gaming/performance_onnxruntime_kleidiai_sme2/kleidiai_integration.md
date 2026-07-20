@@ -10,7 +10,7 @@ layout: learningpathall
 ONNX Runtime automatically detects and uses KleidiAI when SME2 support is available:
 
 - Detection: MLAS checks the CPU capabilities for SME2 support at runtime.
-- Dispatch: when SME2 is detected, MLAS replaces its default kernels with KleidiAI micro-kernels. For example, a Gemm operation that normally uses NEON instructions dispatches to a KleidiAI SME2 micro-kernel instead.
+- Dispatch: when SME2 is detected, MLAS replaces its default kernels with KleidiAI micro-kernels. For example, a Gemm operation that normally uses Neon instructions dispatches to a KleidiAI SME2 micro-kernel instead.
 
 Currently, KleidiAI in MLAS provides `ArmKleidiAI::MlasConv`, `ArmKleidiAI::MlasGemmBatch`, and `ArmKleidiAI::MlasDynamicQGemmBatch` kernels.
 

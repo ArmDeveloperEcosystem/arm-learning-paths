@@ -1,6 +1,8 @@
 ---
 title: Learn how to run AI on Edge devices using Arduino Nano RP2040
 
+description: Learn how to collect and preprocess audio data using Edge Impulse, train an audio classification model, and deploy it to the Arduino Nano RP2040 to control LEDs based on voice commands.
+
 minutes_to_complete: 90
 
 who_is_this_for: This Learning Path is for beginners in Edge AI and TinyML, including developers, engineers, hobbyists, AI/ML enthusiasts, and researchers working with embedded AI and IoT.
@@ -18,6 +20,11 @@ prerequisites:
   - An [Arduino Nano RP2040 Connect board](https://store.arduino.cc/products/arduino-nano-rp2040-connect-with-headers).
 
 author: Bright Edudzi Gershon Kordorwu
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: ML
@@ -30,7 +37,6 @@ tools_software_languages:
     - Arduino
 operatingsystems:
     - Baremetal
-
 
 further_reading:
     - resource:
@@ -46,11 +52,10 @@ further_reading:
         link: https://docs.edgeimpulse.com/docs/readme/for-beginners
         type: doc
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -1,6 +1,8 @@
 ---
 title: Use Arm64EC with Windows 11 on Arm
 
+description: Learn how to build native Arm applications and migrate x86/x64 applications to Arm using Arm64EC on Windows on Arm devices.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for software developers who want to use Arm64EC with Windows on Arm devices. 
@@ -13,6 +15,10 @@ prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11.
 
 author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -31,10 +37,10 @@ further_reading:
         link: https://learn.microsoft.com/en-us/windows/arm/arm64ec-build
         type: documentation
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

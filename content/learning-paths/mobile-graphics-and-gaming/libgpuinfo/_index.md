@@ -1,19 +1,24 @@
 ---
 title: Query Arm GPU configuration information
+description: Learn how to build the libGPUInfo library using Android NDK and query configuration details of Arm Mali or Immortalis GPUs on Android devices.
 
-minutes_to_complete: 15  
+minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for Android developers who want to adjust application complexity to match device performance. 
 
 learning_objectives: 
     - Build the libGPUInfo library using the Android NDK
     - Run an example application to query the configuration details of an Arm Mali or Arm Immortalis GPU
-    
+
 prerequisites:
     - A development machine running Ubuntu or Debian Linux with `x86_64` architecture
     - An Android device with an Arm GPU
 
 author: Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ##### Tags
 
@@ -43,12 +48,10 @@ further_reading:
         link: https://gitlab.arm.com/arm-reference-solutions/arm-reference-solutions-docs/-/tree/master/docs/totalcompute
         type: documentation
 
-
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

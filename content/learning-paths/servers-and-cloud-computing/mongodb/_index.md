@@ -3,12 +3,20 @@ title: Analyze the performance of MongoDB on Arm servers
 
 author: Pareena Verma
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 minutes_to_complete: 30
 
+who_is_this_for: This is an introductory topic for software developers who want to learn how to deploy and measure MongoDB performance on Arm servers.
+
+description: Install MongoDB on Arm servers and benchmark database performance using Yahoo Cloud Serving Benchmark (YCSB) to compare against other architectures.
+
 learning_objectives:
-- Install and run MongoDB on an Arm server.
-- Test MongoDB performance using open-source tooling.
-- Measure and compare the performance of MongoDB on Arm versus other architectures with Yahoo Cloud Serving Benchmark (YCSB). 
+- Install and run MongoDB on an Arm server
+- Test MongoDB performance using open-source tooling
+- Measure and compare the performance of MongoDB on Arm versus other architectures with Yahoo Cloud Serving Benchmark (YCSB)
 
 prerequisites:
 - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider.
@@ -23,12 +31,16 @@ layout: learningpathall
 learning_path_main_page: 'yes'
 skilllevels: Introductory
 subjects: Databases
+cloud_service_providers:
+  - AWS
+  - Microsoft Azure
+  - Google Cloud
+  - Oracle
 test_maintenance: false
 tools_software_languages:
 - MongoDB
 - GCC
 - Runbook
-
 
 further_reading:
     - resource:
@@ -45,12 +57,9 @@ further_reading:
         type: documentation
     - resource:
         title: Compare performance of MongoDB on Arm vs Intel
-        link: https://community.arm.com/arm-community-blogs/b/operating-systems-blog/posts/mongodb-performance-on-aws-with-the-arm-graviton2
+        link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/mongodb-performance-on-aws-with-the-arm-graviton2
         type: blog
 
-
 weight: 1
-who_is_this_for: This is an introductory topic for software developers using MongoDB
-  as their database for mobile, IoT applications, content management, or real-time
-  analytics on Arm servers.
 ---
+

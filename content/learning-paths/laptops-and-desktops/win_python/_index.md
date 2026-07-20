@@ -1,6 +1,8 @@
 ---
 title: Build native Windows on Arm applications with Python
 
+description: Learn how to build Python applications on Windows on Arm and leverage native Arm64 performance for platform-dependent packages.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for developers who are interested in building Python applications on Arm.
@@ -15,6 +17,10 @@ prerequisites:
     - Visual Studio 2022 with Arm build tools. [Refer to this guide for the installation steps](https://developer.arm.com/documentation/102528/0100/Install-Visual-Studio)
 
 author: Dawid Borycki
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -37,10 +43,10 @@ further_reading:
         link: https://old.linaro.org/blog/windows-on-arm-now-supported-in-python-3-11-release/
         type: blog    
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

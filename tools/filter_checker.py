@@ -101,10 +101,32 @@ def updateFiltersInIndexMD(main_category):
 
 
     # re-write the _index.md file, including '---' in the front and back of it
+    #
+    # Hugo's YAML alias protection (parser/metadecoders/decoder.go) uses a
+    # size-based limit for non-scalar node counts:
+    #   < 2 KB  → max 100 non-scalar nodes
+    #   2-10 KB → max 5000
+    #   > 10 KB → max 10000
+    # Each "- ToolName: count" entry in a filter list creates one non-scalar
+    # (mapping) node. Categories with many Learning Paths can easily exceed
+    # 100 entries across all filter lists while the file stays under 2 KB,
+    # triggering: "too many YAML aliases for non-scalar nodes".
+    # To avoid this, we pad the YAML content to at least 2048 bytes using
+    # YAML comments, which raises the limit to 5000.
+    yaml_content = yaml.dump(metadata_dic, sort_keys=False)
+    front_matter = '---\n' + yaml_content + '---\n'
+
+    min_size = 2048
+    if len(front_matter.encode('utf-8')) < min_size:
+        padding_needed = min_size - len(front_matter.encode('utf-8'))
+        # YAML comments are counted in Hugo's size calculation but ignored by the parser
+        padding_line = "# auto-generated padding to avoid Hugo YAML alias limit\n"
+        num_lines = (padding_needed // len(padding_line)) + 1
+        padding = padding_line * num_lines
+        front_matter = '---\n' + yaml_content + padding + '---\n'
+
     with open(category_index_md_file, "w") as f:
-        f.write('---\n')
-        yaml.dump(metadata_dic, f, sort_keys=False) # dump, keeping order that we specified (sort_keys=False)
-        f.write('---\n')
+        f.write(front_matter)
 
     return True
 
@@ -298,19 +320,23 @@ def addCloudServiceProvidersToStatusDict():
     if 'cloud_service_providers' in learning_path_metadata: # since not all LPs have this filtering mechanism, need this check to avoid errors
         cloud_service_providers = learning_path_metadata['cloud_service_providers']
         if cloud_service_providers is not None:
-            if cloud_service_providers not in status_dic['cloud_service_providers'][dir_main_category]:
-                # create subject key in dic
-                status_dic['cloud_service_providers'][dir_main_category][cloud_service_providers] = {}
-                # check if in allow list
-                if cloud_service_providers in dic_allow_list["cloud_service_providers"]:
-                    status_dic['cloud_service_providers'][dir_main_category][cloud_service_providers]['allowed']          = True              
+            # Normalize to list to handle both single string and YAML list formats
+            if isinstance(cloud_service_providers, str):
+                cloud_service_providers = [cloud_service_providers]
+            for csp in cloud_service_providers:
+                if csp not in status_dic['cloud_service_providers'][dir_main_category]:
+                    # create subject key in dic
+                    status_dic['cloud_service_providers'][dir_main_category][csp] = {}
+                    # check if in allow list
+                    if csp in dic_allow_list["cloud_service_providers"]:
+                        status_dic['cloud_service_providers'][dir_main_category][csp]['allowed']          = True              
+                    else:
+                        status_dic['cloud_service_providers'][dir_main_category][csp]['allowed']          = False              
+                    status_dic['cloud_service_providers'][dir_main_category][csp]['count']                = 1                # make count one
+                    status_dic['cloud_service_providers'][dir_main_category][csp]['learning-path-titles'] = [learning_path_metadata['title']]   # create list with title
                 else:
-                    status_dic['cloud_service_providers'][dir_main_category][cloud_service_providers]['allowed']          = False              
-                status_dic['cloud_service_providers'][dir_main_category][cloud_service_providers]['count']                = 1                # make count one
-                status_dic['cloud_service_providers'][dir_main_category][cloud_service_providers]['learning-path-titles'] = [learning_path_metadata['title']]   # create list with title
-            else:
-                status_dic['cloud_service_providers'][dir_main_category][cloud_service_providers]['count']               += 1                # increase count by one
-                status_dic['cloud_service_providers'][dir_main_category][cloud_service_providers]['learning-path-titles'].append(learning_path_metadata['title'])   # add title to list
+                    status_dic['cloud_service_providers'][dir_main_category][csp]['count']               += 1                # increase count by one
+                    status_dic['cloud_service_providers'][dir_main_category][csp]['learning-path-titles'].append(learning_path_metadata['title'])   # add title to list
 
     return status_dic
 

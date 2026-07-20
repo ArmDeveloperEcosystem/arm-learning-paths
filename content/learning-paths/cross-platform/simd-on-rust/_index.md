@@ -1,17 +1,26 @@
 ---
-title: Learn how to write SIMD code on Arm using Rust
+title: Write SIMD code on Arm using Rust
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an advanced topic for software developers who want take advantage of SIMD code on Arm systems using Rust.
+description: Learn how to write SIMD code in Rust on Arm platforms using Neon intrinsics, portable SIMD abstractions, and optimize performance with architecture-specific instructions.
+
+who_is_this_for: This is an advanced topic for software developers who want to take advantage of SIMD code on Arm systems using Rust.
 
 learning_objectives: 
-    - Learn how to write SIMD code with Rust on Arm.
+    - Write SIMD code with Rust using std::arch and Neon intrinsics on Arm
+    - Use portable SIMD abstractions with std::simd for cross-platform code
+    - Apply feature detection and target attributes for architecture-specific optimizations
+    - Compare C and Rust SIMD implementations and disassembly output
 
 prerequisites:
-    - An Arm-based computer with recent versions of a C compiler (Clang or GCC) and a Rust compiler installed.
+    - An Arm-based computer with recent versions of a C compiler (Clang or GCC) and a Rust compiler installed
 
 author: Konstantinos Margaritis
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -33,7 +42,6 @@ shared_between:
     - servers-and-cloud-computing
     - mobile-graphics-and-gaming
 
-
 further_reading:
     - resource:
         title: Rust std::arch documentation
@@ -52,10 +60,10 @@ further_reading:
         link: https://gendignoux.com/blog/2023/01/05/rust-arm-simd-android.html#implicit-feature-detection-beware-of-target-feature
         type: blog
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

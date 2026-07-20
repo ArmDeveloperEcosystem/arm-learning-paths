@@ -1,6 +1,6 @@
 ---
 title: Deploy TypeScript on Google Cloud C4A virtual machines
-    
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for developers deploying and optimizing TypeScript workloads on Arm64 Linux environments, specifically using Google Cloud C4A virtual machines powered by Axion processors.
@@ -15,13 +15,17 @@ prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
   - Basic familiarity with [TypeScript](https://www.typescriptlang.org/) and Node.js runtime environment
 
-
 author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ##### Tags
 skilllevels: Introductory
 subjects: Web
-cloud_service_providers: Google Cloud
+cloud_service_providers:
+  - Google Cloud
 
 armips:
   - Neoverse
@@ -57,3 +61,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

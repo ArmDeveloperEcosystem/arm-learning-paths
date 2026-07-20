@@ -61,5 +61,5 @@ Nice work! You have successfully provisioned an Arm-based Azure Cobalt 100 virtu
 ![Azure portal VM creation - Azure Cobalt 100 Arm64 virtual machine (D4ps_v6) alt-text#center](images/final-vm.png "VM deployment confirmation in Azure portal")
 
 {{% notice Note %}}
-For further information or alternative setup options, see “Getting Started with Microsoft Azure” in [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure).
+For further information or alternative setup options, see “Getting Started with Microsoft Azure” in [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure/).
 {{% /notice %}}

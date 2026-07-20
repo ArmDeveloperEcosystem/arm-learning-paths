@@ -14,10 +14,15 @@ prerequisites:
 
 author: Frédéric -lefred- Descamps
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Advanced
 subjects: Containers and Virtualization
-cloud_service_providers: Oracle
+cloud_service_providers:
+  - Oracle
 
 armips:
     - Neoverse
@@ -27,7 +32,6 @@ operatingsystems:
 
 tools_software_languages:
     - Terraform
-
 
 further_reading:
     - resource:
@@ -39,11 +43,10 @@ further_reading:
         link: https://blogs.oracle.com/cloud-infrastructure/post/arm-based-cloud-computing-is-the-next-big-thing-introducing-arm-on-oracle-cloud-infrastructure
         type: blog
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

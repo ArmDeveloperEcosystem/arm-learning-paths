@@ -1,5 +1,6 @@
 ---
 title: Debug the software stack
+description: Use Arm Development Studio to debug Trusted Firmware-A and the Linux kernel while the software stack runs on an FVP.
 weight: 6
 
 ### FIXED, DO NOT MODIFY

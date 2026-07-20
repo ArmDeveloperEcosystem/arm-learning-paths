@@ -1,6 +1,8 @@
 ---
 title: Run a local LLM chatbot on a Raspberry Pi 5 
 
+description: Learn how to install the Python version of llama.cpp on a Raspberry Pi 5, download an LLM from Hugging Face, assess memory and performance, and run the model using Python bindings.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for anyone interested in running a local Large Language Model on a Raspberry Pi 5.
@@ -15,6 +17,10 @@ prerequisites:
     - A Raspberry Pi 5 running Raspberry Pi OS.
 
 author: Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -44,11 +50,10 @@ further_reading:
         link: https://github.com/abetlen/llama-cpp-python
         type: website
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

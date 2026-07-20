@@ -5,6 +5,7 @@ minutes_to_complete: 10
 
 who_is_this_for: This is an introductory topic for developers who want to use memcached as their in-memory key-value store.
 
+description: Install memcached on Arm cloud servers and benchmark in-memory key-value store performance using open-source tools.
 
 learning_objectives:
 - Install and run memcached on your Arm-based cloud server
@@ -15,6 +16,10 @@ prerequisites:
 
 author: Pareena Verma
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 test_images:
 - ubuntu:latest
 test_link: https://github.com/armflorentlebeau/arm-learning-paths/actions/runs/4312122327
@@ -23,6 +28,9 @@ test_maintenance: true
 ### Tags
 skilllevels: Introductory
 subjects: Web
+cloud_service_providers:
+  - AWS
+  - Oracle
 armips:
 - Neoverse
 operatingsystems:
@@ -38,9 +46,8 @@ further_reading:
         type: documentation
     - resource:
         title: Benchmarking memcached performance on AWS Graviton2 servers
-        link: https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/memcached-benchmarking-aws-graviton2-50-p-p-gains
+        link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/accelerating-deep-packet-inspection-with-neon-on-arm-neoverse
         type: blog
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
@@ -48,3 +55,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

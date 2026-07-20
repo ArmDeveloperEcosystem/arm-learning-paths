@@ -11,6 +11,7 @@ minutes_to_complete: 20
 author: Jonathan Davies
 
 official_docs: https://github.com/llvm/llvm-project/tree/main/bolt
+description: Install BOLT on Linux AArch64 to optimize binary code layout using performance profiles and improve the runtime performance of large applications on Arm.
 
 test_images:
 - ubuntu:latest
@@ -25,18 +26,20 @@ weight: 1
 
 BOLT is an open-source post-link binary optimization tool developed to speed up large applications. It does this by optimizing the application's code layout based on performance profile samples collected during execution.
 
-## What do I need before installing BOLT?
-
-This article provides quick instructions to download and install BOLT. The instructions are for Debian-based Linux distributions, but can be adapted for other Linux distributions.
+In this guide, you'll learn how to download and install BOLT. The instructions are for Debian-based Linux distributions, but can be adapted for other Linux distributions.
 
 {{% notice Note %}}
 BOLT is provided as a built-in, ready-to-use component of the [Arm Toolchain for Linux](https://developer.arm.com/documentation/110477) suite. For more
-information refer to [this guide](https://developer.arm.com/documentation/110477/211/How-to-use-BOLT-with-our-toolchain).
+information, see [How to use BOLT with our toolchain](https://developer.arm.com/documentation/110477/211/How-to-use-BOLT-with-our-toolchain).
 {{% /notice %}}
+
+## Before you begin
+
+Follow these steps:
 
 1. Install Git
 
-[Install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) using the documentation for your operating system.
+[Install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) for your operating system.
 
 Many Linux distributions include Git so you may not need to install it.
 
@@ -52,15 +55,15 @@ Check it is installed:
 cmake --version
 ```
 
-The version is printed:
+The output is similar to:
 
 ```output
-cmake version 3.22.1
+cmake version 3.28.3
 
 CMake suite maintained and supported by Kitware (kitware.com/cmake).
 ```
 
-For more information refer to the [CMake install guide.](/install-guides/cmake)
+For more information, see [CMake install guide.](/install-guides/cmake/)
 
 3. Install Ninja
 
@@ -74,10 +77,10 @@ Check it is installed:
 ninja --version
 ```
 
-The version is printed:
+The output is similar to:
 
 ```output
-1.10.0
+1.11.1
 ```
 
 4. Install Clang
@@ -92,10 +95,10 @@ Check it is installed:
 clang --version
 ```
 
-The version is printed:
+The output is similar to:
 
 ```output
-Ubuntu clang version 14.0.0-1ubuntu1.1
+Ubuntu clang version 18.1.3 (1ubuntu1)
 Target: aarch64-unknown-linux-gnu
 Thread model: posix
 InstalledDir: /usr/bin
@@ -107,11 +110,13 @@ InstalledDir: /usr/bin
 sudo apt-get install xz-utils -y
 ```
 
-## How do I install BOLT?
+## Install BOLT
 
-You can install BOLT in 2 different ways, by building the source code or by downloading a binary release from GitHub.
+You can install BOLT by building the source code or by downloading a binary release from GitHub.
 
-### How do I build and install BOLT from source code?
+### Build and install BOLT from source code
+
+To build and install BOLT from source code, follow these steps:
 
 1. Clone the repository
 
@@ -119,7 +124,7 @@ You can install BOLT in 2 different ways, by building the source code or by down
 git clone https://github.com/llvm/llvm-project.git
 ```
 
-2. Build BOLT and run it.
+2. Build BOLT and run it
 
 ```bash
 cd llvm-project
@@ -131,8 +136,9 @@ cmake -G Ninja ../llvm -DLLVM_TARGETS_TO_BUILD="X86;AArch64" -DCMAKE_BUILD_TYPE=
 ```console
 ninja bolt
 ```
-
-Build time depends on your machine configuration, and it may take several minutes to complete.
+{{% notice Note %}}
+The build time depends on your machine configuration and may take several minutes to complete.
+{{% /notice %}}
 
 3. Add the path to BOLT in your `.bashrc` file
 
@@ -143,30 +149,38 @@ source ~/.bashrc
 
 You are now ready to [verify BOLT is installed](#verify).
 
-### How do I install BOLT using a binary release?
+### Install BOLT using a binary release
+
+To install BOLT using a binary release, follow these steps:
+
+{{% notice Note %}}
+The following commands use BOLT version 22.1.3. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [LLVM Project releases](https://github.com/llvm/llvm-project/releases).
+{{% /notice %}} 
 
 1. Download a binary release
 
-For Arm Linux use the file with `aarch64` in the name:
+For Arm Linux, use the file with `ARM64` in the name:
 
 ```bash
-wget https://github.com/llvm/llvm-project/releases/download/llvmorg-19.1.7/clang+llvm-19.1.7-aarch64-linux-gnu.tar.xz
+wget https://github.com/llvm/llvm-project/releases/download/llvmorg-22.1.3/LLVM-22.1.3-Linux-ARM64.tar.xz
 ```
 
 2. Extract the downloaded file
 
 ```bash
-tar -xvf clang+llvm-19.1.7-aarch64-linux-gnu.tar.xz
+tar -xvf LLVM-22.1.3-Linux-ARM64.tar.xz
 ```
 
 3. Add the path to BOLT in your `.bashrc` file
 
 ```bash
-echo 'export PATH="$PATH:$HOME/clang+llvm-19.1.7-aarch64-linux-gnu/bin"' >> ~/.bashrc
+echo 'export PATH="$PATH:$HOME/LLVM-22.1.3-Linux-ARM64/bin"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-### How do I verify BOLT is installed? {#verify}
+### Verify BOLT is installed {#verify}
+
+To verify BOLT is installed, follow these steps:
 
 1. Confirm BOLT applications `perf2bolt` and `llvm-bolt` are installed
 
@@ -176,7 +190,7 @@ Check the `perf2bolt` command:
 perf2bolt
 ```
 
-The expected output is:
+The output is similar to:
 
 ```output
 perf2bolt: Not enough positional command line arguments specified!
@@ -189,7 +203,7 @@ Check the `llvm-bolt` command:
 llvm-bolt
 ```
 
-The expected output is:
+The output is similar to: 
 
 ```output
 llvm-bolt: Not enough positional command line arguments specified!
@@ -206,8 +220,9 @@ The output is similar to:
 
 ```output
 LLVM (http://llvm.org/):
-  LLVM version 19.1.7
-  Optimized build with assertions.
+  LLVM version 22.1.3
+  Optimized build.
+BOLT revision e9846648fd6183ee6d8cbdb4502213fcf902a211
 
   Registered Targets:
     aarch64    - AArch64 (little endian)
@@ -215,10 +230,14 @@ LLVM (http://llvm.org/):
     aarch64_be - AArch64 (big endian)
     arm64      - ARM64 (little endian)
     arm64_32   - ARM64 (little endian ILP32)
+    riscv32    - 32-bit RISC-V
+    riscv32be  - 32-bit big endian RISC-V
+    riscv64    - 64-bit RISC-V
+    riscv64be  - 64-bit big endian RISC-V
     x86        - 32-bit X86: Pentium-Pro and above
     x86-64     - 64-bit X86: EM64T and AMD64
 ```
 
-You will see additional Registered Targets if you downloaded a binary release.
+You'll see additional Registered Targets if you downloaded a binary release.
 
-You are ready to use BOLT on your Linux machine.
+You are now ready to use BOLT on your Linux machine.

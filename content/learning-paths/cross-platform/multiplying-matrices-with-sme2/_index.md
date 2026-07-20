@@ -1,5 +1,6 @@
 ---
 title: Accelerate Matrix Multiplication Performance with SME2
+description: Learn how to implement and optimize matrix multiplication using Arm's Scalable Matrix Extension 2 (SME2) with assembly and intrinsics, including benchmarking and validation on Arm hardware.
 
 minutes_to_complete: 60
 
@@ -25,16 +26,20 @@ prerequisites:
 
 author: Arnaud de Grandmaison
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
 armips:
-    - Neoverse
-    - Cortex-A
+    - Arm C1
 tools_software_languages:
     - C
     - Clang
     - LLVM
+    - SME2
 
 operatingsystems:
     - Linux
@@ -95,10 +100,10 @@ further_reading:
         link: https://github.com/ARM-software/abi-aa
         type: website
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

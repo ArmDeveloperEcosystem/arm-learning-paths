@@ -1,6 +1,8 @@
 ---
 title: Build and run a native Windows on Arm Qt application 
 
+description: Learn how to build and run Qt-based desktop applications on Windows on Arm and investigate native Arm64 performance improvements.
+
 minutes_to_complete: 20
 
 who_is_this_for: This is an introductory topic for software developers who want to use the native performance of the Qt framework for building desktop applications on Windows on Arm (WoA).
@@ -14,6 +16,10 @@ prerequisites:
     - '[Qt framework](https://www.qt.io/) or [Qt for Open Source Development](https://www.qt.io/download-open-source)'
 
 author: Dawid Borycki
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -37,10 +43,10 @@ further_reading:
         link: https://doc.qt.io/qt-6/qtexamplesandtutorials.html
         type: documentation    
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

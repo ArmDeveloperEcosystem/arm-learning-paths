@@ -1,5 +1,6 @@
 ---
 title: Analyze cache behavior with Perf C2C on Arm
+description: Learn how to identify and fix false sharing issues using Perf C2C cache line analysis and Arm Statistical Profiling Extension on Arm-based cloud systems.
 
 minutes_to_complete: 15
 
@@ -17,9 +18,18 @@ prerequisites:
 
 author: Kieran Hejmadi
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
+cloud_service_providers:
+  - AWS
+  - Microsoft Azure
+  - Google Cloud
+  - Oracle
 armips:
     - Neoverse
 tools_software_languages:
@@ -27,7 +37,6 @@ tools_software_languages:
     - Runbook
 operatingsystems:
     - Linux
-
 
 further_reading:
     - resource:
@@ -45,3 +54,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

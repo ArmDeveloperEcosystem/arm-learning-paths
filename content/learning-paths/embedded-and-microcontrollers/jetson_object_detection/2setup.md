@@ -1,5 +1,6 @@
 ---
 title: Set up your Jetson Orin Nano
+description: Prepare the Jetson Orin Nano hardware, camera, and software environment for image classification and object detection.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

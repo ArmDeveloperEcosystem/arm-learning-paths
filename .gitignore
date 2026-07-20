@@ -8,7 +8,6 @@ package-lock.json
 .vscode
 .env
 startup.sh
-data/
 
 # macOS files
 *.DS_Store
@@ -24,3 +23,6 @@ z_local_saved/
 
 # CTags symbol index
 tags
+
+# Generated spell check config
+.spellcheck-non-draft.yml

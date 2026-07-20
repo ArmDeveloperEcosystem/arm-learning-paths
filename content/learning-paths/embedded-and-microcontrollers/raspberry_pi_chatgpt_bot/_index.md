@@ -1,6 +1,8 @@
 ---
 title: Create a ChatGPT voice bot on a Raspberry Pi
 
+description: Learn how to build a voice-controlled bot on a Raspberry Pi that listens for a wake word, converts speech to text using Google Speech Recognition, sends requests to ChatGPT's API, and plays audio responses.
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory project for developers interested in integrating a Chatbot (namely ChatGPT) into Raspberry Pi projects.
@@ -20,6 +22,10 @@ prerequisites:
 
 author: Gabriel Peterson
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 
@@ -36,7 +42,6 @@ tools_software_languages:
     - Porcupine
     - Python
 
-
 further_reading:
     - resource:
         title: OpenAI Documentation
@@ -47,11 +52,10 @@ further_reading:
         link: https://picovoice.ai/docs/porcupine/
         type: documentation
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -98,7 +98,7 @@ Generate a 32-byte image encryption key:
 ``` bash
 head -c 32 /dev/urandom | openssl enc >image.key
 ```
-Learn more about how the attestation result is used to evaluate the trustworthiness of a CCA realm and how attestation policy gates secrets release in the ["Run an end-to-end Attestation with Arm CCA and Trustee"](/learning-paths/servers-and-cloud-computing/cca-trustee) Learning Path.
+Learn more about how the attestation result is used to evaluate the trustworthiness of a CCA realm and how attestation policy gates secrets release in the ["Run an end-to-end Attestation with Arm CCA and Trustee"](/learning-paths/servers-and-cloud-computing/cca-trustee/) Learning Path.
 
 Publish the encryption key as a KBS secret resource. This resource is only released when the requester presents an attestation token with affirming status.
 ``` bash
@@ -149,10 +149,10 @@ With the Trustee services running in one terminal, open a second terminal for th
 Pull the pre-built FVP container image and run it on the same Docker network:
 
 ```bash
-docker pull armswdev/cca-learning-path:cca-simulation-with-kata-v3
+docker pull armlimited/cca-learning-path:cca-simulation-with-kata-v4
 ```
 ```bash
-docker run --rm -it --network cca-trustee armswdev/cca-learning-path:cca-simulation-with-kata-v3
+docker run --rm -it --network cca-trustee armlimited/cca-learning-path:cca-simulation-with-kata-v4
 ```
 
 Inside your running container, launch the `run-cca-fvp.sh` script to run the Arm CCA pre-built binaries on the FVP:

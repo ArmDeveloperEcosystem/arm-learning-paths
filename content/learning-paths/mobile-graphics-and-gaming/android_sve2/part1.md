@@ -24,7 +24,7 @@ You will also need a Armv8 powered smartphone running Android. We tested the app
 You can find the [complete source code on GitHub](https://github.com/dawidborycki/Arm.SVE2).
 
 ## Create a project and enable SVE2 support
-The process of creating and configuring this project is similar to that used for NEON. Follow these steps:
+The process of creating and configuring this project is similar to that used for Neon. Follow these steps:
 
 1. Open Android Studio on your development machine and then click the **+ New Project** icon:
 

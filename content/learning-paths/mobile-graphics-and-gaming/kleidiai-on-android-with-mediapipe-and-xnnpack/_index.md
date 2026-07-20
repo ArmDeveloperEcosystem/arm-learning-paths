@@ -1,5 +1,6 @@
 ---
-title: LLM inference on Android with KleidiAI, MediaPipe, and XNNPACK
+title: Run LLM inference on Android with KleidiAI, MediaPipe, and XNNPACK
+description: Learn how to run LLM inference on Android devices using MediaPipe with KleidiAI-enhanced Arm i8mm features to benchmark the Gemma 2B model.
 
 minutes_to_complete: 60
 
@@ -19,6 +20,10 @@ author:
     - Joe Stech
     - Adnan AlSinan
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Advanced
 subjects: ML
@@ -36,7 +41,6 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
-
 further_reading:
     - resource:
         title: MediaPipe Solutions Guide 
@@ -51,11 +55,10 @@ further_reading:
         link: https://blog.tensorflow.org/2024/04/faster-dynamically-quantized-inference-with-xnnpack.html
         type: blog
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -31,7 +31,7 @@ Add three secrets using the `New repository secret` button:
 - `DOCKER_PAT` with your Personal Access Token 
 - `DOCKER_ORG` with your Docker Organization (this can be your Docker ID if you are not in an organization)
 
-![GitHub Actions Secrets #center](_images/secrets.png)
+![Screenshot of GitHub repository Settings page showing the Secrets and variables section under Actions, with three repository secrets listed: DOCKER_USER, DOCKER_PAT, and DOCKER_ORG#center](_images/secrets.png)
 
 ## Add files to the repository
 
@@ -113,7 +113,7 @@ From the Docker Desktop dashboard, click `Builds` on the left-hand side and then
 
 You can click on the info symbol next to `Build timing` for explanations of the data presented. Here is the data for this example:
 
-![Build stats  #center](_images/build-stats.png)
+![Screenshot of Docker Desktop Builds interface showing detailed build statistics including build timing breakdown with metrics for image pulling, file transfers, cache access, and parallel execution steps#center](_images/build-stats.png)
 
 ## Automate the build
 

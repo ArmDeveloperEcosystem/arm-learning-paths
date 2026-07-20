@@ -6,7 +6,6 @@ minutes_to_complete: 15
 who_is_this_for: This is an introductory topic for software developers new to the
   Arm RAN Acceleration Library (ArmRAL).
 
-
 learning_objectives:
 - Build and install the Arm RAN Acceleration Library
 - Test the capabilities of your platform
@@ -16,6 +15,10 @@ prerequisites:
   [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
 
 author: Ronan Synnott
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 test_images:
 - ubuntu:latest
@@ -50,9 +53,8 @@ further_reading:
         type: documentation
     - resource:
         title: The next chapter for Arm RAN Acceleration Library Open-sourcing the code base & accelerating adoption
-        link: https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/arm-ral-is-now-open-source
+        link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/arm-ral-is-now-open-source
         type: blog
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
@@ -60,3 +62,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

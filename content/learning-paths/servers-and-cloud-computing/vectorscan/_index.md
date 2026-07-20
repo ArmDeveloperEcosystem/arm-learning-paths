@@ -5,7 +5,6 @@ minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for software developers using Hyperscan who want to migrate to Arm.
 
-
 learning_objectives:
     - Install and run Vectorscan on an Arm-based instance
     - Install and run Snort 3 on your instance
@@ -16,9 +15,18 @@ prerequisites:
 
 author: Pareena Verma
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: Libraries
+cloud_service_providers:
+  - AWS
+  - Microsoft Azure
+  - Google Cloud
+  - Oracle
 armips:
     - Neoverse
 tools_software_languages:
@@ -38,10 +46,8 @@ further_reading:
         type: documentation
     - resource:
         title: Accelerate Deep Packet Inspection with Neon on Arm
-        link: https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/accelerating-deep-packet-inspection-with-neon-on-arm-neoverse
+        link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/accelerating-deep-packet-inspection-with-neon-on-arm-neoverse
         type: blog
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

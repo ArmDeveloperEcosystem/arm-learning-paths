@@ -3,6 +3,7 @@ title: Deploy Java applications on Azure Cobalt 100 processors
 
 minutes_to_complete: 30   
 
+description: Deploy Java on Azure Cobalt 100 Arm virtual machines and benchmark application performance with JMH microbenchmarks.
 who_is_this_for: This is an introductory topic about Java deployment and benchmarking on Microsoft Azure Cobalt 100 Arm-based virtual machines. It is designed for developers migrating Java applications from x86_64 to Arm architecture.
 
 learning_objectives: 
@@ -13,13 +14,17 @@ learning_objectives:
 prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
 
-
 author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
-cloud_service_providers: Microsoft Azure
+cloud_service_providers:
+  - Microsoft Azure
 
 armips:
     - Neoverse
@@ -49,10 +54,10 @@ further_reading:
       link: https://openjdk.org/projects/code-tools/jmh/
       type: documentation
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

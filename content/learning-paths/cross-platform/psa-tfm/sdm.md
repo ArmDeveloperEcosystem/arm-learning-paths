@@ -35,7 +35,7 @@ This adds a new debug configuration, `MPS3_Corstone-1000_ADAC`.
 
 Click `Rebuild Database`, then `Apply and Close`.
 
-## Create Debug Connection
+## Create debug connection
 
 Using the `MPS3_Corstone-1000_ADAC` configuration, create a [debug connection](https://developer.arm.com/documentation/101469/latest/Debugging-code/Configuring-a-connection-to-a-bare-metal-hardware-target) to the `Cortex-A35` processor on the MPS3 development board.
 

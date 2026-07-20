@@ -91,7 +91,7 @@ Run the program on both systems:
 
 For easy comparison, the image below shows the x86 output (left) and Arm output (right). The  highlighted lines show the difference in output: 
 
-![differences](./differences.webp)
+![Side-by-side terminal output comparison showing x86 results on the left and Arm results on the right, with highlighted lines indicating differences in undefined floating-point conversion behaviors such as out-of-range signed-to-unsigned conversions#center](./differences.webp "x86 vs Arm floating-point conversion output comparison")
 
 As you can see, there are several cases where different behavior is observed in these undefined scenarios. For example, when trying to convert a signed number to an unsigned number or dealing with out-of-bounds values. 
 

@@ -170,7 +170,7 @@ will identify the host machine as `aarch64`.
 
 ### Run hello world
 
-Install the `gcc` compiler. If you are using `Ubuntu`, use the following commands. If not, refer to the [GNU compiler install guide](/install-guides/gcc):
+Install the `gcc` compiler. If you are using `Ubuntu`, use the following commands. If not, refer to the [GNU compiler install guide](/install-guides/gcc/):
 
 ```console
 sudo apt-get update
@@ -217,4 +217,4 @@ Open `Control Panel` > `System` and verify that `Device` > `System Type` identif
 
 Cloud infrastructure deployment is typically done via Infrastructure as code (IaC) automation tools. There are Cloud Service Provider specific tools like [Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview) and the open source tool [Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview).
 
-There are also Cloud Service Provider agnostic tools like [Terraform](https://www.terraform.io/). There is a [deploying Arm instances on Azure using Terraform learning path](/learning-paths/servers-and-cloud-computing/azure-terraform) that should be reviewed next.
+There are also Cloud Service Provider agnostic tools like [Terraform](https://www.terraform.io/). There is a [deploying Arm instances on Azure using Terraform learning path](/learning-paths/servers-and-cloud-computing/azure-terraform/) that should be reviewed next.

@@ -46,6 +46,6 @@ Your virtual machine is now ready and running. To connect, use SSH with your pri
 
 {{% notice Note %}}
 
-To learn more about Arm-based virtual machine in Azure, refer to *Getting Started with Microsoft Azure* in [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure).
+To learn more about Arm-based virtual machine in Azure, refer to *Getting Started with Microsoft Azure* in [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure/).
 
 {{% /notice %}}

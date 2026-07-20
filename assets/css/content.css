@@ -16,6 +16,10 @@
 
 
 /* Box around content (learning paths and tools) */
+html[theme="dark"] #main {
+    background-color: var(--ads-ui-ink-90);
+}
+
 div.content-box {
     padding-left: 16px;
     padding-right: 16px;
@@ -28,7 +32,7 @@ div.content-box {
     border-radius: 5px;
 
     border-color: rgba(163, 168, 174,0.25); /* #A3A8AE at 25% transparency */
-    background-color: rgba(31,32,35,0.75);  /* var(--arm-color-base) at 75% transparency */
+    background-color: var(--ads-ui-ink-100);
 }
 html[theme="light"] div.content-box {
     background-color: white;
@@ -153,7 +157,7 @@ img.content-uploaded-image.centered {
     /* have to style the span like a paragraph, required for nesting caption in default markdown configruation */
     display: block; /* or block, depending on the desired layout */
     font-style: italic;
-    font-weight: 500;
+    font-weight: 400;
     margin-top: 0px;
     font-size: 1rem;
 }
@@ -196,7 +200,7 @@ div.answer label {
     --ads-horizontal-tabs-tab-color-active: var(--arm-orange);
     --ads-horizontal-tabs-underline-color: var(--arm-orange);
 
-    --ads-horizontal-tabs-tab-color-hover: var(--arm-green);
+    --ads-horizontal-tabs-tab-color-hover: var(--lp-hover-text);
     --ads-horizontal-tabs-tab-content-background-color: var(--arm-color-footing);
 }
 

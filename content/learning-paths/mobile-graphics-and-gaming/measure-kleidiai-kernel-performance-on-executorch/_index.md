@@ -1,5 +1,6 @@
 ---
 title: Benchmark a KleidiAI micro-kernel in ExecuTorch
+description: Learn how to benchmark KleidiAI micro-kernels in ExecuTorch using SME/SME2 instructions on Arm64 platforms with ETDump profiling and analysis.
 
 minutes_to_complete: 30
 
@@ -17,6 +18,10 @@ prerequisites:
 
 author: Qixiang Xu
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Advanced
 subjects: ML
@@ -32,14 +37,11 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
-
 further_reading:
     - resource:
         title: Executorch User Guide 
         link: https://docs.pytorch.org/executorch/stable/intro-section.html
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
@@ -47,3 +49,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

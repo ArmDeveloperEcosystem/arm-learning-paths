@@ -1,37 +1,39 @@
 ---
-title: "Create a New Project/Repo in GitLab"
-weight: 10
+title: Create a GitLab project
+weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Create your GitLab project for Arm CI/CD
 
-## Where Should you Start?
+This section covers how to create a new GitLab project to use with Arm64 runners.
 
-Start by logging into your GitLab account or create a new one in the [Gitlab](https://gitlab.com/) main page.
 
-You will need to a new project/repo that will contain all your project files including your **`CI/CD`** pipeline configuration file. 
+Before you begin, log in to your [GitLab account](https://gitlab.com/) or create a new one.
 
-You can also choose to use any previously created projects in your Gitlab account. Simply open your previously created project, If that is the case then skip the rest of the steps in the current page and move to the next steps in this tutorial.
-
-## Create a New Project in Gitlab
-
-1. From the Home page, Click on the **`Projects`** icon from the menu on the left hand side panel as the image below.  
-
-2. Click on the **`New Project`** button on the top right hand side as the image below.
-![Gitlab-Projects #center](_images/gitlab-projects.png)
-
-3. You will get a new screen like the image below with multiple options. You can choose any of the 2 options highlighted in red from the image below.
+You need a GitLab project to store your application code and CI/CD configuration. You can either create a new project or use an existing one.
 
 {{% notice Note %}}
-If you chose option 2 then you will need to choose the **`GitLab CI/CD components`** option from the list of templates.
-{{%/notice%}}
+If you're using an existing project, skip to the next section.
+{{% /notice %}}
 
-![New-Project #center](_images/new-project.png)
+## Create a new project
 
-4. Regardles of which option you choose, you will get a screen like the image below where you will need to fill-in the fields highlighted in red. The first field is the **`Project Name`** which you can name it **`CI-CD Runner`**. In the second field you need to choose any option from the **`Project Url`** list then click on the  **`Create Project`** button at the end of the page.
-![Project-Info #center](_images/project-info.png) 
+Navigate to **Projects** in the left sidebar and select **New Project**:
 
-##### **If you did everything correctly then you should get a screen like the one in the image below.**
-![Project-Done #center](_images/project-done.png)
+![GitLab left sidebar showing Projects menu with New Project option highlighted#center](_images/gitlab-projects.png "GitLab Projects menu in left sidebar")
 
+Choose **Create blank project** or **Create from template** (select **GitLab CI/CD components** if using a template):
+
+![GitLab new project creation screen showing options for blank project and templates#center](_images/new-project.png "GitLab new project creation screen")
+
+Provide a project name (for example, `arm-runner-demo`) and select your preferred project URL. Select **Create Project**:
+
+![GitLab project information entry screen with fields for project name and URL#center](_images/project-info.png "GitLab project information entry screen")
+
+Your new project is ready:
+
+![GitLab project creation success screen showing project dashboard#center](_images/project-done.png "GitLab project creation success screen")
+
+With your project created, you can now add application files and configure the CI/CD pipeline to use Arm64 runners.

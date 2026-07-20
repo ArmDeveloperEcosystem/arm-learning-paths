@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## How Do I Prompt Copilot to Generate a Test Program?
+## How do I prompt Copilot to generate a test program?
 
 You can now move on to create a test program using the prompt below. 
 

@@ -1,5 +1,6 @@
 ---
-title: Optimizing graphics using Frame Advisor's render graphs
+title: Optimize graphics performance using Frame Advisor render graphs
+description: Learn how to use Frame Advisor's Render Graph view to identify and resolve graphics performance issues in Android applications.
 
 minutes_to_complete: 30
 
@@ -15,6 +16,10 @@ prerequisites:
     - Some basic familiarity with Frame Advisor. Review the [Frame Advisor](/learning-paths/mobile-graphics-and-gaming/ams/fa/) section in [Get started with Arm Performance Studio for mobile](/learning-paths/mobile-graphics-and-gaming/ams/).
 
 author: Mark Thurman
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 further_reading:
     - resource:
@@ -53,10 +58,10 @@ operatingsystems:
     - macOS
     - Android
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

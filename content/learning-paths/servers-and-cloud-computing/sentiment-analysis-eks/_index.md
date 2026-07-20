@@ -20,10 +20,15 @@ author:
     - Nobel Chowdary Mandepudi
     - Na Li
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Advanced
 subjects: Containers and Virtualization
-cloud_service_providers: AWS
+cloud_service_providers:
+  - AWS
 armips:
     - Neoverse
 tools_software_languages:
@@ -32,7 +37,6 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
-
 further_reading:
     - resource:
         title: EKS documentation
@@ -40,11 +44,8 @@ further_reading:
         type: documentation
     - resource:
         title: How to Enable Real-Time Sentiment Analysis on Arm Neoverse-Based Kubernetes Clusters
-        link: https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/-arm-neoverse-based-kubernetes-clusters
+        link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/-arm-neoverse-based-kubernetes-clusters
         type: documentation
-
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
@@ -52,3 +53,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -1,5 +1,6 @@
 ---
 title: Benchmark Go performance with Sweet and Benchstat
+description: Learn how to provision Arm64 and x86_64 VM instances on Google Cloud, then install and use Sweet and Benchstat to measure and compare Go application performance.
 
 minutes_to_complete: 60
 
@@ -16,12 +17,17 @@ prerequisites:
 
 author: Geremy Cohen
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
+cloud_service_providers:
+  - Google Cloud
 armips:
     - Neoverse
-cloud_service_providers: Google Cloud
 tools_software_languages:
     - Go
 operatingsystems:
@@ -43,3 +49,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

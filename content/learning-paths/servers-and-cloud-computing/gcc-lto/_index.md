@@ -1,24 +1,25 @@
 ---
-title: LTO Optimization With GCC
+title: Optimize performance using Link-Time Optimization with GCC
+description: Learn how to apply link-time optimization with the GCC toolchain to improve application performance by optimizing across compilation units.
 
-draft: true
-cascade:
-    draft: true
-    
-minutes_to_complete: 10
+minutes_to_complete: 15
 
-who_is_this_for: This is an introductory topic intended for developers who want to learn about improving application performance
-  using link-time optimization (LTO) with the GCC toolchain.
+who_is_this_for: This is an introductory topic for developers who want to improve application performance using link-time optimization (LTO) with the GCC toolchain.
 
 learning_objectives:
-    - Understand the key concepts behind link-time optimization (LTO)
-    - Learn how to enable and use LTO with the GCC compiler
-    - Develop intuition about the types of performance improvements LTO can provide
+    - Understand how link-time optimization (LTO) works and when to apply it
+    - Enable and configure LTO with GCC compiler flags
+    - Evaluate the performance and code size trade-offs of LTO
 
 prerequisites:
-    - A recent version of the GCC toolchain
+    - An Arm Linux system (cloud instance, on-premises hardware, or a virtual machine)
+    - A recent version of the [GCC toolchain](/install-guides/gcc/)
 
 author: Victor Do Nascimento
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -40,6 +41,10 @@ further_reading:
         title: Gentoo Wiki LTO
         link: https://wiki.gentoo.org/wiki/LTO
         type: website
+    - resource:
+        title: SPEC CPU 2017 Benchmark Suite
+        link: https://www.spec.org/cpu2017/
+        type: website
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
@@ -47,3 +52,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

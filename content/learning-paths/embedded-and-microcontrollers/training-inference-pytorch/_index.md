@@ -1,6 +1,8 @@
 ---
 title: "Edge AI on Arm: PyTorch and ExecuTorch rock-paper-scissors"
 
+description: Learn how to train a CNN image classification model using PyTorch, convert it to ExecuTorch format, and run it as an interactive mini-game on Arm-based edge devices.
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for machine learning developers who want to deploy TinyML models on Arm-based edge devices using PyTorch and ExecuTorch.
@@ -18,6 +20,10 @@ prerequisites:
   - An x86 Linux host machine or VM running Ubuntu 22.04 or later
 
 author: Dominica Abena O. Amanfo
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -52,3 +58,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

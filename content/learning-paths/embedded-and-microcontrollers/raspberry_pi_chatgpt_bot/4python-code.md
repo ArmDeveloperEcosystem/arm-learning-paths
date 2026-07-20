@@ -1,5 +1,6 @@
 ---
 title: Create the Python application
+description: Create the Python application that detects a wake word, sends speech input to ChatGPT, and plays audio output.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -210,6 +211,6 @@ Your name is Computer and your personality is a mix of Bender from Futurama, HK-
 
 * In `main.py` there is an optional line "recognizer.adjust_for_ambient_noise(source)". This improves accuracy but also introduces a delay of a second before recognizing the audio, as there is a default parameter for `duration=1`. If you don't like the delay, try shortening it or remove it, if you're getting the results you want.
 * In `main.py` the wake keyword is set to "computer". In the Porcupine dashboard on [Picovoice.AI](https://picovoice.ai) you are able to create custom keywords.
-* In `chat_gpt.py` the model selected is gpt-4-turbo-preview model. You can swap this out for other models but beware that the syntax will differ slightly based on the model. Learn more by reviewing the [OpenAI models overview.](https://platform.openai.com/docs/models/overview)
+* In `chat_gpt.py` the model selected is gpt-4-turbo-preview model. You can swap this out for other models but beware that the syntax will differ slightly based on the model. Learn more by reviewing the [OpenAI models overview.](https://platform.openai.com/docs/models/)
 * Also in `chat_gpt.py` the Nova voice is used for the text to speech. You can swap this voice with a number of different voices. The list can be found in the  [OpenAI text-to-speech voices documentation.](https://platform.openai.com/docs/guides/text-to-speech)
 

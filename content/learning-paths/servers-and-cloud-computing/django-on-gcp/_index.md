@@ -1,35 +1,48 @@
 ---
-title: Deploy Django on Google Cloud C4A (Arm-based Axion VMs)
-    
-minutes_to_complete: 30
+title: Deploy Django on Arm-based Google Cloud C4A 
 
-who_is_this_for: This Learning Path is for software developers deploying and optimizing Django-based web applications on Arm64 Linux environments, specifically using Google Cloud C4A virtual machines powered by Axion processors.
+minutes_to_complete: 60
+description: Learn how to deploy a production-grade Django REST API on Google Kubernetes Engine with Arm64 Axion node pools integrated with Google Cloud managed data services.
+who_is_this_for: This is an introductory topic for DevOps engineers and software developers who want to deploy, operate, and benchmark a production-grade Django REST API on Google Kubernetes Engine (GKE) running on Arm64 Axion processors, integrated with managed Google Cloud data services
 
 learning_objectives:
-  - Provision an Arm-based SUSE Linux Enterprise Server (SLES) virtual machine on Google Cloud (C4A with Axion processors)
-  - Install Django on a SUSE Arm64 (C4A) instance
-  - Verify Django functionality by running the development server and accessing the default welcome page on the Arm64 VM  
-  - Measure Django application performance by benchmarking request handling throughput and latency using the official ApacheBench (ab) tool with Gunicorn on Arm64 (aarch64)
+  - Provision Arm-based Axion compute on Google Cloud using virtual machines and GKE node pools
+  - Package a Django REST API into an Arm-native Docker container
+  - Push container images to Google Artifact Registry
+  - Deploy Django on GKE using Kubernetes manifests (Deployment, Service, ConfigMap, Secrets)
+  - Integrate Django with Cloud SQL (PostgreSQL) over private IP
+  - Integrate Django with Memorystore (Redis) for caching and sessions
+  - Expose Django using a Kubernetes LoadBalancer
+  - Validate application connectivity to PostgreSQL and Redis
+  - Measure throughput and p95 latency using ApacheBench against Gunicorn on Arm
 
 prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled  
   - Basic familiarity with [Django](https://www.djangoproject.com/)
+  - Basic understanding of containers and Kubernetes concepts
 
 author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ##### Tags
 skilllevels: Introductory
 subjects: Web
-cloud_service_providers: Google Cloud
+cloud_service_providers:
+  - Google Cloud
 
 armips:
   - Neoverse
 
 tools_software_languages:
   - Django
-  - Python
-  - Gunicorn
-  - Apache Bench
+  - Docker
+  - Kubernetes
+  - Google Artifact Registry
+  - Cloud SQL (PostgreSQL)
+  - Memorystore (Redis)
 
 operatingsystems:
   - Linux
@@ -47,13 +60,23 @@ further_reading:
       title: Django documentation
       link: https://docs.djangoproject.com/
       type: documentation
+  - resource:
+      title: Cloud SQL for PostgreSQL
+      link: https://cloud.google.com/sql/docs/postgres
+      type: documentation
 
   - resource:
-      title: Apache-bench documentation
+      title: Memorystore for Redis
+      link: https://cloud.google.com/memorystore/docs/redis
+      type: documentation
+
+  - resource:
+      title: Apache Bench documentation
       link: https://httpd.apache.org/docs/2.4/programs/ab.html 
       type: documentation
 
 weight: 1
 layout: "learningpathall"
-learning_path_main_page: "yes"
+learning_path_main_page: yes
 ---
+

@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Linux Kernel Compile"
+description: Compile the Linux kernel for Raspberry Pi 4 and compare build behavior with an Arm cloud instance.
 
 weight: 5 # 1 is first, 2 is second, etc.
 

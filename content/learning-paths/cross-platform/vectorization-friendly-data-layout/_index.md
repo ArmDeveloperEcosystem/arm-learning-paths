@@ -3,6 +3,8 @@ title: Optimize SIMD code with vectorization-friendly data layout
 
 minutes_to_complete: 45
 
+description: Learn how to optimize SIMD performance on Arm by restructuring data layouts from Array-of-Structures to Structure-of-Arrays, with practical examples using Neon and SVE intrinsics.
+
 who_is_this_for: This is an advanced topic for C/C++ developers who are interested in improving the performance of SIMD code.
 
 learning_objectives: 
@@ -12,6 +14,10 @@ prerequisites:
     - An Arm computer running Linux and a recent version of Clang or the GNU compiler (gcc) installed.
 
 author: Konstantinos Margaritis
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -32,7 +38,6 @@ shared_between:
     - laptops-and-desktops
     - mobile-graphics-and-gaming
 
-
 further_reading:
     - resource:
         title: Array of Structures (AoS), Structure of Arrays (SoA)
@@ -47,11 +52,10 @@ further_reading:
         link: https://arm-software.github.io/acle/neon_intrinsics/advsimd.html 
         type: documentation
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

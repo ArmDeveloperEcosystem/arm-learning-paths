@@ -44,9 +44,7 @@ jobs:
   #         extended: true
   #
   #     - name: Build
-  #       run: |
-  #         hugo --minify
-  #         bin/pagefind --site "public"
+  #       run: hugo --minify
   #
   #     - name: Check HTML links
   #       continue-on-error: true

@@ -16,6 +16,7 @@ test_images:
 - ubuntu:latest
 test_maintenance: true
 title: Google Cloud Platform (GCP) CLI
+description: Install the Google Cloud CLI on Ubuntu for Arm and verify the setup so you can manage Google Cloud resources with gcloud.
 tool_install: true
 weight: 1
 ---

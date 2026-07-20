@@ -1,5 +1,6 @@
 ---
 title: 'Deploy an application to Azure Kubernetes Service'
+description: Learn how to create an Azure Kubernetes Service cluster with Arm64 virtual machines and deploy a containerized application to AKS.
 
 minutes_to_complete: 45
 
@@ -12,17 +13,22 @@ learning_objectives:
 prerequisites:
     - 'Azure subscription. Use this link to sign up for a free account: https://azure.microsoft.com/en-us/free/.'
     - 'Complete the [first](/learning-paths/servers-and-cloud-computing/from-iot-to-the-cloud-part1) and [second](/learning-paths/servers-and-cloud-computing/from-iot-to-the-cloud-part2) learning paths of this series.'
-  
+
 author: Dawid Borycki
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
 subjects: Containers and Virtualization
-cloud_service_providers: Microsoft Azure
-    
+cloud_service_providers:
+  - Microsoft Azure
+
 armips:
     - Neoverse
-    
+
 tools_software_languages:
     - ASP.NET Core    
     - Docker
@@ -45,11 +51,10 @@ further_reading:
         link: https://kubernetes.io/docs/reference/kubectl/cheatsheet/
         type: Documentation
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

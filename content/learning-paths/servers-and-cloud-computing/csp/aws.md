@@ -153,7 +153,7 @@ will identify the host machine as `aarch64`.
 
 ### Run hello world
 
-Install the `gcc` compiler. If you are using `Ubuntu`, use the following commands. If not, refer to the [GNU compiler install guide](/install-guides/gcc):
+Install the `gcc` compiler. If you are using `Ubuntu`, use the following commands. If not, refer to the [GNU compiler install guide](/install-guides/gcc/):
 
 ```console
 sudo apt-get update
@@ -186,4 +186,4 @@ hello world
 
 Cloud infrastructure deployment is typically done via Infrastructure as code (IaC) automation tools. There are Cloud Service Provider specific tools like [AWS Cloud Formation](https://aws.amazon.com/cloudformation/). There are also Cloud Service Provider agnostic tools like [Terraform](https://www.terraform.io/).
 
-There is a [Deploying Arm instances on AWS using Terraform](/learning-paths/servers-and-cloud-computing/aws-terraform) learning path that should be reviewed next.
+There is a [Deploying Arm instances on AWS using Terraform](/learning-paths/servers-and-cloud-computing/aws-terraform/) learning path that should be reviewed next.

@@ -22,11 +22,11 @@ Axion is Google's first Arm-based server processor, built using the Armv9 Neover
 
 Create a repository in your GitLab account by clicking the "+" sign on top-left corner. Click on `New project/repository` and select a blank project, provide a name and initiate your project/repository.
 
-![repository #center](_images/repository.png)
+![Screenshot of GitLab new project creation interface showing the blank project option, project name field, and project initialization settings needed to create a repository for CI/CD pipeline configuration#center](_images/repository.png "GitLab new repository creation interface")
 
 After you create the repository, navigate to `Settings->CI/CD` in the left-hand pane. Expand the `Runners` section and under `Project Runners`, select `New Project Runner`.
 
-![arm64-runner #center](_images/create-gitlab-runner.webp)
+![Screenshot of GitLab runner creation page showing the Tags field where arm64 is entered to specify job filtering, the Runner description field with google-axion-arm64-runner, and the Create Runner button to register a new Arm-based self-hosted runner#center](_images/create-gitlab-runner.webp "GitLab runner configuration with arm64 tag")
 
 Use `Tags` to specify the jobs that can be executed on the runner. In the `Tags` field, enter `arm64`. In `Runner description` enter `google-axion-arm64-runner` and click the `Create Runner` button
 
@@ -69,7 +69,7 @@ Runner registered successfully. Feel free to start it, but if it's running alrea
 
 You should see the newly registered runner in the Runners section of the GitLab console as shown below.
 
-![registered-runner #center](_images/registered-runner.webp)
+![Screenshot of GitLab Runners page showing successfully registered arm64 and amd64 runners with green status indicators, runner tags, and runner descriptions, confirming that both Google Axion-based and x86-based self-hosted runners are active and ready to execute CI/CD pipeline jobs#center](_images/registered-runner.webp "GitLab console showing registered arm64 and amd64 runners")
 
 To create an `amd64` GitLab runner, follow the same steps as above, except for the `Download binaries` section. Change the download url to `https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64`
 

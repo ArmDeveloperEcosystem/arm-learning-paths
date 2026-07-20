@@ -8,11 +8,13 @@ minutes_to_complete: 10
 multi_install: false
 multitool_install_part: false
 official_docs: https://docs.ansible.com/ansible/latest/index.html
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=ansible
 test_maintenance: true
 test_images:
 - ubuntu:latest
 test_link: null
 title: Ansible
+description: Install Ansible command-line tools on Ubuntu for Arm or macOS so you can automate configuration and software deployment from Arm-based systems.
 tool_install: true
 weight: 1
 ---

@@ -15,7 +15,7 @@ It supports the development of both Desktop and UWP (Universal Windows Platform)
 
 WinUI 3 is an open-source project, offering backwards compatibility with existing UWP and Windows Forms applications and allowing developers to gradually migrate and modernize their applications. Additionally, WinUI 3 is extensible, supporting custom controls and third-party libraries.
 
-In this learning path you will implement a Win UI 3 application, which will perform square matrix multiplication. The idea is to reproduce the same functionality used in [Windows Forms learning path](/learning-paths/laptops-and-desktops/win_forms). You will also be able to measure performance improvements on Arm64 architecture.
+In this learning path you will implement a Win UI 3 application, which will perform square matrix multiplication. The idea is to reproduce the same functionality used in [Windows Forms learning path](/learning-paths/laptops-and-desktops/win_forms/). You will also be able to measure performance improvements on Arm64 architecture.
 
 You can find the [complete code on GitHub](https://github.com/dawidborycki/Arm64.WinUIApp.git).
 
@@ -290,7 +290,7 @@ In this section, you will implement the application's logic. First, create two h
 1. **MatrixHelper**: this class implements matrix multiplication following the mathematical formula detailed in [Wikipedia](https://en.wikipedia.org/wiki/Matrix_multiplication)
 2. **PerformanceHelper**: this class provides functionality to measure code execution time
 
-They will serve the same purpose as in the [Windows Forms learning path](/learning-paths/laptops-and-desktops/win_forms).
+They will serve the same purpose as in the [Windows Forms learning path](/learning-paths/laptops-and-desktops/win_forms/).
 
 Next, you will implement event handlers for the two buttons and additional code to programmatically control the window's appearance.
 

@@ -3,6 +3,8 @@ title: Introduction to SIMD.info
 
 minutes_to_complete: 30
 
+description: Learn how to use SIMD.info to port SIMD intrinsics across Arm architectures, including navigation, search, and comparison features for finding equivalent instructions.
+
 who_is_this_for: This Learning Path is for software developers who are interested in porting SIMD code across Arm platforms.
 
 learning_objectives: 
@@ -15,6 +17,10 @@ prerequisites:
 author: 
     - Georgios Mermigkis
     - Konstantinos Margaritis
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -43,11 +49,10 @@ further_reading:
         link: https://simd.info
         type: website
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

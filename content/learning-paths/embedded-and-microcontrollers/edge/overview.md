@@ -1,5 +1,6 @@
 ---
 title: Overview
+description: Review the Edge AI workflow for collecting audio data, training a model, and deploying it to an Arm microcontroller board.
 weight: 2
 
 # FIXED, DO NOT MODIFY

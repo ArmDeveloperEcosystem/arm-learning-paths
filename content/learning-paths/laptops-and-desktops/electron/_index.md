@@ -1,6 +1,8 @@
 ---
 title: Develop cross-platform desktop applications with Electron on Windows on Arm
 
+description: Learn how to develop and build cross-platform desktop applications using the Electron Framework on Windows on Arm devices.
+
 minutes_to_complete: 30
 
 who_is_this_for: This learning path is for developers who want to learn how to develop cross-platform desktop applications using the Electron Framework on Windows on Arm (WoA).
@@ -15,6 +17,10 @@ prerequisites:
     - Any code editor; we recommend using [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user).
 
 author: Dawid Borycki
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -42,10 +48,10 @@ further_reading:
         link: https://www.electronjs.org/docs/latest/tutorial/windows-arm
         type: documentation    
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

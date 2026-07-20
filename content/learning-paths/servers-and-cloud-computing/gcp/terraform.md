@@ -8,24 +8,24 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-# Deploy an Arm based VM using Terraform
+## Deploy an Arm based VM using Terraform
 
-## Generate an SSH key pair
+### Generate an SSH key pair
 
-Generate an SSH key pair (public key, private key) using `ssh-keygen` to use for Arm VMs access. To generate the key pair, follow this [guide](/install-guides/ssh#ssh-keys).
+Generate an SSH key pair (public key, private key) using `ssh-keygen` to use for Arm VMs access. To generate the key pair, follow this [guide](/install-guides/ssh/#ssh-keys).
 
 {{% notice Note %}}
 If you already have an SSH key pair present in the `~/.ssh` directory, you can skip this step.
 {{% /notice %}}
 
 
-## Acquire GCP Access Credentials
+### Acquire GCP Access Credentials
 
 The installation of Terraform on your Desktop/Laptop needs to communicate with GCP. Thus, Terraform needs to be authenticated.
 
-To obtain GCP user credentials, follow this [guide](/install-guides/gcloud#acquire-user-credentials).
+To obtain GCP user credentials, follow this [guide](/install-guides/gcloud/#acquire-user-credentials).
 
-## Terraform infrastructure
+### Terraform infrastructure
 Add resources required to create a VM in `main.tf`.
 
 Add below code in `main.tf` file:
@@ -64,9 +64,9 @@ resource "google_compute_instance" "vm_instance" {
 Replace `project_ID` with your value which can be found in the [Dashboard](https://console.cloud.google.com/home?_ga=2.56408877.721166205.1675053595-562732326.1671688536&_gac=1.125526520.1675155465.CjwKCAiAleOeBhBdEiwAfgmXfwdH3kCFBFeYzoKSuP1DzwJq7nY083_qzg7oyP2gwxMvaE0PaHVgFhoCmXoQAvD_BwE) of Google Cloud console.
 {{% /notice %}}
 
-## Terraform commands
+### Terraform commands
 
-### Initialize Terraform
+#### Initialize Terraform
 Run `terraform init` to initialize the Terraform deployment. This command downloads all the modules required to manage your resources.
 
 ```
@@ -100,7 +100,7 @@ rerun this command to reinitialize your working directory. If you forget, other
 commands will detect it and remind you to do so if necessary.
 ```
 
-### Create a Terraform execution plan
+#### Create a Terraform execution plan
 
 Run `terraform plan` to create an execution plan.
 ```
@@ -109,7 +109,7 @@ Run `terraform plan` to create an execution plan.
 A long output of resources to be created will be printed.
 
 
-### Apply a Terraform execution plan
+#### Apply a Terraform execution plan
 Run `terraform apply` to apply the execution plan to your cloud infrastructure. Below command creates all required infrastructure.
 
 ```
@@ -132,7 +132,7 @@ In the Google Cloud console, go to the [VM instances page](https://console.cloud
 
 ![terraform4 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/40816837/320b4c6f-0d2b-44f3-9517-dc427d82a018)
 
-## SSH into the launched instance
+### SSH into the launched instance
 
 Run following command to connect to VM through SSH:
 

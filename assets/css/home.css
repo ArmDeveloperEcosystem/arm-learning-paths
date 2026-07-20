@@ -1,6 +1,38 @@
 
 
 
+/* CLS fix: reserve space for web components before hydration */
+ads-search:not(:defined) {
+    display: block;
+    min-height: 45px;
+}
+ads-cta-button:not(:defined) {
+    display: inline-block;
+    min-height: 40px;
+    min-width: 200px;
+}
+ads-breadcrumbs:not(:defined) {
+    display: block;
+    min-height: 32px;
+}
+
+/* The homepage uses the ADS v5 Arm Ink background hierarchy. */
+html[theme='dark'] body {
+    background-color: var(--ads-ui-ink-100);
+    background-image: none;
+}
+
+/* CLS fix: lock the breadcrumb masthead height so hydration doesn't shift content below */
+#only-breadcrumb-masthead {
+    height: 40px;
+    overflow: hidden;
+}
+
+/* CLS fix: lock the description+button area height to prevent shift when ads-cta-button hydrates */
+.homepage-top-desc {
+    min-height: 110px;
+}
+
 /*********************************************************************            
 
         Main Topic Cards
@@ -14,7 +46,10 @@
 
 .main-topic-card {
     padding: 16px;
-    background-color: var(--arm-color-base);
+    min-height: 152px;
+    height: 152px;
+    align-items: center;
+    background-color: var(--ads-ui-ink-80);
     border: 1px solid transparent;
     border-color: #000000;
     transition: 
@@ -22,8 +57,8 @@
         border-color 0.3s ease-in-out;
 }
 .main-topic-card:hover {
-    background-color: var(--arm-color-base);
-    border-color: var(--arm-green);
+    background-color: var(--ads-ui-ink-80);
+    border-color: #848192;
     cursor: pointer;
     transform: translateY(-3px); /* move up 3px */
 
@@ -34,6 +69,7 @@
 
 .maintopic-content {
     text-align: left;
+    min-width: 0;
 }
 
 .maintopic-image {
@@ -42,17 +78,47 @@
     height: 50px;
 }
 
+.main-topic-card > .c-col-3 {
+    flex: 0 0 72px;
+    max-width: 72px;
+    min-width: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-topic-card img[src*="main-topic-icons"] {
+    width: 64px;
+    height: 50px;
+    object-fit: contain;
+    display: block;
+    /* Figma specifies neutral white icons instead of the legacy purple gradients. */
+    filter: brightness(0) invert(1);
+}
+
+/* The two legacy SVGs fill their view boxes more fully than the new 64px icon set. */
+.main-topic-card img[src$="automotive.svg"],
+.main-topic-card img[src$="laptops-and-desktops.svg"] {
+    transform: scale(0.82);
+    transform-origin: center;
+}
+
 /* Title styling */
 /**************************************/
 .main-topic-title {
-    color: var(--arm-light-blue);
+    color: #E6E6E9;
     font-weight: 700;
     font-size: 20px;
+    line-height: 1.2;
+}
+
+.main-topic-card p {
+    line-height: 1.45;
 }
 
 .main-topic-card:hover  .main-topic-title {
     transition: color 0.3s ease-in-out;
-    color: var(--arm-green);
+    color: var(--lp-hover-text);
 }
 
 
@@ -147,7 +213,7 @@ table.contributor-table th {
     color: black;
 }
 table.contributor-table tbody { 
-    background-color: var(--arm-color-base); 
+    background-color: var(--ads-ui-ink-90);
 }
 
 

@@ -1,6 +1,8 @@
 ---
 title: Prepare Docker image for Arm embedded development
 
+description: Learn how to create a Dockerfile, build a Docker image with Arm Compiler for Embedded and Fixed Virtual Platforms, and test the containerized Arm development environment.
+
 minutes_to_complete: 30   
 
 who_is_this_for: This is an introductory topic for embedded software developers new to Docker.
@@ -13,6 +15,10 @@ learning_objectives:
 prerequisites:
 
 author: Ronan Synnott
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -30,7 +36,6 @@ tools_software_languages:
     - Arm Compiler for Embedded
     - Arm Fast Models
 
-
 further_reading:
     - resource:
         title: Docker documentation
@@ -41,10 +46,10 @@ further_reading:
         link: /learning-paths/cross-platform/docker/
         type: website
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

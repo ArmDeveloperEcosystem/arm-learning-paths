@@ -36,7 +36,7 @@ This process includes the following stages:
 The voice assistant pipeline imports and builds a separate module to provide this STT functionality. You can access this at:
 
 ```
-https://gitlab.arm.com/kleidi/kleidi-examples/speech-to-text
+https://github.com/Arm-Examples/STT-Runner
 ```
 
 You can build the pipeline for various platforms and independently benchmark the STT functionality:
@@ -50,7 +50,7 @@ You can build the pipeline for various platforms and independently benchmark the
 Currently, this module uses [whisper.cpp](https://github.com/ggml-org/whisper.cpp) and wraps the backend library with a thin C++ layer. The module also provides JNI bindings for developers targeting Android based applications.
 
 {{% notice %}}
-You can get more information on how to build and use this module in the [speech-to-text README](https://gitlab.arm.com/kleidi/kleidi-examples/speech-to-text/-/blob/main/README.md?ref_type=heads)
+You can get more information on how to build and use this module in the [speech-to-text README](http://github.com/Arm-Examples/STT-Runner/blob/main/README.md)
 {{% /notice %}}
 
 ## Large Language Model  
@@ -64,7 +64,7 @@ By default, the LLM runs asynchronously, streaming tokens as they are generated.
 The voice assistant pipeline imports and builds a separate module to provide this LLM functionality. You can access this at:
 
 ```
-https://gitlab.arm.com/kleidi/kleidi-examples/large-language-models
+https://github.com/Arm-Examples/LLM-Runner
 ```
 
 You can build this pipeline for various platforms and independently benchmark the LLM functionality:
@@ -72,20 +72,21 @@ You can build this pipeline for various platforms and independently benchmark th
 |Platform|Details|
 |---|---|
 |Linux|x86_64 - KleidiAI is disabled by default, aarch64 - KleidiAI is enabled by default.|
-|Android|Cross-compile for an Android device, ensure the Android NDK path is set and correct toolchain file is provided. KleidiAI enabled by default.|
+|Android|Cross-compile for an Android device, ensure the Android NDK path is set and correct toolchain file is provided. KleidiAI enabled by default. SME kernels can be used if available on device.|
 |macOS|Native or cross-compilation for a Mac device. KleidiAI and SME kernels can be used if available on device.|
 
 Currently, this module provides a thin C++ layer as well as JNI bindings for developers targeting Android based applications, supported backends are:
 |Framework|Dependency|Input modalities supported|Output modalities supported|Neural Network|
 |---|---|---|---|---|
-|llama.cpp|https://github.com/ggml-org/llama.cpp|`image`, `text`|`text`|phi-2,Qwen2-VL-2B-Instruct|
-|onnxruntime-genai|https://github.com/microsoft/onnxruntime-genai|`text`|`text`|phi-4-mini-instruct-onnx|
-|mediapipe|https://github.com/google-ai-edge/mediapipe|`text`|`text`|gemma-2b-it-cpu-int4|
+|llama.cpp|https://github.com/ggml-org/llama.cpp|`image`, `text`|`text`|phi-2, qwen-2-VL, llama-3.2-1B|
+|onnxruntime-genai|https://github.com/microsoft/onnxruntime-genai|`text`|`text`|phi-4-mini-instruct, llama-3.2-1B|
+|mnn|https://github.com/alibaba/MNN|`image`, `text`|`text`|qwen-2.5-VL, llama-3.2-1B|
+|executorch|https://github.com/pytorch/executorch|`text`|`text`|llama-3.2-1B|
 
 
 
 {{% notice %}}
-You can get more information on how to build and use this module in the [large-language-models README](https://gitlab.arm.com/kleidi/kleidi-examples/large-language-models/-/blob/main/README.md?ref_type=heads)
+You can get more information on how to build and use this module in the [large-language-models README](https://github.com/Arm-Examples/LLM-Runner/blob/main/README.md)
 {{% /notice %}}
 
 ## Text-to-Speech 

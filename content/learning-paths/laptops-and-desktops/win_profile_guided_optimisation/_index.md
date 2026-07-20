@@ -1,34 +1,39 @@
 ---
-title: Optimize C++ performance with Profile-Guided Optimization and Google Benchmark
+title: Optimize C++ applications on Windows on Arm using Profile-Guided Optimization
 
-draft: true
-cascade:
-    draft: true
+description: Learn how to apply Profile-Guided Optimization (PGO) to build performance-tuned C++ binaries and measure improvements using Google Benchmark on Windows on Arm.
 
-minutes_to_complete: 15
+minutes_to_complete: 30
 
-who_is_this_for: Developers looking to optimize C++ performance on an Arm-based Windows device, based on runtime behavior.
+who_is_this_for: This is an introductory topic for software developers who want to optimize C++ application performance on Windows on Arm using Profile-Guided Optimization (PGO).
 
 learning_objectives: 
-    - Microbenchmark a function using Google Benchmark.
-    - Apply profile-guided optimization to build performance-tuned binaries for Windows on Arm.
+    - Microbenchmark a function using Google Benchmark
+    - Apply profile-guided optimization to build performance-tuned binaries for Windows on Arm
+    - Measure and compare performance improvements from PGO-optimized builds
 
 prerequisites:
-    - Basic C++ understanding.
-    - Access to an Arm-based Windows machine.
+    - Familiarity with C++ development and compiling programs from the command line
+    - A Windows on Arm machine with [Visual Studio](/install-guides/vs-woa/) and the C++ desktop development tools installed
 
 author: Tom Dunkle
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
-subjects: ML
-armips:
-    - Neoverse
+subjects: Performance and Architecture
 tools_software_languages:
+    - C
+    - MSVC
     - Google Benchmark
-    - Runbook
+    - PGO
 operatingsystems:
     - Windows
+armips:
+    - Cortex-A
 
 further_reading:
     - resource:
@@ -39,8 +44,14 @@ further_reading:
         title: Google Benchmark Library 
         link: https://github.com/google/benchmark
         type: documentation
-
-
+    - resource:
+        title: Windows on Arm developer documentation
+        link: https://learn.microsoft.com/en-us/windows/arm/overview
+        type: documentation
+    - resource:
+        title: Arm performance optimization resources
+        link: https://learn.arm.com/learning-paths/laptops-and-desktops/
+        type: website
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
@@ -48,3 +59,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

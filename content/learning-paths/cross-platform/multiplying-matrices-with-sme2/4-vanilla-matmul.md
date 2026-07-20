@@ -23,7 +23,7 @@ The algorithm works by iterating over each row of A and each column of B. It mul
 
 The diagram below shows how matrix C is computed by iterating over rows of A and columns of B:
 
-![Standard Matrix Multiplication alt-text#center](matmul.png "Figure 2: Standard matrix multiplication.")
+![Diagram showing standard matrix multiplication where matrix C is computed by iterating over each row of matrix A and each column of matrix B. For each element in C, the algorithm multiplies corresponding elements from A's row and B's column, then sums the products. This illustrates the O(n³) triple-nested loop structure of the vanilla algorithm.#center](matmul.png "Figure 2: Standard matrix multiplication.")
 
 This implies that the A, B, and C matrices have some constraints on their
 dimensions:

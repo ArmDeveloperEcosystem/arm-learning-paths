@@ -1,6 +1,7 @@
 ---
 # User change
 title: Prepare environment
+description: Install Anaconda and the required Python packages for building and deploying the STM32 image classification model.
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -54,7 +55,7 @@ conda install nomkl
 
 Setup your development machine with the project files.
 
-1. Download the [zip file](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/img_nn_stcube/Project_Files/img_class_stcube.zip) containing the project files
+1. Download the [zip file](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/embedded-and-microcontrollers/img_nn_stcube/project_files/img_class_stcube.zip) containing the project files
 
 2. Unzip the files into a working folder
 

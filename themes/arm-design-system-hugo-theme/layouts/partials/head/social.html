@@ -26,30 +26,30 @@ Where it is used:
             {{ if eq .Parent.Title "Install Guides"}}
                 {{$title  = printf "%s: Install Guide" .Title }}
                 {{$desc   = printf "Get up and running quickly with the most common tool settings with code snippets, using this %s installation guide." .Title}}
-                {{$author = .Params.author_primary}}
+                {{$author = .Params.author}}
             <!-- Install guide subpages in multiinstall -->
             {{else}}
                 {{$title  = printf "%s: Install Guide" .Title }}
                 {{$desc   = printf "Get up and running quickly with the most common tool settings with code snippets, using this %s installation guide." ($.Site.GetPage (path.Dir (path.Dir .RelPermalink))).Title}}
-                {{$author = ($.Site.GetPage (path.Dir (path.Dir .RelPermalink))).Params.author_primary}}
+                {{$author = ($.Site.GetPage (path.Dir (path.Dir .RelPermalink))).Params.author}}
             {{end}}
         {{else}}
             <!-- Learning path subpages -->
             {{$title  = printf "%s: %s" ($.Site.GetPage (path.Dir (path.Dir .RelPermalink))).Title .Title}}
             {{$desc   = ($.Site.GetPage (path.Dir (path.Dir .RelPermalink))).Params.who_is_this_for}}
-            {{$author = ($.Site.GetPage (path.Dir (path.Dir .RelPermalink))).Params.author_primary}}
+            {{$author = ($.Site.GetPage (path.Dir (path.Dir .RelPermalink))).Params.author}}
         {{end}}
     {{else if $is_content}}
         {{if eq .Layout "installtoolsall"}}
             <!-- Install guide _index.md page -->
             {{$title  = printf "%s: Install Guide" .Title}}
             {{$desc   = printf "Get up and running quickly with the most common tool settings with code snippets, using this %s installation guide." .Title}}
-            {{$author = .Params.author_primary}}
+            {{$author = .Params.author}}
         {{else}}
             <!-- Learning path _index.md page -->
             {{$title  = .Title}}
             {{$desc   = .Params.who_is_this_for}}
-            {{$author = .Params.author_primary}}
+            {{$author = .Params.author}}
         {{end}}
     {{end}}
 

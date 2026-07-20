@@ -9,7 +9,7 @@ layout: learningpathall
 ## Before you begin
 The instructions in this learning path are for any Arm server running Ubuntu 22.04 LTS.
 
-To start, you will need to install [PyTorch](/install-guides/pytorch) on your Arm machine. 
+To start, you will need to install [PyTorch](/install-guides/pytorch/) on your Arm machine. 
 PyTorch is a widely used machine learning framework for Python. You will use PyTorch to deploy a Natural Language Processing (NLP) model on your Arm machine.
 
 ## Overview
@@ -181,7 +181,7 @@ Self CPU time total: 51.903ms
 ```
 In addition to the classification output from the model, you can now see the execution time for the different operators. The table shows how much time each operation takes on the CPU, both by itself and including any child operations. 
 
-You can experiment with the [BFloat16 floating-point number format](/install-guides/pytorch#bfloat16-floating-point-number-format) and [Transparent huge pages](/install-guides/pytorch#transparent-huge-pages) settings with PyTorch and see how that impacts the performance of your model.
+You can experiment with the [BFloat16 floating-point number format](/install-guides/pytorch/#bfloat16-floating-point-number-format) and [Transparent huge pages](/install-guides/pytorch/#transparent-huge-pages) settings with PyTorch and see how that impacts the performance of your model.
 
 You have successfully run and profiled a sentiment analysis NLP model from Hugging Face on your Arm machine. You can explore running other models and use cases just as easily.
 

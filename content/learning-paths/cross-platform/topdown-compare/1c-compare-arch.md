@@ -62,7 +62,7 @@ On Arm Neoverse V2, equivalent lost work appears under Bad Speculation through `
 | Frontend vs Backend Balance | Measured by slot distribution from `IDQ_UOPS_NOT_DELIVERED` and `CYCLE_ACTIVITY` counters | Measured using `STALL_SLOT_FRONTEND` and `STALL_SLOT_BACKEND` |
 | Speculative Execution Impact | Explicit "Bad Speculation" slot fraction + `MACHINE_CLEARS.*` | Derived from `BR_MIS_PRED`, `BR_MIS_PRED_RETIRED`, and `OP_SPEC/OP_RETIRED` ratios |
 | Cache and Memory Hierarchy | Layered: L1 → L2 → L3 → DRAM via `CYCLE_ACTIVITY` events | Effectiveness groups: L1I/L1D/L2/LL with MPKI and hit/miss ratios |
-| Stall Accounting Granularity | Strict hierarchical attribution (single bottleneck per slot) | Flexible overlap across groups—multiple concurrent stall sources possible |
+| Stall Accounting Granularity | Strict hierarchical attribution (single bottleneck per slot) | Flexible overlap across groups - multiple concurrent stall sources possible |
 | Metric Normalization | All metrics normalized to total slots = machine_width × CPU cycles | All metrics normalized to total slots = CPU cycles × 8 (rename width) |
 
 ## Practical cross-platform guidance

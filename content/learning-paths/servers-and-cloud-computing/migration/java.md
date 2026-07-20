@@ -8,19 +8,17 @@ layout: "learningpathall"
 
 ---
 
-# Java on Arm Neoverse processors
+## Java on Arm Neoverse processors
 
 Java is a general-purpose, high-level programming language used in a wide variety of applications.
 
-Java code is typically compiled to bytecode that runs on a Java virtual machine (JVM) making it portable across computer architectures.
+Java code is usually compiled to bytecode that runs on a Java virtual machine (JVM) making it portable across computer architectures.
 
-There are many ways to install Java on Arm Linux distributions. Refer to the [Java install guide](/install-guides/java/) for information about how to install Java.
-
-# How can I increase Java performance on Arm? 
+There are many ways to install Java on Arm Linux distributions. For more information, see the [Java install guide](/install-guides/java/).
 
 Java runs well on Arm, but there are some things to investigate to make sure you are getting the best performance. 
 
-## Which JVM flags impact performance?
+## JVM flags that impact performance
 
 The JVM includes a number of flags which are available to tune performance and aid in debugging. Some of the flags are general purpose and some are Arm architecture specific. 
 
@@ -30,7 +28,7 @@ To print the final values of the flags after the JVM has been initialized run:
 java -XX:+PrintFlagsFinal -version
 ```
 
-Use the output from the above command to see the current values before making any changes.
+Use the output from the previous command to see the current values before making any changes.
 
 For example, to check the value of `CICompilerCount` run:
 
@@ -58,7 +56,7 @@ The `-XX:CompilationMode` flag instructs the JIT compiler to to use highest opti
 
 The best way to determine optimal values for your application is to test your application with different values. 
 
-### Architecture flags
+#### Architecture flags
 
 There are flags that are specific to the Arm architecture and indicate if a particular hardware feature is used. You can see all the flags by running:
 
@@ -87,7 +85,7 @@ uint UseSVE                                   = 0                               
 bool UseSimpleArrayEquals                     = false                                {ARCH product} {default}
 ```
 
-Depending on your application, you may want to investigate the vector processing flags for SIMD, NEON, SVE, and CRC. 
+Depending on your application, you may want to investigate the vector processing flags for SIMD, Neon, SVE, and CRC. 
 
 You can try [Process Watch](/learning-paths/servers-and-cloud-computing/processwatch/) to monitor the usage of SIMD and CRC instructions. 
 
@@ -192,6 +190,5 @@ For each x86-64 ELF file, check there is a corresponding aarch64 ELF file in the
 
 Here are a few resources:
 - [Improving Java performance on Neoverse N1 systems](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/java-performance-on-neoverse-n1)
-- [Arm resources show how to optimize your Java applications for AArch64](https://blogs.oracle.com/javamagazine/post/java-arm-runtime-switches-benchmarks)
 - [Unlocking Java Performance on Ampere Altra Family Processors](https://amperecomputing.com/tuning-guides/unlocking-java-performance-tuning-guide)
 

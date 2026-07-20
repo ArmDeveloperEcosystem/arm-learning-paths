@@ -1,0 +1,72 @@
+---
+title: Deploy a live sensor dashboard with TimescaleDB and Grafana on Google Cloud C4A
+
+minutes_to_complete: 45
+
+who_is_this_for: This is an introductory topic for DevOps engineers, database engineers, and software developers who want to deploy and operate TimescaleDB on SUSE Linux Enterprise Server (SLES) Arm64, ingest live time-series sensor data, and visualize it in Grafana.
+
+learning_objectives:
+  - Install and configure TimescaleDB on Google Cloud C4A Axion processors by building from source for Arm64
+  - Create a real-time sensor data ingestion pipeline using Python with hypertables, continuous aggregates, and retention policies
+  - Build a live sensor dashboard with Grafana that automatically refreshes to display time-series data
+  - Validate end-to-end data flow from ingestion through TimescaleDB to Grafana visualization
+
+prerequisites:
+  - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
+  - Basic familiarity with SQL, Python, and Grafana
+
+author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
+##### Tags
+skilllevels: Introductory
+subjects: Databases
+cloud_service_providers:
+  - Google Cloud
+
+armips:
+  - Neoverse
+
+tools_software_languages:
+  - TimescaleDB
+  - PostgreSQL
+  - Python
+  - Grafana
+  - psycopg2
+
+operatingsystems:
+  - Linux
+
+# ================================================================================
+#       FIXED, DO NOT MODIFY
+# ================================================================================
+
+further_reading:
+  - resource:
+      title: TimescaleDB official documentation
+      link: https://docs.timescale.com/
+      type: documentation
+
+  - resource:
+      title: PostgreSQL 15 documentation
+      link: https://www.postgresql.org/docs/15/index.html
+      type: documentation
+
+  - resource:
+      title: Grafana documentation
+      link: https://grafana.com/docs/grafana/latest/
+      type: documentation
+
+  - resource:
+      title: Python psycopg2 documentation
+      link: https://www.psycopg.org/docs/
+      type: documentation
+
+weight: 1
+layout: "learningpathall"
+learning_path_main_page: yes
+---
+

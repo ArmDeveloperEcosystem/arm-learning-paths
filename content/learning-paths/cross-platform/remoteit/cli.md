@@ -62,7 +62,7 @@ You can view the connection information by running the status command
 sudo remoteit status
 ```
 
-## Additional CLI Usage
+## Additional CLI usage
 
 The CLI provides commands such as to register this device as a target for connections.
 

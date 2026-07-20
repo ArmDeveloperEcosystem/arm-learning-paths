@@ -1,5 +1,6 @@
 ---
 title: Learn about optimization techniques using the g++ compiler
+description: Learn how to apply g++ compiler optimization techniques and flags to improve C++ application performance on Arm systems with hands-on examples.
 
 minutes_to_complete: 60
 
@@ -15,9 +16,18 @@ prerequisites:
 
 author: Kieran Hejmadi
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
+cloud_service_providers:
+  - AWS
+  - Microsoft Azure
+  - Google Cloud
+  - Oracle
 armips:
     - Neoverse
 tools_software_languages:
@@ -32,10 +42,10 @@ further_reading:
         link: https://community.arm.com/arm-community-blogs/b/operating-systems-blog/posts/runtime-detection-of-cpu-features-on-an-armv8-a-cpu
         type: blog
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

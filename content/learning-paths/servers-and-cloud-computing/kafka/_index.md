@@ -5,6 +5,8 @@ minutes_to_complete: 90
 
 who_is_this_for: This is an advanced topic for software developers who want to learn how to use Kafka and Zookeeper.
 
+description: Deploy and configure a Kafka cluster with Zookeeper on Arm servers, test event streaming, and automate deployment on AWS and Google Cloud.
+
 learning_objectives:
     - Install Zookeeper and Kafka
     - Configure Zookeeper to work with Kafka
@@ -17,9 +19,16 @@ prerequisites:
 
 author: Pareena Verma
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Advanced
 subjects: Storage
+cloud_service_providers:
+  - AWS
+  - Google Cloud
 armips:
     - Neoverse
 operatingsystems:
@@ -27,7 +36,6 @@ operatingsystems:
 tools_software_languages:
     - Kafka
     - ZooKeeper
-
 
 further_reading:
     - resource:
@@ -44,9 +52,8 @@ further_reading:
         type: documentation
     - resource:
         title: Apache Kafka Benchmarks on AWS Graviton2
-        link: https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/apache-kafka-benchmarks-on-aws-graviton2
+        link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/apache-kafka-benchmarks-on-aws-graviton2
         type: blog
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
@@ -54,3 +61,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

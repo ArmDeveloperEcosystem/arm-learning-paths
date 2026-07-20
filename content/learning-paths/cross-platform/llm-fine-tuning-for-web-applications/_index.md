@@ -1,5 +1,6 @@
 ---
 title: LLM fine-tuning for web and mobile applications
+description: Learn how to fine-tune large language models using parameter-efficient techniques and deploy them to mobile devices using ExecuTorch on Arm processors.
 
 draft: true
 cascade:
@@ -25,15 +26,18 @@ prerequisites:
     - An Android smartphone with the i8mm feature and 16GB of RAM.
     - Basic understanding of machine learning and deep learning. 
     - Familiarity with deep learning frameworks such as PyTorch and Hugging Face Transformers. 
-
 author: Parichay Das
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
 subjects: ML
 armips:
     - Neoverse
-    
+
 tools_software_languages:
     - LLM
     - Generative AI
@@ -58,9 +62,6 @@ further_reading:
         title: PyTorch Documentation
         link: https://pytorch.org/docs/stable/index.html
         type: documentation
-   
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

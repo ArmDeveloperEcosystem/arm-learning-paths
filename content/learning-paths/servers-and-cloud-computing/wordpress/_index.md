@@ -9,6 +9,10 @@ prerequisites:
 
 author: Frédéric -lefred- Descamps
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 who_is_this_for: This is an introductory topic for developers who want to install WordPress on Oracle Cloud Infrastructure (OCI) using always free tier.
 
 learning_objectives: 
@@ -17,7 +21,8 @@ learning_objectives:
 ### Tags
 skilllevels: Introductory
 subjects: Databases
-cloud_service_providers: Oracle
+cloud_service_providers:
+  - Oracle
 
 armips:
     - Neoverse
@@ -29,7 +34,6 @@ tools_software_languages:
     - MySQL
     - WordPress
 
-
 further_reading:
     - resource:
         title: Learn Faster to Grow Faster
@@ -40,11 +44,10 @@ further_reading:
         link: https://blogs.oracle.com/mysql/post/wordpress-with-mysql-on-oci-always-free
         type: blog
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

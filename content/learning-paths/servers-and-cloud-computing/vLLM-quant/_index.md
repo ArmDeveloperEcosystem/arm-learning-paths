@@ -16,19 +16,26 @@ learning_objectives:
     - Launch a vLLM server to serve the quantized model.
     - Run single-prompt and batch inference using the vLLM OpenAI-compatible API.
 
-    
 prerequisites:
     - An Arm-based server or cloud instance running with at least 32 CPU cores, 64 GB RAM, and 32 GB of available disk space.
     - Familiarity with Python and basic understanding of transformer models and quantization techniques.
     - An active Hugging Face account with access to the target model.
-
 author: 
    - Rani Chowdary Mandepudi
    - Phalani Paladugu
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: ML
+cloud_service_providers:
+  - AWS
+  - Microsoft Azure
+  - Google Cloud
+  - Oracle
 armips:
     - Neoverse
 operatingsystems:
@@ -40,8 +47,6 @@ tools_software_languages:
     - Python
     - PyTorch
     - OpenBLAS
-    
-
 
 further_reading:
     - resource:
@@ -60,8 +65,6 @@ further_reading:
         title: Build and Run vLLM on Arm Servers
         link: /learning-paths/servers-and-cloud-computing/vllm/
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

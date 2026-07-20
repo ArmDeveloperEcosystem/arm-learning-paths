@@ -1,5 +1,6 @@
 ---
 title: 'Deploy a containerized application using Azure Container Instances'
+description: Learn how to create and run Docker containers on Azure Container Instances for Arm64-based containerized application deployment.
 
 minutes_to_complete: 30
 
@@ -16,14 +17,19 @@ prerequisites:
 
 author: Dawid Borycki
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: Containers and Virtualization
-cloud_service_providers: Microsoft Azure
+cloud_service_providers:
+  - Microsoft Azure
 
 armips:
     - Neoverse
-    
+
 tools_software_languages:
     - ASP.NET Core    
     - Docker
@@ -45,11 +51,10 @@ further_reading:
         link: https://learn.microsoft.com/en-us/azure/container-instances/
         type: Documentation
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

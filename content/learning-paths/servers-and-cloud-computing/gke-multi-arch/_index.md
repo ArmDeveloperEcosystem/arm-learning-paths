@@ -1,5 +1,6 @@
 ---
 title: Learn how to migrate an x86 application to multi-architecture with Arm-based on Google Axion Processor on GKE
+description: Learn how to add Arm-based Google Axion nodes to an existing x86 GKE cluster and rebuild applications for multi-architecture support.
 
 minutes_to_complete: 30
 
@@ -13,15 +14,20 @@ learning_objectives:
 
 prerequisites:
     - A [Google Cloud account](https://console.cloud.google.com/). Create an account if needed.
-    - A computer with [Google Cloud CLI](/install-guides/gcloud) and [kubectl](/install-guides/kubectl/)installed.
+    - A computer with [Google Cloud CLI](/install-guides/gcloud/) and [kubectl](/install-guides/kubectl/)installed.
     - An existing Google Kubernetes Engine (GKE) cluster with x86-based nodes
 
 author: Pranay Bakre
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Advanced
 subjects: Containers and Virtualization
-cloud_service_providers: Google Cloud
+cloud_service_providers:
+  - Google Cloud
 
 armips:
     - Neoverse
@@ -32,7 +38,6 @@ tools_software_languages:
 
 operatingsystems:
     - Linux
-
 
 further_reading:
     - resource:
@@ -48,11 +53,10 @@ further_reading:
         link: https://cloud.google.com/kubernetes-engine/docs
         type: documentation
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

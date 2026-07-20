@@ -5,6 +5,8 @@ minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for C/C++ developers who are interested in learning about the intricacies of conversions between floating-point numbers and integers.
 
+description: Learn how to identify and fix potential problems with integer and floating-point conversions in C/C++ code on Arm, including explicit conversions, implicit conversions, and type demotion issues.
+
 learning_objectives: 
     - Learn how to identify and fix potential problems in integer/float conversions in C/C++ on Arm
 
@@ -12,6 +14,10 @@ prerequisites:
     - An Arm computer running Linux and a recent version of a C++ compiler (Clang or GCC) installed
 
 author: Konstantinos Margaritis
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -32,7 +38,6 @@ shared_between:
     - laptops-and-desktops
     - servers-and-cloud-computing
     - mobile-graphics-and-gaming
-
 
 further_reading:
     - resource:
@@ -56,11 +61,10 @@ further_reading:
         link: https://en.wikipedia.org/wiki/Bfloat16_floating-point_format
         type: website
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

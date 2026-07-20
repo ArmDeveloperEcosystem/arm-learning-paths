@@ -29,7 +29,7 @@ It has also been ported to SYCL and CUDA backends and further ports are in progr
 ## Where is Eigen used?
 
 Eigen is a useful library and its success is proven by the number of projects that use it. 
-[The list of projects using Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page#Projects_using_Eigen) is rich, but here are a few high profile projects:
+[The list of projects using Eigen](https://libeigen.gitlab.io/#projects-using-eigen) is rich, but here are a few high profile projects:
 
 * [TensorFlow](https://www.tensorflow.org/) - an open source software library for Machine Intelligence.
 * [Celestia](https://celestiaproject.space/) - the 3D astronomical visualization application Celestia (all orbital and geometric calculations are done with Eigen).
@@ -104,7 +104,7 @@ There are more specialized classes for both storage types, like the `Tensor` cla
 
 In this Learning Path, you will test Eigen using a few examples with emphasis on Arm CPUs. For full documentation and a list of all supported types and operations on them, see the [Eigen documentation](https://libeigen.gitlab.io/docs/).
 
-## Numerical Solvers
+## Numerical solvers
 
 Besides basic vector and matrix types, Eigen also provides built-in methods for numerical solving on the matrices.
 

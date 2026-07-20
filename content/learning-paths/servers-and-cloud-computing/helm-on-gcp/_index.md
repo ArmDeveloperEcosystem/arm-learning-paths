@@ -1,10 +1,10 @@
 ---
 title: Install and validate Helm on Google Cloud C4A Arm-based VMs
+description: Learn how to install Helm on Google Cloud Axion C4A SUSE VMs and deploy applications like NGINX, PostgreSQL, and Redis using Helm charts.
 
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic intended for developers who want to get hands-on experience using Helm on Linux Arm64 systems, specifically Google Cloud C4A virtual machines powered by Axion processors.
-
 
 learning_objectives:
   - Provision an Arm-based SUSE Linux Enterprise Server (SLES) virtual machine on Google Cloud (C4A with Axion processors)
@@ -20,13 +20,18 @@ prerequisites:
   - Basic familiarity with [Kubernetes concepts](https://kubernetes.io/docs/concepts/)
   - Basic understanding of [Helm](https://helm.sh/docs/topics/architecture/) and Kubernetes manifests
   - Familiarity with basic Linux command-line usage
-    
+
 author: Pareena Verma
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ##### Tags
 skilllevels: Introductory
 subjects: Containers and Virtualization
-cloud_service_providers: Google Cloud
+cloud_service_providers:
+  - Google Cloud
 
 armips:
   - Neoverse
@@ -39,7 +44,7 @@ tools_software_languages:
   - PostgreSQL
   - Redis
   - NGINX
-    
+
 operatingsystems:
   - Linux
 

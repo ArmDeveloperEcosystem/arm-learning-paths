@@ -35,7 +35,7 @@ Gradients represent the rate of change of the loss with respect to each of the m
 
 An epoch refers to one complete pass through the entire training dataset. During each epoch, the model sees every data point once and updates its parameters accordingly. Multiple epochs are typically required to train a model effectively because, during each epoch, the model learns and fine-tunes its parameters based on the data it processes. The number of epochs is a hyperparameter that you set before training, and increasing it can improve the model's performance, but too many epochs may lead to overfitting, where the model performs well on training data but poorly on new, unseen data.
 
-Backpropagation is a fundamental algorithm used in training neural networks to optimize their parameters—weights and biases—by minimizing the loss function. It works by propagating the error backward through the network, calculating the gradients of the loss function with respect to each parameter, and updating these parameters accordingly.
+Backpropagation is a fundamental algorithm used in training neural networks to optimize their parameters, weights and biases, by minimizing the loss function. It works by propagating the error backward through the network, calculating the gradients of the loss function with respect to each parameter, and updating these parameters accordingly.
 
 ### Training a model in PyTorch
 

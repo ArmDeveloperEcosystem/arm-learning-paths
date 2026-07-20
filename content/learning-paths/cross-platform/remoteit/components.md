@@ -24,12 +24,12 @@ You will need a second computer with SSH configured. This computer is called the
 
 #### Device Package 
 
-If the target device only needs to receive connections, you should install the device package. This is the smallest footprint package which is suitable for embedded devices with limited storage and resources. [Install Device Package](/learning-paths/cross-platform/remoteit/device-package)
+If the target device only needs to receive connections, you should install the device package. This is the smallest footprint package which is suitable for embedded devices with limited storage and resources. [Install Device Package](/learning-paths/cross-platform/remoteit/device-package/)
 This does not support Windows or macOS devices. Install the CLI or Desktop Application for these systems.
 
 #### CLI
 
-If the device will need to initiate a connection to another Remote.It target device without a GUI (command line only), you should install the CLI on the device. This will also allow the device to be a target as well. [Install CLI](/learning-paths/cross-platform/remoteit/cli)
+If the device will need to initiate a connection to another Remote.It target device without a GUI (command line only), you should install the CLI on the device. This will also allow the device to be a target as well. [Install CLI](/learning-paths/cross-platform/remoteit/cli/)
 
 #### Desktop
 

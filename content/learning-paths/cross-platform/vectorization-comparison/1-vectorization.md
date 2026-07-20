@@ -10,11 +10,11 @@ layout: "learningpathall"
 
 Migrating SIMD (Single Instruction, Multiple Data) code from x86 extensions to Arm extensions is a key task for software developers aiming to optimize performance on Arm platforms. 
 
-Understanding the mapping from x86 instruction sets such as SSE, AVX, and AMX to Arm’s NEON, SVE, and SME extensions is essential for achieving portability and high performance. This Learning Path provides an overview to help you design a migration plan in which you can leverage Arm features such as scalable vector lengths and advanced matrix operations to adapt your code effectively.
+Understanding the mapping from x86 instruction sets such as SSE, AVX, and AMX to Arm’s Neon, SVE, and SME extensions is essential for achieving portability and high performance. This Learning Path provides an overview to help you design a migration plan in which you can leverage Arm features such as scalable vector lengths and advanced matrix operations to adapt your code effectively.
 
 Vectorization is a key optimization strategy where one instruction processes multiple data elements simultaneously. It drives performance in High-Performance Computing (HPC), AI and ML, signal processing, and data analytics.
 
-Both x86 and Arm processors offer rich SIMD capabilities, but they differ in philosophy and design. The x86 architecture provides fixed-width vector units of 128, 256, and 512 bits. The Arm architecture offers fixed-width vectors for NEON and scalable vectors for SVE and SME, ranging from 128 to 2048 bits.
+Both x86 and Arm processors offer rich SIMD capabilities, but they differ in philosophy and design. The x86 architecture provides fixed-width vector units of 128, 256, and 512 bits. The Arm architecture offers fixed-width vectors for Neon and scalable vectors for SVE and SME, ranging from 128 to 2048 bits.
 
 If you are migrating SIMD software to Arm, understanding these differences will help you write portable, high-performance code.
 
@@ -22,9 +22,9 @@ If you are migrating SIMD software to Arm, understanding these differences will 
 
 This section provides some more information about the Arm vector and matrix extensions and shows you when to use each, how they map from SSE/AVX/AMX, and what changes in your programming model (predication, gather/scatter, tiles, streaming mode).
 
-### NEON
+### Neon
 
-NEON is a 128-bit SIMD extension available across Armv8-A cores, including Neoverse and mobile. It is well suited to multimedia, DSP, and packet processing. Conceptually, NEON is closest to x86 SSE and AVX used in 128-bit mode, making it the primary target when migrating many SSE workloads. Compiler auto-vectorization to NEON is mature, reducing the need for manual intrinsics.
+Neon is a 128-bit SIMD extension available across Armv8-A cores, including Neoverse and mobile. It is well suited to multimedia, DSP, and packet processing. Conceptually, Neon is closest to x86 SSE and AVX used in 128-bit mode, making it the primary target when migrating many SSE workloads. Compiler auto-vectorization to Neon is mature, reducing the need for manual intrinsics.
 
 ### Scalable Vector Extension (SVE)
 
@@ -36,17 +36,17 @@ SME accelerates matrix multiplication and is similar in intent to AMX. Unlike AM
 
 ## x86 vector and matrix extensions
 
-Here is a brief overview of the x86 families you’ll likely port from: SSE (128-bit), AVX/AVX-512 (256/512-bit with masking), and AMX (tile-based matrix compute). Use this to identify feature equivalents before mapping kernels to NEON, SVE/SVE2, or SME on Arm.
+Here is a brief overview of the x86 families you’ll likely port from: SSE (128-bit), AVX/AVX-512 (256/512-bit with masking), and AMX (tile-based matrix compute). Use this to identify feature equivalents before mapping kernels to Neon, SVE/SVE2, or SME on Arm.
 
 ### Streaming SIMD Extensions (SSE)
 
 The SSE instruction set provides 128-bit XMM registers and supports both integer and floating-point SIMD operations. Despite being an older technology, SSE remains a baseline for many libraries due to its widespread adoption. 
 
-However, its fixed-width design can constrain throughput compared with newer extensions like AVX. When migrating code from SSE to Arm, developers will find that SSE maps well to Arm NEON, enabling a relatively straightforward transition.
+However, its fixed-width design can constrain throughput compared with newer extensions like AVX. When migrating code from SSE to Arm, developers will find that SSE maps well to Arm Neon, enabling a relatively straightforward transition.
 
 ### Advanced Vector Extensions (AVX)
 
-AVX provides 256-bit YMM registers, and AVX-512 adds 512-bit ZMM registers. Features include FMA, per-lane masking in AVX-512, and VEX or EVEX encodings. When moving AVX workloads to Arm, 128-bit paths often translate to NEON, while algorithms that scale with vector width are good candidates for SVE. Because SVE is vector-length agnostic, refactor for predication and scalable loops to maintain portability and performance.
+AVX provides 256-bit YMM registers, and AVX-512 adds 512-bit ZMM registers. Features include FMA, per-lane masking in AVX-512, and VEX or EVEX encodings. When moving AVX workloads to Arm, 128-bit paths often translate to Neon, while algorithms that scale with vector width are good candidates for SVE. Because SVE is vector-length agnostic, refactor for predication and scalable loops to maintain portability and performance.
 
 ### Advanced Matrix Extensions (AMX)
 
@@ -54,11 +54,11 @@ AMX accelerates matrix operations with tile registers configured using a tile pa
 
 ## Comparison tables
 
-Use these side-by-side tables to pick the right Arm target and plan refactors. They compare register width, predication/masking, gather/scatter, key operations, typical workloads, and limitations for SSE ↔ NEON, AVX/AVX-512 ↔ SVE/SVE2, and AMX ↔ SME.
+Use these side-by-side tables to pick the right Arm target and plan refactors. They compare register width, predication/masking, gather/scatter, key operations, typical workloads, and limitations for SSE ↔ Neon, AVX/AVX-512 ↔ SVE/SVE2, and AMX ↔ SME.
 
-### A comparison of SSE and NEON
+### A comparison of SSE and Neon
 
-| Feature | SSE | NEON |
+| Feature | SSE | Neon |
 |---|---|---|
 | **Register width** | 128-bit (XMM) | 128-bit (Q) |
 | **Vector length model** | Fixed 128 bits | Fixed 128 bits |
@@ -104,11 +104,11 @@ The most significant changes when porting include moving from fixed-width SIMD t
 
 ### Vector length model
 
-x86 SIMD (SSE, AVX, and AVX-512) uses fixed widths of 128, 256, or 512 bits. This often requires multiple code paths or dispatch strategies. Arm NEON is also fixed at 128-bit and is a familiar baseline. SVE and SME introduce vector-length agnostic execution from 128 to 2048 bits so the same binary scales across implementations.
+x86 SIMD (SSE, AVX, and AVX-512) uses fixed widths of 128, 256, or 512 bits. This often requires multiple code paths or dispatch strategies. Arm Neon is also fixed at 128-bit and is a familiar baseline. SVE and SME introduce vector-length agnostic execution from 128 to 2048 bits so the same binary scales across implementations.
 
 ### Programming and intrinsics
 
-x86 intrinsics are extensive, and AVX-512 adds masks and lane controls that increase complexity. NEON intrinsics look familiar to SSE developers. SVE and SME use predication and scalable loops. Prefer auto-vectorization and VLA-friendly patterns over heavy hand-written intrinsics when portability matters.
+x86 intrinsics are extensive, and AVX-512 adds masks and lane controls that increase complexity. Neon intrinsics look familiar to SSE developers. SVE and SME use predication and scalable loops. Prefer auto-vectorization and VLA-friendly patterns over heavy hand-written intrinsics when portability matters.
 
 ### Matrix acceleration
 
@@ -116,7 +116,7 @@ AMX provides fixed-geometry tile compute optimized for dot products. SME extends
 
 ## Summary
 
-Migrating from x86 SIMD to Arm entails adopting Arm’s scalable and predicated programming model with SVE and SME for forward-portable performance, while continuing to use NEON for fixed-width SIMD similar to SSE.
+Migrating from x86 SIMD to Arm entails adopting Arm’s scalable and predicated programming model with SVE and SME for forward-portable performance, while continuing to use Neon for fixed-width SIMD similar to SSE.
 
 ## Migration tools
 
@@ -124,8 +124,8 @@ Several libraries help translate or abstract SIMD intrinsics to speed up migrati
 
 Here are some of the tools available and their key features: 
 
-- Sse2neon: an open-source header that maps many SSE2 intrinsics to NEON equivalents. Good for getting code building quickly. Review generated code for performance. See the [sse2neon GitHub repository](https://github.com/DLTcollab/sse2neon).
+- Sse2neon: an open-source header that maps many SSE2 intrinsics to Neon equivalents. Good for getting code building quickly. Review generated code for performance. See the [sse2neon GitHub repository](https://github.com/DLTcollab/sse2neon).
 - SIMD Everywhere (SIMDe): a header-only portability layer that implements many x86 and Arm intrinsics across ISAs, with scalar fallbacks when SIMD is unavailable. See the [simde-everywhere GitHub repository](https://github.com/simd-everywhere/simde).
-- Google Highway (hwy): a portable SIMD library and APIs that target multiple ISAs, including NEON, SVE where supported, and AVX, without per-ISA code paths. See the [Google highway GitHub repository](https://github.com/google/highway).
+- Google Highway (hwy): a portable SIMD library and APIs that target multiple ISAs, including Neon, SVE where supported, and AVX, without per-ISA code paths. See the [Google highway GitHub repository](https://github.com/google/highway).
 
 For more on cross-platform intrinsics, see the Learning Path [Porting architecture-specific intrinsics](/learning-paths/cross-platform/intrinsics/).

@@ -1,5 +1,6 @@
 ---
 title: Learn about Autovectorization
+description: Learn how to optimize C/C++ code using compiler autovectorization techniques including loop modifications, restrict qualifiers, and conditional handling for Arm processors.
 
 minutes_to_complete: 45
 
@@ -12,6 +13,10 @@ prerequisites:
     - An Arm computer running Linux and a recent version of Clang or the GNU compiler (gcc) installed.
 
 author: Konstantinos Margaritis
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -32,7 +37,6 @@ shared_between:
     - laptops-and-desktops
     - mobile-graphics-and-gaming
 
-
 further_reading:
     - resource:
         title: An update on GNU performance
@@ -51,11 +55,10 @@ further_reading:
         link: https://gcc.gnu.org/projects/tree-ssa/vectorization.html
         type: website
 
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

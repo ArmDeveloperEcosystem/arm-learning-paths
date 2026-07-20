@@ -1,0 +1,87 @@
+---
+title: Understand the toolchains used in the Topo Project
+description: Identify the build and runtime components that connect ExecuTorch, remoteproc-runtime, RPMsg, reserved memory, and the Flask web application in the Topo Project.
+weight: 3
+
+### FIXED, DO NOT MODIFY
+layout: learningpathall
+---
+
+## Understand the build and runtime components
+
+The `topo-imx93-npu-deployment` Topo Project combines several toolchains. Topo hides much of the deployment plumbing, but it's useful to understand what's being built and where each component runs.
+
+### ExecuTorch
+
+[ExecuTorch](https://docs.pytorch.org/executorch/stable/index.html) is PyTorch's runtime for deploying PyTorch models to edge devices. By using different backends within ExecuTorch, you can target specific hardware. For example, you can target Ethos-U65 by using the Ethos-U backend. 
+
+To learn more about how the MobileNetV2 model was exported from PyTorch to ExecuTorch and delegated to the Ethos-U, see [Build ExecuTorch models for Ethos-U65](https://learn.arm.com/learning-paths/embedded-and-microcontrollers/observing-ethos-u-on-nxp/7-build-executorch-pte/).
+
+In this Topo Project, ExecuTorch is used in two places:
+
+- At build time, the project exports a MobileNetV2 model to an ExecuTorch `.pte` program.
+- At run time, the Cortex-M33 firmware loads and executes that `.pte` program.
+
+The export pipeline targets `ethos-u65-256`, which means the Ethos-U65 has 256 multiply-accumulate (MAC) units. The model is quantized and lowered so supported neural network operators can be delegated to the Ethos-U65 NPU. 
+
+The generated file is `mv2_ethosu65_256.pte`.
+
+The web application includes this `.pte` file in its container image. During inference, it writes the file into the reserved physical memory range starting at `0xC0000000`, where the Cortex-M33 runner can read it.
+
+### Cortex-M33 firmware runner
+
+The firmware runner is built as `executorch_runner_cm33.elf`.
+
+This firmware runs on the Cortex-M33 core. It waits for commands coming from the Linux web application over `RPMsg`, reads input image tensors from reserved memory, runs inference through ExecuTorch, and writes classification output back over `RPMsg`.
+
+The Topo Project packages the firmware as the entrypoint of the `cm33-runner` image:
+
+```yaml
+cm33-runner:
+  runtime: io.containerd.remoteproc.v1
+  annotations:
+    remoteproc.name: imx-rproc
+```
+
+The `runtime: io.containerd.remoteproc.v1` setting tells containerd to use the remote processor runtime instead of the normal Linux container runtime. The `remoteproc.name` annotation identifies the target remote processor driver, `imx-rproc`.
+
+### remoteproc-runtime
+
+Linux includes a `remoteproc` framework for loading and controlling auxiliary processors such as the Cortex-M33 on the i.MX 93. `remoteproc-runtime` adds an Open Container Initiative (OCI) interface on top of this framework, allowing firmware to be packaged and launched using container tooling.
+
+Topo uses `remoteproc-runtime` when deploying the `cm33-runner` service. The deployment flow is:
+
+1. Topo builds the `runner-runtime` image containing `executorch_runner_cm33.elf`.
+2. Topo starts the image on the target.
+3. containerd uses `io.containerd.remoteproc.v1`.
+4. `remoteproc-runtime` passes the ELF file to the Linux `remoteproc` driver.
+5. The kernel loads the ELF segments and releases the Cortex-M33.
+
+The target must pass the `Remoteproc Runtime`, `Remoteproc Shim`, and `Subsystem Driver (remoteproc)` checks in `topo health`.
+
+### RPMsg
+
+`RPMsg` is the communication channel between the Cortex-A Linux application and the Cortex-M33 firmware. The web application sends a `RUN` command over a `/dev/ttyRPMSG*` device. The firmware replies with status and classification output.
+
+If the deployment succeeds but classification times out, inspect the web app's board checks and the target's `RPMsg` devices. The application expects an `RPMsg` TTY to appear after the Cortex-M33 firmware starts.
+
+### Shared reserved memory
+
+The web application and firmware exchange model and input data through reserved physical memory. The Topo Project expects the target device tree to reserve:
+
+- `model@c0000000`: 4 MiB for the ExecuTorch `.pte` file and input tensor.
+- `ethosu_region@A8000000`: 128 MiB for Ethos-U65 use.
+
+The web application checks these ranges at startup through `/proc/device-tree`. It also checks for `/dev/mem`, `/dev/ethosu0`, the `imx-rproc` remote processor, the `.pte` file, and ImageNet labels.
+
+### Web application
+
+The `webapp` service is a Python Flask application. The application serves the browser UI and preprocesses selected images. It stages the `.pte` program and input tensor in reserved memory, sends inference commands over `RPMsg`, and renders the ImageNet top-1 and top-5 results.
+
+By default, the service publishes port `3001` on the target and forwards it to container port `3000`.
+
+## What you've learned and what's next
+
+You now understand the major toolchains and runtime interfaces used by the Topo Project: ExecuTorch, the Cortex-M33 firmware runner, remoteproc-runtime, RPMsg, reserved memory, and the Flask web application. You've also seen how the web application stages the `.pte` program and input data in reserved memory before sending inference commands to the Cortex-M33 firmware.
+
+Next, you'll build the Topo Project from the base projects by adding the Compose services, build artifacts, Remoteproc Runtime metadata, and Topo parameters.

@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Introduction
 
-The SPE feature is a subset of the Sampling feature that we just discussed.
+The SPE feature is a subset of the Sampling feature previously discussed.
 
 {{% notice Note %}}
 This section requires hardware that supports the SPE specification to function properly.

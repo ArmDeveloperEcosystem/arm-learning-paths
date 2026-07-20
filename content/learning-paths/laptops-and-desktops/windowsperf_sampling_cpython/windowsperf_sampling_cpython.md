@@ -76,7 +76,7 @@ Updating files: 100% (4647/4647), done.
 #### Checkout CPython at specific SHA
 
 {{% notice Note %}}
-This step is optional, but please remember that you may encounter build issues unrelated to this example as the CPython mainline source code that you've just checked out is not stable. Therefore, we recommend that you check out SHA to avoid any unexpected issues and to ensure you are working off the same code base.
+This step is optional, but please remember that you may encounter build issues unrelated to this example as the CPython mainline source code that you checked out is not stable. Therefore, we recommend that you check out SHA to avoid any unexpected issues and to ensure you are working off the same code base.
 {{% /notice %}}
 
 Use a specific CPython commit to match the sampling output in this example:

@@ -6,12 +6,6 @@ weight: 11
 layout: "learningpathall"
 ---
 
-### Why is the search box missing on the home page?
-
-The search index is not automatically generated, but you can add it to enable the search box. 
-
-Refer to the information about the search box in the [Learning Path setup](/learning-paths/cross-platform/_example-learning-path/setup/#search) section.
-
 ### Why are my Learning Path pages in the wrong order?
 
 Each markdown file has a value called weight.

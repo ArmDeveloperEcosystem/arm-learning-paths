@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Introduction
 
-[Arm&reg; Accuracy Super Resolution™ (Arm ASR)](https://www.arm.com/developer-hub/mobile-graphics-and-gaming/arm-accuracy-super-resolution) is a mobile-optimized temporal upscaling technique derived from [AMD's Fidelity Super Resolution 2 v2.2.2](https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/blob/main/docs/techniques/super-resolution-temporal.md).
+[Arm&reg; Accuracy Super Resolution™ (Arm ASR)](https://www.arm.com/developer-hub/mobile-graphics-and-gaming/arm-accuracy-super-resolution) is a mobile-optimized temporal upscaling technique derived from [AMD's Fidelity Super Resolution 2 v2.2.2](https://github.com/GPUOpen-LibrariesAndSDKs/FidelityFX-SDK/blob/main/docs/samples/super-resolution.md). 
 
 Arm ASR extends this technology with optimizations suited to the resource-constrained environment of mobile gaming.
 

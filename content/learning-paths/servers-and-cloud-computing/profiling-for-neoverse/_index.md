@@ -14,6 +14,10 @@ prerequisites:
 
 author: Julie Gaskin
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
@@ -26,7 +30,6 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
-
 further_reading:
     - resource:
         title: Streamline CLI Tools User Guide 
@@ -34,14 +37,12 @@ further_reading:
         type: documentation
     - resource:
         title: Introducing Arm Streamline CLI tools 
-        link: https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog
+        link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog
         type: blog
     - resource:
         title: About Streamline CLI Tools
         link: https://www.arm.com/products/development-tools/performance/streamline-cli
         type: website
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
@@ -49,3 +50,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

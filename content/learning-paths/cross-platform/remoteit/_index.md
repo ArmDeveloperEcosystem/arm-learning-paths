@@ -3,6 +3,8 @@ title: Access remote devices with Remote.It
 
 minutes_to_complete: 45
 
+description: Learn how to install and configure Remote.It for secure remote device access using SSH and other services, with proxy and peer-to-peer connection options.
+
 who_is_this_for: This is an introductory topic for software developers who want to use Remote.It to establish private network connections between users and devices or devices to device.
 
 learning_objectives:
@@ -16,6 +18,28 @@ prerequisites:
     - Determine if your device that you would like to access remotely also needs to make connections to other Remote.It devices.
 
 author: Brenda Strech
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
+further_reading:
+  - resource:
+      title: Developer Documentation
+      link: https://docs.remote.it
+      type: documentation
+  - resource:
+      title: GraphQL API Documentation
+      link: https://link.remote.it/docs/graphql
+      type: documentation
+  - resource:
+      title: User Forum
+      link: https://forum.remote.it
+      type: website
+  - resource:
+      title: Help Center
+      link: https://support.remote.it/hc/en-us
+      type: website
 
 ### Tags
 skilllevels: Introductory
@@ -48,3 +72,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

@@ -17,7 +17,7 @@ If the code being migrated has `MMX` or `SSE` code then either `sse2neon` or `SI
 To make the example application compile and run on Arm there are four steps:
 - Identify the appropriate header file from SIMDe (use the table in the [SIMDEverywhere wiki](https://wiki.debian.org/SIMDEverywhere) to find the right portable header)
 - Define `SIMDE_ENABLE_NATIVE_ALIASES` macro before the include to enable original `_mm` intrinsics to be recognized
-- Replace the x86-specific header file with the SIMDe one to map the intrinsics to NEON instructions
+- Replace the x86-specific header file with the SIMDe one to map the intrinsics to Neon instructions
 - Change the g++ compiler flags for the Arm architecture
 
 {{% notice Note %}}

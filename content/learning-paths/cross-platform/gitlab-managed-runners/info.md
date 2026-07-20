@@ -1,49 +1,71 @@
 ---
-title: "Important Information"
-weight: 5
+title: Build and use GitLab-hosted Arm runners for CI/CD
+weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
 ## What is a GitLab runner?
-A GitLab Runner works with GitLab CI/CD to run jobs in a pipeline. It acts as an agent and executes the jobs you define in your GitLab CI/CD configuration. Some key points to note about GitLab Runner:
 
-1. GitLab offers multiple types of runners - You can use GitLab-hosted runners, self-managed runners, or a combination of both. GitLab manages GitLab-hosted runners, while you install and manage self-managed runners on your own infrastructure.
+A GitLab Runner is an agent that executes CI/CD jobs defined in your pipeline configuration. GitLab offers two types of runners:
 
-2. Each runner is configured as an Executor - When you register a runner, you choose an executor, which determines the environment in which the job runs. Executors can be Docker, Shell, Kubernetes, etc.
+- **GitLab-hosted runners**: GitLab manages these runners, so you don't need to set up or maintain infrastructure.
+- **Self-managed runners**: you install and maintain these runners on your own infrastructure.
 
-3. Multi-architecture support: GitLab runners support multiple architectures including - **`x86/amd64`** and **`arm64`**.
+For Arm development, GitLab-hosted runners offer a managed way to build and test applications targeting Arm platforms without maintaining your own infrastructure. You'll choose between the Docker executor (for containerized builds) or the Shell executor (for direct access to the Arm64 runner environment).
 
+When you register a runner, you specify an executor that determines the job environment. For Arm development workflows, Docker and Shell executors are the most common choices, letting you build container images or compile applications directly on native Arm64 hardware.
+
+## Arm64 runner support
+
+GitLab-hosted runners support both x86-64 and arm64 architectures. For developers targeting Arm platforms (servers, edge devices, or embedded systems), using Arm64 runners provides:
+
+- Native compilation for Arm architecture without cross-compilation
+- Consistent build environment matching deployment targets
+- Access to Arm-specific instructions and optimizations
+- Faster builds when targeting Arm64 platforms
 
 {{% notice Note %}}
-All The information provided in the next section are from GitLab official Pages and it's provided here for convenience and can be changed by Gitlab at anytime. Please refer to the [Gitlab Documentation](https://docs.gitlab.com/ci/runners/hosted_runners/) for more details and for the latest updates. This section is optional.
+GitLab-hosted runner specifications are subject to change. See the [GitLab documentation](https://docs.gitlab.com/ci/runners/hosted_runners/) for further information.
 {{% /notice %}}
 
-## GitLab-Hosted Runners Facts
+## GitLab-hosted runners
 
-1. Each of your jobs runs in a newly provisioned VM, which is dedicated to the specific job.
+### Execution environment
 
-2. The storage is shared by the operating system, the container image with pre-installed software, and a copy of your cloned repository. This means that the available free disk space for your jobs to use is reduced.
+Each job runs in a newly provisioned virtual machine dedicated to that job. The VM is deleted immediately after job completion.
 
-3. Untagged jobs run on the **`small`** Linux x86-64 runner.
+GitLab-hosted runners provide the following execution environment:
 
-4. Jobs handled by hosted runners on GitLab.com time out after 3 hours, regardless of the timeout configured in a project.
+- Jobs run with sudo access (no password required)
+- Jobs time out after three hours
+- Storage is shared between the operating system, container images, and your repository clone
+- Untagged jobs default to the small Linux x86-64 runner (specify `saas-linux-small-arm64` or another Arm64 tag to use Arm runners)
 
-5. The virtual machine where your job runs has **`sudo`** access with no password.
 
-6. Firewall rules only allow outbound communication from the ephemeral VM to the public internet.
+### Network isolation
 
-7. Inbound communication from the public internet to the ephemeral VM is not allowed.
+- Outbound communication to the public internet is allowed
+- Inbound communication from the public internet is blocked
+- Communication between VMs is not permitted
+- Only the runner manager can communicate with ephemeral VMs
 
-8. Firewall rules do not permit communication between VMs.
+### Available Arm64 runners
 
-9. The only internal communication allowed to the ephemeral VMs is from the runner manager.
+GitLab provides three tiers of Linux Arm64 runners:
 
-10. Ephemeral runner VMs serve a single job and are deleted right after the job execution.
+- `saas-linux-small-arm64` (free tier)
+- `saas-linux-medium-arm64` (paid tier)
+- `saas-linux-large-arm64` (paid tier)
 
-11. In addition to isolating runners on the network, each ephemeral runner VM only serves a single job and is deleted straight after the job execution. In the following example, three jobs are executed in a project’s pipeline. Each of these jobs runs in a dedicated ephemeral VM.
+For complete specifications, see [GitLab-hosted runners](https://docs.gitlab.com/ci/runners/hosted_runners/linux/).
 
-12. GitLab sends the command to remove the ephemeral runner VM to the Google Compute API immediately after the CI job completes. The [Google Compute Engine hypervisor](https://cloud.google.com/blog/products/gcp/7-ways-we-harden-our-kvm-hypervisor-at-google-cloud-security-in-plaintext) takes over the task of securely deleting the virtual machine and associated data.
+### VM lifecycle
 
-13. The hosted runners share a distributed cache stored in a Google Cloud Storage (GCS) bucket. Cache contents not updated in the last 14 days are automatically removed, based on the [object lifecycle management policy](https://cloud.google.com/storage/docs/lifecycle). The maximum size of an uploaded cache artifact can be 5 GB after the cache becomes a compressed archive.
+Each job executes in complete isolation:
+
+- GitLab provisions a new VM for your job
+- The job executes in this dedicated environment
+- GitLab sends deletion command to Google Compute API immediately after completion
+- The [Google Compute Engine hypervisor](https://cloud.google.com/blog/products/gcp/7-ways-we-harden-our-kvm-hypervisor-at-google-cloud-security-in-plaintext) securely deletes the VM and data

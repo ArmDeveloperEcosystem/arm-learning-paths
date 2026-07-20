@@ -1,5 +1,6 @@
 ---
 title: Example projects
+description: Update CMSIS-Pack example projects so they remain compatible after migrating the pack to CMSIS v6.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

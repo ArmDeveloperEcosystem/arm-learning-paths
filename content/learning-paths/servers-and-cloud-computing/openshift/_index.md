@@ -16,9 +16,15 @@ prerequisites:
 
 author: Jeff Young
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 # Tags
 skilllevels: Advanced
 subjects: CI-CD
+cloud_service_providers:
+  - AWS
 armips:
   - Neoverse
 tools_software_languages:
@@ -55,3 +61,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

@@ -57,7 +57,7 @@ The architecture of llama.cpp includes several key components that work together
 
 ![Architecture diagram showing llama.cpp components including backends, ggml-cpu library, and KleidiAI integration alt-text#center](images/llama_components.jpg "llama.cpp components")
 
-llama.cpp provides optimized support for Arm CPUs through its `ggml-cpu` library, which leverages Arm-specific vector instructions such as NEON and SVE, and includes an AArch64 trait that accelerates inference using 8-bit integer multiply (i8mm) instructions. The `ggml-cpu` library also integrates the Arm [KleidiAI](https://github.com/ARM-software/kleidiai) library as an additional trait. In addition to Arm CPU support, llama.cpp offers backends for GPU, CUDA, and OpenCL to enable inference on a variety of hardware platforms.
+llama.cpp provides optimized support for Arm CPUs through its `ggml-cpu` library, which leverages Arm-specific vector instructions such as Neon and SVE, and includes an AArch64 trait that accelerates inference using 8-bit integer multiply (i8mm) instructions. The `ggml-cpu` library also integrates the Arm [KleidiAI](https://github.com/ARM-software/kleidiai) library as an additional trait. In addition to Arm CPU support, llama.cpp offers backends for GPU, CUDA, and OpenCL to enable inference on a variety of hardware platforms.
 
 ## Prefill and Decode in autoregressive LLMs
 

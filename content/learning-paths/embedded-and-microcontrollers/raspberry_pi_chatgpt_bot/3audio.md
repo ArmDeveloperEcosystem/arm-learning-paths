@@ -1,5 +1,6 @@
 ---
 title: Configure and test audio
+description: Configure and test the Raspberry Pi microphone and speakers so the bot can capture speech and play responses.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

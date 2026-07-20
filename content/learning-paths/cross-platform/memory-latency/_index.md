@@ -1,5 +1,6 @@
 ---
 title: Memory latency for application software developers
+description: Learn how to reduce memory latency impact in applications using cache alignment and prefetching techniques on Arm processors for improved performance.
 minutes_to_complete: 40
 
 who_is_this_for: This is an introductory topic for Arm developers who want to learn about memory latency and cache usage in application programming. 
@@ -13,6 +14,10 @@ prerequisites:
     - An Arm computer running Linux with recent versions of Clang or GCC installed.
 
 author: Konstantinos Margaritis
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -53,10 +58,10 @@ further_reading:
         link: https://colin-scott.github.io/personal_website/research/interactive_latency.html
         type: website
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

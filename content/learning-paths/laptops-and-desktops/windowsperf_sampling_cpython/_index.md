@@ -1,6 +1,8 @@
 ---
 title: Sampling CPython with WindowsPerf
 
+description: Learn how to use WindowsPerf for performance sampling on Windows on Arm, build CPython from sources, and analyze native workload performance.
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for developers keen to understand sampling and who are new to the Arm architecture.
@@ -12,10 +14,14 @@ learning_objectives:
     - Build CPython from sources for Windows on Arm ARM64 target
 
 prerequisites:
-    - Windows on Arm desktop or development machine with [WindowsPerf installed](/install-guides/wperf)
+    - Windows on Arm desktop or development machine with [WindowsPerf installed](/install-guides/wperf/)
     - Windows x86_64 desktop machine with [Visual Studio 2022 Community Edition](https://visualstudio.microsoft.com/vs/) installed.
 
 author: Przemyslaw Wirkus
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -32,7 +38,7 @@ tools_software_languages:
 further_reading:
     - resource:
         title: Announcing WindowsPerf Open-source performance analysis tool for Windows on Arm
-        link: https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/announcing-windowsperf
+        link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/announcing-windowsperf
         type: blog
     - resource:
         title: WindowsPerf release 2.4.0 introduces the first stable version of sampling model support
@@ -89,3 +95,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

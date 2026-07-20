@@ -12,7 +12,7 @@ layout: "learningpathall"
 
 CCA enhances the virtualization capabilities of your platform by separating the management of resources from access to those resources. It does this by extending the TrustZone for Cortex-A concepts of Normal world and Secure world, adding a Realm world, and an underlying Root world. A secure monitor runs in Root world and manages the transitions between these security states.
 
-![Architecture #center](_images/realms.png)
+![Diagram showing Arm Confidential Compute Architecture with four security states: Normal world, Secure world, Realm world, and Root world, with a secure monitor managing transitions between these states#center](_images/realms.png)
 
 For a detailed explanation of how CCA is implemented, review the [Learn the Architecture](https://developer.arm.com/documentation/den0125/) documentation.
 

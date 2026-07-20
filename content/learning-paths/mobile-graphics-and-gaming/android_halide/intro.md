@@ -59,7 +59,7 @@ Halide offers several powerful scheduling strategies for maximum performance:
 
 - Parallelism is the execution of computations concurrently across multiple CPU cores, reducing execution time for large datasets
 
-- Vectorization enables simultaneous processing of multiple data elements using SIMD (Single Instruction, Multiple Data) instructions, such as Arm NEON, enhancing performance on Arm CPUs and GPUs
+- Vectorization enables simultaneous processing of multiple data elements using SIMD (Single Instruction, Multiple Data) instructions, such as Arm Neon, enhancing performance on Arm CPUs and GPUs
 
 - Tiling divides computations into smaller blocks optimized for cache efficiency, improving memory locality and reducing transfer overhead
 

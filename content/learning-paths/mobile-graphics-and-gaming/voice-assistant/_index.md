@@ -1,5 +1,6 @@
 ---
 title: Accelerate multimodal Voice Assistant performance with KleidiAI and SME2
+description: Learn how to build and optimize a multimodal Voice Assistant application on Android using KleidiAI and SME2 for accelerated performance.
 
 minutes_to_complete: 30
 
@@ -12,21 +13,31 @@ learning_objectives:
     - Optimize performance of multimodal Voice Assistant using KleidiAI and SME2.
 
 prerequisites:
-    - An Android phone that supports the i8mm Arm architecture feature (8-bit integer matrix multiplication). This Learning Path was tested on a Google Pixel 8 Pro.
+    - An Android phone that supports the i8mm Arm architecture feature (8-bit integer matrix multiplication).
+    - An Android phone with support for SME (Scalable Matrix Extension) instructions, required for SME performance checking
+    - This Learning Path was tested on a Vivo X300 Pro.
     - A development machine with [Android Studio](https://developer.android.com/studio) installed.
+    - Arm Performance Studio installed. Follow the [Arm Performance Studio install guide](/install-guides/ams/) for instructions.
 
 author:
     - Arnaud de Grandmaison
     - Nina Drozd
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
     - Cortex-A
+    - Arm C1
 tools_software_languages:
     - Java
     - Kotlin
     - CPP
+    - SME2
+    - Arm Performance Studio
 operatingsystems:
     - Android
     - Linux
@@ -55,3 +66,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

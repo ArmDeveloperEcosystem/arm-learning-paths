@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Build and run the application"
+description: Build and run the CMSIS-RTOS2 RTX application from Keil Studio for VS Code and verify the generated firmware.
 
 weight: 5 # 1 is first, 2 is second, etc.
 
@@ -21,7 +22,7 @@ Choose the debug connection you configured earlier to launch the FVP (Fixed Virt
 
 Use the debugging controls to step through your code.
 
-Once the OS is initialized, you will see the output from the threads displayed in the `Debug Console`.
+Once the OS is initialized, you'll see the output from the threads displayed in the `Debug Console`.
 
 ```
 [model] hello from thread 1
