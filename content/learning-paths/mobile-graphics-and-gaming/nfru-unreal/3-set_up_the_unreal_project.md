@@ -21,7 +21,7 @@ To enable Neural Frame Rate Upscaling (NFRU) for Unreal Engine, follow these ste
 
 3. Open Command Prompt in the `Plugins` directory and create a symbolic link to the plugin folder for your Unreal Engine version. You need administrator permissions to create the symbolic link.
 
-    ```bash
+    ```console
     mklink /D neural-graphics-for-unreal /path/to/neural-graphics-for-unreal/[UEVersion]
     ```
 

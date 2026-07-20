@@ -1,6 +1,7 @@
 ---
 title: Set up the development environment
 description: Install the Vulkan SDK and CMake, build the Neural Graphics SDK, and configure Vulkan ML emulation layers for NFRU development.
+
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -8,14 +9,14 @@ layout: learningpathall
 ---
 ## Install the required tools and dependencies
 
-To use NFRU in your Unreal Engine project, install and configure several tools. These components provide the development environment and runtime support for building and testing NFRU with ML extensions for Vulkan.
+To use Neural Frame Rate Upscaling (NFRU) in your Unreal Engine project, install and configure several tools. These components provide the development environment and runtime support for building and testing NFRU with ML extensions for Vulkan.
 
 Install the following:
 
-- [Vulkan SDK](https://vulkan.lunarg.com/sdk/home/) — Required for developing applications that use Vulkan. It includes the Vulkan Configurator, which you use to enable the emulation layers for running ML workloads through Vulkan ML extensions. Install the version 1.4.321.0 or later.
-- [CMake](https://cmake.org/download/) — A build system that configures and generates project build files. You use CMake to build the Neural Graphics SDK, which compiles the components and dependencies required by the neural graphics plugins and tools. version from 3.21 to 3.31.
+- [Vulkan SDK](https://vulkan.lunarg.com/sdk/home/) — Required for developing applications that use Vulkan. It includes the Vulkan Configurator, which you use to enable the emulation layers for running ML workloads through Vulkan ML extensions. Install the version 1.4.321.0 or newer.
+- [CMake](https://cmake.org/download/) — A build system that configures and generates project build files. You use CMake to build the Neural Graphics SDK, which compiles the components and dependencies required by the neural graphics plugins and tools. The minimum necessary CMake version is 3.21, and the maximum version is 3.31.
 - [`neural-graphics-for-unreal`](https://github.com/arm/neural-graphics-for-unreal/tree/main) — The Unreal Engine integration for the Neural Graphics Development Kit. The `neural-graphics-for-unreal` repository contains the NFRU plugin and resources you need to integrate neural graphics features into Unreal Engine.
-- (Optional) [ML Emulation Layer for Vulkan](https://github.com/arm/ai-ml-emulation-layer-for-vulkan) — The `neural-graphics-for-unreal` repository includes prebuilt Vulkan ML emulation layers for supported Unreal Engine versions. If you need support for a different version, build the emulation layer from source.
+- [ML Emulation Layer for Vulkan](https://github.com/arm/ai-ml-emulation-layer-for-vulkan) — The `neural-graphics-for-unreal` repository includes prebuilt Vulkan ML emulation layers for supported Unreal Engine versions. If you need support for a different version, build the emulation layer from source.
 
 ## Set up the neural-graphics-for-unreal repository
 
@@ -34,7 +35,7 @@ Clone and set up the `neural-graphics-for-unreal` repository and integrate it wi
      git submodule update --init
      ```
 
-3. Install Git LFS:
+3. Initialize Git LFS:
 
      ```bash
      git lfs install
@@ -67,7 +68,7 @@ To emulate the ML extensions for Vulkan:
 
      ![Vulkan Configurator Vulkan Layers Location tab with the folder-add button highlighted for adding a user-defined layer path#center](./images/append_user_defined_layer_path.png "Add the prebuilt Vulkan emulation layer path")
 
-3. Select the **neural-graphics-for-unreal/[UEVersion]/Binaries/ThirdParty/VulkanMLEmulation/Win64** folder.
+3. Select the `neural-graphics-for-unreal/[UEVersion]/Binaries/ThirdParty/VulkanMLEmulation/Win64` folder.
 
 
      A **Loading Layer Completed** dialog appears, showing that two layer manifests loaded successfully.
@@ -76,8 +77,8 @@ To emulate the ML extensions for Vulkan:
 
 4. Verify that the following layers appear in the list:
 
-     - **VK_LAYER_ML_Graph_Emulation**
-     - **VK_LAYER_ML_Tensor_Emulation**
+     - `VK_LAYER_ML_Graph_Emulation`
+     - `VK_LAYER_ML_Tensor_Emulation`
 
      ![Vulkan Configurator layer list showing the Graph and Tensor emulation layers loaded from the selected folder#center](./images/loaded_layers.png "Loaded Vulkan emulation layers")
 

@@ -1,5 +1,5 @@
 ---
-title: Validate NFRU in unreal engine
+title: Validate NFRU in Unreal Engine
 description: Run NFRU in Unreal Engine Standalone Game mode, confirm its debug output, and troubleshoot common Vulkan emulation and plugin issues.
 weight: 5
 
@@ -21,7 +21,7 @@ Select the green **Play** button to launch the level in a new window.
 
 To confirm NFRU is running, enter the following commands in Unreal:
 
-```
+```console
 r.NFRU.Enable 1
 r.NFRU.ShowDebugView 1
 ```
@@ -51,7 +51,7 @@ If the plugin is enabled but not working:
 - Start Vulkan Configurator and confirm it is running
 - Ensure the correct layer configuration is active
 - Check the emulation layer path
-- Confirm the Graph layer is above the Tensor layer
+- Confirm the Graph layer comes before the Tensor layer
 
 For detailed setup steps, see the [emulation layer section](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/2-set_up_the_development_environment/).
 
@@ -68,6 +68,6 @@ Version mismatches or missing dependencies cause most build or startup issues.
 
 ## What you've accomplished and what's next
 
-You've now validated NFRU in a runtime environment using Unreal Engine, confirmed its activation, and resolved common troubleshooting scenarios. 
+You've now validated NFRU in a runtime environment using Unreal Engine, confirmed its activation, and learned how to resolve common troubleshooting scenarios. 
 
 Next, you'll explore built-in NFRU console variables to further customize and analyze performance.

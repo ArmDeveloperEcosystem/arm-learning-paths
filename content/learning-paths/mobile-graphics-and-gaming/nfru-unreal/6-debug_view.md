@@ -30,7 +30,7 @@ Two time references appear in the grid:
 
 ### Grid layout
 
-The layout of the 3 x 3 grid is as follows:
+The layout of the 3 × 3 grid is as follows:
 
 | Row | Column 1 | Column 2 | Column 3 |
 |-----|----------|----------|----------|
@@ -59,6 +59,6 @@ You can use the debug view to identify the following issues during development:
 
 ## What you've accomplished and what's next
 
-You've now learned how to activate and read the NFRU debug view grid in Unreal Engine. You can inspect intermediate buffers to validate frame generation and identify common issues.
+You've now activated the NFRU debug view grid in Unreal Engine and learned how to read it. You can inspect intermediate buffers to validate frame generation and identify common issues.
 
 Next, you'll use RenderDoc to capture and analyze frame data in greater detail.

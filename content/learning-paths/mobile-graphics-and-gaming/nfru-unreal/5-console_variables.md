@@ -12,17 +12,17 @@ The following table summarizes key console variables for Neural Frame Rate Upsca
 
 | Console Variable                  | Type | Default Value           | Description                                                                                                  | Notes                   |
 |-----------------------------------|------|-------------------------|---------------------------------------------------------------------------------------------------------------|-------------------------|
-| r.NFRU.Enable                    | int  | 0                       | Enables NFRU features. To activate NFRU, set this variable to `1`.                                                                                       | —                       |
-| r.NFRU.CaptureDebugUI            | int  | 1 (non-shipping builds) | Captures debug UI rendered on the first Slate DrawWindow call to help debug overlays                                              | Non-shipping builds only|
-| r.NFRU.UpdateGlobalFrameTime     | int  | 0                       | Includes interpolated frames in global frame time and FPS calculations to ensure performance metrics reflect NFRU's impact                                   | —                       |
-| r.NFRU.ModifySlateDeltaTime      | int  | 1                       | Sets Slate's delta time to `0.0` during UI redraws in Slate Redraw UI mode to avoid NativeTick side effects    | Slate Redraw UI mode    |
-| r.NFRU.PaceAdjuster              | int  | 0                       | Enables FPS Pace Adjuster for dynamic target FPS adjustment based on real performance for smoother pacing                                           | —                       |
-| r.NFRU.UpAdjustFrameCount        | int  | 40                      | Frames above target FPS needed to increase FPS when Pace Adjuster is active. Controls how quickly the Pace Adjuster responds to sustained FPS changes                                  | Requires Pace Adjuster  |
-| r.NFRU.DownAdjustFrameCount      | int  | 20                      | Frames below target FPS needed to decrease FPS when Pace Adjuster is active. Controls how quickly the Pace Adjuster responds to sustained FPS changes                                | Requires Pace Adjuster  |
-| r.NFRU.DataGraphOpticalFlow      | int  | 1                       | Selects optical flow method. Set the value as `0` for Data Graph to be the preferred method, `1` for Data Graph to be the only method, and `2` for a shader-based approach                 | Unreleased builds only  |
-| r.NFRU.DataGraphFrameGeneration  | int  | 1                       | Selects frame generation method. Set the value as `0` for NFRU, `1` for Neural, and `2` for a shader-based approach                                   | Unreleased builds only  |
-| r.NFRU.OnlyInterpolatedFrames    | int  | 0                       | Presents only interpolated frames for debugging and validating results                                                              | Dev/Test builds only    |
-| r.NFRU.ShowDebugView             | int  | 0                       | Shows debug visualization of frame interpolation                                                             | Dev/Test builds only    |
+| `r.NFRU.Enable`                    | int  | 0                       | Enables NFRU features. To activate NFRU, set this variable to `1`.                                                                                       | —                       |
+| `r.NFRU.CaptureDebugUI`            | int  | 1 (non-shipping builds) | Captures debug UI rendered on the first Slate DrawWindow call to help debug overlays                                              | Non-shipping builds only|
+| `r.NFRU.UpdateGlobalFrameTime`     | int  | 0                       | Includes interpolated frames in global frame time and FPS calculations to ensure performance metrics reflect NFRU's impact                                   | —                       |
+| `r.NFRU.ModifySlateDeltaTime`      | int  | 1                       | Sets Slate's delta time to `0.0` during UI redraws in Slate Redraw UI mode to avoid NativeTick side effects    | Slate Redraw UI mode    |
+| `r.NFRU.PaceAdjuster`              | int  | 0                       | Enables FPS Pace Adjuster for dynamic target FPS adjustment based on real performance for smoother pacing                                           | —                       |
+| `r.NFRU.UpAdjustFrameCount`        | int  | 40                      | Frames above target FPS needed to increase FPS when Pace Adjuster is active. Controls how quickly the Pace Adjuster responds to sustained FPS changes                                  | Requires Pace Adjuster  |
+| `r.NFRU.DownAdjustFrameCount`      | int  | 20                      | Frames below target FPS needed to decrease FPS when Pace Adjuster is active. Controls how quickly the Pace Adjuster responds to sustained FPS changes                                | Requires Pace Adjuster  |
+| `r.NFRU.DataGraphOpticalFlow`      | int  | 1                       | Selects optical flow method. Set the value as `0` for Data Graph to be the preferred method, `1` for Data Graph to be the only method, and `2` for a shader-based approach                 | Unreleased builds only  |
+| `r.NFRU.DataGraphFrameGeneration`  | int  | 1                       | Selects frame generation method. Set the value as `0` for NFRU, `1` for Neural, and `2` for a shader-based approach                                   | Unreleased builds only  |
+| `r.NFRU.OnlyInterpolatedFrames`    | int  | 0                       | Presents only interpolated frames for debugging and validating results                                                              | Dev/Test builds only    |
+| `r.NFRU.ShowDebugView`             | int  | 0                       | Shows debug visualization of frame interpolation                                                             | Dev/Test builds only    |
 
 ## Monitor frame generation performance with STATGROUP_FrameGen
 
@@ -30,7 +30,7 @@ NFRU provides the `STATGROUP_FrameGen` statistics group to monitor frame generat
 
 Run the following command in the Unreal Engine console:
 
-```bash
+```console
 stat FrameGen
 ```
 
@@ -56,6 +56,6 @@ Typically, `Generated FPS` matches the engine FPS, while `Paced FPS` might diffe
 
 ## What you've accomplished and what's next
 
-You've now learned about the main console variables that control NFRU features in Unreal Engine, including enablement, debugging, and performance tuning. You know how to adjust these variables to optimize NFRU behavior and how to use the `STATGROUP_FrameGen` statistics group to monitor frame generation performance.
+You've now learned how to adjust and optimize the main console variables that control NFRU features in Unreal Engine, including enablement, debugging, and performance tuning. You've also used `STATGROUP_FrameGen` to monitor frame generation performance.
 
 Next, you'll explore how to use the debug view to visualize frame interpolation and validate NFRU output during development and testing.

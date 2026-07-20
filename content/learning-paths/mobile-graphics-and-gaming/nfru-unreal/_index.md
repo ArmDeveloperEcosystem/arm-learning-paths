@@ -1,23 +1,24 @@
 ---
-title: Enable and configure NFRU in Unreal Engine
-description: Configure Neural Frame Rate Upscaling (NFRU) in Unreal Engine with ML Extensions for Vulkan, then validate, tune, debug, and analyze frame generation.
+title: Enable Neural Frame Rate Upscaling in Unreal Engine
+description: Configure Neural Frame Rate Upscaling (NFRU) in Unreal Engine with ML extensions for Vulkan, then validate, tune, debug, and analyze frame generation.
 
 minutes_to_complete: 30
 
-who_is_this_for: This Learning Path is designed for developers interested in exploring neural frame generation techniques in Unreal Engine® using ML Extensions for Vulkan®.
+who_is_this_for: This Learning Path is designed for developers interested in exploring neural frame generation techniques in Unreal Engine® using ML extensions for Vulkan®.
 
 learning_objectives:
     - Understand the fundamentals of neural graphics in game development
-    - Set up and use ML Extensions for Vulkan emulation
+    - Set up and use ML extensions for Vulkan emulation
     - Set up Neural Frame Rate Upscaling (NFRU) in Unreal Engine
     - Visualize neural frame generation result
-    - Tune NFRU performance and quality with available console variables
+    - Set available console variables for tuning NFRU performance and quality
 
 
 prerequisites:
     - Windows 11
     - Unreal Engine 4.27 or 5.4 or 5.6 (with the Templates and Feature Pack enabled)
     - Visual Studio (with Desktop Development with C++ and .NET desktop build tools)
+    - Git Large File Storage (LFS) downloaded and installed
 
 
 author: Powen Yang
@@ -45,8 +46,12 @@ further_reading:
         link: https://developer.arm.com/Tools%20and%20Software/RenderDoc%20for%20Arm%20GPUs
         type: documentation
     - resource:
-        title: Get started with neural graphics using ML Extensions for Vulkan
+        title: Get started with neural graphics using ML extensions for Vulkan
         link: /learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/
+        type: learningpath
+    - resource:
+        title: Train and evaluate Neural Frame Rate Upscaling models using Model Gym
+        link: /learning-paths/mobile-graphics-and-gaming/model-training-gym-nfru/
         type: learningpath
 
 
