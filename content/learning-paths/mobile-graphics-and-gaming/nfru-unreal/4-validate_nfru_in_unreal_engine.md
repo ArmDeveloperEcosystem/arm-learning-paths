@@ -29,7 +29,7 @@ You see the NFRU debug visualization, which confirms the feature is active durin
 
 For more details about the debug outputs, see the [Debug view section](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/6-debug_view).
 
-## Troubleshooting tips
+## Troubleshoot issues with the game
 
 If the game does not behave as expected, check these common issues:
 
@@ -53,6 +53,8 @@ If the plugin is enabled but not working:
 For detailed setup steps, see the [emulation layer section](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/2-set_up_the_development_environment/).
 
 ### Software and hardware setup
+
+If there are issues with software and hardware setup:
 
 - Ensure the NFRU plugin version matches your Unreal Engine version
 - Confirm your GPU driver supports Vulkan

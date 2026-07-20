@@ -1,12 +1,12 @@
 ---
-title:  Using RenderDoc for Debugging and Analysis
+title: Use RenderDoc for Debugging and Analysis
 weight: 8
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Why use RenderDoc with Neural Frame Rate Upscaling?
+## Why use RenderDoc with Neural Frame Rate Upscaling
 
 When you integrate neural upscaling into your game, you need visual debugging and performance profiling. RenderDoc is a frame capture and analysis tool that lets you step through frames, inspect Vulkan API calls, examine shader inputs and outputs, and review GPU resource states. Arm provides additional features for RenderDoc in [RenderDoc for Arm GPUs](https://developer.arm.com/Tools%20and%20Software/RenderDoc%20for%20Arm%20GPUs).
 
@@ -76,3 +76,17 @@ With RenderDoc, you can:
 - Explore your data graph pipeline execution frame by frame
 
 For more information, see the [Debug With RenderDoc User Guide](https://developer.arm.com/documentation/109669/latest).
+
+## What you've accomplished
+
+You've completed a full workflow for Neural Frame Rate Upscaling (NFRU) in Unreal Engine:
+
+- Understood NFRU fundamentals and how it improves game performance
+- Set up your development environment with Vulkan SDK and ML Extensions
+- Installed and enabled the NFRU plugin in Unreal Engine
+- Tested neural frame generation in sample scenes
+- Adjusted NFRU settings using console variables
+- Visualized NFRU intermediate buffers
+- Inspected frames with RenderDoc
+
+You can now integrate neural frame generation into Unreal Engine, optimize it for your hardware, and debug your rendering pipeline.

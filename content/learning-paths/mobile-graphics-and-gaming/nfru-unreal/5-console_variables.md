@@ -1,5 +1,5 @@
 ---
-title: Console Variables for NFRU
+title: Understand console variables for NFRU
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -35,7 +35,7 @@ Use `r.NFRU.PaceAdjuster` to dynamically adjust target FPS based on real-time pe
 
 Set `r.NFRU.OnlyInterpolatedFrames` to present only interpolated frames, which helps you debug and validate your results. Use `r.NFRU.ShowDebugView` to display a debug visualization of frame interpolation in development or test builds.
 
-## Using STAT_FrameGen
+## Use STAT_FrameGen
 
 NFRU provides the `STATGROUP_FrameGen` statistics group to monitor frame generation performance at runtime. Enter the following command in the Unreal Engine console:
 
@@ -54,7 +54,7 @@ This command displays runtime metrics such as generated frame rate, generation t
 | Paced FPS       | `STAT_FrameGen_PacedFPS`     | Presentation-paced FPS, reflecting any swap chain pacing applied to generated frames. Useful for evaluating final upsampled frame rate. |
 | Paced Ms        | `STAT_FrameGen_PacedMs`      | Average time (ms) between paced frame presentations, reflecting wall-clock intervals with pacing or VSync. |
 
-### Interpreting statistics
+### Interpret statistics
 
 - **Generated FPS / Generated Ms**: Show internal frame generation performance.
 - **Paced FPS / Paced Ms**: Reflect actual presentation cadence after pacing or synchronization.

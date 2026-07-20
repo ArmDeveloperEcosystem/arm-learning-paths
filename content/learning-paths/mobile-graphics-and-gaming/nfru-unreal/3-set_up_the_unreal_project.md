@@ -1,5 +1,5 @@
 ---
-title: Set up the Unreal project
+title: Set up the Unreal project with NFRU enabled
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -24,9 +24,9 @@ layout: learningpathall
 
     ![Command to create a symbolic link#center](./images/mklink_command.png "Figure 3: Command to create a symbolic link.")
 
-4. Regenerate the **Visual Studio project files** so Unreal Engine detects the plugin.
+4. Regenerate the Visual Studio project files so Unreal Engine detects the plugin.
 
-5. Open your project in **Visual Studio** and build it using **Build** > **Build Solution** or press `Ctrl+Shift+B`.
+5. Open your project in Visual Studio and build it using **Build** > **Build Solution** or press `Ctrl+Shift+B`.
 
 After building, open your project in Unreal Engine.
 
@@ -50,7 +50,9 @@ Unreal Engine uses DirectX by default. To use NFRU, you must set Vulkan as the r
 
 3. Enable the plugin and restart Unreal Engine.
 
-## Troubleshooting
+## Troubleshoot issues with setup
+
+Use the following guidance to troubleshoot issues with setting up the Unreal project with NFRU.
 
 ### "Bad Image" error with ngsdk_windows_x64.dll
 

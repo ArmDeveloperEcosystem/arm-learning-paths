@@ -24,8 +24,8 @@ The frame generation system displays a 3 × 3 grid of intermediate data. You can
 
 Two time references appear in the grid:
 
-- **tm1** – previous frame
-- **tp1** – next frame
+- `tm1` – previous frame
+- `tp1` – next frame
 
 ### Grid layout
 
@@ -37,13 +37,13 @@ Two time references appear in the grid:
 
 ### What each tile shows
 
-**Depth tiles** show the depth buffers for the previous and next frames. Use these to identify geometry and disocclusion regions.
+*Depth tiles* show the depth buffers for the previous and next frames. Use these to identify geometry and disocclusion regions.
 
-**Disocclusion mask tiles** highlight pixels that become visible as the camera moves. These areas often require special handling during frame generation.
+*Disocclusion mask tiles* highlight pixels that become visible as the camera moves. These areas often require special handling during frame generation.
 
-**Motion warped color tiles** display frames reprojected using engine motion vectors. Check these tiles to verify motion-vector accuracy.
+*Motion warped color tiles* display frames reprojected using engine motion vectors. Check these tiles to verify motion-vector accuracy.
 
-**Optical flow warped color tiles** show frames warped with optical flow estimation. Compare these with the motion-warped tiles to assess optical flow quality.
+*Optical flow warped color tiles* show frames warped with optical flow estimation. Compare these with the motion-warped tiles to assess optical flow quality.
 
 ## Use the debug view to troubleshoot
 

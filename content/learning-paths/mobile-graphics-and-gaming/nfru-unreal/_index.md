@@ -1,5 +1,5 @@
 ---
-title: Neural Frame Rate Upscaling in Unreal Engine
+title: Enable and configure Neural Frame Rate Upscaling (NFRU) in Unreal Engine
 
 minutes_to_complete: 30
 
@@ -8,7 +8,7 @@ who_is_this_for: This Learning Path is designed for developers interested in exp
 learning_objectives:
     - Understand the fundamentals of neural graphics in game development
     - Set up and use ML Extensions for Vulkan emulation
-    - Enable and configure Neural Frame Rate Upscaling (NFRU) in Unreal Engine
+    - Set up Neural Frame Rate Upscaling (NFRU) in Unreal Engine
     - Visualize neural frame generation result
     - Tune NFRU performance and quality with available console variables
 
@@ -34,8 +34,6 @@ tools_software_languages:
 operatingsystems:
     - Windows
 
-
-
 further_reading:
     - resource:
         title: Neural Graphics Development Kit
@@ -45,6 +43,10 @@ further_reading:
         title: RenderDoc for Arm GPUs
         link: https://developer.arm.com/Tools%20and%20Software/RenderDoc%20for%20Arm%20GPUs
         type: documentation
+    - resource:
+        title: Get started with neural graphics using ML Extensions for Vulkan
+        link: /learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/
+        type: learningpath
 
 
 
