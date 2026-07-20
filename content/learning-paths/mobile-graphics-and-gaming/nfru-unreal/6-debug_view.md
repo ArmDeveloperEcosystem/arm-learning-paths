@@ -1,5 +1,5 @@
 ---
-title:  Debug View
+title: Set up a debug view in Unreal Engine
 weight: 7
 
 ### FIXED, DO NOT MODIFY
@@ -29,6 +29,8 @@ Two time references appear in the grid:
 
 ### Grid layout
 
+The layout of the 3 x 3 grid is as follows:
+
 | Row | Column 1 | Column 2 | Column 3 |
 |-----|----------|----------|----------|
 | 1 | depth tm1 | depth tp1 | disocclusion mask tm1 |
@@ -37,17 +39,17 @@ Two time references appear in the grid:
 
 ### What each tile shows
 
-*Depth tiles* show the depth buffers for the previous and next frames. Use these to identify geometry and disocclusion regions.
+Depth tiles show the depth buffers for the previous and next frames. Use these to identify geometry and disocclusion regions.
 
-*Disocclusion mask tiles* highlight pixels that become visible as the camera moves. These areas often require special handling during frame generation.
+Disocclusion mask tiles highlight pixels that become visible as the camera moves. These areas often require special handling during frame generation.
 
-*Motion warped color tiles* display frames reprojected using engine motion vectors. Check these tiles to verify motion-vector accuracy.
+Motion warped color tiles display frames reprojected using engine motion vectors. Check these tiles to verify motion-vector accuracy.
 
-*Optical flow warped color tiles* show frames warped with optical flow estimation. Compare these with the motion-warped tiles to assess optical flow quality.
+Optical flow warped color tiles show frames warped with optical flow estimation. Compare these with the motion-warped tiles to assess optical flow quality.
 
 ## Use the debug view to troubleshoot
 
-The debug grid helps you identify issues during development:
+You can use the debug view to identify the following issues during development:
 
 - Spot incorrect motion vectors
 - Detect disocclusion artifacts
@@ -56,6 +58,6 @@ The debug grid helps you identify issues during development:
 
 ## What you've accomplished and what's next
 
-You've learned how to activate and read the NFRU debug view grid in Unreal Engine. You can now inspect intermediate buffers to validate frame generation and identify common issues.
+You've now learned how to activate and read the NFRU debug view grid in Unreal Engine. You can inspect intermediate buffers to validate frame generation and identify common issues.
 
 Next, you'll use RenderDoc to capture and analyze frame data in greater detail.

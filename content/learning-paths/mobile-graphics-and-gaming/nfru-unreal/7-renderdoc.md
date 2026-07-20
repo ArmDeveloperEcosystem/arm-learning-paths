@@ -1,14 +1,16 @@
 ---
-title: Use RenderDoc for Debugging and Analysis
+title: Use RenderDoc with NFRU for debugging and analysis
 weight: 8
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Why use RenderDoc with Neural Frame Rate Upscaling
+## Why use RenderDoc with NFRU
 
-When you integrate neural upscaling into your game, you need visual debugging and performance profiling. RenderDoc is a frame capture and analysis tool that lets you step through frames, inspect Vulkan API calls, examine shader inputs and outputs, and review GPU resource states. Arm provides additional features for RenderDoc in [RenderDoc for Arm GPUs](https://developer.arm.com/Tools%20and%20Software/RenderDoc%20for%20Arm%20GPUs).
+When you integrate neural upscaling into your game, you need visual debugging and performance profiling. RenderDoc is a frame capture and analysis tool that you can use to review frames, Vulkan API calls, shader inputs and outputs, and GPU resource states. 
+
+Arm provides additional features for RenderDoc in [RenderDoc for Arm GPUs](https://developer.arm.com/Tools%20and%20Software/RenderDoc%20for%20Arm%20GPUs).
 
 Use RenderDoc to:
 
@@ -19,11 +21,11 @@ Use RenderDoc to:
 
 ## Install Arm Performance Studio
 
-Download Arm Performance Studio from the [Arm Performance Studio Downloads](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio#Downloads) page. For Neural Frame Rate Upscaling (NFRU), use version `2025.6` or later.
+Download Arm Performance Studio from the [Arm Performance Studio Downloads](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio#Downloads) page. For NFRU, use version `2025.6` or later.
 
-See the [Arm Performance Studio install guide](/install-guides/ams) for setup instructions.
+For setup instructions, see the [Arm Performance Studio install guide](/install-guides/ams).
 
-After installation, you find RenderDoc for Arm GPUs in the Windows **Start** menu.
+After installation, you'll find RenderDoc for Arm GPUs in the Windows **Start** menu.
 
 ## Build a Windows package in Unreal Engine
 
@@ -56,8 +58,9 @@ Your application launches under RenderDoc. You can now capture frames and analyz
 To capture a frame:
 
 1. With your application running, return to the RenderDoc window.
-2. Click the **Capture Frame Immediately** button (camera icon) or press `F12` while your game window is focused.
-3. The captured frame appears in RenderDoc.
+2. Select the **Capture Frame Immediately** button (camera icon) or press `F12` while your game window is focused.
+
+The captured frame appears in RenderDoc.
 
 ![RenderDoc for Arm GPUs interface showing the capture frame button and a running application. This demonstrates how to capture a frame during execution#center](./images/renderdoc_capture.png "Capture a frame from the running NFRU application")
 
@@ -79,14 +82,6 @@ For more information, see the [Debug With RenderDoc User Guide](https://develope
 
 ## What you've accomplished
 
-You've completed a full workflow for Neural Frame Rate Upscaling (NFRU) in Unreal Engine:
+You've now learned how to set up and use RenderDoc for debugging your game. You've completed a full workflow for NFRU in Unreal Engine.
 
-- Understood NFRU fundamentals and how it improves game performance
-- Set up your development environment with Vulkan SDK and ML Extensions
-- Installed and enabled the NFRU plugin in Unreal Engine
-- Tested neural frame generation in sample scenes
-- Adjusted NFRU settings using console variables
-- Visualized NFRU intermediate buffers
-- Inspected frames with RenderDoc
-
-You can now integrate neural frame generation into Unreal Engine, optimize it for your hardware, and debug your rendering pipeline.
+You can integrate neural frame generation into Unreal Engine, optimize it for your hardware, and debug your rendering pipeline.

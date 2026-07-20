@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Enable NFRU for Unreal Engine
 
-To enable NFRU for Unreal Engine, follow these steps:
+To enable Neural Frame Rate Upscaling (NFRU) for Unreal Engine, follow these steps:
 
 1. Open Unreal Engine and create a new **Third Person** template project using the **C++** option. You need a C++ project to build the Neural Graphics for Unreal plugin.
 
@@ -37,7 +37,7 @@ After building, open your project in Unreal Engine.
 Unreal Engine uses DirectX by default. To use NFRU, you must set Vulkan as the rendering hardware interface (RHI):
 
 1. Open **Project Settings** in Unreal Engine.
-2. Go to **Platform** > **Windows** > **Targeted RHIs** > **Default RHI**.
+2. Navigate to **Platform** > **Windows** > **Targeted RHIs** > **Default RHI**.
 3. Select **Vulkan**.
 4. Restart Unreal Engine to apply the change.
 
@@ -62,7 +62,7 @@ If you see a "Bad Image" error that mentions `ngsdk_windows_x64.dll`, the Neural
 
 To fix this:
 
-- Build the SDK for your platform using the `buildsdk.bat` script. See [Build the SDK](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/2-set_up_the_development_environment) for details.
+- Build the SDK for your platform using the `buildsdk.bat` script. For more information, see [Build the SDK](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/2-set_up_the_development_environment).
 - Check that `ngsdk_windows_x64.dll` exists in the plugin's `Binaries` directory.
 
     ![Developer Command Prompt showing that the SDK binaries built successfully.#center](./images/sdk_built_check.png "Successful SDK binary build")
@@ -77,4 +77,6 @@ If you see a "Plugin only supports Vulkan backend" error, return to the [Change 
 
 ## What you've accomplished and what's next
 
-You've enabled NFRU, set Vulkan as the default RHI, and activated the plugin. Next, you'll run Neural Frame Rate Upscaling in Unreal Engine to validate your setup.
+You've now enabled NFRU, set Vulkan as the default RHI, and activated the plugin.
+
+Next, you'll run Neural Frame Rate Upscaling in Unreal Engine to validate your setup.

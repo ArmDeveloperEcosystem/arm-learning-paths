@@ -1,5 +1,5 @@
 ---
-title: Enable and configure Neural Frame Rate Upscaling (NFRU) in Unreal Engine
+title: Enable and configure NFRU in Unreal Engine
 
 minutes_to_complete: 30
 

@@ -1,5 +1,5 @@
 ---
-title: Understand neural graphics and Neural Framerate Upscaling (NFRU)
+title: Understand neural graphics and NFRU
 weight: 2
 
 ### FIXED, DO NOT MODIFY

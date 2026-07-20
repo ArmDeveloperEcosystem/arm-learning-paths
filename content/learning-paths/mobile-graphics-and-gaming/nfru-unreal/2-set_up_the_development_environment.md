@@ -7,12 +7,12 @@ layout: learningpathall
 ---
 ## Install the required tools and dependencies
 
-To use Neural Frame Rate Upscaling (NFRU) in your Unreal Engine project, install and configure several tools. These components provide the development environment and runtime support for building and testing NFRU with ML extensions for Vulkan.
+To use NFRU in your Unreal Engine project, install and configure several tools. These components provide the development environment and runtime support for building and testing NFRU with ML extensions for Vulkan.
 
 Install the following:
 
-- [Vulkan SDK](https://vulkan.lunarg.com/sdk/home/) — Required for developing applications that use Vulkan. It includes the Vulkan Configurator, which you use to enable the emulation layers for running ML workloads through Vulkan ML extensions. Install the version 1.4.321.0 or newer.
-- [CMake](https://cmake.org/download/) — A build system that configures and generates project build files. You use CMake to build the Neural Graphics SDK, which compiles the components and dependencies required by the neural graphics plugins and tools. Install a version from 3.21 to 3.31.
+- [Vulkan SDK](https://vulkan.lunarg.com/sdk/home/) — Required for developing applications that use Vulkan. It includes the Vulkan Configurator, which you use to enable the emulation layers for running ML workloads through Vulkan ML extensions. Install the version 1.4.321.0 or later.
+- [CMake](https://cmake.org/download/) — A build system that configures and generates project build files. You use CMake to build the Neural Graphics SDK, which compiles the components and dependencies required by the neural graphics plugins and tools. version from 3.21 to 3.31.
 - [`neural-graphics-for-unreal`](https://github.com/arm/neural-graphics-for-unreal/tree/main) — The Unreal Engine integration for the Neural Graphics Development Kit. The `neural-graphics-for-unreal` repository contains the NFRU plugin and resources you need to integrate neural graphics features into Unreal Engine.
 - (Optional) [ML Emulation Layer for Vulkan](https://github.com/arm/ai-ml-emulation-layer-for-vulkan) — The `neural-graphics-for-unreal` repository includes prebuilt Vulkan ML emulation layers for supported Unreal Engine versions. If you need support for a different version, build the emulation layer from source.
 

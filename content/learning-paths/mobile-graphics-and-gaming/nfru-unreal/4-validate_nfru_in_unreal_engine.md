@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Start the level and validate NFRU
 
-NFRU is not supported in the standard Unreal Engine viewport. To test NFRU features, use **Standalone Game** mode or create a packaged build. This activates NFRU in a runtime environment.
+Neural Frame Rate Upscaling (NFRU) isn't supported in the standard Unreal Engine viewport. Use **Standalone Game** mode or create a packaged build to activate NFRU in a runtime environment and test features.
 
 ![Standalone game mode in Unreal Engine editor showing the Play dropdown set to "Standalone Game"#center](./images/standalone_game.png "Use Standalone Game mode to test NFRU")
 
@@ -16,14 +16,16 @@ When you switch to **Standalone Game** mode, the **Play** button changes appeara
 
 ![Green Play button in Unreal Engine editor, indicating Standalone Game mode is active#center](./images/play_in_new_window.png "Play button when Standalone Game mode is active")
 
-Select the green **Play** button to launch the level in a new window. To confirm NFRU is running, enter these commands in Unreal:
+Select the green **Play** button to launch the level in a new window.
+
+To confirm NFRU is running, enter the following commands in Unreal:
 
 ```
 r.NFRU.Enable 1
 r.NFRU.ShowDebugView 1
 ```
 
-You see the NFRU debug visualization, which confirms the feature is active during gameplay.
+You'll see the NFRU debug visualization, which confirms the feature is active during gameplay.
 
 ![NFRU debug view in Standalone Game showing tiled depth, disocclusion, motion-warped, and optical-flow outputs, confirming that the debug visualization is active#center](./images/nfru_debug_runtime.png "NFRU debug output during runtime")
 
@@ -31,7 +33,7 @@ For more details about the debug outputs, see the [Debug view section](/learning
 
 ## Troubleshoot issues with the game
 
-If the game does not behave as expected, check these common issues:
+If the game doesn't behave as expected, consider the following:
 
 ### Game crash
 
@@ -65,4 +67,6 @@ Version mismatches or missing dependencies cause most build or startup issues.
 
 ## What you've accomplished and what's next
 
-You have validated NFRU in a runtime environment using Unreal Engine, confirmed its activation, and resolved common troubleshooting scenarios. Next, explore built-in NFRU console variables to further customize and analyze performance, or proceed to the final section for additional resources and guidance on NFRU.
+You've now validated NFRU in a runtime environment using Unreal Engine, confirmed its activation, and resolved common troubleshooting scenarios. 
+
+Next, you'll explore built-in NFRU console variables to further customize and analyze performance.

@@ -1,5 +1,5 @@
 ---
-title: Train and evaluate Neural Frame Rate Upscaling (NFRU) models using Model Gym
+title: Train and evaluate Neural Frame Rate Upscaling models using Model Gym
 description: Learn how to train and evaluate Neural Frame Rate Upscaling (NFRU) models using PyTorch and Arm's Model Gym API with hardware-aware optimization.
 
 minutes_to_complete: 45
