@@ -17,7 +17,7 @@ prerequisites:
     - Visual Studio workload - Desktop development with C++
     - Visual Studio workload - .NET desktop build tools
 
-author: Annie Tallund
+author: Annie Tallund, Joshua Marshall-Law
 
 generate_summary_faq: true
 rerun_summary: false
