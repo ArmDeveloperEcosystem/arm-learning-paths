@@ -23,7 +23,7 @@ This repository includes the framework and samples showcasing the ML extensions 
 
 ## Setting up Visual studio build tools 
 
-to build the Vulkan Samples on Windows using the Visual Studio generator, you still need the Microsoft C++ compiler and build tools.
+To build the Vulkan Samples on Windows using the Visual Studio generator, you still need the Microsoft C++ compiler and build tools.
 
 Install the Visual Studio 2022 Build Tools with:
 
