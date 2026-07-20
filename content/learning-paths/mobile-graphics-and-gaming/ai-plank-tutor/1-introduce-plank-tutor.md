@@ -45,10 +45,10 @@ This keeps the LLM prompt small, reduces latency, and makes the behavior easier 
 
 ## Clone the starter project
 
-Clone the `PlankTutor` branch of the Learning Path code examples repository. This branch contains the starter Android project used by this Learning Path:
+Clone the `PlankTutor` Learning Path code example repository. 
 
 ```console
-git clone --branch PlankTutor --single-branch https://gitlab.arm.com/learning-code-examples/code-examples.git
+git clone https://gitlab.arm.com/learning-code-examples/code-examples.git
 ```
 
 The starter app for this Learning Path is in:
