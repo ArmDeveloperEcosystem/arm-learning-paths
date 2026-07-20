@@ -23,7 +23,7 @@ Improved performance can give you higher throughput, lower latency, or better co
 
 The following example shows MySQL throughput with HammerDB TPROC-C before and after tuning on an Arm Neoverse V3 system. The throughput metric, NOPM, stands for New Orders Per Minute.
 
-![Bar chart comparing MySQL HammerDB TPROC-C normalized NOPM throughput before and after tuning on an Arm Neoverse V3 system. At 128 clients, the out-of-box configuration is 1.00 and the tuned configuration is 6.00.#center](oobvstuned.png "MySQL HammerDB TPROC-C throughput before and after tuning")
+![Bar chart comparing MySQL HammerDB TPROC-C normalized NOPM throughput before and after tuning on an Arm Neoverse V3 system. At 128 clients, the out-of-box configuration is 1.00 and the tuned configuration is 6.00.#center](oobvstuned.webp "MySQL HammerDB TPROC-C throughput before and after tuning")
 
 This benchmark result is an example, not a guaranteed improvement for every workload. Your results depend on the MySQL version, database size, storage device, memory capacity, client thread count, and the queries used in the test.
 
