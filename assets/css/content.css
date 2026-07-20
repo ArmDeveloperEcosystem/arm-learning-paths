@@ -17,8 +17,7 @@
 
 /* Box around content (learning paths and tools) */
 html[theme="dark"] #main {
-    --content-page-surface: var(--ads-ui-ink-90);
-    background-color: var(--ads-ui-ink-100);
+    background-color: var(--ads-ui-ink-90);
 }
 
 div.content-box {
@@ -33,7 +32,7 @@ div.content-box {
     border-radius: 5px;
 
     border-color: rgba(163, 168, 174,0.25); /* #A3A8AE at 25% transparency */
-    background-color: var(--content-page-surface);
+    background-color: var(--ads-ui-ink-100);
 }
 html[theme="light"] div.content-box {
     background-color: white;

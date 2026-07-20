@@ -32,7 +32,7 @@
     margin-top: -1px !important;
 }
 html[theme='dark'] .tab-row {
-    background-color: var(--content-page-surface);
+    background-color: var(--arm-black); /* rgba(163, 168, 174,1); #2A2B2D; */
 }
 
 .tab-row.active {
@@ -72,7 +72,7 @@ html[theme='dark'] .tab-row.active {
 
 html[theme='dark'] .tab-right-card {
     border-color: rgba(163, 168, 174,0.25); /* #A3A8AE at 25% transparency */
-    background-color: var(--content-page-surface);
+    background-color: rgb(23,25,27);  /* CLOSE to this, but hard coded as they are close to background gradient var(--arm-color-base) at 75% transparency */
 }
 html[theme='dark'] .tab-right-card.active {
     border-color: var(--arm-light-blue);
@@ -141,7 +141,7 @@ div.github-div {
 
 html[theme='dark'] div.github-div {
     border-color: rgba(163, 168, 174,0.25); /* #A3A8AE at 25% transparency */
-    background-color: var(--content-page-surface);
+    background-color: var(--ads-ui-ink-100);
 
 }
 
