@@ -35,10 +35,9 @@ In VSCode create a new folder for this project then make sure you have the follo
 
 ![C/C++ tools extension](images/c-ext.png)
 
-![Cmake tools extension](images/cmake-ext.png)
+![Cmake tools extension](images/cmake-ext.png) 
 
-
-Create a Venv in Python (3.13 was used in the creation of this Guide) and run the following commands 
+The following commands will make a venv in your local version of python and install the required packages. 
 
 ```bash
 py -m venv .venv
