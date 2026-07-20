@@ -20,6 +20,7 @@ Where it is used:
 <!-- All pages -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Set the viewport appropriatly -->
+<script src="/js/theme-preference.js"></script>
     <!-- verify site ownership for Google -->
 <meta name="google-site-verification" content="BTfVb1OscFD-pN_bYZaTGmfx2_K3S1EbzvdKPepntvk" />
     <!-- add cannonical link to reinforce this page's validity for search engines, with a trailing / on the URL name-->
@@ -140,3 +141,6 @@ Where it is used:
         | resources.Concat "css/mini_migration.css" | minify | fingerprint  }}
     <link rel="stylesheet" href="{{ $css_migration.Permalink }}">
 {{end}}
+
+{{ $css_light_mode := resources.Get "css/light-mode.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $css_light_mode.RelPermalink }}" integrity="{{ $css_light_mode.Data.Integrity }}">

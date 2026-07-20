@@ -291,10 +291,6 @@ document.addEventListener('arm-account-signin', (event) => {
 });
 
 document.addEventListener("arm-top-navigation-ready", function (e) {
-  // Need to reset theme as arm-top-navigation may override it
-  const htmlElement = document.documentElement; 
-  htmlElement.setAttribute("theme", "dark"); 
-
   renderAuthInTopNav();
 });
 

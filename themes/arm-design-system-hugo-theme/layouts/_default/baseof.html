@@ -14,7 +14,7 @@
            {{ partialCached "math.html" . }}
         {{ end }}
     </head>
-    <body>
+    <body class="{{ if .IsHome }}home-page{{ end }}">
         <a href="#main" class="skip-link">Skip to main content</a>
 
         {{partial "header/nav-masthead.html" .}}
@@ -22,6 +22,11 @@
         {{ if not .IsHome }}
             {{ partial "header/color-refresh-alert.html" . }}
         {{ end }}
+
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="true" aria-label="Switch to light mode">
+            <span class="theme-toggle__icon" data-theme-toggle-icon aria-hidden="true">☀</span>
+            <span class="theme-toggle__label" data-theme-toggle-label>Light mode</span>
+        </button>
 
         {{/* Where all content sits. Each layout file defines "main" which then sits here. */}}
         <div id="main" class="c-container is-responsive-width" style="min-height: 250px;">
