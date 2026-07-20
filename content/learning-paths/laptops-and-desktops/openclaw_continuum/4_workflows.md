@@ -18,7 +18,7 @@ Clean the heating filter on the first Saturday of every third month.
 Keep the service reference number with the maintenance record.
 ```
 
-Save the file as `household-maintenance.txt`. In Telegram, upload the file to your bot with this caption:
+Save the file as `household-maintenance.txt`. In Telegram, upload the file to your bot. Any caption other than `/tracker` or `/mem` routes the upload to knowledge indexing by default, so use this caption to make the destination explicit:
 
 ```text
 /knowledge

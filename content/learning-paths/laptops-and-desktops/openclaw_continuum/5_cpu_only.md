@@ -153,7 +153,7 @@ If it already exists, start it:
 docker start openclaw-qdrant
 ```
 
-Otherwise, create persistent storage and start Qdrant. Bind its ports to localhost and use the fixed image version shown here:
+Otherwise, create persistent storage and start Qdrant. Bind its ports to localhost:
 
 ```bash
 docker volume create openclaw-qdrant-data
@@ -164,7 +164,7 @@ docker run -d \
   -p 127.0.0.1:6333:6333 \
   -p 127.0.0.1:6334:6334 \
   -v openclaw-qdrant-data:/qdrant/storage \
-  qdrant/qdrant:v1.18.3
+  qdrant/qdrant:latest
 ```
 
 Confirm that the local API responds:
@@ -275,7 +275,7 @@ Create a file named `budget.txt` on the device where you use Telegram:
 Shared household weekly budget: £120.
 ```
 
-Upload the file to the bot with `/knowledge` as the caption. Each allowlisted household member can then add a synthetic expense from their own Telegram chat:
+Upload the file to the bot. Any caption other than `/tracker` or `/mem` routes the upload to knowledge indexing by default, so use `/knowledge` as the caption to make the destination explicit. Each allowlisted household member can then add a synthetic expense from their own Telegram chat:
 
 ```text
 /mem #budget Groceries: £45.
