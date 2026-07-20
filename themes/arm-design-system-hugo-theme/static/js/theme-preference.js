@@ -5,8 +5,6 @@
     var storageKey = 'theme';
     var activeTheme = readStoredTheme() || 'dark';
 
-    root.setAttribute('data-theme-enabled', 'true');
-
     function normalizeTheme(theme) {
         return theme === 'light' ? 'light' : 'dark';
     }
@@ -28,20 +26,18 @@
         }
     }
 
-    function updateToggle(theme) {
-        var toggle = document.getElementById('theme-toggle');
-        if (!toggle) return;
+    function updateNavigation(theme) {
+        var navigation = document.querySelector('arm-top-navigation');
 
-        var isDark = theme === 'dark';
-        var icon = toggle.querySelector('[data-theme-toggle-icon]');
-        var label = toggle.querySelector('[data-theme-toggle-label]');
+        if (navigation) {
+            navigation.setAttribute('theme', theme);
+        }
 
-        toggle.setAttribute('aria-pressed', String(isDark));
-        toggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
-        toggle.title = isDark ? 'Switch to light mode' : 'Switch to dark mode';
-
-        if (icon) icon.textContent = isDark ? '☀' : '☾';
-        if (label) label.textContent = isDark ? 'Light mode' : 'Dark mode';
+        if (typeof window.CustomEvent === 'function') {
+            document.dispatchEvent(new window.CustomEvent('arm-footer-theme', {
+                detail: theme === 'light',
+            }));
+        }
     }
 
     function notifyThemeChange(theme) {
@@ -52,41 +48,36 @@
         }));
     }
 
-    function applyTheme(theme, persist, notify) {
+    function applyTheme(theme, persist, notify, updateGlobalComponents) {
         activeTheme = normalizeTheme(theme);
         root.setAttribute('theme', activeTheme);
         root.style.colorScheme = activeTheme;
-        updateToggle(activeTheme);
 
         if (persist) storeTheme(activeTheme);
+        if (updateGlobalComponents) updateNavigation(activeTheme);
         if (notify) notifyThemeChange(activeTheme);
     }
 
-    function initializeToggle() {
-        var toggle = document.getElementById('theme-toggle');
-        if (!toggle || toggle.getAttribute('data-theme-toggle-ready') === 'true') return;
-
-        toggle.setAttribute('data-theme-toggle-ready', 'true');
-        updateToggle(activeTheme);
-        toggle.addEventListener('click', function () {
-            applyTheme(activeTheme === 'dark' ? 'light' : 'dark', true, true);
-        });
+    function initializeNavigation() {
+        applyTheme(activeTheme, false, false, true);
     }
 
-    applyTheme(activeTheme, false, false);
+    applyTheme(activeTheme, false, false, false);
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initializeToggle);
+        document.addEventListener('DOMContentLoaded', initializeNavigation);
     } else {
-        initializeToggle();
+        initializeNavigation();
     }
 
-    document.addEventListener('arm-top-navigation-ready', function () {
-        applyTheme(activeTheme, false, false);
+    document.addEventListener('arm-top-navigation-ready', initializeNavigation);
+
+    document.addEventListener('arm-theme', function (event) {
+        applyTheme(event.detail === true ? 'light' : 'dark', true, true, false);
     });
 
     window.addEventListener('storage', function (event) {
         if (event.key !== storageKey) return;
-        applyTheme(event.newValue === 'light' ? 'light' : 'dark', false, true);
+        applyTheme(event.newValue === 'light' ? 'light' : 'dark', false, true, true);
     });
 })();

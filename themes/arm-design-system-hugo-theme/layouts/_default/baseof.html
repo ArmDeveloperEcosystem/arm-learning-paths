@@ -23,11 +23,6 @@
             {{ partial "header/color-refresh-alert.html" . }}
         {{ end }}
 
-        <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="true" aria-label="Switch to light mode">
-            <span class="theme-toggle__icon" data-theme-toggle-icon aria-hidden="true">☀</span>
-            <span class="theme-toggle__label" data-theme-toggle-label>Light mode</span>
-        </button>
-
         {{/* Where all content sits. Each layout file defines "main" which then sits here. */}}
         <div id="main" class="c-container is-responsive-width" style="min-height: 250px;">
             <div id="all-content-div-margined" class="u-margin-left-0 u-margin-right-0">

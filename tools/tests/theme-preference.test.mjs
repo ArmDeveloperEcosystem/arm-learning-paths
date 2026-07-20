@@ -8,45 +8,39 @@ const script = await readFile(scriptPath, 'utf8');
 
 function createElement() {
     const attributes = new Map();
-    const listeners = new Map();
 
     return {
         style: {},
-        title: '',
-        textContent: '',
-        addEventListener(name, handler) {
-            listeners.set(name, handler);
-        },
         getAttribute(name) {
             return attributes.has(name) ? attributes.get(name) : null;
         },
         setAttribute(name, value) {
             attributes.set(name, String(value));
         },
-        trigger(name) {
-            const handler = listeners.get(name);
-            if (handler) handler();
-        },
     };
 }
 
 function createEnvironment(options = {}) {
     const root = createElement();
-    const toggle = createElement();
-    const icon = createElement();
-    const label = createElement();
+    const navigation = createElement();
     const documentListeners = new Map();
     const windowListeners = new Map();
     const dispatchedEvents = [];
     const storedValues = new Map();
+    const shadowElements = new Map();
+
+    if (options.hasNavigationShadow) {
+        navigation.shadowRoot = {
+            appendChild(element) {
+                shadowElements.set(element.id, element);
+            },
+            querySelector(selector) {
+                return selector.startsWith('#') ? shadowElements.get(selector.slice(1)) || null : null;
+            },
+        };
+    }
 
     if (options.storedTheme !== undefined) storedValues.set('theme', options.storedTheme);
-
-    toggle.querySelector = (selector) => {
-        if (selector === '[data-theme-toggle-icon]') return icon;
-        if (selector === '[data-theme-toggle-label]') return label;
-        return null;
-    };
 
     const document = {
         documentElement: root,
@@ -57,8 +51,11 @@ function createEnvironment(options = {}) {
         dispatchEvent(event) {
             dispatchedEvents.push(event);
         },
-        getElementById(id) {
-            return id === 'theme-toggle' ? toggle : null;
+        createElement() {
+            return createElement();
+        },
+        querySelector(selector) {
+            return selector === 'arm-top-navigation' ? navigation : null;
         },
     };
 
@@ -92,13 +89,11 @@ function createEnvironment(options = {}) {
 
     return {
         dispatchedEvents,
-        document,
         documentListeners,
-        icon,
-        label,
+        navigation,
         root,
+        shadowElements,
         storedValues,
-        toggle,
         windowListeners,
     };
 }
@@ -106,13 +101,9 @@ function createEnvironment(options = {}) {
 test('defaults to dark when no preference exists', () => {
     const environment = createEnvironment();
 
-    assert.equal(environment.root.getAttribute('data-theme-enabled'), 'true');
     assert.equal(environment.root.getAttribute('theme'), 'dark');
     assert.equal(environment.root.style.colorScheme, 'dark');
-    assert.equal(environment.toggle.getAttribute('aria-pressed'), 'true');
-    assert.equal(environment.toggle.getAttribute('aria-label'), 'Switch to light mode');
-    assert.equal(environment.icon.textContent, '☀');
-    assert.equal(environment.label.textContent, 'Light mode');
+    assert.equal(environment.navigation.getAttribute('theme'), 'dark');
 });
 
 test('restores an explicit light preference', () => {
@@ -120,8 +111,7 @@ test('restores an explicit light preference', () => {
 
     assert.equal(environment.root.getAttribute('theme'), 'light');
     assert.equal(environment.root.style.colorScheme, 'light');
-    assert.equal(environment.toggle.getAttribute('aria-pressed'), 'false');
-    assert.equal(environment.toggle.getAttribute('aria-label'), 'Switch to dark mode');
+    assert.equal(environment.navigation.getAttribute('theme'), 'light');
 });
 
 test('restores an explicit dark preference', () => {
@@ -131,25 +121,21 @@ test('restores an explicit dark preference', () => {
     assert.equal(environment.storedValues.get('theme'), 'dark');
 });
 
-test('toggle updates the theme, preference, and accessible state', () => {
+test('native navigation event updates the theme and preference', () => {
     const environment = createEnvironment();
 
-    environment.toggle.trigger('click');
+    environment.documentListeners.get('arm-theme')({ detail: true });
 
     assert.equal(environment.root.getAttribute('theme'), 'light');
     assert.equal(environment.storedValues.get('theme'), 'light');
-    assert.equal(environment.toggle.getAttribute('aria-pressed'), 'false');
-    assert.equal(environment.toggle.getAttribute('aria-label'), 'Switch to dark mode');
-    assert.equal(environment.icon.textContent, '☾');
-    assert.equal(environment.label.textContent, 'Dark mode');
     assert.equal(environment.dispatchedEvents.at(-1).detail.theme, 'light');
 });
 
-test('restricted storage falls back to dark without blocking switching', () => {
+test('restricted storage does not block native theme switching', () => {
     const environment = createEnvironment({ throwOnRead: true, throwOnWrite: true });
 
     assert.equal(environment.root.getAttribute('theme'), 'dark');
-    assert.doesNotThrow(() => environment.toggle.trigger('click'));
+    assert.doesNotThrow(() => environment.documentListeners.get('arm-theme')({ detail: true }));
     assert.equal(environment.root.getAttribute('theme'), 'light');
 });
 
@@ -157,9 +143,18 @@ test('navigation hydration reapplies the active theme', () => {
     const environment = createEnvironment({ storedTheme: 'light' });
 
     environment.root.setAttribute('theme', 'dark');
+    environment.navigation.setAttribute('theme', 'dark');
     environment.documentListeners.get('arm-top-navigation-ready')();
 
     assert.equal(environment.root.getAttribute('theme'), 'light');
+    assert.equal(environment.navigation.getAttribute('theme'), 'light');
+});
+
+test('navigation hydration uses only the public theme attribute', () => {
+    const environment = createEnvironment({ hasNavigationShadow: true, storedTheme: 'light' });
+
+    assert.equal(environment.navigation.getAttribute('theme'), 'light');
+    assert.equal(environment.shadowElements.size, 0);
 });
 
 test('storage events synchronize theme changes between tabs', () => {
@@ -168,5 +163,6 @@ test('storage events synchronize theme changes between tabs', () => {
     environment.windowListeners.get('storage')({ key: 'theme', newValue: 'light' });
 
     assert.equal(environment.root.getAttribute('theme'), 'light');
+    assert.equal(environment.navigation.getAttribute('theme'), 'light');
     assert.equal(environment.dispatchedEvents.at(-1).detail.theme, 'light');
 });

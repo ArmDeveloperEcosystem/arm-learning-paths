@@ -56,12 +56,9 @@ Where it is used:
   integrity="sha384-caAG7P/HrHxcdQa2gTEfvZYGPLQk7yRwVdvtRn6sa3TRKzcAyY1LMvObXKGhwFNb"
   crossorigin="anonymous">
 </script>
-    <!-- Arm Header & Footer loading. Local development uses the test bundle;
-         production defaults to stable app.js unless a deployment explicitly overrides it. -->
+    <!-- Arm Header & Footer loading. Use the same DevHub bundle locally and in production
+         unless a deployment explicitly overrides it. -->
 {{ $globalWebComponentsURL := .Site.Params.global_web_components_url | default "https://www.arm.com/arm-global-web-components/devhub/app.js" }}
-{{ if and hugo.IsServer (not .Site.Params.global_web_components_url) }}
-  {{ $globalWebComponentsURL = "https://www.arm.com/arm-global-web-components/devhub/test.js" }}
-{{ end }}
 <script
   type="text/javascript"
   src="{{ $globalWebComponentsURL }}"

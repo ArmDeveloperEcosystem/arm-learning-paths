@@ -1,24 +1,23 @@
 html[theme='light'] {
     color-scheme: light;
-    --learn-background: #f7f5fa;
+    --learn-background: var(--ads-ui-gray-05, #f9f9f9);
     --learn-surface: #ffffff;
-    --learn-surface-muted: #f1edf7;
-    --learn-border: #ddd6e8;
-    --learn-border-strong: #b9adc9;
-    --learn-text: #17242d;
-    --learn-text-muted: #354751;
-    --learn-link: #5520c3;
-    --learn-link-hover: #35107f;
-    --learn-accent: var(--lp-accent-primary, #6023de);
-    --learn-accent-soft: #eee7fb;
-    --learn-violet: var(--lp-accent-primary, #6023de);
-    --learn-lilac: var(--lp-accent-secondary, #d1bafc);
-    --learn-brand-gradient: linear-gradient(115deg, var(--learn-violet) 0%, #9c6bea 58%, var(--learn-lilac) 100%);
-    --learn-shadow: 0 10px 30px rgba(16, 24, 32, 0.08);
-    --learn-shadow-hover: 0 18px 42px rgba(96, 35, 222, 0.18);
+    --learn-surface-muted: var(--ads-ui-gray-10, #f0f0f0);
+    --learn-border: var(--ads-ui-gray-40, #d4d4d4);
+    --learn-border-strong: var(--ads-ui-gray-60, #a9a9a9);
+    --learn-text: var(--ads-brand-arm-ink, #080225);
+    --learn-text-muted: var(--ads-ui-ink-65, #484848);
+    --learn-link: var(--ads-brand-horizon-blue, #0057ff);
+    --learn-link-hover: var(--ads-ui-blue-105, #004ee6);
+    --learn-accent: var(--ads-brand-horizon-blue, #0057ff);
+    --learn-accent-hover: var(--ads-ui-blue-105, #004ee6);
+    --learn-accent-soft: var(--ads-ui-blue-10, #e6eeff);
+    --learn-brand-gradient: linear-gradient(115deg, #0057ff 0%, #3379ff 58%, #80abff 100%);
+    --learn-shadow: 0 10px 30px rgba(8, 2, 37, 0.08);
+    --learn-shadow-hover: 0 18px 42px rgba(0, 87, 255, 0.18);
 
     --ads-color: var(--learn-text);
-    --ads-heading-color: #101b22;
+    --ads-heading-color: var(--learn-text);
     --ads-link-color: var(--learn-link);
     --ads-table-border-color: var(--learn-border);
 }
@@ -33,10 +32,15 @@ html[theme='light'] body {
     background-image: none;
 }
 
+html[theme='light'] #global-nav-height-fixer {
+    background: #ffffff;
+    background-color: #ffffff;
+}
+
 html[theme='light'] body.home-page {
     background-image:
-        radial-gradient(circle at 8% 8%, rgba(96, 35, 222, 0.11), transparent 25rem),
-        radial-gradient(circle at 92% 20%, rgba(209, 186, 252, 0.28), transparent 31rem),
+        radial-gradient(circle at 8% 8%, rgba(0, 87, 255, 0.1), transparent 25rem),
+        radial-gradient(circle at 92% 20%, rgba(128, 171, 255, 0.24), transparent 31rem),
         linear-gradient(180deg, #ffffff 0, var(--learn-background) 34rem);
     background-repeat: no-repeat;
 }
@@ -51,9 +55,9 @@ html[theme='light'] a:hover {
 
 html[theme='light'] ads-button {
     --ads-button-background-color-primary: var(--learn-accent);
-    --ads-button-background-color-primary-hover: #4d1aae;
+    --ads-button-background-color-primary-hover: var(--learn-accent-hover);
     --ads-button-border-color-primary: var(--learn-accent);
-    --ads-button-border-color-primary-hover: #4d1aae;
+    --ads-button-border-color-primary-hover: var(--learn-accent-hover);
     --ads-button-color-primary: #ffffff;
     --ads-button-color-primary-hover: #ffffff;
     --ads-button-color-secondary-hover: var(--learn-link-hover);
@@ -62,9 +66,9 @@ html[theme='light'] ads-button {
 
 html[theme='light'] ads-cta-button {
     --ads-cta-button-background-color-primary: var(--learn-accent);
-    --ads-cta-button-background-color-primary-hover: #4d1aae;
+    --ads-cta-button-background-color-primary-hover: var(--learn-accent-hover);
     --ads-cta-button-border-color-primary: var(--learn-accent);
-    --ads-cta-button-border-color-primary-hover: #4d1aae;
+    --ads-cta-button-border-color-primary-hover: var(--learn-accent-hover);
     --ads-cta-button-color-primary: #ffffff;
     --ads-cta-button-color-primary-hover: #ffffff;
     --ads-cta-button-color-secondary-hover: var(--learn-link-hover);
@@ -79,6 +83,26 @@ html[theme='light'] ads-tag {
     --ads-tag-color-hover: var(--learn-link-hover);
 }
 
+html[theme='light'] ads-search {
+    --ads-search-background-color: var(--learn-surface);
+    --ads-search-input-background-color: var(--learn-surface);
+    --ads-search-input-background-color-hover: var(--learn-surface);
+    --ads-search-input-background-color-fill-hover: var(--learn-surface);
+    --ads-search-border-color: var(--learn-border-strong);
+    --ads-search-border-color-hover: var(--learn-accent);
+    --ads-search-border-color-focus: var(--learn-accent);
+    --ads-search-input-color: var(--learn-text);
+    --ads-search-input-color-focus: var(--learn-text);
+    --ads-search-input-placeholder-color: var(--learn-text-muted);
+    --ads-search-icon-color: var(--learn-text-muted);
+    --ads-search-button-background-color: var(--learn-accent);
+    --ads-search-button-background-color-hover: var(--learn-accent-hover);
+    --ads-search-button-background-color-focus: var(--learn-accent-hover);
+    --ads-search-button-color: #ffffff;
+    --ads-search-button-color-hover: #ffffff;
+    --ads-search-button-color-focus: #ffffff;
+}
+
 html[theme='light'] input[type='submit']:hover {
     color: #ffffff;
 }
@@ -88,7 +112,7 @@ html[theme='light'] #main {
 }
 
 html[theme='light'] #only-breadcrumb-masthead {
-    background: #101820;
+    background: var(--learn-surface);
 }
 
 html[theme='light'] div.content-box {
@@ -156,9 +180,9 @@ html[theme='light'] pre[class*='language-'] a.token.url-link:hover {
 }
 
 html[theme='light'] ads-card.notice-callout {
-    --ads-card-background-color: #eee7fb;
-    --ads-card-border-color: #5520c3;
-    --ads-card-border-color-hover: #5520c3;
+    --ads-card-background-color: var(--learn-accent-soft);
+    --ads-card-border-color: var(--learn-accent);
+    --ads-card-border-color-hover: var(--learn-accent-hover);
 }
 
 html[theme='light'] .normal-tabpane {
@@ -196,18 +220,18 @@ html[theme='light'] .tab-right-card > h6 {
 html[theme='light'] .tab-right-card.active {
     border-color: var(--learn-accent);
     background: var(--learn-accent-soft);
-    box-shadow: inset 4px 0 0 var(--learn-accent), 0 8px 20px rgba(96, 35, 222, 0.12);
+    box-shadow: inset 4px 0 0 var(--learn-accent), 0 8px 20px rgba(0, 87, 255, 0.12);
 }
 
 html[theme='light'] .tab-right-card.active > h6 {
-    color: #42149d;
+    color: var(--learn-link-hover);
     font-weight: 700;
 }
 
 html[theme='light'] .tab-row.inactive:hover,
 html[theme='light'] .tab-row.inactive:hover .tab-right-card {
-    border-color: #8a5be5;
-    background: #f5f0fd;
+    border-color: var(--ads-ui-blue-50, #80abff);
+    background: var(--learn-accent-soft);
 }
 
 html[theme='light'] .tab-row.inactive:hover .tab-right-card {
@@ -261,7 +285,7 @@ html[theme='light'] ads-card.path-card,
 html[theme='light'] ads-card.tool-card,
 html[theme='light'] ads-card.module-card {
     --ads-card-background-color: var(--learn-surface);
-    --ads-card-background-color-hover: #fcfbfe;
+    --ads-card-background-color-hover: var(--learn-accent-soft);
     --ads-card-border-color: var(--learn-border);
     --ads-card-border-color-hover: var(--learn-accent);
     --ads-card-box-shadow: 0 3px 12px rgba(23, 36, 45, 0.06);
@@ -303,11 +327,11 @@ html[theme='light'] ads-card.module-card:hover ads-card-content::after {
 html[theme='light'] .learning-path-title,
 html[theme='light'] .basics-title,
 html[theme='light'] ads-card.tool-card p {
-    color: #4d1aae;
+    color: var(--learn-link-hover);
 }
 
 html[theme='light'] .pinned-featured-label {
-    color: #42149d;
+    color: var(--learn-link-hover);
 }
 
 html[theme='light'] .pinned-inline-icon {
@@ -324,11 +348,11 @@ html[theme='light'] .module-card-a:hover,
 html[theme='light'] .social-icons a:hover,
 html[theme='light'] #tag-clear-btn:hover,
 html[theme='light'] #reset-demo-txt:hover {
-    color: #35107f;
+    color: var(--learn-link-hover);
 }
 
 html[theme='light'] .share-icon:hover {
-    fill: #35107f;
+    fill: var(--learn-link-hover);
 }
 
 html[theme='light'] .card-subject,
@@ -360,7 +384,7 @@ html[theme='light'] .filter-facet {
     --ads-tag-border-color: 1px solid var(--learn-border-strong);
     --ads-tag-border-color-hover: 1px solid var(--learn-accent);
     --ads-tag-color: var(--learn-text-muted);
-    --ads-tag-color-hover: #42149d;
+    --ads-tag-color-hover: var(--learn-link-hover);
 }
 
 html[theme='light'] .main-topic-card {
@@ -386,7 +410,7 @@ html[theme='light'] .main-topic-card::before {
 
 html[theme='light'] .main-topic-card:hover {
     border-color: var(--learn-accent);
-    background: #fcfbfe;
+    background: var(--learn-accent-soft);
     box-shadow: var(--learn-shadow-hover);
 }
 
@@ -395,15 +419,15 @@ html[theme='light'] .main-topic-card:hover::before {
 }
 
 html[theme='light'] .main-topic-title {
-    color: #4d1aae;
+    color: var(--learn-link-hover);
 }
 
 html[theme='light'] .main-topic-card:hover .main-topic-title {
-    color: #35107f;
+    color: var(--learn-link-hover);
 }
 
 html[theme='light'] .main-topic-card img[src*='main-topic-icons'] {
-    filter: brightness(0) saturate(100%) invert(20%) sepia(87%) saturate(4529%) hue-rotate(256deg) brightness(80%) contrast(101%);
+    filter: brightness(0) saturate(100%) invert(26%) sepia(98%) saturate(7492%) hue-rotate(222deg) brightness(102%) contrast(106%);
 }
 
 html[theme='light'] .main-topic-card .main-topic-subtitle,
@@ -413,12 +437,12 @@ html[theme='light'] .homepage-dynamic-bottom-spacing + p {
 }
 
 html[theme='light'] #homepage-header {
-    color: #101b22;
-    background: linear-gradient(105deg, #35107f 4%, #6023de 58%, #8a5be5 100%);
+    color: var(--learn-text);
+    background: linear-gradient(105deg, var(--learn-text) 4%, var(--learn-accent) 58%, #3379ff 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 12px 24px rgba(96, 35, 222, 0.14));
+    filter: drop-shadow(0 12px 24px rgba(0, 87, 255, 0.14));
 }
 
 html[theme='light'] body.home-page #title-div {
@@ -434,94 +458,8 @@ html[theme='light'] table.contributor-table tbody {
     background: var(--learn-surface);
 }
 
-button.theme-toggle {
-    position: fixed;
-    right: 1rem;
-    bottom: 1rem;
-    z-index: 20;
-    display: none;
-    min-height: 3rem;
-    align-items: center;
-    width: 3rem;
-    justify-content: center;
-    padding: 0.55rem;
-    border: 2px solid transparent;
-    border-radius: 999px;
-    color: var(--learn-text, #ffffff);
-    background:
-        linear-gradient(var(--learn-surface, #1f2023), var(--learn-surface, #1f2023)) padding-box,
-        linear-gradient(135deg, #6023de, #d1bafc) border-box;
-    box-shadow: 0 10px 28px rgba(96, 35, 222, 0.24), 0 0 0 4px rgba(255, 255, 255, 0.72);
-    cursor: pointer;
-    font: inherit;
-    font-weight: 700;
-    transition: box-shadow 180ms ease, transform 180ms ease;
-}
-
-html[data-theme-enabled='true'] button.theme-toggle {
-    display: inline-flex;
-}
-
-button.theme-toggle:hover {
-    box-shadow: 0 15px 34px rgba(96, 35, 222, 0.3), 0 0 0 5px rgba(209, 186, 252, 0.28);
-    transform: translateY(-3px) rotate(-4deg);
-}
-
-button.theme-toggle:focus-visible {
-    outline: 3px solid #7b45df;
-    outline-offset: 3px;
-}
-
-.theme-toggle__icon {
-    font-size: 1.25rem !important;
-    line-height: 1;
-    transition: transform 180ms ease;
-}
-
-button.theme-toggle:hover .theme-toggle__icon {
-    transform: rotate(12deg) scale(1.08);
-}
-
-.theme-toggle__label {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-}
-
-html[theme='dark'] button.theme-toggle {
-    color: #ffffff;
-    background:
-        linear-gradient(#1f2023, #1f2023) padding-box,
-        linear-gradient(135deg, #6023de, #d1bafc) border-box;
-    box-shadow: 0 10px 28px rgba(96, 35, 222, 0.24), 0 0 0 4px rgba(16, 24, 32, 0.72);
-}
-
-@media (max-width: 576px) {
-    button.theme-toggle {
-        right: 0.75rem;
-        bottom: 0.75rem;
-        padding: 0.55rem;
-    }
-
-}
-
-@media print {
-    button.theme-toggle {
-        display: none;
-    }
-}
-
 @media (prefers-reduced-motion: reduce) {
     html[theme='light'] .main-topic-card,
     html[theme='light'] .main-topic-card::before,
     html[theme='light'] .tab-right-card,
-    button.theme-toggle,
-    .theme-toggle__icon {
-        transition: none;
-    }
 }
