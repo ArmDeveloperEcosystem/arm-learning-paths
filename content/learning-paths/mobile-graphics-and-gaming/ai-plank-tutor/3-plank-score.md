@@ -6,20 +6,9 @@ weight: 4
 layout: learningpathall
 ---
 
-## Objective
-
-In this section, you will turn MediaPipe pose landmarks into a simple plank score.
-
-You will:
-
-- Calculate joint angles from pose landmarks.
-- Compare the learner's live angles with the provided instructor reference.
-- Convert the weighted angle differences into a score from 0 to 100.
-- Display the score in the app UI.
-
-The starter project already includes `PlankPoseData.kt`. This file contains the reference landmarks for the instructor plank image and a list of angle weights. The weights let the app make some joints more important than others when calculating the final score.
-
 ## Review the scoring data
+
+The starter project already includes `data/PlankPoseData.kt`. This file contains the reference landmarks for the instructor plank image and a list of angle weights. The weights let the app make some joints more important than others when calculating the final score.
 
 Open `data/PlankPoseData.kt`.
 
@@ -29,7 +18,7 @@ The file provides three pieces of data:
 - `referenceLandmarks`, which stores the instructor plank pose as MediaPipe landmarks.
 - `angleWeights`, which stores the relative importance of each measured angle.
 
-You do not need to edit this file. In a larger app, you would capture this data from an instructor image or video as a preprocessing step, and load for different poses as needed. In this Learning Path, it is hard-coded so the Android app can stay focused on live inference and feedback.
+You don't need to edit this file. For a larger app, you'd capture this data from an instructor image or video as a preprocessing step, and load for different poses as needed. For this app, the data is hard-coded so the Android app can stay focused on live inference and feedback.
 
 ## Extract joint angles
 
@@ -37,7 +26,7 @@ Open `ui/landmarker/PoseScoreHelper.kt`.
 
 The file already contains landmark index constants and `KEY_JOINTS_COORDINATES`. Each entry in `KEY_JOINTS_COORDINATES` identifies three landmarks that form one angle. For example, an elbow angle uses shoulder, elbow, and wrist landmarks.
 
-Replace the TODO in `extractAnglesFrom()` with this code:
+Replace the TODO in `extractAnglesFrom()` with the following code:
 
 ```kotlin
 fun extractAnglesFrom(landmarks: List<NormalizedLandmark>): List<Double> {
@@ -55,7 +44,7 @@ fun extractAnglesFrom(landmarks: List<NormalizedLandmark>): List<Double> {
 
 The main list extracts wrist, elbow, shoulder, knee, ankle, and hip angles. The final angle estimates neck alignment by creating a midpoint between the shoulders and a midpoint between the hips, with the nose as the third landmark.
 
-Replace the TODO in `midpoint()` with this code for the neck joint helper function:
+Replace the TODO in `midpoint()` with the following code for the neck joint helper function:
 
 ```kotlin
 private fun midpoint(pointA: NormalizedLandmark, pointB: NormalizedLandmark) =
@@ -68,11 +57,11 @@ private fun midpoint(pointA: NormalizedLandmark, pointB: NormalizedLandmark) =
 
 MediaPipe landmarks are normalized coordinates. The `x` and `y` values are relative to the input image, and `z` gives relative depth.
 
-While this demo compares normalized landmarks from a fixed instructor reference, the score is still fairly view-dependent. It works best when the learner is side-on to the camera, fully visible, and at a similar orientation to the reference image.
+While this app compares normalized landmarks from a fixed instructor reference, the score is still fairly view-dependent. The app works best when the learner is side-on to the camera, fully visible, and at a similar orientation to the reference image.
 
 ## Calculate a 3D angle
 
-For each angle in `extractAnglesFrom()` it uses `calculateAngleFor()` - replace its TODO with this code:
+For each angle in `extractAnglesFrom()` it uses `calculateAngleFor()` - replace its TODO with the following code:
 
 ```kotlin
 private fun calculateAngleFor(
@@ -103,7 +92,7 @@ The `coerceIn(-1.0, 1.0)` call protects the `acos()` calculation from small floa
 
 ## Calculate a weighted score
 
-Replace the TODO in `calculatePoseScore()` with this code:
+Replace the TODO in `calculatePoseScore()` with the following code:
 
 ```kotlin
 fun calculatePoseScore(
@@ -132,14 +121,14 @@ For each angle, the score starts at 100 and drops as the learner's angle differs
 The final score is the weighted average across all measured angles.
 
 {{% notice Note %}}
-This score is a simple pose-matching signal for the demo app. It is not a clinical, safety, or fitness-quality assessment.
+This score is a simple pose-matching signal for the demo app. It's not a clinical, safety, or fitness-quality assessment.
 {{% /notice %}}
 
 ## Emit score data from the ViewModel
 
 Open `ui/viewmodels/MainViewModel.kt`.
 
-Replace the TODO inside the `userPoseResults` mapping block with this code:
+Replace the TODO inside the `userPoseResults` mapping block with the following code:
 
 ```kotlin
 val referenceAngles = extractAnglesFrom(PlankPoseData.referenceLandmarks)
@@ -153,9 +142,9 @@ val score = calculatePoseScore(
 UserPoseResult(referenceAngles, userAngles, score)
 ```
 
-This code calculates angles for the instructor reference and the learner's live pose, then stores both angle lists with the score. The next page will reuse the angle lists to build the LLM prompt.
+The code calculates angles for the instructor reference and the learner's live pose. It then stores both angle lists with the score. You'll reuse the angle lists to build the LLM prompt in the following section.
 
-Now replace the TODO in `userPoseScore` with this code:
+Now, replace the TODO in `userPoseScore` with the following code:
 
 ```kotlin
 val userPoseScore: Flow<String> =
@@ -168,7 +157,7 @@ The UI wants a rounded string score. The underlying `UserPoseResult` keeps the f
 
 Open `ui/MainActivity.kt`.
 
-The starter project keeps `collectAppState()` as a safe no-op so the app can run before scoring and speech are implemented. Replace that function with this version:
+The starter project keeps `collectAppState()` as a safe no-op so the app can run before scoring and speech are implemented. Replace that function with the following code:
 
 ```kotlin
 private suspend fun collectAppState() = coroutineScope {
@@ -180,7 +169,7 @@ private suspend fun collectAppState() = coroutineScope {
 }
 ```
 
-Add this import near the other coroutine imports:
+Add the following import near the other coroutine imports:
 
 ```kotlin
 import kotlinx.coroutines.coroutineScope
@@ -188,7 +177,7 @@ import kotlinx.coroutines.coroutineScope
 
 The existing `repeatOnLifecycle(Lifecycle.State.STARTED)` block already calls `collectAppState()`. Changing the function to `suspend` is valid because `repeatOnLifecycle` runs its block from a coroutine.
 
-Later sections will add more `launch { ... }` collectors inside this same `coroutineScope` block.
+You'll add more `launch { ... }` collectors inside this same `coroutineScope` block in the following sections.
 
 ## Run the app
 
@@ -198,4 +187,8 @@ When you move in front of the camera, the score should update as MediaPipe detec
 
 If the score stays blank, verify that `onResults()` is receiving landmarks and that your body remains inside the camera frame. If the score jumps sharply, try a steadier side-on camera angle.
 
-At this point, the app can detect and score the plank pose. The next section converts the largest angle differences into a short text prompt for the local LLM.
+## What you've accomplished and what's next
+
+You've now turned MediaPipe pose landmarks into a plank score. At this point, the app can detect and score the plank pose. 
+
+Next, you'll convert the largest angle differences into a short text prompt for the local LLM.

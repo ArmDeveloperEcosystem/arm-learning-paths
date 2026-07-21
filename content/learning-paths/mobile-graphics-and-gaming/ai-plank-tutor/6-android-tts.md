@@ -6,23 +6,9 @@ weight: 7
 layout: learningpathall
 ---
 
-## Objective
-
-In this section, you will use Android's built-in `TextToSpeech` engine to speak each coaching correction from the local LLM.
-
-You will:
-
-- Initialize `TextToSpeech`.
-- Register an `UtteranceProgressListener`.
-- Queue each correction with `TextToSpeech.QUEUE_ADD`.
-- Keep the caption synchronized with the phrase currently being spoken.
-- Connect `LlmViewModel.sentences` to `SpeechManager` in `MainActivity`.
-
-At the end of this section, the app will speak each complete correction and show the same text as a caption while it is being spoken.
+## Initialize TextToSpeech
 
 Android `TextToSpeech` uses the TTS engine and voices installed on the device. The exact voice, language support, and quality can vary by phone, but the app code is the same.
-
-## Initialize TextToSpeech
 
 Open `ui/SpeechManager.kt`.
 
@@ -159,6 +145,12 @@ Build and run the app on your Android device.
 
 Move into a plank position in front of the camera. The score should update, the local LLM should generate a short correction, and Android TTS should speak it. The same correction should appear as a caption while it is being spoken.
 
-If captions appear but you do not hear speech, check the device media volume and confirm that a TTS voice is installed for the default language.
+If captions appear but you don't hear speech, check the device media volume and confirm that a TTS voice is installed for the default language.
+
+## What you've accomplished and what's next
+
+You've now used Android's built-in `TextToSpeech` engine to update the app to speak each coaching correction from the local LLM. The app shows the same text as a caption while it's being spoken.
 
 At this point, the app has the full on-device pipeline: camera input, pose landmarks, joint-angle scoring, local LLM feedback, and spoken output.
+
+Next, you'll explore ways to improve and extend the app.

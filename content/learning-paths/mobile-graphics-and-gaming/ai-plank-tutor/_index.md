@@ -1,13 +1,9 @@
 ---
-title: Build an on-device AI Plank Tutor on Android
-
-draft: true
-cascade:
-    draft: true
+title: Build an on-device AI plank tutor app on Android
     
 minutes_to_complete: 90
 
-who_is_this_for: This Learning Path is for Android developers who want to explore creating an ML/GenAI pipeline, including camera input, local LLM inference, and speech.
+who_is_this_for: This Learning Path is for Android developers who want to explore creating an ML or Generative AI pipeline, including camera input, local Large Language Model (LLM) inference, and speech.
 
 learning_objectives:
     - Detect human pose landmarks from live Android camera frames with MediaPipe.
