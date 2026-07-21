@@ -1,5 +1,5 @@
 ---
-title: Read the report and drive the optimization loop
+title: Read the report and drive the improvement loop
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -33,7 +33,7 @@ like this:
 
 **Recipe:** Code Hotspots
 **Target:** neoverse-box (Arm Neoverse, 64 cores)
-**Workload:** /home/me/build/myapp --input bench.dat
+**Workload:** /home/me/build/myapp --input /home/me/data/bench.dat
 
 ### Bottleneck Summary
 
@@ -63,16 +63,17 @@ a single function, stable across runs.
 
 ### Ruled Out
 
-- Memory locality is not the issue: the hotspot is purely scalar FP compute.
+- Memory locality is not the issue: the hotspot is purely scalar floating-point
+  compute.
 
 ### Next Step
 
 Rebuild with the sqrt removal, re-run Code Hotspots, and confirm
-escape_iterations drops below 30%.
+escape_iterations falls under 30%.
 ```
 
-Notice the report names a file and line, ranks the cost by measured samples, and
-ends with a single action you can take immediately, rather than a wall of raw
+The report names a file and line, ranks the cost by measured samples, and ends
+with a single action you can take immediately, rather than a wall of raw
 counters.
 
 ## Expect a two-pass investigation
@@ -83,14 +84,14 @@ propose a **second pass** with a characterizing recipe (CPU Microarchitecture,
 Instruction Mix, or Memory Access) to explain why the hot spot is hot. Let it
 run that pass before deciding a cost is irreducible.
 
-## Drive the optimization loop
+## Drive the improvement loop
 
 Work with the skill one change at a time:
 
 1. It establishes a **baseline** run.
-2. You, or the skill, make **one** focused change.
+2. You or the skill make **one** focused change.
 3. It **re-profiles** with the same recipe and workload.
-4. It reports a **before/after comparison**, a measurement, not a claim.
+4. It reports a **before/after comparison** with a measurement, not a claim.
 5. It looks for the **next bottleneck**, or summarizes the remaining trade-offs.
 
 If you want to stop, ask for the remaining opportunities. The skill is designed to
@@ -98,7 +99,18 @@ hand you measured options with their trade-offs rather than declare the work
 finished on its own.
 
 {{% notice Tip %}}
-You can ask the skill to export a run with `apx run export` so you can share it
-with a teammate, or re-render its results as JSON with the `--json` flag for
-machine-readable output.
+If you are using the CLI, you can ask the skill to export a run or render results
+as JSON:
+
+```bash
+apx run export <run_id> <target_directory>
+apx run render <run_id> --json
+```
+
+Use the `Run ID` from the analysis report, or run `apx run list` to find it. The
+`<target_directory>` is a directory on the host where Arm Performix writes the
+exported `.zip` file. Run export/import and render commands are CLI workflows,
+not MCP tool operations.
 {{% /notice %}}
+
+You now have a measurement-first workflow for using the arm-performix skill to profile Arm Neoverse workloads, read the results, and make focused improvements.

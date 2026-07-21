@@ -1,26 +1,26 @@
 ---
-title: Profile and optimize Arm workloads with the arm-performix agent skill
+title: Profile and improve Arm workloads with the arm-performix agent skill
 
 draft: true
 cascade:
     draft: true
     
-description: Learn how to install and use the arm-performix skill so an AI coding assistant can drive Arm Performix for you to find code hotspots, diagnose pipeline stalls, and propose measured optimizations on Arm Neoverse.
+description: Learn how to install and use the arm-performix skill so an AI coding assistant can drive Arm Performix, find code hotspots, diagnose pipeline stalls, and propose measured improvements on Arm Neoverse.
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for developers who use an AI coding assistant (such as GitHub Copilot in VS Code) and want it to drive Arm Performix on their behalf to profile and optimise software performance through the arm-performix skill, without having to memorize the apx CLI themselves.
+who_is_this_for: This is an introductory topic for developers who use an AI coding assistant with Agent Skills support, such as GitHub Copilot in VS Code or Claude Code, and want the arm-performix skill to drive Arm Performix profiling workflows without memorizing the `apx` command-line interface.
 
 learning_objectives:
     - Install and enable the arm-performix skill in your AI assistant
     - Trigger the skill with phrasing that activates the profiling workflow
     - Provide the context the skill needs to profile (target, binary, workload)
-    - Read the analysis report the skill produces and drive the optimization loop
+    - Read the analysis report the skill produces and drive the improvement loop
 
 prerequisites:
-    - An AI assistant that supports skills, such as GitHub Copilot in VS Code
-    - An Arm Neoverse-based instance reachable from the assistant's environment
-    - Arm Performix (the `apx` CLI) installed, or the Arm MCP Server configured
+    - An AI assistant with Agent Skills support enabled, such as GitHub Copilot in VS Code or Claude Code
+    - An Arm Neoverse-based Linux instance reachable from the assistant's environment
+    - Arm Performix installed with the `apx` command-line interface available on the host `PATH`, or the Arm Model Context Protocol (MCP) Server configured for supported launch-mode profiling recipes
 
 author:
     - Henry Wang
@@ -42,7 +42,7 @@ operatingsystems:
 further_reading:
     - resource:
         title: Arm Performix product page
-        link: https://developer.arm.com/Tools%20and%20Software/Arm%20Performix
+        link: https://developer.arm.com/servers-and-cloud-computing/arm-performix
         type: website
     - resource:
         title: Find Code Hotspots with Arm Performix
@@ -56,22 +56,6 @@ further_reading:
         title: Optimize memory access behavior using Arm Performix and the Arm MCP Server
         link: /learning-paths/servers-and-cloud-computing/performix-memory-access/
         type: learning-path
-    - resource:
-        title: Migrate applications to Arm servers using migrate-ease
-        link: /learning-paths/servers-and-cloud-computing/migrate-ease/
-        type: learning-path
-    - resource:
-        title: Automate x86-to-Arm application migration using Arm MCP Server
-        link: /learning-paths/servers-and-cloud-computing/arm-mcp-server/
-        type: learning-path
-    - resource:
-        title: Get started with Servers and Cloud Computing
-        link: /learning-paths/servers-and-cloud-computing/intro/
-        type: learning-path
-    - resource:
-        title: Learn about Arm Neoverse processors
-        link: https://www.arm.com/products/silicon-ip-cpu/neoverse
-        type: website
 
 
 
