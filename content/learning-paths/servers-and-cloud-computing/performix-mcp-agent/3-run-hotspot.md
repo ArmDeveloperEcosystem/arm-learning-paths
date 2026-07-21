@@ -14,7 +14,7 @@ You'll use a GitHub Copilot prompt file to drive the Code Hotspots recipe throug
 ## Use the Arm MCP arm-hotspots-optimization prompt file
 
 {{% notice Note %}}
-If you prefer a different AI assistant than Visual Studio Code with GitHub Copilot, see [Configure other AI agents](#configure-other-ai-agents) at the end of this section for equivalent configurations for Kiro and OpenAI Codex.
+If you prefer a different AI assistant than Visual Studio Code with GitHub Copilot, see [Configure other AI agents](#optional-configure-other-ai-agents) at the end of this section for equivalent configurations for Kiro and OpenAI Codex.
 {{% /notice %}}
 
 The Arm MCP Server repository includes a ready-made prompt file called `arm-hotspots-optimization` that guides an AI agent through the full Code Hotspots workflow: baseline profiling, hotspot identification, targeted code changes, and re-profiling to confirm the improvement. You don't need to write this file yourself. You can copy it from the repository.
