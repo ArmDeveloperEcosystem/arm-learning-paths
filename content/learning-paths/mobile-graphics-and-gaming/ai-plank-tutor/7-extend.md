@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Possible improvements to the app
 
-You now have a complete on-device AI plank tutor. It detects pose landmarks from the camera, compares the learner against an instructor reference, prompts a local LLM, and speaks the result with Android text-to-speech.
+You now have a complete on-device AI Plank Tutor. It detects pose landmarks from the camera, compares the learner against an instructor reference, prompts a local LLM, and speaks the result with Android text-to-speech.
 
 You'll explore the following areas of improvement:
 

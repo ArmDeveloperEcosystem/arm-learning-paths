@@ -1,5 +1,5 @@
 ---
-title: Set up the AI plank tutor project
+title: Set up the AI fitness tutor project
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -8,13 +8,13 @@ layout: learningpathall
 
 ## What you will build
 
-You'll build an on-device AI fitness tutor for Android.
+You'll build an on-device AI fitness tutor for Android called AI Plank Tutor.
 
 The app watches a learner hold a plank and compares their body position with a stored instructor reference. It asks a local LLM for one short correction, and speaks the correction using Android text-to-speech.
 
-This project is based on the [AI yoga tutor](https://developer.arm.com/community/arm-community-blogs/b/ai-blog/posts/ai-yoga-tutor) demo. You'll use the same core pipeline, but the project narrows the app to one static pose. By building an app focused on one pose, you can focus on how a pipeline that includes Android camera, pose detector, local LLM, and speech output fits together.
+This project is based on [AI Yoga Tutor](https://developer.arm.com/community/arm-community-blogs/b/ai-blog/posts/ai-yoga-tutor). You'll use the same core pipeline, but the project narrows the app to one static pose. By building an app focused on one pose, you can focus on how a pipeline that includes Android camera, pose detector, local LLM, and speech output fits together.
 
-![AI Plank Tutor final UI alt-text#center](screenshot.jpg "AI plank tutor showing the instructor plank image, live camera view, score, and spoken correction caption.")
+![AI Plank Tutor app comparing a reference plank on the left with the learner's live camera view on the right. The app displays a pose score of 60 and coaching feedback below the two images.#center](screenshot.jpg "AI Plank Tutor comparing a reference pose with the learner's live plank")
 
 The finished app has two main visual areas:
 
@@ -101,6 +101,6 @@ The code is under the long path `app/src/main/java/com/arm/demo/AIPlankTutor`. C
 
 ## What you've accomplished and what's next 
 
-You've now set up the AI plank tutor project by downloading a starter project and inspecting the files. 
+You've now set up the AI Plank Tutor project by downloading a starter project and inspecting the files.
 
 Next, you'll inspect Android code in the `MainActivity.kt` file and connect the camera to the MediaPipe pose landmarker.

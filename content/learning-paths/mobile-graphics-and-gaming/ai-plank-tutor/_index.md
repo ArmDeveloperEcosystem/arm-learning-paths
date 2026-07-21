@@ -1,5 +1,5 @@
 ---
-title: Build an on-device AI plank tutor app on Android
+title: Build an on-device AI fitness tutor on Android
     
 minutes_to_complete: 90
 

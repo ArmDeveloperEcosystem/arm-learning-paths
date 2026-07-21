@@ -84,7 +84,7 @@ fun generateLlmPromptFrom(
 
 This function calls `angleDifference()` with values that ensure it filters out small differences using `JOINT_DIFF_FILTER` and limits the prompt to `MAX_ENTRIES` joint differences.
 
-The fallback prompt handles the case where the learner is already close to the reference pose. The LLM still creates a useful instruction but isn't forced to invent a large correction from tiny angle changes. In the full AI yoga tutor, this fallback isn't hit as a different "praise" prompt is given when the score is greater than 70.
+The fallback prompt handles the case where the learner is already close to the reference pose. The LLM still creates a useful instruction but isn't forced to invent a large correction from tiny angle changes. In the full AI Yoga Tutor, this fallback isn't hit as a different "praise" prompt is given when the score is greater than 70.
 
 ## Emit prompts from the ViewModel
 
