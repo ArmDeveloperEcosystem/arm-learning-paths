@@ -1,5 +1,5 @@
 ---
-title: Use RenderDoc with NFRU for debugging and analysis
+title: Use RenderDoc for Arm GPUs with NFRU for debugging and analysis
 description: Capture a packaged NFRU application with RenderDoc for Arm GPUs and inspect Vulkan events, resources, and pipeline stages for debugging.
 weight: 8
 
@@ -7,13 +7,13 @@ weight: 8
 layout: learningpathall
 ---
 
-## Why use RenderDoc with NFRU
+## Why use RenderDoc for Arm GPUs with NFRU
 
 When you integrate NFRU into your game, you need visual debugging and performance profiling. RenderDoc is a frame capture and analysis tool that you can use to review frames, Vulkan API calls, shader inputs and outputs, and GPU resource states. 
 
 Arm provides additional features for RenderDoc in [RenderDoc for Arm GPUs](https://developer.arm.com/Tools%20and%20Software/RenderDoc%20for%20Arm%20GPUs).
 
-Use RenderDoc to:
+Use RenderDoc for Arm GPUs to:
 
 - Investigate unexpected visual output or step through the rendering process
 - Analyze the sequence of Vulkan API calls your engine makes
@@ -83,6 +83,6 @@ For more information, see the [Debug With RenderDoc User Guide](https://develope
 
 ## What you've accomplished
 
-You've now learned how to set up and use RenderDoc for debugging your game. You've completed a full workflow for NFRU in Unreal Engine.
+You've now learned how to set up and use RenderDoc for Arm GPUs to debug your game. You've completed a full workflow for NFRU in Unreal Engine.
 
 You can integrate neural frame generation into Unreal Engine, optimize it for your hardware using console variables, and debug your rendering pipeline.
