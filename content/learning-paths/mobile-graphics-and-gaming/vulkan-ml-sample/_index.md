@@ -1,9 +1,9 @@
 ---
 title: Enable neural graphics using ML Extensions for Vulkan
-description: Learn how to set up ML Emulation Layers for Vulkan, run sample applications using ML extensions, and debug the flow with RenderDoc.
+description: Learn how to set up ML Emulation Layers for Vulkan, run sample applications with ML Extensions for Vulkan, and debug the workflow with RenderDoc.
 minutes_to_complete: 30
 
-who_is_this_for: This is an advanced topic for engine developers interested in learning about neural graphics using ML Extensions for Vulkan.
+who_is_this_for: This advanced Learning Path is for engine developers who want to create neural graphics with ML Extensions for Vulkan.
 
 learning_objectives:
     - Explain the purpose of neural graphics and the role of ML Extensions for Vulkan
@@ -13,11 +13,14 @@ learning_objectives:
 
 prerequisites:
     - Windows 11 development machine
-    - Visual Studio 2022 and VSCode
+    - Visual Studio 2022
     - Visual Studio workload - Desktop development with C++
     - Visual Studio workload - .NET desktop build tools
+    - Visual Studio Code
 
-author: Annie Tallund, Joshua Marshall-Law
+author:
+    - Annie Tallund
+    - Joshua Marshall-Law
 
 generate_summary_faq: true
 rerun_summary: false
@@ -63,4 +66,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-
