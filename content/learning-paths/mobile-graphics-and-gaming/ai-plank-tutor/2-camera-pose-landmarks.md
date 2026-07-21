@@ -230,7 +230,7 @@ Build and run the app on your Android device.
 
 When prompted, allow camera access. Expect to see the front camera preview in the right side of the app.
 
-The score won't update yet. At this point, the app is collecting pose landmarks and passing them to `MainViewModel`; you'll add the scoring logic in the following section.
+The score won't update yet. At this point, the app is collecting pose landmarks and passing them to `MainViewModel`. You'll add the scoring logic in the following section.
 
 If the preview opens but no landmarks are produced later, make sure your full body is visible in the frame and check Logcat for `PoseLandmarkerHelper`.
 

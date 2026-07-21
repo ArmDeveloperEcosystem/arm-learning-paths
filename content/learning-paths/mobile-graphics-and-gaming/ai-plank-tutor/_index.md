@@ -18,7 +18,62 @@ prerequisites:
     - Android Debug Bridge (`adb`), included with the Android SDK platform tools.
     - Basic familiarity with Kotlin and Android app development.
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-07-21T21:58:52Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: ffd3800f451b7847ad61169a4b8edb63a84b83475d6790ab15378fd843153aa1
+  summary_generated_at: '2026-07-21T21:58:52Z'
+  summary_source_hash: ffd3800f451b7847ad61169a4b8edb63a84b83475d6790ab15378fd843153aa1
+  faq_generated_at: '2026-07-21T21:58:52Z'
+  faq_source_hash: ffd3800f451b7847ad61169a4b8edb63a84b83475d6790ab15378fd843153aa1
+  summary: >-
+    You'll build AI Plank Tutor, an on-device Android app that evaluates a static plank pose and
+    delivers spoken correction. You'll configure CameraX and MediaPipe Pose Landmarker to extract
+    landmarks from live camera frames, calculate joint angles, and compute a weighted score against
+    an instructor reference. You'll then turn the largest joint-angle differences into a compact
+    prompt for a local LLM. Finally, you'll integrate Arm AI Chat for GGUF inference and connect
+    Android text-to-speech so the app speaks each correction. By the end, you'll have a complete
+    on-device pipeline from camera input to spoken feedback.
+  faqs:
+  - question: Where should I add the CameraX initialization code?
+    answer: >-
+      Open `ui/MainActivity.kt` and replace the `TODO` in `setUpCamera()` with the provided
+      `ProcessCameraProvider` snippet. When the provider is ready, the callback stores it and calls
+      `bindCameraUseCases()`.
+  - question: What do I do if the camera doesn't detect pose landmarks?
+    answer: >-
+      After CameraX initializes and binds its use cases, MediaPipe Pose Landmarker should produce
+      landmarks for each frame. If the camera preview appears but no pose landmarks are detected, make sure that you granted camera
+        permission and that your full body is visible in the frame. Then, check Logcat for
+        `PoseLandmarkerHelper` errors. If the preview doesn't appear, confirm that
+        `bindCameraUseCases()` runs after `ProcessCameraProvider` becomes available.
+  - question: What defines the reference pose and weighting used to score the plank?
+    answer: >-
+      `data/PlankPoseData.kt` contains `referenceLandmarks` for the instructor pose and `angleWeights`
+      that set the importance of each joint. The app uses these values to calculate joint angles
+      and a weighted score.
+  - question: How do I control which joint differences are sent to the LLM?
+    answer: >-
+      `ui/landmarker/PoseScoreHelper.kt` maps angles to names with `KEY_ANGLE_NAMES` and formats the
+      largest differences in `angleDifference()`. Use the `filter` and `maxEntries` parameters to
+      set a threshold and limit the entries included in the prompt.
+  - question: Where do I add the AI Chat dependency and which model format should I use?
+    answer: >-
+      Add `implementation("com.arm:ai-chat:0.1.0")` to the `dependencies` block in `app/build.gradle`,
+      then sync the project. 
+# END generated_summary_faq
+
 author: Ben Clark
+
+generate_summary_faq: false
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
