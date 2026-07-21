@@ -35,7 +35,7 @@ generated_summary_faq:
   faq_generated_at: '2026-07-20T21:53:46Z'
   faq_source_hash: 58ca900e7970e8d2d3dded0aacca94ff1c237ef3881005d422ba95f3f1d8f9b9
   summary: >-
-    You’ll configure Neural Frame Rate Upscaling (NFRU) in Unreal Engine using Arm’s Neural Graphics
+    You’ll configure NFRU in Unreal Engine using Arm’s Neural Graphics
     Development Kit and ML Extensions for Vulkan. You’ll build the Neural Graphics SDK, enable the
     Vulkan ML emulation layers, and add the Neural Rendering plugin to a C++ project. After configuring
     Vulkan as the rendering hardware interface, you’ll validate NFRU in **Standalone Game** mode and
