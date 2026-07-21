@@ -145,7 +145,7 @@ Once the server is running, you can access a web server hosted at `http://<local
 
 The Web UI looks like this:
 
-![Migrate-ease Web UI scan form.#center](web_ui_index.jpg "Migrate-ease Web UI scan form")
+![Migrate-ease Web UI scan form.#center](web_ui_index.webp "Migrate-ease Web UI scan form")
 
 The Web UI walks you through three steps: choose what to scan, set options, and run.
 
@@ -172,7 +172,7 @@ On your first visit, a step-by-step Quick Guide overlay highlights the key contr
 
 When a scan finishes, a results banner appears with three actions:
 
-![Migrate-ease Web UI of scan result.#center](web_ui_result.jpg "Migrate-ease Web UI of scan result")
+![Migrate-ease Web UI of scan result.#center](web_ui_result.webp "Migrate-ease Web UI of scan result")
 
 | Action | What it does |
 |---|---|

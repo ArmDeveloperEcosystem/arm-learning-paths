@@ -27,7 +27,7 @@ Website homepage.
 </div>
 <div class="homepage-top-divs homepage-top-desc">
     <p style="margin: 0px; color: #fff;">Tutorials to help you develop software on Arm. <br> With <a id='contribute-btn' name="contribute-cta" href="/learning-paths/cross-platform/_example-learning-path/">contributions</a> from experts in Arm and our developer community.</p>
-    <ads-cta-button size="medium" class='u-margin-bottom-1 u-margin-top-2' onclick="window.location.href='/install-guides'" level="secondary">Install Guides for Tools</ads-cta-button>
+    <ads-cta-button size="medium" class='u-margin-bottom-1 u-margin-top-2' onclick="window.location.href='/install-guides'" level="primary">Install Guides for Tools</ads-cta-button>
 </div>
 
  
@@ -37,7 +37,7 @@ Website homepage.
 <!-- Search functionality -->
 <div class="c-row u-margin-top-2 u-margin-bottom-2">
     <div class="c-col">
-        <ads-search id="homepage-search-bar" has-search-button placeholder="Search all Learning Paths and Install Guides..." search-index="learning-paths" ></ads-search>
+        <ads-search id="homepage-search-bar" theme="dark" has-search-button placeholder="Search all Learning Paths and Install Guides..." search-index="learning-paths"></ads-search>
     </div>
 </div>
 <script>
@@ -62,10 +62,18 @@ Website homepage.
     <div class="c-col">
         <div class="u-display-grid u-gap-2 sm:u-grid-columns-1 md:u-grid-columns-2 lg:u-grid-columns-2 xl:u-grid-columns-3 xxl:u-grid-columns-3 u-margin-top-1">
             {{ range (where .Site.Pages "Params.maintopic" true).ByWeight}}
+                {{ $iconFilename := printf "%s.svg" (.Title | urlize) }}
+                {{ if eq .Title "Servers and Cloud Computing" }}
+                    {{ $iconFilename = "Cloud.svg" }}
+                {{ else if eq .Title "Mobile, Graphics, and Gaming" }}
+                    {{ $iconFilename = "premium-phone.svg" }}
+                {{ else if eq .Title "Embedded and Microcontrollers" }}
+                    {{ $iconFilename = "Microcontroller.svg" }}
+                {{ end }}
                 <a href="{{.Permalink}}">
                 <div class="main-topic-card c-row" style="flex-wrap: nowrap !important;">
                     <div class="c-col-3">
-                        <img alt="Icon for {{.Title}}" aria-hidden="true" src="img/main-topic-icons/{{.Title | urlize}}.svg" width="60" height="45" />
+                        <img alt="" aria-hidden="true" src="img/main-topic-icons/{{ $iconFilename }}" width="60" height="45" />
                     </div>
                     <div class="maintopic-content c-col-9 u-margin-left-1">                       
                         <h3 class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">{{ replace .Title "and" "&" }}</h3>   
@@ -79,7 +87,7 @@ Website homepage.
             <a href="/tag/ml/">
             <div class="main-topic-card c-row" style="flex-wrap: nowrap !important;">
                 <div class="c-col-3">
-                    <img alt="Icon for AI" aria-hidden="true" src="img/main-topic-icons/ai.svg" width="60" height="45" style="width: 100%;" />
+                    <img alt="" aria-hidden="true" src="img/main-topic-icons/AI_2.svg" width="60" height="45" style="width: 100%;" />
                 </div>
                 <div class="maintopic-content c-col-9 u-margin-left-1">
                     <h3 class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">AI</h3> 
@@ -106,4 +114,3 @@ Website homepage.
 
 
 {{ end }}
-

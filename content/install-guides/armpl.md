@@ -170,13 +170,14 @@ If you want to change the installation directory location, use the `--install-to
 
 Arm Performance Libraries are available to install using Linux system package managers. The following instructions are for the Ubuntu 24.04 system package manager `apt` command.
 
-Add the Arm Performance Libraries `apt` package repository to your system:
+Add the Arm Toolchains `apt` package repository to your system:
 
 ```bash
 curl -O https://developer.arm.com/packages/arm-toolchains/ubuntu/pool/arm-toolchains-repository_2-1~noble_all.deb
 sudo dpkg -i arm-toolchains-repository_2-1~noble_all.deb
 sudo apt update
 ```
+For more information about setting up the Arm Toolchains repository, see [Arm Toolchains](/install-guides/arm-toolchains-repository/).
 
 Download and install Arm Performance Libraries:
 

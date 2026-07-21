@@ -15,10 +15,16 @@
         {{ end }}
     </head>
     <body>
+        <a href="#main" class="skip-link">Skip to main content</a>
+
         {{partial "header/nav-masthead.html" .}}
 
+        {{ if not .IsHome }}
+            {{ partial "header/color-refresh-alert.html" . }}
+        {{ end }}
+
         {{/* Where all content sits. Each layout file defines "main" which then sits here. */}}
-        <div id="all-content-div" class="c-container is-responsive-width" style="min-height: 250px;">
+        <div id="main" class="c-container is-responsive-width" style="min-height: 250px;">
             <div id="all-content-div-margined" class="u-margin-left-0 u-margin-right-0">
                 {{block "main" . }}{{end}}
             </div>

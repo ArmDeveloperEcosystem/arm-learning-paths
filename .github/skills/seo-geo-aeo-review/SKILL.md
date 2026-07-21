@@ -23,9 +23,11 @@ For focused front matter `description` edits only, use `.github/skills/metadata-
 
 ## Workflow
 
+On any given page:
+
 1. Identify the target content type and target developer intent. 
-2. Read the title, front matter description, headings, introduction, prerequisites, main task flow, validation, conclusion, and further reading. If you've previously read a page, use context and don't re-read it unless there's a change since the last read. 
-3. State the page's owned task in one sentence. If the task is unclear or too broad, flag it.
+2. Read the title, front matter description, headings, introduction, prerequisites, main task flow, validation, conclusion, and further reading. If you've previously read the page, use context and don't re-read it unless asked to. 
+3. Summarize the page's owned task in one sentence. If the task is unclear or too broad, flag it.
 4. Review SEO signals:
    - The title is task-led and includes the main technology, platform, or tool.
    - The `description` is one concise sentence that states the task, context, and outcome.

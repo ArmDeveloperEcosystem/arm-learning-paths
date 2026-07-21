@@ -16,6 +16,11 @@
 
 
 /* Box around content (learning paths and tools) */
+html[theme="dark"] #main {
+    --content-page-surface: var(--ads-ui-ink-90);
+    background-color: var(--ads-ui-ink-100);
+}
+
 div.content-box {
     padding-left: 16px;
     padding-right: 16px;
@@ -28,7 +33,7 @@ div.content-box {
     border-radius: 5px;
 
     border-color: rgba(163, 168, 174,0.25); /* #A3A8AE at 25% transparency */
-    background-color: rgba(31,32,35,0.75);  /* var(--arm-color-base) at 75% transparency */
+    background-color: var(--content-page-surface);
 }
 html[theme="light"] div.content-box {
     background-color: white;
@@ -196,7 +201,7 @@ div.answer label {
     --ads-horizontal-tabs-tab-color-active: var(--arm-orange);
     --ads-horizontal-tabs-underline-color: var(--arm-orange);
 
-    --ads-horizontal-tabs-tab-color-hover: var(--arm-green);
+    --ads-horizontal-tabs-tab-color-hover: var(--lp-hover-text);
     --ads-horizontal-tabs-tab-content-background-color: var(--arm-color-footing);
 }
 
