@@ -29,7 +29,7 @@ The two artifacts are most useful together:
 | `.etdp` | Runtime profiling data | Aggregate node timing data from a specific execution |
 | `.pte` | ExecuTorch program | The packaged program and backend/delegate structure |
 
-With the ETRecord loaded as graph context, the ETDump timing data becomes easier to interpret because runtime measurements can be overlaid on the exported graph.
+With the ETRecord loaded as graph context, the ETDump timing data becomes easier to interpret because runtime measurements are linked to the corresponding nodes in the exported graph.
 
 ## Generate ETRecord and ETDump
 
