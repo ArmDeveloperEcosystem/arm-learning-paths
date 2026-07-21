@@ -1,5 +1,6 @@
 ---
 title: Speak corrections with Android text-to-speech
+description: Connect generated coaching corrections to Android TextToSpeech and synchronize each spoken phrase with its on-screen caption.
 weight: 7
 
 ### FIXED, DO NOT MODIFY

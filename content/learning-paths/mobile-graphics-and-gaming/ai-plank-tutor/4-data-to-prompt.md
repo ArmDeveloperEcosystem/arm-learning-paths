@@ -1,5 +1,6 @@
 ---
 title: Turn pose data into a prompt
+description: Turn differences between reference and live pose angles into compact LLM prompts and verify them in Android Studio Logcat.
 weight: 5
 
 ### FIXED, DO NOT MODIFY

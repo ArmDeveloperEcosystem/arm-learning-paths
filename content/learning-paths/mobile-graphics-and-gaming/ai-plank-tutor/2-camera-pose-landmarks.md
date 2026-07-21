@@ -1,5 +1,6 @@
 ---
 title: Get pose landmarks from camera
+description: Connect CameraX frames to MediaPipe Pose Landmarker on Android to extract live body landmarks from the front camera.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

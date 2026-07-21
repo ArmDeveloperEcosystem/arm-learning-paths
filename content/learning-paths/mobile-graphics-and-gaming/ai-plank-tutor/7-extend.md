@@ -1,5 +1,6 @@
 ---
 title: Explore options for tuning and extending AI Plank Tutor
+description: Explore how to tune the AI Plank Tutor feedback loop, improve the local LLM, and extend the app to support additional poses.
 weight: 8
 
 ### FIXED, DO NOT MODIFY

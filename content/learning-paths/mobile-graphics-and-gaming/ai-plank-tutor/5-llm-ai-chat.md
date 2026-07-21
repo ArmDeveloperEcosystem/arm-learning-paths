@@ -1,5 +1,6 @@
 ---
 title: Run the LLM locally with AI Chat
+description: Integrate Arm AI Chat with the Android app, load a local GGUF model, and generate streamed coaching corrections from pose prompts.
 weight: 6
 
 ### FIXED, DO NOT MODIFY

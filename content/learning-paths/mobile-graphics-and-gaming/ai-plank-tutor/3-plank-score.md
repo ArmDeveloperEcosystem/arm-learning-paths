@@ -1,5 +1,6 @@
 ---
 title: Score the plank pose
+description: Convert MediaPipe pose landmarks into weighted joint angles and display a live plank-pose score in the Android app.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

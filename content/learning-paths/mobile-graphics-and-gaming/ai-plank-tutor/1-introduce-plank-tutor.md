@@ -1,5 +1,6 @@
 ---
 title: Set up AI Plank Tutor
+description: Clone and inspect the AI Plank Tutor starter project in Android Studio to understand the on-device camera, pose scoring, LLM, and speech pipeline.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
