@@ -1,8 +1,6 @@
 ---
 title: Arm Toolchains repository
 
-draft: true
-
 additional_search_terms:
 - Arm Toolchains
 - Arm Toolchain for Linux
