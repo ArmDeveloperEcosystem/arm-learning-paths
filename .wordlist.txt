@@ -6604,3 +6604,5 @@ vx
 wal
 whitespace
 xxxxxxxx
+Makefile’s
+SDK’s
