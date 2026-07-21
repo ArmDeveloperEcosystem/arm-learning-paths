@@ -1,5 +1,5 @@
 ---
-title: Speak corrections with Android TTS
+title: Speak corrections with Android text-to-speech
 weight: 7
 
 ### FIXED, DO NOT MODIFY

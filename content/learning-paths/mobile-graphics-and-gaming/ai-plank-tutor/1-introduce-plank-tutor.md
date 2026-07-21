@@ -1,5 +1,5 @@
 ---
-title: Set up the AI fitness tutor project
+title: Set up AI Plank Tutor
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## What you will build
 
-You'll build an on-device AI fitness tutor for Android called AI Plank Tutor.
+You'll build an on-device AI fitness tutor app for Android called AI Plank Tutor.
 
 The app watches a learner hold a plank and compares their body position with a stored instructor reference. It asks a local LLM for one short correction, and speaks the correction using Android text-to-speech.
 

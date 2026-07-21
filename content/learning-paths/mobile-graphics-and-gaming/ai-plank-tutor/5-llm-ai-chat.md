@@ -26,7 +26,7 @@ The starter project already has `mavenCentral()` in `settings.gradle` and native
 
 The app expects a Q4_0 GGUF model file named `Phi-4-mini-instruct-Q4_0.gguf`.
 
-Download [microsoft_Phi-4-mini-instruct-Q4_0.gguf](https://huggingface.co/bartowski/microsoft_Phi-4-mini-instruct-GGUF/blob/main/microsoft_Phi-4-mini-instruct-Q4_0.gguf) from Hugging Face. The model is 3.8B parameters, and about 2.3 GB. Rename the downloaded file by removing the leading `microsoft_` prefix.
+Download [microsoft_Phi-4-mini-instruct-Q4_0.gguf](https://huggingface.co/bartowski/microsoft_Phi-4-mini-instruct-GGUF/blob/main/microsoft_Phi-4-mini-instruct-Q4_0.gguf) from Hugging Face. The model has 3.8 billion parameters, and its size is about 2.3 GB. Rename the downloaded file by removing the leading `microsoft_` prefix.
 
 Keep at least 5 GB free on the device. The app imports the model from external app storage and then copies it into internal app storage the first time it loads, so the device temporarily needs room for both copies.
 
@@ -98,7 +98,7 @@ private val llmViewModel: LlmViewModel by viewModels {
 }
 ```
 
-`AiChat.getInferenceEngine()` creates a native-backed inference engine used by the ViewModel.`LlmModelStore` is the helper that finds or imports the GGUF model file. Now make the `LlmViewModel` accept those parameters.
+`AiChat.getInferenceEngine()` creates a native-backed inference engine used by the ViewModel. `LlmModelStore` is the helper that finds or imports the GGUF model file. Now make the `LlmViewModel` accept those parameters.
 
 ## Add AI Chat to LlmViewModel
 
@@ -201,7 +201,7 @@ The two `_isBusy` checks prevent the app from starting a second generation if a 
 
 ## Split streamed tokens into sentences
 
-AI Chat returns a stream of tokens. Android TTS works better with complete phrases or sentences, so split the stream before page six consumes it.
+AI Chat returns a stream of tokens. Android text-to-speech works better with complete phrases or sentences, so split the stream before sending it to the speech pipeline.
 
 Replace the TODO in the `sentences` Flow with this code:
 
@@ -224,7 +224,7 @@ val sentences: Flow<Sentence> = _tokens
     .flowOn(Dispatchers.Default)
 ```
 
-The ViewModel now exposes a `Flow<Sentence>` instead of raw tokens. Page six will collect this Flow and send each sentence to Android text-to-speech.
+The ViewModel now exposes a `Flow<Sentence>` instead of raw tokens. In the following section, you'll collect this Flow and send each sentence to Android text-to-speech.
 
 ## Release the inference engine
 
@@ -291,6 +291,6 @@ The first run can take longer because the model file might be copied into the ap
 
 ## What you've accomplished and what's next
 
-You've now added Arm's AI Chat library and used it to run a local GGUF model on the Android device. The app produces short text coaching corrections and show them as captions. 
+You've now added Arm's AI Chat library and used it to run a local GGUF model on the Android device. The app produces short text coaching corrections and shows them as captions. 
 
 Next, you'll add speech output to the app using Android `TextToSpeech`.

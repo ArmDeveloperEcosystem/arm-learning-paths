@@ -1,5 +1,6 @@
 ---
-title: Build an on-device AI fitness tutor on Android
+title: Build an on-device AI Plank Tutor on Android
+description: Build an on-device Android fitness tutor that uses CameraX and MediaPipe to score a plank pose, Arm AI Chat to generate local LLM feedback, and Android text-to-speech to speak corrections.
     
 minutes_to_complete: 90
 
@@ -39,21 +40,21 @@ operatingsystems:
 
 further_reading:
     - resource:
+        title: Build a Hands-Free Selfie Android Application with MediaPipe
+        link: https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/build-android-selfie-app-using-mediapipe-multimodality/
+        type: learning path
+    - resource:
+        title: Add an LLM to your Android app with Arm's AI Chat library
+        link: https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/android-ai-chat-lib/
+        type: learning path
+    - resource:
         title: AI Yoga Tutor
         link: https://developer.arm.com/community/arm-community-blogs/b/ai-blog/posts/ai-yoga-tutor
-        type: blog
-    - resource:
-        title: AI Chat - Explore and evaluate LLMs on Android and ChromeOS
-        link: https://developer.arm.com/community/arm-community-blogs/b/announcements/posts/ai-chat-explore-and-evaluate-llms-on-android-and-chromeos
         type: blog
     - resource:
         title: AI Chat library on GitHub
         link: https://github.com/arm/ai-chat
         type: website
-    - resource:
-        title: AI Chat library @ Maven Central
-        link: https://central.sonatype.com/artifact/com.arm/ai-chat
-        type: documentation
     - resource:
         title: MediaPipe Pose Landmarker
         link: https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker

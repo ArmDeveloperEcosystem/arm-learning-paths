@@ -1,5 +1,5 @@
 ---
-title: Tune and extend the tutor
+title: Explore options for tuning and extending AI Plank Tutor
 weight: 8
 
 ### FIXED, DO NOT MODIFY
@@ -104,7 +104,7 @@ The following is a high-level workflow:
 
 7. Fine-tune the model.
 
-   Use supervised fine-tuning or a Low Rank adapatation (LoRA) or Quantized LoRA (QLoRA) workflow on a model that can later run on the device. Train on prompt-response examples that match the app's runtime format. There are a number of good frameworks to work with, so you don't need to set this up from scratch.
+   Use supervised fine-tuning or a Low-Rank adapatation (LoRA) or Quantized LoRA (QLoRA) workflow on a model that can later run on the device. Train on prompt-response examples that match the app's runtime format. There are a number of good frameworks to work with, so you don't need to set this up from scratch.
 
 8. Convert and quantize for Android.
 
