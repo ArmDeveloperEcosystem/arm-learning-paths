@@ -22,10 +22,12 @@ html[theme='dark'] body {
     background-image: none;
 }
 
-/* CLS fix: lock the breadcrumb masthead height so hydration doesn't shift content below */
+/* Match the homepage breadcrumb spacing more closely to category mastheads. */
 #only-breadcrumb-masthead {
-    height: 40px;
+    box-sizing: border-box;
+    height: 64px;
     overflow: hidden;
+    padding-top: 24px;
 }
 
 /* CLS fix: lock the description+button area height to prevent shift when ads-cta-button hydrates */
