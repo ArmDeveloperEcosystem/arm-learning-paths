@@ -85,7 +85,7 @@ On the **Vulkan Layers Configuration** tab, set **Vulkan Loader Configuration Sc
 
 Ensure that the **Graph** layer is listed above the **Tensor** layer.
 
-![VL Config](images/verify_layers.png)
+![VL Config](images/vl-layers.png)
 
 {{% notice Important %}}
 
