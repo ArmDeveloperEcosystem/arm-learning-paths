@@ -6,12 +6,12 @@ weight: 8
 layout: learningpathall
 ---
 
-With the NSS for UE plugin, you’re set up to explore real-time neural graphics with Neural Super Sampling. This toolchain gives you direct access to state-of-the-art upscaling powered by machine learning.
+With the Arm Neural Graphics Plugin, you’re set up to explore real-time neural graphics with Neural Super Sampling. This toolchain gives you direct access to state-of-the-art upscaling powered by machine learning.
 
 You’ve covered:
 - Understanding the role of **ML Extensions for Vulkan** and how emulation layers let you run everything without needing dedicated ML hardware
 - Installing the **Vulkan SDK** and enabling ML Emulation Layer for Vulkan using Vulkan Configurator
-- Setting up the **NSS for Unreal Engine** plugins, and visualizing the model output
+- Setting up the **Arm Neural Graphics Plugin** and visualizing the NSS model output
 - Inspecting the **NSS model** in VGF on Hugging Face
 
 This ecosystem is built for developers who want to push boundaries - whether on flagship mobile SoCs or desktop dev kits. NSS is designed to give you better image quality without the complexity of building custom ML infrastructure.

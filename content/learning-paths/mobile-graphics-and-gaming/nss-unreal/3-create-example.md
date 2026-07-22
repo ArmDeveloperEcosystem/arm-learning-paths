@@ -5,13 +5,13 @@ weight: 5
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## Download the NSS plugin
+## Download the Arm Neural Graphics Plugin
 
-This repository's release package contains everything you need to set up NSS for Unreal Engine, including the plugin and the VGF model file.
+The Arm Neural Graphics Plugin 1.1.0 release package contains the plugin and VGF model file you need to set up NSS for Unreal Engine.
 
-[**Neural Super Sampling Unreal Engine Plugin** → GitHub Repository](https://github.com/arm/neural-graphics-for-unreal)
+[**Arm Neural Graphics Plugin** → GitHub repository](https://github.com/arm/neural-graphics-for-unreal)
 
-Download the latest release `.zip` and extract it on your Windows machine. 
+Download the 1.1.0 release `.zip` and extract it on your Windows machine.
 
 {{% notice Unreal Engine 5.5 plugin %}}
 This version is deprecated. Refer to the repository documentation for more information.
@@ -48,13 +48,11 @@ Open your project directory in Windows explorer, and create a new folder called 
 
 ## Enable the plugin
 
-The plugin is included in the release package you downloaded in the previous section. The package contains a separate folder for each supported Unreal Engine version. Make sure you use the folder that matches your engine version (for example, UE5.4 for Unreal Engine 5.4).
+The extracted archive contains the Arm Neural Graphics Plugin in the `neural-graphics-for-unreal` folder.
 
-1.	Copy the appropriate engine-version folder from the extracted .zip archive into your project's Plugins directory.
-2.	Reopen Unreal Engine. When prompted, confirm that you want to enable the plugin.
-3.	Rebuild your project from source in Visual Studio.
-4.	Verify the installation by opening Edit → Plugins in Unreal Engine and confirming that the NSS plugin is enabled. Restart Unreal Engine if prompted.
-![Unreal Engine plugins window showing NSS enabled#center](./images/verify_plugin_enabled.png "Figure 5: Verify plugin installation in Unreal Engine.")
+1. Copy the `neural-graphics-for-unreal` folder into your project's `Plugins` directory.
+2. Reopen Unreal Engine. When prompted, confirm that you want to enable the plugin.
+3. Rebuild your project from source in Visual Studio.
+4. Open **Edit > Plugins** and search for **Arm Neural Graphics Plugin**. If its checkbox is clear, select it. Restart Unreal Engine if prompted.
 
-With the emulation layers and plugins configured, you're ready to run Neural Super Sampling in Unreal Engine. Continue to the next section to test the integration.
-
+With the emulation layers and Arm Neural Graphics Plugin configured, you're ready to run Neural Super Sampling in Unreal Engine. Continue to the next section to test the integration.

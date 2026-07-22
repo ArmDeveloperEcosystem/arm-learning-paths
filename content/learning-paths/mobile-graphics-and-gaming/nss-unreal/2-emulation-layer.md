@@ -10,15 +10,15 @@ layout: learningpathall
 
 To run NSS in your Unreal Engine project, you will need to install and configure the following:
 
-- **Vulkan SDK**: Required for development of applications that use Vulkan, and to enable the Vulkan Configurator. The latter sets up the emulation layers used for running ML extensions for Vulkan workloads.
+- **Vulkan SDK version 1.4.321.0 or later**: Required for developing applications that use Vulkan and for accessing Vulkan Configurator. Vulkan Configurator sets up the emulation layers used for running ML extensions for Vulkan workloads.
 - **ML Emulation Layer for Vulkan**: These layers allows neural inference to run in emulation through Vulkan’s compute backend. They are activated by Vulkan Configurator to run with the Unreal Engine plugin. The Vulkan layer configuration activates the ML Emulation Layer for Vulkan, which implements the ML extensions for Vulkan.
-- **NSS for Unreal Engine plugin**: You will download and integrate the plugin in the next section.
+- **Arm Neural Graphics Plugin 1.1.0**: You will download and integrate the plugin in the next section.
 
 These components allow you to run NSS in Unreal Engine, using ML emulation layers for Vulkan for development and testing.
 
 ## Install Vulkan Software Development Kit
 
-Go to the [Vulkan SDK landing page](https://vulkan.lunarg.com/sdk/home) and download the SDK Installer for Windows. After you have run the installer, you can move on to the next step.
+Go to the [Vulkan SDK landing page](https://vulkan.lunarg.com/sdk/home) and download version 1.4.321.0 or later of the SDK installer for Windows. After you run the installer, continue to the next step.
 
 ## Download the emulation layers
 
@@ -53,4 +53,4 @@ Make sure you keep Vulkan Configurator running in the background as you go throu
 
 With the ML emulation layers configured, Vulkan is now able to run machine learning workloads through the ML extensions for Vulkan. This enables neural inference to execute alongside the graphics pipeline during development, without requiring access to hardware with dedicated neural accelerators.
 
-The next step is to integrate Neural Super Sampling into an Unreal Engine project. You’ll do this by installing the NSS plugin and creating a simple example game that lets you verify the setup and visualize the upscaling in action.
+The next step is to integrate Neural Super Sampling into an Unreal Engine project. You’ll do this by installing the Arm Neural Graphics Plugin 1.1.0 and creating a simple example game that lets you verify the setup and visualize the upscaling in action.

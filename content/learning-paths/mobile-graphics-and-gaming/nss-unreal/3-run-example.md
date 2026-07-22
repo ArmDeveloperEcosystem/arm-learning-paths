@@ -15,7 +15,7 @@ Press the green **Play** button to start the level. To verify NSS is running, yo
 You’ll see **NSS** listed in the rendering summary.
 
 {{% notice %}}
-In **Project Settings > Plugins > Neural Super Sampling**, you can view and configure the active neural network model being used.
+In **Edit > Project Settings > Plugins > Arm Neural Graphics Plugin 1.1.0**, you can view and configure the NSS settings.
 {{% /notice %}}
 
 Run `ShowFlag.VisualizeTemporalUpscaler 0` to disable the overview. To visualize the NSS model output in real-time, run the following command:
@@ -37,10 +37,10 @@ If the example does not behave as expected, check the following common issues be
 
 ### Check you Unreal Engine configuration
 - Verify that Vulkan is selected as the **Default RHI**.
-- Confirm the NSS plugin is enabled and that Unreal Engine was restarted after enabling it.
-- Check **Project Settings → Plugins → Neural Super Sampling** to confirm a model is selected and active.
+- Confirm the **Arm Neural Graphics Plugin** is enabled and that Unreal Engine was restarted after enabling it.
+- Check **Edit > Project Settings > Plugins > Arm Neural Graphics Plugin 1.1.0** to confirm that NSS is enabled.
 
-If the NSS plugin is enabled but appears to have no effect:
+If the Arm Neural Graphics Plugin is enabled but NSS appears to have no effect:
 - Ensure Vulkan Configurator is running.
 - Verify that the correct layer configuration is selected and active.
 - Double-check that:
@@ -50,7 +50,7 @@ If the NSS plugin is enabled but appears to have no effect:
 Refer back to the [emulation layer section](/learning-paths/mobile-graphics-and-gaming/nss-unreal/2-emulation-layer/) for the full Vulkan Configurator setup and validation steps.
 
 ### Check the software and hardware setup
-- Confirm that the plugin version exactly matches your Unreal Engine version.
+- Confirm that you're using Arm Neural Graphics Plugin 1.1.0 with a supported Unreal Engine version.
 - Verify that your GPU driver supports Vulkan.
 - Verify that your Visual Studio version aligns with the Unreal Engine version you are using.
 - Return to the Visual Studio build output and inspect the logs carefully to identify the first reported error
